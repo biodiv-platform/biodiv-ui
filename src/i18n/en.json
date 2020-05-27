@@ -1,0 +1,505 @@
+{
+  "ACTIVITY_TYPE": {
+    "ADDED_A_COMMENT": "commented",
+    "ADDED_A_FACT": "added fact",
+    "AGREED_ON_SPECIES_NAME": "agreed on species name",
+    "CUSTOM_FIELD_EDITED": "custom field edited",
+    "FEATURED": "featured in group",
+    "FLAG_REMOVED": "flag removed",
+    "FLAGGED": "flagged",
+    "OBSERVATION_CREATED": "observation created",
+    "OBSERVATION_SPECIES_GROUP_UPDATED": "updated species group",
+    "OBSERVATION_TAG_UPDATED": "updated tags",
+    "OBSERVATION_UPDATED": "observation updated",
+    "OBV_LOCKED": "locked observation",
+    "OBV_UNLOCKED": "unlocked observation",
+    "POSTED_RESOURCE": "posted to group",
+    "RATED_MEDIA_RESOURCE": "rated media resource",
+    "REMOVED_RESORUCE": "removed resource",
+    "SUGGESTED_SPECIES_NAME": "suggested species name",
+    "SUGGESTION_REMOVED": "removed suggestion",
+    "UNFEATURED": "unfeatured from group",
+    "UNFLAGGED": "flagged",
+    "UPDATED_FACT": "updated fact"
+  },
+  "CANCEL": "Cancel",
+  "CLEAR": "Clear",
+  "CLOSE": "Close",
+  "COPY": "Copy to Clipboard",
+  "DELETE": "Delete",
+  "FEEDBACK": "Feedback",
+  "FILTERS": {
+    "CLEAR": "Clear ${filterCount} Filter(s)",
+    "DATA_QUALITY": {
+      "FLAG": {
+        "FLAGGED": "Flagged",
+        "TITLE": "Flag",
+        "UNFLAGGED": "Unflagged"
+      },
+      "IDENTIFICATION": {
+        "IDENTIFED": "Identifed",
+        "TITLE": "Identification",
+        "UNIDENTIFED": "Unidentified"
+      },
+      "TAXON_ID": {
+        "HAS_TAXON": "Has Taxon ID",
+        "NO_TAXON": "No Taxon ID",
+        "TITLE": "Taxon ID"
+      },
+      "TITLE": "Data Quality",
+      "VALIDATION": {
+        "NOT_VALIDATED": "Not Validated",
+        "TITLE": "Validation",
+        "VALIDATED": "Validated"
+      }
+    },
+    "LOCATION": {
+      "MAP": {
+        "TITLE": "Map"
+      },
+      "TITLE": "Location"
+    },
+    "MEDIA": {
+      "AUDIO": "Audio",
+      "IMAGE": "Image",
+      "NO_MEDIA": "No Media",
+      "TITLE": "Media Type",
+      "VIDEO": "Video"
+    },
+    "NAME": {
+      "RECO_NAME": {
+        "TITLE": "Name"
+      },
+      "STATUS": {
+        "ACCEPTED": "Accepted",
+        "SYNONYM": "Synonym",
+        "TITLE": "Status"
+      },
+      "TITLE": "Scientific Name"
+    },
+    "SCIENTIFIC_NAME": {
+      "ALL_NAMES": {
+        "TITLE": "All Names"
+      },
+      "TAXON_NAMES": {
+        "TITLE": "Taxon Names"
+      },
+      "TAXON_RANK": {
+        "TITLE": "Taxon Rank"
+      },
+      "TAXON_STATUS": {
+        "TITLE": "Taxon Status"
+      },
+      "TITLE": "Scientific Name"
+    },
+    "SPECIES_GROUP": {
+      "TITLE": "Species Group"
+    },
+    "TAXON_BROWSER": {
+      "SEARCH": "Search in Tree",
+      "SEARCH_RESULTS": "Showing ${currentIndex} of ${resultsCount}",
+      "TITLE": "Taxon Browser"
+    },
+    "TIME": {
+      "CREATED_ON": "Date Created",
+      "MAX_DATE": "Maximum Date",
+      "MIN_DATE": "Minimum Date",
+      "MONTH": {
+        "APR": "April",
+        "AUG": "August",
+        "DEC": "December",
+        "FEB": "February",
+        "JAN": "January",
+        "JUL": "July",
+        "JUN": "June",
+        "MAR": "March",
+        "MAY": "May",
+        "NOV": "November",
+        "OCT": "October",
+        "SEP": "September",
+        "TITLE": "Month Observed"
+      },
+      "OBSERVED_ON": "Date Observed",
+      "TITLE": "Time"
+    },
+    "TITLE": "Filters",
+    "TOGGLE": "Toggle Filters"
+  },
+  "FOOTER": {
+    "EMAIL": "Email",
+    "FACEBOOK": "Facebook",
+    "GITHUB": "GitHub",
+    "POWERED_BY": "Powered by ",
+    "TECHNOLOGY_PARTNER": " Technology Partner ",
+    "TWITTER": "Twitter"
+  },
+  "FORGOT_PASSWORD": {
+    "FORM": {
+      "SUBMIT": "Send verification code",
+      "VERIFICATION_TYPE": "How would you like to verify your account?"
+    },
+    "RESET_SUCCESS": "Password changed sucessfully",
+    "TITLE": "Password Reset"
+  },
+  "HEADER": {
+    "MENU_PRIMARY": {
+      "CONTRIBUTE": {
+        "ADD_DATA_PACKAGE": "Add data package",
+        "ADD_DATASET": "Add Dataset",
+        "ADD_DOCUMENT": "Add Document",
+        "ADD_FACT": "Add Fact",
+        "ADD_LIST": "Add List",
+        "ADD_OBSERVATION": "Add Observation",
+        "ADD_TRAIT_OR_VALUE": "Add Trait/Value",
+        "CONTRIBUTE_TO_SPECIES": "Contribute to Species",
+        "TITLE": "Contribute"
+      },
+      "GROUPS": {
+        "SEE_ALL": "See All",
+        "TITLE": "Groups"
+      },
+      "SETTINGS": {
+        "LEADERBOARD": "My Leaderboard Rank",
+        "LOGOUT": "Logout",
+        "MY_OBSERVATIONS": "My Observations",
+        "MY_PROFILE": "My Profile",
+        "TITLE": "Settings"
+      }
+    },
+    "MENU_SECONDARY": {
+      "DOCUMENTS": {
+        "DOCUMENT_DATATABLES": "Document Datatables",
+        "DOCUMENTS": "Documents",
+        "TITLE": "Documents"
+      },
+      "MAPS": {
+        "TITLE": "Maps"
+      },
+      "MORE": {
+        "ABOUT_US": "About Us",
+        "ACTIVITY": "Activity",
+        "DASHBOARD": "Dashboard",
+        "DATASETS": "Datasets",
+        "DISCUSSIONS": "Discussions",
+        "LEADERBOARD": "Leaderboard",
+        "PARTICIPANTS": "Participants",
+        "TITLE": "More"
+      },
+      "OBSERVATION": {
+        "CHECKLISTS": "List",
+        "DATASETS": "Datasets",
+        "OBSERVATION_DATATABLES": "Observation Datatables",
+        "OBSERVATION_TRAITS": "Observation Traits",
+        "OBSERVATIONS": "Observations",
+        "TITLE": "Observation"
+      },
+      "PAGES": {
+        "TITLE": "Pages"
+      },
+      "SPECIES": {
+        "SPECIES_DATATABLES": "Species Datatables",
+        "SPECIES_PAGES": "Species Pages",
+        "SPECIES_TRAITS": "Species Traits",
+        "TAXON_NAMELIST": "Taxon Namelist",
+        "TITLE": "Species"
+      }
+    },
+    "SEARCH": "Search",
+    "SIGN_IN": "Login"
+  },
+  "HOME": {
+    "BANNER_DESCRIPTION": "A unique repository of information on India's biodiversity. The Portal aims to aggregate data through public participation and provide open and free access to biodiversity information. We welcome your participation and feedback.",
+    "BANNER_MORE": "Read More",
+    "BANNER_TITLE": "Free and open access to India's biodiversity information",
+    "FEATURES": {
+      "CITIZEN_SCIENCE": {
+        "DESC": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
+        "TITLE": "Citizen Science"
+      },
+      "GROUPS": {
+        "DESC": "Microsites on the portal allow communities dedicated to themes of their interest to collect, curate and share content.",
+        "TITLE": "Communities"
+      },
+      "LANDSCAPES": {
+        "DESC": "Aggregating information on India’s Landscapes with detailed information on spatial boundaries, species lists and relevant literature  on it. *Coming soon*",
+        "TITLE": "Landscapes"
+      },
+      "LITERATURE": {
+        "DESC": "Peer reviewed and grey literature uploaded by members or in partnership with biodiversity journals, organised with metadata and tags.",
+        "TITLE": "Biodiversity Literature"
+      },
+      "MAPS": {
+        "DESC": "Interact online with multiple layers of spatial data served as map layers through an interactive web-GIS module.",
+        "TITLE": "Maps"
+      },
+      "OPEN_DATA": {
+        "DESC": "All content on the portal is open and served under Creative Commons license for reuse and sharing with attribution to the original contributors.",
+        "TITLE": "Open Data"
+      },
+      "SPECIES_INFORMATION": {
+        "DESC": "Descriptive pages for every species of India from authenticated sources. Help collaborate and build information on India's species.",
+        "TITLE": "Species information"
+      },
+      "TAXONOMY": {
+        "DESC": "Taxonomy and nomenclatural information on India’s species, allowing for dynamic updates for organizing and querying species data, curated by experts.",
+        "TITLE": "Taxonomy"
+      },
+      "TITLE": "Features"
+    },
+    "MORE": "View all observations",
+    "OBSERVATIONS": "Recent Observations",
+    "OBSERVED_BY": "Observation By",
+    "PARTNERS": "Partners",
+    "PORTAL_STATS": {
+      "ACTIVEUSER": "Users",
+      "DISCUSSIONS": "Discussions",
+      "DOCUMENTS": "Documents",
+      "MAPS": "Maps",
+      "OBSERVATION": "Observations",
+      "SPECIES": "Species",
+      "USERGROUPS": "Groups"
+    }
+  },
+  "LEADERBOARD": {
+    "TIP": "Leaderboard is based on all activities done by a user. Activity will update once every hour.",
+    "TITLE": "Leaderboard"
+  },
+  "LIST": {
+    "CREATED_ON": "Created on",
+    "LOCATION": "Location",
+    "OBSERVATIONS_FOUND": "Observations Found",
+    "OBSERVED_ON": "Observed on",
+    "SORT_BY": "Sort By",
+    "SORT_OPTIONS": {
+      "LAST_UPDATED": "Last Updated",
+      "LATEST": "Last Uploaded",
+      "MOST_VIEWED": "Most Viewed"
+    },
+    "VIEW_TYPE": {
+      "GRID": "Grid",
+      "LIST": "List",
+      "MAP": "Map"
+    }
+  },
+  "LOADING": "Loading...",
+  "NEXT": "Next",
+  "NOTIFICATIONS": {
+    "INVALID_CREDENTIALS": "The username or password you entered is incorrect."
+  },
+  "OBSERVATION": {
+    "ACCEPTED": "Accepted",
+    "ACCURATE": "Accurate",
+    "ACTIVITY": "Activity",
+    "ADD_OBSERVATION": "Add Observation",
+    "COMMENTS": {
+      "ADD_COMMENT": "Add a new comment",
+      "POST": "Post Comment",
+      "TITLE": "Comment(s)"
+    },
+    "COMMON_NAME": "Common Name",
+    "CONTINUE": "Continue",
+    "CONTRIBUTOR": "Contributor",
+    "COORDINATES": "Coordinates",
+    "CREATED_ON": "Created on",
+    "CREATING": "We're creating your observation",
+    "CUSTOM_FIELDS": "Custom Fields",
+    "DATE_ACCURACY": "Date Accuracy",
+    "DELETE_FILE": {
+      "FAILED": "Unable to delete file, please try again later",
+      "SUCCESS": "File deleted successfully"
+    },
+    "DESCRIPTION": {
+      "MY_UPLOADS": "Upload and store media here for a period of 20 days. Select images to use in observation",
+      "RESOURCES": "Upload image, audio or video files of a single observation from your device. (Use ratings to order images)"
+    },
+    "EDIT_HINT": "💡 for editing other items such as name or traits, please input directly from the observation-show page",
+    "EDIT_NOT_UPLOADED": "Some resources are not uploaded properly, please wait or remove them before uploading",
+    "EDIT_OBSERVATION": "Edit Observation",
+    "FEATURE": "Feature Selected",
+    "FEATURE_IN_GROUPS": "Feature in Groups",
+    "FLAG": {
+      "CATEGORY": "Category",
+      "FLAGS": {
+        "DATE_INAPPROPRIATE": "Inappropriate Date",
+        "DETAILS_INAPPROPRIATE": "Inappropriate Details",
+        "LOCATION_INAPPROPRIATE": "Inappropriate Location"
+      },
+      "NOTES": "Notes",
+      "OTHERS_FLAGGED": "Others who flagged this observation",
+      "TITLE": "Flag observation"
+    },
+    "FLAG_OBSERVATION": "Flag observation as inappropriate",
+    "FOLLOW_OBSERVATION": "Follow Observation",
+    "FROM_URL": "YouTube",
+    "GROUP": "Group",
+    "GROUP_UPDATED": "Observation Species Group Updated Successfully",
+    "GROUPS": "Species Groups",
+    "GROUPS_UPDATED": "Groups Updated Successfully",
+    "HELP_IDENTIFY": "Help Identify",
+    "HIDE_PRECISE_LOCATION": "Hide Precise Location",
+    "ID": {
+      "AGREE": "Agree",
+      "NO_RECOMMENDATION": "No Recommendation",
+      "NO_SUGGESTION": "Suggest an identification",
+      "REMOVE": "Remove",
+      "RESUGGEST": "Changed your mind?",
+      "SUGGEST_NEW_RECO": "Suggest another identification",
+      "SUGGESTION_SUCCESS": "Identification suggested successfully",
+      "TITLE": "Identification",
+      "UNLOCK": "Unlock",
+      "VALIDATE": "Validate",
+      "VALIDATED": "Identification validated by curator"
+    },
+    "INFORMATION": "Information",
+    "LANGUAGE": "Language",
+    "LATITUDE": "Latitude",
+    "LICENSE": "License",
+    "LOAD_MORE_ACTIVITY": "Load more activity ↺",
+    "LOAD_MORE_OBSERVATIONS": "Load more observations ↺",
+    "LOCATION_INFORMATION": {
+      "COORDINATES": "Coordinates",
+      "FOREST_TYPE": "Forest Type",
+      "GEOPRIVACY_ENABLED": "Geoprivacy Enabled",
+      "RAINFALL": "Rainfall",
+      "SOIL": "Soil",
+      "TAHSIL": "Tahsil",
+      "TEMPRATURE": "Temprature",
+      "TITLE": "Location Information"
+    },
+    "LOCATION_SCALE": "Location Accuracy",
+    "LONGITUDE": "Longitude",
+    "MAP": {
+      "HIDE": "Hide Map",
+      "SHOW": "Show Map"
+    },
+    "MIN_THREE_CHARS": "Input at least 3 characters to search",
+    "MY_UPLOADS": "My Uploads",
+    "MY_UPLOADS_SORT": {
+      "TAKEN_ON": "Taken on",
+      "UPLOADED_ON": "Uploaded on"
+    },
+    "NAME": "Name",
+    "NEARBY": "Nearby Observations",
+    "NO_CUSTOM_FIELD": "No Custom field(s) found for this observation",
+    "NO_EMPTY_SUGGESTION": "Cannot crete empty suggestion",
+    "NOTES": "Notes",
+    "OBSERVED": "Observed",
+    "OBSERVED_AT": "Location Observed At",
+    "OBSERVED_ON": "Observed on",
+    "PLACE": "Place",
+    "POINTS_GAINED": "${points} activity point(s) gained",
+    "POST_TO_GROUPS": "Post to Groups",
+    "RATE_SUCCESS": "Media successfully rated",
+    "RATING": "Rating",
+    "RELATED": "Related Observations",
+    "REMOVE": {
+      "DESCRIPTION": "Are you sure? You can't undo this action afterwards.",
+      "SUCCESS": "Observation deleted successfully",
+      "TITLE": "Delete observation"
+    },
+    "RESOURCE_INFO": "Resource Information",
+    "SAVED": "Observation Saved",
+    "SAVED_MESSAGE": "We were unable to create your observation at the moment, but if you are offline don't worry it's saved and will be uploaded once connectivity is back",
+    "SCIENTIFIC_NAME": "Scientific Name",
+    "SELECTED_MEDIA": "Selected Media",
+    "SHARE": "Share this observation",
+    "SLIDER_LEFT": "Left",
+    "SLIDER_RIGHT": "Right",
+    "SOURCE": "Source",
+    "SPECIES_PAGE": "See species page",
+    "SUBMITTED": "Submitted",
+    "SUCCESS": "Created successfully",
+    "SUGGEST": "Suggest",
+    "SYNC": {
+      "CONTENT": "Syncing ${current} out of ${total}",
+      "TITLE": "Uploading Pending Observations"
+    },
+    "SYNONYM": "Synonym",
+    "TAGS": "Tags",
+    "TAGS_HINT": "Start typing to search tags",
+    "TAGS_UPDATE_ERROR": "There was an error while updating tags",
+    "TAGS_UPDATE_SUCCESS": "Tags Updated Successfully",
+    "TEMPORAL": {
+      "OBSERVATIONS": "Observations",
+      "TITLE": "Temporal Distribution"
+    },
+    "TERMS": "By submitting this form, you agree that the photos or videos you are submitting are taken by you, or you have permission of the copyright holder to upload them on creative commons licenses. Creative Commons - Attribution (CC-BY) will apply to all data provided.",
+    "TITLE": "What did you observe today?",
+    "TITLE_EDIT": "Edit Observation",
+    "TRAITS": "Traits",
+    "TRAITS_UPDATE_SUCCESS": "Traits Updated Successfully",
+    "UNFEATURE": "Unfeature Selected",
+    "UNFOLLOW_OBSERVATION": "Unfollow Observation",
+    "UNKNOWN": "Unknown",
+    "UPDATE_OBSERVATION": "Update Observation",
+    "UPDATED": "Updated",
+    "UPDATED_ON": "Updated on",
+    "UPLOAD_STATUS": {
+      "FAILED": "Failed",
+      "PENDING": "Pending",
+      "UPLOADED": "Uploaded to My Uploads",
+      "UPLOADING": "Uploading"
+    },
+    "UPLOADER": {
+      "BROWSE": "Browse",
+      "DESCRIPTION": "(Only JPG, JPEG, PNG, MP3 ,MP4 files will be accepted)",
+      "LABEL": "Drag file(s) here",
+      "LABEL_RELEASE": "Ready to upload",
+      "PROCESSING": "Processing",
+      "UPLOADING": "Uploading..."
+    },
+    "USE_DMS": "Use DMS",
+    "USE_IN_OBSERVATION": "Use in observation",
+    "USE_LAT_LNG": "Use Lat-Long",
+    "USERGROUPS": "Groups",
+    "YOUTUBE_PLACEHOLDER": "Input YouTube link"
+  },
+  "OFFLINE": "No Internet Connection",
+  "ONE_MOMENT_PLEASE": "One moment please",
+  "OR": "or",
+  "OTP": {
+    "DESCRIPTION": "Enter a verification code we just sent to your",
+    "FORM": {
+      "OTP": "OTP",
+      "SUBMIT": "Verify"
+    },
+    "INVALID_OTP": "The OTP entered is incorrect",
+    "RESEND": "Resend OTP",
+    "TITLE": "Account verification"
+  },
+  "PREV": "Previous",
+  "SAVE": "Save",
+  "SIGN_IN": {
+    "FORGOT_PASSWORD_LINK": "Forgot password?",
+    "FORM": {
+      "PASSWORD": "Password",
+      "SUBMIT": "Sign In",
+      "USERNAME": "Username"
+    },
+    "SIGN_UP": "Don't have an account?",
+    "SIGN_UP_LINK": "Register",
+    "TITLE": "Sign in",
+    "WITH_GOOGLE": "Sign in with Google"
+  },
+  "SIGN_UP": {
+    "EXISTING_USER": "Already have an account?",
+    "FORM": {
+      "AUTOFILL_WITH_GOOGLE": "Autofill with Google",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "EMAIL": "Email",
+      "GENDER": "Gender",
+      "INSTITUTION": "Institution",
+      "LATITUDE": "Latitude",
+      "LOCATION": "Location",
+      "LONGITUDE": "Longitude",
+      "MOBILE": "Mobile Number",
+      "PASSWORD": "Password",
+      "PROFESSION": "Profession",
+      "SUBMIT": "Register",
+      "USERNAME": "Name",
+      "VERIFY_THROUGH": "Since you have provided email and mobile number both how would you like to verify your account?"
+    },
+    "TITLE": "Sign up"
+  },
+  "TOGGLE": "toggle"
+}

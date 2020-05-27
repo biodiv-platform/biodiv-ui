@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+:root {
+  --heading-height: 124px;
+  --subtle-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+  background: var(--gray-50);
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
+h1,
+h2,
+h3,
+a,
+p,
+span,
+.svg--inline {
+  svg {
+    display: initial !important;
+    vertical-align: middle !important;
+  }
+}
+
+.icon-tabs svg {
+  font-size: 1.2em;
+  margin-right: 0.3rem;
+}
+
+.hidden,
+[data-hidden="true"],
+[hidden="true"] {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+.start-of-content {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  &:focus {
+    width: auto;
+    height: auto;
+    background: var(--blue-500);
+    color: var(--white);
+    padding: 1rem;
+  }
+}

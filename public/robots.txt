@@ -1,0 +1,31 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /namelist/
+
+User-agent: googlebot-image
+Allow: /
+Disallow: /namelist/
+
+User-agent: googlebot-mobile
+Allow: /
+Disallow: /namelist/
+
+User-agent: Bingbot
+Crawl-delay: 10
+Allow: /
+Disallow: /namelist/
+
+User-agent: DuckDuckBot
+Crawl-delay: 10
+Allow: /
+Disallow: /namelist/
+
+User-agent: Twitterbot
+Disallow: 
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: *
+Disallow: /
+Crawl-delay: 10

@@ -1,0 +1,23 @@
+export default {
+  ADDED_A_COMMENT: "Added a comment",
+  ADDED_A_FACT: "Added a fact",
+  AGREED_ON_SPECIES_NAME: "Agreed on species name",
+  FEATURED: "Featured",
+  UNFEATURED: "UnFeatured",
+  OBSERVATION_CREATED: "Observation created",
+  OBSERVATION_SPECIES_GROUP_UPDATED: "Observation species group updated",
+  OBSERVATION_TAG_UPDATED: "Observation tag updated",
+  OBSERVATION_UPDATED: "Observation updated",
+  OBV_LOCKED: "obv locked",
+  OBV_UNLOCKED: "obv unlocked",
+  POSTED_RESOURCE: "Posted resource",
+  SUGGESTED_SPECIES_NAME: "Suggested species name",
+  SUGGESTION_REMOVED: "Suggestion removed",
+  UPDATED_FACT: "Updated fact",
+  FLAGGED: "Flagged",
+  FLAG_REMOVED: "Flag removed",
+  UNFLAGGED: "unflagged",
+  RATED_MEDIA_RESOURCE: "Rated media resource",
+  CUSTOM_FIELD_EDITED: "Custom field edited",
+  REMOVED_RESORUCE: "Removed resoruce"
+};
