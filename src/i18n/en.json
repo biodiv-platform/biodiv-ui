@@ -208,9 +208,7 @@
     "SIGN_IN": "Login"
   },
   "HOME": {
-    "BANNER_DESCRIPTION": "A unique repository of information on India's biodiversity. The Portal aims to aggregate data through public participation and provide open and free access to biodiversity information. We welcome your participation and feedback.",
     "BANNER_MORE": "Read More",
-    "BANNER_TITLE": "Free and open access to India's biodiversity information",
     "FEATURES": {
       "CITIZEN_SCIENCE": {
         "DESC": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",

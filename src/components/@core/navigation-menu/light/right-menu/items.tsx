@@ -97,7 +97,7 @@ export default [
       },
       {
         name: "ABOUT_US",
-        to: "/theportal"
+        to: "/about"
       }
     ]
   }

@@ -5,6 +5,7 @@ import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getObservationThumbnail } from "@utils/media";
+import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import LazyImage from "react-cool-img";
 
@@ -27,6 +28,7 @@ const ObservationBox = styled.div`
 `;
 
 export default function RecentObservationList() {
+  const { id: userGroupList } = useStoreState((s) => s.currentGroup);
   const [observatons, setObservations] = useState<ObservationListMinimalData[]>(
     Array(OBSERVATIONS_SIZE).fill(null)
   );
@@ -35,7 +37,8 @@ export default function RecentObservationList() {
     axGetListData({
       sort: "created_on",
       max: OBSERVATIONS_SIZE,
-      view: "list_minimal"
+      view: "list_minimal",
+      userGroupList
     }).then(({ data }) => {
       setObservations(data?.observationListMinimal || []);
     });

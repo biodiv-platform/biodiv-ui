@@ -2,7 +2,7 @@ import { Avatar, Box, Flex, Image, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
-import { ObservationHomePage } from "@interfaces/observation";
+import { GallerySlider } from "@interfaces/utility";
 import { HERO_FALLBACK } from "@static/home";
 import { getObservationThumbnail, getUserImage } from "@utils/media";
 import EmblaCarouselReact from "embla-carousel-react";
@@ -60,7 +60,7 @@ const CarouselContainer = styled.div`
 `;
 
 interface ISlidesProps {
-  featured: ObservationHomePage[];
+  featured: GallerySlider[];
   slideIndex;
   onChange;
 }
@@ -80,17 +80,13 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
     <CarouselContainer>
       <EmblaCarouselReact emblaRef={setEmbla} options={{ loop: true }}>
         <div className="carousel">
-          {featured.map((o, index) => (
-            <LocalLink
-              key={index}
-              href={`/observation/show/${o.observation.observationId}`}
-              prefixGroup={true}
-            >
+          {featured.map((o) => (
+            <LocalLink key={o.id} href={`/observation/show/${o.observationId}`} prefixGroup={true}>
               <a>
                 <Image
                   objectFit="cover"
-                  src={getObservationThumbnail(o?.resourceUrl, 500)}
-                  alt={o.observation?.recoIbp?.scientificName}
+                  src={getObservationThumbnail(o?.fileName, 500)}
+                  alt={o.observationId.toString()}
                   fallbackSrc={HERO_FALLBACK}
                 />
               </a>
@@ -99,21 +95,21 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
         </div>
       </EmblaCarouselReact>
       <div className="slide-content">
-        <LocalLink href={`/user/show/${featured[slideIndex].observation.user.id}`}>
+        <LocalLink href={`/user/show/${featured[slideIndex].authorId}`}>
           <Link>
             <Flex alignItems="center">
               <Avatar
                 mr={2}
                 flexShrink={0}
                 size="sm"
-                name={featured[slideIndex].observation.user.name}
-                src={getUserImage(featured[slideIndex].observation.user.profilePic)}
+                name={featured[slideIndex].authorName}
+                src={getUserImage(featured[slideIndex].authorImage)}
               />
               <Box className="credits-text">
                 <Text lineHeight="1em" fontSize="xs">
                   {t("HOME.OBSERVED_BY")}
                 </Text>
-                <div>{featured[slideIndex].observation.user.name}</div>
+                <div>{featured[slideIndex].authorName}</div>
               </Box>
             </Flex>
           </Link>

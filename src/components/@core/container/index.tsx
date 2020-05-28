@@ -1,12 +1,13 @@
 import useTranslation from "@configs/i18n/useTranslation";
 import { UserGroupIbp } from "@interfaces/observation";
-import { isBrowser, TOKEN } from "@static/constants";
+import { isBrowser, RESOURCE_SIZE, TOKEN } from "@static/constants";
 import authStore from "@stores/auth.store";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
 import { createStore, StoreProvider } from "easy-peasy";
 import useNookies from "next-nookies-persist";
 import { DefaultSeo } from "next-seo";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
@@ -26,17 +27,18 @@ interface IAppContainerProps {
     pages;
     groups: UserGroupIbp[];
     currentGroup: UserGroupIbp;
+    manifestURL: string;
   };
 }
 
 function AppContainer({ extras }: IAppContainerProps) {
-  const { Component, pageProps, groups, currentGroup, pages } = extras;
+  const { Component, pageProps, groups, currentGroup, pages, manifestURL } = extras;
   const config = { header: true, footer: true, ...Component?.config };
   const { nookies } = useNookies();
   const router = useRouter();
   const initialState = { user: nookies[TOKEN.USER] || {}, groups, currentGroup, pages };
   const hybridStore = createStore(authStore, { initialState });
-  const { t, locale } = useTranslation();
+  const { locale } = useTranslation();
   const canonical = process.env.NEXT_PUBLIC_SITE_URL + router.asPath;
 
   useEffect(() => {
@@ -55,14 +57,14 @@ function AppContainer({ extras }: IAppContainerProps) {
       <DefaultSeo
         title={currentGroup.name}
         canonical={canonical}
-        description={t("HOME.BANNER_DESCRIPTION")}
+        description={process.env.NEXT_PUBLIC_META_DESCRIPTION}
         openGraph={{
           type: "website",
           locale,
           url: canonical,
           title: currentGroup.name,
           site_name: currentGroup.name,
-          description: t("HOME.BANNER_DESCRIPTION")
+          description: process.env.NEXT_PUBLIC_META_DESCRIPTION
         }}
         twitter={{
           handle: process.env.NEXT_PUBLIC_SOCIAL_TWITTER,
@@ -70,6 +72,10 @@ function AppContainer({ extras }: IAppContainerProps) {
           cardType: "summary_large_image"
         }}
       />
+      <Head>
+        <link rel="apple-touch-icon" href={currentGroup.icon + RESOURCE_SIZE.APPLE_TOUCH} />
+        <link rel="manifest" href={manifestURL} />
+      </Head>
       <div className="content">
         {config.header && (
           <>

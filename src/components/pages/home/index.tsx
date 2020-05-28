@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/core";
+import { useStoreState } from "easy-peasy";
 import React from "react";
 
 import Carousel from "./carousel";
@@ -8,15 +9,17 @@ import Partners from "./partners";
 import RecentObservations from "./recent";
 import Stats from "./stats";
 
-export default function HomePageComponent({ portalStats, featured }) {
+export default function HomePageComponent({ homeInfo }) {
+  const showFeatures = !useStoreState((s) => s?.currentGroup?.id);
+
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
-      <Carousel featured={featured} />
-      <Stats portalStats={portalStats} />
-      <RecentObservations />
-      <Map />
-      <Features />
-      <Partners />
+      {homeInfo.showGallery && <Carousel featured={homeInfo.gallerySlider} />}
+      {homeInfo.showStats && <Stats portalStats={homeInfo.stats} />}
+      {homeInfo.showRecentObs && <RecentObservations />}
+      {homeInfo.showGridMap && <Map />}
+      {showFeatures && <Features />}
+      {showFeatures && <Partners />}
     </Box>
   );
 }

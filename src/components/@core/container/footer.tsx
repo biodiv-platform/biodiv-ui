@@ -2,6 +2,8 @@ import { Box, Flex, Icon, Link, Stack } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
+import { version } from "../../../../package.json";
+
 export default function Footer() {
   const { t } = useTranslation();
 
@@ -10,7 +12,9 @@ export default function Footer() {
       <Flex textAlign="center" direction="column" align="center" className="container">
         <div>
           {t("FOOTER.POWERED_BY")}
-          <Link href="https://github.com/strandls?q=biodiv">Biodiversity Informatics Platform</Link>
+          <Link href="https://github.com/strandls?q=biodiv">
+            Biodiversity Informatics Platform - v{version}
+          </Link>
           <br />
           {t("FOOTER.TECHNOLOGY_PARTNER")}
           <Link href="https://strandls.com/">Strand Life Sciences</Link>

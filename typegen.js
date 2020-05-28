@@ -17,7 +17,8 @@ const microservices = [
   "observation",
   "files",
   "utility",
-  "userGroup"
+  "userGroup",
+  "traits"
 ];
 
 const dtsgen = (ms) => {

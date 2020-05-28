@@ -370,18 +370,6 @@ export const axGetObservationListConfig = async () => {
   }
 };
 
-export const axGetObservationsByResources = async (resources) => {
-  try {
-    const { data } = await plainHttp.post(
-      `${ENDPOINT.OBSERVATION}/v1/observation/find`,
-      resources.toString()
-    );
-    return { success: true, data };
-  } catch (e) {
-    return { success: false, data: [] };
-  }
-};
-
 export const axRateObservationResource = async (observationId, resourceId, rating) => {
   try {
     await waitForAuth();

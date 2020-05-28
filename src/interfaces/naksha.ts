@@ -4,6 +4,7 @@ export interface BodyPart {
     [name: string]: string[];
   };
   mediaType?: MediaType;
+  messageBodyWorkers?: MessageBodyWorkers;
   parent?: MultiPart;
   providers?: Providers;
   parameterizedHeaders?: {
@@ -108,6 +109,7 @@ export interface FormDataBodyPart {
     [name: string]: string[];
   };
   mediaType?: MediaType;
+  messageBodyWorkers?: MessageBodyWorkers;
   parent?: MultiPart;
   providers?: Providers;
   simple?: boolean;
@@ -137,6 +139,7 @@ export interface FormDataMultiPart {
     [name: string]: string[];
   };
   mediaType?: MediaType;
+  messageBodyWorkers?: MessageBodyWorkers;
   parent?: MultiPart;
   providers?: Providers;
   bodyParts?: BodyPart[];
@@ -161,12 +164,14 @@ export interface MediaType {
   wildcardType?: boolean;
   wildcardSubtype?: boolean;
 }
+export interface MessageBodyWorkers {}
 export interface MultiPart {
   entity?: Record<string, unknown>;
   headers?: {
     [name: string]: string[];
   };
   mediaType?: MediaType;
+  messageBodyWorkers?: MessageBodyWorkers;
   parent?: MultiPart;
   providers?: Providers;
   bodyParts?: BodyPart[];

@@ -1,27 +1,29 @@
+import { RESOURCE_SIZE } from "@static/constants";
+import { compiledMessage } from "@utils/basic";
+
+import { version } from "../../../package.json";
+
+const getIcon = (p) => ({
+  src: compiledMessage(RESOURCE_SIZE.MANIFEST, p).replace("/crop/", "/logo/"),
+  sizes: `${p.size}x${p.size}`,
+  type: "image/png"
+});
+
 export default (req, res) => {
   const {
     query: { name, icon }
   } = req;
 
   res.json({
-    name: name,
+    name,
     short_name: name.toLowerCase(),
+    version,
+    manifest_version: 2,
     description: process.env.NEXT_PUBLIC_META_DESCRIPTION,
-    background_color: "#0e0e0e",
+    background_color: "#ffffff",
     theme_color: "#363636",
-    display: "minimal-ui",
+    display: "standalone",
     start_url: "/",
-    icons: [
-      {
-        src: `${icon}?h=192&w=192`,
-        sizes: "192x192",
-        type: "image/png"
-      },
-      {
-        src: `${icon}?h=512&w=512`,
-        sizes: "512x512",
-        type: "image/png"
-      }
-    ]
+    icons: [getIcon({ icon, size: 192 }), getIcon({ icon, size: 512 })]
   });
 };

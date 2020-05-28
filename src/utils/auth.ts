@@ -96,6 +96,7 @@ export const generateSession = async (
   setNookie(TOKEN.AUTH, tokens);
   const { success, data } = await axGetUser();
   if (success) {
+    setNookie(TOKEN.USER, data);
     await removeCache();
     if (onSuccess) {
       onSuccess(data);
@@ -123,4 +124,15 @@ export const adminOrAuthor = (authorId) => {
   return u?.id === authorId || hasAccess([Role.Admin]);
 };
 
-export const CACHE_WHITELIST = ["v2", "mapbox-tiles", "workbox-precache"];
+export const CACHE_WHITELIST = ["v2", "mapbox-tiles", "workbox"];
+
+export const CACHE_MANUAL = "v2-light-cache";
+
+export const preCacheRoutes = async (currentGroup) => {
+  try {
+    const cache = await window.caches.open(CACHE_MANUAL);
+    await cache.add(`${currentGroup.webAddress}/observation/create`);
+  } catch (e) {
+    console.error(e);
+  }
+};

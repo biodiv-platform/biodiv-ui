@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/core";
-import { FactValuePair, TraitsValuePair } from "@interfaces/observation";
+import { FactValuePair, TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
