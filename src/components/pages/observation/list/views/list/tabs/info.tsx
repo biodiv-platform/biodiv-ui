@@ -65,11 +65,11 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
             <Text className="elipsis" title={o.reverseGeocodedName}>
-              <Icon mr={1} name="ibplocation" title={t("LIST.LOCATION")} />
+              <Icon mb={1} mr={2} name="ibplocation" title={t("LIST.LOCATION")} />
               {o.reverseGeocodedName}
             </Text>
             <Text>
-              <Icon mr={1} name="calendar" title={t("LIST.OBSERVED_ON")} />
+              <Icon mb={1} mr={2} name="calendar" title={t("LIST.OBSERVED_ON")} />
               {formatDateReadable(o.observedOn)}
             </Text>
           </Box>

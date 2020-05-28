@@ -89,7 +89,7 @@ function Header({ o, setO, following = false }: IHeaderProps) {
         <Flex alignItems="top" justifyContent={["flex-start", "flex-end"]}>
           {showActions && (
             <SimpleButton
-              icon="ibpedit"
+              icon="edit"
               title="EDIT_OBSERVATION"
               onClick={handleOnEdit}
               variantColor="teal"

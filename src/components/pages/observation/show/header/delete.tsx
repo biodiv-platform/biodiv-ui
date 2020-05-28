@@ -33,7 +33,7 @@ export default function DeleteObservation({ observationId }) {
 
   return (
     <>
-      <SimpleButton onClick={onOpen} icon="ibpdelete" title="REMOVE.TITLE" variantColor="red" />
+      <SimpleButton onClick={onOpen} icon="delete" title="REMOVE.TITLE" variantColor="red" />
       <AlertDialog isOpen={isOpen} onClose={onClose} leastDestructiveRef={cancelRef}>
         <AlertDialogOverlay />
         <AlertDialogContent>

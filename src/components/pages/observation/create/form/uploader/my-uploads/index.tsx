@@ -37,7 +37,7 @@ const MyUploadsImages = ({ onDone }) => {
           <Button
             flexShrink={0}
             type="button"
-            leftIcon="check"
+            leftIcon={"ibpcheck" as any}
             onClick={onDone}
             variantColor="blue"
           >

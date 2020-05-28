@@ -24,6 +24,7 @@ export default function ClearFilters() {
         onClick={clearFilters}
         variant="link"
         className="fade"
+        size="lg"
         variantColor="red"
         aria-label={message}
         leftIcon="delete"
