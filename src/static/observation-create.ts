@@ -2,7 +2,8 @@ import { IndexedDBConfig } from "use-indexeddb/src/interfaces";
 
 export const STORE = {
   ASSETS: "assets",
-  PENDING_OBSERVATIONS: "pending-observations"
+  PENDING_OBSERVATIONS: "pending-observations",
+  PENDING_GROUPS: "pending-groups"
 };
 
 export const DB_CONFIG: IndexedDBConfig = {
@@ -31,6 +32,11 @@ export const DB_CONFIG: IndexedDBConfig = {
     },
     {
       name: STORE.PENDING_OBSERVATIONS,
+      id: { keyPath: "id", autoIncrement: true },
+      indices: [{ name: "data", keyPath: "data" }]
+    },
+    {
+      name: STORE.PENDING_GROUPS,
       id: { keyPath: "id", autoIncrement: true },
       indices: [{ name: "data", keyPath: "data" }]
     }

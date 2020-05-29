@@ -11,7 +11,7 @@ const DropTargetBox = styled.div`
   border: 2px dashed var(--gray-300);
   border-radius: 0.5rem;
   padding: 1rem;
-  min-height: 22rem;
+  min-height: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;

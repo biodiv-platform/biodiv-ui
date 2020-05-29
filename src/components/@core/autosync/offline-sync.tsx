@@ -7,8 +7,12 @@ import { axCreateObservation } from "@services/observation.service";
 import {
   SYNC_SINGLE_OBSERVATION,
   SYNC_SINGLE_OBSERVATION_DONE,
-  SYNC_SINGLE_OBSERVATION_ERROR
+  SYNC_SINGLE_OBSERVATION_ERROR,
+  SYNC_SINGLE_GROUP,
+  SYNC_SINGLE_GROUP_DONE,
+  SYNC_SINGLE_GROUP_ERROR
 } from "@static/events";
+import { axCreateGroup } from "@services/usergroup.service";
 import { STORE } from "@static/observation-create";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
@@ -29,6 +33,9 @@ export default function OfflineSync() {
   const router = useLocalRouter();
   const { isOpen, onOpen, onClose } = useDisclosure(true);
   const [syncInfo, setSyncInfo] = useState<SyncInfo>();
+  const { getAll: getAllGroups, add: addGroups, deleteByID: deleteGroups } = useIndexedDBStore<
+    IDBPendingObservation
+  >(STORE.PENDING_GROUPS);
   const { update, deleteByID: deleteResource } = useIndexedDBStore<IDBObservationAsset>(
     STORE.ASSETS
   );
@@ -83,8 +90,34 @@ export default function OfflineSync() {
       console.error(e);
     }
   };
+  const trySyncingGroup = async ({ group, instant, id = -1 }) => {
+    let idbID = id;
+    if (instant) {
+      try {
+        idbID = await addGroups({ data: group });
+      } catch (e) {
+        console.error("addGroup error", e);
+      }
+    }
+    try {
+      const { success } = await axCreateGroup(group);
+      if (success) {
+        await deleteGroups(idbID);
+        if (instant) {
+          emit(SYNC_SINGLE_GROUP_DONE);
+          router.push(`/`, true);
+        }
+      } else {
+        emit(SYNC_SINGLE_GROUP_DONE);
+      }
+    } catch (e) {
+      emit(SYNC_SINGLE_GROUP_ERROR);
+      console.error(e);
+    }
+  };
 
   useListener(trySyncSingleObservation, [SYNC_SINGLE_OBSERVATION]);
+  useListener(trySyncingGroup, [SYNC_SINGLE_GROUP]);
 
   const trySyncPendingObservations = async () => {
     const pendingObservations = await getAllObservations();
@@ -103,10 +136,27 @@ export default function OfflineSync() {
     );
     onClose();
   };
-
+  const trySyncPendingGroups = async () => {
+    const pendingGroup = await getAllGroups();
+    const total = pendingGroup.length;
+    setSyncInfo({ total, current: 0 });
+    onOpen();
+    await Promise.all(
+      pendingGroup.map(async (group, current) => {
+        setSyncInfo({ total, current: current + 1 });
+        await trySyncingGroup({
+          group: group.data,
+          instant: false,
+          id: group.id
+        });
+      })
+    );
+    onClose();
+  };
   useEffect(() => {
     if (isOnline && document.hasFocus()) {
       trySyncPendingObservations();
+      trySyncPendingGroups();
     }
   }, [isOnline]);
 

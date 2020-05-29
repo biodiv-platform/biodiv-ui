@@ -14,6 +14,7 @@ interface ITextAreaProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
+  placeholder?: string;
   form: FormContextValues<any>;
   style?;
 }
@@ -24,6 +25,7 @@ const TextAreaField = ({
   form,
   mb = 4,
   disabled = false,
+  placeholder,
   hint,
   ...props
 }: ITextAreaProps) => (
@@ -32,7 +34,7 @@ const TextAreaField = ({
     <Textarea
       id={name}
       name={name}
-      placeholder={label}
+      placeholder={label ? label : placeholder}
       ref={form.register}
       minH="124px"
       isDisabled={disabled}

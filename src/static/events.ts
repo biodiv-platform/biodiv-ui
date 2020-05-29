@@ -6,6 +6,9 @@ export const RESOURCES_UPLOADING = "resources_uploading";
 export const SYNC_SINGLE_OBSERVATION = "sync_single_observation";
 export const SYNC_SINGLE_OBSERVATION_DONE = "sync_single_observation_done";
 export const SYNC_SINGLE_OBSERVATION_ERROR = "sync_single_observation_error";
+export const SYNC_SINGLE_GROUP = "sync_signle_group";
+export const SYNC_SINGLE_GROUP_DONE = "sync_single_group_done";
+export const SYNC_SINGLE_GROUP_ERROR = "sync_signle_group_error";
 export const TOGGLE_PHOTO_SELECTOR = "toggle_photo_uploader";
 
 export const AUTHWALL = {
