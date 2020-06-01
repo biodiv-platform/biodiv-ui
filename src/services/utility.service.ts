@@ -41,10 +41,7 @@ export const axGetYouTubeInfo = async (url) => {
 export const axGetAllHabitat = async () => {
   try {
     const { data } = await axios.get(`${ENDPOINT.UTILITY}/v1/services/habitat/all`);
-    return {
-      success: true,
-      data
-    };
+    return { success: true, data };
   } catch (error) {
     console.error(error);
     return { success: false, data: [] };

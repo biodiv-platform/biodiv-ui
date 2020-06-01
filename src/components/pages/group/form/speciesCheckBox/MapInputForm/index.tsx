@@ -4,6 +4,7 @@ import { MAP_CENTER } from "@static/constants";
 import { stringToFeature } from "@utils/location";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useMemo, useEffect, useState } from "react";
+
 const defaultViewPort = {
   latitude: MAP_CENTER.lat,
   longitude: MAP_CENTER.lng,
@@ -36,6 +37,7 @@ export default function MapInputForm({ form }) {
   useEffect(() => {
     register({ name: "spacial_coverage" });
   }, [register]);
+
   return (
     <Box position="relative" h="22rem">
       <MapAreaDraw

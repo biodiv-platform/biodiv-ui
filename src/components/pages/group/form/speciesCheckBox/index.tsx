@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, useDisclosure, Button } from "@chakra-ui/core";
+import { Box, useDisclosure, Button, Heading } from "@chakra-ui/core";
 import { useForm } from "react-hook-form";
 import TextBoxField from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
 import RadioInputField from "@components/form/radio";
 // import * as Yup from "yup";
-import { emit } from "react-gbus";
 import useTranslation from "@configs/i18n/useTranslation";
 import { PageHeading } from "@components/@core/layout";
 import GroupSelector from "./customCheckbox";
@@ -13,17 +12,14 @@ import SelectAsync from "@components/form/select-async";
 import { axQueryTagsByText } from "@services/observation.service";
 import AdminInviteField from "./adminInviteField";
 import MapInputForm from "./MapInputForm";
-import SavingGroup from "../../saving";
-import { SYNC_SINGLE_GROUP } from "@static/events";
 import GroupIconUploader from "../uploader";
-// import Submit from "@components/form/submit-button";
-// import { parseDate } from "@utils/date";
-// import { useStoreState } from "easy-peasy";
+import { userInvitaionOptions } from "../options";
+import { axCreateGroup } from "@services/usergroup.service";
 
 function createGroupForm({ speciesGroups, habitats }) {
   const hform = useForm();
   const { t } = useTranslation();
-  const { isOpen, onClose } = useDisclosure(true);
+  const { isOpen, onClose, onOpen } = useDisclosure(true);
   const adminInviteList = [
     {
       name: "founder",
@@ -58,8 +54,8 @@ function createGroupForm({ speciesGroups, habitats }) {
     }
     return { idsList, emailList };
   };
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async () => {
+    onClose();
     const group = hform.getValues();
     const founder = getAdminUser(group.founder);
     const moderator = getAdminUser(group.moderator);
@@ -68,13 +64,13 @@ function createGroupForm({ speciesGroups, habitats }) {
       description: group.group_description,
       icon: group.group_icon,
       name: group.group_name,
-      neLatitude: group && group.spacial_coverage.ne ? group.spacial_coverage.ne[0] : "",
-      neLongitude: group && group.spacial_coverage.ne ? group.spacial_coverage.ne[1] : "",
-      swLatitude: group && group.spacial_coverage.se ? group.spacial_coverage.se[0] : "",
-      swLongitude: group && group.spacial_coverage.se ? group.spacial_coverage.se[1] : "",
+      neLatitude: group?.spacial_coverage?.ne?.[0] || "",
+      neLongitude: group?.spacial_coverage?.ne?.[1] || "",
+      swLatitude: group?.spacial_coverage?.se?.[0] || "",
+      swLongitude: group?.spacial_coverage?.se?.[1] || "",
       languageId: 0,
-      spacialCOverage: group.sGroup ? group.sGroup : [],
-      habitatCoverage: group.habitatCoverage ? group.habitatCoverage : [],
+      speciesCoverage: group.sGroup || [],
+      habitatCoverage: group.habitatCoverage || [],
       sendDigestMail: true,
       tags: group.tags,
       invitationData: {
@@ -85,33 +81,30 @@ function createGroupForm({ speciesGroups, habitats }) {
         moderatorsEmail: moderator.emailList
       }
     };
-    // console.log("the redo you",hform.getValues())
-    emit(SYNC_SINGLE_GROUP, { group: payload, instant: true });
-    onClose();
+    await axCreateGroup(payload);
+
+    hform.reset({
+      tags: [],
+      spacial_coverage: [],
+      sGroup: [],
+      habitatCoverage: []
+    });
+    onOpen();
   };
-  return isOpen ? (
+  return (
     <Box mb={8} minH="calc(100vh - var(--heading-height))">
       <PageHeading>{t("GROUP.CREATE_GROUP_TITLE")}</PageHeading>
-      <Box className="white-box" style={{ padding: "10px 30px", margin: "10px" }}>
-        <h2 className="mt4" style={{ margin: "20px 0px", fontSize: 25 }}>
+      <Box className="white-box" p="10px 30px" m="10px">
+        <Heading as="h2" className="mt4" m="20px 0px" fontSize="x-large">
           <strong>Core Elements</strong>
-        </h2>
-        <form onSubmit={handleFormSubmit}>
-          <TextBoxField
-            name="group_name"
-            isRequired={true}
-            label={t("GROUP.GROUP_NAME")}
-            form={hform}
-          />
-          <TextAreaField
-            name="group_description"
-            label={t("GROUP.GROUP_DESCRIPTION")}
-            form={hform}
-          />
+        </Heading>
+        <form onSubmit={hform.handleSubmit(handleFormSubmit)}>
+          <TextBoxField name="group_name" isRequired={true} label={t("GROUP.NAME")} form={hform} />
+          <TextAreaField name="group_description" label={t("GROUP.DESCRIPTION")} form={hform} />
           <GroupIconUploader form={hform} name="group_icon" />
           <GroupSelector
             name="sGroup"
-            label={t("GROUP.SPECIES_GROUP_COVERAGE")}
+            label={t("GROUP.SPECIES_COVERAGE")}
             options={speciesGroups}
             form={hform}
           />
@@ -125,11 +118,8 @@ function createGroupForm({ speciesGroups, habitats }) {
             form={hform}
             isInline={false}
             name="group_invitaion"
-            label="Can user join the group without invitaion"
-            options={[
-              { label: "yes", value: "true" },
-              { label: "no", value: "false" }
-            ]}
+            label={t("GROUP.USER_INVITAION")}
+            options={userInvitaionOptions}
           />
           <MapInputForm form={hform} />
           <SelectAsync
@@ -145,10 +135,11 @@ function createGroupForm({ speciesGroups, habitats }) {
             <AdminInviteField
               adminList={adminInviteList}
               form={hform}
-              adminTitle={"GROUP.GROUP_ADMIN_TITLE"}
+              adminTitle={t("GROUP.ADMIN_TITLE")}
             />
             <Button
-              className="white-box-padding"
+              isLoading={!isOpen}
+              m={15}
               type="submit"
               onSubmit={handleFormSubmit}
               variantColor="green"
@@ -159,8 +150,6 @@ function createGroupForm({ speciesGroups, habitats }) {
         </form>
       </Box>
     </Box>
-  ) : (
-    <SavingGroup />
   );
 }
 

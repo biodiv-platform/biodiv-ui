@@ -1,6 +1,6 @@
 import { CheckboxGroup } from "@chakra-ui/core";
 import React from "react";
-import Checkbox from "./checkbox";
+import CustomCheckbox from "./checkbox";
 
 export interface ITraitInputProps {
   type?: string;
@@ -17,7 +17,7 @@ const MultipleSpeciesSelector = ({ values, onUpdate, defaultValue }: ITraitInput
     display="flex"
   >
     {values.map((o) => (
-      <Checkbox key={o.id} value={o.id.toString()} label={o.value} icon={o.name} />
+      <CustomCheckbox key={o.id} value={o.id.toString()} label={o.value} icon={o.name} />
     ))}
   </CheckboxGroup>
 );

@@ -4,7 +4,7 @@ import { getSpeciesIcon } from "@utils/media";
 import Tooltip from "@components/@core/tooltip";
 const VH: any = VisuallyHidden;
 
-const Radio = ({ value, label, icon, ...props }) => (
+const CustomCheckbox = ({ value, label, icon, ...props }) => (
   <label role="checkbox" className="custom-checkbox" aria-checked={props.isChecked}>
     <VH as="input" type="checkbox" {...props} value={value} />
     <Tooltip title={icon} placement="top" hasArrow={true}>
@@ -13,4 +13,4 @@ const Radio = ({ value, label, icon, ...props }) => (
   </label>
 );
 
-export default Radio;
+export default CustomCheckbox;

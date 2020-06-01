@@ -49,11 +49,9 @@ export const axGetPages = async () => {
   }
 };
 
-export const axCreateGroup = async ({ ...payload }) => {
+export const axCreateGroup = async (payload) => {
   try {
-    const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/create`, {
-      ...payload
-    });
+    const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/create`, payload);
     return { success: true, data };
   } catch (e) {
     console.error(e.response.data.message);

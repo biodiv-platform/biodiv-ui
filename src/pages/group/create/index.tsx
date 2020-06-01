@@ -1,34 +1,25 @@
-import { useLocalRouter } from "@components/@core/local-link";
-import { TOKEN } from "@static/constants";
-import { encode } from "base64-url";
-import { getNookie } from "next-nookies-persist";
 import CreateGroupPage from "../../../components/pages/group/createGroupPage";
 import { axGetLangList } from "@services/utility.service";
 import { axGetspeciesGroups } from "@services/observation.service";
 import { axGetAllHabitat } from "@services/utility.service";
-import React, { useEffect, useState } from "react";
+import { hasAccess } from "@utils/auth";
+import { encode } from "base64-url";
+import { Role } from "@interfaces/custom";
+import React from "react";
 
 function createGroup({ speciesGroups, habitats }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { push, asPath } = useLocalRouter();
-
-  const init = async () => {
-    const user = getNookie(TOKEN.USER);
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      push("/login", true, { forward: encode(asPath) });
-    }
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
-
-  return isLoggedIn ? <CreateGroupPage habitats={habitats} speciesGroups={speciesGroups} /> : null;
+  return <CreateGroupPage habitats={habitats} speciesGroups={speciesGroups} />;
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
+  if (!hasAccess([Role.Admin, Role.User], ctx)) {
+    const Location = `/login?forward=${encode("/group/create")}`;
+    ctx.res.writeHead(302, {
+      Location,
+      "Content-Type": "text/html; charset=utf-8"
+    });
+    ctx.res.end();
+  }
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitatList } = await axGetAllHabitat();
   const { data } = await axGetLangList();

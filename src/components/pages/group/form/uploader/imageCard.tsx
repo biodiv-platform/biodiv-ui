@@ -11,9 +11,6 @@ import {
 import { useStoreState } from "easy-peasy";
 import React, { useMemo } from "react";
 
-import StatusIcon from "@components/pages/observation/create/form/uploader/statusicon";
-import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
-
 const ImageBox = styled.div`
   flex-grow: 1;
   margin-bottom: 0.5rem;
@@ -44,14 +41,17 @@ export const getImageThumb = (resource, userID, size = 140): string => {
       ? getMyUploadsThumbnail(resource.path, userID, size)
       : getObservationThumbnail(resource.path);
   }
-  return URL.createObjectURL(resource.blob);
+  return URL.createObjectURL(resource.blob || resource);
 };
 
-export default function ResourceCard({ resource, index }: IResourceCardProps) {
-  const { removeObservationAsset } = useObservationCreate();
+export default function ResourceCard({ resource, setValue }) {
   const { user } = useStoreState((s) => s);
 
   const imageURL = useMemo(() => getImageThumb(resource, user.id), []);
+
+  const handleRemovePhoto = () => {
+    setValue(null);
+  };
 
   return (
     <Flex
@@ -73,7 +73,6 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
           fallbackSrc={getFallbackByMIME(resource.type)}
           src={imageURL}
         />
-        <StatusIcon type={resource.status} />
       </ImageBox>
       <CloseButton
         position="absolute"
@@ -81,7 +80,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
         right="200"
         size="lg"
         color="#FF0000"
-        onClick={() => removeObservationAsset(index)}
+        onClick={() => handleRemovePhoto()}
       />
     </Flex>
   );

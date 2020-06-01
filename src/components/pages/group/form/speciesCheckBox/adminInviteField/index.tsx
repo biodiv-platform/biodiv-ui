@@ -1,10 +1,11 @@
 import React from "react";
+import { Box } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { axUserSearch } from "@services/auth.service";
 import { FormContextValues } from "react-hook-form";
-
+import PageHeading from "@components/@core/layout/page-heading";
 interface AdminListDeatils {
   adminTitle: string;
   adminList: any[];
@@ -28,23 +29,23 @@ const AdminInviteField = (props: AdminListDeatils) => {
   };
   return (
     <div>
-      <h1 className="mt4" style={{ margin: "20px 15px", fontSize: 25 }}>
+      <PageHeading className="mt4" style={{ margin: "20px 15px", fontSize: 25 }}>
         <strong>{t(props.adminTitle)}</strong>
-      </h1>
+      </PageHeading>
       {props.adminList &&
         props.adminList.length &&
         props.adminList.map((item: AdminDeatils, index) => (
-          <div className="white-box-padding" key={index}>
+          <Box m={15} p={[10, 30]} key={index}>
             <div>
               <h3>{item.fieldGroupTitle}</h3>
             </div>
             <div>
               <SelectAsync
-                placeholder={t(`GROUP.ADMIN_INVITE`)}
+                placeholder={t(`GROUP.INVITE`)}
                 name={item.name}
                 form={props.form}
                 onQuery={onAdminUserQuery}
-                multiple={item.isMultiple ? item.isMultiple : false}
+                multiple={item.isMultiple}
                 label={item.label ? item.label : ""}
               />
               <TextAreaField
@@ -54,7 +55,7 @@ const AdminInviteField = (props: AdminListDeatils) => {
                 form={props.form}
               />
             </div>
-          </div>
+          </Box>
         ))}
     </div>
   );

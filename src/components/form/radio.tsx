@@ -29,15 +29,15 @@ const RadioInputField = ({
   options = [],
   ...props
 }: IRadioProps) => {
-  const [value, setValue] = useState("true");
+  const [value, setValue] = useState(form.control.defaultValuesRef.current[name]);
 
   useEffect(() => {
-    form.setValue(name, JSON.parse(value));
+    form.setValue(name, value);
   }, [value]);
 
   useEffect(() => {
     form.register({ name });
-    form.setValue(name, JSON.parse(value));
+    form.setValue(name, value);
   }, [form.register]);
 
   return (

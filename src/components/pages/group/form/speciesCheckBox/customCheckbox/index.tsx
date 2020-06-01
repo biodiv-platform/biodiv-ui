@@ -27,8 +27,6 @@ const GroupSelector = ({
     form.setValue(name, [...id, ...species]);
   };
 
-  // console.log("the species list is",options)
-
   useEffect(() => {
     form.register({ name });
   }, [form.register]);
@@ -37,11 +35,6 @@ const GroupSelector = ({
     <>
       <FormControl isInvalid={form.errors[name] && true} isRequired={true} mb={mb} {...props}>
         <FormLabel htmlFor={name}>{label}</FormLabel>
-        {/* <CheckboxGroup id={name} value={value} onChange={onChange} isInline>
-            {options.map((o) => (
-              <SpeciesMultiSelectCheckbox key={o.id} value={o.id} icon={o.name} />
-            ))}
-          </CheckboxGroup> */}
         <MultipleSpeciesSelector values={options} defaultValue={[]} onUpdate={onChange} />
         <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
