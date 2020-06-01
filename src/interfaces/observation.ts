@@ -99,13 +99,10 @@ export interface CustomFieldValuesData {
 }
 export interface CustomFields {
   id?: number; // int64
-  authorId?: number; // int64
   name?: string;
   dataType?: string;
-  fieldType?: string;
-  units?: string;
-  iconURL?: string;
-  notes?: string;
+  fieldtype?: string;
+  values?: CustomFieldValues[];
 }
 export interface Envelope {
   area?: number; // double
@@ -622,10 +619,8 @@ export interface TraitValue {
 export interface Traits {
   id?: number; // int64
   name?: string;
-  traitTypes?: string;
-  showInObservation?: boolean;
-  isParticipatory?: boolean;
-  isDeleted?: boolean;
+  type?: string;
+  traitValues?: TraitValue[];
 }
 export interface TraitsValue {
   id?: number; // int64

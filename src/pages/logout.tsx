@@ -1,17 +1,19 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import { TOKEN } from "@static/constants";
 import { removeCache } from "@utils/auth";
-import { removeNookie } from "next-nookies-persist";
+import useNookies from "next-nookies-persist";
+import { destroyCookie } from "nookies";
 import React, { useEffect } from "react";
 
 const SignOutPage = () => {
   const router = useLocalRouter();
+  const { removeNookie, options } = useNookies();
 
   const destroyAndRedirect = async () => {
     removeNookie(TOKEN.AUTH);
     removeNookie(TOKEN.USER);
-    removeNookie(TOKEN.BATOKEN);
-    removeNookie(TOKEN.BRTOKEN);
+    destroyCookie({}, TOKEN.BATOKEN, options);
+    destroyCookie({}, TOKEN.BRTOKEN, options);
     try {
       await removeCache();
     } catch (e) {
@@ -30,13 +32,6 @@ const SignOutPage = () => {
 SignOutPage.config = {
   header: false,
   footer: false
-};
-
-SignOutPage.getInitialProps = ({ ctx }) => {
-  removeNookie(TOKEN.AUTH, ctx);
-  removeNookie(TOKEN.USER, ctx);
-  removeNookie(TOKEN.BATOKEN, ctx);
-  removeNookie(TOKEN.BRTOKEN, ctx);
 };
 
 export default SignOutPage;

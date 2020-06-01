@@ -13,6 +13,7 @@ import {
 import useTranslation from "@configs/i18n/useTranslation";
 import { Featured, UserGroupIbp } from "@interfaces/observation";
 import { axGroupsFeature, axGroupsUnFeature } from "@services/observation.service";
+import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useRef, useState } from "react";
@@ -25,13 +26,6 @@ interface IGroupFeatureProps {
   selectedDefault: Featured[];
   observationId;
 }
-
-const GROUP_IBP = {
-  id: null,
-  name: process.env.NEXT_PUBLIC_SITE_TITLE,
-  icon: process.env.NEXT_PUBLIC_SITE_LOGO,
-  webAddress: process.env.NEXT_PUBLIC_SITE_URL
-};
 
 export default function GroupFeature({
   groups,
@@ -49,7 +43,7 @@ export default function GroupFeature({
 
   useEffect(() => {
     if (groups) {
-      const groupsNT = [GROUP_IBP, ...groups.map((g) => ({ ...g, icon: g.icon }))];
+      const groupsNT = [DEFAULT_GROUP, ...groups.map((g) => ({ ...g, icon: g.icon }))];
       const selectedGroupsT = selectedDefault.map((g) => `${g.userGroup}`);
       setGroupsN(groupsNT);
       setSelectedGroups(selectedGroupsT);

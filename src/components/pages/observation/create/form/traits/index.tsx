@@ -10,7 +10,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { TraitsValuePair } from "@interfaces/observation";
+import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
 import { FormContextValues } from "react-hook-form";

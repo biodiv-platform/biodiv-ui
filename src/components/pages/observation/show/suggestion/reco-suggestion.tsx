@@ -145,7 +145,7 @@ export default function RecoSuggestion({
                       variant="outline"
                       variantColor={isLocked ? "blue" : "red"}
                       ml={2}
-                      leftIcon={(isLocked ? "ibpunlock" : "ibplock") as any}
+                      leftIcon={isLocked ? "unlock" : "lock"}
                       onClick={() =>
                         recoVoteAction(reco, isLocked ? RecoAction.Unlock : RecoAction.Validate)
                       }

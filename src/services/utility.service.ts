@@ -15,9 +15,11 @@ export const axGetLangList = async () => {
   }
 };
 
-export const axGetPortalStats = async () => {
+export const axGetHomeInfo = async (userGroupId?) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/services/portalStats`);
+    const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
+      params: { userGroupId }
+    });
     return { success: true, data };
   } catch (e) {
     console.error(e);

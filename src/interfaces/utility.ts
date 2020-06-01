@@ -25,6 +25,40 @@ export interface FlagShow {
   flag?: Flag;
   user?: UserIbp;
 }
+export interface GallerySlider {
+  id?: number; // int64
+  ugId?: number; // int64
+  fileName?: string;
+  observationId?: number; // int64
+  authorId?: number; // int64
+  authorName?: string;
+  authorImage?: string;
+  title?: string;
+  customDescripition?: string;
+  moreLinks?: string;
+}
+export interface Habitat {
+  id?: number; // int64
+  habitatOrder?: number; // int32
+  name?: string;
+}
+export interface HomePageData {
+  showGallery?: boolean;
+  showStats?: boolean;
+  showRecentObs?: boolean;
+  showGridMap?: boolean;
+  showPartners?: boolean;
+  stats?: HomePageStats;
+  gallerySlider?: GallerySlider[];
+}
+export interface HomePageStats {
+  species?: number; // int64
+  observation?: number; // int64
+  maps?: number; // int64
+  documents?: number; // int64
+  discussions?: number; // int64
+  activeUser?: number; // int64
+}
 export interface Language {
   id?: number; // int64
   name?: string;
@@ -60,15 +94,6 @@ export interface ParsedName {
   nameStringId?: string;
   parserVersion?: string;
   canonicalName?: CanonicalName;
-}
-export interface PortalStats {
-  species?: number; // int64
-  observation?: number; // int64
-  maps?: number; // int64
-  documents?: number; // int64
-  userGroups?: number; // int64
-  discussions?: number; // int64
-  activeUser?: number; // int64
 }
 export interface Tags {
   id?: number; // int64

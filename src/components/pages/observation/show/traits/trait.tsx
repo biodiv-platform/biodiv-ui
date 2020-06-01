@@ -10,7 +10,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { TraitsValue, TraitsValuePair } from "@interfaces/observation";
+import { TraitsValue, TraitsValuePair } from "@interfaces/traits";
 import { axUpdateTraitById } from "@services/observation.service";
 import { adminOrAuthor } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";

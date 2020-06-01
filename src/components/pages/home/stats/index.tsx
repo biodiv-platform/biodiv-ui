@@ -1,12 +1,12 @@
 import { SimpleGrid } from "@chakra-ui/core";
-import { PortalStats } from "@interfaces/utility";
+import { HomePageStats } from "@interfaces/utility";
 import { CARD_META } from "@static/home";
 import React from "react";
 
 import Card from "./card";
 
 interface IStatsProps {
-  portalStats?: PortalStats;
+  portalStats?: HomePageStats;
 }
 
 export default function Stats({ portalStats }: IStatsProps) {

@@ -38,13 +38,12 @@ const ImageBox = styled.div`
       display: inline-block;
 
       margin-top: 0.25rem;
-      margin-right: 0.35rem;
-      margin-left: -0.2rem;
+      margin-right: 0.7rem;
 
       vertical-align: top;
 
       &:last-child {
-        margin-right: 0;
+        margin-right: 0.25rem;
       }
     }
   }
