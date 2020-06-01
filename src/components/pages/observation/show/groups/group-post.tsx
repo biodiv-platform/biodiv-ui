@@ -64,7 +64,7 @@ export default function GroupPost({
       <SimpleGrid columns={[1, 1, 2, 3]} spacing={4} hidden={isOpen}>
         <GroupBox
           link={DEFAULT_GROUP.webAddress}
-          icon={DEFAULT_GROUP.icon}
+          icon={`${DEFAULT_GROUP.icon}?h=40`}
           name={DEFAULT_GROUP.name}
         />
         {finalGroups.map((og) => (
