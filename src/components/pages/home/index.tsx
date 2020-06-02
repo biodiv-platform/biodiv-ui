@@ -3,6 +3,7 @@ import { useStoreState } from "easy-peasy";
 import React from "react";
 
 import Carousel from "./carousel";
+import HomeDescription from "./description";
 import Features from "./features";
 import Map from "./map";
 import Partners from "./partners";
@@ -16,6 +17,7 @@ export default function HomePageComponent({ homeInfo }) {
     <Box className="container" mt={[6, 6, 6, 10]}>
       {homeInfo.showGallery && <Carousel featured={homeInfo.gallerySlider} />}
       {homeInfo.showStats && <Stats portalStats={homeInfo.stats} />}
+      {homeInfo.ugDescription && <HomeDescription description={homeInfo.ugDescription} />}
       {homeInfo.showRecentObs && <RecentObservations />}
       {homeInfo.showGridMap && <Map />}
       {showFeatures && <Features />}

@@ -225,3 +225,17 @@ button[role="tab"] {
 .elipsis-2 {
   -webkit-line-clamp: 2;
 }
+
+.description-box {
+  p {
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    color: var(--gray-600);
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+}
