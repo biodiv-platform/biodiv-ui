@@ -1,7 +1,7 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import React, { useEffect } from "react";
 
-export default function Recreate() {
+function RecreatePage() {
   const { push } = useLocalRouter();
 
   useEffect(() => {
@@ -10,3 +10,10 @@ export default function Recreate() {
 
   return <div>Loading...</div>;
 }
+
+RecreatePage.config = {
+  header: false,
+  footer: false
+};
+
+export default RecreatePage;
