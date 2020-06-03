@@ -104,3 +104,15 @@ export const axUserSearch = async (name) => {
     return { success: false, data: [] };
   }
 };
+
+export const axUserSearchById = async (userId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/${userId}`, {
+      params: { name }
+    });
+    return { success: true, data };
+  } catch (e) {
+    notification(e.response.data.message);
+    return { success: false, data: {} };
+  }
+};

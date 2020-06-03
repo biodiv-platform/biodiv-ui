@@ -13,11 +13,11 @@ const defaultViewPort = {
   pitch: 0
 };
 
-export default function MapInputForm({ form }) {
+export default function MapInputForm({ form, name }) {
   const { filter } = useObservationFilter();
   const { register, setValue } = form;
-  const [coordinates, setCoordinated] = useState({});
-  const defaultFeatures = useMemo(() => stringToFeature(filter?.location), []);
+  const [coordinates, setCoordinated] = useState(form?.control?.defaultValuesRef?.current[name]);
+  const defaultFeatures = useMemo(() => stringToFeature(coordinates || filter?.location), []);
 
   const handleOnFeatureChange = (features) => {
     if (features.length > 0) {
@@ -31,11 +31,11 @@ export default function MapInputForm({ form }) {
   };
 
   useEffect(() => {
-    setValue("spacial_coverage", coordinates);
+    setValue(name, coordinates);
   }, [coordinates]);
 
   useEffect(() => {
-    register({ name: "spacial_coverage" });
+    register({ name });
   }, [register]);
 
   return (

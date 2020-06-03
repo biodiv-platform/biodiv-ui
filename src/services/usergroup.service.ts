@@ -58,3 +58,28 @@ export const axCreateGroup = async (payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axGetGroupEditById = async (groupId, ctx) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`, {
+      params: { ctx }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axUpdateUserGroup = async (payload, observationId) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.OBSERVATION}/v1/group/edit/save/${observationId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e.response.data.message);
+    return { success: false, data: [] };
+  }
+};

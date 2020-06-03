@@ -15,25 +15,12 @@ import MapInputForm from "./MapInputForm";
 import GroupIconUploader from "../uploader";
 import { userInvitaionOptions } from "../options";
 import { axCreateGroup } from "@services/usergroup.service";
+import { adminInviteList } from "../options";
 
 function createGroupForm({ speciesGroups, habitats }) {
   const hform = useForm();
   const { t } = useTranslation();
   const { isOpen, onClose, onOpen } = useDisclosure(true);
-  const adminInviteList = [
-    {
-      name: "founder",
-      textBoxName: "founder-description",
-      fieldGroupTitle: "Invite Founders",
-      isMultiple: true
-    },
-    {
-      name: "moderator",
-      textBoxName: "moderator-description",
-      fieldGroupTitle: "Invite Moderator",
-      isMultiple: true
-    }
-  ];
 
   const onTagsQuery = async (q) => {
     const { data } = await axQueryTagsByText(q);
@@ -121,7 +108,7 @@ function createGroupForm({ speciesGroups, habitats }) {
             label={t("GROUP.USER_INVITAION")}
             options={userInvitaionOptions}
           />
-          <MapInputForm form={hform} />
+          <MapInputForm name={"spacial_coverage"} form={hform} />
           <SelectAsync
             name="tags"
             label={t("OBSERVATION.TAGS")}

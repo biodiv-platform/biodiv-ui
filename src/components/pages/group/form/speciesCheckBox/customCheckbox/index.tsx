@@ -21,7 +21,7 @@ const GroupSelector = ({
   form,
   ...props
 }: ISpeciesSelecProps) => {
-  const [species, setSpecies] = useState([]);
+  const [species, setSpecies] = useState(form.control.defaultValuesRef.current[name] || []);
   const onChange = (id) => {
     setSpecies(id);
     form.setValue(name, [...id, ...species]);
