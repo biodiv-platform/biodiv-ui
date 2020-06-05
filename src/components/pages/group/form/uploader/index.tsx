@@ -32,7 +32,7 @@ function IconUploader({ form, name }) {
   return (
     <SimpleGrid borderRadius="lg" columns={[1, 3, 4, 5]} spacing={4}>
       {value ? (
-        <ResourceCard setValue={setvalue} resource={value.blob} key={value.hashKey} />
+        <ResourceCard setValue={setvalue} resource={value} />
       ) : (
         <DropTarget setValue={setvalue} assetsSize={observationAssets?.length} />
       )}

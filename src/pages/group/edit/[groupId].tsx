@@ -16,7 +16,7 @@ const ObservationEditPage = ({ userGroup, userGroupId, habitats, speciesGroups }
 );
 
 ObservationEditPage.getInitialProps = async (ctx) => {
-  authorizedPageSSR([Role.Any], ctx, true);
+  authorizedPageSSR([Role.Admin], ctx, true);
   const { success, data } = await axGetGroupEditById(ctx.query.groupId, ctx);
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitatList } = await axGetAllHabitat();

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import TextBoxField from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
 import RadioInputField from "@components/form/radio";
-// import * as Yup from "yup";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "@configs/i18n/useTranslation";
 import { PageHeading } from "@components/@core/layout";
 import GroupSelector from "./customCheckbox";
@@ -15,11 +15,13 @@ import MapInputForm from "./MapInputForm";
 import GroupIconUploader from "../uploader";
 import { userInvitaionOptions } from "../options";
 import { axCreateGroup } from "@services/usergroup.service";
+import { useLocalRouter } from "@components/@core/local-link";
 import { adminInviteList } from "../options";
 
 function createGroupForm({ speciesGroups, habitats }) {
   const hform = useForm();
   const { t } = useTranslation();
+  const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure(true);
 
   const onTagsQuery = async (q) => {
@@ -56,10 +58,10 @@ function createGroupForm({ speciesGroups, habitats }) {
       swLatitude: group?.spacial_coverage?.se?.[0] || "",
       swLongitude: group?.spacial_coverage?.se?.[1] || "",
       languageId: 0,
-      speciesCoverage: group.sGroup || [],
-      habitatCoverage: group.habitatCoverage || [],
+      speciesGroup: group.sGroup || [],
+      habitatId: group.habitatCoverage || [],
       sendDigestMail: true,
-      tags: group.tags,
+      // tags: group.tags,
       invitationData: {
         userGroupId: 0,
         founderIds: founder.idsList,
@@ -68,7 +70,15 @@ function createGroupForm({ speciesGroups, habitats }) {
         moderatorsEmail: moderator.emailList
       }
     };
-    await axCreateGroup(payload);
+    const { success, data } = await axCreateGroup(payload);
+    if (success) {
+      notification("Group Deatils Created Successfully", NotificationType.Success);
+      onOpen();
+      router.push(`/group/show/${data.id}`, true);
+    } else {
+      notification("Unable to create Group", NotificationType.Error);
+      onOpen();
+    }
 
     hform.reset({
       tags: [],

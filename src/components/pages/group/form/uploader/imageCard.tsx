@@ -1,13 +1,7 @@
 import { CloseButton, Flex, Image } from "@chakra-ui/core";
 import styled from "@emotion/styled";
-import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
-import {
-  getFallbackByMIME,
-  getMyUploadsThumbnail,
-  getObservationThumbnail,
-  getYoutubeImage
-} from "@utils/media";
+import { getMyUploadsThumbnail } from "@utils/media";
+import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { useStoreState } from "easy-peasy";
 import React, { useMemo } from "react";
 
@@ -28,20 +22,8 @@ const ImageBox = styled.div`
   }
 `;
 
-interface IResourceCardProps {
-  resource: IDBObservationAsset;
-  index: number;
-}
-
 export const getImageThumb = (resource, userID, size = 140): string => {
-  if (resource.status === AssetStatus.Uploaded) {
-    return resource.type.match(ASSET_TYPES.VIDEO) && resource.url
-      ? getYoutubeImage(resource.url)
-      : resource.path.match(LOCAL_ASSET_PREFIX)
-      ? getMyUploadsThumbnail(resource.path, userID, size)
-      : getObservationThumbnail(resource.path);
-  }
-  return URL.createObjectURL(resource.blob || resource);
+  return getMyUploadsThumbnail(resource.path, userID, size);
 };
 
 export default function ResourceCard({ resource, setValue }) {
@@ -64,13 +46,12 @@ export default function ResourceCard({ resource, setValue }) {
       borderColor="gray.300"
       position="relative"
       p={2}
-      key={resource.hashKey}
     >
       <ImageBox>
         <Image
           objectFit="cover"
           borderRadius="md"
-          fallbackSrc={getFallbackByMIME(resource.type)}
+          fallbackSrc={OBSERVATION_FALLBACK.DEFAULT}
           src={imageURL}
         />
       </ImageBox>

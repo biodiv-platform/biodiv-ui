@@ -222,8 +222,8 @@ export interface UserGroupEditData {
   swLatitude?: number; // double
   swLongitude?: number; // double
   theme?: string;
-  speciesCoverage?: any[];
-  habitatCoverage?: any[];
+  speciesGroup?: any[];
+  habitatId?: any[];
   tags?: any[];
   languageId?: number; // int64
   sendDigestMail?: boolean;

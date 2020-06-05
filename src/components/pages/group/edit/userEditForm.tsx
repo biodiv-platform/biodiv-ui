@@ -95,11 +95,11 @@ export default function ObservationEditForm({
       group_name: userGroup.name,
       group_description: userGroup.description,
       group_icon: userGroup.icon,
-      sGroup: userGroup.speciesCoverage,
-      habitatCoverage: userGroup.habitatCoverage,
-      tags: userGroup.tags,
+      sGroup: userGroup.speciesGroup,
+      habitatCoverage: userGroup.habitatId,
+      // tags: userGroup.tags,
       group_invitaion: userGroup.allowUserToJoin,
-      spacial_coverage: userGroupCoverage
+      spacial_coverage: neLatitude ? userGroupCoverage : null
     }
   });
 
@@ -149,6 +149,9 @@ export default function ObservationEditForm({
       notification("Group Deatils Updated Successfully", NotificationType.Success);
       onClose();
       router.push(`/group/show/${userGroupId}`, true);
+    } else {
+      notification("Unable to update Groups Details", NotificationType.Error);
+      onClose();
     }
   };
 
