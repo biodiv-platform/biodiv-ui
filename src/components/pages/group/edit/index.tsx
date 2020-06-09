@@ -1,22 +1,34 @@
-import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@configs/i18n/useTranslation";
 import UserGroupEditForm from "./userEditForm";
-import React from "react";
+import { useStoreState } from "easy-peasy";
+import { axGetGroupEditById } from "@services/usergroup.service";
+import React, { useEffect, useState } from "react";
 
-export default function GroupEditComponent({ userGroup, userGroupId, habitats, speciesGroups }) {
-  const { t } = useTranslation();
-
-  return (
-    <>
+export default function GroupEditComponent({ habitats, speciesGroups }) {
+  const { id } = useStoreState((s) => s.currentGroup);
+  const [userGroup, setUserGroup] = useState();
+  useEffect(() => {
+    axGetGroupEditById(id)
+      .then(({ success, data }) => {
+        if (success) {
+          setUserGroup(data);
+        }
+      })
+      .catch((err) => {
+        err;
+      });
+  }, []);
+  if (userGroup) {
+    return (
       <div className="container mt">
-        <PageHeading>{t("OBSERVATION.TITLE_EDIT")}</PageHeading>
         <UserGroupEditForm
           userGroup={userGroup}
-          userGroupId={userGroupId}
+          userGroupId={id}
           habitats={habitats}
           speciesGroups={speciesGroups}
         />
       </div>
-    </>
-  );
+    );
+  } else {
+    return <div></div>;
+  }
 }

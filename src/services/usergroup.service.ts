@@ -59,11 +59,9 @@ export const axCreateGroup = async (payload) => {
   }
 };
 
-export const axGetGroupEditById = async (groupId, ctx) => {
+export const axGetGroupEditById = async (groupId) => {
   try {
-    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`, {
-      params: { ctx }
-    });
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -71,10 +69,10 @@ export const axGetGroupEditById = async (groupId, ctx) => {
   }
 };
 
-export const axUpdateUserGroup = async (payload, observationId) => {
+export const axUpdateUserGroup = async (payload, userGroupId) => {
   try {
     const { data } = await http.put(
-      `${ENDPOINT.OBSERVATION}/v1/group/edit/save/${observationId}`,
+      `${ENDPOINT.USERGROUP}/v1/group/edit/save/${userGroupId}`,
       payload
     );
     return { success: true, data };

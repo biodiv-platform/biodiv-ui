@@ -31,7 +31,7 @@ export function reverseGeocode(location) {
  * @returns
  */
 export const stringToFeature = (costr) => {
-  if (!costr) {
+  if (!costr || costr == null) {
     return [];
   }
 
@@ -40,10 +40,11 @@ export const stringToFeature = (costr) => {
   for (let i = 0; i < coarr.length; i += 2) {
     coordinates.push([Number(coarr[i]), Number(coarr[i + 1])]);
   }
+
   return [
     {
       type: "Feature",
-      properties: {},
+      properties: { shape: "Rectangle" },
       geometry: {
         type: "Polygon",
         coordinates: [coordinates]

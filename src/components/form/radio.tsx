@@ -37,15 +37,18 @@ const RadioInputField = ({
 
   useEffect(() => {
     form.register({ name });
-    form.setValue(name, value);
   }, [form.register]);
+
+  const handleChange = (value) => {
+    setValue(value == "true" ? true : false);
+  };
 
   return (
     <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
       <RadioGroup
         key={name}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
         value={value}
         py={2}
         isInline={isInline}

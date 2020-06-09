@@ -2,8 +2,7 @@ import CreateGroupPage from "../../../components/pages/group/createGroupPage";
 import { axGetLangList } from "@services/utility.service";
 import { axGetspeciesGroups } from "@services/observation.service";
 import { axGetAllHabitat } from "@services/utility.service";
-import { hasAccess } from "@utils/auth";
-import { encode } from "base64-url";
+import { authorizedPageSSR } from "@components/auth/auth-redirect";
 import { Role } from "@interfaces/custom";
 import React from "react";
 
@@ -12,14 +11,7 @@ function createGroup({ speciesGroups, habitats }) {
 }
 
 export async function getServerSideProps(ctx) {
-  if (!hasAccess([Role.Admin, Role.User], ctx)) {
-    const Location = `/login?forward=${encode("/group/create")}`;
-    ctx.res.writeHead(302, {
-      Location,
-      "Content-Type": "text/html; charset=utf-8"
-    });
-    ctx.res.end();
-  }
+  authorizedPageSSR([Role.Admin], ctx, true);
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitatList } = await axGetAllHabitat();
   const { data } = await axGetLangList();

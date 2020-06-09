@@ -16,9 +16,11 @@ const defaultViewPort = {
 export default function MapInputForm({ form, name }) {
   const { filter } = useObservationFilter();
   const { register, setValue } = form;
-  const [coordinates, setCoordinated] = useState(form?.control?.defaultValuesRef?.current[name]);
-  const defaultFeatures = useMemo(() => stringToFeature(coordinates || filter?.location), []);
-
+  const defaultFeatures = useMemo(
+    () => stringToFeature(form?.control?.defaultValuesRef?.current[name] || filter?.location),
+    []
+  );
+  const [coordinates, setCoordinated] = useState({});
   const handleOnFeatureChange = (features) => {
     if (features.length > 0) {
       setCoordinated({
@@ -36,6 +38,7 @@ export default function MapInputForm({ form, name }) {
 
   useEffect(() => {
     register({ name });
+    handleOnFeatureChange(defaultFeatures);
   }, [register]);
 
   return (

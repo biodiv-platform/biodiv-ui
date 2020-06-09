@@ -520,6 +520,11 @@
     "INVITE_FOUNDER": "Invite Founders",
     "INVITE_MODERATORS": "Invite Moderators",
     "INVITE": "Type user name or email",
+    "EDIT_SUCCESSFULL": "Group Deatils Updated Successfully",
+    "UPDATE_USERGROUP": "Update Group",
+    "UPDATE_ADMIN": "Update Admin",
+    "UPDATE_TITLE": "Update User Group",
+    "EDIT_ERROR": "Unable to update Groups Details",
     "ADMIN_TEXTBOX_FOUNDER": "You are invited to the founder of the group,Please  click on the link to accept",
     "ADMIN_TEXTBOX_MODERATOR": "You are invited to the moderator of the group,Please  click on the link to accept"
   },

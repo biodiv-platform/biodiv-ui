@@ -55,6 +55,7 @@ const SelectAsyncInputField = ({
   ...props
 }: ISelectProps) => {
   const initialValue = form.control.defaultValuesRef.current[name];
+
   const onQueryDebounce = debounce(onQuery, debounceTime);
   const [selected, setSelected] = useState(
     initialValue ? (multiple ? initialValue : { value: initialValue }) : null

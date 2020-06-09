@@ -6,6 +6,7 @@ import useTranslation from "@configs/i18n/useTranslation";
 import { axUserSearch } from "@services/auth.service";
 import { FormContextValues } from "react-hook-form";
 import PageHeading from "@components/@core/layout/page-heading";
+
 interface AdminListDeatils {
   adminTitle: string;
   adminList: any[];
@@ -29,31 +30,23 @@ const AdminInviteField = (props: AdminListDeatils) => {
   };
   return (
     <div>
-      <PageHeading className="mt4" style={{ margin: "20px 15px", fontSize: 25 }}>
-        <strong>{t(props.adminTitle)}</strong>
-      </PageHeading>
+      <PageHeading style={{ margin: "20px 0px" }}>{t(props.adminTitle)}</PageHeading>
       {props.adminList &&
         props.adminList.length &&
         props.adminList.map((item: AdminDeatils, index) => (
-          <Box m={15} p={[10, 30]} key={index}>
+          <Box m={15} key={index}>
             <div>
               <h3>{item.fieldGroupTitle}</h3>
             </div>
             <div>
               <SelectAsync
-                placeholder={t(`GROUP.INVITE`)}
                 name={item.name}
                 form={props.form}
                 onQuery={onAdminUserQuery}
                 multiple={item.isMultiple}
-                label={item.label ? item.label : ""}
+                label={item.label}
               />
-              <TextAreaField
-                placeholder={t(`GROUP.ADMIN_TEXTBOX_${item.name.toUpperCase()}`)}
-                label={item.textBoxLabel ? item.textBoxLabel : ""}
-                name={item.textBoxName}
-                form={props.form}
-              />
+              <TextAreaField label={item.textBoxLabel} name={item.textBoxName} form={props.form} />
             </div>
           </Box>
         ))}

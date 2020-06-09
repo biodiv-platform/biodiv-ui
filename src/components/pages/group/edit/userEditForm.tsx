@@ -36,9 +36,13 @@ export default function ObservationEditForm({
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
+  const path = router.asPath.split("/");
   const { isOpen, onClose } = useDisclosure(true);
   const founder = [],
     moderator = [];
+  const { neLatitude, neLongitude, swLatitude, swLongitude } = userGroup;
+  const userGroupCoverage = `${neLongitude},${neLatitude},${neLongitude},${swLatitude},${swLongitude},${swLatitude},${swLongitude},${neLatitude},${neLongitude},${neLatitude}`;
+
   const setAdminToForm = (adminList, type) => {
     if (adminList?.length) {
       Promise.all(
@@ -56,22 +60,7 @@ export default function ObservationEditForm({
       });
     }
   };
-  const getAdminUser = (adminList) => {
-    const idsList = [],
-      emailList = [];
-    if (adminList && adminList.length > 0) {
-      adminList.map((item) => {
-        if (item.__isNew__) {
-          emailList.push(item.value);
-        } else {
-          idsList.push(item.value);
-        }
-      });
-    }
-    return { idsList, emailList };
-  };
-  const { neLatitude, neLongitude, swLatitude, swLongitude } = userGroup;
-  const userGroupCoverage = `${neLatitude},${neLongitude},${swLatitude},${swLongitude},${neLatitude},${swLongitude},${swLongitude},${neLatitude}`;
+
   const onTagsQuery = async (q) => {
     const { data } = await axQueryTagsByText(q);
     return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
@@ -88,8 +77,7 @@ export default function ObservationEditForm({
       group_icon: Yup.string(),
       sGroup: Yup.array(),
       habitatCoverage: Yup.array(),
-      spacial_coverage: Yup.array(),
-      tags: Yup.array()
+      spacial_coverage: Yup.array()
     }),
     defaultValues: {
       group_name: userGroup.name,
@@ -97,8 +85,7 @@ export default function ObservationEditForm({
       group_icon: userGroup.icon,
       sGroup: userGroup.speciesGroup,
       habitatCoverage: userGroup.habitatId,
-      // tags: userGroup.tags,
-      group_invitaion: userGroup.allowUserToJoin,
+      group_invitaion: userGroup.allowUserToJoin ? "true" : "false",
       spacial_coverage: neLatitude ? userGroupCoverage : null
     }
   });
@@ -119,49 +106,49 @@ export default function ObservationEditForm({
     }
   });
 
-  const handleOnSubmit = async (group) => {
-    const founder = getAdminUser(group.founder);
-    const moderator = getAdminUser(group.moderator);
+  const handleOnSubmit = async (e, group) => {
+    e.preventDefault();
     const payload = {
       allowUserToJoin: group.group_invitaion,
       description: group.group_description,
       icon: group.group_icon,
+      homePage: null,
+      domainName: null,
+      theme: "default",
+      newFilterRule: null,
       name: group.group_name,
       neLatitude: group?.spacial_coverage?.ne?.[0] || "",
       neLongitude: group?.spacial_coverage?.ne?.[1] || "",
       swLatitude: group?.spacial_coverage?.se?.[0] || "",
       swLongitude: group?.spacial_coverage?.se?.[1] || "",
-      languageId: 0,
-      speciesCoverage: group.sGroup || [],
-      habitatCoverage: group.habitatCoverage || [],
-      sendDigestMail: true,
-      tags: group.tags,
-      invitationData: {
-        userGroupId: 0,
-        founderIds: founder.idsList,
-        moderatorsIds: moderator.idsList,
-        founderEmail: founder.emailList,
-        moderatorsEmail: moderator.emailList
-      }
+      languageId: 205,
+      speciesGroupId: group.sGroup || [],
+      habitatId: group.habitatCoverage || [],
+      sendDigestMail: true
     };
-    const { success } = await axUpdateUserGroup(payload, userGroupId);
+
+    const { success } = await axUpdateUserGroup(payload, path[path.length - 1]);
     if (success) {
-      notification("Group Deatils Updated Successfully", NotificationType.Success);
+      notification(t("GROUP.EDIT_SUCCESSFULL"), NotificationType.Success);
       onClose();
       router.push(`/group/show/${userGroupId}`, true);
     } else {
-      notification("Unable to update Groups Details", NotificationType.Error);
+      notification(t("GROUP.EDIT_ERROR"), NotificationType.Error);
       onClose();
     }
   };
 
   return (
     <div>
-      <Box className="white-box" p="10px 50px" m="20px 0px">
-        <PageHeading className="mt4" style={{ margin: "20px 0px", fontSize: 25 }}>
-          <strong>{t("GROUP.ADMIN_TITLE")}</strong>
+      <Box className="white-box" p={[10, 50]} m={[20, 0]}>
+        <PageHeading className="mt4" style={{ margin: "20px 0px" }}>
+          {t("GROUP.UPDATE_TITLE")}
         </PageHeading>
-        <form onSubmit={coreForm.handleSubmit(handleOnSubmit)}>
+        <form
+          onSubmit={(e) => {
+            handleOnSubmit(e, coreForm.getValues());
+          }}
+        >
           <TextBoxField
             name="group_name"
             isRequired={true}
@@ -201,22 +188,22 @@ export default function ObservationEditForm({
           />
 
           <Submit leftIcon="ibpcheck" isDisabled={!isOpen} form={coreForm} mb={4}>
-            {t("OBSERVATION.UPDATE_OBSERVATION")}
+            {t("GROUP.UPDATE_USERGROUP")}
           </Submit>
         </form>
       </Box>
-      <div className="white-box">
-        <form onSubmit={adminForm.handleSubmit(handleOnSubmit)}>
+      <Box className="white-box" p={[10, 50]} m={[20, 0]}>
+        <form>
           <AdminInviteField
             adminList={adminInviteList}
             form={adminForm}
             adminTitle={t("GROUP.ADMIN_TITLE")}
           />
           <Submit leftIcon="ibpcheck" isDisabled={!isOpen} form={adminForm} mb={4}>
-            {t("OBSERVATION.UPDATE_OBSERVATION")}
+            {t("GROUP.UPDATE_ADMIN")}
           </Submit>
         </form>
-      </div>
+      </Box>
     </div>
   );
 }

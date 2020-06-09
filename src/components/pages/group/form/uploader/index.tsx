@@ -15,7 +15,7 @@ export interface IDropzoneProps {
 
 function IconUploader({ form, name }) {
   const { observationAssets } = useObservationCreate();
-  const [value, setvalue] = useState(null);
+  const [value, setvalue] = useState({ path: form?.control?.defaultValuesRef?.current[name] });
   useEffect(() => {
     form.register({ name });
     if (value) {
@@ -31,7 +31,7 @@ function IconUploader({ form, name }) {
 
   return (
     <SimpleGrid borderRadius="lg" columns={[1, 3, 4, 5]} spacing={4}>
-      {value ? (
+      {value.path ? (
         <ResourceCard setValue={setvalue} resource={value} />
       ) : (
         <DropTarget setValue={setvalue} assetsSize={observationAssets?.length} />

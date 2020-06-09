@@ -49,19 +49,22 @@ function createGroupForm({ speciesGroups, habitats }) {
     const founder = getAdminUser(group.founder);
     const moderator = getAdminUser(group.moderator);
     const payload = {
-      allowUserToJoin: group.group_invitaion,
-      description: group.group_description,
-      icon: group.group_icon,
-      name: group.group_name,
+      allowUserToJoin: group.allowUserToJoin,
+      description: group.description,
+      icon: group.icon,
+      name: group.name,
       neLatitude: group?.spacial_coverage?.ne?.[0] || "",
       neLongitude: group?.spacial_coverage?.ne?.[1] || "",
       swLatitude: group?.spacial_coverage?.se?.[0] || "",
       swLongitude: group?.spacial_coverage?.se?.[1] || "",
-      languageId: 0,
-      speciesGroup: group.sGroup || [],
-      habitatId: group.habitatCoverage || [],
+      languageId: 205,
+      speciesGroup: group.speciesGroup || [],
+      habitatId: group.habitatId || [],
       sendDigestMail: true,
-      // tags: group.tags,
+      homePage: null,
+      domainName: null,
+      theme: "default",
+      newFilterRule: null,
       invitationData: {
         userGroupId: 0,
         founderIds: founder.idsList,
@@ -74,7 +77,7 @@ function createGroupForm({ speciesGroups, habitats }) {
     if (success) {
       notification("Group Deatils Created Successfully", NotificationType.Success);
       onOpen();
-      router.push(`/group/show/${data.id}`, true);
+      router.push(`/group/${data.name}/show`, true);
     } else {
       notification("Unable to create Group", NotificationType.Error);
       onOpen();
@@ -83,30 +86,30 @@ function createGroupForm({ speciesGroups, habitats }) {
     hform.reset({
       tags: [],
       spacial_coverage: [],
-      sGroup: [],
-      habitatCoverage: []
+      speciesGroup: [],
+      habitatId: []
     });
     onOpen();
   };
   return (
-    <Box mb={8} minH="calc(100vh - var(--heading-height))">
+    <Box mb={8}>
       <PageHeading>{t("GROUP.CREATE_GROUP_TITLE")}</PageHeading>
       <Box className="white-box" p="10px 30px" m="10px">
         <Heading as="h2" className="mt4" m="20px 0px" fontSize="x-large">
           <strong>Core Elements</strong>
         </Heading>
         <form onSubmit={hform.handleSubmit(handleFormSubmit)}>
-          <TextBoxField name="group_name" isRequired={true} label={t("GROUP.NAME")} form={hform} />
-          <TextAreaField name="group_description" label={t("GROUP.DESCRIPTION")} form={hform} />
-          <GroupIconUploader form={hform} name="group_icon" />
+          <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} form={hform} />
+          <TextAreaField name="description" label={t("GROUP.DESCRIPTION")} form={hform} />
+          <GroupIconUploader form={hform} name="icon" />
           <GroupSelector
-            name="sGroup"
+            name="speciesGroup"
             label={t("GROUP.SPECIES_COVERAGE")}
             options={speciesGroups}
             form={hform}
           />
           <GroupSelector
-            name="habitatCoverage"
+            name="habitatId"
             label={t("GROUP.HABITATS_COVERED")}
             options={habitats}
             form={hform}
@@ -114,7 +117,7 @@ function createGroupForm({ speciesGroups, habitats }) {
           <RadioInputField
             form={hform}
             isInline={false}
-            name="group_invitaion"
+            name="allowUserToJoin"
             label={t("GROUP.USER_INVITAION")}
             options={userInvitaionOptions}
           />

@@ -35,7 +35,7 @@ const GroupSelector = ({
     <>
       <FormControl isInvalid={form.errors[name] && true} isRequired={true} mb={mb} {...props}>
         <FormLabel htmlFor={name}>{label}</FormLabel>
-        <MultipleSpeciesSelector values={options} defaultValue={[]} onUpdate={onChange} />
+        <MultipleSpeciesSelector values={options} defaultValue={species} onUpdate={onChange} />
         <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
       </FormControl>
