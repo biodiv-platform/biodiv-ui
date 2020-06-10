@@ -21,19 +21,19 @@ import * as Yup from "yup";
 
 function createGroupForm({ speciesGroups, habitats }) {
   const hform = useForm({
-    validationSchema:Yup.object().shape({
+    validationSchema: Yup.object().shape({
       name: Yup.string().required(),
       description: Yup.string(),
       icon: Yup.string(),
       speciesGroup: Yup.array().required(),
       habitatId: Yup.array().required(),
       spacial_coverage: Yup.array(),
-      invitationData:Yup.object().shape({
+      invitationData: Yup.object().shape({
         founder: Yup.array(),
         moderator: Yup.array(),
         founder_description: Yup.string(),
         moderator_description: Yup.string()
-      }),
+      })
     })
   });
   const { t } = useTranslation();
@@ -65,9 +65,9 @@ function createGroupForm({ speciesGroups, habitats }) {
     const founder = getAdminUser(group.founder);
     const moderator = getAdminUser(group.moderator);
     const payload = {
-      allowUserToJoin: group.allowUserToJoin||false,
-      description: group.description||"",
-      icon: group.icon||"",
+      allowUserToJoin: group.allowUserToJoin || false,
+      description: group.description || "",
+      icon: group.icon || "",
       name: group.name,
       neLatitude: group?.spacial_coverage?.ne?.[0] || "",
       neLongitude: group?.spacial_coverage?.ne?.[1] || "",

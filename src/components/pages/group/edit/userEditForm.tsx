@@ -126,7 +126,7 @@ export default function ObservationEditForm({
       sendDigestMail: true
     };
 
-    const { success } = await axUpdateUserGroup(payload,userGroupId);
+    const { success } = await axUpdateUserGroup(payload, userGroupId);
     if (success) {
       notification(t("GROUP.EDIT_SUCCESSFULL"), NotificationType.Success);
       onClose();
@@ -148,12 +148,7 @@ export default function ObservationEditForm({
             handleOnSubmit(e, coreForm.getValues());
           }}
         >
-          <TextBoxField
-            name="name"
-            isRequired={true}
-            label={t("GROUP.NAME")}
-            form={coreForm}
-          />
+          <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} form={coreForm} />
           <TextAreaField name="description" label={t("GROUP.DESCRIPTION")} form={coreForm} />
           <GroupIconUploader form={coreForm} name="icon" />
           <GroupSelector
