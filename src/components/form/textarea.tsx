@@ -34,7 +34,7 @@ const TextAreaField = ({
     <Textarea
       id={name}
       name={name}
-      placeholder={label}
+      placeholder={placeholder || label}
       ref={form.register}
       minH="124px"
       isDisabled={disabled}

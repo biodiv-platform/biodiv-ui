@@ -17,9 +17,20 @@ import { userInvitaionOptions } from "../options";
 import { axCreateGroup } from "@services/usergroup.service";
 import { useLocalRouter } from "@components/@core/local-link";
 import { adminInviteList } from "../options";
+import * as Yup from "yup";
 
 function createGroupForm({ speciesGroups, habitats }) {
-  const hform = useForm();
+  const hform = useForm({
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required(),
+      speciesGroup: Yup.array().required(),
+      habitatId: Yup.array().required(),
+      spacial_coverage: Yup.object().shape({
+        ne: Yup.array().required(),
+        se: Yup.array().required()
+      })
+    })
+  });
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure(true);
@@ -43,23 +54,22 @@ function createGroupForm({ speciesGroups, habitats }) {
     }
     return { idsList, emailList };
   };
-  const handleFormSubmit = async () => {
+  const handleFormSubmit = async (group) => {
     onClose();
-    const group = hform.getValues();
     const founder = getAdminUser(group.founder);
     const moderator = getAdminUser(group.moderator);
     const payload = {
-      allowUserToJoin: group.allowUserToJoin,
-      description: group.description,
-      icon: group.icon,
+      allowUserToJoin: group.allowUserToJoin || false,
+      description: group.description || "",
+      icon: group.icon || "",
       name: group.name,
-      neLatitude: group?.spacial_coverage?.ne?.[0] || "",
-      neLongitude: group?.spacial_coverage?.ne?.[1] || "",
-      swLatitude: group?.spacial_coverage?.se?.[0] || "",
-      swLongitude: group?.spacial_coverage?.se?.[1] || "",
+      neLatitude: group?.spacial_coverage?.ne?.[1],
+      neLongitude: group?.spacial_coverage?.ne?.[0],
+      swLatitude: group?.spacial_coverage?.se?.[1],
+      swLongitude: group?.spacial_coverage?.se?.[0],
       languageId: 205,
-      speciesGroup: group.speciesGroup || [],
-      habitatId: group.habitatId || [],
+      speciesGroup: group.speciesGroup,
+      habitatId: group.habitatId,
       sendDigestMail: true,
       homePage: null,
       domainName: null,
@@ -75,11 +85,11 @@ function createGroupForm({ speciesGroups, habitats }) {
     };
     const { success, data } = await axCreateGroup(payload);
     if (success) {
-      notification("Group Deatils Created Successfully", NotificationType.Success);
+      notification(t("GROUP.CREATE_SUCCESSFULL"), NotificationType.Success);
       onOpen();
       router.push(`/group/${data.name}/show`, true);
     } else {
-      notification("Unable to create Group", NotificationType.Error);
+      notification(t("GROUP.CREATE_ERROR"), NotificationType.Error);
       onOpen();
     }
 
@@ -121,7 +131,7 @@ function createGroupForm({ speciesGroups, habitats }) {
             label={t("GROUP.USER_INVITAION")}
             options={userInvitaionOptions}
           />
-          <MapInputForm name={"spacial_coverage"} form={hform} />
+          <MapInputForm label={t("GROUP.MAPINPUT")} name={"spacial_coverage"} form={hform} />
           <SelectAsync
             name="tags"
             label={t("OBSERVATION.TAGS")}
@@ -137,14 +147,8 @@ function createGroupForm({ speciesGroups, habitats }) {
               form={hform}
               adminTitle={t("GROUP.ADMIN_TITLE")}
             />
-            <Button
-              isLoading={!isOpen}
-              m={15}
-              type="submit"
-              onSubmit={handleFormSubmit}
-              variantColor="green"
-            >
-              Button
+            <Button isLoading={!isOpen} m={15} type="submit" variantColor="green">
+              Save
             </Button>
           </div>
         </form>

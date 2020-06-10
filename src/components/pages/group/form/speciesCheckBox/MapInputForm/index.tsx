@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box, FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { MAP_CENTER } from "@static/constants";
 import { stringToFeature } from "@utils/location";
@@ -13,7 +13,7 @@ const defaultViewPort = {
   pitch: 0
 };
 
-export default function MapInputForm({ form, name }) {
+export default function MapInputForm({ form, label, name, hint = null, mb = 4, ...props }) {
   const { filter } = useObservationFilter();
   const { register, setValue } = form;
   const defaultFeatures = useMemo(
@@ -42,14 +42,19 @@ export default function MapInputForm({ form, name }) {
   }, [register]);
 
   return (
-    <Box position="relative" h="22rem">
-      <MapAreaDraw
-        defaultViewPort={defaultViewPort}
-        defaultFeatures={defaultFeatures}
-        mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-        onFeaturesChange={handleOnFeatureChange}
-        isPolygon={false}
-      />
-    </Box>
+    <FormControl isRequired={true} isInvalid={form.errors[name] && true} mb={mb} {...props}>
+      <FormLabel htmlFor={name}>{label}</FormLabel>
+      <Box position="relative" h="22rem">
+        <MapAreaDraw
+          defaultViewPort={defaultViewPort}
+          defaultFeatures={defaultFeatures}
+          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+          onFeaturesChange={handleOnFeatureChange}
+          isPolygon={false}
+        />
+      </Box>
+      <FormErrorMessage>{form.errors[name] && form.errors[name]["se"]["message"]}</FormErrorMessage>
+      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+    </FormControl>
   );
 }

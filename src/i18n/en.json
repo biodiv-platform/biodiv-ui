@@ -510,6 +510,7 @@
     "SAVED_MESSAGE": "We were unable to create your Group at the moment, but if you are offline don't worry it's saved and will be uploaded once connectivity is back",
     "CREATING": "We're creating your group",
     "SUCCESS": "Created successfully",
+    "MAPINPUT": "Spacial Coverage",
     "ICON": "Icon",
     "SPECIES_COVERAGE": "Species Group Coverage",
     "HABITATS_COVERED": "Habitats Covered",
@@ -520,13 +521,14 @@
     "INVITE_FOUNDER": "Invite Founders",
     "INVITE_MODERATORS": "Invite Moderators",
     "INVITE": "Type user name or email",
-    "EDIT_SUCCESSFULL": "Group Deatils Updated Successfully",
+    "EDIT_SUCCESSFULL": "Group Details Updated Successfully",
+    "CREATE_SUCCESSFULL": "Group Details Created Successfully",
+    "CREATE_ERROR": "Unable to Create Group",
     "UPDATE_USERGROUP": "Update Group",
     "UPDATE_ADMIN": "Update Admin",
     "UPDATE_TITLE": "Update User Group",
     "EDIT_ERROR": "Unable to update Groups Details",
-    "ADMIN_TEXTBOX_FOUNDER": "You are invited to the founder of the group,Please  click on the link to accept",
-    "ADMIN_TEXTBOX_MODERATOR": "You are invited to the moderator of the group,Please  click on the link to accept"
+    "ADMIN_TEXTBOX": "You are invited to the founder of the group,Please  click on the link to accept"
   },
   "TOGGLE": "toggle"
 }

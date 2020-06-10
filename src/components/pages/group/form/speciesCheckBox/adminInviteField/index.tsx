@@ -42,11 +42,17 @@ const AdminInviteField = (props: AdminListDeatils) => {
               <SelectAsync
                 name={item.name}
                 form={props.form}
+                placeholder={t("GROUP.INVITE")}
                 onQuery={onAdminUserQuery}
                 multiple={item.isMultiple}
                 label={item.label}
               />
-              <TextAreaField label={item.textBoxLabel} name={item.textBoxName} form={props.form} />
+              <TextAreaField
+                placeholder={t("GROUP.ADMIN_TEXTBOX")}
+                label={item.textBoxLabel}
+                name={item.textBoxName}
+                form={props.form}
+              />
             </div>
           </Box>
         ))}
