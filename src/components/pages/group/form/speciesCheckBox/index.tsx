@@ -17,9 +17,25 @@ import { userInvitaionOptions } from "../options";
 import { axCreateGroup } from "@services/usergroup.service";
 import { useLocalRouter } from "@components/@core/local-link";
 import { adminInviteList } from "../options";
+import * as Yup from "yup";
 
 function createGroupForm({ speciesGroups, habitats }) {
-  const hform = useForm();
+  const hform = useForm({
+    validationSchema:Yup.object().shape({
+      name: Yup.string().required(),
+      description: Yup.string(),
+      icon: Yup.string(),
+      speciesGroup: Yup.array().required(),
+      habitatId: Yup.array().required(),
+      spacial_coverage: Yup.array(),
+      invitationData:Yup.object().shape({
+        founder: Yup.array(),
+        moderator: Yup.array(),
+        founder_description: Yup.string(),
+        moderator_description: Yup.string()
+      }),
+    })
+  });
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure(true);
@@ -49,17 +65,17 @@ function createGroupForm({ speciesGroups, habitats }) {
     const founder = getAdminUser(group.founder);
     const moderator = getAdminUser(group.moderator);
     const payload = {
-      allowUserToJoin: group.allowUserToJoin,
-      description: group.description,
-      icon: group.icon,
+      allowUserToJoin: group.allowUserToJoin||false,
+      description: group.description||"",
+      icon: group.icon||"",
       name: group.name,
       neLatitude: group?.spacial_coverage?.ne?.[0] || "",
       neLongitude: group?.spacial_coverage?.ne?.[1] || "",
       swLatitude: group?.spacial_coverage?.se?.[0] || "",
       swLongitude: group?.spacial_coverage?.se?.[1] || "",
       languageId: 205,
-      speciesGroup: group.speciesGroup || [],
-      habitatId: group.habitatId || [],
+      speciesGroup: group.speciesGroup,
+      habitatId: group.habitatId,
       sendDigestMail: true,
       homePage: null,
       domainName: null,

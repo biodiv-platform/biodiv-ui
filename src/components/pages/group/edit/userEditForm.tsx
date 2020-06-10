@@ -36,7 +36,6 @@ export default function ObservationEditForm({
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const path = router.asPath.split("/");
   const { isOpen, onClose } = useDisclosure(true);
   const founder = [],
     moderator = [];
@@ -72,20 +71,20 @@ export default function ObservationEditForm({
   const coreForm = useForm({
     mode: "onChange",
     validationSchema: Yup.object().shape({
-      group_name: Yup.string(),
-      group_description: Yup.string(),
-      group_icon: Yup.string(),
-      sGroup: Yup.array(),
-      habitatCoverage: Yup.array(),
+      name: Yup.string().required(),
+      description: Yup.string(),
+      icon: Yup.string(),
+      speciesGroup: Yup.array().required(),
+      habitatId: Yup.array().required(),
       spacial_coverage: Yup.array()
     }),
     defaultValues: {
-      group_name: userGroup.name,
-      group_description: userGroup.description,
-      group_icon: userGroup.icon,
-      sGroup: userGroup.speciesGroup,
-      habitatCoverage: userGroup.habitatId,
-      group_invitaion: userGroup.allowUserToJoin ? "true" : "false",
+      name: userGroup.name,
+      description: userGroup.description,
+      icon: userGroup.icon,
+      speciesGroup: userGroup.speciesGroup,
+      habitatId: userGroup.habitatId,
+      allowUserToJoin: userGroup.allowUserToJoin ? "true" : "false",
       spacial_coverage: neLatitude ? userGroupCoverage : null
     }
   });
@@ -109,25 +108,25 @@ export default function ObservationEditForm({
   const handleOnSubmit = async (e, group) => {
     e.preventDefault();
     const payload = {
-      allowUserToJoin: group.group_invitaion,
-      description: group.group_description,
-      icon: group.group_icon,
+      allowUserToJoin: group.allowUserToJoin,
+      description: group.description,
+      icon: group.icon,
       homePage: null,
       domainName: null,
       theme: "default",
       newFilterRule: null,
-      name: group.group_name,
+      name: group.name,
       neLatitude: group?.spacial_coverage?.ne?.[0] || "",
       neLongitude: group?.spacial_coverage?.ne?.[1] || "",
       swLatitude: group?.spacial_coverage?.se?.[0] || "",
       swLongitude: group?.spacial_coverage?.se?.[1] || "",
       languageId: 205,
-      speciesGroupId: group.sGroup || [],
-      habitatId: group.habitatCoverage || [],
+      speciesGroupId: group.speciesGroup || [],
+      habitatId: group.habitatId || [],
       sendDigestMail: true
     };
 
-    const { success } = await axUpdateUserGroup(payload, path[path.length - 1]);
+    const { success } = await axUpdateUserGroup(payload,userGroupId);
     if (success) {
       notification(t("GROUP.EDIT_SUCCESSFULL"), NotificationType.Success);
       onClose();
@@ -150,21 +149,21 @@ export default function ObservationEditForm({
           }}
         >
           <TextBoxField
-            name="group_name"
+            name="name"
             isRequired={true}
             label={t("GROUP.NAME")}
             form={coreForm}
           />
-          <TextAreaField name="group_description" label={t("GROUP.DESCRIPTION")} form={coreForm} />
-          <GroupIconUploader form={coreForm} name="group_icon" />
+          <TextAreaField name="description" label={t("GROUP.DESCRIPTION")} form={coreForm} />
+          <GroupIconUploader form={coreForm} name="icon" />
           <GroupSelector
-            name="sGroup"
+            name="speciesGroup"
             label={t("GROUP.SPECIES_COVERAGE")}
             options={speciesGroups}
             form={coreForm}
           />
           <GroupSelector
-            name="habitatCoverage"
+            name="habitatId"
             label={t("GROUP.HABITATS_COVERED")}
             options={habitats}
             form={coreForm}
@@ -172,7 +171,7 @@ export default function ObservationEditForm({
           <RadioInputField
             form={coreForm}
             isInline={false}
-            name="group_invitaion"
+            name="allowUserToJoin"
             label={t("GROUP.USER_INVITAION")}
             options={userInvitaionOptions}
           />
