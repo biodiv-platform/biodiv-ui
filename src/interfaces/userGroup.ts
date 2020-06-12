@@ -222,7 +222,7 @@ export interface UserGroupEditData {
   swLatitude?: number; // double
   swLongitude?: number; // double
   theme?: string;
-  speciesGroup?: any[];
+  speciesGroupId?: any[];
   habitatId?: any[];
   tags?: any[];
   languageId?: number; // int64

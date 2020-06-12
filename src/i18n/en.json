@@ -304,6 +304,8 @@
     "CREATING": "We're creating your observation",
     "CUSTOM_FIELDS": "Custom Fields",
     "DATE_ACCURACY": "Date Accuracy",
+    "DOWNLOAD_FILTER_SUCCESS": "Your file is being generated. When it is ready, you will be notified by email and a download link will appear in your profile page.",
+    "DOWNLOAD_FILTER_ERROR": "Unable to generate file",
     "DELETE_FILE": {
       "FAILED": "Unable to delete file, please try again later",
       "SUCCESS": "File deleted successfully"
@@ -317,6 +319,7 @@
     "EDIT_OBSERVATION": "Edit Observation",
     "FEATURE": "Feature Selected",
     "FEATURE_IN_GROUPS": "Feature in Groups",
+    "FILTER_DOWNLOAD_NOTES": "Notes",
     "FLAG": {
       "CATEGORY": "Category",
       "FLAGS": {
@@ -502,19 +505,24 @@
     "TITLE": "Sign up"
   },
   "GROUP": {
+    "DELETE_MEMBER_TITLE": "Delete Administrator",
+    "DELETE_MEMBER_MESSAGE": "Are you sure you want to delete?",
     "CREATE_GROUP_TITLE": "Create Group",
     "NAME": "Group Name",
+    "CORE_ELEMENT": "Core Elements",
     "DESCRIPTION": "Description",
     "CONTINUE": "Continue",
     "SAVED": "Group Saved",
     "SAVED_MESSAGE": "We were unable to create your Group at the moment, but if you are offline don't worry it's saved and will be uploaded once connectivity is back",
     "CREATING": "We're creating your group",
     "SUCCESS": "Created successfully",
-    "MAPINPUT": "Spacial Coverage",
+    "MAPINPUT": "Spatial Coverage",
     "ICON": "Icon",
     "SPECIES_COVERAGE": "Species Group Coverage",
     "HABITATS_COVERED": "Habitats Covered",
     "SPATIAL_COVERGE": "Spatial Coverage",
+    "DELETED_MEMBER": "Removed member from User Group",
+    "DELETE_MEMBER_ERROR": "Unable to remove member user group",
     "TAGS": "Tags",
     "ADMIN_TITLE": "Administrators",
     "USER_INVITAION": "Can user join the group without invitaion",

@@ -381,6 +381,14 @@ export const axGetObservationsByResources = async (resources) => {
     return { success: false, data: [] };
   }
 };
+export const axObservationFilterDownload = async (index, type, params) => {
+  try {
+    await http.get(`${ENDPOINT.OBSERVATION}/v1/observation/listcsv/${index}/${type}`, { params });
+    return { success: true };
+  } catch (err) {
+    return { success: false };
+  }
+};
 
 export const axRateObservationResource = async (observationId, resourceId, rating) => {
   try {

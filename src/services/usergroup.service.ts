@@ -69,12 +69,44 @@ export const axGetGroupEditById = async (groupId) => {
   }
 };
 
+export const axGetGroupMembersById = async (groupId) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.USERGROUP}/v1/group/adminstration/members/${groupId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
 export const axUpdateUserGroup = async (payload, userGroupId) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.USERGROUP}/v1/group/edit/save/${userGroupId}`,
       payload
     );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e.response.data.message);
+    return { success: false, data: [] };
+  }
+};
+
+export const axAddAdminMembers = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/add/members`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e.response.data.message);
+    return { success: false, data: [] };
+  }
+};
+
+export const axRemoveAdminMembers = async (params) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/remove/members`, { params });
     return { success: true, data };
   } catch (e) {
     console.error(e.response.data.message);

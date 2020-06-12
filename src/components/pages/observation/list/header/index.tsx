@@ -1,11 +1,12 @@
-import { Flex, Icon, Select, Tab, TabList, Tabs, Text } from "@chakra-ui/core";
+import { Flex, Icon, Select, Tab, TabList, Tabs, Text, Box } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { sortByOptions, viewTabs } from "@static/observation-list";
 import { toHumanString } from "human-readable-numbers";
+import DownLoadFilterModal from "@components/pages/observation/list/views/shared/filterDownLoadModal";
 import React from "react";
 
-export default function ListHeader() {
+export default function ListHeader({ traits, customFields }) {
   const { filter, setFilter, observationData } = useObservationFilter();
   const defaultIndex = viewTabs.findIndex((t) => t.key === filter.view);
   const { t } = useTranslation();
@@ -50,9 +51,11 @@ export default function ListHeader() {
           </Text>
         )}
       </div>
-      <div>
+      <Box display="flex" p={[6]}>
+        <DownLoadFilterModal traits={traits} customFields={customFields} />
         <Select
           maxW="10rem"
+          ml={[5]}
           aria-label={t("LIST.SORT_BY")}
           value={filter.sort}
           onChange={handleOnSort}
@@ -63,7 +66,7 @@ export default function ListHeader() {
             </option>
           ))}
         </Select>
-      </div>
+      </Box>
     </Flex>
   );
 }

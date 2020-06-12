@@ -17,6 +17,7 @@ import { userInvitaionOptions } from "../options";
 import { axCreateGroup } from "@services/usergroup.service";
 import { useLocalRouter } from "@components/@core/local-link";
 import { adminInviteList } from "../options";
+import { getAdminUser } from "@utils/admin";
 import * as Yup from "yup";
 
 function createGroupForm({ speciesGroups, habitats }) {
@@ -40,20 +41,6 @@ function createGroupForm({ speciesGroups, habitats }) {
     return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
   };
 
-  const getAdminUser = (adminList) => {
-    const idsList = [],
-      emailList = [];
-    if (adminList && adminList.length > 0) {
-      adminList.map((item) => {
-        if (item.__isNew__) {
-          emailList.push(item.value);
-        } else {
-          idsList.push(item.value);
-        }
-      });
-    }
-    return { idsList, emailList };
-  };
   const handleFormSubmit = async (group) => {
     onClose();
     const founder = getAdminUser(group.founder);
@@ -63,10 +50,10 @@ function createGroupForm({ speciesGroups, habitats }) {
       description: group.description || "",
       icon: group.icon || "",
       name: group.name,
-      neLatitude: group?.spacial_coverage?.ne?.[1],
-      neLongitude: group?.spacial_coverage?.ne?.[0],
-      swLatitude: group?.spacial_coverage?.se?.[1],
-      swLongitude: group?.spacial_coverage?.se?.[0],
+      neLatitude: group?.spacial_coverage?.ne?.[1] || "",
+      neLongitude: group?.spacial_coverage?.ne?.[0] || "",
+      swLatitude: group?.spacial_coverage?.se?.[1] || "",
+      swLongitude: group?.spacial_coverage?.se?.[0] || "",
       languageId: 205,
       speciesGroup: group.speciesGroup,
       habitatId: group.habitatId,
@@ -86,8 +73,8 @@ function createGroupForm({ speciesGroups, habitats }) {
     const { success, data } = await axCreateGroup(payload);
     if (success) {
       notification(t("GROUP.CREATE_SUCCESSFULL"), NotificationType.Success);
+      router.push(`/group/${data.name}/show`, false, {}, true);
       onOpen();
-      router.push(`/group/${data.name}/show`, true);
     } else {
       notification(t("GROUP.CREATE_ERROR"), NotificationType.Error);
       onOpen();
@@ -105,8 +92,8 @@ function createGroupForm({ speciesGroups, habitats }) {
     <Box mb={8}>
       <PageHeading>{t("GROUP.CREATE_GROUP_TITLE")}</PageHeading>
       <Box className="white-box" p="10px 30px" m="10px">
-        <Heading as="h2" className="mt4" m="20px 0px" fontSize="x-large">
-          <strong>Core Elements</strong>
+        <Heading as="h2" pt={[5]} pb={[5]} fontSize="x-large">
+          {t("GROUP.CORE_ELEMENT")}
         </Heading>
         <form onSubmit={hform.handleSubmit(handleFormSubmit)}>
           <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} form={hform} />
@@ -145,6 +132,7 @@ function createGroupForm({ speciesGroups, habitats }) {
             <AdminInviteField
               adminList={adminInviteList}
               form={hform}
+              isMultiple={true}
               adminTitle={t("GROUP.ADMIN_TITLE")}
             />
             <Button isLoading={!isOpen} m={15} type="submit" variantColor="green">
