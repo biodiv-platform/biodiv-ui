@@ -7,9 +7,11 @@ import Views from "./views";
 
 interface ObservationListPageProps {
   nextOffset: number;
+  customFields:any[],
+  traits:any[]
 }
 
-export default function ObservationListPageComponent({ nextOffset }: ObservationListPageProps) {
+export default function ObservationListPageComponent({ nextOffset,traits,customFields}: ObservationListPageProps) {
   return (
     <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
       <SimpleGrid w="full" columns={[1, 1, 1, 5]}>
@@ -22,7 +24,7 @@ export default function ObservationListPageComponent({ nextOffset }: Observation
           gridColumn={[null, null, null, "2/6"]}
           px={4}
         >
-          <ListHeader />
+          <ListHeader traits={traits} customFields={customFields} />
           <Views no={nextOffset} />
         </Box>
       </SimpleGrid>

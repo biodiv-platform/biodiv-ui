@@ -6,14 +6,14 @@ import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list"
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-function ObservationListPage({ observationData, listConfig, initialFilterParams, nextOffset }) {
+function ObservationListPage({ observationData, listConfig, initialFilterParams, nextOffset,traits,customFields }) {
   return (
     <ObservationFilterProvider
       {...listConfig}
       filter={initialFilterParams}
       observationData={observationData}
     >
-      <ObservationListPageComponent nextOffset={nextOffset} />
+      <ObservationListPageComponent traits={traits} customFields={customFields} nextOffset={nextOffset} />
     </ObservationFilterProvider>
   );
 }
@@ -33,6 +33,7 @@ ObservationListPage.getInitialProps = async (ctx) => {
 
   const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList };
   const { data } = await axGetListData(initialFilterParams);
+  const {data:observationList} = await axGetObservationListConfig()
 
   return {
     observationData: {
@@ -43,6 +44,8 @@ ObservationListPage.getInitialProps = async (ctx) => {
       mvp: {},
       hasMore: true
     },
+    customFields:observationList['customFields'],
+    traits:observationList['traits'],
     listConfig,
     nextOffset,
     initialFilterParams
