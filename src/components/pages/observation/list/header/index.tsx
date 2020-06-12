@@ -3,10 +3,10 @@ import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { sortByOptions, viewTabs } from "@static/observation-list";
 import { toHumanString } from "human-readable-numbers";
-import Modal from '@components/pages/observation/list/views/shared/filterDownLoadModal'
+import Modal from "@components/pages/observation/list/views/shared/filterDownLoadModal";
 import React from "react";
 
-export default function ListHeader({traits,customFields}) {
+export default function ListHeader({ traits, customFields }) {
   const { filter, setFilter, observationData } = useObservationFilter();
   const defaultIndex = viewTabs.findIndex((t) => t.key === filter.view);
   const { t } = useTranslation();
