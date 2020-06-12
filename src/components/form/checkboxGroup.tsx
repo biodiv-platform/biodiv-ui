@@ -22,7 +22,7 @@ interface ITextBoxProps {
   list: Options[];
   defaultValue?: any[];
   hint?: string;
-  isReadOnly?:boolean;
+  isReadOnly?: boolean;
   form: FormContextValues<any>;
 }
 
@@ -33,7 +33,7 @@ const CheckboxField = ({
   mb = 4,
   list,
   defaultValue = [],
-  isReadOnly=false,
+  isReadOnly = false,
   hint,
   ...props
 }: ITextBoxProps) => {
@@ -51,7 +51,7 @@ const CheckboxField = ({
         {label}
       </Heading>
       <CheckboxGroup
-        defaultValue={isReadOnly?list.map(item=>item.name):defaultValue}
+        defaultValue={isReadOnly ? list.map((item) => item.name) : defaultValue}
         onChange={(v) => handeClick(v)}
         display="grid"
         className="custom-checkbox-group"
@@ -59,7 +59,11 @@ const CheckboxField = ({
         gridTemplateColumns="repeat(3, 0.3fr)"
       >
         {list.map((item, index) => (
-          <Checkbox isDisabled={isReadOnly?true:false}  key={index} value={item.value || item.name}>
+          <Checkbox
+            isDisabled={isReadOnly ? true : false}
+            key={index}
+            value={item.value || item.name}
+          >
             {item.name}
           </Checkbox>
         ))}
