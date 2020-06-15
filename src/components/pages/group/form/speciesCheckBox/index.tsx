@@ -86,7 +86,7 @@ function createGroupForm({ speciesGroups, habitats }) {
     const { success, data } = await axCreateGroup(payload);
     if (success) {
       notification(t("GROUP.CREATE_SUCCESSFULL"), NotificationType.Success);
-      router.push(`/group/${data.name}/show`,true,{},true);
+      router.push(`/group/${data.name}/show`, true, {}, true);
       onOpen();
     } else {
       notification(t("GROUP.CREATE_ERROR"), NotificationType.Error);

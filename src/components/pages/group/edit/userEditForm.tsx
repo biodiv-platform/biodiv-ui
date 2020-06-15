@@ -191,13 +191,17 @@ export default function ObservationEditForm({
 
       <Box className="white-box" p={[10, 50]} m={[20, 0]}>
         <Button
-         display="flex"
-         variant="ghost" 
-         onClick={() => { setShow(!show) }} 
-         justifyContent="space-between" 
-         width="100%" size="lg">
+          display="flex"
+          variant="ghost"
+          onClick={() => {
+            setShow(!show);
+          }}
+          justifyContent="space-between"
+          width="100%"
+          size="lg"
+        >
           {t("GROUP.ADMIN_TITLE")}
-          {<Icon name={show ? 'minus' : 'add'} />}
+          {<Icon name={show ? "minus" : "add"} />}
         </Button>
         <Collapse isOpen={show}>
           <form>
@@ -212,8 +216,6 @@ export default function ObservationEditForm({
           </form>
         </Collapse>
       </Box>
-
-
     </div>
   );
 }
