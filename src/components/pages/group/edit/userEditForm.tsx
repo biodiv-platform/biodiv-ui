@@ -1,4 +1,4 @@
-import { useDisclosure, Box } from "@chakra-ui/core";
+import { useDisclosure, Box, Collapse, Button, Icon } from "@chakra-ui/core";
 import { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
@@ -16,7 +16,7 @@ import GroupSelector from "../form/speciesCheckBox/customCheckbox";
 import { adminInviteList, userInvitaionOptions } from "../form/options";
 import PageHeading from "@components/@core/layout/page-heading";
 import { axQueryTagsByText } from "@services/observation.service";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { axUserSearchById } from "@services/auth.service";
@@ -37,6 +37,7 @@ export default function ObservationEditForm({
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onClose } = useDisclosure(true);
+  const [show, setShow] = useState(false);
   const founder = [],
     moderator = [];
   const { neLatitude, neLongitude, swLatitude, swLongitude } = userGroup;
@@ -187,18 +188,32 @@ export default function ObservationEditForm({
           </Submit>
         </form>
       </Box>
+
       <Box className="white-box" p={[10, 50]} m={[20, 0]}>
-        <form>
-          <AdminInviteField
-            adminList={adminInviteList}
-            form={adminForm}
-            adminTitle={t("GROUP.ADMIN_TITLE")}
-          />
-          <Submit leftIcon="ibpcheck" isDisabled={!isOpen} form={adminForm} mb={4}>
-            {t("GROUP.UPDATE_ADMIN")}
-          </Submit>
-        </form>
+        <Button
+         display="flex"
+         variant="ghost" 
+         onClick={() => { setShow(!show) }} 
+         justifyContent="space-between" 
+         width="100%" size="lg">
+          {t("GROUP.ADMIN_TITLE")}
+          {<Icon name={show ? 'minus' : 'add'} />}
+        </Button>
+        <Collapse isOpen={show}>
+          <form>
+            <AdminInviteField
+              adminList={adminInviteList}
+              form={adminForm}
+              adminTitle={t("GROUP.ADMIN_TITLE")}
+            />
+            <Submit leftIcon="ibpcheck" isDisabled={!isOpen} form={adminForm} mb={4}>
+              {t("GROUP.UPDATE_ADMIN")}
+            </Submit>
+          </form>
+        </Collapse>
       </Box>
+
+
     </div>
   );
 }

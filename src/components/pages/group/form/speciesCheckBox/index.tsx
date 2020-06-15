@@ -63,10 +63,10 @@ function createGroupForm({ speciesGroups, habitats }) {
       description: group.description || "",
       icon: group.icon || "",
       name: group.name,
-      neLatitude: group?.spacial_coverage?.ne?.[1],
-      neLongitude: group?.spacial_coverage?.ne?.[0],
-      swLatitude: group?.spacial_coverage?.se?.[1],
-      swLongitude: group?.spacial_coverage?.se?.[0],
+      neLatitude: group?.spacial_coverage?.ne?.[0],
+      neLongitude: group?.spacial_coverage?.ne?.[1],
+      swLatitude: group?.spacial_coverage?.se?.[0],
+      swLongitude: group?.spacial_coverage?.se?.[1],
       languageId: 205,
       speciesGroup: group.speciesGroup,
       habitatId: group.habitatId,
@@ -86,8 +86,8 @@ function createGroupForm({ speciesGroups, habitats }) {
     const { success, data } = await axCreateGroup(payload);
     if (success) {
       notification(t("GROUP.CREATE_SUCCESSFULL"), NotificationType.Success);
+      router.push(`/group/${data.name}/show`,true,{},true);
       onOpen();
-      router.push(`/group/${data.name}/show`, true);
     } else {
       notification(t("GROUP.CREATE_ERROR"), NotificationType.Error);
       onOpen();

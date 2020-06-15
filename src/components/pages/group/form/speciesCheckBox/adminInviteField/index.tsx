@@ -5,7 +5,6 @@ import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { axUserSearch } from "@services/auth.service";
 import { FormContextValues } from "react-hook-form";
-import PageHeading from "@components/@core/layout/page-heading";
 
 interface AdminListDeatils {
   adminTitle: string;
@@ -30,7 +29,6 @@ const AdminInviteField = (props: AdminListDeatils) => {
   };
   return (
     <div>
-      <PageHeading style={{ margin: "20px 0px" }}>{t(props.adminTitle)}</PageHeading>
       {props.adminList &&
         props.adminList.length &&
         props.adminList.map((item: AdminDeatils, index) => (
