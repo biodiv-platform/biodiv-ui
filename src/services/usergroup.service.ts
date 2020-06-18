@@ -44,7 +44,7 @@ export const axGetPages = async (userGroupId) => {
  */
 export const axVerifyInvitation = async (token) => {
   try {
-    await http.post(`${ENDPOINT.USERGROUP}/v1/accept-invitation`, { token });
+    await http.get(`${ENDPOINT.USERGROUP}/v1/group/validate/members/${token}`);
     return { success: true };
   } catch (e) {
     console.error(e);
@@ -60,7 +60,7 @@ export const axVerifyInvitation = async (token) => {
  */
 export const axVerifyRequest = async (token) => {
   try {
-    await http.post(`${ENDPOINT.USERGROUP}/v1/accept-invitation`, { token });
+    await http.get(`${ENDPOINT.USERGROUP}/v1/group/validate/request/${token}`);
     return { success: true };
   } catch (e) {
     console.error(e);
