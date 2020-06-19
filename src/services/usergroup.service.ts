@@ -35,3 +35,35 @@ export const axGetPages = async (userGroupId) => {
     return { success: false, data: [] };
   }
 };
+
+/**
+ * when user accepts invitation to be moderator of any userGroup
+ *
+ * @param {string} token
+ * @returns
+ */
+export const axVerifyInvitation = async (token) => {
+  try {
+    await http.post(`${ENDPOINT.USERGROUP}/v1/group/validate/members`, { token });
+    return { success: true };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+/**
+ * userGroup moderators can accept request made by user to join userGroup
+ *
+ * @param {string} token
+ * @returns
+ */
+export const axVerifyRequest = async (token) => {
+  try {
+    await http.post(`${ENDPOINT.USERGROUP}/v1/group/validate/request`, { token });
+    return { success: true };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};

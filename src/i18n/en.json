@@ -258,6 +258,7 @@
       "USERGROUPS": "Groups"
     }
   },
+  "INVALID_REQUEST": "Invalid Request",
   "LEADERBOARD": {
     "TIP": "Leaderboard is based on all activities done by a user. Activity will update once every hour.",
     "TITLE": "Leaderboard"
@@ -466,6 +467,7 @@
     "TITLE": "Account verification"
   },
   "PREV": "Previous",
+  "PROCESSING": "Processing...",
   "SAVE": "Save",
   "SIGN_IN": {
     "FORGOT_PASSWORD_LINK": "Forgot password?",
@@ -499,5 +501,6 @@
     },
     "TITLE": "Sign up"
   },
+  "SUCCESS": "Success",
   "TOGGLE": "toggle"
 }
