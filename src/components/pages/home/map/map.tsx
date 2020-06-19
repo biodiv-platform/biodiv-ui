@@ -1,4 +1,5 @@
 import { ENDPOINT, MAP_CENTER } from "@static/constants";
+import { useStoreState } from "easy-peasy";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -12,6 +13,12 @@ const onObservationGridHover = ({ feature }) => (
 );
 
 export default function Map() {
+  /**
+   * Do not remove `undefined` from `userGroupId`
+   * so key will be automatically removed if `null`
+   */
+  const userGroupId = useStoreState((s) => s.currentGroup?.id) || undefined;
+
   return (
     <Naksha
       viewPort={{
@@ -32,7 +39,13 @@ export default function Map() {
           isAdded: true,
           source: {
             type: "grid",
-            endpoint: `${ENDPOINT.NAKSHA}/observation/aggregation?index=extended_observation&type=extended_records&geoField=location&top={top}&left={left}&bottom={bottom}&right={right}&precision={precision}`
+            endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
+          },
+          data: {
+            index: "extended_observation",
+            type: "extended_records",
+            geoField: "location",
+            userGroupId
           },
           onHover: onObservationGridHover
         }
