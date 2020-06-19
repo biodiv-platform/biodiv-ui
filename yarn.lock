@@ -1896,10 +1896,10 @@
     "@babel/runtime" "^7.0.0"
     gl-matrix "^3.0.0"
 
-"@nebula.gl/edit-modes@0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@nebula.gl/edit-modes/-/edit-modes-0.18.1.tgz#197c625a805435314c366383cf47fb4709874bba"
-  integrity sha512-eyFVD42m0oRc4u8jdlCqWpF6WID8+HatQqOq4FemvaHmx4ei58i977hA25lMO8iR/b1LPI5I6LHoiv3yMLhmrA==
+"@nebula.gl/edit-modes@0.18.5":
+  version "0.18.5"
+  resolved "https://registry.yarnpkg.com/@nebula.gl/edit-modes/-/edit-modes-0.18.5.tgz#cf47701c80218d35d242576cfa441c4dcfec69e1"
+  integrity sha512-b5PZY0pGhV008hkIHSoUBKPei5zc/TX3X2A/jeYdOK5ZWXQsQUMZ2FyEm9BYSrz554cIoBV6CLvdeIqFnufAqg==
   dependencies:
     "@turf/bbox" ">=4.0.0"
     "@turf/bbox-polygon" ">=4.0.0"
@@ -3394,10 +3394,10 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-boundingbox@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/boundingbox/-/boundingbox-1.2.1.tgz#2f61f5e6ad8d4b97bce22e430b7d1fa28a8d6f0d"
-  integrity sha512-VnM1f1XgTb7mfIUsUG3VzulpTdE3HdFcrrmj2Sfk/Vp1fjgsZmF35L1Y5NDxJppdhmKbOx51vrI/icKEm69TIg==
+boundingbox@^1.2.2:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/boundingbox/-/boundingbox-1.2.3.tgz#54ae1afb830285e4700472154cb4d64fd560d95c"
+  integrity sha512-QeTwAfHloUTYemaQ/B6/lHo7cpkZwMdTpYFFsxXD8NC3pPtjcL3nZiQ0JD4CS2DK99Oo5CyUlFfo3GvL6FoI7A==
   dependencies:
     geojson-bounds "^1.0.2"
     haversine "^1.1.1"
@@ -5669,6 +5669,11 @@ immer@^6.0.9:
   resolved "https://registry.yarnpkg.com/immer/-/immer-6.0.9.tgz#b9dd69b8e69b3a12391e87db1e3ff535d1b26485"
   integrity sha512-SyCYnAuiRf67Lvk0VkwFvwtDoEiCMjeamnHvRfnVDyc7re1/rQrNxuL+jJ7lA3WvdC4uznrvbmm+clJ9+XXatg==
 
+immer@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-7.0.1.tgz#830f44a36c4181c0eca4385e7782e164e5eb9249"
+  integrity sha512-DpWL/ES2Ba8KwW+A5AgNRoJPZP8LxdHejKXar1VfbF5a7ATvvekzmmNSQxje+WG0DIhuanvFEumFffVqyCLmBQ==
+
 immutable@^4.0.0-rc.12:
   version "4.0.0-rc.12"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0-rc.12.tgz#ca59a7e4c19ae8d9bf74a97bdf0f6e2f2a5d0217"
@@ -6690,10 +6695,10 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-naksha-components-react@^3.1.0-canary.0:
-  version "3.1.0-canary.0"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.1.0-canary.0.tgz#4515d2bada04540fa3a94fc33fdc5b8f12e33806"
-  integrity sha512-VWCkB6dr4G5C9IwdjJCqW6ZeG4iuoOVJGc3zqKekDiDQj3na06GGVcbR1K9Lg+CAXV/n3oiLrdMsD+eEiog2/w==
+naksha-components-react@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.2.0.tgz#6003e561cec39650d6a1b45e0835a330ea33e33e"
+  integrity sha512-zKmVjO/yqJGQL1knqQlefnscznxl63LzPCTXydF+itiBmzGcEnCPFR3gL/8JWDNVy5BYuZQ+a+byIfOfbqLAZA==
   dependencies:
     "@chakra-ui/core" "^0.8.0"
     "@emotion/core" "^10.0.28"
@@ -6701,16 +6706,16 @@ naksha-components-react@^3.1.0-canary.0:
     "@turf/bbox" "^6.0.1"
     axios "^0.19.2"
     bbox-aspect-ratio "^1.4.1"
-    boundingbox "^1.2.1"
+    boundingbox "^1.2.2"
     colorbrewer "^1.3.0"
     emotion-theming "^10.0.27"
     geohash "^0.0.1"
-    immer "^6.0.9"
+    immer "^7.0.1"
     immutable "^4.0.0-rc.12"
     react-gbus "^1.1.2"
     react-highlighter "^0.4.3"
-    react-map-gl "^5.2.5"
-    react-map-gl-draw "^0.18.4"
+    react-map-gl "^5.2.7"
+    react-map-gl-draw "^0.18.5"
     react-tiny-virtual-list "^2.2.0"
     react-virtualized-auto-sizer "^1.0.2"
     react-window "^1.8.5"
@@ -8127,23 +8132,23 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-map-gl-draw@^0.18.4:
-  version "0.18.4"
-  resolved "https://registry.yarnpkg.com/react-map-gl-draw/-/react-map-gl-draw-0.18.4.tgz#b49e6a2393a3e96f3d266ca5071a7dd88bb1c62d"
-  integrity sha512-wRQoK6eeQHWSIeWm/JNN4uVtqEPPxkUNqieT5EsoL9VINbrUleHc+11M2l7XVSY6cdQ0/NMFzRDUxJ+3YRXjew==
+react-map-gl-draw@^0.18.5:
+  version "0.18.5"
+  resolved "https://registry.yarnpkg.com/react-map-gl-draw/-/react-map-gl-draw-0.18.5.tgz#710f2cbbb1739472cf404e1fbb07ffed58b85a5b"
+  integrity sha512-5QTdIoEhAt7/m104aor1HjFLzUj5igakq4WH0Z5szEYiIpYwXc5J63rhnktk1fojXZg6DCyoaLvnuqa2/fGeIA==
   dependencies:
     "@math.gl/web-mercator" "^3.1.3"
-    "@nebula.gl/edit-modes" "0.18.1"
+    "@nebula.gl/edit-modes" "0.18.5"
     "@turf/helpers" "^6.1.4"
     "@types/react-map-gl" "5.2.2"
     mjolnir.js "^2.4.0"
     prop-types "^15.7.2"
     uuid "^3.4.0"
 
-react-map-gl@^5.2.5:
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-5.2.5.tgz#0b16bfd384d5d471cceaabff893b0d088fec9270"
-  integrity sha512-+U5d2ZJ3FpvJvO1U8hJvikC0s51Gq5bcjA77I8yECrbRIfgtPlnhuRoxUDN7rtxtlMHBsPdsypPe3pKgkK+iow==
+react-map-gl@^5.2.7:
+  version "5.2.7"
+  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-5.2.7.tgz#a3d6eda15ee8abb87b9acd855a0f6996cc364188"
+  integrity sha512-nwn/ThhZzlFB5SHzCbKjW2WKhrH9y3uq92PvTQSTIkaZf3eHgfOM4wsRUXR2UncFY8fAdm1ymdYHUwZUqx/2SQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     mapbox-gl "^1.0.0"

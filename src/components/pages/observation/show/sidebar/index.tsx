@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/core";
 import { Observation, UserIbp } from "@interfaces/observation";
 import React from "react";
 
-import ClusterMap from "./ClusterMap";
+import ClusterMap from "./cluster-map";
 import User from "./user";
 
 interface ISidebarProps {
