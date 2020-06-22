@@ -19,6 +19,7 @@ export const throwUnauthorized = (ctx) => {
   if (ctx.res) {
     ctx.res.writeHead(401, { "Content-Type": "text/html; charset=utf-8" });
     ctx.res.write("🍃 Unauthorized");
+    ctx.res.end();
   }
 };
 

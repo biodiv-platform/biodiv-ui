@@ -1,10 +1,10 @@
 import { SimpleGrid } from "@chakra-ui/core";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import ResourceCard from "./imageCard";
 import { FormContextValues } from "react-hook-form";
 const DropTarget = dynamic(import("./IconUploader"), { ssr: false });
+
 export interface IDropzoneProps {
   name: string;
   mb?: number;
@@ -14,8 +14,9 @@ export interface IDropzoneProps {
 }
 
 function IconUploader({ form, name }) {
-  const { observationAssets } = useObservationCreate();
-  const [value, setvalue] = useState({ path: form?.control?.defaultValuesRef?.current[name] });
+  const [value, setvalue] = useState({
+    path: form?.control?.defaultValuesRef?.current[name] || ""
+  });
   useEffect(() => {
     form.register({ name });
     if (value) {
@@ -34,7 +35,7 @@ function IconUploader({ form, name }) {
       {value?.path ? (
         <ResourceCard setValue={setvalue} resource={value} />
       ) : (
-        <DropTarget setValue={setvalue} assetsSize={observationAssets?.length} />
+        <DropTarget setValue={setvalue} />
       )}
     </SimpleGrid>
   );

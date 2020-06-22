@@ -8,6 +8,7 @@ interface ITextBoxProps {
   type?: string;
   mb?: number;
   disabled?: boolean;
+  placeholder?: string;
   hint?: string;
   form: FormContextValues<any>;
   style?;
@@ -24,6 +25,7 @@ const TextBoxField = ({
   mb = 4,
   disabled = false,
   hint,
+  placeholder,
   isRequired = false,
   showLabel = true,
   hidden = false,
@@ -40,7 +42,7 @@ const TextBoxField = ({
     <Input
       name={name}
       id={name}
-      placeholder={label}
+      placeholder={label || placeholder}
       ref={form.register}
       type={type}
       isDisabled={disabled}

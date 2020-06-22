@@ -1,25 +1,24 @@
-import { useDisclosure, Box, Collapse, Button, Icon } from "@chakra-ui/core";
+import { Box, Button, Collapse, Icon, useDisclosure } from "@chakra-ui/core";
+import PageHeading from "@components/@core/layout/page-heading";
 import { useLocalRouter } from "@components/@core/local-link";
+import RadioInputField from "@components/form/radio";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
-import { UserGroupEditData } from "@interfaces/userGroup";
-import { axUpdateUserGroup, axAddAdminMembers } from "@services/usergroup.service";
-import notification, { NotificationType } from "@utils/notification";
-import AdminInviteField from "../form/speciesCheckBox/adminInviteField";
-import SelectAsync from "@components/form/select-async";
 import TextBoxField from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
-import RadioInputField from "@components/form/radio";
-import MapInputForm from "../form/speciesCheckBox/MapInputForm";
-import GroupIconUploader from "../form/uploader";
-import GroupSelector from "../form/speciesCheckBox/customCheckbox";
-import { adminInviteList, userInvitaionOptions } from "../form/options";
-import PageHeading from "@components/@core/layout/page-heading";
-import { axQueryTagsByText } from "@services/observation.service";
+import useTranslation from "@configs/i18n/useTranslation";
+import { UserGroupEditData } from "@interfaces/userGroup";
+import { axAddAdminMembers, axUpdateUserGroup } from "@services/usergroup.service";
+import { getAdminUser } from "@utils/admin";
+import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import { getAdminUser } from "@utils/admin";
+
+import { adminInviteList, userInvitaionOptions } from "../form/options";
+import AdminInviteField from "../form/speciesCheckBox/adminInviteField";
+import GroupSelector from "../form/speciesCheckBox/customCheckbox";
+import MapInputForm from "../form/speciesCheckBox/MapInputForm";
+import GroupIconUploader from "../form/uploader";
 
 interface IuserGroupEditProps {
   userGroup: UserGroupEditData;
@@ -48,11 +47,6 @@ export default function ObservationEditForm({
   const moderator = adminMembers.moderatorList.map((item) => {
     return { label: item?.name, value: item?.id };
   });
-
-  const onTagsQuery = async (q) => {
-    const { data } = await axQueryTagsByText(q);
-    return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
-  };
 
   const coreForm = useForm({
     mode: "onChange",
@@ -84,34 +78,31 @@ export default function ObservationEditForm({
     }),
     defaultValues: {
       founder,
-      moderator,
-      founder_description: "",
-      moderator_description: ""
+      moderator
     }
   });
 
   const handleOnSubmit = async (e, group) => {
     e.preventDefault();
+    const { spacial_coverage, allowUserToJoin, speciesGroup, ...otherValues } = group;
     const payload = {
-      allowUserToJoin: group.allowUserToJoin,
-      description: group.description,
-      icon: group.icon,
+      ...otherValues,
+      languageId: 205,
+      sendDigestMail: true,
       homePage: null,
       domainName: null,
       theme: "default",
       newFilterRule: null,
-      name: group.name,
-      neLatitude: group?.spacial_coverage?.ne?.[1] || "",
-      neLongitude: group?.spacial_coverage?.ne?.[0] || "",
-      swLatitude: group?.spacial_coverage?.se?.[1] || "",
-      swLongitude: group?.spacial_coverage?.se?.[0] || "",
-      languageId: 205,
-      speciesGroupId: group.speciesGroup || [],
-      habitatId: group.habitatId || [],
-      sendDigestMail: true
+      speciesGroupId: speciesGroup,
+      allowUserToJoin: group.allowUserToJoin == "true" ? true : false,
+      neLatitude: group?.spacial_coverage?.ne?.[1],
+      neLongitude: group?.spacial_coverage?.ne?.[0],
+      swLatitude: group?.spacial_coverage?.se?.[1],
+      swLongitude: group?.spacial_coverage?.se?.[0]
     };
 
     const { success, data } = await axUpdateUserGroup(payload, userGroupId);
+
     if (success) {
       notification(t("GROUP.EDIT_SUCCESSFULL"), NotificationType.Success);
       onClose();
@@ -181,15 +172,6 @@ export default function ObservationEditForm({
             options={userInvitaionOptions}
           />
           <MapInputForm label={t("GROUP.MAPINPUT")} name={"spacial_coverage"} form={coreForm} />
-          <SelectAsync
-            name="tags"
-            label={t("OBSERVATION.TAGS")}
-            hint={t("OBSERVATION.TAGS_HINT")}
-            form={coreForm}
-            multiple={true}
-            onQuery={onTagsQuery}
-            mb={2}
-          />
 
           <Submit leftIcon="ibpcheck" isDisabled={!isOpen} form={coreForm} mb={4}>
             {t("GROUP.UPDATE_USERGROUP")}
@@ -209,7 +191,7 @@ export default function ObservationEditForm({
           size="lg"
         >
           {t("GROUP.ADMIN_TITLE")}
-          {<Icon name={show ? "minus" : "add"} />}
+          <Icon name={show ? "minus" : "add"} />
         </Button>
         <Collapse isOpen={show}>
           <form onSubmit={adminForm.handleSubmit(submitAdminForm)}>

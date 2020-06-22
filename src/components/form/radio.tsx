@@ -40,7 +40,7 @@ const RadioInputField = ({
   }, [form.register]);
 
   const handleChange = (value) => {
-    setValue(value == "true" ? true : false);
+    setValue(value);
   };
 
   return (

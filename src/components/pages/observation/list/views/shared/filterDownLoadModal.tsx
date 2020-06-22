@@ -1,46 +1,52 @@
-import React from "react";
-import { useForm } from "react-hook-form";
 import {
+  Box,
+  Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  useDisclosure,
   ModalBody,
   ModalCloseButton,
-  Button,
-  Box
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure
 } from "@chakra-ui/core";
+import { useLocalRouter } from "@components/@core/local-link";
 import CheckboxGroup from "@components/form/checkboxGroup";
-import { observationFilterList } from "@static/observationFiltersList";
-import TextBoxField from "@components/form/text";
 import Submit from "@components/form/submit-button";
+import TextBoxField from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
-import { useStoreState } from "easy-peasy";
+import { Role } from "@interfaces/custom";
 import { axObservationFilterDownload } from "@services/observation.service";
+import { observationFilterList } from "@static/observationFiltersList";
+import { hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import { encode } from "base64-url";
+import { useStoreState } from "easy-peasy";
+import React from "react";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 export default function DownLoadFilterModal({ traits, customFields }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { id } = useStoreState((s) => s.user);
   const { t } = useTranslation();
+  const { push, asPath } = useLocalRouter();
   const hform = useForm({
     mode: "onSubmit",
     validationSchema: Yup.object().shape({
-      taxonomic: Yup.array(),
-      temporal: Yup.array(),
-      spatial: Yup.array(),
-      misc: Yup.array(),
-      traits: Yup.array(),
-      customFields: Yup.array(),
       notes: Yup.string().required()
     })
   });
   (observationFilterList["traits"] = traits),
     (observationFilterList["customFields"] = customFields);
   const observationFilterTypes = Object.keys(observationFilterList);
+
+  const handleOpen = () => {
+    !hasAccess([Role.Admin, Role.User])
+      ? push("/login", true, { forward: encode(asPath) })
+      : onOpen();
+  };
+
   const handleDownload = async (filterData) => {
     try {
       const params = {
@@ -64,7 +70,7 @@ export default function DownLoadFilterModal({ traits, customFields }) {
 
   return (
     <>
-      <Button color="green.500" onClick={onOpen}>
+      <Button color="green.500" onClick={handleOpen}>
         Download
       </Button>
       <Modal isOpen={isOpen} size="50rem" onClose={onClose}>
@@ -100,6 +106,7 @@ export default function DownLoadFilterModal({ traits, customFields }) {
               <TextBoxField
                 isRequired={true}
                 label={t("OBSERVATION.FILTER_DOWNLOAD_NOTES")}
+                placeholder={t("OBSERVATION.FILTER_DOWNLOAD_MODAL")}
                 name="notes"
                 form={hform}
               />

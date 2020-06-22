@@ -1,11 +1,10 @@
-import React from "react";
 import { Box, Heading } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
-import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { axUserSearch } from "@services/auth.service";
 import { axRemoveAdminMembers } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import React from "react";
 import { FormContextValues } from "react-hook-form";
 
 interface AdminListDeatils {
@@ -55,34 +54,22 @@ const AdminInviteField = (props: AdminListDeatils) => {
           Administrator
         </Heading>
       )}
-      {props.adminList &&
-        props.adminList.length &&
-        props.adminList.map((item: AdminDeatils, index) => (
-          <Box m={15} key={index}>
-            <div>
-              <h3>{item.fieldGroupTitle}</h3>
-            </div>
-            <div>
-              <SelectAsync
-                name={item.name}
-                form={form}
-                placeholder={t("GROUP.INVITE")}
-                deleteTitle={t("GROUP.DELETE_MEMBER_TITLE")}
-                deleteMessage={t("GROUP.DELETE_MEMBER_MESSAGE")}
-                onQuery={onAdminUserQuery}
-                multiple={props.isMultiple}
-                onDelete={handleDelete}
-                label={item.label}
-              />
-              <TextAreaField
-                placeholder={t("GROUP.ADMIN_TEXTBOX")}
-                label={item.textBoxLabel}
-                name={item.textBoxName}
-                form={form}
-              />
-            </div>
-          </Box>
-        ))}
+      {props?.adminList?.map((item: AdminDeatils, index) => (
+        <Box m={15} key={index}>
+          <h3>{item.fieldGroupTitle}</h3>
+          <SelectAsync
+            name={item.name}
+            form={form}
+            placeholder={t("GROUP.INVITE")}
+            deleteTitle={t("GROUP.DELETE_MEMBER_TITLE")}
+            deleteMessage={t("GROUP.DELETE_MEMBER_MESSAGE")}
+            onQuery={onAdminUserQuery}
+            multiple={props.isMultiple}
+            onDelete={handleDelete}
+            label={item.label}
+          />
+        </Box>
+      ))}
     </div>
   );
 };

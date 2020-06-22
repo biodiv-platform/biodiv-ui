@@ -1,11 +1,11 @@
 import { Button, Heading, Icon, Text } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
+import { IDBObservationAsset } from "@interfaces/custom";
+import { axUploadUserGroupResource } from "@services/files.service";
 import { resizeMultiple } from "@utils/image";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { IDBObservationAsset } from "@interfaces/custom";
-import { axUploadResource } from "@services/files.service";
 
 const DropTargetBox = styled.div`
   border: 2px dashed var(--gray-300);
@@ -35,7 +35,7 @@ const DropTargetBox = styled.div`
 
 export const accept = ["image/jpg", "image/jpeg", "image/png", "video/*", "audio/*"];
 
-export default function DropTarget({ assetsSize, setValue }) {
+export default function DropTarget({ setValue }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
   const handleOnDrop = async (files) => {
@@ -43,8 +43,9 @@ export default function DropTarget({ assetsSize, setValue }) {
       setIsProcessing(true);
       const resizedAssets = await resizeMultiple(files);
       const assets = resizedAssets.map((item: IDBObservationAsset) => item);
-      await axUploadResource(assets[0]);
-      setValue(assets[0]);
+      const data = await axUploadUserGroupResource(assets[0]);
+      const { uri, ...others } = data;
+      setValue({ path: uri, ...others });
     } catch (error) {
       console.error(error);
       setIsProcessing(false);
@@ -57,21 +58,12 @@ export default function DropTarget({ assetsSize, setValue }) {
   });
 
   return (
-    <DropTargetBox
-      {...getRootProps()}
-      data-has-resources={!!assetsSize}
-      data-dropping={isDragActive}
-    >
+    <DropTargetBox {...getRootProps()} data-dropping={isDragActive}>
       <input {...getInputProps()} />
       {isProcessing ? (
         <div className="fade">
           <Icon name="time" />
           <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
-        </div>
-      ) : isDragActive ? (
-        <div className="fade">
-          <Icon name="arrow-up" />
-          <span>{t("OBSERVATION.UPLOADER.LABEL_RELEASE")}</span>
         </div>
       ) : (
         <div className="fade">
