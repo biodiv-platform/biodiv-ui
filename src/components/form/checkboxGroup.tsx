@@ -1,11 +1,12 @@
 import {
   Checkbox,
+  CheckboxGroup,
   FormControl,
   FormErrorMessage,
   FormHelperText,
-  Heading,
-  CheckboxGroup
+  Heading
 } from "@chakra-ui/core";
+import { capitalizeFirstLetter } from "@utils/text";
 import React, { useEffect } from "react";
 import { FormContextValues } from "react-hook-form";
 
@@ -13,6 +14,7 @@ interface Options {
   name: string;
   value?: string;
 }
+
 interface ITextBoxProps {
   name: string;
   label: string;
@@ -46,24 +48,20 @@ const CheckboxField = ({
   }, [form.register]);
 
   return (
-    <FormControl m={[5]} isInvalid={form.errors[name] && true} mb={mb} {...props}>
-      <Heading as="h3" pb={[4]} pt={[4]} size="lg">
-        {`${label.substring(0, 1).toUpperCase()}${label.substring(1, label.length)}`}
+    <FormControl m={5} isInvalid={form.errors[name] && true} mb={mb} {...props}>
+      <Heading as="h3" pb={4} pt={4} size="lg">
+        {capitalizeFirstLetter(label)}
       </Heading>
       <CheckboxGroup
         defaultValue={isReadOnly ? list.map((item) => item.name) : defaultValue}
-        onChange={(v) => handeClick(v)}
+        onChange={handeClick}
         display="grid"
         className="custom-checkbox-group"
         gridGap={8}
-        gridTemplateColumns={["repeat(1, 1.3fr)", "repeat(2, 1.3fr)"]}
+        gridTemplateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]}
       >
         {list.map((item, index) => (
-          <Checkbox
-            isDisabled={isReadOnly ? true : false}
-            key={index}
-            value={item.value || item.name}
-          >
+          <Checkbox isDisabled={isReadOnly} key={index} value={item.value || item.name}>
             {item.name}
           </Checkbox>
         ))}

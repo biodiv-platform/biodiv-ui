@@ -1,8 +1,7 @@
 import { CloseButton, Flex, Image } from "@chakra-ui/core";
 import styled from "@emotion/styled";
-import { getMyUploadsThumbnail } from "@utils/media";
+import { getGroupImageThumb } from "@utils/media";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
-import { useStoreState } from "easy-peasy";
 import React, { useMemo } from "react";
 
 const ImageBox = styled.div`
@@ -22,14 +21,12 @@ const ImageBox = styled.div`
   }
 `;
 
-export const getImageThumb = (resource, userID, size = 140): string => {
-  return getMyUploadsThumbnail(resource.path, userID, size);
+export const getImageThumb = (resource, size = 140): string => {
+  return getGroupImageThumb(resource.path, size);
 };
 
 export default function ResourceCard({ resource, setValue }) {
-  const { user } = useStoreState((s) => s);
-
-  const imageURL = useMemo(() => getImageThumb(resource, user.id), []);
+  const imageURL = useMemo(() => getImageThumb(resource), []);
 
   const handleRemovePhoto = () => {
     setValue(null);

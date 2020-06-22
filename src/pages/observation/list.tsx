@@ -47,9 +47,10 @@ ObservationListPage.getInitialProps = async (ctx) => {
   const { data } = await axGetListData(initialFilterParams);
   const { data: observationList } = await axGetObservationListConfig();
   fields.forEach((item) => {
-    observationList[item] = observationList[item].map((item) => {
-      return { value: item.name, name: item.name.toLowerCase() };
-    });
+    observationList[item] = observationList[item].map((item) => ({
+      value: item.name,
+      name: item.name.toLowerCase()
+    }));
   });
 
   return {

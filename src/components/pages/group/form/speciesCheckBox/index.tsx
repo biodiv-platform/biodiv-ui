@@ -1,24 +1,22 @@
-import React from "react";
-import { Box, useDisclosure, Button, Heading } from "@chakra-ui/core";
-import { useForm } from "react-hook-form";
+import { Box, Button, Heading, useDisclosure } from "@chakra-ui/core";
+import { PageHeading } from "@components/@core/layout";
+import { useLocalRouter } from "@components/@core/local-link";
+import RadioInputField from "@components/form/radio";
 import TextBoxField from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
-import RadioInputField from "@components/form/radio";
-import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "@configs/i18n/useTranslation";
-import { PageHeading } from "@components/@core/layout";
-import GroupSelector from "./customCheckbox";
-import SelectAsync from "@components/form/select-async";
-import { axQueryTagsByText } from "@services/observation.service";
-import AdminInviteField from "./adminInviteField";
-import MapInputForm from "./MapInputForm";
-import GroupIconUploader from "../uploader";
-import { userInvitaionOptions } from "../options";
 import { axCreateGroup } from "@services/usergroup.service";
-import { useLocalRouter } from "@components/@core/local-link";
-import { adminInviteList } from "../options";
 import { getAdminUser } from "@utils/admin";
+import notification, { NotificationType } from "@utils/notification";
+import React from "react";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import { adminInviteList, userInvitaionOptions } from "../options";
+import GroupIconUploader from "../uploader";
+import AdminInviteField from "./adminInviteField";
+import GroupSelector from "./customCheckbox";
+import MapInputForm from "./MapInputForm";
 
 function createGroupForm({ speciesGroups, habitats }) {
   const hform = useForm({
@@ -35,49 +33,39 @@ function createGroupForm({ speciesGroups, habitats }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure(true);
-
-  const onTagsQuery = async (q) => {
-    const { data } = await axQueryTagsByText(q);
-    return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
-  };
-
   const handleFormSubmit = async (group) => {
     onClose();
-    const founder = getAdminUser(group.founder);
-    const moderator = getAdminUser(group.moderator);
+    const { spacial_coverage, founder, moderator, allowUserToJoin, ...otherValues } = group;
+    const founderFormat = getAdminUser(founder);
+    const moderatorFormat = getAdminUser(moderator);
     const payload = {
-      allowUserToJoin: group.allowUserToJoin || false,
-      description: group.description || "",
-      icon: group.icon || "",
-      name: group.name,
-      neLatitude: group?.spacial_coverage?.ne?.[1] || "",
-      neLongitude: group?.spacial_coverage?.ne?.[0] || "",
-      swLatitude: group?.spacial_coverage?.se?.[1] || "",
-      swLongitude: group?.spacial_coverage?.se?.[0] || "",
+      ...otherValues,
       languageId: 205,
-      speciesGroup: group.speciesGroup,
-      habitatId: group.habitatId,
       sendDigestMail: true,
       homePage: null,
       domainName: null,
       theme: "default",
       newFilterRule: null,
+      allowUserToJoin: group.allowUserToJoin == "true" ? true : false,
+      neLatitude: group?.spacial_coverage?.ne?.[1],
+      neLongitude: group?.spacial_coverage?.ne?.[0],
+      swLatitude: group?.spacial_coverage?.se?.[1],
+      swLongitude: group?.spacial_coverage?.se?.[0],
       invitationData: {
         userGroupId: 0,
-        founderIds: founder.idsList,
-        moderatorsIds: moderator.idsList,
-        founderEmail: founder.emailList,
-        moderatorsEmail: moderator.emailList
+        founderIds: founderFormat.idsList,
+        moderatorsIds: moderatorFormat.idsList,
+        founderEmail: founderFormat.emailList,
+        moderatorsEmail: moderatorFormat.emailList
       }
     };
+
     const { success, data } = await axCreateGroup(payload);
     if (success) {
       notification(t("GROUP.CREATE_SUCCESSFULL"), NotificationType.Success);
       router.push(`/group/${data.name}/show`, false, {}, true);
-      onOpen();
     } else {
       notification(t("GROUP.CREATE_ERROR"), NotificationType.Error);
-      onOpen();
     }
 
     hform.reset({
@@ -88,10 +76,11 @@ function createGroupForm({ speciesGroups, habitats }) {
     });
     onOpen();
   };
+
   return (
     <Box mb={8}>
       <PageHeading>{t("GROUP.CREATE_GROUP_TITLE")}</PageHeading>
-      <Box className="white-box" p="10px 30px" m="10px">
+      <Box className="white-box" p={[10, 30]}>
         <Heading as="h2" pt={[5]} pb={[5]} fontSize="x-large">
           {t("GROUP.CORE_ELEMENT")}
         </Heading>
@@ -119,15 +108,6 @@ function createGroupForm({ speciesGroups, habitats }) {
             options={userInvitaionOptions}
           />
           <MapInputForm label={t("GROUP.MAPINPUT")} name={"spacial_coverage"} form={hform} />
-          <SelectAsync
-            name="tags"
-            label={t("OBSERVATION.TAGS")}
-            hint={t("OBSERVATION.TAGS_HINT")}
-            form={hform}
-            multiple={true}
-            onQuery={onTagsQuery}
-            mb={2}
-          />
           <div className="white-box">
             <AdminInviteField
               adminList={adminInviteList}

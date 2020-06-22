@@ -35,3 +35,17 @@ export const axUploadResource = async (resource: IDBObservationAsset) => {
   });
   return data;
 };
+
+export const axUploadUserGroupResource = async (resource: IDBObservationAsset) => {
+  const formData = new FormData();
+  formData.append("hash", resource.hashKey);
+  formData.append("upload", resource.blob, resource.fileName);
+  formData.append("directory", "userGroups");
+  formData.append("resource", "true");
+  const { data } = await http.post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
+  return data;
+};

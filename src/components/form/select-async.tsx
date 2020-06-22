@@ -1,3 +1,9 @@
+import AsyncSelect from "react-select/async-creatable";
+import { components } from "react-select";
+import { ClearIndicator, selectStyles } from "./configs";
+import DeleteModal from "@components/@core/deleteModal";
+import debounce from "debounce-promise";
+import { FormContextValues } from "react-hook-form";
 import {
   FormControl,
   FormErrorMessage,
@@ -6,13 +12,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import { isBrowser } from "@static/constants";
-import debounce from "debounce-promise";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
-import { components } from "react-select";
-import AsyncSelect from "react-select/async-creatable";
-import { ClearIndicator, selectStyles } from "./configs";
-import DeleteModal from "@components/@core/deleteModal";
 
 interface ISelectProps {
   name: string;
@@ -59,8 +59,8 @@ const SelectAsyncInputField = ({
   placeholder,
   onChange,
   onDelete,
-  deleteMessage = "",
-  deleteTitle = "",
+  deleteMessage,
+  deleteTitle,
   selectRef,
   onQuery = dummyOnQuery,
   resetOnSubmit = true,
@@ -76,13 +76,9 @@ const SelectAsyncInputField = ({
   );
 
   const handleSelected = (val) => {
-    if (selected?.length == 1 || val?.length <= selected?.length) {
+    if ((selected?.length == 1 && !val) || val?.length <= selected?.length) {
       const filtered = val
-        ? selected.filter(function (obj) {
-            return !val.some(function (obj2) {
-              return obj.value == obj2.value;
-            });
-          })
+        ? selected.filter((obj) => !val.some((obj2) => obj.value == obj2.value))
         : selected;
       setPreSelected({ delete: filtered, currtVal: val });
       onOpen();

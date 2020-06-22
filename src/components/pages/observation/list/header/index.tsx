@@ -51,7 +51,7 @@ export default function ListHeader({ traits, customFields }) {
           </Text>
         )}
       </div>
-      <Box display="flex" p={[6]}>
+      <Box display="flex" p={6}>
         <DownLoadFilterModal traits={traits} customFields={customFields} />
         <Select
           maxW="10rem"

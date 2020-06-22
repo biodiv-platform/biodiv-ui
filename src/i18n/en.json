@@ -28,6 +28,7 @@
   "COPY": "Copy to Clipboard",
   "DELETE": "Delete",
   "FEEDBACK": "Feedback",
+  "UNAUTHERIZED": "Unautherized User",
   "FILTERS": {
     "CLEAR": "Clear ${filterCount} Filter(s)",
     "DATA_QUALITY": {
@@ -303,6 +304,7 @@
     "CREATED_ON": "Created on",
     "CREATING": "We're creating your observation",
     "CUSTOM_FIELDS": "Custom Fields",
+    "FILTER_DOWNLOAD_MODAL": "Please state how you intend to use the downloaded data. This  is important for us to understand how open data is being used .",
     "DATE_ACCURACY": "Date Accuracy",
     "DOWNLOAD_FILTER_SUCCESS": "Your file is being generated. When it is ready, you will be notified by email and a download link will appear in your profile page.",
     "DOWNLOAD_FILTER_ERROR": "Unable to generate file",
