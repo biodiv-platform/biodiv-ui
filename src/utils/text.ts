@@ -25,8 +25,9 @@ export const getInjectableHTML = (nHtml) => {
             a: ["href", "title", "class", "rel", "target"],
             p: [],
             br: [],
-            img: ["src"]
-          }
+            div: []
+          },
+          stripIgnoreTag: true
         })
       : null;
   } catch (e) {
