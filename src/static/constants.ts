@@ -1,3 +1,5 @@
+import { UserGroupIbp } from "@interfaces/observation";
+
 export const isBrowser = typeof window !== `undefined`;
 
 export const DEFAULT_LANGUAGE_ID = 205;
@@ -21,6 +23,13 @@ export const ENDPOINT = {
   UTILITY: `${API_ENDPOINT}utility-api/api`,
   FILES: `${API_ENDPOINT}files-api/api`,
   GEOSERVER: `${process.env.NEXT_PUBLIC_SSR_API_ENDPOINT}geoserver`
+};
+
+export const DEFAULT_GROUP: UserGroupIbp = {
+  id: null,
+  icon: `${ENDPOINT.FILES}/get/crop/logo/IBP.png`,
+  name: process.env.NEXT_PUBLIC_SITE_TITLE,
+  webAddress: process.env.NEXT_PUBLIC_SITE_URL
 };
 
 export const DATE_ACCURACY = {
@@ -68,7 +77,9 @@ export const RESOURCE_SIZE = {
   PREVIEW: "?h=420",
   THUMBNAIL: "?h=34",
   LIST_THUMBNAIL: "?h=300",
-  TWITTER: "?w=600&h=330&fit=center&preserve=true"
+  TWITTER: "?w=600&h=330&fit=center&preserve=true",
+  APPLE_TOUCH: "?h=180&w=180&crop=fit&preserve=true",
+  MANIFEST: "${icon}?h=${size}&w=${size}&crop=fit&preserve=true"
 };
 
 export const LEADERBOARD_MODULES = {

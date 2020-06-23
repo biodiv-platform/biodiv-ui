@@ -1,8 +1,7 @@
-import { ENDPOINT, TOKEN } from "@static/constants";
+import { ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
 import axios from "axios";
-import { setNookie } from "next-nookies-persist";
 import { stringify } from "query-string";
 
 /**
@@ -23,7 +22,6 @@ export const axLogin = async (payload) => {
 export const axGetUser = async () => {
   try {
     const { data } = await http.get(`${ENDPOINT.USER}/v1/user/me`);
-    setNookie(TOKEN.USER, data);
     return { success: true, data };
   } catch (e) {
     notification(e.response.data.message);

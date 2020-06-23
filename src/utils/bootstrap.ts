@@ -5,6 +5,7 @@ import { parseNookies } from "next-nookies-persist";
 import { AppContext } from "next/app";
 
 import { absoluteUrl } from "./basic";
+import { getManifestURL } from "./userGroup";
 
 export const getLang = (ctx) => {
   return typeof ctx.query.lang !== "string" || !isLocale(ctx.query.lang)
@@ -24,11 +25,13 @@ export const getNewsLetterMenu = (childs) => {
 
 export const processedInitialProps = async ({ Component, ctx }: AppContext) => {
   const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
-  const aUrl = absoluteUrl(ctx.req).url;
+  const aReq = absoluteUrl(ctx.req);
+  const domain = aReq.hostname.split(".").slice(-2).join(".");
 
-  const groupInfo = await axGroupList(aUrl);
+  const { currentGroup, groups } = await axGroupList(aReq.href);
+  const manifestURL = getManifestURL(currentGroup);
 
-  const { data: rawPages } = await axGetPages();
+  const { data: rawPages } = await axGetPages(currentGroup?.id);
   const pages = getNewsLetterMenu(rawPages);
 
   const lang = getLang(ctx);
@@ -37,7 +40,10 @@ export const processedInitialProps = async ({ Component, ctx }: AppContext) => {
     pageProps,
     lang,
     pages,
-    nookies: parseNookies(ctx),
-    ...groupInfo
+    groups,
+    currentGroup,
+    manifestURL,
+    domain,
+    nookies: parseNookies(ctx)
   };
 };

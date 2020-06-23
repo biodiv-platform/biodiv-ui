@@ -22,10 +22,8 @@ class MyDocument extends Document<IDocumentProps> {
         <Head>
           <style>{jsontocss(customTheme)}</style>
           <link rel="shortcut icon" href="/favicon.ico" />
-          <link rel="manifest" href="/manifest.json" />
           <meta name="description" content={process.env.NEXT_PUBLIC_META_DESCRIPTION} />
           <meta name="theme-color" content="#363636" />
-          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         </Head>
         <body>
           <a className="start-of-content" href="#main">

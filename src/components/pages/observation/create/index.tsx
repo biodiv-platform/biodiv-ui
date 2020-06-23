@@ -3,22 +3,14 @@ import { useStoreState } from "easy-peasy";
 import React, { useEffect } from "react";
 
 import ObservationCreateForm from "./form";
+import { preCacheRoutes } from "@utils/auth";
 
 export default function ObservationCreatePageComponent({ speciesGroups, languages }) {
   const { currentGroup, isLoggedIn } = useStoreState((s) => s);
 
-  const fetchCaches = async () => {
-    try {
-      const cache = await window.caches.open("v2-light-cache");
-      await cache.add(`${currentGroup.webAddress}/observation/create`);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
     if (isBrowser) {
-      fetchCaches();
+      preCacheRoutes(currentGroup);
     }
   }, [currentGroup, isLoggedIn]);
 

@@ -10,6 +10,11 @@ export interface Follow {
   authorId?: number; // int64
   createdOn?: string; // date-time
 }
+export interface GroupAddMember {
+  userGroupId?: number; // int64
+  roleId?: number; // int64
+  memberList?: number /* int64 */[];
+}
 export interface Recipients {
   id?: number; // int64
   name?: string;

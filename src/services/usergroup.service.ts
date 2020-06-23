@@ -1,14 +1,6 @@
-import { UserGroupIbp } from "@interfaces/observation";
-import { ENDPOINT } from "@static/constants";
+import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
-import { getGroupImage } from "@utils/media";
-
-const defaultGroup = {
-  id: 0,
-  icon: process.env.NEXT_PUBLIC_SITE_LOGO,
-  name: process.env.NEXT_PUBLIC_SITE_TITLE,
-  webAddress: process.env.NEXT_PUBLIC_SITE_URL
-};
+import { findCurrentUserGroup, transformUserGroupList } from "@utils/userGroup";
 
 export const axGetUserGroupList = async () => {
   try {
@@ -22,26 +14,21 @@ export const axGetUserGroupList = async () => {
 
 export const axGroupList = async (url) => {
   try {
-    const res = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/all`);
-    const groups = res.data.map((group: UserGroupIbp) => ({
-      ...group,
-      webAddress: group.webAddress.startsWith("/")
-        ? `${process.env.NEXT_PUBLIC_SITE_URL}${group.webAddress}`
-        : group.webAddress,
-      icon: getGroupImage(group.icon)
-    }));
-    const currentGroup =
-      groups.find((group: UserGroupIbp) => url.startsWith(group.webAddress)) || defaultGroup;
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/all`);
+    const groups = transformUserGroupList(data);
+    const currentGroup = findCurrentUserGroup(groups, url);
     return { success: true, groups, currentGroup };
   } catch (e) {
     console.error(e);
-    return { success: false, groups: [], currentGroup: defaultGroup };
+    return { success: false, groups: [], currentGroup: DEFAULT_GROUP };
   }
 };
 
-export const axGetPages = async () => {
+export const axGetPages = async (userGroupId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/newsletter/group`);
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/newsletter/group`, {
+      params: { userGroupId }
+    });
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -111,5 +98,37 @@ export const axRemoveAdminMembers = async (params) => {
   } catch (e) {
     console.error(e.response.data.message);
     return { success: false, data: [] };
+  }
+};
+
+/**
+ * when user accepts invitation to be moderator of any userGroup
+ *
+ * @param {string} token
+ * @returns
+ */
+export const axVerifyInvitation = async (token) => {
+  try {
+    await http.post(`${ENDPOINT.USERGROUP}/v1/group/validate/members`, { token });
+    return { success: true };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+/**
+ * userGroup moderators can accept request made by user to join userGroup
+ *
+ * @param {string} token
+ * @returns
+ */
+export const axVerifyRequest = async (token) => {
+  try {
+    await http.post(`${ENDPOINT.USERGROUP}/v1/group/validate/request`, { token });
+    return { success: true };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
   }
 };

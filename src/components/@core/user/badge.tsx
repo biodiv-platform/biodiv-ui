@@ -5,7 +5,7 @@ import React from "react";
 const Badge = ({ isAdmin }) =>
   isAdmin ? (
     <Tooltip hasArrow={true} placement="right" shouldWrapChildren={true} title="Administrator">
-      <Icon name="ibpverified" />
+      <Icon ml={1} name="ibpverified" />
     </Tooltip>
   ) : null;
 

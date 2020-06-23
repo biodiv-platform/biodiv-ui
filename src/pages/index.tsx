@@ -1,17 +1,18 @@
 import HomePageComponent from "@components/pages/home";
-import FEATURED_IMAGES from "@configs/featured.json";
-import { axGetObservationsByResources } from "@services/observation.service";
-import { axGetPortalStats } from "@services/utility.service";
+import { axGroupList } from "@services/usergroup.service";
+import { axGetHomeInfo } from "@services/utility.service";
+import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-function HomePage({ portalStats, featured }) {
-  return <HomePageComponent portalStats={portalStats} featured={featured} />;
+function HomePage({ homeInfo }) {
+  return <HomePageComponent homeInfo={homeInfo} />;
 }
 
-export async function getServerSideProps() {
-  const { data: portalStats } = await axGetPortalStats();
-  const { data: featured } = await axGetObservationsByResources(FEATURED_IMAGES);
-  return { props: { portalStats, featured } };
+export async function getServerSideProps(ctx) {
+  const aURL = absoluteUrl(ctx.req).href;
+  const { currentGroup } = await axGroupList(aURL);
+  const { data: homeInfo } = await axGetHomeInfo(currentGroup?.id);
+  return { props: { homeInfo } };
 }
 
 export default HomePage;

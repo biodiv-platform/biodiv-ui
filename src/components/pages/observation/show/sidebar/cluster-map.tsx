@@ -24,19 +24,29 @@ export default function ClusterMap({ speciesId, latitude, longitude, colorHex = 
         <Naksha
           mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
           viewPort={{ latitude: MAP_CENTER.lat, longitude: MAP_CENTER.lng, zoom: 3.1 }}
-          layers={[
-            {
-              id: "species-observations",
-              title: "Species Observations",
-              isAdded: true,
-              source: {
-                type: "grid",
-                endpoint: `${ENDPOINT.NAKSHA}/observation/aggregation?index=extended_observation&type=extended_records&geoField=location&top={top}&left={left}&bottom={bottom}&right={right}&precision={precision}&speciesId=${speciesId}`
-              },
-              onHover: onObservationGridHover,
-              onClick: onObservationGridClick
-            }
-          ]}
+          layers={
+            speciesId
+              ? [
+                  {
+                    id: "species-observations",
+                    title: "Species Observations",
+                    isAdded: true,
+                    source: {
+                      type: "grid",
+                      endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
+                    },
+                    data: {
+                      index: "extended_observation",
+                      type: "extended_records",
+                      geoField: "location",
+                      speciesId: speciesId
+                    },
+                    onHover: onObservationGridHover,
+                    onClick: onObservationGridClick
+                  }
+                ]
+              : []
+          }
           markers={[{ latitude, longitude, colorHex }] as ExtendedMarkerProps[]}
         />
       </LazyLoad>

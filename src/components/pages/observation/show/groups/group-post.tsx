@@ -2,6 +2,7 @@ import { Box, Button, CheckboxGroup, Collapse, SimpleGrid, useDisclosure } from 
 import useTranslation from "@configs/i18n/useTranslation";
 import { UserGroupIbp } from "@interfaces/observation";
 import { axSaveUserGroups } from "@services/observation.service";
+import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupLink } from "@utils/basic";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
@@ -62,9 +63,9 @@ export default function GroupPost({
 
       <SimpleGrid columns={[1, 1, 2, 3]} spacing={4} hidden={isOpen}>
         <GroupBox
-          link={process.env.NEXT_PUBLIC_SITE_URL}
-          icon={process.env.NEXT_PUBLIC_SITE_LOGO}
-          name={process.env.NEXT_PUBLIC_SITE_TITLE}
+          link={DEFAULT_GROUP.webAddress}
+          icon={`${DEFAULT_GROUP.icon}?h=40`}
+          name={DEFAULT_GROUP.name}
         />
         {finalGroups.map((og) => (
           <GroupBox

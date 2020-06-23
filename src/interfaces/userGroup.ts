@@ -157,6 +157,14 @@ export interface ShowFilterRule {
   hasObservedOnDateRule?: boolean;
   observedOnDateRule?: UserGroupObservedonDateRule[];
 }
+export interface Stats {
+  species?: number; // int64
+  observation?: number; // int64
+  maps?: number; // int64
+  documents?: number; // int64
+  discussions?: number; // int64
+  activeUser?: number; // int64
+}
 export interface UserGroup {
   id?: number; // int64
   allowUserToJoin?: boolean;
@@ -179,6 +187,11 @@ export interface UserGroup {
   startDate?: string; // date-time
   filterRule?: string;
   newFilterRule?: string;
+  showGallery?: boolean;
+  showStats?: boolean;
+  showRecentObservations?: boolean;
+  showGridMap?: boolean;
+  showPartners?: boolean;
 }
 export interface UserGroupAddMemebr {
   founderList?: number /* int64 */[];
@@ -248,6 +261,14 @@ export interface UserGroupFilterRuleInputData {
   spartialDataList?: string[];
   createdOnDateList?: UserGroupFilterDate[];
   observedOnDateList?: UserGroupFilterDate[];
+}
+export interface UserGroupHomePage {
+  showGallery?: boolean;
+  showStats?: boolean;
+  showRecentObservation?: boolean;
+  showGridMap?: boolean;
+  showPartners?: boolean;
+  stats?: Stats;
 }
 export interface UserGroupIbp {
   id?: number; // int64

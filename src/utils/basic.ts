@@ -11,12 +11,7 @@ export const absoluteUrl = (req, setLocalhost?) => {
     protocol = "http:";
   }
 
-  return {
-    protocol,
-    host,
-    origin: `${protocol}//${host}`,
-    url: `${protocol}//${host}${req?.url}`
-  };
+  return new URL(`${protocol}//${host}${req?.url || ""}`);
 };
 
 export const toKey = (s = "") => s.split(" ").join("_").toUpperCase();

@@ -10,12 +10,17 @@ export default function RecentObservations() {
 
   return (
     <Box className="fade" mb={10}>
-      <Flex justify="space-between" mb={4}>
+      <Flex
+        justify="space-between"
+        align={[null, "center"]}
+        direction={["column", "row"]}
+        mb={[2, 4]}
+      >
         <Heading as="h2" fontSize="2rem">
           {t("HOME.OBSERVATIONS")}
         </Heading>
         <LocalLink href={`/observation/list`} prefixGroup={true}>
-          <Link alignSelf="middle" my={3} whiteSpace="nowrap">
+          <Link>
             {t("HOME.MORE")} <Icon name="arrow-forward" />
           </Link>
         </LocalLink>

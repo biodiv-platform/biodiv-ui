@@ -48,8 +48,9 @@ export default function OTPModal({ isOpen, onClose, user }) {
     const { success: s1, data: tokens } = await axValidateUser(payload);
     if (s1) {
       setNookie(TOKEN.AUTH, tokens);
-      const { success: s2 } = await axGetUser();
+      const { success: s2, data: userData } = await axGetUser();
       if (s2) {
+        setNookie(TOKEN.USER, userData);
         router.push("/");
       }
       notification(tokens?.message, NotificationType.Success);

@@ -37,9 +37,9 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
   const { t } = useTranslation();
   return (
     <Logo>
-      <LocalLink href="/">
-        <Link className="logo">{process.env.NEXT_PUBLIC_SITE_TITLE}</Link>
-      </LocalLink>
+      <Link href={process.env.NEXT_PUBLIC_SITE_URL} className="logo">
+        {process.env.NEXT_PUBLIC_SITE_TITLE}
+      </Link>
       <LocalLink href="/observation/create" prefixGroup={true}>
         <Link
           p={2}

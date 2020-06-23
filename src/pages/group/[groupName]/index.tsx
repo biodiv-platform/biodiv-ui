@@ -1,3 +1,3 @@
-import Show from "./show";
+import HomePage, { getServerSideProps } from "../..";
 
-export default Show;
+export { getServerSideProps, HomePage as default };

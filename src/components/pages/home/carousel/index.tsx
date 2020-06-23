@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ObservationHomePage } from "@interfaces/observation";
+import { GallerySlider } from "@interfaces/utility";
 import { Mq } from "mq-styled-components";
 import React, { useState } from "react";
 
@@ -58,7 +58,7 @@ const CarouselBox = styled.div`
 `;
 
 interface ICarouselProps {
-  featured: ObservationHomePage[];
+  featured: GallerySlider[];
 }
 
 export default function Carousel({ featured }: ICarouselProps) {
@@ -67,7 +67,7 @@ export default function Carousel({ featured }: ICarouselProps) {
   return featured ? (
     <CarouselBox className="fadeInUp">
       <Slides featured={featured} slideIndex={slideIndex} onChange={setSlideIndex} />
-      <SideBar bg={featured[slideIndex]?.resourceUrl} />
+      <SideBar featured={featured} slideIndex={slideIndex} />
     </CarouselBox>
   ) : null;
 }
