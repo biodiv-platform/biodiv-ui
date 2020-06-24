@@ -141,6 +141,34 @@
     "RESET_SUCCESS": "Password changed sucessfully",
     "TITLE": "Password Reset"
   },
+  "GROUP": {
+    "ADMIN_TITLE": "Group Administrators",
+    "CREATE": {
+      "ERROR": "There was some error while creating Group",
+      "SUCCESS": "Group Created Successfully",
+      "TITLE": "Create a Group"
+    },
+    "DELETE_MEMBER": "Are you sure you want to delete?",
+    "DESCRIPTION": "Description",
+    "EDIT": {
+      "ERROR": "There was some error while updating Group",
+      "SUCCESS": "Group Updated Successfully",
+      "TITLE": "Edit Group"
+    },
+    "HABITATS_COVERED": "Habitats Covered",
+    "ICON": "Icon",
+    "INVITE": "Type user name or email",
+    "INVITE_FOUNDERS": "Invite Founders",
+    "INVITE_MODERATORS": "Invite Moderators",
+    "JOIN_WITHOUT_INVITATION": "Allow user to join the group without invitaion",
+    "NAME": "Group Name",
+    "SAVE": "Create Group",
+    "SPATIAL_COVERGE": "Spatial Coverage",
+    "SPECIES_COVERAGE": "Species Group Coverage",
+    "TAGS": "Tags",
+    "UPDATE": "Update Group",
+    "UPDATE_ADMIN": "Update Administrators"
+  },
   "HEADER": {
     "MENU_PRIMARY": {
       "CONTRIBUTE": {
@@ -245,6 +273,7 @@
       "TITLE": "Features"
     },
     "MORE": "View all observations",
+    "NO_RECENT_OBSERVATIONS": "No Recent Observations",
     "OBSERVATIONS": "Recent Observations",
     "OBSERVED_BY": "Observation By",
     "PARTNERS": "Partners",
@@ -502,5 +531,6 @@
     "TITLE": "Sign up"
   },
   "SUCCESS": "Success",
-  "TOGGLE": "toggle"
+  "TOGGLE": "toggle",
+  "UNAUTHERIZED": "Unautherized User"
 }

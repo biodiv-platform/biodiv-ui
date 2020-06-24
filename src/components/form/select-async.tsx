@@ -22,7 +22,9 @@ interface ISelectProps {
   optionComponent?: any;
   placeholder?: string;
   onChange?;
+  eventCallback?;
   selectRef?;
+  isClearable?;
   form: FormContextValues<any>;
   resetOnSubmit?;
 }
@@ -49,9 +51,11 @@ const SelectAsyncInputField = ({
   debounceTime = 200,
   placeholder,
   onChange,
+  eventCallback,
   selectRef,
   onQuery = dummyOnQuery,
   resetOnSubmit = true,
+  isClearable = true,
   ...props
 }: ISelectProps) => {
   const initialValue = form.control.defaultValuesRef.current[name];
@@ -71,6 +75,10 @@ const SelectAsyncInputField = ({
   useEffect(() => {
     form.register({ name });
   }, [form.register]);
+
+  const handleOnChange = (value, event) => {
+    eventCallback ? eventCallback(value, event, setSelected) : setSelected(value);
+  };
 
   useEffect(() => {
     if (resetOnSubmit && form.formState.submitCount) {
@@ -103,8 +111,8 @@ const SelectAsyncInputField = ({
         value={selected}
         isSearchable={true}
         isDisabled={disabled}
-        isClearable={true}
-        onChange={setSelected}
+        isClearable={isClearable}
+        onChange={handleOnChange}
         placeholder={placeholder || label}
         noOptionsMessage={() => null}
         styles={selectStyles}
