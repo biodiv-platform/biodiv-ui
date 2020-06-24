@@ -1,12 +1,7 @@
 import { Spinner } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import useTranslation from "@configs/i18n/useTranslation";
-import {
-  axGetGroupAdministratorsByGroupId,
-  axGetGroupEditInfoByGroupId
-} from "@services/usergroup.service";
-import { useStoreState } from "easy-peasy";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import UserGroupEditForm from "./form";
 import GroupAdministratorsEditForm from "./group-administrator-edit-form";
@@ -14,35 +9,21 @@ import GroupAdministratorsEditForm from "./group-administrator-edit-form";
 interface GroupEditPageProps {
   speciesGroups;
   habitats;
+  groupInfo;
+  founders;
+  moderators;
+  userGroupId;
 }
 
-export default function EditGroupPageComponent({ speciesGroups, habitats }: GroupEditPageProps) {
+export default function EditGroupPageComponent({
+  speciesGroups,
+  habitats,
+  groupInfo,
+  founders,
+  moderators,
+  userGroupId
+}: GroupEditPageProps) {
   const { t } = useTranslation();
-  const { id } = useStoreState((s) => s.currentGroup);
-  const [groupInfo, setGroupInfo] = useState();
-  const [groupAdministrators, setGroupAdministrators] = useState<{ founders; moderators }>();
-
-  const getGroupInfo = async () => {
-    const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(id);
-    const { success: s2, data } = await axGetGroupAdministratorsByGroupId(id);
-    if (s1 && s2) {
-      setGroupInfo(groupInfo);
-      setGroupAdministrators({
-        founders: data.founderList.map(({ name, id }) => ({
-          label: name,
-          value: id
-        })),
-        moderators: data.moderatorList.map(({ name, id }) => ({
-          label: name,
-          value: id
-        }))
-      });
-    }
-  };
-
-  useEffect(() => {
-    getGroupInfo();
-  }, []);
 
   return (
     <div className="container mt">
@@ -51,7 +32,7 @@ export default function EditGroupPageComponent({ speciesGroups, habitats }: Grou
       {groupInfo ? (
         <UserGroupEditForm
           groupInfo={groupInfo}
-          userGroupId={id}
+          userGroupId={userGroupId}
           habitats={habitats}
           speciesGroups={speciesGroups}
         />
@@ -59,9 +40,11 @@ export default function EditGroupPageComponent({ speciesGroups, habitats }: Grou
         <Spinner mb={10} />
       )}
 
-      {groupAdministrators && (
-        <GroupAdministratorsEditForm userGroupId={id} {...groupAdministrators} />
-      )}
+      <GroupAdministratorsEditForm
+        userGroupId={userGroupId}
+        founders={founders}
+        moderators={moderators}
+      />
     </div>
   );
 }

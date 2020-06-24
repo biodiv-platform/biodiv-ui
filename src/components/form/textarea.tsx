@@ -16,6 +16,7 @@ interface ITextAreaProps {
   hint?: string;
   form: FormContextValues<any>;
   style?;
+  isRequired?;
 }
 
 const TextAreaField = ({

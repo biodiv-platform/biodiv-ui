@@ -29,7 +29,8 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { name } = useStoreState((s) => s.currentGroup);
-  const currentAdministrators = [...founders, ...moderators].map(({ values }) => values);
+  const founderIds = founders.map(({ values }) => values);
+  const moderatorIds = founders.map(({ values }) => values);
 
   const hForm = useForm({
     mode: "onChange",
@@ -50,16 +51,17 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
    * @param {*} { value }
    * @returns
    */
-  const onMemberRemoved = async ({ value }) => {
-    if (currentAdministrators.includes(value)) {
+  const onMemberRemoved = async ({ value }, initialMembers) => {
+    if (initialMembers.includes(value)) {
       return await axUserGroupRemoveAdminMembers(userGroupId, value);
     }
+
     return { success: true };
   };
 
   const handleFormSubmit = async (values) => {
-    const founderData = discardExistingAdministrators(values.founders, currentAdministrators);
-    const moderatorData = discardExistingAdministrators(values.moderators, currentAdministrators);
+    const founderData = discardExistingAdministrators(values.founders, founderIds);
+    const moderatorData = discardExistingAdministrators(values.moderators, moderators);
     const payload = {
       userGroupId,
       founderIds: founderData.idsList,
@@ -69,10 +71,10 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     };
     const { success } = await axAddGroupAdminMembers(payload);
     if (success) {
-      notification(t("GROUP.CREATE.SUCCESS"), NotificationType.Success);
+      notification(t("GROUP.ADMIN.UPDATED"), NotificationType.Success);
       router.push(`/group/${name}/show`, false, {}, true);
     } else {
-      notification(t("GROUP.CREATE.ERROR"), NotificationType.Error);
+      notification(t("GROUP.ADMIN.ERROR"), NotificationType.Error);
     }
   };
 
@@ -80,20 +82,25 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
       <AccordionHeader _expanded={{ bg: "gray.100" }}>
         <Heading as="h2" flex="1" textAlign="left" my={1} size="lg">
-          🛡️ {t("GROUP.ADMIN_TITLE")}
+          🛡️ {t("GROUP.ADMIN.TITLE")}
         </Heading>
         <AccordionIcon float="right" />
       </AccordionHeader>
+
       <AccordionPanel>
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
           <AdminInviteField
             form={hForm}
             name="founders"
             label="Founders"
-            onRemove={onMemberRemoved}
+            onRemove={(o) => onMemberRemoved(o, founderIds)}
           />
-          <AdminInviteField form={hForm} name="moderators" label="Moderators" />
-
+          <AdminInviteField
+            form={hForm}
+            name="moderators"
+            label="Moderators"
+            onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+          />
           <SubmitButton form={hForm}>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
         </form>
       </AccordionPanel>

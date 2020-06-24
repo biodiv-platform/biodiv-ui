@@ -26,7 +26,7 @@ const SubmitButton = ({
 
   useEffect(() => {
     setDisabled(isDisabled);
-  }, []);
+  }, [isDisabled]);
 
   return (
     <Button
