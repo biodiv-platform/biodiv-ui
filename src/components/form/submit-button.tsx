@@ -10,6 +10,7 @@ interface ISubmitButtonProps {
   variantColor?;
   mb?;
   w?;
+  mt?;
   form: FormContextValues<any>;
 }
 
@@ -25,7 +26,7 @@ const SubmitButton = ({
 
   useEffect(() => {
     setDisabled(isDisabled);
-  }, []);
+  }, [isDisabled]);
 
   return (
     <Button

@@ -1,3 +1,11 @@
+export interface AdministrationList {
+  founderList?: UserIbp[];
+  moderatorList?: UserIbp[];
+}
+export interface AuthenticationDTO {
+  credentials?: UserDTO;
+  groupId?: number; // int64
+}
 export interface BulkGroupPostingData {
   userGroupList?: number /* int64 */[];
   ugObvFilterDataList?: UserGroupObvFilterData[];
@@ -99,6 +107,9 @@ export interface CustomFields {
   iconURL?: string;
   notes?: string;
 }
+export interface EncryptionKey {
+  token?: string;
+}
 export interface Featured {
   id?: number; // int64
   version?: number; // int64
@@ -165,8 +176,29 @@ export interface Stats {
   discussions?: number; // int64
   activeUser?: number; // int64
 }
+export interface UserDTO {
+  id?: number; // int64
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  username?: string;
+  latitude?: number; // double
+  longitude?: number; // double
+  location?: string;
+  mobileNumber?: string;
+  gender?: string;
+  profession?: string;
+  institution?: string;
+  mapLocation?: string;
+  verificationType?: string;
+  mode?: string;
+  recaptcha?: string;
+}
 export interface UserGroup {
   id?: number; // int64
+  allow_members_to_make_species_call?: boolean;
+  allow_non_members_to_comment?: boolean;
+  allow_obv_cross_posting?: boolean;
   allowUserToJoin?: boolean;
   description?: string;
   domianName?: string;
@@ -192,6 +224,7 @@ export interface UserGroup {
   showRecentObservations?: boolean;
   showGridMap?: boolean;
   showPartners?: boolean;
+  showDesc?: boolean;
 }
 export interface UserGroupAddMemebr {
   founderList?: number /* int64 */[];
@@ -205,6 +238,8 @@ export interface UserGroupCreateData {
   icon?: string;
   domainName?: string;
   name?: string;
+  speciesGroup?: number /* int64 */[];
+  habitatId?: number /* int64 */[];
   neLatitude?: number; // double
   neLongitude?: number; // double
   swLatitude?: number; // double
@@ -214,7 +249,6 @@ export interface UserGroupCreateData {
   sendDigestMail?: boolean;
   newFilterRule?: string;
   invitationData?: UserGroupInvitationData;
-  cfUGMappingData?: CustomFieldUGData[];
 }
 export interface UserGroupCreatedOnDateRule {
   id?: number; // int64
@@ -238,6 +272,8 @@ export interface UserGroupEditData {
   languageId?: number; // int64
   sendDigestMail?: boolean;
   newFilterRule?: string;
+  speciesGroupId?: number /* int64 */[];
+  habitatId?: number /* int64 */[];
 }
 export interface UserGroupFilterDate {
   fromDate?: string; // date-time
@@ -324,4 +360,10 @@ export interface UserGroupTaxonomicRule {
 }
 export interface UserGroupWKT {
   wkt?: string;
+}
+export interface UserIbp {
+  id?: number; // int64
+  name?: string;
+  profilePic?: string;
+  isAdmin?: boolean;
 }

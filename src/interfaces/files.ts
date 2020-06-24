@@ -23,5 +23,6 @@ export interface MyUpload {
   dateUploaded?: string; // date-time
   latitude?: number; // double
   longitude?: number; // double
+  fileSize?: string;
 }
 export interface StreamingOutput {}

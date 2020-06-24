@@ -1,5 +1,6 @@
 import { AspectRatioBox, Box } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
+import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
@@ -28,6 +29,7 @@ const ObservationBox = styled.div`
 `;
 
 export default function RecentObservationList() {
+  const { t } = useTranslation();
   const { id: userGroupList } = useStoreState((s) => s.currentGroup);
   const [observatons, setObservations] = useState<ObservationListMinimalData[]>(
     Array(OBSERVATIONS_SIZE).fill(null)
@@ -44,7 +46,7 @@ export default function RecentObservationList() {
     });
   }, []);
 
-  return (
+  return observatons.length ? (
     <Box
       bg="white"
       p={4}
@@ -76,5 +78,7 @@ export default function RecentObservationList() {
         ))}
       </ObservationBox>
     </Box>
+  ) : (
+    <div>{t("HOME.NO_RECENT_OBSERVATIONS")}</div>
   );
 }

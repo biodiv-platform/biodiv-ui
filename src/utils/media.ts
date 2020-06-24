@@ -80,6 +80,9 @@ export const getSuggestionIcon = (resourceUrl) => {
 
 export const getSpeciesIcon = (icon) => `/next-assets/species/${icon || "Unknown"}.svg`;
 
+export const getLocalIcon = (icon, type = "species") =>
+  `/next-assets/${type}/${icon || "Unknown"}.svg`;
+
 export const getFallbackSpinner = (light = true) => {
   return `data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg' stroke='%23${
     light ? "fff" : "000"

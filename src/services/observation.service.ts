@@ -383,3 +383,15 @@ export const axRateObservationResource = async (observationId, resourceId, ratin
     return { success: false };
   }
 };
+
+export const axDownloadFilteredObservations = async (params) => {
+  try {
+    await http.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/listcsv/extended_observation/extended_records`,
+      { params }
+    );
+    return { success: true };
+  } catch (err) {
+    return { success: false };
+  }
+};

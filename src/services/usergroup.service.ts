@@ -36,6 +36,84 @@ export const axGetPages = async (userGroupId) => {
   }
 };
 
+export const axUserGroupCreate = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/create`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axUserGroupUpdate = async (payload, userGroupId) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/edit/save/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axUserGroupRemoveAdminMembers = async (userGroupId, userId) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/remove/members`, {
+      params: { userGroupId, userId }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+/**
+ * Will retrive group information for group edit endpoint
+ *
+ * @param {*} groupId
+ * @returns
+ */
+export const axGetGroupEditInfoByGroupId = async (groupId, ctx) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`, {
+      params: { ctx }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axGetGroupAdministratorsByGroupId = async (groupId, ctx) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.USERGROUP}/v1/group/adminstration/members/${groupId}`,
+      {
+        params: { ctx }
+      }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axAddGroupAdminMembers = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/add/members`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 /**
  * when user accepts invitation to be moderator of any userGroup
  *

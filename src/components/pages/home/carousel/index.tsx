@@ -64,7 +64,7 @@ interface ICarouselProps {
 export default function Carousel({ featured }: ICarouselProps) {
   const [slideIndex, setSlideIndex] = useState(0);
 
-  return featured ? (
+  return featured.length ? (
     <CarouselBox className="fadeInUp">
       <Slides featured={featured} slideIndex={slideIndex} onChange={setSlideIndex} />
       <SideBar featured={featured} slideIndex={slideIndex} />
