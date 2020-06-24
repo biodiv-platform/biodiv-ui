@@ -48,8 +48,10 @@ export default function DownLoadFilterModal({ traits, customFields }) {
   };
 
   const handleDownload = async (filterData) => {
+    const query = Object.fromEntries(new URLSearchParams(asPath.split("?")[1]));
     try {
       const params = {
+        ...query,
         authorid: id,
         notes: filterData.notes,
         customfields: filterData?.customFields?.toString() || "",
