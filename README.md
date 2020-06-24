@@ -26,7 +26,7 @@ yarn serve           # will start production server
 For end to end typesafe models this grately reduces chances of typos and amazing autocomplete ✨
 
 ```sh
-./typegen.js         # To regenerate modal(s) from microservices endpoints
+./typegen.sh         # To regenerate modal(s) from microservices endpoints
 ```
 
 ### 🔧 Configuration

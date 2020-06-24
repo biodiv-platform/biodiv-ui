@@ -1,0 +1,12 @@
+{
+  "plugins": {
+    "@dtsgenerator/replace-namespace": {
+      "map": [
+        {
+          "from": ["Definitions"],
+          "to": []
+        }
+      ]
+    }
+  }
+}
