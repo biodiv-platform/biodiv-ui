@@ -54,6 +54,7 @@ export interface Traits {
   showInObservation?: boolean;
   isParticipatory?: boolean;
   isDeleted?: boolean;
+  source?: string;
 }
 export interface TraitsValue {
   id?: number; // int64

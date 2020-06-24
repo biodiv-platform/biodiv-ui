@@ -99,10 +99,27 @@ export interface CustomFieldValuesData {
 }
 export interface CustomFields {
   id?: number; // int64
+  authorId?: number; // int64
   name?: string;
   dataType?: string;
-  fieldtype?: string;
-  values?: CustomFieldValues[];
+  fieldType?: string;
+  units?: string;
+  iconURL?: string;
+  notes?: string;
+}
+export interface DownloadLog {
+  id?: number; // int64
+  version?: number; // int64
+  authorId?: number; // int64
+  createdOn?: string; // date-time
+  filePath?: string;
+  filterUrl?: string;
+  notes?: string;
+  paramsMapAsText?: string;
+  status?: string;
+  type?: string;
+  sourceType?: string;
+  offsetParam?: number; // int64
 }
 export interface Envelope {
   area?: number; // double
@@ -509,6 +526,16 @@ export interface PrecisionModel {
   floating?: boolean;
   type?: Type;
 }
+export interface PublicationGrade {
+  hasMediaEvidence?: boolean;
+  hasDateDefined?: boolean;
+  isLocationDefined?: boolean;
+  isIdValidated?: boolean;
+  hasTaxonName?: boolean;
+  hasfamilyRankOrLower?: boolean;
+  isNotFlagged?: boolean;
+  isNativeObservation?: boolean;
+}
 export interface RecoData {
   taxonCommonName?: string;
   scientificNameTaxonId?: number; // int64
@@ -600,8 +627,6 @@ export interface SimilarObservation {
 export interface SpeciesGroup {
   id?: number; // int64
   name?: string;
-  parentGroupId?: number; // int64
-  groupOrder?: number; // int32
 }
 export interface Tags {
   id?: number; // int64
@@ -619,8 +644,11 @@ export interface TraitValue {
 export interface Traits {
   id?: number; // int64
   name?: string;
-  type?: string;
-  traitValues?: TraitValue[];
+  traitTypes?: string;
+  showInObservation?: boolean;
+  isParticipatory?: boolean;
+  isDeleted?: boolean;
+  source?: string;
 }
 export interface TraitsValue {
   id?: number; // int64

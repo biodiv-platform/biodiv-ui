@@ -50,6 +50,7 @@ export interface HomePageData {
   showPartners?: boolean;
   stats?: HomePageStats;
   gallerySlider?: GallerySlider[];
+  ugDescription?: string;
 }
 export interface HomePageStats {
   species?: number; // int64
