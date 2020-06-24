@@ -8,6 +8,12 @@
   .textarea__input {
     padding: 8px 1rem;
   }
+  .textarea__suggestions {
+    position: absolute;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--gray-300);
+  }
 }
 
 textarea,
