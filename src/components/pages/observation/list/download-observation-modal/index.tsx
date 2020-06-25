@@ -41,7 +41,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
       spatial: Yup.array(),
       misc: Yup.array(),
       traits: Yup.array(),
-      customFields: Yup.array(),
+      customfields: Yup.array(),
       notes: Yup.string().required()
     }),
     defaultValues: {
@@ -51,7 +51,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
       spatial: [],
       misc: [],
       traits: [],
-      customFields: []
+      customfields: []
     }
   });
 
@@ -108,7 +108,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
               form={hForm}
             />
             <CheckboxGroupField
-              name="customFields"
+              name="customfields"
               label="Custom Fields"
               options={getFilterOptions(customFields)}
               form={hForm}
