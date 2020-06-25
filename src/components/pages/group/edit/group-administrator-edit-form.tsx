@@ -29,8 +29,8 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { name } = useStoreState((s) => s.currentGroup);
-  const founderIds = founders.map(({ values }) => values);
-  const moderatorIds = founders.map(({ values }) => values);
+  const founderIds = founders.map(({ value }) => value);
+  const moderatorIds = moderators.map(({ value }) => value);
 
   const hForm = useForm({
     mode: "onChange",
@@ -61,7 +61,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
 
   const handleFormSubmit = async (values) => {
     const founderData = discardExistingAdministrators(values.founders, founderIds);
-    const moderatorData = discardExistingAdministrators(values.moderators, moderators);
+    const moderatorData = discardExistingAdministrators(values.moderators, moderatorIds);
     const payload = {
       userGroupId,
       founderIds: founderData.idsList,

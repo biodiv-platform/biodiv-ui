@@ -136,7 +136,7 @@ export default function CreateGroupPageComponent({
         />
 
         <PageHeading as="h2" size="lg">
-          🛡️ {t("GROUP.ADMIN_TITLE")}
+          🛡️ {t("GROUP.ADMIN.TITLE")}
         </PageHeading>
 
         <AdminInviteField form={hForm} name="founder" label={t("GROUP.INVITE_FOUNDERS")} />

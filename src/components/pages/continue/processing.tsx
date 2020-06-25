@@ -15,7 +15,7 @@ export default function Processing({ success, loading, redirect = true }: Proces
 
   useEffect(() => {
     if (success && redirect) {
-      router.push("/", true);
+      router.push("/show", true);
     }
   }, [success]);
 
