@@ -8,15 +8,15 @@ import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axCreateUser } from "@services/auth.service";
+import { axCreateUserUG } from "@services/usergroup.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import { useStoreState } from "easy-peasy";
 import useNookies from "next-nookies-persist";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
-
 import LocationPicker from "./location";
 import {
   GENDER_OPTIONS,
@@ -33,6 +33,7 @@ function SignUpForm() {
   const [user, setUser] = useState(null);
   const { isOpen, onClose, onOpen } = useDisclosure(false);
   const [isOAuth, setIsOAuth] = useState(false);
+  const { id } = useStoreState((s) => s.currentGroup);
 
   const hForm = useForm({
     mode: "onBlur",
@@ -79,11 +80,14 @@ function SignUpForm() {
 
   const handleOnSubmit = async (v) => {
     const payload = {
-      ...v,
-      verificationType:
-        v.email && v.mobileNumber ? v.verificationType : VERIFICATION_TYPE[v.email ? 0 : 1].value
+      credentials: {
+        ...v,
+        verificationType:
+          v.email && v.mobileNumber ? v.verificationType : VERIFICATION_TYPE[v.email ? 0 : 1].value
+      },
+      groupId: id
     };
-    const { success, data } = await axCreateUser(payload);
+    const { success, data } = await axCreateUserUG(payload);
     if (success && data?.status) {
       if (data?.verificationRequired) {
         setUser({ ...data?.user, vt: v.verificationType });

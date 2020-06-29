@@ -1,5 +1,6 @@
 import useTranslation from "@configs/i18n/useTranslation";
 import { UserGroupIbp } from "@interfaces/observation";
+import { axSaveFCMToken } from "@services/user.service";
 import { isBrowser, RESOURCE_SIZE, TOKEN } from "@static/constants";
 import authStore from "@stores/auth.store";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
@@ -11,7 +12,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
-
 import AutoSync from "../autosync";
 import NavigationMenuDark from "../navigation-menu/dark";
 import NavigationMenuLight from "../navigation-menu/light";
@@ -42,9 +42,28 @@ function AppContainer({ extras }: IAppContainerProps) {
   const canonical = process.env.NEXT_PUBLIC_SITE_URL + router.asPath;
 
   useEffect(() => {
+    let timer;
     if (isBrowser) {
       ReactGA.initialize(process.env.NEXT_PUBLIC_GA_TRACKING_ID);
       removeCache(CACHE_WHITELIST);
+      if (initialState?.user?.id) {
+        timer = setTimeout(async () => {
+          const w = window as any;
+          await w.workbox.register();
+          Notification.requestPermission(async (status) => {
+            if (status === "granted") {
+              const token = await w.workbox.messageSW({ command: "getFCMToken" });
+              if (token) {
+                const { success } = await axSaveFCMToken({ token });
+                console.debug(success ? "Token Saved" : "Failed to Save Token");
+              } else {
+                console.debug("Notification Rejected");
+              }
+            }
+          });
+        }, 1 * 60 * 1000);
+        return () => clearTimeout(timer);
+      }
     }
   }, []);
 

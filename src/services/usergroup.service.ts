@@ -1,6 +1,9 @@
 import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
+import notification from "@utils/notification";
 import { findCurrentUserGroup, transformUserGroupList } from "@utils/userGroup";
+import axios from "axios";
+import { stringify } from "querystring";
 
 export const axGetUserGroupList = async () => {
   try {
@@ -143,5 +146,37 @@ export const axVerifyRequest = async (token) => {
   } catch (e) {
     console.error(e);
     return { success: false };
+  }
+};
+
+export const axLoginUG = async (payload) => {
+  try {
+    const { data } = await axios.post(`${ENDPOINT.USERGROUP}/v1/group/login`, stringify(payload));
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: e.response.data };
+  }
+};
+
+export const axValidateUserUG = async (payload) => {
+  try {
+    const { data } = await axios.post(
+      `${ENDPOINT.USERGROUP}/v1/group/verify-user`,
+      stringify(payload)
+    );
+    return { success: true, data };
+  } catch (e) {
+    notification(e.response.data.message);
+    return { success: false, data: {} };
+  }
+};
+
+export const axCreateUserUG = async (payload) => {
+  try {
+    const { data } = await axios.post(`${ENDPOINT.USERGROUP}/v1/group/register`, payload);
+    return { success: true, data };
+  } catch (e) {
+    notification(e.response.data.message);
+    return { success: false, data: {} };
   }
 };

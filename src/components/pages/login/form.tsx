@@ -8,7 +8,7 @@ import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axLogin } from "@services/auth.service";
+import { axLoginUG } from "@services/usergroup.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import { useStoreState } from "easy-peasy";
@@ -18,7 +18,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
-
 import { VERIFICATION_MODE, VERIFICATION_TYPE } from "../register/form/options";
 import Oauth from "./oauth";
 
@@ -76,7 +75,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       mode: v.mode || VERIFICATION_MODE.MANUAL
     };
 
-    const { success, data } = await axLogin(payload);
+    const { success, data } = await axLoginUG(payload);
 
     if (success && data?.status) {
       if (data?.verificationRequired) {

@@ -14,14 +14,14 @@ import { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axGetUser, axRegenerateOTP, axValidateUser } from "@services/auth.service";
+import { axGetUser, axRegenerateOTP } from "@services/auth.service";
+import { axValidateUserUG } from "@services/usergroup.service";
 import { TOKEN } from "@static/constants";
 import notification, { NotificationType } from "@utils/notification";
 import useNookies from "next-nookies-persist";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-
 import OTPIcon from "./otp-icon";
 
 export default function OTPModal({ isOpen, onClose, user }) {
@@ -45,7 +45,7 @@ export default function OTPModal({ isOpen, onClose, user }) {
       otp
     };
 
-    const { success: s1, data: tokens } = await axValidateUser(payload);
+    const { success: s1, data: tokens } = await axValidateUserUG(payload);
     if (s1) {
       setNookie(TOKEN.AUTH, tokens);
       const { success: s2, data: userData } = await axGetUser();

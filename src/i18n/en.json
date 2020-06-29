@@ -546,5 +546,15 @@
   },
   "SUCCESS": "Success",
   "TOGGLE": "toggle",
-  "UNAUTHERIZED": "Unautherized User"
+  "UNAUTHERIZED": "Unauthorized User",
+  "APP_ADMIN": {
+    "LINKS": {
+      "NOTIFICATION": "Send Push Notification"
+    },
+    "PAGES": {
+      "NOTIFICATION": {
+        "HEADING": "🔔 Send Push-Notifications"
+      }
+    }
+  }
 }
