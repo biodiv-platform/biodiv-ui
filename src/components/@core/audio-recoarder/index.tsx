@@ -1,14 +1,18 @@
 import { Box, Button } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useTimer } from "use-timer";
 
 const pad = (number) => number.toString().toString().padStart(2, "0");
 
-export const secondsToMinutes = (totalSeconds) => {
+export const SecondsToMinutes = ({ totalSeconds }) => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds - minutes * 60;
-  return `${pad(minutes)}:${pad(seconds)}`;
+  return (
+    <>
+      {pad(minutes)}:{pad(seconds)}
+    </>
+  );
 };
 
 interface IRecorderProps {
@@ -27,7 +31,6 @@ export default function AudioRecorder({
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const mediaStream = useRef<MediaStream | null>(null);
   const mediaChunks = useRef<Blob[]>([]);
-  const { time, start, reset, isRunning } = useTimer({ endTime });
   const { t } = useTranslation();
 
   const getMediaStream = async () => {
@@ -49,28 +52,28 @@ export default function AudioRecorder({
     onStop(blob);
   };
 
-  const record = async () => {
-    if (isRunning) {
-      if (!mediaStream.current) {
-        await getMediaStream();
-      }
-      if (mediaStream.current) {
-        mediaRecorder.current = new MediaRecorder(mediaStream.current, mediaRecorderOptions);
-        mediaRecorder.current.ondataavailable = onRecordingActive;
-        mediaRecorder.current.onstop = onRecordingStop;
-        mediaRecorder.current.onerror = console.error;
-        mediaRecorder.current.start();
-      }
-    } else {
-      if (mediaRecorder.current) {
-        mediaRecorder.current.stop();
-      }
+  const startRecording = async () => {
+    if (!mediaStream.current) {
+      await getMediaStream();
+    }
+    if (mediaStream.current) {
+      mediaRecorder.current = new MediaRecorder(mediaStream.current, mediaRecorderOptions);
+      mediaRecorder.current.ondataavailable = onRecordingActive;
+      mediaRecorder.current.onstop = onRecordingStop;
+      mediaRecorder.current.onerror = console.error;
+      mediaRecorder.current.start();
+      start();
     }
   };
 
-  useEffect(() => {
-    record();
-  }, [isRunning]);
+  const stopRecording = async () => {
+    if (mediaRecorder.current) {
+      mediaRecorder.current.stop();
+      reset();
+    }
+  };
+
+  const { time, start, reset, isRunning } = useTimer({ endTime, onTimeOver: stopRecording });
 
   return (
     <div className="fade">
@@ -84,14 +87,14 @@ export default function AudioRecorder({
         textAlign="center"
         w="8rem"
       >
-        {secondsToMinutes(time)}
+        <SecondsToMinutes totalSeconds={time} />
       </Box>
       <Button
         isDisabled={isRunning}
         leftIcon={"microphone" as any}
         mr={4}
         mt={4}
-        onClick={start}
+        onClick={startRecording}
         type="button"
         variant="solid"
         variantColor="blue"
@@ -102,7 +105,7 @@ export default function AudioRecorder({
         isDisabled={!isRunning}
         leftIcon={"stop" as any}
         mt={4}
-        onClick={reset}
+        onClick={stopRecording}
         type="button"
         variant="solid"
         variantColor="red"
