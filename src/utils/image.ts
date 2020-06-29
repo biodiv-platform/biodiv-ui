@@ -51,11 +51,30 @@ async function parseGPS(file: File) {
   }
 }
 
+export const getAssetObject = (file, meta?) => {
+  const hashKey = `${LOCAL_ASSET_PREFIX}${nanoid()}`;
+  const finalMeta = meta || { blob: file };
+  return {
+    ...finalMeta,
+    hashKey,
+    fileName: file.name,
+    url: null,
+    path: `/${hashKey}/${file.name}`,
+    type: file.type,
+    licenceId: DEFAULT_LICENSE,
+    status: AssetStatus.Pending,
+    dateUploaded: new Date().getTime(),
+    caption: "",
+    rating: 0,
+    isUsed: 0
+  };
+};
+
 export function resizeMultiple(files: File[]) {
   return Promise.all(
     files.map(async (file) => {
       try {
-        let meta = {};
+        let meta;
         if (file.type.startsWith("image")) {
           const [blob, exif]: any = await Promise.all([resizeImage(file), parseGPS(file)]);
           console.debug("EXIF", exif);
@@ -71,24 +90,8 @@ export function resizeMultiple(files: File[]) {
             longitude: exif?.longitude,
             dateCreated: exif?.DateTimeOriginal
           };
-        } else if (file.type.startsWith("video") || file.type.startsWith("audio")) {
-          meta = { blob: file };
         }
-        const hashKey = `${LOCAL_ASSET_PREFIX}${nanoid()}`;
-        return {
-          ...meta,
-          hashKey,
-          fileName: file.name,
-          url: null,
-          path: `/${hashKey}/${file.name}`,
-          type: file.type,
-          licenceId: DEFAULT_LICENSE,
-          status: AssetStatus.Pending,
-          dateUploaded: new Date().getTime(),
-          caption: "",
-          rating: 0,
-          isUsed: 0
-        };
+        return getAssetObject(file, meta);
       } catch (e) {
         console.error(e);
         return {};

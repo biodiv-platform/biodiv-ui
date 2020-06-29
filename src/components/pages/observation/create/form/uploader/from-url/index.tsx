@@ -61,7 +61,13 @@ export default function FromURL({ onDone }) {
         onChange={handleOnChange}
       />
       {thumbURL && <Image mb={4} borderRadius="lg" maxW="full" h="15rem" src={thumbURL} />}
-      <Button type="button" variantColor="blue" isDisabled={!thumbURL} onClick={handleonInsert}>
+      <Button
+        isDisabled={!thumbURL}
+        leftIcon="check"
+        onClick={handleonInsert}
+        type="button"
+        variantColor="blue"
+      >
         {t("OBSERVATION.USE_IN_OBSERVATION")}
       </Button>
     </Box>
