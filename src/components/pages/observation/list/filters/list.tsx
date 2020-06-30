@@ -16,6 +16,8 @@ import Name from "./name";
 import SpeciesGroupsFilter from "./species-groups";
 import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
+import TraitsFilter from "./traits";
+import UserGroupFilter from "./user-group";
 
 export default function FiltersList() {
   const { t } = useTranslation();
@@ -85,6 +87,19 @@ export default function FiltersList() {
       </AccordionItem>
 
       <MediaType />
+      <UserGroupFilter />
+
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionHeader>
+              <div>{t("FILTERS.TRAITS.TITLE")}</div>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel>{isExpanded && <TraitsFilter />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
 
       <Box textAlign="center" p={4}>
         More filters coming soon 🎉

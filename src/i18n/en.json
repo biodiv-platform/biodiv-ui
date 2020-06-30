@@ -123,7 +123,13 @@
       "TITLE": "Time"
     },
     "TITLE": "Filters",
-    "TOGGLE": "Toggle Filters"
+    "TOGGLE": "Toggle Filters",
+    "TRAITS": {
+      "TITLE": "Traits"
+    },
+    "USERGROUP": {
+      "TITLE": "User Groups"
+    }
   },
   "FOOTER": {
     "EMAIL": "Email",
@@ -518,6 +524,7 @@
   "PREV": "Previous",
   "PROCESSING": "Processing...",
   "SAVE": "Save",
+  "SEARCH": "Search",
   "SIGN_IN": {
     "FORGOT_PASSWORD_LINK": "Forgot password?",
     "FORM": {

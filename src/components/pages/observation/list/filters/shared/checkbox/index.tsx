@@ -3,19 +3,46 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+  Icon,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftElement
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
-import React from "react";
+import { getTraitIcon } from "@utils/media";
+import React, { useState } from "react";
 
 import FilterStat from "../stat";
 
-export default function CheckboxFilterPanel({ filterKey, translateKey, statKey = null, options }) {
+interface CheckboxFilterPanelProps {
+  filterKey;
+  label?;
+  translateKey?;
+  statKey?;
+  options;
+  skipTitleTranslation?: boolean;
+  skipOptionsTranslation?: boolean;
+  showSearch?: boolean;
+}
+
+export default function CheckboxFilterPanel({
+  filterKey,
+  translateKey,
+  statKey,
+  options,
+  label,
+  skipOptionsTranslation,
+  showSearch
+}: CheckboxFilterPanelProps) {
   const { filter, addFilter, removeFilter } = useObservationFilter();
   const defaultValue = filter?.[filterKey] ? filter?.[filterKey]?.split(",") : [];
   const { t } = useTranslation();
+  const [filteredOptions, setFilteredOptions] = useState(options);
 
   const handleOnChange = (v) => {
     if (v.length > 0) {
@@ -25,17 +52,40 @@ export default function CheckboxFilterPanel({ filterKey, translateKey, statKey =
     }
   };
 
+  const handleOnSearch = (e) => {
+    const searchQuery = e?.target?.value.toLowerCase();
+    setFilteredOptions(options.filter(({ label }) => label.toLowerCase().includes(searchQuery)));
+  };
+
   return (
     <AccordionItem>
       <AccordionHeader>
-        <div>{t(translateKey + "TITLE")}</div>
+        <Box textAlign="left">{label || t(translateKey + "TITLE")}</Box>
         <AccordionIcon />
       </AccordionHeader>
       <AccordionPanel>
+        {showSearch && (
+          <InputGroup mb={2}>
+            <InputLeftElement children={<Icon name="search" color="gray.300" />} />
+            <Input type="text" placeholder={t("SEARCH")} onChange={handleOnSearch} />
+          </InputGroup>
+        )}
         <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
-          {options.map(({ label, value, stat }) => (
-            <Checkbox key={label} value={value} onChange={handleOnChange}>
-              {t(translateKey + label)} <FilterStat statKey={statKey} subStatKey={stat} />
+          {filteredOptions.map(({ label, value, stat, valueIcon }) => (
+            <Checkbox key={label} value={value} onChange={handleOnChange} alignItems="baseline">
+              {valueIcon && (
+                <Image
+                  src={getTraitIcon(valueIcon, 20)}
+                  size="1.25rem"
+                  objectFit="contain"
+                  display="inline"
+                  verticalAlign="center"
+                  mr={1}
+                  ignoreFallback={true}
+                />
+              )}
+              {skipOptionsTranslation ? label || value : t(translateKey + label)}
+              <FilterStat statKey={statKey} subStatKey={stat || value} />
             </Checkbox>
           ))}
         </CheckboxGroup>

@@ -1,11 +1,10 @@
 import { Flex, IconButton, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
-import { compiledMessage } from "@utils/basic";
+import { Mq } from "mq-styled-components";
 import React from "react";
 
 import { SyncInfo } from "./offline-sync";
-import { Mq } from "mq-styled-components";
 
 const SyncBoxContainer = styled.div`
   position: fixed;
@@ -88,7 +87,7 @@ export default function SyncBox({ syncInfo, onClose }: SyncBoxProps) {
         </div>
         {isOpen && (
           <Flex className="content fade" alignItems="center">
-            {compiledMessage(t("OBSERVATION.SYNC.CONTENT"), syncInfo)}
+            {t("OBSERVATION.SYNC.CONTENT", syncInfo)}
           </Flex>
         )}
       </div>

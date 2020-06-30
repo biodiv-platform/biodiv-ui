@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/core";
 import useObservationFilter from "@hooks/useObservationFilter";
+import { getByPath } from "@utils/basic";
 import { toHumanString } from "human-readable-numbers";
 import React from "react";
 
@@ -7,7 +8,8 @@ export default function FilterStat({ statKey, subStatKey }) {
   const {
     observationData: { ag }
   } = useObservationFilter();
-  const count = statKey ? ag?.[statKey]?.[subStatKey] : ag?.[subStatKey];
+  const path = statKey ? [statKey, subStatKey].join(".") : subStatKey;
+  const count = getByPath(ag, path);
 
   return (
     <Box color="gray.500" as="span" title={count}>
