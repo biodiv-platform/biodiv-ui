@@ -4,7 +4,7 @@ import notification from "@utils/notification";
 
 export const axSearchSpeciesByText = async (text, field) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.ESMODULE}/v1/services/auto-complete/etdi/er`, {
+    const { data } = await plainHttp.get(`${ENDPOINT.ESMODULE}/v1/services/auto-complete/etd/er`, {
       params: { text, field }
     });
     return { success: true, data };

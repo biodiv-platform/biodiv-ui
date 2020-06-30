@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
 import { FormContextValues } from "react-hook-form";
 
+import AudioInput from "./audio-input";
 import FromURL from "./from-url";
 import MyUploads from "./my-uploads";
 import ResourcesList from "./observation-resources/resources-list";
@@ -48,10 +49,11 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
   return (
     <FormControl isInvalid={form.errors[name] && true} mb={mb}>
       <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded">
-        <TabList mb={4}>
-          <Tab>{t("OBSERVATION.SELECTED_MEDIA")}</Tab>
-          <Tab>{t("OBSERVATION.MY_UPLOADS")}</Tab>
-          <Tab>{t("OBSERVATION.FROM_URL")}</Tab>
+        <TabList mb={4} overflowX="auto" py={1}>
+          <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
+          <Tab>☁️ {t("OBSERVATION.MY_UPLOADS")}</Tab>
+          <Tab>🎙️ {t("OBSERVATION.AUDIO.TITLE")}</Tab>
+          <Tab>📹 {t("OBSERVATION.FROM_URL")}</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -59,6 +61,9 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
           </TabPanel>
           <TabPanel>
             <MyUploads onDone={onSelectionDone} />
+          </TabPanel>
+          <TabPanel>
+            <AudioInput onDone={onSelectionDone} />
           </TabPanel>
           <TabPanel>
             <FromURL onDone={onSelectionDone} />

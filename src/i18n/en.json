@@ -323,6 +323,11 @@
     "ACCURATE": "Accurate",
     "ACTIVITY": "Activity",
     "ADD_OBSERVATION": "Add Observation",
+    "AUDIO": {
+      "START": "Start Recording",
+      "STOP": "Stop Recording",
+      "TITLE": "Audio Recorder"
+    },
     "COMMENTS": {
       "ADD_COMMENT": "Add a new comment",
       "POST": "Post Comment",
@@ -341,6 +346,7 @@
       "SUCCESS": "File deleted successfully"
     },
     "DESCRIPTION": {
+      "AUDIO": "Recording will automatically stop after two minutes",
       "MY_UPLOADS": "Upload and store media here for a period of 20 days. Select images to use in observation",
       "RESOURCES": "Upload image, audio or video files of a single observation from your device. (Use ratings to order images)"
     },
