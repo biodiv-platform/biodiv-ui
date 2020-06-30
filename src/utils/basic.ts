@@ -1,5 +1,8 @@
-export const compiledMessage = (templateString: string, templateVariables) =>
-  templateString.replace(/\${(.*?)}/g, (_, g) => templateVariables[g]);
+export const compiledMessage = (templateString: string, templateVariables) => {
+  return templateVariables
+    ? templateString.replace(/\${(.*?)}/g, (_, g) => templateVariables[g])
+    : templateString;
+};
 
 export const absoluteUrl = (req, setLocalhost?) => {
   let protocol = "https:";
@@ -34,4 +37,19 @@ export const stringToArray = (l) => {
  */
 export const getGroupLink = (url): string => {
   return url.includes("/group/") ? url + "/show" : url;
+};
+
+/**
+ * Works similar to loadash's `_.get` to retrive value from nested objects
+ *
+ * @param {*} obj
+ * @param {*} path
+ * @returns
+ */
+export const getByPath = (obj, path) => {
+  path.split(".").forEach(function (level) {
+    obj = obj[level];
+  });
+
+  return obj;
 };

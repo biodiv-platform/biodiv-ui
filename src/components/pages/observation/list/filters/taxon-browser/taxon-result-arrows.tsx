@@ -1,6 +1,5 @@
 import { IconButton, Stack } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { compiledMessage } from "@utils/basic";
 import React, { useEffect, useState } from "react";
 
 export default function TaxonResultArrows({ resultsCount }) {
@@ -29,7 +28,7 @@ export default function TaxonResultArrows({ resultsCount }) {
   return resultsCount > 1 ? (
     <Stack isInline={true} mt={3} alignItems="center" justify="space-between" className="fadeInUp">
       <div>
-        {compiledMessage(t("FILTERS.TAXON_BROWSER.SEARCH_RESULTS"), {
+        {t("FILTERS.TAXON_BROWSER.SEARCH_RESULTS", {
           currentIndex: currentIndex + 1,
           resultsCount
         })}
