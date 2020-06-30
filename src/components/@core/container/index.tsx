@@ -3,6 +3,7 @@ import { UserGroupIbp } from "@interfaces/observation";
 import { isBrowser, RESOURCE_SIZE, TOKEN } from "@static/constants";
 import authStore from "@stores/auth.store";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
+import { subscribeToPushNotification } from "@utils/user";
 import { createStore, StoreProvider } from "easy-peasy";
 import useNookies from "next-nookies-persist";
 import { DefaultSeo } from "next-seo";
@@ -11,7 +12,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
-
 import AutoSync from "../autosync";
 import NavigationMenuDark from "../navigation-menu/dark";
 import NavigationMenuLight from "../navigation-menu/light";
@@ -45,6 +45,12 @@ function AppContainer({ extras }: IAppContainerProps) {
     if (isBrowser) {
       ReactGA.initialize(process.env.NEXT_PUBLIC_GA_TRACKING_ID);
       removeCache(CACHE_WHITELIST);
+      if (initialState?.user?.id) {
+        const timer = setTimeout(async () => {
+          await subscribeToPushNotification();
+        }, 1 * 60 * 1000);
+        return () => clearTimeout(timer);
+      }
     }
   }, []);
 

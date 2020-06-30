@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/core";
+import SubscribePushButton from "@components/@core/messaging/subscribe-button";
 import { useStoreState } from "easy-peasy";
 import React from "react";
-
 import Carousel from "./carousel";
 import HomeDescription from "./description";
 import Features from "./features";
@@ -11,10 +11,12 @@ import RecentObservations from "./recent";
 import Stats from "./stats";
 
 export default function HomePageComponent({ homeInfo }) {
+  const { isLoggedIn } = useStoreState((s) => s);
   const showFeatures = !useStoreState((s) => s?.currentGroup?.id);
 
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
+      {isLoggedIn && <SubscribePushButton />}
       {homeInfo.showGallery && <Carousel featured={homeInfo.gallerySlider} />}
       {homeInfo.showStats && <Stats portalStats={homeInfo.stats} />}
       {homeInfo.ugDescription && <HomeDescription description={homeInfo.ugDescription} />}

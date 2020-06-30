@@ -22,6 +22,20 @@
     "UNFLAGGED": "flagged",
     "UPDATED_FACT": "updated fact"
   },
+  "ADMIN": {
+    "LINKS": {
+      "NOTIFICATION": "Send Push-Notification"
+    },
+    "PAGES": {
+      "NOTIFICATION": {
+        "HEADING": "Send Push-Notifications",
+        "FORM": {
+          "BODY": "Body",
+          "TITLE": "Title"
+        }
+      }
+    }
+  },
   "CANCEL": "Cancel",
   "CLEAR": "Clear",
   "CLOSE": "Close",
