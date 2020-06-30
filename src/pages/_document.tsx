@@ -24,8 +24,6 @@ class MyDocument extends Document<IDocumentProps> {
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="description" content={process.env.NEXT_PUBLIC_META_DESCRIPTION} />
           <meta name="theme-color" content="#363636" />
-          <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
-          <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
         </Head>
         <body>
           <a className="start-of-content" href="#main">
