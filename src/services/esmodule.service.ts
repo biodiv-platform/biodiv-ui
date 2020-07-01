@@ -56,3 +56,18 @@ export const axGetUserLeaderboard = async (value, how_many, time, authorId = -1)
     return [];
   }
 };
+
+export const axSearchFilterByName = async (text, field) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.ESMODULE}/v1/services/filterautocomplete/eo/er`,
+      {
+        params: { text, field }
+      }
+    );
+    return data.map((i) => ({ value: i, label: i }));
+  } catch (e) {
+    notification(e.response.data.message);
+    return [];
+  }
+};

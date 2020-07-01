@@ -1,23 +1,17 @@
-import { Accordion } from "@chakra-ui/core";
 import useObservationFilter from "@hooks/useObservationFilter";
 import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
+import SubAccordion from "../shared/sub-accordion";
 
 export default function TraitsFilter() {
   const { traits } = useObservationFilter();
 
   return traits.length ? (
-    <Accordion
-      allowMultiple={true}
-      borderColor="gray.200"
-      borderRadius="lg"
-      borderX="1px solid"
-      m={1}
-      overflow="hidden"
-    >
+    <SubAccordion>
       {traits.map((trait) => (
         <CheckboxFilterPanel
+          key={trait.id}
           label={trait.name}
           filterKey={`trait_${trait.id}.string`}
           options={trait.traitValues}
@@ -25,6 +19,6 @@ export default function TraitsFilter() {
           skipOptionsTranslation={true}
         />
       ))}
-    </Accordion>
+    </SubAccordion>
   ) : null;
 }
