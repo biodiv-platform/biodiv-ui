@@ -48,6 +48,9 @@ export const getGroupLink = (url): string => {
  */
 export const getByPath = (obj, path) => {
   path.split(".").forEach(function (level) {
+    if (!obj) {
+      return;
+    }
     obj = obj[level];
   });
 

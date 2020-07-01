@@ -3,12 +3,12 @@ import {
   AccordionHeader,
   AccordionIcon,
   AccordionItem,
-  AccordionPanel,
-  Box
+  AccordionPanel
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
+import CustomFieldsFilter from "./custom-fields";
 import DataQuality from "./data-quality";
 import Location from "./location";
 import MediaType from "./media-type";
@@ -17,6 +17,7 @@ import SpeciesGroupsFilter from "./species-groups";
 import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
 import TraitsFilter from "./traits";
+import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
 
 export default function FiltersList() {
@@ -86,8 +87,19 @@ export default function FiltersList() {
         </AccordionPanel>
       </AccordionItem>
 
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionHeader>
+              <div>{t("FILTERS.USER.TITLE")}</div>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel>{isExpanded && <UserFilter filterKey="user" />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
+
       <MediaType />
-      <UserGroupFilter />
 
       <AccordionItem>
         {({ isExpanded }) => (
@@ -101,9 +113,19 @@ export default function FiltersList() {
         )}
       </AccordionItem>
 
-      <Box textAlign="center" p={4}>
-        More filters coming soon 🎉
-      </Box>
+      <UserGroupFilter />
+
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionHeader>
+              <div>{t("FILTERS.CUSTOM_FIELDS.TITLE")}</div>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel>{isExpanded && <CustomFieldsFilter />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
     </Accordion>
   );
 }

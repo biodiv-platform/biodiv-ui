@@ -1,20 +1,13 @@
-import { Accordion } from "@chakra-ui/core";
 import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 import DateRangeFilter from "../shared/date-range";
+import SubAccordion from "../shared/sub-accordion";
 import { MONTHS } from "./filter-keys";
 
 export default function TimeFilter() {
   return (
-    <Accordion
-      borderX="1px solid"
-      borderColor="gray.200"
-      m={1}
-      borderRadius="lg"
-      overflow="hidden"
-      allowMultiple={true}
-    >
+    <SubAccordion>
       <CheckboxFilterPanel
         translateKey="FILTERS.TIME.MONTH."
         filterKey="month"
@@ -31,6 +24,6 @@ export default function TimeFilter() {
         translateKey="FILTERS.TIME.CREATED_ON"
         filterKey={{ min: "createdOnMinDate", max: "createdOnMaxDate" }}
       />
-    </Accordion>
+    </SubAccordion>
   );
 }
