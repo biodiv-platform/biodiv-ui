@@ -8,7 +8,11 @@ import React from "react";
 import JoinUserGroup from "../join-group";
 
 const Logo = styled.div`
+<<<<<<< HEAD
   width: fit-content;
+=======
+  width: 22rem;
+>>>>>>> acede83abff5722c5444f6754219707393919b20
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,13 +32,17 @@ const Logo = styled.div`
 
   button.ibpmenu {
     display: none;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     font-size: 1.5rem;
   }
 
   ${Mq.max.sm} {
     width: 100%;
     a {
+<<<<<<< HEAD
+=======
+      margin: 0px 5px;
+>>>>>>> acede83abff5722c5444f6754219707393919b20
       img {
         width: 4rem;
       }
