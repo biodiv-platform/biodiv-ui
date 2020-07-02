@@ -5,7 +5,10 @@ import { useStoreState } from "easy-peasy";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
+import JoinUserGroup from "../join-group";
+
 const Logo = styled.div`
+  width: fit-content;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,7 +26,7 @@ const Logo = styled.div`
     }
   }
 
-  button {
+  button.ibpmenu {
     display: none;
     padding: 0.5rem;
     font-size: 1.5rem;
@@ -31,7 +34,12 @@ const Logo = styled.div`
 
   ${Mq.max.sm} {
     width: 100%;
-    button {
+    a {
+      img {
+        width: 4rem;
+      }
+    }
+    button.ibpmenu {
       display: initial;
     }
   }
@@ -42,7 +50,10 @@ const Logo = styled.div`
 `;
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
-  const { name, icon } = useStoreState((s) => s.currentGroup);
+  const {
+    currentGroup: { name, icon, id },
+    isLoggedIn
+  } = useStoreState((s) => s);
 
   return (
     <Logo>
@@ -52,7 +63,8 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
           <Text ml={2}>{name}</Text>
         </Link>
       </LocalLink>
-      <button onClick={onToggle} aria-label="toggle primary menu">
+      {isLoggedIn && id && <JoinUserGroup />}
+      <button className="ibpmenu" onClick={onToggle} aria-label="toggle primary menu">
         <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
       </button>
     </Logo>
