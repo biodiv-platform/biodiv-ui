@@ -1,3 +1,4 @@
+import { compiledMessage, getByPath } from "@utils/basic";
 import { useContext } from "react";
 
 import { LocaleContext } from "../../hooks/useTranslation";
@@ -7,11 +8,17 @@ import strings from "./strings";
 export default function useTranslation() {
   const { locale } = useContext(LocaleContext);
 
-  function t(key: string) {
-    if (!strings[locale][key]) {
+  function t(key: string, values?) {
+    const translatedString = getByPath(strings[locale], key);
+
+    if (!translatedString) {
       console.warn(`Translation '${key}' for locale '${locale}' not found.`);
     }
-    return strings[locale][key] || strings[defaultLocale][key] || key;
+
+    return compiledMessage(
+      translatedString || getByPath(strings[defaultLocale], key) || key,
+      values
+    );
   }
 
   return {

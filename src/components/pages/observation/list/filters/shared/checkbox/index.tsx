@@ -3,43 +3,27 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Checkbox,
-  CheckboxGroup
+  Box
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
 import React from "react";
 
-import FilterStat from "../stat";
+import FilterCheckboxes, { FilterCheckboxesProps } from "./checkboxs";
 
-export default function CheckboxFilterPanel({ filterKey, translateKey, statKey = null, options }) {
-  const { filter, addFilter, removeFilter } = useObservationFilter();
-  const defaultValue = filter?.[filterKey] ? filter?.[filterKey]?.split(",") : [];
+export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
   const { t } = useTranslation();
-
-  const handleOnChange = (v) => {
-    if (v.length > 0) {
-      addFilter(filterKey, v.toString());
-    } else {
-      removeFilter(filterKey);
-    }
-  };
 
   return (
     <AccordionItem>
-      <AccordionHeader>
-        <div>{t(translateKey + "TITLE")}</div>
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionPanel>
-        <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
-          {options.map(({ label, value, stat }) => (
-            <Checkbox key={label} value={value} onChange={handleOnChange}>
-              {t(translateKey + label)} <FilterStat statKey={statKey} subStatKey={stat} />
-            </Checkbox>
-          ))}
-        </CheckboxGroup>
-      </AccordionPanel>
+      {({ isExpanded }) => (
+        <>
+          <AccordionHeader>
+            <Box textAlign="left">{props.label || t(props.translateKey + "TITLE")}</Box>
+            <AccordionIcon />
+          </AccordionHeader>
+          <AccordionPanel>{isExpanded && <FilterCheckboxes {...props} />}</AccordionPanel>
+        </>
+      )}
     </AccordionItem>
   );
 }

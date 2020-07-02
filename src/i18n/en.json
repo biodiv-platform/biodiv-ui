@@ -30,6 +30,12 @@
   "FEEDBACK": "Feedback",
   "FILTERS": {
     "CLEAR": "Clear ${filterCount} Filter(s)",
+    "CUSTOM_FIELDS": {
+      "HAS_CONTENT": "Has Content",
+      "NO_CONTENT": "No Content",
+      "NO_CUSTOM_FIELD": "No Custom field(s) found",
+      "TITLE": "Custom Fields"
+    },
     "DATA_QUALITY": {
       "FLAG": {
         "FLAGGED": "Flagged",
@@ -54,9 +60,12 @@
       }
     },
     "LOCATION": {
+      "DISTRICT": "District",
       "MAP": {
         "TITLE": "Map"
       },
+      "STATE": "State",
+      "TAHSIL": "Tahsil",
       "TITLE": "Location"
     },
     "MEDIA": {
@@ -123,7 +132,17 @@
       "TITLE": "Time"
     },
     "TITLE": "Filters",
-    "TOGGLE": "Toggle Filters"
+    "TOGGLE": "Toggle Filters",
+    "TRAITS": {
+      "TITLE": "Traits"
+    },
+    "USER": {
+      "SEARCH": "Search User",
+      "TITLE": "User"
+    },
+    "USERGROUP": {
+      "TITLE": "User Groups"
+    }
   },
   "FOOTER": {
     "EMAIL": "Email",
@@ -518,6 +537,7 @@
   "PREV": "Previous",
   "PROCESSING": "Processing...",
   "SAVE": "Save",
+  "SEARCH": "Search",
   "SIGN_IN": {
     "FORGOT_PASSWORD_LINK": "Forgot password?",
     "FORM": {

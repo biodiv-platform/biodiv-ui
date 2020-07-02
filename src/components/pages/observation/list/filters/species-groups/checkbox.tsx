@@ -43,7 +43,14 @@ const Checkbox = ({ id, label, value, stat, ...props }) => (
     <Tooltip label={label} hasArrow={true} placement="top">
       <div className="custom-checkbox" aria-checked={props.isChecked}>
         <VH as="input" type="checkbox" {...props} checked={props.isChecked} value={value} />
-        <Image size="2rem" mr={2} objectFit="contain" src={getSpeciesIcon(label)} alt={label} />
+        <Image
+          size="2rem"
+          mr={2}
+          objectFit="contain"
+          src={getSpeciesIcon(label)}
+          alt={label}
+          ignoreFallback={true}
+        />
       </div>
     </Tooltip>
     <div className="badge" aria-checked={props.isChecked}>
