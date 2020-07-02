@@ -8,16 +8,15 @@ import React from "react";
 import JoinUserGroup from "../join-group";
 
 const Logo = styled.div`
-<<<<<<< HEAD
   width: fit-content;
-=======
-  width: 22rem;
->>>>>>> acede83abff5722c5444f6754219707393919b20
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.25rem 0;
   min-height: 3.4rem;
+  .right-logo {
+    display: contents;
+  }
 
   a {
     display: flex;
@@ -32,20 +31,15 @@ const Logo = styled.div`
 
   button.ibpmenu {
     display: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     font-size: 1.5rem;
   }
 
   ${Mq.max.sm} {
     width: 100%;
-    a {
-<<<<<<< HEAD
-=======
-      margin: 0px 5px;
->>>>>>> acede83abff5722c5444f6754219707393919b20
-      img {
-        width: 4rem;
-      }
+    .right-logo {
+      width: 22rem;
+      display: grid;
     }
     button.ibpmenu {
       display: initial;
@@ -65,13 +59,15 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
 
   return (
     <Logo>
-      <LocalLink href="/" prefixGroup={true}>
-        <Link>
-          <img src={`${icon}?w=128`} alt={name} />
-          <Text ml={2}>{name}</Text>
-        </Link>
-      </LocalLink>
-      {isLoggedIn && id && <JoinUserGroup />}
+      <div className="right-logo">
+        <LocalLink href="/" prefixGroup={true}>
+          <Link>
+            <img src={`${icon}?w=128`} alt={name} />
+            <Text ml={2}>{name}</Text>
+          </Link>
+        </LocalLink>
+        {isLoggedIn && id && <JoinUserGroup />}
+      </div>
       <button className="ibpmenu" onClick={onToggle} aria-label="toggle primary menu">
         <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
       </button>
