@@ -167,9 +167,11 @@
     "INVITE_MODERATORS": "Invite Moderators",
     "JOIN": "Join Group",
     "JOIN_WITHOUT_INVITATION": "Allow user to join the group without invitaion",
-    "MEMBER_JOINED": "Successfully joined group",
-    "MEMBER_JOINED_ERROR": "Unbale to join Group",
-    "MEMBER_REQUESTED": "Request sent to Group Moderator",
+    "MEMBER": {
+      "JOINED": "Group joined successfully",
+      "JOINED_ERROR": "Unbale to join Group",
+      "REQUESTED": "Group join request sent"
+    },
     "NAME": "Group Name",
     "SAVE": "Create Group",
     "SPATIAL_COVERGE": "Spatial Coverage",

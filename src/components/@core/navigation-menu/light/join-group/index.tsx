@@ -7,8 +7,8 @@ import React, { useEffect, useState } from "react";
 
 export default function JoinUserGroup() {
   const { currentGroup, user } = useStoreState((s) => s);
-  const [isMember, setIsMember] = useState<boolean | null>(true);
-  const [isLoading, setLoading] = useState<boolean | null>();
+  const [isMember, setIsMember] = useState<boolean>(true);
+  const [isLoading, setLoading] = useState<boolean>();
   const { t } = useTranslation();
 
   const addUserGroupMember = async () => {
@@ -17,30 +17,27 @@ export default function JoinUserGroup() {
     if (canAddMember) {
       const { success } = await axJoinUserGroup(currentGroup.id);
       if (success) {
-        setIsMember(success);
+        setIsMember(true);
         notification(
-          currentGroup.isParticipatory ? t("GROUP.MEMBER_JOINED") : t("GROUP.MEMBER_REQUESTED"),
+          currentGroup.isParticipatory ? t("GROUP.MEMBER.JOINED") : t("GROUP.MEMBER.REQUESTED"),
           NotificationType.Success
         );
       } else {
-        notification(t("MEMBER_JOINED_ERROR"), NotificationType.Error);
+        notification(t("GROUP.MEMBER.JOINED_ERROR"), NotificationType.Error);
       }
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    axCheckUserGroupMember(currentGroup.id, user.id).then(({ data }) => {
-      setIsMember(data);
-    });
+    axCheckUserGroupMember(currentGroup.id, user.id).then(({ data }) => setIsMember(data));
   }, [currentGroup.name]);
 
   return isMember ? null : (
     <Button
-      variant="solid"
+      className="join-usergroup"
       size="sm"
-      ml={{ base: 0, md: 4 }}
-      isDisabled={isLoading}
+      isLoading={isLoading}
       variantColor="blue"
       onClick={addUserGroupMember}
       leftIcon="add"

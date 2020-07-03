@@ -1,4 +1,4 @@
-import { Icon, Link, Text, Box } from "@chakra-ui/core";
+import { Icon, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
 import { useStoreState } from "easy-peasy";
@@ -14,6 +14,8 @@ const Logo = styled.div`
   justify-content: space-between;
   padding: 0.25rem 0;
   min-height: 3.4rem;
+  flex-wrap: wrap;
+
   .right-logo {
     display: contents;
   }
@@ -24,21 +26,36 @@ const Logo = styled.div`
     line-height: 1.2rem;
     img {
       height: 3.75rem;
-      width: 8rem;
+      max-width: 8rem;
       object-fit: contain;
     }
   }
 
-  button.ibpmenu {
+  .menu-toggle {
     display: none;
     padding: 0.5rem;
     font-size: 1.5rem;
   }
 
+  .join-usergroup {
+    margin-left: 0.75rem;
+  }
+
   ${Mq.max.sm} {
     width: 100%;
-    button.ibpmenu {
+
+    p {
+      max-width: 6rem;
+    }
+
+    .menu-toggle {
       display: initial;
+    }
+
+    .join-usergroup {
+      flex-basis: 100%;
+      margin: 0.75rem 0;
+      width: 100%;
     }
   }
 
@@ -54,19 +71,17 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
   } = useStoreState((s) => s);
 
   return (
-    <Box w="inherit" display={{ lg: "flex", sm: "flex", xs: "grid" }} alignItems="center">
-      <Logo>
-        <LocalLink href="/" prefixGroup={true}>
-          <Link>
-            <img src={`${icon}?w=128`} alt={name} />
-            <Text ml={2}>{name}</Text>
-          </Link>
-        </LocalLink>
-        <button className="ibpmenu" onClick={onToggle} aria-label="toggle primary menu">
-          <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
-        </button>
-      </Logo>
+    <Logo>
+      <LocalLink href="/" prefixGroup={true}>
+        <Link>
+          <img src={`${icon}?w=128`} alt={name} />
+          <Text ml={2}>{name}</Text>
+        </Link>
+      </LocalLink>
+      <button className="menu-toggle" onClick={onToggle} aria-label="toggle primary menu">
+        <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
+      </button>
       {isLoggedIn && id && <JoinUserGroup />}
-    </Box>
+    </Logo>
   );
 }
