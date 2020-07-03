@@ -166,6 +166,7 @@
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },
+    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator.",
     "CREATE": {
       "ERROR": "There was some error while creating Group",
       "SUCCESS": "Group Created Successfully",
@@ -183,7 +184,13 @@
     "INVITE": "Type user name or email",
     "INVITE_FOUNDERS": "Invite Founders",
     "INVITE_MODERATORS": "Invite Moderators",
+    "JOIN": "Join Group",
     "JOIN_WITHOUT_INVITATION": "Allow user to join the group without invitaion",
+    "MEMBER": {
+      "JOINED": "Group joined successfully",
+      "JOINED_ERROR": "Unbale to join Group",
+      "REQUESTED": "Group join request sent"
+    },
     "NAME": "Group Name",
     "SAVE": "Create Group",
     "SPATIAL_COVERGE": "Spatial Coverage",
