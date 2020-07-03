@@ -8,9 +8,11 @@ import React, { useEffect, useState } from "react";
 export default function JoinUserGroup() {
   const { currentGroup, user } = useStoreState((s) => s);
   const [isMember, setIsMember] = useState<boolean | null>(true);
+  const [isLoading, setLoading] = useState<boolean | null>();
   const { t } = useTranslation();
 
   const addUserGroupMember = async () => {
+    setLoading(true);
     const canAddMember = currentGroup.isParticipatory || confirm(t("GROUP.CONFIRM_CLOSED_GROUP"));
     if (canAddMember) {
       const { success } = await axJoinUserGroup(currentGroup.id);
@@ -24,6 +26,7 @@ export default function JoinUserGroup() {
         notification(t("MEMBER_JOINED_ERROR"), NotificationType.Error);
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -37,6 +40,7 @@ export default function JoinUserGroup() {
       variant="solid"
       size="sm"
       ml={{ base: 0, md: 4 }}
+      isDisabled={isLoading}
       variantColor="blue"
       onClick={addUserGroupMember}
       leftIcon="add"

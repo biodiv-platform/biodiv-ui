@@ -1,4 +1,4 @@
-import { Icon, Link, Text } from "@chakra-ui/core";
+import { Icon, Link, Text, Box } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
 import { useStoreState } from "easy-peasy";
@@ -37,10 +37,6 @@ const Logo = styled.div`
 
   ${Mq.max.sm} {
     width: 100%;
-    .right-logo {
-      width: 22rem;
-      display: grid;
-    }
     button.ibpmenu {
       display: initial;
     }
@@ -58,19 +54,19 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
   } = useStoreState((s) => s);
 
   return (
-    <Logo>
-      <div className="right-logo">
+    <Box w="inherit" display={{ lg: "flex", sm: "flex", xs: "grid" }} alignItems="center">
+      <Logo>
         <LocalLink href="/" prefixGroup={true}>
           <Link>
             <img src={`${icon}?w=128`} alt={name} />
             <Text ml={2}>{name}</Text>
           </Link>
         </LocalLink>
-        {isLoggedIn && id && <JoinUserGroup />}
-      </div>
-      <button className="ibpmenu" onClick={onToggle} aria-label="toggle primary menu">
-        <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
-      </button>
-    </Logo>
+        <button className="ibpmenu" onClick={onToggle} aria-label="toggle primary menu">
+          <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
+        </button>
+      </Logo>
+      {isLoggedIn && id && <JoinUserGroup />}
+    </Box>
   );
 }
