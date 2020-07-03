@@ -145,3 +145,25 @@ export const axVerifyRequest = async (token) => {
     return { success: false };
   }
 };
+
+export const axCheckUserGroupMember = async (userGroupId, userId) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USER}/v1/user/groupMember`, {
+      params: { userGroupId, userId }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+export const axJoinUserGroup = async (userGroupId) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/join/${userGroupId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
