@@ -1,5 +1,5 @@
 import { ENDPOINT } from "@static/constants";
-import http, { plainHttp } from "@utils/http";
+import http from "@utils/http";
 import notification from "@utils/notification";
 
 export const axSaveFCMToken = async (payload) => {
@@ -13,7 +13,7 @@ export const axSaveFCMToken = async (payload) => {
 
 export const axSendPushNotification = async (payload) => {
   try {
-    await plainHttp.post(`${ENDPOINT.USER}/v1/user/send-notification`, payload);
+    await http.post(`${ENDPOINT.USER}/v1/user/send-notification`, payload);
     return { success: true };
   } catch (e) {
     notification(e.response.data.message);
