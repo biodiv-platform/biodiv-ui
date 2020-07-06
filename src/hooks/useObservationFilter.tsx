@@ -13,6 +13,11 @@ import { useImmer } from "use-immer";
 
 import useDidUpdateEffect from "./useDidUpdateEffect";
 
+const deDupeObservations = (existingObservations, newObservations) => {
+  const existingIDs = existingObservations.map(({ observationId }) => observationId);
+  return newObservations.filter(({ observationId }) => !existingIDs.includes(observationId));
+};
+
 interface ObservationFilterContextProps {
   filter?: ObservationFilterProps;
   observationData?: ObservationData;
@@ -86,10 +91,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         if (data.geohashAggregation) {
           _draft.l = data.geohashAggregation;
         } else if (data.observationList.length) {
-          _draft.l.push(...data.observationList);
+          _draft.l.push(...deDupeObservations(_draft.l, data.observationList));
           _draft.hasMore = data.observationList.length === Number(filter.f.max);
         } else {
-          _draft.ml.push(...data.observationListMinimal);
+          _draft.ml.push(...deDupeObservations(_draft.ml, data.observationListMinimal));
           _draft.hasMore = data.observationListMinimal.length === Number(filter.f.max);
         }
         _draft.n = data.totalCount;

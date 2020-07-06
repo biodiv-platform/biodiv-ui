@@ -53,8 +53,8 @@ const MyUploadsImages = ({ onDone }) => {
         gridTemplateColumns={["repeat(3,1fr)", "repeat(4,1fr)", "repeat(5,1fr)", `repeat(8,1fr)`]}
       >
         <DropTarget />
-        {assets.map((asset, index) => (
-          <Checkbox key={asset.hashKey} value={asset.hashKey} index={index} asset={asset} />
+        {assets.map((asset) => (
+          <Checkbox key={asset.hashKey} value={asset.hashKey} asset={asset} />
         ))}
       </CheckboxGroup>
     </Box>

@@ -7,6 +7,7 @@ import { ObservationUpdateData } from "@interfaces/observation";
 import { axUpdateObservation } from "@services/observation.service";
 import { formatDate, parseDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
+import { nanoid } from "nanoid";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -55,6 +56,7 @@ export default function ObservationEditForm({
       ...observation,
       resources: observation.resources.map((r) => ({
         ...r,
+        hashKey: nanoid(),
         status: AssetStatus.Uploaded,
         licenceId: r.licenceId.toString(),
         isUsed: 1,

@@ -64,7 +64,9 @@
       "MAP": {
         "TITLE": "Map"
       },
-      "STATE": "State",
+      "STATE": {
+        "TITLE": "State"
+      },
       "TAHSIL": "Tahsil",
       "TITLE": "Location"
     },
