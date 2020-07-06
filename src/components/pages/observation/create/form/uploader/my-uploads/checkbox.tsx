@@ -34,7 +34,7 @@ const ImageBox = styled.div`
   }
 `;
 
-const Checkbox = ({ asset, index, ...props }) => {
+const Checkbox = ({ asset, ...props }) => {
   const { user } = useStoreState((s) => s);
   const { t } = useTranslation();
 

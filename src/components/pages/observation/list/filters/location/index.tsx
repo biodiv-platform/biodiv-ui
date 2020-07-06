@@ -4,18 +4,23 @@ import React from "react";
 import SubAccordion from "../shared/sub-accordion";
 import FilterMultiSelectPanel from "./location-multi-select";
 import MapAreaFilter from "./map-area";
+import CheckboxFilterPanel from "../shared/checkbox";
 
 export default function LocationFilter() {
   const { states } = useObservationFilter();
+  const STATE_OPTIONS = states.map((state) => ({ label: state, value: state, stat: state }));
 
   return (
     <SubAccordion>
       <MapAreaFilter />
 
-      <FilterMultiSelectPanel
+      <CheckboxFilterPanel
+        translateKey="FILTERS.LOCATION.STATE."
         filterKey="state"
-        translateKey="FILTERS.LOCATION.STATE"
-        options={states}
+        options={STATE_OPTIONS}
+        statKey="groupState"
+        skipOptionsTranslation={true}
+        showSearch={true}
       />
 
       <FilterMultiSelectPanel filterKey="district" translateKey="FILTERS.LOCATION.DISTRICT" />

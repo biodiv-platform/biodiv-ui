@@ -84,7 +84,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
         top="0"
         right="0"
         size="lg"
-        onClick={() => removeObservationAsset(index)}
+        onClick={() => removeObservationAsset(resource.hashKey)}
       />
       <Flex direction="column" flexShrink={0}>
         <Select
