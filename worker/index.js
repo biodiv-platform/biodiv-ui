@@ -10,7 +10,13 @@ const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler((payload) => {
   const { title, body, icon } = payload.notification;
-  return self.registration.showNotification(title, { body, icon });
+  return self.registration.showNotification(title, {
+    body,
+    icon,
+    renotify: false,
+
+    tag: "same_tag_for_all_notifications"
+  });
 });
 
 self.addEventListener("message", (event) => {
