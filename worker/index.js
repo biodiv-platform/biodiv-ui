@@ -21,6 +21,7 @@ self.addEventListener("message", (event) => {
 });
 
 self.addEventListener("notificationclick", function (event) {
+  const url = new URL("./", location);
   event.notification.close();
   const promiseChain = clients
     .matchAll({
@@ -31,7 +32,7 @@ self.addEventListener("notificationclick", function (event) {
       let matchingClient = null;
       for (let i = 0; i < windowClients.length; i++) {
         const windowClient = windowClients[i];
-        if (windowClient.url === feClickAction) {
+        if (windowClient.url === url) {
           matchingClient = windowClient;
           break;
         }
@@ -39,7 +40,7 @@ self.addEventListener("notificationclick", function (event) {
       if (matchingClient) {
         return matchingClient.focus();
       } else {
-        return clients.openWindow(feClickAction);
+        return clients.openWindow(url);
       }
     });
   event.waitUntil(promiseChain);
