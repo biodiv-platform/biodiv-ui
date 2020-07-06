@@ -11,12 +11,12 @@ import useTranslation from "@configs/i18n/useTranslation";
 import { axCreateUser } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import { useStoreState } from "easy-peasy";
 import useNookies from "next-nookies-persist";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
-
 import LocationPicker from "./location";
 import {
   GENDER_OPTIONS,
@@ -33,6 +33,7 @@ function SignUpForm() {
   const [user, setUser] = useState(null);
   const { isOpen, onClose, onOpen } = useDisclosure(false);
   const [isOAuth, setIsOAuth] = useState(false);
+  const groupId = useStoreState((s) => s?.currentGroup?.id);
 
   const hForm = useForm({
     mode: "onBlur",
@@ -78,10 +79,14 @@ function SignUpForm() {
   }, [watchAuth]);
 
   const handleOnSubmit = async (v) => {
+    const verificationType =
+      v.email && v.mobileNumber ? v.verificationType : VERIFICATION_TYPE[v.email ? 0 : 1].value;
     const payload = {
-      ...v,
-      verificationType:
-        v.email && v.mobileNumber ? v.verificationType : VERIFICATION_TYPE[v.email ? 0 : 1].value
+      credentials: {
+        ...v,
+        verificationType
+      },
+      groupId
     };
     const { success, data } = await axCreateUser(payload);
     if (success && data?.status) {

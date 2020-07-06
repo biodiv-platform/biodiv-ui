@@ -12,7 +12,7 @@ import { stringify } from "query-string";
  */
 export const axLogin = async (payload) => {
   try {
-    const { data } = await axios.post(`${ENDPOINT.USER}/v1/authenticate/login`, stringify(payload));
+    const { data } = await axios.post(`${ENDPOINT.USERGROUP}/v1/group/login`, stringify(payload));
     return { success: true, data };
   } catch (e) {
     return { success: false, data: e.response.data };
@@ -31,7 +31,7 @@ export const axGetUser = async () => {
 
 export const axCreateUser = async (payload) => {
   try {
-    const { data } = await axios.post(`${ENDPOINT.USER}/v1/authenticate/signup`, payload);
+    const { data } = await axios.post(`${ENDPOINT.USERGROUP}/v1/group/register`, payload);
     return { success: true, data };
   } catch (e) {
     notification(e.response.data.message);
@@ -42,7 +42,7 @@ export const axCreateUser = async (payload) => {
 export const axValidateUser = async (payload) => {
   try {
     const { data } = await axios.post(
-      `${ENDPOINT.USER}/v1/authenticate/validate`,
+      `${ENDPOINT.USERGROUP}/v1/group/verify-user`,
       stringify(payload)
     );
     return { success: true, data };
