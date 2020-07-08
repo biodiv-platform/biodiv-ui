@@ -168,7 +168,7 @@
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },
-    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator.",
+    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
     "CREATE": {
       "ERROR": "There was some error while creating Group",
       "SUCCESS": "Group Created Successfully",
@@ -190,7 +190,7 @@
     "JOIN_WITHOUT_INVITATION": "Allow user to join the group without invitaion",
     "MEMBER": {
       "JOINED": "Group joined successfully",
-      "JOINED_ERROR": "Unbale to join Group",
+      "JOINED_ERROR": "Unable to join Group",
       "REQUESTED": "Group join request sent"
     },
     "NAME": "Group Name",
