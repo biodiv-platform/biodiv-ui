@@ -5,6 +5,7 @@ import { axGetspeciesGroups } from "@services/observation.service";
 import {
   axGetGroupAdministratorsByGroupId,
   axGetGroupEditInfoByGroupId,
+  axGetUserGroupCustomField,
   axGroupList
 } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
@@ -27,12 +28,16 @@ GroupEditPage.getInitialProps = async (ctx) => {
   // This can throw error if user is not authorized
   const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id, ctx);
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id, ctx);
-
-  if (s1 && s2) {
+  const { success: s3, data: customFieldList } = await axGetUserGroupCustomField(
+    currentGroup.id,
+    ctx
+  );
+  if (s1 && s2 && s3) {
     return {
       habitats: habitatList,
       speciesGroups,
       groupInfo,
+      customFieldList,
       userGroupId: currentGroup.id,
       founders: data.founderList.map(({ name: label, id: value }) => ({ label, value })),
       moderators: data.moderatorList.map(({ name: label, id: value }) => ({ label, value }))

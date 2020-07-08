@@ -5,10 +5,12 @@ import React from "react";
 
 import UserGroupEditForm from "./form";
 import GroupAdministratorsEditForm from "./group-administrator-edit-form";
+import AddCustomField from "@components/pages/group/common/add-custom-field";
 
 interface GroupEditPageProps {
   speciesGroups;
   habitats;
+  customFieldList;
   groupInfo;
   founders;
   moderators;
@@ -17,6 +19,7 @@ interface GroupEditPageProps {
 
 export default function EditGroupPageComponent({
   speciesGroups,
+  customFieldList,
   habitats,
   groupInfo,
   founders,
@@ -45,6 +48,7 @@ export default function EditGroupPageComponent({
         founders={founders}
         moderators={moderators}
       />
+      <AddCustomField userGroupId={userGroupId} customFieldList={customFieldList} />
     </div>
   );
 }

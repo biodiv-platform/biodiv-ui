@@ -43,7 +43,7 @@ const TextBoxField = ({
       name={name}
       id={id || name}
       placeholder={label}
-      ref={form.register}
+      ref={form.register()}
       type={type}
       isDisabled={disabled}
     />

@@ -166,6 +166,16 @@
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },
+    "CUSTOM_FIELD": {
+      "TITLE": "Custom Fields",
+      "NAME": "Name",
+      "NOTES": "Notes",
+      "DATA_TYPE": "Data Types",
+      "FIELD_TYPE": "Field Types",
+      "SAVE": "Save",
+      "ALLOW_PARTICIPANT": "Allow Participation ?",
+      "IS_MANDATORY": "Mandatory ?"
+    },
     "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator.",
     "CREATE": {
       "ERROR": "There was some error while creating Group",
