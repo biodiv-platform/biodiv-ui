@@ -1,3 +1,9 @@
+export interface FirebaseDTO {
+  token?: string;
+  title?: string;
+  body?: string;
+  icon?: string;
+}
 export interface FirebaseTokens {
   id?: number; // int64
   token?: string;

@@ -28,15 +28,18 @@ const SpeciesGroupsFilter = () => {
       gridGap={2}
       gridTemplateColumns="repeat(5,1fr)"
     >
-      {speciesGroup.slice(1).map((o) => (
-        <CustomCheckbox
-          key={o.id}
-          id={o.id.toString()}
-          value={o.id.toString()}
-          label={o.name}
-          stat={observationData.ag.groupSpeciesName[o.name]}
-        />
-      ))}
+      {speciesGroup
+        .slice(1)
+        .sort((a, b) => a.order - b.order)
+        .map((o) => (
+          <CustomCheckbox
+            key={o.id}
+            id={o.id.toString()}
+            value={o.id.toString()}
+            label={o.name}
+            stat={observationData.ag.groupSpeciesName[o.name]}
+          />
+        ))}
     </CheckboxGroup>
   );
 };
