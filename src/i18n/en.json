@@ -168,11 +168,29 @@
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },
-    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
+    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator.",
     "CREATE": {
       "ERROR": "There was some error while creating Group",
       "SUCCESS": "Group Created Successfully",
       "TITLE": "Create a Group"
+    },
+    "CUSTOM_FIELD": {
+      "ADD_FAILURE": "Unable to Add  Custom Field",
+      "ADD_SUCCESS": "Successfully Added Custom Field",
+      "ALLOW_PARTICIPANT": "Allow Participation",
+      "DATA_TYPE": "Data Types",
+      "EXIST": "Custom Field already exists",
+      "FIELD_TYPE": "Field Types",
+      "IS_MANDATORY": "Is Mandatory",
+      "NAME": "Name",
+      "NOTES": "Notes",
+      "REMOVE_FAILURE": "Unable to remove Custom Field",
+      "REMOVE_SUCCESS": "Successfully removed Custom Field",
+      "REORDER_FAILURE": "Unable ro reorder",
+      "REORDER_SUCCESS": "Successfully reordered Custom Field",
+      "SAVE": "Save",
+      "TITLE": "Custom Fields",
+      "UNITS": "Units"
     },
     "DELETE_MEMBER": "Are you sure you want to delete?",
     "DESCRIPTION": "Description",
@@ -522,6 +540,7 @@
       "LABEL": "Drag file(s) here",
       "LABEL_RELEASE": "Ready to upload",
       "PROCESSING": "Processing",
+      "UPLOAD": "Upload",
       "UPLOADING": "Uploading..."
     },
     "USE_DMS": "Use DMS",

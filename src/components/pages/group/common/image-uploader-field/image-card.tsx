@@ -2,8 +2,8 @@ import { CloseButton, Flex, Image } from "@chakra-ui/core";
 import { getGroupImageThumb } from "@utils/media";
 import React, { useMemo } from "react";
 
-export default function ResourceCard({ resource, setValue }) {
-  const imageURL = useMemo(() => getGroupImageThumb(resource, 300), [resource]);
+export default function ResourceCard({ resource, setValue, imageSize, simpleUpload }) {
+  const imageURL = useMemo(() => getGroupImageThumb(resource, imageSize), [resource]);
 
   const handleRemovePhoto = () => {
     setValue(null);
@@ -12,11 +12,11 @@ export default function ResourceCard({ resource, setValue }) {
   return (
     <Flex
       className="fade"
-      h="13rem"
+      h={simpleUpload ? "" : "13rem"}
       borderRadius="lg"
       bg="white"
       flexDir="column"
-      border="1px solid"
+      border={simpleUpload ? "" : "1px solid"}
       borderColor="gray.300"
       position="relative"
       p={2}

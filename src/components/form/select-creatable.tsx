@@ -1,8 +1,7 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormContextValues } from "react-hook-form";
-import Select from "react-select";
-
+import CreatableSelect from "react-select/creatable";
 import { selectStyles } from "./configs";
 
 interface ISelectProps {
@@ -12,12 +11,12 @@ interface ISelectProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
-  handleChange?;
   selectRef?;
+  handleChange?;
   form: FormContextValues<any>;
 }
 
-const SelectInputField = ({
+const SelectCreateable = ({
   name,
   label,
   hint,
@@ -30,18 +29,20 @@ const SelectInputField = ({
   ...props
 }: ISelectProps) => {
   const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
-
+  const [value, setValue] = useState({});
   const onChange = ({ value }) => {
     if (handleChange) {
       handleChange(value);
     }
     form.setValue(name, value);
+    setValue(options.find((v) => v.value === value));
     form.triggerValidation(name);
   };
 
   useEffect(() => {
     form.register({ name });
-  }, [form.register]);
+    setValue(initialValue);
+  }, [form.register, initialValue]);
 
   return (
     <FormControl
@@ -52,13 +53,14 @@ const SelectInputField = ({
       {...props}
     >
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Select
+      <CreatableSelect
         inputId={name}
         id={name}
         name={name}
         formatCreateLabel={(v) => `Add "${v}"`}
         options={options}
         defaultValue={initialValue}
+        value={value}
         isSearchable={true}
         isDisabled={disabled}
         onChange={onChange}
@@ -71,4 +73,4 @@ const SelectInputField = ({
   );
 };
 
-export default SelectInputField;
+export default SelectCreateable;
