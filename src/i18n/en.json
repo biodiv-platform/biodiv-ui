@@ -31,7 +31,10 @@
         "HEADING": "Send Push-Notifications",
         "FORM": {
           "BODY": "Body",
-          "TITLE": "Title"
+          "ERROR": "Could not save token",
+          "ICON": "Icon",
+          "TITLE": "Title",
+          "TOKEN_SAVED": "Token Saved"
         }
       }
     }

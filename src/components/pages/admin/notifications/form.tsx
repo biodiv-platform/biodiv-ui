@@ -6,28 +6,31 @@ import { axSendPushNotification } from "@services/user.service";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
+import notification from "@utils/notification";
 
 function NotificationsForm() {
   const { t } = useTranslation();
   const hForm = useForm({
     validationSchema: Yup.object().shape({
       title: Yup.string().required(),
-      body: Yup.string().required()
+      body: Yup.string().required(),
+      icon: Yup.string()
     })
   });
 
   const handleOnSubmit = async (v) => {
     const payload = {
       title: v.title,
-      body: v.body
+      body: v.body,
+      icon: v.icon
     };
 
     const { success } = await axSendPushNotification(payload);
 
     if (success) {
-      console.debug("Success");
+      notification(t("ADMIN.PAGES.NOTIFICATION.FORM.TOKEN_SAVED"));
     } else {
-      console.debug("Failed");
+      notification(t("ADMIN.PAGES.NOTIFICATION.FORM.ERROR"));
     }
   };
 
@@ -43,6 +46,12 @@ function NotificationsForm() {
         name="body"
         type="text"
         label={t("ADMIN.PAGES.NOTIFICATION.FORM.BODY")}
+        form={hForm}
+      />
+      <TextBox
+        name="icon"
+        type="text"
+        label={t("ADMIN.PAGES.NOTIFICATION.FORM.ICON")}
         form={hForm}
       />
       <Flex justifyContent="space-between" alignItems="center">

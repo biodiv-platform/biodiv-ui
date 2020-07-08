@@ -9,14 +9,8 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler((payload) => {
-  const { title, body, icon } = payload.notification;
-  return self.registration.showNotification(title, {
-    body,
-    icon,
-    renotify: false,
-
-    tag: "same_tag_for_all_notifications"
-  });
+  const { title, body, icon, click_action } = payload.notification;
+  return self.registration.showNotification(title, { body, icon, click_action });
 });
 
 self.addEventListener("message", (event) => {
