@@ -308,6 +308,7 @@ export interface UserGroupIbp {
   name?: string;
   icon?: string;
   webAddress?: string;
+  isParticipatory?: boolean;
 }
 export interface UserGroupInvitationData {
   userGroupId?: number; // int64

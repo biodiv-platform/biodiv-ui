@@ -627,6 +627,8 @@ export interface SimilarObservation {
 export interface SpeciesGroup {
   id?: number; // int64
   name?: string;
+  parentGroupId?: number; // int64
+  groupOrder?: number; // int32
 }
 export interface Tags {
   id?: number; // int64
@@ -706,6 +708,7 @@ export interface UserGroupIbp {
   name?: string;
   icon?: string;
   webAddress?: string;
+  isParticipatory?: boolean;
 }
 export interface UserGroupMailData {
   id?: number; // int64
