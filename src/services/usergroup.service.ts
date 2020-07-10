@@ -167,27 +167,3 @@ export const axJoinUserGroup = async (userGroupId) => {
     return { success: false };
   }
 };
-
-export const axGetUserGroupCustomField = async (userGroupId, ctx) => {
-  try {
-    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/customfield/group/${userGroupId}`, {
-      params: { ctx }
-    });
-    return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false, data: e };
-  }
-};
-
-export const axRemoveCustomField = async (userGroupId, customFieldId) => {
-  try {
-    const { data } = await http.put(
-      `${ENDPOINT.USERGROUP}/v1/customfield/remove/${userGroupId}/${customFieldId}`
-    );
-    return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false, data: [] };
-  }
-};

@@ -1,17 +1,20 @@
-import React, { useState } from "react";
-import { Stack, Heading, Text, SimpleGrid, IconButton } from "@chakra-ui/core";
-import notification, { NotificationType } from "@utils/notification";
-import { axRemoveCustomField } from "@services/usergroup.service";
+import { Heading, IconButton, SimpleGrid, Stack, Text } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import { axRemoveCustomField } from "@services/customfield.service";
+import notification, { NotificationType } from "@utils/notification";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import arrayMove from "array-move";
+import React, { useEffect, useState } from "react";
 
-function Feature({ customField, onDelete }) {
+const CustomFieldDetails = SortableElement(({ itemDetails, onDelete }) => {
+  const { customFields } = itemDetails;
   return (
     <SimpleGrid color="grey" p={3} columns={6} shadow="md" borderWidth="1px">
-      <Text>{customField.name}</Text>
-      <Text>{customField.dataType}</Text>
-      <Text>{customField.fieldType}</Text>
-      <Text>{customField.allowedParticipation ? "Yes" : "No"}</Text>
-      <Text>{customField.isMandatory ? "Yes" : "No"}</Text>
+      <Text>{customFields.name}</Text>
+      <Text>{customFields.dataType}</Text>
+      <Text>{customFields.fieldType}</Text>
+      <Text>{itemDetails.allowedParticipation ? "Yes" : "No"}</Text>
+      <Text>{itemDetails.isMandatory ? "Yes" : "No"}</Text>
       <IconButton
         aria-label="delete-field"
         onClick={onDelete}
@@ -21,11 +24,12 @@ function Feature({ customField, onDelete }) {
       />
     </SimpleGrid>
   );
-}
+});
 
-export default function CustomFieldList({ userGroupId, customFieldList }) {
+const CustomFieldList = SortableContainer(({ userGroupId, customFieldList }) => {
   const [list, setList] = useState(customFieldList);
   const { t } = useTranslation();
+
   const deleteCustomField = async (index) => {
     const { success } = await axRemoveCustomField(userGroupId, index);
     if (success) {
@@ -35,6 +39,11 @@ export default function CustomFieldList({ userGroupId, customFieldList }) {
       notification(t("GROUP.EDIT.ERROR", NotificationType.Error));
     }
   };
+
+  useEffect(() => {
+    setList(customFieldList);
+  }, [customFieldList]);
+
   return (
     <Stack spacing={4}>
       <SimpleGrid p={3} alignItems="center" columns={6} shadow="md" borderWidth="1px">
@@ -44,15 +53,25 @@ export default function CustomFieldList({ userGroupId, customFieldList }) {
         <Heading size="md">Participation</Heading>
         <Heading size="md">Mandatory</Heading>
       </SimpleGrid>
-      {list.map((item) => (
-        <Feature
+      {list.map((item, index) => (
+        <CustomFieldDetails
           key={item.customFields.id}
-          onDelete={() => {
-            deleteCustomField(item.customFields.id);
-          }}
-          customField={item.customFields}
+          index={index}
+          onDelete={() => deleteCustomField(item.customFields.id)}
+          itemDetails={item}
         />
       ))}
     </Stack>
   );
-}
+});
+
+const SortableCustomFieldList = (props) => {
+  const [items, setItems] = useState(props.customFieldList);
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setItems(arrayMove(items, oldIndex, newIndex));
+  };
+
+  return <CustomFieldList {...props} onSortEnd={onSortEnd} />;
+};
+
+export default SortableCustomFieldList;

@@ -10,17 +10,17 @@ export const STATIC_GROUP_PAYLOAD = {
 };
 
 export const dataType = [
-  { label: "Integer", value: "integer" },
-  { label: "Decimal", value: "decimal" },
-  { label: "Text", value: "text" },
-  { label: "Date", value: "date" }
+  { label: "Integer", value: "INTEGER" },
+  { label: "Decimal", value: "DECIMAL" },
+  { label: "Text", value: "STRING" },
+  { label: "Date", value: "DATE" }
 ];
 
 export const fieldType = [
-  { label: "Single categorical", value: "singleCategorical" },
-  { label: "Multiple Categorical", value: "multipleCategorical" },
-  { label: "Range", value: "range" },
-  { label: "Textbox", value: "textbox" }
+  { label: "Single categorical", value: "SINGLE CATEGORICAL" },
+  { label: "Multiple Categorical", value: "MULTIPLE CATEGORICAL" },
+  { label: "Range", value: "RANGE" },
+  { label: "Textbox", value: "FIELD TEXT" }
 ];
 
 export const booleanOption = [

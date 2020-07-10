@@ -5,9 +5,9 @@ import { axGetspeciesGroups } from "@services/observation.service";
 import {
   axGetGroupAdministratorsByGroupId,
   axGetGroupEditInfoByGroupId,
-  axGetUserGroupCustomField,
   axGroupList
 } from "@services/usergroup.service";
+import { axGetUserGroupCustomField } from "@services/customfield.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
