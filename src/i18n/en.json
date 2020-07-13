@@ -31,10 +31,10 @@
         "HEADING": "Send Push-Notifications",
         "FORM": {
           "BODY": "Body",
-          "ERROR": "Could not save token",
+          "ERROR": "Could not send notification",
           "ICON": "Icon",
-          "TITLE": "Title",
-          "TOKEN_SAVED": "Token Saved"
+          "SUCCESS": "Notification sent",
+          "TITLE": "Title"
         }
       }
     }
@@ -333,7 +333,10 @@
   "LOADING": "Loading...",
   "NEXT": "Next",
   "NOTIFICATIONS": {
-    "INVALID_CREDENTIALS": "The username or password you entered is incorrect."
+    "INVALID_CREDENTIALS": "The username or password you entered is incorrect.",
+    "TOKEN_ERROR": "Error fetching token",
+    "TOKEN_NOT_SAVED": "Could not save token",
+    "TOKEN_SAVED": "Token saved"
   },
   "OBSERVATION": {
     "ACCEPTED": "Accepted",

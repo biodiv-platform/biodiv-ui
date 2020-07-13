@@ -3,10 +3,10 @@ import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
 import { axSendPushNotification } from "@services/user.service";
+import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import notification from "@utils/notification";
 
 function NotificationsForm() {
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ function NotificationsForm() {
     const { success } = await axSendPushNotification(payload);
 
     if (success) {
-      notification(t("ADMIN.PAGES.NOTIFICATION.FORM.TOKEN_SAVED"));
+      notification(t("ADMIN.PAGES.NOTIFICATION.FORM.SUCCESS"), NotificationType.Success);
     } else {
       notification(t("ADMIN.PAGES.NOTIFICATION.FORM.ERROR"));
     }
