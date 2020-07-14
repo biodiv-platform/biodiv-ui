@@ -29,6 +29,7 @@ const DescriptionBox = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
+    justify-items: center;
     a,
     img {
       display: inline;
