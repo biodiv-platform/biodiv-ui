@@ -14,7 +14,8 @@ function NotificationsForm() {
     validationSchema: Yup.object().shape({
       title: Yup.string().required(),
       body: Yup.string().required(),
-      icon: Yup.string()
+      icon: Yup.string(),
+      clickAction: Yup.string()
     })
   });
 
@@ -22,7 +23,8 @@ function NotificationsForm() {
     const payload = {
       title: v.title,
       body: v.body,
-      icon: v.icon
+      icon: v.icon,
+      clickAction: v.clickAction
     };
 
     const { success } = await axSendPushNotification(payload);
@@ -52,6 +54,12 @@ function NotificationsForm() {
         name="icon"
         type="text"
         label={t("ADMIN.PAGES.NOTIFICATION.FORM.ICON")}
+        form={hForm}
+      />
+      <TextBox
+        name="clickAction"
+        type="text"
+        label={t("ADMIN.PAGES.NOTIFICATION.FORM.LINK")}
         form={hForm}
       />
       <Flex justifyContent="space-between" alignItems="center">

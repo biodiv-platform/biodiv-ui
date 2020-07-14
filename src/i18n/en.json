@@ -33,6 +33,7 @@
           "BODY": "Body",
           "ERROR": "Could not send notification",
           "ICON": "Icon",
+          "LINK": "Link",
           "SUCCESS": "Notification sent",
           "TITLE": "Title"
         }
