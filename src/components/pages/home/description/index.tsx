@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 import { getInjectableHTML } from "@utils/text";
 import { Mq } from "mq-styled-components";
@@ -8,7 +9,6 @@ const DescriptionBox = styled.div`
 
   p {
     margin-bottom: 1rem;
-    line-height: 1.2rem;
     font-size: 1.125rem;
     color: var(--gray-600);
   }
@@ -45,10 +45,11 @@ const DescriptionBox = styled.div`
 
 export default function HomeDescription({ description }) {
   return (
-    <DescriptionBox
+    <Box
+      as={DescriptionBox}
       dangerouslySetInnerHTML={{
         __html: getInjectableHTML(description)
       }}
-    />
+    ></Box>
   );
 }
