@@ -25,7 +25,7 @@ export const getInjectableHTML = (nHtml) => {
             a: ["href", "title", "class", "rel", "target"],
             p: [],
             br: [],
-            div: []
+            div: ["class"]
           },
           stripIgnoreTag: true
         })
