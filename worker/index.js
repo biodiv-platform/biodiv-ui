@@ -28,7 +28,7 @@ self.addEventListener("notificationclick", function (event) {
       includeUncontrolled: true
     })
     .then(() => {
-      return clients.openWindow(feClickAction);
+      return clients.openWindow(event.notification.click_action);
     });
   event.waitUntil(promiseChain);
 });
