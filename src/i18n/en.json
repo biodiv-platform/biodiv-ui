@@ -173,14 +173,19 @@
       "TITLE": "Create a Group"
     },
     "CUSTOM_FIELD": {
+      "ADD_FAILURE": "Unable to Add  Custom Field",
+      "ADD_SUCCESS": "Successfully Added Custom Field",
       "ALLOW_PARTICIPANT": "Allow Participation",
-      "CUSTOM_FIELD_FAILURE": "Unable to create new Custom Field",
-      "CUSTOM_FIELD_SUCCESS": "Successfully created Custom Field",
       "DATA_TYPE": "Data Types",
+      "EXIST": "Custom Field already exists",
       "FIELD_TYPE": "Field Types",
       "IS_MANDATORY": "Is Mandatory",
       "NAME": "Name",
       "NOTES": "Notes",
+      "REMOVE_FAILURE": "Unable to remove Custom Field",
+      "REMOVE_SUCCESS": "Successfully removed Custom Field",
+      "REORDER_FAILURE": "Unable ro reorder",
+      "REORDER_SUCCESS": "Successfully reordered Custom Field",
       "SAVE": "Save",
       "TITLE": "Custom Fields",
       "UNITS": "Units"

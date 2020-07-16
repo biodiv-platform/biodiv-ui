@@ -5,25 +5,32 @@ import SubmitButton from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { axAddCustomField, axAddExsistingCustomField } from "@services/customfield.service";
+import notification, { NotificationType } from "@utils/notification";
 import { useStoreState } from "easy-peasy";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import ImageUploaderField from "../image-uploader-field";
-import { dataType, fieldType } from "../static";
+import { dataType, defaultCustomFieldFormValue, fieldType } from "../static";
 import OptionsField from "./options-field";
-import { axAddCustomField } from "@services/customfield.service";
-import notification, { NotificationType } from "@utils/notification";
 
-export default function AddCustomField({ updateCustomFieldList }) {
-  const { t } = useTranslation();
+export default function AddCustomField({
+  updateCustomFieldList,
+  allCustomField,
+  existingCustomField
+}) {
   const [showOption, setShowOption] = useState<boolean>();
   const [fieldTypes, setFilterTypes] = useState(fieldType);
   const [dataTypes, setDataTypes] = useState(dataType);
+  const [defaultValues, setDefaultValue] = useState(defaultCustomFieldFormValue);
+  const [customFieldExist, setCustomFieldExist] = useState<boolean>();
+  const { t } = useTranslation();
+
   const categoricalType = ["SINGLE CATEGORICAL", "MULTIPLE CATEGORICAL"];
   const { id } = useStoreState((s) => s.currentGroup);
-  // const router = useLocalRouter();
+
   const hForm = useForm({
     mode: "onChange",
     validationSchema: Yup.object().shape({
@@ -36,39 +43,55 @@ export default function AddCustomField({ updateCustomFieldList }) {
       iconURL: Yup.string().nullable(),
       dataType: Yup.string().required(),
       fieldType: Yup.string().required(),
+      defaultValue: Yup.boolean().nullable(),
       values: Yup.lazy((value) => {
         if (value) {
           return Yup.array().of(
             Yup.object().shape({
               value: Yup.string().required(),
-              iconURL: Yup.string(),
-              notes: Yup.string().nullable(),
-              isDefault: Yup.boolean().nullable()
+              iconURL: Yup.string().nullable(),
+              notes: Yup.string().nullable()
             })
           );
         }
         return Yup.mixed().notRequired();
       })
     }),
-    defaultValues: {
-      allowedParticipation: true,
-      isMandatory: true,
-      values: [{ name: "val1" }, { name: "val2" }]
-    }
+    defaultValues
   });
+
   const handleFormSubmit = async (value) => {
-    const { success, data } = await axAddCustomField({ ...value, userGroupId: id });
+    if (existingCustomField.some((o) => o?.customFields?.name === value.name)) {
+      notification(t("GROUP.CUSTOM_FIELD.EXIST"));
+      return;
+    }
+    const { isMandatory, allowedParticipation } = value;
+    const payload = [
+      {
+        customFieldId: defaultValues["id"],
+        displayOrder: existingCustomField.length + 1,
+        isMandatory,
+        allowedParticipation
+      }
+    ];
+
+    const { success, data } = customFieldExist
+      ? await axAddExsistingCustomField(id, payload)
+      : await axAddCustomField({
+          ...value,
+          userGroupId: id,
+          displayOrder: existingCustomField.length + 1
+        });
     if (success) {
-      notification(t("GROUP.EDIT.SUCCESS"), NotificationType.Success);
+      notification(t("GROUP.CUSTOM_FIELD.ADD_SUCCESS"), NotificationType.Success);
       updateCustomFieldList(0, data);
     } else {
-      notification(t("GROUP.EDIT.ERROR"));
+      notification(t("GROUP.CUSTOM_FIELD.ADD_FAILURE"));
     }
   };
 
   const handleFieldChange = (value) => {
     setShowOption(categoricalType.includes(value));
-
     const resDataType =
       value === "RANGE"
         ? dataType.filter((item) => item.value !== "STRING")
@@ -90,15 +113,45 @@ export default function AddCustomField({ updateCustomFieldList }) {
     setFilterTypes(resFilterType);
   };
 
+  //populate defaultValues by custom field
+  const handleCustomFieldName = (name) => {
+    const defaultValues = allCustomField.find((item) => item.customFields.name === name);
+    if (defaultValues) {
+      const { customFields, cfValues, ...others } = defaultValues;
+      setDefaultValue({
+        ...customFields,
+        values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],
+        ...others
+      });
+      setCustomFieldExist(true);
+    } else {
+      setDefaultValue(defaultCustomFieldFormValue);
+      setCustomFieldExist(false);
+    }
+  };
+
+  useEffect(() => {
+    hForm.reset(defaultValues);
+    categoricalType.includes(defaultValues["fieldType"])
+      ? setShowOption(true)
+      : setShowOption(false);
+  }, [defaultValues]);
+
   return (
     <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
         <Box gridColumn="1/4">
-          <TextBox
+          <SelectInputField
+            handleChange={handleCustomFieldName}
             name="name"
             form={hForm}
+            options={allCustomField.map((i) => {
+              return {
+                label: i.customFields.name,
+                value: i.customFields.name
+              };
+            })}
             label={t("GROUP.CUSTOM_FIELD.NAME")}
-            isRequired={true}
           />
           <TextAreaField name="notes" form={hForm} label={t("GROUP.CUSTOM_FIELD.NOTES")} />
         </Box>
@@ -125,7 +178,7 @@ export default function AddCustomField({ updateCustomFieldList }) {
         form={hForm}
         label={t("GROUP.CUSTOM_FIELD.ALLOW_PARTICIPANT")}
       />
-      {showOption && <OptionsField name="values" form={hForm} />}
+      {showOption && <OptionsField radioGroupName="defaultValue" name="values" form={hForm} />}
       <SubmitButton form={hForm}>{t("GROUP.CUSTOM_FIELD.SAVE")}</SubmitButton>
     </form>
   );

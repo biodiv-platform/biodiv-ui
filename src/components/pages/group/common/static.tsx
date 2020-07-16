@@ -27,3 +27,9 @@ export const booleanOption = [
   { label: "True", value: true },
   { label: "False", value: false }
 ];
+
+export const defaultCustomFieldFormValue = {
+  allowedParticipation: true,
+  isMandatory: true,
+  values: [{ name: "val1" }, { name: "val2" }]
+};

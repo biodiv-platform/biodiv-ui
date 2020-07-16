@@ -10,15 +10,17 @@ import {
   TabPanels,
   Tabs
 } from "@chakra-ui/core";
-import AddCustomFieldForm from "./custom-field-form";
 import useTranslation from "@configs/i18n/useTranslation";
-import CustomFieldList from "./custom-field-list";
 import React, { useState } from "react";
 
-export default function AddCustomField({ userGroupId, customFieldList }) {
+import AddCustomFieldForm from "./custom-field-form";
+import CustomFieldList from "./custom-field-list";
+
+export default function GroupCustomField({ userGroupId, groupCustomField, allCustomField }) {
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(0);
-  const [list, setList] = useState(customFieldList);
+  const [list, setList] = useState(groupCustomField || []);
+
   const handleTabsChange = (index, latestCustomField?: any) => {
     if (latestCustomField) {
       setList(latestCustomField);
@@ -42,11 +44,19 @@ export default function AddCustomField({ userGroupId, customFieldList }) {
             <Tab>Add</Tab>
           </TabList>
           <TabPanels>
-            <TabPanel>
-              <CustomFieldList userGroupId={userGroupId} customFieldList={list} />
+            <TabPanel overflow="scroll">
+              {tabIndex === 0 && (
+                <CustomFieldList userGroupId={userGroupId} customFieldList={list} />
+              )}
             </TabPanel>
             <TabPanel>
-              <AddCustomFieldForm updateCustomFieldList={handleTabsChange} />
+              {tabIndex === 1 && (
+                <AddCustomFieldForm
+                  existingCustomField={list}
+                  allCustomField={allCustomField}
+                  updateCustomFieldList={handleTabsChange}
+                />
+              )}
             </TabPanel>
           </TabPanels>
         </Tabs>

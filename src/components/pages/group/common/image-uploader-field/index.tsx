@@ -1,4 +1,5 @@
 import { FormControl, FormLabel } from "@chakra-ui/core";
+import { getByPath } from "@utils/basic";
 import React, { useEffect, useState } from "react";
 import { FormContextValues } from "react-hook-form";
 
@@ -24,10 +25,13 @@ export default function ImageUploaderField({
   simpleUpload,
   mb = 4
 }: IDropzoneProps) {
-  const [value, setvalue] = useState(form?.control?.defaultValuesRef?.current[name] || "");
+  const [value, setvalue] = useState(
+    getByPath(form?.control?.defaultValuesRef?.current, name) || ""
+  );
 
   useEffect(() => {
     form.register({ name });
+    setvalue(getByPath(form?.control?.defaultValuesRef?.current, name));
   }, [form.register]);
 
   useEffect(() => {
