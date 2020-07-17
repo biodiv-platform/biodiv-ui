@@ -1,6 +1,6 @@
 import { Spinner } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
-import GroupCustomField from "@components/pages/group/common/add-custom-field";
+import GroupCustomField from "@components/pages/group/common/custom-field";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 

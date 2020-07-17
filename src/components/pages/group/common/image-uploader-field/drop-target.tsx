@@ -4,18 +4,11 @@ import styled from "@emotion/styled";
 import { axUploadUserGroupResource } from "@services/files.service";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { css } from "@emotion/core";
-
-const dynamicStyle = (props) =>
-  css`
-    min-height: ${props.minHeight};
-  `;
 
 const DropTargetBox = styled.div`
   border: 2px dashed var(--gray-300);
   border-radius: 0.5rem;
   padding: 1rem;
-  ${dynamicStyle};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +62,7 @@ export default function DropTarget({ setValue, nestedPath, simpleUpload }: userG
 
   return (
     <DropTargetBox
-      minHeight={simpleUpload ? "" : "13rem"}
+      style={{ minHeight: simpleUpload ? "6rem" : "13rem" }}
       {...getRootProps()}
       data-dropping={isDragActive}
     >

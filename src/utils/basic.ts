@@ -46,12 +46,17 @@ export const getGroupLink = (url): string => {
  * @param {*} path
  * @returns
  */
-export const getByPath = (obj, path, defaultValue = undefined) => {
-  const travel = (regexp) =>
-    String.prototype.split
-      .call(path, regexp)
-      .filter(Boolean)
-      .reduce((res, key) => (res !== null && res !== undefined ? res[key] : res), obj);
-  const result = travel(/[,[\]]+?/) || travel(/[,[\].]+?/);
-  return result === undefined || result === obj ? defaultValue : result;
+export const getByPath = (obj, path) => {
+  path
+    .replace(/\[/g, ".")
+    .replace(/]/g, "")
+    .split(".")
+    .forEach(function (level) {
+      if (!obj) {
+        return;
+      }
+      obj = obj[level];
+    });
+
+  return obj;
 };

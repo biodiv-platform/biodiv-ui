@@ -24,11 +24,11 @@ const TextBoxField = ({
   type = "text",
   form,
   mb = 4,
-  disabled = false,
+  disabled,
   hint,
-  isRequired = false,
+  isRequired,
   showLabel = true,
-  hidden = false,
+  hidden,
   ...props
 }: ITextBoxProps) => (
   <FormControl

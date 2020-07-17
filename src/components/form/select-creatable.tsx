@@ -4,7 +4,7 @@ import { FormContextValues } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import { selectStyles } from "./configs";
 
-interface ISelectProps {
+interface SelectCreateableFieldProps {
   name: string;
   label: string;
   mb?: number;
@@ -16,7 +16,7 @@ interface ISelectProps {
   form: FormContextValues<any>;
 }
 
-const SelectCreateable = ({
+const SelectCreateableField = ({
   name,
   label,
   hint,
@@ -27,9 +27,10 @@ const SelectCreateable = ({
   disabled = false,
   selectRef,
   ...props
-}: ISelectProps) => {
+}: SelectCreateableFieldProps) => {
   const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState(initialValue);
+
   const onChange = ({ value }) => {
     if (handleChange) {
       handleChange(value);
@@ -41,7 +42,6 @@ const SelectCreateable = ({
 
   useEffect(() => {
     form.register({ name });
-    setValue(initialValue);
   }, [form.register, initialValue]);
 
   return (
@@ -73,4 +73,4 @@ const SelectCreateable = ({
   );
 };
 
-export default SelectCreateable;
+export default SelectCreateableField;

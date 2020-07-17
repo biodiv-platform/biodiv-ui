@@ -4,7 +4,7 @@ import { FormContextValues } from "react-hook-form";
 import Select from "react-select";
 import { selectStyles } from "./configs";
 
-interface ISelectProps {
+interface SelectControlledFieldProps {
   name: string;
   label: string;
   mb?: number;
@@ -16,7 +16,7 @@ interface ISelectProps {
   form: FormContextValues<any>;
 }
 
-const SelectCreateable = ({
+const SelectControlledField = ({
   name,
   label,
   hint,
@@ -27,8 +27,9 @@ const SelectCreateable = ({
   disabled = false,
   selectRef,
   ...props
-}: ISelectProps) => {
+}: SelectControlledFieldProps) => {
   const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
+
   const [value, setValue] = useState({});
   const onChange = ({ value }) => {
     if (handleChange) {
@@ -72,4 +73,4 @@ const SelectCreateable = ({
   );
 };
 
-export default SelectCreateable;
+export default SelectControlledField;

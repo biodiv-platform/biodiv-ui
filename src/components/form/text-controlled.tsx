@@ -1,9 +1,9 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/core";
+import { getByPath } from "@utils/basic";
 import React, { useEffect, useState } from "react";
 import { FormContextValues } from "react-hook-form";
-import { getByPath } from "@utils/basic";
 
-interface ITextBoxProps {
+interface TextBoxControlledFieldProps {
   id?: string;
   name: string;
   label: string;
@@ -18,20 +18,20 @@ interface ITextBoxProps {
   hidden?;
 }
 
-const TextBoxField = ({
+const TextBoxControlledField = ({
   id,
   name,
   label,
   type = "text",
   form,
   mb = 4,
-  disabled = false,
+  disabled,
   hint,
-  isRequired = false,
+  isRequired,
   showLabel = true,
-  hidden = false,
+  hidden,
   ...props
-}: ITextBoxProps) => {
+}: TextBoxControlledFieldProps) => {
   const [value, setValue] = useState(form.control.defaultValuesRef.current[name]);
 
   useEffect(() => {
@@ -57,9 +57,7 @@ const TextBoxField = ({
         id={id || name}
         placeholder={label}
         value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
+        onChange={(e) => setValue(e.target.value)}
         type={type}
         isDisabled={disabled}
       />
@@ -69,4 +67,4 @@ const TextBoxField = ({
   );
 };
 
-export default TextBoxField;
+export default TextBoxControlledField;

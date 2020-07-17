@@ -168,27 +168,43 @@
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },
-    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator.",
+    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
     "CREATE": {
       "ERROR": "There was some error while creating Group",
       "SUCCESS": "Group Created Successfully",
       "TITLE": "Create a Group"
     },
     "CUSTOM_FIELD": {
-      "ADD_FAILURE": "Unable to Add  Custom Field",
-      "ADD_SUCCESS": "Successfully Added Custom Field",
+      "ADD": {
+        "FAILURE": "Unable to add Custom Field",
+        "SUCCESS": "Custom Field added successfully"
+      },
       "ALLOW_PARTICIPANT": "Allow Participation",
+      "CREATE": "Create Custom Field",
       "DATA_TYPE": "Data Types",
       "EXIST": "Custom Field already exists",
       "FIELD_TYPE": "Field Types",
-      "IS_MANDATORY": "Is Mandatory",
+      "IS_MANDATORY": "Mandatory",
       "NAME": "Name",
       "NOTES": "Notes",
-      "REMOVE_FAILURE": "Unable to remove Custom Field",
-      "REMOVE_SUCCESS": "Successfully removed Custom Field",
-      "REORDER_FAILURE": "Unable ro reorder",
-      "REORDER_SUCCESS": "Successfully reordered Custom Field",
+      "REMOVE": {
+        "FAILURE": "Unable to delete Custom Field",
+        "SUCCESS": "Custom Field deleted successfully "
+      },
+      "REORDER": {
+        "FAILURE": "Unable to save Custom Field order",
+        "SUCCESS": "Custom Field reordered successfully"
+      },
       "SAVE": "Save",
+      "SAVE_ORDER": "Save Custom Field Order",
+      "TABLE": {
+        "ACTIONS": "Actions",
+        "DATA_TYPE": "Data Type",
+        "INPUT_TYPE": "Input Type",
+        "MANDATORY": "Mandatory",
+        "NAME": "Name",
+        "PARTICIPATION": "Participation"
+      },
       "TITLE": "Custom Fields",
       "UNITS": "Units"
     },

@@ -44,7 +44,7 @@ export default function ImageUploaderField({
       {value ? (
         <ResourceCard
           simpleUpload={simpleUpload}
-          imageSize={simpleUpload ? 70 : 300}
+          imageSize={simpleUpload ? 60 : 300}
           setValue={setvalue}
           resource={value}
         />

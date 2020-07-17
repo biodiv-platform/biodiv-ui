@@ -12,14 +12,14 @@ export default function ResourceCard({ resource, setValue, imageSize, simpleUplo
   return (
     <Flex
       className="fade"
-      h={simpleUpload ? "" : "13rem"}
+      h={simpleUpload ? "6rem" : "13rem"}
       borderRadius="lg"
       bg="white"
       flexDir="column"
-      border={simpleUpload ? "" : "1px solid"}
+      border="1px solid"
       borderColor="gray.300"
       position="relative"
-      p={2}
+      p={simpleUpload ? 0 : 2}
     >
       <Image
         objectFit="contain"

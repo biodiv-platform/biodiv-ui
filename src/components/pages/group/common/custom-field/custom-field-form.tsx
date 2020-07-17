@@ -1,6 +1,6 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, Button, SimpleGrid } from "@chakra-ui/core";
 import CheckBoxField from "@components/form/checkbox";
-import ControlledSelect from "@components/form/controlled-select";
+import SelectControlledField from "@components/form/select-controlled";
 import SelectCreatable from "@components/form/select-creatable";
 import SubmitButton from "@components/form/submit-button";
 import TextBox from "@components/form/text";
@@ -18,9 +18,10 @@ import { dataType, defaultCustomFieldFormValue, fieldType } from "../static";
 import OptionsField from "./options-field";
 
 export default function AddCustomField({
-  updateCustomFieldList,
-  allCustomField,
-  existingCustomField
+  setCustomFields,
+  allCustomFields,
+  customFields,
+  setIsCreate
 }) {
   const [showOption, setShowOption] = useState<boolean>();
   const [fieldTypes, setFilterTypes] = useState(fieldType);
@@ -62,7 +63,7 @@ export default function AddCustomField({
   });
 
   const handleFormSubmit = async (value) => {
-    if (existingCustomField.some((o) => o?.customFields?.name === value.name)) {
+    if (customFields.some((o) => o?.customFields?.name === value.name)) {
       notification(t("GROUP.CUSTOM_FIELD.EXIST"));
       return;
     }
@@ -70,7 +71,7 @@ export default function AddCustomField({
     const payload = [
       {
         customFieldId: defaultValues["id"],
-        displayOrder: existingCustomField.length + 1,
+        displayOrder: customFields.length + 1,
         isMandatory,
         allowedParticipation
       }
@@ -81,13 +82,14 @@ export default function AddCustomField({
       : await axAddCustomField({
           ...value,
           userGroupId: id,
-          displayOrder: existingCustomField.length + 1
+          displayOrder: customFields.length + 1
         });
     if (success) {
-      notification(t("GROUP.CUSTOM_FIELD.ADD_SUCCESS"), NotificationType.Success);
-      updateCustomFieldList(0, data);
+      notification(t("GROUP.CUSTOM_FIELD.ADD.SUCCESS"), NotificationType.Success);
+      setCustomFields(data);
+      setIsCreate(false);
     } else {
-      notification(t("GROUP.CUSTOM_FIELD.ADD_FAILURE"));
+      notification(t("GROUP.CUSTOM_FIELD.ADD.FAILURE"));
     }
   };
 
@@ -113,7 +115,7 @@ export default function AddCustomField({
   };
 
   const handleCustomFieldName = (name) => {
-    const defaultValues = allCustomField.find((item) => item.customFields.name === name);
+    const defaultValues = allCustomFields.find((item) => item.customFields.name === name);
     if (defaultValues) {
       const { customFields, cfValues, ...others } = defaultValues;
       setDefaultValue({
@@ -137,13 +139,16 @@ export default function AddCustomField({
 
   return (
     <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+      <Button mb={4} type="button" onClick={() => setIsCreate(false)} leftIcon="arrow-back">
+        Back to List
+      </Button>
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
         <Box gridColumn="1/4">
           <SelectCreatable
             handleChange={handleCustomFieldName}
             name="name"
             form={hForm}
-            options={allCustomField.map((i) => {
+            options={allCustomFields.map((i) => {
               return {
                 label: i.customFields.name,
                 value: i.customFields.name
@@ -155,29 +160,33 @@ export default function AddCustomField({
         </Box>
         <ImageUploaderField nestedPath="customField" label="icon" name="iconURL" form={hForm} />
       </SimpleGrid>
-      <TextBox name="units" form={hForm} label={t("GROUP.CUSTOM_FIELD.UNITS")} />
-      <ControlledSelect
-        name="fieldType"
-        options={fieldTypes}
-        form={hForm}
-        handleChange={handleFieldChange}
-        label={t("GROUP.CUSTOM_FIELD.FIELD_TYPE")}
-      />
-      <ControlledSelect
-        name="dataType"
-        handleChange={handleDataTypeChange}
-        options={dataTypes}
-        form={hForm}
-        label={t("GROUP.CUSTOM_FIELD.DATA_TYPE")}
-      />
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacingX={4}>
+        <TextBox name="units" form={hForm} label={t("GROUP.CUSTOM_FIELD.UNITS")} />
+        <SelectControlledField
+          name="fieldType"
+          options={fieldTypes}
+          form={hForm}
+          handleChange={handleFieldChange}
+          label={t("GROUP.CUSTOM_FIELD.FIELD_TYPE")}
+        />
+        <SelectControlledField
+          name="dataType"
+          handleChange={handleDataTypeChange}
+          options={dataTypes}
+          form={hForm}
+          label={t("GROUP.CUSTOM_FIELD.DATA_TYPE")}
+        />
+      </SimpleGrid>
+      {showOption && <OptionsField radioGroupName="defaultValue" name="values" form={hForm} />}
       <CheckBoxField name="isMandatory" form={hForm} label={t("GROUP.CUSTOM_FIELD.IS_MANDATORY")} />
       <CheckBoxField
         name="allowedParticipation"
         form={hForm}
         label={t("GROUP.CUSTOM_FIELD.ALLOW_PARTICIPANT")}
       />
-      {showOption && <OptionsField radioGroupName="defaultValue" name="values" form={hForm} />}
-      <SubmitButton form={hForm}>{t("GROUP.CUSTOM_FIELD.SAVE")}</SubmitButton>
+      <SubmitButton leftIcon="check" form={hForm}>
+        Create Custom Field
+      </SubmitButton>
     </form>
   );
 }
