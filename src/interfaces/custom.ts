@@ -121,3 +121,9 @@ export interface IDBPendingObservation {
   id?: number;
   data: any;
 }
+
+export interface LeaderboardFilterProps {
+  module: string;
+  period: string;
+  limit: number;
+}

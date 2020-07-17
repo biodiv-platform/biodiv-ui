@@ -1,3 +1,4 @@
+import { LeaderboardFilterProps } from "@interfaces/custom";
 import { UserGroupIbp } from "@interfaces/observation";
 
 export const isBrowser = typeof window !== `undefined`;
@@ -99,6 +100,12 @@ export const LEADERBOARD_STOPS = {
   month3: "Past 3 Months",
   year: "Past Year",
   f: "All Time"
+};
+
+export const LEADERBOARD_FILTERS: LeaderboardFilterProps = {
+  module: "",
+  period: "f",
+  limit: 20
 };
 
 export const FORWARD_BLACKLIST = ["login", "register"];
