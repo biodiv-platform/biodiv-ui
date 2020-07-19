@@ -37,11 +37,11 @@ export default function Fields({ form, name, radioGroupName }) {
                 <SimpleGrid columns={2} spacingX={4}>
                   <ControlledText
                     isRequired={true}
-                    name={`values[${index}].value`}
+                    name={`values.${index}.value`}
                     label="Value"
                     form={form}
                   />
-                  <ControlledText name={`values[${index}].notes`} label="Notes" form={form} />
+                  <ControlledText name={`values.${index}.notes`} label="Notes" form={form} />
                 </SimpleGrid>
                 <Button
                   variantColor="red"
@@ -57,7 +57,7 @@ export default function Fields({ form, name, radioGroupName }) {
                 nestedPath="customField,values"
                 simpleUpload={true}
                 label="Icon"
-                name={`values[${index}].iconURL`}
+                name={`values.${index}.iconURL`}
                 form={form}
                 mb={0}
               />

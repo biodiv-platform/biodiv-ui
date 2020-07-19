@@ -6,7 +6,7 @@ import SubmitButton from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axAddCustomField, axAddExsistingCustomField } from "@services/customfield.service";
+import { axAddCustomField, axAddExsistingCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import ImageUploaderField from "../image-uploader-field";
-import { dataType, defaultCustomFieldFormValue, fieldType } from "../static";
+import { DATA_TYPE, DEFAULT_CUSTOMFIELD_VALUE, FIELD_TYPE } from "../static";
 import OptionsField from "./options-field";
 
 export default function AddCustomField({
@@ -24,9 +24,9 @@ export default function AddCustomField({
   setIsCreate
 }) {
   const [showOption, setShowOption] = useState<boolean>();
-  const [fieldTypes, setFilterTypes] = useState(fieldType);
-  const [dataTypes, setDataTypes] = useState(dataType);
-  const [defaultValues, setDefaultValue] = useState(defaultCustomFieldFormValue);
+  const [fieldTypes, setFilterTypes] = useState(FIELD_TYPE);
+  const [dataTypes, setDataTypes] = useState(DATA_TYPE);
+  const [defaultValues, setDefaultValue] = useState(DEFAULT_CUSTOMFIELD_VALUE);
   const [customFieldExist, setCustomFieldExist] = useState<boolean>();
   const { t } = useTranslation();
 
@@ -67,8 +67,10 @@ export default function AddCustomField({
       notification(t("GROUP.CUSTOM_FIELD.EXIST"));
       return;
     }
+
     const { isMandatory, allowedParticipation } = value;
-    const payload = [
+
+    const addExistPayload = [
       {
         customFieldId: defaultValues["id"],
         displayOrder: customFields.length + 1,
@@ -76,14 +78,15 @@ export default function AddCustomField({
         allowedParticipation
       }
     ];
+    const createPayload = {
+      ...value,
+      userGroupId: id,
+      displayOrder: customFields.length + 1
+    };
 
     const { success, data } = customFieldExist
-      ? await axAddExsistingCustomField(id, payload)
-      : await axAddCustomField({
-          ...value,
-          userGroupId: id,
-          displayOrder: customFields.length + 1
-        });
+      ? await axAddExsistingCustomField(id, addExistPayload)
+      : await axAddCustomField(createPayload);
     if (success) {
       notification(t("GROUP.CUSTOM_FIELD.ADD.SUCCESS"), NotificationType.Success);
       setCustomFields(data);
@@ -95,52 +98,54 @@ export default function AddCustomField({
 
   const handleFieldChange = (value) => {
     setShowOption(categoricalType.includes(value));
-    const resDataType =
-      value === "RANGE"
-        ? dataType.filter((item) => item.value !== "STRING")
-        : categoricalType.includes(value)
-        ? dataType.filter((item) => item.value === "STRING")
-        : dataType.filter((item) => item.value !== "DATE");
-    setDataTypes(resDataType);
+    switch (value) {
+      case "RANGE":
+        return DATA_TYPE.filter((item) => item.value !== "STRING");
+      case "SINGLE CATEGORICAL":
+      case "MULTIPLE CATEGORICAL":
+        return DATA_TYPE.filter((item) => item.value === "STRING");
+      default:
+        return DATA_TYPE.filter((item) => item.value !== "DATE");
+    }
   };
 
   const handleDataTypeChange = (value) => {
-    const resFilterType =
-      value === "DATE"
-        ? fieldType.filter((item) => item.value === "RANGE")
-        : value === "INTEGER" || value === "DECIMAL"
-        ? fieldType.filter((item) => !categoricalType.includes(item.value))
-        : fieldType.filter((item) => item.value !== "RANGE");
-    setFilterTypes(resFilterType);
+    switch (value) {
+      case "DATE":
+        return FIELD_TYPE.filter((item) => item.value === "RANGE");
+      case "INTEGER":
+      case "DECIMAL":
+        return FIELD_TYPE.filter((item) => !categoricalType.includes(item.value));
+      default:
+        return FIELD_TYPE.filter((item) => item.value !== "RANGE");
+    }
   };
 
   const handleCustomFieldName = (name) => {
-    const defaultValues = allCustomFields.find((item) => item.customFields.name === name);
-    if (defaultValues) {
-      const { customFields, cfValues, ...others } = defaultValues;
-      setDefaultValue({
-        ...customFields,
-        values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],
-        ...others
-      });
-      setCustomFieldExist(true);
-    } else {
-      setDefaultValue(defaultCustomFieldFormValue);
-      setCustomFieldExist(false);
-    }
+    const defaultValue = allCustomFields.reduce((acc, item) => {
+      if (item.customFields.name === name) {
+        const { customFields, cfValues, ...others } = item;
+        acc = {
+          ...customFields,
+          values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],
+          ...others
+        };
+      }
+      return acc;
+    }, DEFAULT_CUSTOMFIELD_VALUE);
+    setDefaultValue(defaultValue);
+    setCustomFieldExist(Object.prototype.hasOwnProperty.call(defaultValue, "id"));
   };
 
   useEffect(() => {
     hForm.reset(defaultValues);
-    categoricalType.includes(defaultValues["fieldType"])
-      ? setShowOption(true)
-      : setShowOption(false);
+    setShowOption(categoricalType.includes(defaultValues["fieldType"]));
   }, [defaultValues]);
 
   return (
     <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
       <Button mb={4} type="button" onClick={() => setIsCreate(false)} leftIcon="arrow-back">
-        Back to List
+        {t("GROUP.CUSTOM_FIELD.BACK")}
       </Button>
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
         <Box gridColumn="1/4">
@@ -166,12 +171,12 @@ export default function AddCustomField({
           name="fieldType"
           options={fieldTypes}
           form={hForm}
-          handleChange={handleFieldChange}
+          handleChange={(val) => setDataTypes(handleFieldChange(val))}
           label={t("GROUP.CUSTOM_FIELD.FIELD_TYPE")}
         />
         <SelectControlledField
           name="dataType"
-          handleChange={handleDataTypeChange}
+          handleChange={(val) => setFilterTypes(handleDataTypeChange(val))}
           options={dataTypes}
           form={hForm}
           label={t("GROUP.CUSTOM_FIELD.DATA_TYPE")}
@@ -185,7 +190,7 @@ export default function AddCustomField({
         label={t("GROUP.CUSTOM_FIELD.ALLOW_PARTICIPANT")}
       />
       <SubmitButton leftIcon="check" form={hForm}>
-        Create Custom Field
+        {t("GROUP.CUSTOM_FIELD.CREATE")}
       </SubmitButton>
     </form>
   );

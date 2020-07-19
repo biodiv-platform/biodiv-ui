@@ -7,7 +7,7 @@ import {
   axGetGroupEditInfoByGroupId,
   axGroupList
 } from "@services/usergroup.service";
-import { axGetUserGroupCustomField, axGetAllCustomFields } from "@services/customfield.service";
+import { axGetUserGroupCustomField, axGetAllCustomFields } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";

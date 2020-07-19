@@ -180,6 +180,7 @@
         "SUCCESS": "Custom Field added successfully"
       },
       "ALLOW_PARTICIPANT": "Allow Participation",
+      "BACK": "Back to List",
       "CREATE": "Create Custom Field",
       "DATA_TYPE": "Data Types",
       "EXIST": "Custom Field already exists",

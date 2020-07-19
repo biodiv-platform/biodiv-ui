@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axRemoveCustomField, axReorderCustomField } from "@services/customfield.service";
+import { axRemoveCustomField, axReorderCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import arrayMove from "array-move";
 import React, { useEffect, useState } from "react";
