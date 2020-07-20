@@ -1,4 +1,5 @@
-import { ENDPOINT, MAP_CENTER } from "@static/constants";
+import SITE_CONFIG from "@configs/site-config.json";
+import { ENDPOINT } from "@static/constants";
 import { useStoreState } from "easy-peasy";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -22,16 +23,19 @@ export default function Map() {
   return (
     <Naksha
       viewPort={{
-        latitude: MAP_CENTER.lat,
-        longitude: MAP_CENTER.lng,
+        ...SITE_CONFIG.MAP.CENTER,
         zoom: 3.4,
         bearing: 0,
         pitch: 0
       }}
       loadToC={false}
-      mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+      mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
-      geoserver={{ endpoint: ENDPOINT.GEOSERVER, store: "ibp", workspace: "biodiv" }}
+      geoserver={{
+        endpoint: ENDPOINT.GEOSERVER,
+        store: SITE_CONFIG.GEOSERVER.STORE,
+        workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
+      }}
       layers={[
         {
           id: "global-observations",

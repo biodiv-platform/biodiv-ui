@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/core";
-import { ENDPOINT, MAP_CENTER } from "@static/constants";
+import SITE_CONFIG from "@configs/site-config.json";
+import { ENDPOINT } from "@static/constants";
 import Naksha from "naksha-components-react";
 import React from "react";
 
@@ -12,17 +13,20 @@ export default function MapPageComponent() {
     <Box height="calc(100vh - var(--heading-height))">
       <Naksha
         viewPort={{
-          latitude: MAP_CENTER.lat,
-          longitude: MAP_CENTER.lng,
+          ...SITE_CONFIG.MAP.CENTER,
           zoom: 3.5,
           bearing: 0,
           pitch: 0
         }}
         loadToC={true}
         showToC={false}
-        mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+        mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
-        geoserver={{ endpoint: ENDPOINT.GEOSERVER, store: "ibp", workspace: "biodiv" }}
+        geoserver={{
+          endpoint: ENDPOINT.GEOSERVER,
+          store: SITE_CONFIG.GEOSERVER.STORE,
+          workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
+        }}
         layers={[
           {
             id: "global-observations",

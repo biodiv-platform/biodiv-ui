@@ -79,7 +79,7 @@ export default function OfflineSync() {
         emit(SYNC_SINGLE_OBSERVATION_ERROR);
       }
     } catch (e) {
-      emit(SYNC_SINGLE_OBSERVATION_ERROR);
+      emit(SYNC_SINGLE_OBSERVATION);
       console.error(e);
     }
   };

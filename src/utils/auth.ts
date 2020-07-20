@@ -63,6 +63,10 @@ export const unregisterSW = async () => {
  */
 export const removeCache = async (whitelist = []) => {
   try {
+    if (process.env.NODE_ENV !== "production") {
+      return;
+    }
+
     await (window as any).workbox.register();
     caches.keys().then(async (keyList) => {
       await Promise.all(

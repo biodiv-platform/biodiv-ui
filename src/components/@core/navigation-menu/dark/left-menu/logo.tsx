@@ -1,6 +1,7 @@
 import { Icon, IconButton, Link } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
+import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import React from "react";
@@ -37,8 +38,8 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
   const { t } = useTranslation();
   return (
     <Logo>
-      <Link href={process.env.NEXT_PUBLIC_SITE_URL} className="logo">
-        {process.env.NEXT_PUBLIC_SITE_TITLE}
+      <Link href={SITE_CONFIG.SITE.URL} className="logo">
+        {SITE_CONFIG.SITE.TITLE}
       </Link>
       <LocalLink href="/observation/create" prefixGroup={true}>
         <Link

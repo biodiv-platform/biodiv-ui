@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import { ENDPOINT } from "@static/constants";
 import { plainHttp } from "@utils/http";
 
@@ -17,7 +18,7 @@ export const axGetTaxonList = async ({ key = "", taxonIds = "", expand_taxon = f
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.API}/taxon/list`, {
       params: {
-        classSystem: process.env.NEXT_PUBLIC_TAXON_ROOT,
+        classSystem: SITE_CONFIG.TAXONOMY.ROOT,
         parent: key,
         expand_taxon,
         taxonIds

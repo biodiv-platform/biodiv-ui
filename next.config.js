@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withPWA = require("next-pwa");
 const { nanoid } = require("nanoid");
+const SITE_CONFIG = require("./src/configs/site-config.json");
+
+const additionalManifestEntries = [
+  { url: "/", revision: nanoid() },
+  { url: "/login", revision: nanoid() },
+  ...(SITE_CONFIG.OBSERVATION.ACTIVE
+    ? [
+        { url: "/observation/create", revision: nanoid() },
+        { url: "/observation/recreate", revision: nanoid() }
+      ]
+    : [])
+];
 
 module.exports = withPWA({
   pwa: {
     dest: "public",
     disable: process.env.NODE_ENV !== "production",
     ignoreURLParametersMatching: [/^lang/, /^h/, /^w/, /^forward/],
-    additionalManifestEntries: [
-      { url: "/", revision: nanoid() },
-      { url: "/login", revision: nanoid() },
-      { url: "/observation/create", revision: nanoid() },
-      { url: "/observation/recreate", revision: nanoid() }
-    ],
+    additionalManifestEntries,
     runtimeCaching: [
       {
         urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp|woff2)/i,

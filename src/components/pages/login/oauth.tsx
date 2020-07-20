@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/core";
+import SITE_CONFIG from "@configs/site-config.json";
 import notification from "@utils/notification";
 import React from "react";
 import GoogleLogin from "react-google-login";
@@ -10,7 +11,7 @@ export default function Oauth({ onSuccess, text, mb = 4 }) {
 
   return (
     <GoogleLogin
-      clientId={process.env.NEXT_PUBLIC_GOOGLE_APP_ID}
+      clientId={SITE_CONFIG.TOKENS.OAUTH_GOOGLE}
       render={(renderProps) => (
         <Button
           w="full"

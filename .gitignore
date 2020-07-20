@@ -20,6 +20,7 @@
 # misc
 .DS_Store
 .env*
+src/configs/site-config.json
 
 # debug
 npm-debug.log*

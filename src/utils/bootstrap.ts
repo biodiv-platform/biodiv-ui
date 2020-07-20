@@ -23,6 +23,18 @@ export const getNewsLetterMenu = (childs) => {
   });
 };
 
+export const getLocaleStrings = async (lang) => {
+  const localeStrings = await import(`../i18n/${lang}.json`);
+
+  if (lang !== defaultLocale) {
+    const defaultLocaleStrings = await import(`../i18n/${defaultLocale}.json`);
+
+    return { [defaultLocale]: defaultLocaleStrings, [lang]: localeStrings };
+  }
+
+  return { [lang]: localeStrings };
+};
+
 export const processedInitialProps = async ({ Component, ctx }: AppContext) => {
   const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
   const aReq = absoluteUrl(ctx.req);
@@ -35,10 +47,12 @@ export const processedInitialProps = async ({ Component, ctx }: AppContext) => {
   const pages = getNewsLetterMenu(rawPages);
 
   const lang = getLang(ctx);
+  const localeStrings = await getLocaleStrings(lang);
 
   return {
     pageProps,
     lang,
+    localeStrings,
     pages,
     groups,
     currentGroup,
