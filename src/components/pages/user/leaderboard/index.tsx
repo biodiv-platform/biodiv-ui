@@ -18,21 +18,9 @@ function UserLeaderboardComponent() {
   const { setFilter, filter } = useLeaderboardFilter();
   const { t } = useTranslation();
 
-  const onChangeModule = (v) => {
+  const onChange = (key, value) => {
     setFilter((_draft) => {
-      _draft.f.module = v.target.value;
-    });
-  };
-
-  const onChangeTime = (v) => {
-    setFilter((_draft) => {
-      _draft.f.period = v.target.value;
-    });
-  };
-
-  const onChangeCount = (v) => {
-    setFilter((_draft) => {
-      _draft.f.limit = +v.target.value;
+      _draft.f[key] = value;
     });
   };
 
@@ -41,21 +29,32 @@ function UserLeaderboardComponent() {
       <PageHeading
         actions={
           <Stack isInline={true} alignItems="center" spacing={4}>
-            <Select minW="8rem" onChange={onChangeModule} defaultValue={filter.module}>
+            <Select
+              minW="8rem"
+              onChange={(event) => onChange("module", event.target.value)}
+              defaultValue={filter.module}
+            >
               {Object.keys(LEADERBOARD_MODULES).map((key, index) => (
                 <option key={index} value={LEADERBOARD_MODULES[key]}>
                   {key}
                 </option>
               ))}
             </Select>
-            <Select minW="8rem" onChange={onChangeTime} defaultValue={filter.period}>
+            <Select
+              minW="8rem"
+              onChange={(event) => onChange("period", event.target.value)}
+              defaultValue={filter.period}
+            >
               {Object.keys(LEADERBOARD_STOPS).map((key, index) => (
                 <option key={index} value={key}>
                   {LEADERBOARD_STOPS[key]}
                 </option>
               ))}
             </Select>
-            <Select onChange={onChangeCount} value={filter.limit}>
+            <Select
+              onChange={(event) => onChange("limit", event.target.value)}
+              value={filter.limit}
+            >
               {STOPS.map((stop) => (
                 <option key={stop} value={stop}>
                   {stop}

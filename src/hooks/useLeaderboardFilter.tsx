@@ -11,7 +11,7 @@ import useDidUpdateEffect from "./useDidUpdateEffect";
 interface LeaderboardFilterContextProps {
   filter?: LeaderboardFilterProps;
   leaderboardData?;
-  setLBData?;
+  setLeaderboard?;
   setFilter?;
   addFilter?;
   removeFilter?;
@@ -41,12 +41,7 @@ export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) 
   const fetchLeaderboardData = async () => {
     try {
       NProgress.start();
-      const data = await axGetUserLeaderboard(
-        filter.f.module,
-        filter.f.limit,
-        filter.f.period,
-        authorid
-      );
+      const data = await axGetUserLeaderboard(filter.f, authorid);
       setLeaderboardData(data);
       NProgress.done();
     } catch (e) {
@@ -59,7 +54,7 @@ export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) 
     fetchLeaderboardData();
   }, [filter]);
 
-  const setLBData = (data) => {
+  const setLeaderboard = (data) => {
     setLeaderboardData(data);
   };
 
@@ -86,7 +81,7 @@ export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) 
       value={{
         filter: filter.f,
         leaderboardData,
-        setLBData,
+        setLeaderboard,
         setFilter,
         addFilter,
         removeFilter,

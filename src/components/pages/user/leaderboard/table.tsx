@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useSortBy, useTable } from "react-table";
 
 function UserLeaderboardTable({ columns }) {
-  const { leaderboardData, setLBData, filter } = useLeaderboardFilter();
+  const { leaderboardData, setLeaderboard, filter } = useLeaderboardFilter();
   const [sortedBy, setSortedBy] = useState("NA");
   const authorId = useStoreState((s) => s.user.id);
 
@@ -22,9 +22,14 @@ function UserLeaderboardTable({ columns }) {
 
   const fetchLeaderboardData = async (v) => {
     setSortedBy(v);
-    const payload = v.split("_")[0].replace(/\b\w/g, (v) => v.toUpperCase());
-    const data = await axGetUserLeaderboard(payload, filter.limit, filter.period, authorId);
-    setLBData(data);
+    const module = v.split("_")[0].replace(/\b\w/g, (v) => v.toUpperCase());
+    const payload = {
+      value: module,
+      how_many: filter.limit,
+      time: filter.period
+    };
+    const data = await axGetUserLeaderboard(payload, authorId);
+    setLeaderboard(data);
   };
 
   return (
