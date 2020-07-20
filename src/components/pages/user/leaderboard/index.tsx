@@ -70,7 +70,7 @@ function UserLeaderboardComponent() {
       <UserLeaderboardTable
         columns={[
           ...LEADERBOARD_TABLE_COLUMNS,
-          ...(filter.module.length == 0
+          ...(filter.module.length
             ? LEADERBOARD_TABLE_MODULES
             : LEADERBOARD_TABLE_SUB_MODULES(filter.module))
         ]}
