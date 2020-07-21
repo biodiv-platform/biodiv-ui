@@ -1,0 +1,118 @@
+{
+  "ABOUT": {
+    "ACTIVE": true
+  },
+  "ACTIVITY": {
+    "ACTIVE": true
+  },
+  "CONTRIBUTE": {
+    "ACTIVE": true
+  },
+  "DASHBOARD": {
+    "ACTIVE": true
+  },
+  "DATASET": {
+    "ACTIVE": true
+  },
+  "DISCUSSION": {
+    "ACTIVE": true
+  },
+  "DOCUMENT": {
+    "ACTIVE": true
+  },
+  "FEEDBACK": {
+    "ACTIVE": true
+  },
+  "FOOTER": {
+    "ACTIVE": true,
+    "CREDITS": true,
+    "PARTNER": true,
+    "SOCIAL": {
+      "FACEBOOK": {
+        "ICON": "ibpfacebook",
+        "LABEL": "FOOTER.FACEBOOK",
+        "URL": "https://www.facebook.com/indiabiodiversity"
+      },
+      "GITHUB": {
+        "ICON": "ibpgithub",
+        "LABEL": "FOOTER.GITHUB",
+        "URL": "https://github.com/strandls?q=biodiv"
+      },
+      "MAIL": {
+        "ICON": "ibpmail",
+        "LABEL": "FOOTER.EMAIL",
+        "URL": "mailto:support@indiabiodiversity.org"
+      },
+      "TWITTER": {
+        "HANDLE": "@inbiodiversity",
+        "ICON": "ibptwitter",
+        "LABEL": "FOOTER.TWITTER",
+        "URL": "https://twitter.com/inbiodiversity"
+      }
+    }
+  },
+  "GEOSERVER": {
+    "STORE": "ibp",
+    "WORKSPACE": "biodiv"
+  },
+  "HOME": {
+    "FEATURES": true,
+    "GALLERY": true,
+    "PARTNERS": true,
+    "STATS": true
+  },
+  "LEADERBOARD": {
+    "ACTIVE": true
+  },
+  "MAP": {
+    "ACTIVE": true,
+    "CENTER": {
+      "latitude": 23.2,
+      "longitude": 83
+    },
+    "COUNTRY": "IN"
+  },
+  "OBSERVATION": {
+    "ACTIVE": true
+  },
+  "PAGES": {
+    "ACTIVE": true
+  },
+  "PARTICIPANTS": {
+    "ACTIVE": true
+  },
+  "SITE": {
+    "API_ENDPOINT": "http://localhost:8010/proxy/",
+    "API_ENDPOINT_SSR": "http://localhost:8010/proxy/",
+    "DESCRIPTION": "A unique repository of information on India's biodiversity",
+    "ICON": "/get/crop/logo/IBP.png",
+    "TITLE": "India Biodiversity Portal",
+    "URL": "http://localhost:3000"
+  },
+  "LANG": {
+    "DEFAULT": "en",
+    "LIST": {
+      "en": "English",
+      "fr": "français"
+    }
+  },
+  "SPECIES": {
+    "ACTIVE": true
+  },
+  "TAXONOMY": {
+    "ROOT": 265799
+  },
+  "TOKENS": {
+    "GMAP": "AIzax",
+    "MAPBOX": "pk.x",
+    "OAUTH_GOOGLE": "x.apps.googleusercontent.com",
+    "RECAPTCHA": "x"
+  },
+  "TRACKING": {
+    "ENABLED": false,
+    "GA_ID": "UA-X"
+  },
+  "USERGROUP": {
+    "ACTIVE": true
+  }
+}
