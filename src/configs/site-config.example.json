@@ -5,9 +5,6 @@
   "ACTIVITY": {
     "ACTIVE": true
   },
-  "CONTRIBUTE": {
-    "ACTIVE": true
-  },
   "DASHBOARD": {
     "ACTIVE": true
   },
@@ -61,6 +58,16 @@
     "PARTNERS": true,
     "STATS": true
   },
+  "LANDSCAPE": {
+    "ACTIVE": true
+  },
+  "LANG": {
+    "DEFAULT": "en",
+    "LIST": {
+      "en": "English",
+      "fr": "français"
+    }
+  },
   "LEADERBOARD": {
     "ACTIVE": true
   },
@@ -75,6 +82,9 @@
   "OBSERVATION": {
     "ACTIVE": true
   },
+  "OFFLINE": {
+    "ACTIVE": false
+  },
   "PAGES": {
     "ACTIVE": true
   },
@@ -88,13 +98,6 @@
     "ICON": "/get/crop/logo/IBP.png",
     "TITLE": "India Biodiversity Portal",
     "URL": "http://localhost:3000"
-  },
-  "LANG": {
-    "DEFAULT": "en",
-    "LIST": {
-      "en": "English",
-      "fr": "français"
-    }
   },
   "SPECIES": {
     "ACTIVE": true

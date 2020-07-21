@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import { Role } from "@interfaces/custom";
 import { axGetUser } from "@services/auth.service";
 import { TOKEN } from "@static/constants";
@@ -63,7 +64,7 @@ export const unregisterSW = async () => {
  */
 export const removeCache = async (whitelist = []) => {
   try {
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production" || !SITE_CONFIG.OFFLINE.ACTIVE) {
       return;
     }
 
