@@ -1,11 +1,13 @@
 import { LeaderboardFilterProps } from "@interfaces/custom";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
-import { isBrowser, LEADERBOARD_FILTERS } from "@static/constants";
+import { isBrowser } from "@static/constants";
+import { LEADERBOARD_FILTERS } from "@static/leaderboard";
 import { useStoreState } from "easy-peasy";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
+
 import useDidUpdateEffect from "./useDidUpdateEffect";
 
 interface LeaderboardFilterContextProps {

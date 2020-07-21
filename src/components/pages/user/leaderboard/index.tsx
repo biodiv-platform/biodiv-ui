@@ -2,12 +2,13 @@ import { Select, Stack } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import useTranslation from "@configs/i18n/useTranslation";
 import useLeaderboardFilter from "@hooks/useLeaderboardFilter";
-import { LEADERBOARD_MODULES, LEADERBOARD_STOPS } from "@static/constants";
+import { LEADERBOARD_MODULES, LEADERBOARD_STOPS } from "@static/leaderboard";
 import React from "react";
+
 import {
-  LEADERBOARD_TABLE_COLUMNS,
-  LEADERBOARD_TABLE_MODULES,
-  LEADERBOARD_TABLE_SUB_MODULES
+  LEADERBOARD_MODULES_COLUMNS,
+  LEADERBOARD_SUB_MODULES_COLUMNS,
+  LEADERBOARD_TABLE_COLUMNS
 } from "./columns";
 import Info from "./info";
 import UserLeaderboardTable from "./table";
@@ -71,8 +72,8 @@ function UserLeaderboardComponent() {
         columns={[
           ...LEADERBOARD_TABLE_COLUMNS,
           ...(!filter.module.length
-            ? LEADERBOARD_TABLE_MODULES
-            : LEADERBOARD_TABLE_SUB_MODULES(filter.module))
+            ? LEADERBOARD_MODULES_COLUMNS
+            : LEADERBOARD_SUB_MODULES_COLUMNS(filter.module))
         ]}
       />
     </div>

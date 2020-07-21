@@ -1,0 +1,121 @@
+{
+  "ABOUT": {
+    "ACTIVE": true
+  },
+  "ACTIVITY": {
+    "ACTIVE": true
+  },
+  "DASHBOARD": {
+    "ACTIVE": true
+  },
+  "DATASET": {
+    "ACTIVE": true
+  },
+  "DISCUSSION": {
+    "ACTIVE": true
+  },
+  "DOCUMENT": {
+    "ACTIVE": true
+  },
+  "FEEDBACK": {
+    "ACTIVE": true
+  },
+  "FOOTER": {
+    "ACTIVE": true,
+    "CREDITS": true,
+    "PARTNER": true,
+    "SOCIAL": {
+      "FACEBOOK": {
+        "ICON": "ibpfacebook",
+        "LABEL": "FOOTER.FACEBOOK",
+        "URL": "https://www.facebook.com/indiabiodiversity"
+      },
+      "GITHUB": {
+        "ICON": "ibpgithub",
+        "LABEL": "FOOTER.GITHUB",
+        "URL": "https://github.com/strandls?q=biodiv"
+      },
+      "MAIL": {
+        "ICON": "ibpmail",
+        "LABEL": "FOOTER.EMAIL",
+        "URL": "mailto:support@indiabiodiversity.org"
+      },
+      "TWITTER": {
+        "HANDLE": "@inbiodiversity",
+        "ICON": "ibptwitter",
+        "LABEL": "FOOTER.TWITTER",
+        "URL": "https://twitter.com/inbiodiversity"
+      }
+    }
+  },
+  "GEOSERVER": {
+    "STORE": "ibp",
+    "WORKSPACE": "biodiv"
+  },
+  "HOME": {
+    "FEATURES": true,
+    "GALLERY": true,
+    "PARTNERS": true,
+    "STATS": true
+  },
+  "LANDSCAPE": {
+    "ACTIVE": true
+  },
+  "LANG": {
+    "DEFAULT": "en",
+    "LIST": {
+      "en": "English",
+      "fr": "français"
+    }
+  },
+  "LEADERBOARD": {
+    "ACTIVE": true
+  },
+  "MAP": {
+    "ACTIVE": true,
+    "CENTER": {
+      "latitude": 23.2,
+      "longitude": 83
+    },
+    "COUNTRY": "IN"
+  },
+  "OBSERVATION": {
+    "ACTIVE": true
+  },
+  "OFFLINE": {
+    "ACTIVE": false
+  },
+  "PAGES": {
+    "ACTIVE": true
+  },
+  "PARTICIPANTS": {
+    "ACTIVE": true
+  },
+  "SITE": {
+    "API_ENDPOINT": "http://localhost:8010/proxy/",
+    "API_ENDPOINT_SSR": "http://localhost:8010/proxy/",
+    "DESCRIPTION": "A unique repository of information on India's biodiversity",
+    "ICON": "/get/crop/logo/IBP.png",
+    "TITLE": "India Biodiversity Portal",
+    "URL": "http://localhost:3000"
+  },
+  "SPECIES": {
+    "ACTIVE": true
+  },
+  "TAXONOMY": {
+    "ROOT": 265799
+  },
+  "TOKENS": {
+    "GMAP": "AIzaSyAyhfqwsO200BkWr3nH8Zbn8NteoxNhe0o",
+    "MAPBOX": "pk.eyJ1IjoiYmlvZGl2IiwiYSI6ImNqZXNraTFhdjA5MTIyd3FlaHl1MnkzeWIifQ.J4zsFoHOub4glUk-Spg0aQ",
+    "OAUTH_GOOGLE": "800157551541-4tsncq3jsl8qupnoadtq26rh7tagn83v.apps.googleusercontent.com",
+    "RECAPTCHA": "6Le14t4UAAAAAK7qUT5A1STiLzOf_qPraCx2zJT4"
+  },
+  "TRACKING": {
+    "ENABLED": true,
+    "GA_ID": "UA-162065374-1"
+  },
+  "USERGROUP": {
+    "ACTIVE": true
+  }
+}

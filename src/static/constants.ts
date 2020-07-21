@@ -1,4 +1,3 @@
-import { LeaderboardFilterProps } from "@interfaces/custom";
 import { UserGroupIbp } from "@interfaces/observation";
 
 export const isBrowser = typeof window !== `undefined`;
@@ -81,31 +80,6 @@ export const RESOURCE_SIZE = {
   TWITTER: "?w=600&h=330&fit=center&preserve=true",
   APPLE_TOUCH: "?h=180&w=180&crop=fit&preserve=true",
   MANIFEST: "${icon}?h=${size}&w=${size}&crop=fit&preserve=true"
-};
-
-export const LEADERBOARD_MODULES = {
-  All: "",
-  Observations: "observation",
-  Species: "species",
-  Discussion: "discussion",
-  Documents: "document",
-  Taxon: "taxon",
-  Miscellaneous: "miscellaneous"
-};
-
-export const LEADERBOARD_STOPS = {
-  today: "Today",
-  week: "Past Week",
-  month: "Past Month",
-  month3: "Past 3 Months",
-  year: "Past Year",
-  f: "All Time"
-};
-
-export const LEADERBOARD_FILTERS: LeaderboardFilterProps = {
-  module: "",
-  period: "f",
-  limit: 20
 };
 
 export const FORWARD_BLACKLIST = ["login", "register"];
