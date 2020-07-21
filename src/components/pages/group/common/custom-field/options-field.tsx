@@ -5,7 +5,7 @@ import { useFieldArray } from "react-hook-form";
 
 import ImageUploaderField from "../image-uploader-field";
 
-export default function Fields({ form, name, radioGroupName }) {
+export default function Fields({ form, name, radioGroupName, disabled }) {
   const [value, setValue] = useState(form.control.defaultValuesRef.current[radioGroupName] || "0");
   const { fields, append, remove } = useFieldArray({
     control: form.control,
@@ -37,11 +37,12 @@ export default function Fields({ form, name, radioGroupName }) {
                 <SimpleGrid columns={2} spacingX={4}>
                   <ControlledText
                     isRequired={true}
+                    disabled={disabled}
                     name={`values.${index}.value`}
                     label="Value"
                     form={form}
                   />
-                  <ControlledText name={`values.${index}.notes`} label="Notes" form={form} />
+                  <ControlledText name={`values.${index}.notes`} disabled={disabled} label="Notes" form={form} />
                 </SimpleGrid>
                 <Button
                   variantColor="red"
@@ -76,6 +77,7 @@ export default function Fields({ form, name, radioGroupName }) {
         onClick={() => append({ value: "append" })}
         variantColor="blue"
         leftIcon="add"
+        isDisabled={disabled}
         mr={4}
         mb={4}
       >

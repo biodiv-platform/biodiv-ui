@@ -161,28 +161,47 @@ export default function AddCustomField({
             })}
             label={t("GROUP.CUSTOM_FIELD.NAME")}
           />
-          <TextAreaField name="notes" form={hForm} label={t("GROUP.CUSTOM_FIELD.NOTES")} />
+          <TextAreaField
+            name="notes"
+            disabled={customFieldExist}
+            form={hForm}
+            label={t("GROUP.CUSTOM_FIELD.NOTES")}
+          />
         </Box>
         <ImageUploaderField nestedPath="customField" label="icon" name="iconURL" form={hForm} />
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacingX={4}>
-        <TextBox name="units" form={hForm} label={t("GROUP.CUSTOM_FIELD.UNITS")} />
+        <TextBox
+          name="units"
+          disabled={customFieldExist}
+          form={hForm}
+          label={t("GROUP.CUSTOM_FIELD.UNITS")}
+        />
         <SelectControlledField
           name="fieldType"
           options={fieldTypes}
+          disabled={customFieldExist}
           form={hForm}
           handleChange={(val) => setDataTypes(handleFieldChange(val))}
           label={t("GROUP.CUSTOM_FIELD.FIELD_TYPE")}
         />
         <SelectControlledField
           name="dataType"
+          disabled={customFieldExist}
           handleChange={(val) => setFilterTypes(handleDataTypeChange(val))}
           options={dataTypes}
           form={hForm}
           label={t("GROUP.CUSTOM_FIELD.DATA_TYPE")}
         />
       </SimpleGrid>
-      {showOption && <OptionsField radioGroupName="defaultValue" name="values" form={hForm} />}
+      {showOption && (
+        <OptionsField
+          disabled={customFieldExist}
+          radioGroupName="defaultValue"
+          name="values"
+          form={hForm}
+        />
+      )}
       <CheckBoxField name="isMandatory" form={hForm} label={t("GROUP.CUSTOM_FIELD.IS_MANDATORY")} />
       <CheckBoxField
         name="allowedParticipation"
