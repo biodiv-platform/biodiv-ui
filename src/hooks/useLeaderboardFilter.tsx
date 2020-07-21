@@ -41,7 +41,12 @@ export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) 
   const fetchLeaderboardData = async () => {
     try {
       NProgress.start();
-      const data = await axGetUserLeaderboard(filter.f, authorid);
+      const payload = {
+        value: filter.f.module,
+        how_many: filter.f.limit,
+        time: filter.f.period
+      };
+      const data = await axGetUserLeaderboard(payload, authorid);
       setLeaderboardData(data);
       NProgress.done();
     } catch (e) {
