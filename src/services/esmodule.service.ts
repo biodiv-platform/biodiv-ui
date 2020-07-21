@@ -14,18 +14,14 @@ export const axSearchSpeciesByText = async (text, field) => {
   }
 };
 
-export const axGetUserLeaderboard = async (value, how_many, time, authorId = -1) => {
+export const axGetUserLeaderboard = async (payload, authorId = -1) => {
   const index = "eaf";
   const type = "er";
   try {
     const { data } = await plainHttp.get(
       `${ENDPOINT.ESMODULE}/v1/services/leaderboard/${index}/${type}`,
       {
-        params: {
-          value,
-          time,
-          how_many
-        }
+        params: payload
       }
     );
     const leaderboardRanked = data.map((o, i) => ({ ...o, rank: i + 1 }));

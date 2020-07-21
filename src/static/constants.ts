@@ -76,23 +76,4 @@ export const RESOURCE_SIZE = {
   MANIFEST: "${icon}?h=${size}&w=${size}&crop=fit&preserve=true"
 };
 
-export const LEADERBOARD_MODULES = {
-  All: "",
-  Observations: "observation",
-  Species: "species",
-  Discussion: "discussion",
-  Documents: "document",
-  Taxon: "taxon",
-  Miscellaneous: "miscellaneous"
-};
-
-export const LEADERBOARD_STOPS = {
-  today: "Today",
-  week: "Past Week",
-  month: "Past Month",
-  month3: "Past 3 Months",
-  year: "Past Year",
-  f: "All Time"
-};
-
 export const FORWARD_BLACKLIST = ["login", "register"];
