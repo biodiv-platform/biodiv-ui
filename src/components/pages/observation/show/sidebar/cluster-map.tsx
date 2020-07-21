@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/core";
-import { ENDPOINT, MAP_CENTER } from "@static/constants";
+import SITE_CONFIG from "@configs/site-config.json";
+import { ENDPOINT } from "@static/constants";
 import { ExtendedMarkerProps } from "naksha-components-react/dist/interfaces/naksha";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -22,8 +23,8 @@ export default function ClusterMap({ speciesId, latitude, longitude, colorHex = 
     <Box h="422px" borderRadius="md" overflow="hidden" className="gray-box fadeInUp delay-5" mb={2}>
       <LazyLoad height={422} once={true}>
         <Naksha
-          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-          viewPort={{ latitude: MAP_CENTER.lat, longitude: MAP_CENTER.lng, zoom: 3.1 }}
+          mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          viewPort={{ ...SITE_CONFIG.MAP.CENTER, zoom: 3.1 }}
           layers={
             speciesId
               ? [

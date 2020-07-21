@@ -1,8 +1,7 @@
-export const defaultLocale = "en" as const;
+import SITE_CONFIG from "@configs/site-config.json";
 
-export const locales = ["en", "fr"] as const;
+export const defaultLocale = SITE_CONFIG.LANG.DEFAULT;
 
-export const languageNames = {
-  en: "English",
-  fr: "français"
-};
+export const locales = Object.keys(SITE_CONFIG.LANG.LIST);
+
+export const languageNames = SITE_CONFIG.LANG.LIST;

@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { stringify } from "querystring";
@@ -8,7 +9,7 @@ export const transformUserGroupList = (list: UserGroupIbp[]): UserGroupIbp[] => 
   return list.map((group: UserGroupIbp) => ({
     ...group,
     webAddress: group.webAddress.startsWith("/")
-      ? process.env.NEXT_PUBLIC_SITE_URL + group.webAddress
+      ? SITE_CONFIG.SITE.URL + group.webAddress
       : group.webAddress,
     icon: getGroupImage(group.icon)
   }));

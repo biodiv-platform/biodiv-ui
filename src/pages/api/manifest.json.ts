@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import { RESOURCE_SIZE } from "@static/constants";
 import { compiledMessage } from "@utils/basic";
 
@@ -19,7 +20,7 @@ export default (req, res) => {
     short_name: name.toLowerCase(),
     version,
     manifest_version: 2,
-    description: process.env.NEXT_PUBLIC_META_DESCRIPTION,
+    description: SITE_CONFIG.SITE.DESCRIPTION,
     background_color: "#ffffff",
     theme_color: "#363636",
     display: "standalone",

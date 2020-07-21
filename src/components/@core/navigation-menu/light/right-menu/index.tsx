@@ -38,10 +38,12 @@ const RightMenuContainer = styled.div`
   }
 `;
 
+const activeItems = items.filter(({ active = true }) => active);
+
 export default function RightMenu({ isOpen }: IMenuProps) {
   return (
     <RightMenuContainer aria-expanded={isOpen} className="fade">
-      {items.map((item) => (
+      {activeItems.map((item) => (
         <MainItems key={item.name} {...item} />
       ))}
     </RightMenuContainer>

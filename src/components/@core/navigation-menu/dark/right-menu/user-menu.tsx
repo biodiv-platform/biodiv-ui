@@ -1,5 +1,6 @@
 import { Avatar, Icon, Link, Menu, MenuButton } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import SITE_CONFIG from "@configs/site-config.json";
 import { getUserImage } from "@utils/media";
 import { useStoreState } from "easy-peasy";
 import React from "react";
@@ -17,10 +18,12 @@ export default function UserMenu() {
       to: `/user/show/${user.id}`
     },
     {
+      active: SITE_CONFIG.LEADERBOARD.ACTIVE,
       name: "LEADERBOARD",
       to: `/user/leaderboard`
     },
     {
+      active: SITE_CONFIG.OBSERVATION.ACTIVE,
       name: "MY_OBSERVATIONS",
       to: `/observation/list`,
       params: { user: user.id }

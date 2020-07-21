@@ -1,13 +1,12 @@
 import { Box } from "@chakra-ui/core";
+import SITE_CONFIG from "@configs/site-config.json";
 import useObservationFilter from "@hooks/useObservationFilter";
-import { MAP_CENTER } from "@static/constants";
 import { stringToFeature } from "@utils/location";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useMemo } from "react";
 
 const defaultViewPort = {
-  latitude: MAP_CENTER.lat,
-  longitude: MAP_CENTER.lng,
+  ...SITE_CONFIG.MAP.CENTER,
   zoom: 2.8,
   bearing: 0,
   pitch: 0
@@ -32,7 +31,7 @@ export default function MapDrawContainer() {
       <MapAreaDraw
         defaultViewPort={defaultViewPort}
         defaultFeatures={defaultFeatures}
-        mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+        mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         onFeaturesChange={handleOnFeatureChange}
         isPolygon={true}
       />

@@ -7,14 +7,20 @@ import { isLocale, Locale } from "../configs/i18n/types";
 interface ContextProps {
   readonly locale: Locale;
   readonly setLocale: (locale: Locale) => void;
+  localeStrings: any;
 }
 
 export const LocaleContext = React.createContext<ContextProps>({
   locale: defaultLocale,
-  setLocale: () => null
+  setLocale: () => null,
+  localeStrings: {}
 });
 
-export const LocaleProvider: React.FC<{ lang: Locale }> = ({ lang, children }) => {
+export const LocaleProvider: React.FC<{ lang: Locale; localeStrings: any }> = ({
+  lang,
+  children,
+  localeStrings
+}) => {
   const [locale, setLocale] = React.useState(lang);
   const { query } = useRouter();
 
@@ -22,5 +28,9 @@ export const LocaleProvider: React.FC<{ lang: Locale }> = ({ lang, children }) =
     setLocale(query.lang);
   }
 
-  return <LocaleContext.Provider value={{ locale, setLocale }}>{children}</LocaleContext.Provider>;
+  return (
+    <LocaleContext.Provider value={{ locale, setLocale, localeStrings }}>
+      {children}
+    </LocaleContext.Provider>
+  );
 };

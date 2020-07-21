@@ -1,7 +1,10 @@
+import SITE_CONFIG from "@configs/site-config.json";
+
 import PagesMenuItem from "./pages-menu-item";
 
 export default [
   {
+    active: SITE_CONFIG.SPECIES.ACTIVE,
     name: "HEADER.MENU_SECONDARY.SPECIES.",
     rows: [
       {
@@ -18,12 +21,15 @@ export default [
       },
       {
         name: "SPECIES_DATATABLES",
-        to: "/dataTable/list",
-        params: { type: "species" }
+        params: {
+          type: "species"
+        },
+        to: "/dataTable/list"
       }
     ]
   },
   {
+    active: SITE_CONFIG.OBSERVATION.ACTIVE,
     name: "HEADER.MENU_SECONDARY.OBSERVATION.",
     rows: [
       {
@@ -44,13 +50,20 @@ export default [
       },
       {
         name: "OBSERVATION_DATATABLES",
-        to: "/dataTable/list",
-        params: { type: "observations" }
+        params: {
+          type: "observations"
+        },
+        to: "/dataTable/list"
       }
     ]
   },
-  { name: "HEADER.MENU_SECONDARY.MAPS.", to: "/map" },
   {
+    active: SITE_CONFIG.MAP.ACTIVE,
+    name: "HEADER.MENU_SECONDARY.MAPS.",
+    to: "/map"
+  },
+  {
+    active: SITE_CONFIG.DOCUMENT.ACTIVE,
     name: "HEADER.MENU_SECONDARY.DOCUMENTS.",
     rows: [
       {
@@ -59,43 +72,53 @@ export default [
       },
       {
         name: "DOCUMENT_DATATABLES",
-        to: "/dataTable/list",
-        params: { type: "documents" }
+        params: {
+          type: "documents"
+        },
+        to: "/dataTable/list"
       }
     ]
   },
   {
-    name: "HEADER.MENU_SECONDARY.PAGES.",
-    cell: PagesMenuItem
+    active: SITE_CONFIG.PAGES.ACTIVE,
+    cell: PagesMenuItem,
+    name: "HEADER.MENU_SECONDARY.PAGES."
   },
   {
     name: "HEADER.MENU_SECONDARY.MORE.",
     rows: [
       {
+        active: SITE_CONFIG.ACTIVITY.ACTIVE,
         name: "ACTIVITY",
         to: "/activityFeed/list"
       },
       {
+        active: SITE_CONFIG.DISCUSSION.ACTIVE,
         name: "DISCUSSIONS",
         to: "/discussion/list"
       },
       {
+        active: SITE_CONFIG.DATASET.ACTIVE,
         name: "DATASETS",
         to: "/dataset/list"
       },
       {
+        active: SITE_CONFIG.PARTICIPANTS.ACTIVE,
         name: "PARTICIPANTS",
         to: "/user/list"
       },
       {
+        active: SITE_CONFIG.LEADERBOARD.ACTIVE,
         name: "LEADERBOARD",
         to: "/user/leaderboard"
       },
       {
+        active: SITE_CONFIG.DASHBOARD.ACTIVE,
         name: "DASHBOARD",
         to: "/chart/show"
       },
       {
+        active: SITE_CONFIG.ABOUT.ACTIVE,
         name: "ABOUT_US",
         to: "/about"
       }

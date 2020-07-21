@@ -1,12 +1,11 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import { UserGroupIbp } from "@interfaces/observation";
 
 export const isBrowser = typeof window !== `undefined`;
 
 export const DEFAULT_LANGUAGE_ID = 205;
 
-const API_ENDPOINT = isBrowser
-  ? process.env.NEXT_PUBLIC_API_ENDPOINT
-  : process.env.NEXT_PUBLIC_SSR_API_ENDPOINT;
+const API_ENDPOINT = isBrowser ? SITE_CONFIG.SITE.API_ENDPOINT : SITE_CONFIG.SITE.API_ENDPOINT_SSR;
 
 export const ENDPOINT = {
   RAW: `${API_ENDPOINT}biodiv`,
@@ -22,14 +21,14 @@ export const ENDPOINT = {
   USERGROUP: `${API_ENDPOINT}userGroup-api/api`,
   UTILITY: `${API_ENDPOINT}utility-api/api`,
   FILES: `${API_ENDPOINT}files-api/api`,
-  GEOSERVER: `${process.env.NEXT_PUBLIC_SSR_API_ENDPOINT}geoserver`
+  GEOSERVER: `${API_ENDPOINT}geoserver`
 };
 
 export const DEFAULT_GROUP: UserGroupIbp = {
   id: null,
-  icon: `${ENDPOINT.FILES}/get/crop/logo/IBP.png`,
-  name: process.env.NEXT_PUBLIC_SITE_TITLE,
-  webAddress: process.env.NEXT_PUBLIC_SITE_URL
+  icon: `${ENDPOINT.FILES}${SITE_CONFIG.SITE.ICON}`,
+  name: SITE_CONFIG.SITE.TITLE,
+  webAddress: SITE_CONFIG.SITE.URL
 };
 
 export const DATE_ACCURACY = {
@@ -50,11 +49,6 @@ export const TOKEN = {
 export const TRAIT_TYPES = {
   SINGLE_CATEGORICAL: "SINGLE_CATEGORICAL",
   MULTIPLE_CATEGORICAL: "MULTIPLE_CATEGORICAL"
-};
-
-export const MAP_CENTER = {
-  lat: Number(process.env.NEXT_PUBLIC_MAP_CENTER.split(",")[0]),
-  lng: Number(process.env.NEXT_PUBLIC_MAP_CENTER.split(",")[1])
 };
 
 export const FLAG_OPTIONS = [

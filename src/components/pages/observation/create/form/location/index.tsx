@@ -12,9 +12,9 @@ import {
 } from "@chakra-ui/core";
 import Select from "@components/form/select";
 import useTranslation from "@configs/i18n/useTranslation";
+import SITE_CONFIG from "@configs/site-config.json";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
 import useOnlineStatus from "@rehooks/online-status";
-import { MAP_CENTER } from "@static/constants";
 import { EXIF_GPS_FOUND } from "@static/events";
 import { reverseGeocode } from "@utils/location";
 import React, { useEffect, useState } from "react";
@@ -28,6 +28,7 @@ const LIBRARIES = ["drawing", "places"];
 
 const LocationPicker = ({ form }) => {
   const { t } = useTranslation();
+  const { latitude: lat, longitude: lng } = SITE_CONFIG.MAP.CENTER;
   const [hideLocationPicker, setHideLocationPicker] = useState(true);
   const isOnline = useOnlineStatus();
 
@@ -59,7 +60,7 @@ const LocationPicker = ({ form }) => {
 
   const { isOpen, onToggle } = useDisclosure();
   const [zoom, setZoom] = useState(4);
-  const [center, setCenter] = useState(MAP_CENTER);
+  const [center, setCenter] = useState({ lat, lng });
   const [searchBoxRef, setSearchBoxRef] = useState<any>();
   const [suggestion, setSuggestion] = useState<any>();
   const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({
@@ -134,7 +135,7 @@ const LocationPicker = ({ form }) => {
   return (
     <LoadScriptNext
       id="observation-create-map-script-loader"
-      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}
+      googleMapsApiKey={SITE_CONFIG.TOKENS.GMAP}
       libraries={LIBRARIES}
     >
       <>
@@ -151,7 +152,7 @@ const LocationPicker = ({ form }) => {
                 <Autocomplete
                   onLoad={setSearchBoxRef}
                   onPlaceChanged={handleOnSearchSelected}
-                  options={{ componentRestrictions: { country: process.env.NEXT_PUBLIC_COUNTRY } }}
+                  options={{ componentRestrictions: { country: SITE_CONFIG.MAP.COUNTRY } }}
                 >
                   <Input
                     id="places-search"
