@@ -10,24 +10,21 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import SITE_CONFIG from "@configs/site-config.json";
 import { LoadScriptNext, StandaloneSearchBox } from "@react-google-maps/api";
-import { MAP_CENTER } from "@static/constants";
 import React, { useEffect, useState } from "react";
 
 import LocationMap from "../../observation/create/form/location/map";
 
 const LIBRARIES = ["drawing", "places"];
 
-interface IDisclosure {
-  defaultIsOpen: boolean;
-}
-
 const LocationPicker = ({ form }) => {
   const { t } = useTranslation();
+  const { latitude: lat, longitude: lng } = SITE_CONFIG.MAP.CENTER;
 
   const { isOpen, onToggle } = useDisclosure();
   const [zoom, setZoom] = useState(4);
-  const [center, setCenter] = useState(MAP_CENTER);
+  const [center, setCenter] = useState({ lat, lng });
   const [searchBoxRef, setSearchBoxRef] = useState<any>();
   const [suggestions, setSuggestions] = useState([]);
   const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
@@ -89,7 +86,7 @@ const LocationPicker = ({ form }) => {
   return (
     <LoadScriptNext
       id="user-registration-map-script-loader"
-      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY}
+      googleMapsApiKey={SITE_CONFIG.TOKENS.GMAP}
       libraries={LIBRARIES}
     >
       <>

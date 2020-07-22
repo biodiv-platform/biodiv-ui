@@ -62,7 +62,7 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
 
       // Extra
       notes: Yup.string().nullable(),
-      tags: Yup.array(),
+      tags: Yup.array().nullable(),
 
       // Date and Location
       observedOn: Yup.string().required(),
@@ -138,11 +138,12 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
         confidence,
         languageId
       },
-      tags: tags.map(({ label, value, version }) => ({
-        id: label !== value ? value : null,
-        version,
-        name: label
-      })),
+      tags:
+        tags?.map(({ label, value, version }) => ({
+          id: label !== value ? value : null,
+          version,
+          name: label
+        })) || [],
       protocol: "SINGLE_OBSERVATION",
       basisOfRecords: "HUMAN_OBSERVATION",
       obsvLanguageId: DEFAULT_LANGUAGE_ID,

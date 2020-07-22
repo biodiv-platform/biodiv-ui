@@ -1,20 +1,31 @@
-import { Accordion } from "@chakra-ui/core";
+import useObservationFilter from "@hooks/useObservationFilter";
 import React from "react";
 
+import SubAccordion from "../shared/sub-accordion";
+import FilterMultiSelectPanel from "./location-multi-select";
 import MapAreaFilter from "./map-area";
+import CheckboxFilterPanel from "../shared/checkbox";
 
 export default function LocationFilter() {
+  const { states } = useObservationFilter();
+  const STATE_OPTIONS = states.map((state) => ({ label: state, value: state, stat: state }));
+
   return (
-    <Accordion
-      borderX="1px solid"
-      borderColor="gray.200"
-      m={1}
-      defaultIndex={[0]}
-      borderRadius="lg"
-      overflow="hidden"
-      allowMultiple={true}
-    >
+    <SubAccordion>
       <MapAreaFilter />
-    </Accordion>
+
+      <CheckboxFilterPanel
+        translateKey="FILTERS.LOCATION.STATE."
+        filterKey="state"
+        options={STATE_OPTIONS}
+        statKey="groupState"
+        skipOptionsTranslation={true}
+        showSearch={true}
+      />
+
+      <FilterMultiSelectPanel filterKey="district" translateKey="FILTERS.LOCATION.DISTRICT" />
+
+      <FilterMultiSelectPanel filterKey="tahsil" translateKey="FILTERS.LOCATION.TAHSIL" />
+    </SubAccordion>
   );
 }

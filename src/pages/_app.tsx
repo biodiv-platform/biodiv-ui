@@ -16,12 +16,12 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 function App(props) {
-  const { lang, nookies, domain, ...extras } = props;
+  const { lang, nookies, localeStrings, domain, ...extras } = props;
 
   return (
     <BusProvider>
       <ThemeProvider theme={customTheme}>
-        <LocaleProvider lang={lang}>
+        <LocaleProvider lang={lang} localeStrings={localeStrings}>
           <NookiesProvider initialValue={nookies} options={{ domain }}>
             <CSSReset />
             <AppContainer extras={extras} />

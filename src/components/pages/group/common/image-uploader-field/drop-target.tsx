@@ -9,7 +9,6 @@ const DropTargetBox = styled.div`
   border: 2px dashed var(--gray-300);
   border-radius: 0.5rem;
   padding: 1rem;
-  min-height: 13rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,14 +33,20 @@ const DropTargetBox = styled.div`
 
 export const accept = ["image/jpg", "image/jpeg", "image/png"];
 
-export default function DropTarget({ setValue }) {
+interface userGroupDropTarget {
+  setValue;
+  nestedPath?;
+  simpleUpload?: boolean;
+}
+
+export default function DropTarget({ setValue, nestedPath, simpleUpload }: userGroupDropTarget) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
 
   const onDrop = async (files) => {
     setIsProcessing(true);
     if (files.length) {
-      const { success, data } = await axUploadUserGroupResource(files[0]);
+      const { success, data } = await axUploadUserGroupResource(files[0], nestedPath);
       if (success) {
         setValue(data);
       }
@@ -56,13 +61,19 @@ export default function DropTarget({ setValue }) {
   });
 
   return (
-    <DropTargetBox {...getRootProps()} data-dropping={isDragActive}>
+    <DropTargetBox
+      style={{ minHeight: simpleUpload ? "6rem" : "13rem" }}
+      {...getRootProps()}
+      data-dropping={isDragActive}
+    >
       <input {...getInputProps()} />
       {isProcessing ? (
         <div className="fade">
           <Icon name="time" />
           <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
         </div>
+      ) : simpleUpload ? (
+        <Button variantColor="blue" variant="outline" children={t("OBSERVATION.UPLOADER.UPLOAD")} />
       ) : (
         <div className="fade">
           <Heading size="md">{t("OBSERVATION.UPLOADER.LABEL")}</Heading>

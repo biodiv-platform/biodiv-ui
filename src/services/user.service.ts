@@ -1,5 +1,5 @@
 import { ENDPOINT } from "@static/constants";
-import http from "@utils/http";
+import http, { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
 
 export const axSaveFCMToken = async (payload) => {
@@ -15,6 +15,30 @@ export const axSendPushNotification = async (payload) => {
   try {
     await http.post(`${ENDPOINT.USER}/v1/user/send-notification`, payload);
     return { success: true };
+  } catch (e) {
+    notification(e.response.data.message);
+    return { success: false, data: [] };
+  }
+};
+
+export const axGetUsersByID = async (userIds) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/bulk/ibp`, {
+      params: { userIds }
+    });
+    return data.map(({ name, id }) => ({ label: name, value: id }));
+  } catch (e) {
+    notification(e.response.data.message);
+    return [];
+  }
+};
+
+export const axUserFilterSearch = async (name) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/autocomplete`, {
+      params: { name }
+    });
+    return data.map(({ name, id }) => ({ label: name, value: id }));
   } catch (e) {
     notification(e.response.data.message);
     return { success: false, data: [] };

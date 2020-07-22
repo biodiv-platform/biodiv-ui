@@ -1,20 +1,12 @@
-import { Accordion } from "@chakra-ui/core";
 import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
-import { FLAG, IDENTIFICATION, VALIDATION, TAXON_ID } from "./filter-keys";
+import SubAccordion from "../shared/sub-accordion";
+import { FLAG, IDENTIFICATION, TAXON_ID, VALIDATION } from "./filter-keys";
 
 export default function DataQuality() {
   return (
-    <Accordion
-      borderX="1px solid"
-      borderColor="gray.200"
-      m={1}
-      defaultIndex={[0]}
-      borderRadius="lg"
-      overflow="hidden"
-      allowMultiple={true}
-    >
+    <SubAccordion>
       <CheckboxFilterPanel
         translateKey="FILTERS.DATA_QUALITY.IDENTIFICATION."
         filterKey="speciesName"
@@ -42,6 +34,6 @@ export default function DataQuality() {
         options={FLAG}
         statKey={"groupFlag"}
       />
-    </Accordion>
+    </SubAccordion>
   );
 }

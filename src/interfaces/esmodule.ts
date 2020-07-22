@@ -212,6 +212,7 @@ export interface SimilarObservation {
 export interface SpeciesGroup {
   id?: number; // int64
   name?: string;
+  order?: number; // int32
 }
 export interface TraitValue {
   value?: string;

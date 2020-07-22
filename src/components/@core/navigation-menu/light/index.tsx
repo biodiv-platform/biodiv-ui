@@ -12,12 +12,12 @@ const LightMenuContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  ${Mq.max.md} {
+  @media (max-width: 1024px) {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  ${Mq.min.md + " and (max-width: 768px)"} {
+  ${Mq.min.md + " and (max-width: 1024px)"} {
     align-items: center;
     padding-bottom: 0.6rem;
   }

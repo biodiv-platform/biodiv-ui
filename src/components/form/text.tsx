@@ -3,6 +3,7 @@ import React from "react";
 import { FormContextValues } from "react-hook-form";
 
 interface ITextBoxProps {
+  id?: string;
   name: string;
   label: string;
   type?: string;
@@ -17,16 +18,17 @@ interface ITextBoxProps {
 }
 
 const TextBoxField = ({
+  id,
   name,
   label,
   type = "text",
   form,
   mb = 4,
-  disabled = false,
+  disabled,
   hint,
-  isRequired = false,
+  isRequired,
   showLabel = true,
-  hidden = false,
+  hidden,
   ...props
 }: ITextBoxProps) => (
   <FormControl
@@ -39,7 +41,7 @@ const TextBoxField = ({
     {showLabel && <FormLabel htmlFor={name}>{label}</FormLabel>}
     <Input
       name={name}
-      id={name}
+      id={id || name}
       placeholder={label}
       ref={form.register}
       type={type}

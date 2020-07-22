@@ -1,4 +1,5 @@
 import { Locale } from "@configs/i18n/types";
+import SITE_CONFIG from "@configs/site-config.json";
 import { customTheme } from "@configs/theme";
 import { getLang } from "@utils/bootstrap";
 import { jsontocss } from "@utils/style";
@@ -22,7 +23,7 @@ class MyDocument extends Document<IDocumentProps> {
         <Head>
           <style>{jsontocss(customTheme)}</style>
           <link rel="shortcut icon" href="/favicon.ico" />
-          <meta name="description" content={process.env.NEXT_PUBLIC_META_DESCRIPTION} />
+          <meta name="description" content={SITE_CONFIG.SITE.DESCRIPTION} />
           <meta name="theme-color" content="#363636" />
         </Head>
         <body>

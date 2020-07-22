@@ -20,8 +20,8 @@ export default function TagsShow({ items = [], observationId }: ITagsShowProps) 
         <TagsEditor observationId={observationId} tags={tags} setTags={setTags} onClose={onClose} />
       ) : (
         <Box>
-          {tags.map((tag) => (
-            <LinkTag label={tag.label} />
+          {tags?.map((tag) => (
+            <LinkTag label={tag.label} key={tag?.label} />
           ))}
           <IconButton
             variant="link"

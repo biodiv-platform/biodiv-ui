@@ -1,4 +1,5 @@
-.table {
+.table,
+.sorting-row {
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
@@ -17,7 +18,7 @@
   }
 
   thead {
-    text-align: center;
+    text-align: left;
     tr:nth-child(1) {
       color: #000;
       text-transform: capitalize;
@@ -48,6 +49,12 @@
   background-color: var(--gray-200);
 }
 
+.sorting-row {
+  display: table;
+  cursor: move;
+}
+
+.sorting-row,
 .table-bordered {
   thead > th,
   td {

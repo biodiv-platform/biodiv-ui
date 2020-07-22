@@ -1,4 +1,5 @@
 import useTranslation from "@configs/i18n/useTranslation";
+import SITE_CONFIG from "@configs/site-config.json";
 import { UserGroupIbp } from "@interfaces/observation";
 import { isBrowser, RESOURCE_SIZE, TOKEN } from "@static/constants";
 import authStore from "@stores/auth.store";
@@ -39,11 +40,11 @@ function AppContainer({ extras }: IAppContainerProps) {
   const initialState = { user: nookies[TOKEN.USER] || {}, groups, currentGroup, pages };
   const hybridStore = createStore(authStore, { initialState });
   const { locale } = useTranslation();
-  const canonical = process.env.NEXT_PUBLIC_SITE_URL + router.asPath;
+  const canonical = SITE_CONFIG.SITE.URL + router.asPath;
 
   useEffect(() => {
-    if (isBrowser) {
-      ReactGA.initialize(process.env.NEXT_PUBLIC_GA_TRACKING_ID);
+    if (isBrowser && SITE_CONFIG.TRACKING.ENABLED) {
+      ReactGA.initialize(SITE_CONFIG.TRACKING.GA_ID);
       removeCache(CACHE_WHITELIST);
       if (initialState?.user?.id) {
         const timer = setTimeout(async () => {
@@ -63,18 +64,18 @@ function AppContainer({ extras }: IAppContainerProps) {
       <DefaultSeo
         title={currentGroup.name}
         canonical={canonical}
-        description={process.env.NEXT_PUBLIC_META_DESCRIPTION}
+        description={SITE_CONFIG.SITE.DESCRIPTION}
         openGraph={{
           type: "website",
           locale,
           url: canonical,
           title: currentGroup.name,
           site_name: currentGroup.name,
-          description: process.env.NEXT_PUBLIC_META_DESCRIPTION
+          description: SITE_CONFIG.SITE.DESCRIPTION
         }}
         twitter={{
-          handle: process.env.NEXT_PUBLIC_SOCIAL_TWITTER,
-          site: process.env.NEXT_PUBLIC_SOCIAL_TWITTER,
+          handle: SITE_CONFIG.FOOTER.SOCIAL.TWITTER.HANDLE,
+          site: SITE_CONFIG.FOOTER.SOCIAL.TWITTER.HANDLE,
           cardType: "summary_large_image"
         }}
       />
@@ -93,9 +94,9 @@ function AppContainer({ extras }: IAppContainerProps) {
         <div id="main">
           <Component {...pageProps} />
         </div>
-        <Feedback />
+        {SITE_CONFIG.FEEDBACK.ACTIVE && <Feedback />}
       </div>
-      {config.footer && <Footer />}
+      {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
       <AuthWall />
     </StoreProvider>
   );

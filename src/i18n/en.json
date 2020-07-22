@@ -48,6 +48,12 @@
   "FEEDBACK": "Feedback",
   "FILTERS": {
     "CLEAR": "Clear ${filterCount} Filter(s)",
+    "CUSTOM_FIELDS": {
+      "HAS_CONTENT": "Has Content",
+      "NO_CONTENT": "No Content",
+      "NO_CUSTOM_FIELD": "No Custom field(s) found",
+      "TITLE": "Custom Fields"
+    },
     "DATA_QUALITY": {
       "FLAG": {
         "FLAGGED": "Flagged",
@@ -72,9 +78,14 @@
       }
     },
     "LOCATION": {
+      "DISTRICT": "District",
       "MAP": {
         "TITLE": "Map"
       },
+      "STATE": {
+        "TITLE": "State"
+      },
+      "TAHSIL": "Tahsil",
       "TITLE": "Location"
     },
     "MEDIA": {
@@ -141,7 +152,17 @@
       "TITLE": "Time"
     },
     "TITLE": "Filters",
-    "TOGGLE": "Toggle Filters"
+    "TOGGLE": "Toggle Filters",
+    "TRAITS": {
+      "TITLE": "Traits"
+    },
+    "USER": {
+      "SEARCH": "Search User",
+      "TITLE": "User"
+    },
+    "USERGROUP": {
+      "TITLE": "User Groups"
+    }
   },
   "FOOTER": {
     "EMAIL": "Email",
@@ -165,10 +186,46 @@
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },
+    "CONFIRM_CLOSED_GROUP": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
     "CREATE": {
       "ERROR": "There was some error while creating Group",
       "SUCCESS": "Group Created Successfully",
       "TITLE": "Create a Group"
+    },
+    "CUSTOM_FIELD": {
+      "ADD": {
+        "FAILURE": "Unable to add Custom Field",
+        "SUCCESS": "Custom Field added successfully"
+      },
+      "ALLOW_PARTICIPANT": "Allow Participation",
+      "BACK": "Back to List",
+      "CREATE": "Create Custom Field",
+      "DATA_TYPE": "Data Types",
+      "EXIST": "Custom Field already exists",
+      "FIELD_TYPE": "Field Types",
+      "IS_MANDATORY": "Mandatory",
+      "NAME": "Name",
+      "NOTES": "Notes",
+      "REMOVE": {
+        "FAILURE": "Unable to delete Custom Field",
+        "SUCCESS": "Custom Field deleted successfully "
+      },
+      "REORDER": {
+        "FAILURE": "Unable to save Custom Field order",
+        "SUCCESS": "Custom Field reordered successfully"
+      },
+      "SAVE": "Save",
+      "SAVE_ORDER": "Save Custom Field Order",
+      "TABLE": {
+        "ACTIONS": "Actions",
+        "DATA_TYPE": "Data Type",
+        "INPUT_TYPE": "Input Type",
+        "MANDATORY": "Mandatory",
+        "NAME": "Name",
+        "PARTICIPATION": "Participation"
+      },
+      "TITLE": "Custom Fields",
+      "UNITS": "Units"
     },
     "DELETE_MEMBER": "Are you sure you want to delete?",
     "DESCRIPTION": "Description",
@@ -182,7 +239,13 @@
     "INVITE": "Type user name or email",
     "INVITE_FOUNDERS": "Invite Founders",
     "INVITE_MODERATORS": "Invite Moderators",
+    "JOIN": "Join Group",
     "JOIN_WITHOUT_INVITATION": "Allow user to join the group without invitaion",
+    "MEMBER": {
+      "JOINED": "Group joined successfully",
+      "JOINED_ERROR": "Unable to join Group",
+      "REQUESTED": "Group join request sent"
+    },
     "NAME": "Group Name",
     "SAVE": "Create Group",
     "SPATIAL_COVERGE": "Spatial Coverage",
@@ -344,6 +407,11 @@
     "ACCURATE": "Accurate",
     "ACTIVITY": "Activity",
     "ADD_OBSERVATION": "Add Observation",
+    "AUDIO": {
+      "START": "Start Recording",
+      "STOP": "Stop Recording",
+      "TITLE": "Audio Recorder"
+    },
     "COMMENTS": {
       "ADD_COMMENT": "Add a new comment",
       "POST": "Post Comment",
@@ -362,6 +430,7 @@
       "SUCCESS": "File deleted successfully"
     },
     "DESCRIPTION": {
+      "AUDIO": "Recording will automatically stop after two minutes",
       "MY_UPLOADS": "Upload and store media here for a period of 20 days. Select images to use in observation",
       "RESOURCES": "Upload image, audio or video files of a single observation from your device. (Use ratings to order images)"
     },
@@ -509,6 +578,7 @@
       "LABEL": "Drag file(s) here",
       "LABEL_RELEASE": "Ready to upload",
       "PROCESSING": "Processing",
+      "UPLOAD": "Upload",
       "UPLOADING": "Uploading..."
     },
     "USE_DMS": "Use DMS",
@@ -533,6 +603,7 @@
   "PREV": "Previous",
   "PROCESSING": "Processing...",
   "SAVE": "Save",
+  "SEARCH": "Search",
   "SIGN_IN": {
     "FORGOT_PASSWORD_LINK": "Forgot password?",
     "FORM": {

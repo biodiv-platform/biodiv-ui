@@ -22,7 +22,7 @@ const FormattedCell = (props) => {
   return format(+props?.cell?.value || 0);
 };
 
-export const LEADERBOARD_TABLE_MODULES = [
+export const LEADERBOARD_MODULES_COLUMNS = [
   {
     Header: "Observation",
     accessor: "observation",
@@ -45,7 +45,7 @@ export const LEADERBOARD_TABLE_MODULES = [
   }
 ];
 
-export const LEADERBOARD_TABLE_SUB_MODULES = (props) => {
+export const LEADERBOARD_SUB_MODULES_COLUMNS = (props) => {
   return [
     {
       Header: `${props} Total`,

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withPWA = require("next-pwa");
 const { nanoid } = require("nanoid");
+const SITE_CONFIG = require("./src/configs/site-config.json");
 
 module.exports = withPWA({
   pwa: {
     dest: "public",
-    disable: process.env.NODE_ENV !== "production",
+    disable: process.env.NODE_ENV !== "production" || !SITE_CONFIG.OFFLINE.ACTIVE,
     ignoreURLParametersMatching: [/^lang/, /^h/, /^w/, /^forward/],
     additionalManifestEntries: [
       { url: "/", revision: nanoid() },
