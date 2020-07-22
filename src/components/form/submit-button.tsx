@@ -11,7 +11,7 @@ interface ISubmitButtonProps {
   mb?;
   w?;
   mt?;
-  form: UseFormMethods<Record<string, any>>;
+  form: UseFormMethods<any>;
 }
 
 const SubmitButton = ({

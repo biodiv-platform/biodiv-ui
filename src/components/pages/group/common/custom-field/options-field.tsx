@@ -1,5 +1,6 @@
 import { Badge, Box, Button, Flex, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/core";
 import TextBox from "@components/form/text";
+import useTranslation from "@configs/i18n/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
@@ -7,6 +8,7 @@ import ImageUploaderField from "../image-uploader-field";
 
 export default function Fields({ form, name, radioGroupName, disabled }) {
   const [value, setValue] = useState(form.control.defaultValuesRef.current[radioGroupName] || "0");
+  const { t } = useTranslation();
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name
@@ -56,7 +58,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
                   isDisabled={fields.length < 3}
                   onClick={() => remove(index)}
                 >
-                  Remove
+                  {t("GROUP.CUSTOM_FIELD.REMOVE.TITLE")}
                 </Button>
               </Box>
               <ImageUploaderField
@@ -69,7 +71,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
               />
               <Flex alignItems="center">
                 <Badge hidden={index.toString() !== value} variantColor="green">
-                  Default
+                  {t("GROUP.HOMEPAGE_CUSTOMIZATION.DEFAULT")}
                 </Badge>
               </Flex>
             </SimpleGrid>
@@ -86,7 +88,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
         mr={4}
         mb={4}
       >
-        Add Option
+        {t("GROUP.HOMEPAGE_CUSTOMIZATION.ADD_OPTIONS")}
       </Button>
     </>
   );

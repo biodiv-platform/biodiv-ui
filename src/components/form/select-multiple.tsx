@@ -1,10 +1,11 @@
 import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { getByPath } from "@utils/basic";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
-import Select from "react-select";
+import Select, { components } from "react-select";
 
 import ErrorMessage from "./common/error-message";
-import { selectStyles } from "./configs";
+import { ClearIndicator, selectStyles } from "./configs";
 
 interface SelectMultipleProps {
   name: string;
@@ -13,11 +14,14 @@ interface SelectMultipleProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
+  optionComponent?: any;
   selectRef?;
   isRequired?: boolean;
   isSearchable?: boolean;
   form: UseFormMethods<Record<string, any>>;
 }
+
+const DefaultOptionComponent = (p) => <components.Option {...p} />;
 
 const SelectMultipleInputField = ({
   name,
@@ -25,6 +29,7 @@ const SelectMultipleInputField = ({
   hint,
   form,
   mb = 4,
+  optionComponent = DefaultOptionComponent,
   options = [],
   disabled,
   selectRef,
@@ -33,14 +38,14 @@ const SelectMultipleInputField = ({
   ...props
 }: SelectMultipleProps) => {
   const initialValue = options.filter((v) =>
-    (form.control.defaultValuesRef.current[name] || []).includes(v.value)
+    (getByPath(form.control.defaultValuesRef.current, name) || []).includes(v.value)
   );
 
   return (
     <FormControl
-      isInvalid={form.errors[name] && true}
+      isInvalid={getByPath(form.errors, name) && true}
       className="dropdown"
-      data-select-invalid={form.errors[name] && true}
+      data-select-invalid={getByPath(form.errors, name) && true}
       mb={mb}
       isRequired={isRequired}
       {...props}
@@ -49,7 +54,7 @@ const SelectMultipleInputField = ({
       <Controller
         control={form.control}
         name={name}
-        defaultValue={form.control.defaultValuesRef.current[name]}
+        defaultValue={getByPath(form.control.defaultValuesRef.current, name)}
         render={({ onChange, onBlur }) => (
           <Select
             id={name}
@@ -57,6 +62,10 @@ const SelectMultipleInputField = ({
             onChange={(o) => onChange(o.map(({ value }) => value))}
             onBlur={onBlur}
             options={options}
+            components={{
+              Option: optionComponent,
+              ClearIndicator
+            }}
             formatCreateLabel={(v) => `Add "${v}"`}
             defaultValue={initialValue}
             isSearchable={true}

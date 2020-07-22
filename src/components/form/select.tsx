@@ -1,26 +1,29 @@
 import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { getByPath } from "@utils/basic";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
-import Select from "react-select";
+import Select, { components } from "react-select";
 
 import ErrorMessage from "./common/error-message";
-import { selectStyles } from "./configs";
+import { ClearIndicator, selectStyles } from "./configs";
 
-interface ISelectProps {
+interface ISelectCreatableProps {
   name: string;
   label: string;
   mb?: number;
   disabled?: boolean;
   hint?: string;
   options?: any[];
+  optionComponent?: any;
   selectRef?;
   isRequired?: boolean;
   isControlled?: boolean;
   onChangeCallback?;
   form: UseFormMethods<Record<string, any>>;
 }
+const DefaultOptionComponent = (p) => <components.Option {...p} />;
 
-const SelectInputField = ({
+const SelectCreatableInputField = ({
   name,
   label,
   hint,
@@ -29,18 +32,21 @@ const SelectInputField = ({
   options = [],
   disabled = false,
   selectRef,
+  optionComponent = DefaultOptionComponent,
   isRequired,
   isControlled,
   onChangeCallback,
   ...props
-}: ISelectProps) => {
-  const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
+}: ISelectCreatableProps) => {
+  const initialValue = options.find(
+    (v) => v.value === getByPath(form.control.defaultValuesRef.current, name)
+  );
 
   return (
     <FormControl
-      isInvalid={form.errors[name] && true}
+      isInvalid={getByPath(form.errors, name) && true}
       className="dropdown"
-      data-select-invalid={form.errors[name] && true}
+      data-select-invalid={getByPath(form.errors, name) && true}
       mb={mb}
       isRequired={isRequired}
       {...props}
@@ -49,7 +55,7 @@ const SelectInputField = ({
       <Controller
         control={form.control}
         name={name}
-        defaultValue={form.control.defaultValuesRef.current[name]}
+        defaultValue={getByPath(form.control.defaultValuesRef.current, name)}
         render={({ onChange, onBlur, value }) => (
           <Select
             id={name}
@@ -60,10 +66,13 @@ const SelectInputField = ({
             }}
             onBlur={onBlur}
             options={options}
-            formatCreateLabel={(v) => `Add "${v}"`}
             {...(isControlled
               ? { value: options.find((o) => o.value === value) }
               : { defaultValue: initialValue })}
+            components={{
+              Option: optionComponent,
+              ClearIndicator
+            }}
             isSearchable={true}
             isDisabled={disabled}
             styles={selectStyles}
@@ -77,4 +86,4 @@ const SelectInputField = ({
   );
 };
 
-export default SelectInputField;
+export default SelectCreatableInputField;

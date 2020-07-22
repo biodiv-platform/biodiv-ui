@@ -1,8 +1,13 @@
-import { Checkbox, Flex, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/core";
+import {
+  Switch,
+  FormLabel,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  Box
+} from "@chakra-ui/core";
 import React from "react";
-import { Controller, UseFormMethods } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
+import { UseFormMethods } from "react-hook-form";
 
 interface ITextBoxProps {
   name: string;
@@ -10,33 +15,36 @@ interface ITextBoxProps {
   mt?: number;
   mb?: number;
   disabled?: boolean;
+  isChecked?: boolean;
   hint?: string;
-  form: UseFormMethods<Record<string, any>>;
+  form: UseFormMethods<any>;
 }
 
-const SwitchField = ({ name, label, form, mb = 4, hint, disabled, ...props }: ITextBoxProps) => (
+const SwitchButton = ({
+  name,
+  label,
+  form,
+  mb = 4,
+  hint,
+  isChecked = false,
+  disabled = false,
+  ...props
+}: ITextBoxProps) => (
   <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    <Flex align="center">
-      <FormLabel htmlFor={name}>
-        {label}
-      </FormLabel>
-      <Controller
-        control={form.control}
+    <Box display="flex" justifyContent="space-between">
+      <FormLabel htmlFor={name}>{label}</FormLabel>
+      <Switch
+        id={name}
         name={name}
-        render={({ onChange, onBlur, value }) => (
-          <Switch
-            onBlur={onBlur}
-            onChange={(e) => onChange(e.target["checked"])}
-            defaultIsChecked={value}
-            isDisabled={disabled}
-            color="green"
-          />
-        )}
+        defaultIsChecked={isChecked}
+        ref={form.register}
+        isDisabled={disabled}
       />
-    </Flex>
-    <ErrorMessage name={name} errors={form.errors} />
+    </Box>
+
+    <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
     {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
   </FormControl>
 );
 
-export default SwitchField;
+export default SwitchButton;

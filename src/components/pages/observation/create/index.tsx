@@ -5,7 +5,11 @@ import React, { useEffect } from "react";
 import ObservationCreateForm from "./form";
 import { preCacheRoutes } from "@utils/auth";
 
-export default function ObservationCreatePageComponent({ speciesGroups, languages }) {
+export default function ObservationCreatePageComponent({
+  speciesGroups,
+  languages,
+  ObservationCreateFormData
+}) {
   const { currentGroup, isLoggedIn } = useStoreState((s) => s);
 
   useEffect(() => {
@@ -16,7 +20,11 @@ export default function ObservationCreatePageComponent({ speciesGroups, language
 
   return (
     <div className="container mt">
-      <ObservationCreateForm speciesGroups={speciesGroups} languages={languages} />
+      <ObservationCreateForm
+        speciesGroups={speciesGroups}
+        ObservationCreateFormData={ObservationCreateFormData}
+        languages={languages}
+      />
     </div>
   );
 }

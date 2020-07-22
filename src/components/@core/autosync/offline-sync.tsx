@@ -11,6 +11,7 @@ import {
 } from "@static/events";
 import { STORE } from "@static/observation-create";
 import notification, { NotificationType } from "@utils/notification";
+import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useIndexedDBStore } from "use-indexeddb";
@@ -38,12 +39,21 @@ export default function OfflineSync() {
     deleteByID: deleteObservation
   } = useIndexedDBStore<IDBPendingObservation>(STORE.PENDING_OBSERVATIONS);
 
-  const trySyncSingleObservation = async ({ observation, instant, id = -1 }) => {
+  const { currentGroup } = useStoreState((s) => s);
+
+  const trySyncSingleObservation = async ({
+    observation,
+    customFieldData = null,
+    instant,
+    id = -1
+  }) => {
     let idbID = id;
 
     if (instant) {
       try {
-        idbID = await addObservation({ data: observation });
+        idbID = await addObservation(
+          customFieldData ? { data: { customFieldData, observation } } : { data: { observation } }
+        );
       } catch (e) {
         console.error("addObservationIDB", e);
       }
@@ -63,7 +73,11 @@ export default function OfflineSync() {
           .filter((r) => r.status !== AssetStatus.Uploaded)
           .map(axUploadObservationResource)
       );
-      const { success, data } = await axCreateObservation(observation);
+      const { success, data } = await axCreateObservation({
+        ...observation,
+        customFieldData,
+        currentGroup
+      });
       if (success) {
         await deleteObservation(idbID);
         for (const resource of observation.resources) {
@@ -94,10 +108,11 @@ export default function OfflineSync() {
     setSyncInfo({ total, current: 0 });
     onOpen();
     await Promise.all(
-      pendingObservations.map(async (observation, current) => {
+      pendingObservations.map(async ({ data: { observation, customFieldData } }, current) => {
         setSyncInfo({ total, current: current + 1 });
         await trySyncSingleObservation({
-          observation: observation.data,
+          observation: observation,
+          customFieldData: customFieldData || null,
           instant: false,
           id: observation.id
         });

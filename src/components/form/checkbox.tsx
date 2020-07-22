@@ -14,17 +14,9 @@ interface ITextBoxProps {
   form: UseFormMethods<Record<string, any>>;
 }
 
-const CheckboxField = ({
-  name,
-  label,
-  form,
-  mb = 4,
-  hint,
-  disabled,
-  ...props
-}: ITextBoxProps) => (
+const CheckboxField = ({ name, label, form, mb = 4, hint, disabled, ...props }: ITextBoxProps) => (
   <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    <Checkbox name={name} placeholder={label} ref={form.register} isDisabled={disabled}>
+    <Checkbox name={name} placeholder={label} ref={form.register()} isDisabled={disabled}>
       {label}
     </Checkbox>
     <ErrorMessage name={name} errors={form.errors} />

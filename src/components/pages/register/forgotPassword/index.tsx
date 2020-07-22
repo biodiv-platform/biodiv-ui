@@ -136,12 +136,7 @@ export default function ForgotPasswordComponent() {
             </Text>
             <form onSubmit={rForm.handleSubmit(handleOnVerification)}>
               <TextBox name="otp" label={t("OTP.FORM.OTP")} form={rForm} />
-              <TextBox
-                name="password"
-                label={t("USER.PASSWORD")}
-                type="password"
-                form={rForm}
-              />
+              <TextBox name="password" label={t("USER.PASSWORD")} type="password" form={rForm} />
               <TextBox
                 name="confirmPassword"
                 label={t("USER.CONFIRM_PASSWORD")}

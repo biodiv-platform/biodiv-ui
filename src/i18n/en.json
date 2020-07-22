@@ -304,7 +304,8 @@
       "NOTES": "Notes",
       "REMOVE": {
         "FAILURE": "Unable to delete Custom Field",
-        "SUCCESS": "Custom Field deleted successfully "
+        "SUCCESS": "Custom Field deleted successfully ",
+        "TITLE": "Remove"
       },
       "REORDER": {
         "FAILURE": "Unable to save Custom Field order",
@@ -331,6 +332,37 @@
       "TITLE": "Edit Group"
     },
     "HABITATS_COVERED": "Habitats Covered",
+    "HOMEPAGE_CUSTOMIZATION": {
+      "ABOUT_US": "About Us",
+      "ADD_OPTIONS": "Add Options",
+      "BACK": "Back to List",
+      "DEFAULT": "Default",
+      "GALLERY": "Gallery",
+      "GALLERY_SETUP": {
+        "CREATE": "Create Gallery Image",
+        "REORDER": {
+          "FAILURE": "Unable to save Gallery List  order",
+          "SUCCESS": "Gallery List reordered successfully"
+        },
+        "SAVE_ORDER": "Save Gallery Image(s) Order",
+        "SHOW_IMAGE_UPLOAD": "Show Image Uploader",
+        "TITLE": "Gallery Setup"
+      },
+      "MODULE_STATS": "Module Stats",
+      "OBSERVATION_MAP": "Observation Distribution Map",
+      "RECENT_OBSERVATION": "Recent Observation",
+      "SAVE": "Save Homepage Details",
+      "TABLE": {
+        "DESCRIPTION": "Description",
+        "MORE_LINK": "Link",
+        "REMOVE_IMAGE": "Remove",
+        "TITLE": "Title"
+      },
+      "UPDATE": {
+        "FAILURE": "Unable to Update Homepage Details",
+        "SUCCESS": "Homepage Details Updated successfully"
+      }
+    },
     "ICON": "Icon",
     "INVITE": "Type user name or email",
     "INVITE_FOUNDERS": "Invite Founders",

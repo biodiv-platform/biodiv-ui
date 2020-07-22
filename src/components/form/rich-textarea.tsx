@@ -14,7 +14,7 @@ interface IRichTextareaProps {
   mb?: number;
   hint?: string;
   isRequired?: boolean;
-  form: UseFormMethods<Record<string, any>>;
+  form: UseFormMethods<any>;
 }
 
 const RichTextareaField = ({ name, label, hint, form, mb = 4, ...props }: IRichTextareaProps) => {
