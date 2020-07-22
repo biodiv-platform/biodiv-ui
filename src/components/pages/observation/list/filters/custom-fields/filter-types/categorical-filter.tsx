@@ -1,10 +1,14 @@
 import React, { useMemo } from "react";
 
 import CheckboxFilter from "../../shared/checkbox/checkboxs";
+import { CUSTOM_FILTER_KEYS } from "./filter-keys";
 
 export default function CatergoricalFilter({ field: { id, values, name } }) {
   const groupOptions = useMemo(
-    () => values.map((g) => ({ label: g.value, value: g.value, stat: g.value })),
+    () => [
+      ...CUSTOM_FILTER_KEYS,
+      ...values.map((g) => ({ label: g.value, value: g.value, stat: g.value }))
+    ],
     []
   );
 

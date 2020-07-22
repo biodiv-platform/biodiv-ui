@@ -54,7 +54,7 @@ export default function AddCustomField({
           if (value) {
             return Yup.array().of(
               Yup.object().shape({
-                value: Yup.string().required(),
+                value: Yup.string().nullable(),
                 iconURL: Yup.string().nullable(),
                 notes: Yup.string().nullable()
               })
@@ -141,9 +141,11 @@ export default function AddCustomField({
   const handleCustomFieldName = (name) => {
     const defaultValue = allCustomFields.reduce((acc, item) => {
       if (item.customFields.name === name) {
-        const { customFields, cfValues, ...others } = item;
+        const { customFields, cfValues, allowedParticipation, isMandatory, ...others } = item;
         acc = {
           ...customFields,
+          allowedParticipation: allowedParticipation || true,
+          isMandatory: isMandatory || true,
           values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],
           ...others
         };

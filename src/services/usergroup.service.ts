@@ -1,6 +1,10 @@
 import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
-import { findCurrentUserGroup, transformUserGroupList } from "@utils/userGroup";
+import {
+  findCurrentUserGroup,
+  reorderRemovedGallerySetup,
+  transformUserGroupList
+} from "@utils/userGroup";
 
 export const axGetUserGroupList = async () => {
   try {
@@ -291,6 +295,57 @@ export const axRemoveUserGroupRule = async (userGroupId, payload) => {
   try {
     const { data } = await http.post(
       `${ENDPOINT.USERGROUP}/v1/group/filterRule/remove/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axGetGroupHompageDetails = async (userGroupId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/homePage/${userGroupId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+export const axUpdateHomePageDetails = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/update/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axRemoveHomePageGalleryImage = async (userGroupId, galleryId) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${galleryId}`
+    );
+    const { response, payload } = reorderRemovedGallerySetup(data);
+
+    await http.put(`${ENDPOINT.USERGROUP}/v1/group/homePage/reordering/${userGroupId}`, payload);
+    return { success: true, data: response };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axReorderHomePageGallery = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/reordering/${userGroupId}`,
       payload
     );
     return { success: true, data };

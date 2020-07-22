@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 
 import { ICustomFieldsProps } from ".";
 import CustomField from "./field";
+import { adminOrAuthor } from "@utils/auth";
 
 export default function CustomFieldList({
   o,
@@ -11,7 +12,10 @@ export default function CustomFieldList({
   setO,
   cfPermission
 }: ICustomFieldsProps) {
-  const { groups } = useGlobalState();
+  const {
+    groups,
+    user: { id: userId }
+  } = useGlobalState();
 
   const getGroupNameById = (gId) => useMemo(() => groups.find((g) => g.id === gId)?.name, [gId]);
 
@@ -36,7 +40,10 @@ export default function CustomFieldList({
                 userGroupId={cfList.userGroupId}
                 observationId={observationId}
                 setO={setO}
-                canEdit={getGroupPermissionsByGroupId(cfList.userGroupId).includes(cf.cfId)}
+                canEdit={
+                  adminOrAuthor(userId) &&
+                  getGroupPermissionsByGroupId(cfList.userGroupId).includes(cf.cfId)
+                }
               />
             ))}
           </TabPanel>

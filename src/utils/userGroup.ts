@@ -65,3 +65,19 @@ export const formatGroupRules = (rules) => {
 
   return groupRules;
 };
+
+export const reorderRemovedGallerySetup = (data) => {
+  const list = data?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder);
+  const response =
+    list.length <= 1
+      ? (list[1].displayOrder = 0)
+      : list.map((item, index) => {
+          if (item[index - 1].displayOrder !== item[index].displayOrder) {
+            item[index].displayOrder = item[index].displayOrder - 1;
+          }
+        });
+  return {
+    response,
+    payload: response.map(({ id, displayOrder }) => ({ galleryId: id, displayOrder }))
+  };
+};
