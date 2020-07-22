@@ -1,5 +1,6 @@
 import { Spinner } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
+import GroupCustomField from "@components/pages/group/common/custom-field";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
@@ -9,6 +10,8 @@ import GroupAdministratorsEditForm from "./group-administrator-edit-form";
 interface GroupEditPageProps {
   speciesGroups;
   habitats;
+  customFieldList;
+  allCustomField;
   groupInfo;
   founders;
   moderators;
@@ -17,6 +20,8 @@ interface GroupEditPageProps {
 
 export default function EditGroupPageComponent({
   speciesGroups,
+  customFieldList,
+  allCustomField,
   habitats,
   groupInfo,
   founders,
@@ -44,6 +49,11 @@ export default function EditGroupPageComponent({
         userGroupId={userGroupId}
         founders={founders}
         moderators={moderators}
+      />
+      <GroupCustomField
+        allCustomField={allCustomField}
+        userGroupId={userGroupId}
+        groupCustomField={customFieldList}
       />
     </div>
   );
