@@ -22,6 +22,24 @@
     "UNFLAGGED": "flagged",
     "UPDATED_FACT": "updated fact"
   },
+  "ADMIN": {
+    "LINKS": {
+      "NOTIFICATION": "Send Push-Notification"
+    },
+    "PAGES": {
+      "NOTIFICATION": {
+        "HEADING": "Send Push-Notifications",
+        "FORM": {
+          "BODY": "Body",
+          "ERROR": "Could not send notification",
+          "ICON": "Icon",
+          "LINK": "Link",
+          "SUCCESS": "Notification sent",
+          "TITLE": "Title"
+        }
+      }
+    }
+  },
   "CANCEL": "Cancel",
   "CLEAR": "Clear",
   "CLOSE": "Close",
@@ -379,7 +397,10 @@
   "LOADING": "Loading...",
   "NEXT": "Next",
   "NOTIFICATIONS": {
-    "INVALID_CREDENTIALS": "The username or password you entered is incorrect."
+    "INVALID_CREDENTIALS": "The username or password you entered is incorrect.",
+    "TOKEN_ERROR": "Error fetching token",
+    "TOKEN_NOT_SAVED": "Could not save token",
+    "TOKEN_SAVED": "Token saved"
   },
   "OBSERVATION": {
     "ACCEPTED": "Accepted",
