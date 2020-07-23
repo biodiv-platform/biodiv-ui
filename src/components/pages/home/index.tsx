@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import { useStoreState } from "easy-peasy";
 import React from "react";
+
 import Carousel from "./carousel";
 import HomeDescription from "./description";
 import Features from "./features";
