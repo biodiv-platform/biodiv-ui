@@ -8,7 +8,7 @@ import { useSortBy, useTable } from "react-table";
 function UserLeaderboardTable({ columns }) {
   const { leaderboardData, setLeaderboard, filter } = useLeaderboardFilter();
   const [sortedBy, setSortedBy] = useState("NA");
-  const authorId = useStoreState((s) => s.user.id);
+  const authorId = useStoreState((s) => s.user?.id);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     {
@@ -28,7 +28,7 @@ function UserLeaderboardTable({ columns }) {
       how_many: filter.limit,
       time: filter.period
     };
-    const data = await axGetUserLeaderboard(payload, authorId);
+    const data = await axGetUserLeaderboard(payload, user, authorId);
     setLeaderboard(data);
   };
 

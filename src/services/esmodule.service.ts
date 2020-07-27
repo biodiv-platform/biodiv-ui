@@ -1,6 +1,7 @@
 import { ENDPOINT } from "@static/constants";
 import { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
+import { createUserESObject } from "@utils/user";
 
 export const axSearchSpeciesByText = async (text, field) => {
   try {
@@ -14,9 +15,12 @@ export const axSearchSpeciesByText = async (text, field) => {
   }
 };
 
-export const axGetUserLeaderboard = async (payload, authorId = -1) => {
+export const axGetUserLeaderboard = async (payload, user) => {
+  const authorId = user?.id || -1;
+  const { time } = payload;
   const index = "eaf";
   const type = "er";
+
   try {
     const { data } = await plainHttp.get(
       `${ENDPOINT.ESMODULE}/v1/services/leaderboard/${index}/${type}`,
@@ -41,9 +45,14 @@ export const axGetUserLeaderboard = async (payload, authorId = -1) => {
         return filteredList;
       } else {
         const res = await plainHttp.get(`${ENDPOINT.ESMODULE}/v1/services/userscore`, {
-          params: { index, type, authorId }
+          params: { index, type, authorId, time }
         });
-        return [...res.data?.record, ...leaderboardRanked];
+        const user_score = [...res.data?.record];
+        if (!user_score.length) {
+          const es_user = createUserESObject(user);
+          user_score.push(es_user);
+        }
+        return [...user_score, ...leaderboardRanked];
       }
     }
     return leaderboardRanked;
