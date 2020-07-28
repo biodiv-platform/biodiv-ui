@@ -1,13 +1,13 @@
 import { Button } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axQueryTagsByText, axUpdateObservationTags } from "@services/observation.service";
+import { axQueryTagsByText } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-export default function TagsEditor({ observationId, tags, setTags, onClose }) {
+export default function TagsEditor({ objectId, updateFunc, tags, setTags, onClose }) {
   const { t } = useTranslation();
 
   const hForm = useForm({
@@ -23,8 +23,8 @@ export default function TagsEditor({ observationId, tags, setTags, onClose }) {
   };
 
   const handleOnSubmit = async (values) => {
-    const { success } = await axUpdateObservationTags({
-      objectId: observationId,
+    const { success } = await updateFunc({
+      objectId,
       tags: (values.tags || []).map((v) => ({
         id: v.value !== v.label ? v.value : null,
         version: v.version || 0,

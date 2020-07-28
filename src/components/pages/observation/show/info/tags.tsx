@@ -7,17 +7,24 @@ import TagsEditor from "./tags-editor";
 
 interface ITagsShowProps {
   items: Tags[];
-  observationId;
+  objectId;
+  updateFunc;
 }
 
-export default function TagsShow({ items = [], observationId }: ITagsShowProps) {
+export default function TagsShow({ items = [], objectId, updateFunc }: ITagsShowProps) {
   const [tags, setTags] = useState(items.map((i) => ({ label: i.name, value: i.id })));
   const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (
     <Box gridColumn="2/5" mb={2}>
       {isOpen ? (
-        <TagsEditor observationId={observationId} tags={tags} setTags={setTags} onClose={onClose} />
+        <TagsEditor
+          objectId={objectId}
+          tags={tags}
+          setTags={setTags}
+          onClose={onClose}
+          updateFunc={updateFunc}
+        />
       ) : (
         <Box>
           {tags?.map((tag) => (

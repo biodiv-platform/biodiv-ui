@@ -1,4 +1,17 @@
 {
+  "ACTIONS": {
+    "FLAG": {
+      "CATEGORY": "Category",
+      "FLAGS": {
+        "DATE_INAPPROPRIATE": "Inappropriate Date",
+        "DETAILS_INAPPROPRIATE": "Inappropriate Details",
+        "LOCATION_INAPPROPRIATE": "Inappropriate Location"
+      },
+      "NOTES": "Notes",
+      "OTHERS_FLAGGED": "Others who flagged",
+      "TITLE": "Flag"
+    }
+  },
   "ACTIVITY_TYPE": {
     "ADDED_A_COMMENT": "commented",
     "ADDED_A_FACT": "added fact",
@@ -27,6 +40,34 @@
   "CLOSE": "Close",
   "COPY": "Copy to Clipboard",
   "DELETE": "Delete",
+  "DOCUMENT": {
+    "ABSTRACT": "Abstract",
+    "ATTRIBUTION": "Attribution",
+    "AUTHORS": "Author(s)",
+    "DOI": "DOI",
+    "DOWNLOAD": {
+      "CITATION": "Download Citation",
+      "PDF": "Download PDF"
+    },
+    "EDIT_DOCUMENT": "Edit Document",
+    "FOLLOW": "Follow Document",
+    "LICENSE": "License",
+    "PUBLICATION": "Publication",
+    "PUBLICATION_DATE": "Publication Date",
+    "PUBLICATION_LANGUAGE": "Publication Language",
+    "REMOVE": {
+      "DESCRIPTION": "Are you sure? You can't undo this action afterwards.",
+      "SUCCESS": "Document deleted successfully",
+      "TITLE": "Delete document"
+    },
+    "SHARE": "Share this document",
+    "TAGS": "Tags",
+    "TITLE": "Title",
+    "TYPE": "Type",
+    "UNFOLLOW": "Unfollow Document",
+    "URL": "URL",
+    "VERSION": "Version"
+  },
   "FEEDBACK": "Feedback",
   "FILTERS": {
     "CLEAR": "Clear ${filterCount} Filter(s)",
@@ -393,18 +434,6 @@
     "EDIT_OBSERVATION": "Edit Observation",
     "FEATURE": "Feature Selected",
     "FEATURE_IN_GROUPS": "Feature in Groups",
-    "FLAG": {
-      "CATEGORY": "Category",
-      "FLAGS": {
-        "DATE_INAPPROPRIATE": "Inappropriate Date",
-        "DETAILS_INAPPROPRIATE": "Inappropriate Details",
-        "LOCATION_INAPPROPRIATE": "Inappropriate Location"
-      },
-      "NOTES": "Notes",
-      "OTHERS_FLAGGED": "Others who flagged this observation",
-      "TITLE": "Flag observation"
-    },
-    "FLAG_OBSERVATION": "Flag observation as inappropriate",
     "FOLLOW_OBSERVATION": "Follow Observation",
     "FROM_URL": "YouTube",
     "GROUP": "Group",

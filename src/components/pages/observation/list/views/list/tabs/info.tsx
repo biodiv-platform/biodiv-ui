@@ -9,6 +9,7 @@ import {
   SimpleGrid,
   Text
 } from "@chakra-ui/core";
+import FlagActionButton from "@components/@core/action-buttons/flag";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
@@ -16,14 +17,10 @@ import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { ObservationData } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
+import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadable } from "@utils/date";
 import { useStoreState } from "easy-peasy";
-import dynamic from "next/dynamic";
 import React from "react";
-
-const FlagObservation = dynamic(() => import("@components/pages/observation/show/header/flag"), {
-  ssr: false
-});
 
 interface IInfoTabProps {
   o: ObservationListPageMapper;
@@ -80,11 +77,13 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             speciesGroups={speciesGroup}
             observationId={o.observationId}
           />
-          <FlagObservation
-            observationId={o.observationId}
+          <FlagActionButton
+            resourceId={o.observationId}
             flags={o.flagShow}
             setFlags={setFlags}
             userId={user.id}
+            flagFunc={axFlagObservation}
+            unFlagFunc={axUnFlagObservation}
           />
         </Flex>
       </SimpleGrid>

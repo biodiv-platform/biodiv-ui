@@ -13,6 +13,7 @@ export const ENDPOINT = {
   NAKSHA: `${API_ENDPOINT}naksha-api/api`,
   USER: `${API_ENDPOINT}user-api/api`,
   ESMODULE: `${API_ENDPOINT}esmodule-api/api`,
+  DOCUMENT: `${API_ENDPOINT}document-api/api`,
   ACTIVITY: `${API_ENDPOINT}activity-api/api`,
   OBSERVATION: `${API_ENDPOINT}observation-api/api`,
   RESOURCES: `${API_ENDPOINT}resources-api/api`,

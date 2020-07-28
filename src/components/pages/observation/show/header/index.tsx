@@ -1,24 +1,28 @@
 import { Box, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/core";
+import DeleteActionButton from "@components/@core/action-buttons/delete";
+import FlagActionButton from "@components/@core/action-buttons/flag";
+import FollowActionButton from "@components/@core/action-buttons/follow";
+import ShareActionButton from "@components/@core/action-buttons/share";
+import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import { ShowData } from "@interfaces/observation";
+import {
+  axDeleteObservation,
+  axFlagObservation,
+  axFollowObservation,
+  axUnFlagObservation
+} from "@services/observation.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getObservationImage } from "@utils/media";
 import { useStoreState } from "easy-peasy";
 import { NextSeo } from "next-seo";
-import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useState } from "react";
 
 import Breadcrumbs from "../breadcrumbs";
 import ObservationStatusBadge from "../status-badge";
-import DeleteObservation from "./delete";
-import FollowObservation from "./follow";
-import Share from "./share";
-import SimpleButton from "./simple-button";
-
-const FlagObservation = dynamic(() => import("./flag"), { ssr: false });
 
 interface IHeaderProps {
   o: ShowData;
@@ -88,22 +92,38 @@ function Header({ o, setO, following = false }: IHeaderProps) {
         </Box>
         <Flex alignItems="top" justifyContent={["flex-start", "flex-end"]}>
           {showActions && (
-            <SimpleButton
+            <SimpleActionButton
               icon="edit"
-              title="EDIT_OBSERVATION"
+              title={t("OBSERVATION.EDIT_OBSERVATION")}
               onClick={handleOnEdit}
               variantColor="teal"
             />
           )}
-          <FollowObservation following={following} observationId={o.observation.id} />
-          <FlagObservation
-            observationId={o.observation.id}
+          <FollowActionButton
+            following={following}
+            resourceId={o.observation.id}
+            toggleFollowFunc={axFollowObservation}
+            followTitle={t("OBSERVATION.FOLLOW_OBSERVATION")}
+            unFollowTitle={t("OBSERVATION.UNFOLLOW_OBSERVATION")}
+          />
+          <FlagActionButton
+            resourceId={o.observation.id}
             flags={o.flag}
             setFlags={setFlags}
             userId={user.id}
+            flagFunc={axFlagObservation}
+            unFlagFunc={axUnFlagObservation}
           />
-          {showActions && <DeleteObservation observationId={o.observation.id} />}
-          <Share text={pageDescription} />
+          {showActions && (
+            <DeleteActionButton
+              observationId={o.observation.id}
+              title={t("OBSERVATION.REMOVE.TITLE")}
+              description={t("OBSERVATION.REMOVE.DESCRIPTION")}
+              deleted={t("OBSERVATION.REMOVE.SUCCESS")}
+              deleteFunc={axDeleteObservation}
+            />
+          )}
+          <ShareActionButton text={pageDescription} title={t("OBSERVATION.SHARE")} />
         </Flex>
       </SimpleGrid>
       <Breadcrumbs crumbs={o.recoIbp?.breadCrumbs} />

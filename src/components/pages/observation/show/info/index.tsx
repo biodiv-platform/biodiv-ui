@@ -4,12 +4,14 @@ import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@configs/i18n/useTranslation";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
+import { axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadable } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
 import { useStoreState } from "easy-peasy";
 import React from "react";
 
+import { ResponsiveInfo } from "./responsive-info";
 import SpeciesGroupBox from "./species-group";
 import Tags from "./tags";
 
@@ -17,19 +19,6 @@ interface IInfoProps {
   observation: ShowData;
   speciesGroups: SpeciesGroup[];
 }
-
-const ResponsiveInfo = ({ title, children }) => {
-  const { t } = useTranslation();
-
-  return (
-    <>
-      <Text fontWeight={600}>{t(`OBSERVATION.${title}`)}</Text>
-      <Box gridColumn={[1, 1, "2/6", "2/6"]} mb={[4, 4, 0, 0]}>
-        {children}
-      </Box>
-    </>
-  );
-};
 
 export default function Info({ observation: o, speciesGroups }: IInfoProps) {
   const { t } = useTranslation();
@@ -41,7 +30,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
   return (
     <Box p={4} mb={4} className="white-box">
       <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
-        <ResponsiveInfo title="NAME">
+        <ResponsiveInfo title="OBSERVATION.NAME">
           <i>{o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}</i>
           {o.recoIbp?.speciesId && (
             <LocalLink href={`${webAddress}/species/show/${o.recoIbp.speciesId}`}>
@@ -53,7 +42,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           {o.recoIbp?.commonName && <div>{o.recoIbp.commonName}</div>}
         </ResponsiveInfo>
 
-        <ResponsiveInfo title="GROUP">
+        <ResponsiveInfo title="OBSERVATION.GROUP">
           <SpeciesGroupBox
             id={o.observation.groupId}
             speciesGroups={speciesGroups}
@@ -61,9 +50,9 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           />
         </ResponsiveInfo>
 
-        <ResponsiveInfo title="PLACE">{o.observation.placeName}</ResponsiveInfo>
+        <ResponsiveInfo title="OBSERVATION.PLACE">{o.observation.placeName}</ResponsiveInfo>
 
-        <ResponsiveInfo title="OBSERVED_ON">
+        <ResponsiveInfo title="OBSERVATION.OBSERVED_ON">
           <Stack isInline={true}>
             <Text mr={1}>{observedOn}</Text>
             {o.observation.dateAccuracy === DATE_ACCURACY.ACCURATE && (
@@ -74,14 +63,14 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           </Stack>
         </ResponsiveInfo>
 
-        <ResponsiveInfo title="CREATED_ON">
+        <ResponsiveInfo title="OBSERVATION.CREATED_ON">
           <Stack isInline={true}>
             <Text mr={1}>{createdOn}</Text>
           </Stack>
         </ResponsiveInfo>
 
         {o.observation?.notes && (
-          <ResponsiveInfo title="NOTES">
+          <ResponsiveInfo title="OBSERVATION.NOTES">
             <Box
               gridColumn="2/5"
               className="sanitized-html"
@@ -92,8 +81,8 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           </ResponsiveInfo>
         )}
 
-        <ResponsiveInfo title="TAGS">
-          <Tags items={o.tags} observationId={o.observation.id} />
+        <ResponsiveInfo title="OBSERVATION.TAGS">
+          <Tags items={o.tags} objectId={o.observation.id} updateFunc={axUpdateObservationTags} />
         </ResponsiveInfo>
       </SimpleGrid>
     </Box>

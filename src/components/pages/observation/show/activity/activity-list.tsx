@@ -99,7 +99,7 @@ export default function ActivityList({ observationId, title = "OBSERVATION.ACTIV
         const [flagType, flagInfo] = desc.split(":");
         return (
           <Box>
-            {t(`OBSERVATION.FLAG.FLAGS.${flagType}`)}: {flagInfo}
+            {t(`ACTIONS.FLAG.FLAGS.${flagType}`)}: {flagInfo}
           </Box>
         );
 

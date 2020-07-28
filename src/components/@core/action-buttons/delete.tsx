@@ -10,22 +10,27 @@ import {
 } from "@chakra-ui/core";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axDeleteObservation } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 
-import SimpleButton from "./simple-button";
+import SimpleActionButton from "./simple";
 
-export default function DeleteObservation({ observationId }) {
+export default function DeleteActionButton({
+  observationId,
+  deleteFunc,
+  title,
+  description,
+  deleted
+}) {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const cancelRef = React.useRef();
 
   const handleOnDelete = async () => {
-    const { success } = await axDeleteObservation(observationId);
+    const { success } = await deleteFunc(observationId);
     if (success) {
-      notification(t("OBSERVATION.REMOVE.SUCCESS"), NotificationType.Success);
+      notification(deleted, NotificationType.Success);
       onClose();
       router.push("/");
     }
@@ -33,14 +38,14 @@ export default function DeleteObservation({ observationId }) {
 
   return (
     <>
-      <SimpleButton onClick={onOpen} icon="delete" title="REMOVE.TITLE" variantColor="red" />
+      <SimpleActionButton onClick={onOpen} icon="delete" title={title} variantColor="red" />
       <AlertDialog isOpen={isOpen} onClose={onClose} leastDestructiveRef={cancelRef}>
         <AlertDialogOverlay />
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            ❓ {t("OBSERVATION.REMOVE.TITLE")}
+            🗑️ {title}
           </AlertDialogHeader>
-          <AlertDialogBody>{t("OBSERVATION.REMOVE.DESCRIPTION")}</AlertDialogBody>
+          <AlertDialogBody>{description}</AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
               {t("CANCEL")}
