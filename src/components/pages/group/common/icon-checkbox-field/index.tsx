@@ -8,7 +8,7 @@ interface CheckboxProps {
   label: string;
   type: string;
   mb?: number;
-  disabled?: boolean;
+  isReadOnly?: boolean;
   hint?: string;
   options?: any[];
   form: FormContextValues<any>;
@@ -21,6 +21,7 @@ export default function IconCheckboxField({
   mb = 4,
   options = [],
   form,
+  isReadOnly,
   type,
   ...props
 }: CheckboxProps) {
@@ -38,7 +39,13 @@ export default function IconCheckboxField({
   return (
     <FormControl isInvalid={form.errors[name] && true} isRequired={true} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <CheckBoxItems values={options} defaultValue={species} onUpdate={onChange} type={type} />
+      <CheckBoxItems
+        isReadOnly={isReadOnly}
+        values={options}
+        defaultValue={species}
+        onUpdate={onChange}
+        type={type}
+      />
       <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>

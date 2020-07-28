@@ -4,6 +4,7 @@ import CheckboxField from "@components/form/checkbox";
 import RichTextareaField from "@components/form/rich-textarea";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
+import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
@@ -22,12 +23,14 @@ interface IuserGroupEditProps {
   userGroupId;
   habitats;
   speciesGroups;
+  isReadOnly?: boolean;
 }
 
 export default function UserGroupEditForm({
   groupInfo,
   userGroupId,
   habitats,
+  isReadOnly,
   speciesGroups
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
@@ -89,31 +92,47 @@ export default function UserGroupEditForm({
     }
   };
 
+  const showTextArea = (isReadOnly, name, form, label) =>
+    isReadOnly ? (
+      <TextAreaField isReadOnly={isReadOnly} name={name} label={label} form={form} />
+    ) : (
+      <RichTextareaField isReadonly={isReadOnly} name={name} label={label} form={form} />
+    );
+
   return (
     <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
         <Box gridColumn="1/4">
-          <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} form={hForm} />
-          <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} form={hForm} />
+          <TextBoxField
+            name="name"
+            isReadOnly={isReadOnly}
+            isRequired={true}
+            label={t("GROUP.NAME")}
+            form={hForm}
+          />
+          {showTextArea(isReadOnly, "description", hForm, t("GROUP.DESCRIPTION"))}
         </Box>
-        <ImageUploaderField label="Logo" name="icon" form={hForm} />
+        <ImageUploaderField isReadOnly={isReadOnly} label="Logo" name="icon" form={hForm} />
       </SimpleGrid>
       <IconCheckboxField
         name="speciesGroupId"
         label={t("GROUP.SPECIES_COVERAGE")}
         form={hForm}
         options={speciesGroups}
+        isReadOnly={isReadOnly}
         type="species"
       />
       <IconCheckboxField
         name="habitatId"
         label={t("GROUP.HABITATS_COVERED")}
         options={habitats}
+        isReadOnly={isReadOnly}
         form={hForm}
         type="habitat"
       />
       <CheckboxField
         name="allowUserToJoin"
+        disabled={isReadOnly}
         label={t("GROUP.JOIN_WITHOUT_INVITATION")}
         form={hForm}
       />
@@ -124,9 +143,11 @@ export default function UserGroupEditForm({
         isRequired={true}
       />
 
-      <SubmitButton form={hForm} mb={8}>
-        {t("GROUP.UPDATE")}
-      </SubmitButton>
+      {isReadOnly ? null : (
+        <SubmitButton form={hForm} mb={8}>
+          {t("GROUP.UPDATE")}
+        </SubmitButton>
+      )}
     </form>
   );
 }

@@ -8,6 +8,7 @@ interface ITextBoxProps {
   mt?: number;
   mb?: number;
   disabled?: boolean;
+  isReadOnly?: boolean;
   hint?: string;
   form: FormContextValues<any>;
 }
@@ -19,10 +20,17 @@ const CheckboxField = ({
   mb = 4,
   hint,
   disabled = false,
+  isReadOnly = false,
   ...props
 }: ITextBoxProps) => (
   <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    <Checkbox name={name} placeholder={label} ref={form.register} isDisabled={disabled}>
+    <Checkbox
+      name={name}
+      placeholder={label}
+      ref={form.register}
+      isReadOnly={isReadOnly}
+      isDisabled={disabled}
+    >
       {label}
     </Checkbox>
     <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>

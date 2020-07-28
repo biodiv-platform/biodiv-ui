@@ -1,6 +1,7 @@
-import { Icon, Link, Text } from "@chakra-ui/core";
+import { Button, Icon, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
+import { Role } from "@interfaces/custom";
 import { useStoreState } from "easy-peasy";
 import { Mq } from "mq-styled-components";
 import React from "react";
@@ -67,8 +68,11 @@ const Logo = styled.div`
 export default function PrimaryLogo({ isOpen, onToggle }) {
   const {
     currentGroup: { name, icon, id },
+    user,
     isLoggedIn
   } = useStoreState((s) => s);
+
+  const canEdit = () => user?.roles?.some((e) => e.id === id && e.authority === Role.Admin);
 
   return (
     <Logo>
@@ -82,6 +86,13 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
         <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
       </button>
       {isLoggedIn && id && <JoinUserGroup />}
+      {canEdit() && (
+        <LocalLink href={`/group/${name}/edit`}>
+          <Button className="join-usergroup" leftIcon="edit" m={2} variantColor="blue" size="sm">
+            Edit
+          </Button>
+        </LocalLink>
+      )}
     </Logo>
   );
 }

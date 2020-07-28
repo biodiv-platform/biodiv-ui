@@ -9,12 +9,21 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 interface IRichTextareaProps {
   name: string;
   label?: string;
+  isReadonly?: boolean;
   mb?: number;
   hint?: string;
   form: FormContextValues<any>;
 }
 
-const RichTextareaField = ({ name, label, hint, form, mb = 4, ...props }: IRichTextareaProps) => {
+const RichTextareaField = ({
+  name,
+  label,
+  hint,
+  form,
+  mb = 4,
+  isReadonly,
+  ...props
+}: IRichTextareaProps) => {
   const modules = {
     toolbar: [
       ["bold", "italic", "underline", "strike", "link"],
@@ -44,7 +53,12 @@ const RichTextareaField = ({ name, label, hint, form, mb = 4, ...props }: IRichT
       </Head>
       {label && <FormLabel>{label}</FormLabel>}
       <Box borderRadius="md" className="ql-box">
-        <ReactQuill defaultValue={quillValue} onChange={setQuillValue} modules={modules} />
+        <ReactQuill
+          readOnly={isReadonly}
+          defaultValue={quillValue}
+          onChange={setQuillValue}
+          modules={modules}
+        />
       </Box>
       <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

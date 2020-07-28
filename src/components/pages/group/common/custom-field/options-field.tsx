@@ -42,7 +42,12 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
                     label="Value"
                     form={form}
                   />
-                  <ControlledText name={`values.${index}.notes`} disabled={disabled} label="Notes" form={form} />
+                  <ControlledText
+                    name={`values.${index}.notes`}
+                    disabled={disabled}
+                    label="Notes"
+                    form={form}
+                  />
                 </SimpleGrid>
                 <Button
                   variantColor="red"

@@ -10,6 +10,7 @@ interface ITextBoxProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
+  isReadOnly?: boolean;
   form: FormContextValues<any>;
   style?;
   isRequired?: boolean;
@@ -28,6 +29,7 @@ const TextBoxField = ({
   hint,
   isRequired,
   showLabel = true,
+  isReadOnly,
   hidden,
   ...props
 }: ITextBoxProps) => (
@@ -43,6 +45,7 @@ const TextBoxField = ({
       name={name}
       id={id || name}
       placeholder={label}
+      isReadOnly={isReadOnly}
       ref={form.register}
       type={type}
       isDisabled={disabled}

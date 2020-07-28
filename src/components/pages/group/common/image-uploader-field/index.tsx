@@ -14,6 +14,7 @@ export interface IDropzoneProps {
   isCreate?: boolean;
   nestedPath?: string;
   simpleUpload?: boolean;
+  isReadOnly?: boolean;
   children?;
 }
 
@@ -23,6 +24,7 @@ export default function ImageUploaderField({
   form,
   nestedPath,
   simpleUpload,
+  isReadOnly,
   mb = 4
 }: IDropzoneProps) {
   const [value, setvalue] = useState(
@@ -46,6 +48,7 @@ export default function ImageUploaderField({
           simpleUpload={simpleUpload}
           imageSize={simpleUpload ? 60 : 300}
           setValue={setvalue}
+          isReadOnly={isReadOnly}
           resource={value}
         />
       ) : (

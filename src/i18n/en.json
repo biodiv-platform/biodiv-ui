@@ -28,7 +28,6 @@
     },
     "PAGES": {
       "NOTIFICATION": {
-        "HEADING": "Send Push-Notifications",
         "FORM": {
           "BODY": "Body",
           "ERROR": "Could not send notification",
@@ -36,7 +35,8 @@
           "LINK": "Link",
           "SUCCESS": "Notification sent",
           "TITLE": "Title"
-        }
+        },
+        "HEADING": "Send Push-Notifications"
       }
     }
   },
@@ -181,8 +181,13 @@
     "TITLE": "Password Reset"
   },
   "GROUP": {
+    "ABOUT": {
+      "TITLE": "About Us"
+    },
     "ADMIN": {
       "ERROR": "There was some error while updating Administrators",
+      "FOUNDER": "Founders",
+      "MODERATOR": "Moderators",
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },

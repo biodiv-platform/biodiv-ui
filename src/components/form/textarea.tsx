@@ -13,6 +13,7 @@ interface ITextAreaProps {
   label: string;
   mb?: number;
   disabled?: boolean;
+  isReadOnly?: boolean;
   hint?: string;
   form: FormContextValues<any>;
   style?;
@@ -24,6 +25,7 @@ const TextAreaField = ({
   label,
   form,
   mb = 4,
+  isReadOnly,
   disabled = false,
   hint,
   ...props
@@ -36,6 +38,7 @@ const TextAreaField = ({
       placeholder={label}
       ref={form.register}
       minH="124px"
+      isReadOnly={isReadOnly}
       isDisabled={disabled}
     />
     <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
