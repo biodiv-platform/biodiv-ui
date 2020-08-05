@@ -42,11 +42,11 @@ export const getYoutubeImage = (resourceUrl: string, size = "hqdefault"): string
   return ytid ? `https://i.ytimg.com/vi/${ytid}/${size}.jpg` : undefined;
 };
 
-export const getUserImage = (resourceUrl) => {
+export const getUserImage = (resourceUrl, w = 64) => {
   return resourceUrl
     ? resourceUrl.startsWith("http")
       ? resourceUrl
-      : `${ENDPOINT.FILES}/get/crop/users${resourceUrl}?w=50`
+      : `${ENDPOINT.FILES}/get/crop/users${resourceUrl}?w=${w}`
     : undefined;
 };
 

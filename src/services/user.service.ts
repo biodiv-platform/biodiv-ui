@@ -44,3 +44,15 @@ export const axUserFilterSearch = async (name) => {
     return { success: false, data: [] };
   }
 };
+
+export const axGetUserById = async (userId, ctx) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USER}/v1/user/${userId}`, {
+      params: { ctx }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: e };
+  }
+};
