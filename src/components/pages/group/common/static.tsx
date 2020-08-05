@@ -33,3 +33,11 @@ export const DEFAULT_CUSTOMFIELD_VALUE = {
   isMandatory: true,
   values: [{ name: "val1" }, { name: "val2" }]
 };
+
+export const RULES_TYPE = [
+  { label: "User", value: "hasUserRule" },
+  { label: "Spatial", value: "spartialDataList" },
+  { label: "Taxonomic", value: "taxonomicIdList" },
+  { label: "Created Date", value: "createdOnDateList" },
+  { label: "Observed Date", value: "observedOnDateList" }
+];

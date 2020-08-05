@@ -12,6 +12,7 @@ interface ISelectProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
+  onChange?;
   selectRef?;
   form: FormContextValues<any>;
 }
@@ -23,13 +24,17 @@ const SelectInputField = ({
   form,
   mb = 4,
   options = [],
+  onChange,
   disabled = false,
   selectRef,
   ...props
 }: ISelectProps) => {
   const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
 
-  const onChange = ({ value }) => {
+  const handleChange = ({ value }) => {
+    if (onChange) {
+      onChange(value);
+    }
     form.setValue(name, value);
     form.triggerValidation(name);
   };
@@ -56,7 +61,7 @@ const SelectInputField = ({
         defaultValue={initialValue}
         isSearchable={true}
         isDisabled={disabled}
-        onChange={onChange}
+        onChange={handleChange}
         styles={selectStyles}
         ref={selectRef}
       />

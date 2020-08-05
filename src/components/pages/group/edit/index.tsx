@@ -6,6 +6,7 @@ import React from "react";
 
 import UserGroupEditForm from "./form";
 import GroupAdministratorsEditForm from "./group-administrator-edit-form";
+import GroupRules from "./group-rules";
 
 interface GroupEditPageProps {
   speciesGroups;
@@ -13,6 +14,7 @@ interface GroupEditPageProps {
   customFieldList;
   allCustomField;
   groupInfo;
+  groupRules;
   founders;
   moderators;
   userGroupId;
@@ -22,6 +24,7 @@ export default function EditGroupPageComponent({
   speciesGroups,
   customFieldList,
   allCustomField,
+  groupRules,
   habitats,
   groupInfo,
   founders,
@@ -55,6 +58,7 @@ export default function EditGroupPageComponent({
         userGroupId={userGroupId}
         groupCustomField={customFieldList}
       />
+      <GroupRules rules={groupRules} userGroupId={userGroupId} />
     </div>
   );
 }

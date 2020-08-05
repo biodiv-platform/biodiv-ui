@@ -7,7 +7,11 @@ import {
   axGetGroupEditInfoByGroupId,
   axGroupList
 } from "@services/usergroup.service";
-import { axGetUserGroupCustomField, axGetAllCustomFields } from "@services/usergroup.service";
+import {
+  axGetUserGroupCustomField,
+  axGetAllCustomFields,
+  axGetUserGroupRules
+} from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
@@ -29,6 +33,7 @@ GroupEditPage.getInitialProps = async (ctx) => {
   const { data: allCustomField } = await axGetAllCustomFields(ctx);
   const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id, ctx);
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id, ctx);
+  const { data: groupRules } = await axGetUserGroupRules(currentGroup.id, ctx);
   const { success: s3, data: customFieldList } = await axGetUserGroupCustomField(
     currentGroup.id,
     ctx
@@ -41,6 +46,7 @@ GroupEditPage.getInitialProps = async (ctx) => {
       groupInfo,
       customFieldList,
       allCustomField,
+      groupRules,
       userGroupId: currentGroup.id,
       founders: data.founderList.map(({ name: label, id: value }) => ({ label, value })),
       moderators: data.moderatorList.map(({ name: label, id: value }) => ({ label, value }))

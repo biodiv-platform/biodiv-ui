@@ -50,6 +50,7 @@ export default function TaxonSuggest({ setParentState, parentState }) {
       expand_taxon: true,
       taxonIds: selectedKeys.toString()
     });
+
     if (!treeData.length) {
       setIsLoading(false);
       return;
