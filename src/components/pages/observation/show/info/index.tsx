@@ -4,6 +4,7 @@ import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@configs/i18n/useTranslation";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
+import { axQueryDocumentTagsByText } from "@services/document.service";
 import { axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadable } from "@utils/date";
@@ -82,7 +83,12 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         )}
 
         <ResponsiveInfo title="OBSERVATION.TAGS">
-          <Tags items={o.tags} objectId={o.observation.id} updateFunc={axUpdateObservationTags} />
+          <Tags
+            items={o.tags}
+            objectId={o.observation.id}
+            queryFunc={axQueryDocumentTagsByText}
+            updateFunc={axUpdateObservationTags}
+          />
         </ResponsiveInfo>
       </SimpleGrid>
     </Box>

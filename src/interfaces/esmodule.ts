@@ -48,7 +48,7 @@ export interface Feature {
   type?: string;
   geometry?: Geometry;
   properties?: {
-    [name: string]: Record<string, unknown>;
+    [name: string]: unknown;
   };
 }
 export interface FilterPanelData {
@@ -80,23 +80,23 @@ export interface Geometry {
 export interface MapAndBoolQuery {
   key?: string;
   path?: string;
-  values?: Record<string, unknown>[];
+  values?: unknown[];
 }
 export interface MapAndMatchPhraseQuery {
   key?: string;
   path?: string;
-  value?: Record<string, unknown>;
+  value?: unknown;
 }
 export interface MapAndRangeQuery {
   key?: string;
   path?: string;
-  start?: Record<string, unknown>;
-  end?: Record<string, unknown>;
+  start?: unknown;
+  end?: unknown;
 }
 export interface MapBoolQuery {
   key?: string;
   path?: string;
-  values?: Record<string, unknown>[];
+  values?: unknown[];
 }
 export interface MapBoundParams {
   bounds?: MapBounds;
@@ -109,7 +109,7 @@ export interface MapBounds {
   right?: number; // double
 }
 export interface MapDocument {
-  document?: Record<string, unknown>;
+  document?: unknown;
 }
 export interface MapExistQuery {
   key?: string;
@@ -123,18 +123,18 @@ export interface MapGeoPoint {
 export interface MapOrBoolQuery {
   key?: string;
   path?: string;
-  values?: Record<string, unknown>[];
+  values?: unknown[];
 }
 export interface MapOrMatchPhraseQuery {
   key?: string;
   path?: string;
-  value?: Record<string, unknown>;
+  value?: unknown;
 }
 export interface MapOrRangeQuery {
   key?: string;
   path?: string;
-  start?: Record<string, unknown>;
-  end?: Record<string, unknown>;
+  start?: unknown;
+  end?: unknown;
 }
 export interface MapQueryResponse {
   result?:
@@ -152,8 +152,8 @@ export interface MapQueryResponse {
 export interface MapRangeQuery {
   key?: string;
   path?: string;
-  start?: Record<string, unknown>;
-  end?: Record<string, unknown>;
+  start?: unknown;
+  end?: unknown;
 }
 export interface MapResponse {
   documents?: MapDocument[];

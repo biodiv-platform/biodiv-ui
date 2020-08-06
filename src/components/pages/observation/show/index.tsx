@@ -6,7 +6,14 @@ import {
   SpeciesGroup,
   TraitsValuePair
 } from "@interfaces/observation";
-import { axGetPermissions } from "@services/observation.service";
+import { axAddObservationComment } from "@services/activity.service";
+import {
+  axGetPermissions,
+  axGroupsFeature,
+  axGroupsUnFeature,
+  axSaveUserGroups
+} from "@services/observation.service";
+import { RESOURCE_TYPE } from "@static/constants";
 import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
@@ -63,7 +70,7 @@ export default function ObservationShowPageComponent({
 
   return (
     <div className="container mt">
-      <Header o={o} setO={setO} following={permission?.following} />
+      <Header o={o} following={permission?.following} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3" className="fadeInUp delay-3">
           <Carousel
@@ -98,12 +105,20 @@ export default function ObservationShowPageComponent({
             authorId={o.authorInfo.id}
           />
           <Groups
-            observationId={o.observation.id}
+            resourceId={o.observation.id}
             observationGroups={o.userGroups}
             featured={o.fetaured}
             permission={permission}
+            resourceType={RESOURCE_TYPE.OBSERVATION}
+            saveUserGroupsFunc={axSaveUserGroups}
+            featureFunc={axGroupsFeature}
+            unfeatureFunc={axGroupsUnFeature}
           />
-          <Activity observationId={o.observation.id} />
+          <Activity
+            resourceId={o.observation.id}
+            resourceType={RESOURCE_TYPE.OBSERVATION}
+            commentFunc={axAddObservationComment}
+          />
         </Box>
         <Box>
           <LocationInformation

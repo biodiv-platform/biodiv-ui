@@ -1,5 +1,6 @@
 export interface BodyPart {
-  entity?: Record<string, unknown>;
+  contentDisposition?: ContentDisposition;
+  entity?: unknown;
   headers?: {
     [name: string]: string[];
   };
@@ -10,7 +11,6 @@ export interface BodyPart {
   parameterizedHeaders?: {
     [name: string]: ParameterizedHeader[];
   };
-  contentDisposition?: ContentDisposition;
 }
 export interface ByteArrayInputStream {}
 export interface ContentDisposition {
@@ -60,11 +60,11 @@ export interface Document {
   attributes?: NamedNodeMap;
 }
 export interface DocumentType {
-  entities?: NamedNodeMap;
-  notations?: NamedNodeMap;
   publicId?: string;
   systemId?: string;
   internalSubset?: string;
+  entities?: NamedNodeMap;
+  notations?: NamedNodeMap;
   name?: string;
   nodeName?: string;
   nodeValue?: string;
@@ -104,7 +104,8 @@ export interface Element {
   attributes?: NamedNodeMap;
 }
 export interface FormDataBodyPart {
-  entity?: Record<string, unknown>;
+  contentDisposition?: ContentDisposition;
+  entity?: unknown;
   headers?: {
     [name: string]: string[];
   };
@@ -114,7 +115,6 @@ export interface FormDataBodyPart {
   providers?: Providers;
   simple?: boolean;
   formDataContentDisposition?: FormDataContentDisposition;
-  contentDisposition?: ContentDisposition;
   name?: string;
   value?: string;
   parameterizedHeaders?: {
@@ -134,7 +134,8 @@ export interface FormDataContentDisposition {
   name?: string;
 }
 export interface FormDataMultiPart {
-  entity?: Record<string, unknown>;
+  contentDisposition?: ContentDisposition;
+  entity?: unknown;
   headers?: {
     [name: string]: string[];
   };
@@ -149,7 +150,6 @@ export interface FormDataMultiPart {
   parameterizedHeaders?: {
     [name: string]: ParameterizedHeader[];
   };
-  contentDisposition?: ContentDisposition;
 }
 export interface GeoserverLayerStyles {
   styleName?: string;
@@ -166,7 +166,8 @@ export interface MediaType {
 }
 export interface MessageBodyWorkers {}
 export interface MultiPart {
-  entity?: Record<string, unknown>;
+  contentDisposition?: ContentDisposition;
+  entity?: unknown;
   headers?: {
     [name: string]: string[];
   };
@@ -178,7 +179,6 @@ export interface MultiPart {
   parameterizedHeaders?: {
     [name: string]: ParameterizedHeader[];
   };
-  contentDisposition?: ContentDisposition;
 }
 export interface NamedNodeMap {
   length?: number; // int32

@@ -19,14 +19,19 @@ import { EXIF_GPS_FOUND } from "@static/events";
 import { reverseGeocode } from "@utils/location";
 import React, { useEffect, useState } from "react";
 import { useListener } from "react-gbus";
+import { UseFormMethods } from "react-hook-form";
 
 import { LOCATION_ACCURACY_OPTIONS } from "../options";
 import CoordinatesInput from "./coordinates";
 import LocationMap from "./map";
 
+interface LocationPickerProps {
+  form: UseFormMethods<Record<string, any>>;
+}
+
 const LIBRARIES = ["drawing", "places"];
 
-const LocationPicker = ({ form }) => {
+const LocationPicker = ({ form }: LocationPickerProps) => {
   const { t } = useTranslation();
   const { latitude: lat, longitude: lng } = SITE_CONFIG.MAP.CENTER;
   const [hideLocationPicker, setHideLocationPicker] = useState(true);
@@ -84,14 +89,14 @@ const LocationPicker = ({ form }) => {
 
   useEffect(() => {
     if (coordinates) {
-      form.setValue(FK.latitude.name, coordinates.lat);
-      form.setValue(FK.longitude.name, coordinates.lng);
+      form.setValue(FK.latitude.name, coordinates.lat, { shouldDirty: true });
+      form.setValue(FK.longitude.name, coordinates.lng, { shouldDirty: true });
     }
   }, [coordinates]);
 
   useEffect(() => {
-    form.setValue(FK.observedAt.name, observedAtText);
-    form.setValue(FK.reverseGeocoded.name, observedAtText);
+    form.setValue(FK.observedAt.name, observedAtText, { shouldDirty: true });
+    form.setValue(FK.reverseGeocoded.name, observedAtText, { shouldDirty: true });
   }, [observedAtText]);
 
   useListener(

@@ -2,7 +2,7 @@ import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";
 import useOnlineStatus from "@rehooks/online-status";
-import { axUploadResource } from "@services/files.service";
+import { axUploadObservationResource } from "@services/files.service";
 import { axCreateObservation } from "@services/observation.service";
 import {
   SYNC_SINGLE_OBSERVATION,
@@ -59,7 +59,9 @@ export default function OfflineSync() {
 
     try {
       await Promise.all(
-        observation.resources.filter((r) => r.status !== AssetStatus.Uploaded).map(axUploadResource)
+        observation.resources
+          .filter((r) => r.status !== AssetStatus.Uploaded)
+          .map(axUploadObservationResource)
       );
       const { success, data } = await axCreateObservation(observation);
       if (success) {

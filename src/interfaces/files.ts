@@ -10,7 +10,7 @@ export interface FileUploadModel {
   uri?: string;
   error?: string;
   o?: {
-    [name: string]: Record<string, unknown>;
+    [name: string]: unknown;
   };
   uploaded?: boolean;
 }

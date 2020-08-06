@@ -26,11 +26,10 @@ import ObservationStatusBadge from "../status-badge";
 
 interface IHeaderProps {
   o: ShowData;
-  setO;
   following?: boolean;
 }
 
-function Header({ o, setO, following = false }: IHeaderProps) {
+function Header({ o, following = false }: IHeaderProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isLoggedIn, user, currentGroup } = useStoreState((s) => s);
@@ -54,12 +53,6 @@ function Header({ o, setO, following = false }: IHeaderProps) {
   useEffect(() => {
     setShowActions(adminOrAuthor(o.authorInfo.id));
   }, [isLoggedIn]);
-
-  const setFlags = (flags) => {
-    setO((draft: ShowData) => {
-      draft.flag = flags;
-    });
-  };
 
   const handleOnEdit = () => router.push(`/observation/edit/${o.observation.id}`, true);
 
@@ -108,8 +101,7 @@ function Header({ o, setO, following = false }: IHeaderProps) {
           />
           <FlagActionButton
             resourceId={o.observation.id}
-            flags={o.flag}
-            setFlags={setFlags}
+            initialFlags={o.flag}
             userId={user.id}
             flagFunc={axFlagObservation}
             unFlagFunc={axUnFlagObservation}

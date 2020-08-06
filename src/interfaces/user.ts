@@ -3,6 +3,7 @@ export interface FirebaseDTO {
   title?: string;
   body?: string;
   icon?: string;
+  clickAction?: string;
 }
 export interface FirebaseTokens {
   id?: number; // int64
@@ -73,7 +74,6 @@ export interface User {
   identificationMail?: boolean;
   sendDigest?: boolean;
   sendPushNotification?: boolean;
-  tokens?: FirebaseTokens[];
 }
 export interface UserDTO {
   id?: number; // int64

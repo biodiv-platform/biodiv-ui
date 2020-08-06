@@ -15,7 +15,6 @@ import ObservationStatusBadge from "@components/pages/observation/show/status-ba
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
-import { ObservationData } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadable } from "@utils/date";
@@ -30,15 +29,8 @@ interface IInfoTabProps {
 
 export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) {
   const { t } = useTranslation();
-  const { speciesGroup, observationData, setObservationData } = useObservationFilter();
+  const { speciesGroup, observationData } = useObservationFilter();
   const { user } = useStoreState((s) => s);
-
-  const setFlags = (flags) => {
-    setObservationData((_draft: ObservationData) => {
-      const obIndex = _draft.l.findIndex((ob) => ob.observationId === o.observationId);
-      _draft.l[obIndex].flagShow = flags;
-    });
-  };
 
   return (
     <Box size="full" display="flex" flexDir="column" justifyContent="space-between">
@@ -79,8 +71,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           />
           <FlagActionButton
             resourceId={o.observationId}
-            flags={o.flagShow}
-            setFlags={setFlags}
+            initialFlags={o.flagShow}
             userId={user.id}
             flagFunc={axFlagObservation}
             unFlagFunc={axUnFlagObservation}

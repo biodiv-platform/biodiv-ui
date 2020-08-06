@@ -80,6 +80,11 @@ export default [
     ]
   },
   {
+    active: SITE_CONFIG.LANDSCAPE.ACTIVE,
+    name: "HEADER.MENU_SECONDARY.LANDSCAPES.",
+    to: "/landscape/list"
+  },
+  {
     active: SITE_CONFIG.PAGES.ACTIVE,
     cell: PagesMenuItem,
     name: "HEADER.MENU_SECONDARY.PAGES."

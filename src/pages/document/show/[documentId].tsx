@@ -1,8 +1,8 @@
-import DocumentShowPageComponent from "@components/pages/document/show";
+import DocumentShowComponent from "@components/pages/document/show";
 import { axGetDocumentById } from "@services/document.service";
 import React from "react";
 
-const DocumentShowPage = ({ document }) => <DocumentShowPageComponent document={document} />;
+const DocumentShowPage = ({ document }) => <DocumentShowComponent document={document} />;
 
 DocumentShowPage.getInitialProps = async (ctx) => {
   const { data: document } = await axGetDocumentById(ctx.query.documentId);

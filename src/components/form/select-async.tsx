@@ -1,11 +1,12 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 import { components } from "react-select";
 import AsyncSelect from "react-select/async-creatable";
 
+import ErrorMessage from "./common/error-message";
 import { ClearIndicator, selectStyles } from "./configs";
 
 interface ISelectProps {
@@ -25,7 +26,7 @@ interface ISelectProps {
   eventCallback?;
   selectRef?;
   isClearable?;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   resetOnSubmit?;
 }
 
@@ -66,7 +67,7 @@ const SelectAsyncInputField = ({
 
   useEffect(() => {
     form.setValue(name, multiple ? selected : selected?.value);
-    form.triggerValidation(name);
+    form.trigger(name);
     if (onChange && selected) {
       onChange(selected);
     }
@@ -118,7 +119,7 @@ const SelectAsyncInputField = ({
         styles={selectStyles}
         ref={selectRef}
       />
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

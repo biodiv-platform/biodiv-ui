@@ -1,9 +1,9 @@
-import { Box, Icon, SimpleGrid } from "@chakra-ui/core";
-import BlueLink from "@components/@core/blue-link";
+import { Box, SimpleGrid } from "@chakra-ui/core";
+import ExternalBlueLink from "@components/@core/blue-link/external";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
 import TagsShow from "@components/pages/observation/show/info/tags";
 import { ShowDocument } from "@interfaces/document";
-import { axUpdateObservationTags } from "@services/observation.service";
+import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
 import { LICENSES } from "@static/licenses";
 import { getInjectableHTML } from "@utils/text";
 import React from "react";
@@ -13,90 +13,110 @@ interface DocumentInfoProps {
 }
 
 export default function DocumentInfo({ d }: DocumentInfoProps) {
-  const {
-    title,
-    externalUrl,
-    type,
-    notes,
-    attribution,
-    contributors,
-    version,
-    doil,
-    fromDate,
-    languageId,
-    licenseId,
-    id: documentId
-  } = d.document;
+  const { document } = d;
 
   const INFO_LINKS = [
     {
-      title: "DOCUMENT.TITLE",
-      value: title
-    },
-    {
-      title: "DOCUMENT.URL",
-      value: externalUrl,
-      cell: (
-        <BlueLink href={externalUrl} target="_blank" rel="noreferrer noopener">
-          {externalUrl} <Icon name="external-link" />
-        </BlueLink>
-      )
-    },
-    {
       title: "DOCUMENT.TYPE",
-      value: type
+      value: document.itemtype
     },
     {
-      title: "DOCUMENT.ABSTRACT",
-      value: notes,
+      title: "DOCUMENT.TITLE",
+      value: document.title
+    },
+    {
+      title: "DOCUMENT.BIB.AUTHOR",
+      value: document.author
+    },
+    {
+      title: "DOCUMENT.DESCRIPTION",
+      value: document.notes,
       cell: (
         <Box
           gridColumn="2/5"
           className="sanitized-html"
           dangerouslySetInnerHTML={{
-            __html: getInjectableHTML(notes)
+            __html: getInjectableHTML(document.notes)
           }}
         ></Box>
       )
     },
     {
-      title: "DOCUMENT.ATTRIBUTION",
-      value: attribution
+      title: "DOCUMENT.BIB.JOURNAL",
+      value: document.journal
     },
     {
-      title: "DOCUMENT.AUTHORS",
-      value: contributors
+      title: "DOCUMENT.BIB.BOOKTITLE",
+      value: document.bookTitle
     },
     {
-      title: "DOCUMENT.VERSION",
-      value: version
+      title: "DOCUMENT.BIB.SERIES",
+      value: document.series
     },
     {
-      title: "DOCUMENT.DOI",
-      value: doil
+      title: "DOCUMENT.BIB.VOLUME",
+      value: document.volume
+    },
+    {
+      title: "DOCUMENT.BIB.NUMBER",
+      value: document.number
+    },
+    {
+      title: "DOCUMENT.BIB.PAGES",
+      value: document.pages
+    },
+    {
+      title: "DOCUMENT.BIB.PUBLISHER",
+      value: document.publisher
     },
     {
       title: "DOCUMENT.PUBLICATION_DATE",
-      value: fromDate
+      value: document.fromDate
     },
     {
       title: "DOCUMENT.PUBLICATION_LANGUAGE",
-      value: languageId
+      value: document.language
+    },
+    {
+      title: "DOCUMENT.BIB.YEAR",
+      value: document.year
+    },
+    {
+      title: "DOCUMENT.BIB.MONTH",
+      value: document.month
+    },
+    {
+      title: "DOCUMENT.CREATED_ON",
+      value: document.createdOn
+    },
+    {
+      title: "DOCUMENT.BIB.DOI",
+      value: document.doil
+    },
+    {
+      title: "DOCUMENT.CONTRIBUTION",
+      value: document.contributors
     },
     {
       title: "DOCUMENT.LICENSE",
-      value: licenseId,
+      value: document.licenseId,
       cell: (
-        <BlueLink href={LICENSES[licenseId].link} target="_blank" rel="noreferrer noopener">
-          {LICENSES[licenseId].name} <Icon name="external-link" />
-        </BlueLink>
+        <ExternalBlueLink href={LICENSES[document.licenseId].link}>
+          {LICENSES[document.licenseId].name}
+        </ExternalBlueLink>
       )
     },
     {
       title: "DOCUMENT.TAGS",
       value: 1,
-      // TODO: replace with actual update func from back-end
-      cell: <TagsShow items={d.tags} objectId={documentId} updateFunc={axUpdateObservationTags} />
+      cell: (
+        <TagsShow
+          items={d.tags}
+          objectId={document.id}
+          queryFunc={axQueryDocumentTagsByText}
+          updateFunc={axUpdateDocumentTags}
+        />
+      )
     }
   ];
 

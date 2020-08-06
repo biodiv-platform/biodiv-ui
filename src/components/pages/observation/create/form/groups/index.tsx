@@ -7,7 +7,7 @@ import {
   RadioButtonGroup
 } from "@chakra-ui/core";
 import React, { useEffect } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 import CustomRadio from "./custom-radio";
 
@@ -18,7 +18,7 @@ interface ISpeciesSelecProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const GroupSelector = ({
@@ -33,7 +33,7 @@ const GroupSelector = ({
   const value = form.watch(name);
 
   const onChange = (v) => {
-    form.setValue(name, v);
+    form.setValue(name, v, { shouldDirty: true, shouldValidate: true });
   };
 
   useEffect(() => {

@@ -11,12 +11,13 @@ import Select from "@components/form/select";
 import SelectAsync from "@components/form/select-async";
 import Submit from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
+import SITE_CONFIG from "@configs/site-config.json";
 import { axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
-import { DEFAULT_LANGUAGE_ID } from "@static/constants";
 import notification from "@utils/notification";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import SkeletonLoader from "tiny-skeleton-loader-react";
 import * as Yup from "yup";
 
@@ -57,19 +58,21 @@ export default function AddSuggestion({
     );
   }, []);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      taxonCommonName: Yup.string().nullable(),
-      scientificNameTaxonId: Yup.mixed().nullable(),
-      taxonScientificName: Yup.string().nullable(),
-      languageId: Yup.mixed().nullable()
-    }),
+    resolver: yupResolver(
+      Yup.object().shape({
+        taxonCommonName: Yup.string().nullable(),
+        scientificNameTaxonId: Yup.mixed().nullable(),
+        taxonScientificName: Yup.string().nullable(),
+        languageId: Yup.mixed().nullable()
+      })
+    ),
     defaultValues: {
       taxonCommonName: null,
       scientificNameTaxonId: null,
       taxonScientificName: null,
-      languageId: DEFAULT_LANGUAGE_ID
+      languageId: SITE_CONFIG.LANG.DEFAULT_ID
     }
   });
 

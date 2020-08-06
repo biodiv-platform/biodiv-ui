@@ -1,8 +1,10 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/core";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 import MobileInput from "react-phone-number-input";
+
+import ErrorMessage from "./common/error-message";
 
 interface ISelectProps {
   name: string;
@@ -12,7 +14,7 @@ interface ISelectProps {
   hint?: string;
   defaultCountry?: string;
   onBlur?;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const PhoneNumberInputField = ({
@@ -36,7 +38,7 @@ const PhoneNumberInputField = ({
   }, [form.register]);
 
   const handleOnBlur = () => {
-    form.triggerValidation(name);
+    form.trigger(name);
   };
 
   return (
@@ -53,7 +55,7 @@ const PhoneNumberInputField = ({
         onBlur={handleOnBlur}
         disabled={disabled}
       />
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

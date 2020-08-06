@@ -9,9 +9,10 @@ interface ITagsShowProps {
   items: Tags[];
   objectId;
   updateFunc;
+  queryFunc;
 }
 
-export default function TagsShow({ items = [], objectId, updateFunc }: ITagsShowProps) {
+export default function TagsShow({ items = [], objectId, updateFunc, queryFunc }: ITagsShowProps) {
   const [tags, setTags] = useState(items.map((i) => ({ label: i.name, value: i.id })));
   const { isOpen, onToggle, onClose } = useDisclosure();
 
@@ -23,6 +24,7 @@ export default function TagsShow({ items = [], objectId, updateFunc }: ITagsShow
           tags={tags}
           setTags={setTags}
           onClose={onClose}
+          queryFunc={queryFunc}
           updateFunc={updateFunc}
         />
       ) : (

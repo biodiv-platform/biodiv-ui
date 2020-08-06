@@ -5,13 +5,13 @@ import SelectAsync from "@components/form/select-async";
 import useTranslation from "@configs/i18n/useTranslation";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 import { CommonNameOption, getCommonNameOption, onCommonNameQuery } from "./common-name";
 import { onScientificNameQuery, ScientificNameOption } from "./scientific-name";
 
 interface IRecodataProps {
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   languages;
 }
 

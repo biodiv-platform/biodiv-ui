@@ -14,7 +14,7 @@ export default function Sidebar({ d }: SidebarProps) {
     <div>
       <User user={d.userIbp} />
       <DownloadButtons />
-      <DocumentSidebarMap />
+      <DocumentSidebarMap documentCoverages={d.documentCoverages} />
     </div>
   );
 }

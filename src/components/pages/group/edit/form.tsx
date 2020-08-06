@@ -10,6 +10,7 @@ import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import AreaDrawFieldProps from "../common/area-draw-field";
@@ -46,17 +47,19 @@ export default function UserGroupEditForm({
     allowUserToJoin
   } = groupInfo;
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      name: Yup.string().required(),
-      speciesGroupId: Yup.array().required(),
-      habitatId: Yup.array().required(),
-      spacialCoverage: Yup.object().shape({
-        ne: Yup.array().required(),
-        se: Yup.array().required()
+    resolver: yupResolver(
+      Yup.object().shape({
+        name: Yup.string().required(),
+        speciesGroupId: Yup.array().required(),
+        habitatId: Yup.array().required(),
+        spacialCoverage: Yup.object().shape({
+          ne: Yup.array().required(),
+          se: Yup.array().required()
+        })
       })
-    }),
+    ),
     defaultValues: {
       name,
       description,
@@ -104,6 +107,7 @@ export default function UserGroupEditForm({
         form={hForm}
         options={speciesGroups}
         type="species"
+        isRequired={true}
       />
       <IconCheckboxField
         name="habitatId"
@@ -111,6 +115,7 @@ export default function UserGroupEditForm({
         options={habitats}
         form={hForm}
         type="habitat"
+        isRequired={true}
       />
       <CheckboxField
         name="allowUserToJoin"

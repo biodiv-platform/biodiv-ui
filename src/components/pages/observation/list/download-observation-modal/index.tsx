@@ -18,6 +18,7 @@ import notification, { NotificationType } from "@utils/notification";
 import { useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import CheckboxGroupField from "./checkbox-group-field";
@@ -32,18 +33,20 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
   const { customFields, traits, filter } = useObservationFilter();
   const [isHidden, setIsHidden] = useState(false);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onSubmit",
-    validationSchema: Yup.object().shape({
-      core: Yup.array(),
-      taxonomic: Yup.array(),
-      temporal: Yup.array(),
-      spatial: Yup.array(),
-      misc: Yup.array(),
-      traits: Yup.array(),
-      customfields: Yup.array(),
-      notes: Yup.string().required()
-    }),
+    resolver: yupResolver(
+      Yup.object().shape({
+        core: Yup.array(),
+        taxonomic: Yup.array(),
+        temporal: Yup.array(),
+        spatial: Yup.array(),
+        misc: Yup.array(),
+        traits: Yup.array(),
+        customfields: Yup.array(),
+        notes: Yup.string().required()
+      })
+    ),
     defaultValues: {
       core: OBSERVATION_FILTERS[0].options.map(({ value }) => value),
       taxonomic: [],

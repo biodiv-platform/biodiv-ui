@@ -115,6 +115,13 @@ input {
   p {
     margin-bottom: 0.3rem;
   }
+  ul,
+  ol {
+    margin-left: 1rem;
+  }
+  ol {
+    list-style-type: decimal;
+  }
 }
 
 .flash {
@@ -210,7 +217,6 @@ button[role="tab"] {
   .ql-container {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    height: 100%;
     height: 6.2em;
     overflow-y: auto;
   }
@@ -230,4 +236,8 @@ button[role="tab"] {
 
 .elipsis-2 {
   -webkit-line-clamp: 2;
+}
+
+.flatpickr-input {
+  background: white !important;
 }

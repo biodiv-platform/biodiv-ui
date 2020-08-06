@@ -35,20 +35,12 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
     setShowActions(adminOrAuthor(document.document.authorId));
   }, [isLoggedIn]);
 
-  const setFlags = (flags) => {
-    console.debug(flags);
-    // TODO: update to tree root
-    // setDocument((draft: ShowDocument) => {
-    //   draft.flag = flags;
-    // });
-  };
-
   const handleOnEdit = () => router.push(`/document/edit/${documentId}`, true);
 
   return (
     <SimpleGrid columns={[1, 1, 4, 4]} mb={4} className="fadeInUp">
       <Box gridColumn="1 / 4">
-        <Heading as="h1" size="xl" mb={2}>
+        <Heading as="h1" size="lg" mb={2}>
           {document?.document?.title}
         </Heading>
       </Box>
@@ -70,8 +62,7 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
         />
         <FlagActionButton
           resourceId={documentId}
-          flags={document?.flag}
-          setFlags={setFlags}
+          initialFlags={document?.flag}
           userId={user.id}
           flagFunc={axFlagDocument}
           unFlagFunc={axUnFlagDocument}

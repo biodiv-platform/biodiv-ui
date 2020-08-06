@@ -11,7 +11,7 @@ import useTranslation from "@configs/i18n/useTranslation";
 import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
 import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 import AudioInput from "./audio-input";
 import FromURL from "./from-url";
@@ -22,7 +22,7 @@ import useObservationCreate from "./use-observation-resources";
 export interface IDropzoneProps {
   name: string;
   mb?: number;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   children?;
 }
@@ -33,7 +33,7 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    form.setValue(name, observationAssets);
+    form.setValue(name, observationAssets, { shouldDirty: true });
   }, [observationAssets]);
 
   useEffect(() => {

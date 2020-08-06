@@ -23,18 +23,20 @@ import TextArea from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { FlagShow } from "@interfaces/observation";
 import { FLAG_OPTIONS } from "@static/constants";
+import { ACTIVITY_UPDATED } from "@static/events";
 import { adminOrAuthor } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { emit } from "react-gbus";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import SimpleActionButton from "./simple";
 
 interface IFlagObservationProps {
-  flags: FlagShow[];
-  setFlags;
+  initialFlags: FlagShow[];
   resourceId;
   userId;
   flagFunc;
@@ -42,14 +44,14 @@ interface IFlagObservationProps {
 }
 
 export default function FlagActionButton({
-  flags,
-  setFlags,
+  initialFlags,
   resourceId,
   userId,
   flagFunc,
   unFlagFunc
 }: IFlagObservationProps) {
   const { t } = useTranslation();
+  const [flags, setFlags] = useState(initialFlags);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -66,16 +68,19 @@ export default function FlagActionButton({
 
   const hForm = useForm({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      flag: Yup.string().required(),
-      notes: Yup.string().required()
-    })
+    resolver: yupResolver(
+      Yup.object().shape({
+        flag: Yup.string().required(),
+        notes: Yup.string().required()
+      })
+    )
   });
 
   const handleOnFlag = async (payload) => {
     const { success, data } = await flagFunc(resourceId, payload);
     if (success) {
       setFlags(data);
+      emit(ACTIVITY_UPDATED, resourceId);
       onClose();
     }
   };
@@ -84,6 +89,7 @@ export default function FlagActionButton({
     const { success, data } = await unFlagFunc(resourceId, flagId);
     if (success) {
       setFlags(data);
+      emit(ACTIVITY_UPDATED, resourceId);
       onClose();
     }
   };

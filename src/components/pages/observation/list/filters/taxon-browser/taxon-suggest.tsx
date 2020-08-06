@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 import { axGetTaxonList, doTaxonSearch } from "@services/api.service";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import { mergeDeep } from "./taxon-browser-helpers";
@@ -33,9 +34,11 @@ export default function TaxonSuggest({ setParentState, parentState }) {
   const { t } = useTranslation();
 
   const hForm = useForm({
-    validationSchema: Yup.object().shape({
-      query: Yup.string()
-    })
+    resolver: yupResolver(
+      Yup.object().shape({
+        query: Yup.string()
+      })
+    )
   });
 
   const handleOnSearch = async (values) => {

@@ -3,6 +3,7 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import GroupPost from "@components/pages/observation/show/groups/group-post";
 import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
+import { axSaveUserGroups } from "@services/observation.service";
 import React from "react";
 
 export default function GroupsTab({ tabIndex, o }) {
@@ -16,7 +17,8 @@ export default function GroupsTab({ tabIndex, o }) {
         <GroupPost
           groups={loggedInUserGroups}
           selectedDefault={o.userGroup}
-          observationId={o.observationId}
+          resourceId={o.observationId}
+          saveUserGroupsFunc={axSaveUserGroups}
         />
       </Box>
     </>

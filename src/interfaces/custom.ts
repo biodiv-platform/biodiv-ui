@@ -127,3 +127,9 @@ export interface LeaderboardFilterProps {
   period: string;
   limit: number;
 }
+
+export interface ResourceDocument {
+  resourceURL: string;
+  size: string;
+  timestamp: number;
+}

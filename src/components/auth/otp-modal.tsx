@@ -20,6 +20,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useNookies from "next-nookies-persist";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import OTPIcon from "./otp-icon";
@@ -31,9 +32,11 @@ export default function OTPModal({ isOpen, onClose, user }) {
 
   const otpForm = useForm({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      otp: Yup.string().required()
-    })
+    resolver: yupResolver(
+      Yup.object().shape({
+        otp: Yup.string().required()
+      })
+    )
   });
 
   const handleOtpFormSubmit = async (values) => {

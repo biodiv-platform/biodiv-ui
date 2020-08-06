@@ -5,9 +5,10 @@ import React from "react";
 
 export interface ITraitInputProps {
   type?: string;
-  values: any[];
+  options: any[];
   gridColumns?;
-  onUpdate;
+  onBlur;
+  onChange;
   defaultValue?;
 }
 
@@ -27,14 +28,15 @@ const CustomCheckbox = ({ value, label, icon, type, ...props }) => (
   </label>
 );
 
-const CheckBoxItems = ({ values, type, onUpdate, defaultValue }: ITraitInputProps) => (
+const CheckBoxItems = ({ options, type, onChange, onBlur, defaultValue }: ITraitInputProps) => (
   <CheckboxGroup
     defaultValue={defaultValue && defaultValue.map((o) => o.toString())}
-    onChange={(v) => onUpdate(v.map((i) => Number(i)))}
+    onChange={(v) => onChange(v.map((i) => Number(i)))}
+    onBlur={onBlur}
     isInline={true}
     spacing={3}
   >
-    {values.map((o) => (
+    {options.map((o) => (
       <CustomCheckbox
         key={o.id}
         value={o.id.toString()}

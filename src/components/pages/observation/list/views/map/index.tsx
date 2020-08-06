@@ -1,5 +1,6 @@
 import React from "react";
 
 export default function MapView() {
-  return <div>TODO: Map View</div>;
+  // TODO: Map Layers + grid view
+  return <div>Map View</div>;
 }

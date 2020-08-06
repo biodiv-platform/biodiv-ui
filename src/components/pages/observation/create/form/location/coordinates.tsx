@@ -13,12 +13,12 @@ import CheckBox from "@components/form/checkbox";
 import useTranslation from "@configs/i18n/useTranslation";
 import { fromDMS, toDMS } from "dmsformat";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 interface ICoordinatesProps {
   show: boolean;
   fk;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   coordinates;
   setCoordinates;
 }

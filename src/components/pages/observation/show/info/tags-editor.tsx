@@ -1,24 +1,26 @@
 import { Button } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axQueryTagsByText } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
-export default function TagsEditor({ objectId, updateFunc, tags, setTags, onClose }) {
+export default function TagsEditor({ objectId, queryFunc, updateFunc, tags, setTags, onClose }) {
   const { t } = useTranslation();
 
-  const hForm = useForm({
-    validationSchema: Yup.object().shape({
-      tags: Yup.array().nullable()
-    }),
+  const hForm = useForm<any>({
+    resolver: yupResolver(
+      Yup.object().shape({
+        tags: Yup.array().nullable()
+      })
+    ),
     defaultValues: { tags }
   });
 
   const onTagsQuery = async (q) => {
-    const { data } = await axQueryTagsByText(q);
+    const { data } = await queryFunc(q);
     return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
   };
 
