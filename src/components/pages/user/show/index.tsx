@@ -1,14 +1,19 @@
-import { Avatar, Box, Divider, Flex, SimpleGrid } from "@chakra-ui/core";
+import { Avatar, Box, Button, Divider, Flex, SimpleGrid } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
+import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
+import { useStoreState } from "easy-peasy";
 import React from "react";
 
 import TextView from "./user-details-view/text-view";
 import UserMapView from "./user-details-view/user-map-view";
 
 export default function UserProfile({ userDetails }) {
+  const {
+    user: { id: authorId }
+  } = useStoreState((s) => s);
   const {
     name,
     profilePic,
@@ -20,6 +25,8 @@ export default function UserProfile({ userDetails }) {
     institution,
     dateCreated,
     lastLoginDate,
+    latitude,
+    longitude,
     aboutMe
   } = userDetails;
 
@@ -27,13 +34,17 @@ export default function UserProfile({ userDetails }) {
     <div className="container mt">
       <SimpleGrid columns={[1, 2]} mb={4}>
         <Flex alignItems="center">
-          <Avatar mr={4} name={name} src={getUserImage(profilePic, 64)} size="lg" />
+          <Avatar mr={4} name={name} src={getUserImage(profilePic, 96)} size="xl" />
           <PageHeading mb={0}>{`${name}`}</PageHeading>
         </Flex>
         <Flex justifyContent={["flex-start", "flex-end"]} alignItems="center">
           <Box background="gray" color="white" p={1} m={3}>
-            {email}
+            {adminOrAuthor(authorId) && email}
           </Box>
+          {/* button added only for representationl pourpose on ticket requirement, functionlity in future */}
+          <Button ml={3} variantColor="blue" size="sm">
+            Edit Details
+          </Button>
         </Flex>
       </SimpleGrid>
       {aboutMe && <HomeDescription description={aboutMe} />}
@@ -48,9 +59,11 @@ export default function UserProfile({ userDetails }) {
           <TextView name="🕗 Member Since" value={formatDate(dateCreated)} />
           <TextView name="🔐 Last Visited" value={formatDate(lastLoginDate)} />
         </Box>
-        <Box minHeight="250px">
-          <UserMapView latitude={30.5} longitude={50.5} />
-        </Box>
+        {longitude && latitude && (
+          <Box minHeight="250px">
+            <UserMapView latitude={longitude} longitude={latitude} />
+          </Box>
+        )}
       </SimpleGrid>
     </div>
   );
