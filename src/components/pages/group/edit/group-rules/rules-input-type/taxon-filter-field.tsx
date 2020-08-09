@@ -14,7 +14,7 @@ export default function TaxonInputField({ form, label, name }) {
         label,
         raw: { id }
       } = value[value.length - 1];
-      value[value.length - 1] = { value: id, label };
+      value[value.length - 1] = { id, label };
     }
     setSelected(value);
   };

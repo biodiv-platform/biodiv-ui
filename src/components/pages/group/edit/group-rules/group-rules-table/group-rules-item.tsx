@@ -1,13 +1,13 @@
 import React from "react";
 import GroupRulesRow from "./group-rules-row";
 
-const CustomFieldListItems = ({ groupRules, removeCustomField }) => {
+const GroupRulesListItems = ({ groupRules, removeGroupRules }) => {
   return (
     <tbody>
       {groupRules.map((item, index) => (
         <GroupRulesRow
           key={index}
-          onDelete={() => removeCustomField(item.customFields.id)}
+          onDelete={() => removeGroupRules({ filterName: item.name, filterId: item.id })}
           itemDetails={item}
         />
       ))}
@@ -15,4 +15,4 @@ const CustomFieldListItems = ({ groupRules, removeCustomField }) => {
   );
 };
 
-export default CustomFieldListItems;
+export default GroupRulesListItems;

@@ -1,21 +1,21 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axRemoveCustomField } from "@services/usergroup.service";
+import { axRemoveUserGroupRule } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 
 import GroupRules from "./group-rules-item";
 
-const CustomFieldTable = ({ userGroupId, groupRules, setGroupRules, setIsCreate }) => {
+const GroupRulesTable = ({ userGroupId, groupRules, setGroupRules, setIsCreate }) => {
   const { t } = useTranslation();
 
-  const removeGroupRules = async (index) => {
-    const { success } = await axRemoveCustomField(userGroupId, index);
+  const removeGroupRules = async ({ filterName, filterId }) => {
+    const { success } = await axRemoveUserGroupRule(userGroupId, { filterName, filterId });
     if (success) {
-      setGroupRules(groupRules);
-      notification(t("GROUP.CUSTOM_FIELD.REMOVE.SUCCESS"), NotificationType.Success);
+      setGroupRules(groupRules.filter((item) => item.id !== filterId));
+      notification(t("GROUP.RULES.REMOVE.SUCCESS"), NotificationType.Success);
     } else {
-      notification(t("GROUP.CUSTOM_FIELD.REMOVE.FAILURE"), NotificationType.Error);
+      notification(t("GROUP.RULES.REMOVE.FAILURE"), NotificationType.Error);
     }
   };
 
@@ -24,21 +24,20 @@ const CustomFieldTable = ({ userGroupId, groupRules, setGroupRules, setIsCreate 
       <table style={{ minWidth: "750px" }} className="table table-bordered">
         <thead>
           <tr>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.NAME")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.DATA_TYPE")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.INPUT_TYPE")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.ACTIONS")}</th>
+            <th>{t("GROUP.RULES.TABLE.RULE_TYPE")}</th>
+            <th>{t("GROUP.RULES.TABLE.VALUE")}</th>
+            <th>{t("GROUP.RULES.TABLE.ACTIONS")}</th>
           </tr>
         </thead>
-        <GroupRules removeCustomField={removeGroupRules} groupRules={groupRules} />
+        <GroupRules removeGroupRules={removeGroupRules} groupRules={groupRules} />
       </table>
       <ButtonGroup spacing={4} mt={4}>
         <Button variantColor="blue" onClick={() => setIsCreate(true)} leftIcon="add">
-          {t("GROUP.CUSTOM_FIELD.CREATE")}
+          {t("GROUP.RULES.ADD.TITLE")}
         </Button>
       </ButtonGroup>
     </Box>
   );
 };
 
-export default CustomFieldTable;
+export default GroupRulesTable;

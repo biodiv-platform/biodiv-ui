@@ -1,22 +1,38 @@
 import React from "react";
 import DateRangePickerField from "@components/form/daterangepicker";
-import CheckboxField from "@components/form/checkbox";
-import AreaDrawField from "../../../common/area-draw-field";
+import CheckBoxField from "@components/form/checkbox";
+import GeoJsonWktParserInput from "../geojson-wkt-inputfield";
 import TaxonInputField from "./taxon-filter-field";
+import useTranslation from "@configs/i18n/useTranslation";
 
-export default function RulesInputType({ inputType, form, name, label }) {
+export default function RulesInputType({ inputType, form, name }) {
+  const { t } = useTranslation();
   switch (inputType) {
     case "hasUserRule":
-      <CheckboxField name={name} label={label} form={form} />;
-      break;
+      return <CheckBoxField name={name} form={form} label={t("GROUP.RULES.INPUT_TYPES.USER")} />;
     case "spartialDataList":
-      return <AreaDrawField label={label} name={name} form={form} mb={8} isRequired={true} />;
-
+      return (
+        <GeoJsonWktParserInput
+          label={t("GROUP.RULES.INPUT_TYPES.SPATIAL")}
+          name={name}
+          form={form}
+          mb={8}
+          isRequired={true}
+        />
+      );
     case "taxonomicIdList":
-      return <TaxonInputField name={name} form={form} label={label} />;
+      return (
+        <TaxonInputField name={name} form={form} label={t("GROUP.RULES.INPUT_TYPES.TAXONOMY")} />
+      );
     case "createdOnDateList":
     case "observedOnDateList":
-      return <DateRangePickerField form={form} name={name} label={label} />;
+      return (
+        <DateRangePickerField
+          form={form}
+          name={name}
+          label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}
+        />
+      );
       break;
   }
 }

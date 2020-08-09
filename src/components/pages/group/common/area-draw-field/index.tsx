@@ -18,6 +18,9 @@ interface AreaDrawFieldProps {
   hint?: string;
   mb?: number;
   isRequired?: boolean;
+  isPolygon?: boolean;
+  handleChage?;
+  isReadOnly?: boolean;
   [key: string]: any;
 }
 
@@ -28,6 +31,9 @@ export default function AreaDrawField({
   hint,
   mb = 4,
   isRequired,
+  isReadOnly,
+  handleChage,
+  isPolygon,
   ...props
 }: AreaDrawFieldProps) {
   const { register, setValue } = form;
@@ -39,6 +45,9 @@ export default function AreaDrawField({
   );
 
   const handleOnFeatureChange = (features) => {
+    if (handleChage) {
+      handleChage(features);
+    }
     setCoordinates(
       features.length
         ? {
@@ -67,7 +76,8 @@ export default function AreaDrawField({
           defaultFeatures={defaultFeatures}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           onFeaturesChange={handleOnFeatureChange}
-          isPolygon={false}
+          isPolygon={isPolygon}
+          isReadOnly={isReadOnly}
         />
       </Box>
       <FormErrorMessage>{form.errors[name] && form.errors[name]["se"]["message"]}</FormErrorMessage>

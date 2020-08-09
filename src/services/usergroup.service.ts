@@ -255,3 +255,29 @@ export const axGetUserGroupRules = async (userGroupId, ctx) => {
     return { success: false, data: e };
   }
 };
+
+export const axAddUserGroupRule = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/add/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axRemoveUserGroupRule = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/remove/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};

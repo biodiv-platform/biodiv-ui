@@ -2,17 +2,14 @@ import { Button } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
-const CustomFieldRow = ({ itemDetails, onDelete }) => {
+const GroupRulesRow = ({ itemDetails, onDelete }) => {
   const { t } = useTranslation();
-  const {
-    customFields: { dataType, fieldType, name }
-  } = itemDetails;
+  const { name, value } = itemDetails;
 
   return (
     <tr>
       <td>{name}</td>
-      <td>{dataType}</td>
-      <td>{fieldType}</td>
+      <td>{value}</td>
       <td>
         <Button onClick={onDelete} variant="link" variantColor="red" leftIcon="delete" ml={2}>
           {t("DELETE")}
@@ -22,4 +19,4 @@ const CustomFieldRow = ({ itemDetails, onDelete }) => {
   );
 };
 
-export default CustomFieldRow;
+export default GroupRulesRow;
