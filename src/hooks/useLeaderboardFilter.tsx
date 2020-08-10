@@ -28,7 +28,7 @@ const LeaderboardFilterContext = createContext<LeaderboardFilterContextProps>(
 export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) => {
   const [filter, setFilter] = useImmer({ f: props.filter });
   const [leaderboardData, setLeaderboardData] = useState([]);
-  const authorid = useStoreState((s) => s.user.id) || -1;
+  const user = useStoreState((s) => s.user);
 
   useEffect(() => {
     if (isBrowser) {
@@ -48,7 +48,7 @@ export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) 
         how_many: filter.f.limit,
         time: filter.f.period
       };
-      const data = await axGetUserLeaderboard(payload, authorid);
+      const data = await axGetUserLeaderboard(payload, user);
       setLeaderboardData(data);
       NProgress.done();
     } catch (e) {

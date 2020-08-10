@@ -18,3 +18,15 @@ export const subscribeToPushNotification = async () => {
     }
   });
 };
+
+export const createUserESObject = (user) => {
+  const { id, profilePic, name } = user;
+  return {
+    details: {
+      author_id: id,
+      activity_score: 0,
+      authorName: name,
+      profilePic: profilePic != null ? profilePic : ""
+    }
+  };
+};
