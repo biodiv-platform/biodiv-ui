@@ -1,7 +1,7 @@
-import { DEFAULT_LANGUAGE_ID } from "@static/constants";
+import SITE_CONFIG from "@configs/site-config.json";
 
 export const STATIC_GROUP_PAYLOAD = {
-  languageId: DEFAULT_LANGUAGE_ID,
+  languageId: SITE_CONFIG.LANG.DEFAULT_ID,
   sendDigestMail: true,
   homePage: null,
   domainName: null,

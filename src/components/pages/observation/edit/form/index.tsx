@@ -10,6 +10,7 @@ import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import DateInputs from "../../create/form/date";
@@ -29,29 +30,31 @@ export default function ObservationEditForm({
   const router = useLocalRouter();
   const { isOpen, onClose } = useDisclosure(true);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      resources: Yup.array().of(
-        Yup.object().shape({
-          status: Yup.number().oneOf(
-            [AssetStatus.Uploaded, null],
-            t("OBSERVATION.EDIT_NOT_UPLOADED")
-          )
-        })
-      ),
-      notes: Yup.string().nullable(),
+    resolver: yupResolver(
+      Yup.object().shape({
+        resources: Yup.array().of(
+          Yup.object().shape({
+            status: Yup.number().oneOf(
+              [AssetStatus.Uploaded, null],
+              t("OBSERVATION.EDIT_NOT_UPLOADED")
+            )
+          })
+        ),
+        notes: Yup.string().nullable(),
 
-      // Date and Location
-      observedOn: Yup.string().required(),
-      dateAccuracy: Yup.string().nullable().required(),
-      observedAt: Yup.string().required(),
-      reverseGeocoded: Yup.string().required(),
-      locationScale: Yup.string().nullable().required(),
-      latitude: Yup.number().required(),
-      longitude: Yup.number().required(),
-      hidePreciseLocation: Yup.boolean()
-    }),
+        // Date and Location
+        observedOn: Yup.string().required(),
+        dateAccuracy: Yup.string().nullable().required(),
+        observedAt: Yup.string().required(),
+        reverseGeocoded: Yup.string().required(),
+        locationScale: Yup.string().nullable().required(),
+        latitude: Yup.number().required(),
+        longitude: Yup.number().required(),
+        hidePreciseLocation: Yup.boolean()
+      })
+    ),
     defaultValues: {
       ...observation,
       resources: observation.resources.map((r) => ({

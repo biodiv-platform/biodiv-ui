@@ -9,21 +9,17 @@ import {
   SimpleGrid,
   Text
 } from "@chakra-ui/core";
+import FlagActionButton from "@components/@core/action-buttons/flag";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
-import { ObservationData } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
+import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadable } from "@utils/date";
 import { useStoreState } from "easy-peasy";
-import dynamic from "next/dynamic";
 import React from "react";
-
-const FlagObservation = dynamic(() => import("@components/pages/observation/show/header/flag"), {
-  ssr: false
-});
 
 interface IInfoTabProps {
   o: ObservationListPageMapper;
@@ -33,15 +29,8 @@ interface IInfoTabProps {
 
 export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) {
   const { t } = useTranslation();
-  const { speciesGroup, observationData, setObservationData } = useObservationFilter();
+  const { speciesGroup, observationData } = useObservationFilter();
   const { user } = useStoreState((s) => s);
-
-  const setFlags = (flags) => {
-    setObservationData((_draft: ObservationData) => {
-      const obIndex = _draft.l.findIndex((ob) => ob.observationId === o.observationId);
-      _draft.l[obIndex].flagShow = flags;
-    });
-  };
 
   return (
     <Box size="full" display="flex" flexDir="column" justifyContent="space-between">
@@ -80,11 +69,12 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             speciesGroups={speciesGroup}
             observationId={o.observationId}
           />
-          <FlagObservation
-            observationId={o.observationId}
-            flags={o.flagShow}
-            setFlags={setFlags}
+          <FlagActionButton
+            resourceId={o.observationId}
+            initialFlags={o.flagShow}
             userId={user.id}
+            flagFunc={axFlagObservation}
+            unFlagFunc={axUnFlagObservation}
           />
         </Flex>
       </SimpleGrid>

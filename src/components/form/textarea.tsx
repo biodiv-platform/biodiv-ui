@@ -1,12 +1,8 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Textarea
-} from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Textarea } from "@chakra-ui/core";
 import React from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
+
+import ErrorMessage from "./common/error-message";
 
 interface ITextAreaProps {
   name: string;
@@ -14,7 +10,7 @@ interface ITextAreaProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   style?;
   isRequired?;
 }
@@ -38,7 +34,7 @@ const TextAreaField = ({
       minH="124px"
       isDisabled={disabled}
     />
-    <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+    <ErrorMessage name={name} errors={form.errors} />
     {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
   </FormControl>
 );

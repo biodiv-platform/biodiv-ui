@@ -13,10 +13,23 @@ interface IGroupsProps {
   observationGroups: UserGroupIbp[];
   permission: ObservationUserPermission;
   featured: Featured[];
-  observationId;
+  resourceId;
+  resourceType;
+  saveUserGroupsFunc;
+  featureFunc;
+  unfeatureFunc;
 }
 
-const Groups = ({ observationGroups, permission, featured, observationId }: IGroupsProps) => {
+const Groups = ({
+  observationGroups,
+  permission,
+  featured,
+  resourceId,
+  resourceType,
+  saveUserGroupsFunc,
+  featureFunc,
+  unfeatureFunc
+}: IGroupsProps) => {
   const { isLoggedIn } = useStoreState((s) => s);
   const { t } = useTranslation();
   const [hideFeature, setHideFeature] = useState(true);
@@ -37,14 +50,18 @@ const Groups = ({ observationGroups, permission, featured, observationId }: IGro
             <GroupPost
               groups={permission?.userGroupMember}
               selectedDefault={observationGroups}
-              observationId={observationId}
+              resourceId={resourceId}
+              saveUserGroupsFunc={saveUserGroupsFunc}
             />
           </TabPanel>
           <TabPanel>
             <GroupFeature
               groups={permission?.userGroupFeature}
               selectedDefault={featured}
-              observationId={observationId}
+              resourceId={resourceId}
+              resourceType={resourceType}
+              featureFunc={featureFunc}
+              unfeatureFunc={unfeatureFunc}
             />
           </TabPanel>
         </TabPanels>

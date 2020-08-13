@@ -86,7 +86,7 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
                 <Image
                   objectFit="cover"
                   src={getObservationThumbnail(o?.fileName, 500)}
-                  alt={o.observationId.toString()}
+                  alt={o.observationId?.toString()}
                   fallbackSrc={HERO_FALLBACK}
                 />
               </a>

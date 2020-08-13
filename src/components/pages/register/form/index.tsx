@@ -15,6 +15,7 @@ import { useStoreState } from "easy-peasy";
 import useNookies from "next-nookies-persist";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 import LocationPicker from "./location";
@@ -35,33 +36,35 @@ function SignUpForm() {
   const [isOAuth, setIsOAuth] = useState(false);
   const groupId = useStoreState((s) => s?.currentGroup?.id);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onBlur",
-    validationSchema: Yup.object().shape({
-      username: Yup.string().required(),
-      mobileNumber: Yup.string().test("mobile", "${path} is not valid", (v) =>
-        v ? isPossiblePhoneNumber(v) : true
-      ),
-      email: Yup.string()
-        .email()
-        .when("mobileNumber", {
-          is: (m) => !m,
-          then: Yup.string().required("either ${path} or mobile number is required")
-        }),
-      password: Yup.string().min(8).required(),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords do not match")
-        .required(),
-      gender: Yup.string().required(),
-      profession: Yup.string().nullable(),
-      institution: Yup.string().nullable(),
-      latitude: Yup.number().required(),
-      longitude: Yup.number().required(),
-      location: Yup.string().required(),
-      verificationType: Yup.string().required(),
-      mode: Yup.string(),
-      recaptcha: Yup.string().required()
-    }),
+    resolver: yupResolver(
+      Yup.object().shape({
+        username: Yup.string().required(),
+        mobileNumber: Yup.string().test("mobile", "${path} is not valid", (v) =>
+          v ? isPossiblePhoneNumber(v) : true
+        ),
+        email: Yup.string()
+          .email()
+          .when("mobileNumber", {
+            is: (m) => !m,
+            then: Yup.string().required("either ${path} or mobile number is required")
+          }),
+        password: Yup.string().min(8).required(),
+        confirmPassword: Yup.string()
+          .oneOf([Yup.ref("password"), null], "Passwords do not match")
+          .required(),
+        gender: Yup.string().required(),
+        profession: Yup.string().nullable(),
+        institution: Yup.string().nullable(),
+        latitude: Yup.number().required(),
+        longitude: Yup.number().required(),
+        location: Yup.string().required(),
+        verificationType: Yup.string().required(),
+        mode: Yup.string(),
+        recaptcha: Yup.string().required()
+      })
+    ),
     defaultValues: {
       verificationType: VERIFICATION_TYPE[0].value,
       mode: VERIFICATION_MODE.MANUAL

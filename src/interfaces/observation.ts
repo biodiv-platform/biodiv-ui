@@ -164,10 +164,6 @@ export interface FilterPanelData {
   traits?: Traits[];
   customFields?: CustomFields[];
 }
-export interface FirebaseTokens {
-  id?: number; // int64
-  token?: string;
-}
 export interface Flag {
   id?: number; // int64
   version?: number; // int64
@@ -197,8 +193,8 @@ export interface Follow {
 export interface Geometry {
   envelope?: Geometry;
   factory?: GeometryFactory;
-  userData?: Record<string, unknown>;
-  srid?: number; // int32
+  userData?: unknown;
+  geometryType?: string;
   precisionModel?: PrecisionModel;
   coordinate?: Coordinate;
   coordinates?: Coordinate[];
@@ -209,10 +205,10 @@ export interface Geometry {
   centroid?: Point;
   interiorPoint?: Point;
   boundary?: Geometry;
-  geometryType?: string;
-  numGeometries?: number; // int32
   boundaryDimension?: number; // int32
   envelopeInternal?: Envelope;
+  srid?: number; // int32
+  numGeometries?: number; // int32
   dimension?: number; // int32
   valid?: boolean;
   length?: number; // double
@@ -494,27 +490,27 @@ export interface ObservationUserPermission {
 export interface Point {
   envelope?: Geometry;
   factory?: GeometryFactory;
-  userData?: Record<string, unknown>;
+  userData?: unknown;
   coordinates?: Coordinate[];
+  geometryType?: string;
   coordinateSequence?: CoordinateSequence;
   coordinate?: Coordinate;
   numPoints?: number; // int32
   simple?: boolean;
   boundary?: Geometry;
-  geometryType?: string;
   boundaryDimension?: number; // int32
   y?: number; // double
   x?: number; // double
   dimension?: number; // int32
   empty?: boolean;
-  srid?: number; // int32
   precisionModel?: PrecisionModel;
   rectangle?: boolean;
   area?: number; // double
   centroid?: Point;
   interiorPoint?: Point;
-  numGeometries?: number; // int32
   envelopeInternal?: Envelope;
+  srid?: number; // int32
+  numGeometries?: number; // int32
   valid?: boolean;
   length?: number; // double
 }
@@ -696,7 +692,6 @@ export interface User {
   identificationMail?: boolean;
   sendDigest?: boolean;
   sendPushNotification?: boolean;
-  tokens?: FirebaseTokens[];
 }
 export interface UserGroup {
   id?: number; // int64

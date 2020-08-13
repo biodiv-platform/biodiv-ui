@@ -1,0 +1,6 @@
+export const LANDSCAPE_LIST_PAGINATION_LIMIT = 10;
+
+export const LANDSCAPE_DEFAULT_FILTER = {
+  offset: 0,
+  max: LANDSCAPE_LIST_PAGINATION_LIMIT
+};

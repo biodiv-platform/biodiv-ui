@@ -22,36 +22,41 @@ import Submit from "@components/form/submit-button";
 import TextArea from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { FlagShow } from "@interfaces/observation";
-import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { FLAG_OPTIONS } from "@static/constants";
+import { ACTIVITY_UPDATED } from "@static/events";
 import { adminOrAuthor } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { emit } from "react-gbus";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
-import SimpleButton from "./simple-button";
+import SimpleActionButton from "./simple";
 
 interface IFlagObservationProps {
-  flags: FlagShow[];
-  setFlags;
-  observationId;
+  initialFlags: FlagShow[];
+  resourceId;
   userId;
+  flagFunc;
+  unFlagFunc;
 }
 
-export default function FlagObservation({
-  flags,
-  setFlags,
-  observationId,
-  userId
+export default function FlagActionButton({
+  initialFlags,
+  resourceId,
+  userId,
+  flagFunc,
+  unFlagFunc
 }: IFlagObservationProps) {
   const { t } = useTranslation();
+  const [flags, setFlags] = useState(initialFlags);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const flagOptions = FLAG_OPTIONS.map((f) => ({
-    label: t(`OBSERVATION.FLAG.FLAGS.${f}`),
+    label: t(`ACTIONS.FLAG.FLAGS.${f}`),
     value: f
   }));
 
@@ -63,33 +68,37 @@ export default function FlagObservation({
 
   const hForm = useForm({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      flag: Yup.string().required(),
-      notes: Yup.string().required()
-    })
+    resolver: yupResolver(
+      Yup.object().shape({
+        flag: Yup.string().required(),
+        notes: Yup.string().required()
+      })
+    )
   });
 
   const handleOnFlag = async (payload) => {
-    const { success, data } = await axFlagObservation(observationId, payload);
+    const { success, data } = await flagFunc(resourceId, payload);
     if (success) {
       setFlags(data);
+      emit(ACTIVITY_UPDATED, resourceId);
       onClose();
     }
   };
 
   const handleOnUnFlag = async (flagId) => {
-    const { success, data } = await axUnFlagObservation(observationId, flagId);
+    const { success, data } = await unFlagFunc(resourceId, flagId);
     if (success) {
       setFlags(data);
+      emit(ACTIVITY_UPDATED, resourceId);
       onClose();
     }
   };
 
   return (
     <>
-      <SimpleButton
+      <SimpleActionButton
         icon={flags.length ? "ibpfillflag" : "ibpoutlineflag"}
-        title="FLAG_OBSERVATION"
+        title={t("ACTIONS.FLAG.TITLE")}
         variantColor={flags.length ? "red" : "purple"}
         onClick={onOpen}
       />
@@ -121,7 +130,7 @@ export default function FlagObservation({
                         {user.name} <UserBadge isAdmin={user.isAdmin} />
                       </BlueLink>
                       <Badge variantColor="red" verticalAlign="baseline">
-                        {t(`OBSERVATION.FLAG.FLAGS.${flag.flag}`)}
+                        {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
                       </Badge>
                       <Text>{flag.notes}</Text>
                     </Box>
@@ -145,11 +154,11 @@ export default function FlagObservation({
               <ModalBody>
                 <Select
                   name="flag"
-                  label={t("OBSERVATION.FLAG.CATEGORY")}
+                  label={t("ACTIONS.FLAG.CATEGORY")}
                   options={flagOptions}
                   form={hForm}
                 />
-                <TextArea mb={0} name="notes" label={t("OBSERVATION.FLAG.NOTES")} form={hForm} />
+                <TextArea mb={0} name="notes" label={t("ACTIONS.FLAG.NOTES")} form={hForm} />
               </ModalBody>
             )}
 

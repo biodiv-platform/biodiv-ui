@@ -1,7 +1,7 @@
 import { Box, Button, CheckboxGroup, Collapse, Icon, useDisclosure } from "@chakra-ui/core";
 import { axGetUserGroupList } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 import Checkbox from "./checkbox";
 
@@ -9,7 +9,7 @@ interface IUserGroupsProps {
   name: string;
   label: string;
   mb?: number;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 export default function UserGroups({ name, label, form }: IUserGroupsProps) {

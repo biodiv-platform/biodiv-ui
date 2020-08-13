@@ -1,17 +1,22 @@
-import { useRouter } from "next/router";
 import React from "react";
 
-import { defaultLocale } from "../configs/i18n/config";
-import { isLocale, Locale } from "../configs/i18n/types";
+import { defaultLocale, defaultLocaleId, localesList } from "../configs/i18n/config";
+import { Locale } from "../configs/i18n/types";
 
 interface ContextProps {
-  readonly locale: Locale;
-  readonly setLocale: (locale: Locale) => void;
+  locale: Locale;
+  localeId;
+  localesList;
+
+  setLocale: (locale: Locale) => void;
   localeStrings: any;
 }
 
 export const LocaleContext = React.createContext<ContextProps>({
   locale: defaultLocale,
+  localeId: defaultLocaleId,
+  localesList,
+
   setLocale: () => null,
   localeStrings: {}
 });
@@ -21,15 +26,23 @@ export const LocaleProvider: React.FC<{ lang: Locale; localeStrings: any }> = ({
   children,
   localeStrings
 }) => {
-  const [locale, setLocale] = React.useState(lang);
-  const { query } = useRouter();
-
-  if (typeof query.lang === "string" && isLocale(query.lang) && locale !== query.lang) {
-    setLocale(query.lang);
-  }
+  const updateLocale = (locale) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("lang", locale);
+    window.location.assign(`${window.location.pathname}?${params.toString()}`);
+  };
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale, localeStrings }}>
+    <LocaleContext.Provider
+      value={{
+        locale: lang,
+        localeId: localesList[lang].ID,
+        localesList,
+
+        setLocale: updateLocale,
+        localeStrings
+      }}
+    >
       {children}
     </LocaleContext.Provider>
   );

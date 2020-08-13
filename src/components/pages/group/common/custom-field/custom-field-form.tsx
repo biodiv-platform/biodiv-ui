@@ -1,11 +1,12 @@
 import { Box, Button, SimpleGrid } from "@chakra-ui/core";
 import CheckBoxField from "@components/form/checkbox";
-import SelectControlledField from "@components/form/select-controlled";
+import Select from "@components/form/select";
 import SelectCreatable from "@components/form/select-creatable";
 import SubmitButton from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
 import { axAddCustomField, axAddExsistingCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import { useStoreState } from "easy-peasy";
@@ -23,42 +24,44 @@ export default function AddCustomField({
   customFields,
   setIsCreate
 }) {
+  const { t } = useTranslation();
   const [showOption, setShowOption] = useState<boolean>();
   const [fieldTypes, setFilterTypes] = useState(FIELD_TYPE);
   const [dataTypes, setDataTypes] = useState(DATA_TYPE);
   const [defaultValues, setDefaultValue] = useState(DEFAULT_CUSTOMFIELD_VALUE);
   const [customFieldExist, setCustomFieldExist] = useState<boolean>();
-  const { t } = useTranslation();
 
   const categoricalType = ["SINGLE CATEGORICAL", "MULTIPLE CATEGORICAL"];
-  const { id } = useStoreState((s) => s.currentGroup);
+  const userGroupId = useStoreState((s) => s.currentGroup?.id);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      name: Yup.string().required(),
-      notes: Yup.string().nullable(),
-      units: Yup.string().nullable(),
-      allowedParticipation: Yup.boolean().required(),
-      isMandatory: Yup.boolean().required(),
-      displayOrder: Yup.number().nullable(),
-      iconURL: Yup.string().nullable(),
-      dataType: Yup.string().required(),
-      fieldType: Yup.string().required(),
-      defaultValue: Yup.string().nullable(),
-      values: Yup.lazy((value) => {
-        if (value) {
-          return Yup.array().of(
-            Yup.object().shape({
-              value: Yup.string().required(),
-              iconURL: Yup.string().nullable(),
-              notes: Yup.string().nullable()
-            })
-          );
-        }
-        return Yup.mixed().notRequired();
+    resolver: yupResolver(
+      Yup.object().shape({
+        name: Yup.string().required(),
+        notes: Yup.string().nullable(),
+        units: Yup.string().nullable(),
+        allowedParticipation: Yup.boolean().required(),
+        isMandatory: Yup.boolean().required(),
+        displayOrder: Yup.number().nullable(),
+        iconURL: Yup.string().nullable(),
+        dataType: Yup.string().required(),
+        fieldType: Yup.string().required(),
+        defaultValue: Yup.string().nullable(),
+        values: Yup.lazy((value) => {
+          if (value) {
+            return Yup.array().of(
+              Yup.object().shape({
+                value: Yup.string().required(),
+                iconURL: Yup.string().nullable(),
+                notes: Yup.string().nullable()
+              })
+            );
+          }
+          return Yup.mixed().notRequired();
+        })
       })
-    }),
+    ),
     defaultValues
   });
 
@@ -78,15 +81,17 @@ export default function AddCustomField({
         allowedParticipation
       }
     ];
+
     const createPayload = {
       ...value,
-      userGroupId: id,
+      userGroupId,
       displayOrder: customFields.length + 1
     };
 
     const { success, data } = customFieldExist
-      ? await axAddExsistingCustomField(id, addExistPayload)
+      ? await axAddExsistingCustomField(userGroupId, addExistPayload)
       : await axAddCustomField(createPayload);
+
     if (success) {
       notification(t("GROUP.CUSTOM_FIELD.ADD.SUCCESS"), NotificationType.Success);
       setCustomFields(data);
@@ -98,27 +103,31 @@ export default function AddCustomField({
 
   const handleFieldChange = (value) => {
     setShowOption(categoricalType.includes(value));
+    let newValue;
     switch (value) {
       case "RANGE":
-        return DATA_TYPE.filter((item) => item.value !== "STRING");
+        newValue = DATA_TYPE.filter((item) => item.value !== "STRING");
       case "SINGLE CATEGORICAL":
       case "MULTIPLE CATEGORICAL":
-        return DATA_TYPE.filter((item) => item.value === "STRING");
+        newValue = DATA_TYPE.filter((item) => item.value === "STRING");
       default:
-        return DATA_TYPE.filter((item) => item.value !== "DATE");
+        newValue = DATA_TYPE.filter((item) => item.value !== "DATE");
     }
+    setDataTypes(newValue);
   };
 
   const handleDataTypeChange = (value) => {
+    let newValue;
     switch (value) {
       case "DATE":
-        return FIELD_TYPE.filter((item) => item.value === "RANGE");
+        newValue = FIELD_TYPE.filter((item) => item.value === "RANGE");
       case "INTEGER":
       case "DECIMAL":
-        return FIELD_TYPE.filter((item) => !categoricalType.includes(item.value));
+        newValue = FIELD_TYPE.filter((item) => !categoricalType.includes(item.value));
       default:
-        return FIELD_TYPE.filter((item) => item.value !== "RANGE");
+        newValue = FIELD_TYPE.filter((item) => item.value !== "RANGE");
     }
+    setFilterTypes(newValue);
   };
 
   const handleCustomFieldName = (name) => {
@@ -150,15 +159,13 @@ export default function AddCustomField({
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
         <Box gridColumn="1/4">
           <SelectCreatable
-            handleChange={handleCustomFieldName}
+            onChangeCallback={handleCustomFieldName}
             name="name"
             form={hForm}
-            options={allCustomFields.map((i) => {
-              return {
-                label: i.customFields.name,
-                value: i.customFields.name
-              };
-            })}
+            options={allCustomFields.map((i) => ({
+              label: i.customFields.name,
+              value: i.customFields.name
+            }))}
             label={t("GROUP.CUSTOM_FIELD.NAME")}
           />
           <TextAreaField
@@ -177,20 +184,22 @@ export default function AddCustomField({
           form={hForm}
           label={t("GROUP.CUSTOM_FIELD.UNITS")}
         />
-        <SelectControlledField
+        <Select
           name="fieldType"
           options={fieldTypes}
           disabled={customFieldExist}
           form={hForm}
-          handleChange={(val) => setDataTypes(handleFieldChange(val))}
+          isControlled={true}
+          onChangeCallback={handleFieldChange}
           label={t("GROUP.CUSTOM_FIELD.FIELD_TYPE")}
         />
-        <SelectControlledField
+        <Select
           name="dataType"
           disabled={customFieldExist}
-          handleChange={(val) => setFilterTypes(handleDataTypeChange(val))}
+          onChangeCallback={handleDataTypeChange}
           options={dataTypes}
           form={hForm}
+          isControlled={true}
           label={t("GROUP.CUSTOM_FIELD.DATA_TYPE")}
         />
       </SimpleGrid>

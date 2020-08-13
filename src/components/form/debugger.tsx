@@ -1,8 +1,8 @@
-import { Alert, AlertIcon, Box, Button, Code } from "@chakra-ui/core";
+import { Alert, AlertIcon, Box, Button } from "@chakra-ui/core";
 import React, { useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
-export default function FormDebugger({ form }: { form: FormContextValues<any> }) {
+export default function FormDebugger({ form }: { form: UseFormMethods<Record<string, any>> }) {
   const [data, setData] = useState(form.getValues());
 
   const update = () => {
@@ -19,9 +19,14 @@ export default function FormDebugger({ form }: { form: FormContextValues<any> })
       <Button w="100%" variantColor="red" onClick={update} mb={2}>
         Refresh Values
       </Button>
-      <Code>
+      <Box bg="gray.100" p={4}>
+        Values
         <pre>{JSON.stringify(data, null, 2)}</pre>
-      </Code>
+      </Box>
+      <Box bg="red.100" p={4}>
+        Errors
+        <pre>{JSON.stringify(form.errors, null, 2)}</pre>
+      </Box>
     </Box>
   );
 }

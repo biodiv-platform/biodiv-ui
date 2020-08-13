@@ -1,7 +1,6 @@
 import { ENDPOINT, PAGINATION_LIMIT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
-import notification from "@utils/notification";
 
 export const axListActivity = async (
   objectType,
@@ -23,15 +22,26 @@ export const axListActivity = async (
       commentCount: res.data.commentCount
     };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
     return { success: false, data: [] };
   }
 };
 
-export const axAddComment = async (payload) => {
+export const axAddObservationComment = async (payload) => {
   try {
     await waitForAuth();
     const { data } = await http.post(`${ENDPOINT.OBSERVATION}/v1/observation/add`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axAddDocumentComment = async (payload) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.post(`${ENDPOINT.DOCUMENT}/v1/services/add/comment`, payload);
     return { success: true, data };
   } catch (e) {
     console.error(e);

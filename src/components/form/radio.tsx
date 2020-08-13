@@ -1,13 +1,8 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup
-} from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Radio, RadioGroup } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
+
+import ErrorMessage from "./common/error-message";
 
 interface IRadioProps {
   name: string;
@@ -16,7 +11,7 @@ interface IRadioProps {
   hint?: string;
   options?: any[];
   isInline?: boolean;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const RadioInputField = ({
@@ -55,7 +50,7 @@ const RadioInputField = ({
           </Radio>
         ))}
       </RadioGroup>
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

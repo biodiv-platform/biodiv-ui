@@ -105,3 +105,7 @@ export const getFallbackByMIME = (mime) => {
       return OBSERVATION_FALLBACK.DEFAULT;
   }
 };
+
+export const getDocumentPath = (resourceUrl: string): string => {
+  return `${ENDPOINT.RAW}/pdf-viewer/?file=${ENDPOINT.RAW}/content${resourceUrl}`;
+};

@@ -18,12 +18,12 @@ import LinkTag from "../../common/link-tag";
 import ACTIVITY_TYPE from "./activity-types";
 import CommentRender from "./comment-render";
 
-export default function ActivityList({ observationId, title = "OBSERVATION.ACTIVITY" }) {
+export default function ActivityList({ resourceId, resourceType, title = "OBSERVATION.ACTIVITY" }) {
   const [state, actions] = useActivityStore();
   const { t } = useTranslation();
 
   const loadActivity = (reset) => {
-    actions.listActivity({ objectType: "observation", objectId: observationId, reset });
+    actions.listActivity({ objectType: resourceType, objectId: resourceId, reset });
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function ActivityList({ observationId, title = "OBSERVATION.ACTIV
 
   useListener(
     (oId) => {
-      if (oId === observationId) {
+      if (oId === resourceId) {
         loadActivity(true);
       }
     },
@@ -99,7 +99,7 @@ export default function ActivityList({ observationId, title = "OBSERVATION.ACTIV
         const [flagType, flagInfo] = desc.split(":");
         return (
           <Box>
-            {t(`OBSERVATION.FLAG.FLAGS.${flagType}`)}: {flagInfo}
+            {t(`ACTIONS.FLAG.FLAGS.${flagType}`)}: {flagInfo}
           </Box>
         );
 

@@ -1,7 +1,7 @@
 import { FormControl, FormLabel } from "@chakra-ui/core";
 import { getByPath } from "@utils/basic";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 import DropTarget from "./drop-target";
 import ResourceCard from "./image-card";
@@ -10,7 +10,7 @@ export interface IDropzoneProps {
   name: string;
   label: string;
   mb?: number;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   nestedPath?: string;
   simpleUpload?: boolean;

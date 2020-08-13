@@ -71,6 +71,10 @@ export interface CustomFieldPermission {
   userGroupId?: number; // int64
   allowedCfId?: number /* int64 */[];
 }
+export interface CustomFieldReordering {
+  cfId?: number; // int64
+  displayOrder?: number; // int64
+}
 export interface CustomFieldUGData {
   customFieldId?: number; // int64
   defaultValue?: string;
@@ -256,6 +260,10 @@ export interface UserGroupCreatedOnDateRule {
   fromDate?: string; // date-time
   toDate?: string; // date-time
   isEnabled?: boolean;
+}
+export interface UserGroupDocCreateData {
+  documentId?: number; // int64
+  userGroupIds?: number /* int64 */[];
 }
 export interface UserGroupEditData {
   allowUserToJoin?: boolean;

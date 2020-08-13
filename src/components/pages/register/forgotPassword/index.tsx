@@ -11,6 +11,7 @@ import { axForgotPassword, axRegenerateOTP, axResetPassword } from "@services/au
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
@@ -23,23 +24,25 @@ export default function ForgotPasswordComponent() {
   const [user, setUser] = useState(null);
   const { isOpen, onClose } = useDisclosure(true);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onBlur",
-    validationSchema: Yup.object().shape({
-      verificationType: Yup.string().required(),
-      email: Yup.string()
-        .email()
-        .when("verificationType", {
-          is: (m) => m === VERIFICATION_TYPE[0].value,
-          then: Yup.string().required()
-        }),
-      mobileNumber: Yup.string()
-        .test("mobile", "${path} is not valid", (v) => (v ? isPossiblePhoneNumber(v) : true))
-        .when("verificationType", {
-          is: (m) => m === VERIFICATION_TYPE[1].value,
-          then: Yup.string().required()
-        })
-    }),
+    resolver: yupResolver(
+      Yup.object().shape({
+        verificationType: Yup.string().required(),
+        email: Yup.string()
+          .email()
+          .when("verificationType", {
+            is: (m) => m === VERIFICATION_TYPE[0].value,
+            then: Yup.string().required()
+          }),
+        mobileNumber: Yup.string()
+          .test("mobile", "${path} is not valid", (v) => (v ? isPossiblePhoneNumber(v) : true))
+          .when("verificationType", {
+            is: (m) => m === VERIFICATION_TYPE[1].value,
+            then: Yup.string().required()
+          })
+      })
+    ),
     defaultValues: {
       verificationType: VERIFICATION_TYPE[0].value
     }
@@ -47,13 +50,15 @@ export default function ForgotPasswordComponent() {
 
   const rForm = useForm({
     mode: "onBlur",
-    validationSchema: Yup.object().shape({
-      otp: Yup.string().required(),
-      password: Yup.string().min(8).required(),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords do not match")
-        .required()
-    })
+    resolver: yupResolver(
+      Yup.object().shape({
+        otp: Yup.string().required(),
+        password: Yup.string().min(8).required(),
+        confirmPassword: Yup.string()
+          .oneOf([Yup.ref("password"), null], "Passwords do not match")
+          .required()
+      })
+    )
   });
 
   const verificationType = hForm.watch("verificationType");

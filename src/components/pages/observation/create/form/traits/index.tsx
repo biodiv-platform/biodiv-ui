@@ -13,14 +13,14 @@ import useTranslation from "@configs/i18n/useTranslation";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 import TraitInput from "../../../common/trait-input";
 
 interface ITraitsPickerProps {
   name: string;
   label: string;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const TraitsPicker = ({ name, form }: ITraitsPickerProps) => {

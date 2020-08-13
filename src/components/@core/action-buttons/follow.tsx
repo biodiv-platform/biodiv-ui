@@ -1,9 +1,14 @@
-import { axFollowObservation } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
 
-import SimpleButton from "./simple-button";
+import SimpleActionButton from "./simple";
 
-export default function FollowObservation({ following, observationId }) {
+export default function FollowActionButton({
+  following,
+  resourceId,
+  toggleFollowFunc,
+  followTitle,
+  unFollowTitle
+}) {
   const [isFollowing, setIsFollowing] = useState(following);
 
   useEffect(() => {
@@ -12,15 +17,16 @@ export default function FollowObservation({ following, observationId }) {
 
   const toggleFollow = async () => {
     const f = !isFollowing;
-    const { success } = await axFollowObservation(observationId, f);
+    const { success } = await toggleFollowFunc(resourceId, f);
     if (success) {
       setIsFollowing(f);
     }
   };
+
   return (
-    <SimpleButton
+    <SimpleActionButton
       icon={isFollowing ? "ibpnotificationsactive" : "ibpnotificationsnone"}
-      title={isFollowing ? "UNFOLLOW_OBSERVATION" : "FOLLOW_OBSERVATION"}
+      title={isFollowing ? unFollowTitle : followTitle}
       variantColor="blue"
       onClick={toggleFollow}
     />

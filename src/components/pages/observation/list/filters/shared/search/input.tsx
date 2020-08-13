@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import useObservationFilter from "@hooks/useObservationFilter";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 const TextFilterForm = styled.form`
@@ -21,10 +22,12 @@ export default function TextFilterInput({ filterKey, label, mb = 0 }) {
   const { filter, addFilter, removeFilter } = useObservationFilter();
   const defaultValue = filter?.[filterKey];
 
-  const hForm = useForm({
-    validationSchema: Yup.object().shape({
-      query: Yup.string()
-    }),
+  const hForm = useForm<any>({
+    resolver: yupResolver(
+      Yup.object().shape({
+        query: Yup.string()
+      })
+    ),
     defaultValues: { query: defaultValue }
   });
 
