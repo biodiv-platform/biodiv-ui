@@ -3,25 +3,26 @@ import { UserGroupIbp } from "@interfaces/observation";
 
 export const isBrowser = typeof window !== `undefined`;
 
-export const DEFAULT_LANGUAGE_ID = 205;
-
 const API_ENDPOINT = isBrowser ? SITE_CONFIG.SITE.API_ENDPOINT : SITE_CONFIG.SITE.API_ENDPOINT_SSR;
 
 export const ENDPOINT = {
-  RAW: `${API_ENDPOINT}biodiv`,
-  API: `${API_ENDPOINT}biodiv-api`,
-  NAKSHA: `${API_ENDPOINT}naksha-api/api`,
-  USER: `${API_ENDPOINT}user-api/api`,
-  ESMODULE: `${API_ENDPOINT}esmodule-api/api`,
   ACTIVITY: `${API_ENDPOINT}activity-api/api`,
+  API: `${API_ENDPOINT}biodiv-api`,
+  DOCUMENT: `${API_ENDPOINT}document-api/api`,
+  ESMODULE: `${API_ENDPOINT}esmodule-api/api`,
+  FILES: `${API_ENDPOINT}files-api/api`,
+  GEOSERVER: `${API_ENDPOINT}geoserver`,
+  GEOENTITIES: `${API_ENDPOINT}geoentities-api/api`,
+  LANDSCAPE: `${API_ENDPOINT}landscape-api/api`,
+  NAKSHA: `${API_ENDPOINT}naksha-api/api`,
   OBSERVATION: `${API_ENDPOINT}observation-api/api`,
+  RAW: `${API_ENDPOINT}biodiv`,
   RESOURCES: `${API_ENDPOINT}resources-api/api`,
   TAXONOMY: `${API_ENDPOINT}taxonomy-api/api`,
   TRAITS: `${API_ENDPOINT}traits-api/api`,
+  USER: `${API_ENDPOINT}user-api/api`,
   USERGROUP: `${API_ENDPOINT}userGroup-api/api`,
-  UTILITY: `${API_ENDPOINT}utility-api/api`,
-  FILES: `${API_ENDPOINT}files-api/api`,
-  GEOSERVER: `${API_ENDPOINT}geoserver`
+  UTILITY: `${API_ENDPOINT}utility-api/api`
 };
 
 export const DEFAULT_GROUP: UserGroupIbp = {
@@ -77,3 +78,8 @@ export const RESOURCE_SIZE = {
 };
 
 export const FORWARD_BLACKLIST = ["login", "register"];
+
+export const RESOURCE_TYPE = {
+  OBSERVATION: "observation",
+  DOCUMENT: "document"
+};

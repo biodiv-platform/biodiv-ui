@@ -1,8 +1,9 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
-import React, { useEffect } from "react";
-import { FormContextValues } from "react-hook-form";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import React from "react";
+import { Controller, UseFormMethods } from "react-hook-form";
 import Select from "react-select";
 
+import ErrorMessage from "./common/error-message";
 import { selectStyles } from "./configs";
 
 interface ISelectProps {
@@ -13,7 +14,10 @@ interface ISelectProps {
   hint?: string;
   options?: any[];
   selectRef?;
-  form: FormContextValues<any>;
+  isRequired?: boolean;
+  isControlled?: boolean;
+  onChangeCallback?;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const SelectInputField = ({
@@ -25,18 +29,12 @@ const SelectInputField = ({
   options = [],
   disabled = false,
   selectRef,
+  isRequired,
+  isControlled,
+  onChangeCallback,
   ...props
 }: ISelectProps) => {
   const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
-
-  const onChange = ({ value }) => {
-    form.setValue(name, value);
-    form.triggerValidation(name);
-  };
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
 
   return (
     <FormControl
@@ -44,23 +42,36 @@ const SelectInputField = ({
       className="dropdown"
       data-select-invalid={form.errors[name] && true}
       mb={mb}
+      isRequired={isRequired}
       {...props}
     >
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Select
-        inputId={name}
-        id={name}
+      <Controller
+        control={form.control}
         name={name}
-        formatCreateLabel={(v) => `Add "${v}"`}
-        options={options}
-        defaultValue={initialValue}
-        isSearchable={true}
-        isDisabled={disabled}
-        onChange={onChange}
-        styles={selectStyles}
-        ref={selectRef}
+        defaultValue={form.control.defaultValuesRef.current[name]}
+        render={({ onChange, onBlur, value }) => (
+          <Select
+            id={name}
+            inputId={name}
+            onChange={(o) => {
+              onChange(o.value);
+              onChangeCallback && onChangeCallback(o.value);
+            }}
+            onBlur={onBlur}
+            options={options}
+            formatCreateLabel={(v) => `Add "${v}"`}
+            {...(isControlled
+              ? { value: options.find((o) => o.value === value) }
+              : { initialValue })}
+            isSearchable={true}
+            isDisabled={disabled}
+            styles={selectStyles}
+            ref={selectRef}
+          />
+        )}
       />
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

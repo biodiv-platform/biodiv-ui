@@ -3,7 +3,8 @@ import { PageHeading } from "@components/@core/layout";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
-import { DEFAULT_LANGUAGE_ID } from "@static/constants";
+import SITE_CONFIG from "@configs/site-config.json";
+import { yupResolver } from "@hookform/resolvers";
 import {
   RESOURCES_UPLOADING,
   SYNC_SINGLE_OBSERVATION,
@@ -46,40 +47,42 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
     [TOGGLE_PHOTO_SELECTOR]
   );
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      sGroup: Yup.number().required(),
-      helpIdentify: Yup.boolean().required(),
+    resolver: yupResolver(
+      Yup.object().shape({
+        sGroup: Yup.number().required(),
+        helpIdentify: Yup.boolean().required(),
 
-      // recoData
-      taxonCommonName: Yup.string().nullable(),
-      scientificNameTaxonId: Yup.mixed().nullable(),
-      taxonScientificName: Yup.string().nullable(),
-      recoComment: Yup.string().nullable(),
-      confidence: Yup.number().nullable(),
-      languageId: Yup.mixed().nullable(),
+        // recoData
+        taxonCommonName: Yup.string().nullable(),
+        scientificNameTaxonId: Yup.mixed().nullable(),
+        taxonScientificName: Yup.string().nullable(),
+        recoComment: Yup.string().nullable(),
+        confidence: Yup.number().nullable(),
+        languageId: Yup.mixed().nullable(),
 
-      // Extra
-      notes: Yup.string().nullable(),
-      tags: Yup.array().nullable(),
+        // Extra
+        notes: Yup.string().nullable(),
+        tags: Yup.array().nullable(),
 
-      // Date and Location
-      observedOn: Yup.string().required(),
-      dateAccuracy: Yup.string().required(),
-      observedAt: Yup.string().required(),
-      reverseGeocoded: Yup.string().required(),
-      locationScale: Yup.string().required(),
-      latitude: Yup.number().min(1).required(),
-      longitude: Yup.number().min(1).required(),
-      useDegMinSec: Yup.boolean(),
-      hidePreciseLocation: Yup.boolean(),
+        // Date and Location
+        observedOn: Yup.string().required(),
+        dateAccuracy: Yup.string().required(),
+        observedAt: Yup.string().required(),
+        reverseGeocoded: Yup.string().required(),
+        locationScale: Yup.string().required(),
+        latitude: Yup.number().min(1).required(),
+        longitude: Yup.number().min(1).required(),
+        useDegMinSec: Yup.boolean(),
+        hidePreciseLocation: Yup.boolean(),
 
-      facts: Yup.object().required(),
-      userGroupId: Yup.array(),
-      resources: Yup.array().min(1).required(),
-      terms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted.")
-    }),
+        facts: Yup.object().required(),
+        userGroupId: Yup.array(),
+        resources: Yup.array().min(1).required(),
+        terms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted.")
+      })
+    ),
     defaultValues: {
       sGroup: undefined,
       helpIdentify: false,
@@ -146,7 +149,7 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
         })) || [],
       protocol: "SINGLE_OBSERVATION",
       basisOfRecords: "HUMAN_OBSERVATION",
-      obsvLanguageId: DEFAULT_LANGUAGE_ID,
+      obsvLanguageId: SITE_CONFIG.LANG.DEFAULT_ID,
       useDegMinSec: false,
       degMinSec: null
     };

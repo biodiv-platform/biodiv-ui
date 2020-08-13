@@ -2,6 +2,7 @@ import { Flex } from "@chakra-ui/core";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
 import { axSendPushNotification } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
@@ -10,23 +11,19 @@ import * as Yup from "yup";
 
 function NotificationsForm() {
   const { t } = useTranslation();
+
   const hForm = useForm({
-    validationSchema: Yup.object().shape({
-      title: Yup.string().required(),
-      body: Yup.string().required(),
-      icon: Yup.string(),
-      clickAction: Yup.string()
-    })
+    resolver: yupResolver(
+      Yup.object().shape({
+        title: Yup.string().required(),
+        body: Yup.string().required(),
+        icon: Yup.string(),
+        clickAction: Yup.string()
+      })
+    )
   });
 
-  const handleOnSubmit = async (v) => {
-    const payload = {
-      title: v.title,
-      body: v.body,
-      icon: v.icon,
-      clickAction: v.clickAction
-    };
-
+  const handleOnSubmit = async (payload) => {
     const { success } = await axSendPushNotification(payload);
 
     if (success) {

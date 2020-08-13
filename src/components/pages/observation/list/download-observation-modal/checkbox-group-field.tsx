@@ -1,12 +1,12 @@
 import { Checkbox, CheckboxGroup, FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/core";
 import React, { useEffect, useMemo } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 interface ITextBoxProps {
   name: string;
   label: string;
   options: { value: string; label: string }[];
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   mb?: number;
   disabled?: boolean;
 }

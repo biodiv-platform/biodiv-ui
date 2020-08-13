@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import { Featured, UserGroupIbp } from "@interfaces/observation";
-import { axGroupsFeature, axGroupsUnFeature } from "@services/observation.service";
 import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
@@ -24,13 +23,19 @@ import GroupBox from "./group-box";
 interface IGroupFeatureProps {
   groups: UserGroupIbp[];
   selectedDefault: Featured[];
-  observationId;
+  resourceId;
+  featureFunc;
+  unfeatureFunc;
+  resourceType;
 }
 
 export default function GroupFeature({
   groups,
   selectedDefault,
-  observationId
+  resourceId,
+  featureFunc,
+  unfeatureFunc,
+  resourceType
 }: IGroupFeatureProps) {
   const [groupsN, setGroupsN] = useState<UserGroupIbp[]>([]);
   const [selectedGroups, setSelectedGroups] = useState<any[]>([]);
@@ -59,28 +64,25 @@ export default function GroupFeature({
 
   const handleOnFeature = async () => {
     const groupsList = selectedGroups.map((i) => Number(i));
-    const { success, data } = await axGroupsFeature({
+    const { success, data } = await featureFunc({
       notes: description,
-      objectId: observationId,
-      objectType: "observation",
+      objectId: resourceId,
+      objectType: resourceType,
       userGroup: groupsList
     });
-    if (success) {
-      updateFinalGroups(data);
-      notification(t("OBSERVATION.GROUPS_UPDATED"), NotificationType.Success);
-      editButtonRef.current.focus();
-      onClose();
-    }
+    success && afterFeatureUpdated(data);
   };
 
   const handleOnUnfeature = async () => {
-    const { success, data } = await axGroupsUnFeature(observationId, selectedGroups);
-    if (success) {
-      updateFinalGroups(data);
-      notification(t("OBSERVATION.GROUPS_UPDATED"), NotificationType.Success);
-      editButtonRef.current.focus();
-      onClose();
-    }
+    const { success, data } = await unfeatureFunc(resourceId, selectedGroups);
+    success && afterFeatureUpdated(data);
+  };
+
+  const afterFeatureUpdated = (data) => {
+    updateFinalGroups(data);
+    notification(t("OBSERVATION.GROUPS_UPDATED"), NotificationType.Success);
+    editButtonRef.current.focus();
+    onClose();
   };
 
   const handleOnCancel = () => {
@@ -98,7 +100,7 @@ export default function GroupFeature({
         ref={editButtonRef}
         onClick={onToggle}
       >
-        Edit
+        {t("EDIT")}
       </Button>
 
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={4} hidden={isOpen}>

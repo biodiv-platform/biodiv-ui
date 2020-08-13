@@ -1,6 +1,5 @@
 import { Box, Button, FormControl, FormLabel } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axAddComment } from "@services/activity.service";
 import { axUserSearch } from "@services/auth.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
@@ -8,7 +7,7 @@ import React, { useState } from "react";
 import { emit } from "react-gbus";
 import { Mention, MentionsInput } from "react-mentions";
 
-export default function Comment({ observationId, focusRef }) {
+export default function Comment({ resourceId, resourceType, focusRef, commentFunc }) {
   const [text, setText] = useState("");
   const { t } = useTranslation();
 
@@ -24,17 +23,17 @@ export default function Comment({ observationId, focusRef }) {
   };
 
   const handleOnComment = async () => {
-    const { success } = await axAddComment({
+    const { success } = await commentFunc({
       body: text,
-      rootHolderId: observationId,
-      rootHolderType: "observation",
+      rootHolderId: resourceId,
+      rootHolderType: resourceType,
       subRootHolderId: null,
       subRootHolderType: null
     });
     if (success) {
       notification("Comment Added", NotificationType.Success);
       setText("");
-      emit(ACTIVITY_UPDATED, observationId);
+      emit(ACTIVITY_UPDATED, resourceId);
       focusRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   };

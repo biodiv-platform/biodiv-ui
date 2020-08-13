@@ -1,15 +1,17 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import React, { useEffect, useState } from "react";
 import ReCaptcha from "react-google-recaptcha";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
+
+import ErrorMessage from "./common/error-message";
 
 interface IRecaptchaProps {
   name: string;
   label?: string;
   mb?: number;
   hint?: string;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const RecaptchaField = ({ name, label, hint, form, mb = 4, ...props }: IRecaptchaProps) => {
@@ -27,7 +29,7 @@ const RecaptchaField = ({ name, label, hint, form, mb = 4, ...props }: IRecaptch
     <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
       <ReCaptcha sitekey={SITE_CONFIG.TOKENS.RECAPTCHA} onExpired={setValue} onChange={setValue} />
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

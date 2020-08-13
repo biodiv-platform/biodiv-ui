@@ -1,4 +1,17 @@
 {
+  "ACTIONS": {
+    "FLAG": {
+      "CATEGORY": "Category",
+      "FLAGS": {
+        "DATE_INAPPROPRIATE": "Inappropriate Date",
+        "DETAILS_INAPPROPRIATE": "Inappropriate Details",
+        "LOCATION_INAPPROPRIATE": "Inappropriate Location"
+      },
+      "NOTES": "Notes",
+      "OTHERS_FLAGGED": "Others who flagged",
+      "TITLE": "Flag"
+    }
+  },
   "ACTIVITY_TYPE": {
     "ADDED_A_COMMENT": "commented",
     "ADDED_A_FACT": "added fact",
@@ -45,6 +58,88 @@
   "CLOSE": "Close",
   "COPY": "Copy to Clipboard",
   "DELETE": "Delete",
+  "DOCUMENT": {
+    "BIB": {
+      "ABSTRACT": "Description",
+      "ADDRESS": "Address",
+      "AUTHOR": "Author",
+      "BOOKTITLE": "Book Title",
+      "CHAPTER": "Chapter",
+      "DOI": "DOI",
+      "EDITION": "Edition",
+      "EDITOR": "Editor",
+      "EXTRA": "Extra",
+      "FILE": "File",
+      "HOWPUBLISHED": "How Published",
+      "INSTITUTION": "Institution",
+      "ISBN": "ISBN",
+      "JOURNAL": "Journal",
+      "LANGUAGE": "Language",
+      "MONTH": "Month",
+      "NOTE": "Note",
+      "NUMBER": "Number",
+      "ORGANIZATION": "Organization",
+      "PAGES": "Pages",
+      "PUBLISHER": "Publisher",
+      "SCHEMA": {
+        "ERROR": "Unable to retrive Bibtex schema"
+      },
+      "SCHOOL": "School",
+      "SERIES": "Series",
+      "TITLE": "Title",
+      "TYPE": "Type",
+      "URL": "URL",
+      "VOLUME": "Volume",
+      "YEAR": "Year"
+    },
+    "CONTRIBUTION": "Contribution",
+    "COVERAGE": {
+      "PLACE": "Place Name",
+      "SPATIAL": "Spatial Coverage",
+      "TITLE": "Coverage",
+      "WKT": "WKT"
+    },
+    "CREATE": {
+      "ERROR": "Unable to create document",
+      "SUCCESS": "Document created successfully",
+      "TITLE": "Create Document"
+    },
+    "CREATED_ON": "Created on",
+    "DESCRIPTION": "Description",
+    "DOI": "DOI",
+    "DOWNLOAD": {
+      "CITATION": "Download Citation",
+      "PDF": "Download PDF"
+    },
+    "EDIT_DOCUMENT": "Edit Document",
+    "FOLLOW": "Follow Document",
+    "GEOENTITIES": "Search from Geoentities",
+    "IMPORT_BIBTEX": "Import from BibTex",
+    "ISSUE": "Issue",
+    "LICENSE": "License",
+    "METADATA": "Metadata",
+    "NO_GEODATA": "No Geographical Data Available",
+    "PAGES": "Pages",
+    "PUBLICATION_DATE": "Publication Date",
+    "PUBLICATION_LANGUAGE": "Publication Language",
+    "REMOVE": {
+      "DESCRIPTION": "Are you sure? You can't undo this action afterwards.",
+      "SUCCESS": "Document deleted successfully",
+      "TITLE": "Delete document"
+    },
+    "SHARE": "Share this document",
+    "TAGS": "Tags",
+    "TITLE": "Title",
+    "TYPE": "Type",
+    "UNFOLLOW": "Unfollow Document",
+    "UPLOAD": {
+      "MY_UPLOADS": "My Uploads",
+      "SELECTED": "Selected Document",
+      "URL": "External URL"
+    },
+    "WKT": "WKT"
+  },
+  "EDIT": "Edit",
   "FEEDBACK": "Feedback",
   "FILTERS": {
     "CLEAR": "Clear ${filterCount} Filter(s)",
@@ -285,6 +380,9 @@
         "DOCUMENTS": "Documents",
         "TITLE": "Documents"
       },
+      "LANDSCAPES": {
+        "TITLE": "Protected Areas"
+      },
       "MAPS": {
         "TITLE": "Maps"
       },
@@ -373,6 +471,13 @@
     }
   },
   "INVALID_REQUEST": "Invalid Request",
+  "LANDSCAPE": {
+    "SITE_NUMBER": "Site #",
+    "TITLE": "Protected Areas",
+    "UPDATE": {
+      "SUCCESS": "Field Saved"
+    }
+  },
   "LEADERBOARD": {
     "TIP": "Leaderboard is based on all activities done by a user. Activity will update once every hour.",
     "TITLE": "Leaderboard"
@@ -449,18 +554,6 @@
     "EDIT_OBSERVATION": "Edit Observation",
     "FEATURE": "Feature Selected",
     "FEATURE_IN_GROUPS": "Feature in Groups",
-    "FLAG": {
-      "CATEGORY": "Category",
-      "FLAGS": {
-        "DATE_INAPPROPRIATE": "Inappropriate Date",
-        "DETAILS_INAPPROPRIATE": "Inappropriate Details",
-        "LOCATION_INAPPROPRIATE": "Inappropriate Location"
-      },
-      "NOTES": "Notes",
-      "OTHERS_FLAGGED": "Others who flagged this observation",
-      "TITLE": "Flag observation"
-    },
-    "FLAG_OBSERVATION": "Flag observation as inappropriate",
     "FOLLOW_OBSERVATION": "Follow Observation",
     "FROM_URL": "YouTube",
     "GROUP": "Group",
@@ -575,7 +668,7 @@
     "UPLOADER": {
       "BROWSE": "Browse",
       "DESCRIPTION": "(Only JPG, JPEG, PNG, MP3 ,MP4 files will be accepted)",
-      "LABEL": "Drag file(s) here",
+      "LABEL": "Drop file(s) here",
       "LABEL_RELEASE": "Ready to upload",
       "PROCESSING": "Processing",
       "UPLOAD": "Upload",

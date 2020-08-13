@@ -1,7 +1,6 @@
 import { Box, Button, CheckboxGroup, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import { UserGroupIbp } from "@interfaces/observation";
-import { axSaveUserGroups } from "@services/observation.service";
 import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupLink } from "@utils/basic";
 import { getGroupImageThumb } from "@utils/media";
@@ -14,13 +13,15 @@ import GroupBox from "./group-box";
 interface IGroupPostProps {
   groups: UserGroupIbp[];
   selectedDefault: UserGroupIbp[];
-  observationId;
+  resourceId;
+  saveUserGroupsFunc;
 }
 
 export default function GroupPost({
   groups = [],
   selectedDefault,
-  observationId
+  resourceId,
+  saveUserGroupsFunc
 }: IGroupPostProps) {
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
   const [selectedGroups, setSelectedGroups] = useState<any[]>(
@@ -32,7 +33,7 @@ export default function GroupPost({
 
   const handleOnSave = async () => {
     const groupsList = selectedGroups.map((i) => Number(i));
-    const { success, data } = await axSaveUserGroups(observationId, groupsList);
+    const { success, data } = await saveUserGroupsFunc(resourceId, groupsList);
     if (success) {
       setFinalGroups(data);
       notification(t("OBSERVATION.GROUPS_UPDATED"), NotificationType.Success);

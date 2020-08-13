@@ -1,4 +1,4 @@
-import { defaultLocale } from "@configs/i18n/config";
+import { defaultLocale, localesList } from "@configs/i18n/config";
 import { isLocale } from "@configs/i18n/types";
 import { axGetPages, axGroupList } from "@services/usergroup.service";
 import { parseNookies } from "next-nookies-persist";
@@ -12,6 +12,8 @@ export const getLang = (ctx) => {
     ? defaultLocale
     : ctx.query.lang;
 };
+
+export const getLangId = (ctx) => localesList[getLang(ctx)].ID;
 
 export const getNewsLetterMenu = (childs) => {
   return childs.map((l) => {

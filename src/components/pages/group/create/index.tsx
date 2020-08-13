@@ -10,6 +10,7 @@ import { axUserGroupCreate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import AdminInviteField from "../common/admin-invite-field";
@@ -41,20 +42,22 @@ export default function CreateGroupPageComponent({
   const { t } = useTranslation();
   const router = useLocalRouter();
 
-  const hForm = useForm({
-    validationSchema: Yup.object().shape({
-      name: Yup.string().required(),
-      speciesGroup: Yup.array().required(),
-      habitatId: Yup.array().required(),
-      allowUserToJoin: Yup.boolean().required(),
-      spacialCoverage: Yup.object().shape({
-        ne: Yup.array().required(),
-        se: Yup.array().required()
-      }),
-      icon: Yup.string().nullable(),
-      founder: Yup.array().nullable(),
-      moderator: Yup.array().nullable()
-    }),
+  const hForm = useForm<any>({
+    resolver: yupResolver(
+      Yup.object().shape({
+        name: Yup.string().required(),
+        speciesGroup: Yup.array().required(),
+        habitatId: Yup.array().required(),
+        allowUserToJoin: Yup.boolean().required(),
+        spacialCoverage: Yup.object().shape({
+          ne: Yup.array().required(),
+          se: Yup.array().required()
+        }),
+        icon: Yup.string().nullable(),
+        founder: Yup.array().nullable(),
+        moderator: Yup.array().nullable()
+      })
+    ),
     defaultValues: {
       allowUserToJoin: true
     }
@@ -114,6 +117,7 @@ export default function CreateGroupPageComponent({
           form={hForm}
           options={speciesGroups}
           type="species"
+          isRequired={true}
         />
         <IconCheckboxField
           name="habitatId"
@@ -121,6 +125,7 @@ export default function CreateGroupPageComponent({
           options={habitats}
           form={hForm}
           type="habitat"
+          isRequired={true}
         />
         <CheckBoxField
           name="allowUserToJoin"

@@ -3,9 +3,13 @@ import { plainHttp } from "@utils/http";
 import { getYouTubeId } from "@utils/media";
 import axios from "axios";
 
-export const axGetLangList = async () => {
+export const axGetLangList = async (document = false) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.OBSERVATION}/v1/observation/language`, {
+    const endpoint = document
+      ? `${ENDPOINT.DOCUMENT}/v1/services/language`
+      : `${ENDPOINT.OBSERVATION}/v1/observation/language`;
+
+    const { data } = await plainHttp.get(endpoint, {
       params: { isDirty: false }
     });
     return { success: true, data };

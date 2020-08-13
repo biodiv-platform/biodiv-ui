@@ -5,7 +5,7 @@ import { LocaleContext } from "../../hooks/useTranslation";
 import { defaultLocale } from "./config";
 
 export default function useTranslation() {
-  const { locale, localeStrings } = useContext(LocaleContext);
+  const { locale, localeId, localesList, localeStrings, setLocale } = useContext(LocaleContext);
 
   function t(key: string, values?) {
     const translatedString = getByPath(localeStrings[locale], key);
@@ -22,6 +22,10 @@ export default function useTranslation() {
 
   return {
     t,
-    locale
+    locale,
+    localeId,
+    localesList,
+
+    setLocale
   };
 }

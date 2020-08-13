@@ -1,6 +1,8 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/core";
 import React from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
+
+import ErrorMessage from "./common/error-message";
 
 interface ITextBoxProps {
   id?: string;
@@ -10,7 +12,7 @@ interface ITextBoxProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
   style?;
   isRequired?: boolean;
   showLabel?: boolean;
@@ -47,7 +49,7 @@ const TextBoxField = ({
       type={type}
       isDisabled={disabled}
     />
-    <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+    <ErrorMessage name={name} errors={form.errors} />
     {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
   </FormControl>
 );

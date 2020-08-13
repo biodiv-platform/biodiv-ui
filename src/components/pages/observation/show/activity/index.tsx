@@ -5,7 +5,7 @@ import LazyLoad from "react-lazyload";
 import ActivityList from "./activity-list";
 import Comment from "./comment";
 
-export default function Activity({ observationId }) {
+export default function Activity({ resourceId, resourceType, commentFunc }) {
   const titleRef = useRef(null);
 
   return (
@@ -13,10 +13,15 @@ export default function Activity({ observationId }) {
       <LazyLoad once={true}>
         <div ref={titleRef}></div>
         <Box mb={4} className="fadeInUp white-box">
-          <ActivityList observationId={observationId} />
+          <ActivityList resourceType={resourceType} resourceId={resourceId} />
         </Box>
         <Box mb={4} p={4} className="fadeInUp delay-1 white-box">
-          <Comment observationId={observationId} focusRef={titleRef} />
+          <Comment
+            resourceId={resourceId}
+            resourceType={resourceType}
+            focusRef={titleRef}
+            commentFunc={commentFunc}
+          />
         </Box>
       </LazyLoad>
     </>

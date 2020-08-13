@@ -1,7 +1,8 @@
 import { Badge, Box, Flex, Image, Stack } from "@chakra-ui/core";
+import SITE_CONFIG from "@configs/site-config.json";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
-import { DEFAULT_LANGUAGE_ID, TAXON_BADGE_COLORS } from "@static/constants";
+import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getSpeciesIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
@@ -54,7 +55,7 @@ export const getCommonNameOption = (cv, mcv, updateScientific = true) => ({
   icon: mcv.repr_image_url,
   groupId: mcv.group_id,
   lang: cv.language_name,
-  langId: cv.language_id || DEFAULT_LANGUAGE_ID,
+  langId: cv.language_id || SITE_CONFIG.LANG.DEFAULT_ID,
   group: getSpeciesIcon(mcv.group_name),
   updateScientific
 });

@@ -8,11 +8,8 @@ import LazyLoad from "react-lazyload";
 
 const Naksha = dynamic(() => import("naksha-components-react"), { ssr: false });
 
-const onObservationGridClick = () => (
-  <Box maxH="250px" overflow="auto" fontSize="sm">
-    TODO: observation list
-  </Box>
-);
+// TODO: observation map on click component
+const onObservationGridClick = () => <Box maxH="250px" overflow="auto" fontSize="sm"></Box>;
 
 const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>

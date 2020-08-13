@@ -4,11 +4,12 @@ import { stringToFeature } from "@utils/location";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useEffect, useMemo, useState } from "react";
 
-const defaultViewPort = {
+export const defaultViewPort = {
   ...SITE_CONFIG.MAP.CENTER,
   zoom: 2.8,
   bearing: 0,
-  pitch: 0
+  pitch: 0,
+  maxZoom: 14
 };
 
 interface AreaDrawFieldProps {
@@ -18,6 +19,7 @@ interface AreaDrawFieldProps {
   hint?: string;
   mb?: number;
   isRequired?: boolean;
+  isControlled?: boolean;
   [key: string]: any;
 }
 
@@ -28,6 +30,7 @@ export default function AreaDrawField({
   hint,
   mb = 4,
   isRequired,
+  isControlled,
   ...props
 }: AreaDrawFieldProps) {
   const { register, setValue } = form;

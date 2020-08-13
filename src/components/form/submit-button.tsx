@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 interface ISubmitButtonProps {
   children;
@@ -11,7 +11,7 @@ interface ISubmitButtonProps {
   mb?;
   w?;
   mt?;
-  form: FormContextValues<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const SubmitButton = ({

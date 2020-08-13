@@ -1,6 +1,10 @@
 import useTranslation from "@configs/i18n/useTranslation";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import { axListMyUploads, axRemoveMyUploads, axUploadResource } from "@services/files.service";
+import {
+  axListMyUploads,
+  axRemoveMyUploads,
+  axUploadObservationResource
+} from "@services/files.service";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { DEFAULT_LICENSE } from "@static/licenses";
 import { STORE } from "@static/observation-create";
@@ -111,7 +115,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.InProgress);
     }
     try {
-      const r = await axUploadResource(pendingResource);
+      const r = await axUploadObservationResource(pendingResource);
       if (r && noSave) {
         await update({
           ...pendingResource,

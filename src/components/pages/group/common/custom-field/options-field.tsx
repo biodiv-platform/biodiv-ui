@@ -1,5 +1,5 @@
 import { Badge, Box, Button, Flex, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/core";
-import ControlledText from "@components/form/text-controlled";
+import TextBox from "@components/form/text";
 import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
@@ -30,19 +30,24 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
         w="full"
         mb={4}
       >
-        {fields.map((item, index) => (
+        {fields.map((_item, index) => (
           <Radio value={index.toString()} w="full" size="lg" mb={4}>
             <SimpleGrid columns={{ base: 1, md: 5 }} spacingX={4} ml={4}>
               <Box gridColumn="1/4">
                 <SimpleGrid columns={2} spacingX={4}>
-                  <ControlledText
+                  <TextBox
                     isRequired={true}
                     disabled={disabled}
                     name={`values.${index}.value`}
                     label="Value"
                     form={form}
                   />
-                  <ControlledText name={`values.${index}.notes`} disabled={disabled} label="Notes" form={form} />
+                  <TextBox
+                    name={`values.${index}.notes`}
+                    disabled={disabled}
+                    label="Notes"
+                    form={form}
+                  />
                 </SimpleGrid>
                 <Button
                   variantColor="red"

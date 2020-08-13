@@ -1,0 +1,87 @@
+import { Icon, IconButton, Text } from "@chakra-ui/core";
+import useTranslation from "@configs/i18n/useTranslation";
+import styled from "@emotion/styled";
+import { formatTimeStamp } from "@utils/date";
+import React, { useState } from "react";
+
+const DocumentList = styled.div`
+  display: flex;
+  border-radius: 0.25rem;
+  background: white;
+  border: 1px solid var(--gray-300);
+  cursor: pointer;
+
+  .icon,
+  .content,
+  .action {
+    padding: 0.25rem;
+    flex-shrink: 0;
+    min-width: 3rem;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon,
+  .action {
+    font-size: 1.2rem;
+  }
+
+  .content {
+    padding-left: 0;
+    flex-shrink: initial;
+    flex-grow: 1;
+    border-right: 1px solid var(--gray-300);
+  }
+
+  .elipsis {
+    height: 1.3rem;
+    overflow: hidden;
+    word-break: break-all;
+  }
+`;
+
+interface FilePreviewProps {
+  fileName;
+  date?;
+  onSelect?;
+  onDelete;
+}
+
+export default function FilePreview({ fileName, date, onSelect, onDelete }: FilePreviewProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
+
+  const handleOnDelete = async () => {
+    setIsLoading(true);
+    await onDelete();
+    setIsLoading(false);
+  };
+
+  return (
+    <DocumentList tabIndex={0} title={fileName} className="fade">
+      <div className="icon" onClick={onSelect}>
+        <Icon name="pdf" color="red.500" />
+      </div>
+      <div className="content" onClick={onSelect}>
+        <div className="elipsis">{fileName}</div>
+        <Text as="small" color="gray.500">
+          {formatTimeStamp(date)}
+        </Text>
+      </div>
+      <IconButton
+        variant="link"
+        variantColor="red"
+        icon="delete"
+        className="action"
+        isLoading={isLoading}
+        aria-label={t("DELETE")}
+        title={t("DELETE")}
+        onClick={handleOnDelete}
+      />
+    </DocumentList>
+  );
+}

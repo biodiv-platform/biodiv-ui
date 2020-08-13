@@ -13,6 +13,7 @@ import notification, { NotificationType } from "@utils/notification";
 import { useStoreState } from "easy-peasy";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import AdminInviteField from "../common/admin-invite-field";
@@ -32,12 +33,14 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   const founderIds = founders.map(({ value }) => value);
   const moderatorIds = moderators.map(({ value }) => value);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
-    validationSchema: Yup.object().shape({
-      founders: Yup.array().nullable(),
-      moderators: Yup.array().nullable()
-    }),
+    resolver: yupResolver(
+      Yup.object().shape({
+        founders: Yup.array().nullable(),
+        moderators: Yup.array().nullable()
+      })
+    ),
     defaultValues: {
       founders,
       moderators

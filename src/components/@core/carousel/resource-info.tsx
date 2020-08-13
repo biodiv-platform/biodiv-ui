@@ -3,7 +3,6 @@ import {
   Grid,
   Icon,
   IconButton,
-  Link,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -18,6 +17,8 @@ import { LICENSES } from "@static/licenses";
 import toast from "cogo-toast";
 import React from "react";
 import Rating from "react-rating";
+
+import ExternalBlueLink from "../blue-link/external";
 
 function CarouselResourceInfo({ currentResource, observationId }) {
   const { t } = useTranslation();
@@ -57,9 +58,9 @@ function CarouselResourceInfo({ currentResource, observationId }) {
 
               <Box>{t("OBSERVATION.LICENSE")}</Box>
               <Box>
-                <Link target="_blank" href={currentLicense?.link}>
-                  {currentLicense?.name} <Icon name="external-link" />
-                </Link>
+                <ExternalBlueLink href={currentLicense?.link}>
+                  {currentLicense?.name}
+                </ExternalBlueLink>
               </Box>
 
               <Box>{t("OBSERVATION.RATING")}</Box>

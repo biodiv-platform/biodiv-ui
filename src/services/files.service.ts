@@ -1,11 +1,12 @@
 import { IDBObservationAsset } from "@interfaces/custom";
-import { ENDPOINT } from "@static/constants";
+import { MyUpload } from "@interfaces/files";
+import { ENDPOINT, RESOURCE_TYPE } from "@static/constants";
 import http from "@utils/http";
 import { nanoid } from "nanoid";
 
-export const axListMyUploads = async () => {
+export const axListMyUploads = async (module = RESOURCE_TYPE.OBSERVATION) => {
   try {
-    const { data } = await http.get(`${ENDPOINT.FILES}/upload/my-uploads`);
+    const { data } = await http.get(`${ENDPOINT.FILES}/upload/my-uploads`, { params: { module } });
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -25,10 +26,24 @@ export const axRemoveMyUploads = async ({ hashKey, fileName }) => {
   }
 };
 
-export const axUploadResource = async (resource: IDBObservationAsset) => {
+export const axUploadObservationResource = async (resource: IDBObservationAsset) => {
   const formData = new FormData();
   formData.append("hash", resource.hashKey);
   formData.append("upload", resource.blob, resource.fileName);
+
+  const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
+
+  return data;
+};
+
+export const axUploadDocumentResource = async (document: File): Promise<MyUpload> => {
+  const formData = new FormData();
+  formData.append("hash", nanoid());
+  formData.append("upload", document, document.name);
 
   const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
     headers: {

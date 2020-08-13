@@ -1,9 +1,11 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
 import MainItems from "../../common/menu-items";
 import items from "./items";
+import LanguageSwitcher from "./language-switcher";
 import Search from "./search";
 import UserMenu from "./user-menu";
 
@@ -39,6 +41,14 @@ const RightMenuContainer = styled.div`
     padding: 0.4rem 0.7rem;
   }
 
+  select {
+    background: var(--gray-800);
+    border: 0;
+    height: 2.3rem;
+    max-width: 6rem;
+    margin-left: 1rem;
+  }
+
   [role="menu"] {
     color: initial;
   }
@@ -53,6 +63,7 @@ export default function RightMenu({ isOpen }: IMenuProps) {
       {activeItems.map((item) => (
         <MainItems key={item.name} {...item} />
       ))}
+      {SITE_CONFIG.LANG.SWITCHER && <LanguageSwitcher />}
       <UserMenu />
     </RightMenuContainer>
   );

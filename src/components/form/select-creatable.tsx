@@ -1,10 +1,12 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
-import React, { useEffect, useState } from "react";
-import { FormContextValues } from "react-hook-form";
-import CreatableSelect from "react-select/creatable";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import React from "react";
+import { Controller, UseFormMethods } from "react-hook-form";
+import Select from "react-select/creatable";
+
+import ErrorMessage from "./common/error-message";
 import { selectStyles } from "./configs";
 
-interface SelectCreateableFieldProps {
+interface ISelectCreatableProps {
   name: string;
   label: string;
   mb?: number;
@@ -12,37 +14,27 @@ interface SelectCreateableFieldProps {
   hint?: string;
   options?: any[];
   selectRef?;
-  handleChange?;
-  form: FormContextValues<any>;
+  isRequired?: boolean;
+  isControlled?: boolean;
+  onChangeCallback?;
+  form: UseFormMethods<Record<string, any>>;
 }
 
-const SelectCreateableField = ({
+const SelectCreatableInputField = ({
   name,
   label,
   hint,
   form,
   mb = 4,
   options = [],
-  handleChange,
   disabled = false,
   selectRef,
+  isRequired,
+  isControlled,
+  onChangeCallback,
   ...props
-}: SelectCreateableFieldProps) => {
+}: ISelectCreatableProps) => {
   const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
-  const [value, setValue] = useState(initialValue);
-
-  const onChange = ({ value }) => {
-    if (handleChange) {
-      handleChange(value);
-    }
-    form.setValue(name, value);
-    setValue(options.find((v) => v.value === value));
-    form.triggerValidation(name);
-  };
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register, initialValue]);
 
   return (
     <FormControl
@@ -50,27 +42,39 @@ const SelectCreateableField = ({
       className="dropdown"
       data-select-invalid={form.errors[name] && true}
       mb={mb}
+      isRequired={isRequired}
       {...props}
     >
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <CreatableSelect
-        inputId={name}
-        id={name}
+      <Controller
+        control={form.control}
         name={name}
-        formatCreateLabel={(v) => `Add "${v}"`}
-        options={options}
-        defaultValue={initialValue}
-        value={value}
-        isSearchable={true}
-        isDisabled={disabled}
-        onChange={onChange}
-        styles={selectStyles}
-        ref={selectRef}
+        defaultValue={form.control.defaultValuesRef.current[name]}
+        render={({ onChange, onBlur, value }) => (
+          <Select
+            id={name}
+            inputId={name}
+            onChange={(o) => {
+              onChange(o.value);
+              onChangeCallback && onChangeCallback(o.value);
+            }}
+            onBlur={onBlur}
+            options={options}
+            formatCreateLabel={(v) => `Add "${v}"`}
+            {...(isControlled
+              ? { value: options.find((o) => o.value === value) }
+              : { initialValue })}
+            isSearchable={true}
+            isDisabled={disabled}
+            styles={selectStyles}
+            ref={selectRef}
+          />
+        )}
       />
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
 
-export default SelectCreateableField;
+export default SelectCreatableInputField;
