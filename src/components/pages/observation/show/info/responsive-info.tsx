@@ -8,7 +8,7 @@ export const ResponsiveInfo = ({ title, children }) => {
   return (
     <>
       <Text fontWeight={600}>{t(title)}</Text>
-      <Box gridColumn={[1, 1, "2/6", "2/6"]} mb={[4, 4, 0, 0]}>
+      <Box gridColumn={[1, 1, "2/6", "2/6"]} mb={[4, 4, 0, 0]} whiteSpace="pre-line">
         {children}
       </Box>
     </>

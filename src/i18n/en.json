@@ -41,7 +41,6 @@
     },
     "PAGES": {
       "NOTIFICATION": {
-        "HEADING": "Send Push-Notifications",
         "FORM": {
           "BODY": "Body",
           "ERROR": "Could not send notification",
@@ -49,7 +48,8 @@
           "LINK": "Link",
           "SUCCESS": "Notification sent",
           "TITLE": "Title"
-        }
+        },
+        "HEADING": "Send Push-Notifications"
       }
     }
   },
@@ -731,5 +731,16 @@
   },
   "SUCCESS": "Success",
   "TOGGLE": "toggle",
-  "UNAUTHERIZED": "Unautherized User"
+  "UNAUTHERIZED": "Unautherized User",
+  "USER": {
+    "ABOUT": "About",
+    "EDIT_PROFILE": "Edit Profile",
+    "EMAIL": "Email",
+    "INSTITUTION": "Institution",
+    "JOINED": "Joined",
+    "LAST_ACTIVE": "Last Active",
+    "LOCATION": "Location",
+    "OCCUPATION": "Occupation",
+    "WEBSITE": "Website"
+  }
 }

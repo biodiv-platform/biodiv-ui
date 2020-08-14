@@ -2,11 +2,16 @@ import { axSaveFCMToken } from "@services/user.service";
 import notification, { NotificationType } from "./notification";
 
 export const subscribeToPushNotification = async () => {
-  const w = window as any;
-  await w.workbox.register();
+  const workbox = (window as any)?.workbox;
+  if (!workbox) {
+    console.debug("Not registering for Push Notifications");
+    return;
+  }
+
+  await workbox.register();
   Notification.requestPermission(async (status) => {
     if (status === "granted") {
-      const token = await w.workbox.messageSW({ command: "getFCMToken" });
+      const token = await workbox.messageSW({ command: "getFCMToken" });
       if (token) {
         const { success } = await axSaveFCMToken({ token });
         success
