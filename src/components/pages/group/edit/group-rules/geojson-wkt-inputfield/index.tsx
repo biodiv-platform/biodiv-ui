@@ -18,7 +18,7 @@ import notification, { NotificationType } from "@utils/notification";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FormContextValues } from "react-hook-form";
-import Wicket from "wicket";
+import { parse, stringify } from "wkt";
 
 const defaultViewPort = {
   ...SITE_CONFIG.MAP.CENTER,
@@ -60,19 +60,15 @@ export default function GeoJsonWktParserInput({
   const { register, setValue } = form;
 
   const handleMapDraw = (geoJson) => {
-    const Wktdata = new Wicket.Wkt();
     if (geoJson.length > 0) {
-      Wktdata.read(JSON.stringify(geoJson[0]));
-      setWkt(Wktdata.write());
+      setWkt(stringify(geoJson[0]));
     }
   };
 
   const handleWktInput = () => {
-    const Wktdata = new Wicket.Wkt();
     try {
-      Wktdata.read(wktInputRef.current.value);
-      setDefaultFeature(stringToFeature(`${Wktdata.toJson().coordinates}`));
-      setValue(name, Wktdata.write());
+      setDefaultFeature(stringToFeature(`${parse(wktInputRef.current.value).coordinates}`));
+      setValue(name, wktInputRef.current.value);
     } catch (e) {
       setValue(name, null);
       notification(t("Enter Valid WKT string"), NotificationType.Error);
