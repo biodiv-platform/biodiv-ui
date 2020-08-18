@@ -242,3 +242,44 @@ export const axReorderCustomField = async (userGroupId, payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axGetUserGroupRules = async (userGroupId, ctx) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/show/${userGroupId}`,
+      {
+        params: { ctx }
+      }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: e };
+  }
+};
+
+export const axAddUserGroupRule = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/add/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axRemoveUserGroupRule = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/remove/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};

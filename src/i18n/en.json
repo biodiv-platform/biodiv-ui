@@ -346,6 +346,29 @@
       "REQUESTED": "Group join request sent"
     },
     "NAME": "Group Name",
+    "RULES": {
+      "ADD": {
+        "FAILURE": "Unable to add Usergroup rule",
+        "SUCCESS": "Created successfully",
+        "TITLE": "Create Group Rule"
+      },
+      "INPUT_TYPES": {
+        "DATE_RANGE": "Add Date range",
+        "SPATIAL": "Add Spatial Rule",
+        "TAXONOMY": "Add taxonomic Rule",
+        "TITLE": "Select Input Type",
+        "USER": "Aggregate observation of all group members"
+      },
+      "REMOVE": {
+        "FAILURE": "Unable to delete User Group Rule",
+        "SUCCESS": "User group Rule deleted successfully"
+      },
+      "TABLE": {
+        "ACTIONS": "Actions",
+        "RULE_TYPE": "Rule Type",
+        "VALUE": "Value"
+      }
+    },
     "SAVE": "Create Group",
     "SPATIAL_COVERGE": "Spatial Coverage",
     "SPECIES_COVERAGE": "Species Group Coverage",
