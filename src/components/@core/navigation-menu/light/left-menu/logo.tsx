@@ -1,11 +1,13 @@
 import { Icon, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
+import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/useGlobalState";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
 import JoinUserGroup from "../join-group";
+import EditLinkButton from "./edit-link-button";
 
 const Logo = styled.div`
   width: fit-content;
@@ -66,9 +68,10 @@ const Logo = styled.div`
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
   const {
-    currentGroup: { name, icon, id },
-    isLoggedIn
+    currentGroup: { name, icon }
   } = useGlobalState();
+
+  const { t } = useTranslation();
 
   return (
     <Logo>
@@ -81,7 +84,8 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
       <button className="menu-toggle" onClick={onToggle} aria-label="toggle primary menu">
         <Icon name={isOpen ? "ibpcross" : "ibpmenu"} />
       </button>
-      {isLoggedIn && id && <JoinUserGroup />}
+      <JoinUserGroup />
+      <EditLinkButton label={t("GROUP.EDIT.TITLE")} />
     </Logo>
   );
 }
