@@ -63,7 +63,7 @@ const SelectInputField = ({
             formatCreateLabel={(v) => `Add "${v}"`}
             {...(isControlled
               ? { value: options.find((o) => o.value === value) }
-              : { initialValue })}
+              : { defaultValue: initialValue })}
             isSearchable={true}
             isDisabled={disabled}
             styles={selectStyles}

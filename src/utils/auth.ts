@@ -124,9 +124,9 @@ export const waitForAuth = (): Promise<Record<string, unknown>> => {
   });
 };
 
-export const adminOrAuthor = (authorId) => {
-  const u = getNookie(TOKEN.USER);
-  return u?.id === authorId || hasAccess([Role.Admin]);
+export const adminOrAuthor = (authorId, ctx?) => {
+  const u = getNookie(TOKEN.USER, ctx);
+  return u?.id === authorId || hasAccess([Role.Admin], ctx);
 };
 
 export const CACHE_WHITELIST = ["v2", "mapbox-tiles", "workbox"];

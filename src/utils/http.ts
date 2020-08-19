@@ -55,7 +55,9 @@ http.interceptors.request.use(
     if (token) {
       options.headers["Authorization"] = token;
     } else {
-      throw -1;
+      if (!options?.params?.skipRefresh) {
+        throw -1;
+      }
     }
 
     if (options?.params?.ctx) {

@@ -1,12 +1,15 @@
-import UserProfile from "@components/pages/user/show";
+import UserShowPageComponent from "@components/pages/user/show";
 import { axGetUserById } from "@services/user.service";
 import React from "react";
 
-const createGroup = ({ userDetails }) => <UserProfile userDetails={userDetails} />;
+import Error from "../../_error";
 
-createGroup.getInitialProps = async (ctx) => {
-  const { data } = await axGetUserById(ctx.query.userId, ctx);
-  return { userDetails: data };
+const UserShowPage = ({ user, success }) =>
+  success ? <UserShowPageComponent user={user} /> : <Error statusCode={404} />;
+
+UserShowPage.getInitialProps = async (ctx) => {
+  const { success, data } = await axGetUserById(ctx.query.userId, ctx);
+  return { user: data, success };
 };
 
-export default createGroup;
+export default UserShowPage;

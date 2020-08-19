@@ -13,7 +13,7 @@ export const GENDER_OPTIONS = [
   }
 ];
 
-export const PROFESSION_OPTIONS = [
+export const OCCUPATION_OPTIONS = [
   {
     label: "Agriculture",
     value: "Agriculture"

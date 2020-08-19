@@ -22,7 +22,7 @@ import LocationPicker from "./location";
 import {
   GENDER_OPTIONS,
   INSTITUTION_OPTIONS,
-  PROFESSION_OPTIONS,
+  OCCUPATION_OPTIONS,
   VERIFICATION_MODE,
   VERIFICATION_TYPE
 } from "./options";
@@ -118,24 +118,24 @@ function SignUpForm() {
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
         <SimpleGrid columns={[1, 1, 2, 2]} spacingX={4}>
           <Flex hidden={isOAuth} gridColumn="1/3">
-            <Oauth text={t("SIGN_UP.FORM.AUTOFILL_WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
+            <Oauth text={t("USER.AUTOFILL_WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
           </Flex>
-          <TextBox name="username" label={t("SIGN_UP.FORM.USERNAME")} form={hForm} />
+          <TextBox name="username" label={t("USER.USERNAME")} form={hForm} />
           <Select name="gender" label="Gender" options={GENDER_OPTIONS} form={hForm} />
 
           <TextBox
             name="email"
             type="email"
             disabled={isOAuth}
-            label={t("SIGN_UP.FORM.EMAIL")}
+            label={t("USER.EMAIL")}
             form={hForm}
           />
-          <PhoneNumber name="mobileNumber" label={t("SIGN_UP.FORM.MOBILE")} form={hForm} />
+          <PhoneNumber name="mobileNumber" label={t("USER.MOBILE")} form={hForm} />
           <Box style={{ gridColumn: "1/3" }} hidden={hideVerificationMethod}>
             <RadioInput
               mb={1}
               name="verificationType"
-              label={t("SIGN_UP.FORM.VERIFY_THROUGH")}
+              label={t("USER.VERIFY_THROUGH")}
               options={VERIFICATION_TYPE}
               form={hForm}
             />
@@ -144,19 +144,19 @@ function SignUpForm() {
           <TextBox
             name="password"
             type="password"
-            label={t("SIGN_UP.FORM.PASSWORD")}
+            label={t("USER.PASSWORD")}
             form={hForm}
             hidden={isOAuth}
           />
           <TextBox
             name="confirmPassword"
             type="password"
-            label={t("SIGN_UP.FORM.CONFIRM_PASSWORD")}
+            label={t("USER.CONFIRM_PASSWORD")}
             form={hForm}
             hidden={isOAuth}
           />
 
-          <Select name="profession" label="Profession" options={PROFESSION_OPTIONS} form={hForm} />
+          <Select name="profession" label="Profession" options={OCCUPATION_OPTIONS} form={hForm} />
           <Select
             name="institution"
             label="Institution"
@@ -167,7 +167,7 @@ function SignUpForm() {
         <LocationPicker form={hForm} />
         <Recaptcha name="recaptcha" form={hForm} />
         <Submit form={hForm} rightIcon="arrow-forward" w="full">
-          {t("SIGN_UP.FORM.SUBMIT")}
+          {t("USER.REGISTER")}
         </Submit>
       </form>
       <OTPModal isOpen={isOpen} onClose={onClose} user={user} />

@@ -6,48 +6,48 @@ import { useStoreState } from "easy-peasy";
 import React from "react";
 import { format } from "timeago.js";
 
-export default function UserAbout({ userDetails }) {
+export default function UserAbout({ user }) {
   const { isLoggedIn } = useStoreState((s) => s);
 
   const aboutLinks = [
     {
       title: "USER.ABOUT",
-      value: userDetails.aboutMe
+      value: user.aboutMe
     },
     {
       title: "USER.LOCATION",
-      value: userDetails.location
+      value: user.location
     },
     {
       title: "USER.WEBSITE",
-      value: userDetails.website,
+      value: user.website,
       cell: (
         <Stack isInline={false}>
-          <ExternalBlueLinkList hrefs={userDetails?.website?.split(",")} />
+          <ExternalBlueLinkList hrefs={user?.website?.split(",")} />
         </Stack>
       )
     },
     {
       title: "USER.EMAIL",
       value: isLoggedIn,
-      cell: <BlueLink href={`mailto:${userDetails.email}`}>{userDetails.email}</BlueLink>
+      cell: <BlueLink href={`mailto:${user.email}`}>{user.email}</BlueLink>
     },
     {
       title: "USER.OCCUPATION",
-      value: userDetails.occupation
+      value: user.occupation
     },
     {
       title: "USER.INSTITUTION",
-      value: userDetails.institution
+      value: user.institution
     },
 
     {
       title: "USER.JOINED",
-      value: format(userDetails.dateCreated)
+      value: format(user.dateCreated)
     },
     {
       title: "USER.LAST_ACTIVE",
-      value: format(userDetails.lastLoginDate)
+      value: format(user.lastLoginDate)
     }
   ];
 

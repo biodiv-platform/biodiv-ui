@@ -119,9 +119,9 @@ export default function ForgotPasswordComponent() {
                 mb={1}
               />
               {showMobile ? (
-                <PhoneNumber name="mobileNumber" label={t("SIGN_UP.FORM.MOBILE")} form={hForm} />
+                <PhoneNumber name="mobileNumber" label={t("USER.MOBILE")} form={hForm} />
               ) : (
-                <TextBox name="email" label={t("SIGN_UP.FORM.EMAIL")} form={hForm} />
+                <TextBox name="email" label={t("USER.EMAIL")} form={hForm} />
               )}
               <Submit form={hForm} rightIcon="arrow-forward">
                 {t("FORGOT_PASSWORD.FORM.SUBMIT")}
@@ -138,13 +138,13 @@ export default function ForgotPasswordComponent() {
               <TextBox name="otp" label={t("OTP.FORM.OTP")} form={rForm} />
               <TextBox
                 name="password"
-                label={t("SIGN_UP.FORM.PASSWORD")}
+                label={t("USER.PASSWORD")}
                 type="password"
                 form={rForm}
               />
               <TextBox
                 name="confirmPassword"
-                label={t("SIGN_UP.FORM.CONFIRM_PASSWORD")}
+                label={t("USER.CONFIRM_PASSWORD")}
                 type="password"
                 form={rForm}
               />

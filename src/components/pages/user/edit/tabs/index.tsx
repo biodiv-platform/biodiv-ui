@@ -1,27 +1,28 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
+import UserAboutTab from "./user-about";
 
-import UserLocationMap from "../user-location-map";
-import UserAbout from "./user-about";
-
-export default function UserInfoTabs({ user }) {
+export default function UserEditTabs({ user, isAdmin }) {
   const { t } = useTranslation();
 
   return (
-    <Box gridColumn={{ md: "2/5" }}>
+    <Box gridColumn={{ md: "2/5" }} mb={4}>
       <div className="white-box">
         <Tabs>
           <TabList>
             <Tab>👤 {t("USER.ABOUT")}</Tab>
-            <Tab>More</Tab>
+            <Tab>🔑 {t("USER.CHANGE_PASSWORD")}</Tab>
+            <Tab>🔔 {t("USER.NOTIFICATIONS")}</Tab>
+            {isAdmin && <Tab>🛡️ {t("USER.PERMISSIONS")}</Tab>}
           </TabList>
-          <UserLocationMap coordinates={[user.longitude, user.latitude]} />
           <TabPanels p={4}>
             <TabPanel>
-              <UserAbout user={user} />
+              <UserAboutTab user={user} />
             </TabPanel>
             <TabPanel>TBA</TabPanel>
+            <TabPanel>TBA</TabPanel>
+            {isAdmin && <TabPanel>TBA</TabPanel>}
           </TabPanels>
         </Tabs>
       </div>

@@ -6,22 +6,28 @@ import {
 } from "@services/observation.service";
 import React from "react";
 
-const ObservationShowPage = ({ observation, traits, speciesGroups }) => (
-  <ObservationShowPageComponent
-    observation={observation}
-    traits={traits}
-    speciesGroups={speciesGroups}
-  />
-);
+import Error from "../../_error";
+
+const ObservationShowPage = ({ observation, traits, speciesGroups, success }) =>
+  success ? (
+    <ObservationShowPageComponent
+      observation={observation}
+      traits={traits}
+      speciesGroups={speciesGroups}
+    />
+  ) : (
+    <Error statusCode={404} />
+  );
 
 ObservationShowPage.getInitialProps = async (ctx) => {
   const { data: speciesGroups } = await axGetspeciesGroups();
-  const { data } = await axGetObservationById(ctx.query.observationId);
-  const res = await axGetTraitsByGroupId(data.observation.groupId);
+  const { success, data } = await axGetObservationById(ctx.query.observationId);
+  const res = await axGetTraitsByGroupId(data?.observation?.groupId);
   return {
     observation: data,
     traits: res.data,
-    speciesGroups
+    speciesGroups,
+    success
   };
 };
 

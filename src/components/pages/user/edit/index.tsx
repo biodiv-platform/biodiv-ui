@@ -2,19 +2,20 @@ import { SimpleGrid } from "@chakra-ui/core";
 import { UserProfileData } from "@interfaces/integrator";
 import React from "react";
 
-import UserInfoSidebar from "./sidebar";
-import UserInfoTabs from "./user-info-tabs";
+import SideBar from "./sidebar";
+import UserEditTabs from "./tabs";
 
-export interface UserProfileProps {
+export interface UserEditPageComponentProps {
   user: UserProfileData;
+  isAdmin?: boolean;
 }
 
-export default function UserShowPageComponent({ user }: UserProfileProps) {
+export default function UserEditPageComponent({ user, isAdmin }: UserEditPageComponentProps) {
   return (
     <div className="container mt">
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
-        <UserInfoSidebar user={user} />
-        <UserInfoTabs user={user} />
+        <SideBar user={user} />
+        <UserEditTabs isAdmin={isAdmin} user={user} />
       </SimpleGrid>
     </div>
   );

@@ -3,14 +3,12 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "@configs/i18n/useTranslation";
 import { ObservationUserPermission, ShowData } from "@interfaces/observation";
 import { ACTIVITY_UPDATED } from "@static/events";
-import dynamic from "next/dynamic";
 import React from "react";
 import { emit } from "react-gbus";
 import LazyLoad from "react-lazyload";
 
+import AddSuggestion from "./add-suggestion";
 import RecoSuggestion from "./reco-suggestion";
-
-const AddSuggestion = dynamic(() => import("./add-suggestion"), { ssr: false });
 
 interface ISuggestionListProps {
   o: ShowData;

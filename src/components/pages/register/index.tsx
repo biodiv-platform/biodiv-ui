@@ -16,10 +16,10 @@ function RegisterComponent() {
   return (
     <Flex className="container fadeInUp" align="center" justify="center" pt={6}>
       <Box maxW="xl" width="full" pb={6}>
-        <NextSeo title={t("SIGN_UP.TITLE")} />
-        <PageHeading>{t("SIGN_UP.TITLE")}</PageHeading>
+        <NextSeo title={t("USER.SIGN_UP")} />
+        <PageHeading>{t("USER.SIGN_UP")}</PageHeading>
         <Text mb={4}>
-          {t("SIGN_UP.EXISTING_USER")}{" "}
+          {t("USER.EXISTING_USER")}{" "}
           <LocalLink href={`${webAddress}/login`}>
             <BlueLink>
               {t("SIGN_IN.TITLE")}
