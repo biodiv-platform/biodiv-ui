@@ -22,7 +22,7 @@ export default function UserEditTabs({ user, isAdmin }) {
           </TabList>
           <TabPanels p={4}>
             <TabPanel>
-              <UserAboutTab user={user} />
+              <UserAboutTab user={user} isAdmin={isAdmin} />
             </TabPanel>
             <TabPanel>
               <ChangePasswordTab userId={user.id} />

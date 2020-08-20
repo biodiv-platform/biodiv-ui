@@ -20,8 +20,9 @@ import * as Yup from "yup";
 
 import { UserEditPageComponentProps } from "..";
 
-export default function UserAboutTab({ user }: UserEditPageComponentProps) {
+export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentProps) {
   const { t } = useTranslation();
+
   const hForm = useForm<any>({
     mode: "onBlur",
     resolver: yupResolver(
@@ -58,14 +59,14 @@ export default function UserAboutTab({ user }: UserEditPageComponentProps) {
 
       latitude: user.latitude,
       longitude: user.longitude,
-      location: user.location,
+      location: user.location || "",
 
       website: user.website
     }
   });
 
   const handleOnUpdate = async (payload) => {
-    const { success } = await axUpdateUserAbout({ id: user.id, email: user.email, ...payload });
+    const { success } = await axUpdateUserAbout({ id: user.id, ...payload });
     if (success) {
       notification(t("USER.UPDATED"), NotificationType.Success);
     } else {
@@ -81,13 +82,13 @@ export default function UserAboutTab({ user }: UserEditPageComponentProps) {
         <TextBoxField
           name="email"
           type="email"
-          disabled={true}
+          disabled={!isAdmin}
           label={t("USER.EMAIL")}
           form={hForm}
         />
         <PhoneNumberInputField
           name="mobileNumber"
-          disabled={true}
+          disabled={!isAdmin}
           label={t("USER.MOBILE")}
           form={hForm}
         />
