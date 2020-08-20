@@ -1,4 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/core";
+import FormDebugger from "@components/form/debugger";
 import PhoneNumberInputField from "@components/form/phone-number";
 import SelectInputField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
@@ -12,6 +13,8 @@ import {
 } from "@components/pages/register/form/options";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
+import { axUpdateUserAbout } from "@services/user.service";
+import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -25,7 +28,7 @@ export default function UserAboutTab({ user }: UserEditPageComponentProps) {
     resolver: yupResolver(
       Yup.object().shape({
         name: Yup.string().required(),
-        username: Yup.string().required(),
+        userName: Yup.string().required(),
         aboutMe: Yup.string().required(),
 
         email: Yup.string().nullable(),
@@ -35,16 +38,16 @@ export default function UserAboutTab({ user }: UserEditPageComponentProps) {
         occupation: Yup.string().nullable(),
         institution: Yup.string().nullable(),
 
-        latitude: Yup.number().required(),
-        longitude: Yup.number().required(),
+        latitude: Yup.number().nullable(),
+        longitude: Yup.number().nullable(),
         location: Yup.string().required(),
 
-        website: Yup.string().required()
+        website: Yup.string().nullable()
       })
     ),
     defaultValues: {
       name: user.name,
-      username: user.userName,
+      userName: user.userName,
       aboutMe: user?.aboutMe?.trim(),
 
       email: user.email, // read-only
@@ -62,51 +65,59 @@ export default function UserAboutTab({ user }: UserEditPageComponentProps) {
     }
   });
 
-  const handleOnUpdate = (value) => {
-    console.debug(value);
+  const handleOnUpdate = async (payload) => {
+    const { success } = await axUpdateUserAbout({ id: user.id, email: user.email, ...payload });
+    if (success) {
+      notification(t("USER.UPDATED"), NotificationType.Success);
+    } else {
+      notification(t("USER.UPDATE_ERROR"));
+    }
   };
 
   return (
-    <div>
-      <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
-          <TextBoxField
-            name="email"
-            type="email"
-            disabled={true}
-            label={t("USER.EMAIL")}
-            form={hForm}
-          />
-          <PhoneNumberInputField
-            name="mobileNumber"
-            disabled={true}
-            label={t("USER.MOBILE")}
-            form={hForm}
-          />
-          <SelectInputField
-            name="occupation"
-            label={t("USER.OCCUPATION")}
-            options={OCCUPATION_OPTIONS}
-            form={hForm}
-          />
-          <SelectInputField
-            name="institution"
-            label={t("USER.INSTITUTION")}
-            options={INSTITUTION_OPTIONS}
-            form={hForm}
-          />
-          <SelectInputField
-            name="sexType"
-            label={t("USER.GENDER")}
-            options={GENDER_OPTIONS}
-            form={hForm}
-          />
-          <TextBoxField name="website" label={t("USER.WEBSITE")} form={hForm} />
-        </SimpleGrid>
-        <TextAreaField name="aboutMe" label="About" form={hForm} />
-        <LocationPicker form={hForm} />
-        <SubmitButton form={hForm}>{t("SAVE")}</SubmitButton>
-      </form>
-    </div>
+    <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
+        <TextBoxField name="userName" label={t("USER.USERNAME")} form={hForm} />
+        <TextBoxField name="name" label={t("USER.NAME")} form={hForm} />
+        <TextBoxField
+          name="email"
+          type="email"
+          disabled={true}
+          label={t("USER.EMAIL")}
+          form={hForm}
+        />
+        <PhoneNumberInputField
+          name="mobileNumber"
+          disabled={true}
+          label={t("USER.MOBILE")}
+          form={hForm}
+        />
+        <SelectInputField
+          name="occupation"
+          label={t("USER.OCCUPATION")}
+          options={OCCUPATION_OPTIONS}
+          form={hForm}
+        />
+        <SelectInputField
+          name="institution"
+          label={t("USER.INSTITUTION")}
+          options={INSTITUTION_OPTIONS}
+          form={hForm}
+        />
+        <SelectInputField
+          name="sexType"
+          label={t("USER.GENDER")}
+          options={GENDER_OPTIONS}
+          form={hForm}
+        />
+        <TextBoxField name="website" label={t("USER.WEBSITE")} form={hForm} />
+      </SimpleGrid>
+      <TextAreaField name="aboutMe" label="About" form={hForm} />
+      <LocationPicker form={hForm} />
+      <SubmitButton leftIcon="ibpcheck" form={hForm}>
+        {t("SAVE")}
+      </SubmitButton>
+      <FormDebugger form={hForm} />
+    </form>
   );
 }

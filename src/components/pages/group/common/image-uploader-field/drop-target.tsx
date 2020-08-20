@@ -1,7 +1,7 @@
 import { Button, Heading, Icon, Text } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
-import { axUploadUserGroupResource } from "@services/files.service";
+import { axUploadResource } from "@services/files.service";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -46,7 +46,7 @@ export default function DropTarget({ setValue, nestedPath, simpleUpload }: userG
   const onDrop = async (files) => {
     setIsProcessing(true);
     if (files.length) {
-      const { success, data } = await axUploadUserGroupResource(files[0], nestedPath);
+      const { success, data } = await axUploadResource(files[0], "userGroups", nestedPath);
       if (success) {
         setValue(data);
       }

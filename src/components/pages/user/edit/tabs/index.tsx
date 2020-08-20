@@ -1,6 +1,10 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
+
+import NotificationsTab from "./notifications";
+import ChangePasswordTab from "./password";
+import PermissionsTab from "./permissions";
 import UserAboutTab from "./user-about";
 
 export default function UserEditTabs({ user, isAdmin }) {
@@ -20,9 +24,17 @@ export default function UserEditTabs({ user, isAdmin }) {
             <TabPanel>
               <UserAboutTab user={user} />
             </TabPanel>
-            <TabPanel>TBA</TabPanel>
-            <TabPanel>TBA</TabPanel>
-            {isAdmin && <TabPanel>TBA</TabPanel>}
+            <TabPanel>
+              <ChangePasswordTab userId={user.id} />
+            </TabPanel>
+            <TabPanel>
+              <NotificationsTab user={user} />
+            </TabPanel>
+            {isAdmin && (
+              <TabPanel>
+                <PermissionsTab user={user} />
+              </TabPanel>
+            )}
           </TabPanels>
         </Tabs>
       </div>

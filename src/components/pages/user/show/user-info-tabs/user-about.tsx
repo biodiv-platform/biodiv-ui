@@ -6,7 +6,9 @@ import { useStoreState } from "easy-peasy";
 import React from "react";
 import { format } from "timeago.js";
 
-export default function UserAbout({ user }) {
+import { UserProfileProps } from "..";
+
+export default function UserAbout({ user }: UserProfileProps) {
   const { isLoggedIn } = useStoreState((s) => s);
 
   const aboutLinks = [

@@ -81,9 +81,45 @@ export interface UserDTO {
   mode?: string;
   recaptcha?: string;
 }
+export interface UserDetails {
+  id?: number; // int64
+  userName?: string;
+  aboutMe?: string;
+  email?: string;
+  sexType?: string;
+  latitude?: number; // double
+  longitude?: number; // double
+  mobileNumber?: string;
+  occupation?: string;
+  institution?: string;
+  location?: string;
+  website?: string;
+}
+export interface UserEmailPreferences {
+  id?: number; // int64
+  hideEmial?: boolean;
+  sendNotification?: boolean;
+  identificationMail?: boolean;
+  sendDigest?: boolean;
+  sendPushNotification?: boolean;
+}
 export interface UserIbp {
   id?: number; // int64
   name?: string;
   profilePic?: string;
   isAdmin?: boolean;
+}
+export interface UserPasswordChange {
+  id?: number; // int64
+  oldPassword?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+export interface UserRoles {
+  id?: number; // int64
+  enabled?: boolean;
+  accountExpired?: boolean;
+  accountLocked?: boolean;
+  passwordExpired?: boolean;
+  roles?: Role[];
 }
