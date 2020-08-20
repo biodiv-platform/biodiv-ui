@@ -1,5 +1,4 @@
 import { SimpleGrid } from "@chakra-ui/core";
-import FormDebugger from "@components/form/debugger";
 import PhoneNumberInputField from "@components/form/phone-number";
 import SelectInputField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
@@ -117,7 +116,6 @@ export default function UserAboutTab({ user }: UserEditPageComponentProps) {
       <SubmitButton leftIcon="ibpcheck" form={hForm}>
         {t("SAVE")}
       </SubmitButton>
-      <FormDebugger form={hForm} />
     </form>
   );
 }
