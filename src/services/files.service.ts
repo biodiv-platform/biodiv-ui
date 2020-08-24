@@ -29,6 +29,7 @@ export const axRemoveMyUploads = async ({ hashKey, fileName }) => {
 export const axUploadObservationResource = async (resource: IDBObservationAsset) => {
   const formData = new FormData();
   formData.append("hash", resource.hashKey);
+  formData.append("module", "observation");
   formData.append("upload", resource.blob, resource.fileName);
 
   const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
@@ -43,6 +44,7 @@ export const axUploadObservationResource = async (resource: IDBObservationAsset)
 export const axUploadDocumentResource = async (document: File): Promise<MyUpload> => {
   const formData = new FormData();
   formData.append("hash", nanoid());
+  formData.append("module", "document");
   formData.append("upload", document, document.name);
 
   const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
