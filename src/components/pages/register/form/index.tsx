@@ -120,7 +120,7 @@ function SignUpForm() {
           <Flex hidden={isOAuth} gridColumn="1/3">
             <Oauth text={t("USER.AUTOFILL_WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
           </Flex>
-          <TextBox name="username" label={t("USER.USERNAME")} form={hForm} />
+          <TextBox name="username" label={t("USER.NAME")} form={hForm} />
           <Select name="gender" label="Gender" options={GENDER_OPTIONS} form={hForm} />
 
           <TextBox
