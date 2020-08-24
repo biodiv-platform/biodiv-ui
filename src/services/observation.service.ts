@@ -20,7 +20,7 @@ export const axGetObservationEditById = async (observationId, ctx) => {
     );
     return { success: true, data };
   } catch (e) {
-    console.error(e.response.data.message);
+    console.error(e);
     return { success: false, data: {} };
   }
 };
@@ -32,7 +32,7 @@ export const axGetObservationById = async (observationId) => {
     );
     return { success: true, data };
   } catch (e) {
-    console.error(e.response.data.message);
+    console.error(e);
     return { success: false, data: {} };
   }
 };

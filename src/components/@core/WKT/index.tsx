@@ -3,8 +3,8 @@ import notification from "@utils/notification";
 import React, { useRef, useState } from "react";
 import wkt from "wkt";
 
+import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
-import WktPreview from "./wkt-preview";
 
 export interface WKTProps {
   name: string;
@@ -83,7 +83,7 @@ export default function WKT({
         </FormControl>
         <SaveButton onClick={handleOnSave} />
       </SimpleGrid>
-      <WktPreview data={geojson} />
+      <GeoJSONPreview data={geojson} />
     </div>
   );
 }

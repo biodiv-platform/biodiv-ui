@@ -1,9 +1,8 @@
 import { AccordionHeader, AccordionIcon, AccordionItem, AccordionPanel } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import dynamic from "next/dynamic";
 import React from "react";
 
-const MapDrawContainer = dynamic(() => import("./map-draw-container"), { ssr: false });
+import MapDrawContainer from "./map-draw-container";
 
 /**
  * `isExpand` is used here so we can prevent unnecessary map render

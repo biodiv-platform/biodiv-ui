@@ -6,7 +6,7 @@ import Select from "react-select";
 import ErrorMessage from "./common/error-message";
 import { selectStyles } from "./configs";
 
-interface ISelectProps {
+interface SelectMultipleProps {
   name: string;
   label: string;
   mb?: number;
@@ -15,26 +15,26 @@ interface ISelectProps {
   options?: any[];
   selectRef?;
   isRequired?: boolean;
-  isControlled?: boolean;
-  onChangeCallback?;
+  isSearchable?: boolean;
   form: UseFormMethods<Record<string, any>>;
 }
 
-const SelectInputField = ({
+const SelectMultipleInputField = ({
   name,
   label,
   hint,
   form,
   mb = 4,
   options = [],
-  disabled = false,
+  disabled,
   selectRef,
   isRequired,
-  isControlled,
-  onChangeCallback,
+  isSearchable,
   ...props
-}: ISelectProps) => {
-  const initialValue = options.find((v) => v.value === form.control.defaultValuesRef.current[name]);
+}: SelectMultipleProps) => {
+  const initialValue = options.filter((v) =>
+    (form.control.defaultValuesRef.current[name] || []).includes(v.value)
+  );
 
   return (
     <FormControl
@@ -50,21 +50,17 @@ const SelectInputField = ({
         control={form.control}
         name={name}
         defaultValue={form.control.defaultValuesRef.current[name]}
-        render={({ onChange, onBlur, value }) => (
+        render={({ onChange, onBlur }) => (
           <Select
             id={name}
             inputId={name}
-            onChange={(o) => {
-              onChange(o.value);
-              onChangeCallback && onChangeCallback(o.value);
-            }}
+            onChange={(o) => onChange(o.map(({ value }) => value))}
             onBlur={onBlur}
             options={options}
             formatCreateLabel={(v) => `Add "${v}"`}
-            {...(isControlled
-              ? { value: options.find((o) => o.value === value) }
-              : { defaultValue: initialValue })}
+            defaultValue={initialValue}
             isSearchable={true}
+            isMulti={true}
             isDisabled={disabled}
             styles={selectStyles}
             ref={selectRef}
@@ -77,4 +73,4 @@ const SelectInputField = ({
   );
 };
 
-export default SelectInputField;
+export default SelectMultipleInputField;

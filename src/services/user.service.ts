@@ -44,3 +44,82 @@ export const axUserFilterSearch = async (name) => {
     return { success: false, data: [] };
   }
 };
+
+export const axGetUserById = async (userId, ctx) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.INTEGRATOR}/v1/services/read/profile/${userId}`, {
+      params: { ctx, skipRefresh: true }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: e };
+  }
+};
+
+export const axUpdateUserAbout = async (payload) => {
+  try {
+    const { status } = await http.put(`${ENDPOINT.USER}/v1/user/update/details`, payload);
+    return { success: status === 200 };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+export const axUpdateNotifications = async (payload) => {
+  try {
+    const { status } = await http.put(`${ENDPOINT.USER}/v1/user/update/emailPreferences`, payload);
+    return { success: status === 200 };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+export const axUpdateUserImage = async (payload) => {
+  try {
+    const { status } = await http.put(
+      `${ENDPOINT.USER}/v1/user/update/image`,
+      {},
+      { params: payload }
+    );
+    return { success: status === 200 };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+export const axUpdateUserPassword = async (payload) => {
+  try {
+    const { status, data } = await http.post(
+      `${ENDPOINT.USER}/v1/authenticate/change-password`,
+      payload
+    );
+    return { success: status === 200 && data.status };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+export const axGetUserRoles = async () => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/roles/all`);
+    return data;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};
+
+export const axUpdateUserPermissions = async (payload) => {
+  try {
+    const { status } = await http.put(`${ENDPOINT.USER}/v1/user/update/roles`, payload);
+    return { success: status === 200 };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};

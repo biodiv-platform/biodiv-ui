@@ -41,7 +41,6 @@
     },
     "PAGES": {
       "NOTIFICATION": {
-        "HEADING": "Send Push-Notifications",
         "FORM": {
           "BODY": "Body",
           "ERROR": "Could not send notification",
@@ -49,7 +48,8 @@
           "LINK": "Link",
           "SUCCESS": "Notification sent",
           "TITLE": "Title"
-        }
+        },
+        "HEADING": "Send Push-Notifications"
       }
     }
   },
@@ -272,6 +272,7 @@
       "SUBMIT": "Send verification code",
       "VERIFICATION_TYPE": "How would you like to verify your account?"
     },
+    "RESET_ERROR": "Unable to update password",
     "RESET_SUCCESS": "Password changed sucessfully",
     "TITLE": "Password Reset"
   },
@@ -709,27 +710,51 @@
     "TITLE": "Sign in",
     "WITH_GOOGLE": "Sign in with Google"
   },
-  "SIGN_UP": {
-    "EXISTING_USER": "Already have an account?",
-    "FORM": {
-      "AUTOFILL_WITH_GOOGLE": "Autofill with Google",
-      "CONFIRM_PASSWORD": "Confirm Password",
-      "EMAIL": "Email",
-      "GENDER": "Gender",
-      "INSTITUTION": "Institution",
-      "LATITUDE": "Latitude",
-      "LOCATION": "Location",
-      "LONGITUDE": "Longitude",
-      "MOBILE": "Mobile Number",
-      "PASSWORD": "Password",
-      "PROFESSION": "Profession",
-      "SUBMIT": "Register",
-      "USERNAME": "Name",
-      "VERIFY_THROUGH": "Since you have provided email and mobile number both how would you like to verify your account?"
-    },
-    "TITLE": "Sign up"
-  },
   "SUCCESS": "Success",
   "TOGGLE": "toggle",
-  "UNAUTHERIZED": "Unautherized User"
+  "UNAUTHERIZED": "Unautherized User",
+  "USER": {
+    "ABOUT": "About",
+    "AUTOFILL_WITH_GOOGLE": "Autofill with Google",
+    "CHANGE_PASSWORD": "Change Password",
+    "CONFIRM_NEW_PASSWORD": "Confirm New Password",
+    "CONFIRM_PASSWORD": "Confirm Password",
+    "CURRENT_PASSWORD": "Current Password",
+    "EDIT_PROFILE": "Edit Profile",
+    "EMAIL": "Email",
+    "ENABLED": "Account Enabled",
+    "EXISTING_USER": "Already have an account?",
+    "EXPIRED": "Account Expired",
+    "GENDER": "Gender",
+    "HIDE_EMAIL": "Hide Email",
+    "IDENTIFICATION_MAIL": "Allow other users to notify me",
+    "INSTITUTION": "Institution",
+    "JOINED": "Joined",
+    "LAST_ACTIVE": "Last Active",
+    "LATITUDE": "Latitude",
+    "LOCATION": "Location",
+    "LOCKED": "Account Locked",
+    "LONGITUDE": "Longitude",
+    "MOBILE": "Mobile Number",
+    "NAME": "Name",
+    "NEW_PASSWORD": "New Password",
+    "NOTIFICATIONS": "Notifications",
+    "OCCUPATION": "Profession",
+    "PASSWORD": "Password",
+    "PASSWORD_EXPIRED": "Password Expired",
+    "PERMISSIONS": "Permissions",
+    "REGISTER": "Register",
+    "ROLES": "Roles",
+    "SEND_DIGEST": "Send Digest",
+    "SEND_EMAIL": "Send Emails",
+    "SEND_PUSH_NOTIFICATIONS": "Send Push Notifications",
+    "SIGN_UP": "Sign up",
+    "UPDATE_ERROR": "Unable to update",
+    "UPDATE_PASSWORD": "Update Password",
+    "UPDATED": "Updated Successfully",
+    "UPLOAD_PHOTO": "Upload a photo",
+    "USERNAME": "Username",
+    "VERIFY_THROUGH": "Since you have provided email and mobile number both how would you like to verify your account?",
+    "WEBSITE": "Website"
+  }
 }

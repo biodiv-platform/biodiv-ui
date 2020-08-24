@@ -28,6 +28,8 @@ interface IDatePickerBoxProps {
   form: UseFormMethods<Record<string, any>>;
 }
 
+const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
+
 const DatePickerField = ({
   name,
   label,
@@ -39,8 +41,6 @@ const DatePickerField = ({
   dateFormat = "d-m-Y",
   ...props
 }: IDatePickerBoxProps) => {
-  const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
-
   if (subscribe) {
     useListener(
       (d) => {

@@ -20,7 +20,7 @@ const CheckboxField = ({
   form,
   mb = 4,
   hint,
-  disabled = false,
+  disabled,
   ...props
 }: ITextBoxProps) => (
   <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>

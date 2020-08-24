@@ -6,8 +6,8 @@ import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
 
+import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
-import WktPreview from "./wkt-preview";
 
 const onQuery = async (q) => {
   const { data } = await axQueryGeoEntitiesByPlaceName(q);
@@ -52,7 +52,7 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
         </FormControl>
         <SaveButton onClick={handleOnSave} />
       </SimpleGrid>
-      <WktPreview data={selected?.value} />
+      <GeoJSONPreview data={selected?.value} />
     </div>
   );
 }

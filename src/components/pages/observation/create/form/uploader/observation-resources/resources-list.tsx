@@ -1,12 +1,10 @@
 import { SimpleGrid, Text } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import dynamic from "next/dynamic";
 import React from "react";
 
 import useObservationCreate from "../use-observation-resources";
+import DropTarget from "./drop-target";
 import ResourceCard from "./resource-card";
-
-const DropTarget = dynamic(import("./drop-target"), { ssr: false });
 
 export default function ResourcesList() {
   const { observationAssets } = useObservationCreate();

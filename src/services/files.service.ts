@@ -60,12 +60,12 @@ export const axUploadDocumentResource = async (document: File): Promise<MyUpload
  * @param {IDBObservationAsset} resource
  * @returns
  */
-export const axUploadUserGroupResource = async (resource: File, nestedPath?: string) => {
+export const axUploadResource = async (resource: File, directory, nestedPath?: string) => {
   try {
     const formData = new FormData();
     formData.append("hash", nanoid());
     formData.append("upload", resource, resource.name);
-    formData.append("directory", "userGroups");
+    formData.append("directory", directory);
     formData.append("resource", "true");
     nestedPath ? formData.append("nestedFolder", nestedPath) : null;
 

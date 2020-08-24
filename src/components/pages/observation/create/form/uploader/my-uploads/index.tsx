@@ -1,13 +1,11 @@
 import { Box, Button, CheckboxGroup, Flex, Select, Spinner, Text } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import dynamic from "next/dynamic";
 import React from "react";
 
 import { MY_UPLOADS_SORT } from "../../options";
 import useObservationCreate from "../use-observation-resources";
 import Checkbox from "./checkbox";
-
-const DropTarget = dynamic(import("./drop-target"), { ssr: false });
+import DropTarget from "./drop-target";
 
 const MyUploadsImages = ({ onDone }) => {
   const { assets, observationAssets, resourcesSortBy, setResourcesSortBy } = useObservationCreate();

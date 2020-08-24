@@ -21,28 +21,33 @@ const LIBRARIES = ["drawing", "places"];
 const LocationPicker = ({ form }) => {
   const { t } = useTranslation();
   const { latitude: lat, longitude: lng } = SITE_CONFIG.MAP.CENTER;
+  const FK = {
+    location: {
+      name: "location",
+      label: t("USER.LOCATION")
+    },
+    latitude: {
+      name: "latitude",
+      label: t("USER.LATITUDE")
+    },
+    longitude: {
+      name: "longitude",
+      label: t("USER.LONGITUDE")
+    }
+  };
 
   const { isOpen, onToggle } = useDisclosure();
   const [zoom, setZoom] = useState(4);
   const [center, setCenter] = useState({ lat, lng });
   const [searchBoxRef, setSearchBoxRef] = useState<any>();
   const [suggestions, setSuggestions] = useState([]);
-  const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
-  const [locationText, setLocationText] = useState("");
-  const FK = {
-    location: {
-      name: "location",
-      label: t("SIGN_UP.FORM.LOCATION")
-    },
-    latitude: {
-      name: "latitude",
-      label: t("SIGN_UP.FORM.LATITUDE")
-    },
-    longitude: {
-      name: "longitude",
-      label: t("SIGN_UP.FORM.LONGITUDE")
-    }
-  };
+  const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({
+    lat: form.control.defaultValuesRef.current[FK.latitude.name] || 0,
+    lng: form.control.defaultValuesRef.current[FK.longitude.name] || 0
+  });
+  const [locationText, setLocationText] = useState(
+    form.control.defaultValuesRef.current[FK.location.name]
+  );
 
   useEffect(() => {
     if (suggestions.length) {

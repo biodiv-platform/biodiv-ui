@@ -17,11 +17,6 @@ export interface Follow {
   authorId?: number; // int64
   createdOn?: string; // date-time
 }
-export interface GroupAddMember {
-  userGroupId?: number; // int64
-  roleId?: number; // int64
-  memberList?: number /* int64 */[];
-}
 export interface Recipients {
   id?: number; // int64
   name?: string;
@@ -33,14 +28,6 @@ export interface Role {
   id?: number; // int64
   version?: number; // int64
   authority?: string;
-}
-export interface SpeciesPermission {
-  id?: number; // int64
-  version?: number; // int64
-  authorId?: number; // int64
-  createdOn?: string; // date-time
-  permissionType?: string;
-  taxonConceptId?: number; // int64
 }
 export interface User {
   id?: number; // int64
@@ -74,6 +61,7 @@ export interface User {
   identificationMail?: boolean;
   sendDigest?: boolean;
   sendPushNotification?: boolean;
+  website?: string;
 }
 export interface UserDTO {
   id?: number; // int64
@@ -93,14 +81,27 @@ export interface UserDTO {
   mode?: string;
   recaptcha?: string;
 }
-export interface UserGroupMemberRole {
-  userGroupId?: number; // int64
-  roleId?: number; // int64
-  getsUserId?: number; // int64
+export interface UserDetails {
+  id?: number; // int64
+  userName?: string;
+  aboutMe?: string;
+  email?: string;
+  sexType?: string;
+  latitude?: number; // double
+  longitude?: number; // double
+  mobileNumber?: string;
+  occupation?: string;
+  institution?: string;
+  location?: string;
+  website?: string;
 }
-export interface UserGroupMembersCount {
-  userGroupId?: number; // int64
-  count?: number; // int64
+export interface UserEmailPreferences {
+  id?: number; // int64
+  hideEmial?: boolean;
+  sendNotification?: boolean;
+  identificationMail?: boolean;
+  sendDigest?: boolean;
+  sendPushNotification?: boolean;
 }
 export interface UserIbp {
   id?: number; // int64
@@ -108,9 +109,17 @@ export interface UserIbp {
   profilePic?: string;
   isAdmin?: boolean;
 }
-export interface UserPermissions {
-  allowedTaxonList?: SpeciesPermission[];
-  userMemberRole?: UserGroupMemberRole[];
-  userFeatureRole?: UserGroupMemberRole[];
-  following?: boolean;
+export interface UserPasswordChange {
+  id?: number; // int64
+  oldPassword?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+export interface UserRoles {
+  id?: number; // int64
+  enabled?: boolean;
+  accountExpired?: boolean;
+  accountLocked?: boolean;
+  passwordExpired?: boolean;
+  roles?: Role[];
 }
