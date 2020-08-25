@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/core";
+import { Box, Flex, Heading, Text } from "@chakra-ui/core";
 import { defaultViewPort } from "@components/pages/group/common/area-draw-field";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
@@ -6,6 +6,8 @@ import { Landscape } from "@interfaces/landscape";
 import { Previewer } from "naksha-components-react";
 import React from "react";
 import wkt from "wkt";
+
+import DownloadLandscape from "./download";
 import LandscapeFields from "./fields";
 
 interface LandscapeShowComponentProps {
@@ -21,13 +23,16 @@ export default function LandscapeShowComponent({
 
   return (
     <div className="container mt">
-      <Heading as="h1" size="xl" mb={4}>
-        {landscape.shortName}
-        <Text as="span" color="gray.500" ml={4}>
-          {t("LANDSCAPE.SITE_NUMBER")}
-          {landscape.siteNumber}
-        </Text>
-      </Heading>
+      <Flex justifyContent="space-between" direction={{ base: "column", md: "row" }} mb={4}>
+        <Heading as="h1" size="xl">
+          {landscape.shortName}
+          <Text as="span" color="gray.500" ml={4}>
+            {t("LANDSCAPE.SITE_NUMBER")}
+            {landscape.siteNumber}
+          </Text>
+        </Heading>
+        <DownloadLandscape id={landscape.id} />
+      </Flex>
       <Box position="relative" h="22rem" bg="gray.200" borderRadius="md" overflow="hidden" mb={4}>
         <Previewer
           defaultViewPort={defaultViewPort}
