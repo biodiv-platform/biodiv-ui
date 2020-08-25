@@ -117,7 +117,6 @@ export default function ObservationCreateForm({
       notes: null,
       tags: [],
 
-      observedOn: null,
       dateAccuracy: "ACCURATE",
       observedAt: "",
       reverseGeocoded: "",
@@ -149,6 +148,7 @@ export default function ObservationCreateForm({
           }));
           return {
             //TODO add default value to i.e. value:options[defaultValue]
+            value: null,
             label: name,
             isRequired,
             customFieldId,
@@ -169,25 +169,28 @@ export default function ObservationCreateForm({
   });
 
   const parseCustomFieldToPayload = (customFields) => {
-    return fields.map(({ fieldType, customFieldId }, index) => {
-      let val;
-      switch (fieldType) {
-        case "MULTIPLE CATEGORICAL":
-          val = { multipleCategorical: customFields[index]?.value };
-          break;
-        case "SINGLE CATEGORICAL":
-          val = { singleCategorical: customFields[index]?.value };
-          break;
-        default:
-          val = { textBoxValue: customFields[index]?.value };
-          break;
+    return fields.reduce((acc, { fieldType, customFieldId }, index) => {
+      if (customFields[index]?.value) {
+        let val;
+        switch (fieldType) {
+          case "MULTIPLE CATEGORICAL":
+            val = { multipleCategorical: customFields[index]?.value };
+            break;
+          case "SINGLE CATEGORICAL":
+            val = { singleCategorical: customFields[index]?.value };
+            break;
+          default:
+            val = { textBoxValue: customFields[index]?.value };
+            break;
+        }
+        acc.push({
+          customFieldId,
+          userGroupId: currentGroup.id,
+          ...val
+        });
       }
-      return {
-        customFieldId,
-        userGroupId: currentGroup.id,
-        ...val
-      };
-    });
+      return acc;
+    }, []);
   };
 
   const handleOnSubmit = async ({
