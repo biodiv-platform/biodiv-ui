@@ -1,13 +1,8 @@
-import {
-  Switch,
-  FormLabel,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  Box
-} from "@chakra-ui/core";
+import { Box, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/core";
 import React from "react";
 import { UseFormMethods } from "react-hook-form";
+
+import ErrorMessage from "./common/error-message";
 
 interface ITextBoxProps {
   name: string;
@@ -17,7 +12,7 @@ interface ITextBoxProps {
   disabled?: boolean;
   isChecked?: boolean;
   hint?: string;
-  form: UseFormMethods<any>;
+  form: UseFormMethods<Record<string, any>>;
 }
 
 const SwitchButton = ({
@@ -26,7 +21,6 @@ const SwitchButton = ({
   form,
   mb = 4,
   hint,
-  isChecked = false,
   disabled = false,
   ...props
 }: ITextBoxProps) => (
@@ -36,13 +30,13 @@ const SwitchButton = ({
       <Switch
         id={name}
         name={name}
-        defaultIsChecked={isChecked}
+        defaultIsChecked={form.control.defaultValuesRef.current[name]}
         ref={form.register}
         isDisabled={disabled}
       />
     </Box>
 
-    <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+    <ErrorMessage name={name} errors={form.errors} />
     {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
   </FormControl>
 );

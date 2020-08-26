@@ -6,7 +6,6 @@ import React from "react";
 
 import UserGroupEditForm from "./form";
 import GroupAdministratorsEditForm from "./group-administrator-edit-form";
-import GroupHomePageCustomization from "./homepage-customization";
 
 interface GroupEditPageProps {
   speciesGroups;
@@ -15,7 +14,6 @@ interface GroupEditPageProps {
   allCustomField;
   groupInfo;
   founders;
-  homePageDetails;
   moderators;
   userGroupId;
 }
@@ -28,7 +26,6 @@ export default function EditGroupPageComponent({
   groupInfo,
   founders,
   moderators,
-  homePageDetails,
   userGroupId
 }: GroupEditPageProps) {
   const { t } = useTranslation();
@@ -58,7 +55,6 @@ export default function EditGroupPageComponent({
         userGroupId={userGroupId}
         groupCustomField={customFieldList}
       />
-      <GroupHomePageCustomization userGroupId={userGroupId} homePageDetails={homePageDetails} />
     </div>
   );
 }

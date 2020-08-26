@@ -6,6 +6,7 @@ import React from "react";
 import { emit } from "react-gbus";
 
 import FieldText from "./text";
+import CategoricalField from "./catergorical-field";
 
 interface ICustomFieldProps {
   cf: CustomFieldData;
@@ -42,6 +43,10 @@ export default function CustomField({
     switch (cf.fieldType) {
       // TODO: add other input types
 
+      case "MULTIPLE CATEGORICAL":
+      case "SINGLE CATEGORICAL":
+        return <CategoricalField cf={cf} />;
+
       default:
         return <FieldText cf={cf} onUpdate={onUpdate} isOpen={isOpen} onClose={onClose} />;
     }
@@ -51,7 +56,7 @@ export default function CustomField({
     <FormControl borderBottom="1px" borderColor="gray.300" p={4}>
       <FormLabel fontWeight="bold" htmlFor={cf.cfId.toString()}>
         {cf.cfName}
-        {canEdit && (
+        {canEdit && cf.fieldType === "FIELD TEXT" && (
           <IconButton
             variant="link"
             variantColor="blue"

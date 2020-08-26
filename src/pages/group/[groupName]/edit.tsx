@@ -9,7 +9,7 @@ import {
   axGetUserGroupCustomField,
   axGroupList
 } from "@services/usergroup.service";
-import { axGetAllHabitat, axGetGroupHompageDetails } from "@services/utility.service";
+import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
@@ -34,24 +34,19 @@ GroupEditPage.getInitialProps = async (ctx) => {
     currentGroup.id,
     ctx
   );
-  const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.id);
-  if (s1 && s2 && s3) {
-    if (s1 && s2) {
-      return {
-        habitats: habitatList,
-        speciesGroups,
-        groupInfo,
-        customFieldList,
-        allCustomField,
-        homePageDetails,
-        userGroupId: currentGroup.id,
-        founders: data.founderList.map(({ name: label, id: value }) => ({ label, value })),
-        moderators: data.moderatorList.map(({ name: label, id: value }) => ({ label, value }))
-      };
-    } else {
-      throwUnauthorized(ctx);
-    }
+  if (!s1 && !s2 && !s3) {
+    return throwUnauthorized(ctx);
   }
+  return {
+    habitats: habitatList,
+    speciesGroups,
+    groupInfo,
+    customFieldList,
+    allCustomField,
+    userGroupId: currentGroup.id,
+    founders: data.founderList.map(({ name: label, id: value }) => ({ label, value })),
+    moderators: data.moderatorList.map(({ name: label, id: value }) => ({ label, value }))
+  };
 };
 
 export default GroupEditPage;

@@ -71,7 +71,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
               />
               <Flex alignItems="center">
                 <Badge hidden={index.toString() !== value} variantColor="green">
-                  {t("GROUP.HOMEPAGE_CUSTOMIZATION.DEFAULT")}
+                  {t("GROUP.HOMEPAGE_SETUP.DEFAULT")}
                 </Badge>
               </Flex>
             </SimpleGrid>
@@ -88,7 +88,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
         mr={4}
         mb={4}
       >
-        {t("GROUP.HOMEPAGE_CUSTOMIZATION.ADD_OPTIONS")}
+        {t("GROUP.HOMEPAGE_SETUP.ADD_OPTIONS")}
       </Button>
     </>
   );

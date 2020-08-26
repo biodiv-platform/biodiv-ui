@@ -26,6 +26,7 @@ import Recodata from "./recodata";
 import TraitsPicker from "./traits";
 import Uploader from "./uploader";
 import UserGroups from "./user-groups";
+import FormDebugger from "@components/form/debugger";
 
 export default function ObservationCreateForm({
   speciesGroups,
@@ -40,6 +41,38 @@ export default function ObservationCreateForm({
     ObservationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder)
   );
   const { currentGroup } = useStoreState((s) => s);
+
+  const parseDefaultCustomField = (list) => {
+    return list?.map(
+      ({
+        customFields: { fieldType, dataType, name, id: customFieldId },
+        isMandatory: isRequired,
+        displayOrder,
+        defaultValue,
+        cfValues
+      }) => {
+        const options = cfValues.map(({ values, id, iconURL }) => ({
+          value: id,
+          label: values,
+          iconURL: iconURL,
+          userGroupId: currentGroup.id,
+          fieldType
+        }));
+        return {
+          //TODO add default value to i.e. value:options[defaultValue]
+          value: null,
+          isRequired,
+          label: name,
+          customFieldId,
+          defaultValue,
+          displayOrder,
+          fieldType,
+          dataType,
+          options
+        };
+      }
+    );
+  };
 
   useListener(
     (isUploading) => {
@@ -93,12 +126,8 @@ export default function ObservationCreateForm({
         //custom field data
         customFields: Yup.array().of(
           Yup.object().shape({
-            value: Yup.mixed().when("isRequired", {
-              is: true,
-              then: Yup.mixed().required(),
-              otherwise: Yup.mixed().required()
-            }),
-            isRequired: Yup.boolean()
+            isRequired: Yup.boolean(),
+            value: Yup.mixed().required()
           })
         )
       })
@@ -131,35 +160,7 @@ export default function ObservationCreateForm({
       resources: [],
       terms: true,
 
-      customFields: customFieldList?.map(
-        ({
-          customFields: { fieldType, dataType, name, id: customFieldId },
-          isMandatory: isRequired,
-          displayOrder,
-          defaultValue,
-          cfValues
-        }) => {
-          const options = cfValues.map(({ values, id, iconURL }) => ({
-            value: id,
-            label: values,
-            iconURL: iconURL,
-            userGroupId: currentGroup.id,
-            fieldType
-          }));
-          return {
-            //TODO add default value to i.e. value:options[defaultValue]
-            value: null,
-            label: name,
-            isRequired,
-            customFieldId,
-            defaultValue,
-            displayOrder,
-            fieldType,
-            dataType,
-            options
-          };
-        }
-      )
+      customFields: parseDefaultCustomField(customFieldList)
     }
   });
 
@@ -267,6 +268,7 @@ export default function ObservationCreateForm({
             {t("OBSERVATION.ADD_OBSERVATION")}
           </Submit>
         </Box>
+        <FormDebugger form={hForm} />
       </form>
     </Box>
   ) : (
