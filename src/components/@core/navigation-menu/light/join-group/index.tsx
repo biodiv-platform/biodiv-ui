@@ -6,8 +6,7 @@ import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 
 export default function JoinUserGroup() {
-  const { currentGroup, isCurrentGroupMember } = useGlobalState();
-  const [showJoin, setShowJoin] = useState(currentGroup?.id ? isCurrentGroupMember : true);
+  const { currentGroup, isCurrentGroupMember, setIsCurrentGroupMember } = useGlobalState();
   const [isLoading, setLoading] = useState<boolean>();
   const { t } = useTranslation();
 
@@ -17,7 +16,7 @@ export default function JoinUserGroup() {
     if (canAddMember) {
       const { success } = await axJoinUserGroup(currentGroup.id);
       if (success) {
-        setShowJoin(true);
+        setIsCurrentGroupMember(true);
         notification(
           currentGroup.isParticipatory ? t("GROUP.MEMBER.JOINED") : t("GROUP.MEMBER.REQUESTED"),
           NotificationType.Success
@@ -29,7 +28,7 @@ export default function JoinUserGroup() {
     setLoading(false);
   };
 
-  return showJoin ? null : (
+  return isCurrentGroupMember ? null : (
     <Button
       className="join-usergroup"
       size="sm"

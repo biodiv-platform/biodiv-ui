@@ -157,7 +157,7 @@ export const axCheckUserGroupMember = async (userGroupId, userId) => {
   } catch (e) {
     console.error(e);
   }
-  return { success: false, data: false };
+  return { success: false, data: userGroupId ? false : true };
 };
 
 export const axJoinUserGroup = async (userGroupId) => {
