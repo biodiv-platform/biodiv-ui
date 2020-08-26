@@ -41,19 +41,12 @@ export default function OfflineSync() {
 
   const { currentGroup } = useStoreState((s) => s);
 
-  const trySyncSingleObservation = async ({
-    observation,
-    customFieldData = null,
-    instant,
-    id = -1
-  }) => {
+  const trySyncSingleObservation = async ({ observation, instant, id = -1 }) => {
     let idbID = id;
 
     if (instant) {
       try {
-        idbID = await addObservation(
-          customFieldData ? { data: { customFieldData, observation } } : { data: { observation } }
-        );
+        idbID = await addObservation({ data: { observation } });
       } catch (e) {
         console.error("addObservationIDB", e);
       }
@@ -75,7 +68,6 @@ export default function OfflineSync() {
       );
       const { success, data } = await axCreateObservation({
         ...observation,
-        customFieldData,
         currentGroup
       });
       if (success) {
@@ -107,17 +99,16 @@ export default function OfflineSync() {
     const total = pendingObservations.length;
     setSyncInfo({ total, current: 0 });
     onOpen();
-    await Promise.all(
-      pendingObservations.map(async ({ data: { observation, customFieldData } }, current) => {
-        setSyncInfo({ total, current: current + 1 });
-        await trySyncSingleObservation({
-          observation: observation,
-          customFieldData: customFieldData || null,
-          instant: false,
-          id: observation.id
-        });
-      })
-    );
+
+    pendingObservations.map(({ data: { observation } }, current) => {
+      setSyncInfo({ total, current: current + 1 });
+      trySyncSingleObservation({
+        observation,
+        instant: false,
+        id: observation.id
+      });
+    });
+
     onClose();
   };
 

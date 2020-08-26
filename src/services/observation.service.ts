@@ -230,7 +230,7 @@ export const axGetCreateObservationPageData = async (userGroupId: number, ctx) =
 export const axCreateObservation = async ({
   currentGroup,
   resources,
-  customFieldData = null,
+  customFieldList: customFieldData,
   ...payload
 }) => {
   try {

@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, Divider, Heading } from "@chakra-ui/core";
+import { Box, Divider, Heading, VisuallyHidden } from "@chakra-ui/core";
 
 import CustomInputField from "./custom-input-field";
 import useTranslation from "@configs/i18n/useTranslation";
+import CheckboxField from "@components/form/checkbox";
 
 export default function ObservationCustomFieldForm({ fields, form }) {
   const { t } = useTranslation();
@@ -14,15 +15,20 @@ export default function ObservationCustomFieldForm({ fields, form }) {
       </Heading>
 
       {fields.map(({ label, isRequired, fieldType, dataType, options }, index) => (
-        <CustomInputField
-          form={form}
-          label={label}
-          isRequired={isRequired}
-          fieldType={fieldType}
-          dataType={dataType}
-          options={options}
-          name={`customFields.${index}.value`}
-        />
+        <>
+          <CustomInputField
+            form={form}
+            label={label}
+            isRequired={isRequired}
+            fieldType={fieldType}
+            dataType={dataType}
+            options={options}
+            name={`customFields.${index}.value`}
+          />
+          <VisuallyHidden>
+            <CheckboxField form={form} name={`customFields.${index}.isRequired`} label={label} />
+          </VisuallyHidden>
+        </>
       ))}
 
       <Divider mb={3} />

@@ -59,7 +59,7 @@ const SelectMultipleInputField = ({
           <Select
             id={name}
             inputId={name}
-            onChange={(o) => onChange(o.map(({ value }) => value))}
+            onChange={(o) => onChange(o ? o.map(({ value }) => value) : [])}
             onBlur={onBlur}
             options={options}
             components={{

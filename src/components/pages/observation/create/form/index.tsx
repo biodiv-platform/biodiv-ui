@@ -26,7 +26,6 @@ import Recodata from "./recodata";
 import TraitsPicker from "./traits";
 import Uploader from "./uploader";
 import UserGroups from "./user-groups";
-import FormDebugger from "@components/form/debugger";
 
 export default function ObservationCreateForm({
   speciesGroups,
@@ -127,7 +126,11 @@ export default function ObservationCreateForm({
         customFields: Yup.array().of(
           Yup.object().shape({
             isRequired: Yup.boolean(),
-            value: Yup.mixed().required()
+            value: Yup.mixed().when("isRequired", {
+              is: true,
+              then: Yup.mixed().required(),
+              otherwise: Yup.mixed().nullable()
+            })
           })
         )
       })
@@ -170,6 +173,9 @@ export default function ObservationCreateForm({
   });
 
   const parseCustomFieldToPayload = (customFields) => {
+    if (!customFields) {
+      return;
+    }
     return fields.reduce((acc, { fieldType, customFieldId }, index) => {
       if (customFields[index]?.value) {
         let val;
@@ -234,10 +240,8 @@ export default function ObservationCreateForm({
       useDegMinSec: false,
       degMinSec: null
     };
-
     emit(SYNC_SINGLE_OBSERVATION, {
-      observation: payload,
-      customFieldData: customFieldList ? parseCustomFieldToPayload(customFields) : null,
+      observation: { ...payload, customFieldList: parseCustomFieldToPayload(customFields) },
       instant: true
     });
     onClose();
@@ -268,7 +272,6 @@ export default function ObservationCreateForm({
             {t("OBSERVATION.ADD_OBSERVATION")}
           </Submit>
         </Box>
-        <FormDebugger form={hForm} />
       </form>
     </Box>
   ) : (
