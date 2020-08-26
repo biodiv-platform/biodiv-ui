@@ -1,4 +1,4 @@
-import { Checkbox, Flex, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/core";
+import { Flex, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/core";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
 
@@ -17,9 +17,7 @@ interface ITextBoxProps {
 const SwitchField = ({ name, label, form, mb = 4, hint, disabled, ...props }: ITextBoxProps) => (
   <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
     <Flex align="center">
-      <FormLabel htmlFor={name}>
-        {label}
-      </FormLabel>
+      <FormLabel htmlFor={name}>{label}</FormLabel>
       <Controller
         control={form.control}
         name={name}

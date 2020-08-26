@@ -1,6 +1,6 @@
 import SITE_CONFIG from "@configs/site-config.json";
+import useGlobalState from "@hooks/useGlobalState";
 import { ENDPOINT } from "@static/constants";
-import { useStoreState } from "easy-peasy";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -18,7 +18,8 @@ export default function Map() {
    * Do not remove `undefined` from `userGroupId`
    * so key will be automatically removed if `null`
    */
-  const userGroupId = useStoreState((s) => s.currentGroup?.id) || undefined;
+  const { currentGroup } = useGlobalState();
+  const userGroupId = currentGroup?.id || undefined;
 
   return (
     <Naksha

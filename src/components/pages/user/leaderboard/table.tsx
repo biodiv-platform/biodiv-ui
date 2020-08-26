@@ -1,14 +1,14 @@
 import { Box, Icon } from "@chakra-ui/core";
+import useGlobalState from "@hooks/useGlobalState";
 import useLeaderboardFilter from "@hooks/useLeaderboardFilter";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
-import { useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import { useSortBy, useTable } from "react-table";
 
 function UserLeaderboardTable({ columns }) {
   const { leaderboardData, setLeaderboard, filter } = useLeaderboardFilter();
   const [sortedBy, setSortedBy] = useState("NA");
-  const user = useStoreState((s) => s.user);
+  const { user } = useGlobalState();
   const authorId = user?.id || -1;
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(

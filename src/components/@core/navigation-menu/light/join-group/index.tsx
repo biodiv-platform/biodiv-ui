@@ -1,13 +1,13 @@
 import { Button } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { axCheckUserGroupMember, axJoinUserGroup } from "@services/usergroup.service";
+import useGlobalState from "@hooks/useGlobalState";
+import { axJoinUserGroup } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import { useStoreState } from "easy-peasy";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export default function JoinUserGroup() {
-  const { currentGroup, user } = useStoreState((s) => s);
-  const [isMember, setIsMember] = useState<boolean>(true);
+  const { currentGroup, isCurrentGroupMember } = useGlobalState();
+  const [showJoin, setShowJoin] = useState(currentGroup?.id ? isCurrentGroupMember : true);
   const [isLoading, setLoading] = useState<boolean>();
   const { t } = useTranslation();
 
@@ -17,7 +17,7 @@ export default function JoinUserGroup() {
     if (canAddMember) {
       const { success } = await axJoinUserGroup(currentGroup.id);
       if (success) {
-        setIsMember(true);
+        setShowJoin(true);
         notification(
           currentGroup.isParticipatory ? t("GROUP.MEMBER.JOINED") : t("GROUP.MEMBER.REQUESTED"),
           NotificationType.Success
@@ -29,11 +29,7 @@ export default function JoinUserGroup() {
     setLoading(false);
   };
 
-  useEffect(() => {
-    axCheckUserGroupMember(currentGroup.id, user.id).then(({ data }) => setIsMember(data));
-  }, [currentGroup.name]);
-
-  return isMember ? null : (
+  return showJoin ? null : (
     <Button
       className="join-usergroup"
       size="sm"

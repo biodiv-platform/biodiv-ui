@@ -1,9 +1,9 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import { Role } from "@interfaces/custom";
 import { Featured, ObservationUserPermission, UserGroupIbp } from "@interfaces/observation";
 import { hasAccess } from "@utils/auth";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 
 import GroupFeature from "./group-feature";
@@ -30,7 +30,7 @@ const Groups = ({
   featureFunc,
   unfeatureFunc
 }: IGroupsProps) => {
-  const { isLoggedIn } = useStoreState((s) => s);
+  const { isLoggedIn } = useGlobalState();
   const { t } = useTranslation();
   const [hideFeature, setHideFeature] = useState(true);
 

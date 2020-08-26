@@ -2,16 +2,11 @@ import { Avatar, AvatarGroup, Box, Button, SimpleGrid, Stack, Text } from "@chak
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import { AllRecoSugguestions, RecoIbp } from "@interfaces/observation";
-import {
-  axAgreeRecoVote,
-  axRemoveRecoVote,
-  axUnlockRecoVote,
-  axValidateRecoVote
-} from "@services/observation.service";
+import { axAgreeRecoVote, axRemoveRecoVote, axUnlockRecoVote, axValidateRecoVote } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import { getUserImage } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 
 enum RecoAction {
@@ -41,7 +36,7 @@ export default function RecoSuggestion({
   permissionOverride
 }: IRecoSuggestionProps) {
   const { t } = useTranslation();
-  const { isLoggedIn, user } = useStoreState((s) => s);
+  const { isLoggedIn, user } = useGlobalState();
 
   const recoVoteOperation = async (func, reco: AllRecoSugguestions) => {
     await waitForAuth();

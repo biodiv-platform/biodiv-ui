@@ -1,5 +1,6 @@
 import { CloseButton, Flex, Icon, Image, Input } from "@chakra-ui/core";
 import styled from "@emotion/styled";
+import useGlobalState from "@hooks/useGlobalState";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { isBrowser } from "@static/constants";
 import { LICENSES_ARRAY } from "@static/licenses";
@@ -10,7 +11,6 @@ import {
   getObservationThumbnail,
   getYoutubeImage
 } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React, { useMemo } from "react";
 import Rating from "react-rating";
 import Select from "react-select";
@@ -53,7 +53,7 @@ export const getImageThumb = (resource, userID, size = 140): string => {
 
 export default function ResourceCard({ resource, index }: IResourceCardProps) {
   const { removeObservationAsset, updateObservationAsset } = useObservationCreate();
-  const { user } = useStoreState((s) => s);
+  const { user } = useGlobalState();
 
   const imageURL = useMemo(() => getImageThumb(resource, user.id), []);
 

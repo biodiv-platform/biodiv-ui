@@ -14,11 +14,11 @@ import SpeciesGroupBox from "@components/pages/observation/show/info/species-gro
 import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadable } from "@utils/date";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 
 interface IInfoTabProps {
@@ -30,7 +30,7 @@ interface IInfoTabProps {
 export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) {
   const { t } = useTranslation();
   const { speciesGroup, observationData } = useObservationFilter();
-  const { user } = useStoreState((s) => s);
+  const { user } = useGlobalState();
 
   return (
     <Box size="full" display="flex" flexDir="column" justifyContent="space-between">

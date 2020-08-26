@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import React from "react";
 
 import Carousel from "./carousel";
@@ -14,7 +14,8 @@ import Stats from "./stats";
 const { HOME } = SITE_CONFIG;
 
 export default function HomePageComponent({ homeInfo }) {
-  const showFeatures = !useStoreState((s) => s?.currentGroup?.id);
+  const { currentGroup } = useGlobalState();
+  const showFeatures = !currentGroup?.id;
 
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>

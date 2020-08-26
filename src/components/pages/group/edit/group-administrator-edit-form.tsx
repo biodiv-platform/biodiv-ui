@@ -8,12 +8,12 @@ import {
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import AdminInviteField from "../common/admin-invite-field";
@@ -29,7 +29,9 @@ const discardExistingAdministrators = (updatedMembers, currentAdministrators) =>
 export default function GroupAdministratorsEditForm({ founders, moderators, userGroupId }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { name } = useStoreState((s) => s.currentGroup);
+  const {
+    currentGroup: { name }
+  } = useGlobalState();
   const founderIds = founders.map(({ value }) => value);
   const moderatorIds = moderators.map(({ value }) => value);
 

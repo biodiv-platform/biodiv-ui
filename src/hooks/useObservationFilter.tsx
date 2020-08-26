@@ -5,13 +5,13 @@ import { axGetListData, axGetMaxVotedRecoPermissions } from "@services/observati
 import { axGetUserGroupList } from "@services/usergroup.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
-import { useStoreState } from "easy-peasy";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import useDidUpdateEffect from "./useDidUpdateEffect";
+import useGlobalState from "./useGlobalState";
 
 const deDupeObservations = (existingObservations, newObservations) => {
   const existingIDs = existingObservations.map(({ observationId }) => observationId);
@@ -46,7 +46,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const initialOffset = props.filter.offset;
   const [filter, setFilter] = useImmer({ f: props.filter });
   const [observationData, setObservationData] = useImmer(props.observationData);
-  const { isLoggedIn } = useStoreState((s) => s);
+  const { isLoggedIn } = useGlobalState();
   const [loggedInUserGroups, setLoggedInUserGroups] = useState([]);
 
   useEffect(() => {

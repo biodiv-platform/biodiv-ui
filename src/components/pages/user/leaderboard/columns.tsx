@@ -1,8 +1,8 @@
 import { Avatar, Stack } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
+import useGlobalState from "@hooks/useGlobalState";
 import { getUserImage } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import { format } from "indian-number-format";
 import React from "react";
 
@@ -90,7 +90,8 @@ export const LEADERBOARD_TABLE_COLUMNS = [
     Header: "Name",
     accessor: "details",
     Cell: (props) => {
-      const { webAddress } = useStoreState((s) => s.currentGroup);
+      const { currentGroup } = useGlobalState();
+
       return (
         <Stack isInline={true} spacing={2} minW="12rem">
           <Avatar
@@ -99,7 +100,9 @@ export const LEADERBOARD_TABLE_COLUMNS = [
             src={getUserImage(props?.cell?.value?.profilePic)}
           ></Avatar>
           <div>
-            <LocalLink href={`${webAddress}/user/show/${props?.cell?.value?.author_id}`}>
+            <LocalLink
+              href={`${currentGroup?.webAddress}/user/show/${props?.cell?.value?.author_id}`}
+            >
               <BlueLink>{props?.cell?.value?.authorName}</BlueLink>
             </LocalLink>
             <br />

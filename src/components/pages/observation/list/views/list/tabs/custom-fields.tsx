@@ -2,11 +2,11 @@ import { Box } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CustomFieldList from "@components/pages/observation/show/custom-fields/list";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { ObservationData } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axGetCustomFieldsPermissions } from "@services/observation.service";
-import { useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import { useEffect } from "react";
 
@@ -18,7 +18,7 @@ export default function CustomFieldsTab({ o }: ICustomFieldsTabInterface) {
   const [cfPermission, setCfPermission] = useState();
   const { t } = useTranslation();
   const { setObservationData } = useObservationFilter();
-  const { isLoggedIn } = useStoreState((s) => s);
+  const { isLoggedIn } = useGlobalState();
 
   useEffect(() => {
     if (isLoggedIn) {

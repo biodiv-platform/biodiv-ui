@@ -1,8 +1,8 @@
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/core";
+import useGlobalState from "@hooks/useGlobalState";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
-import { useStoreState } from "easy-peasy";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 
@@ -15,7 +15,7 @@ interface IFieldsProps {
 }
 
 export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IFieldsProps) {
-  const { isLoggedIn } = useStoreState((s) => s);
+  const { isLoggedIn } = useGlobalState();
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
