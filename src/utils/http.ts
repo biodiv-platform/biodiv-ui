@@ -62,6 +62,7 @@ http.interceptors.request.use(
 
     if (options?.params?.ctx) {
       delete options.params.ctx;
+      delete options.params.skipRefresh;
     }
 
     return options;

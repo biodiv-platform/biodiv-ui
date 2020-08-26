@@ -1,5 +1,5 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import React, { useMemo } from "react";
 
 import { ICustomFieldsProps } from ".";
@@ -11,7 +11,7 @@ export default function CustomFieldList({
   setO,
   cfPermission
 }: ICustomFieldsProps) {
-  const { groups } = useStoreState((s) => s);
+  const { groups } = useGlobalState();
 
   const getGroupNameById = (gId) => useMemo(() => groups.find((g) => g.id === gId)?.name, [gId]);
 

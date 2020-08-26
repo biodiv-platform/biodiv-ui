@@ -2,11 +2,11 @@ import { AspectRatioBox, Box } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
+import useGlobalState from "@hooks/useGlobalState";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getObservationThumbnail } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import LazyImage from "react-cool-img";
 
@@ -30,7 +30,8 @@ const ObservationBox = styled.div`
 
 export default function RecentObservationList() {
   const { t } = useTranslation();
-  const { id: userGroupList } = useStoreState((s) => s.currentGroup);
+  const { currentGroup } = useGlobalState();
+
   const [observatons, setObservations] = useState<ObservationListMinimalData[]>(
     Array(OBSERVATIONS_SIZE).fill(null)
   );
@@ -40,7 +41,7 @@ export default function RecentObservationList() {
       sort: "created_on",
       max: OBSERVATIONS_SIZE,
       view: "list_minimal",
-      userGroupList
+      userGroupList: currentGroup.id
     }).then(({ data }) => {
       setObservations(data?.observationListMinimal || []);
     });

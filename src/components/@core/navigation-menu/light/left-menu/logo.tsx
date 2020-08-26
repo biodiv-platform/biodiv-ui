@@ -1,7 +1,7 @@
 import { Icon, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
@@ -68,7 +68,7 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
   const {
     currentGroup: { name, icon, id },
     isLoggedIn
-  } = useStoreState((s) => s);
+  } = useGlobalState();
 
   return (
     <Logo>

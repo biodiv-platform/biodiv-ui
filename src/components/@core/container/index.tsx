@@ -1,23 +1,17 @@
-import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
+import { GlobalStateProvider } from "@hooks/useGlobalState";
 import { UserGroupIbp } from "@interfaces/observation";
-import { isBrowser, RESOURCE_SIZE, TOKEN } from "@static/constants";
-import authStore from "@stores/auth.store";
-import { CACHE_WHITELIST, removeCache } from "@utils/auth";
-import { subscribeToPushNotification } from "@utils/user";
-import { createStore, StoreProvider } from "easy-peasy";
+import { TOKEN } from "@static/constants";
 import useNookies from "next-nookies-persist";
-import { DefaultSeo } from "next-seo";
 import dynamic from "next/dynamic";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import ReactGA from "react-ga";
+import React from "react";
+
 import AutoSync from "../autosync";
 import NavigationMenuDark from "../navigation-menu/dark";
 import NavigationMenuLight from "../navigation-menu/light";
 import Feedback from "./feedback";
 import Footer from "./footer";
+import Metadata from "./metadata";
 
 const AuthWall = dynamic(() => import("./authwall"), { ssr: false });
 
@@ -28,61 +22,35 @@ interface IAppContainerProps {
     pages;
     groups: UserGroupIbp[];
     currentGroup: UserGroupIbp;
+    isCurrentGroupMember: boolean;
     manifestURL: string;
   };
 }
 
 function AppContainer({ extras }: IAppContainerProps) {
-  const { Component, pageProps, groups, currentGroup, pages, manifestURL } = extras;
+  const {
+    Component,
+    pageProps,
+    groups,
+    currentGroup,
+    pages,
+    manifestURL,
+    isCurrentGroupMember
+  } = extras;
   const config = { header: true, footer: true, ...Component?.config };
   const { nookies } = useNookies();
-  const router = useRouter();
-  const initialState = { user: nookies[TOKEN.USER] || {}, groups, currentGroup, pages };
-  const hybridStore = createStore(authStore, { initialState });
-  const { locale } = useTranslation();
-  const canonical = SITE_CONFIG.SITE.URL + router.asPath;
-
-  useEffect(() => {
-    if (isBrowser && SITE_CONFIG.TRACKING.ENABLED) {
-      ReactGA.initialize(SITE_CONFIG.TRACKING.GA_ID);
-      removeCache(CACHE_WHITELIST);
-      if (initialState?.user?.id) {
-        const timer = setTimeout(async () => {
-          await subscribeToPushNotification();
-        }, 1 * 60 * 1000);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    ReactGA.pageview(router.asPath);
-  }, [router.asPath]);
 
   return (
-    <StoreProvider store={hybridStore}>
-      <DefaultSeo
-        title={currentGroup.name}
-        canonical={canonical}
-        description={SITE_CONFIG.SITE.DESCRIPTION}
-        openGraph={{
-          type: "website",
-          locale,
-          url: canonical,
-          title: currentGroup.name,
-          site_name: currentGroup.name,
-          description: SITE_CONFIG.SITE.DESCRIPTION
-        }}
-        twitter={{
-          handle: SITE_CONFIG.FOOTER.SOCIAL.TWITTER.HANDLE,
-          site: SITE_CONFIG.FOOTER.SOCIAL.TWITTER.HANDLE,
-          cardType: "summary_large_image"
-        }}
-      />
-      <Head>
-        <link rel="apple-touch-icon" href={currentGroup.icon + RESOURCE_SIZE.APPLE_TOUCH} />
-        <link rel="manifest" href={manifestURL} />
-      </Head>
+    <GlobalStateProvider
+      initialState={{
+        user: nookies[TOKEN.USER],
+        groups,
+        currentGroup,
+        isCurrentGroupMember,
+        pages
+      }}
+    >
+      <Metadata manifestURL={manifestURL} />
       <div className="content">
         {config.header && (
           <>
@@ -98,7 +66,7 @@ function AppContainer({ extras }: IAppContainerProps) {
       </div>
       {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
       <AuthWall />
-    </StoreProvider>
+    </GlobalStateProvider>
   );
 }
 

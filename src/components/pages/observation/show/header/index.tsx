@@ -6,6 +6,7 @@ import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import { ShowData } from "@interfaces/observation";
 import {
   axDeleteObservation,
@@ -17,7 +18,6 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getObservationImage } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useMemo, useState } from "react";
 
@@ -32,7 +32,7 @@ interface IHeaderProps {
 function Header({ o, following = false }: IHeaderProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isLoggedIn, user, currentGroup } = useStoreState((s) => s);
+  const { isLoggedIn, user, currentGroup } = useGlobalState();
   const [showActions, setShowActions] = useState(false);
 
   const pageTitle = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} by ${

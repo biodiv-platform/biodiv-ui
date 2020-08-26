@@ -2,14 +2,14 @@ import { SimpleGrid, Stack } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLinkList from "@components/@core/blue-link/external-list";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import React from "react";
 import { format } from "timeago.js";
 
 import { UserProfileProps } from "..";
 
 export default function UserAbout({ user }: UserProfileProps) {
-  const { isLoggedIn } = useStoreState((s) => s);
+  const { isLoggedIn } = useGlobalState();
 
   const aboutLinks = [
     {

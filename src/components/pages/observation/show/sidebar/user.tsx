@@ -2,14 +2,14 @@ import { Avatar, Box, Link, SimpleGrid } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
+import useGlobalState from "@hooks/useGlobalState";
 import { UserIbp } from "@interfaces/observation";
 import { getUserImage } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 
 const User = ({ user }: { user: UserIbp }) => {
-  const { webAddress } = useStoreState((s) => s.currentGroup);
-  const userProfileLink = `${webAddress}/user/show/${user.id}`;
+  const { currentGroup } = useGlobalState();
+  const userProfileLink = `${currentGroup?.webAddress}/user/show/${user.id}`;
 
   return (
     <SimpleGrid

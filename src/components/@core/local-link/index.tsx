@@ -1,5 +1,5 @@
 import { defaultLocale } from "@configs/i18n/config";
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import NextLink, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 import { parse, stringify } from "querystring";
@@ -42,15 +42,15 @@ const getLocalPath = (href, router, params = {}, prefixGroup?, currentGroup?) =>
 
 export function useLocalRouter() {
   const router = useRouter();
-  const { webAddress } = useStoreState((s) => s.currentGroup);
+  const { currentGroup } = useGlobalState();
 
   function push(href, prefixGroup = false, params = {}, useWindow = false) {
-    const to = getLocalPath(href, router, params, prefixGroup, webAddress);
+    const to = getLocalPath(href, router, params, prefixGroup, currentGroup?.webAddress);
     to.startsWith("http") || useWindow ? window.location.assign(to) : router.push(to);
   }
 
   function link(href, prefixGroup = false, params = {}) {
-    return getLocalPath(href, router, params, prefixGroup, webAddress);
+    return getLocalPath(href, router, params, prefixGroup, currentGroup?.webAddress);
   }
 
   return { ...router, push, link };
@@ -61,9 +61,9 @@ function LocalLink({ prefixGroup, params, ...props }: Props) {
     return props.children;
   }
 
-  const { webAddress } = useStoreState((s) => s.currentGroup);
+  const { currentGroup } = useGlobalState();
   const router = useRouter();
-  const localPath = getLocalPath(props.href, router, params, prefixGroup, webAddress);
+  const localPath = getLocalPath(props.href, router, params, prefixGroup, currentGroup?.webAddress);
 
   return localPath.startsWith("http") ? (
     cloneElement(props.children, { ...props?.children?.props, href: localPath })

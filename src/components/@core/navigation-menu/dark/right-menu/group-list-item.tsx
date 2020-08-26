@@ -1,13 +1,12 @@
 import { Flex, Image, Link, MenuItem, MenuList, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
-import { UserGroupIbp } from "@interfaces/observation";
+import useGlobalState from "@hooks/useGlobalState";
 import { getGroupLink } from "@utils/basic";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 
 const GroupListItem = () => {
-  const groups: UserGroupIbp[] = useStoreState((state) => state.groups);
+  const { groups } = useGlobalState();
   const { t } = useTranslation();
 
   return (

@@ -3,6 +3,7 @@ import Activity from "@components/pages/observation/show/activity";
 import Groups from "@components/pages/observation/show/groups";
 import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";
+import useGlobalState from "@hooks/useGlobalState";
 import { DocumentUserPermission, ShowDocument } from "@interfaces/document";
 import { axAddDocumentComment } from "@services/activity.service";
 import {
@@ -13,7 +14,6 @@ import {
 } from "@services/document.service";
 import { RESOURCE_TYPE } from "@static/constants";
 import { getDocumentPath } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 
 import DocumentHeader from "./header";
@@ -36,7 +36,7 @@ interface DocumentShowProps {
 }
 
 export default function DocumentShowComponent({ document }: DocumentShowProps) {
-  const { isLoggedIn } = useStoreState((s) => s);
+  const { isLoggedIn } = useGlobalState();
   const [permission, setPermission] = useState<DocumentUserPermission>();
 
   useEffect(() => {

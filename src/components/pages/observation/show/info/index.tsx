@@ -3,13 +3,13 @@ import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
 import { axQueryDocumentTagsByText } from "@services/document.service";
 import { axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadable } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 
 import { ResponsiveInfo } from "./responsive-info";
@@ -23,7 +23,7 @@ interface IInfoProps {
 
 export default function Info({ observation: o, speciesGroups }: IInfoProps) {
   const { t } = useTranslation();
-  const { webAddress } = useStoreState((s) => s.currentGroup);
+  const { currentGroup } = useGlobalState();
 
   const observedOn = formatDateReadable(o.observation.fromDate);
   const createdOn = formatDateReadable(o.observation.createdOn);
@@ -34,7 +34,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         <ResponsiveInfo title="OBSERVATION.NAME">
           <i>{o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}</i>
           {o.recoIbp?.speciesId && (
-            <LocalLink href={`${webAddress}/species/show/${o.recoIbp.speciesId}`}>
+            <LocalLink href={`${currentGroup?.webAddress}/species/show/${o.recoIbp.speciesId}`}>
               <BlueLink ml={2}>
                 <Icon name="info" /> {t("OBSERVATION.SPECIES_PAGE")}
               </BlueLink>

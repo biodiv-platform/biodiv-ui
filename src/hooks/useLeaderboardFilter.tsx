@@ -2,13 +2,13 @@ import { LeaderboardFilterProps } from "@interfaces/custom";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
 import { isBrowser } from "@static/constants";
 import { LEADERBOARD_FILTERS } from "@static/leaderboard";
-import { useStoreState } from "easy-peasy";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import useDidUpdateEffect from "./useDidUpdateEffect";
+import useGlobalState from "./useGlobalState";
 
 interface LeaderboardFilterContextProps {
   filter?: LeaderboardFilterProps;
@@ -28,7 +28,7 @@ const LeaderboardFilterContext = createContext<LeaderboardFilterContextProps>(
 export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) => {
   const [filter, setFilter] = useImmer({ f: props.filter });
   const [leaderboardData, setLeaderboardData] = useState([]);
-  const user = useStoreState((s) => s.user);
+  const { user } = useGlobalState();
 
   useEffect(() => {
     if (isBrowser) {

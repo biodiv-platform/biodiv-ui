@@ -1,10 +1,10 @@
 import { Link, MenuDivider, MenuItem, MenuList } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import React from "react";
 
 export default function PagesMenuItem({ onClose }) {
-  const pages = useStoreState((state) => state.pages);
+  const { pages } = useGlobalState();
 
   const SubMenuLink = ({ item }) => (
     <>

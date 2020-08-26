@@ -5,13 +5,13 @@ import Submit from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import {
   RESOURCES_UPLOADING,
   SYNC_SINGLE_OBSERVATION,
   TOGGLE_PHOTO_SELECTOR
 } from "@static/events";
 import { parseDate } from "@utils/date";
-import { useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useForm } from "react-hook-form";
@@ -31,7 +31,7 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
   const { isOpen, onClose } = useDisclosure(true);
   const [isSelectedImages, setIsSelectedImages] = useState(true);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState();
-  const { currentGroup } = useStoreState((s) => s);
+  const { currentGroup } = useGlobalState();
 
   useListener(
     (isUploading) => {

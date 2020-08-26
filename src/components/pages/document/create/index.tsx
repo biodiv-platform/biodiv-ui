@@ -4,11 +4,11 @@ import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
 import { DEFAULT_LICENSE } from "@static/licenses";
 import notification, { NotificationType } from "@utils/notification";
-import { useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -29,7 +29,7 @@ const DEFAULT_VALUES = {
 export default function DocumentCreatePageComponent({ speciesGroups, habitats, documentTypes }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { user } = useStoreState((s) => s);
+  const { user } = useGlobalState();
   const [bibField, setBibField] = useState({
     schema: DEFAULT_BIB_FIELDS_SCHEMA,
     fields: DEFAULT_BIB_FIELDS

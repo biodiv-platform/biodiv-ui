@@ -1,8 +1,8 @@
 import { Avatar, Flex, Link } from "@chakra-ui/core";
 import styled from "@emotion/styled";
+import useGlobalState from "@hooks/useGlobalState";
 import { UserIbp } from "@interfaces/activity";
 import { getUserImage } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 
 const UserBox = styled.div`
@@ -17,11 +17,11 @@ const UserBox = styled.div`
 `;
 
 export default function ShadowedUser({ user = {} }: { user?: UserIbp }) {
-  const { webAddress } = useStoreState((s) => s.currentGroup);
+  const { currentGroup } = useGlobalState();
 
   return (
     <UserBox>
-      <Link color="white" href={`${webAddress}/user/show/${user?.id}`}>
+      <Link color="white" href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
         <Flex alignItems="center">
           <Avatar
             mr={2}

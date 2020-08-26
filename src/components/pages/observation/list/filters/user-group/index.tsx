@@ -1,10 +1,10 @@
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import React, { useMemo } from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 
 export default function UserGroupFilter() {
-  const { currentGroup, groups } = useStoreState((s) => s);
+  const { currentGroup, groups } = useGlobalState();
   const groupOptions = useMemo(
     () => groups.map((g) => ({ label: g.name, value: g.id.toString(), stat: g.name })),
     []

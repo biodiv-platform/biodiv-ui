@@ -1,8 +1,8 @@
 import { AspectRatioBox, IconButton, Image, VisuallyHidden } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
+import useGlobalState from "@hooks/useGlobalState";
 import { getFallbackByMIME } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React, { useMemo } from "react";
 
 import { getImageThumb } from "../observation-resources/resource-card";
@@ -35,7 +35,7 @@ const ImageBox = styled.div`
 `;
 
 const Checkbox = ({ asset, ...props }) => {
-  const { user } = useStoreState((s) => s);
+  const { user } = useGlobalState();
   const { t } = useTranslation();
 
   const imageURL = useMemo(() => getImageThumb(asset, user.id), []);
