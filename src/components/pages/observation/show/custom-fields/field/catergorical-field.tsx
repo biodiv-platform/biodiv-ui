@@ -9,7 +9,7 @@ const parseCategoricalValue = (value, isMulti) => {
 };
 
 export default function CategoricalField({ cf }) {
-  const [isMulti] = useState(!!cf?.customFieldValues?.multipleCategoricalData);
+  const [isMulti] = useState(cf?.customFieldValues?.fieldType === "MULTIPLE CATEGORICAL");
   const { t } = useTranslation();
   const [fieldValue] = useState<string[] | string>(
     parseCategoricalValue(cf?.customFieldValues, isMulti)
