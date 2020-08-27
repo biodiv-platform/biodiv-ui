@@ -16,7 +16,13 @@ export default function DownloadLandscape({ id }) {
 
   return (
     <Menu>
-      <MenuButtonA as={Button} rightIcon="chevron-down" variant="outline" variantColor="blue" leftIcon="download">
+      <MenuButtonA
+        as={Button}
+        rightIcon="chevron-down"
+        variant="outline"
+        variantColor="blue"
+        leftIcon="download"
+      >
         {t("LANDSCAPE.DOWNLOAD")}
       </MenuButtonA>
       <MenuList zIndex={4} placement="bottom-end">

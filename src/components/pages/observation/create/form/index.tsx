@@ -14,10 +14,11 @@ import {
 import { parseDate } from "@utils/date";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import SavingObservation from "../saving";
+import ObservationCustomFieldForm from "./custom-field-form";
 import DateInputs from "./date";
 import GroupSelector from "./groups";
 import LocationPicker from "./location";
@@ -26,12 +27,48 @@ import TraitsPicker from "./traits";
 import Uploader from "./uploader";
 import UserGroups from "./user-groups";
 
-export default function ObservationCreateForm({ speciesGroups, languages }) {
+export default function ObservationCreateForm({
+  speciesGroups,
+  languages,
+  ObservationCreateFormData
+}) {
   const { t } = useTranslation();
   const { isOpen, onClose } = useDisclosure(true);
   const [isSelectedImages, setIsSelectedImages] = useState(true);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState();
+  const [customFieldList] = useState(
+    ObservationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder)
+  );
   const { currentGroup } = useGlobalState();
+
+  const parseDefaultCustomField = (list) => {
+    return list?.map(
+      ({
+        customFields: { fieldType, dataType, name, id: customFieldId },
+        isMandatory: isRequired,
+        displayOrder,
+        defaultValue,
+        cfValues
+      }) => ({
+        //TODO add default value to i.e. value:options[defaultValue]
+        value: null,
+        isRequired,
+        label: name,
+        customFieldId,
+        defaultValue,
+        displayOrder,
+        fieldType,
+        dataType,
+        options: cfValues.map(({ values, id, iconURL }) => ({
+          value: id,
+          label: values,
+          iconURL,
+          userGroupId: currentGroup.id,
+          fieldType
+        }))
+      })
+    );
+  };
 
   useListener(
     (isUploading) => {
@@ -80,7 +117,19 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
         facts: Yup.object().required(),
         userGroupId: Yup.array(),
         resources: Yup.array().min(1).required(),
-        terms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted.")
+        terms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted."),
+
+        //custom field data
+        customFields: Yup.array().of(
+          Yup.object().shape({
+            isRequired: Yup.boolean(),
+            value: Yup.mixed().when("isRequired", {
+              is: true,
+              then: Yup.mixed().required(),
+              otherwise: Yup.mixed().nullable()
+            })
+          })
+        )
       })
     ),
     defaultValues: {
@@ -97,7 +146,6 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
       notes: null,
       tags: [],
 
-      observedOn: null,
       dateAccuracy: "ACCURATE",
       observedAt: "",
       reverseGeocoded: "",
@@ -110,9 +158,44 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
       facts: {},
       userGroupId: currentGroup.id > 0 ? [currentGroup.id.toString()] : [],
       resources: [],
-      terms: true
+      terms: true,
+
+      customFields: parseDefaultCustomField(customFieldList)
     }
   });
+
+  const { fields } = useFieldArray({
+    control: hForm.control,
+    name: "customFields"
+  });
+
+  const parseCustomFieldToPayload = (customFields) => {
+    if (!customFields) {
+      return;
+    }
+    return fields.reduce((acc, { fieldType, customFieldId }, index) => {
+      if (customFields[index]?.value) {
+        let val;
+        switch (fieldType) {
+          case "MULTIPLE CATEGORICAL":
+            val = { multipleCategorical: customFields[index]?.value };
+            break;
+          case "SINGLE CATEGORICAL":
+            val = { singleCategorical: customFields[index]?.value };
+            break;
+          default:
+            val = { textBoxValue: customFields[index]?.value };
+            break;
+        }
+        acc.push({
+          customFieldId,
+          userGroupId: currentGroup.id,
+          ...val
+        });
+      }
+      return acc;
+    }, []);
+  };
 
   const handleOnSubmit = async ({
     taxonCommonName,
@@ -122,10 +205,11 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
     confidence,
     languageId,
     tags,
+    customFields,
+    terms,
     ...rest
   }) => {
     const observedOn = parseDate(rest.observedOn).toISOString();
-
     const payload = {
       ...rest,
       observedOn,
@@ -153,8 +237,10 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
       useDegMinSec: false,
       degMinSec: null
     };
-
-    emit(SYNC_SINGLE_OBSERVATION, { observation: payload, instant: true });
+    emit(SYNC_SINGLE_OBSERVATION, {
+      observation: { ...payload, customFieldList: parseCustomFieldToPayload(customFields) },
+      instant: true
+    });
     onClose();
   };
 
@@ -173,6 +259,7 @@ export default function ObservationCreateForm({ speciesGroups, languages }) {
           />
           <LocationPicker form={hForm} />
           <DateInputs form={hForm} />
+          {customFieldList && <ObservationCustomFieldForm fields={fields} form={hForm} />}
           <TraitsPicker name="facts" label={t("OBSERVATION.TRAITS")} form={hForm} />
           <UserGroups name="userGroupId" label={t("OBSERVATION.POST_TO_GROUPS")} form={hForm} />
           <Box mt={4}>

@@ -304,7 +304,10 @@
       "NOTES": "Notes",
       "REMOVE": {
         "FAILURE": "Unable to delete Custom Field",
-        "SUCCESS": "Custom Field deleted successfully "
+        "SUCCESS": "Custom Field deleted successfully ",
+        "TITLE": "Remove",
+        "DEFAULT": "Default",
+        "ADD_OPTIONS": "Add Options"
       },
       "REORDER": {
         "FAILURE": "Unable to save Custom Field order",
