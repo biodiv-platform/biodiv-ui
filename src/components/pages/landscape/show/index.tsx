@@ -31,7 +31,6 @@ export default function LandscapeShowComponent({
             {landscape.siteNumber}
           </Text>
         </Heading>
-        <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Flex>
       <Box position="relative" h="22rem" bg="gray.200" borderRadius="md" overflow="hidden" mb={4}>
         <Previewer
@@ -39,6 +38,7 @@ export default function LandscapeShowComponent({
           data={wkt.parse(landscapeShow.wktData)}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         />
+        <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Box>
       <LandscapeFields childs={landscapeShow.contents.childs} />
     </div>
