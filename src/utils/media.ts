@@ -71,7 +71,9 @@ export const getGroupImage = (resourceUrl) => {
 };
 
 export const getGroupImageThumb = (resourceUrl, height = 32) => {
-  return `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`;
+  return resourceUrl
+    ? `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`
+    : `/next-assets/species/Unknown.svg`;
 };
 
 export const getSuggestionIcon = (resourceUrl) => {

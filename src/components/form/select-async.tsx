@@ -25,6 +25,7 @@ interface ISelectProps {
   onChange?;
   eventCallback?;
   selectRef?;
+  isRequired?: boolean;
   isClearable?;
   form: UseFormMethods<Record<string, any>>;
   resetOnSubmit?;
@@ -54,6 +55,7 @@ const SelectAsyncInputField = ({
   onChange,
   eventCallback,
   selectRef,
+  isRequired,
   onQuery = dummyOnQuery,
   resetOnSubmit = true,
   isClearable = true,
@@ -90,7 +92,8 @@ const SelectAsyncInputField = ({
   return (
     <FormControl
       isInvalid={form.errors[name] && true}
-      data-select-invalid={form.errors[name] && true}
+      isRequired={isRequired}
+      aria-invalid={form.errors[name] && true}
       mb={mb}
       {...props}
     >

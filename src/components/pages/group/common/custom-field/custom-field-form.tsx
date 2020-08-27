@@ -109,11 +109,14 @@ export default function AddCustomField({
     switch (value) {
       case "RANGE":
         newValue = DATA_TYPE.filter((item) => item.value !== "STRING");
+        break;
       case "SINGLE CATEGORICAL":
       case "MULTIPLE CATEGORICAL":
         newValue = DATA_TYPE.filter((item) => item.value === "STRING");
+        break;
       default:
         newValue = DATA_TYPE.filter((item) => item.value !== "DATE");
+        break;
     }
     setDataTypes(newValue);
   };
@@ -123,11 +126,14 @@ export default function AddCustomField({
     switch (value) {
       case "DATE":
         newValue = FIELD_TYPE.filter((item) => item.value === "RANGE");
+        break;
       case "INTEGER":
       case "DECIMAL":
         newValue = FIELD_TYPE.filter((item) => !categoricalType.includes(item.value));
+        break;
       default:
         newValue = FIELD_TYPE.filter((item) => item.value !== "RANGE");
+        break;
     }
     setFilterTypes(newValue);
   };

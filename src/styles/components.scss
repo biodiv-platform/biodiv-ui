@@ -79,7 +79,7 @@ input {
   }
 }
 
-[data-select-invalid="true"] > div > div {
+[aria-invalid="true"] > div > div {
   border-color: var(--red-500) !important;
   box-shadow: 0 0 0 1px var(--red-500) !important;
 }

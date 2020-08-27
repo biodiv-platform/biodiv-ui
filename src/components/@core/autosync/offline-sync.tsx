@@ -1,5 +1,6 @@
 import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";
 import useOnlineStatus from "@rehooks/online-status";
 import { axUploadObservationResource } from "@services/files.service";
@@ -38,6 +39,8 @@ export default function OfflineSync() {
     deleteByID: deleteObservation
   } = useIndexedDBStore<IDBPendingObservation>(STORE.PENDING_OBSERVATIONS);
 
+  const { currentGroup } = useGlobalState();
+
   const trySyncSingleObservation = async ({ observation, instant, id = -1 }) => {
     let idbID = id;
 
@@ -63,7 +66,10 @@ export default function OfflineSync() {
           .filter((r) => r.status !== AssetStatus.Uploaded)
           .map(axUploadObservationResource)
       );
-      const { success, data } = await axCreateObservation(observation);
+      const { success, data } = await axCreateObservation({
+        ...observation,
+        currentGroup
+      });
       if (success) {
         await deleteObservation(idbID);
         for (const resource of observation.resources) {
@@ -93,16 +99,16 @@ export default function OfflineSync() {
     const total = pendingObservations.length;
     setSyncInfo({ total, current: 0 });
     onOpen();
-    await Promise.all(
-      pendingObservations.map(async (observation, current) => {
-        setSyncInfo({ total, current: current + 1 });
-        await trySyncSingleObservation({
-          observation: observation.data,
-          instant: false,
-          id: observation.id
-        });
-      })
-    );
+
+    pendingObservations.map(({ data: { observation } }, current) => {
+      setSyncInfo({ total, current: current + 1 });
+      trySyncSingleObservation({
+        observation,
+        instant: false,
+        id: observation.id
+      });
+    });
+
     onClose();
   };
 

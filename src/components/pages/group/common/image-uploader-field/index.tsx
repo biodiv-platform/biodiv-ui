@@ -1,8 +1,8 @@
-import { FormControl, FormLabel } from "@chakra-ui/core";
+import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/core";
 import { getByPath } from "@utils/basic";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
-
+import ErrorMessage from "@components/form/common/error-message";
 import DropTarget from "./drop-target";
 import ResourceCard from "./image-card";
 
@@ -12,6 +12,7 @@ export interface IDropzoneProps {
   mb?: number;
   form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
+  hint?: string;
   nestedPath?: string;
   simpleUpload?: boolean;
   children?;
@@ -22,6 +23,7 @@ export default function ImageUploaderField({
   label,
   form,
   nestedPath,
+  hint,
   simpleUpload,
   mb = 4
 }: IDropzoneProps) {
@@ -51,6 +53,8 @@ export default function ImageUploaderField({
       ) : (
         <DropTarget simpleUpload={simpleUpload} nestedPath={nestedPath} setValue={setvalue} />
       )}
+      <ErrorMessage name={name} errors={form.errors} />
+      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 }
