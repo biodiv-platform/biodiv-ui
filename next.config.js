@@ -16,13 +16,14 @@ module.exports = withPWA({
     ],
     runtimeCaching: [
       {
-        urlPattern: '/',
-        handler: 'NetworkFirst',
+        urlPattern: "/",
+        handler: "NetworkFirst",
         options: {
-        cacheName: 'start-url',
-        expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 7 * 24 * 60 * 60 // 7 days
+          cacheName: "start-url",
+          expiration: {
+            maxEntries: 4,
+            maxAgeSeconds: 7 * 24 * 60 * 60 // 7 days
+          }
         }
       },
       {
