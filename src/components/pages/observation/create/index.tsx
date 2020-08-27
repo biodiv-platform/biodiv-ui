@@ -1,16 +1,16 @@
+import useGlobalState from "@hooks/useGlobalState";
 import { isBrowser } from "@static/constants";
-import { useStoreState } from "easy-peasy";
+import { preCacheRoutes } from "@utils/auth";
 import React, { useEffect } from "react";
 
 import ObservationCreateForm from "./form";
-import { preCacheRoutes } from "@utils/auth";
 
 export default function ObservationCreatePageComponent({
   speciesGroups,
   languages,
   ObservationCreateFormData
 }) {
-  const { currentGroup, isLoggedIn } = useStoreState((s) => s);
+  const { currentGroup, isLoggedIn } = useGlobalState();
 
   useEffect(() => {
     if (isBrowser) {

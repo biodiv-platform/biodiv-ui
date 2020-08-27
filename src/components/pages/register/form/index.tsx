@@ -8,16 +8,17 @@ import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import { axCreateUser } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import { useStoreState } from "easy-peasy";
 import useNookies from "next-nookies-persist";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
+
 import LocationPicker from "./location";
 import {
   GENDER_OPTIONS,
@@ -34,7 +35,9 @@ function SignUpForm() {
   const [user, setUser] = useState(null);
   const { isOpen, onClose, onOpen } = useDisclosure(false);
   const [isOAuth, setIsOAuth] = useState(false);
-  const groupId = useStoreState((s) => s?.currentGroup?.id);
+  const {
+    currentGroup: { id: groupId }
+  } = useGlobalState();
 
   const hForm = useForm<any>({
     mode: "onBlur",

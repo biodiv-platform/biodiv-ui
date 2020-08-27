@@ -5,13 +5,13 @@ import Submit from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import {
   RESOURCES_UPLOADING,
   SYNC_SINGLE_OBSERVATION,
   TOGGLE_PHOTO_SELECTOR
 } from "@static/events";
 import { parseDate } from "@utils/date";
-import { useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -39,7 +39,7 @@ export default function ObservationCreateForm({
   const [customFieldList] = useState(
     ObservationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder)
   );
-  const { currentGroup } = useStoreState((s) => s);
+  const { currentGroup } = useGlobalState();
 
   const parseDefaultCustomField = (list) => {
     return list?.map(

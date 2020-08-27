@@ -11,14 +11,14 @@ import {
 import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { axDownloadFilteredObservations } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import { useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import CheckboxGroupField from "./checkbox-group-field";
@@ -29,7 +29,10 @@ const getFilterOptions = (options) =>
 
 export default function DownloadObservationDataModal({ isOpen, onClose }) {
   const { t } = useTranslation();
-  const authorid = useStoreState((s) => s.user.id);
+  const {
+    user: { id: authorid },
+    isLoggedIn
+  } = useGlobalState();
   const { customFields, traits, filter } = useObservationFilter();
   const [isHidden, setIsHidden] = useState(false);
 
@@ -72,7 +75,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
   };
 
   const handleOnSubmit = async (values) => {
-    if (!authorid) {
+    if (isLoggedIn) {
       setIsHidden(true);
       await waitForAuth();
       setIsHidden(false);

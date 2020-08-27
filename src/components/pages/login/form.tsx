@@ -8,15 +8,15 @@ import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import { axLogin } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import { useStoreState } from "easy-peasy";
 import useNookies from "next-nookies-persist";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
@@ -35,7 +35,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
   const [user, setUser] = useState();
   const [showMobile, setShowMobile] = useState(false);
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { webAddress } = useStoreState((s) => s.currentGroup);
+  const { currentGroup } = useGlobalState();
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -118,7 +118,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
           <Submit form={hForm} rightIcon="arrow-forward">
             {t("SIGN_IN.FORM.SUBMIT")}
           </Submit>
-          <LocalLink href={`${webAddress}/register/forgotPassword`}>
+          <LocalLink href={`${currentGroup?.webAddress}/register/forgotPassword`}>
             <BlueLink display="block">{t("SIGN_IN.FORGOT_PASSWORD_LINK")}</BlueLink>
           </LocalLink>
         </Flex>
@@ -130,7 +130,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       <Oauth text={t("SIGN_IN.WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
 
       {t("SIGN_IN.SIGN_UP")}
-      <LocalLink href={`${webAddress}/register`}>
+      <LocalLink href={`${currentGroup?.webAddress}/register`}>
         <BlueLink ml={2}>
           {t("SIGN_IN.SIGN_UP_LINK")}
           <Icon name="chevron-right" />

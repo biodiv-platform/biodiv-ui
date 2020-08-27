@@ -1,15 +1,15 @@
 import { Avatar, Icon, Link, Menu, MenuButton } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
+import useGlobalState from "@hooks/useGlobalState";
 import { getUserImage } from "@utils/media";
-import { useStoreState } from "easy-peasy";
 import React from "react";
 
 import SubMenu from "../../common/sub-menu";
 import LoginButton from "./login";
 
 export default function UserMenu() {
-  const { isLoggedIn, user } = useStoreState((s) => s);
+  const { isLoggedIn, user } = useGlobalState();
   const { t } = useTranslation();
 
   const userMenuRows = [

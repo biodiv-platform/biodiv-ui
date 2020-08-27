@@ -13,12 +13,14 @@ export default [
       {
         active: SITE_CONFIG.OBSERVATION.ACTIVE,
         name: "ADD_OBSERVATION",
-        to: "/observation/create"
+        to: "/observation/create",
+        memberOnly: true
       },
       {
         active: SITE_CONFIG.SPECIES.ACTIVE,
         name: "CONTRIBUTE_TO_SPECIES",
-        to: "/species/contribute"
+        to: "/species/contribute",
+        memberOnly: true
       },
       /*
     {

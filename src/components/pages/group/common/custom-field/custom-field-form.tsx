@@ -7,9 +7,9 @@ import TextBox from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
+import useGlobalState from "@hooks/useGlobalState";
 import { axAddCustomField, axAddExsistingCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -32,7 +32,9 @@ export default function AddCustomField({
   const [customFieldExist, setCustomFieldExist] = useState<boolean>();
 
   const categoricalType = ["SINGLE CATEGORICAL", "MULTIPLE CATEGORICAL"];
-  const userGroupId = useStoreState((s) => s.currentGroup?.id);
+  const {
+    currentGroup: { id: userGroupId }
+  } = useGlobalState();
 
   const hForm = useForm<any>({
     mode: "onChange",

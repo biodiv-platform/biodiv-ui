@@ -1,5 +1,6 @@
 import { Box, SimpleGrid } from "@chakra-ui/core";
 import Carousel from "@components/@core/carousel";
+import useGlobalState from "@hooks/useGlobalState";
 import {
   ObservationUserPermission,
   ShowData,
@@ -14,7 +15,6 @@ import {
   axSaveUserGroups
 } from "@services/observation.service";
 import { RESOURCE_TYPE } from "@static/constants";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
@@ -41,7 +41,7 @@ export default function ObservationShowPageComponent({
   traits,
   speciesGroups
 }: IObservationShowPageComponentProps) {
-  const { isLoggedIn } = useStoreState((s) => s);
+  const { isLoggedIn } = useGlobalState();
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState("");

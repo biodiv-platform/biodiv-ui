@@ -3,7 +3,7 @@ import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
-import { useStoreState } from "easy-peasy";
+import useGlobalState from "@hooks/useGlobalState";
 import { NextSeo } from "next-seo";
 import React from "react";
 
@@ -11,7 +11,7 @@ import SignUpForm from "./form";
 
 function RegisterComponent() {
   const { t } = useTranslation();
-  const { webAddress } = useStoreState((s) => s.currentGroup);
+  const { currentGroup } = useGlobalState();
 
   return (
     <Flex className="container fadeInUp" align="center" justify="center" pt={6}>
@@ -20,7 +20,7 @@ function RegisterComponent() {
         <PageHeading>{t("USER.SIGN_UP")}</PageHeading>
         <Text mb={4}>
           {t("USER.EXISTING_USER")}{" "}
-          <LocalLink href={`${webAddress}/login`}>
+          <LocalLink href={`${currentGroup?.webAddress}/login`}>
             <BlueLink>
               {t("SIGN_IN.TITLE")}
               <Icon name="chevron-right" />

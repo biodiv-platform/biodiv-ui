@@ -383,6 +383,7 @@
     "UPDATE_ADMIN": "Update Administrators"
   },
   "HEADER": {
+    "MEMBER_ONLY": "Please join the group to upload observations",
     "MENU_PRIMARY": {
       "CONTRIBUTE": {
         "ADD_DATA_PACKAGE": "Add data package",
@@ -505,6 +506,7 @@
   },
   "INVALID_REQUEST": "Invalid Request",
   "LANDSCAPE": {
+    "DOWNLOAD": "Download",
     "SITE_NUMBER": "Site #",
     "TITLE": "Protected Areas",
     "UPDATE": {

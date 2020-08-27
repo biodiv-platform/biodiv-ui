@@ -6,6 +6,7 @@ import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import { ShowDocument } from "@interfaces/document";
 import {
   axDeleteDocument,
@@ -14,7 +15,6 @@ import {
   axUnFlagDocument
 } from "@services/document.service";
 import { adminOrAuthor } from "@utils/auth";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 
 interface DocumentHeaderProps {
@@ -23,7 +23,7 @@ interface DocumentHeaderProps {
 
 export default function DocumentHeader({ document }: DocumentHeaderProps) {
   const [showActions, setShowActions] = useState<boolean>();
-  const { isLoggedIn, user } = useStoreState((s) => s);
+  const { isLoggedIn, user } = useGlobalState();
   const router = useLocalRouter();
   const documentId = document?.document?.id;
 

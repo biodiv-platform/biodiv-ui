@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, SimpleGrid, Stack } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import DatePickerField from "@components/form/datepicker";
 import RichTextareaField from "@components/form/rich-textarea";
@@ -13,6 +13,8 @@ import notification from "@utils/notification";
 import React, { useEffect } from "react";
 import { UseFormMethods } from "react-hook-form";
 import * as Yup from "yup";
+
+import BibImportButton from "../bib-import";
 
 interface BasicInfoProps {
   hForm: UseFormMethods<Record<string, any>>;
@@ -59,9 +61,12 @@ export default function BasicInfo({ hForm, documentTypes, setBibField }: BasicIn
 
   return (
     <div>
-      <PageHeading as="h2" size="lg" mb={4}>
-        ℹ️ Basic Information
-      </PageHeading>
+      <Stack flexDirection={["column", "row"]} alignItems="top" mb={1}>
+        <PageHeading as="h2" size="lg" mb={4} mr={4}>
+          ℹ️ Basic Information
+        </PageHeading>
+        <BibImportButton hForm={hForm} />
+      </Stack>
 
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
         <Box gridColumn="1/4">

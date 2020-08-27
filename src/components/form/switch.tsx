@@ -1,4 +1,4 @@
-import { Box, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/core";
+import { Flex, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/core";
 import React from "react";
 import { UseFormMethods } from "react-hook-form";
 
@@ -25,16 +25,16 @@ const SwitchButton = ({
   ...props
 }: ITextBoxProps) => (
   <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    <Box display="flex" justifyContent="space-between">
+    <Flex align="center">
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Switch
-        id={name}
+      <Controller
+        control={form.control}
         name={name}
         defaultIsChecked={form.control.defaultValuesRef.current[name]}
         ref={form.register}
         isDisabled={disabled}
       />
-    </Box>
+    </Flex>
 
     <ErrorMessage name={name} errors={form.errors} />
     {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
