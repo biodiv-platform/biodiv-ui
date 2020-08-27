@@ -76,3 +76,16 @@ export const axGetDocumentListData = async (params) => {
     return { success: false, data: [] };
   }
 };
+
+export const axDownloadLandscape = async (protectedAreaId, type) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.LANDSCAPE}/landscape/download`,
+      {},
+      { params: { protectedAreaId, type }, responseType: "blob" }
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
+  }
+};

@@ -474,7 +474,7 @@
   },
   "INVALID_REQUEST": "Invalid Request",
   "LANDSCAPE": {
-    "DOWNLOAD": "Download",
+    "DOWNLOAD_MAP": "Download Map",
     "SITE_NUMBER": "Site #",
     "TITLE": "Protected Areas",
     "UPDATE": {
