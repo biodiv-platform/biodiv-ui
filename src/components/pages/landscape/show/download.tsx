@@ -1,17 +1,27 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
+import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import { ENDPOINT } from "@static/constants";
+import { axDownloadLandscape } from "@services/landscape.service";
+import { waitForAuth } from "@utils/auth";
 import React from "react";
 
 const MenuButtonA: any = MenuButton;
 
-export default function DownloadLandscape({ id }) {
+export default function DownloadLandscape({ id, title }) {
   const { t } = useTranslation();
 
-  const download = (type) => {
-    window.location.assign(
-      `${ENDPOINT.LANDSCAPE}/landscape/download?protectedAreaId=${id}&type=${type}`
-    );
+  const download = async (type) => {
+    await waitForAuth();
+    const { success, data } = await axDownloadLandscape(id, type);
+    if (success) {
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      const blob = new Blob([data], { type: "octet/stream" });
+      const blobUrl = window.URL.createObjectURL(blob);
+      a.href = blobUrl;
+      a.download = `${title}.${type}`;
+      a.click();
+      window.URL.revokeObjectURL(blobUrl);
+    }
   };
 
   return (
