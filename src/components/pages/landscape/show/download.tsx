@@ -9,13 +9,13 @@ const MenuButtonA: any = MenuButton;
 export default function DownloadLandscape({ id, title }) {
   const { t } = useTranslation();
 
-  const download = async (type, stringify?) => {
+  const download = async (type) => {
     await waitForAuth();
     const { success, data } = await axDownloadLandscape(id, type);
     if (success) {
       var a = document.createElement("a");
       document.body.appendChild(a);
-      const blob = new Blob([stringify ? JSON.stringify(data) : data], { type: "octet/stream" });
+      const blob = new Blob([data], { type: "octet/stream" });
       const blobUrl = window.URL.createObjectURL(blob);
       a.href = blobUrl;
       a.download = `${title}.${type}`;
@@ -37,7 +37,7 @@ export default function DownloadLandscape({ id, title }) {
       </MenuButtonA>
       <MenuList zIndex={4} placement="bottom-end">
         <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
-        <MenuItem onClick={() => download("geojson", true)}>GeoJSON</MenuItem>
+        <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>
         <MenuItem onClick={() => download("png")}>Image</MenuItem>
       </MenuList>
     </Menu>
