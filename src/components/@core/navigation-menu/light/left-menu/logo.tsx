@@ -74,7 +74,7 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
     <Logo>
       <LocalLink href="/" prefixGroup={true}>
         <Link>
-          <img src={`${icon}?w=128`} alt={name} />
+          <img src={`${icon}?w=128&preserve=true`} alt={name} />
           <Text ml={2}>{name}</Text>
         </Link>
       </LocalLink>
