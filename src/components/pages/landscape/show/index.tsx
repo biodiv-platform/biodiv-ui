@@ -31,7 +31,7 @@ export default function LandscapeShowComponent({
             {landscape.siteNumber}
           </Text>
         </Heading>
-        <DownloadLandscape id={landscape.id} />
+        <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Flex>
       <Box position="relative" h="22rem" bg="gray.200" borderRadius="md" overflow="hidden" mb={4}>
         <Previewer
