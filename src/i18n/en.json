@@ -290,6 +290,7 @@
     },
     "CUSTOM_FIELD": {
       "ADD": {
+        "OPTIONS": "Add Options",
         "FAILURE": "Unable to add Custom Field",
         "SUCCESS": "Custom Field added successfully"
       },
@@ -303,11 +304,10 @@
       "NAME": "Name",
       "NOTES": "Notes",
       "REMOVE": {
+        "DEFAULT": "Default",
         "FAILURE": "Unable to delete Custom Field",
         "SUCCESS": "Custom Field deleted successfully ",
-        "TITLE": "Remove",
-        "DEFAULT": "Default",
-        "ADD_OPTIONS": "Add Options"
+        "TITLE": "Remove"
       },
       "REORDER": {
         "FAILURE": "Unable to save Custom Field order",

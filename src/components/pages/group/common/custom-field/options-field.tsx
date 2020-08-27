@@ -88,7 +88,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
         mr={4}
         mb={4}
       >
-        {t("GROUP.CUSTOM_FIELD.ADD_OPTIONS")}
+        {t("GROUP.CUSTOM_FIELD.ADD.OPTIONS")}
       </Button>
     </>
   );
