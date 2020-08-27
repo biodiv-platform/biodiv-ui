@@ -4,7 +4,12 @@ import Flash from "@components/@core/flash";
 import useTranslation from "@configs/i18n/useTranslation";
 import useGlobalState from "@hooks/useGlobalState";
 import { AllRecoSugguestions, RecoIbp } from "@interfaces/observation";
-import { axAgreeRecoVote, axRemoveRecoVote, axUnlockRecoVote, axValidateRecoVote } from "@services/observation.service";
+import {
+  axAgreeRecoVote,
+  axRemoveRecoVote,
+  axUnlockRecoVote,
+  axValidateRecoVote
+} from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import React from "react";

@@ -19,7 +19,6 @@ export const DATA_TYPE = [
 export const FIELD_TYPE = [
   { label: "Single categorical", value: "SINGLE CATEGORICAL" },
   { label: "Multiple Categorical", value: "MULTIPLE CATEGORICAL" },
-  { label: "Range", value: "RANGE" },
   { label: "Textbox", value: "FIELD TEXT" }
 ];
 

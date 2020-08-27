@@ -40,7 +40,7 @@ const SelectCreatableInputField = ({
     <FormControl
       isInvalid={form.errors[name] && true}
       className="dropdown"
-      data-select-invalid={form.errors[name] && true}
+      aria-invalid={form.errors[name] && true}
       mb={mb}
       isRequired={isRequired}
       {...props}

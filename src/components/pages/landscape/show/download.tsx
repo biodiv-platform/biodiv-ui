@@ -25,25 +25,21 @@ export default function DownloadLandscape({ id, title }) {
   };
 
   return (
-    <Box position="absolute" pb={6} px={2} bottom={0} right={0}>
-      <Menu>
-        <MenuButtonA
-          as={Button}
-          bg="white"
-          size="sm"
-          rightIcon="chevron-up"
-          variant="outline"
-          variantColor="blue"
-          leftIcon="download"
-        >
-          {t("LANDSCAPE.DOWNLOAD_MAP")}
-        </MenuButtonA>
-        <MenuList zIndex={4} placement="top-end">
-          <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
-          <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>
-          <MenuItem onClick={() => download("png")}>Image</MenuItem>
-        </MenuList>
-      </Menu>
-    </Box>
+    <Menu>
+      <MenuButtonA
+        as={Button}
+        rightIcon="chevron-down"
+        variant="outline"
+        variantColor="blue"
+        leftIcon="download"
+      >
+        {t("LANDSCAPE.DOWNLOAD")}
+      </MenuButtonA>
+      <MenuList zIndex={4} placement="bottom-end">
+        <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
+        <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>
+        <MenuItem onClick={() => download("image")}>Image</MenuItem>
+      </MenuList>
+    </Menu>
   );
 }

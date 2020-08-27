@@ -214,7 +214,25 @@ export const axUnlockRecoVote = async (observationId, payload) => {
   }
 };
 
-export const axCreateObservation = async ({ resources, ...payload }) => {
+export const axGetCreateObservationPageData = async (userGroupId: number, ctx) => {
+  try {
+    const {
+      data
+    } = await http.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/usergroup/createObservation/${userGroupId}`,
+      { params: { ctx } }
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+export const axCreateObservation = async ({
+  currentGroup,
+  resources,
+  customFieldList: customFieldData,
+  ...payload
+}) => {
   try {
     const newResources = resources.map((r) => ({
       path: r.path,
@@ -225,10 +243,13 @@ export const axCreateObservation = async ({ resources, ...payload }) => {
       licenceId: r.licenceId
     }));
 
-    const { data } = await http.post(`${ENDPOINT.OBSERVATION}/v1/observation/create`, {
-      ...payload,
-      resources: newResources
-    });
+    const endpoint = customFieldData
+      ? `${ENDPOINT.OBSERVATION}/v1/observation/create/ugContext`
+      : `${ENDPOINT.OBSERVATION}/v1/observation/create`;
+    const body = customFieldData
+      ? { customFieldData, observationData: { ...payload, resources: newResources } }
+      : { ...payload, resources: newResources };
+    const { data } = await http.post(endpoint, body);
 
     return { success: true, data };
   } catch (e) {
