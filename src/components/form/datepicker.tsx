@@ -1,17 +1,10 @@
-import {
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement
-} from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Icon, Input, InputGroup, InputRightElement } from "@chakra-ui/core";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
-import React from "react";
+import { formatDate, parseDate } from "@utils/date";
+import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
-import { Controller, UseFormMethods } from "react-hook-form";
+import { UseFormMethods } from "react-hook-form";
 
 import ErrorMessage from "./common/error-message";
 
@@ -41,10 +34,21 @@ const DatePickerField = ({
   dateFormat = "d-m-Y",
   ...props
 }: IDatePickerBoxProps) => {
+  const [date, setDate] = useState(parseDate(form.control.defaultValuesRef.current[name]));
+
+  useEffect(() => {
+    form.register({ name });
+    form.setValue(name, formatDate(date));
+  }, [form.register]);
+
+  useEffect(() => {
+    form.setValue(name, formatDate(date));
+  }, [date]);
+
   if (subscribe) {
     useListener(
       (d) => {
-        d && form.setValue(name, d, { shouldDirty: true, shouldValidate: true });
+        d && setDate(d);
       },
       [`${FORM_DATEPICKER_CHANGE}${name}`]
     );
@@ -54,30 +58,21 @@ const DatePickerField = ({
     <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <InputGroup>
-        <Controller
-          control={form.control}
-          name={name}
-          defaultValue={new Date()}
-          render={({ onChange, onBlur, value }) => (
-            <Flatpickr
-              value={value}
-              options={{ allowInput: true, maxDate, dateFormat }}
-              onChange={([v]) => onChange(v)}
-              render={({ defaultValue, value, ...props }, ref) => (
-                <Input
-                  isReadOnly={disabled}
-                  id={name}
-                  onBlur={onBlur}
-                  {...props}
-                  placeholder={label}
-                  defaultValue={defaultValue}
-                  ref={ref}
-                />
-              )}
+        <Flatpickr
+          value={date}
+          options={{ allowInput: true, maxDate, dateFormat }}
+          onChange={setDate}
+          render={({ defaultValue, value, ...props }, ref) => (
+            <Input
+              isReadOnly={disabled}
+              id={name}
+              {...props}
+              placeholder={label}
+              defaultValue={defaultValue}
+              ref={ref}
             />
           )}
         />
-
         <InputRightElement>
           <label htmlFor={name} style={{ cursor: "pointer" }}>
             <Icon name="calendar" color="gray.300" />
