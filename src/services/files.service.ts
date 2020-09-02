@@ -1,6 +1,7 @@
 import { IDBObservationAsset } from "@interfaces/custom";
 import { MyUpload } from "@interfaces/files";
 import { ENDPOINT, RESOURCE_TYPE } from "@static/constants";
+import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import http from "@utils/http";
 import { nanoid } from "nanoid";
 
@@ -43,7 +44,7 @@ export const axUploadObservationResource = async (resource: IDBObservationAsset)
 
 export const axUploadDocumentResource = async (document: File): Promise<MyUpload> => {
   const formData = new FormData();
-  formData.append("hash", nanoid());
+  formData.append("hash", LOCAL_ASSET_PREFIX + nanoid());
   formData.append("module", "document");
   formData.append("upload", document, document.name);
 
