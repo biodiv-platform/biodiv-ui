@@ -30,7 +30,7 @@ export default function GroupRules({ userGroupId, rules }) {
         {isCreate ? (
           <AddGroupRulesForm
             groupRules={groupRules}
-            setCustomFields={setGroupRules}
+            setGroupRules={setGroupRules}
             setIsCreate={setIsCreate}
           />
         ) : (

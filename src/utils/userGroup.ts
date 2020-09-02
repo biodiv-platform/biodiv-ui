@@ -31,20 +31,23 @@ export const getManifestURL = (group: UserGroupIbp) => {
 export const formatGroupRules = (rules) => {
   const groupRules = [];
   const {
-    hasSpatialRule,
+    hasUserRule,
     taxonomicRuleList,
     spartialRuleList,
     observedOnDateRule,
     createdOnDateRuleList
   } = rules;
-
-  hasSpatialRule ? groupRules.push({ name: "userRule", value: "true" }) : null;
+  //populate user rules
+  groupRules.push({ name: "userRule", value: hasUserRule ? "true" : "false" });
+  //populate spatial rules array
   spartialRuleList?.forEach((item) =>
     groupRules.push({ id: item.id, name: "spatialRule", value: item.spatialData })
   );
+  //populate taxon rules array
   taxonomicRuleList?.forEach((item) => {
     groupRules.push({ id: item.id, name: "taxonomicRule", value: item.id });
   });
+  //populate date rules array
   observedOnDateRule?.forEach((item) => {
     groupRules.push({
       id: item.id,
@@ -59,5 +62,6 @@ export const formatGroupRules = (rules) => {
       });
     });
   });
+
   return groupRules;
 };
