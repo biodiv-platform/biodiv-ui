@@ -183,6 +183,18 @@ export const axGetAllCustomFields = async (ctx) => {
   }
 };
 
+export const axGetAllCustomFieldOptionsById = async (observationId, userGroupId, cfId) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.USERGROUP}/v1/customfield/options/${observationId}/${userGroupId}/${cfId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: e };
+  }
+};
+
 export const axGetUserGroupCustomField = async (userGroupId, ctx) => {
   try {
     const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/customfield/group/${userGroupId}`, {

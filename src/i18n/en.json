@@ -290,8 +290,8 @@
     },
     "CUSTOM_FIELD": {
       "ADD": {
-        "OPTIONS": "Add Options",
         "FAILURE": "Unable to add Custom Field",
+        "OPTIONS": "Add Options",
         "SUCCESS": "Custom Field added successfully"
       },
       "ALLOW_PARTICIPANT": "Allow Participation",
@@ -523,6 +523,7 @@
       "STOP": "Stop Recording",
       "TITLE": "Audio Recorder"
     },
+    "CF_UPDATE_SUCCESS": "Successfully Updated Observation Custom Field",
     "COMMENTS": {
       "ADD_COMMENT": "Add a new comment",
       "POST": "Post Comment",
