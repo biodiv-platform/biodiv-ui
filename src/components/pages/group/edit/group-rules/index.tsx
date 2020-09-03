@@ -21,7 +21,7 @@ export default function GroupRules({ userGroupId, rules }) {
     <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
       <AccordionHeader _expanded={{ bg: "gray.100" }}>
         <Heading as="h2" flex="1" textAlign="left" my={1} size="lg">
-          🛂 {t("Rules")}
+          🛂 {t("GROUP.RULES.TITLE")}
         </Heading>
         <AccordionIcon float="right" />
       </AccordionHeader>
