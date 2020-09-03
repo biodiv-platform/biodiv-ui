@@ -18,6 +18,7 @@ export default function RulesInputType({ inputType, form, name }) {
           form={form}
           mb={8}
           isRequired={true}
+          isPolygon={true}
         />
       );
     case "taxonomicIdList":
