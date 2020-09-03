@@ -27,6 +27,7 @@ export default function DocumentSidebarMap({ documentCoverages }) {
       alignItems="center"
       justifyContent="center"
       className="gray-box fadeInUp delay-5"
+      mb={4}
     >
       {documentCoverages.length ? (
         <Previewer

@@ -108,8 +108,8 @@
     "DESCRIPTION": "Description",
     "DOI": "DOI",
     "DOWNLOAD": {
-      "CITATION": "Download Citation",
-      "PDF": "Download PDF"
+      "CITATION": "Citation",
+      "PDF": "PDF"
     },
     "EDIT_DOCUMENT": "Edit Document",
     "FOLLOW": "Follow Document",

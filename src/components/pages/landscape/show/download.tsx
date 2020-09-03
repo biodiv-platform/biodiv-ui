@@ -2,6 +2,7 @@ import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/co
 import useTranslation from "@configs/i18n/useTranslation";
 import { axDownloadLandscape } from "@services/landscape.service";
 import { waitForAuth } from "@utils/auth";
+import { sendFileFromResponse } from "@utils/download";
 import React from "react";
 
 const MenuButtonA: any = MenuButton;
@@ -13,33 +14,30 @@ export default function DownloadLandscape({ id, title }) {
     await waitForAuth();
     const { success, data } = await axDownloadLandscape(id, type);
     if (success) {
-      var a = document.createElement("a");
-      document.body.appendChild(a);
-      const blob = new Blob([data], { type: "octet/stream" });
-      const blobUrl = window.URL.createObjectURL(blob);
-      a.href = blobUrl;
-      a.download = `${title}.${type}`;
-      a.click();
-      window.URL.revokeObjectURL(blobUrl);
+      sendFileFromResponse(data, `${title}.${type}`);
     }
   };
 
   return (
-    <Menu>
-      <MenuButtonA
-        as={Button}
-        rightIcon="chevron-down"
-        variant="outline"
-        variantColor="blue"
-        leftIcon="download"
-      >
-        {t("LANDSCAPE.DOWNLOAD")}
-      </MenuButtonA>
-      <MenuList zIndex={4} placement="bottom-end">
-        <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
-        <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>
-        <MenuItem onClick={() => download("image")}>Image</MenuItem>
-      </MenuList>
-    </Menu>
+    <Box mb={6} mr={2} position="absolute" zIndex={4} bottom={0} right={0}>
+      <Menu>
+        <MenuButtonA
+          as={Button}
+          rightIcon="chevron-up"
+          leftIcon="download"
+          bg="white"
+          size="sm"
+          variant="outline"
+          variantColor="blue"
+        >
+          {t("LANDSCAPE.DOWNLOAD_MAP")}
+        </MenuButtonA>
+        <MenuList placement="top-end">
+          <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
+          <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>
+          <MenuItem onClick={() => download("image")}>Image</MenuItem>
+        </MenuList>
+      </Menu>
+    </Box>
   );
 }

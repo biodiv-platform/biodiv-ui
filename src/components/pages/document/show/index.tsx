@@ -19,9 +19,6 @@ import React, { useEffect, useState } from "react";
 import DocumentHeader from "./header";
 import DocumentInfo from "./info";
 import Sidebar from "./sidebar";
-import HabitatsCoverage from "./sidebar/habitats-coverage";
-import SpatialCoverage from "./sidebar/special-coverage";
-import SpeciesCoverage from "./sidebar/species-coverage";
 
 const DocumentIframe = styled.iframe`
   background: #3b3b3b;
@@ -29,6 +26,7 @@ const DocumentIframe = styled.iframe`
   width: 100%;
   height: 522px;
   grid-column: 1/3;
+  margin-bottom: 1rem;
 `;
 
 interface DocumentShowProps {
@@ -50,12 +48,14 @@ export default function DocumentShowComponent({ document }: DocumentShowProps) {
   return (
     <div className="container mt">
       <DocumentHeader document={document} />
-      <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]} mb={4}>
-        <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(document?.uFile?.path)} />
-        <Sidebar d={document} />
-      </SimpleGrid>
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
+          {document?.uFile?.path && (
+            <DocumentIframe
+              className="fadeInUp delay-2"
+              src={getDocumentPath(document?.uFile?.path)}
+            />
+          )}
           <DocumentInfo d={document} />
 
           {SITE_CONFIG.USERGROUP.ACTIVE && (
@@ -77,11 +77,7 @@ export default function DocumentShowComponent({ document }: DocumentShowProps) {
             commentFunc={axAddDocumentComment}
           />
         </Box>
-        <div>
-          <SpatialCoverage documentCoverage={document.documentCoverages} />
-          <HabitatsCoverage habitat={document.habitatIds} />
-          <SpeciesCoverage speciesGroup={document.speciesGroupIds} />
-        </div>
+        <Sidebar d={document} />
       </SimpleGrid>
     </div>
   );

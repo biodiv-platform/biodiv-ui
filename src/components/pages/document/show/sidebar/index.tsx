@@ -3,7 +3,10 @@ import { ShowDocument } from "@interfaces/document";
 import React from "react";
 
 import DownloadButtons from "./download-buttons";
+import HabitatsCoverage from "./habitats-coverage";
 import DocumentSidebarMap from "./map";
+import SpatialCoverage from "./special-coverage";
+import SpeciesCoverage from "./species-coverage";
 
 interface SidebarProps {
   d: ShowDocument;
@@ -15,6 +18,9 @@ export default function Sidebar({ d }: SidebarProps) {
       <User user={d.userIbp} />
       <DownloadButtons />
       <DocumentSidebarMap documentCoverages={d.documentCoverages} />
+      <SpatialCoverage documentCoverage={d.documentCoverages} />
+      <HabitatsCoverage habitat={d.habitatIds} />
+      <SpeciesCoverage speciesGroup={d.speciesGroupIds} />
     </div>
   );
 }
