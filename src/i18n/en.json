@@ -367,7 +367,8 @@
         "ACTIONS": "Actions",
         "RULE_TYPE": "Rule Type",
         "VALUE": "Value"
-      }
+      },
+      "TITLE": "Group Rules"
     },
     "SAVE": "Create Group",
     "SPATIAL_COVERGE": "Spatial Coverage",
