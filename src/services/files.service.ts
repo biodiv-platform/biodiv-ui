@@ -15,10 +15,10 @@ export const axListMyUploads = async (module = RESOURCE_TYPE.OBSERVATION) => {
   }
 };
 
-export const axRemoveMyUploads = async ({ hashKey, fileName }) => {
+export const axRemoveMyUploads = async ({ path }) => {
   try {
     await http.post(`${ENDPOINT.FILES}/upload/remove-file`, {
-      path: `${hashKey}/${fileName}`
+      path
     });
     return { success: true };
   } catch (e) {
