@@ -16,7 +16,11 @@ export default function Sidebar({ d }: SidebarProps) {
   return (
     <div>
       <User user={d.userIbp} />
-      <DownloadButtons />
+      <DownloadButtons
+        documentPath={d?.uFile?.path}
+        title={d.document.title}
+        documentId={d?.document?.id}
+      />
       <DocumentSidebarMap documentCoverages={d.documentCoverages} />
       <SpatialCoverage documentCoverage={d.documentCoverages} />
       <HabitatsCoverage habitat={d.habitatIds} />
