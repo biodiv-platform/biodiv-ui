@@ -61,6 +61,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
 
         docCoverageData: Yup.array().of(
           Yup.object().shape({
+            id: Yup.mixed().nullable(),
             placename: Yup.string().required(),
             topology: Yup.string().required()
           })
