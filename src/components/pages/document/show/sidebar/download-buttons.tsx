@@ -25,6 +25,7 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
         variant="outline"
         leftIcon={"download" as any}
         onClick={downloadPDF}
+        isDisabled={!documentPath}
         variantColor="red"
       >
         {t("DOCUMENT.DOWNLOAD.PDF")}
