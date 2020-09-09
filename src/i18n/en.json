@@ -277,8 +277,15 @@
     "TITLE": "Password Reset"
   },
   "GROUP": {
+    "ABOUT": {
+      "CLOSED_GROUP": "Closed Group",
+      "OPEN_GROUP": "Open Group",
+      "TITLE": "About"
+    },
     "ADMIN": {
       "ERROR": "There was some error while updating Administrators",
+      "FOUNDER": "Founders",
+      "MODERATOR": "Moderators",
       "NO_ACCESS": "to update custom fields or group rules please contact administrator",
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
@@ -291,16 +298,19 @@
     },
     "CUSTOM_FIELD": {
       "ADD": {
-        "OPTIONS": "Add Options",
         "FAILURE": "Unable to add Custom Field",
+        "OPTIONS": "Add Options",
         "SUCCESS": "Custom Field added successfully"
       },
+      "ADD_OPTION": "Add Option",
       "ALLOW_PARTICIPANT": "Allow Participation",
       "BACK": "Back to List",
       "CREATE": "Create Custom Field",
       "DATA_TYPE": "Data Types",
+      "DEFAULT": "Default",
       "EXIST": "Custom Field already exists",
       "FIELD_TYPE": "Field Types",
+      "ICON": "Icon",
       "IS_MANDATORY": "Mandatory",
       "NAME": "Name",
       "NOTES": "Notes",
@@ -325,7 +335,8 @@
         "PARTICIPATION": "Participation"
       },
       "TITLE": "Custom Fields",
-      "UNITS": "Units"
+      "UNITS": "Units",
+      "VALUE": "Value"
     },
     "DELETE_MEMBER": "Are you sure you want to delete?",
     "DESCRIPTION": "Description",
