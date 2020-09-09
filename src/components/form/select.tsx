@@ -15,6 +15,7 @@ interface ISelectCreatableProps {
   hint?: string;
   options?: any[];
   optionComponent?: any;
+  onChange?;
   selectRef?;
   isRequired?: boolean;
   isControlled?: boolean;
@@ -30,6 +31,7 @@ const SelectCreatableInputField = ({
   form,
   mb = 4,
   options = [],
+  onChange,
   disabled = false,
   selectRef,
   optionComponent = DefaultOptionComponent,
