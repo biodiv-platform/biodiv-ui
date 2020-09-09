@@ -10,11 +10,17 @@ interface GeoJSONPreviewProps {
   h?;
   maxZoom?;
   viewPort?: Partial<ViewportProps>;
+  mb?: number;
 }
 
-export default function GeoJSONPreview({ data, h = "22rem", viewPort = {} }: GeoJSONPreviewProps) {
+export default function GeoJSONPreview({
+  data,
+  h = "22rem",
+  viewPort = {},
+  mb
+}: GeoJSONPreviewProps) {
   return (
-    <Box position="relative" h={h} borderRadius="md" overflow="hidden">
+    <Box position="relative" h={h} borderRadius="md" overflow="hidden" mb={mb}>
       <Previewer
         defaultViewPort={{ ...defaultViewPort, ...viewPort }}
         data={data}

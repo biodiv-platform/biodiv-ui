@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import { axDownloadLandscape } from "@services/landscape.service";
 import { waitForAuth } from "@utils/auth";
@@ -13,7 +13,7 @@ export default function DownloadLandscape({ id, title }) {
     await waitForAuth();
     const { success, data } = await axDownloadLandscape(id, type);
     if (success) {
-      var a = document.createElement("a");
+      const a = document.createElement("a");
       document.body.appendChild(a);
       const blob = new Blob([data], { type: "octet/stream" });
       const blobUrl = window.URL.createObjectURL(blob);

@@ -5,8 +5,6 @@ import { Mq } from "mq-styled-components";
 import React from "react";
 
 const DescriptionBox = styled.div`
-  margin-bottom: 2.5rem;
-
   p {
     margin-bottom: 1rem;
     font-size: 1.125rem;
@@ -43,9 +41,10 @@ const DescriptionBox = styled.div`
   }
 `;
 
-export default function HomeDescription({ description }) {
+export default function HomeDescription({ description, mb = 10 }) {
   return (
     <Box
+      mb={mb}
       as={DescriptionBox}
       dangerouslySetInnerHTML={{
         __html: getInjectableHTML(description)
