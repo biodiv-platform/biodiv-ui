@@ -27,7 +27,6 @@ export default function CustomField({
   canEdit
 }: ICustomFieldProps) {
   const {
-    isLoggedIn,
     user: { id: userId }
   } = useGlobalState();
   const { isOpen, onClose, onToggle } = useDisclosure();
@@ -52,7 +51,7 @@ export default function CustomField({
     <FormControl borderBottom="1px" borderColor="gray.300" p={4}>
       <FormLabel fontWeight="bold" htmlFor={cf.cfId.toString()}>
         {cf.cfName}
-        {isLoggedIn && adminOrAuthor(userId) && canEdit && (
+        {(adminOrAuthor(userId) || canEdit) && (
           <IconButton
             variant="link"
             variantColor="blue"

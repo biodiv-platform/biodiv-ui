@@ -10,7 +10,7 @@ import useObservationFilter from "@hooks/useObservationFilter";
 import React from "react";
 
 import SubAccordion from "../shared/sub-accordion";
-import CustomFieldRenderer from "./custom-field-renderer";
+import CustomFieldTypes from "./filter-types";
 
 export default function CustomFieldsFilter() {
   const { customFields } = useObservationFilter();
@@ -27,7 +27,7 @@ export default function CustomFieldsFilter() {
                 <AccordionIcon />
               </AccordionHeader>
               <AccordionPanel>
-                {isExpanded && <CustomFieldRenderer field={customField} key={customField.id} />}
+                {isExpanded && <CustomFieldTypes field={customField} key={customField.id} />}
               </AccordionPanel>
             </>
           )}

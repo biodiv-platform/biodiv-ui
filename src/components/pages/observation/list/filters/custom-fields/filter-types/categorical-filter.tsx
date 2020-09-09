@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import CheckboxFilter from "../../shared/checkbox/checkboxs";
 
-export default function UserGroupFilter({ field: { id, values } }) {
+export default function CatergoricalFilter({ field: { id, values, name } }) {
   const groupOptions = useMemo(
     () => values.map((g) => ({ label: g.value, value: g.value, stat: g.value })),
     []
@@ -13,6 +13,7 @@ export default function UserGroupFilter({ field: { id, values } }) {
       filterKey={`custom_${id}.field_text`}
       options={groupOptions}
       showSearch={true}
+      statKey={`groupCustomField.${name}`}
       skipOptionsTranslation={true}
     />
   );

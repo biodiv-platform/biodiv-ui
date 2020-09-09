@@ -4,7 +4,7 @@ import FilterCheckboxes from "../../shared/checkbox/checkboxs";
 import TextFilterInput from "../../shared/search/input";
 import { CONTENT_TYPES } from "./filter-keys";
 
-export default function CustomFieldText({ field }) {
+export default function TextFilter({ field }) {
   const { id, name } = field;
 
   return (
