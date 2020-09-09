@@ -9,21 +9,17 @@ export default function FilterIconList({ filterIds, filterList, title, type }) {
   );
 
   return (
-    <Box mb={5}>
-      <Heading m={3} size="lg">
+    <Box mb={6}>
+      <Heading size="lg" as="h2" mb={4}>
         {title}
       </Heading>
-      <Stack isInline>
+      <Stack isInline={true}>
         {filters.map(({ name, id }) => (
-          <Tooltip key={id} aria-label={name} label={name} placement="top" hasArrow={true}>
-            <Image
-              m={2}
-              size="3rem"
-              ignoreFallback={true}
-              src={getLocalIcon(name, type)}
-              alt={name}
-            />
-          </Tooltip>
+          <Box key={id}>
+            <Tooltip aria-label={name} label={name} placement="top" hasArrow={true}>
+              <Image size="3rem" ignoreFallback={true} src={getLocalIcon(name, type)} alt={name} />
+            </Tooltip>
+          </Box>
         ))}
       </Stack>
     </Box>

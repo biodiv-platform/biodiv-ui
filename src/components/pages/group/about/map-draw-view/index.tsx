@@ -1,18 +1,31 @@
 import { Box, Heading } from "@chakra-ui/core";
-import WktPreview from "@components/@core/WKT/wkt-preview";
-import { stringToFeature } from "@utils/location";
+import GeoJSONPreview from "@components/@core/map-preview/geojson";
 import React, { useMemo } from "react";
 
-export default function MapDrawView({ coordinates, title }) {
-  const defaultFeatures = useMemo(() => stringToFeature(coordinates), []);
+export default function MapDrawView({ neLongitude, neLatitude, swLatitude, swLongitude, title }) {
+  const coverage = {
+    type: "Feature",
+    properties: {},
+    geometry: {
+      type: "Polygon",
+      coordinates: [
+        [
+          [neLongitude, swLatitude],
+          [swLongitude, swLatitude],
+          [swLongitude, neLatitude],
+          [neLongitude, neLatitude],
+          [neLongitude, swLatitude]
+        ]
+      ]
+    }
+  };
+
   return (
-    <Box mb={5}>
-      <Heading m={3} size="lg">
+    <Box mb={6}>
+      <Heading size="lg" as="h2" mb={4}>
         {title}
       </Heading>
-      <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
-        <WktPreview data={defaultFeatures[0]} />
-      </Box>
+      <GeoJSONPreview data={coverage} />
     </Box>
   );
 }

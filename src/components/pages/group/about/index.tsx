@@ -6,15 +6,24 @@ import React from "react";
 
 import UserAvatarList from "../common/user-image-list";
 import FilterIconsList from "./filter-icon-list";
-import Wkt from "wkt";
-import GeoJSONPreview from "@components/@core/map-preview/geojson";
+import MapDrawView from "./map-draw-view";
 
 interface GroupEditPageProps {
   speciesGroups;
   habitats;
   customFieldList;
   allCustomField;
-  groupInfo;
+  groupInfo: {
+    description;
+    name;
+    allowUserToJoin;
+    speciesGroupId;
+    habitatId;
+    neLongitude;
+    neLatitude;
+    swLatitude;
+    swLongitude;
+  };
   founders;
   moderators;
 }
@@ -22,7 +31,12 @@ interface GroupEditPageProps {
 export default function AboutGroupComponent({
   speciesGroups,
   habitats,
-  groupInfo: {
+  groupInfo,
+  founders,
+  moderators
+}: GroupEditPageProps) {
+  const { t } = useTranslation();
+  const {
     description,
     name,
     allowUserToJoin,
@@ -32,24 +46,19 @@ export default function AboutGroupComponent({
     neLatitude,
     swLatitude,
     swLongitude
-  },
-  founders,
-  moderators
-}: GroupEditPageProps) {
-  const { t } = useTranslation();
-  const coordinates = `${neLongitude},${neLatitude},${neLongitude},${swLatitude},${swLongitude},${swLatitude},${swLongitude},${neLatitude},${neLongitude},${neLatitude}`;
+  } = groupInfo;
 
   return (
     <div className="container mt">
-      <Flex alignItems="center">
-        <PageHeading>👥 {`${t("GROUP.ABOUT.TITLE")} ${name}`}</PageHeading>
-        <Flex m={6} alignItems="center">
-          <Badge variantColor={allowUserToJoin ? "blue" : "yellow"}>
-            {allowUserToJoin ? t("GROUP.ABOUT.OPEN_GROUP") : t("GROUP.ABOUT.CLOSED_GROUP")}
-          </Badge>
-        </Flex>
+      <Flex alignItems="center" mb={6}>
+        <PageHeading mb={0} mr={4}>
+          👥 {t("GROUP.ABOUT.TITLE")} {name}
+        </PageHeading>
+        <Badge variantColor={allowUserToJoin ? "blue" : "yellow"}>
+          {t(allowUserToJoin ? "GROUP.ABOUT.OPEN_GROUP" : "GROUP.ABOUT.CLOSED_GROUP")}
+        </Badge>
       </Flex>
-      <HomeDescription description={description} />
+      <HomeDescription description={description} mb={6} />
       <FilterIconsList
         title={t("GROUP.SPECIES_COVERAGE")}
         type="species"
@@ -62,8 +71,13 @@ export default function AboutGroupComponent({
         filterIds={habitatId}
         filterList={habitats}
       />
-      <GeoJSONPreview data={Wkt.parse(coordinates)} />
-
+      <MapDrawView
+        title={t("GROUP.SPATIAL_COVERGE")}
+        neLongitude={neLongitude}
+        neLatitude={neLatitude}
+        swLatitude={swLatitude}
+        swLongitude={swLongitude}
+      />
       <UserAvatarList title={t("GROUP.ADMIN.FOUNDER")} userList={founders} />
       <UserAvatarList title={t("GROUP.ADMIN.MODERATOR")} userList={moderators} />
     </div>

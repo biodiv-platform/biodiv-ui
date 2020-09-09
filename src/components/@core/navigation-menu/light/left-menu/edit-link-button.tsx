@@ -1,9 +1,9 @@
 import { Button } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { adminOrAuthor } from "@utils/auth";
 import useGlobalState from "@hooks/useGlobalState";
+import { adminOrAuthor } from "@utils/auth";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 export default function EditLinkButton({ label }) {
   const {
@@ -11,7 +11,12 @@ export default function EditLinkButton({ label }) {
     user: { id: authorId }
   } = useGlobalState();
   const { pathname } = useRouter();
-  const [canEdit] = useState(adminOrAuthor(authorId) && id && !pathname.endsWith("edit"));
+
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    setCanEdit(adminOrAuthor(authorId) && id && !pathname.endsWith("edit"));
+  }, []);
 
   return canEdit ? (
     <LocalLink href={`${webAddress}/edit`}>

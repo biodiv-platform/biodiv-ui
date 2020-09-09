@@ -1,31 +1,27 @@
-import { Avatar, Box, Divider, Heading, SimpleGrid, Tooltip } from "@chakra-ui/core";
+import { Avatar, Box, Divider, Heading, Link, Stack } from "@chakra-ui/core";
+import Tooltip from "@components/@core/tooltip";
 import { getUserImage } from "@utils/media";
 import React from "react";
 
 export default function UserAvatarList({ userList, title }) {
   return (
-    <Box mb={10}>
-      <Heading m={3} size="lg">
+    <Box mb={6}>
+      <Heading size="lg" as="h2" mb={4}>
         {title}
       </Heading>
-      <Box maxWidth={["100%", "50%"]}>
-        <SimpleGrid mt={4} columns={[2, 3, 6]} spacing={2}>
-          {userList.map(({ label, profilePic }, index) => (
-            <Tooltip aria-label="member" hasArrow={true} label={label} placement="top">
-              <span>
-                <Avatar
-                  key={index}
-                  size="lg"
-                  aria-label={label}
-                  name={label}
-                  src={getUserImage(profilePic, 64)}
-                />
-              </span>
-            </Tooltip>
-          ))}
-        </SimpleGrid>
-      </Box>
-      <Divider mb={3} />
+      <Stack isInline={true} spacing={4}>
+        {userList.map(({ name, id, profilePic }) => (
+          <Link href={`/user/show/${id}`} key={id} target="_blank">
+            <Avatar
+              size="lg"
+              title={name}
+              aria-label={name}
+              name={name}
+              src={getUserImage(profilePic, 64)}
+            />
+          </Link>
+        ))}
+      </Stack>
     </Box>
   );
 }
