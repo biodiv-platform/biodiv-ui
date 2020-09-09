@@ -279,6 +279,7 @@
   "GROUP": {
     "ADMIN": {
       "ERROR": "There was some error while updating Administrators",
+      "NO_ACCESS": "to update custom fields or group rules please contact administrator",
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },

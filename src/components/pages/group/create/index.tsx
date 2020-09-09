@@ -14,7 +14,7 @@ import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import AdminInviteField from "../common/admin-invite-field";
-import AreaDrawFieldProps from "../common/area-draw-field";
+import AreaDrawField from "../common/area-draw-field";
 import IconCheckboxField from "../common/icon-checkbox-field";
 import ImageUploaderField from "../common/image-uploader-field";
 import { STATIC_GROUP_PAYLOAD } from "../common/static";
@@ -132,7 +132,7 @@ export default function CreateGroupPageComponent({
           label={t("GROUP.JOIN_WITHOUT_INVITATION")}
           form={hForm}
         />
-        <AreaDrawFieldProps
+        <AreaDrawField
           label={t("GROUP.SPATIAL_COVERGE")}
           name={"spacialCoverage"}
           form={hForm}

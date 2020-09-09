@@ -70,6 +70,7 @@ export default function AreaDrawField({
           defaultFeatures={defaultFeatures}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           onFeaturesChange={handleOnFeatureChange}
+          isPolygon={false}
         />
       </Box>
       <FormErrorMessage>{form.errors[name] && form.errors[name]["se"]["message"]}</FormErrorMessage>

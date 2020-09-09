@@ -5,15 +5,15 @@ import RichTextareaField from "@components/form/rich-textarea";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
 import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
-import AreaDrawFieldProps from "../common/area-draw-field";
+import AreaDrawField from "../common/area-draw-field";
 import IconCheckboxField from "../common/icon-checkbox-field";
 import ImageUploaderField from "../common/image-uploader-field";
 import { STATIC_GROUP_PAYLOAD } from "../common/static";
@@ -122,7 +122,7 @@ export default function UserGroupEditForm({
         label={t("GROUP.JOIN_WITHOUT_INVITATION")}
         form={hForm}
       />
-      <AreaDrawFieldProps
+      <AreaDrawField
         label={t("GROUP.SPATIAL_COVERGE")}
         name={"spacialCoverage"}
         form={hForm}

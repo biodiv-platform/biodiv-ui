@@ -247,9 +247,7 @@ export const axGetUserGroupRules = async (userGroupId, ctx) => {
   try {
     const { data } = await http.get(
       `${ENDPOINT.USERGROUP}/v1/group/filterRule/show/${userGroupId}`,
-      {
-        params: { ctx }
-      }
+      { params: { ctx } }
     );
     return { success: true, data };
   } catch (e) {

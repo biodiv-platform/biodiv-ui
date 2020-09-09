@@ -1,13 +1,17 @@
-import { Box, Link } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
+import BlueLink from "@components/@core/blue-link";
+import useTranslation from "@configs/i18n/useTranslation";
+import SITE_CONFIG from "@configs/site-config.json";
 import React from "react";
 
-export default function () {
+export default function ContactAdmin() {
+  const { t } = useTranslation();
+
   return (
     <Box mb={4}>
-      To Add/Change <strong>Custom Fields or Group Rules</strong> please contact{"  "}
-      <Link color="blue.500" href="mailto:support@indiabiodiversity.org" isExternal>
-        @Administrator
-      </Link>
+      <BlueLink href={SITE_CONFIG.FOOTER.SOCIAL.MAIL.URL} isExternal={true}>
+        {t("GROUP.ADMIN.NO_ACCESS")}
+      </BlueLink>
     </Box>
   );
 }
