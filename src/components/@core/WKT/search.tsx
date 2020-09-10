@@ -11,7 +11,8 @@ import SaveButton from "./save-button";
 
 const onQuery = async (q) => {
   const { data } = await axQueryGeoEntitiesByPlaceName(q);
-  return data.map(({ placeName, wktData }) => ({
+  return data.map(({ placeName, wktData, id }) => ({
+    geoEntityId: id,
     label: placeName,
     value: wkt.parse(wktData)
   }));
@@ -23,8 +24,9 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
 
   const handleOnSave = () => {
     if (selected?.label && selected?.value) {
-      const { label, value } = selected;
+      const { label, value, geoEntityId } = selected;
       onSave({
+        geoEntityId,
         [nameTitle]: label,
         [nameTopology]: wkt.stringify(value)
       });

@@ -8,6 +8,7 @@ import useGlobalState from "@hooks/useGlobalState";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
 import { DEFAULT_LICENSE } from "@static/licenses";
+import { parseDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -60,6 +61,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
 
         docCoverageData: Yup.array().of(
           Yup.object().shape({
+            id: Yup.mixed().nullable(),
             placename: Yup.string().required(),
             topology: Yup.string().required()
           })
@@ -85,6 +87,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
       resource: { resourceURL, size },
       bibFieldData,
       itemTypeId,
+      fromDate,
       ...rest
     } = values;
 
@@ -92,6 +95,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
       ...DEFAULT_VALUES,
       ...rest,
       resourceURL,
+      fromDate: parseDate(fromDate).toISOString(),
       size,
       bibFieldData: {
         ...bibFieldData,

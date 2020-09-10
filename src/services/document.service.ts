@@ -185,3 +185,22 @@ export const axCreateDocument = async (payload) => {
     return { success: false, data: {} };
   }
 };
+
+export const axDownloadDocument = async (documentPath, documentId) => {
+  try {
+    // Fetch document file
+    const { data } = await http.get(documentPath, { responseType: "blob" });
+
+    // Log downloded document
+    await http.post(`${ENDPOINT.DOCUMENT}/v1/services/log/download`, {
+      filePath: documentPath,
+      filterUrl: `/document/show/${documentId}`,
+      status: "success",
+      fileType: "pdf"
+    });
+
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
+  }
+};
