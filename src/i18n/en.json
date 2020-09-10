@@ -17,6 +17,8 @@
     "ADDED_A_FACT": "added fact",
     "AGREED_ON_SPECIES_NAME": "agreed on species name",
     "CUSTOM_FIELD_EDITED": "custom field edited",
+    "DOCUMENT_CREATED": "document created",
+    "DOCUMENT_TAG_UPDATED": "updated tags",
     "FEATURED": "featured in group",
     "FLAG_REMOVED": "flag removed",
     "FLAGGED": "flagged",
@@ -108,8 +110,8 @@
     "DESCRIPTION": "Description",
     "DOI": "DOI",
     "DOWNLOAD": {
-      "CITATION": "Download Citation",
-      "PDF": "Download PDF"
+      "CITATION": "Citation",
+      "PDF": "PDF"
     },
     "EDIT_DOCUMENT": "Edit Document",
     "FOLLOW": "Follow Document",

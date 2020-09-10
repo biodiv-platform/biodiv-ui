@@ -83,6 +83,7 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
           </Box>
         );
 
+      case ACTIVITY_TYPE.DOCUMENT_TAG_UPDATED:
       case ACTIVITY_TYPE.OBSERVATION_TAG_UPDATED:
         const tags = a.activityIbp?.activityDescription.split(",") || [];
         return (
