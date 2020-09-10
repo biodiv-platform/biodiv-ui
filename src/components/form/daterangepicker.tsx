@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Icon,
@@ -8,13 +9,10 @@ import {
   InputRightElement
 } from "@chakra-ui/core";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
-import { formatDate, parseDate } from "@utils/date";
+import { formatDateRange, parseDateRange } from "@utils/date";
 import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
-import { UseFormMethods } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
 
 interface IDatePickerBoxProps {
   name: string;
@@ -26,12 +24,10 @@ interface IDatePickerBoxProps {
   style?;
   isRequired?: boolean;
   subscribe?: boolean;
-  form: UseFormMethods<Record<string, any>>;
+  form;
 }
 
-const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
-
-const DatePickerField = ({
+const DateRangePickerField = ({
   name,
   label,
   form,
@@ -42,15 +38,16 @@ const DatePickerField = ({
   dateFormat = "d-m-Y",
   ...props
 }: IDatePickerBoxProps) => {
-  const [date, setDate] = useState(parseDate(form.control.defaultValuesRef.current[name]));
+  const [date, setDate] = useState(parseDateRange(form.control.defaultValuesRef.current[name]));
+  const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
 
   useEffect(() => {
     form.register({ name });
-    form.setValue(name, formatDate(date));
+    form.setValue(name, formatDateRange(date));
   }, [form.register]);
 
   useEffect(() => {
-    form.setValue(name, formatDate(date));
+    form.setValue(name, formatDateRange(date));
   }, [date]);
 
   if (subscribe) {
@@ -68,7 +65,7 @@ const DatePickerField = ({
       <InputGroup>
         <Flatpickr
           value={date}
-          options={{ allowInput: true, maxDate, dateFormat }}
+          options={{ allowInput: true, maxDate, dateFormat, mode: "range" }}
           onChange={setDate}
           render={({ defaultValue, value, ...props }, ref) => (
             <Input
@@ -87,10 +84,10 @@ const DatePickerField = ({
           </label>
         </InputRightElement>
       </InputGroup>
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
 
-export default DatePickerField;
+export default DateRangePickerField;

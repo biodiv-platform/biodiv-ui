@@ -1,6 +1,7 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
+import { formatDate } from "@utils/date";
 import { stringify } from "querystring";
 
 import { getGroupImage } from "./media";
@@ -25,4 +26,42 @@ export const findCurrentUserGroup = (groups: UserGroupIbp[], currentURL: string)
 export const getManifestURL = (group: UserGroupIbp) => {
   const { name, icon } = group;
   return `/api/manifest.json?${stringify({ name, icon })}`;
+};
+
+export const formatGroupRules = (rules) => {
+  const groupRules = [];
+  const {
+    hasUserRule,
+    taxonomicRuleList,
+    spartialRuleList,
+    observedOnDateRule,
+    createdOnDateRuleList
+  } = rules;
+  //populate user rules
+  groupRules.push({ name: "userRule", value: hasUserRule ? "true" : "false" });
+  //populate spatial rules array
+  spartialRuleList?.forEach((item) =>
+    groupRules.push({ id: item.id, name: "spatialRule", value: item.spatialData })
+  );
+  //populate taxon rules array
+  taxonomicRuleList?.forEach((item) => {
+    groupRules.push({ id: item.id, name: "taxonomicRule", value: item.id });
+  });
+  //populate date rules array
+  observedOnDateRule?.forEach((item) => {
+    groupRules.push({
+      id: item.id,
+      name: "observedOnDateRule",
+      value: `from ${formatDate(item.fromDate)} to ${formatDate(item.toDate)}`
+    });
+    createdOnDateRuleList?.forEach((item) => {
+      groupRules.push({
+        id: item.id,
+        name: "createdOnDateRule",
+        value: `${formatDate(item.fromDate)}-${formatDate(item.toDate)}`
+      });
+    });
+  });
+
+  return groupRules;
 };

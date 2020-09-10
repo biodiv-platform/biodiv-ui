@@ -41,7 +41,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
                     isRequired={true}
                     disabled={disabled}
                     name={`values.${index}.value`}
-                    label="Value"
+                    label={t("GROUP.CUSTOM_FIELD.VALUE")}
                     form={form}
                   />
                   <TextBox
@@ -64,7 +64,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
               <ImageUploaderField
                 nestedPath="customField,values"
                 simpleUpload={true}
-                label="Icon"
+                label={t("GROUP.CUSTOM_FIELD.ICON")}
                 name={`values.${index}.iconURL`}
                 form={form}
                 mb={0}

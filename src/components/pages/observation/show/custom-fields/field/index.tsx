@@ -1,12 +1,15 @@
 import { FormControl, FormHelperText, FormLabel, IconButton, useDisclosure } from "@chakra-ui/core";
+import useTranslation from "@configs/i18n/useTranslation";
+import useGlobalState from "@hooks/useGlobalState";
 import { CustomFieldData } from "@interfaces/observation";
 import { axUpdateCustomField } from "@services/observation.service";
 import { ACTIVITY_UPDATED } from "@static/events";
+import { adminOrAuthor } from "@utils/auth";
+import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { emit } from "react-gbus";
 
-import CategoricalField from "./catergorical-field";
-import FieldText from "./text";
+import FieldData from "./field-data";
 
 interface ICustomFieldProps {
   cf: CustomFieldData;
@@ -23,7 +26,11 @@ export default function CustomField({
   observationId,
   canEdit
 }: ICustomFieldProps) {
+  const {
+    user: { id: userId }
+  } = useGlobalState();
   const { isOpen, onClose, onToggle } = useDisclosure();
+  const { t } = useTranslation();
 
   const onUpdate = async (fieldData) => {
     const { success, data } = await axUpdateCustomField({
@@ -35,28 +42,16 @@ export default function CustomField({
     if (success) {
       setO(data);
       emit(ACTIVITY_UPDATED, observationId);
+      notification(t("OBSERVATION.CF_UPDATE_SUCCESS"), NotificationType.Success);
     }
     onClose();
-  };
-
-  const FieldData = () => {
-    switch (cf.fieldType) {
-      // TODO: add other input types
-
-      case "MULTIPLE CATEGORICAL":
-      case "SINGLE CATEGORICAL":
-        return <CategoricalField cf={cf} />;
-
-      default:
-        return <FieldText cf={cf} onUpdate={onUpdate} isOpen={isOpen} onClose={onClose} />;
-    }
   };
 
   return (
     <FormControl borderBottom="1px" borderColor="gray.300" p={4}>
       <FormLabel fontWeight="bold" htmlFor={cf.cfId.toString()}>
         {cf.cfName}
-        {canEdit && cf.fieldType === "FIELD TEXT" && (
+        {(adminOrAuthor(userId) || canEdit) && (
           <IconButton
             variant="link"
             variantColor="blue"
@@ -71,7 +66,14 @@ export default function CustomField({
           {cf.cfNotes}
         </FormHelperText>
       )}
-      <FieldData />
+      <FieldData
+        onClose={onClose}
+        cf={cf}
+        isOpen={isOpen}
+        onUpdate={onUpdate}
+        userGroupId={userGroupId}
+        observationId={observationId}
+      />
     </FormControl>
   );
 }

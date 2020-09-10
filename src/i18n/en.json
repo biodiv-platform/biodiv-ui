@@ -17,6 +17,8 @@
     "ADDED_A_FACT": "added fact",
     "AGREED_ON_SPECIES_NAME": "agreed on species name",
     "CUSTOM_FIELD_EDITED": "custom field edited",
+    "DOCUMENT_CREATED": "document created",
+    "DOCUMENT_TAG_UPDATED": "updated tags",
     "FEATURED": "featured in group",
     "FLAG_REMOVED": "flag removed",
     "FLAGGED": "flagged",
@@ -277,8 +279,16 @@
     "TITLE": "Password Reset"
   },
   "GROUP": {
+    "ABOUT": {
+      "CLOSED_GROUP": "Closed Group",
+      "OPEN_GROUP": "Open Group",
+      "TITLE": "About"
+    },
     "ADMIN": {
       "ERROR": "There was some error while updating Administrators",
+      "FOUNDER": "Founders",
+      "MODERATOR": "Moderators",
+      "NO_ACCESS": "to update custom fields or group rules please contact administrator",
       "TITLE": "Group Administrators",
       "UPDATED": "Group Administrators Updated Successfully"
     },
@@ -290,16 +300,19 @@
     },
     "CUSTOM_FIELD": {
       "ADD": {
-        "OPTIONS": "Add Options",
         "FAILURE": "Unable to add Custom Field",
+        "OPTIONS": "Add Options",
         "SUCCESS": "Custom Field added successfully"
       },
+      "ADD_OPTION": "Add Option",
       "ALLOW_PARTICIPANT": "Allow Participation",
       "BACK": "Back to List",
       "CREATE": "Create Custom Field",
       "DATA_TYPE": "Data Types",
+      "DEFAULT": "Default",
       "EXIST": "Custom Field already exists",
       "FIELD_TYPE": "Field Types",
+      "ICON": "Icon",
       "IS_MANDATORY": "Mandatory",
       "NAME": "Name",
       "NOTES": "Notes",
@@ -324,7 +337,8 @@
         "PARTICIPATION": "Participation"
       },
       "TITLE": "Custom Fields",
-      "UNITS": "Units"
+      "UNITS": "Units",
+      "VALUE": "Value"
     },
     "DELETE_MEMBER": "Are you sure you want to delete?",
     "DESCRIPTION": "Description",
@@ -346,6 +360,30 @@
       "REQUESTED": "Group join request sent"
     },
     "NAME": "Group Name",
+    "RULES": {
+      "ADD": {
+        "FAILURE": "Unable to add Usergroup rule",
+        "SUCCESS": "Created successfully",
+        "TITLE": "Create Group Rule"
+      },
+      "INPUT_TYPES": {
+        "DATE_RANGE": "Add Date range",
+        "SPATIAL": "Add Spatial Rule",
+        "TAXONOMY": "Add taxonomic Rule",
+        "TITLE": "Select Input Type",
+        "USER": "Aggregate observation of all group members"
+      },
+      "REMOVE": {
+        "FAILURE": "Unable to delete User Group Rule",
+        "SUCCESS": "User group Rule deleted successfully"
+      },
+      "TABLE": {
+        "ACTIONS": "Actions",
+        "RULE_TYPE": "Rule Type",
+        "VALUE": "Value"
+      },
+      "TITLE": "Group Rules"
+    },
     "SAVE": "Create Group",
     "SPATIAL_COVERGE": "Spatial Coverage",
     "SPECIES_COVERAGE": "Species Group Coverage",
@@ -523,6 +561,7 @@
       "STOP": "Stop Recording",
       "TITLE": "Audio Recorder"
     },
+    "CF_UPDATE_SUCCESS": "Successfully Updated Observation Custom Field",
     "COMMENTS": {
       "ADD_COMMENT": "Add a new comment",
       "POST": "Post Comment",

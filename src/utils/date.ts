@@ -19,3 +19,7 @@ export const formatDateReverse = (ts) => ts && dayjs(ts).format(FORMAT_DATE_REVE
 export const parseDateReverse = (ts) => ts && dayjs(ts, FORMAT_DATE_REVERSE).toDate();
 
 export const parseDate = (ts) => (ts ? dayjs(ts, FORMAT_DATE_TIMESTAMP).toDate() : new Date());
+
+export const parseDateRange = (ts) => (ts ? ts.map((i) => parseDate(i)) : []);
+
+export const formatDateRange = (ts) => (ts ? ts.map((i) => formatDate(i)) : []);

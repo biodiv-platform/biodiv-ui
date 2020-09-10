@@ -1,4 +1,5 @@
 import { Box, List, ListItem } from "@chakra-ui/core";
+import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
@@ -10,8 +11,14 @@ export default function SpatialCoverage({ documentCoverage }) {
     <Box mb={4} className="white-box">
       <BoxHeading>🌎 {t("DOCUMENT.COVERAGE.SPATIAL")}</BoxHeading>
       <List as="ol" styleType="decimal" p={4}>
-        {documentCoverage.map(({ placeName, id }) => (
-          <ListItem key={id}>{placeName}</ListItem>
+        {documentCoverage.map(({ placeName, id, landscapeIds }) => (
+          <ListItem key={id}>
+            {landscapeIds ? (
+              <BlueLink href={`/landscape/show/${landscapeIds}`}>{placeName}</BlueLink>
+            ) : (
+              placeName
+            )}
+          </ListItem>
         ))}
       </List>
     </Box>

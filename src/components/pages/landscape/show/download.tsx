@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import { axDownloadLandscape } from "@services/landscape.service";
 import { waitForAuth } from "@utils/auth";

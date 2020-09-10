@@ -183,6 +183,18 @@ export const axGetAllCustomFields = async (ctx) => {
   }
 };
 
+export const axGetAllCustomFieldOptionsById = async (observationId, userGroupId, cfId) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.USERGROUP}/v1/customfield/options/${observationId}/${userGroupId}/${cfId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: e };
+  }
+};
+
 export const axGetUserGroupCustomField = async (userGroupId, ctx) => {
   try {
     const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/customfield/group/${userGroupId}`, {
@@ -234,6 +246,45 @@ export const axReorderCustomField = async (userGroupId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.USERGROUP}/v1/customfield/reordering/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axGetUserGroupRules = async (userGroupId, ctx) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/show/${userGroupId}`,
+      { params: { ctx } }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: e };
+  }
+};
+
+export const axAddUserGroupRule = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/add/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axRemoveUserGroupRule = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.USERGROUP}/v1/group/filterRule/remove/${userGroupId}`,
       payload
     );
     return { success: true, data };
