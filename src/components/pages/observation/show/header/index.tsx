@@ -46,7 +46,7 @@ function Header({ o, following = false }: IHeaderProps) {
   const reprImage: any = useMemo(() => {
     if (o.observation.reprImageId) {
       const r = o.observationResource.find((i) => i.resource.id === o.observation.reprImageId);
-      return getObservationImage(r.resource.fileName, RESOURCE_SIZE.TWITTER);
+      return getObservationImage(r?.resource.fileName, RESOURCE_SIZE.TWITTER);
     }
   }, []);
 
