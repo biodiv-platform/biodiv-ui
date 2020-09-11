@@ -22,6 +22,7 @@
     "@hookform/resolvers": "^0.1.0",
     "@react-google-maps/api": "^1.9.12",
     "@rehooks/online-status": "^1.1.2",
+    "@sentry/react": "^5.23.0",
     "@tinymce/tinymce-react": "^3.6.0",
     "array-move": "^3.0.1",
     "axios": "^0.20.0",
