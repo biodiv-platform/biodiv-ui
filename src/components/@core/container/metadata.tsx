@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 
+import { version } from "../../../../package.json";
+
 export default function Metadata({ manifestURL }) {
   const router = useRouter();
   const { isLoggedIn, currentGroup, user } = useGlobalState();
@@ -20,7 +22,8 @@ export default function Metadata({ manifestURL }) {
   useEffect(() => {
     if (SITE_CONFIG.TOKENS.SENTRY_DSN) {
       Sentry.init({
-        dsn: SITE_CONFIG.TOKENS.SENTRY_DSN
+        dsn: SITE_CONFIG.TOKENS.SENTRY_DSN,
+        release: `biodiv-ui@${version}`
       });
       if (isLoggedIn) {
         Sentry.setUser({
