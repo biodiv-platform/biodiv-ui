@@ -15,7 +15,7 @@ export default function EditLinkButton({ label }) {
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
-    setCanEdit(adminOrAuthor(authorId) && id && !pathname.endsWith("edit"));
+    setCanEdit(authorId && adminOrAuthor(authorId) && id && !pathname.endsWith("edit"));
   }, []);
 
   return canEdit ? (

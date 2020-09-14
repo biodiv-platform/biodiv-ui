@@ -77,11 +77,9 @@ export const axUserGroupRemoveAdminMembers = async (userGroupId, userId) => {
  * @param {*} groupId
  * @returns
  */
-export const axGetGroupEditInfoByGroupId = async (groupId, ctx) => {
+export const axGetGroupEditInfoByGroupId = async (groupId) => {
   try {
-    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`, {
-      params: { ctx }
-    });
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -89,17 +87,13 @@ export const axGetGroupEditInfoByGroupId = async (groupId, ctx) => {
   }
 };
 
-export const axGetGroupAdministratorsByGroupId = async (groupId, ctx) => {
+export const axGetGroupAdministratorsByGroupId = async (groupId) => {
   try {
-    const { data } = await http.get(
-      `${ENDPOINT.USERGROUP}/v1/group/adminstration/members/${groupId}`,
-      {
-        params: { ctx }
-      }
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.USERGROUP}/v1/group/adminstration/members/${groupId}`
     );
     return { success: true, data };
   } catch (e) {
-    console.error(e);
     return { success: false, data: {} };
   }
 };
@@ -146,11 +140,11 @@ export const axVerifyRequest = async (token) => {
   }
 };
 
-export const axCheckUserGroupMember = async (userGroupId, userId) => {
+export const axCheckUserGroupMember = async (userGroupId, userId, ctx) => {
   try {
     if (userGroupId && userId) {
-      const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/groupMember`, {
-        params: { userGroupId, userId }
+      const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/member/${userGroupId}`, {
+        params: { ctx }
       });
       return { success: true, data };
     }

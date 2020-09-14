@@ -1,6 +1,5 @@
-import { authorizedPageSSR, throwUnauthorized } from "@components/auth/auth-redirect";
+import {  throwUnauthorized } from "@components/auth/auth-redirect";
 import AboutGroupComponent from "@components/pages/group/about";
-import { Role } from "@interfaces/custom";
 import { axGetspeciesGroups } from "@services/observation.service";
 import {
   axGetGroupAdministratorsByGroupId,
@@ -15,7 +14,6 @@ const GroupEditPage = (props) => <AboutGroupComponent {...props} />;
 
 GroupEditPage.getInitialProps = async (ctx) => {
   // Will check if user is logged in or redirect
-  authorizedPageSSR([Role.Any], ctx, true);
 
   const aReq = absoluteUrl(ctx.req);
 
@@ -25,8 +23,8 @@ GroupEditPage.getInitialProps = async (ctx) => {
   const { currentGroup } = await axGroupList(aReq.href);
 
   // This can throw error if user is not authorized
-  const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id, ctx);
-  const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id, ctx);
+  const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id);
+  const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id);
   if (s1 && s2) {
     return {
       habitats: habitatList,

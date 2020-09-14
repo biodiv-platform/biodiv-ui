@@ -1,6 +1,6 @@
 import { Box, Heading } from "@chakra-ui/core";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
-import React, { useMemo } from "react";
+import React from "react";
 
 export default function MapDrawView({ neLongitude, neLatitude, swLatitude, swLongitude, title }) {
   const coverage = {

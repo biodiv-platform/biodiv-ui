@@ -379,6 +379,8 @@
       },
       "TABLE": {
         "ACTIONS": "Actions",
+        "READ_LESS": "Read Less",
+        "READ_MORE": "Read More",
         "RULE_TYPE": "Rule Type",
         "VALUE": "Value"
       },
@@ -392,6 +394,7 @@
     "UPDATE_ADMIN": "Update Administrators"
   },
   "HEADER": {
+    "LOGGED_USER_ONLY": "Please login to join the group",
     "MEMBER_ONLY": "Please join the group to upload observations",
     "MENU_PRIMARY": {
       "CONTRIBUTE": {
