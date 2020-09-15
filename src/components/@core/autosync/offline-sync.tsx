@@ -11,6 +11,7 @@ import {
   SYNC_SINGLE_OBSERVATION_ERROR
 } from "@static/events";
 import { STORE } from "@static/observation-create";
+import { getMyUploadsThumbnail } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
 import { emit, useListener } from "react-gbus";
@@ -47,7 +48,7 @@ export default function OfflineSync() {
     getByID: getObservation
   } = useIndexedDBStore<IDBPendingObservation>(STORE.PENDING_OBSERVATIONS);
 
-  const { currentGroup } = useGlobalState();
+  const { currentGroup, user } = useGlobalState();
 
   const trySyncSingleObservation = async ({ observation, instant, id = -1 }) => {
     let idbID = id;
@@ -122,7 +123,9 @@ export default function OfflineSync() {
       poList.map(({ data, id }) => ({
         data,
         id,
-        thumb: URL.createObjectURL(data?.resources?.[0]?.blob)
+        thumb:
+          getMyUploadsThumbnail(data?.resource?.[0].path, user.id) ||
+          URL.createObjectURL(data?.resources?.[0]?.blob)
       }))
     );
     const poIds = poList.map((o) => o.id);
