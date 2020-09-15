@@ -11,7 +11,7 @@ const GroupRulesRow = ({ itemDetails, onDelete }) => {
   return (
     <tr>
       <td>{name}</td>
-      <td>{name === "spatialRule" ? <ReadMore value={value} /> : name}</td>
+      <td>{name === "spatialRule" ? <ReadMore value={value} /> : value}</td>
       <td>
         <Button onClick={onDelete} variant="link" variantColor="red" leftIcon="delete" ml={2}>
           {t("DELETE")}

@@ -1,10 +1,10 @@
-import {  throwUnauthorized } from "@components/auth/auth-redirect";
+import { throwUnauthorized } from "@components/auth/auth-redirect";
 import AboutGroupComponent from "@components/pages/group/about";
 import { axGetspeciesGroups } from "@services/observation.service";
 import {
   axGetGroupAdministratorsByGroupId,
-  axGetGroupEditInfoByGroupId,
-  axGroupList
+  axGroupList,
+  axGetUserGroupById
 } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
@@ -18,16 +18,16 @@ GroupEditPage.getInitialProps = async (ctx) => {
   const aReq = absoluteUrl(ctx.req);
 
   const { data: speciesGroups } = await axGetspeciesGroups();
-  const { data: habitatList } = await axGetAllHabitat();
+  const { data: habitats } = await axGetAllHabitat();
 
   const { currentGroup } = await axGroupList(aReq.href);
 
   // This can throw error if user is not authorized
-  const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id);
+  const { success: s1, data: groupInfo } = await axGetUserGroupById(currentGroup.id);
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id);
   if (s1 && s2) {
     return {
-      habitats: habitatList,
+      habitats,
       speciesGroups,
       groupInfo: { ...groupInfo, icon: groupInfo.icon || "default" },
       userGroupId: currentGroup.id,

@@ -29,7 +29,7 @@ GroupEditPage.getInitialProps = async (ctx) => {
 
   // This can throw error if user is not authorized
   const { data: allCustomField } = await axGetAllCustomFields(ctx);
-  const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id);
+  const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id,ctx);
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id);
   const { success: s4, data: groupRules } = await axGetUserGroupRules(currentGroup.id, ctx);
   const { success: s3, data: customFieldList } = await axGetUserGroupCustomField(

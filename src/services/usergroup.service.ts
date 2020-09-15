@@ -12,6 +12,17 @@ export const axGetUserGroupList = async () => {
   }
 };
 
+export const axGetUserGroupById = async (userGroupId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/${userGroupId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+
 export const axGroupList = async (url) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/all`);
@@ -77,9 +88,11 @@ export const axUserGroupRemoveAdminMembers = async (userGroupId, userId) => {
  * @param {*} groupId
  * @returns
  */
-export const axGetGroupEditInfoByGroupId = async (groupId) => {
+export const axGetGroupEditInfoByGroupId = async (groupId, ctx) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`);
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/edit/${groupId}`, {
+      params: { ctx }
+    });
     return { success: true, data };
   } catch (e) {
     console.error(e);
