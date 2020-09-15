@@ -9,6 +9,8 @@ const Checkbox = ({ value, label, icon, ...props }) => (
     <VH as="input" type="checkbox" {...props} value={value} />
     <Flex alignItems="center" h="2rem" overflow="hidden" title={label}>
       <Image
+        loading="lazy"
+        ignoreFallback={true}
         size="2rem"
         mr={2}
         objectFit="contain"

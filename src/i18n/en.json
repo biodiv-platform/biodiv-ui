@@ -681,8 +681,10 @@
     "SUCCESS": "Created successfully",
     "SUGGEST": "Suggest",
     "SYNC": {
-      "CONTENT": "Syncing ${current} out of ${total}",
-      "TITLE": "Uploading Pending Observations"
+      "DONE": "Done",
+      "FAILED": "Failed",
+      "TITLE": "Pending Observation(s)",
+      "UPLOADING": "Uploading"
     },
     "SYNONYM": "Synonym",
     "TAGS": "Tags",
