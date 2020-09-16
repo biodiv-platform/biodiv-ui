@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { RecoIbp } from "@interfaces/observation";
-import EmblaCarouselReact from "embla-carousel-react";
+import { useEmblaCarousel } from "embla-carousel/react";
 import React, { useEffect, useState } from "react";
 
 import CarouselNavigation from "./navigation";
@@ -21,6 +21,7 @@ const CarouselContainer = styled.div`
   border-radius: 0.25rem;
   padding-top: 1.5rem;
   margin-bottom: 1rem;
+  overflow: hidden;
 
   .is-draggable {
     cursor: grab;
@@ -32,17 +33,17 @@ const CarouselContainer = styled.div`
 `;
 
 function CarouselMain({ resources = [], reco, speciesGroup, observationId }: CarouselMainProps) {
-  const [carousel, setCarousel] = useState(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [carouselIndex, setCarouselIndex] = useState(0);
   const alt = `${reco?.commonName || ""} - ${reco?.scientificName || ""}`;
 
   useEffect(() => {
-    if (carousel) {
-      carousel.on("select", () => {
-        setCarouselIndex(carousel.selectedScrollSnap());
+    if (emblaApi) {
+      emblaApi.on("settle", () => {
+        setCarouselIndex(emblaApi.selectedScrollSnap());
       });
     }
-  }, [carousel]);
+  }, [emblaApi]);
 
   return (
     <CarouselContainer>
@@ -50,11 +51,11 @@ function CarouselMain({ resources = [], reco, speciesGroup, observationId }: Car
         observationId={observationId}
         currentResource={resources[carouselIndex]}
       />
-      <EmblaCarouselReact options={{ loop: true }} emblaRef={setCarousel}>
+      <div ref={emblaRef}>
         <CarouselSlides resources={resources} alt={alt} speciesGroup={speciesGroup} />
-      </EmblaCarouselReact>
-      <CarouselNavigation carousel={carousel} resourcesLength={resources.length} />
-      <CarouselThumb resources={resources} carousel={carousel} carouselIndex={carouselIndex} />
+      </div>
+      <CarouselNavigation carousel={emblaApi} resourcesLength={resources.length} />
+      <CarouselThumb resources={resources} carousel={emblaApi} carouselIndex={carouselIndex} />
     </CarouselContainer>
   );
 }
