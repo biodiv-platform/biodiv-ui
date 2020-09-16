@@ -1,6 +1,7 @@
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/useGlobalState";
+import * as Sentry from "@sentry/react";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
 import { subscribeToPushNotification } from "@utils/user";
@@ -10,13 +11,28 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 
+import { version } from "../../../../package.json";
+
 export default function Metadata({ manifestURL }) {
   const router = useRouter();
-  const { isLoggedIn, currentGroup } = useGlobalState();
+  const { isLoggedIn, currentGroup, user } = useGlobalState();
   const canonical = SITE_CONFIG.SITE.URL + router.asPath;
   const { locale } = useTranslation();
 
   useEffect(() => {
+    if (SITE_CONFIG.TOKENS.SENTRY_DSN) {
+      Sentry.init({
+        dsn: SITE_CONFIG.TOKENS.SENTRY_DSN,
+        release: `biodiv-ui@${version}`
+      });
+      if (isLoggedIn) {
+        Sentry.setUser({
+          id: user.id.toString(),
+          email: user.email,
+          username: user.name
+        });
+      }
+    }
     if (isBrowser && SITE_CONFIG.TRACKING.ENABLED) {
       ReactGA.initialize(SITE_CONFIG.TRACKING.GA_ID);
       removeCache(CACHE_WHITELIST);
