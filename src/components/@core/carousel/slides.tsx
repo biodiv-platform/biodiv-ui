@@ -11,7 +11,7 @@ import {
 } from "@utils/media";
 import React from "react";
 
-const s = getFallbackSpinner();
+const fallbackSpinner = getFallbackSpinner();
 
 const CarouselBox = styled.div`
   display: flex;
@@ -53,11 +53,11 @@ function CarouselSlides({ resources, alt, speciesGroup }) {
       case ResourceType.Image:
         return (
           <Link target="_blank" href={getObservationRAW(resource.fileName)}>
-            <img
+            <Image
               className="carousel--image"
               loading="lazy"
               src={getObservationImage(resource.fileName, RESOURCE_SIZE.PREVIEW)}
-              placeholder={s}
+              placeholder={fallbackSpinner}
               alt={resource.description || alt || resource.fileName}
             />
             {resource.description && (

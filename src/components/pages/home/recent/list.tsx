@@ -1,11 +1,10 @@
-import { AspectRatioBox, Box } from "@chakra-ui/core";
+import { AspectRatioBox, Box, Image } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/useGlobalState";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
-import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getObservationThumbnail } from "@utils/media";
 import React, { useEffect, useState } from "react";
 
@@ -62,15 +61,14 @@ export default function RecentObservationList() {
             prefixGroup={true}
             key={index}
           >
-            <a aria-label={o?.recoIbp?.scientificName}>
+            <a aria-label={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}>
               <AspectRatioBox maxW="full" ratio={1} borderRadius="lg" overflow="hidden">
-                <img
+                <Image
                   className="o-image"
                   loading="lazy"
+                  ignoreFallback={true}
                   src={getObservationThumbnail(o?.thumbnail, 135)}
-                  alt={o?.recoIbp?.scientificName}
-                  title={o?.recoIbp?.scientificName}
-                  placeholder={OBSERVATION_FALLBACK.DEFAULT}
+                  alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
                 />
               </AspectRatioBox>
             </a>

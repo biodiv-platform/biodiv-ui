@@ -5,9 +5,9 @@ import styled from "@emotion/styled";
 import { GallerySlider } from "@interfaces/utility";
 import { HERO_FALLBACK } from "@static/home";
 import { getObservationThumbnail, getUserImage } from "@utils/media";
-import EmblaCarouselReact from "embla-carousel-react";
+import { useEmblaCarousel } from "embla-carousel/react";
 import { Mq } from "mq-styled-components";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import Indicators from "./indicators";
 
@@ -66,25 +66,27 @@ interface ISlidesProps {
 }
 
 export default function Slides({ featured, slideIndex, onChange }: ISlidesProps) {
-  const [embla, setEmbla] = useState(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const { t } = useTranslation();
 
   useEffect(() => {
-    embla &&
-      embla.on("settle", () => {
-        onChange(embla.selectedScrollSnap());
+    if (emblaApi) {
+      emblaApi.on("settle", () => {
+        onChange(emblaApi.selectedScrollSnap());
       });
-  }, [embla]);
+    }
+  }, [emblaApi]);
 
   return (
     <CarouselContainer>
-      <EmblaCarouselReact emblaRef={setEmbla} options={{ loop: true }}>
+      <div ref={emblaRef}>
         <div className="carousel">
           {featured.map((o) => (
             <LocalLink key={o.id} href={`/observation/show/${o.observationId}`} prefixGroup={true}>
               <a>
                 <Image
                   objectFit="cover"
+                  loading="lazy"
                   src={getObservationThumbnail(o?.fileName, 500)}
                   alt={o.observationId?.toString()}
                   fallbackSrc={HERO_FALLBACK}
@@ -93,7 +95,7 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
             </LocalLink>
           ))}
         </div>
-      </EmblaCarouselReact>
+      </div>
       <div className="slide-content">
         <LocalLink href={`/user/show/${featured[slideIndex].authorId}`}>
           <Link>
@@ -114,7 +116,11 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
             </Flex>
           </Link>
         </LocalLink>
-        <Indicators size={featured.length} scrollTo={embla?.scrollTo} currentIndex={slideIndex} />
+        <Indicators
+          size={featured.length}
+          scrollTo={emblaApi?.scrollTo}
+          currentIndex={slideIndex}
+        />
       </div>
     </CarouselContainer>
   );
