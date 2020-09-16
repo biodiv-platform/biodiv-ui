@@ -7,7 +7,8 @@ import { version } from "../../../package.json";
 const getIcon = (p) => ({
   src: compiledMessage(RESOURCE_SIZE.MANIFEST, p).replace("/crop/", "/logo/"),
   sizes: `${p.size}x${p.size}`,
-  type: "image/png"
+  type: "image/png",
+  purpose: "any maskable"
 });
 
 export default (req, res) => {

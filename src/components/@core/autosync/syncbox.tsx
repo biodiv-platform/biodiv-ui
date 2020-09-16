@@ -1,10 +1,11 @@
-import { Flex, IconButton, useDisclosure } from "@chakra-ui/core";
+import { Box, IconButton, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
 import { SyncInfo } from "./offline-sync";
+import SyncRow from "./sync-row";
 
 const SyncBoxContainer = styled.div`
   position: fixed;
@@ -26,14 +27,11 @@ const SyncBoxContainer = styled.div`
     overflow: hidden;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 
-    > div {
-      padding: 0.9rem 1rem;
-    }
-
     .header {
       background: var(--gray-800);
       color: white;
       display: flex;
+      padding: 0.9rem 1rem;
 
       .text {
         overflow: hidden;
@@ -47,17 +45,25 @@ const SyncBoxContainer = styled.div`
     }
 
     .content {
-      max-height: 12rem;
+      max-height: 14rem;
+      overflow: auto;
     }
   }
 `;
 
 interface SyncBoxProps {
   syncInfo: SyncInfo;
+  pendingObservations;
+  deleteObservation;
   onClose;
 }
 
-export default function SyncBox({ syncInfo, onClose }: SyncBoxProps) {
+export default function SyncBox({
+  syncInfo,
+  pendingObservations,
+  deleteObservation,
+  onClose
+}: SyncBoxProps) {
   const { isOpen, onToggle } = useDisclosure(true);
   const { t } = useTranslation();
 
@@ -86,9 +92,16 @@ export default function SyncBox({ syncInfo, onClose }: SyncBoxProps) {
           </div>
         </div>
         {isOpen && (
-          <Flex className="content fade" alignItems="center">
-            {t("OBSERVATION.SYNC.CONTENT", syncInfo)}
-          </Flex>
+          <Box className="content fade" alignItems="center">
+            {pendingObservations.map((pendingObservation) => (
+              <SyncRow
+                key={pendingObservation.id}
+                pendingObservation={pendingObservation}
+                syncInfo={syncInfo}
+                deleteObservation={deleteObservation}
+              />
+            ))}
+          </Box>
         )}
       </div>
     </SyncBoxContainer>

@@ -14,14 +14,17 @@ import { STORE } from "@static/observation-create";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
 import { emit, useListener } from "react-gbus";
+import { useImmer } from "use-immer";
 import { useIndexedDBStore } from "use-indexeddb";
 
 import { useLocalRouter } from "../local-link";
 import SyncBox from "./syncbox";
 
 export interface SyncInfo {
-  total?: number;
-  current?: number;
+  current: number;
+  failed: any[];
+  successful: any[];
+  successMap: Record<string, unknown>;
 }
 
 export default function OfflineSync() {
@@ -29,14 +32,21 @@ export default function OfflineSync() {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onOpen, onClose } = useDisclosure(true);
-  const [syncInfo, setSyncInfo] = useState<SyncInfo>();
+  const [pendingObservations, setPendingObservations] = useState([]);
+  const [syncInfo, setSyncInfo] = useImmer<SyncInfo>({
+    current: null,
+    failed: [],
+    successful: [],
+    successMap: {}
+  });
   const { update, deleteByID: deleteResource } = useIndexedDBStore<IDBObservationAsset>(
     STORE.ASSETS
   );
   const {
     add: addObservation,
     getAll: getAllObservations,
-    deleteByID: deleteObservation
+    deleteByID: deleteObservation,
+    getByID: getObservation
   } = useIndexedDBStore<IDBPendingObservation>(STORE.PENDING_OBSERVATIONS);
 
   const { currentGroup } = useGlobalState();
@@ -50,6 +60,10 @@ export default function OfflineSync() {
       } catch (e) {
         console.error("addObservationIDB", e);
       }
+    } else {
+      setSyncInfo((_draft) => {
+        _draft.current = idbID;
+      });
     }
 
     try {
@@ -82,12 +96,23 @@ export default function OfflineSync() {
           });
           emit(SYNC_SINGLE_OBSERVATION_DONE);
           router.push(`/observation/show/${data.observation.id}`, true);
+        } else {
+          setSyncInfo((_draft) => {
+            _draft.successMap[idbID] = data.observation.id;
+            _draft.successful.push(idbID);
+          });
         }
       } else {
         emit(SYNC_SINGLE_OBSERVATION_ERROR);
+        setSyncInfo((_draft) => {
+          _draft.failed.push(idbID);
+        });
       }
     } catch (e) {
-      emit(SYNC_SINGLE_OBSERVATION);
+      emit(SYNC_SINGLE_OBSERVATION_ERROR);
+      setSyncInfo((_draft) => {
+        _draft.failed.push(idbID);
+      });
       console.error(e);
     }
   };
@@ -95,21 +120,26 @@ export default function OfflineSync() {
   useListener(trySyncSingleObservation, [SYNC_SINGLE_OBSERVATION]);
 
   const trySyncPendingObservations = async () => {
-    const pendingObservations = await getAllObservations();
-    const total = pendingObservations.length;
-    setSyncInfo({ total, current: 0 });
+    const poList = await getAllObservations();
+    setPendingObservations(poList);
+    const poIds = poList.map((o) => o.id);
+
     onOpen();
 
-    pendingObservations.map(({ data: { observation } }, current) => {
-      setSyncInfo({ total, current: current + 1 });
-      trySyncSingleObservation({
-        observation,
-        instant: false,
-        id: observation.id
-      });
-    });
+    for (const poId of poIds) {
+      const po = await getObservation(poId);
+      if (po) {
+        trySyncSingleObservation({
+          observation: po.data,
+          instant: false,
+          id: po?.id
+        });
+      }
+    }
 
-    onClose();
+    setSyncInfo((_draft) => {
+      _draft.current = null;
+    });
   };
 
   useEffect(() => {
@@ -118,9 +148,21 @@ export default function OfflineSync() {
     }
   }, [isOnline]);
 
+  const handleOnDeleteObservation = (poId) => {
+    deleteObservation(poId);
+    setPendingObservations(pendingObservations.filter(({ id }) => id !== poId));
+  };
+
   return (
     <div>
-      {isOpen && syncInfo && <SyncBox syncInfo={syncInfo} onClose={onClose} />}
+      {isOpen && pendingObservations.length > 0 && (
+        <SyncBox
+          syncInfo={syncInfo}
+          pendingObservations={pendingObservations}
+          deleteObservation={handleOnDeleteObservation}
+          onClose={onClose}
+        />
+      )}
       {!isOnline && (
         <Alert status="error" variant="solid" display="flex" justifyContent="center">
           <AlertIcon />

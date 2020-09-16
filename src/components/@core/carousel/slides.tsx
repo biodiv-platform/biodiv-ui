@@ -10,7 +10,6 @@ import {
   getYouTubeEmbed
 } from "@utils/media";
 import React from "react";
-import LazyImage from "react-cool-img";
 
 const s = getFallbackSpinner();
 
@@ -54,7 +53,7 @@ function CarouselSlides({ resources, alt, speciesGroup }) {
       case ResourceType.Image:
         return (
           <Link target="_blank" href={getObservationRAW(resource.fileName)}>
-            <LazyImage
+            <img
               className="carousel--image"
               loading="lazy"
               src={getObservationImage(resource.fileName, RESOURCE_SIZE.PREVIEW)}

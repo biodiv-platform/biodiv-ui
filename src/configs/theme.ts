@@ -1,11 +1,11 @@
-import { theme } from "@chakra-ui/core";
+import { DefaultTheme, theme } from "@chakra-ui/core";
 
 import customIcons from "./custom-icons";
 
 const defaultFontFamily =
   "Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji";
 
-export const customTheme: any = {
+export const customTheme: DefaultTheme = {
   ...theme,
   fontWeights: {
     ...theme.fontWeights,

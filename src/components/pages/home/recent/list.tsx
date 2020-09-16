@@ -8,7 +8,6 @@ import { axGetListData } from "@services/observation.service";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getObservationThumbnail } from "@utils/media";
 import React, { useEffect, useState } from "react";
-import LazyImage from "react-cool-img";
 
 const OBSERVATIONS_SIZE = 8;
 
@@ -63,10 +62,10 @@ export default function RecentObservationList() {
             prefixGroup={true}
             key={index}
           >
-            <a>
+            <a aria-label={o?.recoIbp?.scientificName}>
               <AspectRatioBox maxW="full" ratio={1} borderRadius="lg" overflow="hidden">
-                <LazyImage
-                  className="o-image lol"
+                <img
+                  className="o-image"
                   loading="lazy"
                   src={getObservationThumbnail(o?.thumbnail, 135)}
                   alt={o?.recoIbp?.scientificName}
