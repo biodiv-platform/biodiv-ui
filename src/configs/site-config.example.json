@@ -63,9 +63,12 @@
   },
   "LANG": {
     "DEFAULT": "en",
+    "DEFAULT_ID": 205,
+    "SWITCHER": true,
     "LIST": {
-      "en": "English",
-      "fr": "français"
+      "en": { "NAME": "English", "ID": 205 },
+      "fr": { "NAME": "Français", "ID": 219 },
+      "mg": { "NAME": "Malagasy", "ID": 365 }
     }
   },
   "LEADERBOARD": {
@@ -109,11 +112,12 @@
     "GMAP": "AIzax",
     "MAPBOX": "pk.x",
     "OAUTH_GOOGLE": "x.apps.googleusercontent.com",
-    "RECAPTCHA": "x"
+    "RECAPTCHA": "x",
+    "SENTRY_DSN": null
   },
   "TRACKING": {
-    "ENABLED": false,
-    "GA_ID": "UA-X"
+    "ENABLED": true,
+    "GA_ID": "UA-x"
   },
   "USERGROUP": {
     "ACTIVE": true
