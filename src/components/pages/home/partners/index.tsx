@@ -5,7 +5,7 @@ import partnersData from "@static/partners";
 import React from "react";
 import LazyLoad from "react-lazyload";
 
-const PartnerImage: any = styled.img`
+const PartnerImage = styled.img`
   width: 100%;
   border-radius: 0.5rem;
   border: 2px solid var(--gray-200);

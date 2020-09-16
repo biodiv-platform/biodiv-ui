@@ -5,8 +5,6 @@ import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
 import React from "react";
 
-const MenuButtonA: any = MenuButton;
-
 export default function DownloadLandscape({ id, title }) {
   const { t } = useTranslation();
 
@@ -21,8 +19,9 @@ export default function DownloadLandscape({ id, title }) {
   return (
     <Box mb={6} mr={2} position="absolute" zIndex={4} bottom={0} right={0}>
       <Menu>
-        <MenuButtonA
+        <MenuButton
           as={Button}
+          // @ts-ignore
           rightIcon="chevron-up"
           leftIcon="download"
           bg="white"
@@ -31,7 +30,7 @@ export default function DownloadLandscape({ id, title }) {
           variantColor="blue"
         >
           {t("LANDSCAPE.DOWNLOAD_MAP")}
-        </MenuButtonA>
+        </MenuButton>
         <MenuList placement="top-end">
           <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
           <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>

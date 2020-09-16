@@ -12,8 +12,6 @@ export interface ITraitInputProps {
   defaultValue?;
 }
 
-const VH: any = VisuallyHidden;
-
 const CustomCheckbox = ({ value, label, icon, type, ...props }) => (
   <label
     role="checkbox"
@@ -21,7 +19,8 @@ const CustomCheckbox = ({ value, label, icon, type, ...props }) => (
     style={{ padding: "0.25rem" }}
     aria-checked={props.isChecked}
   >
-    <VH as="input" type="checkbox" {...props} value={value} />
+    {/* @ts-ignore */}
+    <VisuallyHidden as="input" type="checkbox" value={value} {...props} />
     <Tooltip title={icon} placement="top" hasArrow={true}>
       <Image size="3rem" ignoreFallback={true} src={getLocalIcon(icon, type)} alt={icon} />
     </Tooltip>

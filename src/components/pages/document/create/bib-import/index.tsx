@@ -3,8 +3,6 @@ import useTranslation from "@configs/i18n/useTranslation";
 import { axParseBib } from "@services/document.service";
 import React from "react";
 
-const VH: any = VisuallyHidden;
-
 export default function BibImportButton({ hForm }) {
   const { t } = useTranslation();
 
@@ -31,7 +29,14 @@ export default function BibImportButton({ hForm }) {
       variantColor="blue"
       borderRadius="3rem"
     >
-      <VH as="input" type="file" id="bibtex-file" accept=".bib" onChange={handleOnBibUpload} />
+      <VisuallyHidden
+        // @ts-ignore
+        type="file"
+        as="input"
+        id="bibtex-file"
+        accept=".bib"
+        onChange={handleOnBibUpload}
+      />
       {t("DOCUMENT.IMPORT_BIBTEX")}
     </Button>
   );

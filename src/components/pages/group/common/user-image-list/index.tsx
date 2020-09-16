@@ -1,5 +1,4 @@
-import { Avatar, Box, Divider, Heading, Link, Stack } from "@chakra-ui/core";
-import Tooltip from "@components/@core/tooltip";
+import { Avatar, Box, Heading, Link, Stack } from "@chakra-ui/core";
 import { getUserImage } from "@utils/media";
 import React from "react";
 

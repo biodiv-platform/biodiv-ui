@@ -2,43 +2,38 @@ import { Box } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "@configs/i18n/useTranslation";
 import MONTHS from "@static/months";
-import dynamic from "next/dynamic";
 import React from "react";
-import LazyLoad from "react-lazyload";
-
-const Chart: any = dynamic(() => import("react-charts").then((d) => d.Chart), { ssr: false });
+import { VictoryAxis, VictoryBar, VictoryChart } from "victory";
 
 export default function Temporal({ data }) {
   const { t } = useTranslation();
 
   const temporalData = React.useMemo(
-    () => [
-      {
-        label: t("OBSERVATION.TEMPORAL.OBSERVATIONS"),
-        data: MONTHS.map((name) => [name, data[name] || 0])
-      }
-    ],
+    () => MONTHS.map((name) => ({ x: name, y: data[name] || 0 })).reverse(),
     []
   );
+
+  const getLabel = ({ datum }) => `${datum.y} ${t("OBSERVATION.TEMPORAL.OBSERVATIONS")}`;
 
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📊 {t("OBSERVATION.TEMPORAL.TITLE")}</BoxHeading>
-      <LazyLoad height={160} once={true}>
-        <Box p={4} className="fade" w="full" h="160px">
-          <Chart
+      <Box px={4} className="fade" w="full">
+        <VictoryChart
+          domainPadding={{ x: 30 }}
+          height={380}
+          horizontal={true}
+          padding={{ left: 80, right: 110 }}
+        >
+          <VictoryBar
+            style={{ data: { fill: "var(--blue-500)" } }}
+            barRatio={0.9}
+            labels={getLabel}
             data={temporalData}
-            series={{
-              type: "bar"
-            }}
-            tooltip={true}
-            axes={[
-              { primary: true, type: "ordinal", position: "bottom" },
-              { position: "left", type: "linear", stacked: true }
-            ]}
           />
-        </Box>
-      </LazyLoad>
+          <VictoryAxis />
+        </VictoryChart>
+      </Box>
     </Box>
   );
 }

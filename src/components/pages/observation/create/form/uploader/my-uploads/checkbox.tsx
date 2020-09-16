@@ -9,8 +9,6 @@ import { getImageThumb } from "../observation-resources/resource-card";
 import StatusIcon from "../statusicon";
 import useObservationCreate from "../use-observation-resources";
 
-const VH: any = VisuallyHidden;
-
 const ImageBox = styled.div`
   display: flex;
   position: absolute;
@@ -50,10 +48,11 @@ const Checkbox = ({ asset, ...props }) => {
 
   return (
     <label role="checkbox" className="custom-checkbox fade" aria-checked={props.isChecked}>
-      <VH
+      <VisuallyHidden
         as="input"
         type="checkbox"
         {...props}
+        // @ts-ignore
         checked={props.isChecked}
         onChange={handleOnChange}
         value={asset.hashKey}

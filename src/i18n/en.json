@@ -684,7 +684,8 @@
       "DONE": "Done",
       "FAILED": "Failed",
       "TITLE": "Pending Observation(s)",
-      "UPLOADING": "Uploading"
+      "UPLOADING": "Uploading",
+      "VIEW": "View"
     },
     "SYNONYM": "Synonym",
     "TAGS": "Tags",

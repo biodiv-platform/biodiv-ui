@@ -8,7 +8,6 @@ import { axGetListData } from "@services/observation.service";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getObservationThumbnail } from "@utils/media";
 import React, { useEffect, useState } from "react";
-import LazyImage from "react-cool-img";
 
 const OBSERVATIONS_SIZE = 8;
 

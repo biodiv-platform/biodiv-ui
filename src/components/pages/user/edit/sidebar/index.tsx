@@ -8,8 +8,6 @@ import React, { useState } from "react";
 
 import { UserEditPageComponentProps } from "..";
 
-const VH: any = VisuallyHidden;
-
 export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
   const [userImage, setUserImage] = useState(getUserImage(user.profilePic, 400));
   const { t } = useTranslation();
@@ -41,8 +39,9 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
         </AspectRatioBox>
         <Box pl={{ base: 4, md: 0 }}>
           <Button type="button" as="label" cursor="pointer" w="full" variantColor="blue">
-            <VH
+            <VisuallyHidden
               as="input"
+              // @ts-ignore
               type="file"
               id="user-profile"
               accept="image/*"

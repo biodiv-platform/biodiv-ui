@@ -5,13 +5,12 @@ import React from "react";
 
 import SubMenu from "./sub-menu";
 
-const MB: any = MenuButton;
-
 const XLink = ({ children, label, onClose, to, params, isArrow }) =>
   isArrow ? (
-    <MB as={Link} data-label={label} params={params} role="button" tabIndex={0}>
+    // @ts-ignore
+    <MenuButton as={Link} data-label={label} params={params} role="button" tabIndex={0}>
       {children} <Icon name="chevron-down" mt={[1, 0]} float={["right", "none"]} />
-    </MB>
+    </MenuButton>
   ) : (
     <LocalLink href={to} params={params} prefixGroup={true}>
       <Link onClick={onClose}>{children}</Link>

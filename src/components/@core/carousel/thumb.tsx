@@ -4,7 +4,6 @@ import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getObservationImage, getYoutubeImage } from "@utils/media";
 import React from "react";
-import LazyImage from "react-cool-img";
 
 const ThumbBox = styled.div`
   height: 56px;
@@ -52,7 +51,7 @@ function CarouselThumb({ resources, carousel, carouselIndex }) {
     switch (resource.type) {
       case ResourceType.Image:
         return (
-          <LazyImage
+          <img
             loading="lazy"
             alt={resource.description || resource.fileName}
             src={getObservationImage(resource.fileName, RESOURCE_SIZE.THUMBNAIL)}
@@ -61,7 +60,8 @@ function CarouselThumb({ resources, carousel, carouselIndex }) {
 
       case ResourceType.Video:
         return resource?.url ? (
-          <LazyImage
+          <img
+            loading="lazy"
             alt={resource.description || resource.fileName}
             src={getYoutubeImage(resource.url, "default")}
           />

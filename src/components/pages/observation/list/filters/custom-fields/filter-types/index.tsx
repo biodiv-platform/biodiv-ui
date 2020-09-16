@@ -8,7 +8,7 @@ const CustomFieldTypes = ({ field }) => {
     case "MULTIPLE CATEGORICAL":
     case "SINGLE CATEGORICAL":
       return <CategoricalFilter field={field} />;
-      
+
     case "FIELD TEXT":
       return <TextFilter field={field} />;
 

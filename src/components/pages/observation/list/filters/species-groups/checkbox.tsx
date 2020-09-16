@@ -5,8 +5,6 @@ import { getSpeciesIcon } from "@utils/media";
 import { toHumanString } from "human-readable-numbers";
 import React from "react";
 
-const VH: any = VisuallyHidden;
-
 const CheckboxLabel = styled.label`
   cursor: pointer;
 
@@ -42,7 +40,14 @@ const Checkbox = ({ id, label, value, stat, ...props }) => (
   <CheckboxLabel role="checkbox">
     <Tooltip label={label} hasArrow={true} placement="top">
       <div className="custom-checkbox" aria-checked={props.isChecked}>
-        <VH as="input" type="checkbox" {...props} checked={props.isChecked} value={value} />
+        <VisuallyHidden
+          as="input"
+          type="checkbox"
+          {...props}
+          // @ts-ignore
+          checked={props.isChecked}
+          value={value}
+        />
         <Image
           size="2rem"
           mr={2}

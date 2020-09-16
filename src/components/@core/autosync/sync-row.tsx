@@ -1,7 +1,10 @@
-import { Badge, Button, Text } from "@chakra-ui/core";
+import { Badge, Button, Image, Text } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useMemo } from "react";
+
+import ExternalBlueLink from "../blue-link/external";
+import { SyncInfo } from "./offline-sync";
 
 const PendingObservationBox = styled.div`
   border-top: 1px solid var(--gray-200);
@@ -20,9 +23,20 @@ const PendingObservationBox = styled.div`
   }
 `;
 
-export default function SyncRow({ syncInfo, pendingObservation, deleteObservation }) {
+interface SyncRowProps {
+  syncInfo: SyncInfo;
+  pendingObservation;
+  deleteObservation;
+}
+
+export default function SyncRow({ syncInfo, pendingObservation, deleteObservation }: SyncRowProps) {
   const { t } = useTranslation();
-  const { data, thumb, id } = pendingObservation;
+  const { data, id } = pendingObservation;
+  const thumb = useMemo(
+    () =>
+      data?.resources?.[0]?.blob ? window.URL.createObjectURL(data?.resources?.[0]?.blob) : null,
+    []
+  );
 
   const title = `${
     data?.recoData?.taxonCommonName ||
@@ -38,7 +52,7 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
 
   return (
     <PendingObservationBox>
-      <img src={thumb} />
+      <Image bg="gray.200" src={thumb} />
       <div>
         <Text lineHeight="1rem" mb={1}>
           {title}
@@ -49,12 +63,24 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
         <small>{data?.reverseGeocoded}</small>
         <Button
           variantColor="red"
+          mr={2}
           isDisabled={isDone || isUploading}
           size="xs"
           onClick={handleOnDelte}
         >
           {t("DELETE")}
         </Button>
+        {isDone && (
+          <Button
+            as={ExternalBlueLink}
+            variantColor="blue"
+            size="xs"
+            // @ts-ignore
+            href={`/observation/show/${syncInfo.successMap[id]}`}
+          >
+            View
+          </Button>
+        )}
       </div>
     </PendingObservationBox>
   );

@@ -11,7 +11,6 @@ import {
   SYNC_SINGLE_OBSERVATION_ERROR
 } from "@static/events";
 import { STORE } from "@static/observation-create";
-import { getMyUploadsThumbnail } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
 import { emit, useListener } from "react-gbus";
@@ -25,6 +24,7 @@ export interface SyncInfo {
   current: number;
   failed: any[];
   successful: any[];
+  successMap: Record<string, unknown>;
 }
 
 export default function OfflineSync() {
@@ -36,7 +36,8 @@ export default function OfflineSync() {
   const [syncInfo, setSyncInfo] = useImmer<SyncInfo>({
     current: null,
     failed: [],
-    successful: []
+    successful: [],
+    successMap: {}
   });
   const { update, deleteByID: deleteResource } = useIndexedDBStore<IDBObservationAsset>(
     STORE.ASSETS
@@ -48,7 +49,7 @@ export default function OfflineSync() {
     getByID: getObservation
   } = useIndexedDBStore<IDBPendingObservation>(STORE.PENDING_OBSERVATIONS);
 
-  const { currentGroup, user } = useGlobalState();
+  const { currentGroup } = useGlobalState();
 
   const trySyncSingleObservation = async ({ observation, instant, id = -1 }) => {
     let idbID = id;
@@ -97,6 +98,7 @@ export default function OfflineSync() {
           router.push(`/observation/show/${data.observation.id}`, true);
         } else {
           setSyncInfo((_draft) => {
+            _draft.successMap[idbID] = data.observation.id;
             _draft.successful.push(idbID);
           });
         }
@@ -119,15 +121,7 @@ export default function OfflineSync() {
 
   const trySyncPendingObservations = async () => {
     const poList = await getAllObservations();
-    setPendingObservations(
-      poList.map(({ data, id }) => ({
-        data,
-        id,
-        thumb:
-          getMyUploadsThumbnail(data?.resource?.[0].path, user.id) ||
-          URL.createObjectURL(data?.resources?.[0]?.blob)
-      }))
-    );
+    setPendingObservations(poList);
     const poIds = poList.map((o) => o.id);
 
     onOpen();
