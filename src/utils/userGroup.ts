@@ -45,7 +45,7 @@ export const formatGroupRules = (rules) => {
   );
   //populate taxon rules array
   taxonomicRuleList?.forEach((item) => {
-    groupRules.push({ id: item.id, name: "taxonomicRule", value: item.id });
+    groupRules.push({ id: item.id, name: "taxonomicRule", value: item.taxonomyId });
   });
   //populate date rules array
   observedOnDateRule?.forEach((item) => {

@@ -17,8 +17,8 @@ interface GroupEditPageProps {
     description;
     name;
     allowUserToJoin;
-    speciesGroupId;
-    habitatId;
+    speciesGroupIds;
+    habitatIds;
     neLongitude;
     neLatitude;
     swLatitude;
@@ -40,8 +40,8 @@ export default function AboutGroupComponent({
     description,
     name,
     allowUserToJoin,
-    speciesGroupId,
-    habitatId,
+    speciesGroupIds,
+    habitatIds,
     neLongitude,
     neLatitude,
     swLatitude,
@@ -62,13 +62,13 @@ export default function AboutGroupComponent({
       <FilterIconsList
         title={t("GROUP.SPECIES_COVERAGE")}
         type="species"
-        filterIds={speciesGroupId}
+        filterIds={speciesGroupIds}
         filterList={speciesGroups}
       />
       <FilterIconsList
         title={t("GROUP.HABITATS_COVERED")}
         type="habitat"
-        filterIds={habitatId}
+        filterIds={habitatIds}
         filterList={habitats}
       />
       <MapDrawView
