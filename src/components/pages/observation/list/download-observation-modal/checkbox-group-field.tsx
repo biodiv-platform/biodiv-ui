@@ -1,4 +1,5 @@
-import { Checkbox, CheckboxGroup, FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/core";
+import { Checkbox, CheckboxGroup, FormControl, FormLabel } from "@chakra-ui/core";
+import ErrorMessage from "@components/form/common/error-message";
 import React, { useEffect, useMemo } from "react";
 import { UseFormMethods } from "react-hook-form";
 
@@ -45,7 +46,7 @@ const CheckboxGroupField = ({
           </Checkbox>
         ))}
       </CheckboxGroup>
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
     </FormControl>
   );
 };

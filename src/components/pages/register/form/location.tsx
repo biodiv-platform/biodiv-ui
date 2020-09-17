@@ -2,13 +2,13 @@ import {
   Box,
   Button,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
   InputRightElement,
   useDisclosure
 } from "@chakra-ui/core";
+import ErrorMessage from "@components/form/common/error-message";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { LoadScriptNext, StandaloneSearchBox } from "@react-google-maps/api";
@@ -117,9 +117,7 @@ const LocationPicker = ({ form }) => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <FormErrorMessage>
-              {form.errors[FK.location.name] && form.errors[FK.location.name]["message"]}
-            </FormErrorMessage>
+            <ErrorMessage name={FK.location.name} errors={form.errors} />
           </FormControl>
         </Box>
         <LocationMap
