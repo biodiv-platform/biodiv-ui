@@ -8,15 +8,14 @@ import React, { useEffect, useState } from "react";
 
 export default function EditLinkButton({ label }) {
   const {
-    currentGroup: { webAddress, id },
-    user: { id: authorId }
+    currentGroup: { webAddress, id }
   } = useGlobalState();
   const { pathname } = useRouter();
 
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
-    setCanEdit(authorId && hasAccess([Role.Admin]) && id && !pathname.endsWith("edit"));
+    setCanEdit(hasAccess([Role.Admin]) && id && !pathname.endsWith("edit"));
   }, []);
 
   return canEdit ? (

@@ -33,13 +33,13 @@ export default function JoinUserGroup() {
     setLoading(false);
   };
 
-  return isCurrentGroupMember ? null : (
+  return isCurrentGroupMember || !isLoggedIn ? null : (
     <Button
       className="join-usergroup"
       size="sm"
       isLoading={isLoading}
       variantColor="blue"
-      onClick={isLoggedIn ? addUserGroupMember : () => alert(t("HEADER.LOGGED_USER_ONLY"))}
+      onClick={addUserGroupMember}
       leftIcon="add"
     >
       {t("GROUP.JOIN")}

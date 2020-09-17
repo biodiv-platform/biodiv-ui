@@ -22,7 +22,6 @@ export const axGetUserGroupById = async (userGroupId) => {
   }
 };
 
-
 export const axGroupList = async (url) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/all`);

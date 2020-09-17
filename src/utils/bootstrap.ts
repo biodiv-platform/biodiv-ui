@@ -46,7 +46,7 @@ export const processedInitialProps = async ({ Component, ctx }: AppContext) => {
   const userId = nookies?.[TOKEN.USER]?.id;
 
   const { currentGroup, groups } = await axGroupList(aReq.href);
-  const { data: isCurrentGroupMember } = await axCheckUserGroupMember(currentGroup.id, userId,ctx);
+  const { data: isCurrentGroupMember } = await axCheckUserGroupMember(currentGroup.id, userId, ctx);
   const manifestURL = getManifestURL(currentGroup);
 
   const { data: rawPages } = await axGetPages(currentGroup?.id);
