@@ -1,8 +1,9 @@
-import { FormControl, FormErrorMessage, FormHelperText } from "@chakra-ui/core";
+import { FormControl, FormHelperText } from "@chakra-ui/core";
+import ErrorMessage from "@components/form/common/error-message";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
-import { ManageDocumentContextProvider } from "./document-upload-provider";
 
+import { ManageDocumentContextProvider } from "./document-upload-provider";
 import DocumentUploaderTabs from "./tabs";
 
 interface DocumentUploaderProps {
@@ -21,7 +22,7 @@ export default function DocumentUploader({ form, name, hint }: DocumentUploaderP
           render={(props) => <DocumentUploaderTabs {...props} />}
           defaultValue={form.control.defaultValuesRef.current[name]}
         />
-        <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+        <ErrorMessage name={name} errors={form.errors} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
       </FormControl>
     </ManageDocumentContextProvider>

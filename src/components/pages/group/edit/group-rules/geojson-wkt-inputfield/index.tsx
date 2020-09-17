@@ -3,7 +3,6 @@ import {
   Checkbox,
   Flex,
   FormControl,
-  FormErrorMessage,
   FormHelperText,
   FormLabel,
   IconButton,
@@ -11,6 +10,7 @@ import {
   InputGroup,
   InputRightElement
 } from "@chakra-ui/core";
+import ErrorMessage from "@components/form/common/error-message";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { stringToFeature } from "@utils/location";
@@ -121,8 +121,7 @@ export default function GeoJsonWktParserInput({
           </InputRightElement>
         </InputGroup>
       )}
-
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

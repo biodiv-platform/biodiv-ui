@@ -1,6 +1,5 @@
 import {
   FormControl,
-  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Icon,
@@ -13,6 +12,8 @@ import { formatDateRange, parseDateRange } from "@utils/date";
 import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
+
+import ErrorMessage from "./common/error-message";
 
 interface IDatePickerBoxProps {
   name: string;
@@ -84,7 +85,7 @@ const DateRangePickerField = ({
           </label>
         </InputRightElement>
       </InputGroup>
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

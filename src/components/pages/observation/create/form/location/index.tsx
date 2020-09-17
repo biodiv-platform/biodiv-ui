@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
@@ -10,6 +9,7 @@ import {
   SimpleGrid,
   useDisclosure
 } from "@chakra-ui/core";
+import ErrorMessage from "@components/form/common/error-message";
 import Select from "@components/form/select";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
@@ -151,7 +151,15 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
         )}
         <SimpleGrid columns={[1, 1, 4, 4]} spacing={4}>
           <Box style={{ gridColumn: "1/4" }}>
-            <FormControl isInvalid={form.errors[FK.observedAt.name] && true} isRequired={true}>
+            <FormControl
+              isInvalid={
+                (form.errors[FK.observedAt.name] ||
+                  form.errors[FK.latitude.name] ||
+                  form.errors[FK.longitude.name]) &&
+                true
+              }
+              isRequired={true}
+            >
               <FormLabel htmlFor="places-search">{FK.observedAt.label}</FormLabel>
               <InputGroup size="md" className="places-search">
                 <Autocomplete
@@ -173,9 +181,13 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              <FormErrorMessage>
-                {form.errors[FK.observedAt.name] && form.errors[FK.observedAt.name]["message"]}
-              </FormErrorMessage>
+              <ErrorMessage name={FK.observedAt.name} errors={form.errors} />
+              {!isOpen && (
+                <>
+                  <ErrorMessage name={FK.latitude.name} errors={form.errors} />
+                  <ErrorMessage name={FK.longitude.name} errors={form.errors} />
+                </>
+              )}
             </FormControl>
           </Box>
           <Select {...FK.locationScale} options={LOCATION_ACCURACY_OPTIONS} form={form} />

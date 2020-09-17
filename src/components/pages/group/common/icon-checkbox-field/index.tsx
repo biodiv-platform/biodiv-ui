@@ -1,4 +1,5 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import ErrorMessage from "@components/form/common/error-message";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
 
@@ -44,7 +45,7 @@ export default function IconCheckboxField({
           />
         )}
       />
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["message"]}</FormErrorMessage>
+      <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

@@ -2,7 +2,6 @@ import {
   Button,
   Collapse,
   FormControl,
-  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Input,
@@ -10,6 +9,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import CheckBox from "@components/form/checkbox";
+import ErrorMessage from "@components/form/common/error-message";
 import useTranslation from "@configs/i18n/useTranslation";
 import { fromDMS, toDMS } from "dmsformat";
 import React, { useEffect, useState } from "react";
@@ -97,10 +97,8 @@ export default function CoordinatesInput({
             borderLeft={0}
           />
         </InputGroup>
-        <FormErrorMessage>
-          {form.errors[fk.latitude.name] && form.errors[fk.latitude.name]["message"]}
-          {form.errors[fk.longitude.name] && form.errors[fk.longitude.name]["message"]}
-        </FormErrorMessage>
+        <ErrorMessage name={fk.latitude.name} errors={form.errors} />
+        <ErrorMessage name={fk.longitude.name} errors={form.errors} />
         {isOpen && (
           <FormHelperText>
             Enter values in given format for example <code>0° 0&apos; 0.00000&quot; S</code>
