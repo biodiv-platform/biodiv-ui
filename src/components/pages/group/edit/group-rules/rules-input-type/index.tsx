@@ -29,6 +29,7 @@ export default function RulesInputType({ inputType, form, name }) {
     case "observedOnDateList":
       return (
         <DateRangePickerField
+          hasMaxDate={false}
           form={form}
           name={name}
           label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}

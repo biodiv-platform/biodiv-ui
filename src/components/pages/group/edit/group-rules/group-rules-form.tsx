@@ -5,7 +5,7 @@ import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/useGlobalState";
 import { axAddUserGroupRule } from "@services/usergroup.service";
-import { formatDateReverse } from "@utils/date";
+import { formatDateReverse, parseDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { formatGroupRules } from "@utils/userGroup";
 import React, { useState } from "react";
@@ -49,7 +49,10 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
       case "createdOnDateList":
         return {
           [`${type}`]: [
-            { fromDate: formatDateReverse(ruleValue[0]), toDate: formatDateReverse(ruleValue[1]) }
+            {
+              fromDate: formatDateReverse(parseDate(ruleValue[0])),
+              toDate: formatDateReverse(parseDate(ruleValue[0]))
+            }
           ]
         };
       case "taxonomicIdList":
