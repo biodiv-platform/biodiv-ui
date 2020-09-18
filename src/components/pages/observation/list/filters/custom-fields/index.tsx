@@ -1,5 +1,5 @@
 import {
-  AccordionHeader,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
@@ -22,10 +22,10 @@ export default function CustomFieldsFilter() {
         <AccordionItem key={customField.id}>
           {({ isExpanded }) => (
             <>
-              <AccordionHeader>
+              <AccordionButton>
                 <div>{customField.name}</div>
                 <AccordionIcon />
-              </AccordionHeader>
+              </AccordionButton>
               <AccordionPanel>
                 {isExpanded && <CustomFieldTypes field={customField} key={customField.id} />}
               </AccordionPanel>

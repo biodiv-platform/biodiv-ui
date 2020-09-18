@@ -26,7 +26,7 @@ ObservationListPage.getInitialProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const { data: listConfig } = await axGetObservationListConfig();
 
-  const aURL = absoluteUrl(ctx.req).href;
+  const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
 
   const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup.id };

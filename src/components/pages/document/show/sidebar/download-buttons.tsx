@@ -1,5 +1,7 @@
 import { Button, SimpleGrid } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import DownloadIcon from "@icons/download";
+import PeopleIcon from "@icons/people";
 import { axDownloadDocument } from "@services/document.service";
 import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
@@ -23,14 +25,14 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
     <SimpleGrid columns={{ base: 1, md: 2 }} mb={4} spacing={4}>
       <Button
         variant="outline"
-        leftIcon={"download" as any}
+        leftIcon={<DownloadIcon />}
         onClick={downloadPDF}
         isDisabled={!documentPath}
-        variantColor="red"
+        colorScheme="red"
       >
         {t("DOCUMENT.DOWNLOAD.PDF")}
       </Button>
-      <Button variant="outline" leftIcon={"people" as any} variantColor="teal">
+      <Button variant="outline" leftIcon={<PeopleIcon />} colorScheme="teal">
         {t("DOCUMENT.DOWNLOAD.CITATION")}
       </Button>
     </SimpleGrid>

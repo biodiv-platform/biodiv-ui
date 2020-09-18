@@ -26,23 +26,19 @@
     "PARTNER": true,
     "SOCIAL": {
       "FACEBOOK": {
-        "ICON": "ibpfacebook",
         "LABEL": "FOOTER.FACEBOOK",
         "URL": "https://www.facebook.com/indiabiodiversity"
       },
       "GITHUB": {
-        "ICON": "ibpgithub",
         "LABEL": "FOOTER.GITHUB",
         "URL": "https://github.com/strandls?q=biodiv"
       },
       "MAIL": {
-        "ICON": "ibpmail",
         "LABEL": "FOOTER.EMAIL",
         "URL": "mailto:support@indiabiodiversity.org"
       },
       "TWITTER": {
         "HANDLE": "@inbiodiversity",
-        "ICON": "ibptwitter",
         "LABEL": "FOOTER.TWITTER",
         "URL": "https://twitter.com/inbiodiversity"
       }

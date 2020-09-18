@@ -10,18 +10,18 @@ export default function SubMenu({ rows, onClose, prefix = "" }) {
   const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
 
   return (
-    <MenuList placement="bottom-end">
+    <MenuList>
       {activeSubMenuItems.map((item, index) => {
         const label = item.name && t(prefix + item.name);
         return (
           <MenuItem key={index}>
             {isLoggedIn && item.memberOnly && !isCurrentGroupMember ? (
-              <Link py={2} w="full" onClick={() => alert(t("HEADER.MEMBER_ONLY"))}>
+              <Link w="full" onClick={() => alert(t("HEADER.MEMBER_ONLY"))}>
                 {label}
               </Link>
             ) : (
               <LocalLink href={item.to} params={item.params} prefixGroup={true}>
-                <Link py={2} w="full" onClick={onClose}>
+                <Link w="full" onClick={onClose}>
                   {label}
                 </Link>
               </LocalLink>

@@ -16,7 +16,7 @@ const CustomRadio = React.forwardRef((props: any, ref) => {
       {...rest}
     >
       <Tooltip title={icon} placement="top" hasArrow={true}>
-        <Image size="3rem" src={getSpeciesIcon(icon)} alt={icon} />
+        <Image boxSize="3rem" src={getSpeciesIcon(icon)} alt={icon} />
       </Tooltip>
     </Box>
   );

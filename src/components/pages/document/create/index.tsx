@@ -5,6 +5,7 @@ import SubmitButton from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/useGlobalState";
+import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
 import { DEFAULT_LICENSE } from "@static/licenses";
@@ -121,7 +122,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
         <BasicInfo hForm={hForm} documentTypes={documentTypes} setBibField={setBibField} />
         <Metadata hForm={hForm} bibFields={bibField.fields} />
         <Coverage hForm={hForm} speciesGroups={speciesGroups} habitats={habitats} />
-        <SubmitButton leftIcon="ibpcheck" form={hForm}>
+        <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
           {t("DOCUMENT.CREATE.TITLE")}
         </SubmitButton>
       </form>

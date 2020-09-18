@@ -1,4 +1,5 @@
 import { IconButton } from "@chakra-ui/core";
+import { CloseIcon, CopyIcon } from "@chakra-ui/icons";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
@@ -41,7 +42,7 @@ export const ClearIndicator = (props) => {
           <IconButton
             type="button"
             variant="link"
-            icon="copy"
+            icon={<CopyIcon />}
             aria-label={t("COPY")}
             onClick={() => {
               navigator.clipboard.writeText(props.selectProps.value.label);
@@ -55,7 +56,7 @@ export const ClearIndicator = (props) => {
         variant="link"
         mr={1}
         aria-label={t("CLEAR")}
-        icon="close"
+        icon={<CloseIcon />}
         fontSize="0.8rem"
       />
     </div>

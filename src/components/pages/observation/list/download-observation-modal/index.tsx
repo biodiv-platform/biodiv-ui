@@ -14,6 +14,7 @@ import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/useGlobalState";
 import useObservationFilter from "@hooks/useObservationFilter";
+import DownloadIcon from "@icons/download";
 import { axDownloadFilteredObservations } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
@@ -99,45 +100,46 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <ModalOverlay />
-        <ModalContent hidden={isHidden}>
-          <ModalHeader>☑️ {t("OBSERVATION.DOWNLOAD.MODAL.TITLE")}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {OBSERVATION_FILTERS.map((filter) => (
-              <CheckboxGroupField {...filter} key={filter.name} form={hForm} />
-            ))}
-            <CheckboxGroupField
-              name="traits"
-              label="Traits"
-              options={getFilterOptions(traits)}
-              form={hForm}
-            />
-            <CheckboxGroupField
-              name="customfields"
-              label="Custom Fields"
-              options={getFilterOptions(customFields)}
-              form={hForm}
-            />
-            <TextAreaField
-              name="notes"
-              label={t("OBSERVATION.DOWNLOAD.MODAL.NOTE")}
-              hint={t("OBSERVATION.DOWNLOAD.MODAL.NOTE_HINT")}
-              form={hForm}
-              isRequired={true}
-              mb={0}
-            />
-          </ModalBody>
+        <ModalOverlay>
+          <ModalContent hidden={isHidden}>
+            <ModalHeader>☑️ {t("OBSERVATION.DOWNLOAD.MODAL.TITLE")}</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {OBSERVATION_FILTERS.map((filter) => (
+                <CheckboxGroupField {...filter} key={filter.name} form={hForm} />
+              ))}
+              <CheckboxGroupField
+                name="traits"
+                label="Traits"
+                options={getFilterOptions(traits)}
+                form={hForm}
+              />
+              <CheckboxGroupField
+                name="customfields"
+                label="Custom Fields"
+                options={getFilterOptions(customFields)}
+                form={hForm}
+              />
+              <TextAreaField
+                name="notes"
+                label={t("OBSERVATION.DOWNLOAD.MODAL.NOTE")}
+                hint={t("OBSERVATION.DOWNLOAD.MODAL.NOTE_HINT")}
+                form={hForm}
+                isRequired={true}
+                mb={0}
+              />
+            </ModalBody>
 
-          <ModalFooter>
-            <SubmitButton leftIcon="download" form={hForm}>
-              {t("OBSERVATION.DOWNLOAD.TITLE")}
-            </SubmitButton>
-            <Button ml={3} onClick={onClose}>
-              {t("CANCEL")}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
+            <ModalFooter>
+              <SubmitButton leftIcon={<DownloadIcon />} form={hForm}>
+                {t("OBSERVATION.DOWNLOAD.TITLE")}
+              </SubmitButton>
+              <Button ml={3} onClick={onClose}>
+                {t("CANCEL")}
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </ModalOverlay>
       </form>
     </Modal>
   );

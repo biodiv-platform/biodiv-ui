@@ -1,5 +1,6 @@
 import { Box, Button } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import DeleteIcon from "@icons/delete";
 import React from "react";
 
 const GroupRulesRow = ({ itemDetails, onDelete }) => {
@@ -15,7 +16,13 @@ const GroupRulesRow = ({ itemDetails, onDelete }) => {
         </Box>
       </td>
       <td>
-        <Button onClick={onDelete} variant="link" variantColor="red" leftIcon="delete" ml={2}>
+        <Button
+          onClick={onDelete}
+          variant="link"
+          colorScheme="red"
+          leftIcon={<DeleteIcon />}
+          ml={2}
+        >
           {t("DELETE")}
         </Button>
       </td>

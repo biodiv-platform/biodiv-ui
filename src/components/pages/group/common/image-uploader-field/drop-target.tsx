@@ -1,4 +1,5 @@
-import { Button, Heading, Icon, Text } from "@chakra-ui/core";
+import { Button, Heading, Text } from "@chakra-ui/core";
+import { TimeIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
 import { axUploadResource } from "@services/files.service";
@@ -69,11 +70,11 @@ export default function DropTarget({ setValue, nestedPath, simpleUpload }: userG
       <input {...getInputProps()} />
       {isProcessing ? (
         <div className="fade">
-          <Icon name="time" />
+          <TimeIcon />
           <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
         </div>
       ) : simpleUpload ? (
-        <Button variantColor="blue" variant="outline" children={t("OBSERVATION.UPLOADER.UPLOAD")} />
+        <Button colorScheme="blue" variant="outline" children={t("OBSERVATION.UPLOADER.UPLOAD")} />
       ) : (
         <div className="fade">
           <Heading size="md">{t("OBSERVATION.UPLOADER.LABEL")}</Heading>
@@ -81,7 +82,7 @@ export default function DropTarget({ setValue, nestedPath, simpleUpload }: userG
             {t("OR")}
           </Text>
           <Button
-            variantColor="blue"
+            colorScheme="blue"
             variant="outline"
             children={t("OBSERVATION.UPLOADER.BROWSE")}
           />

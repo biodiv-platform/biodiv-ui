@@ -11,7 +11,7 @@ export default function UploadInfo() {
       <Text my={2} color="gray.500">
         {t("OR")}
       </Text>
-      <Button variantColor="blue" variant="outline" children={t("OBSERVATION.UPLOADER.BROWSE")} />
+      <Button colorScheme="blue" variant="outline" children={t("OBSERVATION.UPLOADER.BROWSE")} />
     </div>
   );
 }

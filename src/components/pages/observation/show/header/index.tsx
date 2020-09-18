@@ -7,6 +7,7 @@ import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import useGlobalState from "@hooks/useGlobalState";
+import EditIcon from "@icons/edit";
 import { ShowData } from "@interfaces/observation";
 import {
   axDeleteObservation,
@@ -86,10 +87,10 @@ function Header({ o, following = false }: IHeaderProps) {
         <Flex alignItems="top" justifyContent={["flex-start", "flex-end"]}>
           {showActions && (
             <SimpleActionButton
-              icon="edit"
+              icon={<EditIcon />}
               title={t("OBSERVATION.EDIT_OBSERVATION")}
               onClick={handleOnEdit}
-              variantColor="teal"
+              colorScheme="teal"
             />
           )}
           <FollowActionButton

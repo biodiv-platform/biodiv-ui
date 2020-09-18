@@ -6,6 +6,7 @@
       "@configs/*": ["src/configs/*"],
       "@hooks/*": ["src/hooks/*"],
       "@i18n/*": ["src/i18n/*"],
+      "@icons/*": ["src/icons/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@pages/*": ["src/pages/*"],
       "@services/*": ["src/services/*"],

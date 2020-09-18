@@ -1,4 +1,5 @@
-import { Box, Flex, Icon, Text } from "@chakra-ui/core";
+import { Box, Flex, Text } from "@chakra-ui/core";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
@@ -23,7 +24,7 @@ function RegisterComponent() {
           <LocalLink href={`${currentGroup?.webAddress}/login`}>
             <BlueLink>
               {t("SIGN_IN.TITLE")}
-              <Icon name="chevron-right" />
+              <ChevronRightIcon />
             </BlueLink>
           </LocalLink>
         </Text>

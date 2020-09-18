@@ -1,4 +1,4 @@
-import { AspectRatioBox, Box, Image } from "@chakra-ui/core";
+import { AspectRatio, Box, Image } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
@@ -62,7 +62,7 @@ export default function RecentObservationList() {
             key={index}
           >
             <a aria-label={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}>
-              <AspectRatioBox maxW="full" ratio={1} borderRadius="lg" overflow="hidden">
+              <AspectRatio maxW="full" ratio={1} borderRadius="lg" overflow="hidden">
                 <Image
                   className="o-image"
                   loading="lazy"
@@ -70,7 +70,7 @@ export default function RecentObservationList() {
                   src={getObservationThumbnail(o?.thumbnail, 135)}
                   alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
                 />
-              </AspectRatioBox>
+              </AspectRatio>
             </a>
           </LocalLink>
         ))}

@@ -1,4 +1,11 @@
-import { Divider, FormControl, FormHelperText, FormLabel, RadioButtonGroup } from "@chakra-ui/core";
+import {
+  Divider,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  RadioGroup,
+  Stack
+} from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
 import React, { useEffect } from "react";
 import { UseFormMethods } from "react-hook-form";
@@ -38,11 +45,13 @@ const GroupSelector = ({
     <>
       <FormControl isInvalid={form.errors[name] && true} isRequired={true} mb={mb} {...props}>
         <FormLabel htmlFor={name}>{label}</FormLabel>
-        <RadioButtonGroup id={name} value={value} onChange={onChange} isInline>
-          {options.map((o) => (
-            <CustomRadio key={o.id} value={o.id} icon={o.name} />
-          ))}
-        </RadioButtonGroup>
+        <RadioGroup id={name} value={value} onChange={onChange}>
+          <Stack direction="row" py={2}>
+            {options.map((o) => (
+              <CustomRadio key={o.id} value={o.id} icon={o.name} />
+            ))}
+          </Stack>
+        </RadioGroup>
         <ErrorMessage name={name} errors={form.errors} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
       </FormControl>

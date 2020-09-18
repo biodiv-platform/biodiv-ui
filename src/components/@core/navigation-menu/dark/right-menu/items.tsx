@@ -1,4 +1,5 @@
 import SITE_CONFIG from "@configs/site-config.json";
+import AddIcon from "@icons/add";
 import GroupListItem from "./group-list-item";
 export default [
   {
@@ -8,7 +9,7 @@ export default [
   },
   {
     name: "HEADER.MENU_PRIMARY.CONTRIBUTE.",
-    nameIcon: "ibpadd",
+    nameIcon: AddIcon,
     rows: [
       {
         active: SITE_CONFIG.OBSERVATION.ACTIVE,

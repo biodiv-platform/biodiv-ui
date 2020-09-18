@@ -1,4 +1,5 @@
-import { Button, Heading, Icon, Text } from "@chakra-ui/core";
+import { Button, Heading, Text } from "@chakra-ui/core";
+import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
 import { resizeMultiple } from "@utils/image";
@@ -62,12 +63,12 @@ export default function DropTarget({ assetsSize }) {
       <input {...getInputProps()} />
       {isProcessing ? (
         <div className="fade">
-          <Icon name="time" />
+          <TimeIcon />
           <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
         </div>
       ) : isDragActive ? (
         <div className="fade">
-          <Icon name="arrow-up" />
+          <ArrowUpIcon />
           <span>{t("OBSERVATION.UPLOADER.LABEL_RELEASE")}</span>
         </div>
       ) : (
@@ -77,7 +78,7 @@ export default function DropTarget({ assetsSize }) {
             {t("OR")}
           </Text>
           <Button
-            variantColor="blue"
+            colorScheme="blue"
             variant="outline"
             children={t("OBSERVATION.UPLOADER.BROWSE")}
           />

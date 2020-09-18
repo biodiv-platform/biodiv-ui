@@ -54,7 +54,7 @@ export default function AboutGroupComponent({
         <PageHeading mb={0} mr={4}>
           👥 {t("GROUP.ABOUT.TITLE")} {name}
         </PageHeading>
-        <Badge variantColor={allowUserToJoin ? "blue" : "yellow"}>
+        <Badge colorScheme={allowUserToJoin ? "blue" : "yellow"}>
           {t(allowUserToJoin ? "GROUP.ABOUT.OPEN_GROUP" : "GROUP.ABOUT.CLOSED_GROUP")}
         </Badge>
       </Flex>

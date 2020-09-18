@@ -3,6 +3,7 @@ import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
+import CheckIcon from "@icons/check";
 import { axUpdateUserPassword } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
@@ -58,7 +59,7 @@ export default function ChangePasswordTab({ userId }) {
           />
         </div>
       </SimpleGrid>
-      <SubmitButton leftIcon="ibpcheck" form={hForm}>
+      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
         {t("USER.UPDATE_PASSWORD")}
       </SubmitButton>
     </form>

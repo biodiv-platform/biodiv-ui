@@ -1,6 +1,7 @@
 import { Box, Button } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
+import CheckIcon from "@icons/check";
 import React from "react";
 
 const AudioControl = styled.audio`
@@ -21,7 +22,14 @@ export default function AudioPlayer({ src, onConfirm, onCancel }) {
           <source src={src} type="audio/wav" />
         </AudioControl>
       </Box>
-      <Button type="button" variantColor="blue" onClick={onConfirm} leftIcon="check" mr={4} mt={4}>
+      <Button
+        type="button"
+        colorScheme="blue"
+        onClick={onConfirm}
+        leftIcon={<CheckIcon />}
+        mr={4}
+        mt={4}
+      >
         {t("OBSERVATION.USE_IN_OBSERVATION")}
       </Button>
       <Button type="button" mt={4} onClick={onCancel}>

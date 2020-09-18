@@ -1,4 +1,4 @@
-import { AspectRatioBox, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/core";
+import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
@@ -41,7 +41,7 @@ export default function Suggestions({
             prefixGroup={true}
           >
             <Link className="fade" title={o.name}>
-              <AspectRatioBox ratio={1}>
+              <AspectRatio ratio={1}>
                 <Image
                   overflow="hidden"
                   objectFit="cover"
@@ -51,7 +51,7 @@ export default function Suggestions({
                   bg="gray.200"
                   borderRadius="md"
                 />
-              </AspectRatioBox>
+              </AspectRatio>
             </Link>
           </LocalLink>
         ))}

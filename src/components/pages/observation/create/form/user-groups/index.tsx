@@ -1,4 +1,5 @@
-import { Box, Button, CheckboxGroup, Collapse, Icon, useDisclosure } from "@chakra-ui/core";
+import { Box, Button, CheckboxGroup, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/core";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { axGetUserGroupList } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
@@ -36,20 +37,15 @@ export default function UserGroups({ name, label, form }: IUserGroupsProps) {
   return (
     <Box>
       <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
-        👥 {label} <Icon name={isOpen ? "chevron-up" : "chevron-down"} />
+        👥 {label} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
       <Collapse isOpen={isOpen}>
-        <CheckboxGroup
-          defaultValue={initialValue}
-          onChange={onChange}
-          display="grid"
-          className="custom-checkbox-group"
-          gridGap={4}
-          gridTemplateColumns={["repeat(1,1fr)", "repeat(1,1fr)", "repeat(3,1fr)", "repeat(5,1fr)"]}
-        >
-          {userGroups.map((o) => (
-            <Checkbox key={o.id} value={o.id.toString()} label={o.name} icon={o.icon} />
-          ))}
+        <CheckboxGroup defaultValue={initialValue} onChange={onChange}>
+          <SimpleGrid className="custom-checkbox-group" columns={[1, 1, 3, 5]} gridGap={4}>
+            {userGroups.map((o) => (
+              <Checkbox key={o.id} value={o.id.toString()} label={o.name} icon={o.icon} />
+            ))}
+          </SimpleGrid>
         </CheckboxGroup>
       </Collapse>
     </Box>

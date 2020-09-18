@@ -6,6 +6,7 @@ import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/useGlobalState";
+import CheckIcon from "@icons/check";
 import {
   RESOURCES_UPLOADING,
   SYNC_SINGLE_OBSERVATION,
@@ -33,7 +34,7 @@ export default function ObservationCreateForm({
   ObservationCreateFormData
 }) {
   const { t } = useTranslation();
-  const { isOpen, onClose } = useDisclosure(true);
+  const { isOpen, onClose } = useDisclosure({ isOpen: true });
   const [isSelectedImages, setIsSelectedImages] = useState(true);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState();
   const [customFieldList] = useState(
@@ -265,7 +266,7 @@ export default function ObservationCreateForm({
           <Box mt={4}>
             <CheckBox name="terms" label={t("OBSERVATION.TERMS")} form={hForm} />
           </Box>
-          <Submit leftIcon="ibpcheck" form={hForm} isDisabled={isSubmitDisabled}>
+          <Submit leftIcon={<CheckIcon />} form={hForm} isDisabled={isSubmitDisabled}>
             {t("OBSERVATION.ADD_OBSERVATION")}
           </Submit>
         </Box>

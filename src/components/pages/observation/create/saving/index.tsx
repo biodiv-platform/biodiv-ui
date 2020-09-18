@@ -1,8 +1,9 @@
-import { Heading, Icon, Spinner, Text } from "@chakra-ui/core";
+import { Heading, Spinner, Text } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
+import CheckIcon from "@icons/check";
 import { SYNC_SINGLE_OBSERVATION_DONE, SYNC_SINGLE_OBSERVATION_ERROR } from "@static/events";
 import React, { useState } from "react";
 import { useListener } from "react-gbus";
@@ -41,7 +42,7 @@ export default function SavingObservation() {
       <Saving />
       {status === ObservationStatus.Done && (
         <>
-          <Icon className="fadeInUp" mt={6} fontSize="3rem" color="green.500" name="ibpcheck" />
+          <CheckIcon className="fadeInUp" mt={6} fontSize="3rem" color="green.500" />
           <Heading className="fadeInUp delay-1" my={4}>
             {t("OBSERVATION.SUCCESS")}
           </Heading>

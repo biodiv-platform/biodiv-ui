@@ -10,6 +10,7 @@ import {
   InputGroup,
   InputRightElement
 } from "@chakra-ui/core";
+import { ViewIcon } from "@chakra-ui/icons";
 import ErrorMessage from "@components/form/common/error-message";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
@@ -114,9 +115,9 @@ export default function GeoJsonWktParserInput({
           <InputRightElement>
             <IconButton
               aria-label="verify-wkt"
-              variantColor="blue"
+              colorScheme="blue"
               onClick={handleWktInput}
-              icon="view"
+              icon={<ViewIcon />}
             />
           </InputRightElement>
         </InputGroup>

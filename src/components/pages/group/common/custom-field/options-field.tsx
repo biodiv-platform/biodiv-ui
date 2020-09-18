@@ -1,6 +1,8 @@
 import { Badge, Box, Button, Flex, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/core";
 import TextBox from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
+import AddIcon from "@icons/add";
+import DeleteIcon from "@icons/delete";
 import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
@@ -25,13 +27,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
 
   return (
     <>
-      <RadioGroup
-        onChange={(e) => setValue(e.target.value)}
-        name={radioGroupName}
-        value={value}
-        w="full"
-        mb={4}
-      >
+      <RadioGroup onChange={setValue} name={radioGroupName} value={value} w="full" mb={4}>
         {fields.map((_item, index) => (
           <Radio value={index.toString()} w="full" size="lg" mb={4}>
             <SimpleGrid columns={{ base: 1, md: 5 }} spacingX={4} ml={4}>
@@ -52,9 +48,9 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
                   />
                 </SimpleGrid>
                 <Button
-                  variantColor="red"
+                  colorScheme="red"
                   variant="outline"
-                  leftIcon="delete"
+                  leftIcon={<DeleteIcon />}
                   isDisabled={fields.length < 3}
                   onClick={() => remove(index)}
                 >
@@ -70,7 +66,7 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
                 mb={0}
               />
               <Flex alignItems="center">
-                <Badge hidden={index.toString() !== value} variantColor="green">
+                <Badge hidden={index.toString() !== value} colorScheme="green">
                   {t("GROUP.CUSTOM_FIELD.DEFAULT")}
                 </Badge>
               </Flex>
@@ -82,8 +78,8 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
       <Button
         variant="outline"
         onClick={() => append({ value: "append" })}
-        variantColor="blue"
-        leftIcon="add"
+        colorScheme="blue"
+        leftIcon={<AddIcon />}
         isDisabled={disabled}
         mr={4}
         mb={4}

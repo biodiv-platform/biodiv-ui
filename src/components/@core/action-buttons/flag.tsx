@@ -21,6 +21,9 @@ import Select from "@components/form/select";
 import Submit from "@components/form/submit-button";
 import TextArea from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
+import FlagFillIcon from "@icons/flag-fill";
+import FlagOutlineIcon from "@icons/flag-outline";
 import { FlagShow } from "@interfaces/observation";
 import { FLAG_OPTIONS } from "@static/constants";
 import { ACTIVITY_UPDATED } from "@static/events";
@@ -30,7 +33,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { emit } from "react-gbus";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import SimpleActionButton from "./simple";
@@ -97,83 +99,89 @@ export default function FlagActionButton({
   return (
     <>
       <SimpleActionButton
-        icon={flags.length ? "ibpfillflag" : "ibpoutlineflag"}
+        icon={flags.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
         title={t("ACTIONS.FLAG.TITLE")}
-        variantColor={flags.length ? "red" : "purple"}
+        colorScheme={flags.length ? "red" : "purple"}
         onClick={onOpen}
       />
       <Modal isOpen={isOpen} size="lg" onClose={onClose}>
-        <ModalOverlay className="fade" />
-        <ModalContent className="fadeInUp" borderRadius="md">
-          <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
-            <ModalHeader>🚩 Flag observation</ModalHeader>
-            <ModalCloseButton />
-            {flags.length > 0 && (
-              <>
-                <Heading size="sm" px={6} mb={3}>
-                  flagged by {flags.length} member(s)
-                </Heading>
-                {flags.map(({ flag, user }) => (
-                  <Stack
-                    key={flag.id}
-                    isInline={true}
-                    spacing={4}
-                    px={6}
-                    py={3}
-                    mb={2}
-                    borderTop="1px"
-                    borderColor="gray.300"
-                  >
-                    <Avatar size="sm" mt={2} name={user.name} src={getUserImage(user.profilePic)} />
-                    <Box>
-                      <BlueLink mr={2} href={`/user/show/${user.id}`}>
-                        {user.name} <UserBadge isAdmin={user.isAdmin} />
-                      </BlueLink>
-                      <Badge variantColor="red" verticalAlign="baseline">
-                        {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
-                      </Badge>
-                      <Text>{flag.notes}</Text>
-                    </Box>
-                    <Box flexGrow={1} textAlign="right" pt={2}>
-                      {adminOrAuthor(user.id) && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          variantColor="red"
-                          onClick={() => handleOnUnFlag(flag.id)}
-                        >
-                          Remove
-                        </Button>
-                      )}
-                    </Box>
-                  </Stack>
-                ))}
-              </>
-            )}
-            {!userFlag && (
-              <ModalBody>
-                <Select
-                  name="flag"
-                  label={t("ACTIONS.FLAG.CATEGORY")}
-                  options={flagOptions}
-                  form={hForm}
-                />
-                <TextArea mb={0} name="notes" label={t("ACTIONS.FLAG.NOTES")} form={hForm} />
-              </ModalBody>
-            )}
+        <ModalOverlay className="fade">
+          <ModalContent className="fadeInUp" borderRadius="md">
+            <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
+              <ModalHeader>🚩 Flag observation</ModalHeader>
+              <ModalCloseButton />
+              {flags.length > 0 && (
+                <>
+                  <Heading size="sm" px={6} mb={3}>
+                    flagged by {flags.length} member(s)
+                  </Heading>
+                  {flags.map(({ flag, user }) => (
+                    <Stack
+                      key={flag.id}
+                      isInline={true}
+                      spacing={4}
+                      px={6}
+                      py={3}
+                      mb={2}
+                      borderTop="1px"
+                      borderColor="gray.300"
+                    >
+                      <Avatar
+                        size="sm"
+                        mt={2}
+                        name={user.name}
+                        src={getUserImage(user.profilePic)}
+                      />
+                      <Box>
+                        <BlueLink mr={2} href={`/user/show/${user.id}`}>
+                          {user.name} <UserBadge isAdmin={user.isAdmin} />
+                        </BlueLink>
+                        <Badge colorScheme="red" verticalAlign="baseline">
+                          {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
+                        </Badge>
+                        <Text>{flag.notes}</Text>
+                      </Box>
+                      <Box flexGrow={1} textAlign="right" pt={2}>
+                        {adminOrAuthor(user.id) && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            colorScheme="red"
+                            onClick={() => handleOnUnFlag(flag.id)}
+                          >
+                            Remove
+                          </Button>
+                        )}
+                      </Box>
+                    </Stack>
+                  ))}
+                </>
+              )}
+              {!userFlag && (
+                <ModalBody>
+                  <Select
+                    name="flag"
+                    label={t("ACTIONS.FLAG.CATEGORY")}
+                    options={flagOptions}
+                    form={hForm}
+                  />
+                  <TextArea mb={0} name="notes" label={t("ACTIONS.FLAG.NOTES")} form={hForm} />
+                </ModalBody>
+              )}
 
-            {!userFlag && (
-              <ModalFooter>
-                <Button onClick={onClose} mr={4}>
-                  Close
-                </Button>
-                <Submit form={hForm} variantColor="red">
-                  Flag
-                </Submit>
-              </ModalFooter>
-            )}
-          </form>
-        </ModalContent>
+              {!userFlag && (
+                <ModalFooter>
+                  <Button onClick={onClose} mr={4}>
+                    Close
+                  </Button>
+                  <Submit form={hForm} colorScheme="red">
+                    Flag
+                  </Submit>
+                </ModalFooter>
+              )}
+            </form>
+          </ModalContent>
+        </ModalOverlay>
       </Modal>
     </>
   );

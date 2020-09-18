@@ -49,7 +49,7 @@ const Checkbox = ({ id, label, value, stat, ...props }) => (
           value={value}
         />
         <Image
-          size="2rem"
+          boxSize="2rem"
           mr={2}
           objectFit="contain"
           src={getSpeciesIcon(label)}

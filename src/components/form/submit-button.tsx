@@ -7,7 +7,7 @@ interface ISubmitButtonProps {
   leftIcon?;
   rightIcon?;
   isDisabled?;
-  variantColor?;
+  colorScheme?;
   mb?;
   w?;
   mt?;
@@ -18,7 +18,7 @@ const SubmitButton = ({
   children,
   isDisabled,
   form,
-  variantColor = "blue",
+  colorScheme = "blue",
   mb = 0,
   ...rest
 }: ISubmitButtonProps) => {
@@ -30,7 +30,7 @@ const SubmitButton = ({
 
   return (
     <Button
-      variantColor={variantColor}
+      colorScheme={colorScheme}
       isLoading={form.formState.isSubmitting}
       type="submit"
       isDisabled={disabled}

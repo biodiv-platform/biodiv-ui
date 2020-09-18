@@ -1,5 +1,5 @@
 import {
-  AccordionHeader,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
@@ -17,10 +17,10 @@ export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
     <AccordionItem>
       {({ isExpanded }) => (
         <>
-          <AccordionHeader>
+          <AccordionButton>
             <Box textAlign="left">{props.label || t(props.translateKey + "TITLE")}</Box>
             <AccordionIcon />
-          </AccordionHeader>
+          </AccordionButton>
           <AccordionPanel>{isExpanded && <FilterCheckboxes {...props} />}</AccordionPanel>
         </>
       )}

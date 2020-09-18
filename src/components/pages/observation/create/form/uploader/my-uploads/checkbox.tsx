@@ -1,7 +1,8 @@
-import { AspectRatioBox, IconButton, Image, VisuallyHidden } from "@chakra-ui/core";
+import { AspectRatio, IconButton, Image, VisuallyHidden } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/useGlobalState";
+import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useMemo } from "react";
 
@@ -57,29 +58,29 @@ const Checkbox = ({ asset, ...props }) => {
         onChange={handleOnChange}
         value={asset.hashKey}
       />
-      <AspectRatioBox ratio={1}>
+      <AspectRatio ratio={1}>
         <ImageBox>
           <IconButton
             className="remove fade"
             variant="ghost"
-            variantColor="red"
+            colorScheme="red"
             hidden={props.isChecked}
             aria-label={t("DELETE")}
             onClick={() => removeAsset(asset)}
-            icon="delete"
+            icon={<DeleteIcon />}
           />
           <StatusIcon type={asset.status} />
           <Image
             borderRadius="md"
             style={{ filter: "none" }}
-            size="full"
+            boxSize="full"
             objectFit="cover"
             src={imageURL}
             fallbackSrc={getFallbackByMIME(asset.type)}
             alt={asset.fileName}
           />
         </ImageBox>
-      </AspectRatioBox>
+      </AspectRatio>
     </label>
   );
 };

@@ -145,7 +145,7 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
     >
       <>
         {!isOnline && !hideLocationPicker && (
-          <Button mb={4} variantColor="red" onClick={getCurrentLocation}>
+          <Button mb={4} colorScheme="red" onClick={getCurrentLocation}>
             Click Here for Manual Coordinates
           </Button>
         )}

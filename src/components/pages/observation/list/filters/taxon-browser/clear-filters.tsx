@@ -3,6 +3,7 @@ import { useLocalRouter } from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@configs/i18n/useTranslation";
 import useObservationFilter from "@hooks/useObservationFilter";
+import DeleteIcon from "@icons/delete";
 import { DEFAULT_FILTER } from "@static/observation-list";
 import React from "react";
 
@@ -24,9 +25,9 @@ export default function ClearFilters() {
         variant="link"
         className="fade"
         size="lg"
-        variantColor="red"
+        colorScheme="red"
         aria-label={message}
-        leftIcon="delete"
+        leftIcon={<DeleteIcon />}
       >
         {filterCount}
       </Button>

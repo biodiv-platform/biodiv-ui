@@ -56,7 +56,7 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
           <Mention trigger="@" data={onMentionQuery} />
         </MentionsInput>
       </FormControl>
-      <Button variantColor="blue" onClick={handleOnComment}>
+      <Button colorScheme="blue" onClick={handleOnComment}>
         {t("OBSERVATION.COMMENTS.POST")}
       </Button>
     </Box>

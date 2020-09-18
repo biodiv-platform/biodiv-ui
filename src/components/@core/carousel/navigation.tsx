@@ -1,7 +1,7 @@
-import { Icon } from "@chakra-ui/core";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
-import React from "react";
 import styled from "@emotion/styled";
+import React from "react";
 
 const NavigationBox = styled.div`
   font-size: 1.5em;
@@ -38,14 +38,14 @@ function CarouselNavigation({ carousel, resourcesLength }) {
         aria-label={t("OBSERVATION.SLIDER_LEFT")}
         onClick={() => carousel.scrollPrev()}
       >
-        <Icon name="arrow-back" />
+        <ArrowBackIcon />
       </button>
       <button
         className="right"
         aria-label={t("OBSERVATION.SLIDER_RIGHT")}
         onClick={() => carousel.scrollNext()}
       >
-        <Icon name="arrow-forward" />
+        <ArrowForwardIcon />
       </button>
     </NavigationBox>
   );

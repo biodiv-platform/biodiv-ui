@@ -29,7 +29,7 @@ const ObservationCreatePage = ({ speciesGroups, languages, ObservationCreateForm
 
 export async function getServerSideProps(ctx) {
   const { data: speciesGroups } = await axGetspeciesGroups();
-  const aReq = absoluteUrl(ctx.req);
+  const aReq = absoluteUrl(ctx);
   const { data } = await axGetLangList();
   const {
     currentGroup: { id: userGroupId }

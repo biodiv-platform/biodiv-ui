@@ -1,7 +1,6 @@
 import {
   Box,
   Grid,
-  Icon,
   IconButton,
   Popover,
   PopoverArrow,
@@ -11,7 +10,10 @@ import {
   PopoverHeader,
   PopoverTrigger
 } from "@chakra-ui/core";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
+import StarIcon from "@icons/star";
+import StarOutlineIcon from "@icons/star-outline";
 import { axRateObservationResource } from "@services/observation.service";
 import { LICENSES } from "@static/licenses";
 import toast from "cogo-toast";
@@ -41,8 +43,8 @@ function CarouselResourceInfo({ currentResource, observationId }) {
       <Popover placement="bottom-end" closeOnBlur={false}>
         <PopoverTrigger>
           <IconButton
-            icon="info-outline"
             aria-label={t("OBSERVATION.RESOURCE_INFO")}
+            icon={<InfoOutlineIcon />}
             zIndex={4}
             isRound={true}
           />
@@ -68,8 +70,8 @@ function CarouselResourceInfo({ currentResource, observationId }) {
                 <Rating
                   initialRating={currentResource?.resource?.rating}
                   onChange={onRateHandler}
-                  emptySymbol={<Icon name="ibpstaroutline" />}
-                  fullSymbol={<Icon name="ibpstar" />}
+                  emptySymbol={<StarOutlineIcon />}
+                  fullSymbol={<StarIcon />}
                 />
               </Box>
             </Grid>

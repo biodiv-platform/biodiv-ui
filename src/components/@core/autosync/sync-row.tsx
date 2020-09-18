@@ -56,13 +56,13 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
       <div>
         <Text lineHeight="1rem" mb={1}>
           {title}
-          {isUploading && <Badge variantColor="orange">{t("OBSERVATION.SYNC.UPLOADING")}</Badge>}
-          {isDone && <Badge variantColor="green">{t("OBSERVATION.SYNC.DONE")}</Badge>}
-          {isFailed && <Badge variantColor="red">{t("OBSERVATION.SYNC.FAILED")}</Badge>}
+          {isUploading && <Badge colorScheme="orange">{t("OBSERVATION.SYNC.UPLOADING")}</Badge>}
+          {isDone && <Badge colorScheme="green">{t("OBSERVATION.SYNC.DONE")}</Badge>}
+          {isFailed && <Badge colorScheme="red">{t("OBSERVATION.SYNC.FAILED")}</Badge>}
         </Text>
         <small>{data?.reverseGeocoded}</small>
         <Button
-          variantColor="red"
+          colorScheme="red"
           mr={2}
           isDisabled={isDone || isUploading}
           size="xs"
@@ -73,7 +73,7 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
         {isDone && (
           <Button
             as={ExternalBlueLink}
-            variantColor="blue"
+            colorScheme="blue"
             size="xs"
             // @ts-ignore
             href={`/observation/show/${syncInfo.successMap[id]}`}

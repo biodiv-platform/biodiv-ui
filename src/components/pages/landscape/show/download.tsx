@@ -1,5 +1,7 @@
 import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
+import { ChevronUpIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
+import DownloadIcon from "@icons/download";
 import { axDownloadLandscape } from "@services/landscape.service";
 import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
@@ -18,20 +20,19 @@ export default function DownloadLandscape({ id, title }) {
 
   return (
     <Box mb={6} mr={2} position="absolute" zIndex={4} bottom={0} right={0}>
-      <Menu>
+      <Menu placement="top-end">
         <MenuButton
           as={Button}
-          // @ts-ignore
-          rightIcon="chevron-up"
-          leftIcon="download"
+          rightIcon={<ChevronUpIcon />}
+          leftIcon={<DownloadIcon />}
           bg="white"
           size="sm"
           variant="outline"
-          variantColor="blue"
+          colorScheme="blue"
         >
           {t("LANDSCAPE.DOWNLOAD_MAP")}
         </MenuButton>
-        <MenuList placement="top-end">
+        <MenuList>
           <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
           <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>
           <MenuItem onClick={() => download("image")}>Image</MenuItem>

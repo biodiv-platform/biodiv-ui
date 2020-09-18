@@ -1,6 +1,7 @@
 import { FormControl, FormHelperText, FormLabel, IconButton, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import useGlobalState from "@hooks/useGlobalState";
+import EditIcon from "@icons/edit";
 import { CustomFieldData } from "@interfaces/observation";
 import { axUpdateCustomField } from "@services/observation.service";
 import { ACTIVITY_UPDATED } from "@static/events";
@@ -54,8 +55,8 @@ export default function CustomField({
         {(adminOrAuthor(userId) || canEdit) && (
           <IconButton
             variant="link"
-            variantColor="blue"
-            icon="edit"
+            colorScheme="blue"
+            icon={<EditIcon />}
             aria-label="edit"
             onClick={onToggle}
           />

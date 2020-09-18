@@ -77,7 +77,7 @@ export default function CoordinatesInput({
       >
         <FormLabel htmlFor="coordinates">
           {t("OBSERVATION.COORDINATES")}
-          <Button variant="link" variantColor="blue" size="xs" ml={2} onClick={onToggle}>
+          <Button variant="link" colorScheme="blue" size="xs" ml={2} onClick={onToggle}>
             {t(`OBSERVATION.USE_${isOpen ? "LAT_LNG" : "DMS"}`)}
           </Button>
         </FormLabel>

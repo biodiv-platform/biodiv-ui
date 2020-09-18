@@ -10,7 +10,7 @@ const Checkbox = ({ value, label, icon, ...props }) => (
       <Image
         loading="lazy"
         ignoreFallback={true}
-        size="2rem"
+        boxSize="2rem"
         mr={2}
         objectFit="contain"
         src={value === "null" ? icon : getGroupImageThumb(icon)}

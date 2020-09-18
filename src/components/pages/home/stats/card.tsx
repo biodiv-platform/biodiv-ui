@@ -1,4 +1,5 @@
-import { Icon, PseudoBox, Text } from "@chakra-ui/core";
+import { Box, Text } from "@chakra-ui/core";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
@@ -38,7 +39,7 @@ export default function Card({ name, count, index, meta }) {
   return (
     <LocalLink href={link} prefixGroup={true}>
       <CardLink>
-        <PseudoBox
+        <Box
           p={4}
           className={`fadeInUp delay-${index + 1}`}
           bg="white"
@@ -52,10 +53,10 @@ export default function Card({ name, count, index, meta }) {
           <Text>
             {t(`HOME.PORTAL_STATS.${name.toUpperCase()}`)}
             <span className="arrow">
-              <Icon name="arrow-forward" />
+              <ArrowForwardIcon />
             </span>
           </Text>
-        </PseudoBox>
+        </Box>
       </CardLink>
     </LocalLink>
   );

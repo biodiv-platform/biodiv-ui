@@ -1,4 +1,5 @@
 import { Box, Flex, Text, useDisclosure } from "@chakra-ui/core";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
@@ -7,11 +8,11 @@ import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import useTranslation from "@configs/i18n/useTranslation";
+import { yupResolver } from "@hookform/resolvers";
 import { axForgotPassword, axRegenerateOTP, axResetPassword } from "@services/auth.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
@@ -22,7 +23,7 @@ export default function ForgotPasswordComponent() {
   const router = useLocalRouter();
   const [showMobile, setShowMobile] = useState(false);
   const [user, setUser] = useState(null);
-  const { isOpen, onClose } = useDisclosure(true);
+  const { isOpen, onClose } = useDisclosure({ isOpen: true });
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -123,7 +124,7 @@ export default function ForgotPasswordComponent() {
               ) : (
                 <TextBox name="email" label={t("USER.EMAIL")} form={hForm} />
               )}
-              <Submit form={hForm} rightIcon="arrow-forward">
+              <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
                 {t("FORGOT_PASSWORD.FORM.SUBMIT")}
               </Submit>
             </form>
@@ -144,7 +145,7 @@ export default function ForgotPasswordComponent() {
                 form={rForm}
               />
               <Flex justifyContent="space-between" alignItems="center">
-                <Submit form={rForm} rightIcon="arrow-forward">
+                <Submit form={rForm} rightIcon={<ArrowForwardIcon />}>
                   {t("OTP.FORM.SUBMIT")}
                 </Submit>
                 <BlueLink onClick={handleRegenerate}>{t("OTP.RESEND")}</BlueLink>

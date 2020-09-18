@@ -1,4 +1,5 @@
-import { Avatar, Icon, Link, Menu, MenuButton } from "@chakra-ui/core";
+import { Avatar, Link, Menu, MenuButton } from "@chakra-ui/core";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/useGlobalState";
@@ -35,7 +36,7 @@ export default function UserMenu() {
   ];
 
   return isLoggedIn ? (
-    <Menu>
+    <Menu placement="bottom-end">
       {({ onClose }) => (
         <>
           <MenuButton
@@ -51,7 +52,7 @@ export default function UserMenu() {
               name={user.name}
               src={getUserImage(user.profilePic)}
             />
-            {user.name} <Icon name="chevron-down" />
+            {user.name} <ChevronDownIcon />
           </MenuButton>
           <SubMenu onClose={onClose} rows={userMenuRows} prefix="HEADER.MENU_PRIMARY.SETTINGS." />
         </>

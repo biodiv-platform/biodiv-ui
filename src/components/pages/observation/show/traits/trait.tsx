@@ -10,6 +10,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import EditIcon from "@icons/edit";
 import { TraitsValue, TraitsValuePair } from "@interfaces/traits";
 import { axUpdateTraitById } from "@services/observation.service";
 import { adminOrAuthor } from "@utils/auth";
@@ -61,9 +62,9 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
         {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
           <IconButton
             aria-label="Edit"
-            icon="edit"
+            icon={<EditIcon />}
             variant="link"
-            variantColor="blue"
+            colorScheme="blue"
             onClick={onToggle}
           />
         )}
@@ -94,14 +95,14 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
         <Box mt={2}>
           <Button
             size="sm"
-            variantColor="blue"
+            colorScheme="blue"
             aria-label="Save"
             type="submit"
             onClick={handleTraitUpdate}
           >
             {t("SAVE")}
           </Button>
-          <Button size="sm" ml={2} variantColor="gray" aria-label="Cancel" onClick={onClose}>
+          <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
             {t("CANCEL")}
           </Button>
         </Box>

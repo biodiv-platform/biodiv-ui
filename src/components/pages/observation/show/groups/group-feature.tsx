@@ -11,6 +11,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import EditIcon from "@icons/edit";
 import { Featured, UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupImageThumb } from "@utils/media";
@@ -95,8 +96,8 @@ export default function GroupFeature({
       <Button
         mb={2}
         variant="link"
-        rightIcon="edit"
-        variantColor="blue"
+        rightIcon={<EditIcon />}
+        colorScheme="blue"
         ref={editButtonRef}
         onClick={onToggle}
       >
@@ -115,17 +116,12 @@ export default function GroupFeature({
       </SimpleGrid>
 
       <Collapse isOpen={isOpen}>
-        <CheckboxGroup
-          value={selectedGroups}
-          onChange={setSelectedGroups}
-          display="grid"
-          className="custom-checkbox-group"
-          gridGap={4}
-          gridTemplateColumns={["repeat(1,1fr)", "repeat(1,1fr)", "repeat(3,1fr)", "repeat(3,1fr)"]}
-        >
-          {groupsN.map((o) => (
-            <Checkbox key={o.id} value={`${o.id}`} label={o.name} icon={o.icon} />
-          ))}
+        <CheckboxGroup value={selectedGroups} onChange={setSelectedGroups}>
+          <SimpleGrid columns={[1, 1, 3, 3]} gridGap={4} className="custom-checkbox-group">
+            {groupsN.map((o) => (
+              <Checkbox key={o.id} value={`${o.id}`} label={o.name} icon={o.icon} />
+            ))}
+          </SimpleGrid>
         </CheckboxGroup>
         <Box mt={2}>
           <FormControl>
@@ -140,7 +136,7 @@ export default function GroupFeature({
           <Stack isInline={true} spacing={2} mt={2}>
             <Button
               size="sm"
-              variantColor="blue"
+              colorScheme="blue"
               aria-label="Save"
               type="submit"
               onClick={handleOnFeature}
@@ -149,14 +145,14 @@ export default function GroupFeature({
             </Button>
             <Button
               size="sm"
-              variantColor="red"
+              colorScheme="red"
               aria-label="Save"
               type="submit"
               onClick={handleOnUnfeature}
             >
               {t("OBSERVATION.UNFEATURE")}
             </Button>
-            <Button size="sm" variantColor="gray" aria-label="Cancel" onClick={handleOnCancel}>
+            <Button size="sm" colorScheme="gray" aria-label="Cancel" onClick={handleOnCancel}>
               {t("CLOSE")}
             </Button>
           </Stack>

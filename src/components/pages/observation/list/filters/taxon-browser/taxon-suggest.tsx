@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import { mergeDeep } from "./taxon-browser-helpers";
+import { SearchIcon } from "@chakra-ui/icons";
 
 const SearchForm = styled.form`
   display: flex;
@@ -85,10 +86,10 @@ export default function TaxonSuggest({ setParentState, parentState }) {
         />
         <IconButton
           variant="solid"
-          variantColor="blue"
+          colorScheme="blue"
           isLoading={isLoading}
           type="submit"
-          icon="search"
+          icon={<SearchIcon />}
           aria-label={t("FILTERS.TAXON_BROWSER.SEARCH")}
         />
       </SearchForm>

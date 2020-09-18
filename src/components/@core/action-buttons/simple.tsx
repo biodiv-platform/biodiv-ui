@@ -2,13 +2,13 @@ import { IconButton } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
 import React from "react";
 
-const SimpleActionButton = ({ icon, title, onClick = null, variantColor = "blue" }) => (
+const SimpleActionButton = ({ icon, title, onClick = null, colorScheme = "blue" }) => (
   <Tooltip title={title} placement="bottom">
     <IconButton
       size="lg"
       isRound={true}
       variant="ghost"
-      variantColor={variantColor}
+      colorScheme={colorScheme}
       icon={icon}
       aria-label={title}
       onClick={onClick}

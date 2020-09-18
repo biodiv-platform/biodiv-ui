@@ -1,9 +1,11 @@
-import { Box, Icon, SimpleGrid, Stack, Text } from "@chakra-ui/core";
+import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/core";
+import { InfoIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@configs/i18n/useTranslation";
 import useGlobalState from "@hooks/useGlobalState";
+import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
 import { axQueryDocumentTagsByText } from "@services/document.service";
 import { axUpdateObservationTags } from "@services/observation.service";
@@ -36,7 +38,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           {o.recoIbp?.speciesId && (
             <LocalLink href={`${currentGroup?.webAddress}/species/show/${o.recoIbp.speciesId}`}>
               <BlueLink ml={2}>
-                <Icon name="info" /> {t("OBSERVATION.SPECIES_PAGE")}
+                <InfoIcon /> {t("OBSERVATION.SPECIES_PAGE")}
               </BlueLink>
             </LocalLink>
           )}
@@ -58,7 +60,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
             <Text mr={1}>{observedOn}</Text>
             {o.observation.dateAccuracy === DATE_ACCURACY.ACCURATE && (
               <Tooltip title={t("OBSERVATION.ACCURATE")} shouldWrapChildren={true} hasArrow={true}>
-                <Icon color="green.500" name="ibpcheck" />
+                <CheckIcon color="green.500" />
               </Tooltip>
             )}
           </Stack>

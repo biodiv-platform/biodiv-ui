@@ -1,4 +1,5 @@
-import { Box, Icon } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/core";
+import { ArrowDownIcon } from "@chakra-ui/icons";
 import useGlobalState from "@hooks/useGlobalState";
 import useLeaderboardFilter from "@hooks/useLeaderboardFilter";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
@@ -47,7 +48,7 @@ function UserLeaderboardTable({ columns }) {
                     cursor="pointer"
                   >
                     {column.render("Header")}
-                    <Icon name="arrow-down" hidden={sortedBy !== column?.id} />
+                    <ArrowDownIcon opacity={sortedBy === column?.id ? 0 : 1} />
                   </Box>
                 </th>
               ))}

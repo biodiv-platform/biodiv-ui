@@ -1,4 +1,4 @@
-import { AccordionHeader, AccordionIcon, AccordionItem, AccordionPanel } from "@chakra-ui/core";
+import { AccordionButton, AccordionIcon, AccordionItem, AccordionPanel } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
@@ -10,10 +10,10 @@ export default function TextFilterPanel({ filterKey, translateKey }) {
 
   return (
     <AccordionItem>
-      <AccordionHeader>
+      <AccordionButton>
         <div>{label}</div>
         <AccordionIcon />
-      </AccordionHeader>
+      </AccordionButton>
       <AccordionPanel>
         <TextFilterInput filterKey={filterKey} label={label} />
       </AccordionPanel>

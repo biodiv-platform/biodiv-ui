@@ -35,7 +35,7 @@ export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
             <Heading size="sm" className="elipsis" title={o.recoIbp?.commonName}>
               {o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}{" "}
               {!o.recoIbp?.scientificName && (
-                <Badge variantColor="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
+                <Badge colorScheme="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
               )}
             </Heading>
 

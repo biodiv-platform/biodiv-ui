@@ -1,5 +1,5 @@
 import {
-  AccordionHeader,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
@@ -53,10 +53,10 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
 
   return (
     <AccordionItem>
-      <AccordionHeader>
+      <AccordionButton>
         <div>{t(translateKey)}</div>
         <AccordionIcon />
-      </AccordionHeader>
+      </AccordionButton>
       <AccordionPanel>
         <Flatpickr
           options={options}

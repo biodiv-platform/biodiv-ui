@@ -1,4 +1,4 @@
-import { CheckboxGroup } from "@chakra-ui/core";
+import { CheckboxGroup, SimpleGrid } from "@chakra-ui/core";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { stringToArray } from "@utils/basic";
 import React from "react";
@@ -20,26 +20,21 @@ const SpeciesGroupsFilter = () => {
   };
 
   return (
-    <CheckboxGroup
-      defaultValue={stringToArray(filter.sGroup)}
-      onChange={onChange}
-      display="grid"
-      className="custom-checkbox-group"
-      gridGap={2}
-      gridTemplateColumns="repeat(5,1fr)"
-    >
-      {speciesGroup
-        .slice(1)
-        .sort((a, b) => a.order - b.order)
-        .map((o) => (
-          <CustomCheckbox
-            key={o.id}
-            id={o.id.toString()}
-            value={o.id.toString()}
-            label={o.name}
-            stat={observationData.ag.groupSpeciesName[o.name]}
-          />
-        ))}
+    <CheckboxGroup defaultValue={stringToArray(filter.sGroup)} onChange={onChange}>
+      <SimpleGrid gridGap={2} columns={5} className="custom-checkbox-group">
+        {speciesGroup
+          .slice(1)
+          .sort((a, b) => a.order - b.order)
+          .map((o) => (
+            <CustomCheckbox
+              key={o.id}
+              id={o.id.toString()}
+              value={o.id.toString()}
+              label={o.name}
+              stat={observationData.ag.groupSpeciesName[o.name]}
+            />
+          ))}
+      </SimpleGrid>
     </CheckboxGroup>
   );
 };

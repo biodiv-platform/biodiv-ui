@@ -3,7 +3,7 @@ import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
 export default function InfoMessage() {
-  const { isOpen, onClose } = useDisclosure(true);
+  const { isOpen, onClose } = useDisclosure({ isOpen: true });
   const { t } = useTranslation();
 
   return (

@@ -1,6 +1,6 @@
 import {
   Accordion,
-  AccordionHeader,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel
@@ -26,10 +26,10 @@ export default function FiltersList() {
   return (
     <Accordion defaultIndex={[0]} allowMultiple={true}>
       <AccordionItem>
-        <AccordionHeader>
+        <AccordionButton>
           <div>{t("FILTERS.SPECIES_GROUP.TITLE")}</div>
           <AccordionIcon />
-        </AccordionHeader>
+        </AccordionButton>
         <AccordionPanel>
           <SpeciesGroupsFilter />
         </AccordionPanel>
@@ -38,50 +38,50 @@ export default function FiltersList() {
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <AccordionHeader>
+            <AccordionButton>
               <div>{t("FILTERS.TAXON_BROWSER.TITLE")}</div>
               <AccordionIcon />
-            </AccordionHeader>
+            </AccordionButton>
             <AccordionPanel>{isExpanded && <TaxonBrowser />}</AccordionPanel>
           </>
         )}
       </AccordionItem>
 
       <AccordionItem>
-        <AccordionHeader>
+        <AccordionButton>
           <div>{t("FILTERS.NAME.TITLE")}</div>
           <AccordionIcon />
-        </AccordionHeader>
+        </AccordionButton>
         <AccordionPanel>
           <Name />
         </AccordionPanel>
       </AccordionItem>
 
       <AccordionItem>
-        <AccordionHeader>
+        <AccordionButton>
           <div>{t("FILTERS.LOCATION.TITLE")}</div>
           <AccordionIcon />
-        </AccordionHeader>
+        </AccordionButton>
         <AccordionPanel>
           <Location />
         </AccordionPanel>
       </AccordionItem>
 
       <AccordionItem>
-        <AccordionHeader>
+        <AccordionButton>
           <div>{t("FILTERS.TIME.TITLE")}</div>
           <AccordionIcon />
-        </AccordionHeader>
+        </AccordionButton>
         <AccordionPanel>
           <TimeFilter />
         </AccordionPanel>
       </AccordionItem>
 
       <AccordionItem>
-        <AccordionHeader>
+        <AccordionButton>
           <div>{t("FILTERS.DATA_QUALITY.TITLE")}</div>
           <AccordionIcon />
-        </AccordionHeader>
+        </AccordionButton>
         <AccordionPanel>
           <DataQuality />
         </AccordionPanel>
@@ -90,10 +90,10 @@ export default function FiltersList() {
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <AccordionHeader>
+            <AccordionButton>
               <div>{t("FILTERS.USER.TITLE")}</div>
               <AccordionIcon />
-            </AccordionHeader>
+            </AccordionButton>
             <AccordionPanel>{isExpanded && <UserFilter filterKey="user" />}</AccordionPanel>
           </>
         )}
@@ -104,10 +104,10 @@ export default function FiltersList() {
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <AccordionHeader>
+            <AccordionButton>
               <div>{t("FILTERS.TRAITS.TITLE")}</div>
               <AccordionIcon />
-            </AccordionHeader>
+            </AccordionButton>
             <AccordionPanel>{isExpanded && <TraitsFilter />}</AccordionPanel>
           </>
         )}
@@ -118,10 +118,10 @@ export default function FiltersList() {
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <AccordionHeader>
+            <AccordionButton>
               <div>{t("FILTERS.CUSTOM_FIELDS.TITLE")}</div>
               <AccordionIcon />
-            </AccordionHeader>
+            </AccordionButton>
             <AccordionPanel>{isExpanded && <CustomFieldsFilter />}</AccordionPanel>
           </>
         )}

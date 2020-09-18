@@ -1,6 +1,8 @@
-import { CloseButton, Flex, Icon, Image, Input } from "@chakra-ui/core";
+import { CloseButton, Flex, Image, Input } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/useGlobalState";
+import StarIcon from "@icons/star";
+import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { isBrowser } from "@static/constants";
 import { LICENSES_ARRAY } from "@static/licenses";
@@ -108,8 +110,8 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
           <Rating
             initialRating={resource.rating}
             onChange={(v) => updateObservationAsset(index, resource.hashKey, "rating", v)}
-            emptySymbol={<Icon name="ibpstaroutline" />}
-            fullSymbol={<Icon name="ibpstar" />}
+            emptySymbol={<StarOutlineIcon />}
+            fullSymbol={<StarIcon />}
           />
         </Flex>
       </Flex>

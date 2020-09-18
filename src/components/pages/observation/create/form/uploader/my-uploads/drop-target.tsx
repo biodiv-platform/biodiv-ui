@@ -1,6 +1,8 @@
-import { AspectRatioBox, Icon, Text } from "@chakra-ui/core";
+import { AspectRatio, Text } from "@chakra-ui/core";
+import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
+import AddIcon from "@icons/add";
 import { resizeMultiple } from "@utils/image";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -51,25 +53,25 @@ export default function DropTarget() {
   });
 
   return (
-    <AspectRatioBox ratio={1}>
+    <AspectRatio ratio={1}>
       <DropTargetBox {...getRootProps()} data-dropping={isDragActive}>
         <input {...getInputProps()} />
         {isProcessing ? (
           <div className="fade">
-            <Icon name="time" />
+            <TimeIcon />
             <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
           </div>
         ) : isDragActive ? (
           <div className="fade">
-            <Icon name="arrow-up" mb={4} />
+            <ArrowUpIcon mb={4} />
             <span>{t("OBSERVATION.UPLOADER.LABEL_RELEASE")}</span>
           </div>
         ) : (
           <Text my={2} color="gray.500">
-            <Icon name="add" />
+            <AddIcon />
           </Text>
         )}
       </DropTargetBox>
-    </AspectRatioBox>
+    </AspectRatio>
   );
 }

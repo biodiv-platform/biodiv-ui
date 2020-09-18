@@ -1,14 +1,5 @@
-import {
-  Alert,
-  AlertIcon,
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Icon,
-  SimpleGrid,
-  Text
-} from "@chakra-ui/core";
+import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/core";
+import { CalendarIcon } from "@chakra-ui/icons";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
@@ -16,6 +7,7 @@ import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-s
 import useTranslation from "@configs/i18n/useTranslation";
 import useGlobalState from "@hooks/useGlobalState";
 import useObservationFilter from "@hooks/useObservationFilter";
+import LocationIcon from "@icons/location";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadable } from "@utils/date";
@@ -33,7 +25,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
   const { user } = useGlobalState();
 
   return (
-    <Box size="full" display="flex" flexDir="column" justifyContent="space-between">
+    <Box boxSize="full" display="flex" flexDir="column" justifyContent="space-between">
       <SimpleGrid columns={[1, 1, 3, 3]} px={4} pt={1}>
         <div style={{ gridColumn: "1/3" }}>
           <Heading
@@ -53,12 +45,12 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           </Heading>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
-            <Text className="elipsis" title={o.reverseGeocodedName}>
-              <Icon mb={1} mr={2} name="ibplocation" title={t("LIST.LOCATION")} />
+            <Text className="elipsis" title={t("LIST.LOCATION")}>
+              <LocationIcon mb={1} mr={2} />
               {o.reverseGeocodedName}
             </Text>
-            <Text>
-              <Icon mb={1} mr={2} name="calendar" title={t("LIST.OBSERVED_ON")} />
+            <Text title={t("LIST.OBSERVED_ON")}>
+              <CalendarIcon mb={1} mr={2} />
               {formatDateReadable(o.observedOn)}
             </Text>
           </Box>

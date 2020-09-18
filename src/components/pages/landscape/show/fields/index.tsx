@@ -1,4 +1,5 @@
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/core";
+import EditIcon from "@icons/edit";
 import useGlobalState from "@hooks/useGlobalState";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
@@ -42,9 +43,9 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
                 {canEdit && (
                   <IconButton
                     variant="link"
-                    variantColor="blue"
+                    colorScheme="blue"
                     aria-label={`Edit ${child.header}`}
-                    icon="edit"
+                    icon={<EditIcon />}
                     onClick={onToggle}
                   />
                 )}

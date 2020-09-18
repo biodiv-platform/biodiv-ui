@@ -1,6 +1,8 @@
-import { Icon, IconButton, Text } from "@chakra-ui/core";
+import { IconButton, Text } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
+import DeleteIcon from "@icons/delete";
+import PDFIcon from "@icons/pdf";
 import { formatTimeStamp } from "@utils/date";
 import React, { useState } from "react";
 
@@ -64,7 +66,7 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
   return (
     <DocumentList tabIndex={0} title={fileName} className="fade">
       <div className="icon" onClick={onSelect}>
-        <Icon name="pdf" color="red.500" />
+        <PDFIcon color="red.500" />
       </div>
       <div className="content" onClick={onSelect}>
         <div className="elipsis">{fileName}</div>
@@ -74,8 +76,8 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
       </div>
       <IconButton
         variant="link"
-        variantColor="red"
-        icon="delete"
+        colorScheme="red"
+        icon={<DeleteIcon />}
         className="action"
         isLoading={isLoading}
         aria-label={t("DELETE")}

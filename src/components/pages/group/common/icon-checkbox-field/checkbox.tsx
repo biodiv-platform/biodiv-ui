@@ -1,4 +1,4 @@
-import { CheckboxGroup, Image, VisuallyHidden } from "@chakra-ui/core";
+import { CheckboxGroup, Image, Stack, VisuallyHidden } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
 import React from "react";
@@ -7,7 +7,7 @@ export interface ITraitInputProps {
   type?: string;
   options: any[];
   gridColumns?;
-  onBlur;
+  onBlur?;
   onChange;
   defaultValue?;
 }
@@ -22,28 +22,27 @@ const CustomCheckbox = ({ value, label, icon, type, ...props }) => (
     {/* @ts-ignore */}
     <VisuallyHidden as="input" type="checkbox" value={value} {...props} />
     <Tooltip title={icon} placement="top" hasArrow={true}>
-      <Image size="3rem" ignoreFallback={true} src={getLocalIcon(icon, type)} alt={icon} />
+      <Image boxSize="3rem" ignoreFallback={true} src={getLocalIcon(icon, type)} alt={icon} />
     </Tooltip>
   </label>
 );
 
-const CheckBoxItems = ({ options, type, onChange, onBlur, defaultValue }: ITraitInputProps) => (
+const CheckBoxItems = ({ options, type, onChange, defaultValue }: ITraitInputProps) => (
   <CheckboxGroup
     defaultValue={defaultValue && defaultValue.map((o) => o.toString())}
     onChange={(v) => onChange(v.map((i) => Number(i)))}
-    onBlur={onBlur}
-    isInline={true}
-    spacing={3}
   >
-    {options.map((o) => (
-      <CustomCheckbox
-        key={o.id}
-        value={o.id.toString()}
-        label={o.value}
-        icon={o.name}
-        type={type}
-      />
-    ))}
+    <Stack isInline={true} spacing={3}>
+      {options.map((o) => (
+        <CustomCheckbox
+          key={o.id}
+          value={o.id.toString()}
+          label={o.value}
+          icon={o.name}
+          type={type}
+        />
+      ))}
+    </Stack>
   </CheckboxGroup>
 );
 

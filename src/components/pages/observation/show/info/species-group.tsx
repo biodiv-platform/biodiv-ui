@@ -1,6 +1,9 @@
 import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/core";
+import { CheckIcon } from "@chakra-ui/icons";
 import { selectStyles } from "@components/form/configs";
 import useTranslation from "@configs/i18n/useTranslation";
+import CrossIcon from "@icons/cross";
+import EditIcon from "@icons/edit";
 import { SpeciesGroup } from "@interfaces/observation";
 import { axUpdateSpeciesGroup } from "@services/observation.service";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
@@ -19,7 +22,7 @@ interface ISpeciesGroupsProps {
 const CustomOption = ({ children, ...props }) => (
   <components.Option {...props}>
     <Stack isInline={true} alignItems="center">
-      <Image size="2rem" src={getSpeciesIcon(props.data.label)} />
+      <Image boxSize="2rem" src={getSpeciesIcon(props.data.label)} />
       <Box>{children}</Box>
     </Stack>
   </components.Option>
@@ -62,31 +65,31 @@ export default function SpeciesGroupBox({ id, speciesGroups, observationId }: IS
           <Box flexShrink={0}>
             <IconButton
               size="xs"
-              variantColor="blue"
+              colorScheme="blue"
               aria-label="Save"
               type="submit"
               onClick={handleOnSave}
-              icon={"ibpcheck" as any}
+              icon={<CheckIcon />}
             />
             <IconButton
               size="xs"
               ml={2}
-              variantColor="gray"
+              colorScheme="gray"
               aria-label="Cancel"
               onClick={onClose}
-              icon={"ibpcross" as any}
+              icon={<CrossIcon />}
             />
           </Box>
         </Stack>
       ) : (
         <Stack isInline={true} alignItems="top">
-          <Image title={finalType.label} size="2.5rem" src={getSpeciesIcon(finalType.label)} />
+          <Image title={finalType.label} boxSize="2.5rem" src={getSpeciesIcon(finalType.label)} />
           <IconButton
             size="lg"
             aria-label="edit"
-            icon="edit"
+            icon={<EditIcon />}
             variant="ghost"
-            variantColor="blue"
+            colorScheme="blue"
             minW="auto"
             onClick={onToggle}
           />

@@ -31,7 +31,7 @@ export default function OfflineSync() {
   const isOnline = useOnlineStatus();
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure(true);
+  const { isOpen, onOpen, onClose } = useDisclosure({ isOpen: true });
   const [pendingObservations, setPendingObservations] = useState([]);
   const [syncInfo, setSyncInfo] = useImmer<SyncInfo>({
     current: null,

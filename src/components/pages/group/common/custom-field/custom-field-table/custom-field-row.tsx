@@ -1,11 +1,15 @@
-import { Box, Button, Icon } from "@chakra-ui/core";
+import { Box, Button } from "@chakra-ui/core";
+import { DragHandleIcon } from "@chakra-ui/icons";
 import useTranslation from "@configs/i18n/useTranslation";
+import CheckIcon from "@icons/check";
+import CrossIcon from "@icons/cross";
+import DeleteIcon from "@icons/delete";
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 
 const BooleanIcon = ({ isChecked }) => (
   <Box as="td" w="8rem">
-    <Icon name={isChecked ? "ibpcheck" : "ibpcross"} color={isChecked ? "green.500" : "red.500"} />
+    {isChecked ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />}
   </Box>
 );
 
@@ -20,14 +24,20 @@ const CustomFieldRow = SortableElement(({ itemDetails, onDelete }) => {
   return (
     <tr>
       <Box as="td" w="16rem">
-        <Icon name="drag-handle" cursor="move" /> {name}
+        <DragHandleIcon cursor="move" /> {name}
       </Box>
       <td>{dataType}</td>
       <td>{fieldType}</td>
       <BooleanIcon isChecked={isMandatory} />
       <BooleanIcon isChecked={allowedParticipation} />
       <td>
-        <Button onClick={onDelete} variant="link" variantColor="red" leftIcon="delete" ml={2}>
+        <Button
+          onClick={onDelete}
+          variant="link"
+          colorScheme="red"
+          leftIcon={<DeleteIcon />}
+          ml={2}
+        >
           {t("DELETE")}
         </Button>
       </td>

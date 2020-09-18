@@ -1,4 +1,5 @@
 import { Box, IconButton, useDisclosure } from "@chakra-ui/core";
+import EditIcon from "@icons/edit";
 import { Tags } from "@interfaces/observation";
 import React, { useState } from "react";
 
@@ -34,10 +35,10 @@ export default function TagsShow({ items = [], objectId, updateFunc, queryFunc }
           ))}
           <IconButton
             variant="link"
-            variantColor="blue"
+            colorScheme="blue"
             onClick={onToggle}
             aria-label="Edit"
-            icon="edit"
+            icon={<EditIcon />}
           />
         </Box>
       )}

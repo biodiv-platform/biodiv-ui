@@ -1,5 +1,6 @@
 import { Box, Button, Image, Input } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
+import CheckIcon from "@icons/check";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { axGetYouTubeInfo } from "@services/utility.service";
 import { DEFAULT_LICENSE } from "@static/licenses";
@@ -63,10 +64,10 @@ export default function FromURL({ onDone }) {
       {thumbURL && <Image mb={4} borderRadius="lg" maxW="full" h="15rem" src={thumbURL} />}
       <Button
         isDisabled={!thumbURL}
-        leftIcon="check"
+        leftIcon={<CheckIcon />}
         onClick={handleonInsert}
         type="button"
-        variantColor="blue"
+        colorScheme="blue"
       >
         {t("OBSERVATION.USE_IN_OBSERVATION")}
       </Button>

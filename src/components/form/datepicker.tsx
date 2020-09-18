@@ -2,11 +2,11 @@ import {
   FormControl,
   FormHelperText,
   FormLabel,
-  Icon,
   Input,
   InputGroup,
   InputRightElement
 } from "@chakra-ui/core";
+import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { formatDate, parseDate } from "@utils/date";
 import React, { useEffect, useState } from "react";
@@ -83,7 +83,7 @@ const DatePickerField = ({
         />
         <InputRightElement>
           <label htmlFor={name} style={{ cursor: "pointer" }}>
-            <Icon name="calendar" color="gray.300" />
+            <CalendarIcon color="gray.300" />
           </label>
         </InputRightElement>
       </InputGroup>

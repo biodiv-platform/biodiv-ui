@@ -53,7 +53,7 @@ const FilterWrapper = styled.div`
 `;
 
 export default function Filters() {
-  const { isOpen, onToggle, onClose } = useDisclosure(false);
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
 
   return (

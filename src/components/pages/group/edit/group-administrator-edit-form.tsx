@@ -1,5 +1,6 @@
 import {
-  AccordionHeader,
+  Accordion,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
@@ -84,31 +85,33 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   return (
-    <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
-      <AccordionHeader _expanded={{ bg: "gray.100" }}>
-        <Heading as="h2" flex="1" textAlign="left" my={1} size="lg">
-          🛡️ {t("GROUP.ADMIN.TITLE")}
-        </Heading>
-        <AccordionIcon float="right" />
-      </AccordionHeader>
+    <Accordion>
+      <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
+        <AccordionButton _expanded={{ bg: "gray.100" }}>
+          <Heading as="h2" flex="1" textAlign="left" my={1} size="lg">
+            🛡️ {t("GROUP.ADMIN.TITLE")}
+          </Heading>
+          <AccordionIcon float="right" />
+        </AccordionButton>
 
-      <AccordionPanel>
-        <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-          <AdminInviteField
-            form={hForm}
-            name="founders"
-            label="Founders"
-            onRemove={(o) => onMemberRemoved(o, founderIds)}
-          />
-          <AdminInviteField
-            form={hForm}
-            name="moderators"
-            label="Moderators"
-            onRemove={(o) => onMemberRemoved(o, moderatorIds)}
-          />
-          <SubmitButton form={hForm}>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
-        </form>
-      </AccordionPanel>
-    </AccordionItem>
+        <AccordionPanel>
+          <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+            <AdminInviteField
+              form={hForm}
+              name="founders"
+              label="Founders"
+              onRemove={(o) => onMemberRemoved(o, founderIds)}
+            />
+            <AdminInviteField
+              form={hForm}
+              name="moderators"
+              label="Moderators"
+              onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+            />
+            <SubmitButton form={hForm}>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
+          </form>
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   );
 }

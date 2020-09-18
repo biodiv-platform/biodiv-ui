@@ -1,4 +1,4 @@
-import { AccordionHeader, AccordionIcon, AccordionItem, AccordionPanel } from "@chakra-ui/core";
+import { AccordionButton, AccordionIcon, AccordionItem, AccordionPanel } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
@@ -16,10 +16,10 @@ export default function FilterMultiSelectPanel({
     <AccordionItem>
       {({ isExpanded }) => (
         <>
-          <AccordionHeader>
+          <AccordionButton>
             <div>{label}</div>
             <AccordionIcon />
-          </AccordionHeader>
+          </AccordionButton>
           <AccordionPanel>
             {isExpanded && (
               <FilterMultiSelectInput filterKey={filterKey} label={label} options={options} />
