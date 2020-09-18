@@ -4,7 +4,6 @@ import React from "react";
 
 const Checkbox = ({ value, label, icon, ...props }) => (
   <label role="checkbox" className="custom-checkbox" aria-checked={props.isChecked}>
-    {/* @ts-ignore */}
     <VisuallyHidden as="input" type="checkbox" {...props} value={value} />
     <Flex alignItems="center" h="2rem" overflow="hidden" title={label}>
       <Image

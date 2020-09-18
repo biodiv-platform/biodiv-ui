@@ -30,7 +30,7 @@ export default function ObservationEditForm({
 }: IObservationEditFormProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onClose } = useDisclosure({ isOpen: true });
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   const hForm = useForm<any>({
     mode: "onChange",

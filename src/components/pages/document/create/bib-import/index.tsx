@@ -31,7 +31,6 @@ export default function BibImportButton({ hForm }) {
       borderRadius="3rem"
     >
       <VisuallyHidden
-        // @ts-ignore
         type="file"
         as="input"
         id="bibtex-file"

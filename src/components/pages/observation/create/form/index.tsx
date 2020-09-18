@@ -34,7 +34,7 @@ export default function ObservationCreateForm({
   ObservationCreateFormData
 }) {
   const { t } = useTranslation();
-  const { isOpen, onClose } = useDisclosure({ isOpen: true });
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const [isSelectedImages, setIsSelectedImages] = useState(true);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState();
   const [customFieldList] = useState(

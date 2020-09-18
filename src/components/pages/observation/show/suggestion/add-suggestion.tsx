@@ -51,7 +51,7 @@ export default function AddSuggestion({
   const [languages, setLanguages] = useState([]);
   const langRef = useRef(null);
 
-  const { isOpen, onClose, onOpen } = useDisclosure({ isOpen: true });
+  const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>

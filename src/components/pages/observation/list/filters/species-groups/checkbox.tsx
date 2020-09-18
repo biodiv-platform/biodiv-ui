@@ -44,7 +44,6 @@ const Checkbox = ({ id, label, value, stat, ...props }) => (
           as="input"
           type="checkbox"
           {...props}
-          // @ts-ignore
           checked={props.isChecked}
           value={value}
         />

@@ -19,7 +19,6 @@ const CustomCheckbox = ({ value, label, icon, type, ...props }) => (
     style={{ padding: "0.25rem" }}
     aria-checked={props.isChecked}
   >
-    {/* @ts-ignore */}
     <VisuallyHidden as="input" type="checkbox" value={value} {...props} />
     <Tooltip title={icon} placement="top" hasArrow={true}>
       <Image boxSize="3rem" ignoreFallback={true} src={getLocalIcon(icon, type)} alt={icon} />

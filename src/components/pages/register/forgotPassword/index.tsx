@@ -23,7 +23,7 @@ export default function ForgotPasswordComponent() {
   const router = useLocalRouter();
   const [showMobile, setShowMobile] = useState(false);
   const [user, setUser] = useState(null);
-  const { isOpen, onClose } = useDisclosure({ isOpen: true });
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   const hForm = useForm<any>({
     mode: "onBlur",

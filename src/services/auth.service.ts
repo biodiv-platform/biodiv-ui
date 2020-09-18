@@ -73,7 +73,7 @@ export const axForgotPassword = async (payload) => {
     );
     return { success: true, data };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
     return { success: false, data: {} };
   }
 };

@@ -75,7 +75,6 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
             as={ExternalBlueLink}
             colorScheme="blue"
             size="xs"
-            // @ts-ignore
             href={`/observation/show/${syncInfo.successMap[id]}`}
           >
             View

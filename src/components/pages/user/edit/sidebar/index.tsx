@@ -41,7 +41,6 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
           <Button type="button" as="label" cursor="pointer" w="full" colorScheme="blue">
             <VisuallyHidden
               as="input"
-              // @ts-ignore
               type="file"
               id="user-profile"
               accept="image/*"

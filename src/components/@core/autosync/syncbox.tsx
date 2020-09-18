@@ -66,7 +66,7 @@ export default function SyncBox({
   deleteObservation,
   onClose
 }: SyncBoxProps) {
-  const { isOpen, onToggle } = useDisclosure({ isOpen: true });
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
   const { t } = useTranslation();
 
   return (

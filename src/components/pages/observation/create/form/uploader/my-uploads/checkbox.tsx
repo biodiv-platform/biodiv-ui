@@ -53,7 +53,6 @@ const Checkbox = ({ asset, ...props }) => {
         as="input"
         type="checkbox"
         {...props}
-        // @ts-ignore
         checked={props.isChecked}
         onChange={handleOnChange}
         value={asset.hashKey}
