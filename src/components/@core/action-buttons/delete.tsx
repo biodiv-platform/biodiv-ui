@@ -8,9 +8,9 @@ import {
   Button,
   useDisclosure
 } from "@chakra-ui/core";
-import { DeleteIcon } from "@chakra-ui/icons";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
+import DeleteIcon from "@icons/delete";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 

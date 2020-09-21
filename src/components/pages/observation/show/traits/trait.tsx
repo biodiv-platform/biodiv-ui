@@ -5,6 +5,7 @@ import {
   Flex,
   FormControl,
   IconButton,
+  Image,
   SimpleGrid,
   Text,
   useDisclosure
@@ -14,11 +15,11 @@ import EditIcon from "@icons/edit";
 import { TraitsValue, TraitsValuePair } from "@interfaces/traits";
 import { axUpdateTraitById } from "@services/observation.service";
 import { adminOrAuthor } from "@utils/auth";
+import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
 
 import TraitInput from "../../common/trait-input";
-import Content from "../../common/trait-input/content";
 
 interface ITraitProp {
   speciesTrait: TraitsValuePair;
@@ -82,9 +83,25 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
         <SimpleGrid columns={[1, 1, 2, 3]} spacing={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
-              <Box key={tr.id} role="radio" className="custom-radio" aria-checked={false}>
-                <Content value={tr.id} label={tr.value} icon={tr.icon} />
-              </Box>
+              <Flex
+                alignItems="center"
+                p={2}
+                key={tr.id}
+                cursor="pointer"
+                borderWidth="2px"
+                borderRadius="md"
+                bg="white"
+              >
+                <Image
+                  boxSize="2rem"
+                  mr={2}
+                  loading="lazy"
+                  objectFit="contain"
+                  src={getTraitIcon(tr.icon)}
+                  alt={tr.value}
+                />
+                <Text>{tr.value}</Text>
+              </Flex>
             ))
           ) : (
             <Text color="gray.600">{t("OBSERVATION.UNKNOWN")}</Text>

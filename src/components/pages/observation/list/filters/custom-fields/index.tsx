@@ -3,6 +3,7 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
   Text
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
@@ -23,7 +24,9 @@ export default function CustomFieldsFilter() {
           {({ isExpanded }) => (
             <>
               <AccordionButton>
-                <div>{customField.name}</div>
+                <Box flex={1} textAlign="left">
+                  {customField.name}
+                </Box>
                 <AccordionIcon />
               </AccordionButton>
               <AccordionPanel>

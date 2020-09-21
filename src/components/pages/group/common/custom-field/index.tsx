@@ -4,7 +4,7 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Heading
+  Box
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React, { useState } from "react";
@@ -18,13 +18,13 @@ export default function GroupCustomField({ userGroupId, groupCustomField, allCus
   const [isCreate, setIsCreate] = useState(false);
 
   return (
-    <Accordion>
+    <Accordion allowToggle={true}>
       <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
-          <Heading as="h2" flex="1" textAlign="left" my={1} size="lg">
+          <Box flex={1} textAlign="left" fontSize="lg">
             📜 {t("GROUP.CUSTOM_FIELD.TITLE")}
-          </Heading>
-          <AccordionIcon float="right" />
+          </Box>
+          <AccordionIcon />
         </AccordionButton>
 
         <AccordionPanel p={4}>

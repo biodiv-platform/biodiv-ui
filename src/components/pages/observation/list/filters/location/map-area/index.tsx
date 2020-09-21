@@ -1,4 +1,10 @@
-import { AccordionButton, AccordionIcon, AccordionItem, AccordionPanel } from "@chakra-ui/core";
+import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box
+} from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import React from "react";
 
@@ -17,7 +23,9 @@ export default function MapAreaFilter() {
       {({ isExpanded }) => (
         <>
           <AccordionButton>
-            <div>{t("FILTERS.LOCATION.MAP.TITLE")}</div>
+            <Box flex={1} textAlign="left">
+              {t("FILTERS.LOCATION.MAP.TITLE")}
+            </Box>
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel>{isExpanded && <MapDrawContainer />}</AccordionPanel>

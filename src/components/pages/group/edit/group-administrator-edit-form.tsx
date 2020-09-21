@@ -4,7 +4,7 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Heading
+  Box
 } from "@chakra-ui/core";
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
@@ -85,13 +85,13 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   return (
-    <Accordion>
+    <Accordion allowToggle={true}>
       <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
-          <Heading as="h2" flex="1" textAlign="left" my={1} size="lg">
+          <Box flex={1} textAlign="left" fontSize="lg">
             🛡️ {t("GROUP.ADMIN.TITLE")}
-          </Heading>
-          <AccordionIcon float="right" />
+          </Box>
+          <AccordionIcon />
         </AccordionButton>
 
         <AccordionPanel>

@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CheckboxGroup,
   Collapse,
   FormControl,
   FormLabel,
@@ -18,7 +17,7 @@ import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useRef, useState } from "react";
 
-import Checkbox from "../../create/form/user-groups/checkbox";
+import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
 
 interface IGroupFeatureProps {
@@ -51,7 +50,7 @@ export default function GroupFeature({
     if (groups) {
       const groupsNT = [DEFAULT_GROUP, ...groups.map((g) => ({ ...g, icon: g.icon }))];
       const selectedGroupsT = selectedDefault.map((g) => `${g.userGroup}`);
-      setGroupsN(groupsNT);
+      setGroupsN(groupsNT || []);
       setSelectedGroups(selectedGroupsT);
       setFinalGroups(groupsNT.filter((g) => selectedGroupsT.includes(`${g.id}`)));
     }
@@ -116,16 +115,17 @@ export default function GroupFeature({
       </SimpleGrid>
 
       <Collapse isOpen={isOpen}>
-        <CheckboxGroup value={selectedGroups} onChange={setSelectedGroups}>
-          <SimpleGrid columns={[1, 1, 3, 3]} gridGap={4} className="custom-checkbox-group">
-            {groupsN.map((o) => (
-              <Checkbox key={o.id} value={`${o.id}`} label={o.name} icon={o.icon} />
-            ))}
-          </SimpleGrid>
-        </CheckboxGroup>
+        {groupsN.length > 0 && (
+          <CheckBoxItems
+            gridColumns={[1, 1, 3, 3]}
+            options={groupsN}
+            defaultValue={selectedGroups}
+            onChange={setSelectedGroups}
+          />
+        )}
         <Box mt={2}>
           <FormControl>
-            <FormLabel htmlFor="description">Why Featuring?</FormLabel>
+            <FormLabel htmlFor="description">{t("OBSERVATION.WHY_FEATURING")}</FormLabel>
             <Textarea
               id="description"
               resize="none"

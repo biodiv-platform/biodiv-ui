@@ -1,12 +1,18 @@
-import { CheckboxGroup, SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/core";
 import useObservationFilter from "@hooks/useObservationFilter";
 import { stringToArray } from "@utils/basic";
-import React from "react";
+import React, { useMemo } from "react";
 
 import CustomCheckbox from "./checkbox";
 
 const SpeciesGroupsFilter = () => {
   const { speciesGroup, filter, setFilter, observationData } = useObservationFilter();
+
+  const defaultValue = useMemo(() => stringToArray(filter.sGroup), []);
+  const speciesGroupList = useMemo(
+    () => speciesGroup.slice(1).sort((a, b) => a.order - b.order),
+    speciesGroup
+  );
 
   const onChange = (v) => {
     setFilter((_draft) => {
@@ -19,13 +25,28 @@ const SpeciesGroupsFilter = () => {
     });
   };
 
+  const { getCheckboxProps } = useCheckboxGroup({
+    defaultValue,
+    onChange
+  });
+
   return (
-    <CheckboxGroup defaultValue={stringToArray(filter.sGroup)} onChange={onChange}>
-      <SimpleGrid gridGap={2} columns={5} className="custom-checkbox-group">
-        {speciesGroup
-          .slice(1)
-          .sort((a, b) => a.order - b.order)
-          .map((o) => (
+    <>
+      <SimpleGrid gridGap={2} columns={5}>
+        {speciesGroupList.map((o) => (
+          <CustomCheckbox
+            key={o.id}
+            id={o.id.toString()}
+            label={o.name}
+            stat={observationData.ag.groupSpeciesName[o.name]}
+            {...getCheckboxProps({ value: o.id.toString() })}
+          />
+        ))}
+      </SimpleGrid>
+      {/*  */}
+      {/* <CheckboxGroup defaultValue={defaultValue} onChange={onChange}>
+        <SimpleGrid gridGap={2} columns={5}>
+          {speciesGroupList.map((o) => (
             <CustomCheckbox
               key={o.id}
               id={o.id.toString()}
@@ -34,8 +55,9 @@ const SpeciesGroupsFilter = () => {
               stat={observationData.ag.groupSpeciesName[o.name]}
             />
           ))}
-      </SimpleGrid>
-    </CheckboxGroup>
+        </SimpleGrid>
+      </CheckboxGroup> */}
+    </>
   );
 };
 

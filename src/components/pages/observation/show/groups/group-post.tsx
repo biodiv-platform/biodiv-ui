@@ -1,4 +1,4 @@
-import { Box, Button, CheckboxGroup, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/core";
+import { Box, Button, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
@@ -8,7 +8,7 @@ import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useRef, useState } from "react";
 
-import Checkbox from "../../create/form/user-groups/checkbox";
+import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
 
 interface IGroupPostProps {
@@ -52,8 +52,6 @@ export default function GroupPost({
     <>
       <Button
         mb={2}
-        p={1}
-        pl={0}
         variant="link"
         rightIcon={<EditIcon />}
         colorScheme="blue"
@@ -80,14 +78,14 @@ export default function GroupPost({
       </SimpleGrid>
 
       <Collapse isOpen={isOpen}>
-        <CheckboxGroup defaultValue={selectedGroups} onChange={setSelectedGroups}>
-          <SimpleGrid gridGap={4} columns={[1, 1, 2, 3]} className="custom-checkbox-group">
-            {groups.length > 0 &&
-              groups.map((o) => (
-                <Checkbox key={o.id} value={o.id.toString()} label={o.name} icon={o.icon} />
-              ))}
-          </SimpleGrid>
-        </CheckboxGroup>
+        {groups.length > 0 && (
+          <CheckBoxItems
+            gridColumns={[1, 1, 2, 3]}
+            options={groups}
+            defaultValue={selectedGroups}
+            onChange={setSelectedGroups}
+          />
+        )}
         <Box mt={2}>
           <Button
             size="sm"

@@ -18,7 +18,9 @@ export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
       {({ isExpanded }) => (
         <>
           <AccordionButton>
-            <Box textAlign="left">{props.label || t(props.translateKey + "TITLE")}</Box>
+            <Box flex={1} textAlign="left">
+              {props.label || t(props.translateKey + "TITLE")}
+            </Box>
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel>{isExpanded && <FilterCheckboxes {...props} />}</AccordionPanel>

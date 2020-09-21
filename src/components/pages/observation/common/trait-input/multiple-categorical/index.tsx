@@ -1,25 +1,39 @@
-import { CheckboxGroup, SimpleGrid } from "@chakra-ui/core";
-import React from "react";
+import { SimpleGrid, useCheckbox, useCheckboxGroup } from "@chakra-ui/core";
+import React, { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";
-import Checkbox from "./checkbox";
+import TraitContent from "../content";
 
-const MultipleCategorialTrait = ({
+const SingleCategorialTrait = ({
   values,
   onUpdate,
   defaultValue,
   gridColumns = 5
-}: ITraitInputProps) => (
-  <CheckboxGroup
-    defaultValue={defaultValue && defaultValue.map((o) => o.toString())}
-    onChange={(v) => onUpdate(v.map((i) => Number(i)))}
-  >
-    <SimpleGrid className="custom-checkbox-group" gridGap={4} columns={[1, 1, 2, gridColumns]}>
+}: ITraitInputProps) => {
+  const [value, setValue] = useState(defaultValue);
+
+  useEffect(() => {
+    onUpdate(value);
+  }, [value]);
+
+  const { getCheckboxProps } = useCheckboxGroup({
+    defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
+    onChange: (v) => setValue(v.map((i) => Number(i)))
+  });
+
+  return (
+    <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4}>
       {values.map((o) => (
-        <Checkbox key={o.id} value={o.id.toString()} label={o.value} icon={o.icon} />
+        <TraitContent
+          key={o.id}
+          label={o.value}
+          icon={o.icon}
+          inputHook={useCheckbox}
+          {...getCheckboxProps({ value: String(o.id) })}
+        />
       ))}
     </SimpleGrid>
-  </CheckboxGroup>
-);
+  );
+};
 
-export default MultipleCategorialTrait;
+export default SingleCategorialTrait;

@@ -45,7 +45,7 @@ const Groups = ({
           <Tab>👥 {t("OBSERVATION.USERGROUPS")}</Tab>
           <Tab hidden={hideFeature}>🌟 {t("OBSERVATION.FEATURE_IN_GROUPS")}</Tab>
         </TabList>
-        <TabPanels p={4} pt={2}>
+        <TabPanels>
           <TabPanel>
             <GroupPost
               groups={permission?.userGroupMember}

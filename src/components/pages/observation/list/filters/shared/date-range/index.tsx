@@ -3,6 +3,7 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
   Input
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
@@ -54,7 +55,9 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
   return (
     <AccordionItem>
       <AccordionButton>
-        <div>{t(translateKey)}</div>
+        <Box flex={1} textAlign="left">
+          {t(translateKey)}
+        </Box>
         <AccordionIcon />
       </AccordionButton>
       <AccordionPanel>

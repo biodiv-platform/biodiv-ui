@@ -1,4 +1,4 @@
-import { CheckboxGroup, Image, Stack, VisuallyHidden } from "@chakra-ui/core";
+import { Box, HStack, Image, useCheckbox, useCheckboxGroup } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
 import React from "react";
@@ -12,37 +12,58 @@ export interface ITraitInputProps {
   defaultValue?;
 }
 
-const CustomCheckbox = ({ value, label, icon, type, ...props }) => (
-  <label
-    role="checkbox"
-    className="custom-checkbox"
-    style={{ padding: "0.25rem" }}
-    aria-checked={props.isChecked}
-  >
-    <VisuallyHidden as="input" type="checkbox" value={value} {...props} />
-    <Tooltip title={icon} placement="top" hasArrow={true}>
-      <Image boxSize="3rem" ignoreFallback={true} src={getLocalIcon(icon, type)} alt={icon} />
-    </Tooltip>
-  </label>
-);
+const CustomCheckBox = (props: any) => {
+  const { getInputProps, getCheckboxProps } = useCheckbox(props);
 
-const CheckBoxItems = ({ options, type, onChange, defaultValue }: ITraitInputProps) => (
-  <CheckboxGroup
-    defaultValue={defaultValue && defaultValue.map((o) => o.toString())}
-    onChange={(v) => onChange(v.map((i) => Number(i)))}
-  >
-    <Stack isInline={true} spacing={3}>
-      {options.map((o) => (
-        <CustomCheckbox
-          key={o.id}
-          value={o.id.toString()}
-          label={o.value}
-          icon={o.name}
-          type={type}
-        />
-      ))}
-    </Stack>
-  </CheckboxGroup>
-);
+  return (
+    <label>
+      <input {...getInputProps()} />
+      <Box
+        {...getCheckboxProps()}
+        p={1}
+        cursor="pointer"
+        borderWidth="2px"
+        borderRadius="md"
+        bg="white"
+        _checked={{
+          borderColor: "blue.500",
+          bg: "blue.50"
+        }}
+        _focus={{
+          boxShadow: "outline"
+        }}
+      >
+        {props.children}
+      </Box>
+    </label>
+  );
+};
+
+const CheckBoxItems = ({ options, type, onChange, defaultValue }: ITraitInputProps) => {
+  const { getCheckboxProps } = useCheckboxGroup({
+    defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
+    onChange: (v) => onChange(v.map((i) => Number(i)))
+  });
+
+  return (
+    <HStack>
+      {options.map((o) => {
+        return (
+          <CustomCheckBox key={o.id} {...getCheckboxProps({ value: o.id.toString() })}>
+            <Tooltip title={o.name} placement="top" hasArrow={true}>
+              <Image
+                boxSize="3rem"
+                ignoreFallback={true}
+                loading="lazy"
+                src={getLocalIcon(o.name, type)}
+                alt={o.name}
+              />
+            </Tooltip>
+          </CustomCheckBox>
+        );
+      })}
+    </HStack>
+  );
+};
 
 export default CheckBoxItems;
