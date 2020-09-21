@@ -1,5 +1,5 @@
 import SITE_CONFIG from "@configs/site-config.json";
-import { GlobalStateProvider } from "@hooks/useGlobalState";
+import { GlobalStateProvider } from "@hooks/use-global-state";
 import { UserGroupIbp } from "@interfaces/observation";
 import { TOKEN } from "@static/constants";
 import useNookies from "next-nookies-persist";

@@ -5,7 +5,7 @@ import SpeciesGroupBox from "@components/pages/observation/show/info/species-gro
 import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import useObservationFilter from "@hooks/useObservationFilter";
 import LocationIcon from "@icons/location";
 import { ObservationListPageMapper } from "@interfaces/observation";

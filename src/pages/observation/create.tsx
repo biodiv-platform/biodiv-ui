@@ -6,7 +6,7 @@ import { encode } from "base64-url";
 import React, { useEffect } from "react";
 import { axGroupList } from "@services/usergroup.service";
 import { absoluteUrl } from "@utils/basic";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 
 const ObservationCreatePage = ({ speciesGroups, languages, ObservationCreateFormData }) => {
   const { isLoggedIn } = useGlobalState();

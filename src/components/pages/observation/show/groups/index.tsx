@@ -1,6 +1,6 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { Featured, ObservationUserPermission, UserGroupIbp } from "@interfaces/observation";
 import { hasAccess } from "@utils/auth";

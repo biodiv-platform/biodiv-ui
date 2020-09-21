@@ -1,5 +1,5 @@
 import SITE_CONFIG from "@configs/site-config.json";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { ENDPOINT } from "@static/constants";
 import dynamic from "next/dynamic";
 import React from "react";

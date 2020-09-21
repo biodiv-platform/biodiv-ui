@@ -1,5 +1,5 @@
 import { defaultLocale } from "@configs/i18n/config";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import NextLink, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 import { parse, stringify } from "querystring";

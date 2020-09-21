@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";

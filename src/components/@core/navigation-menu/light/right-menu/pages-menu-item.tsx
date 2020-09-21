@@ -1,6 +1,6 @@
 import { MenuDivider, MenuItem, MenuList } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import React from "react";
 
 const SubMenuLink = ({ item, onClose }) => (

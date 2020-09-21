@@ -2,7 +2,7 @@ import { Avatar, AvatarGroup, Box, Button, SimpleGrid, Stack, Text } from "@chak
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
 import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import LockIcon from "@icons/lock";

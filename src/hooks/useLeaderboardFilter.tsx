@@ -8,7 +8,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import useDidUpdateEffect from "./useDidUpdateEffect";
-import useGlobalState from "./useGlobalState";
+import useGlobalState from "./use-global-state";
 
 interface LeaderboardFilterContextProps {
   filter?: LeaderboardFilterProps;

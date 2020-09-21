@@ -4,7 +4,7 @@ import SelectField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axAddUserGroupRule } from "@services/usergroup.service";
 import { formatDateReverse, parseDate } from "@utils/date";

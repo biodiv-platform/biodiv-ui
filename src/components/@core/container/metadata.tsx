@@ -1,6 +1,6 @@
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import * as Sentry from "@sentry/react";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";

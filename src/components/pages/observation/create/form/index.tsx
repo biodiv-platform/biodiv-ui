@@ -5,7 +5,7 @@ import Submit from "@components/form/submit-button";
 import useTranslation from "@configs/i18n/useTranslation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import {
   RESOURCES_UPLOADING,

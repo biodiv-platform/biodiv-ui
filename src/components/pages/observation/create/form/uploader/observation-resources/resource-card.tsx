@@ -1,6 +1,6 @@
 import { CloseButton, Flex, Image, Input } from "@chakra-ui/core";
 import styled from "@emotion/styled";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";

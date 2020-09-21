@@ -12,7 +12,7 @@ import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import useObservationFilter from "@hooks/useObservationFilter";
 import DownloadIcon from "@icons/download";
 import { axDownloadFilteredObservations } from "@services/observation.service";

@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import { axJoinUserGroup } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";

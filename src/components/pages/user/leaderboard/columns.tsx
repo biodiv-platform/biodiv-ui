@@ -1,7 +1,7 @@
 import { Avatar, Stack } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
 import { format } from "indian-number-format";
 import React from "react";

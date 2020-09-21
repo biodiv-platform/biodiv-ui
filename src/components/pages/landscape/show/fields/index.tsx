@@ -1,6 +1,6 @@
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/core";
 import EditIcon from "@icons/edit";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";

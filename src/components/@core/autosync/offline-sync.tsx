@@ -1,6 +1,6 @@
 import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";
 import useOnlineStatus from "@rehooks/online-status";
 import { axUploadObservationResource } from "@services/files.service";

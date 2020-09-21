@@ -1,7 +1,7 @@
 import { AspectRatio, IconButton, Image, VisuallyHidden } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useMemo } from "react";

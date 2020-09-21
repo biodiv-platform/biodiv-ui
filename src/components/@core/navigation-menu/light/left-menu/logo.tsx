@@ -2,7 +2,7 @@ import { Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import CrossIcon from "@icons/cross";
 import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
