@@ -45,7 +45,7 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
 
   const removeGalleryItem = async (index) => {
     if (galleryList[index]?.id) {
-      const { success } = await axRemoveHomePageGalleryImage(userGroupId, galleryList[index]?.id);
+      const { success } = await axRemoveHomePageGalleryImage(userGroupId, galleryList, index);
       if (!success) {
         notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.REMOVE.FAILURE"), NotificationType.Error);
       }

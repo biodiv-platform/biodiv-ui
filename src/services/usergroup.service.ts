@@ -327,14 +327,16 @@ export const axUpdateHomePageDetails = async (userGroupId, payload) => {
   }
 };
 
-export const axRemoveHomePageGalleryImage = async (userGroupId, galleryId) => {
+export const axRemoveHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
-    const { data } = await http.put(
-      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${galleryId}`
+    await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${galleryList[index]?.id}`
     );
-    const { response, payload } = reorderRemovedGallerySetup(data);
+    const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
+    payload.length > 1
+      ? await http.put(`${ENDPOINT.USERGROUP}/v1/group/homePage/reordering/${userGroupId}`, payload)
+      : null;
 
-    await http.put(`${ENDPOINT.USERGROUP}/v1/group/homePage/reordering/${userGroupId}`, payload);
     return { success: true, data: response };
   } catch (e) {
     console.error(e);

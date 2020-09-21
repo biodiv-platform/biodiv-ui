@@ -66,16 +66,23 @@ export const formatGroupRules = (rules) => {
   return groupRules;
 };
 
-export const reorderRemovedGallerySetup = (data) => {
-  const list = data?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder);
-  const response =
-    list.length <= 1
-      ? (list[1].displayOrder = 0)
-      : list.map((item, index) => {
-          if (item[index - 1].displayOrder !== item[index].displayOrder) {
-            item[index].displayOrder = item[index].displayOrder - 1;
-          }
-        });
+export const reorderRemovedGallerySetup = (data, index) => {
+  const list = data.sort((a, b) => a.displayOrder - b.displayOrder);
+  const removedDisplayOrder = data[index].displayOrder;
+
+  const serializeDisplayOrder = () => {
+    return list.reduce((acc, item) => {
+      if (item.displayOrder !== removedDisplayOrder) {
+        if (item.displayOrder > removedDisplayOrder) {
+          item.displayOrder = item.displayOrder - 1;
+        }
+        acc.push(item);
+      }
+      return acc;
+    }, []);
+  };
+  const response = list.length <= 1 ? list : serializeDisplayOrder();
+
   return {
     response,
     payload: response.map(({ id, displayOrder }) => ({ galleryId: id, displayOrder }))
