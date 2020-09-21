@@ -3,7 +3,7 @@ import "@styles/global.scss";
 import { ChakraProvider, CSSReset } from "@chakra-ui/core";
 import AppContainer from "@components/@core/container";
 import { customTheme } from "@configs/theme";
-import { LocaleProvider } from "@hooks/useTranslation";
+import { LocaleProvider } from "@hooks/use-locale";
 import { processedInitialProps } from "@utils/bootstrap";
 import { NookiesProvider } from "next-nookies-persist";
 import Router from "next/router";

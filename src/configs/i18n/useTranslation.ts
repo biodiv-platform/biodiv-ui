@@ -1,7 +1,7 @@
 import { compiledMessage, getByPath } from "@utils/basic";
 import { useContext } from "react";
 
-import { LocaleContext } from "@hooks/useTranslation";
+import { LocaleContext } from "@hooks/use-locale";
 import { defaultLocale } from "./config";
 
 export default function useTranslation() {
