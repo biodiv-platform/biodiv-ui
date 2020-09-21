@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/core";
 import { ArrowDownIcon } from "@chakra-ui/icons";
 import useGlobalState from "@hooks/use-global-state";
-import useLeaderboardFilter from "@hooks/useLeaderboardFilter";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
 import React, { useState } from "react";
 import { useSortBy, useTable } from "react-table";
+
+import useLeaderboardFilter from "./use-leaderboard-filter";
 
 function UserLeaderboardTable({ columns }) {
   const { leaderboardData, setLeaderboard, filter } = useLeaderboardFilter();

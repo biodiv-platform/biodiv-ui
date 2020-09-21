@@ -1,7 +1,6 @@
 import { Select, Stack } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import useTranslation from "@configs/i18n/useTranslation";
-import useLeaderboardFilter from "@hooks/useLeaderboardFilter";
 import { LEADERBOARD_MODULES, LEADERBOARD_STOPS } from "@static/leaderboard";
 import React from "react";
 
@@ -12,6 +11,7 @@ import {
 } from "./columns";
 import Info from "./info";
 import UserLeaderboardTable from "./table";
+import useLeaderboardFilter from "./use-leaderboard-filter";
 
 const STOPS = [20, 100, 200, 500];
 
