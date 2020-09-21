@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";

@@ -20,7 +20,7 @@ import UserBadge from "@components/@core/user/badge";
 import Select from "@components/form/select";
 import Submit from "@components/form/submit-button";
 import TextArea from "@components/form/textarea";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import FlagFillIcon from "@icons/flag-fill";
 import FlagOutlineIcon from "@icons/flag-outline";

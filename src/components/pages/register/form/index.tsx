@@ -8,7 +8,7 @@ import Select from "@components/form/select";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";
 import { axCreateUser } from "@services/auth.service";

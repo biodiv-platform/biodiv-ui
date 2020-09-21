@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/core";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import { toHumanString } from "human-readable-numbers";
 import React from "react";

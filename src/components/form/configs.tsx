@@ -1,7 +1,7 @@
 import { IconButton } from "@chakra-ui/core";
 import { CloseIcon, CopyIcon } from "@chakra-ui/icons";
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 export const selectStyles = {

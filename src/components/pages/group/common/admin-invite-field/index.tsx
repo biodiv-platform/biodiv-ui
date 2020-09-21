@@ -1,5 +1,5 @@
 import SelectAsyncInputField from "@components/form/select-async";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
 import React from "react";
 

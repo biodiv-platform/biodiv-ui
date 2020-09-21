@@ -1,5 +1,5 @@
 import { Link } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import FeedbackIcon from "@icons/feedback";
 import React from "react";

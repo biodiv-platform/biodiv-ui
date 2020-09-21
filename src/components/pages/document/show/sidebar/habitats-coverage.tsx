@@ -1,6 +1,6 @@
 import { AspectRatio, Box, Image, SimpleGrid } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 export default function HabitatsCoverage({ habitat }) {

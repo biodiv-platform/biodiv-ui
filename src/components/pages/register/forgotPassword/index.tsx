@@ -7,7 +7,7 @@ import PhoneNumber from "@components/form/phone-number";
 import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import { axForgotPassword, axRegenerateOTP, axResetPassword } from "@services/auth.service";
 import notification, { NotificationType } from "@utils/notification";

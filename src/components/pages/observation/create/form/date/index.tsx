@@ -3,7 +3,7 @@ import Datepicker from "@components/form/datepicker";
 import RichTextarea from "@components/form/rich-textarea";
 import Select from "@components/form/select";
 import SelectAsync from "@components/form/select-async";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axQueryTagsByText } from "@services/observation.service";
 import React from "react";
 

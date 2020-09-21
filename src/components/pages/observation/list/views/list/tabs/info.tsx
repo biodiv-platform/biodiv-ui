@@ -4,7 +4,7 @@ import FlagActionButton from "@components/@core/action-buttons/flag";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import LocationIcon from "@icons/location";

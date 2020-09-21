@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/core";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import SelectField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";

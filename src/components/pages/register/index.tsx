@@ -3,7 +3,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import { NextSeo } from "next-seo";
 import React from "react";

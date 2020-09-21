@@ -5,7 +5,7 @@ import RichTextareaField from "@components/form/rich-textarea";
 import SelectInputField from "@components/form/select";
 import SelectAsyncInputField from "@components/form/select-async";
 import TextBoxField from "@components/form/text";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axGetDocumentBibFields, axQueryDocumentTagsByText } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
 import { LICENSES_ARRAY } from "@static/licenses";

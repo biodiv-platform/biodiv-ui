@@ -2,7 +2,7 @@ import { Box, useDisclosure } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";

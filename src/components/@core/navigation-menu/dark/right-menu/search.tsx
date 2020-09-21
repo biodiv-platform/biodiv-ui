@@ -1,4 +1,4 @@
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import { googleSearch } from "@utils/search";
 import { Mq } from "mq-styled-components";

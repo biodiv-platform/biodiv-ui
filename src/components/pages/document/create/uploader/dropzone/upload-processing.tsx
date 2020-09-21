@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/core";
 import { TimeIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 export default function UploadProcessing() {

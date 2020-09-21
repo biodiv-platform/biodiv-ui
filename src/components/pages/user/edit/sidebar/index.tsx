@@ -1,5 +1,5 @@
 import { AspectRatio, Avatar, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateUserImage } from "@services/user.service";
 import { getUserImage } from "@utils/media";

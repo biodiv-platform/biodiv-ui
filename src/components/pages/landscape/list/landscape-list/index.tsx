@@ -1,6 +1,6 @@
 import { Link } from "@chakra-ui/core";
 import ObservationLoading from "@components/pages/observation/list/loading";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";

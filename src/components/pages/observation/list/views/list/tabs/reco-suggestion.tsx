@@ -1,6 +1,6 @@
 import BoxHeading from "@components/@core/layout/box-heading";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 import AddSuggestion from "@components/pages/observation/show/suggestion/add-suggestion";

@@ -1,7 +1,7 @@
 import { Heading, Spinner, Text } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import CheckIcon from "@icons/check";
 import { SYNC_SINGLE_OBSERVATION_DONE, SYNC_SINGLE_OBSERVATION_ERROR } from "@static/events";

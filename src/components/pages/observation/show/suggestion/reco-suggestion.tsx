@@ -1,7 +1,7 @@
 import { Avatar, AvatarGroup, Box, Button, SimpleGrid, Stack, Text } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";

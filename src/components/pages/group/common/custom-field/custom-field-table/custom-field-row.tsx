@@ -1,6 +1,6 @@
 import { Box, Button } from "@chakra-ui/core";
 import { DragHandleIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import DeleteIcon from "@icons/delete";

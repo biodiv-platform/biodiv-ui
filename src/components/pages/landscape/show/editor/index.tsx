@@ -8,7 +8,7 @@ import "tinymce/themes/silver/theme";
 import "tinymce/tinymce";
 
 import { Button, Stack } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axSaveLandscapeField, axUploadEditorResource } from "@services/landscape.service";
 import { Editor } from "@tinymce/tinymce-react";

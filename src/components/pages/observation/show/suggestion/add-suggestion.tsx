@@ -11,7 +11,7 @@ import {
 import Select from "@components/form/select";
 import SelectAsync from "@components/form/select-async";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers";
 import CheckIcon from "@icons/check";

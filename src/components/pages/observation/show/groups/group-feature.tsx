@@ -9,7 +9,7 @@ import {
   Textarea,
   useDisclosure
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { Featured, UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";

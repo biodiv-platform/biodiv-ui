@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import { axJoinUserGroup } from "@services/usergroup.service";

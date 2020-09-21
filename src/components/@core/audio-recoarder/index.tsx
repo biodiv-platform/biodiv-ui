@@ -1,5 +1,5 @@
 import { Box, Button } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import MicrophoneIcon from "@icons/microphone";
 import StopIcon from "@icons/stop";
 import React, { useRef } from "react";

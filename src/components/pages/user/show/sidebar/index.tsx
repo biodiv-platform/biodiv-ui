@@ -1,7 +1,7 @@
 import { AspectRatio, Avatar, Box, Button, Flex, Heading, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { adminOrAuthor } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import React, { useEffect, useState } from "react";

@@ -9,7 +9,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import React, { useEffect, useState } from "react";

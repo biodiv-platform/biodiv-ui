@@ -1,6 +1,6 @@
 import { Button, Heading, Text } from "@chakra-ui/core";
 import { TimeIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import { axUploadResource } from "@services/files.service";
 import React, { useState } from "react";

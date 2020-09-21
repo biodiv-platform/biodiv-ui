@@ -5,7 +5,7 @@ import CheckBoxField from "@components/form/checkbox";
 import RichTextareaField from "@components/form/rich-textarea";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axUserGroupCreate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";

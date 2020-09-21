@@ -11,7 +11,7 @@ import {
   PopoverTrigger
 } from "@chakra-ui/core";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { axRateObservationResource } from "@services/observation.service";

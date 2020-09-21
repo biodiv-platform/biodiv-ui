@@ -7,7 +7,7 @@ import {
   InputLeftElement
 } from "@chakra-ui/core";
 import { SearchIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { getTraitIcon } from "@utils/media";
 import React, { useState } from "react";

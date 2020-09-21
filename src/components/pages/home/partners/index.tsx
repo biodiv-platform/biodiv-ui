@@ -1,5 +1,5 @@
 import { Heading, Link, SimpleGrid } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import partnersData from "@static/partners";
 import React from "react";

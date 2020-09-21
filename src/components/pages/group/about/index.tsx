@@ -1,7 +1,7 @@
 import { Badge, Flex } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 import UserAvatarList from "../common/user-image-list";

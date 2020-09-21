@@ -2,7 +2,7 @@ import { Collapse, SimpleGrid } from "@chakra-ui/core";
 import CheckBox from "@components/form/checkbox";
 import Select from "@components/form/select";
 import SelectAsync from "@components/form/select-async";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { UseFormMethods } from "react-hook-form";

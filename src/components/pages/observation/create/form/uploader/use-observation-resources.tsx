@@ -1,4 +1,4 @@
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import {
   axListMyUploads,

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/core";
 import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";

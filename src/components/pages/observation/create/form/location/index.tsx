@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
 import Select from "@components/form/select";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
 import useOnlineStatus from "@rehooks/online-status";

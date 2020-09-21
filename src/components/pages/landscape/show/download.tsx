@@ -1,6 +1,6 @@
 import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
 import { ChevronUpIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import DownloadIcon from "@icons/download";
 import { axDownloadLandscape } from "@services/landscape.service";
 import { waitForAuth } from "@utils/auth";

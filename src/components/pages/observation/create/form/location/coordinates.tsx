@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/core";
 import CheckBox from "@components/form/checkbox";
 import ErrorMessage from "@components/form/common/error-message";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { fromDMS, toDMS } from "dmsformat";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";

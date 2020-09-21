@@ -1,6 +1,6 @@
 import { AspectRatio, Text } from "@chakra-ui/core";
 import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import AddIcon from "@icons/add";
 import { resizeMultiple } from "@utils/image";

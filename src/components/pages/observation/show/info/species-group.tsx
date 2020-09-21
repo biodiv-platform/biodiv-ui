@@ -1,7 +1,7 @@
 import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/core";
 import { CheckIcon } from "@chakra-ui/icons";
 import { selectStyles } from "@components/form/configs";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
 import { SpeciesGroup } from "@interfaces/observation";

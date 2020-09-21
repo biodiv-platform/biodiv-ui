@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, FormLabel } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";

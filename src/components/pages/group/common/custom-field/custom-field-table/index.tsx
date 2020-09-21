@@ -1,5 +1,5 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import { axRemoveCustomField, axReorderCustomField } from "@services/usergroup.service";

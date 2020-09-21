@@ -1,6 +1,6 @@
 import { Button, VisuallyHidden } from "@chakra-ui/core";
 import { ArrowUpIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axParseBib } from "@services/document.service";
 import React from "react";
 

@@ -2,7 +2,7 @@ import { Box, FormLabel, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra
 import WKT, { WKTProps } from "@components/@core/WKT";
 import WKTSearch from "@components/@core/WKT/search";
 import WKTList from "@components/@core/WKT/wkt-list";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 

@@ -9,7 +9,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import DeleteIcon from "@icons/delete";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";

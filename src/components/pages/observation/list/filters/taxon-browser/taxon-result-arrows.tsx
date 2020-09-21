@@ -1,6 +1,6 @@
 import { IconButton, Stack } from "@chakra-ui/core";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";
 
 export default function TaxonResultArrows({ resultsCount }) {

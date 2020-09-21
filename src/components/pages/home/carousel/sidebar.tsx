@@ -1,7 +1,7 @@
 import { Flex, Heading, Link, Text } from "@chakra-ui/core";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BlurBox from "@components/@core/blur-box";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { GallerySlider } from "@interfaces/utility";
 import { getObservationThumbnail } from "@utils/media";
 import React from "react";

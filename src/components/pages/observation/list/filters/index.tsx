@@ -9,7 +9,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import React from "react";

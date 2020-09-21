@@ -1,6 +1,6 @@
 import { Avatar, Box, Flex, Image, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import { GallerySlider } from "@interfaces/utility";
 import { HERO_FALLBACK } from "@static/home";

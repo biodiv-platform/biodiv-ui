@@ -1,6 +1,6 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 export default function Info({ icon: Icon, title, link }) {

@@ -10,7 +10,7 @@ import {
   Text,
   useDisclosure
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";
 import { sortByOptions, viewTabs } from "@static/observation-list";

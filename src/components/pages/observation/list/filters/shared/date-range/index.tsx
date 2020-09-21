@@ -6,7 +6,7 @@ import {
   Box,
   Input
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { formatDateReverse, parseDateReverse } from "@utils/date";
 import React, { useMemo } from "react";

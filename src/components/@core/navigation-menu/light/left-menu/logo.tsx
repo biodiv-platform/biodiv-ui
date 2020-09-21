@@ -1,6 +1,6 @@
 import { Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import CrossIcon from "@icons/cross";

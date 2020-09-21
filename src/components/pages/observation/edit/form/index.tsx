@@ -2,7 +2,7 @@ import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/core";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import CheckIcon from "@icons/check";
 import { AssetStatus } from "@interfaces/custom";

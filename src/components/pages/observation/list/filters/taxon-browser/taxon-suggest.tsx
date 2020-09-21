@@ -4,7 +4,7 @@ import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import { axGetTaxonList, doTaxonSearch } from "@services/api.service";
 import React, { useState } from "react";

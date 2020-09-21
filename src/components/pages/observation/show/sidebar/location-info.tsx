@@ -1,6 +1,6 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { ObservationLocationInfo } from "@interfaces/observation";
 import { titleCase } from "@utils/basic";
 import React from "react";

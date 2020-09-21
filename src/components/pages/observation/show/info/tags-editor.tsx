@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";

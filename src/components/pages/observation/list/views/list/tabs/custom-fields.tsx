@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CustomFieldList from "@components/pages/observation/show/custom-fields/list";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { ObservationData } from "@interfaces/custom";

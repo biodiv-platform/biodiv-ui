@@ -1,5 +1,5 @@
 import { IconButton, Text } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import DeleteIcon from "@icons/delete";
 import PDFIcon from "@icons/pdf";

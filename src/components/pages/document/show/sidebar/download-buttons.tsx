@@ -1,5 +1,5 @@
 import { Button, SimpleGrid } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import DownloadIcon from "@icons/download";
 import PeopleIcon from "@icons/people";
 import { axDownloadDocument } from "@services/document.service";

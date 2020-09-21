@@ -6,7 +6,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React, { useState } from "react";
 
 import AddCustomFieldForm from "./custom-field-form";

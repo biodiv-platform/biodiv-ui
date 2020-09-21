@@ -1,6 +1,6 @@
 import { Avatar, Link, Menu, MenuButton } from "@chakra-ui/core";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";

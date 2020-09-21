@@ -1,7 +1,7 @@
 import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { getObservationThumbnail, getSpeciesIcon } from "@utils/media";
 import React, { useReducer } from "react";
 
