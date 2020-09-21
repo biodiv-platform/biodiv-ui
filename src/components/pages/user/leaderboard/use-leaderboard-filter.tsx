@@ -7,8 +7,8 @@ import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
-import useDidUpdateEffect from "../../../../hooks/use-did-update-effect";
-import useGlobalState from "../../../../hooks/use-global-state";
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
+import useGlobalState from "@hooks/use-global-state";
 
 interface LeaderboardFilterContextProps {
   filter?: LeaderboardFilterProps;

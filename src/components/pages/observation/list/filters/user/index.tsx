@@ -1,7 +1,7 @@
 import { Spinner } from "@chakra-ui/core";
 import { selectStyles } from "@components/form/configs";
 import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { axGetUsersByID, axUserFilterSearch } from "@services/user.service";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";

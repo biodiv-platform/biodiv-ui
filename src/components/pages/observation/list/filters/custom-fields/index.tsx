@@ -7,7 +7,7 @@ import {
   Text
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 
 import SubAccordion from "../shared/sub-accordion";

@@ -2,7 +2,7 @@ import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@configs/i18n/useTranslation";
 import styled from "@emotion/styled";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/observation-list";
 import { Mq } from "mq-styled-components";

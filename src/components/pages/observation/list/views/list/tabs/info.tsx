@@ -6,7 +6,7 @@ import ObservationStatusBadge from "@components/pages/observation/show/status-ba
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useTranslation from "@configs/i18n/useTranslation";
 import useGlobalState from "@hooks/use-global-state";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import LocationIcon from "@icons/location";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";

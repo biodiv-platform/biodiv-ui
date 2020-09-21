@@ -3,7 +3,7 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import CustomFieldList from "@components/pages/observation/show/custom-fields/list";
 import useTranslation from "@configs/i18n/useTranslation";
 import useGlobalState from "@hooks/use-global-state";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { ObservationData } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axGetCustomFieldsPermissions } from "@services/observation.service";

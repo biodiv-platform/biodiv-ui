@@ -1,3 +1,5 @@
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
+import useGlobalState from "@hooks/use-global-state";
 import { ObservationData, ObservationFilterProps } from "@interfaces/custom";
 import { SpeciesGroup } from "@interfaces/esmodule";
 import { UserGroup, UserGroupIbp } from "@interfaces/observation";
@@ -9,9 +11,6 @@ import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
-
-import useDidUpdateEffect from "./use-did-update-effect";
-import useGlobalState from "./use-global-state";
 
 const deDupeObservations = (existingObservations, newObservations) => {
   const existingIDs = existingObservations.map(({ observationId }) => observationId);

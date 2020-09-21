@@ -11,7 +11,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";
 import { sortByOptions, viewTabs } from "@static/observation-list";
 import { toHumanString } from "human-readable-numbers";

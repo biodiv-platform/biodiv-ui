@@ -7,7 +7,7 @@ import {
   Input
 } from "@chakra-ui/core";
 import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { formatDateReverse, parseDateReverse } from "@utils/date";
 import React, { useMemo } from "react";
 import Flatpickr from "react-flatpickr";

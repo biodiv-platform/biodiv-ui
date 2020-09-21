@@ -13,7 +13,7 @@ import TextAreaField from "@components/form/textarea";
 import useTranslation from "@configs/i18n/useTranslation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";
 import { axDownloadFilteredObservations } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
