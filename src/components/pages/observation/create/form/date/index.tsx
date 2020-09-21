@@ -9,7 +9,7 @@ import React from "react";
 
 import { DATE_ACCURACY_OPTIONS } from "../options";
 
-export const onTagsQuery = async (q) => {
+const onTagsQuery = async (q) => {
   const { data } = await axQueryTagsByText(q);
   return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
 };

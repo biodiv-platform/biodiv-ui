@@ -24,7 +24,7 @@ export const axGetUser = async () => {
     const { data } = await http.get(`${ENDPOINT.USER}/v1/user/me`);
     return { success: true, data };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error("USER_ME", e);
     return { success: false, data: {} };
   }
 };
@@ -34,7 +34,8 @@ export const axCreateUser = async (payload) => {
     const { data } = await axios.post(`${ENDPOINT.USERGROUP}/v1/group/register`, payload);
     return { success: true, data };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
+    notification(e?.response?.data?.message);
     return { success: false, data: {} };
   }
 };
@@ -47,7 +48,8 @@ export const axValidateUser = async (payload) => {
     );
     return { success: true, data };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
+    notification(e?.response?.data?.message);
     return { success: false, data: {} };
   }
 };
@@ -60,7 +62,8 @@ export const axRegenerateOTP = async (payload) => {
     );
     return { success: true, data };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
+    notification(e?.response?.data?.message);
     return { success: false, data: {} };
   }
 };
@@ -86,7 +89,8 @@ export const axResetPassword = async (payload) => {
     );
     return { success: true, data };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
+    notification(e?.response?.data?.message);
     return { success: false, data: {} };
   }
 };
@@ -98,7 +102,8 @@ export const axUserSearch = async (name) => {
     });
     return { success: true, data: data.map((o) => ({ ...o, display: o.name })) };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
+    notification(e?.response?.data?.message);
     return { success: false, data: [] };
   }
 };

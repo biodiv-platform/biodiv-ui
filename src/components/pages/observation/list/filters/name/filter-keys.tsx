@@ -11,7 +11,7 @@ export const RECO_NAME = [
   }
 ];
 
-export const TAXON_RANKS = [
+const TAXON_RANKS = [
   "Kingdom",
   "Phylum",
   "Class",

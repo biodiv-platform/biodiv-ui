@@ -5,7 +5,7 @@ import SITE_CONFIG from "@configs/site-config.json";
 import { Previewer } from "naksha-components-react";
 import React from "react";
 
-export const coverageToGeoJson = (coverage) => ({
+const coverageToGeoJson = (coverage) => ({
   type: "FeatureCollection",
   features: coverage.map(({ topology }) => ({
     type: "Feature",

@@ -7,7 +7,7 @@ import { useTimer } from "use-timer";
 
 const pad = (number) => number.toString().toString().padStart(2, "0");
 
-export const SecondsToMinutes = ({ totalSeconds }) => {
+const SecondsToMinutes = ({ totalSeconds }) => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds - minutes * 60;
   return (

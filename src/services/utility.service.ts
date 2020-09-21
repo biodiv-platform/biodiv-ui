@@ -53,15 +53,3 @@ export const axGetAllHabitat = async () => {
     return { success: false, data: [] };
   }
 };
-
-export const axGetGroupHompageDetails = async (userGroupId) => {
-  try {
-    const { data } = await axios.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
-      params: { userGroupId }
-    });
-    return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false };
-  }
-};

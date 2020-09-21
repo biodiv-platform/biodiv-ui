@@ -2,7 +2,7 @@ import { Box, Flex, Image, SimpleGrid, useCheckbox, useCheckboxGroup } from "@ch
 import { getGroupImageThumb } from "@utils/media";
 import React from "react";
 
-export interface ITraitInputProps {
+interface ITraitInputProps {
   type?: string;
   options: any[];
   gridColumns?;

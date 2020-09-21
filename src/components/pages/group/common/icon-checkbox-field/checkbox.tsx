@@ -3,7 +3,7 @@ import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
 import React from "react";
 
-export interface ITraitInputProps {
+interface ITraitInputProps {
   type?: string;
   options: any[];
   gridColumns?;

@@ -84,6 +84,4 @@ export const FEATURES = [
   }
 ];
 
-export const PARTNER_FALLBACK = `data:image/svg+xml,%3Csvg width='200' height='100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='M0 0h200v100H0z'/%3E%3C/svg%3E`;
-
 export const HERO_FALLBACK = `data:image/svg+xml,%3Csvg width='800' height='500' viewBox='0 0 800 500' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H800V500H0V0Z' fill='%23E2E8F0'/%3E%3Cpath d='M414 232H386C383.791 232 382 233.791 382 236V264C382 266.209 383.791 268 386 268H414C416.209 268 418 266.209 418 264V236C418 233.791 416.209 232 414 232Z' stroke='%23A0AEC0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M393 246C394.657 246 396 244.657 396 243C396 241.343 394.657 240 393 240C391.343 240 390 241.343 390 243C390 244.657 391.343 246 393 246Z' stroke='%23A0AEC0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M418 256L408 246L386 268' stroke='%23A0AEC0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A`;

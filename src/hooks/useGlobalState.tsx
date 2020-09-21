@@ -1,6 +1,8 @@
 import { UserGroupIbp } from "@interfaces/observation";
 import { User } from "@interfaces/user";
+import { AUTHWALL } from "@static/events";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useListener } from "react-gbus";
 
 interface GlobalStateContextProps {
   user?: User;
@@ -33,6 +35,8 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   useEffect(() => {
     setIsLoggedIn(!!user?.id);
   }, [user]);
+
+  useListener(setUser, [AUTHWALL.SUCCESS]);
 
   return (
     <GlobalStateContext.Provider
