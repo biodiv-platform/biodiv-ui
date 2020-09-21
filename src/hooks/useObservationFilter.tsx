@@ -10,7 +10,7 @@ import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
-import useDidUpdateEffect from "./useDidUpdateEffect";
+import useDidUpdateEffect from "./use-did-update-effect";
 import useGlobalState from "./use-global-state";
 
 const deDupeObservations = (existingObservations, newObservations) => {

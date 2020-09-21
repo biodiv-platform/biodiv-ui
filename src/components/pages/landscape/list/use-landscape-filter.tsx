@@ -1,4 +1,4 @@
-import useDidUpdateEffect from "@hooks/useDidUpdateEffect";
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { Landscape } from "@interfaces/landscape";
 import { axGetLandscapeList } from "@services/landscape.service";
 import { isBrowser } from "@static/constants";
