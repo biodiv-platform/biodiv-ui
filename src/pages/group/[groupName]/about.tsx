@@ -10,9 +10,9 @@ import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-const GroupEditPage = (props) => <AboutGroupComponent {...props} />;
+const GroupAboutPage = (props) => <AboutGroupComponent {...props} />;
 
-GroupEditPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   // Will check if user is logged in or redirect
 
   const aReq = absoluteUrl(ctx);
@@ -25,26 +25,21 @@ GroupEditPage.getInitialProps = async (ctx) => {
   // This can throw error if user is not authorized
   const { success: s1, data: groupInfo } = await axGetUserGroupById(currentGroup.id);
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id);
+
   if (s1 && s2) {
     return {
-      habitats,
-      speciesGroups,
-      groupInfo: { ...groupInfo, icon: groupInfo.icon || "default" },
-      userGroupId: currentGroup.id,
-      founders: data.founderList.map((o) => ({
-        ...o,
-        label: o.label,
-        value: o.value
-      })),
-      moderators: data.moderatorList.map((o) => ({
-        ...o,
-        label: o.label,
-        value: o.value
-      }))
+      props: {
+        habitats,
+        speciesGroups,
+        groupInfo: { ...groupInfo, icon: groupInfo.icon || "default" },
+        userGroupId: currentGroup.id,
+        founders: data.founderList,
+        moderators: data.moderatorList
+      }
     };
   } else {
     throwUnauthorized(ctx);
   }
 };
 
-export default GroupEditPage;
+export default GroupAboutPage;

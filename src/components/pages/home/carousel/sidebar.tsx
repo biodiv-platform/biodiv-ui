@@ -18,7 +18,7 @@ export default function SideBar({ featured, slideIndex }: ISidebarProps) {
   return (
     <BlurBox
       bg={getObservationThumbnail(fileName, 500)}
-      fallbackColor="linear-gradient(to bottom, var(--gray-700), var(--gray-800))"
+      fallbackColor="linear-gradient(to bottom, var(--gray-800), var(--gray-900))"
     >
       <Flex p={10} className="content" h="full" justify="center" direction="column">
         <Heading as="h1" fontWeight="100" mb={4}>

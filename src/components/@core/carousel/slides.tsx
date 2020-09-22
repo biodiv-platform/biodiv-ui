@@ -56,6 +56,7 @@ function CarouselSlides({ resources, alt, speciesGroup }) {
             <Image
               className="carousel--image"
               loading="lazy"
+              ignoreFallback={true}
               src={getObservationImage(resource.fileName, RESOURCE_SIZE.PREVIEW)}
               placeholder={fallbackSpinner}
               alt={resource.description || alt || resource.fileName}

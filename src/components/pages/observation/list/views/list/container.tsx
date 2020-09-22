@@ -1,8 +1,8 @@
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@hooks/use-translation";
-import styled from "@emotion/styled";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
 import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/observation-list";
 import { Mq } from "mq-styled-components";
@@ -115,7 +115,7 @@ export default function Container({ o }) {
       <ImageBoxComponent o={o} />
       <VerticalTabs>
         <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
-          <TabPanels className="tab-content">
+          <TabPanels className="tab-content" position="relative">
             <TabPanel>
               <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
             </TabPanel>

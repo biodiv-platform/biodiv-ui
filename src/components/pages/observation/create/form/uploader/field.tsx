@@ -56,16 +56,16 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
           <Tab>📹 {t("OBSERVATION.FROM_URL")}</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
+          <TabPanel p={0}>
             <ResourcesList />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p={0}>
             <MyUploads onDone={onSelectionDone} />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p={0}>
             <AudioInput onDone={onSelectionDone} />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p={0}>
             <FromURL onDone={onSelectionDone} />
           </TabPanel>
         </TabPanels>
