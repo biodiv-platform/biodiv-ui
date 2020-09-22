@@ -37,7 +37,7 @@ export const getServerSideProps = async (ctx) => {
     ctx
   );
 
-  if (s1 && s2 && s3 && s4) {
+  if (s1 && s2 && s3 && s4 && currentGroup?.id) {
     return {
       props: {
         habitats,
