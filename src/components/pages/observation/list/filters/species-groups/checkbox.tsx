@@ -7,8 +7,9 @@ import React from "react";
 
 const CheckboxLabel = styled.label`
   cursor: pointer;
-  border: 1px solid var(--gray-400);
+  border: 1px solid var(--gray-300);
   background: var(--white);
+  overflow: hidden;
 
   img {
     filter: grayscale(1);
@@ -16,7 +17,7 @@ const CheckboxLabel = styled.label`
   }
 
   .badge {
-    background: var(--gray-400);
+    background: var(--gray-500);
     font-size: 0.7rem;
     line-height: 1.2rem;
     color: white;

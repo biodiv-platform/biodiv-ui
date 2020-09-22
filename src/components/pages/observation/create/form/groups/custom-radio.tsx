@@ -25,7 +25,12 @@ const CustomRadio = (props) => {
             boxShadow: "outline"
           }}
         >
-          <Image boxSize="3rem" src={getSpeciesIcon(props.icon)} alt={props.icon} />
+          <Image
+            boxSize="3rem"
+            style={{ filter: props.isChecked ? "none" : "grayscale(1)" }}
+            src={getSpeciesIcon(props.icon)}
+            alt={props.icon}
+          />
         </Box>
       </Tooltip>
     </Box>
