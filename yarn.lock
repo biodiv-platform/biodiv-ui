@@ -6408,10 +6408,10 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.3.0.tgz#7d5ec9f5390ca8936f69b99c06321f13777e553d"
-  integrity sha512-plnwqZGv/pINBelq+uIxiIN3d8SCSHYgHu6UoOpf9mDy4MXMaY4Ur7elbNWH63/seux6y2j/rWgZk7Nds+fMBQ==
+naksha-components-react@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.3.2.tgz#ec338a0d3a9722cd38142fcda5c07f5b1724a0e1"
+  integrity sha512-9Djpo+bnVYAPum7qRlsSHUEHPrdradQfZiHm2hCHjPMDBgXye1A1Ja2+vQ1fM6CB2n/ZbOoocomO6SG2g6vhXQ==
   dependencies:
     "@chakra-ui/core" "^1.0.0-rc.3"
     "@turf/bbox" "^6.0.1"
