@@ -3,8 +3,8 @@ import AboutGroupComponent from "@components/pages/group/about";
 import { axGetspeciesGroups } from "@services/observation.service";
 import {
   axGetGroupAdministratorsByGroupId,
-  axGroupList,
-  axGetUserGroupById
+  axGetUserGroupById,
+  axGroupList
 } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
@@ -26,7 +26,7 @@ export const getServerSideProps = async (ctx) => {
   const { success: s1, data: groupInfo } = await axGetUserGroupById(currentGroup.id);
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id);
 
-  if (s1 && s2) {
+  if (s1 && s2 && currentGroup?.id) {
     return {
       props: {
         habitats,
@@ -37,9 +37,9 @@ export const getServerSideProps = async (ctx) => {
         moderators: data.moderatorList
       }
     };
-  } else {
-    throwUnauthorized(ctx);
   }
+
+  throwUnauthorized(ctx);
 };
 
 export default GroupAboutPage;
