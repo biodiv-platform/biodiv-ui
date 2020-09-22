@@ -118,7 +118,7 @@ export const generateSession = async (
  * @returns {Promise<Record<string, unknown>>}
  */
 export const waitForAuth = (): Promise<Record<string, unknown>> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve: any, reject) => {
     const u = getNookie(TOKEN.USER);
     u?.id ? resolve() : emit(AUTHWALL.INIT, { resolve, reject });
   });
@@ -131,7 +131,7 @@ export const adminOrAuthor = (authorId, ctx?) => {
 
 export const CACHE_WHITELIST = ["v2", "mapbox-tiles", "workbox"];
 
-export const CACHE_MANUAL = "v2-light-cache";
+const CACHE_MANUAL = "v2-light-cache";
 
 export const preCacheRoutes = async (currentGroup) => {
   try {

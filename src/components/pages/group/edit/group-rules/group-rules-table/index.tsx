@@ -1,5 +1,6 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
+import AddIcon from "@icons/add";
 import { axRemoveUserGroupRule } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
@@ -32,7 +33,7 @@ const GroupRulesTable = ({ userGroupId, groupRules, setGroupRules, setIsCreate }
         <GroupRules removeGroupRules={removeGroupRules} groupRules={groupRules} />
       </table>
       <ButtonGroup spacing={4} mt={4}>
-        <Button variantColor="blue" onClick={() => setIsCreate(true)} leftIcon="add">
+        <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
           {t("GROUP.RULES.ADD.TITLE")}
         </Button>
       </ButtonGroup>

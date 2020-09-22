@@ -9,7 +9,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { LoadScriptNext, StandaloneSearchBox } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";

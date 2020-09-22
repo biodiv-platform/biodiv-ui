@@ -170,7 +170,7 @@ export const axAgreeRecoVote = async (observationId, payload) => {
     );
     return { success: true, data };
   } catch (e) {
-    console.error(e.response.data.message);
+    console.error(e?.response?.data);
     return { success: false, data: {} };
   }
 };

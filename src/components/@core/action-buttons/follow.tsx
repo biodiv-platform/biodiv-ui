@@ -1,3 +1,5 @@
+import NotificationsActiveIcon from "@icons/notifications-active";
+import NotificationsNoneIcon from "@icons/notifications-none";
 import React, { useEffect, useState } from "react";
 
 import SimpleActionButton from "./simple";
@@ -25,9 +27,9 @@ export default function FollowActionButton({
 
   return (
     <SimpleActionButton
-      icon={isFollowing ? "ibpnotificationsactive" : "ibpnotificationsnone"}
+      icon={isFollowing ? <NotificationsActiveIcon /> : <NotificationsNoneIcon />}
       title={isFollowing ? unFollowTitle : followTitle}
-      variantColor="blue"
+      colorScheme="blue"
       onClick={toggleFollow}
     />
   );

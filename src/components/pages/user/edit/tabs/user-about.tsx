@@ -10,8 +10,9 @@ import {
   INSTITUTION_OPTIONS,
   OCCUPATION_OPTIONS
 } from "@components/pages/register/form/options";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
+import CheckIcon from "@icons/check";
 import { axUpdateUserAbout } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
@@ -114,7 +115,7 @@ export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentPro
       </SimpleGrid>
       <TextAreaField name="aboutMe" label="About" form={hForm} />
       <LocationPicker form={hForm} />
-      <SubmitButton leftIcon="ibpcheck" form={hForm}>
+      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
         {t("SAVE")}
       </SubmitButton>
     </form>

@@ -1,5 +1,6 @@
-import { Box, Button, CheckboxGroup, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { Box, Button, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/core";
+import useTranslation from "@hooks/use-translation";
+import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupLink } from "@utils/basic";
@@ -7,7 +8,7 @@ import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useRef, useState } from "react";
 
-import Checkbox from "../../create/form/user-groups/checkbox";
+import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
 
 interface IGroupPostProps {
@@ -51,11 +52,9 @@ export default function GroupPost({
     <>
       <Button
         mb={2}
-        p={1}
-        pl={0}
         variant="link"
-        rightIcon="edit"
-        variantColor="blue"
+        rightIcon={<EditIcon />}
+        colorScheme="blue"
         ref={editButtonRef}
         onClick={onToggle}
       >
@@ -79,30 +78,25 @@ export default function GroupPost({
       </SimpleGrid>
 
       <Collapse isOpen={isOpen}>
-        <CheckboxGroup
-          defaultValue={selectedGroups}
-          onChange={setSelectedGroups}
-          display="grid"
-          className="custom-checkbox-group"
-          gridGap={4}
-          gridTemplateColumns={["repeat(1,1fr)", "repeat(1,1fr)", `repeat(2,1fr)`, `repeat(3,1fr)`]}
-        >
-          {groups.length > 0 &&
-            groups.map((o) => (
-              <Checkbox key={o.id} value={o.id.toString()} label={o.name} icon={o.icon} />
-            ))}
-        </CheckboxGroup>
+        {groups.length > 0 && (
+          <CheckBoxItems
+            gridColumns={[1, 1, 2, 3]}
+            options={groups}
+            defaultValue={selectedGroups}
+            onChange={setSelectedGroups}
+          />
+        )}
         <Box mt={2}>
           <Button
             size="sm"
-            variantColor="blue"
+            colorScheme="blue"
             aria-label="Save"
             type="submit"
             onClick={handleOnSave}
           >
             {t("SAVE")}
           </Button>
-          <Button size="sm" ml={2} variantColor="gray" aria-label="Cancel" onClick={handleOnCancel}>
+          <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={handleOnCancel}>
             {t("CLOSE")}
           </Button>
         </Box>

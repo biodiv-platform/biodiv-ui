@@ -1,6 +1,9 @@
-import { Icon, Image, Link } from "@chakra-ui/core";
+import { Image, Link } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
+import AudioIcon from "@icons/audio";
+import ImageIcon from "@icons/image";
+import VideoIcon from "@icons/video";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getObservationImage, getSpeciesIcon } from "@utils/media";
@@ -68,17 +71,17 @@ export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper 
       <div className="stats">
         {o.noOfImages > 0 && (
           <>
-            {o.noOfImages} <Icon name="ibpimage" />
+            {o.noOfImages} <ImageIcon />
           </>
         )}
         {o.noOfVideos > 0 && (
           <>
-            {o.noOfVideos} <Icon name="ibpvideo" />
+            {o.noOfVideos} <VideoIcon />
           </>
         )}
         {o.noOfAudios > 0 && (
           <>
-            {o.noOfAudios} <Icon name="ibpaudio" />
+            {o.noOfAudios} <AudioIcon />
           </>
         )}
       </div>

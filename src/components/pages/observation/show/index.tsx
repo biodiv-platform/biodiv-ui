@@ -1,6 +1,6 @@
 import { Box, SimpleGrid } from "@chakra-ui/core";
 import Carousel from "@components/@core/carousel";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
   ShowData,

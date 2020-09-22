@@ -1,5 +1,5 @@
 import { Text, Textarea } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { CustomFieldData } from "@interfaces/observation";
 import React, { useState } from "react";
 

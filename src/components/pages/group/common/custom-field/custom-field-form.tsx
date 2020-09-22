@@ -1,13 +1,15 @@
 import { Box, Button, SimpleGrid } from "@chakra-ui/core";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import CheckBoxField from "@components/form/checkbox";
 import Select from "@components/form/select";
 import SelectCreatable from "@components/form/select-creatable";
 import SubmitButton from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
+import CheckIcon from "@icons/check";
 import { axAddCustomField, axAddExsistingCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
@@ -161,7 +163,7 @@ export default function AddCustomField({
 
   return (
     <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-      <Button mb={4} type="button" onClick={() => setIsCreate(false)} leftIcon="arrow-back">
+      <Button mb={4} type="button" onClick={() => setIsCreate(false)} leftIcon={<ArrowBackIcon />}>
         {t("GROUP.CUSTOM_FIELD.BACK")}
       </Button>
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
@@ -225,7 +227,7 @@ export default function AddCustomField({
         form={hForm}
         label={t("GROUP.CUSTOM_FIELD.ALLOW_PARTICIPANT")}
       />
-      <SubmitButton leftIcon="check" form={hForm}>
+      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
         {t("GROUP.CUSTOM_FIELD.CREATE")}
       </SubmitButton>
     </form>

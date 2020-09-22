@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
 import Select from "@components/form/select";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
 import useOnlineStatus from "@rehooks/online-status";
@@ -145,7 +145,7 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
     >
       <>
         {!isOnline && !hideLocationPicker && (
-          <Button mb={4} variantColor="red" onClick={getCurrentLocation}>
+          <Button mb={4} colorScheme="red" onClick={getCurrentLocation}>
             Click Here for Manual Coordinates
           </Button>
         )}

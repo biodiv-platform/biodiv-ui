@@ -38,14 +38,15 @@ export default function AuthWall() {
 
   return (
     <Modal isOpen={isOpen} onClose={handleOnFailure}>
-      <ModalOverlay className="fade" />
-      <ModalContent className="fadeInUp" borderRadius="md">
-        <ModalHeader>Auth Wall</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <SignInForm onSuccess={handleOnSuccess} redirect={false} />
-        </ModalBody>
-      </ModalContent>
+      <ModalOverlay className="fade">
+        <ModalContent className="fadeInUp" borderRadius="md">
+          <ModalHeader>Auth Wall</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <SignInForm onSuccess={handleOnSuccess} redirect={false} />
+          </ModalBody>
+        </ModalContent>
+      </ModalOverlay>
     </Modal>
   );
 }

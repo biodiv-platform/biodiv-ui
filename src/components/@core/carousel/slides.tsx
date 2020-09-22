@@ -56,6 +56,7 @@ function CarouselSlides({ resources, alt, speciesGroup }) {
             <Image
               className="carousel--image"
               loading="lazy"
+              ignoreFallback={true}
               src={getObservationImage(resource.fileName, RESOURCE_SIZE.PREVIEW)}
               placeholder={fallbackSpinner}
               alt={resource.description || alt || resource.fileName}
@@ -103,7 +104,7 @@ function CarouselSlides({ resources, alt, speciesGroup }) {
         resources.map(({ resource }) => <div key={resource.id}>{getSlide(resource)}</div>)
       ) : (
         <Box color="gray.500">
-          <Image maxW="20rem" size="full" src={getSpeciesIcon(speciesGroup)} />
+          <Image maxW="20rem" boxSize="full" src={getSpeciesIcon(speciesGroup)} />
         </Box>
       )}
     </CarouselBox>

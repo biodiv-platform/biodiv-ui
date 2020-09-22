@@ -14,7 +14,7 @@ export const CommonNameOption = ({ children, ...props }) => {
       <Stack isInline={true} alignItems="center">
         {hiddenIcon && (
           <Image
-            size="2rem"
+            boxSize="2rem"
             src={getSuggestionIcon(props.data.icon)}
             fallbackSrc={props.data.group}
           />
@@ -23,7 +23,7 @@ export const CommonNameOption = ({ children, ...props }) => {
           <Flex alignItems="center">
             {children}
             {props.data.lang && (
-              <Badge variantColor="red" ml={1}>
+              <Badge colorScheme="red" ml={1}>
                 {props.data.lang}
               </Badge>
             )}
@@ -31,10 +31,10 @@ export const CommonNameOption = ({ children, ...props }) => {
           {props.data.sLabel && (
             <Box fontSize="sm" lineHeight="1rem" color="gray.600">
               {props.data.sLabel}
-              <Badge variantColor={TAXON_BADGE_COLORS[props.data.sStatus]} ml={1}>
+              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.sStatus]} ml={1}>
                 {props.data.sStatus}
               </Badge>
-              <Badge variantColor={TAXON_BADGE_COLORS[props.data.sPosition]} ml={1}>
+              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.sPosition]} ml={1}>
                 {props.data.sPosition}
               </Badge>
             </Box>

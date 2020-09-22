@@ -38,9 +38,9 @@ export const getLocaleStrings = async (lang) => {
   return { [lang]: localeStrings };
 };
 
-export const processedInitialProps = async ({ Component, ctx }: AppContext) => {
+export const processedInitialProps = async ({ Component, ctx, router }: AppContext) => {
   const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
-  const aReq = absoluteUrl(ctx.req);
+  const aReq = absoluteUrl(ctx, router.asPath);
   const domain = aReq.hostname.split(".").slice(-2).join(".");
   const nookies = parseNookies(ctx);
   const userId = nookies?.[TOKEN.USER]?.id;

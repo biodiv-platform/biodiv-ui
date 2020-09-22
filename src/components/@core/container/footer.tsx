@@ -1,9 +1,20 @@
-import { Box, Flex, Icon, Link, Stack } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { Box, Flex, Link, Stack } from "@chakra-ui/core";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
+import FacebookIcon from "@icons/facebook";
+import GithubIcon from "@icons/github";
+import MailIcon from "@icons/mail";
+import TwitterIcon from "@icons/twitter";
 import React from "react";
 
 import { version } from "../../../../package.json";
+
+const ICONS = {
+  FACEBOOK: <FacebookIcon />,
+  GITHUB: <GithubIcon />,
+  MAIL: <MailIcon />,
+  TWITTER: <TwitterIcon />
+};
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -26,9 +37,9 @@ export default function Footer() {
           </div>
         )}
         <Stack isInline={true} spacing={4} mt={2} fontSize="1.4rem">
-          {Object.values(SITE_CONFIG.FOOTER.SOCIAL).map(({ ICON, LABEL, URL }) => (
-            <Link aria-label={t(LABEL)} href={URL} key={ICON}>
-              <Icon name={ICON} />
+          {Object.entries(SITE_CONFIG.FOOTER.SOCIAL).map(([icon, { LABEL, URL }]) => (
+            <Link aria-label={t(LABEL)} href={URL} key={icon}>
+              {ICONS[icon]}
             </Link>
           ))}
         </Stack>

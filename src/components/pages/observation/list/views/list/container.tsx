@@ -1,8 +1,8 @@
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@configs/i18n/useTranslation";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useTranslation from "@hooks/use-translation";
 import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/observation-list";
 import { Mq } from "mq-styled-components";
@@ -26,9 +26,11 @@ const VerticalTabs = styled.div`
       flex-grow: 1;
 
       > [role="tabpanel"] {
+        padding: 0;
         height: 100%;
         max-height: 18rem;
         overflow-y: auto;
+        position: relative;
       }
     }
 
@@ -104,8 +106,7 @@ export default function Container({ o }) {
 
   return (
     <Flex
-      id="view_list"
-      className="white-box fade"
+      className="white-box fade view_list"
       direction={["column", "column", "row", "row"]}
       justify="space-between"
       mb={4}
@@ -114,7 +115,7 @@ export default function Container({ o }) {
       <ImageBoxComponent o={o} />
       <VerticalTabs>
         <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
-          <TabPanels className="tab-content">
+          <TabPanels className="tab-content" position="relative">
             <TabPanel>
               <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
             </TabPanel>

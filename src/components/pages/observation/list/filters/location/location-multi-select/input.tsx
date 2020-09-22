@@ -1,5 +1,5 @@
 import { selectStyles } from "@components/form/configs";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { axSearchFilterByName } from "@services/esmodule.service";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";

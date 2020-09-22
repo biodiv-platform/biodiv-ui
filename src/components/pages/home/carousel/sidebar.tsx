@@ -1,6 +1,7 @@
-import { Flex, Heading, Icon, Link, Text } from "@chakra-ui/core";
+import { Flex, Heading, Link, Text } from "@chakra-ui/core";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BlurBox from "@components/@core/blur-box";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { GallerySlider } from "@interfaces/utility";
 import { getObservationThumbnail } from "@utils/media";
 import React from "react";
@@ -17,7 +18,7 @@ export default function SideBar({ featured, slideIndex }: ISidebarProps) {
   return (
     <BlurBox
       bg={getObservationThumbnail(fileName, 500)}
-      fallbackColor="linear-gradient(to bottom, var(--gray-700), var(--gray-800))"
+      fallbackColor="linear-gradient(to bottom, var(--gray-800), var(--gray-900))"
     >
       <Flex p={10} className="content" h="full" justify="center" direction="column">
         <Heading as="h1" fontWeight="100" mb={4}>
@@ -28,7 +29,7 @@ export default function SideBar({ featured, slideIndex }: ISidebarProps) {
         </Text>
         {moreLinks && (
           <Link fontSize="xl" href={moreLinks}>
-            {t("HOME.BANNER_MORE")} <Icon name="arrow-forward" />
+            {t("HOME.BANNER_MORE")} <ArrowForwardIcon />
           </Link>
         )}
       </Flex>

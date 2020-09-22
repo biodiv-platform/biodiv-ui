@@ -7,6 +7,7 @@ import MultipleCategorialTrait from "./multiple-categorical";
 import SingleCategorialTrait from "./single-categorical";
 
 export interface ITraitInputProps {
+  name?: string;
   type: string;
   values: TraitsValue[];
   gridColumns?;

@@ -1,9 +1,9 @@
 import "@styles/global.scss";
 
-import { CSSReset, ThemeProvider } from "@chakra-ui/core";
+import { ChakraProvider, CSSReset } from "@chakra-ui/core";
 import AppContainer from "@components/@core/container";
 import { customTheme } from "@configs/theme";
-import { LocaleProvider } from "@hooks/useTranslation";
+import { LocaleProvider } from "@hooks/use-locale";
 import { processedInitialProps } from "@utils/bootstrap";
 import { NookiesProvider } from "next-nookies-persist";
 import Router from "next/router";
@@ -20,14 +20,14 @@ function App(props) {
 
   return (
     <BusProvider>
-      <ThemeProvider theme={customTheme}>
-        <LocaleProvider lang={lang} localeStrings={localeStrings}>
-          <NookiesProvider initialValue={nookies} options={{ domain }}>
+      <LocaleProvider lang={lang} localeStrings={localeStrings}>
+        <NookiesProvider initialValue={nookies} options={{ domain }}>
+          <ChakraProvider theme={customTheme}>
             <CSSReset />
             <AppContainer extras={extras} />
-          </NookiesProvider>
-        </LocaleProvider>
-      </ThemeProvider>
+          </ChakraProvider>
+        </NookiesProvider>
+      </LocaleProvider>
     </BusProvider>
   );
 }

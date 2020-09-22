@@ -1,7 +1,7 @@
 import { Badge, Flex } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 import UserAvatarList from "../common/user-image-list";
@@ -54,7 +54,7 @@ export default function AboutGroupComponent({
         <PageHeading mb={0} mr={4}>
           👥 {t("GROUP.ABOUT.TITLE")} {name}
         </PageHeading>
-        <Badge variantColor={allowUserToJoin ? "blue" : "yellow"}>
+        <Badge colorScheme={allowUserToJoin ? "blue" : "yellow"}>
           {t(allowUserToJoin ? "GROUP.ABOUT.OPEN_GROUP" : "GROUP.ABOUT.CLOSED_GROUP")}
         </Badge>
       </Flex>

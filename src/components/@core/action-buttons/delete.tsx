@@ -9,7 +9,8 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
+import DeleteIcon from "@icons/delete";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 
@@ -38,7 +39,7 @@ export default function DeleteActionButton({
 
   return (
     <>
-      <SimpleActionButton onClick={onOpen} icon="delete" title={title} variantColor="red" />
+      <SimpleActionButton onClick={onOpen} icon={<DeleteIcon />} title={title} colorScheme="red" />
       <AlertDialog isOpen={isOpen} onClose={onClose} leastDestructiveRef={cancelRef}>
         <AlertDialogOverlay />
         <AlertDialogContent>
@@ -50,7 +51,7 @@ export default function DeleteActionButton({
             <Button ref={cancelRef} onClick={onClose}>
               {t("CANCEL")}
             </Button>
-            <Button variantColor="red" onClick={handleOnDelete} ml={3}>
+            <Button colorScheme="red" onClick={handleOnDelete} ml={3}>
               {t("DELETE")}
             </Button>
           </AlertDialogFooter>

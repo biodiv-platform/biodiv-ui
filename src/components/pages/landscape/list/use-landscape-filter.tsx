@@ -1,6 +1,6 @@
-import useDidUpdateEffect from "@hooks/useDidUpdateEffect";
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { Landscape } from "@interfaces/landscape";
-import { axGetDocumentListData } from "@services/landscape.service";
+import { axGetLandscapeList } from "@services/landscape.service";
 import { isBrowser } from "@static/constants";
 import { LANDSCAPE_DEFAULT_FILTER, LANDSCAPE_LIST_PAGINATION_LIMIT } from "@static/landscape-list";
 import NProgress from "nprogress";
@@ -37,7 +37,7 @@ export const LandscapeFilterProvider = (props: LandscapeFilterContextProps) => {
   const fetchListData = async () => {
     NProgress.start();
     try {
-      const { data } = await axGetDocumentListData(filter.f);
+      const { data } = await axGetLandscapeList(filter.f);
       setLandscapeData((_draft) => {
         if (filter.f.offset === 0) {
           _draft.l = [];

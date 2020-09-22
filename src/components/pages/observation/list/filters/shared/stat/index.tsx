@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/core";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { getByPath } from "@utils/basic";
 import { toHumanString } from "human-readable-numbers";
 import React from "react";

@@ -1,6 +1,6 @@
 import { Link } from "@chakra-ui/core";
 import ObservationLoading from "@components/pages/observation/list/loading";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -38,7 +38,7 @@ export default function LandscapeList({ nextOffset }) {
   const { t } = useTranslation();
 
   return Array.isArray(landscapeData.l) ? (
-    <GridViewBox id="view_list_minimal">
+    <GridViewBox className="view_list_minimal">
       <InfiniteScroll
         dataLength={landscapeData.l.length}
         next={nextPage}

@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, FormLabel } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
@@ -56,7 +56,7 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
           <Mention trigger="@" data={onMentionQuery} />
         </MentionsInput>
       </FormControl>
-      <Button variantColor="blue" onClick={handleOnComment}>
+      <Button colorScheme="blue" onClick={handleOnComment}>
         {t("OBSERVATION.COMMENTS.POST")}
       </Button>
     </Box>

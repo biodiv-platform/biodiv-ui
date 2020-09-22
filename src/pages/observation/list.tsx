@@ -1,5 +1,5 @@
 import ObservationListPageComponent from "@components/pages/observation/list";
-import { ObservationFilterProvider } from "@hooks/useObservationFilter";
+import { ObservationFilterProvider } from "@components/pages/observation/common/use-observation-filter";
 import { axGetListData, axGetObservationListConfig } from "@services/observation.service";
 import { axGroupList } from "@services/usergroup.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
@@ -26,7 +26,7 @@ ObservationListPage.getInitialProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const { data: listConfig } = await axGetObservationListConfig();
 
-  const aURL = absoluteUrl(ctx.req).href;
+  const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
 
   const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup.id };

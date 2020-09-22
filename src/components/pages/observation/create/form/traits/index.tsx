@@ -5,11 +5,11 @@ import {
   Divider,
   FormControl,
   FormLabel,
-  Icon,
   Text,
   useDisclosure
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import useTranslation from "@hooks/use-translation";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
@@ -52,7 +52,7 @@ const TraitsPicker = ({ name, form }: ITraitsPickerProps) => {
   return (
     <Box>
       <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
-        💎 {t("OBSERVATION.TRAITS")} <Icon name={isOpen ? "chevron-up" : "chevron-down"} />
+        💎 {t("OBSERVATION.TRAITS")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
       <Collapse isOpen={isOpen}>
         {traitsPairs.map(({ traits, values }) => (

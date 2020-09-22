@@ -1,15 +1,16 @@
 import {
-  AccordionHeader,
+  Accordion,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Heading
+  Box
 } from "@chakra-ui/core";
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
@@ -84,31 +85,33 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   return (
-    <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
-      <AccordionHeader _expanded={{ bg: "gray.100" }}>
-        <Heading as="h2" flex="1" textAlign="left" my={1} size="lg">
-          🛡️ {t("GROUP.ADMIN.TITLE")}
-        </Heading>
-        <AccordionIcon float="right" />
-      </AccordionHeader>
+    <Accordion allowToggle={true}>
+      <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
+        <AccordionButton _expanded={{ bg: "gray.100" }}>
+          <Box flex={1} textAlign="left" fontSize="lg">
+            🛡️ {t("GROUP.ADMIN.TITLE")}
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
 
-      <AccordionPanel>
-        <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-          <AdminInviteField
-            form={hForm}
-            name="founders"
-            label="Founders"
-            onRemove={(o) => onMemberRemoved(o, founderIds)}
-          />
-          <AdminInviteField
-            form={hForm}
-            name="moderators"
-            label="Moderators"
-            onRemove={(o) => onMemberRemoved(o, moderatorIds)}
-          />
-          <SubmitButton form={hForm}>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
-        </form>
-      </AccordionPanel>
-    </AccordionItem>
+        <AccordionPanel>
+          <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+            <AdminInviteField
+              form={hForm}
+              name="founders"
+              label="Founders"
+              onRemove={(o) => onMemberRemoved(o, founderIds)}
+            />
+            <AdminInviteField
+              form={hForm}
+              name="moderators"
+              label="Moderators"
+              onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+            />
+            <SubmitButton form={hForm}>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
+          </form>
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   );
 }

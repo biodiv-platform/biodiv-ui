@@ -5,20 +5,21 @@ import {
   Button,
   Collapse,
   SimpleGrid,
+  Skeleton,
   useDisclosure
 } from "@chakra-ui/core";
 import Select from "@components/form/select";
 import SelectAsync from "@components/form/select-async";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
+import { yupResolver } from "@hookform/resolvers";
+import CheckIcon from "@icons/check";
 import { axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
 import notification from "@utils/notification";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
-import SkeletonLoader from "tiny-skeleton-loader-react";
 import * as Yup from "yup";
 
 import {
@@ -50,7 +51,7 @@ export default function AddSuggestion({
   const [languages, setLanguages] = useState([]);
   const langRef = useRef(null);
 
-  const { isOpen, onClose, onOpen } = useDisclosure(true);
+  const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
@@ -166,7 +167,7 @@ export default function AddSuggestion({
                   form={hForm}
                   selectRef={scientificRef}
                 />
-                <Submit leftIcon="ibpcheck" form={hForm}>
+                <Submit leftIcon={<CheckIcon />} form={hForm}>
                   {t("OBSERVATION.SUGGEST")}
                 </Submit>
               </form>
@@ -176,13 +177,13 @@ export default function AddSuggestion({
         <Alert className="fadeInUp" status="success" hidden={isOpen}>
           <AlertIcon />
           {t("OBSERVATION.ID.SUGGESTION_SUCCESS")}
-          <Button variant="link" variantColor="blue" onClick={onOpen} ml={1}>
+          <Button variant="link" colorScheme="blue" onClick={onOpen} ml={1}>
             {t("OBSERVATION.ID.RESUGGEST")}
           </Button>
         </Alert>
       </>
     )
   ) : (
-    <SkeletonLoader height="294px" radius="0" />
+    <Skeleton height="294px" borderRadius={0} />
   );
 }

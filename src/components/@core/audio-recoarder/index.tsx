@@ -1,11 +1,13 @@
 import { Box, Button } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
+import MicrophoneIcon from "@icons/microphone";
+import StopIcon from "@icons/stop";
 import React, { useRef } from "react";
 import { useTimer } from "use-timer";
 
 const pad = (number) => number.toString().toString().padStart(2, "0");
 
-export const SecondsToMinutes = ({ totalSeconds }) => {
+const SecondsToMinutes = ({ totalSeconds }) => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds - minutes * 60;
   return (
@@ -91,24 +93,24 @@ export default function AudioRecorder({
       </Box>
       <Button
         isDisabled={isRunning}
-        leftIcon={"microphone" as any}
+        leftIcon={<MicrophoneIcon />}
         mr={4}
         mt={4}
         onClick={startRecording}
         type="button"
         variant="solid"
-        variantColor="blue"
+        colorScheme="blue"
       >
         {t("OBSERVATION.AUDIO.START")}
       </Button>
       <Button
         isDisabled={!isRunning}
-        leftIcon={"stop" as any}
+        leftIcon={<StopIcon />}
         mt={4}
         onClick={stopRecording}
         type="button"
         variant="solid"
-        variantColor="red"
+        colorScheme="red"
       >
         {t("OBSERVATION.AUDIO.STOP")}
       </Button>

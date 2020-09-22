@@ -7,7 +7,7 @@ import {
   TabPanels,
   Tabs
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
 import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
@@ -56,16 +56,16 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
           <Tab>📹 {t("OBSERVATION.FROM_URL")}</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
+          <TabPanel p={0}>
             <ResourcesList />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p={0}>
             <MyUploads onDone={onSelectionDone} />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p={0}>
             <AudioInput onDone={onSelectionDone} />
           </TabPanel>
-          <TabPanel>
+          <TabPanel p={0}>
             <FromURL onDone={onSelectionDone} />
           </TabPanel>
         </TabPanels>

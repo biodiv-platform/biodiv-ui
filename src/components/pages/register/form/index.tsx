@@ -1,4 +1,5 @@
 import { Box, Flex, SimpleGrid, useDisclosure } from "@chakra-ui/core";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import OTPModal from "@components/auth/otp-modal";
 import PhoneNumber from "@components/form/phone-number";
 import RadioInput from "@components/form/radio";
@@ -7,9 +8,9 @@ import Select from "@components/form/select";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { axCreateUser } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
@@ -33,7 +34,7 @@ function SignUpForm() {
   const { t } = useTranslation();
   const [hideVerificationMethod, setHideVerificationMethod] = useState(true);
   const [user, setUser] = useState(null);
-  const { isOpen, onClose, onOpen } = useDisclosure(false);
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const [isOAuth, setIsOAuth] = useState(false);
   const {
     currentGroup: { id: groupId }
@@ -169,7 +170,7 @@ function SignUpForm() {
         </SimpleGrid>
         <LocationPicker form={hForm} />
         <Recaptcha name="recaptcha" form={hForm} />
-        <Submit form={hForm} rightIcon="arrow-forward" w="full">
+        <Submit form={hForm} rightIcon={<ArrowForwardIcon />} w="full">
           {t("USER.REGISTER")}
         </Submit>
       </form>

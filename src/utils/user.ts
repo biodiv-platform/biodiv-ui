@@ -1,5 +1,4 @@
 import { axSaveFCMToken } from "@services/user.service";
-import notification, { NotificationType } from "./notification";
 
 export const subscribeToPushNotification = async () => {
   const workbox = (window as any)?.workbox;
@@ -14,11 +13,9 @@ export const subscribeToPushNotification = async () => {
       const token = await workbox.messageSW({ command: "getFCMToken" });
       if (token) {
         const { success } = await axSaveFCMToken({ token });
-        success
-          ? notification("TOKEN_SAVED", NotificationType.Success)
-          : notification("TOKEN_NOT_SAVED");
+        console.debug(success ? "TOKEN_SAVED" : "TOKEN_NOT_SAVED");
       } else {
-        notification("NOTIFICATIONS.TOKEN_ERROR");
+        console.debug("NOTIFICATIONS.TOKEN_ERROR");
       }
     }
   });

@@ -22,11 +22,6 @@ export const FIELD_TYPE = [
   { label: "Textbox", value: "FIELD TEXT" }
 ];
 
-export const BOOLEAN_OPTION = [
-  { label: "True", value: true },
-  { label: "False", value: false }
-];
-
 export const DEFAULT_CUSTOMFIELD_VALUE = {
   allowedParticipation: true,
   isMandatory: true,

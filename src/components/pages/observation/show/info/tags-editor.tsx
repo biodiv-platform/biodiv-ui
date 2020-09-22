@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -43,10 +43,10 @@ export default function TagsEditor({ objectId, queryFunc, updateFunc, tags, setT
   return (
     <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
       <SelectAsync name="tags" form={hForm} multiple={true} onQuery={onTagsQuery} mb={2} />
-      <Button size="sm" variantColor="blue" aria-label="Save" type="submit">
+      <Button size="sm" colorScheme="blue" aria-label="Save" type="submit">
         {t("SAVE")}
       </Button>
-      <Button size="sm" ml={2} variantColor="gray" aria-label="Cancel" onClick={onClose}>
+      <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
         {t("CANCEL")}
       </Button>
     </form>

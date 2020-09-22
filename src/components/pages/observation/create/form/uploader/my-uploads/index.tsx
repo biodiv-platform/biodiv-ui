@@ -1,5 +1,15 @@
-import { Box, Button, CheckboxGroup, Flex, Select, Spinner, Text } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import {
+  Box,
+  Button,
+  Flex,
+  Select,
+  SimpleGrid,
+  Spinner,
+  Text,
+  useCheckboxGroup
+} from "@chakra-ui/core";
+import useTranslation from "@hooks/use-translation";
+import CheckIcon from "@icons/check";
 import React from "react";
 
 import { MY_UPLOADS_SORT } from "../../options";
@@ -14,6 +24,10 @@ const MyUploadsImages = ({ onDone }) => {
   const handleOnSort = (e) => {
     setResourcesSortBy(e.target.value);
   };
+
+  const { getCheckboxProps } = useCheckboxGroup({
+    value: observationAssets.map((o) => o.hashKey)
+  });
 
   return assets ? (
     <Box>
@@ -35,26 +49,24 @@ const MyUploadsImages = ({ onDone }) => {
           <Button
             flexShrink={0}
             type="button"
-            leftIcon={"ibpcheck" as any}
+            leftIcon={<CheckIcon />}
             onClick={onDone}
-            variantColor="blue"
+            colorScheme="blue"
           >
             {t("OBSERVATION.USE_IN_OBSERVATION")}
           </Button>
         </Flex>
       </Flex>
-      <CheckboxGroup
-        value={observationAssets.map((o) => o.hashKey)}
-        display="grid"
-        className="custom-checkbox-group"
-        gridGap={4}
-        gridTemplateColumns={["repeat(3,1fr)", "repeat(4,1fr)", "repeat(5,1fr)", `repeat(8,1fr)`]}
-      >
+      <SimpleGrid columns={[3, 4, 5, 8]} gridGap={4} className="custom-checkbox-group">
         <DropTarget />
         {assets.map((asset) => (
-          <Checkbox key={asset.hashKey} value={asset.hashKey} asset={asset} />
+          <Checkbox
+            key={asset.hashKey}
+            asset={asset}
+            {...getCheckboxProps({ value: asset.hashKey })}
+          />
         ))}
-      </CheckboxGroup>
+      </SimpleGrid>
     </Box>
   ) : (
     <Spinner mt={4} />

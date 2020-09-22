@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import React from "react";
 

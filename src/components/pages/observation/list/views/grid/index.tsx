@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -35,7 +35,7 @@ export default function GridView() {
   const { observationData, nextPage } = useObservationFilter();
 
   return Array.isArray(observationData.ml) ? (
-    <GridViewBox id="view_list_minimal">
+    <GridViewBox className="view_list_minimal">
       <InfiniteScroll
         dataLength={observationData.ml.length}
         next={nextPage}

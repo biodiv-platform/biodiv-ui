@@ -1,7 +1,7 @@
 import { TreeNode } from "rc-tree";
 import React from "react";
 
-export const setLeaf = (treeData) => {
+const setLeaf = (treeData) => {
   const loopLeaf = (data) => {
     data.forEach((item) => {
       if (item.children) {

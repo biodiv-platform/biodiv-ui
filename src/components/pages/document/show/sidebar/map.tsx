@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/core";
 import { defaultViewPort } from "@components/pages/group/common/area-draw-field";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { Previewer } from "naksha-components-react";
 import React from "react";
 
-export const coverageToGeoJson = (coverage) => ({
+const coverageToGeoJson = (coverage) => ({
   type: "FeatureCollection",
   features: coverage.map(({ topology }) => ({
     type: "Feature",

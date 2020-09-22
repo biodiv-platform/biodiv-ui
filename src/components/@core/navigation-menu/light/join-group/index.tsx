@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
+import AddIcon from "@icons/add";
 import { axJoinUserGroup } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
@@ -38,9 +39,9 @@ export default function JoinUserGroup() {
       className="join-usergroup"
       size="sm"
       isLoading={isLoading}
-      variantColor="blue"
+      colorScheme="blue"
       onClick={addUserGroupMember}
-      leftIcon="add"
+      leftIcon={<AddIcon />}
     >
       {t("GROUP.JOIN")}
     </Button>

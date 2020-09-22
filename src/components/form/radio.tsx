@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel, Radio, RadioGroup } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 
@@ -37,18 +37,14 @@ const RadioInputField = ({
   return (
     <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
-      <RadioGroup
-        key={name}
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
-        py={2}
-        isInline={isInline}
-      >
-        {options.map((o) => (
-          <Radio key={o.value} value={o.value}>
-            {o.label}
-          </Radio>
-        ))}
+      <RadioGroup key={name} onChange={setValue} value={value}>
+        <Stack direction={isInline ? "row" : "column"} py={2}>
+          {options.map((o) => (
+            <Radio key={o.value} value={o.value}>
+              {o.label}
+            </Radio>
+          ))}
+        </Stack>
       </RadioGroup>
       <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

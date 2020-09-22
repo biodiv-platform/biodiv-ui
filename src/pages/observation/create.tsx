@@ -6,7 +6,7 @@ import { encode } from "base64-url";
 import React, { useEffect } from "react";
 import { axGroupList } from "@services/usergroup.service";
 import { absoluteUrl } from "@utils/basic";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 
 const ObservationCreatePage = ({ speciesGroups, languages, ObservationCreateFormData }) => {
   const { isLoggedIn } = useGlobalState();
@@ -29,7 +29,7 @@ const ObservationCreatePage = ({ speciesGroups, languages, ObservationCreateForm
 
 export async function getServerSideProps(ctx) {
   const { data: speciesGroups } = await axGetspeciesGroups();
-  const aReq = absoluteUrl(ctx.req);
+  const aReq = absoluteUrl(ctx);
   const { data } = await axGetLangList();
   const {
     currentGroup: { id: userGroupId }

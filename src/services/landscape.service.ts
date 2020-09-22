@@ -24,18 +24,6 @@ export const axGetLandscapeShowById = async (landscapeId, languageId) => {
   }
 };
 
-export const axGetLandscapeList = async (offset, limit = 12) => {
-  try {
-    const { data } = await plainHttp.get(`${ENDPOINT.LANDSCAPE}/landscape/all`, {
-      params: { limit, offset }
-    });
-    return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false, data: [] };
-  }
-};
-
 export const axSaveLandscapeField = async (payload) => {
   try {
     const { data } = await http.put(`${ENDPOINT.LANDSCAPE}/landscape/field/content`, payload);
@@ -66,7 +54,7 @@ export const axUploadEditorResource = (blobInfo, success, failure) => {
     });
 };
 
-export const axGetDocumentListData = async (params) => {
+export const axGetLandscapeList = async (params) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.LANDSCAPE}/landscape/all`, {
       params

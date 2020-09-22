@@ -1,12 +1,13 @@
 import {
-  AccordionHeader,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
   Input
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useTranslation from "@hooks/use-translation";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { formatDateReverse, parseDateReverse } from "@utils/date";
 import React, { useMemo } from "react";
 import Flatpickr from "react-flatpickr";
@@ -53,10 +54,12 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
 
   return (
     <AccordionItem>
-      <AccordionHeader>
-        <div>{t(translateKey)}</div>
+      <AccordionButton>
+        <Box flex={1} textAlign="left">
+          {t(translateKey)}
+        </Box>
         <AccordionIcon />
-      </AccordionHeader>
+      </AccordionButton>
       <AccordionPanel>
         <Flatpickr
           options={options}

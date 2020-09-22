@@ -1,11 +1,13 @@
 import { Button } from "@chakra-ui/core";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import SelectField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
+import CheckIcon from "@icons/check";
 import { axAddUserGroupRule } from "@services/usergroup.service";
-import { formatDateReverse } from "@utils/date";
+import { formatDateReverse, parseDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { formatGroupRules } from "@utils/userGroup";
 import React, { useState } from "react";
@@ -49,7 +51,10 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
       case "createdOnDateList":
         return {
           [`${type}`]: [
-            { fromDate: formatDateReverse(ruleValue[0]), toDate: formatDateReverse(ruleValue[1]) }
+            {
+              fromDate: formatDateReverse(parseDate(ruleValue[0])),
+              toDate: formatDateReverse(parseDate(ruleValue[0]))
+            }
           ]
         };
       case "taxonomicIdList":
@@ -71,7 +76,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
 
   return (
     <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-      <Button mb={4} type="button" onClick={() => setIsCreate(false)} leftIcon="arrow-back">
+      <Button mb={4} type="button" onClick={() => setIsCreate(false)} leftIcon={<ArrowBackIcon />}>
         {t("GROUP.CUSTOM_FIELD.BACK")}
       </Button>
       <SelectField
@@ -82,7 +87,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
         form={hForm}
       />
       {inputType && <RulesInputType inputType={inputType} form={hForm} name="ruleValue" />}
-      <SubmitButton leftIcon="check" form={hForm}>
+      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
         {t("GROUP.RULES.ADD.TITLE")}
       </SubmitButton>
     </form>

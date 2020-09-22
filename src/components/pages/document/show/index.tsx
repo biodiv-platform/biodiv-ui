@@ -3,7 +3,7 @@ import Activity from "@components/pages/observation/show/activity";
 import Groups from "@components/pages/observation/show/groups";
 import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { DocumentUserPermission, ShowDocument } from "@interfaces/document";
 import { axAddDocumentComment } from "@services/activity.service";
 import {

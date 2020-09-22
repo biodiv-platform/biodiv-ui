@@ -1,5 +1,6 @@
-import { Icon } from "@chakra-ui/core";
 import styled from "@emotion/styled";
+import AudioIcon from "@icons/audio";
+import VideoIcon from "@icons/video";
 import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getObservationImage, getYoutubeImage } from "@utils/media";
@@ -67,14 +68,14 @@ function CarouselThumb({ resources, carousel, carouselIndex }) {
           />
         ) : (
           <div className="carousel--audio-thumb">
-            <Icon name="ibpvideo" />
+            <VideoIcon />
           </div>
         );
 
       case ResourceType.Audio:
         return (
           <div className="carousel--audio-thumb">
-            <Icon name="ibpaudio" />
+            <AudioIcon />
           </div>
         );
 

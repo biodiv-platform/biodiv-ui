@@ -1,12 +1,13 @@
 import {
-  AccordionHeader,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
   Text
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useTranslation from "@hooks/use-translation";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 
 import SubAccordion from "../shared/sub-accordion";
@@ -22,10 +23,12 @@ export default function CustomFieldsFilter() {
         <AccordionItem key={customField.id}>
           {({ isExpanded }) => (
             <>
-              <AccordionHeader>
-                <div>{customField.name}</div>
+              <AccordionButton>
+                <Box flex={1} textAlign="left">
+                  {customField.name}
+                </Box>
                 <AccordionIcon />
-              </AccordionHeader>
+              </AccordionButton>
               <AccordionPanel>
                 {isExpanded && <CustomFieldTypes field={customField} key={customField.id} />}
               </AccordionPanel>

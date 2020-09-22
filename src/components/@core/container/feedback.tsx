@@ -1,6 +1,7 @@
-import { Icon, Link } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { Link } from "@chakra-ui/core";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import FeedbackIcon from "@icons/feedback";
 import React from "react";
 
 const FeedbackButton = styled.div`
@@ -42,7 +43,7 @@ export default function Feedback() {
         href="https://forms.gle/G4Gi6NpuvnRRuDCc8"
         target="_blank"
       >
-        <Icon name="feedback" className="icon" />
+        <FeedbackIcon className="icon" />
         <span>{t("FEEDBACK")}</span>
       </Link>
     </FeedbackButton>

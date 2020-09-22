@@ -6,7 +6,7 @@ export default function LinkTag({ label }) {
   return (
     <LocalLink href="/observation/list" prefixGroup={true} params={{ tags: label }}>
       <Link>
-        <Tag size="sm" key={label} variantColor="blue" mb={2} mr={2}>
+        <Tag size="sm" key={label} colorScheme="blue" mb={2} mr={2}>
           {label}
         </Tag>
       </Link>

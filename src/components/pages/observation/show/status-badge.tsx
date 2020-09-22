@@ -1,5 +1,5 @@
 import { Badge, Link } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { RecoIbp } from "@interfaces/observation";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import React from "react";
@@ -13,7 +13,7 @@ function ObservationStatusBadge({ reco }: { reco: RecoIbp; maxVotedRecoId: numbe
     case "ACCEPTED":
       return (
         <Link href={taxonLink}>
-          <Badge variantColor={TAXON_BADGE_COLORS.ACCEPTED}>{t("OBSERVATION.ACCEPTED")}</Badge>
+          <Badge colorScheme={TAXON_BADGE_COLORS.ACCEPTED}>{t("OBSERVATION.ACCEPTED")}</Badge>
         </Link>
       );
 
@@ -21,7 +21,7 @@ function ObservationStatusBadge({ reco }: { reco: RecoIbp; maxVotedRecoId: numbe
       const [lastCrumb] = reco.breadCrumbs?.slice(-1) || [{ name: null }];
       return (
         <Link href={taxonLink}>
-          <Badge variantColor={TAXON_BADGE_COLORS.SYNONYM}>
+          <Badge colorScheme={TAXON_BADGE_COLORS.SYNONYM}>
             {t("OBSERVATION.SYNONYM")}
             {lastCrumb.name && `: ${lastCrumb.name}`}
           </Badge>
@@ -30,7 +30,7 @@ function ObservationStatusBadge({ reco }: { reco: RecoIbp; maxVotedRecoId: numbe
 
     default:
       return !reco?.scientificName ? (
-        <Badge variantColor="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
+        <Badge colorScheme="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
       ) : null;
   }
 }

@@ -1,7 +1,8 @@
-import { AspectRatioBox, IconButton, Image, VisuallyHidden } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { AspectRatio, Box, IconButton, Image, useCheckbox } from "@chakra-ui/core";
 import styled from "@emotion/styled";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
+import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useMemo } from "react";
 
@@ -10,77 +11,81 @@ import StatusIcon from "../statusicon";
 import useObservationCreate from "../use-observation-resources";
 
 const ImageBox = styled.div`
+  cursor: pointer;
   display: flex;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+  padding: 0.4rem;
 
   .icon {
     position: absolute;
     bottom: 0;
     left: 0;
-    margin: 0.5rem;
+    margin: 0.7rem;
   }
 
   .remove {
     position: absolute;
     margin: 0;
     top: 0;
-    bottom: 0;
+    left: 0;
   }
 `;
 
-const Checkbox = ({ asset, ...props }) => {
+const Checkbox = (props: any) => {
   const { user } = useGlobalState();
   const { t } = useTranslation();
 
-  const imageURL = useMemo(() => getImageThumb(asset, user.id), []);
+  const imageURL = useMemo(() => getImageThumb(props.asset, user.id), []);
 
   const { addToObservationAssets, removeObservationAsset, removeAsset } = useObservationCreate();
 
   const handleOnChange = (e) => {
     e.target.checked
-      ? addToObservationAssets(asset.hashKey)
-      : removeObservationAsset(asset.hashKey);
+      ? addToObservationAssets(props.asset.hashKey)
+      : removeObservationAsset(props.asset.hashKey);
   };
 
+  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+
   return (
-    <label role="checkbox" className="custom-checkbox fade" aria-checked={props.isChecked}>
-      <VisuallyHidden
-        as="input"
-        type="checkbox"
-        {...props}
-        // @ts-ignore
-        checked={props.isChecked}
-        onChange={handleOnChange}
-        value={asset.hashKey}
-      />
-      <AspectRatioBox ratio={1}>
+    <Box as="label" className="fade" aria-checked={props.isChecked}>
+      <input {...getInputProps()} onChange={handleOnChange} />
+      <AspectRatio
+        ratio={1}
+        {...getCheckboxProps()}
+        borderRadius="lg"
+        overflow="hidden"
+        borderWidth="2px"
+        bg="white"
+        _checked={{ borderColor: "blue.500", bg: "blue.50" }}
+      >
         <ImageBox>
           <IconButton
             className="remove fade"
             variant="ghost"
-            variantColor="red"
+            colorScheme="red"
             hidden={props.isChecked}
             aria-label={t("DELETE")}
-            onClick={() => removeAsset(asset)}
-            icon="delete"
+            onClick={() => removeAsset(props.asset)}
+            icon={<DeleteIcon />}
           />
-          <StatusIcon type={asset.status} />
+          <StatusIcon type={props.asset.status} />
           <Image
-            borderRadius="md"
             style={{ filter: "none" }}
-            size="full"
+            boxSize="full"
             objectFit="cover"
             src={imageURL}
-            fallbackSrc={getFallbackByMIME(asset.type)}
-            alt={asset.fileName}
+            borderRadius="md"
+            fallbackSrc={getFallbackByMIME(props.asset.type)}
+            alt={props.asset.fileName}
           />
         </ImageBox>
-      </AspectRatioBox>
-    </label>
+      </AspectRatio>
+    </Box>
   );
 };
 

@@ -1,6 +1,7 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Icon } from "@chakra-ui/core";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/core";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import React from "react";
 
 const Breadcrumbs = ({ crumbs }) => {
@@ -8,7 +9,7 @@ const Breadcrumbs = ({ crumbs }) => {
 
   return crumbs ? (
     <Box p={2} px={4} mb={4} className="white-box fadeInUp delay-2">
-      <Breadcrumb spacing="8px" separator={<Icon name="chevron-right" />}>
+      <Breadcrumb spacing="8px" separator={<ChevronRightIcon />}>
         {crumbs.map(({ name, id }) => (
           <BreadcrumbItem key={id}>
             <LocalLink href={`${currentGroup?.webAddress}/observation/list`} params={{ taxon: id }}>

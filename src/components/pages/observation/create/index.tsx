@@ -1,4 +1,4 @@
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { isBrowser } from "@static/constants";
 import { preCacheRoutes } from "@utils/auth";
 import React, { useEffect } from "react";

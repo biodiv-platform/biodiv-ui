@@ -1,5 +1,6 @@
 import { Button, Flex } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
+import CheckIcon from "@icons/check";
 import React from "react";
 
 export default function SaveButton({ onClick }) {
@@ -7,7 +8,7 @@ export default function SaveButton({ onClick }) {
 
   return (
     <Flex alignItems="flex-end">
-      <Button type="button" variantColor="blue" leftIcon="check" w="full" onClick={onClick}>
+      <Button type="button" colorScheme="blue" leftIcon={<CheckIcon />} w="full" onClick={onClick}>
         {t("SAVE")}
       </Button>
     </Flex>

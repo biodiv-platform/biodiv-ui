@@ -1,6 +1,8 @@
 import { Box, IconButton, useDisclosure } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import ChevronIcon from "@icons/chevron";
+import CrossIcon from "@icons/cross";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
@@ -64,7 +66,7 @@ export default function SyncBox({
   deleteObservation,
   onClose
 }: SyncBoxProps) {
-  const { isOpen, onToggle } = useDisclosure(true);
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
   const { t } = useTranslation();
 
   return (
@@ -75,7 +77,7 @@ export default function SyncBox({
           <div className="icons">
             <IconButton
               aria-label={t("TOGGLE")}
-              icon={"ibpchevron" as any}
+              icon={<ChevronIcon />}
               variant="link"
               minW="auto"
               transform={isOpen && "rotate(180deg)"}
@@ -84,7 +86,7 @@ export default function SyncBox({
             />
             <IconButton
               aria-label={t("CLOSE")}
-              icon="close"
+              icon={<CrossIcon />}
               variant="link"
               minW="auto"
               onClick={onClose}

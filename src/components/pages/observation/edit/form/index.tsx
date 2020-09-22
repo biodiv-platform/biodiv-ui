@@ -1,7 +1,10 @@
-import { Alert, Icon, Link, Spinner, useDisclosure } from "@chakra-ui/core";
+import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/core";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
+import { yupResolver } from "@hookform/resolvers";
+import CheckIcon from "@icons/check";
 import { AssetStatus } from "@interfaces/custom";
 import { ObservationUpdateData } from "@interfaces/observation";
 import { axUpdateObservation } from "@services/observation.service";
@@ -10,7 +13,6 @@ import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import DateInputs from "../../create/form/date";
@@ -28,7 +30,7 @@ export default function ObservationEditForm({
 }: IObservationEditFormProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onClose } = useDisclosure(true);
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -98,11 +100,11 @@ export default function ObservationEditForm({
       <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
         <Link>
           <Alert mb={4} borderRadius="md">
-            {t("OBSERVATION.EDIT_HINT")} <Icon name="arrow-forward" />
+            {t("OBSERVATION.EDIT_HINT")} <ArrowForwardIcon />
           </Alert>
         </Link>
       </LocalLink>
-      <Submit leftIcon="ibpcheck" form={hForm} mb={4}>
+      <Submit leftIcon={<CheckIcon />} form={hForm} mb={4}>
         {t("OBSERVATION.UPDATE_OBSERVATION")}
       </Submit>
     </form>
