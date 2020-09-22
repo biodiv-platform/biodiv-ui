@@ -38,7 +38,7 @@ export default function LandscapeList({ nextOffset }) {
   const { t } = useTranslation();
 
   return Array.isArray(landscapeData.l) ? (
-    <GridViewBox id="view_list_minimal">
+    <GridViewBox className="view_list_minimal">
       <InfiniteScroll
         dataLength={landscapeData.l.length}
         next={nextPage}

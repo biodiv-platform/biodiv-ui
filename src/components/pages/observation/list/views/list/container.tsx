@@ -30,6 +30,7 @@ const VerticalTabs = styled.div`
         height: 100%;
         max-height: 18rem;
         overflow-y: auto;
+        position: relative;
       }
     }
 
@@ -105,8 +106,7 @@ export default function Container({ o }) {
 
   return (
     <Flex
-      id="view_list"
-      className="white-box fade"
+      className="white-box fade view_list"
       direction={["column", "column", "row", "row"]}
       justify="space-between"
       mb={4}
