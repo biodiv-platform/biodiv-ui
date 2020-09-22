@@ -1,6 +1,6 @@
 import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";
 import useOnlineStatus from "@rehooks/online-status";
 import { axUploadObservationResource } from "@services/files.service";
@@ -31,7 +31,7 @@ export default function OfflineSync() {
   const isOnline = useOnlineStatus();
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure(true);
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
   const [pendingObservations, setPendingObservations] = useState([]);
   const [syncInfo, setSyncInfo] = useImmer<SyncInfo>({
     current: null,

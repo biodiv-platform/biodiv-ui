@@ -1,6 +1,6 @@
 import BoxHeading from "@components/@core/layout/box-heading";
 import TraitsList from "@components/pages/observation/show/traits/traits-list";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
 import { Spinner } from "@chakra-ui/core";

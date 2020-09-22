@@ -1,7 +1,8 @@
 import SubmitButton from "@components/form/submit-button";
 import SwitchField from "@components/form/switch";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
+import CheckIcon from "@icons/check";
 import { axUpdateNotifications } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
@@ -53,7 +54,7 @@ export default function NotificationsTab({ user }: UserEditPageComponentProps) {
       <SwitchField name="identificationMail" label={t("USER.IDENTIFICATION_MAIL")} form={hForm} />
       <SwitchField name="hideEmial" label={t("USER.HIDE_EMAIL")} form={hForm} />
       <SwitchField name="sendDigest" label={t("USER.SEND_DIGEST")} form={hForm} />
-      <SubmitButton leftIcon="ibpcheck" form={hForm}>
+      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
         {t("SAVE")}
       </SubmitButton>
     </form>

@@ -1,5 +1,6 @@
 import { IconButton, Stack } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";
 
 export default function TaxonResultArrows({ resultsCount }) {
@@ -37,7 +38,7 @@ export default function TaxonResultArrows({ resultsCount }) {
         <IconButton
           isDisabled={disabled.prev}
           onClick={onPrevious}
-          icon="arrow-back"
+          icon={<ArrowBackIcon />}
           mx={2}
           aria-label={t("PREV")}
           title={t("PREV")}
@@ -45,7 +46,7 @@ export default function TaxonResultArrows({ resultsCount }) {
         <IconButton
           isDisabled={disabled.next}
           onClick={onNext}
-          icon="arrow-forward"
+          icon={<ArrowForwardIcon />}
           aria-label={t("NEXT")}
           title={t("NEXT")}
         />

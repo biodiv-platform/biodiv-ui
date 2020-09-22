@@ -1,8 +1,8 @@
 import { compiledMessage, getByPath } from "@utils/basic";
 import { useContext } from "react";
 
-import { LocaleContext } from "../../hooks/useTranslation";
-import { defaultLocale } from "./config";
+import { LocaleContext } from "@hooks/use-locale";
+import { defaultLocale } from "../configs/i18n/config";
 
 export default function useTranslation() {
   const { locale, localeId, localesList, localeStrings, setLocale } = useContext(LocaleContext);

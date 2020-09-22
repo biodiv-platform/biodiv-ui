@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import TextBoxField from "@components/form/text";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { META_BIB_FIELDS } from "@static/document";
 import React from "react";
 import { UseFormMethods } from "react-hook-form";

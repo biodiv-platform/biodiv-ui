@@ -1,14 +1,14 @@
 import {
   Checkbox,
   CheckboxGroup,
-  Icon,
   Image,
   Input,
   InputGroup,
   InputLeftElement
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import { SearchIcon } from "@chakra-ui/icons";
+import useTranslation from "@hooks/use-translation";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { getTraitIcon } from "@utils/media";
 import React, { useState } from "react";
 
@@ -55,7 +55,7 @@ export default function FilterCheckboxes({
     <>
       {showSearch && (
         <InputGroup mb={2}>
-          <InputLeftElement children={<Icon name="search" color="gray.300" />} />
+          <InputLeftElement children={<SearchIcon color="gray.300" />} />
           <Input type="text" placeholder={t("SEARCH")} onChange={handleOnSearch} />
         </InputGroup>
       )}
@@ -65,7 +65,7 @@ export default function FilterCheckboxes({
             {valueIcon && (
               <Image
                 src={getTraitIcon(valueIcon, 20)}
-                size="1.25rem"
+                boxSize="1.25rem"
                 objectFit="contain"
                 display="inline"
                 verticalAlign="center"

@@ -2,8 +2,9 @@ import { SimpleGrid, Spinner } from "@chakra-ui/core";
 import SelectMultipleInputField from "@components/form/select-multiple";
 import SubmitButton from "@components/form/submit-button";
 import SwitchField from "@components/form/switch";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
+import CheckIcon from "@icons/check";
 import { Role } from "@interfaces/user";
 import { axGetUserRoles, axUpdateUserPermissions } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
@@ -80,7 +81,7 @@ export default function PermissionsTab({ user }: UserEditPageComponentProps) {
         options={rolesOptionList}
         form={hForm}
       />
-      <SubmitButton leftIcon="ibpcheck" form={hForm}>
+      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
         {t("SAVE")}
       </SubmitButton>
     </form>

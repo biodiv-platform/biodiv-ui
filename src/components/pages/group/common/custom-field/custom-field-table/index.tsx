@@ -1,5 +1,7 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
+import AddIcon from "@icons/add";
+import CheckIcon from "@icons/check";
 import { axRemoveCustomField, axReorderCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import arrayMove from "array-move";
@@ -66,12 +68,12 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
         />
       </table>
       <ButtonGroup spacing={4} mt={4}>
-        <Button variantColor="blue" onClick={() => setIsCreate(true)} leftIcon="add">
+        <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
           {t("GROUP.CUSTOM_FIELD.CREATE")}
         </Button>
         <Button
-          variantColor="blue"
-          leftIcon="check"
+          colorScheme="blue"
+          leftIcon={<CheckIcon />}
           float="right"
           hidden={!canReorder}
           onClick={handleReorderCustomField}

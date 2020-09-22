@@ -1,7 +1,7 @@
 import { Spinner } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import React from "react";

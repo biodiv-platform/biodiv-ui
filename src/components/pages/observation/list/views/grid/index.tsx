@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 

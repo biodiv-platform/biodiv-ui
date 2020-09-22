@@ -3,7 +3,7 @@ import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import Tooltip from "@components/@core/tooltip";
 import Badge from "@components/@core/user/badge";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { ShowActivityIbp } from "@interfaces/activity";
 import { ACTIVITY_UPDATED } from "@static/events";
 import { useActivityStore } from "@stores/activity.store";

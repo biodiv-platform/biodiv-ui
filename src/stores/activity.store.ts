@@ -42,5 +42,3 @@ const activityStore: IActivityStore = {
 };
 
 export const useActivityStore = createComponentStore(activityStore);
-
-export default activityStore;

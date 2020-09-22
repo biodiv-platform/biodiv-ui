@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { ObservationUserPermission, ShowData } from "@interfaces/observation";
 import { ACTIVITY_UPDATED } from "@static/events";
 import React from "react";

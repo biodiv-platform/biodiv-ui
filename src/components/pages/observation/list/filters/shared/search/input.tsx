@@ -1,10 +1,11 @@
 import { IconButton } from "@chakra-ui/core";
+import { SearchIcon } from "@chakra-ui/icons";
 import TextInput from "@components/form/text";
 import styled from "@emotion/styled";
-import useObservationFilter from "@hooks/useObservationFilter";
+import { yupResolver } from "@hookform/resolvers";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 const TextFilterForm = styled.form`
@@ -40,9 +41,9 @@ export default function TextFilterInput({ filterKey, label, mb = 0 }) {
       <TextInput name="query" id={filterKey} form={hForm} label={label} showLabel={false} mb={mb} />
       <IconButton
         variant="solid"
-        variantColor="blue"
+        colorScheme="blue"
         type="submit"
-        icon="search"
+        icon={<SearchIcon />}
         aria-label={`Find ${label}`}
       />
     </TextFilterForm>

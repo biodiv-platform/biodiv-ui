@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
+import EditIcon from "@icons/edit";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { useRouter } from "next/router";
@@ -16,11 +17,11 @@ export default function EditLinkButton({ label }) {
 
   useEffect(() => {
     setCanEdit(hasAccess([Role.Admin]) && id && !pathname.endsWith("edit"));
-  }, []);
+  }, [pathname]);
 
   return canEdit ? (
     <LocalLink href={`${webAddress}/edit`}>
-      <Button className="join-usergroup" leftIcon="edit" m={2} variantColor="blue" size="sm">
+      <Button className="join-usergroup" leftIcon={<EditIcon />} m={2} colorScheme="blue" size="sm">
         {label}
       </Button>
     </LocalLink>

@@ -8,7 +8,7 @@ export default function CustomFieldOption(props) {
   return (
     <components.Option {...props}>
       <Stack isInline={true} alignItems="center">
-        <Image size="2rem" src={imageURL} />
+        <Image boxSize="2rem" src={imageURL} />
         <Text color="gray.600">{props.data.label}</Text>
       </Stack>
     </components.Option>

@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/core";
 import { ClearIndicator, selectStyles } from "@components/form/configs";
 import CustomFieldOption from "@components/pages/observation/create/form/custom-field-form/custom-field-options";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { axGetAllCustomFieldOptionsById } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";

@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/core";
 import AudioRecorder from "@components/@core/audio-recoarder";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { getAssetObject } from "@utils/image";
 import { nanoid } from "nanoid";
 import React, { useState } from "react";

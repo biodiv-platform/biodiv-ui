@@ -15,7 +15,7 @@ Please do this checks before submitting any pull-request
 
 - you can try running `yarn lint` for style unification
 - sort your translation JSON and imports in your component to reduce chance of merge conflict use http://novicelab.org/jsonabc/
-- all files and folders are to be named `kebab-case` except in `hooks` and `interfaces`
+- all files and folders are to be named `kebab-case` except in `interfaces`
 - components should be named as `PascalCase` for example `<DownloadButton />`
 - always provide description when raising PR
 - use [gitmoji](https://gitmoji.carloscuesta.me/) for uniform commit messages (optional)

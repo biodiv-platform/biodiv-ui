@@ -1,8 +1,8 @@
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/observation-list";
 import { Mq } from "mq-styled-components";
@@ -26,6 +26,7 @@ const VerticalTabs = styled.div`
       flex-grow: 1;
 
       > [role="tabpanel"] {
+        padding: 0;
         height: 100%;
         max-height: 18rem;
         overflow-y: auto;

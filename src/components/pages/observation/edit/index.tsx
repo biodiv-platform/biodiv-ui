@@ -1,5 +1,5 @@
 import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 import ObservationEditForm from "./form";

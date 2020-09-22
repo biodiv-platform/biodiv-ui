@@ -1,12 +1,18 @@
-import { CheckboxGroup } from "@chakra-ui/core";
-import useObservationFilter from "@hooks/useObservationFilter";
+import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/core";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { stringToArray } from "@utils/basic";
-import React from "react";
+import React, { useMemo } from "react";
 
 import CustomCheckbox from "./checkbox";
 
 const SpeciesGroupsFilter = () => {
   const { speciesGroup, filter, setFilter, observationData } = useObservationFilter();
+
+  const defaultValue = useMemo(() => stringToArray(filter.sGroup), []);
+  const speciesGroupList = useMemo(
+    () => speciesGroup.slice(1).sort((a, b) => a.order - b.order),
+    speciesGroup
+  );
 
   const onChange = (v) => {
     setFilter((_draft) => {
@@ -19,28 +25,39 @@ const SpeciesGroupsFilter = () => {
     });
   };
 
+  const { getCheckboxProps } = useCheckboxGroup({
+    defaultValue,
+    onChange
+  });
+
   return (
-    <CheckboxGroup
-      defaultValue={stringToArray(filter.sGroup)}
-      onChange={onChange}
-      display="grid"
-      className="custom-checkbox-group"
-      gridGap={2}
-      gridTemplateColumns="repeat(5,1fr)"
-    >
-      {speciesGroup
-        .slice(1)
-        .sort((a, b) => a.order - b.order)
-        .map((o) => (
+    <>
+      <SimpleGrid gridGap={2} columns={5}>
+        {speciesGroupList.map((o) => (
           <CustomCheckbox
             key={o.id}
             id={o.id.toString()}
-            value={o.id.toString()}
             label={o.name}
             stat={observationData.ag.groupSpeciesName[o.name]}
+            {...getCheckboxProps({ value: o.id.toString() })}
           />
         ))}
-    </CheckboxGroup>
+      </SimpleGrid>
+      {/*  */}
+      {/* <CheckboxGroup defaultValue={defaultValue} onChange={onChange}>
+        <SimpleGrid gridGap={2} columns={5}>
+          {speciesGroupList.map((o) => (
+            <CustomCheckbox
+              key={o.id}
+              id={o.id.toString()}
+              value={o.id.toString()}
+              label={o.name}
+              stat={observationData.ag.groupSpeciesName[o.name]}
+            />
+          ))}
+        </SimpleGrid>
+      </CheckboxGroup> */}
+    </>
   );
 };
 

@@ -1,4 +1,7 @@
+import GridIcon from "@icons/grid";
+import ListIcon from "@icons/list";
 import { ObservationFilterProps } from "@interfaces/custom";
+import React from "react";
 
 export const LIST_PAGINATION_LIMIT = 10;
 
@@ -12,12 +15,12 @@ export const DEFAULT_FILTER: ObservationFilterProps = {
 export const viewTabs = [
   {
     name: "LIST.VIEW_TYPE.LIST",
-    icon: "ibplist",
+    icon: <ListIcon />,
     key: "list"
   },
   {
     name: "LIST.VIEW_TYPE.GRID",
-    icon: "ibpgrid",
+    icon: <GridIcon />,
     key: "list_minimal"
   }
   /*

@@ -1,4 +1,3 @@
-import "tinymce/tinymce";
 import "tinymce/icons/default";
 import "tinymce/plugins/code";
 import "tinymce/plugins/image";
@@ -6,9 +5,11 @@ import "tinymce/plugins/link";
 import "tinymce/plugins/lists";
 import "tinymce/plugins/table";
 import "tinymce/themes/silver/theme";
+import "tinymce/tinymce";
 
 import { Button, Stack } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
+import CheckIcon from "@icons/check";
 import { axSaveLandscapeField, axUploadEditorResource } from "@services/landscape.service";
 import { Editor } from "@tinymce/tinymce-react";
 import notification, { NotificationType } from "@utils/notification";
@@ -60,10 +61,10 @@ export default function FieldEditor({ initialContent, id, onChange, onClose }) {
         onEditorChange={setContent}
       />
       <Stack isInline={true} spacing={2} mt={2}>
-        <Button type="button" variantColor="blue" onClick={handleOnSave} leftIcon="check">
+        <Button type="button" colorScheme="blue" onClick={handleOnSave} leftIcon={<CheckIcon />}>
           {t("SAVE")}
         </Button>
-        <Button type="button" variantColor="red" onClick={onClose}>
+        <Button type="button" colorScheme="red" onClick={onClose}>
           {t("CANCEL")}
         </Button>
       </Stack>

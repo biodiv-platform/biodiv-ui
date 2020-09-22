@@ -16,7 +16,7 @@ export default function FormDebugger({ form }: { form: UseFormMethods<Record<str
         <AlertIcon />
         FOR DEVELOPMENT PURPOSES ONLY
       </Alert>
-      <Button w="100%" variantColor="red" onClick={update} mb={2}>
+      <Button w="100%" colorScheme="red" onClick={update} mb={2}>
         Refresh Values
       </Button>
       <Box bg="gray.100" p={4}>

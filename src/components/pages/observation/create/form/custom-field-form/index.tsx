@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Divider, Heading, VisuallyHidden } from "@chakra-ui/core";
 
 import CustomInputField from "./custom-input-field";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import CheckboxField from "@components/form/checkbox";
 
 export default function ObservationCustomFieldForm({ fields, form }) {

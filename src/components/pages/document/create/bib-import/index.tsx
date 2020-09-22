@@ -1,5 +1,6 @@
 import { Button, VisuallyHidden } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { ArrowUpIcon } from "@chakra-ui/icons";
+import useTranslation from "@hooks/use-translation";
 import { axParseBib } from "@services/document.service";
 import React from "react";
 
@@ -25,12 +26,11 @@ export default function BibImportButton({ hForm }) {
       cursor="pointer"
       as="label"
       size="sm"
-      leftIcon="arrow-up"
-      variantColor="blue"
+      leftIcon={<ArrowUpIcon />}
+      colorScheme="blue"
       borderRadius="3rem"
     >
       <VisuallyHidden
-        // @ts-ignore
         type="file"
         as="input"
         id="bibtex-file"

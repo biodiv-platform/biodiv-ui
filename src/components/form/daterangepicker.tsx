@@ -2,11 +2,11 @@ import {
   FormControl,
   FormHelperText,
   FormLabel,
-  Icon,
   Input,
   InputGroup,
   InputRightElement
 } from "@chakra-ui/core";
+import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { formatDateRange, parseDateRange } from "@utils/date";
 import React, { useEffect, useState } from "react";
@@ -23,6 +23,7 @@ interface IDatePickerBoxProps {
   hint?: string;
   dateFormat?: string;
   style?;
+  hasMaxDate?: boolean;
   isRequired?: boolean;
   subscribe?: boolean;
   form;
@@ -36,11 +37,12 @@ const DateRangePickerField = ({
   hint,
   disabled = true,
   subscribe = false,
+  hasMaxDate = true,
   dateFormat = "d-m-Y",
   ...props
 }: IDatePickerBoxProps) => {
   const [date, setDate] = useState(parseDateRange(form.control.defaultValuesRef.current[name]));
-  const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
+  const maxDate = hasMaxDate ? new Date().setHours(23, 59, 59, 999) : null; // End of Day
 
   useEffect(() => {
     form.register({ name });
@@ -81,7 +83,7 @@ const DateRangePickerField = ({
         />
         <InputRightElement>
           <label htmlFor={name} style={{ cursor: "pointer" }}>
-            <Icon name="calendar" color="gray.300" />
+            <CalendarIcon color="gray.300" />
           </label>
         </InputRightElement>
       </InputGroup>

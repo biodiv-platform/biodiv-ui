@@ -1,7 +1,7 @@
 import React from "react";
 
 import TaxonBrowserComponent from "./taxon-browser";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 
 export default function TaxonBrowser() {
   const { filter, addFilter } = useObservationFilter();

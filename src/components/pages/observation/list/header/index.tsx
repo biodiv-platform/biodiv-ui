@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  Icon,
   Select,
   Stack,
   Tab,
@@ -11,10 +10,11 @@ import {
   Text,
   useDisclosure
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import useTranslation from "@hooks/use-translation";
+import DownloadIcon from "@icons/download";
 import { sortByOptions, viewTabs } from "@static/observation-list";
-import { toHumanString } from "human-readable-numbers";
+import { format } from "indian-number-format";
 import React from "react";
 
 import DownloadObservationDataModal from "../download-observation-modal";
@@ -53,9 +53,9 @@ export default function ListHeader() {
           mb={4}
         >
           <TabList aria-orientation="vertical">
-            {viewTabs.map(({ name, icon: iconName, key }) => (
+            {viewTabs.map(({ name, icon, key }) => (
               <Tab key={key} aria-label={t(name)} aria-controls={`view_${key}`}>
-                <Icon name={iconName} /> {t(name)}
+                {icon} {t(name)}
               </Tab>
             ))}
           </TabList>
@@ -75,7 +75,7 @@ export default function ListHeader() {
               ))}
             </Select>
           </Box>
-          <Button variant="outline" variantColor="blue" leftIcon="download" onClick={onOpen}>
+          <Button variant="outline" colorScheme="blue" leftIcon={<DownloadIcon />} onClick={onOpen}>
             {t("OBSERVATION.DOWNLOAD.TITLE")}
           </Button>
         </Stack>
@@ -83,7 +83,7 @@ export default function ListHeader() {
 
       {observationData.n > 0 && (
         <Text color="gray.600" mb={4}>
-          {toHumanString(observationData.n)} {t("LIST.OBSERVATIONS_FOUND")}
+          {format(observationData.n)} {t("LIST.OBSERVATIONS_FOUND")}
         </Text>
       )}
 

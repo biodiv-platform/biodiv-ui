@@ -14,7 +14,7 @@ export const ScientificNameOption = ({ children, ...props }) => {
       <Stack isInline={true} alignItems="center">
         {hiddenIcon && (
           <Image
-            size="2rem"
+            boxSize="2rem"
             src={getSuggestionIcon(props.data.icon)}
             fallbackSrc={props.data.group}
           />
@@ -24,8 +24,8 @@ export const ScientificNameOption = ({ children, ...props }) => {
           {props.data.acceptedNames && <Text color="gray.600">{props.data.acceptedNames}</Text>}
           <Stack isInline={true} mt={1} spacing={2}>
             <Badge>{props.data.rank}</Badge>
-            <Badge variantColor={TAXON_BADGE_COLORS[props.data.status]}>{props.data.status}</Badge>
-            <Badge variantColor={TAXON_BADGE_COLORS[props.data.position]}>
+            <Badge colorScheme={TAXON_BADGE_COLORS[props.data.status]}>{props.data.status}</Badge>
+            <Badge colorScheme={TAXON_BADGE_COLORS[props.data.position]}>
               {props.data.position}
             </Badge>
           </Stack>

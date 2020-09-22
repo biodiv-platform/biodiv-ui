@@ -1,6 +1,6 @@
 import { Box, Heading, Image, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { Landscape } from "@interfaces/landscape";
 import { ENDPOINT } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";

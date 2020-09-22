@@ -1,6 +1,6 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { Featured, ObservationUserPermission, UserGroupIbp } from "@interfaces/observation";
 import { hasAccess } from "@utils/auth";
@@ -45,7 +45,7 @@ const Groups = ({
           <Tab>👥 {t("OBSERVATION.USERGROUPS")}</Tab>
           <Tab hidden={hideFeature}>🌟 {t("OBSERVATION.FEATURE_IN_GROUPS")}</Tab>
         </TabList>
-        <TabPanels p={4} pt={2}>
+        <TabPanels>
           <TabPanel>
             <GroupPost
               groups={permission?.userGroupMember}

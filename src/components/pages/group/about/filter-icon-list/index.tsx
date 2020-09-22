@@ -17,7 +17,12 @@ export default function FilterIconList({ filterIds, filterList, title, type }) {
         {filters.map(({ name, id }) => (
           <Box key={id}>
             <Tooltip aria-label={name} label={name} placement="top" hasArrow={true}>
-              <Image size="3rem" ignoreFallback={true} src={getLocalIcon(name, type)} alt={name} />
+              <Image
+                boxSize="3rem"
+                ignoreFallback={true}
+                src={getLocalIcon(name, type)}
+                alt={name}
+              />
             </Tooltip>
           </Box>
         ))}

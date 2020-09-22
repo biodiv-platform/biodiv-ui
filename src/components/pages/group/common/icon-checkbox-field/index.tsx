@@ -35,14 +35,8 @@ export default function IconCheckboxField({
         control={form.control}
         name={name}
         defaultValue={form.control.defaultValuesRef.current[name]}
-        render={({ onChange, onBlur, value }) => (
-          <CheckBoxItems
-            options={options}
-            defaultValue={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            type={type}
-          />
+        render={({ onChange, value }) => (
+          <CheckBoxItems options={options} defaultValue={value} onChange={onChange} type={type} />
         )}
       />
       <ErrorMessage name={name} errors={form.errors} />

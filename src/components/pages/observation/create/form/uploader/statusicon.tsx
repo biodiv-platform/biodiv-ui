@@ -1,5 +1,5 @@
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { AssetStatus } from "@interfaces/custom";
 import React from "react";
 

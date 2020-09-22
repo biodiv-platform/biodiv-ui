@@ -3,7 +3,7 @@ import DateRangePickerField from "@components/form/daterangepicker";
 import CheckBoxField from "@components/form/checkbox";
 import GeoJsonWktParserInput from "../geojson-wkt-inputfield";
 import TaxonInputField from "./taxon-filter-field";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 
 export default function RulesInputType({ inputType, form, name }) {
   const { t } = useTranslation();
@@ -29,6 +29,7 @@ export default function RulesInputType({ inputType, form, name }) {
     case "observedOnDateList":
       return (
         <DateRangePickerField
+          hasMaxDate={false}
           form={form}
           name={name}
           label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}

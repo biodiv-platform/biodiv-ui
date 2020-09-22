@@ -1,4 +1,4 @@
-import { Image, VisuallyHidden } from "@chakra-ui/core";
+import { Box, Image, useCheckbox } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
 import styled from "@emotion/styled";
 import { getSpeciesIcon } from "@utils/media";
@@ -7,61 +7,90 @@ import React from "react";
 
 const CheckboxLabel = styled.label`
   cursor: pointer;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  overflow: hidden;
 
-  .custom-checkbox {
-    display: block;
-    padding: 0.25rem;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom: 0;
+  img {
+    filter: grayscale(1);
+    margin: 0 auto;
   }
+
   .badge {
-    background: var(--gray-400);
+    background: var(--gray-500);
     font-size: 0.7rem;
     line-height: 1.2rem;
     color: white;
     text-align: center;
-    border-radius: 0.25rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    filter: grayscale(1);
   }
-  [aria-checked="true"].badge {
-    background: var(--blue-500);
-    box-shadow: 0 0 0 1px var(--blue-500);
-    filter: none;
-  }
-  img {
-    margin: 0 auto;
+
+  &[aria-checked="true"] {
+    img {
+      filter: none;
+    }
+    .badge {
+      background: var(--blue-500);
+    }
   }
 `;
 
-const Checkbox = ({ id, label, value, stat, ...props }) => (
-  <CheckboxLabel role="checkbox">
-    <Tooltip label={label} hasArrow={true} placement="top">
-      <div className="custom-checkbox" aria-checked={props.isChecked}>
-        <VisuallyHidden
-          as="input"
-          type="checkbox"
-          {...props}
-          // @ts-ignore
-          checked={props.isChecked}
-          value={value}
-        />
+const Checkbox = (props: any) => {
+  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+
+  return (
+    <Tooltip label={props.label} hasArrow={true} placement="top">
+      <Box
+        {...getCheckboxProps()}
+        as={CheckboxLabel}
+        borderRadius="md"
+        aria-checked={props.isChecked}
+        _checked={{
+          borderColor: "blue.500",
+          bg: "blue.50"
+        }}
+        _focus={{
+          boxShadow: "outline"
+        }}
+      >
+        <input {...getInputProps()} />
         <Image
-          size="2rem"
-          mr={2}
+          boxSize="2.2rem"
           objectFit="contain"
-          src={getSpeciesIcon(label)}
-          alt={label}
+          src={getSpeciesIcon(props.label)}
+          alt={props.label}
           ignoreFallback={true}
         />
-      </div>
+        <div className="badge">{toHumanString(props.stat || 0)}</div>
+      </Box>
     </Tooltip>
-    <div className="badge" aria-checked={props.isChecked}>
-      {toHumanString(stat || 0)}
-    </div>
-  </CheckboxLabel>
-);
+  );
+};
+
+// const Checkbox = ({ id, label, value, stat, ...props }) => (
+//   <CheckboxLabel role="checkbox">
+//     <Tooltip label={label} hasArrow={true} placement="top">
+//       <div className="custom-checkbox" aria-checked={props.isChecked}>
+//         <VisuallyHidden
+//           as="input"
+//           type="checkbox"
+//           {...props}
+//           checked={props.isChecked}
+//           value={value}
+//         />
+//         <Image
+//           boxSize="2rem"
+//           mr={2}
+//           objectFit="contain"
+//           src={getSpeciesIcon(label)}
+//           alt={label}
+//           ignoreFallback={true}
+//         />
+//       </div>
+//     </Tooltip>
+//     <div className="badge" aria-checked={props.isChecked}>
+//       {toHumanString(stat || 0)}
+//     </div>
+//   </CheckboxLabel>
+// );
 
 export default Checkbox;

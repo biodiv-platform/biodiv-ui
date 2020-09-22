@@ -1,7 +1,8 @@
 import { Flex } from "@chakra-ui/core";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import { axSendPushNotification } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
@@ -60,7 +61,7 @@ function NotificationsForm() {
         form={hForm}
       />
       <Flex justifyContent="space-between" alignItems="center">
-        <Submit form={hForm} rightIcon="arrow-forward">
+        <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
           Submit
         </Submit>
       </Flex>

@@ -2,7 +2,7 @@ import { Avatar, Box, Link, SimpleGrid } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { UserIbp } from "@interfaces/observation";
 import { getUserImage } from "@utils/media";
 import React from "react";

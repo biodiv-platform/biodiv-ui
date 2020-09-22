@@ -7,7 +7,7 @@ export const axSaveFCMToken = async (payload) => {
     const { data } = await http.post(`${ENDPOINT.USER}/v1/user/save-token`, payload);
     return { success: true, data };
   } catch (e) {
-    return { success: false, data: e.response.data };
+    return { success: false, data: null };
   }
 };
 

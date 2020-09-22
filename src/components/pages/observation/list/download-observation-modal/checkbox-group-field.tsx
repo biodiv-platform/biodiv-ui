@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup, FormControl, FormLabel } from "@chakra-ui/core";
+import { Checkbox, CheckboxGroup, FormControl, FormLabel, Stack } from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
 import React, { useEffect, useMemo } from "react";
 import { UseFormMethods } from "react-hook-form";
@@ -34,17 +34,14 @@ const CheckboxGroupField = ({
   return (
     <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
       <FormLabel htmlFor="email">{label}</FormLabel>
-      <CheckboxGroup
-        defaultValue={initialValue}
-        onChange={handleOnChange}
-        className="custom-checkbox-group"
-        isInline={true}
-      >
-        {options.map((item) => (
-          <Checkbox w="22rem" isDisabled={disabled} key={item.value} value={item.value}>
-            {item.label}
-          </Checkbox>
-        ))}
+      <CheckboxGroup defaultValue={initialValue} onChange={handleOnChange}>
+        <Stack className="custom-checkbox-group">
+          {options.map((item) => (
+            <Checkbox w="22rem" isDisabled={disabled} key={item.value} value={item.value}>
+              {item.label}
+            </Checkbox>
+          ))}
+        </Stack>
       </CheckboxGroup>
       <ErrorMessage name={name} errors={form.errors} />
     </FormControl>

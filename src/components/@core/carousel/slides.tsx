@@ -103,7 +103,7 @@ function CarouselSlides({ resources, alt, speciesGroup }) {
         resources.map(({ resource }) => <div key={resource.id}>{getSlide(resource)}</div>)
       ) : (
         <Box color="gray.500">
-          <Image maxW="20rem" size="full" src={getSpeciesIcon(speciesGroup)} />
+          <Image maxW="20rem" boxSize="full" src={getSpeciesIcon(speciesGroup)} />
         </Box>
       )}
     </CarouselBox>

@@ -1,8 +1,12 @@
 import { Avatar, AvatarGroup, Box, Button, SimpleGrid, Stack, Text } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
-import useTranslation from "@configs/i18n/useTranslation";
-import useGlobalState from "@hooks/useGlobalState";
+import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
+import CheckIcon from "@icons/check";
+import CrossIcon from "@icons/cross";
+import LockIcon from "@icons/lock";
+import UnlockIcon from "@icons/unlock";
 import { AllRecoSugguestions, RecoIbp } from "@interfaces/observation";
 import {
   axAgreeRecoVote,
@@ -126,8 +130,8 @@ export default function RecoSuggestion({
                     variant="outline"
                     size="sm"
                     minW="100px"
-                    variantColor={canAccept ? "red" : "green"}
-                    leftIcon={(canAccept ? "ibpcross" : "ibpcheck") as any}
+                    colorScheme={canAccept ? "red" : "green"}
+                    leftIcon={canAccept ? <CrossIcon /> : <CheckIcon />}
                     onClick={() =>
                       recoVoteAction(reco, canAccept ? RecoAction.Remove : RecoAction.Agree)
                     }
@@ -143,9 +147,9 @@ export default function RecoSuggestion({
                       minW="100px"
                       size="sm"
                       variant="outline"
-                      variantColor={isLocked ? "blue" : "red"}
+                      colorScheme={isLocked ? "blue" : "red"}
                       ml={2}
-                      leftIcon={isLocked ? "unlock" : "lock"}
+                      leftIcon={isLocked ? <UnlockIcon /> : <LockIcon />}
                       onClick={() =>
                         recoVoteAction(reco, isLocked ? RecoAction.Unlock : RecoAction.Validate)
                       }

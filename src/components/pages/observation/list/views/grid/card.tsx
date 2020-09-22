@@ -1,6 +1,6 @@
 import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getObservationImage, getSpeciesIcon } from "@utils/media";
@@ -35,7 +35,7 @@ export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
             <Heading size="sm" className="elipsis" title={o.recoIbp?.commonName}>
               {o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}{" "}
               {!o.recoIbp?.scientificName && (
-                <Badge variantColor="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
+                <Badge colorScheme="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
               )}
             </Heading>
 

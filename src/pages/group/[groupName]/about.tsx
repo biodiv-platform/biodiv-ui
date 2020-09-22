@@ -15,7 +15,7 @@ const GroupEditPage = (props) => <AboutGroupComponent {...props} />;
 GroupEditPage.getInitialProps = async (ctx) => {
   // Will check if user is logged in or redirect
 
-  const aReq = absoluteUrl(ctx.req);
+  const aReq = absoluteUrl(ctx);
 
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitats } = await axGetAllHabitat();

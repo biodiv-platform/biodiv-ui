@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import React from "react";
 
 import Carousel from "./carousel";

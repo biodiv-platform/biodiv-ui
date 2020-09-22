@@ -1,6 +1,6 @@
-import { AspectRatioBox, Box, Image, SimpleGrid } from "@chakra-ui/core";
+import { AspectRatio, Box, Image, SimpleGrid } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 export default function HabitatsCoverage({ habitat }) {
@@ -11,7 +11,7 @@ export default function HabitatsCoverage({ habitat }) {
       <BoxHeading>🏜 {t("GROUP.HABITATS_COVERED")}</BoxHeading>
       <SimpleGrid columns={4} spacing={4} p={4}>
         {habitat.map((id) => (
-          <AspectRatioBox ratio={1}>
+          <AspectRatio ratio={1}>
             <Image
               overflow="hidden"
               objectFit="cover"
@@ -20,7 +20,7 @@ export default function HabitatsCoverage({ habitat }) {
               bg="gray.200"
               borderRadius="md"
             />
-          </AspectRatioBox>
+          </AspectRatio>
         ))}
       </SimpleGrid>
     </Box>

@@ -1,5 +1,5 @@
-import { AspectRatioBox, Avatar, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { AspectRatio, Avatar, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/core";
+import useTranslation from "@hooks/use-translation";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateUserImage } from "@services/user.service";
 import { getUserImage } from "@utils/media";
@@ -34,14 +34,13 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
         alignItems={{ base: "center", md: "initial" }}
         mb={4}
       >
-        <AspectRatioBox ratio={1} mb={{ md: 4 }} size={{ base: "4rem", md: "auto" }} flexShrink={0}>
+        <AspectRatio ratio={1} mb={{ md: 4 }} boxSize={{ base: "4rem", md: "auto" }} flexShrink={0}>
           <Avatar fontSize={{ md: "6xl" }} src={userImage} name={user.name} />
-        </AspectRatioBox>
+        </AspectRatio>
         <Box pl={{ base: 4, md: 0 }}>
-          <Button type="button" as="label" cursor="pointer" w="full" variantColor="blue">
+          <Button type="button" as="label" cursor="pointer" w="full" colorScheme="blue">
             <VisuallyHidden
               as="input"
-              // @ts-ignore
               type="file"
               id="user-profile"
               accept="image/*"

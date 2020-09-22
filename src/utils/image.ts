@@ -27,7 +27,7 @@ function resizeImage(file: File, max = 3000) {
             img.toBlob(resolve);
           }
         } catch (e) {
-          console.error(e);
+          console.warn("EXIF Failed", e);
           img.toBlob(resolve);
         }
       },

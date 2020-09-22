@@ -1,4 +1,5 @@
-import { Box, Flex, Icon, useDisclosure } from "@chakra-ui/core";
+import { Box, Flex, useDisclosure } from "@chakra-ui/core";
+import { ArrowForwardIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
@@ -7,9 +8,9 @@ import PhoneNumber from "@components/form/phone-number";
 import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import { axLogin } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
@@ -115,7 +116,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
         )}
         <TextBox name="password" type="password" label={t("SIGN_IN.FORM.PASSWORD")} form={hForm} />
         <Flex justifyContent="space-between" alignItems="center">
-          <Submit form={hForm} rightIcon="arrow-forward">
+          <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
             {t("SIGN_IN.FORM.SUBMIT")}
           </Submit>
           <LocalLink href={`${currentGroup?.webAddress}/register/forgotPassword`}>
@@ -133,7 +134,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       <LocalLink href={`${currentGroup?.webAddress}/register`}>
         <BlueLink ml={2}>
           {t("SIGN_IN.SIGN_UP_LINK")}
-          <Icon name="chevron-right" />
+          <ChevronRightIcon />
         </BlueLink>
       </LocalLink>
 

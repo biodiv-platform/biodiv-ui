@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
-import useObservationFilter from "@hooks/useObservationFilter";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { stringToFeature } from "@utils/location";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useMemo } from "react";

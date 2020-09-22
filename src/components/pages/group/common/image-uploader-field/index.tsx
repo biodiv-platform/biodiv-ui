@@ -6,7 +6,7 @@ import ErrorMessage from "@components/form/common/error-message";
 import DropTarget from "./drop-target";
 import ResourceCard from "./image-card";
 
-export interface IDropzoneProps {
+interface IDropzoneProps {
   name: string;
   label: string;
   mb?: number;

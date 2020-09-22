@@ -1,11 +1,11 @@
 import {
-  AccordionHeader,
+  AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 import FilterCheckboxes, { FilterCheckboxesProps } from "./checkboxs";
@@ -17,10 +17,12 @@ export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
     <AccordionItem>
       {({ isExpanded }) => (
         <>
-          <AccordionHeader>
-            <Box textAlign="left">{props.label || t(props.translateKey + "TITLE")}</Box>
+          <AccordionButton>
+            <Box flex={1} textAlign="left">
+              {props.label || t(props.translateKey + "TITLE")}
+            </Box>
             <AccordionIcon />
-          </AccordionHeader>
+          </AccordionButton>
           <AccordionPanel>{isExpanded && <FilterCheckboxes {...props} />}</AccordionPanel>
         </>
       )}

@@ -1,5 +1,6 @@
-import { Flex, Icon } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import { Flex } from "@chakra-ui/core";
+import { ArrowUpIcon } from "@chakra-ui/icons";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 export default function UploadDragging() {
@@ -7,7 +8,7 @@ export default function UploadDragging() {
 
   return (
     <Flex direction="column" alignItems="center" className="fade">
-      <Icon name="arrow-up" mb={4} fontSize="3xl" />
+      <ArrowUpIcon mb={4} fontSize="3xl" />
       <span>{t("OBSERVATION.UPLOADER.LABEL_RELEASE")}</span>
     </Flex>
   );

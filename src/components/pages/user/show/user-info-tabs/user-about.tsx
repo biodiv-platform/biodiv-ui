@@ -2,7 +2,7 @@ import { SimpleGrid, Stack } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLinkList from "@components/@core/blue-link/external-list";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import React from "react";
 import { format } from "timeago.js";
 

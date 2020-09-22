@@ -1,4 +1,11 @@
-import { Divider, FormControl, FormHelperText, FormLabel, RadioButtonGroup } from "@chakra-ui/core";
+import {
+  Box,
+  Divider,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  useRadioGroup
+} from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
 import React, { useEffect } from "react";
 import { UseFormMethods } from "react-hook-form";
@@ -15,6 +22,20 @@ interface ISpeciesSelecProps {
   form: UseFormMethods<Record<string, any>>;
 }
 
+/**
+ * As radio specs only accepts string to use number wrapper is required
+ *
+ * @param {ISpeciesSelecProps} {
+ *   name,
+ *   label,
+ *   hint,
+ *   mb = 4,
+ *   options = [],
+ *   form,
+ *   ...props
+ * }
+ * @returns
+ */
 const GroupSelector = ({
   name,
   label,
@@ -27,22 +48,28 @@ const GroupSelector = ({
   const value = form.watch(name);
 
   const onChange = (v) => {
-    form.setValue(name, v, { shouldDirty: true, shouldValidate: true });
+    form.setValue(name, Number(v), { shouldDirty: true, shouldValidate: true });
   };
 
   useEffect(() => {
     form.register({ name });
   }, [form.register]);
 
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name,
+    value: value ? value.toString() : null,
+    onChange
+  });
+
   return (
     <>
       <FormControl isInvalid={form.errors[name] && true} isRequired={true} mb={mb} {...props}>
         <FormLabel htmlFor={name}>{label}</FormLabel>
-        <RadioButtonGroup id={name} value={value} onChange={onChange} isInline>
+        <Box {...getRootProps()}>
           {options.map((o) => (
-            <CustomRadio key={o.id} value={o.id} icon={o.name} />
+            <CustomRadio key={o.id} icon={o.name} {...getRadioProps({ value: o.id.toString() })} />
           ))}
-        </RadioButtonGroup>
+        </Box>
         <ErrorMessage name={name} errors={form.errors} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
       </FormControl>

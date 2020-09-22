@@ -4,9 +4,11 @@ export const compiledMessage = (templateString: string, templateVariables) => {
     : templateString;
 };
 
-export const absoluteUrl = (req, setLocalhost?) => {
+export const absoluteUrl = (ctx, asPath?, setLocalhost?) => {
   let protocol = "https:";
-  let host = req ? req.headers["x-forwarded-host"] || req.headers["host"] : window.location.host;
+  let host = ctx?.req
+    ? ctx.req.headers["x-forwarded-host"] || ctx.req.headers["host"]
+    : window.location.host;
   if (host.indexOf("localhost") > -1) {
     if (setLocalhost) {
       host = setLocalhost;
@@ -14,7 +16,7 @@ export const absoluteUrl = (req, setLocalhost?) => {
     protocol = "http:";
   }
 
-  return new URL(`${protocol}//${host}${req?.url || ""}`);
+  return new URL(`${protocol}//${host}${asPath || ctx?.resolvedUrl || ctx?.req?.url || ""}`);
 };
 
 export const toKey = (s = "") => s.split(" ").join("_").toUpperCase();

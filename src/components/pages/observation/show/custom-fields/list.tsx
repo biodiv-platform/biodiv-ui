@@ -1,5 +1,5 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
-import useGlobalState from "@hooks/useGlobalState";
+import useGlobalState from "@hooks/use-global-state";
 import React, { useMemo } from "react";
 
 import { ICustomFieldsProps } from ".";

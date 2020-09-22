@@ -1,37 +1,38 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid, useRadio, useRadioGroup } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";
-import Content from "../content";
+import TraitContent from "../content";
 
 const SingleCategorialTrait = ({
+  name,
   values,
   onUpdate,
   defaultValue,
   gridColumns = 5
 }: ITraitInputProps) => {
-  const [selected, setSelected] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue);
 
   useEffect(() => {
-    onUpdate(selected);
-  }, [selected]);
+    onUpdate(value);
+  }, [value]);
 
-  const handleOnClick = (value) => {
-    setSelected(value === selected ? null : value);
-  };
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name,
+    value: value ? value.toString() : null,
+    onChange: (v) => (v === value ? null : setValue(Number(v)))
+  });
 
   return (
-    <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4}>
+    <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4} {...getRootProps()}>
       {values.map((o) => (
-        <Box
+        <TraitContent
           key={o.id}
-          role="radio"
-          className="custom-radio"
-          aria-checked={selected === o.id}
-          onClick={() => handleOnClick(o.id)}
-        >
-          <Content value={o.value} label={o.value} icon={o.icon} />
-        </Box>
+          label={o.value}
+          icon={o.icon}
+          inputHook={useRadio}
+          {...getRadioProps({ value: o.value.toString() })}
+        />
       ))}
     </SimpleGrid>
   );

@@ -17,11 +17,11 @@ import React from "react";
 
 const GroupEditPage = (props) => <GroupEditPageComponent {...props} />;
 
-GroupEditPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   // Will check if user is logged in or redirect
   authorizedPageSSR([Role.Any], ctx, true);
 
-  const aReq = absoluteUrl(ctx.req);
+  const aReq = absoluteUrl(ctx);
 
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitats } = await axGetAllHabitat();

@@ -7,7 +7,7 @@ import {
   TabPanels,
   Tabs
 } from "@chakra-ui/core";
-import useTranslation from "@configs/i18n/useTranslation";
+import useTranslation from "@hooks/use-translation";
 import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
 import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
