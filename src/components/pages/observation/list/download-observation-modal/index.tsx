@@ -25,8 +25,7 @@ import * as Yup from "yup";
 import CheckboxGroupField from "./checkbox-group-field";
 import { OBSERVATION_FILTERS } from "./filters";
 
-const getFilterOptions = (options) =>
-  options.map(({ name, values }) => ({ value: values || name, label: name }));
+const getFilterOptions = (options) => options.map(({ name }) => ({ value: name, label: name }));
 
 export default function DownloadObservationDataModal({ isOpen, onClose }) {
   const { t } = useTranslation();
