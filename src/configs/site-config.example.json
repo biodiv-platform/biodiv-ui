@@ -51,6 +51,7 @@
   "HOME": {
     "FEATURES": true,
     "GALLERY": true,
+    "MAP": [],
     "PARTNERS": true,
     "STATS": true
   },
