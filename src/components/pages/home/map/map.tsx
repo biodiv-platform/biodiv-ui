@@ -1,6 +1,7 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import { ENDPOINT } from "@static/constants";
+import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -21,16 +22,12 @@ export default function Map() {
   const { currentGroup } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
   const geoserverLayers: any[] = SITE_CONFIG.HOME.MAP;
+  const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
 
   return (
     <Naksha
-      viewPort={{
-        zoom: 3.4,
-        bearing: 0,
-        pitch: 0,
-        ...SITE_CONFIG.MAP.CENTER
-      }}
-      loadToC={false}
+      viewPort={mapCenter}
+      loadToC={true}
       mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
       geoserver={{

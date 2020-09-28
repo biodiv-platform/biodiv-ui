@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import { ENDPOINT } from "@static/constants";
+import { getMapCenter } from "@utils/location";
 import { ExtendedMarkerProps } from "naksha-components-react/dist/interfaces/naksha";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -16,12 +17,14 @@ const onObservationGridHover = ({ feature }) => (
 );
 
 export default function ClusterMap({ speciesId, latitude, longitude, colorHex = "E53E3E" }) {
+  const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
+
   return (
     <Box h="422px" borderRadius="md" overflow="hidden" className="gray-box fadeInUp delay-5" mb={2}>
       <LazyLoad height={422} once={true}>
         <Naksha
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
-          viewPort={{ ...SITE_CONFIG.MAP.CENTER, zoom: 3.1 }}
+          viewPort={defaultViewPort}
           layers={
             speciesId
               ? [

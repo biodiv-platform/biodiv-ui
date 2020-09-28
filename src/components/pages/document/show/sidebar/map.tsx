@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/core";
-import { defaultViewPort } from "@components/pages/group/common/area-draw-field";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "@hooks/use-translation";
+import { getMapCenter } from "@utils/location";
 import { Previewer } from "naksha-components-react";
 import React from "react";
 
@@ -17,6 +17,7 @@ const coverageToGeoJson = (coverage) => ({
 export default function DocumentSidebarMap({ documentCoverages }) {
   const geojson = coverageToGeoJson(documentCoverages);
   const { t } = useTranslation();
+  const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
 
   return (
     <Box

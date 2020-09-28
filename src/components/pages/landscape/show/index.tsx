@@ -1,8 +1,8 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/core";
-import { defaultViewPort } from "@components/pages/group/common/area-draw-field";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "@hooks/use-translation";
 import { Landscape } from "@interfaces/landscape";
+import { getMapCenter } from "@utils/location";
 import { Previewer } from "naksha-components-react";
 import React from "react";
 import wkt from "wkt";
@@ -20,6 +20,7 @@ export default function LandscapeShowComponent({
   landscapeShow
 }: LandscapeShowComponentProps) {
   const { t } = useTranslation();
+  const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
 
   return (
     <div className="container mt">

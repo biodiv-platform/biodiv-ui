@@ -1,16 +1,8 @@
 import { Box, FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
-import { stringToFeature } from "@utils/location";
+import { getMapCenter, stringToFeature } from "@utils/location";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useEffect, useMemo, useState } from "react";
-
-export const defaultViewPort = {
-  ...SITE_CONFIG.MAP.CENTER,
-  zoom: 2.8,
-  bearing: 0,
-  pitch: 0,
-  maxZoom: 14
-};
 
 interface AreaDrawFieldProps {
   form;
@@ -35,6 +27,7 @@ export default function AreaDrawField({
 }: AreaDrawFieldProps) {
   const { register, setValue } = form;
   const [coordinates, setCoordinates] = useState({});
+  const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
 
   const defaultFeatures = useMemo(
     () => stringToFeature(form?.control?.defaultValuesRef?.current[name]),

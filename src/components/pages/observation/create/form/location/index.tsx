@@ -11,13 +11,13 @@ import {
 } from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
 import Select from "@components/form/select";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "@hooks/use-translation";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
 import useOnlineStatus from "@rehooks/online-status";
 import { EXIF_GPS_FOUND } from "@static/events";
-import { reverseGeocode } from "@utils/location";
-import React, { useEffect, useState } from "react";
+import { getMapCenter, reverseGeocode } from "@utils/location";
+import React, { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { UseFormMethods } from "react-hook-form";
 
@@ -33,7 +33,7 @@ const LIBRARIES = ["drawing", "places"];
 
 const LocationPicker = ({ form }: LocationPickerProps) => {
   const { t } = useTranslation();
-  const { latitude: lat, longitude: lng } = SITE_CONFIG.MAP.CENTER;
+  const { latitude: lat, longitude: lng, zoom: initialZoom } = useMemo(() => getMapCenter(4), []);
   const [hideLocationPicker, setHideLocationPicker] = useState(true);
   const isOnline = useOnlineStatus();
 
@@ -64,7 +64,7 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
   const defaultValues = form.control.defaultValuesRef.current;
 
   const { isOpen, onToggle } = useDisclosure();
-  const [zoom, setZoom] = useState(4);
+  const [zoom, setZoom] = useState(initialZoom);
   const [center, setCenter] = useState({ lat, lng });
   const [searchBoxRef, setSearchBoxRef] = useState<any>();
   const [suggestion, setSuggestion] = useState<any>();

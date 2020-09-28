@@ -1,10 +1,12 @@
 import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import { ENDPOINT } from "@static/constants";
+import { getMapCenter } from "@utils/location";
 import Naksha from "naksha-components-react";
 import React from "react";
 
 export default function MapPageComponent() {
+  const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
   );
@@ -12,12 +14,7 @@ export default function MapPageComponent() {
   return (
     <Box height="calc(100vh - var(--heading-height))">
       <Naksha
-        viewPort={{
-          ...SITE_CONFIG.MAP.CENTER,
-          zoom: 3.5,
-          bearing: 0,
-          pitch: 0
-        }}
+        viewPort={defaultViewPort}
         loadToC={true}
         showToC={false}
         mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}

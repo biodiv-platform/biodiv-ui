@@ -1,22 +1,16 @@
 import { Box } from "@chakra-ui/core";
-import SITE_CONFIG from "@configs/site-config.json";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import { stringToFeature } from "@utils/location";
+import SITE_CONFIG from "@configs/site-config.json";
+import { getMapCenter, stringToFeature } from "@utils/location";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useMemo } from "react";
-
-const defaultViewPort = {
-  ...SITE_CONFIG.MAP.CENTER,
-  zoom: 2.8,
-  bearing: 0,
-  pitch: 0
-};
 
 const FILTER_NAME = "location";
 
 export default function MapDrawContainer() {
   const { filter, addFilter, removeFilter } = useObservationFilter();
   const defaultFeatures = useMemo(() => stringToFeature(filter?.location), []);
+  const defaultViewPort = useMemo(() => getMapCenter(2.8), []);
 
   const handleOnFeatureChange = (features) => {
     if (features.length > 0) {

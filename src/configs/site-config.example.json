@@ -75,7 +75,8 @@
     "ACTIVE": true,
     "CENTER": {
       "latitude": 23.2,
-      "longitude": 83
+      "longitude": 83,
+      "zoom": 0
     },
     "COUNTRY": "IN"
   },

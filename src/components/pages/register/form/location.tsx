@@ -9,9 +9,10 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 import ErrorMessage from "@components/form/common/error-message";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "@hooks/use-translation";
 import { LoadScriptNext, StandaloneSearchBox } from "@react-google-maps/api";
+import { getMapCenter } from "@utils/location";
 import React, { useEffect, useState } from "react";
 
 import LocationMap from "../../observation/create/form/location/map";
@@ -20,7 +21,7 @@ const LIBRARIES = ["drawing", "places"];
 
 const LocationPicker = ({ form }) => {
   const { t } = useTranslation();
-  const { latitude: lat, longitude: lng } = SITE_CONFIG.MAP.CENTER;
+  const { latitude: lat, longitude: lng, zoom: initialZoom } = getMapCenter(4);
   const FK = {
     location: {
       name: "location",
@@ -37,7 +38,7 @@ const LocationPicker = ({ form }) => {
   };
 
   const { isOpen, onToggle } = useDisclosure();
-  const [zoom, setZoom] = useState(4);
+  const [zoom, setZoom] = useState(initialZoom);
   const [center, setCenter] = useState({ lat, lng });
   const [searchBoxRef, setSearchBoxRef] = useState<any>();
   const [suggestions, setSuggestions] = useState([]);
