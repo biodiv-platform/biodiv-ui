@@ -16,7 +16,7 @@ export default function EditLinkButton({ label }) {
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
-    setCanEdit(hasAccess([Role.Admin]) && id && !pathname.endsWith("edit"));
+    setCanEdit(hasAccess([Role.Admin,Role.UsergroupFounder]) && id && !pathname.endsWith("edit"));
   }, [pathname]);
 
   return canEdit ? (
