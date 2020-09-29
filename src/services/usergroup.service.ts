@@ -166,6 +166,20 @@ export const axCheckUserGroupMember = async (userGroupId, userId, ctx) => {
   return { success: false, data: userGroupId ? false : true };
 };
 
+export const axCheckUserGroupFounderOrAdmin = async (userGroupId, ctx) => {
+  try {
+    if (userGroupId) {
+      const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/enable/edit/${userGroupId}`, {
+        params: { ctx }
+      });
+      return { success: true, data };
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  return { success: false, data: userGroupId ? false : true };
+};
+
 export const axJoinUserGroup = async (userGroupId) => {
   try {
     const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/join/${userGroupId}`);

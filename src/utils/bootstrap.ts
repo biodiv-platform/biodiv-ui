@@ -1,6 +1,11 @@
 import { defaultLocale, localesList } from "@configs/i18n/config";
 import { isLocale } from "@configs/i18n/types";
-import { axCheckUserGroupMember, axGetPages, axGroupList } from "@services/usergroup.service";
+import {
+  axCheckUserGroupMember,
+  axGetPages,
+  axGroupList,
+  axCheckUserGroupFounderOrAdmin
+} from "@services/usergroup.service";
 import { TOKEN } from "@static/constants";
 import { parseNookies } from "next-nookies-persist";
 import { AppContext } from "next/app";
@@ -47,8 +52,8 @@ export const processedInitialProps = async ({ Component, ctx, router }: AppConte
 
   const { currentGroup, groups } = await axGroupList(aReq.href);
   const { data: isCurrentGroupMember } = await axCheckUserGroupMember(currentGroup.id, userId, ctx);
+  const { data: canUserEdit } = await axCheckUserGroupFounderOrAdmin(currentGroup.id, ctx);
   const manifestURL = getManifestURL(currentGroup);
-
   const { data: rawPages } = await axGetPages(currentGroup?.id);
   const pages = getNewsLetterMenu(rawPages);
 
@@ -63,6 +68,7 @@ export const processedInitialProps = async ({ Component, ctx, router }: AppConte
     groups,
     currentGroup,
     isCurrentGroupMember,
+    canUserEdit,
     manifestURL,
     domain,
     nookies
