@@ -35,7 +35,7 @@ export default function DownloadLandscape({ id, title }) {
         <MenuList>
           <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>
           <MenuItem onClick={() => download("geojson")}>GeoJSON</MenuItem>
-          <MenuItem onClick={() => download("image")}>Image</MenuItem>
+          <MenuItem onClick={() => download("png")}>Image</MenuItem>
         </MenuList>
       </Menu>
     </Box>

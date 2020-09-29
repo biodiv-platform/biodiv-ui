@@ -1,6 +1,5 @@
 import { ENDPOINT } from "@static/constants";
 import { plainHttp } from "@utils/http";
-import notification from "@utils/notification";
 import { createUserESObject } from "@utils/user";
 
 export const axSearchSpeciesByText = async (text, field) => {
@@ -10,7 +9,7 @@ export const axSearchSpeciesByText = async (text, field) => {
     });
     return { success: true, data };
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
     return { success: false, data: [] };
   }
 };
@@ -72,7 +71,7 @@ export const axSearchFilterByName = async (text, field) => {
     );
     return data.map((i) => ({ value: i, label: i }));
   } catch (e) {
-    notification(e.response.data.message);
+    console.error(e);
     return [];
   }
 };

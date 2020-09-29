@@ -1,24 +1,25 @@
 import { axSaveFCMToken } from "@services/user.service";
 
 export const subscribeToPushNotification = async () => {
-  const workbox = (window as any)?.workbox;
-  if (!workbox) {
-    console.debug("Not registering for Push Notifications");
-    return;
-  }
+  try {
+    const workbox = (window as any)?.workbox;
 
-  await workbox.register();
-  Notification.requestPermission(async (status) => {
-    if (status === "granted") {
-      const token = await workbox.messageSW({ command: "getFCMToken" });
-      if (token) {
-        const { success } = await axSaveFCMToken({ token });
-        console.debug(success ? "TOKEN_SAVED" : "TOKEN_NOT_SAVED");
-      } else {
-        console.debug("NOTIFICATIONS.TOKEN_ERROR");
+    await workbox.register();
+
+    Notification.requestPermission(async (status) => {
+      if (status === "granted") {
+        const token = await workbox.messageSW({ command: "getFCMToken" });
+        if (token) {
+          const { success } = await axSaveFCMToken({ token });
+          console.debug(success ? "TOKEN_SAVED" : "TOKEN_NOT_SAVED");
+        } else {
+          console.debug("NOTIFICATIONS.TOKEN_ERROR");
+        }
       }
-    }
-  });
+    });
+  } catch (e) {
+    console.debug("Not registering for SW and Push Notifications", e);
+  }
 };
 
 export const createUserESObject = (user) => {
