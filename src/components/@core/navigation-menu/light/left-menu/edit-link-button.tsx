@@ -2,8 +2,7 @@ import { Button } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
-import { Role } from "@interfaces/custom";
-import { hasAccess } from "@utils/auth";
+import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -16,7 +15,11 @@ export default function EditLinkButton({ label }) {
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
-    setCanEdit(hasAccess([Role.Admin]) && id && !pathname.endsWith("edit"));
+    if (id) {
+      axCheckUserGroupFounderOrAdmin(id).then(({ data }) => {
+        setCanEdit(data && !pathname.endsWith("edit"));
+      });
+    }
   }, [pathname]);
 
   return canEdit ? (
