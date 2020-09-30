@@ -166,12 +166,10 @@ export const axCheckUserGroupMember = async (userGroupId, userId, ctx) => {
   return { success: false, data: userGroupId ? false : true };
 };
 
-export const axCheckUserGroupFounderOrAdmin = async (userGroupId, ctx) => {
+export const axCheckUserGroupFounderOrAdmin = async (userGroupId) => {
   try {
     if (userGroupId) {
-      const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/enable/edit/${userGroupId}`, {
-        params: { ctx }
-      });
+      const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/enable/edit/${userGroupId}`);
       return { success: true, data };
     }
   } catch (e) {

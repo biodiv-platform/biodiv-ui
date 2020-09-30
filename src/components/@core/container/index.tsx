@@ -23,7 +23,6 @@ interface IAppContainerProps {
     groups: UserGroupIbp[];
     currentGroup: UserGroupIbp;
     isCurrentGroupMember: boolean;
-    canUserEdit: boolean;
     manifestURL: string;
   };
 }
@@ -36,7 +35,6 @@ function AppContainer({ extras }: IAppContainerProps) {
     currentGroup,
     pages,
     manifestURL,
-    canUserEdit,
     isCurrentGroupMember
   } = extras;
   const config = { header: true, footer: true, ...Component?.config };
@@ -49,7 +47,6 @@ function AppContainer({ extras }: IAppContainerProps) {
         groups,
         currentGroup,
         isCurrentGroupMember,
-        canUserEdit,
         pages
       }}
     >

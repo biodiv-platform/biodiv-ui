@@ -14,8 +14,6 @@ interface GlobalStateContextProps {
   currentGroup?: UserGroupIbp;
   isCurrentGroupMember?: boolean;
   setIsCurrentGroupMember;
-  canUserEdit?: boolean;
-  setCanUserEdit;
 
   pages?;
 }
@@ -33,7 +31,6 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState(
     initialState.isCurrentGroupMember
   );
-  const [canUserEdit, setCanUserEdit] = useState(initialState.canUserEdit);
 
   useEffect(() => {
     setIsLoggedIn(!!user?.id);
@@ -49,9 +46,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
         setUser,
         isLoggedIn,
         isCurrentGroupMember,
-        setIsCurrentGroupMember,
-        canUserEdit,
-        setCanUserEdit
+        setIsCurrentGroupMember
       }}
     >
       {children}
