@@ -1,17 +1,18 @@
 import {
   Button,
   Drawer,
+  DrawerBody,
   DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
   Heading,
   Stack,
+  useBreakpointValue,
   useDisclosure
 } from "@chakra-ui/core";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
-import { Mq } from "mq-styled-components";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 import FiltersList from "./list";
@@ -22,10 +23,6 @@ const FilterWrapper = styled.div`
   overflow-y: scroll;
   border-right: 1px solid var(--gray-300);
   min-width: 18rem;
-
-  .toggle-button {
-    display: none;
-  }
 
   [data-accordion-item] {
     [data-accordion-panel] {
@@ -41,43 +38,35 @@ const FilterWrapper = styled.div`
       flex: 1;
     }
   }
-
-  ${Mq.max.md} {
-    .toggle-button {
-      display: initial;
-    }
-    .hidden-mobile {
-      display: none;
-    }
-  }
 `;
 
 export default function Filters() {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
+  const isDesktopFilter = useBreakpointValue({ base: false, md: true });
 
-  return (
-    <>
-      <FilterWrapper>
-        <Button w="full" className="toggle-button" onClick={onToggle}>
-          {t("FILTERS.TOGGLE")}
-        </Button>
-        <div className={"hidden-mobile"}>
-          <Stack m={4} isInline={true} align="center" justify="space-between">
-            <Heading size="md">{t("FILTERS.TITLE")}</Heading>
-            <ClearFilters />
-          </Stack>
-          <FiltersList />
-        </div>
-      </FilterWrapper>
-      <Drawer onClose={onClose} isOpen={isOpen} size="sm">
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <BoxHeading>Filters</BoxHeading>
-          <FiltersList />
-        </DrawerContent>
+  return isDesktopFilter ? (
+    <FilterWrapper>
+      <Stack m={4} isInline={true} align="center" justify="space-between">
+        <Heading size="md">{t("FILTERS.TITLE")}</Heading>
+        <ClearFilters />
+      </Stack>
+      <FiltersList />
+    </FilterWrapper>
+  ) : (
+    <FilterWrapper>
+      <Button w="full" className="toggle-button" onClick={onToggle}>
+        {t("FILTERS.TOGGLE")}
+      </Button>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton />
+            <BoxHeading>{t("FILTERS.TITLE")}</BoxHeading>
+            <DrawerBody p={0}>{isOpen && <FiltersList />}</DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
       </Drawer>
-    </>
+    </FilterWrapper>
   );
 }
