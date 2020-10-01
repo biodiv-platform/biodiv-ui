@@ -27,6 +27,7 @@ export default function TraitContent(props) {
         _focus={{
           boxShadow: "outline"
         }}
+        style={undefined}
       >
         <Image
           boxSize="2rem"

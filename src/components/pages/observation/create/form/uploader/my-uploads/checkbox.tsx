@@ -62,6 +62,7 @@ const Checkbox = (props: any) => {
         borderWidth="2px"
         bg="white"
         _checked={{ borderColor: "blue.500", bg: "blue.50" }}
+        style={undefined}
       >
         <ImageBox>
           <IconButton

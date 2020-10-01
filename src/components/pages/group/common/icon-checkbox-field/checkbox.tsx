@@ -32,6 +32,7 @@ const CustomCheckBox = (props: any) => {
         _focus={{
           boxShadow: "outline"
         }}
+        style={undefined}
       >
         {props.children}
       </Box>
