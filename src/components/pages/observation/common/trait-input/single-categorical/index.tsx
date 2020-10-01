@@ -1,8 +1,8 @@
-import { SimpleGrid, useRadio, useRadioGroup } from "@chakra-ui/core";
+import { SimpleGrid, useRadioGroup } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";
-import TraitContent from "../content";
+import TraitContent from "./content";
 
 const SingleCategorialTrait = ({
   name,
@@ -30,7 +30,6 @@ const SingleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          inputHook={useRadio}
           {...getRadioProps({ value: o.id.toString() })}
         />
       ))}

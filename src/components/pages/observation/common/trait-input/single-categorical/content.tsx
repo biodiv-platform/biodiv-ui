@@ -1,9 +1,9 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/core";
+import { Box, Flex, Image, Text, useRadio } from "@chakra-ui/core";
 import { getTraitIcon } from "@utils/media";
 import React from "react";
 
 export default function TraitContent(props) {
-  const { getInputProps, getCheckboxProps } = props.inputHook(props);
+  const { getInputProps, getCheckboxProps } = useRadio(props);
 
   const handleOnChange = (e) => {
     props.onChange(props.isChecked ? null : Number(e.target.value));
@@ -27,7 +27,6 @@ export default function TraitContent(props) {
         _focus={{
           boxShadow: "outline"
         }}
-        style={undefined}
       >
         <Image
           boxSize="2rem"
