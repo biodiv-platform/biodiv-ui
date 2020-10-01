@@ -175,8 +175,8 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
                     pr="5rem"
                   />
                 </Autocomplete>
-                <InputRightElement justifyContent="flex-end" width={"5rem"} mr={2}>
-                  <Button h="1.6rem" size="sm" onClick={onToggle}>
+                <InputRightElement mr={6}>
+                  <Button variant="link" h="1.6rem" size="sm" onClick={onToggle}>
                     {t(`OBSERVATION.MAP.${isOpen ? "HIDE" : "SHOW"}`)}
                   </Button>
                 </InputRightElement>

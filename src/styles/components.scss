@@ -1,5 +1,3 @@
-@import "utils.scss";
-
 .textarea {
   min-height: 6rem;
   border-radius: 0.25rem;
@@ -31,61 +29,9 @@ input {
   }
 }
 
-.dropzone {
-  background: var(--white);
-  border: 1px solid var(--gray-300);
-  color: var(--gray-600);
-  height: 220px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  .icon {
-    font-size: 3rem;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-}
-
-.trait-button,
-.custom-checkbox,
-.custom-radio,
-.species-radio {
-  width: 100%;
-  border: 1px solid var(--gray-300);
-  background: var(--white);
-  display: inline-block;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  margin-bottom: 0 !important;
-  cursor: pointer;
-  img {
-    filter: grayscale(100%);
-  }
-  &.color,
-  &:focus,
-  &:hover {
-    img {
-      filter: none;
-    }
-  }
-  &[aria-checked="true"] {
-    border-color: var(--blue-500);
-    background: var(--blue-50);
-    box-shadow: 0 0 0 1px var(--blue-500);
-    img {
-      filter: none;
-    }
-  }
-}
-
 [aria-invalid="true"] > div > div {
   border-color: var(--red-500) !important;
   box-shadow: 0 0 0 1px var(--red-500) !important;
-}
-
-.species-radio {
-  width: auto;
 }
 
 .custom-checkbox-group > div {

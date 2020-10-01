@@ -20,7 +20,7 @@ const CustomCheckBox = (props: any) => {
       <input {...getInputProps()} />
       <Box
         {...getCheckboxProps()}
-        p={1}
+        p={2}
         cursor="pointer"
         borderWidth="2px"
         borderRadius="md"
