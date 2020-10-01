@@ -2,6 +2,7 @@ import { AssetStatus } from "@interfaces/custom";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { DEFAULT_LICENSE } from "@static/licenses";
 import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
+import notification from "@utils/notification";
 import loadImage from "blueimp-load-image";
 import { parse } from "exifr/dist/lite.umd";
 import { nanoid } from "nanoid";
@@ -28,6 +29,9 @@ function resizeImage(file: File, max = 3000) {
           }
         } catch (e) {
           console.warn("EXIF Failed", e);
+          if (!img.toBlob) {
+            notification("Outdated/Unsupported Browser");
+          }
           img.toBlob(resolve);
         }
       },

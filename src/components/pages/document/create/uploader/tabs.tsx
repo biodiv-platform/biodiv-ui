@@ -31,10 +31,10 @@ export default function DocumentUploaderTabs({ onChange }) {
         */}
       </TabList>
       <TabPanels>
-        <TabPanel>
+        <TabPanel p={0}>
           <DocumentDropzone />
         </TabPanel>
-        <TabPanel>
+        <TabPanel p={0}>
           <MyDocumentUploads />
         </TabPanel>
       </TabPanels>

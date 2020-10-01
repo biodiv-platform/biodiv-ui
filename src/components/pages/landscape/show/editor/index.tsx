@@ -1,3 +1,4 @@
+import "tinymce/tinymce";
 import "tinymce/icons/default";
 import "tinymce/plugins/code";
 import "tinymce/plugins/image";
@@ -5,7 +6,6 @@ import "tinymce/plugins/link";
 import "tinymce/plugins/lists";
 import "tinymce/plugins/table";
 import "tinymce/themes/silver/theme";
-import "tinymce/tinymce";
 
 import { Button, Stack } from "@chakra-ui/core";
 import useTranslation from "@hooks/use-translation";

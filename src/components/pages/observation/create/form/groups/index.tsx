@@ -48,7 +48,7 @@ const GroupSelector = ({
   const value = form.watch(name);
 
   const onChange = (v) => {
-    form.setValue(name, Number(v), { shouldDirty: true, shouldValidate: true });
+    form.setValue(name, v, { shouldDirty: true, shouldValidate: true });
   };
 
   useEffect(() => {

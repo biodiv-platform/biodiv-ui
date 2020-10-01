@@ -23,6 +23,7 @@ const GroupListItem = () => {
               <Image
                 boxSize="2rem"
                 objectFit="contain"
+                loading="lazy"
                 src={`${g.icon}?w=40`}
                 aria-label={`${g.name} Logo`}
                 mr={2}

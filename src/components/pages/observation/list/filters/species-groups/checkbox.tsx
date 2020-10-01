@@ -51,6 +51,7 @@ const Checkbox = (props: any) => {
         _focus={{
           boxShadow: "outline"
         }}
+        style={undefined}
       >
         <input {...getInputProps()} />
         <Image

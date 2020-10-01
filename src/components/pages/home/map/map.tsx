@@ -1,6 +1,7 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import { ENDPOINT } from "@static/constants";
+import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -20,16 +21,13 @@ export default function Map() {
    */
   const { currentGroup } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
+  const geoserverLayers: any[] = SITE_CONFIG.HOME.MAP;
+  const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
 
   return (
     <Naksha
-      viewPort={{
-        ...SITE_CONFIG.MAP.CENTER,
-        zoom: 3.4,
-        bearing: 0,
-        pitch: 0
-      }}
-      loadToC={false}
+      viewPort={mapCenter}
+      loadToC={true}
       mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
       geoserver={{
@@ -37,24 +35,29 @@ export default function Map() {
         store: SITE_CONFIG.GEOSERVER.STORE,
         workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
       }}
-      layers={[
-        {
-          id: "global-observations",
-          title: "Observations",
-          isAdded: true,
-          source: {
-            type: "grid",
-            endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
-          },
-          data: {
-            index: "extended_observation",
-            type: "extended_records",
-            geoField: "location",
-            userGroupId
-          },
-          onHover: onObservationGridHover
-        }
-      ]}
+      selectedLayers={geoserverLayers}
+      layers={
+        geoserverLayers.length
+          ? []
+          : [
+              {
+                id: "global-observations",
+                title: "Observations",
+                isAdded: true,
+                source: {
+                  type: "grid",
+                  endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
+                },
+                data: {
+                  index: "extended_observation",
+                  type: "extended_records",
+                  geoField: "location",
+                  userGroupId
+                },
+                onHover: onObservationGridHover
+              }
+            ]
+      }
     />
   );
 }

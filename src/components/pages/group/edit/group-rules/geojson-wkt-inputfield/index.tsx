@@ -12,21 +12,14 @@ import {
 } from "@chakra-ui/core";
 import { ViewIcon } from "@chakra-ui/icons";
 import ErrorMessage from "@components/form/common/error-message";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
-import { stringToFeature } from "@utils/location";
+import useTranslation from "@hooks/use-translation";
+import { getMapCenter, stringToFeature } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
 import { MapAreaDraw } from "naksha-components-react";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 import { parse, stringify } from "wkt";
-
-const defaultViewPort = {
-  ...SITE_CONFIG.MAP.CENTER,
-  zoom: 2,
-  bearing: 0,
-  pitch: 0
-};
 
 interface IGeojsonWktInputProps {
   name: string;
@@ -57,6 +50,7 @@ export default function GeoJsonWktParserInput({
   const [defaultFeature, setDefaultFeature] = useState(
     useMemo(() => stringToFeature(form?.control?.defaultValuesRef?.current[name]), [])
   );
+  const defaultViewPort = React.useMemo(() => getMapCenter(2), []);
 
   const { register, setValue } = form;
 

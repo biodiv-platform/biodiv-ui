@@ -20,7 +20,7 @@ const SingleCategorialTrait = ({
   const { getRootProps, getRadioProps } = useRadioGroup({
     name,
     value: value ? value.toString() : null,
-    onChange: (v) => (v === value ? null : setValue(Number(v)))
+    onChange: setValue
   });
 
   return (

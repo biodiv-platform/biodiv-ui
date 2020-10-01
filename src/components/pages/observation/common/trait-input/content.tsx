@@ -4,9 +4,14 @@ import React from "react";
 
 export default function TraitContent(props) {
   const { getInputProps, getCheckboxProps } = props.inputHook(props);
+
+  const handleOnChange = (e) => {
+    props.onChange(props.isChecked ? null : Number(e.target.value));
+  };
+
   return (
     <Box as="label">
-      <input {...getInputProps()} />
+      <input {...getInputProps()} onChange={() => null} onClick={handleOnChange} />
       <Flex
         {...getCheckboxProps()}
         alignItems="center"
@@ -22,6 +27,7 @@ export default function TraitContent(props) {
         _focus={{
           boxShadow: "outline"
         }}
+        style={undefined}
       >
         <Image
           boxSize="2rem"

@@ -6,9 +6,13 @@ import React from "react";
 const CustomRadio = (props) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);
 
+  const handleOnChange = (e) => {
+    props.onChange(props.isChecked ? null : Number(e.target.value));
+  };
+
   return (
     <Box as="label" display="inline-block" mr={2}>
-      <input {...getInputProps()} />
+      <input {...getInputProps()} onChange={() => null} onClick={handleOnChange} />
       <Tooltip title={props.icon} placement="top" hasArrow={true}>
         <Box
           {...getCheckboxProps()}
@@ -24,6 +28,7 @@ const CustomRadio = (props) => {
           _focus={{
             boxShadow: "outline"
           }}
+          style={undefined}
         >
           <Image
             boxSize="3rem"

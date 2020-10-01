@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import { isBrowser } from "@static/constants";
 
 /**
@@ -51,3 +52,10 @@ export const stringToFeature = (costr) => {
     }
   ];
 };
+
+export const getMapCenter = (zoomDiff) => ({
+  ...SITE_CONFIG.MAP.CENTER,
+  bearing: 0,
+  pitch: 0,
+  zoom: SITE_CONFIG.MAP.CENTER.zoom + (zoomDiff || 0)
+});
