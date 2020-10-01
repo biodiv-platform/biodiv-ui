@@ -18,7 +18,8 @@ export const transformUserGroupList = (list: UserGroupIbp[]): UserGroupIbp[] => 
 
 export const findCurrentUserGroup = (groups: UserGroupIbp[], currentURL: string): UserGroupIbp => {
   return (
-    (currentURL && groups.find((group: UserGroupIbp) => currentURL.startsWith(`${group.webAddress}/`))) ||
+    (currentURL &&
+      groups.find((group: UserGroupIbp) => currentURL.startsWith(`${group.webAddress}/`))) ||
     DEFAULT_GROUP
   );
 };

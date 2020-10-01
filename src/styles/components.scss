@@ -245,3 +245,7 @@ button[role="tab"] {
 .gray-box .lazyload-wrapper {
   height: 100%;
 }
+
+.chakra-modal__overlay {
+  z-index: 5;
+}
