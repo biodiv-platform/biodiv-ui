@@ -67,31 +67,4 @@ const Checkbox = (props: any) => {
   );
 };
 
-// const Checkbox = ({ id, label, value, stat, ...props }) => (
-//   <CheckboxLabel role="checkbox">
-//     <Tooltip label={label} hasArrow={true} placement="top">
-//       <div className="custom-checkbox" aria-checked={props.isChecked}>
-//         <VisuallyHidden
-//           as="input"
-//           type="checkbox"
-//           {...props}
-//           checked={props.isChecked}
-//           value={value}
-//         />
-//         <Image
-//           boxSize="2rem"
-//           mr={2}
-//           objectFit="contain"
-//           src={getSpeciesIcon(label)}
-//           alt={label}
-//           ignoreFallback={true}
-//         />
-//       </div>
-//     </Tooltip>
-//     <div className="badge" aria-checked={props.isChecked}>
-//       {toHumanString(stat || 0)}
-//     </div>
-//   </CheckboxLabel>
-// );
-
 export default Checkbox;

@@ -89,7 +89,7 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
         return (
           <Box mt={2}>
             {tags.map((tag) => (
-              <LinkTag label={tag} />
+              <LinkTag key={tag.label} label={tag} />
             ))}
           </Box>
         );

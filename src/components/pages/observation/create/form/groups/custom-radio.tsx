@@ -16,7 +16,7 @@ const CustomRadio = (props) => {
       <Tooltip title={props.icon} placement="top" hasArrow={true}>
         <Box
           {...getCheckboxProps()}
-          p={1}
+          p={2}
           cursor="pointer"
           borderWidth="2px"
           borderRadius="md"

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function GroupBox({ link, icon, name }) {
   return (
-    <Box className="trait-button color" overflow="hidden" title={name} aria-checked={false}>
+    <Box p={2} borderWidth="2px" borderRadius="md" bg="white" title={name} overflow="hidden">
       <Flex alignItems="center">
         <Image boxSize="2rem" mr={2} objectFit="contain" src={icon} alt={name} />
         <Link href={link} lineHeight="1rem" className="elipsis-2">
