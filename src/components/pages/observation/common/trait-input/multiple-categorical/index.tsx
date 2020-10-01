@@ -1,8 +1,8 @@
-import { SimpleGrid, useCheckbox, useCheckboxGroup } from "@chakra-ui/core";
+import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";
-import TraitContent from "../content";
+import TraitContent from "./content";
 
 const SingleCategorialTrait = ({
   values,
@@ -28,7 +28,6 @@ const SingleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          inputHook={useCheckbox}
           {...getCheckboxProps({ value: String(o.id) })}
         />
       ))}
