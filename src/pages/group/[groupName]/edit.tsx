@@ -6,6 +6,7 @@ import {
   axGetAllCustomFields,
   axGetGroupAdministratorsByGroupId,
   axGetGroupEditInfoByGroupId,
+  axGetGroupHompageDetails,
   axGetUserGroupCustomField,
   axGetUserGroupRules,
   axGroupList
@@ -36,8 +37,8 @@ export const getServerSideProps = async (ctx) => {
     currentGroup.id,
     ctx
   );
-
-  if (s1 && s2 && s3 && s4 && currentGroup?.id) {
+  const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.id);
+  if (s1 && s2 && s3 && s4) {
     return {
       props: {
         habitats,
@@ -46,6 +47,7 @@ export const getServerSideProps = async (ctx) => {
         customFieldList,
         allCustomField,
         groupRules,
+        homePageDetails,
         userGroupId: currentGroup.id,
         founders: data.founderList.map(({ name: label, id: value }) => ({ label, value })),
         moderators: data.moderatorList.map(({ name: label, id: value }) => ({ label, value }))

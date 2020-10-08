@@ -348,6 +348,46 @@
       "TITLE": "Edit Group"
     },
     "HABITATS_COVERED": "Habitats Covered",
+    "HOMEPAGE_CUSTOMIZATION": {
+      "ABOUT_US": "About Us",
+      "ADD_OPTIONS": "Add Options",
+      "BACK": "Back to List",
+      "DEFAULT": "Default",
+      "FAILURE": "Unable to Save changes",
+      "GALLERY": "Gallery",
+      "GALLERY_SETUP": {
+        "ALERT": "Please save changes to re-order",
+        "CREATE": "Create Gallery Image",
+        "SAVE_ORDER": "Save Gallery Image(s) Order",
+        "SHOW_IMAGE_UPLOAD": "Show Image Uploader",
+        "TITLE": "Gallery Setup"
+      },
+      "MODULE_STATS": "Module Stats",
+      "OBSERVATION_MAP": "Observation Distribution Map",
+      "RECENT_OBSERVATION": "Recent Observation",
+      "REMOVE": {
+        "FAILURE": "Unable to remove Gallery Image",
+        "SUCCESS": "Deleted Gallery Image Successfully"
+      },
+      "REORDER": {
+        "FAILURE": "Unable to save Gallery List  order",
+        "SUCCESS": "Gallery List reordered successfully"
+      },
+      "SAVE": "Save Homepage Details",
+      "SHOW_DESC": "Show Description",
+      "SUCCESS": "Updated changes successfully",
+      "TABLE": {
+        "DESCRIPTION": "Description",
+        "MORE_LINK": "Link",
+        "REMOVE_IMAGE": "Remove",
+        "TITLE": "Title"
+      },
+      "TITLE": "Homepage Customization",
+      "UPDATE": {
+        "FAILURE": "Unable to Update Homepage Details",
+        "SUCCESS": "Homepage Details Updated successfully"
+      }
+    },
     "ICON": "Icon",
     "INVITE": "Type user name or email",
     "INVITE_FOUNDERS": "Invite Founders",

@@ -10,13 +10,23 @@ interface ITextBoxProps {
   mt?: number;
   mb?: number;
   disabled?: boolean;
+  color?: string;
   hint?: string;
   form: UseFormMethods<Record<string, any>>;
 }
 
-const SwitchField = ({ name, label, form, mb = 4, hint, disabled, ...props }: ITextBoxProps) => (
+const SwitchField = ({
+  name,
+  label,
+  form,
+  mb = 4,
+  color = "blue",
+  hint,
+  disabled,
+  ...props
+}: ITextBoxProps) => (
   <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    <Flex align="center">
+    <Flex>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Controller
         control={form.control}
@@ -27,7 +37,7 @@ const SwitchField = ({ name, label, form, mb = 4, hint, disabled, ...props }: IT
             onChange={(e) => onChange(e.target["checked"])}
             defaultIsChecked={value}
             isDisabled={disabled}
-            color="green"
+            color={color}
           />
         )}
       />

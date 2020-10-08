@@ -10,6 +10,7 @@ import ContactAdmin from "./contact-admin";
 import UserGroupEditForm from "./form";
 import GroupAdministratorsEditForm from "./group-administrator-edit-form";
 import GroupRules from "./group-rules";
+import GroupHomePageCustomization from "./homepage-customization";
 
 interface GroupEditPageProps {
   speciesGroups;
@@ -19,6 +20,7 @@ interface GroupEditPageProps {
   groupInfo;
   groupRules;
   founders;
+  homePageDetails;
   moderators;
   userGroupId;
 }
@@ -32,6 +34,7 @@ export default function EditGroupPageComponent({
   groupInfo,
   founders,
   moderators,
+  homePageDetails,
   userGroupId
 }: GroupEditPageProps) {
   const { t } = useTranslation();
@@ -64,6 +67,7 @@ export default function EditGroupPageComponent({
             groupCustomField={customFieldList}
           />
           <GroupRules rules={groupRules} userGroupId={userGroupId} />
+          <GroupHomePageCustomization userGroupId={userGroupId} homePageDetails={homePageDetails} />
         </div>
       ) : (
         <ContactAdmin />
