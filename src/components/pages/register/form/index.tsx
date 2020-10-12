@@ -149,6 +149,7 @@ function SignUpForm() {
             name="password"
             type="password"
             label={t("USER.PASSWORD")}
+            autoComplete="new-password"
             form={hForm}
             hidden={isOAuth}
           />
@@ -156,6 +157,7 @@ function SignUpForm() {
             name="confirmPassword"
             type="password"
             label={t("USER.CONFIRM_PASSWORD")}
+            autoComplete="new-password"
             form={hForm}
             hidden={isOAuth}
           />

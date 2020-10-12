@@ -112,9 +112,20 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
         {showMobile ? (
           <PhoneNumber name="mobileNumber" label={t("SIGN_IN.FORM.USERNAME")} form={hForm} />
         ) : (
-          <TextBox name="email" label={t("SIGN_IN.FORM.USERNAME")} form={hForm} />
+          <TextBox
+            name="email"
+            label={t("SIGN_IN.FORM.USERNAME")}
+            autoComplete="username"
+            form={hForm}
+          />
         )}
-        <TextBox name="password" type="password" label={t("SIGN_IN.FORM.PASSWORD")} form={hForm} />
+        <TextBox
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          label={t("SIGN_IN.FORM.PASSWORD")}
+          form={hForm}
+        />
         <Flex justifyContent="space-between" alignItems="center">
           <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
             {t("SIGN_IN.FORM.SUBMIT")}

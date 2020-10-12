@@ -2,15 +2,16 @@ import { Box } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
-import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
 import { DEFAULT_LICENSE } from "@static/licenses";
 import { parseDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
+import { cleanTags } from "@utils/tags";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -89,6 +90,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
       bibFieldData,
       itemTypeId,
       fromDate,
+      tags,
       ...rest
     } = values;
 
@@ -97,6 +99,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
       ...rest,
       resourceURL,
       fromDate: parseDate(fromDate).toISOString(),
+      tags: cleanTags(tags),
       size,
       bibFieldData: {
         ...bibFieldData,

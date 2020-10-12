@@ -2,10 +2,10 @@ import { Box, useDisclosure } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import {
   RESOURCES_UPLOADING,
@@ -13,6 +13,7 @@ import {
   TOGGLE_PHOTO_SELECTOR
 } from "@static/events";
 import { parseDate } from "@utils/date";
+import { cleanTags } from "@utils/tags";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -226,12 +227,7 @@ export default function ObservationCreateForm({
         confidence,
         languageId
       },
-      tags:
-        tags?.map(({ label, value, version }) => ({
-          id: label !== value ? value : null,
-          version,
-          name: label
-        })) || [],
+      tags: cleanTags(tags),
       protocol: "SINGLE_OBSERVATION",
       basisOfRecords: "HUMAN_OBSERVATION",
       obsvLanguageId: SITE_CONFIG.LANG.DEFAULT_ID,

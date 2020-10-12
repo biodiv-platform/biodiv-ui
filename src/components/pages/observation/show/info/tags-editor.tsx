@@ -1,10 +1,11 @@
 import { Button } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
+import { yupResolver } from "@hookform/resolvers";
 import useTranslation from "@hooks/use-translation";
 import notification, { NotificationType } from "@utils/notification";
+import { cleanTags } from "@utils/tags";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 export default function TagsEditor({ objectId, queryFunc, updateFunc, tags, setTags, onClose }) {
@@ -27,11 +28,7 @@ export default function TagsEditor({ objectId, queryFunc, updateFunc, tags, setT
   const handleOnSubmit = async (values) => {
     const { success } = await updateFunc({
       objectId,
-      tags: (values.tags || []).map((v) => ({
-        id: v.value !== v.label ? v.value : null,
-        version: v.version || 0,
-        name: v.label
-      }))
+      tags: cleanTags(values?.tags)
     });
     if (success) {
       setTags(values.tags);

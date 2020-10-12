@@ -3,8 +3,8 @@ import React from "react";
 
 const LoginPage = ({ forward }) => <LoginComponent forward={forward} />;
 
-LoginPage.getInitialProps = async (ctx) => ({
-  forward: ctx.query.forward
+export const getServerSideProps = async (ctx) => ({
+  props: { forward: ctx?.query?.forward || null }
 });
 
 export default LoginPage;

@@ -70,13 +70,6 @@ input {
   }
 }
 
-.flash {
-  transition: background 500ms ease;
-  &.flashing {
-    background: var(--blue-200) !important;
-  }
-}
-
 .gray-box,
 .white-box,
 .hover-box {
@@ -122,34 +115,6 @@ input {
   }
 }
 
-.PhoneInput {
-  position: relative;
-  input {
-    padding-left: 3rem;
-  }
-  .PhoneInputCountryIconUnicode,
-  .PhoneInputCountryIcon {
-    line-height: 2.5rem;
-    padding: 0 0.7rem;
-    font-size: 1.4rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 2;
-  }
-  select {
-    display: none;
-  }
-}
-
-.text-elipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-}
-
 button[role="tab"] {
   padding: 0.75rem 1rem;
 }
@@ -172,6 +137,13 @@ button[role="tab"] {
   }
 }
 
+.text-elipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
 .elipsis,
 .elipsis-2 {
   display: -webkit-box;
@@ -185,6 +157,7 @@ button[role="tab"] {
 }
 
 .chakra-input,
+.chakra-select,
 .flatpickr-input {
   background: white !important;
 }

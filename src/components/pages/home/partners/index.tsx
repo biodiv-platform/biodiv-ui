@@ -7,7 +7,10 @@ import LazyLoad from "react-lazyload";
 
 const PartnerImage = styled.img`
   width: 100%;
+  height: 5rem;
   border-radius: 0.5rem;
+  background: var(--gray-200);
+  overflow: hidden;
   border: 2px solid var(--gray-200);
 `;
 

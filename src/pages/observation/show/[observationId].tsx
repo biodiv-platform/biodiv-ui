@@ -19,15 +19,17 @@ const ObservationShowPage = ({ observation, traits, speciesGroups, success }) =>
     <Error statusCode={404} />
   );
 
-ObservationShowPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { success, data } = await axGetObservationById(ctx.query.observationId);
   const res = await axGetTraitsByGroupId(data?.observation?.groupId);
   return {
-    observation: data,
-    traits: res.data,
-    speciesGroups,
-    success
+    props: {
+      observation: data,
+      traits: res.data,
+      speciesGroups,
+      success
+    }
   };
 };
 

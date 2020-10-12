@@ -67,6 +67,7 @@ export default function RecentObservationList() {
                   className="o-image"
                   loading="lazy"
                   ignoreFallback={true}
+                  bg="gray.200"
                   src={getObservationThumbnail(o?.thumbnail, 135)}
                   alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
                 />
