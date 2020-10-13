@@ -377,7 +377,9 @@
         "ERROR": "Enter valid observation id",
         "IMAGEURL": "Choose Gallery Image",
         "LINK": "Show Page Link",
+        "NEW_IMAGE": "New Image",
         "OBS_ID": "Observation Id",
+        "OBSERVATION_IMAGE": "Observation Image",
         "TITLE": "Title"
       },
       "SAVE": "Save Homepage Details",

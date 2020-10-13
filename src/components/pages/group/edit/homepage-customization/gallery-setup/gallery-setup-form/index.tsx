@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox } from "@chakra-ui/core";
+import { Box, Button, Switch, Flex, Text } from "@chakra-ui/core";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";
@@ -68,9 +68,11 @@ export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList
         <Button m={3} type="button" onClick={() => isCreate(false)} leftIcon={<ArrowBackIcon />}>
           {t("GROUP.HOMEPAGE_CUSTOMIZATION.BACK")}
         </Button>
-        <Checkbox defaultIsChecked onChange={handleChange}>
-          {t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY_SETUP.SHOW_IMAGE_UPLOAD")}
-        </Checkbox>
+        <Flex alignItems="center">
+          <Text m={3}>{t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.NEW_IMAGE")}</Text>
+          <Switch onChange={handleChange} />
+          <Text m={3}>{t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.OBSERVATION_IMAGE")}</Text>
+        </Flex>
       </Box>
       {imagePicker ? (
         <NewResourceForm form={hForm} />

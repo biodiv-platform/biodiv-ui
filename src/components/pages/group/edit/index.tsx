@@ -59,6 +59,7 @@ export default function EditGroupPageComponent({
         founders={founders}
         moderators={moderators}
       />
+      <GroupHomePageCustomization userGroupId={userGroupId} homePageDetails={homePageDetails} />
       {isAdmin ? (
         <div>
           <GroupCustomField
@@ -67,7 +68,6 @@ export default function EditGroupPageComponent({
             groupCustomField={customFieldList}
           />
           <GroupRules rules={groupRules} userGroupId={userGroupId} />
-          <GroupHomePageCustomization userGroupId={userGroupId} homePageDetails={homePageDetails} />
         </div>
       ) : (
         <ContactAdmin />

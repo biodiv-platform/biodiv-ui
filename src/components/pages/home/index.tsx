@@ -16,13 +16,12 @@ const { HOME } = SITE_CONFIG;
 export default function HomePageComponent({ homeInfo }) {
   const { currentGroup } = useGlobalState();
   const showFeatures = !currentGroup?.id;
-
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
       {homeInfo.showGallery && HOME.GALLERY && <Carousel featured={homeInfo.gallerySlider} />}
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}
-      {homeInfo.ugDescription && <HomeDescription description={homeInfo.ugDescription} />}
-      {homeInfo.showRecentObs && SITE_CONFIG.OBSERVATION.ACTIVE && <RecentObservations />}
+      {homeInfo.showDesc && <HomeDescription description={homeInfo.description} />}
+      {homeInfo.showRecentObservation && SITE_CONFIG.OBSERVATION.ACTIVE && <RecentObservations />}
       {homeInfo.showGridMap && SITE_CONFIG.MAP.ACTIVE && <Map />}
       {showFeatures && HOME.FEATURES && <Features />}
       {showFeatures && HOME.PARTNERS && <Partners />}
