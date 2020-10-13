@@ -373,6 +373,13 @@
         "FAILURE": "Unable to save Gallery List  order",
         "SUCCESS": "Gallery List reordered successfully"
       },
+      "RESOURCES": {
+        "ERROR": "Enter valid observation id",
+        "IMAGEURL": "Choose Gallery Image",
+        "LINK": "Show Page Link",
+        "OBS_ID": "Observation Id",
+        "TITLE": "Title"
+      },
       "SAVE": "Save Homepage Details",
       "SHOW_DESC": "Show Description",
       "SUCCESS": "Updated changes successfully",

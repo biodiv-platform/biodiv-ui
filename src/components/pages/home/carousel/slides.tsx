@@ -97,25 +97,27 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
         </div>
       </div>
       <div className="slide-content">
-        <LocalLink href={`/user/show/${featured[slideIndex].authorId}`}>
-          <Link>
-            <Flex alignItems="center">
-              <Avatar
-                mr={2}
-                flexShrink={0}
-                size="sm"
-                name={featured[slideIndex].authorName}
-                src={getUserImage(featured[slideIndex].authorImage)}
-              />
-              <Box className="credits-text">
-                <Text lineHeight="1em" fontSize="xs">
-                  {t("HOME.OBSERVED_BY")}
-                </Text>
-                <div>{featured[slideIndex].authorName}</div>
-              </Box>
-            </Flex>
-          </Link>
-        </LocalLink>
+        {featured[slideIndex].authorId && (
+          <LocalLink href={`/user/show/${featured[slideIndex].authorId}`}>
+            <Link>
+              <Flex alignItems="center">
+                <Avatar
+                  mr={2}
+                  flexShrink={0}
+                  size="sm"
+                  name={featured[slideIndex].authorName}
+                  src={getUserImage(featured[slideIndex].authorImage)}
+                />
+                <Box className="credits-text">
+                  <Text lineHeight="1em" fontSize="xs">
+                    {t("HOME.OBSERVED_BY")}
+                  </Text>
+                  <div>{featured[slideIndex].authorName}</div>
+                </Box>
+              </Flex>
+            </Link>
+          </LocalLink>
+        )}
         <Indicators
           size={featured.length}
           scrollTo={emblaApi?.scrollTo}
