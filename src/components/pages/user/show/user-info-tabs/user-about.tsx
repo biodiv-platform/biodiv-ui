@@ -3,8 +3,8 @@ import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLinkList from "@components/@core/blue-link/external-list";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
 import useGlobalState from "@hooks/use-global-state";
+import { timeAgoUTC } from "@utils/date";
 import React from "react";
-import { format } from "timeago.js";
 
 import { UserProfileProps } from "..";
 
@@ -45,11 +45,11 @@ export default function UserAbout({ user }: UserProfileProps) {
 
     {
       title: "USER.JOINED",
-      value: format(user.dateCreated)
+      value: timeAgoUTC(user.dateCreated)
     },
     {
       title: "USER.LAST_ACTIVE",
-      value: format(user.lastLoginDate)
+      value: timeAgoUTC(user.lastLoginDate)
     }
   ];
 

@@ -2,13 +2,13 @@ import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/core";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
 import CheckIcon from "@icons/check";
 import { AssetStatus } from "@interfaces/custom";
 import { ObservationUpdateData } from "@interfaces/observation";
 import { axUpdateObservation } from "@services/observation.service";
-import { formatDate, parseDate } from "@utils/date";
+import { dateToUTC, formatDateFromUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import React from "react";
@@ -67,7 +67,7 @@ export default function ObservationEditForm({
         isUsed: 1,
         rating: r.rating || 0
       })),
-      observedOn: formatDate(observation.observedOn)
+      observedOn: formatDateFromUTC(observation.observedOn)
     }
   });
 
@@ -82,7 +82,7 @@ export default function ObservationEditForm({
         rating,
         licenceId
       })),
-      observedOn: parseDate(values.observedOn).toISOString()
+      observedOn: dateToUTC(values.observedOn).format()
     };
     const { success } = await axUpdateObservation(payload, observationId);
     if (success) {

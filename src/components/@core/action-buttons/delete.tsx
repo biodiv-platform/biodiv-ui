@@ -41,21 +41,24 @@ export default function DeleteActionButton({
     <>
       <SimpleActionButton onClick={onOpen} icon={<DeleteIcon />} title={title} colorScheme="red" />
       <AlertDialog isOpen={isOpen} onClose={onClose} leastDestructiveRef={cancelRef}>
-        <AlertDialogOverlay />
-        <AlertDialogContent>
-          <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            🗑️ {title}
-          </AlertDialogHeader>
-          <AlertDialogBody>{description}</AlertDialogBody>
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              {t("CANCEL")}
-            </Button>
-            <Button colorScheme="red" onClick={handleOnDelete} ml={3}>
-              {t("DELETE")}
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              🗑️ {title}
+            </AlertDialogHeader>
+
+            <AlertDialogBody>{description}</AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                {t("CANCEL")}
+              </Button>
+              <Button colorScheme="red" onClick={handleOnDelete} ml={3}>
+                {t("DELETE")}
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
       </AlertDialog>
     </>
   );

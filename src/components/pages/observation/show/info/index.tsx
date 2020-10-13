@@ -1,16 +1,17 @@
 import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/core";
 import { InfoIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
+import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
 import { axQueryDocumentTagsByText } from "@services/document.service";
 import { axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
-import { formatDateReadable } from "@utils/date";
+import { formatDateReadableFromUTC } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
 import React from "react";
 
@@ -26,9 +27,6 @@ interface IInfoProps {
 export default function Info({ observation: o, speciesGroups }: IInfoProps) {
   const { t } = useTranslation();
   const { currentGroup } = useGlobalState();
-
-  const observedOn = formatDateReadable(o.observation.fromDate);
-  const createdOn = formatDateReadable(o.observation.createdOn);
 
   return (
     <Box p={4} mb={4} className="white-box">
@@ -57,7 +55,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         <ResponsiveInfo title="OBSERVATION.OBSERVED_ON">
           <Stack isInline={true}>
-            <Text mr={1}>{observedOn}</Text>
+            <Text mr={1}>{formatDateReadableFromUTC(o.observation.fromDate)}</Text>
             {o.observation.dateAccuracy === DATE_ACCURACY.ACCURATE && (
               <Tooltip title={t("OBSERVATION.ACCURATE")} shouldWrapChildren={true} hasArrow={true}>
                 <CheckIcon color="green.500" />
@@ -68,15 +66,15 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         <ResponsiveInfo title="OBSERVATION.CREATED_ON">
           <Stack isInline={true}>
-            <Text mr={1}>{createdOn}</Text>
+            <Text mr={1}>{formatDateReadableFromUTC(o.observation.createdOn)}</Text>
           </Stack>
         </ResponsiveInfo>
 
         {o.observation?.notes && (
           <ResponsiveInfo title="OBSERVATION.NOTES">
             <Box
+              as={HTMLContainer}
               gridColumn="2/5"
-              className="sanitized-html"
               dangerouslySetInnerHTML={{
                 __html: getInjectableHTML(o?.observation?.notes)
               }}

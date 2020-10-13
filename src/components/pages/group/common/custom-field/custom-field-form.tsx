@@ -7,7 +7,7 @@ import SubmitButton from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axAddCustomField, axAddExsistingCustomField } from "@services/usergroup.service";

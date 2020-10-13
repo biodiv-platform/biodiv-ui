@@ -3,7 +3,7 @@ import SelectMultipleInputField from "@components/form/select-multiple";
 import SubmitButton from "@components/form/submit-button";
 import SwitchField from "@components/form/switch";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { Role } from "@interfaces/user";
 import { axGetUserRoles, axUpdateUserPermissions } from "@services/user.service";

@@ -8,7 +8,7 @@ import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { axForgotPassword, axRegenerateOTP, axResetPassword } from "@services/auth.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";

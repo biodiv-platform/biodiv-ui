@@ -6,9 +6,9 @@ import {
   Box,
   Input
 } from "@chakra-ui/core";
-import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import { formatDateReverse, parseDateReverse } from "@utils/date";
+import useTranslation from "@hooks/use-translation";
+import dayjs from "@utils/date";
 import React, { useMemo } from "react";
 import Flatpickr from "react-flatpickr";
 
@@ -28,8 +28,8 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
   const defaultDate = useMemo(() => {
     if (filter[filterKey.min]) {
       return [
-        parseDateReverse(filter[filterKey.min]) || new Date(0),
-        parseDateReverse(filter[filterKey.max]) || "today"
+        dayjs(filter[filterKey.min]).toDate(),
+        filter[filterKey.max] ? dayjs(filter[filterKey.max]).toDate() : "today"
       ];
     }
   }, []);
@@ -45,8 +45,8 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
   const handleOnDateChange = (dates = []) => {
     if (dates.length > 1) {
       setFilter((_draft) => {
-        _draft.f[filterKey.min] = formatDateReverse(dates[0]);
-        _draft.f[filterKey.max] = formatDateReverse(dates[1]);
+        _draft.f[filterKey.min] = dayjs(dates[0]).utc().format();
+        _draft.f[filterKey.max] = dayjs(dates[1]).utc().format();
       });
     }
     console.debug(dates);

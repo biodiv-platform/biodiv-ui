@@ -2,12 +2,12 @@ import { Button } from "@chakra-ui/core";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import SelectField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
-import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axAddUserGroupRule } from "@services/usergroup.service";
-import { formatDateReverse, parseDate } from "@utils/date";
+import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { formatGroupRules } from "@utils/userGroup";
 import React, { useState } from "react";
@@ -52,8 +52,8 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
         return {
           [`${type}`]: [
             {
-              fromDate: formatDateReverse(parseDate(ruleValue[0])),
-              toDate: formatDateReverse(parseDate(ruleValue[0]))
+              fromDate: dateToUTC(ruleValue[0]).format(),
+              toDate: dateToUTC(ruleValue[1]).format()
             }
           ]
         };

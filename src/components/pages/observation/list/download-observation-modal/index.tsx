@@ -11,7 +11,7 @@ import {
 import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";

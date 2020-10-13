@@ -1,6 +1,7 @@
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/core";
-import EditIcon from "@icons/edit";
+import HTMLContainer from "@components/@core/html-container";
 import useGlobalState from "@hooks/use-global-state";
+import EditIcon from "@icons/edit";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
@@ -59,12 +60,12 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
                 />
               ) : (
                 content && (
-                  <div
-                    className="sanitized-html article"
+                  <HTMLContainer
+                    className="article"
                     dangerouslySetInnerHTML={{
                       __html: getInjectableHTML(content)
                     }}
-                  ></div>
+                  />
                 )
               )}
             </Box>

@@ -1,7 +1,7 @@
 import SubmitButton from "@components/form/submit-button";
 import SwitchField from "@components/form/switch";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axUpdateNotifications } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";

@@ -9,7 +9,7 @@ import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { axCreateUser } from "@services/auth.service";
 import { generateSession } from "@utils/auth";

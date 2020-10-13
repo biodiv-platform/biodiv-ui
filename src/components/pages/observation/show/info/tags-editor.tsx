@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/core";
 import SelectAsync from "@components/form/select-async";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanTags } from "@utils/tags";

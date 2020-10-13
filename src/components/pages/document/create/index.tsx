@@ -2,14 +2,14 @@ import { Box } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
 import { DEFAULT_LICENSE } from "@static/licenses";
-import { parseDate } from "@utils/date";
+import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanTags } from "@utils/tags";
 import React, { useState } from "react";
@@ -98,7 +98,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
       ...DEFAULT_VALUES,
       ...rest,
       resourceURL,
-      fromDate: parseDate(fromDate).toISOString(),
+      fromDate: dateToUTC(fromDate).format(),
       tags: cleanTags(tags),
       size,
       bibFieldData: {

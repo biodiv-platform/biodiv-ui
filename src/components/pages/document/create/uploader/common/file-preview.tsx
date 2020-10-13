@@ -1,9 +1,9 @@
 import { IconButton, Text } from "@chakra-ui/core";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
 import DeleteIcon from "@icons/delete";
 import PDFIcon from "@icons/pdf";
-import { formatTimeStamp } from "@utils/date";
+import { formatTimeStampFromUTC } from "@utils/date";
 import React, { useState } from "react";
 
 const DocumentList = styled.div`
@@ -71,7 +71,7 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
       <div className="content" onClick={onSelect}>
         <div className="elipsis">{fileName}</div>
         <Text as="small" color="gray.500">
-          {formatTimeStamp(date)}
+          {formatTimeStampFromUTC(date)}
         </Text>
       </div>
       <IconButton

@@ -13,7 +13,7 @@ import SelectAsync from "@components/form/select-async";
 import Submit from "@components/form/submit-button";
 import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";

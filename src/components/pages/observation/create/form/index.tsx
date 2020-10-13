@@ -3,7 +3,7 @@ import { PageHeading } from "@components/@core/layout";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config.json";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
@@ -12,7 +12,7 @@ import {
   SYNC_SINGLE_OBSERVATION,
   TOGGLE_PHOTO_SELECTOR
 } from "@static/events";
-import { parseDate } from "@utils/date";
+import { dateToUTC } from "@utils/date";
 import { cleanTags } from "@utils/tags";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
@@ -211,11 +211,10 @@ export default function ObservationCreateForm({
     terms,
     ...rest
   }) => {
-    const observedOn = parseDate(rest.observedOn).toISOString();
+    const observedOn = dateToUTC(rest.observedOn).format();
     const payload = {
       ...rest,
       observedOn,
-      createdOn: new Date().toISOString(),
       fromDate: observedOn,
       toDate: observedOn,
       helpIdentify: !taxonCommonName && !taxonScientificName,

@@ -5,7 +5,7 @@ import RichTextareaField from "@components/form/rich-textarea";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";

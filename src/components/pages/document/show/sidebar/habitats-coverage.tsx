@@ -11,7 +11,7 @@ export default function HabitatsCoverage({ habitat }) {
       <BoxHeading>🏜 {t("GROUP.HABITATS_COVERED")}</BoxHeading>
       <SimpleGrid columns={4} spacing={4} p={4}>
         {habitat.map((id) => (
-          <AspectRatio ratio={1}>
+          <AspectRatio ratio={1} key={id}>
             <Image
               overflow="hidden"
               objectFit="cover"
