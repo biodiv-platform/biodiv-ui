@@ -18,8 +18,7 @@ export const transformUserGroupList = (list: UserGroupIbp[]): UserGroupIbp[] => 
 
 export const findCurrentUserGroup = (groups: UserGroupIbp[], currentURL: string): UserGroupIbp => {
   return (
-    (currentURL &&
-      groups.find((group: UserGroupIbp) => currentURL.startsWith(`${group.webAddress}/`))) ||
+    (currentURL && groups.find((group: UserGroupIbp) => currentURL.startsWith(group.webAddress))) ||
     DEFAULT_GROUP
   );
 };
@@ -49,22 +48,45 @@ export const formatGroupRules = (rules) => {
   taxonomicRuleList?.forEach((item) => {
     groupRules.push({ id: item.id, name: "taxonomicRule", value: item.taxonomyId });
   });
-
-  //populate date rules array
+  //observed on date
   observedOnDateRule?.forEach((item) => {
     groupRules.push({
       id: item.id,
       name: "observedOnDateRule",
       value: `${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`
     });
-    createdOnDateRuleList?.forEach((item) => {
-      groupRules.push({
-        id: item.id,
-        name: "createdOnDateRule",
-        value: `${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`
-      });
+  });
+  //created on date
+  createdOnDateRuleList?.forEach((item) => {
+    groupRules.push({
+      id: item.id,
+      name: "createdOnDateRule",
+      value: `${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`
     });
   });
 
   return groupRules;
+};
+
+export const reorderRemovedGallerySetup = (data, index) => {
+  const list = data.sort((a, b) => a.displayOrder - b.displayOrder);
+  const removedDisplayOrder = data[index].displayOrder;
+
+  const serializeDisplayOrder = () => {
+    return list.reduce((acc, item) => {
+      if (item.displayOrder !== removedDisplayOrder) {
+        if (item.displayOrder > removedDisplayOrder) {
+          item.displayOrder = item.displayOrder - 1;
+        }
+        acc.push(item);
+      }
+      return acc;
+    }, []);
+  };
+  const response = list.length <= 1 ? list : serializeDisplayOrder();
+
+  return {
+    response,
+    payload: response.map(({ id, displayOrder }) => ({ galleryId: id, displayOrder }))
+  };
 };
