@@ -1,11 +1,12 @@
 import { Box, SimpleGrid } from "@chakra-ui/core";
 import ExternalBlueLink from "@components/@core/blue-link/external";
+import HTMLContainer from "@components/@core/html-container";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
 import TagsShow from "@components/pages/observation/show/info/tags";
 import { ShowDocument } from "@interfaces/document";
 import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
 import { LICENSES } from "@static/licenses";
-import { formatDateReadable } from "@utils/date";
+import { formatDateReadableFromUTC } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
 import React from "react";
 
@@ -34,8 +35,8 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
       value: document.notes,
       cell: (
         <Box
+          as={HTMLContainer}
           gridColumn="2/5"
-          className="sanitized-html"
           dangerouslySetInnerHTML={{
             __html: getInjectableHTML(document.notes)
           }}
@@ -73,7 +74,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     {
       title: "DOCUMENT.PUBLICATION_DATE",
       value: document.fromDate,
-      cell: formatDateReadable(document.fromDate)
+      cell: formatDateReadableFromUTC(document.fromDate)
     },
     {
       title: "DOCUMENT.PUBLICATION_LANGUAGE",
@@ -90,7 +91,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     {
       title: "DOCUMENT.CREATED_ON",
       value: document.createdOn,
-      cell: formatDateReadable(document.createdOn)
+      cell: formatDateReadableFromUTC(document.createdOn)
     },
     {
       title: "DOCUMENT.BIB.DOI",

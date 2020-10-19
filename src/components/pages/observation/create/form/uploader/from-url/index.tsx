@@ -57,6 +57,7 @@ export default function FromURL({ onDone }) {
       <Input
         mb={4}
         type="text"
+        id="youtube-link"
         placeholder={t("OBSERVATION.YOUTUBE_PLACEHOLDER")}
         value={resourceLink}
         onChange={handleOnChange}

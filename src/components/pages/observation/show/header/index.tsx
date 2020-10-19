@@ -5,8 +5,8 @@ import FollowActionButton from "@components/@core/action-buttons/follow";
 import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { ShowData } from "@interfaces/observation";
 import {
@@ -17,7 +17,6 @@ import {
 } from "@services/observation.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
-import { formatDate } from "@utils/date";
 import { getObservationImage } from "@utils/media";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useMemo, useState } from "react";
@@ -42,7 +41,7 @@ function Header({ o, following = false }: IHeaderProps) {
 
   const pageDescription = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} Observed by ${
     o.authorInfo.name
-  } on ${formatDate(o.observation.fromDate)} at ${o.observation.placeName} on ${currentGroup.name}`;
+  } at ${o.observation.placeName} on ${currentGroup.name}`;
 
   const reprImage: any = useMemo(() => {
     if (o.observation.reprImageId) {

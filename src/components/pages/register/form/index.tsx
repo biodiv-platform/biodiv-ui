@@ -8,9 +8,9 @@ import Select from "@components/form/select";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
-import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import { axCreateUser } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
@@ -149,6 +149,7 @@ function SignUpForm() {
             name="password"
             type="password"
             label={t("USER.PASSWORD")}
+            autoComplete="new-password"
             form={hForm}
             hidden={isOAuth}
           />
@@ -156,6 +157,7 @@ function SignUpForm() {
             name="confirmPassword"
             type="password"
             label={t("USER.CONFIRM_PASSWORD")}
+            autoComplete="new-password"
             form={hForm}
             hidden={isOAuth}
           />

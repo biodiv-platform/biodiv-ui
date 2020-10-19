@@ -1,8 +1,8 @@
-import { Box, Button, Switch, Flex, Text } from "@chakra-ui/core";
+import { Box, Button, Flex, Switch, Text } from "@chakra-ui/core";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";

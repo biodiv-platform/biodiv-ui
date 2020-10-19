@@ -1,4 +1,4 @@
-import { Box, List, ListItem } from "@chakra-ui/core";
+import { Box, ListItem, OrderedList } from "@chakra-ui/core";
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "@hooks/use-translation";
@@ -10,7 +10,7 @@ export default function SpatialCoverage({ documentCoverage }) {
   return documentCoverage.length > 0 ? (
     <Box mb={4} className="white-box">
       <BoxHeading>🌎 {t("DOCUMENT.COVERAGE.SPATIAL")}</BoxHeading>
-      <List as="ol" styleType="decimal" p={4}>
+      <OrderedList p={4}>
         {documentCoverage.map(({ placeName, id, landscapeIds }) => (
           <ListItem key={id}>
             {landscapeIds ? (
@@ -20,7 +20,7 @@ export default function SpatialCoverage({ documentCoverage }) {
             )}
           </ListItem>
         ))}
-      </List>
+      </OrderedList>
     </Box>
   ) : null;
 }

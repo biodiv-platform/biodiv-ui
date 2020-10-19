@@ -1,3 +1,4 @@
+import HTMLContainer from "@components/@core/html-container";
 import { useLocalRouter } from "@components/@core/local-link";
 import { getInjectableHTML } from "@utils/text";
 import React, { useEffect, useState } from "react";
@@ -21,8 +22,7 @@ const CommentRender = ({ html }) => {
   }, []);
 
   return (
-    <div
-      className="sanitized-html"
+    <HTMLContainer
       dangerouslySetInnerHTML={{
         __html: getInjectableHTML(nHtml)
       }}

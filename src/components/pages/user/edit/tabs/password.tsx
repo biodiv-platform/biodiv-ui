@@ -1,8 +1,8 @@
 import { SimpleGrid } from "@chakra-ui/core";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
 import CheckIcon from "@icons/check";
 import { axUpdateUserPassword } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";

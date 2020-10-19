@@ -1,7 +1,7 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
-import { formatDate } from "@utils/date";
+import { formatDateFromUTC } from "@utils/date";
 import { stringify } from "querystring";
 
 import { getGroupImage } from "./media";
@@ -43,6 +43,7 @@ export const formatGroupRules = (rules) => {
   spartialRuleList?.forEach((item) =>
     groupRules.push({ id: item.id, name: "spatialRule", value: item.spatialData })
   );
+
   //populate taxon rules array
   taxonomicRuleList?.forEach((item) => {
     groupRules.push({ id: item.id, name: "taxonomicRule", value: item.taxonomyId });
@@ -52,7 +53,7 @@ export const formatGroupRules = (rules) => {
     groupRules.push({
       id: item.id,
       name: "observedOnDateRule",
-      value: `from ${formatDate(item.fromDate)} to ${formatDate(item.toDate)}`
+      value: `${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`
     });
   });
   //created on date
@@ -60,7 +61,7 @@ export const formatGroupRules = (rules) => {
     groupRules.push({
       id: item.id,
       name: "createdOnDateRule",
-      value: `from ${formatDate(item.fromDate)}  to ${formatDate(item.toDate)}`
+      value: `${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`
     });
   });
 

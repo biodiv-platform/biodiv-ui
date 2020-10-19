@@ -1,10 +1,34 @@
 import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/core";
+import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 import MobileInput from "react-phone-number-input";
 
 import ErrorMessage from "./common/error-message";
+
+const PhoneFormControl = styled.div`
+  .PhoneInput {
+    position: relative;
+    input {
+      padding-left: 3rem;
+    }
+    .PhoneInputCountryIconUnicode,
+    .PhoneInputCountryIcon {
+      line-height: 2.5rem;
+      padding: 0 0.7rem;
+      font-size: 1.4rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+    }
+    select {
+      display: none;
+    }
+  }
+`;
 
 interface ISelectProps {
   name: string;
@@ -42,7 +66,7 @@ const PhoneNumberInputField = ({
   };
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
+    <FormControl as={PhoneFormControl} isInvalid={form.errors[name] && true} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <MobileInput
         id={name}

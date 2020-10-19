@@ -4,11 +4,8 @@ import React from "react";
 const Flash = ({ value, children }) => (
   <FlashChange
     value={value}
-    flashClassName="flashing"
-    className="flash"
-    compare={(prevProps, newProps) =>
-      JSON.stringify(prevProps.value) !== JSON.stringify(newProps.value)
-    }
+    flashStyle={{ background: "var(--yellow-100)" }}
+    style={{ transition: "background 500ms ease" }}
   >
     {children}
   </FlashChange>

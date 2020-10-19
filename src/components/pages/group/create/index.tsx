@@ -5,12 +5,12 @@ import CheckBoxField from "@components/form/checkbox";
 import RichTextareaField from "@components/form/rich-textarea";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axUserGroupCreate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import AdminInviteField from "../common/admin-invite-field";

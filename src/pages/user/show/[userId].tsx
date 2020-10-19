@@ -7,9 +7,9 @@ import Error from "../../_error";
 const UserShowPage = ({ user, success }) =>
   success ? <UserShowPageComponent user={user} /> : <Error statusCode={404} />;
 
-UserShowPage.getInitialProps = async (ctx) => {
-  const { success, data } = await axGetUserById(ctx.query.userId, ctx);
-  return { user: data, success };
+export const getServerSideProps = async (ctx) => {
+  const { success, data: user } = await axGetUserById(ctx.query.userId, ctx);
+  return { props: { user, success } };
 };
 
 export default UserShowPage;

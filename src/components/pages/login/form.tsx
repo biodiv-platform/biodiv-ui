@@ -8,9 +8,9 @@ import PhoneNumber from "@components/form/phone-number";
 import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
-import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import { axLogin } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
@@ -112,9 +112,20 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
         {showMobile ? (
           <PhoneNumber name="mobileNumber" label={t("SIGN_IN.FORM.USERNAME")} form={hForm} />
         ) : (
-          <TextBox name="email" label={t("SIGN_IN.FORM.USERNAME")} form={hForm} />
+          <TextBox
+            name="email"
+            label={t("SIGN_IN.FORM.USERNAME")}
+            autoComplete="username"
+            form={hForm}
+          />
         )}
-        <TextBox name="password" type="password" label={t("SIGN_IN.FORM.PASSWORD")} form={hForm} />
+        <TextBox
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          label={t("SIGN_IN.FORM.PASSWORD")}
+          form={hForm}
+        />
         <Flex justifyContent="space-between" alignItems="center">
           <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
             {t("SIGN_IN.FORM.SUBMIT")}

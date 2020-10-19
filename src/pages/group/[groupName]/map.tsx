@@ -1,3 +1,1 @@
-import GroupMapPage from "../../map";
-
-export default GroupMapPage;
+export { default } from "../../map";

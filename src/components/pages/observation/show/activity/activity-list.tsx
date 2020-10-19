@@ -8,11 +8,10 @@ import { ShowActivityIbp } from "@interfaces/activity";
 import { ACTIVITY_UPDATED } from "@static/events";
 import { useActivityStore } from "@stores/activity.store";
 import { toKey } from "@utils/basic";
-import { formatTimeStamp } from "@utils/date";
+import { formatTimeStampFromUTC, timeAgoUTC } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import React, { useEffect } from "react";
 import { useListener } from "react-gbus";
-import { format } from "timeago.js";
 
 import LinkTag from "../../common/link-tag";
 import ACTIVITY_TYPE from "./activity-types";
@@ -139,9 +138,9 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
             <ActivityType type={a.activityIbp.activityType} />
             <ActivityBoxContent a={a} />
             <Box>
-              <Tooltip title={formatTimeStamp(a.activityIbp.lastUpdated)} hasArrow={true}>
+              <Tooltip title={formatTimeStampFromUTC(a.activityIbp.lastUpdated)} hasArrow={true}>
                 <Text color="gray.600" as="small">
-                  {format(a.activityIbp.lastUpdated)}
+                  {timeAgoUTC(a.activityIbp.lastUpdated)}
                 </Text>
               </Tooltip>
             </Box>

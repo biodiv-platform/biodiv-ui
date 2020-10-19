@@ -1,3 +1,1 @@
-import GroupLogoutPage from "../../logout";
-
-export default GroupLogoutPage;
+export { default } from "../../logout";

@@ -84,12 +84,14 @@ export default function CoordinatesInput({
 
         <InputGroup id="coordinates">
           <Input
+            id="lat"
             roundedRight={0}
             placeholder={t("OBSERVATION.LATITUDE")}
             value={isOpen ? latDMS : lat}
             onChange={setLat}
           />
           <Input
+            id="lng"
             roundedLeft={0}
             placeholder={t("OBSERVATION.LONGITUDE")}
             value={isOpen ? lngDMS : lng}

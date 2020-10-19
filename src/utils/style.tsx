@@ -6,24 +6,17 @@ import flat from "flat";
  * @param {*} { colors }
  * @returns {String}
  */
-export const jsontocss = ({ colors }): string => {
-  const {
-    linkedin,
-    blackalpha,
-    green,
-    facebook,
-    messenger,
-    whatsapp,
-    twitter,
-    telegram,
-    pink,
-    orange,
-    teal,
-    cyan,
-    purple,
-    ...scolors
-  } = colors;
-  const flatColors = flat(scolors, { delimiter: "-" });
+export const jsontocss = ({ colors: c }): string => {
+  const flatColors = flat(
+    {
+      white: c.white,
+      gray: c.gray,
+      red: c.red,
+      yellow: c.yellow,
+      blue: c.blue
+    },
+    { delimiter: "-" }
+  );
   let css = ":root{";
   for (const [key, value] of Object.entries(flatColors)) {
     css = css.concat(`--${key.toLowerCase()}: ${value};`);

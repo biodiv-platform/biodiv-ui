@@ -1,16 +1,16 @@
 import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/core";
 import { CalendarIcon } from "@chakra-ui/icons";
 import FlagActionButton from "@components/@core/action-buttons/flag";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
-import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
-import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import useTranslation from "@hooks/use-translation";
 import LocationIcon from "@icons/location";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
-import { formatDateReadable } from "@utils/date";
+import { formatDateReadableFromUTC } from "@utils/date";
 import React from "react";
 
 interface IInfoTabProps {
@@ -51,7 +51,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             </Text>
             <Text title={t("LIST.OBSERVED_ON")}>
               <CalendarIcon mb={1} mr={2} />
-              {formatDateReadable(o.observedOn)}
+              {formatDateReadableFromUTC(o.observedOn)}
             </Text>
           </Box>
         </div>

@@ -17,6 +17,7 @@ export const ENDPOINT = {
   LANDSCAPE: `${API_ENDPOINT}landscape-api/api`,
   NAKSHA: `${API_ENDPOINT}naksha-api/api`,
   OBSERVATION: `${API_ENDPOINT}observation-api/api`,
+  PAGES: `${API_ENDPOINT}pages-api/api`,
   RAW: `${API_ENDPOINT}biodiv`,
   RESOURCES: `${API_ENDPOINT}resources-api/api`,
   TAXONOMY: `${API_ENDPOINT}taxonomy-api/api`,

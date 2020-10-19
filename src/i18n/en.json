@@ -423,8 +423,8 @@
         "USER": "Aggregate observation of all group members"
       },
       "REMOVE": {
-        "FAILURE": "Unable to delete User Group Rule",
-        "SUCCESS": "User group Rule deleted successfully"
+        "FAILURE": "unable to delete user group rule",
+        "SUCCESS": "user group rule deleted"
       },
       "TABLE": {
         "ACTIONS": "Actions",
@@ -793,6 +793,14 @@
     "INVALID_OTP": "The OTP entered is incorrect",
     "RESEND": "Resend OTP",
     "TITLE": "Account verification"
+  },
+  "PAGE": {
+    "REMOVE": {
+      "DESCRIPTION": "Are you sure? You can't undo this action afterwards.",
+      "SUCCESS": "Page deleted successfully",
+      "TITLE": "Delete page"
+    },
+    "SHARE": "Share this Page"
   },
   "PREV": "Previous",
   "PROCESSING": "Processing...",
