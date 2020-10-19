@@ -1,6 +1,7 @@
 import { Button, ButtonGroup } from "@chakra-ui/core";
 import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
+import CheckIcon from "@icons/check";
 import {
   axRemoveHomePageGalleryImage,
   axReorderHomePageGallery
@@ -10,7 +11,6 @@ import arrayMove from "array-move";
 import React, { useEffect, useState } from "react";
 
 import GalleryListItems from "./gallery-list";
-import CheckIcon from "@icons/check";
 
 const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCreate }) => {
   const [showReorder, setCanReorder] = useState<boolean>();

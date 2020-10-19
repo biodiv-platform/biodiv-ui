@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import ExsistingResourceForm from "./exsistin-resource-form";
+import ExsistingResourceForm from "./exsisting-resource-form";
 import NewResourceForm from "./new-resource-form";
 
 interface IGallerySetupForm {
