@@ -1,3 +1,1 @@
-import ObservationShow from "../../../../observation/show/[observationId]";
-
-export default ObservationShow;
+export { default, getServerSideProps } from "../../../../observation/show/[observationId]";
