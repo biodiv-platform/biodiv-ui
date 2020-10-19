@@ -53,7 +53,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           [`${type}`]: [
             {
               fromDate: formatDateReverse(parseDate(ruleValue[0])),
-              toDate: formatDateReverse(parseDate(ruleValue[0]))
+              toDate: formatDateReverse(parseDate(ruleValue[1]))
             }
           ]
         };

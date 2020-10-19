@@ -1,11 +1,9 @@
 import { FormControl, FormHelperText, FormLabel, IconButton, useDisclosure } from "@chakra-ui/core";
 import useTranslation from "@hooks/use-translation";
-import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { CustomFieldData } from "@interfaces/observation";
 import { axUpdateCustomField } from "@services/observation.service";
 import { ACTIVITY_UPDATED } from "@static/events";
-import { adminOrAuthor } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { emit } from "react-gbus";
@@ -27,9 +25,6 @@ export default function CustomField({
   observationId,
   canEdit
 }: ICustomFieldProps) {
-  const {
-    user: { id: userId }
-  } = useGlobalState();
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { t } = useTranslation();
 
@@ -52,7 +47,7 @@ export default function CustomField({
     <FormControl borderBottom="1px" borderColor="gray.300" p={4}>
       <FormLabel fontWeight="bold" htmlFor={cf.cfId.toString()}>
         {cf.cfName}
-        {(adminOrAuthor(userId) || canEdit) && (
+        {canEdit && (
           <IconButton
             variant="link"
             colorScheme="blue"

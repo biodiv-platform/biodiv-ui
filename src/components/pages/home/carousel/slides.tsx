@@ -4,7 +4,7 @@ import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import { GallerySlider } from "@interfaces/utility";
 import { HERO_FALLBACK } from "@static/home";
-import { getObservationThumbnail, getUserImage } from "@utils/media";
+import { getObservationThumbnail, getGroupImageThumb, getUserImage } from "@utils/media";
 import { useEmblaCarousel } from "embla-carousel/react";
 import { Mq } from "mq-styled-components";
 import React, { useEffect } from "react";
@@ -87,7 +87,11 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
                 <Image
                   objectFit="cover"
                   loading="lazy"
-                  src={getObservationThumbnail(o?.fileName, 500)}
+                  src={
+                    featured[slideIndex].authorId
+                      ? getObservationThumbnail(o?.fileName, 500)
+                      : getGroupImageThumb(o?.fileName, 500)
+                  }
                   alt={o.observationId?.toString()}
                   fallbackSrc={HERO_FALLBACK}
                 />
@@ -97,25 +101,27 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
         </div>
       </div>
       <div className="slide-content">
-        <LocalLink href={`/user/show/${featured[slideIndex].authorId}`}>
-          <Link>
-            <Flex alignItems="center">
-              <Avatar
-                mr={2}
-                flexShrink={0}
-                size="sm"
-                name={featured[slideIndex].authorName}
-                src={getUserImage(featured[slideIndex].authorImage)}
-              />
-              <Box className="credits-text">
-                <Text lineHeight="1em" fontSize="xs">
-                  {t("HOME.OBSERVED_BY")}
-                </Text>
-                <div>{featured[slideIndex].authorName}</div>
-              </Box>
-            </Flex>
-          </Link>
-        </LocalLink>
+        {featured[slideIndex].authorId && (
+          <LocalLink href={`/user/show/${featured[slideIndex].authorId}`}>
+            <Link>
+              <Flex alignItems="center">
+                <Avatar
+                  mr={2}
+                  flexShrink={0}
+                  size="sm"
+                  name={featured[slideIndex].authorName}
+                  src={getUserImage(featured[slideIndex].authorImage)}
+                />
+                <Box className="credits-text">
+                  <Text lineHeight="1em" fontSize="xs">
+                    {t("HOME.OBSERVED_BY")}
+                  </Text>
+                  <div>{featured[slideIndex].authorName}</div>
+                </Box>
+              </Flex>
+            </Link>
+          </LocalLink>
+        )}
         <Indicators
           size={featured.length}
           scrollTo={emblaApi?.scrollTo}
