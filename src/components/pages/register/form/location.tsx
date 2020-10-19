@@ -12,12 +12,13 @@ import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { LoadScriptNext, StandaloneSearchBox } from "@react-google-maps/api";
+import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 import { getMapCenter } from "@utils/location";
 import React, { useEffect, useState } from "react";
 
 import LocationMap from "../../observation/create/form/location/map";
 
-const LIBRARIES = ["drawing", "places"];
+const LIBRARIES: Libraries = ["drawing", "places"];
 
 const LocationPicker = ({ form }) => {
   const { t } = useTranslation();

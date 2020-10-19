@@ -14,6 +14,7 @@ import Select from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
+import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 import useOnlineStatus from "@rehooks/online-status";
 import { EXIF_GPS_FOUND } from "@static/events";
 import { getMapCenter, reverseGeocode } from "@utils/location";
@@ -29,7 +30,7 @@ interface LocationPickerProps {
   form: UseFormMethods<Record<string, any>>;
 }
 
-const LIBRARIES = ["drawing", "places"];
+const LIBRARIES: Libraries = ["drawing", "places"];
 
 const LocationPicker = ({ form }: LocationPickerProps) => {
   const { t } = useTranslation();

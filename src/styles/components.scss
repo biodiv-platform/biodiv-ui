@@ -44,32 +44,6 @@ input {
   }
 }
 
-.sanitized-html {
-  width: 100%;
-  word-break: break-word;
-  a {
-    color: var(--blue-500);
-    text-decoration: underline;
-  }
-  .mention-link {
-    background: var(--blue-50);
-    border-radius: 2rem;
-    padding: 0 0.4rem;
-    text-decoration: none !important;
-    display: inline-block;
-  }
-  p {
-    margin-bottom: 0.3rem;
-  }
-  ul,
-  ol {
-    margin-left: 1rem;
-  }
-  ol {
-    list-style-type: decimal;
-  }
-}
-
 .gray-box,
 .white-box,
 .hover-box {
@@ -128,7 +102,7 @@ button[role="tab"] {
   .ql-container {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    height: 6.2em;
+    height: 6.5em;
     overflow-y: auto;
   }
   .ql-toolbar {

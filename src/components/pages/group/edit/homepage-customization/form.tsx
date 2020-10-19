@@ -2,7 +2,7 @@ import { Box, Button } from "@chakra-ui/core";
 import RichTextareaField from "@components/form/rich-textarea";
 import SwitchButton from "@components/form/switch";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { axUpdateHomePageDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
@@ -27,7 +27,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
     description
   } = homePageDetails;
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
