@@ -32,7 +32,7 @@ export default function CustomFieldList({
       </TabList>
       <TabPanels>
         {o.customField.map((cfList) => (
-          <TabPanel key={cfList.userGroupId}>
+          <TabPanel key={cfList.userGroupId} p={0}>
             {cfList?.customField.map((cf) => (
               <CustomField
                 key={cf.cfId}
