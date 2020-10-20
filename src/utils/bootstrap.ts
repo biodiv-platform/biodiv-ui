@@ -1,6 +1,7 @@
 import { defaultLocale, localesList } from "@configs/i18n/config";
 import { isLocale } from "@configs/i18n/types";
-import { axCheckUserGroupMember, axGetPages, axGroupList } from "@services/usergroup.service";
+import { axGetPages } from "@services/pages.service";
+import { axCheckUserGroupMember, axGroupList } from "@services/usergroup.service";
 import { TOKEN } from "@static/constants";
 import { parseNookies } from "next-nookies-persist";
 import { AppContext } from "next/app";

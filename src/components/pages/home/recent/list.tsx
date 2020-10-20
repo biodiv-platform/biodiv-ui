@@ -1,8 +1,8 @@
 import { AspectRatio, Box, Image } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
 import { getObservationThumbnail } from "@utils/media";
@@ -67,6 +67,7 @@ export default function RecentObservationList() {
                   className="o-image"
                   loading="lazy"
                   ignoreFallback={true}
+                  bg="gray.200"
                   src={getObservationThumbnail(o?.thumbnail, 135)}
                   alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
                 />

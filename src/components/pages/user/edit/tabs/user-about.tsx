@@ -10,8 +10,8 @@ import {
   INSTITUTION_OPTIONS,
   OCCUPATION_OPTIONS
 } from "@components/pages/register/form/options";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
 import CheckIcon from "@icons/check";
 import { axUpdateUserAbout } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";

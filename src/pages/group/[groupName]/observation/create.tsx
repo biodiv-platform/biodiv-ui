@@ -1,5 +1,1 @@
-import GroupObseravationCreatePage, { getServerSideProps } from "../../../observation/create";
-
-export { getServerSideProps };
-
-export default GroupObseravationCreatePage;
+export { default, getServerSideProps } from "../../../observation/create";

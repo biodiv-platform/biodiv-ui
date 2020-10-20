@@ -2,17 +2,18 @@ import { Box, useDisclosure } from "@chakra-ui/core";
 import { PageHeading } from "@components/@core/layout";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import {
   RESOURCES_UPLOADING,
   SYNC_SINGLE_OBSERVATION,
   TOGGLE_PHOTO_SELECTOR
 } from "@static/events";
-import { parseDate } from "@utils/date";
+import { dateToUTC } from "@utils/date";
+import { cleanTags } from "@utils/tags";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -210,11 +211,10 @@ export default function ObservationCreateForm({
     terms,
     ...rest
   }) => {
-    const observedOn = parseDate(rest.observedOn).toISOString();
+    const observedOn = dateToUTC(rest.observedOn).format();
     const payload = {
       ...rest,
       observedOn,
-      createdOn: new Date().toISOString(),
       fromDate: observedOn,
       toDate: observedOn,
       helpIdentify: !taxonCommonName && !taxonScientificName,
@@ -226,12 +226,7 @@ export default function ObservationCreateForm({
         confidence,
         languageId
       },
-      tags:
-        tags?.map(({ label, value, version }) => ({
-          id: label !== value ? value : null,
-          version,
-          name: label
-        })) || [],
+      tags: cleanTags(tags),
       protocol: "SINGLE_OBSERVATION",
       basisOfRecords: "HUMAN_OBSERVATION",
       obsvLanguageId: SITE_CONFIG.LANG.DEFAULT_ID,

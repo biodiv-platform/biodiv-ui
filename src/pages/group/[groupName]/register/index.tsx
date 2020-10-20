@@ -1,3 +1,1 @@
-import GroupRegisterPage from "../../../register";
-
-export default GroupRegisterPage;
+export { default } from "../../../register";

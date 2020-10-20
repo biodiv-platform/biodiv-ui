@@ -1,3 +1,1 @@
-import GroupLoginPage from "../../login";
-
-export default GroupLoginPage;
+export { default, getServerSideProps } from "../../login";

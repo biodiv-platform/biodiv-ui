@@ -17,6 +17,7 @@ interface ITextBoxProps {
   isRequired?: boolean;
   showLabel?: boolean;
   hidden?;
+  autoComplete?;
 }
 
 const TextBoxField = ({
@@ -31,6 +32,7 @@ const TextBoxField = ({
   isRequired,
   showLabel = true,
   hidden,
+  autoComplete,
   ...props
 }: ITextBoxProps) => (
   <FormControl
@@ -48,6 +50,7 @@ const TextBoxField = ({
       ref={form.register}
       type={type}
       isDisabled={disabled}
+      autoComplete={autoComplete}
     />
     <ErrorMessage name={name} errors={form.errors} />
     {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

@@ -1,3 +1,1 @@
-import ObservationEdit from "../../../../observation/edit/[observationId]";
-
-export default ObservationEdit;
+export { default } from "../../../../observation/edit/[observationId]";

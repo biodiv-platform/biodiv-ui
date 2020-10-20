@@ -8,9 +8,9 @@ import {
 } from "@chakra-ui/core";
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
-import useTranslation from "@hooks/use-translation";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
@@ -86,7 +86,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
 
   return (
     <Accordion allowToggle={true}>
-      <AccordionItem mb={8} bg="white" border="1px solid" borderColor="gray.300" borderRadius="md">
+      <AccordionItem mb={8} bg="white" border="1px solid var(--gray-300)" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
             🛡️ {t("GROUP.ADMIN.TITLE")}

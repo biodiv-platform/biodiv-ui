@@ -38,18 +38,6 @@ export const axGroupList = async (url) => {
   }
 };
 
-export const axGetPages = async (userGroupId) => {
-  try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/newsletter/group`, {
-      params: { userGroupId }
-    });
-    return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false, data: [] };
-  }
-};
-
 export const axUserGroupCreate = async (payload) => {
   try {
     const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/create`, payload);

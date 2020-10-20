@@ -1,3 +1,1 @@
-import GroupForgotPasswordPage from "../../../register/forgotPassword";
-
-export default GroupForgotPasswordPage;
+export { default } from "../../../register/forgotPassword";

@@ -1,19 +1,19 @@
 import { IconButton } from "@chakra-ui/core";
+import { SearchIcon } from "@chakra-ui/icons";
 import SelectAsync from "@components/form/select-async";
 import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import { yupResolver } from "@hookform/resolvers/yup";
+import useTranslation from "@hooks/use-translation";
 import { axGetTaxonList, doTaxonSearch } from "@services/api.service";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
 
 import { mergeDeep } from "./taxon-browser-helpers";
-import { SearchIcon } from "@chakra-ui/icons";
 
 const SearchForm = styled.form`
   display: flex;
