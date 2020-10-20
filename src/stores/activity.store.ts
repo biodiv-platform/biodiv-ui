@@ -32,6 +32,7 @@ const activityStore: IActivityStore = {
   listActivity: thunk(async (actions, { objectType, objectId, reset }, helpers) => {
     const offset = reset ? 0 : helpers.getState().offset;
     const response = await axListActivity(objectType, objectId, offset);
+    // console.log("the commet data is",response)
     actions.setActivity(response);
   }),
   clearActivity: action((state) => {

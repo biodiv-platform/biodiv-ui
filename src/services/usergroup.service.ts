@@ -26,11 +26,11 @@ export const axGetUserGroupById = async (userGroupId) => {
   }
 };
 
-export const axGroupList = async (url) => {
+export const axGroupList = async (url?: string) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/all`);
     const groups = transformUserGroupList(data);
-    const currentGroup = findCurrentUserGroup(groups, url);
+    const currentGroup = url ? findCurrentUserGroup(groups, url) : {};
     return { success: true, groups, currentGroup };
   } catch (e) {
     console.error(e);

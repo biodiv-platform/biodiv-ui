@@ -1,0 +1,26 @@
+import { Box, SimpleGrid } from "@chakra-ui/core";
+import React from "react";
+import Views from "./view/index";
+
+interface DocumentListPageProps {
+  nextOffset: number;
+}
+
+export default function DocumentListPageComponent({ nextOffset }: DocumentListPageProps) {
+  return (
+    <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
+      <SimpleGrid w="full" columns={[1, 1, 1, 5]}>
+        <Box
+          maxH="full"
+          w="full"
+          id="items-container"
+          overflowY="auto"
+          gridColumn={[null, null, null, "2/6"]}
+          px={4}
+        >
+          <Views no={nextOffset} />
+        </Box>
+      </SimpleGrid>
+    </Box>
+  );
+}

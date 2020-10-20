@@ -1,12 +1,7 @@
 import { Image, Link } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
-import AudioIcon from "@icons/audio";
-import ImageIcon from "@icons/image";
-import VideoIcon from "@icons/video";
-import { ObservationListPageMapper } from "@interfaces/observation";
-import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage, getSpeciesIcon } from "@utils/media";
+import { getLocalIcon } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
@@ -65,41 +60,22 @@ const ImageBox = styled.div`
   }
 `;
 
-export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper }) {
+export default function ImageBoxComponent({ document, user }) {
   return (
     <ImageBox>
-      <div className="stats">
-        {o.noOfImages > 0 && (
-          <>
-            {o.noOfImages} <ImageIcon />
-          </>
-        )}
-        {o.noOfVideos > 0 && (
-          <>
-            {o.noOfVideos} <VideoIcon />
-          </>
-        )}
-        {o.noOfAudios > 0 && (
-          <>
-            {o.noOfAudios} <AudioIcon />
-          </>
-        )}
-      </div>
-
-      <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
+      <LocalLink href={`/document/show/${document.id}`} prefixGroup={true}>
         <Link color="white">
           <Image
             className="ob-image-list"
             objectFit="cover"
             bg="gray.100"
-            src={getObservationImage(o.reprImageUrl, RESOURCE_SIZE.LIST_THUMBNAIL)}
-            fallbackSrc={getSpeciesIcon(o?.speciesGroup)}
-            alt={o.observationId.toString()}
+            src={getLocalIcon("Unknown")}
+            alt={document.id.toString()}
           />
         </Link>
       </LocalLink>
 
-      <ShadowedUser user={o.user} />
+      <ShadowedUser user={user} />
     </ImageBox>
   );
 }
