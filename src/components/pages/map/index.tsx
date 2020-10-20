@@ -7,6 +7,7 @@ import React from "react";
 
 export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
+
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
   );
@@ -16,7 +17,7 @@ export default function MapPageComponent() {
       <Naksha
         viewPort={defaultViewPort}
         loadToC={true}
-        showToC={false}
+        showToC={true}
         mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
         geoserver={{
@@ -28,7 +29,8 @@ export default function MapPageComponent() {
           {
             id: "global-observations",
             title: "Observations",
-            isAdded: true,
+            description: "All observations from india biodiversity portal",
+            isAdded: false,
             source: {
               type: "grid",
               endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
