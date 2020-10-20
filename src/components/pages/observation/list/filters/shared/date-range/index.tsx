@@ -43,12 +43,15 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
   };
 
   const handleOnDateChange = (dates = []) => {
-    if (dates.length > 1) {
-      setFilter((_draft) => {
+    setFilter((_draft) => {
+      if (dates.length > 0) {
         _draft.f[filterKey.min] = dayjs(dates[0]).utc().format();
         _draft.f[filterKey.max] = dayjs(dates[1]).utc().format();
-      });
-    }
+      } else {
+        _draft.f[filterKey.min] = undefined;
+        _draft.f[filterKey.max] = undefined;
+      }
+    });
     console.debug(dates);
   };
 
