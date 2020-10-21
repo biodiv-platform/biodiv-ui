@@ -10,6 +10,7 @@ import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
+import { axGetAllHabitat } from "@services/utility.service";
 
 const deDupeDocument = (exsistinDocument, newDocument) => {
   const existingIDs = exsistinDocument.map(({ id }) => id);
@@ -29,6 +30,7 @@ interface DocumentFilterContextProps {
   nextPage?;
   resetFilter?;
   loggedInUserGroups?: UserGroupIbp[];
+  habitats;
 }
 
 const DocumentFilterContext = createContext<DocumentFilterContextProps>(
@@ -41,6 +43,7 @@ export const DocumentFilterProvider = (props) => {
   const [documentData, setDocumentData] = useImmer(props.documentData);
   const { isLoggedIn } = useGlobalState();
   const [loggedInUserGroups, setLoggedInUserGroups] = useState([]);
+  const [habitats, setHabitats] = useState();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -52,6 +55,10 @@ export const DocumentFilterProvider = (props) => {
     if (isBrowser) {
       window.history.pushState("", "", `?${stringify({ ...filter.f, offset: initialOffset })}`);
     }
+
+    axGetAllHabitat().then(({ data: habitat }) => {
+      setHabitats(habitat);
+    });
   }, [filter]);
 
   const fetchListData = async () => {
@@ -125,7 +132,8 @@ export const DocumentFilterProvider = (props) => {
         removeFilter,
         nextPage,
         resetFilter,
-        loggedInUserGroups
+        loggedInUserGroups,
+        habitats
       }}
     >
       {props.children}

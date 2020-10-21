@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Stack, Tooltip } from "@chakra-ui/core";
+import { Box, Image, Stack, Tooltip } from "@chakra-ui/core";
 import { getLocalIcon } from "@utils/media";
 import React, { useMemo } from "react";
 
@@ -8,19 +8,15 @@ export default function FilterIconList({ filterIds, filterList, title, type }) {
     []
   );
 
-  // console.log("the filter list data", filterIds, filterList);
-
   return (
-    <Box mb={6}>
-      <Heading size="lg" as="h2" mb={4}>
-        {title}
-      </Heading>
+    <Box m={2}>
       <Stack isInline={true}>
+        <span>{title} :</span>
         {filters.map(({ name, id }) => (
           <Box key={id}>
             <Tooltip aria-label={name} label={name} placement="top" hasArrow={true}>
               <Image
-                boxSize="3rem"
+                boxSize="2rem"
                 ignoreFallback={true}
                 src={getLocalIcon(name, type)}
                 alt={name}

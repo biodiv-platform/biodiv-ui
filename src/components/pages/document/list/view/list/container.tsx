@@ -9,6 +9,7 @@ import { Mq } from "mq-styled-components";
 import React, { useState } from "react";
 
 import ImageBoxComponent from "./image";
+import InfoTab from "./tabs/infotab";
 import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";
 
@@ -115,7 +116,10 @@ export default function Container({ o }) {
         <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
           <TabPanels className="tab-content" position="relative">
             <TabPanel>
-              {/* <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} /> */}
+              <InfoTab
+                habitatIds={o.habitatIds}
+                document={o.document}
+              />
             </TabPanel>
             <TabPanel>
               <GroupTab o={o} tabIndex={tabIndex} />

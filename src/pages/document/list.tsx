@@ -8,7 +8,10 @@ import React from "react";
 
 function DocumentListPage({ documentData, initialFilterParams, nextOffset }) {
   return (
-    <DocumentFilterProvider filter={initialFilterParams} documentData={documentData}>
+    <DocumentFilterProvider
+      filter={initialFilterParams}
+      documentData={documentData}
+    >
       <DocumentListPageComponent nextOffset={nextOffset} />
     </DocumentFilterProvider>
   );
@@ -20,13 +23,13 @@ DocumentListPage.config = {
 
 DocumentListPage.getInitialProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
-
+ 
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
 
   const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup.id };
   const { data } = await axGetListData(initialFilterParams);
-
+  
   return {
     documentData: {
       l: data.documentList,
