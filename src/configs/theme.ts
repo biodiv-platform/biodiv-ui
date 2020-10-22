@@ -2,7 +2,7 @@ import theme from "@chakra-ui/theme";
 import { merge } from "@chakra-ui/utils";
 
 const defaultFontFamily =
-  "Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji";
+  "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji";
 
 export const customTheme = merge(theme, {
   fonts: {

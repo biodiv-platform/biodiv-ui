@@ -24,7 +24,7 @@ export default function CustomFieldList({
   };
 
   return (
-    <Tabs>
+    <Tabs isLazy={true}>
       <TabList>
         {o.customField.map(({ userGroupId }) => (
           <Tab key={userGroupId}>{getGroupNameById(userGroupId)}</Tab>

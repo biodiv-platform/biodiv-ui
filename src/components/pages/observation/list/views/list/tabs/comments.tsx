@@ -5,10 +5,10 @@ import { axAddObservationComment } from "@services/activity.service";
 import { RESOURCE_TYPE } from "@static/constants";
 import React, { useRef } from "react";
 
-export default function CommentsTab({ tabIndex, observationId }) {
+export default function CommentsTab({ observationId }) {
   const titleRef = useRef(null);
 
-  return tabIndex === 5 ? (
+  return (
     <>
       <div ref={titleRef}></div>
       <div>
@@ -27,5 +27,5 @@ export default function CommentsTab({ tabIndex, observationId }) {
         />
       </Box>
     </>
-  ) : null;
+  );
 }

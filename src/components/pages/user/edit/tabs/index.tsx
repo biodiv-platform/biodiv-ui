@@ -13,7 +13,7 @@ export default function UserEditTabs({ user, isAdmin }) {
   return (
     <Box gridColumn={{ md: "2/5" }} mb={4}>
       <div className="white-box">
-        <Tabs>
+        <Tabs isLazy={true}>
           <TabList>
             <Tab>👤 {t("USER.ABOUT")}</Tab>
             <Tab>🔑 {t("USER.CHANGE_PASSWORD")}</Tab>

@@ -51,6 +51,7 @@ export default function ListHeader() {
           isManual={true}
           defaultIndex={defaultIndex}
           mb={4}
+          isLazy={true}
         >
           <TabList aria-orientation="vertical">
             {viewTabs.map(({ name, icon, key }) => (

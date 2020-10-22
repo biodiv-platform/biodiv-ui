@@ -847,6 +847,12 @@
     "NAME": "Name",
     "NEW_PASSWORD": "New Password",
     "NOTIFICATIONS": "Notifications",
+    "OBSERVATIONS": {
+      "IDENTIFIED": "Observations Identified",
+      "LIFE_LIST": "Life List",
+      "TITLE": "Observations",
+      "UPLOADED": "Observations Uploaded"
+    },
     "OCCUPATION": "Profession",
     "PASSWORD": "Password",
     "PASSWORD_EXPIRED": "Password Expired",

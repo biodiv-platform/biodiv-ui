@@ -11,12 +11,19 @@ interface GeoJSONPreviewProps {
   zoom?;
   viewPort?: Partial<ViewportProps>;
   mb?: number;
+  maxZoom?: number;
 }
 
-export default function GeoJSONPreview({ data, h = "22rem", zoom, mb }: GeoJSONPreviewProps) {
-  const defaultViewPort = React.useMemo(() => getMapCenter(zoom || 2.8), []);
+export default function GeoJSONPreview({
+  data,
+  h = "22rem",
+  zoom,
+  maxZoom,
+  mb
+}: GeoJSONPreviewProps) {
+  const defaultViewPort = React.useMemo(() => getMapCenter(zoom || 2.8, maxZoom), []);
   return (
-    <Box position="relative" h={h} borderRadius="md" overflow="hidden" mb={mb}>
+    <Box position="relative" h={h} overflow="hidden" mb={mb}>
       <Previewer
         defaultViewPort={defaultViewPort}
         data={data}

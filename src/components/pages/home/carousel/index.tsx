@@ -25,9 +25,6 @@ const CarouselBox = styled.div`
     .blur-box {
       width: 40%;
     }
-    .content {
-      padding: 1.8rem;
-    }
     p {
       font-size: 1rem;
     }
@@ -47,9 +44,6 @@ const CarouselBox = styled.div`
     }
     .blur-box {
       width: 100%;
-    }
-    .content {
-      padding: 1.2rem;
     }
     h1 {
       font-size: 1.6rem;

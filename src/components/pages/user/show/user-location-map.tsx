@@ -9,6 +9,7 @@ export default function UserLocationMap({ coordinates }) {
         type: "Point",
         coordinates
       }}
+      maxZoom={8}
     />
   ) : null;
 }

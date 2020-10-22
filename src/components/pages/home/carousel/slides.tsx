@@ -1,10 +1,10 @@
 import { Avatar, Box, Flex, Image, Link, Text } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
 import { GallerySlider } from "@interfaces/utility";
 import { HERO_FALLBACK } from "@static/home";
-import { getObservationThumbnail, getGroupImageThumb, getUserImage } from "@utils/media";
+import { getGroupImageThumb, getObservationThumbnail, getUserImage } from "@utils/media";
 import { useEmblaCarousel } from "embla-carousel/react";
 import { Mq } from "mq-styled-components";
 import React, { useEffect } from "react";
@@ -68,6 +68,7 @@ interface ISlidesProps {
 export default function Slides({ featured, slideIndex, onChange }: ISlidesProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const { t } = useTranslation();
+  const authorId = featured[slideIndex]?.authorId || 0;
 
   useEffect(() => {
     if (emblaApi) {
@@ -82,7 +83,11 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
       <div ref={emblaRef}>
         <div className="carousel">
           {featured.map((o) => (
-            <LocalLink key={o.id} href={`/observation/show/${o.observationId}`} prefixGroup={true}>
+            <LocalLink
+              key={o.id}
+              href={o.observationId ? `/observation/show/${o.observationId}` : "#"}
+              prefixGroup={true}
+            >
               <a>
                 <Image
                   objectFit="cover"
@@ -100,9 +105,9 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
           ))}
         </div>
       </div>
-      <div className="slide-content">
-        {featured[slideIndex].authorId && (
-          <LocalLink href={`/user/show/${featured[slideIndex].authorId}`}>
+      {authorId > 1 && (
+        <div className="slide-content">
+          <LocalLink href={`/user/show/${authorId}`}>
             <Link>
               <Flex alignItems="center">
                 <Avatar
@@ -121,13 +126,13 @@ export default function Slides({ featured, slideIndex, onChange }: ISlidesProps)
               </Flex>
             </Link>
           </LocalLink>
-        )}
-        <Indicators
-          size={featured.length}
-          scrollTo={emblaApi?.scrollTo}
-          currentIndex={slideIndex}
-        />
-      </div>
+          <Indicators
+            size={featured.length}
+            scrollTo={emblaApi?.scrollTo}
+            currentIndex={slideIndex}
+          />
+        </div>
+      )}
     </CarouselContainer>
   );
 }

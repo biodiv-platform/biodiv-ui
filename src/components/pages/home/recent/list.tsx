@@ -1,6 +1,5 @@
-import { AspectRatio, Box, Image } from "@chakra-ui/core";
+import { AspectRatio, Box, Image, SimpleGrid, Skeleton } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
-import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
@@ -8,31 +7,14 @@ import { axGetListData } from "@services/observation.service";
 import { getObservationThumbnail } from "@utils/media";
 import React, { useEffect, useState } from "react";
 
-const OBSERVATIONS_SIZE = 8;
-
-const ObservationBox = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(8, 1fr);
-
-  width: 100%;
-  min-width: 940px;
-  .o-image {
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-`;
+const OBSERVATIONS_SIZE = 10;
 
 export default function RecentObservationList() {
   const { t } = useTranslation();
   const { currentGroup } = useGlobalState();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [observatons, setObservations] = useState<ObservationListMinimalData[]>(
-    Array(OBSERVATIONS_SIZE).fill(null)
-  );
+  const [observations, setObservations] = useState<ObservationListMinimalData[]>([]);
 
   useEffect(() => {
     axGetListData({
@@ -42,42 +24,54 @@ export default function RecentObservationList() {
       userGroupList: currentGroup.id
     }).then(({ data }) => {
       setObservations(data?.observationListMinimal || []);
+      setIsLoading(false);
     });
   }, []);
 
-  return observatons.length ? (
+  return (
     <Box
       bg="white"
       p={4}
       borderRadius="lg"
-      border="2px solid"
+      border="1px solid"
       borderColor="gray.200"
       overflowX="auto"
     >
-      <ObservationBox>
-        {observatons.map((o, index) => (
-          <LocalLink
-            href={o?.observationId ? `/observation/show/${o?.observationId}` : null}
-            prefixGroup={true}
-            key={index}
-          >
-            <a aria-label={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}>
-              <AspectRatio maxW="full" ratio={1} borderRadius="lg" overflow="hidden">
-                <Image
-                  className="o-image"
-                  loading="lazy"
-                  ignoreFallback={true}
-                  bg="gray.200"
-                  src={getObservationThumbnail(o?.thumbnail, 135)}
-                  alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
-                />
+      <SimpleGrid columns={{ base: 2, sm: 6, md: 8, lg: 10 }} spacing={4}>
+        {isLoading ? (
+          Array(OBSERVATIONS_SIZE)
+            .fill(null)
+            .map((_, i) => (
+              <AspectRatio ratio={1} key={i}>
+                <Skeleton borderRadius="md" />
               </AspectRatio>
-            </a>
-          </LocalLink>
-        ))}
-      </ObservationBox>
+            ))
+        ) : observations.length ? (
+          observations.map((o) => (
+            <LocalLink
+              href={`/observation/show/${o?.observationId}`}
+              prefixGroup={true}
+              key={o.observationId}
+            >
+              <a aria-label={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}>
+                <AspectRatio ratio={1}>
+                  <Image
+                    objectFit="cover"
+                    borderRadius="md"
+                    loading="lazy"
+                    ignoreFallback={true}
+                    bg="gray.200"
+                    src={getObservationThumbnail(o?.thumbnail, 135)}
+                    alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
+                  />
+                </AspectRatio>
+              </a>
+            </LocalLink>
+          ))
+        ) : (
+          <div>{t("HOME.NO_RECENT_OBSERVATIONS")}</div>
+        )}
+      </SimpleGrid>
     </Box>
-  ) : (
-    <div>{t("HOME.NO_RECENT_OBSERVATIONS")}</div>
   );
 }

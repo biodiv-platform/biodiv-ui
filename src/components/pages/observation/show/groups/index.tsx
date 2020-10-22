@@ -39,7 +39,7 @@ const Groups = ({
   }, [isLoggedIn]);
 
   return (
-    <Box mb={4} className="white-box">
+    <Box mb={4} className="white-box" isLazy={true}>
       <Tabs>
         <TabList>
           <Tab>👥 {t("OBSERVATION.USERGROUPS")}</Tab>

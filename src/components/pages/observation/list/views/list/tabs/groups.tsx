@@ -6,11 +6,11 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import { axSaveUserGroups } from "@services/observation.service";
 import React from "react";
 
-export default function GroupsTab({ tabIndex, o }) {
+export default function GroupsTab({ o }) {
   const { t } = useTranslation();
   const { loggedInUserGroups } = useObservationFilter();
 
-  return tabIndex === 2 ? (
+  return (
     <>
       <BoxHeading>👥 {t("OBSERVATION.USERGROUPS")}</BoxHeading>
       <Box p={4}>
@@ -22,5 +22,5 @@ export default function GroupsTab({ tabIndex, o }) {
         />
       </Box>
     </>
-  ) : null;
+  );
 }
