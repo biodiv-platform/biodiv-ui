@@ -8,8 +8,6 @@ export default function FilterIconList({ filterIds, filterList, title, type }) {
     []
   );
 
-  // console.log("the filter list data", filterIds, filterList);
-
   return (
     <Box mb={6}>
       <Heading size="lg" as="h2" mb={4}>

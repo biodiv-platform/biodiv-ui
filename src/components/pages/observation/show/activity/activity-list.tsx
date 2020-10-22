@@ -116,8 +116,6 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
     }
   };
 
-  // console.log("the aciticuty state",state)
-
   return (
     <>
       <BoxHeading subTitle={`${state.commentCount} ${t("OBSERVATION.COMMENTS.TITLE")}`}>

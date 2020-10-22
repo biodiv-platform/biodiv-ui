@@ -213,7 +213,6 @@ export const axGetListData = async (params, index = "document", type = "document
 
     return { success: true, data };
   } catch (e) {
-    // console.log("the error dta",e)
     return { success: false, data: {} };
   }
 };

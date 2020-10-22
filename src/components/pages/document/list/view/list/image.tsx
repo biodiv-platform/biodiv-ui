@@ -1,11 +1,12 @@
-import { Image, Link } from "@chakra-ui/core";
+import { Avatar, Link, Text, Flex } from "@chakra-ui/core";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
-import { getLocalIcon } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React from "react";
+import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 
 import ShadowedUser from "@components/pages/common/shadowed-user";
+import FlagActionButton from "@components/@core/action-buttons/flag";
 
 const ImageBox = styled.div`
   position: relative;
@@ -60,22 +61,28 @@ const ImageBox = styled.div`
   }
 `;
 
-export default function ImageBoxComponent({ document, user }) {
+export default function ImageBoxComponent({ document, user, flags }) {
   return (
     <ImageBox>
-      <LocalLink href={`/document/show/${document.id}`} prefixGroup={true}>
-        <Link color="white">
-          <Image
-            className="ob-image-list"
-            objectFit="cover"
-            bg="gray.100"
-            src={getLocalIcon("Unknown")}
-            alt={document.id.toString()}
-          />
-        </Link>
-      </LocalLink>
+      <FlagActionButton
+        resourceId={document.id}
+        resourceType="document"
+        initialFlags={flags}
+        userId={user.id}
+        flagFunc={axFlagDocument}
+        unFlagFunc={axUnFlagDocument}
+      />
+      <Flex alignItems="center" justifyContent="center" w="15rem">
+        <LocalLink href={`/document/show/${document.id}`} prefixGroup={true}>
+          <Link color="white">
+            <Text title={document.item_type || "image type"}>
+              <Avatar size="2xl" name={document.item_type} />
+            </Text>
+          </Link>
+        </LocalLink>
 
-      <ShadowedUser user={user} />
+        <ShadowedUser user={user} />
+      </Flex>
     </ImageBox>
   );
 }

@@ -1,9 +1,7 @@
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
 import Tooltip from "@components/@core/tooltip";
-// import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
-// import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/documnet-list";
 import { Mq } from "mq-styled-components";
 import React, { useState } from "react";
@@ -12,6 +10,7 @@ import ImageBoxComponent from "./image";
 import InfoTab from "./tabs/infotab";
 import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";
+import useGlobalState from "@hooks/use-global-state";
 
 const VerticalTabs = styled.div`
   flex-grow: 1;
@@ -92,16 +91,7 @@ const VerticalTabs = styled.div`
 export default function Container({ o }) {
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(0);
-  // const { setObservationData } = useObservationFilter();
-
-  // const recoUpdated = (payload) => {
-  //   setObservationData((_draft: ObservationData) => {
-  //     const i = _draft.l.findIndex((ob) => o.observationId === ob.observationId);
-  //     _draft.l[i].recoShow = payload;
-  //   });
-  // };
-
-  // console.log("the trab index is", tabIndex);
+  const { user } = useGlobalState();
 
   return (
     <Flex
@@ -111,13 +101,18 @@ export default function Container({ o }) {
       mb={4}
       overflow="hidden"
     >
-      <ImageBoxComponent user={o.userIbp} document={o.document} />
+      <ImageBoxComponent
+        user={user}
+        flags={o.flag.map((item) => ({ flag: item, user: o.userIbp }))}
+        document={o.document}
+      />
       <VerticalTabs>
         <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
           <TabPanels className="tab-content" position="relative">
             <TabPanel>
               <InfoTab
                 habitatIds={o.habitatIds}
+                specieIds={o.speciesGroupIds}
                 document={o.document}
               />
             </TabPanel>

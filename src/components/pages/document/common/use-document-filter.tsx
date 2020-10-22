@@ -2,7 +2,7 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { DocumentData } from "@interfaces/custom";
 import { UserGroupIbp } from "@interfaces/document";
-import { axGetListData } from "@services/document.service";
+import { axGetListData, axGetDocumentSpeciesGroups } from "@services/document.service";
 import { axGroupList } from "@services/usergroup.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
@@ -11,11 +11,6 @@ import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 import { axGetAllHabitat } from "@services/utility.service";
-
-const deDupeDocument = (exsistinDocument, newDocument) => {
-  const existingIDs = exsistinDocument.map(({ id }) => id);
-  return newDocument.filter(({ id }) => !existingIDs.includes(id));
-};
 
 interface DocumentFilterContextProps {
   filter?;
@@ -30,6 +25,7 @@ interface DocumentFilterContextProps {
   nextPage?;
   resetFilter?;
   loggedInUserGroups?: UserGroupIbp[];
+  species;
   habitats;
 }
 
@@ -44,6 +40,7 @@ export const DocumentFilterProvider = (props) => {
   const { isLoggedIn } = useGlobalState();
   const [loggedInUserGroups, setLoggedInUserGroups] = useState([]);
   const [habitats, setHabitats] = useState();
+  const [species, setSpecies] = useState();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -56,24 +53,24 @@ export const DocumentFilterProvider = (props) => {
       window.history.pushState("", "", `?${stringify({ ...filter.f, offset: initialOffset })}`);
     }
 
+    axGetDocumentSpeciesGroups().then(({ data: species }) => {
+      setSpecies(species);
+    });
     axGetAllHabitat().then(({ data: habitat }) => {
       setHabitats(habitat);
     });
   }, [filter]);
 
   const fetchListData = async () => {
-    // console.log("the fetch dta")
     try {
       NProgress.start();
       const { data } = await axGetListData(filter.f);
-      // console.log("the data form data",data)
       setDocumentData((_draft) => {
-        // console.log("the data form data",_draft)
         if (filter.f.offset === 0) {
           _draft.l = [];
         }
         if (data.documentList.length) {
-          _draft.l.push(...deDupeDocument(_draft.l, data.documentList));
+          _draft.l.push(...data.documentList);
           _draft.hasMore = data.documentList.length === Number(filter.f.max);
         }
       });
@@ -85,7 +82,6 @@ export const DocumentFilterProvider = (props) => {
   };
 
   useDidUpdateEffect(() => {
-    // console.log("the did update")
     fetchListData();
   }, [filter]);
 
@@ -133,7 +129,8 @@ export const DocumentFilterProvider = (props) => {
         nextPage,
         resetFilter,
         loggedInUserGroups,
-        habitats
+        habitats,
+        species
       }}
     >
       {props.children}
