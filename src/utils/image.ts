@@ -4,11 +4,12 @@ import { DEFAULT_LICENSE } from "@static/licenses";
 import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import notification from "@utils/notification";
 import loadImage from "blueimp-load-image";
-import { parse } from "exifr/dist/lite.umd";
 import { nanoid } from "nanoid";
 import { emit } from "react-gbus";
 
-function resizeImage(file: File, max = 3000) {
+import { CleanExif } from "./location";
+
+function resizeImage(file: File, max = 3000): Promise<any> {
   return new Promise((resolve) => {
     loadImage(
       file,
@@ -22,17 +23,19 @@ function resizeImage(file: File, max = 3000) {
 
             // replace imageHead to restore exif of original image
             img.toBlob((blob) => {
-              loadImage.replaceHead(blob, data.imageHead, resolve);
+              loadImage.replaceHead(blob, data.imageHead, (d) =>
+                resolve([d, CleanExif(data?.exif)])
+              );
             }, file.type);
           } else {
-            img.toBlob(resolve);
+            img.toBlob((d) => resolve([d, {}]));
           }
         } catch (e) {
           console.warn("EXIF Failed", e);
           if (!img.toBlob) {
             notification("Outdated/Unsupported Browser");
           }
-          img.toBlob(resolve);
+          img.toBlob((d) => resolve([d, {}]));
         }
       },
       {
@@ -44,15 +47,6 @@ function resizeImage(file: File, max = 3000) {
       }
     );
   });
-}
-
-async function parseGPS(file: File) {
-  try {
-    return await parse(file);
-  } catch (e) {
-    console.error(e);
-    return {};
-  }
 }
 
 export const getAssetObject = (file, meta?) => {
@@ -74,32 +68,34 @@ export const getAssetObject = (file, meta?) => {
   };
 };
 
-export function resizeMultiple(files: File[]) {
-  return Promise.all(
-    files.map(async (file) => {
-      try {
-        let meta;
-        if (file.type.startsWith("image")) {
-          const [blob, exif]: any = await Promise.all([resizeImage(file), parseGPS(file)]);
-          console.debug("EXIF", exif);
-          if (exif?.DateTimeOriginal) {
-            emit(FORM_DATEPICKER_CHANGE + "observedOn", exif?.DateTimeOriginal);
-          }
-          if (exif?.latitude && exif?.longitude) {
-            emit(EXIF_GPS_FOUND, { lat: exif.latitude, lng: exif.longitude });
-          }
-          meta = {
-            blob,
-            latitude: exif?.latitude,
-            longitude: exif?.longitude,
-            dateCreated: exif?.DateTimeOriginal
-          };
+export const resizeMultiple = async (files: File[]) => {
+  const assets = [];
+
+  for (const file of files) {
+    try {
+      let meta;
+      if (file.type.startsWith("image")) {
+        const [blob, exif] = await resizeImage(file);
+
+        if (exif?.dateCreated) {
+          emit(FORM_DATEPICKER_CHANGE + "observedOn", exif?.dateCreated);
         }
-        return getAssetObject(file, meta);
-      } catch (e) {
-        console.error(e);
-        return {};
+
+        if (exif?.latitude) {
+          emit(EXIF_GPS_FOUND, { lat: exif.latitude, lng: exif.longitude });
+        }
+
+        meta = {
+          blob,
+          ...exif
+        };
       }
-    })
-  );
-}
+      assets.push(getAssetObject(file, meta));
+    } catch (e) {
+      console.error(e);
+      assets.push({});
+    }
+  }
+
+  return assets;
+};
