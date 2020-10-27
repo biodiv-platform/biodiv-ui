@@ -77,7 +77,7 @@ export default function GroupPost({
         ))}
       </SimpleGrid>
 
-      <Collapse isOpen={isOpen}>
+      <Collapse in={isOpen}>
         {groups.length > 0 && (
           <CheckBoxItems
             gridColumns={[1, 1, 2, 3]}

@@ -54,7 +54,7 @@ const TraitsPicker = ({ name, form }: ITraitsPickerProps) => {
       <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
         💎 {t("OBSERVATION.TRAITS")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
-      <Collapse isOpen={isOpen}>
+      <Collapse in={isOpen}>
         {traitsPairs.map(({ traits, values }) => (
           <FormControl mb={4} key={traits.id}>
             <FormLabel mb={1}>{traits.name}</FormLabel>

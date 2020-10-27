@@ -26,7 +26,7 @@ export default function UserGroups({ name, label, form }: IUserGroupsProps) {
       <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
         👥 {label} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
-      <Collapse isOpen={isOpen}>
+      <Collapse in={isOpen}>
         <Controller
           control={form.control}
           name={name}

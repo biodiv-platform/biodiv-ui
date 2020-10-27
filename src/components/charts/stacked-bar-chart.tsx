@@ -52,14 +52,14 @@ export default function StackedBarChart({
     if (!ro?.width || !data.length) return;
 
     // append the svg object to the body of the page
-    var svg = select(svgRef.current).attr("width", ro.width).attr("height", h);
+    const svg = select(svgRef.current).attr("width", ro.width).attr("height", h);
 
     svg.select(".content").attr("transform", `translate(${ml},${mt})`);
 
-    var groups = data.map((o) => o[groupKey]);
+    const groups = data.map((o) => o[groupKey]);
 
     // Add X axis
-    var x: any = scaleBand()
+    const x: any = scaleBand()
       .domain(groups)
       .range([0, ro.width - ml - mr])
       .padding(barPadding);
@@ -85,7 +85,7 @@ export default function StackedBarChart({
     );
 
     // Add Y axis
-    var y: any = scaleLinear()
+    const y: any = scaleLinear()
       .domain([0, max])
       .range([h - mt - mb, 0]);
 
@@ -95,10 +95,10 @@ export default function StackedBarChart({
       .call(axisLeft(y) as any);
 
     // one color per subgroup
-    var color: any = scaleOrdinal().domain(subGroupKeys).range(subGroupColors);
+    const color: any = scaleOrdinal().domain(subGroupKeys).range(subGroupColors);
 
     // stack per subgroup
-    var stackedData = stack().keys(subGroupKeys)(data);
+    const stackedData = stack().keys(subGroupKeys)(data);
 
     // show the bars
     svg

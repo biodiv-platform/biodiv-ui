@@ -16,7 +16,7 @@ const LocationMap = ({ coordinates, setCoordinates, isOpen, onTextUpdate, zoom, 
   };
 
   return (
-    <Collapse isOpen={isOpen}>
+    <Collapse in={isOpen}>
       <Box borderRadius="md" overflow="hidden" mb={4}>
         <GoogleMap
           id="observation-create-map"
