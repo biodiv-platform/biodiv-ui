@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text, Link, Avatar, Flex, Image, Badge, Stack } from "@chakra-ui/core";
+import { Box, Heading, Text, Link, Avatar, Flex, Badge, Stack } from "@chakra-ui/core";
 import FilterIconsList from "@components/pages/document/common/filter-list-icon";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import useTranslation from "@hooks/use-translation";
@@ -11,6 +11,7 @@ import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 
 import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
+import PDFIcon from "@icons/pdf";
 
 export default function InfoTab({ document, habitatIds, specieIds, flags }) {
   const { t } = useTranslation();
@@ -23,34 +24,28 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
       boxSize="full"
       display="flex"
       flexDir="column"
-      justifyContent="space-evenly"
+      justifyContent="space-between"
     >
-      <Heading size="md" title={document?.title}>
-        <Flex justifyContent="flex-start" alignItems="center">
-          <Image
-            m={2}
-            h="80px"
-            objectFit="cover"
-            src="https://bit.ly/sage-adebayo"
-            alt="Segun Adebayo"
-          />
-          <Text m={2}>
-            {document?.title || t("OBSERVATION.UNKNOWN")}
-            <Badge ml={2} colorScheme="red">
-              {document.item_type}
-            </Badge>
-            <FlagActionButton
-              resourceId={document.id}
-              resourceType="document"
-              initialFlags={flags}
-              userId={user.id}
-              flagFunc={axFlagDocument}
-              unFlagFunc={axUnFlagDocument}
-            />
-          </Text>
-        </Flex>
-      </Heading>
       <Stack ml={4}>
+        <Heading size="md" title={document?.title}>
+          <Flex justifyContent="flex-start" alignItems="center">
+            <PDFIcon m={2} width="2em" height="2em" color="red.500" />
+            <Text m={2}>
+              {document?.title || t("OBSERVATION.UNKNOWN")}
+              <Badge ml={2} colorScheme="red">
+                {document.item_type}
+              </Badge>
+              <FlagActionButton
+                resourceId={document.id}
+                resourceType="document"
+                initialFlags={flags}
+                userId={user.id}
+                flagFunc={axFlagDocument}
+                unFlagFunc={axUnFlagDocument}
+              />
+            </Text>
+          </Flex>
+        </Heading>
         {document?.notes && (
           <Box>
             <Text title="Abstract">
@@ -66,7 +61,7 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
           </Box>
         )}
       </Stack>
-      <Flex justifyContent="space-between" m={2} alignItems="center">
+      <Flex justifyContent="space-between" m={4} alignItems="center">
         <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
           <Flex alignItems="flex-end">
             <Avatar

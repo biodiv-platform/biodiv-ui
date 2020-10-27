@@ -1,5 +1,5 @@
-import DocumentListPageComponent from "@components/pages/document/list";
 import { DocumentFilterProvider } from "@components/pages/document/common/use-document-filter";
+import DocumentListPageComponent from "@components/pages/document/list";
 import { axGetListData } from "@services/document.service";
 import { axGroupList } from "@services/usergroup.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";

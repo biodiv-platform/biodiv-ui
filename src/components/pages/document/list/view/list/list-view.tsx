@@ -1,10 +1,10 @@
 import { Link } from "@chakra-ui/core";
-import useTranslation from "@hooks/use-translation";
+import LoadingSpinner from "@components/pages/common/loading";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import LoadingSpinner from "@components/pages/common/loading";
 import Container from "./container";
 
 export default function ListView({ no }) {

@@ -1,11 +1,10 @@
-import { Avatar, Link, Text, Flex } from "@chakra-ui/core";
+import { Avatar, Flex, Link, Text } from "@chakra-ui/core";
+import FlagActionButton from "@components/@core/action-buttons/flag";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
+import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 import { Mq } from "mq-styled-components";
 import React from "react";
-import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
-
-import FlagActionButton from "@components/@core/action-buttons/flag";
 
 const ImageBox = styled.div`
   position: relative;

@@ -1,6 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/core";
 import React from "react";
-import Views from "./view/index";
+
+import Views from "./view";
 
 interface DocumentListPageProps {
   nextOffset: number;

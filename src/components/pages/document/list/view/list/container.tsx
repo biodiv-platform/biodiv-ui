@@ -5,9 +5,10 @@ import useTranslation from "@hooks/use-translation";
 import { actionTabs } from "@static/documnet-list";
 import { Mq } from "mq-styled-components";
 import React, { useState } from "react";
-import InfoTab from "./tabs/infotab";
+
 import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";
+import InfoTab from "./tabs/infotab";
 
 const VerticalTabs = styled.div`
   flex-grow: 1;

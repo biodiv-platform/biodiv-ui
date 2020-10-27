@@ -2,15 +2,15 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { DocumentData } from "@interfaces/custom";
 import { UserGroupIbp } from "@interfaces/document";
-import { axGetListData, axGetDocumentSpeciesGroups } from "@services/document.service";
+import { axGetDocumentSpeciesGroups, axGetListData } from "@services/document.service";
 import { axGroupList } from "@services/usergroup.service";
+import { axGetAllHabitat } from "@services/utility.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
-import { axGetAllHabitat } from "@services/utility.service";
 
 interface DocumentFilterContextProps {
   filter?;
