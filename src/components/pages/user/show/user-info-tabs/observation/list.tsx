@@ -11,7 +11,7 @@ export default function ObservationList({ icon, title, data, loadMore }) {
   const { t } = useTranslation();
 
   return (
-    <Box>
+    <Box mb={4}>
       <PageHeading size="md">
         {icon} {title} ({data.total})
       </PageHeading>

@@ -848,6 +848,7 @@
     "NEW_PASSWORD": "New Password",
     "NOTIFICATIONS": "Notifications",
     "OBSERVATIONS": {
+      "CHART": "Observations by Species Group",
       "IDENTIFIED": "Observations Identified",
       "LIFE_LIST": "Life List",
       "TITLE": "Observations",

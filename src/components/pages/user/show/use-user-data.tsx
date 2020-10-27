@@ -1,5 +1,6 @@
 import { axGetListData } from "@services/observation.service";
-import { useEffect } from "react";
+import SpeciesGroup from "@static/species-group";
+import { useEffect, useMemo } from "react";
 import { useImmer } from "use-immer";
 
 const defaultFilter = {
@@ -15,6 +16,7 @@ const useUserData = (userId, max = 16) => {
     offset: 0,
     total: 0,
     stats: {},
+    speciesData: {},
     hasStats: false
   });
 
@@ -25,8 +27,19 @@ const useUserData = (userId, max = 16) => {
     offset: 0,
     total: 0,
     stats: {},
+    speciesData: {},
     hasStats: false
   });
+
+  const speciesData = useMemo(
+    () =>
+      SpeciesGroup.map((k) => ({
+        group: k,
+        uploaded: uploadedObservations.speciesData[k] || 0,
+        identified: identifiedObservations.speciesData[k] || 0
+      })),
+    [uploadedObservations.speciesData, identifiedObservations.speciesData]
+  );
 
   const startLoading = (setter) => {
     setter((_draft) => {
@@ -44,6 +57,7 @@ const useUserData = (userId, max = 16) => {
       }
 
       if (setStats) {
+        _draft.speciesData = data?.aggregationData?.groupSpeciesName;
         _draft.offset = _draft.offset + max;
         _draft.hasStats = true;
         _draft.total = data.totalCount;
@@ -87,6 +101,8 @@ const useUserData = (userId, max = 16) => {
   }, []);
 
   return {
+    speciesData,
+
     uploadedObservations,
     loadMoreUploadedObservations,
 
