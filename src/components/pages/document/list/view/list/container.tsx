@@ -5,12 +5,9 @@ import useTranslation from "@hooks/use-translation";
 import { actionTabs } from "@static/documnet-list";
 import { Mq } from "mq-styled-components";
 import React, { useState } from "react";
-
-import ImageBoxComponent from "./image";
 import InfoTab from "./tabs/infotab";
 import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";
-import useGlobalState from "@hooks/use-global-state";
 
 const VerticalTabs = styled.div`
   flex-grow: 1;
@@ -24,7 +21,6 @@ const VerticalTabs = styled.div`
       > [role="tabpanel"] {
         padding: 0;
         height: 100%;
-        max-height: 18rem;
         overflow-y: auto;
         position: relative;
       }
@@ -91,7 +87,6 @@ const VerticalTabs = styled.div`
 export default function Container({ o }) {
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(0);
-  const { user } = useGlobalState();
 
   return (
     <Flex
@@ -101,19 +96,15 @@ export default function Container({ o }) {
       mb={4}
       overflow="hidden"
     >
-      <ImageBoxComponent
-        user={user}
-        flags={o.flag.map((item) => ({ flag: item, user: o.userIbp }))}
-        document={o.document}
-      />
       <VerticalTabs>
         <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
-          <TabPanels className="tab-content" position="relative">
+          <TabPanels height={["fit-content", "18rem"]} className="tab-content" position="relative">
             <TabPanel>
               <InfoTab
                 habitatIds={o.habitatIds}
                 specieIds={o.speciesGroupIds}
                 document={o.document}
+                flags={o.flag.map((item) => ({ flag: item, user: o.userIbp }))}
               />
             </TabPanel>
             <TabPanel>

@@ -14,7 +14,7 @@ export default function GroupsTab({ tabIndex, o }) {
     o.userGroupIbp[0]?.id ? (
       <>
         <BoxHeading>👥 {t("OBSERVATION.USERGROUPS")}</BoxHeading>
-        <Box p={4}>
+        <Box minHeight="18rem" p={4}>
           <GroupPost
             groups={loggedInUserGroups}
             selectedDefault={o.userGroupIbp.map((item) => ({
@@ -27,7 +27,7 @@ export default function GroupsTab({ tabIndex, o }) {
         </Box>
       </>
     ) : (
-      <Box p={4}>{t("OBSERVATION.NO_CUSTOM_FIELD")}</Box>
+      <Box p={4}>{t("DOCUMENT.NO_USERGROUP")}</Box>
     )
   ) : null;
 }

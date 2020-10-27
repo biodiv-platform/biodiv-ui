@@ -5,7 +5,6 @@ import { Mq } from "mq-styled-components";
 import React from "react";
 import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 
-import ShadowedUser from "@components/pages/common/shadowed-user";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 
 const ImageBox = styled.div`
@@ -80,8 +79,6 @@ export default function ImageBoxComponent({ document, user, flags }) {
             </Text>
           </Link>
         </LocalLink>
-
-        <ShadowedUser user={user} />
       </Flex>
     </ImageBox>
   );
