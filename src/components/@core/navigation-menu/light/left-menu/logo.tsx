@@ -30,7 +30,7 @@ const Logo = styled.div`
     line-height: 1.2rem;
     img {
       height: 3.75rem;
-      max-width: 8rem;
+      width: 8rem;
       object-fit: contain;
     }
   }

@@ -1,3 +1,6 @@
+import "tinymce/skins/ui/oxide/content.min.css";
+import "tinymce/skins/ui/oxide/skin.min.css";
+
 import "tinymce/tinymce";
 import "tinymce/icons/default";
 import "tinymce/plugins/code";
@@ -13,7 +16,6 @@ import CheckIcon from "@icons/check";
 import { axSaveLandscapeField, axUploadEditorResource } from "@services/landscape.service";
 import { Editor } from "@tinymce/tinymce-react";
 import notification, { NotificationType } from "@utils/notification";
-import Head from "next/head";
 import React, { useState } from "react";
 
 export default function FieldEditor({ initialContent, id, onChange, onClose }) {
@@ -37,13 +39,6 @@ export default function FieldEditor({ initialContent, id, onChange, onClose }) {
 
   return (
     <>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/tinymce@5.4.1/skins/ui/oxide/content.min.css"
-        />
-        <link rel="stylesheet" href="https://unpkg.com/tinymce@5.4.1/skins/ui/oxide/skin.min.css" />
-      </Head>
       <Editor
         value={content}
         init={{
