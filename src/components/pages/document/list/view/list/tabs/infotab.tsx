@@ -1,17 +1,30 @@
-import React from "react";
-import { Box, Heading, Text, Link, Avatar, Flex, Badge, Stack } from "@chakra-ui/core";
+import {
+  Avatar,
+  Badge,
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Link,
+  SimpleGrid,
+  Stack,
+  Text
+} from "@chakra-ui/core";
+import FlagActionButton from "@components/@core/action-buttons/flag";
+import LocalLink from "@components/@core/local-link";
 import FilterIconsList from "@components/pages/document/common/filter-list-icon";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
-import useTranslation from "@hooks/use-translation";
-import PeopleIcon from "@icons/people";
-import Grid from "@icons/grid";
-import FeedBackIcon from "@icons/feedback";
-import FlagActionButton from "@components/@core/action-buttons/flag";
-import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
-
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
+import CalendarIcon from "@icons/calendar";
+import Grid from "@icons/grid";
+import LocationIcon from "@icons/location";
+import LockIcon from "@icons/lock";
+import PeopleIcon from "@icons/people";
+import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
+import { formatDateReadable } from "@utils/date";
 import { getUserImage } from "@utils/media";
-import PDFIcon from "@icons/pdf";
+import React from "react";
 
 export default function InfoTab({ document, habitatIds, specieIds, flags }) {
   const { t } = useTranslation();
@@ -27,25 +40,43 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
       justifyContent="space-between"
     >
       <Stack ml={4}>
-        <Heading size="md" title={document?.title}>
-          <Flex justifyContent="flex-start" alignItems="center">
-            <PDFIcon m={2} width="2em" height="2em" color="red.500" />
-            <Text m={2}>
-              {document?.title || t("OBSERVATION.UNKNOWN")}
-              <Badge ml={2} colorScheme="red">
-                {document.item_type}
-              </Badge>
-              <FlagActionButton
-                resourceId={document.id}
-                resourceType="document"
-                initialFlags={flags}
-                userId={user.id}
-                flagFunc={axFlagDocument}
-                unFlagFunc={axUnFlagDocument}
-              />
+        <LocalLink href={`/document/show/${document.id}`}>
+          <a>
+            <Heading size="sm" title={document?.title}>
+              <Flex justifyContent="flex-start" alignItems="center">
+                <Image boxSize="3rem" src="/next-assets/google-docs.svg" />
+                <Text m={2}>
+                  {document?.title || t("OBSERVATION.UNKNOWN")}
+                  <Badge ml={2} colorScheme="red">
+                    {document.item_type}
+                  </Badge>
+                  <FlagActionButton
+                    resourceId={document.id}
+                    resourceType="document"
+                    initialFlags={flags}
+                    userId={user.id}
+                    flagFunc={axFlagDocument}
+                    unFlagFunc={axUnFlagDocument}
+                  />
+                </Text>
+              </Flex>
+            </Heading>
+          </a>
+        </LocalLink>
+        <Flex justifyContent="flex-start">
+          {document?.author && (
+            <Text mr={2} title="Author">
+              <PeopleIcon mb={1} mr={2} /> {document.author}
             </Text>
-          </Flex>
-        </Heading>
+          )}
+
+          {document.created_on && (
+            <Text title="Date">
+              <CalendarIcon mb={1} mr={2} />
+              {formatDateReadable(document.created_on)}
+            </Text>
+          )}
+        </Flex>
         {document?.notes && (
           <Box>
             <Text title="Abstract">
@@ -53,27 +84,29 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
             </Text>
           </Box>
         )}
-        {document?.attribution && (
-          <Box>
-            <Text title="Attribution">
-              <FeedBackIcon /> {document.attribution.substring(0, 140)}
-            </Text>
-          </Box>
-        )}
       </Stack>
       <Flex justifyContent="space-between" m={4} alignItems="center">
-        <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
-          <Flex alignItems="flex-end">
-            <Avatar
-              mr={2}
-              flexShrink={0}
-              size="sm"
-              name={user?.name}
-              src={getUserImage(user?.profilePic)}
-            />
-            <Text>{user?.name}</Text>
-          </Flex>
-        </Link>
+        <SimpleGrid columns={[1, 2, 2]}>
+          <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
+            <Flex alignItems="flex-end">
+              <Avatar
+                mr={2}
+                flexShrink={0}
+                size="sm"
+                name={user?.name}
+                src={getUserImage(user?.profilePic)}
+              />
+              <Text>{user?.name}</Text>
+            </Flex>
+          </Link>
+          {document.publisher && (
+            <Text title="Publisher">
+              <LockIcon mb={1} m={3} />
+              {document.publisher}
+            </Text>
+          )}
+        </SimpleGrid>
+
         <Flex>
           {habitatIds[0] !== null && habitats && (
             <FilterIconsList
@@ -88,7 +121,7 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
             <FilterIconsList
               title={t("GROUP.SPECIES_COVERAGE")}
               type="species"
-              icon={<PeopleIcon />}
+              icon={<LocationIcon />}
               filterIds={specieIds}
               filterList={species}
             />

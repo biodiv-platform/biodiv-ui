@@ -99,7 +99,7 @@ export default function Container({ o }) {
     >
       <VerticalTabs>
         <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
-          <TabPanels height={["fit-content", "18rem"]} className="tab-content" position="relative">
+          <TabPanels height={["fit-content", "15rem"]} className="tab-content" position="relative">
             <TabPanel>
               <InfoTab
                 habitatIds={o.habitatIds}
@@ -116,15 +116,19 @@ export default function Container({ o }) {
             </TabPanel>
           </TabPanels>
           <TabList>
-            {actionTabs.map(({ name, icon }) => (
-              <Tab key={name}>
-                <Tooltip title={t(name)}>
-                  <div>
-                    {icon} <span>{t(name)}</span>
-                  </div>
-                </Tooltip>
-              </Tab>
-            ))}
+            {actionTabs.map(({ name, active, icon }) => {
+              return (
+                active && (
+                  <Tab key={name}>
+                    <Tooltip title={t(name)}>
+                      <div>
+                        {icon} <span>{t(name)}</span>
+                      </div>
+                    </Tooltip>
+                  </Tab>
+                )
+              );
+            })}
           </TabList>
         </Tabs>
       </VerticalTabs>

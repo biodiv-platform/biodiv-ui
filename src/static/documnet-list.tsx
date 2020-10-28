@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
 import React from "react";
@@ -38,14 +39,17 @@ export const sortByOptions = [
 export const actionTabs = [
   {
     name: "OBSERVATION.INFORMATION",
+    active: true,
     icon: "ℹ️"
   },
   {
     name: "OBSERVATION.USERGROUPS",
+    active: SITE_CONFIG.DOCUMENT.SHOW_USERGROUP,
     icon: "👥"
   },
   {
     name: "OBSERVATION.COMMENTS.TITLE",
+    active: true,
     icon: "💬"
   }
 ];
