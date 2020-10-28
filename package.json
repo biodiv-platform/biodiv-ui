@@ -35,7 +35,6 @@
     "dayjs": "^1.9.1",
     "debounce-promise": "^3.1.2",
     "dmsformat": "^1.1.4",
-    "easy-peasy": "^3.3.1",
     "embla-carousel": "^4.0.5",
     "flat": "^5.0.2",
     "friendly-http-status": "^1.0.0",

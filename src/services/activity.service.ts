@@ -17,7 +17,6 @@ export const axListActivity = async (
       success: true,
       data: res.data.activity,
       offset: offset + res.data.activity.length,
-      reset: offset === 0,
       hasMore: res.data.activity.length === limit,
       commentCount: res.data.commentCount
     };

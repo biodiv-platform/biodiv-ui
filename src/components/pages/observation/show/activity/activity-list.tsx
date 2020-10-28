@@ -3,26 +3,23 @@ import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import Tooltip from "@components/@core/tooltip";
 import Badge from "@components/@core/user/badge";
+import useActivity from "@hooks/use-activity";
 import useTranslation from "@hooks/use-translation";
-import { ShowActivityIbp } from "@interfaces/activity";
 import { ACTIVITY_UPDATED } from "@static/events";
-import { useActivityStore } from "@stores/activity.store";
 import { toKey } from "@utils/basic";
 import { formatTimeStampFromUTC, timeAgoUTC } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import React, { useEffect } from "react";
 import { useListener } from "react-gbus";
 
-import LinkTag from "../../common/link-tag";
-import ACTIVITY_TYPE from "./activity-types";
-import CommentRender from "./comment-render";
+import ContentBox from "./content-box";
 
 export default function ActivityList({ resourceId, resourceType, title = "OBSERVATION.ACTIVITY" }) {
-  const [state, actions] = useActivityStore();
   const { t } = useTranslation();
+  const activity = useActivity();
 
   const loadActivity = (reset) => {
-    actions.listActivity({ objectType: resourceType, objectId: resourceId, reset });
+    activity.loadMore(resourceType, resourceId, reset);
   };
 
   useEffect(() => {
@@ -44,83 +41,12 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
     </Text>
   );
 
-  const ActivityBoxContent = ({ a }: { a: ShowActivityIbp }) => {
-    const at = a.activityIbp.activityType;
-
-    switch (at) {
-      case ACTIVITY_TYPE.ADDED_A_COMMENT:
-        return <CommentRender html={a?.commentsIbp?.body} />;
-
-      case ACTIVITY_TYPE.POSTED_RESOURCE:
-      case ACTIVITY_TYPE.REMOVED_RESORUCE:
-      case ACTIVITY_TYPE.FEATURED:
-      case ACTIVITY_TYPE.UNFEATURED:
-        const ad1 = JSON.parse(a.activityIbp?.activityDescription);
-        return (
-          <Box>
-            <BlueLink href={ad1?.webAddress}>{ad1?.userGroupName}</BlueLink>
-            {at !== ACTIVITY_TYPE.UNFEATURED && <Text as="p">{ad1?.featured}</Text>}
-          </Box>
-        );
-
-      case ACTIVITY_TYPE.SUGGESTED_SPECIES_NAME:
-      case ACTIVITY_TYPE.SUGGESTION_REMOVED:
-      case ACTIVITY_TYPE.AGREED_ON_SPECIES_NAME:
-      case ACTIVITY_TYPE.OBV_LOCKED:
-      case ACTIVITY_TYPE.OBV_UNLOCKED:
-        const ad2 = JSON.parse(a.activityIbp?.activityDescription);
-        const link = ad2?.speciesId ? `/species/show/${ad2?.speciesId}` : null;
-        const content = (
-          <>
-            {ad2?.scientificName} {ad2?.commonName && `(${ad2?.commonName})`}
-          </>
-        );
-        return (
-          <Box>
-            {link ? <BlueLink href={link}>{content}</BlueLink> : content}
-            {ad2?.givenName && <Text as="p">Given name is {ad2.givenName}</Text>}
-          </Box>
-        );
-
-      case ACTIVITY_TYPE.DOCUMENT_TAG_UPDATED:
-      case ACTIVITY_TYPE.OBSERVATION_TAG_UPDATED:
-        const tags = a.activityIbp?.activityDescription.split(",") || [];
-        return (
-          <Box mt={2}>
-            {tags.map((tag) => (
-              <LinkTag key={tag} label={tag} />
-            ))}
-          </Box>
-        );
-
-      case ACTIVITY_TYPE.FLAGGED:
-      case ACTIVITY_TYPE.FLAG_REMOVED:
-        const desc = a?.activityIbp?.activityDescription;
-        const [flagType, flagInfo] = desc.split(":");
-        return (
-          <Box>
-            {t(`ACTIONS.FLAG.FLAGS.${flagType}`)}: {flagInfo}
-          </Box>
-        );
-
-      case ACTIVITY_TYPE.RATED_MEDIA_RESOURCE:
-        return <></>;
-
-      default:
-        return (
-          <Box>
-            <Box>{a?.activityIbp?.activityDescription}</Box>
-          </Box>
-        );
-    }
-  };
-
   return (
     <>
-      <BoxHeading subTitle={`${state.commentCount} ${t("OBSERVATION.COMMENTS.TITLE")}`}>
+      <BoxHeading subTitle={`${activity.data.commentCount} ${t("OBSERVATION.COMMENTS.TITLE")}`}>
         🕒 {t(title)}
       </BoxHeading>
-      {state.activity.map((a, index) => (
+      {activity.data.list.map((a, index) => (
         <Stack
           key={index}
           isInline={true}
@@ -136,7 +62,7 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
               {a.userIbp.name} <Badge isAdmin={a.userIbp.isAdmin} />
             </BlueLink>
             <ActivityType type={a.activityIbp.activityType} />
-            <ActivityBoxContent a={a} />
+            <ContentBox activity={a} />
             <Box>
               <Tooltip title={formatTimeStampFromUTC(a.activityIbp.lastUpdated)} hasArrow={true}>
                 <Text color="gray.600" as="small">
@@ -147,8 +73,13 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
           </Box>
         </Stack>
       ))}
-      {state.hasMore && (
-        <Button w="full" rounded={0} onClick={() => loadActivity(false)}>
+      {activity.data.hasMore && (
+        <Button
+          w="full"
+          rounded={0}
+          isLoading={activity.isLoading}
+          onClick={() => loadActivity(false)}
+        >
           {t("OBSERVATION.LOAD_MORE_ACTIVITY")}
         </Button>
       )}
