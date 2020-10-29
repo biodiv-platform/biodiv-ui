@@ -16,17 +16,36 @@ const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>
 );
 
-export default function ClusterMap({ speciesId, latitude, longitude, colorHex = "E53E3E" }) {
+interface ClusterMapProps {
+  filter;
+  latitude;
+  longitude;
+  colorHex?;
+  borderRadius?;
+}
+
+export default function ClusterMap({
+  filter,
+  latitude,
+  longitude,
+  colorHex = "E53E3E",
+  borderRadius = "md"
+}: ClusterMapProps) {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
 
   return (
-    <Box h="422px" borderRadius="md" overflow="hidden" className="gray-box fadeInUp delay-5" mb={2}>
+    <Box
+      h="422px"
+      borderRadius={borderRadius}
+      overflow="hidden"
+      className="gray-box fadeInUp delay-5"
+    >
       <LazyLoad height={422} once={true}>
         <Naksha
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           viewPort={defaultViewPort}
           layers={
-            speciesId
+            filter
               ? [
                   {
                     id: "species-observations",
@@ -40,7 +59,7 @@ export default function ClusterMap({ speciesId, latitude, longitude, colorHex = 
                       index: "extended_observation",
                       type: "extended_records",
                       geoField: "location",
-                      speciesId: speciesId
+                      ...filter
                     },
                     onHover: onObservationGridHover,
                     onClick: onObservationGridClick

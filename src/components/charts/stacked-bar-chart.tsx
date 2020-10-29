@@ -25,11 +25,11 @@ interface StackedBarChartProps {
 }
 
 export default function StackedBarChart({
-  h = 360,
+  h = 400,
 
   mt = 10,
   mr = 0,
-  mb = 45,
+  mb = 60,
   ml = 36,
 
   barPadding = 0.2,
