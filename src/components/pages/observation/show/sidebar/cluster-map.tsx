@@ -7,7 +7,13 @@ import dynamic from "next/dynamic";
 import React from "react";
 import LazyLoad from "react-lazyload";
 
-const Naksha = dynamic(() => import("naksha-components-react"), { ssr: false });
+const Naksha: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.default),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 // TODO: observation map on click component
 const onObservationGridClick = () => <Box maxH="250px" overflow="auto" fontSize="sm"></Box>;

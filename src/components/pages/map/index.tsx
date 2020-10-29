@@ -2,8 +2,16 @@ import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
-import Naksha from "naksha-components-react";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const Naksha: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.default),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);

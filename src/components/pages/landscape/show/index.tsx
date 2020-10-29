@@ -3,12 +3,20 @@ import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Landscape } from "@interfaces/landscape";
 import { getMapCenter } from "@utils/location";
-import { Previewer } from "naksha-components-react";
+import dynamic from "next/dynamic";
 import React from "react";
 import wkt from "wkt";
 
 import DownloadLandscape from "./download";
 import LandscapeFields from "./fields";
+
+const Previewer: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.Previewer),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 interface LandscapeShowComponentProps {
   landscape: Landscape;

@@ -2,10 +2,18 @@ import { Box } from "@chakra-ui/core";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import SITE_CONFIG from "@configs/site-config.json";
 import { getMapCenter, stringToFeature } from "@utils/location";
-import { MapAreaDraw } from "naksha-components-react";
+import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 
 const FILTER_NAME = "location";
+
+const MapAreaDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.MapAreaDraw),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 export default function MapDrawContainer() {
   const { filter, addFilter, removeFilter } = useObservationFilter();
