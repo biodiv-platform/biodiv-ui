@@ -44,7 +44,7 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
           <a>
             <Heading size="sm" title={document?.title}>
               <Flex justifyContent="flex-start" alignItems="center">
-                <Image boxSize="3rem" src="/next-assets/google-docs.svg" />
+                <Image boxSize="3rem" src="/next-assets/document.svg" />
                 <Text m={2}>
                   {document?.title || t("OBSERVATION.UNKNOWN")}
                   <Badge ml={2} colorScheme="red">

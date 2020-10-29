@@ -44,7 +44,7 @@ export const actionTabs = [
   },
   {
     name: "OBSERVATION.USERGROUPS",
-    active: SITE_CONFIG.DOCUMENT.SHOW_USERGROUP,
+    active: SITE_CONFIG.USERGROUP.ACTIVE,
     icon: "👥"
   },
   {
