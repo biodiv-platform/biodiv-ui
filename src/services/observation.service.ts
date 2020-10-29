@@ -416,3 +416,17 @@ export const axDownloadFilteredObservations = async (params) => {
     return { success: false };
   }
 };
+
+export const axGetUserLifeList = async (userId, type, params) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/userinfo/${type}/${userId}`,
+      {
+        params
+      }
+    );
+    return { success: true, data };
+  } catch (err) {
+    return { success: false, data: [] };
+  }
+};

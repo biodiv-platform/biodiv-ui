@@ -2,7 +2,7 @@ import { ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
 import axios from "axios";
-import { stringify } from "query-string";
+import { stringify } from "querystring";
 
 /**
  * Acquires initial tokens against provided credentials

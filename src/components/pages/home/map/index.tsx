@@ -9,10 +9,12 @@ export default function MapContainer() {
   const isOnline = useOnlineStatus();
 
   return (
-    <LazyLoad height="500" once={true}>
-      <Box h="500px" bg="gray.100" borderRadius="lg" className="fadeInUp" mb={10} overflow="hidden">
-        {isOnline ? <Map /> : null}
-      </Box>
-    </LazyLoad>
+    <Box mb={10}>
+      <LazyLoad height="500" once={true}>
+        <Box h="500px" bg="gray.100" borderRadius="lg" className="fade" overflow="hidden">
+          {isOnline && <Map />}
+        </Box>
+      </LazyLoad>
+    </Box>
   );
 }

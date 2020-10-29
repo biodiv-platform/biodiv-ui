@@ -23,7 +23,7 @@ export default function GeoJSONPreview({
 }: GeoJSONPreviewProps) {
   const defaultViewPort = React.useMemo(() => getMapCenter(zoom || 2.8, maxZoom), []);
   return (
-    <Box position="relative" h={h} overflow="hidden" mb={mb}>
+    <Box position="relative" h={h} overflow="hidden" mb={mb} borderRadius="md">
       <Previewer
         defaultViewPort={defaultViewPort}
         data={data}

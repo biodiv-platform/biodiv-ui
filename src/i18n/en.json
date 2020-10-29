@@ -595,6 +595,7 @@
       "MAP": "Map"
     }
   },
+  "LOAD_MORE": "Load More ↺",
   "LOADING": "Loading...",
   "NEXT": "Next",
   "NOTIFICATIONS": {
@@ -836,6 +837,7 @@
     "GENDER": "Gender",
     "HIDE_EMAIL": "Hide Email",
     "IDENTIFICATION_MAIL": "Allow other users to notify me",
+    "IDENTIFIED": "Identified",
     "INSTITUTION": "Institution",
     "JOINED": "Joined",
     "LAST_ACTIVE": "Last Active",
@@ -849,10 +851,8 @@
     "NOTIFICATIONS": "Notifications",
     "OBSERVATIONS": {
       "CHART": "Observations by Species Group",
-      "IDENTIFIED": "Observations Identified",
       "LIFE_LIST": "Life List",
-      "TITLE": "Observations",
-      "UPLOADED": "Observations Uploaded"
+      "TITLE": "Observations"
     },
     "OCCUPATION": "Profession",
     "PASSWORD": "Password",
@@ -868,8 +868,10 @@
     "UPDATE_PASSWORD": "Update Password",
     "UPDATED": "Updated Successfully",
     "UPLOAD_PHOTO": "Upload a photo",
+    "UPLOADED": "Uploaded",
     "USERNAME": "Username",
     "VERIFY_THROUGH": "Since you have provided email and mobile number both how would you like to verify your account?",
-    "WEBSITE": "Website"
+    "WEBSITE": "Website",
+    "WITH_MEDIA": "With Media"
   }
 }

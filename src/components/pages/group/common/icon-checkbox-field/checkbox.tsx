@@ -20,7 +20,7 @@ const CustomCheckBox = (props: any) => {
       <input {...getInputProps()} />
       <Box
         {...getCheckboxProps()}
-        p={2}
+        p={1}
         cursor="pointer"
         borderWidth="2px"
         borderRadius="md"
@@ -53,7 +53,7 @@ const CheckBoxItems = ({ options, type, onChange, defaultValue }: ITraitInputPro
           <CustomCheckBox key={o.id} {...getCheckboxProps({ value: o.id.toString() })}>
             <Tooltip title={o.name} placement="top" hasArrow={true}>
               <Image
-                boxSize="3rem"
+                boxSize="2.6rem"
                 ignoreFallback={true}
                 loading="lazy"
                 src={getLocalIcon(o.name, type)}

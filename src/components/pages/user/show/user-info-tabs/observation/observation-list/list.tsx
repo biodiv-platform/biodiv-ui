@@ -1,5 +1,4 @@
 import { AspectRatio, Box, Button, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/core";
-import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@hooks/use-translation";
@@ -7,14 +6,14 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getObservationImage, getSpeciesIcon } from "@utils/media";
 import React from "react";
 
-export default function ObservationList({ icon, title, data, loadMore }) {
+export default function ObservationList({ title, data, loadMore }) {
   const { t } = useTranslation();
 
   return (
     <Box mb={4}>
-      <PageHeading size="md">
-        {icon} {title} ({data.total})
-      </PageHeading>
+      <Box fontWeight="bold" mb={2}>
+        {title} ({data.total})
+      </Box>
       <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} spacing={4}>
         {data.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN");
@@ -52,7 +51,7 @@ export default function ObservationList({ icon, title, data, loadMore }) {
         className="fade"
         isLoading={data.isLoading}
         onClick={loadMore}
-        my={4}
+        mt={4}
       >
         {t("OBSERVATION.LOAD_MORE_OBSERVATIONS")}
       </Button>
