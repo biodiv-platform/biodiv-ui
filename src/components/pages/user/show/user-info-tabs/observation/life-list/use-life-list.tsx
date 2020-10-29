@@ -1,7 +1,8 @@
 import { axGetspeciesGroups, axGetUserLifeList } from "@services/observation.service";
-import { PAGINATION_LIMIT } from "@static/constants";
 import { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
+
+const LIFE_LIST_LIMIT = 10;
 
 export default function useLifeList(userId) {
   const [speciesGroups, setSpeciesGroups] = useState([]);
@@ -45,8 +46,8 @@ export default function useLifeList(userId) {
         } else {
           _draft.list.push(...data.uniqueSpeciesInfos);
         }
-        _draft.hasMore = data.length === PAGINATION_LIMIT;
-        _draft.offset = _draft.offset + PAGINATION_LIMIT;
+        _draft.hasMore = data.length === LIFE_LIST_LIMIT;
+        _draft.offset = _draft.offset + LIFE_LIST_LIMIT;
         _draft.isLoading = false;
       });
     } else {

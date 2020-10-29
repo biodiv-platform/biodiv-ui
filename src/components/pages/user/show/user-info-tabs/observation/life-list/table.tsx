@@ -8,7 +8,7 @@ const Table = styled.table`
   tr {
     border-top: 1px solid var(--gray-300);
   }
-  td:first-child {
+  td:first-of-type {
     border-left: 0;
   }
 `;
@@ -26,7 +26,7 @@ const LifeListTable = ({ data, loadMore, title, extraParams }) => {
         <Table className="table">
           <tbody>
             {data.list.map((o) => (
-              <tr key={o.speciesId} className="fade">
+              <tr key={`${o.speciesId}-${o.maxVotedRecoId}-${o.taxonId}`} className="fade">
                 <td>
                   <ExternalBlueLink href={`/species/show/${o.speciesId}`}>
                     {o.name}

@@ -21,7 +21,9 @@ export default function UserInfoSidebar({ user }: UserProfileProps) {
     <div>
       <Flex flexDirection={{ base: "row", md: "column" }} mb={4}>
         <AspectRatio ratio={1} mb={{ md: 4 }} boxSize={{ base: "4rem", md: "auto" }} flexShrink={0}>
-          <Avatar position="absolute" boxSize="full" src={userImage} name={user.name} />
+          <div>
+            <Avatar position="absolute" boxSize="full" src={userImage} name={user.name} />
+          </div>
         </AspectRatio>
         <Box pl={{ base: 4, md: 0 }} wordBreak="break-word">
           <Heading as="h1" fontSize="2xl">
