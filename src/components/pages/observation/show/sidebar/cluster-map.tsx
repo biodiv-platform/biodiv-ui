@@ -45,6 +45,7 @@ export default function ClusterMap({
       borderRadius={borderRadius}
       overflow="hidden"
       className="gray-box fadeInUp delay-5"
+      display="block"
     >
       <LazyLoad height={422} once={true}>
         <Naksha

@@ -20,7 +20,7 @@ export default function UserEditTabs({ user, isAdmin }) {
             <Tab>🔔 {t("USER.NOTIFICATIONS")}</Tab>
             {isAdmin && <Tab>🛡️ {t("USER.PERMISSIONS")}</Tab>}
           </TabList>
-          <TabPanels p={4}>
+          <TabPanels>
             <TabPanel>
               <UserAboutTab user={user} isAdmin={isAdmin} />
             </TabPanel>

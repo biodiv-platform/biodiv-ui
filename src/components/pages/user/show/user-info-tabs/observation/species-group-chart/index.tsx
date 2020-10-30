@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/core";
-import { PageHeading } from "@components/@core/layout";
+import BoxHeading from "@components/@core/layout/box-heading";
 import StackedBarChart from "@components/charts/stacked-bar-chart";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
@@ -10,14 +10,16 @@ export default function SpeciesGroupChart({ data }) {
   const { t } = useTranslation();
 
   return (
-    <Box className="white-box" p={4}>
-      <PageHeading size="md">📊 {t("USER.OBSERVATIONS.CHART")}</PageHeading>
-      <StackedBarChart
-        data={data}
-        meta={ChartMeta}
-        tooltipRenderer={TooltipRenderer}
-        rotateLabels={true}
-      />
+    <Box className="white-box">
+      <BoxHeading>📊 {t("USER.OBSERVATIONS.CHART")}</BoxHeading>
+      <Box p={4}>
+        <StackedBarChart
+          data={data}
+          meta={ChartMeta}
+          tooltipRenderer={TooltipRenderer}
+          rotateLabels={true}
+        />
+      </Box>
     </Box>
   );
 }

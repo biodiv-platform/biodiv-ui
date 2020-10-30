@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/core";
-import { PageHeading } from "@components/@core/layout";
+import BoxHeading from "@components/@core/layout/box-heading";
 import ClusterMap from "@components/pages/observation/show/sidebar/cluster-map";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
@@ -10,9 +10,7 @@ export default function UserObservationsMap({ userId }) {
 
   return (
     <Box className="white-box">
-      <PageHeading size="md" p={4} pb={0}>
-        🗺️ {t("USER.OBSERVATIONS.MAP")}
-      </PageHeading>
+      <BoxHeading>🗺️ {t("USER.OBSERVATIONS.MAP")}</BoxHeading>
       <ClusterMap
         filter={{ userId }}
         latitude={SITE_CONFIG.MAP.CENTER.latitude}

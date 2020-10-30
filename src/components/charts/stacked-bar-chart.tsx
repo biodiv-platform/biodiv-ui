@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from "react";
 
 import useResizeObserver from "./hooks/use-resize-observer";
 import { tooltipHelpers, useTooltip } from "./hooks/use-tooltip";
+import Legend from "./legend";
 
 interface StackedBarChartProps {
   h?: number;
@@ -25,7 +26,7 @@ interface StackedBarChartProps {
 }
 
 export default function StackedBarChart({
-  h = 400,
+  h = 360,
 
   mt = 10,
   mr = 0,
@@ -130,6 +131,7 @@ export default function StackedBarChart({
         </g>
       </svg>
       <div className="tooltip" />
+      <Legend keys={subGroupKeys} colors={subGroupColors} />
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import { Box, Button, Skeleton } from "@chakra-ui/core";
 import ExternalBlueLink from "@components/@core/blue-link/external";
+import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 const Table = styled.table`
   tr {
-    border-top: 1px solid var(--gray-300);
+    border-bottom: 1px solid var(--gray-300);
   }
   td:first-of-type {
     border-left: 0;
@@ -17,11 +18,10 @@ const LifeListTable = ({ data, loadMore, title, extraParams }) => {
   const { t } = useTranslation();
 
   return data.list.length > 0 ? (
-    <Box border="1px solid" borderColor="gray.300" borderRadius="md">
-      <Box fontWeight="bold" p={2} bg="gray.100">
+    <Box className="white-box">
+      <BoxHeading p={2} fontSize="md">
         {title} ({data.total})
-      </Box>
-
+      </BoxHeading>
       <Box w="full" overflowY="auto" h={370}>
         <Table className="table">
           <tbody>
