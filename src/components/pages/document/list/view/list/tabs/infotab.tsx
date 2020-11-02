@@ -9,6 +9,7 @@ import CalendarIcon from "@icons/calendar";
 import Grid from "@icons/grid";
 import LocationIcon from "@icons/location";
 import LockIcon from "@icons/lock";
+import Feedback from "@icons/feedback";
 import PeopleIcon from "@icons/people";
 import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 import { getUserImage } from "@utils/media";
@@ -53,48 +54,38 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
       <Stack>
         <Stack ml={2} justifyContent="center">
           {document?.author && (
-            <Text isTruncated maxWidth="300px" mr={2} title="Author">
-              <PeopleIcon mb={1} mr={2} /> {document.author}
+            <Text isTruncated maxWidth="600px" title="Author">
+              <PeopleIcon mb={1} mr={3} /> {document.author}
             </Text>
           )}
-
-          {document.created_on && (
-            <Text title="Date">
-              <CalendarIcon mb={1} mr={2} />
-              {document.year}
-            </Text>
-          )}
+          <Stack isInline>
+            {document.year && (
+              <Text title="Date">
+                <CalendarIcon mb={1} mr={4} />
+                {document.year}
+              </Text>
+            )}
+            {document.journal && (
+              <Text title="journal">
+                <LockIcon m={2} />
+                {document.journal}
+              </Text>
+            )}
+          </Stack>
 
           {document?.notes && (
-            <Box>
-              <Text isTruncated maxWidth="300px" title="Abstract">
-                {document?.notes?.replace(/<[^>]*>?/gm, "")}
+            <Stack isInline alignItems="baseline">
+              <Text title="Abstract">
+                <Feedback mb={1} mr={2} />
               </Text>
-            </Box>
+              <Box>
+                {document?.notes?.replace(/<[^>]*(>|$)|&nbsp;|&gt;/g, "").substring(0, 400)}
+              </Box>
+            </Stack>
           )}
         </Stack>
 
         <Flex justifyContent="space-between" alignItems="center">
-          <Stack isInline spacing={5} align="center">
-            <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
-              <Flex alignItems="center">
-                <Avatar
-                  m={1}
-                  flexShrink={0}
-                  size="sm"
-                  name={user?.name}
-                  src={getUserImage(user?.profilePic)}
-                />
-                <Text>{user?.name}</Text>
-              </Flex>
-            </Link>
-            {document.publisher && (
-              <Text title="Publisher">
-                <LockIcon m={2} />
-                {document.publisher}
-              </Text>
-            )}
-          </Stack>
           <Stack isInline spacing={5} align="center">
             {habitatIds[0] !== null && habitats && (
               <FilterIconsList
@@ -114,6 +105,20 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
                 filterList={species}
               />
             )}
+          </Stack>
+          <Stack isInline mr={4} spacing={5} align="center">
+            <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
+              <Flex alignItems="center">
+                <Avatar
+                  m={1}
+                  flexShrink={0}
+                  size="sm"
+                  name={user?.name}
+                  src={getUserImage(user?.profilePic)}
+                />
+                <Text>{user?.name}</Text>
+              </Flex>
+            </Link>
           </Stack>
         </Flex>
       </Stack>

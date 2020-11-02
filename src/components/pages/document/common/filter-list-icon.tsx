@@ -11,9 +11,10 @@ export default function FilterIconList({ filterIds, filterList, title, type, ico
   return (
     <Box ml={2}>
       <Stack isInline={true}>
-        <span>
-          <Text title={title}>{icon}</Text>
-        </span>
+        <Text mr={1} title={title}>
+          {icon}
+        </Text>
+
         {filters.map(({ name, id }) => (
           <Box key={id}>
             <Tooltip aria-label={name} label={name} placement="top" hasArrow={true}>
