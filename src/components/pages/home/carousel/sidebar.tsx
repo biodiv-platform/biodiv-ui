@@ -2,34 +2,34 @@ import { Center, Heading, Link, Text } from "@chakra-ui/core";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BlurBox from "@components/@core/blur-box";
 import useTranslation from "@hooks/use-translation";
-import { GallerySlider } from "@interfaces/utility";
-import { getObservationThumbnail } from "@utils/media";
+import { RESOURCE_SIZE } from "@static/constants";
+import { getObservationImage } from "@utils/media";
 import React from "react";
 
-interface ISidebarProps {
-  featured: GallerySlider[];
-  slideIndex;
-}
-
-export default function SideBar({ featured, slideIndex }: ISidebarProps) {
+export default function Sidebar({ resource }) {
   const { t } = useTranslation();
-  const { fileName, title, customDescripition, moreLinks } = featured[slideIndex];
 
   return (
     <BlurBox
-      bg={getObservationThumbnail(fileName, 500)}
-      fallbackColor="linear-gradient(to bottom, var(--gray-800), var(--gray-900))"
+      bg={getObservationImage(resource?.fileName, RESOURCE_SIZE.PREVIEW)}
+      fallbackColor="var(--gray-800)"
     >
-      <Center p={{ base: 4, md: 10 }} h="full">
+      <Center h="full" p={{ base: 6, lg: 8 }}>
         <div>
-          <Heading as="h1" fontWeight={500} mb={4}>
-            {title}
+          <Heading
+            as="h1"
+            fontWeight={500}
+            mb={2}
+            fontSize={{ base: "1.2rem", lg: "2.2rem" }}
+            lineHeight="1.3em"
+          >
+            {resource.title}
           </Heading>
-          <Text fontSize="lg" mb={4} maxH="20rem" overflow="auto">
-            {customDescripition}
+          <Text fontSize={{ md: "sm", lg: "lg" }} mb={4} maxH="14rem" overflow="auto">
+            {resource.customDescripition}
           </Text>
-          {moreLinks && (
-            <Link fontSize="xl" href={moreLinks}>
+          {resource.moreLinks && (
+            <Link href={resource.moreLinks}>
               {t("HOME.BANNER_MORE")} <ArrowForwardIcon />
             </Link>
           )}

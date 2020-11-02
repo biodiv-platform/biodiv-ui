@@ -1,67 +1,46 @@
-import styled from "@emotion/styled";
-import { GallerySlider } from "@interfaces/utility";
-import { Mq } from "mq-styled-components";
-import React, { useState } from "react";
+import "keen-slider/keen-slider.min.css";
 
-import SideBar from "./sidebar";
-import Slides from "./slides";
+import { Box, SimpleGrid } from "@chakra-ui/core";
+import { useKeenSlider } from "keen-slider/react";
+import React from "react";
 
-const CarouselBox = styled.div`
-  display: flex;
-  border-radius: 0.5rem;
-  margin-bottom: 2.5rem;
-  overflow: hidden;
-  position: relative;
-  color: white;
-  background: var(--gray-100);
+import Sidebar from "./sidebar";
+import Slide from "./slide";
+import SlideInfo from "./slide-info";
 
-  .blur-box {
-    flex-shrink: 0;
-    width: 430px;
-    z-index: 1;
-  }
+export default function CarouselNew({ featured }) {
+  const [currentSlide, setCurrentSlide] = React.useState(0);
 
-  ${Mq.max.md} {
-    .blur-box {
-      width: 40%;
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    slideChanged(s) {
+      setCurrentSlide(s.details().relativeSlide);
     }
-    p {
-      font-size: 1rem;
-    }
-    h1 {
-      font-size: 1.6rem;
-    }
-  }
+  });
 
-  ${Mq.max.sm} {
-    display: block;
-    .blur-box-content {
-      width: 100%;
-      position: initial !important;
-    }
-    .blur-box-bg {
-      z-index: -1;
-    }
-    .blur-box {
-      width: 100%;
-    }
-    h1 {
-      font-size: 1.6rem;
-    }
-  }
-`;
-
-interface ICarouselProps {
-  featured: GallerySlider[];
-}
-
-export default function Carousel({ featured }: ICarouselProps) {
-  const [slideIndex, setSlideIndex] = useState(0);
-
-  return featured.length ? (
-    <CarouselBox className="fadeInUp">
-      <Slides featured={featured} slideIndex={slideIndex} onChange={setSlideIndex} />
-      <SideBar featured={featured} slideIndex={slideIndex} />
-    </CarouselBox>
-  ) : null;
+  return (
+    <SimpleGrid
+      columns={{ base: 1, md: 3 }}
+      borderRadius="md"
+      overflow="hidden"
+      mb={10}
+      bg="gray.300"
+      color="white"
+    >
+      <Box gridColumn={{ md: "1/3" }} position="relative">
+        <Box ref={sliderRef} className="keen-slider">
+          {featured.map((o) => (
+            <Slide resource={o} key={o.id} />
+          ))}
+        </Box>
+        <SlideInfo
+          size={featured.length}
+          resource={featured[currentSlide]}
+          currentSlide={currentSlide}
+          scrollTo={slider?.moveToSlide}
+        />
+      </Box>
+      <Sidebar resource={featured[currentSlide]} />
+    </SimpleGrid>
+  );
 }

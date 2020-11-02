@@ -18,7 +18,9 @@ export default function HomePageComponent({ homeInfo }) {
   const showFeatures = !currentGroup?.id;
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
-      {homeInfo.showGallery && HOME.GALLERY && <Carousel featured={homeInfo.gallerySlider} />}
+      {homeInfo.showGallery && HOME.GALLERY && homeInfo.gallerySlider.length && (
+        <Carousel featured={homeInfo.gallerySlider} />
+      )}
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}
       {homeInfo.showDesc && <HomeDescription description={homeInfo.description} />}
       {homeInfo.showRecentObservation && SITE_CONFIG.OBSERVATION.ACTIVE && <RecentObservations />}
