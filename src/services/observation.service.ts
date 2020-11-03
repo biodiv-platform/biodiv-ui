@@ -419,7 +419,7 @@ export const axDownloadFilteredObservations = async (params) => {
 
 export const axGetUserLifeList = async (userId, type, params) => {
   try {
-    const { data } = await http.get(
+    const { data } = await plainHttp.get(
       `${ENDPOINT.OBSERVATION}/v1/observation/userinfo/${type}/${userId}`,
       {
         params

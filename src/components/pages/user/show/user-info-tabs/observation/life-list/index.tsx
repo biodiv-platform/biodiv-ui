@@ -26,7 +26,7 @@ export default function LifeList({ userId }) {
           <LifeListTable
             {...ll.uploaded}
             title={t("USER.UPLOADED")}
-            extraParams={(o) => stringify({ recom: o.maxVotedRecoId })}
+            extraParams={(o) => stringify({ recom: o.maxVotedRecoId, userId })}
           />
           <LifeListTable
             {...ll.identified}

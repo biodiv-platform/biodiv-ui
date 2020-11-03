@@ -28,9 +28,13 @@ const LifeListTable = ({ data, loadMore, title, extraParams }) => {
             {data.list.map((o) => (
               <tr key={`${o.speciesId}-${o.maxVotedRecoId}-${o.taxonId}`} className="fade">
                 <td>
-                  <ExternalBlueLink href={`/species/show/${o.speciesId}`}>
-                    {o.name}
-                  </ExternalBlueLink>
+                  {o.speciesId ? (
+                    <ExternalBlueLink href={`/species/show/${o.speciesId}`}>
+                      {o.name}
+                    </ExternalBlueLink>
+                  ) : (
+                    o.name
+                  )}
                 </td>
                 <td>
                   <ExternalBlueLink href={`/observation/list?${extraParams(o)}`}>
