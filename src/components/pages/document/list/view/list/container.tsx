@@ -106,6 +106,7 @@ export default function Container({ o }) {
                 habitatIds={o.habitatIds}
                 specieIds={o.speciesGroupIds}
                 document={o.document}
+                user={o.userIbp}
                 flags={o.flag.map((item) => ({ flag: item, user: o.userIbp }))}
               />
             </TabPanel>

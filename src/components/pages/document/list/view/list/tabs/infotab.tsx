@@ -15,10 +15,10 @@ import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 import { getUserImage } from "@utils/media";
 import React from "react";
 
-export default function InfoTab({ document, habitatIds, specieIds, flags }) {
+export default function InfoTab({ document, habitatIds, specieIds, flags, user }) {
   const { t } = useTranslation();
   const { habitats, species } = useDocumentFilter();
-  const { user, currentGroup } = useGlobalState();
+  const { currentGroup } = useGlobalState();
 
   return (
     <Stack
@@ -79,7 +79,7 @@ export default function InfoTab({ document, habitatIds, specieIds, flags }) {
                 <Feedback mb={1} mr={2} />
               </Text>
               <Box>
-                {document?.notes?.replace(/<[^>]*(>|$)|&nbsp;|&gt;/g, "").substring(0, 400)}
+                {document?.notes?.replace(/<[^>]*(>|$)|&nbsp;|&gt;/g, "").substring(0, 250)}
               </Box>
             </Stack>
           )}

@@ -6,7 +6,7 @@ import React from "react";
 export const LIST_PAGINATION_LIMIT = 10;
 
 export const DEFAULT_FILTER = {
-  sort: "document.created_on",
+  sort: "document.createdOn",
   offset: 0,
   max: LIST_PAGINATION_LIMIT,
   view: "list"
