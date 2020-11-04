@@ -24,8 +24,8 @@ const onObservationGridHover = ({ feature }) => (
 
 interface ClusterMapProps {
   filter;
-  latitude;
-  longitude;
+  latitude?;
+  longitude?;
   colorHex?;
   borderRadius?;
 }
@@ -74,7 +74,7 @@ export default function ClusterMap({
                 ]
               : []
           }
-          markers={[{ latitude, longitude, colorHex }] as ExtendedMarkerProps[]}
+          markers={latitude ? ([{ latitude, longitude, colorHex }] as ExtendedMarkerProps[]) : []}
         />
       </LazyLoad>
     </Box>
