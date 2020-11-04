@@ -5,10 +5,10 @@ import { axAddDocumentComment } from "@services/activity.service";
 import { RESOURCE_TYPE } from "@static/constants";
 import React, { useRef } from "react";
 
-export default function CommentsTab({ tabIndex, documentId }) {
+export default function CommentsTab({ tabIndex, documentId, tabLength }) {
   const titleRef = useRef(null);
 
-  return tabIndex === 2 ? (
+  return tabIndex === tabLength ? (
     <>
       <div ref={titleRef}></div>
       <div>

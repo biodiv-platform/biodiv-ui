@@ -88,6 +88,7 @@ const VerticalTabs = styled.div`
 export default function Container({ o }) {
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(0);
+  const [filterTabs] = useState(actionTabs.filter((item) => item.active === true));
 
   return (
     <Flex
@@ -108,25 +109,29 @@ export default function Container({ o }) {
                 flags={o.flag.map((item) => ({ flag: item, user: o.userIbp }))}
               />
             </TabPanel>
+            {actionTabs[1].active && (
+              <TabPanel>
+                <GroupTab o={o} tabIndex={tabIndex} tabLength={filterTabs.length - 2} />
+              </TabPanel>
+            )}
             <TabPanel>
-              <GroupTab o={o} tabIndex={tabIndex} />
-            </TabPanel>
-            <TabPanel>
-              <CommentsTab tabIndex={tabIndex} documentId={o.document.id} />
+              <CommentsTab
+                tabIndex={tabIndex}
+                tabLength={filterTabs.length - 1}
+                documentId={o.document.id}
+              />
             </TabPanel>
           </TabPanels>
           <TabList>
-            {actionTabs.map(({ name, active, icon }) => {
+            {filterTabs.map(({ name, icon }) => {
               return (
-                active && (
-                  <Tab key={name}>
-                    <Tooltip title={t(name)}>
-                      <div>
-                        {icon} <span>{t(name)}</span>
-                      </div>
-                    </Tooltip>
-                  </Tab>
-                )
+                <Tab key={name}>
+                  <Tooltip title={t(name)}>
+                    <div>
+                      {icon} <span>{t(name)}</span>
+                    </div>
+                  </Tooltip>
+                </Tab>
               );
             })}
           </TabList>

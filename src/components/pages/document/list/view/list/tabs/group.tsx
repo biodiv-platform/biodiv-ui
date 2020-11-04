@@ -6,11 +6,11 @@ import useTranslation from "@hooks/use-translation";
 import { axDocumentSaveUserGroups } from "@services/document.service";
 import React from "react";
 
-export default function GroupsTab({ tabIndex, o }) {
+export default function GroupsTab({ tabIndex, o, tabLength }) {
   const { t } = useTranslation();
   const { loggedInUserGroups } = useDocumentFilter();
 
-  return tabIndex === 1 ? (
+  return tabIndex === tabLength ? (
     o.userGroupIbp[0]?.id ? (
       <>
         <BoxHeading>👥 {t("OBSERVATION.USERGROUPS")}</BoxHeading>
