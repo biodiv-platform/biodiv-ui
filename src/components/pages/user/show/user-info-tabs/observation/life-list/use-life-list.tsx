@@ -1,3 +1,4 @@
+import useGlobalState from "@hooks/use-global-state";
 import { axGetspeciesGroups, axGetUserLifeList } from "@services/observation.service";
 import { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
@@ -5,6 +6,7 @@ import { useImmer } from "use-immer";
 const LIFE_LIST_LIMIT = 10;
 
 export default function useLifeList(userId) {
+  const { currentGroup } = useGlobalState();
   const [speciesGroups, setSpeciesGroups] = useState([]);
   const [uploaded, setUploaded] = useImmer({
     type: "uploaded",
@@ -35,6 +37,7 @@ export default function useLifeList(userId) {
 
     const { success, data } = await axGetUserLifeList(userId, getter.type, {
       ...filter,
+      userGroupId: currentGroup?.id || undefined,
       offset: getter.offset
     });
 

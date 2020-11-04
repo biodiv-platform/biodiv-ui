@@ -31,7 +31,9 @@ export default function LifeList({ userId }) {
           <LifeListTable
             {...ll.identified}
             title={t("USER.IDENTIFIED")}
-            extraParams={(o) => stringify({ recom: o.taxonId, user: userId, identified: true })}
+            extraParams={(o) =>
+              stringify({ recom: o.taxonId, authorVoted: userId, identified: true })
+            }
           />
         </SimpleGrid>
       </Box>

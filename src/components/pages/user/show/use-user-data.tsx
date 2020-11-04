@@ -1,3 +1,4 @@
+import useGlobalState from "@hooks/use-global-state";
 import { axGetListData } from "@services/observation.service";
 import SpeciesGroup from "@static/species-group";
 import { useEffect, useMemo } from "react";
@@ -9,6 +10,8 @@ const defaultFilter = {
 };
 
 const useUserData = (userId, max = 16) => {
+  const { currentGroup } = useGlobalState();
+
   const [uploadedObservations, setUploadedObservations] = useImmer({
     isLoading: false,
     list: [],
@@ -72,7 +75,8 @@ const useUserData = (userId, max = 16) => {
       ...defaultFilter,
       max,
       user: userId,
-      offset: uploadedObservations.offset
+      offset: uploadedObservations.offset,
+      userGroupList: currentGroup?.id || undefined
     });
 
     if (success) {
@@ -87,7 +91,8 @@ const useUserData = (userId, max = 16) => {
       ...defaultFilter,
       max,
       authorVoted: userId,
-      offset: identifiedObservations.offset
+      offset: identifiedObservations.offset,
+      userGroupList: currentGroup?.id || undefined
     });
 
     if (success) {
