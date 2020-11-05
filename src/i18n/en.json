@@ -675,6 +675,7 @@
     },
     "INFORMATION": "Information",
     "LANGUAGE": "Language",
+    "LAST_LOCATION": "Use last location",
     "LATITUDE": "Latitude",
     "LICENSE": "License",
     "LOAD_MORE_ACTIVITY": "Load more activity ↺",
@@ -692,8 +693,8 @@
     "LOCATION_SCALE": "Location Accuracy",
     "LONGITUDE": "Longitude",
     "MAP": {
-      "HIDE": "Hide Map",
-      "SHOW": "Show Map"
+      "HIDE": "Simpified Edit",
+      "SHOW": "Advanced Edit"
     },
     "MIN_THREE_CHARS": "Input at least 3 characters to search",
     "MY_UPLOADS": "My Uploads",
@@ -777,6 +778,7 @@
     },
     "USE_DMS": "Use DMS",
     "USE_IN_OBSERVATION": "Use in observation",
+    "USE_LAST_VALUE": "Use last value",
     "USE_LAT_LNG": "Use Lat-Long",
     "USERGROUPS": "Groups",
     "WHY_FEATURING": "Why Featuring?",

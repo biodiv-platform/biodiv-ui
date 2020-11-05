@@ -25,6 +25,7 @@ import { UseFormMethods } from "react-hook-form";
 import { LOCATION_ACCURACY_OPTIONS } from "../options";
 import CoordinatesInput from "./coordinates";
 import LocationMap from "./map";
+import useLastLocation from "./use-last-location";
 
 interface LocationPickerProps {
   form: UseFormMethods<Record<string, any>>;
@@ -35,6 +36,7 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
   const { latitude: lat, longitude: lng, zoom: initialZoom } = useMemo(() => getMapCenter(4), []);
   const [hideLocationPicker, setHideLocationPicker] = useState(true);
   const isOnline = useOnlineStatus();
+  const ll = useLastLocation();
 
   const FK = {
     observedAt: {
@@ -102,7 +104,11 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
     async (pos) => {
       if (coordinates.lat === 0 && coordinates.lng === 0) {
         setCoordinates(pos);
-        reverseGeocode(pos).then((r) => r.length && setObservedAtText(r[0].formatted_address));
+        if (pos.address) {
+          setObservedAtText(pos.address);
+        } else {
+          reverseGeocode(pos).then((r) => r.length && setObservedAtText(r[0].formatted_address));
+        }
       }
     },
     [EXIF_GPS_FOUND]
@@ -159,7 +165,22 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
               }
               isRequired={true}
             >
-              <FormLabel htmlFor="places-search">{FK.observedAt.label}</FormLabel>
+              <FormLabel htmlFor="places-search">
+                {FK.observedAt.label}
+                {ll.has && (
+                  <Button
+                    title={ll.value?.address}
+                    variant="link"
+                    size="xs"
+                    ml={1}
+                    verticalAlign="baseline"
+                    colorScheme="blue"
+                    onClick={ll.use}
+                  >
+                    {t("OBSERVATION.LAST_LOCATION")}
+                  </Button>
+                )}
+              </FormLabel>
               <InputGroup size="md" className="places-search">
                 <Autocomplete
                   onLoad={setSearchBoxRef}
@@ -175,9 +196,9 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
                     pr="5rem"
                   />
                 </Autocomplete>
-                <InputRightElement w="6rem">
+                <InputRightElement w="7rem">
                   <Button variant="link" size="sm" onClick={onToggle}>
-                    {t(`OBSERVATION.MAP.${isOpen ? "HIDE" : "SHOW"}`)}
+                    {t(isOpen ? "OBSERVATION.MAP.HIDE" : "OBSERVATION.MAP.SHOW")}
                   </Button>
                 </InputRightElement>
               </InputGroup>
