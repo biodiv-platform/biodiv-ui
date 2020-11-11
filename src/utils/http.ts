@@ -30,7 +30,7 @@ const axRenewToken = async (refreshToken: string) => {
  *
  * @returns {string}
  */
-const getBearerToken = async (ctx?) => {
+export const getBearerToken = async (ctx?) => {
   try {
     const { accessToken, refreshToken, isExpired } = getTokens(ctx);
     const finalToken = !isExpired ? accessToken : await axRenewToken(refreshToken);

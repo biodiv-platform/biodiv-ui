@@ -38,7 +38,7 @@ export default function useLifeList(userId) {
     const { success, data } = await axGetUserLifeList(userId, getter.type, {
       ...filter,
       userGroupId: currentGroup?.id || undefined,
-      offset: getter.offset
+      offset: reset ? 0 : getter.offset
     });
 
     if (success) {
@@ -46,11 +46,12 @@ export default function useLifeList(userId) {
         if (reset) {
           _draft.list = data.uniqueSpeciesInfos;
           _draft.total = data.totalCount;
+          _draft.offset = LIFE_LIST_LIMIT;
         } else {
           _draft.list.push(...data.uniqueSpeciesInfos);
+          _draft.offset = _draft.offset + LIFE_LIST_LIMIT;
         }
         _draft.hasMore = data.length === LIFE_LIST_LIMIT;
-        _draft.offset = _draft.offset + LIFE_LIST_LIMIT;
         _draft.isLoading = false;
       });
     } else {
