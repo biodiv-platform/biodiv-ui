@@ -8,7 +8,7 @@ import React from "react";
 import LazyLoad from "react-lazyload";
 
 const Naksha: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.default),
+  () => import("naksha-components-react").then((mod: any) => mod.Naksha),
   {
     ssr: false,
     loading: () => <p>Loading...</p>

@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 const Naksha: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.default),
+  () => import("naksha-components-react").then((mod: any) => mod.Naksha),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -46,6 +46,9 @@ export default function Map() {
               {
                 id: "global-observations",
                 title: "Observations",
+                description: "All observations from india biodiversity portal",
+                attribution: "indiabiodiversity.org and Contributors",
+                tags: ["Global", "Observations"],
                 isAdded: true,
                 source: {
                   type: "grid",

@@ -1,12 +1,15 @@
 import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import { ENDPOINT } from "@static/constants";
+import { waitForAuth } from "@utils/auth";
+import { getBearerToken } from "@utils/http";
 import { getMapCenter } from "@utils/location";
+import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
 import React from "react";
 
 const Naksha: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.default),
+  () => import("naksha-components-react").then((mod: any) => mod.Naksha),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -20,14 +23,25 @@ export default function MapPageComponent() {
     <div>{feature?.properties?.count} Observations</div>
   );
 
+  const handleOnDownload = async (layer) => {
+    await waitForAuth();
+    const token = await getBearerToken();
+    if (token) {
+      notification(`Mail Sent ${layer.id}`, NotificationType.Success);
+      return { success: true, data: token };
+    }
+    return { success: false, data: token };
+  };
+
   return (
-    <Box height="calc(100vh - var(--heading-height))">
+    <Box height="calc(100vh - var(--heading-height))" overflow="hidden">
       <Naksha
         viewPort={defaultViewPort}
         loadToC={true}
         showToC={true}
         mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
+        onDownload={handleOnDownload}
         geoserver={{
           endpoint: ENDPOINT.GEOSERVER,
           store: SITE_CONFIG.GEOSERVER.STORE,
@@ -38,6 +52,8 @@ export default function MapPageComponent() {
             id: "global-observations",
             title: "Observations",
             description: "All observations from india biodiversity portal",
+            attribution: "indiabiodiversity.org and Contributors",
+            tags: ["Global", "Observations"],
             isAdded: false,
             source: {
               type: "grid",

@@ -44,7 +44,7 @@
     "keen-slider": "^5.2.4",
     "local-storage-json": "^1.1.0",
     "mq-styled-components": "^2.1.2",
-    "naksha-components-react": "^3.3.4",
+    "naksha-components-react": "^3.4.0-canary.6",
     "nanoid": "^3.1.16",
     "next": "^10.0.0",
     "next-nookies-persist": "^1.3.9",
