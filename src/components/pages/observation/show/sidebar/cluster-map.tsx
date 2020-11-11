@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
-import { ExtendedMarkerProps } from "naksha-components-react/dist/interfaces/naksha";
+import { ExtendedMarkerProps } from "naksha-components-react";
 import dynamic from "next/dynamic";
 import React from "react";
 import LazyLoad from "react-lazyload";
