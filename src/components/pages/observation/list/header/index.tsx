@@ -21,7 +21,7 @@ import DownloadObservationDataModal from "../download-observation-modal";
 
 export default function ListHeader() {
   const { filter, setFilter, observationData } = useObservationFilter();
-  const defaultIndex = viewTabs.findIndex((t) => t.key === filter.view);
+  const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter.view);
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 

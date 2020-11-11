@@ -10,8 +10,7 @@ const SubMenuLink = ({ item, onClose }) => (
         {item.name}
       </MenuItem>
     </LocalLink>
-    {item?.rows &&
-      item.rows.map((item) => <SubMenuLink item={item} onClose={onClose} key={item.name} />)}
+    {item?.rows && item.rows.map((i) => <SubMenuLink item={i} onClose={onClose} key={i.name} />)}
     {item?.rows && <MenuDivider />}
   </>
 );

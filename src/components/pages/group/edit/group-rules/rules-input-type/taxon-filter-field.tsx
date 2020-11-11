@@ -10,11 +10,8 @@ export default function TaxonInputField({ form, label, name }) {
 
   const onChange = async (value, event, setSelected) => {
     if (event.action === "select-option") {
-      const {
-        label,
-        raw: { id }
-      } = value[value.length - 1];
-      value[value.length - 1] = { id, label };
+      const o = value[value.length - 1];
+      value[value.length - 1] = { id: o.raw.id, label: o.label };
     }
     setSelected(value);
   };

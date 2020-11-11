@@ -114,12 +114,12 @@ export default function RecoSuggestion({
                   </Text>
                 </Box>
                 <AvatarGroup size="sm" max={2}>
-                  {reco.userList.map((user) => (
+                  {reco.userList.map((u) => (
                     <Avatar
-                      key={user.id}
-                      name={user.name}
-                      src={getUserImage(user.profilePic)}
-                      title={user.name}
+                      key={u.id}
+                      name={u.name}
+                      src={getUserImage(u.profilePic)}
+                      title={u.name}
                     />
                   ))}
                 </AvatarGroup>

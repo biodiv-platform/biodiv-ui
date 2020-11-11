@@ -35,7 +35,7 @@ const RichTextareaField = ({ name, label, hint, form, mb = 4, ...props }: IRichT
           control={form.control}
           name={name}
           defaultValue={form.control.defaultValuesRef.current[name]}
-          render={(props) => <ReactQuill {...props} modules={modules} />}
+          render={(quillProps) => <ReactQuill {...quillProps} modules={modules} />}
         />
       </Box>
       <ErrorMessage name={name} errors={form.errors} />

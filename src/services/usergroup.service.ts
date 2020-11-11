@@ -333,9 +333,9 @@ export const axRemoveHomePageGalleryImage = async (userGroupId, galleryList, ind
       `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${galleryList[index]?.id}`
     );
     const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
-    payload.length > 1
-      ? await http.put(`${ENDPOINT.USERGROUP}/v1/group/homePage/reordering/${userGroupId}`, payload)
-      : null;
+    if (payload.length > 1) {
+      await http.put(`${ENDPOINT.USERGROUP}/v1/group/homePage/reordering/${userGroupId}`, payload);
+    }
 
     return { success: true, data: response };
   } catch (e) {

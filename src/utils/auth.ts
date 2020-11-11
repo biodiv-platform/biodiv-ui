@@ -92,16 +92,16 @@ export const removeCache = async (whitelist = []) => {
 };
 
 export const generateSession = async (
-  setNookie,
+  setNookieI,
   tokens,
   redirect = false,
   forward = "Lw",
   onSuccess?
 ) => {
-  setNookie(TOKEN.AUTH, tokens);
+  setNookieI(TOKEN.AUTH, tokens);
   const { success, data } = await axGetUser();
   if (success) {
-    setNookie(TOKEN.USER, data);
+    setNookieI(TOKEN.USER, data);
     await removeCache();
     if (onSuccess) {
       onSuccess(data);

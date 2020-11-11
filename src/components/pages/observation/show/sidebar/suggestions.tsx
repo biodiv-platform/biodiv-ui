@@ -23,8 +23,8 @@ export default function Suggestions({
   const { t } = useTranslation();
 
   const [{ page, hideMore }, loadMore] = useReducer(
-    ({ page }) => {
-      const nextPage = ++page;
+    (o) => {
+      const nextPage = o.page + 1;
       return { hideMore: nextPage * pageSize > list.length, page: nextPage };
     },
     { hideMore: false, page: 1 }

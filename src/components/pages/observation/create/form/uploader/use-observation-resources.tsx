@@ -121,9 +121,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
           ...pendingResource,
           status: AssetStatus.Uploaded
         });
-        if (noSave) {
-          await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded);
-        }
+        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded);
       }
     } catch (e) {
       console.error(e);

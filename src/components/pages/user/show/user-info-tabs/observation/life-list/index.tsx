@@ -32,7 +32,7 @@ export default function LifeList({ userId }) {
             {...ll.identified}
             title={t("USER.IDENTIFIED")}
             extraParams={(o) =>
-              stringify({ recoId: o.taxonId, authorVoted: userId, identified: true })
+              stringify({ recoId: o.maxVotedRecoId, authorVoted: userId, identified: true })
             }
           />
         </SimpleGrid>

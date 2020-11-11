@@ -62,11 +62,11 @@ export default function ForgotPasswordComponent() {
     )
   });
 
-  const verificationType = hForm.watch("verificationType");
+  const verificationTypeWatch = hForm.watch("verificationType");
 
   useEffect(() => {
-    setShowMobile(verificationType === VERIFICATION_TYPE[1].value);
-  }, [verificationType]);
+    setShowMobile(verificationTypeWatch === VERIFICATION_TYPE[1].value);
+  }, [verificationTypeWatch]);
 
   const handleOnSubmit = async ({ verificationType, email, mobileNumber }) => {
     const verificationId = verificationType === VERIFICATION_TYPE[0].value ? email : mobileNumber;
