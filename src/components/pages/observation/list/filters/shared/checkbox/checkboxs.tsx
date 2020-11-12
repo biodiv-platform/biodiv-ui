@@ -4,11 +4,12 @@ import {
   Image,
   Input,
   InputGroup,
-  InputLeftElement
+  InputLeftElement,
+  Stack
 } from "@chakra-ui/core";
 import { SearchIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import useTranslation from "@hooks/use-translation";
 import { getTraitIcon } from "@utils/media";
 import React, { useState } from "react";
 
@@ -60,23 +61,25 @@ export default function FilterCheckboxes({
         </InputGroup>
       )}
       <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
-        {filteredOptions.map(({ label, value, stat, valueIcon }) => (
-          <Checkbox key={label} value={value} onChange={handleOnChange} alignItems="baseline">
-            {valueIcon && (
-              <Image
-                src={getTraitIcon(valueIcon, 20)}
-                boxSize="1.25rem"
-                objectFit="contain"
-                display="inline"
-                verticalAlign="center"
-                mr={1}
-                ignoreFallback={true}
-              />
-            )}
-            {skipOptionsTranslation ? label || value : t(translateKey + label)}
-            <FilterStat statKey={statKey} subStatKey={stat || value} />
-          </Checkbox>
-        ))}
+        <Stack>
+          {filteredOptions.map(({ label, value, stat, valueIcon }) => (
+            <Checkbox key={label} value={value} alignItems="baseline">
+              {valueIcon && (
+                <Image
+                  src={getTraitIcon(valueIcon, 20)}
+                  boxSize="1.25rem"
+                  objectFit="contain"
+                  display="inline"
+                  verticalAlign="center"
+                  mr={1}
+                  ignoreFallback={true}
+                />
+              )}
+              {skipOptionsTranslation ? label || value : t(translateKey + label)}
+              <FilterStat statKey={statKey} subStatKey={stat || value} />
+            </Checkbox>
+          ))}
+        </Stack>
       </CheckboxGroup>
     </>
   );

@@ -1,13 +1,12 @@
 import useGlobalState from "@hooks/use-global-state";
-import { axGetspeciesGroups, axGetUserLifeList } from "@services/observation.service";
-import { useEffect, useState } from "react";
+import { axGetUserLifeList } from "@services/observation.service";
+import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
 const LIFE_LIST_LIMIT = 10;
 
-export default function useLifeList(userId) {
+export default function useLifeList(userId, filter) {
   const { currentGroup } = useGlobalState();
-  const [speciesGroups, setSpeciesGroups] = useState([]);
   const [uploaded, setUploaded] = useImmer({
     type: "uploaded",
     list: [],
@@ -23,11 +22,6 @@ export default function useLifeList(userId) {
     offset: 0,
     total: 0,
     isLoading: true
-  });
-
-  const [filter, setFilter] = useState<{ sGroupId; hasMedia }>({
-    sGroupId: null,
-    hasMedia: true
   });
 
   const loadMore = async (getter, setter, reset) => {
@@ -65,21 +59,12 @@ export default function useLifeList(userId) {
   const loadMoreIdentified = () => loadMore(identified, setIdentified, false);
 
   useEffect(() => {
-    axGetspeciesGroups().then(({ data }) => setSpeciesGroups(data));
-  }, []);
-
-  useEffect(() => {
-    if (speciesGroups.length) {
-      loadMore(uploaded, setUploaded, true);
-      loadMore(identified, setIdentified, true);
-    }
-  }, [filter, speciesGroups]);
+    loadMore(uploaded, setUploaded, true);
+    loadMore(identified, setIdentified, true);
+  }, [filter]);
 
   return {
-    speciesGroups,
     uploaded: { data: uploaded, loadMore: loadMoreUploaded },
-    identified: { data: identified, loadMore: loadMoreIdentified },
-    filter,
-    setFilter
+    identified: { data: identified, loadMore: loadMoreIdentified }
   };
 }

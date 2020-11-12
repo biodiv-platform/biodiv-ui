@@ -1,7 +1,7 @@
 import useGlobalState from "@hooks/use-global-state";
-import { axGetListData } from "@services/observation.service";
+import { axGetListData, axGetspeciesGroups } from "@services/observation.service";
 import SpeciesGroup from "@static/species-group";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useImmer } from "use-immer";
 
 const defaultFilter = {
@@ -11,6 +11,12 @@ const defaultFilter = {
 
 const useUserData = (userId, max = 16) => {
   const { currentGroup } = useGlobalState();
+  const [speciesGroups, setSpeciesGroups] = useState([]);
+
+  const [filter, setFilter] = useState<{ sGroupId; hasMedia }>({
+    sGroupId: null,
+    hasMedia: true
+  });
 
   const [uploadedObservations, setUploadedObservations] = useImmer({
     isLoading: false,
@@ -44,14 +50,23 @@ const useUserData = (userId, max = 16) => {
     [uploadedObservations.speciesData, identifiedObservations.speciesData]
   );
 
+  useEffect(() => {
+    axGetspeciesGroups().then(({ data }) => setSpeciesGroups(data));
+  }, []);
+
   const startLoading = (setter) => {
     setter((_draft) => {
       _draft.isLoading = true;
     });
   };
 
-  const updateObsevationData = (setter, data, setStats?: boolean) => {
+  const updateObsevationData = (setter, data, reset?: boolean) => {
     setter((_draft) => {
+      if (reset) {
+        _draft.list = [];
+        _draft.hasMore = true;
+      }
+
       _draft.list.push(...data.observationListMinimal);
       _draft.isLoading = false;
 
@@ -59,51 +74,55 @@ const useUserData = (userId, max = 16) => {
         _draft.hasMore = false;
       }
 
-      if (setStats) {
-        _draft.speciesData = data?.aggregationData?.groupSpeciesName;
-        _draft.offset = _draft.offset + max;
-        _draft.hasStats = true;
-        _draft.total = data.totalCount;
-      }
+      _draft.speciesData = data?.aggregationData?.groupSpeciesName;
+      _draft.offset = reset ? max : _draft.offset + max;
+      _draft.hasStats = true;
+      _draft.total = data.totalCount;
     });
   };
 
-  const loadMoreUploadedObservations = async (setStats?: boolean) => {
+  const loadMoreUploadedObservations = async (reset?: boolean) => {
     startLoading(setUploadedObservations);
 
     const { success, data } = await axGetListData({
       ...defaultFilter,
       max,
       user: userId,
-      offset: uploadedObservations.offset,
-      userGroupList: currentGroup?.id || undefined
+      offset: reset ? 0 : uploadedObservations.offset,
+      userGroupList: currentGroup?.id || undefined,
+      sGroup: filter.sGroupId,
+      hasMedia: filter.hasMedia
     });
 
     if (success) {
-      updateObsevationData(setUploadedObservations, data, setStats);
+      updateObsevationData(setUploadedObservations, data, reset);
     }
   };
 
-  const loadMoreIdentifiedObservations = async (setStats?: boolean) => {
+  const loadMoreIdentifiedObservations = async (reset?: boolean) => {
     startLoading(setIdentifiedObservations);
 
     const { success, data } = await axGetListData({
       ...defaultFilter,
       max,
       authorVoted: userId,
-      offset: identifiedObservations.offset,
-      userGroupList: currentGroup?.id || undefined
+      offset: reset ? 0 : identifiedObservations.offset,
+      userGroupList: currentGroup?.id || undefined,
+      sGroup: filter.sGroupId,
+      hasMedia: filter.hasMedia
     });
 
     if (success) {
-      updateObsevationData(setIdentifiedObservations, data, setStats);
+      updateObsevationData(setIdentifiedObservations, data, reset);
     }
   };
 
   useEffect(() => {
-    loadMoreUploadedObservations(true);
-    loadMoreIdentifiedObservations(true);
-  }, []);
+    if (speciesGroups.length) {
+      loadMoreUploadedObservations(true);
+      loadMoreIdentifiedObservations(true);
+    }
+  }, [speciesGroups, filter]);
 
   return {
     speciesData,
@@ -112,7 +131,11 @@ const useUserData = (userId, max = 16) => {
     loadMoreUploadedObservations,
 
     identifiedObservations,
-    loadMoreIdentifiedObservations
+    loadMoreIdentifiedObservations,
+
+    speciesGroups,
+    filter,
+    setFilter
   };
 };
 

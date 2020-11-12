@@ -4,24 +4,17 @@ import useTranslation from "@hooks/use-translation";
 import { stringify } from "querystring";
 import React from "react";
 
-import LifeListFilter from "./filter";
 import LifeListTable from "./table";
 import useLifeList from "./use-life-list";
 
-export default function LifeList({ userId }) {
+export default function LifeList({ userId, filter }) {
   const { t } = useTranslation();
-  const ll = useLifeList(userId);
+  const ll = useLifeList(userId, filter);
 
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📃 {t("USER.OBSERVATIONS.LIFE_LIST")}</BoxHeading>
       <Box p={4}>
-        <LifeListFilter
-          speciesGroups={ll.speciesGroups}
-          filter={ll.filter}
-          setFilter={ll.setFilter}
-        />
-
         <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
           <LifeListTable
             {...ll.uploaded}

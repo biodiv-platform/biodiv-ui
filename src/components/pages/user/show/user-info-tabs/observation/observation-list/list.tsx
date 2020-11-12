@@ -50,7 +50,7 @@ export default function ObservationList({ title, data, loadMore }) {
         hidden={!data.hasMore}
         className="fade"
         isLoading={data.isLoading}
-        onClick={loadMore}
+        onClick={() => loadMore()}
         mt={4}
       >
         {t("OBSERVATION.LOAD_MORE_OBSERVATIONS")}

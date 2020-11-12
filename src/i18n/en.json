@@ -853,6 +853,7 @@
     "NOTIFICATIONS": "Notifications",
     "OBSERVATIONS": {
       "CHART": "Observations by Species Group",
+      "FILTER": "Filter",
       "LIFE_LIST": "Life List",
       "MAP": "Observations Spread",
       "TITLE": "Observations"
