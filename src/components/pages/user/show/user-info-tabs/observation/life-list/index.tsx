@@ -12,7 +12,7 @@ export default function LifeList({ userId, filter }) {
   const ll = useLifeList(userId, filter);
 
   return (
-    <Box mb={4} className="white-box">
+    <Box className="white-box">
       <BoxHeading>📃 {t("USER.OBSERVATIONS.LIFE_LIST")}</BoxHeading>
       <Box p={4}>
         <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>

@@ -1,3 +1,4 @@
+import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-type/filter-keys";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetListData, axGetspeciesGroups } from "@services/observation.service";
 import SpeciesGroup from "@static/species-group";
@@ -14,7 +15,7 @@ const useUserData = (userId, max = 16) => {
   const [speciesGroups, setSpeciesGroups] = useState([]);
 
   const [filter, setFilter] = useState<{ sGroupId; hasMedia }>({
-    sGroupId: null,
+    sGroupId: undefined,
     hasMedia: true
   });
 
@@ -38,6 +39,15 @@ const useUserData = (userId, max = 16) => {
     stats: {},
     speciesData: {},
     hasStats: false
+  });
+
+  const getProcessedFilters = () => ({
+    sGroup: filter.sGroupId,
+    mediaFilter: filter.hasMedia
+      ? MEDIA_TYPES.slice(0, -1)
+          .map((t) => t.value)
+          .toString()
+      : undefined
   });
 
   const speciesData = useMemo(
@@ -90,8 +100,7 @@ const useUserData = (userId, max = 16) => {
       user: userId,
       offset: reset ? 0 : uploadedObservations.offset,
       userGroupList: currentGroup?.id || undefined,
-      sGroup: filter.sGroupId,
-      hasMedia: filter.hasMedia
+      ...getProcessedFilters()
     });
 
     if (success) {
@@ -108,8 +117,7 @@ const useUserData = (userId, max = 16) => {
       authorVoted: userId,
       offset: reset ? 0 : identifiedObservations.offset,
       userGroupList: currentGroup?.id || undefined,
-      sGroup: filter.sGroupId,
-      hasMedia: filter.hasMedia
+      ...getProcessedFilters()
     });
 
     if (success) {

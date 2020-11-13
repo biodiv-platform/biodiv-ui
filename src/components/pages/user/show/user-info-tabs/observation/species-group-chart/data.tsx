@@ -1,11 +1,11 @@
 export const ChartMeta = {
   groupKey: "group",
-  subGroupKeys: ["identified", "uploaded"],
-  subGroupColors: ["#3182CE", "#E53E3E"]
+  subGroupKeys: ["uploaded", "identified"],
+  subGroupColors: ["#E53E3E", "#3182CE"]
 };
 
 export const TooltipRenderer = (data) => {
   return `<b>${data[ChartMeta.groupKey]}</b><br/>
-      <nobr>Uploaded: ${data?.uploaded}</nobr><br/>
-      <nobr>Identified: ${data?.identified}</nobr>`;
+  <nobr>Identified: ${data?.identified}</nobr><br/>
+  <nobr>Uploaded: ${data?.uploaded}</nobr>`;
 };

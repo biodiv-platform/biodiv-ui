@@ -5,7 +5,7 @@ import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
-export default function UserObservationsMap({ userId }) {
+export default function UserObservationsMap({ userId, groupId }) {
   const { t } = useTranslation();
   const { currentGroup } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
@@ -13,7 +13,11 @@ export default function UserObservationsMap({ userId }) {
   return (
     <Box className="white-box">
       <BoxHeading>🗺️ {t("USER.OBSERVATIONS.MAP")}</BoxHeading>
-      <ClusterMap filter={{ authorId: userId, userGroupId }} borderRadius={0} />
+      <ClusterMap
+        filter={{ authorId: userId, userGroupId, groupId }}
+        k={groupId}
+        borderRadius={0}
+      />
     </Box>
   );
 }

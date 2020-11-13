@@ -14,7 +14,7 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "sGroup",
     value: filter?.sGroupId,
-    onChange: (sGroupId) => setFilter({ ...filter, sGroupId })
+    onChange: (v) => setFilter({ ...filter, sGroupId: v || undefined })
   });
 
   return (

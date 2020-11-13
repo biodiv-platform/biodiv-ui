@@ -26,6 +26,7 @@ interface ClusterMapProps {
   filter;
   latitude?;
   longitude?;
+  k?;
   colorHex?;
   borderRadius?;
 }
@@ -34,6 +35,7 @@ export default function ClusterMap({
   filter,
   latitude,
   longitude,
+  k,
   colorHex = "E53E3E",
   borderRadius = "md"
 }: ClusterMapProps) {
@@ -51,6 +53,7 @@ export default function ClusterMap({
         <Naksha
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           viewPort={defaultViewPort}
+          key={k}
           layers={
             filter
               ? [
