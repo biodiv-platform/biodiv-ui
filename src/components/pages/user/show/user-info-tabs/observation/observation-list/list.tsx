@@ -1,4 +1,5 @@
-import { AspectRatio, Box, Button, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/core";
+import { AspectRatio, Box, Button, Flex, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/core";
+import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@hooks/use-translation";
@@ -11,9 +12,14 @@ export default function ObservationList({ title, data, loadMore }) {
 
   return (
     <Box mb={4}>
-      <Box fontWeight="bold" mb={2}>
-        {title} ({data.total})
-      </Box>
+      <Flex justifyContent="space-between">
+        <Box fontWeight="bold" mb={2}>
+          {title} ({data.total})
+        </Box>
+        <LocalLink href="/observation/list" params={data.link}>
+          <ExternalBlueLink>{t("USER.VIEW_ALL")}</ExternalBlueLink>
+        </LocalLink>
+      </Flex>
       <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} spacing={4}>
         {data.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN");

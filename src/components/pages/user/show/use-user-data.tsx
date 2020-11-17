@@ -26,7 +26,8 @@ const useUserData = (userId, max = 16) => {
     total: 0,
     stats: {},
     speciesData: {},
-    hasStats: false
+    hasStats: false,
+    link: ""
   });
 
   const [identifiedObservations, setIdentifiedObservations] = useImmer({
@@ -37,11 +38,14 @@ const useUserData = (userId, max = 16) => {
     total: 0,
     stats: {},
     speciesData: {},
-    hasStats: false
+    hasStats: false,
+    link: ""
   });
 
-  const getProcessedFilters = () => ({
+  const getProcessedFilters = (userKey) => ({
+    [userKey]: userId,
     sGroup: filter.sGroupId,
+    userGroupList: currentGroup?.id || undefined,
     mediaFilter: filter.hasMedia
       ? MEDIA_TYPES.slice(0, -1)
           .map((t) => t.value)
@@ -68,9 +72,10 @@ const useUserData = (userId, max = 16) => {
     axGetspeciesGroups().then(({ data }) => setSpeciesGroups(data));
   }, []);
 
-  const startLoading = (setter) => {
+  const startLoading = (setter, filterParams) => {
     setter((_draft) => {
       _draft.isLoading = true;
+      _draft.link = filterParams;
     });
   };
 
@@ -96,15 +101,14 @@ const useUserData = (userId, max = 16) => {
   };
 
   const loadMoreUploadedObservations = async (reset?: boolean) => {
-    startLoading(setUploadedObservations);
+    const filterParams = getProcessedFilters("user");
+    startLoading(setUploadedObservations, filterParams);
 
     const { success, data } = await axGetListData({
       ...defaultFilter,
       max,
-      user: userId,
       offset: reset ? 0 : uploadedObservations.offset,
-      userGroupList: currentGroup?.id || undefined,
-      ...getProcessedFilters()
+      ...filterParams
     });
 
     if (success) {
@@ -113,15 +117,14 @@ const useUserData = (userId, max = 16) => {
   };
 
   const loadMoreIdentifiedObservations = async (reset?: boolean) => {
-    startLoading(setIdentifiedObservations);
+    const filterParams = getProcessedFilters("authorVoted");
+    startLoading(setIdentifiedObservations, filterParams);
 
     const { success, data } = await axGetListData({
       ...defaultFilter,
       max,
-      authorVoted: userId,
       offset: reset ? 0 : identifiedObservations.offset,
-      userGroupList: currentGroup?.id || undefined,
-      ...getProcessedFilters()
+      ...getProcessedFilters("authorVoted")
     });
 
     if (success) {
@@ -147,7 +150,8 @@ const useUserData = (userId, max = 16) => {
 
     speciesGroups,
     filter,
-    setFilter
+    setFilter,
+    getProcessedFilters
   };
 };
 
