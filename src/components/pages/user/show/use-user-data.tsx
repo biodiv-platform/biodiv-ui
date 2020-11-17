@@ -1,7 +1,6 @@
 import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-type/filter-keys";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetListData, axGetspeciesGroups } from "@services/observation.service";
-import SpeciesGroup from "@static/species-group";
 import { useEffect, useMemo, useState } from "react";
 import { useImmer } from "use-immer";
 
@@ -52,11 +51,16 @@ const useUserData = (userId, max = 16) => {
 
   const speciesData = useMemo(
     () =>
-      SpeciesGroup.map((k) => ({
-        group: k,
-        uploaded: uploadedObservations.speciesData[k] || 0,
-        identified: identifiedObservations.speciesData[k] || 0
-      })),
+      speciesGroups.map(({ id, name }) => {
+        const uploaded = uploadedObservations.speciesData[name] || 0;
+        const identified = identifiedObservations.speciesData[name] || 0;
+        const isFilterMatch = filter.sGroupId === id;
+        return {
+          group: name,
+          uploaded: filter.sGroupId ? (isFilterMatch ? uploaded : 0) : uploaded,
+          identified: filter.sGroupId ? (isFilterMatch ? identified : 0) : identified
+        };
+      }),
     [uploadedObservations.speciesData, identifiedObservations.speciesData]
   );
 
