@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/core";
+import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";

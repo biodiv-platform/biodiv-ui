@@ -1,4 +1,4 @@
-import { Avatar, Box, Link, SimpleGrid } from "@chakra-ui/core";
+import { Avatar, Box, Link, SimpleGrid } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";

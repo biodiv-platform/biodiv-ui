@@ -1,4 +1,4 @@
-import { Alert, AlertIcon } from "@chakra-ui/core";
+import { Alert, AlertIcon } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import React, { useEffect } from "react";

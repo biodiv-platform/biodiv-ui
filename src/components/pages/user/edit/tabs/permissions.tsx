@@ -1,4 +1,4 @@
-import { SimpleGrid, Spinner } from "@chakra-ui/core";
+import { SimpleGrid, Spinner } from "@chakra-ui/react";
 import SelectMultipleInputField from "@components/form/select-multiple";
 import SubmitButton from "@components/form/submit-button";
 import SwitchField from "@components/form/switch";

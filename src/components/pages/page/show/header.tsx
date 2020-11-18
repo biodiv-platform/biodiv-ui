@@ -1,4 +1,4 @@
-import { Flex, Heading, SimpleGrid } from "@chakra-ui/core";
+import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";

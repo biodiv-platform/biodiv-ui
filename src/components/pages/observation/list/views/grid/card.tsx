@@ -1,4 +1,4 @@
-import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/core";
+import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";

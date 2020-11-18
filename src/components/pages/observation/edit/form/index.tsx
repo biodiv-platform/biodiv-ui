@@ -1,4 +1,4 @@
-import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/core";
+import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";

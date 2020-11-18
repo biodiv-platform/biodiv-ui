@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/core";
+import { Box, Button } from "@chakra-ui/react";
 import RichTextareaField from "@components/form/rich-textarea";
 import SwitchButton from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";

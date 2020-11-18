@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CustomFieldList from "@components/pages/observation/show/custom-fields/list";
 import useTranslation from "@hooks/use-translation";

@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/core";
+import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import { CalendarIcon } from "@chakra-ui/icons";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";

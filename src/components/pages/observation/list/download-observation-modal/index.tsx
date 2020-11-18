@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";

@@ -1,4 +1,4 @@
-import { Box, Flex, SimpleGrid, useDisclosure } from "@chakra-ui/core";
+import { Box, Flex, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import OTPModal from "@components/auth/otp-modal";
 import PhoneNumber from "@components/form/phone-number";

@@ -7,7 +7,7 @@ import {
   Input,
   InputGroup,
   InputRightElement
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { formatDateRange, parseDateRange } from "@utils/date";

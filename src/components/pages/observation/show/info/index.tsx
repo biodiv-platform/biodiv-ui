@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/core";
+import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
 import HTMLContainer from "@components/@core/html-container";

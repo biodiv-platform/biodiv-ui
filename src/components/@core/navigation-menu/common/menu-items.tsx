@@ -1,4 +1,4 @@
-import { Link, Menu, MenuButton } from "@chakra-ui/core";
+import { Link, Menu, MenuButton } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";

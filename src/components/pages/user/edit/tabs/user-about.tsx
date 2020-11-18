@@ -1,4 +1,4 @@
-import { SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import PhoneNumberInputField from "@components/form/phone-number";
 import SelectInputField from "@components/form/select";

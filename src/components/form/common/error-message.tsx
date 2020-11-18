@@ -1,4 +1,4 @@
-import { FormErrorMessage } from "@chakra-ui/core";
+import { FormErrorMessage } from "@chakra-ui/react";
 import { getByPath } from "@utils/basic";
 import React from "react";
 

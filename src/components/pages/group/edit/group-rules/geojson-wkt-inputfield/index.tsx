@@ -9,7 +9,7 @@ import {
   Input,
   InputGroup,
   InputRightElement
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { ViewIcon } from "@chakra-ui/icons";
 import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";

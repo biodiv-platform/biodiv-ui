@@ -1,4 +1,4 @@
-import { Button, SimpleGrid } from "@chakra-ui/core";
+import { Button, SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import DownloadIcon from "@icons/download";
 import PeopleIcon from "@icons/people";

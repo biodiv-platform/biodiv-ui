@@ -1,4 +1,4 @@
-import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/core";
+import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/react";
 import HTMLContainer from "@components/@core/html-container";
 import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";

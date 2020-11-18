@@ -1,4 +1,4 @@
-import { Spinner } from "@chakra-ui/core";
+import { Spinner } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
 import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";

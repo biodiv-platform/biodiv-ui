@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { formatGroupRules } from "@utils/userGroup";
 import React, { useState } from "react";

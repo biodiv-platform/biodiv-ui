@@ -1,4 +1,4 @@
-import { IconButton, Text } from "@chakra-ui/core";
+import { IconButton, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
 import DeleteIcon from "@icons/delete";

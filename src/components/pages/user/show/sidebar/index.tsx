@@ -1,4 +1,4 @@
-import { AspectRatio, Avatar, Box, Button, Flex, Heading, Text } from "@chakra-ui/core";
+import { AspectRatio, Avatar, Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
 import useTranslation from "@hooks/use-translation";

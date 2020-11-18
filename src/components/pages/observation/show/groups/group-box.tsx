@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Link } from "@chakra-ui/core";
+import { Box, Flex, Image, Link } from "@chakra-ui/react";
 import React from "react";
 
 export default function GroupBox({ link, icon, name }) {

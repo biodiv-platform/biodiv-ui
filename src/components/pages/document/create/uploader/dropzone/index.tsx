@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";

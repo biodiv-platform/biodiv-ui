@@ -1,4 +1,4 @@
-import { Box, Heading, SimpleGrid } from "@chakra-ui/core";
+import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { FEATURES } from "@static/home";
 import React from "react";

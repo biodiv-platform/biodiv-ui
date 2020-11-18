@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import React from "react";

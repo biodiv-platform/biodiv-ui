@@ -1,6 +1,6 @@
 import "rc-tree/assets/index.css";
 
-import { Spinner } from "@chakra-ui/core";
+import { Spinner } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { axGetTaxonList } from "@services/api.service";
 import Tree from "rc-tree";

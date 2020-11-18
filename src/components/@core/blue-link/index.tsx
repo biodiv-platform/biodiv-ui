@@ -1,4 +1,4 @@
-import { Link, LinkProps } from "@chakra-ui/core";
+import { Link, LinkProps } from "@chakra-ui/react";
 import React, { forwardRef } from "react";
 
 const BlueLink = forwardRef(({ color = "blue.500", ...rest }: LinkProps, ref: any) => (

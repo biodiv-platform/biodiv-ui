@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/core";
+import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronUpIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import DownloadIcon from "@icons/download";

@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import React, { useEffect, useState } from "react";
 import ReCaptcha from "react-google-recaptcha";

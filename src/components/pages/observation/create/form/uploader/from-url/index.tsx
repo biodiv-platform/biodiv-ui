@@ -1,4 +1,4 @@
-import { Box, Button, Image, Input } from "@chakra-ui/core";
+import { Box, Button, Image, Input } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";

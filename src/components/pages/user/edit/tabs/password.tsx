@@ -1,4 +1,4 @@
-import { SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid } from "@chakra-ui/react";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";

@@ -1,4 +1,4 @@
-import { Box, Checkbox, Skeleton, useRadioGroup } from "@chakra-ui/core";
+import { Box, Checkbox, Skeleton, useRadioGroup } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
 import useTranslation from "@hooks/use-translation";

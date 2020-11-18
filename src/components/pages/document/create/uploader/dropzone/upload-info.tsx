@@ -1,4 +1,4 @@
-import { Button, Heading, Text } from "@chakra-ui/core";
+import { Button, Heading, Text } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 

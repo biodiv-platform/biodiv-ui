@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Stack } from "@chakra-ui/core";
+import { Box, Flex, Link, Stack } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import FacebookIcon from "@icons/facebook";

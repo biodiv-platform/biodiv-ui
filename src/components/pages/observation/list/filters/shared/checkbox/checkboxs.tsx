@@ -6,7 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   Stack
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import useTranslation from "@hooks/use-translation";

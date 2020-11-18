@@ -1,6 +1,6 @@
 import "keen-slider/keen-slider.min.css";
 
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useKeenSlider } from "keen-slider/react";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import { Box, Button, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/core";
+import { Box, Button, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";

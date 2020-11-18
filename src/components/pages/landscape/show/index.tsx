@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/core";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Landscape } from "@interfaces/landscape";

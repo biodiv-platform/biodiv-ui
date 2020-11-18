@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import SubmitButton from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";

@@ -7,7 +7,7 @@ import {
   SimpleGrid,
   Skeleton,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import Select from "@components/form/select";
 import SelectAsync from "@components/form/select-async";
 import Submit from "@components/form/submit-button";

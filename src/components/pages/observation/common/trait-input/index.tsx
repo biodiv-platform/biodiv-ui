@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import { TraitsValue } from "@interfaces/observation";
 import { TRAIT_TYPES } from "@static/constants";
 import React from "react";

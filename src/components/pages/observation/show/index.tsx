@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import Carousel from "@components/@core/carousel";
 import useGlobalState from "@hooks/use-global-state";
 import {

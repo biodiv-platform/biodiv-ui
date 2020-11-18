@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";

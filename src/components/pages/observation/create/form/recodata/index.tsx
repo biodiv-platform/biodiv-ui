@@ -1,4 +1,4 @@
-import { Collapse, SimpleGrid } from "@chakra-ui/core";
+import { Collapse, SimpleGrid } from "@chakra-ui/react";
 import CheckBox from "@components/form/checkbox";
 import Select from "@components/form/select";
 import SelectAsync from "@components/form/select-async";

@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/core";
+import { Box, Flex } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import useTranslation from "@hooks/use-translation";
 import React from "react";

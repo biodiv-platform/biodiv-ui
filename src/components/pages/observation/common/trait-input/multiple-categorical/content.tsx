@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, useCheckbox } from "@chakra-ui/core";
+import { Box, Flex, Image, Text, useCheckbox } from "@chakra-ui/react";
 import { getTraitIcon } from "@utils/media";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import { Box, Collapse } from "@chakra-ui/core";
+import { Box, Collapse } from "@chakra-ui/react";
 import { DrawingManager, GoogleMap } from "@react-google-maps/api";
 import React from "react";
 

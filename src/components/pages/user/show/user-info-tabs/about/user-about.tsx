@@ -1,4 +1,4 @@
-import { SimpleGrid, Stack } from "@chakra-ui/core";
+import { SimpleGrid, Stack } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLinkList from "@components/@core/blue-link/external-list";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";

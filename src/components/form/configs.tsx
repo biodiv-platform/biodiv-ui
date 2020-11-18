@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/core";
+import { IconButton } from "@chakra-ui/react";
 import { CloseIcon, CopyIcon } from "@chakra-ui/icons";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@hooks/use-translation";

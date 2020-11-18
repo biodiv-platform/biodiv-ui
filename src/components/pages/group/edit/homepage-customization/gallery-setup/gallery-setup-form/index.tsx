@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Switch, Text } from "@chakra-ui/core";
+import { Box, Button, Flex, Switch, Text } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import SubmitButton from "@components/form/submit-button";
 import TextAreaField from "@components/form/textarea";

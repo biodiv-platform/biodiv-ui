@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import WKTFieldMulti from "@components/form/wkt-multi";
 import IconCheckboxField from "@components/pages/group/common/icon-checkbox-field";

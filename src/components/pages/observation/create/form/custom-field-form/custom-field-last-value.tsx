@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import ls from "local-storage-json";
 import React, { useEffect, useState } from "react";

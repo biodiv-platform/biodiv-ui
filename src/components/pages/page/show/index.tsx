@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import HTMLContainer from "@components/@core/html-container";
 import { Page } from "@interfaces/pages";
 import React from "react";

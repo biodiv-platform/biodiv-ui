@@ -1,4 +1,4 @@
-import { IconButton, Stack } from "@chakra-ui/core";
+import { IconButton, Stack } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import SITE_CONFIG from "@configs/site-config.json";
 import { getMapCenter, stringToFeature } from "@utils/location";

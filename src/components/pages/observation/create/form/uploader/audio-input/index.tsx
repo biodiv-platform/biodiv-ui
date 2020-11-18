@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/core";
+import { Text } from "@chakra-ui/react";
 import AudioRecorder from "@components/@core/audio-recoarder";
 import useTranslation from "@hooks/use-translation";
 import { getAssetObject } from "@utils/image";

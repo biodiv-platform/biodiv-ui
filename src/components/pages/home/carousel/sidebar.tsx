@@ -1,4 +1,4 @@
-import { Center, Heading, Link, Text } from "@chakra-ui/core";
+import { Center, Heading, Link, Text } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import BlurBox from "@components/@core/blur-box";
 import useTranslation from "@hooks/use-translation";

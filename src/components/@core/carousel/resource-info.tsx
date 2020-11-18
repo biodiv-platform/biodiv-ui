@@ -9,7 +9,7 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import StarIcon from "@icons/star";

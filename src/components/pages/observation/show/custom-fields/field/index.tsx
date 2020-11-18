@@ -1,4 +1,10 @@
-import { FormControl, FormHelperText, FormLabel, IconButton, useDisclosure } from "@chakra-ui/core";
+import {
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  IconButton,
+  useDisclosure
+} from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { CustomFieldData } from "@interfaces/observation";

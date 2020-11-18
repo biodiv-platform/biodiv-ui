@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup, FormControl, FormLabel, Stack } from "@chakra-ui/core";
+import { Checkbox, CheckboxGroup, FormControl, FormLabel, Stack } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import React, { useEffect, useMemo } from "react";
 import { UseFormMethods } from "react-hook-form";

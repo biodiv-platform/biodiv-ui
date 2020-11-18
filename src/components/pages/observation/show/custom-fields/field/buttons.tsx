@@ -1,4 +1,4 @@
-import { Button, Stack } from "@chakra-ui/core";
+import { Button, Stack } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import React from "react";

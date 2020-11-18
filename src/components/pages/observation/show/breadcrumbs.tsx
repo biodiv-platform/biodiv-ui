@@ -1,4 +1,4 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/core";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";

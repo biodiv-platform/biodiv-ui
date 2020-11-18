@@ -9,7 +9,7 @@ import {
   SimpleGrid,
   Text,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { TraitsValue, TraitsValuePair } from "@interfaces/traits";

@@ -1,4 +1,4 @@
-import { Flex, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/core";
+import { Flex, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/react";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
 

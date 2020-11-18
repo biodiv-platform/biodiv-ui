@@ -1,4 +1,4 @@
-import { Box, Flex, Link, SimpleGrid } from "@chakra-ui/core";
+import { Box, Flex, Link, SimpleGrid } from "@chakra-ui/react";
 import { UpDownIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";

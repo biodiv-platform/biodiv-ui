@@ -9,7 +9,7 @@ import {
   ModalFooter,
   ModalOverlay,
   Text
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import StackedBarChart from "@components/charts/stacked-bar-chart";
 import useTranslation from "@hooks/use-translation";

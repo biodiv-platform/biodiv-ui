@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, Heading } from "@chakra-ui/react";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
 import React from "react";
 

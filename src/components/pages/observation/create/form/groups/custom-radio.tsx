@@ -1,4 +1,4 @@
-import { Box, Image, useRadio } from "@chakra-ui/core";
+import { Box, Image, useRadio } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { getSpeciesIcon } from "@utils/media";
 import React from "react";

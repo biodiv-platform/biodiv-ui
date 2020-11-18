@@ -7,7 +7,7 @@ import {
   InputGroup,
   InputRightElement,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";

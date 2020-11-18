@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/core";
+import { Box, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import useTranslation from "@hooks/use-translation";
 import { ShowActivityIbp } from "@interfaces/activity";

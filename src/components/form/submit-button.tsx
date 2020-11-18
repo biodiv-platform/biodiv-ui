@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 

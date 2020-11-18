@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/core";
+import { Box, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import FollowActionButton from "@components/@core/action-buttons/follow";

@@ -1,3 +1,4 @@
+import { ColorModeScript } from "@chakra-ui/react";
 import { Locale } from "@configs/i18n/types";
 import SITE_CONFIG from "@configs/site-config.json";
 import { customTheme } from "@configs/theme";
@@ -23,6 +24,7 @@ class MyDocument extends Document<IDocumentProps> {
           <a className="start-of-content" href="#main">
             Skip to Content
           </a>
+          <ColorModeScript />
           <Main />
           <NextScript />
         </body>

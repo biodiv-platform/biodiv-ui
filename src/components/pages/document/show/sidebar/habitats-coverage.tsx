@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Image, SimpleGrid } from "@chakra-ui/core";
+import { AspectRatio, Box, Image, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "@hooks/use-translation";
 import React from "react";

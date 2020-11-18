@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 import { useState } from "react";

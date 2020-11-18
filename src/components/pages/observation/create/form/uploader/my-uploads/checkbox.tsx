@@ -1,4 +1,4 @@
-import { AspectRatio, Box, IconButton, Image, useCheckbox } from "@chakra-ui/core";
+import { AspectRatio, Box, IconButton, Image, useCheckbox } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";

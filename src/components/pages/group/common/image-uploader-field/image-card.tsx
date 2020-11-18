@@ -1,4 +1,4 @@
-import { CloseButton, Flex, Image } from "@chakra-ui/core";
+import { CloseButton, Flex, Image } from "@chakra-ui/react";
 import { getGroupImageThumb } from "@utils/media";
 import React, { useMemo } from "react";
 

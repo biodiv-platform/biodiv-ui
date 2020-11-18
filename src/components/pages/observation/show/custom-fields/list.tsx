@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { adminOrAuthor } from "@utils/auth";
 import React, { useMemo } from "react";

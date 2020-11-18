@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, SimpleGrid } from "@chakra-ui/core";
+import { FormControl, FormLabel, SimpleGrid } from "@chakra-ui/react";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";

@@ -5,7 +5,7 @@ import {
   FormHelperText,
   FormLabel,
   useRadioGroup
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import React, { useEffect } from "react";
 import { UseFormMethods } from "react-hook-form";

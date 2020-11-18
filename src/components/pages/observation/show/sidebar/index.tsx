@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import { Observation, UserIbp } from "@interfaces/observation";
 import React from "react";
 

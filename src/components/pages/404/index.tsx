@@ -1,4 +1,4 @@
-import { Heading, Text } from "@chakra-ui/core";
+import { Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import React from "react";
 

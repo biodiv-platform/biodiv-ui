@@ -7,7 +7,7 @@ import {
   FormLabel,
   Text,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import { TraitsValuePair } from "@interfaces/traits";

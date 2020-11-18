@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import Activity from "@components/pages/observation/show/activity";
 import Groups from "@components/pages/observation/show/groups";
 import SITE_CONFIG from "@configs/site-config.json";

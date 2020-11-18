@@ -1,4 +1,4 @@
-import { Box, FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { Box, FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import { getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";

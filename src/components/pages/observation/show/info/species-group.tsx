@@ -1,4 +1,4 @@
-import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/core";
+import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { selectStyles } from "@components/form/configs";
 import useTranslation from "@hooks/use-translation";

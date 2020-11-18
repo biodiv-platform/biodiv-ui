@@ -1,4 +1,4 @@
-import { Flex, Image, Link, MenuItem, MenuList, Text } from "@chakra-ui/core";
+import { Flex, Image, Link, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";

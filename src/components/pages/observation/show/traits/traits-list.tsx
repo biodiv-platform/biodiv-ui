@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import { FactValuePair, TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";

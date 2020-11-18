@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import LazyLoad from "react-lazyload";
 

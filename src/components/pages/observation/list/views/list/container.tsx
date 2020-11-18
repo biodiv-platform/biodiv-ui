@@ -1,4 +1,4 @@
-import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
+import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";

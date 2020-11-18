@@ -8,7 +8,7 @@ import {
   Stack,
   Textarea,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { Featured, UserGroupIbp } from "@interfaces/observation";

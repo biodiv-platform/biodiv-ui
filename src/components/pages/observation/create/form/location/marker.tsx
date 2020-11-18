@@ -1,4 +1,4 @@
-import { Button, List, ListItem, useDisclosure } from "@chakra-ui/core";
+import { Button, List, ListItem, useDisclosure } from "@chakra-ui/react";
 import { InfoWindow, Marker } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
 import { reverseGeocode } from "@utils/location";

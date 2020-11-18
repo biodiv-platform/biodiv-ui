@@ -1,4 +1,4 @@
-import { Box, ListItem, OrderedList } from "@chakra-ui/core";
+import { Box, ListItem, OrderedList } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "@hooks/use-translation";

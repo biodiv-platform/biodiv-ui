@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/core";
+import { Box, Text } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";

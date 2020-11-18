@@ -1,4 +1,4 @@
-import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/core";
+import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { stringToArray } from "@utils/basic";
 import React, { useMemo } from "react";

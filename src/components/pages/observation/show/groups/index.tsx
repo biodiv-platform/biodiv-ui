@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";

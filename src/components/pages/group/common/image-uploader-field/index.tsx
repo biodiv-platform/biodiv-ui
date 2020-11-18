@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/core";
+import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
 import { getByPath } from "@utils/basic";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";

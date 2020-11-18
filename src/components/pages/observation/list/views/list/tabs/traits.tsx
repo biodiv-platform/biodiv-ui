@@ -3,7 +3,7 @@ import TraitsList from "@components/pages/observation/show/traits/traits-list";
 import useTranslation from "@hooks/use-translation";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
-import { Spinner } from "@chakra-ui/core";
+import { Spinner } from "@chakra-ui/react";
 
 export default function TraitsTab({ o }) {
   const [traits, setTraits] = useState();

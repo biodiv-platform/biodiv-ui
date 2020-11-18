@@ -1,4 +1,4 @@
-import { Badge, Link } from "@chakra-ui/core";
+import { Badge, Link } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { RecoIbp } from "@interfaces/observation";
 import { TAXON_BADGE_COLORS } from "@static/constants";

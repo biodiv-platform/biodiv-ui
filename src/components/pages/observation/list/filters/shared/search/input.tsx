@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/core";
+import { IconButton } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import TextInput from "@components/form/text";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";

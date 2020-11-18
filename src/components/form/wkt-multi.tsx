@@ -1,4 +1,4 @@
-import { Box, FormLabel, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
+import { Box, FormLabel, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import WKT, { WKTProps } from "@components/@core/WKT";
 import WKTSearch from "@components/@core/WKT/search";
 import WKTList from "@components/@core/WKT/wkt-list";

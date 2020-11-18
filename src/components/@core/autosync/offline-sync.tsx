@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/core";
+import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";

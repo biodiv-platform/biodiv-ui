@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/core";
+import { IconButton } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import React from "react";
 
