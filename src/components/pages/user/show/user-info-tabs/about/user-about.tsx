@@ -6,7 +6,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { timeAgoUTC } from "@utils/date";
 import React from "react";
 
-import { UserProfileProps } from "..";
+import { UserProfileProps } from "../../";
 
 export default function UserAbout({ user }: UserProfileProps) {
   const { isLoggedIn } = useGlobalState();
@@ -54,7 +54,7 @@ export default function UserAbout({ user }: UserProfileProps) {
   ];
 
   return (
-    <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
+    <SimpleGrid className="white-box" columns={[1, 1, 5, 5]} spacing={2} p={4}>
       {aboutLinks.map(({ title, value, cell }) =>
         value ? (
           <ResponsiveInfo key={title} title={title}>

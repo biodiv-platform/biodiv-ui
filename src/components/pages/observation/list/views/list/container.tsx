@@ -114,21 +114,31 @@ export default function Container({ o }) {
     >
       <ImageBoxComponent o={o} />
       <VerticalTabs>
-        <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
+        <Tabs
+          isLazy={true}
+          variant="unstyled"
+          className="tabs"
+          index={tabIndex}
+          onChange={setTabIndex}
+        >
           <TabPanels className="tab-content" position="relative">
             <TabPanel>
               <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
             </TabPanel>
             <TabPanel>
-              <RecoSuggestionTab o={o} tabIndex={tabIndex} recoUpdated={recoUpdated} />
+              <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
             </TabPanel>
             <TabPanel>
-              <GroupsTab o={o} tabIndex={tabIndex} />
+              <GroupsTab o={o} />
             </TabPanel>
-            <TabPanel>{tabIndex === 3 && <TraitsTab o={o} />}</TabPanel>
-            <TabPanel>{tabIndex === 4 && <CustomFieldsTab o={o} />}</TabPanel>
             <TabPanel>
-              <CommentsTab tabIndex={tabIndex} observationId={o.observationId} />
+              <TraitsTab o={o} />
+            </TabPanel>
+            <TabPanel>
+              <CustomFieldsTab o={o} />
+            </TabPanel>
+            <TabPanel>
+              <CommentsTab observationId={o.observationId} />
             </TabPanel>
           </TabPanels>
           <TabList>

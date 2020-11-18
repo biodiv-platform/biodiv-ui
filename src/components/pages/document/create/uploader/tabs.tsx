@@ -21,14 +21,10 @@ export default function DocumentUploaderTabs({ onChange }) {
   }, [selectedDocument]);
 
   return (
-    <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded">
+    <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded" isLazy={true}>
       <TabList mb={4} overflowX="auto" py={1}>
         <Tab>✔️ {t("DOCUMENT.UPLOAD.SELECTED")}</Tab>
         <Tab>☁️ {t("DOCUMENT.UPLOAD.MY_UPLOADS")}</Tab>
-        {/*
-          // TODO: add URL upload
-          <Tab>🔗 {t("DOCUMENT.UPLOAD.URL")}</Tab>
-        */}
       </TabList>
       <TabPanels>
         <TabPanel p={0}>

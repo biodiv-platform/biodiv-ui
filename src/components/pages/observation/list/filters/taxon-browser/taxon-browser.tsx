@@ -1,13 +1,14 @@
+import "rc-tree/assets/index.css";
+
 import { Spinner } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 import { axGetTaxonList } from "@services/api.service";
-import Head from "next/head";
 import Tree from "rc-tree";
 import React, { Component } from "react";
 
 import { getNewTreeData, loopLoading } from "./taxon-browser-helpers";
-import TaxonSuggest from "./taxon-suggest";
 import TaxonResultArrows from "./taxon-result-arrows";
+import TaxonSuggest from "./taxon-suggest";
 
 interface TaxonBrowserProps {
   initialTaxon;
@@ -91,14 +92,6 @@ export default class TaxonBrowser extends Component<TaxonBrowserProps, TaxonBrow
 
     return (
       <TaxonBrowserContainer id="taxon-browser">
-        <Head>
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://unpkg.com/rc-tree@3.2.2/assets/index.css"
-          />
-        </Head>
-
         <TaxonSuggest setParentState={this.setParentState} parentState={this.state} />
 
         <div id="taxon-browser-tree">

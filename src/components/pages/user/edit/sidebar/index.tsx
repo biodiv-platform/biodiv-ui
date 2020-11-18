@@ -35,7 +35,7 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
         mb={4}
       >
         <AspectRatio ratio={1} mb={{ md: 4 }} boxSize={{ base: "4rem", md: "auto" }} flexShrink={0}>
-          <Avatar fontSize={{ md: "6xl" }} src={userImage} name={user.name} />
+          <Avatar position="absolute" boxSize="full" src={userImage} name={user.name} />
         </AspectRatio>
         <Box pl={{ base: 4, md: 0 }}>
           <Button type="button" as="label" cursor="pointer" w="full" colorScheme="blue">

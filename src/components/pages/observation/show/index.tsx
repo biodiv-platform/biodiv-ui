@@ -56,8 +56,8 @@ export default function ObservationShowPageComponent({
         axGetPermissions(
           o.observation.id,
           o.allRecoVotes
-            ?.map((o) => o.taxonId)
-            .filter((o) => o)
+            ?.map((r) => r.taxonId)
+            .filter((r) => r)
             .toString()
         ).then(({ success, data }) => success && setPermission(data));
       }, 1000);

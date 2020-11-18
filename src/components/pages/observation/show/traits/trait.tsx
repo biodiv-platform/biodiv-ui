@@ -108,7 +108,7 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
           )}
         </SimpleGrid>
       )}
-      <Collapse isOpen={isOpen}>
+      <Collapse in={isOpen}>
         <Box mt={2}>
           <Button
             size="sm"

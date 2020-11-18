@@ -28,15 +28,19 @@ export const getNewsLetterMenu = (childs) => {
 };
 
 export const getLocaleStrings = async (lang) => {
-  const localeStrings = await import(`../i18n/${lang}.json`);
+  const defaultLocaleStrings = await import(`../i18n/${defaultLocale}.json`);
 
-  if (lang !== defaultLocale) {
-    const defaultLocaleStrings = await import(`../i18n/${defaultLocale}.json`);
-
-    return { [defaultLocale]: defaultLocaleStrings, [lang]: localeStrings };
+  if (lang === defaultLocale) {
+    return {
+      [lang]: defaultLocaleStrings
+    };
   }
 
-  return { [lang]: localeStrings };
+  const localeStrings = await import(`../i18n/${lang}.json`);
+  return {
+    [defaultLocale]: defaultLocaleStrings,
+    [lang]: localeStrings
+  };
 };
 
 export const processedInitialProps = async ({ Component, ctx, router }: AppContext) => {

@@ -1,9 +1,10 @@
-import SelectMultipleInputField from "@components/form/select-multiple";
 import SelectInputField from "@components/form/select";
+import SelectMultipleInputField from "@components/form/select-multiple";
 import TextBoxField from "@components/form/text";
 import React from "react";
-import CustomFieldOptions from "./custom-field-options";
 import { UseFormMethods } from "react-hook-form";
+
+import CustomFieldOptions from "./custom-field-options";
 
 interface IObservationCustomField {
   name: string;
@@ -33,6 +34,7 @@ export default function ObservationCustomFieldInput({
           options={options}
           isRequired={isRequired}
           optionComponent={CustomFieldOptions}
+          mb={0}
         />
       );
 
@@ -45,6 +47,7 @@ export default function ObservationCustomFieldInput({
           isRequired={isRequired}
           optionComponent={CustomFieldOptions}
           options={options}
+          mb={0}
         />
       );
 
@@ -56,6 +59,7 @@ export default function ObservationCustomFieldInput({
           label={label}
           isRequired={isRequired}
           form={form}
+          mb={0}
         />
       );
   }

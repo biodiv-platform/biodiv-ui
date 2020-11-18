@@ -6,14 +6,21 @@ interface IBoxHeadingProps {
   border?: boolean;
   subTitle?;
   p?;
+  fontSize?;
 }
 
-export default function BoxHeading({ border = true, children, subTitle, p = 4 }: IBoxHeadingProps) {
+export default function BoxHeading({
+  border = true,
+  children,
+  subTitle,
+  p = 4,
+  fontSize = "lg"
+}: IBoxHeadingProps) {
   return (
     <Flex
       borderBottom={border ? "1px" : 0}
       borderColor="gray.300"
-      fontSize="lg"
+      fontSize={fontSize}
       px={p}
       minH="3rem"
       fontWeight="bold"

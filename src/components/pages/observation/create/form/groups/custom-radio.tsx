@@ -16,7 +16,7 @@ const CustomRadio = (props) => {
       <Tooltip title={props.icon} placement="top" hasArrow={true}>
         <Box
           {...getCheckboxProps()}
-          p={2}
+          p={1}
           cursor="pointer"
           borderWidth="2px"
           borderRadius="md"
@@ -29,12 +29,14 @@ const CustomRadio = (props) => {
             boxShadow: "outline"
           }}
           style={undefined}
+          className="fade"
         >
           <Image
-            boxSize="3rem"
+            boxSize="2.6rem"
             style={{ filter: props.isChecked ? "none" : "grayscale(1)" }}
             src={getSpeciesIcon(props.icon)}
             alt={props.icon}
+            overflow="hidden"
           />
         </Box>
       </Tooltip>

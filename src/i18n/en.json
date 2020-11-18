@@ -595,6 +595,7 @@
       "MAP": "Map"
     }
   },
+  "LOAD_MORE": "Load More ↺",
   "LOADING": "Loading...",
   "NEXT": "Next",
   "NOTIFICATIONS": {
@@ -674,6 +675,7 @@
     },
     "INFORMATION": "Information",
     "LANGUAGE": "Language",
+    "LAST_LOCATION": "Use last location",
     "LATITUDE": "Latitude",
     "LICENSE": "License",
     "LOAD_MORE_ACTIVITY": "Load more activity ↺",
@@ -691,8 +693,8 @@
     "LOCATION_SCALE": "Location Accuracy",
     "LONGITUDE": "Longitude",
     "MAP": {
-      "HIDE": "Hide Map",
-      "SHOW": "Show Map"
+      "HIDE": "Simpified Edit",
+      "SHOW": "Advanced Edit"
     },
     "MIN_THREE_CHARS": "Input at least 3 characters to search",
     "MY_UPLOADS": "My Uploads",
@@ -776,6 +778,7 @@
     },
     "USE_DMS": "Use DMS",
     "USE_IN_OBSERVATION": "Use in observation",
+    "USE_LAST_VALUE": "Use last value",
     "USE_LAT_LNG": "Use Lat-Long",
     "USERGROUPS": "Groups",
     "WHY_FEATURING": "Why Featuring?",
@@ -836,6 +839,7 @@
     "GENDER": "Gender",
     "HIDE_EMAIL": "Hide Email",
     "IDENTIFICATION_MAIL": "Allow other users to notify me",
+    "IDENTIFIED": "Identified",
     "INSTITUTION": "Institution",
     "JOINED": "Joined",
     "LAST_ACTIVE": "Last Active",
@@ -847,6 +851,13 @@
     "NAME": "Name",
     "NEW_PASSWORD": "New Password",
     "NOTIFICATIONS": "Notifications",
+    "OBSERVATIONS": {
+      "CHART": "Observations by Species Group",
+      "FILTER": "Filter",
+      "LIFE_LIST": "Life List",
+      "MAP": "Observations Spread",
+      "TITLE": "Observations"
+    },
     "OCCUPATION": "Profession",
     "PASSWORD": "Password",
     "PASSWORD_EXPIRED": "Password Expired",
@@ -861,8 +872,11 @@
     "UPDATE_PASSWORD": "Update Password",
     "UPDATED": "Updated Successfully",
     "UPLOAD_PHOTO": "Upload a photo",
+    "UPLOADED": "Uploaded",
     "USERNAME": "Username",
     "VERIFY_THROUGH": "Since you have provided email and mobile number both how would you like to verify your account?",
-    "WEBSITE": "Website"
+    "VIEW_ALL": "View All",
+    "WEBSITE": "Website",
+    "WITH_MEDIA": "With Media"
   }
 }

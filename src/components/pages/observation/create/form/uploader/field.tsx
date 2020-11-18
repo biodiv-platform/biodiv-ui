@@ -48,7 +48,7 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
 
   return (
     <FormControl isInvalid={form.errors[name] && true} mb={mb}>
-      <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded">
+      <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded" isLazy={true}>
         <TabList mb={4} overflowX="auto" py={1}>
           <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
           <Tab>☁️ {t("OBSERVATION.MY_UPLOADS")}</Tab>

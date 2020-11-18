@@ -1,6 +1,6 @@
 import "@styles/global.scss";
 
-import { ChakraProvider, CSSReset } from "@chakra-ui/core";
+import { ChakraProvider } from "@chakra-ui/core";
 import AppContainer from "@components/@core/container";
 import { customTheme } from "@configs/theme";
 import { LocaleProvider } from "@hooks/use-locale";
@@ -23,7 +23,6 @@ function App(props) {
       <LocaleProvider lang={lang} localeStrings={localeStrings}>
         <NookiesProvider initialValue={nookies} options={{ domain }}>
           <ChakraProvider theme={customTheme}>
-            <CSSReset />
             <AppContainer extras={extras} />
           </ChakraProvider>
         </NookiesProvider>

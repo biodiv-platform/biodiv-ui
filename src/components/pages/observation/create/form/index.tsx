@@ -24,6 +24,7 @@ import ObservationCustomFieldForm from "./custom-field-form";
 import DateInputs from "./date";
 import GroupSelector from "./groups";
 import LocationPicker from "./location";
+import { setLastData } from "./location/use-last-location";
 import Recodata from "./recodata";
 import TraitsPicker from "./traits";
 import Uploader from "./uploader";
@@ -233,6 +234,7 @@ export default function ObservationCreateForm({
       useDegMinSec: false,
       degMinSec: null
     };
+    setLastData(rest.latitude, rest.longitude, rest.observedAt, fields, customFields);
     emit(SYNC_SINGLE_OBSERVATION, {
       observation: { ...payload, customFieldList: parseCustomFieldToPayload(customFields) },
       instant: true

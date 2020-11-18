@@ -1,4 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/core";
+import { useLocalRouter } from "@components/@core/local-link";
 import PhoneNumberInputField from "@components/form/phone-number";
 import SelectInputField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
@@ -23,6 +24,7 @@ import { UserEditPageComponentProps } from "..";
 
 export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentProps) {
   const { t } = useTranslation();
+  const router = useLocalRouter();
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -70,6 +72,7 @@ export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentPro
     const { success } = await axUpdateUserAbout({ id: user.id, ...payload });
     if (success) {
       notification(t("USER.UPDATED"), NotificationType.Success);
+      router.push(`/user/show/${user.id}`, true);
     } else {
       notification(t("USER.UPDATE_ERROR"));
     }

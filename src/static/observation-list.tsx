@@ -3,7 +3,7 @@ import ListIcon from "@icons/list";
 import { ObservationFilterProps } from "@interfaces/custom";
 import React from "react";
 
-export const LIST_PAGINATION_LIMIT = 10;
+export const LIST_PAGINATION_LIMIT = 8;
 
 export const DEFAULT_FILTER: ObservationFilterProps = {
   sort: "created_on",

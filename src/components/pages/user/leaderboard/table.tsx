@@ -25,7 +25,7 @@ function UserLeaderboardTable({ columns }) {
 
   const fetchLeaderboardData = async (v) => {
     setSortedBy(v);
-    const module = v.split("_")[0].replace(/\b\w/g, (v) => v.toUpperCase());
+    const module = v.split("_")[0].replace(/\b\w/g, (s) => s.toUpperCase());
     const payload = {
       value: module,
       how_many: filter.limit,

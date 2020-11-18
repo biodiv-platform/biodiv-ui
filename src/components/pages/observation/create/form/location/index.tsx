@@ -14,9 +14,9 @@ import Select from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
-import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 import useOnlineStatus from "@rehooks/online-status";
 import { EXIF_GPS_FOUND } from "@static/events";
+import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS, GMAP_LIBRARIES } from "@static/location";
 import { getMapCenter, reverseGeocode } from "@utils/location";
 import React, { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
@@ -25,18 +25,18 @@ import { UseFormMethods } from "react-hook-form";
 import { LOCATION_ACCURACY_OPTIONS } from "../options";
 import CoordinatesInput from "./coordinates";
 import LocationMap from "./map";
+import useLastLocation from "./use-last-location";
 
 interface LocationPickerProps {
   form: UseFormMethods<Record<string, any>>;
 }
-
-const LIBRARIES: Libraries = ["drawing", "places"];
 
 const LocationPicker = ({ form }: LocationPickerProps) => {
   const { t } = useTranslation();
   const { latitude: lat, longitude: lng, zoom: initialZoom } = useMemo(() => getMapCenter(4), []);
   const [hideLocationPicker, setHideLocationPicker] = useState(true);
   const isOnline = useOnlineStatus();
+  const ll = useLastLocation();
 
   const FK = {
     observedAt: {
@@ -104,7 +104,11 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
     async (pos) => {
       if (coordinates.lat === 0 && coordinates.lng === 0) {
         setCoordinates(pos);
-        reverseGeocode(pos).then((r) => r.length && setObservedAtText(r[0].formatted_address));
+        if (pos.address) {
+          setObservedAtText(pos.address);
+        } else {
+          reverseGeocode(pos).then((r) => r.length && setObservedAtText(r[0].formatted_address));
+        }
       }
     },
     [EXIF_GPS_FOUND]
@@ -142,7 +146,7 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
     <LoadScriptNext
       id="observation-create-map-script-loader"
       googleMapsApiKey={SITE_CONFIG.TOKENS.GMAP}
-      libraries={LIBRARIES}
+      libraries={GMAP_LIBRARIES}
     >
       <>
         {!isOnline && !hideLocationPicker && (
@@ -161,12 +165,28 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
               }
               isRequired={true}
             >
-              <FormLabel htmlFor="places-search">{FK.observedAt.label}</FormLabel>
+              <FormLabel htmlFor="places-search">
+                {FK.observedAt.label}
+                {ll.has && (
+                  <Button
+                    title={ll.value?.address}
+                    variant="link"
+                    size="xs"
+                    ml={1}
+                    verticalAlign="baseline"
+                    colorScheme="blue"
+                    onClick={ll.use}
+                  >
+                    {t("OBSERVATION.LAST_LOCATION")}
+                  </Button>
+                )}
+              </FormLabel>
               <InputGroup size="md" className="places-search">
                 <Autocomplete
                   onLoad={setSearchBoxRef}
                   onPlaceChanged={handleOnSearchSelected}
-                  options={{ componentRestrictions: { country: SITE_CONFIG.MAP.COUNTRY } }}
+                  options={GEOCODE_OPTIONS}
+                  fields={AUTOCOMPLETE_FIELDS}
                 >
                   <Input
                     id="places-search"
@@ -176,9 +196,9 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
                     pr="5rem"
                   />
                 </Autocomplete>
-                <InputRightElement mr={6}>
-                  <Button variant="link" h="1.6rem" size="sm" onClick={onToggle}>
-                    {t(`OBSERVATION.MAP.${isOpen ? "HIDE" : "SHOW"}`)}
+                <InputRightElement w="7rem">
+                  <Button variant="link" size="sm" onClick={onToggle}>
+                    {t(isOpen ? "OBSERVATION.MAP.HIDE" : "OBSERVATION.MAP.SHOW")}
                   </Button>
                 </InputRightElement>
               </InputGroup>

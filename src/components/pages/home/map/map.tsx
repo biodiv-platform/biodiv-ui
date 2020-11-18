@@ -5,10 +5,13 @@ import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const Naksha = dynamic(() => import("naksha-components-react"), {
-  ssr: false,
-  loading: () => <p>Loading...</p>
-});
+const Naksha: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.Naksha),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>
@@ -43,6 +46,9 @@ export default function Map() {
               {
                 id: "global-observations",
                 title: "Observations",
+                description: "All observations from india biodiversity portal",
+                attribution: "indiabiodiversity.org and Contributors",
+                tags: ["Global", "Observations"],
                 isAdded: true,
                 source: {
                   type: "grid",

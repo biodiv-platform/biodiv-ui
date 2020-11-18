@@ -38,7 +38,7 @@ export const stringToArray = (l) => {
  * @returns {string}
  */
 export const getGroupLink = (url): string => {
-  return url.includes("/group/") ? url + "/show" : url;
+  return url?.includes("/group/") ? url + "/show" : url;
 };
 
 /**

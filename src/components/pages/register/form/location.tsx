@@ -11,14 +11,12 @@ import {
 import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
-import { LoadScriptNext, StandaloneSearchBox } from "@react-google-maps/api";
-import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
+import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
+import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS, GMAP_LIBRARIES } from "@static/location";
 import { getMapCenter } from "@utils/location";
 import React, { useEffect, useState } from "react";
 
 import LocationMap from "../../observation/create/form/location/map";
-
-const LIBRARIES: Libraries = ["drawing", "places"];
 
 const LocationPicker = ({ form }) => {
   const { t } = useTranslation();
@@ -42,7 +40,7 @@ const LocationPicker = ({ form }) => {
   const [zoom, setZoom] = useState(initialZoom);
   const [center, setCenter] = useState({ lat, lng });
   const [searchBoxRef, setSearchBoxRef] = useState<any>();
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestion, setSuggestion] = useState<any>();
   const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({
     lat: form.control.defaultValuesRef.current[FK.latitude.name] || 0,
     lng: form.control.defaultValuesRef.current[FK.longitude.name] || 0
@@ -52,8 +50,7 @@ const LocationPicker = ({ form }) => {
   );
 
   useEffect(() => {
-    if (suggestions.length) {
-      const suggestion = suggestions[0];
+    if (suggestion) {
       const point = {
         lat: suggestion.geometry.location.lat(),
         lng: suggestion.geometry.location.lng()
@@ -63,7 +60,7 @@ const LocationPicker = ({ form }) => {
       setLocationText(suggestion.formatted_address);
       setCoordinates(point);
     }
-  }, [suggestions]);
+  }, [suggestion]);
 
   useEffect(() => {
     if (coordinates) {
@@ -87,24 +84,25 @@ const LocationPicker = ({ form }) => {
   };
 
   const handleOnSearchSelected = async () => {
-    setSuggestions(searchBoxRef.getPlaces());
+    setSuggestion(searchBoxRef.getPlace());
   };
 
   return (
     <LoadScriptNext
       id="user-registration-map-script-loader"
       googleMapsApiKey={SITE_CONFIG.TOKENS.GMAP}
-      libraries={LIBRARIES}
+      libraries={GMAP_LIBRARIES}
     >
       <>
         <Box mb={4}>
           <FormControl isInvalid={form.errors[FK.location.name] && true}>
             <FormLabel>{FK.location.label}</FormLabel>
             <InputGroup size="md" className="places-search">
-              <StandaloneSearchBox
+              <Autocomplete
                 onLoad={setSearchBoxRef}
-                onPlacesChanged={handleOnSearchSelected}
-                options={{ componentRestrictions: { country: "in" } }}
+                onPlaceChanged={handleOnSearchSelected}
+                options={GEOCODE_OPTIONS}
+                fields={AUTOCOMPLETE_FIELDS}
               >
                 <Input
                   value={locationText}
@@ -112,10 +110,10 @@ const LocationPicker = ({ form }) => {
                   isRequired={false}
                   pr="5rem"
                 />
-              </StandaloneSearchBox>
-              <InputRightElement width="5rem" mr={2}>
-                <Button h="1.6rem" size="sm" onClick={onToggle}>
-                  {t(`OBSERVATION.MAP.${isOpen ? "HIDE" : "SHOW"}`)}
+              </Autocomplete>
+              <InputRightElement w="7rem">
+                <Button variant="link" size="sm" onClick={onToggle}>
+                  {t(isOpen ? "OBSERVATION.MAP.HIDE" : "OBSERVATION.MAP.SHOW")}
                 </Button>
               </InputRightElement>
             </InputGroup>

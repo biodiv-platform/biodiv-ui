@@ -13,10 +13,10 @@ interface ISidebarProps {
 
 export default function Sidebar({ observation, authorInfo, speciesId }: ISidebarProps) {
   return (
-    <Box>
+    <Box mb={2}>
       <User user={authorInfo} />
       <ClusterMap
-        speciesId={speciesId}
+        filter={speciesId && { speciesId }}
         latitude={observation.latitude}
         longitude={observation.longitude}
       />

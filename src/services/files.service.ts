@@ -70,7 +70,7 @@ export const axUploadResource = async (resource: File, directory, nestedPath?: s
     formData.append("upload", resource, resource.name);
     formData.append("directory", directory);
     formData.append("resource", "true");
-    nestedPath ? formData.append("nestedFolder", nestedPath) : null;
+    nestedPath && formData.append("nestedFolder", nestedPath);
 
     const { data } = await http.post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
       headers: {

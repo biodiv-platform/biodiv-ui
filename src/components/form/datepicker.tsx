@@ -1,3 +1,5 @@
+import "flatpickr/dist/themes/material_blue.css";
+
 import {
   FormControl,
   FormHelperText,

@@ -2,8 +2,16 @@ import { Box } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { getMapCenter } from "@utils/location";
-import { Previewer } from "naksha-components-react";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const Previewer: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.Previewer),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 const coverageToGeoJson = (coverage) => ({
   type: "FeatureCollection",

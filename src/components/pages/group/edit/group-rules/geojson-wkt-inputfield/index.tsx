@@ -16,10 +16,18 @@ import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { getMapCenter, stringToFeature } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
-import { MapAreaDraw } from "naksha-components-react";
+import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 import { parse, stringify } from "wkt";
+
+const MapAreaDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.MapAreaDraw),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 interface IGeojsonWktInputProps {
   name: string;

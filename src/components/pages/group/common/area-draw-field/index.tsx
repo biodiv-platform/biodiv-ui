@@ -1,8 +1,16 @@
 import { Box, FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/core";
 import SITE_CONFIG from "@configs/site-config.json";
 import { getMapCenter, stringToFeature } from "@utils/location";
-import { MapAreaDraw } from "naksha-components-react";
+import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useState } from "react";
+
+const MapAreaDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.MapAreaDraw),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 interface AreaDrawFieldProps {
   form;

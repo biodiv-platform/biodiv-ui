@@ -104,8 +104,8 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
             <ModalHeader>☑️ {t("OBSERVATION.DOWNLOAD.MODAL.TITLE")}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {OBSERVATION_FILTERS.map((filter) => (
-                <CheckboxGroupField {...filter} key={filter.name} form={hForm} />
+              {OBSERVATION_FILTERS.map((f) => (
+                <CheckboxGroupField {...f} key={f.name} form={hForm} />
               ))}
               <CheckboxGroupField
                 name="traits"

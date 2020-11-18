@@ -69,7 +69,7 @@ export default function CoordinatesInput({
   };
 
   return (
-    <Collapse isOpen={show}>
+    <Collapse in={show}>
       <FormControl
         mb={4}
         isInvalid={(form.errors[fk.latitude.name] || form.errors[fk.longitude.name]) && true}

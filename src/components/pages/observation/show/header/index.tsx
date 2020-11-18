@@ -17,6 +17,7 @@ import {
 } from "@services/observation.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
+import { formatDateReadableFromUTC } from "@utils/date";
 import { getObservationImage } from "@utils/media";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useMemo, useState } from "react";
@@ -32,16 +33,16 @@ interface IHeaderProps {
 function Header({ o, following = false }: IHeaderProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isLoggedIn, user, currentGroup } = useGlobalState();
+  const { isLoggedIn, user } = useGlobalState();
   const [showActions, setShowActions] = useState(false);
 
   const pageTitle = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} by ${
     o.authorInfo.name
-  } on ${currentGroup.name}`;
+  } on ${formatDateReadableFromUTC(o.observation.fromDate)}`;
 
   const pageDescription = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} Observed by ${
     o.authorInfo.name
-  } at ${o.observation.placeName} on ${currentGroup.name}`;
+  } at ${o.observation.placeName} on ${formatDateReadableFromUTC(o.observation.fromDate)}`;
 
   const reprImage: any = useMemo(() => {
     if (o.observation.reprImageId) {

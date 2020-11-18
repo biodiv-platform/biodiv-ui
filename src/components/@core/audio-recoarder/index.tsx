@@ -75,7 +75,7 @@ export default function AudioRecorder({
     }
   };
 
-  const { time, start, reset, isRunning } = useTimer({ endTime, onTimeOver: stopRecording });
+  const { time, start, reset, status } = useTimer({ endTime, onTimeOver: stopRecording });
 
   return (
     <div className="fade">
@@ -92,7 +92,7 @@ export default function AudioRecorder({
         <SecondsToMinutes totalSeconds={time} />
       </Box>
       <Button
-        isDisabled={isRunning}
+        isDisabled={status === "RUNNING"}
         leftIcon={<MicrophoneIcon />}
         mr={4}
         mt={4}
@@ -104,7 +104,7 @@ export default function AudioRecorder({
         {t("OBSERVATION.AUDIO.START")}
       </Button>
       <Button
-        isDisabled={!isRunning}
+        isDisabled={status !== "RUNNING"}
         leftIcon={<StopIcon />}
         mt={4}
         onClick={stopRecording}

@@ -38,7 +38,7 @@ export const axUserFilterSearch = async (name) => {
     const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/autocomplete`, {
       params: { name }
     });
-    return data.map(({ name, id }) => ({ label: name, value: id }));
+    return data.map((u) => ({ label: u.name, value: u.id }));
   } catch (e) {
     notification(e.response.data.message);
     return { success: false, data: [] };

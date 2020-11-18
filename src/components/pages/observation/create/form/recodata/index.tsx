@@ -52,7 +52,7 @@ export default function Recodata({ form, languages }: IRecodataProps) {
   return (
     <>
       <CheckBox name="helpIdentify" label="Help Identify" form={form} />
-      <Collapse isOpen={!helpIdentify}>
+      <Collapse in={!helpIdentify}>
         <SimpleGrid columns={[1, 1, 2, 2]} spacing={4}>
           <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
             <SelectAsync

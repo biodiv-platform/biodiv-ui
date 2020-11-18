@@ -143,9 +143,9 @@ export default function AddCustomField({
   const handleCustomFieldName = (name) => {
     const defaultValue = allCustomFields.reduce((acc, item) => {
       if (item.customFields.name === name) {
-        const { customFields, cfValues, allowedParticipation, isMandatory, ...others } = item;
+        const { customFields: cfs, cfValues, allowedParticipation, isMandatory, ...others } = item;
         acc = {
-          ...customFields,
+          ...cfs,
           allowedParticipation: allowedParticipation || true,
           isMandatory: isMandatory || true,
           values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],

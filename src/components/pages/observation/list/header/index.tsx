@@ -21,7 +21,7 @@ import DownloadObservationDataModal from "../download-observation-modal";
 
 export default function ListHeader() {
   const { filter, setFilter, observationData } = useObservationFilter();
-  const defaultIndex = viewTabs.findIndex((t) => t.key === filter.view);
+  const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter.view);
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -51,6 +51,7 @@ export default function ListHeader() {
           isManual={true}
           defaultIndex={defaultIndex}
           mb={4}
+          isLazy={true}
         >
           <TabList aria-orientation="vertical">
             {viewTabs.map(({ name, icon, key }) => (

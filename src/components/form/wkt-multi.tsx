@@ -35,7 +35,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
     <Box mb={props.mb || 4}>
       <FormLabel>{props.label}</FormLabel>
       <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
-        <Tabs>
+        <Tabs isLazy={true}>
           <TabList>
             <Tab>{t("DOCUMENT.GEOENTITIES")}</Tab>
             <Tab>{t("DOCUMENT.WKT")}</Tab>

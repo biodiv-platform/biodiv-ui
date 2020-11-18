@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/core";
 import React from "react";
 
 interface IBlurBoxProps {
@@ -17,7 +18,6 @@ interface IBlurBoxProps {
 function BlurBox({
   children,
   bg,
-  bgOpacity = 0.9,
   fallbackColor = "black",
   blur = 40,
   negativeBlur = 30,
@@ -27,49 +27,40 @@ function BlurBox({
   const bgSize = `${100 + negativeBlur}%`;
 
   return (
-    <div
+    <Box
       className="blur-box"
-      style={{
-        height,
-        width,
-        overflow: "hidden",
-        position: "relative",
-        background: fallbackColor
-      }}
+      h={height}
+      w={width}
+      overflow="hidden"
+      position="relative"
+      bg={fallbackColor}
     >
-      <div
+      <Box
         className="blur-box-bg"
-        style={{
-          opacity: bgOpacity,
-          filter: `blur(${blur}px)`,
-
-          backgroundImage: `url("${bg}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-
-          height: bgSize,
-          width: bgSize,
-
-          position: "absolute",
-          left: `-${negativeBlur / 2}%`,
-          top: `-${negativeBlur / 2}%`,
-          bottom: bgSize,
-          right: bgSize
-        }}
+        opacity={0.9}
+        style={{ filter: `blur(${blur}px)` }}
+        backgroundImage={`url("${bg}")`}
+        backgroundSize="cover"
+        backgroundPosition="center center"
+        h={bgSize}
+        w={bgSize}
+        position="absolute"
+        left={`-${negativeBlur / 2}%`}
+        top={`-${negativeBlur / 2}%`}
+        bottom={bgSize}
+        right={bgSize}
       />
-      <div
+      <Box
         className="blur-box-content"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0
-        }}
+        position={{ base: "inherit", md: "absolute" }}
+        top={0}
+        left={0}
+        bottom={0}
+        right={0}
       >
         {children}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 
