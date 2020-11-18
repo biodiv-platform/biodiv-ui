@@ -31,7 +31,7 @@ export default function StackedBarChart({
   mt = 10,
   mr = 0,
   mb = 60,
-  ml = 36,
+  ml = 40,
 
   barPadding = 0.2,
   rotateLabels,
