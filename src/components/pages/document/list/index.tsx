@@ -2,7 +2,7 @@ import { Box, SimpleGrid } from "@chakra-ui/core";
 import React from "react";
 
 import Views from "./view";
-import Filters from './filters';
+import Filters from "./filters";
 
 interface DocumentListPageProps {
   nextOffset: number;
@@ -12,7 +12,7 @@ export default function DocumentListPageComponent({ nextOffset }: DocumentListPa
   return (
     <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
       <SimpleGrid w="full" columns={[1, 1, 1, 5]}>
-      <Filters />
+        <Filters />
         <Box
           maxH="full"
           w="full"
