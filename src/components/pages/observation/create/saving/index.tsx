@@ -1,4 +1,4 @@
-import { Heading, Spinner, Text } from "@chakra-ui/core";
+import { Heading, Spinner, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";

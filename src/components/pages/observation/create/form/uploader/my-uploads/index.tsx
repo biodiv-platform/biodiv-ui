@@ -7,7 +7,7 @@ import {
   Spinner,
   Text,
   useCheckboxGroup
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import React from "react";

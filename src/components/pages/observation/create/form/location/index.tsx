@@ -8,7 +8,7 @@ import {
   InputRightElement,
   SimpleGrid,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import Select from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config.json";

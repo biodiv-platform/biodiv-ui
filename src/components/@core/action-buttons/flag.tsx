@@ -14,7 +14,7 @@ import {
   Stack,
   Text,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import UserBadge from "@components/@core/user/badge";
 import Select from "@components/form/select";

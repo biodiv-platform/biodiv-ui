@@ -1,4 +1,4 @@
-import { Stack, Tag, TagCloseButton, TagLabel } from "@chakra-ui/core";
+import { Stack, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
 import React from "react";
 
 export default function WKTList({ list, onDelete, nameTitle }) {

@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/core";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "@hooks/use-translation";
 import { ObservationLocationInfo } from "@interfaces/observation";

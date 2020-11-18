@@ -1,4 +1,4 @@
-import { Flex, Spinner } from "@chakra-ui/core";
+import { Flex, Spinner } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 

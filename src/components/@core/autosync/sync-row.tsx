@@ -1,4 +1,4 @@
-import { Badge, Button, Image, Text } from "@chakra-ui/core";
+import { Badge, Button, Image, Text } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import React, { useMemo } from "react";

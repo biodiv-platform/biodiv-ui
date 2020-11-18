@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Stack, Text } from "@chakra-ui/core";
+import { Avatar, Box, Button, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import Tooltip from "@components/@core/tooltip";

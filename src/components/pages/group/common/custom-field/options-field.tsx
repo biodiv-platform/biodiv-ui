@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Flex, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/core";
+import { Badge, Box, Button, Flex, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/react";
 import TextBox from "@components/form/text";
 import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";

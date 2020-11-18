@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Image, Stack } from "@chakra-ui/core";
+import { Badge, Box, Flex, Image, Stack } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";

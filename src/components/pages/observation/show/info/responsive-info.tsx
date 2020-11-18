@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/core";
+import { Box, Text } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 

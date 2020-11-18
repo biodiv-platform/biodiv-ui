@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import ClusterMap from "@components/pages/observation/show/sidebar/cluster-map";
 import useGlobalState from "@hooks/use-global-state";

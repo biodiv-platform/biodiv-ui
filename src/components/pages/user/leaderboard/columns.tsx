@@ -1,4 +1,4 @@
-import { Avatar, Stack } from "@chakra-ui/core";
+import { Avatar, Stack } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";

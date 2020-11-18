@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton } from "@chakra-ui/core";
+import { Box, Button, Skeleton } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";

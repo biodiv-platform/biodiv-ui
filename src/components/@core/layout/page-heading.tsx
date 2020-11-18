@@ -1,4 +1,4 @@
-import { Heading, Stack } from "@chakra-ui/core";
+import { Heading, Stack } from "@chakra-ui/react";
 import React from "react";
 
 export default function PageHeading({ children = null, mb = 4, actions = null, ...props }) {

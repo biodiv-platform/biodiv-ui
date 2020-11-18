@@ -1,4 +1,4 @@
-import { Box, Divider, SimpleGrid } from "@chakra-ui/core";
+import { Box, Divider, SimpleGrid } from "@chakra-ui/react";
 import Datepicker from "@components/form/datepicker";
 import RichTextarea from "@components/form/rich-textarea";
 import Select from "@components/form/select";

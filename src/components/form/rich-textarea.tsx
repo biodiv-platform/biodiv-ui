@@ -1,6 +1,6 @@
 import "react-quill//dist/quill.snow.css";
 
-import { Box, FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { Box, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";

@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, Button } from "@chakra-ui/core";
+import { Alert, AlertIcon, Box, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 

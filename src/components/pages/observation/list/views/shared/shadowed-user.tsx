@@ -1,4 +1,4 @@
-import { Avatar, Flex, Link } from "@chakra-ui/core";
+import { Avatar, Flex, Link } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import { UserIbp } from "@interfaces/activity";

@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import SignInForm from "@components/pages/login/form";
 import { AUTHWALL } from "@static/events";
 import React, { useState } from "react";

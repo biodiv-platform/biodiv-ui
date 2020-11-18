@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useState } from "react";

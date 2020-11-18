@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup } from "@chakra-ui/core";
+import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";

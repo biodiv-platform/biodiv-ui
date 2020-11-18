@@ -1,4 +1,4 @@
-import { Box, Divider, Text, VisuallyHidden } from "@chakra-ui/core";
+import { Box, Divider, Text, VisuallyHidden } from "@chakra-ui/react";
 import CheckboxField from "@components/form/checkbox";
 import useTranslation from "@hooks/use-translation";
 import React from "react";

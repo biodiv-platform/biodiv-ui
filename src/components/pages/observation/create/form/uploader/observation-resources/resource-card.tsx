@@ -1,4 +1,4 @@
-import { CloseButton, Flex, Image, Input } from "@chakra-ui/core";
+import { CloseButton, Flex, Image, Input } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import StarIcon from "@icons/star";

@@ -1,4 +1,4 @@
-import { Box, useDisclosure } from "@chakra-ui/core";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import Router from "next/router";

@@ -1,4 +1,4 @@
-import { Box, useDisclosure } from "@chakra-ui/core";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";

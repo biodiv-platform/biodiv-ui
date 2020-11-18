@@ -1,4 +1,4 @@
-import { Text, Textarea } from "@chakra-ui/core";
+import { Text, Textarea } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { CustomFieldData } from "@interfaces/observation";
 import React, { useState } from "react";

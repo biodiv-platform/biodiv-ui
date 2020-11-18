@@ -1,4 +1,4 @@
-import { SimpleGrid, useRadioGroup } from "@chakra-ui/core";
+import { SimpleGrid, useRadioGroup } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";

@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/react";
 import { TimeIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import React from "react";

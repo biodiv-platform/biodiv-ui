@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/core";
+import { Button, Flex } from "@chakra-ui/react";
 import TextBoxField from "@components/form/text";
 import useTranslation from "@hooks/use-translation";
 import { axGetObservationById } from "@services/observation.service";

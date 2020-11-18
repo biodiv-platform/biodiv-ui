@@ -1,4 +1,4 @@
-import { Heading, Link, SimpleGrid } from "@chakra-ui/core";
+import { Heading, Link, SimpleGrid } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
 import partnersData from "@static/partners";

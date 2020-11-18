@@ -1,4 +1,4 @@
-import { SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
 import FilePreview from "../common/file-preview";

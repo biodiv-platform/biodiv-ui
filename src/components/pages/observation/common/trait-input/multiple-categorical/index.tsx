@@ -1,4 +1,4 @@
-import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/core";
+import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";

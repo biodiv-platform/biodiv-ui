@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Input, SimpleGrid } from "@chakra-ui/core";
+import { FormControl, FormLabel, Input, SimpleGrid } from "@chakra-ui/react";
 import notification from "@utils/notification";
 import React, { useRef, useState } from "react";
 import wkt from "wkt";

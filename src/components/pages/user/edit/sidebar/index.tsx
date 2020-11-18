@@ -1,4 +1,4 @@
-import { AspectRatio, Avatar, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/core";
+import { AspectRatio, Avatar, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateUserImage } from "@services/user.service";

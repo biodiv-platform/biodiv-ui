@@ -1,4 +1,4 @@
-import { Box, IconButton, useDisclosure } from "@chakra-ui/core";
+import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import ChevronIcon from "@icons/chevron";

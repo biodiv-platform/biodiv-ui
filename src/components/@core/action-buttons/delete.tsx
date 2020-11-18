@@ -7,7 +7,7 @@ import {
   AlertDialogOverlay,
   Button,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import DeleteIcon from "@icons/delete";

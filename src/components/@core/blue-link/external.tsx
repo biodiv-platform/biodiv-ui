@@ -1,4 +1,4 @@
-import { LinkProps } from "@chakra-ui/core";
+import { LinkProps } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import React from "react";
 

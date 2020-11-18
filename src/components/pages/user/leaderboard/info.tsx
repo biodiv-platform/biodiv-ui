@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, CloseButton, useDisclosure } from "@chakra-ui/core";
+import { Alert, AlertIcon, CloseButton, useDisclosure } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 

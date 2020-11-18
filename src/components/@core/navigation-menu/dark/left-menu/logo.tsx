@@ -1,4 +1,4 @@
-import { IconButton, Link } from "@chakra-ui/core";
+import { IconButton, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";

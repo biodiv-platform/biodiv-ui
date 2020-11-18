@@ -1,4 +1,4 @@
-import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/core";
+import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { axGetUserGroupList } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";

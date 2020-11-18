@@ -1,4 +1,4 @@
-import { Link } from "@chakra-ui/core";
+import { Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import { FORWARD_BLACKLIST } from "@static/constants";

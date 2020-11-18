@@ -1,4 +1,4 @@
-import { Box, Image, Link } from "@chakra-ui/core";
+import { Box, Image, Link } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";

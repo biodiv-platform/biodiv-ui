@@ -1,4 +1,4 @@
-import { Box, Button, Link } from "@chakra-ui/core";
+import { Box, Button, Link } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { DeleteIcon, LinkIcon, DragHandleIcon } from "@chakra-ui/icons";
 import React from "react";

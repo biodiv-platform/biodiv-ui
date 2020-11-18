@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import GroupPost from "@components/pages/observation/show/groups/group-post";
 import useTranslation from "@hooks/use-translation";

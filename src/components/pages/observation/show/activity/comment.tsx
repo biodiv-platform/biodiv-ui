@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel } from "@chakra-ui/core";
+import { Box, Button, FormControl, FormLabel } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
 import { ACTIVITY_UPDATED } from "@static/events";

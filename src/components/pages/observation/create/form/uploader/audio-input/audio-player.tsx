@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/core";
+import { Box, Button } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import CheckIcon from "@icons/check";

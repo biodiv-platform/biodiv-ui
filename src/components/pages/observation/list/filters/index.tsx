@@ -9,7 +9,7 @@ import {
   Stack,
   useBreakpointValue,
   useDisclosure
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";

@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, SimpleGrid, Stack, Text } from "@chakra-ui/core";
+import { Avatar, AvatarGroup, Box, Button, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
 import useTranslation from "@hooks/use-translation";

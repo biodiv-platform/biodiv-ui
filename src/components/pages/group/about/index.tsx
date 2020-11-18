@@ -1,4 +1,4 @@
-import { Badge, Flex } from "@chakra-ui/core";
+import { Badge, Flex } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
 import useTranslation from "@hooks/use-translation";

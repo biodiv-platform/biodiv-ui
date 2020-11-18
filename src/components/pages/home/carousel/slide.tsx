@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/core";
+import { Box, Image } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getObservationImage } from "@utils/media";

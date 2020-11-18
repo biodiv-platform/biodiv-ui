@@ -1,4 +1,4 @@
-import { Avatar, Box, Heading, Link, Stack } from "@chakra-ui/core";
+import { Avatar, Box, Heading, Link, Stack } from "@chakra-ui/react";
 import { getUserImage } from "@utils/media";
 import React from "react";
 

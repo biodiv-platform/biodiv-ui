@@ -1,4 +1,4 @@
-import { Box, Flex, useDisclosure } from "@chakra-ui/core";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { ArrowForwardIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";

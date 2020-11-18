@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/core";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { useIsMount } from "@hooks/use-is-mount";
 import React, { useEffect, useState } from "react";

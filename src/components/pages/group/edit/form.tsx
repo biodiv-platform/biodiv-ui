@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import CheckboxField from "@components/form/checkbox";
 import RichTextareaField from "@components/form/rich-textarea";

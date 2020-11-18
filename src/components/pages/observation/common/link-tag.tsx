@@ -1,4 +1,4 @@
-import { Link, Tag } from "@chakra-ui/core";
+import { Link, Tag } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import { SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid } from "@chakra-ui/react";
 import { UserProfileData } from "@interfaces/integrator";
 import React from "react";
 

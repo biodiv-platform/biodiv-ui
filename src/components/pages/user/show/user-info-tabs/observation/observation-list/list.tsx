@@ -1,4 +1,13 @@
-import { AspectRatio, Box, Button, Flex, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/core";
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Flex,
+  Image,
+  Link,
+  SimpleGrid,
+  Skeleton
+} from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import ActivityList from "@components/pages/observation/show/activity/activity-list";
 import Comment from "@components/pages/observation/show/activity/comment";
 import { axAddObservationComment } from "@services/activity.service";

@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/core";
+import { FormControl, FormHelperText, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 

@@ -1,4 +1,4 @@
-import { Button, Heading, Text } from "@chakra-ui/core";
+import { Button, Heading, Text } from "@chakra-ui/react";
 import { TimeIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";

@@ -1,4 +1,4 @@
-import { Image, Link } from "@chakra-ui/core";
+import { Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
 import AudioIcon from "@icons/audio";

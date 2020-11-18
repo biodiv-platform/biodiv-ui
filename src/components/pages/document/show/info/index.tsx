@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/core";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import HTMLContainer from "@components/@core/html-container";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";

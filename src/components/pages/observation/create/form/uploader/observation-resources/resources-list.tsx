@@ -1,4 +1,4 @@
-import { SimpleGrid, Text } from "@chakra-ui/core";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 

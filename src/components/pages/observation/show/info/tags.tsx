@@ -1,4 +1,4 @@
-import { Box, IconButton, useDisclosure } from "@chakra-ui/core";
+import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
 import EditIcon from "@icons/edit";
 import { Tags } from "@interfaces/observation";
 import React, { useState } from "react";

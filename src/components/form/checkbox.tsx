@@ -1,4 +1,4 @@
-import { Checkbox, FormControl, FormHelperText } from "@chakra-ui/core";
+import { Checkbox, FormControl, FormHelperText } from "@chakra-ui/react";
 import React from "react";
 import { UseFormMethods, Controller } from "react-hook-form";
 

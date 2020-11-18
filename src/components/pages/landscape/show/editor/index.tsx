@@ -10,7 +10,7 @@ import "tinymce/plugins/lists";
 import "tinymce/plugins/table";
 import "tinymce/themes/silver/theme";
 
-import { Button, Stack } from "@chakra-ui/core";
+import { Button, Stack } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axSaveLandscapeField, axUploadEditorResource } from "@services/landscape.service";

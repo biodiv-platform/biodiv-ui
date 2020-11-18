@@ -1,6 +1,6 @@
 import "@styles/global.scss";
 
-import { ChakraProvider } from "@chakra-ui/core";
+import { ChakraProvider } from "@chakra-ui/react";
 import AppContainer from "@components/@core/container";
 import { customTheme } from "@configs/theme";
 import { LocaleProvider } from "@hooks/use-locale";

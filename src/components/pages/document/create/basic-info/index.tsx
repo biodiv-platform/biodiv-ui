@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Stack } from "@chakra-ui/core";
+import { Box, SimpleGrid, Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import DatePickerField from "@components/form/datepicker";
 import RichTextareaField from "@components/form/rich-textarea";

@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/core";
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
