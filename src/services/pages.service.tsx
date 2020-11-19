@@ -1,6 +1,6 @@
 import { ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
-import { preProcessContent } from "@utils/pages.util";
+import { preProcessContent, treeToFlat } from "@utils/pages.util";
 
 export const axGetPages = async (userGroupId) => {
   try {
@@ -31,5 +31,29 @@ export const axDeletePageByID = async (pageId) => {
   } catch (e) {
     console.error(e.response.data.message);
     return { success: false, data: {} };
+  }
+};
+
+export const axGetTree = async (userGroupId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.PAGES}/v1/page/tree`, {
+      params: { userGroupId }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axUpdateTree = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.PAGES}/v1/page/updateTree`, {
+      pageTree: treeToFlat(payload)
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
   }
 };

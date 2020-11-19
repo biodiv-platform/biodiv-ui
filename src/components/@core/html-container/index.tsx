@@ -31,7 +31,7 @@ const HTMLContainer = styled.div`
   h5,
   h6,
   p {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
   }
 
   h1 {
