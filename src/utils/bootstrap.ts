@@ -28,7 +28,7 @@ export const getNewsLetterMenu = (childs) => {
 };
 
 export const getLocaleStrings = async (lang) => {
-  const defaultLocaleStrings = await import(`../i18n/${defaultLocale}.json`);
+  const defaultLocaleStrings = await import(`../i18n/${defaultLocale || "en"}.json`);
 
   if (lang === defaultLocale) {
     return {
