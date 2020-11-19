@@ -2,19 +2,23 @@ import { AspectRatio, Avatar, Box, Button, Flex, Heading, Text } from "@chakra-u
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
 import useTranslation from "@hooks/use-translation";
-import { adminOrAuthor } from "@utils/auth";
+import { Role } from "@interfaces/custom";
+import { adminOrAuthor, hasAccess } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import React, { useEffect, useState } from "react";
 
 import { UserProfileProps } from "..";
+import DeleteAccount from "./delete-account";
 
 export default function UserInfoSidebar({ user }: UserProfileProps) {
   const userImage = getUserImage(user.profilePic, 400);
   const { t } = useTranslation();
   const [canEdit, setCanEdit] = useState<boolean>();
+  const [canDelete, setCanDelete] = useState<boolean>();
 
   useEffect(() => {
     setCanEdit(adminOrAuthor(user.id));
+    setCanDelete(hasAccess([Role.Admin]));
   }, []);
 
   return (
@@ -39,6 +43,8 @@ export default function UserInfoSidebar({ user }: UserProfileProps) {
           {t("USER.EDIT_PROFILE")}
         </Button>
       </LocalLink>
+
+      {canDelete && <DeleteAccount userId={user.id} />}
     </div>
   );
 }

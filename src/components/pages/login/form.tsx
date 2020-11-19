@@ -1,5 +1,5 @@
-import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { ArrowForwardIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
@@ -9,7 +9,6 @@ import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { axLogin } from "@services/auth.service";
 import { generateSession } from "@utils/auth";
@@ -36,7 +35,6 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
   const [user, setUser] = useState();
   const [showMobile, setShowMobile] = useState(false);
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { currentGroup } = useGlobalState();
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -130,7 +128,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
           <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
             {t("SIGN_IN.FORM.SUBMIT")}
           </Submit>
-          <LocalLink href={`${currentGroup?.webAddress}/register/forgotPassword`}>
+          <LocalLink href="/register/forgotPassword">
             <BlueLink display="block">{t("SIGN_IN.FORGOT_PASSWORD_LINK")}</BlueLink>
           </LocalLink>
         </Flex>
@@ -142,7 +140,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       <Oauth text={t("SIGN_IN.WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
 
       {t("SIGN_IN.SIGN_UP")}
-      <LocalLink href={`${currentGroup?.webAddress}/register`}>
+      <LocalLink href="/register">
         <BlueLink ml={2}>
           {t("SIGN_IN.SIGN_UP_LINK")}
           <ChevronRightIcon />

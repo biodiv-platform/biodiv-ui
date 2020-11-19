@@ -831,6 +831,11 @@
     "CONFIRM_NEW_PASSWORD": "Confirm New Password",
     "CONFIRM_PASSWORD": "Confirm Password",
     "CURRENT_PASSWORD": "Current Password",
+    "DELETE": {
+      "MESSAGE": "Are you sure? You can not undo this action afterwards.",
+      "SUCCESS": "User deleted successfully",
+      "TITLE": "Delete User"
+    },
     "EDIT_PROFILE": "Edit Profile",
     "EMAIL": "Email",
     "ENABLED": "Account Enabled",

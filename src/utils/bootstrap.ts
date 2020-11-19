@@ -1,4 +1,5 @@
 import { defaultLocale, localesList } from "@configs/i18n/config";
+import localeStrings from "@configs/i18n/strings";
 import { isLocale } from "@configs/i18n/types";
 import { axGetPages } from "@services/pages.service";
 import { axCheckUserGroupMember, axGroupList } from "@services/usergroup.service";
@@ -27,21 +28,17 @@ export const getNewsLetterMenu = (childs) => {
   });
 };
 
-export const getLocaleStrings = async (lang) => {
-  const defaultLocaleStrings = await import(`../i18n/${defaultLocale}.json`);
-
-  if (lang === defaultLocale) {
-    return {
-      [lang]: defaultLocaleStrings
-    };
-  }
-
-  const localeStrings = await import(`../i18n/${lang}.json`);
-  return {
-    [defaultLocale]: defaultLocaleStrings,
-    [lang]: localeStrings
-  };
-};
+export function getLocaleStrings(lang) {
+  const defaultLocaleStrings = localeStrings[defaultLocale];
+  return lang === defaultLocale
+    ? {
+        [lang]: defaultLocaleStrings
+      }
+    : {
+        [lang]: localeStrings[lang],
+        [defaultLocale]: defaultLocaleStrings
+      };
+}
 
 export const processedInitialProps = async ({ Component, ctx, router }: AppContext) => {
   const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
