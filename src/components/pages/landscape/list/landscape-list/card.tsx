@@ -12,7 +12,7 @@ export default function GridViewCard({ o }: { o: Landscape }) {
   return (
     <Box className="hover-box fade">
       <Box w="full" position="relative" h="14rem">
-        <LocalLink href={`/landscape/show/${o.id}`} prefixGroup={true}>
+        <LocalLink href={`/landscape/show/${o.id}`} params={{ state: "ewew" }} prefixGroup={true}>
           <Link>
             <Image
               objectFit="contain"

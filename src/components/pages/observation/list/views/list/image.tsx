@@ -10,7 +10,7 @@ import { getObservationImage, getSpeciesIcon } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
-import ShadowedUser from "../shared/shadowed-user";
+import ShadowedUser from "@components/pages/common/shadowed-user";
 
 const ImageBox = styled.div`
   position: relative;

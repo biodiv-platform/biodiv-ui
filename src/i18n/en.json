@@ -121,6 +121,7 @@
     "LICENSE": "License",
     "METADATA": "Metadata",
     "NO_GEODATA": "No Geographical Data Available",
+    "NO_USERGROUP": "No Usergroups  found for this document",
     "PAGES": "Pages",
     "PUBLICATION_DATE": "Publication Date",
     "PUBLICATION_LANGUAGE": "Publication Language",
@@ -178,6 +179,9 @@
       "DISTRICT": "District",
       "MAP": {
         "TITLE": "Map"
+      },
+      "PROTECTED_AREA": {
+        "TITLE": "Protected Areas"
       },
       "STATE": {
         "TITLE": "State"

@@ -9,6 +9,7 @@ dayjs.extend(UTCPlugin);
 
 const FORMAT_TIMESTAMP = "DD-MM-YYYY hh:mm A";
 const FORMAT_DATE_TIMESTAMP = "DD-MM-YYYY";
+const FORMAT_DATE_REVERSE = "YYYY-MM-DD";
 const FORMAT_DATE_READABLE_TIMESTAMP = "D MMMM YYYY";
 const FORMAT_EXIF_TIMESTAMP = "YYYY:MM:DD HH:mm:ss";
 
@@ -16,6 +17,8 @@ export const dateToUTC = (ts?) => (ts ? dayjs(ts, FORMAT_DATE_TIMESTAMP).utc() :
 
 export const parseDate = (ts) => (ts ? dayjs(ts, FORMAT_DATE_TIMESTAMP).toDate() : new Date());
 export const formatDate = (ts) => ts && dayjs(ts).format(FORMAT_DATE_TIMESTAMP);
+export const parseDateReverse = (ts) => ts && dayjs(ts, FORMAT_DATE_REVERSE).toDate();
+export const formatDateReverse = (ts) => ts && dayjs(ts).format(FORMAT_DATE_REVERSE);
 export const formatDateFromUTC = (ts) => dayjs.utc(ts).local().format(FORMAT_DATE_TIMESTAMP);
 
 export const parseDateRange = (ts) => (ts ? ts.map((i) => parseDate(i)) : []);

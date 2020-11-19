@@ -3,7 +3,7 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import ObservationLoading from "../../loading";
+import ObservationLoading from "@components/pages/common/loading";
 import GridViewCard from "./card";
 
 const GridViewBox = styled.div`
