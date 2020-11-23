@@ -798,12 +798,38 @@
     "TITLE": "Account verification"
   },
   "PAGE": {
+    "CREATE": {
+      "FAILLURE": "Unable to create page",
+      "SUCCESS": "Page created successfully",
+      "TITLE": "Create Page"
+    },
+    "FORM": {
+      "CONTENT": "Content",
+      "DESCRIPTION": "Description Metadata",
+      "IS_SIDEBAR": "Show in Sidebar",
+      "PARENT": "Parent Page",
+      "TITLE": "Title"
+    },
+    "MAIL": {
+      "SENT": "Mail sent successfully"
+    },
+    "NO_PARENT": "No Parent",
     "REMOVE": {
       "DESCRIPTION": "Are you sure? You can't undo this action afterwards.",
       "SUCCESS": "Page deleted successfully",
       "TITLE": "Delete page"
     },
-    "SHARE": "Share this Page"
+    "SHARE": "Share this Page",
+    "SIDEBAR": {
+      "REORDER": "Reorder Pages",
+      "TOGGLE": "Toggle Page List",
+      "UPDATED": "Order Updated Successfully"
+    },
+    "UPDATE": {
+      "FAILLURE": "Unable to update page",
+      "SUCCESS": "Page updated successfully",
+      "TITLE": "Update Page"
+    }
   },
   "PREV": "Previous",
   "PROCESSING": "Processing...",

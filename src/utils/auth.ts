@@ -95,7 +95,7 @@ export const generateSession = async (
   setNookieI,
   tokens,
   redirect = false,
-  forward = "Lw",
+  forward?,
   onSuccess?
 ) => {
   setNookieI(TOKEN.AUTH, tokens);
@@ -107,7 +107,7 @@ export const generateSession = async (
       onSuccess(data);
     }
     if (redirect) {
-      window.location.assign(decode(forward));
+      window.location.assign(decode(forward || "Lw"));
     }
   }
 };

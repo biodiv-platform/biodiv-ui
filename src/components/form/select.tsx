@@ -7,7 +7,7 @@ import Select, { components } from "react-select";
 import ErrorMessage from "./common/error-message";
 import { ClearIndicator, selectStyles } from "./configs";
 
-interface ISelectCreatableProps {
+interface SelectInputFieldProps {
   name: string;
   label: string;
   mb?: number;
@@ -23,7 +23,7 @@ interface ISelectCreatableProps {
 }
 const DefaultOptionComponent = (p) => <components.Option {...p} />;
 
-const SelectCreatableInputField = ({
+const SelectInputField = ({
   name,
   label,
   hint,
@@ -37,7 +37,7 @@ const SelectCreatableInputField = ({
   isControlled,
   onChangeCallback,
   ...props
-}: ISelectCreatableProps) => {
+}: SelectInputFieldProps) => {
   const initialValue = options.find(
     (v) => v.value === getByPath(form.control.defaultValuesRef.current, name)
   );
@@ -86,4 +86,4 @@ const SelectCreatableInputField = ({
   );
 };
 
-export default SelectCreatableInputField;
+export default SelectInputField;

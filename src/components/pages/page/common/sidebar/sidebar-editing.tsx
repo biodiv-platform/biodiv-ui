@@ -19,7 +19,7 @@ export default function SidebarEditing() {
       scaffoldBlockPxWidth={24}
       generateNodeProps={({ node }) => ({
         onClick: () => {
-          router.push(`/page/show/${node.id}`);
+          router.push(`/page/${p.linkType}/${node.id}`);
         },
         style: {
           background: node.id === Number(p.currentPage.id) ? "var(--blue-100)" : "var(--gray-50)"

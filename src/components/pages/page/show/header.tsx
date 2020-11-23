@@ -1,3 +1,4 @@
+import { AddIcon } from "@chakra-ui/icons";
 import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ShareActionButton from "@components/@core/action-buttons/share";
@@ -19,6 +20,8 @@ export default function PageHeader({ title, pageId }) {
 
   const handleOnEdit = () => router.push(`/page/edit/${pageId}`, true);
 
+  const handleOnCreate = () => router.push(`/page/create`, true);
+
   return (
     <>
       <NextSeo openGraph={{ title }} title={title} />
@@ -30,6 +33,12 @@ export default function PageHeader({ title, pageId }) {
           <ShareActionButton text={title} title={t("PAGE.SHARE")} />
           {showActions && (
             <>
+              <SimpleActionButton
+                icon={<AddIcon />}
+                title={t("PAGE.CREATE.TITLE")}
+                onClick={handleOnCreate}
+                colorScheme="yellow"
+              />
               <SimpleActionButton
                 icon={<EditIcon />}
                 title={t("EDIT")}

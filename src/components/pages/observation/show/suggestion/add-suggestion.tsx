@@ -133,8 +133,8 @@ export default function AddSuggestion({
       </Alert>
     ) : (
       <>
-        <Box className="fade" hidden={!isOpen}>
-          <Collapse in={isOpen}>
+        <Box className="fade" isHidden={!isOpen}>
+          <Collapse in={isOpen} unmountOnExit={true}>
             <Box p={4}>
               <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
                 <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>

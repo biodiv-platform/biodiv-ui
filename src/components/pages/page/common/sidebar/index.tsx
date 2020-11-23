@@ -1,5 +1,6 @@
 import { Button, Collapse, useBreakpointValue, useDisclosure } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
 import LockIcon from "@icons/lock";
 import MenuIcon from "@icons/menu";
 import UnlockIcon from "@icons/unlock";
@@ -55,6 +56,7 @@ const TreeContainer = styled.div`
 
 export default function PagesSidebar() {
   const p = usePagesSidebar();
+  const { t } = useTranslation();
   const isDesktop = useBreakpointValue({ base: false, md: true });
   const { isOpen, onToggle } = useDisclosure();
 
@@ -68,7 +70,7 @@ export default function PagesSidebar() {
         hidden={isDesktop}
         leftIcon={<MenuIcon />}
       >
-        Toggle Page List
+        {t("PAGE.SIDEBAR.TOGGLE")}
       </Button>
       <Collapse in={isDesktop || isOpen} animateOpacity={true}>
         {p.canEdit && (
@@ -80,7 +82,7 @@ export default function PagesSidebar() {
             rightIcon={p.isEditing ? <UnlockIcon /> : <LockIcon />}
             onClick={p.toggleEditing}
           >
-            Reorder Pages
+            {t("PAGE.SIDEBAR.REORDER")}
           </Button>
         )}
         {p.isEditing ? <SidebarEditing /> : <SidebarNormal />}

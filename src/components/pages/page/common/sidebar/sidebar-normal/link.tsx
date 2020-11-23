@@ -1,5 +1,5 @@
-import { Box, chakra, IconButton, useDisclosure } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { Box, chakra, IconButton, useDisclosure } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
 
@@ -21,12 +21,12 @@ function LinkLayout({ isActive, isParent, children }) {
   );
 }
 
-export const LinkChildren = ({ page, currentPageId }) => {
+export const LinkChildren = ({ page, currentPageId, linkType }) => {
   const isActive = currentPageId === page.id;
 
   return (
     <LinkLayout isActive={isActive} isParent={false}>
-      <LocalLink href={`/page/show/${page.id}`}>
+      <LocalLink href={`/page/${linkType}/${page.id}`}>
         <chakra.a flexGrow={1} px={3} py={2} aria-current={isActive ? "page" : undefined}>
           <Box as="span" color="gray.400" mr={2}>
             #
@@ -38,14 +38,14 @@ export const LinkChildren = ({ page, currentPageId }) => {
   );
 };
 
-export const LinkParent = ({ page, currentPageId }) => {
+export const LinkParent = ({ page, currentPageId, linkType }) => {
   const isActive = currentPageId === page.id;
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
 
   return (
     <Box>
       <LinkLayout isActive={isActive} isParent={true}>
-        <LocalLink href={`/page/show/${page.id}`}>
+        <LocalLink href={`/page/${linkType}/${page.id}`}>
           <chakra.a flexGrow={1} px={3} py={2} aria-current={isActive ? "page" : undefined}>
             {page.title}
           </chakra.a>
@@ -63,7 +63,12 @@ export const LinkParent = ({ page, currentPageId }) => {
       {page.children.length > 0 && isOpen && (
         <Box pl={3} mt={2}>
           {page.children.map((page) => (
-            <LinkChildren page={page} currentPageId={currentPageId} key={page.id} />
+            <LinkChildren
+              page={page}
+              currentPageId={currentPageId}
+              key={page.id}
+              linkType={linkType}
+            />
           ))}
         </Box>
       )}

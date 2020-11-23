@@ -1,4 +1,5 @@
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import { Role } from "@interfaces/custom";
 import { axGetTree, axUpdateTree } from "@services/pages.service";
 import { hasAccess } from "@utils/auth";
@@ -9,6 +10,7 @@ import { toggleExpandedForAll } from "react-sortable-tree";
 interface GlobalStateContextProps {
   pages;
   setPages;
+  linkType;
 
   isEditing;
   toggleEditing;
@@ -20,7 +22,8 @@ interface GlobalStateContextProps {
 
 interface UsePagesSidebarProviderProps {
   initialPages?;
-  currentPage;
+  linkType: "edit" | "show";
+  currentPage?;
   children;
 }
 
@@ -28,9 +31,11 @@ const GlobalStateContext = createContext<GlobalStateContextProps>({} as GlobalSt
 
 export const UsePagesSidebarProvider = ({
   initialPages,
+  linkType,
   currentPage,
   children
 }: UsePagesSidebarProviderProps) => {
+  const { t } = useTranslation();
   const { currentGroup } = useGlobalState();
   const [pages, setPages] = useState(initialPages || []);
   const [isLoading, setIsLoading] = useState<boolean>();
@@ -53,7 +58,7 @@ export const UsePagesSidebarProvider = ({
     setIsLoading(true);
     const { success } = await axUpdateTree(pages);
     if (success) {
-      notification("Order Updated Successfully");
+      notification(t("PAGE.SIDEBAR.UPDATED"));
     }
     setIsLoading(false);
   };
@@ -65,6 +70,7 @@ export const UsePagesSidebarProvider = ({
       value={{
         pages,
         currentPage,
+        linkType,
         isEditing,
         toggleEditing,
         canEdit,

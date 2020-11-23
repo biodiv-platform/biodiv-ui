@@ -1,23 +1,13 @@
 import { ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
-import { preProcessContent, treeToFlat } from "@utils/pages.util";
+import { treeToFlat } from "@utils/pages.util";
 
-export const axGetPages = async (userGroupId) => {
+export const axGetPageByID = async (pageId, format?) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.PAGES}/v1/newsletter/group`, {
-      params: { userGroupId }
+    const { data } = await plainHttp.get(`${ENDPOINT.PAGES}/v1/page/${pageId}`, {
+      params: { format }
     });
     return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false, data: [] };
-  }
-};
-
-export const axGetPageByID = async (pageId) => {
-  try {
-    const { data } = await plainHttp.get(`${ENDPOINT.PAGES}/v1/page/${pageId}`);
-    return { success: true, data: preProcessContent(data) };
   } catch (e) {
     console.error(e);
     return { success: false, data: {} };
@@ -55,5 +45,25 @@ export const axUpdateTree = async (payload) => {
   } catch (e) {
     console.error(e);
     return { success: false, data: [] };
+  }
+};
+
+export const axUpdatePage = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.PAGES}/v1/page`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axCreatePage = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.PAGES}/v1/page`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
   }
 };

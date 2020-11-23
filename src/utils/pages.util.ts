@@ -12,10 +12,7 @@ export const treeToFlat = (children: any[]) =>
     []
   );
 
-export const preProcessContent = ({ content, ...rest }) => ({
-  ...rest,
-  content: content
+export const preProcessContent = (content) =>
+  content
     .replace(/\<table/g, '<div class="table-responsive"><table')
-    .replace(/\<\/table\>/g, "</table></div>")
-    .replace(/\/biodiv\//, "https://indiabiodiversity.org/biodiv/")
-});
+    .replace(/\<\/table\>/g, "</table></div>");
