@@ -336,11 +336,7 @@ export const axUpdateCustomField = async (payload) => {
   }
 };
 
-export const axGetListData = async (
-  params,
-  index = "extended_observation",
-  type = "extended_records"
-) => {
+export const axGetListData = async (params, index = "extended_observation", type = "_doc") => {
   try {
     const { data } = await plainHttp.get(
       `${ENDPOINT.OBSERVATION}/v1/observation/list/${index}/${type}`,

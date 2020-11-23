@@ -56,7 +56,7 @@ export default function Map() {
                 },
                 data: {
                   index: "extended_observation",
-                  type: "extended_records",
+                  type: "_doc",
                   geoField: "location",
                   userGroupId
                 },

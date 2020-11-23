@@ -67,7 +67,7 @@ export default function ClusterMap({
                     },
                     data: {
                       index: "extended_observation",
-                      type: "extended_records",
+                      type: "_doc",
                       geoField: "location",
                       ...filter
                     },
