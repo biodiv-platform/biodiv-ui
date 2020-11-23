@@ -1,7 +1,6 @@
 import { Avatar, Stack } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
-import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
 import { format } from "indian-number-format";
 import React from "react";
@@ -89,27 +88,21 @@ export const LEADERBOARD_TABLE_COLUMNS = [
   {
     Header: "Name",
     accessor: "details",
-    Cell: (props) => {
-      const { currentGroup } = useGlobalState();
-
-      return (
-        <Stack isInline={true} spacing={2} minW="12rem">
-          <Avatar
-            size="md"
-            name={props?.cell?.value?.authorName}
-            src={getUserImage(props?.cell?.value?.profilePic)}
-          ></Avatar>
-          <div>
-            <LocalLink
-              href={`${currentGroup?.webAddress}/user/show/${props?.cell?.value?.author_id}`}
-            >
-              <BlueLink>{props?.cell?.value?.authorName}</BlueLink>
-            </LocalLink>
-            <br />
-            <span>{["Activity Score: ", props?.cell?.value?.activity_score]}</span>
-          </div>
-        </Stack>
-      );
-    }
+    Cell: (props) => (
+      <Stack isInline={true} spacing={2} minW="12rem">
+        <Avatar
+          size="md"
+          name={props?.cell?.value?.authorName}
+          src={getUserImage(props?.cell?.value?.profilePic)}
+        ></Avatar>
+        <div>
+          <LocalLink href={`/user/show/${props?.cell?.value?.author_id}`}>
+            <BlueLink>{props?.cell?.value?.authorName}</BlueLink>
+          </LocalLink>
+          <br />
+          <span>{["Activity Score: ", props?.cell?.value?.activity_score]}</span>
+        </div>
+      </Stack>
+    )
   }
 ];

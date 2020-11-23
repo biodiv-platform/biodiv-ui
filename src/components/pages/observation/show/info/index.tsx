@@ -1,10 +1,9 @@
-import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
+import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
-import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
@@ -26,7 +25,6 @@ interface IInfoProps {
 
 export default function Info({ observation: o, speciesGroups }: IInfoProps) {
   const { t } = useTranslation();
-  const { currentGroup } = useGlobalState();
 
   return (
     <Box p={4} mb={4} className="white-box">
@@ -34,7 +32,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         <ResponsiveInfo title="OBSERVATION.NAME">
           <i>{o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}</i>
           {o.recoIbp?.speciesId && (
-            <LocalLink href={`${currentGroup?.webAddress}/species/show/${o.recoIbp.speciesId}`}>
+            <LocalLink href={`/species/show/${o.recoIbp.speciesId}`}>
               <BlueLink ml={2}>
                 <InfoIcon /> {t("OBSERVATION.SPECIES_PAGE")}
               </BlueLink>

@@ -123,3 +123,13 @@ export const axUpdateUserPermissions = async (payload) => {
     return { success: false };
   }
 };
+
+export const axDeleteUser = async (userId) => {
+  try {
+    const { status } = await http.delete(`${ENDPOINT.USER}/v1/authenticate/delete/${userId}`);
+    return { success: status === 200 };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};

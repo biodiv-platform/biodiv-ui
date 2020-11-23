@@ -36,7 +36,7 @@ export default function MapPageComponent() {
   };
 
   return (
-    <Box height="calc(100vh - var(--heading-height))" overflow="hidden">
+    <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
       <Naksha
         viewPort={defaultViewPort}
         loadToC={true}

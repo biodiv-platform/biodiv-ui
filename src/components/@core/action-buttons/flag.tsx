@@ -34,6 +34,7 @@ import { useState } from "react";
 import { emit } from "react-gbus";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
+import LocalLink from "../local-link";
 
 import SimpleActionButton from "./simple";
 
@@ -133,9 +134,11 @@ export default function FlagActionButton({
                         src={getUserImage(user.profilePic)}
                       />
                       <Box>
-                        <BlueLink mr={2} href={`/user/show/${user.id}`}>
-                          {user.name} <UserBadge isAdmin={user.isAdmin} />
-                        </BlueLink>
+                        <LocalLink href={`/user/show/${user.id}`}>
+                          <BlueLink mr={2}>
+                            {user.name} <UserBadge isAdmin={user.isAdmin} />
+                          </BlueLink>
+                        </LocalLink>
                         <Badge colorScheme="red" verticalAlign="baseline">
                           {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
                         </Badge>
