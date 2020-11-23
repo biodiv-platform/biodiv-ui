@@ -2,7 +2,7 @@ import { Button, Stack } from "@chakra-ui/react";
 import WYSIWYGEditor from "@components/@core/wysiwyg-editor";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
-import { axSaveLandscapeField } from "@services/landscape.service";
+import { axSaveLandscapeField, axUploadEditorResource } from "@services/landscape.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 
@@ -27,7 +27,11 @@ export default function FieldEditor({ initialContent, id, onChange, onClose }) {
 
   return (
     <>
-      <WYSIWYGEditor value={content} onEditorChange={setContent} />
+      <WYSIWYGEditor
+        value={content}
+        onEditorChange={setContent}
+        uploadHandler={axUploadEditorResource}
+      />
       <Stack isInline={true} spacing={2} mt={2}>
         <Button type="button" colorScheme="blue" onClick={handleOnSave} leftIcon={<CheckIcon />}>
           {t("SAVE")}

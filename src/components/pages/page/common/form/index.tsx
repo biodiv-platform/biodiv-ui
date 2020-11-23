@@ -5,6 +5,7 @@ import TextBoxField from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { PageShowMinimal } from "@interfaces/pages";
+import { axUploadEditorPageResource } from "@services/pages.service";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
@@ -56,7 +57,12 @@ export default function PageForm({
     <form onSubmit={hForm.handleSubmit(onSubmit)}>
       <TextBoxField name="title" label={t("PAGE.FORM.TITLE")} form={hForm} />
       <TextBoxField name="description" label={t("PAGE.FORM.DESCRIPTION")} form={hForm} />
-      <WYSIWYGField name="content" label={t("PAGE.FORM.CONTENT")} form={hForm} />
+      <WYSIWYGField
+        name="content"
+        label={t("PAGE.FORM.CONTENT")}
+        uploadHandler={axUploadEditorPageResource}
+        form={hForm}
+      />
       {!hideParentId && (
         <SelectInputField
           name="parentId"

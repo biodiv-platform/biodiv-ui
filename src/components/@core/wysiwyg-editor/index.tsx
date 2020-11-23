@@ -10,11 +10,10 @@ import "tinymce/plugins/lists";
 import "tinymce/plugins/table";
 import "tinymce/themes/silver/theme";
 
-import { axUploadEditorResource } from "@services/landscape.service";
 import { Editor } from "@tinymce/tinymce-react";
 import React from "react";
 
-export default function WYSIWYGEditor(props) {
+export default function WYSIWYGEditor({ uploadHandler, ...props }) {
   return (
     <Editor
       {...props}
@@ -27,7 +26,7 @@ export default function WYSIWYGEditor(props) {
         plugins: ["link", "image", "table", "code", "lists"],
         toolbar:
           "undo redo | bold italic numlist bullist | alignleft aligncenter alignright alignjustify | link image table | code",
-        images_upload_handler: axUploadEditorResource,
+        images_upload_handler: uploadHandler,
         images_upload_base_path: "/"
       }}
     />

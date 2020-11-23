@@ -1,6 +1,27 @@
 import { ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
 import { treeToFlat } from "@utils/pages.util";
+import { nanoid } from "nanoid";
+
+export const axUploadEditorPageResource = (blobInfo, success, failure) => {
+  const formData = new FormData();
+  formData.append("upload", blobInfo.blob(), blobInfo.filename());
+  formData.append("hash", nanoid());
+  formData.append("directory", "pages");
+
+  http
+    .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then((r) => {
+      success(`${ENDPOINT.FILES}/get/raw/pages${r.data.uri}`);
+    })
+    .catch(() => {
+      failure("Error");
+    });
+};
 
 export const axGetPageByID = async (pageId, format?) => {
   try {
