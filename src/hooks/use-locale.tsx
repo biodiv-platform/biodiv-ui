@@ -1,6 +1,6 @@
 import React from "react";
 
-import { defaultLocale, defaultLocaleId, localesList } from "../configs/i18n/config";
+import i18nConfig from "../configs/i18n/config";
 import { Locale } from "../configs/i18n/types";
 
 interface ContextProps {
@@ -13,9 +13,9 @@ interface ContextProps {
 }
 
 export const LocaleContext = React.createContext<ContextProps>({
-  locale: defaultLocale,
-  localeId: defaultLocaleId,
-  localesList,
+  locale: i18nConfig.defaultLocale,
+  localeId: i18nConfig.defaultLocaleId,
+  localesList: i18nConfig.localesList,
 
   setLocale: () => null,
   localeStrings: {}
@@ -36,8 +36,8 @@ export const LocaleProvider: React.FC<{ lang: Locale; localeStrings: any }> = ({
     <LocaleContext.Provider
       value={{
         locale: lang,
-        localeId: localesList[lang].ID,
-        localesList,
+        localeId: i18nConfig.localesList[lang].ID,
+        localesList: i18nConfig.localesList,
 
         setLocale: updateLocale,
         localeStrings

@@ -2,6 +2,7 @@ import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { PageCreate } from "@interfaces/pages";
 import { axCreatePage } from "@services/pages.service";
+import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 
@@ -24,11 +25,12 @@ export default function PageCreateForm(): JSX.Element {
       userGroupId: currentGroup.id,
       languageId: localeId,
       pageIndex: 0,
-      pageType: "CONTENT",
+      pageType: "Content",
       url: null,
       autherId: user.id,
       autherName: user.name,
-      showInFooter: false
+      showInFooter: false,
+      date: dateToUTC().format()
     };
     const { success } = await axCreatePage(payload);
     if (success) {
@@ -43,6 +45,7 @@ export default function PageCreateForm(): JSX.Element {
       defaultValues={defaultValues}
       submitLabel={t("PAGE.CREATE.TITLE")}
       onSubmit={handleOnPageEdit}
+      hideParentId={false}
     />
   );
 }

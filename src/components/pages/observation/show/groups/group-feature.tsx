@@ -114,7 +114,7 @@ export default function GroupFeature({
         ))}
       </SimpleGrid>
 
-      <Collapse in={isOpen}>
+      <Collapse in={isOpen} unmountOnExit={true}>
         {groupsN.length > 0 && (
           <CheckBoxItems
             gridColumns={[1, 1, 3, 3]}

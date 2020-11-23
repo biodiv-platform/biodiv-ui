@@ -18,9 +18,15 @@ interface PageFormProps {
   defaultValues: Partial<PageShowMinimal>;
   submitLabel: string;
   onSubmit;
+  hideParentId: boolean;
 }
 
-export default function PageForm({ defaultValues, submitLabel, onSubmit }: PageFormProps) {
+export default function PageForm({
+  defaultValues,
+  submitLabel,
+  onSubmit,
+  hideParentId
+}: PageFormProps) {
   const { t } = useTranslation();
   const { pages } = usePagesSidebar();
 
@@ -39,7 +45,7 @@ export default function PageForm({ defaultValues, submitLabel, onSubmit }: PageF
         title: Yup.string().required(),
         description: Yup.string().notRequired(),
         content: Yup.string().required(),
-        parentId: Yup.number().nullable(),
+        parentId: hideParentId ? Yup.number().notRequired() : Yup.number().required(),
         sticky: Yup.boolean().required()
       })
     ),
@@ -51,12 +57,14 @@ export default function PageForm({ defaultValues, submitLabel, onSubmit }: PageF
       <TextBoxField name="title" label={t("PAGE.FORM.TITLE")} form={hForm} />
       <TextBoxField name="description" label={t("PAGE.FORM.DESCRIPTION")} form={hForm} />
       <WYSIWYGField name="content" label={t("PAGE.FORM.CONTENT")} form={hForm} />
-      <SelectInputField
-        name="parentId"
-        label={t("PAGE.FORM.PARENT")}
-        options={parentOptions}
-        form={hForm}
-      />
+      {!hideParentId && (
+        <SelectInputField
+          name="parentId"
+          label={t("PAGE.FORM.PARENT")}
+          options={parentOptions}
+          form={hForm}
+        />
+      )}
       <SwitchField name="sticky" mb={2} label={t("PAGE.FORM.IS_SIDEBAR")} form={hForm} />
       <SubmitButton form={hForm}>{submitLabel}</SubmitButton>
     </form>

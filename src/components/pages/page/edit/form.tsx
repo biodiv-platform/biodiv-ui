@@ -15,8 +15,7 @@ export default function PageEditForm({ page }: PageEditFormProps): JSX.Element {
   const defaultValues = {
     title: page.title,
     content: page.content,
-    sticky: page.sticky,
-    parentId: page.parentId
+    sticky: page.sticky
   };
 
   const handleOnPageEdit = async (payload) => {
@@ -39,6 +38,7 @@ export default function PageEditForm({ page }: PageEditFormProps): JSX.Element {
       defaultValues={defaultValues}
       submitLabel={t("PAGE.UPDATE.TITLE")}
       onSubmit={handleOnPageEdit}
+      hideParentId={true}
     />
   );
 }

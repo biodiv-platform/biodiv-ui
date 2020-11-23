@@ -62,17 +62,12 @@ export default function PagesSidebar() {
 
   return (
     <TreeContainer className="fadeInUp">
-      <Button
-        colorScheme="blue"
-        w="full"
-        mb={4}
-        onClick={onToggle}
-        hidden={isDesktop}
-        leftIcon={<MenuIcon />}
-      >
-        {t("PAGE.SIDEBAR.TOGGLE")}
-      </Button>
-      <Collapse in={isDesktop || isOpen} animateOpacity={true}>
+      {!isDesktop && (
+        <Button colorScheme="blue" w="full" mb={4} onClick={onToggle} leftIcon={<MenuIcon />}>
+          {t("PAGE.SIDEBAR.TOGGLE")}
+        </Button>
+      )}
+      <Collapse in={isDesktop || isOpen} unmountOnExit={true}>
         {p.canEdit && (
           <Button
             mb={3}

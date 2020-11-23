@@ -133,7 +133,7 @@ export default function AddSuggestion({
       </Alert>
     ) : (
       <>
-        <Box className="fade" isHidden={!isOpen}>
+        <Box className="fade" hidden={!isOpen}>
           <Collapse in={isOpen} unmountOnExit={true}>
             <Box p={4}>
               <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>

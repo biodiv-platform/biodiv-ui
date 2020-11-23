@@ -12,7 +12,7 @@ const FORMAT_DATE_TIMESTAMP = "DD-MM-YYYY";
 const FORMAT_DATE_READABLE_TIMESTAMP = "D MMMM YYYY";
 const FORMAT_EXIF_TIMESTAMP = "YYYY:MM:DD HH:mm:ss";
 
-export const dateToUTC = (ts) => (ts ? dayjs(ts, FORMAT_DATE_TIMESTAMP).utc() : dayjs().utc());
+export const dateToUTC = (ts?) => (ts ? dayjs(ts, FORMAT_DATE_TIMESTAMP).utc() : dayjs().utc());
 
 export const parseDate = (ts) => (ts ? dayjs(ts, FORMAT_DATE_TIMESTAMP).toDate() : new Date());
 export const formatDate = (ts) => ts && dayjs(ts).format(FORMAT_DATE_TIMESTAMP);

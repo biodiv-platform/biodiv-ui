@@ -41,9 +41,13 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const [assets, setAssets] = useImmer({ a: props.assets || [] });
   const [resourcesSortBy, setResourcesSortBy] = useState(MY_UPLOADS_SORT[0].value);
   const { t } = useTranslation();
-  const { add, getOneByIndex, getManyByIndex, deleteByID, update } = useIndexedDBStore<
-    IDBObservationAsset
-  >(STORE.ASSETS);
+  const {
+    add,
+    getOneByIndex,
+    getManyByIndex,
+    deleteByID,
+    update
+  } = useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
 
   const reFetchAssets = async () => {
     const allUnUsedAssets = await getManyByIndex("isUsed", 0);

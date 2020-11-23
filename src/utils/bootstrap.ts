@@ -1,4 +1,4 @@
-import { defaultLocale, localesList } from "@configs/i18n/config";
+import i18nConfig from "@configs/i18n/config";
 import localeStrings from "@configs/i18n/strings";
 import { isLocale } from "@configs/i18n/types";
 import { axGetTree } from "@services/pages.service";
@@ -12,11 +12,11 @@ import { getManifestURL } from "./userGroup";
 
 export const getLang = (ctx) => {
   return typeof ctx.query.lang !== "string" || !isLocale(ctx.query.lang)
-    ? defaultLocale
+    ? i18nConfig.defaultLocale
     : ctx.query.lang;
 };
 
-export const getLangId = (ctx) => localesList[getLang(ctx)].ID;
+export const getLangId = (ctx) => i18nConfig.localesList[getLang(ctx)].ID;
 
 export const getPagesMenu = (children) => {
   return children.map((l) => {
@@ -29,14 +29,14 @@ export const getPagesMenu = (children) => {
 };
 
 export function getLocaleStrings(lang) {
-  const defaultLocaleStrings = localeStrings[defaultLocale];
-  return lang === defaultLocale
+  const defaultLocaleStrings = localeStrings[i18nConfig.defaultLocale];
+  return lang === i18nConfig.defaultLocale
     ? {
         [lang]: defaultLocaleStrings
       }
     : {
         [lang]: localeStrings[lang],
-        [defaultLocale]: defaultLocaleStrings
+        [i18nConfig.defaultLocale]: defaultLocaleStrings
       };
 }
 

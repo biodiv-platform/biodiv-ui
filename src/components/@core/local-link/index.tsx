@@ -1,4 +1,4 @@
-import { defaultLocale } from "@configs/i18n/config";
+import i18nConfig from "@configs/i18n/config";
 import useGlobalState from "@hooks/use-global-state";
 import NextLink, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
@@ -28,7 +28,7 @@ interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
  * @returns {string}
  */
 const getLocalPath = (href, router, params = {}, prefixGroup?, currentGroup?) => {
-  const lang = router.query.lang || defaultLocale;
+  const lang = router.query.lang || i18nConfig.defaultLocale;
 
   const groupPrefixPath =
     currentGroup && prefixGroup && !href.startsWith("http") ? currentGroup + href : href;
