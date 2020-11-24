@@ -1,3 +1,4 @@
+import { useLocalRouter } from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { PageCreate } from "@interfaces/pages";
@@ -11,6 +12,7 @@ import PageForm from "../common/form";
 export default function PageCreateForm(): JSX.Element {
   const { t, localeId } = useTranslation();
   const { user, currentGroup } = useGlobalState();
+  const router = useLocalRouter();
 
   const defaultValues = {
     content: "",
@@ -32,9 +34,10 @@ export default function PageCreateForm(): JSX.Element {
       showInFooter: false,
       date: dateToUTC().format()
     };
-    const { success } = await axCreatePage(payload);
+    const { success, data } = await axCreatePage(payload);
     if (success) {
       notification(t("PAGE.CREATE.SUCCESS"), NotificationType.Success);
+      router.push(`/page/show/${data?.id}`);
     } else {
       notification(t("PAGE.CREATE.FAILURE"));
     }

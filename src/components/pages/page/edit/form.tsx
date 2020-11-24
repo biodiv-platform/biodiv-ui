@@ -1,3 +1,4 @@
+import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import { axUpdatePage } from "@services/pages.service";
 import notification, { NotificationType } from "@utils/notification";
@@ -11,6 +12,7 @@ interface PageEditFormProps {
 
 export default function PageEditForm({ page }: PageEditFormProps): JSX.Element {
   const { t } = useTranslation();
+  const router = useLocalRouter();
 
   const defaultValues = {
     title: page.title,
@@ -28,6 +30,7 @@ export default function PageEditForm({ page }: PageEditFormProps): JSX.Element {
     });
     if (success) {
       notification(t("PAGE.UPDATE.SUCCESS"), NotificationType.Success);
+      router.push(`/page/show/${page.id}`);
     } else {
       notification(t("PAGE.UPDATE.FAILURE"));
     }

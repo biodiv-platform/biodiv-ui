@@ -69,10 +69,6 @@ const HTMLContainer = styled.div`
     text-align: left;
     padding: 8px;
   }
-
-  tr:nth-child(even) {
-    background-color: var(--gray-200);
-  }
 `;
 
 export default HTMLContainer;
