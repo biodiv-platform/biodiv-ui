@@ -1,3 +1,4 @@
+import { AddIcon } from "@chakra-ui/icons";
 import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ShareActionButton from "@components/@core/action-buttons/share";
@@ -5,19 +6,20 @@ import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
-import { Role } from "@interfaces/custom";
 import { axDeletePageByID } from "@services/pages.service";
-import { hasAccess } from "@utils/auth";
 import { NextSeo } from "next-seo";
-import React, { useMemo } from "react";
+import React from "react";
+
+import usePagesSidebar from "../common/sidebar/use-pages-sidebar";
 
 export default function PageHeader({ title, pageId }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-
-  const showActions = useMemo(() => hasAccess([Role.Admin]), []);
+  const { canEdit } = usePagesSidebar();
 
   const handleOnEdit = () => router.push(`/page/edit/${pageId}`, true);
+
+  const handleOnCreate = () => router.push(`/page/create`, true);
 
   return (
     <>
@@ -28,8 +30,14 @@ export default function PageHeader({ title, pageId }) {
         </Heading>
         <Flex alignItems="top" justifyContent={["flex-start", "flex-end"]}>
           <ShareActionButton text={title} title={t("PAGE.SHARE")} />
-          {showActions && (
+          {canEdit && (
             <>
+              <SimpleActionButton
+                icon={<AddIcon />}
+                title={t("PAGE.CREATE.TITLE")}
+                onClick={handleOnCreate}
+                colorScheme="yellow"
+              />
               <SimpleActionButton
                 icon={<EditIcon />}
                 title={t("EDIT")}

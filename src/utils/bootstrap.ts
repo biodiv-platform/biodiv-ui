@@ -1,7 +1,7 @@
-import { defaultLocale, localesList } from "@configs/i18n/config";
+import i18nConfig from "@configs/i18n/config";
 import localeStrings from "@configs/i18n/strings";
 import { isLocale } from "@configs/i18n/types";
-import { axGetPages } from "@services/pages.service";
+import { axGetTree } from "@services/pages.service";
 import { axCheckUserGroupMember, axGroupList } from "@services/usergroup.service";
 import { TOKEN } from "@static/constants";
 import { parseNookies } from "next-nookies-persist";
@@ -12,31 +12,31 @@ import { getManifestURL } from "./userGroup";
 
 export const getLang = (ctx) => {
   return typeof ctx.query.lang !== "string" || !isLocale(ctx.query.lang)
-    ? defaultLocale
+    ? i18nConfig.defaultLocale
     : ctx.query.lang;
 };
 
-export const getLangId = (ctx) => localesList[getLang(ctx)].ID;
+export const getLangId = (ctx) => i18nConfig.localesList[getLang(ctx)].ID;
 
-export const getNewsLetterMenu = (childs) => {
-  return childs.map((l) => {
+export const getPagesMenu = (children) => {
+  return children.map((l) => {
     const link = { name: l.title, to: `/page/${l.id}` };
-    if (l.childs.length > 0) {
-      return { ...link, rows: getNewsLetterMenu(l.childs) };
+    if (l.children.length > 0) {
+      return { ...link, rows: getPagesMenu(l.children) };
     }
     return link;
   });
 };
 
 export function getLocaleStrings(lang) {
-  const defaultLocaleStrings = localeStrings[defaultLocale];
-  return lang === defaultLocale
+  const defaultLocaleStrings = localeStrings[i18nConfig.defaultLocale];
+  return lang === i18nConfig.defaultLocale
     ? {
         [lang]: defaultLocaleStrings
       }
     : {
         [lang]: localeStrings[lang],
-        [defaultLocale]: defaultLocaleStrings
+        [i18nConfig.defaultLocale]: defaultLocaleStrings
       };
 }
 
@@ -51,8 +51,8 @@ export const processedInitialProps = async ({ Component, ctx, router }: AppConte
   const { data: isCurrentGroupMember } = await axCheckUserGroupMember(currentGroup.id, userId, ctx);
   const manifestURL = getManifestURL(currentGroup);
 
-  const { data: rawPages } = await axGetPages(currentGroup?.id);
-  const pages = getNewsLetterMenu(rawPages);
+  const { data: rawPages } = await axGetTree(currentGroup?.id);
+  const pages = getPagesMenu(rawPages);
 
   const lang = getLang(ctx);
   const localeStrings = await getLocaleStrings(lang);

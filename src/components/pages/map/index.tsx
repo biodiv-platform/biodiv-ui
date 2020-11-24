@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "@hooks/use-translation";
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { getBearerToken } from "@utils/http";
@@ -18,16 +19,17 @@ const Naksha: any = dynamic(
 
 export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
+  const { t } = useTranslation();
 
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
   );
 
-  const handleOnDownload = async (layer) => {
+  const handleOnDownload = async () => {
     await waitForAuth();
     const token = await getBearerToken();
     if (token) {
-      notification(`Mail Sent ${layer.id}`, NotificationType.Success);
+      notification(t("PAGE.MAIL.SENT"), NotificationType.Success);
       return { success: true, data: token };
     }
     return { success: false, data: token };
@@ -41,7 +43,7 @@ export default function MapPageComponent() {
         showToC={true}
         mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
-        onDownload={handleOnDownload}
+        onLayerDownload={handleOnDownload}
         geoserver={{
           endpoint: ENDPOINT.GEOSERVER,
           store: SITE_CONFIG.GEOSERVER.STORE,
@@ -61,7 +63,7 @@ export default function MapPageComponent() {
             },
             data: {
               index: "extended_observation",
-              type: "extended_records",
+              type: "_doc",
               geoField: "location"
             },
             onHover: onObservationGridHover

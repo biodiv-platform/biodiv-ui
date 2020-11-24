@@ -31,7 +31,7 @@ const HTMLContainer = styled.div`
   h5,
   h6,
   p {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
   }
 
   h1 {
@@ -68,10 +68,6 @@ const HTMLContainer = styled.div`
   td {
     text-align: left;
     padding: 8px;
-  }
-
-  tr:nth-child(even) {
-    background-color: var(--gray-200);
   }
 `;
 
