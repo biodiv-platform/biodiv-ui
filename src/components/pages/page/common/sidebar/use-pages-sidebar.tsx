@@ -1,8 +1,7 @@
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
-import { Role } from "@interfaces/custom";
 import { axGetTree, axUpdateTree } from "@services/pages.service";
-import { hasAccess } from "@utils/auth";
+import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import notification from "@utils/notification";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { toggleExpandedForAll } from "react-sortable-tree";
@@ -40,12 +39,13 @@ export const UsePagesSidebarProvider = ({
   const [pages, setPages] = useState(initialPages || []);
   const [isLoading, setIsLoading] = useState<boolean>();
   const [isEditing, setIsEditing] = useState<boolean>();
-  const canEdit = hasAccess([Role.Admin]);
+  const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
     axGetTree(currentGroup?.id).then(({ data: treeData }) =>
       setPages(toggleExpandedForAll({ treeData }))
     );
+    axCheckUserGroupFounderOrAdmin(currentGroup.id).then((o) => setCanEdit(o.data));
   }, []);
 
   useEffect(() => {
