@@ -69,6 +69,46 @@ const HTMLContainer = styled.div`
     text-align: left;
     padding: 8px;
   }
+
+  .user-profile {
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e0;
+    padding: 0.75rem;
+    background-color: #fff;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+
+    img {
+      width: 64px;
+      height: 64px;
+      border-radius: 0.25rem;
+      margin-right: 0.75rem;
+      object-fit: contain;
+    }
+
+    .name {
+      font-size: 20px;
+      margin-bottom: 0.5rem;
+      line-height: 1rem;
+    }
+
+    .info {
+      margin-bottom: 0.4rem;
+      font-size: small;
+      font-weight: bold;
+    }
+
+    .description {
+      color: #4a5568;
+      font-size: small;
+    }
+  }
+
+  .user-others span {
+    color: #4a5568;
+    font-size: small;
+  }
 `;
 
 export default HTMLContainer;
