@@ -2,7 +2,7 @@ import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { axGetTree, axUpdateTree } from "@services/pages.service";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
-import notification from "@utils/notification";
+import notification, { NotificationType } from "@utils/notification";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { toggleExpandedForAll } from "react-sortable-tree";
 
@@ -58,7 +58,7 @@ export const UsePagesSidebarProvider = ({
     setIsLoading(true);
     const { success } = await axUpdateTree(pages);
     if (success) {
-      notification(t("PAGE.SIDEBAR.UPDATED"));
+      notification(t("PAGE.SIDEBAR.UPDATED"), NotificationType.Success);
     }
     setIsLoading(false);
   };

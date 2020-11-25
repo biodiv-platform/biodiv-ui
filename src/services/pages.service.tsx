@@ -59,9 +59,7 @@ export const axGetTree = async (userGroupId) => {
 
 export const axUpdateTree = async (payload) => {
   try {
-    const { data } = await http.put(`${ENDPOINT.PAGES}/v1/page/updateTree`, {
-      pageTree: treeToFlat(payload)
-    });
+    const { data } = await http.put(`${ENDPOINT.PAGES}/v1/page/updateTree`, treeToFlat(payload));
     return { success: true, data };
   } catch (e) {
     console.error(e);
