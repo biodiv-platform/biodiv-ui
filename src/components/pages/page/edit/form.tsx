@@ -30,7 +30,7 @@ export default function PageEditForm({ page }: PageEditFormProps): JSX.Element {
     });
     if (success) {
       notification(t("PAGE.UPDATE.SUCCESS"), NotificationType.Success);
-      router.push(`/page/show/${page.id}`);
+      router.push(`/page/show/${page.id}`, true);
     } else {
       notification(t("PAGE.UPDATE.FAILURE"));
     }

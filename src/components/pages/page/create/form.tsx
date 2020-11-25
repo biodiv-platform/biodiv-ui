@@ -37,7 +37,7 @@ export default function PageCreateForm(): JSX.Element {
     const { success, data } = await axCreatePage(payload);
     if (success) {
       notification(t("PAGE.CREATE.SUCCESS"), NotificationType.Success);
-      router.push(`/page/show/${data?.id}`);
+      router.push(`/page/show/${data?.id}`, true);
     } else {
       notification(t("PAGE.CREATE.FAILURE"));
     }

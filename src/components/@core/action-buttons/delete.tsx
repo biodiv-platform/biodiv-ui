@@ -33,7 +33,7 @@ export default function DeleteActionButton({
     if (success) {
       notification(deleted, NotificationType.Success);
       onClose();
-      router.push("/");
+      router.push("/", true);
     }
   };
 

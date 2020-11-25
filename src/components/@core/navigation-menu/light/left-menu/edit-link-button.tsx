@@ -16,7 +16,7 @@ export default function EditLinkButton({ label }) {
 
   useEffect(() => {
     if (id) {
-      axCheckUserGroupFounderOrAdmin(id).then(({ data }) => {
+      axCheckUserGroupFounderOrAdmin(id).then((data) => {
         setCanEdit(data && !pathname.endsWith("edit"));
       });
     }
