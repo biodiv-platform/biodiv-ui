@@ -37,7 +37,7 @@ export const axGetPageByID = async (pageId, format?) => {
 
 export const axDeletePageByID = async (pageId) => {
   try {
-    const { data } = await http.delete(`${ENDPOINT.PAGES}/v1/page/delete/${pageId}`);
+    const { data } = await http.delete(`${ENDPOINT.PAGES}/v1/page/${pageId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e.response.data.message);

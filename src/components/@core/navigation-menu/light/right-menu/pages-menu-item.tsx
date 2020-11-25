@@ -25,7 +25,7 @@ export default function PagesMenuItem({ onClose }) {
       {pages.length ? (
         pages.map((item) => <SubMenuLink item={item} onClose={onClose} key={item.name} />)
       ) : (
-        <LocalLink href="/page/empty">
+        <LocalLink prefixGroup={true} href="/page/empty">
           <MenuItem as="a" w="full" onClick={onClose}>
             {t("HEADER.MENU_SECONDARY.PAGES.EMPTY")}
           </MenuItem>
