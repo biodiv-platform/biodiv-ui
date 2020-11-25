@@ -45,7 +45,7 @@ export const UsePagesSidebarProvider = ({
     axGetTree(currentGroup?.id).then(({ data: treeData }) =>
       setPages(toggleExpandedForAll({ treeData }))
     );
-    axCheckUserGroupFounderOrAdmin(currentGroup.id).then((o) => setCanEdit(o.data));
+    axCheckUserGroupFounderOrAdmin(currentGroup.id, true).then(setCanEdit);
   }, []);
 
   useEffect(() => {

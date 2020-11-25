@@ -1,4 +1,6 @@
+import { Role } from "@interfaces/custom";
 import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
+import { hasAccess } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
 import {
   findCurrentUserGroup,
@@ -144,30 +146,30 @@ export const axVerifyRequest = async (token) => {
   }
 };
 
-export const axCheckUserGroupMember = async (userGroupId, userId, ctx) => {
+export const axCheckUserGroupMember = async (userGroupId, userId, ctx, cleanCheck?) => {
   try {
     if (userGroupId && userId) {
       const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/member/${userGroupId}`, {
         params: { ctx }
       });
-      return { success: true, data };
+      return data;
     }
   } catch (e) {
     console.error(e);
   }
-  return { success: false, data: userGroupId ? false : true };
+  return cleanCheck ? hasAccess([Role.Admin]) : !userGroupId;
 };
 
-export const axCheckUserGroupFounderOrAdmin = async (userGroupId) => {
+export const axCheckUserGroupFounderOrAdmin = async (userGroupId, cleanCheck?) => {
   try {
     if (userGroupId) {
       const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/enable/edit/${userGroupId}`);
-      return { success: true, data };
+      return data;
     }
   } catch (e) {
     console.error(e);
   }
-  return { success: false, data: userGroupId ? false : true };
+  return cleanCheck ? hasAccess([Role.Admin]) : !userGroupId;
 };
 
 export const axJoinUserGroup = async (userGroupId) => {

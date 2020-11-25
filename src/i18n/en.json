@@ -500,6 +500,7 @@
         "TITLE": "Observation"
       },
       "PAGES": {
+        "EMPTY": "No Pages",
         "TITLE": "Pages"
       },
       "SPECIES": {
@@ -803,6 +804,7 @@
       "SUCCESS": "Page created successfully",
       "TITLE": "Create Page"
     },
+    "EMPTY": "There are no pages published for this group",
     "FORM": {
       "CONTENT": "Content",
       "DESCRIPTION": "Description Metadata",
@@ -811,7 +813,7 @@
       "TITLE": "Title"
     },
     "MAIL": {
-      "SENT": "Mail sent successfully"
+      "SENT": "Your download is being generated. When it is ready, you will be notified by email with a download link"
     },
     "NO_PARENT": "No Parent",
     "REMOVE": {
