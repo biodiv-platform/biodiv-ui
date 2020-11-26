@@ -1,12 +1,12 @@
-export const treeToFlat = (children: any[]) =>
+export const treeToFlat = (children: any[], parentId = 0) =>
   children.reduce(
-    (acc, cv, idx) => [
+    (acc, cv, pageIndex) => [
       {
         id: cv.id,
-        parentId: cv.parentId,
-        pageIndex: idx
+        parentId,
+        pageIndex
       },
-      ...(cv.children.length ? treeToFlat(cv.children) : []),
+      ...(cv.children.length ? treeToFlat(cv.children, cv.id) : []),
       ...acc
     ],
     []
