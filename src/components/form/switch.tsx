@@ -31,13 +31,14 @@ const SwitchField = ({
       <Controller
         control={form.control}
         name={name}
-        render={({ onChange, onBlur, value }) => (
+        render={({ onChange, onBlur, value, ref }) => (
           <Switch
             onBlur={onBlur}
             onChange={(e) => onChange(e.target["checked"])}
             defaultIsChecked={value}
             isDisabled={disabled}
             color={color}
+            ref={ref}
           />
         )}
       />

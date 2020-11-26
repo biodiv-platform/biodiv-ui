@@ -1,13 +1,9 @@
-import "react-quill//dist/quill.snow.css";
-
-import { Box, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
+import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import QuillInput from "@components/@core/quill-input";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
 
 import ErrorMessage from "./common/error-message";
-
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface IRichTextareaProps {
   name: string;
@@ -19,25 +15,15 @@ interface IRichTextareaProps {
 }
 
 const RichTextareaField = ({ name, label, hint, form, mb = 4, ...props }: IRichTextareaProps) => {
-  const modules = {
-    toolbar: [
-      ["bold", "italic", "underline", "strike", "link"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["clean"]
-    ]
-  };
-
   return (
     <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
-      <Box borderRadius="md" className="ql-box">
-        <Controller
-          control={form.control}
-          name={name}
-          defaultValue={form.control.defaultValuesRef.current[name]}
-          render={(quillProps) => <ReactQuill {...quillProps} modules={modules} />}
-        />
-      </Box>
+      <Controller
+        control={form.control}
+        name={name}
+        defaultValue={form.control.defaultValuesRef.current[name]}
+        render={({ value, onChange }) => <QuillInput value={value} onChange={onChange} />}
+      />
       <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
