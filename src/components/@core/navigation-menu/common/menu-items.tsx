@@ -1,5 +1,5 @@
-import { Link, Menu, MenuButton } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Link, Menu, MenuButton } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
@@ -19,20 +19,20 @@ const XLink = ({ children, label, onClose, to, params, isArrow }) =>
   );
 
 export default function MenuItems(props) {
-  const { name, nameIcon: NameIcon, to = "", rows = [], cell: CCell, params } = props;
+  const { name, nameIcon: NameIcon, to = "", rows = [], cell: CCell, params, isLazy } = props;
   const isArrow = rows.length > 0 || CCell;
   const { t } = useTranslation();
 
   return (
-    <Menu placement="bottom-end">
-      {({ onClose }) => (
+    <Menu placement="bottom-end" isLazy={isLazy}>
+      {({ onClose, isOpen }) => (
         <>
           <XLink label={name} onClose={onClose} to={to} isArrow={isArrow} params={params}>
             {NameIcon && <NameIcon mr={1} />}
             {t(`${name}TITLE`)}
           </XLink>
           {CCell ? (
-            <CCell onClose={onClose} />
+            <CCell onClose={onClose} isOpen={isOpen} />
           ) : (
             <SubMenu onClose={onClose} rows={rows} prefix={name} />
           )}

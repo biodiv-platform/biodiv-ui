@@ -5,6 +5,7 @@ import * as Sentry from "@sentry/react";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
 import { subscribeToPushNotification } from "@utils/user";
+import { getManifestURL } from "@utils/userGroup";
 import { DefaultSeo } from "next-seo";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -12,11 +13,12 @@ import React, { useEffect } from "react";
 
 import { version } from "../../../../package.json";
 
-export default function Metadata({ manifestURL }) {
+export default function Metadata() {
   const router = useRouter();
   const { isLoggedIn, currentGroup, user } = useGlobalState();
   const canonical = SITE_CONFIG.SITE.URL + router.asPath;
   const { locale } = useTranslation();
+  const manifestURL = getManifestURL(currentGroup);
 
   useEffect(() => {
     if (SITE_CONFIG.TOKENS.SENTRY_DSN) {

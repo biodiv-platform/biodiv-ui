@@ -1,3 +1,4 @@
+import localeStrings from "@configs/i18n/strings";
 import React from "react";
 
 import i18nConfig from "../configs/i18n/config";
@@ -9,7 +10,7 @@ interface ContextProps {
   localesList;
 
   setLocale: (locale: Locale) => void;
-  localeStrings: any;
+  localeStrings?;
 }
 
 export const LocaleContext = React.createContext<ContextProps>({
@@ -17,15 +18,10 @@ export const LocaleContext = React.createContext<ContextProps>({
   localeId: i18nConfig.defaultLocaleId,
   localesList: i18nConfig.localesList,
 
-  setLocale: () => null,
-  localeStrings: {}
+  setLocale: () => null
 });
 
-export const LocaleProvider: React.FC<{ lang: Locale; localeStrings: any }> = ({
-  lang,
-  children,
-  localeStrings
-}) => {
+export const LocaleProvider: React.FC<{ lang: Locale }> = ({ lang, children }) => {
   const updateLocale = (locale) => {
     const params = new URLSearchParams(window.location.search);
     params.set("lang", locale);

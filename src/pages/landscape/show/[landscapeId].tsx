@@ -1,6 +1,6 @@
 import LandscapeShowPageComponent from "@components/pages/landscape/show";
 import { axGetLandscapeById, axGetLandscapeShowById } from "@services/landscape.service";
-import { getLangId } from "@utils/bootstrap";
+import { getLangId } from "@utils/lang";
 import React from "react";
 
 const ObservationShowPage = ({ landscape, landscapeShow }) => (

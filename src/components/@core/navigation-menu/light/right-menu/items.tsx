@@ -87,6 +87,7 @@ export default [
   {
     active: SITE_CONFIG.PAGES.ACTIVE,
     cell: PagesMenuItem,
+    isLazy: true,
     name: "HEADER.MENU_SECONDARY.PAGES."
   },
   {

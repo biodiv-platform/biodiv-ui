@@ -28,7 +28,7 @@ export default function CarouselNew({ featured }) {
       color="white"
     >
       <Box gridColumn={{ md: "1/3" }} position="relative">
-        <Box ref={sliderRef} className="keen-slider">
+        <Box ref={sliderRef} className="keen-slider fade">
           {featured.map((o) => (
             <Slide resource={o} key={o.id} />
           ))}

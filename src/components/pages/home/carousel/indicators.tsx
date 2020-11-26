@@ -4,17 +4,16 @@ import React from "react";
 const List = styled.ol`
   li {
     display: inline-block;
-    width: 0.8rem;
-    height: 0.8rem;
-    margin: 0;
-    border: 2px solid white;
+    padding: 0.4rem;
     border-radius: 50%;
-    margin-left: 0.4rem;
+    margin-left: 0.6rem;
+    background: white;
     cursor: pointer;
     transition: 0.1s ease;
+    opacity: 0.2;
 
     &.active {
-      background: white;
+      opacity: 1;
     }
   }
 `;
