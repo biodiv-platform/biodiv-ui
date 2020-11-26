@@ -6,7 +6,7 @@ import React from "react";
 
 export default function Slide({ resource }) {
   return (
-    <Box className="keen-slider__slide">
+    <Box className="keen-slider__slide" style={{ minWidth: "100%" }}>
       <LocalLink href={`/observation/show/${resource.observationId}`}>
         <a>
           <Image
