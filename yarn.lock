@@ -7023,6 +7023,11 @@ next-seo@^4.17.0:
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-4.17.0.tgz#fb3dbe0ed7414aa9d83872ef5d8510980a6dae7e"
   integrity sha512-/hnb3oq7bhi8s7bup7+Lm6VzzgRucj+JrWtp+dJiYs/04H0N/NhmE9MpepixQ16fFj6G/39JLYxhzsO/QZG/Kw==
 
+next-simple-google-analytics@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/next-simple-google-analytics/-/next-simple-google-analytics-1.1.0.tgz#3660f7f1badb92dcce7f1f5dc703a6daaf36e88c"
+  integrity sha512-/d4+17R7M4ZXZzTP3f/GcJZkwC7XDroNZcIWgzUq8culp9PT3M2RirQhgcqGo6mmA+h6cop0Y74shZw8XtPwEQ==
+
 next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
@@ -7999,11 +8004,6 @@ react-focus-lock@2.4.1:
     react-clientside-effect "^1.2.2"
     use-callback-ref "^1.2.1"
     use-sidecar "^1.0.1"
-
-react-ga@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-3.3.0.tgz#c91f407198adcb3b49e2bc5c12b3fe460039b3ca"
-  integrity sha512-o8RScHj6Lb8cwy3GMrVH6NJvL+y0zpJvKtc0+wmH7Bt23rszJmnqEQxRbyrqUzk9DTJIHoP42bfO5rswC9SWBQ==
 
 react-gbus@^1.1.2:
   version "1.1.2"

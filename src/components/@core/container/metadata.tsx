@@ -1,6 +1,6 @@
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import * as Sentry from "@sentry/react";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
@@ -9,7 +9,6 @@ import { DefaultSeo } from "next-seo";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import ReactGA from "react-ga";
 
 import { version } from "../../../../package.json";
 
@@ -34,7 +33,6 @@ export default function Metadata({ manifestURL }) {
       }
     }
     if (isBrowser && SITE_CONFIG.TRACKING.ENABLED) {
-      ReactGA.initialize(SITE_CONFIG.TRACKING.GA_ID);
       removeCache(CACHE_WHITELIST);
       if (isLoggedIn) {
         const timer = setTimeout(async () => {
@@ -44,10 +42,6 @@ export default function Metadata({ manifestURL }) {
       }
     }
   }, []);
-
-  useEffect(() => {
-    ReactGA.pageview(router.asPath);
-  }, [router.asPath]);
 
   return (
     <>
