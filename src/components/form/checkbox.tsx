@@ -19,7 +19,7 @@ const CheckboxField = ({ name, label, form, mb = 4, hint, disabled, ...props }: 
     <Controller
       control={form.control}
       name={name}
-      render={({ onChange, onBlur, value }) => (
+      render={({ onChange, onBlur, value, ref }) => (
         <Checkbox
           name={name}
           onChange={(e) => onChange(e.target["checked"])}
@@ -27,6 +27,7 @@ const CheckboxField = ({ name, label, form, mb = 4, hint, disabled, ...props }: 
           onBlur={onBlur}
           defaultIsChecked={value}
           isDisabled={disabled}
+          ref={ref}
         >
           {label}
         </Checkbox>

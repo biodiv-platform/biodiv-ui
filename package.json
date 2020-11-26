@@ -69,7 +69,7 @@
     "react-lazyload": "^3.1.0",
     "react-mentions": "^4.0.2",
     "react-phone-number-input": "^3.1.6",
-    "react-quill": "^2.0.0-beta.2",
+    "react-quilljs": "^1.2.12",
     "react-rating": "^2.0.5",
     "react-select": "^3.1.1",
     "react-sortable-hoc": "^1.11.0",

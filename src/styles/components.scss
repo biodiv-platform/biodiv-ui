@@ -93,24 +93,6 @@ button[role="tab"] {
   padding: 0.75rem 1rem;
 }
 
-.ql-box {
-  .ql-container,
-  .ql-toolbar {
-    background: var(--white);
-    border-radius: 0.25rem;
-  }
-  .ql-container {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    height: 6.5em;
-    overflow-y: auto;
-  }
-  .ql-toolbar {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-}
-
 .text-elipsis {
   white-space: nowrap;
   overflow: hidden;
