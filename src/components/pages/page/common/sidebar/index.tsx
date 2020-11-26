@@ -60,7 +60,7 @@ export default function PagesSidebar() {
   const isDesktop = useBreakpointValue({ base: false, md: true });
   const { isOpen, onToggle } = useDisclosure();
 
-  return (
+  return p.pages.length > 0 ? (
     <TreeContainer className="fadeInUp">
       {!isDesktop && (
         <Button colorScheme="blue" w="full" mb={4} onClick={onToggle} leftIcon={<MenuIcon />}>
@@ -83,5 +83,5 @@ export default function PagesSidebar() {
         {p.isEditing ? <SidebarEditing /> : <SidebarNormal />}
       </Collapse>
     </TreeContainer>
-  );
+  ) : null;
 }

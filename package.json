@@ -1,6 +1,6 @@
 {
   "name": "biodiv-ui",
-  "version": "3.5.10",
+  "version": "3.5.11",
   "description": "India Biodiversity Portal",
   "scripts": {
     "start": "next",

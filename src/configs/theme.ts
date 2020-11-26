@@ -1,7 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 
 const defaultFontFamily =
-  "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji";
+  "-apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji";
 
 export const customTheme = extendTheme({
   fonts: {
