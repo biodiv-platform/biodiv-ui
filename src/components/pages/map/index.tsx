@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { ENDPOINT } from "@static/constants";
-import { waitForAuth } from "@utils/auth";
+import { getTokens, waitForAuth } from "@utils/auth";
 import { getBearerToken } from "@utils/http";
 import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
@@ -20,6 +20,7 @@ const Naksha: any = dynamic(
 export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
   const { t } = useTranslation();
+  const { accessToken } = getTokens();
 
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
@@ -41,6 +42,7 @@ export default function MapPageComponent() {
         viewPort={defaultViewPort}
         loadToC={true}
         showToC={true}
+        nakshaEndpointToken={`Bearer ${accessToken}`}
         mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
         onLayerDownload={handleOnDownload}
