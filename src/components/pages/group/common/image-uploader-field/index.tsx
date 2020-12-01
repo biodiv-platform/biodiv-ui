@@ -25,6 +25,7 @@ export default function ImageUploaderField({
   label,
   form,
   resourcePath,
+  nestedPath,
   hint,
   simpleUpload,
   mb = 4
@@ -54,7 +55,12 @@ export default function ImageUploaderField({
           resource={value}
         />
       ) : (
-        <DropTarget simpleUpload={simpleUpload} resourcePath={resourcePath} setValue={setvalue} />
+        <DropTarget
+          simpleUpload={simpleUpload}
+          nestedPath={nestedPath}
+          resourcePath={resourcePath}
+          setValue={setvalue}
+        />
       )}
       <ErrorMessage name={name} errors={form.errors} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
