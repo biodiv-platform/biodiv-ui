@@ -62,9 +62,9 @@ export const getMyUploadsThumbnail = (resourceUrl, userId, height = 200) => {
     : undefined;
 };
 
-export const getResourceThumbnail = (resourceName, resourceUrl, userId, height = 200) => {
+export const getResourceThumbnail = (resourceName, resourceUrl, height = 200) => {
   return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/${resourceName}/${userId}${resourceUrl}?h=${height}`
+    ? `${ENDPOINT.FILES}/get/crop/${resourceName}/${resourceUrl}?h=${height}`
     : undefined;
 };
 
