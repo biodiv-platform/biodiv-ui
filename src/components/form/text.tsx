@@ -3,6 +3,7 @@ import React from "react";
 import { UseFormMethods } from "react-hook-form";
 
 import ErrorMessage from "./common/error-message";
+import { getByPath } from "@utils/basic";
 
 interface ITextBoxProps {
   id?: string;
@@ -50,6 +51,7 @@ const TextBoxField = ({
       ref={form.register}
       type={type}
       isDisabled={disabled}
+      defaultValue={getByPath(form.control.defaultValuesRef.current, name)}
       autoComplete={autoComplete}
     />
     <ErrorMessage name={name} errors={form.errors} />

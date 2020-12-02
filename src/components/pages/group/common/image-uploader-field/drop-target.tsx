@@ -36,18 +36,24 @@ const accept = ["image/jpg", "image/jpeg", "image/png"];
 
 interface userGroupDropTarget {
   setValue;
+  resourcePath?;
   nestedPath?;
   simpleUpload?: boolean;
 }
 
-export default function DropTarget({ setValue, nestedPath, simpleUpload }: userGroupDropTarget) {
+export default function DropTarget({
+  setValue,
+  resourcePath = "userGroups",
+  nestedPath,
+  simpleUpload
+}: userGroupDropTarget) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
 
   const onDrop = async (files) => {
     setIsProcessing(true);
     if (files.length) {
-      const { success, data } = await axUploadResource(files[0], "userGroups", nestedPath);
+      const { success, data } = await axUploadResource(files[0], resourcePath, nestedPath);
       if (success) {
         setValue(data);
       }
