@@ -25,7 +25,10 @@ export const FIELD_TYPE = [
 export const DEFAULT_CUSTOMFIELD_VALUE = {
   allowedParticipation: true,
   isMandatory: true,
-  values: [{ name: "val1" }, { name: "val2" }]
+  values: [
+    { value: "", notes: "" },
+    { value: "", notes: "" }
+  ]
 };
 
 export const RULES_TYPE = [

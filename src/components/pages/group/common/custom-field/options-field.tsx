@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Flex, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, Radio, RadioGroup, SimpleGrid, HStack } from "@chakra-ui/react";
 import TextBox from "@components/form/text";
 import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
@@ -29,7 +29,8 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
     <>
       <RadioGroup onChange={setValue} name={radioGroupName} value={value} w="full" mb={4}>
         {fields.map((_item, index) => (
-          <Radio value={index.toString()} w="full" size="lg" mb={4}>
+          <HStack key={_item.id} mb={4}>
+            <Radio value={index.toString()} size="lg" />
             <SimpleGrid columns={{ base: 1, md: 5 }} spacingX={4} ml={4}>
               <Box gridColumn="1/4">
                 <SimpleGrid columns={2} spacingX={4}>
@@ -71,13 +72,13 @@ export default function Fields({ form, name, radioGroupName, disabled }) {
                 </Badge>
               </Flex>
             </SimpleGrid>
-          </Radio>
+          </HStack>
         ))}
       </RadioGroup>
 
       <Button
         variant="outline"
-        onClick={() => append({ value: "append" })}
+        onClick={() => append({ value: "", notes: "" })}
         colorScheme="blue"
         leftIcon={<AddIcon />}
         isDisabled={disabled}
