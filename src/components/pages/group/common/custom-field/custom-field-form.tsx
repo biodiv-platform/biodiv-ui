@@ -1,7 +1,6 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, SimpleGrid } from "@chakra-ui/react";
 import CheckBoxField from "@components/form/checkbox";
-import FormDebugger from "@components/form/debugger";
 import Select from "@components/form/select";
 import SelectCreatable from "@components/form/select-creatable";
 import SubmitButton from "@components/form/submit-button";
@@ -230,7 +229,6 @@ export default function AddCustomField({
         form={hForm}
         label={t("GROUP.CUSTOM_FIELD.ALLOW_PARTICIPANT")}
       />
-      <FormDebugger form={hForm} />
       <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
         {t("GROUP.CUSTOM_FIELD.CREATE")}
       </SubmitButton>
