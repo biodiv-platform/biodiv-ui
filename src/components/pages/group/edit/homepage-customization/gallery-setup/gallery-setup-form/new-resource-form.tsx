@@ -1,7 +1,7 @@
-import React from "react";
 import TextBoxField from "@components/form/text";
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
 import useTranslation from "@hooks/use-translation";
+import React from "react";
 
 export default function NewResourceForm({ form }) {
   const { t } = useTranslation();
@@ -22,6 +22,7 @@ export default function NewResourceForm({ form }) {
         form={form}
         label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.IMAGEURL")}
         name="fileName"
+        resourcePath="observations"
       />
     </>
   );

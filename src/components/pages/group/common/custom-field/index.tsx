@@ -7,7 +7,7 @@ import {
   Box
 } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddCustomFieldForm from "./custom-field-form";
 import CustomFieldTable from "./custom-field-table";
@@ -15,7 +15,12 @@ import CustomFieldTable from "./custom-field-table";
 export default function GroupCustomField({ userGroupId, groupCustomField, allCustomField }) {
   const { t } = useTranslation();
   const [customFields, setCustomFields] = useState(groupCustomField || []);
+  const [customFieldList, setCustomFieldList] = useState(allCustomField);
   const [isCreate, setIsCreate] = useState(false);
+
+  useEffect(() => {
+    setCustomFieldList([...customFieldList, ...customFields]);
+  }, [customFields]);
 
   return (
     <Accordion allowToggle={true}>
@@ -31,7 +36,7 @@ export default function GroupCustomField({ userGroupId, groupCustomField, allCus
           {isCreate ? (
             <AddCustomFieldForm
               customFields={customFields}
-              allCustomFields={allCustomField}
+              allCustomFields={customFieldList}
               setCustomFields={setCustomFields}
               setIsCreate={setIsCreate}
             />
