@@ -80,13 +80,18 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const fetchListData = async () => {
     try {
       NProgress.start();
+
+      // Reset list data if params are changed
+      if (filter.f.offset === 0) {
+        setObservationData((_draft) => {
+          _draft.l = [];
+          _draft.ml = [];
+        });
+      }
+
       const { data } = await axGetListData(filter.f);
       updateMaxVotedRecoPermissions(data.observationList);
       setObservationData((_draft) => {
-        if (filter.f.offset === 0) {
-          _draft.l = [];
-          _draft.ml = [];
-        }
         if (data.geohashAggregation) {
           _draft.l = data.geohashAggregation;
         } else if (data.observationList.length) {
