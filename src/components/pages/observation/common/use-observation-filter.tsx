@@ -97,7 +97,9 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft.hasMore = data.observationListMinimal.length === Number(filter.f.max);
         }
         _draft.n = data.totalCount;
-        _draft.ag = data.aggregationData;
+        if (data.aggregationData) {
+          _draft.ag = data.aggregationData;
+        }
       });
       NProgress.done();
     } catch (e) {
