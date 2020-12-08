@@ -12,12 +12,9 @@ export default function CustomFieldList({
   setO,
   cfPermission
 }: ICustomFieldsProps) {
-  const {
-    groups,
-    user: { id: userId }
-  } = useGlobalState();
+  const { groups, user } = useGlobalState();
 
-  const getGroupNameById = (gId) => useMemo(() => groups.find((g) => g.id === gId)?.name, [gId]);
+  const getGroupNameById = (gId) => useMemo(() => groups?.find((g) => g.id === gId)?.name, [gId]);
 
   const getGroupPermissionsByGroupId = (gId) => {
     return cfPermission?.find((cfp) => cfp.userGroupId === gId)?.allowedCfId || [];
@@ -26,14 +23,14 @@ export default function CustomFieldList({
   return (
     <Tabs isLazy={true}>
       <TabList>
-        {o.customField.map(({ userGroupId }) => (
+        {o.customField?.map(({ userGroupId }) => (
           <Tab key={userGroupId}>{getGroupNameById(userGroupId)}</Tab>
         ))}
       </TabList>
       <TabPanels>
-        {o.customField.map((cfList) => (
+        {o.customField?.map((cfList) => (
           <TabPanel key={cfList.userGroupId} p={0}>
-            {cfList?.customField.map((cf) => (
+            {cfList?.customField?.map((cf) => (
               <CustomField
                 key={cf.cfId}
                 cf={cf}
@@ -41,7 +38,8 @@ export default function CustomFieldList({
                 observationId={observationId}
                 setO={setO}
                 canEdit={
-                  adminOrAuthor(userId) &&
+                  adminOrAuthor(user?.id) &&
+                  cf.cfId &&
                   getGroupPermissionsByGroupId(cfList.userGroupId).includes(cf.cfId)
                 }
               />

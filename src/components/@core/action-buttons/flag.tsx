@@ -39,7 +39,7 @@ import LocalLink from "../local-link";
 import SimpleActionButton from "./simple";
 
 interface IFlagObservationProps {
-  initialFlags: FlagShow[];
+  initialFlags: FlagShow[] | undefined;
   resourceId;
   userId;
   flagFunc;
@@ -63,10 +63,10 @@ export default function FlagActionButton({
     value: f
   }));
 
-  const [userFlag, setUserFlag] = useState<FlagShow>();
+  const [userFlag, setUserFlag] = useState<any>();
 
   useEffect(() => {
-    setUserFlag(flags.find((f) => f.user.id === userId));
+    setUserFlag(flags?.find((f) => f.user?.id === userId));
   }, [flags]);
 
   const hForm = useForm({
@@ -100,9 +100,9 @@ export default function FlagActionButton({
   return (
     <>
       <SimpleActionButton
-        icon={flags.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
+        icon={flags?.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
         title={t("ACTIONS.FLAG.TITLE")}
-        colorScheme={flags.length ? "red" : "purple"}
+        colorScheme={flags?.length ? "red" : "purple"}
         onClick={onOpen}
       />
       <Modal isOpen={isOpen} size="lg" onClose={onClose}>
@@ -111,53 +111,57 @@ export default function FlagActionButton({
             <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
               <ModalHeader>🚩 Flag observation</ModalHeader>
               <ModalCloseButton />
-              {flags.length > 0 && (
+              {flags && flags.length > 0 && (
                 <>
                   <Heading size="sm" px={6} mb={3}>
-                    flagged by {flags.length} member(s)
+                    flagged by {flags?.length} member(s)
                   </Heading>
-                  {flags.map(({ flag, user }) => (
-                    <Stack
-                      key={flag.id}
-                      isInline={true}
-                      spacing={4}
-                      px={6}
-                      py={3}
-                      mb={2}
-                      borderTop="1px"
-                      borderColor="gray.300"
-                    >
-                      <Avatar
-                        size="sm"
-                        mt={2}
-                        name={user.name}
-                        src={getUserImage(user.profilePic)}
-                      />
-                      <Box>
-                        <LocalLink href={`/user/show/${user.id}`}>
-                          <BlueLink mr={2}>
-                            {user.name} <UserBadge isAdmin={user.isAdmin} />
-                          </BlueLink>
-                        </LocalLink>
-                        <Badge colorScheme="red" verticalAlign="baseline">
-                          {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
-                        </Badge>
-                        <Text>{flag.notes}</Text>
-                      </Box>
-                      <Box flexGrow={1} textAlign="right" pt={2}>
-                        {adminOrAuthor(user.id) && (
-                          <Button
+                  {flags?.map(
+                    ({ flag, user }) =>
+                      flag &&
+                      user && (
+                        <Stack
+                          key={flag.id}
+                          isInline={true}
+                          spacing={4}
+                          px={6}
+                          py={3}
+                          mb={2}
+                          borderTop="1px"
+                          borderColor="gray.300"
+                        >
+                          <Avatar
                             size="sm"
-                            variant="outline"
-                            colorScheme="red"
-                            onClick={() => handleOnUnFlag(flag.id)}
-                          >
-                            Remove
-                          </Button>
-                        )}
-                      </Box>
-                    </Stack>
-                  ))}
+                            mt={2}
+                            name={user.name}
+                            src={getUserImage(user.profilePic)}
+                          />
+                          <Box>
+                            <LocalLink href={`/user/show/${user.id}`}>
+                              <BlueLink mr={2}>
+                                {user.name} <UserBadge isAdmin={user.isAdmin} />
+                              </BlueLink>
+                            </LocalLink>
+                            <Badge colorScheme="red" verticalAlign="baseline">
+                              {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
+                            </Badge>
+                            <Text>{flag.notes}</Text>
+                          </Box>
+                          <Box flexGrow={1} textAlign="right" pt={2}>
+                            {adminOrAuthor(user.id) && (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                colorScheme="red"
+                                onClick={() => handleOnUnFlag(flag.id)}
+                              >
+                                Remove
+                              </Button>
+                            )}
+                          </Box>
+                        </Stack>
+                      )
+                  )}
                 </>
               )}
               {!userFlag && (

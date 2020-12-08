@@ -48,7 +48,7 @@ export const onScientificNameQuery = async (q, valueKey = "id") => {
     groupId: o.group_id,
     acceptedNames:
       Array.isArray(o.accepted_names) && o.accepted_names.length ? o.accepted_names[0] : "",
-    rank: SCI_RANK[o.rank],
+    rank: SCI_RANK[o.rank || 0],
     group: getSpeciesIcon(o.group_name),
     raw: o
   }));

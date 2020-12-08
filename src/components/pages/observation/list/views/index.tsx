@@ -7,11 +7,17 @@ import ListView from "./list";
 export default function Views({ no }) {
   const { filter } = useObservationFilter();
 
-  return (
-    <>
-      {filter.view === "list" && <ListView no={no} />}
-      {filter.view === "list_minimal" && <GridView />}
-      {filter.view === "map" && <>Map View</>}
-    </>
-  );
+  switch (filter?.view) {
+    case "list":
+      return <ListView no={no} />;
+
+    case "list_minimal":
+      return <GridView />;
+
+    case "map":
+      return <div>Map</div>;
+
+    default:
+      return null;
+  }
 }

@@ -8,7 +8,7 @@ import CheckboxFilterPanel from "../shared/checkbox";
 
 export default function LocationFilter() {
   const { states } = useObservationFilter();
-  const STATE_OPTIONS = states.map((state) => ({ label: state, value: state, stat: state }));
+  const STATE_OPTIONS = states?.map((state) => ({ label: state, value: state, stat: state }));
 
   return (
     <SubAccordion>

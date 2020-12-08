@@ -17,7 +17,7 @@ import { UserEditPageComponentProps } from "..";
 export default function PermissionsTab({ user }: UserEditPageComponentProps) {
   const { t } = useTranslation();
   const [rolesList, setRolesList] = useState<Role[]>([]);
-  const [rolesOptionList, setRoleOptionList] = useState([]);
+  const [rolesOptionList, setRoleOptionList] = useState<any[]>([]);
 
   useEffect(() => {
     axGetUserRoles().then(setRolesList);
@@ -48,7 +48,7 @@ export default function PermissionsTab({ user }: UserEditPageComponentProps) {
       accountExpired: user.accountExpired,
       accountLocked: user.accountLocked,
       passwordExpired: user.passwordExpired,
-      roles: user.roles.map(({ id }) => id)
+      roles: user.roles?.map(({ id }) => id)
     }
   });
 

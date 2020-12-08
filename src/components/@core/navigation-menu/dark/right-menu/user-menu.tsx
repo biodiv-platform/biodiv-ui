@@ -16,7 +16,7 @@ export default function UserMenu() {
   const userMenuRows = [
     {
       name: "MY_PROFILE",
-      to: `/user/show/${user.id}`
+      to: `/user/show/${user?.id}`
     },
     {
       active: SITE_CONFIG.LEADERBOARD.ACTIVE,
@@ -27,7 +27,7 @@ export default function UserMenu() {
       active: SITE_CONFIG.OBSERVATION.ACTIVE,
       name: "MY_OBSERVATIONS",
       to: `/observation/list`,
-      params: { user: user.id }
+      params: { user: user?.id }
     },
     {
       name: "LOGOUT",
@@ -49,10 +49,10 @@ export default function UserMenu() {
               showBorder={true}
               size="xs"
               mr={2}
-              name={user.name}
-              src={getUserImage(user.profilePic)}
+              name={user?.name}
+              src={getUserImage(user?.profilePic)}
             />
-            {user.name} <ChevronDownIcon />
+            {user?.name} <ChevronDownIcon />
           </MenuButton>
           <SubMenu onClose={onClose} rows={userMenuRows} prefix="HEADER.MENU_PRIMARY.SETTINGS." />
         </>

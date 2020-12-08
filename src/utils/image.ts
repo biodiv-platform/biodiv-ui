@@ -69,7 +69,7 @@ export const getAssetObject = (file, meta?) => {
 };
 
 export const resizeMultiple = async (files: File[]) => {
-  const assets = [];
+  const assets: any[] = [];
 
   for (const file of files) {
     try {

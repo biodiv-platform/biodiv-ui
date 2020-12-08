@@ -159,7 +159,7 @@ export default function ObservationCreateForm({
       hidePreciseLocation: false,
 
       facts: {},
-      userGroupId: currentGroup.id > 0 ? [currentGroup.id.toString()] : [],
+      userGroupId: currentGroup.id && currentGroup.id > 0 ? [currentGroup.id.toString()] : [],
       resources: [],
       terms: true,
 

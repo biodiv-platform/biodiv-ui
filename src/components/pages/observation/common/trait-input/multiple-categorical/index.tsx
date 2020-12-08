@@ -23,7 +23,7 @@ const SingleCategorialTrait = ({
 
   return (
     <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4}>
-      {values.map((o) => (
+      {values?.map((o) => (
         <TraitContent
           key={o.id}
           label={o.value}

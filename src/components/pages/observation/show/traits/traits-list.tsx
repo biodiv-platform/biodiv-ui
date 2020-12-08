@@ -9,8 +9,8 @@ import { useListener } from "react-gbus";
 import Trait from "./trait";
 
 export interface ITraitsProps {
-  factsList: FactValuePair[];
-  speciesTraitsListDefault: TraitsValuePair[];
+  factsList?: FactValuePair[];
+  speciesTraitsListDefault: TraitsValuePair[] | undefined;
   observationId;
   authorId?;
 }
@@ -21,7 +21,7 @@ export default function TraitsList({
   observationId,
   authorId = -1
 }: ITraitsProps) {
-  const [newTraitsList, setNewTraitsList] = useState([]);
+  const [newTraitsList, setNewTraitsList] = useState<any[]>([]);
   const [speciesTraitsList, setSpeciesTraitsList] = useState(speciesTraitsListDefault);
 
   useListener(
@@ -35,26 +35,29 @@ export default function TraitsList({
 
   useEffect(() => {
     setNewTraitsList(
-      speciesTraitsList.map((speciesTrait) => {
-        switch (speciesTrait.traits.traitTypes) {
-          case TRAIT_TYPES.SINGLE_CATEGORICAL:
-            return {
-              defaultValue: factsList.find((v) => v.nameId === speciesTrait.traits.id)?.valueId,
-              speciesTrait
-            };
+      speciesTraitsList
+        ? speciesTraitsList.map((speciesTrait) => {
+            switch (speciesTrait.traits?.traitTypes) {
+              case TRAIT_TYPES.SINGLE_CATEGORICAL:
+                return {
+                  defaultValue: factsList?.find((v) => v.nameId === speciesTrait.traits?.id)
+                    ?.valueId,
+                  speciesTrait
+                };
 
-          case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
-            return {
-              defaultValue: factsList
-                .filter((v) => v.nameId === speciesTrait.traits.id)
-                .map((v) => v.valueId),
-              speciesTrait
-            };
+              case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
+                return {
+                  defaultValue: factsList
+                    ?.filter((v) => v.nameId === speciesTrait.traits?.id)
+                    .map((v) => v.valueId),
+                  speciesTrait
+                };
 
-          default:
-            return { defaultValue: null, speciesTrait };
-        }
-      })
+              default:
+                return { defaultValue: null, speciesTrait };
+            }
+          })
+        : []
     );
   }, [factsList, speciesTraitsList]);
 

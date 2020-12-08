@@ -8,9 +8,9 @@ import CustomCheckbox from "./checkbox";
 const SpeciesGroupsFilter = () => {
   const { speciesGroup, filter, setFilter, observationData } = useObservationFilter();
 
-  const defaultValue = useMemo(() => stringToArray(filter.sGroup), []);
+  const defaultValue = useMemo(() => stringToArray(filter?.sGroup), []);
   const speciesGroupList = useMemo(
-    () => speciesGroup.slice(1).sort((a, b) => a.order - b.order),
+    () => speciesGroup?.slice(1).sort((a, b) => (a?.order || 0) - (b.order || 0)),
     speciesGroup
   );
 
@@ -33,13 +33,13 @@ const SpeciesGroupsFilter = () => {
   return (
     <>
       <SimpleGrid gridGap={2} columns={5}>
-        {speciesGroupList.map((o) => (
+        {speciesGroupList?.map((o) => (
           <CustomCheckbox
             key={o.id}
-            id={o.id.toString()}
+            id={o.id?.toString()}
             label={o.name}
-            stat={observationData.ag.groupSpeciesName[o.name]}
-            {...getCheckboxProps({ value: o.id.toString() })}
+            stat={o.name ? observationData?.ag.groupSpeciesName?.[o.name] : 0}
+            {...getCheckboxProps({ value: o.id?.toString() })}
           />
         ))}
       </SimpleGrid>

@@ -6,21 +6,32 @@ import { UserIbp } from "@interfaces/observation";
 import { getUserImage } from "@utils/media";
 import React from "react";
 
-const User = ({ user }: { user: UserIbp }) => (
-  <SimpleGrid columns={5} py={4} mb={4} alignItems="center" className="white-box fadeInUp delay-4">
-    <LocalLink href={`/user/show/${user.id}`}>
-      <Link justifySelf="center" px={4}>
-        <Avatar name={user.name} src={getUserImage(user.profilePic)} />
-      </Link>
-    </LocalLink>
-    <Box gridColumn="2/6">
+interface UserProps {
+  user: UserIbp | undefined;
+}
+
+const User = ({ user }: UserProps) =>
+  user ? (
+    <SimpleGrid
+      columns={5}
+      py={4}
+      mb={4}
+      alignItems="center"
+      className="white-box fadeInUp delay-4"
+    >
       <LocalLink href={`/user/show/${user.id}`}>
-        <BlueLink className="text-elipsis" fontWeight="bold">
-          {user.name} <Badge isAdmin={user.isAdmin} />
-        </BlueLink>
+        <Link justifySelf="center" px={4}>
+          <Avatar name={user.name} src={getUserImage(user.profilePic)} />
+        </Link>
       </LocalLink>
-    </Box>
-  </SimpleGrid>
-);
+      <Box gridColumn="2/6">
+        <LocalLink href={`/user/show/${user.id}`}>
+          <BlueLink className="text-elipsis" fontWeight="bold">
+            {user.name} <Badge isAdmin={user.isAdmin} />
+          </BlueLink>
+        </LocalLink>
+      </Box>
+    </SimpleGrid>
+  ) : null;
 
 export default User;

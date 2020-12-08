@@ -6,10 +6,10 @@ import { titleCase } from "@utils/basic";
 import React from "react";
 
 interface ILocationInformationProps {
-  layerInfo: ObservationLocationInfo;
-  latitude: number;
-  longitude: number;
-  geoprivacy: boolean;
+  layerInfo?: ObservationLocationInfo;
+  latitude?: number;
+  longitude?: number;
+  geoprivacy?: boolean;
 }
 
 export default function LocationInformation({
@@ -38,7 +38,7 @@ export default function LocationInformation({
         <Row title="COORDINATES">
           {geoprivacy
             ? t("OBSERVATION.LOCATION_INFORMATION.GEOPRIVACY_ENABLED")
-            : `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`}
+            : `${latitude?.toFixed(4)}, ${longitude?.toFixed(4)}`}
         </Row>
         <Row title="TAHSIL">{layerInfo.tahsil}</Row>
         <Row title="SOIL">{layerInfo.soil}</Row>

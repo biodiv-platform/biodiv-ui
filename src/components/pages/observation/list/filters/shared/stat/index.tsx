@@ -5,11 +5,9 @@ import { toHumanString } from "human-readable-numbers";
 import React from "react";
 
 export default function FilterStat({ statKey, subStatKey }) {
-  const {
-    observationData: { ag }
-  } = useObservationFilter();
+  const { observationData } = useObservationFilter();
   const path = statKey ? [statKey, subStatKey].join(".") : subStatKey;
-  const count = getByPath(ag, path);
+  const count = getByPath(observationData?.ag, path);
 
   return (
     <Box color="gray.500" as="span" title={count}>

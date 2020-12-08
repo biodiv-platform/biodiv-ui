@@ -17,26 +17,26 @@ const URLify = (text) => {
  * @param {*} nHtml
  * @returns
  */
-export const getInjectableHTML = (nHtml) => {
+export const getInjectableHTML = (nHtml): string => {
   try {
-    return nHtml
-      ? filterXSS(URLify(nHtml), {
-          whiteList: {
-            a: ["href", "title", "class", "rel", "target"],
-            p: ["class"],
-            br: [],
-            h2: [],
-            h3: [],
-            ul: [],
-            li: [],
-            img: ["src"],
-            div: ["class"]
-          },
-          stripIgnoreTag: true
-        })
-      : null;
+    if (nHtml) {
+      return filterXSS(URLify(nHtml), {
+        whiteList: {
+          a: ["href", "title", "class", "rel", "target"],
+          p: ["class"],
+          br: [],
+          h2: [],
+          h3: [],
+          ul: [],
+          li: [],
+          img: ["src"],
+          div: ["class"]
+        },
+        stripIgnoreTag: true
+      });
+    }
   } catch (e) {
     console.error(e);
-    return null;
   }
+  return "";
 };

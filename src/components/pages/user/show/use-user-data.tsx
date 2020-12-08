@@ -11,7 +11,7 @@ const defaultFilter = {
 
 const useUserData = (userId, max = 16) => {
   const { currentGroup } = useGlobalState();
-  const [speciesGroups, setSpeciesGroups] = useState([]);
+  const [speciesGroups, setSpeciesGroups] = useState<any[]>([]);
 
   const [filter, setFilter] = useState<{ sGroupId; hasMedia }>({
     sGroupId: undefined,

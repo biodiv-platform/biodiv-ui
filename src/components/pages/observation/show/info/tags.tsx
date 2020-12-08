@@ -7,7 +7,7 @@ import LinkTag from "../../common/link-tag";
 import TagsEditor from "./tags-editor";
 
 interface ITagsShowProps {
-  items: Tags[];
+  items?: Tags[] | undefined;
   objectId;
   updateFunc;
   queryFunc;

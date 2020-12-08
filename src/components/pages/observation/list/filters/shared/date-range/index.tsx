@@ -28,7 +28,7 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
   const { t } = useTranslation();
   const { filter, setFilter } = useObservationFilter();
   const defaultDate = useMemo(() => {
-    if (filter[filterKey.min]) {
+    if (filter && filter[filterKey.min]) {
       return [
         dayjs(filter[filterKey.min]).toDate(),
         filter[filterKey.max] ? dayjs(filter[filterKey.max]).toDate() : "today"

@@ -35,5 +35,8 @@ export default function RulesInputType({ inputType, form, name }) {
           label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}
         />
       );
+
+    default:
+      return null;
   }
 }

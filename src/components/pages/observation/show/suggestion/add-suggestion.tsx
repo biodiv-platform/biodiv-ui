@@ -46,10 +46,10 @@ export default function AddSuggestion({
   recoVotesLength
 }: IAddSuggestionProps) {
   const { t } = useTranslation();
-  const scientificRef = useRef(null);
-  const [commonNameOptions, setCommonNameOptions] = useState([]);
-  const [languages, setLanguages] = useState([]);
-  const langRef = useRef(null);
+  const scientificRef: any = useRef(null);
+  const [commonNameOptions, setCommonNameOptions] = useState<any[]>([]);
+  const [languages, setLanguages] = useState<any[]>([]);
+  const langRef: any = useRef(null);
 
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
 

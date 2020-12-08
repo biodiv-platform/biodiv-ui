@@ -10,9 +10,9 @@ import GroupFeature from "./group-feature";
 import GroupPost from "./group-post";
 
 interface IGroupsProps {
-  observationGroups: UserGroupIbp[];
-  permission: ObservationUserPermission;
-  featured: Featured[];
+  observationGroups: UserGroupIbp[] | undefined;
+  permission: ObservationUserPermission | undefined;
+  featured: Featured[] | undefined;
   resourceId;
   resourceType;
   saveUserGroupsFunc;
@@ -39,8 +39,8 @@ const Groups = ({
   }, [isLoggedIn]);
 
   return (
-    <Box mb={4} className="white-box" isLazy={true}>
-      <Tabs>
+    <Box mb={4} className="white-box">
+      <Tabs isLazy={true}>
         <TabList>
           <Tab>👥 {t("OBSERVATION.USERGROUPS")}</Tab>
           <Tab hidden={hideFeature}>🌟 {t("OBSERVATION.FEATURE_IN_GROUPS")}</Tab>

@@ -19,7 +19,7 @@ import FieldData from "./field-data";
 interface ICustomFieldProps {
   cf: CustomFieldData;
   setO;
-  canEdit: boolean;
+  canEdit;
   userGroupId;
   observationId;
 }
@@ -51,7 +51,7 @@ export default function CustomField({
 
   return (
     <FormControl borderBottom="1px" borderColor="gray.300" p={4}>
-      <FormLabel fontWeight="bold" htmlFor={cf.cfId.toString()}>
+      <FormLabel fontWeight="bold" htmlFor={cf.cfId?.toString()}>
         {cf.cfName}
         {canEdit && (
           <IconButton

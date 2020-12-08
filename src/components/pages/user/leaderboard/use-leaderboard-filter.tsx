@@ -27,7 +27,7 @@ const LeaderboardFilterContext = createContext<LeaderboardFilterContextProps>(
 
 export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) => {
   const [filter, setFilter] = useImmer({ f: props.filter });
-  const [leaderboardData, setLeaderboardData] = useState([]);
+  const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
   const { user } = useGlobalState();
 
   useEffect(() => {
@@ -44,9 +44,9 @@ export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) 
     try {
       NProgress.start();
       const payload = {
-        value: filter.f.module,
-        how_many: filter.f.limit,
-        time: filter.f.period
+        value: filter.f?.module,
+        how_many: filter.f?.limit,
+        time: filter.f?.period
       };
       const data = await axGetUserLeaderboard(payload, user);
       setLeaderboardData(data);
@@ -66,13 +66,13 @@ export const LeaderboardFilterProvider = (props: LeaderboardFilterContextProps) 
   };
 
   const addFilter = (key, value) => {
-    setFilter((_draft) => {
+    setFilter((_draft: any) => {
       _draft.f[key] = value;
     });
   };
 
   const removeFilter = (key) => {
-    setFilter((_draft) => {
+    setFilter((_draft: any) => {
       delete _draft.f[key];
     });
   };

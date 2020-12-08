@@ -21,8 +21,8 @@ import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
 
 interface IGroupFeatureProps {
-  groups: UserGroupIbp[];
-  selectedDefault: Featured[];
+  groups: UserGroupIbp[] | undefined;
+  selectedDefault: Featured[] | undefined;
   resourceId;
   featureFunc;
   unfeatureFunc;
@@ -39,24 +39,24 @@ export default function GroupFeature({
 }: IGroupFeatureProps) {
   const [groupsN, setGroupsN] = useState<UserGroupIbp[]>([]);
   const [selectedGroups, setSelectedGroups] = useState<any[]>([]);
-  const [finalGroups, setFinalGroups] = useState([]);
+  const [finalGroups, setFinalGroups] = useState<any[]>([]);
   const [description, setDescription] = useState("");
 
   const { t } = useTranslation();
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const editButtonRef = useRef(null);
+  const editButtonRef: any = useRef(null);
 
   useEffect(() => {
     if (groups) {
       const groupsNT = [DEFAULT_GROUP, ...groups.map((g) => ({ ...g, icon: g.icon }))];
-      const selectedGroupsT = selectedDefault.map((g) => `${g.userGroup}`);
+      const selectedGroupsT = selectedDefault?.map((g) => `${g.userGroup}`) || [];
       setGroupsN(groupsNT || []);
       setSelectedGroups(selectedGroupsT);
       setFinalGroups(groupsNT.filter((g) => selectedGroupsT.includes(`${g.id}`)));
     }
   }, [groups]);
 
-  const updateFinalGroups = (data = []) => {
+  const updateFinalGroups = (data = [] as any[]) => {
     const selectedGroupsT = data.map((g) => `${g.userGroup}`);
     setSelectedGroups(selectedGroupsT);
     setFinalGroups(groupsN.filter((g) => selectedGroupsT.includes(`${g.id}`)));

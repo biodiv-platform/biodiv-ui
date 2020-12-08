@@ -9,7 +9,7 @@ import { getGroupImage } from "./media";
 export const transformUserGroupList = (list: UserGroupIbp[]): UserGroupIbp[] => {
   return list.map((group: UserGroupIbp) => ({
     ...group,
-    webAddress: group.webAddress.startsWith("/")
+    webAddress: group.webAddress?.startsWith("/")
       ? SITE_CONFIG.SITE.URL + group.webAddress
       : group.webAddress,
     icon: getGroupImage(group.icon)
@@ -18,7 +18,10 @@ export const transformUserGroupList = (list: UserGroupIbp[]): UserGroupIbp[] => 
 
 export const findCurrentUserGroup = (groups: UserGroupIbp[], currentURL: string): UserGroupIbp => {
   return (
-    (currentURL && groups.find((group: UserGroupIbp) => currentURL.startsWith(group.webAddress))) ||
+    (currentURL &&
+      groups.find(
+        (group: UserGroupIbp) => group.webAddress && currentURL.startsWith(group.webAddress)
+      )) ||
     DEFAULT_GROUP
   );
 };
@@ -29,7 +32,7 @@ export const getManifestURL = (group: UserGroupIbp) => {
 };
 
 export const formatGroupRules = (rules) => {
-  const groupRules = [];
+  const groupRules: any[] = [];
   const {
     hasUserRule,
     taxonomicRuleList,

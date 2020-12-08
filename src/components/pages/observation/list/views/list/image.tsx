@@ -69,21 +69,21 @@ export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper 
   return (
     <ImageBox>
       <div className="stats">
-        {o.noOfImages > 0 && (
+        {o.noOfImages ? (
           <>
             {o.noOfImages} <ImageIcon />
           </>
-        )}
-        {o.noOfVideos > 0 && (
+        ) : null}
+        {o.noOfVideos ? (
           <>
             {o.noOfVideos} <VideoIcon />
           </>
-        )}
-        {o.noOfAudios > 0 && (
+        ) : null}
+        {o.noOfAudios ? (
           <>
             {o.noOfAudios} <AudioIcon />
           </>
-        )}
+        ) : null}
       </div>
 
       <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
@@ -94,7 +94,7 @@ export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper 
             bg="gray.100"
             src={getObservationImage(o.reprImageUrl, RESOURCE_SIZE.LIST_THUMBNAIL)}
             fallbackSrc={getSpeciesIcon(o?.speciesGroup)}
-            alt={o.observationId.toString()}
+            alt={o.observationId?.toString()}
           />
         </Link>
       </LocalLink>

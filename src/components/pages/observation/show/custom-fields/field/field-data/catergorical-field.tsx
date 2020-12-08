@@ -25,7 +25,7 @@ export default function CategoricalField({
   const [isMulti] = useState(cf?.customFieldValues?.fieldType === "MULTIPLE CATEGORICAL");
   const { t } = useTranslation();
   const [fieldValue, setFieldValue] = useState<number[] | number>();
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<any[]>([]);
 
   const onSave = () => {
     onUpdate(isMulti ? { multipleCategorical: [fieldValue] } : { singleCategorical: fieldValue });

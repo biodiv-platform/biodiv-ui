@@ -7,7 +7,7 @@ import flat from "flat";
  * @returns {String}
  */
 export const jsontocss = ({ colors: c }): string => {
-  const flatColors = flat(
+  const flatColors: Record<string, string> = flat(
     {
       white: c.white,
       gray: c.gray,

@@ -1,21 +1,16 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
+import { IconButton } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 const NavigationBox = styled.div`
-  font-size: 1.5em;
-  color: var(--white);
-
   .right,
   .left {
-    border-radius: 50%;
     margin: 0 1rem;
-    width: 3rem;
-    height: 3rem;
+    border-radius: 50%;
     position: absolute;
     top: calc(50% - 1.5rem);
-    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -27,26 +22,29 @@ const NavigationBox = styled.div`
   }
 `;
 
-function CarouselNavigation({ carousel, resourcesLength }) {
-  const isHidden = !(carousel && resourcesLength > 1);
+function CarouselNavigation({ prev, next, current, total }) {
   const { t } = useTranslation();
 
   return (
-    <NavigationBox className={isHidden ? "hidden" : "shown"}>
-      <button
+    <NavigationBox>
+      <IconButton
         className="left"
         aria-label={t("OBSERVATION.SLIDER_LEFT")}
-        onClick={() => carousel.scrollPrev()}
-      >
-        <ArrowBackIcon />
-      </button>
-      <button
+        icon={<ArrowBackIcon />}
+        onClick={prev}
+        opacity={0.2}
+        _hover={{ opacity: 1 }}
+        disabled={current === 0}
+      />
+      <IconButton
         className="right"
         aria-label={t("OBSERVATION.SLIDER_RIGHT")}
-        onClick={() => carousel.scrollNext()}
-      >
-        <ArrowForwardIcon />
-      </button>
+        icon={<ArrowForwardIcon />}
+        onClick={next}
+        opacity={0.2}
+        _hover={{ opacity: 1 }}
+        disabled={current === total - 1}
+      />
     </NavigationBox>
   );
 }

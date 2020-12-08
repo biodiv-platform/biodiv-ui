@@ -7,7 +7,7 @@ import BlueLink from ".";
 export default function ExternalBlueLink(props: LinkProps) {
   return (
     <BlueLink {...props} target="_blank" rel="noreferrer noopener" wordBreak="break-word">
-      {props?.children || decodeURIComponent(props.href)} <ExternalLinkIcon />
+      {props?.children || (props.href && decodeURIComponent(props.href))} <ExternalLinkIcon />
     </BlueLink>
   );
 }

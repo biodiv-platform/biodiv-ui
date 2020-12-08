@@ -19,9 +19,9 @@ export default function Recodata({ form, languages }: IRecodataProps) {
   const helpIdentify = form.watch("helpIdentify");
 
   const { t } = useTranslation();
-  const scientificRef = useRef(null);
-  const langRef = useRef(null);
-  const [commonNameOptions, setCommonNameOptions] = useState([]);
+  const scientificRef: any = useRef(null);
+  const langRef: any = useRef(null);
+  const [commonNameOptions, setCommonNameOptions] = useState<any[]>([]);
 
   const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
     if (langId) {

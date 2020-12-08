@@ -16,7 +16,7 @@ export default function FilterMultiSelectPanel({
   options
 }: FilterMultiSelectProps) {
   const { t } = useTranslation();
-  const label = t(translateKey);
+  const label = translateKey && t(translateKey);
 
   return (
     <AccordionItem>

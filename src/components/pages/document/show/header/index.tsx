@@ -33,7 +33,7 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
   const { t } = useTranslation();
 
   useEffect(() => {
-    setShowActions(adminOrAuthor(document.document.authorId));
+    setShowActions(adminOrAuthor(document?.document?.authorId));
   }, [isLoggedIn]);
 
   const handleOnEdit = () => router.push(`/document/edit/${documentId}`, true);
@@ -64,7 +64,7 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
         <FlagActionButton
           resourceId={documentId}
           initialFlags={document?.flag}
-          userId={user.id}
+          userId={user?.id}
           flagFunc={axFlagDocument}
           unFlagFunc={axUnFlagDocument}
         />

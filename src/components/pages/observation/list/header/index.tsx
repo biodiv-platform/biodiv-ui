@@ -21,7 +21,7 @@ import DownloadObservationDataModal from "../download-observation-modal";
 
 export default function ListHeader() {
   const { filter, setFilter, observationData } = useObservationFilter();
-  const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter.view);
+  const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter?.view);
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -66,7 +66,7 @@ export default function ListHeader() {
             <Select
               maxW="10rem"
               aria-label={t("LIST.SORT_BY")}
-              value={filter.sort}
+              value={filter?.sort}
               onChange={handleOnSort}
             >
               {sortByOptions.map(({ name, key }) => (
@@ -82,7 +82,7 @@ export default function ListHeader() {
         </Stack>
       </Flex>
 
-      {observationData.n > 0 && (
+      {observationData && observationData.n > 0 && (
         <Text color="gray.600" mb={4}>
           {format(observationData.n)} {t("LIST.OBSERVATIONS_FOUND")}
         </Text>

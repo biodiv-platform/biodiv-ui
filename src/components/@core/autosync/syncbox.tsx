@@ -80,7 +80,7 @@ export default function SyncBox({
               icon={<ChevronIcon />}
               variant="link"
               minW="auto"
-              transform={isOpen && "rotate(180deg)"}
+              transform={isOpen ? "rotate(180deg)" : undefined}
               onClick={onToggle}
               mr={5}
             />

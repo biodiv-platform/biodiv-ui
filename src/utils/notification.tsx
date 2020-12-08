@@ -17,7 +17,7 @@ const notification = (message, type = NotificationType.Error, variables = {}) =>
   const m = compiledMessage(`${message}`, variables);
   if (isBrowser) {
     const toaster = cogoToast[type];
-    const { hide } = toaster(m, {
+    const { hide }: any = toaster(m, {
       position: "top-center",
       hideAfter: 10,
       onClick: () => {

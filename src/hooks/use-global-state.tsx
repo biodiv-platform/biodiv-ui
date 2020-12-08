@@ -12,7 +12,7 @@ interface GlobalStateContextProps {
 
   groups?: UserGroupIbp[];
 
-  currentGroup?: UserGroupIbp;
+  currentGroup: UserGroupIbp;
   isCurrentGroupMember?: boolean;
   setIsCurrentGroupMember;
 
@@ -30,7 +30,7 @@ const GlobalStateContext = createContext<GlobalStateContextProps>({} as GlobalSt
 export const GlobalStateProvider = ({ initialState, children }: GlobalStateProviderProps) => {
   const [user, setUser] = useState(initialState.user || {});
   const [isLoggedIn, setIsLoggedIn] = useState(!!initialState?.user?.id);
-  const [pages, setPages] = useState([]);
+  const [pages, setPages] = useState<any[]>([]);
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState(
     initialState.isCurrentGroupMember
   );

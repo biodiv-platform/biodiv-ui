@@ -1,8 +1,8 @@
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
 import { googleSearch } from "@utils/search";
 import { Mq } from "mq-styled-components";
-import React, { useRef } from "react";
+import React from "react";
 
 const SearchForm = styled.form`
   input {
@@ -33,17 +33,16 @@ const SearchForm = styled.form`
 `;
 
 export default function Search() {
-  const queryInput = useRef(null);
   const { t } = useTranslation();
 
   const handleOnSearch = (e) => {
     e.preventDefault();
-    googleSearch(queryInput.current.value);
+    googleSearch(e.target.elements["search"].value);
   };
 
   return (
     <SearchForm onSubmit={handleOnSearch}>
-      <input type="search" placeholder={t("HEADER.SEARCH")} ref={queryInput} />
+      <input name="search" type="search" placeholder={t("HEADER.SEARCH")} />
     </SearchForm>
   );
 }

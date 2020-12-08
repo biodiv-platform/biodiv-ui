@@ -6,7 +6,7 @@ import { format } from "indian-number-format";
 import React from "react";
 
 const ObservationCell = (props) => {
-  const values = Object.values(props?.cell?.value || {});
+  const values: any = Object.values(props?.cell?.value || {});
   const total = values.reduce((cv, t) => (t ? +cv + +t : cv), 0);
   return format(total, 3);
 };

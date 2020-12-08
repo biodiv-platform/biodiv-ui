@@ -23,7 +23,7 @@ export default function FieldText({ cf, onUpdate, onClose, isOpen }: IFieldTextP
   return isOpen ? (
     <>
       <Textarea
-        id={cf.cfId.toString()}
+        id={cf.cfId?.toString()}
         value={fieldTextData}
         onChange={(e) => setFieldTextData(e.target.value)}
         aria-describedby={`${cf.cfId}-helper`}

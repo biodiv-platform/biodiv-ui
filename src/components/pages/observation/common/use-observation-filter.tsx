@@ -42,11 +42,11 @@ const ObservationFilterContext = createContext<ObservationFilterContextProps>(
 );
 
 export const ObservationFilterProvider = (props: ObservationFilterContextProps) => {
-  const initialOffset = props.filter.offset;
-  const [filter, setFilter] = useImmer({ f: props.filter });
-  const [observationData, setObservationData] = useImmer(props.observationData);
+  const initialOffset = props?.filter?.offset || 0;
+  const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
+  const [observationData, setObservationData] = useImmer<any>(props.observationData);
   const { isLoggedIn } = useGlobalState();
-  const [loggedInUserGroups, setLoggedInUserGroups] = useState([]);
+  const [loggedInUserGroups, setLoggedInUserGroups] = useState<any[]>([]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -67,14 +67,14 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         return taxonId ? { ...acc, [cv.observationId]: taxonId } : acc;
       }, {});
       const mvp = await axGetMaxVotedRecoPermissions(payload);
-      setObservationData((_draft) => {
+      setObservationData((_draft: any) => {
         _draft.mvp = { ..._draft.mvp, ...mvp.data };
       });
     }
   };
 
   useEffect(() => {
-    updateMaxVotedRecoPermissions(observationData.l);
+    updateMaxVotedRecoPermissions(observationData?.l);
   }, [isLoggedIn]);
 
   const fetchListData = async () => {
@@ -82,7 +82,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
       NProgress.start();
 
       // Reset list data if params are changed
-      if (filter.f.offset === 0) {
+      if (filter.f?.offset === 0) {
         setObservationData((_draft) => {
           _draft.l = [];
           _draft.ml = [];

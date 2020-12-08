@@ -4,7 +4,7 @@ import { RecoIbp } from "@interfaces/observation";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import React from "react";
 
-function ObservationStatusBadge({ reco }: { reco: RecoIbp; maxVotedRecoId: number }) {
+function ObservationStatusBadge({ reco }: { reco: RecoIbp | undefined }) {
   const { t } = useTranslation();
 
   const taxonLink = `/namelist/index?taxon=${reco?.taxonId}`;

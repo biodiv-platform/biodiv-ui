@@ -1,5 +1,5 @@
-import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
@@ -22,7 +22,7 @@ export default function ForgotPasswordComponent() {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const [showMobile, setShowMobile] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>();
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   const hForm = useForm<any>({
@@ -92,10 +92,8 @@ export default function ForgotPasswordComponent() {
   };
 
   const handleRegenerate = async () => {
-    const { id } = user;
-
     const payload = {
-      id,
+      id: user?.id,
       action: 1
     };
 

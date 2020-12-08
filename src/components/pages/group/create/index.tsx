@@ -26,8 +26,8 @@ interface GroupCreatePageComponentProps {
 
 export const transformMemberPayload = (membersList = []) => {
   return membersList.reduce(
-    ({ idsList, emailList }, item) => {
-      return item.__isNew__
+    ({ idsList, emailList }, item: any) => {
+      return item["__isNew__"]
         ? { idsList, emailList: [...emailList, item.value] }
         : { emailList, idsList: [...idsList, item.value] };
     },

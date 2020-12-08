@@ -55,16 +55,20 @@ const TraitsPicker = ({ name, form }: ITraitsPickerProps) => {
         💎 {t("OBSERVATION.TRAITS")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
       <Collapse in={isOpen}>
-        {traitsPairs.map(({ traits, values }) => (
-          <FormControl mb={4} key={traits.id}>
-            <FormLabel mb={1}>{traits.name}</FormLabel>
-            <TraitInput
-              type={traits.traitTypes}
-              values={values}
-              onUpdate={(v) => handleOnChange(traits.id, v)}
-            />
-          </FormControl>
-        ))}
+        {traitsPairs.map(
+          ({ traits, values }) =>
+            traits &&
+            values && (
+              <FormControl mb={4} key={traits.id}>
+                <FormLabel mb={1}>{traits.name}</FormLabel>
+                <TraitInput
+                  type={traits.traitTypes}
+                  values={values}
+                  onUpdate={(v) => handleOnChange(traits.id, v)}
+                />
+              </FormControl>
+            )
+        )}
         {!sGroup && <Text>please select group first</Text>}
       </Collapse>
       <Divider mb={3} />

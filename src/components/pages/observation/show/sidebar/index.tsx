@@ -6,8 +6,8 @@ import ClusterMap from "./cluster-map";
 import User from "./user";
 
 interface ISidebarProps {
-  observation: Observation;
-  authorInfo: UserIbp;
+  observation?: Observation;
+  authorInfo?: UserIbp;
   speciesId?: number;
 }
 
@@ -17,8 +17,8 @@ export default function Sidebar({ observation, authorInfo, speciesId }: ISidebar
       <User user={authorInfo} />
       <ClusterMap
         filter={speciesId && { speciesId }}
-        latitude={observation.latitude}
-        longitude={observation.longitude}
+        latitude={observation?.latitude}
+        longitude={observation?.longitude}
       />
     </Box>
   );

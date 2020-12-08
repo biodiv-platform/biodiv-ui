@@ -33,7 +33,7 @@ function UserLeaderboardComponent() {
             <Select
               minW="8rem"
               onChange={(event) => onChange("module", event.target.value)}
-              defaultValue={filter.module}
+              defaultValue={filter?.module}
             >
               {Object.keys(LEADERBOARD_MODULES).map((key, index) => (
                 <option key={index} value={LEADERBOARD_MODULES[key]}>
@@ -44,7 +44,7 @@ function UserLeaderboardComponent() {
             <Select
               minW="8rem"
               onChange={(event) => onChange("period", event.target.value)}
-              defaultValue={filter.period}
+              defaultValue={filter?.period}
             >
               {Object.keys(LEADERBOARD_STOPS).map((key, index) => (
                 <option key={index} value={key}>
@@ -54,7 +54,7 @@ function UserLeaderboardComponent() {
             </Select>
             <Select
               onChange={(event) => onChange("limit", event.target.value)}
-              value={filter.limit}
+              value={filter?.limit}
             >
               {STOPS.map((stop) => (
                 <option key={stop} value={stop}>
@@ -71,7 +71,7 @@ function UserLeaderboardComponent() {
       <UserLeaderboardTable
         columns={[
           ...LEADERBOARD_TABLE_COLUMNS,
-          ...(!filter.module.length
+          ...(!filter?.module.length
             ? LEADERBOARD_MODULES_COLUMNS
             : LEADERBOARD_SUB_MODULES_COLUMNS(filter.module))
         ]}

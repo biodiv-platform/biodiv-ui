@@ -37,25 +37,25 @@ function Header({ o, following = false }: IHeaderProps) {
   const [showActions, setShowActions] = useState(false);
 
   const pageTitle = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} by ${
-    o.authorInfo.name
-  } on ${formatDateReadableFromUTC(o.observation.fromDate)}`;
+    o.authorInfo?.name
+  } on ${formatDateReadableFromUTC(o.observation?.fromDate)}`;
 
   const pageDescription = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} Observed by ${
-    o.authorInfo.name
-  } at ${o.observation.placeName} on ${formatDateReadableFromUTC(o.observation.fromDate)}`;
+    o.authorInfo?.name
+  } at ${o.observation?.placeName} on ${formatDateReadableFromUTC(o.observation?.fromDate)}`;
 
   const reprImage: any = useMemo(() => {
-    if (o.observation.reprImageId) {
-      const r = o.observationResource.find((i) => i.resource.id === o.observation.reprImageId);
-      return getObservationImage(r?.resource.fileName, RESOURCE_SIZE.TWITTER);
+    if (o.observation?.reprImageId) {
+      const r = o.observationResource?.find((i) => i.resource?.id === o.observation?.reprImageId);
+      return getObservationImage(r?.resource?.fileName, RESOURCE_SIZE.TWITTER);
     }
   }, []);
 
   useEffect(() => {
-    setShowActions(adminOrAuthor(o.authorInfo.id));
+    setShowActions(adminOrAuthor(o.authorInfo?.id));
   }, [isLoggedIn]);
 
-  const handleOnEdit = () => router.push(`/observation/edit/${o.observation.id}`, true);
+  const handleOnEdit = () => router.push(`/observation/edit/${o.observation?.id}`, true);
 
   return (
     <>
@@ -73,10 +73,7 @@ function Header({ o, following = false }: IHeaderProps) {
             <Text as="i" mr={2}>
               {o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
             </Text>
-            <ObservationStatusBadge
-              reco={o.recoIbp}
-              maxVotedRecoId={o.observation.maxVotedRecoId}
-            />
+            <ObservationStatusBadge reco={o.recoIbp} />
           </Heading>
           {o.recoIbp?.commonName && (
             <Heading as="h2" size="lg">
@@ -95,21 +92,21 @@ function Header({ o, following = false }: IHeaderProps) {
           )}
           <FollowActionButton
             following={following}
-            resourceId={o.observation.id}
+            resourceId={o.observation?.id}
             toggleFollowFunc={axFollowObservation}
             followTitle={t("OBSERVATION.FOLLOW_OBSERVATION")}
             unFollowTitle={t("OBSERVATION.UNFOLLOW_OBSERVATION")}
           />
           <FlagActionButton
-            resourceId={o.observation.id}
+            resourceId={o.observation?.id}
             initialFlags={o.flag}
-            userId={user.id}
+            userId={user?.id}
             flagFunc={axFlagObservation}
             unFlagFunc={axUnFlagObservation}
           />
           {showActions && (
             <DeleteActionButton
-              observationId={o.observation.id}
+              observationId={o.observation?.id}
               title={t("OBSERVATION.REMOVE.TITLE")}
               description={t("OBSERVATION.REMOVE.DESCRIPTION")}
               deleted={t("OBSERVATION.REMOVE.SUCCESS")}

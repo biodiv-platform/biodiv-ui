@@ -26,7 +26,7 @@ const MyUploadsImages = ({ onDone }) => {
   };
 
   const { getCheckboxProps } = useCheckboxGroup({
-    value: observationAssets.map((o) => o.hashKey)
+    value: observationAssets?.map((o) => o.hashKey)
   });
 
   return assets ? (

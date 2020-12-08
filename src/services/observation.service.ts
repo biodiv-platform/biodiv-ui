@@ -214,7 +214,7 @@ export const axUnlockRecoVote = async (observationId, payload) => {
   }
 };
 
-export const axGetCreateObservationPageData = async (userGroupId: number, ctx) => {
+export const axGetCreateObservationPageData = async (userGroupId, ctx) => {
   try {
     const {
       data

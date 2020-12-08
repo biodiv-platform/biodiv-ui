@@ -25,12 +25,12 @@ const SingleCategorialTrait = ({
 
   return (
     <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4} {...getRootProps()}>
-      {values.map((o) => (
+      {values?.map((o) => (
         <TraitContent
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getRadioProps({ value: o.id.toString() })}
+          {...getRadioProps({ value: o?.id?.toString() })}
         />
       ))}
     </SimpleGrid>

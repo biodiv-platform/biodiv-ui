@@ -18,7 +18,7 @@ export default function RecoSuggestionTab({ o, recoUpdated }) {
         recoIbp={o.recoShow.recoIbp}
         allRecoVotes={o.recoShow.allRecoVotes}
         recoUpdated={recoUpdated}
-        permissionOverride={observationData.mvp[o.observationId]}
+        permissionOverride={observationData?.mvp[o.observationId]}
       />
       <AddSuggestion
         recoUpdated={recoUpdated}
