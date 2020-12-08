@@ -14,7 +14,7 @@ interface IUserGroupsProps {
 }
 
 export default function UserGroups({ name, label, form }: IUserGroupsProps) {
-  const [userGroups, setUserGroups] = useState([]);
+  const [userGroups, setUserGroups] = useState<any[]>([]);
   const { isOpen, onToggle } = useDisclosure();
 
   useEffect(() => {

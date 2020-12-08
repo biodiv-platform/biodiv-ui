@@ -17,7 +17,7 @@ import React from "react";
 export default function DeleteAccount({ userId }) {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef();
+  const cancelRef = React.useRef(null);
   const router = useLocalRouter();
 
   const handleOnDelete = async () => {

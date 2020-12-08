@@ -1,3 +1,4 @@
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 import {
   Box,
   Grid,
@@ -10,7 +11,6 @@ import {
   PopoverHeader,
   PopoverTrigger
 } from "@chakra-ui/react";
-import { InfoOutlineIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
@@ -40,13 +40,15 @@ function CarouselResourceInfo({ currentResource, observationId }) {
 
   return (
     <Box position="absolute" top={4} right={4} left={0} display="flex" justifyContent="flex-end">
-      <Popover placement="bottom-end" closeOnBlur={false}>
+      <Popover placement="bottom-end" closeOnBlur={false} isLazy={true}>
         <PopoverTrigger>
           <IconButton
             aria-label={t("OBSERVATION.RESOURCE_INFO")}
             icon={<InfoOutlineIcon />}
             zIndex={4}
+            opacity={0.2}
             isRound={true}
+            _hover={{ opacity: 1 }}
           />
         </PopoverTrigger>
         <PopoverContent zIndex={4}>

@@ -15,7 +15,7 @@ import Select, { components } from "react-select";
 
 interface ISpeciesGroupsProps {
   id;
-  speciesGroups: SpeciesGroup[];
+  speciesGroups: SpeciesGroup[] | undefined;
   observationId;
 }
 
@@ -29,16 +29,16 @@ const CustomOption = ({ children, ...props }) => (
 );
 
 export default function SpeciesGroupBox({ id, speciesGroups, observationId }: ISpeciesGroupsProps) {
-  const options = speciesGroups.map((g) => ({ label: g.name, value: g.id }));
-  const [finalType, setFinalType] = useState(options.find((o) => o.value === id));
+  const options = speciesGroups?.map((g) => ({ label: g.name, value: g.id }));
+  const [finalType, setFinalType] = useState(options?.find((o) => o.value === id));
   const [type, setType] = useState(finalType);
   const { isOpen, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
 
   const handleOnSave = async () => {
-    const { success } = await axUpdateSpeciesGroup(observationId, type.value);
+    const { success } = await axUpdateSpeciesGroup(observationId, type?.value);
     if (success) {
-      emit(SPECIES_GROUP_UPDATED, type.value);
+      emit(SPECIES_GROUP_UPDATED, type?.value);
       setFinalType(type);
       notification(t("OBSERVATION.GROUP_UPDATED"), NotificationType.Success);
       onClose();
@@ -83,7 +83,7 @@ export default function SpeciesGroupBox({ id, speciesGroups, observationId }: IS
         </Stack>
       ) : (
         <Stack isInline={true} alignItems="top">
-          <Image title={finalType.label} boxSize="2.5rem" src={getSpeciesIcon(finalType.label)} />
+          <Image title={finalType?.label} boxSize="2.5rem" src={getSpeciesIcon(finalType?.label)} />
           <IconButton
             size="lg"
             aria-label="edit"

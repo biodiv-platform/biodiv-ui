@@ -22,7 +22,7 @@ export default function CustomFieldsTab({ o }: ICustomFieldsTabInterface) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      const taxonIds = o.recoShow.allRecoVotes.map((rv) => rv.taxonId);
+      const taxonIds = o.recoShow?.allRecoVotes?.map((rv) => rv.taxonId);
       axGetCustomFieldsPermissions(o.observationId, taxonIds).then(({ data }) => {
         setCfPermission(data.cfPermission);
       });
@@ -39,7 +39,7 @@ export default function CustomFieldsTab({ o }: ICustomFieldsTabInterface) {
   return (
     <>
       <BoxHeading>🔶 {t("OBSERVATION.CUSTOM_FIELDS")}</BoxHeading>
-      {o.customField.length ? (
+      {o.customField?.length ? (
         <CustomFieldList
           o={o}
           setO={onCFUpdate}

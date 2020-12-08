@@ -20,91 +20,91 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
   const INFO_LINKS = [
     {
       title: "DOCUMENT.TYPE",
-      value: document.itemtype
+      value: document?.itemtype
     },
     {
       title: "DOCUMENT.TITLE",
-      value: document.title
+      value: document?.title
     },
     {
       title: "DOCUMENT.BIB.AUTHOR",
-      value: document.author
+      value: document?.author
     },
     {
       title: "DOCUMENT.DESCRIPTION",
-      value: document.notes,
+      value: document?.notes,
       cell: (
         <Box
           as={HTMLContainer}
           gridColumn="2/5"
           dangerouslySetInnerHTML={{
-            __html: getInjectableHTML(document.notes)
+            __html: getInjectableHTML(document?.notes)
           }}
         ></Box>
       )
     },
     {
       title: "DOCUMENT.BIB.JOURNAL",
-      value: document.journal
+      value: document?.journal
     },
     {
       title: "DOCUMENT.BIB.BOOKTITLE",
-      value: document.bookTitle
+      value: document?.bookTitle
     },
     {
       title: "DOCUMENT.BIB.SERIES",
-      value: document.series
+      value: document?.series
     },
     {
       title: "DOCUMENT.BIB.VOLUME",
-      value: document.volume
+      value: document?.volume
     },
     {
       title: "DOCUMENT.BIB.NUMBER",
-      value: document.number
+      value: document?.number
     },
     {
       title: "DOCUMENT.BIB.PAGES",
-      value: document.pages
+      value: document?.pages
     },
     {
       title: "DOCUMENT.BIB.PUBLISHER",
-      value: document.publisher
+      value: document?.publisher
     },
     {
       title: "DOCUMENT.PUBLICATION_DATE",
-      value: document.fromDate,
-      cell: formatDateReadableFromUTC(document.fromDate)
+      value: document?.fromDate,
+      cell: formatDateReadableFromUTC(document?.fromDate)
     },
     {
       title: "DOCUMENT.PUBLICATION_LANGUAGE",
-      value: document.language
+      value: document?.language
     },
     {
       title: "DOCUMENT.BIB.YEAR",
-      value: document.year
+      value: document?.year
     },
     {
       title: "DOCUMENT.BIB.MONTH",
-      value: document.month
+      value: document?.month
     },
     {
       title: "DOCUMENT.CREATED_ON",
-      value: document.createdOn,
-      cell: formatDateReadableFromUTC(document.createdOn)
+      value: document?.createdOn,
+      cell: formatDateReadableFromUTC(document?.createdOn)
     },
     {
       title: "DOCUMENT.BIB.DOI",
-      value: document.doil
+      value: document?.doil
     },
     {
       title: "DOCUMENT.CONTRIBUTION",
-      value: document.contributors
+      value: document?.contributors
     },
     {
       title: "DOCUMENT.LICENSE",
-      value: document.licenseId,
-      cell: (
+      value: document?.licenseId,
+      cell: document?.licenseId && (
         <ExternalBlueLink href={LICENSES[document.licenseId].link}>
           {LICENSES[document.licenseId].name}
         </ExternalBlueLink>
@@ -116,7 +116,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
       cell: (
         <TagsShow
           items={d.tags}
-          objectId={document.id}
+          objectId={document?.id}
           queryFunc={axQueryDocumentTagsByText}
           updateFunc={axUpdateDocumentTags}
         />

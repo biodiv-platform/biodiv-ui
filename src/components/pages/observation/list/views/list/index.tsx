@@ -11,20 +11,20 @@ export default function ListView({ no }) {
   const { observationData, nextPage } = useObservationFilter();
   const { t } = useTranslation();
 
-  return Array.isArray(observationData.l) ? (
+  return Array.isArray(observationData?.l) ? (
     <>
       <InfiniteScroll
-        dataLength={observationData.l.length}
+        dataLength={observationData?.l.length || 0}
         next={nextPage}
-        hasMore={observationData.hasMore}
+        hasMore={observationData?.hasMore || false}
         loader={<ObservationLoading key={0} />}
         scrollableTarget="items-container"
       >
-        {observationData.l.map((o) => (
+        {observationData?.l.map((o) => (
           <Container key={o.observationId} o={o} />
         ))}
       </InfiniteScroll>
-      {observationData.l.length > 0 && observationData.hasMore && (
+      {observationData?.l && observationData.l.length > 0 && observationData.hasMore && (
         <Link py={4} href={`./list?offset=${no}`}>
           {t("NEXT")}
         </Link>

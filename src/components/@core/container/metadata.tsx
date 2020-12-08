@@ -23,14 +23,14 @@ export default function Metadata() {
   useEffect(() => {
     if (SITE_CONFIG.TOKENS.SENTRY_DSN) {
       Sentry.init({
-        dsn: SITE_CONFIG.TOKENS.SENTRY_DSN,
+        dsn: SITE_CONFIG.TOKENS.SENTRY_DSN as any,
         release: `biodiv-ui@${version}`
       });
       if (isLoggedIn) {
         Sentry.setUser({
-          id: user.id.toString(),
-          email: user.email,
-          username: user.name
+          id: user?.id?.toString(),
+          email: user?.email,
+          username: user?.name
         });
       }
     }

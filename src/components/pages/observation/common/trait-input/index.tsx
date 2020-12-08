@@ -8,8 +8,8 @@ import SingleCategorialTrait from "./single-categorical";
 
 export interface ITraitInputProps {
   name?: string;
-  type: string;
-  values: TraitsValue[];
+  type?: string;
+  values?: TraitsValue[];
   gridColumns?;
   onUpdate;
   defaultValue?;

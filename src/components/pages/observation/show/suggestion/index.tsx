@@ -20,20 +20,20 @@ export default function SuggesionList({ o, setO, permission }: ISuggestionListPr
   const { t } = useTranslation();
 
   const recoUpdated = (data) => {
-    setO((draft: ShowData) => {
+    setO((draft: Required<ShowData>) => {
       draft.allRecoVotes = data.allRecoVotes;
       draft.recoIbp = data.recoIbp;
       draft.observation.isLocked = data.isLocked;
     });
-    emit(ACTIVITY_UPDATED, o.observation.id);
+    emit(ACTIVITY_UPDATED, o.observation?.id);
   };
 
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>🆔 {t("OBSERVATION.ID.TITLE")}</BoxHeading>
       <RecoSuggestion
-        observationId={o.observation.id}
-        isLocked={o.observation.isLocked}
+        observationId={o.observation?.id}
+        isLocked={o.observation?.isLocked}
         recoIbp={o.recoIbp}
         allRecoVotes={o.allRecoVotes}
         recoUpdated={recoUpdated}
@@ -43,7 +43,7 @@ export default function SuggesionList({ o, setO, permission }: ISuggestionListPr
         <AddSuggestion
           recoUpdated={recoUpdated}
           recoVotesLength={o.allRecoVotes?.length}
-          observationId={o.observation.id}
+          observationId={o.observation?.id}
           isLocked={o.observation?.isLocked}
         />
       </LazyLoad>

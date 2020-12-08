@@ -4,6 +4,7 @@ import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import { getGroupLink } from "@utils/basic";
 import React from "react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 const GroupListItem = ({ isOpen }) => {
   const { groups } = useGlobalState();
@@ -13,7 +14,9 @@ const GroupListItem = ({ isOpen }) => {
     <MenuList h="18rem" maxW="360px" w="90%" overflowY="scroll">
       <MenuItem minH="3rem">
         <LocalLink href="/group/list" prefixGroup={true}>
-          <Link w="full">{t("HEADER.MENU_PRIMARY.GROUPS.SEE_ALL")}</Link>
+          <Link w="full">
+            {t("HEADER.MENU_PRIMARY.GROUPS.SEE_ALL")} <ArrowForwardIcon />
+          </Link>
         </LocalLink>
       </MenuItem>
       {isOpen &&

@@ -27,8 +27,8 @@ export default function WKT({
   disabled,
   onSave
 }: WKTProps) {
-  const WKTInputRef = useRef(null);
-  const TitleInputRef = useRef(null);
+  const WKTInputRef: any = useRef(null);
+  const TitleInputRef: any = useRef(null);
 
   const [geojson, setGeojson] = useState<any>();
 

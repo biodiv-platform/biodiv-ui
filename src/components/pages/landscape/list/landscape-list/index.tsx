@@ -37,7 +37,7 @@ export default function LandscapeList({ nextOffset }) {
   const { landscapeData, nextPage } = useLandscapeFilter();
   const { t } = useTranslation();
 
-  return Array.isArray(landscapeData.l) ? (
+  return landscapeData && Array.isArray(landscapeData.l) ? (
     <GridViewBox className="view_list_minimal">
       <InfiniteScroll
         dataLength={landscapeData.l.length}

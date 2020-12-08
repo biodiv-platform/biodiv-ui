@@ -11,14 +11,15 @@ const FILTERS_BLACKLIST = [...Object.keys(DEFAULT_FILTER), "lang", "userGroupLis
 
 export default function ClearFilters() {
   const { filter } = useObservationFilter();
-  const filterCount = Object.keys(filter).filter((f) => !FILTERS_BLACKLIST.includes(f)).length;
+  const filterCount =
+    filter && Object.keys(filter).filter((f) => !FILTERS_BLACKLIST.includes(f)).length > 0;
   const { t } = useTranslation();
   const message = t("FILTERS.CLEAR", { filterCount });
   const router = useLocalRouter();
 
   const clearFilters = () => router.push("/observation/list", true, {}, true);
 
-  return filterCount > 0 ? (
+  return filterCount ? (
     <Tooltip title={message} hasArrow={true}>
       <Button
         onClick={clearFilters}

@@ -38,7 +38,7 @@ export const stringToFeature = (costr) => {
   }
 
   const coarr = costr.split(",");
-  const coordinates = [];
+  const coordinates: any = [];
   for (let i = 0; i < coarr.length; i += 2) {
     coordinates.push([Number(coarr[i]), Number(coarr[i + 1])]);
   }

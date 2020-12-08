@@ -14,7 +14,7 @@ import { emit, useListener } from "react-gbus";
 
 export default function AuthWall() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [callback, setCallback] = useState(null);
+  const [callback, setCallback] = useState<any>(null);
 
   useListener(
     (r) => {

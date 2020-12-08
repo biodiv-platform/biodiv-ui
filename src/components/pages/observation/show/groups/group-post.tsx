@@ -12,8 +12,8 @@ import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
 
 interface IGroupPostProps {
-  groups: UserGroupIbp[];
-  selectedDefault: UserGroupIbp[];
+  groups: UserGroupIbp[] | undefined;
+  selectedDefault: UserGroupIbp[] | undefined;
   resourceId;
   saveUserGroupsFunc;
 }
@@ -25,12 +25,12 @@ export default function GroupPost({
   saveUserGroupsFunc
 }: IGroupPostProps) {
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
-  const [selectedGroups, setSelectedGroups] = useState<any[]>(
-    selectedDefault.map((g) => g.id.toString())
+  const [selectedGroups, setSelectedGroups] = useState<any>(
+    selectedDefault?.map((g) => g?.id?.toString())
   );
   const { t } = useTranslation();
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const editButtonRef = useRef(null);
+  const editButtonRef: any = useRef(null);
 
   const handleOnSave = async () => {
     const groupsList = selectedGroups.map((i) => Number(i));
@@ -67,7 +67,7 @@ export default function GroupPost({
           icon={`${DEFAULT_GROUP.icon}?h=40`}
           name={DEFAULT_GROUP.name}
         />
-        {finalGroups.map((og) => (
+        {finalGroups?.map((og) => (
           <GroupBox
             key={og.id}
             link={getGroupLink(og.webAddress)}

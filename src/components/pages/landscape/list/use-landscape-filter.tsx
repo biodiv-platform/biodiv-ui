@@ -26,7 +26,11 @@ const LandscapeFilterContext = createContext<LandscapeFilterContextProps>(
 export const LandscapeFilterProvider = (props: LandscapeFilterContextProps) => {
   const initialOffset = props.filter.offset;
   const [filter, setFilter] = useImmer({ f: props.filter });
-  const [landscapeData, setLandscapeData] = useImmer(props.landscapeData);
+  const [landscapeData, setLandscapeData] = useImmer({
+    l: [] as any[],
+    hasMore: false,
+    ...props.landscapeData
+  });
 
   useEffect(() => {
     if (isBrowser) {

@@ -29,8 +29,8 @@ export default function PageCreateForm(): JSX.Element {
       pageIndex: 0,
       pageType: "Content",
       url: null,
-      autherId: user.id,
-      autherName: user.name,
+      autherId: user?.id,
+      autherName: user?.name,
       showInFooter: false,
       date: dateToUTC().format()
     };

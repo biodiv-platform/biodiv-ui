@@ -28,7 +28,7 @@ export const ENDPOINT = {
 };
 
 export const DEFAULT_GROUP: UserGroupIbp = {
-  id: null,
+  id: null as any,
   icon: `${ENDPOINT.FILES}${SITE_CONFIG.SITE.ICON}`,
   name: SITE_CONFIG.SITE.TITLE,
   webAddress: SITE_CONFIG.SITE.URL

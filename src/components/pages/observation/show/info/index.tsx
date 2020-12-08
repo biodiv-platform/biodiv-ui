@@ -43,18 +43,18 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         <ResponsiveInfo title="OBSERVATION.GROUP">
           <SpeciesGroupBox
-            id={o.observation.groupId}
+            id={o.observation?.groupId}
             speciesGroups={speciesGroups}
-            observationId={o.observation.id}
+            observationId={o.observation?.id}
           />
         </ResponsiveInfo>
 
-        <ResponsiveInfo title="OBSERVATION.PLACE">{o.observation.placeName}</ResponsiveInfo>
+        <ResponsiveInfo title="OBSERVATION.PLACE">{o.observation?.placeName}</ResponsiveInfo>
 
         <ResponsiveInfo title="OBSERVATION.OBSERVED_ON">
           <Stack isInline={true}>
-            <Text mr={1}>{formatDateReadableFromUTC(o.observation.fromDate)}</Text>
-            {o.observation.dateAccuracy === DATE_ACCURACY.ACCURATE && (
+            <Text mr={1}>{formatDateReadableFromUTC(o.observation?.fromDate)}</Text>
+            {o.observation?.dateAccuracy === DATE_ACCURACY.ACCURATE && (
               <Tooltip title={t("OBSERVATION.ACCURATE")} shouldWrapChildren={true} hasArrow={true}>
                 <CheckIcon color="green.500" />
               </Tooltip>
@@ -64,7 +64,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         <ResponsiveInfo title="OBSERVATION.CREATED_ON">
           <Stack isInline={true}>
-            <Text mr={1}>{formatDateReadableFromUTC(o.observation.createdOn)}</Text>
+            <Text mr={1}>{formatDateReadableFromUTC(o.observation?.createdOn)}</Text>
           </Stack>
         </ResponsiveInfo>
 
@@ -83,7 +83,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         <ResponsiveInfo title="OBSERVATION.TAGS">
           <Tags
             items={o.tags}
-            objectId={o.observation.id}
+            objectId={o.observation?.id}
             queryFunc={axQueryDocumentTagsByText}
             updateFunc={axUpdateObservationTags}
           />

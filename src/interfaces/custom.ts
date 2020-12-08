@@ -118,7 +118,7 @@ export interface IDBObservationAsset {
 }
 
 export interface IDBPendingObservation {
-  id?: number;
+  id: number;
   data: any;
 }
 

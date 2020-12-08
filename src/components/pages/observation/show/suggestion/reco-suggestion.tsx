@@ -27,9 +27,9 @@ enum RecoAction {
 
 interface IRecoSuggestionProps {
   observationId;
-  recoIbp: RecoIbp;
-  allRecoVotes: AllRecoSugguestions[];
-  isLocked: boolean;
+  recoIbp: RecoIbp | undefined;
+  allRecoVotes: AllRecoSugguestions[] | undefined;
+  isLocked?;
   recoUpdated;
   permission?;
   permissionOverride?: any;
@@ -81,8 +81,8 @@ export default function RecoSuggestion({
   return allRecoVotes ? (
     <>
       {allRecoVotes.map((reco) => {
-        const recoUserIds = reco.userList.map((u) => u.id);
-        const canAccept = recoUserIds.includes(user?.id || -1);
+        const recoUserIds = reco.userList?.map((u) => u.id);
+        const canAccept = recoUserIds?.includes(user?.id || -1);
         const canValidate = permission?.includes(reco.taxonId) || permissionOverride;
         return (
           <Flash value={reco} key={reco.taxonId}>
@@ -114,7 +114,7 @@ export default function RecoSuggestion({
                   </Text>
                 </Box>
                 <AvatarGroup size="sm" max={2}>
-                  {reco.userList.map((u) => (
+                  {reco.userList?.map((u) => (
                     <Avatar
                       key={u.id}
                       name={u.name}

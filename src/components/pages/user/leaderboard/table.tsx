@@ -28,8 +28,8 @@ function UserLeaderboardTable({ columns }) {
     const module = v.split("_")[0].replace(/\b\w/g, (s) => s.toUpperCase());
     const payload = {
       value: module,
-      how_many: filter.limit,
-      time: filter.period
+      how_many: filter?.limit,
+      time: filter?.period
     };
     const data = await axGetUserLeaderboard(payload, user);
     setLeaderboard(data);

@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import Carousel from "@components/@core/carousel";
+import CarouselObservation from "@components/@core/carousel";
 import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
@@ -44,17 +44,17 @@ export default function ObservationShowPageComponent({
   const { isLoggedIn } = useGlobalState();
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
-  const [speciesGroup, setSpeciesGroup] = useState("");
+  const [speciesGroup, setSpeciesGroup] = useState<any>("");
 
   useEffect(() => {
-    setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation.groupId)?.name);
-  }, [o.observation.groupId]);
+    setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name);
+  }, [o.observation?.groupId]);
 
   useEffect(() => {
     if (isLoggedIn) {
       setTimeout(() => {
         axGetPermissions(
-          o.observation.id,
+          o.observation?.id,
           o.allRecoVotes
             ?.map((r) => r.taxonId)
             .filter((r) => r)
@@ -73,12 +73,18 @@ export default function ObservationShowPageComponent({
       <Header o={o} following={permission?.following} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3" className="fadeInUp delay-3">
-          <Carousel
-            observationId={o.observation.id}
+          <CarouselObservation
+            observationId={o.observation?.id}
             resources={o.observationResource}
             reco={o.recoIbp}
             speciesGroup={speciesGroup}
           />
+          {/* <Carousel
+            observationId={o.observation?.id}
+            resources={o.observationResource}
+            reco={o.recoIbp}
+            speciesGroup={speciesGroup}
+          /> */}
         </Box>
         <Box>
           <Sidebar
@@ -95,17 +101,17 @@ export default function ObservationShowPageComponent({
           <CustomFields
             o={o}
             setO={setO}
-            observationId={o.observation.id}
+            observationId={o.observation?.id}
             cfPermission={permission?.cfPermission}
           />
           <TraitsPanel
             factsList={o.factValuePair}
             speciesTraitsListDefault={traits}
-            observationId={o.observation.id}
-            authorId={o.authorInfo.id}
+            observationId={o.observation?.id}
+            authorId={o.authorInfo?.id}
           />
           <Groups
-            resourceId={o.observation.id}
+            resourceId={o.observation?.id}
             observationGroups={o.userGroups}
             featured={o.fetaured}
             permission={permission}
@@ -115,7 +121,7 @@ export default function ObservationShowPageComponent({
             unfeatureFunc={axGroupsUnFeature}
           />
           <Activity
-            resourceId={o.observation.id}
+            resourceId={o.observation?.id}
             resourceType={RESOURCE_TYPE.OBSERVATION}
             commentFunc={axAddObservationComment}
           />
@@ -123,9 +129,9 @@ export default function ObservationShowPageComponent({
         <Box>
           <LocationInformation
             layerInfo={o.layerInfo}
-            latitude={o.observation.latitude}
-            longitude={o.observation.longitude}
-            geoprivacy={o.observation.geoPrivacy}
+            latitude={o.observation?.latitude}
+            longitude={o.observation?.longitude}
+            geoprivacy={o.observation?.geoPrivacy}
           />
           {o.esLayerInfo && (
             <>

@@ -62,7 +62,7 @@ export const unregisterSW = async () => {
 /**
  * Delete caches from browser `Cache`
  */
-export const removeCache = async (whitelist = []) => {
+export const removeCache = async (whitelist = [] as string[]) => {
   try {
     if (process.env.NODE_ENV !== "production" || !SITE_CONFIG.OFFLINE.ACTIVE) {
       return;

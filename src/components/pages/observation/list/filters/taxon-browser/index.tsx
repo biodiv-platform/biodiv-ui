@@ -6,5 +6,5 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 export default function TaxonBrowser() {
   const { filter, addFilter } = useObservationFilter();
 
-  return <TaxonBrowserComponent initialTaxon={filter.taxon} onTaxonChange={addFilter} />;
+  return <TaxonBrowserComponent initialTaxon={filter?.taxon} onTaxonChange={addFilter} />;
 }

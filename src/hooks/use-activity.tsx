@@ -16,7 +16,7 @@ export default function useActivity() {
     setIsLoading(true);
     const r = await axListActivity(resourceType, resourceId, reset ? 0 : activity.offset);
     if (r.success) {
-      setActivity((_draft) => {
+      setActivity((_draft: any) => {
         if (reset) {
           _draft.list = r.data;
         } else {

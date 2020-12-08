@@ -29,10 +29,7 @@ const getFilterOptions = (options) => options.map(({ name }) => ({ value: name, 
 
 export default function DownloadObservationDataModal({ isOpen, onClose }) {
   const { t } = useTranslation();
-  const {
-    user: { id: authorid },
-    isLoggedIn
-  } = useGlobalState();
+  const { user, isLoggedIn } = useGlobalState();
   const { customFields, traits, filter } = useObservationFilter();
   const [isHidden, setIsHidden] = useState(false);
 
@@ -69,7 +66,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
    */
   const normalizeValues = (values) => {
     return Object.entries(values).reduce(
-      (acc, [key, value]) => ({ ...acc, [key]: value.toString() }),
+      (acc, [key, value]: any) => ({ ...acc, [key]: value.toString() }),
       {}
     );
   };
@@ -82,7 +79,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
     }
 
     const params = {
-      authorid,
+      authorId: user?.id,
       ...filter,
       ...normalizeValues(values)
     };

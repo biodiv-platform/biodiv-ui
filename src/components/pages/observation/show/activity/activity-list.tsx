@@ -46,9 +46,9 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
       <BoxHeading subTitle={`${activity.data.commentCount} ${t("OBSERVATION.COMMENTS.TITLE")}`}>
         🕒 {t(title)}
       </BoxHeading>
-      {activity.data.list.map((a, index) => (
+      {activity.data.list.map((a: any) => (
         <Stack
-          key={index}
+          key={a?.activityIbp?.dateCreated}
           isInline={true}
           spacing={3}
           p={4}

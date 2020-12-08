@@ -32,7 +32,7 @@ export default function FromURL({ onDone }) {
             {
               hashKey: ID,
               url: resourceLink,
-              path: null,
+              path: undefined,
               caption: title,
               type: ASSET_TYPES.VIDEO,
               status: AssetStatus.Uploaded,

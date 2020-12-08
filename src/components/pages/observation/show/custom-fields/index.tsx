@@ -8,7 +8,7 @@ import CustomFieldList from "./list";
 
 export interface ICustomFieldsProps {
   observationId;
-  cfPermission: CustomFieldPermission[];
+  cfPermission: CustomFieldPermission[] | undefined;
   o: ShowData;
   setO;
 }
@@ -21,7 +21,7 @@ export default function CustomFields(props: ICustomFieldsProps) {
     });
   };
 
-  return props.o.customField.length ? (
+  return props.o.customField?.length ? (
     <Box mb={4} className="white-box">
       <BoxHeading>🔶 {t("OBSERVATION.CUSTOM_FIELDS")}</BoxHeading>
       <CustomFieldList {...props} setO={onCFUpdate} />

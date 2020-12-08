@@ -21,7 +21,7 @@ import { useLocalRouter } from "../local-link";
 import SyncBox from "./syncbox";
 
 export interface SyncInfo {
-  current: number;
+  current: number | null;
   failed: any[];
   successful: any[];
   successMap: Record<string, unknown>;
@@ -32,7 +32,7 @@ export default function OfflineSync() {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
-  const [pendingObservations, setPendingObservations] = useState([]);
+  const [pendingObservations, setPendingObservations] = useState<any[]>([]);
   const [syncInfo, setSyncInfo] = useImmer<SyncInfo>({
     current: null,
     failed: [],
@@ -56,7 +56,7 @@ export default function OfflineSync() {
 
     if (instant) {
       try {
-        idbID = await addObservation({ data: observation });
+        idbID = await addObservation({ data: observation } as any);
       } catch (e) {
         console.error("addObservationIDB", e);
       }

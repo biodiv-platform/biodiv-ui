@@ -21,9 +21,9 @@ export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
               bg="gray.100"
               w="full"
               h="full"
-              src={getObservationImage(o.thumbnail, RESOURCE_SIZE.LIST_THUMBNAIL)}
+              src={getObservationImage(o?.thumbnail, RESOURCE_SIZE.LIST_THUMBNAIL)}
               fallbackSrc={getSpeciesIcon(o?.speciesGroup)}
-              alt={o.observationId.toString()}
+              alt={o.observationId?.toString()}
             />
           </Link>
         </LocalLink>

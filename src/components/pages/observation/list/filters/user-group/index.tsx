@@ -6,7 +6,7 @@ import CheckboxFilterPanel from "../shared/checkbox";
 export default function UserGroupFilter() {
   const { currentGroup, groups } = useGlobalState();
   const groupOptions = useMemo(
-    () => groups.map((g) => ({ label: g.name, value: g.id.toString(), stat: g.name })),
+    () => groups?.map((g) => ({ label: g.name, value: g.id?.toString(), stat: g.name })),
     []
   );
 

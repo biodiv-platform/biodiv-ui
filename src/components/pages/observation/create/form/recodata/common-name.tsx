@@ -71,8 +71,8 @@ export const onCommonNameQuery = async (q) => {
   return data.reduce(
     (macc, mcv) =>
       (mcv.common_names || []).reduce((acc, cv) => {
-        const iOpts = [];
-        if (cv.name.toLowerCase().includes(q.toLowerCase())) {
+        const iOpts: any[] = [];
+        if (cv.name?.toLowerCase().includes(q.toLowerCase())) {
           iOpts.push(getCommonNameOption(cv, mcv));
         }
         return [...acc, ...iOpts];

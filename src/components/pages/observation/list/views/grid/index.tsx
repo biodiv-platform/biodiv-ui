@@ -34,7 +34,7 @@ const GridViewBox = styled.div`
 export default function GridView() {
   const { observationData, nextPage } = useObservationFilter();
 
-  return Array.isArray(observationData.ml) ? (
+  return observationData && Array.isArray(observationData.ml) ? (
     <GridViewBox className="view_list_minimal">
       <InfiniteScroll
         dataLength={observationData.ml.length}

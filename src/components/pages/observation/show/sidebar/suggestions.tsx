@@ -6,7 +6,7 @@ import { getObservationThumbnail, getSpeciesIcon } from "@utils/media";
 import React, { useReducer } from "react";
 
 interface ISuggestionsProps {
-  list: any[];
+  list?: any[];
   title: string;
   observationKey: string;
   pageSize?: number;
@@ -25,7 +25,7 @@ export default function Suggestions({
   const [{ page, hideMore }, loadMore] = useReducer(
     (o) => {
       const nextPage = o.page + 1;
-      return { hideMore: nextPage * pageSize > list.length, page: nextPage };
+      return { hideMore: nextPage * pageSize > (list || []).length, page: nextPage };
     },
     { hideMore: false, page: 1 }
   );
@@ -34,7 +34,7 @@ export default function Suggestions({
     <Box mb={4} className="white-box">
       <BoxHeading>📍 {t(title)}</BoxHeading>
       <SimpleGrid columns={4} spacing={4} p={4}>
-        {list.slice(0, page * pageSize).map((o) => (
+        {list?.slice(0, page * pageSize).map((o) => (
           <LocalLink
             key={o.observationId}
             href={`/observation/show/${o.observationId}`}

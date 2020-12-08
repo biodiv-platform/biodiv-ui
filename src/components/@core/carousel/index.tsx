@@ -1,63 +1,77 @@
-import styled from "@emotion/styled";
+import "keen-slider/keen-slider.min.css";
+
+import { Box, Flex } from "@chakra-ui/react";
 import { RecoIbp } from "@interfaces/observation";
-import { useEmblaCarousel } from "embla-carousel/react";
-import React, { useEffect, useState } from "react";
+import { useKeenSlider } from "keen-slider/react";
+import React from "react";
 
 import CarouselNavigation from "./navigation";
 import CarouselResourceInfo from "./resource-info";
-import CarouselSlides from "./slides";
-import CarouselThumb from "./thumb";
+import Slide, { NoSlide } from "./slide";
+import Thumbnails from "./thumbnails";
 
-interface CarouselMainProps {
+interface CarouselObservationProps {
   resources?;
-  reco: RecoIbp;
+  reco: RecoIbp | undefined;
   speciesGroup?: string;
   observationId?: number;
 }
 
-const CarouselContainer = styled.div`
-  background: var(--gray-900);
-  position: relative;
-  border-radius: 0.25rem;
-  padding-top: 1.5rem;
-  margin-bottom: 1rem;
-  overflow: hidden;
-
-  .is-draggable {
-    cursor: grab;
-  }
-
-  .is-dragging {
-    cursor: grabbing;
-  }
-`;
-
-function CarouselMain({ resources = [], reco, speciesGroup, observationId }: CarouselMainProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
-  const [carouselIndex, setCarouselIndex] = useState(0);
+export default function CarouselObservation({
+  resources = [],
+  reco,
+  speciesGroup,
+  observationId
+}: CarouselObservationProps) {
+  const [currentSlide, setCurrentSlide] = React.useState(0);
   const alt = `${reco?.commonName || ""} - ${reco?.scientificName || ""}`;
 
-  useEffect(() => {
-    if (emblaApi) {
-      emblaApi.on("settle", () => {
-        setCarouselIndex(emblaApi.selectedScrollSnap());
-      });
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
+    loop: false,
+    slideChanged(s) {
+      setCurrentSlide(s.details().relativeSlide);
     }
-  }, [emblaApi]);
+  });
 
   return (
-    <CarouselContainer>
+    <Box bg="gray.900" borderRadius="md" position="relative" mb={4} p={4}>
       <CarouselResourceInfo
         observationId={observationId}
-        currentResource={resources[carouselIndex]}
+        currentResource={resources[currentSlide]}
       />
-      <div ref={emblaRef}>
-        <CarouselSlides resources={resources} alt={alt} speciesGroup={speciesGroup} />
-      </div>
-      <CarouselNavigation carousel={emblaApi} resourcesLength={resources.length} />
-      <CarouselThumb resources={resources} carousel={emblaApi} carouselIndex={carouselIndex} />
-    </CarouselContainer>
+      <Box ref={sliderRef} className="keen-slider fade" minH="438px">
+        {resources.length ? (
+          resources.map(({ resource }) => (
+            <Flex
+              key={resource.id}
+              className="keen-slider__slide"
+              minW="100%"
+              alignItems="center"
+              justifyContent="center"
+              position="relative"
+            >
+              <Slide resource={resource} alt={alt} />
+            </Flex>
+          ))
+        ) : (
+          <NoSlide speciesGroup={speciesGroup} />
+        )}
+      </Box>
+      {resources.length && (
+        <>
+          <CarouselNavigation
+            prev={slider?.prev}
+            next={slider?.next}
+            current={currentSlide}
+            total={resources.length}
+          />
+          <Thumbnails
+            resources={resources}
+            moveTo={slider?.moveToSlideRelative}
+            current={currentSlide}
+          />
+        </>
+      )}
+    </Box>
   );
 }
-
-export default CarouselMain;

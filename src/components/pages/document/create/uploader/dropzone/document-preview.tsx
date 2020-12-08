@@ -10,7 +10,7 @@ export default function DocumentPreview() {
   return selectedDocument ? (
     <SimpleGrid columns={[1, 2, 2, 3]}>
       <FilePreview
-        fileName={selectedDocument.resourceURL.replace(/^.*[\\\/]/, "")}
+        fileName={selectedDocument?.resourceURL?.replace(/^.*[\\\/]/, "")}
         date={selectedDocument.timestamp}
         onDelete={clearSelectedDocument}
       />

@@ -37,7 +37,7 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
 
   useEffect(() => {
     setSelectedTraits(
-      speciesTrait.values.filter((tr) =>
+      (speciesTrait as any).values.filter((tr) =>
         Array.isArray(finalTraitValue) ? finalTraitValue.includes(tr.id) : finalTraitValue === tr.id
       )
     );
@@ -46,7 +46,7 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
   const handleTraitUpdate = async () => {
     const { success } = await axUpdateTraitById(
       observationId,
-      speciesTrait.traits.id,
+      speciesTrait.traits?.id,
       traitInputValue
     );
     if (success) {
@@ -57,9 +57,9 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
   };
 
   return (
-    <FormControl mb={4} key={speciesTrait.traits.id}>
+    <FormControl mb={4} key={speciesTrait.traits?.id}>
       <Flex mb={1} alignItems="center">
-        {speciesTrait.traits.name}
+        {speciesTrait.traits?.name}
         {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
           <IconButton
             aria-label="Edit"
@@ -73,7 +73,7 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
 
       {isOpen ? (
         <TraitInput
-          type={speciesTrait.traits.traitTypes}
+          type={speciesTrait.traits?.traitTypes}
           values={speciesTrait.values}
           defaultValue={finalTraitValue}
           gridColumns={3}

@@ -11,7 +11,7 @@ import CommentRender from "./comment-render";
 const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
   const { t } = useTranslation();
 
-  const at = activity.activityIbp.activityType;
+  const at = activity.activityIbp?.activityType;
 
   switch (at) {
     case ACTIVITY_TYPE.ADDED_A_COMMENT:
@@ -21,7 +21,7 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
     case ACTIVITY_TYPE.REMOVED_RESORUCE:
     case ACTIVITY_TYPE.FEATURED:
     case ACTIVITY_TYPE.UNFEATURED:
-      const ad1 = JSON.parse(activity.activityIbp?.activityDescription);
+      const ad1 = JSON.parse(activity.activityIbp?.activityDescription || "{}");
       return (
         <Box>
           <BlueLink href={ad1?.webAddress}>{ad1?.userGroupName}</BlueLink>
@@ -34,7 +34,7 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
     case ACTIVITY_TYPE.AGREED_ON_SPECIES_NAME:
     case ACTIVITY_TYPE.OBV_LOCKED:
     case ACTIVITY_TYPE.OBV_UNLOCKED:
-      const ad2 = JSON.parse(activity.activityIbp?.activityDescription);
+      const ad2 = JSON.parse(activity.activityIbp?.activityDescription || "{}");
       const link = ad2?.speciesId ? `/species/show/${ad2?.speciesId}` : null;
       const content = (
         <>
@@ -50,7 +50,7 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
 
     case ACTIVITY_TYPE.DOCUMENT_TAG_UPDATED:
     case ACTIVITY_TYPE.OBSERVATION_TAG_UPDATED:
-      const tags = activity.activityIbp?.activityDescription.split(",") || [];
+      const tags = activity.activityIbp?.activityDescription?.split(",") || [];
       return (
         <Box mt={2}>
           {tags.map((tag) => (
@@ -62,7 +62,7 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
     case ACTIVITY_TYPE.FLAGGED:
     case ACTIVITY_TYPE.FLAG_REMOVED:
       const desc = activity?.activityIbp?.activityDescription;
-      const [flagType, flagInfo] = desc.split(":");
+      const [flagType, flagInfo]: any = desc?.split(":");
       return (
         <Box>
           {t(`ACTIONS.FLAG.FLAGS.${flagType}`)}: {flagInfo}

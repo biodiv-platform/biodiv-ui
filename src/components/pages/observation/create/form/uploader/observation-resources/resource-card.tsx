@@ -42,7 +42,7 @@ interface IResourceCardProps {
   index: number;
 }
 
-export const getImageThumb = (resource, userID, size = 140): string => {
+export const getImageThumb = (resource, userID, size = 140) => {
   if (resource.status === AssetStatus.Uploaded) {
     return resource.type.match(ASSET_TYPES.VIDEO) && resource.url
       ? getYoutubeImage(resource.url)
@@ -57,7 +57,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
   const { removeObservationAsset, updateObservationAsset } = useObservationCreate();
   const { user } = useGlobalState();
 
-  const imageURL = useMemo(() => getImageThumb(resource, user.id), []);
+  const imageURL = useMemo(() => getImageThumb(resource, user?.id), []);
 
   return (
     <Flex

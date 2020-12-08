@@ -51,8 +51,8 @@ export default function GeoJsonWktParserInput({
   mb = 4,
   ...props
 }: IGeojsonWktInputProps) {
-  const wktInputRef = useRef<HTMLInputElement>(null);
-  const [wkt, setWkt] = useState<string>();
+  const wktInputRef: any = useRef<HTMLInputElement>(null);
+  const [wkt, setWkt] = useState<string | null>();
   const { t } = useTranslation();
   const [canShow, setShow] = useState<boolean>();
   const [defaultFeature, setDefaultFeature] = useState(

@@ -29,7 +29,7 @@ export const getYouTubeEmbed = (url) => {
   return `https://www.youtube.com/embed/${getYouTubeId(url)}`;
 };
 
-export const getObservationImage = (resourceUrl: string, size = ""): string => {
+export const getObservationImage = (resourceUrl, size = ""): string => {
   return `${ENDPOINT.FILES}/get/crop/observations${resourceUrl}${size}`;
 };
 
@@ -37,7 +37,7 @@ export const getObservationRAW = (resourceUrl: string): string => {
   return `${ENDPOINT.RAW}/observations${resourceUrl}`;
 };
 
-export const getYoutubeImage = (resourceUrl: string, size = "hqdefault"): string => {
+export const getYoutubeImage = (resourceUrl: string, size = "hqdefault") => {
   const ytid = getYouTubeId(resourceUrl);
   return ytid ? `https://i.ytimg.com/vi/${ytid}/${size}.jpg` : undefined;
 };
@@ -83,7 +83,7 @@ export const getGroupImageThumb = (resourceUrl, height = 32) => {
 };
 
 export const getSuggestionIcon = (resourceUrl) => {
-  return resourceUrl ? `${ENDPOINT.FILES}/get${cleanSlashes(resourceUrl)}?w=50` : null;
+  return resourceUrl ? `${ENDPOINT.FILES}/get${cleanSlashes(resourceUrl)}?w=50` : undefined;
 };
 
 export const getSpeciesIcon = (icon) => `/next-assets/species/${icon || "Unknown"}.svg`;

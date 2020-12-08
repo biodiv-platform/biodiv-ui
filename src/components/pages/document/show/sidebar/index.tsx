@@ -18,7 +18,7 @@ export default function Sidebar({ d }: SidebarProps) {
       <User user={d.userIbp} />
       <DownloadButtons
         documentPath={d?.uFile?.path}
-        title={d.document.title}
+        title={d?.document?.title}
         documentId={d?.document?.id}
       />
       <DocumentSidebarMap documentCoverages={d.documentCoverages} />

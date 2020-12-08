@@ -38,10 +38,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             <Text as="i" mr={2}>
               {o?.recoShow?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
             </Text>
-            <ObservationStatusBadge
-              reco={o.recoShow.recoIbp}
-              maxVotedRecoId={o?.recoShow?.recoIbp?.taxonId}
-            />
+            <ObservationStatusBadge reco={o.recoShow?.recoIbp} />
           </Heading>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
@@ -64,7 +61,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           <FlagActionButton
             resourceId={o.observationId}
             initialFlags={o.flagShow}
-            userId={user.id}
+            userId={user?.id}
             flagFunc={axFlagObservation}
             unFlagFunc={axUnFlagObservation}
           />
@@ -73,23 +70,23 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
       <Box borderTop="1px" borderColor="gray.300">
         <RecoSuggestion
           observationId={o.observationId}
-          isLocked={o.recoShow.isLocked}
-          recoIbp={o.recoShow.recoIbp}
-          allRecoVotes={o.recoShow.allRecoVotes?.slice(0, 1)}
+          isLocked={o.recoShow?.isLocked}
+          recoIbp={o.recoShow?.recoIbp}
+          allRecoVotes={o.recoShow?.allRecoVotes?.slice(0, 1)}
           recoUpdated={recoUpdated}
-          permissionOverride={observationData.mvp[o.observationId]}
+          permissionOverride={observationData?.mvp[o.observationId || 0]}
         />
         <Alert bg="blue.50">
           <AlertIcon />
-          {o.recoShow.isLocked
+          {o.recoShow?.isLocked
             ? t("OBSERVATION.ID.VALIDATED")
-            : o.recoShow.recoIbp
+            : o.recoShow?.recoIbp
             ? t("OBSERVATION.ID.SUGGEST_NEW_RECO")
             : t("OBSERVATION.ID.NO_SUGGESTION")}
           <Button
             variant="link"
             color="blue.600"
-            hidden={o.recoShow.isLocked}
+            hidden={o.recoShow?.isLocked}
             m="auto"
             mr={0}
             onClick={() => setTabIndex(1)}

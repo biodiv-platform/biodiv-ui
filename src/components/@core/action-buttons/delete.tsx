@@ -26,7 +26,7 @@ export default function DeleteActionButton({
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const cancelRef = React.useRef();
+  const cancelRef = React.useRef(null);
 
   const handleOnDelete = async () => {
     const { success } = await deleteFunc(observationId);

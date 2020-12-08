@@ -59,11 +59,11 @@ export default function ObservationEditForm({
     ),
     defaultValues: {
       ...observation,
-      resources: observation.resources.map((r) => ({
+      resources: observation.resources?.map((r) => ({
         ...r,
         hashKey: nanoid(),
         status: AssetStatus.Uploaded,
-        licenceId: r.licenceId.toString(),
+        licenceId: r.licenceId?.toString(),
         isUsed: 1,
         rating: r.rating || 0
       })),

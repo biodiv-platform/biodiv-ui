@@ -34,7 +34,9 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
   const { data, id } = pendingObservation;
   const thumb = useMemo(
     () =>
-      data?.resources?.[0]?.blob ? window.URL.createObjectURL(data?.resources?.[0]?.blob) : null,
+      data?.resources?.[0]?.blob
+        ? window.URL.createObjectURL(data?.resources?.[0]?.blob)
+        : undefined,
     []
   );
 

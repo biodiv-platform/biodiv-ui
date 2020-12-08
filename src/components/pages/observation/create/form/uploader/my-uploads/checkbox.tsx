@@ -39,7 +39,7 @@ const Checkbox = (props: any) => {
   const { user } = useGlobalState();
   const { t } = useTranslation();
 
-  const imageURL = useMemo(() => getImageThumb(props.asset, user.id), []);
+  const imageURL = useMemo(() => getImageThumb(props.asset, user?.id), []);
 
   const { addToObservationAssets, removeObservationAsset, removeAsset } = useObservationCreate();
 

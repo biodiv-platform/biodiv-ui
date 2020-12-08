@@ -11,7 +11,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 interface ManageDocumentContextProps {
   children?;
   initialDocument?: ResourceDocument;
-  selectedDocument?: ResourceDocument;
+  selectedDocument?: Partial<ResourceDocument>;
   documentList?: MyUpload[];
   addDocument?;
   addExternalDocument?;
@@ -25,7 +25,9 @@ const ManageDocumentContext = createContext<ManageDocumentContextProps>(
 );
 
 export const ManageDocumentContextProvider = (props: ManageDocumentContextProps) => {
-  const [selectedDocument, setSelectedDocument] = useState<ResourceDocument>(props.initialDocument);
+  const [selectedDocument, setSelectedDocument] = useState<Partial<ResourceDocument> | undefined>(
+    props.initialDocument
+  );
   const [documentList, setDocumentList] = useState<MyUpload[]>([]);
 
   const listDocuments = async () => {
