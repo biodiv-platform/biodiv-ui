@@ -46,7 +46,7 @@ export const authorizedPageSSR = (
 
   if (!hasAccess(allowedRoles, ctx)) {
     if (canRedirect) {
-      const Location = `/login?forward=${encode(ctx.asPath)}`;
+      const Location = `/login?forward=${encode(ctx?.asPath || ctx?.resolvedUrl)}`;
       if (ctx.res) {
         ctx.res.writeHead(302, {
           Location,
