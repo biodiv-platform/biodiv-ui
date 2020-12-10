@@ -8,5 +8,6 @@ export default function PageCreatePage() {
 }
 
 export const getServerSideProps = async (ctx) => {
-  authorizedPageSSR([Role.Any], ctx, true);
+  authorizedPageSSR([Role.Any], ctx, false);
+  return { props: {} };
 };
