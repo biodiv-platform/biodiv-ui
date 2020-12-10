@@ -698,7 +698,7 @@
       "SHOW": "Advanced Edit"
     },
     "MIN_THREE_CHARS": "Input at least 3 characters to search",
-    "MY_UPLOADS": "My Uploads",
+    "MY_UPLOADS": "Draft Media",
     "MY_UPLOADS_SORT": {
       "TAKEN_ON": "Taken on",
       "UPLOADED_ON": "Uploaded on"
@@ -765,7 +765,7 @@
     "UPLOAD_STATUS": {
       "FAILED": "Failed",
       "PENDING": "Pending",
-      "UPLOADED": "Uploaded to My Uploads",
+      "UPLOADED": "Uploaded to Draft Media",
       "UPLOADING": "Uploading"
     },
     "UPLOADER": {
