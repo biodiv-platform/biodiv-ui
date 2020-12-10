@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "CoenraadS.bracket-pair-colorizer",
+    "dbaeumer.vscode-eslint",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "jpoissonnier.vscode-styled-components",
+    "meganrogge.template-string-converter",
+    "paragdiwan.gitpatch",
+    "rbbit.typescript-hero",
+    "shardulm94.trailing-spaces",
+    "Vtrois.gitmoji-vscode",
+    "wix.vscode-import-cost"
+  ]
+}
