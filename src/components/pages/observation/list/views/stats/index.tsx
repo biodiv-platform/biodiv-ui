@@ -1,6 +1,7 @@
-import React from "react";
 import { SimpleGrid } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import React from "react";
+
 import SpeciesGroups from "./SpeciesGroups";
 import StatesDistribution from "./StatesDistribution";
 

@@ -1,13 +1,12 @@
-import React, { useMemo } from "react";
-
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import React, { useMemo } from "react";
 
-import VerticalBarChart from "./VertcalBarChart";
 import { TooltipRenderer } from "./TooltipRenderer";
+import VerticalBarChart from "./VertcalBarChart";
 
 export default function SpeciesGroups({ observationData, speciesGroup, filter }) {
-  const filteredData2 = useMemo(() => {
+  const filteredData = useMemo(() => {
     if (!filter.sGroup) {
       if (!observationData.ag.groupSpeciesName) {
         return;
@@ -36,7 +35,7 @@ export default function SpeciesGroups({ observationData, speciesGroup, filter })
       <Box className="white-box">
         <BoxHeading> Species Groups</BoxHeading>
         <Box p={4}>
-          <VerticalBarChart data={filteredData2} tooltipRenderer={TooltipRenderer} />
+          <VerticalBarChart data={filteredData} tooltipRenderer={TooltipRenderer} />
         </Box>
       </Box>
     </div>

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import { axGetListData } from "@services/observation.service";
+import { useEffect, useState } from "react";
 
 export default function useObsListData() {
   const [isLoading, setIsLoading] = useState(false);

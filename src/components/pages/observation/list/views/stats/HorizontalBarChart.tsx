@@ -1,10 +1,10 @@
 import useResizeObserver from "@components/charts/hooks/use-resize-observer";
+import { max, min } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear, scaleSequential } from "d3-scale";
+import { interpolatePlasma } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import React, { useEffect, useRef } from "react";
-import { interpolatePlasma } from "d3-scale-chromatic";
-import { max, min } from "d3-array";
 
 interface HorizontalBarChartProps {
   h?: number;
@@ -77,7 +77,6 @@ export default function HorizontalBarChart({
       .attr("transform", `translate(50,0)`)
       .call(axisLeft(y).tickSizeOuter(0) as any);
 
-    //Bars
     svg
       .select(".chart")
       .selectAll("rect")
@@ -87,7 +86,6 @@ export default function HorizontalBarChart({
       .attr("y", (d) => y(d[titleKey]))
       .attr("width", (d) => x(d[countKey]))
       .attr("height", y.bandwidth())
-      // .attr("fill", barColor);
       .attr("fill", (data) => `${color(data[countKey])}`);
 
     svg

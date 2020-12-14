@@ -2,8 +2,8 @@ import useResizeObserver from "@components/charts/hooks/use-resize-observer";
 import { max, min } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear, scaleSequential } from "d3-scale";
-import { select } from "d3-selection";
 import { interpolatePlasma } from "d3-scale-chromatic";
+import { select } from "d3-selection";
 import React, { useEffect, useRef } from "react";
 
 import { tooltipHelpers, useTooltip } from "./use-tooltip";
@@ -37,8 +37,6 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // scales
-
     const labels = data.map((sg) => sg.sgroup);
     const counts = data.map((sg) => sg.count);
 
@@ -53,17 +51,13 @@ function VerticalBarChart({ data, tooltipRenderer }) {
     svg
       .select(".x-axis")
       .join("g")
-      .attr("transform", "translate(" + margin.left + "," + height + ")") // This controls the vertical position of the Axis
+      .attr("transform", "translate(" + margin.left + "," + height + ")")
       .call(axisBottom(xScale))
       .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(-45)")
       .style("text-anchor", "end");
 
-    svg
-      .select(".y-axis")
-      .join("g")
-      .attr("transform", "translate(60,10)") // This controls the vertical position of the Axis
-      .call(axisLeft(yScale));
+    svg.select(".y-axis").join("g").attr("transform", "translate(60,10)").call(axisLeft(yScale));
 
     svg
       .select(".chart")
@@ -73,12 +67,8 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       .on("mouseover", tipHelpers.mouseover)
       .on("mousemove", tipHelpers.mousemove)
       .on("mouseleave", tipHelpers.mouseleave)
-
-      //code to put tooltip here
       .attr("class", "bar")
-      // .attr("fill", "#228B22")
       .attr("fill", (data) => `${color(data.count)}`)
-
       .attr("x", (d) => xScale(d.sgroup) + margin.left)
       .attr("y", (d) => yScale(d.count))
       .attr("width", xScale.bandwidth())

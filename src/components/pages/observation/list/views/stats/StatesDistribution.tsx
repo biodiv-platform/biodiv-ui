@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
-
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import React, { useMemo } from "react";
 
 import HorizontalBarChart from "./HorizontalBarChart";
 
