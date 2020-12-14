@@ -593,7 +593,8 @@
     "VIEW_TYPE": {
       "GRID": "Grid",
       "LIST": "List",
-      "MAP": "Map"
+      "MAP": "Map",
+      "STATS": "Statistics"
     }
   },
   "LOAD_MORE": "Load More ↺",

@@ -1,5 +1,6 @@
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
+import StatsIcon from "@icons/stats";
 import { ObservationFilterProps } from "@interfaces/custom";
 import React from "react";
 
@@ -22,6 +23,11 @@ export const viewTabs = [
     name: "LIST.VIEW_TYPE.GRID",
     icon: <GridIcon />,
     key: "list_minimal"
+  },
+  {
+    name: "LIST.VIEW_TYPE.STATS",
+    icon: <StatsIcon />,
+    key: "stats"
   }
   /*
   {
