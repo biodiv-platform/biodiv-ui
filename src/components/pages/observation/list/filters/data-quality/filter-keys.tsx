@@ -1,12 +1,12 @@
 export const IDENTIFICATION = [
   {
-    label: "IDENTIFED",
-    value: "IDENTIFED",
+    label: "IDENTIFIED",
+    value: "IDENTIFIED",
     stat: "available"
   },
   {
-    label: "UNIDENTIFED",
-    value: "UNIDENTIFED",
+    label: "UNIDENTIFIED",
+    value: "UNIDENTIFIED",
     stat: "missing"
   }
 ];

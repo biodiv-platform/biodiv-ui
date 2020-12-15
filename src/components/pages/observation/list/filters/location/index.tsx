@@ -25,7 +25,7 @@ export default function LocationFilter() {
 
       <FilterMultiSelectPanel filterKey="district" translateKey="FILTERS.LOCATION.DISTRICT" />
 
-      <FilterMultiSelectPanel filterKey="tahsil" translateKey="FILTERS.LOCATION.TAHSIL" />
+      <FilterMultiSelectPanel filterKey="tahsil" translateKey="FILTERS.LOCATION.TEHSIL" />
     </SubAccordion>
   );
 }

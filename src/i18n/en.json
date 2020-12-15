@@ -84,7 +84,7 @@
       "PAGES": "Pages",
       "PUBLISHER": "Publisher",
       "SCHEMA": {
-        "ERROR": "Unable to retrive Bibtex schema"
+        "ERROR": "Unable to retrieve Bibtex schema"
       },
       "SCHOOL": "School",
       "SERIES": "Series",
@@ -158,9 +158,9 @@
         "UNFLAGGED": "Unflagged"
       },
       "IDENTIFICATION": {
-        "IDENTIFED": "Identifed",
+        "IDENTIFIED": "Identified",
         "TITLE": "Identification",
-        "UNIDENTIFED": "Unidentified"
+        "UNIDENTIFIED": "Unidentified"
       },
       "TAXON_ID": {
         "HAS_TAXON": "Has Taxon ID",
@@ -182,7 +182,7 @@
       "STATE": {
         "TITLE": "State"
       },
-      "TAHSIL": "Tahsil",
+      "TEHSIL": "Tehsil",
       "TITLE": "Location"
     },
     "MEDIA": {
@@ -275,7 +275,7 @@
       "VERIFICATION_TYPE": "How would you like to verify your account?"
     },
     "RESET_ERROR": "Unable to update password",
-    "RESET_SUCCESS": "Password changed sucessfully",
+    "RESET_SUCCESS": "Password changed successfully",
     "TITLE": "Password Reset"
   },
   "GROUP": {
@@ -402,7 +402,7 @@
     "INVITE_FOUNDERS": "Invite Founders",
     "INVITE_MODERATORS": "Invite Moderators",
     "JOIN": "Join Group",
-    "JOIN_WITHOUT_INVITATION": "Allow user to join the group without invitaion",
+    "JOIN_WITHOUT_INVITATION": "Allow user to join the group without invitation",
     "MEMBER": {
       "JOINED": "Group joined successfully",
       "JOINED_ERROR": "Unable to join Group",
@@ -530,7 +530,7 @@
         "TITLE": "Landscapes"
       },
       "LITERATURE": {
-        "DESC": "Peer reviewed and grey literature uploaded by members or in partnership with biodiversity journals, organised with metadata and tags.",
+        "DESC": "Peer reviewed and grey literature uploaded by members or in partnership with biodiversity journals, organized with metadata and tags.",
         "TITLE": "Biodiversity Literature"
       },
       "MAPS": {
@@ -564,7 +564,8 @@
       "OBSERVATION": "Observations",
       "SPECIES": "Species",
       "USERGROUPS": "Groups"
-    }
+    },
+    "SPONSORS": "Sponsors"
   },
   "INVALID_REQUEST": "Invalid Request",
   "LANDSCAPE": {
@@ -687,14 +688,14 @@
       "GEOPRIVACY_ENABLED": "Geoprivacy Enabled",
       "RAINFALL": "Rainfall",
       "SOIL": "Soil",
-      "TAHSIL": "Tahsil",
-      "TEMPRATURE": "Temprature",
+      "TEHSIL": "Tehsil",
+      "TEMPERATURE": "Temperature",
       "TITLE": "Location Information"
     },
     "LOCATION_SCALE": "Location Accuracy",
     "LONGITUDE": "Longitude",
     "MAP": {
-      "HIDE": "Simpified Edit",
+      "HIDE": "Simplified Edit",
       "SHOW": "Advanced Edit"
     },
     "MIN_THREE_CHARS": "Input at least 3 characters to search",
@@ -851,7 +852,7 @@
   },
   "SUCCESS": "Success",
   "TOGGLE": "toggle",
-  "UNAUTHERIZED": "Unautherized User",
+  "UNAUTHORIZED": "Unauthorized User",
   "USER": {
     "ABOUT": "About",
     "AUTOFILL_WITH_GOOGLE": "Autofill with Google",

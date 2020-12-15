@@ -22,6 +22,7 @@
 .DS_Store
 .env*
 src/configs/site-config.json
+optimizations.md
 
 # debug
 npm-debug.log*

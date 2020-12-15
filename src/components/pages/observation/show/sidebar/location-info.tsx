@@ -40,9 +40,9 @@ export default function LocationInformation({
             ? t("OBSERVATION.LOCATION_INFORMATION.GEOPRIVACY_ENABLED")
             : `${latitude?.toFixed(4)}, ${longitude?.toFixed(4)}`}
         </Row>
-        <Row title="TAHSIL">{layerInfo.tahsil}</Row>
+        <Row title="TEHSIL">{layerInfo.tahsil}</Row>
         <Row title="SOIL">{layerInfo.soil}</Row>
-        <Row title="TEMPRATURE">{layerInfo.temp} &deg;C</Row>
+        <Row title="TEMPERATURE">{layerInfo.temp} &deg;C</Row>
         <Row title="RAINFALL">{layerInfo.rainfall} mm</Row>
         <Row title="FOREST_TYPE">{titleCase(layerInfo.forestType)}</Row>
       </SimpleGrid>
