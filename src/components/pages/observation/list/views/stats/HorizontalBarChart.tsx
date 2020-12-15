@@ -1,8 +1,7 @@
 import useResizeObserver from "@components/charts/hooks/use-resize-observer";
 import { max, min } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
-import { scaleBand, scaleLinear, scaleSequential } from "d3-scale";
-import { interpolatePlasma } from "d3-scale-chromatic";
+import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
 import React, { useEffect, useRef } from "react";
 
@@ -26,7 +25,7 @@ interface HorizontalBarChartProps {
 }
 
 export default function HorizontalBarChart({
-  h = 400,
+  h = 500,
 
   mt = 10,
   mr = 64,
@@ -52,7 +51,9 @@ export default function HorizontalBarChart({
     const Max = Math.max(...data.map((o) => o[countKey]));
 
     const counts = data.map((s) => s[countKey]);
-    const color = scaleSequential(interpolatePlasma).domain([max(counts), min(counts)]);
+    const color = scaleLinear()
+      .domain([min(counts), max(counts)])
+      .range(["#1E90FF", "#4682B4"]);
 
     const x = scaleLinear()
       .domain([0, Max])

@@ -1,12 +1,10 @@
 import useResizeObserver from "@components/charts/hooks/use-resize-observer";
-import { max, min } from "d3-array";
+import { tooltipHelpers, useTooltip } from "@components/charts/hooks/use-tooltip";
+import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
-import { scaleBand, scaleLinear, scaleSequential } from "d3-scale";
-import { interpolatePlasma } from "d3-scale-chromatic";
+import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
 import React, { useEffect, useRef } from "react";
-
-import { tooltipHelpers, useTooltip } from "./use-tooltip";
 
 function VerticalBarChart({ data, tooltipRenderer }) {
   const svgRef = useRef(null);
@@ -14,7 +12,9 @@ function VerticalBarChart({ data, tooltipRenderer }) {
   const ro = useResizeObserver(containerRef);
 
   const tip = useTooltip(containerRef);
-  const tipHelpers = tooltipHelpers(tip, tooltipRenderer);
+  const leftOffset = 10;
+  const topOffset = -50;
+  const tipHelpers = tooltipHelpers(tip, tooltipRenderer, leftOffset, topOffset);
 
   let w = 500;
   const h = 400;
@@ -37,10 +37,10 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    svg.select(".content").attr("transform", `translate(${margin.left},${margin.top})`);
+
     const labels = data.map((sg) => sg.sgroup);
     const counts = data.map((sg) => sg.count);
-
-    const color = scaleSequential(interpolatePlasma).domain([max(counts), min(counts)]);
 
     const xScale = scaleBand().domain(labels).range([0, width]).padding(0.5);
 
@@ -64,11 +64,11 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       .selectAll("rect")
       .data(data)
       .join("rect")
-      .on("mouseover", tipHelpers.mouseover)
+      .on("mouseover", (event, d) => tipHelpers.mouseover(event, { data: d }))
       .on("mousemove", tipHelpers.mousemove)
       .on("mouseleave", tipHelpers.mouseleave)
       .attr("class", "bar")
-      .attr("fill", (data) => `${color(data.count)}`)
+      .attr("fill", "#228B22")
       .attr("x", (d) => xScale(d.sgroup) + margin.left)
       .attr("y", (d) => yScale(d.count))
       .attr("width", xScale.bandwidth())
@@ -81,7 +81,8 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       .join("text")
       .attr("font-size", 10)
       .attr("y", (d) => yScale(d.count) - 4)
-      .attr("x", (d) => xScale(d.sgroup) + margin.left)
+      .attr("x", (d) => xScale(d.sgroup) + xScale.bandwidth() / 2 + margin.left)
+      .attr("text-anchor", "middle")
       .text((d) => d.count);
   }, [containerRef, ro?.width, h, data]);
 
