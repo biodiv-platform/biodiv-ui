@@ -1,4 +1,5 @@
 import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { isBrowser } from "@static/constants";
 import { getByPath } from "@utils/basic";
 import React from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
@@ -73,6 +74,7 @@ const SelectInputField = ({
               Option: optionComponent,
               ClearIndicator
             }}
+            menuPortalTarget={isBrowser && document.body}
             isSearchable={true}
             isDisabled={disabled}
             styles={selectStyles}
