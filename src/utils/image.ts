@@ -7,6 +7,7 @@ import loadImage from "blueimp-load-image";
 import { nanoid } from "nanoid";
 import { emit } from "react-gbus";
 
+import { normalizeFileName } from "./basic";
 import { CleanExif } from "./location";
 
 function resizeImage(file: File, max = 3000): Promise<any> {
@@ -52,12 +53,14 @@ function resizeImage(file: File, max = 3000): Promise<any> {
 export const getAssetObject = (file, meta?) => {
   const hashKey = `${LOCAL_ASSET_PREFIX}${nanoid()}`;
   const finalMeta = meta || { blob: file };
+  const fileName = normalizeFileName(file.name);
+
   return {
     ...finalMeta,
     hashKey,
-    fileName: file.name,
+    fileName,
     url: null,
-    path: `/${hashKey}/${file.name}`,
+    path: `/${hashKey}/${fileName}`,
     type: file.type,
     licenceId: DEFAULT_LICENSE,
     status: AssetStatus.Pending,

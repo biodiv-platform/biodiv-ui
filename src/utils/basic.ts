@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export const compiledMessage = (templateString: string, templateVariables) => {
   return templateVariables
     ? templateString.replace(/\${(.*?)}/g, (_, g) => templateVariables[g])
@@ -61,3 +63,5 @@ export const getByPath = (obj, path) => {
 
   return obj;
 };
+
+export const normalizeFileName = (s) => `${nanoid()}_${s.replace(/([^a-z0-9\.\s]+)/gi, "-")}`;
