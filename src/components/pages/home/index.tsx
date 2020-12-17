@@ -29,7 +29,7 @@ export default function HomePageComponent({ homeInfo }) {
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}
       {homeInfo.showDesc && <HomeDescription description={homeInfo.description} />}
       {homeInfo.showRecentObservation && SITE_CONFIG.OBSERVATION.ACTIVE && <RecentObservations />}
-      {homeInfo.showGridMap && SITE_CONFIG.MAP.ACTIVE && <Map />}
+      {homeInfo.showGridMap && SITE_CONFIG.MAP.ACTIVE && SITE_CONFIG.HOME.MAP && <Map />}
       {showFeatures && HOME.FEATURES && <Features />}
       {showFeatures && HOME.PARTNERS && (
         <Supporters

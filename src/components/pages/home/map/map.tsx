@@ -24,7 +24,7 @@ export default function Map() {
    */
   const { currentGroup } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
-  const geoserverLayers: any[] = SITE_CONFIG.HOME.MAP;
+  const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
   const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
 
   return (

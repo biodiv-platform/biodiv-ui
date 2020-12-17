@@ -3,19 +3,19 @@ import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import notification from "@utils/notification";
-import React, { useMemo } from "react";
+import React from "react";
 
 export default function SubMenu({ rows, onClose, prefix = "" }) {
   const { t } = useTranslation();
-  const activeSubMenuItems = useMemo(() => rows.filter(({ active = true }) => active), [rows]);
   const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
 
   return (
     <MenuList>
-      {activeSubMenuItems.map((item, index) => {
+      {rows.map((item) => {
         const label = item.name && t(prefix + item.name);
+
         return (
-          <MenuItem key={index}>
+          <MenuItem key={item.name}>
             {isLoggedIn && item.memberOnly && !isCurrentGroupMember ? (
               <Link w="full" onClick={() => notification(t("HEADER.MEMBER_ONLY"))}>
                 {label}

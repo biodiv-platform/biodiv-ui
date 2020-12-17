@@ -2,7 +2,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link, Menu, MenuButton } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
-import React from "react";
+import { hasAccess } from "@utils/auth";
+import React, { useMemo } from "react";
 
 import SubMenu from "./sub-menu";
 
@@ -22,22 +23,28 @@ export default function MenuItems(props) {
   const { name, nameIcon: NameIcon, to = "", rows = [], cell: CCell, params, isLazy } = props;
   const isArrow = rows.length > 0 || CCell;
   const { t } = useTranslation();
+  const activeSubMenuItems = useMemo(
+    () => rows.filter(({ active = true, role }) => active && (role ? hasAccess(role) : true)),
+    [rows]
+  );
 
   return (
-    <Menu placement="bottom-end" isLazy={isLazy}>
-      {({ onClose, isOpen }) => (
-        <>
-          <XLink label={name} onClose={onClose} to={to} isArrow={isArrow} params={params}>
-            {NameIcon && <NameIcon mr={1} />}
-            {t(`${name}TITLE`)}
-          </XLink>
-          {CCell ? (
-            <CCell onClose={onClose} isOpen={isOpen} />
-          ) : (
-            <SubMenu onClose={onClose} rows={rows} prefix={name} />
-          )}
-        </>
-      )}
-    </Menu>
+    activeSubMenuItems.length > 0 && (
+      <Menu placement="bottom-end" isLazy={isLazy}>
+        {({ onClose, isOpen }) => (
+          <>
+            <XLink label={name} onClose={onClose} to={to} isArrow={isArrow} params={params}>
+              {NameIcon && <NameIcon mr={1} />}
+              {t(`${name}TITLE`)}
+            </XLink>
+            {CCell ? (
+              <CCell onClose={onClose} isOpen={isOpen} />
+            ) : (
+              <SubMenu onClose={onClose} rows={activeSubMenuItems} prefix={name} />
+            )}
+          </>
+        )}
+      </Menu>
+    )
   );
 }
