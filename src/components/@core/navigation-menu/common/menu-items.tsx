@@ -28,23 +28,21 @@ export default function MenuItems(props) {
     [rows]
   );
 
-  return (
-    activeSubMenuItems.length > 0 && (
-      <Menu placement="bottom-end" isLazy={isLazy}>
-        {({ onClose, isOpen }) => (
-          <>
-            <XLink label={name} onClose={onClose} to={to} isArrow={isArrow} params={params}>
-              {NameIcon && <NameIcon mr={1} />}
-              {t(`${name}TITLE`)}
-            </XLink>
-            {CCell ? (
-              <CCell onClose={onClose} isOpen={isOpen} />
-            ) : (
-              <SubMenu onClose={onClose} rows={activeSubMenuItems} prefix={name} />
-            )}
-          </>
-        )}
-      </Menu>
-    )
-  );
+  return activeSubMenuItems.length ? (
+    <Menu placement="bottom-end" isLazy={isLazy}>
+      {({ onClose, isOpen }) => (
+        <>
+          <XLink label={name} onClose={onClose} to={to} isArrow={isArrow} params={params}>
+            {NameIcon && <NameIcon mr={1} />}
+            {t(`${name}TITLE`)}
+          </XLink>
+          {CCell ? (
+            <CCell onClose={onClose} isOpen={isOpen} />
+          ) : (
+            <SubMenu onClose={onClose} rows={activeSubMenuItems} prefix={name} />
+          )}
+        </>
+      )}
+    </Menu>
+  ) : null;
 }
