@@ -28,7 +28,7 @@ export default function MenuItems(props) {
     [rows]
   );
 
-  return activeSubMenuItems.length ? (
+  return (
     <Menu placement="bottom-end" isLazy={isLazy}>
       {({ onClose, isOpen }) => (
         <>
@@ -38,11 +38,11 @@ export default function MenuItems(props) {
           </XLink>
           {CCell ? (
             <CCell onClose={onClose} isOpen={isOpen} />
-          ) : (
+          ) : activeSubMenuItems.length ? (
             <SubMenu onClose={onClose} rows={activeSubMenuItems} prefix={name} />
-          )}
+          ) : null}
         </>
       )}
     </Menu>
-  ) : null;
+  );
 }
