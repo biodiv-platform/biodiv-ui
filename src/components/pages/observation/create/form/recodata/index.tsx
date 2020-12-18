@@ -73,6 +73,7 @@ export default function Recodata({ form, languages }: IRecodataProps) {
               options={languages}
               disabled={helpIdentify}
               form={form}
+              shouldPortal={true}
               selectRef={langRef}
             />
           </SimpleGrid>
