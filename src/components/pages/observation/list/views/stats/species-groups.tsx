@@ -1,10 +1,10 @@
-import { Box } from '@chakra-ui/react';
-import BoxHeading from '@components/@core/layout/box-heading';
-import useTranslation from '@hooks/use-translation';
-import React, { useMemo } from 'react';
+import { Box } from "@chakra-ui/react";
+import BoxHeading from "@components/@core/layout/box-heading";
+import useTranslation from "@hooks/use-translation";
+import React, { useMemo } from "react";
 
-import { SpeciesTooltipRenderer } from './static-data';
-import VerticalBarChart from './vertcal-bar-chart';
+import { SpeciesTooltipRenderer } from "./static-data";
+import VerticalBarChart from "./vertcal-bar-chart";
 
 const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
   const filteredData = useMemo(() => {
