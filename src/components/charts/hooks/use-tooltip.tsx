@@ -18,7 +18,7 @@ export const useTooltip = (ref) => {
 };
 
 export function tooltipHelpers(tip, tooltipRenderer, leftOffset = 40, topOffset = 30) {
-  const mousemove = function (e) {
+  const mousemove = (e) => {
     tip
       .style("left", pointer(e)[0] + leftOffset + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
       .style("top", pointer(e)[1] + topOffset + "px");

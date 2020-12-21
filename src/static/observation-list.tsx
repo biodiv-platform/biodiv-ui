@@ -29,13 +29,6 @@ export const viewTabs = [
     icon: <StatsIcon />,
     key: "stats"
   }
-  /*
-  {
-    name: "LIST.VIEW_TYPE.MAP",
-    icon: MdMap,
-    key: "map"
-  }
-  */
 ];
 
 export const sortByOptions = [

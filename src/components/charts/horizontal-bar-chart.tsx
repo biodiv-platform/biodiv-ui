@@ -14,6 +14,8 @@ interface HorizontalBarChartProps {
   ml?: number;
 
   barPadding?: number;
+  leftOffset?: number;
+  displayCountKey?: boolean;
 
   data: any[];
   meta: {
@@ -33,6 +35,8 @@ export default function HorizontalBarChart({
   ml = 60,
 
   barPadding = 0.2,
+  leftOffset = 0,
+  displayCountKey = true,
 
   data,
   meta: { titleKey, countKey, barColor = "#3182CE", hideXAxis }
@@ -70,6 +74,8 @@ export default function HorizontalBarChart({
     svg
       .select(".y-axis")
       .join("g")
+      //adding my offset change here
+      .attr("transform", `translate(${leftOffset},0)`)
       .call(axisLeft(y).tickSizeOuter(0) as any);
 
     //Bars
@@ -78,7 +84,7 @@ export default function HorizontalBarChart({
       .selectAll("rect")
       .data(data)
       .join("rect")
-      .attr("x", x(0))
+      .attr("x", x(0) + leftOffset)
       .attr("y", (d) => y(d[titleKey]))
       .attr("width", (d) => x(d[countKey]))
       .attr("height", y.bandwidth())
@@ -91,8 +97,8 @@ export default function HorizontalBarChart({
       .join("text")
       .attr("font-size", 10)
       .attr("y", (d) => y(d[titleKey]) + y.bandwidth() / 2 + 4)
-      .attr("x", (d) => x(d[countKey]) + 3)
-      .text((d) => `${d[countKey]} ${countKey}`);
+      .attr("x", (d) => x(d[countKey]) + 3 + leftOffset)
+      .text((d) => (displayCountKey ? `${d[countKey]} ${countKey}` : `${d[countKey]}`));
   }, [containerRef, ro?.width, h, data]);
 
   return (

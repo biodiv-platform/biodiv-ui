@@ -580,6 +580,10 @@
     "TITLE": "Leaderboard"
   },
   "LIST": {
+    "CHART": {
+      "SGROUP": "Species Groups",
+      "STATES": "State distribution"
+    },
     "CREATED_ON": "Created on",
     "LOCATION": "Location",
     "OBSERVATIONS_FOUND": "Observations Found",

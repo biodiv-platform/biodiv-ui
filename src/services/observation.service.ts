@@ -426,21 +426,3 @@ export const axGetUserLifeList = async (userId, type, params) => {
     return { success: false, data: [] };
   }
 };
-
-export const axGetObsListData = async (
-  params,
-  index = "extended_observation",
-  type = "extended_records"
-) => {
-  try {
-    const { data } = await plainHttp.get(
-      `${ENDPOINT.OBSERVATION}/v1/observation/list/${index}/${type}`,
-      {
-        params
-      }
-    );
-    return { success: true, data };
-  } catch (e) {
-    return { success: false, data: {} };
-  }
-};

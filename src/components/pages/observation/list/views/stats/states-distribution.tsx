@@ -1,56 +1,51 @@
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import HorizontalBarChart from "@components/charts/horizontal-bar-chart";
+import useTranslation from "@hooks/use-translation";
 import React, { useMemo } from "react";
 
-import HorizontalBarChart from "./HorizontalBarChart";
+import { StatesChartMeta } from "./static-data";
 
-export default function StatesDistribution({ observationData, filter }) {
-  const HorizontalChartMeta = {
-    titleKey: "stateName",
-    countKey: "observations",
-    hideXAxis: true
-  };
-
+const StatesDistribution = ({ observationData, filter }) => {
   const filteredStateData = useMemo(() => {
     if (!filter.state) {
-      if (!observationData.ag.groupState) {
-        return;
-      }
-
-      const stateData = Object.entries(observationData.ag.groupState)
+      return Object.entries(observationData.ag.groupState)
         .map(([stateName, observations]: [string, number]) => ({ stateName, observations }))
         .sort((a, b) => b.observations - a.observations);
-
-      return stateData;
     }
 
     const states = filter.state.split(",");
-    const fs = states.map((s) => ({
-      stateName: s,
-      observations: observationData.ag.groupState[s]
-    }));
-
-    fs.sort((a, b) => b.observations - a.observations);
-
-    return fs;
+    return states
+      .map((s) => ({
+        stateName: s,
+        observations: observationData.ag.groupState[s]
+      }))
+      .sort((a, b) => b.observations - a.observations);
   }, [filter, observationData]);
+
+  const { t } = useTranslation();
 
   return (
     <div>
       <Box className="white-box">
-        <BoxHeading>State distribution</BoxHeading>
+        <BoxHeading>{t("LIST.CHART.STATES")}</BoxHeading>
         <Box p={4}>
           <HorizontalBarChart
             data={filteredStateData}
-            meta={HorizontalChartMeta}
+            meta={StatesChartMeta}
             barPadding={0.1}
+            h={500}
             mt={10}
             mr={145}
             mb={10}
             ml={58}
+            leftOffset={50}
+            displayCountKey={false}
           />
         </Box>
       </Box>
     </div>
   );
-}
+};
+
+export default StatesDistribution;

@@ -6,19 +6,34 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
 import React, { useEffect, useRef } from "react";
 
-function VerticalBarChart({ data, tooltipRenderer }) {
+interface VerticalBarChartProps {
+  h?: number;
+  w?: number;
+  data: any[];
+  mt?: number;
+  mr?: number;
+  mb?: number;
+  ml?: number;
+
+  tooltipRenderer;
+}
+
+const VerticalBarChart = ({
+  data,
+  tooltipRenderer,
+  w = 500,
+  h = 400,
+  mt = 30,
+  mr = 30,
+  mb = 50,
+  ml = 60
+}: VerticalBarChartProps) => {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
   const ro = useResizeObserver(containerRef);
-
   const tip = useTooltip(containerRef);
-  const leftOffset = 10;
-  const topOffset = -50;
-  const tipHelpers = tooltipHelpers(tip, tooltipRenderer, leftOffset, topOffset);
 
-  let w = 500;
-  const h = 400;
-  const margin = { top: 30, right: 30, bottom: 50, left: 60 };
+  const tipHelpers = tooltipHelpers(tip, tooltipRenderer, 10, -50);
 
   useEffect(() => {
     if (!ro?.width || !data.length) {
@@ -28,16 +43,12 @@ function VerticalBarChart({ data, tooltipRenderer }) {
     const svg = select(svgRef.current);
 
     w = ro.width;
-    const width = w - margin.left - margin.right;
-    const height = h - margin.top - margin.bottom;
+    const width = w - ml - mr;
+    const height = h - mt - mb;
 
-    svg
-      .attr("width", w)
-      .attr("height", h)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    svg.attr("width", w).attr("height", h).append("g").attr("transform", `translate(${ml},${mt})`);
 
-    svg.select(".content").attr("transform", `translate(${margin.left},${margin.top})`);
+    svg.select(".content").attr("transform", `translate(${ml},${mt})`);
 
     const labels = data.map((sg) => sg.sgroup);
     const counts = data.map((sg) => sg.count);
@@ -51,7 +62,7 @@ function VerticalBarChart({ data, tooltipRenderer }) {
     svg
       .select(".x-axis")
       .join("g")
-      .attr("transform", "translate(" + margin.left + "," + height + ")")
+      .attr("transform", `translate(${ml},${height})`)
       .call(axisBottom(xScale))
       .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(-45)")
@@ -69,7 +80,7 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       .on("mouseleave", tipHelpers.mouseleave)
       .attr("class", "bar")
       .attr("fill", "#228B22")
-      .attr("x", (d) => xScale(d.sgroup) + margin.left)
+      .attr("x", (d) => xScale(d.sgroup) + ml)
       .attr("y", (d) => yScale(d.count))
       .attr("width", xScale.bandwidth())
       .attr("height", (d) => height - yScale(d.count));
@@ -81,7 +92,7 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       .join("text")
       .attr("font-size", 10)
       .attr("y", (d) => yScale(d.count) - 4)
-      .attr("x", (d) => xScale(d.sgroup) + xScale.bandwidth() / 2 + margin.left)
+      .attr("x", (d) => xScale(d.sgroup) + xScale.bandwidth() / 2 + ml)
       .attr("text-anchor", "middle")
       .text((d) => d.count);
   }, [containerRef, ro?.width, h, data]);
@@ -96,6 +107,6 @@ function VerticalBarChart({ data, tooltipRenderer }) {
       <div className="tooltip" />
     </div>
   );
-}
+};
 
 export default VerticalBarChart;
