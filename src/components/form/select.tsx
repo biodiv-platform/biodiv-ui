@@ -20,6 +20,7 @@ interface SelectInputFieldProps {
   isRequired?: boolean;
   isControlled?: boolean;
   onChangeCallback?;
+  shouldPortal?;
   form: UseFormMethods<Record<string, any>>;
 }
 const DefaultOptionComponent = (p) => <components.Option {...p} />;
@@ -31,11 +32,12 @@ const SelectInputField = ({
   form,
   mb = 4,
   options = [],
-  disabled = false,
+  disabled,
   selectRef,
   optionComponent = DefaultOptionComponent,
   isRequired,
   isControlled,
+  shouldPortal,
   onChangeCallback,
   ...props
 }: SelectInputFieldProps) => {
@@ -74,7 +76,7 @@ const SelectInputField = ({
               Option: optionComponent,
               ClearIndicator
             }}
-            menuPortalTarget={isBrowser && document.body}
+            menuPortalTarget={isBrowser && shouldPortal && document.body}
             isSearchable={true}
             isDisabled={disabled}
             styles={selectStyles}

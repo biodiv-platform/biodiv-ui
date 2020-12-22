@@ -51,26 +51,30 @@ export default function MapPageComponent() {
           store: SITE_CONFIG.GEOSERVER.STORE,
           workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
         }}
-        layers={[
-          {
-            id: "global-observations",
-            title: "Observations",
-            description: "All observations from india biodiversity portal",
-            attribution: "indiabiodiversity.org and Contributors",
-            tags: ["Global", "Observations"],
-            isAdded: false,
-            source: {
-              type: "grid",
-              endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
-            },
-            data: {
-              index: "extended_observation",
-              type: "_doc",
-              geoField: "location"
-            },
-            onHover: onObservationGridHover
-          }
-        ]}
+        layers={
+          SITE_CONFIG.MAP.DEFAULT_LAYERS
+            ? [
+                {
+                  id: "global-observations",
+                  title: "Observations",
+                  description: "All observations from india biodiversity portal",
+                  attribution: "indiabiodiversity.org and Contributors",
+                  tags: ["Global", "Observations"],
+                  isAdded: false,
+                  source: {
+                    type: "grid",
+                    endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
+                  },
+                  data: {
+                    index: "extended_observation",
+                    type: "_doc",
+                    geoField: "location"
+                  },
+                  onHover: onObservationGridHover
+                }
+              ]
+            : []
+        }
       />
     </Box>
   );

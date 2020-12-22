@@ -455,6 +455,7 @@
         "ADD_OBSERVATION": "Add Observation",
         "ADD_TRAIT_OR_VALUE": "Add Trait/Value",
         "CONTRIBUTE_TO_SPECIES": "Contribute to Species",
+        "CONTRIBUTE_TO_MAP": "Contribute to Map",
         "TITLE": "Contribute"
       },
       "GROUPS": {
@@ -565,7 +566,7 @@
       "SPECIES": "Species",
       "USERGROUPS": "Groups"
     },
-    "SPONSORS": "Sponsors"
+    "SPONSORS": "Supported by"
   },
   "INVALID_REQUEST": "Invalid Request",
   "LANDSCAPE": {

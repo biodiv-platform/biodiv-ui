@@ -1,6 +1,9 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import AddIcon from "@icons/add";
+import { Role } from "@interfaces/custom";
+
 import GroupListItem from "./group-list-item";
+
 export default [
   {
     active: SITE_CONFIG.USERGROUP.ACTIVE,
@@ -22,6 +25,12 @@ export default [
         name: "CONTRIBUTE_TO_SPECIES",
         to: "/species/contribute",
         memberOnly: true
+      },
+      {
+        active: SITE_CONFIG.MAP.ACTIVE,
+        name: "CONTRIBUTE_TO_MAP",
+        to: "/map/create",
+        role: [Role.Admin]
       },
       /*
     {

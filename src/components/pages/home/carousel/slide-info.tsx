@@ -40,9 +40,11 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
             </Link>
           </LocalLink>
         )}
-        <div>
-          <Indicators size={size} currentSlide={currentSlide} scrollTo={scrollTo} />
-        </div>
+        {size > 1 && (
+          <div>
+            <Indicators size={size} currentSlide={currentSlide} scrollTo={scrollTo} />
+          </div>
+        )}
       </Flex>
     </Box>
   );
