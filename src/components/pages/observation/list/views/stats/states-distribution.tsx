@@ -7,6 +7,8 @@ import React, { useMemo } from "react";
 import { StatesChartMeta } from "./static-data";
 
 const StatesDistribution = ({ observationData, filter }) => {
+  const { t } = useTranslation();
+
   const filteredStateData = useMemo(() => {
     if (!filter.state) {
       return Object.entries(observationData.ag.groupState)
@@ -22,8 +24,6 @@ const StatesDistribution = ({ observationData, filter }) => {
       }))
       .sort((a, b) => b.observations - a.observations);
   }, [filter, observationData]);
-
-  const { t } = useTranslation();
 
   return (
     <div>

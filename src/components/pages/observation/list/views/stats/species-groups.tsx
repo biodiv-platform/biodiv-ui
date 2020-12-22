@@ -7,6 +7,8 @@ import { SpeciesTooltipRenderer } from "./static-data";
 import VerticalBarChart from "./vertcal-bar-chart";
 
 const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
+  const { t } = useTranslation();
+
   const filteredData = useMemo(() => {
     if (!filter.sGroup) {
       const sgroups = Object.keys(observationData.ag.groupSpeciesName);
@@ -23,8 +25,6 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
       count: observationData.ag.groupSpeciesName[sg.name]
     }));
   }, [filter, observationData]);
-
-  const { t } = useTranslation();
 
   return (
     <div>
