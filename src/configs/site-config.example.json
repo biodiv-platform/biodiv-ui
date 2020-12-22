@@ -79,7 +79,8 @@
       "longitude": 83,
       "zoom": 0
     },
-    "COUNTRY": "IN"
+    "COUNTRY": "IN",
+    "DEFAULT_LAYERS": false
   },
   "OBSERVATION": {
     "ACTIVE": true
