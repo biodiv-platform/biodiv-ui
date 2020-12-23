@@ -26,25 +26,23 @@ const StatesDistribution = ({ observationData, filter }) => {
   }, [filter, observationData]);
 
   return (
-    <div>
-      <Box className="white-box">
-        <BoxHeading>{t("LIST.CHART.STATES")}</BoxHeading>
-        <Box p={4}>
-          <HorizontalBarChart
-            data={filteredStateData}
-            meta={StatesChartMeta}
-            barPadding={0.1}
-            h={500}
-            mt={10}
-            mr={145}
-            mb={10}
-            ml={58}
-            leftOffset={50}
-            displayCountKey={false}
-          />
-        </Box>
+    <Box className="white-box">
+      <BoxHeading>{t("LIST.CHART.STATES")}</BoxHeading>
+      <Box p={4}>
+        <HorizontalBarChart
+          data={filteredStateData}
+          meta={StatesChartMeta}
+          barPadding={0.1}
+          h={500}
+          mt={10}
+          mr={145}
+          mb={10}
+          ml={58}
+          leftOffset={50}
+          displayCountKey={false}
+        />
       </Box>
-    </div>
+    </Box>
   );
 };
 

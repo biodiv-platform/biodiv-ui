@@ -74,7 +74,6 @@ export default function HorizontalBarChart({
     svg
       .select(".y-axis")
       .join("g")
-      //adding my offset change here
       .attr("transform", `translate(${leftOffset},0)`)
       .call(axisLeft(y).tickSizeOuter(0) as any);
 
@@ -98,7 +97,7 @@ export default function HorizontalBarChart({
       .attr("font-size", 10)
       .attr("y", (d) => y(d[titleKey]) + y.bandwidth() / 2 + 4)
       .attr("x", (d) => x(d[countKey]) + 3 + leftOffset)
-      .text((d) => (displayCountKey ? `${d[countKey]} ${countKey}` : `${d[countKey]}`));
+      .text((d) => (displayCountKey ? `${d[countKey]} ${countKey}` : d[countKey]));
   }, [containerRef, ro?.width, h, data]);
 
   return (

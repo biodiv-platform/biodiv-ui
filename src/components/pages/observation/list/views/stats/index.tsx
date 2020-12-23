@@ -9,7 +9,7 @@ export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
 
   return (
-    <SimpleGrid minChildWidth={10} spacing={4}>
+    <SimpleGrid columns={{ md: 2 }} spacing={4}>
       <SpeciesGroups
         observationData={observationData}
         speciesGroup={speciesGroup}

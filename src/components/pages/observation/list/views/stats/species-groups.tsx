@@ -27,14 +27,12 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
   }, [filter, observationData]);
 
   return (
-    <div>
-      <Box className="white-box">
-        <BoxHeading>{t("LIST.CHART.SGROUP")}</BoxHeading>
-        <Box p={4}>
-          <VerticalBarChart data={filteredData} tooltipRenderer={SpeciesTooltipRenderer} />
-        </Box>
+    <Box className="white-box">
+      <BoxHeading>{t("LIST.CHART.SGROUP")}</BoxHeading>
+      <Box p={4}>
+        <VerticalBarChart data={filteredData} tooltipRenderer={SpeciesTooltipRenderer} />
       </Box>
-    </div>
+    </Box>
   );
 };
 

@@ -598,7 +598,7 @@
       "GRID": "Grid",
       "LIST": "List",
       "MAP": "Map",
-      "STATS": "Statistics"
+      "STATS": "Metrics"
     }
   },
   "LOAD_MORE": "Load More ↺",
