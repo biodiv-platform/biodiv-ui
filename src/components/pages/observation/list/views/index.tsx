@@ -3,6 +3,7 @@ import React from "react";
 
 import GridView from "./grid";
 import ListView from "./list";
+import StatsVew from "./stats";
 
 export default function Views({ no }) {
   const { filter } = useObservationFilter();
@@ -13,6 +14,9 @@ export default function Views({ no }) {
 
     case "list_minimal":
       return <GridView />;
+
+    case "stats":
+      return <StatsVew />;
 
     case "map":
       return <div>Map</div>;
