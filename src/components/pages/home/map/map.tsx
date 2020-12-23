@@ -1,6 +1,8 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
+import { Role } from "@interfaces/custom";
 import { ENDPOINT } from "@static/constants";
+import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -22,15 +24,17 @@ export default function Map() {
    * Do not remove `undefined` from `userGroupId`
    * so key will be automatically removed if `null`
    */
-  const { currentGroup } = useGlobalState();
+  const { currentGroup, isLoggedIn } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
   const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
   const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
+  const canManagePublishing = isLoggedIn && hasAccess([Role.Admin]);
 
   return (
     <Naksha
       viewPort={mapCenter}
       loadToC={true}
+      managePublishing={canManagePublishing}
       mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
       geoserver={{

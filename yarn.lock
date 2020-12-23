@@ -6797,10 +6797,10 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.5.0-canary.7:
-  version "3.5.0-canary.7"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.5.0-canary.7.tgz#0e9d13e91f0be33144c7f90fdad33648d89241d4"
-  integrity sha512-QJfXRm2KPF5zmGEKOfzhRzBqC70Q+EKzk8ETn891jDQW3r53/HqEsWnFqQIPMip6B+st7Z9EdbEy/6aRTYtXQA==
+naksha-components-react@^3.5.0-canary.8:
+  version "3.5.0-canary.8"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.5.0-canary.8.tgz#b36fe7abba124d60ea5a53f6b281c7eb4c6e90ba"
+  integrity sha512-dLUR7kf4rD0uKTXRgFZN81tvGst8cXj9g/+eIc6AaobAFpnQVf+mql0YlTXjks0h9A3/cjyibhEs9nZFof+GYA==
   dependencies:
     "@chakra-ui/react" "^1.0.1"
     "@emotion/react" "^11.1.1"
