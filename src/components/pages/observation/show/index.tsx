@@ -127,12 +127,14 @@ export default function ObservationShowPageComponent({
           />
         </Box>
         <Box>
-          <LocationInformation
-            layerInfo={o.layerInfo}
-            latitude={o.observation?.latitude}
-            longitude={o.observation?.longitude}
-            geoprivacy={o.observation?.geoPrivacy}
-          />
+          {o.layerInfo && (
+            <LocationInformation
+              layerInfo={o.layerInfo}
+              latitude={o.observation?.latitude}
+              longitude={o.observation?.longitude}
+              geoprivacy={o.observation?.geoPrivacy}
+            />
+          )}
           {o.esLayerInfo && (
             <>
               <Temporal data={o.esLayerInfo.monthAggregation} />

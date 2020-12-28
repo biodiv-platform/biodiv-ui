@@ -6,14 +6,14 @@ import { titleCase } from "@utils/basic";
 import React from "react";
 
 interface ILocationInformationProps {
-  layerInfo?: ObservationLocationInfo;
+  layerInfo: ObservationLocationInfo;
   latitude?: number;
   longitude?: number;
   geoprivacy?: boolean;
 }
 
 export default function LocationInformation({
-  layerInfo = {},
+  layerInfo,
   latitude,
   longitude,
   geoprivacy = false
