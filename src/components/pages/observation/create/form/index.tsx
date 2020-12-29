@@ -112,8 +112,8 @@ export default function ObservationCreateForm({
         observedAt: Yup.string().required(),
         reverseGeocoded: Yup.string().required(),
         locationScale: Yup.string().required(),
-        latitude: Yup.number().min(1).required(),
-        longitude: Yup.number().min(1).required(),
+        latitude: Yup.number().required(),
+        longitude: Yup.number().required(),
         useDegMinSec: Yup.boolean(),
         hidePreciseLocation: Yup.boolean(),
 
