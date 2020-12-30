@@ -8,9 +8,21 @@ interface PageHeadingProps {
   [x: string]: any;
 }
 
-export default function PageHeading({ children, mb = 4, actions, ...props }: PageHeadingProps) {
+export default function PageHeading({
+  children,
+  className,
+  mb = 4,
+  actions,
+  ...props
+}: PageHeadingProps) {
   return (
-    <Stack flexDirection={["column", "row"]} justify="space-between" mb={mb}>
+    <Stack
+      flexDirection={["column", "row"]}
+      justify="space-between"
+      mb={mb}
+      className={className}
+      spacing={0}
+    >
       <Heading as="h1" display="inline-block" {...props}>
         {children}
       </Heading>

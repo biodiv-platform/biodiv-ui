@@ -6,6 +6,7 @@ import {
 
 export enum ResourceType {
   Video = "VIDEO",
+  Icon = "ICON",
   Image = "IMAGE",
   Audio = "AUDIO"
 }

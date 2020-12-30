@@ -20,6 +20,7 @@ export const ENDPOINT = {
   PAGES: `${API_ENDPOINT}pages-api/api`,
   RAW: `${API_ENDPOINT}biodiv`,
   RESOURCES: `${API_ENDPOINT}resources-api/api`,
+  SPECIES: `${API_ENDPOINT}species-api/api`,
   TAXONOMY: `${API_ENDPOINT}taxonomy-api/api`,
   TRAITS: `${API_ENDPOINT}traits-api/api`,
   USER: `${API_ENDPOINT}user-api/api`,

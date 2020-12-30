@@ -36,7 +36,7 @@ export default function UserMenu() {
   ];
 
   return isLoggedIn ? (
-    <Menu placement="bottom-end">
+    <Menu placement="bottom-end" isLazy={true}>
       {({ onClose }) => (
         <>
           <MenuButton

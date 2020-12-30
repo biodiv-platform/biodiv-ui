@@ -30,7 +30,8 @@ export const getInjectableHTML = (nHtml): string => {
           ul: [],
           li: [],
           img: ["src"],
-          div: ["class"]
+          div: ["class"],
+          i: []
         },
         stripIgnoreTag: true
       });

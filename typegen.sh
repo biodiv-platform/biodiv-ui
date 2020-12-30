@@ -2,7 +2,7 @@
 
 endpoint=venus.strandls.com
 
-microservices=("naksha" "user" "esmodule" "activity" "observation" "files" "utility" "userGroup" "traits" "document" "landscape" "geoentities" "integrator")
+microservices=("naksha" "user" "esmodule" "activity" "observation" "files" "utility" "userGroup" "traits" "document" "landscape" "geoentities" "integrator" "species")
 
 for m in "${microservices[@]}"; do
     npx dtsgen -o "src/interfaces/$m.ts" --url "https://$endpoint/$m-api/api/swagger.json" -c dtsgen.json
