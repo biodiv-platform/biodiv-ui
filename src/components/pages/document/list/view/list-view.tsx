@@ -21,7 +21,7 @@ export default function ListView({ no }) {
         scrollableTarget="items-container"
       >
         {documentData.l.map((item) => (
-          <Container o={item} />
+          <Container key={item.document.id} o={item} />
         ))}
       </InfiniteScroll>
       {documentData.l.length > 0 && documentData.hasMore && (

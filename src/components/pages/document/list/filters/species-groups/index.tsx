@@ -9,10 +9,9 @@ const SpeciesGroupsFilter = () => {
   const { species, filter, setFilter } = useDocumentFilter();
 
   const defaultValue = useMemo(() => stringToArray(filter.sGroup), []);
-  const speciesGroupList = useMemo(
-    () => species?.slice(1).sort((a, b) => a.order - b.order),
+  const speciesGroupList = useMemo(() => species?.slice(1).sort((a, b) => a.order - b.order), [
     species
-  );
+  ]);
 
   const onChange = (v) => {
     setFilter((_draft) => {

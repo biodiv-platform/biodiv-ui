@@ -1,5 +1,6 @@
-import { Avatar, Badge, Box, Flex, Heading, Image, Link, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
+import DocumentIcon from "@components/pages/document/common/document-icon";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import CalendarIcon from "@icons/calendar";
@@ -27,7 +28,7 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
             <Heading size="sm" title={document?.title}>
               <Flex justifyContent="space-between">
                 <Flex alignItems="center">
-                  <Image boxSize="3rem" src="/next-assets/document.svg" />
+                  <DocumentIcon />
                   <Text isTruncated maxWidth={["30vh", "30vh", "40vh", "120vh"]} m={2}>
                     {document?.title || t("OBSERVATION.UNKNOWN")}
                   </Text>

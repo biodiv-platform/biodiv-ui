@@ -1,4 +1,4 @@
-import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
@@ -29,7 +29,6 @@ const VerticalTabs = styled.div`
 
     > [role="tablist"] {
       flex-direction: column;
-
       flex-shrink: 0;
 
       > [role="tab"] {
@@ -135,6 +134,7 @@ export default function Container({ o }) {
                 </Tab>
               );
             })}
+            <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
           </TabList>
         </Tabs>
       </VerticalTabs>

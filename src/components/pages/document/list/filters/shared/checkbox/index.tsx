@@ -8,7 +8,7 @@ import {
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
-import FilterCheckboxes, { FilterCheckboxesProps } from "./checkboxs";
+import FilterCheckboxes, { FilterCheckboxesProps } from "./checkboxes";
 
 export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
   const { t } = useTranslation();

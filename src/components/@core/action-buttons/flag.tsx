@@ -57,6 +57,7 @@ export default function FlagActionButton({
 }: IFlagObservationProps) {
   const { t } = useTranslation();
   const [flags, setFlags] = useState(initialFlags);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const flagOptions = FLAG_OPTIONS.map((f) => ({
