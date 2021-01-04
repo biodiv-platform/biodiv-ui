@@ -103,5 +103,10 @@ export default [
     image: "metastring.webp",
     link: "//www.metastringfoundation.org",
     name: "Metastring Foundation"
+  },
+  {
+    image: "act.webp",
+    link: "//www.aeonct.org",
+    name: "Aeon Charitable Trust (ACT)"
   }
 ];
