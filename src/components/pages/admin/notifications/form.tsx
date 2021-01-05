@@ -13,7 +13,7 @@ import * as Yup from "yup";
 function NotificationsForm() {
   const { t } = useTranslation();
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     resolver: yupResolver(
       Yup.object().shape({
         title: Yup.string().required(),

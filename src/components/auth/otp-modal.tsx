@@ -31,7 +31,7 @@ export default function OTPModal({ isOpen, onClose, user }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
 
-  const otpForm = useForm({
+  const otpForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({

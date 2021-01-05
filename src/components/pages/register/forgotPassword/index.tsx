@@ -49,7 +49,7 @@ export default function ForgotPasswordComponent() {
     }
   });
 
-  const rForm = useForm({
+  const rForm = useForm<any>({
     mode: "onBlur",
     resolver: yupResolver(
       Yup.object().shape({

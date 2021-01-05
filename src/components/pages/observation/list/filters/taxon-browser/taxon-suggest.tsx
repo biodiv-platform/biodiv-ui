@@ -34,7 +34,7 @@ export default function TaxonSuggest({ setParentState, parentState }) {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     resolver: yupResolver(
       Yup.object().shape({
         query: Yup.string()

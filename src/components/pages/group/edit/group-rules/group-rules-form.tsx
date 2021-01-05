@@ -25,7 +25,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
   } = useGlobalState();
   const [inputType, setInputType] = useState<string>();
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({

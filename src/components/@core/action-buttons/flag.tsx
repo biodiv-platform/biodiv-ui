@@ -69,7 +69,7 @@ export default function FlagActionButton({
     setUserFlag(flags?.find((f) => f.user?.id === userId));
   }, [flags]);
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({

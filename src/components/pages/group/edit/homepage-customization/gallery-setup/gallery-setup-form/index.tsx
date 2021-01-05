@@ -28,7 +28,7 @@ export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList
   const [imagePicker, setImagePicker] = useState<boolean>(true);
   const [defaultValues, setDefaultValues] = useState<IGallerySetupForm | any>();
 
-  const hForm = useForm({
+  const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
