@@ -146,6 +146,7 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
     <LoadScriptNext
       id="observation-create-map-script-loader"
       googleMapsApiKey={SITE_CONFIG.TOKENS.GMAP}
+      region={SITE_CONFIG.MAP.COUNTRY}
       libraries={GMAP_LIBRARIES}
     >
       <>

@@ -91,6 +91,7 @@ const LocationPicker = ({ form }) => {
     <LoadScriptNext
       id="user-registration-map-script-loader"
       googleMapsApiKey={SITE_CONFIG.TOKENS.GMAP}
+      region={SITE_CONFIG.MAP.COUNTRY}
       libraries={GMAP_LIBRARIES}
     >
       <>
