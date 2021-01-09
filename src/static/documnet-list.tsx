@@ -1,5 +1,4 @@
 import SITE_CONFIG from "@configs/site-config.json";
-import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
 import React from "react";
 
@@ -17,22 +16,17 @@ export const viewTabs = [
     name: "LIST.VIEW_TYPE.LIST",
     icon: <ListIcon />,
     key: "list"
-  },
-  {
-    name: "LIST.VIEW_TYPE.GRID",
-    icon: <GridIcon />,
-    key: "list_minimal"
   }
 ];
 
 export const sortByOptions = [
   {
     name: "LIST.SORT_OPTIONS.LAST_UPDATED",
-    key: "last_revised"
+    key: "document.lastRevised"
   },
   {
     name: "LIST.SORT_OPTIONS.LATEST",
-    key: "created_on"
+    key: "document.createdOn"
   }
 ];
 

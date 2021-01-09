@@ -1,4 +1,4 @@
-import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Text } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import LocalLink from "@components/@core/local-link";
 import DocumentIcon from "@components/pages/document/common/document-icon";
@@ -59,21 +59,19 @@ export default function InfoTab({
         </LocalLink>
 
         <Box>
-          {flags && (
-            <FlagActionButton
-              resourceId={document.id}
-              resourceType="document"
-              initialFlags={flags}
-              userId={user.id}
-              flagFunc={axFlagDocument}
-              unFlagFunc={axUnFlagDocument}
-            />
-          )}
+          <FlagActionButton
+            resourceId={document.id}
+            resourceType="document"
+            initialFlags={flags}
+            userId={user.id}
+            flagFunc={axFlagDocument}
+            unFlagFunc={axUnFlagDocument}
+          />
         </Box>
       </Flex>
 
       {/* Meta Data */}
-      <Box color="gray.600">
+      <Stack color="gray.600">
         <MetaBlock
           icon={<PeopleIcon />}
           tooltip={t("DOCUMENT.BIB.AUTHOR")}
@@ -89,24 +87,33 @@ export default function InfoTab({
           tooltip={t("DOCUMENT.BIB.JOURNAL")}
           children={document?.journal}
         />
+        {/* regex filter tags and special characters */}
         <MetaBlock
           icon={<MessageIcon />}
           tooltip={t("DOCUMENT.BIB.ABSTRACT")}
           children={document?.notes?.replace(/<[^>]*(>|$)|&nbsp;|&gt;/g, "")}
         />
         <Flex alignItems="flex-end" justifyContent="space-between">
-          <div>
+          <Stack>
             <MetaBlock
               icon={<MapIcon />}
               tooltip={t("GROUP.HABITATS_COVERED")}
               children={
-                <FilterIconsList type="habitat" filterIds={habitatIds} filterList={habitats} />
+                habitatIds[0] ? (
+                  <FilterIconsList type="habitat" filterIds={habitatIds} filterList={habitats} />
+                ) : null
               }
             />
-            <MetaBlock icon={<PawIcon />} tooltip={t("GROUP.SPECIES_COVERAGE")}>
-              <FilterIconsList type="species" filterIds={specieIds} filterList={species} />
-            </MetaBlock>
-          </div>
+            <MetaBlock
+              icon={<PawIcon />}
+              tooltip={t("GROUP.SPECIES_COVERAGE")}
+              children={
+                specieIds[0] ? (
+                  <FilterIconsList type="species" filterIds={specieIds} filterList={species} />
+                ) : null
+              }
+            />
+          </Stack>
           <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
             <Flex alignItems="center">
               <Avatar mr={1} size="sm" name={user?.name} src={getUserImage(user?.profilePic)} />
@@ -114,7 +121,7 @@ export default function InfoTab({
             </Flex>
           </Link>
         </Flex>
-      </Box>
+      </Stack>
     </Box>
   );
 }

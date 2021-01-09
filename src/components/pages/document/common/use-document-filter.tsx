@@ -80,6 +80,7 @@ export const DocumentFilterProvider = (props) => {
           _draft.l.push(...data.documentList);
           _draft.hasMore = data.documentList.length === Number(filter.f.max);
         }
+        _draft.n = data.totalCount;
       });
       NProgress.done();
     } catch (e) {

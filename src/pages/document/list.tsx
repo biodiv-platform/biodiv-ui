@@ -30,6 +30,7 @@ DocumentListPage.getInitialProps = async (ctx) => {
   return {
     documentData: {
       l: data.documentList,
+      n: data.totalCount,
       mvp: {},
       hasMore: true
     },

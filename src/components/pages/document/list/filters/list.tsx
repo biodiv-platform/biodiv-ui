@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
@@ -70,7 +71,7 @@ export default function FiltersList() {
           </>
         )}
       </AccordionItem>
-      <UserGroupFilter />
+      {SITE_CONFIG.USERGROUP.ACTIVE && <UserGroupFilter />}
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">

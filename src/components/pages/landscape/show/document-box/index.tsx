@@ -25,7 +25,7 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
       <Box p={2} borderWidth="2px">
         <LocalLink href={`/document/show/${document.id}`}>
           <a>
-            <Heading size="sm" title={document?.title}>
+            <Heading size="sm" mb={2} title={document?.title}>
               <Flex justifyContent="space-between">
                 <Flex alignItems="center">
                   <DocumentIcon />
@@ -43,7 +43,7 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
 
         <Stack ml={2} justifyContent="center">
           {document?.author && (
-            <Text isTruncated maxWidth={["30vh", "30vh", "40vh", "40vh"]} title="Author">
+            <Text isTruncated maxWidth={["30vh", "30vh", "40vh", "120vh"]} title="Author">
               <PeopleIcon mb={1} mr={3} /> {document.author}
             </Text>
           )}

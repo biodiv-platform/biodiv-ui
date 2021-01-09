@@ -63,6 +63,7 @@ export default function Filters() {
           <DrawerContent>
             <DrawerCloseButton />
             <BoxHeading>{t("FILTERS.TITLE")}</BoxHeading>
+            <ClearFilters />
             <DrawerBody p={0}>{isOpen && <FiltersList />}</DrawerBody>
           </DrawerContent>
         </DrawerOverlay>

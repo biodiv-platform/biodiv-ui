@@ -99,14 +99,14 @@ export default function Container({ o }) {
     >
       <VerticalTabs>
         <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
-          <TabPanels height={["fit-content", "15rem"]} className="tab-content" position="relative">
+          <TabPanels height={["fit-content"]} className="tab-content" position="relative">
             <TabPanel>
               <InfoTab
                 habitatIds={o.habitatIds}
                 specieIds={o.speciesGroupIds}
                 document={o.document}
                 user={o.userIbp}
-                flags={o.flag.map((item) => ({ flag: item, user: o.userIbp }))}
+                flags={o.flag[0] ? o.flag.map((item) => ({ flag: item, user: o.userIbp })) : null}
               />
             </TabPanel>
             {actionTabs[1].active && (

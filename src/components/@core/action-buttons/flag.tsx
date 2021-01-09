@@ -102,9 +102,9 @@ export default function FlagActionButton({
   return (
     <>
       <SimpleActionButton
-        icon={flags?.[0]?.flag ? <FlagFillIcon /> : <FlagOutlineIcon />}
+        icon={flags && flags.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
         title={t("ACTIONS.FLAG.TITLE")}
-        colorScheme={flags?.[0]?.flag ? "red" : "purple"}
+        colorScheme={flags && flags?.length ? "red" : "purple"}
         onClick={onOpen}
       />
       <Modal isOpen={isOpen} size="lg" onClose={onClose}>
