@@ -10,8 +10,8 @@ import wkt from "wkt";
 import DownloadLandscape from "./download";
 import LandscapeFields from "./fields";
 
-const Previewer: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.Previewer),
+const NakshaMapboxView: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -42,7 +42,7 @@ export default function LandscapeShowComponent({
         </Heading>
       </Flex>
       <Box position="relative" h="22rem" bg="gray.200" borderRadius="md" overflow="hidden" mb={4}>
-        <Previewer
+        <NakshaMapboxView
           defaultViewPort={defaultViewPort}
           data={wkt.parse(landscapeShow.wktData)}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}

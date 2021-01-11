@@ -1,3 +1,4 @@
+import { ViewIcon } from "@chakra-ui/icons";
 import {
   Box,
   Checkbox,
@@ -10,7 +11,6 @@ import {
   InputGroup,
   InputRightElement
 } from "@chakra-ui/react";
-import { ViewIcon } from "@chakra-ui/icons";
 import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
@@ -21,8 +21,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 import { parse, stringify } from "wkt";
 
-const MapAreaDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.MapAreaDraw),
+const NakshaMapboxDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -101,7 +101,7 @@ export default function GeoJsonWktParserInput({
       </Flex>
       {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
       <Box position="relative" h="22rem" borderRadius="md" mb={3} overflow="hidden">
-        <MapAreaDraw
+        <NakshaMapboxDraw
           defaultViewPort={defaultViewPort}
           defaultFeatures={defaultFeature}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}

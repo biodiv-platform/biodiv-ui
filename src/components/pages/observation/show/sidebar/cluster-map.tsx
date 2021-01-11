@@ -7,8 +7,8 @@ import dynamic from "next/dynamic";
 import React from "react";
 import LazyLoad from "react-lazyload";
 
-const Naksha: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.Naksha),
+const NakshaMapboxList: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -50,7 +50,7 @@ export default function ClusterMap({
       display="block"
     >
       <LazyLoad height={422} once={true}>
-        <Naksha
+        <NakshaMapboxList
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           viewPort={defaultViewPort}
           key={k}

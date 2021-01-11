@@ -1767,6 +1767,61 @@
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-1.3.0.tgz#b2b0ff3b4b6b104e0df1954e58098e0a9cb6195d"
   integrity sha512-NF+KJYDiFjnGAqhM92vG5kFJFCZFFjO5VxcByf06o6FrG7BEta5NDBhqVsIAMSfMNsn1kWfSKX1TkDT21xq9Hg==
 
+"@ibp/naksha-commons@3.6.8":
+  version "3.6.8"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.6.8.tgz#fe2007efc7a5bdabe2270b0a14363347b57cd8e4"
+  integrity sha512-P7MV9mhMuqmndtndax82NOwwv6Yw41bAw8qeYRXgTahJiXt5lVa7P+HUTmM8VvKgXRqG8LLGUPTsdaaL/8ppFw==
+
+"@ibp/naksha-gmaps-draw@3.6.9":
+  version "3.6.9"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.6.9.tgz#f779373cd258285d2facf98803224f861a38a9ec"
+  integrity sha512-RSqyUeunMTJYVjlwYuSvcdbYCS+N1vfW7ISVr1jQIsxhK1peo8qHjUnHTlebc8uX6qPjxopz4kxiA2oT6Pd4zA==
+  dependencies:
+    "@ibp/naksha-commons" "3.6.8"
+    "@turf/bbox" "^6.0.1"
+
+"@ibp/naksha-mapbox-draw@3.6.8":
+  version "3.6.8"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.6.8.tgz#cd4e6b131215ed7e1836833b5380ba747ffc65db"
+  integrity sha512-NrV9PNkYAEzI6m6a73IopkJIoRFLpqURCO6NY7ziyDPeTKXZ+rDaZNQpjg24C0NvDOuPxILGRGPsHJ/uuUbbFw==
+  dependencies:
+    "@ibp/naksha-commons" "3.6.8"
+
+"@ibp/naksha-mapbox-list@3.6.8":
+  version "3.6.8"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.6.8.tgz#642feb7ba701d255f4d623743aa5313e3da12158"
+  integrity sha512-OAdj5ajTL4pjDWz63EFnZBLUeFCm3uwljyf98481tCKP1wVLEK5Ar68Ztb8Yd+NIejreWn1V0vQ6pVz0oPlV4Q==
+  dependencies:
+    "@ibp/naksha-commons" "3.6.8"
+    "@turf/bbox" "^6.0.1"
+    boundingbox "^1.2.3"
+    colorbrewer "^1.3.0"
+    geohash "^0.0.1"
+    react-gbus "^1.1.2"
+    react-highlighter "^0.4.3"
+    redaxios "^0.3.0"
+    ts-debounce "^2.1.0"
+
+"@ibp/naksha-mapbox-view@3.6.8":
+  version "3.6.8"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.6.8.tgz#8010700925cd31e3801aaa0da29cbc448011b41c"
+  integrity sha512-kaKwivR4KGv+q/Msw6qVl+9dC6pfA88woe2+hgFLNFc6cV7QQ1C1m/JIfjmwvcma+UbRrA//QK3P/gsASGFd9g==
+  dependencies:
+    "@ibp/naksha-commons" "3.6.8"
+
+"@ibp/naksha-upload@3.6.8":
+  version "3.6.8"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.6.8.tgz#dab823ebbb7a97356be250ee8fc9c1d9ccc2c286"
+  integrity sha512-M5VQrJDeUvb0l/7LVbHIkxXyeWQ3eCxfrPMq5OJoM4vKItkKSZ7UU5ioo0nsy5JR8nN6hjSvbRH8UGUX/Thk3Q==
+  dependencies:
+    "@hookform/resolvers" "1.3.0"
+    "@ibp/naksha-commons" "3.6.8"
+    react-dropzone "^11.2.4"
+    react-hook-form "^6.14.0"
+    react-multi-select-component "^3.0.8"
+    shapefile "^0.6.6"
+    yup "^0.32.8"
+
 "@mapbox/geojson-rewind@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@mapbox/geojson-rewind/-/geojson-rewind-0.5.0.tgz#91f0ad56008c120caa19414b644d741249f4f560"
@@ -6263,7 +6318,7 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mapbox-gl@^2.0.0:
+mapbox-gl@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/mapbox-gl/-/mapbox-gl-2.0.1.tgz#e081c075fca2473fbc0e3a28f57c1b68ced3d997"
   integrity sha512-4sWRh4FztQakCPO/WN2JsMSDOVLKXPSQvHjJgXwIEQtnrxjyFB7Et0VX+h9rDxOA4EB6BRCG8mNgw648/dXNTg==
@@ -6497,31 +6552,17 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.5.0-canary.12:
-  version "3.5.0-canary.12"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.5.0-canary.12.tgz#8c50dd70a33de7b9520c22023a5ae8e8c71fa852"
-  integrity sha512-DLX4KFVfL61sPoA2911UB5gY9tkAixvcQmMouzfamCQ5iSBPvjkyJE785twKPvwfD7hHSLRUuWpAjHgAOsQjKw==
+naksha-components-react@^3.6.9:
+  version "3.6.9"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.6.9.tgz#4de2c8c49540ee3068f04a53ebd08f9fc8cbb1b6"
+  integrity sha512-z8aqqAU1mR4LmwLnuMw+/UkykohU3TI6Egur5h2Dh06MMfi0gpvZ3iUcPr0FXtxdXIsPQjxjF3oKmdhB9aOqlg==
   dependencies:
-    "@hookform/resolvers" "1.3.0"
-    "@turf/bbox" "^6.0.1"
-    boundingbox "^1.2.3"
-    colorbrewer "^1.3.0"
-    geohash "^0.0.1"
-    immer "^8.0.0"
-    react-dropzone "^11.2.4"
-    react-gbus "^1.1.2"
-    react-highlighter "^0.4.3"
-    react-hook-form "^6.14.0"
-    react-map-gl "^6.0.2"
-    react-map-gl-draw "^0.21.1"
-    react-multi-select-component "^3.0.8"
-    react-virtualized-auto-sizer "^1.0.3"
-    react-window "^1.8.6"
-    redaxios "^0.3.0"
-    shapefile "^0.6.6"
-    ts-debounce "^2.1.0"
-    use-immer "^0.4.2"
-    yup "^0.32.8"
+    "@ibp/naksha-commons" "3.6.8"
+    "@ibp/naksha-gmaps-draw" "3.6.9"
+    "@ibp/naksha-mapbox-draw" "3.6.8"
+    "@ibp/naksha-mapbox-list" "3.6.8"
+    "@ibp/naksha-mapbox-view" "3.6.8"
+    "@ibp/naksha-upload" "3.6.8"
 
 nan@^2.12.1:
   version "2.14.1"
@@ -7674,13 +7715,13 @@ react-map-gl-draw@^0.21.1:
     prop-types "^15.7.2"
     uuid "^3.4.0"
 
-react-map-gl@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-6.0.2.tgz#88e9a901ddbe6efd38aa8cbee8878cdd76c1d9d3"
-  integrity sha512-YsUnE1qRoez+ZVkyNsAjOOL0DIazgV4bVn7NsnziW9tUIDUCoErTy/EEl0YZiiIwxpTW+6Rls/rOmtSqaWvsJw==
+react-map-gl@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-6.0.3.tgz#469cdc46bbe6f4ec81c5a6c5bc8957872fa680c4"
+  integrity sha512-ODZwDExfA0Ga2E33SR5vyoNQ+N4hO+NpUNUVvzk86/92yUZFjijEveNhnojEe2MVzF0/MGsPF7KhNSyufYMwYw==
   dependencies:
     "@babel/runtime" "^7.0.0"
-    mapbox-gl "^2.0.0"
+    mapbox-gl "^2.0.1"
     mjolnir.js "^2.4.0"
     prop-types "^15.7.2"
     react-virtualized-auto-sizer "^1.0.2"
@@ -7815,11 +7856,6 @@ react-virtualized-auto-sizer@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-virtualized-auto-sizer/-/react-virtualized-auto-sizer-1.0.2.tgz#a61dd4f756458bbf63bd895a92379f9b70f803bd"
   integrity sha512-MYXhTY1BZpdJFjUovvYHVBmkq79szK/k7V3MO+36gJkWGkrXKtyr4vCPtpphaTLRAdDNoYEYFZWE8LjN+PIHNg==
-
-react-virtualized-auto-sizer@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-virtualized-auto-sizer/-/react-virtualized-auto-sizer-1.0.3.tgz#a491577dc70102b9faaef473d640437eab9db120"
-  integrity sha512-HnJo3Hk5Ky2TUL2GpLOs5sKiyskFwdNllI3P5Mp0tgFatz6ClnEG1gnK76/NhSkd/3YtYPTVjIsINYVBd/fRxw==
 
 react-virtualized@^9.21.2:
   version "9.22.2"
