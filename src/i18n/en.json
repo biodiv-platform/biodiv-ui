@@ -114,8 +114,9 @@
       "PDF": "PDF"
     },
     "EDIT_DOCUMENT": "Edit Document",
+    "FIND_GMAPS": "Search from Google Maps",
     "FOLLOW": "Follow Document",
-    "GEOENTITIES": "Search from Geoentities",
+    "GEOENTITIES": "Search from Landscapes",
     "IMPORT_BIBTEX": "Import from BibTex",
     "ISSUE": "Issue",
     "LICENSE": "License",
@@ -454,8 +455,8 @@
         "ADD_LIST": "Add List",
         "ADD_OBSERVATION": "Add Observation",
         "ADD_TRAIT_OR_VALUE": "Add Trait/Value",
-        "CONTRIBUTE_TO_SPECIES": "Contribute to Species",
         "CONTRIBUTE_TO_MAP": "Contribute to Map",
+        "CONTRIBUTE_TO_SPECIES": "Contribute to Species",
         "TITLE": "Contribute"
       },
       "GROUPS": {

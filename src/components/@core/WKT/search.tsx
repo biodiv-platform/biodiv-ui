@@ -1,5 +1,6 @@
-import { Box, FormControl, FormLabel, SimpleGrid } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Input, SimpleGrid, Text } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "@hooks/use-translation";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import { isBrowser } from "@static/constants";
 import { getMapCenter } from "@utils/location";
@@ -30,9 +31,10 @@ const onQuery = async (q) => {
   }));
 };
 
-export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave, mb = 4 }) {
+export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave, mb = 2 }) {
   const [selected, setSelected] = useState<any>();
   const onQueryDebounce = debounce(onQuery, 200);
+  const { t } = useTranslation();
 
   const handleOnSave = () => {
     if (selected?.label && selected?.value) {
@@ -65,13 +67,14 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
             isClearable={true}
             noOptionsMessage={() => null}
             onChange={setSelected}
-            placeholder={nameTitle}
+            placeholder={t("DOCUMENT.GEOENTITIES")}
             loadOptions={onQueryDebounce}
           />
         </FormControl>
         <SaveButton onClick={handleOnSave} />
       </SimpleGrid>
-      <Box position="relative" h="22rem" overflow="hidden" borderRadius="md">
+      <Text color="gray.500" mb={2} children={t("OR")} />
+      <Box position="relative" borderRadius="md">
         <NakshaGmapsDraw
           defaultViewPort={defaultViewPort}
           defaultFeatures={selected?.value ? [selected?.value] : []}
@@ -81,6 +84,8 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
           onFeaturesChange={handleOnChange}
           gmapRegion={SITE_CONFIG.MAP.COUNTRY}
           gmapApiAccessToken={SITE_CONFIG.TOKENS.GMAP}
+          mapStyle={{ height: "22rem", width: "100%", borderRadius: ".25rem" }}
+          autocompleteComponent={<Input mb={4} placeholder={t("DOCUMENT.FIND_GMAPS")} w="full" />}
         />
       </Box>
     </div>
