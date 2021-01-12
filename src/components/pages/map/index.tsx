@@ -9,8 +9,8 @@ import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const Naksha: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.Naksha),
+const NakshaMapboxList: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -38,7 +38,7 @@ export default function MapPageComponent() {
 
   return (
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
-      <Naksha
+      <NakshaMapboxList
         viewPort={defaultViewPort}
         loadToC={true}
         showToC={true}

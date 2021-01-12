@@ -4,8 +4,8 @@ import { getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useState } from "react";
 
-const MapAreaDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.MapAreaDraw),
+const NakshaMapboxDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -66,7 +66,7 @@ export default function AreaDrawField({
     <FormControl isRequired={isRequired} isInvalid={form.errors[name] && true} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
-        <MapAreaDraw
+        <NakshaMapboxDraw
           defaultViewPort={defaultViewPort}
           defaultFeatures={defaultFeatures}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}

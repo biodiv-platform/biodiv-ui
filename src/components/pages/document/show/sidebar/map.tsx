@@ -5,8 +5,8 @@ import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const Previewer: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.Previewer),
+const NakshaMapboxView: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -39,7 +39,7 @@ export default function DocumentSidebarMap({ documentCoverages }) {
       mb={4}
     >
       {documentCoverages.length ? (
-        <Previewer
+        <NakshaMapboxView
           data={geojson}
           defaultViewPort={defaultViewPort}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}

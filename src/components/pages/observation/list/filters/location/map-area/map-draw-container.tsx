@@ -7,8 +7,8 @@ import React, { useMemo } from "react";
 
 const FILTER_NAME = "location";
 
-const MapAreaDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.MapAreaDraw),
+const NakshaMapboxDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -30,7 +30,7 @@ export default function MapDrawContainer() {
 
   return (
     <Box position="relative" h="22rem">
-      <MapAreaDraw
+      <NakshaMapboxDraw
         defaultViewPort={defaultViewPort}
         defaultFeatures={defaultFeatures}
         mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}

@@ -7,8 +7,8 @@ import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const Naksha: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.Naksha),
+const NakshaMapboxList: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -31,7 +31,7 @@ export default function Map() {
   const canManagePublishing = isLoggedIn && hasAccess([Role.Admin]);
 
   return (
-    <Naksha
+    <NakshaMapboxList
       viewPort={mapCenter}
       loadToC={true}
       managePublishing={canManagePublishing}
