@@ -2,11 +2,7 @@ import { Role } from "@interfaces/custom";
 import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
-import {
-  findCurrentUserGroup,
-  reorderRemovedGallerySetup,
-  transformUserGroupList
-} from "@utils/userGroup";
+import { findCurrentUserGroup, reorderRemovedGallerySetup } from "@utils/userGroup";
 
 export const axGetUserGroupList = async () => {
   try {
@@ -30,8 +26,7 @@ export const axGetUserGroupById = async (userGroupId) => {
 
 export const axGroupList = async (url) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/all`);
-    const groups = transformUserGroupList(data);
+    const { data: groups } = await plainHttp.get(`${ENDPOINT.API}/groups`);
     const currentGroup = findCurrentUserGroup(groups, url);
     return { success: true, groups, currentGroup };
   } catch (e) {
