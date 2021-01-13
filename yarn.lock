@@ -1774,11 +1774,6 @@
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-1.3.0.tgz#b2b0ff3b4b6b104e0df1954e58098e0a9cb6195d"
   integrity sha512-NF+KJYDiFjnGAqhM92vG5kFJFCZFFjO5VxcByf06o6FrG7BEta5NDBhqVsIAMSfMNsn1kWfSKX1TkDT21xq9Hg==
 
-"@hookform/resolvers@1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-1.3.2.tgz#9d747784c6d647da22bcf43d0be17f470d412182"
-  integrity sha512-OumtsPsGqBcsMXGUkM7IGDO55+ZmruF3u3D7eDYDK4HpYQcp4Q5QeqQtQr/BLD1wgTiB4YLvcboRXrITuJOwdA==
-
 "@ibp/naksha-commons@3.6.8":
   version "3.6.8"
   resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.6.8.tgz#fe2007efc7a5bdabe2270b0a14363347b57cd8e4"
