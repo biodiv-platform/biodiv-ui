@@ -6,9 +6,10 @@ import { DEFAULT_FILTER } from "@static/documnet-list";
 import wkt from "wkt";
 import { axGetListData } from "@services/document.service";
 
-const geoJsonParams = {
+const ShowLandScapeParams = {
   geoShapeFilterField: "documentCoverages.topology",
-  nestedField: "documentCoverages"
+  nestedField: "documentCoverages",
+  max: 6
 };
 
 const ObservationShowPage = ({ landscape, landscapeShow, documentList }) => (
@@ -30,7 +31,7 @@ ObservationShowPage.getInitialProps = async (ctx) => {
         return acc.concat(str.replace(/[[\]]/g, ""));
       }, "")
     : `${coord}`.replace(/[[\]]/g, "");
-  const initialFilterParams = { ...DEFAULT_FILTER, ...geoJsonParams };
+  const initialFilterParams = { ...DEFAULT_FILTER, ...ShowLandScapeParams };
   const { data: documents } = await axGetListData(initialFilterParams, { location });
   return {
     landscape,

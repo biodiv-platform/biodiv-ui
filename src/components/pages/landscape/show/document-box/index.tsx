@@ -41,13 +41,13 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
           </a>
         </LocalLink>
 
-        <Stack ml={2} justifyContent="center">
-          {document?.author && (
-            <Text isTruncated maxWidth={["30vh", "30vh", "40vh", "120vh"]} title="Author">
-              <PeopleIcon mb={1} mr={3} /> {document.author}
-            </Text>
-          )}
+        <Stack isInline ml={2} justifyContent="space-between" alignItems="center">
           <Stack isInline justify="space-between" align="center">
+            {document?.author && (
+              <Text isTruncated maxWidth={["30vh", "30vh", "40vh", "120vh"]} title="Author">
+                <PeopleIcon mb={1} mr={3} /> {document.author}
+              </Text>
+            )}
             <Stack align="center" isInline>
               {document.year && (
                 <Text title="Date">
@@ -62,19 +62,19 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
                 </Text>
               )}
             </Stack>
-            <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
-              <Flex alignItems="center">
-                <Avatar
-                  m={1}
-                  flexShrink={0}
-                  size="sm"
-                  name={user?.name}
-                  src={getUserImage(user?.profilePic)}
-                />
-                <Text>{user?.name}</Text>
-              </Flex>
-            </Link>
           </Stack>
+          <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
+            <Flex alignItems="center">
+              <Avatar
+                m={1}
+                flexShrink={0}
+                size="sm"
+                name={user?.name}
+                src={getUserImage(user?.profilePic)}
+              />
+              <Text>{user?.name}</Text>
+            </Flex>
+          </Link>
         </Stack>
       </Box>
     </Stack>
