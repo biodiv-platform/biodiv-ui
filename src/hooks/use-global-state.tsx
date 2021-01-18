@@ -1,12 +1,13 @@
 import { UserGroupIbp } from "@interfaces/observation";
-import { User } from "@interfaces/user";
 import { axGetTree } from "@services/pages.service";
+import { axCheckUserGroupMember } from "@services/usergroup.service";
 import { AUTHWALL } from "@static/events";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { getParsedUser } from "@utils/auth";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 
 interface GlobalStateContextProps {
-  user?: User;
+  user?;
   setUser;
   isLoggedIn: boolean;
 
@@ -28,22 +29,30 @@ interface GlobalStateProviderProps {
 const GlobalStateContext = createContext<GlobalStateContextProps>({} as GlobalStateContextProps);
 
 export const GlobalStateProvider = ({ initialState, children }: GlobalStateProviderProps) => {
-  const [user, setUser] = useState(initialState.user || {});
-  const [isLoggedIn, setIsLoggedIn] = useState(!!initialState?.user?.id);
+  const [user, setUser] = useState<any>(initialState.user || {});
   const [pages, setPages] = useState<any[]>([]);
-  const [isCurrentGroupMember, setIsCurrentGroupMember] = useState(
-    initialState.isCurrentGroupMember
-  );
+  const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
+
+  const isLoggedIn = useMemo(() => !!user.id, [user]);
+
+  const fetchIsCurrentGroupMember = async () => {
+    if (!isLoggedIn) return;
+
+    const isCurrentGroupMember = await axCheckUserGroupMember(initialState.currentGroup?.id);
+    setIsCurrentGroupMember(isCurrentGroupMember);
+  };
+
+  useEffect(() => {
+    fetchIsCurrentGroupMember();
+  }, [initialState.currentGroup, user]);
 
   useEffect(() => {
     axGetTree(initialState.currentGroup?.id).then(({ data }) => setPages(data));
   }, [initialState.currentGroup?.id]);
 
-  useEffect(() => {
-    setIsLoggedIn(!!user?.id);
-  }, [user]);
-
-  useListener(setUser, [AUTHWALL.SUCCESS]);
+  useListener(() => {
+    setUser(getParsedUser());
+  }, [AUTHWALL.SUCCESS]);
 
   return (
     <GlobalStateContext.Provider

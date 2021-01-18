@@ -1,5 +1,5 @@
 import { ENDPOINT } from "@static/constants";
-import http, { plainHttp } from "@utils/http";
+import { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
 import axios from "axios";
 import { stringify } from "querystring";
@@ -16,16 +16,6 @@ export const axLogin = async (payload) => {
     return { success: true, data };
   } catch (e) {
     return { success: false, data: e.response.data };
-  }
-};
-
-export const axGetUser = async () => {
-  try {
-    const { data } = await http.get(`${ENDPOINT.USER}/v1/user/me`);
-    return { success: true, data };
-  } catch (e) {
-    console.error("USER_ME", e);
-    return { success: false, data: {} };
   }
 };
 

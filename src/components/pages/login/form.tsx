@@ -11,9 +11,8 @@ import TextBox from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axLogin } from "@services/auth.service";
-import { generateSession } from "@utils/auth";
+import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import useNookies from "next-nookies-persist";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -26,11 +25,10 @@ import Oauth from "./oauth";
 interface ISignInFormProps {
   onSuccess?;
   redirect?: boolean;
-  forward?: string;
+  forward?;
 }
 
 function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
-  const { setNookie } = useNookies();
   const { t } = useTranslation();
   const [user, setUser] = useState();
   const [showMobile, setShowMobile] = useState(false);
@@ -68,7 +66,9 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
   }, [verificationType]);
 
   const authSuccessForward = async (tokens) => {
-    generateSession(setNookie, tokens, redirect, forward, onSuccess);
+    setCookies(tokens);
+    redirect && forwardRedirect(forward);
+    onSuccess && onSuccess();
   };
 
   const handleOnSubmit = async (v) => {

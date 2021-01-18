@@ -1,5 +1,5 @@
-import { Box, Flex, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Box, Flex, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import OTPModal from "@components/auth/otp-modal";
 import PhoneNumber from "@components/form/phone-number";
 import RadioInput from "@components/form/radio";
@@ -12,9 +12,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { axCreateUser } from "@services/auth.service";
-import { generateSession } from "@utils/auth";
+import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import useNookies from "next-nookies-persist";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
@@ -30,7 +29,6 @@ import {
 } from "./options";
 
 function SignUpForm() {
-  const { setNookie } = useNookies();
   const { t } = useTranslation();
   const [hideVerificationMethod, setHideVerificationMethod] = useState(true);
   const [user, setUser] = useState(null);
@@ -101,7 +99,8 @@ function SignUpForm() {
         setUser({ ...data?.user, vt: v.verificationType });
         onOpen();
       } else {
-        generateSession(setNookie, data, true);
+        setCookies(data);
+        forwardRedirect();
       }
     } else {
       notification(data?.message, NotificationType.Info);

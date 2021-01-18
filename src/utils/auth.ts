@@ -1,47 +1,72 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import { Role } from "@interfaces/custom";
-import { axGetUser } from "@services/auth.service";
 import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";
-import { decode } from "base64-url";
-import dayjs from "dayjs";
-import { getNookie, setNookie } from "next-nookies-persist";
+import B64URL from "base64-url";
+import JWTDecode from "jwt-decode";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { emit } from "react-gbus";
 
-interface Session {
-  accessToken: string;
-  refreshToken: string;
-  timeout: string;
-  isExpired?: boolean;
-}
+const getDomain = () => window.location.hostname.split(".").slice(-2).join(".");
 
-export const setTokens = (token) => {
-  setNookie(TOKEN.AUTH, token);
+// sets/re-sets cookies on development mode
+export const setCookies = (tokens, ctx?) => {
+  const cookieOpts = {
+    maxAge: 60 * 60 * 24 * 7, // 1 Week
+    path: "/",
+    domain: getDomain()
+  };
+
+  setCookie(ctx, TOKEN.BATOKEN, tokens.access_token, cookieOpts);
+  setCookie(ctx, TOKEN.BRTOKEN, tokens.refresh_token, cookieOpts);
 };
 
-export const getTokens = (ctx = {}): Session => {
-  const store = getNookie(TOKEN.AUTH, ctx) || {};
-  const accessToken = store[TOKEN.ACCESS];
-  const refreshToken = store[TOKEN.REFRESH];
-  const timeout = store[TOKEN.TIMEOUT] || 0;
-  const isExpired = dayjs(timeout).isBefore(dayjs());
-  return {
-    accessToken,
-    refreshToken,
-    timeout,
-    isExpired
+export const removeCookies = () => {
+  const cookieOpts = {
+    path: "/",
+    domain: getDomain()
   };
+
+  destroyCookie(null, TOKEN.BATOKEN, cookieOpts);
+  destroyCookie(null, TOKEN.BRTOKEN, cookieOpts);
+};
+
+export const forwardRedirect = (forward?) => {
+  window.location.assign(B64URL.decode(forward || "Lw"));
+};
+
+export const getParsedUser = (ctx?) => {
+  const cookies = parseCookies(ctx);
+  const accessToken = cookies?.[TOKEN.BATOKEN];
+  const refreshToken = cookies?.[TOKEN.BRTOKEN];
+
+  if (accessToken) {
+    const decoded: any = JWTDecode(accessToken);
+    return {
+      ...decoded,
+      id: parseInt(decoded.id),
+      accessToken,
+      refreshToken
+    };
+  }
+
+  return {};
+};
+
+export const isTokenExpired = (exp) => {
+  const currentTime = Date.now() / 1000;
+  return exp ? exp < currentTime : true;
 };
 
 export const hasAccess = (allowedRoles: Role[], ctx?) => {
-  const u = getNookie(TOKEN.USER, ctx);
+  const u = getParsedUser(ctx);
 
   if (allowedRoles.includes(Role.Any)) {
     return u?.id ? true : false;
   }
 
   for (const allowedRole of allowedRoles) {
-    if (u?.roles?.find((role) => role.authority === allowedRole)) {
+    if (u?.roles?.includes(allowedRole)) {
       return true;
     }
   }
@@ -91,27 +116,6 @@ export const removeCache = async (whitelist = [] as string[]) => {
   }
 };
 
-export const generateSession = async (
-  setNookieI,
-  tokens,
-  redirect = false,
-  forward?,
-  onSuccess?
-) => {
-  setNookieI(TOKEN.AUTH, tokens);
-  const { success, data } = await axGetUser();
-  if (success) {
-    setNookieI(TOKEN.USER, data);
-    await removeCache();
-    if (onSuccess) {
-      onSuccess(data);
-    }
-    if (redirect) {
-      window.location.assign(decode(forward || "Lw"));
-    }
-  }
-};
-
 /**
  * 🌈 On the spot authorization wrapped in a one magical promise
  *
@@ -119,13 +123,13 @@ export const generateSession = async (
  */
 export const waitForAuth = (): Promise<Record<string, unknown>> => {
   return new Promise((resolve: any, reject) => {
-    const u = getNookie(TOKEN.USER);
+    const u = getParsedUser();
     u?.id ? resolve() : emit(AUTHWALL.INIT, { resolve, reject });
   });
 };
 
 export const adminOrAuthor = (authorId, ctx?) => {
-  const u = getNookie(TOKEN.USER, ctx);
+  const u = getParsedUser(ctx);
   return u?.id === authorId || hasAccess([Role.Admin], ctx);
 };
 

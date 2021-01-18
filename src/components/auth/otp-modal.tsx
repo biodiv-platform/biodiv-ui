@@ -1,3 +1,4 @@
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Heading,
@@ -10,16 +11,14 @@ import {
   ModalOverlay,
   Text
 } from "@chakra-ui/react";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { useLocalRouter } from "@components/@core/local-link";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
-import useTranslation from "@hooks/use-translation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axGetUser, axRegenerateOTP, axValidateUser } from "@services/auth.service";
-import { TOKEN } from "@static/constants";
+import useTranslation from "@hooks/use-translation";
+import { axRegenerateOTP, axValidateUser } from "@services/auth.service";
+import { setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import useNookies from "next-nookies-persist";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -27,7 +26,6 @@ import * as Yup from "yup";
 import OTPIcon from "./otp-icon";
 
 export default function OTPModal({ isOpen, onClose, user }) {
-  const { setNookie } = useNookies();
   const { t } = useTranslation();
   const router = useLocalRouter();
 
@@ -41,23 +39,15 @@ export default function OTPModal({ isOpen, onClose, user }) {
   });
 
   const handleOtpFormSubmit = async (values) => {
-    const { otp } = values;
-    const { id } = user;
+    const { success, data } = await axValidateUser({
+      id: user.id,
+      otp: values.otp
+    });
 
-    const payload = {
-      id,
-      otp
-    };
-
-    const { success: s1, data: tokens } = await axValidateUser(payload);
-    if (s1) {
-      setNookie(TOKEN.AUTH, tokens);
-      const { success: s2, data: userData } = await axGetUser();
-      if (s2) {
-        setNookie(TOKEN.USER, userData);
-        router.push("/");
-      }
-      notification(tokens?.message, NotificationType.Success);
+    if (success) {
+      setCookies(data);
+      router.push("/");
+      notification(data?.message, NotificationType.Success);
     }
   };
 

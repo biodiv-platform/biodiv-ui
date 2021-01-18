@@ -1,20 +1,13 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import { TOKEN } from "@static/constants";
-import { removeCache } from "@utils/auth";
-import useNookies from "next-nookies-persist";
-import { destroyCookie } from "nookies";
+import { removeCache, removeCookies } from "@utils/auth";
 import React, { useEffect } from "react";
 
 const SignOutPage = () => {
   const router = useLocalRouter();
-  const { removeNookie, options } = useNookies();
 
   const destroyAndRedirect = async () => {
-    removeNookie(TOKEN.AUTH);
-    removeNookie(TOKEN.USER);
-    destroyCookie({}, TOKEN.BATOKEN, options);
-    destroyCookie({}, TOKEN.BRTOKEN, options);
     try {
+      removeCookies();
       await removeCache();
     } catch (e) {
       console.error(e);
