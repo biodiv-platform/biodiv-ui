@@ -8,6 +8,7 @@ import Select from "@components/form/select";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
+import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
@@ -48,12 +49,14 @@ function SignUpForm() {
         mobileNumber: Yup.string().test("mobile", "${path} is not valid", (v) =>
           v ? isPossiblePhoneNumber(v) : true
         ),
-        email: Yup.string()
-          .email()
-          .when("mobileNumber", {
-            is: (m) => !m,
-            then: Yup.string().required("either ${path} or mobile number is required")
-          }),
+        email: SITE_CONFIG.REGISTER.MOBILE
+          ? Yup.string()
+              .email()
+              .when("mobileNumber", {
+                is: (m) => !m,
+                then: Yup.string().required("either ${path} or mobile number is required")
+              })
+          : Yup.string().email().required(),
         password: Yup.string().min(8).required(),
         confirmPassword: Yup.string()
           .oneOf([Yup.ref("password"), null], "Passwords do not match")
@@ -82,7 +85,9 @@ function SignUpForm() {
   }, []);
 
   useEffect(() => {
-    setHideVerificationMethod(watchAuth["email"] && watchAuth["mobileNumber"] ? false : true);
+    if (SITE_CONFIG.REGISTER.MOBILE) {
+      setHideVerificationMethod(watchAuth["email"] && watchAuth["mobileNumber"] ? false : true);
+    }
   }, [watchAuth]);
 
   const handleOnSubmit = async (v) => {
