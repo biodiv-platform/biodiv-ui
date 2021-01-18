@@ -1,4 +1,5 @@
 import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -47,7 +48,7 @@ const PhoneNumberInputField = ({
   hint,
   form,
   mb = 4,
-  defaultCountry = "IN",
+  defaultCountry = SITE_CONFIG.MAP.COUNTRY,
   disabled = false,
   ...props
 }: ISelectProps) => {

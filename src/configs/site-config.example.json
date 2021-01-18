@@ -94,6 +94,9 @@
   "PARTICIPANTS": {
     "ACTIVE": true
   },
+  "REGISTER": {
+    "MOBILE": true
+  },
   "SITE": {
     "API_ENDPOINT": "http://localhost:8010/proxy/",
     "API_ENDPOINT_SSR": "http://localhost:8010/proxy/",
