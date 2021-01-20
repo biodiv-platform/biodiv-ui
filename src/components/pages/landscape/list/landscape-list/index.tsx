@@ -1,5 +1,5 @@
 import { Link } from "@chakra-ui/react";
-import ObservationLoading from "@components/pages/observation/list/loading";
+import ObservationLoading from "@components/pages/common/loading";
 import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import React from "react";

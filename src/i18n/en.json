@@ -120,8 +120,13 @@
     "IMPORT_BIBTEX": "Import from BibTex",
     "ISSUE": "Issue",
     "LICENSE": "License",
+    "LIST": {
+      "TITLE": "Documents"
+    },
     "METADATA": "Metadata",
     "NO_GEODATA": "No Geographical Data Available",
+    "NO_USERGROUP": "No Usergroups  found for this document",
+    "DOCUMENTS_FOUND": "Documents Found",
     "PAGES": "Pages",
     "PUBLICATION_DATE": "Publication Date",
     "PUBLICATION_LANGUAGE": "Publication Language",
@@ -135,6 +140,7 @@
     "TITLE": "Title",
     "TYPE": "Type",
     "UNFOLLOW": "Unfollow Document",
+    "UNKNOWN": "Untitled Document",
     "UPLOAD": {
       "MY_UPLOADS": "Draft Media",
       "SELECTED": "Selected Document",
@@ -179,6 +185,9 @@
       "DISTRICT": "District",
       "MAP": {
         "TITLE": "Map"
+      },
+      "PROTECTED_AREA": {
+        "TITLE": "Protected Areas"
       },
       "STATE": {
         "TITLE": "State"

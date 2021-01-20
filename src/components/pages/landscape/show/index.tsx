@@ -1,4 +1,5 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import InfoTab from "./document-box";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Landscape } from "@interfaces/landscape";
@@ -9,6 +10,8 @@ import wkt from "wkt";
 
 import DownloadLandscape from "./download";
 import LandscapeFields from "./fields";
+import LocalLink from "@components/@core/local-link";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 const NakshaMapboxView: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
@@ -21,11 +24,13 @@ const NakshaMapboxView: any = dynamic(
 interface LandscapeShowComponentProps {
   landscape: Landscape;
   landscapeShow;
+  documentList;
 }
 
 export default function LandscapeShowComponent({
   landscape,
-  landscapeShow
+  landscapeShow,
+  documentList
 }: LandscapeShowComponentProps) {
   const { t } = useTranslation();
   const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
@@ -50,6 +55,26 @@ export default function LandscapeShowComponent({
         <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Box>
       <LandscapeFields childs={landscapeShow.contents.childs} />
+      <Stack mb={3}>
+        <Heading mb={3} size="lg">
+          Document List
+        </Heading>
+        {documentList.map((o) => (
+          <InfoTab
+            habitatIds={o.habitatIds}
+            specieIds={o.speciesGroupIds}
+            document={o.document}
+            user={o.userIbp}
+          />
+        ))}
+        <Stack mt={4} isInline justify="flex-end">
+          <LocalLink href={`/document/list`} params={{ state: landscape.shortName }}>
+            <a>
+              {t("HOME.BANNER_MORE")} <ArrowForwardIcon />
+            </a>
+          </LocalLink>
+        </Stack>
+      </Stack>
     </div>
   );
 }

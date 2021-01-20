@@ -1,10 +1,10 @@
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 
-import SubAccordion from "../shared/sub-accordion";
-import FilterMultiSelectPanel from "./location-multi-select";
-import MapAreaFilter from "./map-area";
 import CheckboxFilterPanel from "../shared/checkbox";
+import FilterMultiSelectPanel from "../shared/location-multi-select";
+import SubAccordion from "../shared/sub-accordion";
+import MapAreaFilter from "./map-area";
 
 export default function LocationFilter() {
   const { states } = useObservationFilter();

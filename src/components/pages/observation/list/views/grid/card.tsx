@@ -6,7 +6,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getObservationImage, getSpeciesIcon } from "@utils/media";
 import React from "react";
 
-import ShadowedUser from "../shared/shadowed-user";
+import ShadowedUser from "@components/pages/common/shadowed-user";
 
 export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
   const { t } = useTranslation();

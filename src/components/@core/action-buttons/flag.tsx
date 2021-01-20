@@ -40,6 +40,7 @@ import SimpleActionButton from "./simple";
 
 interface IFlagObservationProps {
   initialFlags: FlagShow[] | undefined;
+  resourceType?;
   resourceId;
   userId;
   flagFunc;
@@ -49,6 +50,7 @@ interface IFlagObservationProps {
 export default function FlagActionButton({
   initialFlags,
   resourceId,
+  resourceType = "observation",
   userId,
   flagFunc,
   unFlagFunc
@@ -100,16 +102,16 @@ export default function FlagActionButton({
   return (
     <>
       <SimpleActionButton
-        icon={flags?.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
+        icon={flags && flags.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
         title={t("ACTIONS.FLAG.TITLE")}
-        colorScheme={flags?.length ? "red" : "purple"}
+        colorScheme={flags && flags?.length ? "red" : "purple"}
         onClick={onOpen}
       />
       <Modal isOpen={isOpen} size="lg" onClose={onClose}>
         <ModalOverlay className="fade">
           <ModalContent className="fadeInUp" borderRadius="md">
             <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
-              <ModalHeader>🚩 Flag observation</ModalHeader>
+              <ModalHeader>🚩 Flag {resourceType}</ModalHeader>
               <ModalCloseButton />
               {flags && flags.length > 0 && (
                 <>
