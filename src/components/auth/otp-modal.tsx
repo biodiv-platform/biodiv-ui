@@ -48,6 +48,8 @@ export default function OTPModal({ isOpen, onClose, user }) {
       setCookies(data);
       router.push("/");
       notification(data?.message, NotificationType.Success);
+    } else {
+      notification(data?.message);
     }
   };
 
