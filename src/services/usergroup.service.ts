@@ -146,18 +146,16 @@ export const axVerifyRequest = async (token) => {
   }
 };
 
-export const axCheckUserGroupMember = async (userGroupId, userId, ctx, cleanCheck?) => {
+export const axCheckUserGroupMember = async (userGroupId) => {
   try {
-    if (userGroupId && userId) {
-      const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/member/${userGroupId}`, {
-        params: { ctx }
-      });
+    if (userGroupId) {
+      const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/member/${userGroupId}`);
       return data;
     }
   } catch (e) {
     console.error(e);
   }
-  return cleanCheck ? hasAccess([Role.Admin]) : !userGroupId;
+  return true;
 };
 
 export const axCheckUserGroupFounderOrAdmin = async (userGroupId, cleanCheck?) => {

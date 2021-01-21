@@ -34,7 +34,8 @@ export default function JoinUserGroup() {
     setLoading(false);
   };
 
-  return isCurrentGroupMember || !isLoggedIn ? null : (
+  // explicit false check is necessary to avoid button flickr
+  return isCurrentGroupMember === false && isLoggedIn ? (
     <Button
       className="join-usergroup"
       size="sm"
@@ -45,5 +46,5 @@ export default function JoinUserGroup() {
     >
       {t("GROUP.JOIN")}
     </Button>
-  );
+  ) : null;
 }

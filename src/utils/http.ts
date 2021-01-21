@@ -1,7 +1,7 @@
 import { ENDPOINT } from "@static/constants";
 import axios from "axios";
 
-import { getTokens, setTokens } from "./auth";
+import { getParsedUser, isTokenExpired, setCookies } from "./auth";
 import notification from "./notification";
 
 const defaultHeaders = {
@@ -21,7 +21,7 @@ const axRenewToken = async (refreshToken: string) => {
   const res = await axios.post(`${ENDPOINT.USER}/v1/authenticate/refresh-tokens`, null, {
     params: { refreshToken }
   });
-  setTokens(res.data);
+  setCookies(res.data);
   return res.data.accessToken;
 };
 
@@ -32,8 +32,9 @@ const axRenewToken = async (refreshToken: string) => {
  */
 export const getBearerToken = async (ctx?) => {
   try {
-    const { accessToken, refreshToken, isExpired } = getTokens(ctx);
-    const finalToken = !isExpired ? accessToken : await axRenewToken(refreshToken);
+    const user = getParsedUser(ctx);
+    const isExpired = isTokenExpired(user.exp);
+    const finalToken = isExpired ? await axRenewToken(user.refreshToken) : user.accessToken;
     return `Bearer ${finalToken}`;
   } catch (e) {
     return false;

@@ -11,11 +11,10 @@ import { customTheme } from "@configs/theme";
 import { GlobalStateProvider } from "@hooks/use-global-state";
 import { LocaleProvider } from "@hooks/use-locale";
 import { UserGroupIbp } from "@interfaces/observation";
-import { axCheckUserGroupMember, axGroupList } from "@services/usergroup.service";
-import { TOKEN } from "@static/constants";
+import { axGroupList } from "@services/usergroup.service";
+import { getParsedUser } from "@utils/auth";
 import { absoluteUrl } from "@utils/basic";
 import { getLang } from "@utils/lang";
-import { NookiesProvider, parseNookies } from "next-nookies-persist";
 import App, { AppContext } from "next/app";
 import dynamic from "next/dynamic";
 import Router from "next/router";
@@ -35,57 +34,38 @@ interface AppProps {
   currentGroup: UserGroupIbp;
   domain;
   groups: UserGroupIbp[];
-  isCurrentGroupMember: boolean;
   lang;
-  nookies;
+  user;
   pageProps;
   pages;
 }
 
-function MainApp({
-  Component,
-  currentGroup,
-  domain,
-  groups,
-  isCurrentGroupMember,
-  lang,
-  nookies,
-  pageProps
-}: AppProps) {
+function MainApp({ Component, currentGroup, domain, groups, lang, user, pageProps }: AppProps) {
   const config = { header: true, footer: true, ...Component?.config };
 
   return (
     <BusProvider>
       <LocaleProvider lang={lang}>
-        <NookiesProvider initialValue={nookies} options={{ domain }}>
-          <ChakraProvider theme={customTheme}>
-            <GlobalStateProvider
-              initialState={{
-                user: nookies[TOKEN.USER],
-                groups,
-                currentGroup,
-                isCurrentGroupMember
-              }}
-            >
-              <Metadata />
-              <div className="content">
-                {config.header && (
-                  <>
-                    <NavigationMenuDark />
-                    <NavigationMenuLight />
-                  </>
-                )}
-                <AutoSync />
-                <div id="main">
-                  <Component {...pageProps} />
-                </div>
-                {SITE_CONFIG.FEEDBACK.ACTIVE && <Feedback />}
+        <ChakraProvider theme={customTheme}>
+          <GlobalStateProvider initialState={{ user, domain, groups, currentGroup }}>
+            <Metadata />
+            <div className="content">
+              {config.header && (
+                <>
+                  <NavigationMenuDark />
+                  <NavigationMenuLight />
+                </>
+              )}
+              <AutoSync />
+              <div id="main">
+                <Component {...pageProps} />
               </div>
-              {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
-              <AuthWall />
-            </GlobalStateProvider>
-          </ChakraProvider>
-        </NookiesProvider>
+              {SITE_CONFIG.FEEDBACK.ACTIVE && <Feedback />}
+            </div>
+            {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
+            <AuthWall />
+          </GlobalStateProvider>
+        </ChakraProvider>
       </LocaleProvider>
     </BusProvider>
   );
@@ -96,14 +76,9 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
 
   const aReq = absoluteUrl(appContext.ctx, appContext.router.asPath);
   const domain = aReq.hostname.split(".").slice(-2).join(".");
-  const nookies = parseNookies(appContext.ctx);
+  const user = getParsedUser(appContext.ctx);
 
   const { currentGroup, groups } = await axGroupList(aReq.href);
-  const isCurrentGroupMember = await axCheckUserGroupMember(
-    currentGroup.id,
-    nookies?.[TOKEN.USER]?.id,
-    appContext.ctx
-  );
 
   const lang = getLang(appContext.ctx);
 
@@ -112,9 +87,8 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
     lang,
     groups,
     currentGroup,
-    isCurrentGroupMember,
     domain,
-    nookies
+    user
   };
 };
 

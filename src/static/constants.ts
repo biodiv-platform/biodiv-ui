@@ -42,8 +42,6 @@ export const DATE_ACCURACY = {
 export const TOKEN = {
   BATOKEN: "BAToken",
   BRTOKEN: "BRToken",
-  AUTH: "token",
-  USER: "user",
   ACCESS: "access_token",
   REFRESH: "refresh_token",
   TIMEOUT: "timeout",

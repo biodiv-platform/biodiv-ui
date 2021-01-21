@@ -14,9 +14,10 @@ export default function SubMenu({ rows, onClose, prefix = "" }) {
       {rows.map((item) => {
         const label = item.name && t(prefix + item.name);
 
+        // explicit false check is necessary to avoid button flickr
         return (
           <MenuItem key={item.name}>
-            {isLoggedIn && item.memberOnly && !isCurrentGroupMember ? (
+            {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
               <Link w="full" onClick={() => notification(t("HEADER.MEMBER_ONLY"))}>
                 {label}
               </Link>
