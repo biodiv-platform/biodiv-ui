@@ -40,7 +40,7 @@
     "flat": "^5.0.2",
     "friendly-http-status": "^1.0.0",
     "human-readable-numbers": "^0.9.5",
-    "immer": "^8.0.0",
+    "immer": "^8.0.1",
     "indian-number-format": "^1.0.4",
     "keen-slider": "^5.3.5",
     "local-storage-json": "^1.1.0",
