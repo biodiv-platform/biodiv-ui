@@ -1,10 +1,10 @@
-import { SimpleGrid } from '@chakra-ui/react';
-import useObservationFilter from '@components/pages/observation/common/use-observation-filter';
-import React from 'react';
+import { SimpleGrid } from "@chakra-ui/react";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import React from "react";
 
-import LifeList from './life-list';
-import SpeciesGroups from './species-groups';
-import StatesDistribution from './states-distribution';
+import LifeList from "./life-list";
+import SpeciesGroups from "./species-groups";
+import StatesDistribution from "./states-distribution";
 
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();

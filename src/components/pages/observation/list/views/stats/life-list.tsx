@@ -1,8 +1,8 @@
-import useTranslation from '@hooks/use-translation';
-import React from 'react';
+import useTranslation from "@hooks/use-translation";
+import React from "react";
 
-import LifeListTable from './table';
-import useUniqueSpecies from './use-unique-species';
+import LifeListTable from "./table";
+import useUniqueSpecies from "./use-unique-species";
 
 const LifeList = ({ filter }) => {
   const uniqueSpecies = useUniqueSpecies({ filter });
