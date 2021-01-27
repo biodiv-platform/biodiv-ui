@@ -583,7 +583,7 @@
   },
   "LIST": {
     "CHART": {
-      "SGROUP": "Species Groups",
+      "SGROUP": "Species groups",
       "STATES": "State distribution"
     },
     "CREATED_ON": "Created on",
@@ -601,6 +601,11 @@
       "LIST": "List",
       "MAP": "Map",
       "STATS": "Metrics"
+    },
+    "LIFE_LIST": {
+      "HEADING": "Life list",
+      "SPECIES_HEADER": "Species",
+      "COUNT_HEADER": "Counts"
     }
   },
   "LOAD_MORE": "Load More ↺",
