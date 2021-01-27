@@ -27,7 +27,7 @@ export const getServerSideProps = async (ctx) => {
     props: {
       observation: data,
       traits: res.data,
-      speciesGroups,
+      speciesGroups: speciesGroups || [],
       success
     }
   };
