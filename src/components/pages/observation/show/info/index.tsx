@@ -4,6 +4,7 @@ import BlueLink from "@components/@core/blue-link";
 import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
+import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
@@ -41,13 +42,15 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           {o.recoIbp?.commonName && <div>{o.recoIbp.commonName}</div>}
         </ResponsiveInfo>
 
-        <ResponsiveInfo title="OBSERVATION.GROUP">
-          <SpeciesGroupBox
-            id={o.observation?.groupId}
-            speciesGroups={speciesGroups}
-            observationId={o.observation?.id}
-          />
-        </ResponsiveInfo>
+        {SITE_CONFIG.USERGROUP.ACTIVE && (
+          <ResponsiveInfo title="OBSERVATION.GROUP">
+            <SpeciesGroupBox
+              id={o.observation?.groupId}
+              speciesGroups={speciesGroups}
+              observationId={o.observation?.id}
+            />
+          </ResponsiveInfo>
+        )}
 
         <ResponsiveInfo title="OBSERVATION.PLACE">{o.observation?.placeName}</ResponsiveInfo>
 
