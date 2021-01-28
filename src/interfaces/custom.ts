@@ -89,6 +89,7 @@ export interface ObservationData {
 export interface DocumentData {
   l: any[];
   mvp: Record<string, unknown>;
+  ag?: any;
   n: number;
   hasMore: boolean;
 }

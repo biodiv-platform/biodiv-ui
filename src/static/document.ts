@@ -64,3 +64,23 @@ export const DEFAULT_BIB_FIELDS = {
   abstract: false,
   title: true
 };
+
+export const DOUCMENT_FILTER_KEY = {
+  itemType: {
+    filterkey: "itemType",
+    searchKey: "document.itemtype"
+  },
+  author: {
+    filterKey: "author",
+    searchKey: "document.author"
+  },
+  publisher: {
+    filterKey: "publisher",
+    searchKey: "document.publisher"
+  },
+
+  title: {
+    filterKey: "title",
+    searchKey: "document.title"
+  }
+};

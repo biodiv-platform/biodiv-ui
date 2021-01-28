@@ -60,7 +60,7 @@ export default function FilterCheckboxes({
         </InputGroup>
       )}
       <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
-        {filteredOptions.map(({ label, value, stat, valueIcon }) => (
+        {filteredOptions.map(({ label, value, valueIcon }) => (
           <Checkbox key={label} value={value} alignItems="baseline">
             {valueIcon && (
               <Image
@@ -74,7 +74,7 @@ export default function FilterCheckboxes({
               />
             )}
             {skipOptionsTranslation ? label || value : t(translateKey + label)}
-            <FilterStat statKey={statKey} subStatKey={stat || value} />
+            <FilterStat statKey={statKey} subStatKey={label || value} />
           </Checkbox>
         ))}
       </CheckboxGroup>

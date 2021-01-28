@@ -6,12 +6,30 @@ import React, { useMemo } from "react";
 import CustomCheckbox from "./checkbox";
 
 const SpeciesGroupsFilter = () => {
-  const { species, filter, setFilter } = useDocumentFilter();
+  const {
+    species,
+    filter,
+    setFilter,
+    documentData: {
+      ag: { groupSpeciesName }
+    }
+  } = useDocumentFilter();
+
+  const speciesMapper = () => {
+    return species
+      ?.reduce((acc, item) => {
+        if (groupSpeciesName[item.id]) {
+          acc.push({ ...item, agg: groupSpeciesName[item.id] });
+        } else {
+          acc.push({ ...item, agg: 0 });
+        }
+        return acc;
+      }, [])
+      .sort((a, b) => a.order - b.order);
+  };
 
   const defaultValue = useMemo(() => stringToArray(filter.sGroup), []);
-  const speciesGroupList = useMemo(() => species?.slice(1).sort((a, b) => a.order - b.order), [
-    species
-  ]);
+  const speciesGroupList = useMemo(() => speciesMapper(), [species]);
 
   const onChange = (v) => {
     setFilter((_draft) => {
@@ -37,7 +55,7 @@ const SpeciesGroupsFilter = () => {
             key={o.id}
             id={o.id.toString()}
             label={o.name}
-            stat={0} //replace with ag stats
+            stat={o.agg} //replace with ag stats
             {...getCheckboxProps({ value: o.id.toString() })}
           />
         ))}

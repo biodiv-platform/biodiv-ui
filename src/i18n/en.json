@@ -108,6 +108,7 @@
     },
     "CREATED_ON": "Created on",
     "DESCRIPTION": "Description",
+    "DOCUMENTS_FOUND": "Documents Found",
     "DOI": "DOI",
     "DOWNLOAD": {
       "CITATION": "Citation",
@@ -126,7 +127,6 @@
     "METADATA": "Metadata",
     "NO_GEODATA": "No Geographical Data Available",
     "NO_USERGROUP": "No Usergroups  found for this document",
-    "DOCUMENTS_FOUND": "Documents Found",
     "PAGES": "Pages",
     "PUBLICATION_DATE": "Publication Date",
     "PUBLICATION_LANGUAGE": "Publication Language",
@@ -181,6 +181,8 @@
         "VALIDATED": "Validated"
       }
     },
+    "DOCUMENT_TITLE": "Title",
+    "ITEM_TYPE": "Item Type",
     "LOCATION": {
       "DISTRICT": "District",
       "MAP": {

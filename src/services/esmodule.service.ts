@@ -61,15 +61,15 @@ export const axGetUserLeaderboard = async (payload, user) => {
   }
 };
 
-export const axSearchFilterByName = async (text, field) => {
+export const axSearchFilterByName = async (text, field, index = "eo") => {
   try {
     const { data } = await plainHttp.get(
-      `${ENDPOINT.ESMODULE}/v1/services/filterautocomplete/eo/er`,
+      `${ENDPOINT.ESMODULE}/v1/services/filterautocomplete/${index}/er`,
       {
         params: { text, field }
       }
     );
-    return data.map((i) => ({ value: i, label: i }));
+    return data.map((i) => ({ value: i, label: i, text }));
   } catch (e) {
     console.error(e);
     return [];
