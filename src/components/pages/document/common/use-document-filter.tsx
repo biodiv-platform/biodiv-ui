@@ -76,7 +76,7 @@ export const DocumentFilterProvider = (props) => {
         if (filter.f.offset === 0) {
           _draft.l = [];
         }
-        if (data.documentList.length) {
+        if (data?.documentList?.length) {
           _draft.l.push(...data.documentList);
           _draft.hasMore = data.documentList.length === Number(filter.f.max);
         }

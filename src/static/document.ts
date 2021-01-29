@@ -79,6 +79,11 @@ export const DOUCMENT_FILTER_KEY = {
     searchKey: "document.publisher"
   },
 
+  tags: {
+    filterKey: "tags",
+    searchKey: "tags.name"
+  },
+
   title: {
     filterKey: "title",
     searchKey: "document.title"

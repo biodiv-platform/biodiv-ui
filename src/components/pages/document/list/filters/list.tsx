@@ -9,13 +9,14 @@ import {
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
-import AuthorFilter from "./author";
 
+import AuthorFilter from "./author";
 import DataQuality from "./data-quality";
 import ItemTypeFilter from "./itemType";
 import Location from "./location";
 import PublisherFilter from "./publisher";
 import SpeciesGroupsFilter from "./species-groups";
+import TagsFilter from "./tags";
 import TimeFilter from "./time";
 import TitleFilter from "./title";
 import UserFilter from "./user";
@@ -69,6 +70,8 @@ export default function FiltersList() {
       <PublisherFilter />
 
       <AuthorFilter />
+
+      <TagsFilter />
 
       <AccordionItem>
         {({ isExpanded }) => (

@@ -141,6 +141,7 @@
     "TYPE": "Type",
     "UNFOLLOW": "Unfollow Document",
     "UNKNOWN": "Untitled Document",
+    "UPDATED_ON": "Date Updated",
     "UPLOAD": {
       "MY_UPLOADS": "Draft Media",
       "SELECTED": "Selected Document",
