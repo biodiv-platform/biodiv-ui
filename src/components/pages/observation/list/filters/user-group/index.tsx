@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import React, { useMemo } from "react";
 
@@ -10,7 +11,7 @@ export default function UserGroupFilter() {
     []
   );
 
-  return currentGroup?.id ? null : (
+  return !currentGroup?.id && SITE_CONFIG.USERGROUP.ACTIVE ? (
     <CheckboxFilterPanel
       filterKey="userGroupList"
       options={groupOptions}
@@ -19,5 +20,5 @@ export default function UserGroupFilter() {
       statKey="groupUserGroupName"
       translateKey="FILTERS.USERGROUP."
     />
-  );
+  ) : null;
 }

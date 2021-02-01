@@ -1,5 +1,7 @@
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
-import InfoTab from "./document-box";
+import BlueLink from "@components/@core/blue-link";
+import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Landscape } from "@interfaces/landscape";
@@ -8,10 +10,9 @@ import dynamic from "next/dynamic";
 import React from "react";
 import wkt from "wkt";
 
+import InfoTab from "./document-box";
 import DownloadLandscape from "./download";
 import LandscapeFields from "./fields";
-import LocalLink from "@components/@core/local-link";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 const NakshaMapboxView: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
@@ -57,23 +58,24 @@ export default function LandscapeShowComponent({
       <LandscapeFields childs={landscapeShow.contents.childs} />
       <Stack mb={3}>
         <Heading mb={3} size="lg">
-          Document List
+          {t("DOCUMENT.LIST.TITLE")}
         </Heading>
         {documentList.map((o) => (
           <InfoTab
+            key={o.document.id}
             habitatIds={o.habitatIds}
             specieIds={o.speciesGroupIds}
             document={o.document}
             user={o.userIbp}
           />
         ))}
-        <Stack mt={4} isInline justify="flex-end">
+        <Flex py={2} justifyContent="flex-end">
           <LocalLink href={`/document/list`} params={{ state: landscape.shortName }}>
-            <a>
+            <BlueLink>
               {t("HOME.BANNER_MORE")} <ArrowForwardIcon />
-            </a>
+            </BlueLink>
           </LocalLink>
-        </Stack>
+        </Flex>
       </Stack>
     </div>
   );

@@ -37,7 +37,7 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
         }, [child]);
 
         return (
-          <>
+          <React.Fragment key={child.id}>
             <Box pb={6} ml={ml} hidden={!content && !canEdit && ml}>
               <Heading mb={3} size={size}>
                 {child.header}
@@ -70,7 +70,7 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
               )}
             </Box>
             {child.childs.length > 0 && <LandscapeFields childs={child.childs} size="md" ml={4} />}
-          </>
+          </React.Fragment>
         );
       })}
     </div>

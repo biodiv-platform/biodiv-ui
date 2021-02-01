@@ -1763,10 +1763,10 @@
     redaxios "^0.3.0"
     ts-debounce "^2.1.0"
 
-"@ibp/naksha-mapbox-view@3.8.0":
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.8.0.tgz#55b0a645cb19f270121dccba6b328f2e2a499381"
-  integrity sha512-wGDsCpHz+NhiY3rQbqcfGn3FVmSecvUfyxa18pyVRPiHXHD5zetlRdZDdF4GNtBBLIcWgyCow9VN3zeiyHACXw==
+"@ibp/naksha-mapbox-view@3.8.5":
+  version "3.8.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.8.5.tgz#f689b4d80d897e30485135edcc461de3bc77df08"
+  integrity sha512-IXWMITEibMitekhJaAlDJsGFM8Rqm3oiRziyh41jpWDL5AV9kVpwRX7ZV7OE76aybxi0HO3avyckMFWTZZFohg==
   dependencies:
     "@ibp/naksha-commons" "3.8.0"
 
@@ -6521,16 +6521,16 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.8.2:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.8.2.tgz#9ea96d1dc617a71cf506282445986650eb0b674c"
-  integrity sha512-Pkgi43xy+IDLLKlOc6WdzaLn+W2u3Abn2T90jZRRhiK+1nHqT4s1aiYHUbZtkqRNbr7zHf6+zoXb9VJy7XAcvg==
+naksha-components-react@^3.8.5:
+  version "3.8.5"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.8.5.tgz#e925d6b251a89adf646235ea039b4a5648d8d678"
+  integrity sha512-ZEAJOWYDoeZGWnqmhecpKUWEgNunBPE3zN9IqQbar8OGcXECpDjPTgPFsQpeoGpax1hcO+3vYRqLSzWSSCIeQA==
   dependencies:
     "@ibp/naksha-commons" "3.8.0"
     "@ibp/naksha-gmaps-draw" "3.8.0"
     "@ibp/naksha-mapbox-draw" "3.8.0"
     "@ibp/naksha-mapbox-list" "3.8.1"
-    "@ibp/naksha-mapbox-view" "3.8.0"
+    "@ibp/naksha-mapbox-view" "3.8.5"
     "@ibp/naksha-upload" "3.8.2"
 
 nan@^2.12.1:
