@@ -10,7 +10,10 @@ const SpeciesGroupsFilter = () => {
 
   const defaultValue = useMemo(() => stringToArray(filter?.sGroup), []);
   const speciesGroupList = useMemo(
-    () => speciesGroup?.slice(1).sort((a, b) => (a?.order || 0) - (b.order || 0)),
+    () =>
+      speciesGroup
+        ?.filter((o) => o.name !== "All") // removes All from filter explicitly
+        .sort((a, b) => (a?.order || 0) - (b.order || 0)),
     speciesGroup
   );
 
@@ -31,33 +34,17 @@ const SpeciesGroupsFilter = () => {
   });
 
   return (
-    <>
-      <SimpleGrid gridGap={2} columns={5}>
-        {speciesGroupList?.map((o) => (
-          <CustomCheckbox
-            key={o.id}
-            id={o.id?.toString()}
-            label={o.name}
-            stat={o.name ? observationData?.ag?.groupSpeciesName?.[o.name] : 0}
-            {...getCheckboxProps({ value: o.id?.toString() })}
-          />
-        ))}
-      </SimpleGrid>
-      {/*  */}
-      {/* <CheckboxGroup defaultValue={defaultValue} onChange={onChange}>
-        <SimpleGrid gridGap={2} columns={5}>
-          {speciesGroupList.map((o) => (
-            <CustomCheckbox
-              key={o.id}
-              id={o.id.toString()}
-              value={o.id.toString()}
-              label={o.name}
-              stat={observationData.ag.groupSpeciesName[o.name]}
-            />
-          ))}
-        </SimpleGrid>
-      </CheckboxGroup> */}
-    </>
+    <SimpleGrid gridGap={2} columns={5}>
+      {speciesGroupList?.map((o) => (
+        <CustomCheckbox
+          key={o.id}
+          id={o.id?.toString()}
+          label={o.name}
+          stat={o.name ? observationData?.ag?.groupSpeciesName?.[o.name] : 0}
+          {...getCheckboxProps({ value: o.id?.toString() })}
+        />
+      ))}
+    </SimpleGrid>
   );
 };
 
