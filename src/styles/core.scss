@@ -42,7 +42,6 @@ span,
 }
 
 .hidden,
-[data-hidden="true"],
 [hidden="true"] {
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
@@ -52,6 +51,10 @@ span,
   overflow: hidden;
   padding: 0;
   position: absolute;
+}
+
+[data-hidden="true"] {
+  display: hidden !important;
 }
 
 .start-of-content {
