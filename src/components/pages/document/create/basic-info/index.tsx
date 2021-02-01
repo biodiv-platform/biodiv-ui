@@ -96,11 +96,7 @@ export default function BasicInfo({ hForm, documentTypes, setBibField }: BasicIn
           />
         </div>
         <div>
-          <TextBoxField
-            name="contribution"
-            label={t("DOCUMENT.CONTRIBUTION")}
-            form={hForm}
-          />
+          <TextBoxField name="contribution" label={t("DOCUMENT.CONTRIBUTION")} form={hForm} />
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
             <DatePickerField
               name="fromDate"

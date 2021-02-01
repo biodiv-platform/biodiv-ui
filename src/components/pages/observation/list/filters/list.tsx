@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
@@ -132,19 +133,21 @@ export default function FiltersList() {
 
       <UserGroupFilter />
 
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton>
-              <Box flex={1} textAlign="left">
-                {t("FILTERS.CUSTOM_FIELDS.TITLE")}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>{isExpanded && <CustomFieldsFilter />}</AccordionPanel>
-          </>
-        )}
-      </AccordionItem>
+      {SITE_CONFIG.CUSTOM_FIELDS.ACTIVE && (
+        <AccordionItem>
+          {({ isExpanded }) => (
+            <>
+              <AccordionButton>
+                <Box flex={1} textAlign="left">
+                  {t("FILTERS.CUSTOM_FIELDS.TITLE")}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel>{isExpanded && <CustomFieldsFilter />}</AccordionPanel>
+            </>
+          )}
+        </AccordionItem>
+      )}
     </Accordion>
   );
 }

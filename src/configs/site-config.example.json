@@ -5,6 +5,9 @@
   "ACTIVITY": {
     "ACTIVE": true
   },
+  "CUSTOM_FIELDS": {
+    "ACTIVE": false
+  },
   "DASHBOARD": {
     "ACTIVE": true
   },
