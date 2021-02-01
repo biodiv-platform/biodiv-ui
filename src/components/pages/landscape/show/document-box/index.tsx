@@ -1,4 +1,4 @@
-import { Avatar, Badge, Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import DocumentIcon from "@components/pages/document/common/document-icon";
 import useGlobalState from "@hooks/use-global-state";
@@ -21,52 +21,45 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
   const { currentGroup } = useGlobalState();
 
   return (
-    <Stack color="gray.600" display="flex" flexDir="column" justifyContent="flex-start">
-      <Box p={2} borderWidth="2px">
+    <Stack color="gray.600" display="flex" flexDir="column" justifyContent="flex-start" bg="white">
+      <Box p={3} borderWidth="1px" borderColor="gray.300" borderRadius="md">
         <LocalLink href={`/document/show/${document.id}`}>
           <a>
-            <Heading size="sm" mb={2} title={document?.title}>
-              <Flex justifyContent="space-between">
-                <Flex alignItems="center">
-                  <DocumentIcon />
-                  <Text isTruncated maxWidth={["30vh", "30vh", "40vh", "120vh"]} m={2}>
-                    {document?.title || t("OBSERVATION.UNKNOWN")}
-                  </Text>
-                  <Badge ml={2} colorScheme="red">
-                    {document.item_type}
-                  </Badge>
-                </Flex>
-              </Flex>
-            </Heading>
+            <HStack alignItems="center" spacing={4}>
+              <DocumentIcon />
+              <Heading fontSize="lg" className="elipsis-2">
+                {document?.title || t("DOCUMENT.UNKNOWN")}
+              </Heading>
+              <Badge colorScheme="red">{document.itemtype}</Badge>
+            </HStack>
           </a>
         </LocalLink>
 
-        <Stack isInline ml={2} justifyContent="space-between" alignItems="center">
-          <Stack isInline justify="space-between" align="center">
+        <Stack isInline justifyContent="space-between" alignItems="flex-end">
+          <Stack isInline justify="space-between" alignItems="flex-end">
             {document?.author && (
-              <Text isTruncated maxWidth={["30vh", "30vh", "40vh", "120vh"]} title="Author">
-                <PeopleIcon mb={1} mr={3} /> {document.author}
+              <Text isTruncated maxWidth={{ base: "30vh", sm: "40vh", md: "120vh" }} title="Author">
+                <PeopleIcon mr={2} />
+                {document.author}
               </Text>
             )}
-            <Stack align="center" isInline>
-              {document.year && (
-                <Text title="Date">
-                  <CalendarIcon mb={1} mr={4} />
-                  {document.year}
-                </Text>
-              )}
-              {document.journal && (
-                <Text title="journal">
-                  <LockIcon m={2} />
-                  {document.journal}
-                </Text>
-              )}
-            </Stack>
+            {document.year && (
+              <Text title="Date">
+                <CalendarIcon mr={2} />
+                {document.year}
+              </Text>
+            )}
+            {document.journal && (
+              <Text title="journal">
+                <LockIcon mr={2} />
+                {document.journal}
+              </Text>
+            )}
           </Stack>
           <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
             <Flex alignItems="center">
               <Avatar
-                m={1}
+                mr={1}
                 flexShrink={0}
                 size="sm"
                 name={user?.name}
