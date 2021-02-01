@@ -45,7 +45,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
         itemTypeId: Yup.number().required(),
         bibFieldData: Yup.object().shape(bibField.schema),
 
-        contribution: Yup.string().required(),
+        contribution: Yup.string(),
         licenseId: Yup.number().required(),
         fromDate: Yup.mixed().required(),
 

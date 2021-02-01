@@ -100,7 +100,6 @@ export default function BasicInfo({ hForm, documentTypes, setBibField }: BasicIn
             name="contribution"
             label={t("DOCUMENT.CONTRIBUTION")}
             form={hForm}
-            isRequired={true}
           />
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
             <DatePickerField
