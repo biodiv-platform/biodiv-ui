@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface IBoxHeadingProps {
@@ -7,6 +7,8 @@ interface IBoxHeadingProps {
   subTitle?;
   p?;
   fontSize?;
+  onClick?;
+  styles?: FlexProps;
 }
 
 export default function BoxHeading({
@@ -14,7 +16,9 @@ export default function BoxHeading({
   children,
   subTitle,
   p = 4,
-  fontSize = "lg"
+  fontSize = "lg",
+  onClick,
+  styles
 }: IBoxHeadingProps) {
   return (
     <Flex
@@ -25,6 +29,8 @@ export default function BoxHeading({
       minH="3rem"
       fontWeight="bold"
       align="center"
+      onClick={onClick}
+      {...styles}
     >
       {children}
       {subTitle && (

@@ -1,5 +1,6 @@
-import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config.json";
 import { axGetUserGroupList } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
 import { Controller, UseFormMethods } from "react-hook-form";
@@ -22,7 +23,7 @@ export default function UserGroups({ name, label, form }: IUserGroupsProps) {
   }, []);
 
   return (
-    <Box>
+    <Box data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE}>
       <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
         👥 {label} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>

@@ -1,4 +1,4 @@
-import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
@@ -116,6 +116,7 @@ export default function Container({ o }) {
       <VerticalTabs>
         <Tabs
           isLazy={true}
+          h={{ md: "100%" }}
           variant="unstyled"
           className="tabs"
           index={tabIndex}
@@ -142,8 +143,8 @@ export default function Container({ o }) {
             </TabPanel>
           </TabPanels>
           <TabList>
-            {actionTabs.map(({ name, icon }) => (
-              <Tab key={name}>
+            {actionTabs.map(({ name, icon, active = true }) => (
+              <Tab key={name} data-hidden={!active}>
                 <Tooltip title={t(name)}>
                   <div>
                     {icon} <span>{t(name)}</span>
@@ -151,6 +152,7 @@ export default function Container({ o }) {
                 </Tooltip>
               </Tab>
             ))}
+            <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
           </TabList>
         </Tabs>
       </VerticalTabs>

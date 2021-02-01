@@ -38,7 +38,7 @@ const SpeciesGroupsFilter = () => {
             key={o.id}
             id={o.id?.toString()}
             label={o.name}
-            stat={o.name ? observationData?.ag.groupSpeciesName?.[o.name] : 0}
+            stat={o.name ? observationData?.ag?.groupSpeciesName?.[o.name] : 0}
             {...getCheckboxProps({ value: o.id?.toString() })}
           />
         ))}

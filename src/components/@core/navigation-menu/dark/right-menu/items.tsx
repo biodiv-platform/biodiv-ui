@@ -13,6 +13,7 @@ export default [
   {
     name: "HEADER.MENU_PRIMARY.CONTRIBUTE.",
     nameIcon: AddIcon,
+    isLazy: true,
     rows: [
       {
         active: SITE_CONFIG.OBSERVATION.ACTIVE,

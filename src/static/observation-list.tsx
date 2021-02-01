@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
 import StatsIcon from "@icons/stats";
@@ -57,7 +58,8 @@ export const actionTabs = [
   },
   {
     name: "OBSERVATION.USERGROUPS",
-    icon: "👥"
+    icon: "👥",
+    active: SITE_CONFIG.USERGROUP.ACTIVE
   },
   {
     name: "OBSERVATION.TRAITS",

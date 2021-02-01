@@ -47,7 +47,7 @@ export default function ObservationShowPageComponent({
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
 
   useEffect(() => {
-    setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name);
+    setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name || "");
   }, [o.observation?.groupId]);
 
   useEffect(() => {
@@ -75,16 +75,10 @@ export default function ObservationShowPageComponent({
         <Box gridColumn="1/3" className="fadeInUp delay-3">
           <CarouselObservation
             observationId={o.observation?.id}
-            resources={o.observationResource}
+            resources={o.observationResource || []}
             reco={o.recoIbp}
             speciesGroup={speciesGroup}
           />
-          {/* <Carousel
-            observationId={o.observation?.id}
-            resources={o.observationResource}
-            reco={o.recoIbp}
-            speciesGroup={speciesGroup}
-          /> */}
         </Box>
         <Box>
           <Sidebar

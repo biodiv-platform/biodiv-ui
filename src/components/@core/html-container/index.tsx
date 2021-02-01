@@ -6,16 +6,12 @@ const HTMLContainer = styled.div`
 
   a {
     color: var(--blue-500);
-    text-decoration: underline;
+    border-bottom: 1px dotted var(--blue-500);
+    &:hover {
+      border-bottom-style: solid;
+    }
   }
 
-  .mention-link {
-    background: var(--blue-50);
-    border-radius: 2rem;
-    padding: 0 0.4rem;
-    text-decoration: none !important;
-    display: inline-block;
-  }
   ul,
   ol {
     margin-left: 1.3rem;
@@ -24,30 +20,40 @@ const HTMLContainer = styled.div`
     list-style-type: decimal;
   }
 
+  p,
+  ul,
+  ol {
+    margin-bottom: 0.75rem;
+  }
+
+  hr {
+    margin: 1.6rem 0;
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6,
-  p {
+  h6 {
+    font-weight: 600;
     margin-bottom: 0.5rem;
   }
 
   h1 {
-    font-size: 2em;
+    font-size: 2.25rem;
   }
   h2 {
-    font-size: 1.5em;
+    font-size: 2rem;
   }
   h3 {
-    font-size: 1.17em;
+    font-size: 1.875rem;
   }
   h5 {
-    font-size: 0.83em;
+    font-size: 1.25rem;
   }
   h6 {
-    font-size: 0.75em;
+    font-size: 0.875rem;
   }
 
   img,

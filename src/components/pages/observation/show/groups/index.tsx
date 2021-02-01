@@ -1,6 +1,7 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import { Role } from "@interfaces/custom";
 import { Featured, ObservationUserPermission, UserGroupIbp } from "@interfaces/observation";
 import { hasAccess } from "@utils/auth";
@@ -39,7 +40,7 @@ const Groups = ({
   }, [isLoggedIn]);
 
   return (
-    <Box mb={4} className="white-box">
+    <Box mb={4} className="white-box" data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE}>
       <Tabs isLazy={true}>
         <TabList>
           <Tab>👥 {t("OBSERVATION.USERGROUPS")}</Tab>
