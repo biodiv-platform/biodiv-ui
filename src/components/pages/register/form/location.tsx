@@ -12,7 +12,7 @@ import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
-import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS, GMAP_LIBRARIES } from "@static/location";
+import { AUTOCOMPLETE_FIELDS, GMAP_LIBRARIES } from "@static/location";
 import { getMapCenter } from "@utils/location";
 import React, { useEffect, useState } from "react";
 
