@@ -813,9 +813,9 @@
     },
     "INVALID_OTP": "The OTP entered is incorrect",
     "MESSAGES": {
-      "COMMON": "unable to send mail or SMS",
+      "COULD_NOT_SEND_MAIL_SMS": "Unable to send Mail or SMS",
       "EMAIL_SMS_SENT": "Mail or SMS sent",
-      "OTP_ATTEMPTS_EXCEEDED": "attempts exceeded for requesting OTP"
+      "OTP_ATTEMPTS_EXCEEDED": "Maximum no of OTP attempts exceeded"
     },
     "RESEND": "Resend OTP",
     "RESENT": "OTP Resent",

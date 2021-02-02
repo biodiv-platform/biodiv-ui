@@ -53,7 +53,7 @@ export const axRegenerateOTP = async (payload) => {
     return { success: data.status, data: `OTP.MESSAGES.${data.message}` };
   } catch (e) {
     console.error(e);
-    return { success: false, data: "OTP.MESSAGES.COMMON" };
+    return { success: false, data: "OTP.MESSAGES.COULD_NOT_SEND_MAIL_SMS" };
   }
 };
 
@@ -66,7 +66,7 @@ export const axForgotPassword = async (payload) => {
     return { success: data.status, data: `OTP.MESSAGES.${data.message}`, user: data.user || {} };
   } catch (e) {
     console.error(e);
-    return { success: false, data: "OTP.MESSAGES.COMMON", user: {} };
+    return { success: false, data: "OTP.MESSAGES.COULD_NOT_SEND_MAIL_SMS", user: {} };
   }
 };
 
