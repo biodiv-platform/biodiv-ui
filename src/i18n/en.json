@@ -183,7 +183,9 @@
       }
     },
     "DOCUMENT_TITLE": "Title",
-    "ITEM_TYPE": "Item Type",
+    "ITEM_TYPE": {
+      "TITLE": "Item Type"
+    },
     "LOCATION": {
       "DISTRICT": "District",
       "MAP": {

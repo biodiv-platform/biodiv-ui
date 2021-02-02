@@ -13,7 +13,6 @@ import FilterMultiSelectInput, { FilterMultiSelectProps } from "./input";
 export default function FilterMultiSelectPanel({
   filterKey,
   translateKey = "",
-  fullTextSearch = true,
   options
 }: FilterMultiSelectProps) {
   const { t } = useTranslation();
@@ -33,7 +32,6 @@ export default function FilterMultiSelectPanel({
             {isExpanded && (
               <FilterMultiSelectInput
                 filterKey={filterKey}
-                fullTextSearch={fullTextSearch}
                 label={label}
                 options={options}
               />

@@ -11,7 +11,6 @@ import AsyncSelect from "react-select/async";
 export interface FilterMultiSelectProps {
   label?: string;
   translateKey?: string;
-  fullTextSearch?: boolean;
   filterKey: string;
   options?;
 }
@@ -21,7 +20,6 @@ const arrayToOptions = (options) => options && options.map((value) => ({ value, 
 export default function FilterMultiSelectInput({
   label,
   filterKey,
-  fullTextSearch = true,
   options
 }: FilterMultiSelectProps) {
   const { filter, addFilter, removeFilter } = useDocumentFilter();
@@ -41,7 +39,7 @@ export default function FilterMultiSelectInput({
     if (values?.length > 0) {
       addFilter(
         filterKey,
-        values.map((item) => (fullTextSearch ? item.value : item.text)).toString()
+        values.map((item) =>  item.value).toString()
       );
     } else {
       removeFilter(filterKey);

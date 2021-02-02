@@ -1,13 +1,21 @@
-import { DOUCMENT_FILTER_KEY } from "@static/document";
+import { DOCUMNET_ITEM_TYPE } from "@static/document";
 import React from "react";
 
-import CheckboxFilterPanel from "../shared/multi-select-search";
+import CheckboxFilterPanel from "../shared/checkbox";
 
 export default function ItemTypeFilter() {
+  const itemTypeList = DOCUMNET_ITEM_TYPE?.map((i) => ({
+    label: i,
+    value: i
+  }));
+
   return (
     <CheckboxFilterPanel
-      filterKey={DOUCMENT_FILTER_KEY.itemType.filterkey}
-      translateKey="FILTERS.ITEM_TYPE"
+      translateKey="FILTERS.ITEM_TYPE."
+      filterKey="itemType"
+      options={itemTypeList}
+      statKey="groupTypeOfDocument"
+      skipOptionsTranslation={true}
     />
   );
 }

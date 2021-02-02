@@ -4,7 +4,8 @@ import {
   Image,
   Input,
   InputGroup,
-  InputLeftElement
+  InputLeftElement,
+  Stack
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
@@ -60,8 +61,9 @@ export default function FilterCheckboxes({
         </InputGroup>
       )}
       <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
+      <Stack >
         {filteredOptions.map(({ label, value, valueIcon }) => (
-          <Checkbox key={label} value={value} alignItems="baseline">
+          <Checkbox mr={4} key={label} value={value} alignItems="baseline">
             {valueIcon && (
               <Image
                 src={getTraitIcon(valueIcon, 20)}
@@ -77,6 +79,7 @@ export default function FilterCheckboxes({
             <FilterStat statKey={statKey} subStatKey={label || value} />
           </Checkbox>
         ))}
+        </Stack>
       </CheckboxGroup>
     </>
   );

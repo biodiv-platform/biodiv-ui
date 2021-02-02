@@ -66,10 +66,6 @@ export const DEFAULT_BIB_FIELDS = {
 };
 
 export const DOUCMENT_FILTER_KEY = {
-  itemType: {
-    filterkey: "itemType",
-    searchKey: "document.itemtype"
-  },
   author: {
     filterKey: "author",
     searchKey: "document.author"
@@ -89,3 +85,14 @@ export const DOUCMENT_FILTER_KEY = {
     searchKey: "document.title"
   }
 };
+
+export const DOCUMNET_ITEM_TYPE = [
+  "mastersthesis",
+  "inbook",
+  "book",
+  "unpublished",
+  "phdthesis",
+  "inproceedings",
+  "article",
+  "misc"
+];
