@@ -102,7 +102,6 @@ const LocationPicker = ({ form }) => {
               <Autocomplete
                 onLoad={setSearchBoxRef}
                 onPlaceChanged={handleOnSearchSelected}
-                options={GEOCODE_OPTIONS}
                 fields={AUTOCOMPLETE_FIELDS}
               >
                 <Input
