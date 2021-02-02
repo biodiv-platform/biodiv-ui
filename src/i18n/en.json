@@ -812,7 +812,13 @@
       "SUBMIT": "Verify"
     },
     "INVALID_OTP": "The OTP entered is incorrect",
+    "MESSAGES": {
+      "COMMON": "unable to send mail or SMS",
+      "EMAIL_SMS_SENT": "Mail or SMS sent",
+      "OTP_ATTEMPTS_EXCEEDED": "attempts exceeded for requesting OTP"
+    },
     "RESEND": "Resend OTP",
+    "RESENT": "OTP Resent",
     "TITLE": "Account verification"
   },
   "PAGE": {

@@ -50,11 +50,10 @@ export const axRegenerateOTP = async (payload) => {
       `${ENDPOINT.USER}/v1/authenticate/regenerate-otp`,
       stringify(payload)
     );
-    return { success: true, data };
+    return { success: data.status, data: `OTP.MESSAGES.${data.message}` };
   } catch (e) {
     console.error(e);
-    notification(e?.response?.data?.message);
-    return { success: false, data: {} };
+    return { success: false, data: "OTP.MESSAGES.COMMON" };
   }
 };
 
@@ -64,10 +63,10 @@ export const axForgotPassword = async (payload) => {
       `${ENDPOINT.USER}/v1/authenticate/forgot-password`,
       stringify(payload)
     );
-    return { success: true, data };
+    return { success: data.status, data: `OTP.MESSAGES.${data.message}`, user: data.user || {} };
   } catch (e) {
     console.error(e);
-    return { success: false, data: {} };
+    return { success: false, data: "OTP.MESSAGES.COMMON", user: {} };
   }
 };
 

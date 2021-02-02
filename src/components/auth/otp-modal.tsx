@@ -61,10 +61,8 @@ export default function OTPModal({ isOpen, onClose, user }) {
       action: 0
     };
 
-    const { success } = await axRegenerateOTP(payload);
-    if (success) {
-      notification("OTP Resent", NotificationType.Success);
-    }
+    const { success, data } = await axRegenerateOTP(payload);
+    notification(t(data), success ? NotificationType.Success : NotificationType.Error);
   };
 
   return (

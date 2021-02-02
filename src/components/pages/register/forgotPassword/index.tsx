@@ -70,10 +70,12 @@ export default function ForgotPasswordComponent() {
 
   const handleOnSubmit = async ({ verificationType, email, mobileNumber }) => {
     const verificationId = verificationType === VERIFICATION_TYPE[0].value ? email : mobileNumber;
-    const { success, data } = await axForgotPassword({ verificationId });
+    const { success, data, user } = await axForgotPassword({ verificationId });
     if (success) {
-      setUser({ ...data?.user, vt: verificationType.toLowerCase() });
+      setUser({ ...user, vt: verificationType.toLowerCase() });
       onClose();
+    } else {
+      notification(t(data));
     }
   };
 
@@ -97,10 +99,8 @@ export default function ForgotPasswordComponent() {
       action: 1
     };
 
-    const { success } = await axRegenerateOTP(payload);
-    if (success) {
-      notification("OTP Resent", NotificationType.Success);
-    }
+    const { success, data } = await axRegenerateOTP(payload);
+    notification(t(data), success ? NotificationType.Success : NotificationType.Error);
   };
 
   return (
