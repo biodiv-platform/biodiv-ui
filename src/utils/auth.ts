@@ -7,7 +7,23 @@ import JWTDecode from "jwt-decode";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { emit } from "react-gbus";
 
-const getDomain = () => window.location.hostname.split(".").slice(-2).join(".");
+/**
+ * This extracts base domain name from URL
+ *
+ * @warning client side only
+ */
+const getDomain = () => {
+  const domain = /[a-z0-9][a-z0-9\-]*[a-z0-9]\.[a-z\.]{2,6}$/i;
+  const parsedUrl = new URL(window.location.origin.toLowerCase());
+
+  if (parsedUrl.host !== null) {
+    const hostMatched = parsedUrl.host.match(domain);
+    return hostMatched ? hostMatched[0] : parsedUrl.host;
+  }
+
+  const pathMatched = parsedUrl.pathname.match(domain);
+  return pathMatched ? pathMatched[0] : "";
+};
 
 // sets/re-sets cookies on development mode
 export const setCookies = (tokens, ctx?) => {
