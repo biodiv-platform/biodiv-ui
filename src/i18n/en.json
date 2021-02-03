@@ -816,11 +816,14 @@
       "OTP": "OTP",
       "SUBMIT": "Verify"
     },
-    "INVALID_OTP": "The OTP entered is incorrect",
     "MESSAGES": {
       "COULD_NOT_SEND_MAIL_SMS": "Unable to send Mail or SMS",
       "EMAIL_SMS_SENT": "Mail or SMS sent",
-      "OTP_ATTEMPTS_EXCEEDED": "Maximum no of OTP attempts exceeded"
+      "ERROR": "Unable not verify OTP",
+      "INVALID_OR_EXPIRED_OTP": "The OTP entered is incorrect or expired",
+      "OTP_ATTEMPTS_EXCEEDED": "Maximum no of OTP attempts exceeded",
+      "OTP_REGENERATED": "OTP Resent",
+      "VERIFIED_OR_OTP_DELETED": "Invalid or Expired OTP, please regenerate"
     },
     "RESEND": "Resend OTP",
     "RESENT": "OTP Resent",
