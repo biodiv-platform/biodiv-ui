@@ -42,6 +42,18 @@ export default function FiltersList() {
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
+            {t("FILTERS.LOCATION.TITLE")}
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel>
+          <Location />
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem>
+        <AccordionButton>
+          <Box flex={1} textAlign="left">
             {t("FILTERS.TIME.TITLE")}
           </Box>
           <AccordionIcon />
@@ -87,17 +99,6 @@ export default function FiltersList() {
         )}
       </AccordionItem>
       {SITE_CONFIG.USERGROUP.ACTIVE && <UserGroupFilter />}
-      <AccordionItem>
-        <AccordionButton>
-          <Box flex={1} textAlign="left">
-            {t("FILTERS.LOCATION.TITLE")}
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
-          <Location />
-        </AccordionPanel>
-      </AccordionItem>
     </Accordion>
   );
 }

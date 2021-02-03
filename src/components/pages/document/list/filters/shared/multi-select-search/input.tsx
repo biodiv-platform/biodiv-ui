@@ -37,10 +37,7 @@ export default function FilterMultiSelectInput({
 
   const handleOnChange = (values) => {
     if (values?.length > 0) {
-      addFilter(
-        filterKey,
-        values.map((item) =>  item.value).toString()
-      );
+      addFilter(filterKey, values.map((item) => item.value).toString());
     } else {
       removeFilter(filterKey);
     }

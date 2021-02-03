@@ -8,7 +8,7 @@ export default function FilterStat({ statKey, subStatKey }) {
   const {
     documentData: { ag }
   } = useDocumentFilter();
-  
+
   const path = statKey ? [statKey, subStatKey].join(".") : subStatKey;
   const count = getByPath(ag, path);
 

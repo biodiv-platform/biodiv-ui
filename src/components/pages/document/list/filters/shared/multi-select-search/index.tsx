@@ -30,11 +30,7 @@ export default function FilterMultiSelectPanel({
           </AccordionButton>
           <AccordionPanel>
             {isExpanded && (
-              <FilterMultiSelectInput
-                filterKey={filterKey}
-                label={label}
-                options={options}
-              />
+              <FilterMultiSelectInput filterKey={filterKey} label={label} options={options} />
             )}
           </AccordionPanel>
         </>

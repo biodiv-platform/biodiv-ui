@@ -61,24 +61,24 @@ export default function FilterCheckboxes({
         </InputGroup>
       )}
       <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
-      <Stack >
-        {filteredOptions.map(({ label, value, valueIcon }) => (
-          <Checkbox mr={4} key={label} value={value} alignItems="baseline">
-            {valueIcon && (
-              <Image
-                src={getTraitIcon(valueIcon, 20)}
-                boxSize="1.25rem"
-                objectFit="contain"
-                display="inline"
-                verticalAlign="center"
-                mr={1}
-                ignoreFallback={true}
-              />
-            )}
-            {skipOptionsTranslation ? label || value : t(translateKey + label)}
-            <FilterStat statKey={statKey} subStatKey={label || value} />
-          </Checkbox>
-        ))}
+        <Stack>
+          {filteredOptions.map(({ label, value, valueIcon }) => (
+            <Checkbox mr={4} key={label} value={value} alignItems="baseline">
+              {valueIcon && (
+                <Image
+                  src={getTraitIcon(valueIcon, 20)}
+                  boxSize="1.25rem"
+                  objectFit="contain"
+                  display="inline"
+                  verticalAlign="center"
+                  mr={1}
+                  ignoreFallback={true}
+                />
+              )}
+              {skipOptionsTranslation ? label || value : t(translateKey + label)}
+              <FilterStat statKey={statKey} subStatKey={label || value} />
+            </Checkbox>
+          ))}
         </Stack>
       </CheckboxGroup>
     </>

@@ -117,6 +117,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
         <TagsShow
           items={d.tags}
           objectId={document?.id}
+          href={"/document/list"}
           queryFunc={axQueryDocumentTagsByText}
           updateFunc={axUpdateDocumentTags}
         />
