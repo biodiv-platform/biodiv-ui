@@ -64,3 +64,35 @@ export const DEFAULT_BIB_FIELDS = {
   abstract: false,
   title: true
 };
+
+export const DOUCMENT_FILTER_KEY = {
+  author: {
+    filterKey: "author",
+    searchKey: "document.author"
+  },
+  publisher: {
+    filterKey: "publisher",
+    searchKey: "document.publisher"
+  },
+
+  tags: {
+    filterKey: "tags",
+    searchKey: "tags.name"
+  },
+
+  title: {
+    filterKey: "title",
+    searchKey: "document.title"
+  }
+};
+
+export const DOCUMNET_ITEM_TYPE = [
+  "mastersthesis",
+  "inbook",
+  "book",
+  "unpublished",
+  "phdthesis",
+  "inproceedings",
+  "article",
+  "misc"
+];

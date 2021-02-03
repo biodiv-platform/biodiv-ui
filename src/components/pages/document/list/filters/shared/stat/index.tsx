@@ -6,10 +6,11 @@ import React from "react";
 
 export default function FilterStat({ statKey, subStatKey }) {
   const {
-    documentData: { n } //number must be replace with ag
+    documentData: { ag }
   } = useDocumentFilter();
+
   const path = statKey ? [statKey, subStatKey].join(".") : subStatKey;
-  const count = getByPath(n, path);
+  const count = getByPath(ag, path);
 
   return (
     <Box color="gray.500" as="span" title={count}>

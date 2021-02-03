@@ -10,10 +10,15 @@ import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
+import AuthorFilter from "./author";
 import DataQuality from "./data-quality";
+import ItemTypeFilter from "./itemType";
 import Location from "./location";
+import PublisherFilter from "./publisher";
 import SpeciesGroupsFilter from "./species-groups";
+import TagsFilter from "./tags";
 import TimeFilter from "./time";
+import TitleFilter from "./title";
 import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
 
@@ -31,6 +36,18 @@ export default function FiltersList() {
         </AccordionButton>
         <AccordionPanel>
           <SpeciesGroupsFilter />
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem>
+        <AccordionButton>
+          <Box flex={1} textAlign="left">
+            {t("FILTERS.LOCATION.TITLE")}
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel>
+          <Location />
         </AccordionPanel>
       </AccordionItem>
 
@@ -58,6 +75,16 @@ export default function FiltersList() {
         </AccordionPanel>
       </AccordionItem>
 
+      <ItemTypeFilter />
+
+      <TitleFilter />
+
+      <PublisherFilter />
+
+      <AuthorFilter />
+
+      <TagsFilter />
+
       <AccordionItem>
         {({ isExpanded }) => (
           <>
@@ -72,17 +99,6 @@ export default function FiltersList() {
         )}
       </AccordionItem>
       {SITE_CONFIG.USERGROUP.ACTIVE && <UserGroupFilter />}
-      <AccordionItem>
-        <AccordionButton>
-          <Box flex={1} textAlign="left">
-            {t("FILTERS.LOCATION.TITLE")}
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
-          <Location />
-        </AccordionPanel>
-      </AccordionItem>
     </Accordion>
   );
 }

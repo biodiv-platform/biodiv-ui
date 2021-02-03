@@ -8,12 +8,19 @@ import TagsEditor from "./tags-editor";
 
 interface ITagsShowProps {
   items?: Tags[] | undefined;
+  href?;
   objectId;
   updateFunc;
   queryFunc;
 }
 
-export default function TagsShow({ items = [], objectId, updateFunc, queryFunc }: ITagsShowProps) {
+export default function TagsShow({
+  items = [],
+  objectId,
+  updateFunc,
+  queryFunc,
+  href
+}: ITagsShowProps) {
   const [tags, setTags] = useState(items.map((i) => ({ label: i.name, value: i.id })));
   const { isOpen, onToggle, onClose } = useDisclosure();
 
@@ -31,7 +38,7 @@ export default function TagsShow({ items = [], objectId, updateFunc, queryFunc }
       ) : (
         <Box>
           {tags?.map((tag) => (
-            <LinkTag label={tag.label} key={tag?.label} />
+            <LinkTag href={href} label={tag.label} key={tag?.label} />
           ))}
           <IconButton
             variant="link"

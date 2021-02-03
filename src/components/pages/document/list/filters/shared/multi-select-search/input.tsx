@@ -2,6 +2,7 @@ import { selectStyles } from "@components/form/configs";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import { axSearchFilterByName } from "@services/esmodule.service";
 import { isBrowser } from "@static/constants";
+import { DOUCMENT_FILTER_KEY } from "@static/document";
 import debounce from "debounce-promise";
 import React, { useMemo } from "react";
 import Select from "react-select";
@@ -25,7 +26,9 @@ export default function FilterMultiSelectInput({
 
   const S = options?.length ? Select : AsyncSelect;
 
-  const onQuery = debounce((q) => axSearchFilterByName(q, filterKey), 200);
+  const searchKey = DOUCMENT_FILTER_KEY[filterKey]?.searchKey || filterKey;
+
+  const onQuery = debounce((q) => axSearchFilterByName(q, searchKey, "ed"), 200);
 
   const defaultValue = useMemo(
     () => (filter?.[filterKey] ? arrayToOptions(filter?.[filterKey]?.split(",")) : []),
@@ -34,7 +37,7 @@ export default function FilterMultiSelectInput({
 
   const handleOnChange = (values) => {
     if (values?.length > 0) {
-      addFilter(filterKey, values.map(({ value }) => value).toString());
+      addFilter(filterKey, values.map((item) => item.value).toString());
     } else {
       removeFilter(filterKey);
     }
