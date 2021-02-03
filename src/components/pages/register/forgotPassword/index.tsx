@@ -89,7 +89,7 @@ export default function ForgotPasswordComponent() {
       notification(t("FORGOT_PASSWORD.RESET_SUCCESS"), NotificationType.Success);
       router.push("/login");
     } else {
-      notification(t("OTP.INVALID_OTP"));
+      notification(t("OTP.MESSAGES.ERROR"));
     }
   };
 

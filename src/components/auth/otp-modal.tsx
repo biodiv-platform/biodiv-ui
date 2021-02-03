@@ -39,7 +39,7 @@ export default function OTPModal({ isOpen, onClose, user }) {
   });
 
   const handleOtpFormSubmit = async (values) => {
-    const { success, data } = await axValidateUser({
+    const { success, data, message } = await axValidateUser({
       id: user.id,
       otp: values.otp
     });
@@ -47,9 +47,9 @@ export default function OTPModal({ isOpen, onClose, user }) {
     if (success) {
       setCookies(data);
       router.push("/");
-      notification(data?.message, NotificationType.Success);
+      notification(t(message), NotificationType.Success);
     } else {
-      notification(data?.message);
+      notification(t(message));
     }
   };
 

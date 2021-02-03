@@ -36,11 +36,10 @@ export const axValidateUser = async (payload) => {
       `${ENDPOINT.USERGROUP}/v1/group/verify-user`,
       stringify(payload)
     );
-    return { success: true, data };
+    return { success: data.status, data, message: `OTP.MESSAGES.${data.message}` };
   } catch (e) {
     console.error(e);
-    notification(e?.response?.data?.message);
-    return { success: false, data: {} };
+    return { success: false, data: {}, message: "OTP.MESSAGES.ERROR" };
   }
 };
 
