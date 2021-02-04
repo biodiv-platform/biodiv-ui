@@ -1,4 +1,5 @@
 import { ENDPOINT } from "@static/constants";
+import { DOUCMENT_FILTER_KEY } from "@static/document";
 import { plainHttp } from "@utils/http";
 import { createUserESObject } from "@utils/user";
 
@@ -70,14 +71,20 @@ export const axSearchFilterByName = async (text, field, index = "eo") => {
       }
     );
 
-    const formatResponse = data?.reduce((acc, i) => {
-      const matchVal = i?.split(",")?.filter((item) => item.includes(text))?.[0];
-      if (matchVal) acc.push(matchVal);
-      return acc;
-    }, []);
+    const formatResponse = () => {
+      return data?.reduce((acc, i) => {
+        const matchVal = i
+          ?.split(",")
+          ?.filter((item) => item.toLowerCase().includes(text.toLowerCase()))?.[0];
+        if (matchVal) acc.push(matchVal);
+        return acc;
+      }, []);
+    };
 
-    return index == "ed"
-      ? formatResponse?.map((i) => ({ value: i.trim(), label: i, text }))
+    return index == "ed" &&
+      (field === DOUCMENT_FILTER_KEY.author.searchKey ||
+        field === DOUCMENT_FILTER_KEY.tags.searchKey)
+      ? formatResponse()?.map((i) => ({ value: i.trim(), label: i, text }))
       : data?.map((i) => ({ value: i, label: i, text }));
   } catch (e) {
     console.error(e);
