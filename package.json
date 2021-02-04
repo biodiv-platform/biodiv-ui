@@ -6,7 +6,7 @@
     "start": "next",
     "build": "next build",
     "serve": "next start",
-    "lint": "eslint -c .eslintrc.js --ext .js,.jsx,.ts,.tsx src && prettier --write src/**/*"
+    "lint": "eslint -c .eslintrc.js --ext .js,.jsx,.ts,.tsx src && prettier -c -w src"
   },
   "keywords": [
     "Biodiversity",
