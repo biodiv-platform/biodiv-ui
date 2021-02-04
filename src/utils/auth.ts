@@ -16,9 +16,9 @@ const getDomain = () => {
   const domain = /[a-z0-9][a-z0-9\-]*[a-z0-9]\.[a-z\.]{2,6}$/i;
   const parsedUrl = new URL(window.location.origin.toLowerCase());
 
-  if (parsedUrl.host !== null) {
-    const hostMatched = parsedUrl.host.match(domain);
-    return hostMatched ? hostMatched[0] : parsedUrl.host;
+  if (parsedUrl.hostname !== null) {
+    const hostMatched = parsedUrl.hostname.match(domain);
+    return hostMatched ? hostMatched[0] : parsedUrl.hostname;
   }
 
   const pathMatched = parsedUrl.pathname.match(domain);
