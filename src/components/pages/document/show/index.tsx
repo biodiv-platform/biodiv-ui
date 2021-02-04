@@ -31,9 +31,15 @@ const DocumentIframe = styled.iframe`
 
 interface DocumentShowProps {
   document: ShowDocument;
+  speciesGroups;
+  habitatList;
 }
 
-export default function DocumentShowComponent({ document }: DocumentShowProps) {
+export default function DocumentShowComponent({
+  document,
+  speciesGroups,
+  habitatList
+}: DocumentShowProps) {
   const { isLoggedIn } = useGlobalState();
   const [permission, setPermission] = useState<DocumentUserPermission>();
 
@@ -77,7 +83,7 @@ export default function DocumentShowComponent({ document }: DocumentShowProps) {
             commentFunc={axAddDocumentComment}
           />
         </Box>
-        <Sidebar d={document} />
+        <Sidebar d={document} speciesGroups={speciesGroups} habitatList={habitatList} />
       </SimpleGrid>
     </div>
   );

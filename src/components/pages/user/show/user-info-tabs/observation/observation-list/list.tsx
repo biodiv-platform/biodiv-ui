@@ -13,7 +13,7 @@ import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@hooks/use-translation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage, getSpeciesIcon } from "@utils/media";
+import { getObservationImage, getLocalIcon } from "@utils/media";
 import React from "react";
 
 export default function ObservationList({ title, data, loadMore }) {
@@ -45,7 +45,7 @@ export default function ObservationList({ title, data, loadMore }) {
                       bg="gray.300"
                       alt={title}
                       src={getObservationImage(observation.thumbnail, RESOURCE_SIZE.LIST_THUMBNAIL)}
-                      fallbackSrc={getSpeciesIcon(observation.speciesGroup)}
+                      fallbackSrc={getLocalIcon(observation.speciesGroup)}
                     />
                   </AspectRatio>
                 </Tooltip>

@@ -4,14 +4,14 @@ import { RESOURCE_SIZE } from "@static/constants";
 import {
   getObservationImage,
   getObservationRAW,
-  getSpeciesIcon,
+  getLocalIcon,
   getYouTubeEmbed
 } from "@utils/media";
 import React from "react";
 
 export const NoSlide = ({ speciesGroup }) => (
   <Box color="gray.500">
-    <Image maxW="20rem" boxSize="full" src={getSpeciesIcon(speciesGroup)} />
+    <Image maxW="20rem" boxSize="full" src={getLocalIcon(speciesGroup)} />
   </Box>
 );
 

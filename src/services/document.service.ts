@@ -219,3 +219,16 @@ export const axGetListData = async (params, payload = {}, index = "document", ty
     return { success: false, data: {} };
   }
 };
+
+export const axUpdateCoverageGroup = async (coverageType, documentId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.DOCUMENT}/v1/services/update/${coverageType}/${documentId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

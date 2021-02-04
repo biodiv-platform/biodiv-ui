@@ -86,8 +86,6 @@ export const getSuggestionIcon = (resourceUrl) => {
   return resourceUrl ? `${ENDPOINT.FILES}/get${cleanSlashes(resourceUrl)}?w=50` : undefined;
 };
 
-export const getSpeciesIcon = (icon) => `/next-assets/species/${icon || "Unknown"}.svg`;
-
 export const getLocalIcon = (icon, type = "species") =>
   `/next-assets/${type}/${icon || "Unknown"}.svg`;
 

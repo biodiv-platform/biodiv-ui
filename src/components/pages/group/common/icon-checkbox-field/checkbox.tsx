@@ -47,7 +47,7 @@ const CheckBoxItems = ({ options, type, onChange, defaultValue }: ITraitInputPro
   });
 
   return (
-    <HStack>
+    <HStack className="cb-items">
       {options.map((o) => {
         return (
           <CustomCheckBox key={o.id} {...getCheckboxProps({ value: o.id.toString() })}>

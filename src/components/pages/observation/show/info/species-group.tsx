@@ -7,7 +7,7 @@ import EditIcon from "@icons/edit";
 import { SpeciesGroup } from "@interfaces/observation";
 import { axUpdateSpeciesGroup } from "@services/observation.service";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
-import { getSpeciesIcon } from "@utils/media";
+import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 import { emit } from "react-gbus";
@@ -22,7 +22,7 @@ interface ISpeciesGroupsProps {
 const CustomOption = ({ children, ...props }) => (
   <components.Option {...props}>
     <Stack isInline={true} alignItems="center">
-      <Image boxSize="2rem" src={getSpeciesIcon(props.data.label)} />
+      <Image boxSize="2rem" src={getLocalIcon(props.data.label)} />
       <Box>{children}</Box>
     </Stack>
   </components.Option>
@@ -83,7 +83,7 @@ export default function SpeciesGroupBox({ id, speciesGroups, observationId }: IS
         </Stack>
       ) : (
         <Stack isInline={true} alignItems="top">
-          <Image title={finalType?.label} boxSize="2.5rem" src={getSpeciesIcon(finalType?.label)} />
+          <Image title={finalType?.label} boxSize="2.5rem" src={getLocalIcon(finalType?.label)} />
           <IconButton
             size="lg"
             aria-label="edit"

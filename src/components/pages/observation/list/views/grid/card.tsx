@@ -3,7 +3,7 @@ import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage, getSpeciesIcon } from "@utils/media";
+import { getObservationImage, getLocalIcon } from "@utils/media";
 import React from "react";
 
 import ShadowedUser from "@components/pages/common/shadowed-user";
@@ -22,7 +22,7 @@ export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
               w="full"
               h="full"
               src={getObservationImage(o?.thumbnail, RESOURCE_SIZE.LIST_THUMBNAIL)}
-              fallbackSrc={getSpeciesIcon(o?.speciesGroup)}
+              fallbackSrc={getLocalIcon(o?.speciesGroup)}
               alt={o.observationId?.toString()}
             />
           </Link>

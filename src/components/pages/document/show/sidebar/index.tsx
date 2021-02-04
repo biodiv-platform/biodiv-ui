@@ -1,18 +1,22 @@
 import User from "@components/pages/observation/show/sidebar/user";
+import useTranslation from "@hooks/use-translation";
 import { ShowDocument } from "@interfaces/document";
 import React from "react";
 
+import CoveragePanel from "./coverage";
 import DownloadButtons from "./download-buttons";
-import HabitatsCoverage from "./habitats-coverage";
 import DocumentSidebarMap from "./map";
 import SpatialCoverage from "./special-coverage";
-import SpeciesCoverage from "./species-coverage";
 
 interface SidebarProps {
   d: ShowDocument;
+  speciesGroups;
+  habitatList;
 }
 
-export default function Sidebar({ d }: SidebarProps) {
+export default function Sidebar({ d, speciesGroups, habitatList }: SidebarProps) {
+  const { t } = useTranslation();
+
   return (
     <div>
       <User user={d.userIbp} />
@@ -23,8 +27,24 @@ export default function Sidebar({ d }: SidebarProps) {
       />
       <DocumentSidebarMap documentCoverages={d.documentCoverages} />
       <SpatialCoverage documentCoverage={d.documentCoverages} />
-      <HabitatsCoverage habitat={d.habitatIds} />
-      <SpeciesCoverage speciesGroup={d.speciesGroupIds} />
+      <CoveragePanel
+        icon="🏜"
+        title={t("GROUP.HABITATS_COVERED")}
+        initialValue={d.habitatIds}
+        items={habitatList}
+        type="habitat"
+        endpointType="habitat"
+        documentId={d.document?.id}
+      />
+      <CoveragePanel
+        icon="🐾"
+        title={t("GROUP.SPECIES_COVERAGE")}
+        initialValue={d.speciesGroupIds}
+        items={speciesGroups}
+        type="species"
+        endpointType="speciesGroup"
+        documentId={d.document?.id}
+      />
     </div>
   );
 }
