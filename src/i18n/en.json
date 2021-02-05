@@ -598,10 +598,15 @@
   },
   "LIST": {
     "CHART": {
-      "SGROUP": "Species Groups",
+      "SGROUP": "Species groups",
       "STATES": "State distribution"
     },
     "CREATED_ON": "Created on",
+    "LIFE_LIST": {
+      "COUNT_HEADER": "Counts",
+      "HEADING": "Life list",
+      "SPECIES_HEADER": "Species"
+    },
     "LOCATION": "Location",
     "OBSERVATIONS_FOUND": "Observations Found",
     "OBSERVED_ON": "Observed on",
