@@ -21,8 +21,8 @@ export default function useUniqueSpecies({ filter }) {
       lifelistoffset: reset ? 0 : getter.lifelistoffset
     });
 
-    if (success) {
-      setter((_draft) => {
+    setter((_draft) => {
+      if (success) {
         if (reset) {
           _draft.list = Object.entries(data.aggregateStatsData.groupUniqueSpecies);
           _draft.lifelistoffset = LIFE_LIST_LIMIT;
@@ -30,9 +30,7 @@ export default function useUniqueSpecies({ filter }) {
           _draft.list.push(...Object.entries(data.aggregateStatsData.groupUniqueSpecies));
           _draft.lifelistoffset = _draft.lifelistoffset + LIFE_LIST_LIMIT;
         }
-      });
-    }
-    setter((_draft) => {
+      }
       _draft.isLoading = false;
     });
   };
