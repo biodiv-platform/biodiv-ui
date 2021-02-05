@@ -454,8 +454,8 @@
         "ADD_LIST": "Add List",
         "ADD_OBSERVATION": "Add Observation",
         "ADD_TRAIT_OR_VALUE": "Add Trait/Value",
-        "CONTRIBUTE_TO_SPECIES": "Contribute to Species",
         "CONTRIBUTE_TO_MAP": "Contribute to Map",
+        "CONTRIBUTE_TO_SPECIES": "Contribute to Species",
         "TITLE": "Contribute"
       },
       "GROUPS": {
@@ -587,6 +587,11 @@
       "STATES": "State distribution"
     },
     "CREATED_ON": "Created on",
+    "LIFE_LIST": {
+      "COUNT_HEADER": "Counts",
+      "HEADING": "Life list",
+      "SPECIES_HEADER": "Species"
+    },
     "LOCATION": "Location",
     "OBSERVATIONS_FOUND": "Observations Found",
     "OBSERVED_ON": "Observed on",
@@ -601,11 +606,6 @@
       "LIST": "List",
       "MAP": "Map",
       "STATS": "Metrics"
-    },
-    "LIFE_LIST": {
-      "HEADING": "Life list",
-      "SPECIES_HEADER": "Species",
-      "COUNT_HEADER": "Counts"
     }
   },
   "LOAD_MORE": "Load More ↺",
