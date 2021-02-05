@@ -16,7 +16,7 @@ const Table = styled.table`
 
 const LifeListTable = ({ data, loadMore, title, extraParams }) => {
   const { t } = useTranslation();
-  
+
   return data.list.length > 0 ? (
     <Box className="white-box">
       <BoxHeading p={2} fontSize="md">
