@@ -30,13 +30,11 @@ export default function useUniqueSpecies({ filter }) {
           _draft.list.push(...Object.entries(data.aggregateStatsData.groupUniqueSpecies));
           _draft.lifelistoffset = _draft.lifelistoffset + LIFE_LIST_LIMIT;
         }
-        _draft.isLoading = false;
-      });
-    } else {
-      setter((_draft) => {
-        _draft.isLoading = false;
       });
     }
+    setter((_draft) => {
+      _draft.isLoading = false;
+    });
   };
 
   const loadMoreUniqueSpecies = () => loadMore(uniqueSpecies, setUniqueSpecies, false);

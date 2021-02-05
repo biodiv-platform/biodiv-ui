@@ -33,12 +33,12 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies }) {
               <th>{t("LIST.LIFE_LIST.SPECIES_HEADER")}</th>
               <th>{t("LIST.LIFE_LIST.COUNT_HEADER")}</th>
             </tr>
-            {data.list.map((d) => (
-              <tr key={`${d[0]}`} className="fade">
-                <td>{d[0]}</td>
+            {data.list.map(([specieName, specieCount]) => (
+              <tr key={`${specieName}`} className="fade">
+                <td>{specieName}</td>
 
-                <ExternalBlueLink href={`/observation/list?recoName=${d[0]}`}>
-                  <td>{d[1]}</td>
+                <ExternalBlueLink href={`/observation/list?recoName=${specieName}`}>
+                  <td>{specieCount}</td>
                 </ExternalBlueLink>
               </tr>
             ))}
