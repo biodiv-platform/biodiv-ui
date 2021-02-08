@@ -9,41 +9,41 @@ import DocumentSidebarMap from "./map";
 import SpatialCoverage from "./special-coverage";
 
 interface SidebarProps {
-  d: ShowDocument;
+  showDocument: ShowDocument;
   speciesGroups;
   habitatList;
 }
 
-export default function Sidebar({ d, speciesGroups, habitatList }: SidebarProps) {
+export default function Sidebar({ showDocument, speciesGroups, habitatList }: SidebarProps) {
   const { t } = useTranslation();
 
   return (
     <div>
-      <User user={d.userIbp} />
+      <User user={showDocument.userIbp} />
       <DownloadButtons
-        documentPath={d?.uFile?.path}
-        title={d?.document?.title}
-        documentId={d?.document?.id}
+        documentPath={showDocument?.uFile?.path}
+        title={showDocument?.document?.title}
+        documentId={showDocument?.document?.id}
       />
-      <DocumentSidebarMap documentCoverages={d.documentCoverages} />
-      <SpatialCoverage documentCoverage={d.documentCoverages} />
+      <DocumentSidebarMap documentCoverages={showDocument.documentCoverages} />
+      <SpatialCoverage documentCoverage={showDocument.documentCoverages} />
       <CoveragePanel
         icon="🏜"
         title={t("GROUP.HABITATS_COVERED")}
-        initialValue={d.habitatIds}
+        initialValue={showDocument.habitatIds}
         items={habitatList}
         type="habitat"
         endpointType="habitat"
-        documentId={d.document?.id}
+        documentId={showDocument.document?.id}
       />
       <CoveragePanel
         icon="🐾"
         title={t("GROUP.SPECIES_COVERAGE")}
-        initialValue={d.speciesGroupIds}
+        initialValue={showDocument.speciesGroupIds}
         items={speciesGroups}
         type="species"
         endpointType="speciesGroup"
-        documentId={d.document?.id}
+        documentId={showDocument.document?.id}
       />
     </div>
   );

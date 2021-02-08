@@ -83,7 +83,7 @@ export default function DocumentShowComponent({
             commentFunc={axAddDocumentComment}
           />
         </Box>
-        <Sidebar d={document} speciesGroups={speciesGroups} habitatList={habitatList} />
+        <Sidebar showDocument={document} speciesGroups={speciesGroups} habitatList={habitatList} />
       </SimpleGrid>
     </div>
   );
