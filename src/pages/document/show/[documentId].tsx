@@ -1,12 +1,16 @@
 import DocumentShowComponent from "@components/pages/document/show";
-import { axGetDocumentById } from "@services/document.service";
+import { axGetDocumentById, axGetDocumentSpeciesGroups } from "@services/document.service";
+import { axGetAllHabitat } from "@services/utility.service";
 import React from "react";
 
-const DocumentShowPage = ({ document }) => <DocumentShowComponent document={document} />;
+const DocumentShowPage = (props) => <DocumentShowComponent {...props} />;
 
 export const getServerSideProps = async (ctx) => {
   const { data: document } = await axGetDocumentById(ctx.query.documentId);
-  return { props: { document } };
+  const { data: speciesGroups } = await axGetDocumentSpeciesGroups();
+  const { data: habitatList } = await axGetAllHabitat();
+
+  return { props: { document, speciesGroups, habitatList } };
 };
 
 export default DocumentShowPage;

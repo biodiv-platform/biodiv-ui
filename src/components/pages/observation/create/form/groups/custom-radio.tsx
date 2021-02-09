@@ -1,6 +1,6 @@
 import { Box, Image, useRadio } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
-import { getSpeciesIcon } from "@utils/media";
+import { getLocalIcon } from "@utils/media";
 import React from "react";
 
 const CustomRadio = (props) => {
@@ -34,7 +34,7 @@ const CustomRadio = (props) => {
           <Image
             boxSize="2.6rem"
             style={{ filter: props.isChecked ? "none" : "grayscale(1)" }}
-            src={getSpeciesIcon(props.icon)}
+            src={getLocalIcon(props.icon)}
             alt={props.icon}
             overflow="hidden"
           />

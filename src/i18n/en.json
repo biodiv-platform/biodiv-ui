@@ -141,6 +141,8 @@
     "TYPE": "Type",
     "UNFOLLOW": "Unfollow Document",
     "UNKNOWN": "Untitled Document",
+    "UPDATE_ERROR": "Unable to update",
+    "UPDATE_SUCCESS": "Updated Successfully",
     "UPDATED_ON": "Date Updated",
     "UPLOAD": {
       "MY_UPLOADS": "Draft Media",

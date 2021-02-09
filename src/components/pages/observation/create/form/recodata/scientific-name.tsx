@@ -3,7 +3,7 @@ import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import SCI_RANK from "@static/sci-rank";
-import { getSpeciesIcon, getSuggestionIcon } from "@utils/media";
+import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
 
@@ -49,7 +49,7 @@ export const onScientificNameQuery = async (q, valueKey = "id") => {
     acceptedNames:
       Array.isArray(o.accepted_names) && o.accepted_names.length ? o.accepted_names[0] : "",
     rank: SCI_RANK[o.rank || 0],
-    group: getSpeciesIcon(o.group_name),
+    group: getLocalIcon(o.group_name),
     raw: o
   }));
 };

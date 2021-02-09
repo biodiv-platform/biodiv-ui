@@ -2,7 +2,7 @@ import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/re
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "@hooks/use-translation";
-import { getObservationThumbnail, getSpeciesIcon } from "@utils/media";
+import { getObservationThumbnail, getLocalIcon } from "@utils/media";
 import React, { useReducer } from "react";
 
 interface ISuggestionsProps {
@@ -47,7 +47,7 @@ export default function Suggestions({
                   objectFit="cover"
                   alt={o.name}
                   src={getObservationThumbnail(o[observationKey], 80)}
-                  fallbackSrc={getSpeciesIcon(o?.speciesGroupName || defaultSpeciesGroup)}
+                  fallbackSrc={getLocalIcon(o?.speciesGroupName || defaultSpeciesGroup)}
                   bg="gray.200"
                   borderRadius="md"
                 />

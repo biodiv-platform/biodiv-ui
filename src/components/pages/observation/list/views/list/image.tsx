@@ -6,7 +6,7 @@ import ImageIcon from "@icons/image";
 import VideoIcon from "@icons/video";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage, getSpeciesIcon } from "@utils/media";
+import { getObservationImage, getLocalIcon } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
@@ -93,7 +93,7 @@ export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper 
             objectFit="cover"
             bg="gray.100"
             src={getObservationImage(o.reprImageUrl, RESOURCE_SIZE.LIST_THUMBNAIL)}
-            fallbackSrc={getSpeciesIcon(o?.speciesGroup)}
+            fallbackSrc={getLocalIcon(o?.speciesGroup)}
             alt={o.observationId?.toString()}
           />
         </Link>

@@ -1,7 +1,7 @@
 import { Box, Image, useCheckbox } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import styled from "@emotion/styled";
-import { getSpeciesIcon } from "@utils/media";
+import { getLocalIcon } from "@utils/media";
 import { toHumanString } from "human-readable-numbers";
 import React from "react";
 
@@ -57,7 +57,7 @@ const Checkbox = (props: any) => {
         <Image
           boxSize="2.2rem"
           objectFit="contain"
-          src={getSpeciesIcon(props.label)}
+          src={getLocalIcon(props.label)}
           alt={props.label}
           ignoreFallback={true}
         />

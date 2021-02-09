@@ -1,30 +1,50 @@
 import User from "@components/pages/observation/show/sidebar/user";
+import useTranslation from "@hooks/use-translation";
 import { ShowDocument } from "@interfaces/document";
 import React from "react";
 
+import CoveragePanel from "./coverage";
 import DownloadButtons from "./download-buttons";
-import HabitatsCoverage from "./habitats-coverage";
 import DocumentSidebarMap from "./map";
 import SpatialCoverage from "./special-coverage";
-import SpeciesCoverage from "./species-coverage";
 
 interface SidebarProps {
-  d: ShowDocument;
+  showDocument: ShowDocument;
+  speciesGroups;
+  habitatList;
 }
 
-export default function Sidebar({ d }: SidebarProps) {
+export default function Sidebar({ showDocument, speciesGroups, habitatList }: SidebarProps) {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <User user={d.userIbp} />
+      <User user={showDocument.userIbp} />
       <DownloadButtons
-        documentPath={d?.uFile?.path}
-        title={d?.document?.title}
-        documentId={d?.document?.id}
+        documentPath={showDocument?.uFile?.path}
+        title={showDocument?.document?.title}
+        documentId={showDocument?.document?.id}
       />
-      <DocumentSidebarMap documentCoverages={d.documentCoverages} />
-      <SpatialCoverage documentCoverage={d.documentCoverages} />
-      <HabitatsCoverage habitat={d.habitatIds} />
-      <SpeciesCoverage speciesGroup={d.speciesGroupIds} />
+      <DocumentSidebarMap documentCoverages={showDocument.documentCoverages} />
+      <SpatialCoverage documentCoverage={showDocument.documentCoverages} />
+      <CoveragePanel
+        icon="🏜"
+        title={t("GROUP.HABITATS_COVERED")}
+        initialValue={showDocument.habitatIds}
+        items={habitatList}
+        type="habitat"
+        endpointType="habitat"
+        documentId={showDocument.document?.id}
+      />
+      <CoveragePanel
+        icon="🐾"
+        title={t("GROUP.SPECIES_COVERAGE")}
+        initialValue={showDocument.speciesGroupIds}
+        items={speciesGroups}
+        type="species"
+        endpointType="speciesGroup"
+        documentId={showDocument.document?.id}
+      />
     </div>
   );
 }
