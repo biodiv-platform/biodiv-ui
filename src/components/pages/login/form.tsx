@@ -107,9 +107,9 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       <PageHeading>{t("SIGN_IN.TITLE")}</PageHeading>
 
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        {SITE_CONFIG.REGISTER.MOBILE && (
+        <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
           <RadioInput name="verificationType" options={VERIFICATION_TYPE} form={hForm} mb={1} />
-        )}
+        </div>
         {showMobile ? (
           <PhoneNumber name="mobileNumber" label={t("SIGN_IN.FORM.MOBILE")} form={hForm} />
         ) : (
