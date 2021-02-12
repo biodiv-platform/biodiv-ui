@@ -61,6 +61,7 @@
   "COPY": "Copy to Clipboard",
   "DELETE": "Delete",
   "DOCUMENT": {
+    "BASIC_INFORMATION": "Basic Information",
     "BIB": {
       "ABSTRACT": "Description",
       "ADDRESS": "Address",
@@ -113,6 +114,11 @@
     "DOWNLOAD": {
       "CITATION": "Citation",
       "PDF": "PDF"
+    },
+    "EDIT": {
+      "ERROR": "There was an error updating this document",
+      "SUCCESS": "Document Updated Successfully",
+      "TITLE": "Edit Document"
     },
     "EDIT_DOCUMENT": "Edit Document",
     "FIND_GMAPS": "Search from Google Maps",

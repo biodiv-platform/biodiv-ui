@@ -13,14 +13,16 @@ interface DocumentUploaderProps {
 }
 
 export default function DocumentUploader({ form, name, hint }: DocumentUploaderProps) {
+  const defaultValue = form.control.defaultValuesRef.current[name];
+
   return (
-    <ManageDocumentContextProvider>
+    <ManageDocumentContextProvider initialDocument={defaultValue}>
       <FormControl isInvalid={form.errors[name] && true} mb={4}>
         <Controller
           control={form.control}
           name={name}
           render={(props) => <DocumentUploaderTabs {...props} />}
-          defaultValue={form.control.defaultValuesRef.current[name]}
+          defaultValue={defaultValue}
         />
         <ErrorMessage name={name} errors={form.errors} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
