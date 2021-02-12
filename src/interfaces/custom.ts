@@ -75,6 +75,7 @@ export interface ObservationFilterProps {
   tahsil?: string;
   district?: string;
   state?: string;
+  groupName?: string;
 }
 
 export interface ObservationData {

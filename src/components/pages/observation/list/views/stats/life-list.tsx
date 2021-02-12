@@ -14,6 +14,7 @@ const LifeList = ({ filter }) => {
         data={uniqueSpecies.speciesData.data}
         title={t("LIST.LIFE_LIST.HEADING")}
         loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
+        filter={filter}
       />
     </div>
   );

@@ -4,6 +4,7 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
+import { stringify } from "querystring";
 
 const Table = styled.table`
   tr {
@@ -20,13 +21,21 @@ const Table = styled.table`
   }
 `;
 
-export default function LifeListTable({ data, title, loadMoreUniqueSpecies }) {
+export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();
+
+  const queryParams = { ...filter };
+  if (filter.recoName) {
+    delete queryParams["recoName"];
+  }
+  queryParams.view = "list";
+  const address = stringify(queryParams);
+
   return data.list.length > 0 ? (
     <Box className="white-box">
       <BoxHeading>{title}</BoxHeading>
 
-      <Box w="full" overflowY="auto" h={370}>
+      <Box w="full" overflowY="auto" h={400}>
         <Table className="table">
           <tbody>
             <tr>
@@ -37,7 +46,13 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies }) {
               <tr key={`${specieName}`} className="fade">
                 <td>{specieName}</td>
 
-                <ExternalBlueLink href={`/observation/list?recoName=${specieName}`}>
+                <ExternalBlueLink
+                  href={
+                    filter?.groupName
+                      ? `/group/${filter.groupName}/observation/list?${address}&recoName=${specieName}`
+                      : `/observation/list?${address}&recoName=${specieName}`
+                  }
+                >
                   <td>{specieCount}</td>
                 </ExternalBlueLink>
               </tr>

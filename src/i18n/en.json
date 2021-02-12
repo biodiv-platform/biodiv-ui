@@ -604,7 +604,7 @@
     "CREATED_ON": "Created on",
     "LIFE_LIST": {
       "COUNT_HEADER": "Counts",
-      "HEADING": "Life list",
+      "HEADING": "Taxa observed",
       "SPECIES_HEADER": "Species"
     },
     "LOCATION": "Location",
@@ -615,6 +615,11 @@
       "LAST_UPDATED": "Last Updated",
       "LATEST": "Last Uploaded",
       "MOST_VIEWED": "Most Viewed"
+    },
+    "TOP_UPLOADERS_LIST": {
+      "AUTHOR_HEADER": "Name",
+      "COUNT_HEADER": "Counts",
+      "HEADING": "Top uploaders"
     },
     "VIEW_TYPE": {
       "GRID": "Grid",
