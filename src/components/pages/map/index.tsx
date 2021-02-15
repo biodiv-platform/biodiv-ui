@@ -2,8 +2,9 @@ import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
+import { Role } from "@interfaces/custom";
 import { ENDPOINT } from "@static/constants";
-import { waitForAuth } from "@utils/auth";
+import { hasAccess, waitForAuth } from "@utils/auth";
 import { getBearerToken } from "@utils/http";
 import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
@@ -22,6 +23,7 @@ export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
   const { t } = useTranslation();
   const { user } = useGlobalState();
+  const isAdmin = hasAccess([Role.Admin]);
 
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
@@ -52,6 +54,7 @@ export default function MapPageComponent() {
           store: SITE_CONFIG.GEOSERVER.STORE,
           workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
         }}
+        managePublishing={isAdmin}
         layers={
           SITE_CONFIG.MAP.DEFAULT_LAYERS
             ? [
