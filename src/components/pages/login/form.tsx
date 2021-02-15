@@ -8,6 +8,7 @@ import PhoneNumber from "@components/form/phone-number";
 import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
+import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axLogin } from "@services/auth.service";
@@ -106,13 +107,15 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       <PageHeading>{t("SIGN_IN.TITLE")}</PageHeading>
 
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <RadioInput name="verificationType" options={VERIFICATION_TYPE} form={hForm} mb={1} />
+        <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
+          <RadioInput name="verificationType" options={VERIFICATION_TYPE} form={hForm} mb={1} />
+        </div>
         {showMobile ? (
-          <PhoneNumber name="mobileNumber" label={t("SIGN_IN.FORM.USERNAME")} form={hForm} />
+          <PhoneNumber name="mobileNumber" label={t("SIGN_IN.FORM.MOBILE")} form={hForm} />
         ) : (
           <TextBox
             name="email"
-            label={t("SIGN_IN.FORM.USERNAME")}
+            label={t("SIGN_IN.FORM.EMAIL")}
             autoComplete="username"
             form={hForm}
           />

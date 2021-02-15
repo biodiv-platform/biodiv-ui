@@ -50,7 +50,7 @@ export default function UserMenu() {
               size="xs"
               mr={2}
               name={user?.name}
-              src={getUserImage(user?.profilePic)}
+              src={getUserImage(user?.profile_pic)}
             />
             {user?.name} <ChevronDownIcon />
           </MenuButton>

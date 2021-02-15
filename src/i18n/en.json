@@ -878,9 +878,10 @@
   "SIGN_IN": {
     "FORGOT_PASSWORD_LINK": "Forgot password?",
     "FORM": {
+      "EMAIL": "Email",
+      "MOBILE": "Mobile Number",
       "PASSWORD": "Password",
-      "SUBMIT": "Sign In",
-      "USERNAME": "Username"
+      "SUBMIT": "Sign In"
     },
     "SIGN_UP": "Don't have an account?",
     "SIGN_UP_LINK": "Register",

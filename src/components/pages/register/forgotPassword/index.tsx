@@ -7,6 +7,7 @@ import PhoneNumber from "@components/form/phone-number";
 import RadioInput from "@components/form/radio";
 import Submit from "@components/form/submit-button";
 import TextBox from "@components/form/text";
+import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axForgotPassword, axRegenerateOTP, axResetPassword } from "@services/auth.service";
@@ -110,13 +111,15 @@ export default function ForgotPasswordComponent() {
           <>
             <PageHeading>{t("FORGOT_PASSWORD.TITLE")}</PageHeading>
             <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-              <RadioInput
-                name="verificationType"
-                label={t("FORGOT_PASSWORD.FORM.VERIFICATION_TYPE")}
-                options={VERIFICATION_TYPE}
-                form={hForm}
-                mb={1}
-              />
+              <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
+                <RadioInput
+                  name="verificationType"
+                  label={t("FORGOT_PASSWORD.FORM.VERIFICATION_TYPE")}
+                  options={VERIFICATION_TYPE}
+                  form={hForm}
+                  mb={1}
+                />
+              </div>
               {showMobile ? (
                 <PhoneNumber name="mobileNumber" label={t("USER.MOBILE")} form={hForm} />
               ) : (
