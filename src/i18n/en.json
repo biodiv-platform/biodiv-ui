@@ -1,4 +1,5 @@
 {
+  "ADD": "Add",
   "ACTIONS": {
     "FLAG": {
       "CATEGORY": "Category",
@@ -103,6 +104,7 @@
       "TITLE": "Coverage",
       "WKT": "WKT"
     },
+    "COVERAGE_HINT": "once selected from any input press save button below the map to finalize",
     "CREATE": {
       "ERROR": "Unable to create document",
       "SUCCESS": "Document created successfully",
@@ -142,6 +144,7 @@
       "SUCCESS": "Document deleted successfully",
       "TITLE": "Delete document"
     },
+    "SELECTED_PLACES": "Selected Places",
     "SHARE": "Share this document",
     "TAGS": "Tags",
     "TITLE": "Title",
