@@ -8,7 +8,7 @@ import TopUploaders from "./top-uploaders";
 
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
-  
+
   return (
     <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
       <SpeciesGroups
