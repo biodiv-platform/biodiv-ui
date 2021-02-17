@@ -1,11 +1,22 @@
-import { Avatar, Box, Button, HStack, Skeleton, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
-import ExternalBlueLink from '@components/@core/blue-link/external';
-import BoxHeading from '@components/@core/layout/box-heading';
-import LocalLink from '@components/@core/local-link';
-import useTranslation from '@hooks/use-translation';
-import { getUserImage } from '@utils/media';
-import React from 'react';
-
+import {
+  Avatar,
+  Box,
+  Button,
+  HStack,
+  Skeleton,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr
+} from "@chakra-ui/react";
+import ExternalBlueLink from "@components/@core/blue-link/external";
+import BoxHeading from "@components/@core/layout/box-heading";
+import LocalLink from "@components/@core/local-link";
+import useTranslation from "@hooks/use-translation";
+import { getUserImage } from "@utils/media";
+import React from "react";
 
 export default function UploadersTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();

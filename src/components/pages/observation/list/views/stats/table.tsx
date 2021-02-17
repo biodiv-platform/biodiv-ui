@@ -1,10 +1,10 @@
-import { Box, Button, Skeleton } from '@chakra-ui/react';
-import ExternalBlueLink from '@components/@core/blue-link/external';
-import BoxHeading from '@components/@core/layout/box-heading';
-import LocalLink from '@components/@core/local-link';
-import styled from '@emotion/styled';
-import useTranslation from '@hooks/use-translation';
-import React from 'react';
+import { Box, Button, Skeleton } from "@chakra-ui/react";
+import ExternalBlueLink from "@components/@core/blue-link/external";
+import BoxHeading from "@components/@core/layout/box-heading";
+import LocalLink from "@components/@core/local-link";
+import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
+import React from "react";
 
 const Table = styled.table`
   tr {
@@ -24,7 +24,7 @@ const Table = styled.table`
 export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();
 
-  const { recoName: _recoName,...queryParams } = filter;
+  const { recoName: _recoName, ...queryParams } = filter;
 
   return data.list.length > 0 ? (
     <Box className="white-box">

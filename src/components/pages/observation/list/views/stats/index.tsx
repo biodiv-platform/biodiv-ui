@@ -6,7 +6,6 @@ import SpeciesGroups from "./species-groups";
 import StatesDistribution from "./states-distribution";
 import TopUploaders from "./top-uploaders";
 
-
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
   return (
