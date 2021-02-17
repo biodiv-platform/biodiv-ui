@@ -1,6 +1,7 @@
 import { Box, Button, Skeleton } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
+import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
@@ -20,13 +21,14 @@ const Table = styled.table`
   }
 `;
 
-export default function LifeListTable({ data, title, loadMoreUniqueSpecies }) {
+export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();
+
   return data.list.length > 0 ? (
     <Box className="white-box">
       <BoxHeading>{title}</BoxHeading>
 
-      <Box w="full" overflowY="auto" h={370}>
+      <Box w="full" overflowY="auto" h={400}>
         <Table className="table">
           <tbody>
             <tr>
@@ -34,12 +36,18 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies }) {
               <th>{t("LIST.LIFE_LIST.COUNT_HEADER")}</th>
             </tr>
             {data.list.map(([specieName, specieCount]) => (
-              <tr key={`${specieName}`} className="fade">
+              <tr key={specieName} className="fade">
                 <td>{specieName}</td>
 
-                <ExternalBlueLink href={`/observation/list?recoName=${specieName}`}>
-                  <td>{specieCount}</td>
-                </ExternalBlueLink>
+                <td>
+                  <LocalLink
+                    href={`/observation/list`}
+                    params={{ ...filter, view: "list", recoName: specieName }}
+                    prefixGroup={true}
+                  >
+                    <ExternalBlueLink>{specieCount}</ExternalBlueLink>
+                  </LocalLink>
+                </td>
               </tr>
             ))}
           </tbody>
