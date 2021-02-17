@@ -21,8 +21,6 @@ import React from "react";
 export default function UploadersTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();
 
-  const { user: _user, ...queryParams } = filter;
-
   return data.list.length > 0 ? (
     <Box className="white-box">
       <BoxHeading>{title}</BoxHeading>
@@ -40,7 +38,7 @@ export default function UploadersTable({ data, title, loadMoreUniqueSpecies, fil
             {data.list.map(({ name, pic, authorId, count }) => (
               <Tr key={`${authorId}-${count}`}>
                 <Td>
-                  <HStack spacing={5}>
+                  <HStack p="md">
                     <Avatar position="relative" src={getUserImage(pic, 50)} name={name} />
                     <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
                       <ExternalBlueLink>{name}</ExternalBlueLink>
@@ -51,7 +49,7 @@ export default function UploadersTable({ data, title, loadMoreUniqueSpecies, fil
                 <Td>
                   <LocalLink
                     href={`/observation/list`}
-                    params={{ ...queryParams, view: "list", user: authorId }}
+                    params={{ ...filter, view: "list", user: authorId }}
                     prefixGroup={true}
                   >
                     <ExternalBlueLink>{count}</ExternalBlueLink>

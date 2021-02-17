@@ -24,8 +24,6 @@ const Table = styled.table`
 export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();
 
-  const { recoName: _recoName, ...queryParams } = filter;
-
   return data.list.length > 0 ? (
     <Box className="white-box">
       <BoxHeading>{title}</BoxHeading>
@@ -38,18 +36,18 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filt
               <th>{t("LIST.LIFE_LIST.COUNT_HEADER")}</th>
             </tr>
             {data.list.map(([specieName, specieCount]) => (
-              <tr key={`${specieName}`} className="fade">
+              <tr key={specieName} className="fade">
                 <td>{specieName}</td>
 
-                <LocalLink
-                  href={`/observation/list`}
-                  params={{ ...queryParams, view: "list", recoName: specieName }}
-                  prefixGroup={true}
-                >
-                  <ExternalBlueLink>
-                    <td>{specieCount}</td>
-                  </ExternalBlueLink>
-                </LocalLink>
+                <td>
+                  <LocalLink
+                    href={`/observation/list`}
+                    params={{ ...filter, view: "list", recoName: specieName }}
+                    prefixGroup={true}
+                  >
+                    <ExternalBlueLink>{specieCount}</ExternalBlueLink>
+                  </LocalLink>
+                </td>
               </tr>
             ))}
           </tbody>
