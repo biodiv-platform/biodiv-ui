@@ -10,14 +10,12 @@ const TopUploaders = ({ filter }) => {
   const { t } = useTranslation();
 
   return (
-    <div>
       <UploadersTable
         data={uploader.uploadersData.data}
         title={t("LIST.TOP_UPLOADERS_LIST.HEADING")}
         loadMoreUniqueSpecies={uploader.uploadersData.loadMore}
         filter={filter}
       />
-    </div>
   );
 };
 

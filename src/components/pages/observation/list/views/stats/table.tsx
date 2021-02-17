@@ -1,10 +1,10 @@
-import { Box, Button, Skeleton } from "@chakra-ui/react";
-import ExternalBlueLink from "@components/@core/blue-link/external";
-import BoxHeading from "@components/@core/layout/box-heading";
-import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
-import React from "react";
-import { stringify } from "querystring";
+import { Box, Button, Skeleton } from '@chakra-ui/react';
+import ExternalBlueLink from '@components/@core/blue-link/external';
+import BoxHeading from '@components/@core/layout/box-heading';
+import LocalLink from '@components/@core/local-link';
+import styled from '@emotion/styled';
+import useTranslation from '@hooks/use-translation';
+import React from 'react';
 
 const Table = styled.table`
   tr {
@@ -24,12 +24,7 @@ const Table = styled.table`
 export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();
 
-  const queryParams = { ...filter };
-  if (filter.recoName) {
-    delete queryParams["recoName"];
-  }
-  queryParams.view = "list";
-  const address = stringify(queryParams);
+  const { recoName: _recoName,...queryParams } = filter;
 
   return data.list.length > 0 ? (
     <Box className="white-box">
@@ -46,15 +41,15 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filt
               <tr key={`${specieName}`} className="fade">
                 <td>{specieName}</td>
 
-                <ExternalBlueLink
-                  href={
-                    filter?.groupName
-                      ? `/group/${filter.groupName}/observation/list?${address}&recoName=${specieName}`
-                      : `/observation/list?${address}&recoName=${specieName}`
-                  }
+                <LocalLink
+                  href={`/observation/list`}
+                  params={{ ...queryParams, view: "list", recoName: specieName }}
+                  prefixGroup={true}
                 >
-                  <td>{specieCount}</td>
-                </ExternalBlueLink>
+                  <ExternalBlueLink>
+                    <td>{specieCount}</td>
+                  </ExternalBlueLink>
+                </LocalLink>
               </tr>
             ))}
           </tbody>

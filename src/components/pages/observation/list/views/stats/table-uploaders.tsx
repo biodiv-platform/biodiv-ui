@@ -1,29 +1,22 @@
-import { Box, Button, Skeleton, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import ExternalBlueLink from "@components/@core/blue-link/external";
-import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
-import React from "react";
-import { getUserImage } from "@utils/media";
+import { Avatar, Box, Button, HStack, Skeleton, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
+import ExternalBlueLink from '@components/@core/blue-link/external';
+import BoxHeading from '@components/@core/layout/box-heading';
+import LocalLink from '@components/@core/local-link';
+import useTranslation from '@hooks/use-translation';
+import { getUserImage } from '@utils/media';
+import React from 'react';
 
-import { Avatar, HStack } from "@chakra-ui/react";
-
-import { stringify } from "querystring";
 
 export default function UploadersTable({ data, title, loadMoreUniqueSpecies, filter }) {
   const { t } = useTranslation();
 
-  const queryParams = { ...filter };
-  if (filter.user) {
-    delete queryParams["user"];
-  }
-  queryParams.view = "list";
-  const address = stringify(queryParams);
+  const { user: _user, ...queryParams } = filter;
 
   return data.list.length > 0 ? (
     <Box className="white-box">
       <BoxHeading>{title}</BoxHeading>
 
-      <Box w="full" overflowY="auto" h={370}>
+      <Box w="full" overflowY="auto" h={490}>
         <Table variant="striped" colorScheme="blackAlpha">
           <Thead>
             <Tr>
@@ -36,30 +29,22 @@ export default function UploadersTable({ data, title, loadMoreUniqueSpecies, fil
             {data.list.map(({ name, pic, authorId, count }) => (
               <Tr key={`${authorId}-${count}`}>
                 <Td>
-                  <HStack spacing="10px">
+                  <HStack spacing={5}>
                     <Avatar position="relative" src={getUserImage(pic, 50)} name={name} />
-                    <ExternalBlueLink
-                      href={
-                        filter?.groupName
-                          ? `/group/${filter.groupName}/user/show/${authorId}`
-                          : `/user/show/${authorId}`
-                      }
-                    >
-                      {name}
-                    </ExternalBlueLink>
+                    <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
+                      <ExternalBlueLink>{name}</ExternalBlueLink>
+                    </LocalLink>
                   </HStack>
                 </Td>
 
                 <Td>
-                  <ExternalBlueLink
-                    href={
-                      filter?.groupName
-                        ? `/group/${filter?.groupName}/observation/list?${address}&user=${authorId}`
-                        : `/observation/list?${address}&user=${authorId}`
-                    }
+                  <LocalLink
+                    href={`/observation/list`}
+                    params={{ ...queryParams, view: "list", user: authorId }}
+                    prefixGroup={true}
                   >
-                    {count}
-                  </ExternalBlueLink>
+                    <ExternalBlueLink>{count}</ExternalBlueLink>
+                  </LocalLink>
                 </Td>
               </Tr>
             ))}
