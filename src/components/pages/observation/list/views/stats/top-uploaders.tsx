@@ -13,7 +13,7 @@ const TopUploaders = ({ filter }) => {
     <UploadersTable
       data={uploader.uploadersData.data}
       title={t("LIST.TOP_UPLOADERS_LIST.HEADING")}
-      loadMoreUniqueSpecies={uploader.uploadersData.loadMore}
+      loadMoreUploaders={uploader.uploadersData.loadMore}
       filter={filter}
     />
   );

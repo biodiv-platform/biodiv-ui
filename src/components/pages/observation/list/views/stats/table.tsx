@@ -38,15 +38,18 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filt
             {data.list.map(([specieName, specieCount]) => (
               <tr key={specieName} className="fade">
                 <td>{specieName}</td>
-
                 <td>
-                  <LocalLink
-                    href={`/observation/list`}
-                    params={{ ...filter, view: "list", recoName: specieName }}
-                    prefixGroup={true}
-                  >
-                    <ExternalBlueLink>{specieCount}</ExternalBlueLink>
-                  </LocalLink>
+                  {specieCount != 0 ? (
+                    <LocalLink
+                      href={`/observation/list`}
+                      params={{ ...filter, view: "list", recoName: specieName }}
+                      prefixGroup={true}
+                    >
+                      <ExternalBlueLink>{specieCount}</ExternalBlueLink>
+                    </LocalLink>
+                  ) : (
+                    specieCount
+                  )}
                 </td>
               </tr>
             ))}

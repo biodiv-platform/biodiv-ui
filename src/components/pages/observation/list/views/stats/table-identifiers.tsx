@@ -18,8 +18,10 @@ import useTranslation from "@hooks/use-translation";
 import { getUserImage } from "@utils/media";
 import React from "react";
 
-export default function UploadersTable({ data, title, loadMoreUploaders, filter }) {
+export default function IdentifiersTable({ data, title, loadMoreIdentifiers, filter }) {
   const { t } = useTranslation();
+
+  const { user: _user, ...queryParams } = filter;
 
   return data.list.length > 0 ? (
     <Box className="white-box">
@@ -35,7 +37,7 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
                 fontSize="md"
                 backgroundColor="#ededed"
               >
-                {t("LIST.TOP_UPLOADERS_LIST.AUTHOR_HEADER")}
+                {t("LIST.TOP_IDENTIFIERS_LIST.AUTHOR_HEADER")}
               </Th>
               <Th
                 textTransform="capitalize"
@@ -43,7 +45,7 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
                 fontSize="md"
                 backgroundColor="#ededed"
               >
-                {t("LIST.TOP_UPLOADERS_LIST.COUNT_HEADER")}
+                {t("LIST.TOP_IDENTIFIERS_LIST.COUNT_HEADER")}
               </Th>
             </Tr>
           </Thead>
@@ -64,7 +66,7 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
                   {count != 0 ? (
                     <LocalLink
                       href={`/observation/list`}
-                      params={{ ...filter, view: "list", user: authorId }}
+                      params={{ ...queryParams, view: "list", authorVoted: authorId }}
                       prefixGroup={true}
                     >
                       <ExternalBlueLink>{count}</ExternalBlueLink>
@@ -78,7 +80,7 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
           </Tbody>
         </Table>
       </Box>
-      <Button w="full" onClick={loadMoreUploaders} isLoading={data.isLoading} borderTopRadius={0}>
+      <Button w="full" onClick={loadMoreIdentifiers} isLoading={data.isLoading} borderTopRadius={0}>
         {t("LOAD_MORE")}
       </Button>
     </Box>

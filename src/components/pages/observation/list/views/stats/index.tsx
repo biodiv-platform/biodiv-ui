@@ -5,12 +5,15 @@ import LifeList from "./life-list";
 import SpeciesGroups from "./species-groups";
 import StatesDistribution from "./states-distribution";
 import TopUploaders from "./top-uploaders";
+import TopIdentifiers from "./top-identifiers";
 
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
 
   return (
     <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
+      <TopUploaders filter={filter} />
+      <TopIdentifiers filter={filter} />
       <SpeciesGroups
         observationData={observationData}
         speciesGroup={speciesGroup}
@@ -18,7 +21,6 @@ export default function StatsView() {
       />
       <LifeList filter={filter} />
       <StatesDistribution observationData={observationData} filter={filter} />
-      <TopUploaders filter={filter} />
     </SimpleGrid>
   );
 }

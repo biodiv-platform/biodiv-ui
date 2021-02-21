@@ -618,6 +618,11 @@
       "LATEST": "Last Uploaded",
       "MOST_VIEWED": "Most Viewed"
     },
+    "TOP_IDENTIFIERS_LIST": {
+      "AUTHOR_HEADER": "Name",
+      "COUNT_HEADER": "Counts",
+      "HEADING": "Top identifiers"
+    },
     "TOP_UPLOADERS_LIST": {
       "AUTHOR_HEADER": "Name",
       "COUNT_HEADER": "Counts",
