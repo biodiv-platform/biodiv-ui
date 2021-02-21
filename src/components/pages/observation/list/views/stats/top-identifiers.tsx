@@ -3,7 +3,6 @@ import React from "react";
 import IdentifiersTable from "./table-identifiers";
 import useTopIdentifiers from "./use-top-identifiers";
 
-
 const TopIdentifiers = ({ filter }) => {
   const identifier = useTopIdentifiers({ filter });
 
