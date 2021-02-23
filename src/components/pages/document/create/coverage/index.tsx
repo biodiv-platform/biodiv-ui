@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
-import WKTFieldMulti from "@components/form/wkt-multi";
 import IconCheckboxField from "@components/pages/group/common/icon-checkbox-field";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
+
+import WKTCoverage from "./wkt-coverage";
 
 export default function Coverage({ hForm, speciesGroups, habitats }) {
   const { t } = useTranslation();
@@ -30,15 +31,7 @@ export default function Coverage({ hForm, speciesGroups, habitats }) {
         type="habitat"
       />
 
-      <WKTFieldMulti
-        name="docCoverageData"
-        label={t("DOCUMENT.COVERAGE.SPATIAL")}
-        nameTitle="placename"
-        labelTitle={t("DOCUMENT.COVERAGE.PLACE")}
-        nameTopology="topology"
-        labelTopology={t("DOCUMENT.COVERAGE.WKT")}
-        form={hForm}
-      />
+      <WKTCoverage hForm={hForm} name="docCoverageData" />
     </Box>
   );
 }

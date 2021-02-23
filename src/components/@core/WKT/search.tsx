@@ -1,16 +1,15 @@
-import { Box, FormControl, FormLabel, Input, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormHelperText, FormLabel, Input, Text } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
+import AddIcon from "@icons/add";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import { isBrowser } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import debounce from "debounce-promise";
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
-
-import SaveButton from "./save-button";
 
 const NakshaGmapsDraw: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaGmapsDraw),
@@ -34,6 +33,7 @@ const onQuery = async (q) => {
 export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave, mb = 2 }) {
   const [selected, setSelected] = useState<any>();
   const onQueryDebounce = debounce(onQuery, 200);
+  const gmapsSearchRef = useRef<any>(null);
   const { t } = useTranslation();
 
   const handleOnSave = () => {
@@ -50,31 +50,31 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
 
   const handleOnChange = (value) => {
     const label = value?.[0]?.properties?.formatted_address;
-    label && setSelected({ label, value: value[0] });
+    if (label) {
+      setSelected({ label, value: value[0] });
+      gmapsSearchRef.current.value = "";
+    }
   };
 
   return (
-    <div>
-      <SimpleGrid columns={[1, 1, 7, 7]} spacing={4} mb={mb}>
-        <FormControl gridColumn="1/7">
-          <FormLabel htmlFor={"geoentities-search"}>{labelTitle}</FormLabel>
-          <AsyncSelect
-            name="geoentities-search"
-            id="geoentities-search"
-            value={selected}
-            menuPortalTarget={isBrowser && document.body}
-            isSearchable={true}
-            isClearable={true}
-            noOptionsMessage={() => null}
-            onChange={setSelected}
-            placeholder={t("DOCUMENT.GEOENTITIES")}
-            loadOptions={onQueryDebounce}
-          />
-        </FormControl>
-        <SaveButton onClick={handleOnSave} />
-      </SimpleGrid>
+    <Box mb={mb}>
+      <FormControl>
+        <FormLabel htmlFor="geoentities-search">{labelTitle}</FormLabel>
+        <AsyncSelect
+          name="geoentities-search"
+          id="geoentities-search"
+          value={selected}
+          menuPortalTarget={isBrowser && document.body}
+          isSearchable={true}
+          isClearable={true}
+          noOptionsMessage={() => null}
+          onChange={setSelected}
+          placeholder={t("DOCUMENT.GEOENTITIES")}
+          loadOptions={onQueryDebounce}
+        />
+      </FormControl>
       <Text color="gray.500" mb={2} children={t("OR")} />
-      <Box position="relative" borderRadius="md">
+      <Box position="relative" borderRadius="md" mb={4}>
         <NakshaGmapsDraw
           defaultViewPort={defaultViewPort}
           defaultFeatures={selected?.value ? [selected?.value] : []}
@@ -85,9 +85,24 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
           gmapRegion={SITE_CONFIG.MAP.COUNTRY}
           gmapApiAccessToken={SITE_CONFIG.TOKENS.GMAP}
           mapStyle={{ height: "22rem", width: "100%", borderRadius: ".25rem" }}
-          autocompleteComponent={<Input mb={4} placeholder={t("DOCUMENT.FIND_GMAPS")} w="full" />}
+          autocompleteComponent={
+            <FormControl mb={4}>
+              <FormLabel htmlFor="gmaps-search">{t("DOCUMENT.FIND_GMAPS")}</FormLabel>
+              <Input ref={gmapsSearchRef} w="full" />
+              <FormHelperText>{t("DOCUMENT.COVERAGE_HINT")}</FormHelperText>
+            </FormControl>
+          }
         />
       </Box>
-    </div>
+      <Button
+        type="button"
+        colorScheme="blue"
+        maxW="6rem"
+        leftIcon={<AddIcon />}
+        onClick={handleOnSave}
+      >
+        {t("ADD")}
+      </Button>
+    </Box>
   );
 }

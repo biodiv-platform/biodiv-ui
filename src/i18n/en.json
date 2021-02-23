@@ -1,4 +1,5 @@
 {
+  "ADD": "Add",
   "ACTIONS": {
     "FLAG": {
       "CATEGORY": "Category",
@@ -19,6 +20,7 @@
     "CUSTOM_FIELD_EDITED": "custom field edited",
     "DOCUMENT_CREATED": "document created",
     "DOCUMENT_TAG_UPDATED": "updated tags",
+    "DOCUMENT_UPDATED": "document updated",
     "FEATURED": "featured in group",
     "FLAG_REMOVED": "flag removed",
     "FLAGGED": "flagged",
@@ -61,6 +63,7 @@
   "COPY": "Copy to Clipboard",
   "DELETE": "Delete",
   "DOCUMENT": {
+    "BASIC_INFORMATION": "Basic Information",
     "BIB": {
       "ABSTRACT": "Description",
       "ADDRESS": "Address",
@@ -101,6 +104,7 @@
       "TITLE": "Coverage",
       "WKT": "WKT"
     },
+    "COVERAGE_HINT": "once selected from any input press save button below the map to finalize",
     "CREATE": {
       "ERROR": "Unable to create document",
       "SUCCESS": "Document created successfully",
@@ -113,6 +117,11 @@
     "DOWNLOAD": {
       "CITATION": "Citation",
       "PDF": "PDF"
+    },
+    "EDIT": {
+      "ERROR": "There was an error updating this document",
+      "SUCCESS": "Document Updated Successfully",
+      "TITLE": "Edit Document"
     },
     "EDIT_DOCUMENT": "Edit Document",
     "FIND_GMAPS": "Search from Google Maps",
@@ -135,6 +144,7 @@
       "SUCCESS": "Document deleted successfully",
       "TITLE": "Delete document"
     },
+    "SELECTED_PLACES": "Selected Places",
     "SHARE": "Share this document",
     "TAGS": "Tags",
     "TITLE": "Title",

@@ -12,6 +12,18 @@ export const axGetDocumentById = async (documentId) => {
   }
 };
 
+export const axGetEditDocumentById = async (ctx, documentId) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.DOCUMENT}/v1/services/edit/${documentId}`, {
+      params: { ctx }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
 export const axFollowDocument = async (documentId, follow = true) => {
   const action = follow ? "follow" : "unfollow";
 
@@ -179,6 +191,16 @@ export const axParseBib = async (bibFile: File) => {
 export const axCreateDocument = async (payload) => {
   try {
     const { data } = await http.post(`${ENDPOINT.DOCUMENT}/v1/services/create`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axUpdateDocument = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.DOCUMENT}/v1/services/update`, payload);
     return { success: true, data };
   } catch (e) {
     console.error(e);

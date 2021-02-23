@@ -40,7 +40,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
             <Tab>{t("DOCUMENT.GEOENTITIES")}</Tab>
             <Tab>{t("DOCUMENT.WKT")}</Tab>
           </TabList>
-          <TabPanels p={4}>
+          <TabPanels>
             <TabPanel>
               <WKTSearch {...props} onSave={handleOnSave} />
             </TabPanel>
@@ -49,7 +49,12 @@ export default function WKTFieldMulti(props: WKTInputProps) {
             </TabPanel>
           </TabPanels>
         </Tabs>
-        <WKTList list={value} onDelete={handleOnDelete} {...props} />
+        <Box>
+          <Box px={4} pb={2}>
+            {t("DOCUMENT.SELECTED_PLACES")}
+          </Box>
+          <WKTList list={value} onDelete={handleOnDelete} {...props} />
+        </Box>
       </Box>
     </Box>
   );

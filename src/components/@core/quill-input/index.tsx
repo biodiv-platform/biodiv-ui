@@ -1,7 +1,7 @@
 import "quill/dist/quill.snow.css";
 
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
 
 const QuillBox = styled.div`
@@ -28,7 +28,9 @@ interface QuillInputProps {
   onChange;
 }
 
-const QuillInput = ({ value, onChange }: QuillInputProps) => {
+const QuillInput = ({ value: EValue, onChange }: QuillInputProps) => {
+  const [value, setValue] = useState(EValue);
+
   const { quill, quillRef } = useQuill({
     theme: "snow",
     modules: {
@@ -40,15 +42,30 @@ const QuillInput = ({ value, onChange }: QuillInputProps) => {
     }
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (quill) {
       quill.clipboard.dangerouslyPasteHTML(value || "");
 
       quill.on("text-change", () => {
-        onChange(quill.root.innerHTML);
+        setValue(quill.root.innerHTML);
       });
     }
   }, [quill]);
+
+  useEffect(() => {
+    onChange(value);
+  }, [value]);
+
+  /*
+   * diffing before hard updating quill
+   * This is useful when key gets updated externally
+   * for example importing `BibTex` file
+   */
+  useEffect(() => {
+    if (EValue !== value) {
+      quill.clipboard.dangerouslyPasteHTML(EValue);
+    }
+  }, [EValue]);
 
   return (
     <QuillBox>

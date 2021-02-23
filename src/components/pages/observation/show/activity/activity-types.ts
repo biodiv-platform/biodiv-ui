@@ -5,6 +5,7 @@ export default {
   CUSTOM_FIELD_EDITED: "Custom field edited",
   DOCUMENT_CREATED: "Document Created",
   DOCUMENT_TAG_UPDATED: "Document tag updated",
+  DOCUMENT_UPDATED: "Document Updated",
   FEATURED: "Featured",
   FLAG_REMOVED: "Flag removed",
   FLAGGED: "Flagged",

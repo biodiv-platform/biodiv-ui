@@ -3,16 +3,14 @@ import { PageHeading } from "@components/@core/layout";
 import DatePickerField from "@components/form/datepicker";
 import RichTextareaField from "@components/form/rich-textarea";
 import SelectInputField from "@components/form/select";
-import SelectAsyncInputField from "@components/form/select-async";
 import TextBoxField from "@components/form/text";
 import useTranslation from "@hooks/use-translation";
-import { axGetDocumentBibFields, axQueryDocumentTagsByText } from "@services/document.service";
-import { DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
+import { axGetDocumentBibFields } from "@services/document.service";
 import { LICENSES_ARRAY } from "@static/licenses";
+import { getBibFieldsMeta } from "@utils/document";
 import notification from "@utils/notification";
 import React, { useEffect } from "react";
 import { UseFormMethods } from "react-hook-form";
-import * as Yup from "yup";
 
 import BibImportButton from "../bib-import";
 
@@ -20,32 +18,20 @@ interface BasicInfoProps {
   hForm: UseFormMethods<Record<string, any>>;
   documentTypes;
   setBibField;
+  canImport?: boolean;
 }
 
-const onTagsQuery = async (q) => {
-  const { data } = await axQueryDocumentTagsByText(q);
-  return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
-};
-
-export default function BasicInfo({ hForm, documentTypes, setBibField }: BasicInfoProps) {
+export default function BasicInfo({
+  hForm,
+  documentTypes,
+  setBibField,
+  canImport
+}: BasicInfoProps) {
   const { t } = useTranslation();
   const itemTypeIdWatch = hForm.watch("itemTypeId");
 
-  const getBibFieldsMeta = (fields) => {
-    return {
-      schema: Object.entries(fields).reduce(
-        (schema, [key, value]) => (value ? { ...schema, [key]: Yup.string().required() } : schema),
-        DEFAULT_BIB_FIELDS_SCHEMA
-      ),
-      fields
-    };
-  };
-
   const getBibOption = async () => {
-    const {
-      success,
-      data: { "item type": _1, file, ...fields }
-    } = await axGetDocumentBibFields(itemTypeIdWatch);
+    const { success, data: fields } = await axGetDocumentBibFields(itemTypeIdWatch);
     if (success) {
       setBibField(getBibFieldsMeta(fields));
     } else {
@@ -63,9 +49,9 @@ export default function BasicInfo({ hForm, documentTypes, setBibField }: BasicIn
     <div>
       <Stack flexDirection={["column", "row"]} alignItems="top" mb={1}>
         <PageHeading as="h2" size="lg" mb={4} mr={4}>
-          ℹ️ Basic Information
+          ℹ️ {t("DOCUMENT.BASIC_INFORMATION")}
         </PageHeading>
-        <BibImportButton hForm={hForm} />
+        {canImport && <BibImportButton hForm={hForm} />}
       </Stack>
 
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
@@ -115,14 +101,6 @@ export default function BasicInfo({ hForm, documentTypes, setBibField }: BasicIn
           </SimpleGrid>
         </div>
       </SimpleGrid>
-      <SelectAsyncInputField
-        name="tags"
-        label={t("DOCUMENT.TAGS")}
-        hint={t("OBSERVATION.TAGS_HINT")}
-        form={hForm}
-        multiple={true}
-        onQuery={onTagsQuery}
-      />
     </div>
   );
 }

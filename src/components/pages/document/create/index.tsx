@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import BasicInfo from "./basic-info";
+import TagsInput from "./basic-info/tags-input";
 import Coverage from "./coverage";
 import Metadata from "./metadata";
 import DocumentUploader from "./uploader";
@@ -122,7 +123,13 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
         <PageHeading>📄 {t("DOCUMENT.CREATE.TITLE")}</PageHeading>
         <DocumentUploader form={hForm} name="resource" />
-        <BasicInfo hForm={hForm} documentTypes={documentTypes} setBibField={setBibField} />
+        <BasicInfo
+          canImport={true}
+          hForm={hForm}
+          documentTypes={documentTypes}
+          setBibField={setBibField}
+        />
+        <TagsInput hForm={hForm} />
         <Metadata hForm={hForm} bibFields={bibField.fields} />
         <Coverage hForm={hForm} speciesGroups={speciesGroups} habitats={habitats} />
         <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
