@@ -11,7 +11,7 @@ export default function TableTotals({ totals }) {
           <Text fontSize="3xl" mt={2}>
             {totals[metric] != undefined ? totals[metric] : 0}
           </Text>
-          <Text>{t(`LIST.STATS_BAR.${metric}`)}</Text>
+          <Text>{t(`LIST.STATS_BAR.${metric.toUpperCase()}`)}</Text>
         </Box>
       ))}
     </SimpleGrid>
