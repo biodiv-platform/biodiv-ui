@@ -28,7 +28,7 @@ export default function FilterMultiSelectInput({
 
   const searchKey = DOUCMENT_FILTER_KEY[filterKey]?.searchKey || filterKey;
 
-  const onQuery = debounce((q) => axSearchFilterByName(q, searchKey, "ed"), 200);
+  const onQuery = debounce((q) => axSearchFilterByName(q, searchKey, "ed", true), 200);
 
   const defaultValue = useMemo(
     () => (filter?.[filterKey] ? arrayToOptions(filter?.[filterKey]?.split(",")) : []),

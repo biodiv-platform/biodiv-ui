@@ -62,7 +62,7 @@ export const axGetUserLeaderboard = async (payload, user) => {
   }
 };
 
-export const axSearchFilterByName = async (text, field, index = "eo") => {
+export const axSearchFilterByName = async (text, field, index = "eo", defaultOption = false) => {
   try {
     const { data } = await plainHttp.get(
       `${ENDPOINT.ESMODULE}/v1/services/filterautocomplete/${index}/er`,
@@ -70,6 +70,10 @@ export const axSearchFilterByName = async (text, field, index = "eo") => {
         params: { text, field }
       }
     );
+
+    if (defaultOption) {
+      data.unshift(text);
+    }
 
     const formatResponse = () => {
       return data?.reduce((acc, i) => {
