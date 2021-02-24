@@ -61,7 +61,7 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
                 </Td>
 
                 <Td>
-                  {count != 0 ? (
+                  {count && (
                     <LocalLink
                       href={`/observation/list`}
                       params={{ ...filter, view: "list", user: authorId }}
@@ -69,8 +69,6 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
                     >
                       <ExternalBlueLink>{count}</ExternalBlueLink>
                     </LocalLink>
-                  ) : (
-                    count
                   )}
                 </Td>
               </Tr>

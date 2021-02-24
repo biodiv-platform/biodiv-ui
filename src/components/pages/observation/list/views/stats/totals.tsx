@@ -1,3 +1,4 @@
+import { Spinner } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import TableTotals from "./table-totals";
 import useTotals from "./use-totals";
@@ -15,11 +16,15 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
 
     const filteredCounts = filteredGroups.map((v) => observationData.ag.groupSpeciesName[v.name]);
     return filteredCounts.reduce((a, b) => a + b);
-  }, [filter, observationData]);
+  }, [filter]);
 
-  const totals = { ...totalsData.data.list, totalObservations: s };
+  const totals = { totalObservations: s, ...totalsData.data.list };
 
-  return <TableTotals totals={totals} />;
+  return totalsData.data.isLoading ? (
+    <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
+  ) : (
+    <TableTotals totals={totals} />
+  );
 };
 
 export default Totals;

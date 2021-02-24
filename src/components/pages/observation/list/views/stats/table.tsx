@@ -39,7 +39,7 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filt
               <tr key={specieName} className="fade">
                 <td>{specieName}</td>
                 <td>
-                  {specieCount != 0 ? (
+                  {specieCount && (
                     <LocalLink
                       href={`/observation/list`}
                       params={{ ...filter, view: "list", recoName: specieName }}
@@ -47,8 +47,6 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filt
                     >
                       <ExternalBlueLink>{specieCount}</ExternalBlueLink>
                     </LocalLink>
-                  ) : (
-                    specieCount
                   )}
                 </td>
               </tr>

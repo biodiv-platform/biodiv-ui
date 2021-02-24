@@ -63,7 +63,7 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
                 </Td>
 
                 <Td>
-                  {count != 0 ? (
+                  {count && (
                     <LocalLink
                       href={`/observation/list`}
                       params={{ ...queryParams, view: "list", authorVoted: authorId }}
@@ -71,8 +71,6 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
                     >
                       <ExternalBlueLink>{count}</ExternalBlueLink>
                     </LocalLink>
-                  ) : (
-                    count
                   )}
                 </Td>
               </Tr>
