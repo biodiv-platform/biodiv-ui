@@ -42,15 +42,13 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           {o.recoIbp?.commonName && <div>{o.recoIbp.commonName}</div>}
         </ResponsiveInfo>
 
-        {SITE_CONFIG.USERGROUP.ACTIVE && (
-          <ResponsiveInfo title="OBSERVATION.GROUP">
-            <SpeciesGroupBox
-              id={o.observation?.groupId}
-              speciesGroups={speciesGroups}
-              observationId={o.observation?.id}
-            />
-          </ResponsiveInfo>
-        )}
+        <ResponsiveInfo title="OBSERVATION.GROUP">
+          <SpeciesGroupBox
+            id={o.observation?.groupId}
+            speciesGroups={speciesGroups}
+            observationId={o.observation?.id}
+          />
+        </ResponsiveInfo>
 
         <ResponsiveInfo title="OBSERVATION.PLACE">{o.observation?.placeName}</ResponsiveInfo>
 
