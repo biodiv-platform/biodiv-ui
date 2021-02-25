@@ -27,8 +27,10 @@ export default function useUniqueSpecies({ filter }) {
           _draft.list = Object.entries(data.aggregateStatsData.groupUniqueSpecies);
           _draft.lifelistoffset = LIFE_LIST_LIMIT;
         } else {
-          _draft.list.push(...Object.entries(data.aggregateStatsData.groupUniqueSpecies));
-          _draft.lifelistoffset = _draft.lifelistoffset + LIFE_LIST_LIMIT;
+          if (data.aggregateStatsData.groupUniqueSpecies) {
+            _draft.list.push(...Object.entries(data.aggregateStatsData.groupUniqueSpecies));
+            _draft.lifelistoffset = _draft.lifelistoffset + LIFE_LIST_LIMIT;
+          }
         }
       }
       _draft.isLoading = false;

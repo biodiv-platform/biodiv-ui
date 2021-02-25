@@ -628,6 +628,17 @@
       "LATEST": "Last Uploaded",
       "MOST_VIEWED": "Most Viewed"
     },
+    "STATS_BAR": {
+      "TOTAL_IDENTIFIERS": "Identifiers",
+      "TOTAL_OBSERVATIONS": "Observations",
+      "TOTAL_TAXA": "Taxa",
+      "TOTAL_UPLOADERS": "Uploaders"
+    },
+    "TOP_IDENTIFIERS_LIST": {
+      "AUTHOR_HEADER": "Name",
+      "COUNT_HEADER": "Counts",
+      "HEADING": "Top identifiers"
+    },
     "TOP_UPLOADERS_LIST": {
       "AUTHOR_HEADER": "Name",
       "COUNT_HEADER": "Counts",
