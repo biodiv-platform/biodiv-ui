@@ -50,12 +50,14 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
         licenseId: Yup.number().required(),
         fromDate: Yup.mixed().required(),
 
-        resource: Yup.object()
-          .shape({
-            resourceURL: Yup.string().required(),
-            size: Yup.number().required()
-          })
-          .required(),
+        resource: Yup.lazy((value) =>
+          value
+            ? Yup.object().shape({
+                resourceURL: Yup.string().required(),
+                size: Yup.number().required()
+              })
+            : Yup.mixed().notRequired()
+        ),
 
         tags: Yup.array().nullable(),
 
@@ -86,22 +88,15 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
   });
 
   const handleOnSubmit = async (values) => {
-    const {
-      resource: { resourceURL, size },
-      bibFieldData,
-      itemTypeId,
-      fromDate,
-      tags,
-      ...rest
-    } = values;
+    const { resource, bibFieldData, itemTypeId, fromDate, tags, ...rest } = values;
 
     const payload = {
       ...DEFAULT_VALUES,
       ...rest,
-      resourceURL,
+      resourceURL: resource?.resourceURL,
       fromDate: dateToUTC(fromDate).format(),
       tags: cleanTags(tags),
-      size,
+      size: resource?.size,
       bibFieldData: {
         ...bibFieldData,
         "item type": documentTypes.find((o) => o.value === itemTypeId)?.label

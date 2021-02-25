@@ -18,7 +18,8 @@
     "ACTIVE": true
   },
   "DOCUMENT": {
-    "ACTIVE": true
+    "ACTIVE": true,
+    "GEOENTITY_SEARCH": true
   },
   "FEEDBACK": {
     "ACTIVE": true

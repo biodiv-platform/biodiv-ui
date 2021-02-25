@@ -58,22 +58,24 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
 
   return (
     <Box mb={mb}>
-      <FormControl>
-        <FormLabel htmlFor="geoentities-search">{labelTitle}</FormLabel>
-        <AsyncSelect
-          name="geoentities-search"
-          id="geoentities-search"
-          value={selected}
-          menuPortalTarget={isBrowser && document.body}
-          isSearchable={true}
-          isClearable={true}
-          noOptionsMessage={() => null}
-          onChange={setSelected}
-          placeholder={t("DOCUMENT.GEOENTITIES")}
-          loadOptions={onQueryDebounce}
-        />
-      </FormControl>
-      <Text color="gray.500" mb={2} children={t("OR")} />
+      <div data-hidden={!SITE_CONFIG.DOCUMENT.GEOENTITY_SEARCH}>
+        <FormControl>
+          <FormLabel htmlFor="geoentities-search">{labelTitle}</FormLabel>
+          <AsyncSelect
+            name="geoentities-search"
+            id="geoentities-search"
+            value={selected}
+            menuPortalTarget={isBrowser && document.body}
+            isSearchable={true}
+            isClearable={true}
+            noOptionsMessage={() => null}
+            onChange={setSelected}
+            placeholder={t("DOCUMENT.GEOENTITIES")}
+            loadOptions={onQueryDebounce}
+          />
+        </FormControl>
+        <Text color="gray.500" mb={2} children={t("OR")} />
+      </div>
       <Box position="relative" borderRadius="md" mb={4}>
         <NakshaGmapsDraw
           defaultViewPort={defaultViewPort}
