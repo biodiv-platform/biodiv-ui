@@ -48,7 +48,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
 
         contribution: Yup.string(),
         licenseId: Yup.number().required(),
-        fromDate: Yup.mixed().required(),
+        fromDate: Yup.mixed(),
 
         resource: Yup.lazy((value) =>
           value
