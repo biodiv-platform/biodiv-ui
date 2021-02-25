@@ -16,10 +16,8 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
 
     const filteredGroups = speciesGroup.filter((sg) => filter.sGroup.includes(sg.id));
 
-    const filteredCounts = filteredGroups.map((v) =>
-      observationData.ag.groupSpeciesName[v.name] != undefined
-        ? observationData.ag.groupSpeciesName[v.name]
-        : 0
+    const filteredCounts = filteredGroups.map(
+      (v) => observationData.ag.groupSpeciesName[v.name] || 0
     );
 
     return filteredCounts.reduce((a, b) => a + b);
