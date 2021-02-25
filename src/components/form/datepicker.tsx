@@ -44,7 +44,8 @@ const DatePickerField = ({
   dateFormat = "d-m-Y",
   ...props
 }: IDatePickerBoxProps) => {
-  const [date, setDate] = useState(parseDate(form.control.defaultValuesRef.current[name]));
+  const initialValue = form.control.defaultValuesRef.current[name];
+  const [date, setDate] = useState(initialValue ? parseDate(initialValue) : undefined);
 
   useEffect(() => {
     form.register({ name });
