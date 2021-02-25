@@ -619,10 +619,10 @@
       "MOST_VIEWED": "Most Viewed"
     },
     "STATS_BAR": {
-      "TOTALIDENTIFIERS": "Identifiers",
-      "TOTALOBSERVATIONS": "Observations",
-      "TOTALTAXA": "Taxa",
-      "TOTALUPLOADERS": "Uploaders"
+      "TOTAL_IDENTIFIERS": "Identifiers",
+      "TOTAL_OBSERVATIONS": "Observations",
+      "TOTAL_TAXA": "Taxa",
+      "TOTAL_UPLOADERS": "Uploaders"
     },
     "TOP_IDENTIFIERS_LIST": {
       "AUTHOR_HEADER": "Name",

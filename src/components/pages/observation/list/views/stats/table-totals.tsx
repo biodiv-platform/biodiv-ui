@@ -1,19 +1,15 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
-export default function TableTotals({ totals }) {
-  const { t } = useTranslation();
+export default function TableTotals({ title, count }) {
   return (
-    <SimpleGrid columns={{ md: 4 }} spacing={4} mb={4}>
-      {Object.keys(totals).map((metric) => (
-        <Box p={4} className="white-box" bg="gray" borderRadius="lg">
-          <Text fontSize="3xl" mt={2}>
-            {totals[metric] != undefined ? totals[metric] : 0}
-          </Text>
-          <Text>{t(`LIST.STATS_BAR.${metric.toUpperCase()}`)}</Text>
-        </Box>
-      ))}
-    </SimpleGrid>
+    <Box p={4} className="white-box" bg="gray" borderRadius="lg">
+      {count && (
+        <Text fontSize="3xl" mt={2}>
+          {count}
+        </Text>
+      )}
+      <Text>{title}</Text>
+    </Box>
   );
 }
