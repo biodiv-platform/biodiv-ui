@@ -2,21 +2,44 @@ import "keen-slider/keen-slider.min.css";
 
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useKeenSlider } from "keen-slider/react";
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import Sidebar from "./sidebar";
 import Slide from "./slide";
 import SlideInfo from "./slide-info";
 
 export default function CarouselNew({ featured }) {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [pause, setPause] = useState(false);
+  const timer = useRef<any>();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide);
-    }
+    slideChanged: (s) => setCurrentSlide(s.details().relativeSlide),
+    duration: 1000, // transition duration when slide changes
+    dragStart: () => setPause(true),
+    dragEnd: () => setPause(false)
   });
+
+  useEffect(() => {
+    sliderRef?.current?.addEventListener("mouseover", () => setPause(true));
+    sliderRef?.current?.addEventListener("mouseout", () => setPause(false));
+  }, [sliderRef]);
+
+  /*
+   * This will be called every 4s to change slide to next
+   * unless if you are hovering over slide and next call will be skipped
+   */
+  useEffect(() => {
+    timer.current = setInterval(() => {
+      if (!pause && slider) {
+        slider.next();
+      }
+    }, 4000);
+    return () => {
+      clearInterval(timer.current);
+    };
+  }, [pause, slider]);
 
   return (
     <SimpleGrid
