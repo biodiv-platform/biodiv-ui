@@ -4,7 +4,6 @@ import BlueLink from "@components/@core/blue-link";
 import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
-import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";

@@ -1,13 +1,12 @@
 import { Box, Flex, Link, Stack } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "@hooks/use-translation";
 import FacebookIcon from "@icons/facebook";
 import GithubIcon from "@icons/github";
 import MailIcon from "@icons/mail";
 import TwitterIcon from "@icons/twitter";
+import { APP_VERSION } from "@static/constants";
 import React from "react";
-
-import { version } from "../../../../package.json";
 
 const ICONS = {
   FACEBOOK: <FacebookIcon />,
@@ -26,7 +25,7 @@ export default function Footer() {
           <div>
             {t("FOOTER.POWERED_BY")}
             <Link href="https://github.com/strandls?q=biodiv">
-              Biodiversity Informatics Platform - v{version}
+              Biodiversity Informatics Platform - v{APP_VERSION}
             </Link>
           </div>
         )}

@@ -11,7 +11,7 @@ export const absoluteUrl = (ctx, asPath?, setLocalhost?) => {
   let host = ctx?.req
     ? ctx.req.headers["x-forwarded-host"] || ctx.req.headers["host"]
     : window.location.host;
-  if (host.indexOf("localhost") > -1) {
+  if (host?.indexOf("localhost") > -1) {
     if (setLocalhost) {
       host = setLocalhost;
     }
