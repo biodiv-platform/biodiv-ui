@@ -4,6 +4,9 @@ const { nanoid } = require("nanoid");
 const SITE_CONFIG = require("./src/configs/site-config.json");
 
 module.exports = withPWA({
+  future: {
+    webpack5: true
+  },
   pwa: {
     dest: "public",
     disable: process.env.NODE_ENV !== "production" || !SITE_CONFIG.OFFLINE.ACTIVE,

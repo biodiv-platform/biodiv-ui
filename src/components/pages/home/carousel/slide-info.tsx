@@ -20,7 +20,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
     >
       <Flex justifyContent="space-between" alignItems="flex-end">
         {resource?.authorId > 1 && (
-          <LocalLink href={`/user/show/${resource.authorId}`}>
+          <LocalLink key={resource.authorId} href={`/user/show/${resource.authorId}`}>
             <Link>
               <Flex alignItems="center">
                 <Avatar

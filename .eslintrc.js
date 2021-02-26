@@ -12,8 +12,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "prettier/react"
+    "prettier"
   ],
   rules: {
     "no-useless-escape": "off",

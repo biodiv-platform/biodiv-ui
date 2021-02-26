@@ -1,6 +1,8 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import { UserGroupIbp } from "@interfaces/observation";
 
+import packageJson from "../../package.json";
+
 export const isBrowser = typeof window !== `undefined`;
 
 const API_ENDPOINT = isBrowser ? SITE_CONFIG.SITE.API_ENDPOINT : SITE_CONFIG.SITE.API_ENDPOINT_SSR;
@@ -84,3 +86,5 @@ export const RESOURCE_TYPE = {
   OBSERVATION: "observation",
   DOCUMENT: "document"
 };
+
+export const APP_VERSION = packageJson.version;
