@@ -38,15 +38,19 @@ export default function DocumentEditPageComponent({
 
         contribution: Yup.string(),
         licenseId: Yup.number().required(),
-        fromDate: Yup.mixed().required(),
+        fromDate: Yup.mixed(),
 
-        ufileData: Yup.object()
-          .shape({
-            id: Yup.string().nullable(),
-            resourceURL: Yup.string().required(),
-            size: Yup.number().required()
-          })
-          .nullable(),
+        ufileData: Yup.lazy((value) =>
+          value
+            ? Yup.object()
+                .shape({
+                  id: Yup.string().nullable(),
+                  resourceURL: Yup.string().required(),
+                  size: Yup.number().required()
+                })
+                .required()
+            : Yup.mixed().notRequired()
+        ),
 
         tags: Yup.array().nullable(),
 
@@ -85,7 +89,7 @@ export default function DocumentEditPageComponent({
       documentId: initialDocument.documentId,
       attribution: initialDocument.attribution,
       rating: initialDocument.rating,
-      fromDate: dateToUTC(values.fromDate),
+      fromDate: values.fromDate ? dateToUTC(values.fromDate) : null,
 
       bibFieldData: {
         ...initialDocument.bibFieldData,

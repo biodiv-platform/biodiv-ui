@@ -84,12 +84,7 @@ export default function BasicInfo({
         <div>
           <TextBoxField name="contribution" label={t("DOCUMENT.CONTRIBUTION")} form={hForm} />
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
-            <DatePickerField
-              name="fromDate"
-              label={t("DOCUMENT.PUBLICATION_DATE")}
-              form={hForm}
-              isRequired={true}
-            />
+            <DatePickerField name="fromDate" label={t("DOCUMENT.PUBLICATION_DATE")} form={hForm} />
             <SelectInputField
               name="licenseId"
               label={t("DOCUMENT.LICENSE")}
