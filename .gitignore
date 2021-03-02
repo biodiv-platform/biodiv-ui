@@ -19,6 +19,7 @@
 /public/*.map
 
 # misc
+.eslintcache
 .DS_Store
 .env*
 src/configs/site-config.json
