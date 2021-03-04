@@ -1,6 +1,7 @@
-import { SimpleGrid, Spinner } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import React, { useMemo } from "react";
+
 import TableTotals from "./table-totals";
 import useTotals from "./use-totals";
 
@@ -24,20 +25,29 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
   }, [filter]);
 
   const totals = { totalObservations: s, ...totalsData.data.list };
+  const isLoading = totalsData.data.isLoading;
 
-  return totalsData.data.isLoading ? (
-    <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
-  ) : (
+  return (
     <SimpleGrid columns={{ md: 4 }} spacing={4} mb={4}>
       <TableTotals
         title={t("LIST.STATS_BAR.TOTAL_OBSERVATIONS")}
         count={totals["totalObservations"]}
+        isLoading={isLoading}
       />
-      <TableTotals title={t("LIST.STATS_BAR.TOTAL_TAXA")} count={totals["totalTaxa"]} />
-      <TableTotals title={t("LIST.STATS_BAR.TOTAL_UPLOADERS")} count={totals["totalUploaders"]} />
+      <TableTotals
+        title={t("LIST.STATS_BAR.TOTAL_TAXA")}
+        count={totals["totalTaxa"]}
+        isLoading={isLoading}
+      />
+      <TableTotals
+        title={t("LIST.STATS_BAR.TOTAL_UPLOADERS")}
+        count={totals["totalUploaders"]}
+        isLoading={isLoading}
+      />
       <TableTotals
         title={t("LIST.STATS_BAR.TOTAL_IDENTIFIERS")}
         count={totals["totalIdentifiers"]}
+        isLoading={isLoading}
       />
     </SimpleGrid>
   );

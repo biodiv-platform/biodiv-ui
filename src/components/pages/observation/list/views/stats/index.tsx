@@ -1,6 +1,8 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
+
+import ObservationsMap from "../map";
 import LifeList from "./life-list";
 import SpeciesGroups from "./species-groups";
 import StatesDistribution from "./states-distribution";
@@ -10,6 +12,7 @@ import Totals from "./totals";
 
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
+
   return (
     <div>
       <Totals filter={filter} observationData={observationData} speciesGroup={speciesGroup} />
@@ -22,6 +25,11 @@ export default function StatsView() {
           filter={filter}
         />
         <LifeList filter={filter} />
+      </SimpleGrid>
+
+      <ObservationsMap />
+
+      <SimpleGrid columns={{ md: 2 }} mb={4}>
         <StatesDistribution observationData={observationData} filter={filter} />
       </SimpleGrid>
     </div>

@@ -79,7 +79,7 @@ const VerticalBarChart = ({
       .on("mousemove", tipHelpers.mousemove)
       .on("mouseleave", tipHelpers.mouseleave)
       .attr("class", "bar")
-      .attr("fill", "#228B22")
+      .attr("fill", "#38A169")
       .attr("x", (d) => xScale(d.sgroup) + ml)
       .attr("y", (d) => yScale(d.count))
       .attr("width", xScale.bandwidth())

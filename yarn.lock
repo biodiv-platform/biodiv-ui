@@ -1596,10 +1596,10 @@
   dependencies:
     "@ibp/naksha-commons" "3.8.0"
 
-"@ibp/naksha-mapbox-list@3.9.2":
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.9.2.tgz#61767c166663f5ef32845e488b95a62f272e417f"
-  integrity sha512-u1MUIMcVRJy3yDEkqkqQIJR5rhxMjeo9txG7ql5KG7Xaq0vMbhmyzlrHzacCAjrg+o35tUpzraugO96G0uzx0g==
+"@ibp/naksha-mapbox-list@3.9.4":
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.9.4.tgz#c2e9d2677e00eebd3985ca9d92fc1aa6f51f6f13"
+  integrity sha512-1xjr63jq5NmBGr6K0BKB6bYrL9X5gl4JWZayEW4qxEAOZQ1ik/j1mERhjoiuOWGKrbayxiJ6IuAIKYh9hjVvdQ==
   dependencies:
     "@ibp/naksha-commons" "3.8.0"
     "@turf/bbox" "^6.0.1"
@@ -5297,15 +5297,15 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.9.2:
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.9.2.tgz#57977df625d7c9ebf36f639d38249dcd5fbba062"
-  integrity sha512-UtGkdjVoD4SEby5PJZunHdkU3I/Je1pxOPfWq/B+Fv1gWr5KXZot61sHuS1RKl0tSaA6HICDL6FmGUP2k0cWEA==
+naksha-components-react@^3.9.4:
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.9.4.tgz#4eae939431bb2780657b2403e4989830f5194f14"
+  integrity sha512-7WpgXuTnFxglBfG8BNL83m/omQaMSGarrDnTzgO0Epjn3bV3Aw9yPl1Pij4n6CoagSHwkGKMCXEuJxE5b/suPQ==
   dependencies:
     "@ibp/naksha-commons" "3.8.0"
     "@ibp/naksha-gmaps-draw" "3.8.0"
     "@ibp/naksha-mapbox-draw" "3.8.6"
-    "@ibp/naksha-mapbox-list" "3.9.2"
+    "@ibp/naksha-mapbox-list" "3.9.4"
     "@ibp/naksha-mapbox-view" "3.8.5"
     "@ibp/naksha-upload" "3.8.7"
 

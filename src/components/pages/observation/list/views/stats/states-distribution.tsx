@@ -27,7 +27,7 @@ const StatesDistribution = ({ observationData, filter }) => {
 
   return (
     <Box className="white-box">
-      <BoxHeading>{t("LIST.CHART.STATES")}</BoxHeading>
+      <BoxHeading>📊 {t("LIST.CHART.STATES")}</BoxHeading>
       <Box p={4}>
         <HorizontalBarChart
           data={filteredStateData}
