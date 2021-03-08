@@ -84,7 +84,7 @@ export default function ObservationShowPageComponent({
           <Sidebar
             observation={o.observation}
             authorInfo={o.authorInfo}
-            speciesId={o.recoIbp?.speciesId}
+            taxon={o.recoIbp?.taxonId}
           />
         </Box>
       </SimpleGrid>
