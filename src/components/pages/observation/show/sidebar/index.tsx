@@ -8,15 +8,15 @@ import User from "./user";
 interface ISidebarProps {
   observation?: Observation;
   authorInfo?: UserIbp;
-  speciesId?: number;
+  taxon?: number;
 }
 
-export default function Sidebar({ observation, authorInfo, speciesId }: ISidebarProps) {
+export default function Sidebar({ observation, authorInfo, taxon }: ISidebarProps) {
   return (
     <Box mb={2}>
       <User user={authorInfo} />
       <ClusterMap
-        filter={speciesId && { speciesId }}
+        filter={taxon && { taxon }}
         latitude={observation?.latitude}
         longitude={observation?.longitude}
       />

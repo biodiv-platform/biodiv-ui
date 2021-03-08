@@ -18,9 +18,6 @@ export default function Views({ no }) {
     case "stats":
       return <StatsVew />;
 
-    case "map":
-      return <div>Map</div>;
-
     default:
       return null;
   }

@@ -18,33 +18,23 @@ import useTranslation from "@hooks/use-translation";
 import { getUserImage } from "@utils/media";
 import React from "react";
 
+import { stickyTh } from "./common";
+
 export default function IdentifiersTable({ data, title, loadMoreIdentifiers, filter }) {
   const { t } = useTranslation();
 
   const { user: _user, ...queryParams } = filter;
 
-  return data.list.length > 0 ? (
+  return data?.list?.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading>{title}</BoxHeading>
+      <BoxHeading>⭐ {title}</BoxHeading>
 
-      <Box w="full" overflowY="auto" h={490}>
+      <Box w="full" overflowY="auto" h={360}>
         <Table variant="striped" colorScheme="gray" size="sm">
           <Thead>
             <Tr>
-              <Th
-                textTransform="capitalize"
-                textColor="black"
-                fontSize="md"
-                backgroundColor="#ededed"
-              >
-                {t("LIST.TOP_IDENTIFIERS_LIST.AUTHOR_HEADER")}
-              </Th>
-              <Th
-                textTransform="capitalize"
-                textColor="black"
-                fontSize="md"
-                backgroundColor="#ededed"
-              >
+              <Th {...stickyTh}>{t("LIST.TOP_IDENTIFIERS_LIST.AUTHOR_HEADER")}</Th>
+              <Th {...stickyTh} isNumeric={true}>
                 {t("LIST.TOP_IDENTIFIERS_LIST.COUNT_HEADER")}
               </Th>
             </Tr>
@@ -55,14 +45,14 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
               <Tr key={`${authorId}-${count}`}>
                 <Td>
                   <HStack p="md">
-                    <Avatar position="relative" src={getUserImage(pic, 50)} name={name} />
+                    <Avatar size="xs" src={getUserImage(pic, 24)} name={name} />
                     <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
                       <ExternalBlueLink>{name}</ExternalBlueLink>
                     </LocalLink>
                   </HStack>
                 </Td>
 
-                <Td>
+                <Td isNumeric={true}>
                   {count && (
                     <LocalLink
                       href={`/observation/list`}

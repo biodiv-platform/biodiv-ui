@@ -3,6 +3,7 @@ import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { Role } from "@interfaces/custom";
+import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
 import { hasAccess, waitForAuth } from "@utils/auth";
 import { getBearerToken } from "@utils/http";
@@ -39,6 +40,17 @@ export default function MapPageComponent() {
     return { success: false, data: token };
   };
 
+  const fetchGridData = async (geoProps) => {
+    const params = {
+      ...geoProps,
+      view: "map",
+      geoField: "location"
+    };
+
+    const { data } = await axGetObservationMapData(params);
+    return data;
+  };
+
   return (
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
       <NakshaMapboxList
@@ -65,15 +77,7 @@ export default function MapPageComponent() {
                   attribution: "indiabiodiversity.org and Contributors",
                   tags: ["Global", "Observations"],
                   isAdded: false,
-                  source: {
-                    type: "grid",
-                    endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
-                  },
-                  data: {
-                    index: "extended_observation",
-                    type: "_doc",
-                    geoField: "location"
-                  },
+                  source: { type: "grid", fetcher: fetchGridData },
                   onHover: onObservationGridHover
                 }
               ]

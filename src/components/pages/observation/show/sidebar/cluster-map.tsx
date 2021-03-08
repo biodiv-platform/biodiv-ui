@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
-import { ENDPOINT } from "@static/constants";
+import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
 import { ExtendedMarkerProps } from "naksha-components-react";
 import dynamic from "next/dynamic";
@@ -41,6 +41,18 @@ export default function ClusterMap({
 }: ClusterMapProps) {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
 
+  const fetchGridData = async (geoProps) => {
+    const params = {
+      ...geoProps,
+      ...filter,
+      view: "map",
+      geoField: "location"
+    };
+
+    const { data } = await axGetObservationMapData(params);
+    return data;
+  };
+
   return (
     <Box
       h="422px"
@@ -61,16 +73,7 @@ export default function ClusterMap({
                     id: "species-observations",
                     title: "Species Observations",
                     isAdded: true,
-                    source: {
-                      type: "grid",
-                      endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
-                    },
-                    data: {
-                      index: "extended_observation",
-                      type: "_doc",
-                      geoField: "location",
-                      ...filter
-                    },
+                    source: { type: "grid", fetcher: fetchGridData },
                     onHover: onObservationGridHover,
                     onClick: onObservationGridClick
                   }

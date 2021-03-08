@@ -1,5 +1,4 @@
 {
-  "ADD": "Add",
   "ACTIONS": {
     "FLAG": {
       "CATEGORY": "Category",
@@ -39,6 +38,7 @@
     "UNFLAGGED": "flagged",
     "UPDATED_FACT": "updated fact"
   },
+  "ADD": "Add",
   "ADMIN": {
     "LINKS": {
       "NOTIFICATION": "Send Push-Notification"
@@ -628,6 +628,7 @@
       "LATEST": "Last Uploaded",
       "MOST_VIEWED": "Most Viewed"
     },
+    "SPATIAL_DISTRIBUTION": "Spatial distribution",
     "STATS_BAR": {
       "TOTAL_IDENTIFIERS": "Identifiers",
       "TOTAL_OBSERVATIONS": "Observations",

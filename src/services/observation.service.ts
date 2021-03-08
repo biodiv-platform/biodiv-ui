@@ -426,3 +426,16 @@ export const axGetUserLifeList = async (userId, type, params) => {
     return { success: false, data: [] };
   }
 };
+
+export const axGetObservationMapData = async (params) => {
+  try {
+    const response = await plainHttp.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/list/extended_observation/_doc`,
+      { params }
+    );
+    return { success: true, data: response.data.geohashAggregation };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

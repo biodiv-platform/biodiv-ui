@@ -1576,60 +1576,60 @@
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-1.3.0.tgz#b2b0ff3b4b6b104e0df1954e58098e0a9cb6195d"
   integrity sha512-NF+KJYDiFjnGAqhM92vG5kFJFCZFFjO5VxcByf06o6FrG7BEta5NDBhqVsIAMSfMNsn1kWfSKX1TkDT21xq9Hg==
 
-"@ibp/naksha-commons@3.8.0":
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.8.0.tgz#f362f747ce0a2b2bafab02c68b4730f108076467"
-  integrity sha512-NoLgjBKYVcvpbhzhOwuMKewkJN8zN5v/CvCk/qp9mZBoeVAQvsOOtb2hZXf/m2WmWf3kZtfDbDmQR93OxoZUtg==
+"@ibp/naksha-commons@3.9.5":
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.9.5.tgz#253e5249327deb62914174e34880475d9a5dbd1a"
+  integrity sha512-ixykWFydsE5jLZPx8otEAGBPbOBP0OlSEYYorCB45ZPv77pBnuDxFsQYjnK8DXDOX+cHw19zvM4/Gzu1c5sFEQ==
 
-"@ibp/naksha-gmaps-draw@3.8.0":
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.8.0.tgz#449545104900daee125c2fbfbc00c42e2c595fa9"
-  integrity sha512-fUZa/VS/vG/EbcQkIoCGvURDrAtePwBOL12oGbNKNWuNLM7014+8c0BY0lIlre24LnH1gpP1PqPYi0peNj21lg==
+"@ibp/naksha-gmaps-draw@3.9.5":
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.9.5.tgz#eeb15bdb96ddeba48667d10698d6913ac46d1d9e"
+  integrity sha512-1r1PadLo24rjJ5fOSdT8OmrWX69N/knrf/T6/hgrSofFTOEp+lutH14gODEP6ARcxF+csCkCzMyVu5cvukcdjw==
   dependencies:
-    "@ibp/naksha-commons" "3.8.0"
-    "@turf/bbox" "^6.0.1"
+    "@ibp/naksha-commons" "3.9.5"
+    "@turf/bbox" "^6.3.0"
 
-"@ibp/naksha-mapbox-draw@3.8.6":
-  version "3.8.6"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.8.6.tgz#36f5d9a0bb5266b3062ffdb7a32860fd3767d503"
-  integrity sha512-BSlRAx/tF5+SI6YVnbEm1bQsVSckFUcRUOmeKQL9JH3MM/Vsvl5wOwzL3Z7YzQgQt9i31gRY3AkcVCjfGJo67g==
+"@ibp/naksha-mapbox-draw@3.9.5":
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.9.5.tgz#4f9878ad827de402b8a03f67e3217ec764a0d047"
+  integrity sha512-HpNxLYu+4LRrXHZjTnOKdZg5/OiqGfZTxV06M/ByD6CeXrk/yTPajuW+UO99/0msWs+gPdwmao+7syFfWRZMag==
   dependencies:
-    "@ibp/naksha-commons" "3.8.0"
+    "@ibp/naksha-commons" "3.9.5"
 
-"@ibp/naksha-mapbox-list@3.9.2":
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.9.2.tgz#61767c166663f5ef32845e488b95a62f272e417f"
-  integrity sha512-u1MUIMcVRJy3yDEkqkqQIJR5rhxMjeo9txG7ql5KG7Xaq0vMbhmyzlrHzacCAjrg+o35tUpzraugO96G0uzx0g==
+"@ibp/naksha-mapbox-list@3.9.5":
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.9.5.tgz#50ce51a0a0bf44946ba504b7714f5717c6675a6d"
+  integrity sha512-ZwnvNKqRVsA2QkJbcELBpK3fbmq3hrfnDjqKrvEWcu+KDhP5s4YjklMionjIuFqni42tkN6E8u77BQGY0or/EQ==
   dependencies:
-    "@ibp/naksha-commons" "3.8.0"
-    "@turf/bbox" "^6.0.1"
+    "@ibp/naksha-commons" "3.9.5"
+    "@turf/bbox" "^6.3.0"
     boundingbox "^1.2.3"
-    colorbrewer "^1.3.0"
+    colorbrewer "^1.4.0"
     geohash "^0.0.1"
     react-gbus "^1.1.2"
     react-highlighter "^0.4.3"
-    redaxios "^0.3.0"
-    ts-debounce "^2.1.0"
+    redaxios "^0.4.1"
+    ts-debounce "^3.0.0"
 
-"@ibp/naksha-mapbox-view@3.8.5":
-  version "3.8.5"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.8.5.tgz#f689b4d80d897e30485135edcc461de3bc77df08"
-  integrity sha512-IXWMITEibMitekhJaAlDJsGFM8Rqm3oiRziyh41jpWDL5AV9kVpwRX7ZV7OE76aybxi0HO3avyckMFWTZZFohg==
+"@ibp/naksha-mapbox-view@3.9.5":
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.9.5.tgz#f7388abf36b27c8ad2000566c983ab06ef4bc736"
+  integrity sha512-+h5Tgw0mpIvmt8/fdVIvqRxkuZZxV9pnH2CasLTkdFncJTe906j4Steg66RKAKqTNLEdM285tpiZaUbQUMS5ww==
   dependencies:
-    "@ibp/naksha-commons" "3.8.0"
+    "@ibp/naksha-commons" "3.9.5"
 
-"@ibp/naksha-upload@3.8.7":
-  version "3.8.7"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.8.7.tgz#a83d91a1b71b48cf530759f0485164bc0925b98d"
-  integrity sha512-jaagdRJ9U0bjwvLoqjsAcoSdHqmrmlhq6bfaZ6Q+Ti/8I0Id6gGmkhnrt+BzaMcxAEuJCCjWQxE28Z3KByOB4w==
+"@ibp/naksha-upload@3.9.6":
+  version "3.9.6"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.9.6.tgz#c99308541c023a58b6e81f9418fae11a00843653"
+  integrity sha512-ToRaj3Uv53eiClBrwa7je3I4ItZy6acsV2pm/pdssmEYImVRQzyVIlvhzkZVtbu2sZ1uDwYh41Mb0yoRekvBKA==
   dependencies:
     "@hookform/resolvers" "1.3.0"
-    "@ibp/naksha-commons" "3.8.0"
-    react-dropzone "^11.2.4"
-    react-hook-form "^6.14.0"
-    react-multi-select-component "^3.0.8"
+    "@ibp/naksha-commons" "3.9.5"
+    react-dropzone "^11.3.1"
+    react-hook-form "^6.15.4"
+    react-multi-select-component "^3.1.5"
     shapefile "^0.6.6"
-    yup "^0.32.8"
+    yup "^0.32.9"
 
 "@mapbox/geojson-rewind@^0.5.0":
   version "0.5.0"
@@ -1990,7 +1990,7 @@
   dependencies:
     "@turf/helpers" "^6.3.0"
 
-"@turf/bbox@*", "@turf/bbox@>=4.0.0", "@turf/bbox@^6.0.1", "@turf/bbox@^6.3.0":
+"@turf/bbox@*", "@turf/bbox@>=4.0.0", "@turf/bbox@^6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@turf/bbox/-/bbox-6.3.0.tgz#0e1a9b59f32d6a2a40c806f54cbaa73575bead25"
   integrity sha512-N4ue5Xopu1qieSHP2MA/CJGWHPKaTrVXQJjzHRNcY1vtsO126xbSaJhWUrFc5x5vVkXp0dcucGryO0r5m4o/KA==
@@ -3323,7 +3323,7 @@ color-name@~1.1.4:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-colorbrewer@^1.3.0:
+colorbrewer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/colorbrewer/-/colorbrewer-1.4.0.tgz#ffe893675c4de868f27216e50db7d7aa39ee50cf"
   integrity sha512-+NM91BbBU/le4Kt/1CsCDf+Hoir1Z+o43od1ZbmSOyMUI6DwlUKmfJdsOPplNiGzq4NSn2C3yn/ZOvtKHC27zQ==
@@ -5297,17 +5297,17 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.9.2:
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.9.2.tgz#57977df625d7c9ebf36f639d38249dcd5fbba062"
-  integrity sha512-UtGkdjVoD4SEby5PJZunHdkU3I/Je1pxOPfWq/B+Fv1gWr5KXZot61sHuS1RKl0tSaA6HICDL6FmGUP2k0cWEA==
+naksha-components-react@^3.9.6:
+  version "3.9.6"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.9.6.tgz#7bc0c40c2f159b1a0fd4ade2adf5f4f82a2288ca"
+  integrity sha512-3GbTOnCFICc4eh847iirqu61TI4POCgjwwqYwFvCBCZllCQh7yZ1aeOGP5eRLLgQqxYrsRJaP7QNRmRFqUOPVA==
   dependencies:
-    "@ibp/naksha-commons" "3.8.0"
-    "@ibp/naksha-gmaps-draw" "3.8.0"
-    "@ibp/naksha-mapbox-draw" "3.8.6"
-    "@ibp/naksha-mapbox-list" "3.9.2"
-    "@ibp/naksha-mapbox-view" "3.8.5"
-    "@ibp/naksha-upload" "3.8.7"
+    "@ibp/naksha-commons" "3.9.5"
+    "@ibp/naksha-gmaps-draw" "3.9.5"
+    "@ibp/naksha-mapbox-draw" "3.9.5"
+    "@ibp/naksha-mapbox-list" "3.9.5"
+    "@ibp/naksha-mapbox-view" "3.9.5"
+    "@ibp/naksha-upload" "3.9.6"
 
 nanoclone@^0.2.1:
   version "0.2.1"
@@ -6104,7 +6104,7 @@ react-dom@^17.0.1:
     object-assign "^4.1.1"
     scheduler "^0.20.1"
 
-react-dropzone@^11.2.4, react-dropzone@^11.3.1:
+react-dropzone@^11.3.1:
   version "11.3.1"
   resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-11.3.1.tgz#a3115e728b32b33e89f03d691b5b3b44b7f9072f"
   integrity sha512-gPyw524T6dYZW81aQoBGmBG90cVNs+YJreh3HaN45Yw09Bm6m4aA6IF9ergHZQAWGeDSJ+DUhDKKAAaDdTj3RQ==
@@ -6171,7 +6171,7 @@ react-highlighter@^0.4.3:
     escape-string-regexp "^1.0.5"
     prop-types "^15.6.0"
 
-react-hook-form@^6.14.0, react-hook-form@^6.15.4:
+react-hook-form@^6.15.4:
   version "6.15.4"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.4.tgz#328003e1ccc096cd158899ffe7e3b33735a9b024"
   integrity sha512-K+Sw33DtTMengs8OdqFJI3glzNl1wBzSefD/ksQw/hJf9CnOHQAU6qy82eOrh0IRNt2G53sjr7qnnw1JDjvx1w==
@@ -6242,10 +6242,10 @@ react-mentions@^4.1.1:
     prop-types "^15.5.8"
     substyle "^9.1.0"
 
-react-multi-select-component@^3.0.8:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-3.1.3.tgz#3a04e461b0023641e471e4757e6ba93d9826cace"
-  integrity sha512-g4bh8U8+qyA+DUzuejtSnE+MfMk9UjArJFd3xNS8G9r6wF5rT5nWWz6bzhgMvkXpKCZ5xQO+ygkGPSw+IuutgA==
+react-multi-select-component@^3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-3.1.5.tgz#7b9cda1958e8f6aca301161922e1a11c8830faa4"
+  integrity sha512-rL2LGCyUmCrDgOLc511PahZ21D47gerJ3d44SIyt36AziPjmUOGf0H5UqR/D1xTKGYNNlDb27gde/OT/nqkqnA==
   dependencies:
     goober "^2.0.30"
 
@@ -6432,10 +6432,10 @@ readdirp@~3.5.0:
   dependencies:
     picomatch "^2.2.1"
 
-redaxios@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/redaxios/-/redaxios-0.3.0.tgz#83bf141494afbe210c44f32b142b8fd73c953f02"
-  integrity sha512-9C4Wvdp/jn4wwBCGMntqu0JCAw+Kfr/uGfMR+JwC0Bg94ORTRzo2dPdHSIPxwSE9/4ORYKmOjhH28mHiuzZSJA==
+redaxios@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/redaxios/-/redaxios-0.4.1.tgz#a46fd53b533ed76d8619d9e6d595b95543855195"
+  integrity sha512-+Jhh1j8/H0KBro+Hih/MrDEJ1PICaU10JA6iu5b3+uvgRI+5n2M7qpMNXq7eC/0fspP0tTq49ONXlGWFdRoNLg==
 
 redux@^4.0.4:
   version "4.0.5"
@@ -7226,10 +7226,10 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-ts-debounce@^2.1.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/ts-debounce/-/ts-debounce-2.3.0.tgz#a360a8bd29402ce0ea9970f7cfc0df44dfae7139"
-  integrity sha512-j63IP7/unAzovrhVHE7U+fNkvDKwIaLH11dCO9TcRbYOZw1chPL054poqq3ZloyRJ5KwJMeB8csN/vGPPpQJjw==
+ts-debounce@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ts-debounce/-/ts-debounce-3.0.0.tgz#9beedf59c04de3b5bef8ff28bd6885624df357be"
+  integrity sha512-7jiRWgN4/8IdvCxbIwnwg2W0bbYFBH6BxFqBjMKk442t7+liF2Z1H6AUCcl8e/pD93GjPru+axeiJwFmRww1WQ==
 
 ts-pnp@^1.1.6:
   version "1.2.0"
@@ -7759,7 +7759,7 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-yup@^0.32.8, yup@^0.32.9:
+yup@^0.32.9:
   version "0.32.9"
   resolved "https://registry.yarnpkg.com/yup/-/yup-0.32.9.tgz#9367bec6b1b0e39211ecbca598702e106019d872"
   integrity sha512-Ci1qN+i2H0XpY7syDQ0k5zKQ/DoxO0LzPg8PAR/X4Mpj6DqaeCoIYEEjDJwhArh3Fa7GWbQQVDZKeXYlSH4JMg==

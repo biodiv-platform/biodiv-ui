@@ -1,6 +1,7 @@
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
+import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
@@ -30,6 +31,18 @@ export default function Map() {
   const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
   const canManagePublishing = isLoggedIn && hasAccess([Role.Admin]);
 
+  const fetchGridData = async (geoProps) => {
+    const params = {
+      ...geoProps,
+      userGroupId,
+      view: "map",
+      geoField: "location"
+    };
+
+    const { data } = await axGetObservationMapData(params);
+    return data;
+  };
+
   return (
     <NakshaMapboxList
       viewPort={mapCenter}
@@ -54,16 +67,7 @@ export default function Map() {
                 attribution: "indiabiodiversity.org and Contributors",
                 tags: ["Global", "Observations"],
                 isAdded: true,
-                source: {
-                  type: "grid",
-                  endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
-                },
-                data: {
-                  index: "extended_observation",
-                  type: "_doc",
-                  geoField: "location",
-                  userGroupId
-                },
+                source: { type: "grid", fetcher: fetchGridData },
                 onHover: onObservationGridHover
               }
             ]
