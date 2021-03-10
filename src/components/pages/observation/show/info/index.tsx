@@ -7,8 +7,7 @@ import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
-import { axQueryDocumentTagsByText } from "@services/document.service";
-import { axUpdateObservationTags } from "@services/observation.service";
+import { axQueryTagsByText, axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
@@ -84,7 +83,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           <Tags
             items={o.tags}
             objectId={o.observation?.id}
-            queryFunc={axQueryDocumentTagsByText}
+            queryFunc={axQueryTagsByText}
             updateFunc={axUpdateObservationTags}
           />
         </ResponsiveInfo>
