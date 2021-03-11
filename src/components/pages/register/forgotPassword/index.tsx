@@ -70,6 +70,9 @@ export default function ForgotPasswordComponent() {
   }, [verificationTypeWatch]);
 
   const handleOnSubmit = async ({ verificationType, email, mobileNumber }) => {
+    // temporary open reset without checking
+    onClose();
+
     const verificationId = verificationType === VERIFICATION_TYPE[0].value ? email : mobileNumber;
     const { success, data, user } = await axForgotPassword({ verificationId });
     if (success) {
@@ -77,7 +80,6 @@ export default function ForgotPasswordComponent() {
     } else {
       notification(t(data));
     }
-    onClose();
   };
 
   const handleOnVerification = async (values) => {
