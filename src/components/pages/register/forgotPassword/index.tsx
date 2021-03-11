@@ -74,10 +74,10 @@ export default function ForgotPasswordComponent() {
     const { success, data, user } = await axForgotPassword({ verificationId });
     if (success) {
       setUser({ ...user, vt: verificationType.toLowerCase() });
-      onClose();
     } else {
       notification(t(data));
     }
+    onClose();
   };
 
   const handleOnVerification = async (values) => {
