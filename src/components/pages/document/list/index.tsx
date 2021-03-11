@@ -12,14 +12,16 @@ interface DocumentListPageProps {
 export default function DocumentListPageComponent({ nextOffset }: DocumentListPageProps) {
   return (
     <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
-      <SimpleGrid w="full" columns={[1, 1, 1, 5]}>
-        <Filters />
+      <SimpleGrid w="full" columns={{ base: 1, lg: 14 }}>
+        <Box gridColumn={{ lg: "1/4" }}>
+          <Filters />
+        </Box>
         <Box
           maxH="full"
           w="full"
           id="items-container"
           overflowY="auto"
-          gridColumn={[null, null, null, "2/6"]}
+          gridColumn={{ lg: "4/15" }}
           p={4}
         >
           <Headers />

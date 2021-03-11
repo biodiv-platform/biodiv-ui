@@ -22,7 +22,6 @@ const FilterWrapper = styled.div`
   height: 100%;
   overflow-y: scroll;
   border-right: 1px solid var(--gray-300);
-  min-width: 18rem;
 
   [data-accordion-item] {
     [data-accordion-panel] {
@@ -43,7 +42,7 @@ const FilterWrapper = styled.div`
 export default function Filters() {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
-  const isDesktopFilter = useBreakpointValue({ base: false, md: true });
+  const isDesktopFilter = useBreakpointValue({ base: false, lg: true });
 
   return isDesktopFilter ? (
     <FilterWrapper>
