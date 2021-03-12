@@ -79,10 +79,16 @@ export default function AddSuggestion({
 
   const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
     if (langId) {
-      langRef.current.select.onChange({ value: langId, label: lang });
+      langRef.current.select.onChange(
+        { value: langId, label: lang },
+        { name: langRef.current.select.props.inputId }
+      );
     }
     if ((sLabel || sValue) && updateScientific) {
-      scientificRef.current.select.onChange({ value: sValue, label: sLabel, groupId });
+      scientificRef.current.select.onChange(
+        { value: sValue, label: sLabel, groupId },
+        { name: scientificRef.current.select.props.inputId }
+      );
     }
   };
 
