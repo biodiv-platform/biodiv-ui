@@ -13,9 +13,7 @@ export default function DocumentListPageComponent({ nextOffset }: DocumentListPa
   return (
     <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
       <SimpleGrid w="full" columns={{ base: 1, lg: 14 }}>
-        <Box gridColumn={{ lg: "1/4" }}>
-          <Filters />
-        </Box>
+        <Filters />
         <Box
           maxH="full"
           w="full"

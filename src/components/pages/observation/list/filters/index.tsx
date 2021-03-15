@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -45,13 +46,13 @@ export default function Filters() {
   const isDesktopFilter = useBreakpointValue({ base: false, lg: true });
 
   return isDesktopFilter ? (
-    <FilterWrapper>
+    <Box as={FilterWrapper} gridColumn={{ lg: "1/4" }}>
       <Stack m={4} isInline={true} align="center" justify="space-between">
         <Heading size="md">{t("FILTERS.TITLE")}</Heading>
         <ClearFilters />
       </Stack>
       <FiltersList />
-    </FilterWrapper>
+    </Box>
   ) : (
     <FilterWrapper>
       <Button w="full" className="toggle-button" onClick={onToggle}>
