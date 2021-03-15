@@ -47,7 +47,11 @@ export const removeCookies = () => {
   destroyCookie(null, TOKEN.BRTOKEN, cookieOpts);
 };
 
-export const forwardRedirect = (forward?) => {
+export const forwardRedirect = async (forward?) => {
+  // remove cache
+  await removeCache();
+
+  // redirect
   window.location.assign(B64URL.decode(forward || "Lw"));
 };
 

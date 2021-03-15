@@ -12,14 +12,14 @@ interface ObservationListPageProps {
 export default function ObservationListPageComponent({ nextOffset }: ObservationListPageProps) {
   return (
     <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
-      <SimpleGrid w="full" columns={[1, 1, 1, 5]}>
+      <SimpleGrid w="full" columns={{ base: 1, lg: 14 }}>
         <Filters />
         <Box
           maxH="full"
           w="full"
           id="items-container"
           overflowY="auto"
-          gridColumn={[null, null, null, "2/6"]}
+          gridColumn={{ lg: "4/15" }}
           px={4}
         >
           <ListHeader />

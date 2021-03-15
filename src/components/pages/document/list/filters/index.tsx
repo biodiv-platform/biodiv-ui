@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -15,14 +16,13 @@ import styled from "@emotion/styled";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
-import FiltersList from "./list";
 import ClearFilters from "./clear-filter";
+import FiltersList from "./list";
 
 const FilterWrapper = styled.div`
   height: 100%;
   overflow-y: scroll;
   border-right: 1px solid var(--gray-300);
-  min-width: 18rem;
 
   [data-accordion-item] {
     [data-accordion-panel] {
@@ -43,16 +43,16 @@ const FilterWrapper = styled.div`
 export default function Filters() {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
-  const isDesktopFilter = useBreakpointValue({ base: false, md: true });
+  const isDesktopFilter = useBreakpointValue({ base: false, lg: true });
 
   return isDesktopFilter ? (
-    <FilterWrapper>
+    <Box as={FilterWrapper} gridColumn={{ lg: "1/4" }}>
       <Stack m={4} isInline={true} align="center" justify="space-between">
         <Heading size="md">{t("FILTERS.TITLE")}</Heading>
         <ClearFilters />
       </Stack>
       <FiltersList />
-    </FilterWrapper>
+    </Box>
   ) : (
     <FilterWrapper>
       <Button w="full" className="toggle-button" onClick={onToggle}>

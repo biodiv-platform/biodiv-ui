@@ -1,8 +1,8 @@
-import { Avatar, AvatarGroup, Box, Button, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Box, Button, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
-import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import LockIcon from "@icons/lock";
@@ -86,17 +86,15 @@ export default function RecoSuggestion({
         const canValidate = permission?.includes(reco.taxonId) || permissionOverride;
         return (
           <Flash value={reco} key={reco.taxonId}>
-            <SimpleGrid
-              columns={[1, 1, 1, 5]}
-              spacingX={4}
-              spacingY={2}
-              alignItems="center"
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              alignItems={{ md: "center" }}
               borderBottom="1px"
               borderColor="gray.300"
               px={4}
               py={2}
             >
-              <Stack gridColumn="1/5" isInline={true} justifyContent="space-between">
+              <Stack flexGrow={1} isInline={true} justifyContent="space-between">
                 <Box minH="3rem">
                   {reco.speciesId ? (
                     <BlueLink
@@ -124,7 +122,7 @@ export default function RecoSuggestion({
                   ))}
                 </AvatarGroup>
               </Stack>
-              <Stack isInline={true} minW="220px" className="reco-actions">
+              <Stack isInline={true} minW="210px" flexShrink={0} className="reco-actions">
                 {!isLocked && (
                   <Button
                     variant="outline"
@@ -158,7 +156,7 @@ export default function RecoSuggestion({
                     </Button>
                   )}
               </Stack>
-            </SimpleGrid>
+            </Stack>
           </Flash>
         );
       })}

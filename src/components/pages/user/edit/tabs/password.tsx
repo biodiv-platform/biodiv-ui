@@ -2,25 +2,30 @@ import { SimpleGrid } from "@chakra-ui/react";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
+import { Role } from "@interfaces/custom";
 import { axUpdateUserPassword } from "@services/user.service";
+import { hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import React from "react";
+import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 export default function ChangePasswordTab({ userId }) {
   const { t } = useTranslation();
+  const { user } = useGlobalState();
+  const hideOldPassword = useMemo(() => user.id !== userId && hasAccess([Role.Admin]), []);
 
   const hForm = useForm<any>({
     mode: "onBlur",
     resolver: yupResolver(
       Yup.object().shape({
-        oldPassword: Yup.string().required(),
-        password: Yup.string().min(8).required(),
-        confirmPassword: Yup.string()
-          .oneOf([Yup.ref("password"), null], "Passwords do not match")
+        oldPassword: hideOldPassword ? Yup.string().notRequired() : Yup.string().required(),
+        newPassword: Yup.string().min(8).required(),
+        confirmNewPassword: Yup.string()
+          .oneOf([Yup.ref("newPassword"), null], "Passwords do not match")
           .required()
       })
     )
@@ -42,17 +47,18 @@ export default function ChangePasswordTab({ userId }) {
           <TextBoxField
             name="oldPassword"
             type="password"
+            hidden={hideOldPassword}
             label={t("USER.CURRENT_PASSWORD")}
             form={hForm}
           />
           <TextBoxField
-            name="password"
+            name="newPassword"
             type="password"
             label={t("USER.NEW_PASSWORD")}
             form={hForm}
           />
           <TextBoxField
-            name="confirmPassword"
+            name="confirmNewPassword"
             type="password"
             label={t("USER.CONFIRM_NEW_PASSWORD")}
             form={hForm}

@@ -15,7 +15,8 @@ export const selectStyles = {
     color: "#757474"
   }),
   valueContainer: (p) => ({ ...p, height: "38px" }),
-  menu: (p) => ({ ...p, zIndex: 3 }),
+  menu: (p) => ({ ...p, minWidth: "20em" }),
+  menuPortal: (p) => ({ ...p, zIndex: 1900 }),
   clearIndicator: (base, state) => ({
     ...base,
     cursor: "pointer",
