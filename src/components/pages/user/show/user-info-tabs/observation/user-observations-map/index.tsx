@@ -14,7 +14,7 @@ export default function UserObservationsMap({ userId, groupId }) {
     <Box className="white-box">
       <BoxHeading>🗺️ {t("USER.OBSERVATIONS.MAP")}</BoxHeading>
       <ClusterMap
-        filter={{ authorId: userId, userGroupId, groupId }}
+        filter={{ user: userId, userGroupList: userGroupId, sGroup: groupId }}
         k={groupId}
         borderRadius={0}
       />
