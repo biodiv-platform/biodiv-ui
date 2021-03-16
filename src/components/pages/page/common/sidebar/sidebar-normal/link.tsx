@@ -26,7 +26,7 @@ export const LinkChildren = ({ page, currentPageId, linkType }) => {
 
   return (
     <LinkLayout isActive={isActive} isParent={false}>
-      <LocalLink href={`/page/${linkType}/${page.id}`}>
+      <LocalLink prefixGroup={true} href={`/page/${linkType}/${page.id}`}>
         <chakra.a flexGrow={1} px={3} py={2} aria-current={isActive ? "page" : undefined}>
           <Box as="span" color="gray.400" mr={2}>
             #
@@ -45,7 +45,7 @@ export const LinkParent = ({ page, currentPageId, linkType }) => {
   return (
     <Box>
       <LinkLayout isActive={isActive} isParent={true}>
-        <LocalLink href={`/page/${linkType}/${page.id}`}>
+        <LocalLink prefixGroup={true} href={`/page/${linkType}/${page.id}`}>
           <chakra.a flexGrow={1} px={3} py={2} aria-current={isActive ? "page" : undefined}>
             {page.title}
           </chakra.a>
