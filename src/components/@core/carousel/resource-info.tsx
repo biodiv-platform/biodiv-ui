@@ -63,7 +63,7 @@ function CarouselResourceInfo({ currentResource, observationId }) {
               <Box>{t("OBSERVATION.LICENSE")}</Box>
               <Box>
                 <ExternalBlueLink href={currentLicense?.link}>
-                  {currentLicense?.name}
+                  {currentLicense?.label}
                 </ExternalBlueLink>
               </Box>
 

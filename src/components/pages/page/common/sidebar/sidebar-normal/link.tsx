@@ -21,7 +21,7 @@ function LinkLayout({ isActive, isParent, children }) {
   );
 }
 
-export const LinkChildren = ({ page, currentPageId, linkType }) => {
+const LinkChildren = ({ page, currentPageId, linkType }) => {
   const isActive = currentPageId === page.id;
 
   return (

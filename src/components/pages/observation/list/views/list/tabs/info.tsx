@@ -1,9 +1,9 @@
-import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import { CalendarIcon } from "@chakra-ui/icons";
+import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
+import ObservationStatusBadge from "@components/pages/common/status-badge";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
-import ObservationStatusBadge from "@components/pages/observation/show/status-badge";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
@@ -38,7 +38,11 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             <Text as="i" mr={2}>
               {o?.recoShow?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
             </Text>
-            <ObservationStatusBadge reco={o.recoShow?.recoIbp} />
+            <ObservationStatusBadge
+              reco={o.recoShow?.recoIbp}
+              crumbs={o.recoShow?.recoIbp?.breadCrumbs}
+              taxonId={o.recoShow?.recoIbp?.taxonId}
+            />
           </Heading>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">

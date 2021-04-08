@@ -32,7 +32,7 @@ const WYSIWYGField = ({
       render={({ onChange, onBlur, value }) => (
         <WYSIWYGEditor
           name={name}
-          initialValue={value}
+          value={value}
           onEditorChange={onChange}
           placeholder={label}
           onBlur={onBlur}

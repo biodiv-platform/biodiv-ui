@@ -25,6 +25,7 @@ export enum Role {
 export interface License {
   name: string;
   link: string;
+  label: string;
 }
 
 export interface ObservationResource {

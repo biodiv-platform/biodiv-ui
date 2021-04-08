@@ -1,13 +1,18 @@
 import { Badge, Link } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
-import { RecoIbp } from "@interfaces/observation";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import React from "react";
 
-function ObservationStatusBadge({ reco }: { reco: RecoIbp | undefined }) {
+interface TaxonStatusBadgeProps {
+  reco;
+  taxonId;
+  crumbs;
+}
+
+function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
   const { t } = useTranslation();
 
-  const taxonLink = `/namelist/index?taxon=${reco?.taxonId}`;
+  const taxonLink = `/namelist/index?taxon=${taxonId}`;
 
   switch (reco?.status) {
     case "ACCEPTED":
@@ -18,7 +23,7 @@ function ObservationStatusBadge({ reco }: { reco: RecoIbp | undefined }) {
       );
 
     case "SYNONYM":
-      const [lastCrumb] = reco.breadCrumbs?.slice(-1) || [{ name: null }];
+      const [lastCrumb] = crumbs?.slice(-1) || [{ name: null }];
       return (
         <Link href={taxonLink}>
           <Badge colorScheme={TAXON_BADGE_COLORS.SYNONYM}>
@@ -30,9 +35,11 @@ function ObservationStatusBadge({ reco }: { reco: RecoIbp | undefined }) {
 
     default:
       return !reco?.scientificName ? (
-        <Badge colorScheme="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
+        <span>
+          <Badge colorScheme="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
+        </span>
       ) : null;
   }
 }
 
-export default ObservationStatusBadge;
+export default TaxonStatusBadge;
