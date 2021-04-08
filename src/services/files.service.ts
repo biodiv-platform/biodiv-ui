@@ -42,6 +42,22 @@ export const axUploadObservationResource = async (resource: IDBObservationAsset)
   return data;
 };
 
+
+export const axBulkUploadObservationResource = async (resource: IDBObservationAsset) => {
+  const formData = new FormData();
+  formData.append("folder","myUploads");
+  formData.append("module", "OBSERVATION");
+  formData.append("upload", resource.blob, resource.fileName);
+
+  const { data } = await http.post(`${ENDPOINT.FILES}/upload/bulk-upload`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
+
+  return data;
+};
+
 export const axUploadDocumentResource = async (document: File): Promise<MyUpload> => {
   const formData = new FormData();
   formData.append("hash", LOCAL_ASSET_PREFIX + nanoid());

@@ -1,6 +1,7 @@
 import useTranslation from "@hooks/use-translation";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import {
+  axBulkUploadObservationResource,
   axListMyUploads,
   axRemoveMyUploads,
   axUploadObservationResource
@@ -114,10 +115,22 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     });
   };
 
-  const uploadPendingResource = async (pendingResource, noSave = true) => {
-    if (noSave) {
-      await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.InProgress);
+  const handleZipFiles = async (pendingResource) => {
+    try {
+      const r = await axBulkUploadObservationResource(pendingResource);
+      if (r) {
+        await fetchMyUploads();
+        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded);
+      }
+    } catch (e) {
+      console.error(e);
+      notification(t("OBSERVATION.DELETE_FILE.ERROR"), NotificationType.Error);
+    } finally {
+      await deleteByID(pendingResource.id);
     }
+  };
+
+  const handleMediaFiles = async (pendingResource, noSave) => {
     try {
       const r = await axUploadObservationResource(pendingResource);
       if (r && noSave) {
@@ -132,6 +145,18 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       if (noSave) {
         await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
       }
+    }
+  };
+
+  const uploadPendingResource = async (pendingResource, noSave = true) => {
+    if (noSave) {
+      await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.InProgress);
+    }
+
+    if (pendingResource.type.includes("application/zip")) {
+      handleZipFiles(pendingResource);
+    } else {
+      handleMediaFiles(pendingResource, noSave);
     }
   };
 

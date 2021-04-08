@@ -687,6 +687,7 @@
     "DATE_ACCURACY": "Date Accuracy",
     "DELETE_FILE": {
       "FAILED": "Unable to delete file, please try again later",
+      "ERROR": "Unable to process file,Please try again later",
       "SUCCESS": "File deleted successfully"
     },
     "DESCRIPTION": {

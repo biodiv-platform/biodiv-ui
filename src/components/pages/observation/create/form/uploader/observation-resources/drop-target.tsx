@@ -34,7 +34,7 @@ const DropTargetBox = styled.div`
   }
 `;
 
-export const accept = ["image/jpg", "image/jpeg", "image/png", "video/*", "audio/*"];
+export const accept = ["image/jpg", "image/jpeg", "image/png", "video/*", "audio/*","application/zip"];
 
 export default function DropTarget({ assetsSize }) {
   const [isProcessing, setIsProcessing] = useState(false);
