@@ -21,6 +21,7 @@ interface ObservationCreateContextProps {
   observationAssets?: IDBObservationAsset[];
   assets?: IDBObservationAsset[];
   addAssets?;
+  setObservationAssets?;
   removeAsset?;
   addToObservationAssets?;
   removeObservationAsset?;
@@ -62,10 +63,6 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
 
   const fetchMyUploads = async () => {
     const { data } = await axListMyUploads();
-
-    if (!data.length) {
-      return;
-    }
 
     // housekeeping for expired assets
     const newAssetsHashKeys = data.map((a) => a.hashKey);
@@ -202,6 +199,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       value={{
         observationAssets: observationAssets.a,
         assets: assets.a,
+        setObservationAssets,
         addAssets,
         removeAsset,
         addToObservationAssets,

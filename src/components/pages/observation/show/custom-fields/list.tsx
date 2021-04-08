@@ -21,7 +21,7 @@ export default function CustomFieldList({
   };
 
   return (
-    <Tabs isLazy={true}>
+    <Tabs className="nospace" isLazy={true}>
       <TabList>
         {o.customField?.map(({ userGroupId }) => (
           <Tab key={userGroupId}>{getGroupNameById(userGroupId)}</Tab>
@@ -29,7 +29,7 @@ export default function CustomFieldList({
       </TabList>
       <TabPanels>
         {o.customField?.map((cfList) => (
-          <TabPanel key={cfList.userGroupId} p={0}>
+          <TabPanel key={cfList.userGroupId}>
             {cfList?.customField?.map((cf) => (
               <CustomField
                 key={cf.cfId}

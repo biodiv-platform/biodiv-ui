@@ -16,13 +16,17 @@ interface IGroupPostProps {
   selectedDefault: UserGroupIbp[] | undefined;
   resourceId;
   saveUserGroupsFunc;
+  columns?;
 }
+
+const defaultGridColumns = [1, 1, 2, 3];
 
 export default function GroupPost({
   groups = [],
   selectedDefault,
   resourceId,
-  saveUserGroupsFunc
+  saveUserGroupsFunc,
+  columns
 }: IGroupPostProps) {
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
   const [selectedGroups, setSelectedGroups] = useState<any>(
@@ -61,7 +65,7 @@ export default function GroupPost({
         Edit
       </Button>
 
-      <SimpleGrid columns={[1, 1, 2, 3]} spacing={4} hidden={isOpen}>
+      <SimpleGrid columns={columns || defaultGridColumns} spacing={4} hidden={isOpen}>
         <GroupBox
           link={DEFAULT_GROUP.webAddress}
           icon={`${DEFAULT_GROUP.icon}?h=40`}
@@ -80,7 +84,7 @@ export default function GroupPost({
       <Collapse in={isOpen} unmountOnExit={true}>
         {groups.length > 0 && (
           <CheckBoxItems
-            gridColumns={[1, 1, 2, 3]}
+            gridColumns={columns || defaultGridColumns}
             options={groups}
             defaultValue={selectedGroups}
             onChange={setSelectedGroups}

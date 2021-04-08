@@ -62,12 +62,9 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
     case ACTIVITY_TYPE.FLAGGED:
     case ACTIVITY_TYPE.FLAG_REMOVED:
       const desc = activity?.activityIbp?.activityDescription;
-      const [flagType, flagInfo]: any = desc?.split(":");
-      return (
-        <Box>
-          {t(`ACTIONS.FLAG.FLAGS.${flagType}`)}: {flagInfo}
-        </Box>
-      );
+      const [flagType, flagInfo]: any = desc?.split(/:(.+)/);
+      const html = `${t(`ACTIONS.FLAG.FLAGS.${flagType}`)}: ${flagInfo}`;
+      return <CommentRender html={html} />;
 
     case ACTIVITY_TYPE.RATED_MEDIA_RESOURCE:
       return <></>;

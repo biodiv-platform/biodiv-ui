@@ -1,9 +1,9 @@
-import { Center, Heading, Link, Text } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Center, Heading, Link, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
 import useTranslation from "@hooks/use-translation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage } from "@utils/media";
+import { getResourceThumbnail } from "@utils/media";
 import React from "react";
 
 export default function Sidebar({ resource }) {
@@ -11,7 +11,7 @@ export default function Sidebar({ resource }) {
 
   return (
     <BlurBox
-      bg={getObservationImage(resource?.fileName, RESOURCE_SIZE.PREVIEW)}
+      bg={getResourceThumbnail(resource.context, resource?.fileName, RESOURCE_SIZE.PREVIEW)}
       fallbackColor="var(--gray-800)"
     >
       <Center h="full" p={{ base: 6, lg: 8 }}>

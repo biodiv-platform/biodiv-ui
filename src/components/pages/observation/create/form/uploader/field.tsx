@@ -1,12 +1,5 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs
-} from "@chakra-ui/react";
+import { FormControl, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { ErrorMessageMulti } from "@components/form/common/error-message";
 import useTranslation from "@hooks/use-translation";
 import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
 import React, { useEffect, useState } from "react";
@@ -48,7 +41,13 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
 
   return (
     <FormControl isInvalid={form.errors[name] && true} mb={mb}>
-      <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded" isLazy={true}>
+      <Tabs
+        className="nospace"
+        index={tabIndex}
+        onChange={setTabIndex}
+        variant="soft-rounded"
+        isLazy={true}
+      >
         <TabList mb={4} overflowX="auto" py={1}>
           <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
           <Tab>☁️ {t("OBSERVATION.MY_UPLOADS")}</Tab>
@@ -56,25 +55,21 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
           <Tab>📹 {t("OBSERVATION.FROM_URL")}</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel p={0}>
-            <ResourcesList />
+          <TabPanel>
+            <ResourcesList showHint={true} />
           </TabPanel>
-          <TabPanel p={0}>
+          <TabPanel>
             <MyUploads onDone={onSelectionDone} />
           </TabPanel>
-          <TabPanel p={0}>
+          <TabPanel>
             <AudioInput onDone={onSelectionDone} />
           </TabPanel>
-          <TabPanel p={0}>
+          <TabPanel>
             <FromURL onDone={onSelectionDone} />
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <FormErrorMessage>
-        {Array.isArray(form.errors[name])
-          ? form.errors[name].map((e) => e && e?.status?.message)
-          : form.errors[name]?.message}
-      </FormErrorMessage>
+      <ErrorMessageMulti errors={form.errors} name={name} />
     </FormControl>
   );
 };

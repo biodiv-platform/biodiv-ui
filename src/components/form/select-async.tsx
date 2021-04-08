@@ -68,8 +68,7 @@ const SelectAsyncInputField = ({
   );
 
   useEffect(() => {
-    form.setValue(name, multiple ? selected : selected?.value);
-    form.trigger(name);
+    form.setValue(name, multiple ? selected : selected?.value, { shouldValidate: true });
     if (onChange && selected) {
       onChange(selected);
     }

@@ -1,12 +1,7 @@
 import { Box, Image, Link } from "@chakra-ui/react";
 import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
-import {
-  getObservationImage,
-  getObservationRAW,
-  getLocalIcon,
-  getYouTubeEmbed
-} from "@utils/media";
+import { getLocalIcon, getResourceRAW, getResourceThumbnail, getYouTubeEmbed } from "@utils/media";
 import React from "react";
 
 export const NoSlide = ({ speciesGroup }) => (
@@ -33,14 +28,15 @@ const SlideDescription = ({ text }) =>
 
 const Slide = ({ resource, alt }) => {
   switch (resource.type) {
+    case ResourceType.Icon:
     case ResourceType.Image:
       return (
-        <Link target="_blank" href={getObservationRAW(resource.fileName)}>
+        <Link target="_blank" href={getResourceRAW(resource.context, resource.fileName)}>
           <Image
             className="carousel--image"
             loading="lazy"
             ignoreFallback={true}
-            src={getObservationImage(resource.fileName, RESOURCE_SIZE.PREVIEW)}
+            src={getResourceThumbnail(resource.context, resource.fileName, RESOURCE_SIZE.PREVIEW)}
             alt={resource.description || alt || resource.fileName}
           />
           <SlideDescription text={resource.description} />
@@ -59,14 +55,14 @@ const Slide = ({ resource, alt }) => {
         ></iframe>
       ) : (
         <video width="500" height="300" controls>
-          <source src={getObservationRAW(resource.fileName)} />
+          <source src={getResourceRAW(resource.context, resource.fileName)} />
         </video>
       );
 
     case ResourceType.Audio:
       return (
         <audio
-          src={getObservationRAW(resource.fileName)}
+          src={getResourceRAW(resource.context, resource.fileName)}
           preload="auto"
           controls={true}
           className="carousel--audio"

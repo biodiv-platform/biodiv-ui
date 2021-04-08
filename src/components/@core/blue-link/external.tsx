@@ -4,10 +4,15 @@ import React from "react";
 
 import BlueLink from ".";
 
-export default function ExternalBlueLink(props: LinkProps) {
-  return (
-    <BlueLink {...props} target="_blank" rel="noreferrer noopener" wordBreak="break-word">
-      {props?.children || (props.href && decodeURIComponent(props.href))} <ExternalLinkIcon />
-    </BlueLink>
-  );
-}
+export const externalLinkProps = {
+  target: "_blank",
+  rel: "noreferrer noopener"
+};
+
+const ExternalBlueLink = (props: LinkProps) => (
+  <BlueLink {...props} {...externalLinkProps} wordBreak="break-word">
+    {props?.children || (props.href && decodeURIComponent(props.href))} <ExternalLinkIcon />
+  </BlueLink>
+);
+
+export default ExternalBlueLink;

@@ -10,7 +10,7 @@ import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import {
   getFallbackByMIME,
   getMyUploadsThumbnail,
-  getObservationThumbnail,
+  getResourceThumbnail,
   getYoutubeImage
 } from "@utils/media";
 import React, { useMemo } from "react";
@@ -48,7 +48,7 @@ export const getImageThumb = (resource, userID, size = 140) => {
       ? getYoutubeImage(resource.url)
       : resource.path.match(LOCAL_ASSET_PREFIX)
       ? getMyUploadsThumbnail(resource.path, userID, size)
-      : getObservationThumbnail(resource.path);
+      : getResourceThumbnail(resource.context, resource.path);
   }
   return URL.createObjectURL(resource.blob);
 };
