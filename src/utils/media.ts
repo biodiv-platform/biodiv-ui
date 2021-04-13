@@ -2,6 +2,11 @@ import { ENDPOINT } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { ASSET_TYPES } from "@static/observation-create";
 
+export const RESOURCE_CTX = {
+  OBSERVATION: "OBSERVATION",
+  MY_UPLOADS: "MY_UPLOADS"
+};
+
 const RESOURCE_CTX_MAP = {
   SPECIES: "img",
   OBSERVATION: "observations",
@@ -36,13 +41,6 @@ export const getYouTubeEmbed = (url) => {
   return `https://www.youtube.com/embed/${getYouTubeId(url)}`;
 };
 
-/**
- * @deprecated use getResourceThumbnail instead
- */
-export const getObservationImage = (resourceUrl, size = ""): string => {
-  return `${ENDPOINT.FILES}/get/crop/observations${resourceUrl}${size}`;
-};
-
 export const getYoutubeImage = (resourceUrl: string, size = "hqdefault") => {
   const ytid = getYouTubeId(resourceUrl);
   return ytid ? `https://i.ytimg.com/vi/${ytid}/${size}.jpg` : undefined;
@@ -56,21 +54,9 @@ export const getUserImage = (resourceUrl, w = 50) => {
     : undefined;
 };
 
-export const getObservationThumbnail = (resourceUrl, height = 200) => {
+export const getResourceThumbnail = (resourceType, resourceUrl, size) => {
   return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/observations${resourceUrl}?h=${height}`
-    : undefined;
-};
-
-export const getMyUploadsThumbnail = (resourceUrl, userId, height = 200) => {
-  return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/myUploads/${userId}${resourceUrl}?h=${height}`
-    : undefined;
-};
-
-export const getResourceThumbnail = (resourceType, resourceUrl, height = 200) => {
-  return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/${RESOURCE_CTX_MAP[resourceType]}/${resourceUrl}?h=${height}`
+    ? `${ENDPOINT.FILES}/get/crop/${RESOURCE_CTX_MAP[resourceType]}/${resourceUrl}${size}`
     : undefined;
 };
 

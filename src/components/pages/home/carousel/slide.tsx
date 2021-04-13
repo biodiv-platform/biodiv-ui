@@ -1,13 +1,17 @@
 import { Box, Image } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getResourceThumbnail } from "@utils/media";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React from "react";
 
 export default function Slide({ resource }) {
   const SlideImage = () => (
     <Image
-      bg={getResourceThumbnail(resource.context, resource?.fileName, RESOURCE_SIZE.PREVIEW)}
+      src={getResourceThumbnail(
+        RESOURCE_CTX.OBSERVATION,
+        resource?.fileName,
+        RESOURCE_SIZE.PREVIEW
+      )}
       h={{ base: 240, md: 420, lg: 500 }}
       w="full"
       objectFit="cover"

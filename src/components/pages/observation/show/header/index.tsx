@@ -21,7 +21,7 @@ import {
 import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDateReadableFromUTC } from "@utils/date";
-import { getObservationImage } from "@utils/media";
+import { getResourceThumbnail } from "@utils/media";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useMemo, useState } from "react";
 
@@ -47,7 +47,11 @@ function Header({ o, following = false }: IHeaderProps) {
   const reprImage: any = useMemo(() => {
     if (o.observation?.reprImageId) {
       const r = o.observationResource?.find((i) => i.resource?.id === o.observation?.reprImageId);
-      return getObservationImage(r?.resource?.fileName, RESOURCE_SIZE.TWITTER);
+      return getResourceThumbnail(
+        r?.resource?.context,
+        r?.resource?.fileName,
+        RESOURCE_SIZE.TWITTER
+      );
     }
   }, []);
 
