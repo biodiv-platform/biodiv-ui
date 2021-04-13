@@ -4,14 +4,14 @@ import useGlobalState from "@hooks/use-global-state";
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import { isBrowser } from "@static/constants";
+import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { LICENSES_ARRAY } from "@static/licenses";
 import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import {
   getFallbackByMIME,
-  getMyUploadsThumbnail,
   getResourceThumbnail,
-  getYoutubeImage
+  getYoutubeImage,
+  RESOURCE_CTX
 } from "@utils/media";
 import React, { useMemo } from "react";
 import Rating from "react-rating";
@@ -47,8 +47,12 @@ export const getImageThumb = (resource, userID, size = 140) => {
     return resource.type.match(ASSET_TYPES.VIDEO) && resource.url
       ? getYoutubeImage(resource.url)
       : resource.path.match(LOCAL_ASSET_PREFIX)
-      ? getMyUploadsThumbnail(resource.path, userID, size)
-      : getResourceThumbnail(resource.context, resource.path);
+      ? getResourceThumbnail(
+          RESOURCE_CTX.MY_UPLOADS,
+          userID + resource.path,
+          RESOURCE_SIZE.RECENT_THUMBNAIL
+        ) // MyUploads
+      : getResourceThumbnail(resource.context, resource.path, RESOURCE_SIZE.DEFAULT);
   }
   return URL.createObjectURL(resource.blob);
 };

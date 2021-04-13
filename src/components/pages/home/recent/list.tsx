@@ -4,7 +4,8 @@ import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
-import { getObservationThumbnail } from "@utils/media";
+import { RESOURCE_SIZE } from "@static/constants";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React, { useEffect, useState } from "react";
 
 const OBSERVATIONS_SIZE = 10;
@@ -61,7 +62,11 @@ export default function RecentObservationList() {
                     loading="lazy"
                     ignoreFallback={true}
                     bg="gray.200"
-                    src={getObservationThumbnail(o?.thumbnail, 135)}
+                    src={getResourceThumbnail(
+                      RESOURCE_CTX.OBSERVATION,
+                      o?.thumbnail,
+                      RESOURCE_SIZE.RECENT_THUMBNAIL
+                    )}
                     alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
                   />
                 </AspectRatio>

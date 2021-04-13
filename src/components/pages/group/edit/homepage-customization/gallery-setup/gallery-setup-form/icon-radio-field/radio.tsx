@@ -1,6 +1,7 @@
 import { Box, HStack, Image, useRadio, useRadioGroup } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
-import { getObservationThumbnail } from "@utils/media";
+import { RESOURCE_SIZE } from "@static/constants";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React from "react";
 
 interface ITraitInputProps {
@@ -57,7 +58,7 @@ const RadioItems = ({ options, form, name, defaultValue }: ITraitInputProps) => 
                 boxSize="5rem"
                 ignoreFallback={true}
                 loading="lazy"
-                src={getObservationThumbnail(o.value)}
+                src={getResourceThumbnail(RESOURCE_CTX.OBSERVATION, o.value, RESOURCE_SIZE.DEFAULT)}
                 alt={o.name}
               />
             </Tooltip>
