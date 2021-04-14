@@ -13,7 +13,7 @@ import * as Yup from "yup";
 
 import usePagesSidebar from "../sidebar/use-pages-sidebar";
 
-const WYSIWYGField = dynamic(import("@components/form/wysiwyg"), { ssr: false });
+const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
 interface PageFormProps {
   defaultValues: Partial<PageShowMinimal>;

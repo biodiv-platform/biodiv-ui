@@ -3,11 +3,12 @@ import AudioIcon from "@icons/audio";
 import VideoIcon from "@icons/video";
 import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage, getYoutubeImage } from "@utils/media";
+import { getResourceThumbnail, getYoutubeImage } from "@utils/media";
 import React from "react";
 
 const Thumbnail = ({ resource }) => {
   switch (resource.type) {
+    case ResourceType.Icon:
     case ResourceType.Image:
       return (
         <Image
@@ -15,7 +16,7 @@ const Thumbnail = ({ resource }) => {
           loading="lazy"
           objectFit="cover"
           alt={resource.description || resource.fileName}
-          src={getObservationImage(resource.fileName, RESOURCE_SIZE.THUMBNAIL)}
+          src={getResourceThumbnail(resource.context, resource.fileName, RESOURCE_SIZE.THUMBNAIL)}
         />
       );
 

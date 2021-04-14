@@ -15,7 +15,7 @@ export default function Temporal({ data }) {
   const { t } = useTranslation();
 
   const temporalData = React.useMemo(
-    () => MONTHS.map((name) => ({ Month: name, Observations: data[name] || 0 })).reverse(),
+    () => MONTHS.map((name) => ({ Month: name, Observations: data[name] || 0 })),
     []
   );
 

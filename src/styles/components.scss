@@ -129,3 +129,9 @@ button[role="tab"] {
 .chakra-badge {
   line-height: normal;
 }
+
+.chakra-tabs.nospace {
+  [role="tabpanel"] {
+    padding: 0;
+  }
+}

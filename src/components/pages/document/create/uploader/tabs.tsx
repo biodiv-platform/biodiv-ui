@@ -21,16 +21,22 @@ export default function DocumentUploaderTabs({ onChange }) {
   }, [selectedDocument]);
 
   return (
-    <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded" isLazy={true}>
+    <Tabs
+      className="nospace"
+      index={tabIndex}
+      onChange={setTabIndex}
+      variant="soft-rounded"
+      isLazy={true}
+    >
       <TabList mb={4} overflowX="auto" py={1}>
         <Tab>✔️ {t("DOCUMENT.UPLOAD.SELECTED")}</Tab>
         <Tab>☁️ {t("DOCUMENT.UPLOAD.MY_UPLOADS")}</Tab>
       </TabList>
       <TabPanels>
-        <TabPanel p={0}>
+        <TabPanel>
           <DocumentDropzone />
         </TabPanel>
-        <TabPanel p={0}>
+        <TabPanel>
           <MyDocumentUploads />
         </TabPanel>
       </TabPanels>

@@ -2,6 +2,18 @@ import { ENDPOINT } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { ASSET_TYPES } from "@static/observation-create";
 
+export const RESOURCE_CTX = {
+  OBSERVATION: "OBSERVATION",
+  MY_UPLOADS: "MY_UPLOADS"
+};
+
+const RESOURCE_CTX_MAP = {
+  SPECIES: "img",
+  OBSERVATION: "observations",
+  SPECIES_FIELD: "img",
+  MY_UPLOADS: "myUploads"
+};
+
 const cleanSlashes = (path) => path.split("//").join("/");
 
 /**
@@ -29,14 +41,6 @@ export const getYouTubeEmbed = (url) => {
   return `https://www.youtube.com/embed/${getYouTubeId(url)}`;
 };
 
-export const getObservationImage = (resourceUrl, size = ""): string => {
-  return `${ENDPOINT.FILES}/get/crop/observations${resourceUrl}${size}`;
-};
-
-export const getObservationRAW = (resourceUrl: string): string => {
-  return `${ENDPOINT.RAW}/observations${resourceUrl}`;
-};
-
 export const getYoutubeImage = (resourceUrl: string, size = "hqdefault") => {
   const ytid = getYouTubeId(resourceUrl);
   return ytid ? `https://i.ytimg.com/vi/${ytid}/${size}.jpg` : undefined;
@@ -50,21 +54,15 @@ export const getUserImage = (resourceUrl, w = 50) => {
     : undefined;
 };
 
-export const getObservationThumbnail = (resourceUrl, height = 200) => {
+export const getResourceThumbnail = (resourceType, resourceUrl, size) => {
   return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/observations${resourceUrl}?h=${height}`
+    ? `${ENDPOINT.FILES}/get/crop/${RESOURCE_CTX_MAP[resourceType]}/${resourceUrl}${size}`
     : undefined;
 };
 
-export const getMyUploadsThumbnail = (resourceUrl, userId, height = 200) => {
+export const getResourceRAW = (resourceType, resourceUrl) => {
   return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/myUploads/${userId}${resourceUrl}?h=${height}`
-    : undefined;
-};
-
-export const getResourceThumbnail = (resourceName, resourceUrl, height = 200) => {
-  return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/${resourceName}/${resourceUrl}?h=${height}`
+    ? `${ENDPOINT.FILES}/get/raw/${RESOURCE_CTX_MAP[resourceType]}/${resourceUrl}`
     : undefined;
 };
 
@@ -88,12 +86,6 @@ export const getSuggestionIcon = (resourceUrl) => {
 
 export const getLocalIcon = (icon, type = "species") =>
   `/next-assets/${type}/${icon || "Unknown"}.svg`;
-
-export const getFallbackSpinner = (light = true) => {
-  return `data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg' stroke='%23${
-    light ? "fff" : "000"
-  }'%3E%3Cg fill='none' fill-rule='evenodd' stroke-width='2'%3E%3Ccircle cx='22' cy='22' r='1'%3E%3Canimate attributeName='r' begin='0s' dur='1.8s' values='1; 20' calcMode='spline' keyTimes='0; 1' keySplines='0.165, 0.84, 0.44, 1' repeatCount='indefinite' /%3E%3Canimate attributeName='stroke-opacity' begin='0s' dur='1.8s' values='1; 0' calcMode='spline' keyTimes='0; 1' keySplines='0.3, 0.61, 0.355, 1' repeatCount='indefinite' /%3E%3C/circle%3E%3Ccircle cx='22' cy='22' r='1'%3E%3Canimate attributeName='r' begin='-0.9s' dur='1.8s' values='1; 20' calcMode='spline' keyTimes='0; 1' keySplines='0.165, 0.84, 0.44, 1' repeatCount='indefinite' /%3E%3Canimate attributeName='stroke-opacity' begin='-0.9s' dur='1.8s' values='1; 0' calcMode='spline' keyTimes='0; 1' keySplines='0.3, 0.61, 0.355, 1' repeatCount='indefinite' /%3E%3C/circle%3E%3C/g%3E%3C/svg%3E`;
-};
 
 export const getFallbackByMIME = (mime) => {
   const type = mime ? mime.toString().split("/")[0] : null;

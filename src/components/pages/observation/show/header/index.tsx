@@ -1,10 +1,13 @@
-import { Box, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import FollowActionButton from "@components/@core/action-buttons/follow";
 import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
+import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
+import TaxonBreadcrumbs from "@components/pages/common/breadcrumbs";
+import TaxonStatusBadge from "@components/pages/common/status-badge";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
@@ -18,12 +21,9 @@ import {
 import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDateReadableFromUTC } from "@utils/date";
-import { getObservationImage } from "@utils/media";
+import { getResourceThumbnail } from "@utils/media";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useMemo, useState } from "react";
-
-import Breadcrumbs from "../breadcrumbs";
-import ObservationStatusBadge from "../status-badge";
 
 interface IHeaderProps {
   o: ShowData;
@@ -47,7 +47,11 @@ function Header({ o, following = false }: IHeaderProps) {
   const reprImage: any = useMemo(() => {
     if (o.observation?.reprImageId) {
       const r = o.observationResource?.find((i) => i.resource?.id === o.observation?.reprImageId);
-      return getObservationImage(r?.resource?.fileName, RESOURCE_SIZE.TWITTER);
+      return getResourceThumbnail(
+        r?.resource?.context,
+        r?.resource?.fileName,
+        RESOURCE_SIZE.TWITTER
+      );
     }
   }, []);
 
@@ -56,6 +60,43 @@ function Header({ o, following = false }: IHeaderProps) {
   }, [isLoggedIn]);
 
   const handleOnEdit = () => router.push(`/observation/edit/${o.observation?.id}`, true);
+
+  const PageActions = () => (
+    <div>
+      {showActions && (
+        <SimpleActionButton
+          icon={<EditIcon />}
+          title={t("OBSERVATION.EDIT_OBSERVATION")}
+          onClick={handleOnEdit}
+          colorScheme="teal"
+        />
+      )}
+      <FollowActionButton
+        following={following}
+        resourceId={o.observation?.id}
+        toggleFollowFunc={axFollowObservation}
+        followTitle={t("OBSERVATION.FOLLOW_OBSERVATION")}
+        unFollowTitle={t("OBSERVATION.UNFOLLOW_OBSERVATION")}
+      />
+      <FlagActionButton
+        resourceId={o.observation?.id}
+        initialFlags={o.flag}
+        userId={user?.id}
+        flagFunc={axFlagObservation}
+        unFlagFunc={axUnFlagObservation}
+      />
+      {showActions && (
+        <DeleteActionButton
+          observationId={o.observation?.id}
+          title={t("OBSERVATION.REMOVE.TITLE")}
+          description={t("OBSERVATION.REMOVE.DESCRIPTION")}
+          deleted={t("OBSERVATION.REMOVE.SUCCESS")}
+          deleteFunc={axDeleteObservation}
+        />
+      )}
+      <ShareActionButton text={pageDescription} title={t("OBSERVATION.SHARE")} />
+    </div>
+  );
 
   return (
     <>
@@ -67,56 +108,27 @@ function Header({ o, following = false }: IHeaderProps) {
         }}
         title={pageTitle}
       />
-      <SimpleGrid columns={[1, 1, 4, 4]} mb={4} className="fadeInUp">
-        <Box gridColumn="1 / 4">
-          <Heading as="h1" size="xl" mb={2}>
-            <Text as="i" mr={2}>
-              {o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
-            </Text>
-            <ObservationStatusBadge reco={o.recoIbp} />
-          </Heading>
+
+      <PageHeading actions={<PageActions />} className="fadeInUp">
+        <>
+          <Flex direction={{ base: "column", md: "row" }}>
+            <Box mr={2}>
+              <i>{o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}</i>
+            </Box>
+            <TaxonStatusBadge
+              reco={o.recoIbp}
+              crumbs={o.recoIbp?.breadCrumbs}
+              taxonId={o.recoIbp?.taxonId}
+            />
+          </Flex>
           {o.recoIbp?.commonName && (
-            <Heading as="h2" size="lg">
+            <Heading as="h2" size="lg" mt={2}>
               {o.recoIbp?.commonName}
             </Heading>
           )}
-        </Box>
-        <Flex alignItems="top" justifyContent={["flex-start", "flex-end"]}>
-          {showActions && (
-            <SimpleActionButton
-              icon={<EditIcon />}
-              title={t("OBSERVATION.EDIT_OBSERVATION")}
-              onClick={handleOnEdit}
-              colorScheme="teal"
-            />
-          )}
-          <FollowActionButton
-            following={following}
-            resourceId={o.observation?.id}
-            toggleFollowFunc={axFollowObservation}
-            followTitle={t("OBSERVATION.FOLLOW_OBSERVATION")}
-            unFollowTitle={t("OBSERVATION.UNFOLLOW_OBSERVATION")}
-          />
-          <FlagActionButton
-            resourceId={o.observation?.id}
-            initialFlags={o.flag}
-            userId={user?.id}
-            flagFunc={axFlagObservation}
-            unFlagFunc={axUnFlagObservation}
-          />
-          {showActions && (
-            <DeleteActionButton
-              observationId={o.observation?.id}
-              title={t("OBSERVATION.REMOVE.TITLE")}
-              description={t("OBSERVATION.REMOVE.DESCRIPTION")}
-              deleted={t("OBSERVATION.REMOVE.SUCCESS")}
-              deleteFunc={axDeleteObservation}
-            />
-          )}
-          <ShareActionButton text={pageDescription} title={t("OBSERVATION.SHARE")} />
-        </Flex>
-      </SimpleGrid>
-      <Breadcrumbs crumbs={o.recoIbp?.breadCrumbs} />
+        </>
+      </PageHeading>
+      <TaxonBreadcrumbs crumbs={o.recoIbp?.breadCrumbs} type="observation" />
     </>
   );
 }

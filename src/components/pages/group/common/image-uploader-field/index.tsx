@@ -1,5 +1,6 @@
 import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
+import { RESOURCE_SIZE } from "@static/constants";
 import { getByPath } from "@utils/basic";
 import React, { useEffect, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
@@ -49,7 +50,7 @@ export default function ImageUploaderField({
       {value ? (
         <ResourceCard
           simpleUpload={simpleUpload}
-          imageSize={simpleUpload ? 60 : 300}
+          imageSize={simpleUpload ? "?h=60" : RESOURCE_SIZE.LIST_THUMBNAIL}
           setValue={setvalue}
           resourceName={resourcePath}
           resource={value}

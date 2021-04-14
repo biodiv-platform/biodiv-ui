@@ -4,7 +4,7 @@ import React from "react";
 interface IBlurBoxProps {
   children;
 
-  bg: string;
+  bg?: string;
   bgOpacity?: number;
   fallbackColor?: string;
 

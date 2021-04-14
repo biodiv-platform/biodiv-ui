@@ -3,7 +3,7 @@ import ls from "local-storage-json";
 import { useEffect, useState } from "react";
 import { emit } from "react-gbus";
 
-export const LAST_LOCATION = "ll";
+const LAST_LOCATION = "ll";
 
 export default function useLastLocation() {
   const [has, setHas] = useState(false);

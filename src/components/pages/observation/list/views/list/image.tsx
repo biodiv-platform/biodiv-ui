@@ -1,16 +1,15 @@
 import { Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
+import ShadowedUser from "@components/pages/common/shadowed-user";
 import styled from "@emotion/styled";
 import AudioIcon from "@icons/audio";
 import ImageIcon from "@icons/image";
 import VideoIcon from "@icons/video";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage, getLocalIcon } from "@utils/media";
+import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React from "react";
-
-import ShadowedUser from "@components/pages/common/shadowed-user";
 
 const ImageBox = styled.div`
   position: relative;
@@ -92,7 +91,11 @@ export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper 
             className="ob-image-list"
             objectFit="cover"
             bg="gray.100"
-            src={getObservationImage(o.reprImageUrl, RESOURCE_SIZE.LIST_THUMBNAIL)}
+            src={getResourceThumbnail(
+              RESOURCE_CTX.OBSERVATION,
+              o.reprImageUrl,
+              RESOURCE_SIZE.LIST_THUMBNAIL
+            )}
             fallbackSrc={getLocalIcon(o?.speciesGroup)}
             alt={o.observationId?.toString()}
           />

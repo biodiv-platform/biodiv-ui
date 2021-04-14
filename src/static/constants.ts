@@ -72,19 +72,22 @@ export const TAXON_BADGE_COLORS = {
 export const PAGINATION_LIMIT = 3;
 
 export const RESOURCE_SIZE = {
-  PREVIEW: "?h=420",
-  THUMBNAIL: "?h=34",
-  LIST_THUMBNAIL: "?h=300",
-  TWITTER: "?w=600&h=330&fit=center&preserve=true",
   APPLE_TOUCH: "?h=180&w=180&crop=fit&preserve=true",
-  MANIFEST: "${icon}?h=${size}&w=${size}&crop=fit&preserve=true"
+  DEFAULT: "?h=200",
+  LIST_THUMBNAIL: "?h=300",
+  MANIFEST: "${icon}?h=${size}&w=${size}&crop=fit&preserve=true",
+  PREVIEW: "?h=420",
+  RECENT_THUMBNAIL: "?h=135",
+  THUMBNAIL: "?h=34",
+  TWITTER: "?w=600&h=330&fit=center&preserve=true",
 };
 
 export const FORWARD_BLACKLIST = ["login", "register"];
 
 export const RESOURCE_TYPE = {
+  DOCUMENT: "document",
   OBSERVATION: "observation",
-  DOCUMENT: "document"
+  SPECIES: "species"
 };
 
 export const APP_VERSION = packageJson.version;

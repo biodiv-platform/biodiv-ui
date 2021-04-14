@@ -1,12 +1,11 @@
 import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
+import ShadowedUser from "@components/pages/common/shadowed-user";
 import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getObservationImage, getLocalIcon } from "@utils/media";
+import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React from "react";
-
-import ShadowedUser from "@components/pages/common/shadowed-user";
 
 export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
   const { t } = useTranslation();
@@ -21,7 +20,11 @@ export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
               bg="gray.100"
               w="full"
               h="full"
-              src={getObservationImage(o?.thumbnail, RESOURCE_SIZE.LIST_THUMBNAIL)}
+              src={getResourceThumbnail(
+                RESOURCE_CTX.OBSERVATION,
+                o?.thumbnail,
+                RESOURCE_SIZE.LIST_THUMBNAIL
+              )}
               fallbackSrc={getLocalIcon(o?.speciesGroup)}
               alt={o.observationId?.toString()}
             />
