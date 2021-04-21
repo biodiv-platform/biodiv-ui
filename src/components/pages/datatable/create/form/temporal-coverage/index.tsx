@@ -1,6 +1,6 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import Datepicker from "@components/form/datepicker";
+import DateRangePickerField from "@components/form/daterangepicker";
 import SelectInputField from "@components/form/select";
 import { DATE_ACCURACY_OPTIONS } from "@components/pages/observation/create/form/options";
 import useTranslation from "@hooks/use-translation";
@@ -12,16 +12,15 @@ export default function TemporalCoverage({ form }) {
 
   return (
     <Box bg="white" border="1px solid var(--gray-300)" borderRadius="md" className="container mt">
-      <BoxHeading styles={{ marginBottom: "5" }}>👥 {t("Temporal Covergae & License")}</BoxHeading>
+      <BoxHeading styles={{ marginBottom: "5" }}>📅 {t("Temporal Covergae & License")}</BoxHeading>
       <SimpleGrid columns={[1, 1, 4, 4]} spacing={2}>
-        <Datepicker
-          name="observedOn"
-          label={t("OBSERVATION.OBSERVED_ON")}
+        <DateRangePickerField
           style={{ gridColumn: "1/3" }}
-          form={form}
+          hasMaxDate={false}
           isRequired={true}
-          subscribe={true}
-          mb={0}
+          form={form}
+          name="observedDateRange"
+          label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}
         />
         <SelectInputField
           name="dateAccuracy"

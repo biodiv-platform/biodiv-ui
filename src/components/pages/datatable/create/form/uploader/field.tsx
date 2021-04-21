@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs
-} from "@chakra-ui/react";
+import { Box, FormControl } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
 import React, { useEffect, useState } from "react";
@@ -14,26 +6,30 @@ import { emit } from "react-gbus";
 import { UseFormMethods } from "react-hook-form";
 
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
-import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import ImageUploaderField from "./file-uploader-field";
+import BoxHeading from "@components/@core/layout/box-heading";
 
 export interface IDropzoneProps {
   name: string;
-  setFieldMapping:any;
+  showMapping: boolean;
+  setFieldMapping: any;
+  setShowMapping: any;
   mb?: number;
   form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   children?;
 }
 
-const DropzoneField = ({ name, mb = 4, form ,setFieldMapping}: IDropzoneProps) => {
-  const { observationAssets } = useObservationCreate();
+const DropzoneField = ({
+  name,
+  mb = 4,
+  form,
+  setFieldMapping,
+  showMapping,
+  setShowMapping
+}: IDropzoneProps) => {
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    form.setValue(name, observationAssets, { shouldDirty: true });
-  }, [observationAssets]);
 
   useEffect(() => {
     form.register({ name });
@@ -41,39 +37,29 @@ const DropzoneField = ({ name, mb = 4, form ,setFieldMapping}: IDropzoneProps) =
 
   useEffect(() => {
     emit(TOGGLE_PHOTO_SELECTOR, tabIndex !== 0);
-  }, [tabIndex]);
+  }, [tabIndex, showMapping]);
 
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb}>
-      <Tabs index={tabIndex} onChange={setTabIndex} variant="soft-rounded" isLazy={true}>
-        <TabList mb={4} overflowX="auto" py={1}>
-          <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
-          <Tab>☁️ {t("OBSERVATION.MY_UPLOADS")}</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel p={0}>
-            <ImageUploaderField
-              simpleUpload={true}
-              label={t("Sheet Uploader")}
-              setFieldMapping={setFieldMapping}
-              name={name}
-              form={form}
-              mb={0}
-            />
-          </TabPanel>
-          <TabPanel p={0}>
-            <MyUploads onDone={onSelectionDone} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-      <FormErrorMessage>
-        {Array.isArray(form.errors[name])
-          ? form.errors[name].map((e) => e && e?.status?.message)
-          : form.errors[name]?.message}
-      </FormErrorMessage>
-    </FormControl>
+    <Box bg="white" border="1px solid var(--gray-300)" borderRadius="md" className="container mt">
+      <BoxHeading styles={{ marginBottom: "5" }}> 📂 {t("Files Uploader")}</BoxHeading>
+      <FormControl isInvalid={form.errors[name] && true} mb={mb}>
+        <MyUploads onDone={onSelectionDone} />
+        {!showMapping && (
+          <ImageUploaderField
+            simpleUpload={true}
+            label={t("Sheet Uploader")}
+            setFieldMapping={setFieldMapping}
+            setShowMapping={setShowMapping}
+            isRequired={true}
+            name={name}
+            form={form}
+            mb={0}
+          />
+        )}
+      </FormControl>
+    </Box>
   );
 };
 

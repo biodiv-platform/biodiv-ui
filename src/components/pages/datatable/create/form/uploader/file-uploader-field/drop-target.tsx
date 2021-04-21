@@ -90,10 +90,11 @@ const sheetJson = [
 
 interface userGroupDropTarget {
   setValue;
+  setFieldMapping;
   simpleUpload?: boolean;
 }
 
-export default function DropTarget({ setValue, simpleUpload }: userGroupDropTarget) {
+export default function DropTarget({ setValue, simpleUpload,setFieldMapping }: userGroupDropTarget) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
 
@@ -117,7 +118,8 @@ export default function DropTarget({ setValue, simpleUpload }: userGroupDropTarg
     //   setValue(dataParse);
     // };
     // reader.readAsBinaryString(e?.target?.files[0]);
-    setValue(sheetJson);
+    setFieldMapping(sheetJson);
+    setValue("/filename/path")
 
     setIsProcessing(false);
   };

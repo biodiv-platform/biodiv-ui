@@ -9,7 +9,7 @@ export default function PartyContributorsForm({ form }) {
 
   return (
     <Box bg="white" border="1px solid var(--gray-300)" borderRadius="md" className="container mt">
-      <BoxHeading styles={{ marginBottom: "5" }}>👥 {t("Geographic Coverage")}</BoxHeading>
+      <BoxHeading styles={{ marginBottom: "5" }}>🌏 {t("Geographic Coverage")}</BoxHeading>
       <LocationPicker form={form} />
     </Box>
   );

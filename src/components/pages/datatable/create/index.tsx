@@ -20,7 +20,7 @@ export default function DataTableCreatePageComponent({ speciesGroups, languages 
 
   return (
     <Box className="container mt" pb={6}>
-      <PageHeading>📄 {t("DOCUMENT.CREATE.TITLE")}</PageHeading>
+      <PageHeading>ℹ️ {t("Create DataTable")}</PageHeading>
       <DataTableCreateForm speciesGroups={speciesGroups} languages={languages} />
     </Box>
   );

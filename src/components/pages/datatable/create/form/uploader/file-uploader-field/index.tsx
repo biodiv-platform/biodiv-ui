@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormLabel } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import { getByPath } from "@utils/basic";
 import React, { useEffect, useState } from "react";
@@ -10,7 +10,9 @@ interface IDropzoneProps {
   name: string;
   label: string;
   setFieldMapping: any;
+  setShowMapping;
   mb?: number;
+  isRequired:boolean,
   form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   hint?: string;
@@ -22,32 +24,33 @@ export default function ImageUploaderField({
   name,
   label,
   form,
-  hint,
   simpleUpload,
+  isRequired=false,
   setFieldMapping,
+  setShowMapping,
   mb = 4
 }: IDropzoneProps) {
-  const [value, setvalue] = useState(
+  const [value, setvalue] = useState<string>(
     getByPath(form?.control?.defaultValuesRef?.current, name) || ""
   );
 
   useEffect(() => {
-    form.register({ name });
-    setvalue(getByPath(form?.control?.defaultValuesRef?.current, name));
+    form.register({ name });  
   }, [form.register]);
 
   useEffect(() => {
     if (value?.length > 0) {
-      setFieldMapping(value);
+      form.setValue(name,value);
+      setShowMapping(true)
     }
   }, [value]);
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb}>
+    <FormControl  isRequired={isRequired} isInvalid={form.errors[name] && true} mb={mb}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <DropTarget simpleUpload={simpleUpload} setValue={setvalue} />
+      <DropTarget simpleUpload={simpleUpload}  setFieldMapping={setFieldMapping} setValue={setvalue} />
       <ErrorMessage name={name} errors={form.errors} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+      {/* {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>} */}
     </FormControl>
   );
 }
