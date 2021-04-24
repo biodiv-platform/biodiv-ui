@@ -85,10 +85,6 @@ export const OBSERVATION_FIELDS = [
     value: "latitude"
   }, 
   {
-    label: "Latitude",
-    value: "latitude"
-  }, 
-  {
     label: "Date Accuracy",
     value: "dateAccuracy"
   },  
@@ -119,6 +115,10 @@ export const OBSERVATION_FIELDS = [
   {
     label: "License",
     value: "license"
+  },
+  {
+    label:"Geo Privacy",
+    value:"geoPrivacy",
   },
   {
     label: "User Groups",

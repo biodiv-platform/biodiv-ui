@@ -27,25 +27,31 @@ export const axRemoveMyUploads = async ({ path }) => {
   }
 };
 
-export const axUploadObservationResource = async (resource: IDBObservationAsset) => {
-  const formData = new FormData();
-  formData.append("hash", resource.hashKey);
-  formData.append("module", "observation");
-  formData.append("upload", resource.blob, resource.fileName);
+export const axUploadObservationResource = async (
+  resource: IDBObservationAsset,
+  module = "observation"
+) => {
+  try {
+    const formData = new FormData();
+    formData.append("hash", resource.hashKey);
+    formData.append("module", module);
+    formData.append("upload", resource.blob, resource.fileName);
 
-  const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data"
-    }
-  });
-
-  return data;
+    const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
 };
-
 
 export const axBulkUploadObservationResource = async (resource: IDBObservationAsset) => {
   const formData = new FormData();
-  formData.append("folder","myUploads");
+  formData.append("folder", "myUploads");
   formData.append("module", "OBSERVATION");
   formData.append("upload", resource.blob, resource.fileName);
 

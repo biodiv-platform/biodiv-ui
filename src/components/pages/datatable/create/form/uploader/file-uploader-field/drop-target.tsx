@@ -1,7 +1,10 @@
-import { Button, Heading, Text } from "@chakra-ui/react";
 import { TimeIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
+import { Button, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
+import { axUploadObservationResource } from "@services/files.service";
+import { getAssetObject } from "@utils/image";
+import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -35,98 +38,41 @@ const accept = [
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   "application/vnd.ms-excel"
 ];
-
-const sheetJson = [
-  {
-    id: "13226105",
-    observed_on: "6/7/18",
-    url: "https://www.inaturalist.org/observations/13226105",
-    tag_list: "Makunda Christian Hospital, Makunda Dragonflies, Forest fulvous skimmer",
-    place_name: "makunda christian leprosy and general hospital",
-    Notes:"",
-    latitude: "24.434169",
-    longitude: "92.330067",
-    scientific_name: "Neurothemis fulvia",
-    common_name: "Russet Percher",
-    iconic_taxon_name: "Arthropods",
-    filename: "1528449296.jpg",
-    user: "4",
-    license: "CC-BY-NC"
-  },
-  {
-    id: "14475377",
-    observed_on: "6/13/18",
-    url: "https://www.inaturalist.org/observations/14475377",
-    tag_list:
-      "Greater Bluewing, Makunda Christian Hospital, Makunda Dragonflies, Rhyothemis plutonia",
-    Notes: "Makunda dragonfly",
-    place_name: "Makunda Christian Leprosy and General Hospital Rd, Assam, India",
-    latitude: "24.434255",
-    longitude: "92.327951",
-    scientific_name: "Rhyothemis plutonia",
-    common_name: "Greater Bluewing",
-    iconic_taxon_name: "Arthropods",
-    filename: "1531915773.jpg",
-    user: "4",
-    license: "CC-BY-NC"
-  },
-  {
-    id: "14475404",
-    observed_on: "5/29/18",
-    url: "https://www.inaturalist.org/observations/14475404",
-    tag_list: "Makunda Christian Hospital, Makunda Dragonflies, Pseudothemis zonata",
-    Notes: "Makunda Dragonfly",
-    place_name: "Makunda Christian Leprosy and General Hospital Rd, Assam, India",
-    latitude: "24.424896",
-    longitude: "92.338424",
-    scientific_name: "Pseudothemis zonata",
-    common_name: "Pied Skimmer",
-    iconic_taxon_name: "Arthropods",
-    filename: "1531915925.jpg",
-    user: "4",
-    license: "CC-BY-NC"
-  }
-];
-
 interface userGroupDropTarget {
   setValue;
   setFieldMapping;
   simpleUpload?: boolean;
 }
 
-export default function DropTarget({ setValue, simpleUpload,setFieldMapping }: userGroupDropTarget) {
+export default function DropTarget({
+  setValue,
+  simpleUpload,
+  setFieldMapping
+}: userGroupDropTarget) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
 
-  const onDrop = async () => {
+  const handleOnDrop = async ([file]) => {
     setIsProcessing(true);
-    // if (files.length) {
-    //   const { success, data } = await axUploadObservationResource(files[0]);
-    //   if (success) {
-    //     setValue(data);
-    //   }
-    // }
+    if (!file) {
+      return;
+    }
 
-    // const reader = new FileReader();
-    // reader.onload = function (e) {
-    //   const readedData = XLSX.read(e?.target?.result, { type: "binary" });
-    //   const wsname = readedData.SheetNames[0];
-    //   const ws = readedData.Sheets[wsname];
-
-    //   /* Convert array to json*/
-    //   const dataParse = XLSX.utils.sheet_to_json(ws, { header: 1 });
-    //   setValue(dataParse);
-    // };
-    // reader.readAsBinaryString(e?.target?.files[0]);
-    setFieldMapping(sheetJson);
-    setValue("/filename/path")
+    const { success, data } = await axUploadObservationResource(getAssetObject(file), "datasets");
+    if (success) {
+      setFieldMapping(data.excelJson);
+      setValue(data.path);
+      notification(t("DATATABLE.NOTIFICATIONS.SHEET_UPLOAD_SUCCESS"), NotificationType.Success);
+    } else {
+      notification(t("DATATABLE.NOTIFICATIONS.SHEET_UPLOAD_ERROR"), NotificationType.Error);
+    }
 
     setIsProcessing(false);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept,
-    onDrop
+    onDrop: handleOnDrop
   });
 
   return (

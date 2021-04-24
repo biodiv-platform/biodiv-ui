@@ -1,34 +1,50 @@
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import BoxHeading from "@components/@core/layout/box-heading";
 import Select from "@components/form/select";
 import useTranslation from "@hooks/use-translation";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import { OBSERVATION_FIELDS } from "@static/observation-create";
 import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
-import BoxHeading from "@components/@core/layout/box-heading";
 
 export default function Fields({ form, name, fieldMapping, showMapping, setShowMapping }) {
   const { t } = useTranslation();
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
   const [fieldValues, setFieldValues] = useState<any[]>([]);
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: form.control,
     name
   });
 
+  const resetMappingTable = () => {
+    setTableHeaders([]);
+    setFieldValues([]);
+    remove();
+  };
   useEffect(() => {
-    if (fieldMapping?.length && showMapping) {
-      setTableHeaders(Object.keys(fieldMapping[1]));
-      fieldMapping.map((item) => {
-        setFieldValues((prevState) => [...prevState, Object.values(item)]);
+    resetMappingTable();
+    const { rowData, headerData } = fieldMapping;
+    if (rowData && headerData && showMapping) {
+      setTableHeaders(headerData);
+      fieldMapping.rowData.map((item) => {
+        const row = reorderRowData(item, headerData);
+        setFieldValues((prevState) => [...prevState, Object.values(row)]);
       });
 
-      Object.keys(fieldMapping[1]).map((item, index) => {
+      Object.keys(rowData[0]).map((item, index) => {
         append({ columnsMapping: { index: index } });
       });
     }
   }, [fieldMapping, showMapping]);
+
+  const reorderRowData = (item: any, headers: string[]) => {
+    const row = {};
+    headers.map((header) => {
+      row[header] = item[header];
+    });
+    return row;
+  };
 
   return showMapping ? (
     <Box bg="white" border="1px solid var(--gray-300)" borderRadius="md" className="container mt">
@@ -64,18 +80,6 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
                 </Td>
               ))}
             </Tr>
-            {/* <Tr>
-              {fields.map((data, index) => (
-                <Td key={index}>
-                  <TextBox
-                    isRequired={true}
-                    name={`columnsMapping.${index}.description`}
-                    label={t("GROUP.CUSTOM_FIELD.VALUE")}
-                    form={form}
-                  />
-                </Td>
-              ))}
-            </Tr> */}
             {fieldValues.map((tableData, _index) => (
               <Tr key={_index}>
                 {tableData.map((data, index) => (

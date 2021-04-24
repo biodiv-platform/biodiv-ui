@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
@@ -6,9 +6,7 @@ import { isBrowser } from "@static/constants";
 import { preCacheRoutes } from "@utils/auth";
 import React, { useEffect } from "react";
 
-import DataTableCreateForm from "./form";
-
-export default function DataTableCreatePageComponent({ speciesGroups, languages, datasetId }) {
+export default function DataTableShowPageComponent({ datatableId }) {
   const { currentGroup, isLoggedIn } = useGlobalState();
   const { t } = useTranslation();
 
@@ -20,12 +18,8 @@ export default function DataTableCreatePageComponent({ speciesGroups, languages,
 
   return (
     <Box className="container mt" pb={6}>
-      <PageHeading>ℹ️ {t("Create DataTable")}</PageHeading>
-      <DataTableCreateForm
-        speciesGroups={speciesGroups}
-        languages={languages}
-        datasetId={datasetId}
-      />
+      <PageHeading>ℹ️ {t("DATATABLE.SHOW_PAGE")}</PageHeading>
+      <Text>{datatableId}</Text>
     </Box>
   );
 }

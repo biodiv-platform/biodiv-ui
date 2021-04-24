@@ -6,7 +6,7 @@ import { axGetLangList } from "@services/utility.service";
 import { encode } from "base64-url";
 import React, { useEffect } from "react";
 
-const DataTableCreatePage = ({ speciesGroups, languages }) => {
+const DataTableCreatePage = ({ speciesGroups, languages, datasetId }) => {
   const { isLoggedIn } = useGlobalState();
   const { push, asPath } = useLocalRouter();
 
@@ -17,19 +17,24 @@ const DataTableCreatePage = ({ speciesGroups, languages }) => {
   }, []);
 
   return isLoggedIn ? (
-    <DataTableCreatePageComponent speciesGroups={speciesGroups} languages={languages} />
+    <DataTableCreatePageComponent
+      speciesGroups={speciesGroups}
+      languages={languages}
+      datasetId={datasetId}
+    />
   ) : null;
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data } = await axGetLangList();
 
   return {
     props: {
       speciesGroups,
-      languages: data.map((l) => ({ label: l.name, value: l.id }))
-    } // will be passed to the page component as props
+      languages: data.map((l) => ({ label: l.name, value: l.id })),
+      datasetId: ctx.query.dataset || null
+    } 
   };
 }
 
