@@ -51,7 +51,6 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         // Date and Location
         dateAccuracy: Yup.string().required(),
         locationScale: Yup.string().required(),
-        locationAccuracy: Yup.string().required(),
         topologyData: Yup.array()
           .required()
           .length(1)
@@ -121,7 +120,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
       reverseGeocoded: placename,
       longitude: coordinates[0],
       latitude: coordinates[1],
-      isVerified:isVerified||false,
+      isVerified: isVerified || false,
       observedToDate:
         dateToUTC(observedDateRange[1]).format() || dateToUTC(observedDateRange[0]).format(),
       wktString: topology,

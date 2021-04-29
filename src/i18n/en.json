@@ -66,7 +66,10 @@
     "BASIS_OF_DATA": "Basis of Data",
     "BASIS_OF_RECORD": "Basis of Record",
     "CONTRIBUTOR": "contributor",
+    "CREATE_DATATABLE": "Create DataTable",
+    "FIELD_MAPPING_TABLE": "Field Mapping Table",
     "FILES_UPLOAD": "Files Uploads",
+    "GEOGRAPHICAL_COVERAGE": "Geographic Coverage",
     "IS_VERIFIED": "Observation Verified",
     "LOCATION_ACCURACY": "Location Accuracy",
     "LOCATION_SCALE": "Location Scale",
@@ -85,7 +88,8 @@
     "SHOW_PAGE": "Datatable Details",
     "TAXONOMY": "Taxonomic Coverage",
     "TEMPORAL": "Temporal Coverage",
-    "TITLE": "General Metadata"
+    "TITLE": "General Metadata",
+    "UPLOAD_AGAIN": "Upload Again"
   },
   "DELETE": "Delete",
   "DOCUMENT": {

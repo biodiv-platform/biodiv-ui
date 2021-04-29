@@ -51,11 +51,11 @@ export const OBSERVATION_FIELDS = [
   {
     label: "Checklist Annotation",
     value: "checklistAnnotation"
-  }, 
+  },
   {
     label: "From Date",
     value: "fromDate"
-  }, 
+  },
   {
     label: "geoPrivacy",
     value: "geoPrivacy"
@@ -67,43 +67,47 @@ export const OBSERVATION_FIELDS = [
   {
     label: "Observed At",
     value: "observedAt"
-  }, 
+  },
+  {
+    label: "User",
+    value: "user"
+  },
   {
     label: "Location Scale",
     value: "locationScale"
-  }, 
+  },
   {
     label: "Location Scale",
     value: "locationScale"
-  }, 
+  },
   {
     label: "Longitude",
     value: "longitude"
-  }, 
+  },
   {
     label: "Latitude",
     value: "latitude"
-  }, 
+  },
   {
     label: "Date Accuracy",
     value: "dateAccuracy"
-  },  
+  },
   {
     label: "Notes",
     value: "notes"
-  },  
+  },
   {
     label: "Filename",
     value: "fileName"
-  },  
+  },
   {
     label: "Common Name",
     value: "commonName"
-  }, 
+  },
   {
     label: "Comment",
     value: "comment"
-  }, 
+  },
   {
     label: "Scientific Name",
     value: "scientificName"
@@ -117,13 +121,13 @@ export const OBSERVATION_FIELDS = [
     value: "license"
   },
   {
-    label:"Geo Privacy",
-    value:"geoPrivacy",
+    label: "Geo Privacy",
+    value: "geoPrivacy"
   },
   {
     label: "User Groups",
     value: "userGroups"
-  }  
+  }
 ];
 
 export const LOCAL_ASSET_PREFIX = "ibpmu-";

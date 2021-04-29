@@ -48,14 +48,16 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
 
   return showMapping ? (
     <Box bg="white" border="1px solid var(--gray-300)" borderRadius="md" className="container mt">
-      <BoxHeading styles={{ marginBottom: "5" }}>🧩 {t("Mapping Field Table")}</BoxHeading>
+      <BoxHeading styles={{ marginBottom: "5" }}>
+        🧩 {t("DATATABLE.FIELD_MAPPING_TABLE")}
+      </BoxHeading>
       <Stack m={2} direction="row-reverse">
         <Button
           colorScheme="blue"
           onClick={() => setShowMapping(false)}
           leftIcon={<ArrowBackIcon />}
         >
-          {t("Upload Again")}
+          {t("DATATABLE.UPLOAD_AGAIN")}
         </Button>
       </Stack>
       <Box style={{ overflowX: "scroll", width: "100%" }}>

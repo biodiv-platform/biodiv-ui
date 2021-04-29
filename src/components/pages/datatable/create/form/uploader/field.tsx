@@ -49,7 +49,6 @@ const DropzoneField = ({
           index={tabIndex}
           onChange={setTabIndex}
           variant="soft-rounded"
-          isLazy={true}
         >
           <TabList mb={4} overflowX="auto" py={1}>
             <Tab>✔️ {t("DATATABLE.SHEET_UPLOADER")}</Tab>
@@ -60,7 +59,7 @@ const DropzoneField = ({
               {!showMapping ? (
                 <SheetUploader
                   simpleUpload={true}
-                  label={t("Sheet Uploader")}
+                  label={t("DATATABLE.SHEET_UPLOADER")}
                   setFieldMapping={setFieldMapping}
                   setShowMapping={setShowMapping}
                   isRequired={true}
