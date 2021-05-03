@@ -116,14 +116,13 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     try {
       const r = await axBulkUploadObservationResource(pendingResource);
       if (r) {
+        await deleteByID(pendingResource.id);
         await fetchMyUploads();
         await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded);
       }
     } catch (e) {
       console.error(e);
       notification(t("OBSERVATION.DELETE_FILE.ERROR"), NotificationType.Error);
-    } finally {
-      await deleteByID(pendingResource.id);
     }
   };
 
