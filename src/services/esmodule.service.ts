@@ -79,9 +79,8 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
       return data?.reduce((acc, i) => {
         const matchVal = i
           ?.split(",")
-          ?.filter((item) => item.toLowerCase().includes(text.toLowerCase()))?.[0]
-          .trim();
-        if (matchVal && !acc.includes(matchVal)) acc.push(matchVal);
+          ?.filter((item) => item.toLowerCase().includes(text.toLowerCase()))?.[0];
+        if (matchVal) acc.push(matchVal);
         return acc;
       }, []);
     };
@@ -89,7 +88,7 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
     return index == "ed" &&
       (field === DOUCMENT_FILTER_KEY.author.searchKey ||
         field === DOUCMENT_FILTER_KEY.tags.searchKey)
-      ? formatResponse()?.map((i) => ({ value: i, label: i, text }))
+      ? formatResponse()?.map((i) => ({ value: i.trim(), label: i, text }))
       : data?.map((i) => ({ value: i, label: i, text }));
   } catch (e) {
     console.error(e);
