@@ -79,8 +79,10 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
       return data?.reduce((acc, i) => {
         const matchVal = i
           ?.split(",")
-          ?.filter((item) => item.toLowerCase().includes(text.toLowerCase()))?.[0];
-        if (matchVal) acc.push(matchVal);
+          ?.filter((item) => item.toLowerCase().includes(text.toLowerCase()))?.[0]
+          .trim()
+          .toLowerCase();
+        if (matchVal && !acc.includes(matchVal)) acc.push(matchVal);
         return acc;
       }, []);
     };
