@@ -80,7 +80,8 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
         const matchVal = i
           ?.split(",")
           ?.filter((item) => item.toLowerCase().includes(text.toLowerCase()))?.[0]
-          .trim();
+          .trim()
+          .toLowerCase();
         if (matchVal && !acc.includes(matchVal)) acc.push(matchVal);
         return acc;
       }, []);
