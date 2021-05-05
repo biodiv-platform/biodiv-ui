@@ -34,7 +34,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           is: (type) =>
             ["observedOnDateList", "taxonomicIdList", "createdOnDateList"].includes(type),
           then: Yup.array().min(1),
-          otherwise: Yup.mixed()
+          otherwise: Yup.mixed().required()
         })
       })
     )
