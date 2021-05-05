@@ -53,6 +53,7 @@
     "WORKSPACE": "biodiv"
   },
   "HOME": {
+    "DONORS": false,
     "FEATURES": true,
     "GALLERY": true,
     "MAP": [],

@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
+import donorsList from "@static/donors";
 import partnersList from "@static/partners";
 import sponsorsList from "@static/sponsors";
 import React from "react";
@@ -44,6 +45,9 @@ export default function HomePageComponent({ homeInfo }) {
           list={sponsorsList}
           imagePrefix="/next-assets/sponsors/"
         />
+      )}
+      {showFeatures && HOME.DONORS && (
+        <Supporters title={t("HOME.DONORS")} list={donorsList} imagePrefix="/donors-images/" />
       )}
     </Box>
   );
