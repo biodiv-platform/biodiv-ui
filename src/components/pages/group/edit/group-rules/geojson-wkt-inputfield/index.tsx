@@ -11,13 +11,14 @@ import {
   InputGroup,
   InputRightElement
 } from "@chakra-ui/react";
+import GeoJSONPreview from "@components/@core/map-preview/geojson";
 import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
-import { getMapCenter, stringToFeature } from "@utils/location";
+import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { UseFormMethods } from "react-hook-form";
 import { parse, stringify } from "wkt";
 
@@ -54,10 +55,8 @@ export default function GeoJsonWktParserInput({
   const wktInputRef: any = useRef<HTMLInputElement>(null);
   const [wkt, setWkt] = useState<string | null>();
   const { t } = useTranslation();
-  const [canShow, setShow] = useState<boolean>();
-  const [defaultFeature, setDefaultFeature] = useState(
-    useMemo(() => stringToFeature(form?.control?.defaultValuesRef?.current[name]), [])
-  );
+  const [canShow, setShow] = useState<boolean>(false);
+  const [featureData, setDefaultFeatureData] = useState();
   const defaultViewPort = React.useMemo(() => getMapCenter(2), []);
 
   const { register, setValue } = form;
@@ -69,17 +68,17 @@ export default function GeoJsonWktParserInput({
   };
 
   const handleWktInput = () => {
-    try {
-      setDefaultFeature(stringToFeature(`${parse(wktInputRef.current.value).coordinates}`));
+    const geoJson = parse(wktInputRef.current.value);
+    if (geoJson) {
+      setDefaultFeatureData(parse(wktInputRef.current.value));
       setValue(name, wktInputRef.current.value);
-    } catch (e) {
+    } else {
       setValue(name, null);
       notification(t("Enter Valid WKT string"), NotificationType.Error);
     }
   };
 
   const toggleWktInput = () => {
-    setDefaultFeature([]);
     setWkt(null);
     setShow(!canShow);
   };
@@ -101,15 +100,17 @@ export default function GeoJsonWktParserInput({
       </Flex>
       {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
       <Box position="relative" h="22rem" borderRadius="md" mb={3} overflow="hidden">
-        <NakshaMapboxDraw
-          defaultViewPort={defaultViewPort}
-          defaultFeatures={defaultFeature}
-          mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
-          onFeaturesChange={handleMapDraw}
-          isControlled={true}
-          isPolygon={isPolygon}
-          isReadOnly={canShow}
-        />
+        {canShow ? (
+          <GeoJSONPreview data={featureData} />
+        ) : (
+          <NakshaMapboxDraw
+            defaultViewPort={defaultViewPort}
+            mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            onFeaturesChange={handleMapDraw}
+            isControlled={true}
+            isPolygon={isPolygon}
+          />
+        )}
       </Box>
       {canShow && (
         <InputGroup size="md">
