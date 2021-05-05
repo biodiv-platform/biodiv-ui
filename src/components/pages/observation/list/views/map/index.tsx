@@ -55,8 +55,8 @@ export default function ObservationsMap() {
             {
               id: "global-observations",
               title: "Observations",
-              description: "All observations from india biodiversity portal",
-              attribution: "indiabiodiversity.org and Contributors",
+              description: "All observations from this portal",
+              attribution: "Portal and Contributors",
               tags: ["Global", "Observations"],
               isAdded: true,
               source: { type: "grid", fetcher: fetchGridData },
