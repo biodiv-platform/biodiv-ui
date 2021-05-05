@@ -149,7 +149,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.InProgress);
     }
 
-    if (pendingResource.type.includes("application/zip")) {
+    if (["application/zip", "application/x-zip-compressed"].includes(pendingResource.type)) {
       handleZipFiles(pendingResource);
     } else {
       handleMediaFiles(pendingResource, noSave);
