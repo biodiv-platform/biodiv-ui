@@ -701,6 +701,7 @@ export interface UserGroup {
 export interface UserGroupIbp {
   id?: number; // int64
   name?: string;
+  nameLocal?: string;
   icon?: string;
   webAddress?: string;
   isParticipatory?: boolean;

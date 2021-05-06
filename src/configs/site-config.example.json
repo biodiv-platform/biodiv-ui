@@ -67,12 +67,21 @@
   "LANG": {
     "DEFAULT": "en",
     "DEFAULT_ID": 205,
-    "SWITCHER": true,
     "LIST": {
-      "en": { "NAME": "English", "ID": 205 },
-      "fr": { "NAME": "Français", "ID": 219 },
-      "mg": { "NAME": "Malagasy", "ID": 365 }
-    }
+      "en": {
+        "ID": 205,
+        "NAME": "English"
+      },
+      "fr": {
+        "ID": 219,
+        "NAME": "Français"
+      },
+      "mg": {
+        "ID": 365,
+        "NAME": "Malagasy"
+      }
+    },
+    "SWITCHER": true
   },
   "LEADERBOARD": {
     "ACTIVE": true
@@ -106,8 +115,13 @@
     "API_ENDPOINT": "http://localhost:8010/proxy/",
     "API_ENDPOINT_SSR": "http://localhost:8010/proxy/",
     "DESCRIPTION": "A unique repository of information on India's biodiversity",
+    "GOV": {
+      "ICON": "/get/crop/logo/gov.png",
+      "NAME": "Government of XYZ"
+    },
     "ICON": "/get/crop/logo/IBP.png",
     "TITLE": "India Biodiversity Portal",
+    "TITLE_LOCAL": "xyz",
     "URL": "http://localhost:3000"
   },
   "SPECIES": {

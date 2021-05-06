@@ -1,11 +1,12 @@
-import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
+import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
 import useTranslation from "@hooks/use-translation";
 import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
 import { SpeciesGroup } from "@interfaces/observation";
 import { axUpdateSpeciesGroup } from "@services/observation.service";
+import { isBrowser } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
 import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
@@ -59,6 +60,7 @@ export default function SpeciesGroupBox({ id, speciesGroups, observationId }: IS
               components={{
                 Option: CustomOption
               }}
+              menuPortalTarget={isBrowser && document.body}
               styles={selectStyles}
             />
           </Box>
