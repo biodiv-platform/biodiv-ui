@@ -93,7 +93,11 @@ const useUserData = (userId, max = 16) => {
         _draft.hasMore = false;
       }
 
-      _draft.speciesData = data?.aggregationData?.groupSpeciesName;
+      const _speciesData = data?.aggregationData?.groupSpeciesName;
+      if (_speciesData) {
+        _draft.speciesData = _speciesData;
+      }
+
       _draft.offset = reset ? max : _draft.offset + max;
       _draft.hasStats = true;
       _draft.total = data.totalCount;
