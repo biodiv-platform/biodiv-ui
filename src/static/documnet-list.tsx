@@ -44,7 +44,7 @@ export const actionTabs = [
   {
     name: "DOCUMENT.TAGS.TITLE",
     active: true,
-    icon: "🔖"
+    icon: "🏷"
   },
   {
     name: "OBSERVATION.COMMENTS.TITLE",
