@@ -1,31 +1,21 @@
-import { useLocalRouter } from "@components/@core/local-link";
+import { authorizedPageSSR } from "@components/auth/auth-redirect";
 import DataTableCreatePageComponent from "@components/pages/datatable/create";
-import useGlobalState from "@hooks/use-global-state";
+import { Role } from "@interfaces/custom";
 import { axGetspeciesGroups } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
-import { encode } from "base64-url";
-import React, { useEffect } from "react";
+import React from "react";
 
-const DataTableCreatePage = ({ speciesGroups, languages, datasetId }) => {
-  const { isLoggedIn } = useGlobalState();
-  const { push, asPath } = useLocalRouter();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      push("/login", true, { forward: encode(asPath) });
-    }
-  }, []);
-
-  return isLoggedIn ? (
-    <DataTableCreatePageComponent
-      speciesGroups={speciesGroups}
-      languages={languages}
-      datasetId={datasetId}
-    />
-  ) : null;
-};
+const DataTableCreatePage = ({ speciesGroups, languages, datasetId }) => (
+  <DataTableCreatePageComponent
+    speciesGroups={speciesGroups}
+    languages={languages}
+    datasetId={datasetId}
+  />
+);
 
 export async function getServerSideProps(ctx) {
+  authorizedPageSSR([Role.Any], ctx, true);
+
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data } = await axGetLangList();
 
@@ -34,7 +24,7 @@ export async function getServerSideProps(ctx) {
       speciesGroups,
       languages: data.map((l) => ({ label: l.name, value: l.id })),
       datasetId: ctx.query.dataset || null
-    } 
+    }
   };
 }
 

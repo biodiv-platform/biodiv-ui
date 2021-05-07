@@ -20,6 +20,7 @@ interface ISpeciesSelecProps {
   hint?: string;
   options?: any[];
   form: UseFormMethods<Record<string, any>>;
+  hideDevider?;
 }
 
 /**
@@ -43,6 +44,7 @@ const GroupSelector = ({
   mb = 4,
   options = [],
   form,
+  hideDevider,
   ...props
 }: ISpeciesSelecProps) => {
   const value = form.watch(name);
@@ -73,7 +75,7 @@ const GroupSelector = ({
         <ErrorMessage name={name} errors={form.errors} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
       </FormControl>
-      <Divider mb={4} />
+      {!hideDevider && <Divider mb={4} />}
     </>
   );
 };

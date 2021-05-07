@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
-import BoxHeading from "@components/@core/layout/box-heading";
 import SelectAsyncInputField from "@components/form/select-async";
 import TextBoxField from "@components/form/text";
+import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
 import React from "react";
@@ -15,18 +15,18 @@ export default function PartyContributorsForm({ form }) {
   };
 
   return (
-    <Box bg="white" border="1px solid var(--gray-300)" borderRadius="md" className="container mt">
-      <BoxHeading styles={{ marginBottom: "5" }}> ⚛️ {t("DATATABLE.PARTY")}</BoxHeading>
-      <SelectAsyncInputField
-        name="contributors"
-        form={form}
-        placeholder={t("GROUP.INVITE")}
-        onQuery={onUserQuery}
-        isRequired={true}
-        label={t("DATATABLE.CONTRIBUTOR")}
-      />
-
-      <TextBoxField name="attribution" label={t("DATATABLE.ATTRIBUTION")} form={form} />
-    </Box>
+    <ToggleablePanel icon="⚛️" title={t("DATATABLE.PARTY")}>
+      <Box p={4} pb={0}>
+        <SelectAsyncInputField
+          name="contributors"
+          form={form}
+          placeholder={t("GROUP.INVITE")}
+          onQuery={onUserQuery}
+          isRequired={true}
+          label={t("DATATABLE.CONTRIBUTOR")}
+        />
+        <TextBoxField name="attribution" label={t("DATATABLE.ATTRIBUTION")} form={form} />
+      </Box>
+    </ToggleablePanel>
   );
 }

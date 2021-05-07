@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";
@@ -27,8 +26,10 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
   const { t } = useTranslation();
   const { user } = useGlobalState();
   const router = useLocalRouter();
+
   const [fieldMapping, setFieldMapping] = useState<any>({});
   const [showMapping, setShowMapping] = useState<boolean>(false);
+
   const hForm = useForm<any>({
     resolver: yupResolver(
       Yup.object().shape({
@@ -81,18 +82,16 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
   const parseColumnData = (columnsMapping) => {
     const columns = {};
     const checklistAnnotation = {};
-    const { headerData } = fieldMapping;
+
     columnsMapping.map((item, index) => {
       if (item?.fieldKey === "checklistAnnotation") {
-        checklistAnnotation[headerData[index]] = index;
+        checklistAnnotation[fieldMapping.headerData[index]] = index;
       } else if (item?.fieldKey) {
         columns[item.fieldKey] = index;
       }
     });
-    return {
-      columns,
-      checklistAnnotation
-    };
+
+    return { columns, checklistAnnotation };
   };
 
   const handleFormSubmit = async ({
@@ -112,6 +111,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         geometry: { coordinates }
       }
     } = topologyData[0];
+
     const payload = {
       columns,
       checklistAnnotation,
@@ -120,7 +120,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
       reverseGeocoded: placename,
       longitude: coordinates[0],
       latitude: coordinates[1],
-      isVerified: isVerified || false,
+      isVerified: !!isVerified,
       observedToDate:
         dateToUTC(observedDateRange[1]).format() || dateToUTC(observedDateRange[0]).format(),
       wktString: topology,
@@ -130,6 +130,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
       createdOn: dateToUTC().format(),
       ...props
     };
+
     const { success, data } = await axBulkObservationData(payload);
 
     if (success) {
@@ -147,25 +148,16 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         fieldMapping={fieldMapping}
         setFieldMapping={setFieldMapping}
         setShowMapping={setShowMapping}
-        name={"filename"}
+        name="filename"
         form={hForm}
       />
-
       <TitleInput form={hForm} languages={languages} />
-
       <TemporalCoverage form={hForm} />
-
       <TaxonomyCovergae form={hForm} speciesGroups={speciesGroups} />
-
       <LocationPicker form={hForm} />
-
       <PartyContributorsForm form={hForm} />
-
       <Others form={hForm} />
-
-      <Box mt={4}>
-        <CheckBox name="terms" label={t("OBSERVATION.TERMS")} form={hForm} />
-      </Box>
+      <CheckBox name="terms" label={t("OBSERVATION.TERMS")} form={hForm} />
       <Submit leftIcon={<CheckIcon />} form={hForm}>
         {t("OBSERVATION.ADD_OBSERVATION")}
       </Submit>

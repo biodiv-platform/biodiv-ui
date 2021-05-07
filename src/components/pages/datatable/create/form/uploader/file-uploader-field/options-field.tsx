@@ -1,7 +1,7 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
-import BoxHeading from "@components/@core/layout/box-heading";
 import Select from "@components/form/select";
+import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import useTranslation from "@hooks/use-translation";
 import { OBSERVATION_FIELDS } from "@static/observation-create";
 import React, { useEffect, useState } from "react";
@@ -22,9 +22,12 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
     setFieldValues([]);
     remove();
   };
+
   useEffect(() => {
     resetMappingTable();
+
     const { rowData, headerData } = fieldMapping;
+
     if (rowData && headerData && showMapping) {
       setTableHeaders(headerData);
       fieldMapping.rowData.map((item) => {
@@ -47,51 +50,50 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
   };
 
   return showMapping ? (
-    <Box bg="white" border="1px solid var(--gray-300)" borderRadius="md" className="container mt">
-      <BoxHeading styles={{ marginBottom: "5" }}>
-        🧩 {t("DATATABLE.FIELD_MAPPING_TABLE")}
-      </BoxHeading>
-      <Stack m={2} direction="row-reverse">
-        <Button
-          colorScheme="blue"
-          onClick={() => setShowMapping(false)}
-          leftIcon={<ArrowBackIcon />}
-        >
-          {t("DATATABLE.UPLOAD_AGAIN")}
-        </Button>
-      </Stack>
-      <Box style={{ overflowX: "scroll", width: "100%" }}>
-        <Table mt={4} variant="striped" colorScheme="gray" size="sm">
-          <Thead>
-            <Tr>
-              {tabelHeaders.map((item, index) => (
-                <Th key={index}>{item}</Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              {fields.map((data, index) => (
-                <Td key={index}>
-                  <Select
-                    name={`columnsMapping.${index}.fieldKey`}
-                    label={t("ACTIONS.FLAG.CATEGORY")}
-                    options={OBSERVATION_FIELDS}
-                    form={form}
-                  />
-                </Td>
-              ))}
-            </Tr>
-            {fieldValues.map((tableData, _index) => (
-              <Tr key={_index}>
-                {tableData.map((data, index) => (
-                  <Td key={index}>{data}</Td>
+    <ToggleablePanel icon="🧩" title={t("DATATABLE.FIELD_MAPPING_TABLE")}>
+      <Box p={4} pb={0}>
+        <Stack m={2} direction="row-reverse">
+          <Button
+            colorScheme="blue"
+            onClick={() => setShowMapping(false)}
+            leftIcon={<ArrowBackIcon />}
+          >
+            {t("DATATABLE.UPLOAD_AGAIN")}
+          </Button>
+        </Stack>
+        <Box style={{ overflowX: "scroll", width: "100%" }}>
+          <Table mt={4} variant="striped" colorScheme="gray" size="sm">
+            <Thead>
+              <Tr>
+                {tabelHeaders.map((item, index) => (
+                  <Th key={index}>{item}</Th>
                 ))}
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              <Tr>
+                {fields.map((data, index) => (
+                  <Td key={index}>
+                    <Select
+                      name={`columnsMapping.${index}.fieldKey`}
+                      label={t("ACTIONS.FLAG.CATEGORY")}
+                      options={OBSERVATION_FIELDS}
+                      form={form}
+                    />
+                  </Td>
+                ))}
+              </Tr>
+              {fieldValues.map((tableData, _index) => (
+                <Tr key={_index}>
+                  {tableData.map((data, index) => (
+                    <Td key={index}>{data}</Td>
+                  ))}
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </Box>
       </Box>
-    </Box>
+    </ToggleablePanel>
   ) : null;
 }

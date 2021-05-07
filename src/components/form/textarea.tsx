@@ -33,6 +33,7 @@ const TextAreaField = ({
       ref={form.register}
       minH="124px"
       isDisabled={disabled}
+      bg="white"
     />
     <ErrorMessage name={name} errors={form.errors} />
     {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
