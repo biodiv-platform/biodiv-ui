@@ -3,6 +3,7 @@ import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
+import { waitForAuth } from "@utils/auth";
 import { getGroupLink } from "@utils/basic";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
@@ -52,6 +53,11 @@ export default function GroupPost({
     editButtonRef.current.focus();
   };
 
+  const onEditClick = async () => {
+    await waitForAuth();
+    onToggle();
+  };
+
   return (
     <>
       <Button
@@ -60,9 +66,9 @@ export default function GroupPost({
         rightIcon={<EditIcon />}
         colorScheme="blue"
         ref={editButtonRef}
-        onClick={onToggle}
+        onClick={onEditClick}
       >
-        Edit
+        {t("EDIT")}
       </Button>
 
       <SimpleGrid columns={columns || defaultGridColumns} spacing={4} hidden={isOpen}>

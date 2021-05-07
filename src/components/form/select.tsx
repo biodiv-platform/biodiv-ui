@@ -21,6 +21,7 @@ interface SelectInputFieldProps {
   isControlled?: boolean;
   onChangeCallback?;
   shouldPortal?;
+  hidden?;
   form: UseFormMethods<Record<string, any>>;
 }
 const DefaultOptionComponent = (p) => <components.Option {...p} />;
@@ -39,6 +40,7 @@ const SelectInputField = ({
   isControlled,
   shouldPortal,
   onChangeCallback,
+  hidden,
   ...props
 }: SelectInputFieldProps) => {
   const initialValue = options.find(
@@ -51,6 +53,7 @@ const SelectInputField = ({
       className="dropdown"
       aria-invalid={getByPath(form.errors, name) && true}
       mb={mb}
+      hidden={hidden}
       isRequired={isRequired}
       {...props}
     >

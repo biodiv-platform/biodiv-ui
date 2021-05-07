@@ -18,9 +18,10 @@ export interface IDropzoneProps {
   form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   children?;
+  hidden?;
 }
 
-const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
+const DropzoneField = ({ name, mb = 4, form, hidden }: IDropzoneProps) => {
   const { observationAssets } = useObservationCreate();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
@@ -40,7 +41,7 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb}>
+    <FormControl hidden={hidden} isInvalid={form.errors[name] && true} mb={mb}>
       <Tabs
         className="nospace"
         index={tabIndex}

@@ -143,3 +143,19 @@ export interface ResourceDocument {
   size: string;
   timestamp: number;
 }
+
+// Modified Species Field Payload
+export interface SpeciesParentField {
+  id: number;
+  parentId: number;
+  displayOrder: number;
+  label: string;
+  header: string;
+  values: any[];
+  traits: any[];
+}
+
+export interface SpeciesField {
+  parentField: SpeciesParentField;
+  childField: SpeciesField[];
+}
