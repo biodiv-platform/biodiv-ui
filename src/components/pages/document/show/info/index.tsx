@@ -111,7 +111,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
       )
     },
     {
-      title: "DOCUMENT.TAGS.TITLE",
+      title: "DOCUMENT.TAGS",
       value: 1,
       cell: (
         <TagsShow

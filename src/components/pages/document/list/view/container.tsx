@@ -9,7 +9,6 @@ import React, { useState } from "react";
 import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";
 import InfoTab from "./tabs/infotab";
-import TagsTab from "./tabs/tags";
 
 const VerticalTabs = styled.div`
   flex-grow: 1;
@@ -115,14 +114,6 @@ export default function Container({ o }) {
                 <GroupTab o={o} tabIndex={tabIndex} tabLength={filterTabs.length - 2} />
               </TabPanel>
             )}
-            <TabPanel>
-              <TagsTab
-                tabIndex={tabIndex}
-                tabLength={filterTabs.length - 2}
-                documentId={o.document.id}
-                tags={o.tags}
-              />
-            </TabPanel>
             <TabPanel>
               <CommentsTab
                 tabIndex={tabIndex}

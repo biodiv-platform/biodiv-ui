@@ -146,10 +146,7 @@
     },
     "SELECTED_PLACES": "Selected Places",
     "SHARE": "Share this document",
-    "TAGS": {
-      "NOT_FOUND": "No Tags(s) found",
-      "TITLE": "Tags"
-    },
+    "TAGS": "Tags",
     "TITLE": "Title",
     "TYPE": "Type",
     "UNFOLLOW": "Unfollow Document",
