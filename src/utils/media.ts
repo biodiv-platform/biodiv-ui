@@ -4,7 +4,8 @@ import { ASSET_TYPES } from "@static/observation-create";
 
 export const RESOURCE_CTX = {
   OBSERVATION: "OBSERVATION",
-  MY_UPLOADS: "MY_UPLOADS"
+  MY_UPLOADS: "MY_UPLOADS",
+  SPECIES: "SPECIES"
 };
 
 const RESOURCE_CTX_MAP = {

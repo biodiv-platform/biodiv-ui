@@ -1018,6 +1018,9 @@
       "TITLE": "Groups"
     },
     "LICENSES": "Licenses",
+    "LIST": {
+      "TITLE": "Species List"
+    },
     "MANAGE_MEDIA": "Manage Media",
     "OBSERVATION_MEDIA": "Observation Media",
     "PULL_MEDIA": "Pull Media",

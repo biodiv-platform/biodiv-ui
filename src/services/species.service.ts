@@ -245,3 +245,13 @@ export const axDeleteSpecies = async (speciesId) => {
     return { success: false, data: {} };
   }
 };
+
+export const axGetSpeciesList = async (params) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/list`, { params });
+    return { success: true, ...data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, totalCount: 0, speciesTiles: [] };
+  }
+};
