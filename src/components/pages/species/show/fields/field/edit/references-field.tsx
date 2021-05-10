@@ -17,7 +17,7 @@ export default function ReferencesField({ name, label, form }) {
     <Box mb={4}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       {fields.map((reference, index) => (
-        <div key={reference.id}>
+        <div data-key={reference.id} key={index}>
           <TextBoxField name={`${name}.[${index}].id`} hidden={true} label="id" form={form} />
           <HStack spacing={4} mb={4}>
             <TextBoxField

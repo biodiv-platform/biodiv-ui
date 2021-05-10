@@ -97,7 +97,7 @@ export default function SpeciesFieldGroup({
           <SpeciesFieldHeading id={parentField?.header} title={parentField?.header} level={level} />
 
           {/* Create Field */}
-          {permissions.isContributor && (
+          {permissions.isContributor && level && (
             <SpeciesFieldSimpleCreate fieldId={parentField?.id} />
           )}
 
