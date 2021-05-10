@@ -14,7 +14,7 @@ export default function TagsInput({ hForm }) {
   return (
     <SelectAsyncInputField
       name="tags"
-      label={t("DOCUMENT.TAGS")}
+      label={t("DOCUMENT.TAGS.TITLE")}
       hint={t("OBSERVATION.TAGS_HINT")}
       form={hForm}
       multiple={true}
