@@ -22,11 +22,13 @@ import Uploader from "../../create/form/uploader";
 interface IObservationEditFormProps {
   observation: ObservationUpdateData;
   observationId;
+  licensesList;
 }
 
 export default function ObservationEditForm({
   observation,
-  observationId
+  observationId,
+  licensesList
 }: IObservationEditFormProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -63,7 +65,7 @@ export default function ObservationEditForm({
         ...r,
         hashKey: nanoid(),
         status: AssetStatus.Uploaded,
-        licenceId: r.licenceId?.toString(),
+        licenseId: r.licenseId?.toString(),
         isUsed: 1,
         rating: r.rating || 0
       })),
@@ -74,13 +76,13 @@ export default function ObservationEditForm({
   const handleOnSubmit = async (values) => {
     const payload = {
       ...values,
-      resources: values.resources.map(({ path, url, type, caption, rating, licenceId }) => ({
+      resources: values.resources.map(({ path, url, type, caption, rating, licenseId }) => ({
         path,
         url,
         type,
         caption,
         rating,
-        licenceId
+        licenseId
       })),
       observedOn: dateToUTC(values.observedOn).format()
     };
@@ -94,7 +96,7 @@ export default function ObservationEditForm({
 
   return isOpen ? (
     <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-      <Uploader name="resources" form={hForm} isCreate={false} />
+      <Uploader name="resources" form={hForm} licensesList={licensesList} isCreate={false} />
       <LocationPicker form={hForm} />
       <DateInputs form={hForm} showTags={false} />
       <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>

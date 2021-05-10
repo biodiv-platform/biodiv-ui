@@ -6,6 +6,7 @@ import {
   axGetDocumentTypes,
   axGetEditDocumentById
 } from "@services/document.service";
+import { axGetLicenseList } from "@services/resources.service";
 import React from "react";
 
 const DocumentEditPage = (props) =>
@@ -17,11 +18,13 @@ DocumentEditPage.getInitialProps = async (ctx) => {
   const { data: initialDocument } = await axGetEditDocumentById(ctx, ctx.query.documentId);
   const { data: defaultBibFields } = await axGetDocumentBibFields(ctx.query.documentId);
   const { data: documentTypes } = await axGetDocumentTypes();
+  const { data: licensesList } = await axGetLicenseList();
 
   return {
     initialDocument,
     defaultBibFields,
-    documentTypes
+    documentTypes,
+    licensesList
   };
 };
 

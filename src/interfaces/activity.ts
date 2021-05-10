@@ -46,9 +46,25 @@ export interface CommentLoggingData {
 export interface CommentsIbp {
   body?: string;
 }
+export interface DocumentActivityLogging {
+  activityDescription?: string;
+  rootObjectId?: number; // int64
+  subRootObjectId?: number; // int64
+  rootObjectType?: string;
+  activityId?: number; // int64
+  activityType?: string;
+  mailData?: MailData;
+}
+export interface DocumentMailData {
+  documentId?: number; // int64
+  createdOn?: string; // date-time
+  authorId?: number; // int64
+}
 export interface MailData {
   observationData?: ObservationMailData;
+  documentMailData?: DocumentMailData;
   userGroupData?: UserGroupMailData[];
+  speciesData?: SpeciesMailData;
 }
 export interface MyJson {
   aid?: number; // int64
@@ -82,6 +98,21 @@ export interface ShowActivityIbp {
   userGroup?: UserGroupActivity;
   recoVote?: RecoVoteActivity;
   userIbp?: UserIbp;
+}
+export interface SpeciesActivityLogging {
+  activityDescription?: string;
+  rootObjectId?: number; // int64
+  subRootObjectId?: number; // int64
+  rootObjectType?: string;
+  activityId?: number; // int64
+  activityType?: string;
+  mailData?: MailData;
+}
+export interface SpeciesMailData {
+  speciesId?: number; // int64
+  speciesName?: string;
+  iconUrl?: string;
+  authorId?: number; // int64
 }
 export interface UserGroupActivity {
   userGroupId?: number; // int64

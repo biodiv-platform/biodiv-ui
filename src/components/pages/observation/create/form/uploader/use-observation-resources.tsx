@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import {
@@ -6,7 +7,6 @@ import {
   axUploadObservationResource
 } from "@services/files.service";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
-import { DEFAULT_LICENSE } from "@static/licenses";
 import { STORE } from "@static/observation-create";
 import notification, { NotificationType } from "@utils/notification";
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -31,6 +31,7 @@ interface ObservationCreateContextProps {
   isCreate?;
   resourcesSortBy?;
   setResourcesSortBy?;
+  licensesList?;
 }
 
 const ObservationCreateContext = createContext<ObservationCreateContextProps>(
@@ -83,7 +84,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
           url: null,
           caption: "",
           rating: 0,
-          licenceId: DEFAULT_LICENSE,
+          licenseId: SITE_CONFIG.LICENSE.DEFAULT,
           isUsed: 0
         });
       }
@@ -207,7 +208,8 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
         updateObservationAsset,
         uploadPendingResource,
         resourcesSortBy,
-        setResourcesSortBy
+        setResourcesSortBy,
+        licensesList: props.licensesList
       }}
     >
       {props.children}

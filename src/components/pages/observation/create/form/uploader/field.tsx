@@ -19,6 +19,7 @@ export interface IDropzoneProps {
   isCreate?: boolean;
   children?;
   hidden?;
+  licensesList;
 }
 
 const DropzoneField = ({ name, mb = 4, form, hidden }: IDropzoneProps) => {

@@ -5,7 +5,6 @@ import { ResponsiveInfo } from "@components/pages/observation/show/info/responsi
 import TagsShow from "@components/pages/observation/show/info/tags";
 import { ShowDocument } from "@interfaces/document";
 import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
-import { LICENSES } from "@static/licenses";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
 import React from "react";
@@ -15,7 +14,7 @@ interface DocumentInfoProps {
 }
 
 export default function DocumentInfo({ d }: DocumentInfoProps) {
-  const { document } = d;
+  const { document, documentLicense } = d;
 
   const INFO_LINKS = [
     {
@@ -95,7 +94,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     },
     {
       title: "DOCUMENT.BIB.DOI",
-      value: document?.doil
+      value: document?.doi
     },
     {
       title: "DOCUMENT.CONTRIBUTION",
@@ -104,10 +103,8 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     {
       title: "DOCUMENT.LICENSE",
       value: document?.licenseId,
-      cell: document?.licenseId && (
-        <ExternalBlueLink href={LICENSES[document.licenseId].link}>
-          {LICENSES[document.licenseId].name}
-        </ExternalBlueLink>
+      cell: documentLicense && (
+        <ExternalBlueLink href={documentLicense.url}>{documentLicense.name}</ExternalBlueLink>
       )
     },
     {

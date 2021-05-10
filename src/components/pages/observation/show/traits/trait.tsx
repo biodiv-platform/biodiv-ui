@@ -12,23 +12,32 @@ import {
 } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
-import { TraitsValue, TraitsValuePair } from "@interfaces/traits";
+import { TraitsValue } from "@interfaces/traits";
 import { axUpdateTraitById } from "@services/observation.service";
+import { TRAIT_TYPES } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import { cleanSingleFact } from "@utils/tags";
 import React, { useEffect, useState } from "react";
 
 import TraitInput from "../../common/trait-input";
 
 interface ITraitProp {
-  speciesTrait: TraitsValuePair;
+  speciesTrait: any;
   defaultValue;
   observationId;
   authorId;
+  traitType?;
 }
 
-export default function Trait({ speciesTrait, defaultValue, observationId, authorId }: ITraitProp) {
+export default function Trait({
+  speciesTrait,
+  defaultValue,
+  observationId,
+  authorId,
+  traitType
+}: ITraitProp) {
   const [finalTraitValue, setFinalTraitValue] = useState(defaultValue);
   const [traitInputValue, setTraitInputValue] = useState(defaultValue);
   const [selectedTraits, setSelectedTraits] = useState<TraitsValue[]>([]);
@@ -36,18 +45,26 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
   const { t } = useTranslation();
 
   useEffect(() => {
-    setSelectedTraits(
-      (speciesTrait as any).values.filter((tr) =>
-        Array.isArray(finalTraitValue) ? finalTraitValue.includes(tr.id) : finalTraitValue === tr.id
-      )
-    );
+    switch (traitType) {
+      case TRAIT_TYPES.SINGLE_CATEGORICAL:
+        setSelectedTraits(speciesTrait.values.filter((tr) => Number(finalTraitValue) === tr.id));
+        break;
+
+      case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
+        setSelectedTraits(speciesTrait.values.filter((tr) => finalTraitValue.includes(tr.id)));
+        break;
+
+      default:
+        setSelectedTraits(finalTraitValue.map((v) => ({ value: v })));
+        break;
+    }
   }, [finalTraitValue]);
 
   const handleTraitUpdate = async () => {
     const { success } = await axUpdateTraitById(
       observationId,
       speciesTrait.traits?.id,
-      traitInputValue
+      cleanSingleFact(traitInputValue)
     );
     if (success) {
       setFinalTraitValue(traitInputValue);
@@ -86,20 +103,22 @@ export default function Trait({ speciesTrait, defaultValue, observationId, autho
               <Flex
                 alignItems="center"
                 p={2}
-                key={tr.id}
+                key={tr.value}
                 cursor="pointer"
                 borderWidth="2px"
                 borderRadius="md"
                 bg="white"
               >
-                <Image
-                  boxSize="2rem"
-                  mr={2}
-                  loading="lazy"
-                  objectFit="contain"
-                  src={getTraitIcon(tr.icon)}
-                  alt={tr.value}
-                />
+                {tr?.icon && (
+                  <Image
+                    boxSize="2rem"
+                    mr={2}
+                    loading="lazy"
+                    objectFit="contain"
+                    src={getTraitIcon(tr.icon)}
+                    alt={tr.value}
+                  />
+                )}
                 <Text>{tr.value}</Text>
               </Flex>
             ))

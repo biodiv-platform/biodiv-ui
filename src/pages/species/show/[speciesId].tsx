@@ -1,6 +1,7 @@
 import SpeciesShowPageComponent from "@components/pages/species/show";
 import { Role } from "@interfaces/custom";
 import { axGetspeciesGroups } from "@services/observation.service";
+import { axGetLicenseList } from "@services/resources.service";
 import {
   axCheckSpeciesPermission,
   axGetAllFieldsMeta,
@@ -13,9 +14,13 @@ import React from "react";
 
 import Error from "../../_error";
 
-const SpeciesShowPage = ({ species, permissions, success }) => {
+const SpeciesShowPage = ({ species, licensesList, permissions, success }) => {
   return success ? (
-    <SpeciesShowPageComponent species={species} permissions={permissions} />
+    <SpeciesShowPageComponent
+      species={species}
+      permissions={permissions}
+      licensesList={licensesList}
+    />
   ) : (
     <Error statusCode={404} />
   );
@@ -27,13 +32,15 @@ export const getServerSideProps = async (ctx) => {
     fieldsMeta,
     speciesData,
     speciesGroupsData,
-    speciesPermission
+    speciesPermission,
+    licensesList
   ] = await Promise.all([
     axGetAllTraitsMeta(),
     axGetAllFieldsMeta(),
     axGetSpeciesById(ctx.query.speciesId),
     axGetspeciesGroups(),
-    axCheckSpeciesPermission(ctx, ctx.query.speciesId)
+    axCheckSpeciesPermission(ctx, ctx.query.speciesId),
+    axGetLicenseList()
   ]);
 
   const species = normalizeSpeciesPayload(
@@ -47,6 +54,7 @@ export const getServerSideProps = async (ctx) => {
 
   return {
     props: {
+      licensesList: licensesList.data,
       species,
       permissions: {
         isContributor: speciesPermission.data.isContributor || isAdmin,

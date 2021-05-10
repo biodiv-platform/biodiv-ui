@@ -16,14 +16,14 @@ import SpeciesFieldContainer from "./species-gallery-container";
 
 export default function SpeciesGalleryForm({ resources, setResources, onClose }) {
   const { t } = useTranslation();
-  const { species } = useSpecies();
+  const { species, licensesList } = useSpecies();
   const initialResources = resources?.map(({ resource: r }) => ({
     ...r,
     caption: r.description,
     path: r.fileName,
     hashKey: nanoid(),
     status: AssetStatus.Uploaded,
-    licenceId: r.licenseId?.toString(),
+    licenseId: r.licenseId?.toString(),
     isUsed: 1,
     rating: r.rating || 0
   }));
@@ -54,7 +54,7 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
       type: r.type,
       caption: r.caption,
       rating: r.rating,
-      licenceId: Number(r.licenceId),
+      licenseId: Number(r.licenseId),
       observationId: r?.observationId,
       resourcesId: r?.id
     }));
@@ -69,7 +69,12 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
   return (
     <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
       <ModalBody>
-        <SpeciesFieldContainer name="resources" form={hForm} isCreate={false} />
+        <SpeciesFieldContainer
+          name="resources"
+          licensesList={licensesList}
+          form={hForm}
+          isCreate={false}
+        />
       </ModalBody>
       <ModalFooter>
         <SubmitButton leftIcon={<CheckIcon />} form={hForm}>

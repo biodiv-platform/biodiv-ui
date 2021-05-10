@@ -12,11 +12,11 @@ import SpeciesSidebar from "./sidebar";
 import SpeciesSynonyms from "./synonyms";
 import { SpeciesProvider } from "./use-species";
 
-export default function SpeciesShowPageComponent({ species, permissions }) {
+export default function SpeciesShowPageComponent({ species, permissions, licensesList }) {
   console.debug("Species", species, permissions);
 
   return (
-    <SpeciesProvider species={species} permissions={permissions}>
+    <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
       <div className="container mt">
         <SimpleGrid columns={{ md: 3 }} spacing={{ md: 4 }}>
           <SpeciesHeader />

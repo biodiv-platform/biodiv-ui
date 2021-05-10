@@ -19,7 +19,6 @@ import Badge from "@components/@core/user/badge";
 import useTranslation from "@hooks/use-translation";
 import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
-import { LICENSES } from "@static/licenses";
 import notification, { NotificationType } from "@utils/notification";
 import { getInjectableHTML } from "@utils/text";
 import React, { useMemo } from "react";
@@ -103,8 +102,8 @@ export default function SpeciesFieldSimple({ value }) {
               </BlockList>
               <BlockList title={t("SPECIES.STATUS")}>{value?.fieldData?.status}</BlockList>
               <BlockList title={t("SPECIES.LICENSES")}>
-                <ExternalBlueLink href={LICENSES[value?.license?.id].link}>
-                  {LICENSES[value?.license?.id].label}
+                <ExternalBlueLink href={value?.license?.url}>
+                  {value?.license?.name}
                 </ExternalBlueLink>
               </BlockList>
               <BlockList title={t("SPECIES.REFERENCES")}>

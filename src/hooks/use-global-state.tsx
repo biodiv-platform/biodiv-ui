@@ -1,4 +1,4 @@
-import { UserGroupIbp } from "@interfaces/observation";
+import { UserGroupIbpExtended } from "@interfaces/custom";
 import { axGetTree } from "@services/pages.service";
 import { axCheckUserGroupMember } from "@services/usergroup.service";
 import { AUTHWALL } from "@static/events";
@@ -11,9 +11,9 @@ interface GlobalStateContextProps {
   setUser;
   isLoggedIn: boolean;
 
-  groups?: UserGroupIbp[];
+  groups?: UserGroupIbpExtended[];
 
-  currentGroup: UserGroupIbp;
+  currentGroup: UserGroupIbpExtended;
   isCurrentGroupMember?: boolean;
   setIsCurrentGroupMember;
 

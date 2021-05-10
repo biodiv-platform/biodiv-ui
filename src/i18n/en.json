@@ -787,6 +787,7 @@
     "PLACE": "Place",
     "POINTS_GAINED": "${points} activity point(s) gained",
     "POST_TO_GROUPS": "Post to Groups",
+    "RANGE_HINT": "use : to septate range values",
     "RATE_SUCCESS": "Media successfully rated",
     "RATING": "Rating",
     "RELATED": "Related Observations",

@@ -5,11 +5,13 @@ interface SpeciesContextProps {
   species;
   permissions;
   getFieldPermission;
+  licensesList;
 }
 
 interface CounterProviderProps {
   species;
   permissions;
+  licensesList;
   children;
 }
 
@@ -19,6 +21,7 @@ export const SpeciesProvider = ({
   children,
   species,
   permissions,
+  licensesList,
   ...rest
 }: CounterProviderProps) => {
   const { user } = useGlobalState();
@@ -44,7 +47,8 @@ export const SpeciesProvider = ({
         ...rest,
         species,
         permissions,
-        getFieldPermission
+        getFieldPermission,
+        licensesList
       }}
     >
       {children}

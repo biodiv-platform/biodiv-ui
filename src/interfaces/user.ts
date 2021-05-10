@@ -62,6 +62,7 @@ export interface User {
   sendDigest?: boolean;
   sendPushNotification?: boolean;
   website?: string;
+  isDeleted?: boolean;
 }
 export interface UserDTO {
   id?: number; // int64
@@ -84,6 +85,7 @@ export interface UserDTO {
 export interface UserDetails {
   id?: number; // int64
   userName?: string;
+  name?: string;
   aboutMe?: string;
   email?: string;
   sexType?: string;
@@ -112,8 +114,8 @@ export interface UserIbp {
 export interface UserPasswordChange {
   id?: number; // int64
   oldPassword?: string;
-  password?: string;
-  confirmPassword?: string;
+  newPassword?: string;
+  confirmNewPassword?: string;
 }
 export interface UserRoles {
   id?: number; // int64

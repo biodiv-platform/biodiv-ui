@@ -11,6 +11,7 @@ import SelectInputField from "@components/form/select";
 import SubmitButton from "@components/form/submit-button";
 import TextBoxField from "@components/form/text";
 import DropzoneFieldContainer from "@components/pages/observation/create/form/uploader";
+import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
@@ -18,7 +19,6 @@ import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { AssetStatus } from "@interfaces/custom";
 import { axUpdateSpeciesField, axUploadSpeciesEditorResource } from "@services/species.service";
-import { DEFAULT_LICENSE, LICENSES_ARRAY } from "@static/licenses";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import dynamic from "next/dynamic";
@@ -35,7 +35,7 @@ const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: fa
 export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel }) {
   const { t } = useTranslation();
   const { user } = useGlobalState();
-  const { species } = useSpecies();
+  const { species, licensesList } = useSpecies();
 
   const referencesOnly = initialValue.referencesOnly;
 
@@ -81,12 +81,12 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
           path: r.resource.fileName,
           hashKey: nanoid(),
           status: AssetStatus.Uploaded,
-          licenceId: r.resource.licenseId?.toString(),
+          licenseId: r.resource.licenseId?.toString(),
           isUsed: 1,
           rating: r.resource.rating || 0
         })) || [],
       ...(referencesOnly
-        ? { sfDescription: "dummy", licenseId: DEFAULT_LICENSE, attributions: "dummy" }
+        ? { sfDescription: "dummy", licenseId: SITE_CONFIG.LICENSE.DEFAULT, attributions: "dummy" }
         : {})
     }
   });
@@ -107,7 +107,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
         type: r.type,
         caption: r.caption,
         rating: r.rating,
-        licenceId: r.licenceId
+        licenseId: r.licenseId
       }))
     };
 
@@ -154,7 +154,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
             label={t("DOCUMENT.LICENSE")}
             form={hForm}
             isRequired={true}
-            options={LICENSES_ARRAY}
+            options={licensesList}
           />
           <ReferencesField name="references" label={t("SPECIES.REFERENCES")} form={hForm} />
           <DropzoneFieldContainer
@@ -162,6 +162,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
             name="speciesFieldResource"
             form={hForm}
             isCreate={false}
+            licensesList={licensesList}
           />
         </ModalBody>
         <ModalFooter>

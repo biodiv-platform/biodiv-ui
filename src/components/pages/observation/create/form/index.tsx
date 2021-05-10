@@ -13,7 +13,7 @@ import {
   TOGGLE_PHOTO_SELECTOR
 } from "@static/events";
 import { dateToUTC } from "@utils/date";
-import { cleanTags } from "@utils/tags";
+import { cleanFacts, cleanTags } from "@utils/tags";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -33,6 +33,7 @@ import UserGroups from "./user-groups";
 export default function ObservationCreateForm({
   speciesGroups,
   languages,
+  licensesList,
   ObservationCreateFormData
 }) {
   const { t } = useTranslation();
@@ -210,11 +211,13 @@ export default function ObservationCreateForm({
     tags,
     customFields,
     terms,
+    facts,
     ...rest
   }) => {
     const observedOn = dateToUTC(rest.observedOn).format();
     const payload = {
       ...rest,
+      ...cleanFacts(facts),
       observedOn,
       fromDate: observedOn,
       toDate: observedOn,
@@ -246,7 +249,7 @@ export default function ObservationCreateForm({
     <Box mb={8} minH="calc(100vh - var(--heading-height))">
       <PageHeading>👋 {t("OBSERVATION.TITLE")}</PageHeading>
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <Uploader name="resources" form={hForm} />
+        <Uploader name="resources" form={hForm} licensesList={licensesList} />
         <Box hidden={isSelectedImages}>
           <Recodata form={hForm} languages={languages} />
           <GroupSelector

@@ -1,5 +1,5 @@
 import SITE_CONFIG from "@configs/site-config.json";
-import { UserGroupIbp } from "@interfaces/observation";
+import { UserGroupIbpExtended } from "@interfaces/custom";
 
 import packageJson from "../../package.json";
 
@@ -30,7 +30,7 @@ export const ENDPOINT = {
   UTILITY: `${API_ENDPOINT}utility-api/api`
 };
 
-export const DEFAULT_GROUP: UserGroupIbp = {
+export const DEFAULT_GROUP: UserGroupIbpExtended = {
   id: null as any,
   icon: `${ENDPOINT.FILES}${SITE_CONFIG.SITE.ICON}`,
   name: SITE_CONFIG.SITE.TITLE,
@@ -51,8 +51,9 @@ export const TOKEN = {
 };
 
 export const TRAIT_TYPES = {
-  SINGLE_CATEGORICAL: "SINGLE_CATEGORICAL",
-  MULTIPLE_CATEGORICAL: "MULTIPLE_CATEGORICAL"
+  MULTIPLE_CATEGORICAL: "MULTIPLE_CATEGORICAL",
+  RANGE: "RANGE",
+  SINGLE_CATEGORICAL: "SINGLE_CATEGORICAL"
 };
 
 export const FLAG_OPTIONS = [
@@ -79,7 +80,7 @@ export const RESOURCE_SIZE = {
   PREVIEW: "?h=420",
   RECENT_THUMBNAIL: "?h=135",
   THUMBNAIL: "?h=34",
-  TWITTER: "?w=600&h=330&fit=center&preserve=true",
+  TWITTER: "?w=600&h=330&fit=center&preserve=true"
 };
 
 export const FORWARD_BLACKLIST = ["login", "register"];

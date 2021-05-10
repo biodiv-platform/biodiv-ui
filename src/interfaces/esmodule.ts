@@ -3,6 +3,10 @@ export interface AggregationResponse {
     [name: string]: number; // int64
   };
 }
+export interface AuthorUploadedObservationInfo {
+  totalCount?: number; // int64
+  maxVotedRecoFreqs?: MaxVotedRecoFreq[];
+}
 export interface CommonName {
   three_letter_code?: string;
   name?: string;
@@ -36,7 +40,7 @@ export interface ExtendedTaxonDefinition {
   group_id?: number; // float
   name?: string;
   common_names?: CommonName[];
-  rank?: number; // int32
+  rank?: string;
   id?: number; // int32
   position?: string;
   lowercase_match_name?: string;
@@ -48,7 +52,9 @@ export interface Feature {
   type?: string;
   geometry?: Geometry;
   properties?: {
-    [name: string]: unknown;
+    [name: string]: {
+      [key: string]: any;
+    };
   };
 }
 export interface FilterPanelData {
@@ -80,27 +86,38 @@ export interface Geometry {
 export interface MapAndBoolQuery {
   key?: string;
   path?: string;
-  values?: unknown[];
+  values?: {
+    [key: string]: any;
+  }[];
 }
 export interface MapAndMatchPhraseQuery {
   key?: string;
   path?: string;
-  value?: unknown;
+  value?: {
+    [key: string]: any;
+  };
 }
 export interface MapAndRangeQuery {
   key?: string;
   path?: string;
-  start?: unknown;
-  end?: unknown;
+  start?: {
+    [key: string]: any;
+  };
+  end?: {
+    [key: string]: any;
+  };
 }
 export interface MapBoolQuery {
   key?: string;
   path?: string;
-  values?: unknown[];
+  values?: {
+    [key: string]: any;
+  }[];
 }
 export interface MapBoundParams {
   bounds?: MapBounds;
   polygon?: MapGeoPoint[];
+  multipolygon?: MapGeoPoint[][];
 }
 export interface MapBounds {
   top?: number; // double
@@ -109,7 +126,9 @@ export interface MapBounds {
   right?: number; // double
 }
 export interface MapDocument {
-  document?: unknown;
+  document?: {
+    [key: string]: any;
+  };
 }
 export interface MapExistQuery {
   key?: string;
@@ -123,18 +142,26 @@ export interface MapGeoPoint {
 export interface MapOrBoolQuery {
   key?: string;
   path?: string;
-  values?: unknown[];
+  values?: {
+    [key: string]: any;
+  }[];
 }
 export interface MapOrMatchPhraseQuery {
   key?: string;
   path?: string;
-  value?: unknown;
+  value?: {
+    [key: string]: any;
+  };
 }
 export interface MapOrRangeQuery {
   key?: string;
   path?: string;
-  start?: unknown;
-  end?: unknown;
+  start?: {
+    [key: string]: any;
+  };
+  end?: {
+    [key: string]: any;
+  };
 }
 export interface MapQueryResponse {
   result?:
@@ -152,8 +179,12 @@ export interface MapQueryResponse {
 export interface MapRangeQuery {
   key?: string;
   path?: string;
-  start?: unknown;
-  end?: unknown;
+  start?: {
+    [key: string]: any;
+  };
+  end?: {
+    [key: string]: any;
+  };
 }
 export interface MapResponse {
   documents?: MapDocument[];
@@ -178,6 +209,10 @@ export interface MapSearchQuery {
   andMatchPhraseQueries?: MapAndMatchPhraseQuery[];
   orMatchPhraseQueries?: MapOrMatchPhraseQuery[];
   searchParams?: MapSearchParams;
+}
+export interface MaxVotedRecoFreq {
+  maxVotedRecoId?: number; // int64
+  freq?: number; // int64
 }
 export interface ObservationInfo {
   monthAggregation?: {

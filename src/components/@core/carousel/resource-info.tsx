@@ -15,7 +15,6 @@ import useTranslation from "@hooks/use-translation";
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { axRateObservationResource } from "@services/observation.service";
-import { LICENSES } from "@static/licenses";
 import toast from "cogo-toast";
 import React from "react";
 import Rating from "react-rating";
@@ -35,8 +34,6 @@ function CarouselResourceInfo({ currentResource, observationId }) {
       toast.success(`${t("OBSERVATION.RATE_SUCCESS")} ${newRating}`);
     }
   };
-
-  const currentLicense = LICENSES[currentResource?.resource?.licenseId];
 
   return (
     <Box position="absolute" top={4} right={4} left={0} display="flex" justifyContent="flex-end">
@@ -62,8 +59,8 @@ function CarouselResourceInfo({ currentResource, observationId }) {
 
               <Box>{t("OBSERVATION.LICENSE")}</Box>
               <Box>
-                <ExternalBlueLink href={currentLicense?.link}>
-                  {currentLicense?.label}
+                <ExternalBlueLink href={currentResource?.license?.url}>
+                  {currentResource?.license?.name}
                 </ExternalBlueLink>
               </Box>
 

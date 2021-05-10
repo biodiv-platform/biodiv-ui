@@ -21,7 +21,8 @@ import DocumentUploader from "../create/uploader";
 export default function DocumentEditPageComponent({
   initialDocument,
   defaultBibFields,
-  documentTypes
+  documentTypes,
+  licensesList
 }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -119,7 +120,12 @@ export default function DocumentEditPageComponent({
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
         <PageHeading>📄 {t("DOCUMENT.EDIT.TITLE")}</PageHeading>
         <DocumentUploader form={hForm} name="ufileData" />
-        <BasicInfo hForm={hForm} documentTypes={documentTypes} setBibField={setBibField} />
+        <BasicInfo
+          hForm={hForm}
+          documentTypes={documentTypes}
+          setBibField={setBibField}
+          licensesList={licensesList}
+        />
         <Metadata hForm={hForm} bibFields={bibField.fields} />
         <WKTCoverage
           hForm={hForm}

@@ -6,7 +6,6 @@ import SelectInputField from "@components/form/select";
 import TextBoxField from "@components/form/text";
 import useTranslation from "@hooks/use-translation";
 import { axGetDocumentBibFields } from "@services/document.service";
-import { LICENSES_ARRAY } from "@static/licenses";
 import { getBibFieldsMeta } from "@utils/document";
 import notification from "@utils/notification";
 import React, { useEffect } from "react";
@@ -19,13 +18,15 @@ interface BasicInfoProps {
   documentTypes;
   setBibField;
   canImport?: boolean;
+  licensesList;
 }
 
 export default function BasicInfo({
   hForm,
   documentTypes,
   setBibField,
-  canImport
+  canImport,
+  licensesList
 }: BasicInfoProps) {
   const { t } = useTranslation();
   const itemTypeIdWatch = hForm.watch("itemTypeId");
@@ -89,7 +90,7 @@ export default function BasicInfo({
               name="licenseId"
               label={t("DOCUMENT.LICENSE")}
               form={hForm}
-              options={LICENSES_ARRAY}
+              options={licensesList}
               isRequired={true}
               isControlled={true}
             />

@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import { SPECIES_FIELD_UPDATE } from "@static/events";
-import { DEFAULT_LICENSE } from "@static/licenses";
+import SITE_CONFIG from "@configs/site-config.json";
 import React from "react";
 import { emit } from "react-gbus";
 
@@ -26,7 +26,7 @@ export default function SpeciesFieldSimpleCreate({
       },
       contributor: [],
       references: [],
-      license: { id: DEFAULT_LICENSE },
+      license: { id: SITE_CONFIG.LICENSE.DEFAULT },
       referencesOnly
     });
 
