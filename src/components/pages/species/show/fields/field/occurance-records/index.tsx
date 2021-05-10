@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import { BaseLayer } from "@ibp/naksha-commons";
+import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
@@ -29,6 +30,17 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
     valueCallback(true);
   }, []);
 
+  const fetchGridData = async (geoProps) => {
+    const params = {
+      ...geoProps,
+      taxonId: species.taxonomyDefinition.id,
+      view: "map"
+    };
+
+    const { data } = await axGetObservationMapData(params);
+    return data;
+  };
+
   return (
     <LazyLoad once={true}>
       <Box h="500px" overflow="hidden" position="relative" borderRadius="md" bg="gray.300" mb={4}>
@@ -49,16 +61,7 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
               id: "species-observations",
               title: "Species Observations",
               isAdded: true,
-              source: {
-                type: "grid",
-                endpoint: `${ENDPOINT.ESMODULE}/v1/geo/aggregation`
-              },
-              data: {
-                index: "extended_observation",
-                type: "extended_records",
-                geoField: "location",
-                speciesId: species.species.id
-              },
+              source: { type: "grid", fetcher: fetchGridData },
               onHover: onObservationGridHover
             }
           ]}
