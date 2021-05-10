@@ -86,12 +86,12 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
           </Box>
         </Link>
       </LocalLink>
-      {SITE_CONFIG.SITE?.GOV && (
+      {SITE_CONFIG.SITE?.GOV?.ACTIVE && (
         <img
           className="icon-gov"
-          src={SITE_CONFIG.SITE?.GOV.ICON}
-          alt={SITE_CONFIG.SITE?.GOV.NAME}
-          title={SITE_CONFIG.SITE?.GOV.NAME}
+          src={SITE_CONFIG.SITE?.GOV?.ICON}
+          alt={SITE_CONFIG.SITE?.GOV?.NAME}
+          title={SITE_CONFIG.SITE?.GOV?.NAME}
         />
       )}
       <button className="menu-toggle" onClick={onToggle} aria-label="toggle primary menu">

@@ -162,5 +162,5 @@ export interface SpeciesField {
 }
 
 export interface UserGroupIbpExtended extends UserGroupIbp {
-  nameLocal?: string;
+  nameLocal?;
 }

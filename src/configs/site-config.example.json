@@ -83,6 +83,9 @@
     },
     "SWITCHER": true
   },
+  "LICENSE": {
+    "DEFAULT": "822"
+  },
   "LEADERBOARD": {
     "ACTIVE": true
   },
@@ -117,7 +120,8 @@
     "DESCRIPTION": "A unique repository of information on India's biodiversity",
     "GOV": {
       "ICON": "/get/crop/logo/gov.png",
-      "NAME": "Government of XYZ"
+      "NAME": "Government of XYZ",
+      "ACTIVE": false
     },
     "ICON": "/get/crop/logo/IBP.png",
     "TITLE": "India Biodiversity Portal",
