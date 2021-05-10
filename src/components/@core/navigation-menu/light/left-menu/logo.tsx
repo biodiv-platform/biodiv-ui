@@ -1,8 +1,9 @@
-import { Link, Text } from "@chakra-ui/react";
+import { Box, Link, Stack, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import CrossIcon from "@icons/cross";
 import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
@@ -28,11 +29,13 @@ const Logo = styled.div`
     display: flex;
     align-items: center;
     line-height: 1.2rem;
-    img {
-      height: 3.75rem;
-      width: 8rem;
-      object-fit: contain;
-    }
+  }
+
+  .icon-gov,
+  a img {
+    height: 3.75rem;
+    max-width: 8rem;
+    object-fit: contain;
   }
 
   .menu-toggle {
@@ -41,16 +44,13 @@ const Logo = styled.div`
     font-size: 1.5rem;
   }
 
+  .icon-gov,
   .join-usergroup {
     margin-left: 0.75rem;
   }
 
   ${Mq.max.sm} {
     width: 100%;
-
-    p {
-      max-width: 6rem;
-    }
 
     .menu-toggle {
       display: initial;
@@ -70,7 +70,7 @@ const Logo = styled.div`
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
   const {
-    currentGroup: { name, icon }
+    currentGroup: { name, nameLocal, icon }
   } = useGlobalState();
 
   const { t } = useTranslation();
@@ -79,10 +79,21 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
     <Logo>
       <LocalLink href="/" prefixGroup={true}>
         <Link>
-          <img src={`${icon}?w=128&preserve=true`} alt={name} />
-          <Text ml={2}>{name}</Text>
+          <img src={`${icon}?w=128&preserve=true`} alt={name} title={name} />
+          <Box ml={2} textAlign="center">
+            {nameLocal && <Box mb={1}>{nameLocal}</Box>}
+            {name}
+          </Box>
         </Link>
       </LocalLink>
+      {SITE_CONFIG.SITE?.GOV && (
+        <img
+          className="icon-gov"
+          src={SITE_CONFIG.SITE?.GOV.ICON}
+          alt={SITE_CONFIG.SITE?.GOV.NAME}
+          title={SITE_CONFIG.SITE?.GOV.NAME}
+        />
+      )}
       <button className="menu-toggle" onClick={onToggle} aria-label="toggle primary menu">
         {isOpen ? <CrossIcon /> : <MenuIcon />}
       </button>

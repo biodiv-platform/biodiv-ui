@@ -34,6 +34,7 @@ export const DEFAULT_GROUP: UserGroupIbpExtended = {
   id: null as any,
   icon: `${ENDPOINT.FILES}${SITE_CONFIG.SITE.ICON}`,
   name: SITE_CONFIG.SITE.TITLE,
+  nameLocal: SITE_CONFIG.SITE?.TITLE_LOCAL,
   webAddress: SITE_CONFIG.SITE.URL
 };
 
