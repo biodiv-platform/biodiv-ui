@@ -44,7 +44,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         basisOfData: Yup.string().required(),
         basisOfRecord: Yup.string().required(),
 
-        observedDateRange: Yup.array().required(),
+        observedDateRange: Yup.array(),
         project: Yup.string(),
         methods: Yup.string(),
         isVerified: Yup.boolean(),

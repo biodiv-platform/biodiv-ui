@@ -4,10 +4,11 @@ import SelectInputField from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { DATE_ACCURACY_OPTIONS } from "@components/pages/observation/create/form/options";
 import useTranslation from "@hooks/use-translation";
-import React from "react";
+import React, { useState } from "react";
 
 export default function TemporalCoverage({ form }) {
   const { t } = useTranslation();
+  const [isDisable, setIsDisable] = useState<boolean>();
 
   return (
     <ToggleablePanel icon="📅" title={t("DATATABLE.TEMPORAL")}>
@@ -15,7 +16,7 @@ export default function TemporalCoverage({ form }) {
         <SimpleGrid columns={{ md: 2 }} spacing={{ md: 4 }}>
           <DateRangePickerField
             hasMaxDate={false}
-            isRequired={true}
+            disableInput={isDisable}
             form={form}
             name="observedDateRange"
             label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}
@@ -24,6 +25,9 @@ export default function TemporalCoverage({ form }) {
             name="dateAccuracy"
             label={t("OBSERVATION.DATE_ACCURACY")}
             isRequired={true}
+            onChangeCallback={(value) =>
+              value === "UNKNOWN" ? setIsDisable(true) : setIsDisable(false)
+            }
             options={DATE_ACCURACY_OPTIONS}
             form={form}
           />
