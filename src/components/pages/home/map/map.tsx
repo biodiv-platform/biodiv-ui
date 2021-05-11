@@ -34,7 +34,7 @@ export default function Map() {
   const fetchGridData = async (geoProps) => {
     const params = {
       ...geoProps,
-      userGroupId,
+      userGroupList: userGroupId,
       view: "map",
       geoField: "location"
     };
