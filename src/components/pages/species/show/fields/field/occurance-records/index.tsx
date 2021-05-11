@@ -33,7 +33,7 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
   const fetchGridData = async (geoProps) => {
     const params = {
       ...geoProps,
-      taxonId: species.taxonomyDefinition.id,
+      taxon: species.taxonomyDefinition.id,
       view: "map"
     };
 
