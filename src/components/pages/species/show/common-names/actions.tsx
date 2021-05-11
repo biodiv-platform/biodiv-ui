@@ -3,7 +3,13 @@ import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
-import { SPECIES_NAME_ADD, SPECIES_NAME_DELETE, SPECIES_NAME_EDIT } from "@static/events";
+import StarIcon from "@icons/star";
+import {
+  SPECIES_NAME_ADD,
+  SPECIES_NAME_DELETE,
+  SPECIES_NAME_EDIT,
+  SPECIES_NAME_PREFERRED
+} from "@static/events";
 import React from "react";
 import { emit } from "react-gbus";
 
@@ -33,6 +39,7 @@ export function CommonNameEditButtons({ commonName }) {
 
   const handleOnEdit = () => emit(SPECIES_NAME_EDIT, commonName);
   const handleOnDelete = () => emit(SPECIES_NAME_DELETE, commonName);
+  const handleOnPreferred = () => emit(SPECIES_NAME_PREFERRED, commonName);
 
   return (
     <Flex alignItems="center" justifyContent="space-between">
@@ -43,6 +50,9 @@ export function CommonNameEditButtons({ commonName }) {
         </Button>
         <Button colorScheme="red" leftIcon={<DeleteIcon />} onClick={handleOnDelete}>
           {t("DELETE")}
+        </Button>
+        <Button colorScheme="orange" leftIcon={<StarIcon />} onClick={handleOnPreferred}>
+          {t("SPECIES.COMMON_NAME.PREFERRED.TITLE")}
         </Button>
       </ButtonGroup>
     </Flex>

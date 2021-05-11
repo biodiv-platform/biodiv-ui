@@ -134,6 +134,17 @@ export const axDeleteSpeciesCommonName = async (speciesId, commonNameId) => {
   }
 };
 
+export const axPreferredSpeciesCommonName = async (commonNameId) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.TAXONOMY}/v1/cname/preffered`, null, {
+      params: { commonNameId }
+    });
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
 export const axUpdateSpeciesSynonym = async (speciesId, payload) => {
   try {
     const { data } = await http.post(

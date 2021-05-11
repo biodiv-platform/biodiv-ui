@@ -19,6 +19,8 @@ export const SPECIES_SYNONYM_DELETE = "ssym_del";
 export const SPECIES_NAME_EDIT = "s_nm_edit";
 export const SPECIES_NAME_ADD = "s_nm_add";
 export const SPECIES_NAME_DELETE = "s_nm_del";
+export const SPECIES_NAME_PREFERRED = "s_nm_pref";
+export const SPECIES_NAME_PREFERRED_UPDATED = "s_nm_pref_updated";
 
 export const AUTHWALL = {
   INIT: "authwall_init",

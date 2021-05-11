@@ -949,6 +949,11 @@
         "LANGUAGE": "Language",
         "NAME": "Name"
       },
+      "PREFERRED": {
+        "FAILURE": "unable to update preferred name",
+        "SUCCESS": "preferred name updated successfully",
+        "TITLE": "Preferred"
+      },
       "SAVE": {
         "FAILURE": "unable to save name",
         "SUCCESS": "name saved successfully"

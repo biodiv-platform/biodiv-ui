@@ -7,10 +7,12 @@ import TaxonStatusBadge from "@components/pages/common/status-badge";
 import useTranslation from "@hooks/use-translation";
 import { axDeleteSpecies, axFollowSpecies } from "@services/species.service";
 import { RESOURCE_SIZE } from "@static/constants";
+import { SPECIES_NAME_PREFERRED_UPDATED } from "@static/events";
 import { getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import { NextSeo } from "next-seo";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import { useListener } from "react-gbus";
 
 import useSpecies from "../use-species";
 
@@ -21,6 +23,8 @@ function SpeciesHeader() {
     species.taxonomyDefinition?.normalizedForm || t("UNKNOWN"),
     t("HEADER.MENU_SECONDARY.SPECIES.TITLE")
   ].join(" | ");
+
+  const [prefferedCommonName, setPrefferedCommonName] = useState(species?.prefferedCommonName);
 
   const openGraph = useMemo(
     () => ({
@@ -36,6 +40,8 @@ function SpeciesHeader() {
     }),
     []
   );
+
+  useListener(setPrefferedCommonName, [SPECIES_NAME_PREFERRED_UPDATED]);
 
   const PageActions = () => (
     <div>
@@ -71,6 +77,12 @@ function SpeciesHeader() {
             }}
           />
         </PageHeading>
+
+        {prefferedCommonName && (
+          <PageHeading size="md" fontWeight="normal" className="fadeInUp" mb={0}>
+            {prefferedCommonName?.name}
+          </PageHeading>
+        )}
 
         <TaxonStatusBadge
           reco={species.taxonomyDefinition}
