@@ -41,7 +41,7 @@ export default function GroupPost({
     const groupsList = selectedGroups.map((i) => Number(i));
     const { success, data } = await saveUserGroupsFunc(resourceId, groupsList);
     if (success) {
-      setFinalGroups(data);
+      setFinalGroups(data || []);
       notification(t("OBSERVATION.GROUPS_UPDATED"), NotificationType.Success);
       editButtonRef.current.focus();
       onClose();
