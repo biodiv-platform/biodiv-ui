@@ -6,6 +6,8 @@ import { getParsedUser } from "@utils/auth";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 
+import useTranslation from "./use-translation";
+
 interface GlobalStateContextProps {
   user?;
   setUser;
@@ -32,6 +34,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [user, setUser] = useState<any>(initialState.user || {});
   const [pages, setPages] = useState<any[]>([]);
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
+  const { localeId } = useTranslation();
 
   const isLoggedIn = useMemo(() => !!user.id, [user]);
 
@@ -47,7 +50,10 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   }, [initialState.currentGroup, user]);
 
   useEffect(() => {
-    axGetTree(initialState.currentGroup?.id).then(({ data }) => setPages(data));
+    axGetTree({
+      userGroupId: initialState.currentGroup?.id,
+      languageId: localeId
+    }).then(({ data }) => setPages(data));
   }, [initialState.currentGroup?.id]);
 
   useListener(() => {
