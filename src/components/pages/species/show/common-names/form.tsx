@@ -99,7 +99,7 @@ export function SpeciesCommonNameForm({ commonName, onUpdate, onClose }) {
           </ModalFooter>
         </form>
       ) : (
-        <Spinner />
+        <Spinner m={4} />
       )}
     </ModalContent>
   );

@@ -1,9 +1,9 @@
-import { Box, Button, ButtonGroup, Flex, Td, Tr } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, IconButton, Td, Tr } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
-import StarIcon from "@icons/star";
+import StarOutlineIcon from "@icons/star-outline";
 import {
   SPECIES_NAME_ADD,
   SPECIES_NAME_DELETE,
@@ -44,16 +44,28 @@ export function CommonNameEditButtons({ commonName }) {
   return (
     <Flex alignItems="center" justifyContent="space-between">
       <Box>{commonName.name}</Box>
-      <ButtonGroup variant="outline" size="xs">
-        <Button colorScheme="blue" leftIcon={<EditIcon />} onClick={handleOnEdit}>
-          {t("EDIT")}
-        </Button>
-        <Button colorScheme="red" leftIcon={<DeleteIcon />} onClick={handleOnDelete}>
-          {t("DELETE")}
-        </Button>
-        <Button colorScheme="orange" leftIcon={<StarIcon />} onClick={handleOnPreferred}>
-          {t("SPECIES.COMMON_NAME.PREFERRED.TITLE")}
-        </Button>
+      <ButtonGroup spacing={0} variant="link">
+        <IconButton
+          colorScheme="blue"
+          icon={<EditIcon />}
+          onClick={handleOnEdit}
+          aria-label={t("EDIT")}
+          title={t("EDIT")}
+        />
+        <IconButton
+          colorScheme="red"
+          icon={<DeleteIcon />}
+          onClick={handleOnDelete}
+          aria-label={t("DELETE")}
+          title={t("DELETE")}
+        />
+        <IconButton
+          colorScheme="orange"
+          leftIcon={<StarOutlineIcon />}
+          onClick={handleOnPreferred}
+          aria-label={t("SPECIES.COMMON_NAME.PREFERRED.TITLE")}
+          title={t("SPECIES.COMMON_NAME.PREFERRED.TITLE")}
+        />
       </ButtonGroup>
     </Flex>
   );

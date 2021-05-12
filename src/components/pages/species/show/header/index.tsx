@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Stack } from "@chakra-ui/react";
+import { Box, Flex, Image, Spacer, Stack } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import FollowActionButton from "@components/@core/action-buttons/follow";
 import ShareActionButton from "@components/@core/action-buttons/share";
@@ -8,7 +8,7 @@ import useTranslation from "@hooks/use-translation";
 import { axDeleteSpecies, axFollowSpecies } from "@services/species.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { SPECIES_NAME_PREFERRED_UPDATED } from "@static/events";
-import { getResourceThumbnail } from "@utils/media";
+import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import { NextSeo } from "next-seo";
 import React, { useMemo, useState } from "react";
@@ -89,6 +89,15 @@ function SpeciesHeader() {
           crumbs={species.breadCrumbs}
           taxonId={species.taxonomyDefinition.id}
         />
+
+        <Box>
+          <Image
+            boxSize="5rem"
+            m={-2}
+            src={getLocalIcon(species.speciesGroup.name)}
+            title={species.speciesGroup.name}
+          />
+        </Box>
 
         <PageActions />
       </Stack>

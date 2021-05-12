@@ -18,14 +18,14 @@ export default function SpeciesShowPageComponent({ species, permissions, license
   return (
     <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
       <div className="container mt">
-        <SimpleGrid columns={{ md: 3 }} spacing={{ md: 4 }}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ md: 4 }}>
           <SpeciesHeader />
           <SpeciesGallery />
         </SimpleGrid>
 
-        <Grid templateColumns="repeat(6, 1fr)" gap={4} mb={4}>
-          <SpeciesNavigation />
-          <GridItem colSpan={3}>
+        <Grid templateColumns={{ md: "repeat(6, 1fr)" }} gap={4} mb={4}>
+          <GridItem colSpan={4}>
+            <SpeciesNavigation />
             <SpeciesSynonyms />
             <SpeciesCommonNames />
             <SpeciesFields />

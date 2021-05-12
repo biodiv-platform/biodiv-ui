@@ -1,5 +1,14 @@
-import { Box, GridItem, List, ListItem } from "@chakra-ui/react";
-import BlueLink from "@components/@core/blue-link";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  IconButton,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  useToken
+} from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { getSpeciesFieldHeaders } from "@utils/species";
 import React from "react";
@@ -11,24 +20,33 @@ export default function SpeciesNavigation() {
   const { t } = useTranslation();
   const { species } = useSpecies();
   const fieldHeaders = getSpeciesFieldHeaders(species.fieldData);
+  const [zIndicesSticky] = useToken("zIndices", ["sticky"]);
 
   return (
-    <GridItem>
-      <Box p={4} className="white-box" position="sticky" top="1rem">
-        <List spacing={4} fontWeight="semibold">
-          <ListItem>
-            <BlueLink href="#synonyms">{t("SPECIES.SYNONYMS")}</BlueLink>
-          </ListItem>
-          <ListItem>
-            <BlueLink href="#common-names">{t("SPECIES.COMMON_NAMES")}</BlueLink>
-          </ListItem>
+    <Box position="sticky" top="0" h={0} zIndex={zIndicesSticky}>
+      <Menu>
+        <MenuButton
+          m={1}
+          as={IconButton}
+          aria-label="Options"
+          icon={<HamburgerIcon />}
+          variant="outline"
+          bg="white"
+        />
+        <MenuList>
+          <MenuItem as={Link} href="#synonyms">
+            {t("SPECIES.SYNONYMS")}
+          </MenuItem>
+          <MenuItem as={Link} href="#common-names">
+            {t("SPECIES.COMMON_NAMES")}
+          </MenuItem>
           {fieldHeaders.map((title) => (
-            <ListItem key={title}>
-              <BlueLink href={`#${urlSlug(title)}`}>{title}</BlueLink>
-            </ListItem>
+            <MenuItem as={Link} href={`#${urlSlug(title)}`} key={title}>
+              {title}
+            </MenuItem>
           ))}
-        </List>
-      </Box>
-    </GridItem>
+        </MenuList>
+      </Menu>
+    </Box>
   );
 }

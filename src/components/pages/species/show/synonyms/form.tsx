@@ -114,7 +114,7 @@ export default function SpeciesSynonymForm({ synonym, onUpdate, onClose }) {
           </ModalFooter>
         </form>
       ) : (
-        <Spinner />
+        <Spinner m={4} />
       )}
     </ModalContent>
   );

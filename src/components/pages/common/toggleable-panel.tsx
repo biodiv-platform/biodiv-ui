@@ -23,7 +23,7 @@ export default function ToggleablePanel({
   const { t } = useTranslation();
 
   return (
-    <Box id={id} className="white-box" mb={3}>
+    <Box id={id} className="white-box" mb={4}>
       <BoxHeading styles={{ justifyContent: "space-between", paddingRight: 0 }}>
         <div>
           {icon} {title}

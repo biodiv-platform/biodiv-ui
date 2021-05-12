@@ -31,7 +31,7 @@ export default function SpeciesGallery() {
   }, [resources]);
 
   return (
-    <Box gridColumn="2/4" className="fadeInUp delay-3">
+    <Box gridColumn={{ md: "2/4" }} className="fadeInUp delay-3">
       <Box bg="gray.900" borderRadius="md" position="relative" zIndex={0} mb={4} p={4}>
         <SpeciesGalleryModal resources={resources} setResources={setResources} />
         <Box ref={sliderRef} className="keen-slider fade" minH="438px">

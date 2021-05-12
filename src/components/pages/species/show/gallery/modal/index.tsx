@@ -23,7 +23,7 @@ export default function SpeciesGalleryModal({ resources, setResources }) {
 
   return (
     <>
-      <Box position="absolute" bottom={0} right={0} p={4} zIndex={1}>
+      <Box position="absolute" top={0} right={0} p={4} zIndex={1}>
         <Button onClick={onOpen} leftIcon={<GridIcon />}>
           {t("SPECIES.ALL_MEDIA")}
         </Button>

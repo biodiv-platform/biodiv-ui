@@ -70,10 +70,10 @@ export function BasicTable({ columns, data, tableStyle }: BasicTableProps) {
   );
 }
 
-export const ResponsiveContainer = ({ children, ...props }) => (
+export const ResponsiveContainer = ({ children, noBorder, ...props }: any) => (
   <Box
     bg="white"
-    border="1px solid"
+    border={noBorder ? 0 : "1px solid"}
     borderColor="gray.300"
     borderRadius="md"
     overflowX="auto"

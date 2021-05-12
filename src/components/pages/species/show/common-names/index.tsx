@@ -1,4 +1,5 @@
 import { Box, List, ListItem, Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import { ResponsiveContainer } from "@components/@core/table";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import useTranslation from "@hooks/use-translation";
 import React, { useMemo, useState } from "react";
@@ -26,38 +27,40 @@ export default function SpeciesCommonNames() {
   return (
     <ToggleablePanel id="common-names" icon="🗒" title={t("SPECIES.COMMON_NAMES")}>
       <CommonNameEditModal onUpdate={setCommonNamesList} />
-      <Box maxH="300px" overflowY="auto">
-        <Table size="sm" variant="striped" w="full">
-          <Tbody>
-            {languagesList.length ? (
-              languagesList.map((language) => (
-                <Tr key={language}>
-                  <Td w="7rem" verticalAlign="top">
-                    {language}
-                  </Td>
-                  <Td>
-                    <List spacing={2}>
-                      {languagesData[language].map((commonName) => (
-                        <ListItem key={commonName.name}>
-                          {permissions.isContributor ? (
-                            <CommonNameEditButtons commonName={commonName} />
-                          ) : (
-                            <div>{commonName.name}</div>
-                          )}
-                        </ListItem>
-                      ))}
-                    </List>
-                  </Td>
+      <Box maxH="300px" w="full" overflow="auto">
+        <ResponsiveContainer noBorder={true}>
+          <Table size="sm" variant="striped" w="full">
+            <Tbody>
+              {languagesList.length ? (
+                languagesList.map((language) => (
+                  <Tr key={language}>
+                    <Td w={{ md: "10rem" }} verticalAlign="top">
+                      {language}
+                    </Td>
+                    <Td>
+                      <List spacing={2}>
+                        {languagesData[language].map((commonName) => (
+                          <ListItem key={commonName.name}>
+                            {permissions.isContributor ? (
+                              <CommonNameEditButtons commonName={commonName} />
+                            ) : (
+                              <div>{commonName.name}</div>
+                            )}
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Td>
+                  </Tr>
+                ))
+              ) : (
+                <Tr>
+                  <Td>{t("NO_DATA")}</Td>
                 </Tr>
-              ))
-            ) : (
-              <Tr>
-                <Td>{t("NO_DATA")}</Td>
-              </Tr>
-            )}
-            {permissions.isContributor && <CommonNameAdd />}
-          </Tbody>
-        </Table>
+              )}
+              {permissions.isContributor && <CommonNameAdd />}
+            </Tbody>
+          </Table>
+        </ResponsiveContainer>
       </Box>
     </ToggleablePanel>
   );

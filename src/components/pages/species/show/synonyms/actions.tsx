@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, Td, Tr } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, IconButton, Td, Tr } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
@@ -37,13 +37,21 @@ export function SynonymEditButtons({ synonym }) {
   return (
     <Flex alignItems="center" justifyContent="space-between">
       <Box>{synonym.normalizedForm}</Box>
-      <ButtonGroup variant="outline" size="xs">
-        <Button colorScheme="blue" leftIcon={<EditIcon />} onClick={handleOnEdit}>
-          {t("EDIT")}
-        </Button>
-        <Button colorScheme="red" leftIcon={<DeleteIcon />} onClick={handleOnDelete}>
-          {t("DELETE")}
-        </Button>
+      <ButtonGroup spacing={0} variant="link">
+        <IconButton
+          colorScheme="blue"
+          icon={<EditIcon />}
+          onClick={handleOnEdit}
+          aria-label={t("EDIT")}
+          title={t("EDIT")}
+        />
+        <IconButton
+          colorScheme="red"
+          icon={<DeleteIcon />}
+          onClick={handleOnDelete}
+          aria-label={t("DELETE")}
+          title={t("DELETE")}
+        />
       </ButtonGroup>
     </Flex>
   );
