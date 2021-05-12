@@ -52,7 +52,11 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         <ResponsiveInfo title="OBSERVATION.OBSERVED_ON">
           <Stack isInline={true}>
-            <Text mr={1}>{formatDateReadableFromUTC(o.observation?.fromDate)}</Text>
+            <Text mr={1}>
+              {o.observation?.fromDate
+                ? formatDateReadableFromUTC(o.observation?.fromDate)
+                : t("OBSERVATION.UNKNOWN")}
+            </Text>
             {o.observation?.dateAccuracy === DATE_ACCURACY.ACCURATE && (
               <Tooltip title={t("OBSERVATION.ACCURATE")} shouldWrapChildren={true} hasArrow={true}>
                 <CheckIcon color="green.500" />
