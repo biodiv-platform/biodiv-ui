@@ -4,6 +4,8 @@ import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import { isBrowser } from "@static/constants";
+import center from "@turf/center";
+import { feature } from "@turf/helpers";
 import { getMapCenter } from "@utils/location";
 import debounce from "debounce-promise";
 import dynamic from "next/dynamic";
@@ -30,7 +32,15 @@ const onQuery = async (q) => {
   }));
 };
 
-export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave, mb = 2 }) {
+export default function WKTSearch({
+  labelTitle,
+  nameTitle,
+  nameTopology,
+  centroid,
+  onSave,
+  isDisabled = false,
+  mb = 2
+}) {
   const [selected, setSelected] = useState<any>();
   const onQueryDebounce = debounce(onQuery, 200);
   const gmapsSearchRef = useRef<any>(null);
@@ -42,7 +52,8 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
       onSave({
         geoEntityId,
         [nameTitle]: label,
-        [nameTopology]: wkt.stringify(value)
+        [nameTopology]: wkt.stringify(value),
+        [centroid]: center(feature(value))
       });
       setSelected(null);
     }
@@ -101,6 +112,7 @@ export default function WKTSearch({ labelTitle, nameTitle, nameTopology, onSave,
         colorScheme="blue"
         maxW="6rem"
         leftIcon={<AddIcon />}
+        isDisabled={isDisabled}
         onClick={handleOnSave}
       >
         {t("ADD")}

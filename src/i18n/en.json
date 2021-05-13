@@ -72,6 +72,36 @@
   "CLEAR": "Clear",
   "CLOSE": "Close",
   "COPY": "Copy to Clipboard",
+  "DATATABLE": {
+    "ATTRIBUTION": "Attribution",
+    "BASIS_OF_DATA": "Basis of Data",
+    "BASIS_OF_RECORD": "Basis of Record",
+    "CONTRIBUTOR": "contributor",
+    "CREATE_DATATABLE": "Create DataTable",
+    "FIELD_MAPPING_TABLE": "Field Mapping Table",
+    "FILES_UPLOAD": "Files Uploads",
+    "GEOGRAPHICAL_COVERAGE": "Geographic Coverage",
+    "IS_VERIFIED": "Observation Verified",
+    "LOCATION_ACCURACY": "Location Accuracy",
+    "LOCATION_SCALE": "Location Scale",
+    "MEDIA_UPLOADER": "Media Uploader",
+    "METHODS": "Methods",
+    "NOTIFICATIONS": {
+      "ERROR": "Unable to create datatable",
+      "SHEET_UPLOAD_ERROR": "Unable to Upload sheet",
+      "SHEET_UPLOAD_SUCCESS": "Successfully Uploaded sheet",
+      "SUCCESS": "Datatable created successfully"
+    },
+    "OTHERS": "Others",
+    "PARTY": "Party",
+    "PROJECT": "Project",
+    "SHEET_UPLOADER": "Spreadsheet Uploader",
+    "SHOW_PAGE": "Datatable Details",
+    "TAXONOMY": "Taxonomic Coverage",
+    "TEMPORAL": "Temporal Coverage",
+    "TITLE": "General Metadata",
+    "UPLOAD_AGAIN": "Upload Again"
+  },
   "DELETE": "Delete",
   "DOCUMENT": {
     "BASIC_INFORMATION": "Basic Information",
@@ -703,6 +733,7 @@
     "CUSTOM_FIELDS": "Custom Fields",
     "DATE_ACCURACY": "Date Accuracy",
     "DELETE_FILE": {
+      "ERROR": "Unable to process file,Please try again later",
       "FAILED": "Unable to delete file, please try again later",
       "SUCCESS": "File deleted successfully"
     },

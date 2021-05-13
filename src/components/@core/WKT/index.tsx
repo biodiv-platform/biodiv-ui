@@ -2,7 +2,8 @@ import { FormControl, FormLabel, Input, SimpleGrid } from "@chakra-ui/react";
 import notification from "@utils/notification";
 import React, { useRef, useState } from "react";
 import wkt from "wkt";
-
+import { feature } from "@turf/helpers";
+import center from "@turf/center";
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
 
@@ -11,6 +12,7 @@ export interface WKTProps {
   label: string;
   nameTitle: string;
   nameTopology: string;
+  centroid: string;
   labelTitle: string;
   labelTopology: string;
   mb?: number;
@@ -23,6 +25,7 @@ export default function WKT({
   nameTopology,
   labelTitle,
   labelTopology,
+  centroid,
   mb = 4,
   disabled,
   onSave
@@ -37,7 +40,8 @@ export default function WKT({
     if (titleValue && geojson) {
       onSave({
         [nameTitle]: titleValue,
-        [nameTopology]: wkt.stringify(geojson)
+        [nameTopology]: wkt.stringify(geojson),
+        [centroid]: center(feature(geojson))
       });
 
       // Reset Fields
@@ -81,7 +85,7 @@ export default function WKT({
             isDisabled={disabled}
           />
         </FormControl>
-        <SaveButton onClick={handleOnSave} />
+        <SaveButton isDisabled={disabled} onClick={handleOnSave} />
       </SimpleGrid>
       <GeoJSONPreview data={geojson} />
     </div>

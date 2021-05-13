@@ -122,7 +122,7 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
   }, [form.register]);
 
   useEffect(() => {
-    if (watchLatLng["resources"].length > 0) {
+    if (watchLatLng["resources"]?.length > 0) {
       setHideLocationPicker(watchLatLng["latitude"] > 0 && watchLatLng["longitude"] > 0);
     }
   }, [watchLatLng]);

@@ -22,6 +22,7 @@ interface IDatePickerBoxProps {
   label: string;
   mb?: number;
   disabled?: boolean;
+  disableInput?:boolean;
   hint?: string;
   dateFormat?: string;
   style?;
@@ -38,6 +39,7 @@ const DateRangePickerField = ({
   mb = 4,
   hint,
   disabled = true,
+  disableInput=false,
   subscribe = false,
   hasMaxDate = true,
   dateFormat = "d-m-Y",
@@ -74,6 +76,7 @@ const DateRangePickerField = ({
           onChange={setDate}
           render={({ defaultValue, value, ...props }, ref) => (
             <Input
+              disabled={disableInput}
               isReadOnly={disabled}
               id={name}
               {...props}

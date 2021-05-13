@@ -1,18 +1,17 @@
+import { TimeIcon } from "@chakra-ui/icons";
 import { Button, Heading, Text } from "@chakra-ui/react";
-import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
-import { resizeMultiple } from "@utils/image";
+import useTranslation from "@hooks/use-translation";
+import { axUploadObservationResource } from "@services/files.service";
+import { getAssetObject } from "@utils/image";
+import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-
-import useObservationCreate from "../use-observation-resources";
 
 const DropTargetBox = styled.div`
   border: 2px dashed var(--gray-300);
   border-radius: 0.5rem;
   padding: 1rem;
-  min-height: 22rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +25,7 @@ const DropTargetBox = styled.div`
   &[data-has-resources="false"] {
     grid-column: 1/6;
   }
+
   svg {
     display: block;
     font-size: 2.5rem;
@@ -34,30 +34,51 @@ const DropTargetBox = styled.div`
   }
 `;
 
-export const accept = ["image/jpg", "image/jpeg", "image/png", "video/*", "audio/*","application/zip", "application/x-zip-compressed"];
+const accept = [
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.ms-excel"
+];
+interface userGroupDropTarget {
+  setValue;
+  setFieldMapping;
+  simpleUpload?: boolean;
+}
 
-export default function DropTarget({ assetsSize }) {
+export default function DropTarget({
+  setValue,
+  simpleUpload,
+  setFieldMapping
+}: userGroupDropTarget) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
-  const { addAssets } = useObservationCreate();
 
-  const handleOnDrop = async (files) => {
+  const handleOnDrop = async ([file]) => {
     setIsProcessing(true);
-    const resizedAssets = await resizeMultiple(files);
+    if (!file) {
+      return;
+    }
 
-    addAssets(resizedAssets, true);
+    const { success, data } = await axUploadObservationResource(getAssetObject(file), "datasets");
+    if (success) {
+      setFieldMapping(data.excelJson);
+      setValue(data.path);
+      notification(t("DATATABLE.NOTIFICATIONS.SHEET_UPLOAD_SUCCESS"), NotificationType.Success);
+    } else {
+      notification(t("DATATABLE.NOTIFICATIONS.SHEET_UPLOAD_ERROR"), NotificationType.Error);
+    }
+
     setIsProcessing(false);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: handleOnDrop,
-    accept
+    accept,
+    onDrop: handleOnDrop
   });
 
   return (
     <DropTargetBox
+      style={{ minHeight: simpleUpload ? "6rem" : "13rem" }}
       {...getRootProps()}
-      data-has-resources={!!assetsSize}
       data-dropping={isDragActive}
     >
       <input {...getInputProps()} />
@@ -66,11 +87,8 @@ export default function DropTarget({ assetsSize }) {
           <TimeIcon />
           <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
         </div>
-      ) : isDragActive ? (
-        <div className="fade">
-          <ArrowUpIcon />
-          <span>{t("OBSERVATION.UPLOADER.LABEL_RELEASE")}</span>
-        </div>
+      ) : simpleUpload ? (
+        <Button colorScheme="blue" variant="outline" children={t("OBSERVATION.UPLOADER.UPLOAD")} />
       ) : (
         <div className="fade">
           <Heading size="md">{t("OBSERVATION.UPLOADER.LABEL")}</Heading>

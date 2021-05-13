@@ -25,6 +25,7 @@
     "@rehooks/online-status": "^1.1.2",
     "@sentry/react": "^6.3.5",
     "@tinymce/tinymce-react": "^3.12.3",
+    "@turf/turf": "^6.3.0",
     "array-move": "^3.0.1",
     "axios": "^0.21.1",
     "base64-url": "^2.3.3",
