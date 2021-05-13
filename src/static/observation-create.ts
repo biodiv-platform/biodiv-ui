@@ -43,4 +43,91 @@ export const ASSET_TYPES = {
   AUDIO: "audio"
 };
 
+export const OBSERVATION_FIELDS = [
+  {
+    label: "Species Group",
+    value: "sGroup"
+  },
+  {
+    label: "Checklist Annotation",
+    value: "checklistAnnotation"
+  },
+  {
+    label: "From Date",
+    value: "fromDate"
+  },
+  {
+    label: "geoPrivacy",
+    value: "geoPrivacy"
+  },
+  {
+    label: "To Date",
+    value: "toDate"
+  },
+  {
+    label: "Observed At",
+    value: "observedAt"
+  },
+  {
+    label: "User",
+    value: "user"
+  },
+  {
+    label: "Location Scale",
+    value: "locationScale"
+  },
+  {
+    label: "Location Scale",
+    value: "locationScale"
+  },
+  {
+    label: "Longitude",
+    value: "longitude"
+  },
+  {
+    label: "Latitude",
+    value: "latitude"
+  },
+  {
+    label: "Date Accuracy",
+    value: "dateAccuracy"
+  },
+  {
+    label: "Notes",
+    value: "notes"
+  },
+  {
+    label: "Filename",
+    value: "fileName"
+  },
+  {
+    label: "Common Name",
+    value: "commonName"
+  },
+  {
+    label: "Comment",
+    value: "comment"
+  },
+  {
+    label: "Scientific Name",
+    value: "scientificName"
+  },
+  {
+    label: "Tags",
+    value: "tags"
+  },
+  {
+    label: "License",
+    value: "license"
+  },
+  {
+    label: "Geo Privacy",
+    value: "geoPrivacy"
+  },
+  {
+    label: "User Groups",
+    value: "userGroups"
+  }
+];
+
 export const LOCAL_ASSET_PREFIX = "ibpmu-";

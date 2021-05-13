@@ -17,7 +17,7 @@ import useObservationCreate from "../use-observation-resources";
 import Checkbox from "./checkbox";
 import DropTarget from "./drop-target";
 
-const MyUploadsImages = ({ onDone }) => {
+const MyUploadsImages = ({ onDone, hasTabs = true }) => {
   const { assets, observationAssets, resourcesSortBy, setResourcesSortBy } = useObservationCreate();
   const { t } = useTranslation();
 
@@ -46,15 +46,17 @@ const MyUploadsImages = ({ onDone }) => {
               </option>
             ))}
           </Select>
-          <Button
-            flexShrink={0}
-            type="button"
-            leftIcon={<CheckIcon />}
-            onClick={onDone}
-            colorScheme="blue"
-          >
-            {t("OBSERVATION.USE_IN_OBSERVATION")}
-          </Button>
+          {hasTabs && (
+            <Button
+              flexShrink={0}
+              type="button"
+              leftIcon={<CheckIcon />}
+              onClick={onDone}
+              colorScheme="blue"
+            >
+              {t("OBSERVATION.USE_IN_OBSERVATION")}
+            </Button>
+          )}
         </Flex>
       </Flex>
       <SimpleGrid columns={[3, 4, 5, 8]} gridGap={4} className="custom-checkbox-group">

@@ -336,6 +336,19 @@ export const axUpdateCustomField = async (payload) => {
   }
 };
 
+export const axBulkObservationData = async (payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.OBSERVATION}/v1/observation/bulk/observation`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e.response.data.message);
+    return { success: false };
+  }
+};
+
 export const axGetListData = async (params, index = "extended_observation", type = "_doc") => {
   try {
     const { data } = await plainHttp.get(
