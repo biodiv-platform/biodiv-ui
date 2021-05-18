@@ -2,7 +2,7 @@ import { Box, Heading, Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
-import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import { getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
 import React from "react";
 
@@ -21,11 +21,7 @@ export default function GridViewCard({ o }) {
               bg="white"
               w="full"
               h="full"
-              src={getResourceThumbnail(
-                RESOURCE_CTX.SPECIES,
-                o.reprImage,
-                RESOURCE_SIZE.LIST_THUMBNAIL
-              )}
+              src={getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL)}
               fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
               alt={simpleName}
             />
