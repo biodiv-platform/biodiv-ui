@@ -74,57 +74,70 @@ export default function SpeciesFieldGroup({
     }
   }, [currentField, childFieldsHasValue]);
 
-  // References
-  if (parentField.id === 81) {
-    return <ReferencesField currentField={currentField} parentField={parentField} level={level} />;
-  }
+  switch (parentField.id) {
+    // ParentField
+    case 65: {
+      return <OccuranceRecoardSpeciesField valueCallback={setChildFieldsHasValue} />;
+    }
 
-  // Documents
-  if (parentField.id === 82) {
-    return <DocumentsField />;
-  }
+    // References
+    case 81: {
+      return (
+        <ReferencesField currentField={currentField} parentField={parentField} level={level} />
+      );
+    }
 
-  // ParentField
-  if (parentField.id === 65) {
-    return <OccuranceRecoardSpeciesField valueCallback={setChildFieldsHasValue} />;
-  }
+    // Documents
+    case 82: {
+      return <DocumentsField />;
+    }
 
-  return (
-    <Box>
-      <div data-hidden={!childFieldsHasValue && !showHiddenFields} style={{ overflow: "initial" }}>
-        <Stack spacing={3} mb={6}>
-          {/* Field Heading */}
-          <SpeciesFieldHeading id={parentField?.header} title={parentField?.header} level={level} />
+    default: {
+      return (
+        <div>
+          <div
+            data-hidden={!childFieldsHasValue && !showHiddenFields}
+            style={{ overflow: "initial" }}
+          >
+            <Stack spacing={3} mb={6}>
+              {/* Field Heading */}
+              <SpeciesFieldHeading
+                id={parentField?.header}
+                title={parentField?.header}
+                level={level}
+              />
 
-          {/* Create Field */}
-          {permissions.isContributor && childField.length === 0 && (
-            <SpeciesFieldSimpleCreate fieldId={parentField?.id} />
-          )}
+              {/* Create Field */}
+              {permissions.isContributor && childField.length === 0 && (
+                <SpeciesFieldSimpleCreate fieldId={parentField?.id} />
+              )}
 
-          {/* Field Traits */}
-          {currentField.traits.map((trait) => (
-            <SpeciesTraitView
-              key={trait.id}
-              trait={trait}
-              setShowCategory={setChildFieldsHasValue}
+              {/* Field Traits */}
+              {currentField.traits.map((trait) => (
+                <SpeciesTraitView
+                  key={trait.id}
+                  trait={trait}
+                  setShowCategory={setChildFieldsHasValue}
+                />
+              ))}
+
+              {/* Field Content */}
+              {currentField.values.map((value) => (
+                <SpeciesFieldSimple key={value.id} value={value} />
+              ))}
+            </Stack>
+          </div>
+
+          {childField.map((field) => (
+            <SpeciesFieldGroup
+              key={field.parentField?.id}
+              valueCallback={setChildFieldsHasValue}
+              {...field}
+              level={level + 1}
             />
           ))}
-
-          {/* Field Content */}
-          {currentField.values.map((value) => (
-            <SpeciesFieldSimple key={value.id} value={value} />
-          ))}
-        </Stack>
-      </div>
-
-      {childField.map((field) => (
-        <SpeciesFieldGroup
-          key={field.parentField?.id}
-          valueCallback={setChildFieldsHasValue}
-          {...field}
-          level={level + 1}
-        />
-      ))}
-    </Box>
-  );
+        </div>
+      );
+    }
+  }
 }
