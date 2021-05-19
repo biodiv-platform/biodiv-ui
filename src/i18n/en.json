@@ -1108,6 +1108,15 @@
     "VIEW_ORIGINAL": "view original"
   },
   "SUCCESS": "Success",
+  "TAXON": {
+    "REQUEST": {
+      "BUTTON": "Request",
+      "FAILURE": "error while requesting permission",
+      "SUCCESS": "taxon permission requested successfully",
+      "TITLE": "Request Permission"
+    },
+    "ROLE": "Role"
+  },
   "TOGGLE": "toggle",
   "UNAUTHORIZED": "Unauthorized User",
   "USER": {
