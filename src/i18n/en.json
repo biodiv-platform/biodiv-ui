@@ -883,7 +883,7 @@
       "UPLOADING": "Uploading..."
     },
     "USE_DMS": "Use DMS",
-    "USE_IN_OBSERVATION": "Use in observation",
+    "USE_IN_OBSERVATION": "Use Selected",
     "USE_LAST_VALUE": "Use last value",
     "USE_LAT_LNG": "Use Lat-Long",
     "USERGROUPS": "Groups",

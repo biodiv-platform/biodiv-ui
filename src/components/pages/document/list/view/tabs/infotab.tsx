@@ -14,6 +14,7 @@ import PawIcon from "@icons/paw";
 import PeopleIcon from "@icons/people";
 import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 import { getUserImage } from "@utils/media";
+import { getInjectableHTML } from "@utils/text";
 import React from "react";
 
 interface InfoTabInterface {
@@ -24,10 +25,25 @@ interface InfoTabInterface {
   flags?;
 }
 
-const MetaBlock = ({ icon, children, tooltip }) =>
+interface MetaBlockProps {
+  icon?;
+  children?;
+  isHtml?: boolean;
+  tooltip?;
+}
+
+const MetaBlock = ({ icon, children, isHtml, tooltip }: MetaBlockProps) =>
   children ? (
     <HStack alignItems="center" spacing={2} title={tooltip}>
-      {icon} <div className="elipsis">{children}</div>
+      {icon}
+      {isHtml ? (
+        <div
+          className="elipsis"
+          dangerouslySetInnerHTML={{ __html: getInjectableHTML(children) }}
+        />
+      ) : (
+        <div className="elipsis" children={children} />
+      )}
     </HStack>
   ) : null;
 
@@ -50,9 +66,13 @@ export default function InfoTab({
           <a>
             <HStack alignItems="center" spacing={4}>
               <DocumentIcon />
-              <Heading fontSize="lg" className="elipsis-2">
-                {document?.title || t("DOCUMENT.UNKNOWN")}
-              </Heading>
+              <Heading
+                fontSize="lg"
+                className="elipsis-2"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(document?.title || t("DOCUMENT.UNKNOWN"))
+                }}
+              />
               <Badge colorScheme="red">{document.itemtype}</Badge>
             </HStack>
           </a>
@@ -85,13 +105,14 @@ export default function InfoTab({
         <MetaBlock
           icon={<BookIcon />}
           tooltip={t("DOCUMENT.BIB.JOURNAL")}
+          isHtml={true}
           children={document?.journal}
         />
-        {/* regex filter tags and special characters */}
         <MetaBlock
           icon={<MessageIcon />}
           tooltip={t("DOCUMENT.BIB.ABSTRACT")}
-          children={document?.notes?.replace(/<[^>]*(>|$)|&nbsp;|&gt;/g, "")}
+          isHtml={true}
+          children={document?.notes}
         />
         <Flex alignItems="flex-end" justifyContent="space-between">
           <Stack>
