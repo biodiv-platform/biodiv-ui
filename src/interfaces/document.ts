@@ -52,6 +52,12 @@ export interface BibTexItemType {
   value?: number; // int64
   label?: string;
 }
+export interface BulkUploadExcelData {
+  fileName?: string;
+  fieldMapping?: {
+    [name: string]: number; // int32
+  };
+}
 export interface CommentLoggingData {
   body?: string;
   rootHolderId?: number; // int64
@@ -79,6 +85,7 @@ export interface Document {
   coverageId?: number; // int64
   createdOn?: string; // date-time
   notes?: string;
+  doi?: string;
   lastRevised?: string; // date-time
   licenseId?: number; // int64
   sourceHolderId?: number; // int64
@@ -138,18 +145,24 @@ export interface Document {
   itemtype?: string;
   isbn?: string;
   extra?: string;
-  doil?: string;
   uFileId?: number; // int64
 }
 export interface DocumentCoverage {
   id?: number; // int64
   documentId?: number; // int64
+  geoEntityId?: number; // int64
   placeName?: string;
   topology?: Geometry;
+  landscapeIds?: number; // int64
+  topologyWKT?: string;
 }
 export interface DocumentCoverageData {
+  id?: number; // int64
+  documentId?: number; // int64
+  landscapeIds?: number; // int64
   placename?: string;
   topology?: string;
+  geoEntityId?: number; // int64
 }
 export interface DocumentCreateData {
   contribution?: string;
@@ -164,28 +177,56 @@ export interface DocumentCreateData {
   tags?: Tags[];
   speciesGroupIds?: number /* int64 */[];
   habitatIds?: number /* int64 */[];
-  geoentitiesId?: number /* int64 */[];
   docCoverageData?: DocumentCoverageData[];
   userGroupId?: number /* int64 */[];
+}
+export interface DocumentEditData {
+  documentId?: number; // int64
+  itemTypeId?: number; // int64
+  contribution?: string;
+  attribution?: string;
+  licenseId?: number; // int64
+  fromDate?: string; // date-time
+  rating?: number; // int32
+  bibFieldData?: BibFieldsData;
+  docCoverage?: DocumentCoverage[];
+  ufileData?: UFile;
+}
+export interface DocumentListParams {
+  location?: string;
 }
 export interface DocumentMailData {
   documentId?: number; // int64
   createdOn?: string; // date-time
   authorId?: number; // int64
 }
+export interface DocumentMeta {
+  id?: number; // int64
+  title?: string;
+  desc?: string;
+  author?: UserIbp;
+  createdOnDate?: string; // date-time
+  displayOrder?: number; // int32
+}
 export interface DocumentUserPermission {
   userGroupMember?: UserGroupIbp[];
   userGroupFeature?: UserGroupIbp[];
   following?: boolean;
 }
+export interface DownloadLogData {
+  filePath?: string;
+  filterUrl?: string;
+  status?: string;
+  fileType?: string;
+}
 export interface Envelope {
   maxX?: number; // double
   maxY?: number; // double
   area?: number; // double
-  width?: number; // double
-  height?: number; // double
   minX?: number; // double
   minY?: number; // double
+  width?: number; // double
+  height?: number; // double
   null?: boolean;
 }
 export interface Featured {
@@ -235,9 +276,16 @@ export interface Follow {
 export interface Geometry {
   envelope?: Geometry;
   factory?: GeometryFactory;
-  userData?: unknown;
-  simple?: boolean;
+  userData?: {
+    [key: string]: any;
+  };
   numGeometries?: number; // int32
+  precisionModel?: PrecisionModel;
+  numPoints?: number; // int32
+  coordinate?: Coordinate;
+  geometryType?: string;
+  srid?: number; // int32
+  coordinates?: Coordinate[];
   rectangle?: boolean;
   area?: number; // double
   centroid?: Point;
@@ -245,14 +293,9 @@ export interface Geometry {
   boundary?: Geometry;
   boundaryDimension?: number; // int32
   envelopeInternal?: Envelope;
-  coordinate?: Coordinate;
-  srid?: number; // int32
-  geometryType?: string;
-  precisionModel?: PrecisionModel;
-  coordinates?: Coordinate[];
-  numPoints?: number; // int32
-  valid?: boolean;
+  simple?: boolean;
   dimension?: number; // int32
+  valid?: boolean;
   length?: number; // double
   empty?: boolean;
 }
@@ -273,10 +316,16 @@ export interface Language {
   isDirty?: boolean;
   region?: string;
 }
+export interface License {
+  id?: number; // int64
+  name?: string;
+  url?: string;
+}
 export interface MailData {
   observationData?: ObservationMailData;
   documentMailData?: DocumentMailData;
   userGroupData?: UserGroupMailData[];
+  speciesData?: SpeciesMailData;
 }
 export interface MyJson {
   aid?: number; // int64
@@ -300,35 +349,37 @@ export interface ObservationMailData {
 export interface Point {
   envelope?: Geometry;
   factory?: GeometryFactory;
-  userData?: unknown;
+  userData?: {
+    [key: string]: any;
+  };
   coordinates?: Coordinate[];
-  simple?: boolean;
-  boundary?: Geometry;
-  boundaryDimension?: number; // int32
-  coordinateSequence?: CoordinateSequence;
+  numPoints?: number; // int32
   coordinate?: Coordinate;
   geometryType?: string;
-  numPoints?: number; // int32
-  dimension?: number; // int32
+  coordinateSequence?: CoordinateSequence;
+  boundary?: Geometry;
+  boundaryDimension?: number; // int32
   y?: number; // double
   x?: number; // double
+  simple?: boolean;
+  dimension?: number; // int32
   empty?: boolean;
   numGeometries?: number; // int32
+  precisionModel?: PrecisionModel;
+  srid?: number; // int32
   rectangle?: boolean;
   area?: number; // double
   centroid?: Point;
   interiorPoint?: Point;
   envelopeInternal?: Envelope;
-  srid?: number; // int32
-  precisionModel?: PrecisionModel;
   valid?: boolean;
   length?: number; // double
 }
 export interface PrecisionModel {
   scale?: number; // double
   maximumSignificantDigits?: number; // int32
-  offsetY?: number; // double
   offsetX?: number; // double
+  offsetY?: number; // double
   floating?: boolean;
   type?: Type;
 }
@@ -343,12 +394,19 @@ export interface ShowDocument {
   speciesGroupIds?: number /* int64 */[];
   flag?: FlagShow[];
   tags?: Tags[];
+  documentLicense?: License;
 }
 export interface SpeciesGroup {
   id?: number; // int64
   name?: string;
   parentGroupId?: number; // int64
   groupOrder?: number; // int32
+}
+export interface SpeciesMailData {
+  speciesId?: number; // int64
+  speciesName?: string;
+  iconUrl?: string;
+  authorId?: number; // int64
 }
 export interface Tags {
   id?: number; // int64

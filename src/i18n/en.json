@@ -15,8 +15,15 @@
   "ACTIVITY_TYPE": {
     "ADDED_A_COMMENT": "commented",
     "ADDED_A_FACT": "added fact",
+    "ADDED_COMMON_NAME": "added common name",
+    "ADDED_SPECIES_FIELD": "added species field",
+    "ADDED_SYNONYM": "added synonym",
     "AGREED_ON_SPECIES_NAME": "agreed on species name",
+    "CREATED_SPECIES": "species created",
     "CUSTOM_FIELD_EDITED": "custom field edited",
+    "DELETED_COMMON_NAME": "deleted common name",
+    "DELETED_SPECIES_FIELD": "deleted species field",
+    "DELETED_SYNONYM": "deleted synonym",
     "DOCUMENT_CREATED": "document created",
     "DOCUMENT_TAG_UPDATED": "updated tags",
     "DOCUMENT_UPDATED": "document updated",
@@ -36,7 +43,11 @@
     "SUGGESTION_REMOVED": "removed suggestion",
     "UNFEATURED": "unfeatured from group",
     "UNFLAGGED": "flagged",
-    "UPDATED_FACT": "updated fact"
+    "UPDATED_COMMON_NAME": "updated common name",
+    "UPDATED_FACT": "updated fact",
+    "UPDATED_SPECIES_FIELD": "updated species field",
+    "UPDATED_SPECIES_GALLERY": "updated species gallery",
+    "UPDATED_SYNONYM": "updated synonym"
   },
   "ADD": "Add",
   "ADMIN": {
@@ -176,7 +187,10 @@
     },
     "SELECTED_PLACES": "Selected Places",
     "SHARE": "Share this document",
-    "TAGS": "Tags",
+    "TAGS": {
+      "NOT_FOUND": "No Tags(s) found",
+      "TITLE": "Tags"
+    },
     "TITLE": "Title",
     "TYPE": "Type",
     "UNFOLLOW": "Unfollow Document",
@@ -686,6 +700,8 @@
   "LOAD_MORE": "Load More ↺",
   "LOADING": "Loading...",
   "NEXT": "Next",
+  "NO_DATA": "No Data",
+  "NO_RESULTS": "No results found",
   "NOTIFICATIONS": {
     "INVALID_CREDENTIALS": "The username or password you entered is incorrect.",
     "TOKEN_ERROR": "Error fetching token",
@@ -802,6 +818,7 @@
     "PLACE": "Place",
     "POINTS_GAINED": "${points} activity point(s) gained",
     "POST_TO_GROUPS": "Post to Groups",
+    "RANGE_HINT": "use : to septate range values",
     "RATE_SUCCESS": "Media successfully rated",
     "RATING": "Rating",
     "RELATED": "Related Observations",
@@ -889,6 +906,7 @@
       "INVALID_OR_EXPIRED_OTP": "The OTP entered is incorrect or expired",
       "OTP_ATTEMPTS_EXCEEDED": "Maximum no of OTP attempts exceeded",
       "OTP_REGENERATED": "OTP Resent",
+      "USER_VERIFICATION_SUCCESSFUL": "Successfully Verified",
       "VERIFIED_OR_OTP_DELETED": "Invalid or Expired OTP, please regenerate"
     },
     "RESEND": "Resend OTP",
@@ -897,7 +915,7 @@
   },
   "PAGE": {
     "CREATE": {
-      "FAILLURE": "Unable to create page",
+      "FAILURE": "Unable to create page",
       "SUCCESS": "Page created successfully",
       "TITLE": "Create Page"
     },
@@ -925,11 +943,12 @@
       "UPDATED": "Order Updated Successfully"
     },
     "UPDATE": {
-      "FAILLURE": "Unable to update page",
+      "FAILURE": "Unable to update page",
       "SUCCESS": "Page updated successfully",
       "TITLE": "Update Page"
     }
   },
+  "PERMALINK": "Permalink",
   "PREV": "Previous",
   "PROCESSING": "Processing...",
   "SAVE": "Save",
@@ -947,7 +966,157 @@
     "TITLE": "Sign in",
     "WITH_GOOGLE": "Sign in with Google"
   },
+  "SPECIES": {
+    "ADD_REFERENCE": "Add Reference",
+    "ALL_MEDIA": "All Media",
+    "ATTRIBUTIONS": "Attributions",
+    "COMMON_NAME": {
+      "DELETE": {
+        "DIALOUGE": "Are you sure?",
+        "FAILURE": "unable to delete name",
+        "SUCCESS": "name deleted successfully"
+      },
+      "FORM": {
+        "LANGUAGE": "Language",
+        "NAME": "Name"
+      },
+      "PREFERRED": {
+        "FAILURE": "unable to update preferred name",
+        "SUCCESS": "preferred name updated successfully",
+        "TITLE": "Preferred"
+      },
+      "SAVE": {
+        "FAILURE": "unable to save name",
+        "SUCCESS": "name saved successfully"
+      }
+    },
+    "COMMON_NAMES": "Common Names",
+    "CONTRIBUTE": {
+      "CREATE_SPECIES": "Create new species",
+      "DESCRIPTION": "Species pages are descriptions of species, with one page for every species. Each species can be described with over 60 standard set of fields. Species pages are contributed and curated by experts. All information published on the Portal will be on public access and under the Creative Commons License of your choice.",
+      "DOWNLOAD": "Download sample XLSX",
+      "EMAIL": "Email Us",
+      "OFFLINE": {
+        "DESCRIPTION": "You may use our spreadsheet template to work offline and create species information. The template consists of one row per species. Please download the xlsx spreadsheet, and fill in multiple species descriptions in the spreadsheet, have a directory of images, zip the directory and send it to us on below email and we will then upload the content on your behalf.",
+        "TITLE": "Offline creation of species pages: "
+      },
+      "ONLINE": {
+        "DESCRIPTION": "To create a new species you should have write permission on the page. Permissions can be requested for a taxa. Please request permissions using the buttons below",
+        "TITLE": "Online creation of species pages: "
+      },
+      "REQUEST_PERMISSION": "Request Permission"
+    },
+    "CONTRIBUTORS": "Contributors",
+    "CREATE": {
+      "CREATING_PAGE": "Please wait while species page is being created.",
+      "DESC_1": "Contributors need to have create rights on the species page in order to add content. If you have not already been allotted rights",
+      "DESC_2": "Please input a species name and validate. If a name is validated and found to already exist on the portal, you will be taken to the species page to add content. If the name is validated and found to be new, you can fill in the taxonomic hierarchy so that the new species page can be created. Author string is compulsory for species levels and lower.",
+      "ERROR": "Unable to create species page",
+      "FORM": {
+        "NAME": "Name",
+        "NAME_PLACEHOLDER": "i.e. Triclinum sorediatum",
+        "RANK": "Rank",
+        "SEARCH": "Search",
+        "SELECT": "Select",
+        "TAXON": {
+          "CREATE": "Create Taxon",
+          "PARENT": "Parent Match",
+          "SELECT": "Matched"
+        },
+        "USE_TAXON": "Use this Taxon",
+        "VALIDATE": "Validate"
+      },
+      "TAXON_ERROR": "Unable to validate",
+      "TITLE": "Add Species",
+      "VALIDATE_ERROR": "Unable to validate"
+    },
+    "EDIT_NAME": "Manage Common Name",
+    "EDIT_SYNONYM": "Manange Synonym",
+    "FIELD": {
+      "DELETE": {
+        "FAILURE": "Unable to delete field",
+        "SUCCESS": "Field deleted Successfully"
+      },
+      "MANAGE": "Manage Field",
+      "UPDATE": {
+        "FAILURE": "Unable to update field",
+        "SUCCESS": "Field Updated Successfully"
+      }
+    },
+    "FOLLOW_SPECIES": "Follow Species",
+    "GALLERY": {
+      "UPDATE": {
+        "FAILURE": "unable to update gallery",
+        "SUCCESS": "gallery updated successfully"
+      }
+    },
+    "GROUPS": {
+      "TITLE": "Groups"
+    },
+    "LICENSES": "Licenses",
+    "LIST": {
+      "TITLE": "Species List"
+    },
+    "MANAGE_MEDIA": "Manage Media",
+    "OBSERVATION_MEDIA": "Observation Media",
+    "PULL_MEDIA": "Pull Media",
+    "REFERENCES": "References",
+    "RELATED": {
+      "TITLE": "Related Observations"
+    },
+    "REMOVE": {
+      "DESCRIPTION": "Are you sure? You can't undo this action afterwards.",
+      "SUCCESS": "Species deleted successfully",
+      "TITLE": "Delete species"
+    },
+    "SHARE": "Share this species",
+    "STATUS": "Status",
+    "SYNONYM": {
+      "ADD": {
+        "FAILURE": "unable to add synonym",
+        "SUCCESS": "synonym added successfully"
+      },
+      "DELETE": {
+        "DIALOUGE": "Are you sure?",
+        "FAILURE": "unable to delete synonym",
+        "SUCCESS": "synonym deleted successfully"
+      },
+      "FORM": {
+        "DATASOURCE": "Datasource",
+        "DATASOURCE_ID": "Datasource Id",
+        "NAME": "Name",
+        "RANK": "Rank",
+        "TYPE": "Type"
+      },
+      "UPDATE": {
+        "FAILURE": "unable to update synonym",
+        "SUCCESS": "synonym updated successfully"
+      }
+    },
+    "SYNONYMS": "Synonyms",
+    "TAXON": "Taxonomy",
+    "TOGGLE_EMPTY": "Toggle Empty",
+    "TRAITS": {
+      "RANGE_HINT": "use : to septate range values",
+      "TITLE": "Traits",
+      "UPDATE": {
+        "FAILURE": "Unable to update Trait",
+        "SUCCESS": "Trait Updated Successfully"
+      }
+    },
+    "UNFOLLOW_SPECIES": "Follow Species",
+    "VIEW_ORIGINAL": "view original"
+  },
   "SUCCESS": "Success",
+  "TAXON": {
+    "REQUEST": {
+      "BUTTON": "Request",
+      "FAILURE": "error while requesting permission",
+      "SUCCESS": "taxon permission requested successfully",
+      "TITLE": "Request Permission"
+    },
+    "ROLE": "Role"
+  },
   "TOGGLE": "toggle",
   "UNAUTHORIZED": "Unauthorized User",
   "USER": {

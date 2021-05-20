@@ -83,6 +83,7 @@
     "react-web-share": "^1.1.0",
     "react-window": "^1.8.6",
     "tinymce": "^5.7.1",
+    "url-slug": "^3.0.1",
     "use-immer": "^0.5.1",
     "use-indexeddb": "^1.0.4-r2-alpha",
     "use-timer": "^2.0.1",

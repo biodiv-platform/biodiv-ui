@@ -1,13 +1,13 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import CheckBox from "@components/form/checkbox";
 import Submit from "@components/form/submit-button";
+import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axBulkObservationData } from "@services/observation.service";
 import { DEFAULT_BASIS_OF_DATA, DEFAULT_BASIS_OF_RECORD } from "@static/datatable";
-import { DEFAULT_LICENSE } from "@static/licenses";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
@@ -125,7 +125,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         dateToUTC(observedDateRange[1]).format() || dateToUTC(observedDateRange[0]).format(),
       wktString: topology,
       useDegMinSec: false,
-      licenseId: DEFAULT_LICENSE,
+      licenseId: SITE_CONFIG.LICENSE.DEFAULT,
       dataset: datasetId || null,
       createdOn: dateToUTC().format(),
       ...props

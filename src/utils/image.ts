@@ -1,6 +1,6 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import { AssetStatus } from "@interfaces/custom";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
-import { DEFAULT_LICENSE } from "@static/licenses";
 import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import notification from "@utils/notification";
 import loadImage from "blueimp-load-image";
@@ -62,7 +62,7 @@ export const getAssetObject = (file, meta?) => {
     url: null,
     path: `/${hashKey}/${fileName}`,
     type: file.type,
-    licenceId: DEFAULT_LICENSE,
+    licenseId: SITE_CONFIG.LICENSE.DEFAULT,
     status: AssetStatus.Pending,
     dateUploaded: new Date().getTime(),
     caption: "",

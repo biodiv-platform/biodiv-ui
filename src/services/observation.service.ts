@@ -76,11 +76,11 @@ export const axUpdateTraitById = async (observationId, traitId, valueList) => {
     await waitForAuth();
     const { data } = await http.put(
       `${ENDPOINT.OBSERVATION}/v1/observation/update/traits/${observationId}/${traitId}`,
-      Array.isArray(valueList) ? valueList : [valueList]
+      valueList
     );
     return { success: true, data };
   } catch (e) {
-    console.error(e.response.data.message);
+    console.error(e);
     return { success: false, data: [] };
   }
 };
@@ -240,7 +240,7 @@ export const axCreateObservation = async ({
       type: r.type,
       caption: r.caption,
       rating: r.rating,
-      licenceId: r.licenceId
+      licenseId: r.licenseId
     }));
 
     const endpoint = customFieldData

@@ -1,8 +1,15 @@
+export interface DocumentMailData {
+  documentId?: number; // int64
+  createdOn?: string; // date-time
+  authorId?: number; // int64
+}
 export interface FactValuePair {
   nameId?: number; // int64
   name?: string;
   valueId?: number; // int64
   value?: string;
+  fromDate?: string; // date-time
+  toDate?: string; // date-time
   type?: string;
   isParticipatry?: boolean;
 }
@@ -29,14 +36,22 @@ export interface FactsCreateData {
   factValuePairs?: {
     [name: string]: number /* int64 */[];
   };
+  factValueString?: {
+    [name: string]: string[];
+  };
+  pageTaxonId?: number; // int64
 }
 export interface FactsUpdateData {
   mailData?: MailData;
   traitValueList?: number /* int64 */[];
+  valuesString?: string[];
+  pageTaxonId?: number; // int64
 }
 export interface MailData {
   observationData?: ObservationMailData;
+  documentMailData?: DocumentMailData;
   userGroupData?: UserGroupMailData[];
+  speciesData?: SpeciesMailData;
 }
 export interface ObservationMailData {
   observationId?: number; // int64
@@ -47,10 +62,21 @@ export interface ObservationMailData {
   commonName?: string;
   authorId?: number; // int64
 }
+export interface SpeciesMailData {
+  speciesId?: number; // int64
+  speciesName?: string;
+  iconUrl?: string;
+  authorId?: number; // int64
+}
 export interface Traits {
   id?: number; // int64
+  dataType?: string;
+  description?: string;
+  fieldId?: number; // int64
   name?: string;
   traitTypes?: string;
+  units?: string;
+  isNotObservationTraits?: boolean;
   showInObservation?: boolean;
   isParticipatory?: boolean;
   isDeleted?: boolean;

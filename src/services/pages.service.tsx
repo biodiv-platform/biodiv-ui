@@ -45,11 +45,9 @@ export const axDeletePageByID = async (pageId) => {
   }
 };
 
-export const axGetTree = async (userGroupId) => {
+export const axGetTree = async (params) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.PAGES}/v1/page/tree`, {
-      params: { userGroupId }
-    });
+    const { data } = await plainHttp.get(`${ENDPOINT.PAGES}/v1/page/tree`, { params });
     return { success: true, data };
   } catch (e) {
     console.error(e);

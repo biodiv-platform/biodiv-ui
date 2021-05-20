@@ -37,12 +37,24 @@ export default function TraitsList({
     setNewTraitsList(
       speciesTraitsList
         ? speciesTraitsList.map((speciesTrait) => {
+            const traitType = speciesTrait.traits?.traitTypes;
+
             switch (speciesTrait.traits?.traitTypes) {
               case TRAIT_TYPES.SINGLE_CATEGORICAL:
                 return {
                   defaultValue: factsList?.find((v) => v.nameId === speciesTrait.traits?.id)
                     ?.valueId,
-                  speciesTrait
+                  speciesTrait,
+                  traitType
+                };
+
+              case TRAIT_TYPES.RANGE:
+                return {
+                  defaultValue: factsList
+                    ?.filter((v) => v.nameId === speciesTrait.traits?.id)
+                    .map((o) => o.value),
+                  speciesTrait,
+                  traitType
                 };
 
               case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
@@ -50,7 +62,8 @@ export default function TraitsList({
                   defaultValue: factsList
                     ?.filter((v) => v.nameId === speciesTrait.traits?.id)
                     .map((v) => v.valueId),
-                  speciesTrait
+                  speciesTrait,
+                  traitType
                 };
 
               default:
@@ -63,13 +76,14 @@ export default function TraitsList({
 
   return (
     <Box p={4} pb={0}>
-      {newTraitsList.map(({ defaultValue, speciesTrait }) => (
+      {newTraitsList.map(({ defaultValue, speciesTrait, traitType }) => (
         <Trait
           key={speciesTrait.traits.id}
           speciesTrait={speciesTrait}
           defaultValue={defaultValue}
           observationId={observationId}
           authorId={authorId}
+          traitType={traitType}
         />
       ))}
     </Box>

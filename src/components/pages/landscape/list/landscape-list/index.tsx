@@ -8,7 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import useLandscapeFilter from "../use-landscape-filter";
 import GridViewCard from "./card";
 
-const GridViewBox = styled.div`
+export const GridViewBox = styled.div`
   .grid-card {
     margin-top: 2px;
     display: grid;

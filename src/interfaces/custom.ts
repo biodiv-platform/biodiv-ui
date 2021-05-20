@@ -1,7 +1,8 @@
 import {
   MapAggregationResponse,
   ObservationListMinimalData,
-  ObservationListPageMapper
+  ObservationListPageMapper,
+  UserGroupIbp
 } from "./observation";
 
 export enum ResourceType {
@@ -115,7 +116,7 @@ export interface IDBObservationAsset {
   path?: string;
   url?: string;
   type: string;
-  licenceId: string;
+  licenseId: string;
   status?: AssetStatus;
   caption?: string;
   rating?: number;
@@ -142,4 +143,24 @@ export interface ResourceDocument {
   resourceURL: string;
   size: string;
   timestamp: number;
+}
+
+// Modified Species Field Payload
+export interface SpeciesParentField {
+  id: number;
+  parentId: number;
+  displayOrder: number;
+  label: string;
+  header: string;
+  values: any[];
+  traits: any[];
+}
+
+export interface SpeciesField {
+  parentField: SpeciesParentField;
+  childField: SpeciesField[];
+}
+
+export interface UserGroupIbpExtended extends UserGroupIbp {
+  nameLocal?;
 }

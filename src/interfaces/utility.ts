@@ -3,6 +3,11 @@ export interface CanonicalName {
   simple?: string;
   stem?: string;
 }
+export interface DocumentMailData {
+  documentId?: number; // int64
+  createdOn?: string; // date-time
+  authorId?: number; // int64
+}
 export interface Flag {
   id?: number; // int64
   version?: number; // int64
@@ -45,7 +50,7 @@ export interface Habitat {
 export interface HomePageData {
   showGallery?: boolean;
   showStats?: boolean;
-  showRecentObs?: boolean;
+  showRecentObservation?: boolean;
   showGridMap?: boolean;
   showPartners?: boolean;
   stats?: HomePageStats;
@@ -69,7 +74,9 @@ export interface Language {
 }
 export interface MailData {
   observationData?: ObservationMailData;
+  documentMailData?: DocumentMailData;
   userGroupData?: UserGroupMailData[];
+  speciesData?: SpeciesMailData;
 }
 export interface ObservationMailData {
   observationId?: number; // int64
@@ -86,8 +93,12 @@ export interface ParsedName {
   verbatim?: string;
   normalized?: string;
   authorship?: string;
-  details?: unknown[];
-  positions?: unknown[];
+  details?: {
+    [key: string]: any;
+  }[];
+  positions?: {
+    [key: string]: any;
+  }[];
   surrogate?: boolean;
   virus?: boolean;
   hybrid?: boolean;
@@ -95,6 +106,12 @@ export interface ParsedName {
   nameStringId?: string;
   parserVersion?: string;
   canonicalName?: CanonicalName;
+}
+export interface SpeciesMailData {
+  speciesId?: number; // int64
+  speciesName?: string;
+  iconUrl?: string;
+  authorId?: number; // int64
 }
 export interface Tags {
   id?: number; // int64

@@ -1,9 +1,9 @@
 import { Box, Button, Image, Input } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { axGetYouTubeInfo } from "@services/utility.service";
-import { DEFAULT_LICENSE } from "@static/licenses";
 import { ASSET_TYPES } from "@static/observation-create";
 import { getYoutubeImage } from "@utils/media";
 import { nanoid } from "nanoid";
@@ -36,7 +36,7 @@ export default function FromURL({ onDone }) {
               caption: title,
               type: ASSET_TYPES.VIDEO,
               status: AssetStatus.Uploaded,
-              licenceId: DEFAULT_LICENSE,
+              licenseId: SITE_CONFIG.LICENSE.DEFAULT,
               rating: 0,
               isUsed: 0
             } as IDBObservationAsset

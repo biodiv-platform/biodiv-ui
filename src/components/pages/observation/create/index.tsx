@@ -8,7 +8,8 @@ import ObservationCreateForm from "./form";
 export default function ObservationCreatePageComponent({
   speciesGroups,
   languages,
-  ObservationCreateFormData
+  ObservationCreateFormData,
+  licensesList
 }) {
   const { currentGroup, isLoggedIn } = useGlobalState();
 
@@ -24,6 +25,7 @@ export default function ObservationCreatePageComponent({
         speciesGroups={speciesGroups}
         ObservationCreateFormData={ObservationCreateFormData}
         languages={languages}
+        licensesList={licensesList}
       />
     </div>
   );
