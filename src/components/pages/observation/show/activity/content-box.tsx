@@ -25,6 +25,11 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
       return (
         <Box>
           <BlueLink href={ad1?.webAddress}>{ad1?.userGroupName}</BlueLink>
+          {ad1?.reason && (
+            <Text color="gray.600" fontSize="sm" fontStyle="italic">
+              ({ad1.reason})
+            </Text>
+          )}
           {at !== ACTIVITY_TYPE.UNFEATURED && <Text as="p">{ad1?.featured}</Text>}
         </Box>
       );

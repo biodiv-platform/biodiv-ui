@@ -23,6 +23,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     },
     {
       title: "DOCUMENT.TITLE",
+      isHtml: true,
       value: document?.title
     },
     {
@@ -44,10 +45,12 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     },
     {
       title: "DOCUMENT.BIB.JOURNAL",
+      isHtml: true,
       value: document?.journal
     },
     {
       title: "DOCUMENT.BIB.BOOKTITLE",
+      isHtml: true,
       value: document?.bookTitle
     },
     {
@@ -98,6 +101,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     },
     {
       title: "DOCUMENT.CONTRIBUTION",
+      isHtml: true,
       value: document?.contributors
     },
     {
@@ -125,11 +129,9 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
   return (
     <Box p={4} mb={4} className="white-box">
       <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
-        {INFO_LINKS.map(({ title, value, cell }) =>
+        {INFO_LINKS.map(({ title, value, isHtml, cell }) =>
           value ? (
-            <ResponsiveInfo key={title} title={title}>
-              {cell || value}
-            </ResponsiveInfo>
+            <ResponsiveInfo key={title} title={title} isHtml={isHtml} children={cell || value} />
           ) : null
         )}
       </SimpleGrid>
