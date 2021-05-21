@@ -1,11 +1,11 @@
-import { IconButton } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import TextInput from "@components/form/text";
+import { IconButton } from "@chakra-ui/react";
+import { TextBoxField } from "@components/form/text";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 const TextFilterForm = styled.form`
@@ -37,15 +37,17 @@ export default function TextFilterInput({ filterKey, label, mb = 0 }) {
   };
 
   return (
-    <TextFilterForm onSubmit={hForm.handleSubmit(handleOnChange)}>
-      <TextInput name="query" id={filterKey} form={hForm} label={label} showLabel={false} mb={mb} />
-      <IconButton
-        variant="solid"
-        colorScheme="blue"
-        type="submit"
-        icon={<SearchIcon />}
-        aria-label={`Find ${label}`}
-      />
-    </TextFilterForm>
+    <FormProvider {...hForm}>
+      <TextFilterForm onSubmit={hForm.handleSubmit(handleOnChange)}>
+        <TextBoxField name="query" id={filterKey} label={label} showLabel={false} mb={mb} />
+        <IconButton
+          variant="solid"
+          colorScheme="blue"
+          type="submit"
+          icon={<SearchIcon />}
+          aria-label={`Find ${label}`}
+        />
+      </TextFilterForm>
+    </FormProvider>
   );
 }

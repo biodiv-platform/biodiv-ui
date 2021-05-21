@@ -4,10 +4,10 @@ import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
 import OTPModal from "@components/auth/otp-modal";
-import PhoneNumber from "@components/form/phone-number";
-import RadioInput from "@components/form/radio";
-import Submit from "@components/form/submit-button";
-import TextBox from "@components/form/text";
+import { PhoneNumberInputField } from "@components/form/phone-number";
+import { RadioInputField } from "@components/form/radio";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
@@ -16,7 +16,7 @@ import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import { NextSeo } from "next-seo";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
@@ -106,36 +106,31 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       <NextSeo title={t("SIGN_IN.TITLE")} />
       <PageHeading>{t("SIGN_IN.TITLE")}</PageHeading>
 
-      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
-          <RadioInput name="verificationType" options={VERIFICATION_TYPE} form={hForm} mb={1} />
-        </div>
-        {showMobile ? (
-          <PhoneNumber name="mobileNumber" label={t("SIGN_IN.FORM.MOBILE")} form={hForm} />
-        ) : (
-          <TextBox
-            name="email"
-            label={t("SIGN_IN.FORM.EMAIL")}
-            autoComplete="username"
-            form={hForm}
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
+            <RadioInputField name="verificationType" options={VERIFICATION_TYPE} mb={1} />
+          </div>
+          {showMobile ? (
+            <PhoneNumberInputField name="mobileNumber" label={t("SIGN_IN.FORM.MOBILE")} />
+          ) : (
+            <TextBoxField name="email" label={t("SIGN_IN.FORM.EMAIL")} autoComplete="username" />
+          )}
+          <TextBoxField
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            label={t("SIGN_IN.FORM.PASSWORD")}
           />
-        )}
-        <TextBox
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          label={t("SIGN_IN.FORM.PASSWORD")}
-          form={hForm}
-        />
-        <Flex justifyContent="space-between" alignItems="center">
-          <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
-            {t("SIGN_IN.FORM.SUBMIT")}
-          </Submit>
-          <LocalLink href="/register/forgotPassword">
-            <BlueLink display="block">{t("SIGN_IN.FORGOT_PASSWORD_LINK")}</BlueLink>
-          </LocalLink>
-        </Flex>
-      </form>
+          <Flex justifyContent="space-between" alignItems="center">
+            <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("SIGN_IN.FORM.SUBMIT")}</SubmitButton>
+            <LocalLink href="/register/forgotPassword">
+              <BlueLink display="block">{t("SIGN_IN.FORGOT_PASSWORD_LINK")}</BlueLink>
+            </LocalLink>
+          </Flex>
+        </form>
+      </FormProvider>
+
       <Box textAlign="center" color="gray.500" my={4}>
         {t("OR")}
       </Box>

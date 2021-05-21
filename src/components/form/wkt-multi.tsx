@@ -1,6 +1,7 @@
 import {
   Box,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Tab,
   TabList,
@@ -13,18 +14,16 @@ import WKTSearch from "@components/@core/WKT/search";
 import WKTList from "@components/@core/WKT/wkt-list";
 import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
-import { ErrorMessageMulti } from "./common/error-message";
+import { useController } from "react-hook-form";
 
 interface WKTInputProps extends Omit<WKTProps, "onSave"> {
-  form: UseFormMethods<Record<string, any>>;
   isMultiple?;
 }
 
 export default function WKTFieldMulti(props: WKTInputProps) {
   const { t } = useTranslation();
-  const initialValue = props.form.control.defaultValuesRef.current[props.name];
-  const [value, setValue] = useState(initialValue || []);
+  const { field, fieldState } = useController({ name: props.name });
+  const [value, setValue] = useState(field.value || []);
   const [isDisabled, setIsdisabled] = useState<boolean>(false);
 
   const handleOnSave = (o) => {
@@ -36,16 +35,12 @@ export default function WKTFieldMulti(props: WKTInputProps) {
   };
 
   useEffect(() => {
-    props.form.register({ name: props.name });
-  }, []);
-
-  useEffect(() => {
     setIsdisabled(!props.isMultiple && value.length >= 1);
-    props.form.setValue(props.name, value);
+    field.onChange(value);
   }, [value]);
 
   return (
-    <FormControl isInvalid={props.form.errors[props.name] && true}>
+    <FormControl isInvalid={fieldState.invalid}>
       <Box mb={props.mb || 4}>
         <FormLabel>{props.label}</FormLabel>
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
@@ -71,7 +66,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
           </Box>
         </Box>
       </Box>
-      <ErrorMessageMulti errors={props.form.errors} name={props.name} />
+      <FormErrorMessage children={JSON.stringify(fieldState?.error?.message)} />
     </FormControl>
   );
 }

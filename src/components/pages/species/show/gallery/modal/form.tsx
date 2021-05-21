@@ -1,5 +1,5 @@
 import { Button, ModalBody, ModalFooter } from "@chakra-ui/react";
-import SubmitButton from "@components/form/submit-button";
+import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
@@ -8,7 +8,7 @@ import { AssetStatus } from "@interfaces/custom";
 import { axUpdateSpeciesGalleryResources } from "@services/species.service";
 import { nanoid } from "nanoid";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import useSpecies from "../../use-species";
@@ -67,23 +67,23 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
   };
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-      <ModalBody>
-        <SpeciesFieldContainer
-          name="resources"
-          licensesList={licensesList}
-          form={hForm}
-          isCreate={false}
-        />
-      </ModalBody>
-      <ModalFooter>
-        <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
-          {t("SAVE")}
-        </SubmitButton>
-        <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
-          {t("CANCEL")}
-        </Button>
-      </ModalFooter>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+        <ModalBody>
+          <SpeciesFieldContainer
+            name="resources"
+            licensesList={licensesList}
+            form={hForm}
+            isCreate={false}
+          />
+        </ModalBody>
+        <ModalFooter>
+          <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
+          <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
+            {t("CANCEL")}
+          </Button>
+        </ModalFooter>
+      </form>
+    </FormProvider>
   );
 }

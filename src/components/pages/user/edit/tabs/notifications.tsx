@@ -1,5 +1,5 @@
-import SubmitButton from "@components/form/submit-button";
-import SwitchField from "@components/form/switch";
+import { SubmitButton } from "@components/form/submit-button";
+import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
@@ -45,18 +45,12 @@ export default function NotificationsTab({ user }: UserEditPageComponentProps) {
 
   return (
     <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-      <SwitchField
-        name="sendPushNotification"
-        label={t("USER.SEND_PUSH_NOTIFICATIONS")}
-        form={hForm}
-      />
-      <SwitchField name="sendNotification" label={t("USER.SEND_EMAIL")} form={hForm} />
-      <SwitchField name="identificationMail" label={t("USER.IDENTIFICATION_MAIL")} form={hForm} />
-      <SwitchField name="hideEmial" label={t("USER.HIDE_EMAIL")} form={hForm} />
-      <SwitchField name="sendDigest" label={t("USER.SEND_DIGEST")} form={hForm} />
-      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
-        {t("SAVE")}
-      </SubmitButton>
+      <SwitchField name="sendPushNotification" label={t("USER.SEND_PUSH_NOTIFICATIONS")} />
+      <SwitchField name="sendNotification" label={t("USER.SEND_EMAIL")} />
+      <SwitchField name="identificationMail" label={t("USER.IDENTIFICATION_MAIL")} />
+      <SwitchField name="hideEmial" label={t("USER.HIDE_EMAIL")} />
+      <SwitchField name="sendDigest" label={t("USER.SEND_DIGEST")} />
+      <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
     </form>
   );
 }

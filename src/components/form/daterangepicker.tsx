@@ -2,6 +2,7 @@ import "flatpickr/dist/themes/material_blue.css";
 
 import {
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Input,
@@ -14,47 +15,40 @@ import { formatDateRange, parseDateRange } from "@utils/date";
 import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
-
-import ErrorMessage from "./common/error-message";
+import { useController } from "react-hook-form";
 
 interface IDatePickerBoxProps {
   name: string;
   label: string;
   mb?: number;
   disabled?: boolean;
-  disableInput?:boolean;
+  disableInput?: boolean;
   hint?: string;
   dateFormat?: string;
   style?;
   hasMaxDate?: boolean;
   isRequired?: boolean;
   subscribe?: boolean;
-  form;
 }
 
-const DateRangePickerField = ({
+export const DateRangePickerField = ({
   name,
   label,
-  form,
   mb = 4,
   hint,
   disabled = true,
-  disableInput=false,
+  disableInput = false,
   subscribe = false,
   hasMaxDate = true,
   dateFormat = "d-m-Y",
   ...props
 }: IDatePickerBoxProps) => {
-  const [date, setDate] = useState(parseDateRange(form.control.defaultValuesRef.current[name]));
+  const { field, fieldState } = useController({ name });
+  const [date, setDate] = useState(parseDateRange(field.value));
   const maxDate = hasMaxDate ? new Date().setHours(23, 59, 59, 999) : null; // End of Day
 
   useEffect(() => {
-    form.register({ name });
-    form.setValue(name, formatDateRange(date));
-  }, [form.register]);
-
-  useEffect(() => {
-    form.setValue(name, formatDateRange(date));
+    field.onChange(formatDateRange(date));
   }, [date]);
 
   if (subscribe) {
@@ -67,7 +61,7 @@ const DateRangePickerField = ({
   }
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
+    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <InputGroup>
         <Flatpickr
@@ -92,10 +86,8 @@ const DateRangePickerField = ({
           </label>
         </InputRightElement>
       </InputGroup>
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
-
-export default DateRangePickerField;

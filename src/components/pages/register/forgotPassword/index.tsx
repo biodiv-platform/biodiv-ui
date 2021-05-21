@@ -3,17 +3,17 @@ import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
-import PhoneNumber from "@components/form/phone-number";
-import RadioInput from "@components/form/radio";
-import Submit from "@components/form/submit-button";
-import TextBox from "@components/form/text";
+import { PhoneNumberInputField } from "@components/form/phone-number";
+import { RadioInputField } from "@components/form/radio";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axForgotPassword, axRegenerateOTP, axResetPassword } from "@services/auth.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
@@ -110,25 +110,24 @@ export default function ForgotPasswordComponent() {
         {isOpen ? (
           <>
             <PageHeading>{t("FORGOT_PASSWORD.TITLE")}</PageHeading>
-            <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-              <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
-                <RadioInput
-                  name="verificationType"
-                  label={t("FORGOT_PASSWORD.FORM.VERIFICATION_TYPE")}
-                  options={VERIFICATION_TYPE}
-                  form={hForm}
-                  mb={1}
-                />
-              </div>
-              {showMobile ? (
-                <PhoneNumber name="mobileNumber" label={t("USER.MOBILE")} form={hForm} />
-              ) : (
-                <TextBox name="email" label={t("USER.EMAIL")} form={hForm} />
-              )}
-              <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
-                {t("FORGOT_PASSWORD.FORM.SUBMIT")}
-              </Submit>
-            </form>
+            <FormProvider {...hForm}>
+              <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+                <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
+                  <RadioInputField
+                    name="verificationType"
+                    label={t("FORGOT_PASSWORD.FORM.VERIFICATION_TYPE")}
+                    options={VERIFICATION_TYPE}
+                    mb={1}
+                  />
+                </div>
+                {showMobile ? (
+                  <PhoneNumberInputField name="mobileNumber" label={t("USER.MOBILE")} />
+                ) : (
+                  <TextBoxField name="email" label={t("USER.EMAIL")} />
+                )}
+                <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("FORGOT_PASSWORD.FORM.SUBMIT")}</SubmitButton>
+              </form>
+            </FormProvider>
           </>
         ) : (
           <>
@@ -136,22 +135,21 @@ export default function ForgotPasswordComponent() {
             <Text mb={4}>
               {t("OTP.DESCRIPTION")} {user?.vt}
             </Text>
-            <form onSubmit={rForm.handleSubmit(handleOnVerification)}>
-              <TextBox name="otp" label={t("OTP.FORM.OTP")} form={rForm} />
-              <TextBox name="password" label={t("USER.PASSWORD")} type="password" form={rForm} />
-              <TextBox
-                name="confirmPassword"
-                label={t("USER.CONFIRM_PASSWORD")}
-                type="password"
-                form={rForm}
-              />
-              <Flex justifyContent="space-between" alignItems="center">
-                <Submit form={rForm} rightIcon={<ArrowForwardIcon />}>
-                  {t("OTP.FORM.SUBMIT")}
-                </Submit>
-                <BlueLink onClick={handleRegenerate}>{t("OTP.RESEND")}</BlueLink>
-              </Flex>
-            </form>
+            <FormProvider {...hForm}>
+              <form onSubmit={rForm.handleSubmit(handleOnVerification)}>
+                <TextBoxField name="otp" label={t("OTP.FORM.OTP")} />
+                <TextBoxField name="password" label={t("USER.PASSWORD")} type="password" />
+                <TextBoxField
+                  name="confirmPassword"
+                  label={t("USER.CONFIRM_PASSWORD")}
+                  type="password"
+                />
+                <Flex justifyContent="space-between" alignItems="center">
+                  <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("OTP.FORM.SUBMIT")}</SubmitButton>
+                  <BlueLink onClick={handleRegenerate}>{t("OTP.RESEND")}</BlueLink>
+                </Flex>
+              </form>
+            </FormProvider>
           </>
         )}
       </Box>

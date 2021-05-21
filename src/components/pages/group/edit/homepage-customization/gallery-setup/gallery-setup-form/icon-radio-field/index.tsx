@@ -1,9 +1,8 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import ErrorMessage from "@components/form/common/error-message";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import React from "react";
-import { Controller, UseFormMethods } from "react-hook-form";
+import { useController } from "react-hook-form";
 
-import CheckBoxItems from "./radio";
+import RadioItems from "./radio";
 
 interface CheckboxProps {
   name: string;
@@ -12,7 +11,6 @@ interface CheckboxProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
-  form: UseFormMethods<Record<string, any>>;
   isRequired?: boolean;
 }
 
@@ -22,32 +20,21 @@ export default function IconRadioField({
   hint,
   mb = 4,
   options = [],
-  form,
   isRequired,
   ...props
 }: CheckboxProps) {
-  const handleChange = (value) => {
-    form.setValue(name, value);
-  };
+  const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} isRequired={isRequired} mb={mb} {...props}>
+    <FormControl isInvalid={fieldState.invalid} isRequired={isRequired} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Controller
-        control={form.control}
+      <RadioItems
+        options={options}
         name={name}
-        defaultValue={form.control.defaultValuesRef.current[name]}
-        render={({ value }) => (
-          <CheckBoxItems
-            options={options}
-            form={form}
-            name={name}
-            defaultValue={value}
-            onChange={handleChange}
-          />
-        )}
+        defaultValue={field.value}
+        onChange={field.onChange}
       />
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

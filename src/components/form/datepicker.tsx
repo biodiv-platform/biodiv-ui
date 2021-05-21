@@ -2,21 +2,21 @@ import "flatpickr/dist/themes/material_blue.css";
 
 import {
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Input,
   InputGroup,
   InputRightElement
 } from "@chakra-ui/react";
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { formatDate, parseDate } from "@utils/date";
 import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
-import { UseFormMethods } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
+import { useController } from "react-hook-form";
 
 interface IDatePickerBoxProps {
   name: string;
@@ -28,15 +28,13 @@ interface IDatePickerBoxProps {
   style?;
   isRequired?: boolean;
   subscribe?: boolean;
-  form: UseFormMethods<Record<string, any>>;
 }
 
 const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
 
-const DatePickerField = ({
+export const DatePickerField = ({
   name,
   label,
-  form,
   mb = 4,
   hint,
   disabled = true,
@@ -44,16 +42,15 @@ const DatePickerField = ({
   dateFormat = "d-m-Y",
   ...props
 }: IDatePickerBoxProps) => {
-  const initialValue = form.control.defaultValuesRef.current[name];
-  const [date, setDate] = useState(initialValue ? parseDate(initialValue) : undefined);
+  const { field, fieldState } = useController({ name });
+  const [date, setDate] = useState(field.value ? parseDate(field.value) : undefined);
 
   useEffect(() => {
-    form.register({ name });
-    form.setValue(name, formatDate(date));
-  }, [form.register]);
+    date && field.onChange(formatDate(date));
+  }, []);
 
-  useEffect(() => {
-    form.setValue(name, formatDate(date));
+  useDidUpdateEffect(() => {
+    field.onChange(formatDate(date));
   }, [date]);
 
   if (subscribe) {
@@ -66,7 +63,7 @@ const DatePickerField = ({
   }
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
+    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <InputGroup>
         <Flatpickr
@@ -90,10 +87,8 @@ const DatePickerField = ({
           </label>
         </InputRightElement>
       </InputGroup>
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
-
-export default DatePickerField;

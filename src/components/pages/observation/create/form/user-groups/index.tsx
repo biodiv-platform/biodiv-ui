@@ -3,7 +3,7 @@ import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import { axGetUserGroupList } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
-import { Controller, UseFormMethods } from "react-hook-form";
+import { useController } from "react-hook-form";
 
 import CheckBoxItems from "./checkbox";
 
@@ -11,12 +11,12 @@ interface IUserGroupsProps {
   name: string;
   label: string;
   mb?: number;
-  form: UseFormMethods<Record<string, any>>;
 }
 
-export default function UserGroups({ name, label, form }: IUserGroupsProps) {
+export default function UserGroups({ name, label }: IUserGroupsProps) {
   const [userGroups, setUserGroups] = useState<any[]>([]);
   const { isOpen, onToggle } = useDisclosure();
+  const { field } = useController({ name });
 
   useEffect(() => {
     axGetUserGroupList().then(({ data }) => setUserGroups(data || []));
@@ -28,14 +28,7 @@ export default function UserGroups({ name, label, form }: IUserGroupsProps) {
         👥 {label} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
       <Collapse in={isOpen}>
-        <Controller
-          control={form.control}
-          name={name}
-          defaultValue={form.control.defaultValuesRef.current[name]}
-          render={({ onChange, value }) => (
-            <CheckBoxItems options={userGroups} defaultValue={value} onChange={onChange} />
-          )}
-        />
+        <CheckBoxItems options={userGroups} defaultValue={field.value} onChange={field.onChange} />
       </Collapse>
     </Box>
   );

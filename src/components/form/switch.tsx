@@ -1,8 +1,13 @@
-import { Flex, FormControl, FormHelperText, FormLabel, Switch } from "@chakra-ui/react";
+import {
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Switch
+} from "@chakra-ui/react";
 import React from "react";
-import { Controller, UseFormMethods } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
+import { useController } from "react-hook-form";
 
 interface ITextBoxProps {
   name: string;
@@ -12,40 +17,34 @@ interface ITextBoxProps {
   disabled?: boolean;
   color?: string;
   hint?: string;
-  form: UseFormMethods<Record<string, any>>;
 }
 
-const SwitchField = ({
+export const SwitchField = ({
   name,
   label,
-  form,
   mb = 4,
   color = "blue",
   hint,
   disabled,
   ...props
-}: ITextBoxProps) => (
-  <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    <Flex>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Controller
-        control={form.control}
-        name={name}
-        render={({ onChange, onBlur, value, ref }) => (
-          <Switch
-            onBlur={onBlur}
-            onChange={(e) => onChange(e.target["checked"])}
-            defaultIsChecked={value}
-            isDisabled={disabled}
-            color={color}
-            ref={ref}
-          />
-        )}
-      />
-    </Flex>
-    <ErrorMessage name={name} errors={form.errors} />
-    {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-  </FormControl>
-);
+}: ITextBoxProps) => {
+  const { field, fieldState } = useController({ name });
 
-export default SwitchField;
+  return (
+    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+      <Flex>
+        <FormLabel htmlFor={name}>{label}</FormLabel>
+        <Switch
+          onBlur={field.onBlur}
+          onChange={(e) => field.onChange(e.target["checked"])}
+          defaultIsChecked={field.value}
+          isDisabled={disabled}
+          color={color}
+          name={name}
+        />
+      </Flex>
+      <FormErrorMessage children={fieldState?.error?.message} />
+      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+    </FormControl>
+  );
+};

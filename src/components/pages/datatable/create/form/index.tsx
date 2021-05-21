@@ -1,6 +1,6 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import CheckBox from "@components/form/checkbox";
-import Submit from "@components/form/submit-button";
+import { CheckboxField } from "@components/form/checkbox";
+import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
@@ -11,7 +11,7 @@ import { DEFAULT_BASIS_OF_DATA, DEFAULT_BASIS_OF_RECORD } from "@static/datatabl
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import PartyContributorsForm from "./contributor";
@@ -142,25 +142,24 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
   };
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
-      <ImageUploaderField
-        showMapping={showMapping}
-        fieldMapping={fieldMapping}
-        setFieldMapping={setFieldMapping}
-        setShowMapping={setShowMapping}
-        name="filename"
-        form={hForm}
-      />
-      <TitleInput form={hForm} languages={languages} />
-      <TemporalCoverage form={hForm} />
-      <TaxonomyCovergae form={hForm} speciesGroups={speciesGroups} />
-      <LocationPicker form={hForm} />
-      <PartyContributorsForm form={hForm} />
-      <Others form={hForm} />
-      <CheckBox name="terms" label={t("OBSERVATION.TERMS")} form={hForm} />
-      <Submit leftIcon={<CheckIcon />} form={hForm}>
-        {t("OBSERVATION.ADD_OBSERVATION")}
-      </Submit>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
+        <ImageUploaderField
+          showMapping={showMapping}
+          fieldMapping={fieldMapping}
+          setFieldMapping={setFieldMapping}
+          setShowMapping={setShowMapping}
+          name="filename"
+        />
+        <TitleInput languages={languages} />
+        <TemporalCoverage />
+        <TaxonomyCovergae speciesGroups={speciesGroups} />
+        <LocationPicker />
+        <PartyContributorsForm />
+        <Others />
+        <CheckboxField name="terms" label={t("OBSERVATION.TERMS")} />
+        <SubmitButton leftIcon={<CheckIcon />}>{t("OBSERVATION.ADD_OBSERVATION")}</SubmitButton>
+      </form>
+    </FormProvider>
   );
 }

@@ -1,21 +1,18 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
-import Select from "@components/form/select";
+import { SelectInputField } from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import useTranslation from "@hooks/use-translation";
 import { OBSERVATION_FIELDS } from "@static/observation-create";
 import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
-export default function Fields({ form, name, fieldMapping, showMapping, setShowMapping }) {
+export default function Fields({ name, fieldMapping, showMapping, setShowMapping }) {
   const { t } = useTranslation();
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
   const [fieldValues, setFieldValues] = useState<any[]>([]);
 
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name
-  });
+  const { fields, append, remove } = useFieldArray({ name });
 
   const resetMappingTable = () => {
     setTableHeaders([]);
@@ -35,9 +32,7 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
         setFieldValues((prevState) => [...prevState, Object.values(row)]);
       });
 
-      Object.keys(rowData[0]).map((item, index) => {
-        append({ columnsMapping: { index: index } });
-      });
+      append(Object.keys(rowData[0]).map(() => ({ fieldKey: "" })));
     }
   }, [fieldMapping, showMapping]);
 
@@ -49,7 +44,7 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
     return row;
   };
 
-  return showMapping ? (
+  return (
     <ToggleablePanel icon="🧩" title={t("DATATABLE.FIELD_MAPPING_TABLE")}>
       <Box p={4} pb={0}>
         <Stack m={2} direction="row-reverse">
@@ -72,13 +67,12 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
             </Thead>
             <Tbody>
               <Tr>
-                {fields.map((data, index) => (
-                  <Td key={index}>
-                    <Select
+                {fields.map((field, index) => (
+                  <Td key={field.id}>
+                    <SelectInputField
                       name={`columnsMapping.${index}.fieldKey`}
                       label={t("ACTIONS.FLAG.CATEGORY")}
                       options={OBSERVATION_FIELDS}
-                      form={form}
                     />
                   </Td>
                 ))}
@@ -95,5 +89,5 @@ export default function Fields({ form, name, fieldMapping, showMapping, setShowM
         </Box>
       </Box>
     </ToggleablePanel>
-  ) : null;
+  );
 }

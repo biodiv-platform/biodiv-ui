@@ -1,9 +1,6 @@
-import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
 import React from "react";
-import { UseFormMethods } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
-import { getByPath } from "@utils/basic";
+import { useController } from "react-hook-form";
 
 interface ITextBoxProps {
   id?: string;
@@ -13,7 +10,6 @@ interface ITextBoxProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
-  form: UseFormMethods<Record<string, any>>;
   style?;
   isRequired?: boolean;
   showLabel?: boolean;
@@ -21,12 +17,11 @@ interface ITextBoxProps {
   autoComplete?;
 }
 
-const TextBoxField = ({
+export const TextBoxField = ({
   id,
   name,
   label,
   type = "text",
-  form,
   mb = 4,
   disabled,
   hint,
@@ -35,28 +30,31 @@ const TextBoxField = ({
   hidden,
   autoComplete,
   ...props
-}: ITextBoxProps) => (
-  <FormControl
-    isInvalid={form.errors[name] && true}
-    mb={mb}
-    hidden={hidden}
-    isRequired={isRequired}
-    {...props}
-  >
-    {showLabel && <FormLabel htmlFor={name}>{label}</FormLabel>}
-    <Input
-      name={name}
-      id={id || name}
-      placeholder={label}
-      ref={form.register}
-      type={type}
-      isDisabled={disabled}
-      defaultValue={getByPath(form.control.defaultValuesRef.current, name)}
-      autoComplete={autoComplete}
-    />
-    <ErrorMessage name={name} errors={form.errors} />
-    {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-  </FormControl>
-);
+}: ITextBoxProps) => {
+  const { field, fieldState } = useController({
+    name,
+    defaultValue: "" // to prevent uncontrolled to controlled error
+  });
 
-export default TextBoxField;
+  return (
+    <FormControl
+      isInvalid={fieldState.invalid}
+      mb={mb}
+      hidden={hidden}
+      isRequired={isRequired}
+      {...props}
+    >
+      {showLabel && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      <Input
+        id={id || name}
+        placeholder={label}
+        type={type}
+        isDisabled={disabled}
+        autoComplete={autoComplete}
+        {...field}
+      />
+      <FormErrorMessage children={fieldState?.error?.message} />
+      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+    </FormControl>
+  );
+};

@@ -1,12 +1,12 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import DateRangePickerField from "@components/form/daterangepicker";
-import SelectInputField from "@components/form/select";
+import { DateRangePickerField } from "@components/form/daterangepicker";
+import { SelectInputField } from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { DATE_ACCURACY_OPTIONS } from "@components/pages/observation/create/form/options";
 import useTranslation from "@hooks/use-translation";
 import React, { useState } from "react";
 
-export default function TemporalCoverage({ form }) {
+export default function TemporalCoverage() {
   const { t } = useTranslation();
   const [isDisable, setIsDisable] = useState<boolean>();
 
@@ -17,7 +17,6 @@ export default function TemporalCoverage({ form }) {
           <DateRangePickerField
             hasMaxDate={false}
             disableInput={isDisable}
-            form={form}
             name="observedDateRange"
             label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}
           />
@@ -29,7 +28,6 @@ export default function TemporalCoverage({ form }) {
               value === "UNKNOWN" ? setIsDisable(true) : setIsDisable(false)
             }
             options={DATE_ACCURACY_OPTIONS}
-            form={form}
           />
         </SimpleGrid>
       </Box>

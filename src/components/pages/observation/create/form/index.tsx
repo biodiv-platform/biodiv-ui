@@ -1,7 +1,7 @@
 import { Box, useDisclosure } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
-import CheckBox from "@components/form/checkbox";
-import Submit from "@components/form/submit-button";
+import { CheckboxField } from "@components/form/checkbox";
+import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
@@ -16,7 +16,7 @@ import { dateToUTC } from "@utils/date";
 import { cleanFacts, cleanTags } from "@utils/tags";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
-import { useFieldArray, useForm } from "react-hook-form";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import SavingObservation from "../saving";
@@ -168,7 +168,7 @@ export default function ObservationCreateForm({
     }
   });
 
-  const { fields } = useFieldArray({
+  const { fields }: any = useFieldArray({
     control: hForm.control,
     name: "customFields"
   });
@@ -248,29 +248,26 @@ export default function ObservationCreateForm({
   return isOpen ? (
     <Box mb={8} minH="calc(100vh - var(--heading-height))">
       <PageHeading>👋 {t("OBSERVATION.TITLE")}</PageHeading>
-      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <Uploader name="resources" form={hForm} licensesList={licensesList} />
-        <Box hidden={isSelectedImages}>
-          <Recodata form={hForm} languages={languages} />
-          <GroupSelector
-            name="sGroup"
-            label={t("OBSERVATION.GROUPS")}
-            options={speciesGroups}
-            form={hForm}
-          />
-          <LocationPicker form={hForm} />
-          <DateInputs form={hForm} />
-          {customFieldList && <ObservationCustomFieldForm fields={fields} form={hForm} />}
-          <TraitsPicker name="facts" label={t("OBSERVATION.TRAITS")} form={hForm} />
-          <UserGroups name="userGroupId" label={t("OBSERVATION.POST_TO_GROUPS")} form={hForm} />
-          <Box mt={4}>
-            <CheckBox name="terms" label={t("OBSERVATION.TERMS")} form={hForm} />
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <Uploader name="resources" licensesList={licensesList} />
+          <Box hidden={isSelectedImages}>
+            <Recodata languages={languages} />
+            <GroupSelector name="sGroup" label={t("OBSERVATION.GROUPS")} options={speciesGroups} />
+            <LocationPicker />
+            <DateInputs />
+            {customFieldList && <ObservationCustomFieldForm fields={fields} />}
+            <TraitsPicker name="facts" label={t("OBSERVATION.TRAITS")} />
+            <UserGroups name="userGroupId" label={t("OBSERVATION.POST_TO_GROUPS")} />
+            <Box mt={4}>
+              <CheckboxField name="terms" label={t("OBSERVATION.TERMS")} />
+            </Box>
+            <SubmitButton leftIcon={<CheckIcon />} isDisabled={isSubmitDisabled}>
+              {t("OBSERVATION.ADD_OBSERVATION")}
+            </SubmitButton>
           </Box>
-          <Submit leftIcon={<CheckIcon />} form={hForm} isDisabled={isSubmitDisabled}>
-            {t("OBSERVATION.ADD_OBSERVATION")}
-          </Submit>
-        </Box>
-      </form>
+        </form>
+      </FormProvider>
     </Box>
   ) : (
     <SavingObservation />

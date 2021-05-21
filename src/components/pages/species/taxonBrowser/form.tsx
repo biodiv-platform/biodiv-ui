@@ -6,8 +6,8 @@ import {
   ModalFooter,
   ModalHeader
 } from "@chakra-ui/react";
-import Select from "@components/form/select";
-import SubmitButton from "@components/form/submit-button";
+import { SelectInputField } from "@components/form/select";
+import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
@@ -16,7 +16,7 @@ import { axRequestTaxonPermission } from "@services/taxonomy.service";
 import { TAXON_ROLES } from "@static/taxon";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 export function TaxonPermissionRequestForm({ taxon, onClose }) {
@@ -48,21 +48,21 @@ export function TaxonPermissionRequestForm({ taxon, onClose }) {
 
   return (
     <ModalContent>
-      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <ModalHeader>{t("TAXON.REQUEST.TITLE")}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Select name="role" label={t("TAXON.ROLE")} options={TAXON_ROLES} form={hForm} mb={0} />
-        </ModalBody>
-        <ModalFooter>
-          <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
-            {t("TAXON.REQUEST.BUTTON")}
-          </SubmitButton>
-          <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
-            {t("CANCEL")}
-          </Button>
-        </ModalFooter>
-      </form>
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <ModalHeader>{t("TAXON.REQUEST.TITLE")}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <SelectInputField name="role" label={t("TAXON.ROLE")} options={TAXON_ROLES} mb={0} />
+          </ModalBody>
+          <ModalFooter>
+            <SubmitButton leftIcon={<CheckIcon />}>{t("TAXON.REQUEST.BUTTON")}</SubmitButton>
+            <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
+              {t("CANCEL")}
+            </Button>
+          </ModalFooter>
+        </form>
+      </FormProvider>
     </ModalContent>
   );
 }

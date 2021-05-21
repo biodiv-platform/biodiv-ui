@@ -1,6 +1,6 @@
 import { Alert, AlertIcon } from "@chakra-ui/alert";
 import { useDisclosure } from "@chakra-ui/hooks";
-import SubmitButton from "@components/form/submit-button";
+import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axCheckTaxonomy, axSaveTaxonomy } from "@services/species.service";
@@ -103,7 +103,7 @@ export function SpeciesTaxonCreateForm() {
             isRequired={isRequired}
           />
         ))}
-        <SubmitButton isDisabled={Object.keys(hForm.errors).length} form={hForm}>
+        <SubmitButton isDisabled={Object.keys(hForm.formState.errors).length}>
           {t("SPECIES.CREATE.FORM.TAXON.CREATE")}
         </SubmitButton>
       </form>

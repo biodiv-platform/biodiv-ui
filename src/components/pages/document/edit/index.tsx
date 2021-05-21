@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
-import SubmitButton from "@components/form/submit-button";
+import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
@@ -10,7 +10,7 @@ import { dateToUTC, formatDateFromUTC } from "@utils/date";
 import { getBibFieldsMeta } from "@utils/document";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import BasicInfo from "../create/basic-info";
@@ -117,26 +117,20 @@ export default function DocumentEditPageComponent({
 
   return (
     <Box className="container mt" pb={6}>
-      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <PageHeading>📄 {t("DOCUMENT.EDIT.TITLE")}</PageHeading>
-        <DocumentUploader form={hForm} name="ufileData" />
-        <BasicInfo
-          hForm={hForm}
-          documentTypes={documentTypes}
-          setBibField={setBibField}
-          licensesList={licensesList}
-        />
-        <Metadata hForm={hForm} bibFields={bibField.fields} />
-        <WKTCoverage
-          hForm={hForm}
-          name="docCoverage"
-          nameTopology="topologyWKT"
-          nameTitle="placeName"
-        />
-        <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
-          {t("DOCUMENT.EDIT.TITLE")}
-        </SubmitButton>
-      </form>
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <PageHeading>📄 {t("DOCUMENT.EDIT.TITLE")}</PageHeading>
+          <DocumentUploader name="ufileData" />
+          <BasicInfo
+            documentTypes={documentTypes}
+            setBibField={setBibField}
+            licensesList={licensesList}
+          />
+          <Metadata bibFields={bibField.fields} />
+          <WKTCoverage name="docCoverage" nameTopology="topologyWKT" nameTitle="placeName" />
+          <SubmitButton leftIcon={<CheckIcon />}>{t("DOCUMENT.EDIT.TITLE")}</SubmitButton>
+        </form>
+      </FormProvider>
     </Box>
   );
 }

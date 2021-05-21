@@ -1,8 +1,8 @@
 import { Box, Divider, SimpleGrid } from "@chakra-ui/react";
-import Datepicker from "@components/form/datepicker";
-import RichTextarea from "@components/form/rich-textarea";
-import Select from "@components/form/select";
-import SelectAsync from "@components/form/select-async";
+import { DatePickerField } from "@components/form/datepicker";
+import { RichTextareaField } from "@components/form/rich-textarea";
+import { SelectInputField } from "@components/form/select";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import useTranslation from "@hooks/use-translation";
 import { axQueryTagsByText } from "@services/observation.service";
 import React from "react";
@@ -14,7 +14,7 @@ const onTagsQuery = async (q) => {
   return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
 };
 
-export default function DateInputs({ form, showTags = true }) {
+export default function DateInputs({ showTags = true }) {
   const { t } = useTranslation();
 
   return (
@@ -22,35 +22,32 @@ export default function DateInputs({ form, showTags = true }) {
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={4}>
         <Box>
           <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} spacing={4}>
-            <Datepicker
+            <DatePickerField
               name="observedOn"
               label={t("OBSERVATION.OBSERVED_ON")}
               style={{ gridColumn: "1/3" }}
-              form={form}
               isRequired={true}
               subscribe={true}
               mb={showTags ? 4 : 0}
             />
-            <Select
+            <SelectInputField
               name="dateAccuracy"
               label={t("OBSERVATION.DATE_ACCURACY")}
               options={DATE_ACCURACY_OPTIONS}
-              form={form}
             />
           </SimpleGrid>
           {showTags && (
-            <SelectAsync
+            <SelectAsyncInputField
               name="tags"
               label={t("OBSERVATION.TAGS")}
               hint={t("OBSERVATION.TAGS_HINT")}
-              form={form}
               multiple={true}
               onQuery={onTagsQuery}
               mb={2}
             />
           )}
         </Box>
-        <RichTextarea name="notes" label={t("OBSERVATION.NOTES")} form={form} />
+        <RichTextareaField name="notes" label={t("OBSERVATION.NOTES")} />
       </SimpleGrid>
       {showTags && <Divider mb={3} />}
     </>

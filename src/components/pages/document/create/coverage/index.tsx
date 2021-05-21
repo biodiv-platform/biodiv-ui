@@ -6,7 +6,7 @@ import React from "react";
 
 import WKTCoverage from "./wkt-coverage";
 
-export default function Coverage({ hForm, speciesGroups, habitats }) {
+export default function Coverage({ speciesGroups, habitats }) {
   const { t } = useTranslation();
 
   return (
@@ -18,7 +18,6 @@ export default function Coverage({ hForm, speciesGroups, habitats }) {
       <IconCheckboxField
         name="speciesGroupIds"
         label={t("GROUP.SPECIES_COVERAGE")}
-        form={hForm}
         options={speciesGroups}
         type="species"
       />
@@ -27,11 +26,10 @@ export default function Coverage({ hForm, speciesGroups, habitats }) {
         name="habitatIds"
         label={t("GROUP.HABITATS_COVERED")}
         options={habitats}
-        form={hForm}
         type="habitat"
       />
 
-      <WKTCoverage hForm={hForm} name="docCoverageData" />
+      <WKTCoverage name="docCoverageData" />
     </Box>
   );
 }

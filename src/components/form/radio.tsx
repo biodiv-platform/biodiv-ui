@@ -1,8 +1,14 @@
-import { FormControl, FormHelperText, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Stack
+} from "@chakra-ui/react";
+import React from "react";
+import { useController } from "react-hook-form";
 
 interface IRadioProps {
   name: string;
@@ -11,33 +17,23 @@ interface IRadioProps {
   hint?: string;
   options?: any[];
   isInline?: boolean;
-  form: UseFormMethods<Record<string, any>>;
 }
 
-const RadioInputField = ({
+export const RadioInputField = ({
   name,
   label,
   hint,
-  form,
   mb = 4,
   isInline = true,
   options = [],
   ...props
 }: IRadioProps) => {
-  const [value, setValue] = useState(form.control.defaultValuesRef.current[name]);
-
-  useEffect(() => {
-    form.setValue(name, value);
-  }, [value]);
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
+  const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
+    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
-      <RadioGroup key={name} onChange={setValue} value={value}>
+      <RadioGroup key={name} {...field}>
         <Stack direction={isInline ? "row" : "column"} py={2}>
           {options.map((o) => (
             <Radio key={o.value} value={o.value}>
@@ -46,10 +42,8 @@ const RadioInputField = ({
           ))}
         </Stack>
       </RadioGroup>
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
-
-export default RadioInputField;

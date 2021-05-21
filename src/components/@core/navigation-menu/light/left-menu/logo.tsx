@@ -1,4 +1,4 @@
-import { Box, Link, Stack, Text } from "@chakra-ui/react";
+import { Box, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";

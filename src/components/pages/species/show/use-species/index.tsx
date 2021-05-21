@@ -1,5 +1,5 @@
 import useGlobalState from "@hooks/use-global-state";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 
 interface SpeciesContextProps {
   species;

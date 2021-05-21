@@ -8,8 +8,8 @@ import {
   ModalHeader,
   ModalOverlay
 } from "@chakra-ui/react";
-import SubmitButton from "@components/form/submit-button";
-import TextAreaField from "@components/form/textarea";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextAreaField } from "@components/form/textarea";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
@@ -19,7 +19,7 @@ import { axDownloadFilteredObservations } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import CheckboxGroupField from "./checkbox-group-field";
@@ -95,48 +95,47 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
-      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <ModalOverlay>
-          <ModalContent hidden={isHidden}>
-            <ModalHeader>☑️ {t("OBSERVATION.DOWNLOAD.MODAL.TITLE")}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {OBSERVATION_FILTERS.map((f) => (
-                <CheckboxGroupField {...f} key={f.name} form={hForm} />
-              ))}
-              <CheckboxGroupField
-                name="traits"
-                label="Traits"
-                options={getFilterOptions(traits)}
-                form={hForm}
-              />
-              <CheckboxGroupField
-                name="customfields"
-                label="Custom Fields"
-                options={getFilterOptions(customFields)}
-                form={hForm}
-              />
-              <TextAreaField
-                name="notes"
-                label={t("OBSERVATION.DOWNLOAD.MODAL.NOTE")}
-                hint={t("OBSERVATION.DOWNLOAD.MODAL.NOTE_HINT")}
-                form={hForm}
-                isRequired={true}
-                mb={0}
-              />
-            </ModalBody>
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <ModalOverlay>
+            <ModalContent hidden={isHidden}>
+              <ModalHeader>☑️ {t("OBSERVATION.DOWNLOAD.MODAL.TITLE")}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                {OBSERVATION_FILTERS.map((f) => (
+                  <CheckboxGroupField {...f} key={f.name} />
+                ))}
+                <CheckboxGroupField
+                  name="traits"
+                  label="Traits"
+                  options={getFilterOptions(traits)}
+                />
+                <CheckboxGroupField
+                  name="customfields"
+                  label="Custom Fields"
+                  options={getFilterOptions(customFields)}
+                />
+                <TextAreaField
+                  name="notes"
+                  label={t("OBSERVATION.DOWNLOAD.MODAL.NOTE")}
+                  hint={t("OBSERVATION.DOWNLOAD.MODAL.NOTE_HINT")}
+                  isRequired={true}
+                  mb={0}
+                />
+              </ModalBody>
 
-            <ModalFooter>
-              <SubmitButton leftIcon={<DownloadIcon />} form={hForm}>
-                {t("OBSERVATION.DOWNLOAD.TITLE")}
-              </SubmitButton>
-              <Button ml={3} onClick={onClose}>
-                {t("CANCEL")}
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </ModalOverlay>
-      </form>
+              <ModalFooter>
+                <SubmitButton leftIcon={<DownloadIcon />}>
+                  {t("OBSERVATION.DOWNLOAD.TITLE")}
+                </SubmitButton>
+                <Button ml={3} onClick={onClose}>
+                  {t("CANCEL")}
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </ModalOverlay>
+        </form>
+      </FormProvider>
     </Modal>
   );
 }

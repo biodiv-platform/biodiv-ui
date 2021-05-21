@@ -1,10 +1,9 @@
-import SelectAsyncInputField from "@components/form/select-async";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
 import React from "react";
 
 interface ManageGroupAdministratorsFieldProps {
-  form;
   name: string;
   label: string;
   onRemove?;
@@ -12,7 +11,6 @@ interface ManageGroupAdministratorsFieldProps {
 }
 
 export default function ManageGroupAdministratorsField({
-  form,
   name,
   label,
   onRemove,
@@ -47,7 +45,6 @@ export default function ManageGroupAdministratorsField({
   return (
     <SelectAsyncInputField
       name={name}
-      form={form}
       placeholder={t("GROUP.INVITE")}
       onQuery={onUserQuery}
       eventCallback={handleEventCallback}
