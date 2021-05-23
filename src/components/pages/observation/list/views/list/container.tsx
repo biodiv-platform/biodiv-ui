@@ -104,6 +104,11 @@ export default function Container({ o }) {
     });
   };
 
+  let internalObs = true;
+  if (o.isExternal) {
+    internalObs = false;
+  }
+
   return (
     <Flex
       className="white-box fade view_list"
@@ -124,7 +129,7 @@ export default function Container({ o }) {
         >
           <TabPanels className="tab-content" position="relative">
             <TabPanel>
-              <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
+               <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
             </TabPanel>
             <TabPanel>
               <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
@@ -139,21 +144,24 @@ export default function Container({ o }) {
               <CustomFieldsTab o={o} />
             </TabPanel>
             <TabPanel>
-              <CommentsTab observationId={o.observationId} />
+             
             </TabPanel>
           </TabPanels>
-          <TabList>
-            {actionTabs.map(({ name, icon, active = true }) => (
-              <Tab key={name} data-hidden={!active}>
-                <Tooltip title={t(name)}>
-                  <div>
-                    {icon} <span>{t(name)}</span>
-                  </div>
-                </Tooltip>
-              </Tab>
-            ))}
-            <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-          </TabList>
+
+          {internalObs && (
+            <TabList>
+              {actionTabs.map(({ name, icon, active = true }) => (
+                <Tab key={name} data-hidden={!active}>
+                  <Tooltip title={t(name)}>
+                    <div>
+                      {icon} <span>{t(name)}</span>
+                    </div>
+                  </Tooltip>
+                </Tab>
+              ))}
+              <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
+            </TabList>
+          )}
         </Tabs>
       </VerticalTabs>
     </Flex>

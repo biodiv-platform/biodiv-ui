@@ -1,5 +1,17 @@
 import { CalendarIcon } from "@chakra-ui/icons";
-import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Text,
+  Link,
+  HStack,
+  Image
+} from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import ObservationStatusBadge from "@components/pages/common/status-badge";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
@@ -24,6 +36,11 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
   const { speciesGroup, observationData } = useObservationFilter();
   const { user } = useGlobalState();
 
+  let internalObs = true;
+  if (o.isExternal) {
+    internalObs = false;
+  }
+
   return (
     <Box boxSize="full" display="flex" flexDir="column" justifyContent="space-between">
       <SimpleGrid columns={[1, 1, 3, 3]} px={4} pt={1}>
@@ -46,10 +63,12 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           </Heading>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
-            <Text className="elipsis" title={t("LIST.LOCATION")}>
-              <LocationIcon mb={1} mr={2} />
-              {o.reverseGeocodedName}
-            </Text>
+            {internalObs && (
+              <Text className="elipsis" title={t("LIST.LOCATION")}>
+                <LocationIcon mb={1} mr={2} />
+                {o.reverseGeocodedName}
+              </Text>
+            )}
             <Text title={t("LIST.OBSERVED_ON")}>
               <CalendarIcon mb={1} mr={2} />
               {formatDateReadableFromUTC(o.observedOn)}
@@ -57,47 +76,70 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           </Box>
         </div>
         <Flex justify={[null, null, "flex-end", "flex-end"]} align="top" py={4}>
-          <SpeciesGroupBox
-            id={o?.speciesGroupId}
-            speciesGroups={speciesGroup}
-            observationId={o.observationId}
-          />
-          <FlagActionButton
-            resourceId={o.observationId}
-            initialFlags={o.flagShow}
-            userId={user?.id}
-            flagFunc={axFlagObservation}
-            unFlagFunc={axUnFlagObservation}
-          />
+          {internalObs && (
+            <SpeciesGroupBox
+              id={o?.speciesGroupId}
+              speciesGroups={speciesGroup}
+              observationId={o.observationId}
+            />
+          )}
+          {internalObs && (
+            <FlagActionButton
+              resourceId={o.observationId}
+              initialFlags={o.flagShow}
+              userId={user?.id}
+              flagFunc={axFlagObservation}
+              unFlagFunc={axUnFlagObservation}
+            />
+          )}
         </Flex>
       </SimpleGrid>
       <Box borderTop="1px" borderColor="gray.300">
-        <RecoSuggestion
-          observationId={o.observationId}
-          isLocked={o.recoShow?.isLocked}
-          recoIbp={o.recoShow?.recoIbp}
-          allRecoVotes={o.recoShow?.allRecoVotes?.slice(0, 1)}
-          recoUpdated={recoUpdated}
-          permissionOverride={observationData?.mvp[o.observationId || 0]}
-        />
-        <Alert bg="blue.50">
-          <AlertIcon />
-          {o.recoShow?.isLocked
-            ? t("OBSERVATION.ID.VALIDATED")
-            : o.recoShow?.recoIbp
-            ? t("OBSERVATION.ID.SUGGEST_NEW_RECO")
-            : t("OBSERVATION.ID.NO_SUGGESTION")}
-          <Button
-            variant="link"
-            color="blue.600"
-            hidden={o.recoShow?.isLocked}
-            m="auto"
-            mr={0}
-            onClick={() => setTabIndex(1)}
-          >
-            {t("OBSERVATION.SUGGEST")}
-          </Button>
-        </Alert>
+        {internalObs && (
+          <RecoSuggestion
+            observationId={o.observationId}
+            isLocked={o.recoShow?.isLocked}
+            recoIbp={o.recoShow?.recoIbp}
+            allRecoVotes={o.recoShow?.allRecoVotes?.slice(0, 1)}
+            recoUpdated={recoUpdated}
+            permissionOverride={observationData?.mvp[o.observationId || 0]}
+          />
+        )}
+
+        {internalObs ? (
+          <Alert bg="blue.50">
+            <AlertIcon />
+            {o.recoShow?.isLocked
+              ? t("OBSERVATION.ID.VALIDATED")
+              : o.recoShow?.recoIbp
+              ? t("OBSERVATION.ID.SUGGEST_NEW_RECO")
+              : t("OBSERVATION.ID.NO_SUGGESTION")}
+            <Button
+              variant="link"
+              color="blue.600"
+              hidden={o.recoShow?.isLocked}
+              m="auto"
+              mr={0}
+              onClick={() => setTabIndex(1)}
+            >
+              {t("OBSERVATION.SUGGEST")}
+            </Button>
+          </Alert>
+        ) : (
+          <Alert bg="blue.50">
+            <AlertIcon />
+            <HStack spacing={8}>
+              <Text fontSize="md">External Observation</Text>
+              <Link href={o.externalGbifReferenceLink}>
+                <Image
+                  src="https://www.dissco.eu/wp-content/uploads/GBIF-2015-full.jpg"
+                  width={100}
+                  height={10}
+                />
+              </Link>
+            </HStack>
+          </Alert>
+        )}
       </Box>
     </Box>
   );

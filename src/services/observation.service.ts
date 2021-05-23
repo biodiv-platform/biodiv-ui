@@ -439,3 +439,16 @@ export const axGetObservationMapData = async (params) => {
     return { success: false, data: {} };
   }
 };
+
+
+export const axGetExtObservationById = async (observationId) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/show/external/${observationId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

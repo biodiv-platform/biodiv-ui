@@ -21,7 +21,7 @@ export default function TagsShow({
   queryFunc,
   href
 }: ITagsShowProps) {
-  const [tags, setTags] = useState(items.map((i) => ({ label: i.name, value: i.id })));
+  const [tags, setTags] = useState(items?items.map((i) => ({ label: i.name, value: i.id })):null);
   const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (

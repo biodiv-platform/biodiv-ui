@@ -85,7 +85,14 @@ export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper 
         ) : null}
       </div>
 
-      <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
+      <LocalLink
+        href={
+          !o?.isExternal
+            ? `/observation/show/${o.observationId}`
+            : `/observation/external/show/${o.uniqueIdPrefix}/${o.observationId}`
+        }
+        prefixGroup={true}
+      >
         <Link color="white">
           <Image
             className="ob-image-list"
