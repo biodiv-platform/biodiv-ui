@@ -57,6 +57,6 @@ export default function LifeListTable({ data, title, loadMoreUniqueSpecies, filt
   ) : data.isLoading ? (
     <Skeleton h={450} borderRadius="md" />
   ) : (
-    <div>No Data</div>
+    <></>
   );
 }
