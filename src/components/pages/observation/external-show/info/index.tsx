@@ -14,7 +14,7 @@ import { getInjectableHTML } from "@utils/text";
 import React from "react";
 
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
-import SpeciesGroupBox from "./species-group";
+import SpeciesGroupBoxForExtObs from "./species-group";
 import Link from "next/link";
 
 interface IInfoProps {
@@ -41,7 +41,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         </ResponsiveInfo>
 
         <ResponsiveInfo title="OBSERVATION.GROUP">
-          <SpeciesGroupBox
+          <SpeciesGroupBoxForExtObs
             id={o.observation?.groupId}
             speciesGroups={speciesGroups}
             observationId={o.observation?.id}

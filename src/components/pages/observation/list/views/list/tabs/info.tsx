@@ -24,6 +24,7 @@ import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadableFromUTC } from "@utils/date";
 import React from "react";
+import SpeciesGroupBoxForExtObs from "@components/pages/observation/external-show/info/species-group";
 
 interface IInfoTabProps {
   o: ObservationListPageMapper;
@@ -76,8 +77,14 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           </Box>
         </div>
         <Flex justify={[null, null, "flex-end", "flex-end"]} align="top" py={4}>
-          {internalObs && (
+          {internalObs ? (
             <SpeciesGroupBox
+              id={o?.speciesGroupId}
+              speciesGroups={speciesGroup}
+              observationId={o.observationId}
+            />
+          ) : (
+            <SpeciesGroupBoxForExtObs
               id={o?.speciesGroupId}
               speciesGroups={speciesGroup}
               observationId={o.observationId}

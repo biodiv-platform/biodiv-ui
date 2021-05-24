@@ -9,7 +9,7 @@ interface ISpeciesGroupsProps {
   observationId;
 }
 
-export default function SpeciesGroupBox({ id, speciesGroups, observationId }: ISpeciesGroupsProps) {
+export default function SpeciesGroupBoxForExternalObs({ id, speciesGroups, observationId }: ISpeciesGroupsProps) {
   const options = speciesGroups?.map((g) => ({ label: g.name, value: g.id }));
   const [finalType, setFinalType] = useState(options?.find((o) => o.value === id));
   const [type, setType] = useState(finalType);
