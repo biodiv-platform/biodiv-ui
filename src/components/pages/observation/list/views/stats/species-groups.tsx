@@ -34,7 +34,7 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
       </Box>
     </Box>
   ) : (
-    <></>
+    null
   );
 };
 
