@@ -7,7 +7,8 @@ import { filterXSS } from "xss";
  * @returns
  */
 const URLify = (text) => {
-  const urlRegex = /(^|[\s\n]|<[A-Za-z]*\/?>)((?:https?|ftp):\/\/[\-A-Z0-9+\u0026\u2019@#\/%?=()~_|!:,.;]*[\-A-Z0-9+\u0026@#\/%=~()_|])/gi;
+  const urlRegex =
+    /(^|[\s\n]|<[A-Za-z]*\/?>)((?:https?|ftp):\/\/[\-A-Z0-9+\u0026\u2019@#\/%?=()~_|!:,.;]*[\-A-Z0-9+\u0026@#\/%=~()_|])/gi;
   return text.replace(urlRegex, '$1<a rel="noreferrer noopener" target="_blank" href="$2">$2</a>');
 };
 

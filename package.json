@@ -6,7 +6,8 @@
     "start": "next",
     "build": "next build",
     "serve": "next start",
-    "lint": "lint-staged"
+    "lint-staged": "lint-staged",
+    "lint": "eslint -c .eslintrc.js --ext .js,.jsx,.ts,.tsx src && prettier --write src/**/*"
   },
   "keywords": [
     "Biodiversity",

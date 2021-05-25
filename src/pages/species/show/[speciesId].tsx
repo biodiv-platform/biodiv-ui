@@ -27,21 +27,15 @@ const SpeciesShowPage = ({ species, licensesList, permissions, success }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const [
-    traitsMeta,
-    fieldsMeta,
-    speciesData,
-    speciesGroupsData,
-    speciesPermission,
-    licensesList
-  ] = await Promise.all([
-    axGetAllTraitsMeta(),
-    axGetAllFieldsMeta(),
-    axGetSpeciesById(ctx.query.speciesId),
-    axGetspeciesGroups(),
-    axCheckSpeciesPermission(ctx, ctx.query.speciesId),
-    axGetLicenseList()
-  ]);
+  const [traitsMeta, fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
+    await Promise.all([
+      axGetAllTraitsMeta(),
+      axGetAllFieldsMeta(),
+      axGetSpeciesById(ctx.query.speciesId),
+      axGetspeciesGroups(),
+      axCheckSpeciesPermission(ctx, ctx.query.speciesId),
+      axGetLicenseList()
+    ]);
 
   const species = normalizeSpeciesPayload(
     fieldsMeta.data,

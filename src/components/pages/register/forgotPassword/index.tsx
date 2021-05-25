@@ -125,7 +125,9 @@ export default function ForgotPasswordComponent() {
                 ) : (
                   <TextBoxField name="email" label={t("USER.EMAIL")} />
                 )}
-                <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("FORGOT_PASSWORD.FORM.SUBMIT")}</SubmitButton>
+                <SubmitButton rightIcon={<ArrowForwardIcon />}>
+                  {t("FORGOT_PASSWORD.FORM.SUBMIT")}
+                </SubmitButton>
               </form>
             </FormProvider>
           </>
@@ -145,7 +147,9 @@ export default function ForgotPasswordComponent() {
                   type="password"
                 />
                 <Flex justifyContent="space-between" alignItems="center">
-                  <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("OTP.FORM.SUBMIT")}</SubmitButton>
+                  <SubmitButton rightIcon={<ArrowForwardIcon />}>
+                    {t("OTP.FORM.SUBMIT")}
+                  </SubmitButton>
                   <BlueLink onClick={handleRegenerate}>{t("OTP.RESEND")}</BlueLink>
                 </Flex>
               </form>

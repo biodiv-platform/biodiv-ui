@@ -216,9 +216,7 @@ export const axUnlockRecoVote = async (observationId, payload) => {
 
 export const axGetCreateObservationPageData = async (userGroupId, ctx) => {
   try {
-    const {
-      data
-    } = await http.get(
+    const { data } = await http.get(
       `${ENDPOINT.OBSERVATION}/v1/observation/usergroup/createObservation/${userGroupId}`,
       { params: { ctx } }
     );

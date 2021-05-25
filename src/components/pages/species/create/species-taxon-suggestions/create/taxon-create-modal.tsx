@@ -60,9 +60,7 @@ export default function TaxonCreateModal({ isOpen, onClose, validateResults }) {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={onClose}>
-            {t("CLOSE")}
-          </Button>
+          <Button onClick={onClose}>{t("CLOSE")}</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

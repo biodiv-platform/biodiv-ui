@@ -11,9 +11,10 @@ import { generateReferencesList } from "./utils";
 export default function ReferencesField({ currentField, parentField, level }) {
   const { species, permissions } = useSpecies();
 
-  const fieldsRender = useMemo(() => generateReferencesList(species.fieldData), [
-    species.fieldData
-  ]);
+  const fieldsRender = useMemo(
+    () => generateReferencesList(species.fieldData),
+    [species.fieldData]
+  );
 
   return (
     <Stack spacing={3}>

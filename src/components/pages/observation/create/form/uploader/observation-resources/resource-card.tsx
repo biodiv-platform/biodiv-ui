@@ -7,7 +7,12 @@ import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
-import { getFallbackByMIME, getResourceThumbnail, getYoutubeImage, RESOURCE_CTX } from "@utils/media";
+import {
+  getFallbackByMIME,
+  getResourceThumbnail,
+  getYoutubeImage,
+  RESOURCE_CTX
+} from "@utils/media";
 import React, { useMemo } from "react";
 import Rating from "react-rating";
 import Select from "react-select";
