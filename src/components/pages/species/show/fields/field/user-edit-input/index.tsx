@@ -1,7 +1,6 @@
-import SelectAsyncInputField from "@components/form/select-async";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import { axUserSearch } from "@services/auth.service";
 import React from "react";
-import { UseFormMethods } from "react-hook-form";
 
 interface IUserSelectProps {
   name: string;
@@ -9,12 +8,11 @@ interface IUserSelectProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
-  form: UseFormMethods<Record<string, any>>;
   style?;
   isRequired?;
 }
 
-const UserSelectField = ({ name, label, form, mb, isRequired }: IUserSelectProps) => {
+const UserSelectField = ({ name, label, mb, isRequired }: IUserSelectProps) => {
   const onUserQuery = async (q) => {
     const { data } = await axUserSearch(q);
 
@@ -28,7 +26,6 @@ const UserSelectField = ({ name, label, form, mb, isRequired }: IUserSelectProps
   return (
     <SelectAsyncInputField
       name={name}
-      form={form}
       placeholder={label}
       onQuery={onUserQuery}
       multiple={true}

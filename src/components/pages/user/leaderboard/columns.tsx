@@ -12,8 +12,13 @@ const ObservationCell = (props) => {
 };
 
 const CommonStatCell = (props) => {
-  const { commented = 0, contributed = 0, organized = 0, curated = 0, identified = 0 } =
-    props?.cell?.value || {};
+  const {
+    commented = 0,
+    contributed = 0,
+    organized = 0,
+    curated = 0,
+    identified = 0
+  } = props?.cell?.value || {};
   return format(+commented + +contributed + +organized + +curated + +identified);
 };
 

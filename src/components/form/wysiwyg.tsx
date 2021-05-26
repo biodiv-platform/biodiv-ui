@@ -1,9 +1,7 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import WYSIWYGEditor from "@components/@core/wysiwyg-editor";
 import React from "react";
-import { Controller, UseFormMethods } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
+import { useController } from "react-hook-form";
 
 interface IWYSIWYGFieldProps {
   name: string;
@@ -12,40 +10,36 @@ interface IWYSIWYGFieldProps {
   mb?: number;
   hint?: string;
   uploadHandler?;
-  form: UseFormMethods<Record<string, any>>;
 }
 
 const WYSIWYGField = ({
   name,
   label,
-  form,
   mb = 4,
   hint,
   uploadHandler,
   ...props
-}: IWYSIWYGFieldProps) => (
-  <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    {label && <FormLabel>{label}</FormLabel>}
-    <Controller
-      control={form.control}
-      name={name}
-      render={({ onChange, onBlur, value }) => (
-        <WYSIWYGEditor
-          name={name}
-          value={value}
-          onEditorChange={onChange}
-          placeholder={label}
-          onBlur={onBlur}
-          uploadHandler={uploadHandler}
-        >
-          {label}
-        </WYSIWYGEditor>
-      )}
-    />
+}: IWYSIWYGFieldProps) => {
+  const { field, fieldState } = useController({ name });
 
-    <ErrorMessage name={name} errors={form.errors} />
-    {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-  </FormControl>
-);
+  return (
+    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+      {label && <FormLabel>{label}</FormLabel>}
+      <WYSIWYGEditor
+        name={name}
+        value={field.value}
+        onEditorChange={field.onChange}
+        placeholder={label}
+        onBlur={field.onBlur}
+        uploadHandler={uploadHandler}
+      >
+        {label}
+      </WYSIWYGEditor>
+
+      <FormErrorMessage children={fieldState?.error?.message} />
+      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+    </FormControl>
+  );
+};
 
 export default WYSIWYGField;

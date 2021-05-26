@@ -12,15 +12,15 @@ import {
   Text
 } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import Submit from "@components/form/submit-button";
-import TextBox from "@components/form/text";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axRegenerateOTP, axValidateUser } from "@services/auth.service";
 import { setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import OTPIcon from "./otp-icon";
@@ -70,29 +70,29 @@ export default function OTPModal({ isOpen, onClose, user }) {
       <ModalOverlay className="fade">
         <ModalContent className="fadeInUp" borderRadius="md">
           <ModalCloseButton />
-          <form onSubmit={otpForm.handleSubmit(handleOtpFormSubmit)}>
-            <ModalBody pt={8}>
-              <Flex direction="column" align="center" mb={8} mt={4}>
-                <OTPIcon />
-              </Flex>
-              <Heading mb={2} size="lg">
-                {t("OTP.TITLE")}
-              </Heading>
-              <Text mb={2} color="gray.600">
-                {t("OTP.DESCRIPTION")} {user?.vt}
-              </Text>
-              <TextBox mb={0} name="otp" label={t("OTP.FORM.OTP")} form={otpForm} />
-            </ModalBody>
+          <FormProvider {...otpForm}>
+            <form onSubmit={otpForm.handleSubmit(handleOtpFormSubmit)}>
+              <ModalBody pt={8}>
+                <Flex direction="column" align="center" mb={8} mt={4}>
+                  <OTPIcon />
+                </Flex>
+                <Heading mb={2} size="lg">
+                  {t("OTP.TITLE")}
+                </Heading>
+                <Text mb={2} color="gray.600">
+                  {t("OTP.DESCRIPTION")} {user?.vt}
+                </Text>
+                <TextBoxField mb={0} name="otp" label={t("OTP.FORM.OTP")} />
+              </ModalBody>
 
-            <ModalFooter justifyContent="space-between">
-              <Link as="button" type="button" onClick={handleRegenerate}>
-                {t("OTP.RESEND")}
-              </Link>
-              <Submit form={otpForm} rightIcon={<ArrowForwardIcon />}>
-                {t("OTP.FORM.SUBMIT")}
-              </Submit>
-            </ModalFooter>
-          </form>
+              <ModalFooter justifyContent="space-between">
+                <Link as="button" type="button" onClick={handleRegenerate}>
+                  {t("OTP.RESEND")}
+                </Link>
+                <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("OTP.FORM.SUBMIT")}</SubmitButton>
+              </ModalFooter>
+            </form>
+          </FormProvider>
         </ModalContent>
       </ModalOverlay>
     </Modal>

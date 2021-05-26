@@ -6,7 +6,6 @@ import React from "react";
 
 interface ITraitInputProps {
   onChange?;
-  form;
   name;
   options: any[];
   gridColumns?;
@@ -41,11 +40,11 @@ const CustomRadio = (props: any) => {
   );
 };
 
-const RadioItems = ({ options, form, name, defaultValue }: ITraitInputProps) => {
+const RadioItems = ({ options, name, defaultValue, onChange }: ITraitInputProps) => {
   const { getRootProps, getRadioProps } = useRadioGroup({
     name,
     defaultValue,
-    onChange: (v) => form.setValue(name, v)
+    onChange
   });
 
   return (

@@ -1,8 +1,7 @@
-import SelectInputField from "@components/form/select";
-import SelectMultipleInputField from "@components/form/select-multiple";
-import TextBoxField from "@components/form/text";
+import { SelectInputField } from "@components/form/select";
+import { SelectMultipleInputField } from "@components/form/select-multiple";
+import { TextBoxField } from "@components/form/text";
 import React from "react";
-import { UseFormMethods } from "react-hook-form";
 
 import CustomFieldOptions from "./custom-field-options";
 
@@ -12,7 +11,6 @@ interface IObservationCustomField {
   fieldType: string;
   isRequired?: boolean;
   dataType?: string;
-  form: UseFormMethods<Record<string, any>>;
   options?;
 }
 export default function ObservationCustomFieldInput({
@@ -20,7 +18,6 @@ export default function ObservationCustomFieldInput({
   fieldType,
   dataType,
   label,
-  form,
   isRequired,
   options
 }: IObservationCustomField) {
@@ -28,7 +25,6 @@ export default function ObservationCustomFieldInput({
     case "SINGLE CATEGORICAL":
       return (
         <SelectInputField
-          form={form}
           name={name}
           label={label}
           options={options}
@@ -41,7 +37,6 @@ export default function ObservationCustomFieldInput({
     case "MULTIPLE CATEGORICAL":
       return (
         <SelectMultipleInputField
-          form={form}
           name={name}
           label={label}
           isRequired={isRequired}
@@ -58,7 +53,6 @@ export default function ObservationCustomFieldInput({
           type={dataType === ("INTEGER" || "DECIMAL") ? "number" : "text"}
           label={label}
           isRequired={isRequired}
-          form={form}
           mb={0}
         />
       );

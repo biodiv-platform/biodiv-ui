@@ -7,9 +7,9 @@ import {
   ModalFooter,
   ModalHeader
 } from "@chakra-ui/react";
-import SelectInputField from "@components/form/select";
-import SubmitButton from "@components/form/submit-button";
-import TextBoxField from "@components/form/text";
+import { SelectInputField } from "@components/form/select";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import DropzoneFieldContainer from "@components/pages/observation/create/form/uploader";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,7 +23,7 @@ import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import useSpecies from "../../../use-species";
@@ -123,55 +123,52 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
 
   return (
     <ModalContent>
-      <form onSubmit={hForm.handleSubmit(handleOnSave)}>
-        <ModalHeader>{t("SPECIES.FIELD.MANAGE")}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
-            <WYSIWYGField
-              name="sfDescription"
-              key="xo"
-              form={hForm}
-              uploadHandler={axUploadSpeciesEditorResource}
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSave)}>
+          <ModalHeader>{t("SPECIES.FIELD.MANAGE")}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
+              <WYSIWYGField
+                name="sfDescription"
+                key="xo"
+                uploadHandler={axUploadSpeciesEditorResource}
+              />
+            </Box>
+            <TextBoxField
+              hidden={referencesOnly}
+              name="attributions"
+              label={t("SPECIES.ATTRIBUTIONS")}
+              isRequired={true}
             />
-          </Box>
-          <TextBoxField
-            hidden={referencesOnly}
-            name="attributions"
-            label={t("SPECIES.ATTRIBUTIONS")}
-            isRequired={true}
-            form={hForm}
-          />
-          <UserSelectField
-            name="contributorIds"
-            label={t("SPECIES.CONTRIBUTORS")}
-            isRequired={true}
-            form={hForm}
-          />
-          <SelectInputField
-            hidden={referencesOnly}
-            name="licenseId"
-            label={t("DOCUMENT.LICENSE")}
-            form={hForm}
-            isRequired={true}
-            options={licensesList}
-          />
-          <ReferencesField name="references" label={t("SPECIES.REFERENCES")} form={hForm} />
-          <DropzoneFieldContainer
-            hidden={referencesOnly}
-            name="speciesFieldResource"
-            form={hForm}
-            isCreate={false}
-            licensesList={licensesList}
-          />
-        </ModalBody>
-        <ModalFooter>
-          <SubmitButton form={hForm} leftIcon={<CheckIcon />} children={t("SAVE")} />
-          <Button ml={4} leftIcon={<CrossIcon />} onClick={onCancel}>
-            {t("CANCEL")}
-          </Button>
-        </ModalFooter>
-      </form>
+            <UserSelectField
+              name="contributorIds"
+              label={t("SPECIES.CONTRIBUTORS")}
+              isRequired={true}
+            />
+            <SelectInputField
+              hidden={referencesOnly}
+              name="licenseId"
+              label={t("DOCUMENT.LICENSE")}
+              isRequired={true}
+              options={licensesList}
+            />
+            <ReferencesField name="references" label={t("SPECIES.REFERENCES")} />
+            <DropzoneFieldContainer
+              hidden={referencesOnly}
+              name="speciesFieldResource"
+              isCreate={false}
+              licensesList={licensesList}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <SubmitButton leftIcon={<CheckIcon />} children={t("SAVE")} />
+            <Button ml={4} leftIcon={<CrossIcon />} onClick={onCancel}>
+              {t("CANCEL")}
+            </Button>
+          </ModalFooter>
+        </form>
+      </FormProvider>
     </ModalContent>
   );
 }

@@ -8,17 +8,16 @@ import {
   InputGroup,
   useDisclosure
 } from "@chakra-ui/react";
-import CheckBox from "@components/form/checkbox";
+import { CheckboxField } from "@components/form/checkbox";
 import ErrorMessage from "@components/form/common/error-message";
 import useTranslation from "@hooks/use-translation";
 import { fromDMS, toDMS } from "dmsformat";
 import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 interface ICoordinatesProps {
   show: boolean;
   fk;
-  form: UseFormMethods<Record<string, any>>;
   coordinates;
   setCoordinates;
 }
@@ -26,10 +25,10 @@ interface ICoordinatesProps {
 export default function CoordinatesInput({
   show,
   fk,
-  form,
   coordinates: { lat, lng },
   setCoordinates
 }: ICoordinatesProps) {
+  const form = useFormContext();
   const { isOpen, onToggle } = useDisclosure();
   const [latDMS, setLatDMS] = useState("");
   const [lngDMS, setLngDMS] = useState("");
@@ -72,7 +71,10 @@ export default function CoordinatesInput({
     <Collapse in={show}>
       <FormControl
         mb={4}
-        isInvalid={(form.errors[fk.latitude.name] || form.errors[fk.longitude.name]) && true}
+        isInvalid={
+          (form.formState.errors[fk.latitude.name] || form.formState.errors[fk.longitude.name]) &&
+          true
+        }
         isRequired={true}
       >
         <FormLabel htmlFor="coordinates">
@@ -99,19 +101,18 @@ export default function CoordinatesInput({
             borderLeft={0}
           />
         </InputGroup>
-        <ErrorMessage name={fk.latitude.name} errors={form.errors} />
-        <ErrorMessage name={fk.longitude.name} errors={form.errors} />
+        <ErrorMessage name={fk.latitude.name} errors={form.formState.errors} />
+        <ErrorMessage name={fk.longitude.name} errors={form.formState.errors} />
         {isOpen && (
           <FormHelperText>
             Enter values in given format for example <code>0° 0&apos; 0.00000&quot; S</code>
           </FormHelperText>
         )}
       </FormControl>
-      <CheckBox
+      <CheckboxField
         mt={2}
         name="hidePreciseLocation"
         label={t("OBSERVATION.HIDE_PRECISE_LOCATION")}
-        form={form}
       />
     </Collapse>
   );

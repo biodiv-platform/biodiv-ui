@@ -13,10 +13,10 @@ export default function FilterIconList({
   filterList = [],
   type
 }: FilterIconListProps) {
-  const filters: any[] = useMemo(() => filterList.filter((item) => filterIds.includes(item.id)), [
-    filterIds,
-    filterList
-  ]);
+  const filters: any[] = useMemo(
+    () => filterList.filter((item) => filterIds.includes(item.id)),
+    [filterIds, filterList]
+  );
 
   if (!filters.length) {
     <Box minH="1.68rem">-</Box>;

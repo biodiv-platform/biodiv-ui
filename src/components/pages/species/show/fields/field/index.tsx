@@ -1,4 +1,4 @@
-import { Box, Stack } from "@chakra-ui/layout";
+import { Stack } from "@chakra-ui/layout";
 import { SpeciesField } from "@interfaces/custom";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATED } from "@static/events";
 import React, { useEffect, useState } from "react";

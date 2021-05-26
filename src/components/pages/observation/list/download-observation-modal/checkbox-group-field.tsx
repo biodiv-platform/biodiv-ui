@@ -1,13 +1,18 @@
-import { Checkbox, CheckboxGroup, FormControl, FormLabel, Stack } from "@chakra-ui/react";
-import ErrorMessage from "@components/form/common/error-message";
-import React, { useEffect, useMemo } from "react";
-import { UseFormMethods } from "react-hook-form";
+import {
+  Checkbox,
+  CheckboxGroup,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Stack
+} from "@chakra-ui/react";
+import React from "react";
+import { useController } from "react-hook-form";
 
 interface ITextBoxProps {
   name: string;
   label: string;
   options: { value: string; label: string }[];
-  form: UseFormMethods<Record<string, any>>;
   mb?: number;
   disabled?: boolean;
 }
@@ -16,25 +21,16 @@ const CheckboxGroupField = ({
   name,
   label,
   options,
-  form,
   mb = 4,
   disabled,
   ...props
 }: ITextBoxProps) => {
-  const initialValue = useMemo(() => form.control.defaultValuesRef.current[name] || [], []);
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
-
-  const handleOnChange = (item) => {
-    form.setValue(name, item);
-  };
+  const { field, fieldState } = useController({ name, defaultValue: [] });
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
+    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
       <FormLabel htmlFor="email">{label}</FormLabel>
-      <CheckboxGroup defaultValue={initialValue} onChange={handleOnChange}>
+      <CheckboxGroup defaultValue={field.value} onChange={field.onChange}>
         <Stack className="custom-checkbox-group">
           {options.map((item) => (
             <Checkbox w="22rem" isDisabled={disabled} key={item.value} value={item.value}>
@@ -43,7 +39,7 @@ const CheckboxGroupField = ({
           ))}
         </Stack>
       </CheckboxGroup>
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
     </FormControl>
   );
 };

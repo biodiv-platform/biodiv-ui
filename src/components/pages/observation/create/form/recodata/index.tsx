@@ -1,21 +1,21 @@
 import { Collapse, SimpleGrid } from "@chakra-ui/react";
-import CheckBox from "@components/form/checkbox";
-import Select from "@components/form/select";
-import SelectAsync from "@components/form/select-async";
+import { CheckboxField } from "@components/form/checkbox";
+import { SelectInputField } from "@components/form/select";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import { CommonNameOption, getCommonNameOption, onCommonNameQuery } from "./common-name";
 import { onScientificNameQuery, ScientificNameOption } from "./scientific-name";
 
 interface IRecodataProps {
-  form: UseFormMethods<Record<string, any>>;
   languages;
 }
 
-export default function Recodata({ form, languages }: IRecodataProps) {
+export default function Recodata({ languages }: IRecodataProps) {
+  const form = useFormContext();
   const helpIdentify = form.watch("helpIdentify");
 
   const { t } = useTranslation();
@@ -52,16 +52,16 @@ export default function Recodata({ form, languages }: IRecodataProps) {
   };
 
   useEffect(() => {
-    form.register({ name: "taxonScientificName" });
+    form.register("taxonScientificName");
   }, [form.register]);
 
   return (
     <>
-      <CheckBox name="helpIdentify" label="Help Identify" form={form} />
+      <CheckboxField name="helpIdentify" label="Help Identify" />
       <Collapse in={!helpIdentify} startingHeight={1} animateOpacity={true}>
         <SimpleGrid columns={[1, 1, 2, 2]} spacing={4}>
           <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
-            <SelectAsync
+            <SelectAsyncInputField
               name="taxonCommonName"
               label={t("OBSERVATION.COMMON_NAME")}
               style={{ gridColumn: "1/3" }}
@@ -71,19 +71,17 @@ export default function Recodata({ form, languages }: IRecodataProps) {
               optionComponent={CommonNameOption}
               placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
               onChange={onCommonNameChange}
-              form={form}
             />
-            <Select
+            <SelectInputField
               name="obsvLanguageId"
               label={t("OBSERVATION.LANGUAGE")}
               options={languages}
               disabled={helpIdentify}
-              form={form}
               shouldPortal={true}
               selectRef={langRef}
             />
           </SimpleGrid>
-          <SelectAsync
+          <SelectAsyncInputField
             name="scientificNameTaxonId"
             label={t("OBSERVATION.SCIENTIFIC_NAME")}
             disabled={helpIdentify}
@@ -91,7 +89,6 @@ export default function Recodata({ form, languages }: IRecodataProps) {
             optionComponent={ScientificNameOption}
             placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
             onChange={onScientificNameChange}
-            form={form}
             selectRef={scientificRef}
           />
         </SimpleGrid>

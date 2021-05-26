@@ -5,14 +5,16 @@ import { ASSET_TYPES } from "@static/observation-create";
 export const RESOURCE_CTX = {
   OBSERVATION: "OBSERVATION",
   MY_UPLOADS: "MY_UPLOADS",
-  SPECIES: "SPECIES"
+  SPECIES: "SPECIES",
+  USERGROUPS: "USERGROUPS"
 };
 
 const RESOURCE_CTX_MAP = {
   SPECIES: "img",
   OBSERVATION: "observations",
   SPECIES_FIELD: "img",
-  MY_UPLOADS: "myUploads"
+  MY_UPLOADS: "myUploads",
+  USERGROUPS: "userGroups"
 };
 
 const cleanSlashes = (path) => path.split("//").join("/");

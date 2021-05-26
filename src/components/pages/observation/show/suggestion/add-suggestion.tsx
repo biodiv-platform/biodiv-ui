@@ -8,9 +8,9 @@ import {
   Skeleton,
   useDisclosure
 } from "@chakra-ui/react";
-import Select from "@components/form/select";
-import SelectAsync from "@components/form/select-async";
-import Submit from "@components/form/submit-button";
+import { SelectInputField } from "@components/form/select";
+import { SelectAsyncInputField } from "@components/form/select-async";
+import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
@@ -19,7 +19,7 @@ import { axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
 import notification from "@utils/notification";
 import React, { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import {
@@ -106,7 +106,7 @@ export default function AddSuggestion({
   };
 
   useEffect(() => {
-    hForm.register({ name: "taxonScientificName" });
+    hForm.register("taxonScientificName");
   }, [hForm.register]);
 
   const handleOnSubmit = async (values) => {
@@ -142,41 +142,38 @@ export default function AddSuggestion({
         <Box className="fade" hidden={!isOpen}>
           <Collapse in={isOpen} unmountOnExit={true}>
             <Box p={4}>
-              <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-                <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
-                  <SelectAsync
-                    name="taxonCommonName"
-                    label={t("OBSERVATION.COMMON_NAME")}
-                    style={{ gridColumn: "1/3" }}
-                    onQuery={onCommonNameQuery}
-                    options={commonNameOptions}
-                    optionComponent={CommonNameOption}
+              <FormProvider {...hForm}>
+                <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+                  <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
+                    <SelectAsyncInputField
+                      name="taxonCommonName"
+                      label={t("OBSERVATION.COMMON_NAME")}
+                      style={{ gridColumn: "1/3" }}
+                      onQuery={onCommonNameQuery}
+                      options={commonNameOptions}
+                      optionComponent={CommonNameOption}
+                      placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
+                      onChange={onCommonNameChange}
+                    />
+                    <SelectInputField
+                      name="languageId"
+                      label={t("OBSERVATION.LANGUAGE")}
+                      options={languages}
+                      selectRef={langRef}
+                    />
+                  </SimpleGrid>
+                  <SelectAsyncInputField
+                    name="scientificNameTaxonId"
+                    label={t("OBSERVATION.SCIENTIFIC_NAME")}
+                    onQuery={onScientificNameQuery}
+                    optionComponent={ScientificNameOption}
                     placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
-                    onChange={onCommonNameChange}
-                    form={hForm}
+                    onChange={onScientificNameChange}
+                    selectRef={scientificRef}
                   />
-                  <Select
-                    name="languageId"
-                    label={t("OBSERVATION.LANGUAGE")}
-                    options={languages}
-                    form={hForm}
-                    selectRef={langRef}
-                  />
-                </SimpleGrid>
-                <SelectAsync
-                  name="scientificNameTaxonId"
-                  label={t("OBSERVATION.SCIENTIFIC_NAME")}
-                  onQuery={onScientificNameQuery}
-                  optionComponent={ScientificNameOption}
-                  placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
-                  onChange={onScientificNameChange}
-                  form={hForm}
-                  selectRef={scientificRef}
-                />
-                <Submit leftIcon={<CheckIcon />} form={hForm}>
-                  {t("OBSERVATION.SUGGEST")}
-                </Submit>
-              </form>
+                  <SubmitButton leftIcon={<CheckIcon />}>{t("OBSERVATION.SUGGEST")}</SubmitButton>
+                </form>
+              </FormProvider>
             </Box>
           </Collapse>
         </Box>

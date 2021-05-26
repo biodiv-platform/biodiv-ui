@@ -1,10 +1,9 @@
-import { Box, FormControl, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import { ErrorMessageMulti } from "@components/form/common/error-message";
+import { Box, FormErrorMessage, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
 import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import FieldMappingInput from "../uploader/file-uploader-field/options-field";
 import SheetUploader from "./file-uploader-field";
@@ -16,7 +15,6 @@ export interface IDropzoneProps {
   setShowMapping: any;
   fieldMapping: any;
   mb?: number;
-  form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   children?;
 }
@@ -24,17 +22,17 @@ export interface IDropzoneProps {
 const DropzoneField = ({
   name,
   mb = 4,
-  form,
   setFieldMapping,
   showMapping,
   fieldMapping,
   setShowMapping
 }: IDropzoneProps) => {
+  const form = useFormContext();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
   useEffect(() => {
-    form.register({ name });
+    form.register(name);
   }, [form.register]);
 
   const onSelectionDone = () => setTabIndex(0);
@@ -42,7 +40,7 @@ const DropzoneField = ({
   return (
     <ToggleablePanel icon="📂" title={t("DATATABLE.FILES_UPLOAD")}>
       <Box p={4} pb={0}>
-        <FormControl isInvalid={form.errors[name] && true} mb={mb}>
+        <Box mb={mb}>
           <Tabs className="nospace" index={tabIndex} onChange={setTabIndex} variant="soft-rounded">
             <TabList mb={2}>
               <Tab>📝 {t("DATATABLE.SHEET_UPLOADER")}</Tab>
@@ -56,7 +54,6 @@ const DropzoneField = ({
                     showMapping={showMapping}
                     setShowMapping={setShowMapping}
                     name="columnsMapping"
-                    form={form}
                   />
                 ) : (
                   <SheetUploader
@@ -66,7 +63,6 @@ const DropzoneField = ({
                     setShowMapping={setShowMapping}
                     isRequired={true}
                     name={name}
-                    form={form}
                     mb={0}
                   />
                 )}
@@ -76,9 +72,8 @@ const DropzoneField = ({
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <ErrorMessageMulti errors={form.errors} name={name} />
-        </FormControl>
-        <FormControl isInvalid={form.errors[name] && true} mb={mb}></FormControl>
+          <FormErrorMessage children={form?.formState?.errors?.[name]} />
+        </Box>
       </Box>
     </ToggleablePanel>
   );

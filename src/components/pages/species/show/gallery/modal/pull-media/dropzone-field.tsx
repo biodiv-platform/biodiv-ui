@@ -1,5 +1,12 @@
-import { FormControl, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import { ErrorMessageMulti } from "@components/form/common/error-message";
+import {
+  FormControl,
+  FormErrorMessage,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs
+} from "@chakra-ui/react";
 import AudioInput from "@components/pages/observation/create/form/uploader/audio-input";
 import FromURL from "@components/pages/observation/create/form/uploader/from-url";
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
@@ -7,34 +14,30 @@ import ResourcesList from "@components/pages/observation/create/form/uploader/ob
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import useTranslation from "@hooks/use-translation";
 import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import { useController } from "react-hook-form";
 
 import SpeciesPullMedia from ".";
 
 interface ISpeciesDropzoneField {
   name: string;
-  form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   children?;
 }
 
-const SpeciesDropzoneField = ({ name, form }: ISpeciesDropzoneField) => {
+const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
+  const { field, fieldState } = useController({ name });
   const { observationAssets } = useObservationCreate();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
   useEffect(() => {
-    form.setValue(name, observationAssets, { shouldDirty: true });
+    field.onChange(observationAssets);
   }, [observationAssets]);
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
 
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} minH="500px">
+    <FormControl isInvalid={fieldState.invalid} minH="500px">
       <Tabs
         className="nospace"
         index={tabIndex}
@@ -67,7 +70,7 @@ const SpeciesDropzoneField = ({ name, form }: ISpeciesDropzoneField) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <ErrorMessageMulti errors={form.errors} name={name} />
+      <FormErrorMessage children={JSON.stringify(fieldState?.error?.message)} />
     </FormControl>
   );
 };

@@ -1,12 +1,9 @@
-import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config.json";
 import styled from "@emotion/styled";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import React from "react";
+import { useController } from "react-hook-form";
 import MobileInput from "react-phone-number-input";
-
-import ErrorMessage from "./common/error-message";
 
 const PhoneFormControl = styled.div`
   .PhoneInput {
@@ -39,51 +36,32 @@ interface ISelectProps {
   hint?: string;
   defaultCountry?: string;
   onBlur?;
-  form: UseFormMethods<Record<string, any>>;
 }
 
-const PhoneNumberInputField = ({
+export const PhoneNumberInputField = ({
   name,
   label,
   hint,
-  form,
   mb = 4,
   defaultCountry = SITE_CONFIG.MAP.COUNTRY,
   disabled = false,
   ...props
 }: ISelectProps) => {
-  const [value, setValue] = useState(form.control.defaultValuesRef.current[name]);
-
-  useEffect(() => {
-    form.setValue(name, value);
-  }, [value]);
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
-
-  const handleOnBlur = () => {
-    form.trigger(name);
-  };
+  const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl as={PhoneFormControl} isInvalid={form.errors[name] && true} mb={mb} {...props}>
+    <FormControl as={PhoneFormControl} isInvalid={fieldState.invalid} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <MobileInput
         id={name}
-        name={name}
         inputComponent={Input}
         countrySelectProps={{ unicodeFlags: true }}
         defaultCountry={defaultCountry}
-        value={value}
-        onChange={setValue}
-        onBlur={handleOnBlur}
         disabled={disabled}
+        {...field}
       />
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
-
-export default PhoneNumberInputField;

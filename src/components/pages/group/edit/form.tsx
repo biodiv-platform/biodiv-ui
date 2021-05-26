@@ -1,16 +1,16 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import CheckboxField from "@components/form/checkbox";
-import RichTextareaField from "@components/form/rich-textarea";
-import SubmitButton from "@components/form/submit-button";
-import TextBoxField from "@components/form/text";
+import { CheckboxField } from "@components/form/checkbox";
+import { RichTextareaField } from "@components/form/rich-textarea";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import AreaDrawField from "../common/area-draw-field";
@@ -93,45 +93,38 @@ export default function UserGroupEditForm({
   };
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
-        <Box gridColumn="1/4">
-          <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} form={hForm} />
-          <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} form={hForm} />
-        </Box>
-        <ImageUploaderField label="Logo" name="icon" form={hForm} />
-      </SimpleGrid>
-      <IconCheckboxField
-        name="speciesGroupId"
-        label={t("GROUP.SPECIES_COVERAGE")}
-        form={hForm}
-        options={speciesGroups}
-        type="species"
-        isRequired={true}
-      />
-      <IconCheckboxField
-        name="habitatId"
-        label={t("GROUP.HABITATS_COVERED")}
-        options={habitats}
-        form={hForm}
-        type="habitat"
-        isRequired={true}
-      />
-      <CheckboxField
-        name="allowUserToJoin"
-        label={t("GROUP.JOIN_WITHOUT_INVITATION")}
-        form={hForm}
-      />
-      <AreaDrawField
-        label={t("GROUP.SPATIAL_COVERGE")}
-        name={"spacialCoverage"}
-        form={hForm}
-        isRequired={true}
-      />
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
+        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+          <Box gridColumn="1/4">
+            <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} />
+            <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} />
+          </Box>
+          <ImageUploaderField label="Logo" name="icon" />
+        </SimpleGrid>
+        <IconCheckboxField
+          name="speciesGroupId"
+          label={t("GROUP.SPECIES_COVERAGE")}
+          options={speciesGroups}
+          type="species"
+          isRequired={true}
+        />
+        <IconCheckboxField
+          name="habitatId"
+          label={t("GROUP.HABITATS_COVERED")}
+          options={habitats}
+          type="habitat"
+          isRequired={true}
+        />
+        <CheckboxField name="allowUserToJoin" label={t("GROUP.JOIN_WITHOUT_INVITATION")} />
+        <AreaDrawField
+          label={t("GROUP.SPATIAL_COVERGE")}
+          name={"spacialCoverage"}
+          isRequired={true}
+        />
 
-      <SubmitButton form={hForm} mb={8}>
-        {t("GROUP.UPDATE")}
-      </SubmitButton>
-    </form>
+        <SubmitButton mb={8}>{t("GROUP.UPDATE")}</SubmitButton>
+      </form>
+    </FormProvider>
   );
 }

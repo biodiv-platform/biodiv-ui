@@ -4,7 +4,7 @@ import GroupSelector from "@components/pages/observation/create/form/groups";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
 
-export default function TaxonomyCovergae({ form, speciesGroups }) {
+export default function TaxonomyCovergae({ speciesGroups }) {
   const { t } = useTranslation();
 
   return (
@@ -14,7 +14,6 @@ export default function TaxonomyCovergae({ form, speciesGroups }) {
           name="sgroup"
           label={t("OBSERVATION.GROUPS")}
           options={speciesGroups}
-          form={form}
           hideDevider={true}
         />
       </Box>

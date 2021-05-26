@@ -1,11 +1,11 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, SimpleGrid } from "@chakra-ui/react";
-import CheckBoxField from "@components/form/checkbox";
-import Select from "@components/form/select";
-import SelectCreatable from "@components/form/select-creatable";
-import SubmitButton from "@components/form/submit-button";
-import TextBox from "@components/form/text";
-import TextAreaField from "@components/form/textarea";
+import { CheckboxField } from "@components/form/checkbox";
+import { SelectInputField } from "@components/form/select";
+import { SelectCreatableInputField } from "@components/form/select-creatable";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
+import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
@@ -13,7 +13,7 @@ import CheckIcon from "@icons/check";
 import { axAddCustomField, axAddExsistingCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import ImageUploaderField from "../image-uploader-field";
@@ -164,74 +164,68 @@ export default function AddCustomField({
   }, [defaultValues]);
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-      <Button mb={4} type="button" onClick={() => setIsCreate(false)} leftIcon={<ArrowBackIcon />}>
-        {t("GROUP.CUSTOM_FIELD.BACK")}
-      </Button>
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
-        <Box gridColumn="1/4">
-          <SelectCreatable
-            onChangeCallback={handleCustomFieldName}
-            name="name"
-            form={hForm}
-            options={allCustomFields.map((i) => ({
-              label: i.customFields.name,
-              value: i.customFields.name
-            }))}
-            label={t("GROUP.CUSTOM_FIELD.NAME")}
-          />
-          <TextAreaField
-            name="notes"
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+        <Button
+          mb={4}
+          type="button"
+          onClick={() => setIsCreate(false)}
+          leftIcon={<ArrowBackIcon />}
+        >
+          {t("GROUP.CUSTOM_FIELD.BACK")}
+        </Button>
+        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+          <Box gridColumn="1/4">
+            <SelectCreatableInputField
+              onChangeCallback={handleCustomFieldName}
+              name="name"
+              options={allCustomFields.map((i) => ({
+                label: i.customFields.name,
+                value: i.customFields.name
+              }))}
+              label={t("GROUP.CUSTOM_FIELD.NAME")}
+            />
+            <TextAreaField
+              name="notes"
+              disabled={customFieldExist}
+              label={t("GROUP.CUSTOM_FIELD.NOTES")}
+            />
+          </Box>
+          <ImageUploaderField nestedPath="customField" label="icon" name="iconURL" />
+        </SimpleGrid>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacingX={4}>
+          <TextBoxField
+            name="units"
             disabled={customFieldExist}
-            form={hForm}
-            label={t("GROUP.CUSTOM_FIELD.NOTES")}
+            label={t("GROUP.CUSTOM_FIELD.UNITS")}
           />
-        </Box>
-        <ImageUploaderField nestedPath="customField" label="icon" name="iconURL" form={hForm} />
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacingX={4}>
-        <TextBox
-          name="units"
-          disabled={customFieldExist}
-          form={hForm}
-          label={t("GROUP.CUSTOM_FIELD.UNITS")}
+          <SelectInputField
+            name="fieldType"
+            options={fieldTypes}
+            disabled={customFieldExist}
+            isControlled={true}
+            onChangeCallback={handleFieldChange}
+            label={t("GROUP.CUSTOM_FIELD.FIELD_TYPE")}
+          />
+          <SelectInputField
+            name="dataType"
+            disabled={customFieldExist}
+            onChangeCallback={handleDataTypeChange}
+            options={dataTypes}
+            isControlled={true}
+            label={t("GROUP.CUSTOM_FIELD.DATA_TYPE")}
+          />
+        </SimpleGrid>
+        {showOption && (
+          <OptionsField disabled={customFieldExist} radioGroupName="defaultValue" name="values" />
+        )}
+        <CheckboxField name="isMandatory" label={t("GROUP.CUSTOM_FIELD.IS_MANDATORY")} />
+        <CheckboxField
+          name="allowedParticipation"
+          label={t("GROUP.CUSTOM_FIELD.ALLOW_PARTICIPANT")}
         />
-        <Select
-          name="fieldType"
-          options={fieldTypes}
-          disabled={customFieldExist}
-          form={hForm}
-          isControlled={true}
-          onChangeCallback={handleFieldChange}
-          label={t("GROUP.CUSTOM_FIELD.FIELD_TYPE")}
-        />
-        <Select
-          name="dataType"
-          disabled={customFieldExist}
-          onChangeCallback={handleDataTypeChange}
-          options={dataTypes}
-          form={hForm}
-          isControlled={true}
-          label={t("GROUP.CUSTOM_FIELD.DATA_TYPE")}
-        />
-      </SimpleGrid>
-      {showOption && (
-        <OptionsField
-          disabled={customFieldExist}
-          radioGroupName="defaultValue"
-          name="values"
-          form={hForm}
-        />
-      )}
-      <CheckBoxField name="isMandatory" form={hForm} label={t("GROUP.CUSTOM_FIELD.IS_MANDATORY")} />
-      <CheckBoxField
-        name="allowedParticipation"
-        form={hForm}
-        label={t("GROUP.CUSTOM_FIELD.ALLOW_PARTICIPANT")}
-      />
-      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
-        {t("GROUP.CUSTOM_FIELD.CREATE")}
-      </SubmitButton>
-    </form>
+        <SubmitButton leftIcon={<CheckIcon />}>{t("GROUP.CUSTOM_FIELD.CREATE")}</SubmitButton>
+      </form>
+    </FormProvider>
   );
 }

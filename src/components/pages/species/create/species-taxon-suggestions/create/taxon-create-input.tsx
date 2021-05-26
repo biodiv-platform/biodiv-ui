@@ -30,7 +30,13 @@ export const TaxonCreateInputField = ({
   onValidate,
   mb = 4
 }: TaxonCreateInputFieldProps) => {
-  const { register, control, errors, watch, setError } = useFormContext();
+  const {
+    register,
+    control,
+    formState: { errors },
+    watch,
+    setError
+  } = useFormContext();
 
   const fieldWatch = watch(name);
 
@@ -55,11 +61,10 @@ export const TaxonCreateInputField = ({
           {label} {isRequired && "*"}
         </InputLeftAddon>
         <Input
-          name={name}
           id={name}
           placeholder={label}
-          ref={register}
           defaultValue={getByPath(control.defaultValuesRef.current, name)}
+          {...register(name)}
         />
         {errors[name] && (
           <InputRightElement width="5.4rem">

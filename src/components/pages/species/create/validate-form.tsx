@@ -1,14 +1,14 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { GridItem, Heading, SimpleGrid } from "@chakra-ui/react";
-import SelectInputField from "@components/form/select";
-import SubmitButton from "@components/form/submit-button";
-import TextBoxField from "@components/form/text";
+import { SelectInputField } from "@components/form/select";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axCheckTaxonomy } from "@services/species.service";
 import notification from "@utils/notification";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import useSpeciesCreate from "./species-taxon-suggestions/create/use-species-create";
@@ -52,33 +52,33 @@ export function SpeciesValidateForm() {
   };
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleOnValidate)}>
-      <Heading mb={4} fontSize="2xl">
-        🔍 {t("SPECIES.CREATE.FORM.SEARCH")}
-      </Heading>
-      <SimpleGrid columns={{ base: 1, md: 6 }} spacing={{ md: 4 }} mb={2}>
-        <GridItem colSpan={1}>
-          <SelectInputField
-            name="rank"
-            label={t("SPECIES.CREATE.FORM.RANK")}
-            form={hForm}
-            options={taxonRankOptions}
-            isRequired={true}
-          />
-        </GridItem>
-        <GridItem colSpan={4}>
-          <TextBoxField
-            name="speciesName"
-            label={t("SPECIES.CREATE.FORM.NAME")}
-            hint={t("SPECIES.CREATE.FORM.NAME_PLACEHOLDER")}
-            form={hForm}
-            isRequired={true}
-          />
-        </GridItem>
-        <SubmitButton mt={{ md: "31px" }} leftIcon={<SearchIcon />} form={hForm}>
-          {t("SPECIES.CREATE.FORM.VALIDATE")}
-        </SubmitButton>
-      </SimpleGrid>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleOnValidate)}>
+        <Heading mb={4} fontSize="2xl">
+          🔍 {t("SPECIES.CREATE.FORM.SEARCH")}
+        </Heading>
+        <SimpleGrid columns={{ base: 1, md: 6 }} spacing={{ md: 4 }} mb={2}>
+          <GridItem colSpan={1}>
+            <SelectInputField
+              name="rank"
+              label={t("SPECIES.CREATE.FORM.RANK")}
+              options={taxonRankOptions}
+              isRequired={true}
+            />
+          </GridItem>
+          <GridItem colSpan={4}>
+            <TextBoxField
+              name="speciesName"
+              label={t("SPECIES.CREATE.FORM.NAME")}
+              hint={t("SPECIES.CREATE.FORM.NAME_PLACEHOLDER")}
+              isRequired={true}
+            />
+          </GridItem>
+          <SubmitButton mt={{ md: "31px" }} leftIcon={<SearchIcon />}>
+            {t("SPECIES.CREATE.FORM.VALIDATE")}
+          </SubmitButton>
+        </SimpleGrid>
+      </form>
+    </FormProvider>
   );
 }

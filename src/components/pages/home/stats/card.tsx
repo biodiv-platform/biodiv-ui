@@ -1,8 +1,8 @@
-import { Box, Text } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Box, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import useTranslation from "@hooks/use-translation";
 import { toHumanString } from "human-readable-numbers";
 import React from "react";
 
@@ -48,7 +48,7 @@ export default function Card({ name, count, index, meta }) {
         >
           <IconMain s={70} />
           <Text className="count" fontSize="3xl" mt={2}>
-            {toHumanString(count)}
+            {toHumanString(count || 0)}
           </Text>
           <Text>
             {t(`HOME.PORTAL_STATS.${name.toUpperCase()}`)}

@@ -1,12 +1,14 @@
 import { Box, Divider, Text, VisuallyHidden } from "@chakra-ui/react";
-import CheckboxField from "@components/form/checkbox";
+import { CheckboxField } from "@components/form/checkbox";
 import useTranslation from "@hooks/use-translation";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
 import CustomFieldLastValue from "./custom-field-last-value";
 import CustomInputField from "./custom-input-field";
 
-export default function ObservationCustomFieldForm({ fields, form }) {
+export default function ObservationCustomFieldForm({ fields }) {
+  const { setValue } = useFormContext();
   const { t } = useTranslation();
 
   return (
@@ -21,7 +23,6 @@ export default function ObservationCustomFieldForm({ fields, form }) {
         return (
           <Box mb={4} key={index}>
             <CustomInputField
-              form={form}
               label={label}
               isRequired={isRequired}
               fieldType={fieldType}
@@ -29,9 +30,9 @@ export default function ObservationCustomFieldForm({ fields, form }) {
               options={options}
               name={fieldName}
             />
-            <CustomFieldLastValue id={customFieldId} name={fieldName} set={form.setValue} />
+            <CustomFieldLastValue id={customFieldId} name={fieldName} set={setValue} />
             <VisuallyHidden>
-              <CheckboxField form={form} name={`customFields.${index}.isRequired`} label={label} />
+              <CheckboxField name={`customFields.${index}.isRequired`} label={label} />
             </VisuallyHidden>
           </Box>
         );

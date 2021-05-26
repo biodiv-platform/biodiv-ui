@@ -1,10 +1,8 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import { getByPath } from "@utils/basic";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import React from "react";
-import { Controller, UseFormMethods } from "react-hook-form";
+import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
-import ErrorMessage from "./common/error-message";
 import { ClearIndicator, selectStyles } from "./configs";
 
 interface SelectMultipleProps {
@@ -18,16 +16,14 @@ interface SelectMultipleProps {
   selectRef?;
   isRequired?: boolean;
   isSearchable?: boolean;
-  form: UseFormMethods<Record<string, any>>;
 }
 
 const DefaultOptionComponent = (p) => <components.Option {...p} />;
 
-const SelectMultipleInputField = ({
+export const SelectMultipleInputField = ({
   name,
   label,
   hint,
-  form,
   mb = 4,
   optionComponent = DefaultOptionComponent,
   options = [],
@@ -37,49 +33,39 @@ const SelectMultipleInputField = ({
   isSearchable,
   ...props
 }: SelectMultipleProps) => {
-  const initialValue = options.filter((v) =>
-    (getByPath(form.control.defaultValuesRef.current, name) || []).includes(v.value)
-  );
+  const { field, fieldState } = useController({ name });
+  const initialValue = options.filter((v) => (field.value || []).includes(v.value));
 
   return (
     <FormControl
-      isInvalid={getByPath(form.errors, name) && true}
+      isInvalid={fieldState.invalid}
       className="dropdown"
-      aria-invalid={getByPath(form.errors, name) && true}
+      aria-invalid={fieldState.invalid}
       mb={mb}
       isRequired={isRequired}
       {...props}
     >
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Controller
-        control={form.control}
-        name={name}
-        defaultValue={getByPath(form.control.defaultValuesRef.current, name)}
-        render={({ onChange, onBlur }) => (
-          <Select
-            id={name}
-            inputId={name}
-            onChange={(o) => onChange(o ? o.map(({ value }) => value) : [])}
-            onBlur={onBlur}
-            options={options}
-            components={{
-              Option: optionComponent,
-              ClearIndicator
-            }}
-            formatCreateLabel={(v) => `Add "${v}"`}
-            defaultValue={initialValue}
-            isSearchable={true}
-            isMulti={true}
-            isDisabled={disabled}
-            styles={selectStyles}
-            ref={selectRef}
-          />
-        )}
+      <Select
+        id={name}
+        inputId={name}
+        onChange={(o) => field.onChange(o ? o.map(({ value }) => value) : [])}
+        onBlur={field.onBlur}
+        options={options}
+        components={{
+          Option: optionComponent,
+          ClearIndicator
+        }}
+        formatCreateLabel={(v) => `Add "${v}"`}
+        defaultValue={initialValue}
+        isSearchable={true}
+        isMulti={true}
+        isDisabled={disabled}
+        styles={selectStyles}
+        ref={selectRef}
       />
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
-
-export default SelectMultipleInputField;
