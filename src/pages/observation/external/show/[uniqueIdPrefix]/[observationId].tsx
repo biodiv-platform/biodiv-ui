@@ -1,6 +1,5 @@
 import ExternalObservationShowPageComponent from "@components/pages/observation/external-show";
 import {
-  axGetObservationById,
   axGetspeciesGroups,
   axGetTraitsByGroupId,
   axGetExtObservationById
@@ -21,7 +20,6 @@ const ExternalObservationShowPage = ({ observation, traits, speciesGroups, succe
   );
 
 export const getServerSideProps = async (ctx) => {
-  console.log(ctx.query);
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { success, data } = await axGetExtObservationById(
     ctx.query.uniqueIdPrefix + "-" + ctx.query.observationId

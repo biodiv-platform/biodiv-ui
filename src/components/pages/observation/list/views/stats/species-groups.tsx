@@ -33,9 +33,7 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
         <VerticalBarChart h={365} data={filteredData} tooltipRenderer={SpeciesTooltipRenderer} />
       </Box>
     </Box>
-  ) : (
-    null
-  );
+  ) : null;
 };
 
 export default SpeciesGroups;

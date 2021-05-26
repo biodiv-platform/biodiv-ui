@@ -441,12 +441,11 @@ export interface ObservationListPageMapper {
   userGroup?: UserGroupIbp[];
   customField?: CustomFieldObservationData[];
   tags?: Tags[];
-  isExternal?:boolean;
-  dataSource?:string;
-	externalOriginalReferenceLink?:string;
-  externalGbifReferenceLink?:string;
-  uniqueIdPrefix?:string
-  
+  isExternal?: boolean;
+  dataSource?: string;
+  externalOriginalReferenceLink?: string;
+  externalGbifReferenceLink?: string;
+  uniqueIdPrefix?: string;
 }
 export interface ObservationLocationInfo {
   soil?: string;
@@ -634,10 +633,10 @@ export interface ShowData {
   observationNearBy?: ObservationNearBy[];
   activityCount?: number; // int32
 }
-export interface ExternalShowData extends ShowData{
-  dataSource?:string;
-  externalGbifReferenceLink:string;
-	externalOriginalReferenceLink:string;
+export interface ExternalShowData extends ShowData {
+  dataSource?: string;
+  externalGbifReferenceLink: string;
+  externalOriginalReferenceLink: string;
 }
 export interface SimilarObservation {
   observationId?: number; // int64

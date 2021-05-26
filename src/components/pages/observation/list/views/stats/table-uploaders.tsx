@@ -70,7 +70,5 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
     </Box>
   ) : data.isLoading ? (
     <Skeleton h={450} borderRadius="md" />
-  ) : (
-    null
-  );
+  ) : null;
 }

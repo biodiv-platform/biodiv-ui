@@ -451,7 +451,6 @@ export const axGetObservationMapData = async (params) => {
   }
 };
 
-
 export const axGetExtObservationById = async (observationId) => {
   try {
     const { data } = await plainHttp.get(

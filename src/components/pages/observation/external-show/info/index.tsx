@@ -1,21 +1,17 @@
 import { InfoIcon } from "@chakra-ui/icons";
 import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
-import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
-import { ExternalShowData, ShowData, SpeciesGroup } from "@interfaces/observation";
-import { axQueryTagsByText, axUpdateObservationTags } from "@services/observation.service";
+import { ExternalShowData, SpeciesGroup } from "@interfaces/observation";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
-import { getInjectableHTML } from "@utils/text";
 import React from "react";
 
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
 import SpeciesGroupBoxForExtObs from "./species-group";
-import Link from "next/link";
 
 interface IInfoProps {
   observation: ExternalShowData;
@@ -41,11 +37,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         </ResponsiveInfo>
 
         <ResponsiveInfo title="OBSERVATION.GROUP">
-          <SpeciesGroupBoxForExtObs
-            id={o.observation?.groupId}
-            speciesGroups={speciesGroups}
-            observationId={o.observation?.id}
-          />
+          <SpeciesGroupBoxForExtObs id={o.observation?.groupId} speciesGroups={speciesGroups} />
         </ResponsiveInfo>
 
         <ResponsiveInfo title="OBSERVATION.PLACE">{o.observation?.placeName}</ResponsiveInfo>
@@ -69,12 +61,12 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         <ResponsiveInfo title="Provided by">
           <BlueLink href={o.externalGbifReferenceLink}>
-          The Global Biodiversity Information Facility
+            The Global Biodiversity Information Facility
           </BlueLink>
         </ResponsiveInfo>
 
         <ResponsiveInfo title="Original source">
-          <BlueLink href={o.externalOriginalReferenceLink} >
+          <BlueLink href={o.externalOriginalReferenceLink}>
             {o.externalOriginalReferenceLink}
           </BlueLink>
         </ResponsiveInfo>

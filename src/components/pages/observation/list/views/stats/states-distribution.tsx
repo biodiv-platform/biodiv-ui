@@ -43,9 +43,7 @@ const StatesDistribution = ({ observationData, filter }) => {
         />
       </Box>
     </Box>
-  ) : (
-    null
-  );
+  ) : null;
 };
 
 export default StatesDistribution;

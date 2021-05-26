@@ -74,7 +74,5 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
     </Box>
   ) : data.isLoading ? (
     <Skeleton h={450} borderRadius="md" />
-  ) : (
-    null
-  );
+  ) : null;
 }

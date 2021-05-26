@@ -3,21 +3,13 @@ import CarouselObservation from "@components/@core/carousel";
 import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
-  ShowData,
   SpeciesGroup,
   TraitsValuePair,
   ExternalShowData
 } from "@interfaces/observation";
-import { axAddObservationComment } from "@services/activity.service";
-import {
-  axGetPermissions,
-  axGroupsFeature,
-  axGroupsUnFeature,
-  axSaveUserGroups
-} from "@services/observation.service";
-import { RESOURCE_TYPE } from "@static/constants";
+import { axGetPermissions } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
-import { useImmer } from "use-immer";
+//import { useImmer } from "use-immer";
 
 import Header from "@components/pages/observation/show/header";
 import Info from "./info";
@@ -34,11 +26,11 @@ interface IObservationShowPageComponentProps {
 
 export default function ExternalObservationShowPageComponent({
   observation,
-  traits,
   speciesGroups
 }: IObservationShowPageComponentProps) {
   const { isLoggedIn } = useGlobalState();
-  const [o, setO] = useImmer<ExternalShowData>(observation);
+  //const [o, setO] = useImmer<ExternalShowData>(observation);
+  const o = observation;
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
 

@@ -129,7 +129,7 @@ export default function Container({ o }) {
         >
           <TabPanels className="tab-content" position="relative">
             <TabPanel>
-               <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
+              <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
             </TabPanel>
             <TabPanel>
               <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
@@ -144,7 +144,7 @@ export default function Container({ o }) {
               <CustomFieldsTab o={o} />
             </TabPanel>
             <TabPanel>
-             
+              <CommentsTab observationId={o.observationId} />
             </TabPanel>
           </TabPanels>
 

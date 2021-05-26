@@ -84,11 +84,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
               observationId={o.observationId}
             />
           ) : (
-            <SpeciesGroupBoxForExtObs
-              id={o?.speciesGroupId}
-              speciesGroups={speciesGroup}
-              observationId={o.observationId}
-            />
+            <SpeciesGroupBoxForExtObs id={o?.speciesGroupId} speciesGroups={speciesGroup} />
           )}
           {internalObs && (
             <FlagActionButton
