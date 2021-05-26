@@ -76,11 +76,11 @@ export const axUpdateTraitById = async (observationId, traitId, valueList) => {
     await waitForAuth();
     const { data } = await http.put(
       `${ENDPOINT.OBSERVATION}/v1/observation/update/traits/${observationId}/${traitId}`,
-      Array.isArray(valueList) ? valueList : [valueList]
+      valueList
     );
     return { success: true, data };
   } catch (e) {
-    console.error(e.response.data.message);
+    console.error(e);
     return { success: false, data: [] };
   }
 };
@@ -216,9 +216,7 @@ export const axUnlockRecoVote = async (observationId, payload) => {
 
 export const axGetCreateObservationPageData = async (userGroupId, ctx) => {
   try {
-    const {
-      data
-    } = await http.get(
+    const { data } = await http.get(
       `${ENDPOINT.OBSERVATION}/v1/observation/usergroup/createObservation/${userGroupId}`,
       { params: { ctx } }
     );
@@ -240,7 +238,7 @@ export const axCreateObservation = async ({
       type: r.type,
       caption: r.caption,
       rating: r.rating,
-      licenceId: r.licenceId
+      licenseId: r.licenseId
     }));
 
     const endpoint = customFieldData
@@ -333,6 +331,19 @@ export const axUpdateCustomField = async (payload) => {
   } catch (e) {
     console.error(e.response.data.message);
     return { success: false, data: [] };
+  }
+};
+
+export const axBulkObservationData = async (payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.OBSERVATION}/v1/observation/bulk/observation`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e.response.data.message);
+    return { success: false };
   }
 };
 

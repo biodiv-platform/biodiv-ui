@@ -7,14 +7,14 @@ import {
   Box
 } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import SubmitButton from "@components/form/submit-button";
+import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import AdminInviteField from "../common/admin-invite-field";
@@ -95,21 +95,21 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
         </AccordionButton>
 
         <AccordionPanel>
-          <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-            <AdminInviteField
-              form={hForm}
-              name="founders"
-              label="Founders"
-              onRemove={(o) => onMemberRemoved(o, founderIds)}
-            />
-            <AdminInviteField
-              form={hForm}
-              name="moderators"
-              label="Moderators"
-              onRemove={(o) => onMemberRemoved(o, moderatorIds)}
-            />
-            <SubmitButton form={hForm}>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
-          </form>
+          <FormProvider {...hForm}>
+            <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+              <AdminInviteField
+                name="founders"
+                label="Founders"
+                onRemove={(o) => onMemberRemoved(o, founderIds)}
+              />
+              <AdminInviteField
+                name="moderators"
+                label="Moderators"
+                onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+              />
+              <SubmitButton>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
+            </form>
+          </FormProvider>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

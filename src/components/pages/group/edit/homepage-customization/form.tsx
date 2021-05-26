@@ -1,12 +1,12 @@
 import { Box, Button } from "@chakra-ui/react";
-import RichTextareaField from "@components/form/rich-textarea";
-import SwitchButton from "@components/form/switch";
+import { RichTextareaField } from "@components/form/rich-textarea";
+import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axUpdateHomePageDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import GallerySetup from "./gallery-setup";
@@ -74,41 +74,25 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
 
   return (
     <>
-      <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-        <Box width={["100%", 350]} justifyContent="space-between">
-          <SwitchButton
-            name="showGallery"
-            form={hForm}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY")}
-          />
-          <SwitchButton
-            name="showStats"
-            form={hForm}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.MODULE_STATS")}
-          />
-          <SwitchButton
-            name="showRecentObservation"
-            form={hForm}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RECENT_OBSERVATION")}
-          />
-          <SwitchButton
-            name="showGridMap"
-            form={hForm}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.OBSERVATION_MAP")}
-          />
-          <SwitchButton
-            name="showPartners"
-            form={hForm}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.ABOUT_US")}
-          />
-          <SwitchButton
-            name="showDesc"
-            form={hForm}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.SHOW_DESC")}
-          />
-        </Box>
-        <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} form={hForm} />
-      </form>
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+          <Box width={["100%", 350]} justifyContent="space-between">
+            <SwitchField name="showGallery" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY")} />
+            <SwitchField name="showStats" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.MODULE_STATS")} />
+            <SwitchField
+              name="showRecentObservation"
+              label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RECENT_OBSERVATION")}
+            />
+            <SwitchField
+              name="showGridMap"
+              label={t("GROUP.HOMEPAGE_CUSTOMIZATION.OBSERVATION_MAP")}
+            />
+            <SwitchField name="showPartners" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.ABOUT_US")} />
+            <SwitchField name="showDesc" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.SHOW_DESC")} />
+          </Box>
+          <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} />
+        </form>
+      </FormProvider>
       <GallerySetup
         userGroupId={userGroupId}
         isCreate={isCreate}

@@ -5,7 +5,6 @@ import { ResponsiveInfo } from "@components/pages/observation/show/info/responsi
 import TagsShow from "@components/pages/observation/show/info/tags";
 import { ShowDocument } from "@interfaces/document";
 import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
-import { LICENSES } from "@static/licenses";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
 import React from "react";
@@ -15,7 +14,7 @@ interface DocumentInfoProps {
 }
 
 export default function DocumentInfo({ d }: DocumentInfoProps) {
-  const { document } = d;
+  const { document, documentLicense } = d;
 
   const INFO_LINKS = [
     {
@@ -24,6 +23,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     },
     {
       title: "DOCUMENT.TITLE",
+      isHtml: true,
       value: document?.title
     },
     {
@@ -45,10 +45,12 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     },
     {
       title: "DOCUMENT.BIB.JOURNAL",
+      isHtml: true,
       value: document?.journal
     },
     {
       title: "DOCUMENT.BIB.BOOKTITLE",
+      isHtml: true,
       value: document?.bookTitle
     },
     {
@@ -95,23 +97,22 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
     },
     {
       title: "DOCUMENT.BIB.DOI",
-      value: document?.doil
+      value: document?.doi
     },
     {
       title: "DOCUMENT.CONTRIBUTION",
+      isHtml: true,
       value: document?.contributors
     },
     {
       title: "DOCUMENT.LICENSE",
       value: document?.licenseId,
-      cell: document?.licenseId && (
-        <ExternalBlueLink href={LICENSES[document.licenseId].link}>
-          {LICENSES[document.licenseId].name}
-        </ExternalBlueLink>
+      cell: documentLicense && (
+        <ExternalBlueLink href={documentLicense.url}>{documentLicense.name}</ExternalBlueLink>
       )
     },
     {
-      title: "DOCUMENT.TAGS",
+      title: "DOCUMENT.TAGS.TITLE",
       value: 1,
       cell: (
         <TagsShow
@@ -128,11 +129,9 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
   return (
     <Box p={4} mb={4} className="white-box">
       <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
-        {INFO_LINKS.map(({ title, value, cell }) =>
+        {INFO_LINKS.map(({ title, value, isHtml, cell }) =>
           value ? (
-            <ResponsiveInfo key={title} title={title}>
-              {cell || value}
-            </ResponsiveInfo>
+            <ResponsiveInfo key={title} title={title} isHtml={isHtml} children={cell || value} />
           ) : null
         )}
       </SimpleGrid>

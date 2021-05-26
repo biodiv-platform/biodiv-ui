@@ -1,11 +1,11 @@
 import { CloseButton, Flex, Image, Input } from "@chakra-ui/react";
+import { selectStyles } from "@components/form/configs";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
-import { LICENSES_ARRAY } from "@static/licenses";
 import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import {
   getFallbackByMIME,
@@ -42,7 +42,7 @@ interface IResourceCardProps {
   index: number;
 }
 
-export const getImageThumb = (resource, userID, size = 140) => {
+export const getImageThumb = (resource, userID) => {
   if (resource.status === AssetStatus.Uploaded) {
     return resource.type.match(ASSET_TYPES.VIDEO) && resource.url
       ? getYoutubeImage(resource.url)
@@ -58,7 +58,7 @@ export const getImageThumb = (resource, userID, size = 140) => {
 };
 
 export default function ResourceCard({ resource, index }: IResourceCardProps) {
-  const { removeObservationAsset, updateObservationAsset } = useObservationCreate();
+  const { removeObservationAsset, updateObservationAsset, licensesList } = useObservationCreate();
   const { user } = useGlobalState();
 
   const imageURL = useMemo(() => getImageThumb(resource, user?.id), []);
@@ -94,12 +94,13 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
       />
       <Flex direction="column" flexShrink={0}>
         <Select
-          defaultValue={LICENSES_ARRAY.find((l) => l.value === resource.licenceId)}
+          defaultValue={licensesList.find((l) => l.value === resource.licenseId)}
           menuPortalTarget={isBrowser && document.body}
-          options={LICENSES_ARRAY}
+          options={licensesList}
           name={`opt-${resource.id}`}
           inputId={`opt-${resource.id}`}
-          onChange={(v) => updateObservationAsset(index, resource.hashKey, "licenceId", v.value)}
+          styles={selectStyles}
+          onChange={(v) => updateObservationAsset(index, resource.hashKey, "licenseId", v.value)}
         />
         <Input
           placeholder="Caption"

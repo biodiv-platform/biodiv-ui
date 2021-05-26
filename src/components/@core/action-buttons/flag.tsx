@@ -17,9 +17,9 @@ import {
 } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import UserBadge from "@components/@core/user/badge";
-import Select from "@components/form/select";
-import Submit from "@components/form/submit-button";
-import TextArea from "@components/form/textarea";
+import { SelectInputField } from "@components/form/select";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import FlagFillIcon from "@icons/flag-fill";
@@ -32,10 +32,10 @@ import { getUserImage } from "@utils/media";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { emit } from "react-gbus";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
-import LocalLink from "../local-link";
 
+import LocalLink from "../local-link";
 import SimpleActionButton from "./simple";
 
 interface IFlagObservationProps {
@@ -110,85 +110,85 @@ export default function FlagActionButton({
       <Modal isOpen={isOpen} size="lg" onClose={onClose}>
         <ModalOverlay className="fade">
           <ModalContent className="fadeInUp" borderRadius="md">
-            <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
-              <ModalHeader>🚩 Flag {resourceType}</ModalHeader>
-              <ModalCloseButton />
-              {flags && flags.length > 0 && (
-                <>
-                  <Heading size="sm" px={6} mb={3}>
-                    flagged by {flags?.length} member(s)
-                  </Heading>
-                  {flags?.map(
-                    ({ flag, user }) =>
-                      flag &&
-                      user && (
-                        <Stack
-                          key={flag.id}
-                          isInline={true}
-                          spacing={4}
-                          px={6}
-                          py={3}
-                          mb={2}
-                          borderTop="1px"
-                          borderColor="gray.300"
-                        >
-                          <Avatar
-                            size="sm"
-                            mt={2}
-                            name={user.name}
-                            src={getUserImage(user.profilePic)}
-                          />
-                          <Box>
-                            <LocalLink href={`/user/show/${user.id}`}>
-                              <BlueLink mr={2}>
-                                {user.name} <UserBadge isAdmin={user.isAdmin} />
-                              </BlueLink>
-                            </LocalLink>
-                            <Badge colorScheme="red" verticalAlign="baseline">
-                              {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
-                            </Badge>
-                            <Text>{flag.notes}</Text>
-                          </Box>
-                          <Box flexGrow={1} textAlign="right" pt={2}>
-                            {adminOrAuthor(user.id) && (
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                colorScheme="red"
-                                onClick={() => handleOnUnFlag(flag.id)}
-                              >
-                                Remove
-                              </Button>
-                            )}
-                          </Box>
-                        </Stack>
-                      )
-                  )}
-                </>
-              )}
-              {!userFlag && (
-                <ModalBody>
-                  <Select
-                    name="flag"
-                    label={t("ACTIONS.FLAG.CATEGORY")}
-                    options={flagOptions}
-                    form={hForm}
-                  />
-                  <TextArea mb={0} name="notes" label={t("ACTIONS.FLAG.NOTES")} form={hForm} />
-                </ModalBody>
-              )}
+            <FormProvider {...hForm}>
+              <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
+                <ModalHeader>🚩 Flag {resourceType}</ModalHeader>
+                <ModalCloseButton />
+                {flags && flags.length > 0 && (
+                  <>
+                    <Heading size="sm" px={6} mb={3}>
+                      flagged by {flags?.length} member(s)
+                    </Heading>
+                    {flags?.map(
+                      ({ flag, user }) =>
+                        flag &&
+                        user && (
+                          <Stack
+                            key={flag.id}
+                            isInline={true}
+                            spacing={4}
+                            px={6}
+                            py={3}
+                            mb={2}
+                            borderTop="1px"
+                            borderColor="gray.300"
+                          >
+                            <Avatar
+                              size="sm"
+                              mt={2}
+                              name={user.name}
+                              src={getUserImage(user.profilePic)}
+                            />
+                            <Box>
+                              <LocalLink href={`/user/show/${user.id}`}>
+                                <BlueLink mr={2}>
+                                  {user.name} <UserBadge isAdmin={user.isAdmin} />
+                                </BlueLink>
+                              </LocalLink>
+                              <Badge colorScheme="red" verticalAlign="baseline">
+                                {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
+                              </Badge>
+                              <Text>{flag.notes}</Text>
+                            </Box>
+                            <Box flexGrow={1} textAlign="right" pt={2}>
+                              {adminOrAuthor(user.id) && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  colorScheme="red"
+                                  onClick={() => handleOnUnFlag(flag.id)}
+                                >
+                                  Remove
+                                </Button>
+                              )}
+                            </Box>
+                          </Stack>
+                        )
+                    )}
+                  </>
+                )}
+                {!userFlag && (
+                  <ModalBody>
+                    <SelectInputField
+                      name="flag"
+                      label={t("ACTIONS.FLAG.CATEGORY")}
+                      options={flagOptions}
+                      shouldPortal={true}
+                    />
+                    <TextAreaField mb={0} name="notes" label={t("ACTIONS.FLAG.NOTES")} />
+                  </ModalBody>
+                )}
 
-              {!userFlag && (
-                <ModalFooter>
-                  <Button onClick={onClose} mr={4}>
-                    Close
-                  </Button>
-                  <Submit form={hForm} colorScheme="red">
-                    Flag
-                  </Submit>
-                </ModalFooter>
-              )}
-            </form>
+                {!userFlag && (
+                  <ModalFooter>
+                    <Button onClick={onClose} mr={4}>
+                      Close
+                    </Button>
+                    <SubmitButton colorScheme="red">Flag</SubmitButton>
+                  </ModalFooter>
+                )}
+              </form>
+            </FormProvider>
           </ModalContent>
         </ModalOverlay>
       </Modal>

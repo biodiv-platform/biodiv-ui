@@ -1,11 +1,11 @@
-import SelectAsync from "@components/form/select-async";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import React from "react";
 
-export default function TaxonInputField({ form, label, name }) {
+export default function TaxonInputField({ label, name }) {
   const onQuery = async (q) => await onScientificNameQuery(q, "name");
 
   const onChange = async (value, event, setSelected) => {
@@ -17,14 +17,13 @@ export default function TaxonInputField({ form, label, name }) {
   };
 
   return (
-    <SelectAsync
+    <SelectAsyncInputField
       name={name}
       onQuery={onQuery}
       optionComponent={ScientificNameOption}
       label={label}
       eventCallback={onChange}
       placeholder={label}
-      form={form}
       isClearable={false}
       multiple={true}
     />

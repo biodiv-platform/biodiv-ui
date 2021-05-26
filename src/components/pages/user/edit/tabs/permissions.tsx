@@ -1,7 +1,7 @@
 import { SimpleGrid, Spinner } from "@chakra-ui/react";
-import SelectMultipleInputField from "@components/form/select-multiple";
-import SubmitButton from "@components/form/submit-button";
-import SwitchField from "@components/form/switch";
+import { SelectMultipleInputField } from "@components/form/select-multiple";
+import { SubmitButton } from "@components/form/submit-button";
+import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
@@ -9,7 +9,7 @@ import { Role } from "@interfaces/user";
 import { axGetUserRoles, axUpdateUserPermissions } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import { UserEditPageComponentProps } from "..";
@@ -66,25 +66,20 @@ export default function PermissionsTab({ user }: UserEditPageComponentProps) {
   };
 
   return rolesOptionList.length ? (
-    <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
-        <div>
-          <SwitchField name="enabled" label={t("USER.ENABLED")} form={hForm} />
-          <SwitchField name="accountExpired" label={t("USER.EXPIRED")} form={hForm} />
-          <SwitchField name="accountLocked" label={t("USER.LOCKED")} form={hForm} />
-          <SwitchField name="passwordExpired" label={t("USER.PASSWORD_EXPIRED")} form={hForm} />
-        </div>
-      </SimpleGrid>
-      <SelectMultipleInputField
-        name="roles"
-        label={t("USER.ROLES")}
-        options={rolesOptionList}
-        form={hForm}
-      />
-      <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
-        {t("SAVE")}
-      </SubmitButton>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
+          <div>
+            <SwitchField name="enabled" label={t("USER.ENABLED")} />
+            <SwitchField name="accountExpired" label={t("USER.EXPIRED")} />
+            <SwitchField name="accountLocked" label={t("USER.LOCKED")} />
+            <SwitchField name="passwordExpired" label={t("USER.PASSWORD_EXPIRED")} />
+          </div>
+        </SimpleGrid>
+        <SelectMultipleInputField name="roles" label={t("USER.ROLES")} options={rolesOptionList} />
+        <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
+      </form>
+    </FormProvider>
   ) : (
     <Spinner />
   );

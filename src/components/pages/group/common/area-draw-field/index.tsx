@@ -3,6 +3,7 @@ import SITE_CONFIG from "@configs/site-config.json";
 import { getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useState } from "react";
+import { useController } from "react-hook-form";
 
 const NakshaMapboxDraw: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
@@ -13,7 +14,6 @@ const NakshaMapboxDraw: any = dynamic(
 );
 
 interface AreaDrawFieldProps {
-  form;
   label: string;
   name: string;
   hint?: string;
@@ -24,7 +24,6 @@ interface AreaDrawFieldProps {
 }
 
 export default function AreaDrawField({
-  form,
   label,
   name,
   hint,
@@ -33,14 +32,11 @@ export default function AreaDrawField({
   isControlled,
   ...props
 }: AreaDrawFieldProps) {
-  const { register, setValue } = form;
+  const { field, fieldState } = useController({ name });
   const [coordinates, setCoordinates] = useState({});
   const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
 
-  const defaultFeatures = useMemo(
-    () => stringToFeature(form?.control?.defaultValuesRef?.current[name]),
-    []
-  );
+  const defaultFeatures = useMemo(() => stringToFeature(field.value), []);
 
   const handleOnFeatureChange = (features) => {
     setCoordinates(
@@ -54,16 +50,15 @@ export default function AreaDrawField({
   };
 
   useEffect(() => {
-    setValue(name, coordinates);
+    field.onChange(coordinates);
   }, [coordinates]);
 
   useEffect(() => {
-    register({ name });
     handleOnFeatureChange(defaultFeatures);
-  }, [register]);
+  }, []);
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={form.errors[name] && true} mb={mb} {...props}>
+    <FormControl isRequired={isRequired} isInvalid={fieldState.invalid} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
         <NakshaMapboxDraw
@@ -74,7 +69,7 @@ export default function AreaDrawField({
           isPolygon={false}
         />
       </Box>
-      <FormErrorMessage>{form.errors[name] && form.errors[name]["se"]["message"]}</FormErrorMessage>
+      <FormErrorMessage children={JSON.stringify(fieldState?.error?.message)} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

@@ -1,13 +1,13 @@
-import { Box, Image, Link } from "@chakra-ui/react";
+import { Box, Flex, Image, Link } from "@chakra-ui/react";
 import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceRAW, getResourceThumbnail, getYouTubeEmbed } from "@utils/media";
 import React from "react";
 
 export const NoSlide = ({ speciesGroup }) => (
-  <Box color="gray.500">
-    <Image maxW="20rem" boxSize="full" src={getLocalIcon(speciesGroup)} />
-  </Box>
+  <Flex color="gray.500" w="full" justifyContent="center">
+    <Image maxW="20rem" src={getLocalIcon(speciesGroup)} />
+  </Flex>
 );
 
 const SlideDescription = ({ text }) =>

@@ -1,12 +1,11 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import { useController, useFormContext } from "react-hook-form";
 import { components } from "react-select";
 import AsyncSelect from "react-select/async-creatable";
 
-import ErrorMessage from "./common/error-message";
 import { ClearIndicator, selectStyles } from "./configs";
 
 interface ISelectProps {
@@ -27,7 +26,6 @@ interface ISelectProps {
   selectRef?;
   isRequired?: boolean;
   isClearable?;
-  form: UseFormMethods<Record<string, any>>;
   resetOnSubmit?;
 }
 
@@ -40,11 +38,10 @@ const dummyOnQuery = (q) =>
 
 const DefaultOptionComponent = (p) => <components.Option {...p} />;
 
-const SelectAsyncInputField = ({
+export const SelectAsyncInputField = ({
   name,
   label,
   hint,
-  form,
   mb = 4,
   options = [],
   multiple = false,
@@ -61,22 +58,20 @@ const SelectAsyncInputField = ({
   isClearable = true,
   ...props
 }: ISelectProps) => {
-  const initialValue = form.control.defaultValuesRef.current[name];
+  const form = useFormContext();
+  const { field, fieldState } = useController({ name });
+
   const onQueryDebounce = debounce(onQuery, debounceTime);
   const [selected, setSelected] = useState(
-    initialValue ? (multiple ? initialValue : { value: initialValue }) : null
+    field.value ? (multiple ? field.value : { value: field.value }) : null
   );
 
   useEffect(() => {
-    form.setValue(name, multiple ? selected : selected?.value, { shouldValidate: true });
+    field.onChange(multiple ? selected : selected?.value);
     if (onChange && selected) {
       onChange(selected);
     }
   }, [selected]);
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
 
   const handleOnChange = (value, event) => {
     eventCallback ? eventCallback(value, event, setSelected) : setSelected(value);
@@ -90,9 +85,9 @@ const SelectAsyncInputField = ({
 
   return (
     <FormControl
-      isInvalid={form.errors[name] && true}
+      isInvalid={fieldState.invalid}
+      aria-invalid={fieldState.invalid}
       isRequired={isRequired}
-      aria-invalid={form.errors[name] && true}
       mb={mb}
       {...props}
     >
@@ -121,10 +116,8 @@ const SelectAsyncInputField = ({
         styles={selectStyles}
         ref={selectRef}
       />
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
-
-export default SelectAsyncInputField;

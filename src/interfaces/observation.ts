@@ -26,6 +26,7 @@ export interface AllRecoSugguestions {
 export interface BreadCrumb {
   id?: number; // int64
   name?: string;
+  rankName?: string;
 }
 export interface CommentLoggingData {
   body?: string;
@@ -84,11 +85,8 @@ export interface CustomFieldPermission {
   allowedCfId?: number /* int64 */[];
 }
 export interface CustomFieldValues {
-  id?: number; // int64
-  customFieldId?: number; // int64
-  values?: string;
-  iconURL?: string;
-  notes?: string;
+  value?: string;
+  valueIcon?: string;
 }
 export interface CustomFieldValuesData {
   fieldTextData?: string;
@@ -99,13 +97,15 @@ export interface CustomFieldValuesData {
 }
 export interface CustomFields {
   id?: number; // int64
-  authorId?: number; // int64
   name?: string;
+  fieldtype?: string;
   dataType?: string;
-  fieldType?: string;
-  units?: string;
-  iconURL?: string;
-  notes?: string;
+  values?: CustomFieldValues[];
+}
+export interface DocumentMailData {
+  documentId?: number; // int64
+  createdOn?: string; // date-time
+  authorId?: number; // int64
 }
 export interface DownloadLog {
   id?: number; // int64
@@ -122,11 +122,11 @@ export interface DownloadLog {
   offsetParam?: number; // int64
 }
 export interface Envelope {
+  maxX?: number; // double
+  maxY?: number; // double
   area?: number; // double
   minX?: number; // double
-  maxX?: number; // double
   minY?: number; // double
-  maxY?: number; // double
   width?: number; // double
   height?: number; // double
   null?: boolean;
@@ -136,6 +136,8 @@ export interface FactValuePair {
   name?: string;
   valueId?: number; // int64
   value?: string;
+  fromDate?: string; // date-time
+  toDate?: string; // date-time
   type?: string;
   isParticipatry?: boolean;
 }
@@ -193,13 +195,16 @@ export interface Follow {
 export interface Geometry {
   envelope?: Geometry;
   factory?: GeometryFactory;
-  userData?: unknown;
-  geometryType?: string;
+  userData?: {
+    [key: string]: any;
+  };
+  numGeometries?: number; // int32
   precisionModel?: PrecisionModel;
-  coordinate?: Coordinate;
-  coordinates?: Coordinate[];
   numPoints?: number; // int32
-  simple?: boolean;
+  coordinate?: Coordinate;
+  geometryType?: string;
+  srid?: number; // int32
+  coordinates?: Coordinate[];
   rectangle?: boolean;
   area?: number; // double
   centroid?: Point;
@@ -207,8 +212,7 @@ export interface Geometry {
   boundary?: Geometry;
   boundaryDimension?: number; // int32
   envelopeInternal?: Envelope;
-  srid?: number; // int32
-  numGeometries?: number; // int32
+  simple?: boolean;
   dimension?: number; // int32
   valid?: boolean;
   length?: number; // double
@@ -226,13 +230,20 @@ export interface Language {
   isDirty?: boolean;
   region?: string;
 }
+export interface License {
+  id?: number; // int64
+  name?: string;
+  url?: string;
+}
 export interface ListPagePermissions {
   validatePermissionTaxon?: number /* int64 */[];
   cfPermission?: CustomFieldPermission[];
 }
 export interface MailData {
   observationData?: ObservationMailData;
+  documentMailData?: DocumentMailData;
   userGroupData?: UserGroupMailData[];
+  speciesData?: SpeciesMailData;
 }
 export interface MapAggregationResponse {
   groupSpeciesName?: {
@@ -377,7 +388,7 @@ export interface ObservationCreate {
   notes?: string;
   tags?: Tags[];
   userGroupId?: number /* int64 */[];
-  resources?: ResourceData[];
+  resources?: ResourceDataObs[];
 }
 export interface ObservationCreateUGContext {
   observationData?: ObservationCreate;
@@ -466,16 +477,12 @@ export interface ObservationNearBy {
   distance?: number; // double
   speciesGroupName?: string;
 }
-export interface ObservationResourceUser {
-  resource?: Resource;
-  user?: User;
-}
 export interface ObservationUGContextCreatePageData {
   userGroupSGroup?: UserGroupSpeciesGroup[];
   customField?: CustomFieldDetails[];
 }
 export interface ObservationUpdateData {
-  resources?: ResourceData[];
+  resources?: ResourceDataObs[];
   notes?: string;
   dateAccuracy?: string;
   observedOn?: string; // date-time
@@ -485,6 +492,10 @@ export interface ObservationUpdateData {
   latitude?: number; // double
   longitude?: number; // double
   hidePreciseLocation?: boolean;
+}
+export interface ObservationUserPageInfo {
+  uniqueSpeciesInfos?: UniqueSpeciesInfo[];
+  totalCount?: number; // int64
 }
 export interface ObservationUserPermission {
   validatePermissionTaxon?: number /* int64 */[];
@@ -496,35 +507,37 @@ export interface ObservationUserPermission {
 export interface Point {
   envelope?: Geometry;
   factory?: GeometryFactory;
-  userData?: unknown;
+  userData?: {
+    [key: string]: any;
+  };
   coordinates?: Coordinate[];
+  numPoints?: number; // int32
+  coordinate?: Coordinate;
   geometryType?: string;
   coordinateSequence?: CoordinateSequence;
-  coordinate?: Coordinate;
-  numPoints?: number; // int32
-  simple?: boolean;
   boundary?: Geometry;
   boundaryDimension?: number; // int32
   y?: number; // double
   x?: number; // double
+  simple?: boolean;
   dimension?: number; // int32
   empty?: boolean;
+  numGeometries?: number; // int32
   precisionModel?: PrecisionModel;
+  srid?: number; // int32
   rectangle?: boolean;
   area?: number; // double
   centroid?: Point;
   interiorPoint?: Point;
   envelopeInternal?: Envelope;
-  srid?: number; // int32
-  numGeometries?: number; // int32
   valid?: boolean;
   length?: number; // double
 }
 export interface PrecisionModel {
   scale?: number; // double
   maximumSignificantDigits?: number; // int32
-  offsetY?: number; // double
   offsetX?: number; // double
+  offsetY?: number; // double
   floating?: boolean;
   type?: Type;
 }
@@ -585,26 +598,26 @@ export interface Resource {
   licenseId?: number; // int64
 }
 export interface ResourceData {
+  resource?: Resource;
+  userIbp?: UserIbp;
+  license?: License;
+}
+export interface ResourceDataObs {
   path?: string;
   url?: string;
   type?: string;
   caption?: string;
   rating?: number; // int32
-  licenceId?: number; // int64
+  licenseId?: number; // int64
 }
 export interface ResourceRating {
   resourceId?: number; // int64
   rating?: number; // int32
 }
-export interface Role {
-  id?: number; // int64
-  version?: number; // int64
-  authority?: string;
-}
 export interface ShowData {
   observation?: Observation;
   factValuePair?: FactValuePair[];
-  observationResource?: ObservationResourceUser[];
+  observationResource?: ResourceData[];
   userGroups?: UserGroupIbp[];
   customField?: CustomFieldObservationData[];
   layerInfo?: ObservationLocationInfo;
@@ -634,8 +647,13 @@ export interface SimilarObservation {
 export interface SpeciesGroup {
   id?: number; // int64
   name?: string;
-  parentGroupId?: number; // int64
-  groupOrder?: number; // int32
+  order?: number; // int32
+}
+export interface SpeciesMailData {
+  speciesId?: number; // int64
+  speciesName?: string;
+  iconUrl?: string;
+  authorId?: number; // int64
 }
 export interface Tags {
   id?: number; // int64
@@ -653,11 +671,8 @@ export interface TraitValue {
 export interface Traits {
   id?: number; // int64
   name?: string;
-  traitTypes?: string;
-  showInObservation?: boolean;
-  isParticipatory?: boolean;
-  isDeleted?: boolean;
-  source?: string;
+  type?: string;
+  traitValues?: TraitValue[];
 }
 export interface TraitsValue {
   id?: number; // int64
@@ -671,38 +686,12 @@ export interface TraitsValuePair {
   values?: TraitsValue[];
 }
 export interface Type {}
-export interface User {
-  id?: number; // int64
-  version?: number; // int64
-  accountExpired?: boolean;
-  accountLocked?: boolean;
-  passwordExpired?: boolean;
-  languageId?: number; // int64
-  enabled?: boolean;
-  userName?: string;
-  aboutMe?: string;
-  email?: string;
-  hideEmial?: boolean;
+export interface UniqueSpeciesInfo {
   name?: string;
-  profilePic?: string;
-  icon?: string;
-  sexType?: string;
-  dateCreated?: string; // date-time
-  latitude?: number; // double
-  longitude?: number; // double
-  mobileNumber?: string;
-  occupation?: string;
-  institution?: string;
-  location?: string;
-  sendNotification?: boolean;
-  emailValidation?: boolean;
-  mobileValidation?: boolean;
-  lastLoginDate?: string; // date-time
-  roles?: Role[];
-  timezone?: number; // float
-  identificationMail?: boolean;
-  sendDigest?: boolean;
-  sendPushNotification?: boolean;
+  maxVotedRecoId?: number; // int64
+  speciesId?: number; // int64
+  taxonId?: number; // int64
+  freq?: number; // int64
 }
 export interface UserGroup {
   id?: number; // int64

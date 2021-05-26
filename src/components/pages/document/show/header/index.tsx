@@ -5,8 +5,8 @@ import FollowActionButton from "@components/@core/action-buttons/follow";
 import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
+import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { ShowDocument } from "@interfaces/document";
 import {
@@ -16,6 +16,7 @@ import {
   axUnFlagDocument
 } from "@services/document.service";
 import { adminOrAuthor } from "@utils/auth";
+import { getInjectableHTML } from "@utils/text";
 import React, { useEffect, useState } from "react";
 
 interface DocumentHeaderProps {
@@ -41,9 +42,12 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
   return (
     <SimpleGrid columns={[1, 1, 4, 4]} mb={4} className="fadeInUp">
       <Box gridColumn="1 / 4">
-        <Heading as="h1" size="lg" mb={2}>
-          {document?.document?.title}
-        </Heading>
+        <Heading
+          as="h1"
+          size="lg"
+          mb={2}
+          dangerouslySetInnerHTML={{ __html: getInjectableHTML(document?.document?.title) }}
+        />
       </Box>
       <Flex alignItems="top" justifyContent={["flex-start", "flex-end"]}>
         {showActions && (

@@ -1,19 +1,19 @@
 import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
-import SubmitButton from "@components/form/submit-button";
+import { SubmitButton } from "@components/form/submit-button";
+import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
-import { DEFAULT_LICENSE } from "@static/licenses";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanTags } from "@utils/tags";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import BasicInfo from "./basic-info";
@@ -30,7 +30,12 @@ const DEFAULT_VALUES = {
   rating: 0
 };
 
-export default function DocumentCreatePageComponent({ speciesGroups, habitats, documentTypes }) {
+export default function DocumentCreatePageComponent({
+  speciesGroups,
+  habitats,
+  documentTypes,
+  licensesList
+}) {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { user } = useGlobalState();
@@ -83,7 +88,7 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
       docCoverageData: [],
       userGroupId: [],
       contribution: user?.name,
-      licenseId: DEFAULT_LICENSE
+      licenseId: SITE_CONFIG.LICENSE.DEFAULT
     }
   });
 
@@ -115,22 +120,22 @@ export default function DocumentCreatePageComponent({ speciesGroups, habitats, d
 
   return (
     <Box className="container mt" pb={6}>
-      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <PageHeading>📄 {t("DOCUMENT.CREATE.TITLE")}</PageHeading>
-        <DocumentUploader form={hForm} name="resource" />
-        <BasicInfo
-          canImport={true}
-          hForm={hForm}
-          documentTypes={documentTypes}
-          setBibField={setBibField}
-        />
-        <TagsInput hForm={hForm} />
-        <Metadata hForm={hForm} bibFields={bibField.fields} />
-        <Coverage hForm={hForm} speciesGroups={speciesGroups} habitats={habitats} />
-        <SubmitButton leftIcon={<CheckIcon />} form={hForm}>
-          {t("DOCUMENT.CREATE.TITLE")}
-        </SubmitButton>
-      </form>
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <PageHeading>📄 {t("DOCUMENT.CREATE.TITLE")}</PageHeading>
+          <DocumentUploader name="resource" />
+          <BasicInfo
+            canImport={true}
+            documentTypes={documentTypes}
+            setBibField={setBibField}
+            licensesList={licensesList}
+          />
+          <TagsInput />
+          <Metadata bibFields={bibField.fields} />
+          <Coverage speciesGroups={speciesGroups} habitats={habitats} />
+          <SubmitButton leftIcon={<CheckIcon />}>{t("DOCUMENT.CREATE.TITLE")}</SubmitButton>
+        </form>
+      </FormProvider>
     </Box>
   );
 }

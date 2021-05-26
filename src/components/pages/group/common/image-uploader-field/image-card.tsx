@@ -1,17 +1,12 @@
 import { CloseButton, Flex, Image } from "@chakra-ui/react";
-import { getResourceThumbnail } from "@utils/media";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React, { useMemo } from "react";
 
-export default function ResourceCard({
-  resourceName = "userGroups",
-  resource,
-  setValue,
-  imageSize,
-  simpleUpload
-}) {
-  const imageURL = useMemo(() => getResourceThumbnail(resourceName, resource, imageSize), [
-    resource
-  ]);
+export default function ResourceCard({ resource, setValue, imageSize, simpleUpload }) {
+  const imageURL = useMemo(
+    () => getResourceThumbnail(RESOURCE_CTX.USERGROUPS, resource, imageSize),
+    [resource]
+  );
 
   const handleRemovePhoto = () => {
     setValue(null);

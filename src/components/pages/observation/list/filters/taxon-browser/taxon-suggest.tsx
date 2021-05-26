@@ -1,6 +1,6 @@
-import { IconButton } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import SelectAsync from "@components/form/select-async";
+import { IconButton } from "@chakra-ui/react";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import {
   onScientificNameQuery,
   ScientificNameOption
@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axGetTaxonList, doTaxonSearch } from "@services/api.service";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import { mergeDeep } from "./taxon-browser-helpers";
@@ -75,24 +75,25 @@ export default function TaxonSuggest({ setParentState, parentState }) {
 
   return (
     <>
-      <SearchForm onSubmit={hForm.handleSubmit(handleOnSearch)}>
-        <SelectAsync
-          name="query"
-          onQuery={onQuery}
-          optionComponent={ScientificNameOption}
-          placeholder={t("FILTERS.TAXON_BROWSER.SEARCH")}
-          form={hForm}
-          resetOnSubmit={false}
-        />
-        <IconButton
-          variant="solid"
-          colorScheme="blue"
-          isLoading={isLoading}
-          type="submit"
-          icon={<SearchIcon />}
-          aria-label={t("FILTERS.TAXON_BROWSER.SEARCH")}
-        />
-      </SearchForm>
+      <FormProvider {...hForm}>
+        <SearchForm onSubmit={hForm.handleSubmit(handleOnSearch)}>
+          <SelectAsyncInputField
+            name="query"
+            onQuery={onQuery}
+            optionComponent={ScientificNameOption}
+            placeholder={t("FILTERS.TAXON_BROWSER.SEARCH")}
+            resetOnSubmit={false}
+          />
+          <IconButton
+            variant="solid"
+            colorScheme="blue"
+            isLoading={isLoading}
+            type="submit"
+            icon={<SearchIcon />}
+            aria-label={t("FILTERS.TAXON_BROWSER.SEARCH")}
+          />
+        </SearchForm>
+      </FormProvider>
     </>
   );
 }

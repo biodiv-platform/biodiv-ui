@@ -85,7 +85,7 @@ export default function HorizontalBarChart({
       .join("rect")
       .attr("x", x(0) + leftOffset)
       .attr("y", (d) => y(d[titleKey]))
-      .attr("width", (d) => x(d[countKey]))
+      .attr("width", (d) => (d[countKey] ? x(d[countKey]) : 0))
       .attr("height", y.bandwidth())
       .attr("fill", barColor);
 

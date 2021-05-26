@@ -4,6 +4,7 @@ import {
   Checkbox,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   IconButton,
@@ -12,14 +13,13 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
-import ErrorMessage from "@components/form/common/error-message";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
 import React, { useEffect, useRef, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import { useController } from "react-hook-form";
 import { parse, stringify } from "wkt";
 
 const NakshaMapboxDraw: any = dynamic(
@@ -38,28 +38,25 @@ interface IGeojsonWktInputProps {
   isRequired?: boolean;
   isReadOnly?: boolean;
   isPolygon?: boolean;
-  form: UseFormMethods<Record<string, any>>;
 }
 
 export default function GeoJsonWktParserInput({
   name,
   label,
   hint,
-  form,
   isRequired,
   isPolygon,
   isReadOnly,
   mb = 4,
   ...props
 }: IGeojsonWktInputProps) {
+  const { field, fieldState } = useController({ name });
   const wktInputRef: any = useRef<HTMLInputElement>(null);
   const [wkt, setWkt] = useState<string | null>();
   const { t } = useTranslation();
   const [canShow, setShow] = useState<boolean>(false);
   const [featureData, setDefaultFeatureData] = useState();
   const defaultViewPort = React.useMemo(() => getMapCenter(2), []);
-
-  const { register, setValue } = form;
 
   const handleMapDraw = (geoJson) => {
     if (geoJson.length > 0) {
@@ -71,9 +68,9 @@ export default function GeoJsonWktParserInput({
     const geoJson = parse(wktInputRef.current.value);
     if (geoJson) {
       setDefaultFeatureData(parse(wktInputRef.current.value));
-      setValue(name, wktInputRef.current.value);
+      field.onChange(wktInputRef.current.value);
     } else {
-      setValue(name, null);
+      field.onChange(null);
       notification(t("Enter Valid WKT string"), NotificationType.Error);
     }
   };
@@ -84,14 +81,13 @@ export default function GeoJsonWktParserInput({
   };
 
   useEffect(() => {
-    register({ name });
-    setValue(name, wkt);
-  }, [register, wkt]);
+    field.onChange(wkt);
+  }, [wkt]);
 
   return (
     <FormControl
-      isInvalid={form.errors[name] && true}
-      data-select-invalid={form.errors[name] && true}
+      isInvalid={fieldState.invalid}
+      data-select-invalid={fieldState.invalid}
       mb={mb}
       {...props}
     >
@@ -125,7 +121,7 @@ export default function GeoJsonWktParserInput({
           </InputRightElement>
         </InputGroup>
       )}
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

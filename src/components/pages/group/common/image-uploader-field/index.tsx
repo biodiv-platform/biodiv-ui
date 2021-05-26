@@ -1,9 +1,7 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import ErrorMessage from "@components/form/common/error-message";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getByPath } from "@utils/basic";
-import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import React from "react";
+import { useController } from "react-hook-form";
 
 import DropTarget from "./drop-target";
 import ResourceCard from "./image-card";
@@ -12,7 +10,6 @@ interface IDropzoneProps {
   name: string;
   label: string;
   mb?: number;
-  form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   hint?: string;
   nestedPath?: string;
@@ -24,46 +21,33 @@ interface IDropzoneProps {
 export default function ImageUploaderField({
   name,
   label,
-  form,
   resourcePath,
   nestedPath,
   hint,
   simpleUpload,
   mb = 4
 }: IDropzoneProps) {
-  const [value, setvalue] = useState(
-    getByPath(form?.control?.defaultValuesRef?.current, name) || ""
-  );
-
-  useEffect(() => {
-    form.register({ name });
-    setvalue(getByPath(form?.control?.defaultValuesRef?.current, name));
-  }, [form.register]);
-
-  useEffect(() => {
-    form.setValue(name, value);
-  }, [value]);
+  const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb}>
+    <FormControl isInvalid={fieldState.invalid} mb={mb}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      {value ? (
+      {field.value ? (
         <ResourceCard
           simpleUpload={simpleUpload}
           imageSize={simpleUpload ? "?h=60" : RESOURCE_SIZE.LIST_THUMBNAIL}
-          setValue={setvalue}
-          resourceName={resourcePath}
-          resource={value}
+          setValue={field.onChange}
+          resource={field.value}
         />
       ) : (
         <DropTarget
           simpleUpload={simpleUpload}
           nestedPath={nestedPath}
           resourcePath={resourcePath}
-          setValue={setvalue}
+          setValue={field.onChange}
         />
       )}
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

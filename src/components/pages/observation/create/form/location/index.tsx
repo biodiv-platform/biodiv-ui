@@ -10,7 +10,7 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
-import Select from "@components/form/select";
+import { SelectInputField } from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
@@ -20,18 +20,15 @@ import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS, GMAP_LIBRARIES } from "@static/lo
 import { getMapCenter, reverseGeocode } from "@utils/location";
 import React, { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
-import { UseFormMethods } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import { LOCATION_ACCURACY_OPTIONS } from "../options";
 import CoordinatesInput from "./coordinates";
 import LocationMap from "./map";
 import useLastLocation from "./use-last-location";
 
-interface LocationPickerProps {
-  form: UseFormMethods<Record<string, any>>;
-}
-
-const LocationPicker = ({ form }: LocationPickerProps) => {
+const LocationPicker = () => {
+  const form = useFormContext();
   const { t } = useTranslation();
   const { latitude: lat, longitude: lng, zoom: initialZoom } = useMemo(() => getMapCenter(4), []);
   const [hideLocationPicker, setHideLocationPicker] = useState(true);
@@ -115,14 +112,14 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
   );
 
   useEffect(() => {
-    form.register({ name: FK.observedAt.name });
-    form.register({ name: FK.reverseGeocoded.name });
-    form.register({ name: FK.latitude.name });
-    form.register({ name: FK.longitude.name });
+    form.register(FK.observedAt.name);
+    form.register(FK.reverseGeocoded.name);
+    form.register(FK.latitude.name);
+    form.register(FK.longitude.name);
   }, [form.register]);
 
   useEffect(() => {
-    if (watchLatLng["resources"].length > 0) {
+    if (watchLatLng["resources"]?.length > 0) {
       setHideLocationPicker(watchLatLng["latitude"] > 0 && watchLatLng["longitude"] > 0);
     }
   }, [watchLatLng]);
@@ -159,9 +156,9 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
           <Box style={{ gridColumn: "1/4" }}>
             <FormControl
               isInvalid={
-                (form.errors[FK.observedAt.name] ||
-                  form.errors[FK.latitude.name] ||
-                  form.errors[FK.longitude.name]) &&
+                (form.formState.errors[FK.observedAt.name] ||
+                  form.formState.errors[FK.latitude.name] ||
+                  form.formState.errors[FK.longitude.name]) &&
                 true
               }
               isRequired={true}
@@ -203,20 +200,19 @@ const LocationPicker = ({ form }: LocationPickerProps) => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              <ErrorMessage name={FK.observedAt.name} errors={form.errors} />
+              <ErrorMessage name={FK.observedAt.name} errors={form.formState.errors} />
               {!isOpen && (
                 <>
-                  <ErrorMessage name={FK.latitude.name} errors={form.errors} />
-                  <ErrorMessage name={FK.longitude.name} errors={form.errors} />
+                  <ErrorMessage name={FK.latitude.name} errors={form.formState.errors} />
+                  <ErrorMessage name={FK.longitude.name} errors={form.formState.errors} />
                 </>
               )}
             </FormControl>
           </Box>
-          <Select {...FK.locationScale} options={LOCATION_ACCURACY_OPTIONS} form={form} />
+          <SelectInputField {...FK.locationScale} options={LOCATION_ACCURACY_OPTIONS} />
         </SimpleGrid>
         <CoordinatesInput
           show={isOpen}
-          form={form}
           fk={FK}
           coordinates={coordinates}
           setCoordinates={setCoordinates}

@@ -1,14 +1,18 @@
 import { Alert, AlertIcon, Box, Button } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-export default function FormDebugger({ form }: { form: UseFormMethods<Record<string, any>> }) {
-  const [data, setData] = useState(form.getValues());
+export default function FormDebugger() {
+  const [data, setData] = useState<any>();
+  const form = useFormContext();
 
   const update = () => {
-    console.debug(form);
     setData(form.getValues());
   };
+
+  useEffect(() => {
+    update();
+  }, [form]);
 
   return (
     <Box my={4}>
@@ -25,7 +29,11 @@ export default function FormDebugger({ form }: { form: UseFormMethods<Record<str
       </Box>
       <Box bg="red.100" p={4}>
         Errors
-        <pre>{JSON.stringify(form.errors, null, 2)}</pre>
+        {Object.entries(form?.formState?.errors || {})?.map(([name, { type, message }]) => (
+          <div key={message}>
+            <b>{name}</b>: [{type}] <pre>{JSON.stringify(message, null, 2)}</pre>
+          </div>
+        ))}
       </Box>
     </Box>
   );

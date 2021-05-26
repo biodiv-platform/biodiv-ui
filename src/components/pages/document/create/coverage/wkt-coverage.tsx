@@ -3,10 +3,10 @@ import useTranslation from "@hooks/use-translation";
 import React from "react";
 
 export default function WKTCoverage({
-  hForm,
   name,
   nameTitle = "placename",
-  nameTopology = "topology"
+  nameTopology = "topology",
+  centroid = "centroid"
 }) {
   const { t } = useTranslation();
 
@@ -15,10 +15,10 @@ export default function WKTCoverage({
       name={name}
       label={t("DOCUMENT.COVERAGE.SPATIAL")}
       nameTitle={nameTitle}
+      centroid={centroid}
       labelTitle={t("DOCUMENT.COVERAGE.PLACE")}
       nameTopology={nameTopology}
       labelTopology={t("DOCUMENT.COVERAGE.WKT")}
-      form={hForm}
     />
   );
 }

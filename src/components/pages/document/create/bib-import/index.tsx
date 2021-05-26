@@ -1,10 +1,12 @@
-import { Button, VisuallyHidden } from "@chakra-ui/react";
 import { ArrowUpIcon } from "@chakra-ui/icons";
+import { Button, VisuallyHidden } from "@chakra-ui/react";
 import useTranslation from "@hooks/use-translation";
 import { axParseBib } from "@services/document.service";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
-export default function BibImportButton({ hForm }) {
+export default function BibImportButton() {
+  const { setValue } = useFormContext();
   const { t } = useTranslation();
 
   const handleOnBibUpload = async (e) => {
@@ -15,8 +17,8 @@ export default function BibImportButton({ hForm }) {
         data: { itemTypeId, ...bibFields }
       } = await axParseBib(bibFile);
       if (success) {
-        hForm.setValue("itemTypeId", itemTypeId);
-        hForm.setValue("bibFieldData", bibFields);
+        setValue("itemTypeId", itemTypeId);
+        setValue("bibFieldData", bibFields);
       }
     }
   };

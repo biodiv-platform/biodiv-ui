@@ -111,6 +111,11 @@ export interface CustomFields {
   iconURL?: string;
   notes?: string;
 }
+export interface DocumentMailData {
+  documentId?: number; // int64
+  createdOn?: string; // date-time
+  authorId?: number; // int64
+}
 export interface EncryptionKey {
   token?: string;
 }
@@ -136,9 +141,35 @@ export interface FeaturedCreateData {
   featuredCreate?: FeaturedCreate;
   mailData?: MailData;
 }
+export interface GroupGallerySlider {
+  id?: number; // int64
+  ugId?: number; // int64
+  fileName?: string;
+  observationId?: number; // int64
+  authorId?: number; // int64
+  authorName?: string;
+  authorImage?: string;
+  title?: string;
+  customDescripition?: string;
+  moreLinks?: string;
+  displayOrder?: number; // int64
+}
+export interface GroupHomePageData {
+  showGallery?: boolean;
+  showStats?: boolean;
+  showRecentObservation?: boolean;
+  showGridMap?: boolean;
+  showPartners?: boolean;
+  showDesc?: boolean;
+  description?: string;
+  stats?: Stats;
+  gallerySlider?: GroupGallerySlider[];
+}
 export interface MailData {
   observationData?: ObservationMailData;
+  documentMailData?: DocumentMailData;
   userGroupData?: UserGroupMailData[];
+  speciesData?: SpeciesMailData;
 }
 export interface Newsletter {
   id?: number; // int64
@@ -161,6 +192,10 @@ export interface ObservationMailData {
   commonName?: string;
   authorId?: number; // int64
 }
+export interface ReorderingHomePage {
+  galleryId?: number; // int64
+  displayOrder?: number; // int64
+}
 export interface ShowFilterRule {
   hasSpatialRule?: boolean;
   spartialRuleList?: UserGroupSpatialData[];
@@ -171,6 +206,12 @@ export interface ShowFilterRule {
   createdOnDateRuleList?: UserGroupCreatedOnDateRule[];
   hasObservedOnDateRule?: boolean;
   observedOnDateRule?: UserGroupObservedonDateRule[];
+}
+export interface SpeciesMailData {
+  speciesId?: number; // int64
+  speciesName?: string;
+  iconUrl?: string;
+  authorId?: number; // int64
 }
 export interface Stats {
   species?: number; // int64
@@ -229,6 +270,8 @@ export interface UserGroup {
   showGridMap?: boolean;
   showPartners?: boolean;
   showDesc?: boolean;
+  habitatIds?: number /* int64 */[];
+  speciesGroupIds?: number /* int64 */[];
 }
 export interface UserGroupAddMemebr {
   founderList?: number /* int64 */[];
@@ -264,6 +307,7 @@ export interface UserGroupCreatedOnDateRule {
 export interface UserGroupDocCreateData {
   documentId?: number; // int64
   userGroupIds?: number /* int64 */[];
+  mailData?: MailData;
 }
 export interface UserGroupEditData {
   allowUserToJoin?: boolean;
@@ -303,13 +347,15 @@ export interface UserGroupFilterRuleInputData {
   createdOnDateList?: UserGroupFilterDate[];
   observedOnDateList?: UserGroupFilterDate[];
 }
-export interface UserGroupHomePage {
+export interface UserGroupHomePageEditData {
   showGallery?: boolean;
   showStats?: boolean;
   showRecentObservation?: boolean;
   showGridMap?: boolean;
   showPartners?: boolean;
-  stats?: Stats;
+  showDesc?: boolean;
+  description?: string;
+  gallerySlider?: GroupGallerySlider[];
 }
 export interface UserGroupIbp {
   id?: number; // int64
@@ -336,6 +382,11 @@ export interface UserGroupMappingCreateData {
   userGroups?: number /* int64 */[];
   ugFilterData?: UserGroupObvFilterData;
 }
+export interface UserGroupMemberRole {
+  userGroupId?: number; // int64
+  roleId?: number; // int64
+  getsUserId?: number; // int64
+}
 export interface UserGroupObservedonDateRule {
   id?: number; // int64
   userGroupId?: number; // int64
@@ -350,12 +401,20 @@ export interface UserGroupObvFilterData {
   createdOnDate?: string; // date-time
   observedOnDate?: string; // date-time
   taxonomyId?: number; // int64
+  authorId?: number; // int64
+}
+export interface UserGroupPermissions {
+  userMemberRole?: UserGroupMemberRole[];
+  userFeatureRole?: UserGroupMemberRole[];
 }
 export interface UserGroupSpatialData {
   id?: number; // int64
   userGroupId?: number; // int64
   spatialData?: string;
   isEnabled?: boolean;
+}
+export interface UserGroupSpeciesCreateData {
+  userGroupIds?: number /* int64 */[];
 }
 export interface UserGroupSpeciesGroup {
   userGroupId?: number; // int64

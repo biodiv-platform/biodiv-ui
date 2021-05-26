@@ -72,7 +72,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             )}
             <Text title={t("LIST.OBSERVED_ON")}>
               <CalendarIcon mb={1} mr={2} />
-              {formatDateReadableFromUTC(o.observedOn)}
+              {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("OBSERVATION.UNKNOWN")}
             </Text>
           </Box>
         </div>

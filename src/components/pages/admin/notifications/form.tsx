@@ -1,13 +1,13 @@
-import { Flex } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import Submit from "@components/form/submit-button";
-import TextBox from "@components/form/text";
+import { Flex } from "@chakra-ui/react";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import { axSendPushNotification } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 function NotificationsForm() {
@@ -35,37 +35,21 @@ function NotificationsForm() {
   };
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-      <TextBox
-        name="title"
-        type="text"
-        label={t("ADMIN.PAGES.NOTIFICATION.FORM.TITLE")}
-        form={hForm}
-      />
-      <TextBox
-        name="body"
-        type="text"
-        label={t("ADMIN.PAGES.NOTIFICATION.FORM.BODY")}
-        form={hForm}
-      />
-      <TextBox
-        name="icon"
-        type="text"
-        label={t("ADMIN.PAGES.NOTIFICATION.FORM.ICON")}
-        form={hForm}
-      />
-      <TextBox
-        name="clickAction"
-        type="text"
-        label={t("ADMIN.PAGES.NOTIFICATION.FORM.LINK")}
-        form={hForm}
-      />
-      <Flex justifyContent="space-between" alignItems="center">
-        <Submit form={hForm} rightIcon={<ArrowForwardIcon />}>
-          Submit
-        </Submit>
-      </Flex>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+        <TextBoxField name="title" type="text" label={t("ADMIN.PAGES.NOTIFICATION.FORM.TITLE")} />
+        <TextBoxField name="body" type="text" label={t("ADMIN.PAGES.NOTIFICATION.FORM.BODY")} />
+        <TextBoxField name="icon" type="text" label={t("ADMIN.PAGES.NOTIFICATION.FORM.ICON")} />
+        <TextBoxField
+          name="clickAction"
+          type="text"
+          label={t("ADMIN.PAGES.NOTIFICATION.FORM.LINK")}
+        />
+        <Flex justifyContent="space-between" alignItems="center">
+          <SubmitButton rightIcon={<ArrowForwardIcon />}>Submit</SubmitButton>
+        </Flex>
+      </form>
+    </FormProvider>
   );
 }
 

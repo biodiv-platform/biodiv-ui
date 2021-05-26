@@ -7,12 +7,8 @@ import notification, { NotificationType } from "@utils/notification";
 import React, { useState } from "react";
 
 export default function JoinUserGroup() {
-  const {
-    isLoggedIn,
-    currentGroup,
-    isCurrentGroupMember,
-    setIsCurrentGroupMember
-  } = useGlobalState();
+  const { isLoggedIn, currentGroup, isCurrentGroupMember, setIsCurrentGroupMember } =
+    useGlobalState();
   const [isLoading, setLoading] = useState<boolean>();
   const { t } = useTranslation();
 

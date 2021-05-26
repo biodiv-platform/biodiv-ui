@@ -83,4 +83,3 @@ export const FEATURES = [
     link: "/observation/list"
   }
 ];
-

@@ -1,12 +1,12 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Flex, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import OTPModal from "@components/auth/otp-modal";
-import PhoneNumber from "@components/form/phone-number";
-import RadioInput from "@components/form/radio";
-import Recaptcha from "@components/form/recaptcha";
-import Select from "@components/form/select";
-import Submit from "@components/form/submit-button";
-import TextBox from "@components/form/text";
+import { PhoneNumberInputField } from "@components/form/phone-number";
+import { RadioInputField } from "@components/form/radio";
+import { RecaptchaField } from "@components/form/recaptcha";
+import { SelectInputField } from "@components/form/select";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
 import SITE_CONFIG from "@configs/site-config.json";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,11 +16,11 @@ import { axCreateUser } from "@services/auth.service";
 import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
-import LocationPicker from "./location";
+import { LocationPicker } from "./location";
 import {
   GENDER_OPTIONS,
   INSTITUTION_OPTIONS,
@@ -123,63 +123,66 @@ function SignUpForm() {
 
   return (
     <>
-      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <SimpleGrid columns={[1, 1, 2, 2]} spacingX={4}>
-          <Flex hidden={isOAuth} gridColumn="1/3">
-            <Oauth text={t("USER.AUTOFILL_WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
-          </Flex>
-          <TextBox name="username" label={t("USER.NAME")} form={hForm} />
-          <Select name="gender" label="Gender" options={GENDER_OPTIONS} form={hForm} />
-
-          <TextBox
-            name="email"
-            type="email"
-            disabled={isOAuth}
-            label={t("USER.EMAIL")}
-            form={hForm}
-          />
-          <PhoneNumber name="mobileNumber" label={t("USER.MOBILE")} form={hForm} />
-          <Box style={{ gridColumn: "1/3" }} hidden={hideVerificationMethod}>
-            <RadioInput
-              mb={1}
-              name="verificationType"
-              label={t("USER.VERIFY_THROUGH")}
-              options={VERIFICATION_TYPE}
-              form={hForm}
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <SimpleGrid columns={[1, 1, 2, 2]} spacingX={4}>
+            <Flex hidden={isOAuth} gridColumn="1/3">
+              <Oauth text={t("USER.AUTOFILL_WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
+            </Flex>
+            <TextBoxField name="username" label={t("USER.NAME")} />
+            <SelectInputField
+              name="gender"
+              label="Gender"
+              options={GENDER_OPTIONS}
+              shouldPortal={true}
             />
-          </Box>
 
-          <TextBox
-            name="password"
-            type="password"
-            label={t("USER.PASSWORD")}
-            autoComplete="new-password"
-            form={hForm}
-            hidden={isOAuth}
-          />
-          <TextBox
-            name="confirmPassword"
-            type="password"
-            label={t("USER.CONFIRM_PASSWORD")}
-            autoComplete="new-password"
-            form={hForm}
-            hidden={isOAuth}
-          />
+            <TextBoxField name="email" type="email" disabled={isOAuth} label={t("USER.EMAIL")} />
+            <PhoneNumberInputField name="mobileNumber" label={t("USER.MOBILE")} />
+            <Box style={{ gridColumn: "1/3" }} hidden={hideVerificationMethod}>
+              <RadioInputField
+                mb={1}
+                name="verificationType"
+                label={t("USER.VERIFY_THROUGH")}
+                options={VERIFICATION_TYPE}
+              />
+            </Box>
 
-          <Select name="profession" label="Profession" options={OCCUPATION_OPTIONS} form={hForm} />
-          <Select
-            name="institution"
-            label="Institution"
-            options={INSTITUTION_OPTIONS}
-            form={hForm}
-          />
-        </SimpleGrid>
-        <LocationPicker form={hForm} />
-        <Recaptcha name="recaptcha" form={hForm} />
-        <Submit form={hForm} rightIcon={<ArrowForwardIcon />} w="full">
-          {t("USER.REGISTER")}
-        </Submit>
-      </form>
+            <TextBoxField
+              name="password"
+              type="password"
+              label={t("USER.PASSWORD")}
+              autoComplete="new-password"
+              hidden={isOAuth}
+            />
+            <TextBoxField
+              name="confirmPassword"
+              type="password"
+              label={t("USER.CONFIRM_PASSWORD")}
+              autoComplete="new-password"
+              hidden={isOAuth}
+            />
+
+            <SelectInputField
+              name="profession"
+              label="Profession"
+              options={OCCUPATION_OPTIONS}
+              shouldPortal={true}
+            />
+            <SelectInputField
+              name="institution"
+              label="Institution"
+              options={INSTITUTION_OPTIONS}
+              shouldPortal={true}
+            />
+          </SimpleGrid>
+          <LocationPicker />
+          <RecaptchaField name="recaptcha" />
+          <SubmitButton rightIcon={<ArrowForwardIcon />} w="full">
+            {t("USER.REGISTER")}
+          </SubmitButton>
+        </form>
+      </FormProvider>
       <OTPModal isOpen={isOpen} onClose={onClose} user={user} />
     </>
   );

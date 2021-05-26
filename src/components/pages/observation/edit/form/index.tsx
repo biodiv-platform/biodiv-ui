@@ -1,7 +1,7 @@
-import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
-import Submit from "@components/form/submit-button";
+import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
@@ -12,7 +12,7 @@ import { dateToUTC, formatDateFromUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import DateInputs from "../../create/form/date";
@@ -22,11 +22,13 @@ import Uploader from "../../create/form/uploader";
 interface IObservationEditFormProps {
   observation: ObservationUpdateData;
   observationId;
+  licensesList;
 }
 
 export default function ObservationEditForm({
   observation,
-  observationId
+  observationId,
+  licensesList
 }: IObservationEditFormProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -63,7 +65,7 @@ export default function ObservationEditForm({
         ...r,
         hashKey: nanoid(),
         status: AssetStatus.Uploaded,
-        licenceId: r.licenceId?.toString(),
+        licenseId: r.licenseId?.toString(),
         isUsed: 1,
         rating: r.rating || 0
       })),
@@ -74,13 +76,13 @@ export default function ObservationEditForm({
   const handleOnSubmit = async (values) => {
     const payload = {
       ...values,
-      resources: values.resources.map(({ path, url, type, caption, rating, licenceId }) => ({
+      resources: values.resources.map(({ path, url, type, caption, rating, licenseId }) => ({
         path,
         url,
         type,
         caption,
         rating,
-        licenceId
+        licenseId
       })),
       observedOn: dateToUTC(values.observedOn).format()
     };
@@ -93,21 +95,23 @@ export default function ObservationEditForm({
   };
 
   return isOpen ? (
-    <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-      <Uploader name="resources" form={hForm} isCreate={false} />
-      <LocationPicker form={hForm} />
-      <DateInputs form={hForm} showTags={false} />
-      <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
-        <Link>
-          <Alert mb={4} borderRadius="md">
-            {t("OBSERVATION.EDIT_HINT")} <ArrowForwardIcon />
-          </Alert>
-        </Link>
-      </LocalLink>
-      <Submit leftIcon={<CheckIcon />} form={hForm} mb={4}>
-        {t("OBSERVATION.UPDATE_OBSERVATION")}
-      </Submit>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+        <Uploader name="resources" licensesList={licensesList} isCreate={false} />
+        <LocationPicker />
+        <DateInputs showTags={false} />
+        <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
+          <Link>
+            <Alert mb={4} borderRadius="md">
+              {t("OBSERVATION.EDIT_HINT")} <ArrowForwardIcon />
+            </Alert>
+          </Link>
+        </LocalLink>
+        <SubmitButton leftIcon={<CheckIcon />} mb={4}>
+          {t("OBSERVATION.UPDATE_OBSERVATION")}
+        </SubmitButton>
+      </form>
+    </FormProvider>
   ) : (
     <Spinner />
   );

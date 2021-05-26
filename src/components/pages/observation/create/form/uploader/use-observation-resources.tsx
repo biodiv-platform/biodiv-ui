@@ -1,12 +1,13 @@
+import SITE_CONFIG from "@configs/site-config.json";
 import useTranslation from "@hooks/use-translation";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import {
+  axBulkUploadObservationResource,
   axListMyUploads,
   axRemoveMyUploads,
   axUploadObservationResource
 } from "@services/files.service";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
-import { DEFAULT_LICENSE } from "@static/licenses";
 import { STORE } from "@static/observation-create";
 import notification, { NotificationType } from "@utils/notification";
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -31,6 +32,7 @@ interface ObservationCreateContextProps {
   isCreate?;
   resourcesSortBy?;
   setResourcesSortBy?;
+  licensesList?;
 }
 
 const ObservationCreateContext = createContext<ObservationCreateContextProps>(
@@ -42,13 +44,8 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const [assets, setAssets] = useImmer({ a: props.assets || [] });
   const [resourcesSortBy, setResourcesSortBy] = useState(MY_UPLOADS_SORT[0].value);
   const { t } = useTranslation();
-  const {
-    add,
-    getOneByIndex,
-    getManyByIndex,
-    deleteByID,
-    update
-  } = useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
+  const { add, getOneByIndex, getManyByIndex, deleteByID, update } =
+    useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
 
   const reFetchAssets = async () => {
     const allUnUsedAssets = await getManyByIndex("isUsed", 0);
@@ -83,7 +80,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
           url: null,
           caption: "",
           rating: 0,
-          licenceId: DEFAULT_LICENSE,
+          licenseId: SITE_CONFIG.LICENSE.DEFAULT,
           isUsed: 0
         });
       }
@@ -111,10 +108,21 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     });
   };
 
-  const uploadPendingResource = async (pendingResource, noSave = true) => {
-    if (noSave) {
-      await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.InProgress);
+  const handleZipFiles = async (pendingResource) => {
+    try {
+      const r = await axBulkUploadObservationResource(pendingResource);
+      if (r) {
+        await deleteByID(pendingResource.id);
+        await fetchMyUploads();
+        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded);
+      }
+    } catch (e) {
+      console.error(e);
+      notification(t("OBSERVATION.DELETE_FILE.ERROR"), NotificationType.Error);
     }
+  };
+
+  const handleMediaFiles = async (pendingResource, noSave) => {
     try {
       const r = await axUploadObservationResource(pendingResource);
       if (r && noSave) {
@@ -129,6 +137,18 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       if (noSave) {
         await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
       }
+    }
+  };
+
+  const uploadPendingResource = async (pendingResource, noSave = true) => {
+    if (noSave) {
+      await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.InProgress);
+    }
+
+    if (["application/zip", "application/x-zip-compressed"].includes(pendingResource.type)) {
+      handleZipFiles(pendingResource);
+    } else {
+      handleMediaFiles(pendingResource, noSave);
     }
   };
 
@@ -207,7 +227,8 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
         updateObservationAsset,
         uploadPendingResource,
         resourcesSortBy,
-        setResourcesSortBy
+        setResourcesSortBy,
+        licensesList: props.licensesList
       }}
     >
       {props.children}

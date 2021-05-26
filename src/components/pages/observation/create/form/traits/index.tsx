@@ -1,3 +1,4 @@
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -8,22 +9,21 @@ import {
   Text,
   useDisclosure
 } from "@chakra-ui/react";
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import useTranslation from "@hooks/use-translation";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
-import { UseFormMethods } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import TraitInput from "../../../common/trait-input";
 
 interface ITraitsPickerProps {
   name: string;
   label: string;
-  form: UseFormMethods<Record<string, any>>;
 }
 
-const TraitsPicker = ({ name, form }: ITraitsPickerProps) => {
+const TraitsPicker = ({ name }: ITraitsPickerProps) => {
+  const form = useFormContext();
   const initialFacts = form.control.defaultValuesRef.current[name] || {};
   const [traitsPairs, setTraitsPairs] = useState<TraitsValuePair[]>([]);
   const [facts, setFacts] = useState<any>(initialFacts);
@@ -46,7 +46,7 @@ const TraitsPicker = ({ name, form }: ITraitsPickerProps) => {
   }, [facts]);
 
   useEffect(() => {
-    form.register({ name });
+    form.register(name);
   }, [form.register]);
 
   return (

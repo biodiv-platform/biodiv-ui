@@ -1,10 +1,18 @@
-import { FormControl, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import { ErrorMessageMulti } from "@components/form/common/error-message";
+import {
+  FormControl,
+  FormErrorMessage,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs
+} from "@chakra-ui/react";
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useTranslation from "@hooks/use-translation";
 import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
 import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
-import { UseFormMethods } from "react-hook-form";
+import { useController } from "react-hook-form";
 
 import AudioInput from "./audio-input";
 import FromURL from "./from-url";
@@ -15,23 +23,26 @@ import useObservationCreate from "./use-observation-resources";
 export interface IDropzoneProps {
   name: string;
   mb?: number;
-  form: UseFormMethods<Record<string, any>>;
   isCreate?: boolean;
   children?;
+  hidden?;
+  licensesList;
 }
 
-const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
+const DropzoneField = ({ name, mb = 4, hidden }: IDropzoneProps) => {
   const { observationAssets } = useObservationCreate();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    form.setValue(name, observationAssets, { shouldDirty: true });
-  }, [observationAssets]);
+  const { field, fieldState } = useController({ name });
 
   useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
+    observationAssets?.length && field.onChange(observationAssets);
+  }, []);
+
+  useDidUpdateEffect(() => {
+    field.onChange(observationAssets);
+  }, [observationAssets]);
 
   useEffect(() => {
     emit(TOGGLE_PHOTO_SELECTOR, tabIndex !== 0);
@@ -40,7 +51,7 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl isInvalid={form.errors[name] && true} mb={mb}>
+    <FormControl hidden={hidden} isInvalid={fieldState.invalid} mb={mb}>
       <Tabs
         className="nospace"
         index={tabIndex}
@@ -69,7 +80,7 @@ const DropzoneField = ({ name, mb = 4, form }: IDropzoneProps) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <ErrorMessageMulti errors={form.errors} name={name} />
+      <FormErrorMessage children={JSON.stringify(fieldState?.error?.message)} />
     </FormControl>
   );
 };

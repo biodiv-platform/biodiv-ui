@@ -47,3 +47,14 @@ export const axAddDocumentComment = async (payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axAddSpeciesComment = async (payload) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/species/add/comment`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};

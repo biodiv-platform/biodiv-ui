@@ -1,11 +1,11 @@
 import { Button } from "@chakra-ui/react";
-import SelectAsync from "@components/form/select-async";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "@hooks/use-translation";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanTags } from "@utils/tags";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 export default function TagsEditor({ objectId, queryFunc, updateFunc, tags, setTags, onClose }) {
@@ -38,14 +38,16 @@ export default function TagsEditor({ objectId, queryFunc, updateFunc, tags, setT
   };
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-      <SelectAsync name="tags" form={hForm} multiple={true} onQuery={onTagsQuery} mb={2} />
-      <Button size="sm" colorScheme="blue" aria-label="Save" type="submit">
-        {t("SAVE")}
-      </Button>
-      <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
-        {t("CANCEL")}
-      </Button>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+        <SelectAsyncInputField name="tags" multiple={true} onQuery={onTagsQuery} mb={2} />
+        <Button size="sm" colorScheme="blue" aria-label="Save" type="submit">
+          {t("SAVE")}
+        </Button>
+        <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
+          {t("CANCEL")}
+        </Button>
+      </form>
+    </FormProvider>
   );
 }

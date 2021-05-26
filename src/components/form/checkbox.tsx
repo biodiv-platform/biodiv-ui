@@ -1,8 +1,6 @@
-import { Checkbox, FormControl, FormHelperText } from "@chakra-ui/react";
+import { Checkbox, FormControl, FormErrorMessage, FormHelperText } from "@chakra-ui/react";
 import React from "react";
-import { UseFormMethods, Controller } from "react-hook-form";
-
-import ErrorMessage from "./common/error-message";
+import { useController } from "react-hook-form";
 
 interface ITextBoxProps {
   name: string;
@@ -11,32 +9,29 @@ interface ITextBoxProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
-  form: UseFormMethods<Record<string, any>>;
 }
 
-const CheckboxField = ({ name, label, form, mb = 4, hint, disabled, ...props }: ITextBoxProps) => (
-  <FormControl isInvalid={form.errors[name] && true} mb={mb} {...props}>
-    <Controller
-      control={form.control}
-      name={name}
-      render={({ onChange, onBlur, value, ref }) => (
-        <Checkbox
-          name={name}
-          onChange={(e) => onChange(e.target["checked"])}
-          placeholder={label}
-          onBlur={onBlur}
-          defaultIsChecked={value}
-          isDisabled={disabled}
-          ref={ref}
-        >
-          {label}
-        </Checkbox>
-      )}
-    />
+export const CheckboxField = ({ name, label, mb = 4, hint, disabled, ...props }: ITextBoxProps) => {
+  const {
+    field: { onChange, onBlur, value },
+    fieldState
+  } = useController({ name });
 
-    <ErrorMessage name={name} errors={form.errors} />
-    {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-  </FormControl>
-);
+  return (
+    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+      <Checkbox
+        name={name}
+        onChange={(e) => onChange(e.target["checked"])}
+        placeholder={label}
+        onBlur={onBlur}
+        defaultIsChecked={value}
+        isDisabled={disabled}
+      >
+        {label}
+      </Checkbox>
 
-export default CheckboxField;
+      <FormErrorMessage children={fieldState?.error?.message} />
+      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+    </FormControl>
+  );
+};

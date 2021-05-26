@@ -2,13 +2,13 @@ import {
   Box,
   Divider,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   useRadioGroup
 } from "@chakra-ui/react";
-import ErrorMessage from "@components/form/common/error-message";
-import React, { useEffect } from "react";
-import { UseFormMethods } from "react-hook-form";
+import React from "react";
+import { useController } from "react-hook-form";
 
 import CustomRadio from "./custom-radio";
 
@@ -19,7 +19,7 @@ interface ISpeciesSelecProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
-  form: UseFormMethods<Record<string, any>>;
+  hideDevider?;
 }
 
 /**
@@ -42,38 +42,30 @@ const GroupSelector = ({
   hint,
   mb = 4,
   options = [],
-  form,
+  hideDevider,
   ...props
 }: ISpeciesSelecProps) => {
-  const value = form.watch(name);
-
-  const onChange = (v) => {
-    form.setValue(name, v, { shouldDirty: true, shouldValidate: true });
-  };
-
-  useEffect(() => {
-    form.register({ name });
-  }, [form.register]);
+  const { field, fieldState } = useController({ name });
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name,
-    value: value ? value.toString() : null,
-    onChange
+    value: field.value ? field.value.toString() : null,
+    onChange: field.onChange
   });
 
   return (
     <>
-      <FormControl isInvalid={form.errors[name] && true} isRequired={true} mb={mb} {...props}>
+      <FormControl isInvalid={fieldState.invalid} isRequired={true} mb={mb} {...props}>
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Box {...getRootProps()}>
           {options.map((o) => (
             <CustomRadio key={o.id} icon={o.name} {...getRadioProps({ value: o.id.toString() })} />
           ))}
         </Box>
-        <ErrorMessage name={name} errors={form.errors} />
+        <FormErrorMessage children={fieldState?.error?.message} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
       </FormControl>
-      <Divider mb={4} />
+      {!hideDevider && <Divider mb={4} />}
     </>
   );
 };

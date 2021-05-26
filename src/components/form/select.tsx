@@ -1,11 +1,9 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { isBrowser } from "@static/constants";
-import { getByPath } from "@utils/basic";
 import React from "react";
-import { Controller, UseFormMethods } from "react-hook-form";
+import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
-import ErrorMessage from "./common/error-message";
 import { ClearIndicator, selectStyles } from "./configs";
 
 interface SelectInputFieldProps {
@@ -21,15 +19,14 @@ interface SelectInputFieldProps {
   isControlled?: boolean;
   onChangeCallback?;
   shouldPortal?;
-  form: UseFormMethods<Record<string, any>>;
+  hidden?;
 }
 const DefaultOptionComponent = (p) => <components.Option {...p} />;
 
-const SelectInputField = ({
+export const SelectInputField = ({
   name,
   label,
   hint,
-  form,
   mb = 4,
   options = [],
   disabled,
@@ -39,55 +36,46 @@ const SelectInputField = ({
   isControlled,
   shouldPortal,
   onChangeCallback,
+  hidden,
   ...props
 }: SelectInputFieldProps) => {
-  const initialValue = options.find(
-    (v) => v.value === getByPath(form.control.defaultValuesRef.current, name)
-  );
+  const { field, fieldState } = useController({ name });
 
   return (
     <FormControl
-      isInvalid={getByPath(form.errors, name) && true}
+      isInvalid={fieldState.invalid}
       className="dropdown"
-      aria-invalid={getByPath(form.errors, name) && true}
+      aria-invalid={fieldState.invalid}
       mb={mb}
+      hidden={hidden}
       isRequired={isRequired}
       {...props}
     >
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Controller
-        control={form.control}
-        name={name}
-        defaultValue={getByPath(form.control.defaultValuesRef.current, name)}
-        render={({ onChange, onBlur, value }) => (
-          <Select
-            id={name}
-            inputId={name}
-            onChange={(o) => {
-              onChange(o.value);
-              onChangeCallback && onChangeCallback(o.value);
-            }}
-            onBlur={onBlur}
-            options={options}
-            {...(isControlled
-              ? { value: options.find((o) => o.value === value) }
-              : { defaultValue: initialValue })}
-            components={{
-              Option: optionComponent,
-              ClearIndicator
-            }}
-            menuPortalTarget={isBrowser && shouldPortal && document.body}
-            isSearchable={true}
-            isDisabled={disabled}
-            styles={selectStyles}
-            ref={selectRef}
-          />
-        )}
+      <Select
+        id={name}
+        inputId={name}
+        onChange={(o) => {
+          field.onChange(o.value);
+          onChangeCallback && onChangeCallback(o.value);
+        }}
+        onBlur={field.onBlur}
+        options={options}
+        components={{
+          Option: optionComponent,
+          ClearIndicator
+        }}
+        menuPortalTarget={isBrowser && shouldPortal && document.body}
+        isSearchable={true}
+        isDisabled={disabled}
+        styles={selectStyles}
+        {...{
+          [isControlled ? "value" : "defaultValue"]: options.find((o) => o.value === field.value)
+        }}
+        ref={selectRef}
       />
-      <ErrorMessage name={name} errors={form.errors} />
+      <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );
 };
-
-export default SelectInputField;
