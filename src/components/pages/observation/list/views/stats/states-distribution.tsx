@@ -25,7 +25,7 @@ const StatesDistribution = ({ observationData, filter }) => {
       .sort((a, b) => b.observations - a.observations);
   }, [filter, observationData]);
 
-  return (
+  return filteredStateData.length > 0 ? (
     <Box className="white-box">
       <BoxHeading>📊 {t("LIST.CHART.STATES")}</BoxHeading>
       <Box p={4}>
@@ -43,6 +43,8 @@ const StatesDistribution = ({ observationData, filter }) => {
         />
       </Box>
     </Box>
+  ) : (
+    null
   );
 };
 
