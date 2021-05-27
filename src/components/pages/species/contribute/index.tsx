@@ -21,7 +21,7 @@ export default function SpeciesContributePageComponent() {
           <b>{t("SPECIES.CONTRIBUTE.ONLINE.TITLE")}</b>
           {t("SPECIES.CONTRIBUTE.ONLINE.DESCRIPTION")}
           <Box my={4}>
-            <LocalLink href="/species/taxonBrowser">
+            <LocalLink href="/roles/request">
               <Button colorScheme="blue" leftIcon={<PeopleIcon />} mr={4} as="a">
                 {t("SPECIES.CONTRIBUTE.REQUEST_PERMISSION")}
               </Button>

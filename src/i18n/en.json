@@ -1113,7 +1113,8 @@
       "BUTTON": "Request",
       "FAILURE": "error while requesting permission",
       "SUCCESS": "taxon permission requested successfully",
-      "TITLE": "Request Permission"
+      "TITLE": "Request Permission",
+      "USER": "User"
     },
     "ROLE": "Role"
   },

@@ -18,7 +18,7 @@ export function SpeciesCreatePageComponent({ taxonRanksMeta }) {
         <UnorderedList>
           <ListItem>
             {t("SPECIES.CREATE.DESC_1")}{" "}
-            <ExternalBlueLink href="/species/taxonBrowser">
+            <ExternalBlueLink href="/roles/request">
               {t("SPECIES.CONTRIBUTE.REQUEST_PERMISSION")}
             </ExternalBlueLink>
           </ListItem>
