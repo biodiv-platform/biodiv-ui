@@ -1,5 +1,3 @@
-import "flatpickr/dist/themes/material_blue.css";
-
 import {
   FormControl,
   FormErrorMessage,
@@ -12,6 +10,7 @@ import {
 import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { formatDateRange, parseDateRange } from "@utils/date";
+import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
@@ -61,33 +60,42 @@ export const DateRangePickerField = ({
   }
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <InputGroup>
-        <Flatpickr
-          value={date}
-          options={{ allowInput: true, maxDate, dateFormat, mode: "range" }}
-          onChange={setDate}
-          render={({ defaultValue, value, ...props }, ref) => (
-            <Input
-              disabled={disableInput}
-              isReadOnly={disabled}
-              id={name}
-              {...props}
-              placeholder={label}
-              defaultValue={defaultValue}
-              ref={ref}
-            />
-          )}
+    <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/flatpickr/dist/themes/material_blue.css"
+          key="flatpickr"
         />
-        <InputRightElement>
-          <label htmlFor={name} style={{ cursor: "pointer" }}>
-            <CalendarIcon color="gray.300" />
-          </label>
-        </InputRightElement>
-      </InputGroup>
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      </Head>
+      <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+        <FormLabel htmlFor={name}>{label}</FormLabel>
+        <InputGroup>
+          <Flatpickr
+            value={date}
+            options={{ allowInput: true, maxDate, dateFormat, mode: "range" }}
+            onChange={setDate}
+            render={({ defaultValue, value, ...props }, ref) => (
+              <Input
+                disabled={disableInput}
+                isReadOnly={disabled}
+                id={name}
+                {...props}
+                placeholder={label}
+                defaultValue={defaultValue}
+                ref={ref}
+              />
+            )}
+          />
+          <InputRightElement>
+            <label htmlFor={name} style={{ cursor: "pointer" }}>
+              <CalendarIcon color="gray.300" />
+            </label>
+          </InputRightElement>
+        </InputGroup>
+        <FormErrorMessage children={fieldState?.error?.message} />
+        {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+      </FormControl>
+    </>
   );
 };

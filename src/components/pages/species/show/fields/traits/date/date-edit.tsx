@@ -1,11 +1,10 @@
-import "flatpickr/dist/themes/material_blue.css";
-
 import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import useSpecies from "@components/pages/species/show/use-species";
 import useTranslation from "@hooks/use-translation";
 import CalendarIcon from "@icons/calendar";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
+import Head from "next/head";
 import React, { useState } from "react";
 import Flatpickr from "react-flatpickr";
 
@@ -47,6 +46,13 @@ export function TraitDateEdit({ traitId, initialValue, onSave, onClose }) {
 
   return (
     <div>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/flatpickr/dist/themes/material_blue.css"
+          key="flatpickr"
+        />
+      </Head>
       <Box mb={3} maxW="md">
         <InputGroup>
           <Flatpickr
