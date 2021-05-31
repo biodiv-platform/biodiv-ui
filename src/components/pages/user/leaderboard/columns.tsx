@@ -98,8 +98,8 @@ export const LEADERBOARD_TABLE_COLUMNS = [
         <Avatar
           size="md"
           name={props?.cell?.value?.authorName}
-          src={getUserImage(props?.cell?.value?.profilePic)}
-        ></Avatar>
+          src={getUserImage(props?.cell?.value?.profilePic, props?.cell?.value?.authorName)}
+        />
         <div>
           <LocalLink href={`/user/show/${props?.cell?.value?.author_id}`}>
             <BlueLink>{props?.cell?.value?.authorName}</BlueLink>

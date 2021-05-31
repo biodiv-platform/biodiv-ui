@@ -137,7 +137,7 @@ export default function FlagActionButton({
                               size="sm"
                               mt={2}
                               name={user.name}
-                              src={getUserImage(user.profilePic)}
+                              src={getUserImage(user.profilePic, user.name)}
                             />
                             <Box>
                               <LocalLink href={`/user/show/${user.id}`}>

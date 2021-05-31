@@ -16,7 +16,7 @@ export default function UserAvatarList({ userList, title }) {
               title={name}
               aria-label={name}
               name={name}
-              src={getUserImage(profilePic, 64)}
+              src={getUserImage(profilePic, name, 64)}
             />
           </Link>
         ))}

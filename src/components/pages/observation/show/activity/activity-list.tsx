@@ -56,7 +56,11 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
           borderColor="gray.300"
           className="fade"
         >
-          <Avatar size="sm" name={a.userIbp.name} src={getUserImage(a.userIbp.profilePic)} />
+          <Avatar
+            size="sm"
+            name={a.userIbp.name}
+            src={getUserImage(a.userIbp.profilePic, a.userIbp.name)}
+          />
           <Box>
             <BlueLink fontWeight="bold" mr={2} href={`/user/show/${a.userIbp.id}`}>
               {a.userIbp.name} <Badge isAdmin={a.userIbp.isAdmin} />

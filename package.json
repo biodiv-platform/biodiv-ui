@@ -31,6 +31,7 @@
     "axios": "^0.21.1",
     "base64-url": "^2.3.3",
     "blueimp-load-image": "^5.14.0",
+    "boring-avatars": "^1.5.4",
     "cogo-toast": "^4.2.3",
     "d3-axis": "^2.1.0",
     "d3-scale": "^3.3.0",

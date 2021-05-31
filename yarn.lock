@@ -4369,6 +4369,11 @@ bn.js@^5.0.0, bn.js@^5.1.1:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.2.0.tgz#358860674396c6997771a9d051fcc1b57d4ae002"
   integrity sha512-D7iWRBvnZE8ecXiLj/9wbxH7Tk79fAh8IHaTNq1RWRixsS02W+5qS+iE9yq6RYl0asXx5tw0bLhmT5pIfbSquw==
 
+boring-avatars@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/boring-avatars/-/boring-avatars-1.5.4.tgz#4ca5608fb16b75322cf5e1bcdc49debfeb2dfd0d"
+  integrity sha512-sSfAGVAjN0LNILSoQRT2zbG6Dy4j4WMqoDoydsU9xoIi9LKYae4DgaqRhCoGjn0iYRwsWtAu0PsohH1rLVPm+A==
+
 boundingbox@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/boundingbox/-/boundingbox-1.2.4.tgz#d0fc5196c73969f389b760b086213f4dd4718e7a"

@@ -46,11 +46,10 @@ export default function UserMenu() {
             aria-label={t("HEADER.MENU_PRIMARY.SETTINGS.TITLE")}
           >
             <Avatar
-              showBorder={true}
               size="xs"
               mr={2}
               name={user?.name}
-              src={getUserImage(user?.profile_pic)}
+              src={getUserImage(user?.profile_pic, user.name)}
             />
             {user?.name} <ChevronDownIcon />
           </MenuButton>

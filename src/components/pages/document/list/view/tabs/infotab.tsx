@@ -137,7 +137,12 @@ export default function InfoTab({
           </Stack>
           <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
             <Flex alignItems="center">
-              <Avatar mr={1} size="sm" name={user?.name} src={getUserImage(user?.profilePic)} />
+              <Avatar
+                mr={1}
+                size="sm"
+                name={user?.name}
+                src={getUserImage(user?.profilePic, user?.name)}
+              />
               <Text>{user?.name}</Text>
             </Flex>
           </Link>
