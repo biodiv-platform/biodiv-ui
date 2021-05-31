@@ -11,7 +11,7 @@ import { UserProfileProps } from "..";
 import DeleteAccount from "./delete-account";
 
 export default function UserInfoSidebar({ user }: UserProfileProps) {
-  const userImage = getUserImage(user.profilePic, 400);
+  const userImage = getUserImage(user.profilePic, user.name, 400);
   const { t } = useTranslation();
   const [canEdit, setCanEdit] = useState<boolean>();
   const [canDelete, setCanDelete] = useState<boolean>();

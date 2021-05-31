@@ -21,7 +21,7 @@ const User = ({ user }: UserProps) =>
     >
       <LocalLink href={`/user/show/${user.id}`}>
         <Link justifySelf="center" px={4}>
-          <Avatar name={user.name} src={getUserImage(user.profilePic)} />
+          <Avatar name={user.name} src={getUserImage(user.profilePic, user.name)} />
         </Link>
       </LocalLink>
       <Box gridColumn="2/6">

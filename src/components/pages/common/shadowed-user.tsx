@@ -27,7 +27,7 @@ export default function ShadowedUser({ user = {} }: { user?: UserIbp }) {
               flexShrink={0}
               size="sm"
               name={user?.name}
-              src={getUserImage(user?.profilePic)}
+              src={getUserImage(user?.profilePic, user?.name)}
             />
             <div className="elipsis-2">{user?.name}</div>
           </Flex>

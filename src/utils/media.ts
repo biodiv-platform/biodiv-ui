@@ -49,12 +49,12 @@ export const getYoutubeImage = (resourceUrl: string, size = "hqdefault") => {
   return ytid ? `https://i.ytimg.com/vi/${ytid}/${size}.jpg` : undefined;
 };
 
-export const getUserImage = (resourceUrl, w = 50) => {
+export const getUserImage = (resourceUrl, name, w = 50) => {
   return resourceUrl
     ? resourceUrl.startsWith("http")
       ? resourceUrl
       : `${ENDPOINT.FILES}/get/crop/users${resourceUrl}?w=${w}`
-    : undefined;
+    : `/api/avatar?t=${name}&s=${w}`;
 };
 
 export const getResourceThumbnail = (resourceType, resourceUrl, size) => {

@@ -116,7 +116,7 @@ export default function RecoSuggestion({
                     <Avatar
                       key={u.id}
                       name={u.name}
-                      src={getUserImage(u.profilePic)}
+                      src={getUserImage(u.profilePic, u.name)}
                       title={u.name}
                     />
                   ))}
