@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 import { TaxonPermissionRequestModal } from "./request-modal";
 
-export default function SpeciesTaxonBrowserComponent() {
+export default function RolesRequestComponent({ isAdmin }) {
   const [selectedTaxon, setSelectedTaxon] = useState();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,7 +21,12 @@ export default function SpeciesTaxonBrowserComponent() {
       <Button my={4} colorScheme="blue" onClick={onOpen} disabled={!selectedTaxon}>
         {t("TAXON.REQUEST.TITLE")}
       </Button>
-      <TaxonPermissionRequestModal isOpen={isOpen} onClose={onClose} taxon={selectedTaxon} />
+      <TaxonPermissionRequestModal
+        isOpen={isOpen}
+        onClose={onClose}
+        taxon={selectedTaxon}
+        isAdmin={isAdmin}
+      />
     </div>
   );
 }

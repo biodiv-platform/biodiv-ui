@@ -28,7 +28,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
                   flexShrink={0}
                   size="sm"
                   name={resource.authorName}
-                  src={getUserImage(resource.authorImage)}
+                  src={getUserImage(resource.authorImage, resource.authorName)}
                 />
                 <Box className="credits-text">
                   <Text lineHeight="1em" fontSize="xs">

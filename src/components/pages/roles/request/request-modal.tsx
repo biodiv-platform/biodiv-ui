@@ -3,11 +3,11 @@ import React from "react";
 
 import { TaxonPermissionRequestForm } from "./form";
 
-export function TaxonPermissionRequestModal({ taxon, isOpen, onClose }) {
+export function TaxonPermissionRequestModal({ taxon, isOpen, onClose, isAdmin }) {
   return (
     <Modal onClose={onClose} size="md" isOpen={isOpen}>
       <ModalOverlay />
-      {isOpen && <TaxonPermissionRequestForm taxon={taxon} onClose={onClose} />}
+      {isOpen && <TaxonPermissionRequestForm taxon={taxon} isAdmin={isAdmin} onClose={onClose} />}
     </Modal>
   );
 }

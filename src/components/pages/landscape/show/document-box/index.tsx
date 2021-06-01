@@ -63,7 +63,7 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
                 flexShrink={0}
                 size="sm"
                 name={user?.name}
-                src={getUserImage(user?.profilePic)}
+                src={getUserImage(user?.profilePic, user?.name)}
               />
               <Text>{user?.name}</Text>
             </Flex>

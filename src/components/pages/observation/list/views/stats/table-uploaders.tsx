@@ -41,7 +41,7 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
               <Tr key={`${authorId}-${count}`}>
                 <Td>
                   <HStack>
-                    <Avatar size="xs" src={getUserImage(pic, 24)} name={name} />
+                    <Avatar size="xs" src={getUserImage(pic, name, 24)} name={name} />
                     <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
                       <ExternalBlueLink>{name}</ExternalBlueLink>
                     </LocalLink>

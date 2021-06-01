@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { UserEditPageComponentProps } from "..";
 
 export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
-  const [userImage, setUserImage] = useState(getUserImage(user.profilePic, 400));
+  const [userImage, setUserImage] = useState(getUserImage(user.profilePic, user.name, 400));
   const { t } = useTranslation();
 
   const handleOnPhotoUpload = async (e) => {
@@ -18,7 +18,7 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
       if (r.success) {
         const { success } = await axUpdateUserImage({ id: user.id, profilePic: r.data });
         if (success) {
-          setUserImage(getUserImage(r.data, 400));
+          setUserImage(getUserImage(r.data, user?.name, 400));
           notification(t("USER.UPDATED"), NotificationType.Success);
           return;
         }

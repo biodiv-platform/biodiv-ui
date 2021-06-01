@@ -137,14 +137,20 @@ export default function ForgotPasswordComponent() {
             <Text mb={4}>
               {t("OTP.DESCRIPTION")} {user?.vt}
             </Text>
-            <FormProvider {...hForm}>
+            <FormProvider {...rForm}>
               <form onSubmit={rForm.handleSubmit(handleOnVerification)}>
                 <TextBoxField name="otp" label={t("OTP.FORM.OTP")} />
-                <TextBoxField name="password" label={t("USER.PASSWORD")} type="password" />
+                <TextBoxField
+                  name="password"
+                  label={t("USER.PASSWORD")}
+                  type="password"
+                  autoComplete="new-password"
+                />
                 <TextBoxField
                   name="confirmPassword"
                   label={t("USER.CONFIRM_PASSWORD")}
                   type="password"
+                  autoComplete="new-password"
                 />
                 <Flex justifyContent="space-between" alignItems="center">
                   <SubmitButton rightIcon={<ArrowForwardIcon />}>

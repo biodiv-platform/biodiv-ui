@@ -45,7 +45,7 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
               <Tr key={`${authorId}-${count}`}>
                 <Td>
                   <HStack p="md">
-                    <Avatar size="xs" src={getUserImage(pic, 24)} name={name} />
+                    <Avatar size="xs" src={getUserImage(pic, name, 24)} name={name} />
                     <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
                       <ExternalBlueLink>{name}</ExternalBlueLink>
                     </LocalLink>

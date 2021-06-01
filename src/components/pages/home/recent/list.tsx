@@ -5,7 +5,7 @@ import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React, { useEffect, useState } from "react";
 
 const OBSERVATIONS_SIZE = 10;
@@ -59,14 +59,13 @@ export default function RecentObservationList() {
                   <Image
                     objectFit="cover"
                     borderRadius="md"
-                    loading="lazy"
-                    ignoreFallback={true}
                     bg="gray.200"
                     src={getResourceThumbnail(
                       RESOURCE_CTX.OBSERVATION,
                       o?.thumbnail,
                       RESOURCE_SIZE.RECENT_THUMBNAIL
                     )}
+                    fallbackSrc={getLocalIcon(o?.speciesGroup)}
                     alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
                   />
                 </AspectRatio>
