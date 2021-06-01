@@ -4,7 +4,6 @@ import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
   SpeciesGroup,
-  TraitsValuePair,
   ExternalShowData
 } from "@interfaces/observation";
 import { axGetPermissions } from "@services/observation.service";
@@ -20,7 +19,6 @@ import Temporal from "@components/pages/observation/show/sidebar/temporal";
 
 interface IObservationShowPageComponentProps {
   observation: ExternalShowData;
-  traits: TraitsValuePair[];
   speciesGroups: SpeciesGroup[];
 }
 
