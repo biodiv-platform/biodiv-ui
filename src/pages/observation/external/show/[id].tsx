@@ -13,9 +13,7 @@ const ExternalObservationShowPage = ({ observation, speciesGroups, success }) =>
 
 export const getServerSideProps = async (ctx) => {
   const { data: speciesGroups } = await axGetspeciesGroups();
-  const { success, data } = await axGetExtObservationById(
-    ctx.query.uniqueIdPrefix + "-" + ctx.query.observationId
-  );
+  const { success, data } = await axGetExtObservationById(ctx.query.id);
   return {
     props: {
       observation: data,

@@ -89,7 +89,7 @@ export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper 
         href={
           !o?.isExternal
             ? `/observation/show/${o.observationId}`
-            : `/observation/external/show/${o.uniqueIdPrefix}/${o.observationId}`
+            : `/observation/external/show/${o.id}`
         }
         prefixGroup={true}
       >

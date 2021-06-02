@@ -1,11 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import CarouselObservation from "@components/@core/carousel";
 import useGlobalState from "@hooks/use-global-state";
-import {
-  ObservationUserPermission,
-  SpeciesGroup,
-  ExternalShowData
-} from "@interfaces/observation";
+import { ObservationUserPermission, SpeciesGroup, ExternalShowData } from "@interfaces/observation";
 import { axGetPermissions } from "@services/observation.service";
 import React, { useEffect, useState } from "react";
 //import { useImmer } from "use-immer";

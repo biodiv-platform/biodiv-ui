@@ -445,7 +445,7 @@ export interface ObservationListPageMapper {
   dataSource?: string;
   externalOriginalReferenceLink?: string;
   externalGbifReferenceLink?: string;
-  uniqueIdPrefix?: string;
+  id?: string;
 }
 export interface ObservationLocationInfo {
   soil?: string;
