@@ -1,5 +1,5 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Flex, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import OTPModal from "@components/auth/otp-modal";
 import { PhoneNumberInputField } from "@components/form/phone-number";
 import { RadioInputField } from "@components/form/radio";
@@ -125,10 +125,10 @@ function SignUpForm() {
     <>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <SimpleGrid columns={[1, 1, 2, 2]} spacingX={4}>
-            <Flex hidden={isOAuth} gridColumn="1/3">
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
+            <GridItem colSpan={{ md: 2 }} hidden={isOAuth}>
               <Oauth text={t("USER.AUTOFILL_WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
-            </Flex>
+            </GridItem>
             <TextBoxField name="username" label={t("USER.NAME")} />
             <SelectInputField
               name="gender"
