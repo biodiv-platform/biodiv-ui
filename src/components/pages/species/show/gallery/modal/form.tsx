@@ -1,12 +1,12 @@
 import { Button, ModalBody, ModalFooter } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { AssetStatus } from "@interfaces/custom";
 import { axUpdateSpeciesGalleryResources } from "@services/species.service";
 import { nanoid } from "nanoid";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -34,10 +34,7 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
       Yup.object().shape({
         resources: Yup.array().of(
           Yup.object().shape({
-            status: Yup.number().oneOf(
-              [AssetStatus.Uploaded, null],
-              t("OBSERVATION.EDIT_NOT_UPLOADED")
-            )
+            status: Yup.number().oneOf([AssetStatus.Uploaded, null], t("common:edit_not_uploaded"))
           })
         )
       })
@@ -78,9 +75,9 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
           />
         </ModalBody>
         <ModalFooter>
-          <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
+          <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
           <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
-            {t("CANCEL")}
+            {t("common:cancel")}
           </Button>
         </ModalFooter>
       </form>

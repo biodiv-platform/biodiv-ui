@@ -1,17 +1,17 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { PageCreate } from "@interfaces/pages";
 import { axCreatePage } from "@services/pages.service";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import PageForm from "../common/form";
 
 export default function PageCreateForm(): JSX.Element {
-  const { t, localeId } = useTranslation();
-  const { user, currentGroup } = useGlobalState();
+  const { t } = useTranslation();
+  const { user, currentGroup, languageId } = useGlobalState();
   const router = useLocalRouter();
 
   const defaultValues = {
@@ -25,7 +25,7 @@ export default function PageCreateForm(): JSX.Element {
       ...values,
       description: null,
       userGroupId: currentGroup.id,
-      languageId: localeId,
+      languageId,
       pageIndex: 0,
       pageType: "Content",
       url: null,
@@ -36,17 +36,17 @@ export default function PageCreateForm(): JSX.Element {
     };
     const { success, data } = await axCreatePage(payload);
     if (success) {
-      notification(t("PAGE.CREATE.SUCCESS"), NotificationType.Success);
+      notification(t("page:create.success"), NotificationType.Success);
       router.push(`/page/show/${data?.id}`, true);
     } else {
-      notification(t("PAGE.CREATE.FAILURE"));
+      notification(t("page:create.failure"));
     }
   };
 
   return (
     <PageForm
       defaultValues={defaultValues}
-      submitLabel={t("PAGE.CREATE.TITLE")}
+      submitLabel={t("page:create.title")}
       onSubmit={handleOnPageEdit}
       hideParentId={false}
     />

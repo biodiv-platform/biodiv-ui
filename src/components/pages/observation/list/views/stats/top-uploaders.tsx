@@ -1,4 +1,4 @@
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import UploadersTable from "./table-uploaders";
@@ -12,7 +12,7 @@ const TopUploaders = ({ filter }) => {
   return (
     <UploadersTable
       data={uploader.uploadersData.data}
-      title={t("LIST.TOP_UPLOADERS_LIST.HEADING")}
+      title={t("observation:list.top_uploaders_list.heading")}
       loadMoreUploaders={uploader.uploadersData.loadMore}
       filter={filter}
     />

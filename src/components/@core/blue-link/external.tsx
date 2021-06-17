@@ -1,5 +1,5 @@
-import { LinkProps } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { LinkProps } from "@chakra-ui/react";
 import React from "react";
 
 import BlueLink from ".";

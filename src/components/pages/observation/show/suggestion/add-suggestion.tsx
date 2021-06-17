@@ -11,13 +11,13 @@ import {
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
 import notification from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -122,7 +122,7 @@ export default function AddSuggestion({
         hForm.reset();
       }
     } else {
-      notification(t("OBSERVATION.NO_EMPTY_SUGGESTION"));
+      notification(t("observation:no_empty_suggestion"));
     }
   };
 
@@ -135,7 +135,7 @@ export default function AddSuggestion({
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">
-        <AlertIcon /> {t("OBSERVATION.ID.VALIDATED")}
+        <AlertIcon /> {t("observation:id.validated")}
       </Alert>
     ) : (
       <>
@@ -147,31 +147,31 @@ export default function AddSuggestion({
                   <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
                     <SelectAsyncInputField
                       name="taxonCommonName"
-                      label={t("OBSERVATION.COMMON_NAME")}
+                      label={t("observation:common_name")}
                       style={{ gridColumn: "1/3" }}
                       onQuery={onCommonNameQuery}
                       options={commonNameOptions}
                       optionComponent={CommonNameOption}
-                      placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
+                      placeholder={t("observation:min_three_chars")}
                       onChange={onCommonNameChange}
                     />
                     <SelectInputField
                       name="languageId"
-                      label={t("OBSERVATION.LANGUAGE")}
+                      label={t("form:language")}
                       options={languages}
                       selectRef={langRef}
                     />
                   </SimpleGrid>
                   <SelectAsyncInputField
                     name="scientificNameTaxonId"
-                    label={t("OBSERVATION.SCIENTIFIC_NAME")}
+                    label={t("observation:scientific_name")}
                     onQuery={onScientificNameQuery}
                     optionComponent={ScientificNameOption}
-                    placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
+                    placeholder={t("observation:min_three_chars")}
                     onChange={onScientificNameChange}
                     selectRef={scientificRef}
                   />
-                  <SubmitButton leftIcon={<CheckIcon />}>{t("OBSERVATION.SUGGEST")}</SubmitButton>
+                  <SubmitButton leftIcon={<CheckIcon />}>{t("observation:suggest")}</SubmitButton>
                 </form>
               </FormProvider>
             </Box>
@@ -179,9 +179,9 @@ export default function AddSuggestion({
         </Box>
         <Alert className="fadeInUp" status="success" hidden={isOpen}>
           <AlertIcon />
-          {t("OBSERVATION.ID.SUGGESTION_SUCCESS")}
+          {t("observation:id.suggestion_success")}
           <Button variant="link" colorScheme="blue" onClick={onOpen} ml={1}>
-            {t("OBSERVATION.ID.RESUGGEST")}
+            {t("observation:id.resuggest")}
           </Button>
         </Alert>
       </>

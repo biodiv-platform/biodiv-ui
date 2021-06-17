@@ -1,9 +1,9 @@
 import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useReducer } from "react";
 
 interface ISuggestionsProps {
@@ -62,7 +62,7 @@ export default function Suggestions({
         ))}
       </SimpleGrid>
       <Button w="full" rounded={0} hidden={hideMore} onClick={loadMore}>
-        {t("OBSERVATION.LOAD_MORE_OBSERVATIONS")}
+        {t("common:load_more")}
       </Button>
     </Box>
   );

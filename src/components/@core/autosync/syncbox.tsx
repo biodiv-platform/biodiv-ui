@@ -1,9 +1,9 @@
 import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import ChevronIcon from "@icons/chevron";
 import CrossIcon from "@icons/cross";
 import { Mq } from "mq-styled-components";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { SyncInfo } from "./offline-sync";
@@ -73,10 +73,10 @@ export default function SyncBox({
     <SyncBoxContainer>
       <div className="fadeInUp">
         <div className="header">
-          <div className="text">{t("OBSERVATION.SYNC.TITLE")}</div>
+          <div className="text">{t("observation:sync.title")}</div>
           <div className="icons">
             <IconButton
-              aria-label={t("TOGGLE")}
+              aria-label={t("common:toggle")}
               icon={<ChevronIcon />}
               variant="link"
               minW="auto"
@@ -85,7 +85,7 @@ export default function SyncBox({
               mr={5}
             />
             <IconButton
-              aria-label={t("CLOSE")}
+              aria-label={t("common:close")}
               icon={<CrossIcon />}
               variant="link"
               minW="auto"

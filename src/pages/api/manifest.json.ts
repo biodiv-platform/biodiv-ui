@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { APP_VERSION, RESOURCE_SIZE } from "@static/constants";
 import { compiledMessage } from "@utils/basic";
 

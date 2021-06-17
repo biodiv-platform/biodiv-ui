@@ -1,5 +1,5 @@
 import { Box, ModalBody, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { SpeciesGalleryImage } from "./image";
@@ -13,8 +13,8 @@ export default function SpeciesGalleryList({ resources }) {
       <ModalBody>
         <Tabs className="nospace" variant="soft-rounded" isLazy={true}>
           <TabList mb={4} overflowX="auto" py={1}>
-            <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
-            <Tab>🖼️ {t("SPECIES.OBSERVATION_MEDIA")}</Tab>
+            <Tab>✔️ {t("form:selected_media")}</Tab>
+            <Tab>🖼️ {t("species:observation_media")}</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>

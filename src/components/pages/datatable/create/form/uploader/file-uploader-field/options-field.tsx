@@ -2,8 +2,8 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
-import useTranslation from "@hooks/use-translation";
 import { OBSERVATION_FIELDS } from "@static/observation-create";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
@@ -45,7 +45,7 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
   };
 
   return (
-    <ToggleablePanel icon="🧩" title={t("DATATABLE.FIELD_MAPPING_TABLE")}>
+    <ToggleablePanel icon="🧩" title={t("datatable:field_mapping_table")}>
       <Box p={4} pb={0}>
         <Stack m={2} direction="row-reverse">
           <Button
@@ -53,7 +53,7 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
             onClick={() => setShowMapping(false)}
             leftIcon={<ArrowBackIcon />}
           >
-            {t("DATATABLE.UPLOAD_AGAIN")}
+            {t("datatable:upload_again")}
           </Button>
         </Stack>
         <Box style={{ overflowX: "scroll", width: "100%" }}>
@@ -71,7 +71,7 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
                   <Td key={field.id}>
                     <SelectInputField
                       name={`columnsMapping.${index}.fieldKey`}
-                      label={t("ACTIONS.FLAG.CATEGORY")}
+                      label={t("common:actions.flag.category")}
                       options={OBSERVATION_FIELDS}
                     />
                   </Td>

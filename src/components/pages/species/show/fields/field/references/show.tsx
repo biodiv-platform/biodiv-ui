@@ -1,9 +1,9 @@
 import { Box, ListItem, OrderedList } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
-import useTranslation from "@hooks/use-translation";
 import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { emit } from "react-gbus";
 
@@ -20,9 +20,9 @@ export default function ReferencesShow({ value }) {
     const { success } = await axRemoveSpeciesField(value.id);
     if (success) {
       emit(SPECIES_FIELD_DELETED, value);
-      notification(t("SPECIES.FIELD.DELETE.SUCCESS"), NotificationType.Success);
+      notification(t("species:field.delete.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.FIELD.DELETE.FAILURE"));
+      notification(t("species:field.delete.failure"));
     }
   };
 

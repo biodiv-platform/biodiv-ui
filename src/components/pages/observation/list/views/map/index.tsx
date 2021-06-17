@@ -1,13 +1,13 @@
 import { Box } from "@chakra-ui/layout";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { NakshaMapboxList } from "@ibp/naksha-mapbox-list";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const onObservationGridHover = ({ feature }) => (
@@ -37,7 +37,7 @@ export default function ObservationsMap() {
 
   return (
     <Box className="white-box" mb={4}>
-      <BoxHeading>🗺️ {t("LIST.SPATIAL_DISTRIBUTION")}</BoxHeading>
+      <BoxHeading>🗺️ {t("observation:list.spatial_distribution")}</BoxHeading>
       <Box h="30rem">
         <NakshaMapboxList
           viewPort={mapCenter}

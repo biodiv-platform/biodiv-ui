@@ -1,9 +1,9 @@
 import { Button } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import { axJoinUserGroup } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 export default function JoinUserGroup() {
@@ -14,17 +14,17 @@ export default function JoinUserGroup() {
 
   const addUserGroupMember = async () => {
     setLoading(true);
-    const canAddMember = currentGroup.isParticipatory || confirm(t("GROUP.CONFIRM_CLOSED_GROUP"));
+    const canAddMember = currentGroup.isParticipatory || confirm(t("group:confirm_closed_group"));
     if (canAddMember) {
       const { success } = await axJoinUserGroup(currentGroup.id);
       if (success) {
         setIsCurrentGroupMember(true);
         notification(
-          currentGroup.isParticipatory ? t("GROUP.MEMBER.JOINED") : t("GROUP.MEMBER.REQUESTED"),
+          currentGroup.isParticipatory ? t("group:member.joined") : t("group:member.requested"),
           NotificationType.Success
         );
       } else {
-        notification(t("GROUP.MEMBER.JOINED_ERROR"), NotificationType.Error);
+        notification(t("group:member.joined_error"), NotificationType.Error);
       }
     }
     setLoading(false);
@@ -40,7 +40,7 @@ export default function JoinUserGroup() {
       onClick={addUserGroupMember}
       leftIcon={<AddIcon />}
     >
-      {t("GROUP.JOIN")}
+      {t("group:join")}
     </Button>
   ) : null;
 }

@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import React from "react";
@@ -39,14 +39,6 @@ const RightMenuContainer = styled.div`
     background: var(--gray-700);
     border-radius: 2rem;
     padding: 0.4rem 0.7rem;
-  }
-
-  select {
-    background: var(--gray-800);
-    border: 0;
-    height: 2.3rem;
-    max-width: 6rem;
-    margin-left: 1rem;
   }
 
   [role="menu"] {

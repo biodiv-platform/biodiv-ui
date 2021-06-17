@@ -1,5 +1,5 @@
 import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import ObservationEditForm from "./form";
@@ -10,7 +10,7 @@ export default function ObservationEditComponent(props) {
   return (
     <>
       <div className="container mt">
-        <PageHeading>{t("OBSERVATION.TITLE_EDIT")}</PageHeading>
+        <PageHeading>{t("observation:title_edit")}</PageHeading>
         <ObservationEditForm {...props} />
       </div>
     </>

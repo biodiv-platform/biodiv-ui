@@ -1,10 +1,10 @@
 import { Heading, Spinner, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import CheckIcon from "@icons/check";
 import { SYNC_SINGLE_OBSERVATION_DONE, SYNC_SINGLE_OBSERVATION_ERROR } from "@static/events";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useListener } from "react-gbus";
 
@@ -44,10 +44,10 @@ export default function SavingObservation() {
         <>
           <CheckIcon className="fadeInUp" mt={6} fontSize="3rem" color="green.500" />
           <Heading className="fadeInUp delay-1" my={4}>
-            {t("OBSERVATION.SUCCESS")}
+            {t("observation:success")}
           </Heading>
           <BlueLink href="./create" mb={6}>
-            {t("OBSERVATION.CONTINUE")}
+            {t("observation:continue")}
           </BlueLink>
         </>
       )}
@@ -55,23 +55,23 @@ export default function SavingObservation() {
         <>
           <Spinner className="fadeInUp delay-2" mt={8} />
           <Heading className="fadeInUp delay-3" my={4}>
-            {t("ONE_MOMENT_PLEASE")}
+            {t("one_moment_please")}
           </Heading>
           <Text mb={6} className="fadeInUp delay-4">
-            {t("OBSERVATION.CREATING")}
+            {t("observation:creating")}
           </Text>
         </>
       )}
       {status === ObservationStatus.Error && (
         <>
           <Heading className="fadeInUp delay-3" mt={8} mb={4}>
-            {t("OBSERVATION.SAVED")}
+            {t("observation:saved")}
           </Heading>
           <Text mb={4} maxW="35rem" className="fadeInUp delay-4">
-            {t("OBSERVATION.SAVED_MESSAGE")}
+            {t("observation:saved_message")}
           </Text>
           <LocalLink href="/observation/recreate" prefixGroup={true}>
-            <BlueLink mb={6}>{t("OBSERVATION.CONTINUE")}</BlueLink>
+            <BlueLink mb={6}>{t("observation:continue")}</BlueLink>
           </LocalLink>
         </>
       )}

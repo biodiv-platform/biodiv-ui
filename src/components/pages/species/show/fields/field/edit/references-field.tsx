@@ -1,8 +1,8 @@
 import { Box, Button, FormLabel, HStack } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
-import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFieldArray } from "react-hook-form";
 
@@ -26,7 +26,7 @@ export default function ReferencesField({ name, label }) {
               onClick={() => remove(index)}
               leftIcon={<DeleteIcon />}
             >
-              {t("DELETE")}
+              {t("common:delete")}
             </Button>
           </HStack>
         </div>
@@ -38,7 +38,7 @@ export default function ReferencesField({ name, label }) {
         type="button"
         onClick={() => append({ title: "", url: "" })}
       >
-        {t("SPECIES.ADD_REFERENCE")}
+        {t("species:add_reference")}
       </Button>
     </Box>
   );

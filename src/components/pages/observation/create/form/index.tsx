@@ -2,10 +2,9 @@ import { Box, useDisclosure } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import {
   RESOURCES_UPLOADING,
@@ -14,6 +13,7 @@ import {
 } from "@static/events";
 import { dateToUTC } from "@utils/date";
 import { cleanFacts, cleanTags } from "@utils/tags";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
@@ -247,23 +247,23 @@ export default function ObservationCreateForm({
 
   return isOpen ? (
     <Box mb={8} minH="calc(100vh - var(--heading-height))">
-      <PageHeading>👋 {t("OBSERVATION.TITLE")}</PageHeading>
+      <PageHeading>👋 {t("observation:title")}</PageHeading>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <Uploader name="resources" licensesList={licensesList} />
           <Box hidden={isSelectedImages}>
             <Recodata languages={languages} />
-            <GroupSelector name="sGroup" label={t("OBSERVATION.GROUPS")} options={speciesGroups} />
+            <GroupSelector name="sGroup" label={t("form:species_groups")} options={speciesGroups} />
             <LocationPicker />
             <DateInputs />
             {customFieldList && <ObservationCustomFieldForm fields={fields} />}
-            <TraitsPicker name="facts" label={t("OBSERVATION.TRAITS")} />
-            <UserGroups name="userGroupId" label={t("OBSERVATION.POST_TO_GROUPS")} />
+            <TraitsPicker name="facts" label={t("observation:traits")} />
+            <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
             <Box mt={4}>
-              <CheckboxField name="terms" label={t("OBSERVATION.TERMS")} />
+              <CheckboxField name="terms" label={t("form:terms")} />
             </Box>
             <SubmitButton leftIcon={<CheckIcon />} isDisabled={isSubmitDisabled}>
-              {t("OBSERVATION.ADD_OBSERVATION")}
+              {t("observation:add_observation")}
             </SubmitButton>
           </Box>
         </form>

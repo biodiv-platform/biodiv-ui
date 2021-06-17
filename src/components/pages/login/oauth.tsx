@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import notification from "@utils/notification";
 import React from "react";
 import GoogleLogin from "react-google-login";

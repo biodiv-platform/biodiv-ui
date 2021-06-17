@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import GallerySetupFrom from "./gallery-setup-form";
@@ -17,7 +17,7 @@ export default function GallerySetup({
 
   return (
     <Box w="full" p={4} className="fadeInUp white-box" overflowX="auto">
-      <BoxHeading>{t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY_SETUP.TITLE")}</BoxHeading>
+      <BoxHeading>{t("group:homepage_customization.gallery_setup.title")}</BoxHeading>
       {isCreate ? (
         <GallerySetupFrom
           isCreate={setIsCreate}

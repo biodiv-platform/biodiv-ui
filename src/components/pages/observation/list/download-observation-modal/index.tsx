@@ -13,11 +13,11 @@ import { TextAreaField } from "@components/form/textarea";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import DownloadIcon from "@icons/download";
 import { axDownloadFilteredObservations } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -86,10 +86,10 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
 
     const { success } = await axDownloadFilteredObservations(params);
     if (success) {
-      notification(t("OBSERVATION.DOWNLOAD.SUCCESS"), NotificationType.Success);
+      notification(t("observation:download.success"), NotificationType.Success);
       onClose();
     } else {
-      notification(t("OBSERVATION.DOWNLOAD.ERROR"));
+      notification(t("observation:download.error"));
     }
   };
 
@@ -99,7 +99,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <ModalOverlay>
             <ModalContent hidden={isHidden}>
-              <ModalHeader>☑️ {t("OBSERVATION.DOWNLOAD.MODAL.TITLE")}</ModalHeader>
+              <ModalHeader>☑️ {t("observation:download.modal.title")}</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 {OBSERVATION_FILTERS.map((f) => (
@@ -117,8 +117,8 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
                 />
                 <TextAreaField
                   name="notes"
-                  label={t("OBSERVATION.DOWNLOAD.MODAL.NOTE")}
-                  hint={t("OBSERVATION.DOWNLOAD.MODAL.NOTE_HINT")}
+                  label={t("observation:download.modal.note")}
+                  hint={t("observation:download.modal.note_hint")}
                   isRequired={true}
                   mb={0}
                 />
@@ -126,10 +126,10 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
 
               <ModalFooter>
                 <SubmitButton leftIcon={<DownloadIcon />}>
-                  {t("OBSERVATION.DOWNLOAD.TITLE")}
+                  {t("observation:download.title")}
                 </SubmitButton>
                 <Button ml={3} onClick={onClose}>
-                  {t("CANCEL")}
+                  {t("common:cancel")}
                 </Button>
               </ModalFooter>
             </ModalContent>

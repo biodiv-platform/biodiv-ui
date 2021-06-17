@@ -1,4 +1,5 @@
 import React from "react";
+
 import ExternalBlueLink from "./external";
 
 export default function ExternalBlueLinkList({ hrefs }: { hrefs?: string[] }) {

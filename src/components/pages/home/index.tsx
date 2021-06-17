@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import donorsList from "@static/donors";
 import partnersList from "@static/partners";
 import sponsorsList from "@static/sponsors";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import Carousel from "./carousel";
@@ -34,20 +34,20 @@ export default function HomePageComponent({ homeInfo }) {
       {showFeatures && HOME.FEATURES && <Features />}
       {showFeatures && HOME.PARTNERS && (
         <Supporters
-          title={t("HOME.PARTNERS")}
+          title={t("home:partners")}
           list={partnersList}
           imagePrefix="/partners-images/"
         />
       )}
       {showFeatures && HOME.SPONSORS && (
         <Supporters
-          title={t("HOME.SPONSORS")}
+          title={t("home:sponsors")}
           list={sponsorsList}
           imagePrefix="/next-assets/sponsors/"
         />
       )}
       {showFeatures && HOME.DONORS && (
-        <Supporters title={t("HOME.DONORS")} list={donorsList} imagePrefix="/donors-images/" />
+        <Supporters title={t("home:donors")} list={donorsList} imagePrefix="/donors-images/" />
       )}
     </Box>
   );

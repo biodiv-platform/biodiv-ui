@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import ErrorMessage from "@components/form/common/error-message";
-import useTranslation from "@hooks/use-translation";
 import { fromDMS, toDMS } from "dmsformat";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -78,9 +78,9 @@ export default function CoordinatesInput({
         isRequired={true}
       >
         <FormLabel htmlFor="coordinates">
-          {t("OBSERVATION.COORDINATES")}
+          {t("observation:coordinates")}
           <Button variant="link" colorScheme="blue" size="xs" ml={2} onClick={onToggle}>
-            {t(`OBSERVATION.USE_${isOpen ? "LAT_LNG" : "DMS"}`)}
+            {t(`observation.use_${isOpen ? "lat_lng" : "dms"}`)}
           </Button>
         </FormLabel>
 
@@ -88,14 +88,14 @@ export default function CoordinatesInput({
           <Input
             id="lat"
             roundedRight={0}
-            placeholder={t("OBSERVATION.LATITUDE")}
+            placeholder={t("observation:latitude")}
             value={isOpen ? latDMS : lat}
             onChange={setLat}
           />
           <Input
             id="lng"
             roundedLeft={0}
-            placeholder={t("OBSERVATION.LONGITUDE")}
+            placeholder={t("observation:longitude")}
             value={isOpen ? lngDMS : lng}
             onChange={setLng}
             borderLeft={0}
@@ -112,7 +112,7 @@ export default function CoordinatesInput({
       <CheckboxField
         mt={2}
         name="hidePreciseLocation"
-        label={t("OBSERVATION.HIDE_PRECISE_LOCATION")}
+        label={t("observation:hide_precise_location")}
       />
     </Collapse>
   );

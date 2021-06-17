@@ -3,8 +3,8 @@ import { Heading, IconButton } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useSpecies from "../../../use-species";
@@ -28,12 +28,12 @@ export function TraitHeader({ trait, onOpen }) {
       )}
 
       {onOpen && permissions.isContributor && (
-        <Tooltip hasArrow={true} title={t("EDIT")}>
+        <Tooltip hasArrow={true} title={t("common:edit")}>
           <IconButton
             variant="link"
             colorScheme="blue"
             icon={<EditIcon />}
-            aria-label={t("EDIT")}
+            aria-label={t("common:edit")}
             onClick={onOpen}
           />
         </Tooltip>

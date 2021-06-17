@@ -1,7 +1,7 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Box, Collapse, IconButton, useDisclosure } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 interface ToggleablePanelProps {
@@ -31,7 +31,7 @@ export default function ToggleablePanel({
         <div>
           {options}
           <IconButton
-            aria-label={t("TOGGLE")}
+            aria-label={t("common:toggle")}
             variant="ghost"
             size="lg"
             onClick={onToggle}

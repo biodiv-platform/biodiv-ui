@@ -3,12 +3,12 @@ import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axUpdateDocument } from "@services/document.service";
 import { dateToUTC, formatDateFromUTC } from "@utils/date";
 import { getBibFieldsMeta } from "@utils/document";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -108,10 +108,10 @@ export default function DocumentEditPageComponent({
     };
     const { success } = await axUpdateDocument(payload);
     if (success) {
-      notification(t("DOCUMENT.EDIT.SUCCESS"), NotificationType.Success);
+      notification(t("document:edit.success"), NotificationType.Success);
       router.push(`/document/show/${initialDocument.documentId}`, true);
     } else {
-      notification(t("DOCUMENT.EDIT.ERROR"));
+      notification(t("document:edit.error"));
     }
   };
 
@@ -119,7 +119,7 @@ export default function DocumentEditPageComponent({
     <Box className="container mt" pb={6}>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <PageHeading>📄 {t("DOCUMENT.EDIT.TITLE")}</PageHeading>
+          <PageHeading>📄 {t("document:edit.title")}</PageHeading>
           <DocumentUploader name="ufileData" />
           <BasicInfo
             documentTypes={documentTypes}
@@ -128,7 +128,7 @@ export default function DocumentEditPageComponent({
           />
           <Metadata bibFields={bibField.fields} />
           <WKTCoverage name="docCoverage" nameTopology="topologyWKT" nameTitle="placeName" />
-          <SubmitButton leftIcon={<CheckIcon />}>{t("DOCUMENT.EDIT.TITLE")}</SubmitButton>
+          <SubmitButton leftIcon={<CheckIcon />}>{t("document:edit.title")}</SubmitButton>
         </form>
       </FormProvider>
     </Box>

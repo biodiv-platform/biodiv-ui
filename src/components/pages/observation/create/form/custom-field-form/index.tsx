@@ -1,6 +1,6 @@
 import { Box, Divider, Text, VisuallyHidden } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -14,7 +14,7 @@ export default function ObservationCustomFieldForm({ fields }) {
   return (
     <Box>
       <Text mb={2} fontSize="2xl" fontWeight="bold">
-        📜 {t("OBSERVATION.CUSTOM_FIELDS")}
+        📜 {t("observation:custom_fields")}
       </Text>
 
       {fields.map(({ label, isRequired, fieldType, dataType, options, customFieldId }, index) => {

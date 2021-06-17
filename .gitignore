@@ -22,7 +22,7 @@
 .eslintcache
 .DS_Store
 .env*
-src/configs/site-config.json
+src/configs/site-config.js*
 optimizations.md
 
 # debug

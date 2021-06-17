@@ -1,7 +1,7 @@
 import { Box, FormErrorMessage, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -38,13 +38,13 @@ const DropzoneField = ({
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <ToggleablePanel icon="📂" title={t("DATATABLE.FILES_UPLOAD")}>
+    <ToggleablePanel icon="📂" title={t("datatable:files_upload")}>
       <Box p={4} pb={0}>
         <Box mb={mb}>
           <Tabs className="nospace" index={tabIndex} onChange={setTabIndex} variant="soft-rounded">
             <TabList mb={2}>
-              <Tab>📝 {t("DATATABLE.SHEET_UPLOADER")}</Tab>
-              <Tab>☁️ {t("DATATABLE.MEDIA_UPLOADER")}</Tab>
+              <Tab>📝 {t("datatable:sheet_uploader")}</Tab>
+              <Tab>☁️ {t("datatable:media_uploader")}</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -58,7 +58,7 @@ const DropzoneField = ({
                 ) : (
                   <SheetUploader
                     simpleUpload={true}
-                    label={t("DATATABLE.SHEET_UPLOADER")}
+                    label={t("datatable:sheet_uploader")}
                     setFieldMapping={setFieldMapping}
                     setShowMapping={setShowMapping}
                     isRequired={true}

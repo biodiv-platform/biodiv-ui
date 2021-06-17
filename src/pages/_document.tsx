@@ -1,14 +1,13 @@
 import { ColorModeScript } from "@chakra-ui/react";
-import { Locale } from "@configs/i18n/types";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { customTheme } from "@configs/theme";
 import { jsontocss } from "@utils/style";
-import GoogleAnalytics from "next-simple-google-analytics";
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import GoogleAnalytics from "next-simple-google-analytics";
 import React from "react";
 
 interface IDocumentProps {
-  lang?: Locale;
+  lang?;
 }
 
 class MyDocument extends Document<IDocumentProps> {

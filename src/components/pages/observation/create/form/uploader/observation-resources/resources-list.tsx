@@ -1,5 +1,5 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useObservationCreate from "../use-observation-resources";
@@ -16,7 +16,7 @@ export default function ResourcesList({ showHint }: ResourcesListProps) {
 
   return (
     <>
-      {showHint && <Text my={5}>💡 {t("OBSERVATION.DESCRIPTION.RESOURCES")}</Text>}
+      {showHint && <Text my={5}>💡 {t("form:description.resources")}</Text>}
       <SimpleGrid borderRadius="lg" columns={[1, 3, 4, 5]} spacing={4}>
         {observationAssets?.map((r, index) => (
           <ResourceCard resource={r} key={r.hashKey} index={index} />

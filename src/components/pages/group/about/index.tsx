@@ -1,7 +1,7 @@
 import { Badge, Flex } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import UserAvatarList from "../common/user-image-list";
@@ -52,7 +52,7 @@ export default function AboutGroupComponent({
     <div className="container mt">
       <Flex alignItems="center" mb={6}>
         <PageHeading mb={0} mr={4}>
-          👥 {t("GROUP.ABOUT.TITLE")} {name}
+          👥 {t("group:about.title")} {name}
         </PageHeading>
         <Badge colorScheme={allowUserToJoin ? "blue" : "yellow"}>
           {t(allowUserToJoin ? "GROUP.ABOUT.OPEN_GROUP" : "GROUP.ABOUT.CLOSED_GROUP")}
@@ -60,26 +60,26 @@ export default function AboutGroupComponent({
       </Flex>
       <HomeDescription description={description} mb={6} />
       <FilterIconsList
-        title={t("GROUP.SPECIES_COVERAGE")}
+        title={t("common:species_coverage")}
         type="species"
         filterIds={speciesGroupIds}
         filterList={speciesGroups}
       />
       <FilterIconsList
-        title={t("GROUP.HABITATS_COVERED")}
+        title={t("common:habitats_covered")}
         type="habitat"
         filterIds={habitatIds}
         filterList={habitats}
       />
       <MapDrawView
-        title={t("GROUP.SPATIAL_COVERGE")}
+        title={t("group:spatial_coverge")}
         neLongitude={neLongitude}
         neLatitude={neLatitude}
         swLatitude={swLatitude}
         swLongitude={swLongitude}
       />
-      <UserAvatarList title={t("GROUP.ADMIN.FOUNDER")} userList={founders} />
-      <UserAvatarList title={t("GROUP.ADMIN.MODERATOR")} userList={moderators} />
+      <UserAvatarList title={t("group:admin.founder")} userList={founders} />
+      <UserAvatarList title={t("group:admin.moderator")} userList={moderators} />
     </div>
   );
 }

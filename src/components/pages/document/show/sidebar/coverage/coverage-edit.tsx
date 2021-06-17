@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import CheckBoxItems from "@components/pages/group/common/icon-checkbox-field/checkbox";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 const EditContainer = styled.div`
@@ -29,9 +29,9 @@ export default function CoverageEdit({ value, onChange, items, type, onClose }) 
       <CheckBoxItems options={items} defaultValue={value} onChange={setCoverage} type={type} />
       <ButtonGroup spacing={4} mt={4}>
         <Button onClick={onSave} colorScheme="blue">
-          {t("SAVE")}
+          {t("common:save")}
         </Button>
-        <Button onClick={onClose}>{t("CANCEL")}</Button>
+        <Button onClick={onClose}>{t("common:cancel")}</Button>
       </ButtonGroup>
     </EditContainer>
   );

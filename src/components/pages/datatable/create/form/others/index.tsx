@@ -2,9 +2,9 @@ import { Box } from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
 import { TextBoxField } from "@components/form/text";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
-import useTranslation from "@hooks/use-translation";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function PartyContributorsForm() {
@@ -12,11 +12,11 @@ export default function PartyContributorsForm() {
   const isAdmin = hasAccess([Role.Admin]);
 
   return (
-    <ToggleablePanel icon="✅" title={t("DATATABLE.OTHERS")}>
+    <ToggleablePanel icon="✅" title={t("datatable:others")}>
       <Box p={4} pb={0}>
-        <TextBoxField name="project" label={t("DATATABLE.PROJECT")} />
-        <TextBoxField name="methods" label={t("DATATABLE.METHODS")} />
-        {isAdmin && <SwitchField name="isVerified" label={t("DATATABLE.IS_VERIFIED")} />}
+        <TextBoxField name="project" label={t("datatable:project")} />
+        <TextBoxField name="methods" label={t("datatable:methods")} />
+        {isAdmin && <SwitchField name="isVerified" label={t("datatable:is_verified")} />}
       </Box>
     </ToggleablePanel>
   );

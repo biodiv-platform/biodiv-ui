@@ -13,11 +13,11 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import { useController } from "react-hook-form";
 import { parse, stringify } from "wkt";
@@ -71,7 +71,7 @@ export default function GeoJsonWktParserInput({
       field.onChange(wktInputRef.current.value);
     } else {
       field.onChange(null);
-      notification(t("Enter Valid WKT string"), NotificationType.Error);
+      notification(t("enter valid wkt string"), NotificationType.Error);
     }
   };
 
@@ -92,7 +92,7 @@ export default function GeoJsonWktParserInput({
       {...props}
     >
       <Flex justifyContent="flex-end">
-        <Checkbox onChange={toggleWktInput}>{t("Use WKT Input field")}</Checkbox>
+        <Checkbox onChange={toggleWktInput}>{t("form:wkt")}</Checkbox>
       </Flex>
       {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
       <Box position="relative" h="22rem" borderRadius="md" mb={3} overflow="hidden">

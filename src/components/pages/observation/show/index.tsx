@@ -133,7 +133,7 @@ export default function ObservationShowPageComponent({
             <>
               <Temporal data={o.esLayerInfo.monthAggregation} />
               <Suggestions
-                title="OBSERVATION.RELATED"
+                title="observation:related"
                 list={o.esLayerInfo.similarObservation}
                 observationKey="reprImage"
                 defaultSpeciesGroup={speciesGroup}
@@ -142,7 +142,7 @@ export default function ObservationShowPageComponent({
           )}
           {o.observationNearBy && (
             <Suggestions
-              title="OBSERVATION.NEARBY"
+              title="observation:nearby"
               list={o.observationNearBy}
               observationKey="thumbnail"
             />

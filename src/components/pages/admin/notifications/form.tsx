@@ -3,9 +3,9 @@ import { Flex } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axSendPushNotification } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -28,22 +28,22 @@ function NotificationsForm() {
     const { success } = await axSendPushNotification(payload);
 
     if (success) {
-      notification(t("ADMIN.PAGES.NOTIFICATION.FORM.SUCCESS"), NotificationType.Success);
+      notification(t("admin:pages.notification.form.success"), NotificationType.Success);
     } else {
-      notification(t("ADMIN.PAGES.NOTIFICATION.FORM.ERROR"));
+      notification(t("admin:pages.notification.form.error"));
     }
   };
 
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <TextBoxField name="title" type="text" label={t("ADMIN.PAGES.NOTIFICATION.FORM.TITLE")} />
-        <TextBoxField name="body" type="text" label={t("ADMIN.PAGES.NOTIFICATION.FORM.BODY")} />
-        <TextBoxField name="icon" type="text" label={t("ADMIN.PAGES.NOTIFICATION.FORM.ICON")} />
+        <TextBoxField name="title" type="text" label={t("admin:pages.notification.form.title")} />
+        <TextBoxField name="body" type="text" label={t("admin:pages.notification.form.body")} />
+        <TextBoxField name="icon" type="text" label={t("admin:pages.notification.form.icon")} />
         <TextBoxField
           name="clickAction"
           type="text"
-          label={t("ADMIN.PAGES.NOTIFICATION.FORM.LINK")}
+          label={t("admin:pages.notification.form.link")}
         />
         <Flex justifyContent="space-between" alignItems="center">
           <SubmitButton rightIcon={<ArrowForwardIcon />}>Submit</SubmitButton>

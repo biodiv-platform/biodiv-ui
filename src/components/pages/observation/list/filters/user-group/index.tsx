@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import React, { useMemo } from "react";
 
@@ -18,7 +18,7 @@ export default function UserGroupFilter() {
       showSearch={true}
       skipOptionsTranslation={true}
       statKey="groupUserGroupName"
-      translateKey="FILTERS.USERGROUP."
+      translateKey="filters:usergroup."
     />
   ) : null;
 }

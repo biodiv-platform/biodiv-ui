@@ -1,14 +1,16 @@
 import { Button, Stack } from "@chakra-ui/react";
 import WYSIWYGEditor from "@components/@core/wysiwyg-editor";
-import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axSaveLandscapeField, axUploadEditorResource } from "@services/landscape.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 export default function FieldEditor({ initialContent, id, onChange, onClose }) {
-  const { t, localeId: languageId } = useTranslation();
+  const { t } = useTranslation();
   const [content, setContent] = useState(initialContent);
+  const { languageId } = useGlobalState();
 
   const handleOnSave = async () => {
     const { success } = await axSaveLandscapeField({
@@ -17,11 +19,11 @@ export default function FieldEditor({ initialContent, id, onChange, onClose }) {
       content
     });
     if (success) {
-      notification(t("LANDSCAPE.UPDATE_SUCCESS"), NotificationType.Success);
+      notification(t("landscape:update_success"), NotificationType.Success);
       onChange(content);
       onClose();
     } else {
-      notification(t("ERROR"));
+      notification(t("error"));
     }
   };
 
@@ -34,10 +36,10 @@ export default function FieldEditor({ initialContent, id, onChange, onClose }) {
       />
       <Stack isInline={true} spacing={2} mt={2}>
         <Button type="button" colorScheme="blue" onClick={handleOnSave} leftIcon={<CheckIcon />}>
-          {t("SAVE")}
+          {t("common:save")}
         </Button>
         <Button type="button" colorScheme="red" onClick={onClose}>
-          {t("CANCEL")}
+          {t("common:cancel")}
         </Button>
       </Stack>
     </>

@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
 import { ObservationUserPermission, ShowData } from "@interfaces/observation";
 import { ACTIVITY_UPDATED } from "@static/events";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { emit } from "react-gbus";
 import LazyLoad from "react-lazyload";
@@ -30,7 +30,7 @@ export default function SuggesionList({ o, setO, permission }: ISuggestionListPr
 
   return (
     <Box mb={4} className="white-box">
-      <BoxHeading>🆔 {t("OBSERVATION.ID.TITLE")}</BoxHeading>
+      <BoxHeading>🆔 {t("observation:id.title")}</BoxHeading>
       <RecoSuggestion
         observationId={o.observation?.id}
         isLocked={o.observation?.isLocked}

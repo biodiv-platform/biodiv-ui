@@ -3,11 +3,11 @@ import { SelectMultipleInputField } from "@components/form/select-multiple";
 import { SubmitButton } from "@components/form/submit-button";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { Role } from "@interfaces/user";
 import { axGetUserRoles, axUpdateUserPermissions } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -59,9 +59,9 @@ export default function PermissionsTab({ user }: UserEditPageComponentProps) {
       ...payload
     });
     if (success) {
-      notification(t("USER.UPDATED"), NotificationType.Success);
+      notification(t("user:updated"), NotificationType.Success);
     } else {
-      notification(t("USER.UPDATE_ERROR"));
+      notification(t("user:update_error"));
     }
   };
 
@@ -70,14 +70,14 @@ export default function PermissionsTab({ user }: UserEditPageComponentProps) {
       <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
           <div>
-            <SwitchField name="enabled" label={t("USER.ENABLED")} />
-            <SwitchField name="accountExpired" label={t("USER.EXPIRED")} />
-            <SwitchField name="accountLocked" label={t("USER.LOCKED")} />
-            <SwitchField name="passwordExpired" label={t("USER.PASSWORD_EXPIRED")} />
+            <SwitchField name="enabled" label={t("user:enabled")} />
+            <SwitchField name="accountExpired" label={t("user:expired")} />
+            <SwitchField name="accountLocked" label={t("user:locked")} />
+            <SwitchField name="passwordExpired" label={t("user:password_expired")} />
           </div>
         </SimpleGrid>
-        <SelectMultipleInputField name="roles" label={t("USER.ROLES")} options={rolesOptionList} />
-        <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
+        <SelectMultipleInputField name="roles" label={t("user:roles")} options={rolesOptionList} />
+        <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
       </form>
     </FormProvider>
   ) : (

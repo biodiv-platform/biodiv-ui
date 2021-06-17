@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import { SpeciesTooltipRenderer } from "./static-data";
@@ -28,14 +28,12 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
 
   return filteredData.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading>📊 {t("LIST.CHART.SGROUP")}</BoxHeading>
+      <BoxHeading>📊 {t("observation:list.chart.sgroup")}</BoxHeading>
       <Box p={4}>
         <VerticalBarChart h={365} data={filteredData} tooltipRenderer={SpeciesTooltipRenderer} />
       </Box>
     </Box>
-  ) : (
-    null
-  );
+  ) : null;
 };
 
 export default SpeciesGroups;

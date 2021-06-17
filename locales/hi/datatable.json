@@ -1,0 +1,30 @@
+{
+  "attribution": "आरोपण",
+  "basis_of_data": "डेटा का आधार",
+  "basis_of_record": "अभिलेख का आधार",
+  "contributor": "योगदान देने वाला",
+  "create_datatable": "डेटाटेबल बनाएँ",
+  "field_mapping_table": "फील्ड मैपिंग टेबल",
+  "files_upload": "फ़ाइलें अपलोड करती हैं",
+  "geographical_coverage": "भौगोलिक कवरेज",
+  "is_verified": "अवलोकन सत्यापित",
+  "location_accuracy": "स्थान सटीकता",
+  "location_scale": "स्थान पैमाने",
+  "media_uploader": "मीडिया अपलोडर",
+  "methods": "तरीकों",
+  "notifications": {
+    "error": "डेटाटेबल बनाने में असमर्थ",
+    "sheet_upload_error": "शीट अपलोड करने में असमर्थ",
+    "sheet_upload_success": "सफलतापूर्वक अपलोड की गई शीट",
+    "success": "डेटाटेबल सफलतापूर्वक बनाया गया"
+  },
+  "others": "अन्य",
+  "party": "पार्टी",
+  "project": "परियोजना",
+  "sheet_uploader": "स्प्रेडशीट अपलोडर",
+  "show_page": "डेटाटेबल विवरण",
+  "taxonomy": "वर्गीकरण कवरेज",
+  "temporal": "अस्थायी कवरेज",
+  "title": "सामान्य मेटाडाटा",
+  "upload_again": "फिर से अपलोड करें"
+}

@@ -9,8 +9,8 @@ import {
   MenuList,
   useToken
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { getSpeciesFieldHeaders } from "@utils/species";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import urlSlug from "url-slug";
 
@@ -35,10 +35,10 @@ export default function SpeciesNavigation() {
         />
         <MenuList>
           <MenuItem as={Link} href="#synonyms">
-            {t("SPECIES.SYNONYMS")}
+            {t("species:synonyms")}
           </MenuItem>
           <MenuItem as={Link} href="#common-names">
-            {t("SPECIES.COMMON_NAMES")}
+            {t("species:common_names")}
           </MenuItem>
           {fieldHeaders.map((title) => (
             <MenuItem as={Link} href={`#${urlSlug(title)}`} key={title}>

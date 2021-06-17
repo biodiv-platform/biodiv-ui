@@ -1,8 +1,7 @@
 import Avatar from "boring-avatars";
+import type { NextApiRequest, NextApiResponse } from "next";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-
-import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { s, t }: any = req.query;

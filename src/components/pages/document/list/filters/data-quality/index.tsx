@@ -8,7 +8,7 @@ export default function DataQuality() {
   return (
     <SubAccordion>
       <CheckboxFilterPanel
-        translateKey="FILTERS.DATA_QUALITY.FLAG."
+        translateKey="filters:data_quality.flag."
         filterKey="isFlagged"
         options={FLAG}
         statKey={"groupFlag"}

@@ -11,12 +11,12 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { axUpdateSpeciesCommonName } from "@services/species.service";
 import { axGetLangList } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -56,9 +56,9 @@ export function SpeciesCommonNameForm({ commonName, onUpdate, onClose }) {
     if (success) {
       onUpdate(data);
       onClose();
-      notification(t("SPECIES.COMMON_NAME.SAVE.SUCCESS"), NotificationType.Success);
+      notification(t("species:common_name.save.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.COMMON_NAME.SAVE.FAILURE"));
+      notification(t("species:common_name.save.failure"));
     }
   };
 
@@ -73,25 +73,25 @@ export function SpeciesCommonNameForm({ commonName, onUpdate, onClose }) {
       {languages.length ? (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-            <ModalHeader>{t("SPECIES.EDIT_NAME")}</ModalHeader>
+            <ModalHeader>{t("species:edit_name")}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <TextBoxField
                 name="name"
-                label={t("SPECIES.COMMON_NAME.FORM.NAME")}
+                label={t("species:common_name.form.name")}
                 isRequired={true}
               />
               <SelectInputField
                 name="languageId"
-                label={t("SPECIES.COMMON_NAME.FORM.LANGUAGE")}
+                label={t("species:common_name.form.language")}
                 options={languages}
                 mb={0}
               />
             </ModalBody>
             <ModalFooter>
-              <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
+              <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
               <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
-                {t("CANCEL")}
+                {t("common:cancel")}
               </Button>
             </ModalFooter>
           </form>

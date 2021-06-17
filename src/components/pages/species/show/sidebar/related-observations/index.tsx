@@ -1,13 +1,13 @@
 import { AspectRatio, Box, Button, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
-import { RESOURCE_CTX, getLocalIcon, getResourceThumbnail } from "@utils/media";
-
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
+import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
 import useSpecies from "../../use-species";
 import useSpeciesOccurancesList from "./use-related-observations";
-import useTranslation from "@hooks/use-translation";
 
 export default function SpeciesRelatedObservations() {
   const { t } = useTranslation();
@@ -16,10 +16,10 @@ export default function SpeciesRelatedObservations() {
 
   return (
     <Box mb={4} className="white-box">
-      <BoxHeading>📷 {t("SPECIES.RELATED.TITLE")}</BoxHeading>
+      <BoxHeading>📷 {t("species:related.title")}</BoxHeading>
       <SimpleGrid className="fade" w="full" columns={4} spacing={4} p={4}>
         {speciesOccurances.list.map((observation) => {
-          const title = observation?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN");
+          const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
             <LocalLink
               href={`/observation/show/${observation.observationId}`}
@@ -60,7 +60,7 @@ export default function SpeciesRelatedObservations() {
         isLoading={speciesOccurances.isLoading}
         onClick={() => loadMore()}
       >
-        {t("OBSERVATION.LOAD_MORE_OBSERVATIONS")}
+        {t("common:load_more")}
       </Button>
     </Box>
   );

@@ -44,42 +44,42 @@ export const CARD_META = {
 export const FEATURES = [
   {
     icon: species,
-    title: "SPECIES_INFORMATION",
+    title: "species_information",
     link: "/species/list"
   },
   {
     icon: observation,
-    title: "CITIZEN_SCIENCE",
+    title: "citizen_science",
     link: "/observation/list"
   },
   {
     icon: maps,
-    title: "MAPS",
+    title: "maps",
     link: "/map"
   },
   {
     icon: documents,
-    title: "LITERATURE",
+    title: "literature",
     link: "/document/list"
   },
   {
     icon: taxonomy,
-    title: "TAXONOMY",
+    title: "taxonomy",
     link: "/namelist/index"
   },
   {
     icon: landscapes,
-    title: "LANDSCAPES",
+    title: "landscapes",
     link: "/landscape"
   },
   {
     icon: userGroups,
-    title: "GROUPS",
+    title: "groups",
     link: "/user/list"
   },
   {
     icon: openData,
-    title: "OPEN_DATA",
+    title: "open_data",
     link: "/observation/list"
   }
 ];

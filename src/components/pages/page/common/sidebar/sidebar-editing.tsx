@@ -1,9 +1,9 @@
 import { useLocalRouter } from "@components/@core/local-link";
+import Head from "next/head";
 import React from "react";
 import SortableTree from "react-sortable-tree";
 
 import usePagesSidebar from "./use-pages-sidebar";
-import Head from "next/head";
 
 export default function SidebarEditing() {
   const p = usePagesSidebar();

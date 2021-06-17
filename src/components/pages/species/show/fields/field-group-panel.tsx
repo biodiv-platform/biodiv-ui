@@ -1,10 +1,10 @@
 import { IconButton } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
-import useTranslation from "@hooks/use-translation";
 import EyeIcon from "@icons/eye";
 import EyeSlashIcon from "@icons/eye-slash";
 import { SpeciesField } from "@interfaces/custom";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import urlSlug from "url-slug";
 
@@ -18,8 +18,8 @@ export default function FieldGroupPanel({ parentField, childField }: SpeciesFiel
 
   const PanelOptions = () => (
     <IconButton
-      aria-label={t("SPECIES.TOGGLE_EMPTY")}
-      title={t("SPECIES.TOGGLE_EMPTY")}
+      aria-label={t("species:toggle_empty")}
+      title={t("species:toggle_empty")}
       variant="ghost"
       size="lg"
       onClick={toggleHiddenFields}
@@ -43,7 +43,7 @@ export default function FieldGroupPanel({ parentField, childField }: SpeciesFiel
           valueCallback={setChildFieldsHasValue}
         />
 
-        {!childFieldsHasValue && !showHiddenFields && <Box mb={4}>{t("NO_DATA")}</Box>}
+        {!childFieldsHasValue && !showHiddenFields && <Box mb={4}>{t("common:no_data")}</Box>}
       </Box>
     </ToggleablePanel>
   );

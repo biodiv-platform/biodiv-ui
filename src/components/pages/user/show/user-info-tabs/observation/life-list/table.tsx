@@ -2,7 +2,7 @@ import { Box, Button, Skeleton } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const Table = styled.table`
@@ -48,7 +48,7 @@ const LifeListTable = ({ data, loadMore, title, extraParams }) => {
       </Box>
 
       <Button w="full" onClick={loadMore} isLoading={data.isLoading} borderTopRadius={0}>
-        {t("LOAD_MORE")}
+        {t("common:load_more")}
       </Button>
     </Box>
   ) : data.isLoading ? (

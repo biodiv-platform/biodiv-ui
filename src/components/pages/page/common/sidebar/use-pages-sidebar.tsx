@@ -1,8 +1,8 @@
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { axUpdateTree } from "@services/pages.service";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface GlobalStateContextProps {
@@ -52,7 +52,7 @@ export const UsePagesSidebarProvider = ({
     setIsLoading(true);
     const { success } = await axUpdateTree(pages);
     if (success) {
-      notification(t("PAGE.SIDEBAR.UPDATED"), NotificationType.Success);
+      notification(t("page:sidebar.updated"), NotificationType.Success);
     }
     setIsLoading(false);
   };

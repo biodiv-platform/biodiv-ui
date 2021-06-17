@@ -4,35 +4,31 @@ import { SelectInputField } from "@components/form/select";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
-import useTranslation from "@hooks/use-translation";
 import { BASIS_OF_DATA, BASIS_OF_RECORD } from "@static/datatable";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function PartyContributorsForm({ languages }) {
   const { t } = useTranslation();
 
   return (
-    <ToggleablePanel icon="📃" title={t("DATATABLE.TITLE")}>
+    <ToggleablePanel icon="📃" title={t("datatable:title")}>
       <Box p={4} pb={0}>
-        <TextBoxField name="title" label={t("DOCUMENT.TITLE")} isRequired={true} />
-        <TextAreaField name="summary" label={t("GROUP.CUSTOM_FIELD.NOTES")} isRequired={true} />
-        <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} />
+        <TextBoxField name="title" label={t("form:title")} isRequired={true} />
+        <TextAreaField name="summary" label={t("form:notes")} isRequired={true} />
+        <RichTextareaField name="description" label={t("form:description.title")} />
         <SimpleGrid columns={{ md: 3 }} spacing={{ md: 4 }}>
-          <SelectInputField
-            name="languageId"
-            label={t("OBSERVATION.LANGUAGE")}
-            options={languages}
-          />
+          <SelectInputField name="languageId" label={t("form:language")} options={languages} />
           <SelectInputField
             name="basisOfData"
-            label={t("DATATABLE.BASIS_OF_DATA")}
+            label={t("datatable:basis_of_data")}
             options={BASIS_OF_DATA}
             isRequired={true}
             isControlled={true}
           />
           <SelectInputField
             name="basisOfRecord"
-            label={t("DATATABLE.BASIS_OF_RECORD")}
+            label={t("datatable:basis_of_record")}
             options={BASIS_OF_RECORD}
             isRequired={true}
             isControlled={true}

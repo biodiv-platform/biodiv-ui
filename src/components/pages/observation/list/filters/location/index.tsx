@@ -15,7 +15,7 @@ export default function LocationFilter() {
       <MapAreaFilter />
 
       <CheckboxFilterPanel
-        translateKey="FILTERS.LOCATION.STATE."
+        translateKey="filters:location.state."
         filterKey="state"
         options={STATE_OPTIONS}
         statKey="groupState"
@@ -23,9 +23,9 @@ export default function LocationFilter() {
         showSearch={true}
       />
 
-      <FilterMultiSelectPanel filterKey="district" translateKey="FILTERS.LOCATION.DISTRICT" />
+      <FilterMultiSelectPanel filterKey="district" translateKey="filters:location.district" />
 
-      <FilterMultiSelectPanel filterKey="tahsil" translateKey="FILTERS.LOCATION.TEHSIL" />
+      <FilterMultiSelectPanel filterKey="tahsil" translateKey="filters:location.tehsil" />
     </SubAccordion>
   );
 }

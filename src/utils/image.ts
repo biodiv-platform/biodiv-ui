@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus } from "@interfaces/custom";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { LOCAL_ASSET_PREFIX } from "@static/observation-create";

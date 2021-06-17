@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import ListIcon from "@icons/list";
 import React from "react";
 
@@ -13,7 +13,7 @@ export const DEFAULT_FILTER = {
 
 export const viewTabs = [
   {
-    name: "LIST.VIEW_TYPE.LIST",
+    name: "common:list.view_type.list",
     icon: <ListIcon />,
     key: "list"
   }
@@ -21,33 +21,33 @@ export const viewTabs = [
 
 export const sortByOptions = [
   {
-    name: "LIST.SORT_OPTIONS.LAST_UPDATED",
+    name: "common:list.sort_options.last_updated",
     key: "document.lastRevised"
   },
   {
-    name: "LIST.SORT_OPTIONS.LATEST",
+    name: "common:list.sort_options.latest",
     key: "document.createdOn"
   }
 ];
 
 export const actionTabs = [
   {
-    name: "OBSERVATION.INFORMATION",
+    name: "common:information",
     active: true,
     icon: "ℹ️"
   },
   {
-    name: "OBSERVATION.USERGROUPS",
+    name: "common:usergroups",
     active: SITE_CONFIG.USERGROUP.ACTIVE,
     icon: "👥"
   },
   {
-    name: "DOCUMENT.TAGS.TITLE",
+    name: "document:tags.title",
     active: true,
     icon: "🏷"
   },
   {
-    name: "OBSERVATION.COMMENTS.TITLE",
+    name: "form:comments.title",
     active: true,
     icon: "💬"
   }

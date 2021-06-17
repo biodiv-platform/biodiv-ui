@@ -1,7 +1,7 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { axCheckSpecies, axCreateSpecies } from "@services/species.service";
 import notification from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface SpeciesCreateContextProps {
@@ -57,7 +57,7 @@ export const SpeciesCreateProvider = ({ taxonRanksMeta, children }: SpeciesCreat
         if (success) {
           speciesId = data;
         } else {
-          notification(t("SPECIES.CREATE.ERROR"));
+          notification(t("species:create.error"));
           return;
         }
       }
@@ -65,7 +65,7 @@ export const SpeciesCreateProvider = ({ taxonRanksMeta, children }: SpeciesCreat
       // Redirect to Species Page
       router.push(`/species/show/${speciesId}`, true);
     } else {
-      notification(t("SPECIES.CREATE.ERROR"));
+      notification(t("species:create.error"));
     }
   };
 

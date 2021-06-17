@@ -1,7 +1,7 @@
 import { Avatar, Box, Flex, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { getUserImage } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import Indicators from "./indicators";
@@ -32,7 +32,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
                 />
                 <Box className="credits-text">
                   <Text lineHeight="1em" fontSize="xs">
-                    {t("HOME.OBSERVED_BY")}
+                    {t("home:observed_by")}
                   </Text>
                   <div>{resource.authorName}</div>
                 </Box>

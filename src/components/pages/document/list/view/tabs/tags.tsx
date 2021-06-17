@@ -3,10 +3,10 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import LinkTag from "@components/pages/observation/common/link-tag";
 import TagsEditor from "@components/pages/observation/show/info/tags-editor";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { Tags } from "@interfaces/observation";
 import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 interface ITagsTabsProps {
@@ -26,7 +26,7 @@ export default function TagsTab({ tabIndex, documentId, tags, tabLength }: ITags
   return tabIndex === tabLength ? (
     <>
       <BoxHeading>
-        🔔 {t("DOCUMENT.TAGS.TITLE")}
+        🔔 {t("document:tags.title")}
         {isLoggedIn && (
           <IconButton
             ml={3}
@@ -56,7 +56,7 @@ export default function TagsTab({ tabIndex, documentId, tags, tabLength }: ITags
           </Box>
         ) : (
           <Text mb={2} color="gray.600">
-            {t("DOCUMENT.TAGS.NOT_FOUND")}
+            {t("document:tags.not_found")}
           </Text>
         )}
       </Box>

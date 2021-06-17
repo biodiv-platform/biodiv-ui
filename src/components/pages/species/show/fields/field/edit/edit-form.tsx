@@ -11,10 +11,9 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import DropzoneFieldContainer from "@components/pages/observation/create/form/uploader";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { AssetStatus } from "@interfaces/custom";
@@ -22,6 +21,7 @@ import { axUpdateSpeciesField, axUploadSpeciesEditorResource } from "@services/s
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -115,9 +115,9 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
 
     if (success) {
       onSave(data);
-      notification(t("SPECIES.FIELD.UPDATE.SUCCESS"), NotificationType.Success);
+      notification(t("species:field.update.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.FIELD.UPDATE.FAILURE"));
+      notification(t("species:field.update.failure"));
     }
   };
 
@@ -125,7 +125,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
     <ModalContent>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSave)}>
-          <ModalHeader>{t("SPECIES.FIELD.MANAGE")}</ModalHeader>
+          <ModalHeader>{t("species:field.manage")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
@@ -138,22 +138,22 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
             <TextBoxField
               hidden={referencesOnly}
               name="attributions"
-              label={t("SPECIES.ATTRIBUTIONS")}
+              label={t("species:attributions")}
               isRequired={true}
             />
             <UserSelectField
               name="contributorIds"
-              label={t("SPECIES.CONTRIBUTORS")}
+              label={t("species:contributors")}
               isRequired={true}
             />
             <SelectInputField
               hidden={referencesOnly}
               name="licenseId"
-              label={t("DOCUMENT.LICENSE")}
+              label={t("form:license")}
               isRequired={true}
               options={licensesList}
             />
-            <ReferencesField name="references" label={t("SPECIES.REFERENCES")} />
+            <ReferencesField name="references" label={t("species:references")} />
             <DropzoneFieldContainer
               hidden={referencesOnly}
               name="speciesFieldResource"
@@ -162,9 +162,9 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
             />
           </ModalBody>
           <ModalFooter>
-            <SubmitButton leftIcon={<CheckIcon />} children={t("SAVE")} />
+            <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
             <Button ml={4} leftIcon={<CrossIcon />} onClick={onCancel}>
-              {t("CANCEL")}
+              {t("common:cancel")}
             </Button>
           </ModalFooter>
         </form>

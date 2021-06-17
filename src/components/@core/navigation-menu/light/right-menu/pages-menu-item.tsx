@@ -1,8 +1,8 @@
 import { MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { getPagesMenu } from "@utils/pages.util";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 const SubMenuLink = ({ item, onClose }) => (
@@ -29,7 +29,7 @@ export default function PagesMenuItem({ onClose }) {
       ) : (
         <LocalLink prefixGroup={true} href="/page/empty">
           <MenuItem as="a" w="full" onClick={onClose}>
-            {t("HEADER.MENU_SECONDARY.PAGES.EMPTY")}
+            {t("header:menu_secondary.pages.empty")}
           </MenuItem>
         </LocalLink>
       )}

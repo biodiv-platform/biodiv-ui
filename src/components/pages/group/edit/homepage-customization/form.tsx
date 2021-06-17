@@ -2,9 +2,9 @@ import { Box, Button } from "@chakra-ui/react";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axUpdateHomePageDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -66,9 +66,9 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
     const { success, data } = await axUpdateHomePageDetails(userGroupId, payload);
     if (success) {
       setGalleryList(data.gallerySlider);
-      notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.SUCCESS"), NotificationType.Success);
+      notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
-      notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.FAILURE"), NotificationType.Error);
+      notification(t("group:homepage_customization.failure"), NotificationType.Error);
     }
   };
 
@@ -77,20 +77,20 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
           <Box width={["100%", 350]} justifyContent="space-between">
-            <SwitchField name="showGallery" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY")} />
-            <SwitchField name="showStats" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.MODULE_STATS")} />
+            <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
+            <SwitchField name="showStats" label={t("group:homepage_customization.module_stats")} />
             <SwitchField
               name="showRecentObservation"
-              label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RECENT_OBSERVATION")}
+              label={t("group:homepage_customization.recent_observation")}
             />
             <SwitchField
               name="showGridMap"
-              label={t("GROUP.HOMEPAGE_CUSTOMIZATION.OBSERVATION_MAP")}
+              label={t("group:homepage_customization.observation_map")}
             />
-            <SwitchField name="showPartners" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.ABOUT_US")} />
-            <SwitchField name="showDesc" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.SHOW_DESC")} />
+            <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
+            <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
           </Box>
-          <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} />
+          <RichTextareaField name="description" label={t("form:description.title")} />
         </form>
       </FormProvider>
       <GallerySetup
@@ -102,7 +102,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
       />
       <Box hidden={isCreate} display="flex" m={4} justifyContent="flex-end">
         <Button colorScheme="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
-          {t("GROUP.HOMEPAGE_CUSTOMIZATION.SAVE")}
+          {t("group:homepage_customization.save")}
         </Button>
       </Box>
     </>

@@ -10,7 +10,7 @@ import {
   ModalOverlay
 } from "@chakra-ui/modal";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -41,7 +41,7 @@ export default function TaxonCreateModal({ isOpen, onClose, validateResults }) {
           rightIcon={<ArrowForwardIcon />}
           onClick={() => applySuggestion(cell.row.original)}
         >
-          {t("SPECIES.CREATE.FORM.SELECT")}
+          {t("species:create.form.select")}
         </Button>
       )
     }
@@ -60,7 +60,7 @@ export default function TaxonCreateModal({ isOpen, onClose, validateResults }) {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={onClose}>{t("CLOSE")}</Button>
+          <Button onClick={onClose}>{t("common:close")}</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

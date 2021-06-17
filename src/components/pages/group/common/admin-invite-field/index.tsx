@@ -1,6 +1,6 @@
 import { SelectAsyncInputField } from "@components/form/select-async";
-import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 interface ManageGroupAdministratorsFieldProps {
@@ -26,7 +26,7 @@ export default function ManageGroupAdministratorsField({
   const handleEventCallback = async (value, event, setSelected) => {
     switch (event.action) {
       case "remove-value":
-        const confirmDelete = confirm(t("GROUP.DELETE_MEMBER"));
+        const confirmDelete = confirm(t("group:delete_member"));
         if (confirmDelete && onRemove) {
           const { success } = await onRemove(event?.removedValue);
           if (!success) {
@@ -45,7 +45,7 @@ export default function ManageGroupAdministratorsField({
   return (
     <SelectAsyncInputField
       name={name}
-      placeholder={t("GROUP.INVITE")}
+      placeholder={t("group:invite")}
       onQuery={onUserQuery}
       eventCallback={handleEventCallback}
       multiple={true}

@@ -1,7 +1,7 @@
 import { Box, Flex, Select, Stack, Tab, TabList, Tabs, Text } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { sortByOptions, viewTabs } from "@static/documnet-list";
 import { format } from "indian-number-format";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useDocumentFilter from "../../common/use-document-filter";
@@ -42,7 +42,7 @@ export default function ListHeader() {
           <Box>
             <Select
               maxW="10rem"
-              aria-label={t("LIST.SORT_BY")}
+              aria-label={t("common:list.sort_by")}
               value={filter?.sort}
               onChange={handleOnSort}
             >
@@ -58,7 +58,7 @@ export default function ListHeader() {
 
       {documentData && documentData.n > 0 && (
         <Text color="gray.600" mb={4}>
-          {format(documentData.n)} {t("DOCUMENT.DOCUMENTS_FOUND")}
+          {format(documentData.n)} {t("document:documents_found")}
         </Text>
       )}
     </>

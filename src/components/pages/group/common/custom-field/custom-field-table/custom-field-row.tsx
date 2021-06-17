@@ -1,9 +1,9 @@
-import { Box, Button } from "@chakra-ui/react";
 import { DragHandleIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
+import { Box, Button } from "@chakra-ui/react";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import DeleteIcon from "@icons/delete";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 
@@ -38,7 +38,7 @@ const CustomFieldRow = SortableElement(({ itemDetails, onDelete }) => {
           leftIcon={<DeleteIcon />}
           ml={2}
         >
-          {t("DELETE")}
+          {t("common:delete")}
         </Button>
       </td>
     </tr>

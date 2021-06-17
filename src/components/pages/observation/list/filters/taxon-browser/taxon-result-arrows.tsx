@@ -1,6 +1,6 @@
-import { IconButton, Stack } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
+import { IconButton, Stack } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 export default function TaxonResultArrows({ resultsCount }) {
@@ -29,7 +29,7 @@ export default function TaxonResultArrows({ resultsCount }) {
   return resultsCount > 1 ? (
     <Stack isInline={true} mt={3} alignItems="center" justify="space-between" className="fadeInUp">
       <div>
-        {t("FILTERS.TAXON_BROWSER.SEARCH_RESULTS", {
+        {t("filters:taxon_browser.search_results", {
           currentIndex: currentIndex + 1,
           resultsCount
         })}
@@ -40,15 +40,15 @@ export default function TaxonResultArrows({ resultsCount }) {
           onClick={onPrevious}
           icon={<ArrowBackIcon />}
           mx={2}
-          aria-label={t("PREV")}
-          title={t("PREV")}
+          aria-label={t("prev")}
+          title={t("prev")}
         />
         <IconButton
           isDisabled={disabled.next}
           onClick={onNext}
           icon={<ArrowForwardIcon />}
-          aria-label={t("NEXT")}
-          title={t("NEXT")}
+          aria-label={t("common:next")}
+          title={t("common:next")}
         />
       </div>
     </Stack>

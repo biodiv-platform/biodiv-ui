@@ -4,13 +4,13 @@ import FollowActionButton from "@components/@core/action-buttons/follow";
 import ShareActionButton from "@components/@core/action-buttons/share";
 import { PageHeading } from "@components/@core/layout";
 import TaxonStatusBadge from "@components/pages/common/status-badge";
-import useTranslation from "@hooks/use-translation";
 import { axDeleteSpecies, axFollowSpecies } from "@services/species.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { SPECIES_NAME_PREFERRED_UPDATED } from "@static/events";
 import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import { NextSeo } from "next-seo";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 
@@ -20,8 +20,8 @@ function SpeciesHeader() {
   const { t } = useTranslation();
   const { species, permissions } = useSpecies();
   const speciesTitle = [
-    species.taxonomyDefinition?.normalizedForm || t("UNKNOWN"),
-    t("HEADER.MENU_SECONDARY.SPECIES.TITLE")
+    species.taxonomyDefinition?.normalizedForm || t("unknown"),
+    t("header:menu_secondary.species.title")
   ].join(" | ");
 
   const [prefferedCommonName, setPrefferedCommonName] = useState(species?.prefferedCommonName);
@@ -49,19 +49,19 @@ function SpeciesHeader() {
         following={permissions.isFollower}
         resourceId={species.species?.id}
         toggleFollowFunc={axFollowSpecies}
-        followTitle={t("SPECIES.FOLLOW_SPECIES")}
-        unFollowTitle={t("SPECIES.UNFOLLOW_SPECIES")}
+        followTitle={t("species:follow_species")}
+        unFollowTitle={t("species:unfollow_species")}
       />
       {permissions.isContributor && (
         <DeleteActionButton
           observationId={species.species?.id}
-          title={t("SPECIES.REMOVE.TITLE")}
-          description={t("SPECIES.REMOVE.DESCRIPTION")}
-          deleted={t("SPECIES.REMOVE.SUCCESS")}
+          title={t("species:remove.title")}
+          description={t("species:remove.description")}
+          deleted={t("species:remove.success")}
           deleteFunc={axDeleteSpecies}
         />
       )}
-      <ShareActionButton text={openGraph.title} title={t("SPECIES.SHARE")} />
+      <ShareActionButton text={openGraph.title} title={t("species:share")} />
     </div>
   );
 

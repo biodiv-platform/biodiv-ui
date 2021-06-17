@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import TraitInput from "@components/pages/observation/common/trait-input";
 import useSpecies from "@components/pages/species/show/use-species";
-import useTranslation from "@hooks/use-translation";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import { TraitEditFooter } from "../common/edit-footer";
@@ -28,9 +28,9 @@ export default function SimpleTraitEdit({ trait, initialValue, onSave, onClose }
     if (success) {
       onSave(data);
       onClose();
-      notification(t("SPECIES.TRAITS.UPDATE.SUCCESS"), NotificationType.Success);
+      notification(t("species:traits.update.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.TRAITS.UPDATE.FAILURE"));
+      notification(t("species:traits.update.failure"));
     }
   };
 

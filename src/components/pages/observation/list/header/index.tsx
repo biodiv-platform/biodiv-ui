@@ -11,10 +11,10 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import useTranslation from "@hooks/use-translation";
 import DownloadIcon from "@icons/download";
 import { sortByOptions, viewTabs } from "@static/observation-list";
 import { format } from "indian-number-format";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import DownloadObservationDataModal from "../download-observation-modal";
@@ -65,7 +65,7 @@ export default function ListHeader() {
           <Box>
             <Select
               maxW="10rem"
-              aria-label={t("LIST.SORT_BY")}
+              aria-label={t("common:list.sort_by")}
               value={filter?.sort}
               onChange={handleOnSort}
             >
@@ -77,14 +77,14 @@ export default function ListHeader() {
             </Select>
           </Box>
           <Button variant="outline" colorScheme="blue" leftIcon={<DownloadIcon />} onClick={onOpen}>
-            {t("OBSERVATION.DOWNLOAD.TITLE")}
+            {t("observation:download.title")}
           </Button>
         </Stack>
       </Flex>
 
       {observationData && observationData.n > 0 && (
         <Text color="gray.600" mb={4}>
-          {format(observationData.n)} {t("LIST.OBSERVATIONS_FOUND")}
+          {format(observationData.n)} {t("observation:list.observations_found")}
         </Text>
       )}
 

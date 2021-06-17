@@ -1,6 +1,6 @@
-import { Flex } from "@chakra-ui/react";
 import { TimeIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
+import { Flex } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function UploadProcessing() {
@@ -9,7 +9,7 @@ export default function UploadProcessing() {
   return (
     <Flex direction="column" alignItems="center" className="fade">
       <TimeIcon mb={4} fontSize="3xl" />
-      <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
+      <span>{t("form:uploader.processing")}</span>
     </Flex>
   );
 }

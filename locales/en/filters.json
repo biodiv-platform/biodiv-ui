@@ -1,0 +1,136 @@
+{
+  "clear": "Clear {{filterCount}} Filter(s)",
+  "custom_fields": {
+    "has_content": "Has Content",
+    "no_content": "No Content",
+    "no_custom_field": "No Custom field(s) found",
+    "title": "Custom Fields"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "Flagged",
+      "title": "Flag",
+      "unflagged": "Unflagged"
+    },
+    "identification": {
+      "identified": "Identified",
+      "title": "Identification",
+      "unidentified": "Unidentified"
+    },
+    "taxon_id": {
+      "has_taxon": "Has Taxon ID",
+      "no_taxon": "No Taxon ID",
+      "title": "Taxon ID"
+    },
+    "title": "Data Quality",
+    "validation": {
+      "not_validated": "Not Validated",
+      "title": "Validation",
+      "validated": "Validated"
+    }
+  },
+  "document_title": "Title",
+  "item_type": {
+    "title": "Item Type"
+  },
+  "location": {
+    "district": "District",
+    "map": {
+      "title": "Map"
+    },
+    "protected_area": {
+      "title": "Protected Areas"
+    },
+    "state": {
+      "title": "State"
+    },
+    "tehsil": "Tehsil",
+    "title": "Location"
+  },
+  "media": {
+    "audio": "Audio",
+    "image": "Image",
+    "no_media": "No Media",
+    "title": "Media Type",
+    "video": "Video"
+  },
+  "name": {
+    "reco_name": {
+      "title": "Name"
+    },
+    "status": {
+      "accepted": "Accepted",
+      "synonym": "Synonym",
+      "title": "Status"
+    },
+    "title": "Scientific Name"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "All Names"
+    },
+    "taxon_names": {
+      "title": "Taxon Names"
+    },
+    "taxon_rank": {
+      "title": "Taxon Rank"
+    },
+    "taxon_status": {
+      "title": "Taxon Status"
+    },
+    "title": "Scientific Name"
+  },
+  "species_group": {
+    "title": "Species Group",
+    "all": "All",
+    "mammals": "Mammals",
+    "birds": "Birds",
+    "reptiles": "Reptiles",
+    "amphibians": "Amphibians",
+    "fish": "Fish",
+    "arthropods": "Arthropods",
+    "molluscs": "Molluscs",
+    "plants": "Plants",
+    "fungi": "Fungi",
+    "others": "Others"
+  },
+  "taxon_browser": {
+    "search": "Search in Tree",
+    "search_results": "Showing {{currentIndex}} of {{resultsCount}}",
+    "title": "Taxon Browser"
+  },
+  "time": {
+    "created_on": "Date Created",
+    "max_date": "Maximum Date",
+    "min_date": "Minimum Date",
+    "month": {
+      "apr": "April",
+      "aug": "August",
+      "dec": "December",
+      "feb": "February",
+      "jan": "January",
+      "jul": "July",
+      "jun": "June",
+      "mar": "March",
+      "may": "May",
+      "nov": "November",
+      "oct": "October",
+      "sep": "September",
+      "title": "Month Observed"
+    },
+    "observed_on": "Date Observed",
+    "title": "Time"
+  },
+  "title": "Filters",
+  "toggle": "Toggle Filters",
+  "traits": {
+    "title": "Traits"
+  },
+  "user": {
+    "search": "Search User",
+    "title": "User"
+  },
+  "usergroup": {
+    "title": "User Groups"
+  }
+}

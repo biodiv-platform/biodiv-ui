@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";

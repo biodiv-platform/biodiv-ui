@@ -1,6 +1,6 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { axGetUserGroupList } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";

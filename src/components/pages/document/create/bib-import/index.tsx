@@ -1,7 +1,7 @@
 import { ArrowUpIcon } from "@chakra-ui/icons";
 import { Button, VisuallyHidden } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { axParseBib } from "@services/document.service";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -39,7 +39,7 @@ export default function BibImportButton() {
         accept=".bib"
         onChange={handleOnBibUpload}
       />
-      {t("DOCUMENT.IMPORT_BIBTEX")}
+      {t("document:import_bibtex")}
     </Button>
   );
 }

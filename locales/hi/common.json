@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "flag": {
+      "category": "वर्ग",
+      "flags": {
+        "date_inappropriate": "अनुचित तिथि",
+        "details_inappropriate": "अनुचित विवरण",
+        "location_inappropriate": "अनुचित स्थान"
+      },
+      "notes": "टिप्पणियाँ",
+      "others_flagged": "जो लोग ध्वजांकित करते हैं",
+      "title": "शीर्षक"
+    }
+  },
+  "add": "जोड़ना",
+  "cancel": "रद्द करना",
+  "clear": "स्पष्ट",
+  "close": "बंद करे",
+  "copy": "क्लिपबोर्ड पर कॉपी करें",
+  "delete": "हटाएं",
+  "edit": "संपादित करें",
+  "feedback": "प्रतिपुष्टि",
+  "footer": {
+    "email": "ईमेल",
+    "facebook": "फेसबुक",
+    "github": "जाओहब",
+    "powered_by": "द्वारा संचालित ",
+    "technology_partner": "प्रौद्योगिकी भागीदार ",
+    "twitter": "ट्विटर"
+  },
+  "invalid_request": "अमान्य अनुरोध",
+  "load_more": "अधिक लोड करें ↺",
+  "loading": "लोड हो रहा है...",
+  "next": "अगला",
+  "no_data": "कोई आकड़ा उपलब्ध नहीं है",
+  "no_results": "कोई परिणाम नहीं मिला",
+  "notifications": {
+    "invalid_credentials": "आपके द्वारा प्रविष्ट किया गया उपयोगकर्तानाम या पासवर्ड गलत है।",
+    "token_error": "टोकन लाने में त्रुटि",
+    "token_not_saved": "टोकन को नहीं बचा सका",
+    "token_saved": "टोकन बचाया"
+  },
+  "offline": "कोई इंटरनेट कनेक्शन नहीं",
+  "one_moment_please": "कृपया एक क्षण",
+  "or": "या",
+  "permalink": "स्थायी लिंक",
+  "prev": "पहले का",
+  "processing": "प्रसंस्करण...",
+  "save": "सहेजें",
+  "search": "खोज",
+  "success": "सफलता",
+  "toggle": "टॉगल",
+  "unauthorized": "अनधिकृत उपयोगकर्ता",
+  "unknown": "अनजान",
+  "list": {
+    "sort_by": "इसके अनुसार क्रमबद्ध करें",
+    "sort_options": {
+      "last_updated": "आखरी अपडेट",
+      "latest": "अंतिम अपलोड किया गया",
+      "most_viewed": "सबसे ज्यादा देखा गया"
+    },
+    "view_type": {
+      "grid": "ग्रिड",
+      "list": "सूची",
+      "map": "नक्शा",
+      "stats": "मैट्रिक्स"
+    }
+  },
+  "slider_left": "बाएं",
+  "slider_right": "सही",
+  "temporal": {
+    "observations": "अवलोकन",
+    "title": "अस्थायी वितरण"
+  },
+  "accepted": "को स्वीकृत",
+  "edit_not_uploaded": "कुछ संसाधन ठीक से अपलोड नहीं किए जाते हैं, कृपया अपलोड करने से पहले प्रतीक्षा करें या उन्हें हटा दें",
+  "activity": "गतिविधि",
+  "information": "जानकारी",
+  "usergroups": "समूहों",
+  "habitats_covered": "निवास स्थान",
+  "species_coverage": "प्रजाति समूह कवरेज",
+  "feature": "फ़ीचर चयनित",
+  "feature_in_groups": "समूहों में सुविधा"
+}

@@ -10,13 +10,13 @@ import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { axUserSearch } from "@services/auth.service";
 import { axRequestTaxonPermission } from "@services/taxonomy.service";
 import { TAXON_ROLES } from "@static/taxon";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -45,9 +45,9 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     for (taxon of taxons) {
       const { success } = await axRequestTaxonPermission({ taxonId: Number(taxon), userId, role });
       if (success) {
-        notification(t("TAXON.REQUEST.SUCCESS"), NotificationType.Success);
+        notification(t("taxon:request.success"), NotificationType.Success);
       } else {
-        notification(t("TAXON.REQUEST.FAILURE"));
+        notification(t("taxon:request.failure"));
       }
     }
 
@@ -58,25 +58,25 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     <ModalContent>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <ModalHeader>{t("TAXON.REQUEST.TITLE")}</ModalHeader>
+          <ModalHeader>{t("taxon:request.title")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <SelectInputField name="role" label={t("TAXON.ROLE")} options={TAXON_ROLES} />
+            <SelectInputField name="role" label={t("taxon:role")} options={TAXON_ROLES} />
             {isAdmin && (
               <SelectAsyncInputField
                 name="userId"
                 onQuery={onUserQuery}
                 multiple={false}
                 isClearable={false}
-                label={t("TAXON.REQUEST.USER")}
+                label={t("taxon:request.user")}
                 mb={0}
               />
             )}
           </ModalBody>
           <ModalFooter>
-            <SubmitButton leftIcon={<CheckIcon />}>{t("TAXON.REQUEST.BUTTON")}</SubmitButton>
+            <SubmitButton leftIcon={<CheckIcon />}>{t("taxon:request.button")}</SubmitButton>
             <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
-              {t("CANCEL")}
+              {t("common:cancel")}
             </Button>
           </ModalFooter>
         </form>

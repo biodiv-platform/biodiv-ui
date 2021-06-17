@@ -8,13 +8,13 @@ import { PhoneNumberInputField } from "@components/form/phone-number";
 import { RadioInputField } from "@components/form/radio";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axLogin } from "@services/auth.service";
 import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import { NextSeo } from "next-seo";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
@@ -89,7 +89,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
         authSuccessForward(data);
       }
     } else {
-      notification(data?.message || t("NOTIFICATIONS.INVALID_CREDENTIALS"), NotificationType.Error);
+      notification(data?.message || t("notifications.invalid_credentials"), NotificationType.Error);
     }
   };
 
@@ -103,8 +103,8 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
 
   return (
     <>
-      <NextSeo title={t("SIGN_IN.TITLE")} />
-      <PageHeading>{t("SIGN_IN.TITLE")}</PageHeading>
+      <NextSeo title={t("auth:sign_in")} />
+      <PageHeading>{t("auth:sign_in")}</PageHeading>
 
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
@@ -112,35 +112,35 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
             <RadioInputField name="verificationType" options={VERIFICATION_TYPE} mb={1} />
           </div>
           {showMobile ? (
-            <PhoneNumberInputField name="mobileNumber" label={t("SIGN_IN.FORM.MOBILE")} />
+            <PhoneNumberInputField name="mobileNumber" label={t("auth:form.mobile")} />
           ) : (
-            <TextBoxField name="email" label={t("SIGN_IN.FORM.EMAIL")} autoComplete="username" />
+            <TextBoxField name="email" label={t("auth:form.email")} autoComplete="username" />
           )}
           <TextBoxField
             name="password"
             type="password"
             autoComplete="current-password"
-            label={t("SIGN_IN.FORM.PASSWORD")}
+            label={t("auth:form.password")}
           />
           <Flex justifyContent="space-between" alignItems="center">
-            <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("SIGN_IN.FORM.SUBMIT")}</SubmitButton>
+            <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("auth:form.submit")}</SubmitButton>
             <LocalLink href="/register/forgotPassword">
-              <BlueLink display="block">{t("SIGN_IN.FORGOT_PASSWORD_LINK")}</BlueLink>
+              <BlueLink display="block">{t("auth:forgot_password_link")}</BlueLink>
             </LocalLink>
           </Flex>
         </form>
       </FormProvider>
 
       <Box textAlign="center" color="gray.500" my={4}>
-        {t("OR")}
+        {t("common:or")}
       </Box>
 
-      <Oauth text={t("SIGN_IN.WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
+      <Oauth text={t("auth:with_google")} onSuccess={onOAuthSuccess} />
 
-      {t("SIGN_IN.SIGN_UP")}
+      {t("auth:sign_up")}
       <LocalLink href="/register">
         <BlueLink ml={2}>
-          {t("SIGN_IN.SIGN_UP_LINK")}
+          {t("auth:sign_up_link")}
           <ChevronRightIcon />
         </BlueLink>
       </LocalLink>

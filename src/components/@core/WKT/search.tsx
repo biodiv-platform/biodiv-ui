@@ -1,6 +1,5 @@
 import { Box, Button, FormControl, FormHelperText, FormLabel, Input, Text } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import { isBrowser } from "@static/constants";
@@ -9,6 +8,7 @@ import { feature } from "@turf/helpers";
 import { getMapCenter } from "@utils/location";
 import debounce from "debounce-promise";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
@@ -81,11 +81,11 @@ export default function WKTSearch({
             isClearable={true}
             noOptionsMessage={() => null}
             onChange={setSelected}
-            placeholder={t("DOCUMENT.GEOENTITIES")}
+            placeholder={t("form:geoentities")}
             loadOptions={onQueryDebounce}
           />
         </FormControl>
-        <Text color="gray.500" mb={2} children={t("OR")} />
+        <Text color="gray.500" mb={2} children={t("common:or")} />
       </div>
       <Box position="relative" borderRadius="md" mb={4}>
         <NakshaGmapsDraw
@@ -100,9 +100,9 @@ export default function WKTSearch({
           mapStyle={{ height: "22rem", width: "100%", borderRadius: ".25rem" }}
           autocompleteComponent={
             <FormControl mb={4}>
-              <FormLabel htmlFor="gmaps-search">{t("DOCUMENT.FIND_GMAPS")}</FormLabel>
+              <FormLabel htmlFor="gmaps-search">{t("form:find_gmaps")}</FormLabel>
               <Input ref={gmapsSearchRef} w="full" />
-              <FormHelperText>{t("DOCUMENT.COVERAGE_HINT")}</FormHelperText>
+              <FormHelperText>{t("form:coverage.hint")}</FormHelperText>
             </FormControl>
           }
         />
@@ -115,7 +115,7 @@ export default function WKTSearch({
         isDisabled={isDisabled}
         onClick={handleOnSave}
       >
-        {t("ADD")}
+        {t("common:add")}
       </Button>
     </Box>
   );

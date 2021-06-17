@@ -4,17 +4,17 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import Tooltip from "@components/@core/tooltip";
 import Badge from "@components/@core/user/badge";
 import useActivity from "@hooks/use-activity";
-import useTranslation from "@hooks/use-translation";
 import { ACTIVITY_UPDATED } from "@static/events";
 import { toKey } from "@utils/basic";
 import { formatTimeStampFromUTC, timeAgoUTC } from "@utils/date";
 import { getUserImage } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { useListener } from "react-gbus";
 
 import ContentBox from "./content-box";
 
-export default function ActivityList({ resourceId, resourceType, title = "OBSERVATION.ACTIVITY" }) {
+export default function ActivityList({ resourceId, resourceType, title = "common:activity" }) {
   const { t } = useTranslation();
   const activity = useActivity();
 
@@ -37,13 +37,13 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
 
   const ActivityType = ({ type }) => (
     <Text color="gray.600" as="i">
-      {t(`ACTIVITY_TYPE.${toKey(type)}`)}
+      {t(`activity:${toKey(type).toLowerCase()}`)}
     </Text>
   );
 
   return (
     <>
-      <BoxHeading subTitle={`${activity.data.commentCount} ${t("OBSERVATION.COMMENTS.TITLE")}`}>
+      <BoxHeading subTitle={`${activity.data.commentCount} ${t("form:comments.title")}`}>
         🕒 {t(title)}
       </BoxHeading>
       {activity.data.list.map((a: any) => (
@@ -84,7 +84,7 @@ export default function ActivityList({ resourceId, resourceType, title = "OBSERV
           isLoading={activity.isLoading}
           onClick={() => loadActivity(false)}
         >
-          {t("OBSERVATION.LOAD_MORE_ACTIVITY")}
+          {t("activity:load_more_activity")}
         </Button>
       )}
     </>

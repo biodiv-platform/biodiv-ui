@@ -1,7 +1,7 @@
 import { Select, Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@hooks/use-translation";
 import { LEADERBOARD_MODULES, LEADERBOARD_STOPS } from "@static/leaderboard";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import {
@@ -65,7 +65,7 @@ function UserLeaderboardComponent() {
           </Stack>
         }
       >
-        🏅 {t("LEADERBOARD.TITLE")}
+        🏅 {t("leaderboard:title")}
       </PageHeading>
       <Info />
       <UserLeaderboardTable

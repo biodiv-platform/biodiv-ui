@@ -1,6 +1,6 @@
 import { TextBoxField } from "@components/form/text";
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function NewResourceForm() {
@@ -11,11 +11,11 @@ export default function NewResourceForm() {
       <TextBoxField
         name="title"
         isRequired={true}
-        label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.TITLE")}
+        label={t("group:homepage_customization.resources.title")}
       />
-      <TextBoxField name="moreLinks" label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.LINK")} />
+      <TextBoxField name="moreLinks" label={t("group:homepage_customization.resources.link")} />
       <ImageUploaderField
-        label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.IMAGEURL")}
+        label={t("group:homepage_customization.resources.imageurl")}
         name="fileName"
         resourcePath="observations"
       />

@@ -7,11 +7,11 @@ import { PhoneNumberInputField } from "@components/form/phone-number";
 import { RadioInputField } from "@components/form/radio";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axForgotPassword, axRegenerateOTP, axResetPassword } from "@services/auth.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
@@ -87,10 +87,10 @@ export default function ForgotPasswordComponent() {
     };
     const { success } = await axResetPassword(payload);
     if (success) {
-      notification(t("FORGOT_PASSWORD.RESET_SUCCESS"), NotificationType.Success);
+      notification(t("auth:forgot.reset_success"), NotificationType.Success);
       router.push("/login");
     } else {
-      notification(t("OTP.MESSAGES.ERROR"));
+      notification(t("auth:otp.messages.error"));
     }
   };
 
@@ -109,54 +109,54 @@ export default function ForgotPasswordComponent() {
       <Box maxW="xs" width="full" pb={4}>
         {isOpen ? (
           <>
-            <PageHeading>{t("FORGOT_PASSWORD.TITLE")}</PageHeading>
+            <PageHeading>{t("auth:forgot.title")}</PageHeading>
             <FormProvider {...hForm}>
               <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
                 <div data-hidden={!SITE_CONFIG.REGISTER.MOBILE}>
                   <RadioInputField
                     name="verificationType"
-                    label={t("FORGOT_PASSWORD.FORM.VERIFICATION_TYPE")}
+                    label={t("auth:forgot.form.verification_type")}
                     options={VERIFICATION_TYPE}
                     mb={1}
                   />
                 </div>
                 {showMobile ? (
-                  <PhoneNumberInputField name="mobileNumber" label={t("USER.MOBILE")} />
+                  <PhoneNumberInputField name="mobileNumber" label={t("user:mobile")} />
                 ) : (
-                  <TextBoxField name="email" label={t("USER.EMAIL")} />
+                  <TextBoxField name="email" label={t("user:email")} />
                 )}
                 <SubmitButton rightIcon={<ArrowForwardIcon />}>
-                  {t("FORGOT_PASSWORD.FORM.SUBMIT")}
+                  {t("auth:forgot.form.submit")}
                 </SubmitButton>
               </form>
             </FormProvider>
           </>
         ) : (
           <>
-            <PageHeading>{t("OTP.TITLE")}</PageHeading>
+            <PageHeading>{t("auth:otp.title")}</PageHeading>
             <Text mb={4}>
-              {t("OTP.DESCRIPTION")} {user?.vt}
+              {t("auth:otp.description")} {user?.vt}
             </Text>
             <FormProvider {...rForm}>
               <form onSubmit={rForm.handleSubmit(handleOnVerification)}>
-                <TextBoxField name="otp" label={t("OTP.FORM.OTP")} />
+                <TextBoxField name="otp" label={t("auth:otp.form.otp")} />
                 <TextBoxField
                   name="password"
-                  label={t("USER.PASSWORD")}
+                  label={t("user:password")}
                   type="password"
                   autoComplete="new-password"
                 />
                 <TextBoxField
                   name="confirmPassword"
-                  label={t("USER.CONFIRM_PASSWORD")}
+                  label={t("user:confirm_password")}
                   type="password"
                   autoComplete="new-password"
                 />
                 <Flex justifyContent="space-between" alignItems="center">
                   <SubmitButton rightIcon={<ArrowForwardIcon />}>
-                    {t("OTP.FORM.SUBMIT")}
+                    {t("auth:otp.form.submit")}
                   </SubmitButton>
-                  <BlueLink onClick={handleRegenerate}>{t("OTP.RESEND")}</BlueLink>
+                  <BlueLink onClick={handleRegenerate}>{t("auth:otp.resend")}</BlueLink>
                 </Flex>
               </form>
             </FormProvider>

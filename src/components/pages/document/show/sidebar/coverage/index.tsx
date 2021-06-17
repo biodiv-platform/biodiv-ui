@@ -1,9 +1,9 @@
 import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { axUpdateCoverageGroup } from "@services/document.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import CoverageEdit from "./coverage-edit";
@@ -27,9 +27,9 @@ export default function CoveragePanel({
     if (success) {
       setCoverageValue(newCoverageValue);
       onClose();
-      notification(t("DOCUMENT.UPDATE_SUCCESS"), NotificationType.Success);
+      notification(t("document:update_success"), NotificationType.Success);
     } else {
-      notification(t("DOCUMENT.UPDATE_ERROR"));
+      notification(t("document:update_error"));
     }
   };
 

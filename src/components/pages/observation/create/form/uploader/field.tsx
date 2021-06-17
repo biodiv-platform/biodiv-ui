@@ -8,8 +8,8 @@ import {
   Tabs
 } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
-import useTranslation from "@hooks/use-translation";
 import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
 import { useController } from "react-hook-form";
@@ -60,10 +60,10 @@ const DropzoneField = ({ name, mb = 4, hidden }: IDropzoneProps) => {
         isLazy={true}
       >
         <TabList mb={4} overflowX="auto" py={1}>
-          <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
-          <Tab>☁️ {t("OBSERVATION.MY_UPLOADS")}</Tab>
-          <Tab>🎙️ {t("OBSERVATION.AUDIO.TITLE")}</Tab>
-          <Tab>📹 {t("OBSERVATION.FROM_URL")}</Tab>
+          <Tab>✔️ {t("form:selected_media")}</Tab>
+          <Tab>☁️ {t("form:my_uploads")}</Tab>
+          <Tab>🎙️ {t("form:audio.title")}</Tab>
+          <Tab>📹 {t("form:from_url")}</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

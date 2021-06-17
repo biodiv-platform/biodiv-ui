@@ -1,6 +1,6 @@
 import { Badge, Link } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { TAXON_BADGE_COLORS } from "@static/constants";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 interface TaxonStatusBadgeProps {
@@ -18,7 +18,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
     case "ACCEPTED":
       return (
         <Link href={taxonLink}>
-          <Badge colorScheme={TAXON_BADGE_COLORS.ACCEPTED}>{t("OBSERVATION.ACCEPTED")}</Badge>
+          <Badge colorScheme={TAXON_BADGE_COLORS.ACCEPTED}>{t("common:accepted")}</Badge>
         </Link>
       );
 
@@ -27,7 +27,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
       return (
         <Link href={taxonLink}>
           <Badge colorScheme={TAXON_BADGE_COLORS.SYNONYM}>
-            {t("OBSERVATION.SYNONYM")}
+            {t("observation:synonym")}
             {lastCrumb.name && `: ${lastCrumb.name}`}
           </Badge>
         </Link>
@@ -36,7 +36,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
     default:
       return !reco?.scientificName ? (
         <span>
-          <Badge colorScheme="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
+          <Badge colorScheme="red">{t("observation:help_identify")}</Badge>
         </span>
       ) : null;
   }

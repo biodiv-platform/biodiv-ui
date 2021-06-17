@@ -11,13 +11,14 @@ import {
 } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import { SelectInputField } from "@components/form/select";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
 import useOnlineStatus from "@rehooks/online-status";
 import { EXIF_GPS_FOUND } from "@static/events";
 import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS, GMAP_LIBRARIES } from "@static/location";
+import { translateOptions } from "@utils/i18n";
 import { getMapCenter, reverseGeocode } from "@utils/location";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { useFormContext } from "react-hook-form";
@@ -34,26 +35,30 @@ const LocationPicker = () => {
   const [hideLocationPicker, setHideLocationPicker] = useState(true);
   const isOnline = useOnlineStatus();
   const ll = useLastLocation();
+  const translatedLocationOptions = useMemo(
+    () => translateOptions(t, LOCATION_ACCURACY_OPTIONS),
+    []
+  );
 
   const FK = {
     observedAt: {
       name: "observedAt",
-      label: t("OBSERVATION.OBSERVED_AT")
+      label: t("observation:observed_at")
     },
     reverseGeocoded: {
       name: "reverseGeocoded"
     },
     locationScale: {
       name: "locationScale",
-      label: t("OBSERVATION.LOCATION_SCALE")
+      label: t("observation:location_scale")
     },
     latitude: {
       name: "latitude",
-      label: t("OBSERVATION.LATITUDE")
+      label: t("observation:latitude")
     },
     longitude: {
       name: "longitude",
-      label: t("OBSERVATION.LONGITUDE")
+      label: t("observation:longitude")
     }
   };
 
@@ -175,7 +180,7 @@ const LocationPicker = () => {
                     colorScheme="blue"
                     onClick={ll.use}
                   >
-                    {t("OBSERVATION.LAST_LOCATION")}
+                    {t("observation:last_location")}
                   </Button>
                 )}
               </FormLabel>
@@ -196,7 +201,7 @@ const LocationPicker = () => {
                 </Autocomplete>
                 <InputRightElement w="7rem">
                   <Button variant="link" size="sm" onClick={onToggle}>
-                    {t(isOpen ? "OBSERVATION.MAP.HIDE" : "OBSERVATION.MAP.SHOW")}
+                    {t(isOpen ? "form:map.hide" : "form:map.show")}
                   </Button>
                 </InputRightElement>
               </InputGroup>
@@ -209,7 +214,7 @@ const LocationPicker = () => {
               )}
             </FormControl>
           </Box>
-          <SelectInputField {...FK.locationScale} options={LOCATION_ACCURACY_OPTIONS} />
+          <SelectInputField {...FK.locationScale} options={translatedLocationOptions} />
         </SimpleGrid>
         <CoordinatesInput
           show={isOpen}

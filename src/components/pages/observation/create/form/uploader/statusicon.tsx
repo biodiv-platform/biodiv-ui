@@ -1,6 +1,6 @@
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@hooks/use-translation";
 import { AssetStatus } from "@interfaces/custom";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function StatusIcon({ type }: { type?: AssetStatus }) {
@@ -9,7 +9,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
   switch (type) {
     case AssetStatus.Uploaded:
       return (
-        <Tooltip title={t("OBSERVATION.UPLOAD_STATUS.UPLOADED")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.uploaded")} hasArrow={true}>
           <svg
             className="icon"
             width="24"
@@ -34,7 +34,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
 
     case AssetStatus.InProgress:
       return (
-        <Tooltip title={t("OBSERVATION.UPLOAD_STATUS.UPLOADING")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.uploading")} hasArrow={true}>
           <svg
             className="icon bounce"
             width="24"
@@ -59,7 +59,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
 
     case AssetStatus.Failed:
       return (
-        <Tooltip title={t("OBSERVATION.UPLOAD_STATUS.FAILED")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.failed")} hasArrow={true}>
           <svg
             className="icon"
             width="24"
@@ -86,7 +86,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
 
     default:
       return (
-        <Tooltip title={t("OBSERVATION.UPLOAD_STATUS.PENDING")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.pending")} hasArrow={true}>
           <svg
             className="icon"
             width="24"

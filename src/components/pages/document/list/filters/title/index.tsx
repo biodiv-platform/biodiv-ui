@@ -7,7 +7,7 @@ export default function TitleFilter() {
   return (
     <CheckboxFilterPanel
       filterKey={DOUCMENT_FILTER_KEY.title.filterKey}
-      translateKey="FILTERS.DOCUMENT_TITLE"
+      translateKey="filters:document_title"
     />
   );
 }

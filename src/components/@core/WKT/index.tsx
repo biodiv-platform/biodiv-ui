@@ -1,9 +1,10 @@
 import { FormControl, FormLabel, Input, SimpleGrid } from "@chakra-ui/react";
+import center from "@turf/center";
+import { feature } from "@turf/helpers";
 import notification from "@utils/notification";
 import React, { useRef, useState } from "react";
 import wkt from "wkt";
-import { feature } from "@turf/helpers";
-import center from "@turf/center";
+
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
 

@@ -9,12 +9,12 @@ import {
   Textarea,
   useDisclosure
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { Featured, UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 
 import CheckBoxItems from "../../create/form/user-groups/checkbox";
@@ -80,7 +80,7 @@ export default function GroupFeature({
 
   const afterFeatureUpdated = (data) => {
     updateFinalGroups(data);
-    notification(t("OBSERVATION.GROUPS_UPDATED"), NotificationType.Success);
+    notification(t("observation:groups_updated"), NotificationType.Success);
     editButtonRef.current.focus();
     onClose();
   };
@@ -100,7 +100,7 @@ export default function GroupFeature({
         ref={editButtonRef}
         onClick={onToggle}
       >
-        {t("EDIT")}
+        {t("common:edit")}
       </Button>
 
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={4} hidden={isOpen}>
@@ -125,7 +125,7 @@ export default function GroupFeature({
         )}
         <Box mt={2}>
           <FormControl>
-            <FormLabel htmlFor="description">{t("OBSERVATION.WHY_FEATURING")}</FormLabel>
+            <FormLabel htmlFor="description">{t("observation:why_featuring")}</FormLabel>
             <Textarea
               id="description"
               resize="none"
@@ -141,7 +141,7 @@ export default function GroupFeature({
               type="submit"
               onClick={handleOnFeature}
             >
-              {t("OBSERVATION.FEATURE")}
+              {t("common:feature")}
             </Button>
             <Button
               size="sm"
@@ -150,10 +150,10 @@ export default function GroupFeature({
               type="submit"
               onClick={handleOnUnfeature}
             >
-              {t("OBSERVATION.UNFEATURE")}
+              {t("observation:unfeature")}
             </Button>
             <Button size="sm" colorScheme="gray" aria-label="Cancel" onClick={handleOnCancel}>
-              {t("CLOSE")}
+              {t("common:close")}
             </Button>
           </Stack>
         </Box>

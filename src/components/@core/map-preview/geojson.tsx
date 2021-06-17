@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";

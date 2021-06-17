@@ -3,7 +3,7 @@ import { Td, Tr } from "@chakra-ui/react";
 import { Table, Tbody } from "@chakra-ui/table";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useSpecies from "../../use-species";
@@ -14,7 +14,7 @@ export default function TaxonTable() {
 
   return (
     <Box mb={4} className="white-box">
-      <BoxHeading>🐾 {t("SPECIES.TAXON")}</BoxHeading>
+      <BoxHeading>🐾 {t("species:taxon")}</BoxHeading>
       <Box>
         <Table size="sm">
           <Tbody>

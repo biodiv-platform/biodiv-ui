@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import HorizontalBarChart from "@components/charts/horizontal-bar-chart";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import { StatesChartMeta } from "./static-data";
@@ -27,7 +27,7 @@ const StatesDistribution = ({ observationData, filter }) => {
 
   return filteredStateData.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading>📊 {t("LIST.CHART.STATES")}</BoxHeading>
+      <BoxHeading>📊 {t("observation:list.chart.states")}</BoxHeading>
       <Box p={4}>
         <HorizontalBarChart
           data={filteredStateData}
@@ -43,9 +43,7 @@ const StatesDistribution = ({ observationData, filter }) => {
         />
       </Box>
     </Box>
-  ) : (
-    null
-  );
+  ) : null;
 };
 
 export default StatesDistribution;

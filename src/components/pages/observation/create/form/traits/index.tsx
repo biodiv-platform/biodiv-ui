@@ -9,9 +9,9 @@ import {
   Text,
   useDisclosure
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -52,7 +52,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
   return (
     <Box>
       <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
-        💎 {t("OBSERVATION.TRAITS")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        💎 {t("observation:traits")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
       <Collapse in={isOpen}>
         {traitsPairs.map(
@@ -69,7 +69,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
               </FormControl>
             )
         )}
-        {!sGroup && <Text>please select group first</Text>}
+        {!sGroup && <Text>{t("observation:traits_no_group")}</Text>}
       </Collapse>
       <Divider mb={3} />
     </Box>

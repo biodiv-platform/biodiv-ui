@@ -1,0 +1,160 @@
+{
+  "about": {
+    "closed_group": "Groupe fermé",
+    "open_group": "Groupe ouvert",
+    "title": "À propos"
+  },
+  "admin": {
+    "error": "Il y avait une erreur lors de la mise à jour des administrateurs",
+    "founder": "Fondatrice",
+    "moderator": "Modératrices",
+    "no_access": "Pour mettre à jour les champs personnalisés ou les règles de groupe, veuillez contacter Administrator",
+    "title": "Administrateurs de groupe",
+    "updated": "Les administrateurs de groupe sont mis à jour avec succès"
+  },
+  "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur.Appuyez sur OK pour envoyer une demande de jointure",
+  "create": {
+    "error": "Il y avait une erreur lors de la création de groupe",
+    "success": "Groupe créé avec succès",
+    "title": "Créer un groupe"
+  },
+  "custom_field": {
+    "add": {
+      "failure": "Impossible d'ajouter un champ personnalisé",
+      "options": "Ajouter des options",
+      "success": "Champ personnalisé ajouté avec succès"
+    },
+    "add_option": "Ajouter une option",
+    "allow_participant": "Permettre la participation",
+    "back": "Retour à la liste",
+    "create": "Créer un champ personnalisé",
+    "data_type": "Types de données",
+    "default": "Défaut",
+    "exist": "Le champ personnalisé existe déjà",
+    "field_type": "Types de champs",
+    "icon": "Icône",
+    "is_mandatory": "Obligatoire",
+    "name": "Nom",
+    "notes": "Remarques",
+    "remove": {
+      "default": "Défaut",
+      "failure": "Impossible de supprimer le champ personnalisé",
+      "success": "Champ personnalisé supprimé avec succès",
+      "title": "Supprimer"
+    },
+    "reorder": {
+      "failure": "Impossible d'enregistrer une commande de champ personnalisé",
+      "success": "Champ personnalisé réorganisé avec succès"
+    },
+    "save": "Sauvegarder",
+    "save_order": "Enregistrer la commande de champ personnalisé",
+    "table": {
+      "actions": "actions",
+      "data_type": "Type de données",
+      "input_type": "Type d'entrée",
+      "mandatory": "Obligatoire",
+      "name": "Nom",
+      "participation": "participation"
+    },
+    "title": "Les champs personnalisés",
+    "units": "Unités",
+    "value": "Valeur"
+  },
+  "delete_member": "Etes-vous sûr que vous voulez supprimer?",
+  "edit": {
+    "error": "Il y avait une erreur lors de la mise à jour du groupe",
+    "success": "Groupe mis à jour avec succès",
+    "title": "Groupe d'édition"
+  },
+  "homepage_customization": {
+    "about_us": "À propos de nous",
+    "add_options": "Ajouter des options",
+    "back": "Retour à la liste",
+    "default": "Défaut",
+    "failure": "Impossible d'enregistrer les modifications",
+    "gallery": "Galerie",
+    "gallery_setup": {
+      "alert": "Veuillez enregistrer des modifications au redressement",
+      "create": "Créer une image de galerie",
+      "save_order": "Enregistrer la galerie image (s) commande",
+      "show_image_upload": "Afficher l'image Uploader",
+      "title": "Configuration de la galerie"
+    },
+    "module_stats": "Statistiques de module",
+    "observation_map": "Carte de distribution d'observation",
+    "recent_observation": "Observation récente",
+    "remove": {
+      "failure": "Impossible de supprimer l'image de la galerie",
+      "success": "Image de la galerie supprimée avec succès"
+    },
+    "reorder": {
+      "failure": "Impossible d'enregistrer la liste de la liste de la galerie",
+      "success": "Liste de la galerie réorganisée avec succès"
+    },
+    "resources": {
+      "error": "Entrez une carte d'observation valide",
+      "imageurl": "Choisissez la galerie image",
+      "link": "Afficher le lien de page",
+      "new_image": "Tableau d'image",
+      "obs_id": "ID d'observation",
+      "observation_image": "Image d'observation",
+      "title": "Titre"
+    },
+    "save": "Enregistrer les détails de la page d'accueil",
+    "show_desc": "Montrer la description",
+    "success": "Changements mis à jour avec succès",
+    "table": {
+      "description": "La description",
+      "more_link": "Relier",
+      "remove_image": "Supprimer",
+      "title": "Titre"
+    },
+    "title": "Personnalisation de la page d'accueil",
+    "update": {
+      "failure": "Impossible de mettre à jour les détails de la page d'accueil",
+      "success": "Page d'accueil Détails mis à jour avec succès"
+    }
+  },
+  "icon": "Icône",
+  "invite": "Tapez le nom d'utilisateur ou le courrier électronique",
+  "invite_founders": "Inviter les fondateurs",
+  "invite_moderators": "Inviter des modérateurs",
+  "join": "Rejoindre le groupe",
+  "join_without_invitation": "Autoriser l'utilisateur à rejoindre le groupe sans invitation",
+  "member": {
+    "joined": "Groupe a rejoint avec succès",
+    "joined_error": "Impossible de rejoindre le groupe",
+    "requested": "Demande de participation de groupe envoyée"
+  },
+  "name": "Nom de groupe",
+  "rules": {
+    "add": {
+      "failure": "Impossible d'ajouter la règle d'Usergroup",
+      "success": "Créé avec succès",
+      "title": "Créer une règle de groupe"
+    },
+    "input_types": {
+      "spatial": "Ajouter une règle spatiale",
+      "taxonomy": "Ajouter une règle taxonomique",
+      "title": "Sélectionnez le type d'entrée",
+      "user": "Observation globale de tous les membres du groupe"
+    },
+    "remove": {
+      "failure": "Impossible de supprimer la règle du groupe d'utilisateurs",
+      "success": "règle du groupe d'utilisateurs supprimé"
+    },
+    "table": {
+      "actions": "actions",
+      "read_less": "Lire moins",
+      "read_more": "Lire la suite",
+      "rule_type": "Type de règle",
+      "value": "Valeur"
+    },
+    "title": "Règles de groupe"
+  },
+  "save": "Créer un groupe",
+  "spatial_coverge": "Couverture spatiale",
+  "tags": "Mots clés",
+  "update": "Groupe de mise à jour",
+  "update_admin": "Mettre à jour les administrateurs"
+}

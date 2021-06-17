@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { BaseLayer } from "@ibp/naksha-commons";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";

@@ -1,9 +1,9 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Center, Heading, Link, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
-import useTranslation from "@hooks/use-translation";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function Sidebar({ resource }) {
@@ -30,7 +30,7 @@ export default function Sidebar({ resource }) {
           </Text>
           {resource.moreLinks && (
             <Link href={resource.moreLinks}>
-              {t("HOME.BANNER_MORE")} <ArrowForwardIcon />
+              {t("home:banner_more")} <ArrowForwardIcon />
             </Link>
           )}
         </div>

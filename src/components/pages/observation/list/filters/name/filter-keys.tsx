@@ -1,11 +1,11 @@
 export const RECO_NAME = [
   {
-    label: "ACCEPTED",
+    label: "accepted",
     value: "accepted",
     stat: "ACCEPTED"
   },
   {
-    label: "SYNONYM",
+    label: "synonym",
     value: "synonym",
     stat: "SYNONYM"
   }

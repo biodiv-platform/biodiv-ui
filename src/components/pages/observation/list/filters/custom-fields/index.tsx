@@ -6,8 +6,8 @@ import {
   Box,
   Text
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import SubAccordion from "../shared/sub-accordion";
@@ -38,6 +38,6 @@ export default function CustomFieldsFilter() {
       ))}
     </SubAccordion>
   ) : (
-    <Text>{t("FILTERS.NO_CUSTOM_FIELD")}</Text>
+    <Text>{t("filters:no_custom_field")}</Text>
   );
 }

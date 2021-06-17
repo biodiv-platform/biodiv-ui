@@ -2,6 +2,7 @@ import { ObservationCreateProvider } from "@components/pages/observation/create/
 import { DB_CONFIG } from "@static/observation-create";
 import React from "react";
 import IndexedDBProvider from "use-indexeddb";
+
 import SpeciesDropzoneField from "./pull-media/dropzone-field";
 
 export default function SpeciesFieldContainer(props) {

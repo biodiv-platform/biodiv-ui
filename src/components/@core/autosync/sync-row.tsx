@@ -1,6 +1,6 @@
 import { Badge, Button, Image, Text } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import ExternalBlueLink from "../blue-link/external";
@@ -41,9 +41,7 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
   );
 
   const title = `${
-    data?.recoData?.taxonCommonName ||
-    data?.recoData.taxonScientificName ||
-    t("OBSERVATION.UNKNOWN")
+    data?.recoData?.taxonCommonName || data?.recoData.taxonScientificName || t("common:unknown")
   } `;
 
   const isDone = syncInfo.successful.includes(id);
@@ -58,9 +56,9 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
       <div>
         <Text lineHeight="1rem" mb={1}>
           {title}
-          {isUploading && <Badge colorScheme="orange">{t("OBSERVATION.SYNC.UPLOADING")}</Badge>}
-          {isDone && <Badge colorScheme="green">{t("OBSERVATION.SYNC.DONE")}</Badge>}
-          {isFailed && <Badge colorScheme="red">{t("OBSERVATION.SYNC.FAILED")}</Badge>}
+          {isUploading && <Badge colorScheme="orange">{t("observation:sync.uploading")}</Badge>}
+          {isDone && <Badge colorScheme="green">{t("observation:sync.done")}</Badge>}
+          {isFailed && <Badge colorScheme="red">{t("observation:sync.failed")}</Badge>}
         </Text>
         <small>{data?.reverseGeocoded}</small>
         <Button
@@ -70,7 +68,7 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
           size="xs"
           onClick={handleOnDelte}
         >
-          {t("DELETE")}
+          {t("common:delete")}
         </Button>
         {isDone && (
           <Button

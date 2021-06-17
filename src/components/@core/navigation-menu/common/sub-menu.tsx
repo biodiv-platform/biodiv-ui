@@ -1,8 +1,8 @@
 import { Link, MenuItem, MenuList } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import notification from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function SubMenu({ rows, onClose, prefix = "" }) {
@@ -18,7 +18,7 @@ export default function SubMenu({ rows, onClose, prefix = "" }) {
         return (
           <MenuItem key={item.name}>
             {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
-              <Link w="full" onClick={() => notification(t("HEADER.MEMBER_ONLY"))}>
+              <Link w="full" onClick={() => notification(t("header:member_only"))}>
                 {label}
               </Link>
             ) : (

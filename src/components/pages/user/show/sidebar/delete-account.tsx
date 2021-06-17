@@ -9,9 +9,9 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { axDeleteUser } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function DeleteAccount({ userId }) {
@@ -23,7 +23,7 @@ export default function DeleteAccount({ userId }) {
   const handleOnDelete = async () => {
     const { success } = await axDeleteUser(userId);
     if (success) {
-      notification(t("USER.DELETE.SUCCESS"), NotificationType.Success);
+      notification(t("user:delete.success"), NotificationType.Success);
       onClose();
       router.push("/user/list");
     }
@@ -32,24 +32,24 @@ export default function DeleteAccount({ userId }) {
   return (
     <>
       <Button w="full" colorScheme="red" onClick={onOpen} mb={4}>
-        {t("DELETE")}
+        {t("common:delete")}
       </Button>
 
       <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              {t("USER.DELETE.TITLE")}
+              {t("user:delete.title")}
             </AlertDialogHeader>
 
-            <AlertDialogBody>{t("USER.DELETE.MESSAGE")}</AlertDialogBody>
+            <AlertDialogBody>{t("user:delete.message")}</AlertDialogBody>
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
-                {t("CANCEL")}
+                {t("common:cancel")}
               </Button>
               <Button colorScheme="red" onClick={handleOnDelete} ml={3}>
-                {t("DELETE")}
+                {t("common:delete")}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

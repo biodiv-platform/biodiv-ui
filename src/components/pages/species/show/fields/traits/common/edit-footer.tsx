@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export function TraitEditFooter({ onSave, onCancel }) {
@@ -10,10 +10,10 @@ export function TraitEditFooter({ onSave, onCancel }) {
   return (
     <ButtonGroup size="sm" spacing={3}>
       <Button leftIcon={<CheckIcon />} onClick={onSave} colorScheme="blue">
-        {t("SAVE")}
+        {t("common:save")}
       </Button>
       <Button leftIcon={<CrossIcon />} onClick={onCancel}>
-        {t("CANCEL")}
+        {t("common:cancel")}
       </Button>
     </ButtonGroup>
   );

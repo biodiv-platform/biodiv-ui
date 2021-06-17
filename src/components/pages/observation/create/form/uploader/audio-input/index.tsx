@@ -1,8 +1,8 @@
 import { Text } from "@chakra-ui/react";
 import AudioRecorder from "@components/@core/audio-recoarder";
-import useTranslation from "@hooks/use-translation";
 import { getAssetObject } from "@utils/image";
 import { nanoid } from "nanoid";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import useObservationCreate from "../use-observation-resources";
@@ -34,7 +34,7 @@ export default function AudioInput({ onDone }) {
 
   return (
     <div>
-      <Text my={5}>ℹ️ {t("OBSERVATION.DESCRIPTION.AUDIO")}</Text>
+      <Text my={5}>ℹ️ {t("form:description.audio")}</Text>
       {audioFile ? (
         <AudioPlayer src={audioFileURL} onConfirm={onConfirm} onCancel={onCancel} />
       ) : (

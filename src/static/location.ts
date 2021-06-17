@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 
 export const GEOCODE_OPTIONS = {
   componentRestrictions: { country: SITE_CONFIG.MAP.COUNTRY }

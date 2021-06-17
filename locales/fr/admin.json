@@ -1,0 +1,18 @@
+{
+  "links": {
+    "notification": "Envoyer une notification push"
+  },
+  "pages": {
+    "notification": {
+      "form": {
+        "body": "Corps",
+        "error": "Impossible d'envoyer une notification",
+        "icon": "Icône",
+        "link": "Relier",
+        "success": "Notification envoyée",
+        "title": "Titre"
+      },
+      "heading": "Envoyer des notifications push-push"
+    }
+  }
+}

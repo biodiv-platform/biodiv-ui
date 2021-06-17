@@ -4,10 +4,10 @@ import { DatePickerField } from "@components/form/datepicker";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
 import { TextBoxField } from "@components/form/text";
-import useTranslation from "@hooks/use-translation";
 import { axGetDocumentBibFields } from "@services/document.service";
 import { getBibFieldsMeta } from "@utils/document";
 import notification from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -35,7 +35,7 @@ export default function BasicInfo({
     if (success) {
       setBibField(getBibFieldsMeta(fields));
     } else {
-      notification(t("DOCUMENT.BIB.SCHEMA.ERROR"));
+      notification(t("document:bib.schema.error"));
     }
   };
 
@@ -49,18 +49,18 @@ export default function BasicInfo({
     <div>
       <Stack flexDirection={["column", "row"]} alignItems="top" mb={1}>
         <PageHeading as="h2" size="lg" mb={4} mr={4}>
-          ℹ️ {t("DOCUMENT.BASIC_INFORMATION")}
+          ℹ️ {t("document:basic_information")}
         </PageHeading>
         {canImport && <BibImportButton />}
       </Stack>
 
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
         <Box gridColumn="1/4">
-          <TextBoxField name="bibFieldData.title" label={t("DOCUMENT.TITLE")} isRequired={true} />
+          <TextBoxField name="bibFieldData.title" label={t("form:title")} isRequired={true} />
         </Box>
         <SelectInputField
           name="itemTypeId"
-          label={t("DOCUMENT.TYPE")}
+          label={t("document:type")}
           options={documentTypes}
           isRequired={true}
           isControlled={true}
@@ -69,15 +69,15 @@ export default function BasicInfo({
 
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
         <div>
-          <RichTextareaField name="bibFieldData.abstract" label={t("DOCUMENT.DESCRIPTION")} />
+          <RichTextareaField name="bibFieldData.abstract" label={t("document:description")} />
         </div>
         <div>
-          <TextBoxField name="contribution" label={t("DOCUMENT.CONTRIBUTION")} />
+          <TextBoxField name="contribution" label={t("document:contribution")} />
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
-            <DatePickerField name="fromDate" label={t("DOCUMENT.PUBLICATION_DATE")} />
+            <DatePickerField name="fromDate" label={t("document:publication_date")} />
             <SelectInputField
               name="licenseId"
-              label={t("DOCUMENT.LICENSE")}
+              label={t("form:license")}
               options={licensesList}
               isRequired={true}
               isControlled={true}

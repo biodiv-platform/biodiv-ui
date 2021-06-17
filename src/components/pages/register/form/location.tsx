@@ -9,11 +9,11 @@ import {
   InputRightElement,
   useDisclosure
 } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
 import { AUTOCOMPLETE_FIELDS, GMAP_LIBRARIES } from "@static/location";
 import { getMapCenter } from "@utils/location";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { useController } from "react-hook-form";
 
@@ -73,7 +73,7 @@ export const LocationPicker = () => {
       <>
         <Box mb={4}>
           <FormControl isInvalid={fieldLocationName.fieldState.invalid}>
-            <FormLabel>{t("USER.LOCATION")}</FormLabel>
+            <FormLabel>{t("user:location")}</FormLabel>
             <InputGroup size="md" className="places-search">
               <Autocomplete
                 onLoad={setSearchBoxRef}
@@ -84,7 +84,7 @@ export const LocationPicker = () => {
               </Autocomplete>
               <InputRightElement w="7rem">
                 <Button variant="link" size="sm" onClick={onToggle}>
-                  {t(isOpen ? "OBSERVATION.MAP.HIDE" : "OBSERVATION.MAP.SHOW")}
+                  {t(isOpen ? "form:map.hide" : "form:map.show")}
                 </Button>
               </InputRightElement>
             </InputGroup>

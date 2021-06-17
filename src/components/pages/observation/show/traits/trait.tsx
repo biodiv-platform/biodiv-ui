@@ -10,7 +10,6 @@ import {
   Text,
   useDisclosure
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { TraitsValue } from "@interfaces/traits";
 import { axUpdateTraitById } from "@services/observation.service";
@@ -19,6 +18,7 @@ import { adminOrAuthor } from "@utils/auth";
 import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanSingleFact } from "@utils/tags";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import TraitInput from "../../common/trait-input";
@@ -68,7 +68,7 @@ export default function Trait({
     );
     if (success) {
       setFinalTraitValue(traitInputValue);
-      notification(t("OBSERVATION.TRAITS_UPDATE_SUCCESS"), NotificationType.Success);
+      notification(t("observation:traits_update_success"), NotificationType.Success);
       onClose();
     }
   };
@@ -123,7 +123,7 @@ export default function Trait({
               </Flex>
             ))
           ) : (
-            <Text color="gray.600">{t("OBSERVATION.UNKNOWN")}</Text>
+            <Text color="gray.600">{t("common:unknown")}</Text>
           )}
         </SimpleGrid>
       )}
@@ -136,10 +136,10 @@ export default function Trait({
             type="submit"
             onClick={handleTraitUpdate}
           >
-            {t("SAVE")}
+            {t("common:save")}
           </Button>
           <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
-            {t("CANCEL")}
+            {t("common:cancel")}
           </Button>
         </Box>
       </Collapse>

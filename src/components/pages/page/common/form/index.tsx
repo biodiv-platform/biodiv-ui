@@ -3,10 +3,10 @@ import { SubmitButton } from "@components/form/submit-button";
 import { SwitchField } from "@components/form/switch";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { PageShowMinimal } from "@interfaces/pages";
 import { axUploadEditorPageResource } from "@services/pages.service";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -33,7 +33,7 @@ export default function PageForm({
 
   const parentOptions = useMemo(
     () => [
-      { label: t("PAGE.NO_PARENT"), value: 0 },
+      { label: t("page:no_parent"), value: 0 },
       ...pages.map((p) => ({ label: `${p.title}`, value: p.id }))
     ],
     [pages]
@@ -56,17 +56,17 @@ export default function PageForm({
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(onSubmit)}>
-        <TextBoxField name="title" label={t("PAGE.FORM.TITLE")} />
-        <TextBoxField name="description" label={t("PAGE.FORM.DESCRIPTION")} />
+        <TextBoxField name="title" label={t("page:form.title")} />
+        <TextBoxField name="description" label={t("page:form.description")} />
         <WYSIWYGField
           name="content"
-          label={t("PAGE.FORM.CONTENT")}
+          label={t("page:form.content")}
           uploadHandler={axUploadEditorPageResource}
         />
         {!hideParentId && (
-          <SelectInputField name="parentId" label={t("PAGE.FORM.PARENT")} options={parentOptions} />
+          <SelectInputField name="parentId" label={t("page:form.parent")} options={parentOptions} />
         )}
-        <SwitchField name="sticky" mb={2} label={t("PAGE.FORM.IS_SIDEBAR")} />
+        <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
         <SubmitButton>{submitLabel}</SubmitButton>
       </form>
     </FormProvider>

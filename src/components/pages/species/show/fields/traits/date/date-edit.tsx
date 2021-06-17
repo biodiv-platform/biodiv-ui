@@ -1,10 +1,10 @@
 import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import useSpecies from "@components/pages/species/show/use-species";
-import useTranslation from "@hooks/use-translation";
 import CalendarIcon from "@icons/calendar";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import Head from "next/head";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import Flatpickr from "react-flatpickr";
 
@@ -31,16 +31,16 @@ export function TraitDateEdit({ traitId, initialValue, onSave, onClose }) {
   const handleOnSave = async () => {
     const payload = {
       pageTaxonId: taxonConceptId,
-      valuesString: [value.map((d) => d.toISOString().split("T")[0]).join(":")]
+      valuesString: [value.map((d) => d.toISOString().split("t")[0]).join(":")]
     };
 
     const { success } = await axUpdateSpeciesTrait(speciesId, traitId, payload);
     if (success) {
       onSave([{ fromDate: value[0], toDate: value[1] }]);
       onClose();
-      notification(t("SPECIES.TRAITS.UPDATE.SUCCESS"), NotificationType.Success);
+      notification(t("species:traits.update.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.TRAITS.UPDATE.FAILURE"));
+      notification(t("species:traits.update.failure"));
     }
   };
 

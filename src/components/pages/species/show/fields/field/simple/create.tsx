@@ -1,8 +1,8 @@
 import { Button } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import { SPECIES_FIELD_UPDATE } from "@static/events";
-import SITE_CONFIG from "@configs/site-config.json";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { emit } from "react-gbus";
 
@@ -39,7 +39,7 @@ export default function SpeciesFieldSimpleCreate({
         leftIcon={<AddIcon />}
         onClick={handleOnCreate}
       >
-        {t("ADD")}
+        {t("common:add")}
       </Button>
     </div>
   );

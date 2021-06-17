@@ -6,7 +6,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import AddCustomFieldForm from "./custom-field-form";
@@ -27,7 +27,7 @@ export default function GroupCustomField({ userGroupId, groupCustomField, allCus
       <AccordionItem mb={8} bg="white" border="1px solid var(--gray-300)" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
-            📜 {t("GROUP.CUSTOM_FIELD.TITLE")}
+            📜 {t("group:custom_field.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>

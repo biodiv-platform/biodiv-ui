@@ -1,12 +1,12 @@
 import { SubmitButton } from "@components/form/submit-button";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axUpdateNotifications } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import { UserEditPageComponentProps } from "..";
@@ -37,20 +37,22 @@ export default function NotificationsTab({ user }: UserEditPageComponentProps) {
   const handleOnUpdate = async (payload) => {
     const { success } = await axUpdateNotifications({ id: user.id, ...payload });
     if (success) {
-      notification(t("USER.UPDATED"), NotificationType.Success);
+      notification(t("user:updated"), NotificationType.Success);
     } else {
-      notification(t("USER.UPDATE_ERROR"));
+      notification(t("user:update_error"));
     }
   };
 
   return (
-    <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-      <SwitchField name="sendPushNotification" label={t("USER.SEND_PUSH_NOTIFICATIONS")} />
-      <SwitchField name="sendNotification" label={t("USER.SEND_EMAIL")} />
-      <SwitchField name="identificationMail" label={t("USER.IDENTIFICATION_MAIL")} />
-      <SwitchField name="hideEmial" label={t("USER.HIDE_EMAIL")} />
-      <SwitchField name="sendDigest" label={t("USER.SEND_DIGEST")} />
-      <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
-    </form>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
+        <SwitchField name="sendPushNotification" label={t("user:send_push_notifications")} />
+        <SwitchField name="sendNotification" label={t("user:send_email")} />
+        <SwitchField name="identificationMail" label={t("user:identification_mail")} />
+        <SwitchField name="hideEmial" label={t("user:hide_email")} />
+        <SwitchField name="sendDigest" label={t("user:send_digest")} />
+        <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
+      </form>
+    </FormProvider>
   );
 }

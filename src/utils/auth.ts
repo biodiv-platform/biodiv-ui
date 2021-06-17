@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";

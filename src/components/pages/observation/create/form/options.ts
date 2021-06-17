@@ -1,48 +1,48 @@
 export const DATE_ACCURACY_OPTIONS = [
   {
-    label: "Accurate",
+    label: "form:date_accuracy_options.accurate",
     value: "ACCURATE"
   },
   {
-    label: "Approximate",
+    label: "form:date_accuracy_options.approximate",
     value: "APPROXIMATE"
   },
   {
-    label: "Unknown",
+    label: "form:date_accuracy_options.unknown",
     value: "UNKNOWN"
   }
 ];
 
 export const LOCATION_ACCURACY_OPTIONS = [
   {
-    label: "Accurate",
+    label: "form:location_accuracy_options.accurate",
     value: "ACCURATE"
   },
   {
-    label: "Approximate",
+    label: "form:location_accuracy_options.approximate",
     value: "APPROXIMATE"
   },
   {
-    label: "Local",
+    label: "form:location_accuracy_options.local",
     value: "LOCAL"
   },
   {
-    label: "Region",
+    label: "form:location_accuracy_options.region",
     value: "REGION"
   },
   {
-    label: "Country",
+    label: "form:location_accuracy_options.country",
     value: "COUNTRY"
   }
 ];
 
 export const MY_UPLOADS_SORT = [
   {
-    label: "UPLOADED_ON",
+    label: "uploaded_on",
     value: "dateUploaded"
   },
   {
-    label: "TAKEN_ON",
+    label: "taken_on",
     value: "dateCreated"
   }
 ];

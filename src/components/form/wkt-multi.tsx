@@ -12,7 +12,7 @@ import {
 import WKT, { WKTProps } from "@components/@core/WKT";
 import WKTSearch from "@components/@core/WKT/search";
 import WKTList from "@components/@core/WKT/wkt-list";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
 
@@ -46,8 +46,8 @@ export default function WKTFieldMulti(props: WKTInputProps) {
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
           <Tabs isLazy={true}>
             <TabList>
-              <Tab>{t("DOCUMENT.GEOENTITIES")}</Tab>
-              <Tab>{t("DOCUMENT.WKT")}</Tab>
+              <Tab>{t("form:geoentities")}</Tab>
+              <Tab>{t("form:wkt")}</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -60,7 +60,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
           </Tabs>
           <Box>
             <Box px={4} pb={2}>
-              {t("DOCUMENT.SELECTED_PLACES")}
+              {t("form:selected_places")}
             </Box>
             <WKTList list={value} onDelete={handleOnDelete} {...props} />
           </Box>

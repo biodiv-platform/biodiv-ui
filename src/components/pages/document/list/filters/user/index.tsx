@@ -1,10 +1,10 @@
 import { Spinner } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
-import useTranslation from "@hooks/use-translation";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import { axGetUsersByID, axUserFilterSearch } from "@services/user.service";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import AsyncSelect from "react-select/async";
 
@@ -43,7 +43,7 @@ export default function UserFilterInput({ filterKey }) {
       loadOptions={onQuery}
       menuPortalTarget={isBrowser && document.body}
       onChange={handleOnChange}
-      placeholder={t("FILTERS.USER.SEARCH")}
+      placeholder={t("filters:user.search")}
       styles={selectStyles}
     />
   ) : (

@@ -1,0 +1,18 @@
+{
+  "links": {
+    "notification": "Send Push-Notification"
+  },
+  "pages": {
+    "notification": {
+      "form": {
+        "body": "Body",
+        "error": "Could not send notification",
+        "icon": "Icon",
+        "link": "Link",
+        "success": "Notification sent",
+        "title": "Title"
+      },
+      "heading": "Send Push-Notifications"
+    }
+  }
+}

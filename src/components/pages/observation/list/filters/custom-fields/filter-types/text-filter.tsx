@@ -14,7 +14,7 @@ export default function TextFilter({ field }) {
         filterKey={`custom_${id}.field_content`}
         options={CONTENT_TYPES}
         statKey={`groupCustomField.${name}`}
-        translateKey="FILTERS.CUSTOM_FIELDS."
+        translateKey="filters:custom_fields."
       />
     </div>
   );

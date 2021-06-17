@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
 import { ExtendedMarkerProps } from "naksha-components-react";

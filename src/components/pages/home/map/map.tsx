@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";

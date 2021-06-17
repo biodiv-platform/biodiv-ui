@@ -6,8 +6,8 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import CustomFieldsFilter from "./custom-fields";
@@ -30,7 +30,7 @@ export default function FiltersList() {
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
-            {t("FILTERS.SPECIES_GROUP.TITLE")}
+            {t("filters:species_group.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -44,7 +44,7 @@ export default function FiltersList() {
           <>
             <AccordionButton>
               <Box flex={1} textAlign="left">
-                {t("FILTERS.TAXON_BROWSER.TITLE")}
+                {t("filters:taxon_browser.title")}
               </Box>
               <AccordionIcon />
             </AccordionButton>
@@ -56,7 +56,7 @@ export default function FiltersList() {
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
-            {t("FILTERS.NAME.TITLE")}
+            {t("filters:name.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -68,7 +68,7 @@ export default function FiltersList() {
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
-            {t("FILTERS.LOCATION.TITLE")}
+            {t("filters:location.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -80,7 +80,7 @@ export default function FiltersList() {
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
-            {t("FILTERS.TIME.TITLE")}
+            {t("filters:time.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -92,7 +92,7 @@ export default function FiltersList() {
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
-            {t("FILTERS.DATA_QUALITY.TITLE")}
+            {t("filters:data_quality.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -106,7 +106,7 @@ export default function FiltersList() {
           <>
             <AccordionButton>
               <Box flex={1} textAlign="left">
-                {t("FILTERS.USER.TITLE")}
+                {t("filters:user.title")}
               </Box>
               <AccordionIcon />
             </AccordionButton>
@@ -122,7 +122,7 @@ export default function FiltersList() {
           <>
             <AccordionButton>
               <Box flex={1} textAlign="left">
-                {t("FILTERS.TRAITS.TITLE")}
+                {t("filters:traits.title")}
               </Box>
               <AccordionIcon />
             </AccordionButton>
@@ -139,7 +139,7 @@ export default function FiltersList() {
             <>
               <AccordionButton>
                 <Box flex={1} textAlign="left">
-                  {t("FILTERS.CUSTOM_FIELDS.TITLE")}
+                  {t("filters:custom_fields.title")}
                 </Box>
                 <AccordionIcon />
               </AccordionButton>

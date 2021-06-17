@@ -1,7 +1,7 @@
 import { Link } from "@chakra-ui/react";
 import LoadingSpinner from "@components/pages/common/loading";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -26,7 +26,7 @@ export default function ListView({ no }) {
       </InfiniteScroll>
       {documentData.l.length > 0 && documentData.hasMore && (
         <Link py={4} href={`./list?offset=${no}`}>
-          {t("NEXT")}
+          {t("common:next")}
         </Link>
       )}
     </>

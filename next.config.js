@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const withPWA = require("next-pwa");
-
 const withTM = require("next-transpile-modules")([
   "d3-array",
   "d3-axis",
@@ -16,10 +14,6 @@ const withTM = require("next-transpile-modules")([
   "internmap"
 ]);
 
-module.exports = withTM(
-  withPWA({
-    future: {
-      webpack5: true
-    }
-  })
-);
+const nextTranslate = require("next-translate");
+
+module.exports = nextTranslate(withTM({}));

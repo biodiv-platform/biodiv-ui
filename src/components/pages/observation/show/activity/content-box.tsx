@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
-import useTranslation from "@hooks/use-translation";
 import { ShowActivityIbp } from "@interfaces/activity";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import LinkTag from "../../common/link-tag";
@@ -68,7 +68,7 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
     case ACTIVITY_TYPE.FLAG_REMOVED:
       const desc = activity?.activityIbp?.activityDescription;
       const [flagType, flagInfo]: any = desc?.split(/:(.+)/);
-      const html = `${t(`ACTIONS.FLAG.FLAGS.${flagType}`)}: ${flagInfo}`;
+      const html = `${t(`common:actions.flag.flags.${flagType.toLowerCase()}`)}: ${flagInfo}`;
       return <CommentRender html={html} />;
 
     case ACTIVITY_TYPE.RATED_MEDIA_RESOURCE:

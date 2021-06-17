@@ -1,7 +1,7 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { axUpdatePage } from "@services/pages.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import PageForm from "../common/form";
@@ -29,17 +29,17 @@ export default function PageEditForm({ page }: PageEditFormProps): JSX.Element {
       ...payload
     });
     if (success) {
-      notification(t("PAGE.UPDATE.SUCCESS"), NotificationType.Success);
+      notification(t("page:update.success"), NotificationType.Success);
       router.push(`/page/show/${page.id}`, true);
     } else {
-      notification(t("PAGE.UPDATE.FAILURE"));
+      notification(t("page:update.failure"));
     }
   };
 
   return (
     <PageForm
       defaultValues={defaultValues}
-      submitLabel={t("PAGE.UPDATE.TITLE")}
+      submitLabel={t("page:update.title")}
       onSubmit={handleOnPageEdit}
       hideParentId={true}
     />

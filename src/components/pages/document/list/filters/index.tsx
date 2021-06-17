@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import ClearFilters from "./clear-filter";
@@ -48,7 +48,7 @@ export default function Filters() {
   return isDesktopFilter ? (
     <Box as={FilterWrapper} gridColumn={{ lg: "1/4" }}>
       <Stack m={4} isInline={true} align="center" justify="space-between">
-        <Heading size="md">{t("FILTERS.TITLE")}</Heading>
+        <Heading size="md">{t("filters:title")}</Heading>
         <ClearFilters />
       </Stack>
       <FiltersList />
@@ -56,13 +56,13 @@ export default function Filters() {
   ) : (
     <FilterWrapper>
       <Button w="full" className="toggle-button" onClick={onToggle}>
-        {t("FILTERS.TOGGLE")}
+        {t("filters:toggle")}
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <BoxHeading>{t("FILTERS.TITLE")}</BoxHeading>
+            <BoxHeading>{t("filters:title")}</BoxHeading>
             <ClearFilters />
             <DrawerBody p={0}>{isOpen && <FiltersList />}</DrawerBody>
           </DrawerContent>

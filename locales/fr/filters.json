@@ -1,0 +1,136 @@
+{
+  "clear": "Clear {{filterCount}} Filtre (s)",
+  "custom_fields": {
+    "has_content": "A du contenu",
+    "no_content": "Pas de contenu",
+    "no_custom_field": "Aucun champ personnalisé trouvé (s) trouvé (s)",
+    "title": "Les champs personnalisés"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "Marqué",
+      "title": "Drapeau",
+      "unflagged": "Incomparable"
+    },
+    "identification": {
+      "identified": "Identifié",
+      "title": "identification",
+      "unidentified": "Non identifié"
+    },
+    "taxon_id": {
+      "has_taxon": "A un identifiant de taxon",
+      "no_taxon": "Aucun identifiant de taxon",
+      "title": "ID de taxon"
+    },
+    "title": "Qualité des données",
+    "validation": {
+      "not_validated": "Pas validé",
+      "title": "validation",
+      "validated": "Validé"
+    }
+  },
+  "document_title": "Titre",
+  "item_type": {
+    "title": "Type d'élément"
+  },
+  "location": {
+    "district": "Quartier",
+    "map": {
+      "title": "Carte"
+    },
+    "protected_area": {
+      "title": "Zones protégées"
+    },
+    "state": {
+      "title": "État"
+    },
+    "tehsil": "tehsil",
+    "title": "Emplacement"
+  },
+  "media": {
+    "audio": "l'audio",
+    "image": "image",
+    "no_media": "Non moyen",
+    "title": "Type de support",
+    "video": "Vidéo"
+  },
+  "name": {
+    "reco_name": {
+      "title": "Nom"
+    },
+    "status": {
+      "accepted": "Accepté",
+      "synonym": "Synonyme",
+      "title": "Statut"
+    },
+    "title": "Nom scientifique"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "Tous les noms"
+    },
+    "taxon_names": {
+      "title": "Noms des taxons"
+    },
+    "taxon_rank": {
+      "title": "Rang de taxon"
+    },
+    "taxon_status": {
+      "title": "Statut de taxon"
+    },
+    "title": "Nom scientifique"
+  },
+  "species_group": {
+    "all": "Tout",
+    "amphibians": "Amphibiens",
+    "arthropods": "Arthropodes",
+    "birds": "Des oiseaux",
+    "fish": "Poisson",
+    "fungi": "Champignons",
+    "mammals": "Mammifères",
+    "molluscs": "Mollusques",
+    "others": "Autres",
+    "plants": "Les plantes",
+    "reptiles": "Reptiles",
+    "title": "Groupe d'espèces"
+  },
+  "taxon_browser": {
+    "search": "Recherche dans l'arbre",
+    "search_results": "Affichage {{currentIndex}} de {{resultsCount}}",
+    "title": "Navigateur de taxon"
+  },
+  "time": {
+    "created_on": "date créée",
+    "max_date": "maximumDate",
+    "min_date": "Date minimale",
+    "month": {
+      "apr": "avril",
+      "aug": "août",
+      "dec": "décembre",
+      "feb": "février",
+      "jan": "janvier",
+      "jul": "juillet",
+      "jun": "juin",
+      "mar": "Mars",
+      "may": "Mai",
+      "nov": "novembre",
+      "oct": "octobre",
+      "sep": "septembre",
+      "title": "Mois observé"
+    },
+    "observed_on": "Date observée",
+    "title": "Temps"
+  },
+  "title": "Filtres",
+  "toggle": "Filtres à bascule",
+  "traits": {
+    "title": "traits"
+  },
+  "user": {
+    "search": "Recherche utilisateur",
+    "title": "Utilisatrice"
+  },
+  "usergroup": {
+    "title": "Groupes d'utilisateurs"
+  }
+}

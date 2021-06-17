@@ -1,9 +1,9 @@
 import { Button, Collapse, useBreakpointValue, useDisclosure } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
 import LockIcon from "@icons/lock";
 import MenuIcon from "@icons/menu";
 import UnlockIcon from "@icons/unlock";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import SidebarEditing from "./sidebar-editing";
@@ -64,7 +64,7 @@ export default function PagesSidebar() {
     <TreeContainer className="fadeInUp">
       {!isDesktop && (
         <Button colorScheme="blue" w="full" mb={4} onClick={onToggle} leftIcon={<MenuIcon />}>
-          {t("PAGE.SIDEBAR.TOGGLE")}
+          {t("page:sidebar.toggle")}
         </Button>
       )}
       <Collapse in={isDesktop || isOpen} unmountOnExit={true}>
@@ -77,7 +77,7 @@ export default function PagesSidebar() {
             rightIcon={p.isEditing ? <UnlockIcon /> : <LockIcon />}
             onClick={p.toggleEditing}
           >
-            {t("PAGE.SIDEBAR.REORDER")}
+            {t("page:sidebar.reorder")}
           </Button>
         )}
         {p.isEditing ? <SidebarEditing /> : <SidebarNormal />}

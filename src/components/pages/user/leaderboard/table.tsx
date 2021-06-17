@@ -1,5 +1,5 @@
-import { Box } from "@chakra-ui/react";
 import { ArrowDownIcon } from "@chakra-ui/icons";
+import { Box } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
 import React, { useState } from "react";

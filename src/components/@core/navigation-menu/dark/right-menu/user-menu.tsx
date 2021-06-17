@@ -1,9 +1,9 @@
-import { Avatar, Link, Menu, MenuButton } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
-import SITE_CONFIG from "@configs/site-config.json";
+import { Avatar, Link, Menu, MenuButton } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import SubMenu from "../../common/sub-menu";
@@ -15,22 +15,22 @@ export default function UserMenu() {
 
   const userMenuRows = [
     {
-      name: "MY_PROFILE",
+      name: "my_profile",
       to: `/user/show/${user?.id}`
     },
     {
       active: SITE_CONFIG.LEADERBOARD.ACTIVE,
-      name: "LEADERBOARD",
+      name: "leaderboard",
       to: `/user/leaderboard`
     },
     {
       active: SITE_CONFIG.OBSERVATION.ACTIVE,
-      name: "MY_OBSERVATIONS",
+      name: "my_observations",
       to: `/observation/list`,
       params: { user: user?.id }
     },
     {
-      name: "LOGOUT",
+      name: "logout",
       to: `/logout`
     }
   ];
@@ -43,7 +43,7 @@ export default function UserMenu() {
             as={Link}
             role="button"
             tabIndex={0}
-            aria-label={t("HEADER.MENU_PRIMARY.SETTINGS.TITLE")}
+            aria-label={t("header:menu_primary.settings.title")}
           >
             <Avatar
               size="xs"
@@ -53,7 +53,7 @@ export default function UserMenu() {
             />
             {user?.name} <ChevronDownIcon />
           </MenuButton>
-          <SubMenu onClose={onClose} rows={userMenuRows} prefix="HEADER.MENU_PRIMARY.SETTINGS." />
+          <SubMenu onClose={onClose} rows={userMenuRows} prefix="header:menu_primary.settings." />
         </>
       )}
     </Menu>

@@ -1,5 +1,6 @@
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
+
 import GalleryItemRow from "./gallery-items-row";
 
 const GalleryListItems = SortableContainer(({ galleryList, removeGalleryItem }) => (

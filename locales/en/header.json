@@ -1,0 +1,75 @@
+{
+  "logged_user_only": "Please login to join the group",
+  "member_only": "Please join the group to upload observations",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "Add data package",
+      "add_dataset": "Add Dataset",
+      "add_document": "Add Document",
+      "add_fact": "Add Fact",
+      "add_list": "Add List",
+      "add_observation": "Add Observation",
+      "add_trait_or_value": "Add Trait/Value",
+      "contribute_to_map": "Contribute to Map",
+      "contribute_to_species": "Contribute to Species",
+      "title": "Contribute"
+    },
+    "groups": {
+      "see_all": "See All",
+      "title": "Groups"
+    },
+    "settings": {
+      "leaderboard": "My Leaderboard Rank",
+      "logout": "Logout",
+      "my_observations": "My Observations",
+      "my_profile": "My Profile",
+      "title": "Settings"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "Document Datatables",
+      "documents": "Documents",
+      "title": "Documents"
+    },
+    "landscapes": {
+      "title": "Protected Areas"
+    },
+    "maps": {
+      "title": "Maps"
+    },
+    "more": {
+      "about_us": "About Us",
+      "activity": "Activity",
+      "dashboard": "Dashboard",
+      "datasets": "Datasets",
+      "discussions": "Discussions",
+      "leaderboard": "Leaderboard",
+      "participants": "Participants",
+      "title": "More"
+    },
+    "observation": {
+      "checklists": "List",
+      "datasets": "Datasets",
+      "observation_datatables": "Observation Datatables",
+      "observation_traits": "Observation Traits",
+      "observations": "Observations",
+      "title": "Observation"
+    },
+    "pages": {
+      "empty": "No Pages",
+      "title": "Pages"
+    },
+    "species": {
+      "species_datatables": "Species Datatables",
+      "species_pages": "Species Pages",
+      "species_traits": "Species Traits",
+      "taxon_namelist": "Taxon Namelist",
+      "title": "Species"
+    }
+  },
+  "search": "Search",
+  "sign_in": "Login",
+  "group_edit": "Edit Group",
+  "toggle_menu": "toggle menu"
+}

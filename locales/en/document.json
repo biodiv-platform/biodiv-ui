@@ -1,0 +1,89 @@
+{
+  "basic_information": "Basic Information",
+  "bib": {
+    "abstract": "Description",
+    "address": "Address",
+    "author": "Author",
+    "booktitle": "Book Title",
+    "chapter": "Chapter",
+    "doi": "DOI",
+    "edition": "Edition",
+    "editor": "Editor",
+    "extra": "Extra",
+    "file": "File",
+    "howpublished": "How Published",
+    "institution": "Institution",
+    "isbn": "ISBN",
+    "journal": "Journal",
+    "language": "Language",
+    "month": "Month",
+    "note": "Note",
+    "number": "Number",
+    "organization": "Organization",
+    "pages": "Pages",
+    "publisher": "Publisher",
+    "schema": {
+      "error": "Unable to retrieve Bibtex schema"
+    },
+    "school": "School",
+    "series": "Series",
+    "title": "Title",
+    "type": "Type",
+    "url": "URL",
+    "volume": "Volume",
+    "year": "Year"
+  },
+  "contribution": "Contribution",
+  "create": {
+    "error": "Unable to create document",
+    "success": "Document created successfully",
+    "title": "Create Document"
+  },
+  "created_on": "Created on",
+  "description": "Description",
+  "documents_found": "Documents Found",
+  "doi": "DOI",
+  "download": {
+    "citation": "Citation",
+    "pdf": "PDF"
+  },
+  "edit": {
+    "error": "There was an error updating this document",
+    "success": "Document Updated Successfully",
+    "title": "Edit Document"
+  },
+  "edit_document": "Edit Document",
+  "follow": "Follow Document",
+  "import_bibtex": "Import from BibTex",
+  "issue": "Issue",
+  "list": {
+    "title": "Documents"
+  },
+  "metadata": "Metadata",
+  "no_geodata": "No Geographical Data Available",
+  "no_usergroup": "No Usergroups  found for this document",
+  "pages": "Pages",
+  "publication_date": "Publication Date",
+  "publication_language": "Publication Language",
+  "remove": {
+    "description": "Are you sure? You can't undo this action afterwards.",
+    "success": "Document deleted successfully",
+    "title": "Delete document"
+  },
+  "share": "Share this document",
+  "tags": {
+    "not_found": "No Tags(s) found",
+    "title": "Tags"
+  },
+  "type": "Type",
+  "unfollow": "Unfollow Document",
+  "unknown": "Untitled Document",
+  "update_error": "Unable to update",
+  "update_success": "Updated Successfully",
+  "updated_on": "Date Updated",
+  "upload": {
+    "my_uploads": "Draft Media",
+    "selected": "Selected Document",
+    "url": "External URL"
+  }
+}

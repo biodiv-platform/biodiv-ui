@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { UserGroupIbpExtended } from "@interfaces/custom";
 
 import packageJson from "../../package.json";

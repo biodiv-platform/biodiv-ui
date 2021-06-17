@@ -1,15 +1,15 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axBulkObservationData } from "@services/observation.service";
 import { DEFAULT_BASIS_OF_DATA, DEFAULT_BASIS_OF_RECORD } from "@static/datatable";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -134,10 +134,10 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
     const { success, data } = await axBulkObservationData(payload);
 
     if (success) {
-      notification(t("DATATABLE.NOTIFICATIONS.SUCCESS"), NotificationType.Success);
+      notification(t("datatable:notifications.success"), NotificationType.Success);
       router.push(`/datatable/show/${data}`, true);
     } else {
-      notification(t("DATATABLE.NOTIFICATIONS.ERROR"));
+      notification(t("datatable:notifications.error"));
     }
   };
 
@@ -157,8 +157,8 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         <LocationPicker />
         <PartyContributorsForm />
         <Others />
-        <CheckboxField name="terms" label={t("OBSERVATION.TERMS")} />
-        <SubmitButton leftIcon={<CheckIcon />}>{t("OBSERVATION.ADD_OBSERVATION")}</SubmitButton>
+        <CheckboxField name="terms" label={t("form:terms")} />
+        <SubmitButton leftIcon={<CheckIcon />}>{t("common:add")}</SubmitButton>
       </form>
     </FormProvider>
   );

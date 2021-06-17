@@ -17,7 +17,7 @@ export default function UserGroupFilter() {
       showSearch={true}
       skipOptionsTranslation={true}
       statKey="groupUserGroupName"
-      translateKey="FILTERS.USERGROUP."
+      translateKey="filters:usergroup."
     />
   );
 }

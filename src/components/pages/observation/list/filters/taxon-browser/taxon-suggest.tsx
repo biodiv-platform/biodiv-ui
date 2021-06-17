@@ -7,8 +7,8 @@ import {
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import styled from "@emotion/styled";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axGetTaxonList, doTaxonSearch } from "@services/api.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -81,7 +81,7 @@ export default function TaxonSuggest({ setParentState, parentState }) {
             name="query"
             onQuery={onQuery}
             optionComponent={ScientificNameOption}
-            placeholder={t("FILTERS.TAXON_BROWSER.SEARCH")}
+            placeholder={t("filters:taxon_browser.search")}
             resetOnSubmit={false}
           />
           <IconButton
@@ -90,7 +90,7 @@ export default function TaxonSuggest({ setParentState, parentState }) {
             isLoading={isLoading}
             type="submit"
             icon={<SearchIcon />}
-            aria-label={t("FILTERS.TAXON_BROWSER.SEARCH")}
+            aria-label={t("filters:taxon_browser.search")}
           />
         </SearchForm>
       </FormProvider>

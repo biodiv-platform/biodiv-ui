@@ -3,8 +3,9 @@ import { SelectInputField } from "@components/form/select";
 import WKTFieldMulti from "@components/form/wkt-multi";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { LOCATION_ACCURACY_OPTIONS } from "@components/pages/observation/create/form/options";
-import useTranslation from "@hooks/use-translation";
-import React from "react";
+import { translateOptions } from "@utils/i18n";
+import useTranslation from "next-translate/useTranslation";
+import React, { useMemo } from "react";
 
 export default function PartyContributorsForm({
   nameTitle = "placename",
@@ -12,25 +13,29 @@ export default function PartyContributorsForm({
   centroid = "centroid"
 }) {
   const { t } = useTranslation();
+  const translatedLocationOptions = useMemo(
+    () => translateOptions(t, LOCATION_ACCURACY_OPTIONS),
+    []
+  );
 
   return (
-    <ToggleablePanel icon="🌏" title={t("DATATABLE.GEOGRAPHICAL_COVERAGE")}>
+    <ToggleablePanel icon="🌏" title={t("datatable:geographical_coverage")}>
       <Box p={4} pb={0}>
         <SelectInputField
           isRequired={true}
           name="locationScale"
-          label={t("DATATABLE.LOCATION_SCALE")}
-          options={LOCATION_ACCURACY_OPTIONS}
+          label={t("datatable:location_scale")}
+          options={translatedLocationOptions}
         />
         <WKTFieldMulti
           name="topologyData"
           isMultiple={false}
           centroid={centroid}
-          label={t("DOCUMENT.COVERAGE.SPATIAL")}
+          label={t("form:coverage.spatial")}
           nameTitle={nameTitle}
-          labelTitle={t("DOCUMENT.COVERAGE.PLACE")}
+          labelTitle={t("form:coverage.place")}
           nameTopology={nameTopology}
-          labelTopology={t("DOCUMENT.COVERAGE.WKT")}
+          labelTopology={t("form:coverage.wkt")}
         />
       </Box>
     </ToggleablePanel>

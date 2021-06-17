@@ -2,7 +2,6 @@ import { Avatar, AvatarGroup, Box, Button, Stack, Text } from "@chakra-ui/react"
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import LockIcon from "@icons/lock";
@@ -16,6 +15,7 @@ import {
 } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import { getUserImage } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 enum RecoAction {
@@ -134,7 +134,7 @@ export default function RecoSuggestion({
                       recoVoteAction(reco, canAccept ? RecoAction.Remove : RecoAction.Agree)
                     }
                   >
-                    {t(canAccept ? "OBSERVATION.ID.REMOVE" : "OBSERVATION.ID.AGREE")}
+                    {t(canAccept ? "observation:id.remove" : "observation:id.agree")}
                   </Button>
                 )}
 
@@ -152,7 +152,7 @@ export default function RecoSuggestion({
                         recoVoteAction(reco, isLocked ? RecoAction.Unlock : RecoAction.Validate)
                       }
                     >
-                      {t(isLocked ? "OBSERVATION.ID.UNLOCK" : "OBSERVATION.ID.VALIDATE")}
+                      {t(isLocked ? "observation:id.unlock" : "observation:id.validate")}
                     </Button>
                   )}
               </Stack>

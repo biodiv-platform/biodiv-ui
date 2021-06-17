@@ -21,6 +21,7 @@ interface HorizontalBarChartProps {
   meta: {
     titleKey: string;
     countKey: string;
+    countTitle?: string;
     barColor?: string;
     hideXAxis?: boolean;
   };
@@ -39,7 +40,7 @@ export default function HorizontalBarChart({
   displayCountKey = true,
 
   data,
-  meta: { titleKey, countKey, barColor = "#3182CE", hideXAxis }
+  meta: { titleKey, countKey, countTitle, barColor = "#3182CE", hideXAxis }
 }: HorizontalBarChartProps) {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
@@ -97,7 +98,7 @@ export default function HorizontalBarChart({
       .attr("font-size", 10)
       .attr("y", (d) => y(d[titleKey]) + y.bandwidth() / 2 + 4)
       .attr("x", (d) => x(d[countKey]) + 3 + leftOffset)
-      .text((d) => (displayCountKey ? `${d[countKey]} ${countKey}` : d[countKey]));
+      .text((d) => (displayCountKey ? `${d[countKey]} ${countTitle || countKey}` : d[countKey]));
   }, [containerRef, ro?.width, h, data]);
 
   return (

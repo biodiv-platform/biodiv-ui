@@ -1,10 +1,10 @@
 import { Link } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import ObservationLoading from "@components/pages/common/loading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import ObservationLoading from "@components/pages/common/loading";
 import Container from "./container";
 
 export default function ListView({ no }) {
@@ -26,7 +26,7 @@ export default function ListView({ no }) {
       </InfiniteScroll>
       {observationData?.l && observationData.l.length > 0 && observationData.hasMore && (
         <Link py={4} href={`./list?offset=${no}`}>
-          {t("NEXT")}
+          {t("common:next")}
         </Link>
       )}
     </>

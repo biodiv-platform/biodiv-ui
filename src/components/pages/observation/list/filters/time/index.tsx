@@ -9,19 +9,19 @@ export default function TimeFilter() {
   return (
     <SubAccordion>
       <CheckboxFilterPanel
-        translateKey="FILTERS.TIME.MONTH."
+        translateKey="filters:time.month."
         filterKey="month"
         options={MONTHS}
         statKey="groupMonth"
       />
 
       <DateRangeFilter
-        translateKey="FILTERS.TIME.OBSERVED_ON"
+        translateKey="filters:time.observed_on"
         filterKey={{ min: "minDate", max: "maxDate" }}
       />
 
       <DateRangeFilter
-        translateKey="FILTERS.TIME.CREATED_ON"
+        translateKey="filters:time.created_on"
         filterKey={{ min: "createdOnMinDate", max: "createdOnMaxDate" }}
       />
     </SubAccordion>

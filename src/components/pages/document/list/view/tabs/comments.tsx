@@ -15,7 +15,7 @@ export default function CommentsTab({ tabIndex, documentId, tabLength }) {
         <ActivityList
           resourceId={documentId}
           resourceType={RESOURCE_TYPE.DOCUMENT}
-          title="OBSERVATION.COMMENTS.TITLE"
+          title="form:comments.title"
         />
       </div>
       <Box p={4}>

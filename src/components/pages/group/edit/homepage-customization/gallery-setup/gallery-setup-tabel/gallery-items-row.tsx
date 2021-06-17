@@ -1,6 +1,6 @@
+import { DeleteIcon, DragHandleIcon, LinkIcon } from "@chakra-ui/icons";
 import { Box, Button, Link } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
-import { DeleteIcon, LinkIcon, DragHandleIcon } from "@chakra-ui/icons";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 
@@ -27,7 +27,7 @@ const GalleryItemsRow = SortableElement(({ itemDetails, onDelete }) => {
           leftIcon={<DeleteIcon />}
           ml={2}
         >
-          {t("DELETE")}
+          {t("common:delete")}
         </Button>
       </td>
     </tr>

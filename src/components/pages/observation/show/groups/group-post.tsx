@@ -1,5 +1,4 @@
 import { Box, Button, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
@@ -7,6 +6,7 @@ import { waitForAuth } from "@utils/auth";
 import { getGroupLink } from "@utils/basic";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 
 import CheckBoxItems from "../../create/form/user-groups/checkbox";
@@ -42,7 +42,7 @@ export default function GroupPost({
     const { success, data } = await saveUserGroupsFunc(resourceId, groupsList);
     if (success) {
       setFinalGroups(data || []);
-      notification(t("OBSERVATION.GROUPS_UPDATED"), NotificationType.Success);
+      notification(t("observation:groups_updated"), NotificationType.Success);
       editButtonRef.current.focus();
       onClose();
     }
@@ -68,7 +68,7 @@ export default function GroupPost({
         ref={editButtonRef}
         onClick={onEditClick}
       >
-        {t("EDIT")}
+        {t("common:edit")}
       </Button>
 
       <SimpleGrid columns={columns || defaultGridColumns} spacing={4} hidden={isOpen}>
@@ -104,10 +104,10 @@ export default function GroupPost({
             type="submit"
             onClick={handleOnSave}
           >
-            {t("SAVE")}
+            {t("common:save")}
           </Button>
           <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={handleOnCancel}>
-            {t("CLOSE")}
+            {t("common:close")}
           </Button>
         </Box>
       </Collapse>

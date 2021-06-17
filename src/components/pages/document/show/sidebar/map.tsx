@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const NakshaMapboxView: any = dynamic(
@@ -15,7 +15,7 @@ const NakshaMapboxView: any = dynamic(
 
 const coverageToGeoJson = (coverage) => ({
   type: "FeatureCollection",
-  features: coverage.map(({ topology }) => ({
+  features: coverage?.map(({ topology }) => ({
     type: "Feature",
     properties: {},
     geometry: topology
@@ -38,14 +38,14 @@ export default function DocumentSidebarMap({ documentCoverages }) {
       className="gray-box fadeInUp delay-5"
       mb={4}
     >
-      {documentCoverages.length ? (
+      {documentCoverages?.length ? (
         <NakshaMapboxView
           data={geojson}
           defaultViewPort={defaultViewPort}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         />
       ) : (
-        t("DOCUMENT.NO_GEODATA")
+        t("document:no_geodata")
       )}
     </Box>
   );

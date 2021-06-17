@@ -1,10 +1,10 @@
 import { AspectRatio, Avatar, Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
-import useTranslation from "@hooks/use-translation";
 import { Role } from "@interfaces/custom";
 import { adminOrAuthor, hasAccess } from "@utils/auth";
 import { getUserImage } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import { UserProfileProps } from "..";
@@ -40,7 +40,7 @@ export default function UserInfoSidebar({ user }: UserProfileProps) {
       </Flex>
       <LocalLink href={`/user/edit/${user.id}`}>
         <Button as="a" w="full" colorScheme="blue" mb={4} hidden={!canEdit}>
-          {t("USER.EDIT_PROFILE")}
+          {t("user:edit_profile")}
         </Button>
       </LocalLink>
 

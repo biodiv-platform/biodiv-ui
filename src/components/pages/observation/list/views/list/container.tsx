@@ -2,10 +2,10 @@ import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/r
 import Tooltip from "@components/@core/tooltip";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
 import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/observation-list";
 import { Mq } from "mq-styled-components";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import ImageBoxComponent from "./image";

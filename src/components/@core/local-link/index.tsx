@@ -1,4 +1,3 @@
-import i18nConfig from "@configs/i18n/config";
 import useGlobalState from "@hooks/use-global-state";
 import NextLink, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
@@ -27,9 +26,7 @@ interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
  * @param {*} [currentGroup]
  * @returns {string}
  */
-const getLocalPath = (href, router, params = {}, prefixGroup?, currentGroup?) => {
-  const lang = router.query.lang || i18nConfig.defaultLocale;
-
+const getLocalPath = (href, params = {}, prefixGroup?, currentGroup?) => {
   const groupPrefixPath =
     currentGroup && prefixGroup && !href.startsWith("http") ? currentGroup + href : href;
 
@@ -37,7 +34,9 @@ const getLocalPath = (href, router, params = {}, prefixGroup?, currentGroup?) =>
     ? groupPrefixPath.replace(/^.*\/\/[^\/]+/, "")
     : groupPrefixPath;
 
-  return cleanPath + "?" + stringify({ ...parse(href.split("?")[1]), ...params, lang });
+  const newParams = stringify({ ...parse(href.split("?")[1]), ...params });
+
+  return cleanPath + (newParams ? `?${newParams}` : "");
 };
 
 export function useLocalRouter() {
@@ -45,12 +44,12 @@ export function useLocalRouter() {
   const { currentGroup } = useGlobalState();
 
   function push(href, prefixGroup = false, params = {}, useWindow = false) {
-    const to = getLocalPath(href, router, params, prefixGroup, currentGroup?.webAddress);
+    const to = getLocalPath(href, params, prefixGroup, currentGroup?.webAddress);
     to.startsWith("http") || useWindow ? window.location.assign(to) : router.push(to);
   }
 
   function link(href, prefixGroup = false, params = {}) {
-    return getLocalPath(href, router, params, prefixGroup, currentGroup?.webAddress);
+    return getLocalPath(href, params, prefixGroup, currentGroup?.webAddress);
   }
 
   return { ...router, push, link };
@@ -62,8 +61,7 @@ function LocalLink({ prefixGroup, params, ...props }: Props) {
   }
 
   const { currentGroup } = useGlobalState();
-  const router = useRouter();
-  const localPath = getLocalPath(props.href, router, params, prefixGroup, currentGroup?.webAddress);
+  const localPath = getLocalPath(props.href, params, prefixGroup, currentGroup?.webAddress);
 
   return localPath.startsWith("http") ? (
     cloneElement(props.children, { ...props?.children?.props, href: localPath })

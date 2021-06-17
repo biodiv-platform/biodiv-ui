@@ -1,9 +1,9 @@
 import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
 import { actionTabs } from "@static/documnet-list";
 import { Mq } from "mq-styled-components";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import CommentsTab from "./tabs/comments";

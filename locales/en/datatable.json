@@ -1,0 +1,30 @@
+{
+  "attribution": "Attribution",
+  "basis_of_data": "Basis of Data",
+  "basis_of_record": "Basis of Record",
+  "contributor": "contributor",
+  "create_datatable": "Create DataTable",
+  "field_mapping_table": "Field Mapping Table",
+  "files_upload": "Files Uploads",
+  "geographical_coverage": "Geographic Coverage",
+  "is_verified": "Observation Verified",
+  "location_accuracy": "Location Accuracy",
+  "location_scale": "Location Scale",
+  "media_uploader": "Media Uploader",
+  "methods": "Methods",
+  "notifications": {
+    "error": "Unable to create datatable",
+    "sheet_upload_error": "Unable to Upload sheet",
+    "sheet_upload_success": "Successfully Uploaded sheet",
+    "success": "Datatable created successfully"
+  },
+  "others": "Others",
+  "party": "Party",
+  "project": "Project",
+  "sheet_uploader": "Spreadsheet Uploader",
+  "show_page": "Datatable Details",
+  "taxonomy": "Taxonomic Coverage",
+  "temporal": "Temporal Coverage",
+  "title": "General Metadata",
+  "upload_again": "Upload Again"
+}

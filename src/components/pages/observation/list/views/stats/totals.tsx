@@ -1,5 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import TableTotals from "./table-totals";
@@ -30,22 +30,22 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
   return (
     <SimpleGrid columns={{ md: 4 }} spacing={4} mb={4}>
       <TableTotals
-        title={t("LIST.STATS_BAR.TOTAL_OBSERVATIONS")}
+        title={t("observation:list.stats_bar.total_observations")}
         count={totals["totalObservations"]}
         isLoading={isLoading}
       />
       <TableTotals
-        title={t("LIST.STATS_BAR.TOTAL_TAXA")}
+        title={t("observation:list.stats_bar.total_taxa")}
         count={totals["totalTaxa"]}
         isLoading={isLoading}
       />
       <TableTotals
-        title={t("LIST.STATS_BAR.TOTAL_UPLOADERS")}
+        title={t("observation:list.stats_bar.total_uploaders")}
         count={totals["totalUploaders"]}
         isLoading={isLoading}
       />
       <TableTotals
-        title={t("LIST.STATS_BAR.TOTAL_IDENTIFIERS")}
+        title={t("observation:list.stats_bar.total_identifiers")}
         count={totals["totalIdentifiers"]}
         isLoading={isLoading}
       />

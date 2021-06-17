@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { SpeciesCreateCommonTableRows } from "../common-table-rows";
@@ -27,7 +27,7 @@ export default function SpeciesTaxonMatched() {
           rightIcon={<ArrowForwardIcon />}
           onClick={() => setSelectedTaxon(original.taxonomyDefinition)}
         >
-          {t("SPECIES.CREATE.FORM.USE_TAXON")}
+          {t("species:create.form.use_taxon")}
         </Button>
       )
     }

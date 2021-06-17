@@ -4,9 +4,9 @@ import { PageShowMinimal } from "@interfaces/pages";
 import { preProcessContent } from "@utils/pages.util";
 import React from "react";
 
-import PageHeader from "./header";
 import PagesSidebar from "../common/sidebar";
 import { UsePagesSidebarProvider } from "../common/sidebar/use-pages-sidebar";
+import PageHeader from "./header";
 
 interface PageShowPageComponentProps {
   page: PageShowMinimal;

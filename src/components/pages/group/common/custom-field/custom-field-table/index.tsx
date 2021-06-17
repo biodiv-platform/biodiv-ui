@@ -1,10 +1,10 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import { axRemoveCustomField, axReorderCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import arrayMove from "array-move";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import CustomFieldListItems from "./custom-field-items";
@@ -30,9 +30,9 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
 
     const { success } = await axReorderCustomField(userGroupId, payload);
     if (success) {
-      notification(t("GROUP.CUSTOM_FIELD.REORDER.SUCCESS"), NotificationType.Success);
+      notification(t("group:custom_field.reorder.success"), NotificationType.Success);
     } else {
-      notification(t("GROUP.CUSTOM_FIELD.REORDER.FAILURE"));
+      notification(t("group:custom_field.reorder.failure"));
     }
     setCanReorder(false);
   };
@@ -41,9 +41,9 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
     const { success } = await axRemoveCustomField(userGroupId, index);
     if (success) {
       setCustomFields(customFields.filter(({ customFields: { id } }) => id !== index));
-      notification(t("GROUP.CUSTOM_FIELD.REMOVE.SUCCESS"), NotificationType.Success);
+      notification(t("group:custom_field.remove.success"), NotificationType.Success);
     } else {
-      notification(t("GROUP.CUSTOM_FIELD.REMOVE.FAILURE"), NotificationType.Error);
+      notification(t("group:custom_field.remove.failure"), NotificationType.Error);
     }
   };
 
@@ -52,12 +52,12 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
       <table style={{ minWidth: "750px" }} className="table table-bordered">
         <thead>
           <tr>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.NAME")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.DATA_TYPE")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.INPUT_TYPE")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.MANDATORY")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.PARTICIPATION")}</th>
-            <th>{t("GROUP.CUSTOM_FIELD.TABLE.ACTIONS")}</th>
+            <th>{t("group:custom_field.table.name")}</th>
+            <th>{t("group:custom_field.table.data_type")}</th>
+            <th>{t("group:custom_field.table.input_type")}</th>
+            <th>{t("group:custom_field.table.mandatory")}</th>
+            <th>{t("group:custom_field.table.participation")}</th>
+            <th>{t("group:custom_field.table.actions")}</th>
           </tr>
         </thead>
         <CustomFieldListItems
@@ -69,7 +69,7 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
       </table>
       <ButtonGroup spacing={4} mt={4}>
         <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
-          {t("GROUP.CUSTOM_FIELD.CREATE")}
+          {t("group:custom_field.create")}
         </Button>
         <Button
           colorScheme="blue"
@@ -78,7 +78,7 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
           hidden={!canReorder}
           onClick={handleReorderCustomField}
         >
-          {t("GROUP.CUSTOM_FIELD.SAVE_ORDER")}
+          {t("group:custom_field.save_order")}
         </Button>
       </ButtonGroup>
     </Box>

@@ -1,11 +1,11 @@
 import { Box, Flex, Link, Stack } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import FacebookIcon from "@icons/facebook";
 import GithubIcon from "@icons/github";
 import MailIcon from "@icons/mail";
 import TwitterIcon from "@icons/twitter";
 import { APP_VERSION } from "@static/constants";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const ICONS = {
@@ -23,7 +23,7 @@ export default function Footer() {
       <Flex textAlign="center" direction="column" align="center" className="container">
         {SITE_CONFIG.FOOTER.CREDITS && (
           <div>
-            {t("FOOTER.POWERED_BY")}
+            {t("common:footer.powered_by")}
             <Link href="https://github.com/strandls?q=biodiv">
               Biodiversity Informatics Platform - v{APP_VERSION}
             </Link>
@@ -31,7 +31,7 @@ export default function Footer() {
         )}
         {SITE_CONFIG.FOOTER.PARTNER && (
           <div>
-            {t("FOOTER.TECHNOLOGY_PARTNER")}
+            {t("common:footer.technology_partner")}
             <Link href="https://strandls.com/">Strand Life Sciences</Link>
           </div>
         )}

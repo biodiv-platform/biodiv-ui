@@ -1,5 +1,5 @@
 import WKTFieldMulti from "@components/form/wkt-multi";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function WKTCoverage({
@@ -13,12 +13,12 @@ export default function WKTCoverage({
   return (
     <WKTFieldMulti
       name={name}
-      label={t("DOCUMENT.COVERAGE.SPATIAL")}
+      label={t("form:coverage.spatial")}
       nameTitle={nameTitle}
       centroid={centroid}
-      labelTitle={t("DOCUMENT.COVERAGE.PLACE")}
+      labelTitle={t("form:coverage.place")}
       nameTopology={nameTopology}
-      labelTopology={t("DOCUMENT.COVERAGE.WKT")}
+      labelTopology={t("form:coverage.wkt")}
     />
   );
 }

@@ -1,6 +1,6 @@
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { Box, chakra, Table, Tbody, Td, Thead, Tr } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useSortBy, useTable } from "react-table";
 
@@ -66,7 +66,7 @@ export function BasicTable({ columns, data, tableStyle }: BasicTableProps) {
       </Tbody>
     </Table>
   ) : (
-    <Box p={4}>{t("NO_RESULTS")}</Box>
+    <Box p={4}>{t("no_results")}</Box>
   );
 }
 

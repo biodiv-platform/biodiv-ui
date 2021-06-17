@@ -1,5 +1,5 @@
 import { Button, Heading, Text } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function UploadInfo() {
@@ -7,11 +7,11 @@ export default function UploadInfo() {
 
   return (
     <div className="fade">
-      <Heading size="md">{t("OBSERVATION.UPLOADER.LABEL")}</Heading>
+      <Heading size="md">{t("form:uploader.label")}</Heading>
       <Text my={2} color="gray.500">
-        {t("OR")}
+        {t("common:or")}
       </Text>
-      <Button colorScheme="blue" variant="outline" children={t("OBSERVATION.UPLOADER.BROWSE")} />
+      <Button colorScheme="blue" variant="outline" children={t("form:uploader.browse")} />
     </div>
   );
 }

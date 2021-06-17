@@ -1,5 +1,5 @@
 import { Box, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs, Tag } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { SpeciesTaxonCreateForm } from "./create";
@@ -22,18 +22,18 @@ export function SpeciesTaxonSuggestions() {
           <Tabs colorScheme="blue" isLazy={true}>
             <TabList>
               <Tab>
-                {t("SPECIES.CREATE.FORM.TAXON.SELECT")}
+                {t("species:create.form.taxon.select")}
                 <Tag colorScheme="blue" ml={2}>
                   {counts.full}
                 </Tag>
               </Tab>
               <Tab>
-                {t("SPECIES.CREATE.FORM.TAXON.PARENT")}
+                {t("species:create.form.taxon.parent")}
                 <Tag colorScheme="blue" ml={2}>
                   {counts.partial}
                 </Tag>
               </Tab>
-              <Tab>{t("SPECIES.CREATE.FORM.TAXON.CREATE")}</Tab>
+              <Tab>{t("species:create.form.taxon.create")}</Tab>
             </TabList>
 
             <TabPanels>

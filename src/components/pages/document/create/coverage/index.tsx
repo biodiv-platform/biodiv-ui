@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import IconCheckboxField from "@components/pages/group/common/icon-checkbox-field";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import WKTCoverage from "./wkt-coverage";
@@ -12,19 +12,19 @@ export default function Coverage({ speciesGroups, habitats }) {
   return (
     <Box mb={6}>
       <PageHeading as="h2" size="lg" mr={4}>
-        ⭐ {t("DOCUMENT.COVERAGE.TITLE")}
+        ⭐ {t("form:coverage.title")}
       </PageHeading>
 
       <IconCheckboxField
         name="speciesGroupIds"
-        label={t("GROUP.SPECIES_COVERAGE")}
+        label={t("common:species_coverage")}
         options={speciesGroups}
         type="species"
       />
 
       <IconCheckboxField
         name="habitatIds"
-        label={t("GROUP.HABITATS_COVERED")}
+        label={t("common:habitats_covered")}
         options={habitats}
         type="habitat"
       />

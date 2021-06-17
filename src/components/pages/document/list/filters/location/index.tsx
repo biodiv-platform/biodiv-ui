@@ -24,7 +24,7 @@ export default function LocationFilter() {
       <MapAreaFilter />
 
       <CheckboxFilterPanel
-        translateKey="FILTERS.LOCATION.PROTECTED_AREA."
+        translateKey="filters:location.protected_area."
         filterKey="state"
         options={STATE_OPTIONS}
         statKey="groupState"
