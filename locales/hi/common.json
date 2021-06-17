@@ -1,4 +1,5 @@
 {
+  "accepted": "को स्वीकृत",
   "actions": {
     "flag": {
       "category": "वर्ग",
@@ -12,6 +13,7 @@
       "title": "शीर्षक"
     }
   },
+  "activity": "गतिविधि",
   "add": "जोड़ना",
   "cancel": "रद्द करना",
   "clear": "स्पष्ट",
@@ -19,6 +21,9 @@
   "copy": "क्लिपबोर्ड पर कॉपी करें",
   "delete": "हटाएं",
   "edit": "संपादित करें",
+  "edit_not_uploaded": "कुछ संसाधन ठीक से अपलोड नहीं किए जाते हैं, कृपया अपलोड करने से पहले प्रतीक्षा करें या उन्हें हटा दें",
+  "feature": "फ़ीचर चयनित",
+  "feature_in_groups": "समूहों में सुविधा",
   "feedback": "प्रतिपुष्टि",
   "footer": {
     "email": "ईमेल",
@@ -28,7 +33,23 @@
     "technology_partner": "प्रौद्योगिकी भागीदार ",
     "twitter": "ट्विटर"
   },
+  "habitats_covered": "निवास स्थान",
+  "information": "जानकारी",
   "invalid_request": "अमान्य अनुरोध",
+  "list": {
+    "sort_by": "इसके अनुसार क्रमबद्ध करें",
+    "sort_options": {
+      "last_updated": "आखरी अपडेट",
+      "latest": "अंतिम अपलोड किया गया",
+      "most_viewed": "सबसे ज्यादा देखा गया"
+    },
+    "view_type": {
+      "grid": "ग्रिड",
+      "list": "सूची",
+      "map": "नक्शा",
+      "stats": "मैट्रिक्स"
+    }
+  },
   "load_more": "अधिक लोड करें ↺",
   "loading": "लोड हो रहा है...",
   "next": "अगला",
@@ -46,39 +67,19 @@
   "permalink": "स्थायी लिंक",
   "prev": "पहले का",
   "processing": "प्रसंस्करण...",
+  "read_more": "अधिक पढ़ें",
   "save": "सहेजें",
   "search": "खोज",
-  "success": "सफलता",
-  "toggle": "टॉगल",
-  "unauthorized": "अनधिकृत उपयोगकर्ता",
-  "unknown": "अनजान",
-  "list": {
-    "sort_by": "इसके अनुसार क्रमबद्ध करें",
-    "sort_options": {
-      "last_updated": "आखरी अपडेट",
-      "latest": "अंतिम अपलोड किया गया",
-      "most_viewed": "सबसे ज्यादा देखा गया"
-    },
-    "view_type": {
-      "grid": "ग्रिड",
-      "list": "सूची",
-      "map": "नक्शा",
-      "stats": "मैट्रिक्स"
-    }
-  },
   "slider_left": "बाएं",
   "slider_right": "सही",
+  "species_coverage": "प्रजाति समूह कवरेज",
+  "success": "सफलता",
   "temporal": {
     "observations": "अवलोकन",
     "title": "अस्थायी वितरण"
   },
-  "accepted": "को स्वीकृत",
-  "edit_not_uploaded": "कुछ संसाधन ठीक से अपलोड नहीं किए जाते हैं, कृपया अपलोड करने से पहले प्रतीक्षा करें या उन्हें हटा दें",
-  "activity": "गतिविधि",
-  "information": "जानकारी",
-  "usergroups": "समूहों",
-  "habitats_covered": "निवास स्थान",
-  "species_coverage": "प्रजाति समूह कवरेज",
-  "feature": "फ़ीचर चयनित",
-  "feature_in_groups": "समूहों में सुविधा"
+  "toggle": "टॉगल",
+  "unauthorized": "अनधिकृत उपयोगकर्ता",
+  "unknown": "अनजान",
+  "usergroups": "समूहों"
 }

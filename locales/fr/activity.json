@@ -16,6 +16,7 @@
   "featured": "Fourniture en groupe",
   "flag_removed": "drapeau enlevé",
   "flagged": "marqué",
+  "load_more_activity": "Charger plus d'activité",
   "observation_created": "Observation créée",
   "observation_species_group_updated": "Groupe d'espèces mis à jour",
   "observation_tag_updated": "Tags mis à jour",
@@ -33,6 +34,5 @@
   "updated_fact": "fait mis à jour",
   "updated_species_field": "Champ d'espèce mis à jour",
   "updated_species_gallery": "Galerie de l'espèce mise à jour",
-  "updated_synonym": "Mise à jour de synonyme",
-  "load_more_activity": "Charger plus d'activité"
+  "updated_synonym": "Mise à jour de synonyme"
 }

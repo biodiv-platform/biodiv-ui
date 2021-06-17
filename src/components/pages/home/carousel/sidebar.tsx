@@ -30,7 +30,7 @@ export default function Sidebar({ resource }) {
           </Text>
           {resource.moreLinks && (
             <Link href={resource.moreLinks}>
-              {t("home:banner_more")} <ArrowForwardIcon />
+              {t("common:read_more")} <ArrowForwardIcon />
             </Link>
           )}
         </div>

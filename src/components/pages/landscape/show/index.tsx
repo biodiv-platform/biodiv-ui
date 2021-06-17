@@ -58,7 +58,7 @@ export default function LandscapeShowComponent({
       <LandscapeFields childs={landscapeShow.contents.childs} />
       <Stack mb={3}>
         <Heading mb={3} size="lg">
-          {t("document:list.title")}
+          {t("landscape:related_documents")}
         </Heading>
         {documentList.map((o) => (
           <InfoTab
@@ -72,7 +72,7 @@ export default function LandscapeShowComponent({
         <Flex py={2} justifyContent="flex-end">
           <LocalLink href={`/document/list`} params={{ state: landscape.shortName }}>
             <BlueLink>
-              {t("home:banner_more")} <ArrowForwardIcon />
+              {t("common:read_more")} <ArrowForwardIcon />
             </BlueLink>
           </LocalLink>
         </Flex>

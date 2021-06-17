@@ -20,8 +20,8 @@ const ObservationShowPage = ({ landscape, landscapeShow, documentList }) => (
   />
 );
 
-ObservationShowPage.getInitialProps = async (ctx) => {
-  const langId = getLanguageId(ctx.local.language);
+export const getServerSideProps = async (ctx) => {
+  const langId = getLanguageId(ctx.locale)?.ID;
   const { data: landscape } = await axGetLandscapeById(ctx.query.landscapeId);
   const { data: landscapeShow } = await axGetLandscapeShowById(ctx.query.landscapeId, langId);
   const coord = wkt.parse(landscapeShow.wktData)?.coordinates;
@@ -33,10 +33,13 @@ ObservationShowPage.getInitialProps = async (ctx) => {
     : `${coord}`.replace(/[[\]]/g, "");
   const initialFilterParams = { ...DEFAULT_FILTER, ...ShowLandScapeParams };
   const { data: documents } = await axGetListData(initialFilterParams, { location });
+
   return {
-    landscape,
-    landscapeShow,
-    documentList: documents?.documentList || []
+    props: {
+      landscape,
+      landscapeShow,
+      documentList: documents?.documentList || []
+    }
   };
 };
 

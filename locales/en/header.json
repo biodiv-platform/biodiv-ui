@@ -1,4 +1,5 @@
 {
+  "group_edit": "Edit Group",
   "logged_user_only": "Please login to join the group",
   "member_only": "Please join the group to upload observations",
   "menu_primary": {
@@ -70,6 +71,5 @@
   },
   "search": "Search",
   "sign_in": "Login",
-  "group_edit": "Edit Group",
   "toggle_menu": "toggle menu"
 }

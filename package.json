@@ -7,8 +7,8 @@
     "build": "next build",
     "serve": "next start",
     "lint-staged": "lint-staged",
-    "lint": "npx next lint && prettier --write src/**/*",
-    "lint:fix": "npx next lint --fix"
+    "lint": "next lint && prettier --write src/**/*",
+    "lint:fix": "next lint --fix"
   },
   "keywords": [
     "Biodiversity",
@@ -125,7 +125,7 @@
     "@emotion/react": "^11.4.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx}": "next lint --cache --fix",
     "*.{js,css,md}": "prettier -c -w src"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "group_edit": "Groupe d'édition",
   "logged_user_only": "Veuillez vous connecter pour rejoindre le groupe",
   "member_only": "Veuillez rejoindre le groupe pour télécharger des observations",
   "menu_primary": {
@@ -70,6 +71,5 @@
   },
   "search": "Rechercher",
   "sign_in": "Connexion",
-  "group_edit": "Groupe d'édition",
   "toggle_menu": "menu basculant"
 }

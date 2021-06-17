@@ -81,18 +81,18 @@
     "title": "Scientific Name"
   },
   "species_group": {
-    "title": "Species Group",
     "all": "All",
-    "mammals": "Mammals",
-    "birds": "Birds",
-    "reptiles": "Reptiles",
     "amphibians": "Amphibians",
-    "fish": "Fish",
     "arthropods": "Arthropods",
-    "molluscs": "Molluscs",
-    "plants": "Plants",
+    "birds": "Birds",
+    "fish": "Fish",
     "fungi": "Fungi",
-    "others": "Others"
+    "mammals": "Mammals",
+    "molluscs": "Molluscs",
+    "others": "Others",
+    "plants": "Plants",
+    "reptiles": "Reptiles",
+    "title": "Species Group"
   },
   "taxon_browser": {
     "search": "Search in Tree",

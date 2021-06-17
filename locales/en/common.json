@@ -1,4 +1,5 @@
 {
+  "accepted": "Accepted",
   "actions": {
     "flag": {
       "category": "Category",
@@ -12,6 +13,7 @@
       "title": "Flag"
     }
   },
+  "activity": "Activity",
   "add": "Add",
   "cancel": "Cancel",
   "clear": "Clear",
@@ -19,6 +21,9 @@
   "copy": "Copy to Clipboard",
   "delete": "Delete",
   "edit": "Edit",
+  "edit_not_uploaded": "Some resources are not uploaded properly, please wait or remove them before uploading",
+  "feature": "Feature Selected",
+  "feature_in_groups": "Feature in Groups",
   "feedback": "Feedback",
   "footer": {
     "email": "Email",
@@ -28,7 +33,23 @@
     "technology_partner": " Technology Partner ",
     "twitter": "Twitter"
   },
+  "habitats_covered": "Habitats Covered",
+  "information": "Information",
   "invalid_request": "Invalid Request",
+  "list": {
+    "sort_by": "Sort By",
+    "sort_options": {
+      "last_updated": "Last Updated",
+      "latest": "Last Uploaded",
+      "most_viewed": "Most Viewed"
+    },
+    "view_type": {
+      "grid": "Grid",
+      "list": "List",
+      "map": "Map",
+      "stats": "Metrics"
+    }
+  },
   "load_more": "Load More ↺",
   "loading": "Loading...",
   "next": "Next",
@@ -46,39 +67,19 @@
   "permalink": "Permalink",
   "prev": "Previous",
   "processing": "Processing...",
+  "read_more": "Read More",
   "save": "Save",
   "search": "Search",
-  "success": "Success",
-  "toggle": "toggle",
-  "unauthorized": "Unauthorized User",
-  "unknown": "Unknown",
-  "list": {
-    "sort_by": "Sort By",
-    "sort_options": {
-      "last_updated": "Last Updated",
-      "latest": "Last Uploaded",
-      "most_viewed": "Most Viewed"
-    },
-    "view_type": {
-      "grid": "Grid",
-      "list": "List",
-      "map": "Map",
-      "stats": "Metrics"
-    }
-  },
   "slider_left": "Left",
   "slider_right": "Right",
+  "species_coverage": "Species Group Coverage",
+  "success": "Success",
   "temporal": {
     "observations": "Observations",
     "title": "Temporal Distribution"
   },
-  "accepted": "Accepted",
-  "edit_not_uploaded": "Some resources are not uploaded properly, please wait or remove them before uploading",
-  "activity": "Activity",
-  "information": "Information",
-  "usergroups": "Groups",
-  "habitats_covered": "Habitats Covered",
-  "species_coverage": "Species Group Coverage",
-  "feature": "Feature Selected",
-  "feature_in_groups": "Feature in Groups"
+  "toggle": "toggle",
+  "unauthorized": "Unauthorized User",
+  "unknown": "Unknown",
+  "usergroups": "Groups"
 }

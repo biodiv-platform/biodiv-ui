@@ -1,4 +1,5 @@
 {
+  "accepted": "Accepté",
   "actions": {
     "flag": {
       "category": "Catégorie",
@@ -12,6 +13,7 @@
       "title": "Drapeau"
     }
   },
+  "activity": "Activité",
   "add": "Ajouter",
   "cancel": "Annuler",
   "clear": "Dégager",
@@ -19,16 +21,35 @@
   "copy": "Copier dans le presse-papier",
   "delete": "Effacer",
   "edit": "Éditer",
+  "edit_not_uploaded": "Certaines ressources ne sont pas téléchargées correctement, veuillez patienter ou supprimer-les avant de télécharger",
+  "feature": "Fonctionnalité sélectionnée",
+  "feature_in_groups": "Fonctionnalité en groupe",
   "feedback": "Retour",
   "footer": {
     "email": "E-mail",
     "facebook": "facebook",
     "github": "Github",
-    "powered_by": "Alimenté par",
-    "technology_partner": "Partenaire technologique",
+    "powered_by": "Alimenté par ",
+    "technology_partner": "Partenaire technologique ",
     "twitter": "twitter"
   },
+  "habitats_covered": "Habitats couverts",
+  "information": "Informations",
   "invalid_request": "requête invalide",
+  "list": {
+    "sort_by": "Trier par",
+    "sort_options": {
+      "last_updated": "Dernière mise à jour",
+      "latest": "Dernier téléchargé",
+      "most_viewed": "Le plus regardé"
+    },
+    "view_type": {
+      "grid": "Grille",
+      "list": "Lister",
+      "map": "Carte",
+      "stats": "Métrique"
+    }
+  },
   "load_more": "Charger plus ↺",
   "loading": "Chargement...",
   "next": "Suivante",
@@ -46,39 +67,19 @@
   "permalink": "Permirant",
   "prev": "Précédente",
   "processing": "Traitement...",
+  "read_more": "Lire la suite",
   "save": "Sauvegarder",
   "search": "Rechercher",
-  "success": "Succès",
-  "toggle": "basculer",
-  "unauthorized": "Utilisateur non autorisé",
-  "unknown": "Inconnue",
-  "list": {
-    "sort_by": "Trier par",
-    "sort_options": {
-      "last_updated": "Dernière mise à jour",
-      "latest": "Dernier téléchargé",
-      "most_viewed": "Le plus regardé"
-    },
-    "view_type": {
-      "grid": "Grille",
-      "list": "Lister",
-      "map": "Carte",
-      "stats": "Métrique"
-    }
-  },
   "slider_left": "La gauche",
   "slider_right": "Droite",
+  "species_coverage": "Couverture de groupe d'espèces",
+  "success": "Succès",
   "temporal": {
     "observations": "observations",
     "title": "Distribution temporelle"
   },
-  "accepted": "Accepté",
-  "edit_not_uploaded": "Certaines ressources ne sont pas téléchargées correctement, veuillez patienter ou supprimer-les avant de télécharger",
-  "activity": "Activité",
-  "information": "Informations",
-  "usergroups": "Groupes",
-  "habitats_covered": "Habitats couverts",
-  "species_coverage": "Couverture de groupe d'espèces",
-  "feature": "Fonctionnalité sélectionnée",
-  "feature_in_groups": "Fonctionnalité en groupe"
+  "toggle": "basculer",
+  "unauthorized": "Utilisateur non autorisé",
+  "unknown": "Inconnue",
+  "usergroups": "Groupes"
 }

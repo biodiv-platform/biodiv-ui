@@ -11,10 +11,11 @@ module.exports = {
     "/group/[groupName]/show": ["home"],
     "/group/[groupName]/edit": ["group"],
     "rgx:/datatable/": ["datatable"],
-    "rgx:/observation/": ["observation", "filters", "activity"],
-    "rgx:/species/": ["species", "filters", "activity"],
     "rgx:/document/": ["document", "filters", "activity"],
+    "rgx:/landscape/": ["landscape", "filters", "activity"],
+    "rgx:/observation/": ["observation", "filters", "activity"],
     "rgx:/register": ["user"],
+    "rgx:/species/": ["species", "filters", "activity"],
     "rgx:/user/": ["user"]
   }
 };

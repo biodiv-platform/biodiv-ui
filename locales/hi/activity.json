@@ -16,6 +16,7 @@
   "featured": "समूह में विशेष रुप से प्रदर्शित",
   "flag_removed": "ध्वज हटा दिया",
   "flagged": "फ्लैग किए गए",
+  "load_more_activity": "अधिक गतिविधि लोड करें ↺",
   "observation_created": "अवलोकन बनाया",
   "observation_species_group_updated": "अद्यतन प्रजाति समूह",
   "observation_tag_updated": "अद्यतन टैग",
@@ -33,6 +34,5 @@
   "updated_fact": "अद्यतन तथ्य",
   "updated_species_field": "अद्यतन प्रजाति क्षेत्र",
   "updated_species_gallery": "अद्यतन प्रजाति गैलरी",
-  "updated_synonym": "अद्यतन पर्यायवाची",
-  "load_more_activity": "अधिक गतिविधि लोड करें ↺"
+  "updated_synonym": "अद्यतन पर्यायवाची"
 }

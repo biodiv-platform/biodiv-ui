@@ -16,6 +16,7 @@
   "featured": "featured in group",
   "flag_removed": "flag removed",
   "flagged": "flagged",
+  "load_more_activity": "Load more activity ↺",
   "observation_created": "observation created",
   "observation_species_group_updated": "updated species group",
   "observation_tag_updated": "updated tags",
@@ -33,6 +34,5 @@
   "updated_fact": "updated fact",
   "updated_species_field": "updated species field",
   "updated_species_gallery": "updated species gallery",
-  "updated_synonym": "updated synonym",
-  "load_more_activity": "Load more activity ↺"
+  "updated_synonym": "updated synonym"
 }
