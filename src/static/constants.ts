@@ -78,7 +78,7 @@ export const RESOURCE_SIZE = {
   DEFAULT: "?h=200",
   LIST_THUMBNAIL: "?h=300",
   MANIFEST: "${icon}?h=${size}&w=${size}&crop=fit&preserve=true",
-  PREVIEW: "?h=420",
+  PREVIEW: "?h=500",
   RECENT_THUMBNAIL: "?h=135",
   THUMBNAIL: "?h=34",
   TWITTER: "?w=600&h=330&fit=center&preserve=true"
