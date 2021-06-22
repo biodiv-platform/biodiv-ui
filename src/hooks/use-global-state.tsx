@@ -37,7 +37,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
   const { lang } = useTranslation();
 
-  const languageId = useMemo(() => getLanguageId(lang), [lang]);
+  const languageId = useMemo(() => getLanguageId(lang)?.ID, [lang]);
   const isLoggedIn = useMemo(() => !!user.id, [user]);
 
   const fetchIsCurrentGroupMember = async () => {
