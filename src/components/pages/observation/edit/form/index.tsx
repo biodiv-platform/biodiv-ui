@@ -73,14 +73,17 @@ export default function ObservationEditForm({
   const handleOnSubmit = async (values) => {
     const payload = {
       ...values,
-      resources: values.resources.map(({ path, url, type, caption, rating, licenseId }) => ({
-        path,
-        url,
-        type,
-        caption,
-        rating,
-        licenseId
-      })),
+      resources: values.resources.map(
+        ({ path, url, type, caption, rating, licenseId, languageId }) => ({
+          path,
+          url,
+          type,
+          caption,
+          rating,
+          licenseId,
+          languageId
+        })
+      ),
       observedOn: dateToUTC(values.observedOn).format()
     };
     const { success } = await axUpdateObservation(payload, observationId);

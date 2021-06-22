@@ -91,9 +91,12 @@ export default function OfflineSync() {
         }
 
         if (instant) {
-          notification(t("observation:points_gained"), NotificationType.Success, {
-            points: data?.activityCount
-          });
+          notification(
+            t("observation:points_gained", {
+              points: data?.activityCount
+            }),
+            NotificationType.Success
+          );
           emit(SYNC_SINGLE_OBSERVATION_DONE);
           router.push(`/observation/show/${data.observation.id}`, true);
         } else {
@@ -166,7 +169,7 @@ export default function OfflineSync() {
       {!isOnline && (
         <Alert status="error" variant="solid" display="flex" justifyContent="center">
           <AlertIcon />
-          {t("offline")}
+          {t("common:offline")}
         </Alert>
       )}
     </div>

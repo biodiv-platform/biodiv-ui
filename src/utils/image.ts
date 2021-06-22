@@ -67,7 +67,8 @@ export const getAssetObject = (file, meta?) => {
     dateUploaded: new Date().getTime(),
     caption: "",
     rating: 0,
-    isUsed: 0
+    isUsed: 0,
+    languageId: SITE_CONFIG.LANG.DEFAULT_ID
   };
 };
 

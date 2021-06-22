@@ -5,6 +5,7 @@ import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
@@ -33,6 +34,7 @@ export default function UserGroupEditForm({
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
+  const { languageId } = useGlobalState();
 
   const {
     neLatitude,
@@ -77,6 +79,7 @@ export default function UserGroupEditForm({
     const payload = {
       ...STATIC_GROUP_PAYLOAD,
       ...otherValues,
+      languageId: values.languageId || languageId,
       neLatitude: spacialCoverage?.ne?.[1],
       neLongitude: spacialCoverage?.ne?.[0],
       swLatitude: spacialCoverage?.se?.[1],

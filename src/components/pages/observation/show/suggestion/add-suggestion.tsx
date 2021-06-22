@@ -11,8 +11,8 @@ import {
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
-import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
@@ -50,7 +50,7 @@ export default function AddSuggestion({
   const [commonNameOptions, setCommonNameOptions] = useState<any[]>([]);
   const [languages, setLanguages] = useState<any[]>([]);
   const langRef: any = useRef(null);
-
+  const { languageId } = useGlobalState();
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function AddSuggestion({
       taxonCommonName: null,
       scientificNameTaxonId: null,
       taxonScientificName: null,
-      languageId: SITE_CONFIG.LANG.DEFAULT_ID
+      languageId: languageId
     }
   });
 

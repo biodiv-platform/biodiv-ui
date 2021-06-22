@@ -6,6 +6,7 @@ import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import { axUserGroupCreate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -64,6 +65,7 @@ export default function CreateGroupPageComponent({
   });
 
   const handleFormSubmit = async (values) => {
+    const { languageId } = useGlobalState();
     const { spacialCoverage, founder, moderator, ...otherValues } = values;
 
     const spacialCoverageBounds = {
@@ -84,6 +86,7 @@ export default function CreateGroupPageComponent({
     };
 
     const payload = {
+      languageId: languageId,
       ...STATIC_GROUP_PAYLOAD,
       ...otherValues,
       ...spacialCoverageBounds,

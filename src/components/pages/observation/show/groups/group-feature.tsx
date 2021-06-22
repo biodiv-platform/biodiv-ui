@@ -9,6 +9,7 @@ import {
   Textarea,
   useDisclosure
 } from "@chakra-ui/react";
+import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { Featured, UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
@@ -42,6 +43,7 @@ export default function GroupFeature({
   const [finalGroups, setFinalGroups] = useState<any[]>([]);
   const [description, setDescription] = useState("");
 
+  const { languageId } = useGlobalState();
   const { t } = useTranslation();
   const { isOpen, onToggle, onClose } = useDisclosure();
   const editButtonRef: any = useRef(null);
@@ -68,7 +70,8 @@ export default function GroupFeature({
       notes: description,
       objectId: resourceId,
       objectType: resourceType,
-      userGroup: groupsList
+      userGroup: groupsList,
+      languageId: languageId
     });
     success && afterFeatureUpdated(data);
   };

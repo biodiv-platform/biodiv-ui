@@ -2,7 +2,6 @@ import { Box, useDisclosure } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
-import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
@@ -43,7 +42,7 @@ export default function ObservationCreateForm({
   const [customFieldList] = useState(
     ObservationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder)
   );
-  const { currentGroup } = useGlobalState();
+  const { currentGroup, languageId } = useGlobalState();
 
   const parseDefaultCustomField = (list) => {
     return list?.map(
@@ -207,7 +206,7 @@ export default function ObservationCreateForm({
     taxonScientificName,
     recoComment,
     confidence,
-    languageId,
+    languageId: lId,
     tags,
     customFields,
     terms,
@@ -228,12 +227,12 @@ export default function ObservationCreateForm({
         taxonScientificName,
         recoComment,
         confidence,
-        languageId
+        languageId: lId
       },
       tags: cleanTags(tags),
       protocol: "SINGLE_OBSERVATION",
       basisOfRecords: "HUMAN_OBSERVATION",
-      obsvLanguageId: SITE_CONFIG.LANG.DEFAULT_ID,
+      obsvLanguageId: languageId,
       useDegMinSec: false,
       degMinSec: null
     };

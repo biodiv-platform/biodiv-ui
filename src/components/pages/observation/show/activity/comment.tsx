@@ -1,4 +1,5 @@
 import { Box, Button, FormControl, FormLabel } from "@chakra-ui/react";
+import useGlobalState from "@hooks/use-global-state";
 import { axUserSearch } from "@services/auth.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
@@ -10,6 +11,7 @@ import { Mention, MentionsInput } from "react-mentions";
 export default function Comment({ resourceId, resourceType, focusRef, commentFunc }) {
   const [text, setText] = useState("");
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
 
   const onMentionQuery = (q, callback) => {
     if (!q) {
@@ -25,6 +27,7 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
   const handleOnComment = async () => {
     const { success } = await commentFunc({
       body: text,
+      languageId: languageId,
       rootHolderId: resourceId,
       rootHolderType: resourceType,
       subRootHolderId: null,
