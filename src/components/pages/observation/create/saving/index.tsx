@@ -55,7 +55,7 @@ export default function SavingObservation() {
         <>
           <Spinner className="fadeInUp delay-2" mt={8} />
           <Heading className="fadeInUp delay-3" my={4}>
-            {t("one_moment_please")}
+            {t("common:one_moment_please")}
           </Heading>
           <Text mb={6} className="fadeInUp delay-4">
             {t("observation:creating")}

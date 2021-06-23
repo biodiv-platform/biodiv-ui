@@ -4,6 +4,7 @@ import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
 import { ExtendedMarkerProps } from "naksha-components-react";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import LazyLoad from "react-lazyload";
 
@@ -39,6 +40,7 @@ export default function ClusterMap({
   colorHex = "E53E3E",
   borderRadius = "md"
 }: ClusterMapProps) {
+  const { lang } = useTranslation();
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
 
   const fetchGridData = async (geoProps) => {
@@ -66,6 +68,7 @@ export default function ClusterMap({
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           viewPort={defaultViewPort}
           key={k}
+          lang={lang}
           layers={
             filter
               ? [

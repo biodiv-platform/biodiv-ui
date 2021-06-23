@@ -22,7 +22,7 @@ const NakshaMapboxList: any = dynamic(
 
 export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const { user } = useGlobalState();
   const isAdmin = hasAccess([Role.Admin]);
 
@@ -54,6 +54,7 @@ export default function MapPageComponent() {
   return (
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
       <NakshaMapboxList
+        lang={lang}
         viewPort={defaultViewPort}
         loadToC={true}
         showToC={true}

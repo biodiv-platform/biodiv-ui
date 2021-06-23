@@ -20,7 +20,7 @@ export default function ObservationsMap() {
   const userGroupId = currentGroup?.id || undefined;
   const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
   const mapCenter = React.useMemo(() => getMapCenter(3.2), []);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const fetchGridData = async (geoProps) => {
     const params = {
@@ -42,6 +42,7 @@ export default function ObservationsMap() {
         <NakshaMapboxList
           viewPort={mapCenter}
           loadToC={false}
+          lang={lang}
           key={JSON.stringify(filter)}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}

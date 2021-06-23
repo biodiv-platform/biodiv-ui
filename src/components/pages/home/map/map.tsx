@@ -6,6 +6,7 @@ import { ENDPOINT } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const NakshaMapboxList: any = dynamic(
@@ -30,6 +31,7 @@ export default function Map() {
   const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
   const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
   const canManagePublishing = isLoggedIn && hasAccess([Role.Admin]);
+  const { lang } = useTranslation();
 
   const fetchGridData = async (geoProps) => {
     const params = {
@@ -47,6 +49,7 @@ export default function Map() {
     <NakshaMapboxList
       viewPort={mapCenter}
       loadToC={true}
+      lang={lang}
       managePublishing={canManagePublishing}
       mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
