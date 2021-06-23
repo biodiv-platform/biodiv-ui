@@ -197,6 +197,7 @@ const LocationPicker = () => {
                     onChange={handleOnSearchChange}
                     isRequired={false}
                     pr="5rem"
+                    placeholder={t("observation:location_placeholder")}
                   />
                 </Autocomplete>
                 <InputRightElement w="7rem">

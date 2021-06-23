@@ -91,6 +91,7 @@
     "temperature": "तापमान",
     "title": "स्थिति सूचना"
   },
+  "location_placeholder": "एक स्थान दर्ज करें",
   "location_scale": "स्थान सटीकता",
   "longitude": "देशान्तर",
   "min_three_chars": "खोज के लिए कम से कम 3 वर्ण इनपुट करें",

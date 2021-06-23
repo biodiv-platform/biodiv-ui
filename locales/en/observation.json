@@ -91,6 +91,7 @@
     "temperature": "Temperature",
     "title": "Location Information"
   },
+  "location_placeholder": "Enter a location",
   "location_scale": "Location Accuracy",
   "longitude": "Longitude",
   "min_three_chars": "Input at least 3 characters to search",
