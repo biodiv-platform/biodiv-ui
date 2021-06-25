@@ -13,6 +13,7 @@ import {
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";
 import { sortByOptions, viewTabs } from "@static/observation-list";
+import { waitForAuth } from "@utils/auth";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -38,6 +39,11 @@ export default function ListHeader() {
       _draft.f.offset = 0;
       _draft.f.sort = `${v}`;
     });
+  };
+
+  const onListDownload = async () => {
+    await waitForAuth();
+    onOpen();
   };
 
   return (
@@ -76,7 +82,12 @@ export default function ListHeader() {
               ))}
             </Select>
           </Box>
-          <Button variant="outline" colorScheme="blue" leftIcon={<DownloadIcon />} onClick={onOpen}>
+          <Button
+            variant="outline"
+            colorScheme="blue"
+            leftIcon={<DownloadIcon />}
+            onClick={onListDownload}
+          >
             {t("observation:download.title")}
           </Button>
         </Stack>

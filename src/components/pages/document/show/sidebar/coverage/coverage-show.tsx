@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
 export const CoverageShow = ({ value, items, type }) => (
   <SimpleGrid columns={5} spacing={4} p={4}>
     {items
-      .filter((item) => value.includes(item.id))
+      .filter((item) => value?.includes(item.id))
       .map((item) => (
         <Fragment key={item.id}>
           <Tooltip title={item.name} hasArrow={true} placement="top">

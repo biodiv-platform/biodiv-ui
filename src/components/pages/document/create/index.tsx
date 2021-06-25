@@ -4,7 +4,6 @@ import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
@@ -17,7 +16,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import BasicInfo from "./basic-info";
-import TagsInput from "./basic-info/tags-input";
 import Coverage from "./coverage";
 import Metadata from "./metadata";
 import DocumentUploader from "./uploader";
@@ -38,7 +36,6 @@ export default function DocumentCreatePageComponent({
 }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { user } = useGlobalState();
   const [bibField, setBibField] = useState({
     schema: DEFAULT_BIB_FIELDS_SCHEMA,
     fields: DEFAULT_BIB_FIELDS
@@ -51,7 +48,6 @@ export default function DocumentCreatePageComponent({
         itemTypeId: Yup.number().required(),
         bibFieldData: Yup.object().shape(bibField.schema),
 
-        contribution: Yup.string(),
         licenseId: Yup.number().required(),
         fromDate: Yup.mixed(),
 
@@ -87,7 +83,6 @@ export default function DocumentCreatePageComponent({
       habitatIds: [],
       docCoverageData: [],
       userGroupId: [],
-      contribution: user?.name,
       licenseId: SITE_CONFIG.LICENSE.DEFAULT
     }
   });
@@ -130,7 +125,6 @@ export default function DocumentCreatePageComponent({
             setBibField={setBibField}
             licensesList={licensesList}
           />
-          <TagsInput />
           <Metadata bibFields={bibField.fields} />
           <Coverage speciesGroups={speciesGroups} habitats={habitats} />
           <SubmitButton leftIcon={<CheckIcon />}>{t("document:create.title")}</SubmitButton>

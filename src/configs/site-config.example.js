@@ -1,4 +1,4 @@
-const SITE_CONFIG = {
+const SITE_CONFIG_EXAMPLE = {
   ABOUT: {
     ACTIVE: true
   },
@@ -150,4 +150,4 @@ const SITE_CONFIG = {
   }
 };
 
-module.exports = SITE_CONFIG;
+module.exports = SITE_CONFIG_EXAMPLE;

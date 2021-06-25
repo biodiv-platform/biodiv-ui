@@ -38,11 +38,12 @@ const Logo = styled.div`
 `;
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
+
   return (
     <Logo>
       <Link href={SITE_CONFIG.SITE.URL} className="logo">
-        {SITE_CONFIG.SITE.TITLE}
+        {SITE_CONFIG.SITE.TITLE?.[lang]}
       </Link>
       <LocalLink href="/observation/create" prefixGroup={true}>
         <Link

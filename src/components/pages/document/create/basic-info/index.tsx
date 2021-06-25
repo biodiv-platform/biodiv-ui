@@ -12,6 +12,7 @@ import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import BibImportButton from "../bib-import";
+import TagsInput from "./tags-input";
 
 interface BasicInfoProps {
   documentTypes;
@@ -69,10 +70,6 @@ export default function BasicInfo({
 
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
         <div>
-          <RichTextareaField name="bibFieldData.abstract" label={t("document:description")} />
-        </div>
-        <div>
-          <TextBoxField name="contribution" label={t("document:contribution")} />
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
             <DatePickerField name="fromDate" label={t("document:publication_date")} />
             <SelectInputField
@@ -83,6 +80,10 @@ export default function BasicInfo({
               isControlled={true}
             />
           </SimpleGrid>
+          <TagsInput />
+        </div>
+        <div>
+          <RichTextareaField name="bibFieldData.abstract" label={t("document:description")} />
         </div>
       </SimpleGrid>
     </div>

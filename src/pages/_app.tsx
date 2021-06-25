@@ -73,7 +73,7 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
   const domain = aReq.hostname.split(".").slice(-2).join(".");
   const user = getParsedUser(appContext.ctx);
 
-  const { currentGroup, groups } = await axGroupList(aReq.href);
+  const { currentGroup, groups } = await axGroupList(aReq.href, appContext.ctx.locale);
 
   return {
     pageProps,
