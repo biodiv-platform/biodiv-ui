@@ -32,7 +32,7 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
       >
         {t("document:download.pdf")}
       </Button>
-      <Button variant="outline" leftIcon={<PeopleIcon />} colorScheme="teal">
+      <Button variant="outline" leftIcon={<PeopleIcon />} isDisabled={true} colorScheme="teal">
         {t("document:download.citation")}
       </Button>
     </SimpleGrid>
