@@ -19,7 +19,7 @@
     },
     "maps": {
       "desc": "Interagissez en ligne avec plusieurs couches de données spatiales servies de calques de carte via un module Web-SIG interactif.",
-      "title": "Plans"
+      "title": "Cartes"
     },
     "open_data": {
       "desc": "Tous les contenus sur le portail sont ouverts et servis sous licence Creative Commons pour la réutilisation et le partage avec attribution aux contributeurs d'origine.",
@@ -44,7 +44,7 @@
     "activeuser": "Utilisatrices",
     "discussions": "Discussion",
     "documents": "documents",
-    "maps": "Plans",
+    "maps": "Cartes",
     "observation": "observations",
     "species": "Espèce",
     "usergroups": "Groupes"
