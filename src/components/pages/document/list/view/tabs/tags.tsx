@@ -11,19 +11,17 @@ import React, { useState } from "react";
 
 interface ITagsTabsProps {
   tags: Tags[];
-  tabIndex;
-  tabLength;
   documentId;
 }
-export default function TagsTab({ tabIndex, documentId, tags, tabLength }: ITagsTabsProps) {
+export default function TagsTab({ documentId, tags }: ITagsTabsProps) {
   const { t } = useTranslation();
   const { isLoggedIn } = useGlobalState();
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const [tagsItems, setTags] = useState<any | undefined>(
     tags[0] ? tags?.map((i) => ({ label: i.name, value: i?.id })) : null
   );
 
-  const { isOpen, onToggle, onClose } = useDisclosure();
-  return tabIndex === tabLength ? (
+  return (
     <>
       <BoxHeading>
         🔔 {t("document:tags.title")}
@@ -61,5 +59,5 @@ export default function TagsTab({ tabIndex, documentId, tags, tabLength }: ITags
         )}
       </Box>
     </>
-  ) : null;
+  );
 }

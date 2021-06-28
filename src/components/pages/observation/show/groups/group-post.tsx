@@ -77,14 +77,16 @@ export default function GroupPost({
           icon={`${DEFAULT_GROUP.icon}?h=40`}
           name={DEFAULT_GROUP.name}
         />
-        {finalGroups?.map((og) => (
-          <GroupBox
-            key={og.id}
-            link={getGroupLink(og.webAddress)}
-            icon={getGroupImageThumb(og.icon, 40)}
-            name={og.name}
-          />
-        ))}
+        {finalGroups
+          ?.filter((o) => o) // filters out null objects
+          .map((og) => (
+            <GroupBox
+              key={og.id}
+              link={getGroupLink(og.webAddress)}
+              icon={getGroupImageThumb(og.icon, 40)}
+              name={og.name}
+            />
+          ))}
       </SimpleGrid>
 
       <Collapse in={isOpen} unmountOnExit={true}>
