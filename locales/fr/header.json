@@ -1,14 +1,14 @@
 {
-  "group_edit": "Groupe d'édition",
-  "logged_user_only": "Veuillez vous connecter pour rejoindre le groupe",
+  "group_edit": "Modifier le groupe",
+  "logged_user_only": "Veuillez vous enregistrer pour rejoindre le groupe",
   "member_only": "Veuillez rejoindre le groupe pour télécharger des observations",
   "menu_primary": {
     "contribute": {
-      "add_data_package": "Ajouter un package de données",
+      "add_data_package": "Ajouter un ensemble de données",
       "add_dataset": "Ajouter un jeu de données",
-      "add_document": "Ajouter du document",
-      "add_fact": "Ajouter du fait",
-      "add_list": "Ajouter la liste",
+      "add_document": "Ajouter un document",
+      "add_fact": "Ajouter un fait",
+      "add_list": "Ajouter une liste",
       "add_observation": "Ajouter une observation",
       "add_trait_or_value": "Ajouter un trait / valeur",
       "contribute_to_map": "Contribuer à la carte",
@@ -20,7 +20,7 @@
       "title": "Groupes"
     },
     "settings": {
-      "leaderboard": "Mon classement de classement",
+      "leaderboard": "Mon rang de classement",
       "logout": "Se déconnecter",
       "my_observations": "Mes observations",
       "my_profile": "Mon profil",
@@ -29,7 +29,7 @@
   },
   "menu_secondary": {
     "documents": {
-      "document_datatables": "Datables de document",
+      "document_datatables": "Tables de données de documents",
       "documents": "documents",
       "title": "documents"
     },
@@ -44,15 +44,15 @@
       "activity": "Activité",
       "dashboard": "Tableau de bord",
       "datasets": "Jeux de données",
-      "discussions": "Discussion",
+      "discussions": "Discussions",
       "leaderboard": "Classement",
-      "participants": "Participantes",
+      "participants": "Participants",
       "title": "Suite"
     },
     "observation": {
       "checklists": "Lister",
       "datasets": "Jeux de données",
-      "observation_datatables": "Datables d'observation",
+      "observation_datatables": "Tables de données d'observation",
       "observation_traits": "Traits d'observation",
       "observations": "observations",
       "title": "observation"
@@ -62,10 +62,10 @@
       "title": "pages"
     },
     "species": {
-      "species_datatables": "Datables de l'espèce",
+      "species_datatables": "Tables de données d'espèces",
       "species_pages": "Pages d'espèces",
-      "species_traits": "Traits d'espèce",
-      "taxon_namelist": "taxonNamelist",
+      "species_traits": "Traits d'espèces",
+      "taxon_namelist": "Taxon Namelist",
       "title": "Espèce"
     }
   },

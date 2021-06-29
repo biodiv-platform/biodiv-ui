@@ -1,63 +1,63 @@
 {
   "basic_information": "Informations de base",
   "bib": {
-    "abstract": "La description",
+    "abstract": "Description",
     "address": "Adresse",
-    "author": "Auteure",
-    "booktitle": "Titre de livre",
+    "author": "Auteur",
+    "booktitle": "Titre du livre",
     "chapter": "Chapitre",
-    "doi": "EST CE QUE JE",
+    "doi": "DOI",
     "edition": "Édition",
-    "editor": "Éditrice",
+    "editor": "Éditeur",
     "extra": "Supplémentaire",
-    "file": "Déposer",
-    "howpublished": "Comment publié",
-    "institution": "institution",
-    "isbn": "Isbn",
+    "file": "Fichier",
+    "howpublished": "Publication",
+    "institution": "Institution",
+    "isbn": "ISBN",
     "journal": "journal",
     "language": "Langue",
     "month": "Mois",
-    "note": "Noter",
+    "note": "Note",
     "number": "Nombre",
     "organization": "Organisation",
     "pages": "pages",
-    "publisher": "Éditrice",
+    "publisher": "Editeur",
     "schema": {
       "error": "Impossible de récupérer le schéma Bibtex"
     },
     "school": "École",
     "series": "Séries",
     "title": "Titre",
-    "type": "Taper",
-    "url": "url",
-    "volume": "Le volume",
-    "year": "An"
+    "type": "Type",
+    "url": "URL",
+    "volume": "Volume",
+    "year": "Année"
   },
-  "contribution": "contribution",
+  "contribution": "Contribution",
   "create": {
     "error": "Impossible de créer un document",
     "success": "Document créé avec succès",
     "title": "Créer un document"
   },
   "created_on": "Créé sur",
-  "description": "La description",
+  "description": "Description",
   "documents_found": "Documents trouvés",
-  "doi": "EST CE QUE JE",
+  "doi": "DOI",
   "download": {
-    "citation": "citation",
-    "pdf": "Pdf"
+    "citation": "Citation",
+    "pdf": "PDF"
   },
   "edit": {
-    "error": "Une erreur a été mise à jour de ce document",
+    "error": "Il y a eu une erreur dans la mise à jour de ce document",
     "success": "Document mis à jour avec succès",
     "title": "Modifier le document"
   },
   "edit_document": "Modifier le document",
   "follow": "Suivre le document",
-  "import_bibtex": "Importer de bibtex",
-  "issue": "Publier",
+  "import_bibtex": "Importer depuis BibTex",
+  "issue": "Issue",
   "list": {
-    "title": "documents"
+    "title": "Documents"
   },
   "metadata": "Métadonnées",
   "no_geodata": "Aucune donnée géographique disponible",
@@ -66,18 +66,18 @@
   "publication_date": "Date de publication",
   "publication_language": "Langue de publication",
   "remove": {
-    "description": "Êtes-vous sûr?Vous ne pouvez pas annuler cette action après.",
+    "description": "Êtes-vous sûr? Vous ne pourrez pas annuler cette action après.",
     "success": "Document supprimé avec succès",
     "title": "Supprimer le document"
   },
   "share": "Partager ce document",
   "tags": {
-    "not_found": "Pas de balises (s) trouvées (s)",
+    "not_found": "Pas de mot clé (s) trouvé (s)",
     "title": "Mots clés"
   },
-  "type": "Taper",
-  "unfollow": "Dessin du document",
-  "unknown": "Document sans titre",
+  "type": "Type",
+  "unfollow": "Document non suivi",
+  "unknown": "Document inconnu",
   "update_error": "Impossible de mettre à jour",
   "update_success": "Mis à jour avec succés",
   "updated_on": "Date mise à jour",

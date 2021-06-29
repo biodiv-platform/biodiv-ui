@@ -5,30 +5,30 @@
       "category": "Catégorie",
       "flags": {
         "date_inappropriate": "Date inappropriée",
-        "details_inappropriate": "Détails inappropriés",
+        "details_inappropriate": "Informations inappropriées",
         "location_inappropriate": "Emplacement inapproprié"
       },
       "notes": "Remarques",
-      "others_flagged": "D'autres qui marquaient",
-      "title": "Drapeau"
+      "others_flagged": "D'autres qui ont marqué",
+      "title": "Marque"
     }
   },
   "activity": "Activité",
   "add": "Ajouter",
   "cancel": "Annuler",
-  "clear": "Dégager",
+  "clear": "Nettoyer",
   "close": "Fermer",
   "copy": "Copier dans le presse-papier",
   "delete": "Effacer",
   "edit": "Éditer",
   "edit_not_uploaded": "Certaines ressources ne sont pas téléchargées correctement, veuillez patienter ou supprimer-les avant de télécharger",
-  "feature": "Fonctionnalité sélectionnée",
-  "feature_in_groups": "Fonctionnalité en groupe",
-  "feedback": "Retour",
+  "feature": "Rubrique sélectionnée",
+  "feature_in_groups": "Rubrique des groupes",
+  "feedback": "Avis",
   "footer": {
     "email": "E-mail",
-    "facebook": "facebook",
-    "github": "Github",
+    "facebook": "Facebook",
+    "github": "GitHub",
     "powered_by": "Alimenté par ",
     "technology_partner": "Partenaire technologique ",
     "twitter": "twitter"
@@ -45,7 +45,7 @@
     },
     "view_type": {
       "grid": "Grille",
-      "list": "Lister",
+      "list": "Liste",
       "map": "Carte",
       "stats": "Métrique"
     }
@@ -56,9 +56,9 @@
   "no_data": "Pas de données",
   "no_results": "Aucun résultat trouvé",
   "notifications": {
-    "invalid_credentials": "Le nom d'utilisateur ou le mot de passe que vous avez tapé est incorrect.",
-    "token_error": "Erreur d'aller chercher jeton",
-    "token_not_saved": "Ne pouvait pas sauver jeton",
+    "invalid_credentials": "Le nom d'utilisateur ou le mot de passe que vous avez saisi est incorrect.",
+    "token_error": "Erreur de récupération du jeton",
+    "token_not_saved": "Le jeton ne peut être sauvé",
     "token_saved": "Jeton sauvé"
   },
   "offline": "Pas de connexion Internet",
@@ -70,16 +70,16 @@
   "read_more": "Lire la suite",
   "save": "Sauvegarder",
   "search": "Rechercher",
-  "slider_left": "La gauche",
+  "slider_left": "Gauche",
   "slider_right": "Droite",
   "species_coverage": "Couverture de groupe d'espèces",
   "success": "Succès",
   "temporal": {
-    "observations": "observations",
+    "observations": "Observations",
     "title": "Distribution temporelle"
   },
   "toggle": "basculer",
   "unauthorized": "Utilisateur non autorisé",
-  "unknown": "Inconnue",
+  "unknown": "Inconnu",
   "usergroups": "Groupes"
 }

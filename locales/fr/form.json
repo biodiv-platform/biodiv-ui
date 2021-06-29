@@ -1,7 +1,7 @@
 {
   "audio": {
     "start": "Commencer l'enregistrement",
-    "stop": "Arrête d'enregistrer",
+    "stop": "Arrêter l'enregistrement",
     "title": "Enregistreur audio"
   },
   "comments": {
@@ -27,7 +27,7 @@
     "audio": "L'enregistrement s'arrête automatiquement après deux minutes",
     "my_uploads": "Téléchargez et stockez des médias ici pendant une période de 20 jours.Sélectionnez des images à utiliser dans l'observation",
     "resources": "Téléchargez des fichiers image, audio ou vidéo d'une seule observation de votre appareil.(Utilisez des évaluations pour commander des images)",
-    "title": "La description"
+    "title": "Description"
   },
   "find_gmaps": "Recherche à partir de Google Maps",
   "from_url": "Youtube",
@@ -42,8 +42,8 @@
     "region": "Région"
   },
   "map": {
-    "hide": "Édition simplifiée",
-    "show": "Modifier avancé"
+    "hide": "Modification simplifiée",
+    "show": "Modification avancée"
   },
   "my_uploads": "Brouillon",
   "my_uploads_sort": {
@@ -55,15 +55,15 @@
   "selected_places": "Endroits sélectionnés",
   "species_groups": "Groupes d'espèces",
   "tags": "Mots clés",
-  "tags_hint": "Commencez à taper des tags de recherche",
-  "tags_update_error": "Il y avait une erreur lors de la mise à jour des balises",
-  "tags_update_success": "Tags mis à jour avec succès",
+  "tags_hint": "Commencez à taper des mots clés de recherche",
+  "tags_update_error": "Il y avait une erreur lors de la mise à jour des mots clés",
+  "tags_update_success": "Mots clés mis à jour avec succès",
   "terms": "En soumettant ce formulaire, vous acceptez que les photos ou vidéos que vous soumettez sont prises par vous ou que vous avez la permission du titulaire du droit d'auteur de les télécharger sur des licences Creative Commons.Creative Commons - Attribution (CC-BY) s'appliquera à toutes les données fournies.",
   "title": "Titre",
   "upload_status": {
     "failed": "Manquée",
     "pending": "En attente",
-    "uploaded": "Téléchargé sur le brouillon de supports",
+    "uploaded": "Téléchargé sur le brouillon de médias",
     "uploading": "Téléchargement"
   },
   "uploader": {
@@ -71,11 +71,11 @@
     "description": "(Seuls les fichiers JPG, JPEG, PNG, MP3, MP4 seront acceptés)",
     "label": "Déposez les fichiers ici",
     "label_release": "Prêt à télécharger",
-    "processing": "Traitement",
+    "processing": "Traitement en cours",
     "upload": "Télécharger",
     "uploading": "Téléchargement..."
   },
   "use_in_observation": "Utiliser sélectionné",
   "wkt": "Wkt",
-  "youtube_placeholder": "Entrée YouTube Link"
+  "youtube_placeholder": "Entrer le lien YouTube"
 }

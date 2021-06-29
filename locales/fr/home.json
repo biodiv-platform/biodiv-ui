@@ -1,12 +1,12 @@
 {
-  "donors": "Donatrices",
+  "donors": "Donateurs",
   "features": {
     "citizen_science": {
-      "desc": "Tout membre du grand public peut télécharger une observation de toutes les espèces observées.Les autres membres aident à identifier, annotant et current les observations.",
-      "title": "Citoyens"
+      "desc": "Tout membre du grand public peut télécharger une observation de toutes les espèces observées.Les autres membres aident à identifier, annotant et valident les observations.",
+      "title": "Science Citoyenne"
     },
     "groups": {
-      "desc": "Les microsites sur le portail permettent aux communautés dédiées aux thèmes de leur intérêt de collecter, de cédez et de partager des contenus.",
+      "desc": "Les microsites sur le portail permettent aux communautés dédiées aux thèmes de leur intérêt de collecter, de céder et de partager des contenus.",
       "title": "Communautés"
     },
     "landscapes": {
@@ -14,23 +14,23 @@
       "title": "Paysages"
     },
     "literature": {
-      "desc": "Littérature examinée par les pairs et gris téléchargés par des membres ou en partenariat avec des revues de biodiversité, organisées avec des métadonnées et des balises.",
+      "desc": "Littérature examinée par les pairs et littérature grise téléchargés par des membres ou en partenariat avec des revues de biodiversité, organisées avec des métadonnées et des balises.",
       "title": "Littérature biodiversité"
     },
     "maps": {
-      "desc": "Interagissez en ligne avec plusieurs couches de données spatiales servies de calques de carte via un module Web-SIG interactif.",
+      "desc": "Interagissez en ligne avec plusieurs couches de données spatiales accompagnées de calques de carte via un module Web-SIG interactif.",
       "title": "Cartes"
     },
     "open_data": {
-      "desc": "Tous les contenus sur le portail sont ouverts et servis sous licence Creative Commons pour la réutilisation et le partage avec attribution aux contributeurs d'origine.",
+      "desc": "Tous les contenus sur le portail sont ouverts et utilisés sous licence Creative Commons pour la réutilisation et le partage avec attribution aux contributeurs d'origine.",
       "title": "Données ouvertes"
     },
     "species_information": {
-      "desc": "Pages descriptives pour toutes les espèces de l'Inde à partir de sources authentifiées.Aider à collaborer et à développer des informations sur les espèces de l'Inde.",
+      "desc": "Pages descriptives pour toutes les espèces de l'Inde à partir de sources authentifiées. Aider à collaborer et à développer des informations sur les espèces de l'Inde.",
       "title": "Information sur les espèces"
     },
     "taxonomy": {
-      "desc": "Informations sur la taxonomie et la nomenclature sur les espèces de l'Inde, permettant des mises à jour dynamiques pour organiser et interroger les données sur les espèces, organisées par des experts.",
+      "desc": "Informations sur la taxonomie et la nomenclature des espèces de l'Inde, permettant des mises à jour dynamiques pour organiser et interroger les données sur les espèces, organisées par des experts.",
       "title": "Taxonomie"
     },
     "title": "Caractéristiques"
@@ -38,16 +38,16 @@
   "more": "Voir toutes les observations",
   "no_recent_observations": "Aucune observation récente",
   "observations": "Observations récentes",
-  "observed_by": "Observer",
-  "partners": "Les partenaires",
+  "observed_by": "Observation par",
+  "partners": "Partenaires",
   "portal_stats": {
-    "activeuser": "Utilisatrices",
-    "discussions": "Discussion",
-    "documents": "documents",
+    "activeuser": "Utilisateurs",
+    "discussions": "Discussions",
+    "documents": "Documents",
     "maps": "Cartes",
-    "observation": "observations",
-    "species": "Espèce",
+    "observation": "Observations",
+    "species": "Espèces",
     "usergroups": "Groupes"
   },
-  "sponsors": "Supporté par"
+  "sponsors": "Sponsorisé par"
 }

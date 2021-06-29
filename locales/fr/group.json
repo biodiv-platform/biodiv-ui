@@ -6,13 +6,13 @@
   },
   "admin": {
     "error": "Il y avait une erreur lors de la mise à jour des administrateurs",
-    "founder": "Fondatrice",
-    "moderator": "Modératrices",
-    "no_access": "Pour mettre à jour les champs personnalisés ou les règles de groupe, veuillez contacter Administrator",
+    "founder": "Fondateur",
+    "moderator": "Modérateurs",
+    "no_access": "Pour mettre à jour les champs personnalisés ou les règles de groupe, veuillez contacter l'Administrateur",
     "title": "Administrateurs de groupe",
     "updated": "Les administrateurs de groupe sont mis à jour avec succès"
   },
-  "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur.Appuyez sur OK pour envoyer une demande de jointure",
+  "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur.Appuyez sur OK pour envoyer une demande de requête",
   "create": {
     "error": "Il y avait une erreur lors de la création de groupe",
     "success": "Groupe créé avec succès",
@@ -74,26 +74,26 @@
     "failure": "Impossible d'enregistrer les modifications",
     "gallery": "Galerie",
     "gallery_setup": {
-      "alert": "Veuillez enregistrer des modifications au redressement",
-      "create": "Créer une image de galerie",
-      "save_order": "Enregistrer la galerie image (s) commande",
-      "show_image_upload": "Afficher l'image Uploader",
+      "alert": "Veuillez enregistrer les modifications pour refaire la demande",
+      "create": "Créer une galerie d'images",
+      "save_order": "Enregistrer la demande d'images de la galerie",
+      "show_image_upload": "Afficher le téléchargeur d'image",
       "title": "Configuration de la galerie"
     },
     "module_stats": "Statistiques de module",
-    "observation_map": "Carte de distribution d'observation",
-    "recent_observation": "Observation récente",
+    "observation_map": "Carte de distribution d'observations",
+    "recent_observation": "Observations récentes",
     "remove": {
       "failure": "Impossible de supprimer l'image de la galerie",
       "success": "Image de la galerie supprimée avec succès"
     },
     "reorder": {
-      "failure": "Impossible d'enregistrer la liste de la liste de la galerie",
-      "success": "Liste de la galerie réorganisée avec succès"
+      "failure": "Impossible d'enregistrer la liste de demandes de la galerie",
+      "success": "Liste de la galerie redemandée avec succès"
     },
     "resources": {
       "error": "Entrez une carte d'observation valide",
-      "imageurl": "Choisissez la galerie image",
+      "imageurl": "Choisissez l'image de la galerie",
       "link": "Afficher le lien de page",
       "new_image": "Tableau d'image",
       "obs_id": "ID d'observation",
@@ -104,15 +104,15 @@
     "show_desc": "Montrer la description",
     "success": "Changements mis à jour avec succès",
     "table": {
-      "description": "La description",
-      "more_link": "Relier",
+      "description": "Description",
+      "more_link": "Lien",
       "remove_image": "Supprimer",
       "title": "Titre"
     },
     "title": "Personnalisation de la page d'accueil",
     "update": {
       "failure": "Impossible de mettre à jour les détails de la page d'accueil",
-      "success": "Page d'accueil Détails mis à jour avec succès"
+      "success": "Détails de la page d'accueil mis à jour avec succès"
     }
   },
   "icon": "Icône",
@@ -122,14 +122,14 @@
   "join": "Rejoindre le groupe",
   "join_without_invitation": "Autoriser l'utilisateur à rejoindre le groupe sans invitation",
   "member": {
-    "joined": "Groupe a rejoint avec succès",
+    "joined": "Groupe rejoint avec succès",
     "joined_error": "Impossible de rejoindre le groupe",
-    "requested": "Demande de participation de groupe envoyée"
+    "requested": "Demande de participation au groupe envoyée"
   },
   "name": "Nom de groupe",
   "rules": {
     "add": {
-      "failure": "Impossible d'ajouter la règle d'Usergroup",
+      "failure": "Impossible d'ajouter la règle d'utilisateur du groupe",
       "success": "Créé avec succès",
       "title": "Créer une règle de groupe"
     },
@@ -137,11 +137,11 @@
       "spatial": "Ajouter une règle spatiale",
       "taxonomy": "Ajouter une règle taxonomique",
       "title": "Sélectionnez le type d'entrée",
-      "user": "Observation globale de tous les membres du groupe"
+      "user": "Aggrégation des observations de tous les membres du groupe"
     },
     "remove": {
       "failure": "Impossible de supprimer la règle du groupe d'utilisateurs",
-      "success": "règle du groupe d'utilisateurs supprimé"
+      "success": "règle du groupe d'utilisateurs supprimée"
     },
     "table": {
       "actions": "actions",
@@ -155,6 +155,6 @@
   "save": "Créer un groupe",
   "spatial_coverge": "Couverture spatiale",
   "tags": "Mots clés",
-  "update": "Groupe de mise à jour",
+  "update": "Mise à jour du groupe",
   "update_admin": "Mettre à jour les administrateurs"
 }

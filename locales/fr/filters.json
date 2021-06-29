@@ -1,16 +1,16 @@
 {
-  "clear": "Clear {{filterCount}} Filtre (s)",
+  "clear": "Nettoyer {{filterCount}} Filtre (s)",
   "custom_fields": {
     "has_content": "A du contenu",
     "no_content": "Pas de contenu",
-    "no_custom_field": "Aucun champ personnalisé trouvé (s) trouvé (s)",
+    "no_custom_field": "Aucun champ personnalisé trouvé (s)",
     "title": "Les champs personnalisés"
   },
   "data_quality": {
     "flag": {
       "flagged": "Marqué",
-      "title": "Drapeau",
-      "unflagged": "Incomparable"
+      "title": "Marque",
+      "unflagged": "Non marqué"
     },
     "identification": {
       "identified": "Identifié",
@@ -24,7 +24,7 @@
     },
     "title": "Qualité des données",
     "validation": {
-      "not_validated": "Pas validé",
+      "not_validated": "Non validé",
       "title": "validation",
       "validated": "Validé"
     }
@@ -48,10 +48,10 @@
     "title": "Emplacement"
   },
   "media": {
-    "audio": "l'audio",
-    "image": "image",
-    "no_media": "Non moyen",
-    "title": "Type de support",
+    "audio": "Audio",
+    "image": "Image",
+    "no_media": "Pas de média",
+    "title": "Type de média",
     "video": "Vidéo"
   },
   "name": {
@@ -84,13 +84,13 @@
     "all": "Tout",
     "amphibians": "Amphibiens",
     "arthropods": "Arthropodes",
-    "birds": "Des oiseaux",
-    "fish": "Poisson",
+    "birds": "Oiseaux",
+    "fish": "Poissons",
     "fungi": "Champignons",
     "mammals": "Mammifères",
     "molluscs": "Mollusques",
     "others": "Autres",
-    "plants": "Les plantes",
+    "plants": "Plantes",
     "reptiles": "Reptiles",
     "title": "Groupe d'espèces"
   },
@@ -101,8 +101,8 @@
   },
   "time": {
     "created_on": "date créée",
-    "max_date": "maximumDate",
-    "min_date": "Date minimale",
+    "max_date": "Date max",
+    "min_date": "Date min",
     "month": {
       "apr": "avril",
       "aug": "août",
@@ -116,10 +116,10 @@
       "nov": "novembre",
       "oct": "octobre",
       "sep": "septembre",
-      "title": "Mois observé"
+      "title": "Mois d'observation"
     },
-    "observed_on": "Date observée",
-    "title": "Temps"
+    "observed_on": "Date d'observation",
+    "title": "Heure"
   },
   "title": "Filtres",
   "toggle": "Filtres à bascule",
@@ -128,7 +128,7 @@
   },
   "user": {
     "search": "Recherche utilisateur",
-    "title": "Utilisatrice"
+    "title": "Utilisateur"
   },
   "usergroup": {
     "title": "Groupes d'utilisateurs"
