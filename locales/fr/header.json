@@ -30,8 +30,8 @@
   "menu_secondary": {
     "documents": {
       "document_datatables": "Tables de données de documents",
-      "documents": "documents",
-      "title": "documents"
+      "documents": "Documents",
+      "title": "Documents"
     },
     "landscapes": {
       "title": "Zones protégées"
@@ -54,19 +54,19 @@
       "datasets": "Jeux de données",
       "observation_datatables": "Tables de données d'observation",
       "observation_traits": "Traits d'observation",
-      "observations": "observations",
-      "title": "observation"
+      "observations": "Observations",
+      "title": "Observation"
     },
     "pages": {
       "empty": "Pas de pages",
-      "title": "pages"
+      "title": "Pages"
     },
     "species": {
       "species_datatables": "Tables de données d'espèces",
       "species_pages": "Pages d'espèces",
       "species_traits": "Traits d'espèces",
       "taxon_namelist": "Taxon Namelist",
-      "title": "Espèce"
+      "title": "Espèces"
     }
   },
   "search": "Rechercher",
