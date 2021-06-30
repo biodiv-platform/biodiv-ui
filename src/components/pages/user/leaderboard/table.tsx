@@ -2,12 +2,14 @@ import { ArrowDownIcon } from "@chakra-ui/icons";
 import { Box } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useSortBy, useTable } from "react-table";
 
 import useLeaderboardFilter from "./use-leaderboard-filter";
 
 function UserLeaderboardTable({ columns }) {
+  const { t } = useTranslation();
   const { leaderboardData, setLeaderboard, filter } = useLeaderboardFilter();
   const [sortedBy, setSortedBy] = useState("NA");
   const { user } = useGlobalState();
@@ -48,7 +50,7 @@ function UserLeaderboardTable({ columns }) {
                     whiteSpace="pre"
                     cursor="pointer"
                   >
-                    {column.render("Header")}
+                    {t(column.render("Header"))}
                     <ArrowDownIcon opacity={sortedBy === column?.id ? 0 : 1} />
                   </Box>
                 </th>

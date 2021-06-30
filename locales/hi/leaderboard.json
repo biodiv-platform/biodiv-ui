@@ -1,4 +1,43 @@
 {
+  "activity_score": "गतिविधि स्कोर: ",
+  "modules": {
+    "all": "सब",
+    "discussion": "चर्चा",
+    "documents": "दस्तावेज़",
+    "miscellaneous": "विविध",
+    "observations": "अवलोकन",
+    "species": "प्रजाति",
+    "taxon": "टैक्सोन"
+  },
+  "stops": {
+    "f": "पूरे समय",
+    "month": "पिछले महीने",
+    "month3": "पिछले 3 महीने Month",
+    "today": "आज",
+    "week": "पिछले सप्ताह",
+    "year": "पिछले एक साल"
+  },
+  "table": {
+    "commented": "टिप्पणी की गई",
+    "created": "बनाया था",
+    "curated": "क्यूरेट किए गए",
+    "discussions": "चर्चाएँ",
+    "documents": "दस्तावेज़",
+    "identified": "पहचान की",
+    "name": "नाम",
+    "observation": "अवलोकन",
+    "organized": "का आयोजन किया",
+    "rank": "पद",
+    "species": "जाति"
+  },
   "tip": "लीडरबोर्ड उपयोगकर्ता द्वारा किए गए सभी गतिविधियों पर आधारित है।गतिविधि हर घंटे एक बार अपडेट हो जाएगी।",
-  "title": "लीडरबोर्ड"
+  "title": "लीडरबोर्ड",
+  "total": {
+    "discussion": "कुल चर्चा",
+    "documents": "कुल दस्तावेज़",
+    "miscellaneous": "कुल विविध",
+    "observations": "कुल अवलोकन",
+    "species": "कुल प्रजाति",
+    "taxon": "कुल टैक्सोन"
+  }
 }

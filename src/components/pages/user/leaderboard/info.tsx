@@ -7,7 +7,7 @@ export default function InfoMessage() {
   const { t } = useTranslation();
 
   return (
-    <Alert status="info" variant="left-accent" mb={4} display={["none", "block"]} hidden={!isOpen}>
+    <Alert status="info" variant="left-accent" mb={4} display={["none", "flex"]} hidden={!isOpen}>
       <AlertIcon />
       {t("leaderboard:tip")}
       <CloseButton onClick={onClose} position="absolute" right="8px" top="8px" />

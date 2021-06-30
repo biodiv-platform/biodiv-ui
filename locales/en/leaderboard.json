@@ -1,4 +1,43 @@
 {
+  "activity_score": "Activity Score: ",
+  "modules": {
+    "all": "All",
+    "discussion": "Discussion",
+    "documents": "Documents",
+    "miscellaneous": "Miscellaneous",
+    "observations": "Observations",
+    "species": "Species",
+    "taxon": "Taxon"
+  },
+  "stops": {
+    "f": "All Time",
+    "month": "Past Month",
+    "month3": "Past 3 Months",
+    "today": "Today",
+    "week": "Past Week",
+    "year": "Past Year"
+  },
+  "table": {
+    "commented": "Commented",
+    "created": "Created",
+    "curated": "Curated",
+    "discussions": "Discussions",
+    "documents": "Documents",
+    "identified": "Identified",
+    "name": "Name",
+    "observation": "Observation",
+    "organized": "Organized",
+    "rank": "Rank",
+    "species": "Species"
+  },
   "tip": "Leaderboard is based on all activities done by a user. Activity will update once every hour.",
-  "title": "Leaderboard"
+  "title": "Leaderboard",
+  "total": {
+    "discussion": "Total Discussion",
+    "documents": "Total Documents",
+    "miscellaneous": "Total Miscellaneous",
+    "observations": "Total Observations",
+    "species": "Total Species",
+    "taxon": "Total Taxon"
+  }
 }
