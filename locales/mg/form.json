@@ -1,0 +1,81 @@
+{
+  "audio": {
+    "start": "Atombohy ny firaketana",
+    "stop": "Ajanony ny firaketana an-tsoratra",
+    "title": "Audio Recorder"
+  },
+  "comments": {
+    "add_comment": "Manampia fanehoan-kevitra vaovao",
+    "post": "Lahatsoratra",
+    "title": "Comment (s)"
+  },
+  "coverage": {
+    "hint": "Raha vao voafantina avy amin'ny bokotra Input CAST SITE ambanin'ny sari-tany mba hamaranana",
+    "place": "Mametraka anarana",
+    "spatial": "Fandrakofana an-tsokosoko",
+    "title": "mikasika ny",
+    "wkt": "WKT"
+  },
+  "date_accuracy": "Daty marina",
+  "date_accuracy_options": {
+    "accurate": "marina",
+    "approximate": "tokotokony",
+    "unknown": "TSY FANTATRA"
+  },
+  "date_range": "Manampy daty daty",
+  "description": {
+    "audio": "Ny firaketana dia hijanona ho azy roa minitra",
+    "my_uploads": "Upload sy Store Media eto mandritra ny 20 andro. Safidio ny sary ampiasaina amin'ny fandinihana",
+    "resources": "Alefaso ny sary, audio na horonan-tsary amin'ny fandinihana tokana avy amin'ny fitaovanao. (Ampiasao ny salanisa mba handefasana sary)",
+    "title": "Description"
+  },
+  "find_gmaps": "Mikaroka avy amin'ny Google Maps",
+  "from_url": "YOUTUBE",
+  "geoentities": "Mikaroka avy amin'ny tany",
+  "language": "Fiteny",
+  "license": "Mombamomba ny mpanoratra",
+  "location_accuracy_options": {
+    "accurate": "marina",
+    "approximate": "tokotokony",
+    "country": "Firenena",
+    "local": "an-toerana",
+    "region": "Region"
+  },
+  "map": {
+    "hide": "Fanitsiana tsotra",
+    "show": "Advanced Edit"
+  },
+  "my_uploads": "Draft Media",
+  "my_uploads_sort": {
+    "taken_on": "Nalaina",
+    "uploaded_on": "Nampakarina tamin'ny"
+  },
+  "notes": "-tsoratra",
+  "selected_media": "Media voafantina",
+  "selected_places": "Toerana voafantina",
+  "species_groups": "Vondrona karazana",
+  "tags": "Tags",
+  "tags_hint": "Atombohy ny fanoratana ny tags",
+  "tags_update_error": "Nisy lesoka raha nanavao ny tags",
+  "tags_update_success": "Nohavaozina tamim-pahombiazana ny tag",
+  "terms": "Amin'ny fandefasana ity taratasy ity dia ekenao fa ny sary na horonan-tsary izay alefanao dia raisinao, na manana fahazoan-dàlana amin'ny tompon'ny zon'ny mpamorona ianao hampiditra azy ireo amin'ny lisansa Creative Commons. Creative Commons - Attribution (CC-BY) dia hihatra amin'ny angon-drakitra rehetra omena.",
+  "title": "lohateny",
+  "upload_status": {
+    "failed": "tsy nahomby",
+    "pending": "mbola miandry",
+    "uploaded": "Nampidirina tamin'ny draft Media",
+    "uploading": "Hampiditra"
+  },
+  "uploader": {
+    "browse": "Browse",
+    "description": "(JPG ihany, JPEG, PNG, MP3, ny rakitra Mp3, dia ekena)",
+    "label": "Afo eto (s) eto",
+    "label_release": "Vonona ny hampakatra",
+    "processing": "fanodinana",
+    "upload": "fampitana",
+    "uploading": "Fandefasana ..."
+  },
+  "use_in_observation": "Fampiasana voafantina",
+  "wkt": "WKT",
+  "youtube_placeholder": "Rohy Youtube Input"
+}

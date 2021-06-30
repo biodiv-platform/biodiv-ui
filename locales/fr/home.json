@@ -9,6 +9,10 @@
       "desc": "Les microsites sur le portail permettent aux communautés dédiées aux thèmes de leur intérêt de collecter, de céder et de partager des contenus.",
       "title": "Communautés"
     },
+    "idao": {
+      "desc": "WIKWIO IDAO est un logiciel d’aide à l’identification et une base de connaissance des principales adventices des cultures alimentaires et des cultures de rente des pays de l’ouest de l’Océan Indien.",
+      "title": "IDAO"
+    },
     "landscapes": {
       "desc": "Agrégation des informations sur les paysages de l'Inde avec des informations détaillées sur les frontières spatiales, les listes d'espèces et la littérature pertinente à ce sujet.*Bientôt disponible*",
       "title": "Paysages"

@@ -1,0 +1,35 @@
+{
+  "create": {
+    "failure": "Tsy afaka namorona pejy",
+    "success": "Pejy noforonina soa aman-tsara",
+    "title": "Mamorona pejy"
+  },
+  "empty": "Tsy misy pejy navoaka ho an'ity vondrona ity",
+  "form": {
+    "content": "Votoatiny",
+    "description": "Famaritana Metadata",
+    "is_sidebar": "Asehoy amin'ny sidebar",
+    "parent": "Pejy ray aman-dreny",
+    "title": "lohateny"
+  },
+  "mail": {
+    "sent": "Namboarina ny fampidinao. Rehefa vonona izy dia hampahafantarina amin'ny mailaka miaraka amin'ny rohy download ianao"
+  },
+  "no_parent": "Tsy ray aman-dreny",
+  "remove": {
+    "description": "Azonao antoka ve izany? Tsy azonao atao ny manaisotra io hetsika io aorian'izay.",
+    "success": "Nesorina tamim-pahombiazana ny pejy",
+    "title": "Hamafa ny pejy"
+  },
+  "share": "Zarao ity pejy ity",
+  "sidebar": {
+    "reorder": "Pejy famerenana",
+    "toggle": "Lisitry ny pejy Pejy",
+    "updated": "Nohavaozina soa aman-tsara ny baiko"
+  },
+  "update": {
+    "failure": "Tsy afaka manavao pejy",
+    "success": "Nohavaozina soa aman-tsara ny pejy",
+    "title": "Pejy fanavaozana"
+  }
+}

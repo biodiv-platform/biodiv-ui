@@ -14,7 +14,7 @@
     "place": "Nom de lieu",
     "spatial": "Couverture spatiale",
     "title": "Couverture",
-    "wkt": "Wkt"
+    "wkt": "WKT"
   },
   "date_accuracy": "Précision de la date",
   "date_accuracy_options": {

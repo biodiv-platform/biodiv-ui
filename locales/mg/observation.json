@@ -1,0 +1,150 @@
+{
+  "accurate": "marina",
+  "add_observation": "Manampy fandinihana",
+  "cf_update_success": "Nohavaozina tamim-pahombiazana ny fomba fiasa mahazatra",
+  "common_name": "Anarana iombonana",
+  "continue": "hanohy",
+  "contributor": "mpiara-miasa",
+  "coordinates": "Velarantany",
+  "created_on": "Noforonina",
+  "creating": "Mamorona ny fandinihanao izahay",
+  "custom_fields": "Saha mahazatra",
+  "delete_file": {
+    "error": "Tsy afaka manamboatra rakitra, andramo manandrana indray avy eo",
+    "failed": "Tsy afaka mamafa ny rakitra, andramo manandrana indray avy eo",
+    "success": "Nalefa soa aman-tsara ny rakitra"
+  },
+  "download": {
+    "error": "Tsy afaka namorona rakitra",
+    "modal": {
+      "note": "Lazao azafady ny fomba hianaranao ny fampiasana ny angon-drakitra alaina",
+      "note_hint": "Zava-dehibe ho anay ny mahatakatra ny fomba ampiasain'ny Open data",
+      "title": "Misafidiana tsanganana"
+    },
+    "success": "Ny rakitrao dia vokarina. Rehefa vonona izy dia hampahafantarina amin'ny mailaka ary ny rohy download dia hiseho ao amin'ny pejinao mombamomba anao.",
+    "title": "Download"
+  },
+  "edit_hint": "💡 Noho ny fanitsiana ireo zavatra hafa toy ny anarana na ny toetra, azafady ampidirina mivantana avy amin'ny pejy fampisehoana-fampisehoana",
+  "edit_observation": "Hanova ny fandinihana",
+  "follow_observation": "Manaraka ny fandinihana",
+  "group": "vondrona",
+  "group_updated": "Ny vondrona karazana fandinihana dia nanavao ny fahombiazana",
+  "groups_updated": "Nohavaozina tamim-pahombiazana ny vondrona",
+  "help_identify": "Ampio hamantatra",
+  "hide_precise_location": "Afeno ny toerana misy azy",
+  "id": {
+    "agree": "manaiky",
+    "no_recommendation": "Tsy misy torohevitra",
+    "no_suggestion": "Manolora hevitra",
+    "remove": "esory",
+    "resuggest": "Nanova ny sainao?",
+    "suggest_new_reco": "Manolora hevitra iray hafa",
+    "suggestion_success": "Ny famantarana dia nanoro hevitra tamim-pahombiazana",
+    "title": "Famantarana",
+    "unlock": "hamaha",
+    "validate": "hanamafy",
+    "validated": "Fanamarinana ny Curator"
+  },
+  "language": "Fiteny",
+  "last_location": "Mampiasà toerana farany",
+  "latitude": "Mponina",
+  "license": "Mombamomba ny mpanoratra",
+  "list": {
+    "chart": {
+      "sgroup": "Vondrona karazana",
+      "states": "Fizarana ny fanjakana"
+    },
+    "created_on": "Noforonina",
+    "life_list": {
+      "count_header": "zava-dehibe",
+      "heading": "Taxa nanamarika",
+      "species_header": "karazana"
+    },
+    "location": "Toerana",
+    "observations_found": "Fikarohana hita",
+    "observed_on": "Voamarina",
+    "spatial_distribution": "Fizarana spatial",
+    "stats_bar": {
+      "total_identifiers": "Identifiers",
+      "total_observations": "fanamarihana",
+      "total_taxa": "Taxa",
+      "total_uploaders": "Uploaders"
+    },
+    "top_identifiers_list": {
+      "author_header": "Anarana",
+      "count_header": "zava-dehibe",
+      "heading": "Mpanome identifiers"
+    },
+    "top_uploaders_list": {
+      "author_header": "Anarana",
+      "count_header": "zava-dehibe",
+      "heading": "Mpikambana ambony"
+    }
+  },
+  "location_information": {
+    "coordinates": "Velarantany",
+    "forest_type": "Ala ala",
+    "geoprivacy_enabled": "Geoprivacy dia nahafahana",
+    "rainfall": "rotsakorana",
+    "soil": "nofon-tany",
+    "tehsil": "Tehsil",
+    "temperature": "hafanana",
+    "title": "Fampahalalana momba ny toerana"
+  },
+  "location_placeholder": "Ampidiro toerana",
+  "location_scale": "Toerana marina",
+  "longitude": "-jarahasina",
+  "min_three_chars": "Fidirana farafahakeliny 3 farafahakeliny mba hikarohana",
+  "name": "Anarana",
+  "nearby": "Teo am-piheverana",
+  "no_custom_field": "Tsy misy fomba fanao manokana hita ho an'ity fandinihana ity",
+  "no_empty_suggestion": "Tsy afaka mametraka soso-kevitra tsy misy na inona na inona",
+  "notes": "-tsoratra",
+  "observed": "nandinika",
+  "observed_at": "Toerana hita ao",
+  "observed_on": "Voamarina",
+  "place": "Place",
+  "points_gained": "{{points}} ny hetsika (s)",
+  "post_to_groups": "Lahatsoratra amin'ny vondrona",
+  "range_hint": "Ampiasao: Ny Septate Sours Range",
+  "rate_success": "Nosongadina soa aman-tsara ny haino aman-jery",
+  "rating": "Rating",
+  "related": "Fanamarihana mifandraika",
+  "remove": {
+    "description": "Azonao antoka ve izany? Tsy azonao atao ny manaisotra io hetsika io aorian'izay.",
+    "success": "Nesorina soa aman-tsara ny fandinihana natao",
+    "title": "Hamafa ny fandinihana"
+  },
+  "resource_info": "Fampahalalana momba ny loharanon-karena",
+  "saved": "Voavonjy ny fandinihana",
+  "saved_message": "Tsy afaka namorona ny fandinihanao izahay tamin'izay fotoana izay, fa raha tsy manambola ianao dia aza matahotra fa voavonjy io ary alefa indray rehefa miverina ny fifandraisana dia miverina",
+  "scientific_name": "Anaran'ny siantifika",
+  "share": "Zarao ity fandinihana ity",
+  "source": "Source",
+  "species_page": "Jereo Pejy karazana",
+  "submitted": "nanaiky",
+  "success": "Namboarina soa aman-tsara",
+  "suggest": "soso-kevitra",
+  "sync": {
+    "done": "hatao",
+    "failed": "tsy nahomby",
+    "title": "Fandraharahana (s)",
+    "uploading": "Hampiditra",
+    "view": "Hijery"
+  },
+  "synonym": "mitovy dika",
+  "title": "Inona no hitanao androany?",
+  "title_edit": "Hanova ny fandinihana",
+  "traits": "toetra",
+  "traits_no_group": "Safidio aloha ny vondrona voalohany",
+  "traits_update_success": "Ny toetra dia nohavaozina soa aman-tsara",
+  "unfeature": "Voafantina tsy mifidy",
+  "unfollow_observation": "Fandinihana tsy vita",
+  "update_observation": "Hanavao ny fandinihana",
+  "updated": "nohavaozina",
+  "updated_on": "Nohavaozina tamin'ny",
+  "use_dms": "Mampiasà DMS",
+  "use_last_value": "Mampiasà sandany farany",
+  "use_lat_lng": "Mampiasà Lat-Long",
+  "why_featuring": "Fa maninona no hita?"
+}

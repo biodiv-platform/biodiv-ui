@@ -9,6 +9,10 @@
       "desc": "Microsites on the portal allow communities dedicated to themes of their interest to collect, curate and share content.",
       "title": "Communities"
     },
+    "idao": {
+      "desc": "WIKWIO IDAO is a software to aid the identification and knowledge base of the main weeds of cash crops and food crops in the Western Indian Ocean countries.",
+      "title": "IDAO"
+    },
     "landscapes": {
       "desc": "Aggregating information on India’s Landscapes with detailed information on spatial boundaries, species lists and relevant literature  on it. *Coming soon*",
       "title": "Landscapes"

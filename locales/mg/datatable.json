@@ -1,0 +1,30 @@
+{
+  "attribution": "Attribution",
+  "basis_of_data": "Fototry ny angona",
+  "basis_of_record": "Fototry ny firaketana an-tsoratra",
+  "contributor": "mpiara-miasa",
+  "create_datatable": "Mamorona datatable",
+  "field_mapping_table": "Latabatra sarintany an-tsaha",
+  "files_upload": "File download",
+  "geographical_coverage": "Fandrakofana ara-jeografika",
+  "is_verified": "Voamarina ny fandinihana",
+  "location_accuracy": "Toerana marina",
+  "location_scale": "Toerana misy toerana",
+  "media_uploader": "Media Uploader",
+  "methods": "fomba",
+  "notifications": {
+    "error": "Tsy afaka namorona datatable",
+    "sheet_upload_error": "Tsy afaka nampiditra takelaka",
+    "sheet_upload_success": "Nalefa soa aman-tsara ny taratasy",
+    "success": "Ditabable dia namorona soa aman-tsara"
+  },
+  "others": "Ny hafa",
+  "party": "Fety",
+  "project": "TETIKASA",
+  "sheet_uploader": "Spreundsheet Uploader",
+  "show_page": "Ny antsipiriany datatable",
+  "taxonomy": "Ny fandrakofana taxonomika",
+  "temporal": "Fandrakofana ara-nofo",
+  "title": "General Metadata",
+  "upload_again": "Alefaso indray"
+}
