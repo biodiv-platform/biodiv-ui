@@ -9,7 +9,6 @@ import { useLocalRouter } from "@components/@core/local-link";
 import TaxonBreadcrumbs from "@components/pages/common/breadcrumbs";
 import TaxonStatusBadge from "@components/pages/common/status-badge";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { ShowData } from "@interfaces/observation";
 import {
@@ -23,6 +22,7 @@ import { adminOrAuthor } from "@utils/auth";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { getResourceThumbnail } from "@utils/media";
 import { NextSeo } from "next-seo";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 
 interface IHeaderProps {
@@ -36,11 +36,11 @@ function Header({ o, following = false }: IHeaderProps) {
   const { isLoggedIn, user } = useGlobalState();
   const [showActions, setShowActions] = useState(false);
 
-  const pageTitle = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} by ${
+  const pageTitle = `${o.recoIbp?.scientificName || t("common:unknown")} by ${
     o.authorInfo?.name
   } on ${formatDateReadableFromUTC(o.observation?.fromDate)}`;
 
-  const pageDescription = `${o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")} Observed by ${
+  const pageDescription = `${o.recoIbp?.scientificName || t("common:unknown")} Observed by ${
     o.authorInfo?.name
   } at ${o.observation?.placeName} on ${formatDateReadableFromUTC(o.observation?.fromDate)}`;
 
@@ -66,7 +66,7 @@ function Header({ o, following = false }: IHeaderProps) {
       {showActions && (
         <SimpleActionButton
           icon={<EditIcon />}
-          title={t("OBSERVATION.EDIT_OBSERVATION")}
+          title={t("observation:edit_observation")}
           onClick={handleOnEdit}
           colorScheme="teal"
         />
@@ -75,8 +75,8 @@ function Header({ o, following = false }: IHeaderProps) {
         following={following}
         resourceId={o.observation?.id}
         toggleFollowFunc={axFollowObservation}
-        followTitle={t("OBSERVATION.FOLLOW_OBSERVATION")}
-        unFollowTitle={t("OBSERVATION.UNFOLLOW_OBSERVATION")}
+        followTitle={t("observation:follow_observation")}
+        unFollowTitle={t("observation:unfollow_observation")}
       />
       <FlagActionButton
         resourceId={o.observation?.id}
@@ -88,13 +88,13 @@ function Header({ o, following = false }: IHeaderProps) {
       {showActions && (
         <DeleteActionButton
           observationId={o.observation?.id}
-          title={t("OBSERVATION.REMOVE.TITLE")}
-          description={t("OBSERVATION.REMOVE.DESCRIPTION")}
-          deleted={t("OBSERVATION.REMOVE.SUCCESS")}
+          title={t("observation:remove.title")}
+          description={t("observation:remove.description")}
+          deleted={t("observation:remove.success")}
           deleteFunc={axDeleteObservation}
         />
       )}
-      <ShareActionButton text={pageDescription} title={t("OBSERVATION.SHARE")} />
+      <ShareActionButton text={pageDescription} title={t("observation:share")} />
     </div>
   );
 
@@ -113,7 +113,7 @@ function Header({ o, following = false }: IHeaderProps) {
         <>
           <Flex direction={{ base: "column", md: "row" }}>
             <Box mr={2}>
-              <i>{o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}</i>
+              <i>{o.recoIbp?.scientificName || t("common:unknown")}</i>
             </Box>
             <TaxonStatusBadge
               reco={o.recoIbp}

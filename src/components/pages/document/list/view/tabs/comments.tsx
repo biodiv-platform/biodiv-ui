@@ -5,17 +5,17 @@ import { axAddDocumentComment } from "@services/activity.service";
 import { RESOURCE_TYPE } from "@static/constants";
 import React, { useRef } from "react";
 
-export default function CommentsTab({ tabIndex, documentId, tabLength }) {
+export default function CommentsTab({ documentId }) {
   const titleRef = useRef(null);
 
-  return tabIndex === tabLength ? (
+  return (
     <>
       <div ref={titleRef}></div>
       <div>
         <ActivityList
           resourceId={documentId}
           resourceType={RESOURCE_TYPE.DOCUMENT}
-          title="OBSERVATION.COMMENTS.TITLE"
+          title="form:comments.title"
         />
       </div>
       <Box p={4}>
@@ -27,5 +27,5 @@ export default function CommentsTab({ tabIndex, documentId, tabLength }) {
         />
       </Box>
     </>
-  ) : null;
+  );
 }

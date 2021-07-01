@@ -1,8 +1,8 @@
 import { Text } from "@chakra-ui/react";
 import { ClearIndicator, selectStyles } from "@components/form/configs";
 import CustomFieldOption from "@components/pages/observation/create/form/custom-field-form/custom-field-options";
-import useTranslation from "@hooks/use-translation";
 import { axGetAllCustomFieldOptionsById } from "@services/usergroup.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 
@@ -59,6 +59,6 @@ export default function CategoricalField({
       <Buttons onSave={onSave} onClose={onClose} />
     </>
   ) : (
-    <Text>{parseCategoricalValue(cf?.customFieldValues, isMulti) || t("OBSERVATION.UNKNOWN")}</Text>
+    <Text>{parseCategoricalValue(cf?.customFieldValues, isMulti) || t("common:unknown")}</Text>
   );
 }

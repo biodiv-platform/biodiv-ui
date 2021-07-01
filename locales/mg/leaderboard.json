@@ -1,0 +1,43 @@
+{
+  "activity_score": "Isa amin'ny hetsika: ",
+  "modules": {
+    "all": "rehetra",
+    "discussion": "Discussion",
+    "documents": "Antontan-taratasy",
+    "miscellaneous": "SAMIHAFA",
+    "observations": "fanamarihana",
+    "species": "karazana",
+    "taxon": "Taxon"
+  },
+  "stops": {
+    "f": "Amin'ny fotoana rehetra",
+    "month": "Volana lasa",
+    "month3": "3 volana lasa",
+    "today": "ankehitriny",
+    "week": "Herinandro lasa",
+    "year": "Taona lasa"
+  },
+  "table": {
+    "commented": "naneho hevitra",
+    "created": "namorona",
+    "curated": "notsongain'ilay",
+    "discussions": "fifanakalozan-kevitra",
+    "documents": "Antontan-taratasy",
+    "identified": "fantatra",
+    "name": "Anarana",
+    "observation": "fandinihana",
+    "organized": "VOALAMINA",
+    "rank": "laharana",
+    "species": "karazana"
+  },
+  "tip": "Ny mpitarika dia mifototra amin'ny hetsika rehetra nataon'ny mpampiasa iray. Havaozina indray mandeha isaky ny ora ny hetsika.",
+  "title": "Leadersboard",
+  "total": {
+    "discussion": "Lahateny misy fiaraha-midinika",
+    "documents": "Documents total",
+    "miscellaneous": "Miscellaneous tanteraka",
+    "observations": "Fandinihana tanteraka",
+    "species": "Karazana karazany",
+    "taxon": "Taxon tanteraka"
+  }
+}

@@ -1,8 +1,8 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Link, Menu, MenuButton } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { hasAccess } from "@utils/auth";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import SubMenu from "./sub-menu";
@@ -34,7 +34,7 @@ export default function MenuItems(props) {
         <>
           <XLink label={name} onClose={onClose} to={to} isArrow={isArrow} params={params}>
             {NameIcon && <NameIcon mr={1} />}
-            {t(`${name}TITLE`)}
+            {t(`${name}title`)}
           </XLink>
           {CCell ? (
             <CCell onClose={onClose} isOpen={isOpen} />

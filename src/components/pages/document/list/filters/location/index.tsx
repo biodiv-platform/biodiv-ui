@@ -1,4 +1,5 @@
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
+import SITE_CONFIG from "@configs/site-config";
 import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
@@ -23,14 +24,16 @@ export default function LocationFilter() {
     <SubAccordion>
       <MapAreaFilter />
 
-      <CheckboxFilterPanel
-        translateKey="FILTERS.LOCATION.PROTECTED_AREA."
-        filterKey="state"
-        options={STATE_OPTIONS}
-        statKey="groupState"
-        skipOptionsTranslation={true}
-        showSearch={true}
-      />
+      {SITE_CONFIG.LANDSCAPE.ACTIVE && (
+        <CheckboxFilterPanel
+          translateKey="filters:location.protected_area."
+          filterKey="state"
+          options={STATE_OPTIONS}
+          statKey="groupState"
+          skipOptionsTranslation={true}
+          showSearch={true}
+        />
+      )}
     </SubAccordion>
   );
 }

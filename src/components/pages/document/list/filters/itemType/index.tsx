@@ -11,7 +11,7 @@ export default function ItemTypeFilter() {
 
   return (
     <CheckboxFilterPanel
-      translateKey="FILTERS.ITEM_TYPE."
+      translateKey="filters:item_type."
       filterKey="itemType"
       options={itemTypeList}
       statKey="groupTypeOfDocument"

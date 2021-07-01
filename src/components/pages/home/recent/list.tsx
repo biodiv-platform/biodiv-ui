@@ -1,11 +1,11 @@
 import { AspectRatio, Box, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 const OBSERVATIONS_SIZE = 10;
@@ -54,7 +54,7 @@ export default function RecentObservationList() {
               prefixGroup={true}
               key={o.observationId}
             >
-              <a aria-label={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}>
+              <a aria-label={o?.recoIbp?.scientificName || t("common:unknown")}>
                 <AspectRatio ratio={1}>
                   <Image
                     objectFit="cover"
@@ -66,14 +66,14 @@ export default function RecentObservationList() {
                       RESOURCE_SIZE.RECENT_THUMBNAIL
                     )}
                     fallbackSrc={getLocalIcon(o?.speciesGroup)}
-                    alt={o?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
+                    alt={o?.recoIbp?.scientificName || t("common:unknown")}
                   />
                 </AspectRatio>
               </a>
             </LocalLink>
           ))
         ) : (
-          <div>{t("HOME.NO_RECENT_OBSERVATIONS")}</div>
+          <div>{t("home:no_recent_observations")}</div>
         )}
       </SimpleGrid>
     </Box>

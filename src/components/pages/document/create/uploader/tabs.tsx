@@ -1,6 +1,6 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { useIsMount } from "@hooks/use-is-mount";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import useManageDocument from "./document-upload-provider";
@@ -29,8 +29,8 @@ export default function DocumentUploaderTabs({ onChange }) {
       isLazy={true}
     >
       <TabList mb={4} overflowX="auto" py={1}>
-        <Tab>✔️ {t("DOCUMENT.UPLOAD.SELECTED")}</Tab>
-        <Tab>☁️ {t("DOCUMENT.UPLOAD.MY_UPLOADS")}</Tab>
+        <Tab>✔️ {t("document:upload.selected")}</Tab>
+        <Tab>☁️ {t("document:upload.my_uploads")}</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>

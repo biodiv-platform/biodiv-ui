@@ -15,10 +15,10 @@ import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axRegenerateOTP, axValidateUser } from "@services/auth.service";
 import { setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -77,19 +77,21 @@ export default function OTPModal({ isOpen, onClose, user }) {
                   <OTPIcon />
                 </Flex>
                 <Heading mb={2} size="lg">
-                  {t("OTP.TITLE")}
+                  {t("auth:otp.title")}
                 </Heading>
                 <Text mb={2} color="gray.600">
-                  {t("OTP.DESCRIPTION")} {user?.vt}
+                  {t("auth:otp.description")} {user?.vt}
                 </Text>
-                <TextBoxField mb={0} name="otp" label={t("OTP.FORM.OTP")} />
+                <TextBoxField mb={0} name="otp" label={t("auth:otp.form.otp")} />
               </ModalBody>
 
               <ModalFooter justifyContent="space-between">
                 <Link as="button" type="button" onClick={handleRegenerate}>
-                  {t("OTP.RESEND")}
+                  {t("auth:otp.resend")}
                 </Link>
-                <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("OTP.FORM.SUBMIT")}</SubmitButton>
+                <SubmitButton rightIcon={<ArrowForwardIcon />}>
+                  {t("auth:otp.form.submit")}
+                </SubmitButton>
               </ModalFooter>
             </form>
           </FormProvider>

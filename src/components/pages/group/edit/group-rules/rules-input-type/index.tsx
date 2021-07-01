@@ -1,6 +1,6 @@
 import { CheckboxField } from "@components/form/checkbox";
 import { DateRangePickerField } from "@components/form/daterangepicker";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import GeoJsonWktParserInput from "../geojson-wkt-inputfield";
@@ -10,11 +10,11 @@ export default function RulesInputType({ inputType, name }) {
   const { t } = useTranslation();
   switch (inputType) {
     case "hasUserRule":
-      return <CheckboxField name={name} label={t("GROUP.RULES.INPUT_TYPES.USER")} />;
+      return <CheckboxField name={name} label={t("group:rules.input_types.user")} />;
     case "spartialDataList":
       return (
         <GeoJsonWktParserInput
-          label={t("GROUP.RULES.INPUT_TYPES.SPATIAL")}
+          label={t("group:rules.input_types.spatial")}
           name={name}
           mb={8}
           isRequired={true}
@@ -22,16 +22,10 @@ export default function RulesInputType({ inputType, name }) {
         />
       );
     case "taxonomicIdList":
-      return <TaxonInputField name={name} label={t("GROUP.RULES.INPUT_TYPES.TAXONOMY")} />;
+      return <TaxonInputField name={name} label={t("group:rules.input_types.taxonomy")} />;
     case "createdOnDateList":
     case "observedOnDateList":
-      return (
-        <DateRangePickerField
-          hasMaxDate={false}
-          name={name}
-          label={t("GROUP.RULES.INPUT_TYPES.DATE_RANGE")}
-        />
-      );
+      return <DateRangePickerField hasMaxDate={false} name={name} label={t("form:date_range")} />;
 
     default:
       return null;

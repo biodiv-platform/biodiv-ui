@@ -1,8 +1,8 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
-import useTranslation from "@hooks/use-translation";
 import { axGetObservationById } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -23,13 +23,13 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
         authorInfo,
         observationId,
         moreLinks: `observation/show/${observationId}`,
-        title: recoIbp?.scientificName || t("OBSERVATION.UNKNOWN"),
+        title: recoIbp?.scientificName || t("common:unknown"),
         fileName: observationResource[0]?.resource?.fileName,
         options: observationResource.map((item) => ({ value: item?.resource?.fileName }))
       });
     } else {
       setDefaultValues({});
-      notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.ERROR"), NotificationType.Error);
+      notification(t("group:homepage_customization.resources.error"), NotificationType.Error);
     }
   };
 
@@ -40,10 +40,10 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
           name="observationId"
           isRequired={true}
           mb={0}
-          label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.OBS_ID")}
+          label={t("group:homepage_customization.resources.obs_id")}
         />
         <Button ml={2} onClick={handleObservationLink}>
-          {t("SEARCH")}
+          {t("common:search")}
         </Button>
       </Flex>
       {defaultValues && (
@@ -51,16 +51,16 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
           <TextBoxField
             name="title"
             isRequired={true}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.TITLE")}
+            label={t("group:homepage_customization.resources.title")}
           />
           <TextBoxField
             name="moreLinks"
             isRequired={true}
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.LINK")}
+            label={t("group:homepage_customization.resources.link")}
           />
           <IconRadioField
             name="fileName"
-            label={t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.IMAGEURL")}
+            label={t("group:homepage_customization.resources.imageurl")}
             options={defaultValues?.options}
           />
         </>

@@ -1,5 +1,5 @@
 import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function Header() {
@@ -7,7 +7,7 @@ export default function Header() {
 
   return (
     <div>
-      <PageHeading>📍 {t("LANDSCAPE.TITLE")}</PageHeading>
+      <PageHeading>📍 {t("landscape:title")}</PageHeading>
     </div>
   );
 }

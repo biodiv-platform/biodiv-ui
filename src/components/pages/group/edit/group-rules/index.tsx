@@ -6,8 +6,8 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { formatGroupRules } from "@utils/userGroup";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import AddGroupRulesForm from "./group-rules-form";
@@ -23,7 +23,7 @@ export default function GroupRules({ userGroupId, rules }) {
       <AccordionItem mb={8} bg="white" border="1px solid var(--gray-300)" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
-            🛂 {t("GROUP.RULES.TITLE")}
+            🛂 {t("group:rules.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>

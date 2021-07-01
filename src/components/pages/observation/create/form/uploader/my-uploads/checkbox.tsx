@@ -1,9 +1,9 @@
 import { AspectRatio, Box, IconButton, Image, useCheckbox } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import { getImageThumb } from "../observation-resources/resource-card";
@@ -70,7 +70,7 @@ const Checkbox = (props: any) => {
             variant="ghost"
             colorScheme="red"
             hidden={props.isChecked}
-            aria-label={t("DELETE")}
+            aria-label={t("common:delete")}
             onClick={() => removeAsset(props.asset)}
             icon={<DeleteIcon />}
           />

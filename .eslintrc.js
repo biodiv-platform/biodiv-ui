@@ -6,7 +6,7 @@ module.exports = {
     node: true
   },
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "simple-import-sort"],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -30,7 +30,14 @@ module.exports = {
     "react/display-name": "off",
     "react/no-children-prop": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
 
     "no-console": ["error", { allow: ["warn", "error", "debug"] }]
+  },
+  settings: {
+    react: {
+      version: "detect"
+    }
   }
 };

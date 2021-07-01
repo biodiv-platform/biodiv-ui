@@ -8,8 +8,8 @@ import {
   Text,
   useCheckboxGroup
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { MY_UPLOADS_SORT } from "../../options";
@@ -37,12 +37,12 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
         alignItems="center"
         mb={2}
       >
-        <Text mb={2}>💡 {t("OBSERVATION.DESCRIPTION.MY_UPLOADS")}</Text>
+        <Text mb={2}>💡 {t("form:description.my_uploads")}</Text>
         <Flex>
           <Select mr={4} value={resourcesSortBy} onChange={handleOnSort} maxW="10rem">
             {MY_UPLOADS_SORT.map((o) => (
               <option key={o.value} value={o.value}>
-                {t(`OBSERVATION.MY_UPLOADS_SORT.${o.label}`)}
+                {t(`form:my_uploads_sort.${o.label}`)}
               </option>
             ))}
           </Select>
@@ -54,7 +54,7 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
               onClick={onDone}
               colorScheme="blue"
             >
-              {t("OBSERVATION.USE_IN_OBSERVATION")}
+              {t("form:use_in_observation")}
             </Button>
           )}
         </Flex>

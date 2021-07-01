@@ -1,0 +1,57 @@
+{
+  "donors": "Donors",
+  "features": {
+    "citizen_science": {
+      "desc": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
+      "title": "Citizen Science"
+    },
+    "groups": {
+      "desc": "Microsites on the portal allow communities dedicated to themes of their interest to collect, curate and share content.",
+      "title": "Communities"
+    },
+    "idao": {
+      "desc": "WIKWIO IDAO is a software to aid the identification and knowledge base of the main weeds of cash crops and food crops in the Western Indian Ocean countries.",
+      "title": "IDAO"
+    },
+    "landscapes": {
+      "desc": "Aggregating information on India’s Landscapes with detailed information on spatial boundaries, species lists and relevant literature  on it. *Coming soon*",
+      "title": "Landscapes"
+    },
+    "literature": {
+      "desc": "Peer reviewed and grey literature uploaded by members or in partnership with biodiversity journals, organized with metadata and tags.",
+      "title": "Biodiversity Literature"
+    },
+    "maps": {
+      "desc": "Interact online with multiple layers of spatial data served as map layers through an interactive web-GIS module.",
+      "title": "Maps"
+    },
+    "open_data": {
+      "desc": "All content on the portal is open and served under Creative Commons license for reuse and sharing with attribution to the original contributors.",
+      "title": "Open Data"
+    },
+    "species_information": {
+      "desc": "Descriptive pages for every species of India from authenticated sources. Help collaborate and build information on India's species.",
+      "title": "Species information"
+    },
+    "taxonomy": {
+      "desc": "Taxonomy and nomenclatural information on India’s species, allowing for dynamic updates for organizing and querying species data, curated by experts.",
+      "title": "Taxonomy"
+    },
+    "title": "Features"
+  },
+  "more": "View all observations",
+  "no_recent_observations": "No Recent Observations",
+  "observations": "Recent Observations",
+  "observed_by": "Observation By",
+  "partners": "Partners",
+  "portal_stats": {
+    "activeuser": "Users",
+    "discussions": "Discussions",
+    "documents": "Documents",
+    "maps": "Maps",
+    "observation": "Observations",
+    "species": "Species",
+    "usergroups": "Groups"
+  },
+  "sponsors": "Supported by"
+}

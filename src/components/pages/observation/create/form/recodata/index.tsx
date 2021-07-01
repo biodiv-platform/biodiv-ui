@@ -2,7 +2,7 @@ import { Collapse, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -57,24 +57,24 @@ export default function Recodata({ languages }: IRecodataProps) {
 
   return (
     <>
-      <CheckboxField name="helpIdentify" label="Help Identify" />
+      <CheckboxField name="helpIdentify" label={t("observation:help_identify")} />
       <Collapse in={!helpIdentify} startingHeight={1} animateOpacity={true}>
         <SimpleGrid columns={[1, 1, 2, 2]} spacing={4}>
           <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
             <SelectAsyncInputField
               name="taxonCommonName"
-              label={t("OBSERVATION.COMMON_NAME")}
+              label={t("observation:common_name")}
               style={{ gridColumn: "1/3" }}
               disabled={helpIdentify}
               onQuery={onCommonNameQuery}
               options={commonNameOptions}
               optionComponent={CommonNameOption}
-              placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
+              placeholder={t("observation:min_three_chars")}
               onChange={onCommonNameChange}
             />
             <SelectInputField
               name="obsvLanguageId"
-              label={t("OBSERVATION.LANGUAGE")}
+              label={t("form:language")}
               options={languages}
               disabled={helpIdentify}
               shouldPortal={true}
@@ -83,11 +83,11 @@ export default function Recodata({ languages }: IRecodataProps) {
           </SimpleGrid>
           <SelectAsyncInputField
             name="scientificNameTaxonId"
-            label={t("OBSERVATION.SCIENTIFIC_NAME")}
+            label={t("observation:scientific_name")}
             disabled={helpIdentify}
             onQuery={onScientificNameQuery}
             optionComponent={ScientificNameOption}
-            placeholder={t("OBSERVATION.MIN_THREE_CHARS")}
+            placeholder={t("observation:min_three_chars")}
             onChange={onScientificNameChange}
             selectRef={scientificRef}
           />

@@ -1,9 +1,9 @@
 import { AspectRatio, Avatar, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateUserImage } from "@services/user.service";
 import { getUserImage } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import { UserEditPageComponentProps } from "..";
@@ -19,12 +19,12 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
         const { success } = await axUpdateUserImage({ id: user.id, profilePic: r.data });
         if (success) {
           setUserImage(getUserImage(r.data, user?.name, 400));
-          notification(t("USER.UPDATED"), NotificationType.Success);
+          notification(t("user:updated"), NotificationType.Success);
           return;
         }
       }
     }
-    notification(t("USER.UPDATE_ERROR"));
+    notification(t("user:update_error"));
   };
 
   return (
@@ -46,7 +46,7 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
               accept="image/*"
               onChange={handleOnPhotoUpload}
             />
-            {t("USER.UPLOAD_PHOTO")}
+            {t("user:upload_photo")}
           </Button>
         </Box>
       </Flex>

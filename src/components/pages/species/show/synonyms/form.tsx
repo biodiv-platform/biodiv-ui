@@ -11,12 +11,12 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { axUpdateSpeciesSynonym } from "@services/species.service";
 import { axGetTaxonRanks } from "@services/taxonomy.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -65,10 +65,10 @@ export default function SpeciesSynonymForm({ synonym, onUpdate, onClose }) {
 
     if (success) {
       onUpdate(data);
-      notification(t("SPECIES.SYNONYM.UPDATE.SUCCESS"), NotificationType.Success);
+      notification(t("species:synonym.update.success"), NotificationType.Success);
       onClose();
     } else {
-      notification(t("SPECIES.SYNONYM.UPDATE.FAILURE"));
+      notification(t("species:synonym.update.failure"));
     }
   };
 
@@ -77,27 +77,27 @@ export default function SpeciesSynonymForm({ synonym, onUpdate, onClose }) {
       {taxonRanks.length ? (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-            <ModalHeader>{t("SPECIES.EDIT_SYNONYM")}</ModalHeader>
+            <ModalHeader>{t("species:edit_synonym")}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <TextBoxField name="name" label={t("SPECIES.SYNONYM.FORM.NAME")} isRequired={true} />
+              <TextBoxField name="name" label={t("species:synonym.form.name")} isRequired={true} />
               <SelectInputField
                 name="rank"
-                label={t("SPECIES.SYNONYM.FORM.RANK")}
+                label={t("species:synonym.form.rank")}
                 options={taxonRanks}
                 isRequired={true}
               />
-              <TextBoxField name="dataSource" label={t("SPECIES.SYNONYM.FORM.DATASOURCE")} />
+              <TextBoxField name="dataSource" label={t("species:synonym.form.datasource")} />
               <TextBoxField
                 name="dataSourceId"
-                label={t("SPECIES.SYNONYM.FORM.DATASOURCE_ID")}
+                label={t("species:synonym.form.datasource_id")}
                 mb={0}
               />
             </ModalBody>
             <ModalFooter>
-              <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
+              <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
               <Button ml={3} leftIcon={<CrossIcon />} onClick={onClose}>
-                {t("CANCEL")}
+                {t("common:cancel")}
               </Button>
             </ModalFooter>
           </form>

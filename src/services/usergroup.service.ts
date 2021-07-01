@@ -1,6 +1,7 @@
 import { Role } from "@interfaces/custom";
 import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
 import { hasAccess } from "@utils/auth";
+import { clearFetchWithCache, fetchWithCache } from "@utils/cached-fetch";
 import http, { plainHttp } from "@utils/http";
 import {
   findCurrentUserGroup,
@@ -28,11 +29,11 @@ export const axGetUserGroupById = async (userGroupId) => {
   }
 };
 
-export const axGroupList = async (url?: string) => {
+export const axGroupList = async (url?: string, lang?: string) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/all`);
+    const data = await fetchWithCache(`${ENDPOINT.USERGROUP}/v1/group/all`);
     const groups = transformUserGroupList(data);
-    const currentGroup = url ? findCurrentUserGroup(groups, url) : {};
+    const currentGroup = url ? findCurrentUserGroup(groups, url, lang) : {};
     return { success: true, groups, currentGroup };
   } catch (e) {
     console.error(e);
@@ -43,6 +44,7 @@ export const axGroupList = async (url?: string) => {
 export const axUserGroupCreate = async (payload) => {
   try {
     const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/create`, payload);
+    clearFetchWithCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -56,6 +58,7 @@ export const axUserGroupUpdate = async (payload, userGroupId) => {
       `${ENDPOINT.USERGROUP}/v1/group/edit/save/${userGroupId}`,
       payload
     );
+    clearFetchWithCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);

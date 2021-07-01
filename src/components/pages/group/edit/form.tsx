@@ -5,10 +5,11 @@ import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
 import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -33,6 +34,7 @@ export default function UserGroupEditForm({
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
+  const { languageId } = useGlobalState();
 
   const {
     neLatitude,
@@ -77,6 +79,7 @@ export default function UserGroupEditForm({
     const payload = {
       ...STATIC_GROUP_PAYLOAD,
       ...otherValues,
+      languageId: values.languageId || languageId,
       neLatitude: spacialCoverage?.ne?.[1],
       neLongitude: spacialCoverage?.ne?.[0],
       swLatitude: spacialCoverage?.se?.[1],
@@ -85,10 +88,10 @@ export default function UserGroupEditForm({
 
     const { success, data } = await axUserGroupUpdate(payload, userGroupId);
     if (success) {
-      notification(t("GROUP.EDIT.SUCCESS"), NotificationType.Success);
+      notification(t("group:edit.success"), NotificationType.Success);
       router.push(`/group/${data.name}/show`, false, {}, true);
     } else {
-      notification(t("GROUP.EDIT.ERROR"));
+      notification(t("group:edit.error"));
     }
   };
 
@@ -97,33 +100,33 @@ export default function UserGroupEditForm({
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
           <Box gridColumn="1/4">
-            <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} />
-            <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} />
+            <TextBoxField name="name" isRequired={true} label={t("group:name")} />
+            <RichTextareaField name="description" label={t("form:description.title")} />
           </Box>
           <ImageUploaderField label="Logo" name="icon" />
         </SimpleGrid>
         <IconCheckboxField
           name="speciesGroupId"
-          label={t("GROUP.SPECIES_COVERAGE")}
+          label={t("common:species_coverage")}
           options={speciesGroups}
           type="species"
           isRequired={true}
         />
         <IconCheckboxField
           name="habitatId"
-          label={t("GROUP.HABITATS_COVERED")}
+          label={t("common:habitats_covered")}
           options={habitats}
           type="habitat"
           isRequired={true}
         />
-        <CheckboxField name="allowUserToJoin" label={t("GROUP.JOIN_WITHOUT_INVITATION")} />
+        <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
         <AreaDrawField
-          label={t("GROUP.SPATIAL_COVERGE")}
+          label={t("group:spatial_coverge")}
           name={"spacialCoverage"}
           isRequired={true}
         />
 
-        <SubmitButton mb={8}>{t("GROUP.UPDATE")}</SubmitButton>
+        <SubmitButton mb={8}>{t("group:update")}</SubmitButton>
       </form>
     </FormProvider>
   );

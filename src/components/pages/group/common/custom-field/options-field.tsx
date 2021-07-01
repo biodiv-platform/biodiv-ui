@@ -1,8 +1,8 @@
 import { Badge, Box, Button, Flex, HStack, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
-import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useController, useFieldArray } from "react-hook-form";
 
@@ -32,7 +32,7 @@ export default function Fields({ name, radioGroupName, disabled }) {
                     isRequired={true}
                     disabled={disabled}
                     name={`values.${index}.value`}
-                    label={t("GROUP.CUSTOM_FIELD.VALUE")}
+                    label={t("group:custom_field.value")}
                   />
                   <TextBoxField name={`values.${index}.notes`} disabled={disabled} label="Notes" />
                 </SimpleGrid>
@@ -43,13 +43,13 @@ export default function Fields({ name, radioGroupName, disabled }) {
                   isDisabled={fields.length < 3}
                   onClick={() => remove(index)}
                 >
-                  {t("GROUP.CUSTOM_FIELD.REMOVE.TITLE")}
+                  {t("group:custom_field.remove.title")}
                 </Button>
               </Box>
               <ImageUploaderField
                 nestedPath="customField,values"
                 simpleUpload={true}
-                label={t("GROUP.CUSTOM_FIELD.ICON")}
+                label={t("group:custom_field.icon")}
                 name={`values.${index}.iconURL`}
                 mb={0}
               />
@@ -58,7 +58,7 @@ export default function Fields({ name, radioGroupName, disabled }) {
                   hidden={index.toString() !== radioGroupController.field.value}
                   colorScheme="green"
                 >
-                  {t("GROUP.CUSTOM_FIELD.DEFAULT")}
+                  {t("group:custom_field.default")}
                 </Badge>
               </Flex>
             </SimpleGrid>
@@ -75,7 +75,7 @@ export default function Fields({ name, radioGroupName, disabled }) {
         mr={4}
         mb={4}
       >
-        {t("GROUP.CUSTOM_FIELD.ADD.OPTIONS")}
+        {t("group:custom_field.add.options")}
       </Button>
     </>
   );

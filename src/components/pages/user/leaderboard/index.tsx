@@ -1,7 +1,7 @@
 import { Select, Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@hooks/use-translation";
 import { LEADERBOARD_MODULES, LEADERBOARD_STOPS } from "@static/leaderboard";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import {
@@ -35,20 +35,20 @@ function UserLeaderboardComponent() {
               onChange={(event) => onChange("module", event.target.value)}
               defaultValue={filter?.module}
             >
-              {Object.keys(LEADERBOARD_MODULES).map((key, index) => (
-                <option key={index} value={LEADERBOARD_MODULES[key]}>
-                  {key}
+              {LEADERBOARD_MODULES.map((option) => (
+                <option key={option.label} value={option.value}>
+                  {t(option.label)}
                 </option>
               ))}
             </Select>
             <Select
-              minW="8rem"
+              minW="10rem"
               onChange={(event) => onChange("period", event.target.value)}
               defaultValue={filter?.period}
             >
-              {Object.keys(LEADERBOARD_STOPS).map((key, index) => (
-                <option key={index} value={key}>
-                  {LEADERBOARD_STOPS[key]}
+              {LEADERBOARD_STOPS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {t(option.label)}
                 </option>
               ))}
             </Select>
@@ -65,7 +65,7 @@ function UserLeaderboardComponent() {
           </Stack>
         }
       >
-        🏅 {t("LEADERBOARD.TITLE")}
+        🏅 {t("leaderboard:title")}
       </PageHeading>
       <Info />
       <UserLeaderboardTable

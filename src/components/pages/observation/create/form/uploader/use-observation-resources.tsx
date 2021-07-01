@@ -1,5 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import {
   axBulkUploadObservationResource,
@@ -10,6 +9,7 @@ import {
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { STORE } from "@static/observation-create";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { emit } from "react-gbus";
 import { useImmer } from "use-immer";
@@ -118,7 +118,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       }
     } catch (e) {
       console.error(e);
-      notification(t("OBSERVATION.DELETE_FILE.ERROR"), NotificationType.Error);
+      notification(t("observation:delete_file.error"), NotificationType.Error);
     }
   };
 
@@ -191,9 +191,9 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     if (success) {
       await deleteByID(asset.id);
       await reFetchAssets();
-      notification(t("OBSERVATION.DELETE_FILE.SUCCESS"), NotificationType.Success);
+      notification(t("observation:delete_file.success"), NotificationType.Success);
     } else {
-      notification(t("OBSERVATION.DELETE_FILE.FAILED"), NotificationType.Error);
+      notification(t("observation:delete_file.failed"), NotificationType.Error);
     }
   };
 

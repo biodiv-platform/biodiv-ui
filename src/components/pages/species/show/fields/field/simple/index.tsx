@@ -16,11 +16,11 @@ import ExternalBlueLink from "@components/@core/blue-link/external";
 import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
-import useTranslation from "@hooks/use-translation";
 import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
 import { getInjectableHTML } from "@utils/text";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { emit } from "react-gbus";
 
@@ -48,9 +48,9 @@ export default function SpeciesFieldSimple({ value }) {
     const { success } = await axRemoveSpeciesField(value.id);
     if (success) {
       emit(SPECIES_FIELD_DELETED, value);
-      notification(t("SPECIES.FIELD.DELETE.SUCCESS"), NotificationType.Success);
+      notification(t("species:field.delete.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.FIELD.DELETE.FAILURE"));
+      notification(t("species:field.delete.failure"));
     }
   };
 
@@ -88,8 +88,8 @@ export default function SpeciesFieldSimple({ value }) {
         <div data-hidden={!isOpen}>
           <Table size="xs" variant="unstyled" mt={3}>
             <Tbody>
-              <BlockList title={t("SPECIES.ATTRIBUTIONS")}>{value?.attributions}</BlockList>
-              <BlockList title={t("SPECIES.CONTRIBUTORS")}>
+              <BlockList title={t("species:attributions")}>{value?.attributions}</BlockList>
+              <BlockList title={t("species:contributors")}>
                 {value?.contributor.map((user) => (
                   <div key={user.id}>
                     <LocalLink href={`/user/show/${user.id}`} prefixGroup={true}>
@@ -100,13 +100,13 @@ export default function SpeciesFieldSimple({ value }) {
                   </div>
                 ))}
               </BlockList>
-              <BlockList title={t("SPECIES.STATUS")}>{value?.fieldData?.status}</BlockList>
-              <BlockList title={t("SPECIES.LICENSES")}>
+              <BlockList title={t("species:status")}>{value?.fieldData?.status}</BlockList>
+              <BlockList title={t("species:licenses")}>
                 <ExternalBlueLink href={value?.license?.url}>
                   {value?.license?.name}
                 </ExternalBlueLink>
               </BlockList>
-              <BlockList title={t("SPECIES.REFERENCES")}>
+              <BlockList title={t("species:references")}>
                 <OrderedList>
                   {value?.references.map(({ title, url }, index) => (
                     <ListItem key={index}>

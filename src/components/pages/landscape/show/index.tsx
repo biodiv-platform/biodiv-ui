@@ -2,11 +2,11 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import { Landscape } from "@interfaces/landscape";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import wkt from "wkt";
 
@@ -42,7 +42,7 @@ export default function LandscapeShowComponent({
         <Heading as="h1" size="xl">
           {landscape.shortName}
           <Text as="span" color="gray.500" ml={4}>
-            {t("LANDSCAPE.SITE_NUMBER")}
+            {t("landscape:site_number")}
             {landscape.siteNumber}
           </Text>
         </Heading>
@@ -58,7 +58,7 @@ export default function LandscapeShowComponent({
       <LandscapeFields childs={landscapeShow.contents.childs} />
       <Stack mb={3}>
         <Heading mb={3} size="lg">
-          {t("DOCUMENT.LIST.TITLE")}
+          {t("landscape:related_documents")}
         </Heading>
         {documentList.map((o) => (
           <InfoTab
@@ -72,7 +72,7 @@ export default function LandscapeShowComponent({
         <Flex py={2} justifyContent="flex-end">
           <LocalLink href={`/document/list`} params={{ state: landscape.shortName }}>
             <BlueLink>
-              {t("HOME.BANNER_MORE")} <ArrowForwardIcon />
+              {t("common:read_more")} <ArrowForwardIcon />
             </BlueLink>
           </LocalLink>
         </Flex>

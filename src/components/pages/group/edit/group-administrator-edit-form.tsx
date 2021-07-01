@@ -10,9 +10,9 @@ import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -77,10 +77,10 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     };
     const { success } = await axAddGroupAdminMembers(payload);
     if (success) {
-      notification(t("GROUP.ADMIN.UPDATED"), NotificationType.Success);
+      notification(t("group:admin.updated"), NotificationType.Success);
       router.push(`/group/${name}/show`, false, {}, true);
     } else {
-      notification(t("GROUP.ADMIN.ERROR"), NotificationType.Error);
+      notification(t("group:admin.error"), NotificationType.Error);
     }
   };
 
@@ -89,7 +89,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
       <AccordionItem mb={8} bg="white" border="1px solid var(--gray-300)" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
-            🛡️ {t("GROUP.ADMIN.TITLE")}
+            🛡️ {t("group:admin.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -107,7 +107,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
                 label="Moderators"
                 onRemove={(o) => onMemberRemoved(o, moderatorIds)}
               />
-              <SubmitButton>{t("GROUP.UPDATE_ADMIN")}</SubmitButton>
+              <SubmitButton>{t("group:update_admin")}</SubmitButton>
             </form>
           </FormProvider>
         </AccordionPanel>

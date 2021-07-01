@@ -53,7 +53,7 @@ export const axGetUserById = async (userId, ctx) => {
     return { success: true, data };
   } catch (e) {
     console.error(e);
-    return { success: false, data: e };
+    return { success: false, data: {} };
   }
 };
 

@@ -21,7 +21,6 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import FlagFillIcon from "@icons/flag-fill";
 import FlagOutlineIcon from "@icons/flag-outline";
 import { FlagShow } from "@interfaces/observation";
@@ -29,6 +28,7 @@ import { FLAG_OPTIONS } from "@static/constants";
 import { ACTIVITY_UPDATED } from "@static/events";
 import { adminOrAuthor } from "@utils/auth";
 import { getUserImage } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { emit } from "react-gbus";
@@ -61,7 +61,7 @@ export default function FlagActionButton({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const flagOptions = FLAG_OPTIONS.map((f) => ({
-    label: t(`ACTIONS.FLAG.FLAGS.${f}`),
+    label: t(`common:actions.flag.flags.${f.toLowerCase()}`),
     value: f
   }));
 
@@ -103,7 +103,7 @@ export default function FlagActionButton({
     <>
       <SimpleActionButton
         icon={flags && flags.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
-        title={t("ACTIONS.FLAG.TITLE")}
+        title={t("common:actions.flag.title")}
         colorScheme={flags && flags?.length ? "red" : "purple"}
         onClick={onOpen}
       />
@@ -146,7 +146,7 @@ export default function FlagActionButton({
                                 </BlueLink>
                               </LocalLink>
                               <Badge colorScheme="red" verticalAlign="baseline">
-                                {t(`ACTIONS.FLAG.FLAGS.${flag.flag}`)}
+                                {t(`common:actions.flag.flags.${flag.flag?.toLowerCase()}`)}
                               </Badge>
                               <Text>{flag.notes}</Text>
                             </Box>
@@ -171,11 +171,11 @@ export default function FlagActionButton({
                   <ModalBody>
                     <SelectInputField
                       name="flag"
-                      label={t("ACTIONS.FLAG.CATEGORY")}
+                      label={t("common:actions.flag.category")}
                       options={flagOptions}
                       shouldPortal={true}
                     />
-                    <TextAreaField mb={0} name="notes" label={t("ACTIONS.FLAG.NOTES")} />
+                    <TextAreaField mb={0} name="notes" label={t("common:actions.flag.notes")} />
                   </ModalBody>
                 )}
 

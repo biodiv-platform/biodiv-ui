@@ -1,8 +1,8 @@
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import useSpecies from "@components/pages/species/show/use-species";
-import useTranslation from "@hooks/use-translation";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useImmer } from "use-immer";
 
@@ -48,9 +48,9 @@ export function TraitColorEdit({ traitId, initialValue, onSave, onClose }) {
     if (success) {
       onSave(value.l);
       onClose();
-      notification(t("SPECIES.TRAITS.UPDATE.SUCCESS"), NotificationType.Success);
+      notification(t("species:traits.update.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.TRAITS.UPDATE.FAILURE"));
+      notification(t("species:traits.update.failure"));
     }
   };
 
@@ -67,7 +67,7 @@ export function TraitColorEdit({ traitId, initialValue, onSave, onClose }) {
           />
         ))}
         <Button h="3.25rem" alignItems="center" justifyContent="center" onClick={addSwatch}>
-          {t("ADD")}
+          {t("common:add")}
         </Button>
       </SimpleGrid>
       <TraitEditFooter onSave={handleOnSave} onCancel={onClose} />

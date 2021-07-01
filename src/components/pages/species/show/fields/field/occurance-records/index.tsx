@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { BaseLayer } from "@ibp/naksha-commons";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import LazyLoad from "react-lazyload";
 
@@ -25,6 +26,7 @@ const onObservationGridHover = ({ feature }: any) => (
 export default function OccuranceRecoardSpeciesField({ valueCallback }) {
   const { species } = useSpecies();
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
+  const { lang } = useTranslation();
 
   useEffect(() => {
     valueCallback(true);
@@ -48,6 +50,7 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
           viewPort={defaultViewPort}
           loadToC={false}
           showToC={false}
+          lang={lang}
           baseLayer={BaseLayer.MAP_SATELLITE}
           mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}

@@ -3,12 +3,12 @@ import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { Role } from "@interfaces/custom";
 import { axUpdateUserPassword } from "@services/user.service";
 import { hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -34,9 +34,9 @@ export default function ChangePasswordTab({ userId }) {
   const handleOnUpdate = async (payload) => {
     const { success } = await axUpdateUserPassword({ id: userId, ...payload });
     if (success) {
-      notification(t("FORGOT_PASSWORD.RESET_SUCCESS"), NotificationType.Success);
+      notification(t("auth:forgot.reset_success"), NotificationType.Success);
     } else {
-      notification(t("FORGOT_PASSWORD.RESET_ERROR"));
+      notification(t("auth:forgot.reset_error"));
     }
   };
 
@@ -49,17 +49,17 @@ export default function ChangePasswordTab({ userId }) {
               name="oldPassword"
               type="password"
               hidden={hideOldPassword}
-              label={t("USER.CURRENT_PASSWORD")}
+              label={t("user:current_password")}
             />
-            <TextBoxField name="newPassword" type="password" label={t("USER.NEW_PASSWORD")} />
+            <TextBoxField name="newPassword" type="password" label={t("user:new_password")} />
             <TextBoxField
               name="confirmNewPassword"
               type="password"
-              label={t("USER.CONFIRM_NEW_PASSWORD")}
+              label={t("user:confirm_new_password")}
             />
           </div>
         </SimpleGrid>
-        <SubmitButton leftIcon={<CheckIcon />}>{t("USER.UPDATE_PASSWORD")}</SubmitButton>
+        <SubmitButton leftIcon={<CheckIcon />}>{t("user:update_password")}</SubmitButton>
       </form>
     </FormProvider>
   );

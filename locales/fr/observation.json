@@ -1,0 +1,150 @@
+{
+  "accurate": "Précise",
+  "add_observation": "Ajouter une observation",
+  "cf_update_success": "Observation mise à jour avec succès",
+  "common_name": "Nom commun",
+  "continue": "Continuer",
+  "contributor": "Donatrice",
+  "coordinates": "Coordonnées",
+  "created_on": "Créé sur",
+  "creating": "Nous créons votre observation",
+  "custom_fields": "Les champs personnalisés",
+  "delete_file": {
+    "error": "Impossible de traiter le fichier, veuillez réessayer ultérieurement",
+    "failed": "Impossible de supprimer le fichier, veuillez réessayer plus tard",
+    "success": "Fichier supprimé avec succès"
+  },
+  "download": {
+    "error": "Impossible de générer un fichier",
+    "modal": {
+      "note": "Veuillez indiquer comment vous avez l'intention d'utiliser les données téléchargées",
+      "note_hint": "Ceci est important pour nous de comprendre comment les données ouvertes sont utilisées",
+      "title": "Choisissez des colonnes"
+    },
+    "success": "Votre fichier est en cours de généré.Lorsqu'il est prêt, vous serez averti par courrier électronique et un lien de téléchargement apparaîtra dans votre page de profil.",
+    "title": "Télécharger"
+  },
+  "edit_hint": "💡 Pour modifier d'autres éléments tels que nom ou traits, veuillez entrer directement à partir de la page Observation-Show.",
+  "edit_observation": "Modifier l'observation",
+  "follow_observation": "Suivre l'observation",
+  "group": "Grouper",
+  "group_updated": "Groupe d'espèces d'observation mis à jour avec succès",
+  "groups_updated": "Groupes mis à jour avec succès",
+  "help_identify": "Aider à identifier",
+  "hide_precise_location": "Masquer l'emplacement précis",
+  "id": {
+    "agree": "Accepter",
+    "no_recommendation": "Aucune recommandation",
+    "no_suggestion": "Suggérer une identification",
+    "remove": "Supprimer",
+    "resuggest": "As changé d'avis?",
+    "suggest_new_reco": "Suggérer une autre identification",
+    "suggestion_success": "L'identification suggérée avec succès",
+    "title": "identification",
+    "unlock": "Ouvrir",
+    "validate": "Valider",
+    "validated": "Identification validée par le conservateur"
+  },
+  "language": "Langue",
+  "last_location": "Utiliser le dernier emplacement",
+  "latitude": "latitude",
+  "license": "Licence",
+  "list": {
+    "chart": {
+      "sgroup": "Groupes d'espèces",
+      "states": "Distribution d'État"
+    },
+    "created_on": "Créé sur",
+    "life_list": {
+      "count_header": "Comptes",
+      "heading": "Taxa observé",
+      "species_header": "Espèce"
+    },
+    "location": "Emplacement",
+    "observations_found": "Observations trouvées",
+    "observed_on": "Observé sur",
+    "spatial_distribution": "Distribution spatiale",
+    "stats_bar": {
+      "total_identifiers": "Identificateurs",
+      "total_observations": "observations",
+      "total_taxa": "taxa",
+      "total_uploaders": "Téléchargeurs"
+    },
+    "top_identifiers_list": {
+      "author_header": "Nom",
+      "count_header": "Comptes",
+      "heading": "Top identifiants"
+    },
+    "top_uploaders_list": {
+      "author_header": "Nom",
+      "count_header": "Comptes",
+      "heading": "Top téléchargers"
+    }
+  },
+  "location_information": {
+    "coordinates": "Coordonnées",
+    "forest_type": "Type de forêt",
+    "geoprivacy_enabled": "Géoprivacy activé",
+    "rainfall": "Précipitations",
+    "soil": "Sol",
+    "tehsil": "tehsil",
+    "temperature": "Température",
+    "title": "Information de Lieu"
+  },
+  "location_placeholder": "Entrez un emplacement",
+  "location_scale": "Précision de l'emplacement",
+  "longitude": "longitude",
+  "min_three_chars": "Entrez au moins 3 caractères à la recherche",
+  "name": "Nom",
+  "nearby": "Observations à proximité",
+  "no_custom_field": "Aucun champ personnalisé trouvé pour cette observation",
+  "no_empty_suggestion": "Impossible de créer des suggestions vides",
+  "notes": "Remarques",
+  "observed": "Observé",
+  "observed_at": "Emplacement observé à",
+  "observed_on": "Observé sur",
+  "place": "Endroit",
+  "points_gained": "{{points}} point (s) d'activité gagné (s)",
+  "post_to_groups": "Poster aux groupes",
+  "range_hint": "Utilisation: Valeurs de la plage de septates",
+  "rate_success": "Médias évalué avec succès",
+  "rating": "Notation",
+  "related": "Observations connexes",
+  "remove": {
+    "description": "Êtes-vous sûr?Vous ne pouvez pas annuler cette action après.",
+    "success": "Observation supprimée avec succès",
+    "title": "Supprimer l'observation"
+  },
+  "resource_info": "Informations sur les ressources",
+  "saved": "Observation enregistrée",
+  "saved_message": "Nous n'avons pas pu créer votre observation pour le moment, mais si vous êtes hors ligne, ne vous inquiétez pas, il est enregistré et sera téléchargé une fois que la connectivité est de retour.",
+  "scientific_name": "Nom scientifique",
+  "share": "Partager cette observation",
+  "source": "La source",
+  "species_page": "Voir la page des espèces",
+  "submitted": "Soumise",
+  "success": "Créé avec succès",
+  "suggest": "Suggérer",
+  "sync": {
+    "done": "Fait",
+    "failed": "Manquée",
+    "title": "En attente d'observation (s)",
+    "uploading": "Téléchargement",
+    "view": "Vue"
+  },
+  "synonym": "Synonyme",
+  "title": "Qu'avez-vous observé aujourd'hui?",
+  "title_edit": "Modifier l'observation",
+  "traits": "traits",
+  "traits_no_group": "Veuillez d'abord sélectionner le groupe",
+  "traits_update_success": "Traits mis à jour avec succès",
+  "unfeature": "Viaque sélectionné",
+  "unfollow_observation": "Observation du désabonner",
+  "update_observation": "Mettre à jour l'observation",
+  "updated": "Mise à jour",
+  "updated_on": "Mis à jour le",
+  "use_dms": "Utiliser dms",
+  "use_last_value": "Utiliser la dernière valeur",
+  "use_lat_lng": "Utiliser la lat-long",
+  "why_featuring": "Pourquoi mettre en vedette?"
+}

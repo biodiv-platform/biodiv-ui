@@ -1,5 +1,4 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import {
@@ -8,6 +7,7 @@ import {
 } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import arrayMove from "array-move";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import GalleryListItems from "./gallery-list";
@@ -27,7 +27,7 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
 
   const handleReorderAlter = () => {
     setCanReorder(false);
-    notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY_SETUP.ALERT"));
+    notification(t("group:homepage_customization.gallery_setup.alert"));
   };
 
   const handleReorderCustomField = async () => {
@@ -38,9 +38,9 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
 
     const { success } = await axReorderHomePageGallery(userGroupId, payload);
     if (success) {
-      notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.REORDER.SUCCESS"), NotificationType.Success);
+      notification(t("group:homepage_customization.reorder.success"), NotificationType.Success);
     } else {
-      notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.REORDER.FAILURE"));
+      notification(t("group:homepage_customization.reorder.failure"));
     }
     setCanReorder(false);
   };
@@ -49,11 +49,11 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
     if (galleryList[index]?.id) {
       const { success } = await axRemoveHomePageGalleryImage(userGroupId, galleryList, index);
       if (!success) {
-        notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.REMOVE.FAILURE"), NotificationType.Error);
+        notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
     }
     setGalleryList(galleryList.filter((item, idx) => idx !== index));
-    notification(t("GROUP.HOMEPAGE_CUSTOMIZATION.REMOVE.SUCCESS"), NotificationType.Success);
+    notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
   };
 
   return (
@@ -61,10 +61,10 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
       <table style={{ minWidth: "750px" }} className="table table-bordered">
         <thead>
           <tr>
-            <th>{t("GROUP.HOMEPAGE_CUSTOMIZATION.TABLE.TITLE")}</th>
-            <th>{t("GROUP.HOMEPAGE_CUSTOMIZATION.TABLE.DESCRIPTION")}</th>
-            <th>{t("GROUP.HOMEPAGE_CUSTOMIZATION.TABLE.MORE_LINK")}</th>
-            <th>{t("GROUP.HOMEPAGE_CUSTOMIZATION.TABLE.REMOVE_IMAGE")}</th>
+            <th>{t("group:homepage_customization.table.title")}</th>
+            <th>{t("group:homepage_customization.table.description")}</th>
+            <th>{t("group:homepage_customization.table.more_link")}</th>
+            <th>{t("group:homepage_customization.table.remove_image")}</th>
           </tr>
         </thead>
         <GalleryListItems
@@ -76,7 +76,7 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
       </table>
       <ButtonGroup spacing={4} mt={4}>
         <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
-          {t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY_SETUP.CREATE")}
+          {t("group:homepage_customization.gallery_setup.create")}
         </Button>
         <Button
           colorScheme="blue"
@@ -89,7 +89,7 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
               : handleReorderCustomField
           }
         >
-          {t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY_SETUP.SAVE_ORDER")}
+          {t("group:homepage_customization.gallery_setup.save_order")}
         </Button>
       </ButtonGroup>
     </>

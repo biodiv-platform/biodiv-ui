@@ -1,12 +1,12 @@
 import { IconButton, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import AddCircleIcon from "@icons/add-circle";
 import CrossIcon from "@icons/cross";
 import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const Logo = styled.div`
@@ -38,18 +38,19 @@ const Logo = styled.div`
 `;
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
+
   return (
     <Logo>
       <Link href={SITE_CONFIG.SITE.URL} className="logo">
-        {SITE_CONFIG.SITE.TITLE}
+        {SITE_CONFIG.SITE.TITLE?.[lang]}
       </Link>
       <LocalLink href="/observation/create" prefixGroup={true}>
         <Link
           p={2}
           lineHeight={1}
           className="button"
-          aria-label={t("HEADER.MENU_PRIMARY.CONTRIBUTE.ADD_OBSERVATION")}
+          aria-label={t("header:menu_primary.contribute.add_observation")}
         >
           <AddCircleIcon />
         </Link>

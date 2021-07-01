@@ -6,7 +6,6 @@ import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { ShowDocument } from "@interfaces/document";
 import {
@@ -17,6 +16,7 @@ import {
 } from "@services/document.service";
 import { adminOrAuthor } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 interface DocumentHeaderProps {
@@ -53,7 +53,7 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
         {showActions && (
           <SimpleActionButton
             icon={<EditIcon />}
-            title={t("DOCUMENT.EDIT_DOCUMENT")}
+            title={t("document:edit_document")}
             onClick={handleOnEdit}
             colorScheme="teal"
           />
@@ -62,8 +62,8 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
           following={false}
           resourceId={documentId}
           toggleFollowFunc={axFollowDocument}
-          followTitle={t("DOCUMENT.FOLLOW")}
-          unFollowTitle={t("DOCUMENT.UNFOLLOW")}
+          followTitle={t("document:follow")}
+          unFollowTitle={t("document:unfollow")}
         />
         <FlagActionButton
           resourceId={documentId}
@@ -75,13 +75,13 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
         {showActions && (
           <DeleteActionButton
             observationId={documentId}
-            title={t("DOCUMENT.REMOVE.TITLE")}
-            description={t("DOCUMENT.REMOVE.DESCRIPTION")}
-            deleted={t("DOCUMENT.REMOVE.SUCCESS")}
+            title={t("document:remove.title")}
+            description={t("document:remove.description")}
+            deleted={t("document:remove.success")}
             deleteFunc={axDeleteDocument}
           />
         )}
-        <ShareActionButton text={pageDescription} title={t("DOCUMENT.SHARE")} />
+        <ShareActionButton text={pageDescription} title={t("document:share")} />
       </Flex>
     </SimpleGrid>
   );

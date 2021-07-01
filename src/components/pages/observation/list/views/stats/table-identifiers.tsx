@@ -14,8 +14,8 @@ import {
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { getUserImage } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { stickyTh } from "./common";
@@ -33,9 +33,9 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
         <Table variant="striped" colorScheme="gray" size="sm">
           <Thead>
             <Tr>
-              <Th {...stickyTh}>{t("LIST.TOP_IDENTIFIERS_LIST.AUTHOR_HEADER")}</Th>
+              <Th {...stickyTh}>{t("observation:list.top_identifiers_list.author_header")}</Th>
               <Th {...stickyTh} isNumeric={true}>
-                {t("LIST.TOP_IDENTIFIERS_LIST.COUNT_HEADER")}
+                {t("observation:list.top_identifiers_list.count_header")}
               </Th>
             </Tr>
           </Thead>
@@ -69,7 +69,7 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
         </Table>
       </Box>
       <Button w="full" onClick={loadMoreIdentifiers} isLoading={data.isLoading} borderTopRadius={0}>
-        {t("LOAD_MORE")}
+        {t("common:load_more")}
       </Button>
     </Box>
   ) : data.isLoading ? (

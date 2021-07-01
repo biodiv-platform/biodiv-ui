@@ -1,5 +1,4 @@
 import { Modal, ModalOverlay } from "@chakra-ui/modal";
-import useTranslation from "@hooks/use-translation";
 import { axDeleteSpeciesCommonName, axPreferredSpeciesCommonName } from "@services/species.service";
 import {
   SPECIES_NAME_ADD,
@@ -9,6 +8,7 @@ import {
   SPECIES_NAME_PREFERRED_UPDATED
 } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 
@@ -21,13 +21,13 @@ export function CommonNameEditModal({ onUpdate }) {
   const { species } = useSpecies();
 
   const handleOnCommonNameDelete = async (commonName) => {
-    if (confirm(t("SPECIES.COMMON_NAME.DELETE.DIALOUGE"))) {
+    if (confirm(t("species:common_name.delete.dialouge"))) {
       const { success, data } = await axDeleteSpeciesCommonName(species.species.id, commonName.id);
       if (success) {
         onUpdate(data);
-        notification(t("SPECIES.COMMON_NAME.DELETE.SUCCESS"), NotificationType.Success);
+        notification(t("species:common_name.delete.success"), NotificationType.Success);
       } else {
-        notification(t("SPECIES.COMMON_NAME.DELETE.FAILURE"));
+        notification(t("species:common_name.delete.failure"));
       }
     }
   };
@@ -38,9 +38,9 @@ export function CommonNameEditModal({ onUpdate }) {
     const { success, data } = await axPreferredSpeciesCommonName(commonName.id);
     if (success) {
       emit(SPECIES_NAME_PREFERRED_UPDATED, data);
-      notification(t("SPECIES.COMMON_NAME.PREFERRED.SUCCESS"), NotificationType.Success);
+      notification(t("species:common_name.preferred.success"), NotificationType.Success);
     } else {
-      notification(t("SPECIES.COMMON_NAME.PREFERRED.FAILURE"));
+      notification(t("species:common_name.preferred.failure"));
     }
   };
 

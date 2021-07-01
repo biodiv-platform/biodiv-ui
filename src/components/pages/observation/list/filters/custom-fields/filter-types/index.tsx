@@ -1,7 +1,7 @@
 import React from "react";
 
-import TextFilter from "./text-filter";
 import CategoricalFilter from "./categorical-filter";
+import TextFilter from "./text-filter";
 
 const CustomFieldTypes = ({ field }) => {
   switch (field.fieldtype) {

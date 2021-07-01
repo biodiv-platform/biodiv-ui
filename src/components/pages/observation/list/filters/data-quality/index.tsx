@@ -8,28 +8,28 @@ export default function DataQuality() {
   return (
     <SubAccordion>
       <CheckboxFilterPanel
-        translateKey="FILTERS.DATA_QUALITY.IDENTIFICATION."
+        translateKey="filters:data_quality.identification."
         filterKey="speciesName"
         options={IDENTIFICATION}
         statKey={"groupIdentificationNameExists"}
       />
 
       <CheckboxFilterPanel
-        translateKey="FILTERS.DATA_QUALITY.TAXON_ID."
+        translateKey="filters:data_quality.taxon_id."
         filterKey="taxonId"
         options={TAXON_ID}
         statKey={"groupTaxonIDExists"}
       />
 
       <CheckboxFilterPanel
-        translateKey="FILTERS.DATA_QUALITY.VALIDATION."
+        translateKey="filters:data_quality.validation."
         filterKey="validate"
         options={VALIDATION}
         statKey={"groupValidate"}
       />
 
       <CheckboxFilterPanel
-        translateKey="FILTERS.DATA_QUALITY.FLAG."
+        translateKey="filters:data_quality.flag."
         filterKey="isFlagged"
         options={FLAG}
         statKey={"groupFlag"}

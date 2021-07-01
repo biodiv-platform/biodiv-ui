@@ -1,8 +1,8 @@
 import { Modal, ModalOverlay } from "@chakra-ui/modal";
-import useTranslation from "@hooks/use-translation";
 import { axDeleteSpeciesSynonym } from "@services/species.service";
 import { SPECIES_SYNONYM_ADD, SPECIES_SYNONYM_DELETE, SPECIES_SYNONYM_EDIT } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useListener } from "react-gbus";
 
@@ -15,14 +15,14 @@ export default function SynonymEditModal({ onUpdate }) {
   const { species } = useSpecies();
 
   const handleOnSynonymDelete = async (synonym) => {
-    if (confirm(t("SPECIES.SYNONYM.DELETE.DIALOUGE"))) {
+    if (confirm(t("species:synonym.delete.dialouge"))) {
       const { success, data } = await axDeleteSpeciesSynonym(species.species.id, synonym.id);
 
       if (success) {
         onUpdate(data);
-        notification(t("SPECIES.SYNONYM.DELETE.SUCCESS"), NotificationType.Success);
+        notification(t("species:synonym.delete.success"), NotificationType.Success);
       } else {
-        notification(t("SPECIES.SYNONYM.DELETE.FAILURE"));
+        notification(t("species:synonym.delete.failure"));
       }
     }
   };

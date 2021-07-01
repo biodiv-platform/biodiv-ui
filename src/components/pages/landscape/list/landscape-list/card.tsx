@@ -1,9 +1,9 @@
 import { Box, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import { Landscape } from "@interfaces/landscape";
 import { ENDPOINT } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function GridViewCard({ o }: { o: Landscape }) {
@@ -31,7 +31,7 @@ export default function GridViewCard({ o }: { o: Landscape }) {
         <Link textDecoration="none!important">
           <Box h="4.6rem" p={4} bg="gray.100">
             <Text color="gray.600" mb={1} fontSize="xs">
-              {t("LANDSCAPE.SITE_NUMBER")}
+              {t("landscape:site_number")}
               {o.siteNumber}
             </Text>
             <Heading size="sm" className="elipsis" title={o.shortName}>

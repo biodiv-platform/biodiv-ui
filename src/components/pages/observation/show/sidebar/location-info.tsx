@@ -1,8 +1,8 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
 import { ObservationLocationInfo } from "@interfaces/observation";
 import { titleCase } from "@utils/basic";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 interface ILocationInformationProps {
@@ -23,7 +23,7 @@ export default function LocationInformation({
   const Row = ({ title, children }) => {
     return (
       <>
-        <Text fontWeight={600}>{t(`OBSERVATION.LOCATION_INFORMATION.${title}`)}</Text>
+        <Text fontWeight={600}>{t(`observation.location_information.${title}`)}</Text>
         <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
           {children}
         </Box>
@@ -33,11 +33,11 @@ export default function LocationInformation({
 
   return (
     <Box mb={4} className="white-box">
-      <BoxHeading>🏜 {t("OBSERVATION.LOCATION_INFORMATION.TITLE")}</BoxHeading>
+      <BoxHeading>🏜 {t("observation:location_information.title")}</BoxHeading>
       <SimpleGrid columns={[1, 1, 3, 3]} spacingY={4} p={4}>
         <Row title="COORDINATES">
           {geoprivacy
-            ? t("OBSERVATION.LOCATION_INFORMATION.GEOPRIVACY_ENABLED")
+            ? t("observation:location_information.geoprivacy_enabled")
             : `${latitude?.toFixed(4)}, ${longitude?.toFixed(4)}`}
         </Row>
         <Row title="TEHSIL">{layerInfo.tahsil}</Row>

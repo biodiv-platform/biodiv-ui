@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import usePullMedia from "../pull-media/use-pull-media";
@@ -21,7 +21,7 @@ export default function ObservationMedia() {
         isLoading={isLoading}
         mb={4}
       >
-        {t("LOAD_MORE")}
+        {t("common:load_more")}
       </Button>
     </>
   );

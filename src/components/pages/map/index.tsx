@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
@@ -10,6 +9,7 @@ import { getBearerToken } from "@utils/http";
 import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const NakshaMapboxList: any = dynamic(
@@ -22,7 +22,7 @@ const NakshaMapboxList: any = dynamic(
 
 export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const { user } = useGlobalState();
   const isAdmin = hasAccess([Role.Admin]);
 
@@ -34,7 +34,7 @@ export default function MapPageComponent() {
     await waitForAuth();
     const token = await getBearerToken();
     if (token) {
-      notification(t("PAGE.MAIL.SENT"), NotificationType.Success);
+      notification(t("page:mail.sent"), NotificationType.Success);
       return { success: true, data: token };
     }
     return { success: false, data: token };
@@ -54,6 +54,7 @@ export default function MapPageComponent() {
   return (
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
       <NakshaMapboxList
+        lang={lang}
         viewPort={defaultViewPort}
         loadToC={true}
         showToC={true}

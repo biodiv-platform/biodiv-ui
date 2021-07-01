@@ -7,7 +7,7 @@ export default function AuthorFilter() {
   return (
     <CheckboxFilterPanel
       filterKey={DOUCMENT_FILTER_KEY.author.filterKey}
-      translateKey="DOCUMENT.BIB.AUTHOR"
+      translateKey="document:bib.author"
     />
   );
 }

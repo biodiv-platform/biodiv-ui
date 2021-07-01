@@ -1,11 +1,12 @@
 import { Button, SimpleGrid } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import DownloadIcon from "@icons/download";
 import PeopleIcon from "@icons/people";
 import { axDownloadDocument } from "@services/document.service";
+import { isBrowser } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
 import { getDocumentFilePath } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function DownloadButtons({ documentPath, documentId, title }) {
@@ -21,6 +22,12 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
     }
   };
 
+  const openZbib = () => {
+    if (isBrowser) {
+      window.open(`https://zbib.org/import?q=${window.location.href}`, "_blank")?.focus();
+    }
+  };
+
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} mb={4} spacing={4}>
       <Button
@@ -30,10 +37,10 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
         isDisabled={!documentPath}
         colorScheme="red"
       >
-        {t("DOCUMENT.DOWNLOAD.PDF")}
+        {t("document:download.pdf")}
       </Button>
-      <Button variant="outline" leftIcon={<PeopleIcon />} colorScheme="teal">
-        {t("DOCUMENT.DOWNLOAD.CITATION")}
+      <Button variant="outline" leftIcon={<PeopleIcon />} onClick={openZbib} colorScheme="teal">
+        {t("document:download.citation")}
       </Button>
     </SimpleGrid>
   );

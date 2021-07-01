@@ -4,10 +4,10 @@ import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { axDeletePageByID } from "@services/pages.service";
 import { NextSeo } from "next-seo";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import usePagesSidebar from "../common/sidebar/use-pages-sidebar";
@@ -29,26 +29,26 @@ export default function PageHeader({ title, pageId }) {
           {title}
         </Heading>
         <Flex alignItems="top" justifyContent={["flex-start", "flex-end"]}>
-          <ShareActionButton text={title} title={t("PAGE.SHARE")} />
+          <ShareActionButton text={title} title={t("page:share")} />
           {canEdit && (
             <>
               <SimpleActionButton
                 icon={<AddIcon />}
-                title={t("PAGE.CREATE.TITLE")}
+                title={t("page:create.title")}
                 onClick={handleOnCreate}
                 colorScheme="yellow"
               />
               <SimpleActionButton
                 icon={<EditIcon />}
-                title={t("EDIT")}
+                title={t("common:edit")}
                 onClick={handleOnEdit}
                 colorScheme="teal"
               />
               <DeleteActionButton
                 observationId={pageId}
-                title={t("PAGE.REMOVE.TITLE")}
-                description={t("PAGE.REMOVE.DESCRIPTION")}
-                deleted={t("PAGE.REMOVE.SUCCESS")}
+                title={t("page:remove.title")}
+                description={t("page:remove.description")}
+                deleted={t("page:remove.success")}
                 deleteFunc={axDeletePageByID}
               />
             </>

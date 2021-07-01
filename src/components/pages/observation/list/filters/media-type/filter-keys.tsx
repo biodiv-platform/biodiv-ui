@@ -1,21 +1,21 @@
 export const MEDIA_TYPES = [
   {
-    label: "IMAGE",
+    label: "image",
     value: "no_of_images",
     stat: "groupImages"
   },
   {
-    label: "VIDEO",
+    label: "video",
     value: "no_of_videos",
     stat: "groupVideo"
   },
   {
-    label: "AUDIO",
+    label: "audio",
     value: "no_of_audio",
     stat: "groupAudio"
   },
   {
-    label: "NO_MEDIA",
+    label: "no_media",
     value: "no_media",
     stat: "groupNoMedia"
   }

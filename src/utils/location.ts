@@ -1,5 +1,6 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { isBrowser } from "@static/constants";
+
 import { parseEXIF } from "./date";
 
 /**

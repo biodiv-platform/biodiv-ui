@@ -1,0 +1,141 @@
+{
+  "add_reference": "Ajouter une référence",
+  "all_media": "Tous les médias",
+  "attributions": "attributions",
+  "common_name": {
+    "delete": {
+      "dialouge": "Êtes-vous sûr?",
+      "failure": "Impossible de supprimer le nom",
+      "success": "Nom supprimé avec succès"
+    },
+    "form": {
+      "language": "Langue",
+      "name": "Nom"
+    },
+    "preferred": {
+      "failure": "Impossible de mettre à jour le nom préféré",
+      "success": "Nom préféré mis à jour avec succès",
+      "title": "Préférée"
+    },
+    "save": {
+      "failure": "Impossible de sauvegarder le nom",
+      "success": "Nom sauvegardé avec succès"
+    }
+  },
+  "common_names": "Noms communs",
+  "contribute": {
+    "create_species": "Créer de nouvelles espèces",
+    "description": "Les pages d'espèces sont des descriptions d'espèces, avec une page pour chaque espèce.Chaque espèce peut être décrite avec plus de 60 groupes de champs standard.Les pages d'espèces sont contribuées et organisées par des experts.Toutes les informations publiées sur le portail seront sur l'accès public et sous la licence Creative Commons de votre choix.",
+    "download": "Télécharger Sample XLSX",
+    "email": "Envoyez-nous un email",
+    "offline": {
+      "description": "Vous pouvez utiliser notre modèle de feuille de calcul pour travailler hors ligne et créer des informations sur les espèces.Le modèle consiste en une ligne par espèce.Veuillez télécharger la feuille de calcul XLSX et remplir plusieurs descriptions de l'espèce dans la feuille de calcul, avoir un répertoire d'images, zip le répertoire et l'envoyer à nous sur le courrier électronique ci-dessous et nous téléchargerons ensuite le contenu en votre nom.",
+      "title": "Création hors ligne de pages d'espèces:"
+    },
+    "online": {
+      "description": "Pour créer une nouvelle espèce, vous devez avoir une autorisation d'écriture sur la page.Les autorisations peuvent être demandées pour un taxa.Veuillez demander des autorisations à l'aide des boutons ci-dessous",
+      "title": "Création en ligne de pages d'espèces:"
+    },
+    "request_permission": "Demander la permission"
+  },
+  "contributors": "Contributrice",
+  "create": {
+    "creating_page": "Veuillez patienter pendant la création de la page d'espèce.",
+    "desc_1": "Les contributeurs doivent avoir des droits sur la page d'espèce afin d'ajouter du contenu.Si vous n'avez pas encore été attribués de droits",
+    "desc_2": "Veuillez saisir un nom d'espèce et valider.Si un nom est validé et jugé déjà existé sur le portail, vous serez dirigé vers la page Espèce pour ajouter du contenu.Si le nom est validé et jugé nouveau, vous pouvez remplir la hiérarchie taxonomique afin que la nouvelle page d'espèce puisse être créée.La chaîne d'auteur est obligatoire pour les niveaux d'espèce et plus bas.",
+    "error": "Impossible de créer une page d'espèce",
+    "form": {
+      "name": "Nom",
+      "name_placeholder": "c'est à dire.Tricklinum Sorediatum",
+      "rank": "Rang",
+      "search": "Rechercher",
+      "select": "Sélectionner",
+      "taxon": {
+        "create": "Créer un taxon",
+        "parent": "Match parent",
+        "select": "Apparié"
+      },
+      "use_taxon": "Utilisez ce taxon",
+      "validate": "Valider"
+    },
+    "taxon_error": "Impossible de valider",
+    "title": "Ajouter des espèces",
+    "validate_error": "Impossible de valider"
+  },
+  "edit_name": "Gérer le nom commun",
+  "edit_synonym": "Mangange synonyme",
+  "field": {
+    "delete": {
+      "failure": "Impossible de supprimer le champ",
+      "success": "Champ supprimé avec succès"
+    },
+    "manage": "Gérer le champ",
+    "update": {
+      "failure": "Impossible de mettre à jour le champ",
+      "success": "Terrain mis à jour avec succès"
+    }
+  },
+  "follow_species": "Suivre les espèces",
+  "gallery": {
+    "update": {
+      "failure": "Impossible de mettre à jour la galerie",
+      "success": "Galerie mise à jour avec succès"
+    }
+  },
+  "groups": {
+    "title": "Groupes"
+  },
+  "licenses": "Licences",
+  "list": {
+    "title": "Liste des espèces"
+  },
+  "manage_media": "Gérer les médias",
+  "observation_media": "Média d'observation",
+  "pull_media": "Pull-pull",
+  "references": "Les références",
+  "related": {
+    "title": "Observations connexes"
+  },
+  "remove": {
+    "description": "Êtes-vous sûr?Vous ne pouvez pas annuler cette action après.",
+    "success": "Espèce supprimée avec succès",
+    "title": "Supprimer des espèces"
+  },
+  "share": "Partager cette espèce",
+  "status": "Statut",
+  "synonym": {
+    "add": {
+      "failure": "Impossible d'ajouter Synonyme",
+      "success": "Synonymey a ajouté avec succès"
+    },
+    "delete": {
+      "dialouge": "Êtes-vous sûr?",
+      "failure": "Impossible de supprimer Synonyme",
+      "success": "Synonyme supprimé avec succès"
+    },
+    "form": {
+      "datasource": "La source de données",
+      "datasource_id": "ID de DataSource",
+      "name": "Nom",
+      "rank": "Rang",
+      "type": "Taper"
+    },
+    "update": {
+      "failure": "Impossible de mettre à jour Synonyme",
+      "success": "Synonyme mis à jour avec succès"
+    }
+  },
+  "synonyms": "Synonymes",
+  "taxon": "Taxonomie",
+  "toggle_empty": "Boggle",
+  "traits": {
+    "range_hint": "Utilisation: Valeurs de la plage de septates",
+    "title": "traits",
+    "update": {
+      "failure": "Impossible de mettre à jour le trait",
+      "success": "Trait mis à jour avec succès"
+    }
+  },
+  "unfollow_species": "Suivre les espèces",
+  "view_original": "Voir original"
+}

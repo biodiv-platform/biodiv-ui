@@ -1,0 +1,85 @@
+{
+  "accepted": "Accepté",
+  "actions": {
+    "flag": {
+      "category": "Catégorie",
+      "flags": {
+        "date_inappropriate": "Date inappropriée",
+        "details_inappropriate": "Informations inappropriées",
+        "location_inappropriate": "Emplacement inapproprié"
+      },
+      "notes": "Remarques",
+      "others_flagged": "D'autres qui ont marqué",
+      "title": "Marque"
+    }
+  },
+  "activity": "Activité",
+  "add": "Ajouter",
+  "cancel": "Annuler",
+  "clear": "Nettoyer",
+  "close": "Fermer",
+  "copy": "Copier dans le presse-papier",
+  "delete": "Effacer",
+  "edit": "Éditer",
+  "edit_not_uploaded": "Certaines ressources ne sont pas téléchargées correctement, veuillez patienter ou supprimer-les avant de télécharger",
+  "feature": "Rubrique sélectionnée",
+  "feature_in_groups": "Rubrique des groupes",
+  "feedback": "Avis",
+  "footer": {
+    "email": "E-mail",
+    "facebook": "Facebook",
+    "github": "GitHub",
+    "powered_by": "Alimenté par ",
+    "technology_partner": "Partenaire technologique ",
+    "twitter": "twitter"
+  },
+  "habitats_covered": "Habitats couverts",
+  "information": "Informations",
+  "invalid_request": "requête invalide",
+  "list": {
+    "sort_by": "Trier par",
+    "sort_options": {
+      "last_updated": "Dernière mise à jour",
+      "latest": "Dernier téléchargé",
+      "most_viewed": "Le plus regardé"
+    },
+    "view_type": {
+      "grid": "Grille",
+      "list": "Liste",
+      "map": "Carte",
+      "stats": "Métrique"
+    }
+  },
+  "load_more": "Charger plus ↺",
+  "loading": "Chargement...",
+  "next": "Suivante",
+  "no_data": "Pas de données",
+  "no_results": "Aucun résultat trouvé",
+  "notifications": {
+    "invalid_credentials": "Le nom d'utilisateur ou le mot de passe que vous avez saisi est incorrect.",
+    "token_error": "Erreur de récupération du jeton",
+    "token_not_saved": "Le jeton ne peut être sauvé",
+    "token_saved": "Jeton sauvé"
+  },
+  "offline": "Pas de connexion Internet",
+  "one_moment_please": "Un instant s'il vous plaît",
+  "or": "ou alors",
+  "permalink": "Permirant",
+  "prev": "Précédente",
+  "processing": "Traitement...",
+  "read_more": "Lire la suite",
+  "save": "Sauvegarder",
+  "search": "Rechercher",
+  "slider_left": "Gauche",
+  "slider_right": "Droite",
+  "species_coverage": "Couverture de groupe d'espèces",
+  "success": "Succès",
+  "temporal": {
+    "observations": "Observations",
+    "title": "Distribution temporelle"
+  },
+  "toggle": "basculer",
+  "unauthorized": "Utilisateur non autorisé",
+  "unknown": "Inconnu",
+  "usergroups": "Groupes"
+}

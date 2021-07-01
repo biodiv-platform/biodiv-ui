@@ -1,10 +1,10 @@
 import { TimeIcon } from "@chakra-ui/icons";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
 import { axUploadObservationResource } from "@services/files.service";
 import { getAssetObject } from "@utils/image";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -62,9 +62,9 @@ export default function DropTarget({
     if (success) {
       setFieldMapping(data.excelJson);
       setValue(data.path);
-      notification(t("DATATABLE.NOTIFICATIONS.SHEET_UPLOAD_SUCCESS"), NotificationType.Success);
+      notification(t("datatable:notifications.sheet_upload_success"), NotificationType.Success);
     } else {
-      notification(t("DATATABLE.NOTIFICATIONS.SHEET_UPLOAD_ERROR"), NotificationType.Error);
+      notification(t("datatable:notifications.sheet_upload_error"), NotificationType.Error);
     }
 
     setIsProcessing(false);
@@ -85,21 +85,17 @@ export default function DropTarget({
       {isProcessing ? (
         <div className="fade">
           <TimeIcon />
-          <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
+          <span>{t("form:uploader.processing")}</span>
         </div>
       ) : simpleUpload ? (
-        <Button colorScheme="blue" variant="outline" children={t("OBSERVATION.UPLOADER.UPLOAD")} />
+        <Button colorScheme="blue" variant="outline" children={t("form:uploader.upload")} />
       ) : (
         <div className="fade">
-          <Heading size="md">{t("OBSERVATION.UPLOADER.LABEL")}</Heading>
+          <Heading size="md">{t("form:uploader.label")}</Heading>
           <Text my={2} color="gray.500">
-            {t("OR")}
+            {t("common:or")}
           </Text>
-          <Button
-            colorScheme="blue"
-            variant="outline"
-            children={t("OBSERVATION.UPLOADER.BROWSE")}
-          />
+          <Button colorScheme="blue" variant="outline" children={t("form:uploader.browse")} />
         </div>
       )}
     </DropTargetBox>

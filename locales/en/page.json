@@ -1,0 +1,35 @@
+{
+  "create": {
+    "failure": "Unable to create page",
+    "success": "Page created successfully",
+    "title": "Create Page"
+  },
+  "empty": "There are no pages published for this group",
+  "form": {
+    "content": "Content",
+    "description": "Description Metadata",
+    "is_sidebar": "Show in Sidebar",
+    "parent": "Parent Page",
+    "title": "Title"
+  },
+  "mail": {
+    "sent": "Your download is being generated. When it is ready, you will be notified by email with a download link"
+  },
+  "no_parent": "No Parent",
+  "remove": {
+    "description": "Are you sure? You can't undo this action afterwards.",
+    "success": "Page deleted successfully",
+    "title": "Delete page"
+  },
+  "share": "Share this Page",
+  "sidebar": {
+    "reorder": "Reorder Pages",
+    "toggle": "Toggle Page List",
+    "updated": "Order Updated Successfully"
+  },
+  "update": {
+    "failure": "Unable to update page",
+    "success": "Page updated successfully",
+    "title": "Update Page"
+  }
+}

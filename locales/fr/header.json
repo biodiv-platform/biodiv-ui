@@ -1,0 +1,75 @@
+{
+  "group_edit": "Modifier le groupe",
+  "logged_user_only": "Veuillez vous enregistrer pour rejoindre le groupe",
+  "member_only": "Veuillez rejoindre le groupe pour télécharger des observations",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "Ajouter un ensemble de données",
+      "add_dataset": "Ajouter un jeu de données",
+      "add_document": "Ajouter un document",
+      "add_fact": "Ajouter un fait",
+      "add_list": "Ajouter une liste",
+      "add_observation": "Ajouter une observation",
+      "add_trait_or_value": "Ajouter un trait / valeur",
+      "contribute_to_map": "Contribuer à la carte",
+      "contribute_to_species": "Contribuer à l'espèce",
+      "title": "Contribuer"
+    },
+    "groups": {
+      "see_all": "Voir tout",
+      "title": "Groupes"
+    },
+    "settings": {
+      "leaderboard": "Mon rang de classement",
+      "logout": "Se déconnecter",
+      "my_observations": "Mes observations",
+      "my_profile": "Mon profil",
+      "title": "Paramètres"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "Tables de données de documents",
+      "documents": "Documents",
+      "title": "Documents"
+    },
+    "landscapes": {
+      "title": "Zones protégées"
+    },
+    "maps": {
+      "title": "Cartes"
+    },
+    "more": {
+      "about_us": "À propos de nous",
+      "activity": "Activité",
+      "dashboard": "Tableau de bord",
+      "datasets": "Jeux de données",
+      "discussions": "Discussions",
+      "leaderboard": "Classement",
+      "participants": "Participants",
+      "title": "Suite"
+    },
+    "observation": {
+      "checklists": "Lister",
+      "datasets": "Jeux de données",
+      "observation_datatables": "Tables de données d'observation",
+      "observation_traits": "Traits d'observation",
+      "observations": "Observations",
+      "title": "Observation"
+    },
+    "pages": {
+      "empty": "Pas de pages",
+      "title": "Pages"
+    },
+    "species": {
+      "species_datatables": "Tables de données d'espèces",
+      "species_pages": "Pages d'espèces",
+      "species_traits": "Traits d'espèces",
+      "taxon_namelist": "Taxon Namelist",
+      "title": "Espèces"
+    }
+  },
+  "search": "Rechercher",
+  "sign_in": "Connexion",
+  "toggle_menu": "menu basculant"
+}

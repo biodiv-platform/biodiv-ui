@@ -1,8 +1,9 @@
 import { Box, Button, FormControl, FormLabel } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
 import { axUserSearch } from "@services/auth.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit } from "react-gbus";
 import { Mention, MentionsInput } from "react-mentions";
@@ -10,6 +11,7 @@ import { Mention, MentionsInput } from "react-mentions";
 export default function Comment({ resourceId, resourceType, focusRef, commentFunc }) {
   const [text, setText] = useState("");
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
 
   const onMentionQuery = (q, callback) => {
     if (!q) {
@@ -25,6 +27,7 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
   const handleOnComment = async () => {
     const { success } = await commentFunc({
       body: text,
+      languageId: languageId,
       rootHolderId: resourceId,
       rootHolderType: resourceType,
       subRootHolderId: null,
@@ -42,7 +45,7 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
     <Box>
       <FormControl isInvalid={false} mb={4}>
         <FormLabel htmlFor="comment" mb={2}>
-          {t("OBSERVATION.COMMENTS.ADD_COMMENT")}
+          {t("form:comments.add_comment")}
         </FormLabel>
         <MentionsInput
           id="comment"
@@ -57,7 +60,7 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
         </MentionsInput>
       </FormControl>
       <Button colorScheme="blue" onClick={handleOnComment}>
-        {t("OBSERVATION.COMMENTS.POST")}
+        {t("form:comments.post")}
       </Button>
     </Box>
   );

@@ -1,6 +1,6 @@
 import User from "@components/pages/observation/show/sidebar/user";
-import useTranslation from "@hooks/use-translation";
 import { ShowDocument } from "@interfaces/document";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import CoveragePanel from "./coverage";
@@ -29,7 +29,7 @@ export default function Sidebar({ showDocument, speciesGroups, habitatList }: Si
       <SpatialCoverage documentCoverage={showDocument.documentCoverages} />
       <CoveragePanel
         icon="🏜"
-        title={t("GROUP.HABITATS_COVERED")}
+        title={t("common:habitats_covered")}
         initialValue={showDocument.habitatIds}
         items={habitatList}
         type="habitat"
@@ -38,7 +38,7 @@ export default function Sidebar({ showDocument, speciesGroups, habitatList }: Si
       />
       <CoveragePanel
         icon="🐾"
-        title={t("GROUP.SPECIES_COVERAGE")}
+        title={t("common:species_coverage")}
         initialValue={showDocument.speciesGroupIds}
         items={speciesGroups}
         type="species"

@@ -1,11 +1,11 @@
 import { Box, Button, ListItem, OrderedList } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import DownloadIcon from "@icons/download";
 import MailIcon from "@icons/mail";
 import PeopleIcon from "@icons/people";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function SpeciesContributePageComponent() {
@@ -14,32 +14,32 @@ export default function SpeciesContributePageComponent() {
   return (
     <div className="container mt">
       <Box mb={4} as="p">
-        {t("SPECIES.CONTRIBUTE.DESCRIPTION")}
+        {t("species:contribute.description")}
       </Box>
       <OrderedList>
         <ListItem>
-          <b>{t("SPECIES.CONTRIBUTE.ONLINE.TITLE")}</b>
-          {t("SPECIES.CONTRIBUTE.ONLINE.DESCRIPTION")}
+          <b>{t("species:contribute.online.title")}</b>
+          {t("species:contribute.online.description")}
           <Box my={4}>
             <LocalLink href="/roles/request">
               <Button colorScheme="blue" leftIcon={<PeopleIcon />} mr={4} as="a">
-                {t("SPECIES.CONTRIBUTE.REQUEST_PERMISSION")}
+                {t("species:contribute.request_permission")}
               </Button>
             </LocalLink>
             <LocalLink href="/species/create">
               <Button colorScheme="blue" leftIcon={<AddIcon />} as="a">
-                {t("SPECIES.CONTRIBUTE.CREATE_SPECIES")}
+                {t("species:contribute.create_species")}
               </Button>
             </LocalLink>
           </Box>
         </ListItem>
 
         <ListItem>
-          <b>{t("SPECIES.CONTRIBUTE.OFFLINE.TITLE")}</b>
-          {t("SPECIES.CONTRIBUTE.OFFLINE.DESCRIPTION")}
+          <b>{t("species:contribute.offline.title")}</b>
+          {t("species:contribute.offline.description")}
           <Box my={4}>
             <Button colorScheme="blue" leftIcon={<DownloadIcon />} mr={4}>
-              {t("SPECIES.CONTRIBUTE.DOWNLOAD")}
+              {t("species:contribute.download")}
             </Button>
             <Button
               as="a"
@@ -47,7 +47,7 @@ export default function SpeciesContributePageComponent() {
               colorScheme="blue"
               leftIcon={<MailIcon />}
             >
-              {t("SPECIES.CONTRIBUTE.EMAIL")}
+              {t("species:contribute.email")}
             </Button>
           </Box>
         </ListItem>

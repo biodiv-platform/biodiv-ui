@@ -1,5 +1,6 @@
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
+
 import CustomFieldRow from "./custom-field-row";
 
 const CustomFieldListItems = SortableContainer(({ customFieldList, removeCustomField }) => (

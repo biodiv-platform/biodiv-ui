@@ -1,6 +1,6 @@
 import { Button, ButtonProps, Flex } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function SaveButton({ onClick, isDisabled }: ButtonProps) {
@@ -16,7 +16,7 @@ export default function SaveButton({ onClick, isDisabled }: ButtonProps) {
         w="full"
         onClick={onClick}
       >
-        {t("SAVE")}
+        {t("common:save")}
       </Button>
     </Flex>
   );

@@ -5,12 +5,12 @@ import {
   IconButton,
   useDisclosure
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import EditIcon from "@icons/edit";
 import { CustomFieldData } from "@interfaces/observation";
 import { axUpdateCustomField } from "@services/observation.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { emit } from "react-gbus";
 
@@ -44,7 +44,7 @@ export default function CustomField({
     if (success) {
       setO(data);
       emit(ACTIVITY_UPDATED, observationId);
-      notification(t("OBSERVATION.CF_UPDATE_SUCCESS"), NotificationType.Success);
+      notification(t("observation:cf_update_success"), NotificationType.Success);
     }
     onClose();
   };

@@ -1,5 +1,4 @@
 import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";
 import useOnlineStatus from "@rehooks/online-status";
@@ -12,6 +11,7 @@ import {
 } from "@static/events";
 import { STORE } from "@static/observation-create";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useImmer } from "use-immer";
@@ -91,9 +91,12 @@ export default function OfflineSync() {
         }
 
         if (instant) {
-          notification(t("OBSERVATION.POINTS_GAINED"), NotificationType.Success, {
-            points: data?.activityCount
-          });
+          notification(
+            t("observation:points_gained", {
+              points: data?.activityCount
+            }),
+            NotificationType.Success
+          );
           emit(SYNC_SINGLE_OBSERVATION_DONE);
           router.push(`/observation/show/${data.observation.id}`, true);
         } else {
@@ -166,7 +169,7 @@ export default function OfflineSync() {
       {!isOnline && (
         <Alert status="error" variant="solid" display="flex" justifyContent="center">
           <AlertIcon />
-          {t("OFFLINE")}
+          {t("common:offline")}
         </Alert>
       )}
     </div>

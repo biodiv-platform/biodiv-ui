@@ -2,8 +2,8 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Button, Center, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 export default function EmptyPageComponent() {
@@ -21,12 +21,12 @@ export default function EmptyPageComponent() {
       <Center textAlign="center" height="calc(100vh - var(--heading-height))">
         <div>
           <Text fontSize="xl" mb={4}>
-            {t("PAGE.EMPTY")}
+            {t("page:empty")}
           </Text>
           {canCreate && (
             <LocalLink prefixGroup={true} href="/page/create">
               <Button as="a" colorScheme="blue" rightIcon={<ArrowForwardIcon />}>
-                {t("PAGE.CREATE.TITLE")}
+                {t("page:create.title")}
               </Button>
             </LocalLink>
           )}

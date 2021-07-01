@@ -1,26 +1,26 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 
 import PagesMenuItem from "./pages-menu-item";
 
 export default [
   {
     active: SITE_CONFIG.SPECIES.ACTIVE,
-    name: "HEADER.MENU_SECONDARY.SPECIES.",
+    name: "header:menu_secondary.species.",
     rows: [
       {
-        name: "SPECIES_PAGES",
+        name: "species_pages",
         to: "/species/list"
       },
       {
-        name: "TAXON_NAMELIST",
+        name: "taxon_namelist",
         to: "/namelist/index"
       },
       {
-        name: "SPECIES_TRAITS",
+        name: "species_traits",
         to: "/species/traits"
       },
       {
-        name: "SPECIES_DATATABLES",
+        name: "species_datatables",
         params: {
           type: "species"
         },
@@ -30,26 +30,26 @@ export default [
   },
   {
     active: SITE_CONFIG.OBSERVATION.ACTIVE,
-    name: "HEADER.MENU_SECONDARY.OBSERVATION.",
+    name: "header:menu_secondary.observation.",
     rows: [
       {
-        name: "OBSERVATIONS",
+        name: "observations",
         to: "/observation/list"
       },
       {
-        name: "CHECKLISTS",
+        name: "checklists",
         to: "/checklist/index"
       },
       {
-        name: "DATASETS",
+        name: "datasets",
         to: "/datasource/list"
       },
       {
-        name: "OBSERVATION_TRAITS",
+        name: "observation_traits",
         to: "/observation/traits"
       },
       {
-        name: "OBSERVATION_DATATABLES",
+        name: "observation_datatables",
         params: {
           type: "observations"
         },
@@ -59,19 +59,19 @@ export default [
   },
   {
     active: SITE_CONFIG.MAP.ACTIVE,
-    name: "HEADER.MENU_SECONDARY.MAPS.",
+    name: "header:menu_secondary.maps.",
     to: "/map"
   },
   {
     active: SITE_CONFIG.DOCUMENT.ACTIVE,
-    name: "HEADER.MENU_SECONDARY.DOCUMENTS.",
+    name: "header:menu_secondary.documents.",
     rows: [
       {
-        name: "DOCUMENTS",
+        name: "documents",
         to: "/document/list"
       },
       {
-        name: "DOCUMENT_DATATABLES",
+        name: "document_datatables",
         params: {
           type: "documents"
         },
@@ -81,51 +81,51 @@ export default [
   },
   {
     active: SITE_CONFIG.LANDSCAPE.ACTIVE,
-    name: "HEADER.MENU_SECONDARY.LANDSCAPES.",
+    name: "header:menu_secondary.landscapes.",
     to: "/landscape/list"
   },
   {
     active: SITE_CONFIG.PAGES.ACTIVE,
     cell: PagesMenuItem,
     isLazy: true,
-    name: "HEADER.MENU_SECONDARY.PAGES."
+    name: "header:menu_secondary.pages."
   },
   {
-    name: "HEADER.MENU_SECONDARY.MORE.",
+    name: "header:menu_secondary.more.",
     rows: [
       {
         active: SITE_CONFIG.ACTIVITY.ACTIVE,
-        name: "ACTIVITY",
+        name: "activity",
         to: "/activityFeed/list"
       },
       {
         active: SITE_CONFIG.DISCUSSION.ACTIVE,
-        name: "DISCUSSIONS",
+        name: "discussions",
         to: "/discussion/list"
       },
       {
         active: SITE_CONFIG.DATASET.ACTIVE,
-        name: "DATASETS",
+        name: "datasets",
         to: "/dataset/list"
       },
       {
         active: SITE_CONFIG.PARTICIPANTS.ACTIVE,
-        name: "PARTICIPANTS",
+        name: "participants",
         to: "/user/list"
       },
       {
         active: SITE_CONFIG.LEADERBOARD.ACTIVE,
-        name: "LEADERBOARD",
+        name: "leaderboard",
         to: "/user/leaderboard"
       },
       {
         active: SITE_CONFIG.DASHBOARD.ACTIVE,
-        name: "DASHBOARD",
+        name: "dashboard",
         to: "/chart/show"
       },
       {
         active: SITE_CONFIG.ABOUT.ACTIVE,
-        name: "ABOUT_US",
+        name: "about_us",
         to: "/about"
       }
     ]

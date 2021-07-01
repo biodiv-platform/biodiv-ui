@@ -1,5 +1,5 @@
 import { Badge, Box, Flex, Image, Stack } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";

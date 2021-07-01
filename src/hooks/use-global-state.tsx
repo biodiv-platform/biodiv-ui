@@ -3,10 +3,10 @@ import { axGetTree } from "@services/pages.service";
 import { axCheckUserGroupMember } from "@services/usergroup.service";
 import { AUTHWALL } from "@static/events";
 import { getParsedUser } from "@utils/auth";
+import { getLanguageId } from "@utils/i18n";
+import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
-
-import useTranslation from "./use-translation";
 
 interface GlobalStateContextProps {
   user?;
@@ -18,6 +18,7 @@ interface GlobalStateContextProps {
   currentGroup: UserGroupIbpExtended;
   isCurrentGroupMember?: boolean;
   setIsCurrentGroupMember;
+  languageId?;
 
   pages?;
   setPages?;
@@ -34,8 +35,9 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [user, setUser] = useState<any>(initialState.user || {});
   const [pages, setPages] = useState<any[]>([]);
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
-  const { localeId } = useTranslation();
+  const { lang } = useTranslation();
 
+  const languageId = useMemo(() => getLanguageId(lang)?.ID, [lang]);
   const isLoggedIn = useMemo(() => !!user.id, [user]);
 
   const fetchIsCurrentGroupMember = async () => {
@@ -52,7 +54,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   useEffect(() => {
     axGetTree({
       userGroupId: initialState.currentGroup?.id,
-      languageId: localeId
+      languageId
     }).then(({ data }) => setPages(data));
   }, [initialState.currentGroup?.id]);
 
@@ -70,6 +72,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
         setUser,
         isLoggedIn,
         isCurrentGroupMember,
+        languageId,
         setIsCurrentGroupMember
       }}
     >

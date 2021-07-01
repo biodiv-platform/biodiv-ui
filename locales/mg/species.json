@@ -1,0 +1,141 @@
+{
+  "add_reference": "Manampia fanondroana",
+  "all_media": "Ny haino aman-jery rehetra",
+  "attributions": "andraikitra",
+  "common_name": {
+    "delete": {
+      "dialouge": "Azonao antoka ve izany?",
+      "failure": "Tsy afaka mamafa anarana",
+      "success": "Nesorina tamim-pahombiazana ny anarana"
+    },
+    "form": {
+      "language": "Fiteny",
+      "name": "Anarana"
+    },
+    "preferred": {
+      "failure": "Tsy afaka nanavao anarana tiany",
+      "success": "Nohavaozina soa aman-tsara ny anarana tiany",
+      "title": "tiany"
+    },
+    "save": {
+      "failure": "Tsy afaka namonjy anarana",
+      "success": "Voavonjy soa aman-tsara ny anarana"
+    }
+  },
+  "common_names": "Anarana iombonana",
+  "contribute": {
+    "create_species": "Mamorona karazana vaovao",
+    "description": "Ny pejy karazana karazana dia mamaritra ny karazana, misy pejy iray ho an'ny karazana tsirairay. Ny karazana tsirairay dia azo raisina miaraka amin'ny saha 60 mahery mihoatra ny 60. Ny pejy karazana karazana dia omena sy voaro amin'ny manam-pahaizana manokana. Ny fampahalalana rehetra navoaka tao amin'ny vavahady dia ho eo amin'ny fidirana ampahibemaso ary eo ambany lisansa Creative Commons ny safidinao.",
+    "download": "Ampidino ny santionany xlsx",
+    "email": "Mandefasa US",
+    "offline": {
+      "description": "Azonao atao ny mampiasa ny modely fanesorana ny elanelantsika mba hiasa ivelany ary hamorona fampahalalana karazana. Ny modely dia misy isaky ny andalana iray isaky ny karazany. Azafady azafady azafady ny fiparitahan'ny XLSX, ary fenoy ny famaritana karazana karazana maro ao amin'ny spreadsheet, misy sary amin'ny sary, zip ny lahatahiry ary alefaso aminay amin'ny mailaka eto ambany ary hampiditra ny atinao ho anao izahay.",
+      "title": "Famoronana ny pejy manokana:"
+    },
+    "online": {
+      "description": "Mba hamoronana karazana vaovao tokony hosoratanao alalana amin'ny pejy. Ny fahazoan-dàlana dia azo angatahina amin'ny taxa iray. Azafady angataho ny fahazoan-dàlana amin'ny alàlan'ny bokotra etsy ambany",
+      "title": "Famoronana horonantsary an-tserasera pejy:"
+    },
+    "request_permission": "Mangataka ny fahazoan-dàlana"
+  },
+  "contributors": "mpandray anjara",
+  "create": {
+    "creating_page": "Miandrasa azafady fa ny pejy karazana dia noforonina.",
+    "desc_1": "Ny mpandray anjara dia mila mamorona zo eo amin'ny pejin'ny karazana mba hanampiana ny atiny. Raha mbola tsy mbola niova ny zo",
+    "desc_2": "Azafady ampidiro ny anarana sy ny maha-manan-kery. Raha manan-kery ny anarana iray ary hita fa efa misy eo amin'ny vavahadin-tserasera, dia hoentina any amin'ny pejin'ny karazana ianao hanampy ny atiny. Raha manan-kery ny anarana ary hita ho vaovao, azonao atao ny mameno ny hierarchie taxonomika ka azo noforonina ny pejy vaovao. Ny kofehy mpanoratra dia tsy maintsy takiana amin'ny haavon'ny karazana ary ambany.",
+    "error": "Tsy afaka namorona pejy karazana",
+    "form": {
+      "name": "Anarana",
+      "name_placeholder": "i.e. triclinum sorediatum",
+      "rank": "laharana",
+      "search": "karohy",
+      "select": "Safidio",
+      "taxon": {
+        "create": "Mamorona taxon",
+        "parent": "Lalao ray aman-dreny",
+        "select": "mifanentana"
+      },
+      "use_taxon": "Ampiasao ity taxon ity",
+      "validate": "hanamafy"
+    },
+    "taxon_error": "Tsy afaka manamarina",
+    "title": "Manampy karazana",
+    "validate_error": "Tsy afaka manamarina"
+  },
+  "edit_name": "Mitantana anarana mahazatra",
+  "edit_synonym": "Manange manangem",
+  "field": {
+    "delete": {
+      "failure": "Tsy afaka mamafa ny saha",
+      "success": "Nalefa soa aman-tsara ny saha"
+    },
+    "manage": "Mitantana saha",
+    "update": {
+      "failure": "Tsy afaka nanavao ny saha",
+      "success": "Nohavaozina soa aman-tsara ny saha"
+    }
+  },
+  "follow_species": "Araho ny karazana",
+  "gallery": {
+    "update": {
+      "failure": "Tsy afaka nanavao ny galeri",
+      "success": "Gallery dia nohavaozina soa aman-tsara"
+    }
+  },
+  "groups": {
+    "title": "Vondrona vondrona"
+  },
+  "licenses": "fahazoan-dalana",
+  "list": {
+    "title": "Lisitry ny karazana"
+  },
+  "manage_media": "Mitantana haino aman-jery",
+  "observation_media": "Media fandinihana",
+  "pull_media": "Pull Media",
+  "references": "References",
+  "related": {
+    "title": "Fanamarihana mifandraika"
+  },
+  "remove": {
+    "description": "Azonao antoka ve izany? Tsy azonao atao ny manaisotra io hetsika io aorian'izay.",
+    "success": "Ny karazana dia nesorina tamim-pahombiazana",
+    "title": "Fafao ireo karazana"
+  },
+  "share": "Zarao ity karazana ity",
+  "status": "sata",
+  "synonym": {
+    "add": {
+      "failure": "Tsy afaka manampy sinonimia",
+      "success": "Nanampy tamim-pahombiazana ny Synonym"
+    },
+    "delete": {
+      "dialouge": "Azonao antoka ve izany?",
+      "failure": "Tsy afaka namafa ny sinonimia",
+      "success": "Synonym dia voafafa soa aman-tsara"
+    },
+    "form": {
+      "datasource": "Datasource",
+      "datasource_id": "Datasource ID",
+      "name": "Anarana",
+      "rank": "laharana",
+      "type": "Type"
+    },
+    "update": {
+      "failure": "Tsy afaka manavao ny sinonimia",
+      "success": "Synonym nohavaozina soa aman-tsara"
+    }
+  },
+  "synonyms": "Synonymes",
+  "taxon": "panasokajiana",
+  "toggle_empty": "Toggle foana",
+  "traits": {
+    "range_hint": "Ampiasao: Ny Septate Sours Range",
+    "title": "toetra",
+    "update": {
+      "failure": "Tsy afaka manavao ny toetrany",
+      "success": "Nohavaozina soa aman-tsara ny traina"
+    }
+  },
+  "unfollow_species": "Araho ny karazana",
+  "view_original": "Jereo tany am-boalohany"
+}

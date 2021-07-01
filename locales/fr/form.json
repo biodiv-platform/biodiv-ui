@@ -1,0 +1,81 @@
+{
+  "audio": {
+    "start": "Commencer l'enregistrement",
+    "stop": "Arrêter l'enregistrement",
+    "title": "Enregistreur audio"
+  },
+  "comments": {
+    "add_comment": "Ajouter un nouveau commentaire",
+    "post": "Poster un commentaire",
+    "title": "Commentaires)"
+  },
+  "coverage": {
+    "hint": "Une fois sélectionné dans n'importe quelle entrée Appuyez sur le bouton Enregistrer sous la carte pour finaliser",
+    "place": "Nom de lieu",
+    "spatial": "Couverture spatiale",
+    "title": "Couverture",
+    "wkt": "WKT"
+  },
+  "date_accuracy": "Précision de la date",
+  "date_accuracy_options": {
+    "accurate": "Exact",
+    "approximate": "Approximatif",
+    "unknown": "Inconnu"
+  },
+  "date_range": "Ajouter une plage de date",
+  "description": {
+    "audio": "L'enregistrement s'arrête automatiquement après deux minutes",
+    "my_uploads": "Téléchargez et stockez des médias ici pendant une période de 20 jours.Sélectionnez des images à utiliser dans l'observation",
+    "resources": "Téléchargez des fichiers image, audio ou vidéo d'une seule observation de votre appareil.(Utilisez des évaluations pour commander des images)",
+    "title": "Description"
+  },
+  "find_gmaps": "Recherche à partir de Google Maps",
+  "from_url": "Youtube",
+  "geoentities": "Recherche dans des paysages",
+  "language": "Langue",
+  "license": "Licence",
+  "location_accuracy_options": {
+    "accurate": "Exact",
+    "approximate": "Approximatif",
+    "country": "Pays",
+    "local": "Local",
+    "region": "Région"
+  },
+  "map": {
+    "hide": "Modification simplifiée",
+    "show": "Modification avancée"
+  },
+  "my_uploads": "Brouillon",
+  "my_uploads_sort": {
+    "taken_on": "Pris sur",
+    "uploaded_on": "Téléchargé sur"
+  },
+  "notes": "Remarques",
+  "selected_media": "Média sélectionné",
+  "selected_places": "Endroits sélectionnés",
+  "species_groups": "Groupes d'espèces",
+  "tags": "Mots clés",
+  "tags_hint": "Commencez à taper des mots clés de recherche",
+  "tags_update_error": "Il y avait une erreur lors de la mise à jour des mots clés",
+  "tags_update_success": "Mots clés mis à jour avec succès",
+  "terms": "En soumettant ce formulaire, vous acceptez que les photos ou vidéos que vous soumettez sont prises par vous ou que vous avez la permission du titulaire du droit d'auteur de les télécharger sur des licences Creative Commons.Creative Commons - Attribution (CC-BY) s'appliquera à toutes les données fournies.",
+  "title": "Titre",
+  "upload_status": {
+    "failed": "Manquée",
+    "pending": "En attente",
+    "uploaded": "Téléchargé sur le brouillon de médias",
+    "uploading": "Téléchargement"
+  },
+  "uploader": {
+    "browse": "Parcourir",
+    "description": "(Seuls les fichiers JPG, JPEG, PNG, MP3, MP4 seront acceptés)",
+    "label": "Déposez les fichiers ici",
+    "label_release": "Prêt à télécharger",
+    "processing": "Traitement en cours",
+    "upload": "Télécharger",
+    "uploading": "Téléchargement..."
+  },
+  "use_in_observation": "Utiliser sélectionné",
+  "wkt": "Wkt",
+  "youtube_placeholder": "Entrer le lien YouTube"
+}

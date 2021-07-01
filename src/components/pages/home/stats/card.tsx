@@ -2,8 +2,8 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
 import { toHumanString } from "human-readable-numbers";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const CardLink = styled.a`
@@ -51,7 +51,7 @@ export default function Card({ name, count, index, meta }) {
             {toHumanString(count || 0)}
           </Text>
           <Text>
-            {t(`HOME.PORTAL_STATS.${name.toUpperCase()}`)}
+            {t(`home:portal_stats.${name.toLowerCase()}`)}
             <span className="arrow">
               <ArrowForwardIcon />
             </span>

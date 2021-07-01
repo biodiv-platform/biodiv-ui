@@ -11,9 +11,9 @@ import {
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
-import useTranslation from "@hooks/use-translation";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function ObservationList({ title, data, loadMore }) {
@@ -26,12 +26,12 @@ export default function ObservationList({ title, data, loadMore }) {
           {title} ({data.total})
         </Box>
         <LocalLink href="/observation/list" params={data.link}>
-          <ExternalBlueLink>{t("USER.VIEW_ALL")}</ExternalBlueLink>
+          <ExternalBlueLink>{t("user:view_all")}</ExternalBlueLink>
         </LocalLink>
       </Flex>
       <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} spacing={4}>
         {data.list.map((observation) => {
-          const title = observation?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN");
+          const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
             <LocalLink
               href={`/observation/show/${observation.observationId}`}
@@ -72,7 +72,7 @@ export default function ObservationList({ title, data, loadMore }) {
         onClick={() => loadMore()}
         mt={4}
       >
-        {t("OBSERVATION.LOAD_MORE_OBSERVATIONS")}
+        {t("common:load_more")}
       </Button>
     </Box>
   );

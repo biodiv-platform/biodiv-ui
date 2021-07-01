@@ -9,9 +9,9 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
 import DeleteIcon from "@icons/delete";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import SimpleActionButton from "./simple";
@@ -51,10 +51,10 @@ export default function DeleteActionButton({
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
-                {t("CANCEL")}
+                {t("common:cancel")}
               </Button>
               <Button colorScheme="red" onClick={handleOnDelete} ml={3}>
-                {t("DELETE")}
+                {t("common:delete")}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

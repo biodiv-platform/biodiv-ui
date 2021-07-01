@@ -1,0 +1,89 @@
+{
+  "basic_information": "Informations de base",
+  "bib": {
+    "abstract": "Description",
+    "address": "Adresse",
+    "author": "Auteur",
+    "booktitle": "Titre du livre",
+    "chapter": "Chapitre",
+    "doi": "DOI",
+    "edition": "Édition",
+    "editor": "Éditeur",
+    "extra": "Supplémentaire",
+    "file": "Fichier",
+    "howpublished": "Publication",
+    "institution": "Institution",
+    "isbn": "ISBN",
+    "journal": "journal",
+    "language": "Langue",
+    "month": "Mois",
+    "note": "Note",
+    "number": "Nombre",
+    "organization": "Organisation",
+    "pages": "pages",
+    "publisher": "Editeur",
+    "schema": {
+      "error": "Impossible de récupérer le schéma Bibtex"
+    },
+    "school": "École",
+    "series": "Séries",
+    "title": "Titre",
+    "type": "Type",
+    "url": "URL",
+    "volume": "Volume",
+    "year": "Année"
+  },
+  "contribution": "Contribution",
+  "create": {
+    "error": "Impossible de créer un document",
+    "success": "Document créé avec succès",
+    "title": "Créer un document"
+  },
+  "created_on": "Créé sur",
+  "description": "Description",
+  "documents_found": "Documents trouvés",
+  "doi": "DOI",
+  "download": {
+    "citation": "Citation",
+    "pdf": "PDF"
+  },
+  "edit": {
+    "error": "Il y a eu une erreur dans la mise à jour de ce document",
+    "success": "Document mis à jour avec succès",
+    "title": "Modifier le document"
+  },
+  "edit_document": "Modifier le document",
+  "follow": "Suivre le document",
+  "import_bibtex": "Importer depuis BibTex",
+  "issue": "Issue",
+  "list": {
+    "title": "Documents"
+  },
+  "metadata": "Métadonnées",
+  "no_geodata": "Aucune donnée géographique disponible",
+  "no_usergroup": "Aucun groupe d'utilisateurs trouvé pour ce document",
+  "pages": "pages",
+  "publication_date": "Date de publication",
+  "publication_language": "Langue de publication",
+  "remove": {
+    "description": "Êtes-vous sûr? Vous ne pourrez pas annuler cette action après.",
+    "success": "Document supprimé avec succès",
+    "title": "Supprimer le document"
+  },
+  "share": "Partager ce document",
+  "tags": {
+    "not_found": "Pas de mot clé (s) trouvé (s)",
+    "title": "Mots clés"
+  },
+  "type": "Type",
+  "unfollow": "Document non suivi",
+  "unknown": "Document inconnu",
+  "update_error": "Impossible de mettre à jour",
+  "update_success": "Mis à jour avec succés",
+  "updated_on": "Date mise à jour",
+  "upload": {
+    "my_uploads": "Brouillon",
+    "selected": "Document sélectionné",
+    "url": "URL externe"
+  }
+}

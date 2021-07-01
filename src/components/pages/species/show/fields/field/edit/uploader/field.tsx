@@ -10,7 +10,7 @@ import {
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
 import ResourcesList from "@components/pages/observation/create/form/uploader/observation-resources/resources-list";
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
 
@@ -43,8 +43,8 @@ const DropzoneField = ({ name, mb = 4 }: IDropzoneProps) => {
         isLazy={true}
       >
         <TabList mb={4} overflowX="auto" py={1}>
-          <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
-          <Tab>☁️ {t("OBSERVATION.MY_UPLOADS")}</Tab>
+          <Tab>✔️ {t("form:selected_media")}</Tab>
+          <Tab>☁️ {t("form:my_uploads")}</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

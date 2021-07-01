@@ -2,11 +2,12 @@ import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@c
 import LocalLink from "@components/@core/local-link";
 import DocumentIcon from "@components/pages/document/common/document-icon";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CalendarIcon from "@icons/calendar";
 import LockIcon from "@icons/lock";
 import PeopleIcon from "@icons/people";
 import { getUserImage } from "@utils/media";
+import { getInjectableHTML } from "@utils/text";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 interface InfoTabInterface {
@@ -28,7 +29,11 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
             <HStack alignItems="center" spacing={4}>
               <DocumentIcon />
               <Heading fontSize="lg" className="elipsis-2">
-                {document?.title || t("DOCUMENT.UNKNOWN")}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: getInjectableHTML(document?.title || t("document:unknown"))
+                  }}
+                />
               </Heading>
               <Badge colorScheme="red">{document.itemtype}</Badge>
             </HStack>
@@ -52,7 +57,11 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
             {document.journal && (
               <Text title="journal">
                 <LockIcon mr={2} />
-                {document.journal}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: getInjectableHTML(document.journal)
+                  }}
+                />
               </Text>
             )}
           </Stack>

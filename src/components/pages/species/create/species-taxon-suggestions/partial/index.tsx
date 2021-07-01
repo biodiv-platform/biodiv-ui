@@ -1,9 +1,9 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
-import useTranslation from "@hooks/use-translation";
 import { axSaveTaxonomy } from "@services/species.service";
 import notification from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import { SpeciesCreateCommonTableRows } from "../common-table-rows";
@@ -48,7 +48,7 @@ export default function SpeciesTaxonPartial() {
           rightIcon={<ArrowForwardIcon />}
           onClick={() => createPartialTaxon(original.registry)}
         >
-          {t("SPECIES.CREATE.FORM.SELECT")}
+          {t("species:create.form.select")}
         </Button>
       )
     }

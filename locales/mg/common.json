@@ -1,0 +1,85 @@
+{
+  "accepted": "nanaiky",
+  "actions": {
+    "flag": {
+      "category": "Category",
+      "flags": {
+        "date_inappropriate": "Daty tsy mendrika",
+        "details_inappropriate": "Ny antsipiriany tsy mendrika",
+        "location_inappropriate": "Toerana tsy mendrika"
+      },
+      "notes": "-tsoratra",
+      "others_flagged": "Ny hafa izay maneverina",
+      "title": "sainam-pirenena"
+    }
+  },
+  "activity": "asa",
+  "add": "hametraka",
+  "cancel": "hanafoana",
+  "clear": "Mazava",
+  "close": "AKAIKY",
+  "copy": "Adikao amin'ny Clipboard",
+  "delete": "Mamafa",
+  "edit": "Ovay",
+  "edit_not_uploaded": "Ny loharanom-pahalalana sasany dia tsy alefa araka ny tokony ho izy, azafady, andraso na esory alohan'ny hampidirana azy",
+  "feature": "Fisafidy voafantina",
+  "feature_in_groups": "Endri-javatra amin'ny vondrona",
+  "feedback": "Hevitra momba ny valiny",
+  "footer": {
+    "email": "Email",
+    "facebook": "Facebook",
+    "github": "GitHub",
+    "powered_by": "Ampandehanin'i",
+    "technology_partner": " Mpiara-miasa amin'ny teknolojia",
+    "twitter": "Twitter"
+  },
+  "habitats_covered": "Voasarona",
+  "information": "Information",
+  "invalid_request": "Fangatahana tsy mety",
+  "list": {
+    "sort_by": "Sivanina araka",
+    "sort_options": {
+      "last_updated": "Nohavaozina farany",
+      "latest": "Nampidirina farany",
+      "most_viewed": "Ny fahitana indrindra"
+    },
+    "view_type": {
+      "grid": "Fefy",
+      "list": "Lisitra",
+      "map": "Sarintany",
+      "stats": "mari-pandrefesana"
+    }
+  },
+  "load_more": "Vesatra bebe kokoa ↺",
+  "loading": "Loading ...",
+  "next": "Manaraka",
+  "no_data": "Tsy misy data",
+  "no_results": "Tsy nisy valiny hita",
+  "notifications": {
+    "invalid_credentials": "Diso ny solon'anarana na ny tenimiafina nampidirinao.",
+    "token_error": "Hadisoana ny fehikibo famantarana",
+    "token_not_saved": "Tsy afaka namonjy tokana",
+    "token_saved": "Tome Voavonjy"
+  },
+  "offline": "Tsy misy fifandraisana Internet",
+  "one_moment_please": "Indray mandeha azafady",
+  "or": "na",
+  "permalink": "Permalink",
+  "prev": "Teo aloha",
+  "processing": "Ny fanodinana ...",
+  "read_more": "Hamaky bebe kokoa",
+  "save": "afa-tsy",
+  "search": "karohy",
+  "slider_left": "ANKA",
+  "slider_right": "TSARA",
+  "species_coverage": "Karazana vondrona vondrona",
+  "success": "FETY",
+  "temporal": {
+    "observations": "fanamarihana",
+    "title": "Fizarana ara-nofo"
+  },
+  "toggle": "toggle",
+  "unauthorized": "Mpampiasa tsy nahazoana alàlana",
+  "unknown": "TSY FANTATRA",
+  "usergroups": "Vondrona vondrona"
+}

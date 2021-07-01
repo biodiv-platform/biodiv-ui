@@ -2,9 +2,9 @@ import { Alert, AlertIcon } from "@chakra-ui/alert";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axCheckTaxonomy, axSaveTaxonomy } from "@services/species.service";
 import notification from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -60,7 +60,7 @@ export function SpeciesTaxonCreateForm() {
       setSelectedTaxon(data);
       setDisableForm(true);
     } else {
-      notification(t("SPECIES.CREATE.TAXON_ERROR"));
+      notification(t("species:create.taxon_error"));
     }
   };
 
@@ -80,14 +80,14 @@ export function SpeciesTaxonCreateForm() {
         onOpen();
       }
     } else {
-      notification(t("SPECIES.CREATE.VALIDATE_ERROR"));
+      notification(t("species:create.validate_error"));
     }
   };
 
   return disableForm ? (
     <Alert status="info">
       <AlertIcon />
-      {t("SPECIES.CREATE.CREATING_PAGE")}
+      {t("species:create.creating_page")}
     </Alert>
   ) : (
     <FormProvider {...hForm}>
@@ -104,7 +104,7 @@ export function SpeciesTaxonCreateForm() {
           />
         ))}
         <SubmitButton isDisabled={Object.keys(hForm.formState.errors).length}>
-          {t("SPECIES.CREATE.FORM.TAXON.CREATE")}
+          {t("species:create.form.taxon.create")}
         </SubmitButton>
       </form>
     </FormProvider>

@@ -3,7 +3,6 @@ import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { AssetStatus } from "@interfaces/custom";
 import { ObservationUpdateData } from "@interfaces/observation";
@@ -11,6 +10,7 @@ import { axUpdateObservation } from "@services/observation.service";
 import { dateToUTC, formatDateFromUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -40,10 +40,7 @@ export default function ObservationEditForm({
       Yup.object().shape({
         resources: Yup.array().of(
           Yup.object().shape({
-            status: Yup.number().oneOf(
-              [AssetStatus.Uploaded, null],
-              t("OBSERVATION.EDIT_NOT_UPLOADED")
-            )
+            status: Yup.number().oneOf([AssetStatus.Uploaded, null], t("common:edit_not_uploaded"))
           })
         ),
         notes: Yup.string().nullable(),
@@ -76,14 +73,17 @@ export default function ObservationEditForm({
   const handleOnSubmit = async (values) => {
     const payload = {
       ...values,
-      resources: values.resources.map(({ path, url, type, caption, rating, licenseId }) => ({
-        path,
-        url,
-        type,
-        caption,
-        rating,
-        licenseId
-      })),
+      resources: values.resources.map(
+        ({ path, url, type, caption, rating, licenseId, languageId }) => ({
+          path,
+          url,
+          type,
+          caption,
+          rating,
+          licenseId,
+          languageId
+        })
+      ),
       observedOn: dateToUTC(values.observedOn).format()
     };
     const { success } = await axUpdateObservation(payload, observationId);
@@ -103,12 +103,12 @@ export default function ObservationEditForm({
         <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
           <Link>
             <Alert mb={4} borderRadius="md">
-              {t("OBSERVATION.EDIT_HINT")} <ArrowForwardIcon />
+              {t("observation:edit_hint")} <ArrowForwardIcon />
             </Alert>
           </Link>
         </LocalLink>
         <SubmitButton leftIcon={<CheckIcon />} mb={4}>
-          {t("OBSERVATION.UPDATE_OBSERVATION")}
+          {t("observation:update_observation")}
         </SubmitButton>
       </form>
     </FormProvider>

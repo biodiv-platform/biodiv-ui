@@ -1,12 +1,12 @@
 import { Box, Button, Image, Input } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config.json";
-import useTranslation from "@hooks/use-translation";
+import SITE_CONFIG from "@configs/site-config";
 import CheckIcon from "@icons/check";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { axGetYouTubeInfo } from "@services/utility.service";
 import { ASSET_TYPES } from "@static/observation-create";
 import { getYoutubeImage } from "@utils/media";
 import { nanoid } from "nanoid";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import useObservationCreate from "../use-observation-resources";
@@ -58,7 +58,7 @@ export default function FromURL({ onDone }) {
         mb={4}
         type="text"
         id="youtube-link"
-        placeholder={t("OBSERVATION.YOUTUBE_PLACEHOLDER")}
+        placeholder={t("form:youtube_placeholder")}
         value={resourceLink}
         onChange={handleOnChange}
       />
@@ -70,7 +70,7 @@ export default function FromURL({ onDone }) {
         type="button"
         colorScheme="blue"
       >
-        {t("OBSERVATION.USE_IN_OBSERVATION")}
+        {t("form:use_in_observation")}
       </Button>
     </Box>
   );

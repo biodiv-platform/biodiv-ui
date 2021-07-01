@@ -1,7 +1,7 @@
 import { Link } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
 import FeedbackIcon from "@icons/feedback";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const FeedbackButton = styled.div`
@@ -38,13 +38,13 @@ export default function Feedback() {
         shadow="lg"
         bg="blue.500"
         rel="noreferrer"
-        aria-label={t("FEEDBACK")}
+        aria-label={t("common:feedback")}
         fontSize="lg"
         href="https://forms.gle/G4Gi6NpuvnRRuDCc8"
         target="_blank"
       >
         <FeedbackIcon className="icon" />
-        <span>{t("FEEDBACK")}</span>
+        <span>{t("common:feedback")}</span>
       </Link>
     </FeedbackButton>
   );

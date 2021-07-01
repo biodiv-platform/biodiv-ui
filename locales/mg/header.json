@@ -1,0 +1,75 @@
+{
+  "group_edit": "Vondrona fanovana",
+  "logged_user_only": "Azafady miditra ao amin'ny vondrona",
+  "member_only": "Miangavy anao hiaraka amin'ny vondrona mba hampakatra fandinihana",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "Ampio ny fonosana data",
+      "add_dataset": "Ampio Dataset",
+      "add_document": "Manampy antontan-taratasy",
+      "add_fact": "Ampio ny zava-misy",
+      "add_list": "Manampy lisitra",
+      "add_observation": "Manampy fandinihana",
+      "add_trait_or_value": "Manampia trait / sanda",
+      "contribute_to_map": "Mandray anjara amin'ny sarintany",
+      "contribute_to_species": "Mandray anjara amin'ny karazana",
+      "title": "Mandray anjara"
+    },
+    "groups": {
+      "see_all": "Jereo daholo",
+      "title": "Vondrona vondrona"
+    },
+    "settings": {
+      "leaderboard": "Ny laharan'ny laharako",
+      "logout": "Miala",
+      "my_observations": "Ny fandinihako",
+      "my_profile": "Ny mombamomba ahy",
+      "title": "Fikirana"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "Datatables antontan-taratasy",
+      "documents": "Antontan-taratasy",
+      "title": "Antontan-taratasy"
+    },
+    "landscapes": {
+      "title": "Faritra arovana"
+    },
+    "maps": {
+      "title": "Maps"
+    },
+    "more": {
+      "about_us": "Momba ANAY",
+      "activity": "asa",
+      "dashboard": "anaty fiara",
+      "datasets": "Datasets",
+      "discussions": "fifanakalozan-kevitra",
+      "leaderboard": "Leadersboard",
+      "participants": "mpandray anjara",
+      "title": "Bebe kokoa"
+    },
+    "observation": {
+      "checklists": "Lisitra",
+      "datasets": "Datasets",
+      "observation_datatables": "Datatables",
+      "observation_traits": "Toetra fandinihana",
+      "observations": "fanamarihana",
+      "title": "fandinihana"
+    },
+    "pages": {
+      "empty": "Tsy misy pejy",
+      "title": "Pejy"
+    },
+    "species": {
+      "species_datatables": "Karazana datatables",
+      "species_pages": "Pejy karazana",
+      "species_traits": "Karazana karazana",
+      "taxon_namelist": "Taxonalistes",
+      "title": "karazana"
+    }
+  },
+  "search": "karohy",
+  "sign_in": "Hiditra",
+  "toggle_menu": "Toggle Menu"
+}

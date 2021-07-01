@@ -4,9 +4,9 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import { axCheckTaxonomy } from "@services/species.service";
 import notification from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -46,7 +46,7 @@ export function SpeciesValidateForm() {
       setSelectedTaxon(undefined);
       setValidationParams(values);
     } else {
-      notification(t("SPECIES.CREATE.VALIDATE_ERROR"));
+      notification(t("species:create.validate_error"));
     }
     setIsLoading(false);
   };
@@ -55,13 +55,13 @@ export function SpeciesValidateForm() {
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnValidate)}>
         <Heading mb={4} fontSize="2xl">
-          🔍 {t("SPECIES.CREATE.FORM.SEARCH")}
+          🔍 {t("species:create.form.search")}
         </Heading>
         <SimpleGrid columns={{ base: 1, md: 6 }} spacing={{ md: 4 }} mb={2}>
           <GridItem colSpan={1}>
             <SelectInputField
               name="rank"
-              label={t("SPECIES.CREATE.FORM.RANK")}
+              label={t("species:create.form.rank")}
               options={taxonRankOptions}
               isRequired={true}
             />
@@ -69,13 +69,13 @@ export function SpeciesValidateForm() {
           <GridItem colSpan={4}>
             <TextBoxField
               name="speciesName"
-              label={t("SPECIES.CREATE.FORM.NAME")}
-              hint={t("SPECIES.CREATE.FORM.NAME_PLACEHOLDER")}
+              label={t("species:create.form.name")}
+              hint={t("species:create.form.name_placeholder")}
               isRequired={true}
             />
           </GridItem>
           <SubmitButton mt={{ md: "31px" }} leftIcon={<SearchIcon />}>
-            {t("SPECIES.CREATE.FORM.VALIDATE")}
+            {t("species:create.form.validate")}
           </SubmitButton>
         </SimpleGrid>
       </form>

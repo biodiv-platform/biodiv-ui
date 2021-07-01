@@ -12,9 +12,9 @@ import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
-import useTranslation from "@hooks/use-translation";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceRAW, getResourceThumbnail } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function SpeciesFieldResource({ resources }) {
@@ -58,7 +58,7 @@ export default function SpeciesFieldResource({ resources }) {
                   </div>
                   <div>
                     <ExternalBlueLink href={getResourceRAW(resource.context, resource.fileName)}>
-                      {t("SPECIES.VIEW_ORIGINAL")}
+                      {t("species:view_original")}
                     </ExternalBlueLink>
                   </div>
                 </PopoverBody>

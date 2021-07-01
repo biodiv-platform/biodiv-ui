@@ -4,12 +4,12 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axAddUserGroupRule } from "@services/usergroup.service";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { formatGroupRules } from "@utils/userGroup";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -66,11 +66,11 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
     const payload = formatPayload(formData);
     const { success, data } = await axAddUserGroupRule(userGroupId, payload);
     if (success && groupRules) {
-      notification(t("GROUP.RULES.ADD.SUCCESS"), NotificationType.Success);
+      notification(t("group:rules.add.success"), NotificationType.Success);
       setGroupRules(formatGroupRules(data));
       setIsCreate(false);
     } else {
-      notification(t("GROUP.RULES.ADD.FAILURE"));
+      notification(t("group:rules.add.failure"));
     }
   };
 
@@ -83,16 +83,16 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           onClick={() => setIsCreate(false)}
           leftIcon={<ArrowBackIcon />}
         >
-          {t("GROUP.CUSTOM_FIELD.BACK")}
+          {t("group:custom_field.back")}
         </Button>
         <SelectInputField
           name="type"
           onChangeCallback={setInputType}
           options={RULES_TYPE}
-          label={t("GROUP.RULES.INPUT_TYPES.TITLE")}
+          label={t("group:rules.input_types.title")}
         />
         {inputType && <RulesInputType inputType={inputType} name="ruleValue" />}
-        <SubmitButton leftIcon={<CheckIcon />}>{t("GROUP.RULES.ADD.TITLE")}</SubmitButton>
+        <SubmitButton leftIcon={<CheckIcon />}>{t("group:rules.add.title")}</SubmitButton>
       </form>
     </FormProvider>
   );

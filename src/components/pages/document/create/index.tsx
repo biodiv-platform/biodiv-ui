@@ -2,22 +2,20 @@ import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanTags } from "@utils/tags";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import BasicInfo from "./basic-info";
-import TagsInput from "./basic-info/tags-input";
 import Coverage from "./coverage";
 import Metadata from "./metadata";
 import DocumentUploader from "./uploader";
@@ -38,7 +36,6 @@ export default function DocumentCreatePageComponent({
 }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { user } = useGlobalState();
   const [bibField, setBibField] = useState({
     schema: DEFAULT_BIB_FIELDS_SCHEMA,
     fields: DEFAULT_BIB_FIELDS
@@ -51,7 +48,6 @@ export default function DocumentCreatePageComponent({
         itemTypeId: Yup.number().required(),
         bibFieldData: Yup.object().shape(bibField.schema),
 
-        contribution: Yup.string(),
         licenseId: Yup.number().required(),
         fromDate: Yup.mixed(),
 
@@ -87,7 +83,6 @@ export default function DocumentCreatePageComponent({
       habitatIds: [],
       docCoverageData: [],
       userGroupId: [],
-      contribution: user?.name,
       licenseId: SITE_CONFIG.LICENSE.DEFAULT
     }
   });
@@ -111,10 +106,10 @@ export default function DocumentCreatePageComponent({
     const { success, data } = await axCreateDocument(payload);
 
     if (success) {
-      notification(t("DOCUMENT.CREATE.SUCCESS"), NotificationType.Success);
+      notification(t("document:create.success"), NotificationType.Success);
       router.push(`/document/show/${data.document.id}`, true);
     } else {
-      notification(t("DOCUMENT.CREATE.ERROR"));
+      notification(t("document:create.error"));
     }
   };
 
@@ -122,7 +117,7 @@ export default function DocumentCreatePageComponent({
     <Box className="container mt" pb={6}>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <PageHeading>📄 {t("DOCUMENT.CREATE.TITLE")}</PageHeading>
+          <PageHeading>📄 {t("document:create.title")}</PageHeading>
           <DocumentUploader name="resource" />
           <BasicInfo
             canImport={true}
@@ -130,10 +125,9 @@ export default function DocumentCreatePageComponent({
             setBibField={setBibField}
             licensesList={licensesList}
           />
-          <TagsInput />
           <Metadata bibFields={bibField.fields} />
           <Coverage speciesGroups={speciesGroups} habitats={habitats} />
-          <SubmitButton leftIcon={<CheckIcon />}>{t("DOCUMENT.CREATE.TITLE")}</SubmitButton>
+          <SubmitButton leftIcon={<CheckIcon />}>{t("document:create.title")}</SubmitButton>
         </form>
       </FormProvider>
     </Box>

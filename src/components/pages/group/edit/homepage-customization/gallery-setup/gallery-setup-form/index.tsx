@@ -1,9 +1,9 @@
-import { Box, Button, Flex, Switch, Text } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Switch, Text } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -67,12 +67,12 @@ export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Button m={3} type="button" onClick={() => isCreate(false)} leftIcon={<ArrowBackIcon />}>
-            {t("GROUP.HOMEPAGE_CUSTOMIZATION.BACK")}
+            {t("group:homepage_customization.back")}
           </Button>
           <Flex alignItems="center">
-            <Text m={3}>{t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.NEW_IMAGE")}</Text>
+            <Text m={3}>{t("group:homepage_customization.resources.new_image")}</Text>
             <Switch onChange={handleChange} />
-            <Text m={3}>{t("GROUP.HOMEPAGE_CUSTOMIZATION.RESOURCES.OBSERVATION_IMAGE")}</Text>
+            <Text m={3}>{t("group:homepage_customization.resources.observation_image")}</Text>
           </Flex>
         </Box>
         {imagePicker ? (
@@ -85,9 +85,9 @@ export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList
         )}
         <TextAreaField
           name="customDescripition"
-          label={t("GROUP.HOMEPAGE_CUSTOMIZATION.TABLE.DESCRIPTION")}
+          label={t("group:homepage_customization.table.description")}
         />
-        <SubmitButton>{t("GROUP.HOMEPAGE_CUSTOMIZATION.GALLERY_SETUP.CREATE")}</SubmitButton>
+        <SubmitButton>{t("group:homepage_customization.gallery_setup.create")}</SubmitButton>
       </form>
     </FormProvider>
   );

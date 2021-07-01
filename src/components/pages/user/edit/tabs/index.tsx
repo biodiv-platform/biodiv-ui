@@ -1,5 +1,5 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import NotificationsTab from "./notifications";
@@ -15,10 +15,10 @@ export default function UserEditTabs({ user, isAdmin }) {
       <div className="white-box">
         <Tabs isLazy={true}>
           <TabList>
-            <Tab>👤 {t("USER.ABOUT")}</Tab>
-            <Tab>🔑 {t("USER.CHANGE_PASSWORD")}</Tab>
-            <Tab>🔔 {t("USER.NOTIFICATIONS")}</Tab>
-            {isAdmin && <Tab>🛡️ {t("USER.PERMISSIONS")}</Tab>}
+            <Tab>👤 {t("user:about")}</Tab>
+            <Tab>🔑 {t("user:change_password")}</Tab>
+            <Tab>🔔 {t("user:notifications")}</Tab>
+            {isAdmin && <Tab>🛡️ {t("user:permissions")}</Tab>}
           </TabList>
           <TabPanels>
             <TabPanel>

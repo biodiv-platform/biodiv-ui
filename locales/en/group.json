@@ -1,0 +1,160 @@
+{
+  "about": {
+    "closed_group": "Closed Group",
+    "open_group": "Open Group",
+    "title": "About"
+  },
+  "admin": {
+    "error": "There was some error while updating Administrators",
+    "founder": "Founders",
+    "moderator": "Moderators",
+    "no_access": "to update custom fields or group rules please contact administrator",
+    "title": "Group Administrators",
+    "updated": "Group Administrators Updated Successfully"
+  },
+  "confirm_closed_group": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
+  "create": {
+    "error": "There was some error while creating Group",
+    "success": "Group Created Successfully",
+    "title": "Create a Group"
+  },
+  "custom_field": {
+    "add": {
+      "failure": "Unable to add Custom Field",
+      "options": "Add Options",
+      "success": "Custom Field added successfully"
+    },
+    "add_option": "Add Option",
+    "allow_participant": "Allow Participation",
+    "back": "Back to List",
+    "create": "Create Custom Field",
+    "data_type": "Data Types",
+    "default": "Default",
+    "exist": "Custom Field already exists",
+    "field_type": "Field Types",
+    "icon": "Icon",
+    "is_mandatory": "Mandatory",
+    "name": "Name",
+    "notes": "Notes",
+    "remove": {
+      "default": "Default",
+      "failure": "Unable to delete Custom Field",
+      "success": "Custom Field deleted successfully ",
+      "title": "Remove"
+    },
+    "reorder": {
+      "failure": "Unable to save Custom Field order",
+      "success": "Custom Field reordered successfully"
+    },
+    "save": "Save",
+    "save_order": "Save Custom Field Order",
+    "table": {
+      "actions": "Actions",
+      "data_type": "Data Type",
+      "input_type": "Input Type",
+      "mandatory": "Mandatory",
+      "name": "Name",
+      "participation": "Participation"
+    },
+    "title": "Custom Fields",
+    "units": "Units",
+    "value": "Value"
+  },
+  "delete_member": "Are you sure you want to delete?",
+  "edit": {
+    "error": "There was some error while updating Group",
+    "success": "Group Updated Successfully",
+    "title": "Edit Group"
+  },
+  "homepage_customization": {
+    "about_us": "About Us",
+    "add_options": "Add Options",
+    "back": "Back to List",
+    "default": "Default",
+    "failure": "Unable to Save changes",
+    "gallery": "Gallery",
+    "gallery_setup": {
+      "alert": "Please save changes to re-order",
+      "create": "Create Gallery Image",
+      "save_order": "Save Gallery Image(s) Order",
+      "show_image_upload": "Show Image Uploader",
+      "title": "Gallery Setup"
+    },
+    "module_stats": "Module Stats",
+    "observation_map": "Observation Distribution Map",
+    "recent_observation": "Recent Observation",
+    "remove": {
+      "failure": "Unable to remove Gallery Image",
+      "success": "Deleted Gallery Image Successfully"
+    },
+    "reorder": {
+      "failure": "Unable to save Gallery List  order",
+      "success": "Gallery List reordered successfully"
+    },
+    "resources": {
+      "error": "Enter valid observation id",
+      "imageurl": "Choose Gallery Image",
+      "link": "Show Page Link",
+      "new_image": "Image Upload",
+      "obs_id": "Observation Id",
+      "observation_image": "Observation Image",
+      "title": "Title"
+    },
+    "save": "Save Homepage Details",
+    "show_desc": "Show Description",
+    "success": "Updated changes successfully",
+    "table": {
+      "description": "Description",
+      "more_link": "Link",
+      "remove_image": "Remove",
+      "title": "Title"
+    },
+    "title": "Homepage Customization",
+    "update": {
+      "failure": "Unable to Update Homepage Details",
+      "success": "Homepage Details Updated successfully"
+    }
+  },
+  "icon": "Icon",
+  "invite": "Type user name or email",
+  "invite_founders": "Invite Founders",
+  "invite_moderators": "Invite Moderators",
+  "join": "Join Group",
+  "join_without_invitation": "Allow user to join the group without invitation",
+  "member": {
+    "joined": "Group joined successfully",
+    "joined_error": "Unable to join Group",
+    "requested": "Group join request sent"
+  },
+  "name": "Group Name",
+  "rules": {
+    "add": {
+      "failure": "Unable to add Usergroup rule",
+      "success": "Created successfully",
+      "title": "Create Group Rule"
+    },
+    "input_types": {
+      "spatial": "Add Spatial Rule",
+      "taxonomy": "Add taxonomic Rule",
+      "title": "Select Input Type",
+      "user": "Aggregate observation of all group members"
+    },
+    "remove": {
+      "failure": "unable to delete user group rule",
+      "success": "user group rule deleted"
+    },
+    "table": {
+      "actions": "Actions",
+      "read_less": "Read Less",
+      "read_more": "Read More",
+      "rule_type": "Rule Type",
+      "value": "Value"
+    },
+    "title": "Group Rules"
+  },
+  "save": "Create Group",
+  "spatial_coverge": "Spatial Coverage",
+  "tags": "Tags",
+  "update": "Update Group",
+  "update_admin": "Update Administrators"
+}

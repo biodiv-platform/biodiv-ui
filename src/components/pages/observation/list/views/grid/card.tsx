@@ -1,10 +1,10 @@
 import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
-import useTranslation from "@hooks/use-translation";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
@@ -36,9 +36,9 @@ export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
         <Link textDecoration="none!important">
           <Box h="4.6rem" p={4}>
             <Heading size="sm" className="elipsis" title={o.recoIbp?.commonName}>
-              {o.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}{" "}
+              {o.recoIbp?.scientificName || t("common:unknown")}{" "}
               {!o.recoIbp?.scientificName && (
-                <Badge colorScheme="red">{t("OBSERVATION.HELP_IDENTIFY")}</Badge>
+                <Badge colorScheme="red">{t("observation:help_identify")}</Badge>
               )}
             </Heading>
 

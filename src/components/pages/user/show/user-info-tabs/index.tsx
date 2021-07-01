@@ -1,5 +1,5 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import UserAbout from "./about/user-about";
@@ -13,8 +13,8 @@ export default function UserInfoTabs({ user }) {
     <Box gridColumn={{ md: "2/5" }} mb={8}>
       <Tabs isLazy={true} variant="soft-rounded">
         <TabList>
-          <Tab>👤 {t("USER.ABOUT")}</Tab>
-          <Tab>🐾 {t("USER.OBSERVATIONS.TITLE")}</Tab>
+          <Tab>👤 {t("user:about")}</Tab>
+          <Tab>🐾 {t("user:observations.title")}</Tab>
         </TabList>
         <TabPanels>
           <TabPanel px={0}>

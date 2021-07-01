@@ -1,0 +1,81 @@
+{
+  "audio": {
+    "start": "Start Recording",
+    "stop": "Stop Recording",
+    "title": "Audio Recorder"
+  },
+  "comments": {
+    "add_comment": "Add a new comment",
+    "post": "Post Comment",
+    "title": "Comment(s)"
+  },
+  "coverage": {
+    "hint": "once selected from any input press save button below the map to finalize",
+    "place": "Place Name",
+    "spatial": "Spatial Coverage",
+    "title": "Coverage",
+    "wkt": "WKT"
+  },
+  "date_accuracy": "Date Accuracy",
+  "date_accuracy_options": {
+    "accurate": "Accurate",
+    "approximate": "Approximate",
+    "unknown": "Unknown"
+  },
+  "date_range": "Add Date range",
+  "description": {
+    "audio": "Recording will automatically stop after two minutes",
+    "my_uploads": "Upload and store media here for a period of 20 days. Select images to use in observation",
+    "resources": "Upload image, audio or video files of a single observation from your device. (Use ratings to order images)",
+    "title": "Description"
+  },
+  "find_gmaps": "Search from Google Maps",
+  "from_url": "YouTube",
+  "geoentities": "Search from Landscapes",
+  "language": "Language",
+  "license": "License",
+  "location_accuracy_options": {
+    "accurate": "Accurate",
+    "approximate": "Approximate",
+    "country": "Country",
+    "local": "Local",
+    "region": "Region"
+  },
+  "map": {
+    "hide": "Simplified Edit",
+    "show": "Advanced Edit"
+  },
+  "my_uploads": "Draft Media",
+  "my_uploads_sort": {
+    "taken_on": "Taken on",
+    "uploaded_on": "Uploaded on"
+  },
+  "notes": "Notes",
+  "selected_media": "Selected Media",
+  "selected_places": "Selected Places",
+  "species_groups": "Species Groups",
+  "tags": "Tags",
+  "tags_hint": "Start typing to search tags",
+  "tags_update_error": "There was an error while updating tags",
+  "tags_update_success": "Tags Updated Successfully",
+  "terms": "By submitting this form, you agree that the photos or videos you are submitting are taken by you, or you have permission of the copyright holder to upload them on creative commons licenses. Creative Commons - Attribution (CC-BY) will apply to all data provided.",
+  "title": "Title",
+  "upload_status": {
+    "failed": "Failed",
+    "pending": "Pending",
+    "uploaded": "Uploaded to Draft Media",
+    "uploading": "Uploading"
+  },
+  "uploader": {
+    "browse": "Browse",
+    "description": "(Only JPG, JPEG, PNG, MP3 ,MP4 files will be accepted)",
+    "label": "Drop file(s) here",
+    "label_release": "Ready to upload",
+    "processing": "Processing",
+    "upload": "Upload",
+    "uploading": "Uploading..."
+  },
+  "use_in_observation": "Use Selected",
+  "wkt": "WKT",
+  "youtube_placeholder": "Input YouTube link"
+}

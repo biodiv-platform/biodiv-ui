@@ -8,8 +8,8 @@ import {
   ModalOverlay,
   useDisclosure
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import GridIcon from "@icons/grid";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useSpecies from "../../use-species";
@@ -25,13 +25,13 @@ export default function SpeciesGalleryModal({ resources, setResources }) {
     <>
       <Box position="absolute" top={0} right={0} p={4} zIndex={1}>
         <Button onClick={onOpen} leftIcon={<GridIcon />}>
-          {t("SPECIES.ALL_MEDIA")}
+          {t("species:all_media")}
         </Button>
       </Box>
       <Modal isOpen={isOpen} size="6xl" onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{t("SPECIES.ALL_MEDIA")}</ModalHeader>
+          <ModalHeader>{t("species:all_media")}</ModalHeader>
           <ModalCloseButton />
           {permissions.isContributor ? (
             <SpeciesGalleryForm

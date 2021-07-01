@@ -12,10 +12,10 @@ import {
   OCCUPATION_OPTIONS
 } from "@components/pages/register/form/options";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
 import { axUpdateUserAbout } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -71,10 +71,10 @@ export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentPro
   const handleOnUpdate = async (payload) => {
     const { success } = await axUpdateUserAbout({ id: user.id, ...payload });
     if (success) {
-      notification(t("USER.UPDATED"), NotificationType.Success);
+      notification(t("user:updated"), NotificationType.Success);
       router.push(`/user/show/${user.id}`, true);
     } else {
-      notification(t("USER.UPDATE_ERROR"));
+      notification(t("user:update_error"));
     }
   };
 
@@ -82,26 +82,26 @@ export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentPro
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
-          <TextBoxField name="userName" label={t("USER.USERNAME")} />
-          <TextBoxField name="name" label={t("USER.NAME")} />
-          <TextBoxField name="email" type="email" disabled={!isAdmin} label={t("USER.EMAIL")} />
-          <PhoneNumberInputField name="mobileNumber" disabled={!isAdmin} label={t("USER.MOBILE")} />
+          <TextBoxField name="userName" label={t("user:username")} />
+          <TextBoxField name="name" label={t("user:name")} />
+          <TextBoxField name="email" type="email" disabled={!isAdmin} label={t("user:email")} />
+          <PhoneNumberInputField name="mobileNumber" disabled={!isAdmin} label={t("user:mobile")} />
           <SelectInputField
             name="occupation"
-            label={t("USER.OCCUPATION")}
+            label={t("user:occupation")}
             options={OCCUPATION_OPTIONS}
           />
           <SelectInputField
             name="institution"
-            label={t("USER.INSTITUTION")}
+            label={t("user:institution")}
             options={INSTITUTION_OPTIONS}
           />
-          <SelectInputField name="sexType" label={t("USER.GENDER")} options={GENDER_OPTIONS} />
-          <TextBoxField name="website" label={t("USER.WEBSITE")} />
+          <SelectInputField name="sexType" label={t("user:gender")} options={GENDER_OPTIONS} />
+          <TextBoxField name="website" label={t("user:website")} />
         </SimpleGrid>
         <TextAreaField name="aboutMe" label="About" />
         <LocationPicker />
-        <SubmitButton leftIcon={<CheckIcon />}>{t("SAVE")}</SubmitButton>
+        <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
       </form>
     </FormProvider>
   );

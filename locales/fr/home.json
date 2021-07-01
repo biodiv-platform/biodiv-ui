@@ -1,0 +1,57 @@
+{
+  "donors": "Donateurs",
+  "features": {
+    "citizen_science": {
+      "desc": "Tout membre du grand public peut télécharger une observation de toutes les espèces observées.Les autres membres aident à identifier, annotant et valident les observations.",
+      "title": "Science Citoyenne"
+    },
+    "groups": {
+      "desc": "Les microsites sur le portail permettent aux communautés dédiées aux thèmes de leur intérêt de collecter, de céder et de partager des contenus.",
+      "title": "Communautés"
+    },
+    "idao": {
+      "desc": "WIKWIO IDAO est un logiciel d’aide à l’identification et une base de connaissance des principales adventices des cultures alimentaires et des cultures de rente des pays de l’ouest de l’Océan Indien.",
+      "title": "IDAO"
+    },
+    "landscapes": {
+      "desc": "Agrégation des informations sur les paysages de l'Inde avec des informations détaillées sur les frontières spatiales, les listes d'espèces et la littérature pertinente à ce sujet.*Bientôt disponible*",
+      "title": "Paysages"
+    },
+    "literature": {
+      "desc": "Littérature examinée par les pairs et littérature grise téléchargés par des membres ou en partenariat avec des revues de biodiversité, organisées avec des métadonnées et des balises.",
+      "title": "Littérature biodiversité"
+    },
+    "maps": {
+      "desc": "Interagissez en ligne avec plusieurs couches de données spatiales accompagnées de calques de carte via un module Web-SIG interactif.",
+      "title": "Cartes"
+    },
+    "open_data": {
+      "desc": "Tous les contenus sur le portail sont ouverts et utilisés sous licence Creative Commons pour la réutilisation et le partage avec attribution aux contributeurs d'origine.",
+      "title": "Données ouvertes"
+    },
+    "species_information": {
+      "desc": "Pages descriptives pour toutes les espèces de l'Inde à partir de sources authentifiées. Aider à collaborer et à développer des informations sur les espèces de l'Inde.",
+      "title": "Information sur les espèces"
+    },
+    "taxonomy": {
+      "desc": "Informations sur la taxonomie et la nomenclature des espèces de l'Inde, permettant des mises à jour dynamiques pour organiser et interroger les données sur les espèces, organisées par des experts.",
+      "title": "Taxonomie"
+    },
+    "title": "Caractéristiques"
+  },
+  "more": "Voir toutes les observations",
+  "no_recent_observations": "Aucune observation récente",
+  "observations": "Observations récentes",
+  "observed_by": "Observation par",
+  "partners": "Partenaires",
+  "portal_stats": {
+    "activeuser": "Utilisateurs",
+    "discussions": "Discussions",
+    "documents": "Documents",
+    "maps": "Cartes",
+    "observation": "Observations",
+    "species": "Espèces",
+    "usergroups": "Groupes"
+  },
+  "sponsors": "Sponsorisé par"
+}

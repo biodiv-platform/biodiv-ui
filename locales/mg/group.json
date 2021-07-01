@@ -1,0 +1,160 @@
+{
+  "about": {
+    "closed_group": "Vondrona mihidy",
+    "open_group": "Open Group",
+    "title": "About"
+  },
+  "admin": {
+    "error": "Nisy ny lesoka raha nanavao ny mpitantana",
+    "founder": "Mpanorina",
+    "moderator": "Mpanolotsaina",
+    "no_access": "hanavao ny saha mahazatra na ny fitsipi-pifehezana dia azafady mba mifandraisa amin'ny Administrator",
+    "title": "Mpitantana vondrona",
+    "updated": "Nohavaozina tamim-pahombiazana ny mpitantana vondrona"
+  },
+  "confirm_closed_group": "Ity dia vondrona mihidy, ny fangatahana mpikambana dia tsy maintsy eken'ny mpandika teny iray. Tsindrio OK raha handefa ny fangatahana",
+  "create": {
+    "error": "Nisy ny fahadisoana raha namorona vondrona",
+    "success": "Noforonina soa aman-tsara ny vondrona",
+    "title": "Mamorona vondrona"
+  },
+  "custom_field": {
+    "add": {
+      "failure": "Tsy afaka manampy saha mahazatra",
+      "options": "Ampio ny safidy",
+      "success": "Ny saha mahazatra dia nanampy tamim-pahombiazana"
+    },
+    "add_option": "Manampy safidy",
+    "allow_participant": "Avelao ny fandraisana anjara",
+    "back": "Miverina ao anaty lisitra",
+    "create": "Mamorona saha mahazatra",
+    "data_type": "Karazana data",
+    "default": "toerana misy anao",
+    "exist": "Efa misy ny saha mahazatra",
+    "field_type": "Karazan-tsaha",
+    "icon": "matoanteny",
+    "is_mandatory": "maintsy",
+    "name": "Anarana",
+    "notes": "-tsoratra",
+    "remove": {
+      "default": "toerana misy anao",
+      "failure": "Tsy afaka mamafa ny saha mahazatra",
+      "success": "Nalefa soa aman-tsara ny saha mahazatra",
+      "title": "esory"
+    },
+    "reorder": {
+      "failure": "Tsy afaka namonjy ny baikon'ny tanimbary",
+      "success": "Vita soa aman-tsara ny saha mahazatra"
+    },
+    "save": "afa-tsy",
+    "save_order": "Tehirizo ny baikon'ny tanimbary",
+    "table": {
+      "actions": "asa",
+      "data_type": "Type data",
+      "input_type": "Karazana fidirana",
+      "mandatory": "maintsy",
+      "name": "Anarana",
+      "participation": "Fandraisana anjara"
+    },
+    "title": "Saha mahazatra",
+    "units": "vondrona",
+    "value": "sarobidy"
+  },
+  "delete_member": "Azonao antoka ve fa te hamafa?",
+  "edit": {
+    "error": "Nisy hadisoana teo raha nanavao ny vondrona",
+    "success": "Nohavaozina tamim-pahombiazana ny vondrona",
+    "title": "Vondrona fanovana"
+  },
+  "homepage_customization": {
+    "about_us": "Momba ANAY",
+    "add_options": "Ampio ny safidy",
+    "back": "Miverina ao anaty lisitra",
+    "default": "toerana misy anao",
+    "failure": "Tsy afaka namonjy fanovana",
+    "gallery": "Gallery",
+    "gallery_setup": {
+      "alert": "Azafady vonjeo ny fanovana mba handefasana indray",
+      "create": "Mamorona sary gallery",
+      "save_order": "Tehirizo ny filaharan'ny galera (s)",
+      "show_image_upload": "Asehoy ny Uploader sary",
+      "title": "Fametahana galera"
+    },
+    "module_stats": "Stats Module",
+    "observation_map": "Sarintany fizarana fandinihana",
+    "recent_observation": "Fanaraha-maso farany",
+    "remove": {
+      "failure": "Tsy afaka nanala ny sary galera",
+      "success": "Nesorina tamim-pahombiazana ny sary Gallery"
+    },
+    "reorder": {
+      "failure": "Tsy afaka namonjy ny lisitry ny lisitra Gallery",
+      "success": "Lisitry ny galera novaina soa aman-tsara"
+    },
+    "resources": {
+      "error": "Ampidiro ny ID fandinihana marina",
+      "imageurl": "Safidio ny sary galeri",
+      "link": "Asehoy ny rohy pejy",
+      "new_image": "Sary nampidirina",
+      "obs_id": "ID fandinihana",
+      "observation_image": "Sary fandinihana",
+      "title": "lohateny"
+    },
+    "save": "Tehirizo ny antsipirian'ny tranokala",
+    "show_desc": "Asehoy ny famaritana",
+    "success": "Nohavaozina nahomby",
+    "table": {
+      "description": "Description",
+      "more_link": "Rohy",
+      "remove_image": "esory",
+      "title": "lohateny"
+    },
+    "title": "Fanabeazana an-trano",
+    "update": {
+      "failure": "Tsy afaka nanavao ny antsipirian'ny tranokala",
+      "success": "Ny antsipiriany momba ny tranokala dia nanavao soa aman-tsara"
+    }
+  },
+  "icon": "matoanteny",
+  "invite": "Ampidiro ny anaran'ny mpampiasa na ny mailaka",
+  "invite_founders": "Asao ny mpanorina",
+  "invite_moderators": "Asao ny mpanelanelana",
+  "join": "Miaraha amin'ny vondrona",
+  "join_without_invitation": "Avelao ny mpampiasa hiditra ao amin'ilay vondrona tsy misy fanasana",
+  "member": {
+    "joined": "Niditra am-pahombiazana ny vondrona",
+    "joined_error": "Tsy afaka niditra vondrona",
+    "requested": "Ny vondrona dia niditra ny fangatahana"
+  },
+  "name": "Anaran'ny tarika",
+  "rules": {
+    "add": {
+      "failure": "Tsy afaka nanampy ny fanjakan'ny mpampiasa",
+      "success": "Namboarina soa aman-tsara",
+      "title": "Mamorona fitsipika"
+    },
+    "input_types": {
+      "spatial": "Ampio ny fitsipika spatial",
+      "taxonomy": "Ampio ny lalàna momba ny hetra",
+      "title": "Safidio ny karazana fidirana",
+      "user": "Ny fanaraha-maso ny mpikambana ao amin'ny vondrona rehetra"
+    },
+    "remove": {
+      "failure": "Tsy afaka namafa ny fitsipiky ny vondrona mpampiasa",
+      "success": "Nesorina ny lalàna mifehy ny vondrona vondrona"
+    },
+    "table": {
+      "actions": "asa",
+      "read_less": "Vakio kely kokoa",
+      "read_more": "Hamaky bebe kokoa",
+      "rule_type": "Fitsipika karazana",
+      "value": "sarobidy"
+    },
+    "title": "Fitsipika vondrona"
+  },
+  "save": "Mamorona vondrona",
+  "spatial_coverge": "Fandrakofana an-tsokosoko",
+  "tags": "Tags",
+  "update": "Update Group",
+  "update_admin": "Manavao ny mpitantana"
+}

@@ -7,9 +7,9 @@ import {
   Input
 } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
-import useTranslation from "@hooks/use-translation";
 import dayjs from "@utils/date";
 import Head from "next/head";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import Flatpickr from "react-flatpickr";
 

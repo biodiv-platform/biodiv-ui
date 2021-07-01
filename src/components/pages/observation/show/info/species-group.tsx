@@ -1,7 +1,6 @@
 import { CheckIcon } from "@chakra-ui/icons";
 import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
-import useTranslation from "@hooks/use-translation";
 import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
 import { SpeciesGroup } from "@interfaces/observation";
@@ -10,6 +9,7 @@ import { isBrowser } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
 import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit } from "react-gbus";
 import Select, { components } from "react-select";
@@ -41,7 +41,7 @@ export default function SpeciesGroupBox({ id, speciesGroups, observationId }: IS
     if (success) {
       emit(SPECIES_GROUP_UPDATED, type?.value);
       setFinalType(type);
-      notification(t("OBSERVATION.GROUP_UPDATED"), NotificationType.Success);
+      notification(t("observation:group_updated"), NotificationType.Success);
       onClose();
     }
   };

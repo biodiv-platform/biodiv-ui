@@ -238,7 +238,8 @@ export const axCreateObservation = async ({
       type: r.type,
       caption: r.caption,
       rating: r.rating,
-      licenseId: r.licenseId
+      licenseId: r.licenseId,
+      languageId: r.languageId
     }));
 
     const endpoint = customFieldData

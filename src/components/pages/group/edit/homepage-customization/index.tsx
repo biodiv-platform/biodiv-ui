@@ -6,7 +6,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import HomePageCustomizationForm from "./form";
@@ -18,7 +18,7 @@ export default function GroupHomePageCustomization({ userGroupId, homePageDetail
       <AccordionItem mb={8} bg="white" border="1px solid var(--gray-300)" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
-            🧰 {t("GROUP.HOMEPAGE_CUSTOMIZATION.TITLE")}
+            🧰 {t("group:homepage_customization.title")}
           </Box>
           <AccordionIcon />
         </AccordionButton>

@@ -6,11 +6,11 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import LocationIcon from "@icons/location";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadableFromUTC } from "@utils/date";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 interface IInfoTabProps {
@@ -36,7 +36,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             title={o?.recoShow?.recoIbp?.scientificName}
           >
             <Text as="i" mr={2}>
-              {o?.recoShow?.recoIbp?.scientificName || t("OBSERVATION.UNKNOWN")}
+              {o?.recoShow?.recoIbp?.scientificName || t("common:unknown")}
             </Text>
             <ObservationStatusBadge
               reco={o.recoShow?.recoIbp}
@@ -46,13 +46,13 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           </Heading>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
-            <Text className="elipsis" title={t("LIST.LOCATION")}>
+            <Text className="elipsis" title={t("observation:list.location")}>
               <LocationIcon mb={1} mr={2} />
               {o.reverseGeocodedName}
             </Text>
-            <Text title={t("LIST.OBSERVED_ON")}>
+            <Text title={t("observation:list.observed_on")}>
               <CalendarIcon mb={1} mr={2} />
-              {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("OBSERVATION.UNKNOWN")}
+              {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("common:unknown")}
             </Text>
           </Box>
         </div>
@@ -83,10 +83,10 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
         <Alert bg="blue.50">
           <AlertIcon />
           {o.recoShow?.isLocked
-            ? t("OBSERVATION.ID.VALIDATED")
+            ? t("observation:id.validated")
             : o.recoShow?.recoIbp
-            ? t("OBSERVATION.ID.SUGGEST_NEW_RECO")
-            : t("OBSERVATION.ID.NO_SUGGESTION")}
+            ? t("observation:id.suggest_new_reco")
+            : t("observation:id.no_suggestion")}
           <Button
             variant="link"
             color="blue.600"
@@ -95,7 +95,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             mr={0}
             onClick={() => setTabIndex(1)}
           >
-            {t("OBSERVATION.SUGGEST")}
+            {t("observation:suggest")}
           </Button>
         </Alert>
       </Box>

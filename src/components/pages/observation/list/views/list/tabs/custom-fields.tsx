@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import CustomFieldList from "@components/pages/observation/show/custom-fields/list";
-import useTranslation from "@hooks/use-translation";
-import useGlobalState from "@hooks/use-global-state";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import CustomFieldList from "@components/pages/observation/show/custom-fields/list";
+import useGlobalState from "@hooks/use-global-state";
 import { ObservationData } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axGetCustomFieldsPermissions } from "@services/observation.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useEffect } from "react";
 
@@ -38,7 +38,7 @@ export default function CustomFieldsTab({ o }: ICustomFieldsTabInterface) {
 
   return (
     <>
-      <BoxHeading>🔶 {t("OBSERVATION.CUSTOM_FIELDS")}</BoxHeading>
+      <BoxHeading>🔶 {t("observation:custom_fields")}</BoxHeading>
       {o.customField?.length ? (
         <CustomFieldList
           o={o}
@@ -47,7 +47,7 @@ export default function CustomFieldsTab({ o }: ICustomFieldsTabInterface) {
           cfPermission={cfPermission}
         />
       ) : (
-        <Box p={4}>{t("OBSERVATION.NO_CUSTOM_FIELD")}</Box>
+        <Box p={4}>{t("observation:no_custom_field")}</Box>
       )}
     </>
   );

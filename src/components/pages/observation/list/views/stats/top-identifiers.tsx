@@ -1,5 +1,6 @@
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
 import IdentifiersTable from "./table-identifiers";
 import useTopIdentifiers from "./use-top-identifiers";
 
@@ -11,7 +12,7 @@ const TopIdentifiers = ({ filter }) => {
   return (
     <IdentifiersTable
       data={identifier.identifiersData.data}
-      title={t("LIST.TOP_IDENTIFIERS_LIST.HEADING")}
+      title={t("observation:list.top_identifiers_list.heading")}
       loadMoreIdentifiers={identifier.identifiersData.loadMore}
       filter={filter}
     />

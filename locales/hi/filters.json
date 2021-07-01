@@ -1,0 +1,136 @@
+{
+  "clear": "साफ़ {{filterCount}} फ़िल्टर (ओं)",
+  "custom_fields": {
+    "has_content": "सामग्री है",
+    "no_content": "कोई सामग्री नहीं है",
+    "no_custom_field": "कोई कस्टम फ़ील्ड नहीं मिला",
+    "title": "कस्टम फील्ड्स"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "चिह्नित किए गए",
+      "title": "झंडा",
+      "unflagged": "जिनमें फ्लैग नहीं किए"
+    },
+    "identification": {
+      "identified": "पहचान की",
+      "title": "पहचान",
+      "unidentified": "अज्ञात"
+    },
+    "taxon_id": {
+      "has_taxon": "टैक्सन आईडी है",
+      "no_taxon": "कोई टैक्सन आईडी नहीं",
+      "title": "टैक्सन आईडी"
+    },
+    "title": "आधार सामग्री की गुणवत्ता",
+    "validation": {
+      "not_validated": "मान्य नहीं",
+      "title": "मान्यकरण",
+      "validated": "मान्य"
+    }
+  },
+  "document_title": "शीर्षक",
+  "item_type": {
+    "title": "वस्तु का प्रकार"
+  },
+  "location": {
+    "district": "जिला",
+    "map": {
+      "title": "नक्शा"
+    },
+    "protected_area": {
+      "title": "संरक्षित क्षेत्र"
+    },
+    "state": {
+      "title": "राज्य"
+    },
+    "tehsil": "तहसील",
+    "title": "स्थान"
+  },
+  "media": {
+    "audio": "ऑडियो",
+    "image": "छवि",
+    "no_media": "मीडिया नहीं",
+    "title": "मीडिया का स्वरूप",
+    "video": "वीडियो"
+  },
+  "name": {
+    "reco_name": {
+      "title": "नाम"
+    },
+    "status": {
+      "accepted": "को स्वीकृत",
+      "synonym": "पर्याय",
+      "title": "स्थिति"
+    },
+    "title": "वैज्ञानिक नाम"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "सभी नाम"
+    },
+    "taxon_names": {
+      "title": "टैक्सन नाम"
+    },
+    "taxon_rank": {
+      "title": "टैक्सन रैंक"
+    },
+    "taxon_status": {
+      "title": "टैक्सन की स्थिति"
+    },
+    "title": "वैज्ञानिक नाम"
+  },
+  "species_group": {
+    "all": "सब",
+    "amphibians": "उभयचर",
+    "arthropods": "ऑर्थ्रोपोड",
+    "birds": "पक्षियों",
+    "fish": "मछली",
+    "fungi": "कवक",
+    "mammals": "स्तनधारियों",
+    "molluscs": "मोलस्क",
+    "others": "अन्य",
+    "plants": "पौधों",
+    "reptiles": "सरीसृप",
+    "title": "प्रजाति समूह"
+  },
+  "taxon_browser": {
+    "search": "पेड़ में खोज",
+    "search_results": "{{resultsCount}} के {{currentIndex}} दिखा रहा है",
+    "title": "टैक्सन ब्राउज़र"
+  },
+  "time": {
+    "created_on": "निर्माण की तिथि",
+    "max_date": "अधिकतम दिनांक",
+    "min_date": "न्यूनतम तिथि",
+    "month": {
+      "apr": "अप्रैल",
+      "aug": "अगस्त",
+      "dec": "दिसंबर",
+      "feb": "फ़रवरी",
+      "jan": "जनवरी",
+      "jul": "जुलाई",
+      "jun": "जून",
+      "mar": "जुलूस",
+      "may": "मई",
+      "nov": "नवंबर",
+      "oct": "अक्टूबर",
+      "sep": "सितंबर",
+      "title": "महीना"
+    },
+    "observed_on": "तिथि देखी गई",
+    "title": "समय"
+  },
+  "title": "फिल्टर",
+  "toggle": "फ़िल्टर टॉगल करें",
+  "traits": {
+    "title": "लक्षण"
+  },
+  "user": {
+    "search": "उपयोगकर्ता खोजें",
+    "title": "उपयोगकर्ता"
+  },
+  "usergroup": {
+    "title": "यूसर समूह"
+  }
+}

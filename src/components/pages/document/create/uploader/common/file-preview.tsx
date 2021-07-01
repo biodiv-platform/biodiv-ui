@@ -1,9 +1,9 @@
 import { IconButton, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
 import DeleteIcon from "@icons/delete";
 import PDFIcon from "@icons/pdf";
 import { formatTimeStampFromUTC } from "@utils/date";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 const DocumentList = styled.div`
@@ -80,8 +80,8 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
         icon={<DeleteIcon />}
         className="action"
         isLoading={isLoading}
-        aria-label={t("DELETE")}
-        title={t("DELETE")}
+        aria-label={t("common:delete")}
+        title={t("common:delete")}
         onClick={handleOnDelete}
       />
     </DocumentList>

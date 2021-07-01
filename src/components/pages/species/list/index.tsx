@@ -1,5 +1,5 @@
 import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import ListTiles from "./list-tiles";
@@ -11,7 +11,7 @@ export default function SpeciesListPageComponent() {
   return (
     <SpeciesListProvider>
       <div className="container mt">
-        <PageHeading>🐾 {t("SPECIES.LIST.TITLE")}</PageHeading>
+        <PageHeading>🐾 {t("species:list.title")}</PageHeading>
         <ListTiles />
       </div>
     </SpeciesListProvider>

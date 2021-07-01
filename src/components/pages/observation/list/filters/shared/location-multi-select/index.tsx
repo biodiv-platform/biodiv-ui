@@ -5,7 +5,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import FilterMultiSelectInput, { FilterMultiSelectProps } from "./input";

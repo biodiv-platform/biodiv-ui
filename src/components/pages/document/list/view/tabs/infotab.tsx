@@ -5,7 +5,6 @@ import DocumentIcon from "@components/pages/document/common/document-icon";
 import FilterIconsList from "@components/pages/document/common/filter-list-icon";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import BookIcon from "@icons/bookmark";
 import CalendarIcon from "@icons/calendar";
 import MapIcon from "@icons/map";
@@ -15,6 +14,7 @@ import PeopleIcon from "@icons/people";
 import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 import { getUserImage } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 interface InfoTabInterface {
@@ -70,7 +70,7 @@ export default function InfoTab({
                 fontSize="lg"
                 className="elipsis-2"
                 dangerouslySetInnerHTML={{
-                  __html: getInjectableHTML(document?.title || t("DOCUMENT.UNKNOWN"))
+                  __html: getInjectableHTML(document?.title || t("document:unknown"))
                 }}
               />
               <Badge colorScheme="red">{document.itemtype}</Badge>
@@ -94,23 +94,23 @@ export default function InfoTab({
       <Stack color="gray.600">
         <MetaBlock
           icon={<PeopleIcon />}
-          tooltip={t("DOCUMENT.BIB.AUTHOR")}
+          tooltip={t("document:bib.author")}
           children={document?.author}
         />
         <MetaBlock
           icon={<CalendarIcon />}
-          tooltip={t("DOCUMENT.BIB.YEAR")}
+          tooltip={t("document:bib.year")}
           children={document?.year}
         />
         <MetaBlock
           icon={<BookIcon />}
-          tooltip={t("DOCUMENT.BIB.JOURNAL")}
+          tooltip={t("document:bib.journal")}
           isHtml={true}
           children={document?.journal}
         />
         <MetaBlock
           icon={<MessageIcon />}
-          tooltip={t("DOCUMENT.BIB.ABSTRACT")}
+          tooltip={t("document:bib.abstract")}
           isHtml={true}
           children={document?.notes}
         />
@@ -118,7 +118,7 @@ export default function InfoTab({
           <Stack>
             <MetaBlock
               icon={<MapIcon />}
-              tooltip={t("GROUP.HABITATS_COVERED")}
+              tooltip={t("common:habitats_covered")}
               children={
                 habitatIds[0] ? (
                   <FilterIconsList type="habitat" filterIds={habitatIds} filterList={habitats} />
@@ -127,7 +127,7 @@ export default function InfoTab({
             />
             <MetaBlock
               icon={<PawIcon />}
-              tooltip={t("GROUP.SPECIES_COVERAGE")}
+              tooltip={t("common:species_coverage")}
               children={
                 specieIds[0] ? (
                   <FilterIconsList type="species" filterIds={specieIds} filterList={species} />

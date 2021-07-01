@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import { Role } from "@interfaces/custom";
 
@@ -8,56 +8,56 @@ export default [
   {
     active: SITE_CONFIG.USERGROUP.ACTIVE,
     cell: GroupListItem,
-    name: "HEADER.MENU_PRIMARY.GROUPS."
+    name: "header:menu_primary.groups."
   },
   {
-    name: "HEADER.MENU_PRIMARY.CONTRIBUTE.",
+    name: "header:menu_primary.contribute.",
     nameIcon: AddIcon,
     isLazy: true,
     rows: [
       {
         active: SITE_CONFIG.OBSERVATION.ACTIVE,
-        name: "ADD_OBSERVATION",
+        name: "add_observation",
         to: "/observation/create",
         memberOnly: true
       },
       {
         active: SITE_CONFIG.SPECIES.ACTIVE,
-        name: "CONTRIBUTE_TO_SPECIES",
+        name: "contribute_to_species",
         to: "/species/contribute",
         memberOnly: true
       },
       {
         active: SITE_CONFIG.MAP.ACTIVE,
-        name: "CONTRIBUTE_TO_MAP",
+        name: "contribute_to_map",
         to: "/map/create",
         role: [Role.Admin]
       },
       /*
     {
-      name: "ADD_LIST",
+      name: "add_list",
       to: "/dataTable/create"
     }
     */
       {
         active: SITE_CONFIG.DOCUMENT.ACTIVE,
-        name: "ADD_DOCUMENT",
+        name: "add_document",
         to: "/document/create"
         /*
       {
-        name: "ADD_DATASET",
+        name: "add_dataset",
         to: "/dataset/create"
       },
       {
-        name: "ADD_TRAIT_OR_VALUE",
+        name: "add_trait_or_value",
         to: "/trait/create"
       },
       {
-        name: "ADD_FACT",
+        name: "add_fact",
         to: "/fact/upload"
       },
       {
-        name: "ADD_DATA_PACKAGE",
+        name: "add_data_package",
         to: "/dataPackage/create"
       }*/
       }

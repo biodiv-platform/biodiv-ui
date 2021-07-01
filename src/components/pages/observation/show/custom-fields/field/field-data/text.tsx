@@ -1,6 +1,6 @@
 import { Text, Textarea } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import { CustomFieldData } from "@interfaces/observation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import Buttons from "../buttons";
@@ -31,6 +31,6 @@ export default function FieldText({ cf, onUpdate, onClose, isOpen }: IFieldTextP
       <Buttons onSave={onSave} onClose={onClose} />
     </>
   ) : (
-    <Text>{cf?.customFieldValues?.fieldTextData || t("OBSERVATION.UNKNOWN")}</Text>
+    <Text>{cf?.customFieldValues?.fieldTextData || t("common:unknown")}</Text>
   );
 }

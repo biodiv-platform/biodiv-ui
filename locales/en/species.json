@@ -1,0 +1,141 @@
+{
+  "add_reference": "Add Reference",
+  "all_media": "All Media",
+  "attributions": "Attributions",
+  "common_name": {
+    "delete": {
+      "dialouge": "Are you sure?",
+      "failure": "unable to delete name",
+      "success": "name deleted successfully"
+    },
+    "form": {
+      "language": "Language",
+      "name": "Name"
+    },
+    "preferred": {
+      "failure": "unable to update preferred name",
+      "success": "preferred name updated successfully",
+      "title": "Preferred"
+    },
+    "save": {
+      "failure": "unable to save name",
+      "success": "name saved successfully"
+    }
+  },
+  "common_names": "Common Names",
+  "contribute": {
+    "create_species": "Create new species",
+    "description": "Species pages are descriptions of species, with one page for every species. Each species can be described with over 60 standard set of fields. Species pages are contributed and curated by experts. All information published on the Portal will be on public access and under the Creative Commons License of your choice.",
+    "download": "Download sample XLSX",
+    "email": "Email Us",
+    "offline": {
+      "description": "You may use our spreadsheet template to work offline and create species information. The template consists of one row per species. Please download the xlsx spreadsheet, and fill in multiple species descriptions in the spreadsheet, have a directory of images, zip the directory and send it to us on below email and we will then upload the content on your behalf.",
+      "title": "Offline creation of species pages: "
+    },
+    "online": {
+      "description": "To create a new species you should have write permission on the page. Permissions can be requested for a taxa. Please request permissions using the buttons below",
+      "title": "Online creation of species pages: "
+    },
+    "request_permission": "Request Permission"
+  },
+  "contributors": "Contributors",
+  "create": {
+    "creating_page": "Please wait while species page is being created.",
+    "desc_1": "Contributors need to have create rights on the species page in order to add content. If you have not already been allotted rights",
+    "desc_2": "Please input a species name and validate. If a name is validated and found to already exist on the portal, you will be taken to the species page to add content. If the name is validated and found to be new, you can fill in the taxonomic hierarchy so that the new species page can be created. Author string is compulsory for species levels and lower.",
+    "error": "Unable to create species page",
+    "form": {
+      "name": "Name",
+      "name_placeholder": "i.e. Triclinum sorediatum",
+      "rank": "Rank",
+      "search": "Search",
+      "select": "Select",
+      "taxon": {
+        "create": "Create Taxon",
+        "parent": "Parent Match",
+        "select": "Matched"
+      },
+      "use_taxon": "Use this Taxon",
+      "validate": "Validate"
+    },
+    "taxon_error": "Unable to validate",
+    "title": "Add Species",
+    "validate_error": "Unable to validate"
+  },
+  "edit_name": "Manage Common Name",
+  "edit_synonym": "Manange Synonym",
+  "field": {
+    "delete": {
+      "failure": "Unable to delete field",
+      "success": "Field deleted Successfully"
+    },
+    "manage": "Manage Field",
+    "update": {
+      "failure": "Unable to update field",
+      "success": "Field Updated Successfully"
+    }
+  },
+  "follow_species": "Follow Species",
+  "gallery": {
+    "update": {
+      "failure": "unable to update gallery",
+      "success": "gallery updated successfully"
+    }
+  },
+  "groups": {
+    "title": "Groups"
+  },
+  "licenses": "Licenses",
+  "list": {
+    "title": "Species List"
+  },
+  "manage_media": "Manage Media",
+  "observation_media": "Observation Media",
+  "pull_media": "Pull Media",
+  "references": "References",
+  "related": {
+    "title": "Related Observations"
+  },
+  "remove": {
+    "description": "Are you sure? You can't undo this action afterwards.",
+    "success": "Species deleted successfully",
+    "title": "Delete species"
+  },
+  "share": "Share this species",
+  "status": "Status",
+  "synonym": {
+    "add": {
+      "failure": "unable to add synonym",
+      "success": "synonym added successfully"
+    },
+    "delete": {
+      "dialouge": "Are you sure?",
+      "failure": "unable to delete synonym",
+      "success": "synonym deleted successfully"
+    },
+    "form": {
+      "datasource": "Datasource",
+      "datasource_id": "Datasource Id",
+      "name": "Name",
+      "rank": "Rank",
+      "type": "Type"
+    },
+    "update": {
+      "failure": "unable to update synonym",
+      "success": "synonym updated successfully"
+    }
+  },
+  "synonyms": "Synonyms",
+  "taxon": "Taxonomy",
+  "toggle_empty": "Toggle Empty",
+  "traits": {
+    "range_hint": "use : to septate range values",
+    "title": "Traits",
+    "update": {
+      "failure": "Unable to update Trait",
+      "success": "Trait Updated Successfully"
+    }
+  },
+  "unfollow_species": "Follow Species",
+  "view_original": "view original"
+}

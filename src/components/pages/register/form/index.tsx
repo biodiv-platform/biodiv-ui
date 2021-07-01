@@ -8,13 +8,13 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import Oauth from "@components/pages/login/oauth";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { axCreateUser } from "@services/auth.service";
 import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
@@ -127,9 +127,9 @@ function SignUpForm() {
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
             <GridItem colSpan={{ md: 2 }} hidden={isOAuth}>
-              <Oauth text={t("USER.AUTOFILL_WITH_GOOGLE")} onSuccess={onOAuthSuccess} />
+              <Oauth text={t("user:autofill_with_google")} onSuccess={onOAuthSuccess} />
             </GridItem>
-            <TextBoxField name="username" label={t("USER.NAME")} />
+            <TextBoxField name="username" label={t("user:name")} />
             <SelectInputField
               name="gender"
               label="Gender"
@@ -137,13 +137,13 @@ function SignUpForm() {
               shouldPortal={true}
             />
 
-            <TextBoxField name="email" type="email" disabled={isOAuth} label={t("USER.EMAIL")} />
-            <PhoneNumberInputField name="mobileNumber" label={t("USER.MOBILE")} />
+            <TextBoxField name="email" type="email" disabled={isOAuth} label={t("user:email")} />
+            <PhoneNumberInputField name="mobileNumber" label={t("user:mobile")} />
             <Box style={{ gridColumn: "1/3" }} hidden={hideVerificationMethod}>
               <RadioInputField
                 mb={1}
                 name="verificationType"
-                label={t("USER.VERIFY_THROUGH")}
+                label={t("user:verify_through")}
                 options={VERIFICATION_TYPE}
               />
             </Box>
@@ -151,14 +151,14 @@ function SignUpForm() {
             <TextBoxField
               name="password"
               type="password"
-              label={t("USER.PASSWORD")}
+              label={t("user:password")}
               autoComplete="new-password"
               hidden={isOAuth}
             />
             <TextBoxField
               name="confirmPassword"
               type="password"
-              label={t("USER.CONFIRM_PASSWORD")}
+              label={t("user:confirm_password")}
               autoComplete="new-password"
               hidden={isOAuth}
             />
@@ -179,7 +179,7 @@ function SignUpForm() {
           <LocationPicker />
           <RecaptchaField name="recaptcha" />
           <SubmitButton rightIcon={<ArrowForwardIcon />} w="full">
-            {t("USER.REGISTER")}
+            {t("user:register")}
           </SubmitButton>
         </form>
       </FormProvider>

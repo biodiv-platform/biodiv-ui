@@ -1,7 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import MicrophoneIcon from "@icons/microphone";
 import StopIcon from "@icons/stop";
+import useTranslation from "next-translate/useTranslation";
 import React, { useRef } from "react";
 import { useTimer } from "use-timer";
 
@@ -101,7 +101,7 @@ export default function AudioRecorder({
         variant="solid"
         colorScheme="blue"
       >
-        {t("OBSERVATION.AUDIO.START")}
+        {t("form:audio.start")}
       </Button>
       <Button
         isDisabled={status !== "RUNNING"}
@@ -112,7 +112,7 @@ export default function AudioRecorder({
         variant="solid"
         colorScheme="red"
       >
-        {t("OBSERVATION.AUDIO.STOP")}
+        {t("form:audio.stop")}
       </Button>
     </div>
   );

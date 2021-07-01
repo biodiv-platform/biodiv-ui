@@ -5,7 +5,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import MapDrawContainer from "./map-draw-container";
@@ -19,7 +19,7 @@ export default function MapAreaFilter() {
         <>
           <AccordionButton>
             <Box flex={1} textAlign="left">
-              {t("FILTERS.LOCATION.MAP.TITLE")}
+              {t("filters:location.map.title")}
             </Box>
             <AccordionIcon />
           </AccordionButton>

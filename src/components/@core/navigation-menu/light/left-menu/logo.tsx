@@ -1,12 +1,12 @@
 import { Box, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import CrossIcon from "@icons/cross";
 import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import JoinUserGroup from "../join-group";
@@ -94,11 +94,11 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
           title={SITE_CONFIG.SITE?.GOV?.NAME}
         />
       )}
-      <button className="menu-toggle" onClick={onToggle} aria-label="toggle primary menu">
+      <button className="menu-toggle" onClick={onToggle} aria-label={t("header:toggle_menu")}>
         {isOpen ? <CrossIcon /> : <MenuIcon />}
       </button>
       <JoinUserGroup />
-      <EditLinkButton label={t("GROUP.EDIT.TITLE")} />
+      <EditLinkButton label={t("header:group_edit")} />
     </Logo>
   );
 }

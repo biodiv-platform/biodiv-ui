@@ -1,0 +1,10 @@
+{
+  "request": {
+    "button": "Demander",
+    "failure": "Erreur lors de la demande de la permission",
+    "success": "Autorisation des taxons demandée avec succès",
+    "title": "Demander la permission",
+    "user": "Utilisatrice"
+  },
+  "role": "Rôle"
+}

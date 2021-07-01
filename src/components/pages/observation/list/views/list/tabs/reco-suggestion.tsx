@@ -2,7 +2,7 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import AddSuggestion from "@components/pages/observation/show/suggestion/add-suggestion";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function RecoSuggestionTab({ o, recoUpdated }) {
@@ -11,7 +11,7 @@ export default function RecoSuggestionTab({ o, recoUpdated }) {
 
   return (
     <>
-      <BoxHeading>🆔 {t("OBSERVATION.ID.TITLE")}</BoxHeading>
+      <BoxHeading>🆔 {t("observation:id.title")}</BoxHeading>
       <RecoSuggestion
         observationId={o.observationId}
         isLocked={o.recoShow.isLocked}

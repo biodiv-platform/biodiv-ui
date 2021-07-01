@@ -2,9 +2,9 @@ import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import GroupPost from "@components/pages/observation/show/groups/group-post";
 import useGlobalState from "@hooks/use-global-state";
-import useTranslation from "@hooks/use-translation";
 import { axSaveUserGroups } from "@services/species.service";
 import { axGetUserGroupList } from "@services/usergroup.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import useSpecies from "../use-species";
@@ -23,7 +23,7 @@ export default function SpeciesGroups() {
 
   return (
     <Box mb={4} className="white-box">
-      <BoxHeading>👥 {t("SPECIES.GROUPS.TITLE")}</BoxHeading>
+      <BoxHeading>👥 {t("species:groups.title")}</BoxHeading>
       <Box p={4}>
         <GroupPost
           groups={userGroups}

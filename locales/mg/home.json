@@ -1,0 +1,57 @@
+{
+  "donors": "mpanome",
+  "features": {
+    "citizen_science": {
+      "desc": "Izay mpikambana ao amin'ny besinimaro amin'ny ankapobeny dia afaka mampakatra ny fandinihana ireo karazana rehetra hita maso. Ny mpikambana hafa dia manampy amin'ny famaritana, manangom-bolo ary mamoritra ny fandinihana.",
+      "title": "Siansa momba ny zom-pirenena"
+    },
+    "groups": {
+      "desc": "Ny microsites ao amin'ny vavahadin-tserasera dia mamela ny fiarahamonina natokana ho an'ireo lohahevitra mahaliana azy ireo hanangona, mifamaly ary mizara votoaty.",
+      "title": "fiaraha-monina"
+    },
+    "idao": {
+      "desc": "Ny WIKWIO IDAO dia rindrambaiko hanampiana ny fampahafantarana sy ny fahalalana fahalalana ny tsimparifary lehibe amin'ny voly sy ny voly voly any amin'ireo firenena Indiana any Andrefana.",
+      "title": "IDAO"
+    },
+    "landscapes": {
+      "desc": "Ny fampahalalana momba ny tontolon'ny tanin'i India misy fampahalalana amin'ny antsipirihany momba ny fetra spatial, ny lisitry ny karazana ary ny literatiora mifandraika amin'izany. *Ho avy tsy ho ela*",
+      "title": "endriky"
+    },
+    "literature": {
+      "desc": "Nodinihin'ireo mpikambana sy volom-bolo izay nampakarin'ny mpikambana na ny fiaraha-miasa amin'ny diarin'ny biodiversity, nokarakaraina tamin'ny metadata sy ny tags.",
+      "title": "Literatiora biodiversity"
+    },
+    "maps": {
+      "desc": "Mifandraisa an-tserasera miaraka amin'ny sosona marobe marobe amin'ny alàlan'ny sarintany sarintany amin'ny alàlan'ny module web ifotony.",
+      "title": "Maps"
+    },
+    "open_data": {
+      "desc": "Misokatra ny votoatiny rehetra ao amin'ny vavahadin-tserasera ary manompo eo ambany lisansa Creative Commons ho an'ny fampiasana sy ny fizarana amin'ny fanomezam-boninahitra amin'ireo mpandray anjara tany am-boalohany.",
+      "title": "Open data"
+    },
+    "species_information": {
+      "desc": "Pejy famaritana ho an'ny karazan-javaboarin'i India rehetra avy amin'ny loharano voamarina. Vonjeo hiara-hiasa sy hanorina fampahalalana ao amin'ny karazan'i India.",
+      "title": "Fampahalalana momba ny karazana"
+    },
+    "taxonomy": {
+      "desc": "Ny fampahalalana momba ny hetra sy ny voambolana ao amin'ny karazan-javamaniry ao India, izay mamela ny fanavaozana mavitrika amin'ny fikarakarana sy ny angon-drakitra momba ny karazana karazana.",
+      "title": "panasokajiana"
+    },
+    "title": "Toetoetra"
+  },
+  "more": "Jereo ny fandinihana rehetra",
+  "no_recent_observations": "Tsy nisy fandinihana farany teo",
+  "observations": "Fanamarihana farany",
+  "observed_by": "Fandinihana nataon'i",
+  "partners": "mpiara-miasa",
+  "portal_stats": {
+    "activeuser": "mpampiasa",
+    "discussions": "fifanakalozan-kevitra",
+    "documents": "Antontan-taratasy",
+    "maps": "Maps",
+    "observation": "fanamarihana",
+    "species": "karazana",
+    "usergroups": "Vondrona vondrona"
+  },
+  "sponsors": "Tohanan'ny"
+}

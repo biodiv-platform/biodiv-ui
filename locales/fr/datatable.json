@@ -1,0 +1,30 @@
+{
+  "attribution": "Attribution",
+  "basis_of_data": "Base de données",
+  "basis_of_record": "Base d'enregistrement",
+  "contributor": "contributeur",
+  "create_datatable": "Créer table de données",
+  "field_mapping_table": "Table de cartographie de champ",
+  "files_upload": "Chargements de fichiers",
+  "geographical_coverage": "Couverture géographique",
+  "is_verified": "Observation vérifiée",
+  "location_accuracy": "Précision de l'emplacement",
+  "location_scale": "Échelle de localisation",
+  "media_uploader": "Téléchargeur de média",
+  "methods": "Méthodes",
+  "notifications": {
+    "error": "Impossible de créer une table de données",
+    "sheet_upload_error": "Impossible de télécharger une feuille",
+    "sheet_upload_success": "Feuille téléchargée avec succès",
+    "success": "Table de données créée avec succès"
+  },
+  "others": "Autres",
+  "party": "Fête",
+  "project": "Projet",
+  "sheet_uploader": "Téléchargeur de feuille de calcul",
+  "show_page": "Informations sur la table de données",
+  "taxonomy": "Couverture taxonomique",
+  "temporal": "Couverture temporelle",
+  "title": "Métadonnées générales",
+  "upload_again": "Télécharger à nouveau"
+}

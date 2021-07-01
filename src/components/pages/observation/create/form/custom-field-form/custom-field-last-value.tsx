@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import ls from "local-storage-json";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 export default function CustomFieldLastValue({ id, name, set }) {
@@ -30,7 +30,7 @@ export default function CustomFieldLastValue({ id, name, set }) {
       title={cfValue.toString()}
       onClick={use}
     >
-      {t("OBSERVATION.USE_LAST_VALUE")}
+      {t("observation:use_last_value")}
     </Button>
   ) : null;
 }

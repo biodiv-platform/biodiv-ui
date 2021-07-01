@@ -13,15 +13,15 @@ export default function UserAbout({ user }: UserProfileProps) {
 
   const aboutLinks = [
     {
-      title: "USER.ABOUT",
+      title: "user:about",
       value: user.aboutMe
     },
     {
-      title: "USER.LOCATION",
+      title: "user:location",
       value: user.location
     },
     {
-      title: "USER.WEBSITE",
+      title: "user:website",
       value: user.website,
       cell: (
         <Stack isInline={false}>
@@ -30,25 +30,25 @@ export default function UserAbout({ user }: UserProfileProps) {
       )
     },
     {
-      title: "USER.EMAIL",
+      title: "user:email",
       value: isLoggedIn,
       cell: <BlueLink href={`mailto:${user.email}`}>{user.email}</BlueLink>
     },
     {
-      title: "USER.OCCUPATION",
+      title: "user:occupation",
       value: user.occupation
     },
     {
-      title: "USER.INSTITUTION",
+      title: "user:institution",
       value: user.institution
     },
 
     {
-      title: "USER.JOINED",
+      title: "user:joined",
       value: timeAgoUTC(user.dateCreated)
     },
     {
-      title: "USER.LAST_ACTIVE",
+      title: "user:last_active",
       value: timeAgoUTC(user.lastLoginDate)
     }
   ];

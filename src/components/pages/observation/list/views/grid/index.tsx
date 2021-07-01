@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
+import ObservationLoading from "@components/pages/common/loading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import styled from "@emotion/styled";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import ObservationLoading from "@components/pages/common/loading";
 import GridViewCard from "./card";
 
 const GridViewBox = styled.div`

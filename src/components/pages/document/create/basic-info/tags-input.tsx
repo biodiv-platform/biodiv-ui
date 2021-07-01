@@ -1,6 +1,6 @@
 import { SelectAsyncInputField } from "@components/form/select-async";
-import useTranslation from "@hooks/use-translation";
 import { axQueryDocumentTagsByText } from "@services/document.service";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const onTagsQuery = async (q) => {
@@ -14,8 +14,8 @@ export default function TagsInput() {
   return (
     <SelectAsyncInputField
       name="tags"
-      label={t("DOCUMENT.TAGS.TITLE")}
-      hint={t("OBSERVATION.TAGS_HINT")}
+      label={t("document:tags.title")}
+      hint={t("form:tags_hint")}
       multiple={true}
       onQuery={onTagsQuery}
     />

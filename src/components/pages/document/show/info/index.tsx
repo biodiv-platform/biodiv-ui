@@ -18,20 +18,20 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
 
   const INFO_LINKS = [
     {
-      title: "DOCUMENT.TYPE",
+      title: "document:type",
       value: document?.itemtype
     },
     {
-      title: "DOCUMENT.TITLE",
+      title: "form:title",
       isHtml: true,
       value: document?.title
     },
     {
-      title: "DOCUMENT.BIB.AUTHOR",
+      title: "document:bib.author",
       value: document?.author
     },
     {
-      title: "DOCUMENT.DESCRIPTION",
+      title: "document:description",
       value: document?.notes,
       cell: (
         <Box
@@ -44,75 +44,75 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
       )
     },
     {
-      title: "DOCUMENT.BIB.JOURNAL",
+      title: "document:bib.journal",
       isHtml: true,
       value: document?.journal
     },
     {
-      title: "DOCUMENT.BIB.BOOKTITLE",
+      title: "document:bib.booktitle",
       isHtml: true,
       value: document?.bookTitle
     },
     {
-      title: "DOCUMENT.BIB.SERIES",
+      title: "document:bib.series",
       value: document?.series
     },
     {
-      title: "DOCUMENT.BIB.VOLUME",
+      title: "document:bib.volume",
       value: document?.volume
     },
     {
-      title: "DOCUMENT.BIB.NUMBER",
+      title: "document:bib.number",
       value: document?.number
     },
     {
-      title: "DOCUMENT.BIB.PAGES",
+      title: "document:bib.pages",
       value: document?.pages
     },
     {
-      title: "DOCUMENT.BIB.PUBLISHER",
+      title: "document:bib.publisher",
       value: document?.publisher
     },
     {
-      title: "DOCUMENT.PUBLICATION_DATE",
+      title: "document:publication_date",
       value: document?.fromDate,
       cell: formatDateReadableFromUTC(document?.fromDate)
     },
     {
-      title: "DOCUMENT.PUBLICATION_LANGUAGE",
+      title: "document:publication_language",
       value: document?.language
     },
     {
-      title: "DOCUMENT.BIB.YEAR",
+      title: "document:bib.year",
       value: document?.year
     },
     {
-      title: "DOCUMENT.BIB.MONTH",
+      title: "document:bib.month",
       value: document?.month
     },
     {
-      title: "DOCUMENT.CREATED_ON",
+      title: "document:created_on",
       value: document?.createdOn,
       cell: formatDateReadableFromUTC(document?.createdOn)
     },
     {
-      title: "DOCUMENT.BIB.DOI",
+      title: "document:bib.doi",
       value: document?.doi
     },
     {
-      title: "DOCUMENT.CONTRIBUTION",
+      title: "document:contribution",
       isHtml: true,
       value: document?.contributors
     },
     {
-      title: "DOCUMENT.LICENSE",
+      title: "form:license",
       value: document?.licenseId,
       cell: documentLicense && (
         <ExternalBlueLink href={documentLicense.url}>{documentLicense.name}</ExternalBlueLink>
       )
     },
     {
-      title: "DOCUMENT.TAGS.TITLE",
+      title: "document:tags.title",
       value: 1,
       cell: (
         <TagsShow

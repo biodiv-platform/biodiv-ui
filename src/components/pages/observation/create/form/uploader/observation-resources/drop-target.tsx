@@ -1,8 +1,8 @@
-import { Button, Heading, Text } from "@chakra-ui/react";
 import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
+import { Button, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { resizeMultiple } from "@utils/image";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -72,24 +72,20 @@ export default function DropTarget({ assetsSize }) {
       {isProcessing ? (
         <div className="fade">
           <TimeIcon />
-          <span>{t("OBSERVATION.UPLOADER.PROCESSING")}</span>
+          <span>{t("form:uploader.processing")}</span>
         </div>
       ) : isDragActive ? (
         <div className="fade">
           <ArrowUpIcon />
-          <span>{t("OBSERVATION.UPLOADER.LABEL_RELEASE")}</span>
+          <span>{t("form:uploader.label_release")}</span>
         </div>
       ) : (
         <div className="fade">
-          <Heading size="md">{t("OBSERVATION.UPLOADER.LABEL")}</Heading>
+          <Heading size="md">{t("form:uploader.label")}</Heading>
           <Text my={2} color="gray.500">
-            {t("OR")}
+            {t("common:or")}
           </Text>
-          <Button
-            colorScheme="blue"
-            variant="outline"
-            children={t("OBSERVATION.UPLOADER.BROWSE")}
-          />
+          <Button colorScheme="blue" variant="outline" children={t("form:uploader.browse")} />
         </div>
       )}
     </DropTargetBox>

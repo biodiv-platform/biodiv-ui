@@ -7,12 +7,12 @@ export default function TimeFilter() {
   return (
     <SubAccordion>
       <DateRangeFilter
-        translateKey="DOCUMENT.UPDATED_ON"
+        translateKey="document:updated_on"
         filterKey={{ min: "revisedOnMinDate", max: "revisedOnMaxDate" }}
       />
 
       <DateRangeFilter
-        translateKey="FILTERS.TIME.CREATED_ON"
+        translateKey="filters:time.created_on"
         filterKey={{ min: "createdOnMinDate", max: "createdOnMaxDate" }}
       />
     </SubAccordion>

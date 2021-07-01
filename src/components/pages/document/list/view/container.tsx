@@ -1,9 +1,9 @@
 import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import styled from "@emotion/styled";
-import useTranslation from "@hooks/use-translation";
 import { actionTabs } from "@static/documnet-list";
 import { Mq } from "mq-styled-components";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import CommentsTab from "./tabs/comments";
@@ -99,7 +99,13 @@ export default function Container({ o }) {
       overflow="hidden"
     >
       <VerticalTabs>
-        <Tabs variant="unstyled" className="tabs" index={tabIndex} onChange={setTabIndex}>
+        <Tabs
+          variant="unstyled"
+          className="tabs"
+          index={tabIndex}
+          onChange={setTabIndex}
+          isLazy={true}
+        >
           <TabPanels height={["fit-content"]} className="tab-content" position="relative">
             <TabPanel>
               <InfoTab
@@ -110,39 +116,26 @@ export default function Container({ o }) {
                 flags={o.flag[0] ? o.flag.map((item) => ({ flag: item, user: o.userIbp })) : null}
               />
             </TabPanel>
-            {actionTabs[1].active && (
-              <TabPanel>
-                <GroupTab o={o} tabIndex={tabIndex} tabLength={filterTabs.length - 2} />
-              </TabPanel>
-            )}
             <TabPanel>
-              <TagsTab
-                tabIndex={tabIndex}
-                tabLength={filterTabs.length - 2}
-                documentId={o.document.id}
-                tags={o.tags}
-              />
+              <GroupTab o={o} />
             </TabPanel>
             <TabPanel>
-              <CommentsTab
-                tabIndex={tabIndex}
-                tabLength={filterTabs.length - 1}
-                documentId={o.document.id}
-              />
+              <TagsTab documentId={o.document.id} tags={o.tags} />
+            </TabPanel>
+            <TabPanel>
+              <CommentsTab documentId={o.document.id} />
             </TabPanel>
           </TabPanels>
           <TabList>
-            {filterTabs.map(({ name, icon }) => {
-              return (
-                <Tab key={name}>
-                  <Tooltip title={t(name)}>
-                    <div>
-                      {icon} <span>{t(name)}</span>
-                    </div>
-                  </Tooltip>
-                </Tab>
-              );
-            })}
+            {filterTabs.map(({ name, icon }) => (
+              <Tab key={name}>
+                <Tooltip title={t(name)}>
+                  <div>
+                    {icon} <span>{t(name)}</span>
+                  </div>
+                </Tooltip>
+              </Tab>
+            ))}
             <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
           </TabList>
         </Tabs>

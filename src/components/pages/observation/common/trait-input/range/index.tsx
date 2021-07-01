@@ -1,5 +1,5 @@
 import { FormControl, FormHelperText, Input, InputGroup, SimpleGrid } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";
@@ -18,7 +18,7 @@ const RangeTrait = ({ name, onUpdate, defaultValue, gridColumns = 5 }: ITraitInp
         <InputGroup maxW="md">
           <Input name={name} defaultValue={value} onChange={(e) => setValue(e.target.value)} />
         </InputGroup>
-        <FormHelperText>{t("OBSERVATION.RANGE_HINT")}</FormHelperText>
+        <FormHelperText>{t("observation:range_hint")}</FormHelperText>
       </FormControl>
     </SimpleGrid>
   );

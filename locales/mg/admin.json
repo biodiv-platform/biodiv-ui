@@ -1,0 +1,18 @@
+{
+  "links": {
+    "notification": "Alefaso ny fanosehana"
+  },
+  "pages": {
+    "notification": {
+      "form": {
+        "body": "-kevi-pitantanana",
+        "error": "Tsy afaka nandefa fampandrenesana",
+        "icon": "matoanteny",
+        "link": "Rohy",
+        "success": "Nalefa ny fampandrenesana",
+        "title": "lohateny"
+      },
+      "heading": "Mandefasa fanamarihana"
+    }
+  }
+}

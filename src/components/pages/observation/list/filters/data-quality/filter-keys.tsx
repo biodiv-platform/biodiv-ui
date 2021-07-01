@@ -1,11 +1,11 @@
 export const IDENTIFICATION = [
   {
-    label: "IDENTIFIED",
+    label: "identified",
     value: "IDENTIFIED",
     stat: "available"
   },
   {
-    label: "UNIDENTIFIED",
+    label: "unidentified",
     value: "UNIDENTIFIED",
     stat: "missing"
   }
@@ -13,12 +13,12 @@ export const IDENTIFICATION = [
 
 export const FLAG = [
   {
-    label: "UNFLAGGED",
+    label: "unflagged",
     value: "0",
     stat: "0"
   },
   {
-    label: "FLAGGED",
+    label: "flagged",
     value: "1",
     stat: "1"
   }
@@ -26,12 +26,12 @@ export const FLAG = [
 
 export const VALIDATION = [
   {
-    label: "VALIDATED",
+    label: "validated",
     value: "validate",
     stat: "1"
   },
   {
-    label: "NOT_VALIDATED",
+    label: "not_validated",
     value: "invalidate",
     stat: "0"
   }
@@ -39,12 +39,12 @@ export const VALIDATION = [
 
 export const TAXON_ID = [
   {
-    label: "HAS_TAXON",
+    label: "has_taxon",
     value: "1",
     stat: "available"
   },
   {
-    label: "NO_TAXON",
+    label: "no_taxon",
     value: "0",
     stat: "missing"
   }

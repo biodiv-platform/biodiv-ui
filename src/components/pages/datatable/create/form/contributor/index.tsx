@@ -2,8 +2,8 @@ import { Box } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { TextBoxField } from "@components/form/text";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
-import useTranslation from "@hooks/use-translation";
 import { axUserSearch } from "@services/auth.service";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function PartyContributorsForm() {
@@ -15,16 +15,16 @@ export default function PartyContributorsForm() {
   };
 
   return (
-    <ToggleablePanel icon="⚛️" title={t("DATATABLE.PARTY")}>
+    <ToggleablePanel icon="⚛️" title={t("datatable:party")}>
       <Box p={4} pb={0}>
         <SelectAsyncInputField
           name="contributors"
-          placeholder={t("GROUP.INVITE")}
+          placeholder={t("group:invite")}
           onQuery={onUserQuery}
           isRequired={true}
-          label={t("DATATABLE.CONTRIBUTOR")}
+          label={t("datatable:contributor")}
         />
-        <TextBoxField name="attribution" label={t("DATATABLE.ATTRIBUTION")} />
+        <TextBoxField name="attribution" label={t("datatable:attribution")} />
       </Box>
     </ToggleablePanel>
   );

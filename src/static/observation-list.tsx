@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
 import StatsIcon from "@icons/stats";
@@ -16,17 +16,17 @@ export const DEFAULT_FILTER: ObservationFilterProps = {
 
 export const viewTabs = [
   {
-    name: "LIST.VIEW_TYPE.LIST",
+    name: "common:list.view_type.list",
     icon: <ListIcon />,
     key: "list"
   },
   {
-    name: "LIST.VIEW_TYPE.GRID",
+    name: "common:list.view_type.grid",
     icon: <GridIcon />,
     key: "list_minimal"
   },
   {
-    name: "LIST.VIEW_TYPE.STATS",
+    name: "common:list.view_type.stats",
     icon: <StatsIcon />,
     key: "stats"
   }
@@ -34,43 +34,43 @@ export const viewTabs = [
 
 export const sortByOptions = [
   {
-    name: "LIST.SORT_OPTIONS.LAST_UPDATED",
+    name: "common:list.sort_options.last_updated",
     key: "last_revised"
   },
   {
-    name: "LIST.SORT_OPTIONS.LATEST",
+    name: "common:list.sort_options.latest",
     key: "created_on"
   },
   {
-    name: "LIST.SORT_OPTIONS.MOST_VIEWED",
+    name: "common:list.sort_options.most_viewed",
     key: "visit_count"
   }
 ];
 
 export const actionTabs = [
   {
-    name: "OBSERVATION.INFORMATION",
+    name: "common:information",
     icon: "ℹ️"
   },
   {
-    name: "OBSERVATION.ID.TITLE",
+    name: "observation:id.title",
     icon: "🆔"
   },
   {
-    name: "OBSERVATION.USERGROUPS",
+    name: "common:usergroups",
     icon: "👥",
     active: SITE_CONFIG.USERGROUP.ACTIVE
   },
   {
-    name: "OBSERVATION.TRAITS",
+    name: "observation:traits",
     icon: "💎"
   },
   {
-    name: "OBSERVATION.CUSTOM_FIELDS",
+    name: "observation:custom_fields",
     icon: "🔶"
   },
   {
-    name: "OBSERVATION.COMMENTS.TITLE",
+    name: "form:comments.title",
     icon: "💬"
   }
 ];

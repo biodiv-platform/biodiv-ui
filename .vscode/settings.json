@@ -3,5 +3,13 @@
     "activityBar.background": "#134e8d",
     "titleBar.activeBackground": "#2E75C2",
     "titleBar.activeForeground": "#FFFBFA"
-  }
+  },
+  "i18n-ally.localesPaths": "locales",
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.translate.promptSource": false,
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{locale}/{namespace}.json",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.translate.parallels": 2
 }

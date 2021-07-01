@@ -1,7 +1,7 @@
 import { Box, List, ListItem, Table, Tbody, Td, Tr } from "@chakra-ui/react";
 import { ResponsiveContainer } from "@components/@core/table";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 
 import useSpecies from "../use-species";
@@ -25,7 +25,7 @@ export default function SpeciesCommonNames() {
   }, [commonNamesList]);
 
   return (
-    <ToggleablePanel id="common-names" icon="🗒" title={t("SPECIES.COMMON_NAMES")}>
+    <ToggleablePanel id="common-names" icon="🗒" title={t("species:common_names")}>
       <CommonNameEditModal onUpdate={setCommonNamesList} />
       <Box maxH="300px" w="full" overflow="auto">
         <ResponsiveContainer noBorder={true}>
@@ -54,7 +54,7 @@ export default function SpeciesCommonNames() {
                 ))
               ) : (
                 <Tr>
-                  <Td>{t("NO_DATA")}</Td>
+                  <Td>{t("common:no_data")}</Td>
                 </Tr>
               )}
               {permissions.isContributor && <CommonNameAdd />}

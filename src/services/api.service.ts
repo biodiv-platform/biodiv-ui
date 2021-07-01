@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { ENDPOINT } from "@static/constants";
 import { plainHttp } from "@utils/http";
 

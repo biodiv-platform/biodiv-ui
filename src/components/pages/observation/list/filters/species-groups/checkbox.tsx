@@ -3,6 +3,7 @@ import Tooltip from "@components/@core/tooltip";
 import styled from "@emotion/styled";
 import { getLocalIcon } from "@utils/media";
 import { toHumanString } from "human-readable-numbers";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const CheckboxLabel = styled.label`
@@ -36,9 +37,14 @@ const CheckboxLabel = styled.label`
 
 const Checkbox = (props: any) => {
   const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { t } = useTranslation();
 
   return (
-    <Tooltip label={props.label} hasArrow={true} placement="top">
+    <Tooltip
+      label={t(`filters:species_group.${props.label.toLowerCase()}`)}
+      hasArrow={true}
+      placement="top"
+    >
       <Box
         {...getCheckboxProps()}
         as={CheckboxLabel}

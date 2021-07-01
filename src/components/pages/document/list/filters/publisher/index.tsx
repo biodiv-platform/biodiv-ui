@@ -7,7 +7,7 @@ export default function PublisherFilter() {
   return (
     <CheckboxFilterPanel
       filterKey={DOUCMENT_FILTER_KEY.publisher.filterKey}
-      translateKey="DOCUMENT.BIB.PUBLISHER"
+      translateKey="document:bib.publisher"
     />
   );
 }

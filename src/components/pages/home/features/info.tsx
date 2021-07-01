@@ -1,6 +1,6 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function Info({ icon: Icon, title, link }) {
@@ -17,10 +17,10 @@ export default function Info({ icon: Icon, title, link }) {
       </Box>
       <Box flexGrow={1}>
         <Text as="h2" lineHeight={1} mb={3} fontSize="2xl">
-          {t(`HOME.FEATURES.${title}.TITLE`)}
+          {t(`home:features.${title}.title`)}
         </Text>
         <Text color="gray.600" fontSize="lg">
-          {t(`HOME.FEATURES.${title}.DESC`)}
+          {t(`home:features.${title}.desc`)}
         </Text>
       </Box>
     </Flex>

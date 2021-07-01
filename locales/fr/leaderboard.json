@@ -1,0 +1,43 @@
+{
+  "activity_score": "Score d'activité: ",
+  "modules": {
+    "all": "Tout",
+    "discussion": "Discussion",
+    "documents": "Documents",
+    "miscellaneous": "Divers",
+    "observations": "Observations",
+    "species": "Espèces",
+    "taxon": "Taxon"
+  },
+  "stops": {
+    "f": "Tout le temps",
+    "month": "Mois passé",
+    "month3": "3 derniers mois",
+    "today": "Aujourd'hui",
+    "week": "La semaine dernière",
+    "year": "L'année passée"
+  },
+  "table": {
+    "commented": "Commenté",
+    "created": "Créé",
+    "curated": "Organisé",
+    "discussions": "Débats",
+    "documents": "Documents",
+    "identified": "Identifié",
+    "name": "Nom",
+    "observation": "Observation",
+    "organized": "Organisé",
+    "rank": "Rang",
+    "species": "Espèce"
+  },
+  "tip": "Le classement est basé sur toutes les activités effectuées par un utilisateur.L'activité mettra à jour une fois toutes les heures.",
+  "title": "Classement",
+  "total": {
+    "discussion": "Discussion totale",
+    "documents": "Nombre total de documents",
+    "miscellaneous": "Total Divers",
+    "observations": "Nombre total d'observations",
+    "species": "Espèces totales",
+    "taxon": "Taxon total"
+  }
+}

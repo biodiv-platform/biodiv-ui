@@ -1,4 +1,4 @@
-import SITE_CONFIG from "@configs/site-config.json";
+import SITE_CONFIG from "@configs/site-config";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { formatDateFromUTC } from "@utils/date";
@@ -16,13 +16,22 @@ export const transformUserGroupList = (list: UserGroupIbp[]): UserGroupIbp[] => 
   }));
 };
 
-export const findCurrentUserGroup = (groups: UserGroupIbp[], currentURL: string): UserGroupIbp => {
+export const findCurrentUserGroup = (
+  groups: UserGroupIbp[],
+  currentURL: string,
+  lang?: string
+): UserGroupIbp => {
+  const defaultGroup = {
+    ...DEFAULT_GROUP,
+    name: SITE_CONFIG.SITE.TITLE?.[lang] || DEFAULT_GROUP.name
+  };
+
   return (
     (currentURL &&
       groups.find(
         (group: UserGroupIbp) => group.webAddress && currentURL.startsWith(group.webAddress)
       )) ||
-    DEFAULT_GROUP
+    defaultGroup
   );
 };
 

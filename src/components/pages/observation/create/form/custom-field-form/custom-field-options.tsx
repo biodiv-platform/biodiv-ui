@@ -1,7 +1,7 @@
+import { Image, Stack, Text } from "@chakra-ui/react";
+import { getGroupImageThumb } from "@utils/media";
 import React, { useMemo } from "react";
 import { components } from "react-select";
-import { Stack, Image, Text } from "@chakra-ui/react";
-import { getGroupImageThumb } from "@utils/media";
 
 export default function CustomFieldOption(props) {
   const imageURL = useMemo(() => getGroupImageThumb(props.data.iconURL), [props.data.iconURL]);

@@ -1,7 +1,7 @@
 import { Link } from "@chakra-ui/react";
 import ObservationLoading from "@components/pages/common/loading";
-import useTranslation from "@hooks/use-translation";
 import styled from "@emotion/styled";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -54,7 +54,7 @@ export default function LandscapeList({ nextOffset }) {
       </InfiniteScroll>
       {landscapeData.l.length > 0 && landscapeData.hasMore && (
         <Link py={4} href={`./list?offset=${nextOffset}`}>
-          {t("NEXT")}
+          {t("common:next")}
         </Link>
       )}
     </GridViewBox>

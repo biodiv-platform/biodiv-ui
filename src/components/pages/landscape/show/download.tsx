@@ -1,10 +1,10 @@
-import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { ChevronUpIcon } from "@chakra-ui/icons";
-import useTranslation from "@hooks/use-translation";
+import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import DownloadIcon from "@icons/download";
 import { axDownloadLandscape } from "@services/landscape.service";
 import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function DownloadLandscape({ id, title }) {
@@ -30,7 +30,7 @@ export default function DownloadLandscape({ id, title }) {
           variant="outline"
           colorScheme="blue"
         >
-          {t("LANDSCAPE.DOWNLOAD_MAP")}
+          {t("landscape:download_map")}
         </MenuButton>
         <MenuList>
           <MenuItem onClick={() => download("wkt")}>Well Known Text (WKT)</MenuItem>

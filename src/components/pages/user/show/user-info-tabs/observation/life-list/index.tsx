@@ -1,6 +1,6 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import { stringify } from "querystring";
 import React from "react";
 
@@ -13,17 +13,17 @@ export default function LifeList({ userId, filter }) {
 
   return (
     <Box className="white-box">
-      <BoxHeading>📃 {t("USER.OBSERVATIONS.LIFE_LIST")}</BoxHeading>
+      <BoxHeading>📃 {t("user:observations.life_list")}</BoxHeading>
       <Box p={4}>
         <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
           <LifeListTable
             {...ll.uploaded}
-            title={t("USER.UPLOADED")}
+            title={t("user:uploaded")}
             extraParams={(o) => stringify({ maxVotedReco: o.maxVotedRecoId, user: userId })}
           />
           <LifeListTable
             {...ll.identified}
-            title={t("USER.IDENTIFIED")}
+            title={t("user:identified")}
             extraParams={(o) =>
               stringify({ recoId: o.maxVotedRecoId, authorVoted: userId, identified: true })
             }

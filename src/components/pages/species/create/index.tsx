@@ -1,7 +1,7 @@
 import { Alert, ListItem, UnorderedList } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { PageHeading } from "@components/@core/layout";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { SpeciesTaxonSuggestions } from "./species-taxon-suggestions";
@@ -13,16 +13,16 @@ export function SpeciesCreatePageComponent({ taxonRanksMeta }) {
 
   return (
     <div className="container mt">
-      <PageHeading>{t("SPECIES.CREATE.TITLE")}</PageHeading>
+      <PageHeading>{t("species:create.title")}</PageHeading>
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
         <UnorderedList>
           <ListItem>
-            {t("SPECIES.CREATE.DESC_1")}{" "}
+            {t("species:create.desc_1")}{" "}
             <ExternalBlueLink href="/roles/request">
-              {t("SPECIES.CONTRIBUTE.REQUEST_PERMISSION")}
+              {t("species:contribute.request_permission")}
             </ExternalBlueLink>
           </ListItem>
-          <ListItem>{t("SPECIES.CREATE.DESC_2")}</ListItem>
+          <ListItem>{t("species:create.desc_2")}</ListItem>
         </UnorderedList>
       </Alert>
 

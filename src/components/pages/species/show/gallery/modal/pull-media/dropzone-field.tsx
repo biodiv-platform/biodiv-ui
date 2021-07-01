@@ -12,7 +12,7 @@ import FromURL from "@components/pages/observation/create/form/uploader/from-url
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
 import ResourcesList from "@components/pages/observation/create/form/uploader/observation-resources/resources-list";
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
 
@@ -46,11 +46,11 @@ const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
         isLazy={true}
       >
         <TabList mb={4} overflowX="auto" py={1}>
-          <Tab>✔️ {t("OBSERVATION.SELECTED_MEDIA")}</Tab>
-          <Tab>🖼️ {t("SPECIES.PULL_MEDIA")}</Tab>
-          <Tab>☁️ {t("OBSERVATION.MY_UPLOADS")}</Tab>
-          <Tab>🎙️ {t("OBSERVATION.AUDIO.TITLE")}</Tab>
-          <Tab>📹 {t("OBSERVATION.FROM_URL")}</Tab>
+          <Tab>✔️ {t("form:selected_media")}</Tab>
+          <Tab>🖼️ {t("species:pull_media")}</Tab>
+          <Tab>☁️ {t("form:my_uploads")}</Tab>
+          <Tab>🎙️ {t("form:audio.title")}</Tab>
+          <Tab>📹 {t("form:from_url")}</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

@@ -1,0 +1,89 @@
+{
+  "basic_information": "Fampahalalana fototra",
+  "bib": {
+    "abstract": "Description",
+    "address": "Address",
+    "author": "Author",
+    "booktitle": "Lohatenin'ny boky",
+    "chapter": "Chapter",
+    "doi": "Doi",
+    "edition": "fanontana",
+    "editor": "mpamoaka lahatsoratra",
+    "extra": "FANALAVAM",
+    "file": "rakitra",
+    "howpublished": "Ahoana no namoahana azy",
+    "institution": "fikambanana",
+    "isbn": "ISBN",
+    "journal": "Journal",
+    "language": "Fiteny",
+    "month": "VOLANA",
+    "note": "Fanamarihana",
+    "number": "isa",
+    "organization": "fikambanana",
+    "pages": "Pejy",
+    "publisher": "mpitory",
+    "schema": {
+      "error": "Tsy afaka namerina ny Schema BIBTEX"
+    },
+    "school": "am-pianarana",
+    "series": "andian-dahatsoratra",
+    "title": "lohateny",
+    "type": "Type",
+    "url": "URL",
+    "volume": "boky",
+    "year": "TAOM-"
+  },
+  "contribution": "fandraisana anjara",
+  "create": {
+    "error": "Tsy afaka namorona antontan-taratasy",
+    "success": "Ny antontan-taratasy noforonina soa aman-tsara",
+    "title": "Mamorona tahirin-kevitra"
+  },
+  "created_on": "Noforonina",
+  "description": "Description",
+  "documents_found": "Antontan-taratasy hita",
+  "doi": "Doi",
+  "download": {
+    "citation": "ambadika",
+    "pdf": "PDF"
+  },
+  "edit": {
+    "error": "Nisy hadisoana nanavao ity tahirin-kevitra ity",
+    "success": "Ny antontan-taratasy dia nohavaozina soa aman-tsara",
+    "title": "Hanova ny antontan-taratasy"
+  },
+  "edit_document": "Hanova ny antontan-taratasy",
+  "follow": "Araho ny antontan-taratasy",
+  "import_bibtex": "Ampidiro amin'ny BIBTEX",
+  "issue": "Olana",
+  "list": {
+    "title": "Antontan-taratasy"
+  },
+  "metadata": "Metadata",
+  "no_geodata": "Tsy misy data ara-jeografika misy",
+  "no_usergroup": "Tsy misy mpampiasa mpampiasa hita amin'ity tahirin-kevitra ity",
+  "pages": "Pejy",
+  "publication_date": "Daty famoahana",
+  "publication_language": "Fiteny publication",
+  "remove": {
+    "description": "Azonao antoka ve izany? Tsy azonao atao ny manaisotra io hetsika io aorian'izay.",
+    "success": "Ny antontan-taratasy voafafa soa aman-tsara",
+    "title": "Fafao ny antontan-taratasy"
+  },
+  "share": "Zarao ity antontan-taratasy ity",
+  "tags": {
+    "not_found": "Tsy misy tags (s) hita",
+    "title": "Tags"
+  },
+  "type": "Type",
+  "unfollow": "Antontan-taratasy tsy misy dikany",
+  "unknown": "Tahirin-kevitra tsy misy dikany",
+  "update_error": "Tsy afaka nanavao",
+  "update_success": "Nohavaozina soa aman-tsara",
+  "updated_on": "Daty Nohavaozina",
+  "upload": {
+    "my_uploads": "Draft Media",
+    "selected": "Antontan-taratasy voafantina",
+    "url": "URL ivelany"
+  }
+}

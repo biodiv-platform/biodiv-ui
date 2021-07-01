@@ -1,10 +1,10 @@
 import LandscapeShowPageComponent from "@components/pages/landscape/show";
-import { axGetLandscapeById, axGetLandscapeShowById } from "@services/landscape.service";
-import { getLangId } from "@utils/lang";
-import React from "react";
-import { DEFAULT_FILTER } from "@static/documnet-list";
-import wkt from "wkt";
 import { axGetListData } from "@services/document.service";
+import { axGetLandscapeById, axGetLandscapeShowById } from "@services/landscape.service";
+import { DEFAULT_FILTER } from "@static/documnet-list";
+import { getLanguageId } from "@utils/i18n";
+import React from "react";
+import wkt from "wkt";
 
 const ShowLandScapeParams = {
   geoShapeFilterField: "documentCoverages.topology",
@@ -20,8 +20,8 @@ const ObservationShowPage = ({ landscape, landscapeShow, documentList }) => (
   />
 );
 
-ObservationShowPage.getInitialProps = async (ctx) => {
-  const langId = getLangId(ctx);
+export const getServerSideProps = async (ctx) => {
+  const langId = getLanguageId(ctx.locale)?.ID;
   const { data: landscape } = await axGetLandscapeById(ctx.query.landscapeId);
   const { data: landscapeShow } = await axGetLandscapeShowById(ctx.query.landscapeId, langId);
   const coord = wkt.parse(landscapeShow.wktData)?.coordinates;
@@ -33,10 +33,13 @@ ObservationShowPage.getInitialProps = async (ctx) => {
     : `${coord}`.replace(/[[\]]/g, "");
   const initialFilterParams = { ...DEFAULT_FILTER, ...ShowLandScapeParams };
   const { data: documents } = await axGetListData(initialFilterParams, { location });
+
   return {
-    landscape,
-    landscapeShow,
-    documentList: documents?.documentList || []
+    props: {
+      landscape,
+      landscapeShow,
+      documentList: documents?.documentList || []
+    }
   };
 };
 

@@ -1,0 +1,150 @@
+{
+  "accurate": "Accurate",
+  "add_observation": "Add Observation",
+  "cf_update_success": "Successfully Updated Observation Custom Field",
+  "common_name": "Common Name",
+  "continue": "Continue",
+  "contributor": "Contributor",
+  "coordinates": "Coordinates",
+  "created_on": "Created on",
+  "creating": "We're creating your observation",
+  "custom_fields": "Custom Fields",
+  "delete_file": {
+    "error": "Unable to process file,Please try again later",
+    "failed": "Unable to delete file, please try again later",
+    "success": "File deleted successfully"
+  },
+  "download": {
+    "error": "Unable to generate file",
+    "modal": {
+      "note": "Please state how you intend to use the downloaded data",
+      "note_hint": "This is important for us to understand how open data is being used",
+      "title": "Choose Columns"
+    },
+    "success": "Your file is being generated. When it is ready, you will be notified by email and a download link will appear in your profile page.",
+    "title": "Download"
+  },
+  "edit_hint": "💡 for editing other items such as name or traits, please input directly from the observation-show page",
+  "edit_observation": "Edit Observation",
+  "follow_observation": "Follow Observation",
+  "group": "Group",
+  "group_updated": "Observation Species Group Updated Successfully",
+  "groups_updated": "Groups Updated Successfully",
+  "help_identify": "Help Identify",
+  "hide_precise_location": "Hide Precise Location",
+  "id": {
+    "agree": "Agree",
+    "no_recommendation": "No Recommendation",
+    "no_suggestion": "Suggest an identification",
+    "remove": "Remove",
+    "resuggest": "Changed your mind?",
+    "suggest_new_reco": "Suggest another identification",
+    "suggestion_success": "Identification suggested successfully",
+    "title": "Identification",
+    "unlock": "Unlock",
+    "validate": "Validate",
+    "validated": "Identification validated by curator"
+  },
+  "language": "Language",
+  "last_location": "Use last location",
+  "latitude": "Latitude",
+  "license": "License",
+  "list": {
+    "chart": {
+      "sgroup": "Species groups",
+      "states": "State distribution"
+    },
+    "created_on": "Created on",
+    "life_list": {
+      "count_header": "Counts",
+      "heading": "Taxa observed",
+      "species_header": "Species"
+    },
+    "location": "Location",
+    "observations_found": "Observations Found",
+    "observed_on": "Observed on",
+    "spatial_distribution": "Spatial distribution",
+    "stats_bar": {
+      "total_identifiers": "Identifiers",
+      "total_observations": "Observations",
+      "total_taxa": "Taxa",
+      "total_uploaders": "Uploaders"
+    },
+    "top_identifiers_list": {
+      "author_header": "Name",
+      "count_header": "Counts",
+      "heading": "Top identifiers"
+    },
+    "top_uploaders_list": {
+      "author_header": "Name",
+      "count_header": "Counts",
+      "heading": "Top uploaders"
+    }
+  },
+  "location_information": {
+    "coordinates": "Coordinates",
+    "forest_type": "Forest Type",
+    "geoprivacy_enabled": "Geoprivacy Enabled",
+    "rainfall": "Rainfall",
+    "soil": "Soil",
+    "tehsil": "Tehsil",
+    "temperature": "Temperature",
+    "title": "Location Information"
+  },
+  "location_placeholder": "Enter a location",
+  "location_scale": "Location Accuracy",
+  "longitude": "Longitude",
+  "min_three_chars": "Input at least 3 characters to search",
+  "name": "Name",
+  "nearby": "Nearby Observations",
+  "no_custom_field": "No Custom field(s) found for this observation",
+  "no_empty_suggestion": "Cannot crete empty suggestion",
+  "notes": "Notes",
+  "observed": "Observed",
+  "observed_at": "Location Observed At",
+  "observed_on": "Observed on",
+  "place": "Place",
+  "points_gained": "{{points}} activity point(s) gained",
+  "post_to_groups": "Post to Groups",
+  "range_hint": "use : to septate range values",
+  "rate_success": "Media successfully rated",
+  "rating": "Rating",
+  "related": "Related Observations",
+  "remove": {
+    "description": "Are you sure? You can't undo this action afterwards.",
+    "success": "Observation deleted successfully",
+    "title": "Delete observation"
+  },
+  "resource_info": "Resource Information",
+  "saved": "Observation Saved",
+  "saved_message": "We were unable to create your observation at the moment, but if you are offline don't worry it's saved and will be uploaded once connectivity is back",
+  "scientific_name": "Scientific Name",
+  "share": "Share this observation",
+  "source": "Source",
+  "species_page": "See species page",
+  "submitted": "Submitted",
+  "success": "Created successfully",
+  "suggest": "Suggest",
+  "sync": {
+    "done": "Done",
+    "failed": "Failed",
+    "title": "Pending Observation(s)",
+    "uploading": "Uploading",
+    "view": "View"
+  },
+  "synonym": "Synonym",
+  "title": "What did you observe today?",
+  "title_edit": "Edit Observation",
+  "traits": "Traits",
+  "traits_no_group": "Please select group first",
+  "traits_update_success": "Traits Updated Successfully",
+  "unfeature": "Unfeature Selected",
+  "unfollow_observation": "Unfollow Observation",
+  "update_observation": "Update Observation",
+  "updated": "Updated",
+  "updated_on": "Updated on",
+  "use_dms": "Use DMS",
+  "use_last_value": "Use last value",
+  "use_lat_lng": "Use Lat-Long",
+  "why_featuring": "Why Featuring?"
+}

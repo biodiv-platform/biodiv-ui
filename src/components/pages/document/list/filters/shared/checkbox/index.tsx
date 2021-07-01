@@ -5,7 +5,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import FilterCheckboxes, { FilterCheckboxesProps } from "./checkboxes";
@@ -19,7 +19,7 @@ export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
         <>
           <AccordionButton>
             <Box flex={1} textAlign="left">
-              {props.label || t(props.translateKey + "TITLE")}
+              {props.label || t(props.translateKey + "title")}
             </Box>
             <AccordionIcon />
           </AccordionButton>

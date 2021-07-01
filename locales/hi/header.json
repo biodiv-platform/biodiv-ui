@@ -1,0 +1,75 @@
+{
+  "group_edit": "समूह संपादित करें",
+  "logged_user_only": "कृपया समूह में शामिल होने के लिए लॉगिन करें",
+  "member_only": "कृपया अवलोकन अपलोड करने के लिए समूह में शामिल हों",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "डेटा पैकेज जोड़ें",
+      "add_dataset": "डेटासेट जोड़ें",
+      "add_document": "दस्तावेज़ जोड़ें",
+      "add_fact": "तथ्य जोड़ें",
+      "add_list": "सूची में जोड़ने",
+      "add_observation": "अवलोकन जोड़ें",
+      "add_trait_or_value": "लक्षण / मूल्य जोड़ें",
+      "contribute_to_map": "मानचित्र में योगदान",
+      "contribute_to_species": "प्रजातियों में योगदान",
+      "title": "योगदान"
+    },
+    "groups": {
+      "see_all": "सभी देखें",
+      "title": "समूहों"
+    },
+    "settings": {
+      "leaderboard": "मेरा लीडरबोर्ड रैंक",
+      "logout": "लॉग आउट",
+      "my_observations": "मेरे अवलोकन",
+      "my_profile": "मेरी प्रोफाइल",
+      "title": "समायोजन"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "दस्तावेज़ डेटाटेबल्स",
+      "documents": "दस्तावेज़",
+      "title": "दस्तावेज़"
+    },
+    "landscapes": {
+      "title": "संरक्षित क्षेत्र"
+    },
+    "maps": {
+      "title": "नक्शा"
+    },
+    "more": {
+      "about_us": "हमारे बारे में",
+      "activity": "गतिविधि",
+      "dashboard": "डैशबोर्ड",
+      "datasets": "डेटासेट्स",
+      "discussions": "चर्चाएँ",
+      "leaderboard": "लीडरबोर्ड",
+      "participants": "प्रतिभागियों",
+      "title": "अधिक"
+    },
+    "observation": {
+      "checklists": "सूची",
+      "datasets": "डेटासेट्स",
+      "observation_datatables": "अवलोकन डेटाटेबल्स",
+      "observation_traits": "अवलोकन लक्षण",
+      "observations": "टिप्पणियों",
+      "title": "अवलोकन"
+    },
+    "pages": {
+      "empty": "कोई पृष्ठ नहीं",
+      "title": "पृष्ठों"
+    },
+    "species": {
+      "species_datatables": "प्रजाति डेटाटेबल्स",
+      "species_pages": "प्रजाति पृष्ठ",
+      "species_traits": "प्रजाति लक्षण",
+      "taxon_namelist": "टैक्सन नामावली",
+      "title": "जाति"
+    }
+  },
+  "search": "खोज",
+  "sign_in": "लॉग इन करें",
+  "toggle_menu": "मेनू टॉगल करें"
+}

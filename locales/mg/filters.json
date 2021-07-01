@@ -1,0 +1,136 @@
+{
+  "clear": "Mazava {{filterCount}} siver (s)",
+  "custom_fields": {
+    "has_content": "Manana votoaty",
+    "no_content": "Tsy misy atiny",
+    "no_custom_field": "Tsy misy fomba fanao mahazatra",
+    "title": "Saha mahazatra"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "Faneva",
+      "title": "sainam-pirenena",
+      "unflagged": "Unflagged"
+    },
+    "identification": {
+      "identified": "fantatra",
+      "title": "Famantarana",
+      "unidentified": "Unidentified"
+    },
+    "taxon_id": {
+      "has_taxon": "Manana id id",
+      "no_taxon": "Tsy misy karapanondro taxon",
+      "title": "ID ID"
+    },
+    "title": "Ny kalitaon'ny data",
+    "validation": {
+      "not_validated": "Tsy manan-kery",
+      "title": "fankatoavana",
+      "validated": "nampanan-kery"
+    }
+  },
+  "document_title": "lohateny",
+  "item_type": {
+    "title": "Karazana entana"
+  },
+  "location": {
+    "district": "DISTRIKA",
+    "map": {
+      "title": "Sarintany"
+    },
+    "protected_area": {
+      "title": "Faritra arovana"
+    },
+    "state": {
+      "title": "FANJAKANA"
+    },
+    "tehsil": "Tehsil",
+    "title": "Toerana"
+  },
+  "media": {
+    "audio": "teny",
+    "image": "SARY",
+    "no_media": "Tsy misy haino aman-jery",
+    "title": "Type Media",
+    "video": "Video"
+  },
+  "name": {
+    "reco_name": {
+      "title": "Anarana"
+    },
+    "status": {
+      "accepted": "nanaiky",
+      "synonym": "mitovy dika",
+      "title": "sata"
+    },
+    "title": "Anaran'ny siantifika"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "Anarana rehetra"
+    },
+    "taxon_names": {
+      "title": "Anaran-kafatra"
+    },
+    "taxon_rank": {
+      "title": "Tranonkala Taxon"
+    },
+    "taxon_status": {
+      "title": "Sata Taxon"
+    },
+    "title": "Anaran'ny siantifika"
+  },
+  "species_group": {
+    "all": "rehetra",
+    "amphibians": "biby miain-droa",
+    "arthropods": "bibikely",
+    "birds": "vorona",
+    "fish": "TRONDRO",
+    "fungi": "holatra",
+    "mammals": "biby mampinono",
+    "molluscs": "Molluscs",
+    "others": "Ny hafa",
+    "plants": "ZAVAMANIRY",
+    "reptiles": "biby mandady",
+    "title": "Vondrona karazana"
+  },
+  "taxon_browser": {
+    "search": "Mikaroka amin'ny hazo",
+    "search_results": "Mampiseho {{currentIndex}} {{resultsCount}}",
+    "title": "Taxon browser"
+  },
+  "time": {
+    "created_on": "Daty noforonina",
+    "max_date": "Daty farany",
+    "min_date": "Daty kely indrindra",
+    "month": {
+      "apr": "Aprily",
+      "aug": "Aogositra",
+      "dec": "Desambra",
+      "feb": "février",
+      "jan": "Janoary",
+      "jul": "Jolay",
+      "jun": "Jona",
+      "mar": "ny diabe",
+      "may": "MEY",
+      "nov": "Novambra",
+      "oct": "Oktobra",
+      "sep": "septembre",
+      "title": "Volana voamarina"
+    },
+    "observed_on": "Daty nanamarika",
+    "title": "Time"
+  },
+  "title": "sivana",
+  "toggle": "Toggle sivana",
+  "traits": {
+    "title": "toetra"
+  },
+  "user": {
+    "search": "Mpampiasa mpampiasa",
+    "title": "Mpikambana"
+  },
+  "usergroup": {
+    "title": "Vondron'olona mpampiasa"
+  }
+}

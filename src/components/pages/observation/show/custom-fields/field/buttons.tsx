@@ -1,6 +1,6 @@
 import { Button, Stack } from "@chakra-ui/react";
-import useTranslation from "@hooks/use-translation";
 import CheckIcon from "@icons/check";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function Buttons({ onSave, onClose }) {
@@ -11,15 +11,15 @@ export default function Buttons({ onSave, onClose }) {
       <Button
         size="sm"
         colorScheme="blue"
-        aria-label={t("SAVE")}
+        aria-label={t("common:save")}
         type="submit"
         leftIcon={<CheckIcon />}
         onClick={onSave}
       >
-        {t("SAVE")}
+        {t("common:save")}
       </Button>
-      <Button size="sm" colorScheme="gray" aria-label={t("CLOSE")} onClick={onClose}>
-        {t("CLOSE")}
+      <Button size="sm" colorScheme="gray" aria-label={t("common:close")} onClick={onClose}>
+        {t("common:close")}
       </Button>
     </Stack>
   );

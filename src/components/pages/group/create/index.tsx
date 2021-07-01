@@ -6,9 +6,10 @@ import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useTranslation from "@hooks/use-translation";
+import useGlobalState from "@hooks/use-global-state";
 import { axUserGroupCreate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -64,6 +65,7 @@ export default function CreateGroupPageComponent({
   });
 
   const handleFormSubmit = async (values) => {
+    const { languageId } = useGlobalState();
     const { spacialCoverage, founder, moderator, ...otherValues } = values;
 
     const spacialCoverageBounds = {
@@ -84,6 +86,7 @@ export default function CreateGroupPageComponent({
     };
 
     const payload = {
+      languageId: languageId,
       ...STATIC_GROUP_PAYLOAD,
       ...otherValues,
       ...spacialCoverageBounds,
@@ -92,57 +95,57 @@ export default function CreateGroupPageComponent({
 
     const { success, data } = await axUserGroupCreate(payload);
     if (success) {
-      notification(t("GROUP.CREATE.SUCCESS"), NotificationType.Success);
+      notification(t("group:create.success"), NotificationType.Success);
       router.push(`/group/${data.name}/show`, false, {}, true);
     } else {
-      notification(t("GROUP.CREATE.ERROR"));
+      notification(t("group:create.error"));
     }
   };
 
   return (
     <div className="container mt">
-      <PageHeading>👥 {t("GROUP.CREATE.TITLE")}</PageHeading>
+      <PageHeading>👥 {t("group:create.title")}</PageHeading>
 
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
             <Box gridColumn="1/4">
-              <TextBoxField name="name" isRequired={true} label={t("GROUP.NAME")} />
-              <RichTextareaField name="description" label={t("GROUP.DESCRIPTION")} />
+              <TextBoxField name="name" isRequired={true} label={t("group:name")} />
+              <RichTextareaField name="description" label={t("form:description.title")} />
             </Box>
             <ImageUploaderField label="Logo" name="icon" />
           </SimpleGrid>
           <IconCheckboxField
             name="speciesGroup"
-            label={t("GROUP.SPECIES_COVERAGE")}
+            label={t("common:species_coverage")}
             options={speciesGroups}
             type="species"
             isRequired={true}
           />
           <IconCheckboxField
             name="habitatId"
-            label={t("GROUP.HABITATS_COVERED")}
+            label={t("common:habitats_covered")}
             options={habitats}
             type="habitat"
             isRequired={true}
           />
-          <CheckboxField name="allowUserToJoin" label={t("GROUP.JOIN_WITHOUT_INVITATION")} />
+          <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
           <AreaDrawField
-            label={t("GROUP.SPATIAL_COVERGE")}
+            label={t("group:spatial_coverge")}
             name={"spacialCoverage"}
             mb={8}
             isRequired={true}
           />
 
           <PageHeading as="h2" size="lg">
-            🛡️ {t("GROUP.ADMIN.TITLE")}
+            🛡️ {t("group:admin.title")}
           </PageHeading>
 
-          <AdminInviteField name="founder" label={t("GROUP.INVITE_FOUNDERS")} />
-          <AdminInviteField name="moderator" label={t("GROUP.INVITE_MODERATORS")} />
+          <AdminInviteField name="founder" label={t("group:invite_founders")} />
+          <AdminInviteField name="moderator" label={t("group:invite_moderators")} />
 
           <SubmitButton mt={2} mb={6}>
-            {t("GROUP.SAVE")}
+            {t("group:save")}
           </SubmitButton>
         </form>
       </FormProvider>

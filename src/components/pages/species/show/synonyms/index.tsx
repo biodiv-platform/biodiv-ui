@@ -1,7 +1,7 @@
 import { Box, Table, Tbody, Td, Tr } from "@chakra-ui/react";
 import { ResponsiveContainer } from "@components/@core/table";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
-import useTranslation from "@hooks/use-translation";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import useSpecies from "../use-species";
@@ -15,7 +15,7 @@ export default function SpeciesSynonym() {
   const [synonymsList, setSynonymsList] = useState(species.taxonomicNames.synonyms);
 
   return (
-    <ToggleablePanel id="synonyms" icon="🗒" title={t("SPECIES.SYNONYMS")}>
+    <ToggleablePanel id="synonyms" icon="🗒" title={t("species:synonyms")}>
       <SynonymEditModal onUpdate={setSynonymsList} />
       <Box maxH="300px">
         <ResponsiveContainer noBorder={true}>
@@ -38,7 +38,7 @@ export default function SpeciesSynonym() {
                 ))
               ) : (
                 <Tr>
-                  <Td>{t("NO_DATA")}</Td>
+                  <Td>{t("common:no_data")}</Td>
                 </Tr>
               )}
               {permissions.isContributor && <SynonymAdd />}
