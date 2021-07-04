@@ -16,7 +16,7 @@ export default function TimeFilter() {
       />
 
       <DateRangeFilter
-        translateKey="filters:time.observed_on"
+        translateKey="common:observed_on"
         filterKey={{ min: "minDate", max: "maxDate" }}
       />
 

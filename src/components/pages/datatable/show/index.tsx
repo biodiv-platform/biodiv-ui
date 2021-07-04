@@ -1,15 +1,53 @@
-import { Box, Text } from "@chakra-ui/react";
-import { PageHeading } from "@components/@core/layout";
-import useTranslation from "next-translate/useTranslation";
+import { Box, SimpleGrid, Stack } from "@chakra-ui/react";
+import Activity from "@components/pages/observation/show/activity";
+import LocationInformation from "@components/pages/observation/show/sidebar/location-info";
+import { axAddAcitivityComment } from "@services/activity.service";
+import { RESOURCE_TYPE } from "@static/constants";
 import React from "react";
 
-export default function DataTableShowPageComponent({ datatableId }) {
-  const { t } = useTranslation();
+import Header from "./header";
+import Info from "./info";
+import ObservationsList from "./list";
+import Sidebar from "./sidebar";
 
+export default function DataTableShowPageComponent({
+  datatableShow: { datatable, authorInfo, layerInfo },
+  speciesGroups
+}) {
   return (
     <Box className="container mt" pb={6}>
-      <PageHeading>📦 {t("datatable:show_page")}</PageHeading>
-      <Text>{datatableId}</Text>
+      <Header datatable={datatable} authorName={authorInfo.name} />
+      <Box mb={4} className="fadeInUp delay-3">
+        <ObservationsList dataTable={datatable} speciesGroups={speciesGroups} />
+      </Box>
+
+      <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]} className="fadeInUp delay-6">
+        <Box gridColumn="1/3">
+          <Stack>
+            <Info dataTable={datatable} speciesGroups={speciesGroups} />
+            <Activity
+              resourceId={datatable.id}
+              resourceType={RESOURCE_TYPE.DATATABLE}
+              commentFunc={axAddAcitivityComment}
+            />
+          </Stack>
+        </Box>
+        <Box>
+          <Stack>
+            <Box>
+              <Sidebar datatable={datatable} authorInfo={authorInfo} />
+            </Box>
+            {layerInfo && (
+              <LocationInformation
+                layerInfo={layerInfo}
+                latitude={datatable?.geographicalCoverageLatitude}
+                longitude={datatable?.geographicalCoverageLongitude}
+                geoprivacy={datatable?.geographicalCoverageGeoPrivacy}
+              />
+            )}
+          </Stack>
+        </Box>
+      </SimpleGrid>
     </Box>
   );
 }

@@ -1,4 +1,5 @@
 {
+  "add": "डेटाटेबल जोड़ें",
   "attribution": "आरोपण",
   "basis_of_data": "डेटा का आधार",
   "basis_of_record": "अभिलेख का आधार",
@@ -6,8 +7,10 @@
   "create_datatable": "डेटाटेबल बनाएँ",
   "field_mapping_table": "फील्ड मैपिंग टेबल",
   "files_upload": "फ़ाइलें अपलोड करती हैं",
+  "found": "डेटाटेबल मिला",
   "geographical_coverage": "भौगोलिक कवरेज",
   "is_verified": "अवलोकन सत्यापित",
+  "location": "स्थान",
   "location_accuracy": "स्थान सटीकता",
   "location_scale": "स्थान पैमाने",
   "media_uploader": "मीडिया अपलोडर",
@@ -23,8 +26,10 @@
   "project": "परियोजना",
   "sheet_uploader": "स्प्रेडशीट अपलोडर",
   "show_page": "डेटाटेबल विवरण",
+  "summary": "सारांश",
   "taxonomy": "वर्गीकरण कवरेज",
   "temporal": "अस्थायी कवरेज",
   "title": "सामान्य मेटाडाटा",
+  "type": "प्रकार",
   "upload_again": "फिर से अपलोड करें"
 }

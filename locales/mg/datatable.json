@@ -1,4 +1,5 @@
 {
+  "add": "Ampio Datatable",
   "attribution": "Attribution",
   "basis_of_data": "Fototry ny angona",
   "basis_of_record": "Fototry ny firaketana an-tsoratra",
@@ -6,8 +7,10 @@
   "create_datatable": "Mamorona datatable",
   "field_mapping_table": "Latabatra sarintany an-tsaha",
   "files_upload": "File download",
+  "found": "Hita Datatable",
   "geographical_coverage": "Fandrakofana ara-jeografika",
   "is_verified": "Voamarina ny fandinihana",
+  "location": "Toerana",
   "location_accuracy": "Toerana marina",
   "location_scale": "Toerana misy toerana",
   "media_uploader": "Media Uploader",
@@ -23,8 +26,10 @@
   "project": "TETIKASA",
   "sheet_uploader": "Spreundsheet Uploader",
   "show_page": "Ny antsipiriany datatable",
+  "summary": "FAMINTINANA",
   "taxonomy": "Ny fandrakofana taxonomika",
   "temporal": "Fandrakofana ara-nofo",
   "title": "General Metadata",
+  "type": "Karazana",
   "upload_again": "Alefaso indray"
 }

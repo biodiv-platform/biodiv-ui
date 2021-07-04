@@ -34,7 +34,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
     resolver: yupResolver(
       Yup.object().shape({
         title: Yup.string().required(),
-        summary: Yup.string().required(),
+        summary: Yup.string().required().max(255),
         description: Yup.string(),
         languageId: Yup.number().required(),
         filename: Yup.string().required(),
@@ -158,7 +158,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         <PartyContributorsForm />
         <Others />
         <CheckboxField name="terms" label={t("form:terms")} />
-        <SubmitButton leftIcon={<CheckIcon />}>{t("common:add")}</SubmitButton>
+        <SubmitButton leftIcon={<CheckIcon />}>{t("datatable:add")}</SubmitButton>
       </form>
     </FormProvider>
   );

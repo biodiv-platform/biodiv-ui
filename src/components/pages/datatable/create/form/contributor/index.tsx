@@ -21,10 +21,11 @@ export default function PartyContributorsForm() {
           name="contributors"
           placeholder={t("group:invite")}
           onQuery={onUserQuery}
+          resetOnSubmit={false}
           isRequired={true}
           label={t("datatable:contributor")}
         />
-        <TextBoxField name="attribution" label={t("datatable:attribution")} />
+        <TextBoxField name="attribution" maxLength={1000} label={t("datatable:attribution")} />
       </Box>
     </ToggleablePanel>
   );

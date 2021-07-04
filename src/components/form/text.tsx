@@ -11,6 +11,7 @@ interface ITextBoxProps {
   disabled?: boolean;
   hint?: string;
   style?;
+  maxLength?;
   isRequired?: boolean;
   showLabel?: boolean;
   hidden?;
@@ -27,6 +28,7 @@ export const TextBoxField = ({
   hint,
   isRequired,
   showLabel = true,
+  maxLength,
   hidden,
   autoComplete,
   ...props
@@ -49,11 +51,15 @@ export const TextBoxField = ({
         id={id || name}
         placeholder={label}
         type={type}
+        maxLength={maxLength}
         isDisabled={disabled}
         autoComplete={autoComplete}
         {...field}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
+      {maxLength && field.value && (
+        <FormHelperText color="gray.600" children={`${field.value.length}/${maxLength}`} />
+      )}
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

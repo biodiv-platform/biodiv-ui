@@ -26,6 +26,20 @@ export const axListActivity = async (
   }
 };
 
+export const axAddAcitivityComment = async (payload) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.post(
+      `${ENDPOINT.ACTIVITY}/v1/service/add/comment/${payload.rootHolderType}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axAddObservationComment = async (payload) => {
   try {
     await waitForAuth();

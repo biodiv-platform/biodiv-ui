@@ -16,6 +16,7 @@
     "title": "mikasika ny",
     "wkt": "WKT"
   },
+  "created_on": "Noforonina tamin'ny",
   "date_accuracy": "Daty marina",
   "date_accuracy_options": {
     "accurate": "marina",
@@ -50,7 +51,9 @@
     "taken_on": "Nalaina",
     "uploaded_on": "Nampakarina tamin'ny"
   },
+  "name": "Anarana",
   "notes": "-tsoratra",
+  "place": "Place",
   "selected_media": "Media voafantina",
   "selected_places": "Toerana voafantina",
   "species_groups": "Vondrona karazana",

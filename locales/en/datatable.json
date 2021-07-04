@@ -1,4 +1,5 @@
 {
+  "add": "Add Datatable",
   "attribution": "Attribution",
   "basis_of_data": "Basis of Data",
   "basis_of_record": "Basis of Record",
@@ -6,8 +7,10 @@
   "create_datatable": "Create DataTable",
   "field_mapping_table": "Field Mapping Table",
   "files_upload": "Files Uploads",
+  "found": "Datatable Found",
   "geographical_coverage": "Geographic Coverage",
-  "is_verified": "Observation Verified",
+  "is_verified": "Is Verified",
+  "location": "Location",
   "location_accuracy": "Location Accuracy",
   "location_scale": "Location Scale",
   "media_uploader": "Media Uploader",
@@ -23,8 +26,10 @@
   "project": "Project",
   "sheet_uploader": "Spreadsheet Uploader",
   "show_page": "Datatable Details",
+  "summary": "Summary",
   "taxonomy": "Taxonomic Coverage",
   "temporal": "Temporal Coverage",
   "title": "General Metadata",
+  "type": "Type",
   "upload_again": "Upload Again"
 }

@@ -14,6 +14,7 @@ interface ITextAreaProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
+  maxLength?;
   style?;
   isRequired?;
 }
@@ -23,6 +24,7 @@ export const TextAreaField = ({
   label,
   mb = 4,
   disabled = false,
+  maxLength = false,
   hint,
   ...props
 }: ITextAreaProps) => {
@@ -37,9 +39,13 @@ export const TextAreaField = ({
         minH="124px"
         isDisabled={disabled}
         bg="white"
+        maxlength={maxLength}
         {...field}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
+      {maxLength && field.value && (
+        <FormHelperText color="gray.600" children={`${field.value.length}/${maxLength}`} />
+      )}
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>
   );

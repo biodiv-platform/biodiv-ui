@@ -451,3 +451,41 @@ export const axGetObservationMapData = async (params) => {
     return { success: false, data: {} };
   }
 };
+
+export const axGetObservationByDatatableId = async (observationId, params) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/dataTableObservation/${observationId}`,
+      { params }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axGetObservationListByDatatableId = async (observationId, params) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/dataTableObservation/list/${observationId}`,
+      { params }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axDeleteObservationByDatatableId = async (observationId) => {
+  try {
+    const { data } = await http.delete(
+      `${ENDPOINT.OBSERVATION}/v1/observation/dataTableObservation/${observationId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e.response.data.message);
+    return { success: false };
+  }
+};

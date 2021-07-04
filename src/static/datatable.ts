@@ -17,3 +17,8 @@ export const BASIS_OF_DATA = [
   { label: "Primary Observation", value: "PRIMARY_OBSERVATION" },
   { label: "Secondary Data", value: "SECONDARY_DATA" }
 ];
+
+export const sortByOptions = [
+  { name: "common:list.sort_options.last_updated", key: "lastRevised" },
+  { name: "common:list.sort_options.latest", key: "createdOn" }
+];
