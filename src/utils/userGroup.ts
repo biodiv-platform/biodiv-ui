@@ -23,7 +23,7 @@ export const findCurrentUserGroup = (
 ): UserGroupIbp => {
   const defaultGroup = {
     ...DEFAULT_GROUP,
-    name: SITE_CONFIG.SITE.TITLE?.[lang] || DEFAULT_GROUP.name
+    name: SITE_CONFIG.SITE.TITLE?.[lang || SITE_CONFIG.LANG.DEFAULT] || DEFAULT_GROUP.name
   };
 
   return (
