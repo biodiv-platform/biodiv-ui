@@ -13,7 +13,7 @@ import GallerySetup from "./gallery-setup";
 
 export default function HomePageCustomizationForm({ userGroupId, homePageDetails }) {
   const { t } = useTranslation();
-  const [galleryList, setGalleryList] = useState(homePageDetails?.gallerySlider || []);
+  const [galleryList, setGalleryList] = useState(homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []);
   const [isCreate, setIsCreate] = useState(false);
 
   const {
@@ -64,7 +64,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
     };
     const { success, data } = await axUpdateHomePageDetails(userGroupId, payload);
     if (success) {
-      setGalleryList(data.gallerySlider);
+      setGalleryList(data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder));
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
