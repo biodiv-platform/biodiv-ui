@@ -52,17 +52,16 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
     }
   });
 
-  const handleFormSubmit = async (value) => {
+  const handleFormSubmit = async ({gallerySlider,...value}) => {
     const payload = {
       gallerySlider: galleryList.reduce((acc, item, index) => {
-        if (item["id"] === undefined) {
+        if (!item.id) {
           acc.push({ ugId: userGroupId, displayOrder: index, ...item });
         }
         return acc;
       }, []),
       ...value
     };
-
     const { success, data } = await axUpdateHomePageDetails(userGroupId, payload);
     if (success) {
       setGalleryList(data.gallerySlider);
