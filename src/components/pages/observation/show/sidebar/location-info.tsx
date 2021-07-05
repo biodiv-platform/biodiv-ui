@@ -23,7 +23,7 @@ export default function LocationInformation({
   const Row = ({ title, children }) => {
     return (
       <>
-        <Text fontWeight={600}>{t(`observation.location_information.${title}`)}</Text>
+        <Text fontWeight={600}>{t(`observation:location_information.${title.toLowerCase()}`)}</Text>
         <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
           {children}
         </Box>
