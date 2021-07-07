@@ -40,7 +40,7 @@ export default function SpeciesGallery() {
             key="keen-slider"
           />
         </Head>
-        <Box ref={sliderRef} className="keen-slider fade" minH="438px">
+        <Box ref={sliderRef} className="keen-slider fade" h="438px">
           {resources.length ? (
             resources.map(({ resource }) => (
               <Flex

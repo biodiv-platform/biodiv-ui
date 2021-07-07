@@ -46,7 +46,7 @@ export default function CarouselObservation({
           observationId={observationId}
           currentResource={resources[currentSlide]}
         />
-        <Box ref={sliderRef} className="keen-slider fade" minH="438px">
+        <Box ref={sliderRef} className="keen-slider fade" h="438px">
           {resources.length ? (
             resources.map(({ resource }) => (
               <Flex
