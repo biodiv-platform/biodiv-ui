@@ -17,7 +17,6 @@ export default function NewResourceForm() {
       <ImageUploaderField
         label={t("group:homepage_customization.resources.imageurl")}
         name="fileName"
-        resourcePath="observations"
       />
     </>
   );

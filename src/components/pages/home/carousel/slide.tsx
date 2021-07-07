@@ -5,10 +5,11 @@ import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React from "react";
 
 export default function Slide({ resource }) {
+  const resourceType =  resource.authorId? RESOURCE_CTX.OBSERVATION:RESOURCE_CTX.USERGROUPS;
   const SlideImage = () => (
     <Image
       src={getResourceThumbnail(
-        RESOURCE_CTX.OBSERVATION,
+        resourceType,
         resource?.fileName,
         RESOURCE_SIZE.PREVIEW
       )}

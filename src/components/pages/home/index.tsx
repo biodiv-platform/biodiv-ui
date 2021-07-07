@@ -21,11 +21,10 @@ export default function HomePageComponent({ homeInfo }) {
   const { currentGroup } = useGlobalState();
   const showFeatures = !currentGroup?.id;
   const { t } = useTranslation();
-
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
       {homeInfo.showGallery && HOME.GALLERY && homeInfo.gallerySlider.length && (
-        <Carousel featured={homeInfo.gallerySlider} />
+        <Carousel featured={homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)} />
       )}
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}
       {homeInfo.showDesc && <HomeDescription description={homeInfo.description} />}

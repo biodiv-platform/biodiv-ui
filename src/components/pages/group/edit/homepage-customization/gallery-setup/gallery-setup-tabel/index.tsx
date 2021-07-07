@@ -20,6 +20,7 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
     setGalleryList(galleryList.sort((a, b) => a.displayOrder - b.displayOrder));
   }, []);
 
+
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setGalleryList(arrayMove(galleryList, oldIndex, newIndex));
     setCanReorder(true);
@@ -31,9 +32,10 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
   };
 
   const handleReorderCustomField = async () => {
-    const payload = galleryList.map(({ id, displayOrder }) => ({
+   
+    const payload = galleryList.map(({ id},index) => ({
       galleryId: id,
-      displayOrder
+      displayOrder:index
     }));
 
     const { success } = await axReorderHomePageGallery(userGroupId, payload);
