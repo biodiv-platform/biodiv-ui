@@ -16,6 +16,7 @@
     "title": "Couverture",
     "wkt": "WKT"
   },
+  "created_on": "Créé sur",
   "date_accuracy": "Précision de la date",
   "date_accuracy_options": {
     "accurate": "Exact",
@@ -50,7 +51,9 @@
     "taken_on": "Pris sur",
     "uploaded_on": "Téléchargé sur"
   },
+  "name": "Nom",
   "notes": "Remarques",
+  "place": "Endroit",
   "selected_media": "Média sélectionné",
   "selected_places": "Endroits sélectionnés",
   "species_groups": "Groupes d'espèces",

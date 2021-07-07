@@ -1,10 +1,11 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { isBrowser } from "@static/constants";
 import debounce from "debounce-promise";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { components } from "react-select";
-import AsyncSelect from "react-select/async-creatable";
+import AsyncSelect from "react-select/async";
+import AsyncSelectCreatable from "react-select/async-creatable";
 
 import { ClearIndicator, selectStyles } from "./configs";
 
@@ -21,6 +22,7 @@ interface ISelectProps {
   debounceTime?: number;
   optionComponent?: any;
   placeholder?: string;
+  isCreatable?: boolean;
   onChange?;
   eventCallback?;
   selectRef?;
@@ -51,6 +53,7 @@ export const SelectAsyncInputField = ({
   placeholder,
   onChange,
   eventCallback,
+  isCreatable,
   selectRef,
   isRequired,
   onQuery = dummyOnQuery,
@@ -60,6 +63,7 @@ export const SelectAsyncInputField = ({
 }: ISelectProps) => {
   const form = useFormContext();
   const { field, fieldState } = useController({ name });
+  const Select = useMemo(() => (isCreatable ? AsyncSelectCreatable : AsyncSelect), [isCreatable]);
 
   const onQueryDebounce = debounce(onQuery, debounceTime);
   const [selected, setSelected] = useState(
@@ -92,7 +96,7 @@ export const SelectAsyncInputField = ({
       {...props}
     >
       {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <AsyncSelect
+      <Select
         name={name}
         inputId={name}
         menuPortalTarget={isBrowser && document.body}

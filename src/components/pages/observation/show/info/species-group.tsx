@@ -17,6 +17,7 @@ import Select, { components } from "react-select";
 interface ISpeciesGroupsProps {
   id;
   speciesGroups: SpeciesGroup[] | undefined;
+  canEdit?: boolean;
   observationId;
 }
 
@@ -29,7 +30,12 @@ const CustomOption = ({ children, ...props }) => (
   </components.Option>
 );
 
-export default function SpeciesGroupBox({ id, speciesGroups, observationId }: ISpeciesGroupsProps) {
+export default function SpeciesGroupBox({
+  id,
+  speciesGroups,
+  observationId,
+  canEdit = true
+}: ISpeciesGroupsProps) {
   const options = speciesGroups?.map((g) => ({ label: g.name, value: g.id }));
   const [finalType, setFinalType] = useState(options?.find((o) => o.value === id));
   const [type, setType] = useState(finalType);
@@ -86,15 +92,17 @@ export default function SpeciesGroupBox({ id, speciesGroups, observationId }: IS
       ) : (
         <Stack isInline={true} alignItems="top">
           <Image title={finalType?.label} boxSize="2.5rem" src={getLocalIcon(finalType?.label)} />
-          <IconButton
-            size="lg"
-            aria-label="edit"
-            icon={<EditIcon />}
-            variant="ghost"
-            colorScheme="blue"
-            minW="auto"
-            onClick={onToggle}
-          />
+          {canEdit && (
+            <IconButton
+              size="lg"
+              aria-label="edit"
+              icon={<EditIcon />}
+              variant="ghost"
+              colorScheme="blue"
+              minW="auto"
+              onClick={onToggle}
+            />
+          )}
         </Stack>
       )}
     </>

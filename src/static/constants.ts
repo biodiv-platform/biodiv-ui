@@ -10,6 +10,7 @@ const API_ENDPOINT = isBrowser ? SITE_CONFIG.SITE.API_ENDPOINT : SITE_CONFIG.SIT
 export const ENDPOINT = {
   ACTIVITY: `${API_ENDPOINT}activity-api/api`,
   API: `${API_ENDPOINT}biodiv-api`,
+  DATATABLE: `${API_ENDPOINT}dataTable-api/api`,
   DOCUMENT: `${API_ENDPOINT}document-api/api`,
   ESMODULE: `${API_ENDPOINT}esmodule-api/api`,
   FILES: `${API_ENDPOINT}files-api/api`,
@@ -39,7 +40,8 @@ export const DEFAULT_GROUP: UserGroupIbpExtended = {
 };
 
 export const DATE_ACCURACY = {
-  ACCURATE: "ACCURATE"
+  ACCURATE: "ACCURATE",
+  UNKNOWN: "UNKNOWN"
 };
 
 export const TOKEN = {
@@ -89,7 +91,8 @@ export const FORWARD_BLACKLIST = ["login", "register"];
 export const RESOURCE_TYPE = {
   DOCUMENT: "document",
   OBSERVATION: "observation",
-  SPECIES: "species"
+  SPECIES: "species",
+  DATATABLE: "datatable"
 };
 
 export const APP_VERSION = packageJson.version;

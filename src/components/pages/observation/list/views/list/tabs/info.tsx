@@ -50,7 +50,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
               <LocationIcon mb={1} mr={2} />
               {o.reverseGeocodedName}
             </Text>
-            <Text title={t("observation:list.observed_on")}>
+            <Text title={t("common:observed_on")}>
               <CalendarIcon mb={1} mr={2} />
               {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("common:unknown")}
             </Text>

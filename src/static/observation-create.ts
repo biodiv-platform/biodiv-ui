@@ -77,10 +77,6 @@ export const OBSERVATION_FIELDS = [
     value: "locationScale"
   },
   {
-    label: "Location Scale",
-    value: "locationScale"
-  },
-  {
     label: "Longitude",
     value: "longitude"
   },

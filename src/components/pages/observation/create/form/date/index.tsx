@@ -27,7 +27,7 @@ export default function DateInputs({ showTags = true }) {
           <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} spacing={4}>
             <DatePickerField
               name="observedOn"
-              label={t("observation:observed_on")}
+              label={t("common:observed_on")}
               style={{ gridColumn: "1/3" }}
               isRequired={true}
               subscribe={true}

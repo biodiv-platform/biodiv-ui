@@ -1,4 +1,5 @@
 {
+  "add": "Ajouter une table de données",
   "attribution": "Attribution",
   "basis_of_data": "Base de données",
   "basis_of_record": "Base d'enregistrement",
@@ -6,8 +7,10 @@
   "create_datatable": "Créer table de données",
   "field_mapping_table": "Table de cartographie de champ",
   "files_upload": "Chargements de fichiers",
+  "found": "Table de données trouvée",
   "geographical_coverage": "Couverture géographique",
   "is_verified": "Observation vérifiée",
+  "location": "Emplacement",
   "location_accuracy": "Précision de l'emplacement",
   "location_scale": "Échelle de localisation",
   "media_uploader": "Téléchargeur de média",
@@ -23,8 +26,17 @@
   "project": "Projet",
   "sheet_uploader": "Téléchargeur de feuille de calcul",
   "show_page": "Informations sur la table de données",
+  "summary": "Résumé",
+  "table": {
+    "geoPrivacy": "Confidentialité géographique",
+    "id": "identifiant",
+    "sGroup": "Groupe d'espèces",
+    "scientificName": "Nom scientifique",
+    "userInfo": "informations utilisateur"
+  },
   "taxonomy": "Couverture taxonomique",
   "temporal": "Couverture temporelle",
   "title": "Métadonnées générales",
+  "type": "Taper",
   "upload_again": "Télécharger à nouveau"
 }

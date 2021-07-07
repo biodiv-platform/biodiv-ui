@@ -16,6 +16,7 @@
     "title": "Coverage",
     "wkt": "WKT"
   },
+  "created_on": "Created On",
   "date_accuracy": "Date Accuracy",
   "date_accuracy_options": {
     "accurate": "Accurate",
@@ -50,7 +51,9 @@
     "taken_on": "Taken on",
     "uploaded_on": "Uploaded on"
   },
+  "name": "Name",
   "notes": "Notes",
+  "place": "Place",
   "selected_media": "Selected Media",
   "selected_places": "Selected Places",
   "species_groups": "Species Groups",

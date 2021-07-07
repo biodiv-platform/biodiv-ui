@@ -16,6 +16,7 @@
     "title": "कवरेज",
     "wkt": "WKT"
   },
+  "created_on": "पर बनाया",
   "date_accuracy": "तिथि सटीकता",
   "date_accuracy_options": {
     "accurate": "सटीक",
@@ -50,7 +51,9 @@
     "taken_on": "पे ले लिया",
     "uploaded_on": "पर अपलोड किया गया"
   },
+  "name": "नाम",
   "notes": "टिप्पणियाँ",
+  "place": "जगह",
   "selected_media": "चयनित मीडिया",
   "selected_places": "चयनित स्थान",
   "species_groups": "प्रजाति समूह",
