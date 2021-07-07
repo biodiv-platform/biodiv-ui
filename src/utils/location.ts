@@ -55,12 +55,12 @@ export const stringToFeature = (costr) => {
   ];
 };
 
-export const getMapCenter = (zoomDiff, maxZoom?) => ({
+export const getMapCenter = (zoomDiff, extra = {}) => ({
   ...SITE_CONFIG.MAP.CENTER,
   bearing: 0,
   pitch: 0,
   zoom: SITE_CONFIG.MAP.CENTER.zoom + (zoomDiff || 0),
-  maxZoom
+  ...extra
 });
 
 const ConvertDMSToDD = (dms, direction) => {
