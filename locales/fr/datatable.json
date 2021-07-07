@@ -27,6 +27,13 @@
   "sheet_uploader": "Téléchargeur de feuille de calcul",
   "show_page": "Informations sur la table de données",
   "summary": "Résumé",
+  "table": {
+    "geoPrivacy": "Confidentialité géographique",
+    "id": "identifiant",
+    "sGroup": "Groupe d'espèces",
+    "scientificName": "Nom scientifique",
+    "userInfo": "informations utilisateur"
+  },
   "taxonomy": "Couverture taxonomique",
   "temporal": "Couverture temporelle",
   "title": "Métadonnées générales",

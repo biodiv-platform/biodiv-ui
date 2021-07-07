@@ -27,6 +27,13 @@
   "sheet_uploader": "Spreundsheet Uploader",
   "show_page": "Ny antsipiriany datatable",
   "summary": "FAMINTINANA",
+  "table": {
+    "geoPrivacy": "Tsiambaratelo Geo",
+    "id": "ID",
+    "sGroup": "Vondron-karazany",
+    "scientificName": "Anarana siantifika",
+    "userInfo": "Mombamomba ny mpampiasa"
+  },
   "taxonomy": "Ny fandrakofana taxonomika",
   "temporal": "Fandrakofana ara-nofo",
   "title": "General Metadata",

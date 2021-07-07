@@ -27,6 +27,13 @@
   "sheet_uploader": "Spreadsheet Uploader",
   "show_page": "Datatable Details",
   "summary": "Summary",
+  "table": {
+    "geoPrivacy": "Geo Privacy",
+    "id": "ID",
+    "scientificName": "Scientific Name",
+    "sGroup": "Species Group",
+    "userInfo": "User Info"
+  },
   "taxonomy": "Taxonomic Coverage",
   "temporal": "Temporal Coverage",
   "title": "General Metadata",
