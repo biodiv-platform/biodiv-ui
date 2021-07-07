@@ -14,7 +14,7 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "sGroup",
     value: filter?.sGroupId,
-    onChange: (v) => setFilter({ ...filter, sGroupId: v || undefined })
+    onChange: (v) => setFilter({ ...filter, sGroupId: v && v !== "null" ? v : undefined })
   });
 
   return (
@@ -28,7 +28,7 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
                 <CustomRadio
                   key={o.id}
                   icon={o.name}
-                  {...getRadioProps({ value: o.id })}
+                  {...getRadioProps({ value: o.id.toString() })}
                   sm={true}
                 />
               ))}
