@@ -10,7 +10,7 @@
     "title": "Commentaires)"
   },
   "coverage": {
-    "hint": "Une fois sélectionné dans n'importe quelle entrée Appuyez sur le bouton Enregistrer sous la carte pour finaliser",
+    "hint": "Une fois sélectionné dans n'importe quelle entrée appuyez sur le bouton Enregistrer sous la carte pour finaliser",
     "place": "Nom de lieu",
     "spatial": "Couverture spatiale",
     "title": "Couverture",
@@ -53,7 +53,7 @@
   },
   "name": "Nom",
   "notes": "Remarques",
-  "place": "Endroit",
+  "place": "Site",
   "selected_media": "Média sélectionné",
   "selected_places": "Endroits sélectionnés",
   "species_groups": "Groupes d'espèces",

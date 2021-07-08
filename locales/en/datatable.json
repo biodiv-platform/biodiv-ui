@@ -9,7 +9,7 @@
   "files_upload": "Files Uploads",
   "found": "Datatable Found",
   "geographical_coverage": "Geographic Coverage",
-  "is_verified": "Is Verified",
+  "is_verified": "Observation Verified",
   "location": "Location",
   "location_accuracy": "Location Accuracy",
   "location_scale": "Location Scale",
@@ -30,8 +30,8 @@
   "table": {
     "geoPrivacy": "Geo Privacy",
     "id": "ID",
-    "scientificName": "Scientific Name",
     "sGroup": "Species Group",
+    "scientificName": "Scientific Name",
     "userInfo": "User Info"
   },
   "taxonomy": "Taxonomic Coverage",

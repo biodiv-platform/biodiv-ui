@@ -14,7 +14,7 @@
     },
     "identification": {
       "identified": "Identifié",
-      "title": "identification",
+      "title": "Identification",
       "unidentified": "Non identifié"
     },
     "taxon_id": {
@@ -25,7 +25,7 @@
     "title": "Qualité des données",
     "validation": {
       "not_validated": "Non validé",
-      "title": "validation",
+      "title": "Validation",
       "validated": "Validé"
     }
   },
@@ -34,7 +34,7 @@
     "title": "Type d'élément"
   },
   "location": {
-    "district": "Quartier",
+    "district": "District",
     "map": {
       "title": "Carte"
     },
@@ -44,8 +44,8 @@
     "state": {
       "title": "État"
     },
-    "tehsil": "tehsil",
-    "title": "Emplacement"
+    "tehsil": "Arrondissement",
+    "title": "Lieu"
   },
   "media": {
     "audio": "Audio",
@@ -100,7 +100,7 @@
     "title": "Navigateur de taxon"
   },
   "time": {
-    "created_on": "date créée",
+    "created_on": "Date créée",
     "max_date": "Date max",
     "min_date": "Date min",
     "month": {
@@ -118,12 +118,12 @@
       "sep": "septembre",
       "title": "Mois d'observation"
     },
-    "title": "Heure"
+    "title": "Date"
   },
   "title": "Filtres",
   "toggle": "Filtres à bascule",
   "traits": {
-    "title": "traits"
+    "title": "Traits"
   },
   "user": {
     "search": "Recherche utilisateur",

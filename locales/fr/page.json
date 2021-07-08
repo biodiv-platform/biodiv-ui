@@ -4,12 +4,12 @@
     "success": "Page créée avec succès",
     "title": "Créer une page"
   },
-  "empty": "Il n'y a pas de pages publiées pour ce groupe",
+  "empty": "Il n'y a pas de page publiée pour ce groupe",
   "form": {
     "content": "Contenu",
-    "description": "Description Métadonnées",
+    "description": "Description des Métadonnées",
     "is_sidebar": "Afficher dans la barre latérale",
-    "parent": "Page des parents",
+    "parent": "Page parent",
     "title": "Titre"
   },
   "mail": {
@@ -17,19 +17,19 @@
   },
   "no_parent": "Non parent",
   "remove": {
-    "description": "Êtes-vous sûr?Vous ne pouvez pas annuler cette action après.",
+    "description": "Êtes-vous certain? Vous ne pourrez pas annuler cette action après.",
     "success": "Page supprimée avec succès",
     "title": "Supprimer la page"
   },
   "share": "Partager cette page",
   "sidebar": {
-    "reorder": "Pages de réorganisation",
+    "reorder": "Réorganiser les pages",
     "toggle": "Basculer la liste de la page",
-    "updated": "Commander mis à jour avec succès"
+    "updated": "Commande mise à jour avec succès"
   },
   "update": {
     "failure": "Impossible de mettre à jour la page",
     "success": "Page mise à jour avec succès",
-    "title": "Page de mise à jour"
+    "title": "Page mise à jour"
   }
 }

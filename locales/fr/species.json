@@ -1,10 +1,10 @@
 {
   "add_reference": "Ajouter une référence",
   "all_media": "Tous les médias",
-  "attributions": "attributions",
+  "attributions": "Attributions",
   "common_name": {
     "delete": {
-      "dialouge": "Êtes-vous sûr?",
+      "dialouge": "Êtes-vous certain?",
       "failure": "Impossible de supprimer le nom",
       "success": "Nom supprimé avec succès"
     },
@@ -15,7 +15,7 @@
     "preferred": {
       "failure": "Impossible de mettre à jour le nom préféré",
       "success": "Nom préféré mis à jour avec succès",
-      "title": "Préférée"
+      "title": "Préféré"
     },
     "save": {
       "failure": "Impossible de sauvegarder le nom",
@@ -25,7 +25,7 @@
   "common_names": "Noms communs",
   "contribute": {
     "create_species": "Créer de nouvelles espèces",
-    "description": "Les pages d'espèces sont des descriptions d'espèces, avec une page pour chaque espèce.Chaque espèce peut être décrite avec plus de 60 groupes de champs standard.Les pages d'espèces sont contribuées et organisées par des experts.Toutes les informations publiées sur le portail seront sur l'accès public et sous la licence Creative Commons de votre choix.",
+    "description": "Les pages espèces sont des descriptions d'espèces, avec une page pour chaque espèce. Chaque espèce peut être décrite avec plus de 60 groupes de champs standards. Les pages espèces sont alimentées et organisées par des experts.Toutes les informations publiées sur le portail sont en accès public et sous la licence Creative Commons de votre choix.",
     "download": "Télécharger Sample XLSX",
     "email": "Envoyez-nous un email",
     "offline": {
@@ -38,15 +38,15 @@
     },
     "request_permission": "Demander la permission"
   },
-  "contributors": "Contributrice",
+  "contributors": "Contributeurs",
   "create": {
     "creating_page": "Veuillez patienter pendant la création de la page d'espèce.",
     "desc_1": "Les contributeurs doivent avoir des droits sur la page d'espèce afin d'ajouter du contenu.Si vous n'avez pas encore été attribués de droits",
-    "desc_2": "Veuillez saisir un nom d'espèce et valider.Si un nom est validé et jugé déjà existé sur le portail, vous serez dirigé vers la page Espèce pour ajouter du contenu.Si le nom est validé et jugé nouveau, vous pouvez remplir la hiérarchie taxonomique afin que la nouvelle page d'espèce puisse être créée.La chaîne d'auteur est obligatoire pour les niveaux d'espèce et plus bas.",
+    "desc_2": "Veuillez saisir un nom d'espèce et valider. Si un nom est validé et jugé déjà existé sur le portail, vous serez dirigé vers la page Espèce pour ajouter du contenu. Si le nom est validé et jugé nouveau, vous pouvez remplir la hiérarchie taxonomique afin que la nouvelle page d'espèce puisse être créée. L'auteur est obligatoire pour les niveaux d'espèce et plus bas.",
     "error": "Impossible de créer une page d'espèce",
     "form": {
       "name": "Nom",
-      "name_placeholder": "c'est à dire.Tricklinum Sorediatum",
+      "name_placeholder": "c'est à dire.Tricklinum sorediatum",
       "rank": "Rang",
       "search": "Rechercher",
       "select": "Sélectionner",
@@ -55,7 +55,7 @@
         "parent": "Match parent",
         "select": "Apparié"
       },
-      "use_taxon": "Utilisez ce taxon",
+      "use_taxon": "Utiliser ce taxon",
       "validate": "Valider"
     },
     "taxon_error": "Impossible de valider",
@@ -63,7 +63,7 @@
     "validate_error": "Impossible de valider"
   },
   "edit_name": "Gérer le nom commun",
-  "edit_synonym": "Mangange synonyme",
+  "edit_synonym": "Gérer les synonymes",
   "field": {
     "delete": {
       "failure": "Impossible de supprimer le champ",
@@ -72,7 +72,7 @@
     "manage": "Gérer le champ",
     "update": {
       "failure": "Impossible de mettre à jour le champ",
-      "success": "Terrain mis à jour avec succès"
+      "success": "Champ mis à jour avec succès"
     }
   },
   "follow_species": "Suivre les espèces",
@@ -91,13 +91,13 @@
   },
   "manage_media": "Gérer les médias",
   "observation_media": "Média d'observation",
-  "pull_media": "Pull-pull",
-  "references": "Les références",
+  "pull_media": "Prendre le média",
+  "references": "Références",
   "related": {
     "title": "Observations connexes"
   },
   "remove": {
-    "description": "Êtes-vous sûr?Vous ne pouvez pas annuler cette action après.",
+    "description": "Êtes-vous certain? Vous ne pourrez pas annuler cette action après.",
     "success": "Espèce supprimée avec succès",
     "title": "Supprimer des espèces"
   },
@@ -106,19 +106,19 @@
   "synonym": {
     "add": {
       "failure": "Impossible d'ajouter Synonyme",
-      "success": "Synonymey a ajouté avec succès"
+      "success": "Synonyme ajouté avec succès"
     },
     "delete": {
-      "dialouge": "Êtes-vous sûr?",
+      "dialouge": "Êtes-vous certain?",
       "failure": "Impossible de supprimer Synonyme",
       "success": "Synonyme supprimé avec succès"
     },
     "form": {
-      "datasource": "La source de données",
+      "datasource": "Source de données",
       "datasource_id": "ID de DataSource",
       "name": "Nom",
       "rank": "Rang",
-      "type": "Taper"
+      "type": "Type"
     },
     "update": {
       "failure": "Impossible de mettre à jour Synonyme",
@@ -136,6 +136,6 @@
       "success": "Trait mis à jour avec succès"
     }
   },
-  "unfollow_species": "Suivre les espèces",
+  "unfollow_species": "Suivre l'espèce",
   "view_original": "Voir original"
 }

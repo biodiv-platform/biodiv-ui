@@ -12,7 +12,7 @@
     "title": "Administrateurs de groupe",
     "updated": "Les administrateurs de groupe sont mis à jour avec succès"
   },
-  "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur.Appuyez sur OK pour envoyer une demande de requête",
+  "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur. Appuyez sur OK pour envoyer une demande de requête.",
   "create": {
     "error": "Il y avait une erreur lors de la création de groupe",
     "success": "Groupe créé avec succès",
@@ -47,7 +47,7 @@
       "success": "Champ personnalisé réorganisé avec succès"
     },
     "save": "Sauvegarder",
-    "save_order": "Enregistrer la commande de champ personnalisé",
+    "save_order": "Enregistrer la demande de champ personnalisé",
     "table": {
       "actions": "actions",
       "data_type": "Type de données",
