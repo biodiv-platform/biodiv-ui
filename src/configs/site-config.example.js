@@ -24,6 +24,11 @@ const SITE_CONFIG_EXAMPLE = {
   FEEDBACK: {
     ACTIVE: true
   },
+  FILTER: {
+    DISTRICT: true,
+    STATE: true,
+    TAHSIL: true
+  },
   FOOTER: {
     ACTIVE: true,
     CREDITS: true,

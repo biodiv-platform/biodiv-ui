@@ -27,7 +27,8 @@ export default function GeoJSONPreview({
   maxZoom,
   mb
 }: GeoJSONPreviewProps) {
-  const defaultViewPort = React.useMemo(() => getMapCenter(zoom || 2.8, maxZoom), []);
+  const defaultViewPort = React.useMemo(() => getMapCenter(zoom || 2.8, { maxZoom }), []);
+
   return (
     <Box position="relative" h={h} overflow="hidden" mb={mb} borderRadius="md">
       <NakshaMapboxView

@@ -1,4 +1,5 @@
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
+import SITE_CONFIG from "@configs/site-config";
 import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
@@ -14,18 +15,24 @@ export default function LocationFilter() {
     <SubAccordion>
       <MapAreaFilter />
 
-      <CheckboxFilterPanel
-        translateKey="filters:location.state."
-        filterKey="state"
-        options={STATE_OPTIONS}
-        statKey="groupState"
-        skipOptionsTranslation={true}
-        showSearch={true}
-      />
+      {SITE_CONFIG.FILTER.STATE && (
+        <CheckboxFilterPanel
+          translateKey="filters:location.state."
+          filterKey="state"
+          options={STATE_OPTIONS}
+          statKey="groupState"
+          skipOptionsTranslation={true}
+          showSearch={true}
+        />
+      )}
 
-      <FilterMultiSelectPanel filterKey="district" translateKey="filters:location.district" />
+      {SITE_CONFIG.FILTER.DISTRICT && (
+        <FilterMultiSelectPanel filterKey="district" translateKey="filters:location.district" />
+      )}
 
-      <FilterMultiSelectPanel filterKey="tahsil" translateKey="filters:location.tehsil" />
+      {SITE_CONFIG.FILTER.TAHSIL && (
+        <FilterMultiSelectPanel filterKey="tahsil" translateKey="filters:location.tehsil" />
+      )}
     </SubAccordion>
   );
 }
