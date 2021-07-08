@@ -10,7 +10,7 @@ export default function TimeFilter() {
     <SubAccordion>
       <CheckboxFilterPanel
         translateKey="filters:time.month."
-        filterKey="month"
+        filterKey="months"
         options={MONTHS}
         statKey="groupMonth"
       />
