@@ -58,7 +58,7 @@ const useUserData = (userId, max = 16) => {
       speciesGroups.map(({ id, name }) => {
         const uploaded = uploadedObservations.speciesData[name] || 0;
         const identified = identifiedObservations.speciesData[name] || 0;
-        const isFilterMatch = filter.sGroupId === id;
+        const isFilterMatch = filter.sGroupId === id.toString();
         return {
           group: name,
           uploaded: filter.sGroupId ? (isFilterMatch ? uploaded : 0) : uploaded,
