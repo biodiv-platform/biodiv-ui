@@ -50,7 +50,7 @@ export default [
       },
       {
         name: "observation_datatables",
-        to: "/datatable/list"
+        to: "/dataTable/list"
       }
     ]
   },

@@ -1,14 +1,14 @@
 export const MONTHS = [
-  { label: "jan", value: "1", stat: "January" },
-  { label: "feb", value: "2", stat: "February" },
-  { label: "mar", value: "3", stat: "March" },
-  { label: "apr", value: "4", stat: "April" },
-  { label: "may", value: "5", stat: "May" },
-  { label: "jun", value: "6", stat: "June" },
-  { label: "jul", value: "7", stat: "July" },
-  { label: "aug", value: "8", stat: "August" },
-  { label: "sep", value: "9", stat: "September" },
-  { label: "oct", value: "10", stat: "October" },
-  { label: "nov", value: "11", stat: "November" },
-  { label: "dec", value: "12", stat: "December" }
+  { label: "jan", value: "january", stat: "January" },
+  { label: "feb", value: "february", stat: "February" },
+  { label: "mar", value: "march", stat: "March" },
+  { label: "apr", value: "april", stat: "April" },
+  { label: "may", value: "may", stat: "May" },
+  { label: "jun", value: "june", stat: "June" },
+  { label: "jul", value: "july", stat: "July" },
+  { label: "aug", value: "august", stat: "August" },
+  { label: "sep", value: "september", stat: "September" },
+  { label: "oct", value: "october", stat: "October" },
+  { label: "nov", value: "november", stat: "November" },
+  { label: "dec", value: "december", stat: "December" }
 ];
