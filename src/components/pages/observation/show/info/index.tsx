@@ -91,6 +91,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
             updateFunc={axUpdateObservationTags}
           />
         </ResponsiveInfo>
+        {o?.dataTable?.geographicalCoverageLocationScale &&<ResponsiveInfo title="observation:location_scale">{o?.dataTable?.geographicalCoverageLocationScale}</ResponsiveInfo>}
       </SimpleGrid>
     </Box>
   );

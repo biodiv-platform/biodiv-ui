@@ -610,6 +610,8 @@ export interface ResourceRating {
 }
 export interface ShowData {
   observation?: Observation;
+  checkListAnnotation?
+  dataTable?
   factValuePair?: FactValuePair[];
   observationResource?: ResourceData[];
   userGroups?: UserGroupIbp[];

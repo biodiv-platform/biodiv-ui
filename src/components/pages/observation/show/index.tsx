@@ -19,6 +19,7 @@ import React, { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import Activity from "./activity";
+import CheckListAnnotation from "./checkListAnnotation";
 import CustomFields from "./custom-fields";
 import Groups from "./groups";
 import Header from "./header";
@@ -119,6 +120,7 @@ export default function ObservationShowPageComponent({
             resourceType={RESOURCE_TYPE.OBSERVATION}
             commentFunc={axAddObservationComment}
           />
+          {o?.checkListAnnotation && <CheckListAnnotation customData={o?.checkListAnnotation} />}
         </Box>
         <Box>
           {o.layerInfo && (
