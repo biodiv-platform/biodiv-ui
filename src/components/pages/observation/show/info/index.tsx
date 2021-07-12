@@ -83,6 +83,15 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           </ResponsiveInfo>
         )}
 
+        {o.dataTable?.id && (
+          <ResponsiveInfo title="common:datatable">
+            <LocalLink href={`/datatable/show/${o.dataTable?.id}`}>
+              <BlueLink>
+                <i> {o.dataTable?.title || t("common:unknown")}</i>
+              </BlueLink>
+            </LocalLink>
+          </ResponsiveInfo>
+        )}
         <ResponsiveInfo title="form:tags">
           <Tags
             items={o.tags}
@@ -91,7 +100,11 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
             updateFunc={axUpdateObservationTags}
           />
         </ResponsiveInfo>
-        {o?.dataTable?.geographicalCoverageLocationScale &&<ResponsiveInfo title="observation:location_scale">{o?.dataTable?.geographicalCoverageLocationScale}</ResponsiveInfo>}
+        {o?.dataTable?.geographicalCoverageLocationScale && (
+          <ResponsiveInfo title="observation:location_scale">
+            {o?.dataTable?.geographicalCoverageLocationScale}
+          </ResponsiveInfo>
+        )}
       </SimpleGrid>
     </Box>
   );

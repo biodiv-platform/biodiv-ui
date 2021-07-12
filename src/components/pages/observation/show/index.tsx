@@ -115,12 +115,12 @@ export default function ObservationShowPageComponent({
             featureFunc={axGroupsFeature}
             unfeatureFunc={axGroupsUnFeature}
           />
+          {o?.checkListAnnotation && <CheckListAnnotation customData={o?.checkListAnnotation} />}
           <Activity
             resourceId={o.observation?.id}
             resourceType={RESOURCE_TYPE.OBSERVATION}
             commentFunc={axAddObservationComment}
           />
-          {o?.checkListAnnotation && <CheckListAnnotation customData={o?.checkListAnnotation} />}
         </Box>
         <Box>
           {o.layerInfo && (

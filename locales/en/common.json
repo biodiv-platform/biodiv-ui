@@ -20,6 +20,7 @@
   "close": "Close",
   "copy": "Copy to Clipboard",
   "delete": "Delete",
+  "datatable":"Datatable",
   "edit": "Edit",
   "edit_not_uploaded": "Some resources are not uploaded properly, please wait or remove them before uploading",
   "feature": "Feature Selected",

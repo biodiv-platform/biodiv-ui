@@ -10,15 +10,18 @@ export default function CheckListAnnotation({ customData }) {
 
   return (
     <Box p={4} mb={4} className="white-box">
-      <BoxHeading>💎 {t("observation:checklistAnnotation")}</BoxHeading>
+      <BoxHeading>📚 {t("observation:checklistAnnotation")}</BoxHeading>
       <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
-        {Object.keys(customData).map((key, index) => (
-          <ResponsiveInfo key={index} title={`${customData[key]}`}>
-            <Stack isInline={true}>
-              <Text mr={1}>{key}</Text>
-            </Stack>
-          </ResponsiveInfo>
-        ))}
+        {Object.keys(customData).map(
+          (key, index) =>
+            customData[key] && (
+              <ResponsiveInfo key={index} title={key}>
+                <Stack isInline={true}>
+                  <Text mr={1}>{`${customData[key]}`}</Text>
+                </Stack>
+              </ResponsiveInfo>
+            )
+        )}
       </SimpleGrid>
     </Box>
   );
