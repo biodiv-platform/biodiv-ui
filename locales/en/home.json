@@ -2,7 +2,7 @@
   "donors": "Donors",
   "features": {
     "citizen_science": {
-      "desc": "Any registered user can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
+      "desc": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
       "title": "Citizen Science"
     },
     "groups": {

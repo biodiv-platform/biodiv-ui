@@ -19,7 +19,7 @@ import React from "react";
 import FiltersList from "./list";
 import ClearFilters from "./taxon-browser/clear-filters";
 
-const FilterWrapper = styled.div`
+export const FilterWrapper = styled.div`
   height: 100%;
   overflow-y: scroll;
   border-right: 1px solid var(--gray-300);

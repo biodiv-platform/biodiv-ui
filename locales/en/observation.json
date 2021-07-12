@@ -93,7 +93,6 @@
   "location_placeholder": "Enter a location",
   "location_scale": "Location Accuracy",
   "longitude": "Longitude",
-  "min_three_chars": "Input at least 3 characters to search",
   "nearby": "Nearby Observations",
   "no_custom_field": "No Custom field(s) found for this observation",
   "no_empty_suggestion": "Cannot crete empty suggestion",

@@ -32,7 +32,7 @@
     "id": "identifiant",
     "sGroup": "Groupe d'espèces",
     "scientificName": "Nom scientifique",
-    "userInfo": "informations utilisateur"
+    "userInfo": "Informations utilisateur"
   },
   "taxonomy": "Couverture taxonomique",
   "temporal": "Couverture temporelle",

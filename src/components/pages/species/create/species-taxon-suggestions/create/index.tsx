@@ -2,7 +2,8 @@ import { Alert, AlertIcon } from "@chakra-ui/alert";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axCheckTaxonomy, axSaveTaxonomy } from "@services/species.service";
+import { axSaveTaxonomy } from "@services/species.service";
+import { axCheckTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -64,15 +65,15 @@ export function SpeciesTaxonCreateForm() {
     }
   };
 
-  const handleOnRankValidate = async (rank, speciesName) => {
+  const handleOnRankValidate = async (rankName, scientificName) => {
     // clear results
     setValidateResults([]);
 
-    const { success, data } = await axCheckTaxonomy({ rank, speciesName });
+    const { success, data } = await axCheckTaxonomy({ rankName, scientificName });
 
     if (success) {
       // clear error for current field since no match should also be treated as valid
-      hForm.clearErrors(rank);
+      hForm.clearErrors(rankName);
 
       // if results are available show select dialouge
       if (data.matched) {

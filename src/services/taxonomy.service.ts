@@ -28,3 +28,72 @@ export const axVerifyTaxonPermission = async (token) => {
     return { success: false };
   }
 };
+
+export const axGetTaxonListData = async (params) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/namelist`, { params });
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
+export const axGetTaxonDetails = async (taxonId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/${taxonId}`);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
+export const axGetTaxonTree = async (taxonId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/tree/breadcrumb/${taxonId}`);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
+export const axUpdateTaxonName = async (params) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.TAXONOMY}/v1/taxonomy/name`, undefined, { params });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axUpdateTaxonStatus = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.TAXONOMY}/v1/taxonomy/status`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axCheckTaxonomy = async (params) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/nameSearch`, { params });
+    return {
+      success: true,
+      data
+    };
+  } catch (e) {
+    return { success: false, data: { matched: [], parentMatched: [] } };
+  }
+};
+
+export const axUpdateTaxonPosition = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.TAXONOMY}/v1/taxonomy/tba_position`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

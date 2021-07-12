@@ -1,4 +1,61 @@
 {
+  "modal": {
+    "activity": "asa",
+    "attributes": {
+      "author": {
+        "desc": "Mampiseho ny mpanoratra sy ny taona amin'ny endrika izay hampiasana azy miaraka amin'ny anarana kanônika. \noh: (Pallas, 1811)",
+        "title": "Mpanoratra sy Taona"
+      },
+      "canonical": {
+        "desc": "Mampiseho ny anarana kanônika ie. \nny anarana feno tsy misy mpanoratra sy taona.",
+        "title": "kanônika"
+      },
+      "id": {
+        "desc": "Ny laharan'ny ID an'ny anarana eo amin'ny base de match.",
+        "title": "ID"
+      },
+      "name": {
+        "desc": "Mampiseho ny anarana verbatim ie. \nny anarana feno miaraka amin'ny mpanoratra sy taona raha fantatra.",
+        "error": "hadisoana raha manavao ny anarana taxon",
+        "success": "vita soa aman-tsara ny anarana taxon",
+        "title": "Anarana"
+      },
+      "position": {
+        "desc": "Mampiseho ny lisitra misy ny anarana ankehitriny.",
+        "error": "hadisoana raha manavao toerana",
+        "success": "havaozina tsara ny toerana",
+        "title": "Toerana"
+      },
+      "rank": {
+        "desc": "Mampiseho ny laharan'ny hetraonomika an'ny anarana ao anatin'ny ambaratonga IBP.",
+        "title": "laharana"
+      },
+      "source": {
+        "desc": "Mampiseho ny tahiry farany izay namahana ny anarana. \nRaha tsy misy anaran'ny angon-drakitra omena, dia azo alamina ny mpanoratra.",
+        "title": "Source"
+      },
+      "status": {
+        "desc": "Mampiseho ny satan'ny anarana nomenclatural amin'izao fotoana izao araka izay ekena ao amin'ny Portal.",
+        "error": "hadisoana raha manavao ny satan'ny taxon",
+        "success": "soa aman-tsara nohavaozina ny satan'ny taxon",
+        "title": "sata"
+      },
+      "title": "toetra",
+      "via": {
+        "desc": "Mampiseho ny loharano niavian'ny loharanom-pahalalana.",
+        "title": "tamin'ny alalan'ny"
+      }
+    },
+    "common_names": "Anarana mahazatra",
+    "synonyms": "Synonymes",
+    "title": "Fampahalalana momba ny taxonomy"
+  },
+  "position": {
+    "title": "Toerana"
+  },
+  "rank": {
+    "title": "laharana"
+  },
   "request": {
     "button": "i Paoly Apostoly",
     "failure": "Hadisoana raha mangataka alalana",
@@ -6,5 +63,8 @@
     "title": "Mangataka ny fahazoan-dàlana",
     "user": "Mpikambana"
   },
-  "role": "anjara asa"
+  "role": "anjara asa",
+  "status": {
+    "title": "sata"
+  }
 }

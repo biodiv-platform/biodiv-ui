@@ -14,8 +14,9 @@ export default function LanguageSwitcher() {
 
   return (
     <Menu>
-      <MenuButton as={Link} role="button" rightIcon={<ChevronDownIcon />}>
-        {lang.toUpperCase()}
+      <MenuButton as={Link} role="button">
+        {SITE_CONFIG.LANG.LIST[lang].NAME}
+        <ChevronDownIcon />
       </MenuButton>
       <MenuList>
         {Object.entries(SITE_CONFIG.LANG.LIST).map(([langCode, info]: any) => (

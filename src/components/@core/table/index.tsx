@@ -1,8 +1,8 @@
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { Box, chakra, Table, Tbody, Td, Thead, Tr } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
-import { useSortBy, useTable } from "react-table";
+import React, { useEffect, useMemo } from "react";
+import { useRowSelect, useSortBy, useTable } from "react-table";
 
 interface BasicTableColumn {
   Header: string;
@@ -14,18 +14,74 @@ interface BasicTableColumn {
 interface BasicTableProps {
   columns: BasicTableColumn[];
   data: any[];
+  size?;
   tableStyle?: React.CSSProperties;
+  isSelectable?;
+  onSelectionChange?;
 }
 
-export function BasicTable({ columns, data, tableStyle }: BasicTableProps) {
+const IndeterminateCheckbox = React.forwardRef(({ indeterminate, ...rest }: any, ref) => {
+  const defaultRef = React.useRef();
+  const resolvedRef: any = ref || defaultRef;
+
+  React.useEffect(() => {
+    resolvedRef.current.indeterminate = indeterminate;
+  }, [resolvedRef, indeterminate]);
+
+  return (
+    <input type="checkbox" ref={resolvedRef} {...rest} style={{ width: "16px", height: "16px" }} />
+  );
+});
+
+export function BasicTable({
+  columns,
+  data,
+  tableStyle,
+  size,
+  isSelectable,
+  onSelectionChange
+}: BasicTableProps) {
   const { t } = useTranslation();
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
-    { columns, data },
-    useSortBy
+
+  const tableProps = useMemo(
+    () =>
+      isSelectable
+        ? [
+            useRowSelect,
+            (hooks) => {
+              hooks.visibleColumns.push((columns) => [
+                {
+                  id: "selection",
+                  Header: (props) => (
+                    <IndeterminateCheckbox {...props.getToggleAllRowsSelectedProps()} />
+                  ),
+                  Cell: ({ row }) => <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />,
+                  style: { width: "16px" }
+                },
+                ...columns
+              ]);
+            }
+          ]
+        : [],
+    []
   );
 
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state } = useTable(
+    { columns, data },
+    useSortBy,
+    ...tableProps
+  );
+
+  useEffect(() => {
+    if (isSelectable) {
+      const selectedRows: any = [];
+      Object.keys(state.selectedRowIds).map((index) => selectedRows.push(data[index]));
+      onSelectionChange(selectedRows);
+    }
+  }, [state.selectedRowIds]);
+
   return data?.length ? (
-    <Table variant="striped" style={tableStyle} {...getTableProps()}>
+    <Table variant="striped" style={tableStyle} size={size} {...getTableProps()}>
       <Thead>
         {headerGroups.map((headerGroup) => (
           <Tr {...headerGroup.getHeaderGroupProps()}>
@@ -56,7 +112,10 @@ export function BasicTable({ columns, data, tableStyle }: BasicTableProps) {
           return (
             <Tr {...row.getRowProps()}>
               {row.cells.map((cell) => (
-                <Td {...cell.getCellProps()} isNumeric={cell.column.isNumeric}>
+                <Td
+                  {...cell.getCellProps({ style: cell.column.style })}
+                  isNumeric={cell.column.isNumeric}
+                >
                   {cell.render("Cell")}
                 </Td>
               ))}
@@ -66,7 +125,7 @@ export function BasicTable({ columns, data, tableStyle }: BasicTableProps) {
       </Tbody>
     </Table>
   ) : (
-    <Box p={4}>{t("no_results")}</Box>
+    <Box p={4}>{t("common:no_results")}</Box>
   );
 }
 

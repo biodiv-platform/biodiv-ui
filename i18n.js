@@ -8,8 +8,8 @@ module.exports = {
     "*": ["common", "header", "auth", "form"],
     "/": ["home"],
     "/group/[groupName]": ["home"],
-    "/group/[groupName]/show": ["home"],
     "/group/[groupName]/edit": ["group"],
+    "/group/[groupName]/show": ["home"],
     "rgx:/datatable/": ["datatable", "form", "observation"],
     "rgx:/document/": ["document", "filters", "activity"],
     "rgx:/landscape/": ["landscape", "filters", "activity"],
@@ -17,6 +17,7 @@ module.exports = {
     "rgx:/page/": ["page"],
     "rgx:/register": ["user"],
     "rgx:/species/": ["species", "filters", "activity"],
+    "rgx:/taxonomy/": ["activity", "filters", "taxon", "species"],
     "rgx:/user/": ["user"],
     "rgx:/user/leaderboard": ["leaderboard"]
   }

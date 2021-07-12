@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   Input,
@@ -58,7 +59,7 @@ export const TaxonCreateInputField = ({
     >
       <InputGroup>
         <InputLeftAddon minW="8rem">
-          {label} {isRequired && "*"}
+          {label} <Box color="red.500">{isRequired && "*"}</Box>
         </InputLeftAddon>
         <Input
           id={name}

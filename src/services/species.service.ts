@@ -195,18 +195,6 @@ export const axUpdateSpeciesGalleryResources = async (speciesId, payload) => {
   }
 };
 
-export const axCheckTaxonomy = async (params) => {
-  try {
-    const { data } = await http.get(`${ENDPOINT.SPECIES}/v1/species/check/taxonomy`, { params });
-    return {
-      success: true,
-      data
-    };
-  } catch (e) {
-    return { success: false, data: { matched: [], parentMatched: [] } };
-  }
-};
-
 export const axCheckSpecies = async (taxonId) => {
   try {
     const { data } = await http.get(`${ENDPOINT.SPECIES}/v1/species/check/species`, {
@@ -220,7 +208,7 @@ export const axCheckSpecies = async (taxonId) => {
 
 export const axSaveTaxonomy = async (payload) => {
   try {
-    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/species/save/taxonomy`, payload);
+    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/taxonomy/nameSearch`, payload);
     return { success: true, data };
   } catch (e) {
     return { success: false, data: null };

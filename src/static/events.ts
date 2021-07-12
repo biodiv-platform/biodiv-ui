@@ -27,3 +27,8 @@ export const AUTHWALL = {
   SUCCESS: "authwall_success",
   FAILURE: "authwall_failed"
 };
+
+export const TAXON = {
+  SELECTED: "tax_selected",
+  UPDATED: "tax_updated"
+};

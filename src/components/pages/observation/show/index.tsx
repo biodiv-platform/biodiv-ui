@@ -69,7 +69,7 @@ export default function ObservationShowPageComponent({
   }, [permission]);
 
   return (
-    <div className="container mt">
+    <div className="container mt" key={o.observation?.id}>
       <Header o={o} following={permission?.following} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3" className="fadeInUp delay-3">

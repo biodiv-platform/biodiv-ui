@@ -80,5 +80,6 @@
   },
   "use_in_observation": "Use Selected",
   "wkt": "WKT",
-  "youtube_placeholder": "Input YouTube link"
+  "youtube_placeholder": "Input YouTube link",
+  "min_three_chars": "Input at least 3 characters to search"
 }

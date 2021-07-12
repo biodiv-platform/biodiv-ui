@@ -69,7 +69,7 @@ export default function Recodata({ languages }: IRecodataProps) {
               onQuery={onCommonNameQuery}
               options={commonNameOptions}
               optionComponent={CommonNameOption}
-              placeholder={t("observation:min_three_chars")}
+              placeholder={t("form:min_three_chars")}
               onChange={onCommonNameChange}
             />
             <SelectInputField
@@ -87,7 +87,7 @@ export default function Recodata({ languages }: IRecodataProps) {
             disabled={helpIdentify}
             onQuery={onScientificNameQuery}
             optionComponent={ScientificNameOption}
-            placeholder={t("observation:min_three_chars")}
+            placeholder={t("form:min_three_chars")}
             onChange={onScientificNameChange}
             selectRef={scientificRef}
           />

@@ -4,7 +4,7 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axCheckTaxonomy } from "@services/species.service";
+import { axCheckTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -29,12 +29,12 @@ export function SpeciesValidateForm() {
     mode: "onBlur",
     resolver: yupResolver(
       Yup.object().shape({
-        rank: Yup.string().required(),
-        speciesName: Yup.string().required()
+        rankName: Yup.string().required(),
+        scientificName: Yup.string().required()
       })
     ),
     defaultValues: {
-      rank: taxonRankOptions[1]?.value
+      rankName: taxonRankOptions[1]?.value
     }
   });
 
@@ -60,7 +60,7 @@ export function SpeciesValidateForm() {
         <SimpleGrid columns={{ base: 1, md: 6 }} spacing={{ md: 4 }} mb={2}>
           <GridItem colSpan={1}>
             <SelectInputField
-              name="rank"
+              name="rankName"
               label={t("species:create.form.rank")}
               options={taxonRankOptions}
               isRequired={true}
@@ -68,7 +68,7 @@ export function SpeciesValidateForm() {
           </GridItem>
           <GridItem colSpan={4}>
             <TextBoxField
-              name="speciesName"
+              name="scientificName"
               label={t("species:create.form.name")}
               hint={t("species:create.form.name_placeholder")}
               isRequired={true}
