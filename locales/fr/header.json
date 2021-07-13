@@ -50,9 +50,9 @@
       "title": "Suite"
     },
     "observation": {
-      "checklists": "Lister",
+      "checklists": "Listes de données",
       "datasets": "Jeux de données",
-      "observation_datatables": "Tables de données d'observation",
+      "observation_datatables": "Tables de données d'observations",
       "observation_traits": "Traits d'observation",
       "observations": "Observations",
       "title": "Observation"
@@ -65,7 +65,7 @@
       "species_datatables": "Tables de données d'espèces",
       "species_pages": "Pages d'espèces",
       "species_traits": "Traits d'espèces",
-      "taxon_namelist": "Taxon Namelist",
+      "taxon_namelist": "Taxonomie",
       "title": "Espèces"
     }
   },
