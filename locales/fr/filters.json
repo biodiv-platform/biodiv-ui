@@ -29,6 +29,15 @@
       "validated": "Validé"
     }
   },
+  "dataset_filter": {
+    "dataset": {
+      "title": "Base de données"
+    },
+    "datatable": {
+      "title": "Table de données"
+    },
+    "title": "Métadonnées de l'ensemble de données"
+  },
   "document_title": "Titre",
   "item_type": {
     "title": "Type d'élément"

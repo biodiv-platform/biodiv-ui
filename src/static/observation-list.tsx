@@ -14,6 +14,18 @@ export const DEFAULT_FILTER: ObservationFilterProps = {
   view: "list"
 };
 
+export const OBSERVATION_FILTER_KEY = {
+  index:"eo",
+  dataSetName: {
+    filterKey: "dataSetName",
+    searchKey:"dataset_title"
+  },
+  dataTableName: {
+    filterKey: "dataTableName",
+    searchKey:"data_table_title"
+  }
+};
+
 export const viewTabs = [
   {
     name: "common:list.view_type.list",

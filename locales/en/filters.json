@@ -33,6 +33,16 @@
   "item_type": {
     "title": "Item Type"
   },
+  "dataset_filter":{
+    "datatable":{
+      "title":"DataTable"
+    },
+
+    "dataset":{
+      "title":"Dataset"
+    },
+    "title":"Dataset Metadata"
+  },
   "location": {
     "district": "District",
     "map": {

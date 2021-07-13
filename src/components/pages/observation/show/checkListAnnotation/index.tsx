@@ -16,8 +16,8 @@ export default function CheckListAnnotation({ customData }) {
           (key, index) =>
             customData[key] && (
               <ResponsiveInfo key={index} title={key}>
-                <Stack isInline={true}>
-                  <Text mr={1}>{`${customData[key]}`}</Text>
+                <Stack  ml={4} isInline={true}>
+                  <Text>{`${customData[key]}`}</Text>
                 </Stack>
               </ResponsiveInfo>
             )

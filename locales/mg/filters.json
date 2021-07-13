@@ -29,6 +29,15 @@
       "validated": "nampanan-kery"
     }
   },
+  "dataset_filter": {
+    "dataset": {
+      "title": "Dataset"
+    },
+    "datatable": {
+      "title": "DataTable"
+    },
+    "title": "Dataset Metadata"
+  },
   "document_title": "lohateny",
   "item_type": {
     "title": "Karazana entana"

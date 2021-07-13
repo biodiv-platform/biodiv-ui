@@ -66,6 +66,7 @@ export const DEFAULT_BIB_FIELDS = {
 };
 
 export const DOUCMENT_FILTER_KEY = {
+  index:"ed",
   author: {
     filterKey: "author",
     searchKey: "document.author"
