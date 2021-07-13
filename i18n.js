@@ -7,11 +7,9 @@ module.exports = {
   pages: {
     "*": ["common", "header", "auth", "form"],
     "/": ["home"],
-    "/group/[groupName]": ["home"],
-    "/group/[groupName]/edit": ["group"],
-    "/group/[groupName]/show": ["home"],
     "rgx:/datatable/": ["datatable", "form", "observation"],
     "rgx:/document/": ["document", "filters", "activity"],
+    "rgx:/group/": ["home", "group"],
     "rgx:/landscape/": ["landscape", "filters", "activity"],
     "rgx:/observation/": ["observation", "filters", "activity"],
     "rgx:/page/": ["page"],

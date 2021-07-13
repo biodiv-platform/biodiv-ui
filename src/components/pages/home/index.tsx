@@ -23,7 +23,7 @@ export default function HomePageComponent({ homeInfo }) {
   const { t } = useTranslation();
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
-      {homeInfo.showGallery && HOME.GALLERY && homeInfo.gallerySlider.length && (
+      {homeInfo.showGallery && HOME.GALLERY && homeInfo.gallerySlider.length > 0 && (
         <Carousel
           featured={homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)}
         />
