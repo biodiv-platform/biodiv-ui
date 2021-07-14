@@ -90,7 +90,7 @@ export const axCheckTaxonomy = async (params) => {
 
 export const axUpdateTaxonPosition = async (payload) => {
   try {
-    const { data } = await http.put(`${ENDPOINT.TAXONOMY}/v1/taxonomy/tba_position`, payload);
+    const { data } = await http.put(`${ENDPOINT.TAXONOMY}/v1/taxonomy/position`, payload);
     return { success: true, data };
   } catch (e) {
     console.error(e);

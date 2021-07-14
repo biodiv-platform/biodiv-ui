@@ -34,7 +34,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
   const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: 0 });
   const [isLoading, setIsLoading] = useState<boolean>();
   const [selectedTaxons, setSelectedTaxons] = useState([]);
-  const [modalTaxon, setModalTaxon] = useState<any>();
+  const [modalTaxon, setModalTaxonI] = useState<any>();
 
   useEffect(() => {
     if (isBrowser) {
@@ -100,14 +100,31 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
 
   useListener(
     (taxonId) => {
+      // TODO: remove double XHR once back-end updates endpoint this
       Promise.all([axGetTaxonDetails(taxonId), axGetTaxonTree(taxonId)]).then(
         ([taxonDetails, taxonTree]) => {
-          setModalTaxon({ ...taxonDetails.data, ranks: taxonTree.data });
+          setModalTaxonI({ ...taxonDetails.data, ranks: taxonTree.data });
         }
       );
     },
     [TAXON.SELECTED]
   );
+
+  const setModalTaxon = async (taxon) => {
+    // update modal taxon instance
+    setModalTaxonI(taxon);
+
+    // update taxon in list
+    if (taxon) {
+      await axGetTaxonTree(taxon.id)
+      setTaxonListData((_draft) => {
+        const taxonIndex = _draft.l.findIndex((listTaxon) => listTaxon.id === taxon.id);
+        if (taxonIndex > -1) {
+          _draft.l[taxonIndex] = taxon;
+        }
+      });
+    }
+  };
 
   return (
     <TaxonFilterContext.Provider

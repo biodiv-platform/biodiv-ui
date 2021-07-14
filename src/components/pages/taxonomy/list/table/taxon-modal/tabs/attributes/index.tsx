@@ -8,7 +8,7 @@ import { TaxonAttributesTable } from "./attributes-table";
 
 export function TaxonAttributesTab() {
   const { t } = useTranslation();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (
     <Box mt={4}>
@@ -22,7 +22,7 @@ export function TaxonAttributesTab() {
       >
         {t("common:edit")}
       </Button>
-      <div>{isOpen ? <TaxonAttributesForm /> : <TaxonAttributesTable />}</div>
+      <div>{isOpen ? <TaxonAttributesForm onClose={onClose} /> : <TaxonAttributesTable />}</div>
     </Box>
   );
 }

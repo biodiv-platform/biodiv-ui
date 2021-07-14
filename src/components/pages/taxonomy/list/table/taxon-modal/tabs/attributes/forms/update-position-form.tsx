@@ -11,7 +11,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-export default function UpdatePositionForm() {
+export default function UpdatePositionForm({ onDone }) {
   const { modalTaxon, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
 
@@ -31,6 +31,7 @@ export default function UpdatePositionForm() {
     const { success, data } = await axUpdateTaxonPosition({ ...values, taxonId: modalTaxon.id });
     if (success) {
       setModalTaxon(data);
+      onDone();
       notification(t("taxon:modal.attributes.position.success"), NotificationType.Success);
     } else {
       notification(t("taxon:modal.attributes.position.error"));

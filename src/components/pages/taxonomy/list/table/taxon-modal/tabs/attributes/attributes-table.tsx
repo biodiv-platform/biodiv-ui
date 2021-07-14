@@ -85,7 +85,7 @@ export function TaxonAttributesTable() {
         </Heading>
         <Table borderRadius="lg" variant="striped" overflow="hidden">
           <Tbody>
-            {modalTaxon.ranks.map((rank) => (
+            {modalTaxon.ranks?.map((rank) => (
               <Tr key={rank.rankName}>
                 <Td style={{ textTransform: "capitalize" }}>{rank.rankName}</Td>
                 <Td>{rank.name}</Td>

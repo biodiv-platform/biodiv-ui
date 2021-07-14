@@ -10,7 +10,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-export default function UpdateNameForm() {
+export default function UpdateNameForm({ onDone }) {
   const { modalTaxon, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
 
@@ -29,7 +29,8 @@ export default function UpdateNameForm() {
   const handleOnSubmit = async (values) => {
     const { success, data } = await axUpdateTaxonName({ ...values, taxonId: modalTaxon.id });
     if (success) {
-      setModalTaxon(data)
+      setModalTaxon(data);
+      onDone();
       notification(t("taxon:modal.attributes.name.success"), NotificationType.Success);
     } else {
       notification(t("taxon:modal.attributes.name.error"));

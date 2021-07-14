@@ -23,14 +23,14 @@ const taxonListRows = [
     style: { width: "100px" }
   },
   {
-    Header: "Rank",
-    accessor: "rank",
+    Header: "Name",
+    accessor: "name",
     Cell: TaxonRankCell,
     style: { paddingTop: 0, paddingBottom: 0 }
   },
   {
-    Header: "Name",
-    accessor: "name"
+    Header: "Rank",
+    accessor: "rank"
   },
   {
     Header: "Status",

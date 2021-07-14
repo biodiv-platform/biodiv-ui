@@ -1,10 +1,11 @@
 import { Box, FormLabel, useDisclosure } from "@chakra-ui/react";
+import FormDebugger from "@components/form/debugger";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
 import {
   onScientificNameQuery,
-  ScientificNameOption,
+  ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import { TaxonCreateInputField } from "@components/pages/species/create/species-taxon-suggestions/create/taxon-create-input";
 import TaxonCreateModal from "@components/pages/species/create/species-taxon-suggestions/create/taxon-create-modal";
@@ -19,7 +20,7 @@ import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-export default function UpdateTaxonForm() {
+export default function UpdateTaxonForm({ onDone }) {
   const { modalTaxon, taxonRanks, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
   const [validateResults, setValidateResults] = useState([]);
@@ -71,7 +72,7 @@ export default function UpdateTaxonForm() {
     defaultValues: {
       status: modalTaxon?.status,
       newTaxonId: { value: modalTaxon?.id, label: modalTaxon?.name },
-      ...Object.fromEntries(modalTaxon?.ranks.map((o) => [o.rankName, o.name]) || [])
+      ...Object.fromEntries(modalTaxon?.ranks?.map((o) => [o.rankName, o.name]) || [])
     }
   });
 
@@ -97,15 +98,15 @@ export default function UpdateTaxonForm() {
     }
   };
 
-  const handleOnStatusFormSubmit = async ({ newTaxonId, status, ...values }) => {
+  const handleOnStatusFormSubmit = async ({ newTaxonId, status, ...hierarchy }) => {
     const { success, data } = await axUpdateTaxonStatus({
-      hierarchy: values,
       taxonId: modalTaxon.id,
-      newTaxonId: newTaxonId?.value,
-      status
+      status,
+      ...(status === TAXON_STATUS_VALUES.SYNONYM ? { newTaxonId } : { hierarchy })
     });
     if (success) {
       setModalTaxon(data);
+      onDone();
       notification(t("taxon:modal.attributes.position.success"), NotificationType.Success);
     } else {
       notification(t("taxon:modal.attributes.position.error"));
@@ -145,10 +146,12 @@ export default function UpdateTaxonForm() {
             onQuery={(q) => onScientificNameQuery(q)}
             optionComponent={ScientificNameOption}
             placeholder={t("form:min_three_chars")}
+            isRaw={true}
           />
         </Box>
 
         <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
+        <FormDebugger />
       </form>
     </FormProvider>
   );

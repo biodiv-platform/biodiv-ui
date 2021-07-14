@@ -19,9 +19,6 @@ TaxonListPage.getInitialProps = async (ctx) => {
     taxonRanks: taxonRanks.map((r) => ({ ...r, value: r.name })),
     filter: {
       ...DEFAULT_FILTER,
-      statusList: "ACCEPTED,SYNONYM",
-      positionList: "CLEAN,WORKING,RAW",
-      rankList: taxonRanks.map((r) => r.name).toString(),
       ...ctx.query
     }
   };

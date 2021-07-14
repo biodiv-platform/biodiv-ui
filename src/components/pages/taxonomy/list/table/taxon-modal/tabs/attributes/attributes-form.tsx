@@ -5,14 +5,14 @@ import UpdateNameForm from "./forms/update-name-form";
 import UpdatePositionForm from "./forms/update-position-form";
 import UpdateTaxonForm from "./forms/update-taxon-form";
 
-export function TaxonAttributesForm() {
+export function TaxonAttributesForm({ onClose }) {
   return (
     <div>
-      <UpdateNameForm />
+      <UpdateNameForm onDone={onClose} />
       <Divider my={4} />
-      <UpdateTaxonForm />
+      <UpdateTaxonForm onDone={onClose} />
       <Divider my={4} />
-      <UpdatePositionForm />
+      <UpdatePositionForm onDone={onClose} />
     </div>
   );
 }
