@@ -88,6 +88,11 @@ export default [
     name: "header:menu_secondary.pages."
   },
   {
+    active: SITE_CONFIG.HEADER.IDAO.ACTIVE,
+    name: "header:menu_secondary.idao.",
+    to: SITE_CONFIG.HEADER.IDAO.LINK
+  },
+  {
     name: "header:menu_secondary.more.",
     rows: [
       {
