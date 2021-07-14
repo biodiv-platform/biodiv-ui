@@ -9,7 +9,7 @@ import { ShowData, SpeciesGroup } from "@interfaces/observation";
 import { axQueryTagsByText, axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
-import { getInjectableHTML } from "@utils/text";
+import { covertToSentenceCase, getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -102,7 +102,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         </ResponsiveInfo>
         {o?.dataTable?.geographicalCoverageLocationScale && (
           <ResponsiveInfo title="observation:location_scale">
-            {o?.dataTable?.geographicalCoverageLocationScale}
+            {covertToSentenceCase(o?.dataTable?.geographicalCoverageLocationScale)}
           </ResponsiveInfo>
         )}
       </SimpleGrid>
