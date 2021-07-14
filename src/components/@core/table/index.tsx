@@ -14,10 +14,11 @@ interface BasicTableColumn {
 interface BasicTableProps {
   columns: BasicTableColumn[];
   data: any[];
+  translateHeader?: boolean;
   tableStyle?: React.CSSProperties;
 }
 
-export function BasicTable({ columns, data, tableStyle }: BasicTableProps) {
+export function BasicTable({ columns, data, tableStyle, translateHeader }: BasicTableProps) {
   const { t } = useTranslation();
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     { columns, data },
@@ -35,7 +36,7 @@ export function BasicTable({ columns, data, tableStyle }: BasicTableProps) {
                 {...column.getHeaderProps(column.getSortByToggleProps())}
                 isNumeric={column.isNumeric}
               >
-                {column.render("Header")}
+                {translateHeader ? t(`${column.render("Header")}`) : column.render("Header")}
                 <chakra.span pl="4">
                   {column.isSorted ? (
                     column.isSortedDesc ? (
