@@ -31,7 +31,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
     switch (item) {
       case "id":
         return {
-          Header:"datatable.table.id",
+          Header:"datatable:table.id",
           accessor: "id",
           Cell: ({ value }) => (
             <a href={`/observation/show/${value}`}>
@@ -41,7 +41,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "scientificName":
         return {
-          Header: "datatable.table.scientificName",
+          Header: "datatable:table.scientificName",
           accessor: "scientificName",
           Cell: ({ value }) => (
             <Text key={value} fontStyle="italic">
@@ -51,7 +51,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "userInfo":
         return {
-          Header:"datatable.table.userInfo",
+          Header:"datatable:table.userInfo",
           accessor: "userInfo",
           Cell: ({ value }) => (
             <a href={`/user/show/${value.id}`}>
@@ -66,7 +66,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "sGroup":
         return {
-          Header: "datatable.table.sGroup",
+          Header: "datatable:table.sGroup",
           accessor: "sGroup",
           Cell: ({ value }) => (
             <SpeciesGroupBox
@@ -79,7 +79,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "geoPrivacy":
         return {
-          Header:"datatable.table.geoPrivacy" ,
+          Header:"datatable:table.geoPrivacy" ,
           accessor: "geoPrivacy",
           Cell: ({ value }) =>
             value ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />
