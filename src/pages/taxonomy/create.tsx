@@ -4,11 +4,11 @@ import { Role } from "@interfaces/custom";
 import { axGetTaxonRanks } from "@services/taxonomy.service";
 import React from "react";
 
-export default function SpeciesCreatePage({ taxonRanksMeta }) {
-  return <SpeciesCreatePageComponent taxonRanksMeta={taxonRanksMeta} isSpeciesPage={true} />;
+export default function TaxonomyCreatePage({ taxonRanksMeta }) {
+  return <SpeciesCreatePageComponent taxonRanksMeta={taxonRanksMeta} isSpeciesPage={false} />;
 }
 
-SpeciesCreatePage.getInitialProps = async (ctx) => {
+TaxonomyCreatePage.getInitialProps = async (ctx) => {
   authorizedPageSSR([Role.Any], ctx, false);
 
   const { data } = await axGetTaxonRanks();

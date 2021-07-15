@@ -79,12 +79,18 @@ export const axUpdateTaxonStatus = async (payload) => {
 export const axCheckTaxonomy = async (params) => {
   try {
     const { data } = await http.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/nameSearch`, { params });
-    return {
-      success: true,
-      data
-    };
+    return { success: true, data };
   } catch (e) {
     return { success: false, data: { matched: [], parentMatched: [] } };
+  }
+};
+
+export const axSaveTaxonomy = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.TAXONOMY}/v1/taxonomy`, payload);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
   }
 };
 

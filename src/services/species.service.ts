@@ -206,15 +206,6 @@ export const axCheckSpecies = async (taxonId) => {
   }
 };
 
-export const axSaveTaxonomy = async (payload) => {
-  try {
-    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/taxonomy/nameSearch`, payload);
-    return { success: true, data };
-  } catch (e) {
-    return { success: false, data: null };
-  }
-};
-
 export const axCreateSpecies = async (payload) => {
   try {
     const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/species/add`, payload);

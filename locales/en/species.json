@@ -40,6 +40,7 @@
   },
   "contributors": "Contributors",
   "create": {
+    "create_species_page": "Create species page while creating taxon",
     "creating_page": "Please wait while species page is being created.",
     "desc_1": "Contributors need to have create rights on the species page in order to add content. If you have not already been allotted rights",
     "desc_2": "Please input a species name and validate. If a name is validated and found to already exist on the portal, you will be taken to the species page to add content. If the name is validated and found to be new, you can fill in the taxonomic hierarchy so that the new species page can be created. Author string is compulsory for species levels and lower.",

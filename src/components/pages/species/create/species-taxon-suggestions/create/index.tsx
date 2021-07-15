@@ -2,8 +2,7 @@ import { Alert, AlertIcon } from "@chakra-ui/alert";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axSaveTaxonomy } from "@services/species.service";
-import { axCheckTaxonomy } from "@services/taxonomy.service";
+import { axCheckTaxonomy, axSaveTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -36,7 +35,7 @@ export function SpeciesTaxonCreateForm() {
       disabled.push([name, required, !found]);
 
       // check for match
-      if (validationParams.rank === name) {
+      if (validationParams.rankName === name) {
         found = true;
       }
     });
@@ -46,14 +45,14 @@ export function SpeciesTaxonCreateForm() {
 
   const hForm = useForm<any>({
     resolver: yupResolver(Yup.object().shape(formValidationSchema)),
-    defaultValues: { [validationParams.rank]: validationParams.speciesName }
+    defaultValues: { [validationParams.rankName]: validationParams.scientificName }
   });
 
   const handleOnTaxonCreate = async (values) => {
     const { success, data } = await axSaveTaxonomy({
-      scientificName: validationParams.speciesName,
-      rank: validationParams.rank,
-      rankToName: values,
+      scientificName: validationParams.scientificName,
+      rank: validationParams.rankName,
+      rankToName: Object.fromEntries(Object.entries(values).filter((o) => o[1])),
       status: "ACCEPTED",
       position: "RAW"
     });

@@ -1,4 +1,7 @@
 {
+  "create": {
+    "title": "टैक्सोन जोड़ें"
+  },
   "modal": {
     "activity": "गतिविधि",
     "attributes": {

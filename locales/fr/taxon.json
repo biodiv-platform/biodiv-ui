@@ -1,4 +1,7 @@
 {
+  "create": {
+    "title": "Ajouter un taxon"
+  },
   "modal": {
     "activity": "Activité",
     "attributes": {
