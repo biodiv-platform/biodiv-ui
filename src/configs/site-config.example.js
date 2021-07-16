@@ -22,7 +22,8 @@ const SITE_CONFIG_EXAMPLE = {
     GEOENTITY_SEARCH: true
   },
   FEEDBACK: {
-    ACTIVE: true
+    ACTIVE: true,
+    URL: "https://forms.gle/G4Gi6NpuvnRRuDCc8"
   },
   FILTER: {
     DISTRICT: true,
