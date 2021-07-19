@@ -31,10 +31,10 @@
   },
   "dataset_filter": {
     "dataset": {
-      "title": "Base de données"
+      "title": "Nom de l'ensemble de données"
     },
     "datatable": {
-      "title": "Table de données"
+      "title": "Nom de la table de données"
     },
     "title": "Métadonnées de l'ensemble de données"
   },

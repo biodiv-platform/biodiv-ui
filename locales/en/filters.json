@@ -35,11 +35,11 @@
   },
   "dataset_filter":{
     "datatable":{
-      "title":"DataTable"
+      "title":"DataTable Name"
     },
 
     "dataset":{
-      "title":"Dataset"
+      "title":"Dataset Name"
     },
     "title":"Dataset Metadata"
   },

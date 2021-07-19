@@ -31,10 +31,10 @@
   },
   "dataset_filter": {
     "dataset": {
-      "title": "डेटासेट"
+      "title": "डेटासेट का नाम"
     },
     "datatable": {
-      "title": "विवरण सारणी"
+      "title": "डेटाटेबल नाम"
     },
     "title": "डेटासेट मेटाडेटा"
   },
