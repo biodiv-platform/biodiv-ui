@@ -1,4 +1,4 @@
-import { axGetTaxonDetails, axGetTaxonListData, axGetTaxonTree } from "@services/taxonomy.service";
+import { axGetTaxonDetails, axGetTaxonListData } from "@services/taxonomy.service";
 import { isBrowser } from "@static/constants";
 import { TAXON } from "@static/events";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/taxon";
