@@ -64,15 +64,23 @@ export default function UpdateTaxonForm({ onDone }) {
         status: Yup.string().required(),
         newTaxonId: Yup.mixed().when("status", {
           is: (m) => m === TAXON_STATUS_VALUES.SYNONYM,
-          then: Yup.mixed().required()
+          then: Yup.array()
+            .of(
+              Yup.object().shape({
+                value: Yup.number().required(),
+                label: Yup.string().required()
+              })
+            )
+            .min(1)
+            .required()
         }),
         ...formValidationSchema
       })
     ),
     defaultValues: {
       status: modalTaxon?.status,
-      newTaxonId: { value: modalTaxon?.id, label: modalTaxon?.name },
-      ...Object.fromEntries(modalTaxon?.ranks?.map((o) => [o.rankName, o.name]) || [])
+      newTaxonId: modalTaxon?.acceptedNames?.map((o) => ({ value: o.id, label: o.name })) || [],
+      ...Object.fromEntries(modalTaxon?.hierarchy?.map((o) => [o.rankName, o.name]) || [])
     }
   });
 
@@ -102,7 +110,9 @@ export default function UpdateTaxonForm({ onDone }) {
     const { success, data } = await axUpdateTaxonStatus({
       taxonId: modalTaxon.id,
       status,
-      ...(status === TAXON_STATUS_VALUES.SYNONYM ? { newTaxonId } : { hierarchy })
+      ...(status === TAXON_STATUS_VALUES.SYNONYM
+        ? { newTaxonId: newTaxonId.map((t) => t.value) }
+        : { hierarchy })
     });
     if (success) {
       setModalTaxon(data);
@@ -143,6 +153,7 @@ export default function UpdateTaxonForm({ onDone }) {
           <SelectAsyncInputField
             name="newTaxonId"
             label={t("form:name")}
+            multiple={true}
             onQuery={(q) => onScientificNameQuery(q)}
             optionComponent={ScientificNameOption}
             placeholder={t("form:min_three_chars")}

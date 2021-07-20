@@ -100,27 +100,30 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
 
   useListener(
     (taxonId) => {
-      // TODO: remove double XHR once back-end updates endpoint this
-      Promise.all([axGetTaxonDetails(taxonId), axGetTaxonTree(taxonId)]).then(
-        ([taxonDetails, taxonTree]) => {
-          setModalTaxonI({ ...taxonDetails.data, ranks: taxonTree.data });
-        }
+      axGetTaxonDetails(taxonId).then(({ data: { taxonomyDefinition, ...extra } }) =>
+        setModalTaxonI({ ...taxonomyDefinition, ...extra })
       );
     },
     [TAXON.SELECTED]
   );
 
   const setModalTaxon = async (taxon) => {
-    // update modal taxon instance
-    setModalTaxonI(taxon);
+    // Transformer to match data
+    const data = {
+      ...taxon,
+      ...taxon?.taxonomyDefinition,
+      taxonomyDefinition: undefined
+    };
 
-    // update taxon in list
-    if (taxon) {
-      await axGetTaxonTree(taxon.id)
+    if (data) {
+      // update modal taxon instance
+      setModalTaxonI(data);
+
+      // update existing object in list
       setTaxonListData((_draft) => {
-        const taxonIndex = _draft.l.findIndex((listTaxon) => listTaxon.id === taxon.id);
+        const taxonIndex = _draft.l.findIndex((listTaxon) => listTaxon.id === data.id);
         if (taxonIndex > -1) {
-          _draft.l[taxonIndex] = taxon;
+          _draft.l[taxonIndex] = data;
         }
       });
     }

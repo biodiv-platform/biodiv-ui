@@ -40,7 +40,7 @@ export const axGetTaxonListData = async (params) => {
 
 export const axGetTaxonDetails = async (taxonId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/${taxonId}`);
+    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/show/${taxonId}`);
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };
