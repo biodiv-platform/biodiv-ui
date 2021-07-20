@@ -437,6 +437,7 @@ export interface ObservationListPageMapper {
   noOfImages?: number; // int64
   noOfAudios?: number; // int64
   noOfVideos?: number; // int64
+  placeName?:string;
   reprImageUrl?: string;
   user?: UserIbp;
   factValuePair?: FactValuePair[];
