@@ -249,6 +249,10 @@ export interface MapAggregationResponse {
   groupSpeciesName?: {
     [name: string]: number; // int64
   };
+  geoEntity?: {
+    [name: string]: number; // int64
+  };
+
   groupStatus?: {
     [name: string]: number; // int64
   };

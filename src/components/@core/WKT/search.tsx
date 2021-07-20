@@ -3,8 +3,8 @@ import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import { isBrowser } from "@static/constants";
-import center from "@turf/center";
 import { feature } from "@turf/helpers";
+import pointOnFeature from "@turf/point-on-feature";
 import { getMapCenter } from "@utils/location";
 import debounce from "debounce-promise";
 import dynamic from "next/dynamic";
@@ -53,7 +53,7 @@ export default function WKTSearch({
         geoEntityId,
         [nameTitle]: label,
         [nameTopology]: wkt.stringify(value),
-        [centroid]: center(feature(value))
+        [centroid]: pointOnFeature(feature(value))
       });
       setSelected(null);
     }

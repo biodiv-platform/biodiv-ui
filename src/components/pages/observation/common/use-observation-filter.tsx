@@ -19,7 +19,7 @@ const deDupeObservations = (existingObservations, newObservations) => {
 
 interface ObservationFilterContextProps {
   filter?: ObservationFilterProps;
-  observationData?: ObservationData;
+  observationData: ObservationData;
   setObservationData?;
   totalCount?;
   observationListAdd?;
@@ -88,8 +88,8 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft.ml = [];
         });
       }
-
-      const { data } = await axGetListData(filter.f);
+      const { location, ...otherValues } = filter.f;
+      const { data } = await axGetListData({ ...otherValues }, location ? { location } : {});
       updateMaxVotedRecoPermissions(data.observationList);
       setObservationData((_draft) => {
         if (data.geohashAggregation) {

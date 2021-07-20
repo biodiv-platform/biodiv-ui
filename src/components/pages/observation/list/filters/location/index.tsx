@@ -8,20 +8,41 @@ import SubAccordion from "../shared/sub-accordion";
 import MapAreaFilter from "./map-area";
 
 export default function LocationFilter() {
-  const { states } = useObservationFilter();
+  const {
+    states,
+    observationData: {
+      ag: { geoEntity }
+    }
+  } = useObservationFilter();
   const STATE_OPTIONS = states?.map((state) => ({ label: state, value: state, stat: state }));
+  const GEO_ENTITY_LOCATION = geoEntity && Object.keys(geoEntity).map((place) => ({
+    label: place,
+    value: place,
+    stat: place
+  }));
 
   return (
     <SubAccordion>
       <MapAreaFilter />
 
-      {SITE_CONFIG.FILTER.STATE && (
+      {SITE_CONFIG.FILTER.STATE  && (
         <CheckboxFilterPanel
           translateKey="filters:location.state."
           filterKey="state"
           options={STATE_OPTIONS}
           statKey="groupState"
           skipOptionsTranslation={true}
+          showSearch={true}
+        />
+      )}
+
+      {SITE_CONFIG.FILTER.PROTECTED_AREAS && (
+        <CheckboxFilterPanel
+          translateKey="filters:location.protected_area."
+          filterKey="geoEntity"
+          options={GEO_ENTITY_LOCATION}
+          skipOptionsTranslation={true}
+          statKey="geoEntity"
           showSearch={true}
         />
       )}

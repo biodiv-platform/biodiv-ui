@@ -348,10 +348,16 @@ export const axBulkObservationData = async (payload) => {
   }
 };
 
-export const axGetListData = async (params, index = "extended_observation", type = "_doc") => {
+export const axGetListData = async (
+  params,
+  payload = {},
+  index = "extended_observation",
+  type = "_doc"
+) => {
   try {
-    const { data } = await plainHttp.get(
+    const { data } = await plainHttp.post(
       `${ENDPOINT.OBSERVATION}/v1/observation/list/${index}/${type}`,
+      payload,
       {
         params
       }
