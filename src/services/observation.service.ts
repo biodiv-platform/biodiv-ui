@@ -354,6 +354,7 @@ export const axGetListData = async (
   index = "extended_observation",
   type = "_doc"
 ) => {
+
   try {
     const { data } = await plainHttp.post(
       `${ENDPOINT.OBSERVATION}/v1/observation/list/${index}/${type}`,

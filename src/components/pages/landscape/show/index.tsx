@@ -22,9 +22,10 @@ const NakshaMapboxView: any = dynamic(
   }
 );
 
-interface LandscapeShowComponentProps {
+export interface LandscapeShowComponentProps {
   landscape: Landscape;
   landscapeShow;
+  observationList;
   documentList;
 }
 
