@@ -12,16 +12,17 @@ interface SidebarProps {
   showDocument: ShowDocument;
   speciesGroups;
   habitatList;
+  documentPath?;
 }
 
-export default function Sidebar({ showDocument, speciesGroups, habitatList }: SidebarProps) {
+export default function Sidebar({ showDocument, speciesGroups, habitatList, documentPath }: SidebarProps) {
   const { t } = useTranslation();
 
   return (
     <div>
       <User user={showDocument.userIbp} />
       <DownloadButtons
-        documentPath={showDocument?.uFile?.path}
+        documentPath={documentPath}
         title={showDocument?.document?.title}
         documentId={showDocument?.document?.id}
       />

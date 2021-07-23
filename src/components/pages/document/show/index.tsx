@@ -42,6 +42,7 @@ export default function DocumentShowComponent({
 }: DocumentShowProps) {
   const { isLoggedIn } = useGlobalState();
   const [permission, setPermission] = useState<DocumentUserPermission>();
+  const documentPath = document?.uFile?.path || document?.document?.externalUrl;
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -56,11 +57,8 @@ export default function DocumentShowComponent({
       <DocumentHeader document={document} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
-          {document?.uFile?.path && (
-            <DocumentIframe
-              className="fadeInUp delay-2"
-              src={getDocumentPath(document?.uFile?.path)}
-            />
+          {documentPath && (
+            <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />
           )}
           <DocumentInfo d={document} />
 
@@ -83,7 +81,12 @@ export default function DocumentShowComponent({
             commentFunc={axAddDocumentComment}
           />
         </Box>
-        <Sidebar showDocument={document} speciesGroups={speciesGroups} habitatList={habitatList} />
+        <Sidebar
+          showDocument={document}
+          speciesGroups={speciesGroups}
+          habitatList={habitatList}
+          documentPath={documentPath}
+        />
       </SimpleGrid>
     </div>
   );
