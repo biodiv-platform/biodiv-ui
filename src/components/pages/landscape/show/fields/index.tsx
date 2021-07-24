@@ -1,5 +1,6 @@
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/react";
 import HTMLContainer from "@components/@core/html-container";
+import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { Role } from "@interfaces/custom";
@@ -7,6 +8,8 @@ import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
+
+import LandscapeObservationList from "../common/observation-list";
 
 const FieldEditor = dynamic(() => import("../editor"), { ssr: false });
 
@@ -68,6 +71,14 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
                   />
                 )
               )}
+              {child.header.toLowerCase() === SITE_CONFIG?.FLORA?.TITLE &&
+                SITE_CONFIG?.FLORA?.LIST && (
+                  <LandscapeObservationList sGroupList={SITE_CONFIG?.FLORA?.LIST} />
+                )}
+              {child.header.toLowerCase() === SITE_CONFIG?.FAUNA?.TITLE &&
+                SITE_CONFIG?.FAUNA?.LIST && (
+                  <LandscapeObservationList sGroupList={SITE_CONFIG?.FAUNA?.LIST} />
+                )}
             </Box>
             {child.childs.length > 0 && <LandscapeFields childs={child.childs} size="md" ml={4} />}
           </React.Fragment>

@@ -14,12 +14,13 @@ import { useImmer } from "use-immer";
 
 const deDupeObservations = (existingObservations, newObservations) => {
   const existingIDs = existingObservations.map(({ observationId }) => observationId);
-  return newObservations.filter(({ observationId }) => !existingIDs.includes(observationId));
+  return newObservations?.filter(({ observationId }) => !existingIDs.includes(observationId));
 };
 
 interface ObservationFilterContextProps {
   filter?: ObservationFilterProps;
   observationData: ObservationData;
+  location;
   setObservationData?;
   totalCount?;
   observationListAdd?;
@@ -89,20 +90,23 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         });
       }
       const { location, ...otherValues } = filter.f;
-      const { data } = await axGetListData({ ...otherValues }, location ? { location } : {});
-      updateMaxVotedRecoPermissions(data.observationList);
+      const { data } = await axGetListData(
+        { ...otherValues },
+        props.location ? { location: props.location } : location ? { location } : {}
+      );
+      updateMaxVotedRecoPermissions(data?.observationList);
       setObservationData((_draft) => {
-        if (data.geohashAggregation) {
-          _draft.l = data.geohashAggregation;
-        } else if (data.observationList.length) {
+        if (data?.geohashAggregation) {
+          _draft.l = data?.geohashAggregation;
+        } else if (data.observationList?.length) {
           _draft.l.push(...deDupeObservations(_draft.l, data.observationList));
-          _draft.hasMore = data.observationList.length === Number(filter.f.max);
+          _draft.hasMore = data.observationList?.length === Number(filter.f.max);
         } else {
           _draft.ml.push(...deDupeObservations(_draft.ml, data.observationListMinimal));
-          _draft.hasMore = data.observationListMinimal.length === Number(filter.f.max);
+          _draft.hasMore = data?.observationListMinimal?.length === Number(filter.f.max);
         }
         _draft.n = data.totalCount;
-        if (data.aggregationData) {
+        if (data?.aggregationData) {
           _draft.ag = data.aggregationData;
         }
       });
@@ -165,6 +169,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         // Config Properties
         speciesGroup: props.speciesGroup,
         userGroup: props.userGroup,
+        location: props.location,
         states: props.states,
         traits: props.traits,
         customFields: props.customFields

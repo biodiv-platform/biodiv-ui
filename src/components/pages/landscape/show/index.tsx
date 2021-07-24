@@ -1,7 +1,4 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
-import BlueLink from "@components/@core/blue-link";
-import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import { Landscape } from "@interfaces/landscape";
 import { getMapCenter } from "@utils/location";
@@ -10,6 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import wkt from "wkt";
 
+import ReadMore from "./common/read-more";
 import InfoTab from "./document-box";
 import DownloadLandscape from "./download";
 import LandscapeFields from "./fields";
@@ -25,7 +23,6 @@ const NakshaMapboxView: any = dynamic(
 export interface LandscapeShowComponentProps {
   landscape: Landscape;
   landscapeShow;
-  observationList;
   documentList;
 }
 
@@ -70,13 +67,7 @@ export default function LandscapeShowComponent({
             user={o.userIbp}
           />
         ))}
-        <Flex py={2} justifyContent="flex-end">
-          <LocalLink href={`/document/list`} params={{ state: landscape.shortName }}>
-            <BlueLink>
-              {t("common:read_more")} <ArrowForwardIcon />
-            </BlueLink>
-          </LocalLink>
-        </Flex>
+        <ReadMore params={{ state: landscape.shortName }} dataType="document" />
       </Stack>
     </div>
   );
