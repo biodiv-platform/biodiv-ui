@@ -29,7 +29,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
   });
 
   return (
-    uniqueSpecies?.speciesData?.data?.list && (
+    uniqueSpecies?.speciesData?.data?.list.length>0 && (
       <Box m={4}>
         <Heading mb={3} size="md">
           {title}
