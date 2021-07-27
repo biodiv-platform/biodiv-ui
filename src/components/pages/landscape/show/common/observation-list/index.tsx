@@ -1,8 +1,9 @@
-import { Box, Heading, Skeleton, useRadioGroup } from "@chakra-ui/react";
+import { Box, Heading, Skeleton, Text, useRadioGroup } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
 import LifeListTable from "@components/pages/observation/list/views/stats/table";
 import useUniqueSpecies from "@components/pages/observation/list/views/stats/use-unique-species";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 
 export const observationListParams = {
@@ -10,6 +11,7 @@ export const observationListParams = {
 };
 
 export default function LandscapeObservationList({ sGroupList, title }) {
+  const { t } = useTranslation();
   const { speciesGroup, filter, location } = useObservationFilter();
   const [observationFilter, setFilter] = useState({ ...filter, sGroup: sGroupList[0] } || {});
   const uniqueSpecies = useUniqueSpecies({ filter: observationFilter, location });
@@ -29,11 +31,11 @@ export default function LandscapeObservationList({ sGroupList, title }) {
   });
 
   return (
-    uniqueSpecies?.speciesData?.data?.list.length>0 && (
-      <Box m={4}>
-        <Heading mb={3} size="md">
-          {title}
-        </Heading>
+    <Box m={4}>
+      <Heading mb={3} size="md">
+        {title}
+      </Heading>
+      {uniqueSpecies?.speciesData?.data?.list?.length > 0 ? (
         <Box p={4} className="white-box">
           <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
             <Box {...getRootProps()} minH="3.75rem">
@@ -55,7 +57,11 @@ export default function LandscapeObservationList({ sGroupList, title }) {
             filter={filter}
           />
         </Box>
-      </Box>
-    )
+      ) : (
+        <Box>
+          <Text>🚧  {t("landscape:no_species_found")}</Text>
+        </Box>
+      )}
+    </Box>
   );
 }

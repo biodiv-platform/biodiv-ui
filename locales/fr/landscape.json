@@ -1,5 +1,6 @@
 {
   "download_map": "Télécharger la carte",
+  "no_species_found": "Aucune liste d'espèces trouvée",
   "observation": {
     "fauna_list": "Liste de la faune",
     "flora_list": "Liste de la flore",

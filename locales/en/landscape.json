@@ -9,6 +9,7 @@
     "species_filter": "Species Filter"
   },
   "related_documents": "Related Document(s)",
+  "no_species_found":"No Species List found",
   "site_number": "Site #",
   "title": "Protected Areas",
   "update": {
