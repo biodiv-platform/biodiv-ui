@@ -3,7 +3,6 @@ import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
-import { getGroupLink } from "@utils/basic";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -82,7 +81,7 @@ export default function GroupPost({
           .map((og) => (
             <GroupBox
               key={og.id}
-              link={getGroupLink(og.webAddress)}
+              link={og.webAddress}
               icon={getGroupImageThumb(og.icon, 40)}
               name={og.name}
             />

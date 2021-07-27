@@ -2,7 +2,7 @@
   "donors": "Donors",
   "features": {
     "citizen_science": {
-      "desc": "Any registered user can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
+      "desc": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
       "title": "Citizen Science"
     },
     "groups": {
@@ -10,7 +10,7 @@
       "title": "Communities"
     },
     "idao": {
-      "desc": "WIKWIO IDAO is a software to aid the identification and knowledge base of the main weeds of cash crops and food crops in the Western Indian Ocean countries.",
+      "desc": "WIKTROP IDAO is a software to aid the identification of the main weeds of cropping systems in tropical and mediterranean areas.",
       "title": "IDAO"
     },
     "landscapes": {

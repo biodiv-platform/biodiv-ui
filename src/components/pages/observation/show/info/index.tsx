@@ -28,7 +28,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
   return (
     <Box p={4} mb={4} className="white-box">
       <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
-        <ResponsiveInfo title="common:name">
+        <ResponsiveInfo title="form:name">
           <i>{o.recoIbp?.scientificName || t("common:unknown")}</i>
           {o.recoIbp?.speciesId && (
             <LocalLink href={`/species/show/${o.recoIbp.speciesId}`}>

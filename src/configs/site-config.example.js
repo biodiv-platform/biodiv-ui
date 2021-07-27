@@ -22,7 +22,8 @@ const SITE_CONFIG_EXAMPLE = {
     GEOENTITY_SEARCH: true
   },
   FEEDBACK: {
-    ACTIVE: true
+    ACTIVE: true,
+    URL: "https://forms.gle/G4Gi6NpuvnRRuDCc8"
   },
   FILTER: {
     DISTRICT: true,
@@ -58,6 +59,12 @@ const SITE_CONFIG_EXAMPLE = {
     STORE: "ibp",
     WORKSPACE: "biodiv"
   },
+  HEADER: {
+    IDAO: {
+      ACTIVE: true,
+      LINK: "x"
+    }
+  },
   HOME: {
     DONORS: false,
     FEATURES: true,
@@ -89,11 +96,11 @@ const SITE_CONFIG_EXAMPLE = {
     },
     SWITCHER: true
   },
-  LICENSE: {
-    DEFAULT: "822"
-  },
   LEADERBOARD: {
     ACTIVE: true
+  },
+  LICENSE: {
+    DEFAULT: "822"
   },
   MAP: {
     ACTIVE: true,
@@ -125,12 +132,17 @@ const SITE_CONFIG_EXAMPLE = {
     API_ENDPOINT_SSR: "http://localhost:8010/proxy/",
     DESCRIPTION: "A unique repository of information on India's biodiversity",
     GOV: {
+      ACTIVE: false,
       ICON: "/get/crop/logo/gov.png",
-      NAME: "Government of XYZ",
-      ACTIVE: false
+      NAME: "Government of XYZ"
     },
     ICON: "/get/crop/logo/IBP.png",
-    TITLE: "India Biodiversity Portal",
+    TITLE: {
+      en: "India Biodiversity Portal",
+      fr: "Portail de la biodiversité de l'Inde",
+      hi: "भारत जैव विविधता पोर्टल",
+      mg: "Portal momba ny harena voajanahary India"
+    },
     TITLE_LOCAL: "xyz",
     URL: "http://localhost:3000"
   },
