@@ -55,7 +55,8 @@ export const getServerSideProps = async (ctx) => {
   const initialFilterParams = { ...DEFAULT_FILTER, ...documentsListParams };
   const initialParamsObservation = {
     ...OBSERVATION_FILTER,
-    ...observationListParams
+    ...observationListParams,
+    view: "stats"
   };
   const { data: documents } = await axGetListData(initialFilterParams, { location });
   const { data: observations } = await axGetObservationList(initialParamsObservation, { location });
@@ -73,7 +74,7 @@ export const getServerSideProps = async (ctx) => {
       },
       documentList: documents?.documentList || [],
       location,
-      listConfig:{...listConfig,location},
+      listConfig: { ...listConfig, location },
       initialParamsObservation
     }
   };

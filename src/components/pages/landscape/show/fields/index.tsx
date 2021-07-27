@@ -7,6 +7,7 @@ import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
 import dynamic from "next/dynamic";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import LandscapeObservationList from "../common/observation-list";
@@ -22,6 +23,7 @@ interface IFieldsProps {
 export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IFieldsProps) {
   const { isLoggedIn } = useGlobalState();
   const [canEdit, setCanEdit] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -73,11 +75,17 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
               )}
               {child.header.toLowerCase() === SITE_CONFIG?.FLORA?.TITLE &&
                 SITE_CONFIG?.FLORA?.LIST && (
-                  <LandscapeObservationList sGroupList={SITE_CONFIG?.FLORA?.LIST} />
+                  <LandscapeObservationList
+                    title={t("landscape:observation.flora_list")}
+                    sGroupList={SITE_CONFIG?.FLORA?.LIST}
+                  />
                 )}
               {child.header.toLowerCase() === SITE_CONFIG?.FAUNA?.TITLE &&
                 SITE_CONFIG?.FAUNA?.LIST && (
-                  <LandscapeObservationList sGroupList={SITE_CONFIG?.FAUNA?.LIST} />
+                  <LandscapeObservationList
+                    title={t("landscape:observation.fauna_list")}
+                    sGroupList={SITE_CONFIG?.FAUNA?.LIST}
+                  />
                 )}
             </Box>
             {child.childs.length > 0 && <LandscapeFields childs={child.childs} size="md" ml={4} />}

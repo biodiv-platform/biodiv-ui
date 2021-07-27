@@ -1,5 +1,13 @@
 {
   "download_map": "Download Map",
+  "observation": {
+    "fauna_list": "Lisitra Fauna",
+    "flora_list": "Lisitra Flora",
+    "life_list": {
+      "title": "Lisitra fandinihana"
+    },
+    "species_filter": "Sivana karazana"
+  },
   "related_documents": "Tahirin-kevitra mifandraika (s)",
   "site_number": "Site #",
   "title": "Faritra arovana",

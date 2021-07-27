@@ -12,7 +12,7 @@ module.exports = {
     "/group/[groupName]/edit": ["group"],
     "rgx:/datatable/": ["activity", "datatable", "form", "observation"],
     "rgx:/document/": ["document", "filters", "activity"],
-    "rgx:/landscape/": ["landscape", "filters", "activity"],
+    "rgx:/landscape/": ["landscape","observation", "filters", "activity"],
     "rgx:/observation/": ["observation", "filters", "activity"],
     "rgx:/page/": ["page"],
     "rgx:/register": ["user"],
