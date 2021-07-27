@@ -29,31 +29,33 @@ export default function LandscapeObservationList({ sGroupList, title }) {
   });
 
   return (
-    <Box m={4}>
-      <Heading mb={3} size="md">
-        {title}
-      </Heading>
-      <Box p={4} className="white-box">
-        <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
-          <Box {...getRootProps()} minH="3.75rem">
-            {speciesGroupList?.map((o) => (
-              <CustomRadio
-                key={o.id}
-                icon={o.name}
-                {...getRadioProps({ value: o?.id })}
-                sm={true}
-              />
-            ))}
-          </Box>
-        </Skeleton>
-        <LifeListTable
-          data={uniqueSpecies.speciesData.data}
-          speciesGroups={speciesGroupList}
-          group={observationFilter.sGroup}
-          loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
-          filter={filter}
-        />
+    uniqueSpecies?.speciesData?.data?.list && (
+      <Box m={4}>
+        <Heading mb={3} size="md">
+          {title}
+        </Heading>
+        <Box p={4} className="white-box">
+          <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
+            <Box {...getRootProps()} minH="3.75rem">
+              {speciesGroupList?.map((o) => (
+                <CustomRadio
+                  key={o.id}
+                  icon={o.name}
+                  {...getRadioProps({ value: o?.id })}
+                  sm={true}
+                />
+              ))}
+            </Box>
+          </Skeleton>
+          <LifeListTable
+            data={uniqueSpecies.speciesData.data}
+            speciesGroups={speciesGroupList}
+            group={observationFilter.sGroup}
+            loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
+            filter={filter}
+          />
+        </Box>
       </Box>
-    </Box>
+    )
   );
 }
