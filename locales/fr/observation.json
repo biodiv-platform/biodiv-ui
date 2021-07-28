@@ -28,7 +28,7 @@
   "edit_hint": "💡 Pour modifier d'autres éléments tels que nom ou traits, veuillez entrer directement à partir de la page Observation-Show.",
   "edit_observation": "Modifier l'observation",
   "follow_observation": "Suivre l'observation",
-  "group": "Grouper",
+  "group": "Groupe",
   "group_updated": "Groupe  d'observation d'espèces mis à jour avec succès",
   "groups_updated": "Groupes mis à jour avec succès",
   "help_identify": "Aide à l'identification",
@@ -61,7 +61,7 @@
       "heading": "Taxons observés",
       "species_header": "Espèces"
     },
-    "location": "Lieux",
+    "location": "Lieu",
     "observations_found": "Observations trouvées",
     "spatial_distribution": "Distribution spatiale",
     "stats_bar": {
@@ -71,12 +71,12 @@
       "total_uploaders": "Téléchargeurs"
     },
     "top_identifiers_list": {
-      "author_header": "Noms",
+      "author_header": "Nom",
       "count_header": "Comptes",
       "heading": "Top identificateurs"
     },
     "top_uploaders_list": {
-      "author_header": "Noms",
+      "author_header": "Nom",
       "count_header": "Comptes",
       "heading": "Top téléchargeurs"
     }

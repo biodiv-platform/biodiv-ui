@@ -2,7 +2,7 @@
   "donors": "Donateurs",
   "features": {
     "citizen_science": {
-      "desc": "Tout utilisateur inscrit peut télécharger une observation de toutes les espèces observées.Les autres membres aident à identifier, annotant et valident les observations.",
+      "desc": "Tout utilisateur inscrit peut poster une observation de toute espèce observée. Les autres membres aident à identifier, et valider les observations, ils peuvent également poster un commentaire.",
       "title": "Science Citoyenne"
     },
     "groups": {
@@ -10,7 +10,7 @@
       "title": "Communautés"
     },
     "idao": {
-      "desc": "WIKTROP IDAO est un logiciel d’aide à l’identification et une base de connaissance des principales adventices des cultures des régions tropicales et méditerranéennes.",
+      "desc": "WIKTROP IDAO est un logiciel d’aide à l’identification des principales adventices des cultures des régions tropicales et méditerranéennes.",
       "title": "IDAO"
     },
     "landscapes": {
@@ -18,7 +18,7 @@
       "title": "Paysages"
     },
     "literature": {
-      "desc": "Littérature examinée par les pairs et littérature grise téléchargés par des membres ou en partenariat avec des revues de biodiversité, organisées avec des métadonnées et des balises.",
+      "desc": "Littérature examinée par les pairs et littérature grise partagées par des membres ou en partenariat avec des revues de biodiversité, organisées avec des métadonnées et des balises.",
       "title": "Littérature biodiversité"
     },
     "maps": {
@@ -30,7 +30,7 @@
       "title": "Données ouvertes"
     },
     "species_information": {
-      "desc": "Pages descriptives pour toutes les espèces à partir de sources authentifiées. Aider à collaborer et à développer des informations sur les espèces.",
+      "desc": "Pages descriptives pour toutes les espèces à partir de sources authentifiées. Aider à capitaliser et à développer des informations sur les espèces.",
       "title": "Information sur les espèces"
     },
     "taxonomy": {

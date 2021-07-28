@@ -55,7 +55,7 @@ function CarouselResourceInfo({ currentResource, observationId }) {
           <PopoverBody>
             <Grid templateColumns="1fr 2fr" gap={3}>
               <Box>{t("observation:contributor")}</Box>
-              <Box>{currentResource?.user?.name}</Box>
+              <Box>{currentResource?.userIbp?.name}</Box>
 
               <Box>{t("observation:license")}</Box>
               <Box>

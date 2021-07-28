@@ -34,16 +34,6 @@ export const stringToArray = (l) => {
 };
 
 /**
- * Temporary function should be removed once group context is fully migrated
- *
- * @param {string} url
- * @returns {string}
- */
-export const getGroupLink = (url): string => {
-  return url?.includes("/group/") ? url + "/show" : url;
-};
-
-/**
  * Works similar to loadash's `_.get` to retrive value from nested objects
  * getByPath(input,path)
  * path input.0.name

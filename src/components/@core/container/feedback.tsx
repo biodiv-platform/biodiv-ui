@@ -1,4 +1,5 @@
 import { Link } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import FeedbackIcon from "@icons/feedback";
 import useTranslation from "next-translate/useTranslation";
@@ -40,7 +41,7 @@ export default function Feedback() {
         rel="noreferrer"
         aria-label={t("common:feedback")}
         fontSize="lg"
-        href="https://forms.gle/G4Gi6NpuvnRRuDCc8"
+        href={SITE_CONFIG.FEEDBACK.URL}
         target="_blank"
       >
         <FeedbackIcon className="icon" />

@@ -1,13 +1,15 @@
 import { Role } from "@interfaces/custom";
 import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
 import { hasAccess } from "@utils/auth";
-import { clearFetchWithCache, fetchWithCache } from "@utils/cached-fetch";
+import { fetchWithCache } from "@utils/cached-fetch";
 import http, { plainHttp } from "@utils/http";
 import {
   findCurrentUserGroup,
   reorderRemovedGallerySetup,
   transformUserGroupList
 } from "@utils/userGroup";
+
+import { axClearMemoryCache } from "./api.service";
 
 export const axGetUserGroupList = async () => {
   try {
@@ -44,7 +46,7 @@ export const axGroupList = async (url?: string, lang?: string) => {
 export const axUserGroupCreate = async (payload) => {
   try {
     const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/create`, payload);
-    clearFetchWithCache();
+    await axClearMemoryCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -58,7 +60,7 @@ export const axUserGroupUpdate = async (payload, userGroupId) => {
       `${ENDPOINT.USERGROUP}/v1/group/edit/save/${userGroupId}`,
       payload
     );
-    clearFetchWithCache();
+    await axClearMemoryCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);
