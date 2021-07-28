@@ -354,7 +354,6 @@ export const axGetListData = async (
   index = "extended_observation",
   type = "_doc"
 ) => {
-
   try {
     const { data } = await plainHttp.post(
       `${ENDPOINT.OBSERVATION}/v1/observation/list/${index}/${type}`,
@@ -446,10 +445,11 @@ export const axGetUserLifeList = async (userId, type, params) => {
   }
 };
 
-export const axGetObservationMapData = async (params) => {
+export const axGetObservationMapData = async (params, payload = {}) => {
   try {
-    const response = await plainHttp.get(
+    const response = await plainHttp.post(
       `${ENDPOINT.OBSERVATION}/v1/observation/list/extended_observation/_doc`,
+      payload,
       { params }
     );
     return { success: true, data: response.data.geohashAggregation };
