@@ -125,7 +125,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const handleMediaFiles = async (pendingResource, noSave) => {
     try {
       const r = await axUploadObservationResource(pendingResource);
-      if (r && noSave) {
+      if (r.success && noSave) {
         await update({
           ...pendingResource,
           status: AssetStatus.Uploaded
