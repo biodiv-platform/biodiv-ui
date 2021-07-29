@@ -1,6 +1,7 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { BasicTable } from "@components/@core/table";
 import styled from "@emotion/styled";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useTaxonFilter from "../use-taxon";
@@ -43,7 +44,8 @@ const taxonListRows = [
 ];
 
 export default function TaxonListTable() {
-  const { taxonListData, isLoading, setSelectedTaxons } = useTaxonFilter();
+  const { t } = useTranslation();
+  const { taxonListData, isLoading, setSelectedTaxons, nextPage } = useTaxonFilter();
 
   return (
     <Box
@@ -54,9 +56,7 @@ export default function TaxonListTable() {
       overflowY="auto"
       gridColumn={{ lg: "4/15" }}
     >
-      {isLoading ? (
-        <Spinner m={4} />
-      ) : (
+      {taxonListData.l.length > 0 && (
         <BasicTable
           data={taxonListData.l}
           columns={taxonListRows}
@@ -64,6 +64,17 @@ export default function TaxonListTable() {
           onSelectionChange={setSelectedTaxons}
         />
       )}
+      <Flex alignItems="center" justifyContent="center" p={4}>
+        <Button
+          isLoading={isLoading}
+          disabled={taxonListData.hasMore}
+          loadingText={t("common:loading")}
+          onClick={nextPage}
+          colorScheme="blue"
+        >
+          {t("common:load_more")}
+        </Button>
+      </Flex>
     </Box>
   );
 }

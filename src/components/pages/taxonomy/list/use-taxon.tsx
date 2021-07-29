@@ -31,7 +31,7 @@ const TaxonFilterContext = createContext<TaxonFilterContextProps>({} as TaxonFil
 export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
   const initialOffset = props?.filter?.offset || 0;
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
-  const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: 0 });
+  const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: 0, hasMore: true });
   const [isLoading, setIsLoading] = useState<boolean>();
   const [selectedTaxons, setSelectedTaxons] = useState([]);
   const [modalTaxon, setModalTaxonI] = useState<any>();
@@ -60,6 +60,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
         if (data?.taxonomyNameListItems) {
           _draft.l.push(...data?.taxonomyNameListItems);
           _draft.count = data.count;
+          _draft.hasMore = data?.taxonomyNameListItems.length < LIST_PAGINATION_LIMIT;
         }
       });
     } catch (e) {
@@ -86,9 +87,9 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
     });
   };
 
-  const nextPage = (max = LIST_PAGINATION_LIMIT) => {
+  const nextPage = () => {
     setFilter((_draft) => {
-      _draft.f.offset = Number(_draft.f.offset) + max;
+      _draft.f.offset = Number(_draft.f.offset) + LIST_PAGINATION_LIMIT;
     });
   };
 

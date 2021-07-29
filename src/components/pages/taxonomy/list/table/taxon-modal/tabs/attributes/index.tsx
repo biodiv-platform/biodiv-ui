@@ -1,5 +1,6 @@
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import EditIcon from "@icons/edit";
+import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -10,6 +11,11 @@ export function TaxonAttributesTab() {
   const { t } = useTranslation();
   const { isOpen, onToggle, onClose } = useDisclosure();
 
+  const handleOnEdit = async () => {
+    await waitForAuth();
+    onToggle();
+  };
+
   return (
     <Box mt={4}>
       <Button
@@ -18,7 +24,7 @@ export function TaxonAttributesTab() {
         colorScheme="blue"
         variant="outline"
         leftIcon={<EditIcon />}
-        onClick={onToggle}
+        onClick={handleOnEdit}
       >
         {t("common:edit")}
       </Button>
