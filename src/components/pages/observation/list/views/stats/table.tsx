@@ -34,9 +34,7 @@ export default function LifeListTable({
         <Table variant="striped" colorScheme="gray" size="sm">
           <Thead>
             <Tr>
-              {group && speciesGroups && (
-                <Th {...stickyTh}>{t("observation:group")}</Th>
-              )}
+              {group && speciesGroups && <Th {...stickyTh}>{t("observation:group")}</Th>}
               <Th {...stickyTh}>{t("observation:list.life_list.species_header")}</Th>
               <Th {...stickyTh} isNumeric={true}>
                 {t("observation:list.life_list.count_header")}
@@ -57,7 +55,9 @@ export default function LifeListTable({
                     />
                   </Td>
                 )}
-                <Td>{specieName}</Td>
+                <Td>
+                  <i>{specieName}</i>
+                </Td>
                 <Td isNumeric={true}>
                   {specieCount && (
                     <LocalLink

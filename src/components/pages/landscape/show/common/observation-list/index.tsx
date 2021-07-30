@@ -1,4 +1,4 @@
-import { Box, Heading, Skeleton, Text, useRadioGroup } from "@chakra-ui/react";
+import { Box, Flex, Heading, Skeleton, Stack, Switch, Text, useRadioGroup } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
 import LifeListTable from "@components/pages/observation/list/views/stats/table";
@@ -13,6 +13,7 @@ export const observationListParams = {
 export default function LandscapeObservationList({ sGroupList, title }) {
   const { t } = useTranslation();
   const { speciesGroup, filter, location } = useObservationFilter();
+  const [validate, setValidate] = useState<boolean>(false);
   const [observationFilter, setFilter] = useState({ ...filter, sGroup: sGroupList[0] } || {});
   const uniqueSpecies = useUniqueSpecies({ filter: observationFilter, location });
 
@@ -30,6 +31,13 @@ export default function LandscapeObservationList({ sGroupList, title }) {
     onChange: (v) => setFilter({ ...observationFilter, sGroup: v && v !== "null" ? v : undefined })
   });
 
+  const handleToggle = () => {
+    setValidate(!validate);
+    !validate
+      ? setFilter({ ...observationFilter, validate: "validate" })
+      : setFilter({ ...observationFilter ,validate: ""});
+  };
+
   return (
     <Box m={4}>
       <Heading mb={3} size="md">
@@ -37,18 +45,25 @@ export default function LandscapeObservationList({ sGroupList, title }) {
       </Heading>
       {uniqueSpecies?.speciesData?.data?.list?.length > 0 ? (
         <Box p={4} className="white-box">
-          <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
-            <Box {...getRootProps()} minH="3.75rem">
-              {speciesGroupList?.map((o) => (
-                <CustomRadio
-                  key={o.id}
-                  icon={o.name}
-                  {...getRadioProps({ value: o?.id })}
-                  sm={true}
-                />
-              ))}
-            </Box>
-          </Skeleton>
+          <Flex justifyContent="space-between">
+            <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
+              <Box {...getRootProps()} minH="3.75rem">
+                {speciesGroupList?.map((o) => (
+                  <CustomRadio
+                    key={o.id}
+                    icon={o.name}
+                    {...getRadioProps({ value: o?.id })}
+                    sm={true}
+                  />
+                ))}
+              </Box>
+            </Skeleton>
+            <Stack align="center" direction="row">
+              <Text>{t("landscape:All")}</Text>
+              <Switch onChange={handleToggle} />
+              <Text>{t("landscape:Validate")}</Text>
+            </Stack>
+          </Flex>
           <LifeListTable
             data={uniqueSpecies.speciesData.data}
             speciesGroups={speciesGroupList}
@@ -59,7 +74,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
         </Box>
       ) : (
         <Box>
-          <Text>🚧  {t("landscape:no_species_found")}</Text>
+          <Text>🚧 {t("landscape:no_species_found")}</Text>
         </Box>
       )}
     </Box>

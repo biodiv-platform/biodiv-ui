@@ -9,6 +9,7 @@ import {
 } from "@services/observation.service";
 import { DEFAULT_FILTER } from "@static/documnet-list";
 import { DEFAULT_FILTER as OBSERVATION_FILTER } from "@static/observation-list";
+import envelope from "@turf/envelope";
 import { getLanguageId } from "@utils/i18n";
 import React from "react";
 import wkt from "wkt";
@@ -19,17 +20,6 @@ export const documentsListParams = {
   max: 6
 };
 
-const parseGeometryToString = (coord) => {
-  return coord?.length > 1
-    ? coord
-        ?.map((item) => {
-          return item.reduce((acc, polygon) => {
-            return acc.concat(`${polygon}`.replace(/[[\]]/g, ""));
-          }, "");
-        })
-        ?.join("/")
-    : `${coord}`.replace(/[[\]]/g, "");
-};
 
 const ObservationShowPage = ({
   landscape,
@@ -57,8 +47,8 @@ export const getServerSideProps = async (ctx) => {
   const langId = getLanguageId(ctx.locale)?.ID;
   const { data: landscape } = await axGetLandscapeById(ctx.query.landscapeId);
   const { data: landscapeShow } = await axGetLandscapeShowById(ctx.query.landscapeId, langId);
-  const coord = wkt.parse(landscapeShow.wktData)?.coordinates;
-  const location = parseGeometryToString(coord);
+  const coord = wkt.parse(landscapeShow.wktData);
+  const location = `${envelope(coord).geometry.coordinates}`.replace(/[[\]]/g, "");
   const initialFilterParams = { ...DEFAULT_FILTER, ...documentsListParams };
   const initialParamsObservation = {
     ...OBSERVATION_FILTER,
