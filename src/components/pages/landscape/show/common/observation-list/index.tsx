@@ -12,7 +12,14 @@ export const observationListParams = {
 
 export default function LandscapeObservationList({ sGroupList, title }) {
   const { t } = useTranslation();
-  const { speciesGroup, filter, location } = useObservationFilter();
+  const {
+    speciesGroup,
+    filter,
+    location,
+    observationData: {
+      ag: { groupSpeciesName }
+    }
+  } = useObservationFilter();
   const [validate, setValidate] = useState<boolean>(false);
   const [observationFilter, setFilter] = useState({ ...filter, sGroup: sGroupList[0] } || {});
   const uniqueSpecies = useUniqueSpecies({ filter: observationFilter, location });
@@ -20,7 +27,12 @@ export default function LandscapeObservationList({ sGroupList, title }) {
   const speciesGroupList = useMemo(
     () =>
       speciesGroup
-        ?.filter((o) => sGroupList.includes(o.id)) // removes All and non-specified from filter explicitly
+        ?.filter(
+          (o) =>
+            sGroupList.includes(o.id) &&
+            o.name &&
+            Object.keys(groupSpeciesName || {})?.includes(o.name)
+        ) // removes All and non-specified from filter explicitly
         .sort((a, b) => (a?.order || 0) - (b.order || 0)),
     speciesGroup || []
   );
@@ -35,7 +47,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
     setValidate(!validate);
     !validate
       ? setFilter({ ...observationFilter, validate: "validate" })
-      : setFilter({ ...observationFilter ,validate: ""});
+      : setFilter({ ...observationFilter, validate: "" });
   };
 
   return (
@@ -65,7 +77,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
             </Stack>
           </Flex>
           <LifeListTable
-            data={uniqueSpecies.speciesData.data}
+            data={uniqueSpecies?.speciesData?.data || []}
             speciesGroups={speciesGroupList}
             group={observationFilter.sGroup}
             loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
