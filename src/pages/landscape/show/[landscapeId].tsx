@@ -19,6 +19,18 @@ export const documentsListParams = {
   max: 6
 };
 
+const parseGeometryToString = (coord) => {
+  return coord?.length > 1
+    ? coord
+        ?.map((item) => {
+          return item.reduce((acc, polygon) => {
+            return acc.concat(`${polygon}`.replace(/[[\]]/g, ""));
+          }, "");
+        })
+        ?.join("/")
+    : `${coord}`.replace(/[[\]]/g, "");
+};
+
 const ObservationShowPage = ({
   landscape,
   landscapeShow,
@@ -46,12 +58,7 @@ export const getServerSideProps = async (ctx) => {
   const { data: landscape } = await axGetLandscapeById(ctx.query.landscapeId);
   const { data: landscapeShow } = await axGetLandscapeShowById(ctx.query.landscapeId, langId);
   const coord = wkt.parse(landscapeShow.wktData)?.coordinates;
-  const location = Array.isArray(coord)
-    ? coord.reduce((acc, item, index, arr) => {
-        const str = index < arr.length - 1 ? `${item}/` : `${item}`;
-        return acc.concat(str.replace(/[[\]]/g, ""));
-      }, "")
-    : `${coord}`.replace(/[[\]]/g, "");
+  const location = parseGeometryToString(coord);
   const initialFilterParams = { ...DEFAULT_FILTER, ...documentsListParams };
   const initialParamsObservation = {
     ...OBSERVATION_FILTER,
