@@ -17,10 +17,11 @@ const FieldEditor = dynamic(() => import("../editor"), { ssr: false });
 interface IFieldsProps {
   childs: any[];
   size?;
+  geoEntity?;
   ml?;
 }
 
-export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IFieldsProps) {
+export default function LandscapeFields({ childs = [], size = "lg", ml = 0,geoEntity="" }: IFieldsProps) {
   const { isLoggedIn } = useGlobalState();
   const [canEdit, setCanEdit] = useState(false);
   const { t } = useTranslation();
@@ -76,6 +77,7 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
               {child.header.toLowerCase() === SITE_CONFIG?.FLORA?.TITLE &&
                 SITE_CONFIG?.FLORA?.LIST && (
                   <LandscapeObservationList
+                  geoEntity={geoEntity}
                     title={t("landscape:observation.flora_list")}
                     sGroupList={SITE_CONFIG?.FLORA?.LIST}
                   />
@@ -83,6 +85,7 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
               {child.header.toLowerCase() === SITE_CONFIG?.FAUNA?.TITLE &&
                 SITE_CONFIG?.FAUNA?.LIST && (
                   <LandscapeObservationList
+                    geoEntity={geoEntity}
                     title={t("landscape:observation.fauna_list")}
                     sGroupList={SITE_CONFIG?.FAUNA?.LIST}
                   />

@@ -10,7 +10,7 @@ export const observationListParams = {
   geoShapeFilterField: "location"
 };
 
-export default function LandscapeObservationList({ sGroupList, title }) {
+export default function LandscapeObservationList({ sGroupList, title, geoEntity }) {
   const { t } = useTranslation();
   const {
     speciesGroup,
@@ -37,12 +37,6 @@ export default function LandscapeObservationList({ sGroupList, title }) {
     speciesGroup || []
   );
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "sGroup",
-    defaultValue: sGroupList[0],
-    onChange: (v) => setFilter({ ...observationFilter, sGroup: v && v !== "null" ? v : undefined })
-  });
-
   const handleToggle = () => {
     setValidate(!validate);
     !validate
@@ -50,12 +44,18 @@ export default function LandscapeObservationList({ sGroupList, title }) {
       : setFilter({ ...observationFilter, validate: "" });
   };
 
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: "sGroup",
+    defaultValue: sGroupList[0],
+    onChange: (v) => setFilter({ ...observationFilter, sGroup: v && v !== "null" ? v : undefined })
+  });
+
   return (
     <Box m={4}>
       <Heading mb={3} size="md">
         {title}
       </Heading>
-      {uniqueSpecies?.speciesData?.data?.list?.length > 0 ? (
+      {groupSpeciesName && uniqueSpecies?.speciesData?.data?.list?.length > 0 ? (
         <Box p={4} className="white-box">
           <Flex justifyContent="space-between">
             <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
@@ -81,7 +81,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
             speciesGroups={speciesGroupList}
             group={observationFilter.sGroup}
             loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
-            filter={filter}
+            filter={{ ...filter, geoEntity }}
           />
         </Box>
       ) : (

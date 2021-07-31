@@ -53,7 +53,7 @@ export default function LandscapeShowComponent({
         />
         <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Box>
-      <LandscapeFields childs={landscapeShow.contents.childs} />
+      <LandscapeFields geoEntity={landscape.shortName} childs={landscapeShow.contents.childs} />
       <Stack mb={3}>
         <Heading mb={3} size="lg">
           {t("landscape:related_documents")}
