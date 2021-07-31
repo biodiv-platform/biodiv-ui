@@ -10,14 +10,14 @@ export const observationListParams = {
   geoShapeFilterField: "location"
 };
 
-export default function LandscapeObservationList({ sGroupList, title, geoEntity }) {
+export default function LandscapeObservationList({ sGroupList, title }) {
   const { t } = useTranslation();
   const {
     speciesGroup,
     filter,
     location,
     observationData: {
-      ag: { groupSpeciesName }
+      ag: { groupSpeciesName, geoEntity }
     }
   } = useObservationFilter();
   const [validate, setValidate] = useState<boolean>(false);
@@ -81,7 +81,7 @@ export default function LandscapeObservationList({ sGroupList, title, geoEntity 
             speciesGroups={speciesGroupList}
             group={observationFilter.sGroup}
             loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
-            filter={{ ...filter, geoEntity }}
+            filter={{ ...filter, geoEntity: Object.keys(geoEntity||{})[0] }}
           />
         </Box>
       ) : (
