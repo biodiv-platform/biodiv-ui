@@ -2,14 +2,14 @@ import { Grid, GridItem, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
 import { SpeciesActivity } from "./activity";
-import SpeciesCommonNames from "./common-names";
+import SpeciesCommonNamesContainer from "./common-names";
 import SpeciesFields from "./fields";
 import SpeciesGallery from "./gallery";
 import SpeciesGroups from "./group";
 import SpeciesHeader from "./header";
 import SpeciesNavigation from "./navigation";
 import SpeciesSidebar from "./sidebar";
-import SpeciesSynonyms from "./synonyms";
+import SpeciesSynonymsContainer from "./synonyms";
 import { SpeciesProvider } from "./use-species";
 
 export default function SpeciesShowPageComponent({ species, permissions, licensesList }) {
@@ -26,8 +26,8 @@ export default function SpeciesShowPageComponent({ species, permissions, license
         <Grid templateColumns={{ md: "repeat(6, 1fr)" }} gap={4} mb={4}>
           <GridItem colSpan={4}>
             <SpeciesNavigation />
-            <SpeciesSynonyms />
-            <SpeciesCommonNames />
+            <SpeciesSynonymsContainer />
+            <SpeciesCommonNamesContainer />
             <SpeciesFields />
           </GridItem>
           <SpeciesSidebar />
