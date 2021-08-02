@@ -48,7 +48,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           <Box color="gray.600">
             <Text className="elipsis" title={t("observation:list.location")}>
               <LocationIcon mb={1} mr={2} />
-              {o.reverseGeocodedName}
+              {o.placeName}
             </Text>
             <Text title={t("common:observed_on")}>
               <CalendarIcon mb={1} mr={2} />
