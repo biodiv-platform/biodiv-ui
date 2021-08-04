@@ -1,7 +1,8 @@
 import { Box } from "@chakra-ui/react";
-import { TAXON } from "@static/events";
 import React from "react";
-import { emit } from "react-gbus";
+
+import useTaxonFilter from "../use-taxon";
+import StatusIcon from "./status-icon";
 
 const POSITION_COLOR = {
   WORKING: "yellow.300",
@@ -10,15 +11,18 @@ const POSITION_COLOR = {
 };
 
 export function TaxonRankCell({ cell, value }) {
+  const { setShowTaxon } = useTaxonFilter();
+
   return (
     <Box style={{ paddingLeft: cell.row.original.rankValue * 10 - 10 }}>
       <Box
         bg={POSITION_COLOR[cell.row.original.position]}
-        p={2}
+        pr={2}
+        py={2}
         cursor="pointer"
-        onClick={() => emit(TAXON.SELECTED, cell.row.original.id)}
-        borderRadius="md"
+        onClick={() => setShowTaxon(cell.row.original.id)}
       >
+        <StatusIcon status={cell.row.original.status} />
         {value}
       </Box>
     </Box>

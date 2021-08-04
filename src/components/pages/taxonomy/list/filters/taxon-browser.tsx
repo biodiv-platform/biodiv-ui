@@ -6,7 +6,8 @@ import {
 } from "@components/pages/observation/list/filters/taxon-browser/taxon-browser";
 import {
   getNewTreeData,
-  loopLoading
+  loopLoading,
+  mergeDeep
 } from "@components/pages/observation/list/filters/taxon-browser/taxon-browser-helpers";
 import TaxonResultArrows from "@components/pages/observation/list/filters/taxon-browser/taxon-result-arrows";
 import TaxonSuggest from "@components/pages/observation/list/filters/taxon-browser/taxon-suggest";
@@ -22,7 +23,7 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
     super(props);
     this.state = {
       treeData: [],
-      selectedKeys: this.props.initialTaxon ? this.props.initialTaxon.split(",") : [],
+      selectedKeys: this.props.initialTaxon ? this.props.initialTaxon?.split(",") : [],
       expandedKeys: [],
       resultsCount: -1
     };
@@ -42,9 +43,38 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
     this.setState(d);
   };
 
+  expandInitialTaxon = async () => {
+    if (!this.state.selectedKeys.length) {
+      return;
+    }
+
+    const treeData = await axGetTaxonList({
+      expand_taxon: true,
+      taxonIds: this.state.selectedKeys.toString()
+    });
+
+    if (!treeData.length) {
+      return;
+    }
+
+    const expandedKeys = Array.from(
+      new Set([...this.state.expandedKeys, ...(treeData?.[0]?.ids || [])])
+    );
+
+    this.setState({
+      treeData: mergeDeep(this.state.treeData, treeData),
+      expandedKeys
+    });
+
+    document.querySelectorAll(".rc-tree-node-selected")?.[0]?.scrollIntoView({ block: "center" });
+  };
+
   componentDidMount() {
     axGetTaxonList({}).then((treeData) => {
+      // sets root taxon browser nodes
       this.setState({ treeData });
+      // if `showTaxon` is passed in URL automatically opens modal
+      this.expandInitialTaxon();
     });
   }
 
@@ -95,5 +125,5 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
 export default function TaxonBrowserFilter() {
   const { filter, addFilter } = useTaxonFilter();
 
-  return <TaxonBrowserComponent initialTaxon={filter?.taxon} onTaxonChange={addFilter} />;
+  return <TaxonBrowserComponent initialTaxon={filter?.taxonId} onTaxonChange={addFilter} />;
 }

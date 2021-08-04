@@ -6,32 +6,23 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay,
-  useDisclosure
+  ModalOverlay
 } from "@chakra-ui/react";
-import { TAXON } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
-import { useListener } from "react-gbus";
 
 import useTaxonFilter from "../../use-taxon";
 import { TaxonModalTabs } from "./tabs";
 
 export default function TaxonShowModal() {
   const { t } = useTranslation();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { setModalTaxon } = useTaxonFilter();
+  const { showTaxon, setShowTaxon } = useTaxonFilter();
 
-  useListener(onOpen, [TAXON.SELECTED]);
-
-  const handleOnClose = () => {
-    onClose();
-    setModalTaxon(undefined);
-  };
+  const handleOnClose = () => setShowTaxon(undefined);
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={handleOnClose} size="6xl">
+      <Modal isOpen={showTaxon} onClose={handleOnClose} size="6xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{t("taxon:modal.title")}</ModalHeader>
@@ -40,7 +31,7 @@ export default function TaxonShowModal() {
             <TaxonModalTabs />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" onClick={onClose}>
+            <Button colorScheme="blue" onClick={handleOnClose}>
               {t("common:close")}
             </Button>
           </ModalFooter>

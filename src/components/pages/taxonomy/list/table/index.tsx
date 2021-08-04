@@ -18,12 +18,6 @@ const TaxonBox = styled.div`
 
 const taxonListRows = [
   {
-    Header: "ID",
-    accessor: "id",
-    isNumeric: true,
-    style: { width: "100px" }
-  },
-  {
     Header: "Name",
     accessor: "name",
     Cell: TaxonRankCell,
@@ -61,6 +55,7 @@ export default function TaxonListTable() {
           data={taxonListData.l}
           columns={taxonListRows}
           isSelectable={true}
+          size="sm"
           onSelectionChange={setSelectedTaxons}
         />
       )}

@@ -1,11 +1,10 @@
 import { axGetTaxonDetails, axGetTaxonListData } from "@services/taxonomy.service";
 import { isBrowser } from "@static/constants";
-import { TAXON } from "@static/events";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/taxon";
+import { removeEmptyKeys } from "@utils/basic";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useListener } from "react-gbus";
 import { useImmer } from "use-immer";
 
 interface TaxonFilterContextProps {
@@ -24,6 +23,9 @@ interface TaxonFilterContextProps {
 
   modalTaxon?;
   setModalTaxon?;
+
+  showTaxon?;
+  setShowTaxon?;
 }
 
 const TaxonFilterContext = createContext<TaxonFilterContextProps>({} as TaxonFilterContextProps);
@@ -33,14 +35,27 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
   const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: 0, hasMore: true });
   const [isLoading, setIsLoading] = useState<boolean>();
+
   const [selectedTaxons, setSelectedTaxons] = useState([]);
+
   const [modalTaxon, setModalTaxonI] = useState<any>();
+  const [showTaxon, setShowTaxon] = useState<any>(filter.f.showTaxon);
 
   useEffect(() => {
     if (isBrowser) {
-      window.history.pushState("", "", `?${stringify({ ...filter.f, offset: initialOffset })}`);
+      window.history.pushState(
+        "",
+        "",
+        `?${stringify(
+          removeEmptyKeys({
+            ...filter.f,
+            showTaxon,
+            offset: initialOffset
+          })
+        )}`
+      );
     }
-  }, [filter]);
+  }, [filter, modalTaxon]);
 
   const fetchListData = async () => {
     try {
@@ -99,14 +114,15 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
     });
   };
 
-  useListener(
-    (taxonId) => {
-      axGetTaxonDetails(taxonId).then(({ data: { taxonomyDefinition, ...extra } }) =>
+  useEffect(() => {
+    if (showTaxon) {
+      axGetTaxonDetails(showTaxon).then(({ data: { taxonomyDefinition, ...extra } }) =>
         setModalTaxonI({ ...taxonomyDefinition, ...extra })
       );
-    },
-    [TAXON.SELECTED]
-  );
+    } else {
+      setModalTaxonI(undefined);
+    }
+  }, [showTaxon]);
 
   const setModalTaxon = async (taxon) => {
     // Transformer to match data
@@ -117,7 +133,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
     };
 
     if (data) {
-      // update modal taxon instance
+      // update `modalTaxon` value
       setModalTaxonI(data);
 
       // update existing object in list
@@ -143,9 +159,15 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
         taxonListData,
         isLoading,
 
+        // for table multiple taxon selections
         selectedTaxons,
         setSelectedTaxons,
 
+        // Stores just clicked taxon ID
+        showTaxon,
+        setShowTaxon,
+
+        // fetches full taxon information once assigned to `showTaxon` for modal
         modalTaxon,
         setModalTaxon
       }}
