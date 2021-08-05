@@ -23,9 +23,11 @@ export default function MapDrawContainer() {
   const handleOnFeatureChange = (features) => {
     if (features.length > 0) {
       addFilter(FILTER_NAME, features[0]?.geometry?.coordinates.toString());
+      addFilter("geoShapeFilterField", "location");
       return;
     }
     removeFilter(FILTER_NAME);
+    removeFilter("geoShapeFilterField");
   };
 
   return (

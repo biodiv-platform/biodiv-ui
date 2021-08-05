@@ -29,6 +29,15 @@
       "validated": "मान्य"
     }
   },
+  "dataset_filter": {
+    "dataset": {
+      "title": "डेटासेट का नाम"
+    },
+    "datatable": {
+      "title": "डेटाटेबल नाम"
+    },
+    "title": "डेटासेट मेटाडेटा"
+  },
   "document_title": "शीर्षक",
   "item_type": {
     "title": "वस्तु का प्रकार"

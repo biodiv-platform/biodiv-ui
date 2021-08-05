@@ -1,5 +1,16 @@
 {
+  "All": "सभी",
+  "Validate": "मान्य",
   "download_map": "मानचित्र डाउनलोड करें",
+  "no_species_found": "कोई प्रजाति सूची नहीं मिली",
+  "observation": {
+    "fauna_list": "जीवों की सूची",
+    "flora_list": "वनस्पति सूची",
+    "life_list": {
+      "title": "अवलोकन सूची"
+    },
+    "species_filter": "प्रजाति फ़िल्टर"
+  },
   "related_documents": "संबंधित दस्तावेज",
   "site_number": "साइट #",
   "title": "संरक्षित क्षेत्र",

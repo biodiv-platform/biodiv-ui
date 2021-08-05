@@ -12,6 +12,7 @@ import React from "react";
 
 import CustomFieldsFilter from "./custom-fields";
 import DataQuality from "./data-quality";
+import DatasetFilter from "./dataset";
 import Location from "./location";
 import MediaType from "./media-type";
 import Name from "./name";
@@ -100,6 +101,19 @@ export default function FiltersList() {
           <DataQuality />
         </AccordionPanel>
       </AccordionItem>
+
+      <AccordionItem>
+        <AccordionButton>
+          <Box flex={1} textAlign="left">
+            {t("filters:dataset_filter.title")}
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel>
+          <DatasetFilter />
+        </AccordionPanel>
+      </AccordionItem>
+
 
       <AccordionItem>
         {({ isExpanded }) => (

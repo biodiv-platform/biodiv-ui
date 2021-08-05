@@ -28,6 +28,7 @@ const SITE_CONFIG_EXAMPLE = {
   FILTER: {
     DISTRICT: true,
     STATE: true,
+    PROTECTED_AREAS:true,
     TAHSIL: true
   },
   FOOTER: {
