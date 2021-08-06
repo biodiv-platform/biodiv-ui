@@ -2,8 +2,8 @@ import { axGetTaxonDetails, axGetTaxonListData } from "@services/taxonomy.servic
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/taxon";
 import { removeEmptyKeys } from "@utils/basic";
+import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 

@@ -13,6 +13,7 @@
     "updated": "Group Administrators Updated Successfully"
   },
   "confirm_closed_group": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
+  "confirm_leave": "Leave Group?",
   "create": {
     "error": "There was some error while creating Group",
     "success": "Group Created Successfully",
@@ -121,9 +122,15 @@
   "invite_moderators": "Invite Moderators",
   "join": "Join Group",
   "join_without_invitation": "Allow user to join the group without invitation",
+  "leave": "Leave Group",
+  "list": {
+    "title": "Groups"
+  },
   "member": {
     "joined": "Group joined successfully",
     "joined_error": "Unable to join Group",
+    "left": "Group left successfully",
+    "left_error": "Unable to leave Group",
     "requested": "Group join request sent"
   },
   "name": "Group Name",

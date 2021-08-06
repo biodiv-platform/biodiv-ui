@@ -1,7 +1,7 @@
 import useGlobalState from "@hooks/use-global-state";
+import { parseUrl, stringify } from "@utils/query-string";
 import NextLink, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
-import { parse, stringify } from "querystring";
 import React, { cloneElement } from "react";
 
 interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
@@ -34,7 +34,7 @@ const getLocalPath = (href, params = {}, prefixGroup?, currentGroup?) => {
     ? groupPrefixPath.replace(/^.*\/\/[^\/]+/, "")
     : groupPrefixPath;
 
-  const newParams = stringify({ ...parse(href.split("?")[1]), ...params });
+  const newParams = stringify({ ...parseUrl(href).query, ...params });
 
   return cleanPath + (newParams ? `?${newParams}` : "");
 };

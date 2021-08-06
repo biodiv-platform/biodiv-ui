@@ -1,1 +1,1 @@
-export { default } from "../../../observation/list";
+export { default, getServerSideProps } from "../../../observation/list";

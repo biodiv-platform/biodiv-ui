@@ -92,7 +92,7 @@ export function BasicTable({
                 isNumeric={column.isNumeric}
               >
                 {column.render("Header")}
-                <chakra.span pl="4">
+                <chakra.span pl="2">
                   {column.isSorted ? (
                     column.isSortedDesc ? (
                       <TriangleDownIcon aria-label="sorted descending" />

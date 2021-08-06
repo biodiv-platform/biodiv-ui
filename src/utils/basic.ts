@@ -64,4 +64,4 @@ export const normalizeFileName = (s) => `${nanoid()}_${s.replace(/([^a-z0-9\.\s]
  * @return {*}  {*}
  */
 export const removeEmptyKeys = (obj = {}): any =>
-  Object.fromEntries(Object.entries(obj).filter(([, v]) => v));
+  Object.fromEntries(Object.entries(obj).filter(([, v]) => (Array.isArray(v) ? v.length : v)));

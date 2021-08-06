@@ -46,6 +46,7 @@
     "hide": "Simplified Edit",
     "show": "Advanced Edit"
   },
+  "min_three_chars": "Input at least 3 characters to search",
   "my_uploads": "Draft Media",
   "my_uploads_sort": {
     "taken_on": "Taken on",
@@ -80,6 +81,5 @@
   },
   "use_in_observation": "Use Selected",
   "wkt": "WKT",
-  "youtube_placeholder": "Input YouTube link",
-  "min_three_chars": "Input at least 3 characters to search"
+  "youtube_placeholder": "Input YouTube link"
 }

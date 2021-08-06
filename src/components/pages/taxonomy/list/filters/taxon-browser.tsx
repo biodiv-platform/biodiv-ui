@@ -23,7 +23,7 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
     super(props);
     this.state = {
       treeData: [],
-      selectedKeys: this.props.initialTaxon ? this.props.initialTaxon?.split(",") : [],
+      selectedKeys: this.props.initialTaxon ? this.props.initialTaxon.toString()?.split(",") : [],
       expandedKeys: [],
       resultsCount: -1
     };

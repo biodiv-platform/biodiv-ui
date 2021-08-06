@@ -15,7 +15,12 @@ interface SidebarProps {
   documentPath?;
 }
 
-export default function Sidebar({ showDocument, speciesGroups, habitatList, documentPath }: SidebarProps) {
+export default function Sidebar({
+  showDocument,
+  speciesGroups,
+  habitatList,
+  documentPath
+}: SidebarProps) {
   const { t } = useTranslation();
 
   return (
