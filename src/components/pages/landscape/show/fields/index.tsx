@@ -73,20 +73,18 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
                   />
                 )
               )}
-              {child.id === SITE_CONFIG?.FLORA?.ID &&
-                SITE_CONFIG?.FLORA?.LIST && (
-                  <LandscapeObservationList
-                    title={t("landscape:observation.flora_list")}
-                    sGroupList={SITE_CONFIG?.FLORA?.LIST}
-                  />
-                )}
-              {child.id=== SITE_CONFIG?.FAUNA?.ID &&
-                SITE_CONFIG?.FAUNA?.LIST && (
-                  <LandscapeObservationList
-                    title={t("landscape:observation.fauna_list")}
-                    sGroupList={SITE_CONFIG?.FAUNA?.LIST}
-                  />
-                )}
+              {child.id === SITE_CONFIG?.FLORA?.ID && SITE_CONFIG?.FLORA?.LIST && (
+                <LandscapeObservationList
+                  title={t("landscape:observation.flora_list")}
+                  sGroupList={SITE_CONFIG?.FLORA?.LIST}
+                />
+              )}
+              {child.id === SITE_CONFIG?.FAUNA?.ID && SITE_CONFIG?.FAUNA?.LIST && (
+                <LandscapeObservationList
+                  title={t("landscape:observation.fauna_list")}
+                  sGroupList={SITE_CONFIG?.FAUNA?.LIST}
+                />
+              )}
             </Box>
             {child.childs.length > 0 && <LandscapeFields childs={child.childs} size="md" ml={4} />}
           </React.Fragment>

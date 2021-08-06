@@ -2,6 +2,7 @@
   "accurate": "Accurate",
   "add_observation": "Add Observation",
   "cf_update_success": "Successfully Updated Observation Custom Field",
+  "checklistAnnotation": "DataTable Fields",
   "common_name": "Common Name",
   "continue": "Continue",
   "contributor": "Contributor",
@@ -9,7 +10,6 @@
   "created_on": "Created on",
   "creating": "We're creating your observation",
   "custom_fields": "Custom Fields",
-  "checklistAnnotation":"DataTable Fields",
   "delete_file": {
     "error": "Unable to process file,Please try again later",
     "failed": "Unable to delete file, please try again later",

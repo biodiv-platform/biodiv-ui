@@ -81,7 +81,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
             speciesGroups={speciesGroupList}
             group={observationFilter.sGroup}
             loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
-            filter={{ ...filter, geoEntity: Object.keys(geoEntity||{})[0] }}
+            filter={{ ...filter, geoEntity: Object.keys(geoEntity || {})[0] }}
           />
         </Box>
       ) : (

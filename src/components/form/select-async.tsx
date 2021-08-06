@@ -54,7 +54,7 @@ export const SelectAsyncInputField = ({
   placeholder,
   onChange,
   eventCallback,
-  isCreatable=true,
+  isCreatable = true,
   selectRef,
   isRequired,
   onQuery = dummyOnQuery,

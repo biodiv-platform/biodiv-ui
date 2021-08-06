@@ -20,7 +20,6 @@ export const documentsListParams = {
   max: 6
 };
 
-
 const ObservationShowPage = ({
   landscape,
   landscapeShow,
