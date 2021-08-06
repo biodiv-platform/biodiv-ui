@@ -291,6 +291,10 @@ export interface MapAggregationResponse {
   groupSpeciesName?: {
     [name: string]: number; // int64
   };
+  geoEntity?: {
+    [name: string]: number; // int64
+  };
+
   groupStatus?: {
     [name: string]: number; // int64
   };
@@ -548,6 +552,7 @@ export interface ObservationListPageMapper {
   noOfImages?: number; // int64
   noOfAudios?: number; // int64
   noOfVideos?: number; // int64
+  placeName?:string;
   reprImageUrl?: string;
   user?: UserIbp;
   factValuePair?: FactValuePair[];
@@ -726,6 +731,8 @@ export interface ResourceRating {
 }
 export interface ShowData {
   observation?: Observation;
+  checkListAnnotation?
+  dataTable?
   factValuePair?: FactValuePair[];
   observationResource?: ResourceData[];
   userGroups?: UserGroupIbp[];

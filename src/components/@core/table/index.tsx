@@ -15,6 +15,7 @@ interface BasicTableProps {
   columns: BasicTableColumn[];
   data: any[];
   size?;
+  translateHeader?: boolean;
   tableStyle?: React.CSSProperties;
   isSelectable?;
   onSelectionChange?;
@@ -38,6 +39,7 @@ export function BasicTable({
   data,
   tableStyle,
   size,
+  translateHeader,
   isSelectable,
   onSelectionChange
 }: BasicTableProps) {
@@ -91,7 +93,7 @@ export function BasicTable({
                 {...column.getHeaderProps(column.getSortByToggleProps())}
                 isNumeric={column.isNumeric}
               >
-                {column.render("Header")}
+                {translateHeader? t(column.Header) : column.render("Header")}
                 <chakra.span pl="2">
                   {column.isSorted ? (
                     column.isSortedDesc ? (

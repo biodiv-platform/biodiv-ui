@@ -9,7 +9,7 @@ const API_ENDPOINT = isBrowser ? SITE_CONFIG.SITE.API_ENDPOINT : SITE_CONFIG.SIT
 
 export const ENDPOINT = {
   ACTIVITY: `${API_ENDPOINT}activity-api/api`,
-  API: `${API_ENDPOINT}biodiv-api`,
+  API: `${SITE_CONFIG.SITE.URL}/api`,
   DATATABLE: `${API_ENDPOINT}dataTable-api/api`,
   DOCUMENT: `${API_ENDPOINT}document-api/api`,
   ESMODULE: `${API_ENDPOINT}esmodule-api/api`,

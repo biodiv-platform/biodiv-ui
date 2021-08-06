@@ -1,5 +1,16 @@
 {
+  "All": "Tous",
+  "Validate": "Valider",
   "download_map": "Télécharger la carte",
+  "no_species_found": "Aucune liste d'espèces trouvée",
+  "observation": {
+    "fauna_list": "Liste de la faune",
+    "flora_list": "Liste de la flore",
+    "life_list": {
+      "title": "Liste d'observations"
+    },
+    "species_filter": "Filtre d'espèces"
+  },
   "related_documents": "Documents connexes",
   "site_number": "Placer #",
   "title": "Zones protégées",

@@ -9,7 +9,7 @@ import { ShowData, SpeciesGroup } from "@interfaces/observation";
 import { axQueryTagsByText, axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
-import { getInjectableHTML } from "@utils/text";
+import { covertToSentenceCase, getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -83,6 +83,15 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
           </ResponsiveInfo>
         )}
 
+        {o.dataTable?.id && (
+          <ResponsiveInfo title="common:datatable">
+            <LocalLink href={`/datatable/show/${o.dataTable?.id}`}>
+              <BlueLink>
+                <i> {o.dataTable?.title || t("common:unknown")}</i>
+              </BlueLink>
+            </LocalLink>
+          </ResponsiveInfo>
+        )}
         <ResponsiveInfo title="form:tags">
           <Tags
             items={o.tags}
@@ -91,6 +100,11 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
             updateFunc={axUpdateObservationTags}
           />
         </ResponsiveInfo>
+        {o?.dataTable?.geographicalCoverageLocationScale && (
+          <ResponsiveInfo title="observation:location_scale">
+            {covertToSentenceCase(o?.dataTable?.geographicalCoverageLocationScale)}
+          </ResponsiveInfo>
+        )}
       </SimpleGrid>
     </Box>
   );

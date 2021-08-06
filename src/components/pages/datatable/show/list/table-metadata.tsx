@@ -4,7 +4,6 @@ import SpeciesGroupBox from "@components/pages/observation/show/info/species-gro
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { getUserImage } from "@utils/media";
-import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const doFilter = (data) => {
@@ -27,13 +26,12 @@ export const parseObservationData = (data) => {
 
 export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
   const header = doFilter(data);
-  const { t } = useTranslation();
 
   return header.map((item) => {
     switch (item) {
       case "id":
         return {
-          Header: t("datatable.table.id"),
+          Header:"datatable:table.id",
           accessor: "id",
           Cell: ({ value }) => (
             <a href={`/observation/show/${value}`}>
@@ -43,7 +41,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "scientificName":
         return {
-          Header: t("datatable.table.scientificName"),
+          Header: "datatable:table.scientificName",
           accessor: "scientificName",
           Cell: ({ value }) => (
             <Text key={value} fontStyle="italic">
@@ -53,7 +51,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "userInfo":
         return {
-          Header: t("datatable.table.userInfo"),
+          Header:"datatable:table.userInfo",
           accessor: "userInfo",
           Cell: ({ value }) => (
             <a href={`/user/show/${value.id}`}>
@@ -68,7 +66,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "sGroup":
         return {
-          Header: t("datatable.table.sGroup"),
+          Header: "datatable:table.sGroup",
           accessor: "sGroup",
           Cell: ({ value }) => (
             <SpeciesGroupBox
@@ -81,7 +79,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "geoPrivacy":
         return {
-          Header: t("datatable.table.geoPrivacy"),
+          Header:"datatable:table.geoPrivacy" ,
           accessor: "geoPrivacy",
           Cell: ({ value }) =>
             value ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />

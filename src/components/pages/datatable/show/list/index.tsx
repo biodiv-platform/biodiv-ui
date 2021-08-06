@@ -30,7 +30,7 @@ export default function ObservationsList({ dataTable: dt, speciesGroups }) {
         scrollableTarget="scrollableDiv"
       >
         <ResponsiveContainer>
-          <BasicTable data={fieldData || []} columns={tableMeta} />
+          <BasicTable translateHeader data={fieldData || []} columns={tableMeta} />
         </ResponsiveContainer>
       </InfiniteScroll>
     </Box>

@@ -49,3 +49,15 @@ export const doTaxonSearch = async (term) => {
     return [];
   }
 };
+
+/**
+ * removes `memory-cache` data from memory
+ *
+ */
+export const axClearMemoryCache = async () => {
+  try {
+    await plainHttp.get(`${ENDPOINT.API}/memory-cache/clear`);
+  } catch (e) {
+    console.error(e);
+  }
+};

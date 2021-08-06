@@ -13,7 +13,9 @@ import FilterMultiSelectInput, { FilterMultiSelectProps } from "./input";
 export default function FilterMultiSelectPanel({
   filterKey,
   translateKey = "",
-  options
+  filterKeyList,
+  useIndexFilter,
+  options = null
 }: FilterMultiSelectProps) {
   const { t } = useTranslation();
   const label = t(translateKey);
@@ -30,7 +32,13 @@ export default function FilterMultiSelectPanel({
           </AccordionButton>
           <AccordionPanel>
             {isExpanded && (
-              <FilterMultiSelectInput filterKey={filterKey} label={label} options={options} />
+              <FilterMultiSelectInput
+                filterKey={filterKey}
+                useIndexFilter={useIndexFilter}
+                filterKeyList={filterKeyList}
+                label={label}
+                options={options}
+              />
             )}
           </AccordionPanel>
         </>
