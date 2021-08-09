@@ -11,7 +11,12 @@ import { Editor } from "@tinymce/tinymce-react";
 import Head from "next/head";
 import React from "react";
 
-export default function WYSIWYGEditor({ uploadHandler, ...props }) {
+interface WYSIWYGEditorProps {
+  uploadHandler?;
+  [key: string]: any;
+}
+
+export default function WYSIWYGEditor({ uploadHandler, ...props }: WYSIWYGEditorProps) {
   return (
     <>
       <Head>
@@ -34,7 +39,7 @@ export default function WYSIWYGEditor({ uploadHandler, ...props }) {
           height: "300px",
           relative_urls: false,
           convert_urls: false,
-          plugins: ["link", "image", "table", "code", "lists"],
+          plugins: ["link", "table", "code", "lists", uploadHandler ? "image" : "na"],
           toolbar:
             "undo redo | bold italic numlist bullist | alignleft aligncenter alignright alignjustify | link image table | code",
           images_upload_handler: uploadHandler,

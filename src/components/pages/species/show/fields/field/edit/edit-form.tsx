@@ -17,7 +17,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { AssetStatus } from "@interfaces/custom";
-import { axUpdateSpeciesField, axUploadSpeciesEditorResource } from "@services/species.service";
+import { axUpdateSpeciesField } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import dynamic from "next/dynamic";
@@ -129,12 +129,14 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
           <ModalCloseButton />
           <ModalBody>
             <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
-              <WYSIWYGField
-                name="sfDescription"
-                key="xo"
-                uploadHandler={axUploadSpeciesEditorResource}
-              />
+              <WYSIWYGField name="sfDescription" key="xo" />
             </Box>
+            <DropzoneFieldContainer
+              hidden={referencesOnly}
+              name="speciesFieldResource"
+              isCreate={false}
+              licensesList={licensesList}
+            />
             <TextBoxField
               hidden={referencesOnly}
               name="attributions"
@@ -154,12 +156,6 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
               options={licensesList}
             />
             <ReferencesField name="references" label={t("species:references")} />
-            <DropzoneFieldContainer
-              hidden={referencesOnly}
-              name="speciesFieldResource"
-              isCreate={false}
-              licensesList={licensesList}
-            />
           </ModalBody>
           <ModalFooter>
             <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />

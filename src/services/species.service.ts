@@ -1,7 +1,6 @@
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
-import { nanoid } from "nanoid";
 
 export const axGetSpeciesById = async (speciesId) => {
   try {
@@ -89,26 +88,6 @@ export const axRemoveSpeciesField = async (speciesFieldId) => {
   } catch (e) {
     return { success: false };
   }
-};
-
-export const axUploadSpeciesEditorResource = (blobInfo, success, failure) => {
-  const formData = new FormData();
-  formData.append("upload", blobInfo.blob(), blobInfo.filename());
-  formData.append("hash", nanoid());
-  formData.append("directory", "species");
-
-  http
-    .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    })
-    .then((r) => {
-      success(`${ENDPOINT.FILES}/get/raw/species${r.data.uri}`);
-    })
-    .catch(() => {
-      failure("Error");
-    });
 };
 
 export const axUpdateSpeciesCommonName = async (speciesId, payload) => {
