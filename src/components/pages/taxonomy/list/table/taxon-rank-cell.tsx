@@ -19,6 +19,7 @@ export function TaxonRankCell({ cell, value }) {
         bg={POSITION_COLOR[cell.row.original.position]}
         pr={2}
         py={2}
+        my="0.1rem"
         cursor="pointer"
         onClick={() => setShowTaxon(cell.row.original.id)}
       >

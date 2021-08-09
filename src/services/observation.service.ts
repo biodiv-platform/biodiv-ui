@@ -364,6 +364,7 @@ export const axGetListData = async (
     );
     return { success: true, data };
   } catch (e) {
+    console.error(e);
     return { success: false, data: {} };
   }
 };
