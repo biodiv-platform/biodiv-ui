@@ -62,7 +62,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
           Yup.object().shape({
             id: Yup.mixed(),
             title: Yup.string().required(),
-            url: Yup.string()
+            url: Yup.string().nullable()
           })
         ),
         speciesFieldResource: Yup.array().nullable()
