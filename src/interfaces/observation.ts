@@ -437,7 +437,7 @@ export interface ObservationListPageMapper {
   noOfImages?: number; // int64
   noOfAudios?: number; // int64
   noOfVideos?: number; // int64
-  placeName?:string;
+  placeName?: string;
   reprImageUrl?: string;
   user?: UserIbp;
   factValuePair?: FactValuePair[];
@@ -615,8 +615,8 @@ export interface ResourceRating {
 }
 export interface ShowData {
   observation?: Observation;
-  checkListAnnotation?
-  dataTable?
+  checkListAnnotation?;
+  dataTable?;
   factValuePair?: FactValuePair[];
   observationResource?: ResourceData[];
   userGroups?: UserGroupIbp[];

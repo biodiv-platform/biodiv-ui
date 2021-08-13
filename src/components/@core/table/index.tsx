@@ -36,7 +36,7 @@ export function BasicTable({ columns, data, tableStyle, translateHeader }: Basic
                 {...column.getHeaderProps(column.getSortByToggleProps())}
                 isNumeric={column.isNumeric}
               >
-                {translateHeader? t(column.Header) : column.render("Header")}
+                {translateHeader ? t(column.Header) : column.render("Header")}
                 <chakra.span pl="4">
                   {column.isSorted ? (
                     column.isSortedDesc ? (

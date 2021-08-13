@@ -1,4 +1,5 @@
 {
+  "Download": "",
   "about": "À propos",
   "autofill_with_google": "Auto-enregistrement avec Google",
   "change_password": "Changer le mot de passe",
@@ -10,11 +11,13 @@
     "success": "Utilisateur supprimé avec succès",
     "title": "Supprimer l'utilisateur"
   },
+  "download_logs": "Télécharger les journaux",
   "edit_profile": "Editer le profil",
   "email": "E-mail",
   "enabled": "Compte activé",
   "existing_user": "Vous avez déjà un compte?",
   "expired": "Compte expiré",
+  "file_not_found": "Fichier non trouvé",
   "gender": "Genre",
   "hide_email": "Cacher l'adresse électronique",
   "identification_mail": "Permettre aux autres utilisateurs de me prévenir",

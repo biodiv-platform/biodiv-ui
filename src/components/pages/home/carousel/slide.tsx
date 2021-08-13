@@ -5,14 +5,10 @@ import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React from "react";
 
 export default function Slide({ resource }) {
-  const resourceType =  resource.authorId? RESOURCE_CTX.OBSERVATION:RESOURCE_CTX.USERGROUPS;
+  const resourceType = resource.authorId ? RESOURCE_CTX.OBSERVATION : RESOURCE_CTX.USERGROUPS;
   const SlideImage = () => (
     <Image
-      src={getResourceThumbnail(
-        resourceType,
-        resource?.fileName,
-        RESOURCE_SIZE.PREVIEW
-      )}
+      src={getResourceThumbnail(resourceType, resource?.fileName, RESOURCE_SIZE.PREVIEW)}
       h={{ base: 240, md: 420, lg: 500 }}
       w="full"
       objectFit="cover"

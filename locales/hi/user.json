@@ -1,4 +1,5 @@
 {
+  "Download": "",
   "about": "तकरीबन",
   "autofill_with_google": "Google के साथ ऑटोफिल",
   "change_password": "पासवर्ड बदलें",
@@ -10,11 +11,13 @@
     "success": "उपयोगकर्ता सफलतापूर्वक हटा दिया गया",
     "title": "उपभोक्ता मिटायें"
   },
+  "download_logs": "लॉग डाउनलोड करें",
   "edit_profile": "प्रोफ़ाइल संपादित करें",
   "email": "ईमेल",
   "enabled": "खाता सक्षम",
   "existing_user": "पहले से ही एक खाता है?",
   "expired": "खाता समाप्त हो गया",
+  "file_not_found": "फ़ाइल प्राप्त नहीं हुई",
   "gender": "लिंग",
   "hide_email": "ई - मेल छिपाएं",
   "identification_mail": "अन्य उपयोगकर्ताओं को मुझे सूचित करने की अनुमति दें",

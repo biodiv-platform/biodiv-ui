@@ -15,17 +15,19 @@ export default function LocationFilter() {
     }
   } = useObservationFilter();
   const STATE_OPTIONS = states?.map((state) => ({ label: state, value: state, stat: state }));
-  const GEO_ENTITY_LOCATION = geoEntity && Object.keys(geoEntity).map((place) => ({
-    label: place,
-    value: place,
-    stat: place
-  }));
+  const GEO_ENTITY_LOCATION =
+    geoEntity &&
+    Object.keys(geoEntity).map((place) => ({
+      label: place,
+      value: place,
+      stat: place
+    }));
 
   return (
     <SubAccordion>
       <MapAreaFilter />
 
-      {SITE_CONFIG.FILTER.STATE  && (
+      {SITE_CONFIG.FILTER.STATE && (
         <CheckboxFilterPanel
           translateKey="filters:location.state."
           filterKey="state"

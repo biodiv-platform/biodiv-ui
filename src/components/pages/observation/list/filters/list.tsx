@@ -114,7 +114,6 @@ export default function FiltersList() {
         </AccordionPanel>
       </AccordionItem>
 
-
       <AccordionItem>
         {({ isExpanded }) => (
           <>

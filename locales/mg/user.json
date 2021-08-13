@@ -1,4 +1,5 @@
 {
+  "Download": "",
   "about": "About",
   "autofill_with_google": "Autofill miaraka amin'ny google",
   "change_password": "Hanova tenimiafina",
@@ -10,11 +11,13 @@
     "success": "Nesorina soa aman-tsara ny mpampiasa",
     "title": "Hamafa ny mpampiasa"
   },
+  "download_logs": "Download Logs",
   "edit_profile": "Profile edit",
   "email": "Email",
   "enabled": "Namboarina ny kaonty",
   "existing_user": "Efa manana kaonty ve ianao?",
   "expired": "Tapitra ny kaonty",
+  "file_not_found": "Tsy hita ny fisie",
   "gender": "lahy sy ny vavy",
   "hide_email": "Afeno ny mailaka",
   "identification_mail": "Avelao ny mpampiasa hafa hampandre ahy",

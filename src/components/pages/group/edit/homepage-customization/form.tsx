@@ -13,7 +13,9 @@ import GallerySetup from "./gallery-setup";
 
 export default function HomePageCustomizationForm({ userGroupId, homePageDetails }) {
   const { t } = useTranslation();
-  const [galleryList, setGalleryList] = useState(homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []);
+  const [galleryList, setGalleryList] = useState(
+    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
+  );
   const [isCreate, setIsCreate] = useState(false);
 
   const {
@@ -52,7 +54,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
     }
   });
 
-  const handleFormSubmit = async ({gallerySlider,...value}) => {
+  const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
       gallerySlider: galleryList.reduce((acc, item, index) => {
         if (!item.id) {
