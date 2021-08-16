@@ -8,7 +8,7 @@ import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 
 const doFilter = (data) => {
-  const { params, filterUrl, ...others } = data[0];
+  const { params, id, filterUrl, ...others } = data[0];
   return data.length
     ? Object.keys({ ...others })
         .map((key) => [key, data.some((d) => !!d[key])]) // tries to find truthy value for each key
@@ -34,7 +34,7 @@ export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
           accessor: "sourceType",
           Cell: ({ value }) => (
             <a href={`${data[index].filterUrl}`}>
-              <BlueLink> {value} </BlueLink>
+              <BlueLink> {value||"Unkown"} </BlueLink>
             </a>
           )
         };

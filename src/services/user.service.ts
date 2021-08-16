@@ -145,8 +145,15 @@ export const axGetDownloadLogsList = async (params) => {
 
 export const axDownloadFile = async (documentPath) => {
   try {
-    const { data } = await http.get(`${documentPath}`, { responseType: "blob" });
-    return { success: true, data };
+    const response = await plainHttp.get(`${ENDPOINT.RAW}/${documentPath}`, { responseType: "blob" });
+    const type = response.headers['content-type']
+      const blob = new Blob([response.data], { type: type })
+      const link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = documentPath.split("/")[documentPath.split("/").length-1]
+      link.click()
+      
+    return { success: true };
   } catch (e) {
     return { success: false, data: {} };
   }
