@@ -1,5 +1,4 @@
 {
-  "Download": "",
   "about": "About",
   "autofill_with_google": "Autofill miaraka amin'ny google",
   "change_password": "Hanova tenimiafina",
@@ -11,6 +10,7 @@
     "success": "Nesorina soa aman-tsara ny mpampiasa",
     "title": "Hamafa ny mpampiasa"
   },
+  "download": "DOWNLOAD",
   "download_logs": "Download Logs",
   "edit_profile": "Profile edit",
   "email": "Email",

@@ -1,5 +1,4 @@
 {
-  "Download": "",
   "about": "तकरीबन",
   "autofill_with_google": "Google के साथ ऑटोफिल",
   "change_password": "पासवर्ड बदलें",
@@ -11,6 +10,7 @@
     "success": "उपयोगकर्ता सफलतापूर्वक हटा दिया गया",
     "title": "उपभोक्ता मिटायें"
   },
+  "download": "डाउनलोड",
   "download_logs": "लॉग डाउनलोड करें",
   "edit_profile": "प्रोफ़ाइल संपादित करें",
   "email": "ईमेल",

@@ -48,6 +48,7 @@ export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
                 borderRadius={50}
                 title={value.name}
                 boxSize="3rem"
+                fallbackSrc={`/api/avatar?t=${value.name}&s=${100}`}
                 src={getUserImage(value.profilePic, value.name, 100)}
               />
             </a>

@@ -1,5 +1,4 @@
 {
-  "Download": "",
   "about": "À propos",
   "autofill_with_google": "Auto-enregistrement avec Google",
   "change_password": "Changer le mot de passe",
@@ -11,6 +10,7 @@
     "success": "Utilisateur supprimé avec succès",
     "title": "Supprimer l'utilisateur"
   },
+  "download": "Télécharger",
   "download_logs": "Télécharger les journaux",
   "edit_profile": "Editer le profil",
   "email": "E-mail",

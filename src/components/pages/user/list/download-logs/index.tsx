@@ -21,7 +21,7 @@ export default function DownloadLogListComponent() {
         px={4}
       >
         {downloadLogData && downloadLogData.n > 0 && (
-          <Text color="gray.600" mt={4}>
+          <Text color="gray.600" m={4}>
             {format(downloadLogData.n)} {t("user:download_logs")}
           </Text>
         )}
