@@ -13,7 +13,6 @@ import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
-import { axUpdateSpeciesSynonym } from "@services/species.service";
 import { axGetTaxonRanks } from "@services/taxonomy.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -21,11 +20,24 @@ import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import useSpecies from "../use-species";
+interface SynonymFormProps {
+  synonym;
+  onUpdate;
+  onClose;
+  speciesId?;
+  taxonId?;
+  updateFunc;
+}
 
-export default function SpeciesSynonymForm({ synonym, onUpdate, onClose }) {
+export default function SynonymForm({
+  synonym,
+  onUpdate,
+  onClose,
+  speciesId,
+  taxonId,
+  updateFunc
+}: SynonymFormProps) {
   const { t } = useTranslation();
-  const { species } = useSpecies();
 
   const [taxonRanks, setTaxonRanks] = useState([]);
 
@@ -61,7 +73,7 @@ export default function SpeciesSynonymForm({ synonym, onUpdate, onClose }) {
   const handleOnSubmit = async (values) => {
     const payload = { id: synonym.id, ...values };
 
-    const { success, data } = await axUpdateSpeciesSynonym(species.species.id, payload);
+    const { success, data } = await updateFunc(speciesId, taxonId, payload);
 
     if (success) {
       onUpdate(data);

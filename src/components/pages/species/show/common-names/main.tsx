@@ -5,7 +5,23 @@ import React, { useMemo, useState } from "react";
 import { CommonNameAdd, CommonNameEditButtons } from "./actions";
 import { CommonNameEditModal } from "./edit-modal";
 
-export default function SpeciesCommonNames({ commonNames, isContributor }) {
+interface CommonNamesListProps {
+  commonNames;
+  isContributor;
+  speciesId?;
+  taxonId?;
+  updateFunc;
+  deleteFunc;
+}
+
+export default function CommonNamesList({
+  commonNames,
+  isContributor,
+  speciesId,
+  taxonId,
+  updateFunc,
+  deleteFunc
+}: CommonNamesListProps) {
   const { t } = useTranslation();
   const [commonNamesList, setCommonNamesList] = useState(commonNames || []);
 
@@ -22,7 +38,13 @@ export default function SpeciesCommonNames({ commonNames, isContributor }) {
 
   return (
     <>
-      <CommonNameEditModal onUpdate={setCommonNamesList} />
+      <CommonNameEditModal
+        onUpdate={setCommonNamesList}
+        updateFunc={updateFunc}
+        deleteFunc={deleteFunc}
+        speciesId={speciesId}
+        taxonId={taxonId}
+      />
       <Table size="sm" variant="striped" w="full">
         <Tbody>
           {languagesList.length ? (
@@ -36,7 +58,10 @@ export default function SpeciesCommonNames({ commonNames, isContributor }) {
                     {languagesData[language].map((commonName) => (
                       <ListItem key={commonName.name}>
                         {isContributor ? (
-                          <CommonNameEditButtons commonName={commonName} />
+                          <CommonNameEditButtons
+                            commonName={commonName}
+                            showPreferred={speciesId}
+                          />
                         ) : (
                           <div>{commonName.name}</div>
                         )}

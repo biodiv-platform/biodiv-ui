@@ -5,14 +5,36 @@ import React, { useState } from "react";
 import { SynonymAdd, SynonymEditButtons } from "./actions";
 import SynonymEditModal from "./edit-modal";
 
-export default function SpeciesSynonym({ synonyms, isContributor }) {
+interface SynonymListProps {
+  synonyms;
+  isContributor;
+  speciesId?;
+  taxonId?;
+  updateFunc;
+  deleteFunc;
+}
+
+export default function SynonymList({
+  synonyms,
+  isContributor,
+  speciesId,
+  taxonId,
+  updateFunc,
+  deleteFunc
+}: SynonymListProps) {
   const { t } = useTranslation();
 
   const [synonymsList, setSynonymsList] = useState(synonyms);
 
   return (
     <>
-      <SynonymEditModal onUpdate={setSynonymsList} />
+      <SynonymEditModal
+        onUpdate={setSynonymsList}
+        speciesId={speciesId}
+        taxonId={taxonId}
+        updateFunc={updateFunc}
+        deleteFunc={deleteFunc}
+      />
       <Table size="sm" variant="striped">
         <Tbody>
           {synonymsList.length ? (

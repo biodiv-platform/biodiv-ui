@@ -124,7 +124,7 @@ export const axPreferredSpeciesCommonName = async (commonNameId) => {
   }
 };
 
-export const axUpdateSpeciesSynonym = async (speciesId, payload) => {
+export const axUpdateSpeciesSynonym = async (speciesId, _taxonId, payload) => {
   try {
     const { data } = await http.post(
       `${ENDPOINT.SPECIES}/v1/species/update/synonyms/${speciesId}`,
@@ -136,7 +136,7 @@ export const axUpdateSpeciesSynonym = async (speciesId, payload) => {
   }
 };
 
-export const axDeleteSpeciesSynonym = async (speciesId, commonNameId) => {
+export const axDeleteSpeciesSynonym = async (speciesId, _taxonId, commonNameId) => {
   try {
     const { data } = await http.delete(
       `${ENDPOINT.SPECIES}/v1/species/remove/synonyms/${speciesId}/${commonNameId}`

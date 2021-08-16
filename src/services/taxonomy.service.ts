@@ -103,3 +103,46 @@ export const axUpdateTaxonPosition = async (payload) => {
     return { success: false, data: {} };
   }
 };
+
+export const axUpdateTaxonCommonName = async (_, payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.TAXONOMY}/v1/cname/update/commoName`, payload);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
+export const axDeleteTaxonCommonName = async (_, commonNameId) => {
+  try {
+    const { data } = await http.delete(
+      `${ENDPOINT.TAXONOMY}/v1/species/remove/commoName/${commonNameId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
+export const axUpdateTaxonSynonym = async (_speciesId, taxonId, payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/update/synonym/${taxonId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
+export const axDeleteTaxonSynonym = async (_speciesId, taxonId, commonNameId) => {
+  try {
+    const { data } = await http.delete(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/remove/synonym/${taxonId}/${commonNameId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
