@@ -145,7 +145,7 @@ export const axGetDownloadLogsList = async (params) => {
 
 export const axDownloadFile = async (documentPath) => {
   try {
-    const { data } = await http.get(`${ENDPOINT.RAW}${documentPath}`, { responseType: "blob" });
+    const { data } = await http.get(`${documentPath}`, { responseType: "blob" });
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };
