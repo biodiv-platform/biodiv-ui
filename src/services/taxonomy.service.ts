@@ -1,4 +1,5 @@
 import { ENDPOINT } from "@static/constants";
+import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
 
 export const axGetTaxonRanks = async () => {
@@ -143,6 +144,20 @@ export const axDeleteTaxonSynonym = async (_speciesId, taxonId, commonNameId) =>
     );
     return { success: true, data };
   } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
+export const axAddTaxonomyComment = async (payload) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.post(
+      `${ENDPOINT.TAXONOMY}/v1/service/add/comment/${payload.rootHolderType}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
     return { success: false, data: [] };
   }
 };

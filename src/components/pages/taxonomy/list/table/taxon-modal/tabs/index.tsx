@@ -2,6 +2,7 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { TaxonActivityTab } from "./activity";
 import { TaxonAttributesTab } from "./attributes";
 import { TaxonCommonNamesTab } from "./common-names";
 import { TaxonSynonymsTab } from "./synonyms";
@@ -27,7 +28,9 @@ export function TaxonModalTabs() {
         <TabPanel>
           <TaxonCommonNamesTab />
         </TabPanel>
-        <TabPanel>activity</TabPanel>
+        <TabPanel>
+          <TaxonActivityTab />
+        </TabPanel>
       </TabPanels>
     </Tabs>
   );

@@ -1,5 +1,4 @@
 import { Box, FormLabel, useDisclosure } from "@chakra-ui/react";
-import FormDebugger from "@components/form/debugger";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
@@ -162,7 +161,6 @@ export default function UpdateTaxonForm({ onDone }) {
         </Box>
 
         <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-        <FormDebugger />
       </form>
     </FormProvider>
   );

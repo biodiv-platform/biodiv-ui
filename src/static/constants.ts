@@ -89,10 +89,11 @@ export const RESOURCE_SIZE = {
 export const FORWARD_BLACKLIST = ["login", "register"];
 
 export const RESOURCE_TYPE = {
+  DATATABLE: "datatable",
   DOCUMENT: "document",
   OBSERVATION: "observation",
   SPECIES: "species",
-  DATATABLE: "datatable"
+  TAXONOMY: "taxonomy"
 };
 
 export const APP_VERSION = packageJson.version;

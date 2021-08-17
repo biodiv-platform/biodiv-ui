@@ -27,6 +27,7 @@ export default {
   REMOVED_RESORUCE: "Removed resoruce",
   SUGGESTED_SPECIES_NAME: "Suggested species name",
   SUGGESTION_REMOVED: "Suggestion removed",
+  TAXON_NAME_UPDATED: "Taxon name updated",
   UNFEATURED: "UnFeatured",
   UNFLAGGED: "unflagged",
   UPDATED_COMMON_NAME: "Updated common name",

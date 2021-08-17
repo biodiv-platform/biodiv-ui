@@ -24,7 +24,7 @@ export default function SynonymList({
 }: SynonymListProps) {
   const { t } = useTranslation();
 
-  const [synonymsList, setSynonymsList] = useState(synonyms);
+  const [synonymsList, setSynonymsList] = useState(synonyms || []);
 
   return (
     <>
