@@ -2,6 +2,7 @@ import { Button, Image, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import DownloadIcon from "@icons/download";
 import { axDownloadFile } from "@services/user.service";
+import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
@@ -26,15 +27,15 @@ const downloadFile = async (value, errorMessage) => {
 export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
   const header = doFilter(data);
 
-  return header.map((item, index) => {
+  return header.map((item) => {
     switch (item) {
       case "sourceType":
         return {
           Header: "Source",
           accessor: "sourceType",
-          Cell: ({ value }) => (
-            <a href={`${data[index].filterUrl}`}>
-              <BlueLink> {value||"Unkown"} </BlueLink>
+          Cell: ({ row }) => (
+            <a href={`${data[row.index].filterUrl}`}>
+              <BlueLink> {row.values.sourceType || "Unkown"} </BlueLink>
             </a>
           )
         };
@@ -66,13 +67,14 @@ export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
         };
       case "filePath":
         return {
-          Header: "file",
+          Header: "File",
           accessor: item,
-          Cell: ({ value }) => (
+          Cell: ({ row: { values } }) => (
             <Button
               variant="outline"
               leftIcon={<DownloadIcon />}
-              onClick={() => downloadFile(value, errorMessage)}
+              isDisabled={!adminOrAuthor(values.user.id)}
+              onClick={() => downloadFile(values.filePath, errorMessage)}
               colorScheme="blue"
             >
               {downloadLabel}

@@ -15,8 +15,7 @@ DownloadLogsList.config = {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
-  const { data } = await axGetDownloadLogsList({ ...ctx.query });
+  const { data } = await axGetDownloadLogsList({ ...ctx.query, offset: 0 });
 
   return {
     props: {
@@ -25,7 +24,7 @@ export const getServerSideProps = async (ctx) => {
         n: data.count || 0,
         hasMore: true
       },
-      nextOffset,
+      nextOffset: LIST_PAGINATION_LIMIT,
       initialFilterParams: { ...ctx.query }
     }
   };

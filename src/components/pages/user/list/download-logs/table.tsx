@@ -20,7 +20,11 @@ export default function DownloadLogsTable() {
   useEffect(() => {
     setFieldData(downloadLogData?.l);
     setTableMeta(
-      downloadLogsRow(downloadLogData?.l, `${t("user:download")}`, `${t("user:file_not_found")}`)
+      downloadLogsRow(
+        downloadLogData?.l,
+        `${t("user:download")}`,
+        `${t("user:file_not_found")}`
+      )
     );
   }, [downloadLogData.l.length]);
 
