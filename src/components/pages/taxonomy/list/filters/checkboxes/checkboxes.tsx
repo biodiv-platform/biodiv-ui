@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup, Image, Stack } from "@chakra-ui/react";
+import { Box, Checkbox, CheckboxGroup, Image, Stack } from "@chakra-ui/react";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -35,8 +35,11 @@ export function FilterCheckboxes({
     <>
       <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
         <Stack>
-          {options.map(({ label, value, valueIcon }) => (
+          {options.map(({ label, value, valueIcon, color }) => (
             <Checkbox key={label} value={value} alignItems="baseline">
+              {color && (
+                <Box display="inline-flex" bg={color} h="1rem" w="1rem" mr={1} borderRadius="lg" />
+              )}
               {valueIcon && (
                 <Image
                   src={getTraitIcon(valueIcon, 20)}

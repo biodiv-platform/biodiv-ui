@@ -34,14 +34,17 @@ export const TAXON_STATUS = [
 export const TAXON_POSITION = [
   {
     label: "Raw",
-    value: "RAW"
+    value: "RAW",
+    color: "var(--chakra-colors-gray-300)"
   },
   {
     label: "Working",
-    value: "WORKING"
+    value: "WORKING",
+    color: "var(--chakra-colors-yellow-300)"
   },
   {
     label: "Clean",
-    value: "CLEAN"
+    value: "CLEAN",
+    color: "var(--chakra-colors-green-300)"
   }
 ];
