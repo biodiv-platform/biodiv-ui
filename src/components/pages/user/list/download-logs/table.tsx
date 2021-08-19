@@ -10,37 +10,43 @@ import { downloadLogsRow } from "./metadata";
 
 export default function DownloadLogsTable() {
   const { t } = useTranslation();
-  const { downloadLogData, nextPage } = useDownloadLogsList();
+  const {
+    downloadLogData: { l: logs, hasMore },
+    filter,
+    nextPage
+  } = useDownloadLogsList();
 
-  const [fieldData, setFieldData] = useState<any[]>(downloadLogData?.l);
+  const [fieldData, setFieldData] = useState<any[]>(logs);
   const [tableMeta, setTableMeta] = useState(
-    downloadLogsRow(downloadLogData.l, `${t("user:download")}`, `${t("user:file_not_found")}`)
+    downloadLogsRow(logs, `${t("user:download")}`, `${t("user:file_not_found")}`)
   );
 
   useEffect(() => {
-    setFieldData(downloadLogData?.l);
-    setTableMeta(
-      downloadLogsRow(
-        downloadLogData?.l,
-        `${t("user:download")}`,
-        `${t("user:file_not_found")}`
-      )
-    );
-  }, [downloadLogData.l.length]);
+    if (logs?.length) {
+      setFieldData(logs);
+      setTableMeta(downloadLogsRow(logs, `${t("user:download")}`, `${t("user:file_not_found")}`));
+    }
+  }, [logs, filter]);
 
   return (
     <Box mt={4} id="scrollableDiv" overflow="auto" h={500}>
-      <InfiniteScroll
-        dataLength={downloadLogData.l.length}
-        next={nextPage}
-        hasMore={true}
-        loader={<Loading />}
-        scrollableTarget="scrollableDiv"
-      >
-        <ResponsiveContainer>
-          <BasicTable translateHeader data={fieldData || []} columns={tableMeta} />
-        </ResponsiveContainer>
-      </InfiniteScroll>
+      {logs?.length ? (
+        <InfiniteScroll
+          dataLength={logs.length}
+          next={nextPage}
+          hasMore={hasMore}
+          loader={<Loading />}
+          scrollableTarget="scrollableDiv"
+        >
+          <ResponsiveContainer>
+            {fieldData && (
+              <BasicTable translateHeader data={fieldData || []} columns={tableMeta || []} />
+            )}
+          </ResponsiveContainer>
+        </InfiniteScroll>
+      ) : (
+        <Loading />
+      )}
     </Box>
   );
 }

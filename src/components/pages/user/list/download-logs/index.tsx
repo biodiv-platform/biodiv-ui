@@ -1,15 +1,10 @@
-import { Box, Text } from "@chakra-ui/react";
-import { format } from "indian-number-format";
-import useTranslation from "next-translate/useTranslation";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 
-import useDownloadLogsList from "../../common/use-download-log";
+import Header from "./header";
 import Views from "./table";
 
 export default function DownloadLogListComponent() {
-  const { downloadLogData } = useDownloadLogsList();
-  const { t } = useTranslation();
-
   return (
     <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
       <Box
@@ -20,11 +15,7 @@ export default function DownloadLogListComponent() {
         gridColumn={{ lg: "4/15" }}
         px={4}
       >
-        {downloadLogData && downloadLogData.n > 0 && (
-          <Text color="gray.600" m={4}>
-            {format(downloadLogData.n)} {t("user:download_logs")}
-          </Text>
-        )}
+        <Header />
         <Views />
       </Box>
     </Box>

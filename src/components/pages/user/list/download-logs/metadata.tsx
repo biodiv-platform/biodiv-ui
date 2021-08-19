@@ -9,13 +9,10 @@ import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 
 const doFilter = (data) => {
-  const { params, id, filterUrl, ...others } = data[0];
-  return data.length
-    ? Object.keys({ ...others })
-        .map((key) => [key, data.some((d) => !!d[key])]) // tries to find truthy value for each key
-        .filter(([, value]) => value) // filters out empty keys
-        .map(([key]) => key) // returns only keys
-    : [];
+  if (data[0]) {
+    const { params, status, id, filterUrl, ...others } = data[0];
+    return data.length ? Object.keys({ ...others }) : [];
+  }
 };
 
 const downloadFile = async (value, errorMessage) => {
@@ -27,7 +24,7 @@ const downloadFile = async (value, errorMessage) => {
 export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
   const header = doFilter(data);
 
-  return header.map((item) => {
+  return header?.map((item) => {
     switch (item) {
       case "sourceType":
         return {

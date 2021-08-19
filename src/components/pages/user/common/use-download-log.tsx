@@ -18,21 +18,24 @@ export const DEFAULT_PARAMS = {
 
 export interface DownloadLogsData {
   l: any[];
-  n: number;
+  ag: any[];
   hasMore: boolean;
 }
 
 export interface showPageFilters {
   offset?: string;
   limit?: string;
+  sourceType?: string;
 }
 
 interface DownloadLogsDataContextProps {
   filter?: showPageFilters;
   downloadLogData: DownloadLogsData;
-  totalCount?;
+  addFilter?;
+  removeFilter?;
   children?;
   nextPage?;
+  setFilter?;
   resetFilter?;
 }
 
@@ -68,15 +71,22 @@ export const DownloadLogsDataProvider = (props: DownloadLogsDataContextProps) =>
       setDownloadLogData((_draft) => {
         if (data?.downloadLogList?.length) {
           _draft.l.push(...deDupeDownloadLog(_draft.l, data.downloadLogList));
-          _draft.hasMore = data?.downloadLogList?.length === Number(filter.f.limit);
+          _draft.hasMore = hasMore(_draft.l, _draft.ag, filter);
         }
-        _draft.n = data.count;
       });
       NProgress.done();
     } catch (e) {
       console.error(e);
       NProgress.done();
     }
+  };
+
+  const hasMore = (data, agg, filter) => {
+    if (filter?.f?.sourceType) {
+      const aggregation = agg.find((item) => Object.keys(item)[0] === filter?.f?.sourceType);
+      return data?.length < aggregation[filter?.f?.sourceType];
+    }
+    return true;
   };
 
   useDidUpdateEffect(() => {
@@ -86,6 +96,19 @@ export const DownloadLogsDataProvider = (props: DownloadLogsDataContextProps) =>
   const nextPage = (max = LIST_PAGINATION_LIMIT) => {
     setFilter((_draft) => {
       _draft.f.offset = Number(_draft.f.offset) + max;
+    });
+  };
+
+  const addFilter = (key, value) => {
+    setFilter((_draft) => {
+      _draft.f.offset = 0;
+      _draft.f[key] = value;
+    });
+  };
+
+  const removeFilter = (key) => {
+    setFilter((_draft) => {
+      delete _draft.f[key];
     });
   };
 
@@ -99,6 +122,9 @@ export const DownloadLogsDataProvider = (props: DownloadLogsDataContextProps) =>
       value={{
         filter: filter.f,
         downloadLogData,
+        addFilter,
+        setFilter,
+        removeFilter,
         nextPage,
         resetFilter
       }}
