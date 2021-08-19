@@ -1,5 +1,5 @@
 import { Modal, ModalOverlay } from "@chakra-ui/modal";
-import { axDeleteSpeciesCommonName, axPreferredSpeciesCommonName } from "@services/species.service";
+import { axPreferredSpeciesCommonName } from "@services/species.service";
 import {
   SPECIES_NAME_ADD,
   SPECIES_NAME_DELETE,
@@ -12,17 +12,15 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 
-import useSpecies from "../use-species";
 import { SpeciesCommonNameForm } from "./form";
 
-export function CommonNameEditModal({ onUpdate }) {
+export function CommonNameEditModal({ onUpdate, speciesId, updateFunc, deleteFunc, taxonId }) {
   const [initialEdit, setInitialEdit] = useState<any>();
   const { t } = useTranslation();
-  const { species } = useSpecies();
 
   const handleOnCommonNameDelete = async (commonName) => {
     if (confirm(t("species:common_name.delete.dialouge"))) {
-      const { success, data } = await axDeleteSpeciesCommonName(species.species.id, commonName.id);
+      const { success, data } = await deleteFunc(speciesId, commonName.id);
       if (success) {
         onUpdate(data);
         notification(t("species:common_name.delete.success"), NotificationType.Success);
@@ -54,7 +52,14 @@ export function CommonNameEditModal({ onUpdate }) {
     <Modal onClose={onClose} size="md" isOpen={!!initialEdit}>
       <ModalOverlay />
       {initialEdit && (
-        <SpeciesCommonNameForm commonName={initialEdit} onUpdate={onUpdate} onClose={onClose} />
+        <SpeciesCommonNameForm
+          commonName={initialEdit}
+          onUpdate={onUpdate}
+          updateFunc={updateFunc}
+          speciesId={speciesId}
+          taxonId={taxonId}
+          onClose={onClose}
+        />
       )}
     </Modal>
   );

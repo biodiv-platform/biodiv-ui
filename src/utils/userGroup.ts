@@ -2,7 +2,7 @@ import SITE_CONFIG from "@configs/site-config";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { formatDateFromUTC } from "@utils/date";
-import { stringify } from "querystring";
+import { stringify } from "@utils/query-string";
 
 import { getGroupImage } from "./media";
 

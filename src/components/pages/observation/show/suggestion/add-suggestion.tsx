@@ -152,7 +152,7 @@ export default function AddSuggestion({
                       onQuery={onCommonNameQuery}
                       options={commonNameOptions}
                       optionComponent={CommonNameOption}
-                      placeholder={t("observation:min_three_chars")}
+                      placeholder={t("form:min_three_chars")}
                       onChange={onCommonNameChange}
                     />
                     <SelectInputField
@@ -167,7 +167,7 @@ export default function AddSuggestion({
                     label={t("observation:scientific_name")}
                     onQuery={onScientificNameQuery}
                     optionComponent={ScientificNameOption}
-                    placeholder={t("observation:min_three_chars")}
+                    placeholder={t("form:min_three_chars")}
                     onChange={onScientificNameChange}
                     selectRef={scientificRef}
                   />

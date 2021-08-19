@@ -1,4 +1,64 @@
 {
+  "create": {
+    "title": "Ajouter un taxon"
+  },
+  "modal": {
+    "activity": "Activité",
+    "attributes": {
+      "author": {
+        "desc": "Affiche l'auteur et l'année dans le format dans lequel il doit être utilisé en conjonction avec le nom canonique. \nex : (Pallas, 1811)",
+        "title": "Auteur et année"
+      },
+      "canonical": {
+        "desc": "Affiche le nom canonique, c'est-à-dire. \nle nom complet sans auteur et année.",
+        "title": "Canonique"
+      },
+      "id": {
+        "desc": "Le numéro d'identification du nom dans la base de données des matchs.",
+        "title": "identifiant"
+      },
+      "name": {
+        "desc": "Affiche le nom textuel, c'est-à-dire. \nle nom complet avec l'auteur et l'année si connu.",
+        "error": "erreur lors de la mise à jour du nom du taxon",
+        "success": "nom du taxon mis à jour avec succès",
+        "title": "Nom"
+      },
+      "position": {
+        "desc": "Affiche la liste dans laquelle le nom est actuellement présent.",
+        "error": "erreur lors de la mise à jour de la position",
+        "success": "position mise à jour avec succès",
+        "title": "Positionner"
+      },
+      "rank": {
+        "desc": "Affiche le rang taxonomique du nom dans sa hiérarchie IBP.",
+        "title": "Rang"
+      },
+      "source": {
+        "desc": "Affiche la dernière base de données par rapport à laquelle le nom a été résolu. \nSi aucun nom de base de données n'est fourni, cela pourrait être organisé par l'auteur.",
+        "title": "La source"
+      },
+      "status": {
+        "desc": "Affiche l'état nomenclatural actuel du nom tel qu'il est reconnu sur Portal.",
+        "error": "erreur lors de la mise à jour du statut du taxon",
+        "success": "statut du taxon mis à jour avec succès",
+        "title": "Statut"
+      },
+      "title": "Les attributs",
+      "via": {
+        "desc": "Affiche la source d'origine à partir de laquelle les données ont été extraites dans la base de données de correspondance.",
+        "title": "passant par"
+      }
+    },
+    "common_names": "Noms communs",
+    "synonyms": "Synonymes",
+    "title": "Informations sur la taxonomie"
+  },
+  "position": {
+    "title": "Positionner"
+  },
+  "rank": {
+    "title": "Rang"
+  },
   "request": {
     "button": "Demander",
     "failure": "Erreur lors de la demande de la permission",
@@ -6,5 +66,8 @@
     "title": "Demander la permission",
     "user": "Utilisateur"
   },
-  "role": "Rôle"
+  "role": "Rôle",
+  "status": {
+    "title": "Statut"
+  }
 }

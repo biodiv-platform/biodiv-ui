@@ -13,7 +13,7 @@ export default [
       },
       {
         name: "taxon_namelist",
-        to: "/namelist/index"
+        to: "/taxonomy/list"
       },
       {
         name: "species_traits",

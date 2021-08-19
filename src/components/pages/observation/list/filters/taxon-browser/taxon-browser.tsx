@@ -9,20 +9,20 @@ import { getNewTreeData, loopLoading } from "./taxon-browser-helpers";
 import TaxonResultArrows from "./taxon-result-arrows";
 import TaxonSuggest from "./taxon-suggest";
 
-interface TaxonBrowserProps {
+export interface TaxonBrowserProps {
   initialTaxon;
   onTaxonChange;
 }
 
-interface TaxonBrowserState {
+export interface TaxonBrowserState {
   treeData;
   selectedKeys;
-  checkedKeys;
+  checkedKeys?;
   expandedKeys;
   resultsCount;
 }
 
-const TaxonBrowserContainer = styled.div`
+export const TaxonBrowserContainer = styled.div`
   #taxon-browser-tree {
     max-height: 20rem;
     overflow: auto;

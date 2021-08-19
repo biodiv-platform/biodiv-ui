@@ -9,14 +9,16 @@ module.exports = {
     "/": ["home"],
     "/group/[groupName]": ["home"],
     "/group/[groupName]/show": ["home"],
-    "/group/[groupName]/edit": ["group"],
     "rgx:/datatable/": ["activity", "datatable", "form", "observation"],
     "rgx:/document/": ["document", "filters", "activity"],
+    "rgx:/group/": ["group"],
     "rgx:/landscape/": ["landscape","observation", "filters", "activity"],
     "rgx:/observation/": ["observation", "filters", "activity"],
     "rgx:/page/": ["page"],
+    "rgx:/roles/": ["filters", "taxon"],
     "rgx:/register": ["user"],
     "rgx:/species/": ["species", "filters", "activity"],
+    "rgx:/taxonomy/": ["activity", "filters", "taxon", "species"],
     "rgx:/user/": ["user"],
     "rgx:/user/leaderboard": ["leaderboard"]
   }

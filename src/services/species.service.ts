@@ -1,7 +1,6 @@
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
-import { nanoid } from "nanoid";
 
 export const axGetSpeciesById = async (speciesId) => {
   try {
@@ -91,26 +90,6 @@ export const axRemoveSpeciesField = async (speciesFieldId) => {
   }
 };
 
-export const axUploadSpeciesEditorResource = (blobInfo, success, failure) => {
-  const formData = new FormData();
-  formData.append("upload", blobInfo.blob(), blobInfo.filename());
-  formData.append("hash", nanoid());
-  formData.append("directory", "species");
-
-  http
-    .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    })
-    .then((r) => {
-      success(`${ENDPOINT.FILES}/get/raw/species${r.data.uri}`);
-    })
-    .catch(() => {
-      failure("Error");
-    });
-};
-
 export const axUpdateSpeciesCommonName = async (speciesId, payload) => {
   try {
     const { data } = await http.put(
@@ -145,7 +124,7 @@ export const axPreferredSpeciesCommonName = async (commonNameId) => {
   }
 };
 
-export const axUpdateSpeciesSynonym = async (speciesId, payload) => {
+export const axUpdateSpeciesSynonym = async (speciesId, _taxonId, payload) => {
   try {
     const { data } = await http.post(
       `${ENDPOINT.SPECIES}/v1/species/update/synonyms/${speciesId}`,
@@ -157,7 +136,7 @@ export const axUpdateSpeciesSynonym = async (speciesId, payload) => {
   }
 };
 
-export const axDeleteSpeciesSynonym = async (speciesId, commonNameId) => {
+export const axDeleteSpeciesSynonym = async (speciesId, _taxonId, commonNameId) => {
   try {
     const { data } = await http.delete(
       `${ENDPOINT.SPECIES}/v1/species/remove/synonyms/${speciesId}/${commonNameId}`
@@ -195,32 +174,11 @@ export const axUpdateSpeciesGalleryResources = async (speciesId, payload) => {
   }
 };
 
-export const axCheckTaxonomy = async (params) => {
-  try {
-    const { data } = await http.get(`${ENDPOINT.SPECIES}/v1/species/check/taxonomy`, { params });
-    return {
-      success: true,
-      data
-    };
-  } catch (e) {
-    return { success: false, data: { matched: [], parentMatched: [] } };
-  }
-};
-
 export const axCheckSpecies = async (taxonId) => {
   try {
     const { data } = await http.get(`${ENDPOINT.SPECIES}/v1/species/check/species`, {
       params: { taxonId }
     });
-    return { success: true, data };
-  } catch (e) {
-    return { success: false, data: null };
-  }
-};
-
-export const axSaveTaxonomy = async (payload) => {
-  try {
-    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/species/save/taxonomy`, payload);
     return { success: true, data };
   } catch (e) {
     return { success: false, data: null };

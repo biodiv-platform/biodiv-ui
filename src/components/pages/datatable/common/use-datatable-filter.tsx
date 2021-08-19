@@ -2,8 +2,8 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axGetDataTableList } from "@services/datatable.service";
 import { isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/observation-list";
+import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 

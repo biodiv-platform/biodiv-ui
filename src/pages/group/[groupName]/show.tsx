@@ -1,3 +1,3 @@
-import HomePage, { getServerSideProps } from "../..";
+import HomePage, { getServerSideProps } from ".";
 
 export { HomePage as default, getServerSideProps };

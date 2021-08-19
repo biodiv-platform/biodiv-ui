@@ -15,14 +15,14 @@ export const DEFAULT_FILTER: ObservationFilterProps = {
 };
 
 export const OBSERVATION_FILTER_KEY = {
-  index:"eo",
+  index: "eo",
   dataSetName: {
     filterKey: "dataSetName",
-    searchKey:"dataset_title"
+    searchKey: "dataset_title"
   },
   dataTableName: {
     filterKey: "dataTableName",
-    searchKey:"data_table_title"
+    searchKey: "data_table_title"
   }
 };
 

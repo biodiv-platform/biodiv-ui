@@ -1,5 +1,6 @@
 import { Box, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
+import JoinUserGroup from "@components/pages/group/common/join-group";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
@@ -9,7 +10,6 @@ import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import JoinUserGroup from "../join-group";
 import EditLinkButton from "./edit-link-button";
 
 const Logo = styled.div`
@@ -69,11 +69,10 @@ const Logo = styled.div`
 `;
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
-  const {
-    currentGroup: { name, nameLocal, icon }
-  } = useGlobalState();
-
+  const { currentGroup, isCurrentGroupMember, setIsCurrentGroupMember } = useGlobalState();
   const { t } = useTranslation();
+
+  const { name, nameLocal, icon } = currentGroup;
 
   return (
     <Logo>
@@ -97,7 +96,11 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
       <button className="menu-toggle" onClick={onToggle} aria-label={t("header:toggle_menu")}>
         {isOpen ? <CrossIcon /> : <MenuIcon />}
       </button>
-      <JoinUserGroup />
+      <JoinUserGroup
+        currentGroup={currentGroup}
+        isCurrentGroupMember={isCurrentGroupMember}
+        setIsCurrentGroupMember={setIsCurrentGroupMember}
+      />
       <EditLinkButton label={t("header:group_edit")} />
     </Logo>
   );

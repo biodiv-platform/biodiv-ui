@@ -6,7 +6,7 @@ import {
   axReorderHomePageGallery
 } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import arrayMove from "array-move";
+import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
@@ -20,9 +20,8 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
     setGalleryList(galleryList.sort((a, b) => a.displayOrder - b.displayOrder));
   }, []);
 
-
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    setGalleryList(arrayMove(galleryList, oldIndex, newIndex));
+    setGalleryList(arrayMoveImmutable(galleryList, oldIndex, newIndex));
     setCanReorder(true);
   };
 
@@ -32,10 +31,9 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
   };
 
   const handleReorderCustomField = async () => {
-   
-    const payload = galleryList.map(({ id},index) => ({
+    const payload = galleryList.map(({ id }, index) => ({
       galleryId: id,
-      displayOrder:index
+      displayOrder: index
     }));
 
     const { success } = await axReorderHomePageGallery(userGroupId, payload);

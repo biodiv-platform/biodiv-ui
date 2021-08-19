@@ -34,7 +34,7 @@ export function CommonNameAdd() {
   );
 }
 
-export function CommonNameEditButtons({ commonName }) {
+export function CommonNameEditButtons({ commonName, showPreferred }) {
   const { t } = useTranslation();
 
   const handleOnEdit = () => emit(SPECIES_NAME_EDIT, commonName);
@@ -59,13 +59,15 @@ export function CommonNameEditButtons({ commonName }) {
           aria-label={t("common:delete")}
           title={t("common:delete")}
         />
-        <IconButton
-          colorScheme="orange"
-          leftIcon={<StarOutlineIcon />}
-          onClick={handleOnPreferred}
-          aria-label={t("species:common_name.preferred.title")}
-          title={t("species:common_name.preferred.title")}
-        />
+        {showPreferred && (
+          <IconButton
+            colorScheme="orange"
+            leftIcon={<StarOutlineIcon />}
+            onClick={handleOnPreferred}
+            aria-label={t("species:common_name.preferred.title")}
+            title={t("species:common_name.preferred.title")}
+          />
+        )}
       </ButtonGroup>
     </Flex>
   );

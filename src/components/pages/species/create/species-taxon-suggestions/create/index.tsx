@@ -2,7 +2,7 @@ import { Alert, AlertIcon } from "@chakra-ui/alert";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axCheckTaxonomy, axSaveTaxonomy } from "@services/species.service";
+import { axCheckTaxonomy, axSaveTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -35,7 +35,7 @@ export function SpeciesTaxonCreateForm() {
       disabled.push([name, required, !found]);
 
       // check for match
-      if (validationParams.rank === name) {
+      if (validationParams.rankName === name) {
         found = true;
       }
     });
@@ -45,14 +45,14 @@ export function SpeciesTaxonCreateForm() {
 
   const hForm = useForm<any>({
     resolver: yupResolver(Yup.object().shape(formValidationSchema)),
-    defaultValues: { [validationParams.rank]: validationParams.speciesName }
+    defaultValues: { [validationParams.rankName]: validationParams.scientificName }
   });
 
   const handleOnTaxonCreate = async (values) => {
     const { success, data } = await axSaveTaxonomy({
-      scientificName: validationParams.speciesName,
-      rank: validationParams.rank,
-      rankToName: values,
+      scientificName: validationParams.scientificName,
+      rank: validationParams.rankName,
+      rankToName: Object.fromEntries(Object.entries(values).filter((o) => o[1])),
       status: "ACCEPTED",
       position: "RAW"
     });
@@ -64,15 +64,15 @@ export function SpeciesTaxonCreateForm() {
     }
   };
 
-  const handleOnRankValidate = async (rank, speciesName) => {
+  const handleOnRankValidate = async (rankName, scientificName) => {
     // clear results
     setValidateResults([]);
 
-    const { success, data } = await axCheckTaxonomy({ rank, speciesName });
+    const { success, data } = await axCheckTaxonomy({ rankName, scientificName });
 
     if (success) {
       // clear error for current field since no match should also be treated as valid
-      hForm.clearErrors(rank);
+      hForm.clearErrors(rankName);
 
       // if results are available show select dialouge
       if (data.matched) {

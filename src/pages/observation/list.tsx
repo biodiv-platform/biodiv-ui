@@ -22,7 +22,7 @@ ObservationListPage.config = {
   footer: false
 };
 
-ObservationListPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const { data: listConfig } = await axGetObservationListConfig();
 
@@ -33,17 +33,19 @@ ObservationListPage.getInitialProps = async (ctx) => {
   const { data } = await axGetListData(initialFilterParams);
 
   return {
-    observationData: {
-      l: data.observationList,
-      ml: data.observationListMinimal,
-      ag: data.aggregationData,
-      n: data.totalCount,
-      mvp: {},
-      hasMore: true
-    },
-    listConfig,
-    nextOffset,
-    initialFilterParams
+    props: {
+      observationData: {
+        l: data.observationList,
+        ml: data.observationListMinimal,
+        ag: data.aggregationData,
+        n: data.totalCount,
+        mvp: {},
+        hasMore: true
+      },
+      listConfig,
+      nextOffset,
+      initialFilterParams
+    }
   };
 };
 
