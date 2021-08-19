@@ -11,15 +11,15 @@ export const UserGroupListTableRows = [
   {
     Header: "Name",
     accessor: "name",
-    style: { width: "24rem" },
+    style: { width: "12rem" },
     Cell: ({ cell, value }) => (
       <LocalLink href={cell.row.original.webAddress}>
         <Link w="full">
           <Flex alignItems="center">
             <Image
-              minW="6rem"
-              w="6rem"
-              h="4rem"
+              minW="3rem"
+              w="3rem"
+              h="2rem"
               objectFit="contain"
               loading="lazy"
               src={`${cell.row.original.icon}?w=96`}
@@ -35,7 +35,7 @@ export const UserGroupListTableRows = [
   {
     Header: "Species Groups",
     accessor: "speciesGroupIds",
-    style: { width: "15rem" },
+    style: { width: "24rem" },
     Cell: ({ value }) => {
       const { speciesGroups } = useGroupListFilter();
       return <IconsList items={speciesGroups} type="species" values={value} />;
@@ -44,7 +44,7 @@ export const UserGroupListTableRows = [
   {
     Header: "Habitats",
     accessor: "habitatIds",
-    style: { width: "15rem" },
+    style: { width: "24rem" },
     Cell: ({ value }) => {
       const { habitat } = useGroupListFilter();
       return <IconsList items={habitat} type="habitat" values={value} />;
