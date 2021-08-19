@@ -70,7 +70,9 @@ export const getResourceRAW = (resourceType, resourceUrl) => {
 };
 
 export const getTraitIcon = (resourceUrl, w = 40) => {
-  return `${ENDPOINT.FILES}/get/crop/traits${resourceUrl}?w=${w}`;
+  return resourceUrl.startsWith("/next-assets/")
+    ? resourceUrl
+    : `${ENDPOINT.FILES}/get/crop/traits${resourceUrl}?w=${w}`;
 };
 
 export const getGroupImage = (resourceUrl) => {

@@ -23,11 +23,13 @@ export const TAXON_STATUS_VALUES = {
 export const TAXON_STATUS = [
   {
     label: "Accepted",
-    value: TAXON_STATUS_VALUES.ACCEPTED
+    value: TAXON_STATUS_VALUES.ACCEPTED,
+    valueIcon: "/next-assets/taxon-status/accepted.svg"
   },
   {
     label: "Synonym",
-    value: TAXON_STATUS_VALUES.SYNONYM
+    value: TAXON_STATUS_VALUES.SYNONYM,
+    valueIcon: "/next-assets/taxon-status/synonym.svg"
   }
 ];
 
