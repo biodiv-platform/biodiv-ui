@@ -6,7 +6,7 @@ import {
   axReorderHomePageGallery
 } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import arrayMove from "array-move";
+import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
@@ -21,7 +21,7 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
   }, []);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    setGalleryList(arrayMove(galleryList, oldIndex, newIndex));
+    setGalleryList(arrayMoveImmutable(galleryList, oldIndex, newIndex));
     setCanReorder(true);
   };
 
