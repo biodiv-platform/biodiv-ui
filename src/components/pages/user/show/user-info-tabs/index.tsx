@@ -5,6 +5,7 @@ import React from "react";
 import UserAbout from "./about/user-about";
 import UserLocationMap from "./about/user-location-map";
 import ObservationTab from "./observation";
+import UserGroupListTab from "./usergroup";
 
 export default function UserInfoTabs({ user }) {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ export default function UserInfoTabs({ user }) {
         <TabList>
           <Tab>👤 {t("user:about")}</Tab>
           <Tab>🐾 {t("user:observations.title")}</Tab>
+          <Tab>👥 {t("common:usergroups")}</Tab>
         </TabList>
         <TabPanels>
           <TabPanel px={0}>
@@ -23,6 +25,9 @@ export default function UserInfoTabs({ user }) {
           </TabPanel>
           <TabPanel pb={0}>
             <ObservationTab userId={user.id} />
+          </TabPanel>
+          <TabPanel>
+            <UserGroupListTab />
           </TabPanel>
         </TabPanels>
       </Tabs>
