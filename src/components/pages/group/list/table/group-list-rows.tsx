@@ -17,9 +17,9 @@ export const UserGroupListTableRows = [
         <Link w="full">
           <Flex alignItems="center">
             <Image
-              minW="3rem"
-              w="3rem"
-              h="2rem"
+              minW="4rem"
+              w="4rem"
+              h="3rem"
               objectFit="contain"
               loading="lazy"
               src={`${cell.row.original.icon}?w=96`}

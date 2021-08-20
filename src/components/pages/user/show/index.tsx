@@ -11,11 +11,9 @@ export interface UserProfileProps {
 
 export default function UserShowPageComponent({ user }: UserProfileProps) {
   return (
-    
-      <SimpleGrid m={12} columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
-        <UserInfoSidebar user={user} />
-        <UserInfoTabs user={user} />
-      </SimpleGrid>
-   
+    <SimpleGrid m={12} columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+      <UserInfoSidebar user={user} />
+      <UserInfoTabs user={user} />
+    </SimpleGrid>
   );
 }

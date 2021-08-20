@@ -8,11 +8,12 @@ export default function IconsList({ items, values, type }) {
   const itemsFiltered = useMemo(() => items.filter(({ id }) => values.includes(id)), [values]);
 
   return (
-    <SimpleGrid columns={6}>
+    <SimpleGrid columns={5}>
       {itemsFiltered.map((item) => (
         <Tooltip title={item.name} key={item.id} placement="top" hasArrow={true}>
           <Image
             boxSize="2rem"
+            minW="1.5rem"
             ignoreFallback={true}
             loading="lazy"
             src={getLocalIcon(item.name, type)}
