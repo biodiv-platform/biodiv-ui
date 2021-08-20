@@ -46,6 +46,7 @@
     "hide": "Simplified Edit",
     "show": "Advanced Edit"
   },
+  "min_three_chars": "Input at least 3 characters to search",
   "my_uploads": "Draft Media",
   "my_uploads_sort": {
     "taken_on": "Taken on",

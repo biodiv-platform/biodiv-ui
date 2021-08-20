@@ -1,4 +1,64 @@
 {
+  "create": {
+    "title": "Add Taxon"
+  },
+  "modal": {
+    "activity": "Activity",
+    "attributes": {
+      "author": {
+        "desc": "Displays the author and year in the format in which it is to be used in conjunction with the canonical name. eg: (Pallas, 1811)",
+        "title": "Author and Year"
+      },
+      "canonical": {
+        "desc": "Displays the canonical name ie. the full name without author and year.",
+        "title": "Canonical"
+      },
+      "id": {
+        "desc": "The ID number of the name on the match database.",
+        "title": "ID"
+      },
+      "name": {
+        "desc": "Displays the verbatim name ie. the full name with author and year if known.",
+        "error": "error while updating taxon name",
+        "success": "taxon name updated successfully",
+        "title": "Name"
+      },
+      "position": {
+        "desc": "Displays the list in which the name is currently present.",
+        "error": "error while updating position",
+        "success": "position updated successfully",
+        "title": "Position"
+      },
+      "rank": {
+        "desc": "Displays the taxonomic rank of the name within its IBP hierarchy.",
+        "title": "Rank"
+      },
+      "source": {
+        "desc": "Displays the last database against which the name was resolved. If no database name is provided this could be author curated.",
+        "title": "Source"
+      },
+      "status": {
+        "desc": "Displays the current nomenclatural status of the name as recognised on Portal.",
+        "error": "error while updating taxon status",
+        "success": "taxon status updated successfully",
+        "title": "Status"
+      },
+      "title": "Attributes",
+      "via": {
+        "desc": "Displays the original source from which the data was sourced into the match database.",
+        "title": "via"
+      }
+    },
+    "common_names": "Common Names",
+    "synonyms": "Synonyms",
+    "title": "Taxonomy Information"
+  },
+  "position": {
+    "title": "Position"
+  },
+  "rank": {
+    "title": "Rank"
+  },
   "request": {
     "button": "Request",
     "failure": "error while requesting permission",
@@ -6,5 +66,8 @@
     "title": "Request Permission",
     "user": "User"
   },
-  "role": "Role"
+  "role": "Role",
+  "status": {
+    "title": "Status"
+  }
 }

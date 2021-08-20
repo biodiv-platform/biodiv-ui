@@ -13,7 +13,6 @@ import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
-import { axUpdateSpeciesCommonName } from "@services/species.service";
 import { axGetLangList } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -21,11 +20,15 @@ import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import useSpecies from "../use-species";
-
-export function SpeciesCommonNameForm({ commonName, onUpdate, onClose }) {
+export function SpeciesCommonNameForm({
+  commonName,
+  onUpdate,
+  onClose,
+  updateFunc,
+  speciesId,
+  taxonId
+}) {
   const { t } = useTranslation();
-  const { species } = useSpecies();
 
   const [languages, setLanguages] = useState<any[]>([]);
 
@@ -48,10 +51,10 @@ export function SpeciesCommonNameForm({ commonName, onUpdate, onClose }) {
       id: commonName?.id,
       languageId: values.languageId,
       name: values.name,
-      taxonConceptId: species.species.taxonConceptId
+      taxonConceptId: taxonId
     };
 
-    const { success, data } = await axUpdateSpeciesCommonName(species.species.id, payload);
+    const { success, data } = await updateFunc(speciesId, payload);
 
     if (success) {
       onUpdate(data);

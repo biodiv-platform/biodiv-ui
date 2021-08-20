@@ -55,3 +55,13 @@ export const getByPath = (obj, path) => {
 };
 
 export const normalizeFileName = (s) => `${nanoid()}_${s.replace(/([^a-z0-9\.\s]+)/gi, "-")}`;
+
+/**
+ * Removes keys with empty/null/falsy value from object
+ * Used mostly when you want to keep query params clean in address bar
+ *
+ * @param {*} [obj={}]
+ * @return {*}  {*}
+ */
+export const removeEmptyKeys = (obj = {}): any =>
+  Object.fromEntries(Object.entries(obj).filter(([, v]) => (Array.isArray(v) ? v.length : v)));

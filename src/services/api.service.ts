@@ -16,7 +16,7 @@ const keyToString = (list) =>
 
 export const axGetTaxonList = async ({ key = "", taxonIds = "", expand_taxon = false }) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.API}/taxon/list`, {
+    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/tree/list`, {
       params: {
         classification: SITE_CONFIG.TAXONOMY.ROOT,
         parent: key,
@@ -39,9 +39,10 @@ export const axGetTaxonList = async ({ key = "", taxonIds = "", expand_taxon = f
  */
 export const doTaxonSearch = async (term) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.API}/taxon/retrieve/specificSearch`, {
-      params: { term }
-    });
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/retrieve/specificSearch`,
+      { params: { term } }
+    );
     return data;
   } catch (e) {
     console.error(e);

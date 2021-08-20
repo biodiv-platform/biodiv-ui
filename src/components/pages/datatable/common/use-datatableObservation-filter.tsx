@@ -3,8 +3,8 @@ import { Observation } from "@interfaces/observation";
 import { axGetObservationListByDatatableId } from "@services/observation.service";
 import { isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/observation-list";
+import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect } from "react";
 import { useImmer } from "use-immer";
 

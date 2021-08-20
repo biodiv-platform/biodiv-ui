@@ -8,8 +8,8 @@ import { axGroupList } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
+import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 

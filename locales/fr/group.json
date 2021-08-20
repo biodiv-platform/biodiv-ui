@@ -13,6 +13,7 @@
     "updated": "Les administrateurs de groupe sont mis à jour avec succès"
   },
   "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur. Appuyez sur OK pour envoyer une demande de requête.",
+  "confirm_leave": "Quitter le groupe?",
   "create": {
     "error": "Il y avait une erreur lors de la création de groupe",
     "success": "Groupe créé avec succès",
@@ -121,9 +122,15 @@
   "invite_moderators": "Inviter des modérateurs",
   "join": "Rejoindre le groupe",
   "join_without_invitation": "Autoriser l'utilisateur à rejoindre le groupe sans invitation",
+  "leave": "Quitter le groupe",
+  "list": {
+    "title": "Groupes"
+  },
   "member": {
     "joined": "Groupe rejoint avec succès",
     "joined_error": "Impossible de rejoindre le groupe",
+    "left": "Le groupe est parti avec succès",
+    "left_error": "Impossible de quitter le groupe",
     "requested": "Demande de participation au groupe envoyée"
   },
   "name": "Nom de groupe",

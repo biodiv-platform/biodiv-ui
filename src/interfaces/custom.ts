@@ -86,6 +86,7 @@ export interface ObservationData {
   mvp: Record<string, unknown>;
   n: number;
   hasMore: boolean;
+  isLoading: boolean;
 }
 
 export interface DocumentData {

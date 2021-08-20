@@ -1,5 +1,8 @@
 {
+  "All": "All",
+  "Validate": "Validated",
   "download_map": "Download Map",
+  "no_species_found": "No Species List found",
   "observation": {
     "fauna_list": "Fauna List",
     "flora_list": "Flora List",
@@ -9,9 +12,6 @@
     "species_filter": "Species Filter"
   },
   "related_documents": "Related Document(s)",
-  "no_species_found":"No Species List found",
-  "All":"All",
-  "Validate":"Validated",
   "site_number": "Site #",
   "title": "Protected Areas",
   "update": {

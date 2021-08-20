@@ -4,8 +4,8 @@ import { LeaderboardFilterProps } from "@interfaces/custom";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
 import { isBrowser } from "@static/constants";
 import { LEADERBOARD_FILTERS } from "@static/leaderboard";
+import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 

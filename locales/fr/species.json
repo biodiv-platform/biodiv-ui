@@ -40,6 +40,7 @@
   },
   "contributors": "Contributeurs",
   "create": {
+    "create_species_page": "Créer une page d'espèce lors de la création d'un taxon",
     "creating_page": "Veuillez patienter pendant la création de la page d'espèce.",
     "desc_1": "Les contributeurs doivent avoir des droits sur la page d'espèce afin d'ajouter du contenu.Si vous n'avez pas encore été attribués de droits",
     "desc_2": "Veuillez saisir un nom d'espèce et valider. Si un nom est validé et jugé déjà existé sur le portail, vous serez dirigé vers la page Espèce pour ajouter du contenu. Si le nom est validé et jugé nouveau, vous pouvez remplir la hiérarchie taxonomique afin que la nouvelle page d'espèce puisse être créée. L'auteur est obligatoire pour les niveaux d'espèce et plus bas.",

@@ -43,6 +43,26 @@ export const axGroupList = async (url?: string, lang?: string) => {
   }
 };
 
+export const axGroupListExpanded = async () => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/list`);
+    return { success: true, data: transformUserGroupList(data) };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axMemberGroupList = async () => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/member/list`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axUserGroupCreate = async (payload) => {
   try {
     const { data } = await http.post(`${ENDPOINT.USERGROUP}/v1/group/create`, payload);
@@ -178,6 +198,16 @@ export const axCheckUserGroupFounderOrAdmin = async (userGroupId, cleanCheck?) =
 export const axJoinUserGroup = async (userGroupId) => {
   try {
     const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/join/${userGroupId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
+
+export const axLeaveUserGroup = async (userGroupId) => {
+  try {
+    const { data } = await http.delete(`${ENDPOINT.USERGROUP}/v1/group/leave/${userGroupId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);

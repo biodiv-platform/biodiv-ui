@@ -1,4 +1,5 @@
 import { useLocalRouter } from "@components/@core/local-link";
+import SITE_CONFIG from "@configs/site-config";
 import { axCheckSpecies, axCreateSpecies } from "@services/species.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -18,11 +19,17 @@ interface SpeciesCreateContextProps {
   validateResponse;
   setValidateResponse;
 
+  isSpeciesPage;
+
+  isCreateSpecies;
+  setIsCreateSpecies;
+
   taxonRanksMeta;
 }
 
 interface SpeciesCreateProviderProps {
   taxonRanksMeta;
+  isSpeciesPage;
   children;
 }
 
@@ -30,7 +37,11 @@ const SpeciesCreateContext = createContext<SpeciesCreateContextProps>(
   {} as SpeciesCreateContextProps
 );
 
-export const SpeciesCreateProvider = ({ taxonRanksMeta, children }: SpeciesCreateProviderProps) => {
+export const SpeciesCreateProvider = ({
+  taxonRanksMeta,
+  isSpeciesPage,
+  children
+}: SpeciesCreateProviderProps) => {
   const router = useLocalRouter();
   const { t } = useTranslation();
 
@@ -39,8 +50,17 @@ export const SpeciesCreateProvider = ({ taxonRanksMeta, children }: SpeciesCreat
   const [taxonRanks, setTaxonRanks] = useState();
   const [validationParams, setValidationParams] = useState();
   const [isLoading, setIsLoading] = useState();
+  const [isCreateSpecies, setIsCreateSpecies] = useState<boolean>(
+    isSpeciesPage || SITE_CONFIG.SPECIES.ACTIVE
+  );
 
   const checkSpecies = async () => {
+    if (!isCreateSpecies) {
+      // Redirect to taxon Page
+      router.push(`/taxonomy/list`, true, { taxonId: selectedTaxon.id });
+      return;
+    }
+
     // Check if taxonId is associated with species page
     const { success, data } = await axCheckSpecies(selectedTaxon.id);
 
@@ -90,6 +110,11 @@ export const SpeciesCreateProvider = ({ taxonRanksMeta, children }: SpeciesCreat
 
         validationParams,
         setValidationParams,
+
+        isSpeciesPage,
+
+        isCreateSpecies,
+        setIsCreateSpecies,
 
         taxonRanksMeta
       }}

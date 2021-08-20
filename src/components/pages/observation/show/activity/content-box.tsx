@@ -74,6 +74,9 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
     case ACTIVITY_TYPE.RATED_MEDIA_RESOURCE:
       return <></>;
 
+    case ACTIVITY_TYPE.TAXON_NAME_UPDATED:
+      return <CommentRender html={activity?.activityIbp?.activityDescription} />;
+
     default:
       return (
         <Box>

@@ -29,19 +29,18 @@
       "validated": "Validated"
     }
   },
+  "dataset_filter": {
+    "dataset": {
+      "title": "Dataset Name"
+    },
+    "datatable": {
+      "title": "DataTable Name"
+    },
+    "title": "Dataset Metadata"
+  },
   "document_title": "Title",
   "item_type": {
     "title": "Item Type"
-  },
-  "dataset_filter":{
-    "datatable":{
-      "title":"DataTable Name"
-    },
-
-    "dataset":{
-      "title":"Dataset Name"
-    },
-    "title":"Dataset Metadata"
   },
   "location": {
     "district": "District",

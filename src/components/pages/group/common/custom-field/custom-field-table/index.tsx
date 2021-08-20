@@ -3,7 +3,7 @@ import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import { axRemoveCustomField, axReorderCustomField } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import arrayMove from "array-move";
+import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
@@ -18,7 +18,7 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
   }, []);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    setCustomFields(arrayMove(customFields, oldIndex, newIndex));
+    setCustomFields(arrayMoveImmutable(customFields, oldIndex, newIndex));
     setCanReorder(true);
   };
 

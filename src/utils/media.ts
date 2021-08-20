@@ -70,7 +70,9 @@ export const getResourceRAW = (resourceType, resourceUrl) => {
 };
 
 export const getTraitIcon = (resourceUrl, w = 40) => {
-  return `${ENDPOINT.FILES}/get/crop/traits${resourceUrl}?w=${w}`;
+  return resourceUrl.startsWith("/next-assets/")
+    ? resourceUrl
+    : `${ENDPOINT.FILES}/get/crop/traits${resourceUrl}?w=${w}`;
 };
 
 export const getGroupImage = (resourceUrl) => {
@@ -107,10 +109,18 @@ export const getFallbackByMIME = (mime) => {
   }
 };
 
+/**
+ * Uses Google Docs viewer to avoid CORS issue
+ *
+ * @param {string} resourceUrl
+ * @return {*}  {string}
+ */
 export const getDocumentPath = (resourceUrl: string): string => {
-  return `${ENDPOINT.RAW}/pdf-viewer/?file=${getDocumentFilePath(resourceUrl)}`;
+  return `https://docs.google.com/viewer?embedded=true&url=${getDocumentFilePath(resourceUrl)}`;
 };
 
 export const getDocumentFilePath = (resourceUrl: string): string => {
-  return `${ENDPOINT.RAW}/content/documents${resourceUrl}`;
+  return resourceUrl.startsWith("http")
+    ? resourceUrl
+    : `${ENDPOINT.RAW}/content/documents${resourceUrl}`;
 };

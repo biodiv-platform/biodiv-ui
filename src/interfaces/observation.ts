@@ -35,6 +35,7 @@ export interface CommentLoggingData {
   subRootHolderId?: number; // int64
   subRootHolderType?: string;
   mailData?: MailData;
+  languageId?: number; // int64
 }
 export interface Coordinate {
   x?: number; // double
@@ -85,8 +86,11 @@ export interface CustomFieldPermission {
   allowedCfId?: number /* int64 */[];
 }
 export interface CustomFieldValues {
-  value?: string;
-  valueIcon?: string;
+  id?: number; // int64
+  customFieldId?: number; // int64
+  values?: string;
+  iconURL?: string;
+  notes?: string;
 }
 export interface CustomFieldValuesData {
   fieldTextData?: string;
@@ -97,10 +101,42 @@ export interface CustomFieldValuesData {
 }
 export interface CustomFields {
   id?: number; // int64
+  authorId?: number; // int64
   name?: string;
-  fieldtype?: string;
   dataType?: string;
-  values?: CustomFieldValues[];
+  fieldType?: string;
+  units?: string;
+  iconURL?: string;
+  notes?: string;
+}
+export interface DataTableWkt {
+  id?: number; // int64
+  title?: string;
+  createdOn?: string; // date-time
+  description?: string;
+  summary?: string;
+  partyAttributions?: string;
+  isDeleted?: boolean;
+  lastRevised?: string; // date-time
+  taxonomicCoverageGroupIds?: string;
+  basisOfData?: string;
+  uploaderId?: number; // int64
+  dataTableType?: string;
+  datasetId?: number; // int64
+  geographicalCoverageGeoPrivacy?: boolean;
+  geographicalCoverageLatitude?: number; // double
+  geographicalCoverageLongitude?: number; // double
+  geographicalCoverageTopology?: string;
+  geographicalCoveragePlaceName?: string;
+  geographicalCoverageLocationScale?: string;
+  project?: string;
+  methods?: string;
+  temporalCoverageDateAccuracy?: string;
+  temporalCoverageFromDate?: string; // date-time
+  basisOfRecord?: string;
+  isVerified?: boolean;
+  fieldMapping?: string;
+  ufileId?: number; // int64
 }
 export interface DocumentMailData {
   documentId?: number; // int64
@@ -122,13 +158,13 @@ export interface DownloadLog {
   offsetParam?: number; // int64
 }
 export interface Envelope {
+  area?: number; // double
   maxX?: number; // double
   maxY?: number; // double
-  area?: number; // double
+  height?: number; // double
+  width?: number; // double
   minX?: number; // double
   minY?: number; // double
-  width?: number; // double
-  height?: number; // double
   null?: boolean;
 }
 export interface FactValuePair {
@@ -140,6 +176,12 @@ export interface FactValuePair {
   toDate?: string; // date-time
   type?: string;
   isParticipatry?: boolean;
+}
+export interface FactsUpdateData {
+  mailData?: MailData;
+  traitValueList?: number /* int64 */[];
+  valuesString?: string[];
+  pageTaxonId?: number; // int64
 }
 export interface Featured {
   id?: number; // int64
@@ -198,13 +240,10 @@ export interface Geometry {
   userData?: {
     [key: string]: any;
   };
-  numGeometries?: number; // int32
   precisionModel?: PrecisionModel;
-  numPoints?: number; // int32
   coordinate?: Coordinate;
-  geometryType?: string;
-  srid?: number; // int32
   coordinates?: Coordinate[];
+  numPoints?: number; // int32
   rectangle?: boolean;
   area?: number; // double
   centroid?: Point;
@@ -212,8 +251,11 @@ export interface Geometry {
   boundary?: Geometry;
   boundaryDimension?: number; // int32
   envelopeInternal?: Envelope;
-  simple?: boolean;
+  srid?: number; // int32
+  numGeometries?: number; // int32
+  geometryType?: string;
   dimension?: number; // int32
+  simple?: boolean;
   valid?: boolean;
   length?: number; // double
   empty?: boolean;
@@ -295,6 +337,16 @@ export interface MapAggregationResponse {
     };
   };
 }
+export interface MapAggregationStatsResponse {
+  groupUniqueSpecies?: {
+    [name: string]: number; // int64
+  };
+  groupTopUploaders?: TopUploadersInfo[];
+  groupTopIdentifiers?: TopUploadersInfo[];
+  totalCounts?: {
+    [name: string]: number; // int64
+  };
+}
 export interface MaxVotedRecoPermission {
   observationId?: number; // int64
   permission?: boolean;
@@ -365,6 +417,44 @@ export interface Observation {
   noOfIdentifications?: number; // int32
   dataTableId?: number; // int64
   dateAccuracy?: string;
+  isVerified?: boolean;
+}
+export interface ObservationBulkDTO {
+  title?: string;
+  summary?: string;
+  description?: string;
+  createdOn?: string; // date-time
+  licenseId?: number; // int64
+  contributors?: number; // int64
+  attribution?: string;
+  dateAccuracy?: string;
+  observedFromDate?: string; // date-time
+  observedToDate?: string; // date-time
+  locationScale?: string;
+  locationAccuracy?: string;
+  observedAt?: string;
+  reverseGeocoded?: string;
+  wktString?: string;
+  latitude?: number; // double
+  longitude?: number; // double
+  useDegMinSec?: boolean;
+  degMinSec?: string;
+  hidePreciseLocation?: boolean;
+  project?: string;
+  methods?: string;
+  basisOfData?: string;
+  basisOfRecord?: string;
+  isVerified?: boolean;
+  dataset?: number; // int64
+  filename?: string;
+  languageId?: number; // int64
+  columns?: {
+    [name: string]: number; // int32
+  };
+  checklistAnnotation?: {
+    [name: string]: number; // int32
+  };
+  sgroup?: string;
 }
 export interface ObservationCreate {
   getsGroup?: number; // int64
@@ -386,8 +476,11 @@ export interface ObservationCreate {
   useDegMinSec?: boolean;
   degMinSec?: string;
   hidePreciseLocation?: boolean;
-  facts?: {
+  factValuePairs?: {
     [name: string]: number /* int64 */[];
+  };
+  factValueStringPairs?: {
+    [name: string]: string[];
   };
   notes?: string;
   tags?: Tags[];
@@ -397,6 +490,26 @@ export interface ObservationCreate {
 export interface ObservationCreateUGContext {
   observationData?: ObservationCreate;
   customFieldData?: CustomFieldFactsInsert[];
+}
+export interface ObservationDataTableShow {
+  id?: number; // int64
+  scientificName?: string;
+  commonName?: string;
+  getsGroup?: number; // int64
+  fromDate?: string;
+  observedAt?: string;
+  locationScale?: string;
+  longitude?: number; // double
+  latitude?: number; // double
+  dateAccuracy?: string;
+  notes?: string;
+  geoPrivacy?: boolean;
+  checklistAnnotation?: {
+    [name: string]: {
+      [key: string]: any;
+    };
+  };
+  userInfo?: UserIbp;
 }
 export interface ObservationHomePage {
   resourceUrl?: string;
@@ -416,6 +529,7 @@ export interface ObservationListData {
     [name: string]: number; // int64
   };
   aggregationData?: MapAggregationResponse;
+  aggregateStatsData?: MapAggregationStatsResponse;
   observationListMinimal?: ObservationListMinimalData[];
 }
 export interface ObservationListMinimalData {
@@ -510,33 +624,33 @@ export interface Point {
     [key: string]: any;
   };
   coordinates?: Coordinate[];
-  numPoints?: number; // int32
-  coordinate?: Coordinate;
-  geometryType?: string;
   coordinateSequence?: CoordinateSequence;
+  coordinate?: Coordinate;
+  numPoints?: number; // int32
   boundary?: Geometry;
   boundaryDimension?: number; // int32
+  geometryType?: string;
+  dimension?: number; // int32
   y?: number; // double
   x?: number; // double
   simple?: boolean;
-  dimension?: number; // int32
   empty?: boolean;
-  numGeometries?: number; // int32
   precisionModel?: PrecisionModel;
-  srid?: number; // int32
   rectangle?: boolean;
   area?: number; // double
   centroid?: Point;
   interiorPoint?: Point;
   envelopeInternal?: Envelope;
+  srid?: number; // int32
+  numGeometries?: number; // int32
   valid?: boolean;
   length?: number; // double
 }
 export interface PrecisionModel {
   scale?: number; // double
+  offsetY?: number; // double
   maximumSignificantDigits?: number; // int32
   offsetX?: number; // double
-  offsetY?: number; // double
   floating?: boolean;
   type?: Type;
 }
@@ -608,6 +722,7 @@ export interface ResourceDataObs {
   caption?: string;
   rating?: number; // int32
   licenseId?: number; // int64
+  context?: string;
 }
 export interface ResourceRating {
   resourceId?: number; // int64
@@ -615,8 +730,6 @@ export interface ResourceRating {
 }
 export interface ShowData {
   observation?: Observation;
-  checkListAnnotation?;
-  dataTable?;
   factValuePair?: FactValuePair[];
   observationResource?: ResourceData[];
   userGroups?: UserGroupIbp[];
@@ -633,7 +746,23 @@ export interface ShowData {
   };
   allRecoVotes?: AllRecoSugguestions[];
   observationNearBy?: ObservationNearBy[];
+  dataTable?: DataTableWkt;
+  checkListAnnotation?: {
+    [name: string]: {
+      [key: string]: any;
+    };
+  };
   activityCount?: number; // int32
+}
+export interface ShowObervationDataTable {
+  datatable?: DataTableWkt;
+  userGroups?: UserGroupIbp[];
+  layerInfo?: ObservationLocationInfo;
+  authorInfo?: UserIbp;
+  authorScore?: {
+    [name: string]: string;
+  };
+  observationList?: ObservationDataTableShow[];
 }
 export interface SimilarObservation {
   observationId?: number; // int64
@@ -643,7 +772,8 @@ export interface SimilarObservation {
 export interface SpeciesGroup {
   id?: number; // int64
   name?: string;
-  order?: number; // int32
+  parentGroupId?: number; // int64
+  groupOrder?: number; // int32
 }
 export interface SpeciesMailData {
   speciesId?: number; // int64
@@ -659,6 +789,12 @@ export interface Tags {
 export interface TagsMapping {
   objectId?: number; // int64
   tags?: Tags[];
+}
+export interface TopUploadersInfo {
+  name?: string;
+  pic?: string;
+  authorId?: number; // int64
+  count?: number; // int64
 }
 export interface TraitValue {
   value?: string;
@@ -697,7 +833,6 @@ export interface UserGroup {
 export interface UserGroupIbp {
   id?: number; // int64
   name?: string;
-  nameLocal?: string;
   icon?: string;
   webAddress?: string;
   isParticipatory?: boolean;

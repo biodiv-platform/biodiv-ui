@@ -1,7 +1,7 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
-import { axSaveTaxonomy } from "@services/species.service";
+import { axSaveTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -17,8 +17,8 @@ export default function SpeciesTaxonPartial() {
   const createPartialTaxon = async (ranks) => {
     setIsLoading(true);
     const { success, data } = await axSaveTaxonomy({
-      scientificName: validationParams.speciesName,
-      rank: validationParams.rank,
+      scientificName: validationParams.scientificName,
+      rank: validationParams.rankName,
       rankToName: Object.fromEntries(ranks.map((rank) => [rank.rank, rank.name])),
       status: "ACCEPTED",
       position: "RAW"

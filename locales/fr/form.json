@@ -46,6 +46,7 @@
     "hide": "Modification simplifiée",
     "show": "Modification avancée"
   },
+  "min_three_chars": "Saisissez au moins 3 caractères pour rechercher",
   "my_uploads": "Brouillon",
   "my_uploads_sort": {
     "taken_on": "Pris sur",

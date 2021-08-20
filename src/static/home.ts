@@ -65,7 +65,7 @@ export const FEATURES = [
   {
     icon: taxonomy,
     title: "taxonomy",
-    link: "/namelist/index"
+    link: "/taxonomy/list"
   },
   {
     icon: landscapes,

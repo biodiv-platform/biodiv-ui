@@ -29,6 +29,7 @@ interface ISelectProps {
   isRequired?: boolean;
   isClearable?;
   resetOnSubmit?;
+  isRaw?;
 }
 
 const dummyOnQuery = (q) =>
@@ -46,8 +47,8 @@ export const SelectAsyncInputField = ({
   hint,
   mb = 4,
   options = [],
-  multiple = false,
-  disabled = false,
+  multiple,
+  disabled,
   optionComponent = DefaultOptionComponent,
   debounceTime = 200,
   placeholder,
@@ -59,6 +60,7 @@ export const SelectAsyncInputField = ({
   onQuery = dummyOnQuery,
   resetOnSubmit = true,
   isClearable = true,
+  isRaw,
   ...props
 }: ISelectProps) => {
   const form = useFormContext();
@@ -67,7 +69,7 @@ export const SelectAsyncInputField = ({
 
   const onQueryDebounce = debounce(onQuery, debounceTime);
   const [selected, setSelected] = useState(
-    field.value ? (multiple ? field.value : { value: field.value }) : null
+    field.value ? (multiple ? field.value : isRaw ? field.value : { value: field.value }) : null
   );
 
   useEffect(() => {
