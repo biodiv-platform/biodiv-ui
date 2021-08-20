@@ -1,0 +1,20 @@
+{
+  "All": "ସମସ୍ତ",
+  "Validate": "ବ valid ଧତା |",
+  "download_map": "ମାନଚିତ୍ର ଡାଉନଲୋଡ୍ କରନ୍ତୁ |",
+  "no_species_found": "କ species ଣସି ପ୍ରଜାତି ତାଲିକା ମିଳିଲା ନାହିଁ |",
+  "observation": {
+    "fauna_list": "ଫାରୁଆ ତାଲିକା |",
+    "flora_list": "ଫ୍ଲୋରା ତାଲିକା |",
+    "life_list": {
+      "title": "ପର୍ଯ୍ୟବେକ୍ଷଣ ତାଲିକା |"
+    },
+    "species_filter": "ପ୍ରଜାତି ଫିଲ୍ଟର୍ |"
+  },
+  "related_documents": "ସମ୍ବନ୍ଧୀୟ ଡକ୍ୟୁମେଣ୍ଟ୍ (ଗୁଡିକ)",
+  "site_number": "ସାଇଟ୍ #",
+  "title": "ସୁରକ୍ଷିତ ଅଞ୍ଚଳଗୁଡିକ |",
+  "update": {
+    "success": "କ୍ଷେତ୍ର ସଞ୍ଚୟ ହୋଇଛି |"
+  }
+}

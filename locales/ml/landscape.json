@@ -1,0 +1,20 @@
+{
+  "All": "എല്ലാം",
+  "Validate": "സാധൂകരിച്ചു",
+  "download_map": "മാപ്പ് ഡൗൺലോഡുചെയ്യുക",
+  "no_species_found": "ഒരു ഇനവും കണ്ടെത്തിയില്ല",
+  "observation": {
+    "fauna_list": "ജന്തുക പട്ടിക",
+    "flora_list": "ഫ്ലോറ പട്ടിക",
+    "life_list": {
+      "title": "നിരീക്ഷണ പട്ടിക"
+    },
+    "species_filter": "സ്പീഷീസ് ഫിൽട്ടർ"
+  },
+  "related_documents": "ബന്ധപ്പെട്ട രേഖകൾ)",
+  "site_number": "സൈറ്റ് #",
+  "title": "സംരക്ഷിത പ്രദേശങ്ങൾ",
+  "update": {
+    "success": "ഫീൽഡ് സംരക്ഷിച്ചു"
+  }
+}

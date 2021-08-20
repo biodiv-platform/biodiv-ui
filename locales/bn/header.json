@@ -1,0 +1,78 @@
+{
+  "group_edit": "গ্রুপ সম্পাদনা করুন",
+  "logged_user_only": "গ্রুপ যোগ দিতে লগইন করুন",
+  "member_only": "পর্যবেক্ষণ আপলোড করার জন্য গ্রুপে যোগদান করুন",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "তথ্য প্যাকেজ যোগ করুন",
+      "add_dataset": "ডেটাসেট যোগ করুন",
+      "add_document": "নথি যোগ করুন",
+      "add_fact": "সত্য যোগ করুন",
+      "add_list": "তালিকা যোগ করুন",
+      "add_observation": "পর্যবেক্ষণ যোগ করুন",
+      "add_trait_or_value": "বৈশিষ্ট্য / মান যোগ করুন",
+      "contribute_to_map": "মানচিত্রে অবদান রাখুন",
+      "contribute_to_species": "প্রজাতি অবদান",
+      "title": "অবদান"
+    },
+    "groups": {
+      "see_all": "সবগুলো দেখ",
+      "title": "গ্রুপ"
+    },
+    "settings": {
+      "leaderboard": "আমার লিডারবোর্ড র্যাঙ্ক",
+      "logout": "প্রস্থান",
+      "my_observations": "আমার পর্যবেক্ষণ",
+      "my_profile": "আমার প্রোফাইল",
+      "title": "সেটিংস"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "নথি datatables.",
+      "documents": "ডকুমেন্টস",
+      "title": "ডকুমেন্টস"
+    },
+    "idao": {
+      "title": "ইডো"
+    },
+    "landscapes": {
+      "title": "সুরক্ষিত এলাকাসমূহ"
+    },
+    "maps": {
+      "title": "মানচিত্র"
+    },
+    "more": {
+      "about_us": "আমাদের সম্পর্কে",
+      "activity": "কার্যকলাপ",
+      "dashboard": "ড্যাশবোর্ড",
+      "datasets": "ডেটাসেটস",
+      "discussions": "আলোচনা",
+      "leaderboard": "লিডারবোর্ড",
+      "participants": "অংশগ্রহণকারীদের",
+      "title": "অধিকন্তু"
+    },
+    "observation": {
+      "checklists": "তালিকা",
+      "datasets": "ডেটাসেটস",
+      "observation_datatables": "পর্যবেক্ষণ datatables.",
+      "observation_traits": "পর্যবেক্ষণ বৈশিষ্ট্য",
+      "observations": "পর্যবেক্ষণ পর্যবেক্ষণ",
+      "title": "পর্যবেক্ষণ"
+    },
+    "pages": {
+      "empty": "কোন পৃষ্ঠা নেই",
+      "title": "পৃষ্ঠা"
+    },
+    "species": {
+      "species_datatables": "প্রজাতি datatables.",
+      "species_pages": "প্রজাতি পেজ",
+      "species_traits": "প্রজাতি বৈশিষ্ট্য",
+      "taxon_namelist": "ট্যাক্সন নাম প্রস্তুতকারক",
+      "title": "প্রজাতি"
+    }
+  },
+  "search": "অনুসন্ধান করুন",
+  "sign_in": "প্রবেশ করুন",
+  "toggle_menu": "টগল মেনু টগল করুন"
+}

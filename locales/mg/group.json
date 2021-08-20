@@ -13,7 +13,7 @@
     "updated": "Nohavaozina tamim-pahombiazana ny mpitantana vondrona"
   },
   "confirm_closed_group": "Ity dia vondrona mihidy, ny fangatahana mpikambana dia tsy maintsy eken'ny mpandika teny iray. Tsindrio OK raha handefa ny fangatahana",
-  "confirm_leave": "Vondrona fialana?",
+  "confirm_leave": "Mialà vondrona?",
   "create": {
     "error": "Nisy ny fahadisoana raha namorona vondrona",
     "success": "Noforonina soa aman-tsara ny vondrona",
@@ -122,15 +122,15 @@
   "invite_moderators": "Asao ny mpanelanelana",
   "join": "Miaraha amin'ny vondrona",
   "join_without_invitation": "Avelao ny mpampiasa hiditra ao amin'ilay vondrona tsy misy fanasana",
-  "leave": "Vondrona fialana",
+  "leave": "Avelao ny vondrona",
   "list": {
-    "title": "Vondrona"
+    "title": "Vondrona vondrona"
   },
   "member": {
     "joined": "Niditra am-pahombiazana ny vondrona",
     "joined_error": "Tsy afaka niditra vondrona",
-    "left": "Nandeha soa aman-tsara ny vondrona",
-    "left_error": "Tsy afaka miala ao amin'ny vondrona",
+    "left": "Namela soa aman-tsara ny vondrona",
+    "left_error": "Tsy afaka namela vondrona",
     "requested": "Ny vondrona dia niditra ny fangatahana"
   },
   "name": "Anaran'ny tarika",

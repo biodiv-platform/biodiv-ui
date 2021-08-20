@@ -1,0 +1,144 @@
+{
+  "clear": "ತೆರವುಗೊಳಿಸಿ {{filterCount}} ಫಿಲ್ಟರ್(ಗಳು)",
+  "custom_fields": {
+    "has_content": "ವಿಷಯವಿದೆ",
+    "no_content": "ಯಾವುದೇ ವಿಷಯವಿಲ್ಲ",
+    "no_custom_field": "ಕಸ್ಟಮ್ ಕ್ಷೇತ್ರ (ಗಳು) ಕಂಡುಬಂದಿಲ್ಲ",
+    "title": "ಕಸ್ಟಮ್ ಜಾಗ"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "ಫ್ಲ್ಯಾಗ್ ಮಾಡಲಾಗಿದೆ",
+      "title": "ಧ್ವಜ",
+      "unflagged": "ಖಾಲಿ ಮಾಡದ"
+    },
+    "identification": {
+      "identified": "ಗುರುತಿಸಲಾಗಿದೆ",
+      "title": "ಗುರುತಿಸುವಿಕೆ",
+      "unidentified": "ಗುರುತಿಸಲಾಗದ"
+    },
+    "taxon_id": {
+      "has_taxon": "ಟ್ಯಾಕ್ಸನ್ ಐಡಿ ಹೊಂದಿದೆ",
+      "no_taxon": "ಯಾವುದೇ ತೆರಿಗೆ ಐಡಿ ಇಲ್ಲ",
+      "title": "ಟ್ಯಾಕ್ಸನ್ ಐಡಿ"
+    },
+    "title": "ಡೇಟಾ ಗುಣಮಟ್ಟ",
+    "validation": {
+      "not_validated": "ಮೌಲ್ಯೀಕರಿಸಲಾಗಿಲ್ಲ",
+      "title": "ಕ್ರಮಬದ್ಧಗೊಳಿಸುವಿಕೆ",
+      "validated": "ಮೌಲ್ಯದ"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "ಡೇಟಾಬೇಸ್ ಹೆಸರು"
+    },
+    "datatable": {
+      "title": "ಡೇಟಾಟೇಬಲ್ ಹೆಸರು"
+    },
+    "title": "ಡಾಟಾಸೆಟ್ ಮೆಟಾಡೇಟಾ"
+  },
+  "document_title": "ಶೀರ್ಷಿಕೆ",
+  "item_type": {
+    "title": "ಐಟಂ ಪ್ರಕಾರ"
+  },
+  "location": {
+    "district": "ಜಿಲ್ಲೆ",
+    "map": {
+      "title": "ನಕ್ಷೆ"
+    },
+    "protected_area": {
+      "title": "ಸಂರಕ್ಷಿತ ಪ್ರದೇಶಗಳು"
+    },
+    "state": {
+      "title": "ರಾಜ್ಯ"
+    },
+    "tehsil": "ತೆಹ್ಸಿಲ್",
+    "title": "ಸ್ಥಳ"
+  },
+  "media": {
+    "audio": "ಆಡಿಯೋ",
+    "image": "ಚಿತ್ರ",
+    "no_media": "ಮಾಧ್ಯಮವಿಲ್ಲ",
+    "title": "ಮಾಧ್ಯಮ ಪ್ರಕಾರ",
+    "video": "ವಿಡಿಯೋ"
+  },
+  "name": {
+    "reco_name": {
+      "title": "ಹೆಸರು"
+    },
+    "status": {
+      "accepted": "ಅಂಗೀಕೃತ",
+      "synonym": "ಸಮಾನಾರ್ಥಕ",
+      "title": "ಸ್ಥಿತಿ"
+    },
+    "title": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "ಎಲ್ಲಾ ಹೆಸರುಗಳು"
+    },
+    "taxon_names": {
+      "title": "ಟ್ಯಾಕ್ಸನ್ ಹೆಸರುಗಳು"
+    },
+    "taxon_rank": {
+      "title": "ತೆರಿಗೆ ದಾಖಲೆ"
+    },
+    "taxon_status": {
+      "title": "ತೆರಿಗೆ ಸ್ಥಿತಿ"
+    },
+    "title": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು"
+  },
+  "species_group": {
+    "all": "ಎಲ್ಲರೂ",
+    "amphibians": "ಉಭಯಚರಗಳು",
+    "arthropods": "ಆರ್ತ್ರೋಪಾಡ್ಸ್",
+    "birds": "ಪಕ್ಷಿಗಳು",
+    "fish": "ಮೀನು",
+    "fungi": "ಶಿಲೀಂಧ್ರ",
+    "mammals": "ಸಸ್ತನಿಗಳು",
+    "molluscs": "ಮೊಲ್ಲಸ್ಕ್ಗಳು",
+    "others": "ಇತರರು",
+    "plants": "ಗಿಡಗಳು",
+    "reptiles": "ಸರೀಸೃಪಗಳು",
+    "title": "ಜಾತಿ ಗುಂಪು"
+  },
+  "taxon_browser": {
+    "search": "ಮರದಲ್ಲಿ ಹುಡುಕಿ",
+    "search_results": "Showing {{currentIndex}} of {{resultsCount}}",
+    "title": "ಟ್ಯಾಕ್ಸನ್ ಬ್ರೌಸರ್"
+  },
+  "time": {
+    "created_on": "ದಿನಾಂಕ ರಚಿಸಲಾಗಿದೆ",
+    "max_date": "ಗರಿಷ್ಠ ದಿನಾಂಕ",
+    "min_date": "ಕನಿಷ್ಠ ದಿನಾಂಕ",
+    "month": {
+      "apr": "ಏಪ್ರಿಲ್",
+      "aug": "ಆಗಸ್ಟ್",
+      "dec": "ಡಿಸೆಂಬರ್ ತಿಂಗಳು",
+      "feb": "ಫೆಬ್ರುವರಿ",
+      "jan": "ಜನವರಿ",
+      "jul": "ಜುಲೈ",
+      "jun": "ಜೂನ್",
+      "mar": "ಮಾರ್ಚ್",
+      "may": "ಮೇ",
+      "nov": "ನವೆಂಬರ್",
+      "oct": "ಅಕ್ಟೋಬರ್",
+      "sep": "ಸೆಪ್ಟೆಂಬರ್",
+      "title": "ತಿಂಗಳು ಗಮನಿಸಲಾಗಿದೆ"
+    },
+    "title": "ಸಮಯ"
+  },
+  "title": "ಶೋಧಕಗಳು",
+  "toggle": "ಟಾಗಲ್ ಶೋಧಕಗಳು",
+  "traits": {
+    "title": "ಲಕ್ಷಣಗಳು"
+  },
+  "user": {
+    "search": "ಹುಡುಕಾಟ ಬಳಕೆದಾರ",
+    "title": "ಬಳಕೆದಾರ"
+  },
+  "usergroup": {
+    "title": "ಬಳಕೆದಾರ ಗುಂಪುಗಳು"
+  }
+}

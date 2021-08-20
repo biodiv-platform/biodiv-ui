@@ -1,0 +1,20 @@
+{
+  "All": "সব",
+  "Validate": "বৈধ",
+  "download_map": "মানচিত্র ডাউনলোড করুন",
+  "no_species_found": "কোন প্রজাতি তালিকা পাওয়া যায় নি",
+  "observation": {
+    "fauna_list": "Fauna তালিকা",
+    "flora_list": "ফ্লোরা তালিকা",
+    "life_list": {
+      "title": "পর্যবেক্ষণ তালিকা"
+    },
+    "species_filter": "প্রজাতি ফিল্টার"
+  },
+  "related_documents": "সম্পর্কিত নথি)",
+  "site_number": "সাইট #",
+  "title": "সুরক্ষিত এলাকাসমূহ",
+  "update": {
+    "success": "ক্ষেত্র সংরক্ষিত"
+  }
+}

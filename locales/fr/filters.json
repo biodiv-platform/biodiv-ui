@@ -1,5 +1,5 @@
 {
-  "clear": "Nettoyer {{filterCount}} Filtre (s)",
+  "clear": "Nettoyer {{filterCount}} Filtre(s)",
   "custom_fields": {
     "has_content": "A du contenu",
     "no_content": "Pas de contenu",
@@ -31,12 +31,12 @@
   },
   "dataset_filter": {
     "dataset": {
-      "title": "Nom de l'ensemble de données"
+      "title": "Nom du jeu de données"
     },
     "datatable": {
-      "title": "Nom de la table de données"
+      "title": "Nom de données"
     },
-    "title": "Métadonnées de l'ensemble de données"
+    "title": "Métadonnées de données de données"
   },
   "document_title": "Titre",
   "item_type": {

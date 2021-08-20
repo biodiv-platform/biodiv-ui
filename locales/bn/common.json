@@ -1,0 +1,89 @@
+{
+  "accepted": "গ্রহণযোগ্য",
+  "actions": {
+    "flag": {
+      "category": "বিভাগ",
+      "flags": {
+        "date_inappropriate": "অনুপযুক্ত তারিখ",
+        "details_inappropriate": "অনুপযুক্ত বিবরণ",
+        "location_inappropriate": "অনুপযুক্ত অবস্থান"
+      },
+      "notes": "মন্তব্য",
+      "others_flagged": "অন্যদের যারা পতাকা",
+      "title": "পতাকা"
+    }
+  },
+  "activity": "কার্যকলাপ",
+  "add": "যোগ করুন",
+  "cancel": "বাতিল করুন",
+  "clear": "পরিষ্কার",
+  "close": "বন্ধ",
+  "copy": "ক্লিপবোর্ডে কপি করুন",
+  "datatable": "Datatable.",
+  "delete": "মুছে ফেলা",
+  "edit": "সম্পাদনা করুন",
+  "edit_not_uploaded": "কিছু সম্পদ সঠিকভাবে আপলোড করা হয় না, আপলোড করার আগে অপেক্ষা করুন অথবা তাদের অপসারণ করুন",
+  "feature": "বৈশিষ্ট্য নির্বাচিত",
+  "feature_in_groups": "গ্রুপ বৈশিষ্ট্য",
+  "feedback": "প্রতিক্রিয়া",
+  "footer": {
+    "email": "ইমেইল.",
+    "facebook": "ফেসবুক",
+    "github": "Github.",
+    "powered_by": "দ্বারা চালিত",
+    "technology_partner": " প্রযুক্তি অংশীদার",
+    "twitter": "টুইটার"
+  },
+  "habitats_covered": "বাসস্থান আচ্ছাদিত",
+  "information": "তথ্য",
+  "invalid_request": "অনুরোধ অগ্রহণযোগ্য",
+  "list": {
+    "sort_by": "ক্রমানুসার",
+    "sort_options": {
+      "last_updated": "সর্বশেষ সংষ্করণ",
+      "latest": "শেষ আপলোড",
+      "most_viewed": "সর্বাধিক দেখা"
+    },
+    "view_type": {
+      "grid": "গ্রিড",
+      "list": "তালিকা",
+      "map": "মানচিত্র",
+      "stats": "ম্যাট্রিক্স"
+    }
+  },
+  "load_more": "আরো লোড ↺",
+  "loading": "লোড হচ্ছে ...",
+  "name": "নাম",
+  "next": "পরবর্তী",
+  "no_data": "কোন তথ্য নেই",
+  "no_results": "কোন ফলাফল পাওয়া যায়নি",
+  "notifications": {
+    "invalid_credentials": "আপনার প্রবেশকৃত ব্যবহারিক নাম ও প্রবেশ সংকেত টি ভুল।",
+    "token_error": "টোকেন fetching ত্রুটি",
+    "token_not_saved": "টোকেন সংরক্ষণ করতে পারে না",
+    "token_saved": "টোকেন সংরক্ষিত"
+  },
+  "observed_on": "উপর পালন করা হয়",
+  "offline": "কোন ইন্টারনেট সংযোগ",
+  "one_moment_please": "এক মুহূর্ত দয়া করে",
+  "or": "অথবা",
+  "permalink": "Permalink.",
+  "prev": "আগে",
+  "processing": "প্রক্রিয়াকরণ ...",
+  "read_more": "আরো পড়ুন",
+  "save": "সংরক্ষণ",
+  "search": "অনুসন্ধান করুন",
+  "session_required": "সাইন ইন প্রয়োজন",
+  "slider_left": "বাম",
+  "slider_right": "ঠিক আছে",
+  "species_coverage": "প্রজাতি গ্রুপ কভারেজ",
+  "success": "সাফল্য",
+  "temporal": {
+    "observations": "পর্যবেক্ষণ পর্যবেক্ষণ",
+    "title": "সাময়িক বিতরণ"
+  },
+  "toggle": "টগল করুন",
+  "unauthorized": "অননুমোদিত ব্যবহারকারী",
+  "unknown": "অজানা",
+  "usergroups": "গ্রুপ"
+}

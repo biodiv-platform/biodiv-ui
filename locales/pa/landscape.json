@@ -1,0 +1,20 @@
+{
+  "All": "ਸਾਰੇ",
+  "Validate": "ਪ੍ਰਮਾਣਿਤ",
+  "download_map": "ਡਾਉਨਲੋਡ ਮੈਪ",
+  "no_species_found": "ਕੋਈ ਸਪੀਸੀਜ਼ ਸੂਚੀ ਨਹੀਂ ਮਿਲੀ",
+  "observation": {
+    "fauna_list": "Funa ਸੂਚੀ",
+    "flora_list": "ਫਲੋਰ ਸੂਚੀ",
+    "life_list": {
+      "title": "ਨਿਰੀਖਣ ਸੂਚੀ"
+    },
+    "species_filter": "ਸਪੀਸੀਜ਼ ਫਿਲਟਰ"
+  },
+  "related_documents": "ਸਬੰਧਤ ਦਸਤਾਵੇਜ਼",
+  "site_number": "ਸਾਈਟ #",
+  "title": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ",
+  "update": {
+    "success": "ਖੇਤਰ ਸੁਰੱਖਿਅਤ"
+  }
+}

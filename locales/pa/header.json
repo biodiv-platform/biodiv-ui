@@ -1,0 +1,78 @@
+{
+  "group_edit": "ਸੋਧ ਸਮੂਹ",
+  "logged_user_only": "ਕਿਰਪਾ ਕਰਕੇ ਸਮੂਹ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਲਈ ਲੌਗਇਨ ਕਰੋ",
+  "member_only": "ਕਿਰਪਾ ਕਰਕੇ ਨਿਰੀਖਣ ਅਪਲੋਡ ਕਰਨ ਲਈ ਸਮੂਹ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "ਡਾਟਾ ਪੈਕੇਜ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_dataset": "ਡੇਟਾਸੇਟ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_document": "ਦਸਤਾਵੇਜ਼ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_fact": "ਤੱਥ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_list": "ਸੂਚੀ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_observation": "ਨਿਰੀਖਣ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_trait_or_value": "ਗੁਣ / ਮੁੱਲ ਸ਼ਾਮਲ ਕਰੋ",
+      "contribute_to_map": "ਨਕਸ਼ੇ ਵਿਚ ਯੋਗਦਾਨ ਪਾਓ",
+      "contribute_to_species": "ਸਪੀਸੀਜ਼ ਵਿਚ ਯੋਗਦਾਨ ਪਾਓ",
+      "title": "ਯੋਗਦਾਨ"
+    },
+    "groups": {
+      "see_all": "ਸਾਰੇ ਵੇਖੋ",
+      "title": "ਸਮੂਹ"
+    },
+    "settings": {
+      "leaderboard": "ਮੇਰੇ ਲੀਡਰਬੋਰਡ ਰੈਂਕ",
+      "logout": "ਲਾੱਗ ਆਊਟ, ਬਾਹਰ ਆਉਣਾ",
+      "my_observations": "ਮੇਰੇ ਨਿਰੀਖਣ",
+      "my_profile": "ਮੇਰਾ ਪ੍ਰੋਫ਼ਾਈਲ",
+      "title": "ਸੈਟਿੰਗਜ਼"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "ਦਸਤਾਵੇਜ਼ ਡੇਟਾਟੇਬਲ",
+      "documents": "ਦਸਤਾਵੇਜ਼",
+      "title": "ਦਸਤਾਵੇਜ਼"
+    },
+    "idao": {
+      "title": "Idao"
+    },
+    "landscapes": {
+      "title": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ"
+    },
+    "maps": {
+      "title": "ਨਕਸ਼ੇ"
+    },
+    "more": {
+      "about_us": "ਸਾਡੇ ਬਾਰੇ",
+      "activity": "ਸਰਗਰਮੀ",
+      "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+      "datasets": "ਡੇਟਾਸੀਟਸ",
+      "discussions": "ਵਿਚਾਰ ਵਟਾਂਦਰੇ",
+      "leaderboard": "ਲੀਡਰਬੋਰਡ",
+      "participants": "ਭਾਗੀਦਾਰ",
+      "title": "ਹੋਰ"
+    },
+    "observation": {
+      "checklists": "ਸੂਚੀ",
+      "datasets": "ਡੇਟਾਸੀਟਸ",
+      "observation_datatables": "ਨਿਰੀਖਣ ਡੇਟਾ",
+      "observation_traits": "ਨਿਰੀਖਣ ਦੇ ਗੁਣ",
+      "observations": "ਨਿਰੀਖਣ",
+      "title": "ਨਿਰੀਖਣ"
+    },
+    "pages": {
+      "empty": "ਕੋਈ ਪੰਨੇ ਨਹੀਂ",
+      "title": "ਪੰਨੇ"
+    },
+    "species": {
+      "species_datatables": "ਸਪੀਸੀਜ਼ ਡੇਟਾ",
+      "species_pages": "ਸਪੀਸੀਜ਼ ਪੇਜ",
+      "species_traits": "ਸਪੀਸੀਜ਼ ਦੇ ਗੁਣ",
+      "taxon_namelist": "ਟੈਕਸਾਂ ਦਾ ਨਾਮ ਲਿਸਟ",
+      "title": "ਸਪੀਸੀਜ਼"
+    }
+  },
+  "search": "ਖੋਜ",
+  "sign_in": "ਲਾਗਿਨ",
+  "toggle_menu": "ਟੌਗਲ ਮੀਨੂ"
+}

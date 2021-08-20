@@ -1,57 +1,57 @@
 {
   "create": {
-    "title": "Manampia Taxon"
+    "title": "Manampy taxon"
   },
   "modal": {
     "activity": "asa",
     "attributes": {
       "author": {
-        "desc": "Mampiseho ny mpanoratra sy ny taona amin'ny endrika izay hampiasana azy miaraka amin'ny anarana kanônika. \noh: (Pallas, 1811)",
-        "title": "Mpanoratra sy Taona"
+        "desc": "Mampiseho ny mpanoratra sy ny taona ao amin'ny format izay tokony hampiasaina amin'ny anarana kanônika. EG: (Pallas, 1811)",
+        "title": "Mpanoratra sy taona"
       },
       "canonical": {
-        "desc": "Mampiseho ny anarana kanônika ie. \nny anarana feno tsy misy mpanoratra sy taona.",
+        "desc": "Mampiseho ny anarana kanonika ie. ny anarana feno tsy misy mpanoratra sy taona.",
         "title": "kanônika"
       },
       "id": {
-        "desc": "Ny laharan'ny ID an'ny anarana eo amin'ny base de match.",
-        "title": "ID"
+        "desc": "Ny isan'ny ID amin'ny anarana amin'ny angona lalao.",
+        "title": "Id"
       },
       "name": {
-        "desc": "Mampiseho ny anarana verbatim ie. \nny anarana feno miaraka amin'ny mpanoratra sy taona raha fantatra.",
-        "error": "hadisoana raha manavao ny anarana taxon",
-        "success": "vita soa aman-tsara ny anarana taxon",
+        "desc": "Mampiseho ny anarana veratim ie. Ny anarana feno miaraka amin'ny mpanoratra sy ny taona raha fantatra.",
+        "error": "Hadisoana raha manavao ny anaran'i Taxon",
+        "success": "Nohavaozina tamim-pahombiazana ny anaran'i Taxon",
         "title": "Anarana"
       },
       "position": {
-        "desc": "Mampiseho ny lisitra misy ny anarana ankehitriny.",
-        "error": "hadisoana raha manavao toerana",
-        "success": "havaozina tsara ny toerana",
+        "desc": "Mampiseho ny lisitra izay misy ny anarana ankehitriny.",
+        "error": "Hadisoana raha manavao ny toerany",
+        "success": "Nohavaozina soa aman-tsara ny toerana",
         "title": "Toerana"
       },
       "rank": {
-        "desc": "Mampiseho ny laharan'ny hetraonomika an'ny anarana ao anatin'ny ambaratonga IBP.",
+        "desc": "Mampiseho ny laharan'ny hetra amin'ny anarana ao anatin'ny ambaratongam-pahefana IBP.",
         "title": "laharana"
       },
       "source": {
-        "desc": "Mampiseho ny tahiry farany izay namahana ny anarana. \nRaha tsy misy anaran'ny angon-drakitra omena, dia azo alamina ny mpanoratra.",
+        "desc": "Mampiseho ny angon-drakitra farany izay namaha ilay anarana. Raha tsy misy anarana database omena dia mety ho mpanoratra ny mpanoratra.",
         "title": "Source"
       },
       "status": {
-        "desc": "Mampiseho ny satan'ny anarana nomenclatural amin'izao fotoana izao araka izay ekena ao amin'ny Portal.",
-        "error": "hadisoana raha manavao ny satan'ny taxon",
-        "success": "soa aman-tsara nohavaozina ny satan'ny taxon",
+        "desc": "Mampiseho ny sata nomen'ny anarana ankehitriny amin'ny anarana hoe ekena amin'ny vavahadin-tserasera.",
+        "error": "Hadisoana raha manavao ny sata ara-pivavahana hetra",
+        "success": "Nohavaozina ny sata taxon",
         "title": "sata"
       },
       "title": "toetra",
       "via": {
-        "desc": "Mampiseho ny loharano niavian'ny loharanom-pahalalana.",
+        "desc": "Mampiseho ny loharanom-baovao tany am-boalohany izay nampidirina tao amin'ny angon-drakitra lalao.",
         "title": "tamin'ny alalan'ny"
       }
     },
-    "common_names": "Anarana mahazatra",
+    "common_names": "Anarana iombonana",
     "synonyms": "Synonymes",
-    "title": "Fampahalalana momba ny taxonomy"
+    "title": "Fampahalalana momba ny hetra"
   },
   "position": {
     "title": "Toerana"

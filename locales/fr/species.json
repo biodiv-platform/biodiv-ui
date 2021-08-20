@@ -26,7 +26,7 @@
   "contribute": {
     "create_species": "Créer de nouvelles espèces",
     "description": "Les pages espèces sont des descriptions d'espèces, avec une page pour chaque espèce. Chaque espèce peut être décrite avec plus de 60 groupes de champs standards. Les pages espèces sont alimentées et organisées par des experts.Toutes les informations publiées sur le portail sont en accès public et sous la licence Creative Commons de votre choix.",
-    "download": "Télécharger Sample XLSX",
+    "download": "Télécharger échantillon XLSX",
     "email": "Envoyez-nous un email",
     "offline": {
       "description": "Vous pouvez utiliser notre modèle de feuille de calcul pour travailler hors ligne et créer des informations sur les espèces.Le modèle consiste en une ligne par espèce.Veuillez télécharger la feuille de calcul XLSX et remplir plusieurs descriptions de l'espèce dans la feuille de calcul, avoir un répertoire d'images, zip le répertoire et l'envoyer à nous sur le courrier électronique ci-dessous et nous téléchargerons ensuite le contenu en votre nom.",
@@ -47,7 +47,7 @@
     "error": "Impossible de créer une page d'espèce",
     "form": {
       "name": "Nom",
-      "name_placeholder": "c'est à dire.Tricklinum sorediatum",
+      "name_placeholder": "c'est à dire.Triclinum sorediatum",
       "rank": "Rang",
       "search": "Rechercher",
       "select": "Sélectionner",
@@ -60,7 +60,7 @@
       "validate": "Valider"
     },
     "taxon_error": "Impossible de valider",
-    "title": "Ajouter des espèces",
+    "title": "Ajouter une espèce",
     "validate_error": "Impossible de valider"
   },
   "edit_name": "Gérer le nom commun",
@@ -100,18 +100,18 @@
   "remove": {
     "description": "Êtes-vous certain? Vous ne pourrez pas annuler cette action après.",
     "success": "Espèce supprimée avec succès",
-    "title": "Supprimer des espèces"
+    "title": "Supprimer l'espèce"
   },
   "share": "Partager cette espèce",
   "status": "Statut",
   "synonym": {
     "add": {
-      "failure": "Impossible d'ajouter Synonyme",
+      "failure": "Impossible d'ajouter le synonyme",
       "success": "Synonyme ajouté avec succès"
     },
     "delete": {
       "dialouge": "Êtes-vous certain?",
-      "failure": "Impossible de supprimer Synonyme",
+      "failure": "Impossible de supprimer le synonyme",
       "success": "Synonyme supprimé avec succès"
     },
     "form": {
@@ -122,7 +122,7 @@
       "type": "Type"
     },
     "update": {
-      "failure": "Impossible de mettre à jour Synonyme",
+      "failure": "Impossible de mettre à jour le synonyme",
       "success": "Synonyme mis à jour avec succès"
     }
   },
@@ -138,5 +138,5 @@
     }
   },
   "unfollow_species": "Suivre l'espèce",
-  "view_original": "Voir original"
+  "view_original": "voir l'original"
 }

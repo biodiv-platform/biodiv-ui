@@ -1,0 +1,89 @@
+{
+  "accepted": "ಅಂಗೀಕೃತ",
+  "actions": {
+    "flag": {
+      "category": "ವರ್ಗ",
+      "flags": {
+        "date_inappropriate": "ಸೂಕ್ತವಲ್ಲದ ದಿನಾಂಕ",
+        "details_inappropriate": "ಸೂಕ್ತವಲ್ಲದ ವಿವರಗಳು",
+        "location_inappropriate": "ಸೂಕ್ತವಲ್ಲದ ಸ್ಥಳ"
+      },
+      "notes": "ಟಿಪ್ಪಣಿಗಳು",
+      "others_flagged": "ಫ್ಲ್ಯಾಗ್ ಮಾಡಿದ ಇತರರು",
+      "title": "ಧ್ವಜ"
+    }
+  },
+  "activity": "ಚಟುವಟಿಕೆ",
+  "add": "ಸೇರಿಸಿ",
+  "cancel": "ರದ್ದುಮಾಡು",
+  "clear": "ಸ್ಪಷ್ಟ",
+  "close": "ಮುಚ್ಚು",
+  "copy": "ಕ್ಲಿಪ್ಬೋರ್ಡ್ಗೆ ನಕಲಿಸಿ",
+  "datatable": "ಡೇಟಾಬೇಡ",
+  "delete": "ಅಳಿಸಿ",
+  "edit": "ತಿದ್ದು",
+  "edit_not_uploaded": "ಕೆಲವು ಸಂಪನ್ಮೂಲಗಳನ್ನು ಸರಿಯಾಗಿ ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗುವುದಿಲ್ಲ, ದಯವಿಟ್ಟು ಅಪ್ಲೋಡ್ ಮಾಡುವ ಮೊದಲು ಅವುಗಳನ್ನು ನಿರೀಕ್ಷಿಸಿ ಅಥವಾ ತೆಗೆದುಹಾಕಿ",
+  "feature": "ವೈಶಿಷ್ಟ್ಯವನ್ನು ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ",
+  "feature_in_groups": "ಗುಂಪುಗಳಲ್ಲಿ ವೈಶಿಷ್ಟ್ಯ",
+  "feedback": "ಪ್ರತಿಕ್ರಿಯೆ",
+  "footer": {
+    "email": "ಸಮ",
+    "facebook": "ಫೇಸ್ಬುಕ್",
+    "github": "ಗಿಥೂಬ್",
+    "powered_by": "ನಡೆಸಲ್ಪಡುತ್ತಿದೆ",
+    "technology_partner": " ತಂತ್ರಜ್ಞಾನ ಪಾಲುದಾರ",
+    "twitter": "ಟ್ವಿಟರ್"
+  },
+  "habitats_covered": "ಆವಾಸಸ್ಥಾನಗಳು ಮುಚ್ಚಿವೆ",
+  "information": "ಮಾಹಿತಿ",
+  "invalid_request": "ಅಮಾನ್ಯ ವಿನಂತಿ",
+  "list": {
+    "sort_by": "ವಿಂಗಡಿಸು",
+    "sort_options": {
+      "last_updated": "ಕೊನೆಯದಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
+      "latest": "ಕೊನೆಯ ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗಿದೆ",
+      "most_viewed": "ಅತಿ ಹೆಚ್ಚು ವೀಕ್ಷಿಸಿದ"
+    },
+    "view_type": {
+      "grid": "ಗ್ರಿಡ್",
+      "list": "ಪಟ್ಟಿ",
+      "map": "ನಕ್ಷೆ",
+      "stats": "ಮೆಟ್ರಿಕ್ಸ್"
+    }
+  },
+  "load_more": "ಇನ್ನಷ್ಟು ಲೋಡ್ ಮಾಡಿ →",
+  "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ ...",
+  "name": "ಹೆಸರು",
+  "next": "ಮುಂದಿನ",
+  "no_data": "ಮಾಹಿತಿ ಇಲ್ಲ",
+  "no_results": "ಯಾವುದೇ ಫಲಿತಾಂಶಗಳು ಕಂಡುಬರಲಿಲ್ಲ",
+  "notifications": {
+    "invalid_credentials": "ನೀವು ನಮೂದಿಸಿದ ಬಳಕೆದಾರಹೆಸರು ಅಥವಾ ಪಾಸ್ವರ್ಡ್ ತಪ್ಪಾಗಿದೆ.",
+    "token_error": "ದೋಷವನ್ನು ಪಡೆಯುವಲ್ಲಿ ದೋಷ",
+    "token_not_saved": "ಟೋಕನ್ ಅನ್ನು ಉಳಿಸಲಾಗಲಿಲ್ಲ",
+    "token_saved": "ಟೋಕನ್ ಉಳಿಸಲಾಗಿದೆ"
+  },
+  "observed_on": "ಆಚರಿಸಲಾಗುತ್ತದೆ",
+  "offline": "ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ",
+  "one_moment_please": "ದಯವಿಟ್ಟು ಒಂದು ಕ್ಷಣ ಕಾಯಿರಿ",
+  "or": "ಅಥವಾ",
+  "permalink": "ಪರ್ಮಾಲಿಂಕ್",
+  "prev": "ಹಿಂದಿನ",
+  "processing": "ಸಂಸ್ಕರಣೆ ...",
+  "read_more": "ಮತ್ತಷ್ಟು ಓದು",
+  "save": "ಉಳಿಸು",
+  "search": "ಹುಡುಕಿ Kannada",
+  "session_required": "ಅಗತ್ಯವಿದೆ ಸೈನ್ ಇನ್",
+  "slider_left": "ಎಡ",
+  "slider_right": "ಬಲ",
+  "species_coverage": "ಜಾತಿ ಗುಂಪು ಕವರೇಜ್",
+  "success": "ಯಶಸ್ಸು",
+  "temporal": {
+    "observations": "ಅವಲೋಕನ",
+    "title": "ತಾತ್ಕಾಲಿಕ ವಿತರಣೆ"
+  },
+  "toggle": "ಟಾಗಲ್",
+  "unauthorized": "ಅನಧಿಕೃತ ಬಳಕೆದಾರ",
+  "unknown": "ಅಜ್ಞಾತ",
+  "usergroups": "ಗುಂಪುಗಳು"
+}

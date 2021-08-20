@@ -1,0 +1,78 @@
+{
+  "group_edit": "குழுவைத் திருத்தவும்",
+  "logged_user_only": "குழுவில் சேர உள்நுழையவும்",
+  "member_only": "பார்வையாளர்களை பதிவேற்ற குழுவில் சேரவும்",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "தரவு தொகுப்பு சேர்க்க",
+      "add_dataset": "தரவுத்தளத்தைச் சேர்க்கவும்",
+      "add_document": "ஆவணத்தைச் சேர்க்கவும்",
+      "add_fact": "உண்மையில் சேர்க்கவும்",
+      "add_list": "பட்டியலைச் சேர்க்கவும்",
+      "add_observation": "கவனிப்பு சேர்க்கவும்",
+      "add_trait_or_value": "பண்பு / மதிப்பு சேர்க்க",
+      "contribute_to_map": "வரைபடத்தை பங்களிக்கவும்",
+      "contribute_to_species": "இனங்கள் பங்களிக்கின்றன",
+      "title": "பங்களிக்கவும்"
+    },
+    "groups": {
+      "see_all": "அனைத்தையும் பார்",
+      "title": "குழுக்கள்"
+    },
+    "settings": {
+      "leaderboard": "என் லீடர்போர்டு ரேங்க்",
+      "logout": "வெளியேறு",
+      "my_observations": "என் அவதானிப்புகள்",
+      "my_profile": "என் சுயவிவரம்",
+      "title": "அமைப்புகள்"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "ஆவண Datatables.",
+      "documents": "ஆவணங்கள்",
+      "title": "ஆவணங்கள்"
+    },
+    "idao": {
+      "title": "Idao."
+    },
+    "landscapes": {
+      "title": "பாதுகாக்கப்பட்ட பகுதிகளில்"
+    },
+    "maps": {
+      "title": "வரைபடங்கள்"
+    },
+    "more": {
+      "about_us": "எங்களை பற்றி",
+      "activity": "செயல்பாடு",
+      "dashboard": "டாஷ்போர்டு",
+      "datasets": "தரவுத்தளங்கள்",
+      "discussions": "விவாதங்கள்",
+      "leaderboard": "லீட்ப்போர்டு",
+      "participants": "பங்கேற்பாளர்கள்",
+      "title": "மேலும்"
+    },
+    "observation": {
+      "checklists": "பட்டியல்",
+      "datasets": "தரவுத்தளங்கள்",
+      "observation_datatables": "கவனிப்பு Datatables.",
+      "observation_traits": "கவனிப்பு பண்புகளை",
+      "observations": "கண்காணிப்பு",
+      "title": "கவனிப்பு"
+    },
+    "pages": {
+      "empty": "பக்கங்கள் இல்லை",
+      "title": "பக்கங்கள்"
+    },
+    "species": {
+      "species_datatables": "இனங்கள் datatables.",
+      "species_pages": "இனங்கள் பக்கங்கள்",
+      "species_traits": "இனங்கள் குறைகின்றன",
+      "taxon_namelist": "டான்சன் நாமலிஸ்ட்",
+      "title": "இனங்கள்"
+    }
+  },
+  "search": "தேடல்",
+  "sign_in": "உள்நுழைய",
+  "toggle_menu": "மெனுவில் மாற்று"
+}

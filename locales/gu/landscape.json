@@ -1,0 +1,20 @@
+{
+  "All": "બધા",
+  "Validate": "માન્ય",
+  "download_map": "નકશો ડાઉનલોડ કરો",
+  "no_species_found": "કોઈ જાતિઓ સૂચિ મળી નથી",
+  "observation": {
+    "fauna_list": "ફ્યુના સૂચિ",
+    "flora_list": "ફ્લોરા યાદી",
+    "life_list": {
+      "title": "નિરીક્ષણ સૂચિ"
+    },
+    "species_filter": "પ્રજાતિ ફિલ્ટર"
+  },
+  "related_documents": "સંબંધિત દસ્તાવેજ (ઓ)",
+  "site_number": "સાઇટ #",
+  "title": "સંરક્ષિત વિસ્તારો",
+  "update": {
+    "success": "ક્ષેત્ર સાચવ્યું"
+  }
+}

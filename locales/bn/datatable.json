@@ -1,0 +1,42 @@
+{
+  "add": "Datatable যোগ করুন",
+  "attribution": "অ্যাট্রিবিউশন",
+  "basis_of_data": "তথ্য ভিত্তিতে",
+  "basis_of_record": "রেকর্ডের ভিত্তিতে",
+  "contributor": "অবদানকারী",
+  "create_datatable": "Datatable তৈরি করুন",
+  "field_mapping_table": "ক্ষেত্র ম্যাপিং টেবিল",
+  "files_upload": "ফাইল আপলোড",
+  "found": "Datatable পাওয়া যায়",
+  "geographical_coverage": "ভৌগোলিক কভারেজ",
+  "is_verified": "পর্যবেক্ষণ যাচাই",
+  "location": "অবস্থান",
+  "location_accuracy": "অবস্থান সঠিকতা",
+  "location_scale": "অবস্থান আইশের",
+  "media_uploader": "মিডিয়া আপলোডার",
+  "methods": "পদ্ধতি",
+  "notifications": {
+    "error": "Datatable তৈরি করতে অক্ষম",
+    "sheet_upload_error": "শীট আপলোড করতে অক্ষম",
+    "sheet_upload_success": "সফলভাবে আপলোড শীট",
+    "success": "Datatable সফলভাবে তৈরি"
+  },
+  "others": "অন্যান্য",
+  "party": "পার্টি",
+  "project": "প্রকল্প",
+  "sheet_uploader": "স্প্রেডশীট আপলোডার",
+  "show_page": "Datatable বিবরণ",
+  "summary": "সারসংক্ষেপ",
+  "table": {
+    "geoPrivacy": "জিও গোপনীয়তা",
+    "id": "আইডি",
+    "sGroup": "প্রজাতি গ্রুপ",
+    "scientificName": "বৈজ্ঞানিক নাম",
+    "userInfo": "ব্যবহারকারীর তথ্য"
+  },
+  "taxonomy": "Taxonomic কভারেজ",
+  "temporal": "সাময়িক কভারেজ",
+  "title": "জেনারেল মেটাডাটা",
+  "type": "টাইপ.",
+  "upload_again": "আবার আপলোড করুন"
+}

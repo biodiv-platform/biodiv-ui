@@ -1,0 +1,89 @@
+{
+  "accepted": "ଗ୍ରହଣ କରାଯାଇଥିବା",
+  "actions": {
+    "flag": {
+      "category": "ବର୍ଗ",
+      "flags": {
+        "date_inappropriate": "ଅନୁପଯୁକ୍ତ ତାରିଖ |",
+        "details_inappropriate": "ଅନୁପଯୁକ୍ତ ବିବରଣୀ",
+        "location_inappropriate": "ଅନୁପଯୁକ୍ତ ଅବସ୍ଥାନ |"
+      },
+      "notes": "ଟିପ୍ପଣୀ |",
+      "others_flagged": "ଅନ୍ୟମାନେ ଯିଏ ଫ୍ଲାଜ୍ କରିଥିଲେ |",
+      "title": "ପତାକା"
+    }
+  },
+  "activity": "କାର୍ଯ୍ୟକଳାପ",
+  "add": "ଯୋଡନ୍ତୁ |",
+  "cancel": "ବାତିଲ୍ କରନ୍ତୁ |",
+  "clear": "ସଫା",
+  "close": "ବନ୍ଦ",
+  "copy": "କ୍ଲିପବୋର୍ଡକୁ କପି କରନ୍ତୁ |",
+  "datatable": "ଡାଟାଟେବଲ୍",
+  "delete": "ବିଲୋପ କରନ୍ତୁ |",
+  "edit": "ସଂପାଦନ କରନ୍ତୁ |",
+  "edit_not_uploaded": "କିଛି ଉତ୍ସ ସଠିକ୍ ଭାବରେ ଅପଲୋଡ୍ ହୋଇନାହିଁ, ଦୟାକରି ସେମାନଙ୍କୁ ଅପଲୋଡ୍ କରିବା ପୂର୍ବରୁ ଅପେକ୍ଷା କରନ୍ତୁ କିମ୍ବା ଅପସାରଣ କରନ୍ତୁ |",
+  "feature": "ମନୋନୀତ ବ feature ଶିଷ୍ଟ୍ୟ",
+  "feature_in_groups": "ଗୋଷ୍ଠୀରେ ବ feature ଶିଷ୍ଟ୍ୟ |",
+  "feedback": "ମତାମତ",
+  "footer": {
+    "email": "ଇମେଲ୍",
+    "facebook": "ଫେସବୁକ୍",
+    "github": "ଗିଥୁବ",
+    "powered_by": "ଦ୍ଵାରା ନିର୍ମିତ",
+    "technology_partner": " ଟେକ୍ନେସ୍ ପାର୍ଟନର |",
+    "twitter": "ଟ୍ୱିଟର"
+  },
+  "habitats_covered": "ବାସସ୍ଥାନ ଆଚ୍ଛାଦିତ |",
+  "information": "ସୂଚନା",
+  "invalid_request": "ଅବ val ଧ ଅନୁରୋଧ |",
+  "list": {
+    "sort_by": "ଦ୍ be ାରା ସର୍ଟ କରନ୍ତୁ |",
+    "sort_options": {
+      "last_updated": "ଶେଷ ଅଦ୍ୟତନ",
+      "latest": "ଶେଷ ଅପଲୋଡ୍ ହୋଇଛି |",
+      "most_viewed": "ଅଧିକାଂଶ ଦେଖାଯାଏ |"
+    },
+    "view_type": {
+      "grid": "ଗ୍ରୀଡ୍",
+      "list": "ତାଲିକା |",
+      "map": "ମାନଚିତ୍ର",
+      "stats": "ମେଟ୍ରିକ୍ସ"
+    }
+  },
+  "load_more": "ଅଧିକ ଲୋଡ୍ କରନ୍ତୁ ↺",
+  "loading": "ଲୋଡିଂ ...",
+  "name": "ନାମ",
+  "next": "ପରବର୍ତ୍ତୀ",
+  "no_data": "କ data ଣସି ତଥ୍ୟ ନାହିଁ |",
+  "no_results": "କ No ଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ |",
+  "notifications": {
+    "invalid_credentials": "ଆପଣ ଦେଇଥିବା ଉପଭକ୍ତା ନାମ ବା ଗୁପ୍ତଶବ୍ଦ ଭୁଲ ଅଛି।",
+    "token_error": "ଟୋକେନ୍ ଆଣିବାରେ ତ୍ରୁଟି |",
+    "token_not_saved": "ଟୋକନ୍ ସଞ୍ଚୟ କରିପାରିଲା ନାହିଁ |",
+    "token_saved": "ଟୋକନ୍ ସେଭ୍ ହୋଇଛି |"
+  },
+  "observed_on": "ଉପରେ ଦେଖାଗଲା |",
+  "offline": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",
+  "one_moment_please": "ଦୟାକରି ଗୋଟିଏ ମୁହୂର୍ତ୍ତ",
+  "or": "କିମ୍ବା",
+  "permalink": "Permalink",
+  "prev": "ପୂର୍ବ",
+  "processing": "ପ୍ରକ୍ରିୟାକରଣ ...",
+  "read_more": "ଅଧିକ ପଢ",
+  "save": "ସଞ୍ଚୟ କରନ୍ତୁ |",
+  "search": "ସନ୍ଧାନ କର |",
+  "session_required": "ଆବଶ୍ୟକ ସାଇନ୍ ଇନ୍ କରନ୍ତୁ |",
+  "slider_left": "ବାମ",
+  "slider_right": "ଠିକ୍",
+  "species_coverage": "ପ୍ରଜାତି ଗ୍ରୁପ୍ କଭରେଜ୍ କଭରେଜ୍ |",
+  "success": "ସଫଳତା",
+  "temporal": {
+    "observations": "ପର୍ଯ୍ୟବେକ୍ଷଣ",
+    "title": "ସାମୟିକ ବଣ୍ଟନ"
+  },
+  "toggle": "ଟୋଗଲ୍ କରନ୍ତୁ |",
+  "unauthorized": "ଅନଧିକୃତ ଉପଭୋକ୍ତା |",
+  "unknown": "ଅଜ୍ଞାତ",
+  "usergroups": "ଗୋଷ୍ଠୀଗୁଡ଼ିକ"
+}

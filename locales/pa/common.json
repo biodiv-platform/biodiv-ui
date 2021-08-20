@@ -1,0 +1,89 @@
+{
+  "accepted": "ਸਵੀਕਾਰ ਕੀਤਾ",
+  "actions": {
+    "flag": {
+      "category": "ਸ਼੍ਰੇਣੀ",
+      "flags": {
+        "date_inappropriate": "ਅਣਉਚਿਤ ਤਾਰੀਖ",
+        "details_inappropriate": "ਅਣਉਚਿਤ ਵੇਰਵੇ",
+        "location_inappropriate": "ਅਣਉਚਿਤ ਸਥਾਨ"
+      },
+      "notes": "ਨੋਟਸ",
+      "others_flagged": "ਹੋਰ ਜੋ ਫਲੈਗ ਕੀਤੇ ਸਨ",
+      "title": "ਝੰਡਾ"
+    }
+  },
+  "activity": "ਸਰਗਰਮੀ",
+  "add": "ਸ਼ਾਮਲ ਕਰੋ",
+  "cancel": "ਰੱਦ ਕਰੋ",
+  "clear": "ਸਾਫ",
+  "close": "ਨੇੜੇ",
+  "copy": "ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ",
+  "datatable": "ਡੇਟਾਟੇਬਲ",
+  "delete": "ਮਿਟਾਓ",
+  "edit": "ਸੋਧ",
+  "edit_not_uploaded": "ਕੁਝ ਸਰੋਤ ਸਹੀ ਤਰ੍ਹਾਂ ਅਪਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ, ਕਿਰਪਾ ਕਰਕੇ ਅਪਲੋਡ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਉਡੀਕ ਕਰੋ ਜਾਂ ਹਟਾਓ",
+  "feature": "ਤਸਵੀਰ ਚੁਣੀ ਗਈ",
+  "feature_in_groups": "ਸਮੂਹਾਂ ਵਿੱਚ ਵਿਸ਼ੇਸ਼ਤਾ",
+  "feedback": "ਸੁਝਾਅ",
+  "footer": {
+    "email": "ਈ - ਮੇਲ",
+    "facebook": "ਫੇਸਬੁੱਕ",
+    "github": "Github",
+    "powered_by": "ਦੁਆਰਾ ਸੰਚਾਲਿਤ",
+    "technology_partner": " ਟੈਕਨੋਲੋਜੀ ਸਾਥੀ",
+    "twitter": "ਟਵਿੱਟਰ"
+  },
+  "habitats_covered": "ਨਿਵਾਸ",
+  "information": "ਜਾਣਕਾਰੀ",
+  "invalid_request": "ਗਲਤ ਬੇਨਤੀ",
+  "list": {
+    "sort_by": "ਦੇ ਨਾਲ ਕ੍ਰਮਬੱਧ",
+    "sort_options": {
+      "last_updated": "ਆਖਰੀ ਵਾਰ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+      "latest": "ਆਖਰੀ ਅਪਲੋਡ ਕੀਤਾ ਗਿਆ",
+      "most_viewed": "ਸਭ ਤੋਂ ਵੱਧ ਵੇਖਿਆ ਗਿਆ"
+    },
+    "view_type": {
+      "grid": "ਗਰਿੱਡ",
+      "list": "ਸੂਚੀ",
+      "map": "ਨਕਸ਼ਾ",
+      "stats": "ਮੈਟ੍ਰਿਕਸ"
+    }
+  },
+  "load_more": "ਹੋਰ ਲੋਡ ਕਰੋ ↺",
+  "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ ...",
+  "name": "ਨਾਮ",
+  "next": "ਅਗਲਾ",
+  "no_data": "ਕੋਈ ਡਾਟਾ ਨਹੀਂ",
+  "no_results": "ਕੋਈ ਨਤੀਜਾ ਨਹੀਂ ਮਿਲਿਆ",
+  "notifications": {
+    "invalid_credentials": "ਤੁਹਾਡੇ ਦੁਆਰਾ ਦਿੱਤਾ ਗਿਆ ਨਾਮ ਜਾਂ ਪਾਸਵਰਡ ਗਲਤ ਹੈ.",
+    "token_error": "ਟੋਕਨ ਲਿਆਉਣ ਵਿੱਚ ਗਲਤੀ",
+    "token_not_saved": "ਟੋਕਨ ਨੂੰ ਬਚਾ ਨਹੀ ਕਰ ਸਕਿਆ",
+    "token_saved": "ਟੋਕਨ ਸੁਰੱਖਿਅਤ ਹੋ ਗਿਆ"
+  },
+  "observed_on": "ਤੇ ਦੇਖਿਆ",
+  "offline": "ਕੋਈ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਨਹੀਂ",
+  "one_moment_please": "ਕਿਰਪਾ ਕਰਕੇ ਇਕ ਪਲ",
+  "or": "ਜਾਂ",
+  "permalink": "ਪਰਮਲਿੰਕ",
+  "prev": "ਪਿਛਲਾ",
+  "processing": "ਕਾਰਵਾਈ...",
+  "read_more": "ਹੋਰ ਪੜ੍ਹੋ",
+  "save": "ਸੇਵ",
+  "search": "ਖੋਜ",
+  "session_required": "ਸਾਈਨ ਇਨ ਲੋੜੀਂਦਾ",
+  "slider_left": "ਖੱਬੇ",
+  "slider_right": "ਸਹੀ",
+  "species_coverage": "ਸਪੀਸੀਜ਼ ਗਰੁੱਪ ਕਵਰੇਜ",
+  "success": "ਸਫਲਤਾ",
+  "temporal": {
+    "observations": "ਨਿਰੀਖਣ",
+    "title": "ਅਸਥਾਈ ਵੰਡ"
+  },
+  "toggle": "ਟੌਗਲ",
+  "unauthorized": "ਅਣਅਧਿਕਾਰਤ ਉਪਭੋਗਤਾ",
+  "unknown": "ਅਣਜਾਣ",
+  "usergroups": "ਸਮੂਹ"
+}

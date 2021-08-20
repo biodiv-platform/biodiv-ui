@@ -1,0 +1,144 @@
+{
+  "clear": "ਸਾਫ {{filterCount}}. ਫਿਲਟਰ) ਫਿਲਟਰ",
+  "custom_fields": {
+    "has_content": "ਦੀ ਸਮੱਗਰੀ ਹੈ",
+    "no_content": "ਕੋਈ ਸਮੱਗਰੀ ਨਹੀਂ",
+    "no_custom_field": "ਕੋਈ ਕਸਟਮ ਫੀਲਡ ਨਹੀਂ ਲੱਭਿਆ",
+    "title": "ਕਸਟਮ ਫੀਲਡ"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "ਫਲੈਗ ਕੀਤਾ",
+      "title": "ਝੰਡਾ",
+      "unflagged": "ਅਣਪਛਾਤੇ"
+    },
+    "identification": {
+      "identified": "ਪਛਾਣਿਆ",
+      "title": "ਪਛਾਣ",
+      "unidentified": "ਅਣਪਛਾਤੀ"
+    },
+    "taxon_id": {
+      "has_taxon": "ਟੈਕਨੀ ਆਈ ਡੀ ਹੈ",
+      "no_taxon": "ਕੋਈ ਟੈਕਨੀਅਨ ਆਈਡੀ ਨਹੀਂ",
+      "title": "ਟੈਕਸੀ"
+    },
+    "title": "ਡਾਟਾ ਕੁਆਲਟੀ",
+    "validation": {
+      "not_validated": "ਪ੍ਰਮਾਣਿਤ ਨਹੀਂ",
+      "title": "ਪ੍ਰਮਾਣਿਕਤਾ",
+      "validated": "ਪ੍ਰਮਾਣਿਤ"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "ਡੇਟਾਸੇਟ ਦਾ ਨਾਮ"
+    },
+    "datatable": {
+      "title": "ਡੇਟਾਟੇਬਲ ਨਾਮ"
+    },
+    "title": "ਡੇਟਾਸੇਟ ਮੈਟਾਡੇਟਾ"
+  },
+  "document_title": "ਸਿਰਲੇਖ",
+  "item_type": {
+    "title": "ਆਈਟਮ ਦੀ ਕਿਸਮ"
+  },
+  "location": {
+    "district": "ਜ਼ਿਲ੍ਹਾ",
+    "map": {
+      "title": "ਨਕਸ਼ਾ"
+    },
+    "protected_area": {
+      "title": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ"
+    },
+    "state": {
+      "title": "ਰਾਜ"
+    },
+    "tehsil": "ਤਹਿਸੀਲ",
+    "title": "ਟਿਕਾਣਾ"
+  },
+  "media": {
+    "audio": "ਆਡੀਓ",
+    "image": "ਚਿੱਤਰ",
+    "no_media": "ਕੋਈ ਮੀਡੀਆ ਨਹੀਂ",
+    "title": "ਮੀਡੀਆ ਪ੍ਰਕਾਰ",
+    "video": "ਵੀਡੀਓ"
+  },
+  "name": {
+    "reco_name": {
+      "title": "ਨਾਮ"
+    },
+    "status": {
+      "accepted": "ਸਵੀਕਾਰ ਕੀਤਾ",
+      "synonym": "ਸਮਾਨਾਰਥੀ",
+      "title": "ਸਥਿਤੀ"
+    },
+    "title": "ਵਿਗਿਆਨਕ ਨਾਮ"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "ਸਾਰੇ ਨਾਮ"
+    },
+    "taxon_names": {
+      "title": "ਟੈਕਸੀ"
+    },
+    "taxon_rank": {
+      "title": "ਟੈਕਨੀ ਰੈਂਕ"
+    },
+    "taxon_status": {
+      "title": "ਟੈਕਸੀ"
+    },
+    "title": "ਵਿਗਿਆਨਕ ਨਾਮ"
+  },
+  "species_group": {
+    "all": "ਸਾਰੇ",
+    "amphibians": "ਐਮਫਿਬਿਅਨਜ਼",
+    "arthropods": "ਆਰਥਰੋਵਡਜ਼",
+    "birds": "ਪੰਛੀ",
+    "fish": "ਮੱਛੀ",
+    "fungi": "ਫੰਗੀ",
+    "mammals": "ਥਣਧਾਰੀ",
+    "molluscs": "ਮੋਲੱਸਸ",
+    "others": "ਹੋਰ",
+    "plants": "ਪੌਦੇ",
+    "reptiles": "ਸਰੀਪਨ",
+    "title": "ਸਪੀਸੀਜ਼ ਸਮੂਹ"
+  },
+  "taxon_browser": {
+    "search": "ਰੁੱਖ ਵਿੱਚ ਖੋਜ ਕਰੋ",
+    "search_results": "{{resultsCount}} ਨਤੀਜਿਆਂ ਦੇ {{currentIndex}} ਵੇਖ ਰਿਹਾ ਹੈ",
+    "title": "ਟੈਕ ਬਰਾ browser ਜ਼ਰ"
+  },
+  "time": {
+    "created_on": "ਤਾਰੀਖ ਬਣਾਈ ਗਈ",
+    "max_date": "ਵੱਧ ਤੋਂ ਵੱਧ ਤਾਰੀਖ",
+    "min_date": "ਘੱਟੋ ਘੱਟ ਤਾਰੀਖ",
+    "month": {
+      "apr": "ਅਪ੍ਰੈਲ",
+      "aug": "ਅਗਸਤ",
+      "dec": "ਦਸੰਬਰ",
+      "feb": "ਫਰਵਰੀ",
+      "jan": "ਜਨਵਰੀ",
+      "jul": "ਜੁਲਾਈ",
+      "jun": "ਜੂਨ",
+      "mar": "ਮਾਰਚ",
+      "may": "ਮਈ",
+      "nov": "ਨਵੰਬਰ",
+      "oct": "ਅਕਤੂਬਰ",
+      "sep": "ਸਤੰਬਰ",
+      "title": "ਮਹੀਨਾ ਮਨਾਇਆ ਗਿਆ"
+    },
+    "title": "ਸਮਾਂ"
+  },
+  "title": "ਫਿਲਟਰ",
+  "toggle": "ਟੌਗਲ ਫਿਲਟਰ",
+  "traits": {
+    "title": "ਗੁਣ"
+  },
+  "user": {
+    "search": "ਖੋਜ ਉਪਭੋਗਤਾ",
+    "title": "ਉਪਭੋਗਤਾ"
+  },
+  "usergroup": {
+    "title": "ਉਪਭੋਗਤਾ ਸਮੂਹ"
+  }
+}

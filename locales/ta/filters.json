@@ -1,0 +1,144 @@
+{
+  "clear": "தெளிவான {{filterCount}} வடிகட்டி (கள்)",
+  "custom_fields": {
+    "has_content": "உள்ளடக்கம் உள்ளது",
+    "no_content": "உள்ளடக்கம் இல்லை",
+    "no_custom_field": "இல்லை விருப்ப துறையில் (கள்) கண்டுபிடிக்கப்பட்டது",
+    "title": "விருப்ப புலங்கள்"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "கொடியது",
+      "title": "கொடி",
+      "unflagged": "Unflagged."
+    },
+    "identification": {
+      "identified": "அடையாளம்",
+      "title": "அடையாளம்",
+      "unidentified": "அடையாளம் தெரியாத"
+    },
+    "taxon_id": {
+      "has_taxon": "டான்சன் ஐடி உள்ளது",
+      "no_taxon": "டாக்சன் ஐடி இல்லை",
+      "title": "டாக்ஸன் ஐடி"
+    },
+    "title": "தரவு தரம்",
+    "validation": {
+      "not_validated": "சரிபார்க்கப்படவில்லை",
+      "title": "சரிபார்த்தல்",
+      "validated": "சரிபார்க்கப்பட்டது"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "தரவுத்தள பெயர்"
+    },
+    "datatable": {
+      "title": "Datatable பெயர்"
+    },
+    "title": "தரவுத்தள மெட்டாடேட்டா"
+  },
+  "document_title": "தலைப்பு",
+  "item_type": {
+    "title": "பொருள் வகை"
+  },
+  "location": {
+    "district": "மாவட்டம்",
+    "map": {
+      "title": "Map."
+    },
+    "protected_area": {
+      "title": "பாதுகாக்கப்பட்ட பகுதிகளில்"
+    },
+    "state": {
+      "title": "நிலை"
+    },
+    "tehsil": "தெஹ்ஸில்",
+    "title": "இருப்பிடம்"
+  },
+  "media": {
+    "audio": "ஆடியோ",
+    "image": "பட",
+    "no_media": "இல்லை ஊடக",
+    "title": "ஊடக வகை",
+    "video": "காணொளி"
+  },
+  "name": {
+    "reco_name": {
+      "title": "பெயர்"
+    },
+    "status": {
+      "accepted": "ஏற்றுக்கொள்ளப்பட்டது",
+      "synonym": "ஒத்தர்த்த",
+      "title": "நிலை"
+    },
+    "title": "அறிவியல் பெயர்"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "அனைத்து பெயர்கள்"
+    },
+    "taxon_names": {
+      "title": "டாக்கன் பெயர்கள்"
+    },
+    "taxon_rank": {
+      "title": "டாக்ஸன் ரேங்க்"
+    },
+    "taxon_status": {
+      "title": "டாக்கன் நிலை"
+    },
+    "title": "அறிவியல் பெயர்"
+  },
+  "species_group": {
+    "all": "அனைத்து",
+    "amphibians": "நிலையற்றவர்",
+    "arthropods": "ஆர்ட்ரோபோட்ஸ்",
+    "birds": "பறவைகள். பறவைகள்",
+    "fish": "மீன்",
+    "fungi": "பூஞ்சை",
+    "mammals": "பாலூட்டிகள்",
+    "molluscs": "மோலுக்கம்",
+    "others": "மற்றவைகள்",
+    "plants": "செடிகள்",
+    "reptiles": "ஊர்வன",
+    "title": "இனங்கள் குழு"
+  },
+  "taxon_browser": {
+    "search": "மரத்தில் தேடுக",
+    "search_results": "{{currentIndex}} of {{resultsCount}}",
+    "title": "டாக்கன் உலாவி"
+  },
+  "time": {
+    "created_on": "உருவாக்கப்பட்டது தேதி",
+    "max_date": "அதிகபட்ச தேதி",
+    "min_date": "குறைந்தபட்ச தேதி.",
+    "month": {
+      "apr": "ஏப்ரல்",
+      "aug": "ஆகஸ்ட்",
+      "dec": "டிசம்பர்",
+      "feb": "பிப்ரவரி",
+      "jan": "ஜனவரி",
+      "jul": "ஜூலை",
+      "jun": "ஜூன்",
+      "mar": "மார்ச்",
+      "may": "மே",
+      "nov": "நவம்பர்",
+      "oct": "அக்டோபர்",
+      "sep": "செப்டம்பர்",
+      "title": "மாதம் அனுசரிக்கப்பட்டது"
+    },
+    "title": "நேரம்"
+  },
+  "title": "வடிகட்டிகள்",
+  "toggle": "வடிகட்டிகள் மாற்று",
+  "traits": {
+    "title": "பண்புகள்"
+  },
+  "user": {
+    "search": "தேடல் பயனர்",
+    "title": "பயனர்"
+  },
+  "usergroup": {
+    "title": "பயனர் குழுக்கள்"
+  }
+}

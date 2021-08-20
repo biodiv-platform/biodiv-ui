@@ -1,0 +1,78 @@
+{
+  "group_edit": "ଗୋଷ୍ଠୀ ସଂପାଦନ କରନ୍ତୁ |",
+  "logged_user_only": "ଦୟାକରି ଗୋଷ୍ଠୀରେ ଯୋଗଦେବା ପାଇଁ ଲଗଇନ୍ କରନ୍ତୁ |",
+  "member_only": "ପର୍ଯ୍ୟବେକ୍ଷଣକୁ ଅପଲୋଡ୍ କରିବା ପାଇଁ ଦୟାକରି ଗୋଷ୍ଠୀରେ ଯୋଗ ଦିଅନ୍ତୁ |",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "ଡାଟା ପ୍ୟାକେଜ୍ ଯୋଡନ୍ତୁ |",
+      "add_dataset": "ଡାଟାସେଟ୍ ଯୋଡନ୍ତୁ |",
+      "add_document": "ଡକ୍ୟୁମେଣ୍ଟ୍ ଯୋଡ",
+      "add_fact": "ସତ୍ୟ ଯୋଡନ୍ତୁ",
+      "add_list": "ତାଲିକା ଯୋଡନ୍ତୁ |",
+      "add_observation": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଯୋଗ କରନ୍ତୁ |",
+      "add_trait_or_value": "ଗୁଣ / ମୂଲ୍ୟ ଯୋଡନ୍ତୁ |",
+      "contribute_to_map": "ମାନଚିତ୍ରରେ ସହଯୋଗ କରନ୍ତୁ |",
+      "contribute_to_species": "ପ୍ରଜାତିର ଯୋଗଦାନ କରନ୍ତୁ |",
+      "title": "ସହଯୋଗ କରନ୍ତୁ |"
+    },
+    "groups": {
+      "see_all": "ସବୁ ଦେଖ",
+      "title": "ଗୋଷ୍ଠୀଗୁଡ଼ିକ"
+    },
+    "settings": {
+      "leaderboard": "ମୋର ଲିଟିଆବୋର୍ଡ ମାନ୍ୟତା |",
+      "logout": "ପ୍ରସ୍ଥାନ କର",
+      "my_observations": "ମୋର ପର୍ଯ୍ୟବେକ୍ଷଣ",
+      "my_profile": "ମୋର ପ୍ରୋଫାଇଲ୍",
+      "title": "ସେଟିଂସମୂହ"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "ଡାଟାବାଟ ଯୋଗ୍ୟ |",
+      "documents": "ଡକ୍ୟୁମେଣ୍ଟ୍ |",
+      "title": "ଡକ୍ୟୁମେଣ୍ଟ୍ |"
+    },
+    "idao": {
+      "title": "IDAO"
+    },
+    "landscapes": {
+      "title": "ସୁରକ୍ଷିତ ଅଞ୍ଚଳଗୁଡିକ |"
+    },
+    "maps": {
+      "title": "ମାନଚିତ୍ରଗୁଡିକ"
+    },
+    "more": {
+      "about_us": "ଆମ ବିଷୟରେ",
+      "activity": "କାର୍ଯ୍ୟକଳାପ",
+      "dashboard": "ଡ୍ୟାସବୋର୍ଡ |",
+      "datasets": "ଡାଟାସେଟ୍ |",
+      "discussions": "ଆଲୋଚନା",
+      "leaderboard": "ଲିଡନବୋର୍ଡ |",
+      "participants": "ଅଂଶଗ୍ରହଣକାରୀମାନେ",
+      "title": "ଅଧିକ"
+    },
+    "observation": {
+      "checklists": "ତାଲିକା |",
+      "datasets": "ଡାଟାସେଟ୍ |",
+      "observation_datatables": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଡାଟାବାଟେବଲ୍ |",
+      "observation_traits": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଗୁଣ |",
+      "observations": "ପର୍ଯ୍ୟବେକ୍ଷଣ",
+      "title": "ପର୍ଯ୍ୟବେକ୍ଷଣ"
+    },
+    "pages": {
+      "empty": "କ pages ଣସି ପୃଷ୍ଠା ନାହିଁ",
+      "title": "ପୃଷ୍ଠାଗୁଡ଼ିକ |"
+    },
+    "species": {
+      "species_datatables": "ପ୍ରଜାତି ଡାଟାବାଟେବଲ୍ |",
+      "species_pages": "ପ୍ରଜାତି ପୃଷ୍ଠାଗୁଡ଼ିକ |",
+      "species_traits": "ପ୍ରଜାତି ଗୁଣଗୁଡିକ |",
+      "taxon_namelist": "କରନ୍ ନାମଲିଷ୍ଟ |",
+      "title": "ପ୍ରଜାତି"
+    }
+  },
+  "search": "ସନ୍ଧାନ କର |",
+  "sign_in": "ଭିତରକୁ ଯାଉ",
+  "toggle_menu": "ମେନୁ ଟୋଗଲ୍ କରନ୍ତୁ |"
+}

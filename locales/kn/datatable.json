@@ -1,0 +1,42 @@
+{
+  "add": "ಡೇಟಾಬೇಡ್ ಸೇರಿಸಿ",
+  "attribution": "ಅಟ್ರಿಬ್ಯೂಷನ್",
+  "basis_of_data": "ಡೇಟಾದ ಆಧಾರ",
+  "basis_of_record": "ದಾಖಲೆಯ ಆಧಾರ",
+  "contributor": "ಕೊಡುಗೆ ಮಾಡು",
+  "create_datatable": "ಡೇಟಾವನ್ನು ರಚಿಸಿ",
+  "field_mapping_table": "ಕ್ಷೇತ್ರ ಮ್ಯಾಪಿಂಗ್ ಟೇಬಲ್",
+  "files_upload": "ಫೈಲ್ಗಳನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡುತ್ತದೆ",
+  "found": "ಡೇಟಾ ಮಾಡಬಹುದಾದದು",
+  "geographical_coverage": "ಭೌಗೋಳಿಕ ವ್ಯಾಪ್ತಿ",
+  "is_verified": "ವೀಕ್ಷಣೆ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+  "location": "ಸ್ಥಳ",
+  "location_accuracy": "ಸ್ಥಳ ನಿಖರತೆ",
+  "location_scale": "ಸ್ಥಳ ಸ್ಕೇಲ್",
+  "media_uploader": "ಮೀಡಿಯಾ ಅಪ್ಲೋಡರ್",
+  "methods": "ವಿಧಾನಗಳು",
+  "notifications": {
+    "error": "ಡೇಟಾವನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+    "sheet_upload_error": "ಹಾಳೆಯನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ",
+    "sheet_upload_success": "ಯಶಸ್ವಿಯಾಗಿ ಅಪ್ಲೋಡ್ ಮಾಡಿದ ಶೀಟ್",
+    "success": "ಡೇಟಾಬೇಸ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ"
+  },
+  "others": "ಇತರರು",
+  "party": "ಪಕ್ಷ",
+  "project": "ಪ್ರಾಜೆಕ್ಟ್",
+  "sheet_uploader": "ಸ್ಪ್ರೆಡ್ಷೀಟ್ ಅಪ್ಲೋಡರ್",
+  "show_page": "ಡೇಟಾಟೇಬಲ್ ವಿವರಗಳು",
+  "summary": "ಸಾರಾಂಶ",
+  "table": {
+    "geoPrivacy": "ಜಿಯೋ ಗೌಪ್ಯತೆ",
+    "id": "ಐಡಿ",
+    "sGroup": "ಜಾತಿ ಗುಂಪು",
+    "scientificName": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು",
+    "userInfo": "ಬಳಕೆದಾರ ಮಾಹಿತಿ"
+  },
+  "taxonomy": "ಜೀವಿವರ್ಗೀಕರಣ ವ್ಯಾಪ್ತಿ",
+  "temporal": "ತಾತ್ಕಾಲಿಕ ವ್ಯಾಪ್ತಿ",
+  "title": "ಜನರಲ್ ಮೆಟಾಡೇಟಾ",
+  "type": "ಮಾದರಿ",
+  "upload_again": "ಮತ್ತೆ ಅಪ್ಲೋಡ್ ಮಾಡಿ"
+}

@@ -1,0 +1,78 @@
+{
+  "group_edit": "જૂથ સંપાદિત કરો",
+  "logged_user_only": "કૃપા કરીને જૂથમાં જોડાવા માટે લૉગિન કરો",
+  "member_only": "કૃપા કરીને અવલોકનો અપલોડ કરવા માટે જૂથમાં જોડાઓ",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "ડેટા પેકેજ ઉમેરો",
+      "add_dataset": "ડેટાસેટ ઉમેરો",
+      "add_document": "દસ્તાવેજ ઉમેરો",
+      "add_fact": "હકીકત ઉમેરો",
+      "add_list": "સૂચિ ઉમેરો",
+      "add_observation": "નિરીક્ષણ ઉમેરો",
+      "add_trait_or_value": "વિશેષતા / મૂલ્ય ઉમેરો",
+      "contribute_to_map": "નકશામાં ફાળો આપે છે",
+      "contribute_to_species": "જાતિઓમાં યોગદાન આપો",
+      "title": "ફાળો આપવો"
+    },
+    "groups": {
+      "see_all": "બધા જુઓ",
+      "title": "જૂથો"
+    },
+    "settings": {
+      "leaderboard": "મારા લીડરબોર્ડ રેન્ક",
+      "logout": "લૉગ આઉટ",
+      "my_observations": "મારા અવલોકનો",
+      "my_profile": "મારી પ્રોફાઈલ",
+      "title": "ગોઠવણીઓ"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "દસ્તાવેજ ડેટાટેબલ્સ",
+      "documents": "દસ્તાવેજો",
+      "title": "દસ્તાવેજો"
+    },
+    "idao": {
+      "title": "ઇડાડો"
+    },
+    "landscapes": {
+      "title": "સંરક્ષિત વિસ્તારો"
+    },
+    "maps": {
+      "title": "નકશા"
+    },
+    "more": {
+      "about_us": "અમારા વિશે",
+      "activity": "પ્રવૃત્તિ",
+      "dashboard": "ડેશબોર્ડ",
+      "datasets": "ડેટાસેટ્સ",
+      "discussions": "ચર્ચાઓ",
+      "leaderboard": "અગ્રલેખ",
+      "participants": "સહભાગીઓ",
+      "title": "વધુ"
+    },
+    "observation": {
+      "checklists": "યાદી",
+      "datasets": "ડેટાસેટ્સ",
+      "observation_datatables": "નિરીક્ષણ ડેટા",
+      "observation_traits": "નિરીક્ષણ",
+      "observations": "અવલોકન",
+      "title": "અવલોકન"
+    },
+    "pages": {
+      "empty": "કોઈ પૃષ્ઠો નથી",
+      "title": "પાના"
+    },
+    "species": {
+      "species_datatables": "જાતિઓ ડેટાટેબલ્સ",
+      "species_pages": "પ્રજાતિના પૃષ્ઠો",
+      "species_traits": "પ્રજાતિઓની લાક્ષણિકતાઓ",
+      "taxon_namelist": "ટેક્સન નમાલિસ્ટ",
+      "title": "પ્રજાતિઓ"
+    }
+  },
+  "search": "શોધ",
+  "sign_in": "પ્રવેશ કરો",
+  "toggle_menu": "ટૉગલ કરો"
+}

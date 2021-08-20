@@ -1,0 +1,78 @@
+{
+  "group_edit": "సమూహంను సవరించండి",
+  "logged_user_only": "దయచేసి సమూహంలో చేరడానికి లాగిన్ చేయండి",
+  "member_only": "దయచేసి పరిశీలనలను అప్లోడ్ చేయడానికి సమూహంలో చేరండి",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "డేటా ప్యాకేజీని జోడించండి",
+      "add_dataset": "డేటాసెట్ను జోడించండి",
+      "add_document": "పత్రాన్ని జోడించండి",
+      "add_fact": "నిజానికి జోడించండి",
+      "add_list": "జాబితాను జోడించండి",
+      "add_observation": "పరిశీలనను జోడించండి",
+      "add_trait_or_value": "లక్షణం / విలువను జోడించండి",
+      "contribute_to_map": "మ్యాప్కు దోహదం చేస్తుంది",
+      "contribute_to_species": "జాతులకు దోహదం చేస్తుంది",
+      "title": "సహకారం"
+    },
+    "groups": {
+      "see_all": "అన్నింటిని చూడు",
+      "title": "గుంపులు"
+    },
+    "settings": {
+      "leaderboard": "నా లీడర్బోర్డ్ ర్యాంక్",
+      "logout": "లాగ్ అవుట్",
+      "my_observations": "నా పరిశీలనలు",
+      "my_profile": "నా జీవన వివరణ",
+      "title": "సెట్టింగులు"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "document_datatables": "డాక్యుమెంట్ డేటా టేబుల్లను",
+      "documents": "పత్రాలు",
+      "title": "పత్రాలు"
+    },
+    "idao": {
+      "title": "Idao."
+    },
+    "landscapes": {
+      "title": "రక్షిత ప్రాంతాలు"
+    },
+    "maps": {
+      "title": "పటాలు"
+    },
+    "more": {
+      "about_us": "మా గురించి",
+      "activity": "కార్యాచరణ",
+      "dashboard": "డాష్బోర్డ్",
+      "datasets": "డేటాసెట్ల",
+      "discussions": "చర్చలు",
+      "leaderboard": "లీడర్బోర్డ్",
+      "participants": "పాల్గొనేవారు",
+      "title": "మరింత"
+    },
+    "observation": {
+      "checklists": "జాబితా",
+      "datasets": "డేటాసెట్ల",
+      "observation_datatables": "పరిశీలన డేటాట్రాస్",
+      "observation_traits": "పరిశీలన లక్షణాలు",
+      "observations": "పరిశీలనలు",
+      "title": "పరిశీలన"
+    },
+    "pages": {
+      "empty": "ఏ పేజీలు",
+      "title": "పేజీలు"
+    },
+    "species": {
+      "species_datatables": "జాతులు dataatables.",
+      "species_pages": "జాతుల పేజీలు",
+      "species_traits": "జాతుల లక్షణాలు",
+      "taxon_namelist": "టాక్సన్ నమెలిస్ట్",
+      "title": "జాతులు"
+    }
+  },
+  "search": "వెతకండి",
+  "sign_in": "ప్రవేశించండి",
+  "toggle_menu": "టోగుల్ మెను"
+}

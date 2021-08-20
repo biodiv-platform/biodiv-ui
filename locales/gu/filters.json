@@ -1,0 +1,144 @@
+{
+  "clear": "{{filterCount}} ફિલ્ટર(ઓ) દૂર કરો",
+  "custom_fields": {
+    "has_content": "સામગ્રી છે",
+    "no_content": "કોઈ સામગ્રી",
+    "no_custom_field": "કોઈ કસ્ટમ ક્ષેત્ર (ઓ) મળી નથી",
+    "title": "કસ્ટમ ક્ષેત્રો"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "જણાવ્યું ",
+      "title": "જણાવો",
+      "unflagged": "અજાણ કર્યું "
+    },
+    "identification": {
+      "identified": "ઓળખાયેલું",
+      "title": "ઓળખ",
+      "unidentified": "અજાણ્યા"
+    },
+    "taxon_id": {
+      "has_taxon": "ટેક્સન આઈડી  છે",
+      "no_taxon": "ટેક્સન આઈડી નથી ",
+      "title": "ટેક્સન આઈડી"
+    },
+    "title": "માહિતી ની ગુણવત્તા",
+    "validation": {
+      "not_validated": "માન્ય નથી",
+      "title": "માન્યતા",
+      "validated": "માન્ય"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "ડેટાસેટ નામ"
+    },
+    "datatable": {
+      "title": "ડેટેટેબલ નામ"
+    },
+    "title": "ડેટાસેટ મેટાડેટા"
+  },
+  "document_title": "શીર્ષક",
+  "item_type": {
+    "title": "વસ્તુ પ્રકાર"
+  },
+  "location": {
+    "district": "જિલ્લા",
+    "map": {
+      "title": "નકશો"
+    },
+    "protected_area": {
+      "title": "સંરક્ષિત વિસ્તારો"
+    },
+    "state": {
+      "title": "રાજ્ય"
+    },
+    "tehsil": "તહસિલ",
+    "title": "સ્થાન"
+  },
+  "media": {
+    "audio": "ઓડિયો",
+    "image": "છબી",
+    "no_media": "કોઈ મીડિયા",
+    "title": "મીડિયા પ્રકાર",
+    "video": "વિડિઓ"
+  },
+  "name": {
+    "reco_name": {
+      "title": "નામ"
+    },
+    "status": {
+      "accepted": "સ્વીકૃત",
+      "synonym": "સમાનાર્થી",
+      "title": "સ્થિતિ"
+    },
+    "title": "વૈજ્ઞાનિક નામ"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "બધા નામો"
+    },
+    "taxon_names": {
+      "title": "ટેક્સન નામો"
+    },
+    "taxon_rank": {
+      "title": "ટેક્સન ક્રમ"
+    },
+    "taxon_status": {
+      "title": "ટેક્સન સ્થિતિ"
+    },
+    "title": "વૈજ્ઞાનિક નામ"
+  },
+  "species_group": {
+    "all": "બધા",
+    "amphibians": "ઉભય",
+    "arthropods": "સંધિવા",
+    "birds": "પક્ષી",
+    "fish": "માછલી",
+    "fungi": "ફૂગ",
+    "mammals": "સસ્તન પ્રાણીઓ",
+    "molluscs": "મોલુસ્ક્સ",
+    "others": "અન્ય",
+    "plants": "છોડ",
+    "reptiles": "સરિસૃપ",
+    "title": "પ્રજાતિ જૂથ"
+  },
+  "taxon_browser": {
+    "search": "વૃક્ષમાં શોધો",
+    "search_results": "{{currentIndex}} નું {{resultsCount}} દર્શાવે છે",
+    "title": "ટેક્સન બ્રાઉઝર"
+  },
+  "time": {
+    "created_on": "બનાવવાની તારીખ",
+    "max_date": "મહત્તમ તારીખ",
+    "min_date": "ન્યૂનતમ તારીખ",
+    "month": {
+      "apr": "એપ્રિલ",
+      "aug": "ઓગસ્ટ",
+      "dec": "ડિસેમ્બર",
+      "feb": "ફેબ્રુઆરી",
+      "jan": "જાન્યુઆરી",
+      "jul": "જુલાઈ",
+      "jun": "જૂન",
+      "mar": "કુચ",
+      "may": "મે",
+      "nov": "નવેમ્બર",
+      "oct": "ઑક્ટોબર",
+      "sep": "સપ્ટેમ્બર",
+      "title": "અવલોકન નો મહિનો"
+    },
+    "title": "સમય"
+  },
+  "title": "ફિલ્ટર",
+  "toggle": "ફિલ્ટર્સ ચાલું/બંધ",
+  "traits": {
+    "title": "લાક્ષણિકતા"
+  },
+  "user": {
+    "search": "વપરાશકર્તા શોધ",
+    "title": "વપરાશકર્તા"
+  },
+  "usergroup": {
+    "title": "વપરાશકર્તા જૂથો"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "clear": "{{filterCount}} फिल्टर साफ करा",
+  "custom_fields": {
+    "has_content": "सामग्री आहे",
+    "no_content": "कोणतीही सामग्री नाही",
+    "no_custom_field": "नाही सानुकूल फील्ड आढळले नाही",
+    "title": "सानुकूल फील्ड"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "ध्वजांकित",
+      "title": "झेंडा",
+      "unflagged": "Unflagged"
+    },
+    "identification": {
+      "identified": "ओळखले",
+      "title": "ओळख",
+      "unidentified": "अज्ञात"
+    },
+    "taxon_id": {
+      "has_taxon": "करदाता आहे",
+      "no_taxon": "नाही टॅक्सॉन आयडी",
+      "title": "करदाता आयडी"
+    },
+    "title": "डेटा गुणवत्ता",
+    "validation": {
+      "not_validated": "प्रमाणित नाही",
+      "title": "प्रमाणीकरण",
+      "validated": "प्रमाणित"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "डेटासेट नाव"
+    },
+    "datatable": {
+      "title": "डेटाटेबल नाव"
+    },
+    "title": "डेटासेट मेटाडाटा"
+  },
+  "document_title": "शीर्षक",
+  "item_type": {
+    "title": "आयटम प्रकार"
+  },
+  "location": {
+    "district": "जिल्हा",
+    "map": {
+      "title": "नकाशा"
+    },
+    "protected_area": {
+      "title": "संरक्षित भागात"
+    },
+    "state": {
+      "title": "राज्य"
+    },
+    "tehsil": "तहसील",
+    "title": "स्थान"
+  },
+  "media": {
+    "audio": "ऑडिओ",
+    "image": "प्रतिमा",
+    "no_media": "नाही मीडिया",
+    "title": "माध्यम प्रकार",
+    "video": "व्हिडिओ"
+  },
+  "name": {
+    "reco_name": {
+      "title": "नाव"
+    },
+    "status": {
+      "accepted": "स्वीकारले",
+      "synonym": "समानार्थी शब्द",
+      "title": "स्थिती"
+    },
+    "title": "शास्त्रीय नाव"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "सर्व नाव"
+    },
+    "taxon_names": {
+      "title": "करांची नावे"
+    },
+    "taxon_rank": {
+      "title": "कर श्रेणी"
+    },
+    "taxon_status": {
+      "title": "करदाता स्थिती"
+    },
+    "title": "शास्त्रीय नाव"
+  },
+  "species_group": {
+    "all": "सर्व",
+    "amphibians": "उभयचर",
+    "arthropods": "आर्थ्रोपोड्स",
+    "birds": "पक्षी",
+    "fish": "मासे",
+    "fungi": "फंगी",
+    "mammals": "सस्तन प्राणी",
+    "molluscs": "Molluscs.",
+    "others": "इतर",
+    "plants": "वनस्पती",
+    "reptiles": "सरपटणारे प्राणी",
+    "title": "प्रजाती गट"
+  },
+  "taxon_browser": {
+    "search": "झाड मध्ये शोधा",
+    "search_results": "{{currentIndex}} {{resultsCount}}",
+    "title": "टॅक्सन ब्राउझर"
+  },
+  "time": {
+    "created_on": "तारीख तयार केली",
+    "max_date": "कमाल तारीख",
+    "min_date": "किमान तारीख",
+    "month": {
+      "apr": "एप्रिल",
+      "aug": "ऑगस्ट",
+      "dec": "डिसेंबर",
+      "feb": "फेब्रुवारी",
+      "jan": "जानेवारी",
+      "jul": "जुलै",
+      "jun": "जून",
+      "mar": "मार्च",
+      "may": "मे",
+      "nov": "नोव्हेंबर",
+      "oct": "ऑक्टोबर",
+      "sep": "सप्टेंबर",
+      "title": "महिना पाहिली"
+    },
+    "title": "वेळ"
+  },
+  "title": "फिल्टर",
+  "toggle": "फिल्टर टॉगल",
+  "traits": {
+    "title": "गुणधर्म"
+  },
+  "user": {
+    "search": "वापरकर्ता शोधा",
+    "title": "वापरकर्ता"
+  },
+  "usergroup": {
+    "title": "वापरकर्ता गट"
+  }
+}
