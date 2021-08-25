@@ -1,35 +1,38 @@
-import { DownloadLogsDataProvider } from "@components/pages/user/common/use-download-log";
+import { GroupListFilterProvider } from "@components/pages/group/list/use-group-list";
 import UserShowPageComponent from "@components/pages/user/show";
-import { axGetDownloadLogsList, axGetUserById } from "@services/user.service";
-import { LIST_PAGINATION_LIMIT } from "@static/observation-list";
+import { axGetspeciesGroups } from "@services/observation.service";
+import { axGetUserById } from "@services/user.service";
+import { axGroupListExpanded } from "@services/usergroup.service";
+import { axGetAllHabitat } from "@services/utility.service";
 import React from "react";
 
 import Error from "../../_error";
 
-const UserShowPage = ({ user, success, downloadLogData, initialFilterParams }) =>
+const UserShowPage = ({ user, groupFilter, success }) =>
   success ? (
-    <DownloadLogsDataProvider filter={initialFilterParams} downloadLogData={downloadLogData}>
+    <GroupListFilterProvider {...groupFilter}>
       <UserShowPageComponent user={user} />
-    </DownloadLogsDataProvider>
+    </GroupListFilterProvider>
   ) : (
     <Error statusCode={404} />
   );
 
 export const getServerSideProps = async (ctx) => {
-  const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const { success, data: user } = await axGetUserById(ctx.query.userId, ctx);
-  const { data } = await axGetDownloadLogsList({ ...ctx.query });
+  const [groupListExpanded, speciesGroups, habitat] = await Promise.all([
+    axGroupListExpanded(),
+    axGetspeciesGroups(),
+    axGetAllHabitat()
+  ]);
 
   return {
     props: {
-      downloadLogData: {
-        l: data.downloadLogList || [],
-        n: data.count || 0,
-        hasMore: true
-      },
-      nextOffset,
-      initialFilterParams: { ...ctx.query },
       user,
+      groupFilter: {
+        userGroupList: groupListExpanded.data,
+        speciesGroups: speciesGroups.data,
+        habitat: habitat.data
+      },
       success
     }
   };
