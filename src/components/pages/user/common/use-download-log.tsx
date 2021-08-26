@@ -19,6 +19,7 @@ export const DEFAULT_PARAMS = {
 export interface DownloadLogsData {
   l: any[];
   ag: any[];
+  n:number;
   hasMore: boolean;
 }
 
@@ -72,6 +73,7 @@ export const DownloadLogsDataProvider = (props: DownloadLogsDataContextProps) =>
         if (data?.downloadLogList?.length) {
           _draft.l.push(...deDupeDownloadLog(_draft.l, data.downloadLogList));
           _draft.hasMore = hasMore(_draft.l, _draft.ag, filter);
+          _draft.n  = data.count
         }
       });
       NProgress.done();

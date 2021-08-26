@@ -2,6 +2,7 @@ import { Button, Image, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import DownloadIcon from "@icons/download";
 import { axDownloadFile } from "@services/user.service";
+import { ENDPOINT, isBrowser } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
@@ -15,10 +16,12 @@ const doFilter = (data) => {
   }
 };
 
-const downloadFile = async (value, errorMessage) => {
+const downloadFile = async (value,errorMessage) => {
   const { success } = await axDownloadFile(value);
-  if (!success) {
-    notification(`${errorMessage}`, NotificationType.Error);
+  if (isBrowser) {
+    success
+      ? window.open(`${ENDPOINT.RAW}/${value}`, "_blank")?.focus()
+      : notification(`${errorMessage}`, NotificationType.Error);
   }
 };
 export const downloadLogsRow = (data, downloadLabel, errorMessage) => {

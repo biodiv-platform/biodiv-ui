@@ -1,34 +1,17 @@
 import { Box, Select, Stack, Text } from "@chakra-ui/react";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React from "react";
 
 import useDownloadLogsList from "../../common/use-download-log";
 
 export default function Header() {
   const {
-    downloadLogData: { ag: aggregate },
+    downloadLogData: { ag: aggregate, n: totalCount },
     addFilter,
-    resetFilter,
-    filter
+    resetFilter
   } = useDownloadLogsList();
   const { t } = useTranslation();
-
-  const totalCount: any = useMemo(() => {
-    return aggregate?.reduce((acc, item) => {
-      if (filter?.sourceType) {
-        return Object.values(
-          aggregate.find((item) => {
-            if (Object.keys(item)[0] === filter?.sourceType) {
-              return Object.keys(item)[0];
-            }
-          })
-        )[0];
-      } else {
-        return acc + Number(Object.values(item));
-      }
-    }, 0);
-  }, [filter]);
 
   const handleOnSort = (e) => {
     const v = e?.target?.value;
