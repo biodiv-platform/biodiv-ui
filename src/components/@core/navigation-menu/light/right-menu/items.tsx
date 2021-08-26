@@ -103,7 +103,7 @@ export default [
       {
         active: SITE_CONFIG.DOWNLOAD_LOGS.ACTIVE,
         name: "download_logs",
-        to: "/user/list/download-logs"
+        to: "/user/download-logs"
       },
       {
         active: SITE_CONFIG.DISCUSSION.ACTIVE,
