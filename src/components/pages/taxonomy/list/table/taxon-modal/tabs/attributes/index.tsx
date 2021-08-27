@@ -1,6 +1,7 @@
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import EditIcon from "@icons/edit";
-import { waitForAuth } from "@utils/auth";
+import { Role } from "@interfaces/custom";
+import { hasAccess, waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -23,6 +24,7 @@ export function TaxonAttributesTab() {
         size="sm"
         colorScheme="blue"
         variant="outline"
+        hidden={!hasAccess([Role.Admin])}
         leftIcon={<EditIcon />}
         onClick={handleOnEdit}
       >

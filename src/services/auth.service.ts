@@ -36,10 +36,10 @@ export const axValidateUser = async (payload) => {
       `${ENDPOINT.USERGROUP}/v1/group/verify-user`,
       stringify(payload)
     );
-    return { success: data.status, data, message: `OTP.MESSAGES.${data.message}` };
+    return { success: data.status, data, message: `otp.messages.${data.message}` };
   } catch (e) {
     console.error(e);
-    return { success: false, data: {}, message: "OTP.MESSAGES.ERROR" };
+    return { success: false, data: {}, message: "otp.messages.error" };
   }
 };
 
@@ -49,10 +49,10 @@ export const axRegenerateOTP = async (payload) => {
       `${ENDPOINT.USER}/v1/authenticate/regenerate-otp`,
       stringify(payload)
     );
-    return { success: data.status, data: `OTP.MESSAGES.${data.message}` };
+    return { success: data.status, data: `otp.messages.${data.message}` };
   } catch (e) {
     console.error(e);
-    return { success: false, data: "OTP.MESSAGES.COULD_NOT_SEND_MAIL_SMS" };
+    return { success: false, data: "otp.messages.could_not_send_mail_sms" };
   }
 };
 
@@ -62,10 +62,10 @@ export const axForgotPassword = async (payload) => {
       `${ENDPOINT.USER}/v1/authenticate/forgot-password`,
       stringify(payload)
     );
-    return { success: data.status, data: `OTP.MESSAGES.${data.message}`, user: data.user || {} };
+    return { success: data.status, data: `otp.messages.${data.message}`, user: data.user || {} };
   } catch (e) {
     console.error(e);
-    return { success: false, data: "OTP.MESSAGES.COULD_NOT_SEND_MAIL_SMS", user: {} };
+    return { success: false, data: "otp.messages.could_not_send_mail_sms", user: {} };
   }
 };
 
