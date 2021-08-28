@@ -22,7 +22,7 @@ export const getServerSideProps = async (ctx) => {
       downloadLogData: {
         l: data.downloadLogList || [],
         ag: data.aggregate,
-        n:data.count,
+        n: data.count,
         hasMore: true
       },
       nextOffset: LIST_PAGINATION_LIMIT,

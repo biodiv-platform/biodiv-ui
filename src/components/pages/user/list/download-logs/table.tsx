@@ -24,7 +24,7 @@ export default function DownloadLogsTable() {
   useEffect(() => {
     if (logs?.length) {
       setFieldData(logs);
-      setTableMeta(downloadLogsRow(logs, `${t("user:download")}`, `${t("user:file_not_found")}`));
+      setTableMeta(downloadLogsRow(logs, `${t("user:download")}`, `${t("common:unknown")}`));
     }
   }, [logs, filter]);
 

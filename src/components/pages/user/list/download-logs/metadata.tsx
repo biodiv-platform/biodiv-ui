@@ -1,12 +1,11 @@
 import { Button, Image, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import DownloadIcon from "@icons/download";
-import { axDownloadFile } from "@services/user.service";
-import { ENDPOINT, isBrowser } from "@static/constants";
+import { ENDPOINT } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
-import notification, { NotificationType } from "@utils/notification";
+import { stripSpecialCharacters } from "@utils/text";
 import React from "react";
 
 const doFilter = (data) => {
@@ -16,15 +15,7 @@ const doFilter = (data) => {
   }
 };
 
-const downloadFile = async (value,errorMessage) => {
-  const { success } = await axDownloadFile(value);
-  if (isBrowser) {
-    success
-      ? window.open(`${ENDPOINT.RAW}/${value}`, "_blank")?.focus()
-      : notification(`${errorMessage}`, NotificationType.Error);
-  }
-};
-export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
+export const downloadLogsRow = (data, downloadLabel, unknown) => {
   const header = doFilter(data);
 
   return header?.map((item) => {
@@ -35,13 +26,13 @@ export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
           accessor: "sourceType",
           Cell: ({ row }) => (
             <a href={`${data[row.index].filterUrl}`}>
-              <BlueLink> {row.values.sourceType || "Unkown"} </BlueLink>
+              <BlueLink> {row.values.sourceType || unknown} </BlueLink>
             </a>
           )
         };
       case "user":
         return {
-          Header: item.replace(/(\B[A-Z])/g, " $1").replace(/^./, item[0].toUpperCase()),
+          Header: stripSpecialCharacters(item),
           accessor: "user",
           Cell: ({ value }) => (
             <a href={`/user/show/${value.id}`}>
@@ -57,7 +48,7 @@ export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
         };
       case "createdOn":
         return {
-          Header: item.replace(/(\B[A-Z])/g, " $1").replace(/^./, item[0].toUpperCase()),
+          Header: stripSpecialCharacters(item),
           accessor: item,
           Cell: ({ value }) => (
             <Text key={value} fontStyle="italic">
@@ -72,9 +63,11 @@ export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
           Cell: ({ row: { values } }) => (
             <Button
               variant="outline"
+              as="a"
+              href={`${ENDPOINT.RAW}/${values.filePath}`}
+              target="_blank"
+              download={!adminOrAuthor(values.user.id)}
               leftIcon={<DownloadIcon />}
-              isDisabled={!adminOrAuthor(values.user.id)}
-              onClick={() => downloadFile(values.filePath, errorMessage)}
               colorScheme="blue"
             >
               {downloadLabel}
@@ -84,7 +77,7 @@ export const downloadLogsRow = (data, downloadLabel, errorMessage) => {
 
       default:
         return {
-          Header: item.replace(/(\B[A-Z])/g, " $1").replace(/^./, item[0].toUpperCase()),
+          Header: stripSpecialCharacters(item),
           accessor: item,
           Cell: ({ value }) => (
             <Text key={value} fontStyle="italic">
