@@ -22,6 +22,12 @@ export default [
         memberOnly: true
       },
       {
+        active: SITE_CONFIG.DATATABLE.ACTIVE,
+        name: "add_datatable",
+        to: "/datatable/create",
+        memberOnly: true
+      },
+      {
         active: SITE_CONFIG.SPECIES.ACTIVE,
         name: "contribute_to_species",
         to: "/species/contribute",

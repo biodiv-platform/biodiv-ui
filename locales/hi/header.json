@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "डेटा पैकेज जोड़ें",
       "add_dataset": "डेटासेट जोड़ें",
+      "add_datatable": "डेटाटेबल जोड़ें",
       "add_document": "दस्तावेज़ जोड़ें",
       "add_fact": "तथ्य जोड़ें",
       "add_list": "सूची में जोड़ने",
@@ -48,6 +49,7 @@
       "dashboard": "डैशबोर्ड",
       "datasets": "डेटासेट्स",
       "discussions": "चर्चाएँ",
+      "download_logs": "लॉग डाउनलोड करें",
       "leaderboard": "लीडरबोर्ड",
       "participants": "प्रतिभागियों",
       "title": "अधिक"

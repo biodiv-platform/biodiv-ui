@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "Ajouter un ensemble de données",
       "add_dataset": "Ajouter un jeu de données",
+      "add_datatable": "Ajouter une table de données",
       "add_document": "Ajouter un document",
       "add_fact": "Ajouter un fait",
       "add_list": "Ajouter une liste",
@@ -48,6 +49,7 @@
       "dashboard": "Tableau de bord",
       "datasets": "Jeux de données",
       "discussions": "Discussions",
+      "download_logs": "Télécharger les journaux",
       "leaderboard": "Classement",
       "participants": "Participants",
       "title": "Suite"

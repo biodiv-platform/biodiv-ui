@@ -133,3 +133,23 @@ export const axDeleteUser = async (userId) => {
     return { success: false };
   }
 };
+
+export const axGetDownloadLogsList = async (params) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/downloadLog/list`, { params });
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
+export const axDownloadFile = async (documentPath) => {
+  try {
+    await plainHttp.get(`${ENDPOINT.RAW}/${documentPath}`, {
+      responseType: "blob"
+    });
+    return { success: true };
+  } catch (e) {
+    return { success: false };
+  }
+};
