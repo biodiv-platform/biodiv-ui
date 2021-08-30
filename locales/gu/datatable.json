@@ -1,0 +1,42 @@
+{
+  "add": "ડેટાબેટેબલ ઉમેરો",
+  "attribution": "એટ્રિબ્યુશન",
+  "basis_of_data": "માહિતીનો આધાર",
+  "basis_of_record": "રેકોર્ડના આધારે",
+  "contributor": "ફાળો આપનાર",
+  "create_datatable": "ડેટાબેટેબલ બનાવો",
+  "field_mapping_table": "ફીલ્ડ મેપિંગ ટેબલ",
+  "files_upload": "ફાઇલો અપલોડ કરે છે",
+  "found": "ડેટાબેટેબલ મળી",
+  "geographical_coverage": "ભૌગોલિક કવરેજ",
+  "is_verified": "નિરીક્ષણ ચકાસાયેલ",
+  "location": "સ્થાન",
+  "location_accuracy": "સ્થાન ચોકસાઈ",
+  "location_scale": "સ્થાન સ્કેલ",
+  "media_uploader": "મીડિયા અપલોડર",
+  "methods": "પદ્ધતિઓ",
+  "notifications": {
+    "error": "ડેટાબેટેબલ બનાવવા માટે અસમર્થ",
+    "sheet_upload_error": "શીટ અપલોડ કરવામાં અસમર્થ",
+    "sheet_upload_success": "સફળતાપૂર્વક શીટ અપલોડ કરી",
+    "success": "ડેટાબેટેબલ સફળતાપૂર્વક બનાવેલ છે"
+  },
+  "others": "અન્ય",
+  "party": "પક્ષકાર",
+  "project": "પ્રોજેક્ટ",
+  "sheet_uploader": "સ્પ્રેડશીટ અપલોડરનો",
+  "show_page": "ડેટેટેબલ વિગતો",
+  "summary": "સારાંશ",
+  "table": {
+    "geoPrivacy": "જીઓ ગોપનીયતા",
+    "id": "Id",
+    "sGroup": "પ્રજાતિ જૂથ",
+    "scientificName": "વૈજ્ઞાનિક નામ",
+    "userInfo": "વપરાશકર્તા માહિતી"
+  },
+  "taxonomy": "વર્ગીકરણ-કવરેજ",
+  "temporal": "કામચલાયક કવરેજ",
+  "title": "જનરલ મેટાડેટા",
+  "type": "પ્રકાર",
+  "upload_again": "ફરીથી અપલોડ કરો"
+}

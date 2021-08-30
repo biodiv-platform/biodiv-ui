@@ -1,0 +1,43 @@
+{
+  "activity_score": "પ્રવૃત્તિ સ્કોર:",
+  "modules": {
+    "all": "બધા",
+    "discussion": "ચર્ચા",
+    "documents": "દસ્તાવેજો",
+    "miscellaneous": "વિવિધલક્ષી",
+    "observations": "અવલોકન",
+    "species": "પ્રજાતિઓ",
+    "taxon": "ટેક્સન"
+  },
+  "stops": {
+    "f": "બધા સમયે",
+    "month": "પાછલા મહિનો",
+    "month3": "છેલ્લા 3 મહિના",
+    "today": "આજે",
+    "week": "પાછલા સપ્તાહે",
+    "year": "પાછલો વર્ષ"
+  },
+  "table": {
+    "commented": "ટિપ્પણી કરી",
+    "created": "બનાવટી",
+    "curated": "કરન્ટ",
+    "discussions": "ચર્ચાઓ",
+    "documents": "દસ્તાવેજો",
+    "identified": "ઓળખાયેલું",
+    "name": "નામ",
+    "observation": "અવલોકન",
+    "organized": "સંગઠિત",
+    "rank": "ક્રમ",
+    "species": "પ્રજાતિઓ"
+  },
+  "tip": "લીડરબોર્ડ વપરાશકર્તા દ્વારા કરવામાં આવેલી બધી પ્રવૃત્તિઓ પર આધારિત છે. પ્રવૃત્તિ દર કલાકે એકવાર અપડેટ કરશે.",
+  "title": "અગ્રલેખ",
+  "total": {
+    "discussion": "કુલ ચર્ચા",
+    "documents": "કુલ દસ્તાવેજો",
+    "miscellaneous": "કુલ વિવિધ",
+    "observations": "કુલ અવલોકનો",
+    "species": "કુલ જાતિઓ",
+    "taxon": "કુલ ટેક્સ"
+  }
+}

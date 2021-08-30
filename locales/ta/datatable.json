@@ -1,0 +1,42 @@
+{
+  "add": "Datatable ஐ சேர்க்கவும்",
+  "attribution": "பண்பு",
+  "basis_of_data": "தரவு அடிப்படையில்",
+  "basis_of_record": "பதிவு அடிப்படையில்",
+  "contributor": "பங்களிப்பவர்",
+  "create_datatable": "Datatable உருவாக்க",
+  "field_mapping_table": "புலம் மேப்பிங் அட்டவணை",
+  "files_upload": "கோப்புகள் பதிவேற்றங்கள்",
+  "found": "Datatable காணப்பட்டது",
+  "geographical_coverage": "புவியியல் பாதுகாப்பு",
+  "is_verified": "கவனிப்பு சரிபார்க்கப்பட்டது",
+  "location": "இருப்பிடம்",
+  "location_accuracy": "இருப்பிட துல்லியம்",
+  "location_scale": "இருப்பிட அளவுகோல்",
+  "media_uploader": "ஊடக பதிவேற்றி",
+  "methods": "முறைகள்",
+  "notifications": {
+    "error": "Datatable உருவாக்க முடியவில்லை",
+    "sheet_upload_error": "தாள் பதிவேற்ற முடியவில்லை",
+    "sheet_upload_success": "வெற்றிகரமாக பதிவேற்றப்பட்டது",
+    "success": "Datatable வெற்றிகரமாக உருவாக்கப்பட்டது"
+  },
+  "others": "மற்றவைகள்",
+  "party": "கட்சி",
+  "project": "திட்டம்",
+  "sheet_uploader": "விரிதாள் பதிவேற்றியவர்",
+  "show_page": "தரவுத்தள விவரங்கள்",
+  "summary": "சுருக்கம்",
+  "table": {
+    "geoPrivacy": "ஜியோ தனியுரிமை",
+    "id": "ஐடி",
+    "sGroup": "இனங்கள் குழு",
+    "scientificName": "அறிவியல் பெயர்",
+    "userInfo": "பயனர் தகவல்"
+  },
+  "taxonomy": "வரிக்கான பாதுகாப்பு",
+  "temporal": "தற்காலிக பாதுகாப்பு",
+  "title": "பொது மெட்டாடேட்டா",
+  "type": "வகை",
+  "upload_again": "மீண்டும் பதிவேற்றவும்"
+}

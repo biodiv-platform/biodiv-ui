@@ -1,0 +1,20 @@
+{
+  "All": "అన్ని",
+  "Validate": "ధ్రువీకరించిన",
+  "download_map": "మ్యాప్ డౌన్లోడ్",
+  "no_species_found": "ఏ జాతుల జాబితా దొరకలేదు",
+  "observation": {
+    "fauna_list": "ఫౌన జాబితా",
+    "flora_list": "ఫ్లోరా లిస్ట్",
+    "life_list": {
+      "title": "పరిశీలన జాబితా"
+    },
+    "species_filter": "జాతుల ఫిల్టర్"
+  },
+  "related_documents": "సంబంధిత పత్రాలు)",
+  "site_number": "సైట్ #",
+  "title": "రక్షిత ప్రాంతాలు",
+  "update": {
+    "success": "ఫీల్డ్ సేవ్ చేయబడింది"
+  }
+}

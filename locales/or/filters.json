@@ -1,0 +1,144 @@
+{
+  "clear": "ସଫା {{filterCount}} ଫିଲ୍ଟର୍ (ଗୁଡିକ)",
+  "custom_fields": {
+    "has_content": "ବିଷୟବସ୍ତୁ ଅଛି |",
+    "no_content": "କ contry ଣସି ବିଷୟବସ୍ତୁ ନାହିଁ |",
+    "no_custom_field": "କ pood ଣସି କଷ୍ଟମ୍ ଫିଲ୍ଡ (ଗୁଡିକ) ମିଳିଲା ନାହିଁ |",
+    "title": "କଷ୍ଟମ୍ ଫିଲ୍ଡସ୍ |"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "ଫ୍ଲାଗ୍ ହୋଇଥିବା",
+      "title": "ପତାକା",
+      "unflagged": "ଅଦୃଶ୍ୟ"
+    },
+    "identification": {
+      "identified": "ଚିହ୍ନିତ |",
+      "title": "ପରିଚୟ",
+      "unidentified": "ଅଜ୍ଞାତିତ |"
+    },
+    "taxon_id": {
+      "has_taxon": "ଟ୍ୟାକ୍ସନ୍ ID ଅଛି |",
+      "no_taxon": "କ tact ଣସି ଟ୍ୟାକ୍ସନ୍ ID ନାହିଁ |",
+      "title": "ଟ୍ୟାକ୍ସନ୍ ID"
+    },
+    "title": "ଡାଟା ଗୁଣବତ୍ତା |",
+    "validation": {
+      "not_validated": "ବ valid ଧ ନୁହେଁ |",
+      "title": "ବ valid ଧତା",
+      "validated": "ବ valid ଧତା |"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "ଡାଟାସେଟ୍ ନାମ |"
+    },
+    "datatable": {
+      "title": "ଡାଟାଟେବଲ୍ ନାମ |"
+    },
+    "title": "ଡାଟାସେଟ୍ ମେଟାଡାଟା |"
+  },
+  "document_title": "ଆଖ୍ୟା",
+  "item_type": {
+    "title": "ଆଇଟମ୍ ପ୍ରକାର |"
+  },
+  "location": {
+    "district": "ଜିଲ୍ଲା",
+    "map": {
+      "title": "ମାନଚିତ୍ର"
+    },
+    "protected_area": {
+      "title": "ସୁରକ୍ଷିତ ଅଞ୍ଚଳଗୁଡିକ |"
+    },
+    "state": {
+      "title": "ରାଜ୍ୟ"
+    },
+    "tehsil": "Thehsill",
+    "title": "ଅବସ୍ଥାନ"
+  },
+  "media": {
+    "audio": "ଅଡିଓ",
+    "image": "ପ୍ରତିଛବି |",
+    "no_media": "ନା ମିଡିଆ ନାହିଁ |",
+    "title": "ମିଡିଆ ପ୍ରକାର |",
+    "video": "ଭିଡିଓ"
+  },
+  "name": {
+    "reco_name": {
+      "title": "ନାମ"
+    },
+    "status": {
+      "accepted": "ଗ୍ରହଣ କରାଯାଇଥିବା",
+      "synonym": "ସମାନନାମ",
+      "title": "ସ୍ଥିତି"
+    },
+    "title": "ବ scientific ଜ୍ଞାନିକ ନାମ"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "ସମସ୍ତ ନାମ |"
+    },
+    "taxon_names": {
+      "title": "ଟ୍ୟାକ୍ସନ୍ ନାମଗୁଡିକ |"
+    },
+    "taxon_rank": {
+      "title": "ଟିକସନ୍ ର୍ୟାଙ୍କ୍ |"
+    },
+    "taxon_status": {
+      "title": "ଟ୍ୟାକ୍ସନ୍ ସ୍ଥିତି"
+    },
+    "title": "ବ scientific ଜ୍ଞାନିକ ନାମ"
+  },
+  "species_group": {
+    "all": "ସମସ୍ତ",
+    "amphibians": "ଆମ୍ଫିବିଆନ୍ମାନେ |",
+    "arthropods": "ଆର୍ଥ୍ରୋପୋଡ୍ |",
+    "birds": "ପକ୍ଷୀମାନେ",
+    "fish": "ମାଛ |",
+    "fungi": "କବଜା",
+    "mammals": "ସ୍ତନ୍ୟପାୟୀ ପ୍ରାଣୀ",
+    "molluscs": "ମଲ୍ଲକସ୍",
+    "others": "ଅନ୍ୟମାନେ",
+    "plants": "ଉଦ୍ଭିଦ",
+    "reptiles": "ସରୀସୃପଗୁଡିକ |",
+    "title": "ପ୍ରଜାତି ଗୋଷ୍ଠୀ |"
+  },
+  "taxon_browser": {
+    "search": "ଗଛରେ ଖୋଜ |",
+    "search_results": "{{currentIndex}} {{resultsCount}}",
+    "title": "ଟ୍ୟାକ୍ସନ୍ ବ୍ରାଉଜର୍ |"
+  },
+  "time": {
+    "created_on": "ସ୍ଥାପିତ ତାରିଖ |",
+    "max_date": "ସର୍ବାଧିକ ତାରିଖ",
+    "min_date": "ସର୍ବନିମ୍ନ ତାରିଖ",
+    "month": {
+      "apr": "ଏପ୍ରିଲ୍",
+      "aug": "ଅଗଷ୍ଟ",
+      "dec": "ଡିସେମ୍ବର",
+      "feb": "ଫେବୃଆରୀ",
+      "jan": "ଜାନୁଆରୀ",
+      "jul": "ଜୁଲାଇ",
+      "jun": "ଜୁନ୍ |",
+      "mar": "ମାର୍ଚ୍ଚ",
+      "may": "ମେ",
+      "nov": "ନଭେମ୍ବର",
+      "oct": "ଅକ୍ଟୋବର",
+      "sep": "ସେପ୍ଟେମ୍ବର |",
+      "title": "ମାସ ପାଳନ କରାଯାଇଛି |"
+    },
+    "title": "ସମୟ"
+  },
+  "title": "ଫିଲ୍ଟର୍",
+  "toggle": "ଫିଲ୍ଟର ଟୋଗଲ୍ କରନ୍ତୁ |",
+  "traits": {
+    "title": "ବିଶ୍ୱାସ"
+  },
+  "user": {
+    "search": "ଉପଯୋଗକର୍ତ୍ତା ଖୋଜ |",
+    "title": "ଉପଯୋଗକର୍ତ୍ତା |"
+  },
+  "usergroup": {
+    "title": "ବ୍ୟବହାରକାରୀ ଗୋଷ୍ଠୀ |"
+  }
+}

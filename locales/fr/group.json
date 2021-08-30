@@ -129,7 +129,7 @@
   "member": {
     "joined": "Groupe rejoint avec succès",
     "joined_error": "Impossible de rejoindre le groupe",
-    "left": "Le groupe est parti avec succès",
+    "left": "Groupe laissé avec succès",
     "left_error": "Impossible de quitter le groupe",
     "requested": "Demande de participation au groupe envoyée"
   },

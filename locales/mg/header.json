@@ -30,8 +30,6 @@
   },
   "menu_secondary": {
     "documents": {
-      "document_datatables": "Datatables antontan-taratasy",
-      "documents": "Antontan-taratasy",
       "title": "Antontan-taratasy"
     },
     "idao": {
@@ -45,32 +43,27 @@
     },
     "more": {
       "about_us": "Momba ANAY",
-      "activity": "asa",
       "dashboard": "anaty fiara",
-      "datasets": "Datasets",
       "discussions": "fifanakalozan-kevitra",
       "download_logs": "Download Logs",
       "leaderboard": "Leadersboard",
-      "participants": "mpandray anjara",
-      "title": "Bebe kokoa"
+      "taxonomy": "panasokajiana",
+      "title": "Bebe kokoa",
+      "users": "mpampiasa"
     },
     "observation": {
+      "all_observations": "Ny fandinihana rehetra",
       "checklists": "Lisitra",
       "datasets": "Datasets",
+      "datatables": "Datatables",
       "observation_datatables": "Datatables",
-      "observation_traits": "Toetra fandinihana",
-      "observations": "fanamarihana",
-      "title": "fandinihana"
+      "title": "fanamarihana"
     },
     "pages": {
       "empty": "Tsy misy pejy",
       "title": "Pejy"
     },
     "species": {
-      "species_datatables": "Karazana datatables",
-      "species_pages": "Pejy karazana",
-      "species_traits": "Karazana karazana",
-      "taxon_namelist": "Taxonalistes",
       "title": "karazana"
     }
   },

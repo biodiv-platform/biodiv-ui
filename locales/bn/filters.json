@@ -1,0 +1,144 @@
+{
+  "clear": "পরিষ্কার {{filterCount}} ফিল্টার(গুলি)",
+  "custom_fields": {
+    "has_content": "কন্টেন্ট আছে",
+    "no_content": "কোন উপাদান নেই",
+    "no_custom_field": "কোন কাস্টম ক্ষেত্র (গুলি) পাওয়া যায় নি",
+    "title": "কাস্টম ক্ষেত্র"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "পতাকাঙ্কিত",
+      "title": "পতাকা",
+      "unflagged": "Unflagged."
+    },
+    "identification": {
+      "identified": "চিহ্নিত",
+      "title": "সনাক্তকরণ.",
+      "unidentified": "অজ্ঞাত"
+    },
+    "taxon_id": {
+      "has_taxon": "ট্যাক্সন আইডি আছে",
+      "no_taxon": "কোন ট্যাক্সন আইডি",
+      "title": "ট্যাক্সন আইডি"
+    },
+    "title": "উপাত্তের গুণ",
+    "validation": {
+      "not_validated": "বৈধ নয়",
+      "title": "বৈধতা",
+      "validated": "বৈধ"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "ডেটাসেট নাম"
+    },
+    "datatable": {
+      "title": "Datatable নাম"
+    },
+    "title": "ডেটাসেট মেটাডেটা"
+  },
+  "document_title": "শিরোনাম",
+  "item_type": {
+    "title": "বস্তু"
+  },
+  "location": {
+    "district": "জেলা",
+    "map": {
+      "title": "মানচিত্র"
+    },
+    "protected_area": {
+      "title": "সুরক্ষিত এলাকাসমূহ"
+    },
+    "state": {
+      "title": "রাষ্ট্র"
+    },
+    "tehsil": "Tehsil.",
+    "title": "অবস্থান"
+  },
+  "media": {
+    "audio": "শ্রুতি",
+    "image": "ইমেজ",
+    "no_media": "কোন মিডিয়া",
+    "title": "মিডিয়া টাইপ",
+    "video": "ভিডিও"
+  },
+  "name": {
+    "reco_name": {
+      "title": "নাম"
+    },
+    "status": {
+      "accepted": "গ্রহণযোগ্য",
+      "synonym": "Synonym.",
+      "title": "অবস্থা"
+    },
+    "title": "বৈজ্ঞানিক নাম"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "সব নাম"
+    },
+    "taxon_names": {
+      "title": "ট্যাক্সন নাম"
+    },
+    "taxon_rank": {
+      "title": "ট্যাক্সন র্যাঙ্ক"
+    },
+    "taxon_status": {
+      "title": "ট্যাক্সন অবস্থা"
+    },
+    "title": "বৈজ্ঞানিক নাম"
+  },
+  "species_group": {
+    "all": "সব",
+    "amphibians": "Amphibians.",
+    "arthropods": "Arthropods.",
+    "birds": "পাখি",
+    "fish": "মাছ",
+    "fungi": "ছত্রাক",
+    "mammals": "স্তন্যপায়ী প্রাণী",
+    "molluscs": "Molluscs.",
+    "others": "অন্যান্য",
+    "plants": "গাছপালা",
+    "reptiles": "সরীসৃপ",
+    "title": "প্রজাতি গ্রুপ"
+  },
+  "taxon_browser": {
+    "search": "গাছ অনুসন্ধান করুন",
+    "search_results": "{{resultsCount}} এর {{{currentIndex}} দেখানো হচ্ছে}",
+    "title": "ট্যাক্সন ব্রাউজার"
+  },
+  "time": {
+    "created_on": "তারিখ তৈরী",
+    "max_date": "সর্বোচ্চ তারিখ",
+    "min_date": "নূন্যতম তারিখ",
+    "month": {
+      "apr": "এপ্রিল",
+      "aug": "আগস্ট",
+      "dec": "ডিসেম্বর",
+      "feb": "ফেব্রুয়ারি",
+      "jan": "জানুয়ারি",
+      "jul": "জুলাই",
+      "jun": "জুন",
+      "mar": "মার্চ",
+      "may": "মে",
+      "nov": "নভেম্বর",
+      "oct": "অক্টোবর",
+      "sep": "সেপ্টেম্বর",
+      "title": "মাস পর্যবেক্ষণ"
+    },
+    "title": "সময়"
+  },
+  "title": "ফিল্টার",
+  "toggle": "ফিল্টার টগল করুন",
+  "traits": {
+    "title": "বৈশিষ্ট্য"
+  },
+  "user": {
+    "search": "অনুসন্ধান করুন ব্যবহারকারী",
+    "title": "ব্যবহারকারী"
+  },
+  "usergroup": {
+    "title": "ব্যবহারকারী গ্রুপ"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "activity_score": "क्रियाकलाप स्कोअर:",
+  "modules": {
+    "all": "सर्व",
+    "discussion": "चर्चा",
+    "documents": "कागदपत्रे",
+    "miscellaneous": "किरकोळ",
+    "observations": "निरीक्षणे",
+    "species": "प्रजाती",
+    "taxon": "कर"
+  },
+  "stops": {
+    "f": "नेहमी",
+    "month": "गेल्या महिन्यात",
+    "month3": "गेल्या 3 महिने",
+    "today": "आज",
+    "week": "गेल्या आठवड्यात",
+    "year": "मागील वर्षी"
+  },
+  "table": {
+    "commented": "टिप्पणी दिली",
+    "created": "तयार",
+    "curated": "Curated",
+    "discussions": "चर्चा",
+    "documents": "कागदपत्रे",
+    "identified": "ओळखले",
+    "name": "नाव",
+    "observation": "निरीक्षण",
+    "organized": "आयोजित",
+    "rank": "श्रेणी",
+    "species": "प्रजाती"
+  },
+  "tip": "लीडरबोर्ड वापरकर्त्याद्वारे केलेल्या सर्व उपक्रमांवर आधारित आहे. प्रत्येक तास एकदा क्रियाकलाप अद्यतनित होईल.",
+  "title": "लीडरबोर्ड",
+  "total": {
+    "discussion": "एकूण चर्चा",
+    "documents": "एकूण दस्तऐवज",
+    "miscellaneous": "एकूण संग्रह",
+    "observations": "एकूण निरीक्षण",
+    "species": "एकूण प्रजाती",
+    "taxon": "एकूण कर"
+  }
+}

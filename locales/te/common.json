@@ -1,0 +1,89 @@
+{
+  "accepted": "ఆమోదించబడిన",
+  "actions": {
+    "flag": {
+      "category": "వర్గం",
+      "flags": {
+        "date_inappropriate": "తగని తేదీ",
+        "details_inappropriate": "తగని వివరాలు",
+        "location_inappropriate": "తగని స్థానం"
+      },
+      "notes": "గమనికలు",
+      "others_flagged": "ఇతరులు ఎవరు ఫ్లాగ్ చేశారు",
+      "title": "జెండా"
+    }
+  },
+  "activity": "కార్యాచరణ",
+  "add": "జోడించు",
+  "cancel": "రద్దు చేయండి",
+  "clear": "స్పష్టమైన",
+  "close": "దగ్గరగా",
+  "copy": "క్లిప్బోర్డ్కు కాపీ చేయండి",
+  "datatable": "Datatable.",
+  "delete": "తొలగింపు",
+  "edit": "మార్చు",
+  "edit_not_uploaded": "కొన్ని వనరులు సరిగా అప్లోడ్ చేయబడవు, దయచేసి అప్లోడ్ చేయడానికి ముందు వేచి ఉండండి లేదా తొలగించండి",
+  "feature": "ఫీచర్ ఎంపిక",
+  "feature_in_groups": "సమూహాలలో ఫీచర్",
+  "feedback": "ఫీడ్బ్యాక్",
+  "footer": {
+    "email": "ఇమెయిల్",
+    "facebook": "ఫేస్బుక్",
+    "github": "Github.",
+    "powered_by": "ద్వారా ఆధారితం",
+    "technology_partner": "టెక్నాలజీ పార్టనర్",
+    "twitter": "ట్విట్టర్"
+  },
+  "habitats_covered": "ఆవాసాలు కప్పబడి ఉంటాయి",
+  "information": "సమాచారం",
+  "invalid_request": "చెల్లని అభ్యర్థన",
+  "list": {
+    "sort_by": "ఆమరిక",
+    "sort_options": {
+      "last_updated": "చివరిగా నవీకరించబడింది",
+      "latest": "చివరిగా అప్లోడ్ చేయబడింది",
+      "most_viewed": "అత్యంత వీక్షించబడిన"
+    },
+    "view_type": {
+      "grid": "గ్రిడ్",
+      "list": "జాబితా",
+      "map": "మ్యాప్",
+      "stats": "మెట్రిక్స్"
+    }
+  },
+  "load_more": "మరింత low.",
+  "loading": "లోడ్...",
+  "name": "పేరు",
+  "next": "తరువాత",
+  "no_data": "సమాచారం లేదు",
+  "no_results": "ఎటువంటి ఫలితాలు లభించలేదు",
+  "notifications": {
+    "invalid_credentials": "మీరు నమోదు చేసిన వినియోగదారు పేరు లేదా పాస్వర్డ్ తప్పు.",
+    "token_error": "టోకెన్ పొందడంలో లోపం",
+    "token_not_saved": "టోకెన్ సేవ్ కాలేదు",
+    "token_saved": "టోకెన్ సేవ్ చేయబడింది"
+  },
+  "observed_on": "గమనించారు",
+  "offline": "ఇంటర్నెట్ కనెక్షన్ లేదు",
+  "one_moment_please": "ఒక క్షణం దయచేసి",
+  "or": "లేక",
+  "permalink": "Permalink.",
+  "prev": "మునుపటి",
+  "processing": "ప్రాసెసింగ్ ...",
+  "read_more": "ఇంకా చదవండి",
+  "save": "సేవ్",
+  "search": "వెతకండి",
+  "session_required": "సైన్ ఇన్ అవసరం",
+  "slider_left": "ఎడమవైపున",
+  "slider_right": "సరియైనది",
+  "species_coverage": "జాతుల సమూహం కవరేజ్",
+  "success": "సక్సెస్",
+  "temporal": {
+    "observations": "పరిశీలనలు",
+    "title": "తాత్కాలిక పంపిణీ"
+  },
+  "toggle": "టోగుల్",
+  "unauthorized": "అనధికార వినియోగదారు",
+  "unknown": "తెలియనిది",
+  "usergroups": "గుంపులు"
+}

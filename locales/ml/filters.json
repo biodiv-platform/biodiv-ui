@@ -1,0 +1,144 @@
+{
+  "clear": "{{filterCount}} ഫിൽട്ടർ(കൾ)",
+  "custom_fields": {
+    "has_content": "ഉള്ളടക്കം ഉണ്ട്",
+    "no_content": "ഉള്ളടക്കമില്ല",
+    "no_custom_field": "ഇഷ്ടാനുസൃത ഫീൽഡ് (കൾ) കണ്ടെത്തിയില്ല",
+    "title": "ഇഷ്ടാനുസൃത ഫീൽഡുകൾ"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "ഫ്ലാഗുചെയ്തു",
+      "title": "കൊടി",
+      "unflagged": "ഫ്ലാഗ് മാറ്റി "
+    },
+    "identification": {
+      "identified": "തിരിച്ചറിഞ്ഞത്",
+      "title": "തിരിച്ചറിയൽ",
+      "unidentified": "അജ്ഞാതം "
+    },
+    "taxon_id": {
+      "has_taxon": "ടാക്സൺ ഐഡി ഉണ്ട്",
+      "no_taxon": "ടാക്സൺ ഐഡി ഇല്ല",
+      "title": "ടാക്സൺ ഐഡി"
+    },
+    "title": "ഡാറ്റ നിലവാരം",
+    "validation": {
+      "not_validated": "സാധൂകരിച്ചിട്ടില്ല",
+      "title": "മൂല്യനിർണ്ണയം",
+      "validated": "സാധൂകരിച്ചു"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "ഡാറ്റാസേറ്റിന്റെ പേര്"
+    },
+    "datatable": {
+      "title": "ഡാറ്റ ടേബിൾ  പേര് "
+    },
+    "title": "ഡാറ്റാസെറ്റ് മെറ്റാഡാറ്റ"
+  },
+  "document_title": "തലക്കെട്ട്",
+  "item_type": {
+    "title": "സാധനത്തിന്റെ ഇനം"
+  },
+  "location": {
+    "district": "ജില്ല",
+    "map": {
+      "title": "ഭൂപടം"
+    },
+    "protected_area": {
+      "title": "സംരക്ഷിത പ്രദേശങ്ങൾ"
+    },
+    "state": {
+      "title": "സംസ്ഥാനം"
+    },
+    "tehsil": "തഹസിൽ",
+    "title": "സ്ഥലം "
+  },
+  "media": {
+    "audio": "ശബ്ദം",
+    "image": "ചിത്രം",
+    "no_media": "മീഡിയ ഇല്ല",
+    "title": "മീഡിയ തരം",
+    "video": "വീഡിയോ"
+  },
+  "name": {
+    "reco_name": {
+      "title": "പേര്"
+    },
+    "status": {
+      "accepted": "അംഗീകരിച്ചു",
+      "synonym": "പര്യായം",
+      "title": "പദവി"
+    },
+    "title": "ശാസ്ത്രീയ നാമം"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "എല്ലാ പേരുകളും"
+    },
+    "taxon_names": {
+      "title": "ടാക്സൺ പേരുകൾ"
+    },
+    "taxon_rank": {
+      "title": "ടാക്സൺ റാങ്ക്"
+    },
+    "taxon_status": {
+      "title": "ടാക്സൺ നില"
+    },
+    "title": "ശാസ്ത്രീയ നാമം"
+  },
+  "species_group": {
+    "all": "എല്ലാം",
+    "amphibians": "ഉഭയജീവികൾ",
+    "arthropods": "ആർത്രോപോഡുകൾ",
+    "birds": "പക്ഷികൾ",
+    "fish": "മത്സ്യങ്ങൾ",
+    "fungi": "കൂണുകൾ",
+    "mammals": "സസ്തനികൾ",
+    "molluscs": "മോളസ്ക്സ്",
+    "others": "മറ്റുള്ളവ",
+    "plants": "സസ്യങ്ങൾ",
+    "reptiles": "ഉരഗങ്ങൾ",
+    "title": "സ്പീഷിസ് ഗ്രൂപ്പ്"
+  },
+  "taxon_browser": {
+    "search": "മരത്തിൽ തിരയുക",
+    "search_results": "{{currentIndex}} {{resultsCount}} കാണിക്കുന്നു",
+    "title": "ടാക്സൺ ബ്രൗസർ"
+  },
+  "time": {
+    "created_on": "സൃഷ്ടിച്ച തീയതി",
+    "max_date": "പരമാവധി തീയതി",
+    "min_date": "കുറഞ്ഞ തീയതി",
+    "month": {
+      "apr": "ഏപ്രിൽ",
+      "aug": "ആഗസ്റ്റ്",
+      "dec": "ഡിസംബർ",
+      "feb": "ഫെബ്രുവരി",
+      "jan": "ജാനുവരി",
+      "jul": "ജൂലൈ",
+      "jun": "ജൂൺ",
+      "mar": "മാർച്ച്",
+      "may": "മേയ്",
+      "nov": "നവംബർ",
+      "oct": "ഒക്ടോബർ",
+      "sep": "സെപ്റ്റംബർ",
+      "title": "നിരീക്ഷിച്ച മാസം  "
+    },
+    "title": "കാലം"
+  },
+  "title": "ഫിൽട്ടറുകൾ",
+  "toggle": "ഫിൽട്ടറുകൾ ടോഗിൾ ചെയ്യുക",
+  "traits": {
+    "title": "സവിശേഷതകൾ"
+  },
+  "user": {
+    "search": "ഉപയോക്താവിനെ തിരയുക",
+    "title": "ഉപയോക്താവ് "
+  },
+  "usergroup": {
+    "title": "ഉപയോക്തൃ ഗ്രൂപ്പുകൾ"
+  }
+}

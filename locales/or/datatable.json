@@ -1,0 +1,42 @@
+{
+  "add": "ଡାଟାବୋଟ୍ ଯୋଡନ୍ତୁ |",
+  "attribution": "ଆଟ୍ରିବ୍ୟୁଜ୍",
+  "basis_of_data": "ତଥ୍ୟର ଆଧାର |",
+  "basis_of_record": "ରେକର୍ଡର ଆଧାର |",
+  "contributor": "ଯୋଗଦାନକାରୀ",
+  "create_datatable": "ଡାଟାବୋଟ୍ ସୃଷ୍ଟି କରନ୍ତୁ |",
+  "field_mapping_table": "ଫିଲ୍ଡ ମ୍ୟାପିଂ ଟେବୁଲ୍ |",
+  "files_upload": "ଫାଇଲଗୁଡିକ ଅପଲୋଡ୍ କରେ |",
+  "found": "ଡାଟାଟେବଲ୍ ମିଳିଲା |",
+  "geographical_coverage": "ଭ ographic ଗୋଳିକ କଭରେଜ୍ |",
+  "is_verified": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଯାଞ୍ଚ |",
+  "location": "ଅବସ୍ଥାନ",
+  "location_accuracy": "ଅବସ୍ଥାନ ସଠିକତା |",
+  "location_scale": "ଅବସ୍ଥାନ ସ୍କେଲ",
+  "media_uploader": "ମିଡିଆ ଅପଲୋଡର୍ |",
+  "methods": "ପଦ୍ଧତି",
+  "notifications": {
+    "error": "ଡାଟାବାଟ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ |",
+    "sheet_upload_error": "ସିଟ୍ ଅପଲୋଡ୍ କରିବାକୁ ଅସମର୍ଥ |",
+    "sheet_upload_success": "ସଫଳତାର ସହିତ ସିଟ୍ ଅପଲୋଡ୍ ହୋଇଛି |",
+    "success": "ଡେସ୍କାଟେବଲ୍ ସଫଳତାର ସହିତ ସୃଷ୍ଟି ହୋଇଛି |"
+  },
+  "others": "ଅନ୍ୟମାନେ",
+  "party": "ପାର୍ଟୀ",
+  "project": "ପ୍ରକଳ୍ପ",
+  "sheet_uploader": "ସ୍ପ୍ରେଡସିଟ୍ ଅପଲୋଡ୍ |",
+  "show_page": "ଡାଟାଟେବଲ୍ ବିବରଣୀଗୁଡିକ |",
+  "summary": "ସାରାଂଶ",
+  "table": {
+    "geoPrivacy": "ଜିଓ ଗୋପନୀୟତା |",
+    "id": "ପରିଚୟ",
+    "sGroup": "ପ୍ରଜାତି ଗୋଷ୍ଠୀ |",
+    "scientificName": "ବ scientific ଜ୍ଞାନିକ ନାମ",
+    "userInfo": "ବ୍ୟବହାରକାରୀ ସୂଚନା"
+  },
+  "taxonomy": "ଟ୍ୟାକ୍ସୋନୋମିକ୍ କଭରେଜ୍ |",
+  "temporal": "ସାମୟିକ କଭରେଜ୍ |",
+  "title": "ସାଧାରଣ ମେଟାଡାଟା |",
+  "type": "ଟାଇପ୍ କରନ୍ତୁ |",
+  "upload_again": "ପୁନର୍ବାର ଅପଲୋଡ୍ କରନ୍ତୁ |"
+}

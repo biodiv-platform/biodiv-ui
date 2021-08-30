@@ -1,0 +1,73 @@
+{
+  "group_edit": "ಗುಂಪನ್ನು ಸಂಪಾದಿಸಿ",
+  "logged_user_only": "ದಯವಿಟ್ಟು ಗುಂಪಿನಲ್ಲಿ ಸೇರಲು ಲಾಗಿನ್ ಮಾಡಿ",
+  "member_only": "ದಯವಿಟ್ಟು ವೀಕ್ಷಣೆಗಳನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಲು ಗುಂಪನ್ನು ಸೇರಿಕೊಳ್ಳಿ",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "ಡೇಟಾ ಪ್ಯಾಕೇಜ್ ಸೇರಿಸಿ",
+      "add_dataset": "ಡೇಟಾಬೇಸ್ ಸೇರಿಸಿ",
+      "add_datatable": "ಡೇಟಾಟೇಬಲ್ ಸೇರಿಸಿ",
+      "add_document": "ಡಾಕ್ಯುಮೆಂಟ್ ಸೇರಿಸಿ",
+      "add_fact": "ಸತ್ಯವನ್ನು ಸೇರಿಸಿ",
+      "add_list": "ಪಟ್ಟಿ ಸೇರಿಸಿ",
+      "add_observation": "ವೀಕ್ಷಣೆ ಸೇರಿಸಿ",
+      "add_trait_or_value": "ಗುಣಲಕ್ಷಣ / ಮೌಲ್ಯವನ್ನು ಸೇರಿಸಿ",
+      "contribute_to_map": "ನಕ್ಷೆಗೆ ಕೊಡುಗೆ ನೀಡಿ",
+      "contribute_to_species": "ಜಾತಿಗಳಿಗೆ ಕೊಡುಗೆ ನೀಡಿ",
+      "title": "ಕೊಡುಗೆ"
+    },
+    "groups": {
+      "see_all": "ಎಲ್ಲವನ್ನೂ ನೋಡು",
+      "title": "ಗುಂಪುಗಳು"
+    },
+    "settings": {
+      "leaderboard": "ನನ್ನ ಲೀಡರ್ಬೋರ್ಡ್ ಶ್ರೇಣಿ",
+      "logout": "ಲಾಗ್ ಔಟ್",
+      "my_observations": "ನನ್ನ ಅವಲೋಕನಗಳು",
+      "my_profile": "ಸ್ವ ಭೂಮಿಕೆ",
+      "title": "ಸಂಯೋಜನೆಗಳು"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "title": "ದಾಖಲೆಗಳು"
+    },
+    "idao": {
+      "title": "ಇದಾವೊ"
+    },
+    "landscapes": {
+      "title": "ಸಂರಕ್ಷಿತ ಪ್ರದೇಶಗಳು"
+    },
+    "maps": {
+      "title": "ನಕ್ಷೆ"
+    },
+    "more": {
+      "about_us": "ನಮ್ಮ ಬಗ್ಗೆ",
+      "dashboard": "ಕುತೂಹಲ",
+      "discussions": "ಚರ್ಚೆಗಳು",
+      "download_logs": "ಲಾಗ್‌ಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
+      "leaderboard": "ಲೀಡರ್ಬೋರ್ಡ್",
+      "taxonomy": "ವರ್ಗೀಕರಣ",
+      "title": "ಇನ್ನಷ್ಟು",
+      "users": "ಬಳಕೆದಾರರು"
+    },
+    "observation": {
+      "all_observations": "ಎಲ್ಲಾ ಅವಲೋಕನಗಳು",
+      "checklists": "ಪಟ್ಟಿ",
+      "datasets": "ದತ್ತಸಲೆಗಳು",
+      "datatables": "ಡೇಟಾಟೇಬಲ್ಗಳು",
+      "observation_datatables": "ವೀಕ್ಷಣೆ ಡೇಟಾಟೇಬಲ್ಗಳು",
+      "title": "ಅವಲೋಕನಗಳು"
+    },
+    "pages": {
+      "empty": "ಯಾವುದೇ ಪುಟಗಳಿಲ್ಲ",
+      "title": "ಪುಟಗಳು"
+    },
+    "species": {
+      "title": "ಜಾತಿಗಳು"
+    }
+  },
+  "search": "ಹುಡುಕಿ Kannada",
+  "sign_in": "ಲಾಗಿನ್",
+  "toggle_menu": "ಟಾಗಲ್ ಮೆನು"
+}

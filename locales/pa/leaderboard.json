@@ -1,0 +1,43 @@
+{
+  "activity_score": "ਸਰਗਰਮੀ ਸਕੋਰ:",
+  "modules": {
+    "all": "ਸਾਰੇ",
+    "discussion": "ਵਿਚਾਰ ਵਟਾਂਦਰੇ",
+    "documents": "ਦਸਤਾਵੇਜ਼",
+    "miscellaneous": "ਫੁਟਕਲ",
+    "observations": "ਨਿਰੀਖਣ",
+    "species": "ਸਪੀਸੀਜ਼",
+    "taxon": "ਟੈਕਸ"
+  },
+  "stops": {
+    "f": "ਸਾਰਾ ਵਕਤ",
+    "month": "ਪਿਛਲੇ ਮਹੀਨੇ",
+    "month3": "ਪਿਛਲੇ 3 ਮਹੀਨੇ",
+    "today": "ਅੱਜ",
+    "week": "ਪਿਛਲੇ ਹਫ਼ਤੇ",
+    "year": "ਪਿਛਲੇ ਸਾਲ"
+  },
+  "table": {
+    "commented": "ਟਿੱਪਣੀ ਕੀਤੀ",
+    "created": "ਬਣਾਇਆ",
+    "curated": "Curesed",
+    "discussions": "ਵਿਚਾਰ ਵਟਾਂਦਰੇ",
+    "documents": "ਦਸਤਾਵੇਜ਼",
+    "identified": "ਪਛਾਣਿਆ",
+    "name": "ਨਾਮ",
+    "observation": "ਨਿਰੀਖਣ",
+    "organized": "ਸੰਗਠਿਤ",
+    "rank": "ਦਰਜਾ",
+    "species": "ਸਪੀਸੀਜ਼"
+  },
+  "tip": "ਲੀਡਰਬੋਰਡ ਇੱਕ ਉਪਭੋਗਤਾ ਦੁਆਰਾ ਕੀਤੀਆਂ ਸਾਰੀਆਂ ਗਤੀਵਿਧੀਆਂ ਤੇ ਅਧਾਰਤ ਹੁੰਦਾ ਹੈ. ਗਤੀਵਿਧੀ ਹਰ ਘੰਟੇ ਵਿੱਚ ਇੱਕ ਵਾਰ ਅਪਡੇਟ ਕਰੇਗੀ.",
+  "title": "ਲੀਡਰਬੋਰਡ",
+  "total": {
+    "discussion": "ਕੁੱਲ ਵਿਚਾਰ-ਵਟਾਂਦਰੇ",
+    "documents": "ਕੁੱਲ ਦਸਤਾਵੇਜ਼",
+    "miscellaneous": "ਕੁੱਲ ਫੁਟਕਲ",
+    "observations": "ਕੁੱਲ ਨਿਰੀਖਾਵਾਂ",
+    "species": "ਕੁੱਲ ਸਪੀਸੀਜ਼",
+    "taxon": "ਕੁੱਲ ਟੈਕਸ"
+  }
+}

@@ -1,18 +1,18 @@
 {
   "All": "Tous",
-  "Validate": "Valider",
+  "Validate": "Validé",
   "download_map": "Télécharger la carte",
   "no_species_found": "Aucune liste d'espèces trouvée",
   "observation": {
     "fauna_list": "Liste de la faune",
-    "flora_list": "Liste de la flore",
+    "flora_list": "Liste de flore",
     "life_list": {
-      "title": "Liste d'observations"
+      "title": "Liste d'observation"
     },
-    "species_filter": "Filtre d'espèces"
+    "species_filter": "Filtre des espèces"
   },
   "related_documents": "Documents connexes",
-  "site_number": "Placer #",
+  "site_number": "Lieu #",
   "title": "Zones protégées",
   "update": {
     "success": "Champ sauvegardé"

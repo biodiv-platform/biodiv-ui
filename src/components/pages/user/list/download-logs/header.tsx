@@ -1,4 +1,5 @@
-import { Box, Select, Stack, Text } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
+import { PageHeading } from "@components/@core/layout";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -25,27 +26,18 @@ export default function Header() {
 
   return (
     aggregate && (
-      <Stack
-        m={3}
-        justifyContent="space-between"
-        alignItems="center"
-        isInline={true}
-        spacing={4}
-        mb={4}
-      >
-        <Text color="gray.600">
-          {format(totalCount)} {t("user:download_logs")}
-        </Text>
-
-        <Box>
+      <PageHeading
+        actions={
           <Select maxW="10rem" aria-label={t("common:list.sort_by")} onChange={handleOnSort}>
             <option>All</option>
             {aggregate?.map((item) => (
               <option>{`${Object.keys(item)[0]}`}</option>
             ))}
           </Select>
-        </Box>
-      </Stack>
+        }
+      >
+        ⬇️ {t("user:download_logs")} ({format(totalCount)})
+      </PageHeading>
     )
   );
 }

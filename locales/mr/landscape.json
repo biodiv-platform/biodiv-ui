@@ -1,0 +1,20 @@
+{
+  "All": "सर्व",
+  "Validate": "प्रमाणित",
+  "download_map": "नकाशा डाउनलोड करा",
+  "no_species_found": "कोणतीही प्रजाती सूची आढळली नाही",
+  "observation": {
+    "fauna_list": "प्राणी यादी",
+    "flora_list": "फ्लोरा यादी",
+    "life_list": {
+      "title": "निरीक्षण यादी"
+    },
+    "species_filter": "प्रजाती फिल्टर"
+  },
+  "related_documents": "संबंधित कागदपत्र)",
+  "site_number": "जागा #",
+  "title": "संरक्षित भागात",
+  "update": {
+    "success": "फील्ड जतन"
+  }
+}

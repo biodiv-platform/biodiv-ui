@@ -89,7 +89,10 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
         authSuccessForward(data);
       }
     } else {
-      notification(data?.message || t("notifications.invalid_credentials"), NotificationType.Error);
+      notification(
+        data?.message || t("common:notifications.invalid_credentials"),
+        NotificationType.Error
+      );
     }
   };
 

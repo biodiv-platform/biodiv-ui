@@ -1,0 +1,42 @@
+{
+  "add": "डेटाटेबल जोडा",
+  "attribution": "गुणधर्म",
+  "basis_of_data": "डेटा आधार",
+  "basis_of_record": "रेकॉर्ड आधार",
+  "contributor": "योगदानकर्ता",
+  "create_datatable": "डेटाटेबल तयार करा",
+  "field_mapping_table": "फील्ड मॅपिंग टेबल",
+  "files_upload": "फायली अपलोड",
+  "found": "डेटा उपलब्ध आढळले",
+  "geographical_coverage": "भौगोलिक कव्हरेज",
+  "is_verified": "निरीक्षण सत्यापित",
+  "location": "स्थान",
+  "location_accuracy": "स्थान अचूकता",
+  "location_scale": "स्थान स्केल",
+  "media_uploader": "मीडिया अपलोडर",
+  "methods": "पद्धती",
+  "notifications": {
+    "error": "डेटाटेबल तयार करण्यास अक्षम",
+    "sheet_upload_error": "पत्रक अपलोड करण्यात अक्षम",
+    "sheet_upload_success": "यशस्वीरित्या अपलोड केलेले पत्रक",
+    "success": "यशस्वीरित्या यशस्वीरित्या तयार केले"
+  },
+  "others": "इतर",
+  "party": "पार्टी",
+  "project": "प्रकल्प",
+  "sheet_uploader": "स्प्रेडशीट अपलोडर",
+  "show_page": "डेटाटेबल तपशील",
+  "summary": "सारांश",
+  "table": {
+    "geoPrivacy": "भौगोलिक गोपनीयता",
+    "id": "आयडी",
+    "sGroup": "प्रजाती गट",
+    "scientificName": "शास्त्रीय नाव",
+    "userInfo": "वापरकर्ता माहिती"
+  },
+  "taxonomy": "करमुक्त कव्हरेज",
+  "temporal": "तात्पुरती कव्हरेज",
+  "title": "सामान्य मेटाडाटा",
+  "type": "प्रकार",
+  "upload_again": "पुन्हा अपलोड करा"
+}

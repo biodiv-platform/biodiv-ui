@@ -30,8 +30,6 @@
   },
   "menu_secondary": {
     "documents": {
-      "document_datatables": "Tables de données de documents",
-      "documents": "Documents",
       "title": "Documents"
     },
     "idao": {
@@ -45,32 +43,27 @@
     },
     "more": {
       "about_us": "À propos de nous",
-      "activity": "Activité",
       "dashboard": "Tableau de bord",
-      "datasets": "Jeux de données",
       "discussions": "Discussions",
       "download_logs": "Télécharger les journaux",
       "leaderboard": "Classement",
-      "participants": "Participants",
-      "title": "Suite"
+      "taxonomy": "Taxonomie",
+      "title": "Suite",
+      "users": "Utilisateurs"
     },
     "observation": {
+      "all_observations": "Toutes les observations",
       "checklists": "Listes de données",
       "datasets": "Jeux de données",
+      "datatables": "Datables",
       "observation_datatables": "Tables de données d'observations",
-      "observation_traits": "Traits d'observation",
-      "observations": "Observations",
-      "title": "Observation"
+      "title": "Observations"
     },
     "pages": {
       "empty": "Pas de pages",
       "title": "Pages"
     },
     "species": {
-      "species_datatables": "Tables de données d'espèces",
-      "species_pages": "Pages d'espèces",
-      "species_traits": "Traits d'espèces",
-      "taxon_namelist": "Taxonomie",
       "title": "Espèces"
     }
   },

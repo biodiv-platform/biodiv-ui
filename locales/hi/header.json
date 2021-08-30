@@ -30,8 +30,6 @@
   },
   "menu_secondary": {
     "documents": {
-      "document_datatables": "दस्तावेज़ डेटाटेबल्स",
-      "documents": "दस्तावेज़",
       "title": "दस्तावेज़"
     },
     "idao": {
@@ -45,32 +43,27 @@
     },
     "more": {
       "about_us": "हमारे बारे में",
-      "activity": "गतिविधि",
       "dashboard": "डैशबोर्ड",
-      "datasets": "डेटासेट्स",
       "discussions": "चर्चाएँ",
       "download_logs": "लॉग डाउनलोड करें",
       "leaderboard": "लीडरबोर्ड",
-      "participants": "प्रतिभागियों",
-      "title": "अधिक"
+      "taxonomy": "वर्गीकरण",
+      "title": "अधिक",
+      "users": "उपयोगकर्ताओं"
     },
     "observation": {
+      "all_observations": "सभी अवलोकन",
       "checklists": "सूची",
       "datasets": "डेटासेट्स",
+      "datatables": "डेटाटेबल्स",
       "observation_datatables": "अवलोकन डेटाटेबल्स",
-      "observation_traits": "अवलोकन लक्षण",
-      "observations": "टिप्पणियों",
-      "title": "अवलोकन"
+      "title": "टिप्पणियों"
     },
     "pages": {
       "empty": "कोई पृष्ठ नहीं",
       "title": "पृष्ठों"
     },
     "species": {
-      "species_datatables": "प्रजाति डेटाटेबल्स",
-      "species_pages": "प्रजाति पृष्ठ",
-      "species_traits": "प्रजाति लक्षण",
-      "taxon_namelist": "टैक्सन नामावली",
       "title": "जाति"
     }
   },

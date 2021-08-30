@@ -1,0 +1,42 @@
+{
+  "add": "Datatable జోడించండి",
+  "attribution": "ఆరోపణ",
+  "basis_of_data": "డేటా ఆధారంగా",
+  "basis_of_record": "రికార్డు ఆధారంగా",
+  "contributor": "సహకారము",
+  "create_datatable": "Datatable సృష్టించండి",
+  "field_mapping_table": "ఫీల్డ్ మ్యాపింగ్ టేబుల్",
+  "files_upload": "ఫైల్స్ అప్లోడ్లు",
+  "found": "Datatable కనుగొనబడింది",
+  "geographical_coverage": "భౌగోళిక కవరేజ్",
+  "is_verified": "పరిశీలన ధృవీకరించబడింది",
+  "location": "స్థానం",
+  "location_accuracy": "స్థానం ఖచ్చితత్వం",
+  "location_scale": "స్థానం స్థాయి",
+  "media_uploader": "మీడియా అప్లోడర్",
+  "methods": "పద్ధతులు",
+  "notifications": {
+    "error": "Datatable సృష్టించడం సాధ్యం కాలేదు",
+    "sheet_upload_error": "షీట్ను అప్లోడ్ చేయడం సాధ్యం కాలేదు",
+    "sheet_upload_success": "విజయవంతంగా అప్లోడ్ చేయబడిన షీట్",
+    "success": "Datatable విజయవంతంగా సృష్టించబడింది"
+  },
+  "others": "ఇతరులు",
+  "party": "పార్టీ",
+  "project": "ప్రాజెక్ట్",
+  "sheet_uploader": "స్ప్రెడ్షీట్ అప్లోడర్",
+  "show_page": "Datatable వివరాలు",
+  "summary": "సారాంశం",
+  "table": {
+    "geoPrivacy": "జియో గోప్యత",
+    "id": "Id.",
+    "sGroup": "జాతుల సమూహం",
+    "scientificName": "శాస్త్రీయ పేరు",
+    "userInfo": "వాడుకరి సమాచారం"
+  },
+  "taxonomy": "వర్గీకరణ కవరేజ్",
+  "temporal": "తాత్కాలిక కవరేజ్",
+  "title": "జనరల్ మెటాడేటా",
+  "type": "రకం",
+  "upload_again": "మళ్ళీ అప్లోడ్ చేయండి"
+}

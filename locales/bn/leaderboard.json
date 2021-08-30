@@ -1,0 +1,43 @@
+{
+  "activity_score": "কার্যকলাপ স্কোর:",
+  "modules": {
+    "all": "সব",
+    "discussion": "আলোচনা",
+    "documents": "ডকুমেন্টস",
+    "miscellaneous": "বিবিধ",
+    "observations": "পর্যবেক্ষণ পর্যবেক্ষণ",
+    "species": "প্রজাতি",
+    "taxon": "ট্যাক্সন"
+  },
+  "stops": {
+    "f": "সব সময়",
+    "month": "গত মাসে",
+    "month3": "গত 3 মাস",
+    "today": "আজ",
+    "week": "গত সপ্তাহ",
+    "year": "বিগত বছর"
+  },
+  "table": {
+    "commented": "মন্তব্য",
+    "created": "তৈরি",
+    "curated": "Curated.",
+    "discussions": "আলোচনা",
+    "documents": "ডকুমেন্টস",
+    "identified": "চিহ্নিত",
+    "name": "নাম",
+    "observation": "পর্যবেক্ষণ",
+    "organized": "সংগঠিত",
+    "rank": "র্যাঙ্ক",
+    "species": "প্রজাতি"
+  },
+  "tip": "লিডারবোর্ড একটি ব্যবহারকারী দ্বারা সম্পন্ন সব কার্যক্রম উপর ভিত্তি করে। কার্যকলাপ প্রতি ঘন্টা একবার আপডেট হবে।",
+  "title": "লিডারবোর্ড",
+  "total": {
+    "discussion": "মোট আলোচনা",
+    "documents": "মোট ডকুমেন্টস",
+    "miscellaneous": "মোট বিবিধ",
+    "observations": "মোট পর্যবেক্ষণ",
+    "species": "মোট প্রজাতি",
+    "taxon": "মোট ট্যাক্সন"
+  }
+}

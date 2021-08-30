@@ -1,0 +1,89 @@
+{
+  "accepted": "स्वीकारले",
+  "actions": {
+    "flag": {
+      "category": "वर्ग",
+      "flags": {
+        "date_inappropriate": "अनुचित तारीख",
+        "details_inappropriate": "अनुचित तपशील",
+        "location_inappropriate": "अयोग्य स्थान"
+      },
+      "notes": "नोट्स",
+      "others_flagged": "जो कोणी ध्वजांकित",
+      "title": "झेंडा"
+    }
+  },
+  "activity": "क्रियाकलाप",
+  "add": "जोडा",
+  "cancel": "रद्द करा",
+  "clear": "स्पष्ट",
+  "close": "बंद",
+  "copy": "क्लिपबोर्डवर कॉपी करा",
+  "datatable": "डेटाटेबल",
+  "delete": "हटवा",
+  "edit": "सुधारणे",
+  "edit_not_uploaded": "काही स्त्रोत योग्यरित्या अपलोड केलेले नाहीत, कृपया अपलोड करण्यापूर्वी प्रतीक्षा करा किंवा काढा",
+  "feature": "निवडले वैशिष्ट्य",
+  "feature_in_groups": "गटांमध्ये वैशिष्ट्य",
+  "feedback": "अभिप्राय",
+  "footer": {
+    "email": "ईमेल",
+    "facebook": "फेसबुक",
+    "github": "गिथब",
+    "powered_by": "द्वारा समर्थित",
+    "technology_partner": "तंत्रज्ञान भागीदार",
+    "twitter": "ट्विटर"
+  },
+  "habitats_covered": "संरक्षित निवास",
+  "information": "माहिती",
+  "invalid_request": "अवैध विनंती",
+  "list": {
+    "sort_by": "क्रमवारी लावा",
+    "sort_options": {
+      "last_updated": "शेवटचे अद्यावत",
+      "latest": "शेवटचे अपलोड",
+      "most_viewed": "सर्वाधिक पाहिलेले"
+    },
+    "view_type": {
+      "grid": "ग्रिड",
+      "list": "यादी",
+      "map": "नकाशा",
+      "stats": "मेट्रिक्स"
+    }
+  },
+  "load_more": "अधिक लोड करा ↺.",
+  "loading": "लोड करीत आहे ...",
+  "name": "नाव",
+  "next": "पुढे",
+  "no_data": "माहिती उपलब्ध नाही",
+  "no_results": "कोणतेही परिणाम सापडले नाहीत",
+  "notifications": {
+    "invalid_credentials": "आपण प्रविष्ट केलेला वापरकर्तानाव किंवा संकेतशब्द चुकीचा आहे.",
+    "token_error": "टोकन आणताना त्रुटी",
+    "token_not_saved": "टोकन वाचवू शकत नाही",
+    "token_saved": "टोकन वाचले"
+  },
+  "observed_on": "वर पाहिले",
+  "offline": "इंटरनेट कनेक्शन नाही",
+  "one_moment_please": "कृपया क्षणभर थांबा",
+  "or": "किंवा",
+  "permalink": "परमिलिंक",
+  "prev": "मागील",
+  "processing": "प्रक्रिया ...",
+  "read_more": "पुढे वाचा",
+  "save": "जतन करा",
+  "search": "शोध",
+  "session_required": "साइन इन आवश्यक आहे",
+  "slider_left": "डावीकडे",
+  "slider_right": "उजवीकडे",
+  "species_coverage": "प्रजाती ग्रुप कव्हरेज",
+  "success": "यश",
+  "temporal": {
+    "observations": "निरीक्षणे",
+    "title": "तात्पुरती वितरण"
+  },
+  "toggle": "टॉगल",
+  "unauthorized": "अनधिकृत वापरकर्ता",
+  "unknown": "अज्ञात",
+  "usergroups": "गट"
+}

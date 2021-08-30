@@ -1,5 +1,5 @@
 {
-  "clear": "Mazava {{filterCount}} siver (s)",
+  "clear": "Mazava {{filterCount}} siver(s)",
   "custom_fields": {
     "has_content": "Manana votoaty",
     "no_content": "Tsy misy atiny",
@@ -31,12 +31,12 @@
   },
   "dataset_filter": {
     "dataset": {
-      "title": "Anaran-datety"
+      "title": "DataSet anarana"
     },
     "datatable": {
-      "title": "DataTable anarana"
+      "title": "Anarana desabable"
     },
-    "title": "Dataset Metadata"
+    "title": "Dataset metadata"
   },
   "document_title": "lohateny",
   "item_type": {

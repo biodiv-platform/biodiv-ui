@@ -1,13 +1,13 @@
 {
   "All": "rehetra",
-  "Validate": "hanamafy",
+  "Validate": "nampanan-kery",
   "download_map": "Download Map",
-  "no_species_found": "Tsy misy lisitra karazana",
+  "no_species_found": "Tsy misy lisitra karazana hita",
   "observation": {
-    "fauna_list": "Lisitra Fauna",
-    "flora_list": "Lisitra Flora",
+    "fauna_list": "Lisitry ny fauna",
+    "flora_list": "Lisitry ny Flora",
     "life_list": {
-      "title": "Lisitra fandinihana"
+      "title": "Lisitry ny fandinihana"
     },
     "species_filter": "Sivana karazana"
   },

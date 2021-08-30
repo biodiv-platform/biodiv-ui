@@ -1,0 +1,144 @@
+{
+  "clear": "{{filterCount}} వడపోత (లు)",
+  "custom_fields": {
+    "has_content": "కంటెంట్ ఉంది",
+    "no_content": "ఏ కంటెంట్",
+    "no_custom_field": "ఏ కస్టమ్ ఫీల్డ్ (లు) దొరకలేదు",
+    "title": "కస్టమ్ ఫీల్డ్స్"
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "ఫ్లాగ్ చేయబడింది",
+      "title": "జెండా",
+      "unflagged": "Unflagged."
+    },
+    "identification": {
+      "identified": "గుర్తించిన",
+      "title": "గుర్తింపు",
+      "unidentified": "గుర్తించబడలేదు"
+    },
+    "taxon_id": {
+      "has_taxon": "టాక్సన్ ID ఉంది",
+      "no_taxon": "సంఖ్య టాక్సన్ ID",
+      "title": "టాక్సన్ ఐడి"
+    },
+    "title": "డేటా నాణ్యత",
+    "validation": {
+      "not_validated": "ధృవీకరించబడలేదు",
+      "title": "ధ్రువీకరణ",
+      "validated": "ధ్రువీకరించిన"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "డేటాసెట్ పేరు"
+    },
+    "datatable": {
+      "title": "Datatable పేరు"
+    },
+    "title": "డేటాసెట్ మెటాడేటా"
+  },
+  "document_title": "శీర్షికబడ్డ",
+  "item_type": {
+    "title": "వస్తువు రకము"
+  },
+  "location": {
+    "district": "జిల్లా",
+    "map": {
+      "title": "మ్యాప్"
+    },
+    "protected_area": {
+      "title": "రక్షిత ప్రాంతాలు"
+    },
+    "state": {
+      "title": "రాష్ట్ర"
+    },
+    "tehsil": "టెహ్సిల్",
+    "title": "స్థానం"
+  },
+  "media": {
+    "audio": "ఆడియో",
+    "image": "చిత్రం",
+    "no_media": "మీడియా లేదు",
+    "title": "మీడియా రకం",
+    "video": "వీడియో"
+  },
+  "name": {
+    "reco_name": {
+      "title": "పేరు"
+    },
+    "status": {
+      "accepted": "ఆమోదించబడిన",
+      "synonym": "పర్యాయపదం",
+      "title": "స్థితి"
+    },
+    "title": "శాస్త్రీయ పేరు"
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "అన్ని పేర్లు"
+    },
+    "taxon_names": {
+      "title": "టాక్సన్ పేర్లు"
+    },
+    "taxon_rank": {
+      "title": "టాక్సన్ ర్యాంక్"
+    },
+    "taxon_status": {
+      "title": "టాక్సన్ స్థితి"
+    },
+    "title": "శాస్త్రీయ పేరు"
+  },
+  "species_group": {
+    "all": "అన్ని",
+    "amphibians": "ఉభయచరాలు",
+    "arthropods": "ఆర్థ్రోపోడ్స్",
+    "birds": "పక్షులు",
+    "fish": "చేప",
+    "fungi": "శిలీంధ్ర",
+    "mammals": "క్షీరదాలు",
+    "molluscs": "MollUscs.",
+    "others": "ఇతరులు",
+    "plants": "మొక్కలు",
+    "reptiles": "సరీసృపాలు",
+    "title": "జాతుల సమూహం"
+  },
+  "taxon_browser": {
+    "search": "చెట్టులో శోధించండి",
+    "search_results": "{{currentIndex}} of {{resultsCount}}",
+    "title": "టాక్సన్ బ్రౌజర్"
+  },
+  "time": {
+    "created_on": "సృష్టించబడిన తేదీ",
+    "max_date": "గరిష్ట తేదీ",
+    "min_date": "కనీస తేదీ",
+    "month": {
+      "apr": "ఏప్రిల్",
+      "aug": "ఆగస్టు",
+      "dec": "డిసెంబర్",
+      "feb": "ఫిబ్రవరి",
+      "jan": "జనవరి",
+      "jul": "జూలై",
+      "jun": "జూన్",
+      "mar": "మార్చి",
+      "may": "మే",
+      "nov": "నవంబర్",
+      "oct": "అక్టోబర్",
+      "sep": "సెప్టెంబర్",
+      "title": "నెల పరిశీలించబడింది"
+    },
+    "title": "సమయము"
+  },
+  "title": "వడపోతలు",
+  "toggle": "ఫిల్టర్లను టోగుల్ చేయండి",
+  "traits": {
+    "title": "లక్షణాలు"
+  },
+  "user": {
+    "search": "శోధన యూజర్",
+    "title": "వాడుకరి"
+  },
+  "usergroup": {
+    "title": "వాడుకరి గుంపులు"
+  }
+}

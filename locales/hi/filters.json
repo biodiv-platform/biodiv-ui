@@ -1,5 +1,5 @@
 {
-  "clear": "साफ़ {{filterCount}} फ़िल्टर (ओं)",
+  "clear": "साफ़ {{filterCount}} फ़िल्टर(ओं)",
   "custom_fields": {
     "has_content": "सामग्री है",
     "no_content": "कोई सामग्री नहीं है",

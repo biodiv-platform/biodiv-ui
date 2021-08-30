@@ -30,8 +30,6 @@
   },
   "menu_secondary": {
     "documents": {
-      "document_datatables": "Document Datatables",
-      "documents": "Documents",
       "title": "Documents"
     },
     "idao": {
@@ -45,32 +43,27 @@
     },
     "more": {
       "about_us": "About Us",
-      "activity": "Activity",
       "dashboard": "Dashboard",
-      "datasets": "Datasets",
       "discussions": "Discussions",
       "download_logs": "Download Logs",
       "leaderboard": "Leaderboard",
-      "participants": "Participants",
-      "title": "More"
+      "taxonomy": "Taxonomy",
+      "title": "More",
+      "users": "Users"
     },
     "observation": {
+      "all_observations": "All Observations",
       "checklists": "List",
       "datasets": "Datasets",
+      "datatables": "Datatables",
       "observation_datatables": "Observation Datatables",
-      "observation_traits": "Observation Traits",
-      "observations": "Observations",
-      "title": "Observation"
+      "title": "Observations"
     },
     "pages": {
       "empty": "No Pages",
       "title": "Pages"
     },
     "species": {
-      "species_datatables": "Species Datatables",
-      "species_pages": "Species Pages",
-      "species_traits": "Species Traits",
-      "taxon_namelist": "Taxon Namelist",
       "title": "Species"
     }
   },

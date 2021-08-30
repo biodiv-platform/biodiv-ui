@@ -1,0 +1,146 @@
+{
+  "accurate": "ਸਹੀ",
+  "add_observation": "ਨਿਰੀਖਣ ਸ਼ਾਮਲ ਕਰੋ",
+  "cf_update_success": "ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਨਿਗਰਾਨੀ ਕਸਟਮ ਫੀਲਡ",
+  "checklistAnnotation": "ਡੇਟਾਟੇਬਲ ਖੇਤਰ",
+  "common_name": "ਆਮ ਨਾਮ",
+  "continue": "ਜਾਰੀ ਰੱਖੋ",
+  "contributor": "ਯੋਗਦਾਨ",
+  "coordinates": "ਤਾਲਮੇਲ",
+  "created_on": "ਤੇ ਬਣਾਇਆ",
+  "creating": "ਅਸੀਂ ਤੁਹਾਡਾ ਨਿਰੀਖਣ ਬਣਾ ਰਹੇ ਹਾਂ",
+  "custom_fields": "ਕਸਟਮ ਫੀਲਡ",
+  "delete_file": {
+    "error": "ਫਾਈਲ ਤੇ ਕਾਰਵਾਈ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ, ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+    "failed": "ਫਾਈਲ ਨੂੰ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ, ਕਿਰਪਾ ਕਰਕੇ ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+    "success": "ਫਾਈਲ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟ ਗਈ"
+  },
+  "download": {
+    "error": "ਫਾਈਲ ਤਿਆਰ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
+    "modal": {
+      "note": "ਕਿਰਪਾ ਕਰਕੇ ਦੱਸੋ ਕਿ ਤੁਸੀਂ ਡਾਉਨਲੋਡ ਕੀਤੇ ਡੇਟਾ ਨੂੰ ਕਿਵੇਂ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ",
+      "note_hint": "ਇਹ ਸਮਝਣਾ ਮਹੱਤਵਪੂਰਣ ਹੈ ਕਿ ਕਿਵੇਂ ਖੁੱਲਾ ਡੇਟਾ ਵਰਤਿਆ ਜਾ ਰਿਹਾ ਹੈ",
+      "title": "ਕਾਲਮ ਚੁਣੋ"
+    },
+    "success": "ਤੁਹਾਡੀ ਫਾਈਲ ਤਿਆਰ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ. ਜਦੋਂ ਇਹ ਤਿਆਰ ਹੋ ਜਾਂਦਾ ਹੈ, ਤੁਹਾਨੂੰ ਈਮੇਲ ਦੁਆਰਾ ਸੂਚਿਤ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ ਅਤੇ ਤੁਹਾਡੇ ਪ੍ਰੋਫਾਈਲ ਪੰਨੇ ਤੇ ਡਾਉਨਲੋਡ ਲਿੰਕ ਦਿਖਾਈ ਦੇਵੇਗਾ.",
+    "title": "ਡਾਉਨਲੋਡ ਕਰੋ"
+  },
+  "edit_hint": "Each ਹੋਰ ਚੀਜ਼ਾਂ ਜਿਵੇਂ ਕਿ ਨਾਮ ਜਾਂ ਗੁਣਾਂ ਨੂੰ ਸੰਪਾਦਿਤ ਕਰਨ ਲਈ, ਕਿਰਪਾ ਕਰਕੇ ਨਿਰੀਖਣ-ਸ਼ੋਅ ਪੰਨੇ ਤੋਂ ਸਿੱਧਾ ਇਨਪੁਟ ਕਰੋ",
+  "edit_observation": "ਨਿਰੀਖਣ ਸੋਧੋ",
+  "follow_observation": "ਅਨੁਸਰਣ ਕਰੋ",
+  "group": "ਸਮੂਹ",
+  "group_updated": "ਨਿਗਰਾਨੀ ਸਪੀਸੀਜ਼ ਸਮੂਹ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਹੋਇਆ",
+  "groups_updated": "ਸਮੂਹ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+  "help_identify": "ਦੀ ਪਛਾਣ ਕਰੋ",
+  "hide_precise_location": "ਸਹੀ ਸਥਾਨ ਲੁਕਾਓ",
+  "id": {
+    "agree": "ਸਹਿਮਤ",
+    "no_recommendation": "ਕੋਈ ਸਿਫਾਰਸ਼ ਨਹੀਂ",
+    "no_suggestion": "ਇੱਕ ਪਛਾਣ ਦਾ ਸੁਝਾਅ ਦਿਓ",
+    "remove": "ਹਟਾਓ",
+    "resuggest": "ਆਪਣਾ ਮਨ ਬਦਲਿਆ?",
+    "suggest_new_reco": "ਇਕ ਹੋਰ ਪਛਾਣ ਦਾ ਸੁਝਾਅ ਦਿਓ",
+    "suggestion_success": "ਸਫਲਤਾਪੂਰਵਕ ਸੁਝਾਅ",
+    "title": "ਪਛਾਣ",
+    "unlock": "ਅਨਲੌਕ",
+    "validate": "ਪੜਤਾਲ",
+    "validated": "ਕੁਰੇਟਰ ਦੁਆਰਾ ਪ੍ਰਮਾਣਿਤ"
+  },
+  "language": "ਭਾਸ਼ਾ",
+  "last_location": "ਆਖਰੀ ਸਥਾਨ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "latitude": "ਵਿਥਕਾਰ",
+  "license": "ਲਾਇਸੈਂਸ",
+  "list": {
+    "chart": {
+      "sgroup": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
+      "states": "ਰਾਜ ਵੰਡ"
+    },
+    "created_on": "ਤੇ ਬਣਾਇਆ",
+    "life_list": {
+      "count_header": "ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ",
+      "heading": "ਟੈਕਸ ਮਨਾਇਆ",
+      "species_header": "ਸਪੀਸੀਜ਼"
+    },
+    "location": "ਟਿਕਾਣਾ",
+    "observations_found": "ਨਿਗਰਾਨੀ ਮਿਲ ਗਈ",
+    "spatial_distribution": "ਸਥਾਨਿਕ ਡਿਸਟ੍ਰੀਬਿ .ਸ਼ਨ",
+    "stats_bar": {
+      "total_identifiers": "ਪਛਾਣਕਰਤਾ",
+      "total_observations": "ਨਿਰੀਖਣ",
+      "total_taxa": "ਟੈਕਸ",
+      "total_uploaders": "ਅਪਲੋਡਰ"
+    },
+    "top_identifiers_list": {
+      "author_header": "ਨਾਮ",
+      "count_header": "ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ",
+      "heading": "ਚੋਟੀ ਦੇ ਪਹਿਚਾਣ"
+    },
+    "top_uploaders_list": {
+      "author_header": "ਨਾਮ",
+      "count_header": "ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ",
+      "heading": "ਚੋਟੀ ਦੇ ਅਪਲੋਡ ਕਰਨ ਵਾਲੇ"
+    }
+  },
+  "location_information": {
+    "coordinates": "ਤਾਲਮੇਲ",
+    "forest_type": "ਜੰਗਲ ਦੀ ਕਿਸਮ",
+    "geoprivacy_enabled": "ਜਿਓਪ੍ਰਵਸੀਟੀ ਯੋਗ",
+    "rainfall": "ਮੀਂਹ",
+    "soil": "ਮਿੱਟੀ",
+    "tehsil": "ਤਹਿਸੀਲ",
+    "temperature": "ਤਾਪਮਾਨ",
+    "title": "ਸਥਾਨ ਦੀ ਜਾਣਕਾਰੀ"
+  },
+  "location_placeholder": "ਇੱਕ ਟਿਕਾਣਾ ਦਰਜ ਕਰੋ",
+  "location_scale": "ਸਥਾਨ ਦੀ ਸ਼ੁੱਧਤਾ",
+  "longitude": "ਲੰਬਕਾਰ",
+  "nearby": "ਨੇੜਲੇ ਨਿਰੀਖਣ",
+  "no_custom_field": "ਇਸ ਨਿਰੀਖਣ ਲਈ ਕੋਈ ਕਸਟਮ ਫੀਲਡ ਨਹੀਂ (ਜ਼)",
+  "no_empty_suggestion": "ਖਾਲੀ ਸੁਝਾਅ ਨੂੰ ਕ੍ਰੇਟ ਨਹੀਂ ਕਰ ਸਕਦਾ",
+  "notes": "ਨੋਟਸ",
+  "observed": "ਦੇਖਿਆ",
+  "observed_at": "ਸਥਿਤੀ 'ਤੇ ਦੇਖਿਆ ਗਿਆ",
+  "points_gained": "{{points}} ਐਕਟੀਵਿਟੀ ਪੁਆਇੰਟ(ਟ) ਪ੍ਰਾਪਤ ਕੀਤੇ",
+  "post_to_groups": "ਸਮੂਹਾਂ ਨੂੰ ਪੋਸਟ ਕਰੋ",
+  "range_hint": "ਵਰਤੋਂ: ਸੇਬੈਟ ਰੇਂਜ ਦੇ ਮੁੱਲਾਂ ਨੂੰ",
+  "rate_success": "ਮੀਡੀਆ ਨੇ ਸਫਲਤਾਪੂਰਵਕ ਦਰਜਾ ਦਿੱਤਾ",
+  "rating": "ਰੇਟਿੰਗ",
+  "related": "ਸੰਬੰਧਿਤ ਨਿਰੀਖਣ",
+  "remove": {
+    "description": "ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ? ਤੁਹਾਨੂੰ ਬਾਅਦ ਵਿੱਚ ਇਸ ਕਾਰਵਾਈ ਨੂੰ ਵਾਪਸ ਨਹੀਂ ਲੈ ਸਕਦਾ.",
+    "success": "ਨਿਗਰਾਨੀ ਨੂੰ ਸਫਲਤਾਪੂਰਕ ਮਿਟਾ ਦਿੱਤਾ ਗਿਆ",
+    "title": "ਨਿਰੀਖਣ ਨੂੰ ਮਿਟਾਓ"
+  },
+  "resource_info": "ਸਰੋਤ ਜਾਣਕਾਰੀ",
+  "saved": "ਨਿਰੀਖਣ ਬਚ ਗਿਆ",
+  "saved_message": "ਅਸੀਂ ਇਸ ਸਮੇਂ ਤੁਹਾਡਾ ਨਿਰੀਖਣ ਬਣਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ ਸੀ, ਪਰ ਜੇ ਤੁਸੀਂ offline ਨਲਾਈਨ ਹੋ ਤਾਂ ਚਿੰਤਾ ਨਾ ਕਰੋ ਕਿ ਇਹ ਬਚਾਇਆ ਗਿਆ ਹੈ ਅਤੇ ਇਕ ਵਾਰ ਸੰਪਰਕ ਹੋ ਜਾਵੇਗਾ",
+  "scientific_name": "ਵਿਗਿਆਨਕ ਨਾਮ",
+  "share": "ਇਸ ਨਿਰੀਖਣ ਨੂੰ ਸਾਂਝਾ ਕਰੋ",
+  "source": "ਸਰੋਤ",
+  "species_page": "ਸਪੀਸੀਜ਼ ਪੇਜ ਵੇਖੋ",
+  "submitted": "ਪੇਸ਼",
+  "success": "ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ",
+  "suggest": "ਸੁਝਾਅ ਦਿਓ",
+  "sync": {
+    "done": "ਕੀਤਾ",
+    "failed": "ਅਸਫਲ",
+    "title": "ਬਕਾਇਆ ਨਿਰੀਖਣ",
+    "uploading": "ਅਪਲੋਡ ਕਰਨਾ",
+    "view": "ਵੇਖੋ"
+  },
+  "synonym": "ਸਮਾਨਾਰਥੀ",
+  "title": "ਤੁਸੀਂ ਅੱਜ ਕੀ ਦੇਖਿਆ?",
+  "title_edit": "ਨਿਰੀਖਣ ਸੋਧੋ",
+  "traits": "ਗੁਣ",
+  "traits_no_group": "ਕਿਰਪਾ ਕਰਕੇ ਗਰੁੱਪ ਨੂੰ ਪਹਿਲਾਂ ਚੁਣੋ",
+  "traits_update_success": "ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੇ ਗਏ",
+  "unfeature": "ਗੈਰ -ਭੂਤ ਚੁਣਿਆ ਗਿਆ",
+  "unfollow_observation": "ਅਨੌਖੇ ਨਿਰੀਖਣ",
+  "update_observation": "ਨਿਰਧਾਰਤ ਨਿਗਰਾਨੀ",
+  "updated": "ਅੱਪਡੇਟ ਕੀਤਾ",
+  "updated_on": "ਤੇ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+  "use_dms": "ਡੀਐਮਐਸ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "use_last_value": "ਆਖਰੀ ਮੁੱਲ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "use_lat_lng": "ਲੈਟ-ਲੌਂਗ ਦੀ ਵਰਤੋਂ ਕਰੋ",
+  "why_featuring": "ਗੁਣ ਕਿਉਂ?"
+}

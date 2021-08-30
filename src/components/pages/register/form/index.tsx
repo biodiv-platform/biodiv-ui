@@ -132,7 +132,7 @@ function SignUpForm() {
             <TextBoxField name="username" label={t("user:name")} />
             <SelectInputField
               name="gender"
-              label="Gender"
+              label={t("user:gender")}
               options={GENDER_OPTIONS}
               shouldPortal={true}
             />
@@ -165,13 +165,13 @@ function SignUpForm() {
 
             <SelectInputField
               name="profession"
-              label="Profession"
+              label={t("user:occupation")}
               options={OCCUPATION_OPTIONS}
               shouldPortal={true}
             />
             <SelectInputField
               name="institution"
-              label="Institution"
+              label={t("user:institution")}
               options={INSTITUTION_OPTIONS}
               shouldPortal={true}
             />

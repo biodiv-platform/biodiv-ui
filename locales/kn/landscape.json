@@ -1,0 +1,20 @@
+{
+  "All": "ಎಲ್ಲರೂ",
+  "Validate": "ಮೌಲ್ಯದ",
+  "download_map": "ನಕ್ಷೆ ಡೌನ್ಲೋಡ್ ಮಾಡಿ",
+  "no_species_found": "ಯಾವುದೇ ಜಾತಿಗಳ ಪಟ್ಟಿ ಕಂಡುಬಂದಿಲ್ಲ",
+  "observation": {
+    "fauna_list": "ಪ್ರಾಣಿಗಳ ಪಟ್ಟಿ",
+    "flora_list": "ಫ್ಲೋರಾ ಪಟ್ಟಿ",
+    "life_list": {
+      "title": "ವೀಕ್ಷಣೆ ಪಟ್ಟಿ"
+    },
+    "species_filter": "ಜಾತಿಗಳು ಫಿಲ್ಟರ್"
+  },
+  "related_documents": "ಸಂಬಂಧಿತ ದಾಖಲೆಗಳು)",
+  "site_number": "ಸೈಟ್ #",
+  "title": "ಸಂರಕ್ಷಿತ ಪ್ರದೇಶಗಳು",
+  "update": {
+    "success": "ಕ್ಷೇತ್ರ ಉಳಿಸಲಾಗಿದೆ"
+  }
+}

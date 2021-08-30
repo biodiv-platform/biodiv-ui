@@ -1,0 +1,73 @@
+{
+  "group_edit": "गट संपादित करा",
+  "logged_user_only": "कृपया गटात सामील होण्यासाठी लॉग इन करा",
+  "member_only": "कृपया निरीक्षणे अपलोड करण्यासाठी गटात सामील व्हा",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "डेटा पॅकेज जोडा",
+      "add_dataset": "डेटासेट जोडा",
+      "add_datatable": "डेटाटेबल जोडा",
+      "add_document": "दस्तऐवज जोडा",
+      "add_fact": "तथ्य जोडा",
+      "add_list": "सूची जोडा",
+      "add_observation": "निरीक्षण जोडा",
+      "add_trait_or_value": "गुणधर्म / मूल्य जोडा",
+      "contribute_to_map": "नकाशा योगदान",
+      "contribute_to_species": "प्रजातींमध्ये योगदान",
+      "title": "योगदान"
+    },
+    "groups": {
+      "see_all": "सर्व पाहा",
+      "title": "गट"
+    },
+    "settings": {
+      "leaderboard": "माझे लीडरबोर्ड रँक",
+      "logout": "बाहेर पडणे",
+      "my_observations": "माझे निरीक्षण",
+      "my_profile": "माझे प्रोफाइल",
+      "title": "सेटिंग्ज"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "title": "कागदपत्रे"
+    },
+    "idao": {
+      "title": "इडाओ"
+    },
+    "landscapes": {
+      "title": "संरक्षित भागात"
+    },
+    "maps": {
+      "title": "नकाशे"
+    },
+    "more": {
+      "about_us": "आमच्याबद्दल",
+      "dashboard": "डॅशबोर्ड",
+      "discussions": "चर्चा",
+      "download_logs": "लॉग डाउनलोड करा",
+      "leaderboard": "लीडरबोर्ड",
+      "taxonomy": "वर्गीकरण",
+      "title": "अधिक",
+      "users": "वापरकर्ते"
+    },
+    "observation": {
+      "all_observations": "सर्व निरीक्षणे",
+      "checklists": "यादी",
+      "datasets": "डेटासेट्स",
+      "datatables": "डेटाटाटेबल्स",
+      "observation_datatables": "निरीक्षण डेटाटेबल्स",
+      "title": "निरीक्षणे"
+    },
+    "pages": {
+      "empty": "कोणतीही पृष्ठे नाहीत",
+      "title": "पृष्ठे"
+    },
+    "species": {
+      "title": "प्रजाती"
+    }
+  },
+  "search": "शोध",
+  "sign_in": "लॉग इन करा",
+  "toggle_menu": "टॉगल मेनू"
+}
