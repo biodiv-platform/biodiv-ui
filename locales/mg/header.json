@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "Ampio ny fonosana data",
       "add_dataset": "Ampio Dataset",
+      "add_datatable": "Ampio Datatable",
       "add_document": "Manampy antontan-taratasy",
       "add_fact": "Ampio ny zava-misy",
       "add_list": "Manampy lisitra",
@@ -48,6 +49,7 @@
       "dashboard": "anaty fiara",
       "datasets": "Datasets",
       "discussions": "fifanakalozan-kevitra",
+      "download_logs": "Download Logs",
       "leaderboard": "Leadersboard",
       "participants": "mpandray anjara",
       "title": "Bebe kokoa"
