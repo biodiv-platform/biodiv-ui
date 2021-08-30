@@ -58,12 +58,6 @@ export default [
     ]
   },
   {
-    active: SITE_CONFIG.PAGES.ACTIVE,
-    cell: PagesMenuItem,
-    isLazy: true,
-    name: "header:menu_secondary.pages."
-  },
-  {
     name: "header:menu_secondary.more.",
     rows: [
       {
@@ -96,5 +90,11 @@ export default [
     active: SITE_CONFIG.HEADER.IDAO.ACTIVE,
     name: "header:menu_secondary.idao.",
     to: SITE_CONFIG.HEADER.IDAO.LINK
+  },
+  {
+    active: SITE_CONFIG.PAGES.ACTIVE,
+    cell: PagesMenuItem,
+    isLazy: true,
+    name: "header:menu_secondary.pages."
   }
 ];
