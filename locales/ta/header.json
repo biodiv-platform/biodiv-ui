@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "அனைத்து ஆவணங்களும்",
-      "document_datatables": "ஆவண Datatables.",
       "title": "ஆவணங்கள்"
     },
     "idao": {
       "title": "Idao."
     },
     "landscapes": {
-      "all_landscapes": "அனைத்து பாதுகாக்கப்பட்ட பகுதிகளிலும்",
       "title": "பாதுகாக்கப்பட்ட பகுதிகளில்"
     },
     "maps": {
-      "all_maps": "அனைத்து வரைபடங்கள்",
       "title": "வரைபடங்கள்"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "பக்கங்கள்"
     },
     "species": {
-      "all_species": "அனைத்து இனங்கள்",
-      "species_datatables": "இனங்கள் datatables.",
-      "species_pages": "இனங்கள் பக்கங்கள்",
-      "taxon_namelist": "டான்சன் நாமலிஸ்ட்",
       "title": "இனங்கள்"
     }
   },

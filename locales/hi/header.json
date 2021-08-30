@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "डेटाटेबल जोड़ें",
-      "document_datatables": "दस्तावेज़ डेटाटेबल्स",
       "title": "दस्तावेज़"
     },
     "idao": {
       "title": "IDAO"
     },
     "landscapes": {
-      "all_landscapes": "सभी संरक्षित क्षेत्र",
       "title": "संरक्षित क्षेत्र"
     },
     "maps": {
-      "all_maps": "सभी मानचित्र",
       "title": "नक्शा"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "पृष्ठों"
     },
     "species": {
-      "all_species": "सभी प्रजाति",
-      "species_datatables": "प्रजाति डेटाटेबल्स",
-      "species_pages": "प्रजाति पृष्ठ",
-      "taxon_namelist": "टैक्सन नामावली",
       "title": "जाति"
     }
   },

@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "എല്ലാ രേഖകളും",
-      "document_datatables": "ഡോക്യുമെന്റ് ഡാറ്റാറ്റബിൾസ്",
       "title": "രേഖകൾ"
     },
     "idao": {
       "title": "ഇഡാ"
     },
     "landscapes": {
-      "all_landscapes": "എല്ലാ പരിരക്ഷിത പ്രദേശങ്ങളും",
       "title": "സംരക്ഷിത പ്രദേശങ്ങൾ"
     },
     "maps": {
-      "all_maps": "എല്ലാ മാപ്പുകളും",
       "title": "മാപ്പുകൾ"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "പേജിംഗ"
     },
     "species": {
-      "all_species": "എല്ലാ ഇനങ്ങളും",
-      "species_datatables": "ഇനങ്ങളുടെ ഡാറ്റാറ്റബിൾസ്",
-      "species_pages": "ഇന പേജുകൾ",
-      "taxon_namelist": "ടാക്സൺ നെയിലിസ്റ്റ്",
       "title": "സ്പീഷീസ്"
     }
   },

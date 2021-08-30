@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "అన్ని పత్రాలు",
-      "document_datatables": "డాక్యుమెంట్ డేటా టేబుల్లను",
       "title": "పత్రాలు"
     },
     "idao": {
       "title": "Idao."
     },
     "landscapes": {
-      "all_landscapes": "అన్ని రక్షిత ప్రాంతాలు",
       "title": "రక్షిత ప్రాంతాలు"
     },
     "maps": {
-      "all_maps": "అన్ని పటాలు",
       "title": "పటాలు"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "పేజీలు"
     },
     "species": {
-      "all_species": "అన్ని జాతులు",
-      "species_datatables": "జాతులు dataatables.",
-      "species_pages": "జాతుల పేజీలు",
-      "taxon_namelist": "టాక్సన్ నమెలిస్ట్",
       "title": "జాతులు"
     }
   },

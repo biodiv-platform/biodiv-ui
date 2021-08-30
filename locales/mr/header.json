@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "सर्व दस्तऐवज",
-      "document_datatables": "दस्तऐवज डेटाटेबल्स",
       "title": "कागदपत्रे"
     },
     "idao": {
       "title": "इडाओ"
     },
     "landscapes": {
-      "all_landscapes": "सर्व संरक्षित भागात",
       "title": "संरक्षित भागात"
     },
     "maps": {
-      "all_maps": "सर्व नकाशे",
       "title": "नकाशे"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "पृष्ठे"
     },
     "species": {
-      "all_species": "सर्व प्रजाती",
-      "species_datatables": "प्रजाती डेटाटेबल्स",
-      "species_pages": "प्रजाती पृष्ठे",
-      "taxon_namelist": "कर्नलिस्ट",
       "title": "प्रजाती"
     }
   },

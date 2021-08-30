@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "সকল কাগজপত্র",
-      "document_datatables": "নথি datatables.",
       "title": "ডকুমেন্টস"
     },
     "idao": {
       "title": "ইডো"
     },
     "landscapes": {
-      "all_landscapes": "সমস্ত সুরক্ষিত এলাকা",
       "title": "সুরক্ষিত এলাকাসমূহ"
     },
     "maps": {
-      "all_maps": "সব মানচিত্র",
       "title": "মানচিত্র"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "পৃষ্ঠা"
     },
     "species": {
-      "all_species": "সব প্রজাতি",
-      "species_datatables": "প্রজাতি datatables.",
-      "species_pages": "প্রজাতি পেজ",
-      "taxon_namelist": "ট্যাক্সন নাম প্রস্তুতকারক",
       "title": "প্রজাতি"
     }
   },

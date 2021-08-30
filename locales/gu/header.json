@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "બધા દસ્તાવેજો",
-      "document_datatables": "દસ્તાવેજ ડેટાટેબલ્સ",
       "title": "દસ્તાવેજો"
     },
     "idao": {
       "title": "ઇડાડો"
     },
     "landscapes": {
-      "all_landscapes": "બધા સુરક્ષિત વિસ્તારો",
       "title": "સંરક્ષિત વિસ્તારો"
     },
     "maps": {
-      "all_maps": "બધા નકશા",
       "title": "નકશા"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "પાના"
     },
     "species": {
-      "all_species": "બધી જાતિઓ",
-      "species_datatables": "જાતિઓ ડેટાટેબલ્સ",
-      "species_pages": "પ્રજાતિના પૃષ્ઠો",
-      "taxon_namelist": "ટેક્સન નમાલિસ્ટ",
       "title": "પ્રજાતિઓ"
     }
   },

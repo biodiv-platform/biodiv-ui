@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "ਸਾਰੇ ਦਸਤਾਵੇਜ਼",
-      "document_datatables": "ਦਸਤਾਵੇਜ਼ ਡੇਟਾਟੇਬਲ",
       "title": "ਦਸਤਾਵੇਜ਼"
     },
     "idao": {
       "title": "Idao"
     },
     "landscapes": {
-      "all_landscapes": "ਸਾਰੇ ਸੁਰੱਖਿਅਤ ਖੇਤਰ",
       "title": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ"
     },
     "maps": {
-      "all_maps": "ਸਾਰੇ ਨਕਸ਼ੇ",
       "title": "ਨਕਸ਼ੇ"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "ਪੰਨੇ"
     },
     "species": {
-      "all_species": "ਸਾਰੀਆਂ ਕਿਸਮਾਂ",
-      "species_datatables": "ਸਪੀਸੀਜ਼ ਡੇਟਾ",
-      "species_pages": "ਸਪੀਸੀਜ਼ ਪੇਜ",
-      "taxon_namelist": "ਟੈਕਸਾਂ ਦਾ ਨਾਮ ਲਿਸਟ",
       "title": "ਸਪੀਸੀਜ਼"
     }
   },

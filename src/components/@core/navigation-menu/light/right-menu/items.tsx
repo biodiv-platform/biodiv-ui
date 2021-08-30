@@ -6,12 +6,7 @@ export default [
   {
     active: SITE_CONFIG.SPECIES.ACTIVE,
     name: "header:menu_secondary.species.",
-    rows: [
-      {
-        name: "all_species",
-        to: "/species/list"
-      }
-    ]
+    to: "/species/list"
   },
   {
     active: SITE_CONFIG.OBSERVATION.ACTIVE,
@@ -30,32 +25,17 @@ export default [
   {
     active: SITE_CONFIG.MAP.ACTIVE,
     name: "header:menu_secondary.maps.",
-    rows: [
-      {
-        name: "all_maps",
-        to: "/map"
-      }
-    ]
+    to: "/map"
   },
   {
     active: SITE_CONFIG.DOCUMENT.ACTIVE,
     name: "header:menu_secondary.documents.",
-    rows: [
-      {
-        name: "all_documents",
-        to: "/document/list"
-      }
-    ]
+    to: "/document/list"
   },
   {
     active: SITE_CONFIG.LANDSCAPE.ACTIVE,
     name: "header:menu_secondary.landscapes.",
-    rows: [
-      {
-        name: "all_landscapes",
-        to: "/landscape/list"
-      }
-    ]
+    to: "/landscape/list"
   },
   {
     name: "header:menu_secondary.more.",

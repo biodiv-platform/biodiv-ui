@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "Ajouter une table de données",
-      "document_datatables": "Tables de données de documents",
       "title": "Documents"
     },
     "idao": {
       "title": "IDAO"
     },
     "landscapes": {
-      "all_landscapes": "Toutes les zones protégées",
       "title": "Zones protégées"
     },
     "maps": {
-      "all_maps": "Toutes les cartes",
       "title": "Cartes"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "Pages"
     },
     "species": {
-      "all_species": "Toutes les espèces",
-      "species_datatables": "Tables de données d'espèces",
-      "species_pages": "Pages d'espèces",
-      "taxon_namelist": "Taxonomie",
       "title": "Espèces"
     }
   },

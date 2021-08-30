@@ -30,19 +30,15 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "Ampio Datatable",
-      "document_datatables": "Datatables antontan-taratasy",
       "title": "Antontan-taratasy"
     },
     "idao": {
       "title": "IDAO"
     },
     "landscapes": {
-      "all_landscapes": "Ireo faritra voaro rehetra",
       "title": "Faritra arovana"
     },
     "maps": {
-      "all_maps": "Maps daholo",
       "title": "Maps"
     },
     "more": {
@@ -68,10 +64,6 @@
       "title": "Pejy"
     },
     "species": {
-      "all_species": "Karazana rehetra",
-      "species_datatables": "Karazana datatables",
-      "species_pages": "Pejy karazana",
-      "taxon_namelist": "Taxonalistes",
       "title": "karazana"
     }
   },

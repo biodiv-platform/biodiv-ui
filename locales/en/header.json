@@ -30,29 +30,25 @@
   },
   "menu_secondary": {
     "documents": {
-      "all_documents": "All Documents",
-      "document_datatables": "Document Datatables",
       "title": "Documents"
     },
     "idao": {
       "title": "IDAO"
     },
     "landscapes": {
-      "all_landscapes": "All Protected Areas",
       "title": "Protected Areas"
     },
     "maps": {
-      "all_maps": "All Maps",
       "title": "Maps"
     },
     "more": {
       "about_us": "About Us",
       "dashboard": "Dashboard",
       "discussions": "Discussions",
+      "download_logs": "Download Logs",
       "leaderboard": "Leaderboard",
       "taxonomy": "Taxonomy",
       "title": "More",
-      "download_logs": "Download Logs",
       "users": "Users"
     },
     "observation": {
@@ -68,10 +64,6 @@
       "title": "Pages"
     },
     "species": {
-      "all_species": "All Species",
-      "species_datatables": "Species Datatables",
-      "species_pages": "Species Pages",
-      "taxon_namelist": "Taxon Namelist",
       "title": "Species"
     }
   },
