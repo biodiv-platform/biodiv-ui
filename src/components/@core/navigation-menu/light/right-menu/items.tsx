@@ -62,7 +62,7 @@ export default [
       {
         active: SITE_CONFIG.ABOUT.ACTIVE,
         name: "about_us",
-        to: "/about"
+        to: SITE_CONFIG.PAGES.ABOUT
       }
     ]
   },

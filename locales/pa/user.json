@@ -14,6 +14,7 @@
   "download_logs": "ਡਾਉਨਲੋਡਸ",
   "edit_profile": "ਸੋਧ ਪ੍ਰੋਫ਼ਾਈਲ",
   "email": "ਈ - ਮੇਲ",
+  "email_or_mobile_required": "ਜਾਂ ਤਾਂ ਈ-ਮੇਲ ਜਾਂ ਫ਼ੋਨ ਨੰਬਰ ਲੋੜੀਂਦਾ ਹੈ",
   "enabled": "ਖਾਤਾ ਯੋਗ",
   "existing_user": "ਪਹਿਲਾਂ ਹੀ ਕੋਈ ਖਾਤਾ ਹੈ?",
   "expired": "ਖਾਤਾ ਖਤਮ ਹੋ ਗਿਆ",
@@ -43,6 +44,7 @@
   "occupation": "ਪੇਸ਼ੇ",
   "password": "ਪਾਸਵਰਡ",
   "password_expired": "ਪਾਸਵਰਡ ਦੀ ਮਿਆਦ ਖਤਮ ਹੋ ਗਈ",
+  "passwords_not_match": "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ",
   "permissions": "ਅਨੁਮਤੀਆਂ",
   "register": "ਰਜਿਸਟਰ",
   "roles": "ਭੂਮਿਕਾਵਾਂ",
@@ -50,6 +52,12 @@
   "send_email": "ਈਮੇਲਾਂ ਭੇਜੋ",
   "send_push_notifications": "ਪੁਸ਼ ਸੂਚਨਾਵਾਂ ਭੇਜੋ",
   "sign_up": "ਸਾਇਨ ਅਪ",
+  "terms": {
+    "privacy": "ਪਰਾਈਵੇਟ ਨੀਤੀ",
+    "required": "'ਸੇਵਾ ਦੀਆਂ ਸ਼ਰਤਾਂ' ਅਤੇ 'ਗੋਪਨੀਯਤਾ ਨੀਤੀ' ਨੂੰ ਸਵੀਕਾਰ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ.",
+    "terms": "ਸੇਵਾ ਦੀਆਂ ਸ਼ਰਤਾਂ",
+    "text": "ਮੈਂ ਇਸ ਵੈਬਸਾਈਟ ਨਾਲ ਸਹਿਮਤ ਹਾਂ"
+  },
   "update_error": "ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
   "update_password": "ਪਾਸਵਰਡ ਅਪਡੇਟ ਕਰੋ",
   "updated": "ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
