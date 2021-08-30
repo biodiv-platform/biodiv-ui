@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import Loading from "@components/pages/common/loading";
 import useTranslation from "next-translate/useTranslation";
@@ -29,7 +28,7 @@ export default function DownloadLogsTable() {
   }, [logs, filter]);
 
   return (
-    <Box mt={4} id="scrollableDiv" overflow="auto" h={500}>
+    <>
       {logs?.length ? (
         <InfiniteScroll
           dataLength={logs.length}
@@ -47,6 +46,6 @@ export default function DownloadLogsTable() {
       ) : (
         <Loading />
       )}
-    </Box>
+    </>
   );
 }

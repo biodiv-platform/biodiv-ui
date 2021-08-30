@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "তথ্য প্যাকেজ যোগ করুন",
       "add_dataset": "ডেটাসেট যোগ করুন",
+      "add_datatable": "ডেটাটেবল যোগ করুন",
       "add_document": "নথি যোগ করুন",
       "add_fact": "সত্য যোগ করুন",
       "add_list": "তালিকা যোগ করুন",
@@ -29,35 +30,37 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "সকল কাগজপত্র",
       "document_datatables": "নথি datatables.",
-      "documents": "ডকুমেন্টস",
       "title": "ডকুমেন্টস"
     },
     "idao": {
       "title": "ইডো"
     },
     "landscapes": {
+      "all_landscapes": "সমস্ত সুরক্ষিত এলাকা",
       "title": "সুরক্ষিত এলাকাসমূহ"
     },
     "maps": {
+      "all_maps": "সব মানচিত্র",
       "title": "মানচিত্র"
     },
     "more": {
       "about_us": "আমাদের সম্পর্কে",
-      "activity": "কার্যকলাপ",
       "dashboard": "ড্যাশবোর্ড",
-      "datasets": "ডেটাসেটস",
       "discussions": "আলোচনা",
+      "download_logs": "লগ ডাউনলোড করুন",
       "leaderboard": "লিডারবোর্ড",
-      "participants": "অংশগ্রহণকারীদের",
-      "title": "অধিকন্তু"
+      "taxonomy": "শ্রেণীবিন্যাস",
+      "title": "অধিকন্তু",
+      "users": "ব্যবহারকারীরা"
     },
     "observation": {
+      "all_observations": "সব পর্যবেক্ষণ",
       "checklists": "তালিকা",
       "datasets": "ডেটাসেটস",
+      "datatables": "Datatables.",
       "observation_datatables": "পর্যবেক্ষণ datatables.",
-      "observation_traits": "পর্যবেক্ষণ বৈশিষ্ট্য",
-      "observations": "পর্যবেক্ষণ পর্যবেক্ষণ",
       "title": "পর্যবেক্ষণ"
     },
     "pages": {
@@ -65,9 +68,9 @@
       "title": "পৃষ্ঠা"
     },
     "species": {
+      "all_species": "সব প্রজাতি",
       "species_datatables": "প্রজাতি datatables.",
       "species_pages": "প্রজাতি পেজ",
-      "species_traits": "প্রজাতি বৈশিষ্ট্য",
       "taxon_namelist": "ট্যাক্সন নাম প্রস্তুতকারক",
       "title": "প্রজাতি"
     }

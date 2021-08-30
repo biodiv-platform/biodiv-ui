@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "डेटा पॅकेज जोडा",
       "add_dataset": "डेटासेट जोडा",
+      "add_datatable": "डेटाटेबल जोडा",
       "add_document": "दस्तऐवज जोडा",
       "add_fact": "तथ्य जोडा",
       "add_list": "सूची जोडा",
@@ -29,45 +30,47 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "सर्व दस्तऐवज",
       "document_datatables": "दस्तऐवज डेटाटेबल्स",
-      "documents": "कागदपत्रे",
       "title": "कागदपत्रे"
     },
     "idao": {
       "title": "इडाओ"
     },
     "landscapes": {
+      "all_landscapes": "सर्व संरक्षित भागात",
       "title": "संरक्षित भागात"
     },
     "maps": {
+      "all_maps": "सर्व नकाशे",
       "title": "नकाशे"
     },
     "more": {
       "about_us": "आमच्याबद्दल",
-      "activity": "क्रियाकलाप",
       "dashboard": "डॅशबोर्ड",
-      "datasets": "डेटासेट्स",
       "discussions": "चर्चा",
+      "download_logs": "लॉग डाउनलोड करा",
       "leaderboard": "लीडरबोर्ड",
-      "participants": "सहभागी",
-      "title": "अधिक"
+      "taxonomy": "वर्गीकरण",
+      "title": "अधिक",
+      "users": "वापरकर्ते"
     },
     "observation": {
+      "all_observations": "सर्व निरीक्षणे",
       "checklists": "यादी",
       "datasets": "डेटासेट्स",
+      "datatables": "डेटाटाटेबल्स",
       "observation_datatables": "निरीक्षण डेटाटेबल्स",
-      "observation_traits": "निरीक्षण गुणधर्म",
-      "observations": "निरीक्षणे",
-      "title": "निरीक्षण"
+      "title": "निरीक्षणे"
     },
     "pages": {
       "empty": "कोणतीही पृष्ठे नाहीत",
       "title": "पृष्ठे"
     },
     "species": {
+      "all_species": "सर्व प्रजाती",
       "species_datatables": "प्रजाती डेटाटेबल्स",
       "species_pages": "प्रजाती पृष्ठे",
-      "species_traits": "प्रजाती गुण",
       "taxon_namelist": "कर्नलिस्ट",
       "title": "प्रजाती"
     }

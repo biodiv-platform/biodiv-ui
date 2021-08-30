@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "డేటా ప్యాకేజీని జోడించండి",
       "add_dataset": "డేటాసెట్ను జోడించండి",
+      "add_datatable": "డేటబుల్ జోడించండి",
       "add_document": "పత్రాన్ని జోడించండి",
       "add_fact": "నిజానికి జోడించండి",
       "add_list": "జాబితాను జోడించండి",
@@ -29,45 +30,47 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "అన్ని పత్రాలు",
       "document_datatables": "డాక్యుమెంట్ డేటా టేబుల్లను",
-      "documents": "పత్రాలు",
       "title": "పత్రాలు"
     },
     "idao": {
       "title": "Idao."
     },
     "landscapes": {
+      "all_landscapes": "అన్ని రక్షిత ప్రాంతాలు",
       "title": "రక్షిత ప్రాంతాలు"
     },
     "maps": {
+      "all_maps": "అన్ని పటాలు",
       "title": "పటాలు"
     },
     "more": {
       "about_us": "మా గురించి",
-      "activity": "కార్యాచరణ",
       "dashboard": "డాష్బోర్డ్",
-      "datasets": "డేటాసెట్ల",
       "discussions": "చర్చలు",
+      "download_logs": "లాగ్‌లను డౌన్‌లోడ్ చేయండి",
       "leaderboard": "లీడర్బోర్డ్",
-      "participants": "పాల్గొనేవారు",
-      "title": "మరింత"
+      "taxonomy": "వర్గీకరణ",
+      "title": "మరింత",
+      "users": "వినియోగదారులు"
     },
     "observation": {
+      "all_observations": "అన్ని పరిశీలనలు",
       "checklists": "జాబితా",
       "datasets": "డేటాసెట్ల",
+      "datatables": "Datatables.",
       "observation_datatables": "పరిశీలన డేటాట్రాస్",
-      "observation_traits": "పరిశీలన లక్షణాలు",
-      "observations": "పరిశీలనలు",
-      "title": "పరిశీలన"
+      "title": "పరిశీలనలు"
     },
     "pages": {
       "empty": "ఏ పేజీలు",
       "title": "పేజీలు"
     },
     "species": {
+      "all_species": "అన్ని జాతులు",
       "species_datatables": "జాతులు dataatables.",
       "species_pages": "జాతుల పేజీలు",
-      "species_traits": "జాతుల లక్షణాలు",
       "taxon_namelist": "టాక్సన్ నమెలిస్ట్",
       "title": "జాతులు"
     }

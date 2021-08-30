@@ -8,23 +8,8 @@ export default [
     name: "header:menu_secondary.species.",
     rows: [
       {
-        name: "species_pages",
+        name: "all_species",
         to: "/species/list"
-      },
-      {
-        name: "taxon_namelist",
-        to: "/taxonomy/list"
-      },
-      {
-        name: "species_traits",
-        to: "/species/traits"
-      },
-      {
-        name: "species_datatables",
-        params: {
-          type: "species"
-        },
-        to: "/dataTable/list"
       }
     ]
   },
@@ -33,53 +18,44 @@ export default [
     name: "header:menu_secondary.observation.",
     rows: [
       {
-        name: "observations",
+        name: "all_observations",
         to: "/observation/list"
       },
       {
-        name: "checklists",
-        to: "/checklist/index"
-      },
-      {
-        name: "datasets",
-        to: "/datasource/list"
-      },
-      {
-        name: "observation_traits",
-        to: "/observation/traits"
-      },
-      {
-        name: "observation_datatables",
-        to: "/dataTable/list"
+        name: "datatables",
+        to: "/datatable/list"
       }
     ]
   },
   {
     active: SITE_CONFIG.MAP.ACTIVE,
     name: "header:menu_secondary.maps.",
-    to: "/map"
+    rows: [
+      {
+        name: "all_maps",
+        to: "/map"
+      }
+    ]
   },
   {
     active: SITE_CONFIG.DOCUMENT.ACTIVE,
     name: "header:menu_secondary.documents.",
     rows: [
       {
-        name: "documents",
+        name: "all_documents",
         to: "/document/list"
-      },
-      {
-        name: "document_datatables",
-        params: {
-          type: "documents"
-        },
-        to: "/dataTable/list"
       }
     ]
   },
   {
     active: SITE_CONFIG.LANDSCAPE.ACTIVE,
     name: "header:menu_secondary.landscapes.",
-    to: "/landscape/list"
+    rows: [
+      {
+        name: "all_landscapes",
+        to: "/landscape/list"
+      }
+    ]
   },
   {
     active: SITE_CONFIG.PAGES.ACTIVE,
@@ -88,36 +64,15 @@ export default [
     name: "header:menu_secondary.pages."
   },
   {
-    active: SITE_CONFIG.HEADER.IDAO.ACTIVE,
-    name: "header:menu_secondary.idao.",
-    to: SITE_CONFIG.HEADER.IDAO.LINK
-  },
-  {
     name: "header:menu_secondary.more.",
     rows: [
       {
-        active: SITE_CONFIG.ACTIVITY.ACTIVE,
-        name: "activity",
-        to: "/activityFeed/list"
-      },
-      {
-        active: SITE_CONFIG.DOWNLOAD_LOGS.ACTIVE,
-        name: "download_logs",
-        to: "/user/download-logs"
-      },
-      {
-        active: SITE_CONFIG.DISCUSSION.ACTIVE,
-        name: "discussions",
-        to: "/discussion/list"
-      },
-      {
-        active: SITE_CONFIG.DATASET.ACTIVE,
-        name: "datasets",
-        to: "/dataset/list"
+        name: "taxonomy",
+        to: "/taxonomy/list"
       },
       {
         active: SITE_CONFIG.PARTICIPANTS.ACTIVE,
-        name: "participants",
+        name: "users",
         to: "/user/list"
       },
       {
@@ -126,9 +81,9 @@ export default [
         to: "/user/leaderboard"
       },
       {
-        active: SITE_CONFIG.DASHBOARD.ACTIVE,
-        name: "dashboard",
-        to: "/chart/show"
+        active: SITE_CONFIG.ABOUT.ACTIVE,
+        name: "download_logs",
+        to: "/user/download-logs"
       },
       {
         active: SITE_CONFIG.ABOUT.ACTIVE,
@@ -136,5 +91,10 @@ export default [
         to: "/about"
       }
     ]
+  },
+  {
+    active: SITE_CONFIG.HEADER.IDAO.ACTIVE,
+    name: "header:menu_secondary.idao.",
+    to: SITE_CONFIG.HEADER.IDAO.LINK
   }
 ];

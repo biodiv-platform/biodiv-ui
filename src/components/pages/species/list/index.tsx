@@ -3,7 +3,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import ListTiles from "./list-tiles";
-import { SpeciesListProvider } from "./use-observation-list";
+import { SpeciesListProvider } from "./use-species-list";
 
 export default function SpeciesListPageComponent() {
   const { t } = useTranslation();

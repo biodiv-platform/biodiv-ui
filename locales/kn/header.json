@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "ಡೇಟಾ ಪ್ಯಾಕೇಜ್ ಸೇರಿಸಿ",
       "add_dataset": "ಡೇಟಾಬೇಸ್ ಸೇರಿಸಿ",
+      "add_datatable": "ಡೇಟಾಟೇಬಲ್ ಸೇರಿಸಿ",
       "add_document": "ಡಾಕ್ಯುಮೆಂಟ್ ಸೇರಿಸಿ",
       "add_fact": "ಸತ್ಯವನ್ನು ಸೇರಿಸಿ",
       "add_list": "ಪಟ್ಟಿ ಸೇರಿಸಿ",
@@ -29,45 +30,47 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "ಎಲ್ಲಾ ದಾಖಲೆಗಳು",
       "document_datatables": "ಡಾಕ್ಯುಮೆಂಟ್ ಡೇಟಾಟೇಬಲ್ಗಳು",
-      "documents": "ದಾಖಲೆಗಳು",
       "title": "ದಾಖಲೆಗಳು"
     },
     "idao": {
       "title": "ಇದಾವೊ"
     },
     "landscapes": {
+      "all_landscapes": "ಎಲ್ಲಾ ರಕ್ಷಿತ ಪ್ರದೇಶಗಳು",
       "title": "ಸಂರಕ್ಷಿತ ಪ್ರದೇಶಗಳು"
     },
     "maps": {
+      "all_maps": "ಎಲ್ಲಾ ನಕ್ಷೆಗಳು",
       "title": "ನಕ್ಷೆ"
     },
     "more": {
       "about_us": "ನಮ್ಮ ಬಗ್ಗೆ",
-      "activity": "ಚಟುವಟಿಕೆ",
       "dashboard": "ಕುತೂಹಲ",
-      "datasets": "ದತ್ತಸಲೆಗಳು",
       "discussions": "ಚರ್ಚೆಗಳು",
+      "download_logs": "ಲಾಗ್‌ಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
       "leaderboard": "ಲೀಡರ್ಬೋರ್ಡ್",
-      "participants": "ಭಾಗವಹಿಸುವವರು",
-      "title": "ಇನ್ನಷ್ಟು"
+      "taxonomy": "ವರ್ಗೀಕರಣ",
+      "title": "ಇನ್ನಷ್ಟು",
+      "users": "ಬಳಕೆದಾರರು"
     },
     "observation": {
+      "all_observations": "ಎಲ್ಲಾ ಅವಲೋಕನಗಳು",
       "checklists": "ಪಟ್ಟಿ",
       "datasets": "ದತ್ತಸಲೆಗಳು",
+      "datatables": "ಡೇಟಾಟೇಬಲ್ಗಳು",
       "observation_datatables": "ವೀಕ್ಷಣೆ ಡೇಟಾಟೇಬಲ್ಗಳು",
-      "observation_traits": "ವೀಕ್ಷಣೆ ಲಕ್ಷಣಗಳು",
-      "observations": "ಅವಲೋಕನ",
-      "title": "ವೀಕ್ಷಣೆ"
+      "title": "ಅವಲೋಕನಗಳು"
     },
     "pages": {
       "empty": "ಯಾವುದೇ ಪುಟಗಳಿಲ್ಲ",
       "title": "ಪುಟಗಳು"
     },
     "species": {
+      "all_species": "ಎಲ್ಲಾ ಜಾತಿಗಳು",
       "species_datatables": "ಜಾತಿಗಳ ಡೇಟಾಟೇಬಲ್ಗಳು",
       "species_pages": "ಜಾತಿ ಪುಟಗಳು",
-      "species_traits": "ಜಾತಿ ಲಕ್ಷಣಗಳು",
       "taxon_namelist": "ಟ್ಯಾಕ್ಸನ್ ನಮ್ಲೀಸ್ಟ್",
       "title": "ಜಾತಿಗಳು"
     }

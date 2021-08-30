@@ -24,7 +24,7 @@ export default function Footer() {
         {SITE_CONFIG.FOOTER.CREDITS && (
           <div>
             {t("common:footer.powered_by")}
-            <Link href="https://github.com/strandls?q=biodiv">
+            <Link ml={1} href="https://github.com/strandls?q=biodiv">
               Biodiversity Informatics Platform - v{APP_VERSION}
             </Link>
           </div>
@@ -32,7 +32,7 @@ export default function Footer() {
         {SITE_CONFIG.FOOTER.PARTNER && (
           <div>
             {t("common:footer.technology_partner")}
-            <Link href="https://strandls.com/">Strand Life Sciences</Link>
+            <Link ml={1} href="https://strandls.com/">Strand Life Sciences</Link>
           </div>
         )}
         <Stack isInline={true} spacing={4} mt={2} fontSize="1.4rem">

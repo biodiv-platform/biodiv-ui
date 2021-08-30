@@ -3,7 +3,7 @@ import { GridViewBox } from "@components/pages/landscape/list/landscape-list";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import useSpeciesList from "../use-observation-list";
+import useSpeciesList from "../use-species-list";
 import GridViewCard from "./card";
 
 export default function SpeciesList() {
@@ -20,7 +20,7 @@ export default function SpeciesList() {
       >
         <div className="grid-card">
           {speciesData.l.map((o) => (
-            <GridViewCard o={o} />
+            <GridViewCard key={o.id} o={o} />
           ))}
         </div>
       </InfiniteScroll>

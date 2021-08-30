@@ -40,7 +40,7 @@
     "remove": {
       "default": "Default",
       "failure": "Unable to delete Custom Field",
-      "success": "Custom Field deleted successfully ",
+      "success": "Custom Field deleted successfully",
       "title": "Remove"
     },
     "reorder": {

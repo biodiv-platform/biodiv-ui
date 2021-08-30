@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "ડેટા પેકેજ ઉમેરો",
       "add_dataset": "ડેટાસેટ ઉમેરો",
+      "add_datatable": "ડેટાટેબલ ઉમેરો",
       "add_document": "દસ્તાવેજ ઉમેરો",
       "add_fact": "હકીકત ઉમેરો",
       "add_list": "સૂચિ ઉમેરો",
@@ -29,45 +30,47 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "બધા દસ્તાવેજો",
       "document_datatables": "દસ્તાવેજ ડેટાટેબલ્સ",
-      "documents": "દસ્તાવેજો",
       "title": "દસ્તાવેજો"
     },
     "idao": {
       "title": "ઇડાડો"
     },
     "landscapes": {
+      "all_landscapes": "બધા સુરક્ષિત વિસ્તારો",
       "title": "સંરક્ષિત વિસ્તારો"
     },
     "maps": {
+      "all_maps": "બધા નકશા",
       "title": "નકશા"
     },
     "more": {
       "about_us": "અમારા વિશે",
-      "activity": "પ્રવૃત્તિ",
       "dashboard": "ડેશબોર્ડ",
-      "datasets": "ડેટાસેટ્સ",
       "discussions": "ચર્ચાઓ",
+      "download_logs": "લોગ ડાઉનલોડ કરો",
       "leaderboard": "અગ્રલેખ",
-      "participants": "સહભાગીઓ",
-      "title": "વધુ"
+      "taxonomy": "વર્ગીકરણ",
+      "title": "વધુ",
+      "users": "વપરાશકર્તાઓ"
     },
     "observation": {
+      "all_observations": "બધા અવલોકનો",
       "checklists": "યાદી",
       "datasets": "ડેટાસેટ્સ",
+      "datatables": "ડેટાબેટેબલ્સ",
       "observation_datatables": "નિરીક્ષણ ડેટા",
-      "observation_traits": "નિરીક્ષણ",
-      "observations": "અવલોકન",
-      "title": "અવલોકન"
+      "title": "અવલોકનો"
     },
     "pages": {
       "empty": "કોઈ પૃષ્ઠો નથી",
       "title": "પાના"
     },
     "species": {
+      "all_species": "બધી જાતિઓ",
       "species_datatables": "જાતિઓ ડેટાટેબલ્સ",
       "species_pages": "પ્રજાતિના પૃષ્ઠો",
-      "species_traits": "પ્રજાતિઓની લાક્ષણિકતાઓ",
       "taxon_namelist": "ટેક્સન નમાલિસ્ટ",
       "title": "પ્રજાતિઓ"
     }

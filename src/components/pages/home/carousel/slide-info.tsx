@@ -19,7 +19,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
       p={6}
     >
       <Flex justifyContent="space-between" alignItems="flex-end">
-        {resource?.authorId > 1 && (
+        {resource?.authorId > 1 ? (
           <LocalLink key={resource.authorId} href={`/user/show/${resource.authorId}`}>
             <Link>
               <Flex alignItems="center">
@@ -39,6 +39,8 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
               </Flex>
             </Link>
           </LocalLink>
+        ) : (
+          <div />
         )}
         {size > 1 && (
           <div>

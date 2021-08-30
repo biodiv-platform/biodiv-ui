@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "ਡਾਟਾ ਪੈਕੇਜ ਸ਼ਾਮਲ ਕਰੋ",
       "add_dataset": "ਡੇਟਾਸੇਟ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_datatable": "ਡਾਟਾਟੇਬਲ ਸ਼ਾਮਲ ਕਰੋ",
       "add_document": "ਦਸਤਾਵੇਜ਼ ਸ਼ਾਮਲ ਕਰੋ",
       "add_fact": "ਤੱਥ ਸ਼ਾਮਲ ਕਰੋ",
       "add_list": "ਸੂਚੀ ਸ਼ਾਮਲ ਕਰੋ",
@@ -29,35 +30,37 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "ਸਾਰੇ ਦਸਤਾਵੇਜ਼",
       "document_datatables": "ਦਸਤਾਵੇਜ਼ ਡੇਟਾਟੇਬਲ",
-      "documents": "ਦਸਤਾਵੇਜ਼",
       "title": "ਦਸਤਾਵੇਜ਼"
     },
     "idao": {
       "title": "Idao"
     },
     "landscapes": {
+      "all_landscapes": "ਸਾਰੇ ਸੁਰੱਖਿਅਤ ਖੇਤਰ",
       "title": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ"
     },
     "maps": {
+      "all_maps": "ਸਾਰੇ ਨਕਸ਼ੇ",
       "title": "ਨਕਸ਼ੇ"
     },
     "more": {
       "about_us": "ਸਾਡੇ ਬਾਰੇ",
-      "activity": "ਸਰਗਰਮੀ",
       "dashboard": "ਡੈਸ਼ਬੋਰਡ",
-      "datasets": "ਡੇਟਾਸੀਟਸ",
       "discussions": "ਵਿਚਾਰ ਵਟਾਂਦਰੇ",
+      "download_logs": "ਲਾਗ ਡਾਉਨਲੋਡ ਕਰੋ",
       "leaderboard": "ਲੀਡਰਬੋਰਡ",
-      "participants": "ਭਾਗੀਦਾਰ",
-      "title": "ਹੋਰ"
+      "taxonomy": "ਵਰਗੀਕਰਨ",
+      "title": "ਹੋਰ",
+      "users": "ਉਪਯੋਗਕਰਤਾ"
     },
     "observation": {
+      "all_observations": "ਸਾਰੇ ਨਿਰੀਖਣ",
       "checklists": "ਸੂਚੀ",
       "datasets": "ਡੇਟਾਸੀਟਸ",
+      "datatables": "ਡੇਟਾਟੇਬਲ",
       "observation_datatables": "ਨਿਰੀਖਣ ਡੇਟਾ",
-      "observation_traits": "ਨਿਰੀਖਣ ਦੇ ਗੁਣ",
-      "observations": "ਨਿਰੀਖਣ",
       "title": "ਨਿਰੀਖਣ"
     },
     "pages": {
@@ -65,9 +68,9 @@
       "title": "ਪੰਨੇ"
     },
     "species": {
+      "all_species": "ਸਾਰੀਆਂ ਕਿਸਮਾਂ",
       "species_datatables": "ਸਪੀਸੀਜ਼ ਡੇਟਾ",
       "species_pages": "ਸਪੀਸੀਜ਼ ਪੇਜ",
-      "species_traits": "ਸਪੀਸੀਜ਼ ਦੇ ਗੁਣ",
       "taxon_namelist": "ਟੈਕਸਾਂ ਦਾ ਨਾਮ ਲਿਸਟ",
       "title": "ਸਪੀਸੀਜ਼"
     }

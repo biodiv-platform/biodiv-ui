@@ -6,6 +6,7 @@
     "contribute": {
       "add_data_package": "ଡାଟା ପ୍ୟାକେଜ୍ ଯୋଡନ୍ତୁ |",
       "add_dataset": "ଡାଟାସେଟ୍ ଯୋଡନ୍ତୁ |",
+      "add_datatable": "ଡାଟାବେସ୍ ଯୋଡନ୍ତୁ |",
       "add_document": "ଡକ୍ୟୁମେଣ୍ଟ୍ ଯୋଡ",
       "add_fact": "ସତ୍ୟ ଯୋଡନ୍ତୁ",
       "add_list": "ତାଲିକା ଯୋଡନ୍ତୁ |",
@@ -29,35 +30,37 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "ସମସ୍ତ ଡକ୍ୟୁମେଣ୍ଟ୍ |",
       "document_datatables": "ଡାଟାବାଟ ଯୋଗ୍ୟ |",
-      "documents": "ଡକ୍ୟୁମେଣ୍ଟ୍ |",
       "title": "ଡକ୍ୟୁମେଣ୍ଟ୍ |"
     },
     "idao": {
       "title": "IDAO"
     },
     "landscapes": {
+      "all_landscapes": "ସମସ୍ତ ସଂରକ୍ଷିତ କ୍ଷେତ୍ରଗୁଡିକ |",
       "title": "ସୁରକ୍ଷିତ ଅଞ୍ଚଳଗୁଡିକ |"
     },
     "maps": {
+      "all_maps": "ସମସ୍ତ ମାନଚିତ୍ର",
       "title": "ମାନଚିତ୍ରଗୁଡିକ"
     },
     "more": {
       "about_us": "ଆମ ବିଷୟରେ",
-      "activity": "କାର୍ଯ୍ୟକଳାପ",
       "dashboard": "ଡ୍ୟାସବୋର୍ଡ |",
-      "datasets": "ଡାଟାସେଟ୍ |",
       "discussions": "ଆଲୋଚନା",
+      "download_logs": "ଲଗ୍ ଡାଉନଲୋଡ୍ କରନ୍ତୁ |",
       "leaderboard": "ଲିଡନବୋର୍ଡ |",
-      "participants": "ଅଂଶଗ୍ରହଣକାରୀମାନେ",
-      "title": "ଅଧିକ"
+      "taxonomy": "ଟ୍ୟାକ୍ସୋନୋମି",
+      "title": "ଅଧିକ",
+      "users": "ଉପଯୋଗକର୍ତ୍ତାଗଣ |"
     },
     "observation": {
+      "all_observations": "ସମସ୍ତ ପର୍ଯ୍ୟବେକ୍ଷଣ |",
       "checklists": "ତାଲିକା |",
       "datasets": "ଡାଟାସେଟ୍ |",
+      "datatables": "ଡାଟାଟେବଲ୍ |",
       "observation_datatables": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଡାଟାବାଟେବଲ୍ |",
-      "observation_traits": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଗୁଣ |",
-      "observations": "ପର୍ଯ୍ୟବେକ୍ଷଣ",
       "title": "ପର୍ଯ୍ୟବେକ୍ଷଣ"
     },
     "pages": {
@@ -65,9 +68,9 @@
       "title": "ପୃଷ୍ଠାଗୁଡ଼ିକ |"
     },
     "species": {
+      "all_species": "ସମସ୍ତ ପ୍ରଜାତି",
       "species_datatables": "ପ୍ରଜାତି ଡାଟାବାଟେବଲ୍ |",
       "species_pages": "ପ୍ରଜାତି ପୃଷ୍ଠାଗୁଡ଼ିକ |",
-      "species_traits": "ପ୍ରଜାତି ଗୁଣଗୁଡିକ |",
       "taxon_namelist": "କରନ୍ ନାମଲିଷ୍ଟ |",
       "title": "ପ୍ରଜାତି"
     }

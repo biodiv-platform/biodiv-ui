@@ -30,6 +30,7 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
             </a>
           )
         };
+
       case "user":
         return {
           Header: stripSpecialCharacters(item),
@@ -39,13 +40,14 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
               <Image
                 borderRadius={50}
                 title={value.name}
-                boxSize="3rem"
+                boxSize="2rem"
                 fallbackSrc={`/api/avatar?t=${value.name}&s=${100}`}
                 src={getUserImage(value.profilePic, value.name, 100)}
               />
             </a>
           )
         };
+
       case "createdOn":
         return {
           Header: stripSpecialCharacters(item),
@@ -56,6 +58,7 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
             </Text>
           )
         };
+
       case "filePath":
         return {
           Header: "File",
@@ -63,6 +66,7 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
           Cell: ({ row: { values } }) => (
             <Button
               variant="outline"
+              size="sm"
               as="a"
               href={`${ENDPOINT.RAW}/${values.filePath}`}
               target="_blank"

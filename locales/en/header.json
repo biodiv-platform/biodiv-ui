@@ -30,46 +30,47 @@
   },
   "menu_secondary": {
     "documents": {
+      "all_documents": "All Documents",
       "document_datatables": "Document Datatables",
-      "documents": "Documents",
       "title": "Documents"
     },
     "idao": {
       "title": "IDAO"
     },
     "landscapes": {
+      "all_landscapes": "All Protected Areas",
       "title": "Protected Areas"
     },
     "maps": {
+      "all_maps": "All Maps",
       "title": "Maps"
     },
     "more": {
       "about_us": "About Us",
-      "activity": "Activity",
       "dashboard": "Dashboard",
-      "datasets": "Datasets",
       "discussions": "Discussions",
-      "download_logs": "Download Logs",
       "leaderboard": "Leaderboard",
-      "participants": "Participants",
-      "title": "More"
+      "taxonomy": "Taxonomy",
+      "title": "More",
+      "download_logs": "Download Logs",
+      "users": "Users"
     },
     "observation": {
+      "all_observations": "All Observations",
       "checklists": "List",
       "datasets": "Datasets",
+      "datatables": "Datatables",
       "observation_datatables": "Observation Datatables",
-      "observation_traits": "Observation Traits",
-      "observations": "Observations",
-      "title": "Observation"
+      "title": "Observations"
     },
     "pages": {
       "empty": "No Pages",
       "title": "Pages"
     },
     "species": {
+      "all_species": "All Species",
       "species_datatables": "Species Datatables",
       "species_pages": "Species Pages",
-      "species_traits": "Species Traits",
       "taxon_namelist": "Taxon Namelist",
       "title": "Species"
     }
