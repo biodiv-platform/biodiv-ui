@@ -36,7 +36,7 @@ export default function Header() {
           </Select>
         }
       >
-        ⬇️ {t("user:download_logs")} ({format(totalCount)})
+        ⬇️  {t("user:download_logs")} {`(${format(totalCount)})`}
       </PageHeading>
     )
   );

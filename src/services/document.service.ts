@@ -208,7 +208,7 @@ export const axUpdateDocument = async (payload) => {
   }
 };
 
-export const axDownloadDocument = async (documentPath, documentId) => {
+export const axDownloadDocument = async (documentPath, documentId,notes) => {
   try {
     // Fetch document file
     const { data } = await http.get(documentPath, { responseType: "blob" });
@@ -218,7 +218,8 @@ export const axDownloadDocument = async (documentPath, documentId) => {
       filePath: documentPath,
       filterUrl: `/document/show/${documentId}`,
       status: "success",
-      fileType: "pdf"
+      fileType: "pdf",
+      notes
     });
 
     return { success: true, data };
