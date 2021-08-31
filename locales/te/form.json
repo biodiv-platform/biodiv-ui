@@ -14,7 +14,7 @@
     "place": "పేరు",
     "spatial": "ప్రాదేశిక కవరేజ్",
     "title": "కవరేజ్",
-    "wkt": "Wkt."
+    "wkt": "WKT"
   },
   "created_on": "సృష్టించబడింది",
   "date_accuracy": "తేదీ ఖచ్చితత్వం",
@@ -80,6 +80,6 @@
     "uploading": "అప్లోడ్ ..."
   },
   "use_in_observation": "ఎంచుకున్నది",
-  "wkt": "Wkt.",
+  "wkt": "WKT",
   "youtube_placeholder": "ఇన్పుట్ YouTube లింక్"
 }

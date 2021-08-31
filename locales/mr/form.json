@@ -14,7 +14,7 @@
     "place": "स्थान ठेवा",
     "spatial": "स्थानिक कव्हरेज",
     "title": "कव्हरेज",
-    "wkt": "Wct."
+    "wkt": "WKT"
   },
   "created_on": "चालू",
   "date_accuracy": "तारीख अचूकता",
@@ -80,6 +80,6 @@
     "uploading": "अपलोड करीत आहे ..."
   },
   "use_in_observation": "निवडलेले वापरा",
-  "wkt": "Wct.",
+  "wkt": "WKT",
   "youtube_placeholder": "YouTube लिंक इनपुट करा"
 }

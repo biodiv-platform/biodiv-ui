@@ -6,14 +6,14 @@
     "author": "రచయిత",
     "booktitle": "పుస్తకం పేరు",
     "chapter": "చాప్టర్",
-    "doi": "Doi.",
+    "doi": "DOI",
     "edition": "ఎడిషన్",
     "editor": "ఎడిటర్",
     "extra": "అదనపు",
     "file": "ఫైల్",
     "howpublished": "ఎలా ప్రచురించబడింది",
     "institution": "సంస్థ",
-    "isbn": "Isbn.",
+    "isbn": "ISBN",
     "journal": "జర్నాల్",
     "language": "భాష",
     "month": "నెల.",
@@ -42,10 +42,10 @@
   "created_on": "సృష్టించబడింది",
   "description": "వర్ణన",
   "documents_found": "పత్రాలు కనుగొనబడ్డాయి",
-  "doi": "Doi.",
+  "doi": "DOI",
   "download": {
     "citation": "Citation.",
-    "pdf": "పిడిఎఫ్"
+    "pdf": "PDF"
   },
   "edit": {
     "error": "ఈ పత్రాన్ని నవీకరించడంలో లోపం ఉంది",

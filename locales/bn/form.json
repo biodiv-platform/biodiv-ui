@@ -14,7 +14,7 @@
     "place": "স্থানের নাম",
     "spatial": "স্থানিক কভারেজ",
     "title": "কভারেজ",
-    "wkt": "Wkt."
+    "wkt": "WKT"
   },
   "created_on": "তৈরি",
   "date_accuracy": "তারিখ সঠিকতা",
@@ -80,6 +80,6 @@
     "uploading": "আপলোড করা হচ্ছে ..."
   },
   "use_in_observation": "নির্বাচিত ব্যবহার করুন",
-  "wkt": "Wkt.",
+  "wkt": "WKT",
   "youtube_placeholder": "ইনপুট ইউটিউব লিঙ্ক"
 }

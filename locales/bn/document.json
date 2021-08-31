@@ -6,14 +6,14 @@
     "author": "লেখক",
     "booktitle": "বইয়ের শিরোনাম",
     "chapter": "অধ্যায়",
-    "doi": "দোআই",
+    "doi": "DOI",
     "edition": "সংস্করণ",
     "editor": "সম্পাদক",
     "extra": "অতিরিক্ত",
     "file": "ফাইল",
     "howpublished": "কিভাবে প্রকাশিত",
     "institution": "প্রতিষ্ঠান",
-    "isbn": "Isbn.",
+    "isbn": "ISBN",
     "journal": "জার্নাল",
     "language": "ভাষা",
     "month": "মাস",
@@ -42,10 +42,10 @@
   "created_on": "তৈরি",
   "description": "বর্ণনা",
   "documents_found": "ডকুমেন্টস পাওয়া যায়",
-  "doi": "দোআই",
+  "doi": "DOI",
   "download": {
     "citation": "উদ্ধৃতি",
-    "pdf": "পিডিএফ"
+    "pdf": "PDF"
   },
   "edit": {
     "error": "এই দস্তাবেজ আপডেট করার সময় একটি ত্রুটি ছিল",

@@ -13,7 +13,7 @@
     "file": "ଫାଇଲ୍ |",
     "howpublished": "କେମିତି ପ୍ରକାଶିତ |",
     "institution": "ସଂସ୍ଥା",
-    "isbn": "Isbn",
+    "isbn": "ISBN",
     "journal": "ପତ୍ରିକା",
     "language": "ଭାଷା",
     "month": "ମାସ",
@@ -45,7 +45,7 @@
   "doi": "DOI",
   "download": {
     "citation": "ଉଦ୍ଧୃତ",
-    "pdf": "ପିଡିଏଫ୍"
+    "pdf": "PDF"
   },
   "edit": {
     "error": "ଏହି ଡକ୍ୟୁମେଣ୍ଟ୍ ଅପଡେଟ୍ କରିବାରେ ଏକ ତ୍ରୁଟି ଥିଲା |",

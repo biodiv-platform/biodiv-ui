@@ -6,14 +6,14 @@
     "author": "लेखक",
     "booktitle": "पुस्तकाचे शीर्षक",
     "chapter": "अध्याय",
-    "doi": "डोई",
+    "doi": "DOI",
     "edition": "संस्करण",
     "editor": "संपादक",
     "extra": "अतिरिक्त",
     "file": "फाइल",
     "howpublished": "कसे प्रकाशित केले",
     "institution": "संस्था",
-    "isbn": "आयएसबीएन",
+    "isbn": "ISBN",
     "journal": "जर्नल",
     "language": "इंग्रजी",
     "month": "महिना",
@@ -42,10 +42,10 @@
   "created_on": "चालू",
   "description": "वर्णन",
   "documents_found": "आढळले दस्तऐवज",
-  "doi": "डोई",
+  "doi": "DOI",
   "download": {
     "citation": "उद्धरण",
-    "pdf": "पीडीएफ"
+    "pdf": "PDF"
   },
   "edit": {
     "error": "हा दस्तऐवज अद्यतनित करताना त्रुटी आली",

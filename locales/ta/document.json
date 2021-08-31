@@ -6,14 +6,14 @@
     "author": "நூலாசிரியர்",
     "booktitle": "புத்தகம் தலைப்பு",
     "chapter": "பாடம்",
-    "doi": "DOI.",
+    "doi": "DOI",
     "edition": "பதிப்பு",
     "editor": "ஆசிரியர்",
     "extra": "கூடுதல்",
     "file": "கோப்பு",
     "howpublished": "எப்படி வெளியிடப்பட்டது",
     "institution": "நிறுவனம்",
-    "isbn": "ISBN.",
+    "isbn": "ISBN",
     "journal": "ஜர்னல்",
     "language": "மொழி. மொழி",
     "month": "மாதம்",
@@ -42,10 +42,10 @@
   "created_on": "அன்று உருவாக்கப்பட்ட",
   "description": "விளக்கம்",
   "documents_found": "ஆவணங்கள் காணப்படுகின்றன",
-  "doi": "DOI.",
+  "doi": "DOI",
   "download": {
     "citation": "மேற்கோள்",
-    "pdf": "PDF."
+    "pdf": "PDF"
   },
   "edit": {
     "error": "இந்த ஆவணத்தை புதுப்பிப்பதில் பிழை ஏற்பட்டது",

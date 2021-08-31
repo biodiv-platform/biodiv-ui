@@ -6,7 +6,7 @@
     "author": "Author",
     "booktitle": "Lohatenin'ny boky",
     "chapter": "Chapter",
-    "doi": "Doi",
+    "doi": "DOI",
     "edition": "fanontana",
     "editor": "mpamoaka lahatsoratra",
     "extra": "FANALAVAM",
@@ -42,7 +42,7 @@
   "created_on": "Noforonina",
   "description": "Description",
   "documents_found": "Antontan-taratasy hita",
-  "doi": "Doi",
+  "doi": "DOI",
   "download": {
     "citation": "ambadika",
     "pdf": "PDF"
