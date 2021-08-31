@@ -1,7 +1,7 @@
 {
-  "group_edit": "જૂથ સંપાદિત કરો",
-  "logged_user_only": "કૃપા કરીને જૂથમાં જોડાવા માટે લૉગિન કરો",
-  "member_only": "કૃપા કરીને અવલોકનો અપલોડ કરવા માટે જૂથમાં જોડાઓ",
+  "group_edit": "ગ્રુપ સંપાદિત કરો",
+  "logged_user_only": "કૃપા કરીને ગ્રુપમાં જોડાવા માટે લૉગિન કરો",
+  "member_only": "કૃપા કરીને અવલોકનો અપલોડ કરવા માટે ગ્રુપમાં જોડાઓ",
   "menu_primary": {
     "contribute": {
       "add_data_package": "ડેટા પેકેજ ઉમેરો",
@@ -13,12 +13,12 @@
       "add_observation": "નિરીક્ષણ ઉમેરો",
       "add_trait_or_value": "વિશેષતા / મૂલ્ય ઉમેરો",
       "contribute_to_map": "નકશામાં ફાળો આપે છે",
-      "contribute_to_species": "જાતિઓમાં યોગદાન આપો",
-      "title": "ફાળો આપવો"
+      "contribute_to_species": "પ્રજાતિઓમા ફાળો આપો",
+      "title": "ફાળો આપો"
     },
     "groups": {
       "see_all": "બધા જુઓ",
-      "title": "જૂથો"
+      "title": "ગ્રૂપો"
     },
     "settings": {
       "leaderboard": "મારા લીડરબોર્ડ રેન્ક",
@@ -33,7 +33,7 @@
       "title": "દસ્તાવેજો"
     },
     "idao": {
-      "title": "ઇડાડો"
+      "title": "IDAO"
     },
     "landscapes": {
       "title": "સંરક્ષિત વિસ્તારો"
@@ -67,7 +67,7 @@
       "title": "પ્રજાતિઓ"
     }
   },
-  "search": "શોધ",
+  "search": "શોધો",
   "sign_in": "પ્રવેશ કરો",
   "toggle_menu": "ટૉગલ કરો"
 }

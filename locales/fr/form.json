@@ -31,7 +31,7 @@
     "title": "Description"
   },
   "find_gmaps": "Recherche à partir de Google Maps",
-  "from_url": "Youtube",
+  "from_url": "YouTube",
   "geoentities": "Recherche dans des paysages",
   "language": "Langue",
   "license": "Licence",
@@ -80,6 +80,6 @@
     "uploading": "Téléchargement..."
   },
   "use_in_observation": "Utiliser sélectionné",
-  "wkt": "Wkt",
+  "wkt": "WKT",
   "youtube_placeholder": "Entrer le lien YouTube"
 }

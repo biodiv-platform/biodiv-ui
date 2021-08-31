@@ -6,14 +6,14 @@
     "author": "ಲೇಖಕ",
     "booktitle": "ಪುಸ್ತಕ ಶೀರ್ಷಿಕೆ",
     "chapter": "ಅಧ್ಯಾಯ",
-    "doi": "ನಾನ",
+    "doi": "DOI",
     "edition": "ಸಂಪಾದನೆ",
     "editor": "ಸಂಪಾದಕ",
     "extra": "ಹೆಚ್ಚುವರಿ",
     "file": "ಕಡಮೆ",
     "howpublished": "ಹೇಗೆ ಪ್ರಕಟಿಸಲಾಗಿದೆ",
     "institution": "ಸ್ಥಾಪನೆ",
-    "isbn": "Isbn",
+    "isbn": "ISBN",
     "journal": "ಜರ್ನಲ್",
     "language": "ಭಾಷೆ",
     "month": "ತಿಂಗಳು",
@@ -42,10 +42,10 @@
   "created_on": "ರಚಿಸಲಾಗಿದೆ",
   "description": "ವಿವರಣೆ",
   "documents_found": "ದಾಖಲೆಗಳು ಕಂಡುಬಂದಿವೆ",
-  "doi": "ನಾನ",
+  "doi": "DOI",
   "download": {
     "citation": "ಉಲ್ಲೇಖ",
-    "pdf": "ಪಿಡಿಎಫ್"
+    "pdf": "PDF"
   },
   "edit": {
     "error": "ಈ ಡಾಕ್ಯುಮೆಂಟ್ ಅನ್ನು ನವೀಕರಿಸುವಲ್ಲಿ ದೋಷ ಕಂಡುಬಂದಿದೆ",

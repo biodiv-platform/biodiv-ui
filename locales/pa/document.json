@@ -6,14 +6,14 @@
     "author": "ਲੇਖਕ",
     "booktitle": "ਕਿਤਾਬ ਦਾ ਸਿਰਲੇਖ",
     "chapter": "ਅਧਿਆਇ",
-    "doi": "Doi",
+    "doi": "DOI",
     "edition": "ਐਡੀਸ਼ਨ",
     "editor": "ਸੰਪਾਦਕ",
     "extra": "ਵਾਧੂ",
     "file": "ਫਾਈਲ",
     "howpublished": "ਕਿੰਨਾ ਪ੍ਰਕਾਸ਼ਤ",
     "institution": "ਸੰਸਥਾ",
-    "isbn": "Isbn",
+    "isbn": "ISBN",
     "journal": "ਰਸਾਲਾ",
     "language": "ਭਾਸ਼ਾ",
     "month": "ਮਹੀਨਾ",
@@ -42,10 +42,10 @@
   "created_on": "ਤੇ ਬਣਾਇਆ",
   "description": "ਵੇਰਵਾ",
   "documents_found": "ਦਸਤਾਵੇਜ਼ ਮਿਲੇ",
-  "doi": "Doi",
+  "doi": "DOI",
   "download": {
     "citation": "ਹਵਾਲਾ",
-    "pdf": "ਪੀਡੀਐਫ"
+    "pdf": "PDF"
   },
   "edit": {
     "error": "ਇਸ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਇੱਕ ਗਲਤੀ ਆਈ",
