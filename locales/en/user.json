@@ -14,6 +14,7 @@
   "download_logs": "Downloads",
   "edit_profile": "Edit Profile",
   "email": "Email",
+  "email_or_mobile_required": "Either e-mail or phone number is required",
   "enabled": "Account Enabled",
   "existing_user": "Already have an account?",
   "expired": "Account Expired",
@@ -43,6 +44,7 @@
   "occupation": "Profession",
   "password": "Password",
   "password_expired": "Password Expired",
+  "passwords_not_match": "Passwords do not match",
   "permissions": "Permissions",
   "register": "Register",
   "roles": "Roles",
@@ -50,6 +52,12 @@
   "send_email": "Send Emails",
   "send_push_notifications": "Send Push Notifications",
   "sign_up": "Sign up",
+  "terms": {
+    "privacy": "Privacy Policy",
+    "required": "The 'Terms of Service' and 'Privacy Policy' must be accepted.",
+    "terms": "Terms of Service",
+    "text": "I agree to this website's"
+  },
   "update_error": "Unable to update",
   "update_password": "Update Password",
   "updated": "Updated Successfully",

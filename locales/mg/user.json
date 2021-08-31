@@ -14,6 +14,7 @@
   "download_logs": "Fampidinana",
   "edit_profile": "Profile edit",
   "email": "Email",
+  "email_or_mobile_required": "Na mailaka na nomeraon-telefaona dia ilaina",
   "enabled": "Namboarina ny kaonty",
   "existing_user": "Efa manana kaonty ve ianao?",
   "expired": "Tapitra ny kaonty",
@@ -43,6 +44,7 @@
   "occupation": "asa",
   "password": "Password",
   "password_expired": "Tapitra ny tenimiafina",
+  "passwords_not_match": "Tsy mifanaraka ny teny miafina",
   "permissions": "alalana",
   "register": "hisoratra anarana",
   "roles": "andraikitra",
@@ -50,6 +52,12 @@
   "send_email": "Mandefasa mailaka",
   "send_push_notifications": "Mandefasa fampandrenesana Push",
   "sign_up": "Hiditra Mpikambana",
+  "terms": {
+    "privacy": "politika Fiarovana fiainan'olona",
+    "required": "Ny 'Terms of Service' sy ny 'Privacy Policy' dia tsy maintsy ekena.",
+    "terms": "Fepetran'ny serivisy",
+    "text": "Manaiky an'ity tranonkala ity aho"
+  },
   "update_error": "Tsy afaka nanavao",
   "update_password": "Hanavao ny tenimiafina",
   "updated": "Nohavaozina soa aman-tsara",
