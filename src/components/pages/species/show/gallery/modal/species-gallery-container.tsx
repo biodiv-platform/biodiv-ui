@@ -10,7 +10,7 @@ export default function SpeciesFieldContainer(props) {
     <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
       <ObservationCreateProvider
         licensesList={props.licensesList}
-        observationAssets={props.form.control.defaultValuesRef.current[props.name]}
+        observationAssets={props.form.control._defaultValues[props.name]}
       >
         <SpeciesDropzoneField {...props} />
       </ObservationCreateProvider>

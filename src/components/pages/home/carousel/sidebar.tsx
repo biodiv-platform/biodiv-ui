@@ -12,7 +12,7 @@ export default function Sidebar({ resource }) {
   return (
     <BlurBox
       bg={getResourceThumbnail(RESOURCE_CTX.OBSERVATION, resource?.fileName, RESOURCE_SIZE.PREVIEW)}
-      fallbackColor="var(--gray-800)"
+      fallbackColor="var(--chakra-colors-gray-800)"
     >
       <Center h="full" p={{ base: 6, lg: 8 }}>
         <div>

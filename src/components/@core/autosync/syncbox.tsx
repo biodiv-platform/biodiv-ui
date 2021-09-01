@@ -30,7 +30,7 @@ const SyncBoxContainer = styled.div`
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 
     .header {
-      background: var(--gray-800);
+      background: var(--chakra-colors-gray-800);
       color: white;
       display: flex;
       padding: 0.9rem 1rem;

@@ -8,7 +8,7 @@ import React from "react";
 
 const CardLink = styled.a`
   div {
-    border: 2px solid var(--gray-200);
+    border: 2px solid var(--chakra-colors-gray-200);
     transition: 0.2s ease-in-out;
     .arrow {
       transition: 0.1s ease-in-out;

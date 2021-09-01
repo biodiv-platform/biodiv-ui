@@ -15,7 +15,7 @@ export default function GroupHomePageCustomization({ userGroupId, homePageDetail
   const { t } = useTranslation();
   return (
     <Accordion allowToggle>
-      <AccordionItem mb={8} bg="white" border="1px solid var(--gray-300)" borderRadius="md">
+      <AccordionItem mb={8} bg="white" border="1px solid var(--chakra-colors-gray-300)" borderRadius="md">
         <AccordionButton _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
             🧰 {t("group:homepage_customization.title")}

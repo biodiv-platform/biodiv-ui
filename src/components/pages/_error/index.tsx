@@ -8,7 +8,7 @@ const ErrorContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color: var(--gray-900);
+  color: var(--chakra-colors-gray-900);
 
   h1 {
     font-size: 2.2rem;
@@ -20,12 +20,12 @@ const ErrorContainer = styled.div`
   p {
     max-width: 400px;
     text-align: center;
-    color: var(--gray-500);
+    color: var(--chakra-colors-gray-500);
   }
 
   @keyframes type {
     from {
-      box-shadow: inset -3px 0px 0px var(--gray-900);
+      box-shadow: inset -3px 0px 0px var(--chakra-colors-gray-900);
     }
 
     to {

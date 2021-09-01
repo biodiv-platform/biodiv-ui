@@ -24,7 +24,7 @@ interface ITraitsPickerProps {
 
 const TraitsPicker = ({ name }: ITraitsPickerProps) => {
   const form = useFormContext();
-  const initialFacts = form.control.defaultValuesRef.current[name] || {};
+  const initialFacts = form.control._defaultValues[name] || {};
   const [traitsPairs, setTraitsPairs] = useState<TraitsValuePair[]>([]);
   const [facts, setFacts] = useState<any>(initialFacts);
   const sGroup = form.watch("sGroup");

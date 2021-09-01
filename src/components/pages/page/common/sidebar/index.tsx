@@ -30,7 +30,7 @@ const TreeContainer = styled.div`
     padding: 0;
   }
   .rst__row {
-    border: 1px solid var(--gray-400);
+    border: 1px solid var(--chakra-colors-gray-400);
     border-radius: 0.25rem;
   }
   .rst__moveHandle {

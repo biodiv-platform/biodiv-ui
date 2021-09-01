@@ -7,8 +7,8 @@ import React from "react";
 
 const CheckboxLabel = styled.label`
   cursor: pointer;
-  border: 1px solid var(--gray-300);
-  background: var(--white);
+  border: 1px solid var(--chakra-colors-gray-300);
+  background: var(--chakra-colors-white);
   overflow: hidden;
 
   img {
@@ -17,7 +17,7 @@ const CheckboxLabel = styled.label`
   }
 
   .badge {
-    background: var(--gray-500);
+    background: var(--chakra-colors-gray-500);
     font-size: 0.7rem;
     line-height: 1.2rem;
     color: white;
@@ -29,7 +29,7 @@ const CheckboxLabel = styled.label`
       filter: none;
     }
     .badge {
-      background: var(--blue-500);
+      background: var(--chakra-colors-blue-500);
     }
   }
 `;

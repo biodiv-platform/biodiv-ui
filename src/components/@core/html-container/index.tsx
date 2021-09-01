@@ -5,8 +5,8 @@ const HTMLContainer = styled.div`
   word-break: break-word;
 
   a {
-    color: var(--blue-500);
-    border-bottom: 1px dotted var(--blue-500);
+    color: var(--chakra-colors-blue-500);
+    border-bottom: 1px dotted var(--chakra-colors-blue-500);
     &:hover {
       border-bottom-style: solid;
     }
@@ -67,7 +67,7 @@ const HTMLContainer = styled.div`
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--chakra-colors-gray-300);
   }
 
   th,

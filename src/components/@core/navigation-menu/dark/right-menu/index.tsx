@@ -36,7 +36,7 @@ const RightMenuContainer = styled.div`
   }
 
   [data-label="ibpadd"] {
-    background: var(--gray-700);
+    background: var(--chakra-colors-gray-700);
     border-radius: 2rem;
     padding: 0.4rem 0.7rem;
   }

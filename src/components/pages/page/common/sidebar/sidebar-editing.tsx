@@ -25,7 +25,7 @@ export default function SidebarEditing() {
             router.push(`/page/${p.linkType}/${node.id}`);
           },
           style: {
-            background: node.id === Number(p.currentPage?.id) ? "var(--blue-100)" : "var(--gray-50)"
+            background: node.id === Number(p.currentPage?.id) ? "var(--chakra-colors-blue-100)" : "var(--chakra-colors-gray-50)"
           }
         })}
         rowHeight={48}

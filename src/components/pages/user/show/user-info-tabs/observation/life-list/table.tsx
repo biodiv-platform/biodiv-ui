@@ -7,7 +7,7 @@ import React from "react";
 
 const Table = styled.table`
   tr {
-    border-bottom: 1px solid var(--gray-300);
+    border-bottom: 1px solid var(--chakra-colors-gray-300);
   }
   td:first-of-type {
     border-left: 0;

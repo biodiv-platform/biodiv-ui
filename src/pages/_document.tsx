@@ -1,7 +1,5 @@
 import { ColorModeScript } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
-import { customTheme } from "@configs/theme";
-import { jsontocss } from "@utils/style";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import GoogleAnalytics from "next-simple-google-analytics";
 import React from "react";
@@ -15,7 +13,6 @@ class MyDocument extends Document<IDocumentProps> {
     return (
       <Html lang={this.props.__NEXT_DATA__?.props?.lang}>
         <Head>
-          <style>{jsontocss(customTheme)}</style>
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="description" content={SITE_CONFIG.SITE.DESCRIPTION} />
           <meta name="theme-color" content="#363636" />

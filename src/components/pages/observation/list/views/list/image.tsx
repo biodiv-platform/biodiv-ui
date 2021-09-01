@@ -14,7 +14,7 @@ import React from "react";
 const ImageBox = styled.div`
   position: relative;
   height: auto;
-  border-right: 1px solid var(--gray-300);
+  border-right: 1px solid var(--chakra-colors-gray-300);
   flex-shrink: 0;
 
   .ob-image-list {

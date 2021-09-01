@@ -8,7 +8,7 @@ const DescriptionBox = styled.div`
   p {
     margin-bottom: 1rem;
     font-size: 1.125rem;
-    color: var(--gray-600);
+    color: var(--chakra-colors-gray-600);
   }
 
   h2,

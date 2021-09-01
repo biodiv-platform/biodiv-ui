@@ -12,7 +12,7 @@ import useObservationCreate from "../use-observation-resources";
 
 const DropTargetBox = styled.div`
   cursor: pointer;
-  border: 2px dashed var(--gray-300);
+  border: 2px dashed var(--chakra-colors-gray-300);
   border-radius: 0.5rem;
   position: absolute;
   text-align: center;
@@ -25,7 +25,7 @@ const DropTargetBox = styled.div`
   align-items: center;
   justify-content: center;
   &[data-dropping="true"] {
-    border-color: var(--blue-500);
+    border-color: var(--chakra-colors-blue-500);
   }
   svg {
     display: block;

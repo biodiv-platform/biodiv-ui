@@ -28,9 +28,9 @@ export const TaxonBrowserContainer = styled.div`
     overflow: auto;
     border-radius: 0.25rem;
     position: relative;
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--chakra-colors-gray-300);
     padding: 0.75rem;
-    background: var(--white);
+    background: var(--chakra-colors-white);
   }
 
   .rc-tree .rc-tree-treenode {
