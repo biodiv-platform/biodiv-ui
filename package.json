@@ -49,7 +49,7 @@
     "keen-slider": "^5.5.1",
     "local-storage-json": "^1.1.0",
     "mq-styled-components": "^2.1.2",
-    "naksha-components-react": "^3.10.5",
+    "naksha-components-react": "^3.10.6",
     "nanoid": "^3.1.25",
     "next": "^11.1.2",
     "next-seo": "^4.26.0",
@@ -120,7 +120,7 @@
     "prettier": "^2.3.2",
     "sass": "^1.39.0",
     "typescript": "^4.4.2",
-    "webpack": "^5.51.1"
+    "webpack": "^5.51.2"
   },
   "resolutions": {
     "@emotion/react": "^11.4.1"
