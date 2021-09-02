@@ -89,14 +89,17 @@ export default function GroupPost({
       </SimpleGrid>
 
       <Collapse in={isOpen} unmountOnExit={true}>
-        {groups?.length > 0 && (
+        {groups?.length > 0 ? (
           <CheckBoxItems
             gridColumns={columns || defaultGridColumns}
             options={groups}
             defaultValue={selectedGroups}
             onChange={setSelectedGroups}
           />
+        ) : (
+          <div>{t("common:no_groups_joined")}</div>
         )}
+
         <Box mt={2}>
           <Button
             size="sm"
