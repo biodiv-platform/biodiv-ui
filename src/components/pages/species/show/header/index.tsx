@@ -94,8 +94,8 @@ function SpeciesHeader() {
           <Image
             boxSize="5rem"
             m={-2}
-            src={getLocalIcon(species.speciesGroup.name)}
-            title={species.speciesGroup.name}
+            src={getLocalIcon(species.speciesGroup?.name)}
+            title={species.speciesGroup?.name}
           />
         </Box>
 
