@@ -49,7 +49,12 @@ export default function TagsTab({ documentId, tags }: ITagsTabsProps) {
         ) : tagsItems?.length > 0 ? (
           <Box>
             {tagsItems?.map((item) => (
-              <LinkTag href={"/document/list"} label={item?.label} key={item?.label} />
+              <LinkTag
+                href={"/document/list"}
+                hardLink={true}
+                label={item?.label}
+                key={item?.label}
+              />
             ))}
           </Box>
         ) : (
