@@ -4,7 +4,7 @@ import { useImmer } from "use-immer";
 
 const LIFE_LIST_LIMIT = 10;
 
-export default function useUniqueSpecies({ filter, location = {} }) {
+export default function useUniqueSpecies({ filter, location = "" }) {
   const [uniqueSpecies, setUniqueSpecies] = useImmer({
     list: [],
     lifelistoffset: 0,
@@ -21,7 +21,7 @@ export default function useUniqueSpecies({ filter, location = {} }) {
         ...filter,
         lifelistoffset: reset ? 0 : getter.lifelistoffset
       },
-      { location }
+      location ? { location } : {}
     );
 
     setter((_draft) => {
