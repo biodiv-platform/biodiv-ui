@@ -1003,10 +1003,10 @@
   dependencies:
     "@ibp/naksha-commons" "3.10.2"
 
-"@ibp/naksha-mapbox-list@3.10.4":
-  version "3.10.4"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.10.4.tgz#a2a932e671cb7f7174487b15f26921c307c30eba"
-  integrity sha512-MxhmA0fgus8/UEuk1mZvwWEJ2V1biNynhEKUWdWUP3t+ql7g+racJO+7UOP4Dwrc1IwOXTbLPcoxllN7mPKEvw==
+"@ibp/naksha-mapbox-list@3.10.6":
+  version "3.10.6"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.10.6.tgz#4b217995f3d0901252aabc54d5a1b9b46104262e"
+  integrity sha512-KktJBCu5MUZGjtZamOuSvTYdG5Wkxf5JSSozQuQXOa+a8238cfhNoymsPwbSuUPqwi/ms1i6KtnV61fpsyU8FQ==
   dependencies:
     "@ibp/naksha-commons" "3.10.2"
     "@turf/bbox" "^6.4.0"
@@ -6532,15 +6532,15 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.10.4:
-  version "3.10.4"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.10.4.tgz#113f3a0bf449430a6edcac3c35a57fce1ae84feb"
-  integrity sha512-DVHKFyL46/JbKWIA0GOXs72NRLeARifIYEOkNsGnBM/TG+jkI9U3C00DpWEFVsgMBKuywPHsINno1OpRZrmNnQ==
+naksha-components-react@^3.10.6:
+  version "3.10.6"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.10.6.tgz#d43d202d254cc7829d412a1693015173b9ac98fd"
+  integrity sha512-e4TYYYz9TIbC1KZkWCeG/kl+idsFnL4n/rsxZ5mPqtd8aqnacGUfASjsXmi6i37j6RofNrD2xqHLfcv/XBYWFw==
   dependencies:
     "@ibp/naksha-commons" "3.10.2"
     "@ibp/naksha-gmaps-draw" "3.10.2"
     "@ibp/naksha-mapbox-draw" "3.10.2"
-    "@ibp/naksha-mapbox-list" "3.10.4"
+    "@ibp/naksha-mapbox-list" "3.10.6"
     "@ibp/naksha-mapbox-view" "3.10.2"
     "@ibp/naksha-upload" "3.10.2"
 
@@ -8025,10 +8025,10 @@ safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass@^1.38.2:
-  version "1.38.2"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.38.2.tgz#970045d9966180002a8c8f3820fc114cddb42822"
-  integrity sha512-Bz1fG6qiyF0FX6m/I+VxtdVKz1Dfmg/e9kfDy2PhWOkq3T384q2KxwIfP0fXpeI+EyyETdOauH+cRHQDFASllA==
+sass@^1.39.0:
+  version "1.39.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.39.0.tgz#6c64695d1c437767c8f1a4e471288e831f81d035"
+  integrity sha512-F4o+RhJkNOIG0b6QudYU8c78ZADKZjKDk5cyrf8XTKWfrgbtyVVXImFstJrc+1pkQDCggyidIOytq6gS4gCCZg==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 
@@ -9019,10 +9019,10 @@ webpack-sources@^3.2.0:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.0.tgz#b16973bcf844ebcdb3afde32eda1c04d0b90f89d"
   integrity sha512-fahN08Et7P9trej8xz/Z7eRu8ltyiygEo/hnRi9KqBUs80KeDcnf96ZJo++ewWd84fEf3xSX9bp4ZS9hbw0OBw==
 
-webpack@^5.51.1:
-  version "5.51.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.51.1.tgz#41bebf38dccab9a89487b16dbe95c22e147aac57"
-  integrity sha512-xsn3lwqEKoFvqn4JQggPSRxE4dhsRcysWTqYABAZlmavcoTmwlOb9b1N36Inbt/eIispSkuHa80/FJkDTPos1A==
+webpack@^5.51.2:
+  version "5.51.2"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.51.2.tgz#f765d258b0bf6abda3c5f21bf855a25720e9796f"
+  integrity sha512-odydxP4WA3XYYzwSQUivPxywdzMlY42bbfxMwCaEtHb+i/N9uzKSHcLgWkXo/Gsa+4Zlzf3Jg0hEHn1FnZpk2Q==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.50"

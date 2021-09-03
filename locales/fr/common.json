@@ -57,6 +57,7 @@
   "name": "Nom",
   "next": "Suivante",
   "no_data": "Pas de données",
+  "no_groups_joined": "Vous n'avez rejoint aucun groupe",
   "no_results": "Aucun résultat trouvé",
   "notifications": {
     "invalid_credentials": "Le nom d'utilisateur ou le mot de passe que vous avez saisi est incorrect.",
