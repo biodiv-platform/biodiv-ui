@@ -76,7 +76,7 @@ export default function FilterCheckboxes({
                 />
               )}
               {skipOptionsTranslation ? label || value : t(translateKey + label)}
-              <FilterStat statKey={statKey} subStatKey={label || value} />
+              <FilterStat statKey={statKey} subStatKey={value || label} />
             </Checkbox>
           ))}
         </Stack>

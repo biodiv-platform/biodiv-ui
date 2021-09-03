@@ -83,7 +83,7 @@ export const DOUCMENT_FILTER_KEY = {
 
   title: {
     filterKey: "title",
-    searchKey: "form:title"
+    searchKey: "document.title"
   }
 };
 
