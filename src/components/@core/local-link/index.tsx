@@ -11,6 +11,7 @@ interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
   className?: string;
   params?: Record<string, unknown>;
   prefixGroup?: boolean;
+  hardLink?: boolean;
 }
 
 /**
@@ -63,7 +64,7 @@ function LocalLink({ prefixGroup, params, ...props }: Props) {
   const { currentGroup } = useGlobalState();
   const localPath = getLocalPath(props.href, params, prefixGroup, currentGroup?.webAddress);
 
-  return localPath.startsWith("http") ? (
+  return localPath.startsWith("http") || props?.hardLink ? (
     cloneElement(props.children, { ...props?.children?.props, href: localPath })
   ) : (
     <NextLink {...props} href={localPath} prefetch={false} passHref={true} />
