@@ -16,6 +16,7 @@ const VerticalTabs = styled.div`
 
   .tabs {
     display: flex;
+    height: 18rem;
 
     > .tab-content {
       flex-grow: 1;
@@ -23,6 +24,7 @@ const VerticalTabs = styled.div`
       > [role="tabpanel"] {
         padding: 0;
         height: 100%;
+        max-height: 18rem;
         overflow-y: auto;
         position: relative;
       }
