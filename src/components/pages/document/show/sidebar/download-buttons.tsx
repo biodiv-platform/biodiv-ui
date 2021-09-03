@@ -5,7 +5,6 @@ import { axDownloadDocument } from "@services/document.service";
 import { isBrowser } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
-import { getDocumentFilePath } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -15,8 +14,11 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
   const downloadPDF = async () => {
     await waitForAuth();
     const fileName = `${title}.pdf`;
-    const fullFilePath = getDocumentFilePath(documentPath);
-    const { success, data } = await axDownloadDocument(fullFilePath, documentId);
+    const { success, data } = await axDownloadDocument(
+      `/content/documents${documentPath}`,
+      documentId,
+      title
+    );
     if (success) {
       sendFileFromResponse(data, fileName);
     }

@@ -68,9 +68,13 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
               variant="outline"
               size="sm"
               as="a"
-              href={`${ENDPOINT.RAW}/${values.filePath}`}
-              target="_blank"
-              download={!adminOrAuthor(values.user.id)}
+              href={
+                values.filePath.startsWith("/naksha")
+                  ? values.filePath
+                  : `${ENDPOINT.RAW}${values.filePath}`
+              }
+              download={true}
+              disabled={!adminOrAuthor(values.user.id)}
               leftIcon={<DownloadIcon />}
               colorScheme="blue"
             >
