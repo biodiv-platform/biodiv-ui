@@ -1,7 +1,7 @@
 import { Button, Image, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import DownloadIcon from "@icons/download";
-import { API_ENDPOINT, ENDPOINT } from "@static/constants";
+import { ENDPOINT } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
@@ -70,10 +70,10 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
               as="a"
               href={
                 values.filePath.startsWith("/naksha")
-                  ? `${API_ENDPOINT}${values.filePath}`
+                  ? values.filePath
                   : `${ENDPOINT.RAW}${values.filePath}`
               }
-              target="_blank"
+              download={true}
               disabled={!adminOrAuthor(values.user.id)}
               leftIcon={<DownloadIcon />}
               colorScheme="blue"

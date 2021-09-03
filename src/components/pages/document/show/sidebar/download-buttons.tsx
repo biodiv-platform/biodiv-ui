@@ -14,7 +14,11 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
   const downloadPDF = async () => {
     await waitForAuth();
     const fileName = `${title}.pdf`;
-    const { success, data } = await axDownloadDocument(`/content/documents${documentPath}`, documentId,title);
+    const { success, data } = await axDownloadDocument(
+      `/content/documents${documentPath}`,
+      documentId,
+      title
+    );
     if (success) {
       sendFileFromResponse(data, fileName);
     }

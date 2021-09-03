@@ -5,7 +5,7 @@ import packageJson from "../../package.json";
 
 export const isBrowser = typeof window !== `undefined`;
 
-export const API_ENDPOINT = isBrowser ? SITE_CONFIG.SITE.API_ENDPOINT : SITE_CONFIG.SITE.API_ENDPOINT_SSR;
+const API_ENDPOINT = isBrowser ? SITE_CONFIG.SITE.API_ENDPOINT : SITE_CONFIG.SITE.API_ENDPOINT_SSR;
 
 export const ENDPOINT = {
   ACTIVITY: `${API_ENDPOINT}activity-api/api`,

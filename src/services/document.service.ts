@@ -208,7 +208,7 @@ export const axUpdateDocument = async (payload) => {
   }
 };
 
-export const axDownloadDocument = async (documentPath, documentId,notes) => {
+export const axDownloadDocument = async (documentPath, documentId, notes) => {
   try {
     // Fetch document file
     const { data } = await http.get(documentPath, { responseType: "blob" });
