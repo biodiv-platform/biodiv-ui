@@ -25,8 +25,8 @@ interface GroupCreatePageComponentProps {
   habitats;
 }
 
-export const transformMemberPayload = (membersList = []) => {
-  return membersList.reduce(
+export const transformMemberPayload = (membersList) => {
+  return (membersList || [])?.reduce(
     ({ idsList, emailList }, item: any) => {
       return item["__isNew__"]
         ? { idsList, emailList: [...emailList, item.value] }
@@ -42,6 +42,7 @@ export default function CreateGroupPageComponent({
 }: GroupCreatePageComponentProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
+  const { languageId } = useGlobalState();
 
   const hForm = useForm<any>({
     resolver: yupResolver(
@@ -65,7 +66,6 @@ export default function CreateGroupPageComponent({
   });
 
   const handleFormSubmit = async (values) => {
-    const { languageId } = useGlobalState();
     const { spacialCoverage, founder, moderator, ...otherValues } = values;
 
     const spacialCoverageBounds = {
