@@ -21,7 +21,7 @@ export default function useUniqueSpecies({ filter, location = "" }) {
         ...filter,
         lifelistoffset: reset ? 0 : getter.lifelistoffset
       },
-      location?{location}:{}
+      location ? { location } : {}
     );
 
     setter((_draft) => {

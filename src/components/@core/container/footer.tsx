@@ -32,7 +32,9 @@ export default function Footer() {
         {SITE_CONFIG.FOOTER.PARTNER && (
           <div>
             {t("common:footer.technology_partner")}
-            <Link ml={1} href="https://strandls.com/">Strand Life Sciences</Link>
+            <Link ml={1} href="https://strandls.com/">
+              Strand Life Sciences
+            </Link>
           </div>
         )}
         <Stack isInline={true} spacing={4} mt={2} fontSize="1.4rem">
