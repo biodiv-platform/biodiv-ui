@@ -11,10 +11,10 @@ const SearchForm = styled.form`
     line-height: 1.8;
     border-radius: 2rem;
     width: 11rem;
-    background: var(--gray-700);
-    color: var(--white);
+    background: var(--chakra-colors-gray-700);
+    color: var(--chakra-colors-white);
     &:focus {
-      background: var(--white);
+      background: var(--chakra-colors-white);
       color: initial;
     }
   }

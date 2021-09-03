@@ -4,7 +4,7 @@ import React from "react";
 const Flash = ({ value, children }) => (
   <FlashChange
     value={value}
-    flashStyle={{ background: "var(--yellow-100)" }}
+    flashStyle={{ background: "var(--chakra-colors-yellow-100)" }}
     style={{ transition: "background 500ms ease" }}
   >
     {children}

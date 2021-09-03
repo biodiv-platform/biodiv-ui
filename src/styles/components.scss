@@ -1,7 +1,7 @@
 .textarea {
   min-height: 6rem;
   border-radius: 0.25rem;
-  border: 1px solid var(--gray-300);
+  border: 1px solid var(--chakra-colors-gray-300);
   .textarea__highlighter,
   .textarea__input {
     padding: 8px 1rem;
@@ -10,28 +10,28 @@
     position: absolute;
     padding: 0.25rem;
     border-radius: 0.25rem;
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--chakra-colors-gray-300);
   }
 }
 
 textarea,
 input {
-  border-color: var(--gray-300) !important;
+  border-color: var(--chakra-colors-gray-300) !important;
   &:focus,
   &:active {
-    border-color: var(--blue-500) !important;
+    border-color: var(--chakra-colors-blue-500) !important;
   }
   &[aria-invalid="true"] {
-    border-color: var(--red-500) !important;
+    border-color: var(--chakra-colors-red-500) !important;
   }
   &:disabled {
-    background: var(--gray-200) !important;
+    background: var(--chakra-colors-gray-200) !important;
   }
 }
 
 [aria-invalid="true"] > div > div {
-  border-color: var(--red-500) !important;
-  box-shadow: 0 0 0 1px var(--red-500) !important;
+  border-color: var(--chakra-colors-red-500) !important;
+  box-shadow: 0 0 0 1px var(--chakra-colors-red-500) !important;
 }
 
 .custom-checkbox-group > div {
@@ -47,8 +47,8 @@ input {
 .gray-box,
 .white-box,
 .hover-box {
-  background: var(--white);
-  border: 1px solid var(--gray-300);
+  background: var(--chakra-colors-white);
+  border: 1px solid var(--chakra-colors-gray-300);
   border-radius: 0.25rem;
   display: inline-block;
   width: 100%;
@@ -56,7 +56,7 @@ input {
 
 .gray-box {
   border: 0;
-  background: var(--gray-100);
+  background: var(--chakra-colors-gray-100);
 }
 
 .hover-box {

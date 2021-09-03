@@ -16,6 +16,7 @@ const VerticalTabs = styled.div`
 
   .tabs {
     display: flex;
+    height: 18rem;
 
     > .tab-content {
       flex-grow: 1;
@@ -23,6 +24,7 @@ const VerticalTabs = styled.div`
       > [role="tabpanel"] {
         padding: 0;
         height: 100%;
+        max-height: 18rem;
         overflow-y: auto;
         position: relative;
       }
@@ -41,10 +43,10 @@ const VerticalTabs = styled.div`
         text-align: left;
         white-space: nowrap;
 
-        color: var(--gray-600);
-        border-bottom: 1px solid var(--gray-300);
-        border-left: 1px solid var(--gray-300);
-        background: var(--gray-50);
+        color: var(--chakra-colors-gray-600);
+        border-bottom: 1px solid var(--chakra-colors-gray-300);
+        border-left: 1px solid var(--chakra-colors-gray-300);
+        background: var(--chakra-colors-gray-50);
         filter: grayscale(1);
       }
 

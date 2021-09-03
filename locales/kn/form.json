@@ -14,7 +14,7 @@
     "place": "ಸ್ಥಾನ",
     "spatial": "ಪ್ರಾದೇಶಿಕ ವ್ಯಾಪ್ತಿ",
     "title": "ವ್ಯಾಪ್ತಿ",
-    "wkt": "Wkt"
+    "wkt": "WKT"
   },
   "created_on": "ರಚಿಸಲಾಗಿದೆ",
   "date_accuracy": "ದಿನಾಂಕ ನಿಖರತೆ",
@@ -80,6 +80,6 @@
     "uploading": "ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ ..."
   },
   "use_in_observation": "ಆಯ್ಕೆಮಾಡಿ",
-  "wkt": "Wkt",
+  "wkt": "WKT",
   "youtube_placeholder": "ಇನ್ಪುಟ್ ಯೂಟ್ಯೂಬ್ ಲಿಂಕ್"
 }

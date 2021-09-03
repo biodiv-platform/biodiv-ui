@@ -14,6 +14,7 @@
   "download_logs": "डाउनलोड",
   "edit_profile": "प्रोफाईल संपादित करा",
   "email": "ईमेल",
+  "email_or_mobile_required": "एकतर ई-मेल किंवा फोन नंबर आवश्यक आहे",
   "enabled": "खाते सक्षम",
   "existing_user": "आधीपासूनच एक खाते आहे?",
   "expired": "खाते कालबाह्य झाले",
@@ -43,6 +44,7 @@
   "occupation": "व्यवसाय",
   "password": "पासवर्ड",
   "password_expired": "संकेतशब्द कालबाह्य झाला",
+  "passwords_not_match": "पासवर्ड जुळत नाही",
   "permissions": "परवानग्या",
   "register": "नोंदणी",
   "roles": "भूमिका",
@@ -50,6 +52,12 @@
   "send_email": "ईमेल पाठवा",
   "send_push_notifications": "पुश सूचना पाठवा",
   "sign_up": "साइन अप करा",
+  "terms": {
+    "privacy": "गोपनीयता धोरण",
+    "required": "सेवा अटी आणि गोपनीयता धोरण स्वीकारणे आवश्यक आहे.",
+    "terms": "सेवा अटी",
+    "text": "मी या वेबसाइटशी सहमत आहे"
+  },
   "update_error": "अद्यतन करण्यास अक्षम",
   "update_password": "पासवर्ड अद्ययावत करा",
   "updated": "यशस्वीरित्या अद्यतनित केले",

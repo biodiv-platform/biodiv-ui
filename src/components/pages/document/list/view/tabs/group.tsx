@@ -13,7 +13,7 @@ export default function GroupsTab({ o }) {
   return (
     <>
       <BoxHeading>👥 {t("common:usergroups")}</BoxHeading>
-      <Box minHeight="18rem" p={4}>
+      <Box height="100%" overflowX="auto" p={4}>
         <GroupPost
           groups={loggedInUserGroups}
           selectedDefault={o.userGroupIbp}

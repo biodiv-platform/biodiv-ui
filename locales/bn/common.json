@@ -15,6 +15,7 @@
   },
   "activity": "কার্যকলাপ",
   "add": "যোগ করুন",
+  "and": "এবং",
   "cancel": "বাতিল করুন",
   "clear": "পরিষ্কার",
   "close": "বন্ধ",
@@ -29,7 +30,7 @@
   "footer": {
     "email": "ইমেইল.",
     "facebook": "ফেসবুক",
-    "github": "Github.",
+    "github": "Github",
     "powered_by": "দ্বারা চালিত",
     "technology_partner": "প্রযুক্তি অংশীদার",
     "twitter": "টুইটার"
@@ -56,6 +57,7 @@
   "name": "নাম",
   "next": "পরবর্তী",
   "no_data": "কোন তথ্য নেই",
+  "no_groups_joined": "আপনি কোন গ্রুপে যোগদান করেননি",
   "no_results": "কোন ফলাফল পাওয়া যায়নি",
   "notifications": {
     "invalid_credentials": "আপনার প্রবেশকৃত ব্যবহারিক নাম ও প্রবেশ সংকেত টি ভুল।",

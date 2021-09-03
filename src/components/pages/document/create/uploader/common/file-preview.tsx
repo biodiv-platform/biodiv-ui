@@ -10,7 +10,7 @@ const DocumentList = styled.div`
   display: flex;
   border-radius: 0.25rem;
   background: white;
-  border: 1px solid var(--gray-300);
+  border: 1px solid var(--chakra-colors-gray-300);
   cursor: pointer;
 
   .icon,
@@ -36,7 +36,7 @@ const DocumentList = styled.div`
     padding-left: 0;
     flex-shrink: initial;
     flex-grow: 1;
-    border-right: 1px solid var(--gray-300);
+    border-right: 1px solid var(--chakra-colors-gray-300);
   }
 
   .elipsis {

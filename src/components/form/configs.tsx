@@ -8,7 +8,7 @@ export const selectStyles = {
   control: (p) => ({
     ...p,
     cursor: "text",
-    borderColor: "var(--gray-300)"
+    borderColor: "var(--chakra-colors-gray-300)"
   }),
   placeholder: (p) => ({
     ...p,

@@ -19,8 +19,8 @@
   },
   "table": {
     "commented": "ટિપ્પણી કરી",
-    "created": "બનાવટી",
-    "curated": "કરન્ટ",
+    "created": "બનાવટ",
+    "curated": "ક્યુરેટેડ",
     "discussions": "ચર્ચાઓ",
     "documents": "દસ્તાવેજો",
     "identified": "ઓળખાયેલું",
@@ -35,9 +35,9 @@
   "total": {
     "discussion": "કુલ ચર્ચા",
     "documents": "કુલ દસ્તાવેજો",
-    "miscellaneous": "કુલ વિવિધ",
+    "miscellaneous": "કુલ પ્રકીર્ણ",
     "observations": "કુલ અવલોકનો",
     "species": "કુલ જાતિઓ",
-    "taxon": "કુલ ટેક્સ"
+    "taxon": "કુલ વર્ગ"
   }
 }

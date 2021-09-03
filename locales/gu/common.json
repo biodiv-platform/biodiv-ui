@@ -9,46 +9,47 @@
         "location_inappropriate": "અયોગ્ય સ્થાન"
       },
       "notes": "નોંધ",
-      "others_flagged": "અન્ય લોકો જે ફ્લેગ કરે છે",
-      "title": "ધ્વજ"
+      "others_flagged": "અન્ય લોકો જે જાણ કરે છે",
+      "title": "જાણ"
     }
   },
   "activity": "પ્રવૃત્તિ",
   "add": "ઉમેરો",
-  "cancel": "રદ કરવું",
-  "clear": "ચોખ્ખુ",
+  "and": "અને",
+  "cancel": "રદ કરો",
+  "clear": "સાફ કરો",
   "close": "બંધ",
   "copy": "ક્લિપબોર્ડ પર કૉપિ કરો",
-  "datatable": "નાટકીય",
+  "datatable": "ડેટાટેબલ",
   "delete": "કાઢી નાખો",
-  "edit": "ફેરફાર કરવો",
-  "edit_not_uploaded": "કેટલાક સંસાધનો યોગ્ય રીતે અપલોડ કરવામાં આવ્યાં નથી, કૃપા કરીને અપલોડ કરતા પહેલા રાહ જુઓ અથવા દૂર કરો",
+  "edit": "ફેરફાર કરો",
+  "edit_not_uploaded": "કેટલાક ફોટા યોગ્ય રીતે અપલોડ થયા નથી. કૃપા કરીને અપલોડ કરતા પહેલા રાહ જુઓ અથવા તેમને દૂર કરો",
   "feature": "લક્ષણ પસંદ કર્યું",
-  "feature_in_groups": "જૂથોમાં લક્ષણ",
+  "feature_in_groups": "ગ્રુપોમાં લક્ષણ",
   "feedback": "પ્રતિસાદ",
   "footer": {
     "email": "ઇમેઇલ",
     "facebook": "ફેસબુક",
-    "github": "ગિથબ",
-    "powered_by": "દ્વારા સંચાલિત",
+    "github": "ગિટહબ ",
+    "powered_by": "સંચાલક",
     "technology_partner": "ટેકનોલોજી ભાગીદાર",
-    "twitter": "Twitter"
+    "twitter": "ટવીટર"
   },
-  "habitats_covered": "આવાસ આવરી લે છે",
+  "habitats_covered": "વસવાટનું કવરેજ",
   "information": "માહિતી",
   "invalid_request": "અમાન્ય વિનંતી",
   "list": {
-    "sort_by": "દ્વારા સૉર્ટ કરો",
+    "sort_by": "દ્વારા ગોઠવો",
     "sort_options": {
-      "last_updated": "છેલ્લે અપડેટ",
-      "latest": "છેલ્લે અપલોડ",
+      "last_updated": "છેલ્લી અપડેટ",
+      "latest": "છેલ્લી અપલોડ",
       "most_viewed": "સૌથી વધુ જોવાયેલ"
     },
     "view_type": {
       "grid": "ગ્રીડ",
       "list": "યાદી",
       "map": "નકશો",
-      "stats": "મેટ્રિક્સ"
+      "stats": "માપદંડ"
     }
   },
   "load_more": "વધુ લોડ કરો ↺",
@@ -56,6 +57,7 @@
   "name": "નામ",
   "next": "આગળ",
   "no_data": "કોઈ ડેટા નથી",
+  "no_groups_joined": "તમે કોઈપણ ગ્રુપમાં જોડાયા નથી",
   "no_results": "કોઈ પરિણામો મળ્યા નથી",
   "notifications": {
     "invalid_credentials": "તમે દાખલ કરેલ વપરાશકર્તા નામ અથવા પાસવર્ડ ખોટો છે.",
@@ -64,7 +66,7 @@
     "token_saved": "ટોકન સાચવેલું"
   },
   "observed_on": "પર અવલોકન",
-  "offline": "કોઈ ઇન્ટરનેટ કનેક્શન નથી",
+  "offline": "ઇન્ટરનેટ કનેક્શન નથી",
   "one_moment_please": "એક ક્ષણ કૃપા કરીને",
   "or": "અથવા",
   "permalink": "પરમાલિંક",
@@ -72,11 +74,11 @@
   "processing": "પ્રક્રિયા...",
   "read_more": "વધુ વાંચો",
   "save": "સાચવવું",
-  "search": "શોધ",
+  "search": "શોધો",
   "session_required": "સાઇન ઇન આવશ્યક છે",
-  "slider_left": "બાકી",
-  "slider_right": "અધિકાર",
-  "species_coverage": "પ્રજાતિઓ જૂથ કવરેજ",
+  "slider_left": "પાછળ",
+  "slider_right": "આગળ",
+  "species_coverage": "પ્રજાતિઓ ગ્રુપ કવરેજ",
   "success": "સફળતા",
   "temporal": {
     "observations": "અવલોકન",
@@ -85,5 +87,5 @@
   "toggle": "ટૉગલ કરો",
   "unauthorized": "અનધિકૃત વપરાશકર્તા",
   "unknown": "અજ્ઞાત",
-  "usergroups": "જૂથો"
+  "usergroups": "ગ્રૂપો"
 }

@@ -14,7 +14,7 @@
     "place": "ସ୍ଥାନ ନାମ",
     "spatial": "ସ୍ଥାନିକ କଭରେଜ୍ |",
     "title": "କଭରେଜ୍",
-    "wkt": "Wkt"
+    "wkt": "WKT"
   },
   "created_on": "ସୃଷ୍ଟି ହୋଇଛି",
   "date_accuracy": "ତାରିଖ ସଠିକତା",
@@ -80,6 +80,6 @@
     "uploading": "ଅପଲୋଡ୍ ..."
   },
   "use_in_observation": "ମନୋନୀତ ବ୍ୟବହାର କରନ୍ତୁ |",
-  "wkt": "Wkt",
+  "wkt": "WKT",
   "youtube_placeholder": "ଇନପୁଟ୍ ୟୁଟ୍ୟୁବ୍ ଲିଙ୍କ୍ |"
 }

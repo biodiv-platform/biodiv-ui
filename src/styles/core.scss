@@ -7,7 +7,7 @@ html,
 body,
 #__next {
   height: 100%;
-  background: var(--gray-50);
+  background: var(--chakra-colors-gray-50);
   scroll-behavior: smooth;
 }
 
@@ -66,8 +66,8 @@ span,
   &:focus {
     width: auto;
     height: auto;
-    background: var(--blue-500);
-    color: var(--white);
+    background: var(--chakra-colors-blue-500);
+    color: var(--chakra-colors-white);
     padding: 1rem;
   }
 }

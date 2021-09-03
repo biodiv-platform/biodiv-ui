@@ -30,7 +30,7 @@ const TreeContainer = styled.div`
     padding: 0;
   }
   .rst__row {
-    border: 1px solid var(--gray-400);
+    border: 1px solid var(--chakra-colors-gray-400);
     border-radius: 0.25rem;
   }
   .rst__moveHandle {
@@ -61,7 +61,7 @@ export default function PagesSidebar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return p.pages.length > 0 ? (
-    <TreeContainer className="fadeInUp">
+    <TreeContainer className="fade">
       {!isDesktop && (
         <Button colorScheme="blue" w="full" mb={4} onClick={onToggle} leftIcon={<MenuIcon />}>
           {t("page:sidebar.toggle")}

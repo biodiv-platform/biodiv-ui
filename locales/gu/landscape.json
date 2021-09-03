@@ -4,15 +4,15 @@
   "download_map": "નકશો ડાઉનલોડ કરો",
   "no_species_found": "કોઈ જાતિઓ સૂચિ મળી નથી",
   "observation": {
-    "fauna_list": "ફ્યુના સૂચિ",
-    "flora_list": "ફ્લોરા યાદી",
+    "fauna_list": "પ્રાણીસૃષ્ટિ ની સૂચિ",
+    "flora_list": "વનસ્પતિ ની સૂચિ",
     "life_list": {
-      "title": "નિરીક્ષણ સૂચિ"
+      "title": "નિરીક્ષણ ની સૂચિ"
     },
     "species_filter": "પ્રજાતિ ફિલ્ટર"
   },
-  "related_documents": "સંબંધિત દસ્તાવેજ (ઓ)",
-  "site_number": "સાઇટ #",
+  "related_documents": "સંબંધિત દસ્તાવેજો",
+  "site_number": "સાઇટ નં.",
   "title": "સંરક્ષિત વિસ્તારો",
   "update": {
     "success": "ક્ષેત્ર સાચવ્યું"

@@ -1,6 +1,8 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, GridItem, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import ExternalBlueLink from "@components/@core/blue-link/external";
 import OTPModal from "@components/auth/otp-modal";
+import { CheckboxField } from "@components/form/checkbox";
 import { PhoneNumberInputField } from "@components/form/phone-number";
 import { RadioInputField } from "@components/form/radio";
 import { RecaptchaField } from "@components/form/recaptcha";
@@ -52,12 +54,12 @@ function SignUpForm() {
               .email()
               .when("mobileNumber", {
                 is: (m) => !m,
-                then: Yup.string().required("either ${path} or mobile number is required")
+                then: Yup.string().required(t("user:email_or_mobile_required"))
               })
           : Yup.string().email().required(),
         password: Yup.string().min(8).required(),
         confirmPassword: Yup.string()
-          .oneOf([Yup.ref("password"), null], "Passwords do not match")
+          .oneOf([Yup.ref("password"), null], t("user:passwords_not_match"))
           .required(),
         gender: Yup.string().required(),
         profession: Yup.string().nullable(),
@@ -67,12 +69,14 @@ function SignUpForm() {
         location: Yup.string().required(),
         verificationType: Yup.string().required(),
         mode: Yup.string(),
+        terms: Yup.boolean().oneOf([true], t("user:terms.required")),
         recaptcha: Yup.string().required()
       })
     ),
     defaultValues: {
       verificationType: VERIFICATION_TYPE[0].value,
-      mode: VERIFICATION_MODE.MANUAL
+      mode: VERIFICATION_MODE.MANUAL,
+      terms: true
     }
   });
 
@@ -88,17 +92,17 @@ function SignUpForm() {
     }
   }, [watchAuth]);
 
-  const handleOnSubmit = async (v) => {
+  const handleOnSubmit = async ({ terms, ...v }) => {
     const verificationType =
       v.email && v.mobileNumber ? v.verificationType : VERIFICATION_TYPE[v.email ? 0 : 1].value;
+
     const payload = {
-      credentials: {
-        ...v,
-        verificationType
-      },
+      credentials: { ...v, verificationType },
       groupId
     };
+
     const { success, data } = await axCreateUser(payload);
+
     if (success && data?.status) {
       if (data?.verificationRequired) {
         setUser({ ...data?.user, vt: v.verificationType });
@@ -178,6 +182,22 @@ function SignUpForm() {
           </SimpleGrid>
           <LocationPicker />
           <RecaptchaField name="recaptcha" />
+          <Box mt={4}>
+            <CheckboxField name="terms" label="terms">
+              {t("user:terms.text")}
+              <ExternalBlueLink
+                mx={1}
+                href={SITE_CONFIG.PAGES.TERMS}
+                children={t("user:terms.terms")}
+              />
+              {t("common:and")}
+              <ExternalBlueLink
+                mx={1}
+                href={SITE_CONFIG.PAGES.PRIVACY}
+                children={t("user:terms.privacy")}
+              />
+            </CheckboxField>
+          </Box>
           <SubmitButton rightIcon={<ArrowForwardIcon />} w="full">
             {t("user:register")}
           </SubmitButton>

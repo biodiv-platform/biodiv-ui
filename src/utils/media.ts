@@ -116,7 +116,7 @@ export const getFallbackByMIME = (mime) => {
  * @return {*}  {string}
  */
 export const getDocumentPath = (resourceUrl: string): string => {
-  return `https://docs.google.com/viewer?embedded=true&url=${getDocumentFilePath(resourceUrl)}`;
+  return `/pdf-viewer/?file=${getDocumentFilePath(resourceUrl)}`;
 };
 
 export const getDocumentFilePath = (resourceUrl: string): string => {

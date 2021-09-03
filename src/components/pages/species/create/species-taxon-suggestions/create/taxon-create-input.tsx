@@ -64,7 +64,7 @@ export const TaxonCreateInputField = ({
         <Input
           id={name}
           placeholder={label}
-          defaultValue={getByPath(control.defaultValuesRef.current, name)}
+          defaultValue={getByPath(control._defaultValues, name)}
           {...register(name)}
         />
         {errors[name] && (

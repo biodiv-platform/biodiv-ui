@@ -14,7 +14,7 @@
     "place": "இடம் பெயர்",
     "spatial": "இடஞ்சார்ந்த பாதுகாப்பு",
     "title": "பாதுகாப்பு",
-    "wkt": "Wkt."
+    "wkt": "WKT"
   },
   "created_on": "அன்று உருவாக்கப்பட்ட",
   "date_accuracy": "தேதி துல்லியம்",
@@ -80,6 +80,6 @@
     "uploading": "பதிவேற்றம் ..."
   },
   "use_in_observation": "தேர்வு பயன்படுத்தவும்",
-  "wkt": "Wkt.",
+  "wkt": "WKT",
   "youtube_placeholder": "INPUT YOUTUBE LINK."
 }

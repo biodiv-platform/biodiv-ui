@@ -7,7 +7,7 @@ const QuillBox = styled.div`
   border-radius: 0.25rem;
   .ql-container,
   .ql-toolbar {
-    background: var(--white);
+    background: var(--chakra-colors-white);
     border-radius: 0.25rem;
   }
   .ql-container {

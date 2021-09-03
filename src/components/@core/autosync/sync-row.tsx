@@ -7,7 +7,7 @@ import ExternalBlueLink from "../blue-link/external";
 import { SyncInfo } from "./offline-sync";
 
 const PendingObservationBox = styled.div`
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--chakra-colors-gray-200);
   padding: 1rem;
   display: flex;
   img {

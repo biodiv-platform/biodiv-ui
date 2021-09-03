@@ -13,7 +13,7 @@ const DropzoneFieldContainer = (props: IDropzoneProps) => {
     <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
       <ObservationCreateProvider
         licensesList={props.licensesList}
-        observationAssets={form.control.defaultValuesRef.current[props.name]}
+        observationAssets={form.control._defaultValues[props.name]}
       >
         <DropzoneField {...props} />
       </ObservationCreateProvider>

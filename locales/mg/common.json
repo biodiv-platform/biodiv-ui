@@ -15,6 +15,7 @@
   },
   "activity": "asa",
   "add": "hametraka",
+  "and": "SY",
   "cancel": "hanafoana",
   "clear": "Mazava",
   "close": "AKAIKY",
@@ -56,6 +57,7 @@
   "name": "Anarana",
   "next": "Manaraka",
   "no_data": "Tsy misy data",
+  "no_groups_joined": "Tsy niditra ho vondrona hafa ianao",
   "no_results": "Tsy nisy valiny hita",
   "notifications": {
     "invalid_credentials": "Diso ny solon'anarana na ny tenimiafina nampidirinao.",

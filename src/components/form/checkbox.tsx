@@ -5,13 +5,22 @@ import { useController } from "react-hook-form";
 interface ITextBoxProps {
   name: string;
   label: string;
+  children?;
   mt?: number;
   mb?: number;
   disabled?: boolean;
   hint?: string;
 }
 
-export const CheckboxField = ({ name, label, mb = 4, hint, disabled, ...props }: ITextBoxProps) => {
+export const CheckboxField = ({
+  name,
+  label,
+  mb = 4,
+  hint,
+  disabled,
+  children,
+  ...props
+}: ITextBoxProps) => {
   const {
     field: { onChange, onBlur, value },
     fieldState
@@ -27,7 +36,7 @@ export const CheckboxField = ({ name, label, mb = 4, hint, disabled, ...props }:
         defaultIsChecked={value}
         isDisabled={disabled}
       >
-        {label}
+        {children || label}
       </Checkbox>
 
       <FormErrorMessage children={fieldState?.error?.message} />

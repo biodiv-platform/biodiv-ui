@@ -6,14 +6,14 @@
     "author": "लेखक",
     "booktitle": "पुस्तक का शीर्षक",
     "chapter": "अध्याय",
-    "doi": "डोई",
+    "doi": "DOI",
     "edition": "संस्करण",
     "editor": "संपादक",
     "extra": "अतिरिक्त",
     "file": "फ़ाइल",
     "howpublished": "कैसे प्रकाशित",
     "institution": "संस्थान",
-    "isbn": "आईएसबीएन",
+    "isbn": "ISBN",
     "journal": "पत्रिका",
     "language": "भाषा",
     "month": "महीना",
@@ -42,10 +42,10 @@
   "created_on": "पर बनाया",
   "description": "विवरण",
   "documents_found": "दस्तावेज़ मिले",
-  "doi": "डोई",
+  "doi": "DOI",
   "download": {
     "citation": "उद्धरण",
-    "pdf": "पीडीएफ"
+    "pdf": "PDF"
   },
   "edit": {
     "error": "इस दस्तावेज़ को अपडेट करने में त्रुटि हुई थी",

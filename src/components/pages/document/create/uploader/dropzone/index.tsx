@@ -10,7 +10,7 @@ import UploadInfo from "./upload-info";
 import UploadProcessing from "./upload-processing";
 
 const DropTargetBox = styled.div`
-  border: 2px dashed var(--gray-300);
+  border: 2px dashed var(--chakra-colors-gray-300);
   border-radius: 0.5rem;
   padding: 1rem;
   height: 14.4rem;
@@ -22,7 +22,7 @@ const DropTargetBox = styled.div`
     text-align: center;
   }
   &[data-dropping="true"] {
-    border-color: var(--blue-500);
+    border-color: var(--chakra-colors-blue-500);
   }
   &[data-has-resources="true"] {
     height: 10rem;

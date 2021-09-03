@@ -14,6 +14,7 @@
   "download_logs": "Téléchargements",
   "edit_profile": "Editer le profil",
   "email": "E-mail",
+  "email_or_mobile_required": "Un e-mail ou un numéro de téléphone est requis",
   "enabled": "Compte activé",
   "existing_user": "Vous avez déjà un compte?",
   "expired": "Compte expiré",
@@ -43,6 +44,7 @@
   "occupation": "Profession",
   "password": "Mot de passe",
   "password_expired": "Mot de passe expiré",
+  "passwords_not_match": "Les mots de passe ne correspondent pas",
   "permissions": "Autorisation",
   "register": "S'inscrire",
   "roles": "Rôles",
@@ -50,6 +52,12 @@
   "send_email": "Envoyer des emails",
   "send_push_notifications": "Envoyer des notifications push",
   "sign_up": "S'inscrire",
+  "terms": {
+    "privacy": "Politique de confidentialité",
+    "required": "Les Conditions d'utilisation et la Politique de confidentialité doivent être acceptées.",
+    "terms": "Conditions d'utilisation",
+    "text": "Je suis d'accord avec ce site"
+  },
   "update_error": "Impossible de mettre à jour",
   "update_password": "Mettre à jour le mot de passe",
   "updated": "Mis à jour avec succés",

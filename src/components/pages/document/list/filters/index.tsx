@@ -22,7 +22,7 @@ import FiltersList from "./list";
 const FilterWrapper = styled.div`
   height: 100%;
   overflow-y: scroll;
-  border-right: 1px solid var(--gray-300);
+  border-right: 1px solid var(--chakra-colors-gray-300);
 
   [data-accordion-item] {
     [data-accordion-panel] {
@@ -30,7 +30,7 @@ const FilterWrapper = styled.div`
     }
 
     > button[aria-expanded="true"] {
-      background: var(--gray-100);
+      background: var(--chakra-colors-gray-100);
     }
 
     > button > div {

@@ -15,6 +15,7 @@
   },
   "activity": "Activity",
   "add": "Add",
+  "and": "And",
   "cancel": "Cancel",
   "clear": "Clear",
   "close": "Close",
@@ -56,6 +57,7 @@
   "name": "Name",
   "next": "Next",
   "no_data": "No Data",
+  "no_groups_joined": "You have not joined any group",
   "no_results": "No results found",
   "notifications": {
     "invalid_credentials": "The username or password you entered is incorrect.",

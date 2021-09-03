@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 const DropTargetBox = styled.div`
-  border: 2px dashed var(--gray-300);
+  border: 2px dashed var(--chakra-colors-gray-300);
   border-radius: 0.5rem;
   padding: 1rem;
   display: flex;
@@ -18,7 +18,7 @@ const DropTargetBox = styled.div`
     text-align: center;
   }
   &[data-dropping="true"] {
-    border-color: var(--blue-500);
+    border-color: var(--chakra-colors-blue-500);
   }
   &[data-has-resources="false"] {
     grid-column: 1/6;

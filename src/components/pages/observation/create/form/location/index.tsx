@@ -64,7 +64,7 @@ const LocationPicker = () => {
 
   const watchLatLng = form.watch([FK.latitude.name, FK.longitude.name, "resources"]);
 
-  const defaultValues = form.control.defaultValuesRef.current;
+  const defaultValues = form.control._defaultValues;
 
   const { isOpen, onToggle } = useDisclosure();
   const [zoom, setZoom] = useState(initialZoom);
