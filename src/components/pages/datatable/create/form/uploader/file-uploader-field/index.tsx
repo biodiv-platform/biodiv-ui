@@ -33,7 +33,6 @@ export default function ImageUploaderField({
   useEffect(() => {
     if (value?.length > 0) {
       field.onChange(value);
-      setShowMapping(true);
     }
   }, [value]);
 
@@ -43,6 +42,7 @@ export default function ImageUploaderField({
       <DropTarget
         simpleUpload={simpleUpload}
         setFieldMapping={setFieldMapping}
+        setShowMapping={setShowMapping}
         setValue={setvalue}
       />
       <FormErrorMessage children={fieldState?.error?.message} />

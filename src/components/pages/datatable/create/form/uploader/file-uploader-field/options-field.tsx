@@ -5,14 +5,14 @@ import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { OBSERVATION_FIELDS } from "@static/observation-create";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
-import { useFieldArray } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
 export default function Fields({ name, fieldMapping, showMapping, setShowMapping }) {
   const { t } = useTranslation();
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
   const [fieldValues, setFieldValues] = useState<any[]>([]);
-
   const { fields, append, remove } = useFieldArray({ name });
+  const form = useFormContext();
 
   const resetMappingTable = () => {
     setTableHeaders([]);
@@ -32,7 +32,7 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
         setFieldValues((prevState) => [...prevState, Object.values(row)]);
       });
 
-      append(Object.keys(rowData[0]).map(() => ({ fieldKey: "" })));
+      append(Object.keys(rowData[0]).map(() => ({ fieldKey: undefined })));
     }
   }, [fieldMapping, showMapping]);
 
@@ -44,15 +44,17 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
     return row;
   };
 
+  const toggleFieldMapping = () => {
+    resetMappingTable();
+    form.setValue("filename", "");
+    setShowMapping(false);
+  };
+
   return (
     <ToggleablePanel icon="🧩" title={t("datatable:field_mapping_table")}>
       <Box p={4} pb={0}>
         <Stack m={2} direction="row-reverse">
-          <Button
-            colorScheme="blue"
-            onClick={() => setShowMapping(false)}
-            leftIcon={<ArrowBackIcon />}
-          >
+          <Button colorScheme="blue" onClick={toggleFieldMapping} leftIcon={<ArrowBackIcon />}>
             {t("datatable:upload_again")}
           </Button>
         </Stack>
@@ -70,6 +72,7 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
                 {fields.map((field, index) => (
                   <Td key={field.id}>
                     <SelectInputField
+                      isRequired={true}
                       name={`columnsMapping.${index}.fieldKey`}
                       label={t("common:actions.flag.category")}
                       options={OBSERVATION_FIELDS}

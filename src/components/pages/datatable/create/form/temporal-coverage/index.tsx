@@ -17,7 +17,7 @@ export default function TemporalCoverage() {
       <Box p={4} pb={0}>
         <SimpleGrid columns={{ md: 2 }} spacing={{ md: 4 }}>
           <DateRangePickerField
-            hasMaxDate={false}
+            hasMaxDate={true}
             disableInput={isDisable}
             name="observedDateRange"
             label={t("form:date_range")}

@@ -41,13 +41,15 @@ const accept = [
 interface userGroupDropTarget {
   setValue;
   setFieldMapping;
+  setShowMapping;
   simpleUpload?: boolean;
 }
 
 export default function DropTarget({
   setValue,
   simpleUpload,
-  setFieldMapping
+  setFieldMapping,
+  setShowMapping
 }: userGroupDropTarget) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
@@ -62,6 +64,7 @@ export default function DropTarget({
     if (success) {
       setFieldMapping(data.excelJson);
       setValue(data.path);
+      setShowMapping(true);
       notification(t("datatable:notifications.sheet_upload_success"), NotificationType.Success);
     } else {
       notification(t("datatable:notifications.sheet_upload_error"), NotificationType.Error);

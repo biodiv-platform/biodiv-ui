@@ -26,11 +26,12 @@ export const getServerSideProps = async (ctx) => {
     ctx.query.datatableId,
     {}
   );
+
   return {
     props: {
       observationData: {
         l: datatableShow?.observationList ? datatableShow.observationList : [],
-        n: datatableShow.observationList?.length,
+        n: datatableShow?.observationList?.length || 0,
         datatableId: ctx.query.datatableId,
         hasMore: false
       },
