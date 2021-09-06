@@ -51,6 +51,17 @@ export const UserGroupListTableRows = [
     }
   },
   {
+    Header: "Participants",
+    accessor: "memberCount",
+    listOnly: true
+  },
+  {
+    Header: "Type",
+    accessor: "isParticipatory",
+    Cell: ({ value }) => (value ? "Open" : "Closed"),
+    listOnly: true
+  },
+  {
     Header: "Join",
     accessor: "id",
     style: { width: "12rem" },

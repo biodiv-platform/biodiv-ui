@@ -10,9 +10,11 @@ export default function UserGroupListTab() {
     return groupListData.filter((item) => !!groupJoinedStatus[item.id]);
   }, [groupJoinedStatus]);
 
+  const columns = useMemo(() => UserGroupListTableRows.filter((col) => !col.listOnly), []);
+
   return (
     <ResponsiveContainer mb={12}>
-      <BasicTable columns={UserGroupListTableRows} data={groupUserFilterData} />
+      <BasicTable columns={columns} data={groupUserFilterData} />
     </ResponsiveContainer>
   );
 }
