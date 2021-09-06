@@ -6,12 +6,15 @@ const SITE_CONFIG_EXAMPLE = {
     ACTIVE: true
   },
   CUSTOM_FIELDS: {
-    ACTIVE: false
+    ACTIVE: true
   },
   DASHBOARD: {
     ACTIVE: true
   },
   DATASET: {
+    ACTIVE: true
+  },
+  DATATABLE: {
     ACTIVE: true
   },
   DISCUSSION: {
@@ -21,6 +24,9 @@ const SITE_CONFIG_EXAMPLE = {
     ACTIVE: true,
     GEOENTITY_SEARCH: true
   },
+  DOWNLOAD_LOGS: {
+    ACTIVE: true
+  },
   FEEDBACK: {
     ACTIVE: true,
     URL: "https://forms.gle/G4Gi6NpuvnRRuDCc8"
@@ -28,7 +34,7 @@ const SITE_CONFIG_EXAMPLE = {
   FILTER: {
     DISTRICT: true,
     STATE: true,
-    PROTECTED_AREAS: true,
+    PROTECTED_AREAS: false,
     TAHSIL: true
   },
   FOOTER: {
@@ -61,7 +67,7 @@ const SITE_CONFIG_EXAMPLE = {
   },
   HEADER: {
     IDAO: {
-      ACTIVE: true,
+      ACTIVE: false,
       LINK: "x"
     }
   },
@@ -75,23 +81,16 @@ const SITE_CONFIG_EXAMPLE = {
     STATS: true
   },
   LANDSCAPE: {
-    ACTIVE: true
+    ACTIVE: false
   },
   LANG: {
     DEFAULT: "en",
     DEFAULT_ID: 205,
     LIST: {
       en: {
+        I: "english",
         ID: 205,
         NAME: "English"
-      },
-      fr: {
-        ID: 219,
-        NAME: "Français"
-      },
-      mg: {
-        ID: 365,
-        NAME: "Malagasy"
       }
     },
     SWITCHER: true
@@ -105,8 +104,8 @@ const SITE_CONFIG_EXAMPLE = {
   MAP: {
     ACTIVE: true,
     CENTER: {
-      latitude: 23.2,
-      longitude: 83,
+      latitude: 20.7,
+      longitude: 79.05,
       zoom: 0
     },
     COUNTRY: "IN",
@@ -119,7 +118,10 @@ const SITE_CONFIG_EXAMPLE = {
     ACTIVE: false
   },
   PAGES: {
-    ACTIVE: true
+    ABOUT: "/page/show/1",
+    ACTIVE: true,
+    PRIVACY: "/page/show/1",
+    TERMS: "/page/show/1"
   },
   PARTICIPANTS: {
     ACTIVE: true
@@ -138,10 +140,7 @@ const SITE_CONFIG_EXAMPLE = {
     },
     ICON: "/get/crop/logo/IBP.png",
     TITLE: {
-      en: "India Biodiversity Portal",
-      fr: "Portail de la biodiversité de l'Inde",
-      hi: "भारत जैव विविधता पोर्टल",
-      mg: "Portal momba ny harena voajanahary India"
+      en: "India Biodiversity Portal"
     },
     TITLE_LOCAL: "xyz",
     URL: "http://localhost:3000"
@@ -150,14 +149,14 @@ const SITE_CONFIG_EXAMPLE = {
     ACTIVE: true
   },
   TAXONOMY: {
-    ROOT: 265799
+    ROOT: 1
   },
   TOKENS: {
     GMAP: "AIzax",
     MAPBOX: "pk.x",
     OAUTH_GOOGLE: "x.apps.googleusercontent.com",
     RECAPTCHA: "x",
-    SENTRY_DSN: null
+    SENTRY_DSN: false
   },
   TRACKING: {
     ENABLED: true,
