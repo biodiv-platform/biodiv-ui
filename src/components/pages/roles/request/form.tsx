@@ -34,7 +34,7 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     resolver: yupResolver(
       Yup.object().shape({
         role: Yup.string().required(),
-        userId: isAdmin ? Yup.number().required() : Yup.number()
+        userId: isAdmin ? Yup.mixed().required() : Yup.number()
       })
     )
   });

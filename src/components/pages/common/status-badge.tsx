@@ -12,7 +12,7 @@ interface TaxonStatusBadgeProps {
 function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
   const { t } = useTranslation();
 
-  const taxonLink = `/namelist?taxon=${taxonId}`;
+  const taxonLink = `/taxonomy/list?taxonId=${taxonId}`;
 
   switch (reco?.status) {
     case "ACCEPTED":
