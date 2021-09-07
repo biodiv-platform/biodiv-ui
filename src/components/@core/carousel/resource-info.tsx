@@ -21,7 +21,12 @@ import Rating from "react-rating";
 
 import ExternalBlueLink from "../blue-link/external";
 
-function CarouselResourceInfo({ currentResource, observationId }) {
+interface CarouselResourceInfoProps {
+  currentResource;
+  observationId?;
+}
+
+function CarouselResourceInfo({ currentResource, observationId }: CarouselResourceInfoProps) {
   const { t } = useTranslation();
 
   const onRateHandler = async (newRating) => {
@@ -36,14 +41,14 @@ function CarouselResourceInfo({ currentResource, observationId }) {
   };
 
   return (
-    <Box position="absolute" top={4} right={4} left={0} display="flex" justifyContent="flex-end">
-      <Popover placement="bottom-end" closeOnBlur={false} isLazy={true}>
+    <Box position="absolute" top={4} right={0} left={4} display="flex">
+      <Popover placement="bottom-start" closeOnBlur={false} isLazy={true}>
         <PopoverTrigger>
           <IconButton
             aria-label={t("observation:resource_info")}
             icon={<InfoOutlineIcon />}
             zIndex={4}
-            opacity={0.2}
+            opacity={0.4}
             isRound={true}
             _hover={{ opacity: 1 }}
           />
@@ -67,6 +72,7 @@ function CarouselResourceInfo({ currentResource, observationId }) {
               <Box>{t("observation:rating")}</Box>
               <Box>
                 <Rating
+                  readonly={!observationId}
                   initialRating={currentResource?.resource?.rating}
                   onChange={onRateHandler}
                   emptySymbol={<StarOutlineIcon />}
