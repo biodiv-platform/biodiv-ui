@@ -13,7 +13,6 @@ const ObservationShowPage = ({ observation, traits, speciesGroups }) => (
     speciesGroups={speciesGroups}
   />
 );
-
 export const getServerSideProps = async (ctx) => {
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { success, data } = await axGetObservationById(ctx.query.observationId);

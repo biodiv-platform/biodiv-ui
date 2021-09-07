@@ -7,11 +7,11 @@ import { axGetObservationByDatatableId, axGetspeciesGroups } from "@services/obs
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import React from "react";
 
-const DatatableShowPage = ({ datatableShow, speciesGroups, observationData, filter }) => {
+const DatatableShowPage = ({ datatableShow, speciesGroups, observationData, filter }) => (
   <DataTableObservationListProvider observationData={observationData} filter={filter}>
     <DataTableShowPageComponent datatableShow={datatableShow} speciesGroups={speciesGroups} />
-  </DataTableObservationListProvider>;
-};
+  </DataTableObservationListProvider>
+);
 export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
 
