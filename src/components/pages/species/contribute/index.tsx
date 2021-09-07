@@ -38,7 +38,13 @@ export default function SpeciesContributePageComponent() {
           <b>{t("species:contribute.offline.title")}</b>
           {t("species:contribute.offline.description")}
           <Box my={4}>
-            <Button colorScheme="blue" leftIcon={<DownloadIcon />} mr={4}>
+            <Button
+              as="a"
+              href="/biodiv/content/SimpleSpeciesPagesTemplateWithExample.xlsx"
+              colorScheme="blue"
+              leftIcon={<DownloadIcon />}
+              mr={4}
+            >
               {t("species:contribute.download")}
             </Button>
             <Button
