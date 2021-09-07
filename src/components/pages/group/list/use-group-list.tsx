@@ -1,5 +1,5 @@
 import useGlobalState from "@hooks/use-global-state";
-import { axMemberGroupList } from "@services/usergroup.service";
+import { axMemberGroupList, axMemberGroupListByUserId } from "@services/usergroup.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER } from "@static/documnet-list";
 import { removeEmptyKeys } from "@utils/basic";
@@ -14,6 +14,7 @@ interface GroupListFilterContextProps {
   groupListData?;
   groupJoinedStatus?;
   setGroupJoinedStatus?;
+  userId?;
 
   speciesGroups?;
   habitat?;
@@ -35,12 +36,14 @@ export const GroupListFilterProvider = (props) => {
   const [groupJoinedStatus, setGroupJoinedStatus] = useState<any>();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (props.userId) {
+      axMemberGroupListByUserId(props.userId).then(({ data }) => setGroupJoinedStatus(data));
+    } else if (isLoggedIn) {
       axMemberGroupList().then(({ data }) => setGroupJoinedStatus(data));
     } else {
       setGroupJoinedStatus({});
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, props.userId]);
 
   useEffect(() => {
     if (isBrowser) {
@@ -98,7 +101,7 @@ export const GroupListFilterProvider = (props) => {
       value={{
         filter: filter.f,
         groupListData,
-
+        userId: props.userId,
         addFilter,
         removeFilter,
         resetFilter,

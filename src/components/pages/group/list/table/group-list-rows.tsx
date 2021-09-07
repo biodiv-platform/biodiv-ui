@@ -65,6 +65,7 @@ export const UserGroupListTableRows = [
     Header: "Join",
     accessor: "id",
     style: { width: "12rem" },
+    authorOnly: true,
     Cell: ({ value, cell }) => {
       const { groupJoinedStatus, setGroupJoinedStatus } = useGroupListFilter();
       const { t } = useTranslation();
