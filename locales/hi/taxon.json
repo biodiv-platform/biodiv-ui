@@ -2,6 +2,10 @@
   "create": {
     "title": "टैक्सोन जोड़ें"
   },
+  "grant": {
+    "button": "अनुदान",
+    "title": "अनुदान अनुमति"
+  },
   "modal": {
     "activity": "गतिविधि",
     "attributes": {

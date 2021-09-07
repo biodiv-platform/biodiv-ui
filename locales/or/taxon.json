@@ -2,6 +2,10 @@
   "create": {
     "title": "ଟ୍ୟାକ୍ସନ୍ ଯୋଡନ୍ତୁ |"
   },
+  "grant": {
+    "button": "ଅନୁଦାନ",
+    "title": "ଅନୁମତି"
+  },
   "modal": {
     "activity": "କାର୍ଯ୍ୟକଳାପ",
     "attributes": {

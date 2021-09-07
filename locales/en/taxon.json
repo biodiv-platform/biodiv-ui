@@ -2,6 +2,10 @@
   "create": {
     "title": "Add Taxon"
   },
+  "grant": {
+    "button": "Grant",
+    "title": "Grant Permission"
+  },
   "modal": {
     "activity": "Activity",
     "attributes": {

@@ -2,6 +2,10 @@
   "create": {
     "title": "ટેક્સન ઉમેરો"
   },
+  "grant": {
+    "button": "અનુદાન",
+    "title": "અનુમતિ આપો"
+  },
   "modal": {
     "activity": "પ્રવૃત્તિ",
     "attributes": {

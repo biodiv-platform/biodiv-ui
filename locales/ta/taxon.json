@@ -2,6 +2,10 @@
   "create": {
     "title": "டாக்கன் சேர்க்கவும்"
   },
+  "grant": {
+    "button": "மானியம்",
+    "title": "அனுமதி வழங்கவும்"
+  },
   "modal": {
     "activity": "செயல்பாடு",
     "attributes": {

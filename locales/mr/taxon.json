@@ -2,6 +2,10 @@
   "create": {
     "title": "करदाता जोडा"
   },
+  "grant": {
+    "button": "अनुदान",
+    "title": "परवानगी द्या"
+  },
   "modal": {
     "activity": "क्रियाकलाप",
     "attributes": {
