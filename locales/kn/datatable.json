@@ -10,6 +10,9 @@
   "found": "ಡೇಟಾ ಮಾಡಬಹುದಾದದು",
   "geographical_coverage": "ಭೌಗೋಳಿಕ ವ್ಯಾಪ್ತಿ",
   "is_verified": "ವೀಕ್ಷಣೆ ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+  "list": {
+    "title": "ಅಂಕಿಅಂಶಗಳು"
+  },
   "location": "ಸ್ಥಳ",
   "location_accuracy": "ಸ್ಥಳ ನಿಖರತೆ",
   "location_scale": "ಸ್ಥಳ ಸ್ಕೇಲ್",

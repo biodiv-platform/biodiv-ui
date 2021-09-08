@@ -10,6 +10,9 @@
   "found": "डेटा उपलब्ध आढळले",
   "geographical_coverage": "भौगोलिक कव्हरेज",
   "is_verified": "निरीक्षण सत्यापित",
+  "list": {
+    "title": "डेटाटेबल्स"
+  },
   "location": "स्थान",
   "location_accuracy": "स्थान अचूकता",
   "location_scale": "स्थान स्केल",

@@ -11,7 +11,7 @@ export default function CheckListAnnotation({ customData }) {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📚 {t("observation:checklist_annotation")}</BoxHeading>
-      <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
+      <SimpleGrid columns={[1, 1, 5, 5]} spacing={2} p={4}>
         {Object.keys(customData).map(
           (key, index) =>
             customData[key] && (

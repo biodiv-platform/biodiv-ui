@@ -1,6 +1,7 @@
 import { CalendarIcon } from "@chakra-ui/icons";
 import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
+import ScientificName from "@components/@core/scientific-name";
 import ObservationStatusBadge from "@components/pages/common/status-badge";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
@@ -10,6 +11,7 @@ import LocationIcon from "@icons/location";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadableFromUTC } from "@utils/date";
+import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -33,11 +35,11 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
             pt={2}
             mb={1}
             className="elipsis-2"
-            title={o?.recoShow?.recoIbp?.scientificName}
+            title={stripTags(o?.recoShow?.recoIbp?.scientificName)}
           >
-            <Text as="i" mr={2}>
-              {o?.recoShow?.recoIbp?.scientificName || t("common:unknown")}
-            </Text>
+            <Box mr={2}>
+              <ScientificName value={o?.recoShow?.recoIbp?.scientificName || t("common:unknown")} />
+            </Box>
             <ObservationStatusBadge
               reco={o.recoShow?.recoIbp}
               crumbs={o.recoShow?.recoIbp?.breadCrumbs}

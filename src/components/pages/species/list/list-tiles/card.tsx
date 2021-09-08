@@ -1,5 +1,6 @@
 import { Box, Heading, Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
+import ScientificName from "@components/@core/scientific-name";
 import { RESOURCE_SIZE } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getResourceThumbnail } from "@utils/media";
@@ -27,12 +28,9 @@ export default function GridViewCard({ o }) {
             />
           </Box>
           <Box h="4.6rem" p={4} bg="gray.100">
-            <Heading
-              className="elipsis-2"
-              size="sm"
-              title={simpleName}
-              dangerouslySetInnerHTML={{ __html: name }}
-            />
+            <Heading className="elipsis-2" size="sm" title={simpleName}>
+              <ScientificName value={name} />
+            </Heading>
           </Box>
         </Link>
       </LocalLink>

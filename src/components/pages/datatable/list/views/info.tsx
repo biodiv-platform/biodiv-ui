@@ -1,6 +1,5 @@
 import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import DocumentIcon from "@components/pages/document/common/document-icon";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import useGlobalState from "@hooks/use-global-state";
 import CalendarIcon from "@icons/calendar";
@@ -63,7 +62,6 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
           <LocalLink href={`/datatable/show/${datatable.id}`}>
             <a>
               <HStack alignItems="center" spacing={4}>
-                <DocumentIcon />
                 <Heading
                   fontSize="lg"
                   className="elipsis-2"

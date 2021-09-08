@@ -10,6 +10,9 @@
   "found": "ડેટાબેટેબલ મળી",
   "geographical_coverage": "ભૌગોલિક કવરેજ",
   "is_verified": "નિરીક્ષણ ચકાસાયેલ",
+  "list": {
+    "title": "ડેટાબેલ્સ"
+  },
   "location": "સ્થાન",
   "location_accuracy": "સ્થાન ચોકસાઈ",
   "location_scale": "સ્થાન સ્કેલ",

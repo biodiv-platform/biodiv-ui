@@ -10,6 +10,9 @@
   "found": "Datatable காணப்பட்டது",
   "geographical_coverage": "புவியியல் பாதுகாப்பு",
   "is_verified": "கவனிப்பு சரிபார்க்கப்பட்டது",
+  "list": {
+    "title": "தரவு"
+  },
   "location": "இருப்பிடம்",
   "location_accuracy": "இருப்பிட துல்லியம்",
   "location_scale": "இருப்பிட அளவுகோல்",

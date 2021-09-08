@@ -10,6 +10,9 @@
   "found": "Datatable కనుగొనబడింది",
   "geographical_coverage": "భౌగోళిక కవరేజ్",
   "is_verified": "పరిశీలన ధృవీకరించబడింది",
+  "list": {
+    "title": "డేటాబేస్‌లు"
+  },
   "location": "స్థానం",
   "location_accuracy": "స్థానం ఖచ్చితత్వం",
   "location_scale": "స్థానం స్థాయి",

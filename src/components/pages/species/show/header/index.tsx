@@ -3,12 +3,12 @@ import DeleteActionButton from "@components/@core/action-buttons/delete";
 import FollowActionButton from "@components/@core/action-buttons/follow";
 import ShareActionButton from "@components/@core/action-buttons/share";
 import { PageHeading } from "@components/@core/layout";
+import ScientificName from "@components/@core/scientific-name";
 import TaxonStatusBadge from "@components/pages/common/status-badge";
 import { axDeleteSpecies, axFollowSpecies } from "@services/species.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { SPECIES_NAME_PREFERRED_UPDATED } from "@static/events";
 import { getLocalIcon, getResourceThumbnail } from "@utils/media";
-import { getInjectableHTML } from "@utils/text";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -20,7 +20,7 @@ function SpeciesHeader() {
   const { t } = useTranslation();
   const { species, permissions } = useSpecies();
   const speciesTitle = [
-    species.taxonomyDefinition?.normalizedForm || t("unknown"),
+    species.taxonomyDefinition?.normalizedForm || t("common:unknown"),
     t("header:menu_secondary.species.title")
   ].join(" | ");
 
@@ -71,11 +71,7 @@ function SpeciesHeader() {
       <Spacer />
       <Stack direction="column" p={3} spacing={4}>
         <PageHeading className="fadeInUp" mb={0}>
-          <Box
-            dangerouslySetInnerHTML={{
-              __html: getInjectableHTML(species?.taxonomyDefinition?.italicisedForm)
-            }}
-          />
+          <ScientificName value={species?.taxonomyDefinition?.italicisedForm} />
         </PageHeading>
 
         {prefferedCommonName && (
