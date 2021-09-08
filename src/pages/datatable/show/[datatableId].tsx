@@ -7,17 +7,11 @@ import { axGetObservationByDatatableId, axGetspeciesGroups } from "@services/obs
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import React from "react";
 
-import Error from "../../_error";
-
-const DatatableShowPage = ({ datatableShow, speciesGroups, observationData, filter, success }) =>
-  success ? (
-    <DataTableObservationListProvider observationData={observationData} filter={filter}>
-      <DataTableShowPageComponent datatableShow={datatableShow} speciesGroups={speciesGroups} />
-    </DataTableObservationListProvider>
-  ) : (
-    <Error statusCode={404} />
-  );
-
+const DatatableShowPage = ({ datatableShow, speciesGroups, observationData, filter }) => (
+  <DataTableObservationListProvider observationData={observationData} filter={filter}>
+    <DataTableShowPageComponent datatableShow={datatableShow} speciesGroups={speciesGroups} />
+  </DataTableObservationListProvider>
+);
 export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
 
@@ -27,21 +21,27 @@ export const getServerSideProps = async (ctx) => {
     {}
   );
 
-  return {
-    props: {
-      observationData: {
-        l: datatableShow?.observationList ? datatableShow.observationList : [],
-        n: datatableShow?.observationList?.length || 0,
-        datatableId: ctx.query.datatableId,
-        hasMore: false
-      },
-      filter: DEFAULT_PARAMS,
-      datatableShow,
-      speciesGroups,
-      nextOffset,
-      success
-    }
-  };
+  return success
+    ? {
+        props: {
+          observationData: {
+            l: datatableShow?.observationList ? datatableShow.observationList : [],
+            n: datatableShow?.observationList?.length || 0,
+            datatableId: ctx.query.datatableId,
+            hasMore: false
+          },
+          filter: DEFAULT_PARAMS,
+          datatableShow,
+          speciesGroups,
+          nextOffset
+        }
+      }
+    : {
+        redirect: {
+          permanent: false,
+          destination: "/datatable/list"
+        }
+      };
 };
 
 export default DatatableShowPage;

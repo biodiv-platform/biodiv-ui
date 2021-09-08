@@ -5,6 +5,7 @@
   "basis_of_record": "பதிவு அடிப்படையில்",
   "contributor": "பங்களிப்பவர்",
   "create_datatable": "Datatable உருவாக்க",
+  "deleted_datatable": "நீக்கப்பட்ட தரவு",
   "field_mapping_table": "புலம் மேப்பிங் அட்டவணை",
   "files_upload": "கோப்புகள் பதிவேற்றங்கள்",
   "found": "Datatable காணப்பட்டது",
@@ -19,7 +20,8 @@
     "error": "Datatable உருவாக்க முடியவில்லை",
     "sheet_upload_error": "தாள் பதிவேற்ற முடியவில்லை",
     "sheet_upload_success": "வெற்றிகரமாக பதிவேற்றப்பட்டது",
-    "success": "Datatable வெற்றிகரமாக உருவாக்கப்பட்டது"
+    "success": "Datatable வெற்றிகரமாக உருவாக்கப்பட்டது",
+    "success_deleted": "வெற்றிகரமாக நீக்கப்பட்டது தரவுத்தளம்"
   },
   "others": "மற்றவைகள்",
   "party": "கட்சி",

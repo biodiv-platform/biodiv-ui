@@ -1,5 +1,6 @@
 import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import { stripSpecialCharacters } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -11,11 +12,11 @@ export default function CheckListAnnotation({ customData }) {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📚 {t("observation:checklistAnnotation")}</BoxHeading>
-      <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
+      <SimpleGrid ml={4} columns={[1, 1, 5, 5]} spacing={2}>
         {Object.keys(customData).map(
           (key, index) =>
             customData[key] && (
-              <ResponsiveInfo key={index} title={key}>
+              <ResponsiveInfo key={index} title={stripSpecialCharacters(key)}>
                 <Stack ml={4} isInline={true}>
                   <Text>{`${customData[key]}`}</Text>
                 </Stack>

@@ -5,6 +5,7 @@
   "basis_of_record": "Fototry ny firaketana an-tsoratra",
   "contributor": "mpiara-miasa",
   "create_datatable": "Mamorona datatable",
+  "deleted_datatable": "Voafafa Datatable",
   "field_mapping_table": "Latabatra sarintany an-tsaha",
   "files_upload": "File download",
   "found": "Hita Datatable",
@@ -19,7 +20,8 @@
     "error": "Tsy afaka namorona datatable",
     "sheet_upload_error": "Tsy afaka nampiditra takelaka",
     "sheet_upload_success": "Nalefa soa aman-tsara ny taratasy",
-    "success": "Ditabable dia namorona soa aman-tsara"
+    "success": "Ditabable dia namorona soa aman-tsara",
+    "success_deleted": "Nesorina tamim-pahombiazana Datatable"
   },
   "others": "Ny hafa",
   "party": "Fety",

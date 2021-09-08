@@ -31,7 +31,8 @@ export const getServerSideProps = async (ctx) => {
       groupFilter: {
         userGroupList: groupListExpanded.data,
         speciesGroups: speciesGroups.data,
-        habitat: habitat.data
+        habitat: habitat.data,
+        userId: user.id
       },
       success
     }

@@ -5,6 +5,7 @@
   "basis_of_record": "రికార్డు ఆధారంగా",
   "contributor": "సహకారము",
   "create_datatable": "Datatable సృష్టించండి",
+  "deleted_datatable": "డేటాబేస్ తొలగించబడింది",
   "field_mapping_table": "ఫీల్డ్ మ్యాపింగ్ టేబుల్",
   "files_upload": "ఫైల్స్ అప్లోడ్లు",
   "found": "Datatable కనుగొనబడింది",
@@ -19,7 +20,8 @@
     "error": "Datatable సృష్టించడం సాధ్యం కాలేదు",
     "sheet_upload_error": "షీట్ను అప్లోడ్ చేయడం సాధ్యం కాలేదు",
     "sheet_upload_success": "విజయవంతంగా అప్లోడ్ చేయబడిన షీట్",
-    "success": "Datatable విజయవంతంగా సృష్టించబడింది"
+    "success": "Datatable విజయవంతంగా సృష్టించబడింది",
+    "success_deleted": "విజయవంతంగా తొలగించబడిన డేటాటేబుల్"
   },
   "others": "ఇతరులు",
   "party": "పార్టీ",

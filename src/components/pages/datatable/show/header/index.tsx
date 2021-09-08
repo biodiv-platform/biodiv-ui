@@ -23,9 +23,9 @@ export default function Header({ datatable, authorName }) {
       {adminOrAuthor(datatable.uploaderId) && (
         <DeleteActionButton
           observationId={datatable?.id}
-          title={t("observation:remove.title")}
+          title={t("datatable:deleted_datatable")}
           description={t("observation:remove.description")}
-          deleted={t("observation:remove.success")}
+          deleted={t("datatable:notifications.success_deleted")}
           deleteFunc={axDeleteObservationByDatatableId}
         />
       )}

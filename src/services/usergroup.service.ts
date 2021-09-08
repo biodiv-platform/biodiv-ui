@@ -62,6 +62,15 @@ export const axMemberGroupList = async () => {
     return { success: false, data: [] };
   }
 };
+export const axMemberGroupListByUserId = async (userId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/member/list/${userId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
 
 export const axUserGroupCreate = async (payload) => {
   try {
