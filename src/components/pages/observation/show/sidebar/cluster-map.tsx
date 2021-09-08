@@ -41,7 +41,10 @@ export default function ClusterMap({
   borderRadius = "md"
 }: ClusterMapProps) {
   const { lang } = useTranslation();
-  const defaultViewPort = React.useMemo(() => getMapCenter(3.1, { latitude, longitude }), []);
+  const defaultViewPort = React.useMemo(
+    () => getMapCenter(3.1, latitude ? { latitude, longitude } : {}),
+    []
+  );
 
   const fetchGridData = async (geoProps) => {
     const params = {
