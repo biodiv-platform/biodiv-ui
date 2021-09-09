@@ -2,6 +2,10 @@
   "create": {
     "title": "Ajouter un taxon"
   },
+  "grant": {
+    "button": "Accorder",
+    "title": "Donner la permission"
+  },
   "modal": {
     "activity": "Activité",
     "attributes": {

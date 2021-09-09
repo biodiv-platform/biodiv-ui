@@ -89,7 +89,11 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
         position="absolute"
         top="0"
         right="0"
-        size="lg"
+        size="sm"
+        m={4}
+        bg="red.500"
+        _hover={{ bg: "red.500" }}
+        color="white"
         onClick={() => removeObservationAsset(resource.hashKey)}
       />
       <Flex direction="column" flexShrink={0}>

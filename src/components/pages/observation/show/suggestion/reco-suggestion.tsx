@@ -1,6 +1,7 @@
 import { Avatar, AvatarGroup, Box, Button, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
+import ScientificName from "@components/@core/scientific-name";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
@@ -15,6 +16,7 @@ import {
 } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import { getUserImage } from "@utils/media";
+import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -100,12 +102,14 @@ export default function RecoSuggestion({
                     <BlueLink
                       className="elipsis"
                       href={`/species/show/${reco.speciesId}`}
-                      title={reco.scientificName}
+                      title={stripTags(reco.scientificName)}
                     >
-                      {reco.scientificName}
+                      <ScientificName value={reco.scientificName} />
                     </BlueLink>
                   ) : (
-                    <Text className="elipsis">{reco.scientificName}</Text>
+                    <Text className="elipsis">
+                      <ScientificName value={reco.scientificName} />
+                    </Text>
                   )}
                   <Text className="elipsis" color="gray.700" title={reco.commonName}>
                     {reco.commonName}

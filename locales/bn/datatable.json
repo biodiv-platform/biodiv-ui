@@ -11,6 +11,9 @@
   "found": "Datatable পাওয়া যায়",
   "geographical_coverage": "ভৌগোলিক কভারেজ",
   "is_verified": "পর্যবেক্ষণ যাচাই",
+  "list": {
+    "title": "ডেটাটেবল"
+  },
   "location": "অবস্থান",
   "location_accuracy": "অবস্থান সঠিকতা",
   "location_scale": "অবস্থান আইশের",

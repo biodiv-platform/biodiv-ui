@@ -1,0 +1,89 @@
+{
+  "basic_information": "Maelezo ya msingi.",
+  "bib": {
+    "abstract": "Maelezo.",
+    "address": "Anwani.",
+    "author": "Mwandishi",
+    "booktitle": "Kichwa cha Kitabu.",
+    "chapter": "Sura ya",
+    "doi": "DOI.",
+    "edition": "Toleo",
+    "editor": "Mhariri.",
+    "extra": "Ziada",
+    "file": "Faili.",
+    "howpublished": "Jinsi kuchapishwa",
+    "institution": "Taasisi",
+    "isbn": "ISBN.",
+    "journal": "Journal.",
+    "language": "Lugha",
+    "month": "Mwezi",
+    "note": "Kumbuka",
+    "number": "Idadi.",
+    "organization": "Shirika.",
+    "pages": "Kurasa.",
+    "publisher": "Mchapishaji",
+    "schema": {
+      "error": "Haiwezi kurejesha Schema ya Bibtex."
+    },
+    "school": "Shule.",
+    "series": "Mfululizo.",
+    "title": "Kichwa",
+    "type": "Andika",
+    "url": "URL.",
+    "volume": "Volume.",
+    "year": "Mwaka."
+  },
+  "contribution": "Mchango",
+  "create": {
+    "error": "Haiwezi kuunda hati.",
+    "success": "Hati imeundwa kwa mafanikio.",
+    "title": "Unda hati."
+  },
+  "created_on": "Imeundwa On.",
+  "description": "Maelezo.",
+  "documents_found": "Nyaraka zilizopatikana.",
+  "doi": "DOI.",
+  "download": {
+    "citation": "Citation.",
+    "pdf": "PDF."
+  },
+  "edit": {
+    "error": "Kulikuwa na hitilafu kuhariri hati hii",
+    "success": "Hati imesasishwa kwa mafanikio.",
+    "title": "Hariri hati"
+  },
+  "edit_document": "Hariri hati",
+  "follow": "Fuata hati.",
+  "import_bibtex": "Ingiza kutoka Bibtex.",
+  "issue": "Suala.",
+  "list": {
+    "title": "Nyaraka"
+  },
+  "metadata": "Metadata.",
+  "no_geodata": "Hakuna data ya kijiografia inapatikana.",
+  "no_usergroup": "Hakuna UserGroups zilizopatikana kwa waraka huu",
+  "pages": "Kurasa.",
+  "publication_date": "Tarehe ya kuchapishwa",
+  "publication_language": "Lugha ya kuchapishwa",
+  "remove": {
+    "description": "Una uhakika? Huwezi kufuta hatua hii baadaye.",
+    "success": "Hati imefutwa kwa mafanikio.",
+    "title": "Futa hati"
+  },
+  "share": "Shiriki hati hii",
+  "tags": {
+    "not_found": "Hakuna tags (s) zilizopatikana.",
+    "title": "Tags."
+  },
+  "type": "Andika",
+  "unfollow": "Futa hati",
+  "unknown": "Hati isiyojulikana",
+  "update_error": "Haiwezi kusasisha",
+  "update_success": "Imesasishwa kwa mafanikio.",
+  "updated_on": "Tarehe updated.",
+  "upload": {
+    "my_uploads": "Rasimu ya vyombo vya habari.",
+    "selected": "Hati iliyochaguliwa",
+    "url": "URL ya nje"
+  }
+}

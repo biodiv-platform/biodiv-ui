@@ -1,0 +1,18 @@
+{
+  "links": {
+    "notification": "Tuma Arifa ya Push."
+  },
+  "pages": {
+    "notification": {
+      "form": {
+        "body": "Mwili.",
+        "error": "Haikuweza kutuma taarifa",
+        "icon": "Icon.",
+        "link": "LINK.",
+        "success": "Arifa imetumwa",
+        "title": "Kichwa"
+      },
+      "heading": "Tuma arifa za kushinikiza"
+    }
+  }
+}

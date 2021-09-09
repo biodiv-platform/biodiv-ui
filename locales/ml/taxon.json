@@ -2,6 +2,10 @@
   "create": {
     "title": "ടാക്സൺ ചേർക്കുക"
   },
+  "grant": {
+    "button": "അനുവദിക്കുക",
+    "title": "അനുമതി നൽകുക"
+  },
   "modal": {
     "activity": "പ്രവർത്തനം",
     "attributes": {

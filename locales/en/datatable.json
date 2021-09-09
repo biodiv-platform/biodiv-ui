@@ -11,6 +11,9 @@
   "found": "Datatable Found",
   "geographical_coverage": "Geographic Coverage",
   "is_verified": "Observation Verified",
+  "list": {
+    "title": "Datatables"
+  },
   "location": "Location",
   "location_accuracy": "Location Accuracy",
   "location_scale": "Location Scale",

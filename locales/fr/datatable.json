@@ -11,6 +11,9 @@
   "found": "Table de données trouvée",
   "geographical_coverage": "Couverture géographique",
   "is_verified": "Observation vérifiée",
+  "list": {
+    "title": "Tables de données"
+  },
   "location": "Emplacement",
   "location_accuracy": "Précision de l'emplacement",
   "location_scale": "Échelle de localisation",

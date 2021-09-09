@@ -11,6 +11,9 @@
   "found": "ਡੇਟਾਟੇਬਲ ਮਿਲਿਆ",
   "geographical_coverage": "ਭੂਗੋਲਿਕ ਕਵਰੇਜ",
   "is_verified": "ਨਿਰੀਖਣ ਪ੍ਰਮਾਣਿਤ",
+  "list": {
+    "title": "ਡਾਟਾਟੇਬਲ"
+  },
   "location": "ਟਿਕਾਣਾ",
   "location_accuracy": "ਸਥਾਨ ਦੀ ਸ਼ੁੱਧਤਾ",
   "location_scale": "ਸਥਾਨ ਸਕੇਲ",

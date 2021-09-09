@@ -6,6 +6,7 @@ import ShareActionButton from "@components/@core/action-buttons/share";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
+import ScientificName from "@components/@core/scientific-name";
 import TaxonBreadcrumbs from "@components/pages/common/breadcrumbs";
 import TaxonStatusBadge from "@components/pages/common/status-badge";
 import useGlobalState from "@hooks/use-global-state";
@@ -21,6 +22,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { getResourceThumbnail } from "@utils/media";
+import { stripTags } from "@utils/text";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
@@ -36,7 +38,7 @@ function Header({ o, following = false }: IHeaderProps) {
   const { isLoggedIn, user } = useGlobalState();
   const [showActions, setShowActions] = useState(false);
 
-  const pageTitle = `${o.recoIbp?.scientificName || t("common:unknown")} by ${
+  const pageTitle = `${stripTags(o.recoIbp?.scientificName) || t("common:unknown")} by ${
     o.authorInfo?.name
   } on ${formatDateReadableFromUTC(o.observation?.fromDate)}`;
 
@@ -113,7 +115,7 @@ function Header({ o, following = false }: IHeaderProps) {
         <>
           <Flex direction={{ base: "column", md: "row" }}>
             <Box mr={2}>
-              <i>{o.recoIbp?.scientificName || t("common:unknown")}</i>
+              <ScientificName value={o.recoIbp?.scientificName || t("common:unknown")} />
             </Box>
             <TaxonStatusBadge
               reco={o.recoIbp}

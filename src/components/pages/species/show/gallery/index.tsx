@@ -1,5 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import CarouselNavigation from "@components/@core/carousel/navigation";
+import CarouselResourceInfo from "@components/@core/carousel/resource-info";
 import Slide, { NoSlide } from "@components/@core/carousel/slide";
 import Thumbnails from "@components/@core/carousel/thumbnails";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
@@ -33,6 +34,7 @@ export default function SpeciesGallery() {
     <Box gridColumn={{ md: "2/4" }} className="fadeInUp delay-3">
       <Box bg="gray.900" borderRadius="md" position="relative" zIndex={0} mb={4} p={4}>
         <SpeciesGalleryModal resources={resources} setResources={setResources} />
+        <CarouselResourceInfo currentResource={resources[currentSlide]} />
         <Head>
           <link
             rel="stylesheet"

@@ -2,6 +2,10 @@
   "create": {
     "title": "టాక్సోన్ను జోడించు"
   },
+  "grant": {
+    "button": "మంజూరు",
+    "title": "మంజూరు మంజూరు"
+  },
   "modal": {
     "activity": "కార్యాచరణ",
     "attributes": {

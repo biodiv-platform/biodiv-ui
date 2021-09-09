@@ -2,6 +2,10 @@
   "create": {
     "title": "Manampy taxon"
   },
+  "grant": {
+    "button": "Fanomezana",
+    "title": "Fahazoan-dàlana"
+  },
   "modal": {
     "activity": "asa",
     "attributes": {

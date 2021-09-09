@@ -1,0 +1,43 @@
+{
+  "activity_score": "SHOGGE SCORE:",
+  "modules": {
+    "all": "Wote",
+    "discussion": "Majadiliano",
+    "documents": "Nyaraka",
+    "miscellaneous": "Miscellaneous.",
+    "observations": "Uchunguzi",
+    "species": "SPECIES.",
+    "taxon": "Taxon."
+  },
+  "stops": {
+    "f": "Muda wote",
+    "month": "Mwezi uliopita",
+    "month3": "Miezi 3 iliyopita.",
+    "today": "Leo",
+    "week": "Wiki iliyopita",
+    "year": "Mwaka uliopita"
+  },
+  "table": {
+    "commented": "Alitoa maoni",
+    "created": "Imeundwa",
+    "curated": "Pana",
+    "discussions": "Majadiliano",
+    "documents": "Nyaraka",
+    "identified": "Kutambuliwa",
+    "name": "Jina.",
+    "observation": "Uchunguzi",
+    "organized": "Iliyoandaliwa",
+    "rank": "Rank.",
+    "species": "SPECIES."
+  },
+  "tip": "Kiongozi wa kiongozi hutegemea shughuli zote zilizofanywa na mtumiaji. Shughuli itasasisha mara moja kila saa.",
+  "title": "Kiongozi wa Kiongozi",
+  "total": {
+    "discussion": "Majadiliano ya jumla.",
+    "documents": "Nyaraka zote",
+    "miscellaneous": "Jumla ya miscellaneous.",
+    "observation": "Jumla ya uchunguzi",
+    "species": "Aina ya jumla",
+    "taxon": "Jumla ya taxon."
+  }
+}

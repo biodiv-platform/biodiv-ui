@@ -34,7 +34,7 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     resolver: yupResolver(
       Yup.object().shape({
         role: Yup.string().required(),
-        userId: isAdmin ? Yup.number().required() : Yup.number()
+        userId: isAdmin ? Yup.mixed().required() : Yup.number()
       })
     )
   });
@@ -58,7 +58,7 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     <ModalContent>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <ModalHeader>{t("taxon:request.title")}</ModalHeader>
+          <ModalHeader>{isAdmin ? t("taxon:grant.title") : t("taxon:request.title")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <SelectInputField name="role" label={t("taxon:role")} options={TAXON_ROLES} />
@@ -74,7 +74,7 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
             )}
           </ModalBody>
           <ModalFooter>
-            <SubmitButton leftIcon={<CheckIcon />}>{t("taxon:request.button")}</SubmitButton>
+            <SubmitButton leftIcon={<CheckIcon />}>{isAdmin ? t("taxon:grant.button") : t("taxon:request.button")}</SubmitButton>
             <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
               {t("common:cancel")}
             </Button>

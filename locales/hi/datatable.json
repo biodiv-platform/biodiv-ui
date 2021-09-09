@@ -11,6 +11,9 @@
   "found": "डेटाटेबल मिला",
   "geographical_coverage": "भौगोलिक कवरेज",
   "is_verified": "अवलोकन सत्यापित",
+  "list": {
+    "title": "डेटाटेबल्स"
+  },
   "location": "स्थान",
   "location_accuracy": "स्थान सटीकता",
   "location_scale": "स्थान पैमाने",

@@ -1,0 +1,142 @@
+{
+  "add_reference": "Ongeza kumbukumbu.",
+  "all_media": "Wote Vyombo vya habari.",
+  "attributions": "Tabia",
+  "common_name": {
+    "delete": {
+      "dialouge": "Una uhakika?",
+      "failure": "Haiwezi kufuta jina",
+      "success": "Jina limefutwa kwa mafanikio."
+    },
+    "form": {
+      "language": "Lugha",
+      "name": "Jina."
+    },
+    "preferred": {
+      "failure": "Haiwezi kusasisha jina lililopendekezwa",
+      "success": "Jina lililopendekezwa limehifadhiwa kwa mafanikio.",
+      "title": "Walipendelea"
+    },
+    "save": {
+      "failure": "Haiwezi kuokoa jina",
+      "success": "Jina limehifadhiwa kwa mafanikio."
+    }
+  },
+  "common_names": "Majina ya kawaida",
+  "contribute": {
+    "create_species": "Unda aina mpya",
+    "description": "Kurasa za aina ni maelezo ya aina, na ukurasa mmoja kwa kila aina. Kila aina inaweza kuelezwa kwa seti ya kiwango cha juu zaidi ya 60. Kurasa za aina zinachangia na kutibiwa na wataalam. Taarifa zote zilizochapishwa kwenye bandari zitakuwa kwenye upatikanaji wa umma na chini ya leseni ya Creative Commons ya uchaguzi wako.",
+    "download": "Pakua Mfano XLSX.",
+    "email": "Tutumie barua pepe.",
+    "offline": {
+      "description": "Unaweza kutumia template yetu ya sahajedwali kufanya kazi nje ya mtandao na kuunda habari za aina. Template ina mstari mmoja kwa kila aina. Tafadhali pakua sahajedwali ya XLSX, na ujaze maelezo ya aina nyingi kwenye sahajedwali, uwe na saraka ya picha, zip saraka na tutumie kwenye barua pepe chini na tutaweza kupakia maudhui kwa niaba yako.",
+      "title": "Uumbaji wa nje wa aina ya aina:"
+    },
+    "online": {
+      "description": "Ili kuunda aina mpya unapaswa kuwa na ruhusa ya kuandika kwenye ukurasa. Vyeti vinaweza kuombwa kwa taxa. Tafadhali ombi ruhusa kwa kutumia vifungo chini",
+      "title": "Uumbaji wa aina ya aina:"
+    },
+    "request_permission": "Omba ruhusa."
+  },
+  "contributors": "Washiriki",
+  "create": {
+    "create_species_page": "Unda ukurasa wa aina wakati wa kuunda taxon.",
+    "creating_page": "Tafadhali subiri wakati ukurasa wa aina unaumbwa.",
+    "desc_1": "Wachangiaji wanahitaji kuunda haki kwenye ukurasa wa aina ili kuongeza maudhui. Ikiwa haujawahi kuwa na haki zilizopangwa",
+    "desc_2": "Tafadhali ingiza jina la aina na uhakikishe. Ikiwa jina linathibitishwa na linapatikana tayari kuwepo kwenye bandari, utachukuliwa kwenye ukurasa wa aina ili kuongeza maudhui. Ikiwa jina linathibitishwa na linapatikana kuwa mpya, unaweza kujaza uongozi wa taxonomic ili ukurasa mpya wa aina unaweza kuundwa. Kamba ya mwandishi ni lazima kwa viwango vya aina na chini.",
+    "error": "Haiwezi kuunda ukurasa wa aina",
+    "form": {
+      "name": "Jina.",
+      "name_placeholder": "I.E. Triclinum Soreduatum.",
+      "rank": "Rank.",
+      "search": "Utafutaji",
+      "select": "Chagua",
+      "taxon": {
+        "create": "Unda Taxon.",
+        "parent": "Mechi ya Mzazi",
+        "select": "Inafanana"
+      },
+      "use_taxon": "Tumia taxon hii.",
+      "validate": "Kuhalalisha"
+    },
+    "taxon_error": "Haiwezi kuthibitisha",
+    "title": "Ongeza aina.",
+    "validate_error": "Haiwezi kuthibitisha"
+  },
+  "edit_name": "Dhibiti jina la kawaida",
+  "edit_synonym": "Manange ya Manange",
+  "field": {
+    "delete": {
+      "failure": "Haiwezi kufuta shamba",
+      "success": "Shamba limefutwa kwa mafanikio."
+    },
+    "manage": "Dhibiti shamba.",
+    "update": {
+      "failure": "Haiwezi kurekebisha shamba",
+      "success": "Field updated kwa mafanikio."
+    }
+  },
+  "follow_species": "Fuata aina hiyo",
+  "gallery": {
+    "update": {
+      "failure": "Haiwezi kurekebisha nyumba ya sanaa.",
+      "success": "Nyumba ya sanaa imesasishwa kwa mafanikio."
+    }
+  },
+  "groups": {
+    "title": "Vikundi."
+  },
+  "licenses": "Leseni.",
+  "list": {
+    "title": "Orodha ya aina."
+  },
+  "manage_media": "Dhibiti vyombo vya habari.",
+  "observation_media": "Uchunguzi wa vyombo vya habari.",
+  "pull_media": "Piga vyombo vya habari.",
+  "references": "Marejeleo",
+  "related": {
+    "title": "Maonyesho yanayohusiana"
+  },
+  "remove": {
+    "description": "Una uhakika? Huwezi kufuta hatua hii baadaye.",
+    "success": "Aina zimefutwa kwa mafanikio.",
+    "title": "Futa aina"
+  },
+  "share": "Shiriki aina hii",
+  "status": "Hali",
+  "synonym": {
+    "add": {
+      "failure": "Haiwezi kuongeza sawa",
+      "success": "Sambamba aliongeza kwa mafanikio."
+    },
+    "delete": {
+      "dialouge": "Una uhakika?",
+      "failure": "Haiwezi kufuta sawa",
+      "success": "Sambamba imefutwa kwa mafanikio."
+    },
+    "form": {
+      "datasource": "DataSource.",
+      "datasource_id": "Kitambulisho cha DataSource.",
+      "name": "Jina.",
+      "rank": "Rank.",
+      "type": "Andika"
+    },
+    "update": {
+      "failure": "Haiwezi kurekebisha sawa",
+      "success": "Sambamba updated kwa mafanikio."
+    }
+  },
+  "synonyms": "Vidokezo",
+  "taxon": "Taxonomy",
+  "toggle_empty": "Badilisha tupu.",
+  "traits": {
+    "range_hint": "Tumia: kwa maadili ya mara kwa mara",
+    "title": "Tabia.",
+    "update": {
+      "failure": "Haiwezi kurekebisha tabia.",
+      "success": "Trait updated kwa mafanikio."
+    }
+  },
+  "unfollow_species": "Fuata aina hiyo",
+  "view_original": "Angalia awali"
+}

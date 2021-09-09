@@ -1,0 +1,20 @@
+{
+  "All": "Wote",
+  "Validate": "Kuthibitishwa",
+  "download_map": "Pakua ramani",
+  "no_species_found": "Hakuna orodha ya aina iliyopatikana.",
+  "observation": {
+    "fauna_list": "Orodha ya Fauna.",
+    "flora_list": "Orodha ya Flora.",
+    "life_list": {
+      "title": "Orodha ya uchunguzi"
+    },
+    "species_filter": "Aina ya chujio"
+  },
+  "related_documents": "Hati inayohusiana (s)",
+  "site_number": "Site #",
+  "title": "Maeneo yaliyohifadhiwa",
+  "update": {
+    "success": "Shamba limehifadhiwa"
+  }
+}

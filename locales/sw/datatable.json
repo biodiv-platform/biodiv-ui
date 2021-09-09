@@ -1,0 +1,45 @@
+{
+  "add": "Ongeza DataTable.",
+  "attribution": "Attribution.",
+  "basis_of_data": "Msingi wa data.",
+  "basis_of_record": "Msingi wa rekodi.",
+  "contributor": "Mchangiaji",
+  "create_datatable": "Unda DataTable.",
+  "field_mapping_table": "Meza ya ramani ya shamba",
+  "files_upload": "Upakiaji wa faili.",
+  "found": "Inapatikana kwa data",
+  "geographical_coverage": "Chanjo ya kijiografia",
+  "is_verified": "Uchunguzi kuthibitishwa.",
+  "list": {
+    "title": "Maelezo"
+  },
+  "location": "Mahali",
+  "location_accuracy": "Usahihi wa mahali",
+  "location_scale": "Eneo la kiwango cha eneo",
+  "media_uploader": "Media uploader.",
+  "methods": "Njia",
+  "notifications": {
+    "error": "Haiwezi kuunda datatable.",
+    "sheet_upload_error": "Haiwezi kupakia karatasi",
+    "sheet_upload_success": "Karatasi iliyopakiwa kwa ufanisi",
+    "success": "DataTable imeundwa kwa mafanikio."
+  },
+  "others": "Wengine",
+  "party": "Chama",
+  "project": "Mradi.",
+  "sheet_uploader": "Mpangilio wa Spreadsheet.",
+  "show_page": "Maelezo ya data",
+  "summary": "Muhtasari",
+  "table": {
+    "geoPrivacy": "Geo Faragha.",
+    "id": "ID.",
+    "sGroup": "SPECIES GROUP.",
+    "scientificName": "Jina la kisayansi.",
+    "userInfo": "Maelezo ya mtumiaji"
+  },
+  "taxonomy": "Chanjo ya taxonomic.",
+  "temporal": "Chanjo ya muda",
+  "title": "Metadata Mkuu",
+  "type": "Andika",
+  "upload_again": "Pakia tena"
+}

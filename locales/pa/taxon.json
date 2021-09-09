@@ -2,6 +2,10 @@
   "create": {
     "title": "ਟੈਕਸੀਅਨ ਸ਼ਾਮਲ ਕਰੋ"
   },
+  "grant": {
+    "button": "ਗ੍ਰਾਂਟ",
+    "title": "ਅਨੁਮਤੀ ਦਿਓ"
+  },
   "modal": {
     "activity": "ਸਰਗਰਮੀ",
     "attributes": {

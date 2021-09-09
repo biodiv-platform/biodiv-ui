@@ -1,4 +1,5 @@
 import { Box, Flex, Select, Stack, Text } from "@chakra-ui/react";
+import { PageHeading } from "@components/@core/layout";
 import { sortByOptions } from "@static/datatable";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
@@ -20,6 +21,7 @@ export default function Header() {
 
   return (
     <>
+      <PageHeading>📚 {t("datatable:list.title")}</PageHeading>
       <Flex
         mt={4}
         direction={{ base: "column", md: "row" }}

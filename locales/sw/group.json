@@ -1,0 +1,167 @@
+{
+  "about": {
+    "closed_group": "Kikundi kilichofungwa",
+    "open_group": "Fungua kikundi",
+    "title": "Kuhusu"
+  },
+  "admin": {
+    "error": "Kulikuwa na hitilafu wakati wa uppdatering watendaji",
+    "founder": "Waanzilishi",
+    "moderator": "Wasimamizi",
+    "no_access": "Kurekebisha mashamba ya desturi au sheria za kikundi tafadhali wasiliana na msimamizi",
+    "title": "Wakurugenzi wa kikundi",
+    "updated": "Watawala wa kikundi updated kwa mafanikio."
+  },
+  "confirm_closed_group": "Hii ni kikundi kilichofungwa, ombi la uanachama linapaswa kupitishwa na msimamizi. Bonyeza OK kutuma ombi la kujiunga.",
+  "confirm_leave": "Acha Group?",
+  "create": {
+    "error": "Kulikuwa na hitilafu wakati wa kujenga kikundi.",
+    "success": "Kikundi kilichoundwa kwa mafanikio.",
+    "title": "Unda kikundi"
+  },
+  "custom_field": {
+    "add": {
+      "failure": "Haiwezi kuongeza shamba la desturi.",
+      "options": "Ongeza chaguzi.",
+      "success": "Sehemu ya Desturi imeongezwa kwa mafanikio."
+    },
+    "add_option": "Ongeza chaguo.",
+    "allow_participant": "Ruhusu ushiriki",
+    "back": "Rudi kwenye orodha",
+    "create": "Unda shamba la desturi.",
+    "data_type": "Aina za data.",
+    "default": "Default.",
+    "exist": "Shamba la desturi tayari lipo",
+    "field_type": "Aina ya shamba",
+    "icon": "Icon.",
+    "is_mandatory": "Inahitajika",
+    "name": "Jina.",
+    "notes": "Vidokezo",
+    "remove": {
+      "default": "Default.",
+      "failure": "Haiwezi kufuta uwanja wa desturi.",
+      "success": "Field Desturi imefutwa kwa mafanikio.",
+      "title": "Ondoa"
+    },
+    "reorder": {
+      "failure": "Haiwezi kuokoa utaratibu wa shamba la desturi.",
+      "success": "Field Desturi ilirekebishwa kwa mafanikio."
+    },
+    "save": "Hifadhi",
+    "save_order": "Hifadhi utaratibu wa shamba la desturi.",
+    "table": {
+      "actions": "Vitendo",
+      "data_type": "Aina ya data.",
+      "input_type": "Aina ya kuingiza.",
+      "mandatory": "Inahitajika",
+      "name": "Jina.",
+      "participation": "Ushiriki"
+    },
+    "title": "Mashamba ya Desturi.",
+    "units": "Vitengo.",
+    "value": "Thamani"
+  },
+  "delete_member": "Una uhakika unataka kufuta?",
+  "edit": {
+    "error": "Kulikuwa na hitilafu wakati wa uppdatering Group.",
+    "success": "Kikundi kilichosasishwa kwa mafanikio.",
+    "title": "Hariri Group."
+  },
+  "homepage_customization": {
+    "about_us": "Kuhusu sisi",
+    "add_options": "Ongeza chaguzi.",
+    "back": "Rudi kwenye orodha",
+    "default": "Default.",
+    "failure": "Haiwezi kuhifadhi mabadiliko.",
+    "gallery": "Nyumba ya sanaa",
+    "gallery_setup": {
+      "alert": "Tafadhali salama mabadiliko ili uagize tena",
+      "create": "Unda picha ya sanaa",
+      "save_order": "Hifadhi amri ya picha ya sanaa",
+      "show_image_upload": "Onyesha Upakiaji wa Image.",
+      "title": "Setup ya Nyumba ya sanaa"
+    },
+    "module_stats": "Takwimu za moduli.",
+    "observation_map": "Ramani ya usambazaji wa uchunguzi",
+    "recent_observation": "Uchunguzi wa hivi karibuni.",
+    "remove": {
+      "failure": "Haiwezi kuondoa picha ya sanaa",
+      "success": "Picha ya sanaa iliyofutwa kwa mafanikio."
+    },
+    "reorder": {
+      "failure": "Haiwezi kuokoa orodha ya orodha ya sanaa.",
+      "success": "Orodha ya Nyumba ya sanaa ilirekebishwa kwa mafanikio."
+    },
+    "resources": {
+      "error": "Ingiza ID ya uchunguzi wa halali.",
+      "imageurl": "Chagua picha ya sanaa",
+      "link": "Onyesha kiungo cha ukurasa.",
+      "new_image": "Upakiaji wa picha.",
+      "obs_id": "Kitambulisho cha uchunguzi",
+      "observation_image": "Picha ya uchunguzi",
+      "title": "Kichwa"
+    },
+    "save": "Hifadhi maelezo ya ukurasa wa nyumbani.",
+    "show_desc": "Onyesha maelezo",
+    "success": "Mabadiliko yaliyopangwa kwa mafanikio.",
+    "table": {
+      "description": "Maelezo.",
+      "more_link": "LINK.",
+      "remove_image": "Ondoa",
+      "title": "Kichwa"
+    },
+    "title": "Utekelezaji wa Homepage.",
+    "update": {
+      "failure": "Haiwezi kurekebisha maelezo ya ukurasa wa nyumbani.",
+      "success": "Maelezo ya Homepage Updated kwa mafanikio."
+    }
+  },
+  "icon": "Icon.",
+  "invite": "Weka jina la mtumiaji au barua pepe.",
+  "invite_founders": "Waalike waanzilishi",
+  "invite_moderators": "Paribisha wasimamizi",
+  "join": "Jiunge na Group.",
+  "join_without_invitation": "Ruhusu mtumiaji kujiunga na kikundi bila mwaliko.",
+  "leave": "Acha Group.",
+  "list": {
+    "title": "Vikundi."
+  },
+  "member": {
+    "joined": "Kikundi kilijiunga na mafanikio.",
+    "joined_error": "Haiwezi kujiunga na kikundi",
+    "left": "Kikundi cha kushoto kwa mafanikio.",
+    "left_error": "Haiwezi kuondoka kundi.",
+    "requested": "Kikundi cha Kujiunga na Kikundi kilichotumwa"
+  },
+  "name": "Jina la kikundi",
+  "rules": {
+    "add": {
+      "failure": "Haiwezi kuongeza utawala wa usergroup.",
+      "success": "Imeundwa kwa mafanikio.",
+      "title": "Unda utawala wa kikundi"
+    },
+    "input_types": {
+      "spatial": "Ongeza utawala wa anga.",
+      "taxonomy": "Ongeza utawala wa taxonomic",
+      "title": "Chagua aina ya kuingiza.",
+      "user": "Uchunguzi wa jumla wa wanachama wote wa kikundi"
+    },
+    "remove": {
+      "failure": "Haiwezi kufuta utawala wa kikundi cha mtumiaji",
+      "success": "Utawala wa kikundi cha mtumiaji umefutwa."
+    },
+    "table": {
+      "actions": "Vitendo",
+      "read_less": "Soma chini.",
+      "read_more": "Soma zaidi",
+      "rule_type": "Kanuni ya aina.",
+      "value": "Thamani"
+    },
+    "title": "Kanuni za Kikundi"
+  },
+  "save": "Unda kikundi",
+  "spatial_coverge": "Chanjo ya nafasi.",
+  "tags": "Tags.",
+  "update": "Sasisha Group.",
+  "update_admin": "Sasisha watendaji"
+}

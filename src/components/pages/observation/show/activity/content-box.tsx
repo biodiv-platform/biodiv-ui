@@ -1,5 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
+import ScientificName from "@components/@core/scientific-name";
 import { ShowActivityIbp } from "@interfaces/activity";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -43,7 +44,7 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
       const link = ad2?.speciesId ? `/species/show/${ad2?.speciesId}` : null;
       const content = (
         <>
-          {ad2?.scientificName} {ad2?.commonName && `(${ad2?.commonName})`}
+          <ScientificName value={ad2?.scientificName} /> {ad2?.commonName && `(${ad2?.commonName})`}
         </>
       );
       return (

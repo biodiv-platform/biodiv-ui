@@ -19,7 +19,7 @@ export default function RolesRequestComponent({ isAdmin }) {
         onTaxonChange={(_, data) => setSelectedTaxon(data)}
       />
       <Button my={4} colorScheme="blue" onClick={onOpen} disabled={!selectedTaxon}>
-        {t("taxon:request.title")}
+        {isAdmin ? t("taxon:grant.title") : t("taxon:request.title")}
       </Button>
       <TaxonPermissionRequestModal
         isOpen={isOpen}

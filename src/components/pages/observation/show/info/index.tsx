@@ -3,6 +3,7 @@ import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
+import ScientificName from "@components/@core/scientific-name";
 import Tooltip from "@components/@core/tooltip";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
@@ -29,7 +30,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
     <Box p={4} mb={4} className="white-box">
       <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
         <ResponsiveInfo title="form:name">
-          <i>{o.recoIbp?.scientificName || t("common:unknown")}</i>
+          <ScientificName value={o.recoIbp?.scientificName || t("common:unknown")} />
           {o.recoIbp?.speciesId && (
             <LocalLink href={`/species/show/${o.recoIbp.speciesId}`}>
               <BlueLink ml={2}>

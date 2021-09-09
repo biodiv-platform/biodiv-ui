@@ -11,6 +11,9 @@
   "found": "ଡାଟାଟେବଲ୍ ମିଳିଲା |",
   "geographical_coverage": "ଭ ographic ଗୋଳିକ କଭରେଜ୍ |",
   "is_verified": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଯାଞ୍ଚ |",
+  "list": {
+    "title": "ଡାଟାବେସ୍"
+  },
   "location": "ଅବସ୍ଥାନ",
   "location_accuracy": "ଅବସ୍ଥାନ ସଠିକତା |",
   "location_scale": "ଅବସ୍ଥାନ ସ୍କେଲ",

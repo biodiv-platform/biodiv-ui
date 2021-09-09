@@ -1,0 +1,85 @@
+{
+  "audio": {
+    "start": "Anza kurekodi.",
+    "stop": "Kuacha kurekodi",
+    "title": "Rekodi ya sauti."
+  },
+  "comments": {
+    "add_comment": "Ongeza maoni mapya.",
+    "post": "Chapisha maoni.",
+    "title": "Maoni (s)"
+  },
+  "coverage": {
+    "hint": "Mara baada ya kuchaguliwa kutoka kifungo chochote cha Hifadhi ya Hifadhi ya Hifadhi chini ya ramani ili kukamilisha",
+    "place": "Jina la mahali",
+    "spatial": "Chanjo ya nafasi.",
+    "title": "Chanjo",
+    "wkt": "WKT."
+  },
+  "created_on": "Imeundwa On.",
+  "date_accuracy": "Usahihi wa tarehe",
+  "date_accuracy_options": {
+    "accurate": "Sahihi",
+    "approximate": "Takriban",
+    "unknown": "Haijulikani"
+  },
+  "date_range": "Ongeza upeo wa tarehe.",
+  "description": {
+    "audio": "Kurekodi itaacha moja kwa moja baada ya dakika mbili.",
+    "my_uploads": "Pakia na kuhifadhi vyombo vya habari hapa kwa kipindi cha siku 20. Chagua picha za kutumia katika uchunguzi",
+    "resources": "Pakia picha, sauti au video za uchunguzi mmoja kutoka kwenye kifaa chako. (Tumia ratings ili kuagiza picha)",
+    "title": "Maelezo."
+  },
+  "find_gmaps": "Tafuta kutoka kwa Ramani za Google.",
+  "from_url": "YouTube.",
+  "geoentities": "Tafuta kutoka kwenye mandhari",
+  "language": "Lugha",
+  "license": "Leseni.",
+  "location_accuracy_options": {
+    "accurate": "Sahihi",
+    "approximate": "Takriban",
+    "country": "Nchi.",
+    "local": "Mitaa",
+    "region": "Eneo."
+  },
+  "map": {
+    "hide": "Kilivyohaririwa",
+    "show": "Hariri ya juu"
+  },
+  "min_three_chars": "Kuingiza angalau wahusika 3 kutafuta",
+  "my_uploads": "Rasimu ya vyombo vya habari.",
+  "my_uploads_sort": {
+    "taken_on": "Imechukuliwa",
+    "uploaded_on": "Imepakiwa On."
+  },
+  "name": "Jina.",
+  "notes": "Vidokezo",
+  "place": "Mahali",
+  "selected_media": "Vyombo vya habari vilivyochaguliwa.",
+  "selected_places": "Maeneo yaliyochaguliwa",
+  "species_groups": "Vikundi vya aina",
+  "tags": "Tags.",
+  "tags_hint": "Anza kuandika kwenye vitambulisho vya utafutaji",
+  "tags_update_error": "Kulikuwa na hitilafu wakati uppdatering vitambulisho.",
+  "tags_update_success": "Tags updated mafanikio.",
+  "terms": "Kwa kuwasilisha fomu hii, unakubali kwamba picha au video unazowasilisha zinachukuliwa na wewe, au una ruhusa ya mmiliki wa hakimiliki kupakia kwenye leseni za Creative Commons. Creative Commons - Attribution (CC-by) itatumika kwa data zote zinazotolewa.",
+  "title": "Kichwa",
+  "upload_status": {
+    "failed": "Imeshindwa",
+    "pending": "Inasubiri",
+    "uploaded": "Kupakiwa kwa rasimu ya vyombo vya habari.",
+    "uploading": "Kupakia"
+  },
+  "uploader": {
+    "browse": "Vinjari",
+    "description": "(Jpg tu, jpeg, png, mp3, faili mp4 zitakubaliwa)",
+    "label": "Weka faili (s) hapa.",
+    "label_release": "Tayari kupakia",
+    "processing": "Usindikaji",
+    "upload": "Upload.",
+    "uploading": "Inapakia ..."
+  },
+  "use_in_observation": "Tumia kuchaguliwa.",
+  "wkt": "WKT.",
+  "youtube_placeholder": "Input Youtube Link."
+}

@@ -2,6 +2,10 @@
   "create": {
     "title": "ಟ್ಯಾಕ್ಸನ್ ಸೇರಿಸಿ"
   },
+  "grant": {
+    "button": "ಅನುದಾನ",
+    "title": "ಅನುಮತಿ ನೀಡಿ"
+  },
   "modal": {
     "activity": "ಚಟುವಟಿಕೆ",
     "attributes": {

@@ -11,6 +11,9 @@
   "found": "ഡാറ്റാട്ടബിൾ കണ്ടെത്തി",
   "geographical_coverage": "ഭൂമിശാസ്ത്രപരമായ കവറേജ്",
   "is_verified": "നിരീക്ഷണ സ്ഥിരീകരിച്ചു",
+  "list": {
+    "title": "ഡാറ്റാറ്റബിൾസ്"
+  },
   "location": "സ്ഥാപിക്കല്",
   "location_accuracy": "ലൊക്കേഷൻ കൃത്യത",
   "location_scale": "ലൊക്കേഷൻ സ്കെയിൽ",

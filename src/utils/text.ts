@@ -48,7 +48,7 @@ export const getInjectableHTML = (nHtml): string => {
   return "";
 };
 
-export const stripTags = (html): string => html.replace(/<[^>]*>?/gm, "");
+export const stripTags = (html): string => (html ? html.replace(/<[^>]*>?/gm, "") : null);
 
 export const covertToSentenceCase = (text): string => {
   const result = text.replace(/[^a-zA-Z ]/g, " ").toLowerCase();
@@ -57,4 +57,19 @@ export const covertToSentenceCase = (text): string => {
 
 export const stripSpecialCharacters = (text): string => {
   return text.replace(/(\B[A-Z])/g, " $1").replace(/^./, text[0].toUpperCase());
+};
+
+/**
+ * sanitizes scientific name
+ *
+ * @param {*} nHtml
+ * @returns
+ */
+export const getInjectableScientificName = (nHtml) => {
+  try {
+    return { __html: filterXSS(URLify(nHtml), { whiteList: { i: [] }, stripIgnoreTag: true }) };
+  } catch (e) {
+    console.error(e);
+  }
+  return { __html: "" };
 };

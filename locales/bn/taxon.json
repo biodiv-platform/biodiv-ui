@@ -2,6 +2,10 @@
   "create": {
     "title": "ট্যাক্সন যোগ করুন"
   },
+  "grant": {
+    "button": "প্রদান",
+    "title": "মঞ্জুরি অনুমতি"
+  },
   "modal": {
     "activity": "কার্যকলাপ",
     "attributes": {

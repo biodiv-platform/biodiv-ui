@@ -11,6 +11,9 @@
   "found": "Hita Datatable",
   "geographical_coverage": "Fandrakofana ara-jeografika",
   "is_verified": "Voamarina ny fandinihana",
+  "list": {
+    "title": "Datatables"
+  },
   "location": "Toerana",
   "location_accuracy": "Toerana marina",
   "location_scale": "Toerana misy toerana",

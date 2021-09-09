@@ -1,0 +1,91 @@
+{
+  "accepted": "Imekubaliwa",
+  "actions": {
+    "flag": {
+      "category": "Jamii.",
+      "flags": {
+        "date_inappropriate": "Tarehe isiyofaa",
+        "details_inappropriate": "Maelezo yasiyofaa",
+        "location_inappropriate": "Eneo lisilofaa"
+      },
+      "notes": "Vidokezo",
+      "others_flagged": "Wengine ambao walisema",
+      "title": "Bendera"
+    }
+  },
+  "activity": "Shughuli",
+  "add": "Ongeza",
+  "and": "Na",
+  "cancel": "Futa.",
+  "clear": "Futa",
+  "close": "Karibu",
+  "copy": "Nakili kwenye clipboard.",
+  "datatable": "DataTable.",
+  "delete": "Futa",
+  "edit": "Hariri",
+  "edit_not_uploaded": "Baadhi ya rasilimali hazipakiwa vizuri, tafadhali subiri au uwaondoe kabla ya kupakia",
+  "feature": "Kipengele kilichochaguliwa.",
+  "feature_in_groups": "Kipengele katika vikundi.",
+  "feedback": "Maoni",
+  "footer": {
+    "email": "Barua pepe",
+    "facebook": "Facebook.",
+    "github": "Github.",
+    "powered_by": "Kinatumia",
+    "technology_partner": "Mshirika wa Teknolojia",
+    "twitter": "Twitter"
+  },
+  "habitats_covered": "Mazingira yalifunikwa",
+  "information": "Taarifa",
+  "invalid_request": "Ombi batili.",
+  "list": {
+    "sort_by": "Panga kwa",
+    "sort_options": {
+      "last_updated": "Mwisho updated.",
+      "latest": "Ilipakiwa mwisho",
+      "most_viewed": "Wengi kutazamwa."
+    },
+    "view_type": {
+      "grid": "Gridi.",
+      "list": "Orodha.",
+      "map": "Ramani.",
+      "stats": "Metrics."
+    }
+  },
+  "load_more": "Weka zaidi ↺",
+  "loading": "Inapakia ...",
+  "name": "Jina.",
+  "next": "Ijayo",
+  "no_data": "Hakuna data.",
+  "no_groups_joined": "Hujajiunga na kundi lolote",
+  "no_results": "Hakuna matokeo yaliyopatikana.",
+  "notifications": {
+    "invalid_credentials": "Jinatumizi au nywila uliyoitumia siyo sahihi.",
+    "token_error": "Hitilafu ya kuchochea ishara",
+    "token_not_saved": "Haikuweza kuokoa Ishara",
+    "token_saved": "Ishara imehifadhiwa"
+  },
+  "observed_on": "Aliona juu ya",
+  "offline": "Hakuna uhusiano wa internet.",
+  "one_moment_please": "Dakika moja tafadhali",
+  "or": "au",
+  "permalink": "Permalink.",
+  "prev": "Iliyotangulia.",
+  "processing": "Usindikaji ...",
+  "read_more": "Soma zaidi",
+  "save": "Hifadhi",
+  "search": "Utafutaji",
+  "session_required": "Ingia inahitajika.",
+  "slider_left": "Kushoto.",
+  "slider_right": "Haki",
+  "species_coverage": "Aina ya chanjo ya kikundi.",
+  "success": "Mafanikio",
+  "temporal": {
+    "observations": "Uchunguzi",
+    "title": "Usambazaji wa muda"
+  },
+  "toggle": "Badilisha",
+  "unauthorized": "Mtumiaji asiyeidhinishwa",
+  "unknown": "Haijulikani",
+  "usergroups": "Vikundi."
+}
