@@ -1,9 +1,9 @@
 import { ENDPOINT } from "@static/constants";
-import { plainHttp } from "@utils/http";
+import { fetchWithCache } from "@utils/cached-fetch";
 
 export const axGetLicenseList = async () => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.RESOURCES}/v1/license/all`);
+    const data = await fetchWithCache(`${ENDPOINT.RESOURCES}/v1/license/all`);
     return {
       success: true,
       data: data.map((o) => ({ label: o.name, value: o.id.toString(), url: o.url }))

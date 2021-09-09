@@ -1,10 +1,11 @@
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
+import { fetchWithCache } from "@utils/cached-fetch";
 import http, { plainHttp } from "@utils/http";
 
 export const axGetspeciesGroups = async () => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.OBSERVATION}/v1/observation/species/all`);
+    const data = await fetchWithCache(`${ENDPOINT.OBSERVATION}/v1/observation/species/all`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
