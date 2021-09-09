@@ -1,16 +1,16 @@
 {
-  "clear": "ತೆರವುಗೊಳಿಸಿ {{filterCount}} ಫಿಲ್ಟರ್(ಗಳು)",
+  "clear": "ತೆರವುಗೊಳಿಸಿ {{filterCount}} ಶೋಧಕ(ಗಳು)",
   "custom_fields": {
-    "has_content": "ವಿಷಯವಿದೆ",
+    "has_content": "ವಿಷಯವನ್ನು ಹೊಂದಿದೆ",
     "no_content": "ಯಾವುದೇ ವಿಷಯವಿಲ್ಲ",
     "no_custom_field": "ಕಸ್ಟಮ್ ಕ್ಷೇತ್ರ (ಗಳು) ಕಂಡುಬಂದಿಲ್ಲ",
-    "title": "ಕಸ್ಟಮ್ ಜಾಗ"
+    "title": "ಕಸ್ಟಮ್ ಕ್ಷೇತ್ರ "
   },
   "data_quality": {
     "flag": {
       "flagged": "ಫ್ಲ್ಯಾಗ್ ಮಾಡಲಾಗಿದೆ",
-      "title": "ಧ್ವಜ",
-      "unflagged": "ಖಾಲಿ ಮಾಡದ"
+      "title": "ಫ್ಲ್ಯಾಗ್",
+      "unflagged": "ಫ್ಲ್ಯಾಗ್ ಮಾಡದ"
     },
     "identification": {
       "identified": "ಗುರುತಿಸಲಾಗಿದೆ",
@@ -18,15 +18,15 @@
       "unidentified": "ಗುರುತಿಸಲಾಗದ"
     },
     "taxon_id": {
-      "has_taxon": "ಟ್ಯಾಕ್ಸನ್ ಐಡಿ ಹೊಂದಿದೆ",
-      "no_taxon": "ಯಾವುದೇ ತೆರಿಗೆ ಐಡಿ ಇಲ್ಲ",
-      "title": "ಟ್ಯಾಕ್ಸನ್ ಐಡಿ"
+      "has_taxon": "ಜೀವಿವರ್ಗದ ಐಡಿ ಹೊಂದಿದೆ",
+      "no_taxon": "ಯಾವುದೇ ಜೀವಿವರ್ಗದ ಐಡಿ ಇಲ್ಲ",
+      "title": "ಜೀವಿವರ್ಗದ ಐಡಿ"
     },
-    "title": "ಡೇಟಾ ಗುಣಮಟ್ಟ",
+    "title": "ದತ್ತಾಂಶ ಗುಣಮಟ್ಟ",
     "validation": {
-      "not_validated": "ಮೌಲ್ಯೀಕರಿಸಲಾಗಿಲ್ಲ",
-      "title": "ಕ್ರಮಬದ್ಧಗೊಳಿಸುವಿಕೆ",
-      "validated": "ಮೌಲ್ಯದ"
+      "not_validated": "ಪರಿಶೀಲಿಸಲಾಗಿಲ್ಲ",
+      "title": "ಪರಿಶೀಲನೆ",
+      "validated": "ಪರಿಶೀಲಿಸಲಾಗಿದೆ"
     }
   },
   "dataset_filter": {
@@ -40,7 +40,7 @@
   },
   "document_title": "ಶೀರ್ಷಿಕೆ",
   "item_type": {
-    "title": "ಐಟಂ ಪ್ರಕಾರ"
+    "title": "ಐಟಂ ವಿಧ"
   },
   "location": {
     "district": "ಜಿಲ್ಲೆ",
@@ -57,10 +57,10 @@
     "title": "ಸ್ಥಳ"
   },
   "media": {
-    "audio": "ಆಡಿಯೋ",
+    "audio": "ಧ್ವನಿ",
     "image": "ಚಿತ್ರ",
     "no_media": "ಮಾಧ್ಯಮವಿಲ್ಲ",
-    "title": "ಮಾಧ್ಯಮ ಪ್ರಕಾರ",
+    "title": "ಮಾಧ್ಯಮದ ವಿಧ",
     "video": "ವಿಡಿಯೋ"
   },
   "name": {
@@ -68,8 +68,8 @@
       "title": "ಹೆಸರು"
     },
     "status": {
-      "accepted": "ಅಂಗೀಕೃತ",
-      "synonym": "ಸಮಾನಾರ್ಥಕ",
+      "accepted": "ಅಂಗೀಕರಿಸಿದೆ",
+      "synonym": "ಸಮಾನಾರ್ಥಕ ಪದ",
       "title": "ಸ್ಥಿತಿ"
     },
     "title": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು"
@@ -79,43 +79,43 @@
       "title": "ಎಲ್ಲಾ ಹೆಸರುಗಳು"
     },
     "taxon_names": {
-      "title": "ಟ್ಯಾಕ್ಸನ್ ಹೆಸರುಗಳು"
+      "title": "ಜೀವಿವರ್ಗದ ಹೆಸರುಗಳು"
     },
     "taxon_rank": {
-      "title": "ತೆರಿಗೆ ದಾಖಲೆ"
+      "title": "ಜೀವಿವರ್ಗದ ದರ್ಜೆ"
     },
     "taxon_status": {
-      "title": "ತೆರಿಗೆ ಸ್ಥಿತಿ"
+      "title": "ಜೀವಿವರ್ಗದ ಸ್ಥಿತಿ"
     },
     "title": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು"
   },
   "species_group": {
-    "all": "ಎಲ್ಲರೂ",
+    "all": "ಎಲ್ಲಾ",
     "amphibians": "ಉಭಯಚರಗಳು",
     "arthropods": "ಆರ್ತ್ರೋಪಾಡ್ಸ್",
     "birds": "ಪಕ್ಷಿಗಳು",
     "fish": "ಮೀನು",
     "fungi": "ಶಿಲೀಂಧ್ರ",
     "mammals": "ಸಸ್ತನಿಗಳು",
-    "molluscs": "ಮೊಲ್ಲಸ್ಕ್ಗಳು",
-    "others": "ಇತರರು",
-    "plants": "ಗಿಡಗಳು",
+    "molluscs": "ಮೃದ್ವಂಗಿಗಳು",
+    "others": "ಇತರೆ",
+    "plants": "ಸಸ್ಯಗಳು",
     "reptiles": "ಸರೀಸೃಪಗಳು",
-    "title": "ಜಾತಿ ಗುಂಪು"
+    "title": "ಪ್ರಭೇದದ ಗುಂಪು"
   },
   "taxon_browser": {
     "search": "ಮರದಲ್ಲಿ ಹುಡುಕಿ",
-    "search_results": "Showing {{currentIndex}} of {{resultsCount}}",
-    "title": "ಟ್ಯಾಕ್ಸನ್ ಬ್ರೌಸರ್"
+    "search_results": "{{resultsCount}} ನಲ್ಲಿ {{currentIndex}} ಪ್ರದರ್ಶಿಸುತ್ತಿದೆ",
+    "title": "ಜೀವಿವರ್ಗದ ಬ್ರೌಸರ್"
   },
   "time": {
-    "created_on": "ದಿನಾಂಕ ರಚಿಸಲಾಗಿದೆ",
+    "created_on": "ರಚಿಸಲಾದ ದಿನಾಂಕ ",
     "max_date": "ಗರಿಷ್ಠ ದಿನಾಂಕ",
     "min_date": "ಕನಿಷ್ಠ ದಿನಾಂಕ",
     "month": {
       "apr": "ಏಪ್ರಿಲ್",
       "aug": "ಆಗಸ್ಟ್",
-      "dec": "ಡಿಸೆಂಬರ್ ತಿಂಗಳು",
+      "dec": "ಡಿಸೆಂಬರ್",
       "feb": "ಫೆಬ್ರುವರಿ",
       "jan": "ಜನವರಿ",
       "jul": "ಜುಲೈ",
@@ -125,20 +125,20 @@
       "nov": "ನವೆಂಬರ್",
       "oct": "ಅಕ್ಟೋಬರ್",
       "sep": "ಸೆಪ್ಟೆಂಬರ್",
-      "title": "ತಿಂಗಳು ಗಮನಿಸಲಾಗಿದೆ"
+      "title": "ವೀಕ್ಷಣೆಯ ತಿಂಗಳು"
     },
     "title": "ಸಮಯ"
   },
   "title": "ಶೋಧಕಗಳು",
-  "toggle": "ಟಾಗಲ್ ಶೋಧಕಗಳು",
+  "toggle": "ಶೋಧಕಗಳನ್ನು ಅದಲುಬದಲಿಸಿ",
   "traits": {
     "title": "ಲಕ್ಷಣಗಳು"
   },
   "user": {
-    "search": "ಹುಡುಕಾಟ ಬಳಕೆದಾರ",
-    "title": "ಬಳಕೆದಾರ"
+    "search": "ಬಳಕೆದಾರರನ್ನು ಹುಡುಕಿ",
+    "title": "ಬಳಕೆದಾರರು"
   },
   "usergroup": {
-    "title": "ಬಳಕೆದಾರ ಗುಂಪುಗಳು"
+    "title": "ಬಳಕೆದಾರರ ಗುಂಪುಗಳು"
   }
 }

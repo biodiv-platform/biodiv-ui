@@ -1,0 +1,146 @@
+{
+  "accurate": "Sahihi",
+  "add_observation": "Ongeza uchunguzi.",
+  "cf_update_success": "Fungua kwa ufanisi uwanja wa desturi",
+  "checklist_annotation": "Mashamba ya data",
+  "common_name": "Jina la kawaida",
+  "continue": "Endelea",
+  "contributor": "Mchangiaji",
+  "coordinates": "Kuratibu",
+  "created_on": "Imeundwa On.",
+  "creating": "Tunaunda uchunguzi wako",
+  "custom_fields": "Mashamba ya Desturi.",
+  "delete_file": {
+    "error": "Haiwezi kutengeneza faili, tafadhali jaribu tena baadaye",
+    "failed": "Haiwezi kufuta faili, tafadhali jaribu tena baadaye",
+    "success": "Faili imefutwa kwa mafanikio."
+  },
+  "download": {
+    "error": "Haiwezi kuzalisha faili.",
+    "modal": {
+      "note": "Tafadhali sema jinsi unavyotaka kutumia data iliyopakuliwa",
+      "note_hint": "Hii ni muhimu kwetu kuelewa jinsi data iliyo wazi inatumiwa",
+      "title": "Chagua nguzo"
+    },
+    "success": "Faili yako inazalishwa. Ikiwa tayari, utaambiwa kwa barua pepe na kiungo cha kupakua kitaonekana kwenye ukurasa wako wa wasifu.",
+    "title": "Pakua"
+  },
+  "edit_hint": "💡 kwa kuhariri vitu vingine kama jina au sifa, tafadhali ingiza moja kwa moja kutoka kwenye ukurasa wa Onyesha",
+  "edit_observation": "Badilisha uchunguzi.",
+  "follow_observation": "Fuata uchunguzi",
+  "group": "Kikundi",
+  "group_updated": "SPECIAL SPECIES GROUP updated kwa mafanikio.",
+  "groups_updated": "Vikundi vinasasishwa kwa mafanikio.",
+  "help_identify": "Kusaidia kutambua",
+  "hide_precise_location": "Ficha eneo sahihi",
+  "id": {
+    "agree": "Kubali",
+    "no_recommendation": "Hakuna mapendekezo",
+    "no_suggestion": "Pendekeza kitambulisho",
+    "remove": "Ondoa",
+    "resuggest": "Iliyopita mawazo yako?",
+    "suggest_new_reco": "Pendekeza kitambulisho kingine",
+    "suggestion_success": "Utambulisho ulipendekezwa kwa mafanikio.",
+    "title": "Kitambulisho",
+    "unlock": "Kufungua",
+    "validate": "Kuhalalisha",
+    "validated": "Kitambulisho kilichothibitishwa na Curator."
+  },
+  "language": "Lugha",
+  "last_location": "Tumia eneo la mwisho",
+  "latitude": "Latitude",
+  "license": "Leseni.",
+  "list": {
+    "chart": {
+      "sgroup": "Vikundi vya aina",
+      "states": "Usambazaji wa Nchi."
+    },
+    "created_on": "Imeundwa On.",
+    "life_list": {
+      "count_header": "Hesabu",
+      "heading": "Taxa aliona",
+      "species_header": "SPECIES."
+    },
+    "location": "Mahali",
+    "observations_found": "Uchunguzi uliopatikana.",
+    "spatial_distribution": "Usambazaji wa anga.",
+    "stats_bar": {
+      "total_identifiers": "Watambulisho",
+      "total_observations": "Uchunguzi",
+      "total_taxa": "Taxa",
+      "total_uploaders": "Wapakiaji"
+    },
+    "top_identifiers_list": {
+      "author_header": "Jina.",
+      "count_header": "Hesabu",
+      "heading": "Vitambulisho vya juu"
+    },
+    "top_uploaders_list": {
+      "author_header": "Jina.",
+      "count_header": "Hesabu",
+      "heading": "Wapakiaji wa juu"
+    }
+  },
+  "location_information": {
+    "coordinates": "Kuratibu",
+    "forest_type": "Aina ya Misitu.",
+    "geoprivacy_enabled": "Geoprivacy imewezeshwa",
+    "rainfall": "Mvua",
+    "soil": "Udongo",
+    "tehsil": "Tehsil.",
+    "temperature": "Joto",
+    "title": "Maelezo ya Mahali."
+  },
+  "location_placeholder": "Ingiza mahali",
+  "location_scale": "Usahihi wa mahali",
+  "longitude": "Longitude.",
+  "nearby": "Uchunguzi wa karibu.",
+  "no_custom_field": "Hakuna uwanja wa desturi unaopatikana kwa uchunguzi huu",
+  "no_empty_suggestion": "Hawezi kuandika maoni yasiyofaa.",
+  "notes": "Vidokezo",
+  "observed": "Aliona",
+  "observed_at": "Eneo limezingatiwa At.",
+  "points_gained": "{{points}} hatua ya shughuli zilizopatikana",
+  "post_to_groups": "Chapisha kwa makundi.",
+  "range_hint": "Tumia: kwa maadili ya mara kwa mara",
+  "rate_success": "Vyombo vya habari vilipimwa kwa ufanisi",
+  "rating": "Rating.",
+  "related": "Maonyesho yanayohusiana",
+  "remove": {
+    "description": "Una uhakika? Huwezi kufuta hatua hii baadaye.",
+    "success": "Uchunguzi umefutwa kwa mafanikio.",
+    "title": "Futa uchunguzi"
+  },
+  "resource_info": "Taarifa ya Rasilimali.",
+  "saved": "Uchunguzi umehifadhiwa",
+  "saved_message": "Hatukuweza kuunda uchunguzi wako kwa wakati huu, lakini ikiwa uko nje ya mtandao usijali kuwa umehifadhiwa na utapakiwa mara moja uunganisho ni nyuma",
+  "scientific_name": "Jina la kisayansi.",
+  "share": "Shiriki uchunguzi huu",
+  "source": "Chanzo",
+  "species_page": "Angalia ukurasa wa aina.",
+  "submitted": "Iliyotolewa",
+  "success": "Imeundwa kwa mafanikio.",
+  "suggest": "Pendekeza",
+  "sync": {
+    "done": "Kufanyika",
+    "failed": "Imeshindwa",
+    "title": "Inasubiri uchunguzi (s)",
+    "uploading": "Kupakia",
+    "view": "Tazama"
+  },
+  "synonym": "Sambamba",
+  "title": "Ulizingatia nini leo?",
+  "title_edit": "Badilisha uchunguzi.",
+  "traits": "Tabia.",
+  "traits_no_group": "Tafadhali chagua kikundi kwanza",
+  "traits_update_success": "Tabia zilizosasishwa kwa mafanikio.",
+  "unfeature": "Futa iliyochaguliwa.",
+  "unfollow_observation": "Unfollow observation.",
+  "update_observation": "Sasisha uchunguzi",
+  "updated": "Imeongezwa",
+  "updated_on": "Updated On.",
+  "use_dms": "Tumia DMS.",
+  "use_last_value": "Tumia thamani ya mwisho",
+  "use_lat_lng": "Tumia Lat-Long.",
+  "why_featuring": "Kwa nini akiwa na?"
+}

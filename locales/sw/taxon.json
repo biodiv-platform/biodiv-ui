@@ -1,0 +1,77 @@
+{
+  "create": {
+    "title": "Ongeza taxon."
+  },
+  "grant": {
+    "button": "Ruzuku",
+    "title": "Ruhusu ruhusa."
+  },
+  "modal": {
+    "activity": "Shughuli",
+    "attributes": {
+      "author": {
+        "desc": "Inaonyesha mwandishi na mwaka katika muundo ambao utatumiwa kwa kushirikiana na jina la kisheria. Mfano: (Pallas, 1811)",
+        "title": "Mwandishi na Mwaka."
+      },
+      "canonical": {
+        "desc": "Inaonyesha jina la canonical yaani. Jina kamili bila mwandishi na mwaka.",
+        "title": "Canonical."
+      },
+      "id": {
+        "desc": "Nambari ya ID ya jina kwenye database ya mechi.",
+        "title": "ID."
+      },
+      "name": {
+        "desc": "Inaonyesha jina la maneno yaani. Jina kamili na mwandishi na mwaka ikiwa inajulikana.",
+        "error": "Hitilafu wakati uppdatering jina la taxon.",
+        "success": "Jina la taxon updated kwa mafanikio.",
+        "title": "Jina."
+      },
+      "position": {
+        "desc": "Inaonyesha orodha ambayo jina sasa linawasilisha.",
+        "error": "Hitilafu wakati uppdatering nafasi.",
+        "success": "nafasi updated kwa mafanikio.",
+        "title": "Nafasi"
+      },
+      "rank": {
+        "desc": "Inaonyesha cheo cha taxonomic cha jina ndani ya uongozi wake wa IBP.",
+        "title": "Rank."
+      },
+      "source": {
+        "desc": "Inaonyesha database ya mwisho ambayo jina lilitatuliwa. Ikiwa hakuna jina la database linalotolewa hii inaweza kuwa mwandishi aliyepigwa.",
+        "title": "Chanzo"
+      },
+      "status": {
+        "desc": "Inaonyesha hali ya sasa ya jina la jina kama kutambuliwa kwenye portal.",
+        "error": "Hitilafu wakati uppdatering hali ya taxon.",
+        "success": "Hali ya taxon imesasishwa kwa mafanikio.",
+        "title": "Hali"
+      },
+      "title": "Sifa",
+      "via": {
+        "desc": "Inaonyesha chanzo cha awali ambacho data ilikuwa imefungwa kwenye database ya mechi.",
+        "title": "VIA."
+      }
+    },
+    "common_names": "Majina ya kawaida",
+    "synonyms": "Vidokezo",
+    "title": "Taarifa ya Taxonomy."
+  },
+  "position": {
+    "title": "Nafasi"
+  },
+  "rank": {
+    "title": "Rank."
+  },
+  "request": {
+    "button": "Ombi",
+    "failure": "Hitilafu wakati wa kuomba ruhusa",
+    "success": "Ruhusa ya Taxon iliomba kwa mafanikio.",
+    "title": "Omba ruhusa.",
+    "user": "Mtumiaji"
+  },
+  "role": "Jukumu",
+  "status": {
+    "title": "Hali"
+  }
+}

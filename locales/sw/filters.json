@@ -1,0 +1,144 @@
+{
+  "clear": "Futa {{filterCount}} Filter(s)",
+  "custom_fields": {
+    "has_content": "Ina maudhui.",
+    "no_content": "Hakuna maudhui.",
+    "no_custom_field": "Hakuna uwanja wa desturi uliopatikana",
+    "title": "Mashamba ya Desturi."
+  },
+  "data_quality": {
+    "flag": {
+      "flagged": "Imepigwa",
+      "title": "Bendera",
+      "unflagged": "Unflagged."
+    },
+    "identification": {
+      "identified": "Kutambuliwa",
+      "title": "Kitambulisho",
+      "unidentified": "Haijulikani."
+    },
+    "taxon_id": {
+      "has_taxon": "Ina ID ya taxon.",
+      "no_taxon": "Hakuna ID ya Taxon.",
+      "title": "Kitambulisho cha Taxon."
+    },
+    "title": "Ubora wa data.",
+    "validation": {
+      "not_validated": "Si kuthibitishwa.",
+      "title": "Uthibitishaji",
+      "validated": "Kuthibitishwa"
+    }
+  },
+  "dataset_filter": {
+    "dataset": {
+      "title": "Jina la dataset."
+    },
+    "datatable": {
+      "title": "Jina la data"
+    },
+    "title": "Metadata ya dataset."
+  },
+  "document_title": "Kichwa",
+  "item_type": {
+    "title": "Aina ya kipengee."
+  },
+  "location": {
+    "district": "Wilaya.",
+    "map": {
+      "title": "Ramani."
+    },
+    "protected_area": {
+      "title": "Maeneo yaliyohifadhiwa"
+    },
+    "state": {
+      "title": "Jimbo"
+    },
+    "tehsil": "Tehsil.",
+    "title": "Mahali"
+  },
+  "media": {
+    "audio": "Audio.",
+    "image": "Picha",
+    "no_media": "Hakuna vyombo vya habari.",
+    "title": "Aina ya vyombo vya habari.",
+    "video": "Video."
+  },
+  "name": {
+    "reco_name": {
+      "title": "Jina."
+    },
+    "status": {
+      "accepted": "Imekubaliwa",
+      "synonym": "Sambamba",
+      "title": "Hali"
+    },
+    "title": "Jina la kisayansi."
+  },
+  "scientific_name": {
+    "all_names": {
+      "title": "Majina yote"
+    },
+    "taxon_names": {
+      "title": "Majina ya Taxon."
+    },
+    "taxon_rank": {
+      "title": "Taxa cheo"
+    },
+    "taxon_status": {
+      "title": "Hali ya Taxon."
+    },
+    "title": "Jina la kisayansi."
+  },
+  "species_group": {
+    "all": "Wote",
+    "amphibians": "Amphibians.",
+    "arthropods": "Arthropods.",
+    "birds": "Ndege",
+    "fish": "Samaki",
+    "fungi": "Fungi.",
+    "mammals": "Mamalia",
+    "molluscs": "Molluscs.",
+    "others": "Wengine",
+    "plants": "Mimea",
+    "reptiles": "Reptiles.",
+    "title": "SPECIES GROUP."
+  },
+  "taxon_browser": {
+    "search": "Tafuta katika mti.",
+    "search_results": "Kuonyesha {{currentIndex}} ya {{resultsCount}}",
+    "title": "Kivinjari cha Taxon."
+  },
+  "time": {
+    "created_on": "Tarehe iliyoundwa.",
+    "max_date": "Tarehe ya juu",
+    "min_date": "Tarehe ya chini",
+    "month": {
+      "apr": "Aprili.",
+      "aug": "Agosti",
+      "dec": "Desemba",
+      "feb": "Februari",
+      "jan": "Januari",
+      "jul": "Julai",
+      "jun": "Juni.",
+      "mar": "Machi.",
+      "may": "Mei",
+      "nov": "Novemba",
+      "oct": "Oktoba",
+      "sep": "Septemba.",
+      "title": "Mwezi uliona"
+    },
+    "title": "Wakati"
+  },
+  "title": "Filters.",
+  "toggle": "Toggle Filters.",
+  "traits": {
+    "title": "Tabia."
+  },
+  "user": {
+    "search": "Tafuta mtumiaji",
+    "title": "Mtumiaji"
+  },
+  "usergroup": {
+    "title": "Vikundi vya mtumiaji"
+  }
+}

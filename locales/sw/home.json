@@ -1,0 +1,57 @@
+{
+  "donors": "Wafadhili",
+  "features": {
+    "citizen_science": {
+      "desc": "Mwanachama yeyote wa umma anaweza kupakia uchunguzi wa aina yoyote inayoonekana. Wanachama wengine husaidia kutambua, kutangaza na kushikamana na uchunguzi.",
+      "title": "Sayansi ya Wananchi"
+    },
+    "groups": {
+      "desc": "Microsites kwenye portal kuruhusu jamii kujitolea kwa mandhari ya maslahi yao kukusanya, curate na kushiriki maudhui.",
+      "title": "Jamii."
+    },
+    "idao": {
+      "desc": "Wiktrop Idao ni programu ya kusaidia utambulisho wa magugu kuu ya mifumo ya kukuza katika maeneo ya kitropiki na ya Mediterranean.",
+      "title": "Idao."
+    },
+    "landscapes": {
+      "desc": "Aggrating habari juu ya mandhari ya India na maelezo ya kina juu ya mipaka ya anga, orodha ya aina na fasihi husika juu yake. * Kuja hivi karibuni *",
+      "title": "Mandhari."
+    },
+    "literature": {
+      "desc": "Vitabu vya upimaji na kijivu vilivyopakiwa na wanachama au kwa kushirikiana na majarida ya viumbe hai, iliyoandaliwa na metadata na vitambulisho.",
+      "title": "Vitabu vya viumbe hai"
+    },
+    "maps": {
+      "desc": "Kuingiliana mtandaoni na tabaka nyingi za data za anga zilikuwa kama tabaka za ramani kupitia moduli ya maingiliano ya mtandao wa GIS.",
+      "title": "Ramani"
+    },
+    "open_data": {
+      "desc": "Maudhui yote kwenye bandari yanafunguliwa na kutumiwa chini ya leseni ya Creative Commons kwa kutumia tena na kugawana kwa ugawaji kwa wachangiaji wa awali.",
+      "title": "Fungua data."
+    },
+    "species_information": {
+      "desc": "Kurasa za maelezo kwa kila aina ya India kutoka vyanzo vya kuthibitishwa. Msaada kushirikiana na kujenga habari juu ya aina ya India.",
+      "title": "Taarifa ya aina."
+    },
+    "taxonomy": {
+      "desc": "Taasisi na maelezo ya nomenclatural juu ya aina ya India, kuruhusu sasisho za nguvu za kuandaa na kutaja data ya aina, kutibiwa na wataalam.",
+      "title": "Taxonomy"
+    },
+    "title": "Vipengele"
+  },
+  "more": "Tazama uchunguzi wote",
+  "no_recent_observations": "Hakuna uchunguzi wa hivi karibuni.",
+  "observations": "Uchunguzi wa hivi karibuni.",
+  "observed_by": "Uchunguzi na",
+  "partners": "Washirika",
+  "portal_stats": {
+    "activeuser": "Watumiaji",
+    "discussions": "Majadiliano",
+    "documents": "Nyaraka",
+    "maps": "Ramani",
+    "observation": "Uchunguzi",
+    "species": "SPECIES.",
+    "usergroups": "Vikundi."
+  },
+  "sponsors": "Inasaidiwa na"
+}

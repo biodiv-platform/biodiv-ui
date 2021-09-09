@@ -1,0 +1,73 @@
+{
+  "group_edit": "Hariri Group.",
+  "logged_user_only": "Tafadhali ingia kujiunga na kikundi",
+  "member_only": "Tafadhali jiunge na kikundi kupakia uchunguzi",
+  "menu_primary": {
+    "contribute": {
+      "add_data_package": "Ongeza mfuko wa data.",
+      "add_dataset": "Ongeza Dataset.",
+      "add_datatable": "Ongeza DataTable.",
+      "add_document": "Ongeza hati.",
+      "add_fact": "Ongeza ukweli.",
+      "add_list": "Ongeza orodha.",
+      "add_observation": "Ongeza uchunguzi.",
+      "add_trait_or_value": "Ongeza sifa / thamani",
+      "contribute_to_map": "Kuchangia kwenye ramani.",
+      "contribute_to_species": "Kuchangia kwa aina",
+      "title": "Kushiriki"
+    },
+    "groups": {
+      "see_all": "Ona yote",
+      "title": "Vikundi."
+    },
+    "settings": {
+      "leaderboard": "Cheo changu cha kiongozi",
+      "logout": "Ingia",
+      "my_observations": "Maoni yangu",
+      "my_profile": "Profaili yangu.",
+      "title": "Mipangilio"
+    }
+  },
+  "menu_secondary": {
+    "documents": {
+      "title": "Nyaraka"
+    },
+    "idao": {
+      "title": "Idao."
+    },
+    "landscapes": {
+      "title": "Maeneo yaliyohifadhiwa"
+    },
+    "maps": {
+      "title": "Ramani"
+    },
+    "more": {
+      "about_us": "Kuhusu sisi",
+      "dashboard": "Dashibodi",
+      "discussions": "Majadiliano",
+      "download_logs": "Pakua magogo",
+      "leaderboard": "Kiongozi wa Kiongozi",
+      "taxonomy": "Taxonomy",
+      "title": "Zaidi",
+      "users": "Watumiaji"
+    },
+    "observation": {
+      "all_observations": "Mtazamo wote",
+      "checklists": "Orodha.",
+      "datasets": "Datasets.",
+      "datatables": "Datatables.",
+      "observation_datatables": "Data za Uchunguzi",
+      "title": "Uchunguzi"
+    },
+    "pages": {
+      "empty": "Hakuna kurasa",
+      "title": "Kurasa."
+    },
+    "species": {
+      "title": "SPECIES."
+    }
+  },
+  "search": "Utafutaji",
+  "sign_in": "Ingia",
+  "toggle_menu": "Toggle Menyu."
+}
