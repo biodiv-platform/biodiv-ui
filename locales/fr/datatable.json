@@ -5,6 +5,7 @@
   "basis_of_record": "Base d'enregistrement",
   "contributor": "contributeur",
   "create_datatable": "Créer table de données",
+  "deleted_datatable": "Table de données supprimée",
   "field_mapping_table": "Table de cartographie de champ",
   "files_upload": "Chargements de fichiers",
   "found": "Table de données trouvée",
@@ -22,7 +23,8 @@
     "error": "Impossible de créer une table de données",
     "sheet_upload_error": "Impossible de télécharger une feuille",
     "sheet_upload_success": "Feuille téléchargée avec succès",
-    "success": "Table de données créée avec succès"
+    "success": "Table de données créée avec succès",
+    "success_deleted": "Datatable supprimé avec succès"
   },
   "others": "Autres",
   "party": "Fête",

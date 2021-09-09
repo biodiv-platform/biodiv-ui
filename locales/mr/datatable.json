@@ -5,6 +5,7 @@
   "basis_of_record": "रेकॉर्ड आधार",
   "contributor": "योगदानकर्ता",
   "create_datatable": "डेटाटेबल तयार करा",
+  "deleted_datatable": "डेटाटेबल हटवले",
   "field_mapping_table": "फील्ड मॅपिंग टेबल",
   "files_upload": "फायली अपलोड",
   "found": "डेटा उपलब्ध आढळले",
@@ -22,7 +23,8 @@
     "error": "डेटाटेबल तयार करण्यास अक्षम",
     "sheet_upload_error": "पत्रक अपलोड करण्यात अक्षम",
     "sheet_upload_success": "यशस्वीरित्या अपलोड केलेले पत्रक",
-    "success": "यशस्वीरित्या यशस्वीरित्या तयार केले"
+    "success": "यशस्वीरित्या यशस्वीरित्या तयार केले",
+    "success_deleted": "Datatable यशस्वीरित्या हटवले"
   },
   "others": "इतर",
   "party": "पार्टी",

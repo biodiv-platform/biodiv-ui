@@ -466,7 +466,7 @@ export const axGetObservationByDatatableId = async (observationId, params) => {
       `${ENDPOINT.OBSERVATION}/v1/observation/dataTableObservation/${observationId}`,
       { params }
     );
-    return { success: true, data };
+    return { success: !!data, data };
   } catch (e) {
     console.error(e);
     return { success: false, data: {} };

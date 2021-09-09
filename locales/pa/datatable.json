@@ -5,6 +5,7 @@
   "basis_of_record": "ਰਿਕਾਰਡ ਦਾ ਅਧਾਰ",
   "contributor": "ਯੋਗਦਾਨ",
   "create_datatable": "ਡੇਟਾ ਬਣਾਓ",
+  "deleted_datatable": "ਮਿਟਾਏ ਗਏ ਡੇਟਾਟੇਬਲ",
   "field_mapping_table": "ਫੀਲਡ ਮੈਪਿੰਗ ਟੇਬਲ",
   "files_upload": "ਫਾਈਲਾਂ ਅਪਲੋਡ ਕਰਦਾ ਹੈ",
   "found": "ਡੇਟਾਟੇਬਲ ਮਿਲਿਆ",
@@ -22,7 +23,8 @@
     "error": "ਡੇਟਾ ਨੂੰ ਬਣਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ",
     "sheet_upload_error": "ਪੱਤਰ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
     "sheet_upload_success": "ਸਫਲਤਾਪੂਰਵਕ ਅਪਲੋਡ ਕੀਤੀ ਸ਼ੀਟ",
-    "success": "ਡੇਟਾਟੇਬਲ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ"
+    "success": "ਡੇਟਾਟੇਬਲ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ",
+    "success_deleted": "ਡਾਟਾਟੇਬਲ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾਇਆ ਗਿਆ"
   },
   "others": "ਹੋਰ",
   "party": "ਪਾਰਟੀ",

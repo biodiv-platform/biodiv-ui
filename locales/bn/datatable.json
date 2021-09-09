@@ -5,6 +5,7 @@
   "basis_of_record": "রেকর্ডের ভিত্তিতে",
   "contributor": "অবদানকারী",
   "create_datatable": "Datatable তৈরি করুন",
+  "deleted_datatable": "ডেটাটেবল মোছা হয়েছে",
   "field_mapping_table": "ক্ষেত্র ম্যাপিং টেবিল",
   "files_upload": "ফাইল আপলোড",
   "found": "Datatable পাওয়া যায়",
@@ -22,7 +23,8 @@
     "error": "Datatable তৈরি করতে অক্ষম",
     "sheet_upload_error": "শীট আপলোড করতে অক্ষম",
     "sheet_upload_success": "সফলভাবে আপলোড শীট",
-    "success": "Datatable সফলভাবে তৈরি"
+    "success": "Datatable সফলভাবে তৈরি",
+    "success_deleted": "ডেটাটেবল সফলভাবে মুছে ফেলা হয়েছে"
   },
   "others": "অন্যান্য",
   "party": "পার্টি",
