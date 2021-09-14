@@ -1,7 +1,8 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
+import { getLocalIcon } from "@utils/media";
 import { toHumanString } from "human-readable-numbers";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -34,7 +35,9 @@ const CardLink = styled.a`
 
 export default function Card({ name, count, index, meta }) {
   const { t } = useTranslation();
-  const { icon: IconMain, link, color } = meta;
+  const { icon, link, color } = meta;
+
+  const iconPath = getLocalIcon(icon, "icons");
 
   return (
     <LocalLink href={link} prefixGroup={true}>
@@ -46,7 +49,7 @@ export default function Card({ name, count, index, meta }) {
           borderRadius="lg"
           _hover={{ borderColor: color }}
         >
-          <IconMain s={70} />
+          <Image src={iconPath} alt={icon} boxSize="70" />
           <Text className="count" fontSize="3xl" mt={2}>
             {toHumanString(count || 0)}
           </Text>

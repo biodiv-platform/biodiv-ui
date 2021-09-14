@@ -1,17 +1,20 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
+import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-export default function Info({ icon: Icon, title, link }) {
+export default function Info({ icon, title, link }) {
   const { t } = useTranslation();
+
+  const iconPath = getLocalIcon(icon, "icons");
 
   return (
     <Flex align="flex-start" direction={["column", "row"]}>
       <Box w={90} mr={5} mb={8}>
         <LocalLink href={link} prefixGroup={true}>
           <Link aria-label={title} display="inline-block">
-            <Icon s={90} />
+            <Image src={iconPath} alt={icon} minW={90} display="inline-block" />
           </Link>
         </LocalLink>
       </Box>
