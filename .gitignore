@@ -23,6 +23,7 @@
 .DS_Store
 .env*
 src/configs/site-config.js*
+src/configs/site-config.dev.js
 optimizations.md
 
 # debug

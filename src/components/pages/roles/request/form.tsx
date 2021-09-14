@@ -74,7 +74,9 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
             )}
           </ModalBody>
           <ModalFooter>
-            <SubmitButton leftIcon={<CheckIcon />}>{isAdmin ? t("taxon:grant.button") : t("taxon:request.button")}</SubmitButton>
+            <SubmitButton leftIcon={<CheckIcon />}>
+              {isAdmin ? t("taxon:grant.button") : t("taxon:request.button")}
+            </SubmitButton>
             <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
               {t("common:cancel")}
             </Button>
