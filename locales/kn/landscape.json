@@ -1,20 +1,20 @@
 {
-  "All": "ಎಲ್ಲರೂ",
-  "Validate": "ಮೌಲ್ಯದ",
-  "download_map": "ನಕ್ಷೆ ಡೌನ್ಲೋಡ್ ಮಾಡಿ",
-  "no_species_found": "ಯಾವುದೇ ಜಾತಿಗಳ ಪಟ್ಟಿ ಕಂಡುಬಂದಿಲ್ಲ",
+  "All": "ಎಲ್ಲಾ",
+  "Validate": "ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+  "download_map": "ಭೂಪಟವನ್ನು ಡೌನ್ಲೋಡ್ ಮಾಡಿ",
+  "no_species_found": "ಯಾವುದೇ ಪ್ರಭೇದಗಳ ಪಟ್ಟಿ ಕಂಡುಬಂದಿಲ್ಲ",
   "observation": {
-    "fauna_list": "ಪ್ರಾಣಿಗಳ ಪಟ್ಟಿ",
-    "flora_list": "ಫ್ಲೋರಾ ಪಟ್ಟಿ",
+    "fauna_list": "ಪ್ರಾಣಿ ಸಂಕುಲದ ಪಟ್ಟಿ",
+    "flora_list": "ಸಸ್ಯ ಸಂಪತ್ತಿನ ಪಟ್ಟಿ",
     "life_list": {
       "title": "ವೀಕ್ಷಣೆ ಪಟ್ಟಿ"
     },
-    "species_filter": "ಜಾತಿಗಳು ಫಿಲ್ಟರ್"
+    "species_filter": "ಪ್ರಭೇದಗಳ ಶೋಧಕ"
   },
-  "related_documents": "ಸಂಬಂಧಿತ ದಾಖಲೆಗಳು)",
-  "site_number": "ಸೈಟ್ #",
+  "related_documents": "ಸಂಬಂಧಿತ ದಾಖಲೆ(ಗಳು)",
+  "site_number": "ತಾಣ #",
   "title": "ಸಂರಕ್ಷಿತ ಪ್ರದೇಶಗಳು",
   "update": {
-    "success": "ಕ್ಷೇತ್ರ ಉಳಿಸಲಾಗಿದೆ"
+    "success": "ಕ್ಷೇತ್ರವನ್ನು ಉಳಿಸಲಾಗಿದೆ"
   }
 }
