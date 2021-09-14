@@ -1,4 +1,5 @@
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import { FEATURES } from "@static/home";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -14,9 +15,11 @@ export default function Features() {
         {t("home:features.title")}
       </Heading>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={6}>
-        {FEATURES.map(({ icon, title, link }) => (
-          <Info key={title} icon={icon} title={title} link={link} />
-        ))}
+        {FEATURES.filter((o) => o.tag.includes(SITE_CONFIG.HOME.FEATURES)).map(
+          ({ icon, title, link }) => (
+            <Info key={title} icon={icon} title={title} link={link} />
+          )
+        )}
       </SimpleGrid>
     </Box>
   );
