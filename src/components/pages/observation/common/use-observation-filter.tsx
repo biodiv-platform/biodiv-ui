@@ -86,6 +86,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
       if (filter.f?.offset === 0) {
         setObservationData((_draft) => {
           _draft.l = [];
+          _draft.n = -1;
           _draft.ml = [];
         });
       }
