@@ -5,6 +5,10 @@
       "desc": "Mwanachama yeyote wa umma anaweza kupakia uchunguzi wa aina yoyote inayoonekana. Wanachama wengine husaidia kutambua, kutangaza na kushikamana na uchunguzi.",
       "title": "Sayansi ya Wananchi"
     },
+    "datasets": {
+      "desc": "Seti tofauti za data zilizo na metadata kulingana na Lugha ya Marashi ya Kiikolojia.",
+      "title": "Hifadhidata"
+    },
     "groups": {
       "desc": "Microsites kwenye portal kuruhusu jamii kujitolea kwa mandhari ya maslahi yao kukusanya, curate na kushiriki maudhui.",
       "title": "Jamii."
@@ -25,12 +29,28 @@
       "desc": "Kuingiliana mtandaoni na tabaka nyingi za data za anga zilikuwa kama tabaka za ramani kupitia moduli ya maingiliano ya mtandao wa GIS.",
       "title": "Ramani"
     },
+    "mikoko_citizen_science": {
+      "desc": "Kujitolea kwa utofauti wa shughuli za kijamii na kiuchumi. \nHabari kutoka kwa jamii na washirika wa kisayansi waliohusika katika usimamizi wa rasilimali za mikoko. \nInashughulikia matumizi na njia za mavuno, masoko na mahitaji.",
+      "title": "Riziki"
+    },
+    "mikoko_idao": {
+      "desc": "Chombo cha maingiliano cha kutambua spishi za mikoko kulingana na uchunguzi wa sifa za shamba",
+      "title": "Tambua Spishi za mikoko"
+    },
+    "mikoko_monitoring": {
+      "desc": "Shughuli za ufuatiliaji kama upandaji miti, uvuvi, ukataji miti, kazi ya ardhi, na pia njia za ukarabati na mbinu zinazotumiwa Kenya (na katika maeneo mengine ya ulimwengu). \nKuangazia changamoto na njia bora na changamoto kutoka kwa mipango juu ya ulinzi na urejesho wa mikoko.",
+      "title": "Ufuatiliaji"
+    },
+    "mikoko_species_information": {
+      "desc": "Kurasa za kuelezea kwa kila spishi ya mikoko ya Kenya iliyopangwa na timu hiyo. \nSaidia kushirikiana na kujenga habari juu ya spishi za Kenya.",
+      "title": "Habari za spishi"
+    },
     "open_data": {
       "desc": "Maudhui yote kwenye bandari yanafunguliwa na kutumiwa chini ya leseni ya Creative Commons kwa kutumia tena na kugawana kwa ugawaji kwa wachangiaji wa awali.",
       "title": "Fungua data."
     },
     "species_information": {
-      "desc": "Kurasa za maelezo kwa kila aina ya India kutoka vyanzo vya kuthibitishwa. Msaada kushirikiana na kujenga habari juu ya aina ya India.",
+      "desc": "Kurasa zinazoelezea kwa kila spishi kutoka kwa vyanzo vilivyothibitishwa. Saidia kushirikiana na kujenga habari juu ya spishi za India.",
       "title": "Taarifa ya aina."
     },
     "taxonomy": {

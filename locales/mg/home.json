@@ -5,6 +5,10 @@
       "desc": "Izay mpikambana ao amin'ny besinimaro amin'ny ankapobeny dia afaka mampakatra ny fandinihana ireo karazana rehetra hita maso. Ny mpikambana hafa dia manampy amin'ny famaritana, manangom-bolo ary mamoritra ny fandinihana.",
       "title": "Siansa momba ny zom-pirenena"
     },
+    "datasets": {
+      "desc": "Datety isan-karazany miaraka amin'ny metadata araka ny Ecological Markup Language.",
+      "title": "Datasets"
+    },
     "groups": {
       "desc": "Ny microsites ao amin'ny vavahadin-tserasera dia mamela ny fiarahamonina natokana ho an'ireo lohahevitra mahaliana azy ireo hanangona, mifamaly ary mizara votoaty.",
       "title": "fiaraha-monina"
@@ -25,12 +29,28 @@
       "desc": "Mifandraisa an-tserasera miaraka amin'ny sosona marobe marobe amin'ny alàlan'ny sarintany sarintany amin'ny alàlan'ny module web ifotony.",
       "title": "Maps"
     },
+    "mikoko_citizen_science": {
+      "desc": "Miompana amin'ny fahasamihafana amin'ny asa sosialy-toekarena. \nFampahalalana avy amin'ny vondrom-piarahamonina eo an-toerana sy ny mpiara-miasa siantifika tafiditra amin'ny fitantanana ny harena honko. \nNy fandrakofana dia mampiasa sy fomba fijinjana, tsena ary fitakiana.",
+      "title": "Asa fivelomana"
+    },
+    "mikoko_idao": {
+      "desc": "Fitaovana ifanakalozana hahafantarana ireo karazana honko mifototra amin'ny fandinihana ireo toetra mampiavaka ny saha",
+      "title": "Fantaro ireo karazana honko"
+    },
+    "mikoko_monitoring": {
+      "desc": "Ny hetsika fanaraha-maso toy ny fambolen-kazo, ny jono, ny fanapahana hazo, ny fibodoana ny tany, ary koa ny fomba fanarenana sy ny teknika ampiasaina any Kenya (sy any amin'ny faritra hafa manerantany). \nManasongadina fanamby sy fomba fanao tsara indrindra ary fanamby avy amin'ny fandraisana andraikitra amin'ny fiarovana sy famerenana amin'ny laoniny ny honko.",
+      "title": "Fanaraha-maso"
+    },
+    "mikoko_species_information": {
+      "desc": "Pejy misy fanazavana ho an'ny karazana Mangrove rehetra any Kenya izay namboarin'ilay ekipa. \nAmpio hiara-miasa sy hanangana vaovao momba ny karazana Kenya.",
+      "title": "Fampahalalana momba ny karazana"
+    },
     "open_data": {
       "desc": "Misokatra ny votoatiny rehetra ao amin'ny vavahadin-tserasera ary manompo eo ambany lisansa Creative Commons ho an'ny fampiasana sy ny fizarana amin'ny fanomezam-boninahitra amin'ireo mpandray anjara tany am-boalohany.",
       "title": "Open data"
     },
     "species_information": {
-      "desc": "Pejy famaritana ho an'ny karazan-javaboarin'i India rehetra avy amin'ny loharano voamarina. Vonjeo hiara-hiasa sy hanorina fampahalalana ao amin'ny karazan'i India.",
+      "desc": "Pejy misy fanazavana ho an'ny karazana rehetra avy amin'ny loharano voamarina. Ampio hiara-miasa sy hanangana vaovao momba ny karazana India.",
       "title": "Fampahalalana momba ny karazana"
     },
     "taxonomy": {

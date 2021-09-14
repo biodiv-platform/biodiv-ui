@@ -5,9 +5,9 @@
   "basis_of_record": "Basis of Record",
   "contributor": "contributor",
   "create_datatable": "Create DataTable",
-  "deleted_datatable":"Deleted Datatable",
+  "deleted_datatable": "Deleted Datatable",
   "field_mapping_table": "Field Mapping Table",
-  "files_upload": "Files",
+  "files_upload": "Files Uploads",
   "found": "Datatable Found",
   "geographical_coverage": "Geographic Coverage",
   "is_verified": "Observation Verified",
@@ -24,7 +24,7 @@
     "sheet_upload_error": "Unable to Upload sheet",
     "sheet_upload_success": "Successfully Uploaded sheet",
     "success": "Datatable created successfully",
-    "success_deleted":"Successfully deleted Datatable"
+    "success_deleted": "Successfully deleted Datatable"
   },
   "others": "Others",
   "party": "Party",

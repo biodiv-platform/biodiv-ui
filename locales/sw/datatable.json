@@ -5,6 +5,7 @@
   "basis_of_record": "Msingi wa rekodi.",
   "contributor": "Mchangiaji",
   "create_datatable": "Unda DataTable.",
+  "deleted_datatable": "Imefuta Datatable",
   "field_mapping_table": "Meza ya ramani ya shamba",
   "files_upload": "Upakiaji wa faili.",
   "found": "Inapatikana kwa data",
@@ -22,7 +23,8 @@
     "error": "Haiwezi kuunda datatable.",
     "sheet_upload_error": "Haiwezi kupakia karatasi",
     "sheet_upload_success": "Karatasi iliyopakiwa kwa ufanisi",
-    "success": "DataTable imeundwa kwa mafanikio."
+    "success": "DataTable imeundwa kwa mafanikio.",
+    "success_deleted": "Imefaulu kufutwa"
   },
   "others": "Wengine",
   "party": "Chama",

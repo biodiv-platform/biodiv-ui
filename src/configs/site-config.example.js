@@ -73,7 +73,7 @@ const SITE_CONFIG_EXAMPLE = {
   },
   HOME: {
     DONORS: false,
-    FEATURES: true,
+    FEATURES: "ibp",
     GALLERY: true,
     MAP: [],
     PARTNERS: true,

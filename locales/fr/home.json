@@ -5,6 +5,10 @@
       "desc": "Tout utilisateur inscrit peut poster une observation de toute espèce observée. Les autres membres aident à identifier, et valider les observations, ils peuvent également poster un commentaire.",
       "title": "Science Citoyenne"
     },
+    "datasets": {
+      "desc": "Ensembles de données diversifiés avec des métadonnées selon le langage de balisage écologique.",
+      "title": "Ensembles de données"
+    },
     "groups": {
       "desc": "Les microsites sur le portail permettent aux communautés dédiées aux thèmes de leur intérêt de collecter, de céder et de partager des contenus.",
       "title": "Communautés"
@@ -24,6 +28,22 @@
     "maps": {
       "desc": "Interagissez en ligne avec plusieurs couches de données spatiales accompagnées de calques de carte via un module Web-SIG interactif.",
       "title": "Cartes"
+    },
+    "mikoko_citizen_science": {
+      "desc": "Consacré à la diversité des activités socio-économiques. \nInformations des communautés locales et des partenaires scientifiques impliqués dans la gestion des ressources de la mangrove. \nCouvre les usages et les méthodes de récolte, les marchés et les demandes.",
+      "title": "Moyens de subsistance"
+    },
+    "mikoko_idao": {
+      "desc": "Un outil interactif pour identifier les espèces de mangroves basé sur l'observation des caractéristiques du terrain",
+      "title": "Identifier les espèces de mangrove"
+    },
+    "mikoko_monitoring": {
+      "desc": "Activités de surveillance telles que la plantation d'arbres, la pêche, la coupe de bois, l'occupation des terres, ainsi que les méthodes et techniques de réhabilitation utilisées au Kenya (et dans d'autres régions du monde). \nMettre en évidence les défis et les meilleures pratiques et les défis des initiatives sur la protection et la restauration des mangroves.",
+      "title": "Surveillance"
+    },
+    "mikoko_species_information": {
+      "desc": "Pages descriptives pour chaque espèce de mangrove du Kenya organisée par l'équipe. \nAidez à collaborer et à créer des informations sur les espèces du Kenya.",
+      "title": "Informations sur l'espèce"
     },
     "open_data": {
       "desc": "Tous les contenus sur le portail sont ouverts et utilisés sous licence Creative Commons pour la réutilisation et le partage avec mention aux contributeurs d'origine.",

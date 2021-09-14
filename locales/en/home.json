@@ -5,6 +5,10 @@
       "desc": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
       "title": "Citizen Science"
     },
+    "datasets": {
+      "desc": "Diverse datasets with metadata according to the Ecological Markup Language.",
+      "title": "Datasets"
+    },
     "groups": {
       "desc": "Microsites on the portal allow communities dedicated to themes of their interest to collect, curate and share content.",
       "title": "Communities"
@@ -25,12 +29,28 @@
       "desc": "Interact online with multiple layers of spatial data served as map layers through an interactive web-GIS module.",
       "title": "Maps"
     },
+    "mikoko_citizen_science": {
+      "desc": "Devoted to the diversity of socio-economic activities. Information from local communities and scientific partners involved in the management of mangrove resources. Covers uses and methods of harvests, markets and demands.",
+      "title": "Livelihoods & Citizen Science"
+    },
+    "mikoko_idao": {
+      "desc": "An interactive tool to identify mangrove species based upon observation of field characteristics",
+      "title": "Identify Mangrove Species"
+    },
+    "mikoko_monitoring": {
+      "desc": "Monitoring activities such as tree planting, fishing, wood cutting, land occupation, as well as rehabilitation methods and techniques used in Kenya (and in other regions of the world). Highlighting challenges and best practices and challenges from initiatives on protection and restoration of mangroves.",
+      "title": "Monitoring"
+    },
+    "mikoko_species_information": {
+      "desc": "Descriptive pages for every Mangrove species of Kenya curated by the team. Help collaborate and build information on Kenya's species. ",
+      "title": "Species information"
+    },
     "open_data": {
       "desc": "All content on the portal is open and served under Creative Commons license for reuse and sharing with attribution to the original contributors.",
       "title": "Open Data"
     },
     "species_information": {
-      "desc": "Descriptive pages for every species of India from authenticated sources. Help collaborate and build information on India's species.",
+      "desc": "Descriptive pages for every species from authenticated sources. Help collaborate and build information on India's species.",
       "title": "Species information"
     },
     "taxonomy": {
