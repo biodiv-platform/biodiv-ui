@@ -12,12 +12,13 @@ import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import DateInputs from "../../create/form/date";
 import LocationPicker from "../../create/form/location";
 import Uploader from "../../create/form/uploader";
+import CheckListAnnotationForm from "./checklistAnnotation";
+import DateInputs from "./dateInput";
 
 interface IObservationEditFormProps {
   observation: ObservationUpdateData;
@@ -34,31 +35,69 @@ export default function ObservationEditForm({
   const router = useLocalRouter();
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
+  const parsechecklistAnnotations = (checklistAnnotations) => {
+    if (checklistAnnotations) {
+      return Object.entries(JSON.parse(checklistAnnotations)).map(([key, value]) => ({
+        value,
+        label: key,
+        defaultValue: value
+      }));
+    }
+  };
+
+  const formatChecklistAnnotation = (value) => {
+    const formatData = {};
+    if (value) {
+      value.map((item) => {
+        formatData[item.label] = item.value;
+      });
+      return JSON.stringify(formatData);
+    }
+  };
+
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
-        resources: Yup.array().of(
-          Yup.object().shape({
-            status: Yup.number().oneOf([AssetStatus.Uploaded, null], t("common:edit_not_uploaded"))
-          })
-        ),
+        resources: Yup.array()
+          .of(
+            Yup.object().shape({
+              status: Yup.number().oneOf(
+                [AssetStatus.Uploaded, null],
+                t("common:edit_not_uploaded")
+              )
+            })
+          )
+          .when("dataTableId", (dataTableId, schema) =>
+            dataTableId ? schema : schema.min(1).required("")
+          ),
         notes: Yup.string().nullable(),
-
         // Date and Location
-        observedOn: Yup.string().required(),
+        observedOn: Yup.string().when("dateAccuracy", (dateAccuracy, schema) =>
+          dateAccuracy === "UNKNOWN" ? schema : schema.required()
+        ),
         dateAccuracy: Yup.string().nullable().required(),
         observedAt: Yup.string().required(),
         reverseGeocoded: Yup.string().required(),
         locationScale: Yup.string().nullable().required(),
         latitude: Yup.number().required(),
         longitude: Yup.number().required(),
-        hidePreciseLocation: Yup.boolean()
+        hidePreciseLocation: Yup.boolean(),
+        dataTableId: Yup.number().nullable(),
+        basisOfRecord: Yup.string().required(),
+        checklistAnnotations: Yup.array().of(
+          Yup.object().shape({
+            value: Yup.string(),
+            label: Yup.string(),
+            defaultValue: Yup.string()
+          })
+        )
       })
     ),
     defaultValues: {
       ...observation,
-      resources: observation.resources?.map((r) => ({
+      checklistAnnotations: parsechecklistAnnotations(observation?.checklistAnnotations),
+      resources: observation?.resources?.map((r) => ({
         ...r,
         hashKey: nanoid(),
         status: AssetStatus.Uploaded,
@@ -66,14 +105,20 @@ export default function ObservationEditForm({
         isUsed: 1,
         rating: r.rating || 0
       })),
-      observedOn: formatDateFromUTC(observation.observedOn)
+      observedOn: observation.observedOn ? formatDateFromUTC(observation.observedOn) : ""
     }
+  });
+
+  const { fields }: any = useFieldArray({
+    control: hForm.control,
+    name: "checklistAnnotations"
   });
 
   const handleOnSubmit = async (values) => {
     const payload = {
       ...values,
-      resources: values.resources.map(
+      checklistAnnotations: formatChecklistAnnotation(values.checklistAnnotations),
+      resources: values?.resources?.map(
         ({ path, url, type, caption, rating, licenseId, languageId }) => ({
           path,
           url,
@@ -84,9 +129,10 @@ export default function ObservationEditForm({
           languageId
         })
       ),
-      observedOn: dateToUTC(values.observedOn).format()
+      observedOn: values.observedOn.length > 0 ? dateToUTC(values.observedOn).format() : null
     };
     const { success } = await axUpdateObservation(payload, observationId);
+
     if (success) {
       notification("Observation Updated Successfully", NotificationType.Success);
       onClose();
@@ -99,7 +145,11 @@ export default function ObservationEditForm({
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
         <Uploader name="resources" licensesList={licensesList} isCreate={false} />
         <LocationPicker />
-        <DateInputs showTags={false} />
+        <DateInputs
+          showTags={false}
+          disabled={observation.dateAccuracy === "UNKNOWN" ? true : false}
+        />
+        {observation.checklistAnnotations && <CheckListAnnotationForm fields={fields} />}
         <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
           <Link>
             <Alert mb={4} borderRadius="md">

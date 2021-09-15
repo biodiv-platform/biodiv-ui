@@ -13,7 +13,7 @@ module.exports = {
     "rgx:/document/": ["document", "filters", "activity"],
     "rgx:/group/": ["group"],
     "rgx:/landscape/": ["landscape", "observation", "filters", "activity"],
-    "rgx:/observation/": ["observation", "filters", "activity"],
+    "rgx:/observation/": ["observation", "datatable", "filters", "activity"],
     "rgx:/page/": ["page"],
     "rgx:/roles/": ["filters", "taxon"],
     "rgx:/register": ["user"],
