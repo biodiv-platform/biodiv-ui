@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "ਜੀਓ ਗੋਪਨੀਯਤਾ",
     "id": "ਆਈਡੀ",
+    "observedAt": "ਸਥਾਨ ਦਾ ਨਾਮ",
     "sGroup": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
     "scientificName": "ਵਿਗਿਆਨਕ ਨਾਮ",
     "userInfo": "ਉਪਭੋਗਤਾ ਦੀ ਜਾਣਕਾਰੀ"

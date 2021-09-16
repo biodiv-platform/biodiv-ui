@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "भू गोपनीयता",
     "id": "ईद",
+    "observedAt": "स्थान का नाम",
     "sGroup": "प्रजाति समूह",
     "scientificName": "वैज्ञानिक नाम",
     "userInfo": "उपयोगकर्ता जानकारी"

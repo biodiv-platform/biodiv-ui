@@ -37,7 +37,8 @@
     "id": "ID",
     "sGroup": "Species Group",
     "scientificName": "Scientific Name",
-    "userInfo": "User Info"
+    "userInfo": "User Info",
+    "observedAt":"Place Name"
   },
   "taxonomy": "Taxonomic Coverage",
   "temporal": "Temporal Coverage",

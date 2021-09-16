@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "भौगोलिक गोपनीयता",
     "id": "आयडी",
+    "observedAt": "ठिकाणाचे नाव",
     "sGroup": "प्रजाती गट",
     "scientificName": "शास्त्रीय नाव",
     "userInfo": "वापरकर्ता माहिती"

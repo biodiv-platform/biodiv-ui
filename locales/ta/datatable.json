@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "ஜியோ தனியுரிமை",
     "id": "ஐடி",
+    "observedAt": "இடப்பெயர்",
     "sGroup": "இனங்கள் குழு",
     "scientificName": "அறிவியல் பெயர்",
     "userInfo": "பயனர் தகவல்"

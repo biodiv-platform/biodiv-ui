@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "జియో గోప్యత",
     "id": "Id.",
+    "observedAt": "స్థలం పేరు",
     "sGroup": "జాతుల సమూహం",
     "scientificName": "శాస్త్రీయ పేరు",
     "userInfo": "వాడుకరి సమాచారం"

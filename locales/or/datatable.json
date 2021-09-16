@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "ଜିଓ ଗୋପନୀୟତା |",
     "id": "ପରିଚୟ",
+    "observedAt": "ସ୍ଥାନ ନାମ",
     "sGroup": "ପ୍ରଜାତି ଗୋଷ୍ଠୀ |",
     "scientificName": "ବ scientific ଜ୍ଞାନିକ ନାମ",
     "userInfo": "ବ୍ୟବହାରକାରୀ ସୂଚନା"

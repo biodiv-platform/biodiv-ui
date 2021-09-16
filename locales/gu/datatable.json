@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "જીઓ ગોપનીયતા",
     "id": "ID",
+    "observedAt": "સ્થળનું નામ",
     "sGroup": "પ્રજાતિ ગ્રુપ",
     "scientificName": "વૈજ્ઞાનિક નામ",
     "userInfo": "વપરાશકર્તા માહિતી"

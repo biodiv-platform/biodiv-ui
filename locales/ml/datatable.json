@@ -35,6 +35,7 @@
   "table": {
     "geoPrivacy": "ജിയോ സ്വകാര്യത",
     "id": "ഐഡി",
+    "observedAt": "സ്ഥലനാമം",
     "sGroup": "സ്പീഷിസ് ഗ്രൂപ്പ്",
     "scientificName": "ശാസ്ത്രീയ നാമം",
     "userInfo": "ഉപയോക്തൃ വിവരം"

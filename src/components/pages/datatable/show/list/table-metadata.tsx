@@ -84,6 +84,11 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
           Cell: ({ value }) =>
             value ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />
         };
+      case "observedAt":
+        return {
+          Header: "datatable:table.observedAt",
+          accessor: "observedAt",
+        }
       default:
         return {
           Header: item.replace(/(\B[A-Z])/g, " $1").replace(/^./, item[0].toUpperCase()),
