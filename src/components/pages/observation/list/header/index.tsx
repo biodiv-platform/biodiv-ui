@@ -92,8 +92,7 @@ export default function ListHeader() {
           </Button>
         </Stack>
       </Flex>
-
-      {observationData && observationData.n > 0 && (
+      {observationData && observationData.n > -1 && (
         <Text color="gray.600" mb={4}>
           {format(observationData.n)} {t("observation:list.observations_found")}
         </Text>
