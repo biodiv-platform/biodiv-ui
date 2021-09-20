@@ -1,5 +1,6 @@
 import { Image, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
+import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
@@ -45,7 +46,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
           accessor: "scientificName",
           Cell: ({ value }) => (
             <Text key={value} fontStyle="italic">
-              {value}
+              <ScientificName value={value} />
             </Text>
           )
         };
