@@ -7,6 +7,7 @@ import CoveragePanel from "./coverage";
 import DownloadButtons from "./download-buttons";
 import DocumentSidebarMap from "./map";
 import SpatialCoverage from "./special-coverage";
+import  ScientificNames from "./scientific-names";
 
 interface SidebarProps {
   showDocument: ShowDocument;
@@ -22,7 +23,8 @@ export default function Sidebar({
   documentPath
 }: SidebarProps) {
   const { t } = useTranslation();
-
+  /* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
+   console.log("id hai ye = ",showDocument.document?.id);
   return (
     <div>
       <User user={showDocument.userIbp} />
@@ -50,6 +52,10 @@ export default function Sidebar({
         type="species"
         endpointType="speciesGroup"
         documentId={showDocument.document?.id}
+      />
+      <ScientificNames
+        documentId={showDocument.document?.id}
+        authorId={showDocument.document?.authorId}
       />
     </div>
   );

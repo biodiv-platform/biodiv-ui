@@ -21,6 +21,8 @@ export default function DeleteActionButton({
   deleteFunc,
   title,
   description,
+  deleteGnfinderName,
+  refreshgnfinderNameFunc,
   deleted
 }) {
   const { t } = useTranslation();
@@ -29,11 +31,25 @@ export default function DeleteActionButton({
   const cancelRef = React.useRef(null);
 
   const handleOnDelete = async () => {
+    
+    console.log("deleteGnfinderName=",deleteGnfinderName)
+    console.log("refreshgnfinderNameFunc",refreshgnfinderNameFunc)
+    
+    
     const { success } = await deleteFunc(observationId);
     if (success) {
+     
       notification(deleted, NotificationType.Success);
       onClose();
-      router.push("/", true);
+      if(deleteGnfinderName){
+        refreshgnfinderNameFunc
+      }
+      /* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
+      console.log("value of onclose is = ",onClose);
+      if(!deleteGnfinderName){
+        router.push("/", true);
+      }
+      
     }
   };
 
