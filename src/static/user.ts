@@ -18,7 +18,7 @@ export const DEFAULT_FILTER = {
 };
 
 export const USER_FILTER_KEY = {
-  index: "extended_user",
+  index: "eu",
   name: {
     filterKey: "name",
     searchKey: "user.name"

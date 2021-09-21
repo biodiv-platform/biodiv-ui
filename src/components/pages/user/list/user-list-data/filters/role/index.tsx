@@ -1,5 +1,5 @@
 import useUserFilter from "@components/pages/user/common/use-user-filter";
-import { stripSpecialCharacters } from "@utils/text";
+import { covertToSentenceCase } from "@utils/text";
 import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
@@ -12,7 +12,7 @@ export default function RoleFilter() {
   } = useUserFilter();
 
   const OPTIONS = Object.keys(role)?.map((val) => ({
-    label: stripSpecialCharacters(val),
+    label: covertToSentenceCase(val),
     value: val,
     stat: role[val]
   }));
