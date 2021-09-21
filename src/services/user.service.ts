@@ -153,3 +153,23 @@ export const axDownloadFile = async (documentPath) => {
     return { success: false };
   }
 };
+
+export const axGetUserList = async (
+  params,
+  payload = {},
+  index = "extended_user",
+  type = "_doc"
+) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.USER}/v1/user/list/${index}/${type}`,
+      payload,
+      { params }
+    );
+
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
