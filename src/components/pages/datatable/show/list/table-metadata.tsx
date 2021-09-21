@@ -45,7 +45,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
           Header: "datatable:table.scientificName",
           accessor: "scientificName",
           Cell: ({ value }) => (
-            <Text key={value} fontStyle="italic">
+            <Text key={value}>
               <ScientificName value={value} />
             </Text>
           )

@@ -17,8 +17,8 @@ import * as Yup from "yup";
 
 import LocationPicker from "../../create/form/location";
 import Uploader from "../../create/form/uploader";
-import CheckListAnnotationForm from "./checklistAnnotation";
-import DateInputs from "./dateInput";
+import CheckListAnnotationForm from "./checklist-annotation";
+import DateInputs from "./date-input";
 
 interface IObservationEditFormProps {
   observation: ObservationUpdateData;
