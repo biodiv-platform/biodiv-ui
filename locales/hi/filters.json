@@ -135,8 +135,14 @@
     "title": "लक्षण"
   },
   "user": {
+    "email": "ईमेल",
+    "institution_title": "संस्था",
+    "phone": "फ़ोन नंबर",
+    "profession_title": "पेशा",
+    "role_title": "भूमिका",
     "search": "उपयोगकर्ता खोजें",
-    "title": "उपयोगकर्ता"
+    "title": "उपयोगकर्ता",
+    "username": "उपयोगकर्ता नाम"
   },
   "usergroup": {
     "title": "यूसर समूह"

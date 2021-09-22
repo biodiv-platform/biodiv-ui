@@ -10,7 +10,7 @@ export default function PhoneNumberFilter() {
       filterKey={USER_FILTER_KEY.phoneNumber.filterKey}
       filterKeyList={USER_FILTER_KEY}
       useIndexFilter={useUserFilter}
-      translateKey="filters:user_phone_number"
+      translateKey="filters:user.phone"
     />
   );
 }

@@ -135,8 +135,14 @@
     "title": "സവിശേഷതകൾ"
   },
   "user": {
+    "email": "ഇമെയിൽ",
+    "institution_title": "ഇൻസ്റ്റിറ്റ്യൂട്ട്",
+    "phone": "ഫോൺ നമ്പർ",
+    "profession_title": "തൊഴിൽ",
+    "role_title": "പങ്ക്",
     "search": "ഉപയോക്താവിനെ തിരയുക",
-    "title": "ഉപയോക്താവ് "
+    "title": "ഉപയോക്താവ് ",
+    "username": "ഉപയോക്തൃ നാമം"
   },
   "usergroup": {
     "title": "ഉപയോക്തൃ ഗ്രൂപ്പുകൾ"

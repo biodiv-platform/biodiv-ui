@@ -19,7 +19,7 @@ export default function InstituteFilter() {
 
   return (
     <CheckboxFilterPanel
-      translateKey="filters:user_institution"
+      translateKey="filters:user.institution_"
       filterKey="institution"
       options={STATE_OPTIONS}
       statKey="institution"

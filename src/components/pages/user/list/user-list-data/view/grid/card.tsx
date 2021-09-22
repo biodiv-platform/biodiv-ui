@@ -19,7 +19,7 @@ export default function GridViewCard({ user: { user } }) {
             />
           </Link>
         </LocalLink>
-        <ShadowedUser user={user} />
+        <ShadowedUser user={user} avatar={false} />
       </Box>
     </Box>
   );

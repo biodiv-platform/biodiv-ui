@@ -135,8 +135,14 @@
     "title": "Traits"
   },
   "user": {
+    "email": "email",
+    "institution_title": "Institute",
+    "phone": "Phone Number",
+    "profession_title": "Profession",
+    "role_title": "Role",
     "search": "Search User",
-    "title": "User"
+    "title": "User",
+    "username": "User Name"
   },
   "usergroup": {
     "title": "User Groups"

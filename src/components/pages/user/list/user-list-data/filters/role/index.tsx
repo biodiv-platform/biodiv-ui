@@ -19,7 +19,7 @@ export default function RoleFilter() {
 
   return (
     <CheckboxFilterPanel
-      translateKey="filters:user_role"
+      translateKey="filters:user.role_"
       filterKey="role"
       options={OPTIONS}
       statKey="role"

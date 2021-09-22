@@ -19,7 +19,7 @@ export default function ProfessionFilter() {
 
   return (
     <CheckboxFilterPanel
-      translateKey="filters:user_profession"
+      translateKey="filters:user.profession_"
       filterKey="profession"
       options={OPTIONS}
       statKey="profession"

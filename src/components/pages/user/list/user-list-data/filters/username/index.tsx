@@ -10,7 +10,7 @@ export default function UserNameFilter() {
       filterKey={USER_FILTER_KEY.userName.filterKey}
       filterKeyList={USER_FILTER_KEY}
       useIndexFilter={useUserFilter}
-      translateKey="filters:user_username"
+      translateKey="filters:user.username"
     />
   );
 }

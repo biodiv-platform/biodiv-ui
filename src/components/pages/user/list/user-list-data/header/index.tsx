@@ -20,7 +20,7 @@ export default function ListHeader() {
 
   return (
     <>
-      <Flex mt={4} direction={{ base: "column", md: "row" }} justify="space-between">
+      <Flex mt={4} direction={{ base: "column", md: "row-reverse" }} alignItems="center" justify="space-between">
         <Stack isInline={true} spacing={4} mb={4}>
           <Box>
             <Select
@@ -37,13 +37,14 @@ export default function ListHeader() {
             </Select>
           </Box>
         </Stack>
+        {userListData && userListData.n > 0 && (
+          <Text color="gray.600" mb={4}>
+            {format(userListData.n)} {t("user:user_found")}
+          </Text>
+        )}
       </Flex>
 
-      {userListData && userListData.n > 0 && (
-        <Text color="gray.600" mb={4}>
-          {format(userListData.n)} {t("document:documents_found")}
-        </Text>
-      )}
+
     </>
   );
 }

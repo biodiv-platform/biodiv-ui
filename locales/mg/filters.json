@@ -135,8 +135,14 @@
     "title": "toetra"
   },
   "user": {
+    "email": "mailaka",
+    "institution_title": "Institute",
+    "phone": "Nomeraon-telefaona",
+    "profession_title": "asa",
+    "role_title": "anjara asa",
     "search": "Mpampiasa mpampiasa",
-    "title": "Mpikambana"
+    "title": "Mpikambana",
+    "username": "Anaran'ny mpampiasa"
   },
   "usergroup": {
     "title": "Vondron'olona mpampiasa"

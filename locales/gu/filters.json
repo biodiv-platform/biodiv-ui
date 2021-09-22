@@ -135,8 +135,14 @@
     "title": "લાક્ષણિકતા"
   },
   "user": {
+    "email": "ઇમેઇલ",
+    "institution_title": "સંસ્થા",
+    "phone": "ફોન નંબર",
+    "profession_title": "વ્યવસાય",
+    "role_title": "ભૂમિકા",
     "search": "વપરાશકર્તા શોધ",
-    "title": "વપરાશકર્તા"
+    "title": "વપરાશકર્તા",
+    "username": "વપરાશકર્તા નામ"
   },
   "usergroup": {
     "title": "વપરાશકર્તા ગ્રુપો"

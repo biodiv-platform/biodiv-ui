@@ -135,8 +135,14 @@
     "title": "गुणधर्म"
   },
   "user": {
+    "email": "ईमेल",
+    "institution_title": "संस्था",
+    "phone": "फोन नंबर",
+    "profession_title": "व्यवसाय",
+    "role_title": "भूमिका",
     "search": "वापरकर्ता शोधा",
-    "title": "वापरकर्ता"
+    "title": "वापरकर्ता",
+    "username": "वापरकर्ता नाव"
   },
   "usergroup": {
     "title": "वापरकर्ता गट"

@@ -10,7 +10,7 @@ export default function EmailFilter() {
       filterKey={USER_FILTER_KEY.email.filterKey}
       filterKeyList={USER_FILTER_KEY}
       useIndexFilter={useUserFilter}
-      translateKey="filters:user_email"
+      translateKey="filters:user.email"
     />
   );
 }

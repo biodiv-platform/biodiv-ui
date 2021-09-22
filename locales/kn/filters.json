@@ -135,8 +135,14 @@
     "title": "ಲಕ್ಷಣಗಳು"
   },
   "user": {
+    "email": "ಇಮೇಲ್",
+    "institution_title": "ಸಂಸ್ಥೆ",
+    "phone": "ದೂರವಾಣಿ ಸಂಖ್ಯೆ",
+    "profession_title": "ವೃತ್ತಿ",
+    "role_title": "ಪಾತ್ರ",
     "search": "ಬಳಕೆದಾರರನ್ನು ಹುಡುಕಿ",
-    "title": "ಬಳಕೆದಾರರು"
+    "title": "ಬಳಕೆದಾರರು",
+    "username": "ಬಳಕೆದಾರ ಹೆಸರು"
   },
   "usergroup": {
     "title": "ಬಳಕೆದಾರರ ಗುಂಪುಗಳು"
