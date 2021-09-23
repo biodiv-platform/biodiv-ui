@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
+import useUserListFilter from "@components/pages/user/common/use-user-filter";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -16,6 +17,7 @@ import Location from "./location/map-area";
 import PhoneNumberFilter from "./phone";
 import ProfessionFilter from "./profession";
 import RoleFilter from "./role";
+import SexTypeFilter from "./sex-type";
 import TimeFilter from "./time";
 import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
@@ -23,6 +25,7 @@ import UserNameFilter from "./username";
 
 export default function FiltersList() {
   const { t } = useTranslation();
+  const { isAdmin } = useUserListFilter();
 
   return (
     <Accordion defaultIndex={[0]} allowMultiple={true}>
@@ -50,11 +53,13 @@ export default function FiltersList() {
         </AccordionPanel>
       </AccordionItem>
 
-      <EmailFilter />
+      <SexTypeFilter />
+
+      {isAdmin && <EmailFilter />}
 
       <InstituteFilter />
 
-      <PhoneNumberFilter />
+      {isAdmin && <PhoneNumberFilter />}
 
       <ProfessionFilter />
 

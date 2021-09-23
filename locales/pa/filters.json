@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "ਤਾਰੀਖ ਬਣਾਈ ਗਈ",
+    "last_logged": "ਆਖਰੀ ਵਾਰ ਲੌਗ ਇਨ ਕੀਤਾ",
     "max_date": "ਵੱਧ ਤੋਂ ਵੱਧ ਤਾਰੀਖ",
     "min_date": "ਘੱਟੋ ਘੱਟ ਤਾਰੀਖ",
     "month": {
@@ -135,8 +136,15 @@
     "title": "ਗੁਣ"
   },
   "user": {
+    "email": "ਈ - ਮੇਲ",
+    "institution_title": "ਇੰਸਟੀਚਿਟ",
+    "phone": "ਫੋਨ ਨੰਬਰ",
+    "profession_title": "ਪੇਸ਼ਾ",
+    "role_title": "ਭੂਮਿਕਾ",
     "search": "ਖੋਜ ਉਪਭੋਗਤਾ",
-    "title": "ਉਪਭੋਗਤਾ"
+    "sex_title": "ਲਿੰਗ ਦੀ ਕਿਸਮ",
+    "title": "ਉਪਭੋਗਤਾ",
+    "username": "ਉਪਭੋਗਤਾ ਨਾਮ"
   },
   "usergroup": {
     "title": "ਉਪਭੋਗਤਾ ਸਮੂਹ"

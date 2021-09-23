@@ -157,15 +157,15 @@ export const axDownloadFile = async (documentPath) => {
 export const axGetUserList = async (
   params,
   payload = {},
+  isAdmin = false,
   index = "extended_user",
   type = "_doc"
 ) => {
+  const httpReq = isAdmin ? http : plainHttp;
   try {
-    const { data } = await plainHttp.post(
-      `${ENDPOINT.USER}/v1/user/list/${index}/${type}`,
-      payload,
-      { params }
-    );
+    const { data } = await httpReq.post(`${ENDPOINT.USER}/v1/user/list/${index}/${type}`, payload, {
+      params
+    });
 
     return { success: true, data };
   } catch (e) {

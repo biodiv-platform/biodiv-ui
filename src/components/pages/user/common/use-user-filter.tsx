@@ -2,7 +2,6 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axGetUserList } from "@services/user.service";
 import { isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
-import { DEFAULT_FILTER } from "@static/user";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect } from "react";
@@ -23,6 +22,7 @@ export interface UserListData {
 interface UserListContextProps {
   filter?;
   userListData: UserListData;
+  isAdmin: boolean;
   addFilter?;
   removeFilter?;
   children?;
@@ -34,9 +34,8 @@ interface UserListContextProps {
 const UserListContext = createContext<UserListContextProps>({} as UserListContextProps);
 
 export function UserListContextProvider(props: UserListContextProps) {
-  const [filter, setFilter] = useImmer<{ f: any }>({
-    f: props.filter ? DEFAULT_FILTER : props.filter
-  });
+  const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
+  const [isAdmin] = useImmer<boolean>(props.isAdmin);
 
   const [userListData, setuserListData] = useImmer<any>(props.userListData);
 
@@ -62,11 +61,16 @@ export function UserListContextProvider(props: UserListContextProps) {
       }
 
       const { location, ...otherValues } = filter.f;
-      const { data } = await axGetUserList({ ...otherValues }, location ? { location } : {});
+      const { data } = await axGetUserList(
+        { ...otherValues },
+        location ? { location } : {},
+        isAdmin
+      );
       setuserListData((_draft) => {
         if (data?.userList?.length) {
           _draft.l.push(...deDupeUserListData(_draft.l, data.userList));
           _draft.hasMore = filter?.f?.offset < data.totalCount;
+          _draft.ag = data.aggregationData;
           _draft.n = data.totalCount;
         }
       });
@@ -106,6 +110,7 @@ export function UserListContextProvider(props: UserListContextProps) {
     <UserListContext.Provider
       value={{
         filter: filter.f,
+        isAdmin,
         userListData,
         addFilter,
         setFilter,

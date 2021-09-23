@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "సృష్టించబడిన తేదీ",
+    "last_logged": "చివరిగా లాగిన్ అయ్యారు",
     "max_date": "గరిష్ట తేదీ",
     "min_date": "కనీస తేదీ",
     "month": {
@@ -135,8 +136,15 @@
     "title": "లక్షణాలు"
   },
   "user": {
+    "email": "ఇమెయిల్",
+    "institution_title": "ఇనిస్టిట్యూట్",
+    "phone": "ఫోను నంబరు",
+    "profession_title": "వృత్తి",
+    "role_title": "పాత్ర",
     "search": "శోధన యూజర్",
-    "title": "వాడుకరి"
+    "sex_title": "సెక్స్ రకం",
+    "title": "వాడుకరి",
+    "username": "వినియోగదారు పేరు"
   },
   "usergroup": {
     "title": "వాడుకరి గుంపులు"

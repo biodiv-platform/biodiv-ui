@@ -41,6 +41,7 @@
   "list": {
     "sort_by": "Panga kwa",
     "sort_options": {
+      "last_logged_in": "Mwisho Kuingia",
       "last_updated": "Mwisho updated.",
       "latest": "Ilipakiwa mwisho",
       "most_viewed": "Wengi kutazamwa."

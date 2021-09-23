@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "Date Created",
+    "last_logged": "Last Logged In",
     "max_date": "Maximum Date",
     "min_date": "Minimum Date",
     "month": {
@@ -141,6 +142,7 @@
     "profession_title": "Profession",
     "role_title": "Role",
     "search": "Search User",
+    "sex_title": "Sex Type",
     "title": "User",
     "username": "User Name"
   },

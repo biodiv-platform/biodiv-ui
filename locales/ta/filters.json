@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "உருவாக்கப்பட்டது தேதி",
+    "last_logged": "கடைசியாக உள்நுழைந்தது",
     "max_date": "அதிகபட்ச தேதி",
     "min_date": "குறைந்தபட்ச தேதி.",
     "month": {
@@ -135,8 +136,15 @@
     "title": "பண்புகள்"
   },
   "user": {
+    "email": "மின்னஞ்சல்",
+    "institution_title": "நிறுவனம்",
+    "phone": "தொலைபேசி எண்",
+    "profession_title": "தொழில்",
+    "role_title": "பங்கு",
     "search": "தேடல் பயனர்",
-    "title": "பயனர்"
+    "sex_title": "செக்ஸ் வகை",
+    "title": "பயனர்",
+    "username": "பயனர் பெயர்"
   },
   "usergroup": {
     "title": "பயனர் குழுக்கள்"

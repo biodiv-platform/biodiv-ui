@@ -16,19 +16,27 @@ const UserBox = styled.div`
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
 `;
 
-export default function ShadowedUser({ user = {}, avatar = true }: { user?: UserIbp, avatar?: boolean }) {
+export default function ShadowedUser({
+  user = {},
+  avatar = true
+}: {
+  user?: UserIbp;
+  avatar?: boolean;
+}) {
   return (
     <UserBox>
       <LocalLink href={`/user/show/${user?.id}`}>
         <Link color="white">
           <Flex alignItems="center">
-            {avatar && <Avatar
-              mr={2}
-              flexShrink={0}
-              size="sm"
-              name={user?.name}
-              src={getUserImage(user?.profilePic, user?.name)}
-            />}
+            {avatar && (
+              <Avatar
+                mr={2}
+                flexShrink={0}
+                size="sm"
+                name={user?.name}
+                src={getUserImage(user?.profilePic, user?.name)}
+              />
+            )}
             <div className="elipsis-2">{user?.name}</div>
           </Flex>
         </Link>

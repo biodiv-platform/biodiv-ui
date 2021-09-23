@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "Daty noforonina",
+    "last_logged": "Tafiditra farany",
     "max_date": "Daty farany",
     "min_date": "Daty kely indrindra",
     "month": {
@@ -141,6 +142,7 @@
     "profession_title": "asa",
     "role_title": "anjara asa",
     "search": "Mpampiasa mpampiasa",
+    "sex_title": "Karazana firaisana",
     "title": "Mpikambana",
     "username": "Anaran'ny mpampiasa"
   },

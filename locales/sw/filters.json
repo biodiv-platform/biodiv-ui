@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "Tarehe iliyoundwa.",
+    "last_logged": "Mwisho Kuingia",
     "max_date": "Tarehe ya juu",
     "min_date": "Tarehe ya chini",
     "month": {
@@ -135,8 +136,15 @@
     "title": "Tabia."
   },
   "user": {
+    "email": "barua pepe",
+    "institution_title": "Taasisi",
+    "phone": "Nambari ya simu",
+    "profession_title": "Taaluma",
+    "role_title": "Wajibu",
     "search": "Tafuta mtumiaji",
-    "title": "Mtumiaji"
+    "sex_title": "Aina ya Jinsia",
+    "title": "Mtumiaji",
+    "username": "Jina la Mtumiaji"
   },
   "usergroup": {
     "title": "Vikundi vya mtumiaji"
