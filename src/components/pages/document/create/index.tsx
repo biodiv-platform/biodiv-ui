@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
-import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
@@ -83,7 +82,7 @@ export default function DocumentCreatePageComponent({
       habitatIds: [],
       docCoverageData: [],
       userGroupId: [],
-      licenseId: SITE_CONFIG.LICENSE.DEFAULT
+      licenseId: licensesList?.[0]?.value
     }
   });
 

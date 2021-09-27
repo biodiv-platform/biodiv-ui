@@ -139,3 +139,10 @@ button[role="tab"] {
 .tox-tinymce-aux {
   z-index: 1500 !important;
 }
+
+/* big arrow glitch when styles are not loaded on time */
+.flatpickr-calendar:not(.open) {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
