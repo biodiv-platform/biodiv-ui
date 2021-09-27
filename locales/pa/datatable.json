@@ -33,12 +33,12 @@
   "show_page": "ਡੇਟਾਟੇਬਲ ਵੇਰਵੇ",
   "summary": "ਸੰਖੇਪ",
   "table": {
-    "geoPrivacy": "ਜੀਓ ਗੋਪਨੀਯਤਾ",
+    "geo_privacy": "ਜੀਓ ਗੋਪਨੀਯਤਾ",
     "id": "ਆਈਡੀ",
-    "observedAt": "ਸਥਾਨ ਦਾ ਨਾਮ",
-    "sGroup": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
-    "scientificName": "ਵਿਗਿਆਨਕ ਨਾਮ",
-    "userInfo": "ਉਪਭੋਗਤਾ ਦੀ ਜਾਣਕਾਰੀ"
+    "observed_at": "ਸਥਾਨ ਦਾ ਨਾਮ",
+    "s_group": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
+    "scientific_name": "ਵਿਗਿਆਨਕ ਨਾਮ",
+    "user_info": "ਉਪਭੋਗਤਾ ਦੀ ਜਾਣਕਾਰੀ"
   },
   "taxonomy": "ਟੈਕਸੋਨੋਮਿਕ ਕਵਰੇਜ",
   "temporal": "ਟੈਂਪੋਰਲ ਕਵਰੇਜ",

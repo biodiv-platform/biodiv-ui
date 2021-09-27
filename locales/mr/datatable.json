@@ -33,12 +33,12 @@
   "show_page": "डेटाटेबल तपशील",
   "summary": "सारांश",
   "table": {
-    "geoPrivacy": "भौगोलिक गोपनीयता",
+    "geo_privacy": "भौगोलिक गोपनीयता",
     "id": "आयडी",
-    "observedAt": "ठिकाणाचे नाव",
-    "sGroup": "प्रजाती गट",
-    "scientificName": "शास्त्रीय नाव",
-    "userInfo": "वापरकर्ता माहिती"
+    "observed_at": "ठिकाणाचे नाव",
+    "s_group": "प्रजाती गट",
+    "scientific_name": "शास्त्रीय नाव",
+    "user_info": "वापरकर्ता माहिती"
   },
   "taxonomy": "करमुक्त कव्हरेज",
   "temporal": "तात्पुरती कव्हरेज",

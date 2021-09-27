@@ -33,12 +33,12 @@
   "show_page": "ડેટેટેબલ વિગતો",
   "summary": "સારાંશ",
   "table": {
-    "geoPrivacy": "જીઓ ગોપનીયતા",
+    "geo_privacy": "જીઓ ગોપનીયતા",
     "id": "ID",
-    "observedAt": "સ્થળનું નામ",
-    "sGroup": "પ્રજાતિ ગ્રુપ",
-    "scientificName": "વૈજ્ઞાનિક નામ",
-    "userInfo": "વપરાશકર્તા માહિતી"
+    "observed_at": "સ્થળનું નામ",
+    "s_group": "પ્રજાતિ ગ્રુપ",
+    "scientific_name": "વૈજ્ઞાનિક નામ",
+    "user_info": "વપરાશકર્તા માહિતી"
   },
   "taxonomy": "વર્ગીકરણ-કવરેજ",
   "temporal": "કામચલાયક કવરેજ",

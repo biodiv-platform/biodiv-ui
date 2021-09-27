@@ -33,12 +33,12 @@
   "show_page": "தரவுத்தள விவரங்கள்",
   "summary": "சுருக்கம்",
   "table": {
-    "geoPrivacy": "ஜியோ தனியுரிமை",
+    "geo_privacy": "ஜியோ தனியுரிமை",
     "id": "ஐடி",
-    "observedAt": "இடப்பெயர்",
-    "sGroup": "இனங்கள் குழு",
-    "scientificName": "அறிவியல் பெயர்",
-    "userInfo": "பயனர் தகவல்"
+    "observed_at": "இடப்பெயர்",
+    "s_group": "இனங்கள் குழு",
+    "scientific_name": "அறிவியல் பெயர்",
+    "user_info": "பயனர் தகவல்"
   },
   "taxonomy": "வரிக்கான பாதுகாப்பு",
   "temporal": "தற்காலிக பாதுகாப்பு",

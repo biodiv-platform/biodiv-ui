@@ -33,12 +33,12 @@
   "show_page": "ಡೇಟಾಟೇಬಲ್ ವಿವರಗಳು",
   "summary": "ಸಾರಾಂಶ",
   "table": {
-    "geoPrivacy": "ಭೂಗೌಪ್ಯತೆ",
+    "geo_privacy": "ಭೂಗೌಪ್ಯತೆ",
     "id": "ಐಡಿ",
-    "observedAt": "ಸ್ಥಳದ ಹೆಸರು",
-    "sGroup": "ಪ್ರಭೇದದ ಗುಂಪು",
-    "scientificName": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು",
-    "userInfo": "ಬಳಕೆದಾರರ ಮಾಹಿತಿ"
+    "observed_at": "ಸ್ಥಳದ ಹೆಸರು",
+    "s_group": "ಪ್ರಭೇದದ ಗುಂಪು",
+    "scientific_name": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು",
+    "user_info": "ಬಳಕೆದಾರರ ಮಾಹಿತಿ"
   },
   "taxonomy": "ಜೀವಿವರ್ಗೀಕರಣ ವ್ಯಾಪ್ತಿ",
   "temporal": "ತಾತ್ಕಾಲಿಕ ವ್ಯಾಪ್ತಿ",
