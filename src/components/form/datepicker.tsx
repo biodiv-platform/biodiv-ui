@@ -82,6 +82,7 @@ export const DatePickerField = ({
                 isReadOnly={disabled}
                 id={name}
                 {...props}
+                disabled={disabled}
                 placeholder={label}
                 defaultValue={defaultValue}
                 ref={ref}

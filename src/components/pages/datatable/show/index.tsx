@@ -17,10 +17,7 @@ export default function DataTableShowPageComponent({
   return (
     <Box className="container mt" pb={6}>
       <Header datatable={datatable} authorName={authorInfo.name} />
-      <Box mb={4} className="fadeInUp delay-3">
-        <ObservationsList dataTable={datatable} speciesGroups={speciesGroups} />
-      </Box>
-
+      <ObservationsList dataTable={datatable} speciesGroups={speciesGroups} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]} className="fadeInUp delay-6">
         <Box gridColumn="1/3">
           <Stack>

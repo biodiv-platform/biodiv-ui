@@ -70,7 +70,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
           .min(1)
           .of(
             Yup.object().shape({
-              fieldKey: Yup.string().required()
+              fieldKey: Yup.string()
             })
           )
           .required()

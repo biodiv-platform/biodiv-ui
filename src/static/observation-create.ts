@@ -65,7 +65,7 @@ export const OBSERVATION_FIELDS = [
     value: "toDate"
   },
   {
-    label: "Observed At",
+    label: "Place Name",
     value: "observedAt"
   },
   {
@@ -111,10 +111,6 @@ export const OBSERVATION_FIELDS = [
   {
     label: "Tags",
     value: "tags"
-  },
-  {
-    label: "License",
-    value: "license"
   },
   {
     label: "Geo Privacy",
