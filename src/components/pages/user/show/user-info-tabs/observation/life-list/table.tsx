@@ -1,6 +1,7 @@
 import { Box, Button, Skeleton } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
+import ScientificName from "@components/@core/scientific-name";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -30,10 +31,10 @@ const LifeListTable = ({ data, loadMore, title, extraParams }) => {
                 <td>
                   {o.speciesId ? (
                     <ExternalBlueLink href={`/species/show/${o.speciesId}`}>
-                      {o.name}
+                      <ScientificName value={o.name} />
                     </ExternalBlueLink>
                   ) : (
-                    o.name
+                    <ScientificName value={o.name} />
                   )}
                 </td>
                 <td>
