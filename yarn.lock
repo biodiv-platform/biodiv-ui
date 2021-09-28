@@ -989,32 +989,32 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@ibp/naksha-commons@3.10.18":
-  version "3.10.18"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.10.18.tgz#90a0111ddc6a35fa641d3c0f9204c1f35d5912ab"
-  integrity sha512-IcG0AtN66fd+Af3fh4svJPFpjDCQ+3TjqFs6JPamf8hsRffH6uTncnZVTiEbCDU2LPwftnYMNoxGLjhDAg2h1g==
+"@ibp/naksha-commons@3.10.19":
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.10.19.tgz#953760d8b45c998b08c01f1e1fdaef992126dd8a"
+  integrity sha512-LmrFQgxkz7lbIDtJqLoSn6AJijrNLRiNMFRI8elsf0pCojZlGSyaYTpfv2WdJFZMUDNqVXfeJYPDPtCwnT4vvA==
 
-"@ibp/naksha-gmaps-draw@3.10.18":
-  version "3.10.18"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.10.18.tgz#06cac5d9cb1f2c4cdd2bf393ad6112a7a1bafa97"
-  integrity sha512-e2JodMXGxD+hcOFKR36xAIs0xpwmqYcsTjcvJuDqLL0UsavcoMwlHgcrR57UGhk4pvQoh5z9fujBA/qOFzMlAA==
+"@ibp/naksha-gmaps-draw@3.10.19":
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.10.19.tgz#f3edab829faa985438d5fb2d60d8f458662eb1a6"
+  integrity sha512-hWmeDjkIaQo3Empku+1t554V2bZyy1Umel4Ng2ftsVD4yzpxCtHd3EcSRMxgwLb/gd7UOXQB1HXZ5LPKNVrCGg==
   dependencies:
-    "@ibp/naksha-commons" "3.10.18"
+    "@ibp/naksha-commons" "3.10.19"
     "@turf/bbox" "^6.5.0"
 
-"@ibp/naksha-mapbox-draw@3.10.18":
-  version "3.10.18"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.10.18.tgz#bd91bd6eb97d45fc97c3ce5db28936e1a3d0c842"
-  integrity sha512-GaWFTxT4MN/u+GofKuIzcXruIVihVv+LyNLdoT2HN2euwcjIgDg+cu0m4/b87UDHHu+RL2ULyNWs9g4duGFX9Q==
+"@ibp/naksha-mapbox-draw@3.10.19":
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.10.19.tgz#8ed1cab93f5236bd5daf18181bb008ae0636a356"
+  integrity sha512-imgJsoMs//gNyk0bIAVUFEc6jt7BnbrX5UhNaEyW3uUq7KdOQwiraxZn9Dn1zVzh/e9QVmvzdELt0lF05JeipQ==
   dependencies:
-    "@ibp/naksha-commons" "3.10.18"
+    "@ibp/naksha-commons" "3.10.19"
 
-"@ibp/naksha-mapbox-list@3.10.18":
-  version "3.10.18"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.10.18.tgz#31f2536c8ee17786b436fc222472ffd29ede38d0"
-  integrity sha512-13Jdix8fZWTBuE7RChNgKsrp2icaH/DA1IT5U9oNGvtHyYrmVgKpXzNOu3H7aJa1NUP6xVqIDiKvw3/JEXVT/Q==
+"@ibp/naksha-mapbox-list@3.10.19":
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.10.19.tgz#2dabcc60cc67cbdadd8c599f58dac213a4613b77"
+  integrity sha512-fIkn59mTdgL4X8DkWNeyfEAa9MRu+W0+6g3KGweVuRte251rAutsGLkUxBPFexmdJ4FQ1Fuyi3OPgMzV3FcHig==
   dependencies:
-    "@ibp/naksha-commons" "3.10.18"
+    "@ibp/naksha-commons" "3.10.19"
     "@turf/bbox" "^6.5.0"
     boundingbox "^1.2.5"
     colorbrewer "^1.5.1"
@@ -1024,20 +1024,20 @@
     redaxios "^0.4.1"
     ts-debounce "^3.0.0"
 
-"@ibp/naksha-mapbox-view@3.10.18":
-  version "3.10.18"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.10.18.tgz#d00f26cfde08a608105aed187b6b66d5dca6116d"
-  integrity sha512-8xGyWvxzBCx58/C9730IUjFzPiO6Fg9yWaT7H3AJSjP6VIEHilT7Kmwom5NipaOYD2fnQ90AznT1z2CAfHPCig==
+"@ibp/naksha-mapbox-view@3.10.19":
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.10.19.tgz#fab0915727a3ee55d8c02383f5e82e62ad29726c"
+  integrity sha512-6z6t1bJhfU2Gcsk6Rf3y3hNqDNN3Qu+rAnFU84bNtV3vVjQHXaBeTYuv/ippcZol7pesWKzh0g24Wjm2eRPGzg==
   dependencies:
-    "@ibp/naksha-commons" "3.10.18"
+    "@ibp/naksha-commons" "3.10.19"
 
-"@ibp/naksha-upload@3.10.18":
-  version "3.10.18"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.10.18.tgz#cc96e8e441e5ab68aa4f656d9d4fa1af87671001"
-  integrity sha512-6E/wP/h65nABbxQ3nzv+Xx9BXaZdzMyjcNuWZi6u38WNjEqEARcgYe0GxvErWufIFUnDyjPzXg601NIC0UR9qQ==
+"@ibp/naksha-upload@3.10.19":
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.10.19.tgz#c4c47b8160d97da456a33928fa432a1cf3f66195"
+  integrity sha512-kf9Vibz0EzGa8jJPPjoQYyxeuFTbQlKjEuxUjS7hmvvXCILpR7QszDbgsXN/WuibM/0ge9XTqRXHBv7wNMiMJQ==
   dependencies:
     "@hookform/resolvers" "2.8.0"
-    "@ibp/naksha-commons" "3.10.18"
+    "@ibp/naksha-commons" "3.10.19"
     react-dropzone "^11.3.4"
     react-hook-form "^7.15.3"
     react-multi-select-component "^4.1.11"
@@ -6683,17 +6683,17 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.10.18:
-  version "3.10.18"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.10.18.tgz#3e7570d242d3e8415bde9ad2f63494be0994f8fb"
-  integrity sha512-LYWTP18MtPNf0+FW2xItSwQFuiji/3qDULlUjQrs2ZIzfgYMb9jc9m3aNFNLGaMDbqgmtRbNDKX9CKd54pW6XQ==
+naksha-components-react@^3.10.19:
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.10.19.tgz#dda2fc13bb22f989f9f0f3af5bc4b3d91401d1e6"
+  integrity sha512-/SGf28sfrF6h8n5kakJurTwkTE28rxa7jCdpPphRSp+j2r37lmT+JtFBPOQg12Np4mH5qpWI6eUqyEAW/UYeKA==
   dependencies:
-    "@ibp/naksha-commons" "3.10.18"
-    "@ibp/naksha-gmaps-draw" "3.10.18"
-    "@ibp/naksha-mapbox-draw" "3.10.18"
-    "@ibp/naksha-mapbox-list" "3.10.18"
-    "@ibp/naksha-mapbox-view" "3.10.18"
-    "@ibp/naksha-upload" "3.10.18"
+    "@ibp/naksha-commons" "3.10.19"
+    "@ibp/naksha-gmaps-draw" "3.10.19"
+    "@ibp/naksha-mapbox-draw" "3.10.19"
+    "@ibp/naksha-mapbox-list" "3.10.19"
+    "@ibp/naksha-mapbox-view" "3.10.19"
+    "@ibp/naksha-upload" "3.10.19"
 
 nanoclone@^0.2.1:
   version "0.2.1"
@@ -7665,10 +7665,15 @@ react-clientside-effect@^1.2.2:
   dependencies:
     "@babel/runtime" "^7.12.13"
 
-react-colorful@^5.1.2, react-colorful@^5.4.0:
+react-colorful@^5.1.2:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.4.0.tgz#e05e602469f9768234f29c1bad9ec1f4e86145a2"
   integrity sha512-k7QJXuQGWevr/V8hoMJ1wBW9i2CVhBdDXpBf3jy/AAtzVyYtsFqEAT+y+NOGiSG1cmnGTreqm5EFLXlVaKbPLQ==
+
+react-colorful@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.5.0.tgz#8359f218984a927095477a190ab9927eaf865c0c"
+  integrity sha512-BuzrlrM0ylg7coPkXOrRqlf2BgHLw5L44sybbr9Lg4xy7w9e5N7fGYbojOO0s8J0nvrM3PERN2rVFkvSa24lnQ==
 
 react-display-name@^0.2.0:
   version "0.2.5"
@@ -7873,10 +7878,10 @@ react-multi-select-component@^4.1.11:
   resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-4.1.11.tgz#c3455659073ba62fe8309f75fa2cfce9af699696"
   integrity sha512-7AJjNWFE+1UdJq6ZWAw/CcXyiuIdfOHMA1Xk63+y6X3mnRMB1gjc+Sgo0P60Vg8TGDgdFFyhnY353u65MNMMlQ==
 
-react-phone-number-input@^3.1.28:
-  version "3.1.28"
-  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.1.28.tgz#132fb6f5e1bab7ad54afbbae7817ade305a63c00"
-  integrity sha512-xCnP4iqwANC/QAau/wEhDy0K4l1HjKFtrEC2yYUIpwtfbwCAul906H29v0i8xsruln5bHC6umeqjWzCmLQJoJw==
+react-phone-number-input@^3.1.29:
+  version "3.1.29"
+  resolved "https://registry.yarnpkg.com/react-phone-number-input/-/react-phone-number-input-3.1.29.tgz#3a602e26d588f63967388d95e15cb75e8441e446"
+  integrity sha512-eWF7SQweusFsgb8o8gddrTl1fJpAmwYSwBi/+hY3K7pFwzOz5coN/9n7lK17LhCgQfYqfZ8ItmdjQUTsLB5CtA==
   dependencies:
     classnames "^2.2.5"
     country-flag-icons "^1.0.2"
