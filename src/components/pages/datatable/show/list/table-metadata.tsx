@@ -88,8 +88,8 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
       case "observedAt":
         return {
           Header: "datatable:table.observed_at",
-          accessor: "observedAt",
-        }
+          accessor: "observedAt"
+        };
       default:
         return {
           Header: item.replace(/(\B[A-Z])/g, " $1").replace(/^./, item[0].toUpperCase()),

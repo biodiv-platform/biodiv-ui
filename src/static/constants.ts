@@ -97,3 +97,5 @@ export const RESOURCE_TYPE = {
 };
 
 export const APP_VERSION = packageJson.version;
+
+export const MENU_PORTAL_TARGET = isBrowser ? document.body : undefined;

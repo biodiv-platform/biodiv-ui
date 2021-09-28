@@ -25,12 +25,14 @@ const LocationMap = ({ coordinates, setCoordinates, isOpen, onTextUpdate, zoom, 
           center={center}
         >
           <DrawingManager
-            options={{
-              drawingControl: true,
-              drawingControlOptions: {
-                drawingModes: ["marker"]
-              }
-            }}
+            options={
+              {
+                drawingControl: true,
+                drawingControlOptions: {
+                  drawingModes: ["marker"]
+                }
+              } as any
+            }
             onMarkerComplete={onMarkerComplete}
           />
           <Marker

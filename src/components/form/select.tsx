@@ -1,5 +1,5 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
-import { isBrowser } from "@static/constants";
+import { MENU_PORTAL_TARGET } from "@static/constants";
 import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
@@ -21,7 +21,7 @@ interface SelectInputFieldProps {
   shouldPortal?;
   hidden?;
 }
-const DefaultOptionComponent = (p) => <components.Option {...p} />;
+const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
 
 export const SelectInputField = ({
   name,
@@ -65,7 +65,7 @@ export const SelectInputField = ({
           Option: optionComponent,
           ClearIndicator
         }}
-        menuPortalTarget={isBrowser && shouldPortal && document.body}
+        menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
         isSearchable={true}
         isDisabled={disabled}
         styles={selectStyles}
