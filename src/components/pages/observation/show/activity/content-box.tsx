@@ -50,7 +50,11 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
       return (
         <Box>
           {link ? <BlueLink href={link}>{content}</BlueLink> : content}
-          {ad2?.givenName && <Text as="p">Given name is {ad2.givenName}</Text>}
+          {ad2?.givenName && (
+            <Text as="p">
+              Given name is <ScientificName value={ad2.givenName} />
+            </Text>
+          )}
         </Box>
       );
 
