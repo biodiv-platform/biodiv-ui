@@ -137,12 +137,15 @@
   },
   "user": {
     "email": "ਈ - ਮੇਲ",
+    "group_role_title": "ਉਪਭੋਗਤਾ ਸਮੂਹ ਦੀਆਂ ਭੂਮਿਕਾਵਾਂ",
     "institution_title": "ਇੰਸਟੀਚਿਟ",
     "phone": "ਫੋਨ ਨੰਬਰ",
     "profession_title": "ਪੇਸ਼ਾ",
     "role_title": "ਭੂਮਿਕਾ",
     "search": "ਖੋਜ ਉਪਭੋਗਤਾ",
     "sex_title": "ਲਿੰਗ ਦੀ ਕਿਸਮ",
+    "taxon_browser": "ਟੈਕਸਨ ਬ੍ਰਾਉਜ਼ਰ",
+    "taxon_role_title": "ਵਰਗੀਕਰਨ ਭੂਮਿਕਾਵਾਂ",
     "title": "ਉਪਭੋਗਤਾ",
     "username": "ਉਪਭੋਗਤਾ ਨਾਮ"
   },

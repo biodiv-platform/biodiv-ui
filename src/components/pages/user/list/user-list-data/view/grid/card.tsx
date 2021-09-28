@@ -5,7 +5,6 @@ import { getUserImage } from "@utils/media";
 import React from "react";
 
 export default function GridViewCard({ user: { user } }) {
-  
   return (
     <Box className="hover-box fade">
       <Box w="full" position="relative" h="16rem">
@@ -16,7 +15,7 @@ export default function GridViewCard({ user: { user } }) {
               bg="gray.100"
               w="full"
               h="full"
-              src= {getUserImage(user?.profilePic, user?.name,400)}
+              src={getUserImage(user?.profilePic, user?.name, 400)}
             />
           </Link>
         </LocalLink>
