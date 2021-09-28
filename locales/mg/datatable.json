@@ -33,11 +33,12 @@
   "show_page": "Ny antsipiriany datatable",
   "summary": "FAMINTINANA",
   "table": {
-    "geoPrivacy": "Tsiambaratelo Geo",
+    "geo_privacy": "Tsiambaratelo Geo",
     "id": "ID",
-    "sGroup": "Vondron-karazany",
-    "scientificName": "Anarana siantifika",
-    "userInfo": "Mombamomba ny mpampiasa"
+    "observed_at": "Anaran-toerana",
+    "s_group": "Vondron-karazany",
+    "scientific_name": "Anarana siantifika",
+    "user_info": "Mombamomba ny mpampiasa"
   },
   "taxonomy": "Ny fandrakofana taxonomika",
   "temporal": "Fandrakofana ara-nofo",
