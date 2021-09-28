@@ -45,7 +45,7 @@ export default function GridView() {
       >
         <div className="grid-card">
           {userListData.l.map((user) => (
-            <GridViewCard user={user} />
+            <GridViewCard key={user?.id} user={user} />
           ))}
         </div>
       </InfiniteScroll>

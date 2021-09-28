@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "Date créée",
+    "last_logged": "Dernière connexion",
     "max_date": "Date max",
     "min_date": "Date min",
     "month": {
@@ -136,11 +137,14 @@
   },
   "user": {
     "email": "e-mail",
+    "group_role_title": "Rôles des groupes d'utilisateurs",
     "institution_title": "Institut",
     "phone": "Numéro de téléphone",
     "profession_title": "Métier",
     "role_title": "Rôle",
     "search": "Recherche utilisateur",
+    "sex_title": "Genre",
+    "taxon_role_title": "Rôles de taxonomie",
     "title": "Utilisateur",
     "username": "Nom d'utilisateur"
   },

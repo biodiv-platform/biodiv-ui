@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "ರಚಿಸಲಾದ ದಿನಾಂಕ ",
+    "last_logged": "ಕೊನೆಯದಾಗಿ ಲಾಗ್ ಇನ್ ಮಾಡಲಾಗಿದೆ",
     "max_date": "ಗರಿಷ್ಠ ದಿನಾಂಕ",
     "min_date": "ಕನಿಷ್ಠ ದಿನಾಂಕ",
     "month": {
@@ -136,11 +137,14 @@
   },
   "user": {
     "email": "ಇಮೇಲ್",
+    "group_role_title": "ಬಳಕೆದಾರರ ಗುಂಪು ಪಾತ್ರಗಳು",
     "institution_title": "ಸಂಸ್ಥೆ",
     "phone": "ದೂರವಾಣಿ ಸಂಖ್ಯೆ",
     "profession_title": "ವೃತ್ತಿ",
     "role_title": "ಪಾತ್ರ",
     "search": "ಬಳಕೆದಾರರನ್ನು ಹುಡುಕಿ",
+    "sex_title": "ಲಿಂಗ",
+    "taxon_role_title": "ವರ್ಗೀಕರಣದ ಪಾತ್ರಗಳು",
     "title": "ಬಳಕೆದಾರರು",
     "username": "ಬಳಕೆದಾರ ಹೆಸರು"
   },

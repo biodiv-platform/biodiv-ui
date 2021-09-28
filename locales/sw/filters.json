@@ -137,12 +137,14 @@
   },
   "user": {
     "email": "barua pepe",
+    "group_role_title": "Wajibu wa Kikundi cha Watumiaji",
     "institution_title": "Taasisi",
     "phone": "Nambari ya simu",
     "profession_title": "Taaluma",
     "role_title": "Wajibu",
     "search": "Tafuta mtumiaji",
     "sex_title": "Aina ya Jinsia",
+    "taxon_role_title": "Wajibu wa Ushuru",
     "title": "Mtumiaji",
     "username": "Jina la Mtumiaji"
   },

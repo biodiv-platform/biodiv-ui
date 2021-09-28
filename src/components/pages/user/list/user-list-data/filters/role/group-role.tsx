@@ -4,27 +4,27 @@ import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 
-export default function InstituteFilter() {
+export default function GroupRoleFilter() {
   const {
     userListData: {
-      ag: { institution }
+      ag: { role }
     }
   } = useUserFilter();
 
-  const STATE_OPTIONS = Object.keys(institution)?.map((val) => ({
+  const OPTIONS = Object.keys(role)?.map((val) => ({
     label: covertToSentenceCase(val),
     value: val,
-    stat: institution[val]
+    stat: role[val]
   }));
 
   return (
     <CheckboxFilterPanel
-      translateKey="filters:user.institution_"
-      filterKey="institution"
-      options={STATE_OPTIONS}
-      statKey="institution"
+      translateKey="filters:user.group_role_"
+      filterKey="role"
+      options={OPTIONS}
+      statKey="role"
       skipOptionsTranslation={true}
-      showSearch={true}
+      showSearch={false}
     />
   );
 }

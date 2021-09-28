@@ -137,12 +137,14 @@
   },
   "user": {
     "email": "ଇମେଲ୍ |",
+    "group_role_title": "ଉପଯୋଗକର୍ତ୍ତା ଗୋଷ୍ଠୀ ଭୂମିକା |",
     "institution_title": "ଅନୁଷ୍ଠାନ",
     "phone": "ଫୋନ୍ ନମ୍ବର",
     "profession_title": "ବୃତ୍ତି",
     "role_title": "ଭୂମିକା",
     "search": "ଉପଯୋଗକର୍ତ୍ତା ଖୋଜ |",
     "sex_title": "ସେକ୍ସ ପ୍ରକାର |",
+    "taxon_role_title": "ଟ୍ୟାକ୍ସୋନୋମି ଭୂମିକା |",
     "title": "ଉପଯୋଗକର୍ତ୍ତା |",
     "username": "ଉପଯୋଗକର୍ତ୍ତା ନାମ"
   },

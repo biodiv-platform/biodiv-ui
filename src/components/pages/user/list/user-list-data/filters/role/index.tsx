@@ -1,30 +1,33 @@
-import useUserFilter from "@components/pages/user/common/use-user-filter";
-import { covertToSentenceCase } from "@utils/text";
+import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box
+} from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import CheckboxFilterPanel from "../shared/checkbox";
+import GroupRole from "./group-role";
+import TaxonRole from "./taxon-role"
 
-export default function RoleFilter() {
-  const {
-    userListData: {
-      ag: { role }
-    }
-  } = useUserFilter();
-
-  const OPTIONS = Object.keys(role)?.map((val) => ({
-    label: covertToSentenceCase(val),
-    value: val,
-    stat: role[val]
-  }));
+export default function RolesFilter() {
+  const { t } = useTranslation();
 
   return (
-    <CheckboxFilterPanel
-      translateKey="filters:user.role_"
-      filterKey="role"
-      options={OPTIONS}
-      statKey="role"
-      skipOptionsTranslation={true}
-      showSearch={true}
-    />
+    <AccordionItem>
+      {() => (
+        <>
+          <AccordionButton>
+            <Box flex={1} textAlign="left">
+              {t("filters:user.role_title")}
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel> <GroupRole /><TaxonRole /></AccordionPanel>
+
+        </>
+      )}
+    </AccordionItem>
   );
 }

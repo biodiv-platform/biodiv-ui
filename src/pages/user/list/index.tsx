@@ -20,11 +20,12 @@ function UserListPage({ userListData, initialFilterParams, isAdmin }) {
     </UserListContextProvider>
   );
 }
+
 UserListPage.config = {
   footer: false
 };
 
-UserListPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const aURL = absoluteUrl(ctx).href;
   const isAdmin = hasAccess([Role.Admin], ctx);
@@ -33,15 +34,17 @@ UserListPage.getInitialProps = async (ctx) => {
   const { data } = await axGetUserList(initialFilterParams);
 
   return {
-    userListData: {
-      l: data.userList,
-      ag: data.aggregationData,
-      n: data.totalCount,
-      hasMore: true
-    },
-    isAdmin,
-    nextOffset,
-    initialFilterParams
+    props: {
+      userListData: {
+        l: data.userList,
+        ag: data.aggregationData,
+        n: data.totalCount,
+        hasMore: true
+      },
+      isAdmin,
+      nextOffset,
+      initialFilterParams
+    }
   };
 };
 

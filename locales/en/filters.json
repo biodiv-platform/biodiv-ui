@@ -137,12 +137,14 @@
   },
   "user": {
     "email": "email",
-    "institution_title": "Institute",
+    "group_role_title": "Usergroup Roles",
+    "institution_title": "Institution",
     "phone": "Phone Number",
     "profession_title": "Profession",
-    "role_title": "Role",
+    "role_title": "Roles",
     "search": "Search User",
-    "sex_title": "Sex Type",
+    "sex_title": "Gender",
+    "taxon_role_title": "Taxonomy Roles",
     "title": "User",
     "username": "User Name"
   },

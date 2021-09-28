@@ -16,7 +16,7 @@ import InstituteFilter from "./institute";
 import Location from "./location/map-area";
 import PhoneNumberFilter from "./phone";
 import ProfessionFilter from "./profession";
-import RoleFilter from "./role";
+import RolesFilter from "./role";
 import SexTypeFilter from "./sex-type";
 import TimeFilter from "./time";
 import UserFilter from "./user";
@@ -63,7 +63,7 @@ export default function FiltersList() {
 
       <ProfessionFilter />
 
-      <RoleFilter />
+      <RolesFilter />
 
       <UserNameFilter />
 

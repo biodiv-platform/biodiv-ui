@@ -137,12 +137,14 @@
   },
   "user": {
     "email": "ఇమెయిల్",
+    "group_role_title": "వినియోగదారు సమూహ పాత్రలు",
     "institution_title": "ఇనిస్టిట్యూట్",
     "phone": "ఫోను నంబరు",
     "profession_title": "వృత్తి",
     "role_title": "పాత్ర",
     "search": "శోధన యూజర్",
     "sex_title": "సెక్స్ రకం",
+    "taxon_role_title": "వర్గీకరణ పాత్రలు",
     "title": "వాడుకరి",
     "username": "వినియోగదారు పేరు"
   },

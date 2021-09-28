@@ -137,12 +137,14 @@
   },
   "user": {
     "email": "ईमेल",
+    "group_role_title": "वापरकर्ता गट भूमिका",
     "institution_title": "संस्था",
     "phone": "फोन नंबर",
     "profession_title": "व्यवसाय",
     "role_title": "भूमिका",
     "search": "वापरकर्ता शोधा",
     "sex_title": "लिंग प्रकार",
+    "taxon_role_title": "वर्गीकरण भूमिका",
     "title": "वापरकर्ता",
     "username": "वापरकर्ता नाव"
   },
