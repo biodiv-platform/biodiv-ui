@@ -149,7 +149,8 @@ const SITE_CONFIG_EXAMPLE = {
     ACTIVE: true
   },
   TAXONOMY: {
-    ROOT: 1
+    CLASSIFICATION_ID: 1,
+    TAXON_ID: 1
   },
   TOKENS: {
     GMAP: "AIzax",
