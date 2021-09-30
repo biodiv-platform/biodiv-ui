@@ -71,6 +71,18 @@
     "title": "Delete document"
   },
   "share": "Share this document",
+  "show": {
+    "scientific_names_table": {
+      "count_header": "Frequency",
+      "delete": {
+        "deleted": "Name removed succcesfully",
+        "description": "Are you sure you want to delete this name? You can't undo this action afterwards.",
+        "title": "Delete name"
+      },
+      "name_header": "Name",
+      "title": "Scientific names"
+    }
+  },
   "tags": {
     "not_found": "No Tags(s) found",
     "title": "Tags"

@@ -6,8 +6,8 @@ import React from "react";
 import CoveragePanel from "./coverage";
 import DownloadButtons from "./download-buttons";
 import DocumentSidebarMap from "./map";
+import ScientificNames from "./scientific-names";
 import SpatialCoverage from "./special-coverage";
-import  ScientificNames from "./scientific-names";
 
 interface SidebarProps {
   showDocument: ShowDocument;
@@ -23,8 +23,7 @@ export default function Sidebar({
   documentPath
 }: SidebarProps) {
   const { t } = useTranslation();
-  /* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
-   console.log("id hai ye = ",showDocument.document?.id);
+
   return (
     <div>
       <User user={showDocument.userIbp} />

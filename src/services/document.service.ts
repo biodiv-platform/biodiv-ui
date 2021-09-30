@@ -256,27 +256,24 @@ export const axUpdateCoverageGroup = async (coverageType, documentId, payload) =
   }
 };
 
-export const axGetDocumentScientificNames = async (documentId , params)=>{
-try{
-  const{data}=await plainHttp.get(`${ENDPOINT.DOCUMENT}/v1/services/names/${documentId}`,
-    {params}
-  );
-  return {success:true,data}
-} catch (e){
-  console.error(e);
-  return {success:false,data:{}}
-}
-
-};
-
-export const axUpdateScientifcNameToIsDeleted=async(nameId)=> {
-  try{
-    const {data}=await http.put(`${ENDPOINT.DOCUMENT}/v1/services/deleteName/${nameId}`);
-   return {success:true,data}
-
+export const axGetDocumentScientificNames = async (documentId, params) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.DOCUMENT}/v1/services/names/${documentId}`, {
+      params
+    });
+    return { success: true, data };
   } catch (e) {
     console.error(e);
-    return {succes:false,data:{}}
+    return { success: false, data: {} };
   }
+};
 
+export const axUpdateScientifcNameToIsDeleted = async (nameId) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.DOCUMENT}/v1/services/deleteName/${nameId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { succes: false, data: {} };
+  }
 };
