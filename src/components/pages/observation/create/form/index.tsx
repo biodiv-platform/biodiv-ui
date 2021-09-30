@@ -91,7 +91,7 @@ export default function ObservationCreateForm({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
-        sGroup: Yup.number().required(),
+        sGroup: Yup.mixed().required(),
         helpIdentify: Yup.boolean().required(),
 
         // recoData
