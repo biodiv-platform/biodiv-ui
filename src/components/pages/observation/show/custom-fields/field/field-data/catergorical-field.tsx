@@ -42,8 +42,6 @@ export default function CategoricalField({
   return isOpen ? (
     <>
       <Select
-        id={name}
-        inputId={name}
         onChange={(o) => {
           setFieldValue(isMulti ? o.map((item) => item.value) : o.value);
         }}

@@ -117,7 +117,7 @@ export const axUpdateTaxonCommonName = async (_, payload) => {
 export const axDeleteTaxonCommonName = async (_, commonNameId) => {
   try {
     const { data } = await http.delete(
-      `${ENDPOINT.TAXONOMY}/v1/species/remove/commoName/${commonNameId}`
+      `${ENDPOINT.TAXONOMY}/v1/cname/remove/commoName/${commonNameId}`
     );
     return { success: true, data };
   } catch (e) {

@@ -1,5 +1,6 @@
 import { Image, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
+import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
@@ -41,17 +42,17 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "scientificName":
         return {
-          Header: "datatable:table.scientificName",
+          Header: "datatable:table.scientific_name",
           accessor: "scientificName",
           Cell: ({ value }) => (
-            <Text key={value} fontStyle="italic">
-              {value}
+            <Text key={value}>
+              <ScientificName value={value} />
             </Text>
           )
         };
       case "userInfo":
         return {
-          Header: "datatable:table.userInfo",
+          Header: "datatable:table.user_info",
           accessor: "userInfo",
           Cell: ({ value }) => (
             <a href={`/user/show/${value.id}`}>
@@ -66,7 +67,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "sGroup":
         return {
-          Header: "datatable:table.sGroup",
+          Header: "datatable:table.s_group",
           accessor: "sGroup",
           Cell: ({ value }) => (
             <SpeciesGroupBox
@@ -79,10 +80,15 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         };
       case "geoPrivacy":
         return {
-          Header: "datatable:table.geoPrivacy",
+          Header: "datatable:table.geo_privacy",
           accessor: "geoPrivacy",
           Cell: ({ value }) =>
             value ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />
+        };
+      case "observedAt":
+        return {
+          Header: "datatable:table.observed_at",
+          accessor: "observedAt"
         };
       default:
         return {

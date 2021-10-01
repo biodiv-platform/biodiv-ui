@@ -4,21 +4,23 @@ import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axQueryTagsByText } from "@services/observation.service";
+import { BASIS_OF_RECORD } from "@static/datatable";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 
-import { DATE_ACCURACY_OPTIONS } from "../options";
+import { DATE_ACCURACY_OPTIONS } from "../../../create/form/options";
 
 const onTagsQuery = async (q) => {
   const { data } = await axQueryTagsByText(q);
   return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
 };
 
-export default function DateInputs({ showTags = true }) {
+export default function DateInputs({ showTags = true, disabled }) {
   const { t } = useTranslation();
 
   const translatedDateOptions = useMemo(() => translateOptions(t, DATE_ACCURACY_OPTIONS), []);
+  const [isDisable, setIsDisable] = useState<boolean>(disabled);
 
   return (
     <>
@@ -29,15 +31,25 @@ export default function DateInputs({ showTags = true }) {
               name="observedOn"
               label={t("common:observed_on")}
               style={{ gridColumn: "1/3" }}
-              isRequired={true}
-              disabled={false}
+              isRequired={!isDisable}
+              disabled={isDisable}
               subscribe={true}
               mb={showTags ? 4 : 0}
             />
             <SelectInputField
               name="dateAccuracy"
               label={t("form:date_accuracy")}
+              onChangeCallback={(value) =>
+                value === "UNKNOWN" ? setIsDisable(true) : setIsDisable(false)
+              }
               options={translatedDateOptions}
+            />
+            <SelectInputField
+              name="basisOfRecord"
+              label={t("datatable:basis_of_record")}
+              options={BASIS_OF_RECORD}
+              isRequired={true}
+              isControlled={true}
             />
           </SimpleGrid>
           {showTags && (
@@ -51,6 +63,7 @@ export default function DateInputs({ showTags = true }) {
             />
           )}
         </Box>
+
         <RichTextareaField name="notes" label={t("observation:notes")} />
       </SimpleGrid>
       {showTags && <Divider mb={3} />}

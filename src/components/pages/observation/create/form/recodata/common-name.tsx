@@ -7,7 +7,7 @@ import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
 
-export const CommonNameOption = ({ children, ...props }) => {
+export const CommonNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
   return (
     <components.Option {...props}>

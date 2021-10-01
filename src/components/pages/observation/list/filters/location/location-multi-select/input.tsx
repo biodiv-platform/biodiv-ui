@@ -1,7 +1,7 @@
 import { selectStyles } from "@components/form/configs";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { axSearchFilterByName } from "@services/esmodule.service";
-import { isBrowser } from "@static/constants";
+import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useMemo } from "react";
 import Select from "react-select";
@@ -23,7 +23,7 @@ export default function FilterMultiSelectInput({
 }: FilterMultiSelectProps) {
   const { filter, addFilter, removeFilter } = useObservationFilter();
 
-  const S = options?.length ? Select : AsyncSelect;
+  const S: any = options?.length ? Select : AsyncSelect;
 
   const onQuery = debounce((q) => axSearchFilterByName(q, filterKey), 200);
 
@@ -54,7 +54,7 @@ export default function FilterMultiSelectInput({
       isMulti={true}
       isSearchable={true}
       loadOptions={onQuery}
-      menuPortalTarget={isBrowser && document.body}
+      menuPortalTarget={MENU_PORTAL_TARGET}
       onChange={handleOnChange}
       options={arrayToOptions(options)}
       placeholder={label}

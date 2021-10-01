@@ -3,7 +3,7 @@ import { getGroupImageThumb } from "@utils/media";
 import React, { useMemo } from "react";
 import { components } from "react-select";
 
-export default function CustomFieldOption(props) {
+export default function CustomFieldOption(props: any) {
   const imageURL = useMemo(() => getGroupImageThumb(props.data.iconURL), [props.data.iconURL]);
   return (
     <components.Option {...props}>

@@ -21,7 +21,7 @@ export default function ObservationsList({ dataTable: dt, speciesGroups }) {
   }, [observationData.l.length]);
 
   return (
-    <Box id="scrollableDiv" overflow="auto" h={500}>
+    <Box id="scrollableDiv" overflow="auto" h={380}>
       <InfiniteScroll
         dataLength={observationData.l.length}
         next={nextPage}

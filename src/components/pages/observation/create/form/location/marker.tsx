@@ -4,7 +4,7 @@ import { reverseGeocode } from "@utils/location";
 import React, { useEffect, useState } from "react";
 
 const CustomMarker = ({ position, setCoordinates, onTextUpdate }) => {
-  const [markerRef, setMarkerRef] = useState();
+  const [markerRef, setMarkerRef] = useState<any>();
   const [suggestons, setSuggestions] = useState<{ formatted_address; place_id }[]>([]);
   const { isOpen, onClose, onToggle } = useDisclosure();
 

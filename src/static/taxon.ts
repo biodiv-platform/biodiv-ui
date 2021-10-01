@@ -11,8 +11,8 @@ export const LIST_PAGINATION_LIMIT = 100;
 export const DEFAULT_FILTER = {
   offset: 0,
   limit: LIST_PAGINATION_LIMIT,
-  classificationId: SITE_CONFIG.TAXONOMY.ROOT,
-  taxonId: SITE_CONFIG.TAXONOMY.ROOT
+  classificationId: SITE_CONFIG.TAXONOMY.CLASSIFICATION_ID,
+  taxonId: SITE_CONFIG.TAXONOMY.TAXON_ID
 };
 
 export const TAXON_STATUS_VALUES = {
