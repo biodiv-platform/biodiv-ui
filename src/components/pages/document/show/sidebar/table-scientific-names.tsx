@@ -1,4 +1,3 @@
-// eslint-disable-next-line simple-import-sort/imports
 import { Box, Button, Skeleton, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
@@ -34,8 +33,8 @@ export default function ScientificNamesTable({
         <Table variant="striped" colorScheme="gray" size="sm">
           <Thead>
             <Tr>
-              <Th {...stickyTh}>{t("document.show.scientific_names_table.name_header")}</Th>
-              <Th {...stickyTh}>{t("document.show.scientific_names_table.count_header")}</Th>
+              <Th {...stickyTh}>{t("document:show.scientific_names_table.name_header")}</Th>
+              <Th {...stickyTh}>{t("document:show.scientific_names_table.count_header")}</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -59,9 +58,9 @@ export default function ScientificNamesTable({
                   {showActions && (
                     <DeleteActionButton
                       observationId={id}
-                      title={t("document.show.scientific_names_table.delete.title")}
-                      description={t("document.show.scientific_names_table.delete.description")}
-                      deleted={t("document.show.scientific_names_table.delete.deleted")}
+                      title={t("document:show.scientific_names_table.delete.title")}
+                      description={t("document:show.scientific_names_table.delete.description")}
+                      deleted={t("document:show.scientific_names_table.delete.deleted")}
                       deleteFunc={axUpdateScientifcNameToIsDeleted}
                       deleteGnfinderName={true}
                       refreshFunc={refreshFunc}

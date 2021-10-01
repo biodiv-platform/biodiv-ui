@@ -1,8 +1,7 @@
 import { axGetDocumentScientificNames } from "@services/document.service";
+import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
-
-const LIMIT = 10;
 
 export default function useScientificNames(documentId) {
   const [names, setNames] = useImmer({
@@ -22,11 +21,11 @@ export default function useScientificNames(documentId) {
       if (success) {
         if (reset) {
           _draft.list = data;
-          _draft.offset = LIMIT;
+          _draft.offset = LIST_PAGINATION_LIMIT;
         } else {
           if (data) {
             _draft.list.push(...data);
-            _draft.offset = _draft.offset + LIMIT;
+            _draft.offset = _draft.offset + LIST_PAGINATION_LIMIT;
           }
         }
       }
@@ -39,7 +38,7 @@ export default function useScientificNames(documentId) {
   const refreshNames = () => loadMore(names, setNames, true);
 
   useEffect(() => {
-    loadMore(names, setNames, true);
+    refreshNames();
   }, []);
 
   return {

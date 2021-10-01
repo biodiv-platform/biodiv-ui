@@ -11,7 +11,7 @@ export default function ScientificNames({ documentId, authorId }) {
   return (
     <ScientificNamesTable
       data={scientficNamesData.namesData.data}
-      title={t("document.show.scientific_names_table.title")}
+      title={t("document:show.scientific_names_table.title")}
       loadMoreNames={scientficNamesData.namesData.loadMore}
       authorId={authorId}
       refreshFunc={scientficNamesData.namesData.refresh}
