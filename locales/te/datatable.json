@@ -33,11 +33,12 @@
   "show_page": "Datatable వివరాలు",
   "summary": "సారాంశం",
   "table": {
-    "geoPrivacy": "జియో గోప్యత",
+    "geo_privacy": "జియో గోప్యత",
     "id": "Id.",
-    "sGroup": "జాతుల సమూహం",
-    "scientificName": "శాస్త్రీయ పేరు",
-    "userInfo": "వాడుకరి సమాచారం"
+    "observed_at": "స్థలం పేరు",
+    "s_group": "జాతుల సమూహం",
+    "scientific_name": "శాస్త్రీయ పేరు",
+    "user_info": "వాడుకరి సమాచారం"
   },
   "taxonomy": "వర్గీకరణ కవరేజ్",
   "temporal": "తాత్కాలిక కవరేజ్",

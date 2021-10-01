@@ -18,7 +18,7 @@ export const axGetTaxonList = async ({ key = "", taxonIds = "", expand_taxon = f
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/tree/list`, {
       params: {
-        classification: SITE_CONFIG.TAXONOMY.ROOT,
+        classification: SITE_CONFIG.TAXONOMY.CLASSIFICATION_ID,
         parent: key,
         expand_taxon,
         taxonIds

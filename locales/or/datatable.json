@@ -33,11 +33,12 @@
   "show_page": "ଡାଟାଟେବଲ୍ ବିବରଣୀଗୁଡିକ |",
   "summary": "ସାରାଂଶ",
   "table": {
-    "geoPrivacy": "ଜିଓ ଗୋପନୀୟତା |",
+    "geo_privacy": "ଜିଓ ଗୋପନୀୟତା |",
     "id": "ପରିଚୟ",
-    "sGroup": "ପ୍ରଜାତି ଗୋଷ୍ଠୀ |",
-    "scientificName": "ବ scientific ଜ୍ଞାନିକ ନାମ",
-    "userInfo": "ବ୍ୟବହାରକାରୀ ସୂଚନା"
+    "observed_at": "ସ୍ଥାନ ନାମ",
+    "s_group": "ପ୍ରଜାତି ଗୋଷ୍ଠୀ |",
+    "scientific_name": "ବ scientific ଜ୍ଞାନିକ ନାମ",
+    "user_info": "ବ୍ୟବହାରକାରୀ ସୂଚନା"
   },
   "taxonomy": "ଟ୍ୟାକ୍ସୋନୋମିକ୍ କଭରେଜ୍ |",
   "temporal": "ସାମୟିକ କଭରେଜ୍ |",

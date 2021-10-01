@@ -7,7 +7,7 @@ const CustomRadio = (props) => {
   const { getInputProps, getCheckboxProps } = useRadio(props);
 
   const handleOnChange = (e) => {
-    props.onChange(props.isChecked ? null : Number(e.target.value));
+    props.onChange(props.isChecked ? "" : Number(e.target.value));
   };
 
   return (

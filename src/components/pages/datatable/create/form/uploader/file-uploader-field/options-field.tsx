@@ -72,7 +72,6 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
                 {fields.map((field, index) => (
                   <Td key={field.id}>
                     <SelectInputField
-                      isRequired={true}
                       name={`columnsMapping.${index}.fieldKey`}
                       label={t("common:actions.flag.category")}
                       options={OBSERVATION_FIELDS}

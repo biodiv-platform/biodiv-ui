@@ -18,7 +18,7 @@ interface SelectMultipleProps {
   isSearchable?: boolean;
 }
 
-const DefaultOptionComponent = (p) => <components.Option {...p} />;
+const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
 
 export const SelectMultipleInputField = ({
   name,
@@ -56,7 +56,6 @@ export const SelectMultipleInputField = ({
           Option: optionComponent,
           ClearIndicator
         }}
-        formatCreateLabel={(v) => `Add "${v}"`}
         defaultValue={initialValue}
         isSearchable={true}
         isMulti={true}

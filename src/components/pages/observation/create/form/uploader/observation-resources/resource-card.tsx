@@ -5,7 +5,7 @@ import useGlobalState from "@hooks/use-global-state";
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import { isBrowser, RESOURCE_SIZE } from "@static/constants";
+import { MENU_PORTAL_TARGET, RESOURCE_SIZE } from "@static/constants";
 import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import {
   getFallbackByMIME,
@@ -99,7 +99,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
       <Flex direction="column" flexShrink={0}>
         <Select
           defaultValue={licensesList.find((l) => l.value === resource.licenseId)}
-          menuPortalTarget={isBrowser && document.body}
+          menuPortalTarget={MENU_PORTAL_TARGET}
           options={licensesList}
           name={`opt-${resource.id}`}
           inputId={`opt-${resource.id}`}

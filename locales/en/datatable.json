@@ -33,11 +33,12 @@
   "show_page": "Datatable Details",
   "summary": "Summary",
   "table": {
-    "geoPrivacy": "Geo Privacy",
+    "geo_privacy": "Geo Privacy",
     "id": "ID",
-    "sGroup": "Species Group",
-    "scientificName": "Scientific Name",
-    "userInfo": "User Info"
+    "observed_at": "Place Name",
+    "s_group": "Species Group",
+    "scientific_name": "Scientific Name",
+    "user_info": "User Info"
   },
   "taxonomy": "Taxonomic Coverage",
   "temporal": "Temporal Coverage",

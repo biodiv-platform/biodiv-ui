@@ -2,7 +2,7 @@ import { Box, Button, FormControl, FormHelperText, FormLabel, Input, Text } from
 import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
-import { isBrowser } from "@static/constants";
+import { MENU_PORTAL_TARGET } from "@static/constants";
 import { feature } from "@turf/helpers";
 import pointOnFeature from "@turf/point-on-feature";
 import { getMapCenter } from "@utils/location";
@@ -76,7 +76,7 @@ export default function WKTSearch({
             name="geoentities-search"
             id="geoentities-search"
             value={selected}
-            menuPortalTarget={isBrowser && document.body}
+            menuPortalTarget={MENU_PORTAL_TARGET}
             isSearchable={true}
             isClearable={true}
             noOptionsMessage={() => null}

@@ -48,14 +48,22 @@ export const getServerSideProps = async (ctx) => {
   const { data: landscapeShow } = await axGetLandscapeShowById(ctx.query.landscapeId, langId);
   const coord = wkt.parse(landscapeShow.wktData);
   const location = `${envelope(coord).geometry.coordinates}`.replace(/[[\]]/g, "");
-  const initialFilterParams = { ...DEFAULT_FILTER, ...documentsListParams };
+
+  const initialFilterParams = {
+    ...DEFAULT_FILTER,
+    ...documentsListParams,
+    location
+  };
+
   const initialParamsObservation = {
     ...OBSERVATION_FILTER,
     ...observationListParams,
-    view: "stats"
+    view: "stats",
+    location
   };
-  const { data: documents } = await axGetListData(initialFilterParams, { location });
-  const { data: observations } = await axGetObservationList(initialParamsObservation, { location });
+
+  const { data: documents } = await axGetListData(initialFilterParams);
+  const { data: observations } = await axGetObservationList(initialParamsObservation);
   return {
     props: {
       landscape,

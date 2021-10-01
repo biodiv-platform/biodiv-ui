@@ -1,5 +1,5 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
-import { isBrowser } from "@static/constants";
+import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useMemo, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
@@ -39,7 +39,7 @@ const dummyOnQuery = (q) =>
     }, 1000);
   });
 
-const DefaultOptionComponent = (p) => <components.Option {...p} />;
+const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
 
 export const SelectAsyncInputField = ({
   name,
@@ -65,7 +65,7 @@ export const SelectAsyncInputField = ({
 }: ISelectProps) => {
   const form = useFormContext();
   const { field, fieldState } = useController({ name });
-  const Select = useMemo(() => (isCreatable ? AsyncSelectCreatable : AsyncSelect), [isCreatable]);
+  const Select: any = useMemo(() => (isCreatable ? AsyncSelectCreatable : AsyncSelect), [isCreatable]);
 
   const onQueryDebounce = debounce(onQuery, debounceTime);
   const [selected, setSelected] = useState(
@@ -101,7 +101,7 @@ export const SelectAsyncInputField = ({
       <Select
         name={name}
         inputId={name}
-        menuPortalTarget={isBrowser && document.body}
+        menuPortalTarget={MENU_PORTAL_TARGET}
         formatCreateLabel={(v) => `Add "${v}"`}
         isMulti={multiple}
         defaultOptions={options}

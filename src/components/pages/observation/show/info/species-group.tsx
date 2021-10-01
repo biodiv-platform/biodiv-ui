@@ -5,7 +5,7 @@ import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
 import { SpeciesGroup } from "@interfaces/observation";
 import { axUpdateSpeciesGroup } from "@services/observation.service";
-import { isBrowser } from "@static/constants";
+import { MENU_PORTAL_TARGET } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
 import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
@@ -21,7 +21,7 @@ interface ISpeciesGroupsProps {
   observationId;
 }
 
-const CustomOption = ({ children, ...props }) => (
+const CustomOption = ({ children, ...props }: any) => (
   <components.Option {...props}>
     <Stack isInline={true} alignItems="center">
       <Image boxSize="2rem" src={getLocalIcon(props.data.label)} />
@@ -66,7 +66,7 @@ export default function SpeciesGroupBox({
               components={{
                 Option: CustomOption
               }}
-              menuPortalTarget={isBrowser && document.body}
+              menuPortalTarget={MENU_PORTAL_TARGET}
               styles={selectStyles}
             />
           </Box>

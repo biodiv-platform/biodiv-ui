@@ -597,6 +597,7 @@ export interface ObservationUGContextCreatePageData {
 export interface ObservationUpdateData {
   resources?: ResourceDataObs[];
   notes?: string;
+  checklistAnnotations?: string;
   dateAccuracy?: string;
   observedOn?: string; // date-time
   observedAt?: string;
@@ -604,6 +605,7 @@ export interface ObservationUpdateData {
   locationScale?: string;
   latitude?: number; // double
   longitude?: number; // double
+  dataTableId?: number;
   hidePreciseLocation?: boolean;
 }
 export interface ObservationUserPageInfo {

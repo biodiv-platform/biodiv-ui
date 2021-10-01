@@ -33,11 +33,12 @@
   "show_page": "Maelezo ya data",
   "summary": "Muhtasari",
   "table": {
-    "geoPrivacy": "Geo Faragha.",
+    "geo_privacy": "Geo Faragha.",
     "id": "ID.",
-    "sGroup": "SPECIES GROUP.",
-    "scientificName": "Jina la kisayansi.",
-    "userInfo": "Maelezo ya mtumiaji"
+    "observed_at": "Weka Jina",
+    "s_group": "SPECIES GROUP.",
+    "scientific_name": "Jina la kisayansi.",
+    "user_info": "Maelezo ya mtumiaji"
   },
   "taxonomy": "Chanjo ya taxonomic.",
   "temporal": "Chanjo ya muda",

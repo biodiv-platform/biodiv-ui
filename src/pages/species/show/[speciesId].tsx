@@ -5,7 +5,7 @@ import { axGetLicenseList } from "@services/resources.service";
 import {
   axCheckSpeciesPermission,
   axGetAllFieldsMeta,
-  axGetAllTraitsMeta,
+  axGetAllTraitsMetaByTaxonId,
   axGetSpeciesById
 } from "@services/species.service";
 import { hasAccess } from "@utils/auth";
@@ -27,15 +27,16 @@ const SpeciesShowPage = ({ species, licensesList, permissions, success }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const [traitsMeta, fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
+  const [fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
     await Promise.all([
-      axGetAllTraitsMeta(),
       axGetAllFieldsMeta(),
       axGetSpeciesById(ctx.query.speciesId),
       axGetspeciesGroups(),
       axCheckSpeciesPermission(ctx, ctx.query.speciesId),
       axGetLicenseList()
     ]);
+
+  const traitsMeta = await axGetAllTraitsMetaByTaxonId(speciesData.data.species.taxonConceptId);
 
   const species = normalizeSpeciesPayload(
     fieldsMeta.data,

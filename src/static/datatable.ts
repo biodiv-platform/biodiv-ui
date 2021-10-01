@@ -10,6 +10,7 @@ export const BASIS_OF_RECORD = [
   { label: "Material Sample", value: "MATERIAL_SAMPLE" },
   { label: "Observation", value: "OBSERVATION" },
   { label: "Preserved Specimen", value: "PRESERVED_SPECIMEN" },
+  { label: "Primary Observation", value: "PRIMARY_OBSERVATION" },
   { label: "Unknown", value: "UNKNOWN" }
 ];
 
