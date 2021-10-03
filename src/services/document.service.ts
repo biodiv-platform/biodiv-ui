@@ -270,7 +270,7 @@ export const axGetDocumentScientificNames = async (documentId, params) => {
 
 export const axUpdateScientifcNameToIsDeleted = async (nameId) => {
   try {
-    const { data } = await http.put(`${ENDPOINT.DOCUMENT}/v1/services/deleteName/${nameId}`);
+    const { data } = await http.put(`${ENDPOINT.DOCUMENT}/v1/services/deletename/${nameId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
