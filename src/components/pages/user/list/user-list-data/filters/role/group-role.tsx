@@ -1,6 +1,6 @@
 import useUserFilter from "@components/pages/user/common/use-user-filter";
 import { covertToSentenceCase } from "@utils/text";
-import React from "react";
+import React, { useMemo } from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 
@@ -11,11 +11,12 @@ export default function GroupRoleFilter() {
     }
   } = useUserFilter();
 
-  const OPTIONS = Object.keys(role)?.map((val) => ({
-    label: covertToSentenceCase(val),
+
+  const OPTIONS = useMemo(() => Object.keys(role)?.map((val) => ({
+    label: covertToSentenceCase(val.replace("EXPERT", "moderator").replace("ROLE_USERGROUP_", "")),
     value: val,
     stat: role[val]
-  }));
+  })), [])
 
   return (
     <CheckboxFilterPanel

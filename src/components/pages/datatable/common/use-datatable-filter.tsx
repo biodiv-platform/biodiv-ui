@@ -69,7 +69,7 @@ export const DataTableFilterContextProvider = (props: DataTableFilterContextProp
       setDataTableData((_draft) => {
         if (data?.list?.length) {
           _draft.l.push(...deDupeList(_draft.l, data.list));
-          _draft.hasMore = data?.count > Number(filter.f.offset);
+          _draft.hasMore = data?.count > Number(filter.f.offset) && data?.count  !== _draft.l.length;
         } else {
           _draft.hasMore = false;
         }

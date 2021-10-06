@@ -42,9 +42,9 @@ export default function ListHeader() {
             </Select>
           </Box>
         </Stack>
-        {userListData && userListData.n > 0 && (
+        {(
           <Text color="gray.600" mb={4}>
-            {format(userListData.n)} {t("user:user_found")}
+            {format(userListData?.n || 0)} {t("user:user_found")}
           </Text>
         )}
       </Flex>

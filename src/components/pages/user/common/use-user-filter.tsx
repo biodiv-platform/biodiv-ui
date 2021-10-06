@@ -69,10 +69,12 @@ export function UserListContextProvider(props: UserListContextProps) {
       setuserListData((_draft) => {
         if (data?.userList?.length) {
           _draft.l.push(...deDupeUserListData(_draft.l, data.userList));
-          _draft.hasMore = filter?.f?.offset < data.totalCount;
+          _draft.hasMore = data.totalCount > filter?.f?.offset && data?.totalCount  !== _draft.l.length;
           _draft.ag = data.aggregationData;
-          _draft.n = data.totalCount;
+        } else {
+          _draft.hasMore = false
         }
+        _draft.n = data.totalCount;
       });
       NProgress.done();
     } catch (e) {

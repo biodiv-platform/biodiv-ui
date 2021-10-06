@@ -51,6 +51,6 @@ export default function GridView() {
       </InfiniteScroll>
     </GridViewBox>
   ) : (
-    <ObservationLoading />
+    <p>Users Not Found</p>
   );
 }
