@@ -1,6 +1,8 @@
 import { AspectRatio, Box, Button, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
+import ScientificName from "@components/@core/scientific-name";
+import Tooltip from "@components/@core/tooltip";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -26,20 +28,21 @@ export default function SpeciesRelatedObservations() {
               key={observation.observationId}
             >
               <Link target="_blank" className="fade">
-                <AspectRatio ratio={1}>
-                  <Image
-                    borderRadius="md"
-                    bg="gray.300"
-                    alt={title}
-                    title={title}
-                    src={getResourceThumbnail(
-                      RESOURCE_CTX.OBSERVATION,
-                      observation.thumbnail,
-                      RESOURCE_SIZE.LIST_THUMBNAIL
-                    )}
-                    fallbackSrc={getLocalIcon(observation.speciesGroup)}
-                  />
-                </AspectRatio>
+                <Tooltip hasArrow={true} title={<ScientificName value={title} />}>
+                  <AspectRatio ratio={1}>
+                    <Image
+                      borderRadius="md"
+                      bg="gray.300"
+                      alt={title}
+                      src={getResourceThumbnail(
+                        RESOURCE_CTX.OBSERVATION,
+                        observation.thumbnail,
+                        RESOURCE_SIZE.LIST_THUMBNAIL
+                      )}
+                      fallbackSrc={getLocalIcon(observation.speciesGroup)}
+                    />
+                  </AspectRatio>
+                </Tooltip>
               </Link>
             </LocalLink>
           );

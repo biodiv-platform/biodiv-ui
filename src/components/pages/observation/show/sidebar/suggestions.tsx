@@ -1,6 +1,8 @@
 import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
+import ScientificName from "@components/@core/scientific-name";
+import Tooltip from "@components/@core/tooltip";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -42,21 +44,23 @@ export default function Suggestions({
             prefixGroup={true}
           >
             <Link className="fade" title={o.name}>
-              <AspectRatio ratio={1}>
-                <Image
-                  overflow="hidden"
-                  objectFit="cover"
-                  alt={o.name}
-                  src={getResourceThumbnail(
-                    RESOURCE_CTX.OBSERVATION,
-                    o[observationKey],
-                    RESOURCE_SIZE.RECENT_THUMBNAIL
-                  )}
-                  fallbackSrc={getLocalIcon(o?.speciesGroupName || defaultSpeciesGroup)}
-                  bg="gray.200"
-                  borderRadius="md"
-                />
-              </AspectRatio>
+              <Tooltip hasArrow={true} title={<ScientificName value={o.name} />}>
+                <AspectRatio ratio={1}>
+                  <Image
+                    overflow="hidden"
+                    objectFit="cover"
+                    alt={o.name}
+                    src={getResourceThumbnail(
+                      RESOURCE_CTX.OBSERVATION,
+                      o[observationKey],
+                      RESOURCE_SIZE.RECENT_THUMBNAIL
+                    )}
+                    fallbackSrc={getLocalIcon(o?.speciesGroupName || defaultSpeciesGroup)}
+                    bg="gray.200"
+                    borderRadius="md"
+                  />
+                </AspectRatio>
+              </Tooltip>
             </Link>
           </LocalLink>
         ))}
