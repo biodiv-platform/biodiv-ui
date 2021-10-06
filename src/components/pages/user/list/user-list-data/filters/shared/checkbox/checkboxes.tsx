@@ -23,6 +23,8 @@ export interface FilterCheckboxesProps {
   options;
   skipTitleTranslation?: boolean;
   skipOptionsTranslation?: boolean;
+  showStat?: boolean
+  isTaxonFilter?: boolean;
   showSearch?: boolean;
 }
 
@@ -31,6 +33,7 @@ export default function FilterCheckboxes({
   translateKey,
   statKey,
   options,
+  showStat = true,
   skipOptionsTranslation,
   showSearch
 }: FilterCheckboxesProps) {
@@ -76,7 +79,7 @@ export default function FilterCheckboxes({
                 />
               )}
               {skipOptionsTranslation ? label || value : t(translateKey + label)}
-              <FilterStat statKey={statKey} subStatKey={value || label} />
+              {showStat && <FilterStat statKey={statKey} subStatKey={value || label} />}
             </Checkbox>
           ))}
         </Stack>

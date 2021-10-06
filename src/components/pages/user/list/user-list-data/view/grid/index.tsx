@@ -37,14 +37,14 @@ export default function GridView() {
   return userListData && Array.isArray(userListData.l) ? (
     <GridViewBox className="view_list_minimal">
       <InfiniteScroll
-        dataLength={userListData.l.length}
+        dataLength={userListData?.l?.length}
         next={nextPage}
         hasMore={userListData.hasMore}
         loader={<ObservationLoading key={0} />}
         scrollableTarget="items-container"
       >
         <div className="grid-card">
-          {userListData.l.map((user) => (
+          {userListData?.l?.map((user) => (
             <GridViewCard key={user?.id} user={user} />
           ))}
         </div>

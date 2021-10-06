@@ -23,6 +23,7 @@ export default function GroupRoleFilter() {
       filterKey="role"
       options={OPTIONS}
       statKey="role"
+      showStat={false}
       skipOptionsTranslation={true}
       showSearch={false}
     />

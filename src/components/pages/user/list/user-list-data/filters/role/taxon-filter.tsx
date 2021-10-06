@@ -1,10 +1,3 @@
-import {
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box
-} from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import {
   onScientificNameQuery,
@@ -44,29 +37,17 @@ export default function TaxonInputField({ translateKey, filterKey }) {
   };
 
   return (
-    <AccordionItem>
-      <>
-        <AccordionButton>
-          <Box flex={1} textAlign="left">
-            {t(translateKey)}
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
-          <FormProvider {...hForm}>
-            <SelectAsyncInputField
-              name="query"
-              onQuery={onQuery}
-              optionComponent={ScientificNameOption}
-              eventCallback={onChange}
-              placeholder={t(translateKey)}
-              isClearable={false}
-              isCreatable={false}
-              multiple={true}
-            />
-          </FormProvider>
-        </AccordionPanel>
-      </>
-    </AccordionItem>
+    <FormProvider {...hForm}>
+      <SelectAsyncInputField
+        name="query"
+        onQuery={onQuery}
+        optionComponent={ScientificNameOption}
+        eventCallback={onChange}
+        placeholder={t(translateKey)}
+        isClearable={false}
+        isCreatable={false}
+        multiple={true}
+      />
+    </FormProvider>
   );
 }

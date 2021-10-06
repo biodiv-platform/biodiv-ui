@@ -8,6 +8,7 @@ import {
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import TaxonInputField from "../../role/taxon-filter";
 import FilterCheckboxes, { FilterCheckboxesProps } from "./checkboxes";
 
 export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
@@ -23,7 +24,12 @@ export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
             </Box>
             <AccordionIcon />
           </AccordionButton>
-          <AccordionPanel>{isExpanded && <FilterCheckboxes {...props} />}</AccordionPanel>
+          <AccordionPanel>
+            {props.isTaxonFilter && (
+              <TaxonInputField translateKey="filters:user.taxon_browser" filterKey="taxonomyList" />
+            )}
+            {isExpanded && <FilterCheckboxes {...props} />}
+          </AccordionPanel>
         </>
       )}
     </AccordionItem>

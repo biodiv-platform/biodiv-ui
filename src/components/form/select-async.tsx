@@ -65,7 +65,10 @@ export const SelectAsyncInputField = ({
 }: ISelectProps) => {
   const form = useFormContext();
   const { field, fieldState } = useController({ name });
-  const Select: any = useMemo(() => (isCreatable ? AsyncSelectCreatable : AsyncSelect), [isCreatable]);
+  const Select: any = useMemo(
+    () => (isCreatable ? AsyncSelectCreatable : AsyncSelect),
+    [isCreatable]
+  );
 
   const onQueryDebounce = debounce(onQuery, debounceTime);
   const [selected, setSelected] = useState(

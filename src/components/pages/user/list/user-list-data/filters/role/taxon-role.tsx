@@ -23,6 +23,8 @@ export default function TaxonRoleFilter() {
       filterKey="taxonRole"
       options={OPTIONS}
       statKey="taxonomyRole"
+      isTaxonFilter={true}
+      showStat={false}
       skipOptionsTranslation={true}
       showSearch={false}
     />

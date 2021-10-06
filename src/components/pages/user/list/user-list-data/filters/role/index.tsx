@@ -9,7 +9,6 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import GroupRole from "./group-role";
-import TaxonInputField from "./taxon-filter";
 import TaxonRole from "./taxon-role";
 
 export default function RolesFilter() {
@@ -28,7 +27,6 @@ export default function RolesFilter() {
           <AccordionPanel>
             <GroupRole />
             <TaxonRole />
-            <TaxonInputField translateKey="filters:user.taxon_browser" filterKey="taxonomyList" />
           </AccordionPanel>
         </>
       )}

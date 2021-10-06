@@ -65,7 +65,7 @@ export default function FiltersList() {
 
       <RolesFilter />
 
-      <UserNameFilter />
+      {isAdmin && <UserNameFilter />}
 
       <AccordionItem>
         {({ isExpanded }) => (
