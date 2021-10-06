@@ -47,11 +47,16 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
     setFilter((_draft) => {
       if (dates.length > 0) {
         _draft.f[filterKey.min] = dayjs(dates[0]).utc().format();
-        _draft.f[filterKey.max] = dayjs(dates[1]).utc().format();
+
+        // If no max is selected then by default it will add 1 day (end of day) and shows results
+        _draft.f[filterKey.max] = dates[1]
+          ? dayjs(dates[1]).utc().format()
+          : dayjs(dates[0]).add(1, "day").utc().format();
       } else {
         _draft.f[filterKey.min] = undefined;
         _draft.f[filterKey.max] = undefined;
       }
+      _draft.f.offset = 0;
     });
     console.debug(dates);
   };
