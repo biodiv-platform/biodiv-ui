@@ -28,7 +28,7 @@ export const getServerSideProps = async (ctx) => {
             l: datatableShow?.observationList ? datatableShow.observationList : [],
             n: datatableShow?.observationList?.length || 0,
             datatableId: ctx.query.datatableId,
-            hasMore: true
+            hasMore: datatableShow?.observationList?.length >= LIST_PAGINATION_LIMIT
           },
           filter: DEFAULT_PARAMS,
           datatableShow,

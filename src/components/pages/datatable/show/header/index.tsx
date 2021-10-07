@@ -1,5 +1,9 @@
+import { LinkIcon } from "@chakra-ui/icons";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
+import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
+import LocalLink from "@components/@core/local-link";
+import Tooltip from "@components/@core/tooltip";
 import { axDeleteObservationByDatatableId } from "@services/observation.service";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDateReadableFromUTC } from "@utils/date";
@@ -20,6 +24,13 @@ export default function Header({ datatable, authorName }) {
 
   const PageActions = () => (
     <div>
+      <LocalLink href={`/observation/list`} params={{ dataTableName: datatable?.title }}>
+        <BlueLink>
+          <Tooltip title="observation list" placement="bottom">
+            <LinkIcon />
+          </Tooltip>
+        </BlueLink>
+      </LocalLink>
       {adminOrAuthor(datatable.uploaderId) && (
         <DeleteActionButton
           observationId={datatable?.id}

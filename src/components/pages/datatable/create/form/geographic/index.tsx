@@ -33,6 +33,7 @@ export default function PartyContributorsForm({
           centroid={centroid}
           label={t("form:coverage.spatial")}
           nameTitle={nameTitle}
+          canDraw={true}
           labelTitle={t("form:coverage.place")}
           nameTopology={nameTopology}
           labelTopology={t("form:coverage.wkt")}

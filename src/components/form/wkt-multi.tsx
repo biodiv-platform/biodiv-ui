@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import WKT, { WKTProps } from "@components/@core/WKT";
 import WKTSearch from "@components/@core/WKT/search";
+import WKTDrawViewer from "@components/@core/WKT/wkt-draw-viewer";
 import WKTList from "@components/@core/WKT/wkt-list";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ import { useController } from "react-hook-form";
 
 interface WKTInputProps extends Omit<WKTProps, "onSave"> {
   isMultiple?;
+  canDraw?;
 }
 
 export default function WKTFieldMulti(props: WKTInputProps) {
@@ -54,7 +56,11 @@ export default function WKTFieldMulti(props: WKTInputProps) {
                 <WKTSearch {...props} isDisabled={isDisabled} onSave={handleOnSave} />
               </TabPanel>
               <TabPanel>
-                <WKT {...props} disabled={isDisabled} onSave={handleOnSave} />
+                {props.canDraw ? (
+                  <WKTDrawViewer {...props} disabled={isDisabled} onSave={handleOnSave} />
+                ) : (
+                  <WKT {...props} disabled={isDisabled} onSave={handleOnSave} />
+                )}
               </TabPanel>
             </TabPanels>
           </Tabs>
