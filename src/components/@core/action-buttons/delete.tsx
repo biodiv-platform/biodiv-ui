@@ -20,8 +20,12 @@ export default function DeleteActionButton({
   observationId,
   deleteFunc,
   title,
+  deleteGnfinderName = false,
   description,
-  deleted
+  deleted,
+  refreshFunc = () => {
+    return null;
+  }
 }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -32,8 +36,13 @@ export default function DeleteActionButton({
     const { success } = await deleteFunc(observationId);
     if (success) {
       notification(deleted, NotificationType.Success);
+      if (deleteGnfinderName) {
+        refreshFunc();
+      }
       onClose();
-      router.push("/", true);
+      if (!deleteGnfinderName) {
+        router.push("/", true);
+      }
     }
   };
 

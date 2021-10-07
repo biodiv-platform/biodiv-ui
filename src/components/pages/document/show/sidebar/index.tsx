@@ -6,6 +6,7 @@ import React from "react";
 import CoveragePanel from "./coverage";
 import DownloadButtons from "./download-buttons";
 import DocumentSidebarMap from "./map";
+import ScientificNames from "./scientific-names";
 import SpatialCoverage from "./special-coverage";
 
 interface SidebarProps {
@@ -50,6 +51,10 @@ export default function Sidebar({
         type="species"
         endpointType="speciesGroup"
         documentId={showDocument.document?.id}
+      />
+      <ScientificNames
+        documentId={showDocument.document?.id}
+        authorId={showDocument.document?.authorId}
       />
     </div>
   );
