@@ -253,7 +253,10 @@ export const axCreateObservation = async ({
 
     return { success: true, data };
   } catch (e) {
-    console.error(e.response.data.message);
+    if (e.response.status === 400) {
+      alert(e.response.data);
+    }
+    console.error(e.response);
     return { success: false, data: [] };
   }
 };
