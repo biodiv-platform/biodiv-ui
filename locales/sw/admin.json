@@ -1,14 +1,14 @@
 {
   "links": {
-    "notification": "Tuma Arifa ya Push."
+    "notification": "Tuma Arifa ya Push"
   },
   "pages": {
     "notification": {
       "form": {
-        "body": "Mwili.",
+        "body": "Mwili",
         "error": "Haikuweza kutuma taarifa",
-        "icon": "Icon.",
-        "link": "LINK.",
+        "icon": "Icon",
+        "link": "kiungo",
         "success": "Arifa imetumwa",
         "title": "Kichwa"
       },

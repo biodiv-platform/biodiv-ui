@@ -71,6 +71,18 @@
     "title": "Fafao ny antontan-taratasy"
   },
   "share": "Zarao ity antontan-taratasy ity",
+  "show": {
+    "scientific_names_table": {
+      "count_header": "hatetika",
+      "delete": {
+        "deleted": "Nesorina soa aman-tsara ny anarana",
+        "description": "Tena te hamafa an'io anarana io ve ianao? \nTsy afaka manafoana ity hetsika ity ianao aorian'izay.",
+        "title": "Fafao ny anarana"
+      },
+      "name_header": "Anarana",
+      "title": "Anarana siantifika"
+    }
+  },
   "tags": {
     "not_found": "Tsy misy tags (s) hita",
     "title": "Tags"

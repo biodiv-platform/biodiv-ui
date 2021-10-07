@@ -23,7 +23,7 @@ export interface FilterCheckboxesProps {
   options;
   skipTitleTranslation?: boolean;
   skipOptionsTranslation?: boolean;
-  showStat?: boolean
+  showStat?: boolean;
   isTaxonFilter?: boolean;
   showSearch?: boolean;
 }

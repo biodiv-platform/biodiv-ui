@@ -42,11 +42,9 @@ export default function ListHeader() {
             </Select>
           </Box>
         </Stack>
-        {(
-          <Text color="gray.600" mb={4}>
-            {format(userListData?.n || 0)} {t("user:user_found")}
-          </Text>
-        )}
+        <Text color="gray.600" mb={4}>
+          {format(userListData?.n || 0)} {t("user:user_found")}
+        </Text>
       </Flex>
     </>
   );

@@ -2,19 +2,19 @@
   "audio": {
     "start": "Anza kurekodi.",
     "stop": "Kuacha kurekodi",
-    "title": "Rekodi ya sauti."
+    "title": "Rekodi ya sauti"
   },
   "comments": {
-    "add_comment": "Ongeza maoni mapya.",
+    "add_comment": "Ongeza maoni mapya",
     "post": "Chapisha maoni.",
-    "title": "Maoni (s)"
+    "title": "Maoni "
   },
   "coverage": {
     "hint": "Mara baada ya kuchaguliwa kutoka kifungo chochote cha Hifadhi ya Hifadhi ya Hifadhi chini ya ramani ili kukamilisha",
     "place": "Jina la mahali",
     "spatial": "Chanjo ya nafasi.",
     "title": "Chanjo",
-    "wkt": "WKT."
+    "wkt": "WKT"
   },
   "created_on": "Imeundwa On.",
   "date_accuracy": "Usahihi wa tarehe",
@@ -28,19 +28,19 @@
     "audio": "Kurekodi itaacha moja kwa moja baada ya dakika mbili.",
     "my_uploads": "Pakia na kuhifadhi vyombo vya habari hapa kwa kipindi cha siku 20. Chagua picha za kutumia katika uchunguzi",
     "resources": "Pakia picha, sauti au video za uchunguzi mmoja kutoka kwenye kifaa chako. (Tumia ratings ili kuagiza picha)",
-    "title": "Maelezo."
+    "title": "Maelezo"
   },
   "find_gmaps": "Tafuta kutoka kwa Ramani za Google.",
-  "from_url": "YouTube.",
+  "from_url": "YouTube",
   "geoentities": "Tafuta kutoka kwenye mandhari",
   "language": "Lugha",
-  "license": "Leseni.",
+  "license": "Leseni",
   "location_accuracy_options": {
     "accurate": "Sahihi",
     "approximate": "Takriban",
-    "country": "Nchi.",
+    "country": "Nchi",
     "local": "Mitaa",
-    "region": "Eneo."
+    "region": "Eneo"
   },
   "map": {
     "hide": "Kilivyohaririwa",
@@ -50,9 +50,9 @@
   "my_uploads": "Rasimu ya vyombo vya habari.",
   "my_uploads_sort": {
     "taken_on": "Imechukuliwa",
-    "uploaded_on": "Imepakiwa On."
+    "uploaded_on": "Imepakiwa On"
   },
-  "name": "Jina.",
+  "name": "Jina",
   "notes": "Vidokezo",
   "place": "Mahali",
   "selected_media": "Vyombo vya habari vilivyochaguliwa.",

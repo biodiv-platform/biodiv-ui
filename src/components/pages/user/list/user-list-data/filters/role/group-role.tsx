@@ -11,12 +11,17 @@ export default function GroupRoleFilter() {
     }
   } = useUserFilter();
 
-
-  const OPTIONS = useMemo(() => Object.keys(role)?.map((val) => ({
-    label: covertToSentenceCase(val.replace("EXPERT", "moderator").replace("ROLE_USERGROUP_", "")),
-    value: val,
-    stat: role[val]
-  })), [])
+  const OPTIONS = useMemo(
+    () =>
+      Object.keys(role)?.map((val) => ({
+        label: covertToSentenceCase(
+          val.replace("EXPERT", "moderator").replace("ROLE_USERGROUP_", "")
+        ),
+        value: val,
+        stat: role[val]
+      })),
+    []
+  );
 
   return (
     <CheckboxFilterPanel

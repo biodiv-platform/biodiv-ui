@@ -10,21 +10,21 @@
     "flag": {
       "flagged": "Imepigwa",
       "title": "Bendera",
-      "unflagged": "Unflagged."
+      "unflagged": "Unflagged"
     },
     "identification": {
       "identified": "Kutambuliwa",
       "title": "Kitambulisho",
-      "unidentified": "Haijulikani."
+      "unidentified": "Haijulikani"
     },
     "taxon_id": {
-      "has_taxon": "Ina ID ya taxon.",
-      "no_taxon": "Hakuna ID ya Taxon.",
-      "title": "Kitambulisho cha Taxon."
+      "has_taxon": "Ina ID ya taxon",
+      "no_taxon": "Hakuna ID ya Taxon",
+      "title": "Kitambulisho cha Taxon"
     },
-    "title": "Ubora wa data.",
+    "title": "Ubora wa data",
     "validation": {
-      "not_validated": "Si kuthibitishwa.",
+      "not_validated": "Si kuthibitishwa",
       "title": "Uthibitishaji",
       "validated": "Kuthibitishwa"
     }
@@ -43,9 +43,9 @@
     "title": "Aina ya kipengee."
   },
   "location": {
-    "district": "Wilaya.",
+    "district": "Wilaya",
     "map": {
-      "title": "Ramani."
+      "title": "Ramani"
     },
     "protected_area": {
       "title": "Maeneo yaliyohifadhiwa"
@@ -57,7 +57,7 @@
     "title": "Mahali"
   },
   "media": {
-    "audio": "Audio.",
+    "audio": "Audio",
     "image": "Picha",
     "no_media": "Hakuna vyombo vya habari.",
     "title": "Aina ya vyombo vya habari.",
@@ -91,16 +91,16 @@
   },
   "species_group": {
     "all": "Wote",
-    "amphibians": "Amphibians.",
-    "arthropods": "Arthropods.",
+    "amphibians": "Amphibians",
+    "arthropods": "Arthropods",
     "birds": "Ndege",
     "fish": "Samaki",
-    "fungi": "Fungi.",
+    "fungi": "Fungi",
     "mammals": "Mamalia",
-    "molluscs": "Molluscs.",
+    "molluscs": "Molluscs",
     "others": "Wengine",
     "plants": "Mimea",
-    "reptiles": "Reptiles.",
+    "reptiles": "Reptiles",
     "title": "SPECIES GROUP."
   },
   "taxon_browser": {

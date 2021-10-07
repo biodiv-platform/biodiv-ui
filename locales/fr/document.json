@@ -71,6 +71,18 @@
     "title": "Supprimer le document"
   },
   "share": "Partager ce document",
+  "show": {
+    "scientific_names_table": {
+      "count_header": "La fréquence",
+      "delete": {
+        "deleted": "Nom supprimé avec succès",
+        "description": "Voulez-vous vraiment supprimer ce nom ? \nVous ne pouvez pas annuler cette action par la suite.",
+        "title": "Supprimer le nom"
+      },
+      "name_header": "Nom",
+      "title": "Noms scientifiques"
+    }
+  },
   "tags": {
     "not_found": "Pas de mot clé (s) trouvé (s)",
     "title": "Mots clés"
