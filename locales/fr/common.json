@@ -41,6 +41,7 @@
   "list": {
     "sort_by": "Trier par",
     "sort_options": {
+      "last_logged_in": "Dernière connexion",
       "last_updated": "Dernière mise à jour",
       "latest": "Dernier téléchargé",
       "most_viewed": "Le plus regardé"

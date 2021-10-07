@@ -1,1 +1,1 @@
-export { default } from "../../../user/list";
+export { default, getServerSideProps } from "../../../user/list";

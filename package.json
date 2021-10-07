@@ -6,7 +6,6 @@
     "start": "next",
     "build": "next build",
     "serve": "next start",
-    "lint-staged": "lint-staged",
     "lint": "next lint && prettier --write src/**/*",
     "lint:fix": "next lint --fix",
     "prepare": "husky install"
@@ -114,8 +113,6 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "framer-motion": "^4.1.17",
-    "husky": "^7.0.2",
-    "lint-staged": ">=11",
     "memory-cache": "^0.2.0",
     "prettier": "^2.4.1",
     "sass": "^1.42.1",
@@ -124,9 +121,5 @@
   },
   "resolutions": {
     "@emotion/react": "^11.4.1"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "next lint --cache --fix",
-    "*.{js,css,md}": "prettier -c -w src"
   }
 }

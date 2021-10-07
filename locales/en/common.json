@@ -41,8 +41,9 @@
   "list": {
     "sort_by": "Sort By",
     "sort_options": {
+      "last_logged_in": "Last Logged In",
       "last_updated": "Last Updated",
-      "latest": "Last Uploaded",
+      "latest": "Last Created",
       "most_viewed": "Most Viewed"
     },
     "view_type": {

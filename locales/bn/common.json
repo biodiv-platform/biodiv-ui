@@ -41,6 +41,7 @@
   "list": {
     "sort_by": "ক্রমানুসার",
     "sort_options": {
+      "last_logged_in": "শেষ লগ ইন",
       "last_updated": "সর্বশেষ সংষ্করণ",
       "latest": "শেষ আপলোড",
       "most_viewed": "সর্বাধিক দেখা"

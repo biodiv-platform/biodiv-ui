@@ -41,6 +41,7 @@
   "list": {
     "sort_by": "इसके अनुसार क्रमबद्ध करें",
     "sort_options": {
+      "last_logged_in": "पिछला लॉग इन",
       "last_updated": "आखरी अपडेट",
       "latest": "अंतिम अपलोड किया गया",
       "most_viewed": "सबसे ज्यादा देखा गया"

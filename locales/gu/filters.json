@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "બનાવવાની તારીખ",
+    "last_logged": "છેલ્લે પ્રવેશ કર્યો",
     "max_date": "મહત્તમ તારીખ",
     "min_date": "ન્યૂનતમ તારીખ",
     "month": {
@@ -135,8 +136,18 @@
     "title": "લાક્ષણિકતા"
   },
   "user": {
+    "email": "ઇમેઇલ",
+    "group_role_title": "વપરાશકર્તા જૂથ ભૂમિકાઓ",
+    "institution_title": "સંસ્થા",
+    "phone": "ફોન નંબર",
+    "profession_title": "વ્યવસાય",
+    "role_title": "ભૂમિકા",
     "search": "વપરાશકર્તા શોધ",
-    "title": "વપરાશકર્તા"
+    "sex_title": "જાતિ",
+    "taxon_browser": "ટેક્સન બ્રાઉઝર",
+    "taxon_role_title": "વર્ગીકરણ ભૂમિકાઓ",
+    "title": "વપરાશકર્તા",
+    "username": "વપરાશકર્તા નામ"
   },
   "usergroup": {
     "title": "વપરાશકર્તા ગ્રુપો"

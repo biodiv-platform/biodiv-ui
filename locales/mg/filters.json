@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "Daty noforonina",
+    "last_logged": "Tafiditra farany",
     "max_date": "Daty farany",
     "min_date": "Daty kely indrindra",
     "month": {
@@ -135,8 +136,18 @@
     "title": "toetra"
   },
   "user": {
+    "email": "mailaka",
+    "group_role_title": "Andraikitry ny Usergroup",
+    "institution_title": "Institute",
+    "phone": "Nomeraon-telefaona",
+    "profession_title": "asa",
+    "role_title": "anjara asa",
     "search": "Mpampiasa mpampiasa",
-    "title": "Mpikambana"
+    "sex_title": "Karazana firaisana",
+    "taxon_browser": "Browser Taxon",
+    "taxon_role_title": "Andraikitra ara-ketra",
+    "title": "Mpikambana",
+    "username": "Anaran'ny mpampiasa"
   },
   "usergroup": {
     "title": "Vondron'olona mpampiasa"

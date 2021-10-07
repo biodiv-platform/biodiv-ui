@@ -31,7 +31,7 @@ For end to end typesafe models this grately reduces chances of typos and amazing
 
 ### 🔧 Configuration
 
-Code quality checks are done with `prettier`, `eslint` and `husky`.
+Code quality checks are done with `prettier` and `eslint`.
 
 ### 📄 License
 
