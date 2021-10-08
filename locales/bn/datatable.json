@@ -12,6 +12,7 @@
   "geographical_coverage": "ভৌগোলিক কভারেজ",
   "is_verified": "পর্যবেক্ষণ যাচাই",
   "list": {
+    "all": "সব দেখুন/ডাউনলোড করুন",
     "title": "ডেটাটেবল"
   },
   "location": "অবস্থান",

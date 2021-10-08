@@ -12,6 +12,7 @@
   "geographical_coverage": "भौगोलिक कवरेज",
   "is_verified": "अवलोकन सत्यापित",
   "list": {
+    "all": "सभी देखें/डाउनलोड करें",
     "title": "डेटाटेबल्स"
   },
   "location": "स्थान",

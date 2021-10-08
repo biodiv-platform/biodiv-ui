@@ -12,6 +12,7 @@
   "geographical_coverage": "Couverture géographique",
   "is_verified": "Observation vérifiée",
   "list": {
+    "all": "tout voir/télécharger",
     "title": "Tables de données"
   },
   "location": "Emplacement",

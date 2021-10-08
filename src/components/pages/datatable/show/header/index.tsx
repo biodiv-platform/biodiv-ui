@@ -1,4 +1,4 @@
-import { LinkIcon } from "@chakra-ui/icons";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
@@ -26,8 +26,8 @@ export default function Header({ datatable, authorName }) {
     <div>
       <LocalLink href={`/observation/list`} params={{ dataTableName: datatable?.title }}>
         <BlueLink>
-          <Tooltip title="observation list" placement="bottom">
-            <LinkIcon />
+          <Tooltip title={t("datatable:list.all")} placement="bottom">
+            <ExternalLinkIcon />
           </Tooltip>
         </BlueLink>
       </LocalLink>
