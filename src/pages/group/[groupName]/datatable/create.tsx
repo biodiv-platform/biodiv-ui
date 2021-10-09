@@ -1,1 +1,1 @@
-export { default, getServerSideProps } from "../../../observation/create";
+export { default, getServerSideProps } from "../../../datatable/create";

@@ -24,7 +24,7 @@ import ImageUploaderField from "./uploader";
 
 export default function DataTableCreateForm({ speciesGroups, languages, datasetId }) {
   const { t } = useTranslation();
-  const { user } = useGlobalState();
+  const { user,currentGroup } = useGlobalState();
   const router = useLocalRouter();
 
   const [fieldMapping, setFieldMapping] = useState<any>({});
@@ -132,6 +132,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         dateToUTC(observedDateRange[1]).format() || dateToUTC(observedDateRange[0]).format(),
       wktString: topology,
       useDegMinSec: false,
+      userGroup:`${currentGroup?.id}`||"",
       licenseId: SITE_CONFIG.LICENSE.DEFAULT,
       dataset: datasetId || null,
       createdOn: dateToUTC().format(),

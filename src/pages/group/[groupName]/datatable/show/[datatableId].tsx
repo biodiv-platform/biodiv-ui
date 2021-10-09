@@ -1,1 +1,1 @@
-export { default } from "../../../../datatable/show/[datatableId]";
+export { default,getServerSideProps} from "../../../../datatable/show/[datatableId]";

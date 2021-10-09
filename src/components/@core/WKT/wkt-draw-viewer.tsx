@@ -85,7 +85,6 @@ export default function WKTDrawViewer({
   useEffect(() => {
     if (!disabled) {
       WKTInputRef.current.value = "";
-      WKTInputRef.current.value = "";
       setGeojson(undefined);
     }
   }, [disabled]);
