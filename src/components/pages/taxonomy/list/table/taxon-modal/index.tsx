@@ -13,6 +13,7 @@ import React from "react";
 
 import useTaxonFilter from "../../use-taxon";
 import { TaxonModalTabs } from "./tabs";
+import { SpeciesPageLinkTab } from "./tabs/species";
 
 export default function TaxonShowModal() {
   const { t } = useTranslation();
@@ -29,6 +30,7 @@ export default function TaxonShowModal() {
           <ModalCloseButton />
           <ModalBody>
             <TaxonModalTabs />
+            <SpeciesPageLinkTab showTaxon={showTaxon} />
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" onClick={handleOnClose}>
