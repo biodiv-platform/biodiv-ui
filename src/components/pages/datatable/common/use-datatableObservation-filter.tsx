@@ -67,16 +67,18 @@ export const DataTableObservationListProvider = (props: DataTableObservationCont
         });
       }
 
-      const { data: observationList } = await axGetObservationListByDatatableId(
-        datatableId,
-        filter.f
-      );
+      const {
+        data: { observationList, total }
+      } = await axGetObservationListByDatatableId(datatableId, filter.f);
+
       setObservationData((_draft) => {
-        if (observationList.length) {
+        if (observationList?.length) {
           _draft.l.push(...deDupeObservations(_draft.l, observationList));
-          _draft.hasMore = observationList.length === Number(filter.f.limit);
+          _draft.hasMore = total > Number(filter.f.offset) && total !== _draft.l.length;
+        } else {
+          _draft.hasMore = false;
         }
-        _draft.n = observationList.length;
+        _draft.n = observationList?.length;
       });
       NProgress.done();
     } catch (e) {

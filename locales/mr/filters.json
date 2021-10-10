@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "तारीख तयार केली",
+    "last_logged": "शेवटचे लॉग इन केले",
     "max_date": "कमाल तारीख",
     "min_date": "किमान तारीख",
     "month": {
@@ -135,8 +136,18 @@
     "title": "गुणधर्म"
   },
   "user": {
+    "email": "ईमेल",
+    "group_role_title": "वापरकर्ता गट भूमिका",
+    "institution_title": "संस्था",
+    "phone": "फोन नंबर",
+    "profession_title": "व्यवसाय",
+    "role_title": "भूमिका",
     "search": "वापरकर्ता शोधा",
-    "title": "वापरकर्ता"
+    "sex_title": "लिंग प्रकार",
+    "taxon_browser": "टॅक्सन ब्राउझर",
+    "taxon_role_title": "वर्गीकरण भूमिका",
+    "title": "वापरकर्ता",
+    "username": "वापरकर्ता नाव"
   },
   "usergroup": {
     "title": "वापरकर्ता गट"

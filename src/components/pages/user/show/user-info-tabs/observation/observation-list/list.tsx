@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
+import ScientificName from "@components/@core/scientific-name";
 import Tooltip from "@components/@core/tooltip";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
@@ -38,7 +39,7 @@ export default function ObservationList({ title, data, loadMore }) {
               key={observation.observationId}
             >
               <Link target="_blank" className="fade">
-                <Tooltip title={title} hasArrow={true}>
+                <Tooltip title={<ScientificName value={title} />} hasArrow={true}>
                   <AspectRatio ratio={1}>
                     <Image
                       borderRadius="md"

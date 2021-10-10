@@ -41,6 +41,7 @@
   "list": {
     "sort_by": "ਦੇ ਨਾਲ ਕ੍ਰਮਬੱਧ",
     "sort_options": {
+      "last_logged_in": "ਆਖਰੀ ਵਾਰ ਲੌਗ ਇਨ ਕੀਤਾ",
       "last_updated": "ਆਖਰੀ ਵਾਰ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
       "latest": "ਆਖਰੀ ਅਪਲੋਡ ਕੀਤਾ ਗਿਆ",
       "most_viewed": "ਸਭ ਤੋਂ ਵੱਧ ਵੇਖਿਆ ਗਿਆ"

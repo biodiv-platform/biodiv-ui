@@ -117,8 +117,8 @@
     "form": {
       "datasource": "DataSource.",
       "datasource_id": "Kitambulisho cha DataSource.",
-      "name": "Jina.",
-      "rank": "Rank.",
+      "name": "Jina",
+      "rank": "Rank",
       "type": "Andika"
     },
     "update": {

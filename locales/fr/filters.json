@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "Date créée",
+    "last_logged": "Dernière connexion",
     "max_date": "Date max",
     "min_date": "Date min",
     "month": {
@@ -135,8 +136,18 @@
     "title": "Traits"
   },
   "user": {
+    "email": "e-mail",
+    "group_role_title": "Rôles des groupes d'utilisateurs",
+    "institution_title": "Institut",
+    "phone": "Numéro de téléphone",
+    "profession_title": "Métier",
+    "role_title": "Rôle",
     "search": "Recherche utilisateur",
-    "title": "Utilisateur"
+    "sex_title": "Genre",
+    "taxon_browser": "Navigateur de taxons",
+    "taxon_role_title": "Rôles de taxonomie",
+    "title": "Utilisateur",
+    "username": "Nom d'utilisateur"
   },
   "usergroup": {
     "title": "Groupes d'utilisateurs"

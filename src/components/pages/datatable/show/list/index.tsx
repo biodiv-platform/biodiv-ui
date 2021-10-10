@@ -25,7 +25,7 @@ export default function ObservationsList({ dataTable: dt, speciesGroups }) {
       <InfiniteScroll
         dataLength={observationData.l.length}
         next={nextPage}
-        hasMore={true}
+        hasMore={observationData.hasMore}
         loader={<Loading />}
         scrollableTarget="scrollableDiv"
       >

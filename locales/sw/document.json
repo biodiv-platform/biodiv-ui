@@ -1,37 +1,37 @@
 {
-  "basic_information": "Maelezo ya msingi.",
+  "basic_information": "Maelezo ya msingi",
   "bib": {
-    "abstract": "Maelezo.",
-    "address": "Anwani.",
+    "abstract": "Maelezo",
+    "address": "Anwani",
     "author": "Mwandishi",
-    "booktitle": "Kichwa cha Kitabu.",
+    "booktitle": "Kichwa cha Kitabu",
     "chapter": "Sura ya",
-    "doi": "DOI.",
+    "doi": "DOI",
     "edition": "Toleo",
-    "editor": "Mhariri.",
+    "editor": "Mhariri",
     "extra": "Ziada",
-    "file": "Faili.",
+    "file": "Faili",
     "howpublished": "Jinsi kuchapishwa",
     "institution": "Taasisi",
-    "isbn": "ISBN.",
-    "journal": "Journal.",
+    "isbn": "ISBN",
+    "journal": "Journal",
     "language": "Lugha",
     "month": "Mwezi",
     "note": "Kumbuka",
-    "number": "Idadi.",
-    "organization": "Shirika.",
-    "pages": "Kurasa.",
+    "number": "Idadi",
+    "organization": "Shirika",
+    "pages": "Kurasa",
     "publisher": "Mchapishaji",
     "schema": {
       "error": "Haiwezi kurejesha Schema ya Bibtex."
     },
-    "school": "Shule.",
-    "series": "Mfululizo.",
+    "school": "Shule",
+    "series": "Mfululizo",
     "title": "Kichwa",
     "type": "Andika",
     "url": "URL.",
-    "volume": "Volume.",
-    "year": "Mwaka."
+    "volume": "Volume",
+    "year": "Mwaka"
   },
   "contribution": "Mchango",
   "create": {
@@ -71,6 +71,18 @@
     "title": "Futa hati"
   },
   "share": "Shiriki hati hii",
+  "show": {
+    "scientific_names_table": {
+      "count_header": "Mzunguko",
+      "delete": {
+        "deleted": "Jina limeondolewa vyema",
+        "description": "Je! Una uhakika unataka kufuta jina hili? \nHuwezi kutendua kitendo hiki baadaye.",
+        "title": "Futa jina"
+      },
+      "name_header": "Jina.",
+      "title": "Majina ya kisayansi"
+    }
+  },
   "tags": {
     "not_found": "Hakuna tags (s) zilizopatikana.",
     "title": "Tags."

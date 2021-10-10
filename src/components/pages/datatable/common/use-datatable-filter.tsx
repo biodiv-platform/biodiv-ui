@@ -69,9 +69,10 @@ export const DataTableFilterContextProvider = (props: DataTableFilterContextProp
       setDataTableData((_draft) => {
         if (data?.list?.length) {
           _draft.l.push(...deDupeList(_draft.l, data.list));
-          _draft.hasMore = data?.list?.length === Number(filter.f.limit);
+          _draft.hasMore = data?.count > Number(filter.f.offset) && data?.count !== _draft.l.length;
+        } else {
+          _draft.hasMore = false;
         }
-        _draft.n = data.count;
       });
       NProgress.done();
     } catch (e) {

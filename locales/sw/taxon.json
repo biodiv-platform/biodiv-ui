@@ -19,13 +19,13 @@
       },
       "id": {
         "desc": "Nambari ya ID ya jina kwenye database ya mechi.",
-        "title": "ID."
+        "title": "ID"
       },
       "name": {
         "desc": "Inaonyesha jina la maneno yaani. Jina kamili na mwandishi na mwaka ikiwa inajulikana.",
         "error": "Hitilafu wakati uppdatering jina la taxon.",
         "success": "Jina la taxon updated kwa mafanikio.",
-        "title": "Jina."
+        "title": "Jina"
       },
       "position": {
         "desc": "Inaonyesha orodha ambayo jina sasa linawasilisha.",

@@ -59,7 +59,7 @@ export const axFollowSpecies = async (speciesId, follow = true) => {
 export const axSaveUserGroups = async (speciesId, userGroupList) => {
   try {
     const { data } = await http.put(
-      `${ENDPOINT.SPECIES}/v1/observation/update/usergroup/${speciesId}`,
+      `${ENDPOINT.SPECIES}/v1/species/update/usergroup/${speciesId}`,
       userGroupList
     );
     return { success: true, data };

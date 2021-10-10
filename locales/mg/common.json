@@ -41,6 +41,7 @@
   "list": {
     "sort_by": "Sivanina araka",
     "sort_options": {
+      "last_logged_in": "Tafiditra farany",
       "last_updated": "Nohavaozina farany",
       "latest": "Nampidirina farany",
       "most_viewed": "Ny fahitana indrindra"

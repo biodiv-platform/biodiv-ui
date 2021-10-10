@@ -110,6 +110,7 @@
   },
   "time": {
     "created_on": "സൃഷ്ടിച്ച തീയതി",
+    "last_logged": "അവസാനം ലോഗിൻ ചെയ്‌തു",
     "max_date": "പരമാവധി തീയതി",
     "min_date": "കുറഞ്ഞ തീയതി",
     "month": {
@@ -135,8 +136,18 @@
     "title": "സവിശേഷതകൾ"
   },
   "user": {
+    "email": "ഇമെയിൽ",
+    "group_role_title": "യൂസർഗ്രൂപ്പ് റോളുകൾ",
+    "institution_title": "ഇൻസ്റ്റിറ്റ്യൂട്ട്",
+    "phone": "ഫോൺ നമ്പർ",
+    "profession_title": "തൊഴിൽ",
+    "role_title": "പങ്ക്",
     "search": "ഉപയോക്താവിനെ തിരയുക",
-    "title": "ഉപയോക്താവ് "
+    "sex_title": "ലിംഗഭേദം",
+    "taxon_browser": "ടാക്സൺ ബ്രൗസർ",
+    "taxon_role_title": "ടാക്സോണമി റോളുകൾ",
+    "title": "ഉപയോക്താവ് ",
+    "username": "ഉപയോക്തൃ നാമം"
   },
   "usergroup": {
     "title": "ഉപയോക്തൃ ഗ്രൂപ്പുകൾ"

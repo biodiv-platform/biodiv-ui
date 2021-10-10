@@ -41,6 +41,7 @@
   "list": {
     "sort_by": "क्रमवारी लावा",
     "sort_options": {
+      "last_logged_in": "शेवटचे लॉग इन केले",
       "last_updated": "शेवटचे अद्यावत",
       "latest": "शेवटचे अपलोड",
       "most_viewed": "सर्वाधिक पाहिलेले"
