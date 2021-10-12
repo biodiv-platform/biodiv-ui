@@ -49,7 +49,10 @@ export default function SpeciesFieldSimple({ value }) {
   const [langShow, setLangShow] = useState(false);
 
   const hasFieldPermission = useMemo(() => getFieldPermission(value), [value]);
-  const fieldLanguageName = useMemo(() => getLanguageNameById(value?.fieldData?.languageId), []);
+  const fieldLanguageName = useMemo(
+    () => getLanguageNameById(value?.fieldData?.languageId),
+    [languageId]
+  );
 
   const handleOnDelete = async () => {
     const { success } = await axRemoveSpeciesField(value.id);
