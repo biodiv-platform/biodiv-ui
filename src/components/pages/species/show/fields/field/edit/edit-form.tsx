@@ -34,8 +34,12 @@ const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: fa
 
 export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel }) {
   const { t } = useTranslation();
-  const { user } = useGlobalState();
+  const { user, languageId } = useGlobalState();
   const { species, licensesList } = useSpecies();
+  const languagesList = useMemo(
+    () => Object.values(SITE_CONFIG.LANG.LIST).map((l) => ({ value: l.ID, label: l.NAME })),
+    []
+  );
 
   const referencesOnly = initialValue.referencesOnly;
 
@@ -56,6 +60,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
       Yup.object().shape({
         sfDescription: Yup.string().required(),
         attributions: Yup.string().required(),
+        languageId: Yup.mixed().required(),
         licenseId: Yup.mixed().required(),
         contributorIds: Yup.array().min(1).required(),
         references: Yup.array().of(
@@ -70,6 +75,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
     ),
     defaultValues: {
       sfDescription: initialValue.fieldData.description,
+      languageId: initialValue?.fieldData?.languageId || languageId,
       licenseId: initialValue.license.id.toString(),
       attributions: initialValue.attributions,
       contributorIds: initialContributors,
@@ -147,6 +153,13 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
               name="contributorIds"
               label={t("species:contributors")}
               isRequired={true}
+            />
+            <SelectInputField
+              hidden={referencesOnly}
+              name="languageId"
+              label={t("form:language")}
+              isRequired={true}
+              options={languagesList}
             />
             <SelectInputField
               hidden={referencesOnly}

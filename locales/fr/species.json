@@ -23,6 +23,7 @@
     }
   },
   "common_names": "Noms communs",
+  "content_another_language": "Il y a du contenu dans une autre langue. Veuillez cliquer ici pour le lire.",
   "contribute": {
     "create_species": "Créer de nouvelles espèces",
     "description": "Les pages espèces sont des descriptions d'espèces, avec une page pour chaque espèce. Chaque espèce peut être décrite avec plus de 60 groupes de champs standards. Les pages espèces sont alimentées et organisées par des experts.Toutes les informations publiées sur le portail sont en accès public et sous la licence Creative Commons de votre choix.",
