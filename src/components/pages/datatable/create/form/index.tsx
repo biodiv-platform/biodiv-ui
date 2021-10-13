@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import UserGroups from "../../../observation/create/form/user-groups";
 import PartyContributorsForm from "./contributor";
 import LocationPicker from "./geographic";
 import Others from "./others";
@@ -24,7 +25,7 @@ import ImageUploaderField from "./uploader";
 
 export default function DataTableCreateForm({ speciesGroups, languages, datasetId }) {
   const { t } = useTranslation();
-  const { user,currentGroup } = useGlobalState();
+  const { user, currentGroup } = useGlobalState();
   const router = useLocalRouter();
 
   const [fieldMapping, setFieldMapping] = useState<any>({});
@@ -63,6 +64,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
               centroid: Yup.object().required()
             })
           ),
+        userGroupId: Yup.array(),
         useDegMinSec: Yup.boolean(),
         hidePreciseLocation: Yup.boolean(),
         terms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted."),
@@ -80,8 +82,9 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
       languageId: 205,
       basisOfData: DEFAULT_BASIS_OF_DATA,
       basisOfRecord: DEFAULT_BASIS_OF_RECORD,
+      contributors: { label: user.name, value: user.id },
+      userGroupId: currentGroup.id && currentGroup.id > 0 ? [currentGroup.id.toString()] : [],
       isVerified: false,
-      contributors: user.id,
       terms: true
     }
   });
@@ -108,6 +111,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
     observedToDate,
     topologyData,
     isVerified,
+    userGroupId,
     ...props
   }) => {
     const { columns, checklistAnnotation } = parseColumnData(columnsMapping);
@@ -132,7 +136,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         dateToUTC(observedDateRange[1]).format() || dateToUTC(observedDateRange[0]).format(),
       wktString: topology,
       useDegMinSec: false,
-      userGroup:`${currentGroup?.id}`||"",
+      userGroup: userGroupId?.length > 0 ? userGroupId.join(",") : "",
       licenseId: SITE_CONFIG.LICENSE.DEFAULT,
       dataset: datasetId || null,
       createdOn: dateToUTC().format(),
@@ -165,6 +169,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         <LocationPicker />
         <PartyContributorsForm />
         <Others />
+        <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
         <CheckboxField name="terms" label={t("form:terms")} />
         <SubmitButton leftIcon={<CheckIcon />}>{t("datatable:add")}</SubmitButton>
       </form>
