@@ -240,7 +240,7 @@ export const axGetSpeciesList = async (params) => {
 export const axGetSpeciesIdFromTaxonId = async (taxonId) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/speciesId/${taxonId}`);
-    return { success: data, data };
+    return { success: true, data: data };
   } catch (e) {
     console.error(e);
     return { success: false, data: {} };
