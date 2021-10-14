@@ -1,19 +1,30 @@
-import { Box, Heading, SimpleGrid, Spinner, Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import { Box, Heading, HStack, SimpleGrid, Spinner, Table, Tbody, Td, Tr } from "@chakra-ui/react";
 import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { ObservationsLink } from "../../observation";
+import { SpeciesPageLink } from "../../species";
+
 export function TaxonAttributesTable() {
-  const { modalTaxon } = useTaxonFilter();
+  const { modalTaxon, showTaxon } = useTaxonFilter();
   const { t } = useTranslation();
 
   return modalTaxon ? (
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
       <Box gridColumn="1/3">
         <Heading as="h3" size="md" mb={4}>
+          Data Links
+        </Heading>
+        <HStack>
+          <SpeciesPageLink showTaxon={showTaxon} />
+          <ObservationsLink showTaxon={showTaxon} />
+        </HStack>
+        <Heading as="h3" size="md" mb={4}>
           Info
         </Heading>
+
         <Table borderRadius="lg" variant="striped" overflow="hidden">
           <Tbody>
             <Tr>

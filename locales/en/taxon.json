@@ -54,6 +54,10 @@
       }
     },
     "common_names": "Common Names",
+    "data_links": {
+      "observations": "Observations",
+      "species": "Species"
+    },
     "synonyms": "Synonyms",
     "title": "Taxonomy Information"
   },
