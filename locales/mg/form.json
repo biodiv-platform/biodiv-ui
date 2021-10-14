@@ -32,7 +32,7 @@
   },
   "find_gmaps": "Mikaroka avy amin'ny Google Maps",
   "from_url": "YouTube",
-  "geoentities": "Mikaroka avy amin'ny tany",
+  "geoentities": "Hevitra fikarohana",
   "language": "Fiteny",
   "license": "Mombamomba ny mpanoratra",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "Fandefasana ..."
   },
   "use_in_observation": "Fampiasana voafantina",
-  "wkt": "WKT",
+  "wkt": "Sariho Polygon",
   "youtube_placeholder": "Rohy Youtube Input"
 }

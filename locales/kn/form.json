@@ -32,7 +32,7 @@
   },
   "find_gmaps": "ಗೂಗಲ್ ನಕ್ಷೆಗಳಿಂದ ಹುಡುಕಿ",
   "from_url": "ಯೂಟ್ಯೂಬ್",
-  "geoentities": "ಭೂದೃಶ್ಯಗಳಿಂದ ಹುಡುಕಿ",
+  "geoentities": "ಸರ್ಚ್ ಪಾಯಿಂಟ್ಸ್",
   "language": "ಭಾಷೆ",
   "license": "ಪರವಾನಗಿ",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ ..."
   },
   "use_in_observation": "ಆಯ್ಕೆಮಾಡಿದ್ದನ್ನು ಬಳಸಿ",
-  "wkt": "WKT",
+  "wkt": "ಬಹುಭುಜಾಕೃತಿಯನ್ನು ಎಳೆಯಿರಿ",
   "youtube_placeholder": "ಯೂಟ್ಯೂಬ್ ಲಿಂಕ್ ನಮೂದಿಸಿ"
 }

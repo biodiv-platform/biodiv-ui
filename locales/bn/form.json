@@ -32,7 +32,7 @@
   },
   "find_gmaps": "গুগল ম্যাপ থেকে অনুসন্ধান করুন",
   "from_url": "ইউটিউব",
-  "geoentities": "ল্যান্ডস্কেপ থেকে অনুসন্ধান করুন",
+  "geoentities": "সার্চ পয়েন্ট",
   "language": "ভাষা",
   "license": "লাইসেন্স",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "আপলোড করা হচ্ছে ..."
   },
   "use_in_observation": "নির্বাচিত ব্যবহার করুন",
-  "wkt": "WKT",
+  "wkt": "বহুভুজ আঁকুন",
   "youtube_placeholder": "ইনপুট ইউটিউব লিঙ্ক"
 }

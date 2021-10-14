@@ -105,7 +105,6 @@ export const axUserGroupDatatableUpdate = async (userGroupId, groupList) => {
         userGroupIds: groupList
       }
     );
-    await axClearMemoryCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);
