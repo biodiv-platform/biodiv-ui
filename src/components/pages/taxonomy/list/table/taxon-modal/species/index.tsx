@@ -1,30 +1,36 @@
 import { Box, Text } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
-import React from "react";
-
-import { useSpeciesId } from "./use-species-id";
+import { axGetSpeciesIdFromTaxonId } from "@services/species.service";
+import useTranslation from "next-translate/useTranslation";
+import React, { useEffect, useState } from "react";
 
 export function SpeciesPageLink({ showTaxon }) {
-  let count = 0;
-  let speciesId = null;
-  if (showTaxon) {
-    speciesId = useSpeciesId(showTaxon);
-    count = 1;
-  }
+  const { t } = useTranslation();
+  const [speciesId, setSpeciesId] = useState(null);
+  const getSpeciesId = async (taxonId) => {
+    const { success, data } = await axGetSpeciesIdFromTaxonId(taxonId);
+    if (success) {
+      setSpeciesId(data);
+    }
+  };
+
+  useEffect(() => {
+    getSpeciesId(showTaxon);
+  }, []);
 
   return (
     <Box borderRadius="md">
-      <Box p={1} className="white-box" lineHeight={1} borderTopRadius="md">
+      <Box p={2} className="white-box" lineHeight={1} minWidth={200}>
         <Text fontSize="3xl" mb={2}>
-          {count}
+          {speciesId ? 1 : 0}
         </Text>
         {speciesId ? (
           <LocalLink href={`/species/show/${speciesId}`}>
-            <ExternalBlueLink>Species</ExternalBlueLink>
+            <ExternalBlueLink>{t("taxon:modal.data_links.species")}</ExternalBlueLink>
           </LocalLink>
         ) : (
-          <Text>Species</Text>
+          <Text>{t("taxon:modal.data_links.species")}</Text>
         )}
       </Box>
     </Box>

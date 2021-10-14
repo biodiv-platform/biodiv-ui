@@ -1,35 +1,29 @@
 import { axGetListData } from "@services/observation.service";
-import { useEffect } from "react";
-import { useImmer } from "use-immer";
+import { useEffect, useState } from "react";
 
-export default function useObsCount(taxonId) {
-  const [count, setCount] = useImmer({
-    value: null,
-    isLoading: true
-  });
+export default function useObsCount(taxon) {
+  const [count, setCount] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const getData = async (setter) => {
-    setter((_draft) => {
-      _draft.isLoading = true;
-    });
+  const getData = async (taxon) => {
+    setIsLoading(true);
 
     const { success, data } = await axGetListData({
-      taxon: taxonId
+      taxon
     });
 
-    setter((_draft) => {
-      if (success) {
-        _draft.value = data.totalCount;
-      }
-      _draft.isLoading = false;
-    });
+    if (success) {
+      setCount(data.totalCount);
+    }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    getData(setCount);
+    getData(taxon);
   }, []);
 
   return {
-    countsData: { data: count }
+    countsData: { value: count, isLoading: isLoading }
   };
 }
