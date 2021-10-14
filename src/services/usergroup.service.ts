@@ -97,6 +97,21 @@ export const axUserGroupUpdate = async (payload, userGroupId) => {
   }
 };
 
+export const axUserGroupDatatableUpdate = async (userGroupId, groupList) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/update/data-table/${userGroupId}`,
+      {
+        userGroupIds: groupList
+      }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axUserGroupRemoveAdminMembers = async (userGroupId, userId) => {
   try {
     const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/remove/members`, {

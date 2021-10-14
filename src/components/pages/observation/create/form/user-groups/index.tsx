@@ -24,7 +24,7 @@ export default function UserGroups({ name, label }: IUserGroupsProps) {
 
   return (
     <Box data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE}>
-      <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
+      <Button variant="link" color="gray.900" fontSize="2xl" mb={4} onClick={onToggle}>
         👥 {label} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
       <Collapse in={isOpen}>

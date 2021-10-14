@@ -32,7 +32,7 @@
   },
   "find_gmaps": "Google नकाशे पासून शोधा",
   "from_url": "YouTube",
-  "geoentities": "Landscapes पासून शोधा",
+  "geoentities": "शोध गुण",
   "language": "इंग्रजी",
   "license": "परवाना",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "अपलोड करीत आहे ..."
   },
   "use_in_observation": "निवडलेले वापरा",
-  "wkt": "WKT",
+  "wkt": "बहुभुज काढा",
   "youtube_placeholder": "YouTube लिंक इनपुट करा"
 }

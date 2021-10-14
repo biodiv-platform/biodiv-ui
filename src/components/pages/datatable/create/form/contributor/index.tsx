@@ -23,6 +23,8 @@ export default function PartyContributorsForm() {
           onQuery={onUserQuery}
           resetOnSubmit={false}
           isRequired={true}
+          isRaw={true}
+          isCreatable={false}
           label={t("datatable:contributor")}
         />
         <TextBoxField name="attribution" maxLength={1000} label={t("datatable:attribution")} />

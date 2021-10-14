@@ -49,7 +49,7 @@ export const OBSERVATION_FIELDS = [
     value: "sGroup"
   },
   {
-    label: "Checklist Annotation",
+    label: "Other datatable field",
     value: "checklistAnnotation"
   },
   {
