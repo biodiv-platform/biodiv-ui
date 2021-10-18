@@ -38,7 +38,7 @@ export const FEATURES = [
     icon: "species",
     title: "species_information",
     link: "/species/list",
-    tag: ["ibp"]
+    tag: ["ibp", "wiktrop"]
   },
   {
     icon: "species",
@@ -50,13 +50,13 @@ export const FEATURES = [
     icon: "observation",
     title: "citizen_science",
     link: "/observation/list",
-    tag: ["ibp"]
+    tag: ["ibp", "wiktrop"]
   },
   {
     icon: "maps",
     title: "maps",
     link: "/map",
-    tag: ["ibp", "mikoko"]
+    tag: ["ibp", "wiktrop", "mikoko"]
   },
   {
     icon: "search",
@@ -86,13 +86,13 @@ export const FEATURES = [
     icon: "documents",
     title: "literature",
     link: "/document/list",
-    tag: ["ibp", "mikoko"]
+    tag: ["ibp", "wiktrop", "mikoko"]
   },
   {
     icon: "taxonomy",
     title: "taxonomy",
     link: "/taxonomy/list",
-    tag: ["ibp"]
+    tag: ["ibp", "wiktrop"]
   },
   {
     icon: "landscapes",
@@ -101,15 +101,21 @@ export const FEATURES = [
     tag: ["ibp"]
   },
   {
+    icon: "search",
+    title: "idao",
+    link: SITE_CONFIG.HEADER.IDAO.LINK,
+    tag: ["wiktrop"]
+  },
+  {
     icon: "user-groups",
     title: "groups",
     link: "/user/list",
-    tag: ["ibp"]
+    tag: ["ibp", "wiktrop"]
   },
   {
     icon: "open-data",
     title: "open_data",
     link: "/observation/list",
-    tag: ["ibp", "mikoko"]
+    tag: ["ibp", "wiktrop", "mikoko"]
   }
 ];
