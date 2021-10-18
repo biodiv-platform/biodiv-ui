@@ -1,6 +1,8 @@
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import {
+  Alert,
   Box,
+  Button,
   Flex,
   IconButton,
   ListItem,
@@ -16,12 +18,14 @@ import ExternalBlueLink from "@components/@core/blue-link/external";
 import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
+import useGlobalState from "@hooks/use-global-state";
 import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
+import { getLanguageNameById } from "@utils/i18n";
 import notification, { NotificationType } from "@utils/notification";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { emit } from "react-gbus";
 
 import useSpecies from "../../../use-species";
@@ -41,8 +45,14 @@ export default function SpeciesFieldSimple({ value }) {
   const { isOpen, onToggle } = useDisclosure();
   const { t } = useTranslation();
   const { getFieldPermission } = useSpecies();
+  const { languageId } = useGlobalState();
+  const [langShow, setLangShow] = useState(false);
 
   const hasFieldPermission = useMemo(() => getFieldPermission(value), [value]);
+  const fieldLanguageName = useMemo(
+    () => getLanguageNameById(value?.fieldData?.languageId),
+    [languageId]
+  );
 
   const handleOnDelete = async () => {
     const { success } = await axRemoveSpeciesField(value.id);
@@ -56,7 +66,7 @@ export default function SpeciesFieldSimple({ value }) {
 
   const handleOnEdit = () => emit(SPECIES_FIELD_UPDATE, { ...value, isEdit: true });
 
-  return (
+  return langShow || languageId === value?.fieldData?.languageId ? (
     <Box border="1px" borderColor="gray.300" overflow="hidden" borderRadius="md">
       <SpeciesFieldResource resources={value?.speciesFieldResource} />
       {hasFieldPermission && (
@@ -120,5 +130,12 @@ export default function SpeciesFieldSimple({ value }) {
         </div>
       </Box>
     </Box>
+  ) : (
+    <Alert status="info" borderRadius="md">
+      {t("species:content_another_language")}
+      <Button colorScheme="blue" size="xs" onClick={() => setLangShow(true)} ml={2}>
+        {fieldLanguageName}
+      </Button>
+    </Alert>
   );
 }
