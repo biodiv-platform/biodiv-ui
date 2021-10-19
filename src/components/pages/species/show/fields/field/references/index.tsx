@@ -17,7 +17,7 @@ export default function ReferencesField({ currentField, parentField, level }) {
   );
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={3} wordBreak="break-word">
       <SpeciesFieldHeading id={parentField?.header} title={parentField?.header} level={level} />
 
       {/* Create Field */}

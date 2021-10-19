@@ -133,7 +133,7 @@ export default function SpeciesFieldSimple({ value }) {
   ) : (
     <Alert status="info" borderRadius="md">
       {t("species:content_another_language")}
-      <Button colorScheme="blue" size="xs" onClick={() => setLangShow(true)} ml={2}>
+      <Button flexShrink={0} colorScheme="blue" size="xs" onClick={() => setLangShow(true)} ml={2}>
         {fieldLanguageName}
       </Button>
     </Alert>
