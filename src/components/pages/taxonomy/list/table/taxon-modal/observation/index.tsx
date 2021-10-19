@@ -11,15 +11,17 @@ export function ObservationsLink({ showTaxon }) {
   const { t } = useTranslation();
 
   return (
-    <Skeleton p={2} isLoaded={!countsData.isLoading} borderRadius="lg" lineHeight={1}>
-      <Box p={2} className="white-box" lineHeight={1} minWidth={200}>
-        <Text fontSize="3xl" mb={2}>
-          {countsData.value}
-        </Text>
-        <LocalLink href={`/observation/list`} params={{ taxon: showTaxon }}>
-          <ExternalBlueLink>{t("taxon:modal.data_links.observations")}</ExternalBlueLink>
-        </LocalLink>
-      </Box>
-    </Skeleton>
+    <div>
+      <Skeleton isLoaded={!countsData.isLoading} borderRadius="md">
+        <Box p={2} className="white-box" lineHeight={1} minWidth={200}>
+          <Text fontSize="3xl" mb={2}>
+            {countsData.value}
+          </Text>
+          <LocalLink href={`/observation/list`} params={{ taxon: showTaxon }}>
+            <ExternalBlueLink>{t("taxon:modal.data_links.observations")}</ExternalBlueLink>
+          </LocalLink>
+        </Box>
+      </Skeleton>
+    </div>
   );
 }
