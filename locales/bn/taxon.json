@@ -54,6 +54,10 @@
       }
     },
     "common_names": "সাধারণ নাম",
+    "data_links": {
+      "observations": "পর্যবেক্ষণ",
+      "species": "প্রজাতি"
+    },
     "synonyms": "প্রতিশব্দ",
     "title": "শ্রেণীবিন্যাস তথ্য"
   },

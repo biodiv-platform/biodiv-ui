@@ -54,6 +54,10 @@
       }
     },
     "common_names": "Majina ya kawaida",
+    "data_links": {
+      "observations": "Uchunguzi",
+      "species": "SPECIES."
+    },
     "synonyms": "Vidokezo",
     "title": "Taarifa ya Taxonomy."
   },

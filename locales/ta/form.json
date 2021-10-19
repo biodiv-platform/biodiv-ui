@@ -32,7 +32,7 @@
   },
   "find_gmaps": "Google Maps இல் இருந்து தேடலாம்",
   "from_url": "வலைஒளி",
-  "geoentities": "தேடல் புள்ளிகள்",
+  "geoentities": "நிலப்பரப்புகளில் இருந்து தேடலாம்",
   "language": "மொழி. மொழி",
   "license": "உரிமம்",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "பதிவேற்றம் ..."
   },
   "use_in_observation": "தேர்வு பயன்படுத்தவும்",
-  "wkt": "பலகோணத்தை வரையவும்",
+  "wkt": "WKT",
   "youtube_placeholder": "INPUT YOUTUBE LINK."
 }

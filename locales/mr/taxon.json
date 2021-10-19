@@ -54,6 +54,10 @@
       }
     },
     "common_names": "सामान्य नावे",
+    "data_links": {
+      "observations": "निरीक्षणे",
+      "species": "प्रजाती"
+    },
     "synonyms": "समानार्थी शब्द",
     "title": "वर्गीकरण माहिती"
   },

@@ -54,6 +54,10 @@
       }
     },
     "common_names": "സാധാരണ പേരുകൾ",
+    "data_links": {
+      "observations": "നിരീക്ഷണങ്ങൾ",
+      "species": "സ്പീഷീസ്"
+    },
     "synonyms": "പര്യായങ്ങൾ",
     "title": "ടാക്സോണമി വിവരങ്ങൾ"
   },

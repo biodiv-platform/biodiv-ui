@@ -54,6 +54,10 @@
       }
     },
     "common_names": "સામાન્ય નામો",
+    "data_links": {
+      "observations": "અવલોકન",
+      "species": "પ્રજાતિઓ"
+    },
     "synonyms": "સમાનાર્થી",
     "title": "વર્ગીકરણ માહિતી"
   },

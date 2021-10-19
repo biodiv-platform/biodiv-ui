@@ -54,6 +54,10 @@
       }
     },
     "common_names": "సాధారణ పేర్లు",
+    "data_links": {
+      "observations": "పరిశీలనలు",
+      "species": "జాతులు"
+    },
     "synonyms": "పర్యాయపదాలు",
     "title": "వర్గీకరణ సమాచారం"
   },
