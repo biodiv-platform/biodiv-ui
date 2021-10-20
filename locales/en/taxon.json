@@ -56,7 +56,8 @@
     "common_names": "Common Names",
     "data_links": {
       "observations": "Observations",
-      "species": "Species"
+      "species": "Species",
+      "title": "Data Links"
     },
     "synonyms": "Synonyms",
     "title": "Taxonomy Information"

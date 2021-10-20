@@ -56,7 +56,8 @@
     "common_names": "ਆਮ ਨਾਮ",
     "data_links": {
       "observations": "ਨਿਰੀਖਣ",
-      "species": "ਸਪੀਸੀਜ਼"
+      "species": "ਸਪੀਸੀਜ਼",
+      "title": "ਡਾਟਾ ਲਿੰਕ"
     },
     "synonyms": "ਸਮਾਨਾਰਥੀ",
     "title": "ਟੈਕਸਨੀਮੀ ਜਾਣਕਾਰੀ"

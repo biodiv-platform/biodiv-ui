@@ -56,7 +56,8 @@
     "common_names": "பொதுவான பெயர்கள்",
     "data_links": {
       "observations": "கண்காணிப்பு",
-      "species": "இனங்கள்"
+      "species": "இனங்கள்",
+      "title": "தரவு இணைப்புகள்"
     },
     "synonyms": "ஒத்திசைவு",
     "title": "வகைபிரித்தல் தகவல்"

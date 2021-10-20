@@ -15,7 +15,7 @@ export function ObservationsLink({ showTaxon }) {
       <Skeleton isLoaded={!countsData.isLoading} borderRadius="md">
         <Box p={2} className="white-box" lineHeight={1} minWidth={200}>
           <Text fontSize="3xl" mb={2}>
-            {countsData.value}
+            {countsData.value || 0}
           </Text>
           <LocalLink href={`/observation/list`} params={{ taxon: showTaxon }}>
             <ExternalBlueLink>{t("taxon:modal.data_links.observations")}</ExternalBlueLink>

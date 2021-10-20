@@ -56,7 +56,8 @@
     "common_names": "సాధారణ పేర్లు",
     "data_links": {
       "observations": "పరిశీలనలు",
-      "species": "జాతులు"
+      "species": "జాతులు",
+      "title": "డేటా లింకులు"
     },
     "synonyms": "పర్యాయపదాలు",
     "title": "వర్గీకరణ సమాచారం"
