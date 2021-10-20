@@ -17,6 +17,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { AssetStatus } from "@interfaces/custom";
+import { axUploadEditorPageResource } from "@services/pages.service";
 import { axUpdateSpeciesField } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
@@ -135,7 +136,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
           <ModalCloseButton />
           <ModalBody>
             <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
-              <WYSIWYGField name="sfDescription" key="xo" />
+              <WYSIWYGField name="sfDescription" uploadHandler={axUploadEditorPageResource} key="xo" />
             </Box>
             <DropzoneFieldContainer
               hidden={referencesOnly}
