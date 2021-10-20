@@ -49,8 +49,11 @@ export default function SpeciesFieldSimple({ value }) {
   const [langShow, setLangShow] = useState(false);
 
   const hasFieldPermission = useMemo(() => getFieldPermission(value), [value]);
-  const fieldLanguageName = useMemo(
-    () => getLanguageNameById(value?.fieldData?.languageId),
+  const [fieldLanguageName, isDefaultLang] = useMemo(
+    () => [
+      getLanguageNameById(value?.fieldData?.languageId),
+      languageId === value?.fieldData?.languageId
+    ],
     [languageId]
   );
 
@@ -66,76 +69,87 @@ export default function SpeciesFieldSimple({ value }) {
 
   const handleOnEdit = () => emit(SPECIES_FIELD_UPDATE, { ...value, isEdit: true });
 
-  return langShow || languageId === value?.fieldData?.languageId ? (
-    <Box border="1px" borderColor="gray.300" overflow="hidden" borderRadius="md">
-      <SpeciesFieldResource resources={value?.speciesFieldResource} />
-      {hasFieldPermission && (
-        <FieldEditActionButtons onEdit={handleOnEdit} onDelete={handleOnDelete} />
+  return (
+    <>
+      {!isDefaultLang && (
+        <Alert status="info" borderRadius="md">
+          {t("species:content_another_language")}
+          <Button
+            flexShrink={0}
+            colorScheme="blue"
+            size="xs"
+            onClick={() => setLangShow(!langShow)}
+            ml={2}
+          >
+            {fieldLanguageName}
+          </Button>
+        </Alert>
       )}
-      <Box
-        as={HTMLContainer}
-        p={2}
-        className="preview"
-        dangerouslySetInnerHTML={{
-          __html: getInjectableHTML(value?.fieldData?.description || "Empty")
-        }}
-      />
-      <Box bg="gray.50" fontSize="sm" borderTop="1px" borderColor="gray.300" p={2}>
-        <Flex justifyContent="space-between">
-          <Box>{value?.attributions || value?.contributor.map((u) => u.name).join(", ")}</Box>
-          <div>
-            <IconButton
-              minW="auto"
-              size="sm"
-              m={1}
-              variant="link"
-              aria-label="toggle"
-              icon={<InfoOutlineIcon />}
-              onClick={onToggle}
-            />
-          </div>
-        </Flex>
-        <div data-hidden={!isOpen}>
-          <Table size="xs" variant="unstyled" mt={3}>
-            <Tbody>
-              <BlockList title={t("species:attributions")}>{value?.attributions}</BlockList>
-              <BlockList title={t("species:contributors")}>
-                {value?.contributor.map((user) => (
-                  <div key={user.id}>
-                    <LocalLink href={`/user/show/${user.id}`} prefixGroup={true}>
-                      <BlueLink>
-                        {user.name} <Badge isAdmin={user.isAdmin} />
-                      </BlueLink>
-                    </LocalLink>
-                  </div>
-                ))}
-              </BlockList>
-              <BlockList title={t("species:status")}>{value?.fieldData?.status}</BlockList>
-              <BlockList title={t("species:licenses")}>
-                <ExternalBlueLink href={value?.license?.url}>
-                  {value?.license?.name}
-                </ExternalBlueLink>
-              </BlockList>
-              <BlockList title={t("species:references")}>
-                <OrderedList>
-                  {value?.references.map(({ title, url }, index) => (
-                    <ListItem key={index}>
-                      {title} {url && <ExternalBlueLink href={url} />}
-                    </ListItem>
-                  ))}
-                </OrderedList>
-              </BlockList>
-            </Tbody>
-          </Table>
-        </div>
-      </Box>
-    </Box>
-  ) : (
-    <Alert status="info" borderRadius="md">
-      {t("species:content_another_language")}
-      <Button flexShrink={0} colorScheme="blue" size="xs" onClick={() => setLangShow(true)} ml={2}>
-        {fieldLanguageName}
-      </Button>
-    </Alert>
+      {(langShow || isDefaultLang) && (
+        <Box border="1px" borderColor="gray.300" overflow="hidden" borderRadius="md">
+          <SpeciesFieldResource resources={value?.speciesFieldResource} />
+          {hasFieldPermission && (
+            <FieldEditActionButtons onEdit={handleOnEdit} onDelete={handleOnDelete} />
+          )}
+          <Box
+            as={HTMLContainer}
+            p={2}
+            className="preview"
+            dangerouslySetInnerHTML={{
+              __html: getInjectableHTML(value?.fieldData?.description || "Empty")
+            }}
+          />
+          <Box bg="gray.50" fontSize="sm" borderTop="1px" borderColor="gray.300" p={2}>
+            <Flex justifyContent="space-between">
+              <Box>{value?.attributions || value?.contributor.map((u) => u.name).join(", ")}</Box>
+              <div>
+                <IconButton
+                  minW="auto"
+                  size="sm"
+                  m={1}
+                  variant="link"
+                  aria-label="toggle"
+                  icon={<InfoOutlineIcon />}
+                  onClick={onToggle}
+                />
+              </div>
+            </Flex>
+            <div data-hidden={!isOpen}>
+              <Table size="xs" variant="unstyled" mt={3}>
+                <Tbody>
+                  <BlockList title={t("species:attributions")}>{value?.attributions}</BlockList>
+                  <BlockList title={t("species:contributors")}>
+                    {value?.contributor.map((user) => (
+                      <div key={user.id}>
+                        <LocalLink href={`/user/show/${user.id}`} prefixGroup={true}>
+                          <BlueLink>
+                            {user.name} <Badge isAdmin={user.isAdmin} />
+                          </BlueLink>
+                        </LocalLink>
+                      </div>
+                    ))}
+                  </BlockList>
+                  <BlockList title={t("species:status")}>{value?.fieldData?.status}</BlockList>
+                  <BlockList title={t("species:licenses")}>
+                    <ExternalBlueLink href={value?.license?.url}>
+                      {value?.license?.name}
+                    </ExternalBlueLink>
+                  </BlockList>
+                  <BlockList title={t("species:references")}>
+                    <OrderedList>
+                      {value?.references.map(({ title, url }, index) => (
+                        <ListItem key={index}>
+                          {title} {url && <ExternalBlueLink href={url} />}
+                        </ListItem>
+                      ))}
+                    </OrderedList>
+                  </BlockList>
+                </Tbody>
+              </Table>
+            </div>
+          </Box>
+        </Box>
+      )}
+    </>
   );
 }
