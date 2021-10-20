@@ -78,7 +78,7 @@ export default function SpeciesFieldSimple({ value }) {
           cursor="pointer"
         >
           {langShow ? <ChevronDownIcon /> : <ChevronRightIcon />}{" "}
-          {t("species:content_another_language")} ({fieldLanguageName || "English"})
+          {t("species:content_another_language")} ({fieldLanguageName})
         </Alert>
       )}
       {(langShow || isDefaultLang) && (
