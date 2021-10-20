@@ -11,6 +11,10 @@ import useSpecies from "../../../use-species";
 import FieldEditActionButtons from "../simple/action-buttons";
 
 export default function ReferencesShow({ value }) {
+  if (value.references.length === 0) {
+    return null;
+  }
+
   const { t } = useTranslation();
   const { getFieldPermission } = useSpecies();
 

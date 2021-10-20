@@ -26,6 +26,7 @@ export const getInjectableHTML = (nHtml): string => {
           a: ["href", "title", "class", "rel", "target"],
           b: [],
           br: [],
+          caption: [],
           div: ["class"],
           em: [],
           h1: [],
@@ -39,6 +40,10 @@ export const getInjectableHTML = (nHtml): string => {
           li: [],
           p: ["class"],
           strong: [],
+          table: [],
+          tbody: [],
+          td: ["colspan", "rowspan", "style"],
+          tr: ["style"],
           ul: []
         },
         stripIgnoreTag: true
