@@ -32,7 +32,7 @@
   },
   "find_gmaps": "ਗੂਗਲ ਨਕਸ਼ੇ ਤੋਂ ਖੋਜ ਕਰੋ",
   "from_url": "ਯੂਟਿ .ਬ",
-  "geoentities": "ਖੋਜ ਅੰਕ",
+  "geoentities": "ਲੈਂਡਸਕੇਪਾਂ ਤੋਂ ਖੋਜ ਕਰੋ",
   "language": "ਭਾਸ਼ਾ",
   "license": "ਲਾਇਸੈਂਸ",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "ਅਪਲੋਡ ..."
   },
   "use_in_observation": "ਚੁਣੇ ਦੀ ਵਰਤੋਂ ਕਰੋ",
-  "wkt": "ਬਹੁਭੁਜ ਬਣਾਉ",
+  "wkt": "WKT",
   "youtube_placeholder": "ਇਨਪੁਟ ਯੂਟਿ .ਬ ਲਿੰਕ"
 }

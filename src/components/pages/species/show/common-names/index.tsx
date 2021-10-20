@@ -14,8 +14,8 @@ export default function SpeciesCommonNamesContainer() {
 
   return (
     <ToggleablePanel id="common-names" icon="🗒" title={t("species:common_names")}>
-      <Box maxH="300px" w="full" overflow="auto">
-        <ResponsiveContainer noBorder={true}>
+      <Box w="full">
+        <ResponsiveContainer maxH="300px" noBorder={true}>
           <CommonNamesList
             commonNames={species.taxonomicNames.commonNames}
             isContributor={permissions.isContributor}

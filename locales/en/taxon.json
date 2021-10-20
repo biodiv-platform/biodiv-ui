@@ -6,6 +6,16 @@
     "button": "Grant",
     "title": "Grant Permission"
   },
+  "hierarchy": {
+    "class": "Class",
+    "family": "Family",
+    "genus": "Genus",
+    "kingdom": "Kingdom",
+    "order": "Order",
+    "phylum": "Phylum",
+    "root": "Root",
+    "species": "Species"
+  },
   "modal": {
     "activity": "Activity",
     "attributes": {
@@ -56,7 +66,8 @@
     "common_names": "Common Names",
     "data_links": {
       "observations": "Observations",
-      "species": "Species"
+      "species": "Species",
+      "title": "Data Links"
     },
     "synonyms": "Synonyms",
     "title": "Taxonomy Information"

@@ -32,7 +32,7 @@
   },
   "find_gmaps": "Google మ్యాప్స్ నుండి శోధించండి",
   "from_url": "YouTube.",
-  "geoentities": "శోధన పాయింట్లు",
+  "geoentities": "ప్రకృతి దృశ్యాలు నుండి శోధించండి",
   "language": "భాష",
   "license": "లైసెన్సు",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "అప్లోడ్ ..."
   },
   "use_in_observation": "ఎంచుకున్నది",
-  "wkt": "బహుభుజిని గీయండి",
+  "wkt": "WKT",
   "youtube_placeholder": "ఇన్పుట్ YouTube లింక్"
 }

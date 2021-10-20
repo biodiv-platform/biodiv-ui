@@ -1,5 +1,4 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import SITE_CONFIG from "@configs/site-config";
 import { axCheckSpecies, axCreateSpecies } from "@services/species.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -50,9 +49,7 @@ export const SpeciesCreateProvider = ({
   const [taxonRanks, setTaxonRanks] = useState();
   const [validationParams, setValidationParams] = useState();
   const [isLoading, setIsLoading] = useState();
-  const [isCreateSpecies, setIsCreateSpecies] = useState<boolean>(
-    isSpeciesPage || SITE_CONFIG.SPECIES.ACTIVE
-  );
+  const [isCreateSpecies, setIsCreateSpecies] = useState<boolean>(isSpeciesPage);
 
   const checkSpecies = async () => {
     if (!isCreateSpecies) {

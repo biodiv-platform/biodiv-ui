@@ -15,14 +15,14 @@ export function TaxonAttributesTable() {
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
       <Box gridColumn="1/3">
         <Heading as="h3" size="md" mb={4}>
-          Data Links
+          {t("taxon:modal.data_links.title")}
         </Heading>
-        <HStack>
+        <HStack mb={4} spacing={4}>
           <SpeciesPageLink showTaxon={showTaxon} />
           <ObservationsLink showTaxon={showTaxon} />
         </HStack>
         <Heading as="h3" size="md" mb={4}>
-          Info
+          {t("common:information")}
         </Heading>
 
         <Table borderRadius="lg" variant="striped" overflow="hidden">

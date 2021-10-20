@@ -32,7 +32,7 @@
   },
   "find_gmaps": "ગૂગલ મેપ્સથી શોધો",
   "from_url": "યુટ્યુબ",
-  "geoentities": "શોધ પોઇન્ટ",
+  "geoentities": "લેન્ડસ્કેપ્સ માંથી શોધો",
   "language": "ભાષા",
   "license": "લાઈસન્સ",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "અપલોડ કરી રહ્યું છે ..."
   },
   "use_in_observation": "પસંદ કરેલ ઉપયોગ કરો",
-  "wkt": "બહુકોણ દોરો",
+  "wkt": "WKT",
   "youtube_placeholder": "યુટ્યુબ લિંક આપો"
 }

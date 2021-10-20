@@ -6,6 +6,16 @@
     "button": "Ruzuku",
     "title": "Ruhusu ruhusa."
   },
+  "hierarchy": {
+    "class": "Darasa",
+    "family": "Familia",
+    "genus": "Genus.",
+    "kingdom": "Ufalme",
+    "order": "Amri",
+    "phylum": "Phylum.",
+    "root": "Mizizi",
+    "species": "SPECIES."
+  },
   "modal": {
     "activity": "Shughuli",
     "attributes": {
@@ -54,6 +64,11 @@
       }
     },
     "common_names": "Majina ya kawaida",
+    "data_links": {
+      "observations": "Uchunguzi",
+      "species": "SPECIES.",
+      "title": "Viungo vya Takwimu"
+    },
     "synonyms": "Vidokezo",
     "title": "Taarifa ya Taxonomy."
   },

@@ -12,7 +12,7 @@
   "geographical_coverage": "Geographic Coverage",
   "is_verified": "Observation Verified",
   "list": {
-    "all":"view all/download",
+    "all": "view all/download",
     "title": "Datatables"
   },
   "location": "Location",

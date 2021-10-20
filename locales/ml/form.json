@@ -32,7 +32,7 @@
   },
   "find_gmaps": "Google മാപ്സിൽ നിന്ന് തിരയുക",
   "from_url": "YouTube",
-  "geoentities": "തിരയൽ പോയിന്റുകൾ",
+  "geoentities": "ലാൻഡ്സ്കേപ്പുകളിൽ നിന്ന് തിരയുക",
   "language": "ഭാഷ",
   "license": "ലൈസൻസ്",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "അപ്ലോഡുചെയ്യുന്നു ..."
   },
   "use_in_observation": "തിരഞ്ഞെടുത്ത ഉപയോഗം",
-  "wkt": "പോളിഗോൺ വരയ്ക്കുക",
+  "wkt": "WKT",
   "youtube_placeholder": "യൂട്യൂബ് ലിങ്ക് ഇൻപുട്ട് ചെയ്യുക"
 }

@@ -43,7 +43,8 @@ export default function WYSIWYGEditor({ uploadHandler, ...props }: WYSIWYGEditor
           toolbar:
             "undo redo | bold italic numlist bullist | alignleft aligncenter alignright alignjustify | link image table | code",
           images_upload_handler: uploadHandler,
-          images_upload_base_path: "/"
+          images_upload_base_path: "/",
+          images_dataimg_filter: (img) => img.hasAttribute("internal-blob")
         }}
       />
     </>

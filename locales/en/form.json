@@ -32,7 +32,7 @@
   },
   "find_gmaps": "Search from Google Maps",
   "from_url": "YouTube",
-  "geoentities": "Search Point",
+  "geoentities": "Search from Landscapes",
   "language": "Language",
   "license": "License",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "Uploading..."
   },
   "use_in_observation": "Use Selected",
-  "wkt": "Draw Polygon",
+  "wkt": "WKT",
   "youtube_placeholder": "Input YouTube link"
 }

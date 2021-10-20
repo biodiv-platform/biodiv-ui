@@ -20,7 +20,7 @@ export function SpeciesPageLink({ showTaxon }) {
   }, []);
 
   return (
-    <Box borderRadius="md">
+    <div>
       <Box p={2} className="white-box" lineHeight={1} minWidth={200}>
         <Text fontSize="3xl" mb={2}>
           {speciesId ? 1 : 0}
@@ -33,6 +33,6 @@ export function SpeciesPageLink({ showTaxon }) {
           <Text>{t("taxon:modal.data_links.species")}</Text>
         )}
       </Box>
-    </Box>
+    </div>
   );
 }

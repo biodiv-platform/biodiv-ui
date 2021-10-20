@@ -67,13 +67,18 @@ const HTMLContainer = styled.div`
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border: 1px solid var(--chakra-colors-gray-300);
   }
 
   th,
   td {
     text-align: left;
     padding: 8px;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid var(--chakra-colors-gray-300);
   }
 
   .user-profile {

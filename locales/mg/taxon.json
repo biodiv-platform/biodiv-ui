@@ -6,6 +6,16 @@
     "button": "Fanomezana",
     "title": "Fahazoan-dàlana"
   },
+  "hierarchy": {
+    "class": "KILASY",
+    "family": "Family",
+    "genus": "karazana",
+    "kingdom": "FANJAKANA",
+    "order": "mba",
+    "phylum": "Filoma",
+    "root": "faka",
+    "species": "karazana"
+  },
   "modal": {
     "activity": "asa",
     "attributes": {
@@ -54,6 +64,11 @@
       }
     },
     "common_names": "Anarana iombonana",
+    "data_links": {
+      "observations": "fanamarihana",
+      "species": "karazana",
+      "title": "Rohy data"
+    },
     "synonyms": "Synonymes",
     "title": "Fampahalalana momba ny hetra"
   },

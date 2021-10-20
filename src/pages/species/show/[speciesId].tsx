@@ -1,4 +1,5 @@
 import SpeciesShowPageComponent from "@components/pages/species/show";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
@@ -9,6 +10,7 @@ import {
   axGetSpeciesById
 } from "@services/species.service";
 import { hasAccess } from "@utils/auth";
+import { getLanguageId } from "@utils/i18n";
 import { normalizeSpeciesPayload } from "@utils/species";
 import React from "react";
 
@@ -27,9 +29,13 @@ const SpeciesShowPage = ({ species, licensesList, permissions, success }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
+  const langId = SITE_CONFIG.SPECIES.MULTILINGUAL_FIELDS
+    ? getLanguageId(ctx.locale)?.ID
+    : SITE_CONFIG.LANG.DEFAULT_ID;
+
   const [fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
     await Promise.all([
-      axGetAllFieldsMeta(),
+      axGetAllFieldsMeta({ langId }),
       axGetSpeciesById(ctx.query.speciesId),
       axGetspeciesGroups(),
       axCheckSpeciesPermission(ctx, ctx.query.speciesId),

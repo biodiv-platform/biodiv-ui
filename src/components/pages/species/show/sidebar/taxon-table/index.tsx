@@ -20,7 +20,7 @@ export default function TaxonTable() {
           <Tbody>
             {species?.breadCrumbs?.map(({ name, rankName, id }) => (
               <Tr key={id}>
-                <Td textTransform="capitalize">{rankName}</Td>
+                <Td>{t(`taxon:hierarchy.${rankName}`)}</Td>
                 <Td>
                   <ExternalBlueLink href={`/species/list?taxon=${id}`}>{name}</ExternalBlueLink>
                 </Td>

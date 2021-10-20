@@ -6,6 +6,16 @@
     "button": "अनुदान",
     "title": "परवानगी द्या"
   },
+  "hierarchy": {
+    "class": "वर्ग",
+    "family": "कुटुंब",
+    "genus": "जीनस",
+    "kingdom": "राज्य",
+    "order": "ऑर्डर",
+    "phylum": "Phylum",
+    "root": "मूळ",
+    "species": "प्रजाती"
+  },
   "modal": {
     "activity": "क्रियाकलाप",
     "attributes": {
@@ -54,6 +64,11 @@
       }
     },
     "common_names": "सामान्य नावे",
+    "data_links": {
+      "observations": "निरीक्षणे",
+      "species": "प्रजाती",
+      "title": "डेटा लिंक्स"
+    },
     "synonyms": "समानार्थी शब्द",
     "title": "वर्गीकरण माहिती"
   },

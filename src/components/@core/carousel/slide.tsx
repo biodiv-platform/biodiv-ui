@@ -2,6 +2,7 @@ import { Box, Flex, Image, Link } from "@chakra-ui/react";
 import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceRAW, getResourceThumbnail, getYouTubeEmbed } from "@utils/media";
+import { getInjectableHTML } from "@utils/text";
 import React from "react";
 
 export const NoSlide = ({ speciesGroup }) => (
@@ -21,9 +22,8 @@ const SlideDescription = ({ text }) =>
       p={4}
       background="linear-gradient(to bottom, rgba(25, 25, 35, 0), rgba(25, 25, 35, 1))"
       color="white"
-    >
-      {text}
-    </Box>
+      dangerouslySetInnerHTML={{ __html: getInjectableHTML(text) }}
+    />
   ) : null;
 
 const Slide = ({ resource, alt }) => {

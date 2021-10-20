@@ -32,7 +32,7 @@
   },
   "find_gmaps": "ଗୁଗୁଲ୍ ମ୍ୟାପ୍ସରୁ ସନ୍ଧାନ କରନ୍ତୁ |",
   "from_url": "ୟୁଟ୍ୟୁବ୍",
-  "geoentities": "ସନ୍ଧାନ ବିନ୍ଦୁ |",
+  "geoentities": "ଲ୍ୟାଣ୍ଡସ୍କେପ୍ ରୁ ସନ୍ଧାନ କରନ୍ତୁ |",
   "language": "ଭାଷା",
   "license": "ଲାଇସେନ୍ସ",
   "location_accuracy_options": {
@@ -80,6 +80,6 @@
     "uploading": "ଅପଲୋଡ୍ ..."
   },
   "use_in_observation": "ମନୋନୀତ ବ୍ୟବହାର କରନ୍ତୁ |",
-  "wkt": "ବହୁଭୂଜ ଅଙ୍କନ କରନ୍ତୁ |",
+  "wkt": "WKT",
   "youtube_placeholder": "ଇନପୁଟ୍ ୟୁଟ୍ୟୁବ୍ ଲିଙ୍କ୍ |"
 }

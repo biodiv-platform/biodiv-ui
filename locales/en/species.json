@@ -23,6 +23,7 @@
     }
   },
   "common_names": "Common Names",
+  "content_another_language": "There is content in another language. Please click here to read it.",
   "contribute": {
     "create_species": "Create new species",
     "description": "Species pages are descriptions of species, with one page for every species. Each species can be described with over 60 standard set of fields. Species pages are contributed and curated by experts. All information published on the Portal will be on public access and under the Creative Commons License of your choice.",
@@ -138,6 +139,5 @@
     }
   },
   "unfollow_species": "Follow Species",
-  "view_original": "view original",
-  "content_another_language": "There is content in another language. Please click here to read it."
+  "view_original": "view original"
 }

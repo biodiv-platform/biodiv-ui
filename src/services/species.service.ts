@@ -34,9 +34,11 @@ export const axGetAllTraitsMetaByTaxonId = async (taxonId) => {
   }
 };
 
-export const axGetAllFieldsMeta = async () => {
+export const axGetAllFieldsMeta = async (params) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/fields/render`);
+    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/fields/render`, {
+      params
+    });
     return { success: true, data };
   } catch (e) {
     console.error(e);

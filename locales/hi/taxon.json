@@ -6,6 +6,16 @@
     "button": "अनुदान",
     "title": "अनुदान अनुमति"
   },
+  "hierarchy": {
+    "class": "कक्षा",
+    "family": "परिवार",
+    "genus": "जाति",
+    "kingdom": "साम्राज्य",
+    "order": "आदेश",
+    "phylum": "संघ",
+    "root": "जड़",
+    "species": "प्रजातियां"
+  },
   "modal": {
     "activity": "गतिविधि",
     "attributes": {
@@ -54,6 +64,11 @@
       }
     },
     "common_names": "सामान्य नाम",
+    "data_links": {
+      "observations": "टिप्पणियों",
+      "species": "प्रजातियां",
+      "title": "डेटा लिंक"
+    },
     "synonyms": "समानार्थक शब्द",
     "title": "वर्गीकरण सूचना"
   },

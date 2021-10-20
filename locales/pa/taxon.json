@@ -6,6 +6,16 @@
     "button": "ਗ੍ਰਾਂਟ",
     "title": "ਅਨੁਮਤੀ ਦਿਓ"
   },
+  "hierarchy": {
+    "class": "ਕਲਾਸ",
+    "family": "ਪਰਿਵਾਰ",
+    "genus": "ਜੀਨਸ",
+    "kingdom": "ਰਾਜ",
+    "order": "ਆਰਡਰ",
+    "phylum": "ਫਾਈਲਮ",
+    "root": "ਰੂਟ",
+    "species": "ਸਪੀਸੀਜ਼"
+  },
   "modal": {
     "activity": "ਸਰਗਰਮੀ",
     "attributes": {
@@ -54,6 +64,11 @@
       }
     },
     "common_names": "ਆਮ ਨਾਮ",
+    "data_links": {
+      "observations": "ਨਿਰੀਖਣ",
+      "species": "ਸਪੀਸੀਜ਼",
+      "title": "ਡਾਟਾ ਲਿੰਕ"
+    },
     "synonyms": "ਸਮਾਨਾਰਥੀ",
     "title": "ਟੈਕਸਨੀਮੀ ਜਾਣਕਾਰੀ"
   },

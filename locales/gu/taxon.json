@@ -6,6 +6,16 @@
     "button": "અનુદાન",
     "title": "અનુમતિ આપો"
   },
+  "hierarchy": {
+    "class": "વર્ગ",
+    "family": "કુટુંબ",
+    "genus": "જાતિ",
+    "kingdom": "સામ્રાજ્ય",
+    "order": "ઓર્ડર",
+    "phylum": "ફાયલમ",
+    "root": "રુટ",
+    "species": "પ્રજાતિઓ"
+  },
   "modal": {
     "activity": "પ્રવૃત્તિ",
     "attributes": {
@@ -54,6 +64,11 @@
       }
     },
     "common_names": "સામાન્ય નામો",
+    "data_links": {
+      "observations": "અવલોકન",
+      "species": "પ્રજાતિઓ",
+      "title": "ડેટા લિંક્સ"
+    },
     "synonyms": "સમાનાર્થી",
     "title": "વર્ગીકરણ માહિતી"
   },

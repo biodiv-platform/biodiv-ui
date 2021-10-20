@@ -14,8 +14,8 @@ export default function SpeciesSynonymsContainer() {
 
   return (
     <ToggleablePanel id="synonyms" icon="🗒" title={t("species:synonyms")}>
-      <Box maxH="300px">
-        <ResponsiveContainer noBorder={true}>
+      <Box>
+        <ResponsiveContainer maxH="300px" noBorder={true}>
           <SynonymList
             speciesId={species.species.id}
             updateFunc={axUpdateSpeciesSynonym}

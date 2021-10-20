@@ -27,7 +27,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
   const { field, fieldState } = useController({ name: props.name });
   const [value, setValue] = useState(field.value || []);
   const [isDisabled, setIsdisabled] = useState<boolean>(false);
-  const Viewer = props.canDraw ? WKTDrawViewer : WKT
+  const Viewer = props.canDraw ? WKTDrawViewer : WKT;
 
   const handleOnSave = (o) => {
     setValue([...value, o]);
@@ -57,7 +57,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
                 <WKTSearch {...props} isDisabled={isDisabled} onSave={handleOnSave} />
               </TabPanel>
               <TabPanel>
-               <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} />
+                <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} />
               </TabPanel>
             </TabPanels>
           </Tabs>

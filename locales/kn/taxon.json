@@ -6,6 +6,16 @@
     "button": "ಅನುದಾನ",
     "title": "ಅನುಮತಿ ನೀಡಿ"
   },
+  "hierarchy": {
+    "class": "ವರ್ಗ",
+    "family": "ಕುಟುಂಬ",
+    "genus": "ಕುಲ",
+    "kingdom": "ಸಾಮ್ರಾಜ್ಯ",
+    "order": "ಆದೇಶ",
+    "phylum": "ಫೈಲಮ್",
+    "root": "ಬೇರು",
+    "species": "ಜಾತಿಗಳು"
+  },
   "modal": {
     "activity": "ಚಟುವಟಿಕೆ",
     "attributes": {
@@ -54,6 +64,11 @@
       }
     },
     "common_names": "ಸಾಮಾನ್ಯ ಹೆಸರುಗಳು",
+    "data_links": {
+      "observations": "ಅವಲೋಕನ",
+      "species": "ಜಾತಿಗಳು",
+      "title": "ಡೇಟಾ ಲಿಂಕ್‌ಗಳು"
+    },
     "synonyms": "ಸಮಾನಾರ್ಥಕ ಪದಗಳು",
     "title": "ಜೀವಿವರ್ಗೀಕರಣ ಶಾಸ್ತ್ರ ಮಾಹಿತಿ"
   },
