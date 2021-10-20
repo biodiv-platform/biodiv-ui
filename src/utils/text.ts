@@ -24,6 +24,7 @@ export const getInjectableHTML = (nHtml): string => {
       return filterXSS(URLify(nHtml), {
         whiteList: {
           a: ["href", "title", "class", "rel", "target"],
+          b: [],
           br: [],
           div: ["class"],
           em: [],
@@ -37,6 +38,7 @@ export const getInjectableHTML = (nHtml): string => {
           img: ["src"],
           li: [],
           p: ["class"],
+          strong: [],
           ul: []
         },
         stripIgnoreTag: true
