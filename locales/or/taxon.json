@@ -6,6 +6,16 @@
     "button": "ଅନୁଦାନ",
     "title": "ଅନୁମତି"
   },
+  "hierarchy": {
+    "class": "ଶ୍ରେଣୀ",
+    "family": "ପରିବାର",
+    "genus": "ଜେନସ୍",
+    "kingdom": "ରାଜ୍ୟ",
+    "order": "କ୍ରମ",
+    "phylum": "ଫୁଲା",
+    "root": "ମୂଳ",
+    "species": "ପ୍ରଜାତି"
+  },
   "modal": {
     "activity": "କାର୍ଯ୍ୟକଳାପ",
     "attributes": {

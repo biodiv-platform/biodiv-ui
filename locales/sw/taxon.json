@@ -6,6 +6,16 @@
     "button": "Ruzuku",
     "title": "Ruhusu ruhusa."
   },
+  "hierarchy": {
+    "class": "Darasa",
+    "family": "Familia",
+    "genus": "Genus.",
+    "kingdom": "Ufalme",
+    "order": "Amri",
+    "phylum": "Phylum.",
+    "root": "Mizizi",
+    "species": "SPECIES."
+  },
   "modal": {
     "activity": "Shughuli",
     "attributes": {

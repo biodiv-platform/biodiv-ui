@@ -6,6 +6,16 @@
     "button": "Accorder",
     "title": "Donner la permission"
   },
+  "hierarchy": {
+    "class": "Classe",
+    "family": "Famille",
+    "genus": "Genre",
+    "kingdom": "Règne",
+    "order": "Ordre",
+    "phylum": "Phylum",
+    "root": "Racine",
+    "species": "Espèce"
+  },
   "modal": {
     "activity": "Activité",
     "attributes": {

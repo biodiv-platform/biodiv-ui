@@ -6,6 +6,16 @@
     "button": "अनुदान",
     "title": "अनुदान अनुमति"
   },
+  "hierarchy": {
+    "class": "कक्षा",
+    "family": "परिवार",
+    "genus": "जाति",
+    "kingdom": "साम्राज्य",
+    "order": "आदेश",
+    "phylum": "संघ",
+    "root": "जड़",
+    "species": "प्रजातियां"
+  },
   "modal": {
     "activity": "गतिविधि",
     "attributes": {

@@ -6,6 +6,16 @@
     "button": "അനുവദിക്കുക",
     "title": "അനുമതി നൽകുക"
   },
+  "hierarchy": {
+    "class": "പകുക്കുക",
+    "family": "കുടുംബം",
+    "genus": "ജീസ്",
+    "kingdom": "രാജം",
+    "order": "ആജ്ഞകൊടുക്കുക",
+    "phylum": "Fylum",
+    "root": "വേര്",
+    "species": "സ്പീഷീസ്"
+  },
   "modal": {
     "activity": "പ്രവർത്തനം",
     "attributes": {

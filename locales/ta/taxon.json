@@ -6,6 +6,16 @@
     "button": "மானியம்",
     "title": "அனுமதி வழங்கவும்"
   },
+  "hierarchy": {
+    "class": "வர்க்கம்",
+    "family": "குடும்பம்",
+    "genus": "இன வகை",
+    "kingdom": "இராச்சியம்",
+    "order": "ஒழுங்கு",
+    "phylum": "பைலியம்",
+    "root": "வேர்",
+    "species": "இனங்கள்"
+  },
   "modal": {
     "activity": "செயல்பாடு",
     "attributes": {

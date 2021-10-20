@@ -6,6 +6,16 @@
     "button": "మంజూరు",
     "title": "మంజూరు మంజూరు"
   },
+  "hierarchy": {
+    "class": "తరగతి",
+    "family": "కుటుంబం",
+    "genus": "జాతులు",
+    "kingdom": "రాజ్యం",
+    "order": "ఆర్డర్",
+    "phylum": "ఫిలిం",
+    "root": "రూటు",
+    "species": "జాతులు"
+  },
   "modal": {
     "activity": "కార్యాచరణ",
     "attributes": {

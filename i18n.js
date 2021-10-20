@@ -17,7 +17,7 @@ module.exports = {
     "rgx:/page/": ["page"],
     "rgx:/roles/": ["filters", "taxon"],
     "rgx:/register": ["user"],
-    "rgx:/species/": ["observation", "species", "filters", "activity"],
+    "rgx:/species/": ["observation", "species", "filters", "activity", "taxon"],
     "rgx:/taxonomy/": ["activity", "filters", "taxon", "species"],
     "rgx:/user/": ["user", "group", "filters"],
     "rgx:/user/leaderboard": ["leaderboard"]

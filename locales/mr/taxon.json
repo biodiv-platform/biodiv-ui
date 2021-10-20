@@ -6,6 +6,16 @@
     "button": "अनुदान",
     "title": "परवानगी द्या"
   },
+  "hierarchy": {
+    "class": "वर्ग",
+    "family": "कुटुंब",
+    "genus": "जीनस",
+    "kingdom": "राज्य",
+    "order": "ऑर्डर",
+    "phylum": "Phylum",
+    "root": "मूळ",
+    "species": "प्रजाती"
+  },
   "modal": {
     "activity": "क्रियाकलाप",
     "attributes": {

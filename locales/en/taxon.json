@@ -6,6 +6,16 @@
     "button": "Grant",
     "title": "Grant Permission"
   },
+  "hierarchy": {
+    "class": "Class",
+    "family": "Family",
+    "genus": "Genus",
+    "kingdom": "Kingdom",
+    "order": "Order",
+    "phylum": "Phylum",
+    "root": "Root",
+    "species": "Species"
+  },
   "modal": {
     "activity": "Activity",
     "attributes": {

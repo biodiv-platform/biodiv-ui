@@ -6,6 +6,16 @@
     "button": "ಅನುದಾನ",
     "title": "ಅನುಮತಿ ನೀಡಿ"
   },
+  "hierarchy": {
+    "class": "ವರ್ಗ",
+    "family": "ಕುಟುಂಬ",
+    "genus": "ಕುಲ",
+    "kingdom": "ಸಾಮ್ರಾಜ್ಯ",
+    "order": "ಆದೇಶ",
+    "phylum": "ಫೈಲಮ್",
+    "root": "ಬೇರು",
+    "species": "ಜಾತಿಗಳು"
+  },
   "modal": {
     "activity": "ಚಟುವಟಿಕೆ",
     "attributes": {
