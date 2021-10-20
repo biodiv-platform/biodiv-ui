@@ -33,8 +33,8 @@ const SITE_CONFIG_EXAMPLE = {
   },
   FILTER: {
     DISTRICT: true,
-    STATE: true,
     PROTECTED_AREAS: false,
+    STATE: true,
     TAHSIL: true
   },
   FOOTER: {
@@ -146,7 +146,8 @@ const SITE_CONFIG_EXAMPLE = {
     URL: "http://localhost:3000"
   },
   SPECIES: {
-    ACTIVE: true
+    ACTIVE: true,
+    MULTILINGUAL_FIELDS: false
   },
   TAXONOMY: {
     CLASSIFICATION_ID: 1,
