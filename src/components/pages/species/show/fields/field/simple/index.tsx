@@ -1,8 +1,7 @@
-import { InfoOutlineIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronRightIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 import {
   Alert,
   Box,
-  Button,
   Flex,
   IconButton,
   ListItem,
@@ -72,17 +71,14 @@ export default function SpeciesFieldSimple({ value }) {
   return (
     <>
       {!isDefaultLang && (
-        <Alert status="info" borderRadius="md">
-          {t("species:content_another_language")}
-          <Button
-            flexShrink={0}
-            colorScheme="blue"
-            size="xs"
-            onClick={() => setLangShow(!langShow)}
-            ml={2}
-          >
-            {fieldLanguageName}
-          </Button>
+        <Alert
+          status="info"
+          borderRadius="md"
+          onClick={() => setLangShow(!langShow)}
+          cursor="pointer"
+        >
+          {langShow ? <ChevronDownIcon /> : <ChevronRightIcon />}{" "}
+          {t("species:content_another_language")} ({fieldLanguageName || "English"})
         </Alert>
       )}
       {(langShow || isDefaultLang) && (
