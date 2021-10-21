@@ -1,10 +1,17 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 
+import useSpecies from "../../../use-species";
+import DocumentItem from "./document-item";
+
 export default function DocumentsField() {
+  const { species } = useSpecies();
+
   return (
-    <Box p={3} mb={4} borderRadius="md" bg="gray.200">
-      TODO: &lt;DocumentsField/&gt;
+    <Box mb={4}>
+      {species?.documentMetaList?.map((d) => (
+        <DocumentItem key={d.id} document={d} />
+      ))}
     </Box>
   );
 }
