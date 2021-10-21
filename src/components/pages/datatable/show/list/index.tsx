@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { BasicTable, ResponsiveContainer } from "@components/@core/table";
+import { BasicTable } from "@components/@core/table";
 import Loading from "@components/pages/common/loading";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -21,17 +21,16 @@ export default function ObservationsList({ dataTable: dt, speciesGroups }) {
   }, [observationData.l.length]);
 
   return (
-    <Box id="scrollableDiv" overflow="auto" minH="250" maxH="350">
+    <Box className="white-box" id="scrollableDiv" maxH={350} overflow="auto" mb={4}>
       <InfiniteScroll
         dataLength={observationData.l.length}
         next={nextPage}
+        style={{ overflow: "unset" }}
         hasMore={observationData.hasMore}
         loader={<Loading />}
         scrollableTarget="scrollableDiv"
       >
-        <ResponsiveContainer>
-          <BasicTable translateHeader data={fieldData || []} columns={tableMeta} />
-        </ResponsiveContainer>
+        <BasicTable translateHeader data={fieldData || []} columns={tableMeta} />
       </InfiniteScroll>
     </Box>
   );
