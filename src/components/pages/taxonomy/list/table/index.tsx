@@ -5,7 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useTaxonFilter from "../use-taxon";
-import { TaxonRankCell } from "./taxon-rank-cell";
+import { TaxonNameCell, TaxonRankCell } from "./taxon-rank-cell";
 
 const TaxonBox = styled.div`
   thead td {
@@ -20,12 +20,13 @@ const taxonListRows = [
   {
     Header: "Name",
     accessor: "name",
-    Cell: TaxonRankCell,
+    Cell: TaxonNameCell,
     style: { paddingTop: 0, paddingBottom: 0 }
   },
   {
     Header: "Rank",
-    accessor: "rank"
+    accessor: "rank",
+    Cell: TaxonRankCell
   },
   {
     Header: "Status",

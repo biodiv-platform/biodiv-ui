@@ -61,7 +61,7 @@ export function TaxonAttributesTable() {
               <Td title={t("taxon:modal.attributes.rank.desc")}>
                 {t("taxon:modal.attributes.rank.title")}
               </Td>
-              <Td>{modalTaxon?.rank}</Td>
+              <Td>{t(`taxon:hierarchy.${modalTaxon?.rank}`)}</Td>
             </Tr>
             <Tr>
               <Td title={t("taxon:modal.attributes.source.desc")}>
@@ -98,7 +98,7 @@ export function TaxonAttributesTable() {
           <Tbody>
             {modalTaxon?.hierarchy?.map((rank) => (
               <Tr key={rank.rankName}>
-                <Td style={{ textTransform: "capitalize" }}>{rank.rankName}</Td>
+                <Td>{t(`taxon:hierarchy.${rank.rankName}`)}</Td>
                 <Td>{rank.name}</Td>
               </Tr>
             ))}

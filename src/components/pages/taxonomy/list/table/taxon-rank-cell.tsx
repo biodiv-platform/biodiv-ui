@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useTaxonFilter from "../use-taxon";
@@ -10,7 +11,7 @@ const POSITION_COLOR = {
   RAW: "gray.300"
 };
 
-export function TaxonRankCell({ cell, value }) {
+export function TaxonNameCell({ cell, value }) {
   const { setShowTaxon } = useTaxonFilter();
 
   return (
@@ -28,4 +29,10 @@ export function TaxonRankCell({ cell, value }) {
       </Box>
     </Box>
   );
+}
+
+export function TaxonRankCell({ value }) {
+  const { t } = useTranslation();
+
+  return t(`taxon:hierarchy.${value}`);
 }
