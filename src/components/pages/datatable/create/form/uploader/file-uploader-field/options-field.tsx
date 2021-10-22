@@ -7,7 +7,17 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
-export default function Fields({ name, fieldMapping, showMapping, setShowMapping }) {
+
+// formats field mapping  dropdown options
+const formatOptions = (options, observationConfig) => {
+  const { customFields, traits } = observationConfig;
+  const formatOptions = [options,
+    { label: "Traits", options: traits.map((item) => ({ label: item.name, value: item.name })) }]
+  return customFields.length > 0 ?
+    [...formatOptions, { label: "Custom Field", options: customFields.map((item) => ({ label: item.name, value: item.name })) }] : formatOptions;
+}
+
+export default function Fields({ name, fieldMapping, showMapping, setShowMapping, observationConfig }) {
   const { t } = useTranslation();
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
   const [fieldValues, setFieldValues] = useState<any[]>([]);
@@ -74,7 +84,7 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
                     <SelectInputField
                       name={`columnsMapping.${index}.fieldKey`}
                       label={t("common:actions.flag.category")}
-                      options={OBSERVATION_FIELDS}
+                      options={formatOptions(OBSERVATION_FIELDS, observationConfig)}
                     />
                   </Td>
                 ))}

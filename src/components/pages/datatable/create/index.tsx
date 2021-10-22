@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 
 import DataTableCreateForm from "./form";
 
-export default function DataTableCreatePageComponent({ speciesGroups, languages, datasetId }) {
+export default function DataTableCreatePageComponent({ speciesGroups, languages, datasetId,observationConfig }) {
   const { currentGroup, isLoggedIn } = useGlobalState();
   const { t } = useTranslation();
 
@@ -22,6 +22,7 @@ export default function DataTableCreatePageComponent({ speciesGroups, languages,
     <Box className="container mt" pb={6}>
       <PageHeading mb={6}>📦 {t("datatable:create_datatable")}</PageHeading>
       <DataTableCreateForm
+        observationConfig={observationConfig}
         speciesGroups={speciesGroups}
         languages={languages}
         datasetId={datasetId}

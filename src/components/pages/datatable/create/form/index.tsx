@@ -1,5 +1,6 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
+import FormDebugger from "@components/form/debugger";
 import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,7 +24,7 @@ import TemporalCoverage from "./temporal-coverage";
 import TitleInput from "./title";
 import ImageUploaderField from "./uploader";
 
-export default function DataTableCreateForm({ speciesGroups, languages, datasetId }) {
+export default function DataTableCreateForm({ speciesGroups, languages, datasetId,observationConfig }) {
   const { t } = useTranslation();
   const { user, currentGroup } = useGlobalState();
   const router = useLocalRouter();
@@ -157,6 +158,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <ImageUploaderField
+          observationConfig={observationConfig}
           showMapping={showMapping}
           fieldMapping={fieldMapping}
           setFieldMapping={setFieldMapping}
@@ -172,6 +174,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
         <CheckboxField name="terms" label={t("form:terms")} />
         <SubmitButton leftIcon={<CheckIcon />}>{t("datatable:add")}</SubmitButton>
+     <FormDebugger/>
       </form>
     </FormProvider>
   );

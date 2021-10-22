@@ -43,83 +43,86 @@ export const ASSET_TYPES = {
   AUDIO: "audio"
 };
 
-export const OBSERVATION_FIELDS = [
-  {
-    label: "Species Group",
-    value: "sGroup"
-  },
-  {
-    label: "Other datatable field",
-    value: "checklistAnnotation"
-  },
-  {
-    label: "From Date",
-    value: "fromDate"
-  },
-  {
-    label: "geoPrivacy",
-    value: "geoPrivacy"
-  },
-  {
-    label: "To Date",
-    value: "toDate"
-  },
-  {
-    label: "Place Name",
-    value: "observedAt"
-  },
-  {
-    label: "User",
-    value: "user"
-  },
-  {
-    label: "Location Scale",
-    value: "locationScale"
-  },
-  {
-    label: "Longitude",
-    value: "longitude"
-  },
-  {
-    label: "Latitude",
-    value: "latitude"
-  },
-  {
-    label: "Date Accuracy",
-    value: "dateAccuracy"
-  },
-  {
-    label: "Notes",
-    value: "notes"
-  },
-  {
-    label: "Filename",
-    value: "fileName"
-  },
-  {
-    label: "Common Name",
-    value: "commonName"
-  },
-  {
-    label: "Comment",
-    value: "comment"
-  },
-  {
-    label: "Scientific Name",
-    value: "scientificName"
-  },
-  {
-    label: "Tags",
-    value: "tags"
-  },
-  {
-    label: "Geo Privacy",
-    value: "geoPrivacy"
-  },
-  {
-    label: "User Groups",
-    value: "userGroups"
-  }
-];
+export const OBSERVATION_FIELDS = {
+  label: "Core Fields",
+  options: [
+    {
+      label: "Species Group",
+      value: "sGroup"
+    },
+    {
+      label: "Other datatable field",
+      value: "checklistAnnotation"
+    },
+    {
+      label: "From Date",
+      value: "fromDate"
+    },
+    {
+      label: "geoPrivacy",
+      value: "geoPrivacy"
+    },
+    {
+      label: "To Date",
+      value: "toDate"
+    },
+    {
+      label: "Place Name",
+      value: "observedAt"
+    },
+    {
+      label: "User",
+      value: "user"
+    },
+    {
+      label: "Location Scale",
+      value: "locationScale"
+    },
+    {
+      label: "Longitude",
+      value: "longitude"
+    },
+    {
+      label: "Latitude",
+      value: "latitude"
+    },
+    {
+      label: "Date Accuracy",
+      value: "dateAccuracy"
+    },
+    {
+      label: "Notes",
+      value: "notes"
+    },
+    {
+      label: "Filename",
+      value: "fileName"
+    },
+    {
+      label: "Common Name",
+      value: "commonName"
+    },
+    {
+      label: "Comment",
+      value: "comment"
+    },
+    {
+      label: "Scientific Name",
+      value: "scientificName"
+    },
+    {
+      label: "Tags",
+      value: "tags"
+    },
+    {
+      label: "Geo Privacy",
+      value: "geoPrivacy"
+    },
+    {
+      label: "User Groups",
+      value: "userGroups"
+    }
+  ]
+};
 
 export const LOCAL_ASSET_PREFIX = "ibpmu-";
