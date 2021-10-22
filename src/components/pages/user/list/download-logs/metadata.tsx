@@ -5,7 +5,7 @@ import { ENDPOINT } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
-import { stripSpecialCharacters } from "@utils/text";
+import { stripSpecialCharacters, stripTags } from "@utils/text";
 import React from "react";
 
 const doFilter = (data) => {
@@ -89,7 +89,7 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
           accessor: item,
           Cell: ({ value }) => (
             <Text key={value} fontStyle="italic">
-              {value}
+              {stripTags(value)}
             </Text>
           )
         };
