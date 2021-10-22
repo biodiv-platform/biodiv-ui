@@ -22,6 +22,7 @@ export const OBSERVATION_FILTERS = [
       { value: "flagReason", label: "Flag Reason" },
       { value: "recordedBy", label: "Recorded By" },
       { value: "createdon", label: "Created on" },
+      { value: "basisOfRecord", label: "Basis of Record" },
       { value: "associatedMedia", label: "Associated Media" }
     ],
     disabled: true
@@ -65,7 +66,11 @@ export const OBSERVATION_FILTERS = [
       { value: "uploadProtocol", label: "Upload Protocol" },
       { value: "organismRemarks", label: "Organism Remarks" },
       { value: "tags", label: "Tags" },
-      { value: "speciesGroup", label: "Species Group" }
+      { value: "speciesGroup", label: "Species Group" },
+      { value: "datatableName", label: "Datatable Name" },
+      { value: "datatableAnnotations", label: "Datatable Annotation" },
+      { value: "basisOfData", label: "Basis of Data" }
+
     ]
   }
 ];
