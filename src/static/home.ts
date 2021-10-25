@@ -50,13 +50,13 @@ export const FEATURES = [
     icon: "observation",
     title: "citizen_science",
     link: "/observation/list",
-    tag: ["ibp", "wiktrop"]
+    tag: ["pa", "ibp", "wiktrop"]
   },
   {
     icon: "maps",
     title: "maps",
     link: "/map",
-    tag: ["ibp", "wiktrop", "mikoko"]
+    tag: ["pa", "ibp", "wiktrop", "mikoko"]
   },
   {
     icon: "search",
@@ -86,19 +86,19 @@ export const FEATURES = [
     icon: "documents",
     title: "literature",
     link: "/document/list",
-    tag: ["ibp", "wiktrop", "mikoko"]
+    tag: ["pa", "ibp", "wiktrop", "mikoko"]
   },
   {
     icon: "taxonomy",
     title: "taxonomy",
     link: "/taxonomy/list",
-    tag: ["ibp", "wiktrop"]
+    tag: ["pa", "ibp", "wiktrop"]
   },
   {
     icon: "landscapes",
     title: "landscapes",
     link: "/landscape",
-    tag: ["ibp"]
+    tag: ["pa", "ibp"]
   },
   {
     icon: "search",
@@ -116,6 +116,6 @@ export const FEATURES = [
     icon: "open-data",
     title: "open_data",
     link: "/observation/list",
-    tag: ["ibp", "wiktrop", "mikoko"]
+    tag: ["pa", "ibp", "wiktrop", "mikoko"]
   }
 ];
