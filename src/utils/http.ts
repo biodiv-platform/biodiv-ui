@@ -5,10 +5,7 @@ import { getParsedUser, isTokenExpired, setCookies } from "./auth";
 import notification from "./notification";
 
 const defaultHeaders = {
-  headers: {
-    post: { "Content-Type": "application/json" },
-    put: { "Content-Type": "application/json" }
-  }
+  headers: { "Content-Type": "application/json" }
 };
 
 /**
@@ -54,7 +51,7 @@ http.interceptors.request.use(
 
     const token = await getBearerToken(options?.params?.ctx);
     if (token) {
-      options.headers["Authorization"] = token;
+      options.headers = { ...(options.headers || {}), Authorization: token };
     } else {
       if (!options?.params?.skipRefresh) {
         throw -1;

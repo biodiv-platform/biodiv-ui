@@ -56,7 +56,7 @@ export const PhoneNumberInputField = ({
         id={name}
         inputComponent={Input}
         countrySelectProps={{ unicodeFlags: true }}
-        defaultCountry={defaultCountry}
+        defaultCountry={defaultCountry as any}
         disabled={disabled}
         {...field}
       />

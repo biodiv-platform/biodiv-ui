@@ -70,7 +70,6 @@ export const OBSERVATION_FILTERS = [
       { value: "datatableName", label: "Datatable Name" },
       { value: "datatableAnnotations", label: "Datatable Annotation" },
       { value: "basisOfData", label: "Basis of Data" }
-
     ]
   }
 ];
