@@ -23,7 +23,7 @@ export const getServerSideProps = async (ctx) => {
         l: data.downloadLogList || [],
         ag: data.aggregate,
         n: data.count,
-        hasMore: data.count > LIST_PAGINATION_LIMIT 
+        hasMore: data.count > LIST_PAGINATION_LIMIT
       },
       nextOffset: LIST_PAGINATION_LIMIT,
       initialFilterParams: { ...ctx.query }

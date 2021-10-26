@@ -136,7 +136,11 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
           <ModalCloseButton />
           <ModalBody>
             <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
-              <WYSIWYGField name="sfDescription" uploadHandler={axUploadEditorPageResource} key="xo" />
+              <WYSIWYGField
+                name="sfDescription"
+                uploadHandler={axUploadEditorPageResource}
+                key="xo"
+              />
             </Box>
             <DropzoneFieldContainer
               hidden={referencesOnly}
