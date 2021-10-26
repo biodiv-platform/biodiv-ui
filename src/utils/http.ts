@@ -4,8 +4,11 @@ import axios from "axios";
 import { getParsedUser, isTokenExpired, setCookies } from "./auth";
 import notification from "./notification";
 
-const defaultHeaders = {
-  headers: { "Content-Type": "application/json" }
+const defaultHeaders: any = {
+  headers: {
+    post: { "Content-Type": "application/json" },
+    put: { "Content-Type": "application/json" }
+  }
 };
 
 /**
