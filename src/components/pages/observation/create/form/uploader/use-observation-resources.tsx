@@ -78,6 +78,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
           ...asset,
           status: AssetStatus.Uploaded,
           url: null,
+          contributor: "",
           caption: "",
           rating: 0,
           licenseId: SITE_CONFIG.LICENSE.DEFAULT,

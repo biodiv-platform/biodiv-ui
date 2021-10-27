@@ -237,6 +237,7 @@ export const axCreateObservation = async ({
       path: r.path,
       url: r.url,
       type: r.type,
+      contributor: r.contributor,
       caption: r.caption,
       rating: r.rating,
       licenseId: r.licenseId,
