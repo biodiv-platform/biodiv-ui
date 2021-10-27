@@ -3,7 +3,6 @@ import useGlobalState from "@hooks/use-global-state";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
 import { subscribeToPushNotification } from "@utils/user";
-import { getManifestURL } from "@utils/userGroup";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { DefaultSeo } from "next-seo";
