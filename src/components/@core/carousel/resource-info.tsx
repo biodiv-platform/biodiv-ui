@@ -20,6 +20,7 @@ import React from "react";
 import Rating from "react-rating";
 
 import ExternalBlueLink from "../blue-link/external";
+import LocalLink from "../local-link";
 
 interface CarouselResourceInfoProps {
   currentResource;
@@ -60,7 +61,14 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
           <PopoverBody>
             <Grid templateColumns="1fr 2fr" gap={3}>
               <Box>{t("observation:contributor")}</Box>
-              <Box>{currentResource?.userIbp?.name}</Box>
+              <Box>{currentResource?.resource?.contributor || currentResource?.userIbp?.name}</Box>
+
+              <Box>{t("common:uploader")}</Box>
+              <Box>
+                <LocalLink href={`/user/show/${currentResource?.userIbp?.id}`} prefixGroup={true}>
+                  <ExternalBlueLink>{currentResource?.userIbp?.name}</ExternalBlueLink>
+                </LocalLink>
+              </Box>
 
               <Box>{t("observation:license")}</Box>
               <Box>

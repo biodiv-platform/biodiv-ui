@@ -120,6 +120,7 @@ export interface IDBObservationAsset {
   licenseId: string;
   status?: AssetStatus;
   caption?: string;
+  contributor?: string;
   rating?: number;
   latitude?: number;
   longitude?: number;

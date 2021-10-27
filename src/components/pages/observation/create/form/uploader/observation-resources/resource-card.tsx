@@ -66,7 +66,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
   return (
     <Flex
       className="fade"
-      minH="22rem"
+      minH="25rem"
       borderRadius="lg"
       bg="white"
       flexDir="column"
@@ -105,6 +105,15 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
           inputId={`opt-${resource.id}`}
           styles={selectStyles}
           onChange={(v) => updateObservationAsset(index, resource.hashKey, "licenseId", v.value)}
+        />
+        <Input
+          placeholder="Contributor"
+          mt={2}
+          name={`contributor-${resource.id}`}
+          defaultValue={resource.contributor}
+          onBlur={(e) =>
+            updateObservationAsset(index, resource.hashKey, "contributor", e?.target?.value)
+          }
         />
         <Input
           placeholder="Caption"

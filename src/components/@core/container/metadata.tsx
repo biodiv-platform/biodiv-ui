@@ -15,7 +15,7 @@ export default function Metadata() {
   const { isLoggedIn, currentGroup } = useGlobalState();
   const canonical = SITE_CONFIG.SITE.URL + router.asPath;
   const { lang } = useTranslation();
-  const manifestURL = getManifestURL(currentGroup);
+  // const manifestURL = getManifestURL(currentGroup);
 
   useEffect(() => {
     if (isBrowser && SITE_CONFIG.TRACKING.ENABLED) {
@@ -51,7 +51,7 @@ export default function Metadata() {
       />
       <Head>
         <link rel="apple-touch-icon" href={currentGroup?.icon + RESOURCE_SIZE.APPLE_TOUCH} />
-        <link rel="manifest" href={manifestURL} />
+        {/* <link rel="manifest" href={manifestURL} /> */}
       </Head>
     </>
   );
