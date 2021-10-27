@@ -3,18 +3,19 @@ import useGlobalState from "@hooks/use-global-state";
 import { isBrowser, RESOURCE_SIZE } from "@static/constants";
 import { CACHE_WHITELIST, removeCache } from "@utils/auth";
 import { subscribeToPushNotification } from "@utils/user";
+import { getManifestURL } from "@utils/userGroup";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { DefaultSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 
 export default function Metadata() {
   const router = useRouter();
   const { isLoggedIn, currentGroup } = useGlobalState();
   const canonical = SITE_CONFIG.SITE.URL + router.asPath;
   const { lang } = useTranslation();
-  // const manifestURL = getManifestURL(currentGroup);
+  const manifestURL = useMemo(() => getManifestURL(currentGroup), [currentGroup]);
 
   useEffect(() => {
     if (isBrowser && SITE_CONFIG.TRACKING.ENABLED) {
@@ -50,7 +51,7 @@ export default function Metadata() {
       />
       <Head>
         <link rel="apple-touch-icon" href={currentGroup?.icon + RESOURCE_SIZE.APPLE_TOUCH} />
-        {/* <link rel="manifest" href={manifestURL} /> */}
+        <link rel="manifest" href={manifestURL} />
       </Head>
     </>
   );
