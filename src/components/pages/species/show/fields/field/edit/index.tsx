@@ -18,7 +18,7 @@ export default function SpeciesFieldSimpleEdit() {
   useListener(setInitialFormValue, [SPECIES_FIELD_UPDATE]);
 
   return (
-    <Modal onClose={doCleanup} size="6xl" isOpen={!!initialFormValue}>
+    <Modal onClose={doCleanup} trapFocus={false} size="6xl" isOpen={!!initialFormValue}>
       <ModalOverlay />
       {initialFormValue && (
         <SpeciesFieldEditForm
