@@ -13,7 +13,8 @@
     "title": "lohateny"
   },
   "mail": {
-    "sent": "Namboarina ny fampidinao. Rehefa vonona izy dia hampahafantarina amin'ny mailaka miaraka amin'ny rohy download ianao"
+    "download_logs": "Download Logs",
+    "sent": "Eo am-panaovana ny fampidinana. \nMisy mailaka halefa miaraka amin'ny rohy fampidinana, izay azo idirana ihany koa"
   },
   "no_parent": "Tsy ray aman-dreny",
   "remove": {

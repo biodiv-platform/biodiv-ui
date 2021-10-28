@@ -13,7 +13,8 @@
     "title": "Kichwa"
   },
   "mail": {
-    "sent": "Upakuaji wako unazalishwa. Ikiwa ni tayari, utaambiwa kwa barua pepe na kiungo cha kupakua"
+    "download_logs": "Pakua Kumbukumbu",
+    "sent": "Upakuaji unachakatwa. \nBarua pepe itatumwa na kiungo cha kupakua, ambacho kinaweza pia kufikiwa kutoka"
   },
   "no_parent": "Hakuna mzazi",
   "remove": {

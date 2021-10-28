@@ -13,7 +13,8 @@
     "title": "Titre"
   },
   "mail": {
-    "sent": "Votre téléchargement est généré.Quand il est prêt, vous serez averti par email avec un lien de téléchargement"
+    "download_logs": "Télécharger les journaux",
+    "sent": "Le téléchargement est en cours de traitement. \nUn e-mail vous sera envoyé avec le lien de téléchargement, également accessible depuis"
   },
   "no_parent": "Non parent",
   "remove": {

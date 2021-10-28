@@ -13,7 +13,8 @@
     "title": "Title"
   },
   "mail": {
-    "sent": "Your download is being generated. When it is ready, you will be notified by email with a download link"
+    "download_logs": "Download Logs",
+    "sent": "Download is being processed. An email will be sent with the download link, which can also be accessed from"
   },
   "no_parent": "No Parent",
   "remove": {

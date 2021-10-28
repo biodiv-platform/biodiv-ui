@@ -14,7 +14,7 @@ import {
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { axRateObservationResource } from "@services/observation.service";
-import toast from "cogo-toast";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import Rating from "react-rating";
@@ -37,7 +37,7 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
       newRating
     );
     if (success) {
-      toast.success(`${t("observation:rate_success")} ${newRating}`);
+      notification(`${t("observation:rate_success")} ${newRating}`, NotificationType.Success);
     }
   };
 

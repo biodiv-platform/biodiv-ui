@@ -1,4 +1,5 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
+import ExternalBlueLink from "@components/@core/blue-link/external";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
@@ -7,7 +8,6 @@ import { ENDPOINT } from "@static/constants";
 import { hasAccess, waitForAuth } from "@utils/auth";
 import { getBearerToken } from "@utils/http";
 import { getMapCenter } from "@utils/location";
-import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -24,6 +24,7 @@ export default function MapPageComponent() {
   const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
   const { t, lang } = useTranslation();
   const { user } = useGlobalState();
+  const toast = useToast();
   const isAdmin = hasAccess([Role.Admin]);
 
   const onObservationGridHover = ({ feature }) => (
@@ -34,7 +35,21 @@ export default function MapPageComponent() {
     await waitForAuth();
     const token = await getBearerToken();
     if (token) {
-      notification(t("page:mail.sent"), NotificationType.Success);
+      toast({
+        title: t("common:success"),
+        description: (
+          <div>
+            {t("page:mail.sent")}{" "}
+            <ExternalBlueLink href="/user/download-logs">
+              {t("page:mail.download_logs")}
+            </ExternalBlueLink>
+          </div>
+        ),
+        variant: "left-accent",
+        status: "success",
+        duration: 9000,
+        isClosable: true
+      });
       return { success: true, data: token };
     }
     return { success: false, data: token };
