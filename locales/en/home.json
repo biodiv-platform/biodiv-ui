@@ -18,7 +18,7 @@
       "title": "IDAO"
     },
     "landscapes": {
-      "desc": "Aggregating information on India’s Landscapes with detailed information on spatial boundaries, species lists and relevant literature  on it. *Coming soon*",
+      "desc": "Aggregating information on Landscapes with detailed information on spatial boundaries, species lists and relevant literature  on it. *Coming soon*",
       "title": "Landscapes"
     },
     "literature": {
@@ -50,11 +50,11 @@
       "title": "Open Data"
     },
     "species_information": {
-      "desc": "Descriptive pages for every species from authenticated sources. Help collaborate and build information on India's species.",
+      "desc": "Descriptive pages for every species from authenticated sources. Help collaborate and build information on species.",
       "title": "Species information"
     },
     "taxonomy": {
-      "desc": "Taxonomy and nomenclatural information on India’s species, allowing for dynamic updates for organizing and querying species data, curated by experts.",
+      "desc": "Taxonomy and nomenclatural information on species, allowing for dynamic updates for organizing and querying species data, curated by experts.",
       "title": "Taxonomy"
     },
     "title": "Features"

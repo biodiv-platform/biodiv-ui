@@ -18,7 +18,7 @@
       "title": "IDAO"
     },
     "landscapes": {
-      "desc": "Ny fampahalalana momba ny tontolon'ny tanin'i India misy fampahalalana amin'ny antsipirihany momba ny fetra spatial, ny lisitry ny karazana ary ny literatiora mifandraika amin'izany. *Ho avy tsy ho ela*",
+      "desc": "Ny fampahalalana momba ny tany misy fampahalalana momba ny antsipirihany momba ny fetra spatial, ny lisitry ny karazana ary ny literatiora mifandraika amin'izany. *Ho avy tsy ho ela*",
       "title": "endriky"
     },
     "literature": {
@@ -50,11 +50,11 @@
       "title": "Open data"
     },
     "species_information": {
-      "desc": "Pejy misy fanazavana ho an'ny karazana rehetra avy amin'ny loharano voamarina. Ampio hiara-miasa sy hanangana vaovao momba ny karazana India.",
+      "desc": "Pejy famaritana ho an'ny karazana rehetra avy amin'ireo loharano voamarina. MAMPIASA hiara-hiasa sy hanorina fampahalalana momba ireo karazana.",
       "title": "Fampahalalana momba ny karazana"
     },
     "taxonomy": {
-      "desc": "Ny fampahalalana momba ny hetra sy ny voambolana ao amin'ny karazan-javamaniry ao India, izay mamela ny fanavaozana mavitrika amin'ny fikarakarana sy ny angon-drakitra momba ny karazana karazana.",
+      "desc": "Ny fampahalalana momba ny hetra sy ny fampahalalana momba ny hetra, izay mamela ny fanavaozana mavitrika amin'ny fikarakarana sy ny fandalinana ny angon-drakitra karazana, izay notantanan'ny manam-pahaizana manokana.",
       "title": "panasokajiana"
     },
     "title": "Toetoetra"
