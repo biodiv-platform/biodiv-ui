@@ -14,7 +14,7 @@ const parseCategoricalValue = (value, isMulti) => {
     : value?.singleCategoricalData?.values;
 };
 
-export default function CategoricalField({
+export default function ({
   cf,
   onUpdate,
   userGroupId,
@@ -22,7 +22,7 @@ export default function CategoricalField({
   onClose,
   isOpen
 }) {
-  const [isMulti] = useState(cf?.customFieldValues?.fieldType === "MULTIPLE CATEGORICAL");
+  const [isMulti] = useState(cf?.fieldType === "MULTIPLE CATEGORICAL");
   const { t } = useTranslation();
   const [fieldValue, setFieldValue] = useState<number[] | number>();
   const [options, setOptions] = useState<any[]>([]);
