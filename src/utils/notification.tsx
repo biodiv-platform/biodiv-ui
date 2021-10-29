@@ -19,7 +19,7 @@ const notification = (message, type = NotificationType.Error, variables = {}) =>
     const toast = createStandaloneToast({ theme: customTheme });
 
     toast({
-      description: compiledMessage(`${message}`, variables),
+      description: typeof message === "string" ? compiledMessage(`${message}`, variables) : message,
       isClosable: true,
       position: "top",
       status: type as any,
