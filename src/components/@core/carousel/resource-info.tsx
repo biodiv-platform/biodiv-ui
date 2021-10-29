@@ -28,6 +28,10 @@ interface CarouselResourceInfoProps {
 }
 
 function CarouselResourceInfo({ currentResource, observationId }: CarouselResourceInfoProps) {
+  if (!currentResource) {
+    return null;
+  }
+
   const { t } = useTranslation();
 
   const onRateHandler = async (newRating) => {
