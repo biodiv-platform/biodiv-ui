@@ -1,6 +1,5 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
-import FormDebugger from "@components/form/debugger";
 import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -174,7 +173,6 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
         <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
         <CheckboxField name="terms" label={t("form:terms")} />
         <SubmitButton leftIcon={<CheckIcon />}>{t("datatable:add")}</SubmitButton>
-     <FormDebugger/>
       </form>
     </FormProvider>
   );
