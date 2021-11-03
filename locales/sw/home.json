@@ -18,7 +18,7 @@
       "title": "Idao."
     },
     "landscapes": {
-      "desc": "Aggrating habari juu ya mandhari ya India na maelezo ya kina juu ya mipaka ya anga, orodha ya aina na fasihi husika juu yake. * Kuja hivi karibuni *",
+      "desc": "Kuunganisha habari juu ya mandhari na maelezo ya kina juu ya mipaka ya anga, orodha ya aina na fasihi zinazofaa juu yake.",
       "title": "Mandhari."
     },
     "literature": {
@@ -50,11 +50,11 @@
       "title": "Fungua data."
     },
     "species_information": {
-      "desc": "Kurasa zinazoelezea kwa kila spishi kutoka kwa vyanzo vilivyothibitishwa. Saidia kushirikiana na kujenga habari juu ya spishi za India.",
+      "desc": "Kurasa za maelezo kwa kila aina kutoka vyanzo vya kuthibitishwa. Msaada kushirikiana na kujenga habari juu ya aina.",
       "title": "Taarifa ya aina."
     },
     "taxonomy": {
-      "desc": "Taasisi na maelezo ya nomenclatural juu ya aina ya India, kuruhusu sasisho za nguvu za kuandaa na kutaja data ya aina, kutibiwa na wataalam.",
+      "desc": "Taxonomy na maelezo ya nomenclatural juu ya aina, kuruhusu sasisho za nguvu kwa kuandaa data ya aina, kutibiwa na wataalam.",
       "title": "Taxonomy"
     },
     "title": "Vipengele"
