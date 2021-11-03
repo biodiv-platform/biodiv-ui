@@ -12,6 +12,7 @@ export interface IDropzoneProps {
   name: string;
   showMapping: boolean;
   setFieldMapping: any;
+  observationConfig: any
   setShowMapping: any;
   fieldMapping: any;
   mb?: number;
@@ -25,6 +26,7 @@ const DropzoneField = ({
   setFieldMapping,
   showMapping,
   fieldMapping,
+  observationConfig,
   setShowMapping
 }: IDropzoneProps) => {
   const form = useFormContext();
@@ -50,6 +52,7 @@ const DropzoneField = ({
               <TabPanel>
                 {showMapping ? (
                   <FieldMappingInput
+                    observationConfig={observationConfig}
                     fieldMapping={fieldMapping}
                     showMapping={showMapping}
                     setShowMapping={setShowMapping}

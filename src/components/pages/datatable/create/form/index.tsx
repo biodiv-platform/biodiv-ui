@@ -23,7 +23,12 @@ import TemporalCoverage from "./temporal-coverage";
 import TitleInput from "./title";
 import ImageUploaderField from "./uploader";
 
-export default function DataTableCreateForm({ speciesGroups, languages, datasetId }) {
+export default function DataTableCreateForm({
+  speciesGroups,
+  languages,
+  datasetId,
+  observationConfig
+}) {
   const { t } = useTranslation();
   const { user, currentGroup } = useGlobalState();
   const router = useLocalRouter();
@@ -126,14 +131,17 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
     const payload = {
       columns,
       checklistAnnotation,
-      observedFromDate: dateToUTC(observedDateRange[0]).format(),
+      observedFromDate: observedDateRange[0] ? dateToUTC(observedDateRange[0]).format() : null,
       observedAt: placename,
       reverseGeocoded: placename,
       longitude: coordinates[0],
       latitude: coordinates[1],
       isVerified: !!isVerified,
-      observedToDate:
-        dateToUTC(observedDateRange[1]).format() || dateToUTC(observedDateRange[0]).format(),
+      observedToDate: observedDateRange[1]
+        ? dateToUTC(observedDateRange[1]).format()
+        : observedDateRange[0]
+        ? dateToUTC(observedDateRange[0]).format()
+        : null,
       wktString: topology,
       useDegMinSec: false,
       userGroup: userGroupId?.length > 0 ? userGroupId.join(",") : "",
@@ -157,6 +165,7 @@ export default function DataTableCreateForm({ speciesGroups, languages, datasetI
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <ImageUploaderField
+          observationConfig={observationConfig}
           showMapping={showMapping}
           fieldMapping={fieldMapping}
           setFieldMapping={setFieldMapping}
