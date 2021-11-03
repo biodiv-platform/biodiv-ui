@@ -7,7 +7,6 @@ import IndexedDBProvider from "use-indexeddb";
 import DropzoneField, { IDropzoneProps } from "./field";
 
 const DropzoneFieldContainer = (props: IDropzoneProps) => {
-
   const form = useFormContext();
 
   return (
