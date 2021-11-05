@@ -2,14 +2,26 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
+import useGlobalState from "@hooks/use-global-state";
 import { OBSERVATION_FIELDS } from "@static/observation-create";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
-export default function Fields({ name, fieldMapping, showMapping, setShowMapping }) {
+
+// formats field mapping  dropdown options
+const formatOptions = (options, observationConfig, userGroupId) => {
+  const { customFields, traits } = observationConfig;
+  const formatOptions = [options,
+    { label: "Traits", options: traits.map((item) => ({ label: item.name, value: item.name })) }]
+  return userGroupId ?
+    [...formatOptions, { label: "Custom Field", options: customFields.map((item) => ({ label: item.name, value: item.name })) }] : formatOptions;
+}
+
+export default function Fields({ name, fieldMapping, showMapping, setShowMapping, observationConfig }) {
   const { t } = useTranslation();
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
+  const { currentGroup } = useGlobalState();
   const [fieldValues, setFieldValues] = useState<any[]>([]);
   const { fields, append, remove } = useFieldArray({ name });
   const form = useFormContext();
@@ -74,7 +86,7 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
                     <SelectInputField
                       name={`columnsMapping.${index}.fieldKey`}
                       label={t("common:actions.flag.category")}
-                      options={OBSERVATION_FIELDS}
+                      options={formatOptions(OBSERVATION_FIELDS, observationConfig, currentGroup?.id)}
                     />
                   </Td>
                 ))}
