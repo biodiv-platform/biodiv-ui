@@ -38,7 +38,9 @@ export default function usePullMedia(noPayloadModification?: PullMediaProps) {
               ? r
               : {
                   ...r.resource,
+                  userIbp: r.userIbp,
                   caption: r.resource.description,
+                  contributor: r.userIbp.name,
                   licenseId: r.resource.licenseId?.toString(),
                   hashKey: r.resource.id.toString(),
                   status: AssetStatus.Uploaded,

@@ -119,10 +119,11 @@ export default function ObservationEditForm({
       ...values,
       checklistAnnotations: formatChecklistAnnotation(values.checklistAnnotations),
       resources: values?.resources?.map(
-        ({ path, url, type, caption, rating, licenseId, languageId }) => ({
+        ({ path, url, type, caption, contributor, rating, licenseId, languageId }) => ({
           path,
           url,
           type,
+          contributor,
           caption,
           rating,
           licenseId,

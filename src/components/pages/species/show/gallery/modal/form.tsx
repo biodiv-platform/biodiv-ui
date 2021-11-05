@@ -50,6 +50,7 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
       url: r.url,
       type: r.type,
       caption: r.caption,
+      contributor: r.contributor,
       rating: r.rating,
       licenseId: Number(r.licenseId),
       observationId: r?.observationId,

@@ -17,15 +17,11 @@ import App, { AppContext } from "next/app";
 import dynamic from "next/dynamic";
 import Router from "next/router";
 import NProgress from "nprogress";
-import React from "react";
+import React, { useEffect } from "react";
 import BusProvider from "react-gbus";
 
 const AuthWall = dynamic(() => import("@components/@core/container/authwall"), { ssr: false });
 const AutoSync = dynamic(() => import("@components/@core/autosync"), { ssr: false });
-
-Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
 
 interface AppProps {
   Component;
@@ -39,6 +35,12 @@ interface AppProps {
 
 function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: AppProps) {
   const config = { header: true, footer: true, ...Component?.config };
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", () => NProgress.start());
+    Router.events.on("routeChangeComplete", () => NProgress.done());
+    Router.events.on("routeChangeError", () => NProgress.done());
+  }, [Router]);
 
   return (
     <BusProvider>

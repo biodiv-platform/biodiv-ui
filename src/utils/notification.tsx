@@ -1,12 +1,13 @@
+import { createStandaloneToast } from "@chakra-ui/toast";
+import { customTheme } from "@configs/theme";
 import { isBrowser } from "@static/constants";
-import cogoToast from "cogo-toast";
 
 import { compiledMessage } from "./basic";
 
 export enum NotificationType {
   Success = "success",
   Info = "info",
-  Warning = "warn",
+  Warning = "warning",
   Error = "error"
 }
 
@@ -14,15 +15,15 @@ const notification = (message, type = NotificationType.Error, variables = {}) =>
   if (!message) {
     return;
   }
-  const m = compiledMessage(`${message}`, variables);
   if (isBrowser) {
-    const toaster = cogoToast[type];
-    const { hide }: any = toaster(m, {
-      position: "top-center",
-      hideAfter: 10,
-      onClick: () => {
-        hide();
-      }
+    const toast = createStandaloneToast({ theme: customTheme });
+
+    toast({
+      description: typeof message === "string" ? compiledMessage(`${message}`, variables) : message,
+      isClosable: true,
+      position: "top",
+      status: type as any,
+      variant: "left-accent"
     });
   }
 };

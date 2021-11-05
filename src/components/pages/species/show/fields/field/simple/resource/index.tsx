@@ -1,5 +1,7 @@
 import {
   AspectRatio,
+  Box,
+  Grid,
   Image,
   Popover,
   PopoverArrow,
@@ -49,13 +51,21 @@ export default function SpeciesFieldResource({ resources }) {
                 <PopoverArrow />
                 <PopoverBody>
                   <div>{resource.description}</div>
-                  <div>
-                    <LocalLink href={`/user/show/${userIbp.id}`}>
-                      <BlueLink>
-                        {userIbp.name} <Badge isAdmin={userIbp?.isAdmin} />
-                      </BlueLink>
-                    </LocalLink>
-                  </div>
+
+                  <Grid templateColumns="1fr 2fr">
+                    <Box>{t("observation:contributor")}</Box>
+                    <Box>{resource?.contributor || userIbp?.name}</Box>
+
+                    <Box>{t("common:uploader")}</Box>
+                    <Box>
+                      <LocalLink href={`/user/show/${userIbp.id}`}>
+                        <BlueLink>
+                          {userIbp.name} <Badge isAdmin={userIbp?.isAdmin} />
+                        </BlueLink>
+                      </LocalLink>
+                    </Box>
+                  </Grid>
+
                   <div>
                     <ExternalBlueLink href={getResourceRAW(resource.context, resource.fileName)}>
                       {t("species:view_original")}

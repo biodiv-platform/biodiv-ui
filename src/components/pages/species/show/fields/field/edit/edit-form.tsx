@@ -113,6 +113,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
         url: r.url,
         type: r.type,
         caption: r.caption,
+        contributor: r.contributor,
         rating: r.rating,
         licenseId: r.licenseId
       }))

@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
-import { ExtendedMarkerProps } from "naksha-components-react";
+import type { ExtendedMarkerProps } from "naksha-components-react";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";

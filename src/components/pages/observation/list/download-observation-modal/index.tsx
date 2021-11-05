@@ -8,6 +8,7 @@ import {
   ModalHeader,
   ModalOverlay
 } from "@chakra-ui/react";
+import ExternalBlueLink from "@components/@core/blue-link/external";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextAreaField } from "@components/form/textarea";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
@@ -86,7 +87,15 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
 
     const { success } = await axDownloadFilteredObservations(params);
     if (success) {
-      notification(t("observation:download.success"), NotificationType.Success);
+      notification(
+        <>
+          {t("observation:download.success")}{" "}
+          <ExternalBlueLink href="/user/download-logs">
+            {t("header:menu_secondary.more.download_logs")}
+          </ExternalBlueLink>
+        </>,
+        NotificationType.Success
+      );
       onClose();
     } else {
       notification(t("observation:download.error"));

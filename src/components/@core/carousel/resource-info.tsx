@@ -14,12 +14,13 @@ import {
 import StarIcon from "@icons/star";
 import StarOutlineIcon from "@icons/star-outline";
 import { axRateObservationResource } from "@services/observation.service";
-import toast from "cogo-toast";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import Rating from "react-rating";
 
 import ExternalBlueLink from "../blue-link/external";
+import LocalLink from "../local-link";
 
 interface CarouselResourceInfoProps {
   currentResource;
@@ -27,6 +28,10 @@ interface CarouselResourceInfoProps {
 }
 
 function CarouselResourceInfo({ currentResource, observationId }: CarouselResourceInfoProps) {
+  if (!currentResource) {
+    return null;
+  }
+
   const { t } = useTranslation();
 
   const onRateHandler = async (newRating) => {
@@ -36,7 +41,7 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
       newRating
     );
     if (success) {
-      toast.success(`${t("observation:rate_success")} ${newRating}`);
+      notification(`${t("observation:rate_success")} ${newRating}`, NotificationType.Success);
     }
   };
 
@@ -60,7 +65,14 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
           <PopoverBody>
             <Grid templateColumns="1fr 2fr" gap={3}>
               <Box>{t("observation:contributor")}</Box>
-              <Box>{currentResource?.userIbp?.name}</Box>
+              <Box>{currentResource?.resource?.contributor || currentResource?.userIbp?.name}</Box>
+
+              <Box>{t("common:uploader")}</Box>
+              <Box>
+                <LocalLink href={`/user/show/${currentResource?.userIbp?.id}`} prefixGroup={true}>
+                  <ExternalBlueLink>{currentResource?.userIbp?.name}</ExternalBlueLink>
+                </LocalLink>
+              </Box>
 
               <Box>{t("observation:license")}</Box>
               <Box>

@@ -1,4 +1,5 @@
 import { AspectRatio, Box, Flex, Image, useCheckbox } from "@chakra-ui/react";
+import ShadowedUser from "@components/pages/common/shadowed-user";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import useGlobalState from "@hooks/use-global-state";
@@ -37,7 +38,7 @@ const Checkbox = (props: any) => {
         _checked={{ borderColor: "blue.500", bg: "blue.50" }}
         style={undefined}
       >
-        <Flex cursor="pointer" p={2}>
+        <Flex cursor="pointer" position="relative" p={2}>
           <Image
             style={{ filter: "none" }}
             boxSize="full"
@@ -47,6 +48,7 @@ const Checkbox = (props: any) => {
             fallbackSrc={getFallbackByMIME(props.asset.type)}
             alt={props.asset.fileName}
           />
+          <ShadowedUser user={props.asset.userIbp} />
         </Flex>
       </AspectRatio>
     </Box>

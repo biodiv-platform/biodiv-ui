@@ -16,4 +16,10 @@ const withTM = require("next-transpile-modules")([
 
 const nextTranslate = require("next-translate");
 
-module.exports = nextTranslate(withTM({}));
+module.exports = nextTranslate(
+  withTM({
+    experimental: {
+      esmExternals: false
+    }
+  })
+);

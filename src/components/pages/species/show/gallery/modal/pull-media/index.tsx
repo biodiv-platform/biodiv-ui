@@ -23,7 +23,7 @@ const SpeciesPullMedia = ({ onDone }) => {
           {t("form:use_in_observation")}
         </Button>
       </Box>
-      <SimpleGrid columns={[3, 4, 5, 8]} gridGap={4} mb={4} className="custom-checkbox-group">
+      <SimpleGrid columns={[2, 3, 4, 5]} gridGap={4} mb={4} className="custom-checkbox-group">
         {resourcesList.list.map((asset) => (
           <Checkbox key={asset.id} asset={asset} {...getCheckboxProps({ value: asset.id })} />
         ))}
