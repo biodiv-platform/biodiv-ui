@@ -13,7 +13,7 @@ import PawIcon from "@icons/paw";
 import PeopleIcon from "@icons/people";
 import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 import { getUserImage } from "@utils/media";
-import { getInjectableHTML } from "@utils/text";
+import { getInjectableHTML, stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -105,14 +105,12 @@ export default function InfoTab({
         <MetaBlock
           icon={<BookIcon />}
           tooltip={t("document:bib.journal")}
-          isHtml={true}
-          children={document?.journal}
+          children={stripTags(document?.journal)}
         />
         <MetaBlock
           icon={<MessageIcon />}
           tooltip={t("document:bib.abstract")}
-          isHtml={true}
-          children={document?.notes}
+          children={stripTags(document?.notes)}
         />
         <Flex alignItems="flex-end" justifyContent="space-between">
           <Stack>
