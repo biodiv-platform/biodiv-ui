@@ -15,7 +15,8 @@
     "order": "आदेश",
     "phylum": "संघ",
     "root": "जड़",
-    "species": "प्रजातियां"
+    "species": "प्रजातियां",
+    "subgenus": "उपजाति"
   },
   "modal": {
     "activity": "गतिविधि",

@@ -15,7 +15,8 @@
     "order": "Ordre",
     "phylum": "Phylum",
     "root": "Racine",
-    "species": "Espèce"
+    "species": "Espèce",
+    "subgenus": "Sous-genre"
   },
   "modal": {
     "activity": "Activité",

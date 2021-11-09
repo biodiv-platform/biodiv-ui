@@ -151,7 +151,7 @@ export default function UpdateTaxonForm({ onDone }) {
         <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.SYNONYM}>
           <SelectAsyncInputField
             name="newTaxonId"
-            label={t("form:name")}
+            label={t("form:accepted_name")}
             multiple={true}
             onQuery={(q) => onScientificNameQuery(q)}
             optionComponent={ScientificNameOption}

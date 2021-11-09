@@ -1,4 +1,5 @@
 {
+  "accepted_name": "Nom accepté",
   "audio": {
     "start": "Commencer l'enregistrement",
     "stop": "Arrêter l'enregistrement",

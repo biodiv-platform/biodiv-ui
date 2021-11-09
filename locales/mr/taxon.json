@@ -15,7 +15,8 @@
     "order": "ऑर्डर",
     "phylum": "Phylum",
     "root": "मूळ",
-    "species": "प्रजाती"
+    "species": "प्रजाती",
+    "subgenus": "उपजात"
   },
   "modal": {
     "activity": "क्रियाकलाप",
