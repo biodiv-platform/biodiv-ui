@@ -1,4 +1,5 @@
 {
+  "accepted_name": "Nom accepté",
   "audio": {
     "start": "Commencer l'enregistrement",
     "stop": "Arrêter l'enregistrement",
@@ -32,7 +33,8 @@
   },
   "find_gmaps": "Recherche à partir de Google Maps",
   "from_url": "YouTube",
-  "geoentities": "Recherche dans des paysages",
+  "geoentities": "Paysages",
+  "gmaps": "Dessiner un polygone",
   "language": "Langue",
   "license": "Licence",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "Nom",
   "notes": "Remarques",
   "place": "Site",
+  "search_point": "Point de recherche",
   "selected_media": "Média sélectionné",
   "selected_places": "Endroits sélectionnés",
   "species_groups": "Groupes d'espèces",

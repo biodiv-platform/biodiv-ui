@@ -12,7 +12,7 @@ export default function Views() {
     <InfiniteScroll
       dataLength={dataTableData?.l.length || 0}
       next={nextPage}
-      hasMore={dataTableData?.hasMore}
+      hasMore={dataTableData?.l?.length > 0 && dataTableData?.hasMore}
       loader={<Loading key={0} />}
       scrollableTarget="items-container"
     >

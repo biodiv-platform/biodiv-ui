@@ -16,7 +16,7 @@ export default function ListView({ no }) {
       <InfiniteScroll
         dataLength={documentData.l.length}
         next={nextPage}
-        hasMore={documentData.hasMore}
+        hasMore={documentData.l.length > 0 && documentData.hasMore}
         loader={<LoadingSpinner key={0} />}
         scrollableTarget="items-container"
       >

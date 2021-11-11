@@ -15,7 +15,8 @@
     "order": "Order",
     "phylum": "Phylum",
     "root": "Root",
-    "species": "Species"
+    "species": "Species",
+    "subgenus": "Subgenus"
   },
   "modal": {
     "activity": "Activity",

@@ -1,4 +1,5 @@
 {
+  "accepted_name": "গৃহীত নাম",
   "audio": {
     "start": "রেকর্ডিং শুরু করুন",
     "stop": "রেকর্ডিং বন্ধ করুন",
@@ -32,7 +33,8 @@
   },
   "find_gmaps": "গুগল ম্যাপ থেকে অনুসন্ধান করুন",
   "from_url": "ইউটিউব",
-  "geoentities": "ল্যান্ডস্কেপ থেকে অনুসন্ধান করুন",
+  "geoentities": "ল্যান্ডস্কেপ",
+  "gmaps": "বহুভুজ আঁকুন",
   "language": "ভাষা",
   "license": "লাইসেন্স",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "নাম",
   "notes": "মন্তব্য",
   "place": "স্থান",
+  "search_point": "অনুসন্ধান পয়েন্ট",
   "selected_media": "নির্বাচিত মিডিয়া",
   "selected_places": "নির্বাচিত জায়গা",
   "species_groups": "প্রজাতি গ্রুপ",

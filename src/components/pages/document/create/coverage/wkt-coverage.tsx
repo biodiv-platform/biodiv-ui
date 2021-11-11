@@ -14,8 +14,11 @@ export default function WKTCoverage({
     <WKTFieldMulti
       name={name}
       label={t("form:coverage.spatial")}
+      gMapTab={false}
       nameTitle={nameTitle}
       centroid={centroid}
+      canDraw={true}
+      isMultiple={true}
       labelTitle={t("form:coverage.place")}
       nameTopology={nameTopology}
       labelTopology={t("form:coverage.wkt")}

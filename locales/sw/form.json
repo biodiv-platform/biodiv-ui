@@ -1,4 +1,5 @@
 {
+  "accepted_name": "Jina Lililokubaliwa",
   "audio": {
     "start": "Anza kurekodi.",
     "stop": "Kuacha kurekodi",
@@ -33,6 +34,7 @@
   "find_gmaps": "Tafuta kutoka kwa Ramani za Google.",
   "from_url": "YouTube",
   "geoentities": "Tafuta kutoka kwenye mandhari",
+  "gmaps": "Chora Polygon",
   "language": "Lugha",
   "license": "Leseni",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "Jina",
   "notes": "Vidokezo",
   "place": "Mahali",
+  "search_point": "Tafuta Pointi",
   "selected_media": "Vyombo vya habari vilivyochaguliwa.",
   "selected_places": "Maeneo yaliyochaguliwa",
   "species_groups": "Vikundi vya aina",
@@ -80,6 +83,6 @@
     "uploading": "Inapakia ..."
   },
   "use_in_observation": "Tumia kuchaguliwa.",
-  "wkt": "WKT.",
+  "wkt": "WKT",
   "youtube_placeholder": "Input Youtube Link."
 }

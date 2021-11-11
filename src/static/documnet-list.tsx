@@ -2,7 +2,7 @@ import SITE_CONFIG from "@configs/site-config";
 import ListIcon from "@icons/list";
 import React from "react";
 
-export const LIST_PAGINATION_LIMIT = 10;
+export const LIST_PAGINATION_LIMIT = 12;
 
 export const DEFAULT_FILTER = {
   sort: "document.createdOn",

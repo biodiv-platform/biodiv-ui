@@ -1,4 +1,5 @@
 {
+  "accepted_name": "ಸ್ವೀಕರಿಸಿದ ಹೆಸರು",
   "audio": {
     "start": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
     "stop": "ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ",
@@ -33,6 +34,7 @@
   "find_gmaps": "ಗೂಗಲ್ ನಕ್ಷೆಗಳಿಂದ ಹುಡುಕಿ",
   "from_url": "ಯೂಟ್ಯೂಬ್",
   "geoentities": "ಭೂದೃಶ್ಯಗಳಿಂದ ಹುಡುಕಿ",
+  "gmaps": "ಬಹುಭುಜಾಕೃತಿಯನ್ನು ಎಳೆಯಿರಿ",
   "language": "ಭಾಷೆ",
   "license": "ಪರವಾನಗಿ",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "ಹೆಸರು",
   "notes": "ಟಿಪ್ಪಣಿಗಳು",
   "place": "ಸ್ಥಳ",
+  "search_point": "ಹುಡುಕಾಟ ಬಿಂದು",
   "selected_media": "ಆಯ್ದ ಮಾಧ್ಯಮ",
   "selected_places": "ಆಯ್ದ ಸ್ಥಳಗಳು",
   "species_groups": "ಪ್ರಭೇದದ ಗುಂಪುಗಳು",

@@ -39,7 +39,7 @@ export default function GridView() {
       <InfiniteScroll
         dataLength={userListData?.l?.length}
         next={nextPage}
-        hasMore={userListData.hasMore}
+        hasMore={userListData?.l?.length > 0 && userListData.hasMore}
         loader={<ObservationLoading key={0} />}
         scrollableTarget="items-container"
       >

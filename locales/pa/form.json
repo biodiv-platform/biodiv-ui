@@ -1,4 +1,5 @@
 {
+  "accepted_name": "ਸਵੀਕਾਰ ਕੀਤਾ ਨਾਮ",
   "audio": {
     "start": "ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ",
     "stop": "ਰਿਕਾਰਡਿੰਗ ਰੋਕੋ",
@@ -33,6 +34,7 @@
   "find_gmaps": "ਗੂਗਲ ਨਕਸ਼ੇ ਤੋਂ ਖੋਜ ਕਰੋ",
   "from_url": "ਯੂਟਿ .ਬ",
   "geoentities": "ਲੈਂਡਸਕੇਪਾਂ ਤੋਂ ਖੋਜ ਕਰੋ",
+  "gmaps": "ਬਹੁਭੁਜ ਖਿੱਚੋ",
   "language": "ਭਾਸ਼ਾ",
   "license": "ਲਾਇਸੈਂਸ",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "ਨਾਮ",
   "notes": "ਨੋਟਸ",
   "place": "ਜਗ੍ਹਾ",
+  "search_point": "ਖੋਜ ਬਿੰਦੂ",
   "selected_media": "ਚੁਣਿਆ ਮੀਡੀਆ",
   "selected_places": "ਚੁਣੇ ਸਥਾਨ",
   "species_groups": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
@@ -80,6 +83,6 @@
     "uploading": "ਅਪਲੋਡ ..."
   },
   "use_in_observation": "ਚੁਣੇ ਦੀ ਵਰਤੋਂ ਕਰੋ",
-  "wkt": "WKT",
+  "wkt": "ਡਬਲਯੂ.ਕੇ.ਟੀ",
   "youtube_placeholder": "ਇਨਪੁਟ ਯੂਟਿ .ਬ ਲਿੰਕ"
 }

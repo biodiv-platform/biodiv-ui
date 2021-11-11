@@ -1,4 +1,5 @@
 {
+  "accepted_name": "അംഗീകൃത പേര്",
   "audio": {
     "start": "റെക്കോർഡിംഗ് ആരംഭിക്കുക",
     "stop": "റെക്കോർഡിംഗ് നിർത്തുക",
@@ -33,6 +34,7 @@
   "find_gmaps": "Google മാപ്സിൽ നിന്ന് തിരയുക",
   "from_url": "YouTube",
   "geoentities": "ലാൻഡ്സ്കേപ്പുകളിൽ നിന്ന് തിരയുക",
+  "gmaps": "പോളിഗോൺ വരയ്ക്കുക",
   "language": "ഭാഷ",
   "license": "ലൈസൻസ്",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "പേര്",
   "notes": "കുറിപ്പുകൾ",
   "place": "സ്ഥലം",
+  "search_point": "തിരയൽ പോയിന്റ്",
   "selected_media": "തിരഞ്ഞെടുത്ത മീഡിയ",
   "selected_places": "തിരഞ്ഞെടുത്ത സ്ഥലങ്ങൾ",
   "species_groups": "സ്പീഷിസ് ഗ്രൂപ്പുകൾ",

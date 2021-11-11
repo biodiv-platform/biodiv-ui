@@ -78,7 +78,8 @@ export const DocumentFilterProvider = (props) => {
         }
         if (data?.documentList?.length) {
           _draft.l.push(...data.documentList);
-          _draft.hasMore = data.documentList.length === Number(filter.f.max);
+          _draft.hasMore =
+            data.totalCount > Number(filter.f.offset) && data.totalCount !== _draft.l.length;
         }
         _draft.n = data.totalCount;
       });

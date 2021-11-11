@@ -30,6 +30,7 @@ export default function PartyContributorsForm({
         <WKTFieldMulti
           name="topologyData"
           isMultiple={false}
+          gMapTab={false}
           centroid={centroid}
           label={t("form:coverage.spatial")}
           nameTitle={nameTitle}

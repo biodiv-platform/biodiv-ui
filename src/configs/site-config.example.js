@@ -166,6 +166,9 @@ const SITE_CONFIG_EXAMPLE = {
   },
   USERGROUP: {
     ACTIVE: true
+  },
+  WKT: {
+    DEFAULT_TAB: 2
   }
 };
 

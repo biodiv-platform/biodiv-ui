@@ -1,4 +1,5 @@
 {
+  "accepted_name": "ఆమోదించబడిన పేరు",
   "audio": {
     "start": "రికార్డింగ్ ప్రారంభించండి",
     "stop": "రికార్డింగ్ను ఆపండి",
@@ -33,6 +34,7 @@
   "find_gmaps": "Google మ్యాప్స్ నుండి శోధించండి",
   "from_url": "YouTube.",
   "geoentities": "ప్రకృతి దృశ్యాలు నుండి శోధించండి",
+  "gmaps": "బహుభుజి గీయండి",
   "language": "భాష",
   "license": "లైసెన్సు",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "పేరు",
   "notes": "గమనికలు",
   "place": "స్థలం",
+  "search_point": "సెర్చ్ పాయింట్",
   "selected_media": "ఎంచుకున్న మీడియా",
   "selected_places": "ఎంచుకున్న ప్రదేశాలు",
   "species_groups": "జాతుల గుంపులు",

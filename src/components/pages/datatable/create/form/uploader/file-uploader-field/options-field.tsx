@@ -8,17 +8,31 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
-
 // formats field mapping  dropdown options
 const formatOptions = (options, observationConfig, userGroupId) => {
   const { customFields, traits } = observationConfig;
-  const formatOptions = [options,
-    { label: "Traits", options: traits.map((item) => ({ label: item.name, value: item.name })) }]
-  return userGroupId ?
-    [...formatOptions, { label: "Custom Field", options: customFields.map((item) => ({ label: item.name, value: item.name })) }] : formatOptions;
-}
+  const formatOptions = [
+    options,
+    { label: "Traits", options: traits.map((item) => ({ label: item.name, value: item.name })) }
+  ];
+  return userGroupId
+    ? [
+        ...formatOptions,
+        {
+          label: "Custom Field",
+          options: customFields.map((item) => ({ label: item.name, value: item.name }))
+        }
+      ]
+    : formatOptions;
+};
 
-export default function Fields({ name, fieldMapping, showMapping, setShowMapping, observationConfig }) {
+export default function Fields({
+  name,
+  fieldMapping,
+  showMapping,
+  setShowMapping,
+  observationConfig
+}) {
   const { t } = useTranslation();
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
   const { currentGroup } = useGlobalState();
@@ -86,7 +100,11 @@ export default function Fields({ name, fieldMapping, showMapping, setShowMapping
                     <SelectInputField
                       name={`columnsMapping.${index}.fieldKey`}
                       label={t("common:actions.flag.category")}
-                      options={formatOptions(OBSERVATION_FIELDS, observationConfig, currentGroup?.id)}
+                      options={formatOptions(
+                        OBSERVATION_FIELDS,
+                        observationConfig,
+                        currentGroup?.id
+                      )}
                     />
                   </Td>
                 ))}

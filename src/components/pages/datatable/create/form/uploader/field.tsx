@@ -12,7 +12,7 @@ export interface IDropzoneProps {
   name: string;
   showMapping: boolean;
   setFieldMapping: any;
-  observationConfig: any
+  observationConfig: any;
   setShowMapping: any;
   fieldMapping: any;
   mb?: number;

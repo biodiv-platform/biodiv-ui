@@ -1,4 +1,5 @@
 {
+  "accepted_name": "Anarana ekena",
   "audio": {
     "start": "Atombohy ny firaketana",
     "stop": "Ajanony ny firaketana an-tsoratra",
@@ -33,6 +34,7 @@
   "find_gmaps": "Mikaroka avy amin'ny Google Maps",
   "from_url": "YouTube",
   "geoentities": "Mikaroka avy amin'ny tany",
+  "gmaps": "Manaova sary polygon",
   "language": "Fiteny",
   "license": "Mombamomba ny mpanoratra",
   "location_accuracy_options": {
@@ -55,6 +57,7 @@
   "name": "Anarana",
   "notes": "-tsoratra",
   "place": "Place",
+  "search_point": "Teboka fikarohana",
   "selected_media": "Media voafantina",
   "selected_places": "Toerana voafantina",
   "species_groups": "Vondrona karazana",
