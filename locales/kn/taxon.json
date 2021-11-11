@@ -15,7 +15,8 @@
     "order": "ಆದೇಶ",
     "phylum": "ಫೈಲಮ್",
     "root": "ಬೇರು",
-    "species": "ಜಾತಿಗಳು"
+    "species": "ಜಾತಿಗಳು",
+    "subgenus": "ಉಪಜಾತಿ"
   },
   "modal": {
     "activity": "ಚಟುವಟಿಕೆ",

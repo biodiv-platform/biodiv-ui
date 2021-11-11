@@ -15,7 +15,8 @@
     "order": "ஒழுங்கு",
     "phylum": "பைலியம்",
     "root": "வேர்",
-    "species": "இனங்கள்"
+    "species": "இனங்கள்",
+    "subgenus": "துணை இனம்"
   },
   "modal": {
     "activity": "செயல்பாடு",

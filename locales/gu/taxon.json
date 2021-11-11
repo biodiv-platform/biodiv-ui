@@ -15,7 +15,8 @@
     "order": "ઓર્ડર",
     "phylum": "ફાયલમ",
     "root": "રુટ",
-    "species": "પ્રજાતિઓ"
+    "species": "પ્રજાતિઓ",
+    "subgenus": "સબજીનસ"
   },
   "modal": {
     "activity": "પ્રવૃત્તિ",

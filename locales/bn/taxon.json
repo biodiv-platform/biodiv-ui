@@ -15,7 +15,8 @@
     "order": "আদেশ",
     "phylum": "ফিলাম",
     "root": "শিকড়",
-    "species": "প্রজাতি"
+    "species": "প্রজাতি",
+    "subgenus": "সাবজেনাস"
   },
   "modal": {
     "activity": "কার্যকলাপ",
