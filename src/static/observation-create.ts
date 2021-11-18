@@ -44,6 +44,7 @@ export const ASSET_TYPES = {
 };
 
 export const OBSERVATION_FIELDS = {
+ 
   options: [
     {
       label: "Species Group",
