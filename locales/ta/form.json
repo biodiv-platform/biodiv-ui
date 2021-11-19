@@ -34,6 +34,7 @@
   "find_gmaps": "Google Maps இல் இருந்து தேடலாம்",
   "from_url": "வலைஒளி",
   "geoentities": "நிலப்பரப்புகளில் இருந்து தேடலாம்",
+  "gmaps": "பலகோணத்தை வரையவும்",
   "language": "மொழி. மொழி",
   "license": "உரிமம்",
   "location_accuracy_options": {
@@ -56,6 +57,7 @@
   "name": "பெயர்",
   "notes": "குறிப்புகள்",
   "place": "இடம்",
+  "search_point": "தேடல் புள்ளி",
   "selected_media": "தேர்ந்தெடுக்கப்பட்ட ஊடக",
   "selected_places": "தேர்ந்தெடுக்கப்பட்ட இடங்கள்",
   "species_groups": "இனங்கள் குழுக்கள்",

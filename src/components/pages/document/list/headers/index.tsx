@@ -56,7 +56,7 @@ export default function ListHeader() {
         </Stack>
       </Flex>
 
-      {documentData && documentData.n > 0 && (
+      {documentData && documentData.n > -1 && (
         <Text color="gray.600" mb={4}>
           {format(documentData.n)} {t("document:documents_found")}
         </Text>

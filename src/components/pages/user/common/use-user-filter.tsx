@@ -7,11 +7,6 @@ import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect } from "react";
 import { useImmer } from "use-immer";
 
-const deDupeUserListData = (current, latest) => {
-  const existingIDs = current.map(({ id }) => id);
-  return latest.filter(({ id }) => !existingIDs.includes(id));
-};
-
 export interface UserListData {
   l: any[];
   ag: any;
@@ -68,7 +63,7 @@ export function UserListContextProvider(props: UserListContextProps) {
       );
       setuserListData((_draft) => {
         if (data?.userList?.length) {
-          _draft.l.push(...deDupeUserListData(_draft.l, data.userList));
+          _draft.l.push(...data.userList);
           _draft.hasMore =
             data.totalCount > filter?.f?.offset && data?.totalCount !== _draft.l.length;
           _draft.ag = data.aggregationData;

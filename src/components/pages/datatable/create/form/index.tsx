@@ -1,5 +1,6 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
+import FormDebugger from "@components/form/debugger";
 import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -50,13 +51,17 @@ export default function DataTableCreateForm({
         basisOfData: Yup.string().required(),
         basisOfRecord: Yup.string().required(),
 
-        observedDateRange: Yup.array(),
         project: Yup.string(),
         methods: Yup.string(),
         isVerified: Yup.boolean(),
 
         // Date and Location
         dateAccuracy: Yup.string().required(),
+        observedDateRange: Yup.array().when("dateAccuracy", {
+          is: "UNKNOWN",
+          then: Yup.array().nullable(),
+          otherwise: Yup.array().min(1).required("Enter observed date")
+        }),
         locationScale: Yup.string().required(),
         topologyData: Yup.array()
           .required()
@@ -181,6 +186,7 @@ export default function DataTableCreateForm({
         <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
         <CheckboxField name="terms" label={t("form:terms")} />
         <SubmitButton leftIcon={<CheckIcon />}>{t("datatable:add")}</SubmitButton>
+        <FormDebugger />
       </form>
     </FormProvider>
   );

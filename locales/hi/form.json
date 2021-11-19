@@ -34,6 +34,7 @@
   "find_gmaps": "Google मानचित्र से खोजें",
   "from_url": "यूट्यूब",
   "geoentities": "परिदृश्य से खोजें",
+  "gmaps": "बहुभुज ड्रा करें",
   "language": "भाषा",
   "license": "लाइसेंस",
   "location_accuracy_options": {
@@ -56,6 +57,7 @@
   "name": "नाम",
   "notes": "टिप्पणियाँ",
   "place": "जगह",
+  "search_point": "खोज बिंदु",
   "selected_media": "चयनित मीडिया",
   "selected_places": "चयनित स्थान",
   "species_groups": "प्रजाति समूह",
@@ -81,6 +83,6 @@
     "uploading": "अपलोड कर रहा है ..."
   },
   "use_in_observation": "चयनित का उपयोग करें",
-  "wkt": "WKT",
+  "wkt": "वाली WKT-",
   "youtube_placeholder": "इनपुट यूट्यूब लिंक"
 }

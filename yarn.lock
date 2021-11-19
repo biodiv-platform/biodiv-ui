@@ -978,11 +978,6 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.1.tgz#9daf5745156fd84b8e9889a2dc721f0c58e894aa"
   integrity sha512-CAEbWH7OIur6jEOzaai83jq3FmKmv4PmX1JYfs9IrYcGEVI/lyL1EXJGCj7eFVJ0bg5QR8LMxBlEtA+xKiLpFw==
 
-"@hookform/resolvers@2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.8.2.tgz#590dcc23212a659bad08212138261c3950ef09f1"
-  integrity sha512-oDTGrm7yHxT4VIv4kJcfjvWvozCbdcL0/jrpbAkeo39FYn78XnKOrrGTNmrXdfu+EQVkNIdZ47IYRFManZ4jUA==
-
 "@hookform/resolvers@2.8.3":
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.8.3.tgz#d362360f6057bcca7318ad22d49e5f0c47290e27"
@@ -1002,58 +997,58 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@ibp/naksha-commons@3.10.22":
-  version "3.10.22"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.10.22.tgz#508d4bbe2fa74872d2e66452cd3e3f5850f85a99"
-  integrity sha512-KpEbofzfOFLnCCRpGv3tFcRPMVIEc/vlKJ0Ybmdd3PMT7aaEO6YiOq0B94UptEN7tOILWPw5APnvohLQm4bcXQ==
+"@ibp/naksha-commons@3.11.0":
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.11.0.tgz#d05f392f7ab52b2e972590f4547c476a2d75bf1a"
+  integrity sha512-YA/K/O8zU6k/vPefElAXmOODFiOVuEddnoUBJTQRCJ5KlAHwcRLihEkuyPEolKyoHb+JqhITuHJyEft60z+Bpg==
 
-"@ibp/naksha-gmaps-draw@3.10.22":
-  version "3.10.22"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.10.22.tgz#a0b5255d4c2ea0588b627dcdf6c60822233115fc"
-  integrity sha512-CmrvbDnxIUsB+qSb8EuiinlaqQGMbhMpWg3bpwSbIpfmm2R13CVmqccyyDgbu6o5tVFVnY6x1o+7dXfPtgJEJw==
+"@ibp/naksha-gmaps-draw@3.11.2":
+  version "3.11.2"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.11.2.tgz#0ce9bf4adf40ccaf3374e22a86c7781c4126cfa9"
+  integrity sha512-ulocVLyj+ei2sR92NwHIcpoXKC0HKPeZHNeh4KjsVgLScZlTkFxRqRia6SKjkDXp6rFvBxbeJ0b9bKoesrt6SA==
   dependencies:
-    "@ibp/naksha-commons" "3.10.22"
+    "@ibp/naksha-commons" "3.11.0"
     "@turf/bbox" "^6.5.0"
 
-"@ibp/naksha-mapbox-draw@3.10.22":
-  version "3.10.22"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.10.22.tgz#9f8d995c1ce536f5cc667f4ee67cbcbefcc57bea"
-  integrity sha512-qJqvVf2FSbxNqO84ZzDcbn8qHXTz4BqlqKfsMB0rqiBdTaDiEp2j6roKmDm3VMtFZpQleNaH7FtGKsJQJyKQzw==
+"@ibp/naksha-mapbox-draw@3.11.2":
+  version "3.11.2"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.11.2.tgz#22dc6bcefb85d40086e88f260a4a5b56fba5a567"
+  integrity sha512-jd27Z1YNLR4qIMGKsQRH+bp2457KrciN8WV2dX2L4BppdTy01YmszFP7+4LnWhwksWETqaP6jObNz2i6QlnhhQ==
   dependencies:
-    "@ibp/naksha-commons" "3.10.22"
+    "@ibp/naksha-commons" "3.11.0"
 
-"@ibp/naksha-mapbox-list@3.10.24":
-  version "3.10.24"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.10.24.tgz#442a92d9d2dd387d5e5a09f6903d269a85b5dab7"
-  integrity sha512-6KqavSvvfb2fzy1rsOf7hp0iccGdN8HiVlKbm2xXPtYQO6Ld1s1FzeLvj88edkXRy7TfmUnSt7sCR3XAHveRSQ==
+"@ibp/naksha-mapbox-list@3.11.2":
+  version "3.11.2"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.11.2.tgz#11e0019436ffc1cce7157c67abdc25e0be0bdf55"
+  integrity sha512-U2qRoCJQpcpGrSH83w5aBiLvmYvC0tToLGhi1dhIn+pHx5AW+dbr1QyP60QZjVy5mrmrIUXTGpYATSJps/F4pQ==
   dependencies:
-    "@ibp/naksha-commons" "3.10.22"
+    "@ibp/naksha-commons" "3.11.0"
     "@turf/bbox" "^6.5.0"
-    boundingbox "^1.2.5"
+    boundingbox "^1.3.0"
     colorbrewer "^1.5.1"
     geohash "^0.0.1"
     react-gbus "^1.1.2"
     react-highlighter "^0.4.3"
     redaxios "^0.4.1"
-    ts-debounce "^3.0.0"
+    ts-debounce "^4.0.0"
 
-"@ibp/naksha-mapbox-view@3.10.22":
-  version "3.10.22"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.10.22.tgz#fb616d4d8ef96bf23e9af5dc2fafde7b729bbffd"
-  integrity sha512-cY9y36iMeF3uP7g0tvLhcSk0Q9BTXb9GMYE2dXAF5Mb5bZToVuw9X0u3k8mYDh58cJ+Ybah8C/sbouCZ9iRSfw==
+"@ibp/naksha-mapbox-view@3.11.3":
+  version "3.11.3"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.11.3.tgz#3c0f7e0c9b3d651c1b73b2a16b7f63a22180068d"
+  integrity sha512-lDnTzUAk7iRXT3yIlmRPWAA2qXBm/nWXkT+I8LsUothRhs14XHc6XeqJW9z2pXt2die8ba/CTnCKJDwdRy+ecw==
   dependencies:
-    "@ibp/naksha-commons" "3.10.22"
+    "@ibp/naksha-commons" "3.11.0"
 
-"@ibp/naksha-upload@3.10.25":
-  version "3.10.25"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.10.25.tgz#70e8b764dd690817df6c2308ad573c09510e1de7"
-  integrity sha512-DkuddQczKxC9SRg8VeD+iGdAWvWeqd8OEd1SVbdx5CAeoQQfl9+JmXlfi+61ZNIq0IejSerJmYUr5BdcUtkbYA==
+"@ibp/naksha-upload@3.11.2":
+  version "3.11.2"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.11.2.tgz#bfaa9c8d90b9a6eb348ccfbeab8d0d8ba9f55ba4"
+  integrity sha512-cy5BX1kar2aIMeYG+HXfoweIlCW59XLwrxymNPP/s/5nuzNa4vE9/6+Fpa8JUkn1RqrR0zqt1TBa7xQ71spI8Q==
   dependencies:
-    "@hookform/resolvers" "2.8.2"
-    "@ibp/naksha-commons" "3.10.22"
+    "@hookform/resolvers" "2.8.3"
+    "@ibp/naksha-commons" "3.11.0"
     react-dropzone "^11.4.2"
-    react-hook-form "^7.18.0"
-    react-multi-select-component "^4.1.13"
+    react-hook-form "^7.19.5"
+    react-multi-select-component "^4.1.14"
     shapefile "^0.6.6"
     yup "^0.32.11"
 
@@ -3861,10 +3856,10 @@ boring-avatars@^1.5.8:
   resolved "https://registry.yarnpkg.com/boring-avatars/-/boring-avatars-1.5.8.tgz#736e4e99c2390724f31dbc9175a18ac6b52f8c55"
   integrity sha512-Xy9+6UcdwLZ0JDrzY2r0hYZXnQS9ZJRHcW8TdfnBfFcjTq7UfCC7N8g7tu7GD90RCp6XHbzTuJ1QKoK4djcWPA==
 
-boundingbox@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/boundingbox/-/boundingbox-1.2.5.tgz#530b8ae1b2b4c061f778514fbd4a02aa9915fb51"
-  integrity sha512-/rQl2manDAm2KIjPIvAsK6SAvz5GEG+wM+pYOqdliTiJ2LQlTOMOEGk2ww8pjEdWpsgbdlzbPbdyAorLEsBfCw==
+boundingbox@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/boundingbox/-/boundingbox-1.3.0.tgz#31bdecbc3815f5dc1ef6cf63e0eb118dad650e3d"
+  integrity sha512-Hz8yDdG5JAXDdaVmjeB8AxK1KSTrom+/BCpPShPDWDda3HLaBnkOxZ8FAQ/w9B1Td8VT9BoEGTbRNZz/jP9lgA==
   dependencies:
     geojson-bounds "^1.0.2"
     haversine "^1.1.1"
@@ -6517,17 +6512,17 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.10.25:
-  version "3.10.25"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.10.25.tgz#a8cee5ba0fb8773776278b7c03348ec094c1796d"
-  integrity sha512-fd4wZsHPohxjqUGKFjUBl5ouygvVeGAFatj3h1Sfktz0AVQGrPixWb+D7NAvHUJ6S3Z8wMg3VdrlF7IBa934SQ==
+naksha-components-react@^3.11.3:
+  version "3.11.3"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.11.3.tgz#28608f73751ecc9fb5a8cbdf3ca34c743b93295b"
+  integrity sha512-8vOx07RTMfItC2C5W16CnMSSZCyEKKd+Qfdxt8xMfjOQ7jav1vKm0uDSztMtPWvoJ4Qc0+Y02pYv4KrIg5gpOg==
   dependencies:
-    "@ibp/naksha-commons" "3.10.22"
-    "@ibp/naksha-gmaps-draw" "3.10.22"
-    "@ibp/naksha-mapbox-draw" "3.10.22"
-    "@ibp/naksha-mapbox-list" "3.10.24"
-    "@ibp/naksha-mapbox-view" "3.10.22"
-    "@ibp/naksha-upload" "3.10.25"
+    "@ibp/naksha-commons" "3.11.0"
+    "@ibp/naksha-gmaps-draw" "3.11.2"
+    "@ibp/naksha-mapbox-draw" "3.11.2"
+    "@ibp/naksha-mapbox-list" "3.11.2"
+    "@ibp/naksha-mapbox-view" "3.11.3"
+    "@ibp/naksha-upload" "3.11.2"
 
 nanoclone@^0.2.1:
   version "0.2.1"
@@ -7522,15 +7517,15 @@ react-highlighter@^0.4.3:
     escape-string-regexp "^1.0.5"
     prop-types "^15.6.0"
 
-react-hook-form@^7.18.0:
-  version "7.18.0"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.18.0.tgz#2ba847096be0209e1f6e4d82e7168a037a2fe103"
-  integrity sha512-aTFs1jXGvpBBv4vYuhheVd9KbAZw/l3DOZhLIadNDyFddaDQmn+yJa63IZ14GDFz4NFgIi+ROkubfGJG2x6q2Q==
-
 react-hook-form@^7.19.0:
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.19.0.tgz#8549d33988be48157769d5d6788a05bef2d8ea07"
   integrity sha512-imJZIjqaDo12CrcMctK88PdNvl9CweS2QAsH/aZqxzJc/JIpvaBpaoYFdnBVs58imGm8drQ9+cM0vRK+HglN3w==
+
+react-hook-form@^7.19.5:
+  version "7.19.5"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.19.5.tgz#cc6087419facf2fb57d47d5b0d4a8ca63201298f"
+  integrity sha512-+M9gd0nWWASuEitf5PQGOGNElnHknzY3rGISrPDXwsOmZb7c/jyvkRUqk4OJXaZit1ZwesSv+EysttdAeFEfmw==
 
 react-infinite-scroll-component@^6.1.0:
   version "6.1.0"
@@ -7603,10 +7598,10 @@ react-mentions@^4.3.0:
     prop-types "^15.5.8"
     substyle "^9.1.0"
 
-react-multi-select-component@^4.1.13:
-  version "4.1.13"
-  resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-4.1.13.tgz#d0f57d5df386f40496ea82208be74323106ad9b7"
-  integrity sha512-+pCqnW7wsoQSGEVChWNg/8hmHoza8cvkzBoVXzo1a9pYI/Cp0onOyJ1yyqNvE62y5EIpTwsnD/qFgljZQwxG6A==
+react-multi-select-component@^4.1.14:
+  version "4.1.14"
+  resolved "https://registry.yarnpkg.com/react-multi-select-component/-/react-multi-select-component-4.1.14.tgz#3a1bbdec3eb0ba68a51608c1e455496ac0b0bfe3"
+  integrity sha512-pAameZYTdm0D0Ivgd/nzFZOOfE7ES8lHOphMSvZ3EDfsMJtLTaRubzefC86yXelZW4YigAQquQhKmhGLcjGU1g==
 
 react-phone-number-input@^3.1.38:
   version "3.1.38"
@@ -8629,10 +8624,10 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-ts-debounce@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ts-debounce/-/ts-debounce-3.0.0.tgz#9beedf59c04de3b5bef8ff28bd6885624df357be"
-  integrity sha512-7jiRWgN4/8IdvCxbIwnwg2W0bbYFBH6BxFqBjMKk442t7+liF2Z1H6AUCcl8e/pD93GjPru+axeiJwFmRww1WQ==
+ts-debounce@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ts-debounce/-/ts-debounce-4.0.0.tgz#33440ef64fab53793c3d546a8ca6ae539ec15841"
+  integrity sha512-+1iDGY6NmOGidq7i7xZGA4cm8DAa6fqdYcvO5Z6yBevH++Bdo9Qt/mN0TzHUgcCcKv1gmh9+W5dHqz8pMWbCbg==
 
 ts-dedent@^2.0.0:
   version "2.1.1"

@@ -10,9 +10,10 @@ import {
   Tabs
 } from "@chakra-ui/react";
 import WKT, { WKTProps } from "@components/@core/WKT";
-import WKTSearch from "@components/@core/WKT/search";
+import GmapsWktLocationPicker from "@components/@core/WKT/gmaps-wkt";
 import WKTDrawViewer from "@components/@core/WKT/wkt-draw-viewer";
 import WKTList from "@components/@core/WKT/wkt-list";
+import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
@@ -20,6 +21,7 @@ import { useController } from "react-hook-form";
 interface WKTInputProps extends Omit<WKTProps, "onSave"> {
   isMultiple?;
   canDraw?;
+  gMapTab: boolean;
 }
 
 export default function WKTFieldMulti(props: WKTInputProps) {
@@ -47,26 +49,35 @@ export default function WKTFieldMulti(props: WKTInputProps) {
       <Box mb={props.mb || 4}>
         <FormLabel>{props.label}</FormLabel>
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
-          <Tabs isLazy={true}>
+          <Tabs defaultIndex={SITE_CONFIG.WKT.DEFAULT_TAB || 2} isLazy={true}>
             <TabList>
-              <Tab>{t("form:geoentities")}</Tab>
-              <Tab>{t("form:wkt")}</Tab>
+              <Tab>{t("form:gmaps")}</Tab>
+              <Tab>{t("form:search_point")}</Tab>
             </TabList>
+            <Box>
+              {value.length > 0 && (
+                <Box>
+                  <Box px={4} pt={2} pb={2}>
+                    {t("form:selected_places")}
+                  </Box>
+                  <WKTList list={value} onDelete={handleOnDelete} {...props} />
+                </Box>
+              )}
+            </Box>
             <TabPanels>
-              <TabPanel>
-                <WKTSearch {...props} isDisabled={isDisabled} onSave={handleOnSave} />
-              </TabPanel>
               <TabPanel>
                 <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} />
               </TabPanel>
+              <TabPanel>
+                <GmapsWktLocationPicker
+                  {...props}
+                  label={t("form:coverage.place")}
+                  disabled={isDisabled}
+                  onSave={handleOnSave}
+                />
+              </TabPanel>
             </TabPanels>
           </Tabs>
-          <Box>
-            <Box px={4} pb={2}>
-              {t("form:selected_places")}
-            </Box>
-            <WKTList list={value} onDelete={handleOnDelete} {...props} />
-          </Box>
         </Box>
       </Box>
       <FormErrorMessage children={JSON.stringify(fieldState?.error?.message)} />

@@ -34,6 +34,7 @@
   "find_gmaps": "Google नकाशे पासून शोधा",
   "from_url": "YouTube",
   "geoentities": "Landscapes पासून शोधा",
+  "gmaps": "बहुभुज काढा",
   "language": "इंग्रजी",
   "license": "परवाना",
   "location_accuracy_options": {
@@ -56,6 +57,7 @@
   "name": "नाव",
   "notes": "नोट्स",
   "place": "जागा",
+  "search_point": "शोध बिंदू",
   "selected_media": "निवडलेले माध्यम",
   "selected_places": "निवडलेली ठिकाणे",
   "species_groups": "प्रजाती गट",
