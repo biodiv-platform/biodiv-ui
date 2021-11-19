@@ -49,7 +49,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
       <Box mb={props.mb || 4}>
         <FormLabel>{props.label}</FormLabel>
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
-          <Tabs defaultIndex={SITE_CONFIG.WKT.DEFAULT_TAB || 2} isLazy={true}>
+          <Tabs defaultIndex={SITE_CONFIG?.WKT?.DEFAULT_TAB} isLazy={true}>
             <TabList>
               <Tab>{t("form:gmaps")}</Tab>
               <Tab>{t("form:search_point")}</Tab>
