@@ -997,32 +997,40 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@ibp/naksha-commons@3.11.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.11.0.tgz#d05f392f7ab52b2e972590f4547c476a2d75bf1a"
-  integrity sha512-YA/K/O8zU6k/vPefElAXmOODFiOVuEddnoUBJTQRCJ5KlAHwcRLihEkuyPEolKyoHb+JqhITuHJyEft60z+Bpg==
+"@ibp/naksha-commons@3.12.2":
+  version "3.12.2"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.12.2.tgz#dfad88da330e6d9f042261703567cc21d60b44a5"
+  integrity sha512-obz3HpE6AjGNZIi4sY34K+UQBvaJauQcpG4lNv1jAseUQEligudklnkzh5HTw0etF0BgtOBgv19oCCdEt0UTPw==
 
-"@ibp/naksha-gmaps-draw@3.11.2":
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.11.2.tgz#0ce9bf4adf40ccaf3374e22a86c7781c4126cfa9"
-  integrity sha512-ulocVLyj+ei2sR92NwHIcpoXKC0HKPeZHNeh4KjsVgLScZlTkFxRqRia6SKjkDXp6rFvBxbeJ0b9bKoesrt6SA==
+"@ibp/naksha-gmaps-draw@3.12.5":
+  version "3.12.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.12.5.tgz#4ed88cf4cf5ceda35913cfd84ed1bce6560c9c2c"
+  integrity sha512-2Q4ZBZvFrgPUMkparPx7EnlebJhbGp5+T5U3NqHnrP1MocM/MNVo9tB+qsEKTrVbUFJUwdpUU9hV3UR3wrXd7Q==
   dependencies:
-    "@ibp/naksha-commons" "3.11.0"
+    "@ibp/naksha-commons" "3.12.2"
     "@turf/bbox" "^6.5.0"
 
-"@ibp/naksha-mapbox-draw@3.11.2":
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.11.2.tgz#22dc6bcefb85d40086e88f260a4a5b56fba5a567"
-  integrity sha512-jd27Z1YNLR4qIMGKsQRH+bp2457KrciN8WV2dX2L4BppdTy01YmszFP7+4LnWhwksWETqaP6jObNz2i6QlnhhQ==
+"@ibp/naksha-gmaps-view@3.12.3":
+  version "3.12.3"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-view/-/naksha-gmaps-view-3.12.3.tgz#aa1c3d41eff996cb26aa55b45241d56993e85f73"
+  integrity sha512-0pkBE4b59WVk4qwqLdKt4v+emz6iuPa4Mpt3IW40SkU8un+KkYdCDfnR8j0aW0zNrXONkDWKXKOF7IfL/SWECQ==
   dependencies:
-    "@ibp/naksha-commons" "3.11.0"
+    "@ibp/naksha-commons" "3.12.2"
+    "@turf/bbox" "^6.5.0"
 
-"@ibp/naksha-mapbox-list@3.11.2":
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.11.2.tgz#11e0019436ffc1cce7157c67abdc25e0be0bdf55"
-  integrity sha512-U2qRoCJQpcpGrSH83w5aBiLvmYvC0tToLGhi1dhIn+pHx5AW+dbr1QyP60QZjVy5mrmrIUXTGpYATSJps/F4pQ==
+"@ibp/naksha-mapbox-draw@3.12.3":
+  version "3.12.3"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-3.12.3.tgz#0b2d28e71656e8b39cff76bbb6bcd3542b13bf22"
+  integrity sha512-e+TfSO+ROUZdA+c/ZHjurgg1pnL0YixMSQz+8Oumn2wXF1ndUGWv2TmJo3ULfs98NevM8flN1hzoG5dJmO3ELg==
   dependencies:
-    "@ibp/naksha-commons" "3.11.0"
+    "@ibp/naksha-commons" "3.12.2"
+
+"@ibp/naksha-mapbox-list@3.12.3":
+  version "3.12.3"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-3.12.3.tgz#73f4cef8340e1b592738ca2ebc917c1e3ba8bf4a"
+  integrity sha512-9H7xLNERMJQ+0IxVofnz8AVK2AYrfEtc4EU8oJ4TbW4/IiLktzqNeOS6be4dAnaSQAqxS/z+V7h1sr4zrTxtdg==
+  dependencies:
+    "@ibp/naksha-commons" "3.12.2"
     "@turf/bbox" "^6.5.0"
     boundingbox "^1.3.0"
     colorbrewer "^1.5.1"
@@ -1032,20 +1040,20 @@
     redaxios "^0.4.1"
     ts-debounce "^4.0.0"
 
-"@ibp/naksha-mapbox-view@3.11.3":
-  version "3.11.3"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.11.3.tgz#3c0f7e0c9b3d651c1b73b2a16b7f63a22180068d"
-  integrity sha512-lDnTzUAk7iRXT3yIlmRPWAA2qXBm/nWXkT+I8LsUothRhs14XHc6XeqJW9z2pXt2die8ba/CTnCKJDwdRy+ecw==
+"@ibp/naksha-mapbox-view@3.12.3":
+  version "3.12.3"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-3.12.3.tgz#b841a055d9eb5b205c35d852b6b2ac246682c8cf"
+  integrity sha512-VzWSr5gEuOqqJkUt0rl5AokWnGpPe1wYBnECfyIUMpddGmEpq5M6sfU28hvK11A0VBQ2FHiHEqy+9a39787XXw==
   dependencies:
-    "@ibp/naksha-commons" "3.11.0"
+    "@ibp/naksha-commons" "3.12.2"
 
-"@ibp/naksha-upload@3.11.2":
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.11.2.tgz#bfaa9c8d90b9a6eb348ccfbeab8d0d8ba9f55ba4"
-  integrity sha512-cy5BX1kar2aIMeYG+HXfoweIlCW59XLwrxymNPP/s/5nuzNa4vE9/6+Fpa8JUkn1RqrR0zqt1TBa7xQ71spI8Q==
+"@ibp/naksha-upload@3.12.3":
+  version "3.12.3"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-upload/-/naksha-upload-3.12.3.tgz#5eb5511a36417245406b0cdf4ce01a9239a42f68"
+  integrity sha512-0cbFl2i7F2Id2spD3ssD/5uIO7vfR1iiHg/mhFvoeKLL6sY19athQSq94EH6ThxVEsv3BG7ALiKCjgCe2I8zSg==
   dependencies:
     "@hookform/resolvers" "2.8.3"
-    "@ibp/naksha-commons" "3.11.0"
+    "@ibp/naksha-commons" "3.12.2"
     react-dropzone "^11.4.2"
     react-hook-form "^7.19.5"
     react-multi-select-component "^4.1.14"
@@ -6512,17 +6520,18 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.11.3:
-  version "3.11.3"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.11.3.tgz#28608f73751ecc9fb5a8cbdf3ca34c743b93295b"
-  integrity sha512-8vOx07RTMfItC2C5W16CnMSSZCyEKKd+Qfdxt8xMfjOQ7jav1vKm0uDSztMtPWvoJ4Qc0+Y02pYv4KrIg5gpOg==
+naksha-components-react@^3.12.5:
+  version "3.12.5"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.12.5.tgz#3d36e8aee897ccfc4a7d40e24a08f7f34a35f767"
+  integrity sha512-W4Y5JIB4mlT2Qvjncj1kRM3ak03+hbtxhNeHOxSu3UUMRdvP51+t74nUJxFo/36vzQ4ZgAQPwLbDGXvGu5bK9w==
   dependencies:
-    "@ibp/naksha-commons" "3.11.0"
-    "@ibp/naksha-gmaps-draw" "3.11.2"
-    "@ibp/naksha-mapbox-draw" "3.11.2"
-    "@ibp/naksha-mapbox-list" "3.11.2"
-    "@ibp/naksha-mapbox-view" "3.11.3"
-    "@ibp/naksha-upload" "3.11.2"
+    "@ibp/naksha-commons" "3.12.2"
+    "@ibp/naksha-gmaps-draw" "3.12.5"
+    "@ibp/naksha-gmaps-view" "3.12.3"
+    "@ibp/naksha-mapbox-draw" "3.12.3"
+    "@ibp/naksha-mapbox-list" "3.12.3"
+    "@ibp/naksha-mapbox-view" "3.12.3"
+    "@ibp/naksha-upload" "3.12.3"
 
 nanoclone@^0.2.1:
   version "0.2.1"
