@@ -18,6 +18,7 @@ interface BasicInfoProps {
   documentTypes;
   setBibField;
   canImport?: boolean;
+  showTags?: boolean;
   licensesList;
 }
 
@@ -25,6 +26,7 @@ export default function BasicInfo({
   documentTypes,
   setBibField,
   canImport,
+  showTags = true,
   licensesList
 }: BasicInfoProps) {
   const form = useFormContext();
@@ -80,7 +82,7 @@ export default function BasicInfo({
               isControlled={true}
             />
           </SimpleGrid>
-          <TagsInput />
+          {showTags && <TagsInput />}
         </div>
         <div>
           <RichTextareaField name="bibFieldData.abstract" label={t("document:description")} />

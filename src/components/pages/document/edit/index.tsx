@@ -37,23 +37,21 @@ export default function DocumentEditPageComponent({
         itemTypeId: Yup.number().required(),
         bibFieldData: Yup.object().shape(bibField.schema),
 
-        contribution: Yup.string(),
+        contribution: Yup.string().nullable(),
         licenseId: Yup.number().required(),
         fromDate: Yup.mixed(),
 
         ufileData: Yup.lazy((value) =>
           value
             ? Yup.object()
-                .shape({
-                  id: Yup.string().nullable(),
-                  resourceURL: Yup.string().required(),
-                  size: Yup.number().required()
-                })
-                .required()
+              .shape({
+                id: Yup.string().nullable(),
+                resourceURL: Yup.string().required(),
+                size: Yup.number().required()
+              })
+              .required()
             : Yup.mixed().notRequired()
         ),
-
-        tags: Yup.array().nullable(),
 
         docCoverageData: Yup.array().of(
           Yup.object().shape({
@@ -74,10 +72,10 @@ export default function DocumentEditPageComponent({
 
       ufileData: ufileData
         ? {
-            id: ufileData.id,
-            resourceURL: ufileData.path,
-            size: Number(ufileData.size)
-          }
+          id: ufileData.id,
+          resourceURL: ufileData.path,
+          size: Number(ufileData.size)
+        }
         : null,
 
       docCoverage: initialDocument.docCoverage
@@ -89,6 +87,7 @@ export default function DocumentEditPageComponent({
       ...values,
       documentId: initialDocument.documentId,
       attribution: initialDocument.attribution,
+      contribution: initialDocument?.contribution || "",
       rating: initialDocument.rating,
       fromDate: values.fromDate ? dateToUTC(values.fromDate) : null,
 
@@ -99,11 +98,11 @@ export default function DocumentEditPageComponent({
 
       ufileData: values.ufileData
         ? {
-            id: values.ufileData.id,
-            mimeType: "application/pdf",
-            path: values.ufileData.resourceURL,
-            size: values.ufileData.size
-          }
+          id: values.ufileData.id,
+          mimeType: "application/pdf",
+          path: values.ufileData.resourceURL,
+          size: values.ufileData.size
+        }
         : null
     };
     const { success } = await axUpdateDocument(payload);
@@ -125,6 +124,7 @@ export default function DocumentEditPageComponent({
             documentTypes={documentTypes}
             setBibField={setBibField}
             licensesList={licensesList}
+            showTags={false}
           />
           <Metadata bibFields={bibField.fields} />
           <WKTCoverage name="docCoverage" nameTopology="topologyWKT" nameTitle="placeName" />
