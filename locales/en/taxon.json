@@ -9,6 +9,7 @@
   "hierarchy": {
     "class": "Class",
     "family": "Family",
+    "subfamily":"Subfamily",
     "genus": "Genus",
     "infraspecies": "Infraspecies",
     "kingdom": "Kingdom",

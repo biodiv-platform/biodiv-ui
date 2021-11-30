@@ -16,7 +16,7 @@ const VerticalTabs = styled.div`
 
   .tabs {
     display: flex;
-    height: 15rem;
+    height: 18rem;
 
     > .tab-content {
       flex-grow: 1;

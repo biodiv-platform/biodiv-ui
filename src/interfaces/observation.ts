@@ -567,6 +567,9 @@ export interface ObservationLocationInfo {
   rainfall?: string;
   tahsil?: string;
   forestType?: string;
+  district?: string;
+  province?: string;
+  protectedAreaName?: string;
 }
 export interface ObservationMailData {
   observationId?: number; // int64

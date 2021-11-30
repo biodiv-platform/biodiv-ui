@@ -59,39 +59,37 @@ export default function InfoTab({
   const { currentGroup } = useGlobalState();
 
   return (
-    <Box p={4}>
-      {/* Title + Flag */}
-      <Flex justifyContent="space-between" mb={2}>
-        <LocalLink href={`/document/show/${document.id}`}>
-          <a>
-            <HStack alignItems="center" spacing={4}>
-              <DocumentIcon />
-              <Heading
-                fontSize="lg"
-                className="elipsis-2"
-                dangerouslySetInnerHTML={{
-                  __html: getInjectableHTML(document?.title || t("document:unknown"))
-                }}
-              />
-              <Badge colorScheme="red">{document.itemtype}</Badge>
-            </HStack>
-          </a>
-        </LocalLink>
-
-        <Box>
-          <FlagActionButton
-            resourceId={document.id}
-            resourceType="document"
-            initialFlags={flags}
-            userId={user.id}
-            flagFunc={axFlagDocument}
-            unFlagFunc={axUnFlagDocument}
-          />
-        </Box>
-      </Flex>
-
-      {/* Meta Data */}
+    <Flex direction="column" minH="18rem" justifyContent="space-between" p={4}>
       <Stack color="gray.600">
+        {/* Title + Flag */}
+        <Flex justifyContent="space-between" mb={3}>
+          <LocalLink href={`/document/show/${document.id}`}>
+            <a>
+              <HStack alignItems="center" spacing={4}>
+                <DocumentIcon />
+                <Heading
+                  fontSize="lg"
+                  className="elipsis-2"
+                  dangerouslySetInnerHTML={{
+                    __html: getInjectableHTML(document?.title || t("document:unknown"))
+                  }}
+                />
+                <Badge colorScheme="red">{document.itemtype}</Badge>
+              </HStack>
+            </a>
+          </LocalLink>
+          {/* Meta Data */}
+          <Box>
+            <FlagActionButton
+              resourceId={document.id}
+              resourceType="document"
+              initialFlags={flags}
+              userId={user.id}
+              flagFunc={axFlagDocument}
+              unFlagFunc={axUnFlagDocument}
+            />
+          </Box>
+        </Flex>
         <MetaBlock
           icon={<PeopleIcon />}
           tooltip={t("document:bib.author")}
@@ -112,40 +110,40 @@ export default function InfoTab({
           tooltip={t("document:bib.abstract")}
           children={stripTags(document?.notes)}
         />
-        <Flex alignItems="flex-end" justifyContent="space-between">
-          <Stack>
-            <MetaBlock
-              icon={<MapIcon />}
-              tooltip={t("common:habitats_covered")}
-              children={
-                habitatIds[0] ? (
-                  <FilterIconsList type="habitat" filterIds={habitatIds} filterList={habitats} />
-                ) : null
-              }
-            />
-            <MetaBlock
-              icon={<PawIcon />}
-              tooltip={t("common:species_coverage")}
-              children={
-                specieIds[0] ? (
-                  <FilterIconsList type="species" filterIds={specieIds} filterList={species} />
-                ) : null
-              }
-            />
-          </Stack>
-          <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
-            <Flex alignItems="center">
-              <Avatar
-                mr={1}
-                size="sm"
-                name={user?.name}
-                src={getUserImage(user?.profilePic, user?.name)}
-              />
-              <Text>{user?.name}</Text>
-            </Flex>
-          </Link>
-        </Flex>
       </Stack>
-    </Box>
+      <Flex alignItems="flex-end" justifyContent="space-between">
+        <Stack>
+          <MetaBlock
+            icon={<MapIcon />}
+            tooltip={t("common:habitats_covered")}
+            children={
+              habitatIds[0] ? (
+                <FilterIconsList type="habitat" filterIds={habitatIds} filterList={habitats} />
+              ) : null
+            }
+          />
+          <MetaBlock
+            icon={<PawIcon />}
+            tooltip={t("common:species_coverage")}
+            children={
+              specieIds[0] ? (
+                <FilterIconsList type="species" filterIds={specieIds} filterList={species} />
+              ) : null
+            }
+          />
+        </Stack>
+        <Link href={`${currentGroup?.webAddress}/user/show/${user?.id}`}>
+          <Flex alignItems="center">
+            <Avatar
+              mr={1}
+              size="sm"
+              name={user?.name}
+              src={getUserImage(user?.profilePic, user?.name)}
+            />
+            <Text>{user?.name}</Text>
+          </Flex>
+        </Link>
+      </Flex>
+    </Flex>
   );
 }
