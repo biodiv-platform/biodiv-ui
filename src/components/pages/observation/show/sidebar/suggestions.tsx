@@ -40,6 +40,7 @@ export default function Suggestions({
         {list?.slice(0, page * pageSize).map((o) => (
           <LocalLink
             key={o.observationId}
+            hardLink={true}
             href={`/observation/show/${o.observationId}`}
             prefixGroup={true}
           >
