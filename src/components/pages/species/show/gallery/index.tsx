@@ -3,7 +3,6 @@ import CarouselNavigation from "@components/@core/carousel/navigation";
 import CarouselResourceInfo from "@components/@core/carousel/resource-info";
 import Slide, { NoSlide } from "@components/@core/carousel/slide";
 import Thumbnails from "@components/@core/carousel/thumbnails";
-import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { ResourceType } from "@interfaces/custom";
 import { useKeenSlider } from "keen-slider/react";
 import Head from "next/head";
@@ -21,14 +20,8 @@ export default function SpeciesGallery() {
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: false,
-    slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide);
-    }
+    slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
   });
-
-  useDidUpdateEffect(() => {
-    slider.refresh();
-  }, [resources]);
 
   return (
     <Box gridColumn={{ md: "2/4" }} className="fadeInUp delay-3">
@@ -63,14 +56,14 @@ export default function SpeciesGallery() {
         {resources?.length && (
           <>
             <CarouselNavigation
-              prev={slider?.prev}
-              next={slider?.next}
+              prev={slider?.current?.prev}
+              next={slider?.current?.next}
               current={currentSlide}
               total={resources.length}
             />
             <Thumbnails
               resources={resources}
-              moveTo={slider?.moveToSlideRelative}
+              moveTo={slider?.current?.moveToIdx}
               current={currentSlide}
             />
           </>

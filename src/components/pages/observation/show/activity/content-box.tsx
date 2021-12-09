@@ -71,8 +71,8 @@ const ContentBox = ({ activity }: { activity: ShowActivityIbp }) => {
 
     case ACTIVITY_TYPE.FLAGGED:
     case ACTIVITY_TYPE.FLAG_REMOVED:
-      const desc = activity?.activityIbp?.activityDescription;
-      const [flagType, flagInfo]: any = desc?.split(/:(.+)/);
+      const desc = activity?.activityIbp?.activityDescription || ":";
+      const [flagType, flagInfo]: any = desc.split(/:(.+)/);
       const html = `${t(`common:actions.flag.flags.${flagType.toLowerCase()}`)}: ${flagInfo}`;
       return <CommentRender html={html} />;
 

@@ -2,7 +2,7 @@ import { useLocalRouter } from "@components/@core/local-link";
 import { removeCache, removeCookies } from "@utils/auth";
 import React, { useEffect } from "react";
 
-const SignOutPage = () => {
+const logout = () => {
   const router = useLocalRouter();
 
   const destroyAndRedirect = async () => {
@@ -22,9 +22,9 @@ const SignOutPage = () => {
   return <pre>Please Wait...</pre>;
 };
 
-SignOutPage.config = {
+logout.config = {
   header: false,
   footer: false
 };
 
-export default SignOutPage;
+export default logout;
