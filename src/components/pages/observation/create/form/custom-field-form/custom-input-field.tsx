@@ -11,6 +11,7 @@ interface IObservationCustomField {
   fieldType: string;
   isRequired?: boolean;
   dataType?: string;
+  hint?:string;
   options?;
 }
 export default function ObservationCustomFieldInput({
@@ -19,7 +20,8 @@ export default function ObservationCustomFieldInput({
   dataType,
   label,
   isRequired,
-  options
+  options,
+  hint
 }: IObservationCustomField) {
   switch (fieldType) {
     case "SINGLE CATEGORICAL":
@@ -29,6 +31,7 @@ export default function ObservationCustomFieldInput({
           label={label}
           options={options}
           isRequired={isRequired}
+          hint={hint}
           optionComponent={CustomFieldOptions}
           mb={0}
         />
@@ -39,6 +42,7 @@ export default function ObservationCustomFieldInput({
         <SelectMultipleInputField
           name={name}
           label={label}
+          hint={hint}
           isRequired={isRequired}
           optionComponent={CustomFieldOptions}
           options={options}
@@ -52,6 +56,7 @@ export default function ObservationCustomFieldInput({
           name={name}
           type={dataType === ("INTEGER" || "DECIMAL") ? "number" : "text"}
           label={label}
+          hint={hint}
           isRequired={isRequired}
           mb={0}
         />
