@@ -11,7 +11,7 @@ interface IObservationCustomField {
   fieldType: string;
   isRequired?: boolean;
   dataType?: string;
-  hint?:string;
+  hint?: string;
   options?;
 }
 export default function ObservationCustomFieldInput({

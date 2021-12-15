@@ -89,7 +89,10 @@
     "soil": "Soil",
     "tehsil": "Tehsil",
     "temperature": "Temperature",
-    "title": "Location Information"
+    "title": "Location Information",
+    "protected_area_name":"Protected Area",
+    "province":"Province",
+    "district":"District"
   },
   "location_placeholder": "Enter a location",
   "location_scale": "Location Accuracy",
