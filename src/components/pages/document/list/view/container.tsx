@@ -1,5 +1,6 @@
 import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
+import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import { actionTabs } from "@static/documnet-list";
 import { Mq } from "mq-styled-components";
@@ -118,9 +119,9 @@ export default function Container({ o }) {
                 flags={o.flag[0] ? o.flag.map((item) => ({ flag: item, user: o.userIbp })) : null}
               />
             </TabPanel>
-            <TabPanel>
+            {SITE_CONFIG.USERGROUP.ACTIVE && <TabPanel>
               <GroupTab o={o} />
-            </TabPanel>
+            </TabPanel>}
             <TabPanel>
               <TagsTab documentId={o.document.id} tags={o.tags} />
             </TabPanel>
