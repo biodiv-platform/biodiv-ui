@@ -17,7 +17,7 @@ export default function ObservationCustomFieldForm({ fields }) {
         📜 {t("observation:custom_fields")}
       </Text>
 
-      {fields.map(({ label, isRequired, fieldType, dataType, options, customFieldId }, index) => {
+      {fields.map(({ label, notes, isRequired, fieldType, dataType, options, customFieldId }, index) => {
         const fieldName = `customFields.${index}.value`;
 
         return (
@@ -28,6 +28,7 @@ export default function ObservationCustomFieldForm({ fields }) {
               fieldType={fieldType}
               dataType={dataType}
               options={options}
+              hint={notes}
               name={fieldName}
             />
             <CustomFieldLastValue id={customFieldId} name={fieldName} set={setValue} />

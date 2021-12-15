@@ -1,44 +1,51 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useKeenSlider } from "keen-slider/react";
 import Head from "next/head";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 import Sidebar from "./sidebar";
 import Slide from "./slide";
 import SlideInfo from "./slide-info";
 
 export default function CarouselNew({ featured }) {
-  const [pause, setPause] = useState(false);
-  const timer = useRef<any>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    slideChanged: (s) => setCurrentSlide(s.details().relativeSlide),
-    duration: 1000, // transition duration when slide changes
-    dragStart: () => setPause(true),
-    dragEnd: () => setPause(false)
-  });
-
-  useEffect(() => {
-    sliderRef?.current?.addEventListener("mouseover", () => setPause(true));
-    sliderRef?.current?.addEventListener("mouseout", () => setPause(false));
-  }, [sliderRef]);
-
-  /*
-   * This will be called every 4s to change slide to next
-   * unless if you are hovering over slide and next call will be skipped
-   */
-  useEffect(() => {
-    timer.current = setInterval(() => {
-      if (!pause && slider) {
-        slider.next();
+  const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
+    {
+      loop: true,
+      slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
+    },
+    [
+      (slider) => {
+        let timeout: ReturnType<typeof setTimeout>;
+        let mouseOver = false;
+        function clearNextTimeout() {
+          clearTimeout(timeout);
+        }
+        function nextTimeout() {
+          clearTimeout(timeout);
+          if (mouseOver) return;
+          timeout = setTimeout(() => {
+            slider.next();
+          }, 4000);
+        }
+        slider.on("created", () => {
+          slider.container.addEventListener("mouseover", () => {
+            mouseOver = true;
+            clearNextTimeout();
+          });
+          slider.container.addEventListener("mouseout", () => {
+            mouseOver = false;
+            nextTimeout();
+          });
+          nextTimeout();
+        });
+        slider.on("dragStarted", clearNextTimeout);
+        slider.on("animationEnded", nextTimeout);
+        slider.on("updated", nextTimeout);
       }
-    }, 4000);
-    return () => {
-      clearInterval(timer.current);
-    };
-  }, [pause, slider]);
+    ]
+  );
 
   return (
     <>
@@ -67,7 +74,7 @@ export default function CarouselNew({ featured }) {
             size={featured.length}
             resource={featured[currentSlide]}
             currentSlide={currentSlide}
-            scrollTo={slider?.moveToSlide}
+            scrollTo={iSlider?.current?.moveToIdx}
           />
         </Box>
         <Sidebar resource={featured[currentSlide]} />

@@ -2,7 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { RecoIbp } from "@interfaces/observation";
 import { useKeenSlider } from "keen-slider/react";
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 
 import CarouselNavigation from "./navigation";
 import CarouselResourceInfo from "./resource-info";
@@ -22,14 +22,12 @@ export default function CarouselObservation({
   speciesGroup,
   observationId
 }: CarouselObservationProps) {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const alt = `${reco?.commonName || ""} - ${reco?.scientificName || ""}`;
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: false,
-    slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide);
-    }
+    slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
   });
 
   return (
@@ -67,14 +65,14 @@ export default function CarouselObservation({
         {resources.length && (
           <>
             <CarouselNavigation
-              prev={slider?.prev}
-              next={slider?.next}
+              prev={slider?.current?.prev}
+              next={slider?.current?.next}
               current={currentSlide}
               total={resources.length}
             />
             <Thumbnails
               resources={resources}
-              moveTo={slider?.moveToSlideRelative}
+              moveTo={slider?.current?.moveToIdx}
               current={currentSlide}
             />
           </>

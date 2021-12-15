@@ -4,7 +4,7 @@ import { axGetHomeInfo } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-function HomePage({ homeInfo }) {
+function index({ homeInfo }) {
   return <HomePageComponent homeInfo={homeInfo} />;
 }
 
@@ -18,4 +18,4 @@ export async function getServerSideProps(ctx) {
   return { props: { homeInfo } };
 }
 
-export default HomePage;
+export default index;

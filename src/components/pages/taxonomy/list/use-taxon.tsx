@@ -73,7 +73,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
       const { data } = await axGetTaxonListData(filter.f);
       setTaxonListData((_draft) => {
         if (data?.taxonomyNameListItems) {
-          _draft.l.push(...data?.taxonomyNameListItems);
+          _draft.l.push(...(data?.taxonomyNameListItems || []));
           _draft.count = data.count;
           _draft.hasMore = data?.taxonomyNameListItems.length < LIST_PAGINATION_LIMIT;
         }
