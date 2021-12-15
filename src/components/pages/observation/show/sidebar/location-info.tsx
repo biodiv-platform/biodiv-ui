@@ -45,10 +45,11 @@ export default function LocationInformation({
         {layerInfo.temp && <Row title="TEMPERATURE">{layerInfo.temp} &deg;C</Row>}
         {layerInfo.rainfall && <Row title="RAINFALL">{layerInfo.rainfall} mm</Row>}
         {layerInfo.forestType && <Row title="FOREST_TYPE">{titleCase(layerInfo.forestType)}</Row>}
-        {layerInfo.protectedAreaName && <Row title="PROTECTED_AREA_NAME">{titleCase(layerInfo.protectedAreaName)}</Row>}
+        {layerInfo.protectedAreaName && (
+          <Row title="PROTECTED_AREA_NAME">{titleCase(layerInfo.protectedAreaName)}</Row>
+        )}
         {layerInfo.province && <Row title="PROVINCE">{titleCase(layerInfo.province)}</Row>}
         {layerInfo.district && <Row title="DISTRICT">{titleCase(layerInfo.district)}</Row>}
-
       </SimpleGrid>
     </Box>
   );

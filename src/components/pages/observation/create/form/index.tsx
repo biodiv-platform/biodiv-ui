@@ -47,7 +47,7 @@ export default function ObservationCreateForm({
   const parseDefaultCustomField = (list) => {
     return list?.map(
       ({
-        customFields: { fieldType, dataType, name,notes, id: customFieldId },
+        customFields: { fieldType, dataType, name, notes, id: customFieldId },
         isMandatory: isRequired,
         displayOrder,
         defaultValue,

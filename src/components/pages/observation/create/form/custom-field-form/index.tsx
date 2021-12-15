@@ -17,27 +17,29 @@ export default function ObservationCustomFieldForm({ fields }) {
         📜 {t("observation:custom_fields")}
       </Text>
 
-      {fields.map(({ label, notes, isRequired, fieldType, dataType, options, customFieldId }, index) => {
-        const fieldName = `customFields.${index}.value`;
+      {fields.map(
+        ({ label, notes, isRequired, fieldType, dataType, options, customFieldId }, index) => {
+          const fieldName = `customFields.${index}.value`;
 
-        return (
-          <Box mb={4} key={index}>
-            <CustomInputField
-              label={label}
-              isRequired={isRequired}
-              fieldType={fieldType}
-              dataType={dataType}
-              options={options}
-              hint={notes}
-              name={fieldName}
-            />
-            <CustomFieldLastValue id={customFieldId} name={fieldName} set={setValue} />
-            <VisuallyHidden>
-              <CheckboxField name={`customFields.${index}.isRequired`} label={label} />
-            </VisuallyHidden>
-          </Box>
-        );
-      })}
+          return (
+            <Box mb={4} key={index}>
+              <CustomInputField
+                label={label}
+                isRequired={isRequired}
+                fieldType={fieldType}
+                dataType={dataType}
+                options={options}
+                hint={notes}
+                name={fieldName}
+              />
+              <CustomFieldLastValue id={customFieldId} name={fieldName} set={setValue} />
+              <VisuallyHidden>
+                <CheckboxField name={`customFields.${index}.isRequired`} label={label} />
+              </VisuallyHidden>
+            </Box>
+          );
+        }
+      )}
 
       <Divider mb={3} />
     </Box>
