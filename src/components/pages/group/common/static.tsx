@@ -1,9 +1,7 @@
 export const STATIC_GROUP_PAYLOAD = {
-  sendDigestMail: true,
   homePage: null,
   domainName: null,
   theme: "default",
-  newFilterRule: null
 };
 
 export const DATA_TYPE = [
