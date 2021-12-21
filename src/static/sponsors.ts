@@ -8,5 +8,10 @@ export default [
     image: "cloudflare.svg",
     link: "https://www.cloudflare.com/?utm_source=indiabiodiversity&utm_medium=ibp_link&utm_campaign=ibp_landing",
     name: "cloudflare"
+  },
+  {
+    image: "1password.svg",
+    link: "https://1password.com/?utm_source=indiabiodiversity&utm_medium=ibp_link&utm_campaign=ibp_landing",
+    name: "1password"
   }
 ];
