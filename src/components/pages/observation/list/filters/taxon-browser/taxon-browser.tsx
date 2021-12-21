@@ -12,6 +12,7 @@ import TaxonSuggest from "./taxon-suggest";
 export interface TaxonBrowserProps {
   initialTaxon;
   onTaxonChange;
+  taxonFilterKey?;
 }
 
 export interface TaxonBrowserState {
@@ -69,7 +70,10 @@ export default class TaxonBrowser extends Component<TaxonBrowserProps, TaxonBrow
   onExpand = (expandedKeys) => this.setState({ expandedKeys });
   onCheck = (checkedKeys) => {
     this.setState({ checkedKeys });
-    this.props.onTaxonChange("taxon", checkedKeys?.checked?.toString());
+    this.props.onTaxonChange(
+      this.props.taxonFilterKey || "taxon",
+      checkedKeys?.checked?.toString()
+    );
   };
   setParentState = (d) => this.setState(d);
 

@@ -1,7 +1,7 @@
 export const STATIC_GROUP_PAYLOAD = {
   homePage: null,
   domainName: null,
-  theme: "default",
+  theme: "default"
 };
 
 export const DATA_TYPE = [

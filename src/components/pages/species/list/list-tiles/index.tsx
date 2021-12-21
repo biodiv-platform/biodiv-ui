@@ -14,7 +14,7 @@ export default function SpeciesList() {
       <InfiniteScroll
         dataLength={speciesData.l.length}
         next={nextPage}
-        hasMore={speciesData.hasMore}
+        hasMore={speciesData.l.length > 0 && speciesData.hasMore}
         loader={<SpeciesLoading key={0} />}
         scrollableTarget="items-container"
       >
