@@ -1,4 +1,4 @@
-import { stripSpecialCharacters } from "@utils/text";
+import { covertToSentenceCase } from "@utils/text";
 import React from "react";
 
 import useSpeciesList from "../../use-species-list";
@@ -10,19 +10,18 @@ export default function MediaFilter() {
   } = useSpeciesList();
 
   const OPTIONS = Object.keys(ag?.groupMediaType || [])?.map((val) => ({
-    label: stripSpecialCharacters(val),
+    label: covertToSentenceCase(val),
     value: val,
     stat: ag?.groupMediaType[val]
   }));
 
   return (
     <CheckboxFilterPanel
-      translateKey="filters:media.title"
+      translateKey="filters:media."
       filterKey="mediaFilter"
       options={OPTIONS}
       statKey="groupMediaType"
       skipOptionsTranslation={true}
-      showSearch={true}
     />
   );
 }

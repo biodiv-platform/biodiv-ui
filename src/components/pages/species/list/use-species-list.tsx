@@ -59,8 +59,8 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
 
       const { data } = await axGetSpeciesList(filter.f);
       setSpeciesData((_draft) => {
-        if (data?.userList?.length) {
-          _draft.l.push(...data.userList);
+        if (data?.speciesTiles?.length) {
+          _draft.l.push(...data.speciesTiles);
           _draft.hasMore =
             data.totalCount > filter?.f?.offset && data?.totalCount !== _draft.l.length;
           _draft.ag = data.aggregationData;
@@ -76,9 +76,6 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
     }
   };
 
-  useEffect(() => {
-    nextPage();
-  }, []);
 
   const nextPage = (max = 10) => {
     setFilter((_draft) => {

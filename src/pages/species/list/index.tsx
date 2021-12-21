@@ -1,6 +1,6 @@
 import SpeciesListPageComponent from "@components/pages/species/list";
+import { DEFAULT_SPECIES_FILTER } from "@components/pages/species/list/filter/clear-filter";
 import {
-  SPECIES_PAGE_SIZE,
   SpeciesListProvider
 } from "@components/pages/species/list/use-species-list";
 import { axGetAllTraitsMeta, axGetSpeciesList } from "@services/species.service";
@@ -9,11 +9,6 @@ import { axGroupList } from "@services/usergroup.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-export const DEFAULT_SPECIES_FILTER = {
-  sort: "species.dateCreated",
-  offset: 0,
-  max: 10
-};
 
 function SpeciesListPage({ speciesData, species, traits, initialFilterParams }) {
   return (
@@ -33,7 +28,6 @@ SpeciesListPage.config = {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const nextOffset = (Number(ctx.query.offset) || SPECIES_PAGE_SIZE) + SPECIES_PAGE_SIZE;
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
   const initialFilterParams = {
@@ -56,7 +50,6 @@ export const getServerSideProps = async (ctx) => {
       },
       species,
       traits,
-      nextOffset,
       initialFilterParams
     }
   };
