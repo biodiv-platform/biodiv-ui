@@ -10,7 +10,7 @@ export default function CommonNameFilter() {
       filterKey={SPECIES_FILTER_KEY.commonName.filterKey}
       filterKeyList={SPECIES_FILTER_KEY}
       useIndexFilter={useSpeciesList}
-      translateKey="filters:user.username"
+      translateKey="filters:name.common_name"
     />
   );
 }

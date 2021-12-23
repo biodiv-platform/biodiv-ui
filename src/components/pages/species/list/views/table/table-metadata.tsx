@@ -34,7 +34,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
           accessor: "reprImage",
           Cell: ({ value, cell }) => (
             <Image
-              borderRadius={50}
+              borderRadius={4}
               title={stripTags(cell.row.original.name)}
               boxSize="3rem"
               src={getResourceThumbnail(

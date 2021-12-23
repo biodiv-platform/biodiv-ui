@@ -1,11 +1,8 @@
-import GridIcon from "@icons/grid";
-import ListIcon from "@icons/list";
-
 export const SPECIES_FILTER_KEY = {
   index: "esp",
   scientificName: {
     filterKey: "scientificName",
-    searchKey: "species.title"
+    searchKey: "taxonomyDefinition.defaultHierarchy.name"
   },
   commonName: {
     filterKey: "commonName",

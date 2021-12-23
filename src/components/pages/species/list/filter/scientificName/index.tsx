@@ -10,7 +10,7 @@ export default function ScientificNameFilter() {
       filterKey={SPECIES_FILTER_KEY.scientificName.filterKey}
       filterKeyList={SPECIES_FILTER_KEY}
       useIndexFilter={useSpeciesList}
-      translateKey="filters:user.username"
+      translateKey="filters:name.title"
     />
   );
 }

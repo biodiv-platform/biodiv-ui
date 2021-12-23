@@ -72,7 +72,8 @@
       "synonym": "Synonym",
       "title": "Status"
     },
-    "title": "Scientific Name"
+    "title": "Scientific Name",
+    "common_name":"Common Name"
   },
   "rank": {
     "title": "Rank"
@@ -114,6 +115,7 @@
   "time": {
     "created_on": "Date Created",
     "last_logged": "Last Logged In",
+    "last_updated":"Last Updated",
     "max_date": "Maximum Date",
     "min_date": "Minimum Date",
     "month": {
