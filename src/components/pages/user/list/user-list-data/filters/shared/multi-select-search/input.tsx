@@ -26,7 +26,7 @@ export default function FilterMultiSelectInput({
 }: FilterMultiSelectProps) {
   const { filter, addFilter, removeFilter } = useIndexFilter();
 
-  const S:any = options?.length ? Select : AsyncSelect;
+  const S: any = options?.length ? Select : AsyncSelect;
 
   const searchKey = filterKeyList[filterKey].searchKey || filterKey;
 

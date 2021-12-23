@@ -22,7 +22,7 @@ export default function TraitsFilter() {
             <>
               <AccordionButton>
                 <Box flex={1} textAlign="left">
-                  {categoryName.replace(">", "|")}
+                  {categoryName.split(">")[1]}
                 </Box>
                 <AccordionIcon />
               </AccordionButton>

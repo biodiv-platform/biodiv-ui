@@ -2,17 +2,11 @@ import { Button } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import DeleteIcon from "@icons/delete";
+import { DEFAULT_SPECIES_FILTER } from "@static/species";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import useSpeciesList from "../use-species-list";
-
-export const DEFAULT_SPECIES_FILTER = {
-  sort: "species.dateCreated",
-  offset: 0,
-  max: 10
-};
-
 
 const FILTERS_BLACKLIST = [...Object.keys(DEFAULT_SPECIES_FILTER), "userGroupList"];
 

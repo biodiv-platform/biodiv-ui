@@ -1,14 +1,11 @@
 import SpeciesListPageComponent from "@components/pages/species/list";
-import { DEFAULT_SPECIES_FILTER } from "@components/pages/species/list/filter/clear-filter";
-import {
-  SpeciesListProvider
-} from "@components/pages/species/list/use-species-list";
+import { SpeciesListProvider } from "@components/pages/species/list/use-species-list";
 import { axGetAllTraitsMeta, axGetSpeciesList } from "@services/species.service";
 import { axGetSpeciesGroupList } from "@services/taxonomy.service";
 import { axGroupList } from "@services/usergroup.service";
+import { DEFAULT_SPECIES_FILTER } from "@static/species";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
-
 
 function SpeciesListPage({ speciesData, species, traits, initialFilterParams }) {
   return (

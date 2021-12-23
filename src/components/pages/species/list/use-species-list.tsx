@@ -56,8 +56,8 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
           _draft.l = [];
         });
       }
-
-      const { data } = await axGetSpeciesList(filter.f);
+      const { view, ...rest } = filter.f;
+      const { data } = await axGetSpeciesList({ ...rest });
       setSpeciesData((_draft) => {
         if (data?.speciesTiles?.length) {
           _draft.l.push(...data.speciesTiles);
@@ -75,7 +75,6 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
       NProgress.done();
     }
   };
-
 
   const nextPage = (max = 10) => {
     setFilter((_draft) => {

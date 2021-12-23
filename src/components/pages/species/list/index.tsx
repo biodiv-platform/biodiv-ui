@@ -3,7 +3,7 @@ import React from "react";
 
 import Filters from "./filter";
 import ListHeader from "./header";
-import ListTiles from "./list-tiles";
+import Views from "./views";
 
 export default function SpeciesListPageComponent() {
   return (
@@ -19,7 +19,7 @@ export default function SpeciesListPageComponent() {
           px={4}
         >
           <ListHeader />
-          <ListTiles />
+          <Views />
         </Box>
       </SimpleGrid>
     </Box>

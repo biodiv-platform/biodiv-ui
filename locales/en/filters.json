@@ -74,6 +74,9 @@
     },
     "title": "Scientific Name"
   },
+  "rank": {
+    "title": "Rank"
+  },
   "scientific_name": {
     "all_names": {
       "title": "All Names"
