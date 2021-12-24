@@ -2,15 +2,17 @@ import { Box, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import { RESOURCE_SIZE } from "@static/constants";
-import { OBSERVATION_FALLBACK } from "@static/inline-images";
-import { getResourceThumbnail } from "@utils/media";
+import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
 import React from "react";
+
+import useSpeciesList from "../../use-species-list";
 
 export default function GridViewCard({ o }) {
   const name = getInjectableHTML(o.name);
   const simpleName = stripTags(o.name);
 
+  const {species} = useSpeciesList();
   return (
     <Box className="hover-box fade">
       <LocalLink href={`/species/show/${o.id}`} prefixGroup={true}>
@@ -23,7 +25,7 @@ export default function GridViewCard({ o }) {
               w="full"
               h="full"
               src={getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL)}
-              fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
+              fallbackSrc={getLocalIcon(species.find(item => item.id === o.sGroup).name)}
               alt={simpleName}
             />
           </Box>
