@@ -25,7 +25,7 @@ export default function GridViewCard({ o }) {
               w="full"
               h="full"
               src={getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL)}
-              fallbackSrc={getLocalIcon(species.find(item => item.id === o.sGroup).name)}
+              fallbackSrc={getLocalIcon(species?.find(item => item?.id === o?.sGroup)?.name)}
               alt={simpleName}
             />
           </Box>
