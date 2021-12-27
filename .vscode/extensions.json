@@ -3,13 +3,13 @@
     "dbaeumer.vscode-eslint",
     "dsznajder.es7-react-js-snippets",
     "esbenp.prettier-vscode",
-    "jpoissonnier.vscode-styled-components",
+    "styled-components.vscode-styled-components",
     "lokalise.i18n-ally",
     "meganrogge.template-string-converter",
     "paragdiwan.gitpatch",
     "rbbit.typescript-hero",
     "shardulm94.trailing-spaces",
-    "Vtrois.gitmoji-vscode",
-    "wix.vscode-import-cost"
+    "wix.vscode-import-cost",
+    "formulahendry.auto-rename-tag"
   ]
 }
