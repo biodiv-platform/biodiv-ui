@@ -12,7 +12,7 @@ export default function GridViewCard({ o }) {
   const name = getInjectableHTML(o.name);
   const simpleName = stripTags(o.name);
 
-  const {species} = useSpeciesList();
+  const { species } = useSpeciesList();
   return (
     <Box className="hover-box fade">
       <LocalLink href={`/species/show/${o.id}`} prefixGroup={true}>
@@ -25,7 +25,7 @@ export default function GridViewCard({ o }) {
               w="full"
               h="full"
               src={getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL)}
-              fallbackSrc={getLocalIcon(species?.find(item => item?.id === o?.sGroup)?.name)}
+              fallbackSrc={getLocalIcon(species?.find((item) => item?.id === o?.sGroup)?.name)}
               alt={simpleName}
             />
           </Box>

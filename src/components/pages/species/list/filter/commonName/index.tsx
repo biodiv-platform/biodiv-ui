@@ -1,3 +1,7 @@
+import {
+  CommonNameOption,
+  onCommonNameQuery
+} from "@components/pages/observation/create/form/recodata/common-name";
 import useSpeciesList from "@components/pages/species/list/use-species-list";
 import { SPECIES_FILTER_KEY } from "@static/species";
 import React from "react";
@@ -11,6 +15,8 @@ export default function CommonNameFilter() {
       filterKeyList={SPECIES_FILTER_KEY}
       useIndexFilter={useSpeciesList}
       translateKey="filters:name.common_name"
+      searchQuery={onCommonNameQuery}
+      optionsComponent={CommonNameOption}
     />
   );
 }

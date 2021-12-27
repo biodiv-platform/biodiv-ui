@@ -15,7 +15,10 @@ export default function FilterMultiSelectPanel({
   translateKey = "",
   filterKeyList,
   useIndexFilter,
-  options = null
+  options = null,
+  isMulti,
+  searchQuery,
+  optionsComponent
 }: FilterMultiSelectProps) {
   const { t } = useTranslation();
   const label = t(translateKey);
@@ -38,6 +41,9 @@ export default function FilterMultiSelectPanel({
                 filterKeyList={filterKeyList}
                 label={label}
                 options={options}
+                searchQuery={searchQuery}
+                isMulti={isMulti}
+                optionsComponent={optionsComponent}
               />
             )}
           </AccordionPanel>
