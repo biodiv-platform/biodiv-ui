@@ -115,7 +115,6 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         resetFilter
       }}
     >
-      {}
       {props.children}
     </SpeciesContext.Provider>
   );

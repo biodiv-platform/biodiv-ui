@@ -18,6 +18,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
 
   return header.map((item) => {
     switch (item) {
+
       case "name":
         return {
           Header: "species:scientific_name",
@@ -28,6 +29,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
             </BlueLink>
           )
         };
+
       case "reprImage":
         return {
           Header: "species:resource",
@@ -46,6 +48,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
             />
           )
         };
+
       case "sGroup":
         return {
           Header: "species:species_group",
@@ -59,6 +62,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
             />
           )
         };
+        
       default:
         return {
           Header: item.replace(/(\B[A-Z])/g, " $1").replace(/^./, item[0].toUpperCase()),
