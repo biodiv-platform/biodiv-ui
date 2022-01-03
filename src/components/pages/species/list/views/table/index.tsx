@@ -19,7 +19,7 @@ export default function TableView() {
   }, [speciesData.l.length]);
 
   return (
-    <Box id="scrollableDiv" maxH={{ base: 375,xl: 400, md: 700 }} overflow="auto" mb={4}>
+    <Box id="scrollableDiv" maxH={{ base: 375,xl:800, md: 700 }} overflow="auto" mb={4}>
       <InfiniteScroll
         dataLength={speciesData.l.length}
         next={nextPage}

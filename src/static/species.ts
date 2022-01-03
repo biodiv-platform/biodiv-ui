@@ -14,7 +14,7 @@ export const DEFAULT_SPECIES_FILTER = {
   sort: "species.dateCreated",
   view: "grid",
   offset: 0,
-  max: 10
+  max: 16
 };
 
 export const sortByOptions = [
