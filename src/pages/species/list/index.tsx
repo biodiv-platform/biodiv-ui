@@ -28,8 +28,8 @@ export const getServerSideProps = async (ctx) => {
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
   const initialFilterParams = {
-    ...DEFAULT_SPECIES_FILTER,
     ...ctx.query,
+    ...DEFAULT_SPECIES_FILTER,
     userGroupList: currentGroup?.id
   };
   const { data } = await axGetSpeciesList(initialFilterParams);

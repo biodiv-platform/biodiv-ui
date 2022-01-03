@@ -38,7 +38,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
             <Image
               borderRadius={4}
               title={stripTags(cell.row.original.name)}
-              boxSize="3rem"
+              boxSize="5rem"
               src={getResourceThumbnail(
                 cell.row.original.context,
                 value,
@@ -62,7 +62,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
             />
           )
         };
-        
+
       default:
         return {
           Header: item.replace(/(\B[A-Z])/g, " $1").replace(/^./, item[0].toUpperCase()),
