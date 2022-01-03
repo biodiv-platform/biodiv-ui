@@ -18,7 +18,7 @@ export default function SpeciesList() {
       loader={<SpeciesLoading key={0} />}
       scrollableTarget="items-container"
     >
-      <SimpleGrid columns={[1, 1, 4, 4]} spacing={10}>
+      <SimpleGrid columns={[1, 1, 4, 4]} spacing={4}>
         {speciesData.l.map((o) => (
           <GridViewCard key={o.id} o={o} />
         ))}

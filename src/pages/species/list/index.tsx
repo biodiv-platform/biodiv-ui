@@ -15,7 +15,7 @@ function SpeciesListPage({ speciesData, species, traits, initialFilterParams }) 
       species={species}
       filter={initialFilterParams}
     >
-      <SpeciesListPageComponent />;
+      <SpeciesListPageComponent />
     </SpeciesListProvider>
   );
 }
