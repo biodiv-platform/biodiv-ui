@@ -119,9 +119,11 @@ export default function Container({ o }) {
                 flags={o.flag[0] ? o.flag.map((item) => ({ flag: item, user: o.userIbp })) : null}
               />
             </TabPanel>
-            {SITE_CONFIG.USERGROUP.ACTIVE && <TabPanel>
-              <GroupTab o={o} />
-            </TabPanel>}
+            {SITE_CONFIG.USERGROUP.ACTIVE && (
+              <TabPanel>
+                <GroupTab o={o} />
+              </TabPanel>
+            )}
             <TabPanel>
               <TagsTab documentId={o.document.id} tags={o.tags} />
             </TabPanel>

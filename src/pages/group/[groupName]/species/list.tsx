@@ -1,1 +1,1 @@
-export { default } from "../../../species/list";
+export { default, getServerSideProps } from "../../../species/list";

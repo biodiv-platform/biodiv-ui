@@ -1,6 +1,8 @@
 {
   "add_reference": "Add Reference",
   "all_media": "All Media",
+  "resource":"Resource",
+  "species_group":"Species Group",
   "attributions": "Attributions",
   "common_name": {
     "delete": {
@@ -23,6 +25,7 @@
     }
   },
   "common_names": "Common Names",
+  "scientific_name":"Scientific Name",
   "content_another_language": "There is content in another language. Please click here to read it.",
   "contribute": {
     "create_species": "Create new species",
@@ -89,7 +92,7 @@
   },
   "licenses": "Licenses",
   "list": {
-    "title": "Species List"
+    "title": "Species"
   },
   "manage_media": "Manage Media",
   "observation_media": "Observation Media",

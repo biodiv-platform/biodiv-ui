@@ -1,5 +1,6 @@
 import { ENDPOINT } from "@static/constants";
 import { DOUCMENT_FILTER_KEY } from "@static/document";
+import { SPECIES_FILTER_KEY } from "@static/species";
 import { plainHttp } from "@utils/http";
 import { createUserESObject } from "@utils/user";
 
@@ -47,7 +48,7 @@ export const axGetUserLeaderboard = async (payload, user) => {
         const res = await plainHttp.get(`${ENDPOINT.ESMODULE}/v1/services/userscore`, {
           params: { index, type, authorId, time }
         });
-        const user_score = [...res.data?.record];
+        const user_score = [...res.data.record];
         if (!user_score.length) {
           const es_user = createUserESObject(user);
           user_score.push(es_user);
@@ -87,8 +88,10 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
       }, []);
     };
 
-    return index == "ed" &&
+    return ["ed", "esp"].includes(index) &&
       (field === DOUCMENT_FILTER_KEY.author.searchKey ||
+        field === SPECIES_FILTER_KEY.scientificName.searchKey ||
+        field === SPECIES_FILTER_KEY.commonName.searchKey ||
         field === DOUCMENT_FILTER_KEY.tags.searchKey)
       ? formatResponse()?.map((i) => ({ value: i.trim(), label: i, text }))
       : data?.map((i) => ({ value: i, label: i, text }));

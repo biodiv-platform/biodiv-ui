@@ -39,6 +39,15 @@ export const axGetTaxonListData = async (params) => {
   }
 };
 
+export const axGetSpeciesGroupList = async () => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/species/all`);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
 export const axGetTaxonDetails = async (taxonId) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/show/${taxonId}`);

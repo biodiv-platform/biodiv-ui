@@ -30,7 +30,7 @@ export const getServerSideProps = async (ctx) => {
   const aURL = absoluteUrl(ctx).href;
   const isAdmin = hasAccess([Role.Admin], ctx);
   const { currentGroup } = await axGroupList(aURL);
-  const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup?.id };
+  const initialFilterParams = {...ctx.query,...DEFAULT_FILTER, userGroupList: currentGroup?.id };
   const { data } = await axGetUserList(initialFilterParams);
 
   return {
