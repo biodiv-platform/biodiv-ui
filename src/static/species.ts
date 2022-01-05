@@ -11,7 +11,7 @@ export const SPECIES_FILTER_KEY = {
 };
 
 export const DEFAULT_SPECIES_FILTER = {
-  sort: "species.dateCreated",
+  sort: "species.lastUpdated",
   view: "grid",
   offset: 0,
   max: 16
@@ -19,11 +19,11 @@ export const DEFAULT_SPECIES_FILTER = {
 
 export const sortByOptions = [
   {
-    name: "common:list.sort_options.latest",
-    key: "species.dateCreated"
-  },
-  {
     name: "common:list.sort_options.last_updated",
     key: "species.lastUpdated"
+  },
+  {
+    name: "common:list.sort_options.latest",
+    key: "species.dateCreated"
   }
 ];

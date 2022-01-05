@@ -33,7 +33,7 @@ export function CommonNameEditModal({ onUpdate, speciesId, updateFunc, deleteFun
   useListener(handleOnCommonNameDelete, [SPECIES_NAME_DELETE]);
 
   const handleOnCommonNamePreferred = async (commonName) => {
-    const { success, data } = await axPreferredSpeciesCommonName(commonName.id);
+    const { success, data } = await axPreferredSpeciesCommonName(speciesId, commonName.id);
     if (success) {
       emit(SPECIES_NAME_PREFERRED_UPDATED, data);
       notification(t("species:common_name.preferred.success"), NotificationType.Success);

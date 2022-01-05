@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "Coordonnées",
+    "district": "Quartier",
     "forest_type": "Type de forêt",
     "geoprivacy_enabled": "Géolocalisation activée",
+    "protected_area_name": "Zone protégée",
+    "province": "Province",
     "rainfall": "Précipitations",
     "soil": "Sol",
     "tehsil": "Arrondissement",

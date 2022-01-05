@@ -64,6 +64,7 @@
     "video": "ভিডিও"
   },
   "name": {
+    "common_name": "সাধারণ নাম",
     "reco_name": {
       "title": "নাম"
     },
@@ -73,6 +74,9 @@
       "title": "অবস্থা"
     },
     "title": "বৈজ্ঞানিক নাম"
+  },
+  "rank": {
+    "title": "পদমর্যাদা"
   },
   "scientific_name": {
     "all_names": {
@@ -111,6 +115,7 @@
   "time": {
     "created_on": "তারিখ তৈরী",
     "last_logged": "শেষ লগ ইন",
+    "last_updated": "সর্বশেষ সংষ্করণ",
     "max_date": "সর্বোচ্চ তারিখ",
     "min_date": "নূন্যতম তারিখ",
     "month": {

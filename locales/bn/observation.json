@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "সমন্বয়",
+    "district": "জেলা",
     "forest_type": "বন টাইপ",
     "geoprivacy_enabled": "Geoprivacy সক্রিয়",
+    "protected_area_name": "সুরক্ষিত এলাকা",
+    "province": "প্রদেশ",
     "rainfall": "বৃষ্টিপাত",
     "soil": "মাটি",
     "tehsil": "Tehsil.",

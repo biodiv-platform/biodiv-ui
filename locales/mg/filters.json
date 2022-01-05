@@ -64,6 +64,7 @@
     "video": "Video"
   },
   "name": {
+    "common_name": "Anarana iombonana",
     "reco_name": {
       "title": "Anarana"
     },
@@ -73,6 +74,9 @@
       "title": "sata"
     },
     "title": "Anaran'ny siantifika"
+  },
+  "rank": {
+    "title": "laharana"
   },
   "scientific_name": {
     "all_names": {
@@ -111,6 +115,7 @@
   "time": {
     "created_on": "Daty noforonina",
     "last_logged": "Tafiditra farany",
+    "last_updated": "Nohavaozina farany",
     "max_date": "Daty farany",
     "min_date": "Daty kely indrindra",
     "month": {

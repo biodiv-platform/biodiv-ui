@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "ನಿರ್ದೇಶಾಂಕಗಳು",
+    "district": "ಜಿಲ್ಲೆ",
     "forest_type": "ಅರಣ್ಯದ ವಿಧ",
     "geoprivacy_enabled": "ಭೂಗೌಪ್ಯತೆ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ",
+    "protected_area_name": "ಸಂರಕ್ಷಿತ ಪ್ರದೇಶ",
+    "province": "ಪ್ರಾಂತ್ಯ",
     "rainfall": "ಮಳೆ",
     "soil": "ಮಣ್ಣು",
     "tehsil": "ತೆಹ್ಸಿಲ್",

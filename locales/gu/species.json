@@ -103,7 +103,10 @@
     "success": "જાતિઓ સફળતાપૂર્વક કાઢી નાખી",
     "title": "જાતિઓ કાઢી નાખો"
   },
+  "resource": "સંસાધન",
+  "scientific_name": "વૈજ્ઞાનિક નામ",
   "share": "આ જાતિઓ શેર કરો",
+  "species_group": "જાતિ જૂથ",
   "status": "સ્થિતિ",
   "synonym": {
     "add": {

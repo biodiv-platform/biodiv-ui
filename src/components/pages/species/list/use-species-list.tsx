@@ -26,6 +26,11 @@ interface SpeciesContextProps {
   resetFilter?;
 }
 
+const deDupeDownloadLog = (current, latest) => {
+  const existingIDs = current.map(({ id }) => id);
+  return latest.filter(({ id }) => !existingIDs.includes(id));
+};
+
 const SpeciesContext = createContext<SpeciesContextProps>({} as SpeciesContextProps);
 
 export const SPECIES_PAGE_SIZE = 10;
@@ -60,14 +65,14 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
       const { data } = await axGetSpeciesList({ ...rest });
       setSpeciesData((_draft) => {
         if (data?.speciesTiles?.length) {
-          _draft.l.push(...data.speciesTiles);
+          _draft.l.push(...deDupeDownloadLog(_draft.l, data.speciesTiles));
           _draft.hasMore =
-            data.totalCount > filter?.f?.offset && data?.totalCount !== _draft.l.length;
+            data?.totalCount > filter?.f?.offset && data?.totalCount !== _draft.l.length;
           _draft.ag = data.aggregationData;
         } else {
           _draft.hasMore = false;
         }
-        _draft.n = data.totalCount;
+        _draft.n = data?.totalCount;
       });
       NProgress.done();
     } catch (e) {

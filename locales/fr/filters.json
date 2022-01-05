@@ -64,6 +64,7 @@
     "video": "Vidéo"
   },
   "name": {
+    "common_name": "Nom commun",
     "reco_name": {
       "title": "Nom"
     },
@@ -73,6 +74,9 @@
       "title": "Statut"
     },
     "title": "Nom scientifique"
+  },
+  "rank": {
+    "title": "Rang"
   },
   "scientific_name": {
     "all_names": {
@@ -111,6 +115,7 @@
   "time": {
     "created_on": "Date créée",
     "last_logged": "Dernière connexion",
+    "last_updated": "Dernière mise à jour",
     "max_date": "Date max",
     "min_date": "Date min",
     "month": {

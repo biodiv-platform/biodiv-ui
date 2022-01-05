@@ -103,7 +103,10 @@
     "success": "Espèce supprimée avec succès",
     "title": "Supprimer l'espèce"
   },
+  "resource": "Ressource",
+  "scientific_name": "Nom scientifique",
   "share": "Partager cette espèce",
+  "species_group": "Groupe d'espèces",
   "status": "Statut",
   "synonym": {
     "add": {

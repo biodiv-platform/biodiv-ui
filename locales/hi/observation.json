@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "निर्देशांक",
+    "district": "ज़िला",
     "forest_type": "वन प्रकार",
     "geoprivacy_enabled": "भू-गोपनीयता सक्षम",
+    "protected_area_name": "संरक्षित क्षेत्र",
+    "province": "प्रांत",
     "rainfall": "वर्षा",
     "soil": "मिट्टी",
     "tehsil": "तहसील",

@@ -64,6 +64,7 @@
     "video": "વિડિઓ"
   },
   "name": {
+    "common_name": "સામાન્ય નામ",
     "reco_name": {
       "title": "નામ"
     },
@@ -73,6 +74,9 @@
       "title": "સ્થિતિ"
     },
     "title": "વૈજ્ઞાનિક નામ"
+  },
+  "rank": {
+    "title": "ક્રમ"
   },
   "scientific_name": {
     "all_names": {
@@ -111,6 +115,7 @@
   "time": {
     "created_on": "બનાવવાની તારીખ",
     "last_logged": "છેલ્લે પ્રવેશ કર્યો",
+    "last_updated": "છેલ્લું અપડેટ",
     "max_date": "મહત્તમ તારીખ",
     "min_date": "ન્યૂનતમ તારીખ",
     "month": {

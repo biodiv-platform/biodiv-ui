@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "Velarantany",
+    "district": "DISTRIKA",
     "forest_type": "Ala ala",
     "geoprivacy_enabled": "Geoprivacy dia nahafahana",
+    "protected_area_name": "Faritra arovana",
+    "province": "-tokony eran'ny fanjakana",
     "rainfall": "rotsakorana",
     "soil": "nofon-tany",
     "tehsil": "Tehsil",

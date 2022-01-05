@@ -64,6 +64,7 @@
     "video": "ವಿಡಿಯೋ"
   },
   "name": {
+    "common_name": "ಸಾಮಾನ್ಯ ಹೆಸರು",
     "reco_name": {
       "title": "ಹೆಸರು"
     },
@@ -73,6 +74,9 @@
       "title": "ಸ್ಥಿತಿ"
     },
     "title": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು"
+  },
+  "rank": {
+    "title": "ಶ್ರೇಣಿ"
   },
   "scientific_name": {
     "all_names": {
@@ -111,6 +115,7 @@
   "time": {
     "created_on": "ರಚಿಸಲಾದ ದಿನಾಂಕ ",
     "last_logged": "ಕೊನೆಯದಾಗಿ ಲಾಗ್ ಇನ್ ಮಾಡಲಾಗಿದೆ",
+    "last_updated": "ಕೊನೆಯದಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
     "max_date": "ಗರಿಷ್ಠ ದಿನಾಂಕ",
     "min_date": "ಕನಿಷ್ಠ ದಿನಾಂಕ",
     "month": {
