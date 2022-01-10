@@ -1,5 +1,5 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Button, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormErrorMessage, FormHelperText, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import useGlobalState from "@hooks/use-global-state";
@@ -17,12 +17,12 @@ const formatOptions = (options, observationConfig, userGroupId) => {
   ];
   return userGroupId
     ? [
-        ...formatOptions,
-        {
-          label: "Custom Field",
-          options: customFields.map((item) => ({ label: item.name, value: item.name }))
-        }
-      ]
+      ...formatOptions,
+      {
+        label: "Custom Field",
+        options: customFields.map((item) => ({ label: item.name, value: item.name }))
+      }
+    ]
     : formatOptions;
 };
 
@@ -37,18 +37,12 @@ export default function Fields({
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
   const { currentGroup } = useGlobalState();
   const [fieldValues, setFieldValues] = useState<any[]>([]);
-  const { fields, append, remove } = useFieldArray({ name });
+  const { fields, append, remove, } = useFieldArray({ name });
   const form = useFormContext();
 
-  const resetMappingTable = () => {
-    setTableHeaders([]);
-    setFieldValues([]);
-    remove();
-  };
 
   useEffect(() => {
-    resetMappingTable();
-
+    remove();
     const { rowData, headerData } = fieldMapping;
 
     if (rowData && headerData && showMapping) {
@@ -71,55 +65,62 @@ export default function Fields({
   };
 
   const toggleFieldMapping = () => {
-    resetMappingTable();
+    remove();
     form.setValue("filename", "");
     setShowMapping(false);
   };
 
   return (
-    <ToggleablePanel icon="🧩" title={t("datatable:field_mapping_table")}>
-      <Box p={4} pb={0}>
-        <Stack m={2} direction="row-reverse">
-          <Button colorScheme="blue" onClick={toggleFieldMapping} leftIcon={<ArrowBackIcon />}>
-            {t("datatable:upload_again")}
-          </Button>
-        </Stack>
-        <Box style={{ overflowX: "scroll", width: "100%" }}>
-          <Table mt={4} variant="striped" colorScheme="gray" size="sm">
-            <Thead>
-              <Tr>
-                {tabelHeaders.map((item, index) => (
-                  <Th key={index}>{item}</Th>
-                ))}
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                {fields.map((field, index) => (
-                  <Td key={field.id}>
-                    <SelectInputField
-                      name={`columnsMapping.${index}.fieldKey`}
-                      label={t("common:actions.flag.category")}
-                      options={formatOptions(
-                        OBSERVATION_FIELDS,
-                        observationConfig,
-                        currentGroup?.id
-                      )}
-                    />
-                  </Td>
-                ))}
-              </Tr>
-              {fieldValues.map((tableData, _index) => (
-                <Tr key={_index}>
-                  {tableData.map((data, index) => (
-                    <Td key={index}>{data}</Td>
+    <FormControl isInvalid={!form.formState.isValid}>
+      <ToggleablePanel icon="🧩" title={t("datatable:field_mapping_table")}>
+        <Box p={4} pb={0}>
+          <Stack m={2} alignItems="center" justifyContent="space-between" direction="row">
+            {form.formState?.errors[`${name}`] ?
+              <FormErrorMessage children={form.formState?.errors[name]?.message} />
+              : <FormHelperText color="gray.600">
+                {t("datatable:field_mapping_hint")}
+              </FormHelperText>}
+            <Button colorScheme="blue" onClick={toggleFieldMapping} leftIcon={<ArrowBackIcon />}>
+              {t("datatable:upload_again")}
+            </Button>
+          </Stack>
+          <Box style={{ overflowX: "scroll", width: "100%" }}>
+            <Table mt={4} variant="striped" colorScheme="gray" size="sm">
+              <Thead>
+                <Tr>
+                  {tabelHeaders.map((item, index) => (
+                    <Th key={index}>{item}</Th>
                   ))}
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  {fields.map((field, index) => (
+                    <Td key={field.id}>
+                      <SelectInputField
+                        name={`columnsMapping.${index}.fieldKey`}
+                        label={t("common:actions.flag.category")}
+                        options={formatOptions(
+                          OBSERVATION_FIELDS,
+                          observationConfig,
+                          currentGroup?.id
+                        )}
+                      />
+                    </Td>
+                  ))}
+                </Tr>
+                {fieldValues.map((tableData, _index) => (
+                  <Tr key={_index}>
+                    {tableData.map((data, index) => (
+                      <Td key={index}>{data}</Td>
+                    ))}
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </Box>
         </Box>
-      </Box>
-    </ToggleablePanel>
+      </ToggleablePanel>
+    </FormControl>
   );
 }

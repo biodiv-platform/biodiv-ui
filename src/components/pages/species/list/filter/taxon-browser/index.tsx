@@ -9,7 +9,7 @@ export default function TaxonBrowser() {
   return (
     <TaxonBrowserComponent
       initialTaxon={filter?.taxon}
-      taxonFilterKey={"taxonId"}
+      taxonFilterKey={"taxon"}
       onTaxonChange={addFilter}
     />
   );
