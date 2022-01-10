@@ -6,6 +6,7 @@
   "contributor": "contributor",
   "create_datatable": "Create DataTable",
   "deleted_datatable": "Deleted Datatable",
+  "field_mapping_hint": "Please map Scientific Name or Common Name columns",
   "field_mapping_table": "Field Mapping Table",
   "files_upload": "Files Uploads",
   "found": "Datatable Found",

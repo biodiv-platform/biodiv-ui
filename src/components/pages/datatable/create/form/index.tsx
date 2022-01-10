@@ -85,6 +85,10 @@ export default function DataTableCreateForm({
             })
           )
           .required()
+          .test({
+            message: 'Scientific name or Common name mapping is required',
+            test: (value) => value?.some((item) => ['scientificName', 'commonName'].includes(item?.fieldKey || "")) || false
+          })
       })
     ),
     defaultValues: {
@@ -144,8 +148,8 @@ export default function DataTableCreateForm({
       observedToDate: observedDateRange[1]
         ? dateToUTC(observedDateRange[1]).format()
         : observedDateRange[0]
-        ? dateToUTC(observedDateRange[0]).format()
-        : null,
+          ? dateToUTC(observedDateRange[0]).format()
+          : null,
       wktString: topology,
       useDegMinSec: false,
       userGroup: userGroupId?.length > 0 ? userGroupId.join(",") : "",

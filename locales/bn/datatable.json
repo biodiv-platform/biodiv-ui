@@ -6,6 +6,7 @@
   "contributor": "অবদানকারী",
   "create_datatable": "Datatable তৈরি করুন",
   "deleted_datatable": "ডেটাটেবল মোছা হয়েছে",
+  "field_mapping_hint": "অনুগ্রহ করে বৈজ্ঞানিক নাম বা সাধারণ নাম কলাম ম্যাপ করুন",
   "field_mapping_table": "ক্ষেত্র ম্যাপিং টেবিল",
   "files_upload": "ফাইল আপলোড",
   "found": "Datatable পাওয়া যায়",
