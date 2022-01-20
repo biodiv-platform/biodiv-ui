@@ -18,7 +18,6 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
 
   return header.map((item) => {
     switch (item) {
-
       case "name":
         return {
           Header: "species:scientific_name",

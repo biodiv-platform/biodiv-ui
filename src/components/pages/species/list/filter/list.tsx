@@ -10,14 +10,18 @@ import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import AttributeFilter from "./attribute";
 import CommonNameFilter from "./commonName";
 import MediaType from "./media";
 import RankFilter from "./rank";
+import ReferenceFilter from "./reference";
 import ScientificNameFilter from "./scientificName";
+import SpeciesFieldFilter from "./species-field";
 import SpeciesGroupsFilter from "./species-groups";
 import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
 import TraitsFilter from "./traits";
+import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
 
 export default function FiltersList() {
@@ -41,6 +45,19 @@ export default function FiltersList() {
           <>
             <AccordionButton>
               <Box flex={1} textAlign="left">
+                {t("filters:user.title")}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel>{isExpanded && <UserFilter filterKey="user" />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionButton>
+              <Box flex={1} textAlign="left">
                 {t("filters:taxon_browser.title")}
               </Box>
               <AccordionIcon />
@@ -54,6 +71,21 @@ export default function FiltersList() {
       <RankFilter />
       <CommonNameFilter />
       <ScientificNameFilter />
+      <AttributeFilter />
+      <ReferenceFilter />
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionButton>
+              <Box flex={1} textAlign="left">
+                {t("filters:species_field.title")}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel>{isExpanded && <SpeciesFieldFilter />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
       <AccordionItem>
         {({ isExpanded }) => (
           <>

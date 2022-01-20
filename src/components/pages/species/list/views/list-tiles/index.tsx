@@ -10,7 +10,6 @@ export default function SpeciesList() {
   const { speciesData, nextPage } = useSpeciesList();
 
   return (
-
     <InfiniteScroll
       dataLength={speciesData.l.length}
       next={nextPage}
@@ -23,8 +22,6 @@ export default function SpeciesList() {
           <GridViewCard key={o.id} o={o} />
         ))}
       </SimpleGrid>
-
     </InfiniteScroll>
-
   );
 }

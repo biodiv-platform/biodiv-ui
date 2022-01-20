@@ -64,6 +64,7 @@
     "video": "Video"
   },
   "name": {
+    "common_name": "Common Name",
     "reco_name": {
       "title": "Name"
     },
@@ -72,8 +73,7 @@
       "synonym": "Synonym",
       "title": "Status"
     },
-    "title": "Scientific Name",
-    "common_name":"Common Name"
+    "title": "Scientific Name"
   },
   "rank": {
     "title": "Rank"
@@ -92,6 +92,15 @@
       "title": "Taxon Status"
     },
     "title": "Scientific Name"
+  },
+  "species_field": {
+    "title": "Species Field"
+  },
+  "attribution": {
+    "title": "Attribution"
+  },
+  "reference": {
+    "title": "Reference"
   },
   "species_group": {
     "all": "All",
@@ -115,7 +124,7 @@
   "time": {
     "created_on": "Date Created",
     "last_logged": "Last Logged In",
-    "last_updated":"Last Updated",
+    "last_updated": "Last Updated",
     "max_date": "Maximum Date",
     "min_date": "Minimum Date",
     "month": {
