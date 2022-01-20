@@ -1,6 +1,5 @@
 import { Box, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import JoinUserGroup from "@components/pages/group/common/join-group";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
@@ -8,9 +7,10 @@ import CrossIcon from "@icons/cross";
 import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { Suspense } from "react";
 
-import EditLinkButton from "./edit-link-button";
+const EditLinkButton = React.lazy(() => import("./edit-link-button"));
+const JoinUserGroup = React.lazy(() => import("@components/pages/group/common/join-group"));
 
 const Logo = styled.div`
   width: fit-content;
@@ -96,12 +96,16 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
       <button className="menu-toggle" onClick={onToggle} aria-label={t("header:toggle_menu")}>
         {isOpen ? <CrossIcon /> : <MenuIcon />}
       </button>
-      <JoinUserGroup
-        currentGroup={currentGroup}
-        isCurrentGroupMember={isCurrentGroupMember}
-        setIsCurrentGroupMember={setIsCurrentGroupMember}
-      />
-      <EditLinkButton label={t("header:group_edit")} />
+      {currentGroup.id && (
+        <Suspense fallback={null}>
+          <JoinUserGroup
+            currentGroup={currentGroup}
+            isCurrentGroupMember={isCurrentGroupMember}
+            setIsCurrentGroupMember={setIsCurrentGroupMember}
+          />
+          <EditLinkButton label={t("header:group_edit")} />
+        </Suspense>
+      )}
     </Logo>
   );
 }

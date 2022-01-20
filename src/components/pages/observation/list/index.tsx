@@ -1,9 +1,11 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
+import React, { Suspense } from "react";
 
-import Filters from "./filters";
+import FilterFallback from "./filters/fallback";
 import ListHeader from "./header";
 import Views from "./views";
+
+const Filters = React.lazy(() => import("./filters"));
 
 interface ObservationListPageProps {
   nextOffset: number;
@@ -13,7 +15,9 @@ export default function ObservationListPageComponent({ nextOffset }: Observation
   return (
     <Box w="full" maxH="calc( 100vh - var(--heading-height) )" display="flex">
       <SimpleGrid w="full" columns={{ base: 1, lg: 14 }}>
-        <Filters />
+        <Suspense fallback={<FilterFallback />}>
+          <Filters />
+        </Suspense>
         <Box
           maxH="full"
           w="full"
