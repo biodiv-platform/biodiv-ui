@@ -79,7 +79,7 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
       <LocalLink href="/" prefixGroup={true}>
         <Link>
           <img src={`${icon}?w=128&preserve=true`} alt={name} title={name} />
-          <Box ml={2} textAlign="center">
+          <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
             {nameLocal && <Box mb={1}>{nameLocal}</Box>}
             {name}
           </Box>

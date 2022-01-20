@@ -6,5 +6,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const nextTranslate = require("next-translate");
 
 module.exports = withBundleAnalyzer(
-  nextTranslate({ concurrentFeatures: true, serverComponents: true })
+  nextTranslate({
+    concurrentFeatures: true
+  })
 );
