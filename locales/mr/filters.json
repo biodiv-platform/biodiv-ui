@@ -136,6 +136,7 @@
     "title": "गुणधर्म"
   },
   "user": {
+    "contributor": "योगदानकर्ता",
     "email": "ईमेल",
     "group_role_title": "वापरकर्ता गट भूमिका",
     "institution_title": "संस्था",

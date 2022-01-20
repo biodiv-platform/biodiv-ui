@@ -161,6 +161,7 @@
     "taxon_browser": "Taxon Seach",
     "taxon_role_title": "Taxonomy Roles",
     "title": "User",
+    "contributor":"Contributor",
     "username": "User Name"
   },
   "usergroup": {

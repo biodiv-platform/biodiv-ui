@@ -15,11 +15,11 @@ export default function TextFilterPanel({ filterKey, label, childHeader, path })
   return (
     <AccordionItem>
       <AccordionButton>
-        <Flex mr={3} justifyContent="space-between" alignItems="center" flex={1} textAlign="left">
+        <Flex mr={3} justifyContent="space-between" alignItems="center" textAlign="left">
           {label}
           {childHeader?.length > 0 && (
             <Tooltip
-              title={childHeader.toString()}
+              title={childHeader.join(", ")}
               placement="top-start"
               shouldWrapChildren={true}
               hasArrow={true}

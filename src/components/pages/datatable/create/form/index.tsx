@@ -88,8 +88,8 @@ export default function DataTableCreateForm({
           .test({
             message: "Scientific name or Common name mapping is required",
             test: (value) =>
-              value?.some((item) =>
-                ["scientificName", "commonName"].includes(item?.fieldKey || "")
+              value?.some((item: any) =>
+                ["scientificName", "commonName"].includes(item?.fieldKey)
               ) || false
           })
       })

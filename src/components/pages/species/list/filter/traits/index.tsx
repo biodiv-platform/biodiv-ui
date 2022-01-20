@@ -13,6 +13,7 @@ import SubAccordion from "../shared/sub-accordion";
 
 const filterTraitsfromAggregation = (traits, ag) => {
   if (Object.keys(ag?.groupTraitsName)?.length <= 0) return [];
+
   return traits
     .map(({ categoryName, traitsValuePairList }) => ({
       categoryName,

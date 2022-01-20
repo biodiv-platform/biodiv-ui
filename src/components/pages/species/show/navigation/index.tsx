@@ -40,9 +40,9 @@ export default function SpeciesNavigation() {
           <MenuItem as={Link} href="#common-names">
             {t("species:common_names")}
           </MenuItem>
-          {fieldHeaders.map(({ header: title }) => (
-            <MenuItem as={Link} href={`#${urlSlug(title)}`} key={title}>
-              {title}
+          {fieldHeaders.map(({ header }) => (
+            <MenuItem as={Link} href={`#${urlSlug(header)}`} key={header}>
+              {header}
             </MenuItem>
           ))}
         </MenuList>

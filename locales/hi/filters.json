@@ -141,6 +141,7 @@
     "title": "लक्षण"
   },
   "user": {
+    "contributor": "योगदान देने वाला",
     "email": "ईमेल",
     "group_role_title": "उपयोगकर्ता समूह भूमिकाएँ",
     "institution_title": "संस्था",

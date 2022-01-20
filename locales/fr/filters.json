@@ -141,6 +141,7 @@
     "title": "Traits"
   },
   "user": {
+    "contributor": "Donateur",
     "email": "e-mail",
     "group_role_title": "Rôles des groupes d'utilisateurs",
     "institution_title": "Institut",

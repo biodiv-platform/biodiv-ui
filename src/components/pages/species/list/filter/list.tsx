@@ -40,19 +40,7 @@ export default function FiltersList() {
           <SpeciesGroupsFilter />
         </AccordionPanel>
       </AccordionItem>
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton>
-              <Box flex={1} textAlign="left">
-                {t("filters:user.title")}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>{isExpanded && <UserFilter filterKey="user" />}</AccordionPanel>
-          </>
-        )}
-      </AccordionItem>
+
       <AccordionItem>
         {({ isExpanded }) => (
           <>
@@ -67,12 +55,12 @@ export default function FiltersList() {
         )}
       </AccordionItem>
 
-      <MediaType />
-      <RankFilter />
-      <CommonNameFilter />
       <ScientificNameFilter />
-      <AttributeFilter />
-      <ReferenceFilter />
+
+      <CommonNameFilter />
+
+      <RankFilter />
+
       <AccordionItem>
         {({ isExpanded }) => (
           <>
@@ -86,6 +74,7 @@ export default function FiltersList() {
           </>
         )}
       </AccordionItem>
+
       <AccordionItem>
         {({ isExpanded }) => (
           <>
@@ -99,6 +88,27 @@ export default function FiltersList() {
           </>
         )}
       </AccordionItem>
+
+      <AttributeFilter />
+
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionButton>
+              <Box flex={1} textAlign="left">
+                {t("filters:user.contributor")}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel>{isExpanded && <UserFilter filterKey="user" />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
+
+      <ReferenceFilter />
+
+      <MediaType />
+
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
@@ -110,7 +120,6 @@ export default function FiltersList() {
           <TimeFilter />
         </AccordionPanel>
       </AccordionItem>
-
       {SITE_CONFIG.USERGROUP.ACTIVE && <UserGroupFilter />}
     </Accordion>
   );
