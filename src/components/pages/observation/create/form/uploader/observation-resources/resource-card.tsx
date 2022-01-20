@@ -1,4 +1,5 @@
 import { CloseButton, Flex, Image, Input } from "@chakra-ui/react";
+import Rating from "@components/@core/rating";
 import { selectStyles } from "@components/form/configs";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
@@ -14,7 +15,6 @@ import {
   RESOURCE_CTX
 } from "@utils/media";
 import React, { useMemo } from "react";
-import Rating from "react-rating";
 import Select from "react-select";
 
 import StatusIcon from "../statusicon";
