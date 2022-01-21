@@ -42,7 +42,7 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
   const [species] = useImmer<{ f: any }>(props.species);
   const [traits] = useImmer<{ f: any }>(props.traits);
-  const [fieldsMeta] = useImmer<{ f: any }>(getSpeciesFieldHeaders(props.fieldsMeta));
+  const [fieldsMeta] = useImmer<any>(getSpeciesFieldHeaders(props.fieldsMeta));
 
   useDidUpdateEffect(() => {
     fetchListData();
