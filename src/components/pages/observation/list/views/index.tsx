@@ -1,9 +1,11 @@
+import ObservationLoading from "@components/pages/common/loading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import React from "react";
+import React, { Suspense } from "react";
 
-import GridView from "./grid";
 import ListView from "./list";
-import StatsVew from "./stats";
+
+const GridView = React.lazy(() => import("./grid"));
+const StatsVew = React.lazy(() => import("./stats"));
 
 export default function Views({ no }) {
   const { filter } = useObservationFilter();
@@ -13,10 +15,18 @@ export default function Views({ no }) {
       return <ListView no={no} />;
 
     case "list_minimal":
-      return <GridView />;
+      return (
+        <Suspense fallback={<ObservationLoading />}>
+          <GridView />
+        </Suspense>
+      );
 
     case "stats":
-      return <StatsVew />;
+      return (
+        <Suspense fallback={<ObservationLoading />}>
+          <StatsVew />
+        </Suspense>
+      );
 
     default:
       return null;

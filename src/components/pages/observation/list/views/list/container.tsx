@@ -1,4 +1,4 @@
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
@@ -6,15 +6,16 @@ import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/observation-list";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 
 import ImageBoxComponent from "./image";
-import CommentsTab from "./tabs/comments";
-import CustomFieldsTab from "./tabs/custom-fields";
-import GroupsTab from "./tabs/groups";
 import InfoTab from "./tabs/info";
-import RecoSuggestionTab from "./tabs/reco-suggestion";
-import TraitsTab from "./tabs/traits";
+
+const CommentsTab = React.lazy(() => import("./tabs/comments"));
+const CustomFieldsTab = React.lazy(() => import("./tabs/custom-fields"));
+const GroupsTab = React.lazy(() => import("./tabs/groups"));
+const RecoSuggestionTab = React.lazy(() => import("./tabs/reco-suggestion"));
+const TraitsTab = React.lazy(() => import("./tabs/traits"));
 
 const VerticalTabs = styled.div`
   flex-grow: 1;
@@ -127,19 +128,29 @@ export default function Container({ o }) {
               <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
             </TabPanel>
             <TabPanel>
-              <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
+              <Suspense fallback={<Spinner />}>
+                <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
+              </Suspense>
             </TabPanel>
             <TabPanel>
-              <GroupsTab o={o} />
+              <Suspense fallback={<Spinner />}>
+                <GroupsTab o={o} />
+              </Suspense>
             </TabPanel>
             <TabPanel>
-              <TraitsTab o={o} />
+              <Suspense fallback={<Spinner />}>
+                <TraitsTab o={o} />
+              </Suspense>
             </TabPanel>
             <TabPanel>
-              <CustomFieldsTab o={o} />
+              <Suspense fallback={<Spinner />}>
+                <CustomFieldsTab o={o} />
+              </Suspense>
             </TabPanel>
             <TabPanel>
-              <CommentsTab observationId={o.observationId} />
+              <Suspense fallback={<Spinner />}>
+                <CommentsTab observationId={o.observationId} />
+              </Suspense>
             </TabPanel>
           </TabPanels>
           <TabList>

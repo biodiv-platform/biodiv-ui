@@ -30,7 +30,7 @@ export default function LanguageSwitcher() {
   }, []);
 
   return (
-    <Menu>
+    <Menu isLazy={true}>
       <MenuButton as={Link} role="button">
         {SITE_CONFIG.LANG.LIST[lang].NAME}
         <ChevronDownIcon />

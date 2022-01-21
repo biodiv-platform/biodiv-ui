@@ -16,9 +16,9 @@ import { sortByOptions, viewTabs } from "@static/observation-list";
 import { waitForAuth } from "@utils/auth";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { Suspense } from "react";
 
-import DownloadObservationDataModal from "../download-observation-modal";
+const DownloadObservationDataModal = React.lazy(() => import("../download-observation-modal"));
 
 export default function ListHeader() {
   const { filter, setFilter, observationData } = useObservationFilter();
@@ -98,7 +98,11 @@ export default function ListHeader() {
         </Text>
       )}
 
-      {isOpen && <DownloadObservationDataModal isOpen={isOpen} onClose={onClose} />}
+      {isOpen && (
+        <Suspense fallback={null}>
+          <DownloadObservationDataModal isOpen={isOpen} onClose={onClose} />
+        </Suspense>
+      )}
     </>
   );
 }

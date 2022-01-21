@@ -56,7 +56,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
       userGroupId: initialState.currentGroup?.id,
       languageId
     }).then(({ data }) => setPages(data));
-  }, [initialState.currentGroup?.id]);
+  }, [initialState.currentGroup?.id, languageId]);
 
   useListener(() => {
     setUser(getParsedUser());
