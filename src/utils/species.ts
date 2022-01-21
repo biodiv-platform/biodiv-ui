@@ -2,7 +2,12 @@
  * extracts header(s) from species.fieldData
  */
 export const getSpeciesFieldHeaders = (fieldData) => {
-  return fieldData.filter((o) => o.childField.length).map((o) => o.parentField.header);
+  return fieldData
+    .filter((o) => o.childField.length)
+    .map(({ parentField, childField }) => ({
+      ...parentField,
+      childHeader: childField?.map(({ parentField }) => parentField?.header)
+    }));
 };
 
 /**

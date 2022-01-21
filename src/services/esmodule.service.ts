@@ -92,6 +92,8 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
       (field === DOUCMENT_FILTER_KEY.author.searchKey ||
         field === SPECIES_FILTER_KEY.scientificName.searchKey ||
         field === SPECIES_FILTER_KEY.commonName.searchKey ||
+        field === SPECIES_FILTER_KEY.attributes.searchKey ||
+        field === SPECIES_FILTER_KEY.reference.searchKey ||
         field === DOUCMENT_FILTER_KEY.tags.searchKey)
       ? formatResponse()?.map((i) => ({ value: i.trim(), label: i, text }))
       : data?.map((i) => ({ value: i, label: i, text }));

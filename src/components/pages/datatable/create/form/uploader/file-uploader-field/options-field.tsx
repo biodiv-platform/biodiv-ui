@@ -1,5 +1,18 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Button, FormControl, FormErrorMessage, FormHelperText, Stack, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  Stack,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr
+} from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import useGlobalState from "@hooks/use-global-state";
@@ -17,12 +30,12 @@ const formatOptions = (options, observationConfig, userGroupId) => {
   ];
   return userGroupId
     ? [
-      ...formatOptions,
-      {
-        label: "Custom Field",
-        options: customFields.map((item) => ({ label: item.name, value: item.name }))
-      }
-    ]
+        ...formatOptions,
+        {
+          label: "Custom Field",
+          options: customFields.map((item) => ({ label: item.name, value: item.name }))
+        }
+      ]
     : formatOptions;
 };
 
@@ -37,9 +50,8 @@ export default function Fields({
   const [tabelHeaders, setTableHeaders] = useState<string[]>([]);
   const { currentGroup } = useGlobalState();
   const [fieldValues, setFieldValues] = useState<any[]>([]);
-  const { fields, append, remove, } = useFieldArray({ name });
+  const { fields, append, remove } = useFieldArray({ name });
   const form = useFormContext();
-
 
   useEffect(() => {
     remove();
@@ -75,11 +87,11 @@ export default function Fields({
       <ToggleablePanel icon="🧩" title={t("datatable:field_mapping_table")}>
         <Box p={4} pb={0}>
           <Stack m={2} alignItems="center" justifyContent="space-between" direction="row">
-            {form.formState?.errors[`${name}`] ?
+            {form.formState?.errors[`${name}`] ? (
               <FormErrorMessage children={form.formState?.errors[name]?.message} />
-              : <FormHelperText color="gray.600">
-                {t("datatable:field_mapping_hint")}
-              </FormHelperText>}
+            ) : (
+              <FormHelperText color="gray.600">{t("datatable:field_mapping_hint")}</FormHelperText>
+            )}
             <Button colorScheme="blue" onClick={toggleFieldMapping} leftIcon={<ArrowBackIcon />}>
               {t("datatable:upload_again")}
             </Button>

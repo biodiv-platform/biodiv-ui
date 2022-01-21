@@ -10,7 +10,6 @@ export default function Views() {
   } = useSpeciesList();
 
   switch (f?.view) {
-
     case "grid":
       return <GridView />;
 

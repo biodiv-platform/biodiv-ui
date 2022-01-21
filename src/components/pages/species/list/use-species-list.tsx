@@ -2,6 +2,7 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axGetSpeciesList } from "@services/species.service";
 import { isBrowser } from "@static/constants";
 import { stringify } from "@utils/query-string";
+import { getSpeciesFieldHeaders } from "@utils/species";
 import NProgress from "nprogress";
 import React, { createContext, useContext, useEffect } from "react";
 import { useImmer } from "use-immer";
@@ -17,6 +18,7 @@ interface SpeciesContextProps {
   filter?;
   speciesData: SpeciesListData;
   species: any;
+  fieldsMeta: any;
   traits: any;
   addFilter?;
   removeFilter?;
@@ -40,6 +42,7 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
   const [species] = useImmer<{ f: any }>(props.species);
   const [traits] = useImmer<{ f: any }>(props.traits);
+  const [fieldsMeta] = useImmer<any>(getSpeciesFieldHeaders(props.fieldsMeta));
 
   useDidUpdateEffect(() => {
     fetchListData();
@@ -111,6 +114,7 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
       value={{
         filter,
         speciesData,
+        fieldsMeta,
         species,
         traits,
         addFilter,

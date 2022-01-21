@@ -10,14 +10,18 @@ import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import AttributeFilter from "./attribute";
 import CommonNameFilter from "./commonName";
 import MediaType from "./media";
 import RankFilter from "./rank";
+import ReferenceFilter from "./reference";
 import ScientificNameFilter from "./scientificName";
+import SpeciesFieldFilter from "./species-field";
 import SpeciesGroupsFilter from "./species-groups";
 import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
 import TraitsFilter from "./traits";
+import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
 
 export default function FiltersList() {
@@ -36,6 +40,7 @@ export default function FiltersList() {
           <SpeciesGroupsFilter />
         </AccordionPanel>
       </AccordionItem>
+
       <AccordionItem>
         {({ isExpanded }) => (
           <>
@@ -50,10 +55,26 @@ export default function FiltersList() {
         )}
       </AccordionItem>
 
-      <MediaType />
-      <RankFilter />
-      <CommonNameFilter />
       <ScientificNameFilter />
+
+      <CommonNameFilter />
+
+      <RankFilter />
+
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionButton>
+              <Box flex={1} textAlign="left">
+                {t("filters:species_field.title")}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel>{isExpanded && <SpeciesFieldFilter />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
+
       <AccordionItem>
         {({ isExpanded }) => (
           <>
@@ -67,6 +88,27 @@ export default function FiltersList() {
           </>
         )}
       </AccordionItem>
+
+      <AttributeFilter />
+
+      <AccordionItem>
+        {({ isExpanded }) => (
+          <>
+            <AccordionButton>
+              <Box flex={1} textAlign="left">
+                {t("filters:user.contributor")}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel>{isExpanded && <UserFilter filterKey="user" />}</AccordionPanel>
+          </>
+        )}
+      </AccordionItem>
+
+      <ReferenceFilter />
+
+      <MediaType />
+
       <AccordionItem>
         <AccordionButton>
           <Box flex={1} textAlign="left">
@@ -78,7 +120,6 @@ export default function FiltersList() {
           <TimeFilter />
         </AccordionPanel>
       </AccordionItem>
-
       {SITE_CONFIG.USERGROUP.ACTIVE && <UserGroupFilter />}
     </Accordion>
   );

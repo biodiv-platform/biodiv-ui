@@ -1,18 +1,25 @@
 import SpeciesListPageComponent from "@components/pages/species/list";
 import { SpeciesListProvider } from "@components/pages/species/list/use-species-list";
-import { axGetAllTraitsMeta, axGetSpeciesList } from "@services/species.service";
+import SITE_CONFIG from "@configs/site-config";
+import {
+  axGetAllFieldsMeta,
+  axGetAllTraitsMeta,
+  axGetSpeciesList
+} from "@services/species.service";
 import { axGetSpeciesGroupList } from "@services/taxonomy.service";
 import { axGroupList } from "@services/usergroup.service";
 import { DEFAULT_SPECIES_FILTER } from "@static/species";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
-function SpeciesListPage({ speciesData, species, traits, initialFilterParams }) {
+function SpeciesListPage({ speciesData, species, traits, fieldsMeta, initialFilterParams }) {
   return (
     <SpeciesListProvider
       speciesData={speciesData}
       traits={traits}
       species={species}
+      fieldsMeta={fieldsMeta}
       filter={initialFilterParams}
     >
       <SpeciesListPageComponent />
@@ -26,6 +33,9 @@ SpeciesListPage.config = {
 
 export const getServerSideProps = async (ctx) => {
   const aURL = absoluteUrl(ctx).href;
+  const langId = SITE_CONFIG.SPECIES.MULTILINGUAL_FIELDS
+    ? getLanguageId(ctx.locale)?.ID
+    : SITE_CONFIG.LANG.DEFAULT_ID;
   const { currentGroup } = await axGroupList(aURL);
   const initialFilterParams = {
     ...ctx.query,
@@ -37,6 +47,8 @@ export const getServerSideProps = async (ctx) => {
   const { data: species } = await axGetSpeciesGroupList();
 
   const { data: traits } = await axGetAllTraitsMeta();
+
+  const { data: fieldsMeta } = await axGetAllFieldsMeta({ langId });
   return {
     props: {
       speciesData: {
@@ -47,6 +59,7 @@ export const getServerSideProps = async (ctx) => {
       },
       species,
       traits,
+      fieldsMeta,
       initialFilterParams
     }
   };

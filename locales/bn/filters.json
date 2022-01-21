@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "অ্যাট্রিবিউশন"
+  },
   "clear": "পরিষ্কার {{filterCount}} ফিল্টার(গুলি)",
   "custom_fields": {
     "has_content": "কন্টেন্ট আছে",
@@ -78,6 +81,9 @@
   "rank": {
     "title": "পদমর্যাদা"
   },
+  "reference": {
+    "title": "রেফারেন্স"
+  },
   "scientific_name": {
     "all_names": {
       "title": "সব নাম"
@@ -92,6 +98,9 @@
       "title": "ট্যাক্সন অবস্থা"
     },
     "title": "বৈজ্ঞানিক নাম"
+  },
+  "species_field": {
+    "title": "প্রজাতির ক্ষেত্র"
   },
   "species_group": {
     "all": "সব",
@@ -141,6 +150,7 @@
     "title": "বৈশিষ্ট্য"
   },
   "user": {
+    "contributor": "অবদানকারী",
     "email": "ইমেইল",
     "group_role_title": "ব্যবহারকারীর গ্রুপের ভূমিকা",
     "institution_title": "ইনস্টিটিউট",

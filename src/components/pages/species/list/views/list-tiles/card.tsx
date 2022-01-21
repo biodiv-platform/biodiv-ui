@@ -29,7 +29,7 @@ export default function GridViewCard({ o }) {
               alt={simpleName}
             />
           </Box>
-          <Flex  direction="column" justifyContent="space-between" h="4.6rem" p={4} bg="gray.100">
+          <Flex direction="column" justifyContent="space-between" h="4.6rem" p={4} bg="gray.100">
             <Heading className="elipsis-2" size="sm" title={simpleName}>
               <ScientificName value={name} />
             </Heading>

@@ -7,6 +7,14 @@ export const SPECIES_FILTER_KEY = {
   commonName: {
     filterKey: "commonName",
     searchKey: "taxonomicNames.commonNames.name"
+  },
+  attributes: {
+    filterKey: "attributes",
+    searchKey: "fieldData.attributions"
+  },
+  reference: {
+    filterKey: "reference",
+    searchKey: "fieldData.references.title"
   }
 };
 
