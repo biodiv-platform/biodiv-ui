@@ -1,5 +1,5 @@
 import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useController } from "react-hook-form";
 
 import DropTarget from "./drop-target";
@@ -28,13 +28,7 @@ export default function ImageUploaderField({
 }: IDropzoneProps) {
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
-  const [value, setvalue] = useState<string>(field.value);
 
-  useEffect(() => {
-    if (value?.length > 0) {
-      field.onChange(value);
-    }
-  }, [value]);
 
   return (
     <FormControl isRequired={isRequired} isInvalid={fieldState.invalid} mb={mb}>
@@ -43,7 +37,7 @@ export default function ImageUploaderField({
         simpleUpload={simpleUpload}
         setFieldMapping={setFieldMapping}
         setShowMapping={setShowMapping}
-        setValue={setvalue}
+        field={field}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
     </FormControl>
