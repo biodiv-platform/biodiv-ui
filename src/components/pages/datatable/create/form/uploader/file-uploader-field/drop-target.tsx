@@ -39,14 +39,14 @@ const accept = [
   "application/vnd.ms-excel"
 ];
 interface userGroupDropTarget {
-  setValue;
+  field;
   setFieldMapping;
   setShowMapping;
   simpleUpload?: boolean;
 }
 
 export default function DropTarget({
-  setValue,
+  field,
   simpleUpload,
   setFieldMapping,
   setShowMapping
@@ -63,7 +63,7 @@ export default function DropTarget({
     const { success, data } = await axUploadObservationResource(getAssetObject(file), "datasets");
     if (success) {
       setFieldMapping(data.excelJson);
-      setValue(data.path);
+      field.onChange(data.path);
       setShowMapping(true);
       notification(t("datatable:notifications.sheet_upload_success"), NotificationType.Success);
     } else {
