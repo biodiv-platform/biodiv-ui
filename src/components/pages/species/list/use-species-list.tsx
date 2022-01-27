@@ -21,6 +21,8 @@ interface SpeciesContextProps {
   fieldsMeta: any;
   traits: any;
   addFilter?;
+  pushSpeciesFieldFilter?;
+  popSpeciesFieldFilter?;
   removeFilter?;
   children?;
   nextPage?;
@@ -64,8 +66,8 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
           _draft.l = [];
         });
       }
-      const { view, ...rest } = filter.f;
-      const { data } = await axGetSpeciesList({ ...rest });
+      const { view, description, ...rest } = filter.f;
+      const { data } = await axGetSpeciesList({ ...rest, ...deconstructSpeciesFieldFilter(description) });
       setSpeciesData((_draft) => {
         if (data?.speciesTiles?.length) {
           _draft.l.push(...deDupeDownloadLog(_draft.l, data.speciesTiles));
@@ -84,6 +86,15 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
     }
   };
 
+  const deconstructSpeciesFieldFilter = (sField): any => {
+    if (sField?.length) {
+      const path = sField.map((item) => item.split(".")[0]).join();
+      const description = sField.map((item) => item.split(".")[1]).join();
+      return { path, description }
+    }
+    return {}
+  }
+
   const nextPage = (max = 10) => {
     setFilter((_draft) => {
       _draft.f.offset = Number(_draft.f.offset) + max;
@@ -96,6 +107,29 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
       _draft.f[key] = value;
     });
   };
+  const pushSpeciesFieldFilter = (key, value) => {
+    setFilter((_draft) => {
+      if (value && !_draft.f[key]?.includes(value)) {
+        const filterList = _draft.f[key]?.filter((item) => !item.includes(value.split(".")[0]));
+        _draft.f.offset = 0;
+        _draft.f[key] = _draft.f[key] ? [...filterList, value] : [value];
+
+      }
+    });
+  }
+
+  const popSpeciesFieldFilter = (key, path) => {
+    setFilter((_draft) => {
+      if (_draft.f[key] && _draft.f[key]?.length > 0) {
+        _draft.f.offset = 0;
+        if (_draft.f[key]?.length <= 1) {
+          removeFilter(key)
+        } else {
+          _draft.f[key] = _draft.f[key]?.filter((item) => !item.includes(path));
+        }
+      }
+    });
+  }
 
   const removeFilter = (key) => {
     setFilter((_draft) => {
@@ -118,6 +152,8 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         species,
         traits,
         addFilter,
+        popSpeciesFieldFilter,
+        pushSpeciesFieldFilter,
         removeFilter,
         nextPage,
         setFilter,
