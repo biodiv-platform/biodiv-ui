@@ -28,12 +28,12 @@ export default function Header() {
         alignItems="center"
         justify="space-between"
       >
-        {dataTableData && dataTableData.n > 0 && (
+        {dataTableData && (
           <Text color="gray.600" mb={2}>
             {format(dataTableData.n)} {t("datatable:found")}
           </Text>
         )}
-        <Stack isInline={true} spacing={4} mb={4}>
+        {dataTableData.n > 0 && <Stack isInline={true} spacing={4} mb={4}>
           <Box>
             <Select
               maxW="10rem"
@@ -48,7 +48,7 @@ export default function Header() {
               ))}
             </Select>
           </Box>
-        </Stack>
+        </Stack>}
       </Flex>
     </>
   );
