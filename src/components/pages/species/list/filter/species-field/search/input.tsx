@@ -21,7 +21,7 @@ const TextFilterForm = styled.form`
 `;
 
 export default function TextFilterInput({ filterKey, path, label, mb = 0 }) {
-  const { filter, addFilter, removeFilter } = useSpeciesList();
+  const { filter, pushSpeciesFieldFilter, popSpeciesFieldFilter } = useSpeciesList();
   const defaultValue = filter?.[filterKey];
 
   const hForm = useForm<any>({
@@ -35,11 +35,9 @@ export default function TextFilterInput({ filterKey, path, label, mb = 0 }) {
 
   const handleOnChange = (v) => {
     if (v.query) {
-      addFilter(filterKey, v.query);
-      addFilter("path", path);
+      pushSpeciesFieldFilter(filterKey, `${path}.${v.query}`);
     } else {
-      removeFilter(filterKey);
-      removeFilter("path");
+      popSpeciesFieldFilter(filterKey, path);
     }
   };
 

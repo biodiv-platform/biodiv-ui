@@ -28,8 +28,6 @@ export default function ImageUploaderField({
 }: IDropzoneProps) {
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
-
-
   return (
     <FormControl isRequired={isRequired} isInvalid={fieldState.invalid} mb={mb}>
       <FormLabel htmlFor={name}>{label}</FormLabel>

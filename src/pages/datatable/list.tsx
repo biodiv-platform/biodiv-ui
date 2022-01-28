@@ -1,4 +1,5 @@
 import { DataTableFilterContextProvider } from "@components/pages/datatable/common/use-datatable-filter";
+import { DEFAULT_PARAMS } from "@components/pages/datatable/common/use-datatableObservation-filter";
 import DataTableListPageComponent from "@components/pages/datatable/list";
 import { axGetDataTableList } from "@services/datatable.service";
 import { axGetspeciesGroups } from "@services/observation.service";
@@ -22,22 +23,26 @@ DataTableListPage.config = {
   footer: false
 };
 
-DataTableListPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL);
+  const {
+    currentGroup: { id }
+  } = await axGroupList(aURL);
 
-  const initialFilterParams = { ...ctx.query, userGroupList: currentGroup.id };
+  const initialFilterParams = { ...DEFAULT_PARAMS, ...ctx.query, userGroupId: id };
   const { data } = await axGetDataTableList(initialFilterParams);
   const { data: speciesGroups } = await axGetspeciesGroups();
 
   return {
-    dataTableData: {
-      l: data.list || [],
-      n: data.count || 0,
-      hasMore: true
-    },
-    speciesGroups,
-    initialFilterParams
+    props: {
+      dataTableData: {
+        l: data.list || [],
+        n: data.count || 0,
+        hasMore: true
+      },
+      speciesGroups,
+      initialFilterParams
+    }
   };
 };
 

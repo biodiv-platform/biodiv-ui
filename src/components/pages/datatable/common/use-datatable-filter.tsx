@@ -23,6 +23,7 @@ export interface showPageFilters {
   offset?: string;
   limit?: string;
   sortOn?: string;
+  userGroupId?: string;
 }
 
 interface DataTableFilterContextProps {
@@ -42,7 +43,7 @@ const DataTableFilterContext = createContext<DataTableFilterContextProps>(
 
 export const DataTableFilterContextProvider = (props: DataTableFilterContextProps) => {
   const [filter, setFilter] = useImmer<{ f: any }>({
-    f: props.filter ? DEFAULT_PARAMS : props.filter
+    f: !props.filter ? DEFAULT_PARAMS : props.filter
   });
   const [specieList] = useState(props.species);
 
