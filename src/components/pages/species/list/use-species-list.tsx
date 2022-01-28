@@ -67,7 +67,10 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         });
       }
       const { view, description, ...rest } = filter.f;
-      const { data } = await axGetSpeciesList({ ...rest, ...deconstructSpeciesFieldFilter(description) });
+      const { data } = await axGetSpeciesList({
+        ...rest,
+        ...deconstructSpeciesFieldFilter(description)
+      });
       setSpeciesData((_draft) => {
         if (data?.speciesTiles?.length) {
           _draft.l.push(...deDupeDownloadLog(_draft.l, data.speciesTiles));
@@ -90,10 +93,10 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
     if (sField?.length) {
       const path = sField.map((item) => item.split(".")[0]).join();
       const description = sField.map((item) => item.split(".")[1]).join();
-      return { path, description }
+      return { path, description };
     }
-    return {}
-  }
+    return {};
+  };
 
   const nextPage = (max = 10) => {
     setFilter((_draft) => {
@@ -113,23 +116,22 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         const filterList = _draft.f[key]?.filter((item) => !item.includes(value.split(".")[0]));
         _draft.f.offset = 0;
         _draft.f[key] = _draft.f[key] ? [...filterList, value] : [value];
-
       }
     });
-  }
+  };
 
   const popSpeciesFieldFilter = (key, path) => {
     setFilter((_draft) => {
       if (_draft.f[key] && _draft.f[key]?.length > 0) {
         _draft.f.offset = 0;
         if (_draft.f[key]?.length <= 1) {
-          removeFilter(key)
+          removeFilter(key);
         } else {
           _draft.f[key] = _draft.f[key]?.filter((item) => !item.includes(path));
         }
       }
     });
-  }
+  };
 
   const removeFilter = (key) => {
     setFilter((_draft) => {
