@@ -24,7 +24,6 @@ export interface IDropzoneProps {
   isCreate?: boolean;
   children?;
   hidden?;
-  licensesList;
   onTabIndexChanged?;
 }
 
