@@ -5,11 +5,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
-import {
-  RESOURCES_UPLOADING,
-  SYNC_SINGLE_OBSERVATION,
-  TOGGLE_PHOTO_SELECTOR
-} from "@static/events";
+import { RESOURCES_UPLOADING, SYNC_SINGLE_OBSERVATION } from "@static/events";
 import { dateToUTC } from "@utils/date";
 import { cleanFacts, cleanTags } from "@utils/tags";
 import useTranslation from "next-translate/useTranslation";
@@ -37,7 +33,7 @@ export default function ObservationCreateForm({
 }) {
   const { t } = useTranslation();
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
-  const [isSelectedImages, setIsSelectedImages] = useState(true);
+  const [isSelectedImages, setIsSelectedImages] = useState<boolean>();
   const [isSubmitDisabled, setIsSubmitDisabled] = useState();
   const [customFieldList] = useState(
     ObservationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder)
@@ -79,13 +75,6 @@ export default function ObservationCreateForm({
       setIsSubmitDisabled(isUploading);
     },
     [RESOURCES_UPLOADING]
-  );
-
-  useListener(
-    (e) => {
-      setIsSelectedImages(e);
-    },
-    [TOGGLE_PHOTO_SELECTOR]
   );
 
   const hForm = useForm<any>({
@@ -250,7 +239,11 @@ export default function ObservationCreateForm({
       <PageHeading>👋 {t("observation:title")}</PageHeading>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <Uploader name="resources" licensesList={licensesList} />
+          <Uploader
+            name="resources"
+            licensesList={licensesList}
+            onTabIndexChanged={(ti) => setIsSelectedImages(ti > 0)}
+          />
           <Box hidden={isSelectedImages}>
             <Recodata languages={languages} />
             <GroupSelector name="sGroup" label={t("form:species_groups")} options={speciesGroups} />
