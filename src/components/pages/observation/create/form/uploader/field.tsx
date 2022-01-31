@@ -8,10 +8,8 @@ import {
   Tabs
 } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
-import { TOGGLE_PHOTO_SELECTOR } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
-import { emit } from "react-gbus";
 import { useController } from "react-hook-form";
 
 import AudioInput from "./audio-input";
@@ -26,10 +24,10 @@ export interface IDropzoneProps {
   isCreate?: boolean;
   children?;
   hidden?;
-  licensesList;
+  onTabIndexChanged?;
 }
 
-const DropzoneField = ({ name, mb = 4, hidden }: IDropzoneProps) => {
+const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzoneProps) => {
   const { observationAssets } = useObservationCreate();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
@@ -40,13 +38,13 @@ const DropzoneField = ({ name, mb = 4, hidden }: IDropzoneProps) => {
     observationAssets?.length && field.onChange(observationAssets);
   }, []);
 
+  useEffect(() => {
+    onTabIndexChanged && onTabIndexChanged(tabIndex);
+  }, [tabIndex]);
+
   useDidUpdateEffect(() => {
     field.onChange(observationAssets);
   }, [observationAssets]);
-
-  useEffect(() => {
-    emit(TOGGLE_PHOTO_SELECTOR, tabIndex !== 0);
-  }, [tabIndex]);
 
   const onSelectionDone = () => setTabIndex(0);
 

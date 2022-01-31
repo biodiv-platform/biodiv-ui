@@ -6,7 +6,11 @@ import IndexedDBProvider from "use-indexeddb";
 import DropzoneField, { IDropzoneProps } from "./field";
 import { ObservationCreateProvider } from "./use-observation-resources";
 
-const DropzoneFieldContainer = (props: IDropzoneProps) => {
+interface IDropzoneExtendedProps extends IDropzoneProps {
+  licensesList;
+}
+
+const DropzoneFieldContainer = (props: IDropzoneExtendedProps) => {
   const form = useFormContext();
 
   return (

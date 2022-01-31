@@ -43,7 +43,7 @@ const QuillInput = ({ value: EValue, onChange }: QuillInputProps) => {
 
   useEffect(() => {
     if (quill) {
-      quill.clipboard.dangerouslyPasteHTML(value || "");
+      quill.setContents(quill.clipboard.convert(value || ""));
 
       quill.on("text-change", () => {
         setValue(quill.root.innerHTML);
