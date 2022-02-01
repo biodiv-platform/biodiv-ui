@@ -1,5 +1,5 @@
-import { Image } from "@chakra-ui/react";
-import BlueLink from "@components/@core/blue-link";
+import { Image, Link } from "@chakra-ui/react";
+import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import { RESOURCE_SIZE } from "@static/constants";
@@ -23,9 +23,11 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
           Header: "species:scientific_name",
           accessor: "name",
           Cell: ({ value, cell }) => (
-            <BlueLink href={`/species/show/${cell.row.original.id}`}>
-              <ScientificName value={value} />
-            </BlueLink>
+            <LocalLink href={`/species/show/${cell.row.original.id}`} prefixGroup={true}>
+              <Link>
+                <ScientificName value={value} />
+              </Link>
+            </LocalLink>
           )
         };
 

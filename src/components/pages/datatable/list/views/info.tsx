@@ -59,7 +59,7 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
       <Box p={4} w="full">
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={2}>
-          <LocalLink href={`/datatable/show/${datatable.id}`}>
+          <LocalLink href={`/datatable/show/${datatable.id}`} prefixGroup={true}>
             <a>
               <HStack alignItems="center" spacing={4}>
                 <Heading

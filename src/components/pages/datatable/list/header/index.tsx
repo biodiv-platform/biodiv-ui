@@ -33,22 +33,24 @@ export default function Header() {
             {format(dataTableData.n)} {t("datatable:found")}
           </Text>
         )}
-        {dataTableData.n > 0 && <Stack isInline={true} spacing={4} mb={4}>
-          <Box>
-            <Select
-              maxW="10rem"
-              aria-label={t("common:list.sort_by")}
-              value={filter?.sortOn}
-              onChange={handleOnSort}
-            >
-              {sortByOptions.map(({ name, key }) => (
-                <option key={key} value={key}>
-                  {t(name)}
-                </option>
-              ))}
-            </Select>
-          </Box>
-        </Stack>}
+        {dataTableData.n > 0 && (
+          <Stack isInline={true} spacing={4} mb={4}>
+            <Box>
+              <Select
+                maxW="10rem"
+                aria-label={t("common:list.sort_by")}
+                value={filter?.sortOn}
+                onChange={handleOnSort}
+              >
+                {sortByOptions.map(({ name, key }) => (
+                  <option key={key} value={key}>
+                    {t(name)}
+                  </option>
+                ))}
+              </Select>
+            </Box>
+          </Stack>
+        )}
       </Flex>
     </>
   );
