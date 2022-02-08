@@ -11,12 +11,6 @@ const SearchForm = styled.form`
     line-height: 1.8;
     border-radius: 2rem;
     width: 11rem;
-    background: var(--chakra-colors-gray-700);
-    color: var(--chakra-colors-white);
-    &:focus {
-      background: var(--chakra-colors-white);
-      color: initial;
-    }
   }
   ${Mq.max.sm} {
     width: 100%;
