@@ -14,10 +14,10 @@ const SimpleLink = ({ children, to, params }) => (
 
 export default function MenuItems(props) {
   const { name, nameIcon: NameIcon, to, rows = [], cell: CCell, params, isLazy } = props;
-  const isArrow = rows.length > 0 || CCell;
+  const isDropdown = rows.length > 0 || CCell;
   const { t } = useTranslation();
 
-  return isArrow ? (
+  return isDropdown ? (
     <Menu placement="bottom-end" isLazy={isLazy}>
       {({ isOpen }) => (
         <>
