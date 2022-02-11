@@ -897,10 +897,10 @@
   resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-3.12.2.tgz#dfad88da330e6d9f042261703567cc21d60b44a5"
   integrity sha512-obz3HpE6AjGNZIi4sY34K+UQBvaJauQcpG4lNv1jAseUQEligudklnkzh5HTw0etF0BgtOBgv19oCCdEt0UTPw==
 
-"@ibp/naksha-gmaps-draw@3.12.15":
-  version "3.12.15"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.12.15.tgz#3397ce293838d64a83713b96a15ef5e87796fb77"
-  integrity sha512-fbBOx5W2pR8X/JL0zzBMAlocImxVBJWDAxxbch5EmSn5U5LbKBVbDsUBeCSTS415LFs1rc9ovd4vPNG2f9I/QQ==
+"@ibp/naksha-gmaps-draw@3.13.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-3.13.0.tgz#44f4ce223e8ec953ca5d6ee184fb30fa47b85288"
+  integrity sha512-b3Oj+J50lT8in2Vp/SKMEUa7hMr9xRdyioEcnJlOCzrXQiB5HLn1xPCfR2299G1uFNATKRy5tJtwAJhpgmKinA==
   dependencies:
     "@ibp/naksha-commons" "3.12.2"
     "@turf/bbox" "^6.5.0"
@@ -2659,10 +2659,10 @@
   dependencies:
     "@types/geojson" "*"
 
-"@types/node@^17.0.16":
-  version "17.0.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.16.tgz#e3733f46797b9df9e853ca9f719c8a6f7b84cd26"
-  integrity sha512-ydLaGVfQOQ6hI1xK2A5nVh8bl0OGoIfYMxPWHqqYe9bTkWCfqiVvZoh2I/QF2sNSkZzZyROBoTefIEI+PB6iIA==
+"@types/node@^17.0.17":
+  version "17.0.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.17.tgz#a8ddf6e0c2341718d74ee3dc413a13a042c45a0c"
+  integrity sha512-e8PUNQy1HgJGV3iU/Bp2+D/DXh3PYeyli8LgIwsQcs1Ar1LoaWHSIT6Rw+H2rNJmiq6SNWiDytfx8+gYj7wDHw==
 
 "@types/npmlog@^4.1.2":
   version "4.1.4"
@@ -4070,10 +4070,10 @@ format@^0.2.0:
   resolved "https://registry.yarnpkg.com/format/-/format-0.2.2.tgz#d6170107e9efdc4ed30c9dc39016df942b5cb58b"
   integrity sha1-1hcBB+nv3E7TDJ3DkBbflCtctYs=
 
-framer-motion@^6.2.4:
-  version "6.2.4"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.2.4.tgz#3d9c61be3fb8381a770efccdb56cc421de662979"
-  integrity sha512-1UfnSG4c4CefKft6QMYGx8AWt3TtaFoR/Ax4dkuDDD5BDDeIuUm7gesmJrF8GzxeX/i6fMm8+MEdPngUyPVdLA==
+framer-motion@^6.2.6:
+  version "6.2.6"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.2.6.tgz#75277b4944a1234beaf7453da19028bbf4f75cce"
+  integrity sha512-7eGav5MxEEzDHozQTDY6+psTIOw2i2kM1QVoJOC3bCp9VOKoo+mKR5n7aT5JPh7ksEKFYJYz0GJDils/9S+oLA==
   dependencies:
     framesync "6.0.1"
     hey-listen "^1.0.8"
@@ -4953,13 +4953,13 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^3.12.15:
-  version "3.12.15"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.12.15.tgz#0723ba8618cd6415d262b55d8bf72b31f6565669"
-  integrity sha512-0w8XeiRHIxxhs/PQ7Lb7R0LfBeT1yQbNt7azKoDFL9rgLZchwvItLxcts/8EhLR31rvTrOshtZxX366k0BrI0g==
+naksha-components-react@^3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-3.13.0.tgz#2df8c8b135feb61584b95d78aa9b950ea69be7a7"
+  integrity sha512-ohue3U67D+CdvXlSn4uPyN5H4Om3skSlzFk8Z+XHQiKix2v6XYSYXiH5nngcD3fOdsqRgZVaLGMsH0NJv5D6pA==
   dependencies:
     "@ibp/naksha-commons" "3.12.2"
-    "@ibp/naksha-gmaps-draw" "3.12.15"
+    "@ibp/naksha-gmaps-draw" "3.13.0"
     "@ibp/naksha-gmaps-view" "3.12.11"
     "@ibp/naksha-mapbox-draw" "3.12.3"
     "@ibp/naksha-mapbox-list" "3.12.7"
@@ -5650,10 +5650,10 @@ react-dropzone@^11.4.2:
     file-selector "^0.2.2"
     prop-types "^15.7.2"
 
-react-dropzone@^12.0.1:
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-12.0.1.tgz#926d8537405845fa058869e70d7829938eca5552"
-  integrity sha512-E//nFCJfb8eDZ0zI9bOZ/v+8DOwK+7IY76Fv8u8ogfqX/d/K+32EWkFQ2+O9kF8XfUAyGtSA4cKvCjW4o78Qgg==
+react-dropzone@^12.0.2:
+  version "12.0.2"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-12.0.2.tgz#3c34f71f378bc35bf06e8e5a1ccb415a5b7c9917"
+  integrity sha512-wnU3+QZA9H5XqC+UNdEDs5YuB+XgJh5mQ9Bop4PUtN/2nKTGTpBbfkcsm9OVCYylBHak69Ezjzbhx/0Cb6OfjA==
   dependencies:
     attr-accept "^2.2.2"
     file-selector "^0.4.0"
@@ -5717,10 +5717,15 @@ react-highlighter@^0.4.3:
     escape-string-regexp "^1.0.5"
     prop-types "^15.6.0"
 
-react-hook-form@^7.19.5, react-hook-form@^7.26.1:
+react-hook-form@^7.19.5:
   version "7.26.1"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.26.1.tgz#8f5c0aa81a452f5ebcb6a2d7253800011e735b1c"
   integrity sha512-/Qw/7IsCCVfYSGryJAMcouEpIDgWZJPeHR15J0IFSgo1BgofcfnY+AeUDcYD1E3yzzXYpR7NHyJehhkBKvjdMg==
+
+react-hook-form@^7.27.0:
+  version "7.27.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.27.0.tgz#2c05e54ca557f71c55f645311ff612ec936c6c7c"
+  integrity sha512-NEh3Qbz1Rg3w95SRZv0kHorHN3frtMKasplznMBr8RkFrE4pVxjd/zo3clnFXpD0FppUVHBMfsTMtTsa6wyQrA==
 
 react-infinite-scroll-component@^6.1.0:
   version "6.1.0"
@@ -6442,7 +6447,12 @@ tiny-invariant@^1.0.6:
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.2.0.tgz#a1141f86b672a9148c72e978a19a73b9b94a15a9"
   integrity sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==
 
-tinymce@^5.10.2, tinymce@^5.5.1:
+tinymce@^5.10.3:
+  version "5.10.3"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.10.3.tgz#9485cf00159fd70c4948cb5e9dd49bce2a775899"
+  integrity sha512-O59ssHNnujWvSk5Gt8hIGrdNCMKVWVQv9F8siAgLTRgTh0t3NDHrP1UlLtCxArUi9DPWZvlBeUz8D5fJTu7vnA==
+
+tinymce@^5.5.1:
   version "5.10.2"
   resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.10.2.tgz#cf1ff01025909be26c64348509e6de8e70d58e1d"
   integrity sha512-5QhnZ6c8F28fYucLLc00MM37fZoAZ4g7QCYzwIl38i5TwJR5xGqzOv6YMideyLM4tytCzLCRwJoQen2LI66p5A==
