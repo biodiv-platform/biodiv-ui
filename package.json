@@ -82,6 +82,7 @@
     "react-window": "^1.8.6",
     "tinymce": "^5.10.2",
     "url-slug": "^3.0.3",
+    "use-deep-compare": "^1.1.0",
     "use-immer": "^0.6.0",
     "use-indexeddb": "^1.0.9",
     "use-timer": "^2.0.1",

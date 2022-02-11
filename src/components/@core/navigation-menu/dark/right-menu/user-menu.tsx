@@ -37,25 +37,21 @@ export default function UserMenu() {
 
   return isLoggedIn ? (
     <Menu placement="bottom-end" isLazy={true}>
-      {({ onClose }) => (
-        <>
-          <MenuButton
-            as={Link}
-            role="button"
-            tabIndex={0}
-            aria-label={t("header:menu_primary.settings.title")}
-          >
-            <Avatar
-              size="xs"
-              mr={2}
-              name={user?.name}
-              src={getUserImage(user?.profile_pic, user.name)}
-            />
-            {user?.name} <ChevronDownIcon />
-          </MenuButton>
-          <SubMenu onClose={onClose} rows={userMenuRows} prefix="header:menu_primary.settings." />
-        </>
-      )}
+      <MenuButton
+        as={Link}
+        role="button"
+        tabIndex={0}
+        aria-label={t("header:menu_primary.settings.title")}
+      >
+        <Avatar
+          size="xs"
+          mr={2}
+          name={user?.name}
+          src={getUserImage(user?.profile_pic, user.name)}
+        />
+        {user?.name} <ChevronDownIcon />
+      </MenuButton>
+      <SubMenu rows={userMenuRows} prefix="header:menu_primary.settings." />
     </Menu>
   ) : (
     <LoginButton />
