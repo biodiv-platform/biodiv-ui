@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
+import {axExtractAllParams} from "@services/extraction.service"
 /* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
 
 const schema = yup.object().shape({
@@ -18,9 +19,15 @@ export default function ColumnSelect({ availableColumns }) {
   });
   const [x, setX] = useState();
 
-  const submitForm = (data) => {
-    console.log(data);
-    setX(data);
+  const submitForm = async (dat) => {
+    const payload={
+      ...dat
+    }
+    const {success,data}=await axExtractAllParams(payload)
+    if(success){
+      console.log("here is the data=",data)
+    }
+    setX(dat);
     //call an api
   };
   /*const a = [
@@ -30,7 +37,7 @@ export default function ColumnSelect({ availableColumns }) {
   ];*/
 
   const columnList = availableColumns.map((column) => ({ label: column, value: column }));
-  console.log(columnList);
+  //console.log(columnList);
 
   return (
     <FormProvider {...hForm}>
