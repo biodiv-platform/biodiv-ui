@@ -1,5 +1,5 @@
 import { IDBObservationAsset } from "@interfaces/custom";
-import { MyUpload } from "@interfaces/files";
+import { MyCsvUpload, MyUpload } from "@interfaces/files";
 import { ENDPOINT, RESOURCE_TYPE } from "@static/constants";
 import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import http from "@utils/http";
@@ -68,6 +68,21 @@ export const axUploadDocumentResource = async (document: File): Promise<MyUpload
   const formData = new FormData();
   formData.append("hash", LOCAL_ASSET_PREFIX + nanoid());
   formData.append("module", "document");
+  formData.append("upload", document, document.name);
+
+  const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
+
+  return data;
+};
+
+export const axUploadCsvCurationResource = async (document: File): Promise<MyCsvUpload> => {
+  const formData = new FormData();
+  formData.append("hash", "curate-" + nanoid());
+  formData.append("module", "curation");
   formData.append("upload", document, document.name);
 
   const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {

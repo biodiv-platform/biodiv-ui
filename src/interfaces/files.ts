@@ -138,6 +138,9 @@ export interface MyUpload {
   longitude?: number; // double
   fileSize?: string;
 }
+export interface MyCsvUpload extends MyUpload {
+  excelJson?: { csvHeaders: string[] };
+}
 export interface ParameterizedHeader {
   value?: string;
   parameters?: {

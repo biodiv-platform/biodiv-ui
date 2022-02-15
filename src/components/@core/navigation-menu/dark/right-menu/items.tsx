@@ -39,6 +39,11 @@ export default [
         to: "/map/create",
         role: [Role.Admin]
       },
+      {
+        active: SITE_CONFIG.DATA_CURATION.ACTIVE,
+        name: "data_curate",
+        to: "/curation"
+      },
       /*
     {
       name: "add_list",

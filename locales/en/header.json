@@ -14,7 +14,8 @@
       "add_trait_or_value": "Add Trait/Value",
       "contribute_to_map": "Contribute to Map",
       "contribute_to_species": "Contribute to Species",
-      "title": "Contribute"
+      "title": "Contribute",
+      "data_curate":"Data Curation"
     },
     "groups": {
       "see_all": "See All",
