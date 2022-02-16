@@ -1,0 +1,76 @@
+.table,
+.sorting-row {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  background: var(--chakra-colors-white);
+  position: relative;
+  width: 100%;
+}
+.table td,
+.table th,
+.sorting-row td,
+.sorting-row th {
+  border-left: 1px solid var(--chakra-colors-gray-300);
+  border-width: 0 0 0 1px;
+  font-size: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0.4em;
+  background-color: transparent;
+  min-width: 60px;
+}
+.table thead,
+.sorting-row thead {
+  text-align: left;
+}
+.table thead tr:nth-child(1),
+.sorting-row thead tr:nth-child(1) {
+  color: #000;
+  text-transform: capitalize;
+}
+.table [data-highlight="true"],
+.sorting-row [data-highlight="true"] {
+  border-width: 3px 5px;
+  border-color: var(--chakra-colors-gray-700);
+}
+.table [data-highlight="true"] td,
+.sorting-row [data-highlight="true"] td {
+  background: var(--chakra-colors-yellow-100) !important;
+}
+
+.table-odd td,
+.table-striped tr:nth-child(2n-1) td {
+  background-color: var(--chakra-colors-gray-200);
+}
+
+.sorting-row {
+  display: table;
+  cursor: move;
+}
+
+.sorting-row thead > th,
+.sorting-row td,
+.table-bordered thead > th,
+.table-bordered td {
+  border-bottom: 1px solid var(--chakra-colors-gray-300);
+}
+.sorting-row thead tr,
+.sorting-row td,
+.table-bordered thead tr,
+.table-bordered td {
+  border: 1px solid var(--chakra-colors-gray-300);
+}
+.sorting-row tbody > tr:last-child > td,
+.table-bordered tbody > tr:last-child > td {
+  border-bottom-width: 0;
+}
+
+.table-horizontal td,
+.table-horizontal th {
+  border-width: 0 0 0 1px;
+  border-bottom: 1px solid var(--chakra-colors-gray-300);
+}
+.table-horizontal tbody > tr:last-child > td {
+  border-bottom-width: 0;
+}

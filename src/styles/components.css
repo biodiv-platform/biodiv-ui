@@ -2,31 +2,35 @@
   min-height: 6rem;
   border-radius: 0.25rem;
   border: 1px solid var(--chakra-colors-gray-300);
-  .textarea__highlighter,
-  .textarea__input {
-    padding: 8px 1rem;
-  }
-  .textarea__suggestions {
-    position: absolute;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
-    border: 1px solid var(--chakra-colors-gray-300);
-  }
+}
+.textarea .textarea__highlighter,
+.textarea .textarea__input {
+  padding: 8px 1rem;
+}
+.textarea .textarea__suggestions {
+  position: absolute;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--chakra-colors-gray-300);
 }
 
 textarea,
 input {
   border-color: var(--chakra-colors-gray-300) !important;
-  &:focus,
-  &:active {
-    border-color: var(--chakra-colors-blue-500) !important;
-  }
-  &[aria-invalid="true"] {
-    border-color: var(--chakra-colors-red-500) !important;
-  }
-  &:disabled {
-    background: var(--chakra-colors-gray-200) !important;
-  }
+}
+textarea:focus,
+textarea:active,
+input:focus,
+input:active {
+  border-color: var(--chakra-colors-blue-500) !important;
+}
+textarea[aria-invalid="true"],
+input[aria-invalid="true"] {
+  border-color: var(--chakra-colors-red-500) !important;
+}
+textarea:disabled,
+input:disabled {
+  background: var(--chakra-colors-gray-200) !important;
 }
 
 [aria-invalid="true"] > div > div {
@@ -38,10 +42,8 @@ input {
   margin-bottom: 0 !important;
 }
 
-.places-search {
-  > div:first-child {
-    width: 100%;
-  }
+.places-search > div:first-child {
+  width: 100%;
 }
 
 .gray-box,
@@ -64,11 +66,11 @@ input {
   top: 0px;
   position: relative;
   overflow: hidden;
-  &:hover {
-    transition: all 0.2s ease-out;
-    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
-    top: -2px;
-  }
+}
+.hover-box:hover {
+  transition: all 0.2s ease-out;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  top: -2px;
 }
 
 .container,
@@ -78,9 +80,10 @@ input {
   padding-left: 1.5rem;
   margin-right: auto;
   margin-left: auto;
-  &.mt {
-    margin-top: 1rem;
-  }
+}
+.container.mt,
+.container-fluid.mt {
+  margin-top: 1rem;
 }
 
 @media (min-width: 1280px) {
@@ -88,7 +91,6 @@ input {
     max-width: 1280px;
   }
 }
-
 button[role="tab"] {
   padding: 0.75rem 1rem;
 }
@@ -130,10 +132,8 @@ button[role="tab"] {
   line-height: normal;
 }
 
-.chakra-tabs.nospace {
-  [role="tabpanel"] {
-    padding: 0;
-  }
+.chakra-tabs.nospace [role="tabpanel"] {
+  padding: 0;
 }
 
 .tox-tinymce-aux {

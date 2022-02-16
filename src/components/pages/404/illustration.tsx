@@ -8,6 +8,7 @@ function NotFoundIllustration() {
       height="778"
       fill="none"
       viewBox="0 0 1121 778"
+      style={{ width: "450px", maxWidth: "90%", height: "auto" }}
     >
       <path
         fill="#ED8936"

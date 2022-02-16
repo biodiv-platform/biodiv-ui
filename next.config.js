@@ -2,5 +2,6 @@
 const nextTranslate = require("next-translate");
 
 module.exports = nextTranslate({
-  concurrentFeatures: true
+  concurrentFeatures: true,
+  experimental: { reactRoot: true }
 });

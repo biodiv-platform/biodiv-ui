@@ -39,7 +39,7 @@ export const TextAreaField = ({
         minH="124px"
         isDisabled={disabled}
         bg="white"
-        maxlength={maxLength}
+        maxLength={maxLength}
         {...field}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
