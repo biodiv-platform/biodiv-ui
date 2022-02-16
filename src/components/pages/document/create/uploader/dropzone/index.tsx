@@ -30,7 +30,7 @@ const DropTargetBox = styled.div`
   }
 `;
 
-const accept = ".pdf";
+const accept = "application/pdf";
 
 export default function DocumentDropzone() {
   const { selectedDocument, addDocument } = useManageDocument();

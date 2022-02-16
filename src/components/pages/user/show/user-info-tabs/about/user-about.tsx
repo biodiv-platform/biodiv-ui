@@ -25,7 +25,9 @@ export default function UserAbout({ user }: UserProfileProps) {
       value: user.website,
       cell: (
         <Stack isInline={false}>
-          <ExternalBlueLinkList hrefs={user?.website?.split(",")} />
+          <ExternalBlueLinkList
+            hrefs={user?.website?.split(",").map((url) => (url.includes("//") ? url : `//${url}`))}
+          />
         </Stack>
       )
     },

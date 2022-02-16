@@ -22,17 +22,15 @@ body,
   flex-shrink: 0;
 }
 
-h1,
-h2,
-h3,
-a,
-p,
-span,
-.svg--inline {
-  svg {
-    display: initial !important;
-    vertical-align: middle !important;
-  }
+h1 svg,
+h2 svg,
+h3 svg,
+a svg,
+p svg,
+span svg,
+.svg--inline svg {
+  display: initial !important;
+  vertical-align: middle !important;
 }
 
 .icon-tabs svg {
@@ -61,11 +59,11 @@ span,
   width: 1px;
   height: 1px;
   overflow: hidden;
-  &:focus {
-    width: auto;
-    height: auto;
-    background: var(--chakra-colors-blue-500);
-    color: var(--chakra-colors-white);
-    padding: 1rem;
-  }
+}
+.start-of-content:focus {
+  width: auto;
+  height: auto;
+  background: var(--chakra-colors-blue-500);
+  color: var(--chakra-colors-white);
+  padding: 1rem;
 }

@@ -10,7 +10,7 @@ const getPageLink = (lang, to) => {
   return typeof to === "string" ? to : to?.[lang] || to?.[SITE_CONFIG.LANG.DEFAULT];
 };
 
-export default function SubMenu({ rows, onClose, prefix = "" }) {
+export default function SubMenu({ rows, prefix = "" }) {
   const { t, lang } = useTranslation();
   const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
 
@@ -31,9 +31,7 @@ export default function SubMenu({ rows, onClose, prefix = "" }) {
               </Link>
             ) : (
               <LocalLink href={toLink} params={item.params} prefixGroup={true}>
-                <Link w="full" onClick={onClose}>
-                  {label}
-                </Link>
+                <Link w="full">{label}</Link>
               </LocalLink>
             )}
           </MenuItem>
