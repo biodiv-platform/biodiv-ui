@@ -6,26 +6,29 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
-import {axExtractAllParams} from "@services/extraction.service"
+import { axExtractAllParams } from "@services/extraction.service";
 /* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
 
 const schema = yup.object().shape({
   sname: yup.array().required("its a required field")
 });
 
-export default function ColumnSelect({ availableColumns }) {
+export default function ColumnSelect({ availableColumns, filePath }) {
   const hForm = useForm({
     resolver: yupResolver(schema)
   });
   const [x, setX] = useState();
 
   const submitForm = async (dat) => {
-    const payload={
-      ...dat
-    }
-    const {success,data}=await axExtractAllParams(payload)
-    if(success){
-      console.log("here is the data=",data)
+    const payload = {
+      ...dat,
+      filePath:filePath
+    };
+
+    console.log(dat)
+    const { success, data } = await axExtractAllParams(payload);
+    if (success) {
+      console.log("here is the data=", data);
     }
     setX(dat);
     //call an api

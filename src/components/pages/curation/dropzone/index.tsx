@@ -34,14 +34,20 @@ const DropTargetBox = styled.div`
   }
 `;
 
-const addCsvFile = async (file, setter) => {
+const addCsvFile = async (file, setter, setterFilePath, userId) => {
   const resource = await axUploadCsvCurationResource(file);
 
-  console.log(resource.path);
+  //console.log(resource.path);
+
   setter(resource.excelJson?.csvHeaders);
+  const absFilePath = `/app/biodiv-image/myUploads/${userId}${resource.path}`;
+  setterFilePath(absFilePath);
+
+  console.log(absFilePath);
+
   //path = resource.path;
 };
-export default function CsvDropzoneComponent({setCsvHeaders}) {
+export default function CsvDropzoneComponent({ setCsvHeaders, setFilePath, userId }) {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const [columns, setColumns] = useState<object>();
@@ -52,7 +58,7 @@ export default function CsvDropzoneComponent({setCsvHeaders}) {
     }
 
     setIsProcessing(true);
-    await addCsvFile(file, setCsvHeaders);
+    await addCsvFile(file, setCsvHeaders, setFilePath, userId);
 
     setIsProcessing(false);
   };
