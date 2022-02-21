@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "കടപ്പാട്"
+  },
   "clear": "{{filterCount}} ഫിൽട്ടർ(കൾ)",
   "custom_fields": {
     "has_content": "ഉള്ളടക്കം ഉണ്ട്",
@@ -64,6 +67,7 @@
     "video": "വീഡിയോ"
   },
   "name": {
+    "common_name": "പൊതുവായ പേര്",
     "reco_name": {
       "title": "പേര്"
     },
@@ -73,6 +77,12 @@
       "title": "പദവി"
     },
     "title": "ശാസ്ത്രീയ നാമം"
+  },
+  "rank": {
+    "title": "റാങ്ക്"
+  },
+  "reference": {
+    "title": "റഫറൻസ്"
   },
   "scientific_name": {
     "all_names": {
@@ -88,6 +98,9 @@
       "title": "ടാക്സൺ നില"
     },
     "title": "ശാസ്ത്രീയ നാമം"
+  },
+  "species_field": {
+    "title": "സ്പീഷീസ് ഫീൽഡ്"
   },
   "species_group": {
     "all": "എല്ലാം",
@@ -111,6 +124,7 @@
   "time": {
     "created_on": "സൃഷ്ടിച്ച തീയതി",
     "last_logged": "അവസാനം ലോഗിൻ ചെയ്‌തു",
+    "last_updated": "അവസാനമായി പുതുക്കിയത്",
     "max_date": "പരമാവധി തീയതി",
     "min_date": "കുറഞ്ഞ തീയതി",
     "month": {

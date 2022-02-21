@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "आरोपण"
+  },
   "clear": "साफ़ {{filterCount}} फ़िल्टर(ओं)",
   "custom_fields": {
     "has_content": "सामग्री है",
@@ -78,6 +81,9 @@
   "rank": {
     "title": "पद"
   },
+  "reference": {
+    "title": "संदर्भ"
+  },
   "scientific_name": {
     "all_names": {
       "title": "सभी नाम"
@@ -92,6 +98,9 @@
       "title": "टैक्सन की स्थिति"
     },
     "title": "वैज्ञानिक नाम"
+  },
+  "species_field": {
+    "title": "प्रजाति क्षेत्र"
   },
   "species_group": {
     "all": "सब",

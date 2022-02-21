@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "ਤਾਲਮੇਲ",
+    "district": "ਜ਼ਿਲ੍ਹਾ",
     "forest_type": "ਜੰਗਲ ਦੀ ਕਿਸਮ",
     "geoprivacy_enabled": "ਜਿਓਪ੍ਰਵਸੀਟੀ ਯੋਗ",
+    "protected_area_name": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ",
+    "province": "ਸੂਬਾ",
     "rainfall": "ਮੀਂਹ",
     "soil": "ਮਿੱਟੀ",
     "tehsil": "ਤਹਿਸੀਲ",

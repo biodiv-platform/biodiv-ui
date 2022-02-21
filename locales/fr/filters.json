@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "Attribution"
+  },
   "clear": "Nettoyer {{filterCount}} Filtre(s)",
   "custom_fields": {
     "has_content": "A du contenu",
@@ -78,6 +81,9 @@
   "rank": {
     "title": "Rang"
   },
+  "reference": {
+    "title": "Référence"
+  },
   "scientific_name": {
     "all_names": {
       "title": "Tous les noms"
@@ -92,6 +98,9 @@
       "title": "Statut de taxon"
     },
     "title": "Nom scientifique"
+  },
+  "species_field": {
+    "title": "Champ d'espèces"
   },
   "species_group": {
     "all": "Tout",

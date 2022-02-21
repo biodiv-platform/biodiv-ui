@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "ସଂଯୋଜନାଗୁଡ଼ିକ",
+    "district": "ଜିଲ୍ଲା",
     "forest_type": "ଜଙ୍ଗଲ ପ୍ରକାର",
     "geoprivacy_enabled": "ଜିଓଭିଭୁଟିଭ୍ ସକ୍ଷମ |",
+    "protected_area_name": "ସଂରକ୍ଷିତ କ୍ଷେତ୍ର |",
+    "province": "ପ୍ରଦେଶ",
     "rainfall": "ବର୍ଷା",
     "soil": "ମାଟି",
     "tehsil": "Thehsill",

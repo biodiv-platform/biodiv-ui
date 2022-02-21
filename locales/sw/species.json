@@ -103,7 +103,10 @@
     "success": "Aina zimefutwa kwa mafanikio.",
     "title": "Futa aina"
   },
+  "resource": "Rasilimali",
+  "scientific_name": "Jina la kisayansi",
   "share": "Shiriki aina hii",
+  "species_group": "Kikundi cha Aina",
   "status": "Hali",
   "synonym": {
     "add": {

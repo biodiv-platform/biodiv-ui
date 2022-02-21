@@ -58,6 +58,23 @@
     "terms": "Fepetran'ny serivisy",
     "text": "Manaiky an'ity tranonkala ity aho"
   },
+  "unsubscribe": {
+    "error": {
+      "contact_us": "Contact",
+      "description": "Tsy afaka tsy misoratra anarana!",
+      "title": "fahadisoana"
+    },
+    "landing": {
+      "confirm": "Manamarina",
+      "description": "Malahelo izahay mahita anao mandeha!",
+      "title": "Tsy misoratra anarana"
+    },
+    "success": {
+      "description": "Nahomby ny tsy nisoratra anarana!",
+      "home": "an-trano",
+      "title": "FETY"
+    }
+  },
   "update_error": "Tsy afaka nanavao",
   "update_password": "Hanavao ny tenimiafina",
   "updated": "Nohavaozina soa aman-tsara",

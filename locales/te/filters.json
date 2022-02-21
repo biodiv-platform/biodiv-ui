@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "ఆపాదింపు"
+  },
   "clear": "{{filterCount}} వడపోత (లు)",
   "custom_fields": {
     "has_content": "కంటెంట్ ఉంది",
@@ -64,6 +67,7 @@
     "video": "వీడియో"
   },
   "name": {
+    "common_name": "సాధారణ పేరు",
     "reco_name": {
       "title": "పేరు"
     },
@@ -73,6 +77,12 @@
       "title": "స్థితి"
     },
     "title": "శాస్త్రీయ పేరు"
+  },
+  "rank": {
+    "title": "ర్యాంక్"
+  },
+  "reference": {
+    "title": "సూచన"
   },
   "scientific_name": {
     "all_names": {
@@ -88,6 +98,9 @@
       "title": "టాక్సన్ స్థితి"
     },
     "title": "శాస్త్రీయ పేరు"
+  },
+  "species_field": {
+    "title": "జాతుల క్షేత్రం"
   },
   "species_group": {
     "all": "అన్ని",
@@ -111,6 +124,7 @@
   "time": {
     "created_on": "సృష్టించబడిన తేదీ",
     "last_logged": "చివరిగా లాగిన్ అయ్యారు",
+    "last_updated": "చివరిగా నవీకరించబడింది",
     "max_date": "గరిష్ట తేదీ",
     "min_date": "కనీస తేదీ",
     "month": {

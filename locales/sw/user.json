@@ -58,6 +58,23 @@
     "terms": "Masharti ya Huduma.",
     "text": "Nakubaliana na tovuti hii"
   },
+  "unsubscribe": {
+    "error": {
+      "contact_us": "Wasiliana",
+      "description": "Imeshindwa kujiondoa!",
+      "title": "Hitilafu"
+    },
+    "landing": {
+      "confirm": "Thibitisha",
+      "description": "Tunasikitika kukuona ukienda!",
+      "title": "Jiondoe"
+    },
+    "success": {
+      "description": "Imefaulu Kujiondoa!",
+      "home": "Nyumbani",
+      "title": "Mafanikio"
+    }
+  },
   "update_error": "Haiwezi kusasisha",
   "update_password": "Sasisha nenosiri.",
   "updated": "Imesasishwa kwa mafanikio.",

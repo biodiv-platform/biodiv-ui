@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "ஒருங்கிணைப்பு",
+    "district": "மாவட்டம்",
     "forest_type": "வன வகை",
     "geoprivacy_enabled": "புவியியல் இயலுமைப்படுத்தப்பட்டது",
+    "protected_area_name": "பாதுகாக்கப்பட்ட பகுதி",
+    "province": "மாகாணம்",
     "rainfall": "மழைப்பொழிவு",
     "soil": "மண்",
     "tehsil": "தெஹ்ஸில்",
