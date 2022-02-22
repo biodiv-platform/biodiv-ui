@@ -1,13 +1,10 @@
-import { Button, Heading, Select, VStack } from "@chakra-ui/react";
-import { SelectInputField } from "@components/form/select";
 import { SelectMultipleInputField } from "@components/form/select-multiple";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
+import { axExtractAllParams } from "@services/extraction.service";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { axExtractAllParams } from "@services/extraction.service";
-/* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
 
 const schema = yup.object().shape({
   sname: yup.array().required("its a required field")
@@ -22,22 +19,14 @@ export default function ColumnSelect({ availableColumns, filePath }) {
   const submitForm = async (dat) => {
     const payload = {
       ...dat,
-      filePath:filePath
+      filePath: filePath
     };
 
-    console.log(dat)
-    const { success, data } = await axExtractAllParams(payload);
+    const { success } = await axExtractAllParams(payload);
     if (success) {
-      console.log("here is the data=", data);
+      setX(dat);
     }
-    setX(dat);
-    //call an api
   };
-  /*const a = [
-    { label: "something1", value: "somevalue1" },
-    { label: "something2", value: "somevalue2" },
-    { label: "something3", value: "somevalue3" }
-  ];*/
 
   const columnList = availableColumns.map((column) => ({ label: column, value: column }));
   //console.log(columnList);

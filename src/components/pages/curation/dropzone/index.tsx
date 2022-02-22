@@ -3,15 +3,9 @@ import UploadDragging from "@components/pages/document/create/uploader/dropzone/
 import UploadInfo from "@components/pages/document/create/uploader/dropzone/upload-info";
 import UploadProcessing from "@components/pages/document/create/uploader/dropzone/upload-processing";
 import styled from "@emotion/styled";
-import { MyCsvUpload } from "@interfaces/files";
 import { axUploadCsvCurationResource } from "@services/files.service";
-import { stringify } from "querystring";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-
-//import useFileHeaders from "./use-file-headers";
-
-/* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
 
 const DropTargetBox = styled.div`
   border: 2px dashed var(--chakra-colors-gray-300);
@@ -37,20 +31,12 @@ const DropTargetBox = styled.div`
 const addCsvFile = async (file, setter, setterFilePath, userId) => {
   const resource = await axUploadCsvCurationResource(file);
 
-  //console.log(resource.path);
-
   setter(resource.excelJson?.csvHeaders);
   const absFilePath = `/app/biodiv-image/myUploads/${userId}${resource.path}`;
   setterFilePath(absFilePath);
-
-  console.log(absFilePath);
-
-  //path = resource.path;
 };
 export default function CsvDropzoneComponent({ setCsvHeaders, setFilePath, userId }) {
   const [isProcessing, setIsProcessing] = useState(false);
-
-  const [columns, setColumns] = useState<object>();
 
   const handleOnDrop = async ([file]) => {
     if (!file) {
