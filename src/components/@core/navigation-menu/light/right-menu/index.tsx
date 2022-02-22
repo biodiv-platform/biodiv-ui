@@ -13,7 +13,8 @@ const RightMenuContainer = styled.div`
   display: flex;
   align-items: center;
   z-index: 3;
-  & > a {
+  & > a,
+  & > button {
     margin-left: 1.3rem;
     white-space: pre;
   }
@@ -22,10 +23,12 @@ const RightMenuContainer = styled.div`
     width: 100%;
     flex-direction: column;
     height: auto;
-    & > a {
+    & > a,
+    & > button {
       width: 100%;
       margin-left: 0;
       margin-bottom: 1rem;
+      text-align: left;
     }
     &[aria-expanded="false"] {
       height: 0px;

@@ -7,6 +7,7 @@ import { getLanguageId } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
+import { useDeepCompareMemo } from "use-deep-compare";
 
 interface GlobalStateContextProps {
   user?;
@@ -62,23 +63,29 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
     setUser(getParsedUser());
   }, [AUTHWALL.SUCCESS]);
 
-  return (
-    <GlobalStateContext.Provider
-      value={{
-        ...initialState,
-        pages,
-        setPages,
-        user,
-        setUser,
-        isLoggedIn,
-        isCurrentGroupMember,
-        languageId,
-        setIsCurrentGroupMember
-      }}
-    >
-      {children}
-    </GlobalStateContext.Provider>
+  const value = {};
+
+  // to avoid unnecessary re-renders
+  const valueMemo = useDeepCompareMemo(
+    () => ({
+      groups: initialState.groups,
+      currentGroup: initialState.currentGroup,
+      isCurrentGroupMember,
+      setIsCurrentGroupMember,
+
+      pages,
+      setPages,
+
+      user,
+      setUser,
+      isLoggedIn,
+
+      languageId
+    }),
+    [value, initialState, pages, user, isLoggedIn, isCurrentGroupMember, languageId]
   );
+
+  return <GlobalStateContext.Provider value={valueMemo}>{children}</GlobalStateContext.Provider>;
 };
 
 export default function useGlobalState() {

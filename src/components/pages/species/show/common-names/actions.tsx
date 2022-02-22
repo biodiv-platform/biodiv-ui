@@ -62,7 +62,7 @@ export function CommonNameEditButtons({ commonName, showPreferred }) {
         {showPreferred && (
           <IconButton
             colorScheme="orange"
-            leftIcon={<StarOutlineIcon />}
+            icon={<StarOutlineIcon />}
             onClick={handleOnPreferred}
             aria-label={t("species:common_name.preferred.title")}
             title={t("species:common_name.preferred.title")}
