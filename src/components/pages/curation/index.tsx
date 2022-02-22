@@ -12,7 +12,7 @@ export default function Curation({ user }) {
   const [filePath, setFilePath] = useState();
   return (
     <div>
-      <PageHeading>Curate Spiderindia Files </PageHeading>
+      <PageHeading>Upload File for Curation</PageHeading>
       <CsvDropzoneComponent setCsvHeaders={setCsvHeaders} setFilePath={setFilePath} userId={user.id} />
       {csvHeaders ? <ColumnSelect availableColumns={csvHeaders} filePath={filePath} /> : <></>}
     </div>
