@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "Maelezo"
+  },
   "clear": "Futa {{filterCount}} Filter(s)",
   "custom_fields": {
     "has_content": "Ina maudhui.",
@@ -64,6 +67,7 @@
     "video": "Video."
   },
   "name": {
+    "common_name": "Jina la kawaida",
     "reco_name": {
       "title": "Jina."
     },
@@ -73,6 +77,12 @@
       "title": "Hali"
     },
     "title": "Jina la kisayansi."
+  },
+  "rank": {
+    "title": "Cheo"
+  },
+  "reference": {
+    "title": "Rejea"
   },
   "scientific_name": {
     "all_names": {
@@ -88,6 +98,9 @@
       "title": "Hali ya Taxon."
     },
     "title": "Jina la kisayansi."
+  },
+  "species_field": {
+    "title": "Uwanja wa Spishi"
   },
   "species_group": {
     "all": "Wote",
@@ -111,6 +124,7 @@
   "time": {
     "created_on": "Tarehe iliyoundwa.",
     "last_logged": "Mwisho Kuingia",
+    "last_updated": "Ilisasishwa Mwisho",
     "max_date": "Tarehe ya juu",
     "min_date": "Tarehe ya chini",
     "month": {

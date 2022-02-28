@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "समन्वय",
+    "district": "जिल्हा",
     "forest_type": "वन प्रकार",
     "geoprivacy_enabled": "भूमिका सक्षम",
+    "protected_area_name": "संरक्षित क्षेत्र",
+    "province": "प्रांत",
     "rainfall": "पाऊस",
     "soil": "माती",
     "tehsil": "तहसील",

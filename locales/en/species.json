@@ -1,8 +1,6 @@
 {
   "add_reference": "Add Reference",
   "all_media": "All Media",
-  "resource":"Resource",
-  "species_group":"Species Group",
   "attributions": "Attributions",
   "common_name": {
     "delete": {
@@ -25,7 +23,6 @@
     }
   },
   "common_names": "Common Names",
-  "scientific_name":"Scientific Name",
   "content_another_language": "There is content in another language. Please click here to read it.",
   "contribute": {
     "create_species": "Create new species",
@@ -106,7 +103,10 @@
     "success": "Species deleted successfully",
     "title": "Delete species"
   },
+  "resource": "Resource",
+  "scientific_name": "Scientific Name",
   "share": "Share this species",
+  "species_group": "Species Group",
   "status": "Status",
   "synonym": {
     "add": {

@@ -173,3 +173,12 @@ export const axGetUserList = async (
     return { success: false, data: {} };
   }
 };
+
+export const axUnsubscribeUser = async (key) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/unsubscribe/${key}`);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: e?.response?.data };
+  }
+};

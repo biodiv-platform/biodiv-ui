@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "ଗୁଣ"
+  },
   "clear": "ସଫା {{filterCount}} ଫିଲ୍ଟର୍ (ଗୁଡିକ)",
   "custom_fields": {
     "has_content": "ବିଷୟବସ୍ତୁ ଅଛି |",
@@ -64,6 +67,7 @@
     "video": "ଭିଡିଓ"
   },
   "name": {
+    "common_name": "ସାଧାରଣ ନାମ |",
     "reco_name": {
       "title": "ନାମ"
     },
@@ -73,6 +77,12 @@
       "title": "ସ୍ଥିତି"
     },
     "title": "ବ scientific ଜ୍ଞାନିକ ନାମ"
+  },
+  "rank": {
+    "title": "ରାଙ୍କ୍"
+  },
+  "reference": {
+    "title": "ସନ୍ଦର୍ଭ"
   },
   "scientific_name": {
     "all_names": {
@@ -88,6 +98,9 @@
       "title": "ଟ୍ୟାକ୍ସନ୍ ସ୍ଥିତି"
     },
     "title": "ବ scientific ଜ୍ଞାନିକ ନାମ"
+  },
+  "species_field": {
+    "title": "ପ୍ରଜାତି କ୍ଷେତ୍ର |"
   },
   "species_group": {
     "all": "ସମସ୍ତ",
@@ -111,6 +124,7 @@
   "time": {
     "created_on": "ସ୍ଥାପିତ ତାରିଖ |",
     "last_logged": "ଶେଷ ଲଗ୍ ଇନ୍ |",
+    "last_updated": "ଶେଷ ଅଦ୍ୟତନ",
     "max_date": "ସର୍ବାଧିକ ତାରିଖ",
     "min_date": "ସର୍ବନିମ୍ନ ତାରିଖ",
     "month": {

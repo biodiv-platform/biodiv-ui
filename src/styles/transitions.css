@@ -49,6 +49,17 @@
     transform: translateY(0);
   }
 }
+
+.floating {
+  animation: floating 2s ease infinite;
+}
+
+@keyframes floating {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
 .delay-1 {
   animation-delay: 0.1s;
 }
