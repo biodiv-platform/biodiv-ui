@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "ಗುಣಲಕ್ಷಣ"
+  },
   "clear": "ತೆರವುಗೊಳಿಸಿ {{filterCount}} ಶೋಧಕ(ಗಳು)",
   "custom_fields": {
     "has_content": "ವಿಷಯವನ್ನು ಹೊಂದಿದೆ",
@@ -78,6 +81,9 @@
   "rank": {
     "title": "ಶ್ರೇಣಿ"
   },
+  "reference": {
+    "title": "ಉಲ್ಲೇಖ"
+  },
   "scientific_name": {
     "all_names": {
       "title": "ಎಲ್ಲಾ ಹೆಸರುಗಳು"
@@ -92,6 +98,9 @@
       "title": "ಜೀವಿವರ್ಗದ ಸ್ಥಿತಿ"
     },
     "title": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು"
+  },
+  "species_field": {
+    "title": "ಜಾತಿಯ ಕ್ಷೇತ್ರ"
   },
   "species_group": {
     "all": "ಎಲ್ಲಾ",

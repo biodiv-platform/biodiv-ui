@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "பண்புக்கூறு"
+  },
   "clear": "தெளிவான {{filterCount}} வடிகட்டி (கள்)",
   "custom_fields": {
     "has_content": "உள்ளடக்கம் உள்ளது",
@@ -64,6 +67,7 @@
     "video": "காணொளி"
   },
   "name": {
+    "common_name": "பொது பெயர்",
     "reco_name": {
       "title": "பெயர்"
     },
@@ -73,6 +77,12 @@
       "title": "நிலை"
     },
     "title": "அறிவியல் பெயர்"
+  },
+  "rank": {
+    "title": "தரவரிசை"
+  },
+  "reference": {
+    "title": "குறிப்பு"
   },
   "scientific_name": {
     "all_names": {
@@ -88,6 +98,9 @@
       "title": "டாக்கன் நிலை"
     },
     "title": "அறிவியல் பெயர்"
+  },
+  "species_field": {
+    "title": "இனங்கள் புலம்"
   },
   "species_group": {
     "all": "அனைத்து",
@@ -111,6 +124,7 @@
   "time": {
     "created_on": "உருவாக்கப்பட்டது தேதி",
     "last_logged": "கடைசியாக உள்நுழைந்தது",
+    "last_updated": "கடைசியாக புதுப்பிக்கப்பட்டது",
     "max_date": "அதிகபட்ச தேதி",
     "min_date": "குறைந்தபட்ச தேதி.",
     "month": {

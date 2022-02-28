@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "Attribution"
+  },
   "clear": "Mazava {{filterCount}} siver(s)",
   "custom_fields": {
     "has_content": "Manana votoaty",
@@ -78,6 +81,9 @@
   "rank": {
     "title": "laharana"
   },
+  "reference": {
+    "title": "Reference"
+  },
   "scientific_name": {
     "all_names": {
       "title": "Anarana rehetra"
@@ -92,6 +98,9 @@
       "title": "Sata Taxon"
     },
     "title": "Anaran'ny siantifika"
+  },
+  "species_field": {
+    "title": "saha karazana"
   },
   "species_group": {
     "all": "rehetra",

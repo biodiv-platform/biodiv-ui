@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "Attribution"
+  },
   "clear": "Clear {{filterCount}} Filter(s)",
   "custom_fields": {
     "has_content": "Has Content",
@@ -78,6 +81,9 @@
   "rank": {
     "title": "Rank"
   },
+  "reference": {
+    "title": "Reference"
+  },
   "scientific_name": {
     "all_names": {
       "title": "All Names"
@@ -95,12 +101,6 @@
   },
   "species_field": {
     "title": "Species Field"
-  },
-  "attribution": {
-    "title": "Attribution"
-  },
-  "reference": {
-    "title": "Reference"
   },
   "species_group": {
     "all": "All",
@@ -150,6 +150,7 @@
     "title": "Traits"
   },
   "user": {
+    "contributor": "Contributor",
     "email": "email",
     "group_role_title": "Usergroup Roles",
     "institution_title": "Institution",
@@ -161,7 +162,6 @@
     "taxon_browser": "Taxon Seach",
     "taxon_role_title": "Taxonomy Roles",
     "title": "User",
-    "contributor":"Contributor",
     "username": "User Name"
   },
   "usergroup": {

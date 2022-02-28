@@ -9,7 +9,6 @@
   "hierarchy": {
     "class": "Class",
     "family": "Family",
-    "subfamily":"Subfamily",
     "genus": "Genus",
     "infraspecies": "Infraspecies",
     "kingdom": "Kingdom",
@@ -17,6 +16,7 @@
     "phylum": "Phylum",
     "root": "Root",
     "species": "Species",
+    "subfamily": "Subfamily",
     "subgenus": "Subgenus"
   },
   "modal": {

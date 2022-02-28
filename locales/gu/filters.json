@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "એટ્રિબ્યુશન"
+  },
   "clear": "{{filterCount}} ફિલ્ટર દૂર કરો",
   "custom_fields": {
     "has_content": "સામગ્રી છે",
@@ -78,6 +81,9 @@
   "rank": {
     "title": "ક્રમ"
   },
+  "reference": {
+    "title": "સંદર્ભ"
+  },
   "scientific_name": {
     "all_names": {
       "title": "બધા નામો"
@@ -92,6 +98,9 @@
       "title": "ટેક્સન સ્થિતિ"
     },
     "title": "વૈજ્ઞાનિક નામ"
+  },
+  "species_field": {
+    "title": "પ્રજાતિ ક્ષેત્ર"
   },
   "species_group": {
     "all": "બધા",

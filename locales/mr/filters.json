@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "विशेषता"
+  },
   "clear": "{{filterCount}} फिल्टर साफ करा",
   "custom_fields": {
     "has_content": "सामग्री आहे",
@@ -64,6 +67,7 @@
     "video": "व्हिडिओ"
   },
   "name": {
+    "common_name": "सामान्य नाव",
     "reco_name": {
       "title": "नाव"
     },
@@ -73,6 +77,12 @@
       "title": "स्थिती"
     },
     "title": "शास्त्रीय नाव"
+  },
+  "rank": {
+    "title": "रँक"
+  },
+  "reference": {
+    "title": "संदर्भ"
   },
   "scientific_name": {
     "all_names": {
@@ -88,6 +98,9 @@
       "title": "करदाता स्थिती"
     },
     "title": "शास्त्रीय नाव"
+  },
+  "species_field": {
+    "title": "प्रजाती फील्ड"
   },
   "species_group": {
     "all": "सर्व",
@@ -111,6 +124,7 @@
   "time": {
     "created_on": "तारीख तयार केली",
     "last_logged": "शेवटचे लॉग इन केले",
+    "last_updated": "शेवटचे अद्यावत",
     "max_date": "कमाल तारीख",
     "min_date": "किमान तारीख",
     "month": {
