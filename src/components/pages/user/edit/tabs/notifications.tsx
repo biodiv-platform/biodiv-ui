@@ -20,7 +20,6 @@ export default function NotificationsTab({ user }: UserEditPageComponentProps) {
       Yup.object().shape({
         sendNotification: Yup.boolean().required(), // Email
         sendPushNotification: Yup.boolean().required(),
-        sendDigest: Yup.boolean().required(),
         hideEmial: Yup.boolean().required(),
         identificationMail: Yup.boolean().required()
       })
@@ -28,7 +27,6 @@ export default function NotificationsTab({ user }: UserEditPageComponentProps) {
     defaultValues: {
       sendNotification: user.sendNotification,
       sendPushNotification: user.sendPushNotification,
-      sendDigest: user.sendDigest,
       hideEmial: user.hideEmial,
       identificationMail: user.identificationMail
     }
@@ -50,7 +48,6 @@ export default function NotificationsTab({ user }: UserEditPageComponentProps) {
         <SwitchField name="sendNotification" label={t("user:send_email")} />
         <SwitchField name="identificationMail" label={t("user:identification_mail")} />
         <SwitchField name="hideEmial" label={t("user:hide_email")} />
-        <SwitchField name="sendDigest" label={t("user:send_digest")} />
         <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
       </form>
     </FormProvider>

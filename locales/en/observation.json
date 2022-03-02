@@ -83,16 +83,16 @@
   },
   "location_information": {
     "coordinates": "Coordinates",
+    "district": "District",
     "forest_type": "Forest Type",
     "geoprivacy_enabled": "Geoprivacy Enabled",
+    "protected_area_name": "Protected Area",
+    "province": "Province",
     "rainfall": "Rainfall",
     "soil": "Soil",
     "tehsil": "Tehsil",
     "temperature": "Temperature",
-    "title": "Location Information",
-    "protected_area_name":"Protected Area",
-    "province":"Province",
-    "district":"District"
+    "title": "Location Information"
   },
   "location_placeholder": "Enter a location",
   "location_scale": "Location Accuracy",

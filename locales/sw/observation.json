@@ -83,8 +83,11 @@
   },
   "location_information": {
     "coordinates": "Kuratibu",
+    "district": "Wilaya",
     "forest_type": "Aina ya Misitu.",
     "geoprivacy_enabled": "Geoprivacy imewezeshwa",
+    "protected_area_name": "Eneo lililohifadhiwa",
+    "province": "Mkoa",
     "rainfall": "Mvua",
     "soil": "Udongo",
     "tehsil": "Tehsil.",

@@ -1,4 +1,7 @@
 {
+  "attribution": {
+    "title": "ਵਿਸ਼ੇਸ਼ਤਾ"
+  },
   "clear": "ਸਾਫ {{filterCount}}. ਫਿਲਟਰ) ਫਿਲਟਰ",
   "custom_fields": {
     "has_content": "ਦੀ ਸਮੱਗਰੀ ਹੈ",
@@ -64,6 +67,7 @@
     "video": "ਵੀਡੀਓ"
   },
   "name": {
+    "common_name": "ਆਮ ਨਾਮ",
     "reco_name": {
       "title": "ਨਾਮ"
     },
@@ -73,6 +77,12 @@
       "title": "ਸਥਿਤੀ"
     },
     "title": "ਵਿਗਿਆਨਕ ਨਾਮ"
+  },
+  "rank": {
+    "title": "ਰੈਂਕ"
+  },
+  "reference": {
+    "title": "ਹਵਾਲਾ"
   },
   "scientific_name": {
     "all_names": {
@@ -88,6 +98,9 @@
       "title": "ਟੈਕਸੀ"
     },
     "title": "ਵਿਗਿਆਨਕ ਨਾਮ"
+  },
+  "species_field": {
+    "title": "ਸਪੀਸੀਜ਼ ਫੀਲਡ"
   },
   "species_group": {
     "all": "ਸਾਰੇ",
@@ -111,6 +124,7 @@
   "time": {
     "created_on": "ਤਾਰੀਖ ਬਣਾਈ ਗਈ",
     "last_logged": "ਆਖਰੀ ਵਾਰ ਲੌਗ ਇਨ ਕੀਤਾ",
+    "last_updated": "ਆਖਰੀ ਵਾਰ ਅੱਪਡੇਟ ਕੀਤਾ",
     "max_date": "ਵੱਧ ਤੋਂ ਵੱਧ ਤਾਰੀਖ",
     "min_date": "ਘੱਟੋ ਘੱਟ ਤਾਰੀਖ",
     "month": {

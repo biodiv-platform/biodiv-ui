@@ -58,6 +58,23 @@
     "terms": "Conditions d'utilisation",
     "text": "Je suis d'accord avec ce site"
   },
+  "unsubscribe": {
+    "error": {
+      "contact_us": "Contact",
+      "description": "Impossible de se désabonner !",
+      "title": "Erreur"
+    },
+    "landing": {
+      "confirm": "Confirmer",
+      "description": "Nous sommes navrés de vous voir partir!",
+      "title": "Se désabonner"
+    },
+    "success": {
+      "description": "Désabonnement réussi !",
+      "home": "Maison",
+      "title": "Succès"
+    }
+  },
   "update_error": "Impossible de mettre à jour",
   "update_password": "Mettre à jour le mot de passe",
   "updated": "Mis à jour avec succés",

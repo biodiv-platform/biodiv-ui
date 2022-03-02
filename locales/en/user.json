@@ -58,6 +58,23 @@
     "terms": "Terms of Service",
     "text": "I agree to this website's"
   },
+  "unsubscribe": {
+    "error": {
+      "contact_us": "Contact",
+      "description": "Unable to Unsubscribe!",
+      "title": "Error"
+    },
+    "landing": {
+      "confirm": "Confirm",
+      "description": "We are sorry to see you go!",
+      "title": "Unsubscribe"
+    },
+    "success": {
+      "description": "Successfully Unsubscribed!",
+      "home": "Home",
+      "title": "Success"
+    }
+  },
   "update_error": "Unable to update",
   "update_password": "Update Password",
   "updated": "Updated Successfully",
