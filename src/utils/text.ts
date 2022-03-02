@@ -41,9 +41,11 @@ export const getInjectableHTML = (nHtml): string => {
           p: ["class"],
           strong: [],
           table: [],
+          thead: [],
           tbody: [],
           td: ["colspan", "rowspan", "style"],
           tr: ["style"],
+          th: ["style"],
           ul: []
         },
         stripIgnoreTag: true
