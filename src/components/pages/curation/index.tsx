@@ -15,7 +15,11 @@ export default function Curation({ user }) {
         setFilePath={setFilePath}
         userId={user.id}
       />
-      {csvHeaders ? <ColumnSelect availableColumns={csvHeaders} filePath={filePath} /> : <></>}
+      {csvHeaders ? (
+        <ColumnSelect availableColumns={csvHeaders} filePath={filePath} userId={user.id} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

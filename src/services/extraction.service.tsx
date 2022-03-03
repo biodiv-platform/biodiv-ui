@@ -7,6 +7,9 @@ export const axExtractAllParams = async (d) => {
     formData.append("location", d.location);
     formData.append("date", d.date);
     formData.append("path", d.filePath);
+    formData.append("userId", d.userId);
+    formData.append("title", d.title);
+    formData.append("datasetDescription", d.summary);
     const { data } = await http.post(`http://localhost:5000/extract`, formData, {
       headers: {
         "Content-Type": "multipart/form-data"
