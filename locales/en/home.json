@@ -5,10 +5,6 @@
       "desc": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
       "title": "Citizen Science"
     },
-    "researchers": {
-      "desc": "The student researchers involved in the Mikoko project along with their profile, location and research interests.",
-      "title": "Mikoko Project Researchers"
-    },
     "groups": {
       "desc": "Microsites on the portal allow communities dedicated to themes of their interest to collect, curate and share content.",
       "title": "Communities"
@@ -48,6 +44,10 @@
     "open_data": {
       "desc": "All content on the portal is open and served under Creative Commons license for reuse and sharing with attribution to the original contributors.",
       "title": "Open Data"
+    },
+    "researchers": {
+      "desc": "The student and researchers involved in the Mikoko project along with their profile, location and research interests.",
+      "title": "Mikoko Project Researchers"
     },
     "species_information": {
       "desc": "Descriptive pages for every species from authenticated sources. Help collaborate and build information on species.",

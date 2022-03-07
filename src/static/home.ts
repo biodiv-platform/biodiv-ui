@@ -65,9 +65,9 @@ export const FEATURES = [
     tag: ["mikoko"]
   },
   {
-    icon: "user-groups",
+    icon: "cap",
     title: "researchers",
-    link: "https://bit.ly/mikoko-researchers",
+    link: "https://bit.ly/mikoko-pr",
     tag: ["mikoko"]
   },
   {
