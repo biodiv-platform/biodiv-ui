@@ -65,9 +65,9 @@ export const FEATURES = [
     tag: ["mikoko"]
   },
   {
-    icon: "open-data",
-    title: "datasets",
-    link: "/data-table/list",
+    icon: "user-groups",
+    title: "researchers",
+    link: "https://bit.ly/mikoko-researchers",
     tag: ["mikoko"]
   },
   {

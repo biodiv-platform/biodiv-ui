@@ -5,9 +5,9 @@
       "desc": "Any member of the general public can upload an observation of any species sighted. Other members help identify, annotate and curate the observations.",
       "title": "Citizen Science"
     },
-    "datasets": {
-      "desc": "Diverse datasets with metadata according to the Ecological Markup Language.",
-      "title": "Datasets"
+    "researchers": {
+      "desc": "The student researchers involved in the Mikoko project along with their profile, location and research interests.",
+      "title": "Mikoko Project Researchers"
     },
     "groups": {
       "desc": "Microsites on the portal allow communities dedicated to themes of their interest to collect, curate and share content.",

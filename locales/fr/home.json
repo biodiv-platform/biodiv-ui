@@ -5,9 +5,9 @@
       "desc": "Tout utilisateur inscrit peut poster une observation de toute espèce observée. Les autres membres aident à identifier, et valider les observations, ils peuvent également poster un commentaire.",
       "title": "Science Citoyenne"
     },
-    "datasets": {
-      "desc": "Ensembles de données diversifiés avec des métadonnées selon le langage de balisage écologique.",
-      "title": "Ensembles de données"
+    "researchers": {
+      "desc": "Les étudiants chercheurs impliqués dans le projet Mikoko ainsi que leur profil, localisation et intérêts de recherche.",
+      "title": "Chercheurs du projet Mikoko"
     },
     "groups": {
       "desc": "Les microsites sur le portail permettent aux communautés dédiées aux thèmes de leur intérêt de collecter, de céder et de partager des contenus.",
