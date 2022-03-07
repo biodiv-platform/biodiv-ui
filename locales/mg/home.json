@@ -5,9 +5,9 @@
       "desc": "Izay mpikambana ao amin'ny besinimaro amin'ny ankapobeny dia afaka mampakatra ny fandinihana ireo karazana rehetra hita maso. Ny mpikambana hafa dia manampy amin'ny famaritana, manangom-bolo ary mamoritra ny fandinihana.",
       "title": "Siansa momba ny zom-pirenena"
     },
-    "datasets": {
-      "desc": "Datety isan-karazany miaraka amin'ny metadata araka ny Ecological Markup Language.",
-      "title": "Datasets"
+    "researchers": {
+      "desc": "Ireo mpikaroka mpianatra nandray anjara tamin'ny tetikasa Mikoko miaraka amin'ny mombamomba azy, ny toerana misy azy ary ny tombontsoany amin'ny fikarohana.",
+      "title": "Mikoko Project Researchers"
     },
     "groups": {
       "desc": "Ny microsites ao amin'ny vavahadin-tserasera dia mamela ny fiarahamonina natokana ho an'ireo lohahevitra mahaliana azy ireo hanangona, mifamaly ary mizara votoaty.",

@@ -5,9 +5,9 @@
       "desc": "Mwanachama yeyote wa umma anaweza kupakia uchunguzi wa aina yoyote inayoonekana. Wanachama wengine husaidia kutambua, kutangaza na kushikamana na uchunguzi.",
       "title": "Sayansi ya Wananchi"
     },
-    "datasets": {
-      "desc": "Seti tofauti za data zilizo na metadata kulingana na Lugha ya Marashi ya Kiikolojia.",
-      "title": "Hifadhidata"
+    "researchers": {
+      "desc": "Watafiti wanafunzi waliohusika katika mradi wa Mikoko pamoja na wasifu wao, eneo na maslahi yao ya utafiti.",
+      "title": "Watafiti wa Mradi wa Mikoko"
     },
     "groups": {
       "desc": "Microsites kwenye portal kuruhusu jamii kujitolea kwa mandhari ya maslahi yao kukusanya, curate na kushiriki maudhui.",
