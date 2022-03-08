@@ -16,7 +16,7 @@ const CustomCheckBox = (props: any) => {
 
   return (
     <label>
-      <input {...getInputProps()} />
+      <input {...getInputProps()} required={false} />
       <Box
         {...getCheckboxProps()}
         p={2}

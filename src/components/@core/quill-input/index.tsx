@@ -1,5 +1,6 @@
+import "quill/dist/quill.snow.css";
+
 import styled from "@emotion/styled";
-import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
 
@@ -68,9 +69,6 @@ const QuillInput = ({ value: EValue, onChange }: QuillInputProps) => {
 
   return (
     <QuillBox>
-      <Head>
-        <link rel="stylesheet" href="https://unpkg.com/quill/dist/quill.snow.css" key="quill" />
-      </Head>
       <div ref={quillRef} />
     </QuillBox>
   );

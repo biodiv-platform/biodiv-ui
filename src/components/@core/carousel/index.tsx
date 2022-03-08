@@ -1,7 +1,8 @@
+import "keen-slider/keen-slider.min.css";
+
 import { Box, Flex } from "@chakra-ui/react";
 import { RecoIbp } from "@interfaces/observation";
 import { useKeenSlider } from "keen-slider/react";
-import Head from "next/head";
 import React, { useState } from "react";
 
 import CarouselNavigation from "./navigation";
@@ -31,53 +32,44 @@ export default function CarouselObservation({
   });
 
   return (
-    <>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/keen-slider/keen-slider.min.css"
-          key="keen-slider"
-        />
-      </Head>
-      <Box bg="gray.900" borderRadius="md" position="relative" mb={4} p={4}>
-        <CarouselResourceInfo
-          observationId={observationId}
-          currentResource={resources[currentSlide]}
-        />
-        <Box ref={sliderRef} className="keen-slider fade" h="438px">
-          {resources.length ? (
-            resources.map(({ resource }) => (
-              <Flex
-                key={resource.id}
-                className="keen-slider__slide"
-                minW="100%"
-                alignItems="center"
-                justifyContent="center"
-                position="relative"
-              >
-                <Slide resource={resource} alt={alt} />
-              </Flex>
-            ))
-          ) : (
-            <NoSlide speciesGroup={speciesGroup} />
-          )}
-        </Box>
-        {resources.length && (
-          <>
-            <CarouselNavigation
-              prev={slider?.current?.prev}
-              next={slider?.current?.next}
-              current={currentSlide}
-              total={resources.length}
-            />
-            <Thumbnails
-              resources={resources}
-              moveTo={slider?.current?.moveToIdx}
-              current={currentSlide}
-            />
-          </>
+    <Box bg="gray.900" borderRadius="md" position="relative" mb={4} p={4}>
+      <CarouselResourceInfo
+        observationId={observationId}
+        currentResource={resources[currentSlide]}
+      />
+      <Box ref={sliderRef} className="keen-slider fade" h="438px">
+        {resources.length ? (
+          resources.map(({ resource }) => (
+            <Flex
+              key={resource.id}
+              className="keen-slider__slide"
+              minW="100%"
+              alignItems="center"
+              justifyContent="center"
+              position="relative"
+            >
+              <Slide resource={resource} alt={alt} />
+            </Flex>
+          ))
+        ) : (
+          <NoSlide speciesGroup={speciesGroup} />
         )}
       </Box>
-    </>
+      {resources.length && (
+        <>
+          <CarouselNavigation
+            prev={slider?.current?.prev}
+            next={slider?.current?.next}
+            current={currentSlide}
+            total={resources.length}
+          />
+          <Thumbnails
+            resources={resources}
+            moveTo={slider?.current?.moveToIdx}
+            current={currentSlide}
+          />
+        </>
+      )}
+    </Box>
   );
 }

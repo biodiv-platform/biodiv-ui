@@ -36,7 +36,7 @@ export const RadioInputField = ({
       <RadioGroup key={name} {...field}>
         <Stack direction={isInline ? "row" : "column"} py={2}>
           {options.map((o) => (
-            <Radio key={o.value} value={o.value}>
+            <Radio key={o.value} id={o.value} value={o.value}>
               {o.label}
             </Radio>
           ))}
