@@ -16,6 +16,7 @@ export const selectStyles = {
   }),
   valueContainer: (p) => ({ ...p, height: "38px" }),
   menu: (p) => ({ ...p, minWidth: "20em" }),
+  menuList:(p)=>({...p,maxHeight:"9em"}),
   menuPortal: (p) => ({ ...p, zIndex: 1900 }),
   clearIndicator: (base, state) => ({
     ...base,
