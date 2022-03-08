@@ -7,7 +7,7 @@ export default function TraitContent(props) {
 
   return (
     <Box as="label">
-      <input {...getInputProps()} />
+      <input {...getInputProps()} required={false} />
       <Flex
         {...getCheckboxProps()}
         alignItems="center"

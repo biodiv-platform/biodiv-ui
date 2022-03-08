@@ -53,7 +53,7 @@ const Checkbox = (props: any) => {
         }}
         style={undefined}
       >
-        <input {...getInputProps()} />
+        <input {...getInputProps()} required={false} />
         <Image
           boxSize="2.2rem"
           objectFit="contain"
