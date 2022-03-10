@@ -6,14 +6,14 @@
     "contribute": {
       "add_data_package": "தரவு தொகுப்பு சேர்க்க",
       "add_dataset": "தரவுத்தளத்தைச் சேர்க்கவும்",
-      "add_datatable": "தரவைச் சேர்க்கவும்",
+      "add_datatable": "தரவு அட்டவணையை சேர்க்கவும்",
       "add_document": "ஆவணத்தைச் சேர்க்கவும்",
-      "add_fact": "உண்மையில் சேர்க்கவும்",
+      "add_fact": "தகவலை சேர்க்கவும்",
       "add_list": "பட்டியலைச் சேர்க்கவும்",
-      "add_observation": "கவனிப்பு சேர்க்கவும்",
-      "add_trait_or_value": "பண்பு / மதிப்பு சேர்க்க",
-      "contribute_to_map": "வரைபடத்தை பங்களிக்கவும்",
-      "contribute_to_species": "இனங்கள் பங்களிக்கின்றன",
+      "add_observation": "அவதானிப்புகளை சேர்க்கவும்",
+      "add_trait_or_value": "பண்பு / மதிப்பு சேர்க்கவும்",
+      "contribute_to_map": "வரைபடத்திற்கு பங்களிக்கவும்",
+      "contribute_to_species": "இனங்களிற்கு பங்களிக்கவும்",
       "title": "பங்களிக்கவும்"
     },
     "groups": {
@@ -21,7 +21,7 @@
       "title": "குழுக்கள்"
     },
     "settings": {
-      "leaderboard": "என் லீடர்போர்டு ரேங்க்",
+      "leaderboard": "என் லீடர்போர்டு படிவரிசை",
       "logout": "வெளியேறு",
       "my_observations": "என் அவதானிப்புகள்",
       "my_profile": "என் சுயவிவரம்",
@@ -36,27 +36,27 @@
       "title": "IDAO"
     },
     "landscapes": {
-      "title": "பாதுகாக்கப்பட்ட பகுதிகளில்"
+      "title": "பாதுகாக்கப்பட்ட பகுதிகள்"
     },
     "maps": {
       "title": "வரைபடங்கள்"
     },
     "more": {
       "about_us": "எங்களை பற்றி",
-      "dashboard": "டாஷ்போர்டு",
+      "dashboard": "முகப்பு பலகை",
       "discussions": "விவாதங்கள்",
-      "download_logs": "பதிவுகளைப் பதிவிறக்கவும்",
-      "leaderboard": "லீட்ப்போர்டு",
-      "taxonomy": "வகைபிரித்தல்",
+      "download_logs": "குறிப்புகளை பதிவிறக்கவும்",
+      "leaderboard": "லீடர்போர்டு",
+      "taxonomy": "வகைப்பாட்டியல்",
       "title": "மேலும்",
       "users": "பயனர்கள்"
     },
     "observation": {
-      "all_observations": "அனைத்து கண்காணிப்புகளும்",
+      "all_observations": "அனைத்து அவதானிப்புகளும்",
       "checklists": "பட்டியல்",
       "datasets": "தரவுத்தளங்கள்",
-      "datatables": "Datatables.",
-      "observation_datatables": "கவனிப்பு Datatables.",
+      "datatables": "தரவு அட்டவணைகள்",
+      "observation_datatables": "அவதானிப்பு அட்டவணைகள்",
       "title": "அவதானிப்புகள்"
     },
     "pages": {

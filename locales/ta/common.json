@@ -9,8 +9,8 @@
         "location_inappropriate": "பொருத்தமற்ற இடம்"
       },
       "notes": "குறிப்புகள்",
-      "others_flagged": "கொடியவர்கள் மற்றவர்கள்",
-      "title": "கொடி"
+      "others_flagged": "கொடி காண்பித்த மற்றவர்",
+      "title": "கொடி காண்பி"
     }
   },
   "activity": "செயல்பாடு",
@@ -29,10 +29,10 @@
   "feedback": "பின்னூட்டம்",
   "footer": {
     "email": "மின்னஞ்சல்",
-    "facebook": "முகநூல்",
-    "github": "Github.",
-    "powered_by": "மூலம் இயக்கப்படுகிறது",
-    "technology_partner": "தொழில்நுட்ப பங்குதாரர்",
+    "facebook": "ஃபேஸ்புக்",
+    "github": "கிட்ஹப்",
+    "powered_by": "இயக்க மூலம்",
+    "technology_partner": "தொழில்நுட்பக் கூட்டாளி",
     "twitter": "ட்விட்டர்"
   },
   "habitats_covered": "வாழ்விடங்கள்",
@@ -49,8 +49,8 @@
     "view_type": {
       "grid": "கட்டம்",
       "list": "பட்டியல்",
-      "map": "Map.",
-      "stats": "மெட்ரிக்ஸ்"
+      "map": "வரைபடம்",
+      "stats": "அலகுகள்"
     }
   },
   "load_more": "மேலும் ஏற்றவும்",
@@ -82,8 +82,8 @@
   "species_coverage": "இனத்தொகுதிகள்",
   "success": "வெற்றி",
   "temporal": {
-    "observations": "கண்காணிப்பு",
-    "title": "தற்காலிக விநியோகம்"
+    "observations": "அவதானிப்புகள்",
+    "title": "காலஞ்சார்ந்த பரவல்"
   },
   "toggle": "நிலைமாற்று",
   "unauthorized": "அங்கீகரிக்கப்படாத பயனர்",

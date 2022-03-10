@@ -5,9 +5,9 @@
   "no_species_found": "இனங்கள் பட்டியல் இல்லை",
   "observation": {
     "fauna_list": "விலங்கினப் பட்டியல்",
-    "flora_list": "ஃப்ளோரா பட்டியல்",
+    "flora_list": "தாவரப் பட்டியல்",
     "life_list": {
-      "title": "கவனிப்பு பட்டியல்"
+      "title": "அவதானிப்பு பட்டியல்"
     },
     "species_filter": "இனங்கள் வடிகட்டி"
   },
