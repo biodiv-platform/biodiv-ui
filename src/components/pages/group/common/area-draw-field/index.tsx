@@ -1,5 +1,6 @@
 import { Box, FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
+import bbox from "@turf/bbox";
 import { getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useState } from "react";
@@ -34,19 +35,21 @@ export default function AreaDrawField({
 }: AreaDrawFieldProps) {
   const { field, fieldState } = useController({ name });
   const [coordinates, setCoordinates] = useState({});
-  const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
+  const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
   const defaultFeatures = useMemo(() => stringToFeature(field.value), []);
 
   const handleOnFeatureChange = (features) => {
-    setCoordinates(
-      features.length
-        ? {
-            ne: features[0].geometry.coordinates[0][0],
-            se: features[0].geometry.coordinates[0][2]
-          }
-        : {}
-    );
+    if (!features.length) {
+      setCoordinates({});
+      return;
+    }
+
+    const [minlng, minlat, maxlng, maxlat] = bbox({ type: "FeatureCollection", features });
+    setCoordinates({
+      ne: [maxlat, minlng],
+      se: [minlat, maxlng]
+    });
   };
 
   useEffect(() => {
@@ -62,11 +65,10 @@ export default function AreaDrawField({
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
         <NakshaMapboxDraw
-          defaultViewPort={defaultViewPort}
-          defaultFeatures={defaultFeatures}
-          mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          defaultViewState={defaultViewState}
+          features={defaultFeatures}
           onFeaturesChange={handleOnFeatureChange}
-          isPolygon={false}
+          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         />
       </Box>
       <FormErrorMessage children={JSON.stringify(fieldState?.error?.message)} />

@@ -22,7 +22,7 @@ const NakshaGmapsDraw: any = dynamic(
   }
 );
 
-const defaultViewPort = getMapCenter(2.8);
+const defaultViewState = getMapCenter(2.8);
 
 const onQuery = async (q) => {
   const { data } = await axQueryGeoEntitiesByPlaceName(q);
@@ -92,14 +92,14 @@ export default function WKTSearch({
       {gMapTab ? (
         <Box position="relative" borderRadius="md" mb={4}>
           <NakshaGmapsDraw
-            defaultViewPort={defaultViewPort}
+            defaultViewState={defaultViewState}
             defaultFeatures={selected?.value ? [selected?.value] : []}
             isControlled={true}
             isAutocomplete={true}
             isReadOnly={true}
             onFeaturesChange={handleOnChange}
             gmapRegion={SITE_CONFIG.MAP.COUNTRY}
-            gmapApiAccessToken={SITE_CONFIG.TOKENS.GMAP}
+            gmapAccessToken={SITE_CONFIG.TOKENS.GMAP}
             mapStyle={{ height: "22rem", width: "100%", borderRadius: ".25rem" }}
             autocompleteComponent={
               <FormControl mb={4}>

@@ -3,3 +3,6 @@
 @import "progress.css";
 @import "table.css";
 @import "components.css";
+
+@import "mapbox-gl/dist/mapbox-gl.css";
+@import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";

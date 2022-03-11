@@ -11,6 +11,7 @@ const NakshaMapboxView: any = dynamic(
     loading: () => <p>Loading...</p>
   }
 );
+
 interface GeoJSONPreviewProps {
   data: any;
   h?;
@@ -27,14 +28,14 @@ export default function GeoJSONPreview({
   maxZoom,
   mb
 }: GeoJSONPreviewProps) {
-  const defaultViewPort = React.useMemo(() => getMapCenter(zoom || 2.8, { maxZoom }), []);
+  const defaultViewState = React.useMemo(() => getMapCenter(zoom || 2.8, { maxZoom }), []);
 
   return (
     <Box position="relative" h={h} overflow="hidden" mb={mb} borderRadius="md">
       <NakshaMapboxView
-        defaultViewPort={defaultViewPort}
+        defaultViewState={defaultViewState}
         data={data}
-        mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       />
     </Box>
   );

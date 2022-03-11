@@ -32,7 +32,7 @@ export default function LandscapeShowComponent({
   documentList
 }: LandscapeShowComponentProps) {
   const { t } = useTranslation();
-  const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
+  const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
   return (
     <div className="container mt">
@@ -47,9 +47,9 @@ export default function LandscapeShowComponent({
       </Flex>
       <Box position="relative" h="22rem" bg="gray.200" borderRadius="md" overflow="hidden" mb={4}>
         <NakshaMapboxView
-          defaultViewPort={defaultViewPort}
+          defaultViewState={defaultViewState}
           data={wkt.parse(landscapeShow.wktData)}
-          mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         />
         <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Box>

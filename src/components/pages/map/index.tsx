@@ -21,7 +21,7 @@ const NakshaMapboxList: any = dynamic(
 );
 
 export default function MapPageComponent() {
-  const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
+  const defaultViewState = React.useMemo(() => getMapCenter(3.1), []);
   const { t, lang } = useTranslation();
   const { user } = useGlobalState();
   const toast = useToast();
@@ -70,11 +70,11 @@ export default function MapPageComponent() {
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
       <NakshaMapboxList
         lang={lang}
-        viewPort={defaultViewPort}
+        defaultViewState={defaultViewState}
         loadToC={true}
         showToC={true}
         nakshaEndpointToken={`Bearer ${user.accessToken}`}
-        mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
         onLayerDownload={handleOnDownload}
         geoserver={{
@@ -94,7 +94,14 @@ export default function MapPageComponent() {
                   tags: ["Global", "Observations"],
                   isAdded: false,
                   source: { type: "grid", fetcher: fetchGridData },
-                  onHover: onObservationGridHover
+                  onHover: onObservationGridHover,
+                  data: {
+                    index: "extended_observation",
+                    type: "extended_records",
+                    geoField: "location",
+                    summaryColumn: ["count"],
+                    propertyMap: { count: "Count" }
+                  }
                 }
               ]
             : []

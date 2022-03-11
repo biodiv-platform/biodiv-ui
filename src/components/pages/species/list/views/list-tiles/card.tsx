@@ -24,12 +24,13 @@ export default function GridViewCard({ o }) {
               bg="white"
               w="full"
               h="full"
+              borderTopRadius="md"
               src={getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL)}
               fallbackSrc={getLocalIcon(species?.find((item) => item?.id === o?.sGroup)?.name)}
               alt={simpleName}
             />
           </Box>
-          <Flex direction="column" justifyContent="space-between" h="4.6rem" p={4} bg="gray.100">
+          <Flex direction="column" justifyContent="space-between" h="4.6rem" p={4} bg="gray.100" borderBottomRadius="md">
             <Heading className="elipsis-2" size="sm" title={simpleName}>
               <ScientificName value={name} />
             </Heading>

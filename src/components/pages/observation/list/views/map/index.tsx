@@ -40,11 +40,11 @@ export default function ObservationsMap() {
       <BoxHeading>🗺️ {t("observation:list.spatial_distribution")}</BoxHeading>
       <Box h="30rem">
         <NakshaMapboxList
-          viewPort={mapCenter}
+          defaultViewState={mapCenter}
           loadToC={false}
           lang={lang}
           key={JSON.stringify(filter)}
-          mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
             endpoint: ENDPOINT.GEOSERVER,
@@ -61,7 +61,14 @@ export default function ObservationsMap() {
               tags: ["Global", "Observations"],
               isAdded: true,
               source: { type: "grid", fetcher: fetchGridData },
-              onHover: onObservationGridHover
+              onHover: onObservationGridHover,
+              data: {
+                index: "extended_observation",
+                type: "extended_records",
+                geoField: "location",
+                summaryColumn: ["count"],
+                propertyMap: { count: "Count" }
+              }
             }
           ]}
         />
