@@ -3,19 +3,19 @@
     "title": "வகைப்பாடு சேர்க்கவும்"
   },
   "grant": {
-    "button": "மானியம்",
+    "button": "அனுமதி",
     "title": "அனுமதி வழங்கவும்"
   },
   "hierarchy": {
     "class": "வர்க்கம்",
     "family": "குடும்பம்",
     "genus": "இன வகை",
-    "infraspecies": "அகச்சிவப்பு",
+    "infraspecies": "இன உட்பிரிவு",
     "kingdom": "இராச்சியம்",
     "order": "ஒழுங்கு",
-    "phylum": "பைலியம்",
+    "phylum": "ஃபைலம்",
     "root": "வேர்",
-    "species": "இனங்கள்",
+    "species": "இனம்",
     "subfamily": "துணைக் குடும்பம்",
     "subgenus": "துணை இனம்"
   },
