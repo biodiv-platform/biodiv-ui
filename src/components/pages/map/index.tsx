@@ -4,13 +4,14 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT } from "@static/constants";
+import { ENDPOINT, isBrowser } from "@static/constants";
 import { hasAccess, waitForAuth } from "@utils/auth";
 import { getBearerToken } from "@utils/http";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { stringify } from "querystring";
+import React, { useEffect, useState } from "react";
 
 const NakshaMapboxList: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
@@ -20,12 +21,13 @@ const NakshaMapboxList: any = dynamic(
   }
 );
 
-export default function MapPageComponent() {
+export default function MapPageComponent({ defaultLayers }) {
   const defaultViewState = React.useMemo(() => getMapCenter(3.1), []);
   const { t, lang } = useTranslation();
   const { user } = useGlobalState();
   const toast = useToast();
   const isAdmin = hasAccess([Role.Admin]);
+  const [selectedLayers, setSelectedLayers] = useState(defaultLayers);
 
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
@@ -66,6 +68,12 @@ export default function MapPageComponent() {
     return data;
   };
 
+  useEffect(() => {
+    if (isBrowser) {
+      window.history.pushState("", "", `?${stringify({ layers: selectedLayers.toString() })}`);
+    }
+  }, [selectedLayers]);
+
   return (
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
       <NakshaMapboxList
@@ -73,6 +81,8 @@ export default function MapPageComponent() {
         defaultViewState={defaultViewState}
         loadToC={true}
         showToC={true}
+        selectedLayers={defaultLayers}
+        onSelectedLayersChange={setSelectedLayers}
         nakshaEndpointToken={`Bearer ${user.accessToken}`}
         mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}

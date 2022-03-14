@@ -2,7 +2,6 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
-import FormDebugger from "@components/form/debugger";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -148,8 +147,6 @@ export default function CreateGroupPageComponent({
           <SubmitButton mt={2} mb={6}>
             {t("group:save")}
           </SubmitButton>
-
-          <FormDebugger />
         </form>
       </FormProvider>
     </div>

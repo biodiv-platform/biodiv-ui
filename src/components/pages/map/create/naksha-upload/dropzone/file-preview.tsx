@@ -33,9 +33,6 @@ export default function FilePreview() {
         {Object.keys(shapeFiles).map((type) => (
           <SingleFile type={type} key={type} name={shapeFiles?.[type]?.file?.name} />
         ))}
-        {/* {shapeFiles.dbf.file && <SingleFile name={shapeFiles.dbf.file.name} />}
-        {shapeFiles.shp.file && <SingleFile name={shapeFiles.shp.file.name} />}
-        {shapeFiles.shx.file && <SingleFile name={shapeFiles.shx.file.name} />} */}
       </Box>
       <Button
         w="100%"
