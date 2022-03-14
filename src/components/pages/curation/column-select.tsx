@@ -1,15 +1,17 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import { RichTextareaField } from "@components/form/rich-textarea";
-import { SelectInputField } from "@components/form/select";
+import { Box } from "@chakra-ui/react";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import { SelectMultipleInputField } from "@components/form/select-multiple";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axExtractAllParams } from "@services/extraction.service";
+import { axUserFilterSearch } from "@services/user.service";
+import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+//import AsyncSelect from "react-select/async";
 import * as yup from "yup";
 
 import ToggleablePanel from "../common/toggleable-panel";
@@ -19,6 +21,8 @@ const schema = yup.object().shape({
   location: yup.array().required("its a required field"),
   date: yup.array().required("its a required field")
 });
+
+//const onQuery = debounce(axUserFilterSearch, 200);
 
 export default function ColumnSelect({ availableColumns, filePath, userId }) {
   const { t } = useTranslation();
@@ -31,8 +35,12 @@ export default function ColumnSelect({ availableColumns, filePath, userId }) {
     const payload = {
       ...dat,
       filePath: filePath,
-      userId: userId,
+      userId: userId
     };
+
+    /* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
+
+    console.log(payload);
 
     const { success } = await axExtractAllParams(payload);
     if (success) {
@@ -69,6 +77,13 @@ export default function ColumnSelect({ availableColumns, filePath, userId }) {
             />
           </Box>
         </ToggleablePanel>
+
+        <SelectAsyncInputField
+          name="contributors"
+          label="contributors"
+          multiple={true}
+          onQuery={axUserFilterSearch}
+        />
 
         <SubmitButton>Save</SubmitButton>
       </form>
