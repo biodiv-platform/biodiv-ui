@@ -1,11 +1,11 @@
-import shp from "shapefile";
+import { openDbf, openShp } from "shapefile";
 
 import { LAYER_TYPES } from "../data";
 
 export const parseSHP = (file, update) => {
   const readerShp = new FileReader();
   readerShp.onload = async () => {
-    const sourceShp = await shp.openShp(readerShp.result);
+    const sourceShp = await openShp(readerShp.result);
     const meta = (await sourceShp.read()).value;
     update("shp", file, {
       ...meta,
@@ -20,7 +20,7 @@ export const parseSHP = (file, update) => {
 export const parseDBF = (file, update) => {
   const readerDbf = new FileReader();
   readerDbf.onload = async () => {
-    const sourceDbf = await shp.openDbf(readerDbf.result, { encoding: "UTF-8" });
+    const sourceDbf = await openDbf(readerDbf.result, { encoding: "UTF-8" });
 
     const rows: any[] = [];
     try {
