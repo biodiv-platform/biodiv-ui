@@ -942,10 +942,10 @@
     "@ibp/naksha-commons" "4.1.1"
     "@turf/bbox" "^6.5.0"
 
-"@ibp/naksha-mapbox-draw@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-4.1.1.tgz#92995376c116c988c6d02993fef170d97d4a75c9"
-  integrity sha512-YMRdUeJdXyBDQwB3C3H3YZWKupY2sH20nNrGlcFSVnPuDwNe9nWLndk5nd26uUIBlL4Ac1CL96RFECPzpFJ2gQ==
+"@ibp/naksha-mapbox-draw@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-4.2.5.tgz#3eef05ed45110dcf3740928c23f98a92de876c9e"
+  integrity sha512-3aCCAKKlJIJa+lyvmk3UT2gl9BsOmJB/u1z1Dqx6tUEygjN2KoTtpFVnl7OmczoYFjNLJBrm/9IV0OYFLjR3HA==
   dependencies:
     "@ibp/naksha-commons" "4.1.1"
     "@mapbox/mapbox-gl-draw" "^1.3.0"
@@ -953,10 +953,10 @@
     boundingbox "^1.4.0"
     react-gbus "^1.1.2"
 
-"@ibp/naksha-mapbox-list@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-4.2.4.tgz#07a95936c3fef759099acc2d069fbefc4fb58006"
-  integrity sha512-47/59ebJFhzEyR5RiGolq8i8juoOgwI/TKwUTthxLDhI9vTuj0sbHVxk9gOctJlUyrNmelK9QF6oypVgOKV8KA==
+"@ibp/naksha-mapbox-list@4.2.7":
+  version "4.2.7"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-4.2.7.tgz#4b3c54b59f4aea1567c2543940614599d8070ca1"
+  integrity sha512-s6PyC1IGB5bpa9YXvndeybWjtemVNBXgh2QVaPo1WF3F5M1mjUBqZodqneCYB4RVPOJ6vaRJwLcAPsfoOKdd9Q==
   dependencies:
     "@bumaga/tabs" "^0.2.0"
     "@ibp/naksha-commons" "4.1.1"
@@ -967,15 +967,16 @@
     highlight-search-result "^1.0.4"
     immer "^9.0.12"
     react-sortable-hoc "^2.0.0"
+    react-tiny-popover "^7.0.1"
     react-virtual "^2.10.4"
     react-virtualized-auto-sizer "^1.0.6"
     redaxios "^0.4.1"
     twind "^0.16.16"
 
-"@ibp/naksha-mapbox-view@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-4.1.1.tgz#3bed14a4d425644c51f98884fb683352f3781c99"
-  integrity sha512-2DazxNec5kATSAvb6TarvvPnCKUpUmzxsD78mbry9b3x8pXLK/Ydf62zA4aZd7Gol6YBB5mfFgu5wK7UxOv9Wg==
+"@ibp/naksha-mapbox-view@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-4.2.5.tgz#f8007fda4c8626e1dd43d2d4c6c96c3a0c794c8f"
+  integrity sha512-JjNYfJluhCjvkhGFIfrHq/TazYWWAWl3ay49KSHCwVdTchmm7YSZZdL63sOgsGQytR8/GY7WqI2uMHIwWFJyVw==
   dependencies:
     "@ibp/naksha-commons" "4.1.1"
     "@turf/bbox" "^6.5.0"
@@ -5182,17 +5183,17 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^4.2.4:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.2.4.tgz#89879f7ab9d5b4245944f80f0410685b8d81f031"
-  integrity sha512-kHv7qlZQ+jXDI3AW9zIVdJQuvacyVsLW70d9peomGpreqWiRgCfiPCg866kgJxT+ZMeocAVq+pygdfrsOASK8A==
+naksha-components-react@^4.2.7:
+  version "4.2.7"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.2.7.tgz#2c7a57dc22fea7341dc1af066ac718b3006b19d9"
+  integrity sha512-SGY7IZW9ITXLn79+cleIQqYqW5mJGQNFGycnLkTqeUfjEwC12tc/huJXFUwrUebwMDmkf+dqszvKXxtN+gNu6w==
   dependencies:
     "@ibp/eslint-preset" "4.1.1"
     "@ibp/naksha-gmaps-draw" "4.1.1"
     "@ibp/naksha-gmaps-view" "4.1.1"
-    "@ibp/naksha-mapbox-draw" "4.1.1"
-    "@ibp/naksha-mapbox-list" "4.2.4"
-    "@ibp/naksha-mapbox-view" "4.1.1"
+    "@ibp/naksha-mapbox-draw" "4.2.5"
+    "@ibp/naksha-mapbox-list" "4.2.7"
+    "@ibp/naksha-mapbox-view" "4.2.5"
     "@ibp/tsconfig" "4.1.1"
 
 nanoclone@^0.2.1:
@@ -6145,6 +6146,11 @@ react-textarea-autosize@^8.3.0:
     "@babel/runtime" "^7.10.2"
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
+
+react-tiny-popover@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/react-tiny-popover/-/react-tiny-popover-7.0.1.tgz#efb396cae335f00a0767ad98b9579d28744aec9e"
+  integrity sha512-uV+nTZXkCtfPFQtoKwbfX8waaU7+b8LEOoyOUjtmRxqnH3KLX1FkPm7RU+RC8eXxtOe4rC1cuhOIbQFcc71vQQ==
 
 react-transition-group@^4.3.0:
   version "4.4.2"
