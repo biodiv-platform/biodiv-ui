@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
-import type { ExtendedMarkerProps } from "naksha-components-react";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -41,7 +40,7 @@ export default function ClusterMap({
   borderRadius = "md"
 }: ClusterMapProps) {
   const { lang } = useTranslation();
-  const defaultViewPort = React.useMemo(
+  const defaultViewState = React.useMemo(
     () => getMapCenter(3.1, latitude ? { latitude, longitude } : {}),
     []
   );
@@ -68,8 +67,8 @@ export default function ClusterMap({
     >
       <LazyLoad height={422} once={true}>
         <NakshaMapboxList
-          mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
-          viewPort={defaultViewPort}
+          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          defaultViewState={defaultViewState}
           key={k}
           lang={lang}
           layers={
@@ -81,12 +80,19 @@ export default function ClusterMap({
                     isAdded: true,
                     source: { type: "grid", fetcher: fetchGridData },
                     onHover: onObservationGridHover,
-                    onClick: onObservationGridClick
+                    onClick: onObservationGridClick,
+                    data: {
+                      index: "extended_observation",
+                      type: "extended_records",
+                      geoField: "location",
+                      summaryColumn: ["count"],
+                      propertyMap: { count: "Count" }
+                    }
                   }
                 ]
               : []
           }
-          markers={latitude ? ([{ latitude, longitude, colorHex }] as ExtendedMarkerProps[]) : []}
+          markers={latitude ? [{ latitude, longitude, colorHex }] : []}
         />
       </LazyLoad>
     </Box>

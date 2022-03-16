@@ -51,7 +51,7 @@ input:disabled {
 .hover-box {
   background: var(--chakra-colors-white);
   border: 1px solid var(--chakra-colors-gray-300);
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   display: inline-block;
   width: 100%;
 }
@@ -65,7 +65,6 @@ input:disabled {
   transition: all 0.3s ease-out;
   top: 0px;
   position: relative;
-  overflow: hidden;
 }
 .hover-box:hover {
   transition: all 0.2s ease-out;

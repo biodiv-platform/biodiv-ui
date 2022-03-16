@@ -25,7 +25,7 @@ const coverageToGeoJson = (coverage) => ({
 export default function DocumentSidebarMap({ documentCoverages }) {
   const geojson = coverageToGeoJson(documentCoverages);
   const { t } = useTranslation();
-  const defaultViewPort = React.useMemo(() => getMapCenter(2.8), []);
+  const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
   return (
     <Box
@@ -41,8 +41,8 @@ export default function DocumentSidebarMap({ documentCoverages }) {
       {documentCoverages?.length ? (
         <NakshaMapboxView
           data={geojson}
-          defaultViewPort={defaultViewPort}
-          mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          defaultViewState={defaultViewState}
+          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         />
       ) : (
         t("document:no_geodata")

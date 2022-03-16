@@ -8,6 +8,7 @@ export default [
   {
     active: SITE_CONFIG.USERGROUP.ACTIVE,
     cell: GroupListItem,
+    isLazy: true,
     name: "header:menu_primary.groups."
   },
   {
