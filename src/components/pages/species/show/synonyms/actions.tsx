@@ -1,4 +1,5 @@
 import { Box, Button, ButtonGroup, Flex, IconButton, Td, Tr } from "@chakra-ui/react";
+import ScientificName from "@components/@core/scientific-name";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
@@ -36,7 +37,9 @@ export function SynonymEditButtons({ synonym }) {
 
   return (
     <Flex alignItems="center" justifyContent="space-between">
-      <Box>{synonym.normalizedForm}</Box>
+      <Box>
+        <ScientificName value={synonym.italicisedForm} />
+      </Box>
       <ButtonGroup spacing={0} variant="link">
         <IconButton
           colorScheme="blue"

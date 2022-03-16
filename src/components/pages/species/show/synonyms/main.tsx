@@ -1,4 +1,5 @@
 import { Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import ScientificName from "@components/@core/scientific-name";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
@@ -47,7 +48,7 @@ export default function SynonymList({
                   {isContributor ? (
                     <SynonymEditButtons synonym={synonym} />
                   ) : (
-                    synonym.normalizedForm
+                    <ScientificName value={synonym.italicisedForm} />
                   )}
                 </Td>
               </Tr>
