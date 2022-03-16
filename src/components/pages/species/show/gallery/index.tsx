@@ -40,7 +40,7 @@ export default function SpeciesGallery() {
                 justifyContent="center"
                 position="relative"
               >
-                <Slide resource={resource} alt={species.taxonomyDefinition.normalizedForm} />
+                <Slide resource={resource} alt={species.taxonomyDefinition.name} />
               </Flex>
             ))
           ) : (
