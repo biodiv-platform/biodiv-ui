@@ -71,27 +71,23 @@ export default function ClusterMap({
           defaultViewState={defaultViewState}
           key={k}
           lang={lang}
-          layers={
-            filter
-              ? [
-                  {
-                    id: "species-observations",
-                    title: "Species Observations",
-                    isAdded: true,
-                    source: { type: "grid", fetcher: fetchGridData },
-                    onHover: onObservationGridHover,
-                    onClick: onObservationGridClick,
-                    data: {
-                      index: "extended_observation",
-                      type: "extended_records",
-                      geoField: "location",
-                      summaryColumn: ["count"],
-                      propertyMap: { count: "Count" }
-                    }
-                  }
-                ]
-              : []
-          }
+          selectedLayers={filter ? ["species-observations"] : []}
+          layers={[
+            {
+              id: "species-observations",
+              title: "Species Observations",
+              source: { type: "grid", fetcher: fetchGridData },
+              onHover: onObservationGridHover,
+              onClick: onObservationGridClick,
+              data: {
+                index: "extended_observation",
+                type: "extended_records",
+                geoField: "location",
+                summaryColumn: ["count"],
+                propertyMap: { count: "Count" }
+              }
+            }
+          ]}
           markers={latitude ? [{ latitude, longitude, colorHex }] : []}
         />
       </LazyLoad>
