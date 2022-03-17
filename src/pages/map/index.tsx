@@ -6,5 +6,5 @@ export default function MapPage({ layers }) {
 }
 
 export const getServerSideProps = async (ctx) => ({
-  props: { layers: ctx.query?.layers?.split(",") || [] }
+  props: { layers: ctx.query?.layers?.split(",").filter((o) => o) || [] }
 });
