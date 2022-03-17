@@ -59,11 +59,11 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
             store: SITE_CONFIG.GEOSERVER.STORE,
             workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
           }}
+          selectedLayers={["species-observations"]}
           layers={[
             {
               id: "species-observations",
               title: "Species Observations",
-              isAdded: true,
               source: { type: "grid", fetcher: fetchGridData },
               onHover: onObservationGridHover,
               data: {
