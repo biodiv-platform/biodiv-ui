@@ -87,6 +87,7 @@ export default function MapPageComponent({ defaultLayers }) {
         mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
         onLayerDownload={handleOnDownload}
+        canLayerShare={true}
         geoserver={{
           endpoint: ENDPOINT.GEOSERVER,
           store: SITE_CONFIG.GEOSERVER.STORE,
