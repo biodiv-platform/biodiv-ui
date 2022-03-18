@@ -913,53 +913,53 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@ibp/eslint-preset@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@ibp/eslint-preset/-/eslint-preset-4.1.1.tgz#0ffddc2c6640fd6856b47475c3c068b641609f2e"
-  integrity sha512-/uzBwMeZR+cy1Hy5Kx7l4k52Z+wG9tYFzwktEWCpwIfrxjTRK7v0E1ixB5CQythn5Uj8lORD3OSWR2ynEwo3SQ==
+"@ibp/eslint-preset@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ibp/eslint-preset/-/eslint-preset-4.3.1.tgz#ad86a3e45553583c9c2a26bd09948c1a067f46ba"
+  integrity sha512-lVDMZpMAwSWZGMHSbgP+uJxa+g2jy1isOoiT6eDdVr/WT5Sj0aTZWDuRxQckWA/nDto0f1AqJCiuknkjpnLFjg==
   dependencies:
     eslint-config-next "^12.1.0"
     eslint-config-prettier "^8.4.0"
 
-"@ibp/naksha-commons@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-4.1.1.tgz#035ce015a1ccb97b34bb50865f374cc43454ef35"
-  integrity sha512-nIDLNPCfcvU7/Og2kPL8MvITMor+tjZ4dFw3BiWGREsg9k+bXm5GjZpDAdg7Pc4OqsAQXljqm1ofsKClTxlKyg==
+"@ibp/naksha-commons@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-commons/-/naksha-commons-4.3.1.tgz#535df36468b11532ed8a42282bb3f8725e0737ae"
+  integrity sha512-E35jEFVlV0E8kde2T+iU+2ZXit7AWzF1Z2XaHdI4MtXdE5+PA+ObbumtNsTbZlromgijCJQ98WoYKL/RrSMqAQ==
 
-"@ibp/naksha-gmaps-draw@4.2.9":
-  version "4.2.9"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-4.2.9.tgz#6349475e5f367a93458273d45d783f7f2c81e8b0"
-  integrity sha512-NJUdNhL9BQ9EjJneY+mcq/Yu/VqmGGMpzZaygmbPVb7Paccq6Caiua1KVnk8QmlPY4S/Hb2ylGfV74gR1pfvLg==
+"@ibp/naksha-gmaps-draw@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-draw/-/naksha-gmaps-draw-4.3.1.tgz#61b49c6509f464029939a455c56a5d4a55ad18cb"
+  integrity sha512-il2LtCtpMqlEdx8vOLSIc0selZwZ0XBQgAJHybEIu/+qudMmZdjBiGan4sYgh/2JJ/HkQc94/ufPfGpfSLBI0w==
   dependencies:
-    "@ibp/naksha-commons" "4.1.1"
+    "@ibp/naksha-commons" "4.3.1"
     "@turf/bbox" "^6.5.0"
 
-"@ibp/naksha-gmaps-view@4.2.9":
-  version "4.2.9"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-view/-/naksha-gmaps-view-4.2.9.tgz#d36b4d41c74ba6219f235d96b440d6691e55c92e"
-  integrity sha512-X+fyo83WZoKnAkurp3iaygd0eKWhcIOPT9Smnrv8HZ3YZU68cy+kdduQZPEIU6rg8HmobNnPY6YxUw7HGPSwPg==
+"@ibp/naksha-gmaps-view@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-gmaps-view/-/naksha-gmaps-view-4.3.1.tgz#31410acb8aa103fee1d788d0c09ce75cdae07f29"
+  integrity sha512-YLnt88o33UmL4c+77+ZkzlaP69AGDwxMMZRHGAOA9HfhAGL89MV+dLlo3WpGHO2+NhIy0duFAMLgP8MDpccT/Q==
   dependencies:
-    "@ibp/naksha-commons" "4.1.1"
+    "@ibp/naksha-commons" "4.3.1"
     "@turf/bbox" "^6.5.0"
 
-"@ibp/naksha-mapbox-draw@4.2.9":
-  version "4.2.9"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-4.2.9.tgz#a8397882838e9e9ebbe7288c24afb4e6d179dd9d"
-  integrity sha512-/hPvJLR8AZLX6rC8ypO00k4vcpWTuKqR5mMSSdqgVja8MlVnxInHux9NByM1zrD3vBjLJAt+yAOTUJLjgCLh9g==
+"@ibp/naksha-mapbox-draw@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-draw/-/naksha-mapbox-draw-4.3.1.tgz#269547332d658bfe6bb3891de82808d4d03271db"
+  integrity sha512-JX37O9kRbtSwhuVfZjiS3ioJxRNW7VFT6uUYs/W4Gv3gsNb39aPLFJQppp0leLodReIZSh9V4El+vRSAKkQVYQ==
   dependencies:
-    "@ibp/naksha-commons" "4.1.1"
+    "@ibp/naksha-commons" "4.3.1"
     "@mapbox/mapbox-gl-draw" "^1.3.0"
     "@turf/bbox" "^6.5.0"
     boundingbox "^1.4.0"
     react-gbus "^1.1.2"
 
-"@ibp/naksha-mapbox-list@4.2.9":
-  version "4.2.9"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-4.2.9.tgz#9746f8c0920a4421a36a3bc32bd46678da602d2c"
-  integrity sha512-9cjkfaHA4l6ns26KrNmjGXsuQ79xSftdY7wCIswNpyqNeKyZfhqYZDPIShvilnd+G8sk2ZxRS1U9lyr99waaew==
+"@ibp/naksha-mapbox-list@4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-4.4.0.tgz#9d5fec57a78e655d900200949235410c0f3d2cfd"
+  integrity sha512-ZZiBu6WlwRzCd3HjnT9R+xi/bpzdzkZPCT2/GBArsuge4VDF/olu5OxMXOYRv8KXxbV6PT1kva8naI2x3+sWZw==
   dependencies:
     "@bumaga/tabs" "^0.2.0"
-    "@ibp/naksha-commons" "4.1.1"
+    "@ibp/naksha-commons" "4.3.1"
     boundingbox "^1.4.0"
     clsx "^1.1.1"
     colorbrewer "^1.5.2"
@@ -970,22 +970,23 @@
     react-tiny-popover "^7.0.1"
     react-virtual "^2.10.4"
     react-virtualized-auto-sizer "^1.0.6"
+    react-web-share "^1.1.5"
     redaxios "^0.4.1"
     twind "^0.16.16"
 
-"@ibp/naksha-mapbox-view@4.2.9":
-  version "4.2.9"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-4.2.9.tgz#ed5182b8e1fe712c97e65a7a656bc82df7033645"
-  integrity sha512-CZ1Oaatnfa9FXsCugcw1owezCTR+cb94kjVXeFlf7W/JdmQrNJxBGwvu3yYeXjoTKxR1XdCXMooWwa0r48n0kg==
+"@ibp/naksha-mapbox-view@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-view/-/naksha-mapbox-view-4.3.1.tgz#c3c79fa3b0661c6b811d62702de4c36297041d46"
+  integrity sha512-r0CRkBERsjLmhpzddZInESKQEZR0dJPII7wHDPKyjJapM2QSsT7O3CJIiA88rkS/IAwQNPl4cq9qmSTLX9IVXg==
   dependencies:
-    "@ibp/naksha-commons" "4.1.1"
+    "@ibp/naksha-commons" "4.3.1"
     "@turf/bbox" "^6.5.0"
     boundingbox "^1.4.0"
 
-"@ibp/tsconfig@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@ibp/tsconfig/-/tsconfig-4.1.1.tgz#6f95534912f66ad03f5f75c79050b5c74c66b1e4"
-  integrity sha512-YcBfwRThpJIhYExrGnnPDb9UnXEmPihIe5TgyatB4b2qXGSfSmRy8mQLog4TyFsXbYR2s6QVkfmRTGDB+12Mfw==
+"@ibp/tsconfig@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@ibp/tsconfig/-/tsconfig-4.3.1.tgz#a2b37c31bfd17150796ac3595b72d36c7b1ef436"
+  integrity sha512-Cr6cl2eB8r2w+kFrnlzcRaRCu2E46JRakTkfZLyMEh1zC0WpzZ6zt3jpmG7EafSlZ+I9aSoWNoD/OgSE0n0Cew==
 
 "@mapbox/extent@0.4.0":
   version "0.4.0"
@@ -5178,18 +5179,18 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^4.2.9:
-  version "4.2.9"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.2.9.tgz#75b59f06ae9eaa4780a9eaf697c492c1a21d1565"
-  integrity sha512-f828ZuUOanY7sY2ax6z1tu9Vt41Qn6cnalRMVIMETBO36XC1j3w+SuIKfiCaCOf+YNvSn3GKgDLPQiYwHGQUIw==
+naksha-components-react@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.4.0.tgz#3ecde010ce0c8fc2d49f593a8c90d3deddad7a76"
+  integrity sha512-qT4ClLTFZVTurjkWvJPLFZWGun55DoF+as3hejJhupzHVmCB7qlGFBXWdeodozAZowD166d6kRFJ71ADkal+qw==
   dependencies:
-    "@ibp/eslint-preset" "4.1.1"
-    "@ibp/naksha-gmaps-draw" "4.2.9"
-    "@ibp/naksha-gmaps-view" "4.2.9"
-    "@ibp/naksha-mapbox-draw" "4.2.9"
-    "@ibp/naksha-mapbox-list" "4.2.9"
-    "@ibp/naksha-mapbox-view" "4.2.9"
-    "@ibp/tsconfig" "4.1.1"
+    "@ibp/eslint-preset" "4.3.1"
+    "@ibp/naksha-gmaps-draw" "4.3.1"
+    "@ibp/naksha-gmaps-view" "4.3.1"
+    "@ibp/naksha-mapbox-draw" "4.3.1"
+    "@ibp/naksha-mapbox-list" "4.4.0"
+    "@ibp/naksha-mapbox-view" "4.3.1"
+    "@ibp/tsconfig" "4.3.1"
 
 nanoclone@^0.2.1:
   version "0.2.1"
@@ -6181,10 +6182,10 @@ react-virtualized@^9.21.2:
     prop-types "^15.7.2"
     react-lifecycles-compat "^3.0.4"
 
-react-web-share@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/react-web-share/-/react-web-share-1.1.3.tgz#c8705f385ba872d0f23464e83a75b7b9512df70b"
-  integrity sha512-cqaJ4cjbwR+UxCdmGzKPTuN4vJZtVDJn1ha4NgbJx4Zw0nHNA79XcaVLmcBHrkjxndeZVHQEeVG77ESFzCr49A==
+react-web-share@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-web-share/-/react-web-share-1.1.5.tgz#36d83ee355acd68072f4eaf84e29341bf237d1df"
+  integrity sha512-muMgWiBd3lEnbsxSt0KHbOOf9ErwybXDX5QLCNWNaMfQG2x4NJ1d2LxJq6+au7VlznN2pX6M9QHwZAhXGlRHjg==
 
 react-window@^1.8.6:
   version "1.8.6"
