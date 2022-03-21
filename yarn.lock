@@ -3215,7 +3215,7 @@ clone@^2.1.1:
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
 
-clsx@^1.0.0, clsx@^1.0.4:
+clsx@^1.0.0, clsx@^1.0.4, clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -5673,6 +5673,13 @@ react-colorful@^5.1.2, react-colorful@^5.5.1:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.5.1.tgz#29d9c4e496f2ca784dd2bb5053a3a4340cfaf784"
   integrity sha512-M1TJH2X3RXEt12sWkpa6hLc/bbYS0H6F4rIqjQZ+RxNBstpY67d9TrFXtqdZwhpmBXcCwEi7stKqFue3ZRkiOg==
+
+react-data-grid@^7.0.0-beta.11:
+  version "7.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/react-data-grid/-/react-data-grid-7.0.0-beta.11.tgz#16e87f87ac2d1f2c33816837f1be3c4210f1e4b2"
+  integrity sha512-IjJf3GZ7HxH7uSoDaQhKXV9+L8I64xRKgLVQNCblSgvEY20mg2XlMmEjiV9KqROTUM2MqI+IlEpeBLCZRB3mEw==
+  dependencies:
+    clsx "^1.1.1"
 
 react-display-name@^0.2.0:
   version "0.2.5"

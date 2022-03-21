@@ -34,3 +34,12 @@ export const axShowDataset = async (datasetId) => {
     return { success: false, data: {} };
   }
 };
+
+export const axUpdateDataset = async (payload) => {
+  try {
+    const { data } = await http.put("http://localhost:5000/update/2",payload); //1=dataset 2=row index
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
