@@ -53,7 +53,7 @@ export default function SpeciesFieldSimple({ value }) {
       getLanguageNameById(value?.fieldData?.languageId),
       languageId === value?.fieldData?.languageId
     ],
-    [languageId]
+    [languageId, value?.fieldData?.languageId]
   );
 
   const handleOnDelete = async () => {
