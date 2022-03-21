@@ -5,8 +5,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT, isBrowser } from "@static/constants";
-import { hasAccess, waitForAuth } from "@utils/auth";
-import { getBearerToken } from "@utils/http";
+import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
@@ -33,28 +32,23 @@ export default function MapPageComponent({ defaultLayers }) {
     <div>{feature?.properties?.count} Observations</div>
   );
 
-  const handleOnDownload = async () => {
-    await waitForAuth();
-    const token = await getBearerToken();
-    if (token) {
-      toast({
-        title: t("common:success"),
-        description: (
-          <div>
-            {t("page:mail.sent")}{" "}
-            <ExternalBlueLink href="/user/download-logs">
-              {t("page:mail.download_logs")}
-            </ExternalBlueLink>
-          </div>
-        ),
-        variant: "left-accent",
-        status: "success",
-        duration: 9000,
-        isClosable: true
-      });
-      return { success: true, data: token };
-    }
-    return { success: false, data: token };
+  const handleOnDownload = async (layerId) => {
+    console.debug(`Layer download requested ${layerId}`);
+    toast({
+      title: t("common:success"),
+      description: (
+        <div>
+          {t("page:mail.sent")}{" "}
+          <ExternalBlueLink href="/user/download-logs">
+            {t("page:mail.download_logs")}
+          </ExternalBlueLink>
+        </div>
+      ),
+      variant: "left-accent",
+      status: "success",
+      duration: 9000,
+      isClosable: true
+    });
   };
 
   const fetchGridData = async (geoProps) => {
