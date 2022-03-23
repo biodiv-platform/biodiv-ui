@@ -117,6 +117,7 @@
     }
   },
   "icon": "Icon.",
+  "invalid_wkt": "Ingiza Kamba Halali ya WKT",
   "invite": "Weka jina la mtumiaji au barua pepe.",
   "invite_founders": "Waalike waanzilishi",
   "invite_moderators": "Paribisha wasimamizi",

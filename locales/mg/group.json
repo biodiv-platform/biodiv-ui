@@ -117,6 +117,7 @@
     }
   },
   "icon": "matoanteny",
+  "invalid_wkt": "Ampidiro ny tady WKT manan-kery",
   "invite": "Ampidiro ny anaran'ny mpampiasa na ny mailaka",
   "invite_founders": "Asao ny mpanorina",
   "invite_moderators": "Asao ny mpanelanelana",
