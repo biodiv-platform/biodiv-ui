@@ -1,11 +1,11 @@
 import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import HTMLContainer from "@components/@core/html-container";
 import Tooltip from "@components/@core/tooltip";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { SpeciesGroup } from "@interfaces/observation";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { covertToSentenceCase, getInjectableHTML } from "@utils/text";
@@ -64,83 +64,79 @@ export default function Info({ dataTable: dt, speciesGroups }: IInfoProps) {
         </ResponsiveInfo>
         {dt?.description && (
           <ResponsiveInfo title="form:description.title">
-            <Box
-              as={HTMLContainer}
-              gridColumn="2/5"
-              dangerouslySetInnerHTML={{
-                __html: getInjectableHTML(dt?.description)
-              }}
-            ></Box>
+            <Prose>
+              <Box
+                gridColumn="2/5"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(dt?.description)
+                }}
+              />
+            </Prose>
           </ResponsiveInfo>
         )}
         {dt?.summary && (
           <ResponsiveInfo title="datatable:summary">
-            <Box
-              as={HTMLContainer}
-              gridColumn="2/5"
-              dangerouslySetInnerHTML={{
-                __html: getInjectableHTML(dt?.summary)
-              }}
-            ></Box>
+            <Prose>
+              <Box
+                gridColumn="2/5"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(dt?.summary)
+                }}
+              />
+            </Prose>
           </ResponsiveInfo>
         )}
 
         {dt?.geographicalCoverageLocationScale && (
           <ResponsiveInfo title="datatable:location_scale">
-            <Box as={HTMLContainer} gridColumn="2/5">
+            <Box gridColumn="2/5">
               {covertToSentenceCase(dt?.geographicalCoverageLocationScale)}
             </Box>
           </ResponsiveInfo>
         )}
         {dt?.methods && (
           <ResponsiveInfo title="datatable:methods">
-            <Box
-              as={HTMLContainer}
-              gridColumn="2/5"
-              dangerouslySetInnerHTML={{
-                __html: getInjectableHTML(dt?.methods)
-              }}
-            ></Box>
+            <Prose>
+              <Box
+                gridColumn="2/5"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(dt?.methods)
+                }}
+              />
+            </Prose>
           </ResponsiveInfo>
         )}
         {dt?.partyAttributions && (
           <ResponsiveInfo title="datatable:attribution">
-            <Box
-              as={HTMLContainer}
-              gridColumn="2/5"
-              dangerouslySetInnerHTML={{
-                __html: getInjectableHTML(dt?.partyAttributions)
-              }}
-            ></Box>
+            <Prose>
+              <Box
+                gridColumn="2/5"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(dt?.partyAttributions)
+                }}
+              />
+            </Prose>
           </ResponsiveInfo>
         )}
         {dt?.project && (
           <ResponsiveInfo title="datatable:project">
-            <Box as={HTMLContainer} gridColumn="2/5">
-              {covertToSentenceCase(dt?.project)}
-            </Box>
+            <Box gridColumn="2/5">{covertToSentenceCase(dt?.project)}</Box>
           </ResponsiveInfo>
         )}
 
         {dt?.basisOfData && (
           <ResponsiveInfo title="datatable:basis_of_data">
-            <Box as={HTMLContainer} gridColumn="2/5">
-              {covertToSentenceCase(dt?.basisOfData)}
-            </Box>
+            <Box gridColumn="2/5">{covertToSentenceCase(dt?.basisOfData)}</Box>
           </ResponsiveInfo>
         )}
         {dt?.basisOfRecord && (
           <ResponsiveInfo title="datatable:basis_of_record">
-            <Box as={HTMLContainer} gridColumn="2/5">
-              {covertToSentenceCase(dt?.basisOfRecord)}
-            </Box>
+            <Box gridColumn="2/5">{covertToSentenceCase(dt?.basisOfRecord)}</Box>
           </ResponsiveInfo>
         )}
         {dt?.dataTableType && (
           <ResponsiveInfo title="datatable:type">
-            <Box as={HTMLContainer} gridColumn="2/5">
-              {covertToSentenceCase(dt?.dataTableType)}
-            </Box>
+            <Box gridColumn="2/5">{covertToSentenceCase(dt?.dataTableType)}</Box>
           </ResponsiveInfo>
         )}
 

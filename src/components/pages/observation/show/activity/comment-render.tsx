@@ -1,5 +1,5 @@
-import HTMLContainer from "@components/@core/html-container";
 import { useLocalRouter } from "@components/@core/local-link";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { getInjectableHTML } from "@utils/text";
 import React, { useEffect, useState } from "react";
 
@@ -22,11 +22,9 @@ const CommentRender = ({ html }) => {
   }, []);
 
   return (
-    <HTMLContainer
-      dangerouslySetInnerHTML={{
-        __html: getInjectableHTML(nHtml)
-      }}
-    />
+    <Prose>
+      <div dangerouslySetInnerHTML={{ __html: getInjectableHTML(nHtml) }} />
+    </Prose>
   );
 };
 

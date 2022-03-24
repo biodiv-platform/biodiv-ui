@@ -1,9 +1,9 @@
 import { Box, Heading, IconButton, useDisclosure } from "@chakra-ui/react";
-import HTMLContainer from "@components/@core/html-container";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { Role } from "@interfaces/custom";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
 import dynamic from "next/dynamic";
@@ -65,12 +65,14 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
                 />
               ) : (
                 content && (
-                  <HTMLContainer
-                    className="article"
-                    dangerouslySetInnerHTML={{
-                      __html: getInjectableHTML(content)
-                    }}
-                  />
+                  <Prose>
+                    <div
+                      className="article"
+                      dangerouslySetInnerHTML={{
+                        __html: getInjectableHTML(content)
+                      }}
+                    />
+                  </Prose>
                 )
               )}
               {child.id === SITE_CONFIG?.FLORA?.ID && SITE_CONFIG?.FLORA?.LIST && (
