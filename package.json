@@ -22,6 +22,7 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@hookform/resolvers": "2.8.8",
+    "@nikolovlazar/chakra-ui-prose": "^1.0.6",
     "@react-google-maps/api": "^2.7.0",
     "@rehooks/online-status": "^1.1.2",
     "@tinymce/tinymce-react": "^3.13.0",
