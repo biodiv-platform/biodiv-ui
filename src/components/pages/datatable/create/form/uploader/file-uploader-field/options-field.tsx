@@ -110,6 +110,7 @@ export default function Fields({
                   {fields.map((field, index) => (
                     <Td key={field.id}>
                       <SelectInputField
+                        shouldPortal={true}
                         name={`columnsMapping.${index}.fieldKey`}
                         label={t("common:actions.flag.category")}
                         options={formatOptions(
