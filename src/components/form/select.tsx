@@ -8,7 +8,7 @@ import { ClearIndicator, selectStyles } from "./configs";
 
 interface SelectInputFieldProps {
   name: string;
-  label: string;
+  label?: string;
   mb?: number;
   disabled?: boolean;
   hint?: string;
@@ -19,6 +19,7 @@ interface SelectInputFieldProps {
   isControlled?: boolean;
   onChangeCallback?;
   shouldPortal?;
+  placeholder?;
   hidden?;
 }
 const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
@@ -37,6 +38,7 @@ export const SelectInputField = ({
   shouldPortal,
   onChangeCallback,
   hidden,
+  placeholder,
   ...props
 }: SelectInputFieldProps) => {
   const { field, fieldState } = useController({ name });
@@ -51,7 +53,7 @@ export const SelectInputField = ({
       isRequired={isRequired}
       {...props}
     >
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
       <Select
         id={name}
         inputId={name}
@@ -65,6 +67,7 @@ export const SelectInputField = ({
           Option: optionComponent,
           ClearIndicator
         }}
+        placeholder={placeholder}
         menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
         isSearchable={true}
         isDisabled={disabled}
