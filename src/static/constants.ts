@@ -28,7 +28,8 @@ export const ENDPOINT = {
   TRAITS: `${API_ENDPOINT}traits-api/api`,
   USER: `${API_ENDPOINT}user-api/api`,
   USERGROUP: `${API_ENDPOINT}userGroup-api/api`,
-  UTILITY: `${API_ENDPOINT}utility-api/api`
+  UTILITY: `${API_ENDPOINT}utility-api/api`,
+  CURATE:`${API_ENDPOINT}curate-api`
 };
 
 export const DEFAULT_GROUP: UserGroupIbpExtended = {

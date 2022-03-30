@@ -1,34 +1,26 @@
 import { Box } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
-import { BasicTable } from "@components/@core/table";
-import { axShowDataset, axUpdateDataset } from "@services/extraction.service";
-import React, { useEffect, useMemo, useState } from "react";
-import DataGrid, {
-  Column,
-  SelectCellFormatter,
-  SelectColumn,
-  SortColumn,
-  TextEditor
-} from "react-data-grid";
-import InfiniteScroll from "react-infinite-scroll-component";
-
-import Loading from "../common/loading";
+import { axUpdateDataset } from "@services/extraction.service";
+import React, { useMemo, useState } from "react";
+import DataGrid, { SortColumn, TextEditor } from "react-data-grid";
 
 /* eslint no-console: ["error", { allow: ["warn", "error","log"] }] */
-
+const EditableColumns = ["curatedSNames", "curatedLocations", "curatedDates", "isValid"];
 interface Row {
   uniqueId: number;
   locations: string;
   day: number;
   month: number;
+  scientificNamesGNRD: string;
+  scientificNamesFlashtext: string;
+  year: string;
+  curatedSNames: string;
+  curatedLocations: string;
+  curatedDates: string;
+  isValid: string;
 }
 
 function rowKeyGetter(row: Row) {
   return row.uniqueId;
-}
-
-function helloWorld() {
-  console.log("hello world");
 }
 
 const updateRow = async (allRows, updatedRowsInfo, setter) => {
@@ -54,7 +46,9 @@ function getComparator(sortColumn: string): Comparator {
       };
 
     default:
-      throw new Error(`unsupported sortColumn: "${sortColumn}"`);
+      return (a, b) => {
+        return a[sortColumn].localeCompare(b[sortColumn]);
+      };
   }
 }
 
@@ -77,11 +71,18 @@ const DatasetShowPage = ({ data, columns }) => {
     });
   }, [rows, sortColumns]);
 
-  const c = columns.map((v) => ({
-    key: v,
-    name: v,
-    editor: TextEditor
-  }));
+  const c = columns.map((v) =>
+    EditableColumns.includes(v)
+      ? {
+          key: v,
+          name: v,
+          editor: TextEditor
+        }
+      : {
+          key: v,
+          name: v
+        }
+  );
 
   return (
     <Box className="white-box" id="scrollableDiv" maxH={500} overflow="auto" mb={4}>
@@ -103,15 +104,6 @@ const DatasetShowPage = ({ data, columns }) => {
         sortColumns={sortColumns}
         onSortColumnsChange={setSortColumns}
       />
-      <Button
-        colorScheme="blue"
-        size="lg"
-        onClick={() => {
-          console.log(rows);
-        }}
-      >
-        Button
-      </Button>
     </Box>
   );
 };

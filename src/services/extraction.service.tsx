@@ -1,3 +1,4 @@
+import { ENDPOINT } from "@static/constants";
 import http, { plainHttp } from "@utils/http";
 
 export const axExtractAllParams = async (d) => {
@@ -15,7 +16,7 @@ export const axExtractAllParams = async (d) => {
     const cIds = contributors.map((v) => v.value);
 
     formData.append("contributorsIds", cIds);
-    const { data } = await http.post(`http://localhost:5000/extract`, formData, {
+    const { data } = await http.post(`${ENDPOINT.CURATE}/extract`, formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
@@ -28,7 +29,7 @@ export const axExtractAllParams = async (d) => {
 
 export const axShowDataset = async (datasetId) => {
   try {
-    const { data } = await plainHttp.get(`http://localhost:5000/show/1/2`);
+    const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/show/1/${datasetId}`);
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };
@@ -37,7 +38,7 @@ export const axShowDataset = async (datasetId) => {
 
 export const axUpdateDataset = async (payload) => {
   try {
-    const { data } = await http.put("http://localhost:5000/update/2",payload); //1=dataset 2=row index
+    const { data } = await http.put("${ENDPOINT.CURATE}/update/", payload); //1=dataset 2=row index
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };

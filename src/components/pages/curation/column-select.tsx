@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import { useLocalRouter } from "@components/@core/local-link";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SelectMultipleInputField } from "@components/form/select-multiple";
 import { SubmitButton } from "@components/form/submit-button";
@@ -7,7 +8,7 @@ import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axExtractAllParams } from "@services/extraction.service";
 import { axUserFilterSearch } from "@services/user.service";
-import debounce from "debounce-promise";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -25,6 +26,8 @@ const schema = yup.object().shape({
 //const onQuery = debounce(axUserFilterSearch, 200);
 
 export default function ColumnSelect({ availableColumns, filePath, userId }) {
+  const router = useLocalRouter();
+
   const { t } = useTranslation();
   const hForm = useForm({
     resolver: yupResolver(schema)
@@ -42,9 +45,14 @@ export default function ColumnSelect({ availableColumns, filePath, userId }) {
 
     console.log(payload);
 
-    const { success } = await axExtractAllParams(payload);
+    const { success, data } = await axExtractAllParams(payload);
+
     if (success) {
       setX(dat);
+      notification("Dataset uploaded successfully", NotificationType.Success);
+      router.push(`/dataset/${data}/`, true);
+    } else {
+      notification("Unable to create dataset");
     }
   };
 
