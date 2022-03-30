@@ -5,10 +5,6 @@
       "desc": "Izay mpikambana ao amin'ny besinimaro amin'ny ankapobeny dia afaka mampakatra ny fandinihana ireo karazana rehetra hita maso. Ny mpikambana hafa dia manampy amin'ny famaritana, manangom-bolo ary mamoritra ny fandinihana.",
       "title": "Siansa momba ny zom-pirenena"
     },
-    "datasets": {
-      "desc": "Datety isan-karazany miaraka amin'ny metadata araka ny Ecological Markup Language.",
-      "title": "Datasets"
-    },
     "groups": {
       "desc": "Ny microsites ao amin'ny vavahadin-tserasera dia mamela ny fiarahamonina natokana ho an'ireo lohahevitra mahaliana azy ireo hanangona, mifamaly ary mizara votoaty.",
       "title": "fiaraha-monina"
@@ -48,6 +44,10 @@
     "open_data": {
       "desc": "Misokatra ny votoatiny rehetra ao amin'ny vavahadin-tserasera ary manompo eo ambany lisansa Creative Commons ho an'ny fampiasana sy ny fizarana amin'ny fanomezam-boninahitra amin'ireo mpandray anjara tany am-boalohany.",
       "title": "Open data"
+    },
+    "researchers": {
+      "desc": "Ny mpianatra sy ny mpikaroka nandray anjara tamin'ny tetikasa Mikoko miaraka amin'ny mombamomba azy, ny toerana misy azy ary ny tombontsoany amin'ny fikarohana.",
+      "title": "Mikoko Project Researchers"
     },
     "species_information": {
       "desc": "Pejy famaritana ho an'ny karazana rehetra avy amin'ireo loharano voamarina. MAMPIASA hiara-hiasa sy hanorina fampahalalana momba ireo karazana.",

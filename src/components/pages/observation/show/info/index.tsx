@@ -1,12 +1,12 @@
 import { InfoIcon } from "@chakra-ui/icons";
 import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
-import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import Tooltip from "@components/@core/tooltip";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { axQueryTagsByText, axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
@@ -74,13 +74,14 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         {o.observation?.notes && (
           <ResponsiveInfo title="observation:notes">
-            <Box
-              as={HTMLContainer}
-              gridColumn="2/5"
-              dangerouslySetInnerHTML={{
-                __html: getInjectableHTML(o?.observation?.notes)
-              }}
-            ></Box>
+            <Prose>
+              <Box
+                gridColumn="2/5"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(o?.observation?.notes)
+                }}
+              />
+            </Prose>
           </ResponsiveInfo>
         )}
 

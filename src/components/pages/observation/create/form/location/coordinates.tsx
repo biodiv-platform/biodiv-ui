@@ -80,7 +80,7 @@ export default function CoordinatesInput({
         <FormLabel htmlFor="coordinates">
           {t("observation:coordinates")}
           <Button variant="link" colorScheme="blue" size="xs" ml={2} onClick={onToggle}>
-            {t(`observation.use_${isOpen ? "lat_lng" : "dms"}`)}
+            {t(`observation:use_${isOpen ? "lat_lng" : "dms"}`)}
           </Button>
         </FormLabel>
 

@@ -34,25 +34,26 @@ export function reverseGeocode(location) {
  * @returns
  */
 export const stringToFeature = (costr) => {
-  if (!costr) {
+  try {
+    const coarr = costr.split(",");
+    const coordinates: any = [];
+    for (let i = 0; i < coarr.length; i += 2) {
+      coordinates.push([Number(coarr[i]), Number(coarr[i + 1])]);
+    }
+    return [
+      {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Polygon",
+          coordinates: [coordinates]
+        }
+      }
+    ];
+  } catch (e) {
+    console.error(e);
     return [];
   }
-
-  const coarr = costr.split(",");
-  const coordinates: any = [];
-  for (let i = 0; i < coarr.length; i += 2) {
-    coordinates.push([Number(coarr[i]), Number(coarr[i + 1])]);
-  }
-  return [
-    {
-      type: "Feature",
-      properties: {},
-      geometry: {
-        type: "Polygon",
-        coordinates: [coordinates]
-      }
-    }
-  ];
 };
 
 export const getMapCenter = (zoomDiff, extra = {}) => ({

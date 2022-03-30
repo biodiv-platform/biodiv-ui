@@ -27,7 +27,7 @@ const Checkbox = (props: any) => {
 
   return (
     <Box as="label" className="fade" aria-checked={props.isChecked}>
-      <input {...getInputProps()} onChange={handleOnChange} />
+      <input {...getInputProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
         {...getCheckboxProps()}

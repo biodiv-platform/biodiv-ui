@@ -4,13 +4,13 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT } from "@static/constants";
-import { hasAccess, waitForAuth } from "@utils/auth";
-import { getBearerToken } from "@utils/http";
+import { ENDPOINT, isBrowser } from "@static/constants";
+import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { stringify } from "querystring";
+import React, { useEffect, useState } from "react";
 
 const NakshaMapboxList: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
@@ -20,39 +20,35 @@ const NakshaMapboxList: any = dynamic(
   }
 );
 
-export default function MapPageComponent() {
-  const defaultViewPort = React.useMemo(() => getMapCenter(3.1), []);
+export default function MapPageComponent({ defaultLayers }) {
+  const defaultViewState = React.useMemo(() => getMapCenter(3.1), []);
   const { t, lang } = useTranslation();
   const { user } = useGlobalState();
   const toast = useToast();
   const isAdmin = hasAccess([Role.Admin]);
+  const [selectedLayers, setSelectedLayers] = useState(defaultLayers);
 
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
   );
 
-  const handleOnDownload = async () => {
-    await waitForAuth();
-    const token = await getBearerToken();
-    if (token) {
-      toast({
-        title: t("common:success"),
-        description: (
-          <div>
-            {t("page:mail.sent")}{" "}
-            <ExternalBlueLink href="/user/download-logs">
-              {t("page:mail.download_logs")}
-            </ExternalBlueLink>
-          </div>
-        ),
-        variant: "left-accent",
-        status: "success",
-        duration: 9000,
-        isClosable: true
-      });
-      return { success: true, data: token };
-    }
-    return { success: false, data: token };
+  const handleOnDownload = async (layerId) => {
+    console.debug(`Layer download requested ${layerId}`);
+    toast({
+      title: t("common:success"),
+      description: (
+        <div>
+          {t("page:mail.sent")}{" "}
+          <ExternalBlueLink href="/user/download-logs">
+            {t("page:mail.download_logs")}
+          </ExternalBlueLink>
+        </div>
+      ),
+      variant: "left-accent",
+      status: "success",
+      duration: 9000,
+      isClosable: true
+    });
   };
 
   const fetchGridData = async (geoProps) => {
@@ -66,17 +62,26 @@ export default function MapPageComponent() {
     return data;
   };
 
+  useEffect(() => {
+    if (isBrowser) {
+      window.history.pushState("", "", `?${stringify({ layers: selectedLayers.toString() })}`);
+    }
+  }, [selectedLayers]);
+
   return (
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
       <NakshaMapboxList
         lang={lang}
-        viewPort={defaultViewPort}
+        defaultViewState={defaultViewState}
         loadToC={true}
         showToC={true}
+        selectedLayers={defaultLayers}
+        onSelectedLayersChange={setSelectedLayers}
         nakshaEndpointToken={`Bearer ${user.accessToken}`}
-        mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
         onLayerDownload={handleOnDownload}
+        canLayerShare={true}
         geoserver={{
           endpoint: ENDPOINT.GEOSERVER,
           store: SITE_CONFIG.GEOSERVER.STORE,
@@ -94,7 +99,14 @@ export default function MapPageComponent() {
                   tags: ["Global", "Observations"],
                   isAdded: false,
                   source: { type: "grid", fetcher: fetchGridData },
-                  onHover: onObservationGridHover
+                  onHover: onObservationGridHover,
+                  data: {
+                    index: "extended_observation",
+                    type: "extended_records",
+                    geoField: "location",
+                    summaryColumn: ["count"],
+                    propertyMap: { count: "Count" }
+                  }
                 }
               ]
             : []

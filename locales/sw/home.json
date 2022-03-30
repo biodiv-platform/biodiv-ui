@@ -5,10 +5,6 @@
       "desc": "Mwanachama yeyote wa umma anaweza kupakia uchunguzi wa aina yoyote inayoonekana. Wanachama wengine husaidia kutambua, kutangaza na kushikamana na uchunguzi.",
       "title": "Sayansi ya Wananchi"
     },
-    "datasets": {
-      "desc": "Seti tofauti za data zilizo na metadata kulingana na Lugha ya Marashi ya Kiikolojia.",
-      "title": "Hifadhidata"
-    },
     "groups": {
       "desc": "Microsites kwenye portal kuruhusu jamii kujitolea kwa mandhari ya maslahi yao kukusanya, curate na kushiriki maudhui.",
       "title": "Jamii."
@@ -48,6 +44,10 @@
     "open_data": {
       "desc": "Maudhui yote kwenye bandari yanafunguliwa na kutumiwa chini ya leseni ya Creative Commons kwa kutumia tena na kugawana kwa ugawaji kwa wachangiaji wa awali.",
       "title": "Fungua data."
+    },
+    "researchers": {
+      "desc": "Mwanafunzi na watafiti waliohusika katika mradi wa Mikoko pamoja na wasifu wao, eneo na maslahi yao ya utafiti.",
+      "title": "Watafiti wa Mradi wa Mikoko"
     },
     "species_information": {
       "desc": "Kurasa za maelezo kwa kila aina kutoka vyanzo vya kuthibitishwa. Msaada kushirikiana na kujenga habari juu ya aina.",

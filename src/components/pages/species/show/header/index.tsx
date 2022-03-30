@@ -20,7 +20,7 @@ function SpeciesHeader() {
   const { t } = useTranslation();
   const { species, permissions } = useSpecies();
   const speciesTitle = [
-    species.taxonomyDefinition?.normalizedForm || t("common:unknown"),
+    species.taxonomyDefinition?.name || t("common:unknown"),
     t("header:menu_secondary.species.title")
   ].join(" | ");
 

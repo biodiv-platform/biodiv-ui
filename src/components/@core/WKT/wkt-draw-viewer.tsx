@@ -67,7 +67,7 @@ export default function WKTDrawViewer({
 }: WKTProps) {
   const WKTInputRef: any = useRef(null);
   const TitleInputRef: any = useRef(null);
-  const defaultViewPort = React.useMemo(() => getMapCenter(2), []);
+  const defaultViewState = React.useMemo(() => getMapCenter(2), []);
   const { t } = useTranslation();
   const [geojson, setGeojson] = useState<any>();
 
@@ -186,10 +186,9 @@ export default function WKTDrawViewer({
       ) : (
         <Box position="relative" h="22rem">
           <NakshaMapboxDraw
-            defaultViewPort={defaultViewPort}
-            mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            defaultViewState={defaultViewState}
+            mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
             onFeaturesChange={handleMapDraw}
-            isControlled={true}
             isReadOnly={disabled}
           />
         </Box>

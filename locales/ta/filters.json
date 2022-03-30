@@ -1,31 +1,31 @@
 {
   "attribution": {
-    "title": "பண்புக்கூறு"
+    "title": "உடைமை"
   },
-  "clear": "தெளிவான {{filterCount}} வடிகட்டி (கள்)",
+  "clear": "{{filterCount}} வடிகட்டி (கள்) அகற்று",
   "custom_fields": {
     "has_content": "உள்ளடக்கம் உள்ளது",
     "no_content": "உள்ளடக்கம் இல்லை",
-    "no_custom_field": "இல்லை விருப்ப துறையில் (கள்) கண்டுபிடிக்கப்பட்டது",
-    "title": "விருப்ப புலங்கள்"
+    "no_custom_field": "தனிப்பயன் புலம்(கள்)  இல்லை",
+    "title": "தனிப்பயன் புலங்கள்"
   },
   "data_quality": {
     "flag": {
-      "flagged": "கொடியது",
+      "flagged": "கொடி காண்பிக்கப்பட்டது",
       "title": "கொடி",
-      "unflagged": "Unflagged."
+      "unflagged": "கொடி நீக்கம்"
     },
     "identification": {
-      "identified": "அடையாளம்",
+      "identified": "அடையாளம் கண்டது",
       "title": "அடையாளம்",
-      "unidentified": "அடையாளம் தெரியாத"
+      "unidentified": "அடையாளம் தெரியாதது"
     },
     "taxon_id": {
-      "has_taxon": "டான்சன் ஐடி உள்ளது",
-      "no_taxon": "டாக்சன் ஐடி இல்லை",
-      "title": "டாக்ஸன் ஐடி"
+      "has_taxon": "வகைப்பாடு அடையாளம் உள்ளது",
+      "no_taxon": "வகைப்பாடு அடையாளம் இல்லை",
+      "title": "வகைப்பாடு அடையாளம்"
     },
-    "title": "தரவு தரம்",
+    "title": "தரவின் தரம்",
     "validation": {
       "not_validated": "சரிபார்க்கப்படவில்லை",
       "title": "சரிபார்த்தல்",
@@ -37,9 +37,9 @@
       "title": "தரவுத்தள பெயர்"
     },
     "datatable": {
-      "title": "Datatable பெயர்"
+      "title": "தரவு அட்டவணையின் பெயர்"
     },
-    "title": "தரவுத்தள மெட்டாடேட்டா"
+    "title": "தரவுத்தள விவரணை"
   },
   "document_title": "தலைப்பு",
   "item_type": {
@@ -48,21 +48,21 @@
   "location": {
     "district": "மாவட்டம்",
     "map": {
-      "title": "Map."
+      "title": "வரைபடம்"
     },
     "protected_area": {
-      "title": "பாதுகாக்கப்பட்ட பகுதிகளில்"
+      "title": "பாதுகாக்கப்பட்ட பகுதிகள்"
     },
     "state": {
-      "title": "நிலை"
+      "title": "மாநிலம்"
     },
-    "tehsil": "தெஹ்ஸில்",
-    "title": "இருப்பிடம்"
+    "tehsil": "தாலுகா",
+    "title": "புவியிடம்"
   },
   "media": {
-    "audio": "ஆடியோ",
-    "image": "பட",
-    "no_media": "இல்லை ஊடக",
+    "audio": "ஒலி",
+    "image": "படம்",
+    "no_media": "ஊடகம் இல்லை",
     "title": "ஊடக வகை",
     "video": "காணொளி"
   },
@@ -73,7 +73,7 @@
     },
     "status": {
       "accepted": "ஏற்றுக்கொள்ளப்பட்டது",
-      "synonym": "ஒத்தர்த்த",
+      "synonym": "ஒத்த பெயர்",
       "title": "நிலை"
     },
     "title": "அறிவியல் பெயர்"
@@ -89,13 +89,13 @@
       "title": "அனைத்து பெயர்கள்"
     },
     "taxon_names": {
-      "title": "டாக்கன் பெயர்கள்"
+      "title": "வகைப்பாடு பெயர்கள்"
     },
     "taxon_rank": {
-      "title": "டாக்ஸன் ரேங்க்"
+      "title": "வகைப்பாடு படிவரிசை"
     },
     "taxon_status": {
-      "title": "டாக்கன் நிலை"
+      "title": "வகைப்பாடு நிலை"
     },
     "title": "அறிவியல் பெயர்"
   },
@@ -104,25 +104,25 @@
   },
   "species_group": {
     "all": "அனைத்து",
-    "amphibians": "நிலையற்றவர்",
-    "arthropods": "ஆர்ட்ரோபோட்ஸ்",
-    "birds": "பறவைகள். பறவைகள்",
+    "amphibians": "நீர்நில உயிர்கள்",
+    "arthropods": "கணுக்காலிகள்",
+    "birds": "பறவைகள்",
     "fish": "மீன்",
     "fungi": "பூஞ்சை",
     "mammals": "பாலூட்டிகள்",
-    "molluscs": "மோலுக்கம்",
-    "others": "மற்றவைகள்",
+    "molluscs": "மெல்லுடலி",
+    "others": "மற்றவை",
     "plants": "செடிகள்",
     "reptiles": "ஊர்வன",
-    "title": "இனங்கள் குழு"
+    "title": "இனத்தொகுதி"
   },
   "taxon_browser": {
-    "search": "மரத்தில் தேடுக",
-    "search_results": "{{currentIndex}} of {{resultsCount}}",
-    "title": "டாக்கன் உலாவி"
+    "search": "வகைப்பாடு மரத்தில் தேடுக",
+    "search_results": "{{resultsCount}}-ல் {{currentIndex}}",
+    "title": "வகைப்பாடு உலா"
   },
   "time": {
-    "created_on": "உருவாக்கப்பட்டது தேதி",
+    "created_on": "உருவாக்கப்பட்ட தேதி",
     "last_logged": "கடைசியாக உள்நுழைந்தது",
     "last_updated": "கடைசியாக புதுப்பிக்கப்பட்டது",
     "max_date": "அதிகபட்ச தேதி",
@@ -140,12 +140,12 @@
       "nov": "நவம்பர்",
       "oct": "அக்டோபர்",
       "sep": "செப்டம்பர்",
-      "title": "மாதம் அனுசரிக்கப்பட்டது"
+      "title": "அவதானிப்பின் மாதம்"
     },
     "title": "நேரம்"
   },
   "title": "வடிகட்டிகள்",
-  "toggle": "வடிகட்டிகள் மாற்று",
+  "toggle": "வடிகட்டிகள் நிலைமாற்று",
   "traits": {
     "title": "பண்புகள்"
   },
@@ -158,9 +158,9 @@
     "profession_title": "தொழில்",
     "role_title": "பங்கு",
     "search": "தேடல் பயனர்",
-    "sex_title": "செக்ஸ் வகை",
-    "taxon_browser": "டாக்ஸன் உலாவி",
-    "taxon_role_title": "வகைபிரித்தல் பாத்திரங்கள்",
+    "sex_title": "பாலினம்",
+    "taxon_browser": "வகைப்பாடு உலாவி",
+    "taxon_role_title": "வகைப்பாடு பாத்திரங்கள்",
     "title": "பயனர்",
     "username": "பயனர் பெயர்"
   },

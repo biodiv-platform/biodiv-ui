@@ -117,6 +117,7 @@
     }
   },
   "icon": "Icon",
+  "invalid_wkt": "Enter Valid WKT String",
   "invite": "Type user name or email",
   "invite_founders": "Invite Founders",
   "invite_moderators": "Invite Moderators",

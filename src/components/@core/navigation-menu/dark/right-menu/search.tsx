@@ -4,11 +4,11 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export default function Search() {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const handleOnSearch = (e) => {
     e.preventDefault();
-    googleSearch(e.target.elements["search"].value);
+    googleSearch(e.target.elements["search"].value, lang);
   };
 
   return (

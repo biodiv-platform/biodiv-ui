@@ -14,10 +14,10 @@ import {
 } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLink from "@components/@core/blue-link/external";
-import HTMLContainer from "@components/@core/html-container";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
 import useGlobalState from "@hooks/use-global-state";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
 import { getLanguageNameById } from "@utils/i18n";
@@ -53,7 +53,7 @@ export default function SpeciesFieldSimple({ value }) {
       getLanguageNameById(value?.fieldData?.languageId),
       languageId === value?.fieldData?.languageId
     ],
-    [languageId]
+    [languageId, value?.fieldData?.languageId]
   );
 
   const handleOnDelete = async () => {
@@ -87,14 +87,15 @@ export default function SpeciesFieldSimple({ value }) {
           {hasFieldPermission && (
             <FieldEditActionButtons onEdit={handleOnEdit} onDelete={handleOnDelete} />
           )}
-          <Box
-            as={HTMLContainer}
-            p={2}
-            className="preview"
-            dangerouslySetInnerHTML={{
-              __html: getInjectableHTML(value?.fieldData?.description || "Empty")
-            }}
-          />
+          <Prose>
+            <Box
+              p={2}
+              className="preview"
+              dangerouslySetInnerHTML={{
+                __html: getInjectableHTML(value?.fieldData?.description || "Empty")
+              }}
+            />
+          </Prose>
           <Box bg="gray.50" fontSize="sm" borderTop="1px" borderColor="gray.300" p={2}>
             <Flex justifyContent="space-between">
               <Box>{value?.attributions || value?.contributor.map((u) => u.name).join(", ")}</Box>

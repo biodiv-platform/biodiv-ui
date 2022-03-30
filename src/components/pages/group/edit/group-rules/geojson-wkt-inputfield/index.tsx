@@ -56,7 +56,7 @@ export default function GeoJsonWktParserInput({
   const { t } = useTranslation();
   const [canShow, setShow] = useState<boolean>(false);
   const [featureData, setDefaultFeatureData] = useState();
-  const defaultViewPort = React.useMemo(() => getMapCenter(2), []);
+  const defaultViewState = React.useMemo(() => getMapCenter(2), []);
 
   const handleMapDraw = (geoJson) => {
     if (geoJson.length > 0) {
@@ -71,7 +71,7 @@ export default function GeoJsonWktParserInput({
       field.onChange(wktInputRef.current.value);
     } else {
       field.onChange(null);
-      notification(t("enter valid wkt string"), NotificationType.Error);
+      notification(t("group:invalid_wkt"), NotificationType.Error);
     }
   };
 
@@ -100,11 +100,9 @@ export default function GeoJsonWktParserInput({
           <GeoJSONPreview data={featureData} />
         ) : (
           <NakshaMapboxDraw
-            defaultViewPort={defaultViewPort}
-            mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            defaultViewState={defaultViewState}
+            mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
             onFeaturesChange={handleMapDraw}
-            isControlled={true}
-            isPolygon={isPolygon}
           />
         )}
       </Box>

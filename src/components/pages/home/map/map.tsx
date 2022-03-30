@@ -47,11 +47,11 @@ export default function Map() {
 
   return (
     <NakshaMapboxList
-      viewPort={mapCenter}
+      defaultViewState={mapCenter}
       loadToC={true}
       lang={lang}
       managePublishing={canManagePublishing}
-      mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+      mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
       geoserver={{
         endpoint: ENDPOINT.GEOSERVER,
@@ -59,22 +59,24 @@ export default function Map() {
         workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
       }}
       selectedLayers={geoserverLayers}
-      layers={
-        geoserverLayers.length
-          ? []
-          : [
-              {
-                id: "global-observations",
-                title: "Observations",
-                description: "All observations from this portal",
-                attribution: "Portal and Contributors",
-                tags: ["Global", "Observations"],
-                isAdded: true,
-                source: { type: "grid", fetcher: fetchGridData },
-                onHover: onObservationGridHover
-              }
-            ]
-      }
+      layers={[
+        {
+          id: "global-observations",
+          title: "Observations",
+          description: "All observations from this portal",
+          attribution: "Portal and Contributors",
+          tags: ["Global", "Observations"],
+          source: { type: "grid", fetcher: fetchGridData },
+          onHover: onObservationGridHover,
+          data: {
+            index: "extended_observation",
+            type: "extended_records",
+            geoField: "location",
+            summaryColumn: ["count"],
+            propertyMap: { count: "Count" },
+          }
+        }
+      ]}
     />
   );
 }

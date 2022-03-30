@@ -18,7 +18,7 @@ const NakshaMapboxDraw: any = dynamic(
 export default function MapDrawContainer() {
   const { filter, addFilter, removeFilter } = useObservationFilter();
   const defaultFeatures = useMemo(() => stringToFeature(filter?.location), []);
-  const defaultViewPort = useMemo(() => getMapCenter(2.8), []);
+  const defaultViewState = useMemo(() => getMapCenter(2.8), []);
 
   const handleOnFeatureChange = (features) => {
     if (features.length > 0) {
@@ -33,11 +33,10 @@ export default function MapDrawContainer() {
   return (
     <Box position="relative" h="22rem">
       <NakshaMapboxDraw
-        defaultViewPort={defaultViewPort}
-        defaultFeatures={defaultFeatures}
-        mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        defaultViewState={defaultViewState}
+        features={defaultFeatures}
+        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         onFeaturesChange={handleOnFeatureChange}
-        isPolygon={true}
       />
     </Box>
   );

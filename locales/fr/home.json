@@ -5,10 +5,6 @@
       "desc": "Tout utilisateur inscrit peut poster une observation de toute espèce observée. Les autres membres aident à identifier, et valider les observations, ils peuvent également poster un commentaire.",
       "title": "Science Citoyenne"
     },
-    "datasets": {
-      "desc": "Ensembles de données diversifiés avec des métadonnées selon le langage de balisage écologique.",
-      "title": "Ensembles de données"
-    },
     "groups": {
       "desc": "Les microsites sur le portail permettent aux communautés dédiées aux thèmes de leur intérêt de collecter, de céder et de partager des contenus.",
       "title": "Communautés"
@@ -48,6 +44,10 @@
     "open_data": {
       "desc": "Tous les contenus sur le portail sont ouverts et utilisés sous licence Creative Commons pour la réutilisation et le partage avec mention aux contributeurs d'origine.",
       "title": "Données ouvertes"
+    },
+    "researchers": {
+      "desc": "L'étudiant et les chercheurs impliqués dans le projet Mikoko ainsi que leur profil, leur localisation et leurs intérêts de recherche.",
+      "title": "Chercheurs du projet Mikoko"
     },
     "species_information": {
       "desc": "Pages descriptives pour toutes les espèces à partir de sources authentifiées. Aider à capitaliser et à développer des informations sur les espèces.",

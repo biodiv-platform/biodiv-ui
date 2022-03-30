@@ -3,7 +3,7 @@ import ClusterMap from "@components/pages/observation/show/sidebar/cluster-map";
 import User from "@components/pages/observation/show/sidebar/user";
 import SITE_CONFIG from "@configs/site-config";
 import { UserIbp } from "@interfaces/observation";
-import { defaultViewPort, NakshaMapboxView } from "naksha-components-react";
+import { defaultViewState, NakshaMapboxView } from "naksha-components-react";
 import React from "react";
 import wkt from "wkt";
 
@@ -20,9 +20,9 @@ export default function Sidebar({ datatable, authorInfo, taxon }: ISidebarProps)
       {datatable.geographicalCoverageTopology ? (
         <Box position="relative" h="35rem" bg="gray.200" borderRadius="md" overflow="hidden" mb={4}>
           <NakshaMapboxView
-            defaultViewPort={defaultViewPort}
+            defaultViewState={defaultViewState}
             data={wkt.parse(datatable.geographicalCoverageTopology)}
-            mapboxApiAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           />
         </Box>
       ) : (
