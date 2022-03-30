@@ -32,7 +32,7 @@ const addCsvFile = async (file, setter, setterFilePath, userId) => {
   const resource = await axUploadCsvCurationResource(file);
 
   setter(resource.excelJson?.csvHeaders);
-  const absFilePath = `/app/biodiv-image/myUploads/${userId}${resource.path}`;
+  const absFilePath = `/app/data/biodiv/myUploads/${userId}${resource.path}`;
   setterFilePath(absFilePath);
 };
 export default function CsvDropzoneComponent({ setCsvHeaders, setFilePath, userId }) {
