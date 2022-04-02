@@ -29,7 +29,7 @@ export const axExtractAllParams = async (d) => {
 
 export const axShowDataset = async (datasetId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/show/1/${datasetId}`);
+    const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/show/${datasetId}`);
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };
@@ -38,7 +38,7 @@ export const axShowDataset = async (datasetId) => {
 
 export const axUpdateDataset = async (payload) => {
   try {
-    const { data } = await http.put("${ENDPOINT.CURATE}/update/", payload); //1=dataset 2=row index
+    const { data } = await http.put(`${ENDPOINT.CURATE}/update/`, payload); //1=dataset 2=row index
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };
