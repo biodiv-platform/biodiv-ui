@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { PageShowMinimal } from "@interfaces/pages";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { preProcessContent } from "@utils/pages.util";
@@ -19,14 +19,11 @@ export default function PageShowPageComponent({ page }: PageShowPageComponentPro
         <PageHeader title={page.title} pageId={page.id} />
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
           <PagesSidebar />
-          <Prose>
-            <Box
-              gridColumn={{ md: "2/5" }}
-              className="fadeInUp delay-4"
-              mb={8}
-              dangerouslySetInnerHTML={{ __html: preProcessContent(page.content) }}
-            />
-          </Prose>
+          <Box gridColumn={{ md: "2/5" }} className="fadeInUp delay-4" mb={8}>
+            <Prose>
+              <div dangerouslySetInnerHTML={{ __html: preProcessContent(page.content) }} />
+            </Prose>
+          </Box>
         </SimpleGrid>
       </div>
     </UsePagesSidebarProvider>
