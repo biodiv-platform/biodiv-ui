@@ -1,4 +1,4 @@
-import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { PageShowMinimal } from "@interfaces/pages";
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { preProcessContent } from "@utils/pages.util";
