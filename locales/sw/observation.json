@@ -1,5 +1,6 @@
 {
   "accurate": "Sahihi",
+  "actions": "Vitendo",
   "add_observation": "Ongeza uchunguzi.",
   "cf_update_success": "Fungua kwa ufanisi uwanja wa desturi",
   "checklist_annotation": "Mashamba ya data",
@@ -118,6 +119,7 @@
   "saved": "Uchunguzi umehifadhiwa",
   "saved_message": "Hatukuweza kuunda uchunguzi wako kwa wakati huu, lakini ikiwa uko nje ya mtandao usijali kuwa umehifadhiwa na utapakiwa mara moja uunganisho ni nyuma",
   "scientific_name": "Jina la kisayansi.",
+  "selectAll": "Chagua Zote",
   "share": "Shiriki uchunguzi huu",
   "source": "Chanzo",
   "species_page": "Angalia ukurasa wa aina.",
@@ -139,6 +141,7 @@
   "traits_update_success": "Tabia zilizosasishwa kwa mafanikio.",
   "unfeature": "Futa iliyochaguliwa.",
   "unfollow_observation": "Unfollow observation.",
+  "unselect": "Usichague Zote",
   "update_observation": "Sasisha uchunguzi",
   "updated": "Imeongezwa",
   "updated_on": "Updated On.",

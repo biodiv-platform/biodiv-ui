@@ -59,6 +59,14 @@ export const sortByOptions = [
   }
 ];
 
+export const bulkActionTabs = [
+  {
+    name: "common:usergroups",
+    icon: "👥",
+    active: SITE_CONFIG.USERGROUP.ACTIVE
+  }
+];
+
 export const actionTabs = [
   {
     name: "common:information",

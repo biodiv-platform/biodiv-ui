@@ -17,7 +17,7 @@ const GroupsTab = React.lazy(() => import("./tabs/groups"));
 const RecoSuggestionTab = React.lazy(() => import("./tabs/reco-suggestion"));
 const TraitsTab = React.lazy(() => import("./tabs/traits"));
 
-const VerticalTabs = styled.div`
+export const VerticalTabs = styled.div`
   flex-grow: 1;
 
   .tabs {
@@ -96,7 +96,7 @@ const VerticalTabs = styled.div`
 export default function Container({ o }) {
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(0);
-  const { setObservationData } = useObservationFilter();
+  const { setObservationData, getCheckboxProps } = useObservationFilter();
 
   const recoUpdated = (payload) => {
     setObservationData((_draft: ObservationData) => {
@@ -113,7 +113,7 @@ export default function Container({ o }) {
       mb={4}
       overflow="hidden"
     >
-      <ImageBoxComponent o={o} />
+      <ImageBoxComponent o={o} getCheckboxProps={getCheckboxProps} />
       <VerticalTabs>
         <Tabs
           isLazy={true}

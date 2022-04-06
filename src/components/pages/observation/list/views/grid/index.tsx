@@ -32,7 +32,7 @@ const GridViewBox = styled.div`
 `;
 
 export default function GridView() {
-  const { observationData, nextPage } = useObservationFilter();
+  const { observationData, getCheckboxProps, nextPage } = useObservationFilter();
 
   return observationData && Array.isArray(observationData.ml) ? (
     <GridViewBox className="view_list_minimal">
@@ -45,7 +45,7 @@ export default function GridView() {
       >
         <div className="grid-card">
           {observationData.ml.map((o) => (
-            <GridViewCard o={o} />
+            <GridViewCard o={o} getCheckboxProps={getCheckboxProps} />
           ))}
         </div>
       </InfiniteScroll>

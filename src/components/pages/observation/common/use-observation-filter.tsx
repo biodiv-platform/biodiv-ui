@@ -1,3 +1,4 @@
+import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { ObservationData, ObservationFilterProps } from "@interfaces/custom";
@@ -23,6 +24,7 @@ interface ObservationFilterContextProps {
   location;
   setObservationData?;
   totalCount?;
+  getCheckboxProps?;
   observationListAdd?;
   setFilter?;
   addFilter?;
@@ -33,6 +35,13 @@ interface ObservationFilterContextProps {
   speciesGroup?: SpeciesGroup[];
   userGroup?: UserGroup[];
   states?: string[];
+  selectAll?: boolean;
+  setSelectAll?;
+  bulkObservationList?: any[];
+  handleBulkCheckbox: (arg: string) => void;
+  isOpen?;
+  onOpen?;
+  onClose?;
   traits?;
   customFields?;
   loggedInUserGroups?: UserGroupIbp[];
@@ -45,9 +54,28 @@ const ObservationFilterContext = createContext<ObservationFilterContextProps>(
 export const ObservationFilterProvider = (props: ObservationFilterContextProps) => {
   const initialOffset = props?.filter?.offset || 0;
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
-  const [observationData, setObservationData] = useImmer<any>(props.observationData);
+  const [observationData, setObservationData] = useImmer<ObservationData>(props.observationData);
   const { isLoggedIn } = useGlobalState();
   const [loggedInUserGroups, setLoggedInUserGroups] = useState<any[]>([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { getCheckboxProps, value: bulkObservationList, setValue } = useCheckboxGroup();
+
+  const handleBulkCheckbox = (actionType: string) => {
+    switch (actionType) {
+      case "selectAll":
+        if (!selectAll) {
+          setSelectAll(true);
+          setValue(observationData?.l?.map((i) => String(i.observationId)));
+        }
+        break;
+      case "UnsSelectAll":
+        setValue([]);
+        setSelectAll(false);
+        break;
+    }
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -122,7 +150,14 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     fetchListData();
   }, [filter]);
 
+  useDidUpdateEffect(() => {
+    if (selectAll) {
+      handleBulkCheckbox("selectAll");
+    }
+  }, [observationData.l]);
+
   const addFilter = (key, value) => {
+    setSelectAll(!selectAll);
     setFilter((_draft) => {
       _draft.f.offset = 0;
       _draft.f[key] = value;
@@ -166,7 +201,14 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         nextPage,
         resetFilter,
         loggedInUserGroups,
-
+        getCheckboxProps,
+        selectAll,
+        setSelectAll,
+        bulkObservationList,
+        handleBulkCheckbox,
+        isOpen,
+        onOpen,
+        onClose,
         // Config Properties
         speciesGroup: props.speciesGroup,
         userGroup: props.userGroup,

@@ -12,18 +12,15 @@ import CheckboxFilterPanel from "../shared/checkbox";
 import HsvColorFilter from "../shared/hsv-color-picker";
 import SubAccordion from "../shared/sub-accordion";
 
-const includedDataType = ["COLOR", "STRING"]
+const includedDataType = ["COLOR", "STRING"];
 const filterTraitsfromAggregation = (traits, ag) => {
   if (Object.keys(ag?.groupTraitsName)?.length <= 0) return [];
-  return traits
-    .map(({ categoryName, traitsValuePairList }) => ({
-      categoryName,
-      traitsValuePairList: traitsValuePairList
+  return traits.map(({ categoryName, traitsValuePairList }) => ({
+    categoryName,
+    traitsValuePairList: traitsValuePairList
       .filter(({ traits: trait }) => includedDataType.includes(trait.dataType))
-      .filter((f) =>
-          !Object.keys(ag.groupTraitsName).includes(f.traits.id)
-        )
-    }))
+      .filter((f) => !Object.keys(ag.groupTraitsName).includes(f.traits.id))
+  }));
 };
 export default function TraitsFilter() {
   const {

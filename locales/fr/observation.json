@@ -1,5 +1,6 @@
 {
   "accurate": "Précise",
+  "actions": "Actions",
   "add_observation": "Ajouter une observation",
   "cf_update_success": "Observation mise à jour avec succès",
   "checklist_annotation": "Champs de données",
@@ -118,6 +119,7 @@
   "saved": "Observation enregistrée",
   "saved_message": "Nous n'avons pas pu créer votre observation pour le moment, mais si vous êtes hors ligne, ne vous inquiétez pas, il est enregistré et sera téléchargé une fois que la connectivité est de retour.",
   "scientific_name": "Nom scientifique",
+  "selectAll": "Tout sélectionner",
   "share": "Partager cette observation",
   "source": "Source",
   "species_page": "Voir la page des espèces",
@@ -139,6 +141,7 @@
   "traits_update_success": "Traits mis à jour avec succès",
   "unfeature": "Viaque sélectionné",
   "unfollow_observation": "Désabonnement d'une observation",
+  "unselect": "Tout déselectionner",
   "update_observation": "Mettre à jour l'observation",
   "updated": "Mise à jour",
   "updated_on": "Mis à jour le",

@@ -1,4 +1,4 @@
-import { Image, Link } from "@chakra-ui/react";
+import { Checkbox, HStack, Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import styled from "@emotion/styled";
@@ -22,16 +22,22 @@ const ImageBox = styled.div`
     height: 18rem;
   }
 
-  .stats {
+  .topBox {
     position: absolute;
     top: 0;
     left: 0;
-
-    margin: 1rem;
-    padding: 0.1rem 0.6rem;
-
+    width: 100%;
+  }
+  .topCheckbox {
+    border-radius: 5rem;
+    background: white;
+    margin: 10px;
+    box-shadow: var(--subtle-shadow);
+  }
+  .stats {
     user-select: none;
-
+    margin: 0.5rem;
+    padding: 0.1rem 0.6rem;
     border-radius: 1rem;
     background: white;
     box-shadow: var(--subtle-shadow);
@@ -64,29 +70,43 @@ const ImageBox = styled.div`
   }
 `;
 
-export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper }) {
+export interface ObservationImageCard {
+  o: ObservationListPageMapper;
+  getCheckboxProps?: (props?: any | undefined) => {
+    [x: string]: any;
+  };
+}
+export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationImageCard) {
   return (
     <ImageBox>
-      <div className="stats">
-        {o.noOfImages ? (
-          <>
-            {o.noOfImages} <ImageIcon />
-          </>
-        ) : null}
-        {o.noOfVideos ? (
-          <>
-            {o.noOfVideos} <VideoIcon />
-          </>
-        ) : null}
-        {o.noOfAudios ? (
-          <>
-            {o.noOfAudios} <AudioIcon />
-          </>
-        ) : null}
-      </div>
+      <HStack className="topBox" justifyContent="space-between">
+        <div className="stats">
+          {o.noOfImages ? (
+            <>
+              {o.noOfImages} <ImageIcon />
+            </>
+          ) : null}
+          {o.noOfVideos ? (
+            <>
+              {o.noOfVideos} <VideoIcon />
+            </>
+          ) : null}
+          {o.noOfAudios ? (
+            <>
+              {o.noOfAudios} <AudioIcon />
+            </>
+          ) : null}
+        </div>
+        {getCheckboxProps && (
+          <Checkbox
+            {...getCheckboxProps({ value: String(o.observationId) })}
+            className="topCheckbox"
+          ></Checkbox>
+        )}
+      </HStack>
 
       <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-        <Link color="white">
+        <Link target="_blank" color="white">
           <Image
             className="ob-image-list"
             objectFit="cover"
