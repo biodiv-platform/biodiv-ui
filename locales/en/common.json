@@ -71,6 +71,7 @@
   "one_moment_please": "One moment please",
   "or": "or",
   "permalink": "Permalink",
+  "post": "Post",
   "prev": "Previous",
   "processing": "Processing...",
   "read_more": "Read More",
@@ -86,6 +87,7 @@
     "title": "Temporal Distribution"
   },
   "toggle": "toggle",
+  "un_post": "Unpost",
   "unauthorized": "Unauthorized User",
   "unknown": "Unknown",
   "uploader": "Uploader",

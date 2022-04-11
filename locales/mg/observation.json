@@ -2,6 +2,11 @@
   "accurate": "marina",
   "actions": "asa",
   "add_observation": "Manampy fandinihana",
+  "bulk_action": {
+    "failure": "Tsy afaka nanetsika hetsika marobe",
+    "success": "Vita soa aman-tsara ny hetsika marobe, ho hita tsy ho ela ny fanovana"
+  },
+  "bulk_actions": "Hetsika marobe",
   "cf_update_success": "Nohavaozina tamim-pahombiazana ny fomba fiasa mahazatra",
   "checklist_annotation": "Saha tsy fantatra",
   "common_name": "Anarana iombonana",
@@ -120,6 +125,7 @@
   "saved_message": "Tsy afaka namorona ny fandinihanao izahay tamin'izay fotoana izay, fa raha tsy manambola ianao dia aza matahotra fa voavonjy io ary alefa indray rehefa miverina ny fifandraisana dia miverina",
   "scientific_name": "Anaran'ny siantifika",
   "selectAll": "Select All",
+  "select_all": "Fandinihana nofantenana",
   "share": "Zarao ity fandinihana ity",
   "source": "Source",
   "species_page": "Jereo Pejy karazana",

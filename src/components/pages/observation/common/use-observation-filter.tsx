@@ -37,7 +37,7 @@ interface ObservationFilterContextProps {
   states?: string[];
   selectAll?: boolean;
   setSelectAll?;
-  bulkObservationList?: any[];
+  bulkObservationIds?: any[];
   handleBulkCheckbox: (arg: string) => void;
   isOpen?;
   onOpen?;
@@ -60,15 +60,13 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [selectAll, setSelectAll] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { getCheckboxProps, value: bulkObservationList, setValue } = useCheckboxGroup();
+  const { getCheckboxProps, value: bulkObservationIds, setValue } = useCheckboxGroup();
 
   const handleBulkCheckbox = (actionType: string) => {
     switch (actionType) {
       case "selectAll":
-        if (!selectAll) {
-          setSelectAll(true);
-          setValue(observationData?.l?.map((i) => String(i.observationId)));
-        }
+        setSelectAll(true);
+        setValue(observationData?.l?.map((i) => String(i.observationId)));
         break;
       case "UnsSelectAll":
         setValue([]);
@@ -128,10 +126,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         if (data?.geohashAggregation) {
           _draft.l = data?.geohashAggregation;
         } else if (data.observationList?.length) {
-          _draft.l.push(...deDupeObservations(_draft.l, data.observationList));
+          _draft?.l?.push(...deDupeObservations(_draft.l, data.observationList));
           _draft.hasMore = data.observationList?.length === Number(filter.f.max);
         } else {
-          _draft.ml.push(...deDupeObservations(_draft.ml, data.observationListMinimal));
+          _draft?.ml?.push(...deDupeObservations(_draft.ml, data.observationListMinimal));
           _draft.hasMore = data?.observationListMinimal?.length === Number(filter.f.max);
         }
         _draft.n = data.totalCount;
@@ -157,7 +155,6 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   }, [observationData.l]);
 
   const addFilter = (key, value) => {
-    setSelectAll(!selectAll);
     setFilter((_draft) => {
       _draft.f.offset = 0;
       _draft.f[key] = value;
@@ -171,6 +168,9 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   };
 
   const nextPage = (max = LIST_PAGINATION_LIMIT) => {
+    if (selectAll) {
+      handleBulkCheckbox("selectAll");
+    }
     setFilter((_draft) => {
       _draft.f.offset = Number(_draft.f.offset) + max;
     });
@@ -204,7 +204,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         getCheckboxProps,
         selectAll,
         setSelectAll,
-        bulkObservationList,
+        bulkObservationIds,
         handleBulkCheckbox,
         isOpen,
         onOpen,

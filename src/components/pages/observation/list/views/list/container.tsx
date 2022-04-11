@@ -30,7 +30,7 @@ export const VerticalTabs = styled.div`
         padding: 0;
         height: 100%;
         max-height: 18rem;
-        overflow-y: auto;
+        overflow-y: hidden;
         position: relative;
       }
     }

@@ -21,6 +21,11 @@ import useObservationFilter from "../../common/use-observation-filter";
 import { VerticalTabs } from "../views/list/container";
 import GroupPost from "./actions/groupTab";
 
+export enum bulkActions {
+  unPost = "ugBulkUnPosting",
+  post = "ugBulkPosting"
+}
+
 export default function BulkMapperModal() {
   const { t } = useTranslation();
   const { onClose, isOpen } = useObservationFilter();
@@ -31,7 +36,7 @@ export default function BulkMapperModal() {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>{t("observation.actions")}</DrawerHeader>
+        <DrawerHeader>{t("observation:bulk_actions")}</DrawerHeader>
         <VerticalTabs>
           <Tabs
             isLazy={true}

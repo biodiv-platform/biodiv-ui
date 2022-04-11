@@ -71,6 +71,7 @@
   "one_moment_please": "এক মুহূর্ত দয়া করে",
   "or": "অথবা",
   "permalink": "Permalink.",
+  "post": "পোস্ট",
   "prev": "আগে",
   "processing": "প্রক্রিয়াকরণ ...",
   "read_more": "আরো পড়ুন",
@@ -86,6 +87,7 @@
     "title": "সাময়িক বিতরণ"
   },
   "toggle": "টগল করুন",
+  "un_post": "আনপোস্ট",
   "unauthorized": "অননুমোদিত ব্যবহারকারী",
   "unknown": "অজানা",
   "uploader": "আপলোডার",

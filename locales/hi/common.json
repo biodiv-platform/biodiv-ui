@@ -71,6 +71,7 @@
   "one_moment_please": "कृपया एक क्षण",
   "or": "या",
   "permalink": "स्थायी लिंक",
+  "post": "डाक",
   "prev": "पहले का",
   "processing": "प्रसंस्करण...",
   "read_more": "अधिक पढ़ें",
@@ -86,6 +87,7 @@
     "title": "अस्थायी वितरण"
   },
   "toggle": "टॉगल",
+  "un_post": "पोस्ट न करें",
   "unauthorized": "अनधिकृत उपयोगकर्ता",
   "unknown": "अनजान",
   "uploader": "अपलोडर",

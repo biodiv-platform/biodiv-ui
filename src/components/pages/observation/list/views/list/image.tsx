@@ -5,11 +5,14 @@ import styled from "@emotion/styled";
 import AudioIcon from "@icons/audio";
 import ImageIcon from "@icons/image";
 import VideoIcon from "@icons/video";
+import { Role } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
+import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React from "react";
+import { useState } from "react";
 
 const ImageBox = styled.div`
   position: relative;
@@ -77,6 +80,8 @@ export interface ObservationImageCard {
   };
 }
 export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationImageCard) {
+  const [canEdit] = useState(hasAccess([Role.Admin, Role.UsergroupFounder, Role.UsergroupExpert]));
+
   return (
     <ImageBox>
       <HStack className="topBox" justifyContent="space-between">
@@ -97,7 +102,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
             </>
           ) : null}
         </div>
-        {getCheckboxProps && (
+        {canEdit && getCheckboxProps && (
           <Checkbox
             {...getCheckboxProps({ value: String(o.observationId) })}
             className="topCheckbox"

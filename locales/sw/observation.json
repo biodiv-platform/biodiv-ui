@@ -2,6 +2,11 @@
   "accurate": "Sahihi",
   "actions": "Vitendo",
   "add_observation": "Ongeza uchunguzi.",
+  "bulk_action": {
+    "failure": "Imeshindwa kuanzisha kitendo kikubwa",
+    "success": "Imefaulu kuanzisha hatua nyingi, Mabadiliko yataonekana baada ya muda mfupi"
+  },
+  "bulk_actions": "Vitendo Vingi",
   "cf_update_success": "Fungua kwa ufanisi uwanja wa desturi",
   "checklist_annotation": "Mashamba ya data",
   "common_name": "Jina la kawaida",
@@ -120,6 +125,7 @@
   "saved_message": "Hatukuweza kuunda uchunguzi wako kwa wakati huu, lakini ikiwa uko nje ya mtandao usijali kuwa umehifadhiwa na utapakiwa mara moja uunganisho ni nyuma",
   "scientific_name": "Jina la kisayansi.",
   "selectAll": "Chagua Zote",
+  "select_all": "Uchunguzi umechaguliwa",
   "share": "Shiriki uchunguzi huu",
   "source": "Chanzo",
   "species_page": "Angalia ukurasa wa aina.",

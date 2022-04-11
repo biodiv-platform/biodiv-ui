@@ -29,7 +29,7 @@ export default function ListHeader() {
     onOpen: openBulkMappingModal,
     observationData,
     handleBulkCheckbox,
-    bulkObservationList,
+    bulkObservationIds,
     selectAll
   } = useObservationFilter();
   const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter?.view);
@@ -56,6 +56,10 @@ export default function ListHeader() {
     onOpen();
   };
 
+  const handleSelectAll = () => {
+    alert(`${observationData.n} ${t("observation:select_all")}`);
+    handleBulkCheckbox("selectAll");
+  };
   return (
     <>
       <Flex mt={4} direction={{ base: "column", md: "row" }} justify="space-between">
@@ -107,14 +111,14 @@ export default function ListHeader() {
           <Text color="gray.600">
             {format(observationData.n)} {t("observation:list.observations_found")}
           </Text>
-          {bulkObservationList && bulkObservationList?.length > 0 && (
+          {bulkObservationIds && bulkObservationIds?.length > 0 && (
             <ButtonGroup size="sm" variant="outline">
               {!selectAll && (
                 <Button
                   variant="outline"
                   colorScheme="blue"
                   leftIcon={<CheckCircleIcon />}
-                  onClick={() => handleBulkCheckbox("selectAll")}
+                  onClick={handleSelectAll}
                 >
                   {t("observation:selectAll")}
                 </Button>
