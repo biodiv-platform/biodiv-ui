@@ -124,7 +124,7 @@ function Header({ o, following = false }: IHeaderProps) {
             />
           </Flex>
           {o.recoIbp?.commonName && (
-            <Heading as="h2" size="lg" mt={2}>
+            <Heading as="div" size="lg" mt={2}>
               {o.recoIbp?.commonName}
             </Heading>
           )}
