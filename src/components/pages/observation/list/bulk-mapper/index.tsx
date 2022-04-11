@@ -58,7 +58,7 @@ export default function BulkMapperModal() {
               ))}
               <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
             </TabList>
-            <TabPanels className="tab-content" position="relative">
+            <TabPanels position="relative">
               <TabPanel>
                 <Suspense fallback={<Spinner />}>
                   <GroupPost />

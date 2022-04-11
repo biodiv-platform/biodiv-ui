@@ -50,7 +50,7 @@ export default function GroupPost() {
   }, 200);
 
   return (
-    <Box m={1} p={4}>
+    <Box>
       <Flex alignItems="center" mb={4} justifyContent="flex-end">
         <Input
           w="20rem"
@@ -62,7 +62,7 @@ export default function GroupPost() {
       </Flex>
 
       {filterGroups && filterGroups?.length > 0 && (
-        <Box h="8rem" mb={4} overflowX="clip" overflowY="scroll">
+        <Box height="10rem" mb={4} overflowX="clip" overflowY="scroll">
           <CheckBoxItems
             gridColumns={[1, 1, 2, 3]}
             options={filterGroups}
