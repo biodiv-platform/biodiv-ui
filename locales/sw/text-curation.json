@@ -1,0 +1,27 @@
+{
+  "contributors": "Wachangiaji",
+  "create": {
+    "error": "Haijaweza kuunda Seti ya Data ya Uhifadhi wa Maandishi",
+    "success": "Seti ya Data ya Uundaji Maandishi Imepakiwa",
+    "title": "Utunzaji wa maandishi"
+  },
+  "curation_status": {
+    "curated": "Imeratibiwa",
+    "pending": "Inasubiri",
+    "rejected": "Imekataliwa"
+  },
+  "dataset_description": "Maelezo ya Seti ya Data",
+  "date_columns": "Safu za Tarehe",
+  "location_columns": "Safu wima za Mahali",
+  "metadata": "Metadata",
+  "parsed": {
+    "date": "Tarehe Iliyochanganuliwa",
+    "location": "Eneo Lililochanganuliwa",
+    "sci_name": "Jina la Kisayansi Limechanganuliwa"
+  },
+  "sci_name_columns": "Safu za Jina la Kisayansi",
+  "update": {
+    "error": "Haiwezi Kusasisha Safu",
+    "success": "Safu Mlalo Imesasishwa"
+  }
+}

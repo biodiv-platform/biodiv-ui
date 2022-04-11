@@ -1,0 +1,27 @@
+{
+  "contributors": "Contributeurs",
+  "create": {
+    "error": "Impossible de créer l'ensemble de données de curation de texte",
+    "success": "Ensemble de données de création de texte téléchargé avec succès",
+    "title": "Curation de texte"
+  },
+  "curation_status": {
+    "curated": "Organisé",
+    "pending": "En attente",
+    "rejected": "Rejeté"
+  },
+  "dataset_description": "Description de l'ensemble de données",
+  "date_columns": "Colonnes de dates",
+  "location_columns": "Colonnes d'emplacement",
+  "metadata": "Métadonnées",
+  "parsed": {
+    "date": "Date analysée",
+    "location": "Emplacement analysé",
+    "sci_name": "Nom scientifique analysé"
+  },
+  "sci_name_columns": "Colonnes des noms scientifiques",
+  "update": {
+    "error": "Impossible de mettre à jour la ligne",
+    "success": "Ligne mise à jour avec succès"
+  }
+}

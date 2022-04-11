@@ -40,6 +40,11 @@ export default [
         to: "/map/create",
         role: [Role.Admin]
       },
+      {
+        active: SITE_CONFIG.DATA_CURATION.ACTIVE,
+        name: "text_curation",
+        to: "/text-curation/create"
+      },
       /*
     {
       name: "add_list",

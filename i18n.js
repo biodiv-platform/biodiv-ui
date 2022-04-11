@@ -20,6 +20,7 @@ module.exports = {
     "rgx:/roles/": ["filters", "taxon"],
     "rgx:/species/": ["observation", "species", "filters", "activity", "taxon"],
     "rgx:/taxonomy/": ["activity", "filters", "taxon", "species"],
+    "rgx:/text-curation/": ["text-curation", "observation"],
     "rgx:/user/": ["user", "group", "filters"],
     "rgx:/user/leaderboard": ["leaderboard"]
   }

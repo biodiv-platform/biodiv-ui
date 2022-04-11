@@ -1,8 +1,8 @@
 import { IDBObservationAsset } from "@interfaces/custom";
-import { MyUpload } from "@interfaces/files";
+import { MyCsvUpload, MyUpload } from "@interfaces/files";
 import { ENDPOINT, RESOURCE_TYPE } from "@static/constants";
 import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
-import http from "@utils/http";
+import http, { formDataHeaders } from "@utils/http";
 import { nanoid } from "nanoid";
 
 export const axListMyUploads = async (module = RESOURCE_TYPE.OBSERVATION) => {
@@ -38,9 +38,7 @@ export const axUploadObservationResource = async (
     formData.append("upload", resource.blob, resource.fileName);
 
     const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
+      headers: formDataHeaders
     });
     return { success: true, data };
   } catch (e) {
@@ -56,9 +54,7 @@ export const axBulkUploadObservationResource = async (resource: IDBObservationAs
   formData.append("upload", resource.blob, resource.fileName);
 
   const { data } = await http.post(`${ENDPOINT.FILES}/upload/bulk-upload`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data"
-    }
+    headers: formDataHeaders
   });
 
   return data;
@@ -71,9 +67,20 @@ export const axUploadDocumentResource = async (document: File): Promise<MyUpload
   formData.append("upload", document, document.name);
 
   const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data"
-    }
+    headers: formDataHeaders
+  });
+
+  return data;
+};
+
+export const axUploadCSVCurationResource = async (document: File): Promise<MyCsvUpload> => {
+  const formData = new FormData();
+  formData.append("hash", "curate-" + nanoid());
+  formData.append("module", "curation");
+  formData.append("upload", document, document.name);
+
+  const { data } = await http.post(`${ENDPOINT.FILES}/upload/my-uploads`, formData, {
+    headers: formDataHeaders
   });
 
   return data;
@@ -95,9 +102,7 @@ export const axUploadResource = async (resource: File, directory, nestedPath?: s
     nestedPath && formData.append("nestedFolder", nestedPath);
 
     const { data } = await http.post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
+      headers: formDataHeaders
     });
 
     return { success: true, data: data.uri };
