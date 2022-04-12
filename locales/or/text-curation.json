@@ -5,6 +5,11 @@
     "success": "ପାଠ୍ୟ ସୃଷ୍ଟି ଡାଟାବେସ୍ ସଫଳତାର ସହିତ ଅପଲୋଡ୍ ହେଲା |",
     "title": "ପାଠ୍ୟ କ୍ୟୁରେସନ୍ |"
   },
+  "curated": {
+    "date": "କ୍ୟୁରେଟେଡ୍ ତାରିଖ |",
+    "location": "କ୍ୟୁରେଟେଡ୍ ଅବସ୍ଥାନ |",
+    "sci_name": "କ୍ୟୁରେଟେଡ୍ ବ Scient ଜ୍ ific ାନିକ ନାମ |"
+  },
   "curation_status": {
     "curated": "କ୍ୟୁରେଟେଡ୍ |",
     "pending": "ବିଚାରାଧୀନ ଅଛି |",
@@ -14,11 +19,6 @@
   "date_columns": "ତାରିଖ ସ୍ତମ୍ଭ",
   "location_columns": "ଅବସ୍ଥାନ ସ୍ତମ୍ଭ",
   "metadata": "ମେଟାଡାଟା |",
-  "parsed": {
-    "date": "ପାର୍ସଡ୍ ତାରିଖ |",
-    "location": "ପାର୍ସଡ୍ ଅବସ୍ଥାନ |",
-    "sci_name": "ପାର୍ସଡ୍ ବ Scientific ଜ୍ଞାନିକ ନାମ |"
-  },
   "sci_name_columns": "ବ Scientific ଜ୍ଞାନିକ ନାମ ସ୍ତମ୍ଭଗୁଡିକ |",
   "update": {
     "error": "ଧାଡି ଅପଡେଟ୍ କରିବାକୁ ଅସମର୍ଥ |",

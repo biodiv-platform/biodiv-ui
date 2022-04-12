@@ -5,6 +5,11 @@
     "success": "Ensemble de données de création de texte téléchargé avec succès",
     "title": "Curation de texte"
   },
+  "curated": {
+    "date": "Date de conservation",
+    "location": "Emplacement organisé",
+    "sci_name": "Nom scientifique organisé"
+  },
   "curation_status": {
     "curated": "Organisé",
     "pending": "En attente",
@@ -14,11 +19,6 @@
   "date_columns": "Colonnes de dates",
   "location_columns": "Colonnes d'emplacement",
   "metadata": "Métadonnées",
-  "parsed": {
-    "date": "Date analysée",
-    "location": "Emplacement analysé",
-    "sci_name": "Nom scientifique analysé"
-  },
   "sci_name_columns": "Colonnes des noms scientifiques",
   "update": {
     "error": "Impossible de mettre à jour la ligne",

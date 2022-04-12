@@ -2,7 +2,6 @@ import ExternalBlueLink from "@components/@core/blue-link/external";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import ActionButton from "./action-button";
 import CurationStatus from "./curation-status";
 
 export const DATE_FORMAT = {
@@ -11,10 +10,12 @@ export const DATE_FORMAT = {
   YEAR: "Y"
 };
 
+export const DATE_FORMAT_OPTIONS = Object.keys(DATE_FORMAT).map((df) => ({ label: df, value: df }));
+
 export const CURATED_STATUS = {
-  PENDING: 0,
-  CURATED: 1,
-  REJECTED: 2
+  PENDING: "PENDING",
+  CURATED: "CURATED",
+  REJECTED: "REJECTED"
 };
 
 export const columns = [
@@ -36,18 +37,15 @@ export const columns = [
   },
   {
     name: "curatedSName",
-    selector: (row) => row.curatedSName,
-    cell: (row) => <ActionButton row={row} name="curatedSName" />
+    selector: (row) => row.curatedSName
   },
   {
     name: "curatedLocation",
-    selector: (row) => row.curatedLocation,
-    cell: (row) => <ActionButton row={row} name="curatedLocation" />
+    selector: (row) => row.curatedLocation
   },
   {
     name: "curatedDate",
-    selector: (row) => row.curatedDate,
-    cell: (row) => <ActionButton row={row} name="curatedDate" />
+    selector: (row) => row.curatedDate
   },
   {
     name: "curatedStatus",

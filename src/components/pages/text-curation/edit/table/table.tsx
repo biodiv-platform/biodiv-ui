@@ -9,13 +9,11 @@ import ExpandedComponent from "./expanded";
 export default function TextCurationTable() {
   const { rows } = useCurateEdit();
 
-  console.debug(rows.all);
-
   return (
     <Box bg="white" borderRadius="md" borderWidth={1} mb={8}>
       <DataTable
         columns={columns}
-        data={rows.all}
+        data={rows.filtered}
         expandableRows={true}
         pagination={true}
         conditionalRowStyles={[

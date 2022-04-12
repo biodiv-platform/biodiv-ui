@@ -5,6 +5,11 @@
     "success": "Seti ya Data ya Uundaji Maandishi Imepakiwa",
     "title": "Utunzaji wa maandishi"
   },
+  "curated": {
+    "date": "Tarehe Iliyoratibiwa",
+    "location": "Eneo Lililoratibiwa",
+    "sci_name": "Jina la Kisayansi Lililoratibiwa"
+  },
   "curation_status": {
     "curated": "Imeratibiwa",
     "pending": "Inasubiri",
@@ -14,11 +19,6 @@
   "date_columns": "Safu za Tarehe",
   "location_columns": "Safu wima za Mahali",
   "metadata": "Metadata",
-  "parsed": {
-    "date": "Tarehe Iliyochanganuliwa",
-    "location": "Eneo Lililochanganuliwa",
-    "sci_name": "Jina la Kisayansi Limechanganuliwa"
-  },
   "sci_name_columns": "Safu za Jina la Kisayansi",
   "update": {
     "error": "Haiwezi Kusasisha Safu",

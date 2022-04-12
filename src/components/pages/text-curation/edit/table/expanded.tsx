@@ -1,28 +1,33 @@
-import { Box, SimpleGrid, Table, TableContainer, Tbody, Td, Text, Tr } from "@chakra-ui/react";
+import { Box, SimpleGrid, Table, TableContainer, Tbody, Td, Tr } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 
-export default function ExpandedComponent({ data }: { data: any }) {
+import EditRowForm from "./form";
+
+export default function ExpandedComponent(props) {
   const infoRows = useMemo(() => {
-    return Object.entries(data).filter((r) => !!r[1]);
-  }, [data]);
+    return Object.entries(props.data).filter((r) => !!r[1]);
+  }, [props.data]);
 
   return (
     <div>
-      <SimpleGrid>
+      <SimpleGrid columns={2} spacing={0}>
         <TableContainer>
-          <Table variant="striped" w="full">
+          <Table variant="striped">
             <Tbody>
               {infoRows.map(([k, v]: any) => (
                 <Tr key={k}>
                   <Td>{k}</Td>
-                  <Td>
-                    <Box whiteSpace="initial">{v}</Box>
+                  <Td whiteSpace="initial" wordBreak="break-word">
+                    {v}
                   </Td>
                 </Tr>
               ))}
             </Tbody>
           </Table>
         </TableContainer>
+        <Box>
+          <EditRowForm row={props.data} />
+        </Box>
       </SimpleGrid>
     </div>
   );

@@ -5,6 +5,11 @@
     "success": "Nahomby ny angon-drakitra famoronana lahatsoratra",
     "title": "Text Curation"
   },
+  "curated": {
+    "date": "Daty voalamina",
+    "location": "Toerana voalamina",
+    "sci_name": "Anarana siantifika voarindra"
+  },
   "curation_status": {
     "curated": "notsongain'ilay",
     "pending": "mbola miandry",
@@ -14,11 +19,6 @@
   "date_columns": "Tsanganana daty",
   "location_columns": "Tsanganana toerana",
   "metadata": "Metadata",
-  "parsed": {
-    "date": "Daty nodinihina",
-    "location": "Toerana nodinihina",
-    "sci_name": "Anarana siantifika voasokajy"
-  },
   "sci_name_columns": "Tsanganana anarana siantifika",
   "update": {
     "error": "Tsy afaka manavao ny laharana",
