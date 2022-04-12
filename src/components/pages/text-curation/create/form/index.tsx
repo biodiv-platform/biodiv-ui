@@ -45,7 +45,7 @@ export default function TextCurationCreateForm() {
     const { success, data } = await axExtractAllParams(payload);
     if (success) {
       notification(t("text-curation:create.success"), NotificationType.Success);
-      router.push(`/text-curation/edit/${data}/`, true);
+      router.push(`/text-curation/show/${data}/`, true);
     } else {
       notification(t("text-curation:create.error"));
     }

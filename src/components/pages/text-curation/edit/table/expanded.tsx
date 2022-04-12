@@ -1,6 +1,7 @@
 import { Box, SimpleGrid, Table, TableContainer, Tbody, Td, Tr } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 
+import useCurateEdit from "../use-curate-edit";
 import EditRowForm from "./form";
 
 const EXPAND_BLACKLIST = [
@@ -17,13 +18,16 @@ const EXPAND_BLACKLIST = [
 ];
 
 export default function ExpandedComponent(props) {
-  const infoRows = useMemo(() => {
-    return Object.entries(props.data).filter((r) => r[1] && !EXPAND_BLACKLIST.includes(r[0]));
-  }, [props.data]);
+  const { isShow } = useCurateEdit();
+
+  const infoRows = useMemo(
+    () => Object.entries(props.data).filter((r) => r[1] && !EXPAND_BLACKLIST.includes(r[0])),
+    [props.data]
+  );
 
   return (
     <div>
-      <SimpleGrid columns={2} spacing={0}>
+      <SimpleGrid columns={isShow ? 1 : 2} spacing={0}>
         <TableContainer>
           <Table variant="striped">
             <Tbody>
@@ -38,9 +42,11 @@ export default function ExpandedComponent(props) {
             </Tbody>
           </Table>
         </TableContainer>
-        <Box>
-          <EditRowForm row={props.data} />
-        </Box>
+        {!isShow && (
+          <Box>
+            <EditRowForm row={props.data} />
+          </Box>
+        )}
       </SimpleGrid>
     </div>
   );

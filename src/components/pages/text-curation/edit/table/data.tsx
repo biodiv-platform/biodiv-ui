@@ -46,10 +46,11 @@ export const columns = [
   {
     name: "curatedDate",
     selector: (row) => row.curatedDate
-  },
-  {
-    name: "curatedStatus",
-    selector: (row) => row.curatedStatus,
-    cell: (row) => <CurationStatus row={row} name="curatedStatus" />
   }
 ];
+
+export const editColumn = {
+  name: "curatedStatus",
+  selector: (row) => row.curatedStatus,
+  cell: (row) => <CurationStatus row={row} name="curatedStatus" />
+};

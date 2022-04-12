@@ -1,18 +1,20 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useMemo } from "react";
 import DataTable from "react-data-table-component";
 
 import useCurateEdit from "../use-curate-edit";
-import { columns } from "./data";
+import { columns, editColumn } from "./data";
 import ExpandedComponent from "./expanded";
 
 export default function TextCurationTable() {
-  const { rows } = useCurateEdit();
+  const { rows, isShow } = useCurateEdit();
+
+  const finalColumns = useMemo(() => (isShow ? columns : [...columns, editColumn]), [isShow]);
 
   return (
     <Box bg="white" borderRadius="md" borderWidth={1} mb={8}>
       <DataTable
-        columns={columns}
+        columns={finalColumns}
         data={rows.filtered}
         expandableRows={true}
         pagination={true}
