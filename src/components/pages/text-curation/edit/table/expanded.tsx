@@ -3,11 +3,22 @@ import React, { useMemo } from "react";
 
 import EditRowForm from "./form";
 
+const EXPAND_BLACKLIST = [
+  "DATE",
+  "locations",
+  "scientificNames",
+  "scientificNamesFlashtext",
+  "scientificNamesGNRD",
+  "curatedDate",
+  "curatedDateFormat",
+  "curatedLocation",
+  "curatedSName",
+  "curatedStatus"
+];
+
 export default function ExpandedComponent(props) {
   const infoRows = useMemo(() => {
-    return Object.entries(props.data).filter(
-      (r) => r[1] && !["DATE", "locations", "scientificNames"].includes(r[0])
-    );
+    return Object.entries(props.data).filter((r) => r[1] && !EXPAND_BLACKLIST.includes(r[0]));
   }, [props.data]);
 
   return (
