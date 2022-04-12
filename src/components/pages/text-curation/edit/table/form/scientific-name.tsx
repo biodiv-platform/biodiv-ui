@@ -5,23 +5,11 @@ import {
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 
 export default function ScientificNameEdit({ row }) {
   const { t } = useTranslation();
   const scientificRef: any = useRef(null);
-  const [suggestions] = useMemo(() => {
-    const _SciNameSuggestions = Array.from(
-      new Set(
-        `${row.scientificNamesFlashtext || ""},${row.scientificNamesGNRD || ""}`
-          .split(",")
-          .map((o) => o.trim())
-          .filter((o) => !!o)
-      )
-    );
-
-    return [_SciNameSuggestions];
-  }, [row]);
 
   const onSciNameQuery = async (q) => await onScientificNameQuery(q, "name");
 
@@ -46,22 +34,21 @@ export default function ScientificNameEdit({ row }) {
         mb={3}
       />
 
-      {suggestions.length > 0 &&
-        suggestions.map((suggestion) => (
-          <Button
-            variant="outline"
-            size="xs"
-            bg="blue.50"
-            key={suggestion}
-            colorScheme="blue"
-            borderRadius="3xl"
-            onClick={() => onTagSelect(suggestion)}
-            mb={2}
-            mr={2}
-          >
-            {suggestion}
-          </Button>
-        ))}
+      {row.scientificNames.map((suggestion) => (
+        <Button
+          variant="outline"
+          size="xs"
+          bg="blue.50"
+          key={suggestion}
+          colorScheme="blue"
+          borderRadius="3xl"
+          onClick={() => onTagSelect(suggestion)}
+          mb={2}
+          mr={2}
+        >
+          {suggestion}
+        </Button>
+      ))}
     </Box>
   );
 }

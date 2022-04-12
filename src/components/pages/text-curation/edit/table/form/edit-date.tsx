@@ -4,27 +4,15 @@ import { SelectInputField } from "@components/form/select";
 import { parseDate } from "@utils/date";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
-import useCurateEdit from "../../use-curate-edit";
 import { DATE_FORMAT, DATE_FORMAT_OPTIONS } from "../data";
 
 export default function DateEdit({ row }) {
   const { t } = useTranslation();
-  const { rows } = useCurateEdit();
   const inputRef = useRef<any>({});
   const hForm = useFormContext();
-
-  const [suggestions] = useMemo(() => {
-    const _dates = {
-      DAY: (row.day || null)?.split(",") || [],
-      MONTH: (row.month || null)?.split(",") || [],
-      YEAR: (row.year || null)?.split(",") || []
-    };
-
-    return [Object.entries(_dates).reverse()];
-  }, [rows.editing]);
 
   const onTagSelect = (type, value) => {
     const parsedDate = parseDate(hForm.getValues("curatedDate"));
@@ -71,24 +59,23 @@ export default function DateEdit({ row }) {
         />
       </SimpleGrid>
 
-      {suggestions.length > 0 &&
-        suggestions.map(([type, value]) =>
-          value.map((v) => (
-            <Button
-              variant="outline"
-              size="xs"
-              bg="blue.50"
-              key={type + v}
-              colorScheme="blue"
-              borderRadius="3xl"
-              mb={2}
-              mr={2}
-              onClick={() => onTagSelect(type, v)}
-            >
-              {type}: {v}
-            </Button>
-          ))
-        )}
+      {Object.entries(row.DATE).map(([type, value]: any) =>
+        value.map((v) => (
+          <Button
+            variant="outline"
+            size="xs"
+            bg="blue.50"
+            key={type + v}
+            colorScheme="blue"
+            borderRadius="3xl"
+            mb={2}
+            mr={2}
+            onClick={() => onTagSelect(type, v)}
+          >
+            {type}: {v}
+          </Button>
+        ))
+      )}
     </Box>
   );
 }

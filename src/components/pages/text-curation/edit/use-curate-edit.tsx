@@ -12,9 +12,6 @@ interface CurateEditContextProps {
     updateFilter;
     all;
     update;
-    editing;
-    setEditing;
-    clearEditing;
   };
 }
 
@@ -27,7 +24,6 @@ const CurateEditContext = createContext<CurateEditContextProps>({} as CurateEdit
 
 export const CurateEditProvider = ({ initialData, children }: CurateEditProviderProps) => {
   const [rows, setRows] = useState<any[]>(initialData.data || []);
-  const [editingRow, setEditingRow] = useState();
   const { t } = useTranslation();
   const [filter, setFilter] = useState({});
 
@@ -42,8 +38,6 @@ export const CurateEditProvider = ({ initialData, children }: CurateEditProvider
       notification(t("text-curation:update.error"));
     }
   };
-
-  const clearEditingRow = () => setEditingRow(undefined);
 
   const updateFilter = (key, value?) => setFilter({ ...filter, [key]: value || undefined });
 
@@ -74,10 +68,7 @@ export const CurateEditProvider = ({ initialData, children }: CurateEditProvider
           setFilter,
           updateFilter,
           all: rows,
-          update: updateRow,
-          editing: editingRow,
-          setEditing: setEditingRow,
-          clearEditing: clearEditingRow
+          update: updateRow
         }
       }}
     >

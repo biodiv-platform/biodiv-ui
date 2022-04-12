@@ -5,7 +5,9 @@ import EditRowForm from "./form";
 
 export default function ExpandedComponent(props) {
   const infoRows = useMemo(() => {
-    return Object.entries(props.data).filter((r) => !!r[1]);
+    return Object.entries(props.data).filter(
+      (r) => r[1] && !["DATE", "locations", "scientificNames"].includes(r[0])
+    );
   }, [props.data]);
 
   return (
