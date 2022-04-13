@@ -8,7 +8,8 @@
   "curated": {
     "date": "କ୍ୟୁରେଟେଡ୍ ତାରିଖ |",
     "location": "କ୍ୟୁରେଟେଡ୍ ଅବସ୍ଥାନ |",
-    "sci_name": "କ୍ୟୁରେଟେଡ୍ ବ Scient ଜ୍ ific ାନିକ ନାମ |"
+    "sci_name": "କ୍ୟୁରେଟେଡ୍ ବ Scient ଜ୍ ific ାନିକ ନାମ |",
+    "status": "ଚିକିତ୍ସା ସ୍ଥିତି"
   },
   "curation_status": {
     "curated": "କ୍ୟୁରେଟେଡ୍ |",

@@ -11,6 +11,7 @@ import useCurateEdit from "../../use-curate-edit";
 import { DATE_FORMAT_OPTIONS } from "../data";
 import DateEdit from "./edit-date";
 import LocationEdit from "./edit-location";
+import EditStatus from "./edit-status";
 import ScientificNameEdit from "./scientific-name";
 
 export default function EditRowForm({ row }) {
@@ -23,7 +24,8 @@ export default function EditRowForm({ row }) {
         curatedSName: Yup.string(),
         curatedLocation: Yup.string(),
         curatedDate: Yup.string(),
-        curatedDateFormat: Yup.string()
+        curatedDateFormat: Yup.string(),
+        curatedStatus: Yup.string().required()
       })
     ),
     defaultValues: {
@@ -32,7 +34,8 @@ export default function EditRowForm({ row }) {
         : undefined,
       curatedLocation: row.curatedLocation,
       curatedDate: row.curatedDate,
-      curatedDateFormat: DATE_FORMAT_OPTIONS[0].value
+      curatedDateFormat: DATE_FORMAT_OPTIONS[0].value,
+      curatedStatus: row.curatedStatus
     }
   });
 
@@ -51,6 +54,7 @@ export default function EditRowForm({ row }) {
           <ScientificNameEdit row={row} />
           <LocationEdit row={row} />
           <DateEdit row={row} />
+          <EditStatus />
           <Box p={4}>
             <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
           </Box>

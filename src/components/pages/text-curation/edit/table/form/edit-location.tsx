@@ -11,7 +11,7 @@ export default function LocationEdit({ row }) {
   const onTagSelect = (value) => hForm.setValue("curatedLocation", value);
 
   return (
-    <Box p={4}>
+    <Box p={4} mb={4}>
       <TextBoxField name="curatedLocation" label={t("text-curation:curated.location")} mb={3} />
       {row.locations.map((suggestion: any) => (
         <Button

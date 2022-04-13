@@ -1,4 +1,6 @@
 import { Box, SimpleGrid, Table, TableContainer, Tbody, Td, Tr } from "@chakra-ui/react";
+import { Prose } from "@nikolovlazar/chakra-ui-prose";
+import { getInjectableHTML } from "@utils/text";
 import React, { useMemo } from "react";
 
 import useCurateEdit from "../use-curate-edit";
@@ -27,7 +29,7 @@ export default function ExpandedComponent(props) {
 
   return (
     <div>
-      <SimpleGrid columns={isShow ? 1 : 2} spacing={0}>
+      <SimpleGrid columns={isShow ? 1 : 2} spacing={0} borderBottomWidth="1px">
         <TableContainer>
           <Table variant="striped">
             <Tbody>
@@ -35,7 +37,11 @@ export default function ExpandedComponent(props) {
                 <Tr key={k}>
                   <Td>{k}</Td>
                   <Td whiteSpace="initial" wordBreak="break-word">
-                    {v}
+                    <Prose>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: getInjectableHTML(v?.toString()) }}
+                      ></div>
+                    </Prose>
                   </Td>
                 </Tr>
               ))}

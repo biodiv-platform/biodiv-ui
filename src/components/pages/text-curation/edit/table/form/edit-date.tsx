@@ -41,7 +41,7 @@ export default function DateEdit({ row }) {
   const dateFormat = hForm.watch("curatedDateFormat");
 
   return (
-    <Box px={4}>
+    <Box px={4} mb={6}>
       <SimpleGrid columns={2} gap={4} mb={3}>
         <DatePickerField
           name="curatedDate"

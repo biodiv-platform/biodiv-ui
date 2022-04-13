@@ -8,7 +8,8 @@
   "curated": {
     "date": "Curated Date",
     "location": "Curated Location",
-    "sci_name": "Curated Scientific Name"
+    "sci_name": "Curated Scientific Name",
+    "status": "Curation Status"
   },
   "curation_status": {
     "curated": "Curated",

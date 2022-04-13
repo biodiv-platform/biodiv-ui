@@ -21,7 +21,7 @@ export default function ScientificNameEdit({ row }) {
   };
 
   return (
-    <Box p={4} pb={0}>
+    <Box p={4} pb={0} mb={6}>
       <SelectAsyncInputField
         resetOnSubmit={false}
         name="curatedSName"

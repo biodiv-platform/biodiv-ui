@@ -8,7 +8,8 @@
   "curated": {
     "date": "Date de conservation",
     "location": "Emplacement organisé",
-    "sci_name": "Nom scientifique organisé"
+    "sci_name": "Nom scientifique organisé",
+    "status": "Statut de conservation"
   },
   "curation_status": {
     "curated": "Organisé",

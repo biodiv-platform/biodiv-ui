@@ -6,6 +6,8 @@ import React, { createContext, useContext, useMemo, useState } from "react";
 interface CurateEditContextProps {
   initialData;
   isShow;
+  canEdit;
+  datasetId;
   rows: {
     filtered;
     filter;
@@ -18,13 +20,21 @@ interface CurateEditContextProps {
 
 interface CurateEditProviderProps {
   initialData;
+  datasetId;
+  canEdit;
   isShow;
   children;
 }
 
 const CurateEditContext = createContext<CurateEditContextProps>({} as CurateEditContextProps);
 
-export const CurateEditProvider = ({ initialData, isShow, children }: CurateEditProviderProps) => {
+export const CurateEditProvider = ({
+  initialData,
+  datasetId,
+  canEdit,
+  isShow,
+  children
+}: CurateEditProviderProps) => {
   const [rows, setRows] = useState<any[]>(initialData.data || []);
   const { t } = useTranslation();
   const [filter, setFilter] = useState({});
@@ -65,6 +75,8 @@ export const CurateEditProvider = ({ initialData, isShow, children }: CurateEdit
       value={{
         initialData,
         isShow,
+        canEdit,
+        datasetId,
         rows: {
           filtered: filteredRows,
           filter,
