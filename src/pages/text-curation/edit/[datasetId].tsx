@@ -18,7 +18,7 @@ export const getServerSideProps = async (ctx) => {
   const { data } = await axShowDataset(ctx.query.datasetId);
 
   const user = getParsedUser(ctx);
-  const canEdit = data.contributors.includes(user.id.toString()) || hasAccess([Role.Admin]);
+  const canEdit = data.contributors.includes(user.id.toString()) || hasAccess([Role.Admin], ctx);
 
   if (!canEdit) throwUnauthorized(ctx);
 
