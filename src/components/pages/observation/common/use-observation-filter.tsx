@@ -5,7 +5,7 @@ import { ObservationData, ObservationFilterProps } from "@interfaces/custom";
 import { SpeciesGroup } from "@interfaces/esmodule";
 import { UserGroup, UserGroupIbp } from "@interfaces/observation";
 import { axGetListData, axGetMaxVotedRecoPermissions } from "@services/observation.service";
-import { axGetUserGroupList } from "@services/usergroup.service";
+import { axGetUserGroupList, getAuthorizedUserGroupById } from "@services/usergroup.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { stringify } from "@utils/query-string";
@@ -34,6 +34,8 @@ interface ObservationFilterContextProps {
   resetFilter?;
   speciesGroup?: SpeciesGroup[];
   userGroup?: UserGroup[];
+  authorizedUserGroupList?: UserGroup[];
+  hasUgAccess?: boolean;
   states?: string[];
   selectAll?: boolean;
   setSelectAll?;
@@ -57,6 +59,8 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [observationData, setObservationData] = useImmer<ObservationData>(props.observationData);
   const { isLoggedIn } = useGlobalState();
   const [loggedInUserGroups, setLoggedInUserGroups] = useState<any[]>([]);
+  const [hasUgAccess, setHasUgAdminAccess] = useState<boolean>(false);
+  const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
   const [selectAll, setSelectAll] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -78,6 +82,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   useEffect(() => {
     if (isLoggedIn) {
       axGetUserGroupList().then(({ data }) => setLoggedInUserGroups(data));
+      getAuthorizedUserGroupById().then(({ data }) => {
+        setHasUgAdminAccess(data?.isAdmin || false);
+        setAuthorizedUserGroupList(data?.ugList || []);
+      });
     }
   }, [isLoggedIn]);
 
@@ -206,6 +214,8 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         setSelectAll,
         bulkObservationIds,
         handleBulkCheckbox,
+        authorizedUserGroupList,
+        hasUgAccess,
         isOpen,
         onOpen,
         onClose,

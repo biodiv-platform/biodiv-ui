@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Input } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CheckBoxItems from "@components/pages/observation/create/form/user-groups/checkbox";
@@ -14,7 +14,7 @@ export default function GroupPost() {
   const router = useLocalRouter();
   const {
     onClose,
-    loggedInUserGroups: groups,
+    authorizedUserGroupList: groups,
     filter,
     selectAll,
     bulkObservationIds
@@ -49,9 +49,9 @@ export default function GroupPost() {
     );
   }, 200);
 
-  return (
+  return groups && groups.length ? (
     <Box>
-      <Flex alignItems="center" mb={4} justifyContent="flex-end">
+      <Flex alignItems="center" mb={4} justifyContent="flex-start">
         <Input
           w="20rem"
           name="search"
@@ -72,28 +72,32 @@ export default function GroupPost() {
         </Box>
       )}
 
-      <Button
-        disabled={selectedGroups.length <= 0}
-        size="sm"
-        variant="outline"
-        colorScheme="blue"
-        aria-label="Save"
-        type="submit"
-        onClick={() => handleOnSave(bulkActions.post)}
-      >
-        {t("common:post")}
-      </Button>
-      <Button
-        disabled={selectedGroups.length <= 0}
-        size="sm"
-        variant="outline"
-        ml={2}
-        colorScheme="red"
-        aria-label="Unpost"
-        onClick={() => handleOnSave(bulkActions.unPost)}
-      >
-        {t("common:un_post")}
-      </Button>
+      <HStack m={2} justifyContent="flex-end">
+        <Button
+          disabled={selectedGroups.length <= 0}
+          size="sm"
+          variant="outline"
+          colorScheme="blue"
+          aria-label="Save"
+          type="submit"
+          onClick={() => handleOnSave(bulkActions.post)}
+        >
+          {t("common:post")}
+        </Button>
+        <Button
+          disabled={selectedGroups.length <= 0}
+          size="sm"
+          variant="outline"
+          ml={2}
+          colorScheme="red"
+          aria-label="Unpost"
+          onClick={() => handleOnSave(bulkActions.unPost)}
+        >
+          {t("common:un_post")}
+        </Button>
+      </HStack>
     </Box>
+  ) : (
+    <div>{t("common:no_groups_joined")}</div>
   );
 }

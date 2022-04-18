@@ -1,6 +1,7 @@
 import { Checkbox, HStack, Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
 import AudioIcon from "@icons/audio";
 import ImageIcon from "@icons/image";
@@ -11,7 +12,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 const ImageBox = styled.div`
@@ -80,7 +81,12 @@ export interface ObservationImageCard {
   };
 }
 export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationImageCard) {
-  const [canEdit] = useState(hasAccess([Role.Admin, Role.UsergroupFounder, Role.UsergroupExpert]));
+  const [canEdit, setCanEdit] = useState(false);
+  const { hasUgAccess } = useObservationFilter();
+
+  useEffect(() => {
+    setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
+  }, []);
 
   return (
     <ImageBox>

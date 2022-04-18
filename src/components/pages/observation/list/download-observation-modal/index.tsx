@@ -86,7 +86,11 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
       view: "csv_download"
     };
 
-    const { success } = await axGetObservationMapData(params, {}, true);
+    const { success } = await axGetObservationMapData(
+      params,
+      filter?.location ? { location: filter?.location } : {},
+      true
+    );
     if (success) {
       notification(
         <>
