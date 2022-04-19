@@ -28,7 +28,7 @@ export default function GroupPost() {
       selectAll,
       view: "bulkMapping",
       bulkUsergroupIds: selectedGroups?.toString() || "",
-      bulkObservationIds: bulkObservationIds?.toString() || "",
+      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
       bulkAction
     };
 
