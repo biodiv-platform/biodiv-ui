@@ -28,8 +28,8 @@ export const getServerSideProps = async (ctx) => {
 
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
-  const {location,...otherValues} = ctx.query
-  const initialFilterParams = { ...DEFAULT_FILTER, ...otherValues, userGroupList: currentGroup.id };
+  const {location} = ctx.query
+  const initialFilterParams = { ...DEFAULT_FILTER, ... ctx.query, userGroupList: currentGroup.id };
   const { data } = await axGetListData(initialFilterParams,location?{location}:{});
 
   return {
