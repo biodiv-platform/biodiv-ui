@@ -32,7 +32,7 @@ export default function GroupPost() {
       bulkAction
     };
 
-    const { success } = await axGetObservationMapData(params, {}, true);
+    const { success } = await axGetObservationMapData(params, filter?.location ? { location:filter.location } : {}, true);
     if (success) {
       notification(t("observation:bulk_action.success"), NotificationType.Success);
     } else {
