@@ -1,6 +1,6 @@
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
-import http, { plainHttp } from "@utils/http";
+import http, { formDataHeaders, plainHttp } from "@utils/http";
 
 export const axGetDocumentById = async (documentId) => {
   try {
@@ -177,9 +177,7 @@ export const axParseBib = async (bibFile: File) => {
     formData.append("file", bibFile, bibFile.name);
 
     const { data } = await plainHttp.post(`${ENDPOINT.DOCUMENT}/v1/services/upload/bib`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
+      headers: formDataHeaders
     });
     return { success: true, data };
   } catch (e) {

@@ -4,6 +4,8 @@ import axios from "axios";
 import { getParsedUser, isTokenExpired, setCookies } from "./auth";
 import notification from "./notification";
 
+export const formDataHeaders: any = { "Content-Type": "multipart/form-data" };
+
 const defaultHeaders: any = {
   headers: {
     post: { "Content-Type": "application/json" },

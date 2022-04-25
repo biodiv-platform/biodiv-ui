@@ -1,5 +1,5 @@
 import { ENDPOINT } from "@static/constants";
-import http, { plainHttp } from "@utils/http";
+import http, { formDataHeaders, plainHttp } from "@utils/http";
 import { treeToFlat } from "@utils/pages.util";
 import { nanoid } from "nanoid";
 
@@ -11,9 +11,7 @@ export const axUploadEditorPageResource = (blobInfo, success, failure) => {
 
   http
     .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
+      headers: formDataHeaders
     })
     .then((r) => {
       success(`${ENDPOINT.FILES}/get/raw/pages${r.data.uri}`);
