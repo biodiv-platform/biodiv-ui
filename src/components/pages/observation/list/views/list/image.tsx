@@ -86,7 +86,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
 
   useEffect(() => {
     setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
-  }, []);
+  }, [hasUgAccess]);
 
   return (
     <ImageBox>
