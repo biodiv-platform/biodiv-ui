@@ -15,7 +15,7 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import DownloadIcon from "@icons/download";
-import { axDownloadFilteredObservations } from "@services/observation.service";
+import { axGetObservationMapData } from "@services/observation.service";
 import { waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -82,10 +82,15 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
     const params = {
       authorId: user?.id,
       ...filter,
-      ...normalizeValues(values)
+      ...normalizeValues(values),
+      view: "csv_download"
     };
 
-    const { success } = await axDownloadFilteredObservations(params);
+    const { success } = await axGetObservationMapData(
+      params,
+      filter?.location ? { location: filter?.location } : {},
+      true
+    );
     if (success) {
       notification(
         <>

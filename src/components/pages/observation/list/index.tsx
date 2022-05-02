@@ -1,6 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import React, { Suspense } from "react";
 
+import BulkMapperModal from "./bulk-mapper";
 import FilterFallback from "./filters/fallback";
 import ListHeader from "./header";
 import Views from "./views";
@@ -30,6 +31,7 @@ export default function ObservationListPageComponent({ nextOffset }: Observation
           <Views no={nextOffset} />
         </Box>
       </SimpleGrid>
+      <BulkMapperModal />
     </Box>
   );
 }

@@ -451,9 +451,10 @@ export const axGetUserLifeList = async (userId, type, params) => {
   }
 };
 
-export const axGetObservationMapData = async (params, payload = {}) => {
+export const axGetObservationMapData = async (params, payload = {}, actions = false) => {
   try {
-    const response = await plainHttp.post(
+    const fetchHttp = actions ? http : plainHttp;
+    const response = await fetchHttp.post(
       `${ENDPOINT.OBSERVATION}/v1/observation/list/extended_observation/_doc`,
       payload,
       { params }

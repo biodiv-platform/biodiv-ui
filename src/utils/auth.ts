@@ -1,5 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
+import { getAuthorizedUserGroupById } from "@services/usergroup.service";
 import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";
 import B64URL from "base64-url";
@@ -78,7 +79,7 @@ export const isTokenExpired = (exp) => {
   return exp ? exp < currentTime : true;
 };
 
-export const hasAccess = (allowedRoles: Role[], ctx?) => {
+export const hasAccess = (allowedRoles: Role[], ctx?): boolean => {
   const u = getParsedUser(ctx);
 
   if (allowedRoles.includes(Role.Any)) {
@@ -91,6 +92,15 @@ export const hasAccess = (allowedRoles: Role[], ctx?) => {
     }
   }
   return false;
+};
+
+export const hasUgAccess = async (ctx?) => {
+  const u = getParsedUser(ctx);
+  if (u?.id) {
+    const { data } = await getAuthorizedUserGroupById();
+    return data;
+  }
+  return { idAdmin: false, ugList: [] };
 };
 
 /**

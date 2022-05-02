@@ -73,7 +73,7 @@ export default function Map() {
             type: "extended_records",
             geoField: "location",
             summaryColumn: ["count"],
-            propertyMap: { count: "Count" },
+            propertyMap: { count: "Count" }
           }
         }
       ]}

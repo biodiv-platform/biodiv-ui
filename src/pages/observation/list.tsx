@@ -28,9 +28,9 @@ export const getServerSideProps = async (ctx) => {
 
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
-
-  const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup.id };
-  const { data } = await axGetListData(initialFilterParams);
+  const {location} = ctx.query
+  const initialFilterParams = { ...DEFAULT_FILTER, ... ctx.query, userGroupList: currentGroup.id };
+  const { data } = await axGetListData(initialFilterParams,location?{location}:{});
 
   return {
     props: {

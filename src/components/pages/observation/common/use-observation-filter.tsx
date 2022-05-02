@@ -1,10 +1,11 @@
+import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { ObservationData, ObservationFilterProps } from "@interfaces/custom";
 import { SpeciesGroup } from "@interfaces/esmodule";
 import { UserGroup, UserGroupIbp } from "@interfaces/observation";
 import { axGetListData, axGetMaxVotedRecoPermissions } from "@services/observation.service";
-import { axGetUserGroupList } from "@services/usergroup.service";
+import { axGetUserGroupList, getAuthorizedUserGroupById } from "@services/usergroup.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { stringify } from "@utils/query-string";
@@ -23,6 +24,7 @@ interface ObservationFilterContextProps {
   location;
   setObservationData?;
   totalCount?;
+  getCheckboxProps?;
   observationListAdd?;
   setFilter?;
   addFilter?;
@@ -32,7 +34,16 @@ interface ObservationFilterContextProps {
   resetFilter?;
   speciesGroup?: SpeciesGroup[];
   userGroup?: UserGroup[];
+  authorizedUserGroupList?: UserGroup[];
+  hasUgAccess?: boolean;
   states?: string[];
+  selectAll?: boolean;
+  setSelectAll?;
+  bulkObservationIds?: any[];
+  handleBulkCheckbox: (arg: string) => void;
+  isOpen?;
+  onOpen?;
+  onClose?;
   traits?;
   customFields?;
   loggedInUserGroups?: UserGroupIbp[];
@@ -45,13 +56,36 @@ const ObservationFilterContext = createContext<ObservationFilterContextProps>(
 export const ObservationFilterProvider = (props: ObservationFilterContextProps) => {
   const initialOffset = props?.filter?.offset || 0;
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
-  const [observationData, setObservationData] = useImmer<any>(props.observationData);
+  const [observationData, setObservationData] = useImmer<ObservationData>(props.observationData);
   const { isLoggedIn } = useGlobalState();
   const [loggedInUserGroups, setLoggedInUserGroups] = useState<any[]>([]);
+  const [hasUgAccess, setHasUgAdminAccess] = useState<boolean>(false);
+  const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { getCheckboxProps, value: bulkObservationIds, setValue } = useCheckboxGroup();
+
+  const handleBulkCheckbox = (actionType: string) => {
+    switch (actionType) {
+      case "selectAll":
+        setSelectAll(true);
+        setValue(observationData?.l?.map((i) => String(i.observationId)));
+        break;
+      case "UnsSelectAll":
+        setValue([]);
+        setSelectAll(false);
+        break;
+    }
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
       axGetUserGroupList().then(({ data }) => setLoggedInUserGroups(data));
+      getAuthorizedUserGroupById().then(({ data }) => {
+        setHasUgAdminAccess(data?.isAdmin || false);
+        setAuthorizedUserGroupList(data?.ugList || []);
+      });
     }
   }, [isLoggedIn]);
 
@@ -100,10 +134,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         if (data?.geohashAggregation) {
           _draft.l = data?.geohashAggregation;
         } else if (data.observationList?.length) {
-          _draft.l.push(...deDupeObservations(_draft.l, data.observationList));
+          _draft?.l?.push(...deDupeObservations(_draft.l, data.observationList));
           _draft.hasMore = data.observationList?.length === Number(filter.f.max);
         } else {
-          _draft.ml.push(...deDupeObservations(_draft.ml, data.observationListMinimal));
+          _draft?.ml?.push(...deDupeObservations(_draft.ml, data.observationListMinimal));
           _draft.hasMore = data?.observationListMinimal?.length === Number(filter.f.max);
         }
         _draft.n = data.totalCount;
@@ -122,6 +156,12 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     fetchListData();
   }, [filter]);
 
+  useDidUpdateEffect(() => {
+    if (selectAll) {
+      handleBulkCheckbox("selectAll");
+    }
+  }, [observationData.l]);
+
   const addFilter = (key, value) => {
     setFilter((_draft) => {
       _draft.f.offset = 0;
@@ -136,6 +176,9 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   };
 
   const nextPage = (max = LIST_PAGINATION_LIMIT) => {
+    if (selectAll) {
+      handleBulkCheckbox("selectAll");
+    }
     setFilter((_draft) => {
       _draft.f.offset = Number(_draft.f.offset) + max;
     });
@@ -166,7 +209,16 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         nextPage,
         resetFilter,
         loggedInUserGroups,
-
+        getCheckboxProps,
+        selectAll,
+        setSelectAll,
+        bulkObservationIds,
+        handleBulkCheckbox,
+        authorizedUserGroupList,
+        hasUgAccess,
+        isOpen,
+        onOpen,
+        onClose,
         // Config Properties
         speciesGroup: props.speciesGroup,
         userGroup: props.userGroup,

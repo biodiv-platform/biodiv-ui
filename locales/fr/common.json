@@ -71,6 +71,7 @@
   "one_moment_please": "Un instant s'il vous plaît",
   "or": "ou alors",
   "permalink": "Permirant",
+  "post": "Poster",
   "prev": "Précédente",
   "processing": "Traitement...",
   "read_more": "Lire la suite",
@@ -86,6 +87,7 @@
     "title": "Distribution temporelle"
   },
   "toggle": "basculer",
+  "un_post": "Annuler la publication",
   "unauthorized": "Utilisateur non autorisé",
   "unknown": "Inconnu",
   "uploader": "Téléchargeur",

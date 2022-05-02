@@ -1,15 +1,19 @@
-import { Image, Link } from "@chakra-ui/react";
+import { Checkbox, HStack, Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
+import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
 import AudioIcon from "@icons/audio";
 import ImageIcon from "@icons/image";
 import VideoIcon from "@icons/video";
+import { Role } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
+import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 
 const ImageBox = styled.div`
   position: relative;
@@ -22,16 +26,22 @@ const ImageBox = styled.div`
     height: 18rem;
   }
 
-  .stats {
+  .topBox {
     position: absolute;
     top: 0;
     left: 0;
-
-    margin: 1rem;
-    padding: 0.1rem 0.6rem;
-
+    width: 100%;
+  }
+  .topCheckbox {
+    border-radius: 5rem;
+    background: white;
+    margin: 10px;
+    box-shadow: var(--subtle-shadow);
+  }
+  .stats {
     user-select: none;
-
+    margin: 0.5rem;
+    padding: 0.1rem 0.6rem;
     border-radius: 1rem;
     background: white;
     box-shadow: var(--subtle-shadow);
@@ -64,29 +74,50 @@ const ImageBox = styled.div`
   }
 `;
 
-export default function ImageBoxComponent({ o }: { o: ObservationListPageMapper }) {
+export interface ObservationImageCard {
+  o: ObservationListPageMapper;
+  getCheckboxProps?: (props?: any | undefined) => {
+    [x: string]: any;
+  };
+}
+export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationImageCard) {
+  const [canEdit, setCanEdit] = useState(false);
+  const { hasUgAccess } = useObservationFilter();
+
+  useEffect(() => {
+    setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
+  }, [hasUgAccess]);
+
   return (
     <ImageBox>
-      <div className="stats">
-        {o.noOfImages ? (
-          <>
-            {o.noOfImages} <ImageIcon />
-          </>
-        ) : null}
-        {o.noOfVideos ? (
-          <>
-            {o.noOfVideos} <VideoIcon />
-          </>
-        ) : null}
-        {o.noOfAudios ? (
-          <>
-            {o.noOfAudios} <AudioIcon />
-          </>
-        ) : null}
-      </div>
+      <HStack className="topBox" justifyContent="space-between">
+        <div className="stats">
+          {o.noOfImages ? (
+            <>
+              {o.noOfImages} <ImageIcon />
+            </>
+          ) : null}
+          {o.noOfVideos ? (
+            <>
+              {o.noOfVideos} <VideoIcon />
+            </>
+          ) : null}
+          {o.noOfAudios ? (
+            <>
+              {o.noOfAudios} <AudioIcon />
+            </>
+          ) : null}
+        </div>
+        {canEdit && getCheckboxProps && (
+          <Checkbox
+            {...getCheckboxProps({ value: String(o.observationId) })}
+            className="topCheckbox"
+          ></Checkbox>
+        )}
+      </HStack>
 
       <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-        <Link color="white">
+        <Link target="_blank" color="white">
           <Image
             className="ob-image-list"
             objectFit="cover"

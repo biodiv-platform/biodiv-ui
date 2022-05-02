@@ -1,21 +1,35 @@
-import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/react";
+import { Badge, Box, Checkbox, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import ShadowedUser from "@components/pages/common/shadowed-user";
+import { Role } from "@interfaces/custom";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
+import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useState } from "react";
 
-export default function GridViewCard({ o }: { o: ObservationListMinimalData }) {
+export interface ObservationMinList {
+  o: ObservationListMinimalData;
+  getCheckboxProps?: (props?: any | undefined) => {
+    [x: string]: any;
+  };
+}
+
+export default function GridViewCard({ o, getCheckboxProps }: ObservationMinList) {
   const { t } = useTranslation();
+  const [canEdit] = useState(hasAccess([Role.Admin, Role.UsergroupFounder, Role.UsergroupExpert]));
 
   return (
     <Box className="hover-box fade">
+      {canEdit && getCheckboxProps && (
+        <Checkbox m={2} {...getCheckboxProps({ value: String(o.observationId) })}></Checkbox>
+      )}
+
       <Box w="full" position="relative" h="16rem">
         <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-          <Link>
+          <Link target="_blank">
             <Image
               objectFit="cover"
               bg="gray.100"

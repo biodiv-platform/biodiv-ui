@@ -415,3 +415,13 @@ export const axReorderHomePageGallery = async (userGroupId, payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const getAuthorizedUserGroupById = async () => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/grouplist/admin`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};

@@ -1,6 +1,12 @@
 {
   "accurate": "Précise",
+  "actions": "Actions",
   "add_observation": "Ajouter une observation",
+  "bulk_action": {
+    "failure": "Impossible de déclencher une action groupée",
+    "success": "L'action groupée a été déclenchée avec succès, les modifications seront reflétées sous peu"
+  },
+  "bulk_actions": "Actions en vrac",
   "cf_update_success": "Observation mise à jour avec succès",
   "checklist_annotation": "Champs de données",
   "common_name": "Nom commun",
@@ -118,6 +124,8 @@
   "saved": "Observation enregistrée",
   "saved_message": "Nous n'avons pas pu créer votre observation pour le moment, mais si vous êtes hors ligne, ne vous inquiétez pas, il est enregistré et sera téléchargé une fois que la connectivité est de retour.",
   "scientific_name": "Nom scientifique",
+  "selectAll": "Tout sélectionner",
+  "select_all": "Les observations seront sélectionnées",
   "share": "Partager cette observation",
   "source": "Source",
   "species_page": "Voir la page des espèces",
@@ -139,6 +147,7 @@
   "traits_update_success": "Traits mis à jour avec succès",
   "unfeature": "Viaque sélectionné",
   "unfollow_observation": "Désabonnement d'une observation",
+  "unselect": "Tout déselectionner",
   "update_observation": "Mettre à jour l'observation",
   "updated": "Mise à jour",
   "updated_on": "Mis à jour le",

@@ -1,6 +1,12 @@
 {
   "accurate": "Accurate",
+  "actions": "Actions",
   "add_observation": "Add Observation",
+  "bulk_action": {
+    "failure": "Unable to trigger bulk action",
+    "success": "Successfully triggered  bulk action, Changes will be reflected  shortly"
+  },
+  "bulk_actions": "Bulk Actions",
   "cf_update_success": "Successfully Updated Observation Custom Field",
   "checklist_annotation": "DataTable Fields",
   "common_name": "Common Name",
@@ -118,6 +124,8 @@
   "saved": "Observation Saved",
   "saved_message": "We were unable to create your observation at the moment, but if you are offline don't worry it's saved and will be uploaded once connectivity is back",
   "scientific_name": "Scientific Name",
+  "selectAll": "Select All",
+  "select_all": "Observations will be  selected",
   "share": "Share this observation",
   "source": "Source",
   "species_page": "See species page",
@@ -139,6 +147,7 @@
   "traits_update_success": "Traits Updated Successfully",
   "unfeature": "Unfeature Selected",
   "unfollow_observation": "Unfollow Observation",
+  "unselect": "Unselect All",
   "update_observation": "Update Observation",
   "updated": "Updated",
   "updated_on": "Updated on",
