@@ -28,6 +28,7 @@ interface IDatePickerBoxProps {
   style?;
   isRequired?: boolean;
   subscribe?: boolean;
+  inputRef?;
 }
 
 const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
@@ -40,12 +41,17 @@ export const DatePickerField = ({
   disabled = true,
   subscribe = false,
   dateFormat = "d-m-Y",
+  inputRef,
   ...props
 }: IDatePickerBoxProps) => {
   const { field, fieldState } = useController({ name });
   const [date, setDate] = useState(field.value ? parseDate(field.value) : undefined);
 
   useEffect(() => {
+    if (inputRef?.current) {
+      inputRef.current.onChange = setDate;
+    }
+
     date && field.onChange(formatDate(date));
   }, []);
 

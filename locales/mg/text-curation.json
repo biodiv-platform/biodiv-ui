@@ -1,0 +1,28 @@
+{
+  "contributors": "mpandray anjara",
+  "create": {
+    "error": "Tsy afaka mamorona angona Data Curation Text",
+    "success": "Nahomby ny angon-drakitra famoronana lahatsoratra",
+    "title": "Text Curation"
+  },
+  "curated": {
+    "date": "Daty voalamina",
+    "location": "Toerana voalamina",
+    "sci_name": "Anarana siantifika voarindra",
+    "status": "Toeram-pikarakarana"
+  },
+  "curation_status": {
+    "curated": "notsongain'ilay",
+    "pending": "mbola miandry",
+    "rejected": "TSY"
+  },
+  "dataset_description": "Dataset Description",
+  "date_columns": "Tsanganana daty",
+  "location_columns": "Tsanganana toerana",
+  "metadata": "Metadata",
+  "sci_name_columns": "Tsanganana anarana siantifika",
+  "update": {
+    "error": "Tsy afaka manavao ny laharana",
+    "success": "Nohavaozina soa aman-tsara ny laharana"
+  }
+}

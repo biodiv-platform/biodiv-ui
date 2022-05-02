@@ -11,6 +11,9 @@ const SITE_CONFIG_EXAMPLE = {
   DASHBOARD: {
     ACTIVE: true
   },
+  DATA_CURATION: {
+    ACTIVE: true
+  },
   DATASET: {
     ACTIVE: true
   },

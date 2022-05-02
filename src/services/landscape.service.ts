@@ -1,5 +1,5 @@
 import { ENDPOINT } from "@static/constants";
-import http, { plainHttp } from "@utils/http";
+import http, { formDataHeaders, plainHttp } from "@utils/http";
 import { nanoid } from "nanoid";
 
 export const axGetLandscapeById = async (landscapeId) => {
@@ -41,11 +41,7 @@ export const axUploadEditorResource = (blobInfo, success, failure) => {
   formData.append("directory", "landscape");
 
   http
-    .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    })
+    .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, { headers: formDataHeaders })
     .then((r) => {
       success(`${ENDPOINT.FILES}/get/raw/landscape${r.data.uri}`);
     })

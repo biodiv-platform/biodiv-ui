@@ -1,0 +1,28 @@
+{
+  "contributors": "Contributors",
+  "create": {
+    "error": "Unable to create Text Curation Dataset",
+    "success": "Text Creation Dataset Uploaded Successfully",
+    "title": "Text Curation"
+  },
+  "curated": {
+    "date": "Curated Date",
+    "location": "Curated Location",
+    "sci_name": "Curated Scientific Name",
+    "status": "Curation Status"
+  },
+  "curation_status": {
+    "curated": "Curated",
+    "pending": "Pending",
+    "rejected": "Rejected"
+  },
+  "dataset_description": "Dataset Description",
+  "date_columns": "Date Columns",
+  "location_columns": "Location Columns",
+  "metadata": "Metadata",
+  "sci_name_columns": "Scientific Name Columns",
+  "update": {
+    "error": "Unable to Update Row",
+    "success": "Row Updated Successfully"
+  }
+}
