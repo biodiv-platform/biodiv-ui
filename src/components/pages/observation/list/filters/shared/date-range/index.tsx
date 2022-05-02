@@ -49,10 +49,12 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
       if (dates.length > 0) {
         _draft.f[filterKey.min] = dayjs(dates[0]).utc().format();
 
-        // If no max is selected then by default it will add 1 day (end of day) and shows results
-        _draft.f[filterKey.max] = dates[1]
-          ? dayjs(dates[1]).utc().format()
-          : dayjs(dates[0]).add(1, "day").utc().format();
+        // If no max is selected then by default it will use start date
+        // Also it will add 1 day to create end of that day
+        _draft.f[filterKey.max] = dayjs(dates[1] ? dates[1] : dates[0])
+          .add(1, "day")
+          .utc()
+          .format();
       } else {
         _draft.f[filterKey.min] = undefined;
         _draft.f[filterKey.max] = undefined;
