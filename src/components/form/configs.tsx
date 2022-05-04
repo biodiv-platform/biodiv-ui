@@ -12,7 +12,7 @@ export const selectStyles = {
   }),
   placeholder: (p) => ({
     ...p,
-    color: "#757474"
+    color: "var(--chakra-colors-gray-400)"
   }),
   valueContainer: (p) => ({ ...p, height: "38px" }),
   menu: (p) => ({ ...p, minWidth: "20em" }),
@@ -20,7 +20,7 @@ export const selectStyles = {
   clearIndicator: (base, state) => ({
     ...base,
     cursor: "pointer",
-    color: state.isFocused ? "blue" : "black"
+    color: state.isFocused ? "var(--chakra-colors-blue-500)" : "var(--chakra-colors-gray-400)"
   })
 };
 
