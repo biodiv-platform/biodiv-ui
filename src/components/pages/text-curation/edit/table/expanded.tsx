@@ -7,6 +7,8 @@ import useCurateEdit from "../use-curate-edit";
 import EditRowForm from "./form";
 
 const EXPAND_BLACKLIST = [
+  "taxonomyMatchedNames",
+  "hierarchy",
   "DATE",
   "locations",
   "scientificNames",
@@ -16,8 +18,7 @@ const EXPAND_BLACKLIST = [
   "curatedDateFormat",
   "curatedLocation",
   "curatedSName",
-  "curatedStatus",
-  "taxonomyMatchedNames"
+  "curatedStatus"
 ];
 
 export default function ExpandedComponent(props) {
