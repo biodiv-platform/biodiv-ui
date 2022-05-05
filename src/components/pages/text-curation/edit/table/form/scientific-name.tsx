@@ -6,18 +6,33 @@ import {
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef } from "react";
+import { useFormContext } from "react-hook-form";
 
 export default function ScientificNameEdit({ row }) {
   const { t } = useTranslation();
+  const hForm = useFormContext();
   const scientificRef: any = useRef(null);
 
   const onSciNameQuery = async (q) => await onScientificNameQuery(q, "name");
 
   const onTagSelect = (value) => {
     scientificRef.current.onChange(
-      { value: value, label: value },
+      {
+        value: value.fullName,
+        label: value.fullName,
+        taxonId: value.taxonId,
+        rank: value.rank,
+        hierarchy: value.hierarchy
+      },
       { name: scientificRef.current.props.inputId }
     );
+  };
+
+  const handleOnChange = (value) => {
+    hForm.setValue("curatedSName", value.label);
+    hForm.setValue("taxonId", value.taxonId ? value.taxonId : "");
+    hForm.setValue("rank", value.rank ? value.rank : "");
+    hForm.setValue("hierarchy", value.hierarchy ? value.hierarchy : []);
   };
 
   return (
@@ -28,13 +43,14 @@ export default function ScientificNameEdit({ row }) {
         label={t("text-curation:curated.sci_name")}
         placeholder={t("observation:scientific_name")}
         onQuery={onSciNameQuery}
+        onChange={handleOnChange}
         optionComponent={ScientificNameOption}
         selectRef={scientificRef}
         isRaw={true}
         mb={3}
       />
 
-      {row.scientificNames.map((suggestion) => (
+      {row.taxonomyMatchedNames.map((suggestion) => (
         <Button
           variant="outline"
           size="xs"
@@ -46,7 +62,7 @@ export default function ScientificNameEdit({ row }) {
           mb={2}
           mr={2}
         >
-          {suggestion}
+          {suggestion.fullName}
         </Button>
       ))}
     </Box>
