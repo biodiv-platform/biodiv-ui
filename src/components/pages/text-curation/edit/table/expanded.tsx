@@ -16,7 +16,8 @@ const EXPAND_BLACKLIST = [
   "curatedDateFormat",
   "curatedLocation",
   "curatedSName",
-  "curatedStatus"
+  "curatedStatus",
+  "taxonomyMatchedNames"
 ];
 
 export default function ExpandedComponent(props) {
