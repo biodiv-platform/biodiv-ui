@@ -1,19 +1,40 @@
 import { Box, Button } from "@chakra-ui/react";
-import { TextBoxField } from "@components/form/text";
+import { SelectAsyncInputField } from "@components/form/select-async";
+import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function LocationEdit({ row }) {
   const { t } = useTranslation();
   const hForm = useFormContext();
+  const locationRef: any = useRef(null);
 
-  const onTagSelect = (value) => hForm.setValue("curatedLocation", value);
+  const onTagSelect = (value) => {
+    locationRef.current.onChange(
+      { value: value.label, label: value.label, coordinates: value.coordinates },
+      { name: locationRef.current.props.inputId }
+    );
+  };
+
+  const handleOnChange = (value) => {
+    hForm.setValue("curatedLocation", value.label);
+    hForm.setValue("longitude", value.coordinates ? value.coordinates[0] : null);
+    hForm.setValue("latitude", value.coordinates ? value.coordinates[1] : null);
+  };
 
   return (
     <Box p={4} mb={4}>
-      <TextBoxField name="curatedLocation" label={t("text-curation:curated.location")} mb={3} />
-      {row.locations.map((suggestion: any) => (
+      <SelectAsyncInputField
+        name="curatedLocation"
+        label={t("text-curation:curated.location")}
+        multiple={false}
+        mb={3}
+        onQuery={axGetPeliasAutocompleteLocations}
+        onChange={handleOnChange}
+        selectRef={locationRef}
+      />
+      {row.peliasLocations.map((suggestion: any) => (
         <Button
           variant="outline"
           size="xs"
@@ -25,7 +46,8 @@ export default function LocationEdit({ row }) {
           mb={2}
           mr={2}
         >
-          {suggestion}
+          {suggestion.label}
+          {" " + "(" + suggestion.coordinates[0] + ", " + suggestion.coordinates[1] + ")"}
         </Button>
       ))}
     </Box>
