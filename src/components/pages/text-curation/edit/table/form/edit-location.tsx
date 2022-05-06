@@ -18,7 +18,6 @@ export default function LocationEdit({ row }) {
   };
 
   const handleOnChange = (value) => {
-    hForm.setValue("curatedLocation", value.label);
     hForm.setValue("longitude", value.coordinates ? value.coordinates[0] : null);
     hForm.setValue("latitude", value.coordinates ? value.coordinates[1] : null);
   };
