@@ -1,11 +1,12 @@
 import { Box, Button } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
+import TaxonBreadcrumbs from "@components/pages/common/breadcrumbs";
 import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function ScientificNameEdit({ row }) {
@@ -13,9 +14,24 @@ export default function ScientificNameEdit({ row }) {
   const hForm = useFormContext();
   const scientificRef: any = useRef(null);
 
+  const initialBreadCrumbs = row.hierarchy.map((v) => ({
+    id: v.taxon_id,
+    name: v.taxon_name,
+    rankName: v.taxon_rank
+  }));
+
+  const [breadCrumbs, setBreadCrumbs] = useState();
+
   const onSciNameQuery = async (q) => await onScientificNameQuery(q, "name");
 
   const onTagSelect = (value) => {
+    setBreadCrumbs(
+      value.hierarchy.map((v) => ({
+        id: v.taxon_id,
+        name: v.taxon_name,
+        rankName: v.taxon_rank
+      }))
+    );
     scientificRef.current.onChange(
       {
         value: value.fullName,
@@ -29,6 +45,15 @@ export default function ScientificNameEdit({ row }) {
   };
 
   const handleOnChange = (value) => {
+    setBreadCrumbs(
+      value.hierarchy
+        ? value.hierarchy.map((v) => ({
+            id: v.taxon_id,
+            name: v.taxon_name,
+            rankName: v.taxon_rank
+          }))
+        : t
+    );
     hForm.setValue("taxonId", value.taxonId ? value.taxonId : "");
     hForm.setValue("rank", value.rank ? value.rank : "");
     hForm.setValue("hierarchy", value.hierarchy ? value.hierarchy : []);
@@ -47,6 +72,10 @@ export default function ScientificNameEdit({ row }) {
         selectRef={scientificRef}
         isRaw={true}
         mb={3}
+      />
+      <TaxonBreadcrumbs
+        crumbs={breadCrumbs ? breadCrumbs : initialBreadCrumbs}
+        type="observation"
       />
 
       {row.taxonomyMatchedNames.map((suggestion) => (
