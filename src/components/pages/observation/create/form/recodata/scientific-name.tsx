@@ -2,7 +2,6 @@ import { Badge, Box, Image, Stack, Text } from "@chakra-ui/react";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
-import SCI_RANK from "@static/sci-rank";
 import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
