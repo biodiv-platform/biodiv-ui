@@ -29,7 +29,6 @@ export default function ScientificNameEdit({ row }) {
   };
 
   const handleOnChange = (value) => {
-    hForm.setValue("curatedSName", value.label);
     hForm.setValue("taxonId", value.taxonId ? value.taxonId : "");
     hForm.setValue("rank", value.rank ? value.rank : "");
     hForm.setValue("hierarchy", value.hierarchy ? value.hierarchy : []);
