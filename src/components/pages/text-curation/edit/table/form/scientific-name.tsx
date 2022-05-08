@@ -53,11 +53,11 @@ export default function ScientificNameEdit({ row }) {
             name: v.taxon_name,
             rankName: v.taxon_rank
           }))
-        : t
+        : initialBreadCrumbs
     );
-    hForm.setValue("taxonId", value.taxonId ? value.taxonId : "");
-    hForm.setValue("rank", value.rank ? value.rank : "");
-    hForm.setValue("hierarchy", value.hierarchy ? value.hierarchy : []);
+    hForm.setValue("taxonId", value.taxonId ? value.taxonId : row.taxonId);
+    hForm.setValue("rank", value.rank ? value.rank : row.rank);
+    hForm.setValue("hierarchy", value.hierarchy ? value.hierarchy : row.hierarchy);
   };
 
   return (
