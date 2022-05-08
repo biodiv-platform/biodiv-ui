@@ -18,8 +18,8 @@ export default function LocationEdit({ row }) {
   };
 
   const handleOnChange = (value) => {
-    hForm.setValue("longitude", value.coordinates ? value.coordinates[0] : null);
-    hForm.setValue("latitude", value.coordinates ? value.coordinates[1] : null);
+    hForm.setValue("longitude", value.coordinates ? value.coordinates[0] : row.longitude);
+    hForm.setValue("latitude", value.coordinates ? value.coordinates[1] : row.latitude);
   };
 
   return (
