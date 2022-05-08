@@ -1,8 +1,9 @@
 import { Box, Button } from "@chakra-ui/react";
+import { Tag } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function LocationEdit({ row }) {
@@ -10,7 +11,13 @@ export default function LocationEdit({ row }) {
   const hForm = useFormContext();
   const locationRef: any = useRef(null);
 
+  const [latitude, setLatitude] = useState();
+  const [longitude, setlongitude] = useState();
+
   const onTagSelect = (value) => {
+    setLatitude(value.coordinates[1]);
+    setlongitude(value.coordinates[0]);
+
     locationRef.current.onChange(
       { value: value.label, label: value.label, coordinates: value.coordinates },
       { name: locationRef.current.props.inputId }
@@ -18,6 +25,9 @@ export default function LocationEdit({ row }) {
   };
 
   const handleOnChange = (value) => {
+    setlongitude(value.coordinates ? value.coordinates[0] : row.longitude);
+    setLatitude(value.coordinates ? value.coordinates[1] : row.latitude);
+
     hForm.setValue("longitude", value.coordinates ? value.coordinates[0] : row.longitude);
     hForm.setValue("latitude", value.coordinates ? value.coordinates[1] : row.latitude);
   };
@@ -33,6 +43,9 @@ export default function LocationEdit({ row }) {
         onChange={handleOnChange}
         selectRef={locationRef}
       />
+      {longitude && <Tag>{`longitude : ${longitude}`}</Tag>}
+      {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
+      <br />
       {row.peliasLocations.map((suggestion: any) => (
         <Button
           variant="outline"
