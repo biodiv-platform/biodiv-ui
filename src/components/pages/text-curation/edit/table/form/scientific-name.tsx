@@ -74,25 +74,29 @@ export default function ScientificNameEdit({ row }) {
         isRaw={true}
         mb={3}
       />
-      <TaxonBreadcrumbs
-        crumbs={breadCrumbs ? breadCrumbs : initialBreadCrumbs}
-        type="observation"
-      />
-      <Tag mb={3}>
-        {breadCrumbs
-          ? `taxon id : ${breadCrumbs[breadCrumbs.length - 1].id}`
-          : row.taxonId
-          ? `taxon id : ${row.taxonId}`
-          : `taxon id : None`}
-      </Tag>
+      {breadCrumbs ? (
+        <TaxonBreadcrumbs
+          crumbs={breadCrumbs ? breadCrumbs : initialBreadCrumbs}
+          type="observation"
+        ></TaxonBreadcrumbs>
+      ) : (
+        initialBreadCrumbs.length > 0 && (
+          <TaxonBreadcrumbs crumbs={initialBreadCrumbs} type="observation"></TaxonBreadcrumbs>
+        )
+      )}
 
-      <Tag mb={3}>
-        {breadCrumbs
-          ? `rank : ${breadCrumbs[breadCrumbs.length - 1].rankName}`
-          : row.rank
-          ? `rank : ${row.rank}`
-          : `rank : None`}
-      </Tag>
+      {breadCrumbs ? (
+        <Tag>{`taxon id : ${breadCrumbs[breadCrumbs.length - 1].id}`}</Tag>
+      ) : (
+        row.taxonId && <Tag>{`taxon id : ${row.taxonId}`}</Tag>
+      )}
+
+      {breadCrumbs ? (
+        <Tag>{`rank : ${breadCrumbs[breadCrumbs.length - 1].rankName}`}</Tag>
+      ) : (
+        row.rank && <Tag>{`rank : ${row.rank}`}</Tag>
+      )}
+
       <br />
       {row.taxonomyMatchedNames.map((suggestion) => (
         <Button
