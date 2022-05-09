@@ -1,8 +1,6 @@
-import { CheckCircleIcon, RepeatIcon, SettingsIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  ButtonGroup,
   Flex,
   Select,
   Stack,
@@ -12,6 +10,7 @@ import {
   Text,
   useDisclosure
 } from "@chakra-ui/react";
+import BulkMapperHeader from "@components/pages/common/bulk-mapper";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";
 import { sortByOptions, viewTabs } from "@static/observation-list";
@@ -60,6 +59,7 @@ export default function ListHeader() {
     alert(`${observationData.n} ${t("observation:select_all")}`);
     handleBulkCheckbox("selectAll");
   };
+
   return (
     <>
       <Flex mt={4} direction={{ base: "column", md: "row" }} justify="space-between">
@@ -111,36 +111,13 @@ export default function ListHeader() {
           <Text color="gray.600">
             {format(observationData.n)} {t("observation:list.observations_found")}
           </Text>
-          {bulkObservationIds && bulkObservationIds?.length > 0 && (
-            <ButtonGroup size="sm" variant="outline">
-              {!selectAll && (
-                <Button
-                  variant="outline"
-                  colorScheme="blue"
-                  leftIcon={<CheckCircleIcon />}
-                  onClick={handleSelectAll}
-                >
-                  {t("observation:selectAll")}
-                </Button>
-              )}
-              <Button
-                variant="outline"
-                colorScheme="red"
-                leftIcon={<RepeatIcon />}
-                onClick={() => handleBulkCheckbox("UnsSelectAll")}
-              >
-                {t("observation:unselect")}
-              </Button>
-              <Button
-                variant="outline"
-                colorScheme="green"
-                leftIcon={<SettingsIcon />}
-                onClick={openBulkMappingModal}
-              >
-                {t("observation:actions")}
-              </Button>
-            </ButtonGroup>
-          )}
+          <BulkMapperHeader
+            selectAll={selectAll}
+            bulkIds={bulkObservationIds}
+            handleSelectAll={handleSelectAll}
+            handleBulkCheckbox={handleBulkCheckbox}
+            openBulkMappingModal={openBulkMappingModal}
+          />
         </Flex>
       )}
 

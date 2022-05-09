@@ -105,6 +105,7 @@
   },
   "resource": "Resource",
   "scientific_name": "Scientific Name",
+  "select_all": "Species will be selected",
   "share": "Share this species",
   "species_group": "Species Group",
   "status": "Status",

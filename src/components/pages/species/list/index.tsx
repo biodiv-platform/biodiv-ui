@@ -1,6 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
+import BulkMapperModal from "./bulk-mapper";
 import Filters from "./filter";
 import ListHeader from "./header";
 import Views from "./views";
@@ -22,6 +23,7 @@ export default function SpeciesListPageComponent() {
           <Views />
         </Box>
       </SimpleGrid>
+      <BulkMapperModal />
     </Box>
   );
 }

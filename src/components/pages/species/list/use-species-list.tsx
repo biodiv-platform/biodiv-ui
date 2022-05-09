@@ -1,10 +1,14 @@
+import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
+import useGlobalState from "@hooks/use-global-state";
+import { UserGroup } from "@interfaces/userGroup";
 import { axGetSpeciesList } from "@services/species.service";
+import { getAuthorizedUserGroupById } from "@services/usergroup.service";
 import { isBrowser } from "@static/constants";
 import { stringify } from "@utils/query-string";
 import { getSpeciesFieldHeaders } from "@utils/species";
 import NProgress from "nprogress";
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 export interface SpeciesListData {
@@ -28,6 +32,17 @@ interface SpeciesContextProps {
   nextPage?;
   setFilter?;
   resetFilter?;
+  //bulkUgMapping states
+  hasUgAccess?: boolean;
+  authorizedUserGroupList?: UserGroup[];
+  getCheckboxProps?;
+  selectAll?: boolean;
+  setSelectAll?;
+  bulkSpeciesIds?: any[];
+  handleBulkCheckbox?: (arg: string) => void;
+  isOpen?;
+  onOpen?;
+  onClose?;
 }
 
 const deDupeDownloadLog = (current, latest) => {
@@ -46,9 +61,44 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const [traits] = useImmer<{ f: any }>(props.traits);
   const [fieldsMeta] = useImmer<any>(getSpeciesFieldHeaders(props.fieldsMeta));
 
+  const [hasUgAccess, setHasUgAdminAccess] = useState<boolean>(false);
+  const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { getCheckboxProps, value: bulkSpeciesIds, setValue } = useCheckboxGroup();
+  const { isLoggedIn } = useGlobalState();
+
+  const handleBulkCheckbox = (actionType: string) => {
+    switch (actionType) {
+      case "selectAll":
+        setSelectAll(true);
+        setValue(speciesData?.l?.map((i) => String(i.id)));
+        break;
+      case "UnsSelectAll":
+        setValue([]);
+        setSelectAll(false);
+        break;
+    }
+  };
+
   useDidUpdateEffect(() => {
     fetchListData();
   }, [filter]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getAuthorizedUserGroupById().then(({ data }) => {
+        setHasUgAdminAccess(data?.isAdmin || false);
+        setAuthorizedUserGroupList(data?.ugList || []);
+      });
+    }
+  }, [isLoggedIn]);
+
+  useDidUpdateEffect(() => {
+    if (selectAll) {
+      handleBulkCheckbox("selectAll");
+    }
+  }, [speciesData.l]);
 
   useEffect(() => {
     if (isBrowser) {
@@ -159,7 +209,18 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         removeFilter,
         nextPage,
         setFilter,
-        resetFilter
+        resetFilter,
+
+        selectAll,
+        setSelectAll,
+        bulkSpeciesIds,
+        handleBulkCheckbox,
+        authorizedUserGroupList,
+        getCheckboxProps,
+        hasUgAccess,
+        isOpen,
+        onOpen,
+        onClose
       }}
     >
       {props.children}

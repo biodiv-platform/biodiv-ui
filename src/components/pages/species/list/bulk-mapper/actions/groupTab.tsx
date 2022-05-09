@@ -1,6 +1,5 @@
 import { Box, Button, Flex, HStack, Input } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CheckBoxItems from "@components/pages/observation/create/form/user-groups/checkbox";
 import { bulkActions } from "@components/pages/observation/list/bulk-mapper";
 import { axGetObservationMapData } from "@services/observation.service";
@@ -8,6 +7,8 @@ import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+
+import useSpeciesList from "../../use-species-list";
 
 export default function GroupPost() {
   const { t } = useTranslation();
@@ -17,8 +18,8 @@ export default function GroupPost() {
     authorizedUserGroupList: groups,
     filter,
     selectAll,
-    bulkObservationIds
-  } = useObservationFilter();
+    bulkSpeciesIds
+  } = useSpeciesList();
   const [selectedGroups, setSelectedGroups] = useState<any>([]);
   const [filterGroups, setFilterGroups] = useState<any>(groups);
 
@@ -28,7 +29,7 @@ export default function GroupPost() {
       selectAll,
       view: "bulkMapping",
       bulkUsergroupIds: selectedGroups?.toString() || "",
-      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
+      bulkSpeciesIds: selectAll ? "" : bulkSpeciesIds?.toString(),
       bulkAction
     };
 
@@ -42,7 +43,7 @@ export default function GroupPost() {
     } else {
       notification(t("observation:bulk_action.failure"), NotificationType.Error);
     }
-    router.push("/observation/list", true, { ...filter }, true);
+    router.push("/species/list", true, { ...filter }, true);
 
     onClose();
   };
