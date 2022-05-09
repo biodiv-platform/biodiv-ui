@@ -93,6 +93,7 @@ export default function ScientificNameEdit({ row }) {
           ? `rank : ${row.rank}`
           : `rank : None`}
       </Tag>
+      <br />
       {row.taxonomyMatchedNames.map((suggestion) => (
         <Button
           variant="outline"
