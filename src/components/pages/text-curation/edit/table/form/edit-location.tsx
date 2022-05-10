@@ -1,5 +1,5 @@
 import { Box, Button } from "@chakra-ui/react";
-import { Tag } from "@chakra-ui/react";
+import { HStack,Tag } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
 import useTranslation from "next-translate/useTranslation";
@@ -45,10 +45,13 @@ export default function LocationEdit({ row }) {
         selectRef={locationRef}
         isRaw={true}
       />
-      
-      {longitude && <Tag>{`longitude : ${longitude}`}</Tag>}
-      {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
-      <br />
+      <Box mb={4}>
+        <HStack spacing={4}>
+          {longitude && <Tag>{`longitude : ${longitude}`}</Tag>}
+          {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
+        </HStack>
+      </Box>
+
       {row.peliasLocations.map((suggestion: any) => (
         <Button
           variant="outline"

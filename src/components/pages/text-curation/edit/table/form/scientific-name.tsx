@@ -1,5 +1,5 @@
 import { Box, Button } from "@chakra-ui/react";
-import { Tag } from "@chakra-ui/react";
+import { HStack,Tag } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import TaxonBreadcrumbs from "@components/pages/common/breadcrumbs";
 import {
@@ -85,19 +85,21 @@ export default function ScientificNameEdit({ row }) {
         )
       )}
 
-      {breadCrumbs ? (
-        <Tag>{`taxon id : ${breadCrumbs[breadCrumbs.length - 1].id}`}</Tag>
-      ) : (
-        row.taxonId && <Tag>{`taxon id : ${row.taxonId}`}</Tag>
-      )}
+      <Box mb={4}>
+        <HStack spacing={4}>
+          {breadCrumbs ? (
+            <Tag>{`taxon id : ${breadCrumbs[breadCrumbs.length - 1].id}`}</Tag>
+          ) : (
+            row.taxonId && <Tag>{`taxon id : ${row.taxonId}`}</Tag>
+          )}
 
-      {breadCrumbs ? (
-        <Tag>{`rank : ${breadCrumbs[breadCrumbs.length - 1].rankName}`}</Tag>
-      ) : (
-        row.rank && <Tag>{`rank : ${row.rank}`}</Tag>
-      )}
-
-      <br />
+          {breadCrumbs ? (
+            <Tag>{`rank : ${breadCrumbs[breadCrumbs.length - 1].rankName}`}</Tag>
+          ) : (
+            row.rank && <Tag>{`rank : ${row.rank}`}</Tag>
+          )}
+        </HStack>
+      </Box>
       {row.taxonomyMatchedNames.map((suggestion) => (
         <Button
           variant="outline"
