@@ -39,7 +39,7 @@ interface SpeciesContextProps {
   selectAll?: boolean;
   setSelectAll?;
   bulkSpeciesIds?: any[];
-  handleBulkCheckbox?: (arg: string) => void;
+  handleBulkCheckbox: (arg: string) => void;
   isOpen?;
   onOpen?;
   onClose?;
