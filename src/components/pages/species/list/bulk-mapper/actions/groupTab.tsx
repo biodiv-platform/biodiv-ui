@@ -2,7 +2,7 @@ import { Box, Button, Flex, HStack, Input } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import CheckBoxItems from "@components/pages/observation/create/form/user-groups/checkbox";
 import { bulkActions } from "@components/pages/observation/list/bulk-mapper";
-import { axGetObservationMapData } from "@services/observation.service";
+import { axGetSpeciesList } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
@@ -33,11 +33,11 @@ export default function GroupPost() {
       bulkAction
     };
 
-    const { success } = await axGetObservationMapData(
+    const { success } = await axGetSpeciesList(
       params,
-      filter?.location ? { location: filter.location } : {},
       true
     );
+    
     if (success) {
       notification(t("observation:bulk_action.success"), NotificationType.Success);
     } else {
