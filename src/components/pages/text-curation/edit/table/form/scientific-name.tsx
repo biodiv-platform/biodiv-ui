@@ -103,7 +103,7 @@ export default function ScientificNameEdit({ row }) {
           variant="outline"
           size="xs"
           bg="blue.50"
-          key={suggestion}
+          key={suggestion.taxonId}
           colorScheme="blue"
           borderRadius="3xl"
           onClick={() => onTagSelect(suggestion)}

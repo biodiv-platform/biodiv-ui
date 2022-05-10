@@ -35,6 +35,7 @@ export default function LocationEdit({ row }) {
   return (
     <Box p={4} mb={4}>
       <SelectAsyncInputField
+        resetOnSubmit={false}
         name="curatedLocation"
         label={t("text-curation:curated.location")}
         multiple={false}
@@ -42,7 +43,9 @@ export default function LocationEdit({ row }) {
         onQuery={axGetPeliasAutocompleteLocations}
         onChange={handleOnChange}
         selectRef={locationRef}
+        isRaw={true}
       />
+      
       {longitude && <Tag>{`longitude : ${longitude}`}</Tag>}
       {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
       <br />
@@ -51,7 +54,7 @@ export default function LocationEdit({ row }) {
           variant="outline"
           size="xs"
           bg="blue.50"
-          key={suggestion}
+          key={suggestion.coordinates.toString()}
           colorScheme="blue"
           borderRadius="3xl"
           onClick={() => onTagSelect(suggestion)}
