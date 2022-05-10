@@ -92,15 +92,17 @@ export default function ListHeader() {
               ))}
             </Select>
           </Box>
-          <BulkMapperHeader
-            selectAll={selectAll}
-            bulkIds={bulkSpeciesIds}
-            handleSelectAll={handleSelectAll}
-            handleBulkCheckbox={handleBulkCheckbox}
-            openBulkMappingModal={onOpen}
-          />
         </Stack>
       </Flex>
+      <Stack mb={4} isInline justifyContent="flex-end">
+        <BulkMapperHeader
+          selectAll={selectAll}
+          bulkIds={bulkSpeciesIds}
+          handleSelectAll={handleSelectAll}
+          handleBulkCheckbox={handleBulkCheckbox}
+          openBulkMappingModal={onOpen}
+        />
+      </Stack>
     </>
   );
 }

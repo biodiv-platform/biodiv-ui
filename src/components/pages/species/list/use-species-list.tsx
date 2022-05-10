@@ -54,6 +54,15 @@ const SpeciesContext = createContext<SpeciesContextProps>({} as SpeciesContextPr
 
 export const SPECIES_PAGE_SIZE = 10;
 
+export const deconstructSpeciesFieldFilter = (sField): any => {
+  if (sField?.length) {
+    const path = sField.map((item) => item.split(".")[0]).join();
+    const description = sField.map((item) => item.split(".")[1]).join();
+    return { path, description };
+  }
+  return {};
+};
+
 export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const [speciesData, setSpeciesData] = useImmer<any>(props.speciesData);
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
@@ -138,15 +147,6 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
       console.error(e);
       NProgress.done();
     }
-  };
-
-  const deconstructSpeciesFieldFilter = (sField): any => {
-    if (sField?.length) {
-      const path = sField.map((item) => item.split(".")[0]).join();
-      const description = sField.map((item) => item.split(".")[1]).join();
-      return { path, description };
-    }
-    return {};
   };
 
   const nextPage = (max = 10) => {

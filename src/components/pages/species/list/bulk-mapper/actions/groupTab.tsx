@@ -8,7 +8,7 @@ import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
-import useSpeciesList from "../../use-species-list";
+import useSpeciesList, { deconstructSpeciesFieldFilter } from "../../use-species-list";
 
 export default function GroupPost() {
   const { t } = useTranslation();
@@ -24,8 +24,10 @@ export default function GroupPost() {
   const [filterGroups, setFilterGroups] = useState<any>(groups);
 
   const handleOnSave = async (bulkAction) => {
+    const { view, description, ...rest } = filter.f;
     const params = {
-      ...filter,
+      ...rest,
+      ...deconstructSpeciesFieldFilter(description),
       selectAll,
       view: "bulkMapping",
       bulkUsergroupIds: selectedGroups?.toString() || "",

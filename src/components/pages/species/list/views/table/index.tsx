@@ -14,12 +14,13 @@ export default function TableView() {
     species: speciesGroups,
     getCheckboxProps,
     hasUgAccess,
+    selectAll,
     nextPage
   } = useSpeciesList();
   const [canEdit, setCanEdit] = useState(false);
   const [fieldData, setFieldData] = useState<any[]>(speciesData?.l);
   const [tableMeta, setTableMeta] = useState(
-    speciesTableMetaData(speciesData?.l, speciesGroups, getCheckboxProps, canEdit)
+    speciesTableMetaData(speciesData?.l, speciesGroups, canEdit)
   );
 
   useEffect(() => {
@@ -28,8 +29,8 @@ export default function TableView() {
 
   useEffect(() => {
     setFieldData(speciesData?.l);
-    setTableMeta(speciesTableMetaData(speciesData?.l, speciesGroups, getCheckboxProps, canEdit));
-  }, [speciesData.l.length]);
+    setTableMeta(speciesTableMetaData(speciesData?.l, speciesGroups, canEdit));
+  }, [selectAll, speciesData.l.length]);
 
   return (
     <InfiniteScroll
@@ -39,7 +40,14 @@ export default function TableView() {
       loader={<Loading />}
       scrollableTarget="items-container"
     >
-      <BasicTable translateHeader data={fieldData || []} columns={tableMeta} />
+      {fieldData && (
+        <BasicTable
+          getCheckboxProps={getCheckboxProps}
+          translateHeader
+          data={fieldData || []}
+          columns={tableMeta}
+        />
+      )}
     </InfiniteScroll>
   );
 }
