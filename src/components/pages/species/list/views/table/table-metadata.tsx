@@ -1,4 +1,4 @@
-import { Image, Link } from "@chakra-ui/react";
+import { Checkbox, Image, Link, Stack } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
@@ -13,7 +13,7 @@ const doFilter = (speciesTiles) => {
   return Object.keys({ reprImage, name, sGroup, commonName });
 };
 
-export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
+export const speciesTableMetaData = (speciesTiles, speciesGroups, getCheckboxProps, canEdit) => {
   const header = speciesTiles.length > 0 ? doFilter(speciesTiles) : [];
 
   return header.map((item) => {
@@ -23,11 +23,20 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups) => {
           Header: "species:scientific_name",
           accessor: "name",
           Cell: ({ value, cell }) => (
-            <LocalLink href={`/species/show/${cell.row.original.id}`} prefixGroup={true}>
-              <Link>
-                <ScientificName value={value} />
-              </Link>
-            </LocalLink>
+            <Stack isInline>
+              {canEdit && getCheckboxProps && (
+                <Checkbox
+                  m={2}
+                  {...getCheckboxProps({ value: String(cell.row.original.id) })}
+                ></Checkbox>
+              )}
+
+              <LocalLink href={`/species/show/${cell.row.original.id}`} prefixGroup={true}>
+                <Link>
+                  <ScientificName value={value} />
+                </Link>
+              </LocalLink>
+            </Stack>
           )
         };
 

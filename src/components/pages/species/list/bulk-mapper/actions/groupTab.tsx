@@ -33,11 +33,8 @@ export default function GroupPost() {
       bulkAction
     };
 
-    const { success } = await axGetSpeciesList(
-      params,
-      true
-    );
-    
+    const { success } = await axGetSpeciesList(params, true);
+
     if (success) {
       notification(t("observation:bulk_action.success"), NotificationType.Success);
     } else {

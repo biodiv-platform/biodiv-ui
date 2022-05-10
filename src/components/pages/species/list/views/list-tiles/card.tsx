@@ -1,20 +1,28 @@
-import { Box, Flex, Heading, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
+import { Role } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
+import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
-import React from "react";
+import React, { useState } from "react";
 
 import useSpeciesList from "../../use-species-list";
 
-export default function GridViewCard({ o }) {
+export default function GridViewCard({ o, getCheckboxProps }) {
   const name = getInjectableHTML(o.name);
   const simpleName = stripTags(o.name);
 
   const { species } = useSpeciesList();
+  const [canEdit] = useState(hasAccess([Role.Admin, Role.UsergroupFounder, Role.UsergroupExpert]));
+
   return (
     <Box className="hover-box fade">
+      {canEdit && getCheckboxProps && (
+        <Checkbox m={2} {...getCheckboxProps({ value: String(o.observationId) })}></Checkbox>
+      )}
+
       <LocalLink href={`/species/show/${o.id}`} prefixGroup={true}>
         <Link>
           <Box w="full" position="relative" h="14rem">

@@ -118,6 +118,7 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
       }
       const { view, description, ...rest } = filter.f;
       const { data } = await axGetSpeciesList({
+        view,
         ...rest,
         ...deconstructSpeciesFieldFilter(description)
       });
