@@ -59,7 +59,7 @@ export default function DateEdit({ row }) {
         />
       </SimpleGrid>
 
-      {Object.entries(row.DATE).map(([type, value]: any) =>
+      {Object.entries(row.DATE).reverse().map(([type, value]: any) =>
         value.map((v) => (
           <Button
             variant="outline"
