@@ -1,7 +1,6 @@
 import { Box, Button } from "@chakra-ui/react";
-import { HStack,Tag } from "@chakra-ui/react";
+import { HStack, Tag } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
-import TaxonBreadcrumbs from "@components/pages/common/breadcrumbs";
 import {
   onScientificNameQuery,
   ScientificNameOption
@@ -9,6 +8,8 @@ import {
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+
+import CurationTaxonBreadcrumbs from "./curation-breadcrumbs";
 
 export default function ScientificNameEdit({ row }) {
   const { t } = useTranslation();
@@ -75,13 +76,12 @@ export default function ScientificNameEdit({ row }) {
         mb={3}
       />
       {breadCrumbs ? (
-        <TaxonBreadcrumbs
+        <CurationTaxonBreadcrumbs
           crumbs={breadCrumbs ? breadCrumbs : initialBreadCrumbs}
-          type="observation"
-        ></TaxonBreadcrumbs>
+        ></CurationTaxonBreadcrumbs>
       ) : (
         initialBreadCrumbs.length > 0 && (
-          <TaxonBreadcrumbs crumbs={initialBreadCrumbs} type="observation"></TaxonBreadcrumbs>
+          <CurationTaxonBreadcrumbs crumbs={initialBreadCrumbs}></CurationTaxonBreadcrumbs>
         )
       )}
 
