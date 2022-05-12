@@ -42,7 +42,7 @@ export default function GroupPost() {
     } else {
       notification(t("observation:bulk_action.failure"), NotificationType.Error);
     }
-    router.push("/species/list", true, { ...filter }, true);
+    router.push("/species/list", true, { ...filter.f }, true);
 
     onClose();
   };
