@@ -22,7 +22,7 @@ export default function ScientificNameEdit({ row }) {
     rankName: v.taxon_rank
   }));
 
-  const [breadCrumbs, setBreadCrumbs] = useState<any[]>();
+  const [breadCrumbs, setBreadCrumbs] = useState<any[]>([]);
 
   const onSciNameQuery = async (q) => await onScientificNameQuery(q, "name");
 
@@ -75,7 +75,7 @@ export default function ScientificNameEdit({ row }) {
         isRaw={true}
         mb={3}
       />
-      {breadCrumbs ? (
+      {breadCrumbs.length > 0 ? (
         <CurationTaxonBreadcrumbs
           crumbs={breadCrumbs ? breadCrumbs : initialBreadCrumbs}
         ></CurationTaxonBreadcrumbs>
@@ -87,13 +87,13 @@ export default function ScientificNameEdit({ row }) {
 
       <Box mb={4}>
         <HStack spacing={4}>
-          {breadCrumbs ? (
+          {breadCrumbs.length > 0 ? (
             <Tag>{`taxon id : ${breadCrumbs[breadCrumbs.length - 1].id}`}</Tag>
           ) : (
             row.taxonId && <Tag>{`taxon id : ${row.taxonId}`}</Tag>
           )}
 
-          {breadCrumbs ? (
+          {breadCrumbs.length > 0 ? (
             <Tag>{`rank : ${breadCrumbs[breadCrumbs.length - 1].rankName}`}</Tag>
           ) : (
             row.rank && <Tag>{`rank : ${row.rank}`}</Tag>
