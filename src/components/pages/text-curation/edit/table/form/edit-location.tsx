@@ -1,5 +1,5 @@
-import { Box, Button } from "@chakra-ui/react";
-import { HStack,Tag } from "@chakra-ui/react";
+import { Box, Button, HStack, Tag } from "@chakra-ui/react";
+import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
 import useTranslation from "next-translate/useTranslation";
@@ -10,16 +10,31 @@ export default function LocationEdit({ row }) {
   const { t } = useTranslation();
   const hForm = useFormContext();
   const locationRef: any = useRef(null);
+  const accuracyRef: any = useRef(null);
 
   const [latitude, setLatitude] = useState();
   const [longitude, setlongitude] = useState();
+  const [locationAccuracy, setLocationAccuracy] = useState();
+
+  const accuracyOptions = [
+    "Accurate",
+    "Approximate-Local",
+    "Approximate-Region",
+    "Approximate-Country"
+  ];
 
   const onTagSelect = (value) => {
     setLatitude(value.coordinates[1]);
     setlongitude(value.coordinates[0]);
+    setLocationAccuracy(value.locationAccuracy);
 
     locationRef.current.onChange(
-      { value: value.label, label: value.label, coordinates: value.coordinates },
+      {
+        value: value.label,
+        label: value.label,
+        coordinates: value.coordinates,
+        locationAccuracy: value.locationAccuracy
+      },
       { name: locationRef.current.props.inputId }
     );
   };
@@ -27,9 +42,18 @@ export default function LocationEdit({ row }) {
   const handleOnChange = (value) => {
     setlongitude(value.coordinates ? value.coordinates[0] : row.longitude);
     setLatitude(value.coordinates ? value.coordinates[1] : row.latitude);
+    setLocationAccuracy(value.locationAccuracy ? value.locationAccuracy : row.locationAccuracy);
 
     hForm.setValue("longitude", value.coordinates ? value.coordinates[0] : row.longitude);
     hForm.setValue("latitude", value.coordinates ? value.coordinates[1] : row.latitude);
+    hForm.setValue(
+      "locationAccuracy",
+      value.locationAccuracy ? value.locationAccuracy : row.locationAccuracy
+    );
+  };
+
+  const handleOnOptionSelect = (value) => {
+    setLocationAccuracy(value);
   };
 
   return (
@@ -46,10 +70,19 @@ export default function LocationEdit({ row }) {
         isRaw={true}
       />
       <Box mb={4}>
-        <HStack spacing={4}>
+        <HStack spacing={4} mb={4}>
           {longitude && <Tag>{`longitude : ${longitude}`}</Tag>}
           {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
+          {locationAccuracy && <Tag>{`accuracy : ${locationAccuracy}`}</Tag>}
         </HStack>
+        <SelectInputField
+          name="locationAccuracy"
+          label="Location accuracy"
+          options={accuracyOptions.map((o) => ({ label: o, value: o }))}
+          selectRef={accuracyRef}
+          onChangeCallback={handleOnOptionSelect}
+          mb={0}
+        />
       </Box>
 
       {row.peliasLocations.map((suggestion: any) => (

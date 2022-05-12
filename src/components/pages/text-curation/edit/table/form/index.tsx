@@ -35,7 +35,8 @@ export default function EditRowForm({ row }) {
       curatedLocation: { label: row.curatedLocation, value: row.curatedLocation },
       curatedDate: row.curatedDate,
       curatedDateFormat: DATE_FORMAT_OPTIONS[0].value,
-      curatedStatus: row.curatedStatus
+      curatedStatus: row.curatedStatus,
+      locationAccuracy: row.locationAccuracy
     }
   });
 
