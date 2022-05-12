@@ -6,7 +6,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import useSpeciesList from "../../use-species-list";
 
@@ -14,8 +14,13 @@ export default function GridViewCard({ o, getCheckboxProps }) {
   const name = getInjectableHTML(o.name);
   const simpleName = stripTags(o.name);
 
-  const { species } = useSpeciesList();
-  const [canEdit] = useState(hasAccess([Role.Admin, Role.UsergroupFounder, Role.UsergroupExpert]));
+  const { species, hasUgAccess } = useSpeciesList();
+
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
+  }, [hasUgAccess]);
 
   return (
     <Box className="hover-box fade">

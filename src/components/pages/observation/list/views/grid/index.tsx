@@ -1,7 +1,9 @@
 import ObservationLoading from "@components/pages/common/loading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
-import React from "react";
+import { Role } from "@interfaces/custom";
+import { hasAccess } from "@utils/auth";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import GridViewCard from "./card";
@@ -32,7 +34,12 @@ const GridViewBox = styled.div`
 `;
 
 export default function GridView() {
-  const { observationData, getCheckboxProps, nextPage } = useObservationFilter();
+  const { observationData, getCheckboxProps, nextPage, hasUgAccess } = useObservationFilter();
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
+  }, [hasUgAccess]);
 
   return observationData && Array.isArray(observationData.ml) ? (
     <GridViewBox className="view_list_minimal">
@@ -45,7 +52,7 @@ export default function GridView() {
       >
         <div className="grid-card">
           {observationData.ml.map((o) => (
-            <GridViewCard o={o} getCheckboxProps={getCheckboxProps} />
+            <GridViewCard o={o} canEdit={canEdit} getCheckboxProps={getCheckboxProps} />
           ))}
         </div>
       </InfiniteScroll>
