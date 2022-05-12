@@ -2,6 +2,7 @@ import { Box, Button, HStack, Tag } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
+import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -10,7 +11,6 @@ export default function LocationEdit({ row }) {
   const { t } = useTranslation();
   const hForm = useFormContext();
   const locationRef: any = useRef(null);
-  const accuracyRef: any = useRef(null);
 
   const [latitude, setLatitude] = useState();
   const [longitude, setlongitude] = useState();
@@ -27,7 +27,6 @@ export default function LocationEdit({ row }) {
     setLatitude(value.coordinates[1]);
     setlongitude(value.coordinates[0]);
     setLocationAccuracy(value.locationAccuracy);
-
     locationRef.current.onChange(
       {
         value: value.label,
@@ -79,7 +78,6 @@ export default function LocationEdit({ row }) {
           name="locationAccuracy"
           label="Location accuracy"
           options={accuracyOptions.map((o) => ({ label: o, value: o }))}
-          selectRef={accuracyRef}
           onChangeCallback={handleOnOptionSelect}
           mb={0}
         />
@@ -90,7 +88,7 @@ export default function LocationEdit({ row }) {
           variant="outline"
           size="xs"
           bg="blue.50"
-          key={suggestion.coordinates.toString()}
+          key={nanoid()}
           colorScheme="blue"
           borderRadius="3xl"
           onClick={() => onTagSelect(suggestion)}

@@ -50,7 +50,12 @@ export const axGetPeliasAutocompleteLocations = async (text) => {
     const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/pelias/autocomplete`, {
       params: { text: text }
     });
-    return data.map((l) => ({ label: l.label, value: l.label, coordinates: l.coordinates }));
+    return data.map((l) => ({
+      label: l.label,
+      value: l.label,
+      coordinates: l.coordinates,
+      locationAccuracy: l.locationAccuracy
+    }));
   } catch (e) {
     return { succces: false, data: [] };
   }

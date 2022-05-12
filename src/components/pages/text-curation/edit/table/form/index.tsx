@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import FormDebugger from "@components/form/debugger";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
@@ -32,11 +33,13 @@ export default function EditRowForm({ row }) {
       curatedSName: row.curatedSName
         ? { label: row.curatedSName, value: row.curatedSName }
         : undefined,
-      curatedLocation: { label: row.curatedLocation, value: row.curatedLocation },
+      curatedLocation: {
+        label: row.curatedLocation,
+        value: row.curatedLocation
+      },
       curatedDate: row.curatedDate,
       curatedDateFormat: DATE_FORMAT_OPTIONS[0].value,
-      curatedStatus: row.curatedStatus,
-      locationAccuracy: row.locationAccuracy
+      curatedStatus: row.curatedStatus
     }
   });
 
