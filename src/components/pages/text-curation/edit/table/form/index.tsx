@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import FormDebugger from "@components/form/debugger";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
