@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { SelectInputField } from "@components/form/select";
+import { RadioInputField } from "@components/form/radio";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -12,11 +12,12 @@ export default function EditStatus() {
 
   return (
     <Box px={4} mb={6}>
-      <SelectInputField
+      <RadioInputField
         name="curatedStatus"
         label={t("text-curation:curated.status")}
         options={CURATION_OPTIONS}
         mb={4}
+        isInline={false}
       />
     </Box>
   );

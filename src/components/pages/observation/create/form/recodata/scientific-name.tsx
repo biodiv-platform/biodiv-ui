@@ -2,7 +2,6 @@ import { Badge, Box, Image, Stack, Text } from "@chakra-ui/react";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
-import SCI_RANK from "@static/sci-rank";
 import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
@@ -48,8 +47,10 @@ export const onScientificNameQuery = async (q, valueKey = "id") => {
     groupId: o.group_id,
     acceptedNames:
       Array.isArray(o.accepted_names) && o.accepted_names.length ? o.accepted_names[0] : "",
-    rank: SCI_RANK[o.rank || 0],
+    rank: o.rank,
     group: getLocalIcon(o.group_name),
-    raw: o
+    raw: o,
+    taxonId: o.id,
+    hierarchy: o.hierarchy
   }));
 };

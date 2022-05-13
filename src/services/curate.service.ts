@@ -44,3 +44,19 @@ export const axUpdateDataset = async (payload) => {
     return { success: false, data: {} };
   }
 };
+
+export const axGetPeliasAutocompleteLocations = async (text) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/pelias/autocomplete`, {
+      params: { text: text }
+    });
+    return data.map((l) => ({
+      label: l.label,
+      value: l.label,
+      coordinates: l.coordinates,
+      locationAccuracy: l.locationAccuracy
+    }));
+  } catch (e) {
+    return { succces: false, data: [] };
+  }
+};

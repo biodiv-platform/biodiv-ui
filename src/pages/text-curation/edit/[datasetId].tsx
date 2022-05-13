@@ -1,10 +1,14 @@
 import { throwUnauthorized } from "@components/auth/auth-redirect";
-import CurateEditPageComponent from "@components/pages/text-curation/edit";
 import { CurateEditProvider } from "@components/pages/text-curation/edit/use-curate-edit";
 import { Role } from "@interfaces/custom";
 import { axShowDataset } from "@services/curate.service";
 import { getParsedUser, hasAccess } from "@utils/auth";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const CurateEditPageComponent = dynamic(() => import("@components/pages/text-curation/edit"), {
+  ssr: false
+});
 
 export default function CurateEditPage({ data, datasetId, canEdit }) {
   return (
