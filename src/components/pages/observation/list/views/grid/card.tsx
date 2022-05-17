@@ -10,7 +10,7 @@ import React from "react";
 
 export interface ObservationMinList {
   o: ObservationListMinimalData;
-  canEdit: boolean;
+  canEdit:boolean;
   getCheckboxProps?: (props?: any | undefined) => {
     [x: string]: any;
   };
