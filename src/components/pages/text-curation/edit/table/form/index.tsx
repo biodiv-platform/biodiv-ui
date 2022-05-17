@@ -32,7 +32,10 @@ export default function EditRowForm({ row }) {
       curatedSName: row.curatedSName
         ? { label: row.curatedSName, value: row.curatedSName }
         : undefined,
-      curatedLocation: row.curatedLocation,
+      curatedLocation: {
+        label: row.curatedLocation,
+        value: row.curatedLocation
+      },
       curatedDate: row.curatedDate,
       curatedDateFormat: DATE_FORMAT_OPTIONS[0].value,
       curatedStatus: row.curatedStatus
