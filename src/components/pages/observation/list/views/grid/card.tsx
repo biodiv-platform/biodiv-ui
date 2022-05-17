@@ -2,24 +2,22 @@ import { Badge, Box, Checkbox, Heading, Image, Link, Text } from "@chakra-ui/rea
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import ShadowedUser from "@components/pages/common/shadowed-user";
-import { Role } from "@interfaces/custom";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React from "react";
 
 export interface ObservationMinList {
   o: ObservationListMinimalData;
+  canEdit: boolean;
   getCheckboxProps?: (props?: any | undefined) => {
     [x: string]: any;
   };
 }
 
-export default function GridViewCard({ o, getCheckboxProps }: ObservationMinList) {
+export default function GridViewCard({ o, getCheckboxProps, canEdit }: ObservationMinList) {
   const { t } = useTranslation();
-  const [canEdit] = useState(hasAccess([Role.Admin, Role.UsergroupFounder, Role.UsergroupExpert]));
 
   return (
     <Box className="hover-box fade">
