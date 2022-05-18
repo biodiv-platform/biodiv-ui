@@ -1,6 +1,7 @@
 import SpeciesListPageComponent from "@components/pages/species/list";
 import { SpeciesListProvider } from "@components/pages/species/list/use-species-list";
 import SITE_CONFIG from "@configs/site-config";
+import { axGetObservationListConfig } from "@services/observation.service";
 import {
   axGetAllFieldsMeta,
   axGetAllTraitsMeta,
@@ -13,9 +14,17 @@ import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
-function SpeciesListPage({ speciesData, species, traits, fieldsMeta, initialFilterParams }) {
+function SpeciesListPage({
+  listConfig,
+  speciesData,
+  species,
+  traits,
+  fieldsMeta,
+  initialFilterParams
+}) {
   return (
     <SpeciesListProvider
+      {...listConfig}
       speciesData={speciesData}
       traits={traits}
       species={species}
@@ -49,6 +58,9 @@ export const getServerSideProps = async (ctx) => {
   const { data: traits } = await axGetAllTraitsMeta();
 
   const { data: fieldsMeta } = await axGetAllFieldsMeta({ langId });
+
+  const { data: listConfig } = await axGetObservationListConfig();
+
   return {
     props: {
       speciesData: {
@@ -60,7 +72,8 @@ export const getServerSideProps = async (ctx) => {
       species,
       traits,
       fieldsMeta,
-      initialFilterParams
+      initialFilterParams,
+      listConfig
     }
   };
 };

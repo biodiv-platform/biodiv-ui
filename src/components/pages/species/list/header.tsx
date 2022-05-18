@@ -1,4 +1,5 @@
 import { Box, Flex, Select, Stack, Tab, TabList, Tabs, Text } from "@chakra-ui/react";
+import BulkMapperHeader from "@components/pages/common/bulk-mapper";
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
 import { sortByOptions } from "@static/species";
@@ -22,7 +23,8 @@ export const viewTabs = [
 ];
 
 export default function ListHeader() {
-  const { filter, setFilter, speciesData } = useSpeciesList();
+  const { bulkSpeciesIds, speciesData, filter, setFilter, onOpen, selectAll, handleBulkCheckbox } =
+    useSpeciesList();
   const { t } = useTranslation();
 
   const handleOnSort = (e) => {
@@ -38,6 +40,11 @@ export default function ListHeader() {
       _draft.f.offset = 0;
       _draft.f.view = viewTabs[index].key;
     });
+  };
+
+  const handleSelectAll = () => {
+    alert(`${speciesData.n} ${t("species:select_all")}`);
+    handleBulkCheckbox("selectAll");
   };
 
   return (
@@ -87,6 +94,15 @@ export default function ListHeader() {
           </Box>
         </Stack>
       </Flex>
+      <Stack mb={4} isInline justifyContent="flex-end">
+        <BulkMapperHeader
+          selectAll={selectAll}
+          bulkIds={bulkSpeciesIds}
+          handleSelectAll={handleSelectAll}
+          handleBulkCheckbox={handleBulkCheckbox}
+          openBulkMappingModal={onOpen}
+        />
+      </Stack>
     </>
   );
 }
