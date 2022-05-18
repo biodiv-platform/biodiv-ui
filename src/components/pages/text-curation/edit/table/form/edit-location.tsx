@@ -2,12 +2,16 @@ import { Box, Button, HStack, Tag } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
-import { nanoid } from "nanoid";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import MapSuggedtedLocations from "./map-locations";
 
 export default function LocationEdit({ row }) {
+  // const MapWithNoSSR = dynamic(() => import("./map-locations"), {
+  //   ssr: false
+  // });
   const { t } = useTranslation();
   const hForm = useFormContext();
   const locationRef: any = useRef(null);
@@ -83,12 +87,14 @@ export default function LocationEdit({ row }) {
         />
       </Box>
 
+      <MapSuggedtedLocations />
+
       {row.peliasLocations.map((suggestion: any) => (
         <Button
           variant="outline"
           size="xs"
           bg="blue.50"
-          key={nanoid()}
+          key={suggestion.coordinates.toString()}
           colorScheme="blue"
           borderRadius="3xl"
           onClick={() => onTagSelect(suggestion)}
