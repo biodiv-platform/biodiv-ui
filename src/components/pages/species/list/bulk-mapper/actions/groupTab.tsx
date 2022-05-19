@@ -1,13 +1,14 @@
 import { Box, Button, Flex, HStack, Input } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CheckBoxItems from "@components/pages/observation/create/form/user-groups/checkbox";
 import { bulkActions } from "@components/pages/observation/list/bulk-mapper";
-import { axGetObservationMapData } from "@services/observation.service";
+import { axGetSpeciesList } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+
+import useSpeciesList, { deconstructSpeciesFieldFilter } from "../../use-species-list";
 
 export default function GroupPost() {
   const { t } = useTranslation();
@@ -17,32 +18,31 @@ export default function GroupPost() {
     authorizedUserGroupList: groups,
     filter,
     selectAll,
-    bulkObservationIds
-  } = useObservationFilter();
+    bulkSpeciesIds
+  } = useSpeciesList();
   const [selectedGroups, setSelectedGroups] = useState<any>([]);
   const [filterGroups, setFilterGroups] = useState<any>(groups);
 
   const handleOnSave = async (bulkAction) => {
+    const { view, description, ...rest } = filter.f;
     const params = {
-      ...filter,
+      ...rest,
+      ...deconstructSpeciesFieldFilter(description),
       selectAll,
       view: "bulkMapping",
       bulkUsergroupIds: selectedGroups?.toString() || "",
-      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
+      bulkSpeciesIds: selectAll ? "" : bulkSpeciesIds?.toString(),
       bulkAction
     };
 
-    const { success } = await axGetObservationMapData(
-      params,
-      filter?.location ? { location: filter.location } : {},
-      true
-    );
+    const { success } = await axGetSpeciesList(params, true);
+
     if (success) {
       notification(t("observation:bulk_action.success"), NotificationType.Success);
     } else {
       notification(t("observation:bulk_action.failure"), NotificationType.Error);
     }
-    router.push("/observation/list", true, { ...filter }, true);
+    router.push("/species/list", true, { ...filter.f }, true);
 
     onClose();
   };

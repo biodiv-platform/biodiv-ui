@@ -17,6 +17,7 @@ interface BasicTableProps {
   size?;
   translateHeader?: boolean;
   tableStyle?: React.CSSProperties;
+  getCheckboxProps?: any;
   isSelectable?;
   onSelectionChange?;
 }
@@ -41,7 +42,8 @@ export function BasicTable({
   size,
   translateHeader,
   isSelectable,
-  onSelectionChange
+  onSelectionChange,
+  getCheckboxProps
 }: BasicTableProps) {
   const { t } = useTranslation();
 
@@ -69,7 +71,7 @@ export function BasicTable({
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state } = useTable(
-    { columns, data },
+    { columns, data, getCheckboxProps },
     useSortBy,
     ...tableProps
   );

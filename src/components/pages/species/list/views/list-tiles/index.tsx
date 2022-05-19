@@ -7,7 +7,7 @@ import useSpeciesList from "../../use-species-list";
 import GridViewCard from "./card";
 
 export default function SpeciesList() {
-  const { speciesData, nextPage } = useSpeciesList();
+  const { speciesData, nextPage, getCheckboxProps } = useSpeciesList();
 
   return (
     <InfiniteScroll
@@ -19,7 +19,7 @@ export default function SpeciesList() {
     >
       <SimpleGrid columns={{ base: 1, md: 5 }} spacing={4}>
         {speciesData.l.map((o) => (
-          <GridViewCard key={o.id} o={o} />
+          <GridViewCard getCheckboxProps={getCheckboxProps} key={o.id} o={o} />
         ))}
       </SimpleGrid>
     </InfiniteScroll>
