@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React from "react";
 import { Marker, Popup } from "react-leaflet";
 import { MapContainer } from "react-leaflet";
 import { TileLayer } from "react-leaflet";

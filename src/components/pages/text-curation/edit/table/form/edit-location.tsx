@@ -2,10 +2,10 @@ import { Box, Button, HStack, Tag } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
-import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+
 import MapSuggedtedLocations from "./map-locations";
 
 export default function LocationEdit({ row }) {
