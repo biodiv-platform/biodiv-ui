@@ -121,8 +121,8 @@ export default function ScientificNameEdit({ row }) {
         </Button>
       ))}
       <RadioInputField
-        name="valid"
-        label="Validity of scientific names"
+        name="isValid"
+        label="Validity of scientific name"
         options={validityOptions.map((v) => ({ label: v, value: v == "Valid" ? "true" : "false" }))}
         mb={4}
         isInline={false}
