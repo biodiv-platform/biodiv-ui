@@ -1,17 +1,17 @@
-import { Box, Button, HStack, Tag } from "@chakra-ui/react";
+import { Box, Button, HStack, Input, Tag, VStack } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-import MapSuggedtedLocations from "./map-locations";
-
 export default function LocationEdit({ row }) {
-  // const MapWithNoSSR = dynamic(() => import("./map-locations"), {
-  //   ssr: false
-  // });
+  const MapWithNoSSR = dynamic(() => import("./map-locations"), {
+    ssr: false
+  });
   const { t } = useTranslation();
   const hForm = useFormContext();
   const locationRef: any = useRef(null);
@@ -31,6 +31,7 @@ export default function LocationEdit({ row }) {
     setLatitude(value.coordinates[1]);
     setlongitude(value.coordinates[0]);
     setLocationAccuracy(value.locationAccuracy);
+
     locationRef.current.onChange(
       {
         value: value.label,
@@ -59,6 +60,15 @@ export default function LocationEdit({ row }) {
     setLocationAccuracy(value);
   };
 
+  const handleLonChange = (event) => {
+    setlongitude(event.target.value);
+    hForm.setValue("longitude", event.target.value);
+  };
+  const handleLatChange = (event) => {
+    setLatitude(event.target.value);
+    hForm.setValue("latitude", event.target.value);
+  };
+
   return (
     <Box p={4} mb={4}>
       <SelectAsyncInputField
@@ -78,16 +88,36 @@ export default function LocationEdit({ row }) {
           {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
           {locationAccuracy && <Tag>{`accuracy : ${locationAccuracy}`}</Tag>}
         </HStack>
+
+        <HStack mb={2}>
+          <VStack align="flex-start">
+            <Text>Longitude</Text>
+            <Input value={longitude} onChange={handleLonChange} placeholder="longitude" size="md" />
+          </VStack>
+
+          <VStack align="flex-start">
+            <Text>Latitude</Text>
+            <Input value={latitude} onChange={handleLatChange} placeholder="longitude" size="md" />
+          </VStack>
+        </HStack>
+
         <SelectInputField
+          shouldPortal={true}
           name="locationAccuracy"
           label="Location accuracy"
           options={accuracyOptions.map((o) => ({ label: o, value: o }))}
           onChangeCallback={handleOnOptionSelect}
-          mb={0}
         />
       </Box>
 
-      <MapSuggedtedLocations />
+      <MapWithNoSSR
+        row={row}
+        setLatitude={setLatitude}
+        setLongitude={setlongitude}
+        setLocationAccuracy={setLocationAccuracy}
+        hForm={hForm}
+        locationRef={locationRef}
+      />
 
       {row.peliasLocations.map((suggestion: any) => (
         <Button

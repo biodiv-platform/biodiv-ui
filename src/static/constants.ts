@@ -100,3 +100,12 @@ export const RESOURCE_TYPE = {
 export const APP_VERSION = packageJson.version;
 
 export const MENU_PORTAL_TARGET = isBrowser ? document.body : undefined;
+
+export const LEAFLET_MARKER_ICON:any = {
+  iconRetinaUrl: "/next-assets/marker-default@2x.png",
+  iconUrl: "/next-assets/marker-default.png",
+  iconSize: [30, 70],
+  shadowSize: [0, 0],
+  shadowAnchor: [0, 0],
+  popupAnchor: [3, -40],
+}
