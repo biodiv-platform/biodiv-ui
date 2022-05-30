@@ -3,6 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { Box } from "@chakra-ui/react";
 import { LEAFLET_MARKER_ICON } from "@static/constants";
 import L from "leaflet";
+import { LatLngBoundsExpression } from "leaflet";
 import React from "react";
 import { Marker, Tooltip } from "react-leaflet";
 import { MapContainer } from "react-leaflet";
@@ -45,13 +46,24 @@ const MapSuggedtedLocations = ({
   hForm,
   locationRef
 }) => {
+  const allLatitudes = row.peliasLocations
+    ? row.peliasLocations.map((suggestion) => suggestion.coordinates[1])
+    : [];
+  const allLongitudes = row.peliasLocations
+    ? row.peliasLocations.map((suggestion) => suggestion.coordinates[0])
+    : [];
+  const mapBounds: LatLngBoundsExpression = [
+    [Math.min(...allLatitudes) - 1, Math.min(...allLongitudes) - 1],
+    [Math.max(...allLatitudes) + 1, Math.max(...allLongitudes) + 1]
+  ];
   return (
     <Box>
       {row.peliasLocations && (
         <Box position="relative" h={500} overflow="hidden" mb={5} borderRadius="md">
           <MapContainer
+            bounds={mapBounds}
             key="map"
-            center={[20.5937, 78.9629]}
+            // center={[20.5937, 78.9629]}
             zoom={4}
             scrollWheelZoom={true}
             style={{ height: "100%", width: "100%" }}
