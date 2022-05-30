@@ -1,10 +1,12 @@
 import { Box, Button } from "@chakra-ui/react";
 import { HStack, Tag } from "@chakra-ui/react";
+import { RadioInputField } from "@components/form/radio";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
+import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -15,6 +17,8 @@ export default function ScientificNameEdit({ row }) {
   const { t } = useTranslation();
   const hForm = useFormContext();
   const scientificRef: any = useRef(null);
+
+  const validityOptions = ["Not validated", "Validated", "Invalid"];
 
   const initialBreadCrumbs = row.hierarchy.map((v) => ({
     id: v.taxon_id,
@@ -100,12 +104,13 @@ export default function ScientificNameEdit({ row }) {
           )}
         </HStack>
       </Box>
+
       {row.taxonomyMatchedNames.map((suggestion) => (
         <Button
           variant="outline"
           size="xs"
           bg="blue.50"
-          key={suggestion.taxonId}
+          key={nanoid()}
           colorScheme="blue"
           borderRadius="3xl"
           onClick={() => onTagSelect(suggestion)}
@@ -115,6 +120,13 @@ export default function ScientificNameEdit({ row }) {
           {suggestion.fullName}
         </Button>
       ))}
+      <RadioInputField
+        name="validatedStatus"
+        label="Validity of scientific name"
+        options={validityOptions.map((v) => ({ label: v, value: v }))}
+        mb={4}
+        isInline={false}
+      />
     </Box>
   );
 }
