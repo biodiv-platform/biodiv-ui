@@ -39,7 +39,7 @@ export default function EditRowForm({ row }) {
       curatedDate: row.curatedDate,
       curatedDateFormat: DATE_FORMAT_OPTIONS[0].value,
       curatedStatus: row.curatedStatus,
-      validatedStatus:row.validatedStatus
+      validatedStatus: row.validatedStatus
     }
   });
 

@@ -1,6 +1,6 @@
 import "leaflet/dist/leaflet.css";
 
-import { Box } from "@chakra-ui/react";
+import { Box, Collapse } from "@chakra-ui/react";
 import { LEAFLET_MARKER_ICON } from "@static/constants";
 import L from "leaflet";
 import { LatLngBoundsExpression } from "leaflet";
@@ -44,7 +44,8 @@ const MapSuggedtedLocations = ({
   setLongitude,
   setLocationAccuracy,
   hForm,
-  locationRef
+  locationRef,
+  isOpen
 }) => {
   const allLatitudes = row.peliasLocations
     ? row.peliasLocations.map((suggestion) => suggestion.coordinates[1])
@@ -58,47 +59,49 @@ const MapSuggedtedLocations = ({
   ];
   return (
     <Box>
-      {row.peliasLocations && (
-        <Box position="relative" h={500} overflow="hidden" mb={5} borderRadius="md">
-          <MapContainer
-            bounds={mapBounds}
-            key="map"
-            // center={[20.5937, 78.9629]}
-            zoom={4}
-            scrollWheelZoom={true}
-            style={{ height: "100%", width: "100%" }}
-          >
-            <TileLayer
-              key="tile"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {row.peliasLocations.map((suggestion) => (
-              <Marker
-                key={suggestion.coordinates.toString()}
-                eventHandlers={{
-                  click: () => {
-                    onMarkerClickHandler(
-                      row,
-                      suggestion,
-                      setLatitude,
-                      setLongitude,
-                      setLocationAccuracy,
-                      hForm,
-                      locationRef
-                    );
-                  }
-                }}
-                riseOnHover={true}
-                position={[suggestion.coordinates[1], suggestion.coordinates[0]]}
-                icon={L.icon(LEAFLET_MARKER_ICON)}
-              >
-                <Tooltip>{suggestion.label}</Tooltip>
-              </Marker>
-            ))}
-          </MapContainer>
-        </Box>
-      )}
+      <Collapse in={isOpen}>
+        {row.peliasLocations && (
+          <Box position="relative" h={500} overflow="hidden" mb={5} borderRadius="md">
+            <MapContainer
+              bounds={mapBounds}
+              key="map"
+              // center={[20.5937, 78.9629]}
+              zoom={4}
+              scrollWheelZoom={true}
+              style={{ height: "100%", width: "100%" }}
+            >
+              <TileLayer
+                key="tile"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {row.peliasLocations.map((suggestion) => (
+                <Marker
+                  key={suggestion.coordinates.toString()}
+                  eventHandlers={{
+                    click: () => {
+                      onMarkerClickHandler(
+                        row,
+                        suggestion,
+                        setLatitude,
+                        setLongitude,
+                        setLocationAccuracy,
+                        hForm,
+                        locationRef
+                      );
+                    }
+                  }}
+                  riseOnHover={true}
+                  position={[suggestion.coordinates[1], suggestion.coordinates[0]]}
+                  icon={L.icon(LEAFLET_MARKER_ICON)}
+                >
+                  <Tooltip>{suggestion.label}</Tooltip>
+                </Marker>
+              ))}
+            </MapContainer>
+          </Box>
+        )}
+      </Collapse>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Input, Tag, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Input, Tag, useDisclosure, VStack } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
@@ -12,6 +12,7 @@ export default function LocationEdit({ row }) {
   const MapWithNoSSR = dynamic(() => import("./map-locations"), {
     ssr: false
   });
+  const { isOpen, onToggle } = useDisclosure();
   const { t } = useTranslation();
   const hForm = useFormContext();
   const locationRef: any = useRef(null);
@@ -83,11 +84,12 @@ export default function LocationEdit({ row }) {
         isRaw={true}
       />
       <Box mb={4}>
-        <HStack spacing={4} mb={4}>
+        {/* <HStack spacing={4} mb={4}>
           {longitude && <Tag>{`longitude : ${longitude}`}</Tag>}
           {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
           {locationAccuracy && <Tag>{`accuracy : ${locationAccuracy}`}</Tag>}
-        </HStack>
+        </HStack> */}
+        {locationAccuracy && <Tag mb={4}>{`accuracy : ${locationAccuracy}`}</Tag>}
 
         <HStack mb={2}>
           <VStack align="flex-start">
@@ -101,14 +103,20 @@ export default function LocationEdit({ row }) {
           </VStack>
         </HStack>
 
-        <SelectInputField
-          shouldPortal={true}
-          name="locationAccuracy"
-          label="Location accuracy"
-          options={accuracyOptions.map((o) => ({ label: o, value: o }))}
-          onChangeCallback={handleOnOptionSelect}
-        />
+        <HStack mb={2}>
+          <SelectInputField
+            shouldPortal={true}
+            name="locationAccuracy"
+            label="Edit Location accuracy"
+            options={accuracyOptions.map((o) => ({ label: o, value: o }))}
+            onChangeCallback={handleOnOptionSelect}
+          />
+        </HStack>
       </Box>
+
+      <Button variant="ghost" size="sm" onClick={onToggle} mb={4}>
+        {isOpen ? "Collapse map" : "Expand map"}
+      </Button>
 
       <MapWithNoSSR
         row={row}
@@ -117,6 +125,7 @@ export default function LocationEdit({ row }) {
         setLocationAccuracy={setLocationAccuracy}
         hForm={hForm}
         locationRef={locationRef}
+        isOpen={isOpen}
       />
 
       {row.peliasLocations.map((suggestion: any) => (
