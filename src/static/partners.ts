@@ -108,5 +108,10 @@ export default [
     image: "act.webp",
     link: "//www.aeonct.org",
     name: "Aeon Charitable Trust (ACT)"
+  },
+  {
+    image: "nature-mates.webp",
+    link: "//www.naturematesindia.org",
+    name: "Nature Mates"
   }
 ];
