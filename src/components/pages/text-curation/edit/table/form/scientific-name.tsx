@@ -18,7 +18,7 @@ export default function ScientificNameEdit({ row }) {
   const hForm = useFormContext();
   const scientificRef: any = useRef(null);
 
-  const validityOptions = ["Valid", "Invalid"];
+  const validityOptions = ["Not validated", "Validated", "Invalid"];
 
   const initialBreadCrumbs = row.hierarchy.map((v) => ({
     id: v.taxon_id,
@@ -121,9 +121,9 @@ export default function ScientificNameEdit({ row }) {
         </Button>
       ))}
       <RadioInputField
-        name="isValid"
+        name="validatedStatus"
         label="Validity of scientific name"
-        options={validityOptions.map((v) => ({ label: v, value: v == "Valid" ? "true" : "false" }))}
+        options={validityOptions.map((v) => ({ label: v, value: v }))}
         mb={4}
         isInline={false}
       />
