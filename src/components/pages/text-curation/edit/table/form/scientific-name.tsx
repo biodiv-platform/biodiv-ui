@@ -67,6 +67,21 @@ export default function ScientificNameEdit({ row }) {
 
   return (
     <Box p={4} pb={0} mb={6}>
+      {row.taxonomyMatchedNames.map((suggestion) => (
+        <Button
+          variant="outline"
+          size="xs"
+          bg="blue.50"
+          key={nanoid()}
+          colorScheme="blue"
+          borderRadius="3xl"
+          onClick={() => onTagSelect(suggestion)}
+          mb={2}
+          mr={2}
+        >
+          {suggestion.fullName}
+        </Button>
+      ))}
       <SelectAsyncInputField
         resetOnSubmit={false}
         name="curatedSName"
@@ -105,21 +120,6 @@ export default function ScientificNameEdit({ row }) {
         </HStack>
       </Box>
 
-      {row.taxonomyMatchedNames.map((suggestion) => (
-        <Button
-          variant="outline"
-          size="xs"
-          bg="blue.50"
-          key={nanoid()}
-          colorScheme="blue"
-          borderRadius="3xl"
-          onClick={() => onTagSelect(suggestion)}
-          mb={2}
-          mr={2}
-        >
-          {suggestion.fullName}
-        </Button>
-      ))}
       <RadioInputField
         name="validatedStatus"
         label="Validity of scientific name"

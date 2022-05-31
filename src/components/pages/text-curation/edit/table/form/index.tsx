@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
@@ -55,10 +55,30 @@ export default function EditRowForm({ row }) {
     <Box borderLeft="1px" borderColor="gray.200" h="full">
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <ScientificNameEdit row={row} />
-          <LocationEdit row={row} />
-          <DateEdit row={row} />
-          <EditStatus />
+          <Box border="solid" mb={4}>
+            <Heading ml={4} as="h2">
+              Taxonomic Data
+            </Heading>
+            <ScientificNameEdit row={row} />
+          </Box>
+
+          <Box border="solid" mb={4}>
+            <Heading ml={4} as="h2">
+              Spacial Data
+            </Heading>
+            <LocationEdit row={row} />
+          </Box>
+
+          <Box border="solid" mb={4}>
+            <Heading ml={4} as="h2" mb={4}>
+              Temporal Data
+            </Heading>
+            <DateEdit row={row} />
+          </Box>
+
+          <Box border="solid" mb={4}>
+            <EditStatus />
+          </Box>
           <Box p={4}>
             <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
           </Box>

@@ -72,52 +72,9 @@ export default function LocationEdit({ row }) {
 
   return (
     <Box p={4} mb={4}>
-      <SelectAsyncInputField
-        resetOnSubmit={false}
-        name="curatedLocation"
-        label={t("text-curation:curated.location")}
-        multiple={false}
-        mb={3}
-        onQuery={axGetPeliasAutocompleteLocations}
-        onChange={handleOnChange}
-        selectRef={locationRef}
-        isRaw={true}
-      />
-      <Box mb={4}>
-        {/* <HStack spacing={4} mb={4}>
-          {longitude && <Tag>{`longitude : ${longitude}`}</Tag>}
-          {latitude && <Tag>{`latitude : ${latitude}`}</Tag>}
-          {locationAccuracy && <Tag>{`accuracy : ${locationAccuracy}`}</Tag>}
-        </HStack> */}
-        {locationAccuracy && <Tag mb={4}>{`accuracy : ${locationAccuracy}`}</Tag>}
-
-        <HStack mb={2}>
-          <VStack align="flex-start">
-            <Text>Longitude</Text>
-            <Input value={longitude} onChange={handleLonChange} placeholder="longitude" size="md" />
-          </VStack>
-
-          <VStack align="flex-start">
-            <Text>Latitude</Text>
-            <Input value={latitude} onChange={handleLatChange} placeholder="longitude" size="md" />
-          </VStack>
-        </HStack>
-
-        <HStack mb={2}>
-          <SelectInputField
-            shouldPortal={true}
-            name="locationAccuracy"
-            label="Edit Location accuracy"
-            options={accuracyOptions.map((o) => ({ label: o, value: o }))}
-            onChangeCallback={handleOnOptionSelect}
-          />
-        </HStack>
-      </Box>
-
-      <Button variant="ghost" size="sm" onClick={onToggle} mb={4}>
-        {isOpen ? "Collapse map" : "Expand map"}
+      <Button variant="solid" colorScheme="teal" size="sm" onClick={onToggle} mb={4}>
+        {isOpen ? "Collapse map" : "Show locations on map"}
       </Button>
-
       <MapWithNoSSR
         row={row}
         setLatitude={setLatitude}
@@ -144,6 +101,42 @@ export default function LocationEdit({ row }) {
           {" " + "(" + suggestion.coordinates[0] + ", " + suggestion.coordinates[1] + ")"}
         </Button>
       ))}
+      <SelectAsyncInputField
+        resetOnSubmit={false}
+        name="curatedLocation"
+        label={t("text-curation:curated.location")}
+        multiple={false}
+        mb={3}
+        onQuery={axGetPeliasAutocompleteLocations}
+        onChange={handleOnChange}
+        selectRef={locationRef}
+        isRaw={true}
+      />
+      <Box mb={4}>
+        {locationAccuracy && <Tag mb={4}>{`accuracy : ${locationAccuracy}`}</Tag>}
+
+        <HStack mb={2}>
+          <VStack align="flex-start">
+            <Text>Longitude</Text>
+            <Input value={longitude} onChange={handleLonChange} placeholder="longitude" size="md" />
+          </VStack>
+
+          <VStack align="flex-start">
+            <Text>Latitude</Text>
+            <Input value={latitude} onChange={handleLatChange} placeholder="longitude" size="md" />
+          </VStack>
+        </HStack>
+
+        <HStack mb={2}>
+          <SelectInputField
+            shouldPortal={true}
+            name="locationAccuracy"
+            label="Edit Location accuracy"
+            options={accuracyOptions.map((o) => ({ label: o, value: o }))}
+            onChangeCallback={handleOnOptionSelect}
+          />
+        </HStack>
+      </Box>
     </Box>
   );
 }
