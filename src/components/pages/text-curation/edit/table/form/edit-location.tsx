@@ -72,7 +72,15 @@ export default function LocationEdit({ row }) {
 
   return (
     <Box p={4} mb={4}>
-      <Button variant="solid" colorScheme="teal" size="sm" onClick={onToggle} mb={4}>
+      <Button
+        variant="solid"
+        colorScheme="gray"
+        size="sm"
+        onClick={onToggle}
+        mb={4}
+        borderColor="gray.300"
+        borderWidth="medium"
+      >
         {isOpen ? "Collapse map" : "Show locations on map"}
       </Button>
       <MapWithNoSSR

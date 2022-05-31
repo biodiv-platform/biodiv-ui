@@ -55,28 +55,31 @@ export default function EditRowForm({ row }) {
     <Box borderLeft="1px" borderColor="gray.200" h="full">
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <Box border="solid" mb={4}>
-            <Heading ml={4} as="h2">
+          <Box borderColor="gray.300" mb={4} borderWidth="thin">
+            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
               Taxonomic Data
             </Heading>
             <ScientificNameEdit row={row} />
           </Box>
 
-          <Box border="solid" mb={4}>
-            <Heading ml={4} as="h2">
-              Spacial Data
+          <Box borderColor="gray.300" mb={4} borderWidth="thin">
+            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
+              Spatial Data
             </Heading>
             <LocationEdit row={row} />
           </Box>
 
-          <Box border="solid" mb={4}>
-            <Heading ml={4} as="h2" mb={4}>
+          <Box borderColor="gray.300" mb={4} borderWidth="thin">
+            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
               Temporal Data
             </Heading>
             <DateEdit row={row} />
           </Box>
 
-          <Box border="solid" mb={4}>
+          <Box borderColor="gray.300" mb={4} borderWidth="thin">
+            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
+              Curated Status
+            </Heading>
             <EditStatus />
           </Box>
           <Box p={4}>
