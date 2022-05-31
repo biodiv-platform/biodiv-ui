@@ -20,13 +20,14 @@ const NakshaMapboxList: any = dynamic(
   }
 );
 
+const defaultViewState = getMapCenter(3.1);
+
 export default function MapPageComponent({ defaultLayers }) {
-  const defaultViewState = React.useMemo(() => getMapCenter(3.1), []);
   const { t, lang } = useTranslation();
   const { user } = useGlobalState();
   const toast = useToast();
   const isAdmin = hasAccess([Role.Admin]);
-  const [selectedLayers, setSelectedLayers] = useState(defaultLayers);
+  const [selectedLayers, setSelectedLayers] = useState(defaultLayers || []);
 
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>
