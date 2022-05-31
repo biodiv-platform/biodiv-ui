@@ -34,20 +34,22 @@ export const axSaveLandscapeField = async (payload) => {
   }
 };
 
-export const axUploadEditorResource = (blobInfo, success, failure) => {
-  const formData = new FormData();
-  formData.append("upload", blobInfo.blob(), blobInfo.filename());
-  formData.append("hash", nanoid());
-  formData.append("directory", "landscape");
+export const axUploadEditorResource = (blobInfo) => {
+  return new Promise((success, failure) => {
+    const formData = new FormData();
+    formData.append("upload", blobInfo.blob(), blobInfo.filename());
+    formData.append("hash", nanoid());
+    formData.append("directory", "landscape");
 
-  http
-    .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, { headers: formDataHeaders })
-    .then((r) => {
-      success(`${ENDPOINT.FILES}/get/raw/landscape${r.data.uri}`);
-    })
-    .catch(() => {
-      failure("Error");
-    });
+    http
+      .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, { headers: formDataHeaders })
+      .then((r) => {
+        success(`${ENDPOINT.FILES}/get/raw/landscape${r.data.uri}`);
+      })
+      .catch(() => {
+        failure("Error");
+      });
+  });
 };
 
 export const axGetLandscapeList = async (params) => {
