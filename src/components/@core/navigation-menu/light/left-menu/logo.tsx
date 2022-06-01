@@ -6,11 +6,14 @@ import useGlobalState from "@hooks/use-global-state";
 import CrossIcon from "@icons/cross";
 import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense } from "react";
+import React from "react";
 
-const EditLinkButton = React.lazy(() => import("./edit-link-button"));
-const JoinUserGroup = React.lazy(() => import("@components/pages/group/common/join-group"));
+const EditLinkButton = dynamic(() => import("./edit-link-button"), { ssr: false });
+const JoinUserGroup = dynamic(() => import("@components/pages/group/common/join-group"), {
+  ssr: false
+});
 
 const Logo = styled.div`
   width: fit-content;
@@ -97,14 +100,14 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
         {isOpen ? <CrossIcon /> : <MenuIcon />}
       </button>
       {currentGroup.id && (
-        <Suspense fallback={null}>
+        <>
           <JoinUserGroup
             currentGroup={currentGroup}
             isCurrentGroupMember={isCurrentGroupMember}
             setIsCurrentGroupMember={setIsCurrentGroupMember}
           />
           <EditLinkButton label={t("header:group_edit")} />
-        </Suspense>
+        </>
       )}
     </Logo>
   );
