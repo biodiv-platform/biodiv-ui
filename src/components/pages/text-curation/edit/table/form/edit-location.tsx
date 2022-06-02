@@ -72,26 +72,31 @@ export default function LocationEdit({ row }) {
 
   return (
     <Box p={4} mb={4}>
-      <Button
-        variant="solid"
-        colorScheme="gray"
-        size="sm"
-        onClick={onToggle}
-        mb={4}
-        borderColor="gray.300"
-        borderWidth="medium"
-      >
-        {isOpen ? "Collapse map" : "Show locations on map"}
-      </Button>
-      <MapWithNoSSR
-        row={row}
-        setLatitude={setLatitude}
-        setLongitude={setlongitude}
-        setLocationAccuracy={setLocationAccuracy}
-        hForm={hForm}
-        locationRef={locationRef}
-        isOpen={isOpen}
-      />
+      {row.peliasLocations.length > 0 && (
+        <Box>
+          <Button
+            variant="solid"
+            colorScheme="gray"
+            size="sm"
+            onClick={onToggle}
+            mb={4}
+            borderColor="gray.300"
+            borderWidth="medium"
+          >
+            {isOpen ? "Collapse map" : "Show locations on map"}
+          </Button>
+
+          <MapWithNoSSR
+            row={row}
+            setLatitude={setLatitude}
+            setLongitude={setlongitude}
+            setLocationAccuracy={setLocationAccuracy}
+            hForm={hForm}
+            locationRef={locationRef}
+            isOpen={isOpen}
+          />
+        </Box>
+      )}
 
       {row.peliasLocations.map((suggestion: any) => (
         <Button
@@ -109,6 +114,8 @@ export default function LocationEdit({ row }) {
           {" " + "(" + suggestion.coordinates[0] + ", " + suggestion.coordinates[1] + ")"}
         </Button>
       ))}
+
+      {/* {hasMore ? <button onClick={handleLoadMore}>Load More</button> : <p>No more results</p>} */}
       <SelectAsyncInputField
         resetOnSubmit={false}
         name="curatedLocation"
