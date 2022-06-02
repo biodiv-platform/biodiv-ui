@@ -3,22 +3,24 @@ import http, { formDataHeaders, plainHttp } from "@utils/http";
 import { treeToFlat } from "@utils/pages.util";
 import { nanoid } from "nanoid";
 
-export const axUploadEditorPageResource = (blobInfo, success, failure) => {
-  const formData = new FormData();
-  formData.append("upload", blobInfo.blob(), blobInfo.filename());
-  formData.append("hash", nanoid());
-  formData.append("directory", "pages");
+export const axUploadEditorPageResource = async (blobInfo) => {
+  return new Promise((success, failure) => {
+    const formData = new FormData();
+    formData.append("upload", blobInfo.blob(), blobInfo.filename());
+    formData.append("hash", nanoid());
+    formData.append("directory", "pages");
 
-  http
-    .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
-      headers: formDataHeaders
-    })
-    .then((r) => {
-      success(`${ENDPOINT.FILES}/get/raw/pages${r.data.uri}`);
-    })
-    .catch(() => {
-      failure("Error");
-    });
+    http
+      .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
+        headers: formDataHeaders
+      })
+      .then((r) => {
+        success(`${ENDPOINT.FILES}/get/raw/pages${r.data.uri}`);
+      })
+      .catch(() => {
+        failure("Error");
+      });
+  });
 };
 
 export const axGetPageByID = async (pageId, format?) => {
