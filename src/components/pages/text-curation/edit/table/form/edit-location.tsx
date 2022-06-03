@@ -5,7 +5,7 @@ import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function LocationEdit({ row }) {
@@ -70,6 +70,22 @@ export default function LocationEdit({ row }) {
     hForm.setValue("latitude", event.target.value);
   };
 
+  const [listOfLocations, setListOfLocations] = useState([...row.peliasLocations.slice(0, 4)]);
+
+  const [hasMore, setHasMore] = useState(row.peliasLocations.length > 4);
+
+  const handleLoadMore = () => {
+    if (hasMore) {
+      const currentLength = listOfLocations.length;
+      const hasMoreLocations = currentLength < row.peliasLocations.length;
+      setHasMore(hasMoreLocations);
+      const nextResults = hasMoreLocations
+        ? row.peliasLocations.slice(currentLength, currentLength + 4)
+        : [];
+      setListOfLocations([...listOfLocations, ...nextResults]);
+    }
+  };
+
   return (
     <Box p={4} mb={4}>
       {row.peliasLocations.length > 0 && (
@@ -98,24 +114,30 @@ export default function LocationEdit({ row }) {
         </Box>
       )}
 
-      {row.peliasLocations.map((suggestion: any) => (
-        <Button
-          variant="outline"
-          size="xs"
-          bg="blue.50"
-          key={suggestion.coordinates.toString()}
-          colorScheme="blue"
-          borderRadius="3xl"
-          onClick={() => onTagSelect(suggestion)}
-          mb={2}
-          mr={2}
-        >
-          {suggestion.label}
-          {" " + "(" + suggestion.coordinates[0] + ", " + suggestion.coordinates[1] + ")"}
-        </Button>
-      ))}
+      <Box>
+        {listOfLocations.map((suggestion: any) => (
+          <Button
+            variant="outline"
+            size="xs"
+            bg="blue.50"
+            key={suggestion.coordinates.toString()}
+            colorScheme="blue"
+            borderRadius="3xl"
+            onClick={() => onTagSelect(suggestion)}
+            mb={2}
+            mr={2}
+          >
+            {suggestion.label}
+            {" " + "(" + suggestion.coordinates[0] + ", " + suggestion.coordinates[1] + ")"}
+          </Button>
+        ))}
+        {hasMore && (
+          <Button variant="link" onClick={handleLoadMore}>
+            Load more suggestions
+          </Button>
+        )}
+      </Box>
 
-      {/* {hasMore ? <button onClick={handleLoadMore}>Load More</button> : <p>No more results</p>} */}
       <SelectAsyncInputField
         resetOnSubmit={false}
         name="curatedLocation"
