@@ -80,10 +80,14 @@ export default function LocationEdit({ row }) {
       const hasMoreLocations = currentLength < row.peliasLocations.length;
       setHasMore(hasMoreLocations);
       const nextResults = hasMoreLocations
-        ? row.peliasLocations.slice(currentLength, currentLength + 4)
+        ? row.peliasLocations.slice(currentLength, row.peliasLocations.length)
         : [];
       setListOfLocations([...listOfLocations, ...nextResults]);
     }
+  };
+
+  const handleCollapse = () => {
+    setListOfLocations([...row.peliasLocations.slice(0, 4)]);
   };
 
   return (
@@ -131,9 +135,14 @@ export default function LocationEdit({ row }) {
             {" " + "(" + suggestion.coordinates[0] + ", " + suggestion.coordinates[1] + ")"}
           </Button>
         ))}
-        {hasMore && (
-          <Button variant="link" onClick={handleLoadMore}>
-            Load more suggestions
+        {listOfLocations.length < row.peliasLocations.length && (
+          <Button variant="link" onClick={handleLoadMore} color="blue.500">
+            Show all
+          </Button>
+        )}
+        {listOfLocations.length === row.peliasLocations.length && (
+          <Button variant="link" onClick={handleCollapse} color="blue.500">
+            Show fewer
           </Button>
         )}
       </Box>
