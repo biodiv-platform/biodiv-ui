@@ -46,21 +46,21 @@ export default function UploadProgress({ payload, data }) {
     ];
   }, [payload, data]);
 
-  const UploadContinue = () => (
-    <Button
-      as={Link}
-      href="/observation/create2"
-      colorScheme="blue"
-      isDisabled={count.done !== count.total}
-      rightIcon={<ArrowForwardIcon />}
-    >
-      {t("observation:continue")}
-    </Button>
-  );
-
   return (
     <div className="container mt">
-      <PageHeading actions={<UploadContinue />}>
+      <PageHeading
+        actions={
+          <Button
+            as={Link}
+            href="/observation/create2"
+            colorScheme="blue"
+            isDisabled={count.done !== count.total}
+            rightIcon={<ArrowForwardIcon />}
+          >
+            {t("observation:continue")}
+          </Button>
+        }
+      >
         {count.done === count.total
           ? count.failed > 0
             ? t("observation:saved")
