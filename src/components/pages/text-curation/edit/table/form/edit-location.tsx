@@ -5,7 +5,7 @@ import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function LocationEdit({ row }) {
