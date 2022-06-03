@@ -33,6 +33,10 @@ interface IDatePickerBoxProps {
 
 const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
 
+/**
+ * @deprecated use `<DatePickerNextField/>` instead
+ *
+ */
 export const DatePickerField = ({
   name,
   label,

@@ -26,7 +26,7 @@ interface ISpeciesDropzoneField {
 
 const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
   const { field, fieldState } = useController({ name });
-  const { observationAssets } = useObservationCreate();
+  const { observationAssets, addAssets } = useObservationCreate();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
@@ -46,7 +46,7 @@ const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
         isLazy={true}
       >
         <TabList mb={4} overflowX="auto" py={1}>
-          <Tab>✔️ {t("form:selected_media")}</Tab>
+          <Tab>✔️  {t("form:selected_media")}</Tab>
           <Tab>🖼️ {t("species:pull_media")}</Tab>
           <Tab>☁️ {t("form:my_uploads")}</Tab>
           <Tab>🎙️ {t("form:audio.title")}</Tab>
@@ -63,10 +63,10 @@ const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
             <MyUploads onDone={onSelectionDone} />
           </TabPanel>
           <TabPanel>
-            <AudioInput onDone={onSelectionDone} />
+            <AudioInput onDone={onSelectionDone} onSave={addAssets} />
           </TabPanel>
           <TabPanel>
-            <FromURL onDone={onSelectionDone} />
+            <FromURL onDone={onSelectionDone} onSave={addAssets} />
           </TabPanel>
         </TabPanels>
       </Tabs>

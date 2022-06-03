@@ -33,7 +33,7 @@ export const CheckboxField = ({
         onChange={(e) => onChange(e.target["checked"])}
         placeholder={label}
         onBlur={onBlur}
-        defaultIsChecked={value}
+        defaultChecked={value}
         isDisabled={disabled}
       >
         {children || label}

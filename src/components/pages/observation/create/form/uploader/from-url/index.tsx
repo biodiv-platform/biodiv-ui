@@ -9,13 +9,10 @@ import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
-import useObservationCreate from "../use-observation-resources";
-
-export default function FromURL({ onDone }) {
+export default function FromURL({ onDone, onSave }) {
   const { t } = useTranslation();
   const [resourceLink, setResourceLink] = useState<string>();
   const [thumbURL, setThumbURL] = useState<string>();
-  const { addAssets } = useObservationCreate();
 
   const handleOnChange = (e) => {
     setResourceLink(e.target.value);
@@ -27,7 +24,7 @@ export default function FromURL({ onDone }) {
       const { success, title } = await axGetYouTubeInfo(resourceLink);
       if (success) {
         const ID = nanoid();
-        await addAssets(
+        await onSave(
           [
             {
               hashKey: ID,
@@ -56,8 +53,7 @@ export default function FromURL({ onDone }) {
     <Box minH="22rem">
       <Input
         mb={4}
-        type="text"
-        id="youtube-link"
+        id="ytb-link"
         placeholder={t("form:youtube_placeholder")}
         value={resourceLink}
         onChange={handleOnChange}

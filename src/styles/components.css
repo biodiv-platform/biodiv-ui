@@ -145,3 +145,13 @@ button[role="tab"] {
   width: 0;
   overflow: hidden;
 }
+
+/* google autocomplete suggestions */
+.pac-container {
+  z-index: 9999;
+}
+
+.rsw-editor {
+  background: white;
+  min-height: 128px !important;
+}

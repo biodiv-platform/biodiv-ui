@@ -37,7 +37,7 @@ export const SwitchField = ({
         <Switch
           onBlur={field.onBlur}
           onChange={(e) => field.onChange(e.target["checked"])}
-          defaultIsChecked={field.value}
+          defaultChecked={field.value}
           isDisabled={disabled}
           color={color}
           name={name}

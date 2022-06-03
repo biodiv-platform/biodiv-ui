@@ -3,5 +3,8 @@ const nextTranslate = require("next-translate");
 
 module.exports = nextTranslate({
   concurrentFeatures: true,
-  experimental: { reactRoot: true }
+  experimental: {
+    legacyBrowsers: false,
+    browsersListForSwc: true
+  }
 });

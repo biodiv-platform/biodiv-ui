@@ -27,6 +27,13 @@ export interface SyncInfo {
   successMap: Record<string, unknown>;
 }
 
+interface SyncSingleObservationProps {
+  id?;
+  instant;
+  observation;
+  redirect?;
+}
+
 export default function OfflineSync() {
   const isOnline = useOnlineStatus();
   const { t } = useTranslation();
@@ -51,7 +58,12 @@ export default function OfflineSync() {
 
   const { currentGroup } = useGlobalState();
 
-  const trySyncSingleObservation = async ({ observation, instant, id = -1 }) => {
+  const trySyncSingleObservation = async ({
+    observation,
+    instant,
+    id = -1,
+    redirect = true
+  }: SyncSingleObservationProps) => {
     let idbID = id;
 
     if (instant) {
@@ -97,8 +109,10 @@ export default function OfflineSync() {
             }),
             NotificationType.Success
           );
-          emit(SYNC_SINGLE_OBSERVATION_DONE);
-          router.push(`/observation/show/${data.observation.id}`, true);
+          emit(SYNC_SINGLE_OBSERVATION_DONE, { observation, data });
+          if (redirect) {
+            router.push(`/observation/show/${data.observation.id}`, true);
+          }
         } else {
           setSyncInfo((_draft) => {
             _draft.successMap[idbID] = data.observation.id;
@@ -106,13 +120,13 @@ export default function OfflineSync() {
           });
         }
       } else {
-        emit(SYNC_SINGLE_OBSERVATION_ERROR);
+        emit(SYNC_SINGLE_OBSERVATION_ERROR, { observation });
         setSyncInfo((_draft) => {
           _draft.failed.push(idbID);
         });
       }
     } catch (e) {
-      emit(SYNC_SINGLE_OBSERVATION_ERROR);
+      emit(SYNC_SINGLE_OBSERVATION_ERROR, { observation });
       setSyncInfo((_draft) => {
         _draft.failed.push(idbID);
       });

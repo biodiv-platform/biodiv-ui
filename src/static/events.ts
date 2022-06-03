@@ -21,6 +21,10 @@ export const SPECIES_NAME_DELETE = "s_nm_del";
 export const SPECIES_NAME_PREFERRED = "s_nm_pref";
 export const SPECIES_NAME_PREFERRED_UPDATED = "s_nm_pref_updated";
 
+export const OBSERVATION_IMPORT_RESOURCE = "res_import";
+export const OBSERVATION_BULK_EDIT = "o_blk_edit";
+export const OBSERVATION_BULK_EDIT_DONE = "o_blk_edit_done";
+
 export const AUTHWALL = {
   INIT: "authwall_init",
   SUCCESS: "authwall_success",

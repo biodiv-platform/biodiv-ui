@@ -30,7 +30,7 @@ export default function FormDebugger() {
       <Box bg="red.100" p={4}>
         Errors
         {Object.entries(form?.formState?.errors || {})?.map(([name, { type, message }]) => (
-          <div key={message}>
+          <div key={message + name}>
             <b>{name}</b>: [{type}] <pre>{JSON.stringify(message, null, 2)}</pre>
           </div>
         ))}

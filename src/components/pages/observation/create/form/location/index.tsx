@@ -28,7 +28,7 @@ import CoordinatesInput from "./coordinates";
 import LocationMap from "./map";
 import useLastLocation from "./use-last-location";
 
-const LocationPicker = () => {
+const LocationPicker = ({ isRequired = true }) => {
   const form = useFormContext();
   const { t } = useTranslation();
   const { latitude: lat, longitude: lng, zoom: initialZoom } = useMemo(() => getMapCenter(4), []);
@@ -166,7 +166,7 @@ const LocationPicker = () => {
                   form.formState.errors[FK.longitude.name]) &&
                 true
               }
-              isRequired={true}
+              isRequired={isRequired}
             >
               <FormLabel htmlFor="places-search">
                 {FK.observedAt.label}

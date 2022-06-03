@@ -1,3 +1,4 @@
+import { createStandaloneToast } from "@chakra-ui/toast";
 import { UserGroupIbpExtended } from "@interfaces/custom";
 import { axGetTree } from "@services/pages.service";
 import { axCheckUserGroupMember } from "@services/usergroup.service";
@@ -37,6 +38,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [pages, setPages] = useState<any[]>([]);
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
   const { lang } = useTranslation();
+  const { ToastContainer } = createStandaloneToast();
 
   const languageId = useMemo(() => getLanguageId(lang)?.ID, [lang]);
   const isLoggedIn = useMemo(() => !!user.id, [user]);
@@ -85,7 +87,12 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
     [value, initialState, pages, user, isLoggedIn, isCurrentGroupMember, languageId]
   );
 
-  return <GlobalStateContext.Provider value={valueMemo}>{children}</GlobalStateContext.Provider>;
+  return (
+    <GlobalStateContext.Provider value={valueMemo}>
+      <ToastContainer />
+      {children}
+    </GlobalStateContext.Provider>
+  );
 };
 
 export default function useGlobalState() {

@@ -11,6 +11,7 @@ interface ISubmitButtonProps {
   mb?;
   w?;
   mt?;
+  mr?;
 }
 
 export const SubmitButton = ({
