@@ -1,13 +1,17 @@
 import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import { axListMyUploads, axRemoveMyUploads, axUploadObservationResource } from "@services/files.service";
-import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE, OBSERVATION_IMPORT_RESOURCE } from "@static/events";
+import {
+  axListMyUploads,
+  axRemoveMyUploads,
+  axUploadObservationResource
+} from "@services/files.service";
+import { OBSERVATION_IMPORT_RESOURCE } from "@static/events";
 import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS } from "@static/location";
 import { STORE } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { emit } from "react-gbus";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useIndexedDBStore } from "use-indexeddb";
@@ -181,35 +185,22 @@ export const ObservationCreate2Provider = ({
     await refreshDraftMediaFromIdb();
   };
 
-  const addToObservationAssets = async (hashKey) => {
-    const a = await getOneByIndex("hashKey", hashKey);
-
-    if (a?.dateCreated) {
-      emit(FORM_DATEPICKER_CHANGE + "observedOn", a?.dateCreated);
-    }
-    if (a?.latitude && a?.longitude) {
-      emit(EXIF_GPS_FOUND, { lat: a.latitude, lng: a.longitude });
-    }
-  };
-
   const addToDrafts = async (newMedia, addToObservation) => {
-    await Promise.all(newMedia.map((o) => add(o)));
-    await tryMediaSync();
+    for (const o of newMedia) {
+      await add(o);
 
-    if (addToObservation) {
-      const newHKs = newMedia.map((m) => {
-        addToObservationAssets(m.hashKey);
-        return m.hashKey;
-      });
-
-      setDraftDisabled([...draftDisabled, ...newHKs]);
+      const _odb = await getOneByIndex("hashKey", o.hashKey);
+      await uploadPendingMedia(_odb);
 
       const _draftList = await refreshDraftMediaFromIdb();
-      emit(
-        OBSERVATION_IMPORT_RESOURCE,
-        _draftList.filter((m) => newHKs.includes(m.hashKey))
-      );
+
+      if (addToObservation) {
+        setDraftDisabled([...draftDisabled, o.hashKey]);
+        emit(OBSERVATION_IMPORT_RESOURCE, [_draftList.find((m) => o.hashKey === m.hashKey)]);
+      }
     }
+
+    tryMediaSync();
   };
 
   const toggleDraftSelection = (hashKey, add) => {
@@ -230,10 +221,6 @@ export const ObservationCreate2Provider = ({
       notification(t("observation:delete_file.failed"), NotificationType.Error);
     }
   };
-
-  useEffect(() => {
-    draftList.length && tryMediaSync();
-  }, [draftList.length]);
 
   return (
     <ObservationCreate2Context.Provider
