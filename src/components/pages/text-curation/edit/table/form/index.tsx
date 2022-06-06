@@ -49,6 +49,8 @@ export default function EditRowForm({ row }) {
       ...values,
       curatedSName: values.curatedSName || ""
     });
+    const btn: any = document.querySelector(`[data-testid=expander-button-${row.id}]`);
+    btn.click();
   };
 
   return (

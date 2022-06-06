@@ -20,8 +20,8 @@ export const CURATED_STATUS = {
 
 export const columns = [
   {
-    name: "uniqueId",
-    selector: (row) => row.uniqueId
+    name: "id",
+    selector: (row) => row.id
   },
   {
     name: "permalink",
