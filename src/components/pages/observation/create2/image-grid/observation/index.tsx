@@ -1,17 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import { DatePickerNextField } from "@components/form/datepicker-next";
 import { LocationInputField } from "@components/form/location-input";
-import { SelectInputField } from "@components/form/select";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-import useObservationCreate2 from "../../use-observation-create2-hook";
 import Recodata from "./recodata";
 import Resources from "./resources";
 
 export default function ObservationBox({ remove, index }) {
-  const { licensesList } = useObservationCreate2();
   const { t } = useTranslation();
   const form = useFormContext();
 
@@ -38,13 +35,6 @@ export default function ObservationBox({ remove, index }) {
       transition="0.1s ease"
     >
       <Resources index={index} removeObservation={remove} />
-      <SelectInputField
-        mb={2}
-        name={`o.${index}.license`}
-        options={licensesList}
-        placeholder={t("observation:license")}
-        shouldPortal={true}
-      />
       <Recodata index={index} />
       <DatePickerNextField
         mb={2}

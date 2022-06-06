@@ -1,8 +1,6 @@
-import { SYNC_SINGLE_OBSERVATION } from "@static/events";
 import { dateToUTC, formatDate } from "@utils/date";
 import { reverseGeocode } from "@utils/location";
 import { cleanFacts, cleanTags } from "@utils/tags";
-import { emit } from "react-gbus";
 
 import { setLastData } from "../create/form/location/use-last-location";
 
