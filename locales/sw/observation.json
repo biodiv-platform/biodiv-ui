@@ -150,6 +150,7 @@
   "title": "Ulizingatia nini leo?",
   "title_edit": "Badilisha uchunguzi.",
   "toolbar": {
+    "delete": "Futa Uliochaguliwa",
     "edit": "Hariri Umechaguliwa",
     "errors": {
       "no_observations_selected": "Hakuna uchunguzi uliochaguliwa"

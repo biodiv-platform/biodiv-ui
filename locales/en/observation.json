@@ -150,6 +150,7 @@
   "title": "What did you observe today?",
   "title_edit": "Edit Observation",
   "toolbar": {
+    "delete": "Delete Selected",
     "edit": "Edit Selected",
     "errors": {
       "no_observations_selected": "No observation(s) selected"

@@ -150,6 +150,7 @@
   "title": "आपने आज क्या देखा?",
   "title_edit": "अवलोकन संपादित करें",
   "toolbar": {
+    "delete": "चयनित मिटाएं",
     "edit": "चयनित संपादित करें",
     "errors": {
       "no_observations_selected": "कोई अवलोकन नहीं चुना गया"

@@ -150,6 +150,7 @@
   "title": "Qu'avez-vous observé aujourd'hui?",
   "title_edit": "Modifier l'observation",
   "toolbar": {
+    "delete": "Supprimer sélectionnée",
     "edit": "Modifier la sélection",
     "errors": {
       "no_observations_selected": "Aucune observation sélectionnée"

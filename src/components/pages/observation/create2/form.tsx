@@ -212,7 +212,7 @@ export default function ObservationCreate2Form({ onBrowse }) {
     <>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <Toolbar onMerge={handleOnMerge} onSplit={handleOnSplit} />
+          <Toolbar onMerge={handleOnMerge} onSplit={handleOnSplit} onRemove={o.remove} />
           <div className="container-fluid">
             <ImageGrid fields={o.fields} onRemove={o.remove} onBrowse={onBrowse} />
             <MediaPicker onBrowse={onBrowse} />

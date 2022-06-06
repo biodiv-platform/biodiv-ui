@@ -150,6 +150,7 @@
   "title": "Inona no hitanao androany?",
   "title_edit": "Hanova ny fandinihana",
   "toolbar": {
+    "delete": "Fafao voafantina",
     "edit": "Ahitsio Voafantina",
     "errors": {
       "no_observations_selected": "Tsy misy fanamarihana voafantina"

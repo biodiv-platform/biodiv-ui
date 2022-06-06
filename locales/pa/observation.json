@@ -150,6 +150,7 @@
   "title": "ਤੁਸੀਂ ਅੱਜ ਕੀ ਦੇਖਿਆ?",
   "title_edit": "ਨਿਰੀਖਣ ਸੋਧੋ",
   "toolbar": {
+    "delete": "ਚੁਣਿਆ ਮਿਟਾਓ",
     "edit": "ਚੁਣਿਆ ਗਿਆ ਸੰਪਾਦਨ ਕਰੋ",
     "errors": {
       "no_observations_selected": "ਕੋਈ ਨਿਰੀਖਣ(ਆਂ) ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ"

@@ -11,6 +11,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import CheckIcon from "@icons/check";
 import CheckAllIcon from "@icons/check-all";
 import CrossIcon from "@icons/cross";
+import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
 import ImageIcon from "@icons/image";
 import MergeIcon from "@icons/merge";
@@ -46,7 +47,7 @@ const ToolbarButton = ({ icon, children, ...rest }: any) => {
   );
 };
 
-export default function Toolbar({ onMerge, onSplit }) {
+export default function Toolbar({ onMerge, onSplit, onRemove }) {
   const { setShowMediaPicker } = useObservationCreate2();
   const form = useFormContext();
   const { t } = useTranslation();
@@ -61,6 +62,19 @@ export default function Toolbar({ onMerge, onSplit }) {
   const onSelectAll = () => toggleSelection(true);
 
   const onSelectNone = () => toggleSelection(false);
+
+  const bulkDelete = () => {
+    const { o: all } = form.getValues();
+
+    all
+      .reduce(
+        (indexList, currentValue, index) =>
+          currentValue.isSelected ? indexList.concat(index) : indexList,
+        []
+      )
+      .reverse() // we need remove it from end so observation index won't change
+      .map(onRemove);
+  };
 
   const bulkEdit = () => {
     const { o: all } = form.getValues();
@@ -132,15 +146,26 @@ export default function Toolbar({ onMerge, onSplit }) {
                 {t("observation:toolbar.select_none")}
               </ToolbarButton>
             </ButtonGroup>
-            <ToolbarButton
-              type="button"
-              onClick={bulkEdit}
-              icon={<EditIcon />}
-              variant="outline"
-              colorScheme="purple"
-            >
-              {t("observation:toolbar.edit")}
-            </ToolbarButton>
+            <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
+              <ToolbarButton
+                type="button"
+                onClick={bulkEdit}
+                icon={<EditIcon />}
+                variant="outline"
+                colorScheme="purple"
+              >
+                {t("observation:toolbar.edit")}
+              </ToolbarButton>
+              <ToolbarButton
+                type="button"
+                onClick={bulkDelete}
+                icon={<DeleteIcon />}
+                variant="outline"
+                colorScheme="red"
+              >
+                {t("observation:toolbar.delete")}
+              </ToolbarButton>
+            </ButtonGroup>
           </HStack>
           <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
             {t("form:uploader.upload")}
