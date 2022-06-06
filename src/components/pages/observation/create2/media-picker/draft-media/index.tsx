@@ -1,6 +1,7 @@
 import {
   AspectRatio,
   Box,
+  Button,
   Flex,
   IconButton,
   Image,
@@ -12,6 +13,7 @@ import { MY_UPLOADS_SORT } from "@components/pages/observation/create/form/optio
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import StatusIcon from "@components/pages/observation/create/form/uploader/statusicon";
 import useGlobalState from "@hooks/use-global-state";
+import CheckIcon from "@icons/check";
 import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -78,21 +80,34 @@ const DraftResource = ({ resource: r }) => {
   );
 };
 
-export default function DraftMedia({ onBrowse }) {
+export default function DraftMedia({ onBrowse, onImport }) {
   const { draft } = useObservationCreate2();
   const { t } = useTranslation();
 
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center" mb={4}>
-        <Text>💡 {t("form:description.my_uploads")}</Text>
-        <Select value={draft.sortBy} onChange={(e) => draft.setSortBy(e.target.value)} maxW="10rem">
-          {MY_UPLOADS_SORT.map((o) => (
-            <option key={o.value} value={o.value}>
-              {t(`form:my_uploads_sort.${o.label}`)}
-            </option>
-          ))}
-        </Select>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        flexDir={{ base: "column", md: "row" }}
+      >
+        <Text mb={4}>💡 {t("form:description.my_uploads")}</Text>
+        <Flex mb={4}>
+          <Button colorScheme="blue" leftIcon={<CheckIcon />} onClick={onImport} mr={4}>
+            {t("common:import")}
+          </Button>
+          <Select
+            value={draft.sortBy}
+            onChange={(e) => draft.setSortBy(e.target.value)}
+            maxW="9rem"
+          >
+            {MY_UPLOADS_SORT.map((o) => (
+              <option key={o.value} value={o.value}>
+                {t(`form:my_uploads_sort.${o.label}`)}
+              </option>
+            ))}
+          </Select>
+        </Flex>
       </Flex>
       <SimpleGrid columns={{ base: 3, sm: 5, md: 6 }} spacing={4}>
         <Box

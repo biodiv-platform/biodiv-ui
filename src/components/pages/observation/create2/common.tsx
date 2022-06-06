@@ -114,7 +114,6 @@ export const handleOnSingleObservationSubmit = (
     },
     tags: cleanTags(tags),
     protocol: "SINGLE_OBSERVATION",
-    basisOfRecords: "HUMAN_OBSERVATION",
     obsvLanguageId: languageId,
     useDegMinSec: false,
     degMinSec: null
@@ -143,6 +142,7 @@ export const DEFAULT_OBSERVATION_PAYLOAD = {
 
   notes: null,
   tags: [],
+  basisOfRecords: "HUMAN_OBSERVATION",
 
   dateAccuracy: "ACCURATE",
   observedAt: "",

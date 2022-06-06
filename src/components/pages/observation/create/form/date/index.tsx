@@ -4,6 +4,7 @@ import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axQueryTagsByText } from "@services/observation.service";
+import { BASIS_OF_RECORD } from "@static/datatable";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
@@ -38,16 +39,25 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
               options={translatedDateOptions}
             />
           </SimpleGrid>
-          {showTags && (
-            <SelectAsyncInputField
-              name="tags"
-              label={t("form:tags")}
-              hint={t("form:tags_hint")}
-              multiple={true}
-              onQuery={onTagsQuery}
-              mb={2}
+          <SimpleGrid columns={showTags ? { base: 1, md: 2 } : 1} spacing={4}>
+            {showTags && (
+              <SelectAsyncInputField
+                name="tags"
+                label={t("form:tags")}
+                hint={t("form:tags_hint")}
+                multiple={true}
+                onQuery={onTagsQuery}
+                mb={2}
+              />
+            )}
+            <SelectInputField
+              name="basisOfRecords"
+              label={t("datatable:basis_of_record")}
+              options={BASIS_OF_RECORD}
+              isRequired={isRequired}
+              shouldPortal={true}
             />
-          )}
+          </SimpleGrid>
         </Box>
         <RichTextareaField name="notes" label={t("observation:notes")} />
       </SimpleGrid>

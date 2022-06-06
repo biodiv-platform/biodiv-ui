@@ -55,6 +55,7 @@ export default function BulkEditorModal({ initialValue, onClose }) {
         // Extra
         notes: Yup.string().nullable(),
         tags: Yup.array().nullable(),
+        basisOfRecords: Yup.string().nullable(),
 
         // Date and Location
         observedOn: Yup.string().nullable(),
@@ -109,7 +110,7 @@ export default function BulkEditorModal({ initialValue, onClose }) {
         <ModalHeader>{t("observation:title_edit")}</ModalHeader>
         <ModalCloseButton />
         <FormProvider {...hForm}>
-          <form onSubmit={hForm.handleSubmit(handleOnFormSubmit)}>
+          <form onSubmit={hForm.handleSubmit(handleOnFormSubmit)} noValidate>
             <ModalBody>
               <RecoInputs />
               <GroupSelector

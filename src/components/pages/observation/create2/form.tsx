@@ -59,6 +59,7 @@ export default function ObservationCreate2Form({ onBrowse }) {
               // Extra
               notes: Yup.string().nullable(),
               tags: Yup.array().nullable(),
+              basisOfRecords: Yup.string().required(),
 
               // Date and Location
               observedOn: Yup.string().required(),

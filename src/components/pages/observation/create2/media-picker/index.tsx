@@ -13,7 +13,6 @@ import {
   TabPanels,
   Tabs
 } from "@chakra-ui/react";
-import CheckIcon from "@icons/check";
 import { OBSERVATION_IMPORT_RESOURCE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
@@ -76,7 +75,7 @@ export function MediaPicker({ onBrowse }) {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <DraftMedia onBrowse={onBrowse} />
+                <DraftMedia onBrowse={onBrowse} onImport={handleOnImport} />
               </TabPanel>
               <TabPanel>
                 <AudioInput onDone={onSelectionDone} onSave={draft.add} />
@@ -89,11 +88,8 @@ export function MediaPicker({ onBrowse }) {
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={onClose} mr={3}>
+          <Button onClick={onClose}>
             {t("common:close")}
-          </Button>
-          <Button colorScheme="blue" leftIcon={<CheckIcon />} onClick={handleOnImport}>
-            {t("common:import")}
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -92,6 +92,7 @@ export default function ObservationCreateForm({
         // Extra
         notes: Yup.string().nullable(),
         tags: Yup.array().nullable(),
+        basisOfRecords: Yup.string().required(),
 
         // Date and Location
         observedOn: Yup.string().required(),
@@ -134,6 +135,7 @@ export default function ObservationCreateForm({
 
       notes: null,
       tags: [],
+      basisOfRecords: "HUMAN_OBSERVATION",
 
       dateAccuracy: "ACCURATE",
       observedAt: "",
