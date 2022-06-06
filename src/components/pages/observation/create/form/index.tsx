@@ -5,10 +5,10 @@ import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
-import { RESOURCES_UPLOADING } from "@static/events";
+import { RESOURCES_UPLOADING, SYNC_OBSERVATION } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
-import { useListener } from "react-gbus";
+import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
@@ -158,7 +158,7 @@ export default function ObservationCreateForm({
   });
 
   const handleOnSubmit = async (values) => {
-    await handleOnSingleObservationSubmit(
+    const observation = handleOnSingleObservationSubmit(
       values,
       {
         languageId,
@@ -167,6 +167,7 @@ export default function ObservationCreateForm({
       },
       true
     );
+    emit(SYNC_OBSERVATION, [observation]);
     onClose();
   };
 

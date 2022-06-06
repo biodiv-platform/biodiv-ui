@@ -80,7 +80,7 @@ export const parseCustomFieldToPayload = (fields, customFields, userGroupId) => 
   }, []);
 };
 
-export const handleOnSingleObservationSubmit = async (
+export const handleOnSingleObservationSubmit = (
   {
     taxonCommonName,
     scientificNameTaxonId,
@@ -122,14 +122,14 @@ export const handleOnSingleObservationSubmit = async (
     degMinSec: null
   };
   setLastData(rest.latitude, rest.longitude, rest.observedAt, fields, customFields);
-  emit(SYNC_SINGLE_OBSERVATION, {
+  return {
     observation: {
       ...payload,
       customFieldList: parseCustomFieldToPayload(fields, customFields, currentGroupId)
     },
     instant: true,
     redirect: redirect
-  });
+  };
 };
 
 export const DEFAULT_OBSERVATION_PAYLOAD = {

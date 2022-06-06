@@ -5,7 +5,7 @@ import useOnlineStatus from "@rehooks/online-status";
 import { axUploadObservationResource } from "@services/files.service";
 import { axCreateObservation } from "@services/observation.service";
 import {
-  SYNC_SINGLE_OBSERVATION,
+  SYNC_OBSERVATION,
   SYNC_SINGLE_OBSERVATION_DONE,
   SYNC_SINGLE_OBSERVATION_ERROR
 } from "@static/events";
@@ -134,7 +134,13 @@ export default function OfflineSync() {
     }
   };
 
-  useListener(trySyncSingleObservation, [SYNC_SINGLE_OBSERVATION]);
+  const trySyncincObservations = async (observations) => {
+    for (const observation of observations) {
+      await trySyncSingleObservation(observation);
+    }
+  };
+
+  useListener(trySyncincObservations, [SYNC_OBSERVATION]);
 
   const trySyncPendingObservations = async () => {
     const poList = await getAllObservations();

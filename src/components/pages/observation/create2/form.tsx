@@ -3,12 +3,13 @@ import useGlobalState from "@hooks/use-global-state";
 import {
   OBSERVATION_BULK_EDIT_DONE,
   OBSERVATION_IMPORT_RESOURCE,
+  SYNC_OBSERVATION,
   SYNC_SINGLE_OBSERVATION_DONE,
   SYNC_SINGLE_OBSERVATION_ERROR
 } from "@static/events";
 import deepmerge from "deepmerge";
 import React from "react";
-import { useListener } from "react-gbus";
+import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { useImmer } from "use-immer";
 import * as Yup from "yup";
@@ -189,17 +190,16 @@ export default function ObservationCreate2Form({ onBrowse }) {
   );
 
   const handleOnSubmit = async ({ o }) => {
-    for (const observation of o) {
-      await handleOnSingleObservationSubmit(
+    const observations = o.map((observation) =>
+      handleOnSingleObservationSubmit(
         observation,
-        {
-          languageId,
-          fields: [],
-          currentGroupId: currentGroup.id
-        },
+        { languageId, fields: [], currentGroupId: currentGroup.id },
         false
-      );
-    }
+      )
+    );
+
+    emit(SYNC_OBSERVATION, observations);
+
     setUploadSummery((_draft) => {
       _draft.payload = o;
       _draft.isSubmittd = true;
