@@ -1,9 +1,7 @@
 import {
   AspectRatio,
   Box,
-  Button,
   Flex,
-  Heading,
   IconButton,
   Image,
   Select,
@@ -96,36 +94,28 @@ export default function DraftMedia({ onBrowse }) {
           ))}
         </Select>
       </Flex>
-      <Box>
-        {draft.all.length ? (
-          <SimpleGrid columns={{ base: 3, sm: 5, md: 6 }} spacing={4}>
-            {draft.all.map((r) => (
-              <DraftResource key={r.hashKey} resource={r} />
-            ))}
-          </SimpleGrid>
-        ) : (
-          <Flex
-            alignItems="center"
-            bg="gray.50"
-            border="2px dashed var(--chakra-colors-gray-300)"
-            borderRadius="md"
-            flexDirection="column"
-            justifyContent="center"
-            minH="320px"
-          >
-            <UploadIcon size={80} />
-            <Heading size="md" fontWeight="normal" mt={4} color="gray.400">
-              {t("observation:drag_drop_files")}
-            </Heading>
-            <Text my={4} color="gray.400">
-              {t("common:or")}
-            </Text>
-            <Button colorScheme="blue" onClick={onBrowse}>
-              {t("form:uploader.browse")}
-            </Button>
-          </Flex>
-        )}
-      </Box>
+      <SimpleGrid columns={{ base: 3, sm: 5, md: 6 }} spacing={4}>
+        <Box
+          border="2px"
+          borderColor="gray.300"
+          borderRadius="md"
+          borderStyle="dashed"
+          onClick={onBrowse}
+          p={2}
+          cursor="pointer"
+          position="relative"
+        >
+          <AspectRatio ratio={1}>
+            <Flex flexDir="column">
+              <UploadIcon size={56} />
+            </Flex>
+          </AspectRatio>
+        </Box>
+
+        {draft.all.map((r) => (
+          <DraftResource key={r.hashKey} resource={r} />
+        ))}
+      </SimpleGrid>
     </>
   );
 }
