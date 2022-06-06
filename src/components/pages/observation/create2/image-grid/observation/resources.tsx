@@ -25,6 +25,7 @@ export default function Resources({ index, removeObservation }) {
           borderRadius="sm"
           objectFit="cover"
           overflow="hidden"
+          className="o-selectable"
           src={getImageThumb(resources.fields[resourceIndex], user?.id)}
           fallbackSrc={getFallbackByMIME(resources.fields[resourceIndex]?.["type"])}
         />

@@ -18,7 +18,7 @@ export default function ObservationBox({ remove, index }) {
   const isSelected = form.watch(`o.${index}.isSelected`);
 
   const handleOnSelection = (e) => {
-    if (e.target === e.currentTarget) {
+    if (e.target === e.currentTarget || e.target.classList.contains("o-selectable")) {
       form.setValue(`o.${index}.isSelected`, !isSelected);
     }
   };
