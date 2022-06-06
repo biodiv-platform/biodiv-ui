@@ -131,7 +131,7 @@ export default function ObservationCreate2Form({ onBrowse }) {
       .filter((obs) => obs.isSelected)
       .reduce((prev, current) => deepMergeObservations(current, prev), { isSelected: false });
 
-    updateObservationByIndex(o1, selectedFirstIndex, o.update);
+    updateObservationByIndex({ ...o1, isSelected: false }, selectedFirstIndex, o.update);
   };
 
   const handleOnSplit = () => {
@@ -147,7 +147,7 @@ export default function ObservationCreate2Form({ onBrowse }) {
 
         for (const [resourceIndex, resource] of currentObservation.resources.entries()) {
           updateObservationByIndex(
-            { ...currentObservation, resources: [resource] },
+            { ...currentObservation, resources: [resource], isSelected: false },
             toSplitIndex,
             resourceIndex === 0 ? o.update : o.insert
           );
