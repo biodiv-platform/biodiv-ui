@@ -140,7 +140,7 @@ export default function LocationEdit({ row }) {
             Show all
           </Button>
         )}
-        {listOfLocations.length === row.peliasLocations.length && (
+        {listOfLocations.length === row.peliasLocations.length && listOfLocations.length > 4 && (
           <Button variant="link" onClick={handleCollapse} color="blue.500">
             Show fewer
           </Button>
