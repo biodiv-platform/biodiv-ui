@@ -47,7 +47,7 @@ const DraftResource = ({ resource: r }) => {
       borderColor={isSelected || isDisabled ? "blue.500" : "gray.300"}
       borderRadius="md"
       borderStyle={isDisabled ? "dashed" : "solid"}
-      key={r.hashKey}
+      className="fade"
       onClick={handleOnResourceToggle}
       p={2}
       position="relative"
@@ -109,7 +109,7 @@ export default function DraftMedia({ onBrowse, onImport }) {
           </Select>
         </Flex>
       </Flex>
-      <SimpleGrid columns={{ base: 3, sm: 5, md: 6 }} spacing={4}>
+      <SimpleGrid columns={{ base: 2, sm: 5, md: 6 }} spacing={4}>
         <Box
           border="2px"
           borderColor="gray.300"

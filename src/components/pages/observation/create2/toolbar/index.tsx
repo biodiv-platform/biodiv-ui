@@ -1,20 +1,28 @@
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   ButtonGroup,
-  HStack,
-  IconButton,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList,
   SimpleGrid,
   useBreakpointValue
 } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import CheckIcon from "@icons/check";
 import CheckAllIcon from "@icons/check-all";
+import CloudIcon from "@icons/cloud";
 import CrossIcon from "@icons/cross";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
 import ImageIcon from "@icons/image";
 import MergeIcon from "@icons/merge";
+import SmartphoneIcon from "@icons/smartphone";
 import SplitIcon from "@icons/split";
 import { OBSERVATION_BULK_EDIT } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
@@ -37,20 +45,11 @@ const areValuesEqual = (val1, val2) => {
   return val1 === val2;
 };
 
-const ToolbarButton = ({ icon, children, ...rest }: any) => {
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-
-  return isDesktop ? (
-    <Button leftIcon={icon} children={children} {...rest} />
-  ) : (
-    <IconButton icon={icon} title={children} aria-label={children} {...rest} />
-  );
-};
-
-export default function Toolbar({ onMerge, onSplit, onRemove }) {
+export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
   const { setShowMediaPicker } = useObservationCreate2();
   const form = useFormContext();
   const { t } = useTranslation();
+  const isDesktop = useBreakpointValue({ base: false, lg: true });
 
   const toggleSelection = (selectAll?) => {
     const { o: all } = form.getValues();
@@ -114,63 +113,127 @@ export default function Toolbar({ onMerge, onSplit, onRemove }) {
   return (
     <Box bg="white" shadow="md" borderBottom="1px" borderColor="gray.300" mb={4}>
       <SimpleGrid className="container-fluid" py={3}>
-        <HStack justifyContent="space-between">
-          <HStack spacing={4}>
-            <ToolbarButton
-              type="button"
-              onClick={() => setShowMediaPicker(true)}
-              icon={<ImageIcon />}
-              variant="outline"
-              colorScheme="blue"
-            >
-              {t("observation:toolbar.import")}
-            </ToolbarButton>
-            <ButtonGroup isAttached={true} variant="outline" colorScheme="orange">
-              <ToolbarButton type="button" onClick={onMerge} icon={<MergeIcon />} borderRight={0}>
-                {t("observation:toolbar.merge")}
-              </ToolbarButton>
-              <ToolbarButton type="button" onClick={onSplit} icon={<SplitIcon />}>
-                {t("observation:toolbar.split")}
-              </ToolbarButton>
-            </ButtonGroup>
-            <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
-              <ToolbarButton
-                type="button"
-                onClick={onSelectAll}
-                icon={<CheckAllIcon />}
-                borderRight={0}
-              >
-                {t("observation:toolbar.select_all")}
-              </ToolbarButton>
-              <ToolbarButton type="button" onClick={onSelectNone} icon={<CrossIcon />}>
-                {t("observation:toolbar.select_none")}
-              </ToolbarButton>
-            </ButtonGroup>
-            <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
-              <ToolbarButton
-                type="button"
-                onClick={bulkEdit}
-                icon={<EditIcon />}
-                variant="outline"
-                colorScheme="purple"
-              >
-                {t("observation:toolbar.edit")}
-              </ToolbarButton>
-              <ToolbarButton
-                type="button"
-                onClick={bulkDelete}
-                icon={<DeleteIcon />}
-                variant="outline"
-                colorScheme="red"
-              >
-                {t("observation:toolbar.delete")}
-              </ToolbarButton>
-            </ButtonGroup>
-          </HStack>
-          <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
-            {t("form:uploader.upload")}
-          </SubmitButton>
-        </HStack>
+        {isDesktop ? (
+          <Flex justifyContent="space-between" gap={4} alignItems="center">
+            <Flex flexFlow="wrap" gap={4}>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  type="button"
+                  leftIcon={<ImageIcon />}
+                  rightIcon={<ChevronDownIcon />}
+                  variant="outline"
+                  colorScheme="blue"
+                >
+                  {t("observation:toolbar.import")}
+                </MenuButton>
+                <MenuList>
+                  <MenuItem onClick={onBrowse} icon={<SmartphoneIcon />}>
+                    {t("form:uploader.device")}
+                  </MenuItem>
+                  <MenuItem onClick={() => setShowMediaPicker(true)} icon={<CloudIcon />}>
+                    {t("form:uploader.draft")}
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+
+              <ButtonGroup isAttached={true} variant="outline" colorScheme="orange">
+                <Button type="button" onClick={onMerge} leftIcon={<MergeIcon />} borderRight={0}>
+                  {t("observation:toolbar.merge")}
+                </Button>
+                <Button type="button" onClick={onSplit} leftIcon={<SplitIcon />}>
+                  {t("observation:toolbar.split")}
+                </Button>
+              </ButtonGroup>
+              <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
+                <Button
+                  type="button"
+                  onClick={onSelectAll}
+                  leftIcon={<CheckAllIcon />}
+                  borderRight={0}
+                >
+                  {t("observation:toolbar.select_all")}
+                </Button>
+                <Button type="button" onClick={onSelectNone} leftIcon={<CrossIcon />}>
+                  {t("observation:toolbar.select_none")}
+                </Button>
+              </ButtonGroup>
+              <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
+                <Button
+                  type="button"
+                  onClick={bulkEdit}
+                  leftIcon={<EditIcon />}
+                  variant="outline"
+                  colorScheme="purple"
+                >
+                  {t("observation:toolbar.edit")}
+                </Button>
+                <Button
+                  type="button"
+                  onClick={bulkDelete}
+                  leftIcon={<DeleteIcon />}
+                  variant="outline"
+                  colorScheme="red"
+                >
+                  {t("observation:toolbar.delete")}
+                </Button>
+              </ButtonGroup>
+            </Flex>
+            <Box>
+              <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
+                {t("form:uploader.upload")}
+              </SubmitButton>
+            </Box>
+          </Flex>
+        ) : (
+          <Flex gap={4} justifyContent="space-between">
+            <Menu isLazy={true}>
+              <MenuButton as={Button} maxW="120px" colorScheme="gray" leftIcon={<HamburgerIcon />}>
+                {t("observation:actions")}
+              </MenuButton>
+              <MenuList>
+                <MenuGroup title={t("observation:toolbar.import")}>
+                  <MenuItem color="blue.600" onClick={onBrowse} icon={<SmartphoneIcon />}>
+                    {t("form:uploader.device")}
+                  </MenuItem>
+                  <MenuItem
+                    color="blue.600"
+                    onClick={() => setShowMediaPicker(true)}
+                    icon={<CloudIcon />}
+                  >
+                    {t("form:my_uploads")}
+                  </MenuItem>
+                </MenuGroup>
+                <MenuDivider />
+                <MenuGroup title="Actions">
+                  <MenuItem color="orange.600" onClick={onMerge} icon={<MergeIcon />}>
+                    {t("observation:toolbar.merge")}
+                  </MenuItem>
+                  <MenuItem color="orange.600" onClick={onSplit} icon={<SplitIcon />}>
+                    {t("observation:toolbar.split")}
+                  </MenuItem>
+                  <MenuDivider />
+                  <MenuItem color="teal.600" onClick={onSelectAll} icon={<CheckAllIcon />}>
+                    {t("observation:toolbar.select_all")}
+                  </MenuItem>
+                  <MenuItem color="teal.600" onClick={onSelectNone} icon={<CrossIcon />}>
+                    {t("observation:toolbar.select_none")}
+                  </MenuItem>
+                  <MenuDivider />
+                  <MenuItem color="purple.600" onClick={bulkEdit} icon={<EditIcon />}>
+                    {t("observation:toolbar.edit")}
+                  </MenuItem>
+                  <MenuItem color="red.600" onClick={bulkDelete} icon={<DeleteIcon />}>
+                    {t("observation:toolbar.delete")}
+                  </MenuItem>
+                </MenuGroup>
+              </MenuList>
+            </Menu>
+            <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
+              {t("form:uploader.upload")}
+            </SubmitButton>
+          </Flex>
+        )}
       </SimpleGrid>
     </Box>
   );

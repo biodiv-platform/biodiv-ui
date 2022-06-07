@@ -76,8 +76,11 @@
   "uploader": {
     "browse": "Vinjari",
     "description": "(Jpg tu, jpeg, png, mp3, faili mp4 zitakubaliwa)",
+    "device": "Kutoka kwa Kifaa",
+    "draft": "Kutoka Rasimu ya Vyombo vya Habari",
     "label": "Weka faili (s) hapa.",
     "label_release": "Tayari kupakia",
+    "old_form": "Fomu ya Kupakia (Mzee)",
     "processing": "Usindikaji",
     "upload": "Upload.",
     "uploading": "Inapakia ..."

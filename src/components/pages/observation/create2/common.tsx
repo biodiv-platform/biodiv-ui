@@ -39,6 +39,7 @@ export const preProcessObservations = async (resources, currentGroup) => {
 
 export const prepareObservationData = (data) => ({
   ...data,
+  sGroup: data.sGroup ? Number(data.sGroup) : undefined,
   // assigns other values to `tmp`, since they need to be re-updated via `ref` for UI Components
   tmp: {
     sci: {

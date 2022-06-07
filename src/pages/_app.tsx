@@ -1,6 +1,7 @@
 import "../styles/global.css";
 
 import { ChakraProvider } from "@chakra-ui/react";
+import { SkipNavContent, SkipNavLink } from "@chakra-ui/skip-nav";
 import Feedback from "@components/@core/container/feedback";
 import Footer from "@components/@core/container/footer";
 import Metadata from "@components/@core/container/metadata";
@@ -47,6 +48,7 @@ function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: A
       <ChakraProvider theme={customTheme}>
         <GlobalStateProvider initialState={{ user, domain, groups, currentGroup }}>
           <Metadata />
+          <SkipNavLink>Skip to content</SkipNavLink>
           <div className="content">
             {config.header && (
               <>
@@ -55,6 +57,7 @@ function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: A
               </>
             )}
             <AutoSync />
+            <SkipNavContent />
             <div id="main">
               <Component {...pageProps} />
             </div>

@@ -76,8 +76,11 @@
   "uploader": {
     "browse": "Browse",
     "description": "(JPG ihany, JPEG, PNG, MP3, ny rakitra Mp3, dia ekena)",
+    "device": "Avy amin'ny Device",
+    "draft": "Avy amin'ny Draft Media",
     "label": "Afo eto (s) eto",
     "label_release": "Vonona ny hampakatra",
+    "old_form": "Mampiakatra endrika (Taloha)",
     "processing": "fanodinana",
     "upload": "fampitana",
     "uploading": "Fandefasana ..."

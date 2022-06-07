@@ -24,10 +24,11 @@ export default function ObservationBox({ remove, index }) {
     <Box
       borderColor={isSelected ? "blue.500" : "gray.300"}
       borderRadius="md"
-      borderWidth="2px"
+      borderWidth="3px"
       className="white-box fade"
       flex="0 0 250px"
       m="2px"
+      _hover={{ borderColor: isSelected ? "blue.500" : "cyan.300" }}
       mr={4}
       onClick={handleOnSelection}
       p={2}

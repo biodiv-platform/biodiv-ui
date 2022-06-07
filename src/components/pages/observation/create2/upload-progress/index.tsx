@@ -1,6 +1,8 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Button, Link, SimpleGrid, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, Link, LinkOverlay, SimpleGrid, Text } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
+import LocalLink from "@components/@core/local-link";
+import ListIcon from "@icons/list";
 import { AssetStatus } from "@interfaces/custom";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
@@ -50,15 +52,29 @@ export default function UploadProgress({ payload, data }) {
     <div className="container mt">
       <PageHeading
         actions={
-          <Button
-            as={Link}
-            href="/observation/create2"
-            colorScheme="blue"
-            isDisabled={count.done !== count.total}
-            rightIcon={<ArrowForwardIcon />}
-          >
-            {t("observation:continue")}
-          </Button>
+          <ButtonGroup spacing={4}>
+            <LocalLink href="/observation/list">
+              <Button
+                as={LinkOverlay}
+                colorScheme="blue"
+                variant="outline"
+                leftIcon={<ListIcon />}
+                isDisabled={count.done !== count.total}
+              >
+                {t("header:menu_secondary.observation.all_observations")}
+              </Button>
+            </LocalLink>
+            <Button
+              as={Link}
+              href="/observation/create2"
+              colorScheme="blue"
+              variant="outline"
+              rightIcon={<ArrowForwardIcon />}
+              isDisabled={count.done !== count.total}
+            >
+              {t("observation:continue")}
+            </Button>
+          </ButtonGroup>
         }
       >
         {count.done === count.total

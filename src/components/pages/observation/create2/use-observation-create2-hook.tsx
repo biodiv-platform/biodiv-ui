@@ -186,6 +186,8 @@ export const ObservationCreate2Provider = ({
   };
 
   const addToDrafts = async (newMedia, addToObservation) => {
+    setDraftDisabled([...draftDisabled, ...newMedia.map((o) => o.hashKey)]);
+
     for (const o of newMedia) {
       await add(o);
 
@@ -195,7 +197,6 @@ export const ObservationCreate2Provider = ({
       const _draftList = await refreshDraftMediaFromIdb();
 
       if (addToObservation) {
-        setDraftDisabled([...draftDisabled, o.hashKey]);
         emit(OBSERVATION_IMPORT_RESOURCE, [_draftList.find((m) => o.hashKey === m.hashKey)]);
       }
     }

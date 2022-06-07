@@ -53,17 +53,3 @@ span svg,
 [data-hidden="true"] {
   display: none !important;
 }
-
-.start-of-content {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.start-of-content:focus {
-  width: auto;
-  height: auto;
-  background: var(--chakra-colors-blue-500);
-  color: var(--chakra-colors-white);
-  padding: 1rem;
-}

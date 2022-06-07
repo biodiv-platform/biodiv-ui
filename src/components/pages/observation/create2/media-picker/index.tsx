@@ -1,10 +1,8 @@
 import {
-  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Tab,
@@ -60,7 +58,7 @@ export function MediaPicker({ onBrowse }) {
       <ModalContent>
         <ModalHeader>🖼 {t("observation:media_picker")}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody pb={6}>
           <Tabs
             className="nospace"
             index={tabIndex}
@@ -86,12 +84,6 @@ export function MediaPicker({ onBrowse }) {
             </TabPanels>
           </Tabs>
         </ModalBody>
-
-        <ModalFooter>
-          <Button onClick={onClose}>
-            {t("common:close")}
-          </Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );

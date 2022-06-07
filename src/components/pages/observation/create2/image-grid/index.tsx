@@ -1,4 +1,5 @@
-import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex, Heading, Link, Text } from "@chakra-ui/react";
+import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -23,9 +24,17 @@ const ImageGrid = ({ fields, onRemove, onBrowse }) => {
           {t("observation:drag_drop_files")}
         </Heading>
 
-        <Text my={8} fontSize="lg" color="gray.400">{t("common:or")}</Text>
+        <Text my={8} fontSize="lg" color="gray.400">
+          {t("common:or")}
+        </Text>
 
-        <Button colorScheme="blue" onClick={onBrowse}>{t("form:uploader.browse")}</Button>
+        <Button colorScheme="blue" onClick={onBrowse} mb={8}>
+          {t("form:uploader.browse")}
+        </Button>
+
+        <LocalLink href="/observation/create-old">
+          <Link fontSize="sm" color="gray.500">{t("form:uploader.old_form")}</Link>
+        </LocalLink>
       </Flex>
     </Flex>
   );

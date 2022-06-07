@@ -76,8 +76,11 @@
   "uploader": {
     "browse": "Browse",
     "description": "(Only JPG, JPEG, PNG, MP3 ,MP4 files will be accepted)",
+    "device": "From Device",
+    "draft": "From Draft Media",
     "label": "Drop file(s) here",
     "label_release": "Ready to upload",
+    "old_form": "Upload Form (Old)",
     "processing": "Processing",
     "upload": "Upload",
     "uploading": "Uploading..."

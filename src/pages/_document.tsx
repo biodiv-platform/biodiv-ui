@@ -19,9 +19,6 @@ class MyDocument extends Document<IDocumentProps> {
           {SITE_CONFIG.TRACKING.ENABLED && <GoogleAnalytics id={SITE_CONFIG.TRACKING.GA_ID} />}
         </Head>
         <body>
-          <a className="start-of-content" href="#main">
-            Skip to Content
-          </a>
           <ColorModeScript />
           <Main />
           <NextScript />

@@ -76,8 +76,11 @@
   "uploader": {
     "browse": "Parcourir",
     "description": "(Seuls les fichiers JPG, JPEG, PNG, MP3, MP4 seront acceptés)",
+    "device": "Depuis l'appareil",
+    "draft": "À partir d'un brouillon de média",
     "label": "Déposez les fichiers ici",
     "label_release": "Prêt à télécharger",
+    "old_form": "Télécharger le formulaire (ancien)",
     "processing": "Traitement en cours",
     "upload": "Télécharger",
     "uploading": "Téléchargement..."
