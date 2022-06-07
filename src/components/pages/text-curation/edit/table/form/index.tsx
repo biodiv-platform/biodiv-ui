@@ -37,7 +37,9 @@ export default function EditRowForm({ row }) {
         value: row.curatedLocation
       },
       curatedDate: row.curatedDate,
-      curatedDateFormat: DATE_FORMAT_OPTIONS[0].value,
+      curatedDateFormat: row.curatedDateFormat
+        ? row.curatedDateFormat
+        : DATE_FORMAT_OPTIONS[0].value,
       curatedStatus: row.curatedStatus,
       validatedStatus: row.validatedStatus
     }

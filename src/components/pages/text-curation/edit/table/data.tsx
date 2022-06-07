@@ -45,7 +45,19 @@ export const columns = [
   },
   {
     name: "Curated Date",
-    selector: (row) => row.curatedDate
+    selector: (row) => row.curatedDate,
+    cell: (row) => {
+      const date = row.curatedDate;
+      let formatedDate = row.curatedDate;
+      if (row.curatedDateFormat == "MONTH" && date != "") {
+        formatedDate = date.substring(date.indexOf("-") + 1, date.length);
+      } else if (row.curatedDateFormat == "YEAR" && date != "") {
+        formatedDate = date.substring(date.lastIndexOf("-") + 1, date.length);
+      } else {
+        formatedDate = date;
+      }
+      return formatedDate;
+    }
   },
   {
     name: "Curated Status",
