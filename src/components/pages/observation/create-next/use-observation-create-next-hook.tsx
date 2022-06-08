@@ -44,6 +44,7 @@ interface ObservationCreateNextContextProps {
     setDisabledKeys;
     selected;
     toggleSelection;
+    sync;
   };
 }
 
@@ -164,6 +165,7 @@ export const ObservationCreateNextProvider = ({
           status: AssetStatus.Uploaded
         });
         await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Uploaded);
+        return true;
       }
     } catch (e) {
       console.error(e);
@@ -171,6 +173,8 @@ export const ObservationCreateNextProvider = ({
         await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Pending);
       }
     }
+
+    return false;
   };
 
   /**
@@ -192,12 +196,16 @@ export const ObservationCreateNextProvider = ({
       await add(o);
 
       const _odb = await getOneByIndex("hashKey", o.hashKey);
-      await uploadPendingMedia(_odb);
+      const isUploaded = await uploadPendingMedia(_odb);
 
-      const _draftList = await refreshDraftMediaFromIdb();
+      if (isUploaded) {
+        const _draftList = await refreshDraftMediaFromIdb();
 
-      if (addToObservation) {
-        emit(OBSERVATION_IMPORT_RESOURCE, [_draftList.find((m) => o.hashKey === m.hashKey)]);
+        if (addToObservation) {
+          emit(OBSERVATION_IMPORT_RESOURCE, [_draftList.find((m) => o.hashKey === m.hashKey)]);
+        }
+      } else {
+        notification(`${t("observation:status.failed")} ${_odb.fileName}`);
       }
     }
 
@@ -249,7 +257,8 @@ export const ObservationCreateNextProvider = ({
           disabledKeys: draftDisabled,
           setDisabledKeys: setDraftDisabled,
           selected: selectedMediaList,
-          toggleSelection: toggleDraftSelection
+          toggleSelection: toggleDraftSelection,
+          sync: tryMediaSync
         }
       }}
     >

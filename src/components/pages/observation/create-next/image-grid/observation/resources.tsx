@@ -5,7 +5,7 @@ import { getImageThumb } from "@components/pages/observation/create/form/uploade
 import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
 import useObservationCreateNext from "../../use-observation-create-next-hook";
@@ -23,17 +23,26 @@ export default function Resources({ index, removeObservation }) {
 
   const handleOnRemoveResource = () => resources.remove(resourceIndex);
 
+  const imgThumb = useMemo(
+    () => ({
+      key: resources.fields[resourceIndex].id,
+      src: getImageThumb(resources.fields[resourceIndex], user?.id),
+      fallbackSrc: getFallbackByMIME(resources.fields[resourceIndex]?.["type"])
+    }),
+    [resources.fields[resourceIndex].id]
+  );
+
   return (
     <>
-      <Box position="relative" key={resources.fields[resourceIndex].id}>
+      <Box position="relative" key={imgThumb.key}>
         <AspectRatio maxW="100%" mb={2} ratio={1}>
           <Image
             borderRadius="sm"
             objectFit="cover"
             overflow="hidden"
             className="o-selectable"
-            src={getImageThumb(resources.fields[resourceIndex], user?.id)}
-            fallbackSrc={getFallbackByMIME(resources.fields[resourceIndex]?.["type"])}
+            src={imgThumb.src}
+            fallbackSrc={imgThumb.fallbackSrc}
           />
         </AspectRatio>
         <IconButton

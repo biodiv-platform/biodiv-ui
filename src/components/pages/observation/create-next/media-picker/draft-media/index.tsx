@@ -15,6 +15,7 @@ import StatusIcon from "@components/pages/observation/create/form/uploader/statu
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import DeleteIcon from "@icons/delete";
+import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
@@ -27,8 +28,11 @@ const DraftResource = ({ resource: r }) => {
   const { user } = useGlobalState();
 
   const [isSelected, isDisabled] = useMemo(
-    () => [media.keys.includes(r.hashKey), media.disabledKeys.includes(r.hashKey)],
-    [media, r.hashKey, media.disabledKeys]
+    () => [
+      media.keys.includes(r.hashKey),
+      media.disabledKeys.includes(r.hashKey) || r.status !== AssetStatus.Uploaded
+    ],
+    [media, r.hashKey, r.status, media.disabledKeys]
   );
 
   const handleOnResourceToggle = () => {
@@ -40,6 +44,15 @@ const DraftResource = ({ resource: r }) => {
     e.stopPropagation();
     draft.remove(r);
   };
+
+  const imgThumb = useMemo(
+    () => ({
+      key: r.id,
+      src: getImageThumb(r, user?.id),
+      fallbackSrc: getFallbackByMIME(r?.type)
+    }),
+    [r.id, r.status]
+  );
 
   return (
     <Box
@@ -57,8 +70,8 @@ const DraftResource = ({ resource: r }) => {
           alt={r.hashKey}
           borderRadius="0.4rem"
           objectFit="cover"
-          src={getImageThumb(r, user?.id)}
-          fallbackSrc={getFallbackByMIME(r.type)}
+          src={imgThumb.src}
+          fallbackSrc={imgThumb.fallbackSrc}
         />
       </AspectRatio>
       <Box position="absolute" bottom={0} left={0} m={4}>

@@ -46,7 +46,7 @@ const areValuesEqual = (val1, val2) => {
 };
 
 export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
-  const { setShowMediaPicker } = useObservationCreateNext();
+  const { setShowMediaPicker, media } = useObservationCreateNext();
   const form = useFormContext();
   const { t } = useTranslation();
   const isDesktop = useBreakpointValue({ base: false, lg: true });
@@ -110,6 +110,11 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
     emit(OBSERVATION_BULK_EDIT, initialEditObject);
   };
 
+  const onDraftMediaOpen = () => {
+    setShowMediaPicker(true)
+    media.sync()
+  }
+
   return (
     <Box bg="white" shadow="md" borderBottom="1px" borderColor="gray.300" mb={4}>
       <SimpleGrid className="container-fluid" py={3}>
@@ -131,7 +136,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                   <MenuItem onClick={onBrowse} icon={<SmartphoneIcon />}>
                     {t("form:uploader.device")}
                   </MenuItem>
-                  <MenuItem onClick={() => setShowMediaPicker(true)} icon={<CloudIcon />}>
+                  <MenuItem onClick={onDraftMediaOpen} icon={<CloudIcon />}>
                     {t("form:uploader.draft")}
                   </MenuItem>
                 </MenuList>
@@ -198,7 +203,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                   </MenuItem>
                   <MenuItem
                     color="blue.600"
-                    onClick={() => setShowMediaPicker(true)}
+                    onClick={onDraftMediaOpen}
                     icon={<CloudIcon />}
                   >
                     {t("form:my_uploads")}
