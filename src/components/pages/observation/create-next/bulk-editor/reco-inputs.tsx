@@ -14,7 +14,7 @@ import {
   onScientificNameQuery,
   ScientificNameOption
 } from "../../create/form/recodata/scientific-name";
-import useObservationCreate2 from "../use-observation-create2-hook";
+import useObservationCreateNext from "../use-observation-create-next-hook";
 
 export default function RecoInputs() {
   const form = useFormContext();
@@ -23,7 +23,7 @@ export default function RecoInputs() {
   const scientificRef: any = useRef(null);
   const commonRef: any = useRef(null);
   const [commonNameOptions, setCommonNameOptions] = useState<any[]>([]);
-  const { licensesList } = useObservationCreate2();
+  const { licensesList } = useObservationCreateNext();
 
   const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
     if (langId) {

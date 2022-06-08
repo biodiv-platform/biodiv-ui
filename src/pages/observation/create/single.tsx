@@ -1,5 +1,5 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import ObservationCreatePageComponent from "@components/pages/observation/create";
+import ObservationCreateSinglePageComponent from "@components/pages/observation/create";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
@@ -9,7 +9,7 @@ import { absoluteUrl } from "@utils/basic";
 import { encode } from "base64-url";
 import React, { useEffect } from "react";
 
-const ObservationCreatePage = ({
+const ObservationCreateSinglePage = ({
   speciesGroups,
   languages,
   ObservationCreateFormData,
@@ -25,7 +25,7 @@ const ObservationCreatePage = ({
   }, []);
 
   return isLoggedIn ? (
-    <ObservationCreatePageComponent
+    <ObservationCreateSinglePageComponent
       speciesGroups={speciesGroups}
       ObservationCreateFormData={ObservationCreateFormData}
       languages={languages}
@@ -58,4 +58,4 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default ObservationCreatePage;
+export default ObservationCreateSinglePage;

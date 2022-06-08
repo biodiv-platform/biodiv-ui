@@ -5,7 +5,11 @@ import React, { useEffect } from "react";
 
 import ObservationCreateForm from "./form";
 
-export default function ObservationCreatePageComponent({
+/**
+ * @deprecated this is for old single upload form for new use CreateNext*
+ *
+ */
+export default function ObservationCreateSinglePageComponent({
   speciesGroups,
   languages,
   ObservationCreateFormData,

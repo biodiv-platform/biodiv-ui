@@ -31,7 +31,7 @@ const deepMergeObservations = (prev, current) => {
   return deepmerge(_prev, _current);
 };
 
-export default function ObservationCreate2Form({ onBrowse }) {
+export default function ObservationCreateNextForm({ onBrowse }) {
   const { currentGroup, languageId } = useGlobalState();
 
   const [uploadSummery, setUploadSummery] = useImmer({

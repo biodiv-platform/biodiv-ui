@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { components } from "react-select";
 
-import useObservationCreate2 from "../../use-observation-create2-hook";
+import useObservationCreateNext from "../../use-observation-create-next-hook";
 
 export const SpeciesGroupOption = ({ children, ...props }: any) => (
   <components.Option {...props}>
@@ -29,7 +29,7 @@ export const SpeciesGroupOption = ({ children, ...props }: any) => (
 
 export default function Recodata({ index }) {
   const { t } = useTranslation();
-  const { speciesGroupOptions } = useObservationCreate2();
+  const { speciesGroupOptions } = useObservationCreateNext();
   const form = useFormContext();
 
   const scientificRef: any = useRef(null);

@@ -18,7 +18,7 @@ import { useIndexedDBStore } from "use-indexeddb";
 
 import { MY_UPLOADS_SORT } from "../create/form/options";
 
-interface ObservationCreate2ContextProps {
+interface ObservationCreateNextContextProps {
   observationCreateFormData;
   speciesGroups;
   speciesGroupOptions;
@@ -47,7 +47,7 @@ interface ObservationCreate2ContextProps {
   };
 }
 
-interface ObservationCreate2ProviderProps {
+interface ObservationCreateNextProviderProps {
   observationCreateFormData;
   speciesGroups;
   languages;
@@ -56,18 +56,18 @@ interface ObservationCreate2ProviderProps {
   children;
 }
 
-const ObservationCreate2Context = createContext<ObservationCreate2ContextProps>(
-  {} as ObservationCreate2ContextProps
+const ObservationCreateNextContext = createContext<ObservationCreateNextContextProps>(
+  {} as ObservationCreateNextContextProps
 );
 
-export const ObservationCreate2Provider = ({
+export const ObservationCreateNextProvider = ({
   observationCreateFormData,
   speciesGroups,
   languages,
   licensesList,
 
   children
-}: ObservationCreate2ProviderProps) => {
+}: ObservationCreateNextProviderProps) => {
   const [showMediaPicker, setShowMediaPicker] = useState<boolean>();
 
   const { t } = useTranslation();
@@ -224,7 +224,7 @@ export const ObservationCreate2Provider = ({
   };
 
   return (
-    <ObservationCreate2Context.Provider
+    <ObservationCreateNextContext.Provider
       value={{
         observationCreateFormData,
         speciesGroups,
@@ -255,10 +255,10 @@ export const ObservationCreate2Provider = ({
     >
       <input ref={ref} type="hidden" />
       {children}
-    </ObservationCreate2Context.Provider>
+    </ObservationCreateNextContext.Provider>
   );
 };
 
-export default function useObservationCreate2() {
-  return useContext(ObservationCreate2Context);
+export default function useObservationCreateNext() {
+  return useContext(ObservationCreateNextContext);
 }

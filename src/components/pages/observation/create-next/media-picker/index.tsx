@@ -19,11 +19,11 @@ import { useFormContext } from "react-hook-form";
 
 import AudioInput from "../../create/form/uploader/audio-input";
 import FromURL from "../../create/form/uploader/from-url";
-import useObservationCreate2 from "../use-observation-create2-hook";
+import useObservationCreateNext from "../use-observation-create-next-hook";
 import DraftMedia from "./draft-media";
 
 export function MediaPicker({ onBrowse }) {
-  const { setShowMediaPicker, showMediaPicker, draft, media } = useObservationCreate2();
+  const { setShowMediaPicker, showMediaPicker, draft, media } = useObservationCreateNext();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
   const form = useFormContext();

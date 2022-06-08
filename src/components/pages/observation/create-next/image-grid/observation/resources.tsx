@@ -8,11 +8,11 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
-import useObservationCreate2 from "../../use-observation-create2-hook";
+import useObservationCreateNext from "../../use-observation-create-next-hook";
 import ResourceNavigation from "./resource-navigation";
 
 export default function Resources({ index, removeObservation }) {
-  const { licensesList } = useObservationCreate2();
+  const { licensesList } = useObservationCreateNext();
   const { t } = useTranslation();
   const resources = useFieldArray({ name: `o.${index}.resources` });
 

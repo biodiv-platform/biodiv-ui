@@ -66,7 +66,7 @@ export default function UploadProgress({ payload, data }) {
             </LocalLink>
             <Button
               as={Link}
-              href="/observation/create2"
+              href="/observation/create"
               colorScheme="blue"
               variant="outline"
               rightIcon={<ArrowForwardIcon />}

@@ -12,7 +12,7 @@ import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import { handleOnSingleObservationSubmit } from "../../create2/common";
+import { handleOnSingleObservationSubmit } from "../../create-next/common";
 import SavingObservation from "../saving";
 import ObservationCustomFieldForm from "./custom-field-form";
 import DateInputs from "./date";

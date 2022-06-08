@@ -1,5 +1,5 @@
 import { authorizedPageSSR } from "@components/auth/auth-redirect";
-import ObservationCreate2Component from "@components/pages/observation/create2";
+import ObservationCreateNextComponent from "@components/pages/observation/create-next";
 import { Role } from "@interfaces/custom";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
@@ -10,9 +10,9 @@ import { absoluteUrl } from "@utils/basic";
 import React from "react";
 import IndexedDBProvider from "use-indexeddb";
 
-const ObservationCreate2Page = (props) => (
+const ObservationCreateNextPage = (props) => (
   <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
-    <ObservationCreate2Component {...props} />
+    <ObservationCreateNextComponent {...props} />
   </IndexedDBProvider>
 );
 
@@ -43,4 +43,4 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default ObservationCreate2Page;
+export default ObservationCreateNextPage;

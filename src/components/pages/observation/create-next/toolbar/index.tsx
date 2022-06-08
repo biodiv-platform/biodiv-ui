@@ -31,7 +31,7 @@ import React from "react";
 import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 
-import useObservationCreate2 from "../use-observation-create2-hook";
+import useObservationCreateNext from "../use-observation-create-next-hook";
 
 const areValuesEqual = (val1, val2) => {
   if (!val1 || !val2) {
@@ -46,7 +46,7 @@ const areValuesEqual = (val1, val2) => {
 };
 
 export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
-  const { setShowMediaPicker } = useObservationCreate2();
+  const { setShowMediaPicker } = useObservationCreateNext();
   const form = useFormContext();
   const { t } = useTranslation();
   const isDesktop = useBreakpointValue({ base: false, lg: true });

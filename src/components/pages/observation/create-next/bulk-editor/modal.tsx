@@ -26,12 +26,12 @@ import GroupSelector from "../../create/form/groups";
 import LocationPicker from "../../create/form/location";
 import TraitsPicker from "../../create/form/traits";
 import UserGroups from "../../create/form/user-groups";
-import useObservationCreate2 from "../use-observation-create2-hook";
+import useObservationCreateNext from "../use-observation-create-next-hook";
 import RecoInputs from "./reco-inputs";
 
 export default function BulkEditorModal({ initialValue, onClose }) {
   const { t } = useTranslation();
-  const { speciesGroupOptions, observationCreateFormData } = useObservationCreate2();
+  const { speciesGroupOptions, observationCreateFormData } = useObservationCreateNext();
   const [customFieldList] = useState(
     observationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder)
   );

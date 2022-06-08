@@ -19,11 +19,11 @@ import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
-import useObservationCreate2 from "../../use-observation-create2-hook";
+import useObservationCreateNext from "../../use-observation-create-next-hook";
 import UploadIcon from "../upload-icon";
 
 const DraftResource = ({ resource: r }) => {
-  const { media, draft } = useObservationCreate2();
+  const { media, draft } = useObservationCreateNext();
   const { user } = useGlobalState();
 
   const [isSelected, isDisabled] = useMemo(
@@ -81,7 +81,7 @@ const DraftResource = ({ resource: r }) => {
 };
 
 export default function DraftMedia({ onBrowse, onImport }) {
-  const { draft } = useObservationCreate2();
+  const { draft } = useObservationCreateNext();
   const { t } = useTranslation();
 
   return (

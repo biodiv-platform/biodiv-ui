@@ -5,11 +5,11 @@ import NProgress from "nprogress";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
-import ObservationCreate2Form from "./form";
-import useObservationCreate2 from "./use-observation-create2-hook";
+import ObservationCreateNextForm from "./form";
+import useObservationCreateNext from "./use-observation-create-next-hook";
 
 export default function DraftDropzone() {
-  const { draft } = useObservationCreate2();
+  const { draft } = useObservationCreateNext();
 
   const handleOnDrop = async (files) => {
     NProgress.start();
@@ -33,7 +33,7 @@ export default function DraftDropzone() {
       cursor="inherit"
     >
       <input {...getInputProps()} />
-      <ObservationCreate2Form onBrowse={open} />
+      <ObservationCreateNextForm onBrowse={open} />
     </Box>
   );
 }
