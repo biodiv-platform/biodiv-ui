@@ -10,7 +10,7 @@ import React from "react";
 
 export interface ObservationMinList {
   o: ObservationListMinimalData;
-  canEdit:boolean;
+  canEdit: boolean;
   getCheckboxProps?: (props?: any | undefined) => {
     [x: string]: any;
   };
@@ -21,11 +21,15 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
 
   return (
     <Box className="hover-box fade">
-      {canEdit && getCheckboxProps && (
-        <Checkbox m={2} {...getCheckboxProps({ value: String(o.observationId) })}></Checkbox>
-      )}
-
       <Box w="full" position="relative" h="16rem">
+        {canEdit && getCheckboxProps && (
+          <Checkbox
+            position="absolute"
+            bg="white"
+            m={2}
+            {...getCheckboxProps({ value: String(o.observationId) })}
+          />
+        )}
         <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
           <Link target="_blank">
             <Image
@@ -33,6 +37,7 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
               bg="gray.100"
               w="full"
               h="full"
+              borderTopRadius="md"
               src={getResourceThumbnail(
                 RESOURCE_CTX.OBSERVATION,
                 o?.thumbnail,

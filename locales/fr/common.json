@@ -56,6 +56,10 @@
   },
   "load_more": "Charger plus ↺",
   "loading": "Chargement...",
+  "move": {
+    "down": "Vers le bas",
+    "up": "En haut"
+  },
   "name": "Nom",
   "next": "Suivante",
   "no_data": "Pas de données",

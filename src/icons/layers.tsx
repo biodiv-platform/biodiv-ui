@@ -1,8 +1,8 @@
 import { createIcon } from "@chakra-ui/icon";
 import React from "react";
 
-const StatsIcon = createIcon({
-  displayName: "Stats",
+const LayersIcon = createIcon({
+  displayName: "Layers",
   path: (
     <g
       stroke="currentColor"
@@ -11,12 +11,12 @@ const StatsIcon = createIcon({
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <line x1="18" y1="20" x2="18" y2="10" />
-      <line x1="12" y1="20" x2="12" y2="4" />
-      <line x1="6" y1="20" x2="6" y2="14" />
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
     </g>
   ),
   viewBox: "0 0 24 24"
 });
 
-export default StatsIcon;
+export default LayersIcon;

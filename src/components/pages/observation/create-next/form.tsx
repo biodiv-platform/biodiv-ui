@@ -1,3 +1,4 @@
+import FormDebugger from "@components/form/debugger";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import {
@@ -223,6 +224,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
             <ImageGrid fields={o.fields} onRemove={o.remove} onBrowse={onBrowse} />
             <MediaPicker onBrowse={onBrowse} />
           </div>
+          <FormDebugger />
         </form>
       </FormProvider>
       <BulkEditor />

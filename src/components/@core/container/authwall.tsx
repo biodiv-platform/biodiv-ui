@@ -11,6 +11,7 @@ import {
 import { AUTHWALL } from "@static/events";
 import React, { Suspense, useState } from "react";
 import { emit, useListener } from "react-gbus";
+import LazyLoad from "react-lazyload";
 
 const SignInForm = React.lazy(() => import("@components/pages/login/form"));
 
@@ -45,9 +46,11 @@ export default function AuthWall() {
           <ModalHeader>Auth Wall</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Suspense fallback={<Spinner />}>
-              <SignInForm onSuccess={handleOnSuccess} redirect={false} />
-            </Suspense>
+            <LazyLoad once={true}>
+              <Suspense fallback={<Spinner />}>
+                <SignInForm onSuccess={handleOnSuccess} redirect={false} />
+              </Suspense>
+            </LazyLoad>
           </ModalBody>
         </ModalContent>
       </ModalOverlay>

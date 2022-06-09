@@ -56,6 +56,10 @@
   },
   "load_more": "Vesatra bebe kokoa ↺",
   "loading": "Loading ...",
+  "move": {
+    "down": "Midina",
+    "up": "ny"
+  },
   "name": "Anarana",
   "next": "Manaraka",
   "no_data": "Tsy misy data",

@@ -69,7 +69,6 @@ input:disabled {
 .hover-box:hover {
   transition: all 0.2s ease-out;
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
-  top: -2px;
 }
 
 .container,

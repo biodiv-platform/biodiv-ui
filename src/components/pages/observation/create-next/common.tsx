@@ -96,10 +96,15 @@ export const handleOnSingleObservationSubmit = (
   redirect?
 ) => {
   const observedOn = dateToUTC(formatDate(rest.observedOn)).format();
+
   const payload = {
     hidePreciseLocation: false,
     ...rest,
     ...cleanFacts(facts),
+    resources: rest.resources.map((_r, idx) => ({
+      ..._r,
+      rating: rest.resources.length - idx
+    })),
     observedOn,
     fromDate: observedOn,
     toDate: observedOn,

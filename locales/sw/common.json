@@ -56,6 +56,10 @@
   },
   "load_more": "Weka zaidi ↺",
   "loading": "Inapakia ...",
+  "move": {
+    "down": "Chini",
+    "up": "Juu"
+  },
   "name": "Jina.",
   "next": "Ijayo",
   "no_data": "Hakuna data.",

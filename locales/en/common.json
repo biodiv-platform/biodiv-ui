@@ -56,6 +56,10 @@
   },
   "load_more": "Load More ↺",
   "loading": "Loading...",
+  "move": {
+    "down": "Down",
+    "up": "Up"
+  },
   "name": "Name",
   "next": "Next",
   "no_data": "No Data",

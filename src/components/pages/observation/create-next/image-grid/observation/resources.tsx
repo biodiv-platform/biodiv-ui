@@ -1,20 +1,17 @@
 import { CloseIcon } from "@chakra-ui/icons";
-import { AspectRatio, Box, IconButton, Image } from "@chakra-ui/react";
-import { SelectInputField } from "@components/form/select";
+import { AspectRatio, Box, IconButton, Image, useBoolean } from "@chakra-ui/react";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
-import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 
-import useObservationCreateNext from "../../use-observation-create-next-hook";
+import ManageResourcesModal from "../../manage-resources";
 import ResourceNavigation from "./resource-navigation";
 
 export default function Resources({ index, removeObservation }) {
-  const { licensesList } = useObservationCreateNext();
-  const { t } = useTranslation();
   const resources = useFieldArray({ name: `o.${index}.resources` });
+  const [resourceEditor, setResourceEditor] = useBoolean();
 
   const { user } = useGlobalState();
   const [resourceIndex, setResourceIndex] = useState(0);
@@ -59,18 +56,19 @@ export default function Resources({ index, removeObservation }) {
         <ResourceNavigation
           index={resourceIndex}
           onDelete={handleOnRemoveResource}
+          onReorder={setResourceEditor.on}
           setIndex={setResourceIndex}
           size={resources.fields.length}
         />
       </Box>
-      <SelectInputField
-        mb={2}
-        key={index + resourceIndex}
-        name={`o.${index}.resources.${resourceIndex}.licenseId`}
-        options={licensesList}
-        placeholder={t("observation:license")}
-        shouldPortal={true}
-      />
+      {resourceEditor && (
+        <ManageResourcesModal
+          index={index}
+          resources={resources}
+          isOpen={resourceEditor}
+          onClose={setResourceEditor.off}
+        />
+      )}
     </>
   );
 }
