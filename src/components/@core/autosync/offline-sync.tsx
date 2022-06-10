@@ -104,7 +104,7 @@ export default function OfflineSync() {
 
         if (instant) {
           notification(
-            t("observation:points_gained", {
+            t("common:points_gained", {
               points: data?.activityCount
             }),
             NotificationType.Success

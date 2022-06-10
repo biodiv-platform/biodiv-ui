@@ -1,4 +1,4 @@
-import { AspectRatio, Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/react";
+import { AspectRatio, Badge, Box, Heading, Image, LinkOverlay, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import useGlobalState from "@hooks/use-global-state";
@@ -20,8 +20,11 @@ export default function ProgressCard({ item }) {
 
   return (
     <Box position="relative" className="white-box fade" flex="0 0 250px">
-      <LocalLink href={`/observation/show/${item.observationId}`} prefixGroup={true}>
-        <Link>
+      <LocalLink
+        href={item.observationId ? `/observation/show/${item.observationId}` : undefined}
+        prefixGroup={true}
+      >
+        <LinkOverlay target="_blank">
           <AspectRatio maxW="100%" mb={2} ratio={1}>
             <Image
               borderTopRadius="md"
@@ -44,7 +47,7 @@ export default function ProgressCard({ item }) {
               {item?.commonName}
             </Text>
           </Box>
-        </Link>
+        </LinkOverlay>
       </LocalLink>
       <Badge
         borderRadius="xl"
