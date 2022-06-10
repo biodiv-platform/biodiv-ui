@@ -104,7 +104,7 @@ const LocationPicker = ({ isRequired = true }) => {
 
   useListener(
     async (pos) => {
-      if (coordinates.lat === 0 && coordinates.lng === 0) {
+      if ((coordinates.lat === 0 && coordinates.lng === 0) || pos.isLast) {
         setCoordinates(pos);
         if (pos.address) {
           setObservedAtText(pos.address);

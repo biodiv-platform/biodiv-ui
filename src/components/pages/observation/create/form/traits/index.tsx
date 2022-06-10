@@ -64,6 +64,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
                 <TraitInput
                   type={traits.traitTypes}
                   values={values}
+                  defaultValue={traits.id ? facts[traits.id] : undefined}
                   onUpdate={(v) => handleOnChange(traits.id, v)}
                 />
               </FormControl>

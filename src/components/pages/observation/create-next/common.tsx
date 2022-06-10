@@ -28,7 +28,7 @@ export const preProcessObservations = async (resources, currentGroup) => {
     finalResources.push({
       ...DEFAULT_OBSERVATION_PAYLOAD,
       resources: [r],
-      observedOn: r.dateCreated,
+      observedOn: new Date(r.dateCreated).toISOString(),
       ...geoInfo,
       userGroupId: currentGroup.id && currentGroup.id > 0 ? [currentGroup.id.toString()] : []
     });
