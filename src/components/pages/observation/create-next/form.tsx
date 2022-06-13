@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import {
@@ -213,16 +214,16 @@ export default function ObservationCreateNextForm({ onBrowse }) {
     <>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <Box className="container-fluid" minH="calc(100vh - var(--heading-height))">
+            <ImageGrid fields={o.fields} onRemove={o.remove} onBrowse={onBrowse} />
+            <MediaPicker onBrowse={onBrowse} />
+          </Box>
           <Toolbar
             onMerge={handleOnMerge}
             onSplit={handleOnSplit}
             onRemove={o.remove}
             onBrowse={onBrowse}
           />
-          <div className="container-fluid">
-            <ImageGrid fields={o.fields} onRemove={o.remove} onBrowse={onBrowse} />
-            <MediaPicker onBrowse={onBrowse} />
-          </div>
         </form>
       </FormProvider>
       <BulkEditor />

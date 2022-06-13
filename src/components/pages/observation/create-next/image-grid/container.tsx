@@ -8,6 +8,7 @@ const ImageGridContainer = ({ children }) => (
       overflowX="auto"
       overscrollBehaviorX="contain"
       pb={2}
+      mt={4}
       style={{ scrollSnapType: "x mandatory" }}
       width="100%"
     >

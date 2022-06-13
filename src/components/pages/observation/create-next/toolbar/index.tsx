@@ -111,135 +111,138 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
   };
 
   const onDraftMediaOpen = () => {
-    setShowMediaPicker(true)
-    media.sync()
-  }
+    setShowMediaPicker(true);
+    media.sync();
+  };
 
   return (
-    <Box bg="white" shadow="md" borderBottom="1px" borderColor="gray.300" mb={4}>
-      <SimpleGrid className="container-fluid" py={3}>
-        {isDesktop ? (
-          <Flex justifyContent="space-between" gap={4} alignItems="center">
-            <Flex flexFlow="wrap" gap={4}>
-              <Menu>
+    <Box position="sticky" bottom={0} w="full" p={4}>
+      <Box bg="white" border="1px" borderColor="gray.300" borderRadius="md">
+        <SimpleGrid p={4}>
+          {isDesktop ? (
+            <Flex justifyContent="space-between" gap={4} alignItems="center">
+              <Flex flexFlow="wrap" gap={4}>
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    type="button"
+                    leftIcon={<ImageIcon />}
+                    rightIcon={<ChevronDownIcon />}
+                    variant="outline"
+                    colorScheme="blue"
+                  >
+                    {t("observation:toolbar.import")}
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={onBrowse} icon={<SmartphoneIcon />}>
+                      {t("form:uploader.device")}
+                    </MenuItem>
+                    <MenuItem onClick={onDraftMediaOpen} icon={<CloudIcon />}>
+                      {t("form:uploader.draft")}
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+
+                <ButtonGroup isAttached={true} variant="outline" colorScheme="orange">
+                  <Button type="button" onClick={onMerge} leftIcon={<MergeIcon />} borderRight={0}>
+                    {t("observation:toolbar.merge")}
+                  </Button>
+                  <Button type="button" onClick={onSplit} leftIcon={<SplitIcon />}>
+                    {t("observation:toolbar.split")}
+                  </Button>
+                </ButtonGroup>
+                <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
+                  <Button
+                    type="button"
+                    onClick={onSelectAll}
+                    leftIcon={<CheckAllIcon />}
+                    borderRight={0}
+                  >
+                    {t("observation:toolbar.select_all")}
+                  </Button>
+                  <Button type="button" onClick={onSelectNone} leftIcon={<CrossIcon />}>
+                    {t("observation:toolbar.select_none")}
+                  </Button>
+                </ButtonGroup>
+                <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
+                  <Button
+                    type="button"
+                    onClick={bulkEdit}
+                    leftIcon={<EditIcon />}
+                    variant="outline"
+                    colorScheme="purple"
+                  >
+                    {t("observation:toolbar.edit")}
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={bulkDelete}
+                    leftIcon={<DeleteIcon />}
+                    variant="outline"
+                    colorScheme="red"
+                  >
+                    {t("observation:toolbar.delete")}
+                  </Button>
+                </ButtonGroup>
+              </Flex>
+              <Box>
+                <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
+                  {t("form:uploader.upload")}
+                </SubmitButton>
+              </Box>
+            </Flex>
+          ) : (
+            <Flex gap={4} justifyContent="space-between">
+              <Menu isLazy={true}>
                 <MenuButton
                   as={Button}
-                  type="button"
-                  leftIcon={<ImageIcon />}
-                  rightIcon={<ChevronDownIcon />}
-                  variant="outline"
-                  colorScheme="blue"
+                  maxW="120px"
+                  colorScheme="gray"
+                  leftIcon={<HamburgerIcon />}
                 >
-                  {t("observation:toolbar.import")}
+                  {t("observation:actions")}
                 </MenuButton>
                 <MenuList>
-                  <MenuItem onClick={onBrowse} icon={<SmartphoneIcon />}>
-                    {t("form:uploader.device")}
-                  </MenuItem>
-                  <MenuItem onClick={onDraftMediaOpen} icon={<CloudIcon />}>
-                    {t("form:uploader.draft")}
-                  </MenuItem>
+                  <MenuGroup title={t("observation:toolbar.import")}>
+                    <MenuItem color="blue.600" onClick={onBrowse} icon={<SmartphoneIcon />}>
+                      {t("form:uploader.device")}
+                    </MenuItem>
+                    <MenuItem color="blue.600" onClick={onDraftMediaOpen} icon={<CloudIcon />}>
+                      {t("form:my_uploads")}
+                    </MenuItem>
+                  </MenuGroup>
+                  <MenuDivider />
+                  <MenuGroup title="Actions">
+                    <MenuItem color="orange.600" onClick={onMerge} icon={<MergeIcon />}>
+                      {t("observation:toolbar.merge")}
+                    </MenuItem>
+                    <MenuItem color="orange.600" onClick={onSplit} icon={<SplitIcon />}>
+                      {t("observation:toolbar.split")}
+                    </MenuItem>
+                    <MenuDivider />
+                    <MenuItem color="teal.600" onClick={onSelectAll} icon={<CheckAllIcon />}>
+                      {t("observation:toolbar.select_all")}
+                    </MenuItem>
+                    <MenuItem color="teal.600" onClick={onSelectNone} icon={<CrossIcon />}>
+                      {t("observation:toolbar.select_none")}
+                    </MenuItem>
+                    <MenuDivider />
+                    <MenuItem color="purple.600" onClick={bulkEdit} icon={<EditIcon />}>
+                      {t("observation:toolbar.edit")}
+                    </MenuItem>
+                    <MenuItem color="red.600" onClick={bulkDelete} icon={<DeleteIcon />}>
+                      {t("observation:toolbar.delete")}
+                    </MenuItem>
+                  </MenuGroup>
                 </MenuList>
               </Menu>
-
-              <ButtonGroup isAttached={true} variant="outline" colorScheme="orange">
-                <Button type="button" onClick={onMerge} leftIcon={<MergeIcon />} borderRight={0}>
-                  {t("observation:toolbar.merge")}
-                </Button>
-                <Button type="button" onClick={onSplit} leftIcon={<SplitIcon />}>
-                  {t("observation:toolbar.split")}
-                </Button>
-              </ButtonGroup>
-              <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
-                <Button
-                  type="button"
-                  onClick={onSelectAll}
-                  leftIcon={<CheckAllIcon />}
-                  borderRight={0}
-                >
-                  {t("observation:toolbar.select_all")}
-                </Button>
-                <Button type="button" onClick={onSelectNone} leftIcon={<CrossIcon />}>
-                  {t("observation:toolbar.select_none")}
-                </Button>
-              </ButtonGroup>
-              <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
-                <Button
-                  type="button"
-                  onClick={bulkEdit}
-                  leftIcon={<EditIcon />}
-                  variant="outline"
-                  colorScheme="purple"
-                >
-                  {t("observation:toolbar.edit")}
-                </Button>
-                <Button
-                  type="button"
-                  onClick={bulkDelete}
-                  leftIcon={<DeleteIcon />}
-                  variant="outline"
-                  colorScheme="red"
-                >
-                  {t("observation:toolbar.delete")}
-                </Button>
-              </ButtonGroup>
-            </Flex>
-            <Box>
               <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
                 {t("form:uploader.upload")}
               </SubmitButton>
-            </Box>
-          </Flex>
-        ) : (
-          <Flex gap={4} justifyContent="space-between">
-            <Menu isLazy={true}>
-              <MenuButton as={Button} maxW="120px" colorScheme="gray" leftIcon={<HamburgerIcon />}>
-                {t("observation:actions")}
-              </MenuButton>
-              <MenuList>
-                <MenuGroup title={t("observation:toolbar.import")}>
-                  <MenuItem color="blue.600" onClick={onBrowse} icon={<SmartphoneIcon />}>
-                    {t("form:uploader.device")}
-                  </MenuItem>
-                  <MenuItem
-                    color="blue.600"
-                    onClick={onDraftMediaOpen}
-                    icon={<CloudIcon />}
-                  >
-                    {t("form:my_uploads")}
-                  </MenuItem>
-                </MenuGroup>
-                <MenuDivider />
-                <MenuGroup title="Actions">
-                  <MenuItem color="orange.600" onClick={onMerge} icon={<MergeIcon />}>
-                    {t("observation:toolbar.merge")}
-                  </MenuItem>
-                  <MenuItem color="orange.600" onClick={onSplit} icon={<SplitIcon />}>
-                    {t("observation:toolbar.split")}
-                  </MenuItem>
-                  <MenuDivider />
-                  <MenuItem color="teal.600" onClick={onSelectAll} icon={<CheckAllIcon />}>
-                    {t("observation:toolbar.select_all")}
-                  </MenuItem>
-                  <MenuItem color="teal.600" onClick={onSelectNone} icon={<CrossIcon />}>
-                    {t("observation:toolbar.select_none")}
-                  </MenuItem>
-                  <MenuDivider />
-                  <MenuItem color="purple.600" onClick={bulkEdit} icon={<EditIcon />}>
-                    {t("observation:toolbar.edit")}
-                  </MenuItem>
-                  <MenuItem color="red.600" onClick={bulkDelete} icon={<DeleteIcon />}>
-                    {t("observation:toolbar.delete")}
-                  </MenuItem>
-                </MenuGroup>
-              </MenuList>
-            </Menu>
-            <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
-              {t("form:uploader.upload")}
-            </SubmitButton>
-          </Flex>
-        )}
-      </SimpleGrid>
+            </Flex>
+          )}
+        </SimpleGrid>
+      </Box>
     </Box>
   );
 }

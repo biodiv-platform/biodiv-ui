@@ -17,7 +17,7 @@ const ImageGrid = ({ fields, onRemove, onBrowse }) => {
       ))}
     </ImageGridContainer>
   ) : (
-    <Flex minH="calc(90vh - var(--heading-height))" alignItems="center" justifyContent="center">
+    <Flex minH="calc(100vh - var(--heading-height))" alignItems="center" justifyContent="center">
       <Flex flexDir="column" alignItems="center" p={4}>
         <UploadIcon size={100} />
         <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>

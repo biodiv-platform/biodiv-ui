@@ -17,6 +17,7 @@
 /worker/firebase-config.js
 /public/*.js
 /public/*.map
+/public/partners-images
 
 # misc
 .eslintcache

@@ -10,5 +10,8 @@ export default function PageShowPage({ success, data }) {
 
 export const getServerSideProps = async (ctx) => {
   const props = await axGetPageByID(ctx.query.pageId);
+
+  if (!props.success) return { notFound: true };
+
   return { props };
 };

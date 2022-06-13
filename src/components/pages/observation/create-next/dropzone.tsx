@@ -27,7 +27,7 @@ export default function DraftDropzone() {
   return (
     <Box
       {...getRootProps()}
-      minH="calc(90vh - var(--heading-height))"
+      minH="calc(100vh - var(--heading-height))"
       bg={isDragActive ? "blue.100" : undefined}
       id="dropzone"
       cursor="inherit"
