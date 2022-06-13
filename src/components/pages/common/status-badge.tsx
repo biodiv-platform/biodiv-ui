@@ -32,7 +32,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
           <Link>
             <Badge colorScheme={TAXON_BADGE_COLORS.SYNONYM}>
               {t("observation:synonym")}
-              {lastCrumb.name && `: ${lastCrumb.name}`}
+              {lastCrumb?.name && `: ${lastCrumb.name}`}
             </Badge>
           </Link>
         </LocalLink>
