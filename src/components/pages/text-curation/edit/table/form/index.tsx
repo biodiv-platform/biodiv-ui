@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
@@ -13,6 +13,7 @@ import DateEdit from "./edit-date";
 import LocationEdit from "./edit-location";
 import EditStatus from "./edit-status";
 import ScientificNameEdit from "./scientific-name";
+import Section from "./section";
 
 export default function EditRowForm({ row }) {
   const { t } = useTranslation();
@@ -59,33 +60,18 @@ export default function EditRowForm({ row }) {
     <Box borderLeft="1px" borderColor="gray.200" h="full">
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <Box borderColor="gray.300" mb={4} borderWidth="thin">
-            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
-              Taxonomic Data
-            </Heading>
-            <ScientificNameEdit row={row} />
-          </Box>
-
-          <Box borderColor="gray.300" mb={4} borderWidth="thin">
-            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
-              Spatial Data
-            </Heading>
-            <LocationEdit row={row} />
-          </Box>
-
-          <Box borderColor="gray.300" mb={4} borderWidth="thin">
-            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
-              Temporal Data
-            </Heading>
-            <DateEdit row={row} />
-          </Box>
-
-          <Box borderColor="gray.300" mb={4} borderWidth="thin">
-            <Heading p={4} as="h3" size="sm" fontWeight="semibold" color="gray.500">
-              Curated Status
-            </Heading>
-            <EditStatus />
-          </Box>
+          <Section heading={t("text-curation:section_heading.taxonomic_data")}>
+            {<ScientificNameEdit row={row} />}
+          </Section>
+          <Section heading={t("text-curation:section_heading.spatial_data")}>
+            {<LocationEdit row={row} />}
+          </Section>
+          <Section heading={t("text-curation:section_heading.Temporal Data")}>
+            {<DateEdit row={row} />}
+          </Section>
+          <Section heading={t("text-curation:section_heading.curated_status")}>
+            {<EditStatus />}
+          </Section>
           <Box p={4}>
             <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
           </Box>

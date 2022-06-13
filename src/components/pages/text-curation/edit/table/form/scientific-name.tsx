@@ -107,22 +107,28 @@ export default function ScientificNameEdit({ row }) {
       <Box mb={4}>
         <HStack spacing={4}>
           {breadCrumbs.length > 0 ? (
-            <Tag>{`taxon id : ${breadCrumbs[breadCrumbs.length - 1].id}`}</Tag>
+            <Tag>{`${t("text-curation:edit.scientific_name.taxon_id")} : ${
+              breadCrumbs[breadCrumbs.length - 1].id
+            }`}</Tag>
           ) : (
-            row.taxonId && <Tag>{`taxon id : ${row.taxonId}`}</Tag>
+            row.taxonId && (
+              <Tag>{`${t("text-curation:edit.scientific_name.taxon_id")} : ${row.taxonId}`}</Tag>
+            )
           )}
 
           {breadCrumbs.length > 0 ? (
-            <Tag>{`rank : ${breadCrumbs[breadCrumbs.length - 1].rankName}`}</Tag>
+            <Tag>{`${t("text-curation:edit.scientific_name.rank")} : ${
+              breadCrumbs[breadCrumbs.length - 1].rankName
+            }`}</Tag>
           ) : (
-            row.rank && <Tag>{`rank : ${row.rank}`}</Tag>
+            row.rank && <Tag>{`${t("text-curation:edit.scientific_name.rank")} : ${row.rank}`}</Tag>
           )}
         </HStack>
       </Box>
 
       <RadioInputField
         name="validatedStatus"
-        label="Validity of scientific name"
+        label={t("text-curation:edit.scientific_name.validity")}
         options={validityOptions.map((v) => ({ label: v, value: v }))}
         mb={4}
         isInline={false}

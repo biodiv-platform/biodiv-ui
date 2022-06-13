@@ -65,7 +65,6 @@ const MapSuggedtedLocations = ({
             <MapContainer
               bounds={mapBounds}
               key="map"
-              // center={[20.5937, 78.9629]}
               zoom={4}
               scrollWheelZoom={true}
               style={{ height: "100%", width: "100%" }}

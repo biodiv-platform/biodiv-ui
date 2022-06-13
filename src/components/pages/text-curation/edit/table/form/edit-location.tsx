@@ -103,7 +103,9 @@ export default function LocationEdit({ row }) {
             borderColor="gray.300"
             borderWidth="medium"
           >
-            {isOpen ? "Collapse map" : "Show locations on map"}
+            {isOpen
+              ? t("text-curation:edit.location.collapse_map")
+              : t("text-curation:edit.location.show_on_map")}
           </Button>
 
           <MapWithNoSSR
@@ -137,12 +139,12 @@ export default function LocationEdit({ row }) {
         ))}
         {listOfLocations.length < row.peliasLocations.length && (
           <Button variant="link" onClick={handleLoadMore} color="blue.500">
-            Show all
+            {t("text-curation:edit.location.show_all")}
           </Button>
         )}
         {listOfLocations.length === row.peliasLocations.length && listOfLocations.length > 4 && (
           <Button variant="link" onClick={handleCollapse} color="blue.500">
-            Show fewer
+            {t("text-curation:edit.location.show_fewer")}
           </Button>
         )}
       </Box>
@@ -163,12 +165,12 @@ export default function LocationEdit({ row }) {
 
         <HStack mb={2}>
           <VStack align="flex-start">
-            <Text>Longitude</Text>
+            <Text>{t("text-curation:edit.location.longitude")}</Text>
             <Input value={longitude} onChange={handleLonChange} placeholder="longitude" size="md" />
           </VStack>
 
           <VStack align="flex-start">
-            <Text>Latitude</Text>
+            <Text>{t("text-curation:edit.location.latitude")}</Text>
             <Input value={latitude} onChange={handleLatChange} placeholder="longitude" size="md" />
           </VStack>
         </HStack>
@@ -177,7 +179,7 @@ export default function LocationEdit({ row }) {
           <SelectInputField
             shouldPortal={true}
             name="locationAccuracy"
-            label="Edit Location accuracy"
+            label={t("text-curation:edit.location.edit_location_accuracy")}
             options={accuracyOptions.map((o) => ({ label: o, value: o }))}
             onChangeCallback={handleOnOptionSelect}
           />
