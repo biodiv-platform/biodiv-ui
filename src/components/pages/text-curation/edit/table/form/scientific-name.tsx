@@ -12,13 +12,13 @@ import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import CurationTaxonBreadcrumbs from "./curation-breadcrumbs";
+const validityOptions = ["Not validated", "Validated", "Invalid"];
+const options = validityOptions.map((v) => ({ label: v, value: v }));
 
 export default function ScientificNameEdit({ row }) {
   const { t } = useTranslation();
   const hForm = useFormContext();
   const scientificRef: any = useRef(null);
-
-  const validityOptions = ["Not validated", "Validated", "Invalid"];
 
   const initialBreadCrumbs = row.hierarchy.map((v) => ({
     id: v.taxon_id,
@@ -107,21 +107,29 @@ export default function ScientificNameEdit({ row }) {
       <Box mb={4}>
         <HStack spacing={4}>
           {breadCrumbs.length > 0 ? (
-            <Tag>{`${t("text-curation:edit.scientific_name.taxon_id")} : ${
-              breadCrumbs[breadCrumbs.length - 1].id
-            }`}</Tag>
+            <Tag>
+              {t("text-curation:edit.scientific_name.taxon_id")} :
+              {breadCrumbs[breadCrumbs.length - 1].id}
+            </Tag>
           ) : (
             row.taxonId && (
-              <Tag>{`${t("text-curation:edit.scientific_name.taxon_id")} : ${row.taxonId}`}</Tag>
+              <Tag>
+                {t("text-curation:edit.scientific_name.taxon_id")} : {row.taxonId}
+              </Tag>
             )
           )}
 
           {breadCrumbs.length > 0 ? (
-            <Tag>{`${t("text-curation:edit.scientific_name.rank")} : ${
-              breadCrumbs[breadCrumbs.length - 1].rankName
-            }`}</Tag>
+            <Tag>
+              {t("text-curation:edit.scientific_name.rank")} :
+              {breadCrumbs[breadCrumbs.length - 1].rankName}
+            </Tag>
           ) : (
-            row.rank && <Tag>{`${t("text-curation:edit.scientific_name.rank")} : ${row.rank}`}</Tag>
+            row.rank && (
+              <Tag>
+                {t("text-curation:edit.scientific_name.rank")} : {row.rank}
+              </Tag>
+            )
           )}
         </HStack>
       </Box>
@@ -129,7 +137,7 @@ export default function ScientificNameEdit({ row }) {
       <RadioInputField
         name="validatedStatus"
         label={t("text-curation:edit.scientific_name.validity")}
-        options={validityOptions.map((v) => ({ label: v, value: v }))}
+        options={options}
         mb={4}
         isInline={false}
       />

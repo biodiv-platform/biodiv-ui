@@ -61,16 +61,16 @@ export default function EditRowForm({ row }) {
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <Section heading={t("text-curation:section_heading.taxonomic_data")}>
-            {<ScientificNameEdit row={row} />}
+            <ScientificNameEdit row={row} />
           </Section>
           <Section heading={t("text-curation:section_heading.spatial_data")}>
-            {<LocationEdit row={row} />}
+            <LocationEdit row={row} />
           </Section>
           <Section heading={t("text-curation:section_heading.Temporal Data")}>
-            {<DateEdit row={row} />}
+            <DateEdit row={row} />
           </Section>
           <Section heading={t("text-curation:section_heading.curated_status")}>
-            {<EditStatus />}
+            <EditStatus />
           </Section>
           <Box p={4}>
             <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>

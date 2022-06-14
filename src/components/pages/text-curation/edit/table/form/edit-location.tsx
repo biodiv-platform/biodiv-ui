@@ -5,13 +5,14 @@ import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
+const MapWithNoSSR = dynamic(() => import("./map-locations"), {
+  ssr: false
+});
+
 export default function LocationEdit({ row }) {
-  const MapWithNoSSR = dynamic(() => import("./map-locations"), {
-    ssr: false
-  });
   const { isOpen, onToggle } = useDisclosure();
   const { t } = useTranslation();
   const hForm = useFormContext();
@@ -86,8 +87,13 @@ export default function LocationEdit({ row }) {
     }
   };
 
+  const reducedListOfLocations = useMemo(
+    () => row.peliasLocations.slice(0, 4),
+    [row.peliasLocations]
+  );
+
   const handleCollapse = () => {
-    setListOfLocations([...row.peliasLocations.slice(0, 4)]);
+    setListOfLocations(reducedListOfLocations);
   };
 
   return (
@@ -108,15 +114,17 @@ export default function LocationEdit({ row }) {
               : t("text-curation:edit.location.show_on_map")}
           </Button>
 
-          <MapWithNoSSR
-            row={row}
-            setLatitude={setLatitude}
-            setLongitude={setlongitude}
-            setLocationAccuracy={setLocationAccuracy}
-            hForm={hForm}
-            locationRef={locationRef}
-            isOpen={isOpen}
-          />
+          {isOpen && (
+            <MapWithNoSSR
+              row={row}
+              setLatitude={setLatitude}
+              setLongitude={setlongitude}
+              setLocationAccuracy={setLocationAccuracy}
+              hForm={hForm}
+              locationRef={locationRef}
+              isOpen={isOpen}
+            />
+          )}
         </Box>
       )}
 
@@ -137,6 +145,7 @@ export default function LocationEdit({ row }) {
             {" " + "(" + suggestion.coordinates[0] + ", " + suggestion.coordinates[1] + ")"}
           </Button>
         ))}
+
         {listOfLocations.length < row.peliasLocations.length && (
           <Button variant="link" onClick={handleLoadMore} color="blue.500">
             {t("text-curation:edit.location.show_all")}
@@ -161,7 +170,11 @@ export default function LocationEdit({ row }) {
         isRaw={true}
       />
       <Box mb={4}>
-        {locationAccuracy && <Tag mb={4}>{`accuracy : ${locationAccuracy}`}</Tag>}
+        {locationAccuracy && (
+          <Tag mb={4}>
+            {t("text-curation:edit.location.accuracy")} : {locationAccuracy}
+          </Tag>
+        )}
 
         <HStack mb={2}>
           <VStack align="flex-start">

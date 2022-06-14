@@ -16,7 +16,7 @@ export const CURATED_STATUS = {
   REJECTED_OTHER_COMMUNICATION: "REJECTED_OTHER_COMMUNICATION",
   REJECTED_NOT_ACCESSIBLE: "REJECTED_NOT_ACCESSIBLE",
   REJECTED_OTHER_ORGANISM: "REJECTED_OTHER_ORGANISM",
-  REJECTED_INCOMPLETE:"REJECTED_INCOMPLETE"
+  REJECTED_INCOMPLETE: "REJECTED_INCOMPLETE"
 };
 
 export const columns = [
@@ -49,15 +49,18 @@ export const columns = [
     selector: (row) => row.curatedDate,
     cell: (row) => {
       const date = row.curatedDate;
-      let formatedDate = row.curatedDate;
-      if (row.curatedDateFormat == "MONTH" && date != "") {
-        formatedDate = date.substring(date.indexOf("-") + 1, date.length);
-      } else if (row.curatedDateFormat == "YEAR" && date != "") {
-        formatedDate = date.substring(date.lastIndexOf("-") + 1, date.length);
-      } else {
-        formatedDate = date;
+      if (!date) return date;
+
+      switch (row.curatedDateFormat) {
+        case "MONTH":
+          return date.substring(date.indexOf("-") + 1, date.length);
+
+        case "YEAR":
+          return date.substring(date.lastIndexOf("-") + 1, date.length);
+
+        default:
+          return date;
       }
-      return formatedDate;
     }
   },
   {
