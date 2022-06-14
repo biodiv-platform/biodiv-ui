@@ -117,8 +117,8 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
   };
 
   return (
-    <Box position="sticky" bottom={0} w="full" p={4}>
-      <Box bg="white" border="1px" borderColor="gray.300" borderRadius="md">
+    <Box position="sticky" bottom={0} w="full" className="container-fluid" py={4}>
+      <Box bg="white" border="1px" borderColor="gray.400" borderRadius="md" shadow="md">
         <SimpleGrid p={4}>
           {isDesktop ? (
             <Flex justifyContent="space-between" gap={4} alignItems="center">
