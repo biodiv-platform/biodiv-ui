@@ -43,7 +43,7 @@ export const CurateEditProvider = ({
     const { success } = await axUpdateDataset(updatedRow);
     if (success) {
       setRows(
-        rows.map((row) => (row.uniqueId === updatedRow.uniqueId ? { ...row, ...updatedRow } : row))
+        rows.map((row) => (row.id === updatedRow.id ? { ...row, ...updatedRow } : row))
       );
       notification(t("text-curation:update.success"), NotificationType.Success);
     } else {

@@ -15,13 +15,14 @@ export const CURATED_STATUS = {
   CURATED: "CURATED",
   REJECTED_OTHER_COMMUNICATION: "REJECTED_OTHER_COMMUNICATION",
   REJECTED_NOT_ACCESSIBLE: "REJECTED_NOT_ACCESSIBLE",
-  REJECTED_OTHER_ORGANISM: "REJECTED_OTHER_ORGANISM"
+  REJECTED_OTHER_ORGANISM: "REJECTED_OTHER_ORGANISM",
+  REJECTED_INCOMPLETE: "REJECTED_INCOMPLETE"
 };
 
 export const columns = [
   {
-    name: "uniqueId",
-    selector: (row) => row.uniqueId
+    name: "id",
+    selector: (row) => row.id
   },
   {
     name: "permalink",
@@ -45,7 +46,22 @@ export const columns = [
   },
   {
     name: "Curated Date",
-    selector: (row) => row.curatedDate
+    selector: (row) => row.curatedDate,
+    cell: (row) => {
+      const date = row.curatedDate;
+      if (!date) return date;
+
+      switch (row.curatedDateFormat) {
+        case "MONTH":
+          return date.substring(date.indexOf("-") + 1, date.length);
+
+        case "YEAR":
+          return date.substring(date.lastIndexOf("-") + 1, date.length);
+
+        default:
+          return date;
+      }
+    }
   },
   {
     name: "Curated Status",

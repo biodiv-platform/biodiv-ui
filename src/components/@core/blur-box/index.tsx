@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import React from "react";
 
 interface IBlurBoxProps {
   children;
@@ -15,48 +15,41 @@ interface IBlurBoxProps {
   width?;
 }
 
-const defaultProps = {
-  fallbackColor: "black",
-  blur: 40,
-  negativeBlur: 30
-};
-
-function BlurBox(props: IBlurBoxProps) {
-  const [p, blurBoxProps]: any = useMemo(() => {
-    const p = { ...defaultProps, ...props };
-
-    const bgSize = `${100 + p.negativeBlur}%`;
-
-    return [
-      p,
-      {
-        className: "blur-box-bg",
-        opacity: 0.9,
-        style: { filter: `blur(${p.blur}px)` },
-        backgroundImage: `url("${p.bg}")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-        h: bgSize,
-        w: bgSize,
-        position: "absolute",
-        left: `-${p.negativeBlur / 2}%`,
-        top: `-${p.negativeBlur / 2}%`,
-        bottom: bgSize,
-        right: bgSize
-      }
-    ];
-  }, [props]);
+function BlurBox({
+  children,
+  bg,
+  fallbackColor = "black",
+  blur = 40,
+  negativeBlur = 30,
+  height,
+  width
+}: IBlurBoxProps) {
+  const bgSize = `${100 + negativeBlur}%`;
 
   return (
     <Box
       className="blur-box"
-      h={p.height}
-      w={p.width}
+      h={height}
+      w={width}
       overflow="hidden"
       position="relative"
-      bg={p.fallbackColor}
+      bg={fallbackColor}
     >
-      <Box {...blurBoxProps} />
+      <Box
+        className="blur-box-bg"
+        opacity={0.9}
+        style={{ filter: `blur(${blur}px)` }}
+        backgroundImage={`url("${bg}")`}
+        backgroundSize="cover"
+        backgroundPosition="center center"
+        h={bgSize}
+        w={bgSize}
+        position="absolute"
+        left={`-${negativeBlur / 2}%`}
+        top={`-${negativeBlur / 2}%`}
+        bottom={bgSize}
+        right={bgSize}
+      />
       <Box
         className="blur-box-content"
         position={{ base: "inherit", md: "absolute" }}
@@ -65,7 +58,7 @@ function BlurBox(props: IBlurBoxProps) {
         bottom={0}
         right={0}
       >
-        {p.children}
+        {children}
       </Box>
     </Box>
   );

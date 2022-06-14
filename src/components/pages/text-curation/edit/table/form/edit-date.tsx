@@ -42,6 +42,25 @@ export default function DateEdit({ row }) {
 
   return (
     <Box px={4} mb={6}>
+      {Object.entries(row.DATE)
+        .reverse()
+        .map(([type, value]: any) =>
+          value.map((v) => (
+            <Button
+              variant="outline"
+              size="xs"
+              bg="blue.50"
+              key={type + v}
+              colorScheme="blue"
+              borderRadius="3xl"
+              mb={2}
+              mr={2}
+              onClick={() => onTagSelect(type, v)}
+            >
+              {type}: {v}
+            </Button>
+          ))
+        )}
       <SimpleGrid columns={2} gap={4} mb={3}>
         <DatePickerField
           name="curatedDate"
@@ -58,24 +77,6 @@ export default function DateEdit({ row }) {
           mb={0}
         />
       </SimpleGrid>
-
-      {Object.entries(row.DATE).reverse().map(([type, value]: any) =>
-        value.map((v) => (
-          <Button
-            variant="outline"
-            size="xs"
-            bg="blue.50"
-            key={type + v}
-            colorScheme="blue"
-            borderRadius="3xl"
-            mb={2}
-            mr={2}
-            onClick={() => onTagSelect(type, v)}
-          >
-            {type}: {v}
-          </Button>
-        ))
-      )}
     </Box>
   );
 }
