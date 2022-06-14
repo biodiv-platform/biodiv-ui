@@ -184,7 +184,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
 
       for (let i = 0; i < all.length; i++) {
         if (all[i].isSelected) {
-          o.update(i, prepareObservationData({ ...all[i], ...data }));
+          o.update(i, prepareObservationData({ ...all[i], ...data, isSelected: false }));
         }
       }
     },
