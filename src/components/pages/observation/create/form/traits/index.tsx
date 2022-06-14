@@ -38,7 +38,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
   }, [sGroup]);
 
   const handleOnChange = (traitId, value) => {
-    setFacts({ ...facts, [traitId]: Array.isArray(value) ? value : [value] });
+    setFacts({ ...facts, [traitId]: Array.isArray(value) ? value : value ? [value] : [] });
   };
 
   useEffect(() => {
