@@ -146,12 +146,12 @@ export default function LocationEdit({ row }) {
         ))}
 
         {listOfLocations.length < row.peliasLocations.length && (
-          <Button variant="link" onClick={handleLoadMore} color="blue.500">
+          <Button variant="link" onClick={handleLoadMore} colorScheme="blue">
             {t("text-curation:edit.location.show_all")}
           </Button>
         )}
         {listOfLocations.length === row.peliasLocations.length && listOfLocations.length > 4 && (
-          <Button variant="link" onClick={handleCollapse} color="blue.500">
+          <Button variant="link" onClick={handleCollapse} colorScheme="blue">
             {t("text-curation:edit.location.show_fewer")}
           </Button>
         )}

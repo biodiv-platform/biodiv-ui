@@ -33,6 +33,7 @@ export default function SpeciesRelatedObservations() {
                     <Image
                       borderRadius="md"
                       bg="gray.300"
+                      loading="lazy"
                       alt={title}
                       src={getResourceThumbnail(
                         RESOURCE_CTX.OBSERVATION,
