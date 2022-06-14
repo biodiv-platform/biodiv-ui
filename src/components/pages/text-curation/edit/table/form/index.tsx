@@ -13,6 +13,7 @@ import DateEdit from "./edit-date";
 import LocationEdit from "./edit-location";
 import EditStatus from "./edit-status";
 import ScientificNameEdit from "./scientific-name";
+import Section from "./section";
 
 export default function EditRowForm({ row }) {
   const { t } = useTranslation();
@@ -37,8 +38,11 @@ export default function EditRowForm({ row }) {
         value: row.curatedLocation
       },
       curatedDate: row.curatedDate,
-      curatedDateFormat: DATE_FORMAT_OPTIONS[0].value,
-      curatedStatus: row.curatedStatus
+      curatedDateFormat: row.curatedDateFormat
+        ? row.curatedDateFormat
+        : DATE_FORMAT_OPTIONS[0].value,
+      curatedStatus: row.curatedStatus,
+      validatedStatus: row.validatedStatus
     }
   });
 
@@ -48,16 +52,26 @@ export default function EditRowForm({ row }) {
       ...values,
       curatedSName: values.curatedSName || ""
     });
+    const btn: any = document.querySelector(`[data-testid=expander-button-${row.id}]`);
+    btn.click();
   };
 
   return (
     <Box borderLeft="1px" borderColor="gray.200" h="full">
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <ScientificNameEdit row={row} />
-          <LocationEdit row={row} />
-          <DateEdit row={row} />
-          <EditStatus />
+          <Section heading={t("text-curation:section_heading.taxonomic_data")}>
+            <ScientificNameEdit row={row} />
+          </Section>
+          <Section heading={t("text-curation:section_heading.spatial_data")}>
+            <LocationEdit row={row} />
+          </Section>
+          <Section heading={t("text-curation:section_heading.Temporal Data")}>
+            <DateEdit row={row} />
+          </Section>
+          <Section heading={t("text-curation:section_heading.curated_status")}>
+            <EditStatus />
+          </Section>
           <Box p={4}>
             <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
           </Box>

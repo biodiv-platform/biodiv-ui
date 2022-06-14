@@ -7,6 +7,8 @@ import useCurateEdit from "../use-curate-edit";
 import EditRowForm from "./form";
 
 const EXPAND_BLACKLIST = [
+  "validatedStatus",
+  "locationAccuracy",
   "latitude",
   "longitude",
   "rank",
