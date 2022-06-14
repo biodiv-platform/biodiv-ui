@@ -32,6 +32,7 @@ import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 
 import useObservationCreateNext from "../use-observation-create-next-hook";
+import SelectionCounter from "./selection-counter";
 
 const areValuesEqual = (val1, val2) => {
   if (!val1 || !val2) {
@@ -172,7 +173,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     variant="outline"
                     colorScheme="purple"
                   >
-                    {t("observation:toolbar.edit")}
+                    {t("observation:toolbar.edit")} <SelectionCounter />
                   </Button>
                   <Button
                     type="button"
@@ -228,7 +229,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     </MenuItem>
                     <MenuDivider />
                     <MenuItem color="purple.600" onClick={bulkEdit} icon={<EditIcon />}>
-                      {t("observation:toolbar.edit")}
+                      {t("observation:toolbar.edit")} <SelectionCounter />
                     </MenuItem>
                     <MenuItem color="red.600" onClick={bulkDelete} icon={<DeleteIcon />}>
                       {t("observation:toolbar.delete")}
