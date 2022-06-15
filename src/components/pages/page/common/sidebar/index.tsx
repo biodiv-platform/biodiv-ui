@@ -61,7 +61,7 @@ export default function PagesSidebar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return p.pages.length > 0 ? (
-    <TreeContainer className="fade">
+    <TreeContainer>
       {!isDesktop && (
         <Button colorScheme="blue" w="full" mb={4} onClick={onToggle} leftIcon={<MenuIcon />}>
           {t("page:sidebar.toggle")}

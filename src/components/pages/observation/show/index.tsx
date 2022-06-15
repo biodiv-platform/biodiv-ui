@@ -73,7 +73,7 @@ export default function ObservationShowPageComponent({
     <div className="container mt" key={o.observation?.id}>
       <Header o={o} following={permission?.following} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
-        <Box gridColumn="1/3" className="fadeInUp delay-3">
+        <Box gridColumn="1/3">
           <CarouselObservation
             observationId={o.observation?.id}
             resources={o.observationResource || []}
@@ -89,7 +89,7 @@ export default function ObservationShowPageComponent({
           />
         </Box>
       </SimpleGrid>
-      <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]} className="fadeInUp delay-6">
+      <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
           <Info observation={o} speciesGroups={speciesGroups} />
           <RecoSuggestion o={o} setO={setO} permission={permission} />

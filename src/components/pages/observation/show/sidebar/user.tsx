@@ -17,7 +17,7 @@ const User = ({ user }: UserProps) =>
       py={4}
       mb={4}
       alignItems="center"
-      className="white-box fadeInUp delay-4"
+      className="white-box"
     >
       <LocalLink href={`/user/show/${user.id}`}>
         <Link justifySelf="center" px={4}>
