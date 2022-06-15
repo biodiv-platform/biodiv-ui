@@ -71,12 +71,12 @@
     "token_not_saved": "টোকেন সংরক্ষণ করতে পারে না",
     "token_saved": "টোকেন সংরক্ষিত"
   },
+  "observation_success": "পর্যবেক্ষণ সফলভাবে তৈরি",
   "observed_on": "উপর পালন করা হয়",
   "offline": "কোন ইন্টারনেট সংযোগ",
   "one_moment_please": "এক মুহূর্ত দয়া করে",
   "or": "অথবা",
   "permalink": "Permalink.",
-  "points_gained": "{{points}} কার্যকলাপ বিন্দু(গুলি) অর্জন",
   "post": "পোস্ট",
   "prev": "আগে",
   "processing": "প্রক্রিয়াকরণ ...",

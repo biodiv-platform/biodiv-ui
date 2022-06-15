@@ -71,12 +71,12 @@
     "token_not_saved": "टोकन को नहीं बचा सका",
     "token_saved": "टोकन बचाया"
   },
+  "observation_success": "अवलोकन सफलतापूर्वक बनाया गया",
   "observed_on": "पर देखा गया",
   "offline": "कोई इंटरनेट कनेक्शन नहीं",
   "one_moment_please": "कृपया एक क्षण",
   "or": "या",
   "permalink": "स्थायी लिंक",
-  "points_gained": "{{points}} प्राप्त हुआ",
   "post": "डाक",
   "prev": "पहले का",
   "processing": "प्रसंस्करण...",

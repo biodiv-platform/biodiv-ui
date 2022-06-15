@@ -18,9 +18,32 @@
   },
   "dataset_description": "डेटासेट विवरण",
   "date_columns": "दिनांक कॉलम",
+  "edit": {
+    "location": {
+      "accuracy": "शुद्धता",
+      "collapse_map": "नक्शा संक्षिप्त करें",
+      "edit_location_accuracy": "स्थान सटीकता संपादित करें",
+      "latitude": "अक्षांश",
+      "longitude": "देशान्तर",
+      "show_all": "सब दिखाएं",
+      "show_fewer": "कम दिखाएं",
+      "show_on_map": "मानचित्र पर स्थान दिखाएं"
+    },
+    "scientific_name": {
+      "rank": "पद",
+      "taxon_id": "टैक्सोन आईडी",
+      "validity": "वैज्ञानिक नाम की वैधता"
+    }
+  },
   "location_columns": "स्थान कॉलम",
   "metadata": "मेटाडाटा",
   "sci_name_columns": "वैज्ञानिक नाम कॉलम",
+  "section_heading": {
+    "Temporal Data": "अस्थायी डेटा",
+    "curated_status": "क्यूरेटेड स्थिति",
+    "spatial_data": "स्थानिक डेटा",
+    "taxonomic_data": "टैक्सोनोमिक डेटा"
+  },
   "update": {
     "error": "पंक्ति अद्यतन करने में असमर्थ",
     "success": "पंक्ति सफलतापूर्वक अपडेट की गई"

@@ -71,12 +71,12 @@
     "token_not_saved": "టోకెన్ సేవ్ కాలేదు",
     "token_saved": "టోకెన్ సేవ్ చేయబడింది"
   },
+  "observation_success": "పరిశీలన విజయవంతంగా రూపొందించబడింది",
   "observed_on": "గమనించారు",
   "offline": "ఇంటర్నెట్ కనెక్షన్ లేదు",
   "one_moment_please": "ఒక క్షణం దయచేసి",
   "or": "లేక",
   "permalink": "Permalink.",
-  "points_gained": "{{points}} కార్యాచరణ పాయింట్(లు) పొందింది",
   "post": "పోస్ట్ చేయండి",
   "prev": "మునుపటి",
   "processing": "ప్రాసెసింగ్ ...",

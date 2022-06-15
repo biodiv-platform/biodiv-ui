@@ -18,9 +18,32 @@
   },
   "dataset_description": "ଡାଟାବେସ୍ ବର୍ଣ୍ଣନା",
   "date_columns": "ତାରିଖ ସ୍ତମ୍ଭ",
+  "edit": {
+    "location": {
+      "accuracy": "ସଠିକତା",
+      "collapse_map": "ମାନଚିତ୍ର ନଷ୍ଟ କରନ୍ତୁ |",
+      "edit_location_accuracy": "ଅବସ୍ଥାନ ସଠିକତା ସଂପାଦନ କରନ୍ତୁ |",
+      "latitude": "ଅକ୍ଷାଂଶ",
+      "longitude": "ଦ୍ରାଘିମା",
+      "show_all": "ସମସ୍ତ ଦେଖାନ୍ତୁ |",
+      "show_fewer": "କମ୍ ଦେଖାନ୍ତୁ |",
+      "show_on_map": "ମାନଚିତ୍ରରେ ଅବସ୍ଥାନ ଦେଖାନ୍ତୁ |"
+    },
+    "scientific_name": {
+      "rank": "ମାନ୍ୟତା",
+      "taxon_id": "ଟ୍ୟାକ୍ସନ୍ id",
+      "validity": "ବ scientific ଜ୍ଞାନିକ ନାମର ବ id ଧତା |"
+    }
+  },
   "location_columns": "ଅବସ୍ଥାନ ସ୍ତମ୍ଭ",
   "metadata": "ମେଟାଡାଟା |",
   "sci_name_columns": "ବ Scientific ଜ୍ଞାନିକ ନାମ ସ୍ତମ୍ଭଗୁଡିକ |",
+  "section_heading": {
+    "Temporal Data": "ସାମୟିକ ତଥ୍ୟ |",
+    "curated_status": "କ୍ୟୁରେଟେଡ୍ ସ୍ଥିତି |",
+    "spatial_data": "ସ୍ଥାନିକ ତଥ୍ୟ |",
+    "taxonomic_data": "ଟ୍ୟାକ୍ସୋନୋମିକ୍ ତଥ୍ୟ |"
+  },
   "update": {
     "error": "ଧାଡି ଅପଡେଟ୍ କରିବାକୁ ଅସମର୍ଥ |",
     "success": "ଧାଡି ସଫଳତାର ସହିତ ଅଦ୍ୟତନ ହେଲା |"

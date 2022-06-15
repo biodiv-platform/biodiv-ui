@@ -103,14 +103,9 @@ export default function OfflineSync() {
         }
 
         if (instant) {
-          notification(
-            t("common:points_gained", {
-              points: data?.activityCount
-            }),
-            NotificationType.Success
-          );
           emit(SYNC_SINGLE_OBSERVATION_DONE, { observation, data });
           if (redirect) {
+            notification(t("common:observation_success"), NotificationType.Success);
             router.push(`/observation/show/${data.observation.id}`, true);
           }
         } else {
@@ -134,13 +129,7 @@ export default function OfflineSync() {
     }
   };
 
-  const trySyncincObservations = async (observations) => {
-    for (const observation of observations) {
-      await trySyncSingleObservation(observation);
-    }
-  };
-
-  useListener(trySyncincObservations, [SYNC_OBSERVATION]);
+  useListener((observations) => observations.forEach(trySyncSingleObservation), [SYNC_OBSERVATION]);
 
   const trySyncPendingObservations = async () => {
     const poList = await getAllObservations();

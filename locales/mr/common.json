@@ -71,12 +71,12 @@
     "token_not_saved": "टोकन वाचवू शकत नाही",
     "token_saved": "टोकन वाचले"
   },
+  "observation_success": "निरीक्षण यशस्वीरित्या तयार केले",
   "observed_on": "वर पाहिले",
   "offline": "इंटरनेट कनेक्शन नाही",
   "one_moment_please": "कृपया क्षणभर थांबा",
   "or": "किंवा",
   "permalink": "परमिलिंक",
-  "points_gained": "{{points}} क्रियाकलाप बिंदू प्राप्त",
   "post": "पोस्ट",
   "prev": "मागील",
   "processing": "प्रक्रिया ...",

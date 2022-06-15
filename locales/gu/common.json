@@ -71,12 +71,12 @@
     "token_not_saved": "ટોકન સાચવી શક્યું નથી",
     "token_saved": "ટોકન સાચવેલું"
   },
+  "observation_success": "અવલોકન સફળતાપૂર્વક બનાવવામાં આવ્યું",
   "observed_on": "પર અવલોકન",
   "offline": "ઇન્ટરનેટ કનેક્શન નથી",
   "one_moment_please": "એક ક્ષણ કૃપા કરીને",
   "or": "અથવા",
   "permalink": "પરમાલિંક",
-  "points_gained": "{{points}} પ્રવૃત્તિ પોઈન્ટ્સ પ્રાપ્ત થયા",
   "post": "પોસ્ટ",
   "prev": "અગાઉના",
   "processing": "પ્રક્રિયા...",

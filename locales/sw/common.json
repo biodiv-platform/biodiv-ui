@@ -71,12 +71,12 @@
     "token_not_saved": "Haikuweza kuokoa Ishara",
     "token_saved": "Ishara imehifadhiwa"
   },
+  "observation_success": "Uchunguzi Umeundwa Kwa Mafanikio",
   "observed_on": "Aliona juu ya",
   "offline": "Hakuna uhusiano wa internet.",
   "one_moment_please": "Dakika moja tafadhali",
   "or": "au",
   "permalink": "Permalink.",
-  "points_gained": "{{points}} hatua ya shughuli zilizopatikana",
   "post": "Chapisha",
   "prev": "Iliyotangulia.",
   "processing": "Usindikaji ...",
