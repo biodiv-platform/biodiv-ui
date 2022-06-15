@@ -115,7 +115,9 @@ export default function ObservationShowPageComponent({
             featureFunc={axGroupsFeature}
             unfeatureFunc={axGroupsUnFeature}
           />
-          {o?.checkListAnnotation && <CheckListAnnotation customData={o?.checkListAnnotation} />}
+          {Object.keys(o?.checkListAnnotation || {}).length > 0 && (
+            <CheckListAnnotation customData={o?.checkListAnnotation} />
+          )}
           <Activity
             resourceId={o.observation?.id}
             resourceType={RESOURCE_TYPE.OBSERVATION}
