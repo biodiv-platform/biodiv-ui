@@ -17,10 +17,8 @@ import { absoluteUrl } from "@utils/basic";
 import App, { AppContext } from "next/app";
 import Router from "next/router";
 import NProgress from "nprogress";
-import React, { Suspense, useEffect } from "react";
+import React, { useEffect } from "react";
 import BusProvider from "react-gbus";
-
-const AutoSync = React.lazy(() => import("@components/@core/autosync"));
 
 interface AppProps {
   Component;
@@ -54,9 +52,6 @@ function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: A
                 <NavigationMenuLight />
               </>
             )}
-            <Suspense fallback={null}>
-              <AutoSync />
-            </Suspense>
             <SkipNavContent />
             <div id="main">
               <Component {...pageProps} />
