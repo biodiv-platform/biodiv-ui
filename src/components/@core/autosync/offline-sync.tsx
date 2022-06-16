@@ -129,7 +129,15 @@ export default function OfflineSync() {
     }
   };
 
-  useListener((observations) => observations.forEach(trySyncSingleObservation), [SYNC_OBSERVATION]);
+  useListener(
+    async (observations) => {
+      for (const observation of observations) {
+        await trySyncSingleObservation(observation);
+        await new Promise((r) => setTimeout(r, 3000));
+      }
+    },
+    [SYNC_OBSERVATION]
+  );
 
   const trySyncPendingObservations = async () => {
     const poList = await getAllObservations();
