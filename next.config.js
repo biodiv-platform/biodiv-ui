@@ -5,6 +5,7 @@ module.exports = nextTranslate({
   concurrentFeatures: true,
   experimental: {
     legacyBrowsers: false,
-    browsersListForSwc: true
+    browsersListForSwc: true,
+    nextScriptWorkers: true
   }
 });
