@@ -21,11 +21,12 @@ Allow: /
 Disallow: /namelist/
 
 User-agent: Twitterbot
-Disallow: 
+Allow: /
+Disallow: /namelist/
 
 User-agent: facebookexternalhit
 Allow: /
+Disallow: /namelist/
 
 User-agent: *
 Disallow: /
-Crawl-delay: 10
