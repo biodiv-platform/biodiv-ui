@@ -16,7 +16,6 @@ const Actions = () => {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { rows, isShow, canEdit, datasetId } = useCurateEdit();
-  console.log(rows.filter);
 
   const handleOnChange = (e) => rows.updateFilter("curatedStatus", e.target.value);
 
