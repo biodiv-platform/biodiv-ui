@@ -213,7 +213,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   ) : (
     <>
       <FormProvider {...hForm}>
-        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)} noValidate>
           <Box className="container-fluid" minH="calc(100vh - var(--heading-height))">
             <ImageGrid fields={o.fields} onRemove={o.remove} onBrowse={onBrowse} />
             <MediaPicker onBrowse={onBrowse} />
