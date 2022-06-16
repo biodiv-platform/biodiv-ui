@@ -60,3 +60,14 @@ export const axGetPeliasAutocompleteLocations = async (text) => {
     return { succces: false, data: [] };
   }
 };
+
+export const axDownloadCsv = async (id, curatedStatus) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/download/${id}`, {
+      params: { curatedStatus: curatedStatus }
+    });
+    return { succes: true, data: data };
+  } catch (e) {
+    return { succces: false, data: [] };
+  }
+};

@@ -42,7 +42,9 @@ export default function EditRowForm({ row }) {
         ? row.curatedDateFormat
         : DATE_FORMAT_OPTIONS[0].value,
       curatedStatus: row.curatedStatus,
-      validatedStatus: row.validatedStatus
+      validatedStatus: row.validatedStatus,
+      country: row.country,
+      countryCode: row.countryCode
     }
   });
 
