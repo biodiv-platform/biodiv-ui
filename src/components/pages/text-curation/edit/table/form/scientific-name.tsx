@@ -15,7 +15,7 @@ import CurationTaxonBreadcrumbs from "./curation-breadcrumbs";
 const validityOptions = ["Not validated", "Validated", "Invalid"];
 const options = validityOptions.map((v) => ({ label: v, value: v }));
 
-export default function ScientificNameEdit({ row }) {
+export default function ScientificNameEdit({ row, userId }) {
   const { t } = useTranslation();
   const hForm = useFormContext();
   const scientificRef: any = useRef(null);
@@ -134,13 +134,15 @@ export default function ScientificNameEdit({ row }) {
         </HStack>
       </Box>
 
-      <RadioInputField
-        name="validatedStatus"
-        label={t("text-curation:edit.scientific_name.validity")}
-        options={options}
-        mb={4}
-        isInline={false}
-      />
+      {row?.validators?.includes(userId) && (
+        <RadioInputField
+          name="validatedStatus"
+          label={t("text-curation:edit.scientific_name.validity")}
+          options={options}
+          mb={4}
+          isInline={false}
+        />
+      )}
     </Box>
   );
 }

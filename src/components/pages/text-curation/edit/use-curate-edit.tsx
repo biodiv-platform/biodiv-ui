@@ -8,6 +8,8 @@ interface CurateEditContextProps {
   isShow;
   canEdit;
   datasetId;
+  userName;
+  userId;
   rows: {
     filtered;
     filter;
@@ -24,6 +26,8 @@ interface CurateEditProviderProps {
   canEdit;
   isShow;
   children;
+  userName;
+  userId;
 }
 
 const CurateEditContext = createContext<CurateEditContextProps>({} as CurateEditContextProps);
@@ -33,6 +37,8 @@ export const CurateEditProvider = ({
   datasetId,
   canEdit,
   isShow,
+  userName,
+  userId,
   children
 }: CurateEditProviderProps) => {
   const [rows, setRows] = useState<any[]>(initialData.data || []);
@@ -42,9 +48,7 @@ export const CurateEditProvider = ({
   const updateRow = async (updatedRow) => {
     const { success } = await axUpdateDataset(updatedRow);
     if (success) {
-      setRows(
-        rows.map((row) => (row.id === updatedRow.id ? { ...row, ...updatedRow } : row))
-      );
+      setRows(rows.map((row) => (row.id === updatedRow.id ? { ...row, ...updatedRow } : row)));
       notification(t("text-curation:update.success"), NotificationType.Success);
     } else {
       notification(t("text-curation:update.error"));
@@ -77,6 +81,8 @@ export const CurateEditProvider = ({
         isShow,
         canEdit,
         datasetId,
+        userName,
+        userId,
         rows: {
           filtered: filteredRows,
           filter,
