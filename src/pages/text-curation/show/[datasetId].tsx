@@ -5,7 +5,7 @@ import { axShowDataset } from "@services/curate.service";
 import { getParsedUser, hasAccess } from "@utils/auth";
 import React from "react";
 
-export default function CurateEditPage({ data, datasetId, canEdit, userName, userId }) {
+export default function CurateEditPage({ data, datasetId, canEdit, userName, canValidate }) {
   return (
     <CurateEditProvider
       initialData={data}
@@ -13,7 +13,7 @@ export default function CurateEditPage({ data, datasetId, canEdit, userName, use
       canEdit={canEdit}
       isShow={true}
       userName={userName}
-      userId={userId}
+      canValidate={canValidate}
     >
       <CurateShowPageComponent />
     </CurateEditProvider>
@@ -25,8 +25,8 @@ export const getServerSideProps = async (ctx) => {
 
   const user = getParsedUser(ctx);
   const userName = user.name;
-  const userId = user.id.toString();
   const canEdit = data.contributors.includes(user.id.toString()) || hasAccess([Role.Admin], ctx);
+  const canValidate = data.validators.length == 0 || data.validators.includes(user.id.toString());
 
   return {
     props: {
@@ -34,7 +34,7 @@ export const getServerSideProps = async (ctx) => {
       datasetId: ctx.query.datasetId,
       canEdit,
       userName,
-      userId
+      canValidate
     }
   };
 };

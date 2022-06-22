@@ -17,7 +17,7 @@ import Section from "./section";
 
 export default function EditRowForm({ row }) {
   const { t } = useTranslation();
-  const { rows, userName, userId } = useCurateEdit();
+  const { rows, userName, canValidate } = useCurateEdit();
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
@@ -62,7 +62,7 @@ export default function EditRowForm({ row }) {
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <Section heading={t("text-curation:section_heading.taxonomic_data")}>
-            <ScientificNameEdit row={row} userId={userId} />
+            <ScientificNameEdit row={row} canValidate={canValidate} />
           </Section>
           <Section heading={t("text-curation:section_heading.spatial_data")}>
             <LocationEdit row={row} />
