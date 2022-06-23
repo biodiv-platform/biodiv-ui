@@ -28,15 +28,17 @@ const Actions = () => {
 
   return (
     <Flex gap={4} alignItems="center">
-      <Button
-        p={5}
-        variant="outline"
-        colorScheme="blue"
-        leftIcon={<DownloadIcon />}
-        onClick={() => handleOnDownload(datasetId, rows.filter.curatedStatus)}
-      >
-        Download
-      </Button>
+      {canEdit && (
+        <Button
+          p={5}
+          variant="outline"
+          colorScheme="blue"
+          leftIcon={<DownloadIcon />}
+          onClick={() => handleOnDownload(datasetId, rows.filter.curatedStatus)}
+        >
+          Download
+        </Button>
+      )}
       <Select onChange={handleOnChange} size="sm">
         <option value="">ALL</option>
         {Object.keys(CURATED_STATUS).map((k) => (
