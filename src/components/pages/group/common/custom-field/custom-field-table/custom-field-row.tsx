@@ -3,6 +3,7 @@ import { Box, Button } from "@chakra-ui/react";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import DeleteIcon from "@icons/delete";
+import EditIcon from "@icons/edit";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
@@ -13,7 +14,7 @@ const BooleanIcon = ({ isChecked }) => (
   </Box>
 );
 
-const CustomFieldRow = SortableElement(({ itemDetails, onDelete }) => {
+const CustomFieldRow = SortableElement(({ itemDetails, onDelete, onEdit }) => {
   const { t } = useTranslation();
   const {
     customFields: { dataType, fieldType, name },
@@ -39,6 +40,11 @@ const CustomFieldRow = SortableElement(({ itemDetails, onDelete }) => {
           ml={2}
         >
           {t("common:delete")}
+        </Button>
+      </td>
+      <td>
+        <Button onClick={onEdit} variant="link" colorScheme="blue" leftIcon={<EditIcon />} ml={2}>
+          {t("common:edit")}
         </Button>
       </td>
     </tr>

@@ -34,6 +34,7 @@
     "exist": "Le champ personnalisé existe déjà",
     "field_type": "Types de champs",
     "icon": "Icône",
+    "image_unavailable": "Image non disponible",
     "is_mandatory": "Obligatoire",
     "name": "Nom",
     "notes": "Remarques",
@@ -59,6 +60,11 @@
     },
     "title": "Les champs personnalisés",
     "units": "Unités",
+    "update": {
+      "failure": "Impossible de mettre à jour le champ personnalisé",
+      "success": "Champ personnalisé mis à jour avec succès",
+      "title": "Mise à jour"
+    },
     "value": "Valeur"
   },
   "delete_member": "Etes-vous sûr que vous voulez supprimer?",

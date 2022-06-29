@@ -1,5 +1,6 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { RESOURCE_SIZE } from "@static/constants";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useController } from "react-hook-form";
 
@@ -16,6 +17,7 @@ interface IDropzoneProps {
   resourcePath?: string;
   simpleUpload?: boolean;
   children?;
+  disabled?: boolean;
 }
 
 export default function ImageUploaderField({
@@ -25,9 +27,11 @@ export default function ImageUploaderField({
   nestedPath,
   hint,
   simpleUpload,
-  mb = 4
+  mb = 4,
+  disabled
 }: IDropzoneProps) {
   const { field, fieldState } = useController({ name });
+  const { t } = useTranslation();
 
   return (
     <FormControl isInvalid={fieldState.invalid} mb={mb}>
@@ -38,14 +42,17 @@ export default function ImageUploaderField({
           imageSize={simpleUpload ? "?h=60" : RESOURCE_SIZE.LIST_THUMBNAIL}
           setValue={field.onChange}
           resource={field.value}
+          disabled={disabled}
         />
-      ) : (
+      ) : !disabled ? (
         <DropTarget
           simpleUpload={simpleUpload}
           nestedPath={nestedPath}
           resourcePath={resourcePath}
           setValue={field.onChange}
         />
+      ) : (
+        <p>{t("group:custom_field.image_unavailable")} </p>
       )}
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

@@ -9,7 +9,14 @@ import React, { useEffect, useState } from "react";
 
 import CustomFieldListItems from "./custom-field-items";
 
-const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCreate }) => {
+const CustomFieldTable = ({
+  userGroupId,
+  customFields,
+  setCustomFields,
+  setIsCreate,
+  setIsEdit,
+  setEditCustomFieldData
+}) => {
   const [canReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
 
@@ -47,6 +54,11 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
     }
   };
 
+  const customFieldDetails = async (index) => {
+    setIsEdit(true);
+    setEditCustomFieldData(customFields.filter((cfData) => cfData.customFields.id == index));
+  };
+
   return (
     <Box w="full" overflowX="auto" className="fade">
       <table style={{ minWidth: "750px" }} className="table table-bordered">
@@ -62,6 +74,7 @@ const CustomFieldTable = ({ userGroupId, customFields, setCustomFields, setIsCre
         </thead>
         <CustomFieldListItems
           removeCustomField={removeCustomField}
+          customFieldDetails={customFieldDetails}
           helperClass="sorting-row"
           customFieldList={customFields}
           onSortEnd={onSortEnd}

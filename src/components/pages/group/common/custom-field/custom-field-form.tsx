@@ -1,5 +1,5 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Button, SimpleGrid } from "@chakra-ui/react";
+import { Button, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
 import { SelectCreatableInputField } from "@components/form/select-creatable";
@@ -14,10 +14,10 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import * as Yup from "yup";
 
 import ImageUploaderField from "../image-uploader-field";
 import { DATA_TYPE, DEFAULT_CUSTOMFIELD_VALUE, FIELD_TYPE } from "../static";
+import { customFieldValidationSchema } from "./common";
 import OptionsField from "./options-field";
 
 export default function AddCustomField({
@@ -40,32 +40,7 @@ export default function AddCustomField({
 
   const hForm = useForm<any>({
     mode: "onChange",
-    resolver: yupResolver(
-      Yup.object().shape({
-        name: Yup.string().required(),
-        notes: Yup.string().nullable(),
-        units: Yup.string().nullable(),
-        allowedParticipation: Yup.boolean().required(),
-        isMandatory: Yup.boolean().required(),
-        displayOrder: Yup.number().nullable(),
-        iconURL: Yup.string().nullable(),
-        dataType: Yup.string().required(),
-        fieldType: Yup.string().required(),
-        defaultValue: Yup.string().nullable(),
-        values: Yup.lazy((value) => {
-          if (value) {
-            return Yup.array().of(
-              Yup.object().shape({
-                value: Yup.string().nullable(),
-                iconURL: Yup.string().nullable(),
-                notes: Yup.string().nullable()
-              })
-            );
-          }
-          return Yup.mixed().notRequired();
-        })
-      })
-    ),
+    resolver: yupResolver(customFieldValidationSchema),
     defaultValues
   });
 
@@ -175,7 +150,7 @@ export default function AddCustomField({
           {t("group:custom_field.back")}
         </Button>
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
-          <Box gridColumn="1/4">
+          <GridItem colSpan={3}>
             <SelectCreatableInputField
               onChangeCallback={handleCustomFieldName}
               name="name"
@@ -186,8 +161,13 @@ export default function AddCustomField({
               label={t("group:custom_field.name")}
             />
             <TextAreaField name="notes" disabled={customFieldExist} label={t("form:notes")} />
-          </Box>
-          <ImageUploaderField nestedPath="customField" label="icon" name="iconURL" />
+          </GridItem>
+          <ImageUploaderField
+            nestedPath="customField"
+            disabled={customFieldExist}
+            label={t("group:custom_field.icon")}
+            name="iconURL"
+          />
         </SimpleGrid>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacingX={4}>
           <TextBoxField
@@ -213,7 +193,12 @@ export default function AddCustomField({
           />
         </SimpleGrid>
         {showOption && (
-          <OptionsField disabled={customFieldExist} radioGroupName="defaultValue" name="values" />
+          <OptionsField
+            disabled={customFieldExist}
+            radioGroupName="defaultValue"
+            name="values"
+            isEdit={false}
+          />
         )}
         <CheckboxField name="isMandatory" label={t("group:custom_field.is_mandatory")} />
         <CheckboxField
