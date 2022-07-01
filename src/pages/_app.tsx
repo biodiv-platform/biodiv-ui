@@ -1,6 +1,6 @@
 import "../styles/global.css";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
 import { SkipNavContent, SkipNavLink } from "@chakra-ui/skip-nav";
 import AuthWall from "@components/@core/container/authwall";
 import Footer from "@components/@core/container/footer";
@@ -31,6 +31,7 @@ interface AppProps {
 }
 
 function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: AppProps) {
+  const { ToastContainer } = createStandaloneToast();
   const config = { header: true, footer: true, ...Component?.config };
 
   useEffect(() => {
@@ -41,6 +42,7 @@ function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: A
 
   return (
     <BusProvider>
+      <ToastContainer />
       <ChakraProvider theme={customTheme}>
         <GlobalStateProvider initialState={{ user, domain, groups, currentGroup }}>
           <Metadata />
