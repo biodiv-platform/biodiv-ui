@@ -425,3 +425,16 @@ export const getAuthorizedUserGroupById = async () => {
     return { success: false };
   }
 };
+
+export const axcustomFieldEditDetails = async (userGroupId, customFieldId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/customfield/edit/${userGroupId}/${customFieldId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
