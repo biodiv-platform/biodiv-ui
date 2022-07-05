@@ -9,6 +9,7 @@ import {
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
+import EditCustomField from "./custom-field-edit-from";
 import AddCustomFieldForm from "./custom-field-form";
 import CustomFieldTable from "./custom-field-table";
 
@@ -17,6 +18,8 @@ export default function GroupCustomField({ userGroupId, groupCustomField, allCus
   const [customFields, setCustomFields] = useState(groupCustomField || []);
   const [customFieldList, setCustomFieldList] = useState(allCustomField);
   const [isCreate, setIsCreate] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editCustomFieldData, setEditCustomFieldData] = useState(groupCustomField);
 
   useEffect(() => {
     setCustomFieldList([...customFieldList, ...customFields]);
@@ -38,7 +41,13 @@ export default function GroupCustomField({ userGroupId, groupCustomField, allCus
         </AccordionButton>
 
         <AccordionPanel p={4}>
-          {isCreate ? (
+          {isEdit ? (
+            <EditCustomField
+              editCustomFieldData={editCustomFieldData}
+              setIsEdit={setIsEdit}
+              setCustomFields={setCustomFields}
+            />
+          ) : isCreate ? (
             <AddCustomFieldForm
               customFields={customFields}
               allCustomFields={customFieldList}
@@ -51,6 +60,8 @@ export default function GroupCustomField({ userGroupId, groupCustomField, allCus
               customFields={customFields}
               setCustomFields={setCustomFields}
               setIsCreate={setIsCreate}
+              setIsEdit={setIsEdit}
+              setEditCustomFieldData={setEditCustomFieldData}
             />
           )}
         </AccordionPanel>

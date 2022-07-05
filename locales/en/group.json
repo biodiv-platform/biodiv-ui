@@ -34,6 +34,7 @@
     "exist": "Custom Field already exists",
     "field_type": "Field Types",
     "icon": "Icon",
+    "image_unavailable": "Image not Available",
     "is_mandatory": "Mandatory",
     "name": "Name",
     "notes": "Notes",
@@ -59,6 +60,11 @@
     },
     "title": "Custom Fields",
     "units": "Units",
+    "update": {
+      "failure": "Unable to update Custom Field",
+      "success": "Custom Field updated successfully",
+      "title": "Update"
+    },
     "value": "Value"
   },
   "delete_member": "Are you sure you want to delete?",
