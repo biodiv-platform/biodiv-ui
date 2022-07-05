@@ -1,4 +1,13 @@
-import { Badge, Box, Button, Flex, HStack, Radio, RadioGroup, SimpleGrid } from "@chakra-ui/react";
+import {
+  Badge,
+  Button,
+  Flex,
+  GridItem,
+  HStack,
+  Radio,
+  RadioGroup,
+  SimpleGrid
+} from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
@@ -8,7 +17,7 @@ import { useController, useFieldArray } from "react-hook-form";
 
 import ImageUploaderField from "../image-uploader-field";
 
-export default function Fields({ name, radioGroupName, disabled }) {
+export default function Fields({ name, radioGroupName, disabled, isEdit }) {
   const { t } = useTranslation();
   const { fields, append, remove } = useFieldArray({ name });
   const radioGroupController = useController({ name: radioGroupName });
@@ -26,32 +35,42 @@ export default function Fields({ name, radioGroupName, disabled }) {
           <HStack key={_item.id} mb={4}>
             <Radio value={index.toString()} size="lg" />
             <SimpleGrid columns={{ base: 1, md: 5 }} spacingX={4} ml={4}>
-              <Box gridColumn="1/4">
+              <GridItem colSpan={3}>
                 <SimpleGrid columns={2} spacingX={4}>
-                  <TextBoxField
-                    isRequired={true}
-                    disabled={disabled}
-                    name={`values.${index}.value`}
-                    label={t("group:custom_field.value")}
-                  />
+                  {isEdit ? (
+                    <TextBoxField
+                      isRequired={true}
+                      disabled={disabled}
+                      name={`values.${index}.values`}
+                      label={t("group:custom_field.value")}
+                    />
+                  ) : (
+                    <TextBoxField
+                      isRequired={true}
+                      disabled={disabled}
+                      name={`values.${index}.value`}
+                      label={t("group:custom_field.value")}
+                    />
+                  )}
                   <TextBoxField name={`values.${index}.notes`} disabled={disabled} label="Notes" />
                 </SimpleGrid>
                 <Button
                   colorScheme="red"
                   variant="outline"
                   leftIcon={<DeleteIcon />}
-                  isDisabled={fields.length < 3}
+                  isDisabled={fields.length < 3 || disabled}
                   onClick={() => remove(index)}
                 >
                   {t("group:custom_field.remove.title")}
                 </Button>
-              </Box>
+              </GridItem>
               <ImageUploaderField
                 nestedPath="customField,values"
                 simpleUpload={true}
                 label={t("group:custom_field.icon")}
                 name={`values.${index}.iconURL`}
                 mb={0}
+                disabled={disabled}
               />
               <Flex alignItems="center">
                 <Badge

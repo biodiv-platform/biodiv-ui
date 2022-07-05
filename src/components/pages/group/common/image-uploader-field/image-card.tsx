@@ -2,7 +2,7 @@ import { CloseButton, Flex, Image } from "@chakra-ui/react";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React, { useMemo } from "react";
 
-export default function ResourceCard({ resource, setValue, imageSize, simpleUpload }) {
+export default function ResourceCard({ resource, setValue, imageSize, simpleUpload, disabled }) {
   const imageURL = useMemo(
     () => getResourceThumbnail(RESOURCE_CTX.USERGROUPS, resource, imageSize),
     [resource]
@@ -32,7 +32,9 @@ export default function ResourceCard({ resource, setValue, imageSize, simpleUplo
         ignoreFallback={true}
         src={imageURL}
       />
-      <CloseButton position="absolute" top={0} right={0} size="lg" onClick={handleRemovePhoto} />
+      {!disabled && (
+        <CloseButton position="absolute" top={0} right={0} size="lg" onClick={handleRemovePhoto} />
+      )}
     </Flex>
   );
 }
