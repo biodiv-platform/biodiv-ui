@@ -24,3 +24,14 @@ export const customFieldValidationSchema = Yup.object().shape({
     return Yup.mixed().notRequired();
   })
 });
+
+export const processCFValue = (item) => {
+  const { customFields: cfs, cfValues, allowedParticipation, isMandatory, ...others } = item;
+  return {
+    ...cfs,
+    allowedParticipation: allowedParticipation ?? true,
+    isMandatory: isMandatory ?? true,
+    values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],
+    ...others
+  };
+};

@@ -44,15 +44,15 @@ export default function ImageUploaderField({
           resource={field.value}
           disabled={disabled}
         />
-      ) : !disabled ? (
+      ) : disabled ? (
+        <p>{t("group:custom_field.image_unavailable")} </p>
+      ) : (
         <DropTarget
           simpleUpload={simpleUpload}
           nestedPath={nestedPath}
           resourcePath={resourcePath}
           setValue={field.onChange}
         />
-      ) : (
-        <p>{t("group:custom_field.image_unavailable")} </p>
       )}
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

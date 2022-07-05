@@ -1,5 +1,4 @@
 import { authorizedPageSSR, throwUnauthorized } from "@components/auth/auth-redirect";
-import GroupEditPageComponent from "@components/pages/group/edit";
 import { Role } from "@interfaces/custom";
 import { axGetspeciesGroups } from "@services/observation.service";
 import {
@@ -13,7 +12,12 @@ import {
 } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const GroupEditPageComponent: any = dynamic(() => import("@components/pages/group/edit"), {
+  ssr: false
+});
 
 const GroupEditPage = (props) => <GroupEditPageComponent {...props} />;
 

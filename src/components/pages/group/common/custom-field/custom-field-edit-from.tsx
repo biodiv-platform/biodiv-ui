@@ -11,21 +11,24 @@ import CheckIcon from "@icons/check";
 import { axcustomFieldEditDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { FormProvider } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import ImageUploaderField from "../image-uploader-field";
-import { DATA_TYPE, DEFAULT_CUSTOMFIELD_VALUE, FIELD_TYPE } from "../static";
-import { customFieldValidationSchema } from "./common";
+import { DATA_TYPE, FIELD_TYPE } from "../static";
+import { customFieldValidationSchema, processCFValue } from "./common";
 import OptionsField from "./options-field";
+
+const categoricalType = ["SINGLE CATEGORICAL", "MULTIPLE CATEGORICAL"];
 
 export default function EditCustomField({ editCustomFieldData, setIsEdit, setCustomFields }) {
   const { t } = useTranslation();
-  const [showOption, setShowOption] = useState<boolean>();
-  const [fieldTypes] = useState(FIELD_TYPE);
-  const [dataTypes] = useState(DATA_TYPE);
-  const categoricalType = ["SINGLE CATEGORICAL", "MULTIPLE CATEGORICAL"];
+
+  const defaultValues = useMemo(
+    () => processCFValue(editCustomFieldData[0]),
+    [editCustomFieldData]
+  );
 
   const {
     currentGroup: { id: userGroupId }
@@ -35,10 +38,7 @@ export default function EditCustomField({ editCustomFieldData, setIsEdit, setCus
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(customFieldValidationSchema),
-    defaultValues: {
-      isMandatory: editCustomFieldData[0].isMandatory,
-      allowedParticipation: editCustomFieldData[0].allowedParticipation
-    }
+    defaultValues
   });
 
   const handleFormSubmit = async (value) => {
@@ -79,23 +79,6 @@ export default function EditCustomField({ editCustomFieldData, setIsEdit, setCus
     }
   };
 
-  const defaultValues = editCustomFieldData.reduce((acc, item) => {
-    const { customFields: cfs, cfValues, allowedParticipation, isMandatory, ...others } = item;
-    acc = {
-      ...cfs,
-      allowedParticipation: allowedParticipation,
-      isMandatory: isMandatory,
-      values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],
-      ...others
-    };
-    return acc;
-  }, DEFAULT_CUSTOMFIELD_VALUE);
-
-  useEffect(() => {
-    hForm.reset(defaultValues);
-    setShowOption(categoricalType.includes(defaultValues["fieldType"]));
-  }, []);
-
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
@@ -113,7 +96,7 @@ export default function EditCustomField({ editCustomFieldData, setIsEdit, setCus
           <TextBoxField name="units" disabled={false} label={t("group:custom_field.units")} />
           <SelectInputField
             name="fieldType"
-            options={fieldTypes}
+            options={FIELD_TYPE}
             disabled={true}
             isControlled={true}
             label={t("group:custom_field.field_type")}
@@ -121,12 +104,12 @@ export default function EditCustomField({ editCustomFieldData, setIsEdit, setCus
           <SelectInputField
             name="dataType"
             disabled={true}
-            options={dataTypes}
+            options={DATA_TYPE}
             isControlled={true}
             label={t("group:custom_field.data_type")}
           />
         </SimpleGrid>
-        {showOption && (
+        {categoricalType.includes(defaultValues["fieldType"]) && (
           <OptionsField
             disabled={false}
             radioGroupName="defaultValue"

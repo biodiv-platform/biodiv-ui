@@ -23,12 +23,12 @@ export const TextAreaField = ({
   name,
   label,
   mb = 4,
-  disabled = false,
-  maxLength = false,
+  disabled,
+  maxLength,
   hint,
   ...props
 }: ITextAreaProps) => {
-  const { field, fieldState } = useController({ name });
+  const { field, fieldState } = useController({ name, defaultValue: "" });
 
   return (
     <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>

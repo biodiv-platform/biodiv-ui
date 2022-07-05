@@ -17,7 +17,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import ImageUploaderField from "../image-uploader-field";
 import { DATA_TYPE, DEFAULT_CUSTOMFIELD_VALUE, FIELD_TYPE } from "../static";
-import { customFieldValidationSchema } from "./common";
+import { customFieldValidationSchema, processCFValue } from "./common";
 import OptionsField from "./options-field";
 
 export default function AddCustomField({
@@ -116,19 +116,10 @@ export default function AddCustomField({
   };
 
   const handleCustomFieldName = (name) => {
-    const defaultValue = allCustomFields.reduce((acc, item) => {
-      if (item.customFields.name === name) {
-        const { customFields: cfs, cfValues, allowedParticipation, isMandatory, ...others } = item;
-        acc = {
-          ...cfs,
-          allowedParticipation: allowedParticipation || true,
-          isMandatory: isMandatory || true,
-          values: cfValues ? [...cfValues.map((i) => ({ value: i.values, ...i }))] : [],
-          ...others
-        };
-      }
-      return acc;
-    }, DEFAULT_CUSTOMFIELD_VALUE);
+    const defaultValue = allCustomFields.reduce(
+      (acc, item) => (item.customFields.name === name ? processCFValue(item) : acc),
+      DEFAULT_CUSTOMFIELD_VALUE
+    );
     setDefaultValue(defaultValue);
     setCustomFieldExist(Object.prototype.hasOwnProperty.call(defaultValue, "id"));
   };
