@@ -10,6 +10,7 @@ const CURATION_OPTIONS = Object.entries(CURATED_STATUS).map(([label, value]) => 
 export default function EditStatus({ userName }) {
   const hForm = useFormContext();
   hForm.setValue("curatedBy", userName);
+  hForm.setValue("verifiedBy", userName);
   return (
     <Box px={4} mb={6}>
       <RadioInputField name="curatedStatus" options={CURATION_OPTIONS} mb={4} isInline={false} />

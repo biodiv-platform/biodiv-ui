@@ -23,7 +23,7 @@ const Actions = () => {
 
   const handleOnDownload = async (id, curatedStatus) => {
     const { data } = await axDownloadCsv(id, curatedStatus);
-    sendFileFromResponse(data, "sampledownload.csv");
+    sendFileFromResponse(data, "DataSheet" + datasetId + "Download" + ".csv");
   };
 
   return (
