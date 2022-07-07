@@ -1,3 +1,4 @@
+import AutoSync from "@components/@core/autosync";
 import useGlobalState from "@hooks/use-global-state";
 import { isBrowser } from "@static/constants";
 import { preCacheRoutes } from "@utils/auth";
@@ -25,6 +26,7 @@ export default function ObservationCreateSinglePageComponent({
 
   return (
     <div className="container mt">
+      <AutoSync />
       <ObservationCreateForm
         speciesGroups={speciesGroups}
         ObservationCreateFormData={ObservationCreateFormData}

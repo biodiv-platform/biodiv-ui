@@ -106,11 +106,11 @@ export default function OfflineSync() {
           emit(SYNC_SINGLE_OBSERVATION_DONE, { observation, data });
           if (redirect) {
             notification(t("common:observation_success"), NotificationType.Success);
-            router.push(`/observation/show/${data.observation.id}`, true);
+            router.push(`/observation/show/${data}`, true);
           }
         } else {
           setSyncInfo((_draft) => {
-            _draft.successMap[idbID] = data.observation.id;
+            _draft.successMap[idbID] = data;
             _draft.successful.push(idbID);
           });
         }

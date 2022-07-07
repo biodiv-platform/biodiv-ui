@@ -26,7 +26,7 @@ export default function UploadProgress({ payload, data }) {
 
       return {
         status,
-        observationId: r?.data?.observation?.id,
+        observationId: r?.data,
         resource: oPayload?.resources?.[0],
         commonName: oPayload?.taxonCommonName,
         scientificName: oPayload?.taxonScientificName
