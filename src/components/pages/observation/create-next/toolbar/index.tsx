@@ -108,7 +108,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
       Object.entries(allSelected[0]).filter(([key]) => commonProps.includes(key))
     );
 
-    emit(OBSERVATION_BULK_EDIT, initialEditObject);
+    emit(OBSERVATION_BULK_EDIT, { data: initialEditObject });
   };
 
   const onDraftMediaOpen = () => {

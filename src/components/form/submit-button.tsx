@@ -22,18 +22,13 @@ export const SubmitButton = ({
   ...rest
 }: ISubmitButtonProps) => {
   const { formState } = useFormContext();
-  const [disabled, setDisabled] = useState(true);
-
-  useEffect(() => {
-    setDisabled(isDisabled);
-  }, [isDisabled]);
 
   return (
     <Button
       colorScheme={colorScheme}
       isLoading={formState.isSubmitting}
       type="submit"
-      isDisabled={disabled}
+      isDisabled={isDisabled}
       mb={mb}
       {...rest}
     >

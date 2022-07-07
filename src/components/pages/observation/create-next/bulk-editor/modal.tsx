@@ -29,7 +29,7 @@ import UserGroups from "../../create/form/user-groups";
 import useObservationCreateNext from "../use-observation-create-next-hook";
 import RecoInputs from "./reco-inputs";
 
-export default function BulkEditorModal({ initialValue, onClose }) {
+export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
   const { t } = useTranslation();
   const { speciesGroupOptions, observationCreateFormData } = useObservationCreateNext();
   const [customFieldList] = useState(
@@ -99,7 +99,7 @@ export default function BulkEditorModal({ initialValue, onClose }) {
 
   const handleOnFormSubmit = (values) => {
     const newProps = Object.fromEntries(Object.entries(values).filter((kv) => kv[1]));
-    emit(OBSERVATION_BULK_EDIT_DONE, newProps);
+    emit(OBSERVATION_BULK_EDIT_DONE, { data: newProps, applyIndex });
     onClose();
   };
 

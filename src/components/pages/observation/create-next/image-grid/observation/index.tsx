@@ -1,8 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { DatePickerNextField } from "@components/form/datepicker-next";
 import { LocationInputField } from "@components/form/location-input";
+import EditIcon from "@icons/edit";
+import { OBSERVATION_BULK_EDIT } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 
 import Recodata from "./recodata";
@@ -20,6 +23,13 @@ export default function ObservationBox({ remove, index }) {
     }
   };
 
+  const handleOnEdit = () => {
+    emit(OBSERVATION_BULK_EDIT, {
+      data: form.getValues(`o.${index}`),
+      applyIndex: index
+    });
+  };
+
   return (
     <Box
       borderColor={isSelected ? "blue.500" : "gray.300"}
@@ -28,7 +38,7 @@ export default function ObservationBox({ remove, index }) {
       className="white-box fade"
       flex="0 0 250px"
       m="2px"
-      _hover={{ borderColor: isSelected ? "blue.500" : "cyan.300" }}
+      _hover={{ borderColor: isSelected ? "blue.500" : "blue.200" }}
       mr={4}
       onClick={handleOnSelection}
       p={2}
@@ -45,10 +55,13 @@ export default function ObservationBox({ remove, index }) {
       <LocationInputField
         latName={`o.${index}.latitude`}
         lngName={`o.${index}.longitude`}
-        mb={0}
         name={`o.${index}.observedAt`}
         placeholder={t("observation:observed_at")}
+        mb={2}
       />
+      <Button w="full" leftIcon={<EditIcon />} onClick={handleOnEdit}>
+        {t("common:edit")}
+      </Button>
     </Box>
   );
 }

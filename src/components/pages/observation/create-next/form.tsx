@@ -179,13 +179,16 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   );
 
   useListener(
-    (data) => {
+    ({ data, applyIndex }) => {
       const { o: all } = hForm.getValues();
 
-      for (let i = 0; i < all.length; i++) {
-        if (all[i].isSelected) {
-          o.update(i, prepareObservationData({ ...all[i], ...data, isSelected: false }));
-        }
+      if (typeof applyIndex === "number") {
+        o.update(applyIndex, prepareObservationData(data));
+      } else {
+        const newValues = all.map((_o) =>
+          _o.isSelected ? prepareObservationData({ ..._o, ...data, isSelected: false }) : _o
+        );
+        o.replace(newValues);
       }
     },
     [OBSERVATION_BULK_EDIT_DONE]

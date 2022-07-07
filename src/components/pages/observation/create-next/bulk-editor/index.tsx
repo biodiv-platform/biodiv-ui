@@ -6,16 +6,20 @@ import { prepareObservationData } from "../common";
 import BulkEditorModal from "./modal";
 
 export default function BulkEditor() {
-  const [initialValue, setInitialValue] = useState<any>();
+  const [initialValueProps, setInitialValueProps] = useState<any>();
 
   useListener(
-    (initialEditObject) => setInitialValue(prepareObservationData(initialEditObject)),
+    (data) =>
+      setInitialValueProps({
+        initialValue: prepareObservationData(data.data),
+        applyIndex: data.applyIndex
+      }),
     [OBSERVATION_BULK_EDIT]
   );
 
-  const handleOnClose = () => setInitialValue(undefined);
+  const handleOnClose = () => setInitialValueProps(undefined);
 
-  return initialValue ? (
-    <BulkEditorModal initialValue={initialValue} onClose={handleOnClose} />
+  return initialValueProps ? (
+    <BulkEditorModal {...initialValueProps} onClose={handleOnClose} />
   ) : null;
 }
