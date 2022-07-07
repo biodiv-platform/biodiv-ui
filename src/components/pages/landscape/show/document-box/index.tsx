@@ -43,7 +43,11 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
         <Stack isInline justifyContent="space-between" alignItems="flex-end">
           <Stack isInline justify="space-between" alignItems="flex-end">
             {document?.author && (
-              <Text noOfLines={1} maxWidth={{ base: "30vh", sm: "40vh", md: "120vh" }} title="Author">
+              <Text
+                noOfLines={1}
+                maxWidth={{ base: "30vh", sm: "40vh", md: "120vh" }}
+                title="Author"
+              >
                 <PeopleIcon mr={2} />
                 {document.author}
               </Text>

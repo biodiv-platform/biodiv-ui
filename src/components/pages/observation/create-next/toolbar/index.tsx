@@ -43,6 +43,10 @@ const areValuesEqual = (val1, val2) => {
     return true;
   }
 
+  if (Array.isArray(val1) && Array.isArray(val2) && JSON.stringify(val1) === JSON.stringify(val2)) {
+    return true;
+  }
+
   return val1 === val2;
 };
 

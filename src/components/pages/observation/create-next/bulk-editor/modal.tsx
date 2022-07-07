@@ -87,8 +87,12 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
       })
     ),
     defaultValues: {
-      customFields: parseDefaultCustomField(customFieldList, currentGroup),
-      ...initialValue
+      ...initialValue,
+      customFields: parseDefaultCustomField(
+        customFieldList,
+        currentGroup,
+        initialValue.customFields
+      )
     }
   });
 

@@ -27,7 +27,7 @@ export default function UserGroups({ name, label }: IUserGroupsProps) {
       <Button variant="link" color="gray.900" fontSize="2xl" mb={4} onClick={onToggle}>
         👥 {label} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
-      <Collapse in={isOpen}>
+      <Collapse in={isOpen} unmountOnExit={true}>
         <CheckBoxItems options={userGroups} defaultValue={field.value} onChange={field.onChange} />
       </Collapse>
     </Box>

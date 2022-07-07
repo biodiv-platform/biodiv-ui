@@ -23,7 +23,9 @@ import TraitsPicker from "./traits";
 import Uploader from "./uploader";
 import UserGroups from "./user-groups";
 
-export const parseDefaultCustomField = (list, currentGroup) => {
+export const parseDefaultCustomField = (list, currentGroup, initialValue?) => {
+  if (initialValue?.length) return initialValue;
+
   return list?.map(
     ({
       customFields: { fieldType, dataType, name, notes, id: customFieldId },

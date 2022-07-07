@@ -33,7 +33,9 @@ const ImageGrid = ({ fields, onRemove, onBrowse }) => {
         </Button>
 
         <LocalLink href="/observation/create/single">
-          <Link fontSize="sm" color="gray.500">{t("form:uploader.old_form")}</Link>
+          <Link fontSize="sm" color="gray.500">
+            {t("form:uploader.old_form")}
+          </Link>
         </LocalLink>
       </Flex>
     </Flex>

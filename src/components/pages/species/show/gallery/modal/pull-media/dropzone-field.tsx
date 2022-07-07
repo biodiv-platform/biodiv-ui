@@ -46,7 +46,7 @@ const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
         isLazy={true}
       >
         <TabList mb={4} overflowX="auto" py={1}>
-          <Tab>✔️  {t("form:selected_media")}</Tab>
+          <Tab>✔️ {t("form:selected_media")}</Tab>
           <Tab>🖼️ {t("species:pull_media")}</Tab>
           <Tab>☁️ {t("form:my_uploads")}</Tab>
           <Tab>🎙️ {t("form:audio.title")}</Tab>

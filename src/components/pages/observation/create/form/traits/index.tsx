@@ -25,7 +25,7 @@ interface ITraitsPickerProps {
 const TraitsPicker = ({ name }: ITraitsPickerProps) => {
   const form = useFormContext();
   const initialFacts = form.control._defaultValues[name] || {};
-  const [traitsPairs, setTraitsPairs] = useState<TraitsValuePair[]>([]);
+  const [traitsPairs, setTraitsPairs] = useState<Required<TraitsValuePair>[]>([]);
   const [facts, setFacts] = useState<any>(initialFacts);
   const sGroup = form.watch("sGroup");
   const { t } = useTranslation();
@@ -54,22 +54,18 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
       <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
         💎 {t("observation:traits")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
-      <Collapse in={isOpen}>
-        {traitsPairs.map(
-          ({ traits, values }) =>
-            traits &&
-            values && (
-              <FormControl mb={4} key={traits.id}>
-                <FormLabel mb={1}>{traits.name}</FormLabel>
-                <TraitInput
-                  type={traits.traitTypes}
-                  values={values}
-                  defaultValue={traits.id ? facts[traits.id] : undefined}
-                  onUpdate={(v) => handleOnChange(traits.id, v)}
-                />
-              </FormControl>
-            )
-        )}
+      <Collapse in={isOpen} unmountOnExit={true}>
+        {traitsPairs.map(({ traits, values }) => (
+          <FormControl mb={4} key={traits.id}>
+            <FormLabel mb={1}>{traits.name}</FormLabel>
+            <TraitInput
+              type={traits.traitTypes}
+              values={values}
+              defaultValue={traits.id ? facts[traits.id] : undefined}
+              onUpdate={(v) => handleOnChange(traits.id, v)}
+            />
+          </FormControl>
+        ))}
         {!sGroup && <Text>{t("observation:traits_no_group")}</Text>}
       </Collapse>
       <Divider mb={3} />
