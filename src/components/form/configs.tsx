@@ -4,25 +4,35 @@ import Tooltip from "@components/@core/tooltip";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-export const selectStyles = {
-  control: (p) => ({
-    ...p,
-    cursor: "text",
-    borderColor: "var(--chakra-colors-gray-300)"
-  }),
-  placeholder: (p) => ({
-    ...p,
-    color: "var(--chakra-colors-gray-400)"
-  }),
-  valueContainer: (p) => ({ ...p, height: "38px" }),
-  menu: (p) => ({ ...p, minWidth: "20em" }),
-  menuPortal: (p) => ({ ...p, zIndex: 1900 }),
-  clearIndicator: (base, state) => ({
-    ...base,
-    cursor: "pointer",
-    color: state.isFocused ? "var(--chakra-colors-blue-500)" : "var(--chakra-colors-gray-400)"
+export const reactSelectProps = {
+  styles: {
+    control: (p) => ({
+      ...p,
+      cursor: "text",
+      paddingLeft: "0.4rem"
+    }),
+    valueContainer: (p) => ({ ...p, height: "38px" }),
+    menu: (p) => ({ ...p, minWidth: "20em" }),
+    menuPortal: (p) => ({ ...p, zIndex: 1900 })
+  },
+  theme: (theme) => ({
+    ...theme,
+    colors: {
+      ...theme.colors,
+      neutral50: "var(--chakra-colors-gray-500)",
+      neutral20: "var(--chakra-colors-gray-300)",
+      primary25: "var(--chakra-colors-gray-100)",
+      primary: "var(--chakra-colors-blue-500)"
+    }
   })
 };
+
+/**
+ *
+ * @deprecated using `reactSelectProps` instead
+ * @type {*}
+ * */
+export const selectStyles = reactSelectProps.styles;
 
 export const ClearIndicator = (props) => {
   const {

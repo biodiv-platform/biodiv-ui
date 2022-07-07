@@ -133,7 +133,6 @@ export default function OfflineSync() {
     async (observations) => {
       for (const observation of observations) {
         await trySyncSingleObservation(observation);
-        await new Promise((r) => setTimeout(r, 3000));
       }
     },
     [SYNC_OBSERVATION]

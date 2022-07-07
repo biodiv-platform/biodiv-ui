@@ -7,7 +7,7 @@ import { components } from "react-select";
 import AsyncSelect from "react-select/async";
 import AsyncSelectCreatable from "react-select/async-creatable";
 
-import { ClearIndicator, selectStyles } from "./configs";
+import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface ISelectProps {
   name: string;
@@ -122,8 +122,8 @@ export const SelectAsyncInputField = ({
         onChange={handleOnChange}
         placeholder={placeholder || label}
         noOptionsMessage={() => null}
-        styles={selectStyles}
         ref={selectRef}
+        {...reactSelectProps}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

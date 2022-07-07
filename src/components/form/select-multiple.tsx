@@ -3,7 +3,7 @@ import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
-import { ClearIndicator, selectStyles } from "./configs";
+import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface SelectMultipleProps {
   name: string;
@@ -60,8 +60,8 @@ export const SelectMultipleInputField = ({
         isSearchable={true}
         isMulti={true}
         isDisabled={disabled}
-        styles={selectStyles}
         ref={selectRef}
+        {...reactSelectProps}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

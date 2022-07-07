@@ -4,7 +4,7 @@ import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
-import { ClearIndicator, selectStyles } from "./configs";
+import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface SelectInputFieldProps {
   name: string;
@@ -71,11 +71,11 @@ export const SelectInputField = ({
         menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
         isSearchable={true}
         isDisabled={disabled}
-        styles={selectStyles}
         {...{
           [isControlled ? "value" : "defaultValue"]: options.find((o) => o.value === field.value)
         }}
         ref={selectRef}
+        {...reactSelectProps}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
