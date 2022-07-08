@@ -29,7 +29,7 @@ export default function ImageUploaderField({
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={fieldState.invalid} mb={mb}>
+    <FormControl isRequired={isRequired} isInvalid={!!fieldState.error} mb={mb}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <DropTarget
         simpleUpload={simpleUpload}

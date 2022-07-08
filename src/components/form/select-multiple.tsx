@@ -38,9 +38,9 @@ export const SelectMultipleInputField = ({
 
   return (
     <FormControl
-      isInvalid={fieldState.invalid}
+      isInvalid={!!fieldState.error}
       className="dropdown"
-      aria-invalid={fieldState.invalid}
+      aria-invalid={!!fieldState.error}
       mb={mb}
       isRequired={isRequired}
       {...props}

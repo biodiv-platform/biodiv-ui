@@ -15,7 +15,7 @@ export const RecaptchaField = ({ name, label, hint, mb = 4, ...props }: IRecaptc
   const { field, fieldState } = useController({ name, defaultValue: null });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
       <ReCaptcha
         sitekey={SITE_CONFIG.TOKENS.RECAPTCHA}

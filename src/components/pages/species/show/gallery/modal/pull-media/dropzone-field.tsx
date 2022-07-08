@@ -37,7 +37,7 @@ const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl isInvalid={fieldState.invalid} minH="500px">
+    <FormControl isInvalid={!!fieldState.error} minH="500px">
       <Tabs
         className="nospace"
         index={tabIndex}
