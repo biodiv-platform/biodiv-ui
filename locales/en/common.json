@@ -22,6 +22,7 @@
   "copy": "Copy to Clipboard",
   "datatable": "Datatable",
   "delete": "Delete",
+  "update": "Update",
   "edit": "Edit",
   "edit_not_uploaded": "Some resources are not uploaded properly, please wait or remove them before uploading",
   "feature": "Feature Selected",

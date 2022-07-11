@@ -17,6 +17,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
     homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
   );
   const [isCreate, setIsCreate] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const {
     showGallery,
@@ -100,8 +101,10 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
         setIsCreate={setIsCreate}
         setGalleryList={setGalleryList}
         galleryList={galleryList}
+        isEdit={isEdit}
+        setIsEdit={setIsEdit}
       />
-      <Box hidden={isCreate} display="flex" m={4} justifyContent="flex-end">
+      <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
         <Button colorScheme="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
           {t("group:homepage_customization.save")}
         </Button>

@@ -111,9 +111,10 @@
     "show_desc": "Onyesha maelezo",
     "success": "Mabadiliko yaliyopangwa kwa mafanikio.",
     "table": {
+      "actions": "Vitendo",
       "description": "Maelezo.",
+      "image": "Picha",
       "more_link": "LINK.",
-      "remove_image": "Ondoa",
       "title": "Kichwa"
     },
     "title": "Utekelezaji wa Homepage.",

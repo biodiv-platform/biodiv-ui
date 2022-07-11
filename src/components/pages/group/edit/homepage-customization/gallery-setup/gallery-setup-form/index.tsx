@@ -6,8 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import * as Yup from "yup";
 
+import { galleryFieldValidationSchema } from "./common";
 import ExsistingResourceForm from "./exsisting-resource-form";
 import NewResourceForm from "./new-resource-form";
 
@@ -30,16 +30,7 @@ export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList
 
   const hForm = useForm<any>({
     mode: "onChange",
-    resolver: yupResolver(
-      Yup.object().shape({
-        title: Yup.string().required(),
-        customDescripition: Yup.string(),
-        fileName: Yup.string().required(),
-        observationId: Yup.number().nullable(),
-        moreLinks: Yup.string().required(),
-        options: Yup.array().nullable()
-      })
-    ),
+    resolver: yupResolver(galleryFieldValidationSchema),
     defaultValues
   });
 
