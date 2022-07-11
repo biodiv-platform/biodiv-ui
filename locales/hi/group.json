@@ -105,7 +105,9 @@
     "show_desc": "विवरण दिखाएं",
     "success": "अद्यतन परिवर्तन सफलतापूर्वक",
     "table": {
+      "actions": "कार्रवाई",
       "description": "विवरण",
+      "image": "छवि",
       "more_link": "संपर्क",
       "remove_image": "हटाना",
       "title": "शीर्षक"

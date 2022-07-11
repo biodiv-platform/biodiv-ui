@@ -23,6 +23,7 @@
   "datatable": "Datatable",
   "delete": "Delete",
   "edit": "Edit",
+  "update": "Update",
   "edit_not_uploaded": "Some resources are not uploaded properly, please wait or remove them before uploading",
   "feature": "Feature Selected",
   "feature_in_groups": "Feature in Groups",

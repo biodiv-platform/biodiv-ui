@@ -105,7 +105,9 @@
     "show_desc": "वर्णन दर्शवा",
     "success": "यशस्वीरित्या अद्ययावत केलेले बदल",
     "table": {
+      "actions": "क्रिया",
       "description": "वर्णन",
+      "image": "प्रतिमा",
       "more_link": "दुवा",
       "remove_image": "काढा",
       "title": "शीर्षक"

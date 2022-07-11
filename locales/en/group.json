@@ -108,7 +108,9 @@
       "description": "Description",
       "more_link": "Link",
       "remove_image": "Remove",
-      "title": "Title"
+      "title": "Title",
+      "actions": "Actions",
+      "image":"Image"
     },
     "title": "Homepage Customization",
     "update": {

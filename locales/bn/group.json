@@ -105,7 +105,9 @@
     "show_desc": "বর্ণনা দেখান",
     "success": "আপডেট আপডেট আপডেট",
     "table": {
+      "actions": "কর্ম",
       "description": "বর্ণনা",
+      "image": "ছবি",
       "more_link": "লিঙ্ক",
       "remove_image": "অপসারণ",
       "title": "শিরোনাম"

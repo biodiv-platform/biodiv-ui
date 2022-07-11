@@ -105,7 +105,9 @@
     "show_desc": "ବର୍ଣ୍ଣନା ଦେଖାନ୍ତୁ |",
     "success": "ଅଦ୍ୟତନ ସଫଳତାର ସହିତ ଅଦ୍ୟତନଗୁଡିକ |",
     "table": {
+      "actions": "କାର୍ଯ୍ୟ",
       "description": "ବର୍ଣ୍ଣନା",
+      "image": "ପ୍ରତିଛବି |",
       "more_link": "ଲିଙ୍କ୍",
       "remove_image": "କା remove ାଳି ଦିଅ |",
       "title": "ଆଖ୍ୟା"
