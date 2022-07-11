@@ -24,13 +24,13 @@ export default function GallerySetup({
       <BoxHeading>{t("group:homepage_customization.gallery_setup.title")}</BoxHeading>
       {isEdit ? (
         <GalleryEditForm
-          isEdit={setIsEdit}
+          setIsEdit={setIsEdit}
           setGalleryList={setGalleryList}
           editGalleryData={editGalleryData}
         />
       ) : isCreate ? (
         <GallerySetupFrom
-          isCreate={setIsCreate}
+          setIsCreate={setIsCreate}
           galleryList={galleryList}
           setGalleryList={setGalleryList}
         />

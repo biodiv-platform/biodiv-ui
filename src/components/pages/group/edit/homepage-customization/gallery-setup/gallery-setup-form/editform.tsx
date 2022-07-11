@@ -7,15 +7,14 @@ import { axEditHomePageGallery } from "@services/usergroup.service";
 import { NotificationType } from "@utils/notification";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { galleryFieldValidationSchema } from "./common";
 import NewResourceForm from "./new-resource-form";
 
-export default function GalleryEditForm({ isEdit, setGalleryList, editGalleryData }) {
+export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData }) {
   const { t } = useTranslation();
-  const [defaultValues] = useState<any>();
 
   const { id, ugId, title, fileName, customDescripition, moreLinks, displayOrder } =
     editGalleryData;
@@ -34,10 +33,7 @@ export default function GalleryEditForm({ isEdit, setGalleryList, editGalleryDat
     }
   });
 
-  const handleFormSubmit = async (value) => {
-    const payload = {
-      ...value
-    };
+  const handleFormSubmit = async (payload) => {
 
     const { success, data } = await axEditHomePageGallery(ugId, id, payload);
     if (!success) {
@@ -46,18 +42,14 @@ export default function GalleryEditForm({ isEdit, setGalleryList, editGalleryDat
     notification(t("group:homepage_customization.update.success"), NotificationType.Success);
     // data.gallerSlider returns a list of all galleryslider
     setGalleryList(data.gallerySlider);
-    isEdit(false);
+    setIsEdit(false);
   };
-
-  useEffect(() => {
-    hForm.reset(defaultValues);
-  }, [defaultValues]);
 
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Button m={3} type="button" onClick={() => isEdit(false)} leftIcon={<ArrowBackIcon />}>
+          <Button m={3} type="button" onClick={() => setIsEdit(false)} leftIcon={<ArrowBackIcon />}>
             {t("group:homepage_customization.back")}
           </Button>
         </Box>
