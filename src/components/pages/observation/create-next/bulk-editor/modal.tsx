@@ -14,7 +14,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { OBSERVATION_BULK_EDIT_DONE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React from "react";
 import { emit } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -31,10 +31,7 @@ import RecoInputs from "./reco-inputs";
 
 export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
   const { t } = useTranslation();
-  const { speciesGroupOptions, observationCreateFormData } = useObservationCreateNext();
-  const [customFieldList] = useState(
-    observationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder)
-  );
+  const { speciesGroupOptions, sortedCFList } = useObservationCreateNext();
   const { currentGroup } = useGlobalState();
 
   const hForm = useForm<any>({
@@ -71,16 +68,7 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
 
         //custom field data
         customFields: Yup.array()
-          .of(
-            Yup.object().shape({
-              isRequired: Yup.boolean(),
-              value: Yup.mixed().when("isRequired", {
-                is: true,
-                then: Yup.mixed().required(),
-                otherwise: Yup.mixed().nullable()
-              })
-            })
-          )
+          .of(Yup.object().shape({ value: Yup.mixed().nullable() }))
           .nullable(),
 
         tmp: Yup.mixed().nullable()
@@ -88,11 +76,7 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
     ),
     defaultValues: {
       ...initialValue,
-      customFields: parseDefaultCustomField(
-        customFieldList,
-        currentGroup,
-        initialValue.customFields
-      )
+      customFields: parseDefaultCustomField(sortedCFList, currentGroup, initialValue.customFields)
     }
   });
 
@@ -126,7 +110,7 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
               <LocationPicker isRequired={false} />
               <DateInputs isRequired={false} />
 
-              {customFieldList && <ObservationCustomFieldForm fields={fields} />}
+              {sortedCFList?.length && <ObservationCustomFieldForm fields={fields} />}
               <TraitsPicker name="facts" label={t("observation:traits")} />
               <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
             </ModalBody>

@@ -63,7 +63,7 @@ export default function ObservationBox({ remove, index }) {
       <Button w="full" leftIcon={<EditIcon />} onClick={handleOnEdit}>
         {t("common:edit")}
       </Button>
-      <CustomfieldsError name={`o.${index}.customFields`} />
+      <CustomfieldsError idx={index} />
     </Box>
   );
 }

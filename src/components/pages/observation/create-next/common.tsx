@@ -2,10 +2,13 @@ import { dateToUTC, formatDate } from "@utils/date";
 import { reverseGeocode } from "@utils/location";
 import { cleanFacts, cleanTags } from "@utils/tags";
 
+import { parseDefaultCustomField } from "../create/form";
 import { setLastData } from "../create/form/location/use-last-location";
 
-export const preProcessObservations = async (resources, currentGroup) => {
+export const preProcessObservations = async (resources, currentGroup, customFieldList) => {
   const finalResources: any[] = [];
+
+  const customFields = parseDefaultCustomField(customFieldList, currentGroup);
 
   for (const r of resources) {
     let geoInfo = {};
@@ -30,6 +33,7 @@ export const preProcessObservations = async (resources, currentGroup) => {
       resources: [r],
       observedOn: r?.dateCreated ? new Date(r?.dateCreated).toISOString() : undefined,
       ...geoInfo,
+      customFields,
       userGroupId: currentGroup.id && currentGroup.id > 0 ? [currentGroup.id.toString()] : []
     });
   }

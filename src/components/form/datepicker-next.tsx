@@ -50,6 +50,7 @@ export const DatePickerNextField = ({
             onChange={field.onChange}
             selected={field.value ? new Date(field.value) : undefined}
             maxDate={maxDate}
+            portalId={name}
           />
           <InputRightElement>
             <label htmlFor={name} style={{ cursor: "pointer" }}>

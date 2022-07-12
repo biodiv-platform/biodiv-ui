@@ -36,7 +36,7 @@ const deepMergeObservations = (prev, current) => {
 export default function ObservationCreateNextForm({ onBrowse }) {
   const { currentGroup, languageId } = useGlobalState();
 
-  const { requiredCFIds } = useObservationCreateNext();
+  const { sortedCFList } = useObservationCreateNext();
 
   const [uploadSummery, setUploadSummery] = useImmer({
     isSubmittd: false,
@@ -79,7 +79,18 @@ export default function ObservationCreateNextForm({ onBrowse }) {
               resources: Yup.array().min(1).required(),
 
               //custom field data - detailed validation in browse modal
-              customFields: Yup.array().min(requiredCFIds.length).required()
+              customFields: Yup.array()
+                .of(
+                  Yup.object().shape({
+                    isRequired: Yup.boolean(),
+                    value: Yup.mixed().when("isRequired", {
+                      is: true,
+                      then: Yup.mixed().required(),
+                      otherwise: Yup.mixed().nullable()
+                    })
+                  })
+                )
+                .nullable()
             })
           )
           .min(1)
@@ -155,7 +166,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   // this will inject them to hookform array
   useListener(
     async (_resources) => {
-      const finalResources = await preProcessObservations(_resources, currentGroup);
+      const finalResources = await preProcessObservations(_resources, currentGroup, sortedCFList);
       o.append(finalResources);
     },
     [OBSERVATION_IMPORT_RESOURCE]

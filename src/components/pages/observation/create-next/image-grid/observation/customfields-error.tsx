@@ -1,20 +1,17 @@
 import { FormControl, FormErrorMessage } from "@chakra-ui/react";
-import { ErrorMessage } from "@hookform/error-message";
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
-export default function CustomfieldsError({ name }) {
+export default function CustomfieldsError({ idx }) {
   const hForm = useFormContext();
 
-  return (
-    <ErrorMessage
-      errors={hForm.formState.errors}
-      name={name}
-      render={(o) => (
-        <FormControl isInvalid={!!o.message}>
-          <FormErrorMessage children={o.message} />
-        </FormControl>
-      )}
-    />
-  );
+  useEffect(() => {
+    hForm.trigger(`o.${idx}.customFields`);
+  }, [hForm.trigger]);
+
+  return (hForm.formState.errors?.o?.[idx]?.customFields as any)?.filter((o) => o)?.length ? (
+    <FormControl isInvalid={true}>
+      <FormErrorMessage children="*Some Custom Fields are required" />
+    </FormControl>
+  ) : null;
 }

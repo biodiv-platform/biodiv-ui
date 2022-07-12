@@ -28,7 +28,7 @@ interface ObservationCreateNextContextProps {
   showMediaPicker;
   setShowMediaPicker;
 
-  requiredCFIds;
+  sortedCFList;
 
   draft: {
     all;
@@ -79,14 +79,6 @@ export const ObservationCreateNextProvider = ({
   const [selectedHKs, setSelectedHKs] = useState<string[]>([]);
   const [draftSortBy, setDraftSortBy] = useState(MY_UPLOADS_SORT[0].value);
 
-  const requiredCFIds = useMemo(
-    () =>
-      (observationCreateFormData?.customField || [])
-        .filter((_o) => _o.isMandatory)
-        .map((_o) => _o.customFields.id),
-    []
-  );
-
   // initialising autocomplete to init google maps
   // for background reverse geocoder to work
   const { ref }: any = usePlacesWidget({
@@ -103,6 +95,11 @@ export const ObservationCreateNextProvider = ({
         image: getLocalIcon(sg.name),
         ...sg
       })),
+    []
+  );
+
+  const sortedCFList = useMemo(
+    () => observationCreateFormData?.customField?.sort((a, b) => a.displayOrder - b.displayOrder),
     []
   );
 
@@ -253,7 +250,7 @@ export const ObservationCreateNextProvider = ({
         showMediaPicker,
         setShowMediaPicker,
 
-        requiredCFIds,
+        sortedCFList,
 
         draft: {
           all: draftList,

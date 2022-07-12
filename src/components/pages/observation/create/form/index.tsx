@@ -42,7 +42,7 @@ export const parseDefaultCustomField = (list, currentGroup, initialValue?) => {
       isRequired,
       label: name,
       notes,
-      value: null,
+      value: undefined,
       options: cfValues.map(({ values, id, iconURL }) => ({
         value: id,
         label: values,
