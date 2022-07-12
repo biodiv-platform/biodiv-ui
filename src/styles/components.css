@@ -115,7 +115,8 @@ button[role="tab"] {
   padding: 0;
 }
 
-.tox-tinymce-aux {
+.tox-tinymce-aux,
+.react-datepicker-popper {
   z-index: 1500 !important;
 }
 
