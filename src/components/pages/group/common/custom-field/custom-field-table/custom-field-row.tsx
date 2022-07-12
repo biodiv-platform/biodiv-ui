@@ -14,7 +14,7 @@ const BooleanIcon = ({ isChecked }) => (
   </Box>
 );
 
-const CustomFieldRow = SortableElement(({ itemDetails, onDelete, onEdit }) => {
+const CustomFieldRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) => {
   const { t } = useTranslation();
   const {
     customFields: { dataType, fieldType, name },

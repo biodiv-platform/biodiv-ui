@@ -87,8 +87,8 @@ export default function Fields({
       <ToggleablePanel icon="🧩" title={t("datatable:field_mapping_table")}>
         <Box p={4} pb={0}>
           <Stack m={2} alignItems="center" justifyContent="space-between" direction="row">
-            {form.formState?.errors[`${name}`] ? (
-              <FormErrorMessage children={form.formState?.errors[name]?.message} />
+            {form.formState?.errors[name]?.message ? (
+              <FormErrorMessage children={form.formState?.errors[name]?.message?.toString()} />
             ) : (
               <FormHelperText color="gray.600">{t("datatable:field_mapping_hint")}</FormHelperText>
             )}

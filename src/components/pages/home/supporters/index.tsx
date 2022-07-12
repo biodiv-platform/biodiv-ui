@@ -8,7 +8,7 @@ const Supporters = ({ title, list, imagePrefix }) => (
     </Heading>
     <SimpleGrid className="fade" columns={[2, 2, 4, 7]} spacing={6} mb={10}>
       {list.map(({ image, name, link }) => (
-        <Link target="_blank" rel="noopener" href={link} title={name} key={link}>
+        <Link isExternal={true} href={link || "#"} title={name} key={link}>
           <Image
             w="100%"
             h="5rem"

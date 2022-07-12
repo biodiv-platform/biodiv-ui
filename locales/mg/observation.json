@@ -31,6 +31,7 @@
     "success": "Namboarina ny rakitrao. Rehefa vonona izy dia hampahafantarina amin'ny mailaka ianao ary hiseho ny rohy download iray",
     "title": "Download"
   },
+  "drag_drop_files": "tarihiny",
   "edit_hint": "💡 Noho ny fanitsiana ireo zavatra hafa toy ny anarana na ny toetra, azafady ampidirina mivantana avy amin'ny pejy fampisehoana-fampisehoana",
   "edit_observation": "Hanova ny fandinihana",
   "follow_observation": "Manaraka ny fandinihana",
@@ -103,13 +104,14 @@
   "location_placeholder": "Ampidiro toerana",
   "location_scale": "Toerana marina",
   "longitude": "-jarahasina",
+  "mange_resources": "Mitantana loharanon-karena",
+  "media_picker": "Media Picker",
   "nearby": "Teo am-piheverana",
   "no_custom_field": "Tsy misy fomba fanao manokana hita ho an'ity fandinihana ity",
   "no_empty_suggestion": "Tsy afaka mametraka soso-kevitra tsy misy na inona na inona",
   "notes": "-tsoratra",
   "observed": "nandinika",
   "observed_at": "Toerana hita ao",
-  "points_gained": "{{points}} ny hetsika(s)",
   "post_to_groups": "Lahatsoratra amin'ny vondrona",
   "range_hint": "Ampiasao: Ny Septate Sours Range",
   "rate_success": "Nosongadina soa aman-tsara ny haino aman-jery",
@@ -129,6 +131,11 @@
   "share": "Zarao ity fandinihana ity",
   "source": "Source",
   "species_page": "Jereo Pejy karazana",
+  "status": {
+    "failed": "tsy nahomby",
+    "in_progress": "Eo an-dàlana",
+    "uploaded": "Uploaded"
+  },
   "submitted": "nanaiky",
   "success": "Namboarina soa aman-tsara",
   "suggest": "soso-kevitra",
@@ -142,6 +149,18 @@
   "synonym": "mitovy dika",
   "title": "Inona no hitanao androany?",
   "title_edit": "Hanova ny fandinihana",
+  "toolbar": {
+    "delete": "Fafao voafantina",
+    "edit": "Ahitsio Voafantina",
+    "errors": {
+      "no_observations_selected": "Tsy misy fanamarihana voafantina"
+    },
+    "import": "Import",
+    "merge": "mampiray",
+    "select_all": "Select All",
+    "select_none": "Select None",
+    "split": "Saraho"
+  },
   "traits": "toetra",
   "traits_no_group": "Safidio aloha ny vondrona voalohany",
   "traits_update_success": "Ny toetra dia nohavaozina soa aman-tsara",

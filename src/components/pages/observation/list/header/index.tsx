@@ -107,7 +107,7 @@ export default function ListHeader() {
         </Stack>
       </Flex>
       {observationData && observationData.n > -1 && (
-        <Flex mb={4} justifyContent="space-between" alignItems="center">
+        <Flex mb={4} justifyContent="space-between" minH="32px" alignItems="center">
           <Text color="gray.600">
             {format(observationData.n)} {t("observation:list.observations_found")}
           </Text>

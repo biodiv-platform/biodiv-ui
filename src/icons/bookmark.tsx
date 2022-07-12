@@ -2,7 +2,7 @@ import { createIcon } from "@chakra-ui/icon";
 import React from "react";
 
 const BookmarkIcon = createIcon({
-  displayName: "Book",
+  displayName: "Bookmark",
   path: (
     <g
       stroke="currentColor"

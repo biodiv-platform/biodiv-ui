@@ -1,3 +1,4 @@
+import AutoSync from "@components/@core/autosync";
 import useGlobalState from "@hooks/use-global-state";
 import { isBrowser } from "@static/constants";
 import { preCacheRoutes } from "@utils/auth";
@@ -5,7 +6,11 @@ import React, { useEffect } from "react";
 
 import ObservationCreateForm from "./form";
 
-export default function ObservationCreatePageComponent({
+/**
+ * @deprecated this is for old single upload form for new use CreateNext*
+ *
+ */
+export default function ObservationCreateSinglePageComponent({
   speciesGroups,
   languages,
   ObservationCreateFormData,
@@ -21,6 +26,7 @@ export default function ObservationCreatePageComponent({
 
   return (
     <div className="container mt">
+      <AutoSync />
       <ObservationCreateForm
         speciesGroups={speciesGroups}
         ObservationCreateFormData={ObservationCreateFormData}

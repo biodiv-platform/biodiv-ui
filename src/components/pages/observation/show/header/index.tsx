@@ -111,7 +111,7 @@ function Header({ o, following = false }: IHeaderProps) {
         title={pageTitle}
       />
 
-      <PageHeading actions={<PageActions />} className="fadeInUp">
+      <PageHeading actions={<PageActions />}>
         <>
           <Flex direction={{ base: "column", md: "row" }}>
             <Box mr={2}>

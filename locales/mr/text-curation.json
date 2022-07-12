@@ -18,9 +18,32 @@
   },
   "dataset_description": "डेटासेट वर्णन",
   "date_columns": "तारीख स्तंभ",
+  "edit": {
+    "location": {
+      "accuracy": "अचूकता",
+      "collapse_map": "नकाशा संकुचित करा",
+      "edit_location_accuracy": "स्थान अचूकता संपादित करा",
+      "latitude": "अक्षांश",
+      "longitude": "रेखांश",
+      "show_all": "सगळं दाखवा",
+      "show_fewer": "कमी दाखवा",
+      "show_on_map": "नकाशावर स्थाने दर्शवा"
+    },
+    "scientific_name": {
+      "rank": "रँक",
+      "taxon_id": "टॅक्सन आयडी",
+      "validity": "वैज्ञानिक नावाची वैधता"
+    }
+  },
   "location_columns": "स्थान स्तंभ",
   "metadata": "मेटाडेटा",
   "sci_name_columns": "वैज्ञानिक नाव स्तंभ",
+  "section_heading": {
+    "Temporal Data": "टेम्पोरल डेटा",
+    "curated_status": "क्युरेटेड स्थिती",
+    "spatial_data": "अवकाशीय डेटा",
+    "taxonomic_data": "वर्गीकरण डेटा"
+  },
   "update": {
     "error": "पंक्ती अपडेट करण्यात अक्षम",
     "success": "पंक्ती यशस्वीरित्या अद्यतनित केली"

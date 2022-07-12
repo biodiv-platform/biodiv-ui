@@ -20,6 +20,7 @@ interface ISpeciesSelecProps {
   hint?: string;
   options?: any[];
   hideDevider?;
+  isRequired?;
 }
 
 /**
@@ -43,6 +44,7 @@ const GroupSelector = ({
   mb = 4,
   options = [],
   hideDevider,
+  isRequired = true,
   ...props
 }: ISpeciesSelecProps) => {
   const { field, fieldState } = useController({ name });
@@ -55,7 +57,7 @@ const GroupSelector = ({
 
   return (
     <>
-      <FormControl isInvalid={fieldState.invalid} isRequired={true} mb={mb} {...props}>
+      <FormControl isInvalid={!!fieldState.error} isRequired={isRequired} mb={mb} {...props}>
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Box {...getRootProps()}>
           {options.map((o) => (

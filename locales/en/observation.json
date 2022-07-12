@@ -14,7 +14,7 @@
   "contributor": "Contributor",
   "coordinates": "Coordinates",
   "created_on": "Created on",
-  "creating": "We're creating your observation",
+  "creating": "We're creating your observation(s)",
   "custom_fields": "Custom Fields",
   "delete_file": {
     "error": "Unable to process file,Please try again later",
@@ -31,6 +31,7 @@
     "success": "Your file is being generated. When it is ready, you will be notified by email and a download link will appear in",
     "title": "Download"
   },
+  "drag_drop_files": "Drag & drop some photos, sounds or videos",
   "edit_hint": "💡 for editing other items such as name or traits, please input directly from the observation-show page",
   "edit_observation": "Edit Observation",
   "follow_observation": "Follow Observation",
@@ -103,13 +104,14 @@
   "location_placeholder": "Enter a location",
   "location_scale": "Location Accuracy",
   "longitude": "Longitude",
+  "mange_resources": "Manage Resources",
+  "media_picker": "Media Picker",
   "nearby": "Nearby Observations",
   "no_custom_field": "No Custom field(s) found for this observation",
   "no_empty_suggestion": "Cannot crete empty suggestion",
   "notes": "Notes",
   "observed": "Observed",
   "observed_at": "Location Observed At",
-  "points_gained": "{{points}} activity point(s) gained",
   "post_to_groups": "Post to Groups",
   "range_hint": "use : to septate range values",
   "rate_success": "Media successfully rated",
@@ -129,6 +131,11 @@
   "share": "Share this observation",
   "source": "Source",
   "species_page": "See species page",
+  "status": {
+    "failed": "Failed",
+    "in_progress": "In Progress",
+    "uploaded": "Uploaded"
+  },
   "submitted": "Submitted",
   "success": "Created successfully",
   "suggest": "Suggest",
@@ -142,6 +149,18 @@
   "synonym": "Synonym",
   "title": "What did you observe today?",
   "title_edit": "Edit Observation",
+  "toolbar": {
+    "delete": "Delete Selected",
+    "edit": "Edit Selected",
+    "errors": {
+      "no_observations_selected": "No observation(s) selected"
+    },
+    "import": "Import",
+    "merge": "Merge",
+    "select_all": "Select All",
+    "select_none": "Select None",
+    "split": "Split"
+  },
   "traits": "Traits",
   "traits_no_group": "Please select group first",
   "traits_update_success": "Traits Updated Successfully",

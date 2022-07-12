@@ -1,5 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
-import { HStack, Tag } from "@chakra-ui/react";
+import { Box, Button, HStack, Tag } from "@chakra-ui/react";
 import { RadioInputField } from "@components/form/radio";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import {
@@ -12,6 +11,7 @@ import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import CurationTaxonBreadcrumbs from "./curation-breadcrumbs";
+
 const validityOptions = ["Not validated", "Validated", "Invalid"];
 const options = validityOptions.map((v) => ({ label: v, value: v }));
 

@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Link, Text, useBreakpointValue } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -8,6 +8,7 @@ import Indicators from "./indicators";
 
 export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
   const { t } = useTranslation();
+  const showIndicators = useBreakpointValue({ base: false, md: true });
 
   return (
     <Box
@@ -42,7 +43,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
         ) : (
           <div />
         )}
-        {size > 1 && (
+        {showIndicators && size > 1 && (
           <div>
             <Indicators size={size} currentSlide={currentSlide} scrollTo={scrollTo} />
           </div>

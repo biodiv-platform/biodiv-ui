@@ -1,6 +1,7 @@
 import { Box, Flex, Link, Stack } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import FacebookIcon from "@icons/facebook";
+import FeedbackIcon from "@icons/feedback";
 import GithubIcon from "@icons/github";
 import MailIcon from "@icons/mail";
 import TwitterIcon from "@icons/twitter";
@@ -39,10 +40,20 @@ export default function Footer() {
         )}
         <Stack isInline={true} spacing={4} mt={2} fontSize="1.4rem">
           {Object.entries(SITE_CONFIG.FOOTER.SOCIAL).map(([icon, { LABEL, URL }]) => (
-            <Link aria-label={t(LABEL)} href={URL} key={icon}>
+            <Link aria-label={t(LABEL)} title={t(LABEL)} href={URL} key={icon} isExternal={true}>
               {ICONS[icon]}
             </Link>
           ))}
+          {SITE_CONFIG.FEEDBACK.ACTIVE && (
+            <Link
+              isExternal={true}
+              aria-label={t("common:feedback")}
+              title={t("common:feedback")}
+              href={SITE_CONFIG.FEEDBACK.URL}
+            >
+              <FeedbackIcon />
+            </Link>
+          )}
         </Stack>
       </Flex>
     </Box>

@@ -36,6 +36,7 @@
     "twitter": "Twitter"
   },
   "habitats_covered": "Habitats Covered",
+  "import": "Import",
   "information": "Information",
   "invalid_request": "Invalid Request",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "Load More ↺",
   "loading": "Loading...",
+  "move": {
+    "down": "Down",
+    "up": "Up"
+  },
   "name": "Name",
   "next": "Next",
   "no_data": "No Data",
@@ -66,6 +71,7 @@
     "token_not_saved": "Could not save token",
     "token_saved": "Token saved"
   },
+  "observation_success": "Observation Created Successfully",
   "observed_on": "Observed on",
   "offline": "No Internet Connection",
   "one_moment_please": "One moment please",

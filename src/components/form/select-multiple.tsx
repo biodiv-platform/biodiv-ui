@@ -3,7 +3,7 @@ import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
-import { ClearIndicator, selectStyles } from "./configs";
+import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface SelectMultipleProps {
   name: string;
@@ -38,9 +38,9 @@ export const SelectMultipleInputField = ({
 
   return (
     <FormControl
-      isInvalid={fieldState.invalid}
+      isInvalid={!!fieldState.error}
       className="dropdown"
-      aria-invalid={fieldState.invalid}
+      aria-invalid={!!fieldState.error}
       mb={mb}
       isRequired={isRequired}
       {...props}
@@ -54,14 +54,15 @@ export const SelectMultipleInputField = ({
         options={options}
         components={{
           Option: optionComponent,
-          ClearIndicator
+          ClearIndicator,
+          IndicatorSeparator: () => null
         }}
         defaultValue={initialValue}
         isSearchable={true}
         isMulti={true}
         isDisabled={disabled}
-        styles={selectStyles}
         ref={selectRef}
+        {...reactSelectProps}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

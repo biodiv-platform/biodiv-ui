@@ -5,7 +5,7 @@ import useOnlineStatus from "@rehooks/online-status";
 import { axUploadObservationResource } from "@services/files.service";
 import { axCreateObservation } from "@services/observation.service";
 import {
-  SYNC_SINGLE_OBSERVATION,
+  SYNC_OBSERVATION,
   SYNC_SINGLE_OBSERVATION_DONE,
   SYNC_SINGLE_OBSERVATION_ERROR
 } from "@static/events";
@@ -25,6 +25,13 @@ export interface SyncInfo {
   failed: any[];
   successful: any[];
   successMap: Record<string, unknown>;
+}
+
+interface SyncSingleObservationProps {
+  id?;
+  instant;
+  observation;
+  redirect?;
 }
 
 export default function OfflineSync() {
@@ -51,7 +58,12 @@ export default function OfflineSync() {
 
   const { currentGroup } = useGlobalState();
 
-  const trySyncSingleObservation = async ({ observation, instant, id = -1 }) => {
+  const trySyncSingleObservation = async ({
+    observation,
+    instant,
+    id = -1,
+    redirect = true
+  }: SyncSingleObservationProps) => {
     let idbID = id;
 
     if (instant) {
@@ -91,28 +103,25 @@ export default function OfflineSync() {
         }
 
         if (instant) {
-          notification(
-            t("observation:points_gained", {
-              points: data?.activityCount
-            }),
-            NotificationType.Success
-          );
-          emit(SYNC_SINGLE_OBSERVATION_DONE);
-          router.push(`/observation/show/${data.observation.id}`, true);
+          emit(SYNC_SINGLE_OBSERVATION_DONE, { observation, data });
+          if (redirect) {
+            notification(t("common:observation_success"), NotificationType.Success);
+            router.push(`/observation/show/${data}`, true);
+          }
         } else {
           setSyncInfo((_draft) => {
-            _draft.successMap[idbID] = data.observation.id;
+            _draft.successMap[idbID] = data;
             _draft.successful.push(idbID);
           });
         }
       } else {
-        emit(SYNC_SINGLE_OBSERVATION_ERROR);
+        emit(SYNC_SINGLE_OBSERVATION_ERROR, { observation });
         setSyncInfo((_draft) => {
           _draft.failed.push(idbID);
         });
       }
     } catch (e) {
-      emit(SYNC_SINGLE_OBSERVATION_ERROR);
+      emit(SYNC_SINGLE_OBSERVATION_ERROR, { observation });
       setSyncInfo((_draft) => {
         _draft.failed.push(idbID);
       });
@@ -120,7 +129,14 @@ export default function OfflineSync() {
     }
   };
 
-  useListener(trySyncSingleObservation, [SYNC_SINGLE_OBSERVATION]);
+  useListener(
+    async (observations) => {
+      for (const observation of observations) {
+        await trySyncSingleObservation(observation);
+      }
+    },
+    [SYNC_OBSERVATION]
+  );
 
   const trySyncPendingObservations = async () => {
     const poList = await getAllObservations();

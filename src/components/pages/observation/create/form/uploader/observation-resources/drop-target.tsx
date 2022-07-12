@@ -1,6 +1,7 @@
 import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -34,16 +35,6 @@ const DropTargetBox = styled.div`
   }
 `;
 
-export const accept = [
-  "image/jpg",
-  "image/jpeg",
-  "image/png",
-  "video/*",
-  "audio/*",
-  "application/zip",
-  "application/x-zip-compressed"
-];
-
 export default function DropTarget({ assetsSize }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
@@ -59,7 +50,7 @@ export default function DropTarget({ assetsSize }) {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
-    accept
+    accept: ACCEPTED_FILE_TYPES
   });
 
   return (

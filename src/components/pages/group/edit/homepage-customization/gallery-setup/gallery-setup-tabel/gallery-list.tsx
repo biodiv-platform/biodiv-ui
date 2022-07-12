@@ -3,7 +3,7 @@ import { SortableContainer } from "react-sortable-hoc";
 
 import GalleryItemRow from "./gallery-items-row";
 
-const GalleryListItems = SortableContainer(({ galleryList, removeGalleryItem }) => (
+const GalleryListItems: any = SortableContainer(({ galleryList, removeGalleryItem }) => (
   <tbody>
     {galleryList.map((item, index) => (
       <GalleryItemRow

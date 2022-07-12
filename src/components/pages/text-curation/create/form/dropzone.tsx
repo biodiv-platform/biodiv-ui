@@ -51,7 +51,7 @@ export default function CSVDropzoneComponent({ name, setHeaders }) {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
-    accept: ".csv",
+    accept: { "text/csv": [".csv"] },
     multiple: false
   });
 

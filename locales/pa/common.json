@@ -36,6 +36,7 @@
     "twitter": "ਟਵਿੱਟਰ"
   },
   "habitats_covered": "ਨਿਵਾਸ",
+  "import": "ਆਯਾਤ ਕਰੋ",
   "information": "ਜਾਣਕਾਰੀ",
   "invalid_request": "ਗਲਤ ਬੇਨਤੀ",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "ਹੋਰ ਲੋਡ ਕਰੋ ↺",
   "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ ...",
+  "move": {
+    "down": "ਥੱਲੇ, ਹੇਠਾਂ, ਨੀਂਵਾ",
+    "up": "ਉੱਪਰ"
+  },
   "name": "ਨਾਮ",
   "next": "ਅਗਲਾ",
   "no_data": "ਕੋਈ ਡਾਟਾ ਨਹੀਂ",
@@ -66,6 +71,7 @@
     "token_not_saved": "ਟੋਕਨ ਨੂੰ ਬਚਾ ਨਹੀ ਕਰ ਸਕਿਆ",
     "token_saved": "ਟੋਕਨ ਸੁਰੱਖਿਅਤ ਹੋ ਗਿਆ"
   },
+  "observation_success": "ਨਿਰੀਖਣ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ",
   "observed_on": "ਤੇ ਦੇਖਿਆ",
   "offline": "ਕੋਈ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਨਹੀਂ",
   "one_moment_please": "ਕਿਰਪਾ ਕਰਕੇ ਇਕ ਪਲ",

@@ -18,9 +18,32 @@
   },
   "dataset_description": "Description de l'ensemble de données",
   "date_columns": "Colonnes de dates",
+  "edit": {
+    "location": {
+      "accuracy": "précision",
+      "collapse_map": "Réduire la carte",
+      "edit_location_accuracy": "Modifier la précision de l'emplacement",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "show_all": "Afficher tout",
+      "show_fewer": "Afficher moins",
+      "show_on_map": "Afficher les emplacements sur la carte"
+    },
+    "scientific_name": {
+      "rank": "rang",
+      "taxon_id": "identifiant de taxon",
+      "validity": "Validité du nom scientifique"
+    }
+  },
   "location_columns": "Colonnes d'emplacement",
   "metadata": "Métadonnées",
   "sci_name_columns": "Colonnes des noms scientifiques",
+  "section_heading": {
+    "Temporal Data": "Données temporelles",
+    "curated_status": "Statut organisé",
+    "spatial_data": "Données spatiales",
+    "taxonomic_data": "Données taxonomiques"
+  },
   "update": {
     "error": "Impossible de mettre à jour la ligne",
     "success": "Ligne mise à jour avec succès"

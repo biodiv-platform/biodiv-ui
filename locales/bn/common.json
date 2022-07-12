@@ -36,6 +36,7 @@
     "twitter": "টুইটার"
   },
   "habitats_covered": "বাসস্থান আচ্ছাদিত",
+  "import": "আমদানি",
   "information": "তথ্য",
   "invalid_request": "অনুরোধ অগ্রহণযোগ্য",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "আরো লোড ↺",
   "loading": "লোড হচ্ছে ...",
+  "move": {
+    "down": "নিচে",
+    "up": "উপরে"
+  },
   "name": "নাম",
   "next": "পরবর্তী",
   "no_data": "কোন তথ্য নেই",
@@ -66,6 +71,7 @@
     "token_not_saved": "টোকেন সংরক্ষণ করতে পারে না",
     "token_saved": "টোকেন সংরক্ষিত"
   },
+  "observation_success": "পর্যবেক্ষণ সফলভাবে তৈরি",
   "observed_on": "উপর পালন করা হয়",
   "offline": "কোন ইন্টারনেট সংযোগ",
   "one_moment_please": "এক মুহূর্ত দয়া করে",

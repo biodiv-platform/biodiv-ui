@@ -4,7 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 
-const GalleryItemsRow = SortableElement(({ itemDetails, onDelete }) => {
+const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete }) => {
   const { t } = useTranslation();
   const { title, customDescripition, moreLinks } = itemDetails;
 

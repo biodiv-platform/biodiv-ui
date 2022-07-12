@@ -48,7 +48,7 @@ const CustomMarker = ({ position, setCoordinates, onTextUpdate }) => {
           </List>
         </InfoWindow>
       )}
-      {position && (
+      {position?.lat && (
         <Marker
           position={position}
           draggable={true}

@@ -3,7 +3,7 @@ import React from "react";
 import { useController } from "react-hook-form";
 import Select from "react-select/creatable";
 
-import { selectStyles } from "./configs";
+import { reactSelectProps } from "./configs";
 
 interface ISelectCreatableProps {
   name: string;
@@ -35,9 +35,9 @@ export const SelectCreatableInputField = ({
 
   return (
     <FormControl
-      isInvalid={fieldState.invalid}
+      isInvalid={!!fieldState.error}
       className="dropdown"
-      aria-invalid={fieldState.invalid}
+      aria-invalid={!!fieldState.error}
       mb={mb}
       isRequired={isRequired}
       {...props}
@@ -59,8 +59,9 @@ export const SelectCreatableInputField = ({
         }}
         isSearchable={true}
         isDisabled={disabled}
-        styles={selectStyles}
         ref={selectRef}
+        components={{ IndicatorSeparator: () => null }}
+        {...reactSelectProps}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
