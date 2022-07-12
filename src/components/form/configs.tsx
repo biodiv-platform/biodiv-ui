@@ -6,14 +6,11 @@ import React from "react";
 
 export const reactSelectProps = {
   styles: {
-    control: (p) => ({
-      ...p,
-      cursor: "text",
-      paddingLeft: "0.4rem"
-    }),
+    control: (p) => ({ ...p, cursor: "text", borderRadius: "var(--chakra-radii-md)" }),
     valueContainer: (p) => ({ ...p, height: "38px" }),
     menu: (p) => ({ ...p, minWidth: "20em" }),
-    menuPortal: (p) => ({ ...p, zIndex: 1900 })
+    menuPortal: (p) => ({ ...p, zIndex: 1900 }),
+    clearIndicator: (p) => ({ ...p, paddingLeft: 0 }),
   },
   theme: (theme) => ({
     ...theme,
@@ -40,6 +37,7 @@ export const ClearIndicator = (props) => {
     innerProps: { ref, ...restInnerProps }
   } = props;
   const { t } = useTranslation();
+
   return (
     <div {...restInnerProps} ref={ref} style={getStyles("clearIndicator", props)}>
       <div
@@ -52,12 +50,13 @@ export const ClearIndicator = (props) => {
         <Tooltip hasArrow={true} title={t("common:copy")}>
           <IconButton
             type="button"
+            minW={0}
+            mr={2}
+            mt={1}
             variant="link"
             icon={<CopyIcon />}
             aria-label={t("common:copy")}
-            onClick={() => {
-              navigator.clipboard.writeText(props.selectProps.value.label);
-            }}
+            onClick={() => navigator.clipboard.writeText(props.selectProps.value.label)}
           />
         </Tooltip>
       </div>

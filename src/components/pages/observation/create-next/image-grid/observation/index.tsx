@@ -37,7 +37,7 @@ export default function ObservationBox({ remove, index }) {
       borderRadius="md"
       borderWidth="3px"
       className="white-box fade"
-      flex="0 0 250px"
+      flex="0 0 220px"
       m="2px"
       _hover={{ borderColor: isSelected ? "blue.500" : "blue.200" }}
       mr={4}

@@ -54,7 +54,8 @@ export const SelectMultipleInputField = ({
         options={options}
         components={{
           Option: optionComponent,
-          ClearIndicator
+          ClearIndicator,
+          IndicatorSeparator: () => null
         }}
         defaultValue={initialValue}
         isSearchable={true}

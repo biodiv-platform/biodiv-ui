@@ -65,7 +65,8 @@ export const SelectInputField = ({
         options={options}
         components={{
           Option: optionComponent,
-          ClearIndicator
+          ClearIndicator,
+          IndicatorSeparator: () => null
         }}
         placeholder={placeholder}
         menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}

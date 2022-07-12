@@ -60,6 +60,7 @@ export const SelectCreatableInputField = ({
         isSearchable={true}
         isDisabled={disabled}
         ref={selectRef}
+        components={{ IndicatorSeparator: () => null }}
         {...reactSelectProps}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
