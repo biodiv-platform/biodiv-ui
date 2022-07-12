@@ -46,7 +46,7 @@ export default function SavingObservation() {
           <Heading className="fadeInUp delay-1" my={4}>
             {t("observation:success")}
           </Heading>
-          <BlueLink href="./create" mb={6}>
+          <BlueLink href="./create/single" mb={6}>
             {t("observation:continue")}
           </BlueLink>
         </>

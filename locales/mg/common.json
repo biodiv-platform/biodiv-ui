@@ -36,6 +36,7 @@
     "twitter": "Twitter"
   },
   "habitats_covered": "Voasarona",
+  "import": "Import",
   "information": "Information",
   "invalid_request": "Fangatahana tsy mety",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "Vesatra bebe kokoa ↺",
   "loading": "Loading ...",
+  "move": {
+    "down": "Midina",
+    "up": "ny"
+  },
   "name": "Anarana",
   "next": "Manaraka",
   "no_data": "Tsy misy data",
@@ -66,6 +71,7 @@
     "token_not_saved": "Tsy afaka namonjy tokana",
     "token_saved": "Tome Voavonjy"
   },
+  "observation_success": "Vita soa aman-tsara ny fandinihana",
   "observed_on": "Voamarina amin'ny",
   "offline": "Tsy misy fifandraisana Internet",
   "one_moment_please": "Indray mandeha azafady",

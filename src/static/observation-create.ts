@@ -125,3 +125,10 @@ export const OBSERVATION_FIELDS = {
 };
 
 export const LOCAL_ASSET_PREFIX = "ibpmu-";
+
+export const ACCEPTED_FILE_TYPES = {
+  "image/*": [".jpg", ".jpeg", ".png"],
+  "video/*": [".mp4"],
+  "audio/*": [".wav", ".mp3"],
+  "application/zip": [".zip"]
+};

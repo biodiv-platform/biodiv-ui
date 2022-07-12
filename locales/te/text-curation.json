@@ -18,9 +18,32 @@
   },
   "dataset_description": "డేటాసెట్ వివరణ",
   "date_columns": "తేదీ నిలువు వరుసలు",
+  "edit": {
+    "location": {
+      "accuracy": "ఖచ్చితత్వం",
+      "collapse_map": "మ్యాప్‌ను కుదించు",
+      "edit_location_accuracy": "స్థాన ఖచ్చితత్వాన్ని సవరించండి",
+      "latitude": "అక్షాంశం",
+      "longitude": "రేఖాంశం",
+      "show_all": "అన్నీ చూపండి",
+      "show_fewer": "తక్కువ చూపు",
+      "show_on_map": "మ్యాప్‌లో స్థానాలను చూపండి"
+    },
+    "scientific_name": {
+      "rank": "ర్యాంక్",
+      "taxon_id": "టాక్సన్ ఐడి",
+      "validity": "శాస్త్రీయ నామం యొక్క చెల్లుబాటు"
+    }
+  },
   "location_columns": "స్థాన నిలువు వరుసలు",
   "metadata": "మెటాడేటా",
   "sci_name_columns": "శాస్త్రీయ నామ కాలమ్‌లు",
+  "section_heading": {
+    "Temporal Data": "తాత్కాలిక డేటా",
+    "curated_status": "క్యూరేటెడ్ స్థితి",
+    "spatial_data": "ప్రాదేశిక డేటా",
+    "taxonomic_data": "వర్గీకరణ డేటా"
+  },
   "update": {
     "error": "అడ్డు వరుసను నవీకరించడం సాధ్యం కాలేదు",
     "success": "అడ్డు వరుస విజయవంతంగా నవీకరించబడింది"

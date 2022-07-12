@@ -1,7 +1,8 @@
 import "../styles/global.css";
 
-import { ChakraProvider } from "@chakra-ui/react";
-import Feedback from "@components/@core/container/feedback";
+import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
+import { SkipNavContent, SkipNavLink } from "@chakra-ui/skip-nav";
+import AuthWall from "@components/@core/container/authwall";
 import Footer from "@components/@core/container/footer";
 import Metadata from "@components/@core/container/metadata";
 import NavigationMenuDark from "@components/@core/navigation-menu/dark";
@@ -14,14 +15,10 @@ import { axGroupList } from "@services/usergroup.service";
 import { getParsedUser } from "@utils/auth";
 import { absoluteUrl } from "@utils/basic";
 import App, { AppContext } from "next/app";
-import dynamic from "next/dynamic";
 import Router from "next/router";
 import NProgress from "nprogress";
 import React, { useEffect } from "react";
 import BusProvider from "react-gbus";
-
-const AuthWall = dynamic(() => import("@components/@core/container/authwall"), { ssr: false });
-const AutoSync = dynamic(() => import("@components/@core/autosync"), { ssr: false });
 
 interface AppProps {
   Component;
@@ -34,6 +31,7 @@ interface AppProps {
 }
 
 function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: AppProps) {
+  const { ToastContainer } = createStandaloneToast();
   const config = { header: true, footer: true, ...Component?.config };
 
   useEffect(() => {
@@ -44,9 +42,11 @@ function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: A
 
   return (
     <BusProvider>
+      <ToastContainer />
       <ChakraProvider theme={customTheme}>
         <GlobalStateProvider initialState={{ user, domain, groups, currentGroup }}>
           <Metadata />
+          <SkipNavLink>Skip to content</SkipNavLink>
           <div className="content">
             {config.header && (
               <>
@@ -54,11 +54,10 @@ function MainApp({ Component, currentGroup, domain, groups, user, pageProps }: A
                 <NavigationMenuLight />
               </>
             )}
-            <AutoSync />
+            <SkipNavContent />
             <div id="main">
               <Component {...pageProps} />
             </div>
-            {SITE_CONFIG.FEEDBACK.ACTIVE && <Feedback />}
           </div>
           {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
           <AuthWall />

@@ -16,7 +16,7 @@ const notification = (message, type = NotificationType.Error, variables = {}) =>
     return;
   }
   if (isBrowser) {
-    const toast = createStandaloneToast({ theme: customTheme });
+    const { toast } = createStandaloneToast({ theme: customTheme });
 
     toast({
       description: typeof message === "string" ? compiledMessage(`${message}`, variables) : message,

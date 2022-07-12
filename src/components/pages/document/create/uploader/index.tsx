@@ -15,7 +15,7 @@ export default function DocumentUploader({ name, hint }: DocumentUploaderProps) 
 
   return (
     <ManageDocumentContextProvider initialDocument={field.value}>
-      <FormControl isInvalid={fieldState.invalid} mb={4}>
+      <FormControl isInvalid={!!fieldState.error} mb={4}>
         <DocumentUploaderTabs {...field} />
         <FormErrorMessage children={fieldState?.error?.message} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

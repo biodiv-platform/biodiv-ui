@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ITraitInputProps } from "..";
 import TraitContent from "./content";
 
-const SingleCategorialTrait = ({
+const MultipleCategorialTrait = ({
   values,
   onUpdate,
   defaultValue,
@@ -35,4 +35,4 @@ const SingleCategorialTrait = ({
   );
 };
 
-export default SingleCategorialTrait;
+export default MultipleCategorialTrait;

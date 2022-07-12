@@ -14,25 +14,6 @@
   border: 1px solid var(--chakra-colors-gray-300);
 }
 
-textarea,
-input {
-  border-color: var(--chakra-colors-gray-300) !important;
-}
-textarea:focus,
-textarea:active,
-input:focus,
-input:active {
-  border-color: var(--chakra-colors-blue-500) !important;
-}
-textarea[aria-invalid="true"],
-input[aria-invalid="true"] {
-  border-color: var(--chakra-colors-red-500) !important;
-}
-textarea:disabled,
-input:disabled {
-  background: var(--chakra-colors-gray-200) !important;
-}
-
 [aria-invalid="true"] > div > div {
   border-color: var(--chakra-colors-red-500) !important;
   box-shadow: 0 0 0 1px var(--chakra-colors-red-500) !important;
@@ -69,7 +50,6 @@ input:disabled {
 .hover-box:hover {
   transition: all 0.2s ease-out;
   box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
-  top: -2px;
 }
 
 .container,
@@ -135,7 +115,8 @@ button[role="tab"] {
   padding: 0;
 }
 
-.tox-tinymce-aux {
+.tox-tinymce-aux,
+.react-datepicker-popper {
   z-index: 1500 !important;
 }
 
@@ -144,4 +125,14 @@ button[role="tab"] {
   height: 0;
   width: 0;
   overflow: hidden;
+}
+
+/* google autocomplete suggestions */
+.pac-container {
+  z-index: 9999;
+}
+
+.rsw-editor {
+  background: white;
+  min-height: 128px !important;
 }

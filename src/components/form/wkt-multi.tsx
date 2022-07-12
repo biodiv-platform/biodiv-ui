@@ -45,7 +45,7 @@ export default function WKTFieldMulti(props: WKTInputProps) {
   }, [value]);
 
   return (
-    <FormControl isInvalid={fieldState.invalid}>
+    <FormControl isInvalid={!!fieldState.error}>
       <Box mb={props.mb || 4}>
         <FormLabel>{props.label}</FormLabel>
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">

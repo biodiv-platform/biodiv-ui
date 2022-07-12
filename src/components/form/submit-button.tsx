@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useFormContext } from "react-hook-form";
 
 interface ISubmitButtonProps {
@@ -11,6 +11,7 @@ interface ISubmitButtonProps {
   mb?;
   w?;
   mt?;
+  mr?;
 }
 
 export const SubmitButton = ({
@@ -21,18 +22,13 @@ export const SubmitButton = ({
   ...rest
 }: ISubmitButtonProps) => {
   const { formState } = useFormContext();
-  const [disabled, setDisabled] = useState(true);
-
-  useEffect(() => {
-    setDisabled(isDisabled);
-  }, [isDisabled]);
 
   return (
     <Button
       colorScheme={colorScheme}
       isLoading={formState.isSubmitting}
       type="submit"
-      isDisabled={disabled}
+      isDisabled={isDisabled}
       mb={mb}
       {...rest}
     >

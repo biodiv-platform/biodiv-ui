@@ -10,8 +10,8 @@ Next Generation UI for Biodiversity Informatics Platform
 
 ```sh
 yarn install
-cp src/configs/site-config.example.json src/configs/site-config.json  # setup with appropriate properties
-yarn start # will start development server on port 3000
+cp src/configs/site-config.example.js src/configs/site-config.js  # setup with appropriate properties
+yarn dev # will start development server on port 3000
 ```
 
 ### 👷 Production Build

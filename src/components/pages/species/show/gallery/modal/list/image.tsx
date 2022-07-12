@@ -1,5 +1,4 @@
 import { Box, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
-import { externalLinkProps } from "@components/@core/blue-link/external";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getFallbackByMIME, getResourceRAW, getResourceThumbnail } from "@utils/media";
@@ -16,7 +15,7 @@ export const SpeciesGalleryImage = ({ resources, isLoading }: SpeciesGalleryImag
       <Box className="white-box fade" key={resource.id} overflow="hidden">
         <a href={`/observation/show/${observationId}`}>{observationId}</a>
         <Box position="relative">
-          <Link {...externalLinkProps} href={getResourceRAW(resource.context, resource.fileName)}>
+          <Link isExternal={true} href={getResourceRAW(resource.context, resource.fileName)}>
             <Image
               w="full"
               h="12.5rem"

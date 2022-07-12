@@ -61,7 +61,7 @@ export default function AreaDrawField({
   }, []);
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isRequired={isRequired} isInvalid={!!fieldState.error} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
         <NakshaMapboxDraw

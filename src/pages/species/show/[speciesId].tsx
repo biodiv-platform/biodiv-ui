@@ -14,19 +14,13 @@ import { getLanguageId } from "@utils/i18n";
 import { normalizeSpeciesPayload } from "@utils/species";
 import React from "react";
 
-import Error from "../../_error";
-
-const SpeciesShowPage = ({ species, licensesList, permissions, success }) => {
-  return success ? (
-    <SpeciesShowPageComponent
-      species={species}
-      permissions={permissions}
-      licensesList={licensesList}
-    />
-  ) : (
-    <Error statusCode={404} />
-  );
-};
+const SpeciesShowPage = ({ species, licensesList, permissions }) => (
+  <SpeciesShowPageComponent
+    species={species}
+    permissions={permissions}
+    licensesList={licensesList}
+  />
+);
 
 export const getServerSideProps = async (ctx) => {
   const langId = SITE_CONFIG.SPECIES.MULTILINGUAL_FIELDS
@@ -41,6 +35,8 @@ export const getServerSideProps = async (ctx) => {
       axCheckSpeciesPermission(ctx, ctx.query.speciesId),
       axGetLicenseList()
     ]);
+
+  if (!speciesData.success) return { notFound: true };
 
   const traitsMeta = await axGetAllTraitsMetaByTaxonId(speciesData.data.species.taxonConceptId);
 
@@ -61,8 +57,7 @@ export const getServerSideProps = async (ctx) => {
         isContributor: speciesPermission.data.isContributor || isAdmin,
         isFollower: speciesPermission.data.isFollower || null,
         isAdmin
-      },
-      success: speciesData.success
+      }
     }
   };
 };

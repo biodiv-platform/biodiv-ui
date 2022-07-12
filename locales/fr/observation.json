@@ -31,6 +31,7 @@
     "success": "Votre fichier est en cours de génération.Lorsqu'il sera prêt, vous serez averti par courrier électronique et un lien de téléchargement apparaîtra dans votre page de",
     "title": "Télécharger"
   },
+  "drag_drop_files": "Glisser",
   "edit_hint": "💡 Pour modifier d'autres éléments tels que nom ou traits, veuillez entrer directement à partir de la page Observation-Show.",
   "edit_observation": "Modifier l'observation",
   "follow_observation": "Suivre l'observation",
@@ -103,13 +104,14 @@
   "location_placeholder": "Entrez un emplacement",
   "location_scale": "Précision du lieu",
   "longitude": "Longitude",
+  "mange_resources": "Gérer les ressources",
+  "media_picker": "Sélecteur de médias",
   "nearby": "Observations à proximité",
   "no_custom_field": "Aucun champ personnalisé trouvé pour cette observation",
   "no_empty_suggestion": "Impossible de créer des suggestions vides",
   "notes": "Remarques",
   "observed": "Observé",
   "observed_at": "Lieu de l'observation",
-  "points_gained": "{{points}} point(s) d'activité gagné(s)",
   "post_to_groups": "Associer aux groupes",
   "range_hint": "Utilisation: Valeurs de la plage de septates",
   "rate_success": "Médias évalués avec succès",
@@ -129,6 +131,11 @@
   "share": "Partager cette observation",
   "source": "Source",
   "species_page": "Voir la page des espèces",
+  "status": {
+    "failed": "Manqué",
+    "in_progress": "En cours",
+    "uploaded": "Téléchargé"
+  },
   "submitted": "Soumise",
   "success": "Créé avec succès",
   "suggest": "Suggérer",
@@ -142,6 +149,18 @@
   "synonym": "Synonyme",
   "title": "Qu'avez-vous observé aujourd'hui?",
   "title_edit": "Modifier l'observation",
+  "toolbar": {
+    "delete": "Supprimer sélectionnée",
+    "edit": "Modifier la sélection",
+    "errors": {
+      "no_observations_selected": "Aucune observation sélectionnée"
+    },
+    "import": "Importer",
+    "merge": "Fusionner",
+    "select_all": "Tout sélectionner",
+    "select_none": "Ne rien sélectionner",
+    "split": "Diviser"
+  },
   "traits": "traits",
   "traits_no_group": "Veuillez d'abord sélectionner le groupe",
   "traits_update_success": "Traits mis à jour avec succès",

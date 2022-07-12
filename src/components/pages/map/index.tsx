@@ -27,7 +27,7 @@ export default function MapPageComponent({ defaultLayers }) {
   const { user } = useGlobalState();
   const toast = useToast();
   const isAdmin = hasAccess([Role.Admin]);
-  const [selectedLayers, setSelectedLayers] = useState(defaultLayers || []);
+  const [selectedLayers, setSelectedLayers] = useState(defaultLayers);
 
   const onObservationGridHover = ({ feature }) => (
     <div>{feature?.properties?.count} Observations</div>

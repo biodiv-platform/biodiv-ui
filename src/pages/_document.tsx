@@ -1,7 +1,6 @@
 import { ColorModeScript } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import GoogleAnalytics from "next-simple-google-analytics";
 import React from "react";
 
 interface IDocumentProps {
@@ -16,12 +15,16 @@ class MyDocument extends Document<IDocumentProps> {
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="description" content={SITE_CONFIG.SITE.DESCRIPTION} />
           <meta name="theme-color" content="#363636" />
-          {SITE_CONFIG.TRACKING.ENABLED && <GoogleAnalytics id={SITE_CONFIG.TRACKING.GA_ID} />}
+          {SITE_CONFIG.TRACKING.ENABLED && (
+            <script
+              data-partytown-config
+              dangerouslySetInnerHTML={{
+                __html: `partytown = { lib: "/_next/static/~partytown/", forward: ["gtag"] };`
+              }}
+            />
+          )}
         </Head>
         <body>
-          <a className="start-of-content" href="#main">
-            Skip to Content
-          </a>
           <ColorModeScript />
           <Main />
           <NextScript />

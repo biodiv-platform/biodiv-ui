@@ -36,6 +36,7 @@
     "twitter": "twitter"
   },
   "habitats_covered": "Habitats couverts",
+  "import": "Importer",
   "information": "Informations",
   "invalid_request": "requête invalide",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "Charger plus ↺",
   "loading": "Chargement...",
+  "move": {
+    "down": "Vers le bas",
+    "up": "En haut"
+  },
   "name": "Nom",
   "next": "Suivante",
   "no_data": "Pas de données",
@@ -66,6 +71,7 @@
     "token_not_saved": "Le jeton ne peut être sauvé",
     "token_saved": "Jeton sauvé"
   },
+  "observation_success": "Observation créée avec succès",
   "observed_on": "Observé le",
   "offline": "Pas de connexion Internet",
   "one_moment_please": "Un instant s'il vous plaît",

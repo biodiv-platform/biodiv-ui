@@ -18,9 +18,32 @@
   },
   "dataset_description": "Dataset Description",
   "date_columns": "Tsanganana daty",
+  "edit": {
+    "location": {
+      "accuracy": "araka ny marina",
+      "collapse_map": "Atsaharo ny sarintany",
+      "edit_location_accuracy": "Hanova ny fahamarinan'ny toerana",
+      "latitude": "Mponina",
+      "longitude": "-jarahasina",
+      "show_all": "Asehoy daholo",
+      "show_fewer": "Asehoy vitsy kokoa",
+      "show_on_map": "Asehoy amin'ny sari-tany ny toerana"
+    },
+    "scientific_name": {
+      "rank": "laharana",
+      "taxon_id": "taxon id",
+      "validity": "Valiny ny anarana siantifika"
+    }
+  },
   "location_columns": "Tsanganana toerana",
   "metadata": "Metadata",
   "sci_name_columns": "Tsanganana anarana siantifika",
+  "section_heading": {
+    "Temporal Data": "Data ara-potoana",
+    "curated_status": "Sata voarindra",
+    "spatial_data": "Data momba ny habaka",
+    "taxonomic_data": "Taxonomic Data"
+  },
   "update": {
     "error": "Tsy afaka manavao ny laharana",
     "success": "Nohavaozina soa aman-tsara ny laharana"

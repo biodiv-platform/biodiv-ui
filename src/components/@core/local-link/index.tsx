@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { cloneElement } from "react";
 
 interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
-  href: string;
+  href: string | undefined;
   as?: string;
   children?: any;
   className?: string;

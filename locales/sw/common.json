@@ -36,6 +36,7 @@
     "twitter": "Twitter"
   },
   "habitats_covered": "Mazingira yalifunikwa",
+  "import": "Ingiza",
   "information": "Taarifa",
   "invalid_request": "Ombi batili",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "Weka zaidi ↺",
   "loading": "Inapakia ...",
+  "move": {
+    "down": "Chini",
+    "up": "Juu"
+  },
   "name": "Jina.",
   "next": "Ijayo",
   "no_data": "Hakuna data.",
@@ -66,6 +71,7 @@
     "token_not_saved": "Haikuweza kuokoa Ishara",
     "token_saved": "Ishara imehifadhiwa"
   },
+  "observation_success": "Uchunguzi Umeundwa Kwa Mafanikio",
   "observed_on": "Aliona juu ya",
   "offline": "Hakuna uhusiano wa internet.",
   "one_moment_please": "Dakika moja tafadhali",

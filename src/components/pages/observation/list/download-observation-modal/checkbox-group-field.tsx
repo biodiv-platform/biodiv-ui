@@ -28,7 +28,7 @@ const CheckboxGroupField = ({
   const { field, fieldState } = useController({ name, defaultValue: [] });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       <FormLabel htmlFor="email">{label}</FormLabel>
       <CheckboxGroup defaultValue={field.value} onChange={field.onChange}>
         <Stack className="custom-checkbox-group">

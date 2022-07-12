@@ -4,16 +4,19 @@ import BlurBox from "@components/@core/blur-box";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useMemo } from "react";
 
 export default function Sidebar({ resource }) {
   const { t } = useTranslation();
 
+  const bgThumb = useMemo(
+    () =>
+      getResourceThumbnail(RESOURCE_CTX.OBSERVATION, resource?.fileName, RESOURCE_SIZE.THUMBNAIL),
+    [resource?.fileName]
+  );
+
   return (
-    <BlurBox
-      bg={getResourceThumbnail(RESOURCE_CTX.OBSERVATION, resource?.fileName, RESOURCE_SIZE.PREVIEW)}
-      fallbackColor="var(--chakra-colors-gray-800)"
-    >
+    <BlurBox bg={bgThumb} fallbackColor="var(--chakra-colors-gray-800)">
       <Center h="full" p={{ base: 6, lg: 8 }}>
         <div>
           <Heading

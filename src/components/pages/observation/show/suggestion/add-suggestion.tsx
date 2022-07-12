@@ -177,7 +177,7 @@ export default function AddSuggestion({
             </Box>
           </Collapse>
         </Box>
-        <Alert className="fadeInUp" status="success" hidden={isOpen}>
+        <Alert status="success" hidden={isOpen}>
           <AlertIcon />
           {t("observation:id.suggestion_success")}
           <Button variant="link" colorScheme="blue" onClick={onOpen} ml={1}>

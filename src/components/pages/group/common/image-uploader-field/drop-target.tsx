@@ -32,7 +32,7 @@ const DropTargetBox = styled.div`
   }
 `;
 
-const accept = ["image/jpg", "image/jpeg", "image/png"];
+const accept = { "image/*": [".jpg", ".jpeg", ".png"] };
 
 interface userGroupDropTarget {
   setValue;
