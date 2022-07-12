@@ -93,7 +93,7 @@ export const handleOnSingleObservationSubmit = (
     ...rest
   },
   { languageId, fields, currentGroupId },
-  redirect?
+  isSingle?
 ) => {
   const observedOn = dateToUTC(formatDate(rest.observedOn)).format();
 
@@ -119,7 +119,7 @@ export const handleOnSingleObservationSubmit = (
       languageId: lId
     },
     tags: cleanTags(tags),
-    protocol: "SINGLE_OBSERVATION",
+    protocol: isSingle ? "SINGLE_OBSERVATION" : "MULTI_OBSERVATION",
     obsvLanguageId: languageId,
     useDegMinSec: false,
     degMinSec: null
@@ -131,7 +131,7 @@ export const handleOnSingleObservationSubmit = (
       customFieldList: parseCustomFieldToPayload(fields, customFields, currentGroupId)
     },
     instant: true,
-    redirect: redirect
+    redirect: isSingle
   };
 };
 
