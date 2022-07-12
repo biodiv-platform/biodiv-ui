@@ -25,6 +25,7 @@ import ImageGrid from "./image-grid";
 import { MediaPicker } from "./media-picker";
 import Toolbar from "./toolbar";
 import UploadProgress from "./upload-progress";
+import useObservationCreateNext from "./use-observation-create-next-hook";
 
 const deepMergeObservations = (prev, current) => {
   const _prev = Object.fromEntries(Object.entries(prev).filter((o) => o[1]));
@@ -34,6 +35,8 @@ const deepMergeObservations = (prev, current) => {
 
 export default function ObservationCreateNextForm({ onBrowse }) {
   const { currentGroup, languageId } = useGlobalState();
+
+  const { requiredCFIds } = useObservationCreateNext();
 
   const [uploadSummery, setUploadSummery] = useImmer({
     isSubmittd: false,
@@ -75,19 +78,8 @@ export default function ObservationCreateNextForm({ onBrowse }) {
               userGroupId: Yup.array(),
               resources: Yup.array().min(1).required(),
 
-              //custom field data
-              customFields: Yup.array()
-                .of(
-                  Yup.object().shape({
-                    isRequired: Yup.boolean(),
-                    value: Yup.mixed().when("isRequired", {
-                      is: true,
-                      then: Yup.mixed().required(),
-                      otherwise: Yup.mixed().nullable()
-                    })
-                  })
-                )
-                .nullable()
+              //custom field data - detailed validation in browse modal
+              customFields: Yup.array().min(requiredCFIds.length).required()
             })
           )
           .min(1)

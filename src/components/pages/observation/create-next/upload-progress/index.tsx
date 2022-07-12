@@ -1,9 +1,10 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Button, ButtonGroup, Link, LinkOverlay, SimpleGrid, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, LinkOverlay, SimpleGrid, Text } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import LocalLink from "@components/@core/local-link";
 import ListIcon from "@icons/list";
 import { AssetStatus } from "@interfaces/custom";
+import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
@@ -11,6 +12,7 @@ import ProgressCard from "./progress-card";
 
 export default function UploadProgress({ payload, data }) {
   const { t } = useTranslation();
+  const router = useRouter();
 
   const [list, count] = useMemo(() => {
     const _list = payload.map((oPayload) => {
@@ -65,12 +67,11 @@ export default function UploadProgress({ payload, data }) {
               </Button>
             </LocalLink>
             <Button
-              as={Link}
-              href="/observation/create"
               colorScheme="blue"
               variant="outline"
               rightIcon={<ArrowForwardIcon />}
               isDisabled={count.done !== count.total}
+              onClick={router.reload}
             >
               {t("observation:continue")}
             </Button>
@@ -88,7 +89,7 @@ export default function UploadProgress({ payload, data }) {
         {t("observation:creating")} [{count.done}/{count.total}]
       </Text>
 
-      <SimpleGrid columns={{ base: 1, sm: 1, md: 4, lg: 5 }} spacing={4}>
+      <SimpleGrid columns={{ base: 1, sm: 1, md: 4, lg: 5 }} spacing={4} mb={6}>
         {list.map((item, index) => (
           <ProgressCard item={item} key={index} />
         ))}

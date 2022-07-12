@@ -8,6 +8,7 @@ import React from "react";
 import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 
+import CustomfieldsError from "./customfields-error";
 import Recodata from "./recodata";
 import Resources from "./resources";
 
@@ -62,6 +63,7 @@ export default function ObservationBox({ remove, index }) {
       <Button w="full" leftIcon={<EditIcon />} onClick={handleOnEdit}>
         {t("common:edit")}
       </Button>
+      <CustomfieldsError name={`o.${index}.customFields`} />
     </Box>
   );
 }

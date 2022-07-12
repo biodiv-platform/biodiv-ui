@@ -1034,6 +1034,11 @@
     fast-deep-equal "^3.1.3"
     supercluster "^7.1.3"
 
+"@hookform/error-message@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hookform/error-message/-/error-message-2.0.0.tgz#9b1b037fd816ea9b1531c06aa7fab5f5154aa740"
+  integrity sha512-Y90nHzjgL2MP7GFy75kscdvxrCTjtyxGmOLLxX14nd08OXRIh9lMH/y9Kpdo0p1IPowJBiZMHyueg7p+yrqynQ==
+
 "@hookform/resolvers@2.9.3":
   version "2.9.3"
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.9.3.tgz#13f6934cfe705e24fac094da377e0621adcfc424"
