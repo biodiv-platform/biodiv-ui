@@ -55,7 +55,7 @@ export default function UploadProgress({ payload, data }) {
       <PageHeading
         actions={
           <ButtonGroup spacing={4}>
-            <LocalLink href="/observation/list">
+            <LocalLink prefixGroup={true} href="/observation/list">
               <Button
                 as={LinkOverlay}
                 colorScheme="blue"
