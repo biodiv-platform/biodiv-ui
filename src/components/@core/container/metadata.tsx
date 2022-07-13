@@ -65,12 +65,10 @@ export default function Metadata() {
             dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || [];
-            window.gtag = function gtag(){window.dataLayer.push(arguments);}
+            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', '${SITE_CONFIG.TRACKING.GA_ID}', {
-                page_path: window.location.pathname,
-            });
+            gtag('config', 'SITE_CONFIG.TRACKING.GA_ID');
         `
             }}
           />
