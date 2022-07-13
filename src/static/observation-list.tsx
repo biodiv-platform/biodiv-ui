@@ -11,7 +11,8 @@ export const DEFAULT_FILTER: ObservationFilterProps = {
   sort: "created_on",
   offset: 0,
   max: LIST_PAGINATION_LIMIT,
-  view: "list"
+  view: "list",
+  mediaFilter: "no_of_images,no_of_videos,no_of_audio"
 };
 
 export const OBSERVATION_FILTER_KEY = {
