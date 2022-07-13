@@ -1,4 +1,4 @@
-import { authorizedPageSSR } from "@components/auth/auth-redirect";
+import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import ObservationCreateNextComponent from "@components/pages/observation/create-next";
 import { Role } from "@interfaces/custom";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
@@ -17,7 +17,8 @@ const ObservationCreateNextPage = (props) => (
 );
 
 export async function getServerSideProps(ctx) {
-  authorizedPageSSR([Role.Any], ctx, true);
+  const redirect = authorizedPageSSP([Role.Any], ctx);
+  if (redirect) return redirect;
 
   const aReq = absoluteUrl(ctx);
 
