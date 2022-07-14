@@ -57,11 +57,13 @@ export default function Metadata() {
       {SITE_CONFIG.TRACKING.ENABLED && (
         <>
           <Script
+            type="text/partytown"
             strategy="worker"
             src={`https://www.googletagmanager.com/gtag/js?id=${SITE_CONFIG.TRACKING.GA_ID}`}
           />
-          <script
+          <Script
             type="text/partytown"
+            strategy="worker"
             dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || [];
