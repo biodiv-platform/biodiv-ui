@@ -26,6 +26,7 @@ import SmartphoneIcon from "@icons/smartphone";
 import SplitIcon from "@icons/split";
 import { OBSERVATION_BULK_EDIT } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
+import dayjs from "dayjs";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { emit } from "react-gbus";
@@ -34,16 +35,16 @@ import { useFormContext } from "react-hook-form";
 import useObservationCreateNext from "../use-observation-create-next-hook";
 import SelectionCounter from "./selection-counter";
 
-const areValuesEqual = (val1, val2) => {
+const areValuesEqual = (val1, val2, key) => {
   if (!val1 || !val2) {
     return false;
   }
 
-  if (val1 instanceof Date && val2 instanceof Date && val1.getTime() === val2.getTime()) {
+  if (Array.isArray(val1) && Array.isArray(val2) && JSON.stringify(val1) === JSON.stringify(val2)) {
     return true;
   }
 
-  if (Array.isArray(val1) && Array.isArray(val2) && JSON.stringify(val1) === JSON.stringify(val2)) {
+  if (key === "observedOn" && dayjs(val1).diff(dayjs(val2), "day") === 0) {
     return true;
   }
 
@@ -97,7 +98,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
       let isCommon = true;
 
       for (const selectedObservation of allSelected) {
-        if (!areValuesEqual(selectedObservation[key], value)) {
+        if (!areValuesEqual(selectedObservation[key], value, key)) {
           isCommon = false;
           break;
         }
