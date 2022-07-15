@@ -82,16 +82,20 @@ export interface ObservationImageCard {
 }
 export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationImageCard) {
   const [canEdit, setCanEdit] = useState(false);
-  const { hasUgAccess } = useObservationFilter();
+  const { hasUgAccess, setCropObservationId } = useObservationFilter();
 
   useEffect(() => {
     setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
   }, [hasUgAccess]);
 
+  const handleImageIconClick = () => {
+    setCropObservationId(o.observationId);
+  }
+
   return (
     <ImageBox>
       <HStack className="topBox" justifyContent="space-between">
-        <div className="stats">
+        <div className="stats" onClick={handleImageIconClick}>
           {o.noOfImages ? (
             <>
               {o.noOfImages} <ImageIcon />

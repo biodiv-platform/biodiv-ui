@@ -38,6 +38,30 @@ export const axGetObservationById = async (observationId) => {
   }
 };
 
+export const axGetCropResources = async (observationId) => {
+  try {
+    const {data} = await plainHttp.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/crop/resources/${observationId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+}
+
+// FOR UPDATING THE CROP RESOURCES
+export const axUpdateCropResources = async (payload) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.put(`${ENDPOINT.OBSERVATION}/v1/observation/crop/resources/${payload.id}`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e.response.data.message);
+    return { success: false, data: [] };
+  }
+};
+
 export const axQueryTagsByText = async (query) => {
   try {
     const { data } = await http.get(`${ENDPOINT.OBSERVATION}/v1/observation/tags/autocomplete`, {

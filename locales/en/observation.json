@@ -15,6 +15,15 @@
   "coordinates": "Coordinates",
   "created_on": "Created on",
   "creating": "We're creating your observation",
+  "crop": {
+    "title": "Crop",
+    "selected": "CURATED",
+    "not_curated": "NOT CURATED",
+    "rejected": "REJECTED",
+    "curate": "Curate",
+    "reject": "Reject",
+    "un_curate": "Un-curate"
+  },
   "custom_fields": "Custom Fields",
   "delete_file": {
     "error": "Unable to process file,Please try again later",
