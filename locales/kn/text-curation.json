@@ -18,9 +18,32 @@
   },
   "dataset_description": "ಡೇಟಾ ಸೆಟ್ ವಿವರಣೆ",
   "date_columns": "ದಿನಾಂಕ ಕಾಲಮ್‌ಗಳು",
+  "edit": {
+    "location": {
+      "accuracy": "ನಿಖರತೆ",
+      "collapse_map": "ನಕ್ಷೆಯನ್ನು ಕುಗ್ಗಿಸಿ",
+      "edit_location_accuracy": "ಸ್ಥಳದ ನಿಖರತೆಯನ್ನು ಸಂಪಾದಿಸಿ",
+      "latitude": "ಅಕ್ಷಾಂಶ",
+      "longitude": "ರೇಖಾಂಶ",
+      "show_all": "ಎಲ್ಲ ತೋರಿಸು",
+      "show_fewer": "ಕಡಿಮೆ ತೋರಿಸು",
+      "show_on_map": "ನಕ್ಷೆಯಲ್ಲಿ ಸ್ಥಳಗಳನ್ನು ತೋರಿಸಿ"
+    },
+    "scientific_name": {
+      "rank": "ಶ್ರೇಣಿ",
+      "taxon_id": "ಟ್ಯಾಕ್ಸನ್ ಐಡಿ",
+      "validity": "ವೈಜ್ಞಾನಿಕ ಹೆಸರಿನ ಸಿಂಧುತ್ವ"
+    }
+  },
   "location_columns": "ಸ್ಥಳ ಕಾಲಮ್‌ಗಳು",
   "metadata": "ಮೆಟಾಡೇಟಾ",
   "sci_name_columns": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು ಅಂಕಣಗಳು",
+  "section_heading": {
+    "Temporal Data": "ತಾತ್ಕಾಲಿಕ ಡೇಟಾ",
+    "curated_status": "ಕ್ಯುರೇಟೆಡ್ ಸ್ಥಿತಿ",
+    "spatial_data": "ಪ್ರಾದೇಶಿಕ ಡೇಟಾ",
+    "taxonomic_data": "ಟಕ್ಸಾನಮಿಕ್ ಡೇಟಾ"
+  },
   "update": {
     "error": "ಸಾಲನ್ನು ನವೀಕರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
     "success": "ಸಾಲನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ"

@@ -1,4 +1,4 @@
-import { authorizedPageSSR } from "@components/auth/auth-redirect";
+import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import RolesRequestComponent from "@components/pages/roles/request";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
@@ -9,7 +9,8 @@ export default function RolesRequestPage({ isAdmin }) {
 }
 
 export async function getServerSideProps(ctx) {
-  authorizedPageSSR([Role.Any], ctx, true);
+  const redirect = authorizedPageSSP([Role.Any], ctx);
+  if (redirect) return redirect;
 
   return {
     props: {

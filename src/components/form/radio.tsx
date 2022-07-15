@@ -31,7 +31,7 @@ export const RadioInputField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
       <RadioGroup key={name} {...field}>
         <Stack direction={isInline ? "row" : "column"} py={2}>

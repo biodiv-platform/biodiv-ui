@@ -72,7 +72,7 @@ export const LocationPicker = () => {
     >
       <>
         <Box mb={4}>
-          <FormControl isInvalid={fieldLocationName.fieldState.invalid}>
+          <FormControl isInvalid={!!fieldLocationName.fieldState.error}>
             <FormLabel>{t("user:location")}</FormLabel>
             <InputGroup size="md" className="places-search">
               <Autocomplete

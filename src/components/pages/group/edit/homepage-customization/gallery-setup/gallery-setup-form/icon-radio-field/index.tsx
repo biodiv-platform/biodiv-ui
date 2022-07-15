@@ -26,7 +26,7 @@ export default function IconRadioField({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} isRequired={isRequired} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} isRequired={isRequired} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <RadioItems
         options={options}

@@ -31,13 +31,13 @@ export const SwitchField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       <Flex>
         <FormLabel htmlFor={name}>{label}</FormLabel>
         <Switch
           onBlur={field.onBlur}
           onChange={(e) => field.onChange(e.target["checked"])}
-          defaultIsChecked={field.value}
+          defaultChecked={field.value}
           isDisabled={disabled}
           color={color}
           name={name}

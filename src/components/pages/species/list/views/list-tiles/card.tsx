@@ -18,6 +18,8 @@ export default function GridViewCard({ o, getCheckboxProps }) {
 
   const [canEdit, setCanEdit] = useState(false);
 
+  const thumbFallbackSrc = getLocalIcon(species?.find((item) => item?.id === o?.sGroup)?.name);
+
   useEffect(() => {
     setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
   }, [hasUgAccess]);
@@ -38,8 +40,12 @@ export default function GridViewCard({ o, getCheckboxProps }) {
               w="full"
               h="full"
               borderTopRadius="md"
-              src={getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL)}
-              fallbackSrc={getLocalIcon(species?.find((item) => item?.id === o?.sGroup)?.name)}
+              src={
+                getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL) ||
+                thumbFallbackSrc
+              }
+              fallbackSrc={thumbFallbackSrc}
+              loading="lazy"
               alt={simpleName}
             />
           </Box>

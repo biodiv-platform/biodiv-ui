@@ -6,6 +6,7 @@ import { subscribeToPushNotification } from "@utils/user";
 import { getManifestURL } from "@utils/userGroup";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo } from "react";
@@ -53,6 +54,28 @@ export default function Metadata() {
         <link rel="apple-touch-icon" href={currentGroup?.icon + RESOURCE_SIZE.APPLE_TOUCH} />
         <link rel="manifest" href={manifestURL} />
       </Head>
+      {SITE_CONFIG.TRACKING.ENABLED && (
+        <>
+          <Script
+            type="text/partytown"
+            strategy="worker"
+            src={`https://www.googletagmanager.com/gtag/js?id=${SITE_CONFIG.TRACKING.GA_ID}`}
+          />
+          <Script
+            type="text/partytown"
+            strategy="worker"
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'SITE_CONFIG.TRACKING.GA_ID');
+        `
+            }}
+          />
+        </>
+      )}
     </>
   );
 }

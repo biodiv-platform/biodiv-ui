@@ -18,9 +18,32 @@
   },
   "dataset_description": "ડેટાસેટ વર્ણન",
   "date_columns": "તારીખ કૉલમ",
+  "edit": {
+    "location": {
+      "accuracy": "ચોકસાઈ",
+      "collapse_map": "નકશો સંકુચિત કરો",
+      "edit_location_accuracy": "સ્થાનની ચોકસાઈ સંપાદિત કરો",
+      "latitude": "અક્ષાંશ",
+      "longitude": "રેખાંશ",
+      "show_all": "બધું બતાવો",
+      "show_fewer": "ઓછા બતાવો",
+      "show_on_map": "નકશા પર સ્થાનો બતાવો"
+    },
+    "scientific_name": {
+      "rank": "ક્રમ",
+      "taxon_id": "ટેક્સન આઈડી",
+      "validity": "વૈજ્ઞાનિક નામની માન્યતા"
+    }
+  },
   "location_columns": "સ્થાન કૉલમ",
   "metadata": "મેટાડેટા",
   "sci_name_columns": "વૈજ્ઞાનિક નામ કૉલમ",
+  "section_heading": {
+    "Temporal Data": "ટેમ્પોરલ ડેટા",
+    "curated_status": "ક્યુરેટેડ સ્ટેટસ",
+    "spatial_data": "અવકાશી ડેટા",
+    "taxonomic_data": "વર્ગીકરણ ડેટા"
+  },
   "update": {
     "error": "પંક્તિ અપડેટ કરવામાં અસમર્થ",
     "success": "પંક્તિ સફળતાપૂર્વક અપડેટ થઈ"

@@ -27,13 +27,13 @@ export const CheckboxField = ({
   } = useController({ name });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       <Checkbox
         name={name}
         onChange={(e) => onChange(e.target["checked"])}
         placeholder={label}
         onBlur={onBlur}
-        defaultIsChecked={value}
+        defaultChecked={value}
         isDisabled={disabled}
       >
         {children || label}

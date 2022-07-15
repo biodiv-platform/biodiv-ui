@@ -28,7 +28,7 @@ export default function IconCheckboxField({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} isRequired={isRequired} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} isRequired={isRequired} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <CheckBoxItems
         options={options}

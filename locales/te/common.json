@@ -36,6 +36,7 @@
     "twitter": "ట్విట్టర్"
   },
   "habitats_covered": "ఆవాసాలు కప్పబడి ఉంటాయి",
+  "import": "దిగుమతి",
   "information": "సమాచారం",
   "invalid_request": "చెల్లని అభ్యర్థన",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "మరింత low.",
   "loading": "లోడ్...",
+  "move": {
+    "down": "క్రిందికి",
+    "up": "పైకి"
+  },
   "name": "పేరు",
   "next": "తరువాత",
   "no_data": "సమాచారం లేదు",
@@ -66,6 +71,7 @@
     "token_not_saved": "టోకెన్ సేవ్ కాలేదు",
     "token_saved": "టోకెన్ సేవ్ చేయబడింది"
   },
+  "observation_success": "పరిశీలన విజయవంతంగా రూపొందించబడింది",
   "observed_on": "గమనించారు",
   "offline": "ఇంటర్నెట్ కనెక్షన్ లేదు",
   "one_moment_please": "ఒక క్షణం దయచేసి",

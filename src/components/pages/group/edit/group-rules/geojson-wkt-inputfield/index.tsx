@@ -86,8 +86,8 @@ export default function GeoJsonWktParserInput({
 
   return (
     <FormControl
-      isInvalid={fieldState.invalid}
-      data-select-invalid={fieldState.invalid}
+      isInvalid={!!fieldState.error}
+      data-select-invalid={!!fieldState.error}
       mb={mb}
       {...props}
     >

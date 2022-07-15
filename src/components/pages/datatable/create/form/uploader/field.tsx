@@ -75,7 +75,7 @@ const DropzoneField = ({
               </TabPanel>
             </TabPanels>
           </Tabs>
-          <FormErrorMessage children={form?.formState?.errors?.[name]} />
+          <FormErrorMessage children={form?.formState?.errors?.[name]?.message?.toString()} />
         </Box>
       </Box>
     </ToggleablePanel>

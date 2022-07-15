@@ -36,6 +36,7 @@
     "twitter": "ट्विटर"
   },
   "habitats_covered": "संरक्षित निवास",
+  "import": "आयात करा",
   "information": "माहिती",
   "invalid_request": "अवैध विनंती",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "अधिक लोड करा ↺.",
   "loading": "लोड करीत आहे ...",
+  "move": {
+    "down": "खाली",
+    "up": "वर"
+  },
   "name": "नाव",
   "next": "पुढे",
   "no_data": "माहिती उपलब्ध नाही",
@@ -66,6 +71,7 @@
     "token_not_saved": "टोकन वाचवू शकत नाही",
     "token_saved": "टोकन वाचले"
   },
+  "observation_success": "निरीक्षण यशस्वीरित्या तयार केले",
   "observed_on": "वर पाहिले",
   "offline": "इंटरनेट कनेक्शन नाही",
   "one_moment_please": "कृपया क्षणभर थांबा",

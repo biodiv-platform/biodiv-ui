@@ -50,6 +50,7 @@ export default function Suggestions({
                   <Image
                     overflow="hidden"
                     objectFit="cover"
+                    loading="lazy"
                     alt={o.name}
                     src={getResourceThumbnail(
                       RESOURCE_CTX.OBSERVATION,

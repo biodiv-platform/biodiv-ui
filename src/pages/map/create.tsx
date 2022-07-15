@@ -1,4 +1,4 @@
-import { authorizedPageSSR } from "@components/auth/auth-redirect";
+import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import MapCreatePageComponent from "@components/pages/map/create";
 import { Role } from "@interfaces/custom";
 import React from "react";
@@ -12,6 +12,6 @@ MapPage.config = {
 };
 
 export const getServerSideProps = async (ctx) => {
-  authorizedPageSSR([Role.Admin], ctx, true);
-  return { props: {} };
+  const redirect = authorizedPageSSP([Role.Admin], ctx);
+  return redirect || { props: {} };
 };

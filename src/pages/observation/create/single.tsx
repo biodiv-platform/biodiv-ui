@@ -1,40 +1,19 @@
-import { useLocalRouter } from "@components/@core/local-link";
-import ObservationCreatePageComponent from "@components/pages/observation/create";
-import useGlobalState from "@hooks/use-global-state";
+import { authorizedPageSSP } from "@components/auth/auth-redirect";
+import ObservationCreateSinglePageComponent from "@components/pages/observation/create";
+import { Role } from "@interfaces/custom";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
 import { axGroupList } from "@services/usergroup.service";
 import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
-import { encode } from "base64-url";
-import React, { useEffect } from "react";
+import React from "react";
 
-const ObservationCreatePage = ({
-  speciesGroups,
-  languages,
-  ObservationCreateFormData,
-  licensesList
-}) => {
-  const { isLoggedIn } = useGlobalState();
-  const { push, asPath } = useLocalRouter();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      push("/login", true, { forward: encode(asPath) });
-    }
-  }, []);
-
-  return isLoggedIn ? (
-    <ObservationCreatePageComponent
-      speciesGroups={speciesGroups}
-      ObservationCreateFormData={ObservationCreateFormData}
-      languages={languages}
-      licensesList={licensesList}
-    />
-  ) : null;
-};
+const ObservationCreateSinglePage = (props) => <ObservationCreateSinglePageComponent {...props} />;
 
 export async function getServerSideProps(ctx) {
+  const redirect = authorizedPageSSP([Role.Any], ctx);
+  if (redirect) return redirect;
+
   const { data: speciesGroups } = await axGetspeciesGroups();
   const aReq = absoluteUrl(ctx);
   const { data } = await axGetLangList();
@@ -54,8 +33,8 @@ export async function getServerSideProps(ctx) {
       speciesGroups,
       languages: data.map((l) => ({ label: l.name, value: l.id })),
       licensesList
-    } // will be passed to the page component as props
+    }
   };
 }
 
-export default ObservationCreatePage;
+export default ObservationCreateSinglePage;

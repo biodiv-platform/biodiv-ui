@@ -34,6 +34,21 @@ export const customTheme = extendTheme(
           scrollBehavior: "smooth"
         }
       }
+    },
+    components: {
+      Input: {
+        sizes: {
+          md: {
+            addon: { px: 2.5 },
+            field: { px: 2.5 }
+          }
+        }
+      }
+    },
+    semanticTokens: {
+      colors: {
+        "chakra-border-color": { _light: "gray.300" }
+      }
     }
   },
   withProse({

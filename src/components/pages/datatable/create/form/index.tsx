@@ -74,7 +74,6 @@ export default function DataTableCreateForm({
             })
           ),
         userGroupId: Yup.array(),
-        useDegMinSec: Yup.boolean(),
         hidePreciseLocation: Yup.boolean(),
         terms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted."),
         columnsMapping: Yup.array()

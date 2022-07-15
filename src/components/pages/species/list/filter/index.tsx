@@ -7,6 +7,7 @@ import {
   DrawerContent,
   DrawerOverlay,
   Heading,
+  Spinner,
   Stack,
   useBreakpointValue,
   useDisclosure
@@ -14,10 +15,11 @@ import {
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { Suspense } from "react";
 
 import ClearFilters from "./clear-filter";
-import FiltersList from "./list";
+
+const FiltersList = React.lazy(() => import("./list"));
 
 const FilterWrapper = styled.div`
   height: 100%;
@@ -51,7 +53,9 @@ export default function Filters() {
         <Heading size="md">{t("filters:title")}</Heading>
         <ClearFilters />
       </Stack>
-      <FiltersList />
+      <Suspense fallback={<Spinner />}>
+        <FiltersList />
+      </Suspense>
     </Box>
   ) : (
     <FilterWrapper>
@@ -64,7 +68,13 @@ export default function Filters() {
             <DrawerCloseButton />
             <BoxHeading>{t("filters:title")}</BoxHeading>
             <ClearFilters />
-            <DrawerBody p={0}>{isOpen && <FiltersList />}</DrawerBody>
+            <DrawerBody p={0}>
+              {isOpen && (
+                <Suspense fallback={<Spinner />}>
+                  <FiltersList />
+                </Suspense>
+              )}
+            </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>

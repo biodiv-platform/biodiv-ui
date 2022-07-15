@@ -34,7 +34,7 @@ const DropzoneField = ({ name, mb = 4 }: IDropzoneProps) => {
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb}>
       <Tabs
         className="nospace"
         index={tabIndex}

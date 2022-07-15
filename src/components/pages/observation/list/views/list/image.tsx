@@ -126,6 +126,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
             className="ob-image-list"
             objectFit="cover"
             bg="gray.100"
+            loading="lazy"
             src={getResourceThumbnail(
               RESOURCE_CTX.OBSERVATION,
               o.reprImageUrl,

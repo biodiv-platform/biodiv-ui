@@ -35,7 +35,7 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
             </Box>
           </Skeleton>
           <Skeleton isLoaded={speciesGroups.length > 0} maxW="8rem">
-            <Checkbox defaultIsChecked={filter.hasMedia} onChange={handleOnMediaChange}>
+            <Checkbox defaultChecked={filter.hasMedia} onChange={handleOnMediaChange}>
               {t("user:with_media")}
             </Checkbox>
           </Skeleton>

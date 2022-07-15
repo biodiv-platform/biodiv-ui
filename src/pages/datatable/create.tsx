@@ -1,4 +1,4 @@
-import { authorizedPageSSR } from "@components/auth/auth-redirect";
+import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import DataTableCreatePageComponent from "@components/pages/datatable/create";
 import { Role } from "@interfaces/custom";
 import {
@@ -21,7 +21,8 @@ const DataTableCreatePage = ({ speciesGroups, languages, datasetId, observationC
 );
 
 export async function getServerSideProps(ctx) {
-  authorizedPageSSR([Role.Any], ctx, true);
+  const redirect = authorizedPageSSP([Role.Any], ctx);
+  if (redirect) return redirect;
 
   const { data: speciesGroups } = await axGetspeciesGroups();
   const {
