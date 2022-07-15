@@ -11,14 +11,7 @@ import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-const DataTableCreatePage = ({ speciesGroups, languages, datasetId, observationConfig }) => (
-  <DataTableCreatePageComponent
-    speciesGroups={speciesGroups}
-    observationConfig={observationConfig}
-    languages={languages}
-    datasetId={datasetId}
-  />
-);
+const DataTableCreatePage = (props) => <DataTableCreatePageComponent {...props} />;
 
 export async function getServerSideProps(ctx) {
   const redirect = authorizedPageSSP([Role.Any], ctx);
