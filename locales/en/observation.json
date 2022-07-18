@@ -16,13 +16,9 @@
   "created_on": "Created on",
   "creating": "We're creating your observation(s)",
   "crop": {
-    "title": "Crop",
-    "selected": "CURATED",
-    "not_curated": "NOT CURATED",
-    "rejected": "REJECTED",
-    "curate": "Curate",
-    "reject": "Reject",
-    "un_curate": "Un-curate"
+    "actions": { "curate": "Curate", "reject": "Reject", "un_curate": "Un-curate" },
+    "status": { "not_curated": "NOT CURATED", "rejected": "REJECTED", "selected": "CURATED" },
+    "title": "Crop"
   },
   "custom_fields": "Custom Fields",
   "delete_file": {

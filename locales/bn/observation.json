@@ -15,6 +15,19 @@
   "coordinates": "সমন্বয়",
   "created_on": "তৈরি",
   "creating": "আমরা আপনার পর্যবেক্ষণ তৈরি করছি",
+  "crop": {
+    "actions": {
+      "curate": "কিউরেট",
+      "reject": "প্রত্যাখ্যান করুন",
+      "un_curate": "আন-কিউরেট"
+    },
+    "status": {
+      "not_curated": "কিউরেট করা হয়নি",
+      "rejected": "প্রত্যাখ্যাত",
+      "selected": "কিউরেটেড"
+    },
+    "title": "ফসল"
+  },
   "custom_fields": "কাস্টম ক্ষেত্র",
   "delete_file": {
     "error": "ফাইল প্রক্রিয়া করতে অক্ষম, পরে আবার চেষ্টা করুন",

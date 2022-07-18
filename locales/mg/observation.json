@@ -15,6 +15,19 @@
   "coordinates": "Velarantany",
   "created_on": "Noforonina",
   "creating": "Mamorona ny fandinihanao izahay",
+  "crop": {
+    "actions": {
+      "curate": "Curate",
+      "reject": "mandà",
+      "un_curate": "Un-curate"
+    },
+    "status": {
+      "not_curated": "TSY MAHAY",
+      "rejected": "TSY",
+      "selected": "notsongain'ilay"
+    },
+    "title": "vokatra"
+  },
   "custom_fields": "Saha mahazatra",
   "delete_file": {
     "error": "Tsy afaka manamboatra rakitra, andramo manandrana indray avy eo",

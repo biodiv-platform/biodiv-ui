@@ -1,6 +1,6 @@
 import "react-image-crop/dist/ReactCrop.css";
 
-import { Box, Button, ButtonGroup, Image } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Divider, Image } from "@chakra-ui/react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { axUpdateCropResources } from "@services/observation.service";
 import { CROP_STATUS, RESOURCE_SIZE } from "@static/constants";
@@ -76,7 +76,7 @@ export default function CropTab({ data, setData }) {
     return (
       <>
         <Grid h="450px" templateRows="repeat(9, 1fr)" templateColumns="repeat(5, 1fr)" gap={2}>
-          <GridItem rowSpan={9} colSpan={1} overflow="auto">
+          <GridItem rowSpan={9} colSpan={1} overflow="auto" display="flex">
             {data?.observationResource?.map(({ selectionStatus, resource, bbox }) => (
               <Box width="10rem" h="6.5rem" position="relative">
                 <Box position="absolute" top={0} left={0} ml={2}>
@@ -102,6 +102,7 @@ export default function CropTab({ data, setData }) {
                 />
               </Box>
             ))}
+            <Divider orientation="vertical" ml={5}/>
           </GridItem>
           <GridItem
             rowSpan={8}
@@ -135,14 +136,14 @@ export default function CropTab({ data, setData }) {
           <GridItem rowSpan={1} colSpan={4} display="flex" justifyContent="space-between" mb={4}>
             <ButtonGroup gap={1}>
               <Button colorScheme="green" onClick={() => handleValidate(currentCropItem.id)}>
-                {t("observation:crop:curate")}
+                {t("observation:crop.actions.curate")}
               </Button>
               <Button colorScheme="red" onClick={() => handleReject(currentCropItem.id)}>
-                {t("observation:crop.reject")}
+                {t("observation:crop.actions.reject")}
               </Button>
             </ButtonGroup>
             <Button colorScheme="blue" onClick={() => handleReset(currentCropItem.id)}>
-              {t("observation:crop:un_curate")}
+              {t("observation:crop.actions.un_curate")}
             </Button>
           </GridItem>
         </Grid>

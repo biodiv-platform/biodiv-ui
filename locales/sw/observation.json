@@ -15,6 +15,19 @@
   "coordinates": "Kuratibu",
   "created_on": "Imeundwa On.",
   "creating": "Tunaunda uchunguzi wako",
+  "crop": {
+    "actions": {
+      "curate": "Taratibu",
+      "reject": "Kataa",
+      "un_curate": "Un-curate"
+    },
+    "status": {
+      "not_curated": "HAIJATUNZWA",
+      "rejected": "IMEKATAA",
+      "selected": "IMETUNGWA"
+    },
+    "title": "Mazao"
+  },
   "custom_fields": "Mashamba ya Desturi.",
   "delete_file": {
     "error": "Haiwezi kutengeneza faili, tafadhali jaribu tena baadaye",
