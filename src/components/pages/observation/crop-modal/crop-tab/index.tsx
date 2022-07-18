@@ -102,7 +102,7 @@ export default function CropTab({ data, setData }) {
                 />
               </Box>
             ))}
-            <Divider orientation="vertical" ml={5}/>
+            <Divider orientation="vertical" ml={5} />
           </GridItem>
           <GridItem
             rowSpan={8}

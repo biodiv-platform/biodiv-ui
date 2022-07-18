@@ -90,7 +90,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
 
   const handleImageIconClick = () => {
     setCropObservationId(o.observationId);
-  }
+  };
 
   return (
     <ImageBox>
