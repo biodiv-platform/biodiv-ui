@@ -438,3 +438,16 @@ export const axcustomFieldEditDetails = async (userGroupId, customFieldId, paylo
     return { success: false, data: [] };
   }
 };
+
+export const axEditHomePageGallery = async (userGroupId, galleryId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/edit/${userGroupId}/${galleryId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};

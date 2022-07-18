@@ -111,9 +111,10 @@
     "show_desc": "Montrer la description",
     "success": "Changements mis à jour avec succès",
     "table": {
+      "actions": "Actions",
       "description": "Description",
+      "image": "Image",
       "more_link": "Lien",
-      "remove_image": "Supprimer",
       "title": "Titre"
     },
     "title": "Personnalisation de la page d'accueil",

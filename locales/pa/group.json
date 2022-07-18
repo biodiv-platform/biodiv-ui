@@ -111,9 +111,10 @@
     "show_desc": "ਵੇਰਵਾ ਦਿਖਾਓ",
     "success": "ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੇ ਗਏ",
     "table": {
+      "actions": "ਕਾਰਵਾਈਆਂ",
       "description": "ਵੇਰਵਾ",
+      "image": "ਚਿੱਤਰ",
       "more_link": "ਲਿੰਕ",
-      "remove_image": "ਹਟਾਓ",
       "title": "ਸਿਰਲੇਖ"
     },
     "title": "ਹੋਮਪੇਜ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ",

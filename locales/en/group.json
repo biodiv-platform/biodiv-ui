@@ -111,9 +111,10 @@
     "show_desc": "Show Description",
     "success": "Updated changes successfully",
     "table": {
+      "actions": "Actions",
       "description": "Description",
+      "image": "Image",
       "more_link": "Link",
-      "remove_image": "Remove",
       "title": "Title"
     },
     "title": "Homepage Customization",
