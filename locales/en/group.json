@@ -111,11 +111,11 @@
     "show_desc": "Show Description",
     "success": "Updated changes successfully",
     "table": {
+      "actions": "Actions",
       "description": "Description",
+      "image": "Image",
       "more_link": "Link",
-      "title": "Title",
-      "actions":"Actions",
-      "image":"Image"
+      "title": "Title"
     },
     "title": "Homepage Customization",
     "update": {

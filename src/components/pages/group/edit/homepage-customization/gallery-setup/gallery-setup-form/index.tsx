@@ -57,7 +57,12 @@ export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryL
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Button m={3} type="button" onClick={() => setIsCreate(false)} leftIcon={<ArrowBackIcon />}>
+          <Button
+            m={3}
+            type="button"
+            onClick={() => setIsCreate(false)}
+            leftIcon={<ArrowBackIcon />}
+          >
             {t("group:homepage_customization.back")}
           </Button>
           <Flex alignItems="center">

@@ -34,7 +34,6 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
   });
 
   const handleFormSubmit = async (payload) => {
-
     const { success, data } = await axEditHomePageGallery(ugId, id, payload);
     if (!success) {
       notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
