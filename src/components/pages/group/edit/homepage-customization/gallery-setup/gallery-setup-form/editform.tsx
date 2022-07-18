@@ -35,13 +35,14 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
 
   const handleFormSubmit = async (payload) => {
     const { success, data } = await axEditHomePageGallery(ugId, id, payload);
-    if (!success) {
+
+    if (success) {
+      notification(t("group:homepage_customization.update.success"), NotificationType.Success);
+      setGalleryList(data.gallerySlider);
+      setIsEdit(false);
+    } else {
       notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
     }
-    notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-    // data.gallerSlider returns a list of all galleryslider
-    setGalleryList(data.gallerySlider);
-    setIsEdit(false);
   };
 
   return (
