@@ -105,7 +105,8 @@
       "new_image": "Image Upload",
       "obs_id": "Observation Id",
       "observation_image": "Observation Image",
-      "title": "Title"
+      "title": "Title",
+      "observation_image_not_editable" : "Observation Image Not Editable"
     },
     "save": "Save Homepage Details",
     "show_desc": "Show Description",

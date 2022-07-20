@@ -105,6 +105,7 @@
       "new_image": "Tableau d'image",
       "obs_id": "ID d'observation",
       "observation_image": "Image d'observation",
+      "observation_image_not_editable": "Image d'observation non modifiable",
       "title": "Titre"
     },
     "save": "Enregistrer les détails de la page d'accueil",
