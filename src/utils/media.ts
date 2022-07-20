@@ -79,10 +79,6 @@ export const getGroupImage = (resourceUrl) => {
   return `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}`;
 };
 
-export const getObservationImage = (resourceUrl) => {
-  return `${ENDPOINT.FILES}/get/crop/observations/${resourceUrl}`;
-};
-
 export const getGroupImageThumb = (resourceUrl, height = 32) => {
   return resourceUrl
     ? `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`

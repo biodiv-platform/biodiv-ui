@@ -6,7 +6,8 @@ import { TextAreaField } from "@components/form/textarea";
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axEditHomePageGallery } from "@services/usergroup.service";
-import { getObservationImage } from "@utils/media";
+import { RESOURCE_SIZE } from "@static/constants";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { NotificationType } from "@utils/notification";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -36,7 +37,12 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     }
   });
 
-  const imgUrl = getObservationImage(fileName) + "/?h=300";
+  const imgUrl = getResourceThumbnail(
+    RESOURCE_CTX.OBSERVATION,
+    fileName,
+    RESOURCE_SIZE.LIST_THUMBNAIL
+  );
+
   const handleFormSubmit = async (payload) => {
     const { success, data } = await axEditHomePageGallery(ugId, id, payload);
 
