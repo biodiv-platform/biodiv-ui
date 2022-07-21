@@ -105,6 +105,7 @@
       "new_image": "छवि अपलोड",
       "obs_id": "अवलोकन आईडी",
       "observation_image": "अवलोकन छवि",
+      "observation_image_not_editable": "अवलोकन छवि संपादन योग्य नहीं है",
       "title": "शीर्षक"
     },
     "save": "होमपेज विवरण सहेजें",

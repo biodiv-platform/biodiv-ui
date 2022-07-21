@@ -10,7 +10,7 @@ export const reactSelectProps = {
     valueContainer: (p) => ({ ...p, height: "38px" }),
     menu: (p) => ({ ...p, minWidth: "20em" }),
     menuPortal: (p) => ({ ...p, zIndex: 1900 }),
-    clearIndicator: (p) => ({ ...p, paddingLeft: 0 }),
+    clearIndicator: (p) => ({ ...p, paddingLeft: 0 })
   },
   theme: (theme) => ({
     ...theme,

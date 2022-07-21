@@ -1,15 +1,18 @@
 import { DeleteIcon, DragHandleIcon, EditIcon, LinkIcon } from "@chakra-ui/icons";
 import { Box, Button, Image, Link } from "@chakra-ui/react";
-import { getGroupImage } from "@utils/media";
+import { RESOURCE_SIZE } from "@static/constants";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 
 const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) => {
   const { t } = useTranslation();
-  const { title, customDescripition, moreLinks, fileName } = itemDetails;
+  const { title, customDescripition, moreLinks, fileName, observationId } = itemDetails;
 
-  const imgUrl = getGroupImage(fileName) + "/?h=300";
+  const imgUrl = observationId
+    ? getResourceThumbnail(RESOURCE_CTX.OBSERVATION, fileName, RESOURCE_SIZE.LIST_THUMBNAIL)
+    : getResourceThumbnail(RESOURCE_CTX.USERGROUPS, fileName, RESOURCE_SIZE.LIST_THUMBNAIL);
 
   return (
     <tr>
