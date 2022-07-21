@@ -1,6 +1,6 @@
 import "react-image-crop/dist/ReactCrop.css";
 
-import { Box, Button, ButtonGroup, Divider, Image } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Image } from "@chakra-ui/react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { axUpdateCropResources } from "@services/observation.service";
 import { CROP_STATUS, RESOURCE_SIZE } from "@static/constants";
@@ -76,9 +76,9 @@ export default function CropTab({ data, setData }) {
     return (
       <>
         <Grid h="450px" templateRows="repeat(9, 1fr)" templateColumns="repeat(5, 1fr)" gap={2}>
-          <GridItem rowSpan={9} colSpan={1} overflow="auto" display="flex">
+          <GridItem rowSpan={9} colSpan={1} overflow="auto" display="flex flex-col">
             {data?.observationResource?.map(({ selectionStatus, resource, bbox }) => (
-              <Box width="10rem" h="6.5rem" position="relative">
+              <Box width="10rem" h="6.5rem" position="relative" gap={2} m={1}>
                 <Box position="absolute" top={0} left={0} ml={2}>
                   <ObservationImageStatusBadge
                     status={selectionStatus || CROP_STATUS.NOT_CURATED}
@@ -102,7 +102,6 @@ export default function CropTab({ data, setData }) {
                 />
               </Box>
             ))}
-            <Divider orientation="vertical" ml={5} />
           </GridItem>
           <GridItem
             rowSpan={8}
@@ -118,7 +117,6 @@ export default function CropTab({ data, setData }) {
             <>
               <ReactCrop
                 crop={crop}
-                aspect={4 / 3}
                 onChange={(c) => {
                   setCrop(c);
                 }}
