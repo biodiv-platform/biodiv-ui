@@ -9,14 +9,16 @@ import {
   ModalOverlay
 } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
+import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextAreaField } from "@components/form/textarea";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import DownloadIcon from "@icons/download";
+import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
-import { waitForAuth } from "@utils/auth";
+import { hasAccess, waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -45,7 +47,8 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
         misc: Yup.array(),
         traits: Yup.array(),
         customfields: Yup.array(),
-        notes: Yup.string().required()
+        notes: Yup.string().required(),
+        view: Yup.boolean().nullable()
       })
     ),
     defaultValues: {
@@ -55,7 +58,8 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
       spatial: [],
       misc: [],
       traits: [],
-      customfields: []
+      customfields: [],
+      view: false
     }
   });
 
@@ -83,7 +87,7 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
       authorId: user?.id,
       ...filter,
       ...normalizeValues(values),
-      view: "csv_download"
+      view: values.view ? "resources_csv_download" : "csv_download"
     };
 
     const { success } = await axGetObservationMapData(
@@ -134,7 +138,11 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
                   label={t("observation:download.modal.note")}
                   hint={t("observation:download.modal.note_hint")}
                   isRequired={true}
-                  mb={0}
+                />
+                <CheckboxField
+                  hidden={!hasAccess([Role.Admin])}
+                  label="Download as Resource Dataset"
+                  name="view"
                 />
               </ModalBody>
 

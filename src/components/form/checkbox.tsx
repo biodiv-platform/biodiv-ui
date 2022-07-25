@@ -10,6 +10,7 @@ interface ITextBoxProps {
   mb?: number;
   disabled?: boolean;
   hint?: string;
+  hidden?;
 }
 
 export const CheckboxField = ({
