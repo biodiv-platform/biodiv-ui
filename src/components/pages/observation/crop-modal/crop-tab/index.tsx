@@ -1,7 +1,6 @@
 import "react-image-crop/dist/ReactCrop.css";
 
-import { Box, Button, ButtonGroup, Image } from "@chakra-ui/react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, GridItem, Image, SimpleGrid } from "@chakra-ui/react";
 import { axUpdateCropResources } from "@services/observation.service";
 import { CROP_STATUS, RESOURCE_SIZE } from "@static/constants";
 import { getFallbackByMIME, getResourceRAW, getResourceThumbnail } from "@utils/media";
@@ -22,7 +21,9 @@ const arrayToObject = (arr) => {
 };
 
 export default function CropTab({ data, setData }) {
-  const [crop, setCrop] = useState<any | null>(arrayToObject(data?.observationResource?.[0]?.bbox));
+  if (!data.id) return <>{CROP_STATUS.OBSERVATION_NULL_MESSAGE}</>;
+
+  const [crop, setCrop] = useState<any>(arrayToObject(data?.observationResource?.[0]?.bbox));
   const [currentCropItem, setCurrentCropItem] = useState(data?.observationResource?.[0]?.resource);
   const { t } = useTranslation();
 
@@ -46,6 +47,7 @@ export default function CropTab({ data, setData }) {
       update.selectionStatus = CROP_STATUS.SELECTED;
       update.bbox = objectToArray(crop);
     });
+
     setData(newData);
     updateCropResources(newData);
   };
@@ -56,6 +58,7 @@ export default function CropTab({ data, setData }) {
       update.selectionStatus = CROP_STATUS.REJECTED;
       update.bbox = null;
     });
+
     setData(newData);
     updateCropResources(newData);
     setCrop(null);
@@ -67,87 +70,81 @@ export default function CropTab({ data, setData }) {
       update.selectionStatus = CROP_STATUS.NOT_CURATED;
       update.bbox = null;
     });
+
     setData(newData);
     updateCropResources(newData);
     setCrop(null);
   };
 
-  if (data?.id) {
-    return (
-      <>
-        <Grid h="450px" templateRows="repeat(9, 1fr)" templateColumns="repeat(5, 1fr)" gap={2}>
-          <GridItem rowSpan={9} colSpan={1} overflow="auto" display="flex flex-col">
-            {data?.observationResource?.map(({ selectionStatus, resource, bbox }) => (
-              <Box width="10rem" h="6.5rem" position="relative" gap={2} m={1}>
-                <Box position="absolute" top={0} left={0} ml={2}>
-                  <ObservationImageStatusBadge
-                    status={selectionStatus || CROP_STATUS.NOT_CURATED}
-                  />
-                </Box>
-                <Image
-                  w="full"
-                  h="full"
-                  borderRadius="md"
-                  border="2px solid"
-                  borderColor={currentCropItem?.id === resource.id ? "blue.500" : "gray.200"}
-                  objectFit="cover"
-                  fallbackSrc={getFallbackByMIME(resource.type)}
-                  alt={`${resource.id}`}
-                  src={getResourceThumbnail(
-                    resource.context,
-                    resource.fileName,
-                    RESOURCE_SIZE.DEFAULT
-                  )}
-                  onClick={() => handleCrop(resource, bbox)}
-                />
+  return (
+    <SimpleGrid columns={10} gap={4} mb={3}>
+      <GridItem colSpan={{ base: 10, md: 2 }} h="full">
+        <Flex gap={4} direction={{ base: "row", md: "column" }} w="full" overflow="auto">
+          {data?.observationResource?.map(({ selectionStatus, resource, bbox }) => (
+            <Box minW="8rem" width="full" h="7rem" position="relative">
+              <Box position="absolute" top={0} left={0} ml={3} mt={1}>
+                <ObservationImageStatusBadge status={selectionStatus || CROP_STATUS.NOT_CURATED} />
               </Box>
-            ))}
-          </GridItem>
-          <GridItem
-            rowSpan={8}
-            colSpan={4}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            backgroundColor="#cccccc"
-            borderRadius="1rem"
-            height="fit-content"
-            ml={1}
+              <Image
+                w="full"
+                h="full"
+                borderRadius="md"
+                border="3px solid"
+                borderColor={currentCropItem?.id === resource.id ? "blue.500" : "gray.300"}
+                bg="gray.200"
+                objectFit="contain"
+                fallbackSrc={getFallbackByMIME(resource.type)}
+                alt={`${resource.id}`}
+                src={getResourceThumbnail(
+                  resource.context,
+                  resource.fileName,
+                  RESOURCE_SIZE.DEFAULT
+                )}
+                onClick={() => handleCrop(resource, bbox)}
+              />
+            </Box>
+          ))}
+        </Flex>
+      </GridItem>
+      <GridItem colSpan={{ base: 10, md: 8 }}>
+        <Flex
+          alignItems="center"
+          justifyContent="center"
+          h="fit-content"
+          bg="gray.200"
+          borderRadius="md"
+          mb={4}
+        >
+          <ReactCrop
+            crop={crop}
+            onChange={(c) => {
+              setCrop(c);
+            }}
           >
-            <>
-              <ReactCrop
-                crop={crop}
-                onChange={(c) => {
-                  setCrop(c);
-                }}
-              >
-                <Image
-                  alt={`${currentCropItem?.id}`}
-                  src={getResourceRAW(currentCropItem.context, currentCropItem.fileName)}
-                  width="auto"
-                  height="23rem"
-                  maxWidth="100%"
-                />
-              </ReactCrop>
-            </>
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={4} display="flex" justifyContent="space-between" mb={4}>
-            <ButtonGroup gap={1}>
-              <Button colorScheme="green" onClick={() => handleValidate(currentCropItem.id)}>
-                {t("observation:crop.actions.curate")}
-              </Button>
-              <Button colorScheme="red" onClick={() => handleReject(currentCropItem.id)}>
-                {t("observation:crop.actions.reject")}
-              </Button>
-            </ButtonGroup>
-            <Button colorScheme="blue" onClick={() => handleReset(currentCropItem.id)}>
-              {t("observation:crop.actions.un_curate")}
+            <Image
+              alt={`${currentCropItem?.id}`}
+              src={getResourceRAW(currentCropItem.context, currentCropItem.fileName)}
+              width="auto"
+              height="23rem"
+              maxWidth="100%"
+            />
+          </ReactCrop>
+        </Flex>
+
+        <Flex justifyContent="space-between">
+          <ButtonGroup gap={2}>
+            <Button colorScheme="green" onClick={() => handleValidate(currentCropItem.id)}>
+              {t("observation:crop.actions.curate")}
             </Button>
-          </GridItem>
-        </Grid>
-      </>
-    );
-  } else {
-    return <>{CROP_STATUS.OBSERVATION_NULL_MESSAGE}</>;
-  }
+            <Button colorScheme="red" onClick={() => handleReject(currentCropItem.id)}>
+              {t("observation:crop.actions.reject")}
+            </Button>
+          </ButtonGroup>
+          <Button colorScheme="blue" onClick={() => handleReset(currentCropItem.id)}>
+            {t("observation:crop.actions.un_curate")}
+          </Button>
+        </Flex>
+      </GridItem>
+    </SimpleGrid>
+  );
 }

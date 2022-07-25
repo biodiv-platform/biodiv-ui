@@ -9,7 +9,7 @@ import VideoIcon from "@icons/video";
 import { Role } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { hasAccess } from "@utils/auth";
+import { adminOrAuthor, hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React, { useEffect } from "react";
@@ -89,7 +89,9 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
   }, [hasUgAccess]);
 
   const handleImageIconClick = () => {
-    setCropObservationId(o.observationId);
+    if (adminOrAuthor(o.user?.id)) {
+      setCropObservationId(o.observationId);
+    }
   };
 
   return (

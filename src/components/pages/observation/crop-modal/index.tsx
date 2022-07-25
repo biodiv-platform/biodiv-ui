@@ -27,7 +27,7 @@ export default function CropModal() {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader> {t("observation:crop.title")} </ModalHeader>
+        <ModalHeader>{t("observation:crop.title")}</ModalHeader>
         <ModalCloseButton />
         <Box minH={"fit-content"}>
           <ModalBody>
