@@ -24,7 +24,14 @@ export default function Header({ datatable, authorName }) {
 
   const PageActions = () => (
     <div>
-      <LocalLink href={"/observation/list"} params={{ dataTableId: datatable?.id }}>
+      <LocalLink
+        href="/observation/list"
+        prefixGroup={true}
+        params={{
+          dataTableId: datatable?.id,
+          mediaFilter: "no_of_images,no_of_videos,no_of_audio,no_media"
+        }}
+      >
         <BlueLink>
           <Tooltip title={t("datatable:list.all")} placement="bottom">
             <ExternalLinkIcon />

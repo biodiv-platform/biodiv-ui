@@ -12,7 +12,14 @@ import React, { useEffect, useState } from "react";
 
 import GalleryListItems from "./gallery-list";
 
-const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCreate }) => {
+const GallerySetupTable = ({
+  userGroupId,
+  galleryList,
+  setGalleryList,
+  setIsCreate,
+  setIsEdit,
+  setEditGalleryData
+}) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
 
@@ -56,18 +63,25 @@ const GallerySetupTable = ({ userGroupId, galleryList, setGalleryList, setIsCrea
     notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
   };
 
+  const editGalleryItem = async (index) => {
+    setIsEdit(true);
+    setEditGalleryData(galleryList[index]);
+  };
+
   return (
     <>
       <table style={{ minWidth: "750px" }} className="table table-bordered">
         <thead>
           <tr>
             <th>{t("group:homepage_customization.table.title")}</th>
+            <th>{t("group:homepage_customization.table.image")}</th>
             <th>{t("group:homepage_customization.table.description")}</th>
             <th>{t("group:homepage_customization.table.more_link")}</th>
-            <th>{t("group:homepage_customization.table.remove_image")}</th>
+            <th>{t("group:homepage_customization.table.actions")}</th>
           </tr>
         </thead>
         <GalleryListItems
+          editGalleryItem={editGalleryItem}
           removeGalleryItem={removeGalleryItem}
           helperClass="sorting-row"
           galleryList={galleryList}

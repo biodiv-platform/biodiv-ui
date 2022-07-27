@@ -9,7 +9,7 @@ export default function ResourceCard({ resource, setValue, imageSize, simpleUplo
   );
 
   const handleRemovePhoto = () => {
-    setValue(null);
+    setValue("");
   };
 
   return (
