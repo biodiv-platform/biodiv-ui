@@ -79,7 +79,13 @@ export default function CropTab({ data, setData }) {
   return (
     <SimpleGrid columns={10} gap={4} mb={3}>
       <GridItem colSpan={{ base: 10, md: 2 }} h="full">
-        <Flex gap={4} direction={{ base: "row", md: "column" }} w="full" overflow="auto">
+        <Flex
+          gap={4}
+          direction={{ base: "row", md: "column" }}
+          w="full"
+          overflow="auto"
+          maxH="23rem"
+        >
           {data?.observationResource?.map(({ selectionStatus, resource, bbox }) => (
             <Box minW="8rem" width="full" h="7rem" position="relative">
               <Box position="absolute" top={0} left={0} ml={3} mt={1}>
