@@ -11,6 +11,9 @@ function AdminComponent() {
       <BlueLink href="/admin/notifications" display="block">
         {t("admin:links.notification")}
       </BlueLink>
+      <BlueLink href="/admin/homegallery" display="block">
+        {t("group:homepage_customization.title")}
+      </BlueLink>
     </Box>
   );
 }

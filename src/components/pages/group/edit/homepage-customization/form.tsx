@@ -2,7 +2,7 @@ import { Box, Button } from "@chakra-ui/react";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axUpdateHomePageDetails } from "@services/usergroup.service";
+import { axUpdateGroupHomePageDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -65,7 +65,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
       }, []),
       ...value
     };
-    const { success, data } = await axUpdateHomePageDetails(userGroupId, payload);
+    const { success, data } = await axUpdateGroupHomePageDetails(userGroupId, payload);
     if (success) {
       setGalleryList(data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder));
       notification(t("group:homepage_customization.success"), NotificationType.Success);

@@ -1,19 +1,15 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
+// reusing GalleryListItems component from group page
+import GalleryListItems from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-tabel/gallery-list";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
-import {
-  axRemoveGroupHomePageGalleryImage,
-  axReorderGroupHomePageGallery
-} from "@services/usergroup.service";
+import { axRemoveHomePageGallery, axReorderHomePageGallery } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
-import GalleryListItems from "./gallery-list";
-
 const GallerySetupTable = ({
-  userGroupId,
   galleryList,
   setGalleryList,
   setIsCreate,
@@ -43,7 +39,7 @@ const GallerySetupTable = ({
       displayOrder: index
     }));
 
-    const { success } = await axReorderGroupHomePageGallery(userGroupId, payload);
+    const { success } = await axReorderHomePageGallery(payload);
     if (success) {
       notification(t("group:homepage_customization.reorder.success"), NotificationType.Success);
     } else {
@@ -54,13 +50,14 @@ const GallerySetupTable = ({
 
   const removeGalleryItem = async (index) => {
     if (galleryList[index]?.id) {
-      const { success } = await axRemoveGroupHomePageGalleryImage(userGroupId, galleryList, index);
-      if (!success) {
+      const { success } = await axRemoveHomePageGallery(galleryList[index].id);
+      if (success) {
+        notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
+        setGalleryList(galleryList.filter((item, idx) => idx !== index));
+      } else {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
     }
-    setGalleryList(galleryList.filter((item, idx) => idx !== index));
-    notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
   };
 
   const editGalleryItem = async (index) => {
@@ -90,7 +87,7 @@ const GallerySetupTable = ({
       </table>
       <ButtonGroup spacing={4} mt={4}>
         <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
-          {t("group:homepage_customization.gallery_setup.create")}
+          {"Create Gallery Image"}
         </Button>
         <Button
           colorScheme="blue"

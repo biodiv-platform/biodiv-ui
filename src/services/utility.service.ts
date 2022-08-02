@@ -1,5 +1,5 @@
 import { ENDPOINT } from "@static/constants";
-import { plainHttp } from "@utils/http";
+import http, { plainHttp } from "@utils/http";
 import { getYouTubeId } from "@utils/media";
 import axios from "axios";
 
@@ -50,6 +50,51 @@ export const axGetAllHabitat = async () => {
     return { success: true, data };
   } catch (error) {
     console.error(error);
+    return { success: false, data: [] };
+  }
+};
+
+export const axEditHomePageGallery = async (galleryId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.UTILITY}/v1/services/homePage/edit/${galleryId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axRemoveHomePageGallery = async (galleryId) => {
+  try {
+    const { data } = await http.delete(
+      `${ENDPOINT.UTILITY}/v1/services/homePage/remove/${galleryId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axInsertHomePageGallery = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/insert`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axReorderHomePageGallery = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/reorder`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
     return { success: false, data: [] };
   }
 };
