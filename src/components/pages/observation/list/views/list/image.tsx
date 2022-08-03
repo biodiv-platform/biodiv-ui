@@ -9,7 +9,7 @@ import VideoIcon from "@icons/video";
 import { Role } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
-import { hasAccess } from "@utils/auth";
+import { adminOrAuthor, hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React, { useEffect } from "react";
@@ -82,16 +82,22 @@ export interface ObservationImageCard {
 }
 export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationImageCard) {
   const [canEdit, setCanEdit] = useState(false);
-  const { hasUgAccess } = useObservationFilter();
+  const { hasUgAccess, setCropObservationId } = useObservationFilter();
 
   useEffect(() => {
     setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
   }, [hasUgAccess]);
 
+  const handleImageIconClick = () => {
+    if (adminOrAuthor(o.user?.id)) {
+      setCropObservationId(o.observationId);
+    }
+  };
+
   return (
     <ImageBox>
       <HStack className="topBox" justifyContent="space-between">
-        <div className="stats">
+        <div className="stats" onClick={handleImageIconClick}>
           {o.noOfImages ? (
             <>
               {o.noOfImages} <ImageIcon />
@@ -122,6 +128,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
             className="ob-image-list"
             objectFit="cover"
             bg="gray.100"
+            loading="lazy"
             src={getResourceThumbnail(
               RESOURCE_CTX.OBSERVATION,
               o.reprImageUrl,

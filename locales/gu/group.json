@@ -105,15 +105,17 @@
       "new_image": "ફોટો અપલોડ કરો",
       "obs_id": "અવલોકન આઈડી",
       "observation_image": "અવલોકન ફોટો",
+      "observation_image_not_editable": "અવલોકન છબી સંપાદનયોગ્ય નથી",
       "title": "શીર્ષક"
     },
     "save": "હોમપેજ વિગતો સાચવો",
     "show_desc": "વર્ણન બતાવો",
     "success": "ફેરફારો સફળતાપૂર્વક સુધારાયા",
     "table": {
+      "actions": "ક્રિયાઓ",
       "description": "વર્ણન",
+      "image": "છબી",
       "more_link": "લિંક",
-      "remove_image": "દૂર કરવું",
       "title": "શીર્ષક"
     },
     "title": "મુખપૃષ્ઠ વૈવિધ્યપણું",

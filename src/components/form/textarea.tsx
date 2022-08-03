@@ -31,7 +31,7 @@ export const TextAreaField = ({
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Textarea
         id={name}

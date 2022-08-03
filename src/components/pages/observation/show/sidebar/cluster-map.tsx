@@ -62,7 +62,7 @@ export default function ClusterMap({
       h="422px"
       borderRadius={borderRadius}
       overflow="hidden"
-      className="gray-box fadeInUp delay-5"
+      className="gray-box"
       display="block"
     >
       <LazyLoad height={422} once={true}>

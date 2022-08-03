@@ -36,6 +36,7 @@
     "twitter": "ટવીટર"
   },
   "habitats_covered": "વસવાટનું કવરેજ",
+  "import": "આયાત કરો",
   "information": "માહિતી",
   "invalid_request": "અમાન્ય વિનંતી",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "વધુ લોડ કરો ↺",
   "loading": "લોડ કરી રહ્યું છે ...",
+  "move": {
+    "down": "નીચે",
+    "up": "ઉપર"
+  },
   "name": "નામ",
   "next": "આગળ",
   "no_data": "કોઈ ડેટા નથી",
@@ -66,6 +71,7 @@
     "token_not_saved": "ટોકન સાચવી શક્યું નથી",
     "token_saved": "ટોકન સાચવેલું"
   },
+  "observation_success": "અવલોકન સફળતાપૂર્વક બનાવવામાં આવ્યું",
   "observed_on": "પર અવલોકન",
   "offline": "ઇન્ટરનેટ કનેક્શન નથી",
   "one_moment_please": "એક ક્ષણ કૃપા કરીને",
@@ -90,6 +96,7 @@
   "un_post": "અનપોસ્ટ",
   "unauthorized": "અનધિકૃત વપરાશકર્તા",
   "unknown": "અજ્ઞાત",
+  "update": "અપડેટ કરો",
   "uploader": "અપલોડર",
   "usergroups": "ગ્રૂપો"
 }

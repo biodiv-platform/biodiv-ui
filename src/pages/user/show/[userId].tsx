@@ -6,16 +6,11 @@ import { axGroupListExpanded } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import React from "react";
 
-import Error from "../../_error";
-
-const UserShowPage = ({ user, groupFilter, success }) =>
-  success ? (
-    <GroupListFilterProvider {...groupFilter}>
-      <UserShowPageComponent user={user} />
-    </GroupListFilterProvider>
-  ) : (
-    <Error statusCode={404} />
-  );
+const UserShowPage = ({ user, groupFilter }) => (
+  <GroupListFilterProvider {...groupFilter}>
+    <UserShowPageComponent user={user} />
+  </GroupListFilterProvider>
+);
 
 export const getServerSideProps = async (ctx) => {
   const { success, data: user } = await axGetUserById(ctx.query.userId, ctx);
@@ -24,6 +19,8 @@ export const getServerSideProps = async (ctx) => {
     axGetspeciesGroups(),
     axGetAllHabitat()
   ]);
+
+  if (!success) return { notFound: true };
 
   return {
     props: {

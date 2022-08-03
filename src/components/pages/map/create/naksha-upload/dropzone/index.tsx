@@ -26,7 +26,7 @@ export default function LayerUploadDropzone() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: Object.values(FILE_TYPES),
+    accept: { "*/*": Object.values(FILE_TYPES) },
     multiple: true
   });
 

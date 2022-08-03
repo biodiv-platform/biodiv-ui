@@ -10,11 +10,12 @@ import {
 } from "@chakra-ui/react";
 import GridIcon from "@icons/grid";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { Suspense } from "react";
 
 import useSpecies from "../../use-species";
-import SpeciesGalleryForm from "./form";
-import SpeciesGalleryList from "./list";
+
+const SpeciesGalleryForm = React.lazy(() => import("./form"));
+const SpeciesGalleryList = React.lazy(() => import("./list"));
 
 export default function SpeciesGalleryModal({ resources, setResources }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,15 +34,21 @@ export default function SpeciesGalleryModal({ resources, setResources }) {
         <ModalContent>
           <ModalHeader>{t("species:all_media")}</ModalHeader>
           <ModalCloseButton />
-          {permissions.isContributor ? (
-            <SpeciesGalleryForm
-              resources={resources}
-              setResources={setResources}
-              onClose={onClose}
-            />
-          ) : (
-            <SpeciesGalleryList resources={resources} />
-          )}
+          {isOpen ? (
+            permissions.isContributor ? (
+              <Suspense fallback={null}>
+                <SpeciesGalleryForm
+                  resources={resources}
+                  setResources={setResources}
+                  onClose={onClose}
+                />
+              </Suspense>
+            ) : (
+              <Suspense fallback={null}>
+                <SpeciesGalleryList resources={resources} />
+              </Suspense>
+            )
+          ) : null}
         </ModalContent>
       </Modal>
     </>

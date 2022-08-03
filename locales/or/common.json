@@ -36,6 +36,7 @@
     "twitter": "ଟ୍ୱିଟର"
   },
   "habitats_covered": "ବାସସ୍ଥାନ ଆଚ୍ଛାଦିତ |",
+  "import": "ଆମଦାନୀ କରନ୍ତୁ |",
   "information": "ସୂଚନା",
   "invalid_request": "ଅବ val ଧ ଅନୁରୋଧ |",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "ଅଧିକ ଲୋଡ୍ କରନ୍ତୁ ↺",
   "loading": "ଲୋଡିଂ ...",
+  "move": {
+    "down": "ତଳକୁ |",
+    "up": "ଅପ୍"
+  },
   "name": "ନାମ",
   "next": "ପରବର୍ତ୍ତୀ",
   "no_data": "କ data ଣସି ତଥ୍ୟ ନାହିଁ |",
@@ -66,6 +71,7 @@
     "token_not_saved": "ଟୋକନ୍ ସଞ୍ଚୟ କରିପାରିଲା ନାହିଁ |",
     "token_saved": "ଟୋକନ୍ ସେଭ୍ ହୋଇଛି |"
   },
+  "observation_success": "ପର୍ଯ୍ୟବେକ୍ଷଣ ସଫଳତାର ସହିତ ସୃଷ୍ଟି ହେଲା |",
   "observed_on": "ଉପରେ ଦେଖାଗଲା |",
   "offline": "କ internet ଣସି ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ନାହିଁ |",
   "one_moment_please": "ଦୟାକରି ଗୋଟିଏ ମୁହୂର୍ତ୍ତ",
@@ -90,6 +96,7 @@
   "un_post": "ଅଣପୋଷ୍ଟ",
   "unauthorized": "ଅନଧିକୃତ ଉପଭୋକ୍ତା |",
   "unknown": "ଅଜ୍ଞାତ",
+  "update": "ଅଦ୍ୟତନ କରନ୍ତୁ |",
   "uploader": "ଅପଲୋଡର୍ |",
   "usergroups": "ଗୋଷ୍ଠୀଗୁଡ଼ିକ"
 }

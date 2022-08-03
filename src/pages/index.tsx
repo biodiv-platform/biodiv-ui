@@ -15,7 +15,14 @@ export async function getServerSideProps(ctx) {
     ? await axGetGroupHompageDetails(currentGroup?.id)
     : await axGetHomeInfo();
 
-  return { props: { homeInfo } };
+  return {
+    props: {
+      homeInfo: {
+        ...homeInfo,
+        gallerySlider: homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+      }
+    }
+  };
 }
 
 export default index;

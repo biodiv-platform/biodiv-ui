@@ -15,6 +15,19 @@
   "coordinates": "Kuratibu",
   "created_on": "Imeundwa On.",
   "creating": "Tunaunda uchunguzi wako",
+  "crop": {
+    "actions": {
+      "curate": "Taratibu",
+      "reject": "Kataa",
+      "un_curate": "Un-curate"
+    },
+    "status": {
+      "not_curated": "HAIJATUNZWA",
+      "rejected": "IMEKATAA",
+      "selected": "IMETUNGWA"
+    },
+    "title": "Mazao"
+  },
   "custom_fields": "Mashamba ya Desturi.",
   "delete_file": {
     "error": "Haiwezi kutengeneza faili, tafadhali jaribu tena baadaye",
@@ -31,6 +44,7 @@
     "success": "Faili yako inazalishwa. Ikiwa tayari, utaambiwa kwa barua pepe na kiungo cha kupakua kitaonekana",
     "title": "Pakua"
   },
+  "drag_drop_files": "Buruta",
   "edit_hint": "💡 kwa kuhariri vitu vingine kama jina au sifa, tafadhali ingiza moja kwa moja kutoka kwenye ukurasa wa Onyesha",
   "edit_observation": "Badilisha uchunguzi.",
   "follow_observation": "Fuata uchunguzi",
@@ -103,13 +117,15 @@
   "location_placeholder": "Ingiza mahali",
   "location_scale": "Usahihi wa mahali",
   "longitude": "Longitude.",
+  "mange_resources": "Dhibiti Rasilimali",
+  "media_picker": "Kiteua Vyombo vya Habari",
+  "more_fields": "Viwanja Zaidi",
   "nearby": "Uchunguzi wa karibu.",
   "no_custom_field": "Hakuna uwanja wa desturi unaopatikana kwa uchunguzi huu",
   "no_empty_suggestion": "Hawezi kuandika maoni yasiyofaa.",
   "notes": "Vidokezo",
   "observed": "Aliona",
   "observed_at": "Eneo limezingatiwa At.",
-  "points_gained": "{{points}} hatua ya shughuli zilizopatikana",
   "post_to_groups": "Chapisha kwa makundi.",
   "range_hint": "Tumia: kwa maadili ya mara kwa mara",
   "rate_success": "Vyombo vya habari vilipimwa kwa ufanisi",
@@ -129,6 +145,11 @@
   "share": "Shiriki uchunguzi huu",
   "source": "Chanzo",
   "species_page": "Angalia ukurasa wa aina.",
+  "status": {
+    "failed": "Imeshindwa",
+    "in_progress": "Inaendelea",
+    "uploaded": "Imepakiwa"
+  },
   "submitted": "Iliyotolewa",
   "success": "Imeundwa kwa mafanikio.",
   "suggest": "Pendekeza",
@@ -142,6 +163,18 @@
   "synonym": "Sambamba",
   "title": "Ulizingatia nini leo?",
   "title_edit": "Badilisha uchunguzi.",
+  "toolbar": {
+    "delete": "Futa Uliochaguliwa",
+    "edit": "Jaza Iliyochaguliwa",
+    "errors": {
+      "no_observations_selected": "Hakuna uchunguzi uliochaguliwa"
+    },
+    "import": "Ingiza",
+    "merge": "Unganisha",
+    "select_all": "Chagua Zote",
+    "select_none": "Chagua Hakuna",
+    "split": "Gawanya"
+  },
   "traits": "Tabia.",
   "traits_no_group": "Tafadhali chagua kikundi kwanza",
   "traits_update_success": "Tabia zilizosasishwa kwa mafanikio.",
@@ -151,6 +184,7 @@
   "update_observation": "Sasisha uchunguzi",
   "updated": "Imeongezwa",
   "updated_on": "Updated On.",
+  "upload_info": "Ili kuepuka kurudia, tafadhali chagua na uunganishe picha nyingi za kiumbe kimoja",
   "use_dms": "Tumia DMS.",
   "use_last_value": "Tumia thamani ya mwisho",
   "use_lat_lng": "Tumia Lat-Long.",

@@ -18,9 +18,32 @@
   },
   "dataset_description": "Maelezo ya Seti ya Data",
   "date_columns": "Safu za Tarehe",
+  "edit": {
+    "location": {
+      "accuracy": "usahihi",
+      "collapse_map": "Kunja ramani",
+      "edit_location_accuracy": "Badilisha usahihi wa Mahali",
+      "latitude": "Latitudo",
+      "longitude": "Longitude",
+      "show_all": "Onyesha yote",
+      "show_fewer": "Onyesha chache",
+      "show_on_map": "Onyesha maeneo kwenye ramani"
+    },
+    "scientific_name": {
+      "rank": "cheo",
+      "taxon_id": "kitambulisho cha ushuru",
+      "validity": "Uhalali wa jina la kisayansi"
+    }
+  },
   "location_columns": "Safu wima za Mahali",
   "metadata": "Metadata",
   "sci_name_columns": "Safu za Jina la Kisayansi",
+  "section_heading": {
+    "Temporal Data": "Data ya Muda",
+    "curated_status": "Hali Iliyoratibiwa",
+    "spatial_data": "Data ya anga",
+    "taxonomic_data": "Data ya Taxonomic"
+  },
   "update": {
     "error": "Haiwezi Kusasisha Safu",
     "success": "Safu Mlalo Imesasishwa"

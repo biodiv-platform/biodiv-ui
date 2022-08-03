@@ -36,6 +36,7 @@
     "twitter": "ट्विटर"
   },
   "habitats_covered": "निवास स्थान",
+  "import": "आयात",
   "information": "जानकारी",
   "invalid_request": "अमान्य अनुरोध",
   "list": {
@@ -55,6 +56,10 @@
   },
   "load_more": "अधिक लोड करें ↺",
   "loading": "लोड हो रहा है...",
+  "move": {
+    "down": "नीचे",
+    "up": "यूपी"
+  },
   "name": "नाम",
   "next": "अगला",
   "no_data": "कोई आकड़ा उपलब्ध नहीं है",
@@ -66,6 +71,7 @@
     "token_not_saved": "टोकन को नहीं बचा सका",
     "token_saved": "टोकन बचाया"
   },
+  "observation_success": "अवलोकन सफलतापूर्वक बनाया गया",
   "observed_on": "पर देखा गया",
   "offline": "कोई इंटरनेट कनेक्शन नहीं",
   "one_moment_please": "कृपया एक क्षण",
@@ -90,6 +96,7 @@
   "un_post": "पोस्ट न करें",
   "unauthorized": "अनधिकृत उपयोगकर्ता",
   "unknown": "अनजान",
+  "update": "अद्यतन",
   "uploader": "अपलोडर",
   "usergroups": "समूहों"
 }

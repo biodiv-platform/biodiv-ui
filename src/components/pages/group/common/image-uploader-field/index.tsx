@@ -34,7 +34,7 @@ export default function ImageUploaderField({
   const { t } = useTranslation();
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       {field.value ? (
         <ResourceCard

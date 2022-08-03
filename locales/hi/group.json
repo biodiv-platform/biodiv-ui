@@ -105,15 +105,17 @@
       "new_image": "छवि अपलोड",
       "obs_id": "अवलोकन आईडी",
       "observation_image": "अवलोकन छवि",
+      "observation_image_not_editable": "अवलोकन छवि संपादन योग्य नहीं है",
       "title": "शीर्षक"
     },
     "save": "होमपेज विवरण सहेजें",
     "show_desc": "विवरण दिखाएं",
     "success": "अद्यतन परिवर्तन सफलतापूर्वक",
     "table": {
+      "actions": "कार्रवाई",
       "description": "विवरण",
+      "image": "छवि",
       "more_link": "संपर्क",
-      "remove_image": "हटाना",
       "title": "शीर्षक"
     },
     "title": "होमपेज अनुकूलन",

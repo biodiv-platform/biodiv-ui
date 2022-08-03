@@ -105,15 +105,17 @@
       "new_image": "ছবি আপলোড",
       "obs_id": "পর্যবেক্ষণ আইডি",
       "observation_image": "পর্যবেক্ষণ ইমেজ",
+      "observation_image_not_editable": "পর্যবেক্ষণ চিত্র সম্পাদনাযোগ্য নয়",
       "title": "শিরোনাম"
     },
     "save": "হোমপেজের বিবরণ সংরক্ষণ করুন",
     "show_desc": "বর্ণনা দেখান",
     "success": "আপডেট আপডেট আপডেট",
     "table": {
+      "actions": "কর্ম",
       "description": "বর্ণনা",
+      "image": "ছবি",
       "more_link": "লিঙ্ক",
-      "remove_image": "অপসারণ",
       "title": "শিরোনাম"
     },
     "title": "হোমপেজে কাস্টমাইজেশন",

@@ -7,7 +7,7 @@ import CheckIcon from "@icons/check";
 import { AssetStatus } from "@interfaces/custom";
 import { ObservationUpdateData } from "@interfaces/observation";
 import { axUpdateObservation } from "@services/observation.service";
-import { dateToUTC, formatDateFromUTC } from "@utils/date";
+import { dateToUTC, formatDate, parseDateFromUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
@@ -105,7 +105,7 @@ export default function ObservationEditForm({
         isUsed: 1,
         rating: r.rating || 0
       })),
-      observedOn: observation.observedOn ? formatDateFromUTC(observation.observedOn) : ""
+      observedOn: observation.observedOn ? parseDateFromUTC(observation.observedOn) : undefined
     }
   });
 
@@ -130,7 +130,7 @@ export default function ObservationEditForm({
           languageId
         })
       ),
-      observedOn: values.observedOn.length > 0 ? dateToUTC(values.observedOn).format() : null
+      observedOn: dateToUTC(formatDate(values.observedOn)).format()
     };
     const { success } = await axUpdateObservation(payload, observationId);
 

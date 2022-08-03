@@ -11,7 +11,7 @@ export function CreateSpeciesPageCheck() {
   return isSpeciesPage ? null : (
     <Box mb={4}>
       <Checkbox
-        defaultIsChecked={isCreateSpecies}
+        defaultChecked={isCreateSpecies}
         onChange={(e) => setIsCreateSpecies(e.target.checked)}
       >
         {t("species:create.create_species_page")}

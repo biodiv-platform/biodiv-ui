@@ -1,4 +1,4 @@
-import { authorizedPageSSR, throwUnauthorized } from "@components/auth/auth-redirect";
+import { authorizedPageSSP, throwUnauthorized } from "@components/auth/auth-redirect";
 import { Role } from "@interfaces/custom";
 import { axGetspeciesGroups } from "@services/observation.service";
 import {
@@ -22,8 +22,8 @@ const GroupEditPageComponent: any = dynamic(() => import("@components/pages/grou
 const GroupEditPage = (props) => <GroupEditPageComponent {...props} />;
 
 export const getServerSideProps = async (ctx) => {
-  // Will check if user is logged in or redirect
-  authorizedPageSSR([Role.Any], ctx, true);
+  const redirect = authorizedPageSSP([Role.Any], ctx);
+  if (redirect) return redirect;
 
   const aReq = absoluteUrl(ctx);
 

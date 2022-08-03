@@ -51,7 +51,7 @@ export const TaxonCreateInputField = ({
 
   return (
     <FormControl
-      isInvalid={errors[name]}
+      isInvalid={!!errors[name]}
       mb={mb}
       hidden={hidden}
       isRequired={isRequired}

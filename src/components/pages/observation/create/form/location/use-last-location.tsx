@@ -34,7 +34,7 @@ export default function useLastLocation() {
 }
 
 export const setLastData = (lat, lng, address, customFields, customFieldValues) => {
-  ls.set(LAST_LOCATION, { lat, lng, address });
+  ls.set(LAST_LOCATION, { lat, lng, address, isLast: true });
   customFields.map(({ customFieldId }, index) => {
     const value = customFieldValues[index].value;
     ls.set(`cf-${customFieldId}`, { value });

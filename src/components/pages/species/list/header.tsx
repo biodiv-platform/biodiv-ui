@@ -11,14 +11,14 @@ import useSpeciesList from "./use-species-list";
 
 export const viewTabs = [
   {
-    name: "common:list.view_type.list",
-    icon: <ListIcon />,
-    key: "list"
-  },
-  {
     name: "common:list.view_type.grid",
     icon: <GridIcon />,
     key: "grid"
+  },
+  {
+    name: "common:list.view_type.list",
+    icon: <ListIcon />,
+    key: "list"
   }
 ];
 

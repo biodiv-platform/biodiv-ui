@@ -14,7 +14,14 @@ export default function Info({ icon, title, link }) {
       <Box w={90} mr={5} mb={8}>
         <LocalLink href={link} prefixGroup={true}>
           <Link aria-label={title} display="inline-block">
-            <Image src={iconPath} alt={icon} minW={90} display="inline-block" />
+            <Image
+              src={iconPath}
+              alt={icon}
+              htmlWidth={90}
+              htmlHeight={90}
+              minW={90}
+              display="inline-block"
+            />
           </Link>
         </LocalLink>
       </Box>

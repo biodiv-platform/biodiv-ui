@@ -1,4 +1,4 @@
-import { authorizedPageSSR } from "@components/auth/auth-redirect";
+import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import DataTableCreatePageComponent from "@components/pages/datatable/create";
 import { Role } from "@interfaces/custom";
 import {
@@ -11,17 +11,11 @@ import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-const DataTableCreatePage = ({ speciesGroups, languages, datasetId, observationConfig }) => (
-  <DataTableCreatePageComponent
-    speciesGroups={speciesGroups}
-    observationConfig={observationConfig}
-    languages={languages}
-    datasetId={datasetId}
-  />
-);
+const DataTableCreatePage = (props) => <DataTableCreatePageComponent {...props} />;
 
 export async function getServerSideProps(ctx) {
-  authorizedPageSSR([Role.Any], ctx, true);
+  const redirect = authorizedPageSSP([Role.Any], ctx);
+  if (redirect) return redirect;
 
   const { data: speciesGroups } = await axGetspeciesGroups();
   const {

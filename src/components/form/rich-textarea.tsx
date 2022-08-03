@@ -1,7 +1,12 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
-import QuillInput from "@components/@core/quill-input";
+import dynamic from "next/dynamic";
 import React from "react";
 import { useController } from "react-hook-form";
+
+const DefaultEditor: any = dynamic(
+  () => import("react-simple-wysiwyg").then((m) => m.DefaultEditor),
+  { ssr: false }
+);
 
 interface IRichTextareaProps {
   name: string;
@@ -15,9 +20,9 @@ export const RichTextareaField = ({ name, label, hint, mb = 4, ...props }: IRich
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={fieldState.invalid} mb={mb} {...props}>
+    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       {label && <FormLabel>{label}</FormLabel>}
-      <QuillInput value={field.value} onChange={field.onChange} />
+      <DefaultEditor placeholder={label} {...field} title={label} />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
     </FormControl>

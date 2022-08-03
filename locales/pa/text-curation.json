@@ -18,9 +18,32 @@
   },
   "dataset_description": "ਡਾਟਾਸੈਟ ਵਰਣਨ",
   "date_columns": "ਮਿਤੀ ਕਾਲਮ",
+  "edit": {
+    "location": {
+      "accuracy": "ਸ਼ੁੱਧਤਾ",
+      "collapse_map": "ਨਕਸ਼ੇ ਨੂੰ ਸਮੇਟੋ",
+      "edit_location_accuracy": "ਸਥਾਨ ਸ਼ੁੱਧਤਾ ਦਾ ਸੰਪਾਦਨ ਕਰੋ",
+      "latitude": "ਵਿਥਕਾਰ",
+      "longitude": "ਲੰਬਕਾਰ",
+      "show_all": "ਸਾਰੇ ਦਿਖਾਓ",
+      "show_fewer": "ਘੱਟ ਦਿਖਾਓ",
+      "show_on_map": "ਨਕਸ਼ੇ 'ਤੇ ਟਿਕਾਣੇ ਦਿਖਾਓ"
+    },
+    "scientific_name": {
+      "rank": "ਦਰਜਾ",
+      "taxon_id": "ਟੈਕਸਨ ਆਈ.ਡੀ",
+      "validity": "ਵਿਗਿਆਨਕ ਨਾਮ ਦੀ ਵੈਧਤਾ"
+    }
+  },
   "location_columns": "ਟਿਕਾਣਾ ਕਾਲਮ",
   "metadata": "ਮੈਟਾਡਾਟਾ",
   "sci_name_columns": "ਵਿਗਿਆਨਕ ਨਾਮ ਕਾਲਮ",
+  "section_heading": {
+    "Temporal Data": "ਅਸਥਾਈ ਡੇਟਾ",
+    "curated_status": "ਚੁਣੀ ਗਈ ਸਥਿਤੀ",
+    "spatial_data": "ਸਥਾਨਿਕ ਡੇਟਾ",
+    "taxonomic_data": "ਟੈਕਸੋਨੋਮਿਕ ਡੇਟਾ"
+  },
   "update": {
     "error": "ਕਤਾਰ ਨੂੰ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
     "success": "ਕਤਾਰ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤੀ ਗਈ"

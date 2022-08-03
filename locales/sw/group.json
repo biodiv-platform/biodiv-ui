@@ -105,15 +105,17 @@
       "new_image": "Upakiaji wa picha.",
       "obs_id": "Kitambulisho cha uchunguzi",
       "observation_image": "Picha ya uchunguzi",
+      "observation_image_not_editable": "Picha ya Uchunguzi Haibadiliki",
       "title": "Kichwa"
     },
     "save": "Hifadhi maelezo ya ukurasa wa nyumbani.",
     "show_desc": "Onyesha maelezo",
     "success": "Mabadiliko yaliyopangwa kwa mafanikio.",
     "table": {
+      "actions": "Vitendo",
       "description": "Maelezo.",
+      "image": "Picha",
       "more_link": "LINK.",
-      "remove_image": "Ondoa",
       "title": "Kichwa"
     },
     "title": "Utekelezaji wa Homepage.",

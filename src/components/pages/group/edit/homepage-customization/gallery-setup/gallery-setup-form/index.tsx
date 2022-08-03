@@ -6,8 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import * as Yup from "yup";
 
+import { galleryFieldValidationSchema } from "./common";
 import ExsistingResourceForm from "./exsisting-resource-form";
 import NewResourceForm from "./new-resource-form";
 
@@ -23,23 +23,14 @@ interface IGallerySetupForm {
   options?: any[];
 }
 
-export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList }) {
+export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryList }) {
   const { t } = useTranslation();
   const [imagePicker, setImagePicker] = useState<boolean>(true);
   const [defaultValues, setDefaultValues] = useState<IGallerySetupForm | any>();
 
   const hForm = useForm<any>({
     mode: "onChange",
-    resolver: yupResolver(
-      Yup.object().shape({
-        title: Yup.string().required(),
-        customDescripition: Yup.string(),
-        fileName: Yup.string().required(),
-        observationId: Yup.number().nullable(),
-        moreLinks: Yup.string().required(),
-        options: Yup.array().nullable()
-      })
-    ),
+    resolver: yupResolver(galleryFieldValidationSchema),
     defaultValues
   });
 
@@ -51,7 +42,7 @@ export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList
       ...value
     };
     setGalleryList([...galleryList, payload]);
-    isCreate(false);
+    setIsCreate(false);
   };
 
   const handleChange = () => {
@@ -66,7 +57,12 @@ export default function GallerySetupFrom({ isCreate, galleryList, setGalleryList
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Button m={3} type="button" onClick={() => isCreate(false)} leftIcon={<ArrowBackIcon />}>
+          <Button
+            m={3}
+            type="button"
+            onClick={() => setIsCreate(false)}
+            leftIcon={<ArrowBackIcon />}
+          >
             {t("group:homepage_customization.back")}
           </Button>
           <Flex alignItems="center">

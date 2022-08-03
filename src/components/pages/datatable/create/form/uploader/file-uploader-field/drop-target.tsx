@@ -34,10 +34,11 @@ const DropTargetBox = styled.div`
   }
 `;
 
-const accept = [
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  "application/vnd.ms-excel"
-];
+const accept = {
+  "application/vnd.ms-excel": [".xls"],
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"]
+};
+
 interface userGroupDropTarget {
   field;
   setFieldMapping;

@@ -105,15 +105,17 @@
       "new_image": "ਚਿੱਤਰ ਅਪਲੋਡ",
       "obs_id": "ਨਿਰੀਖਣ ID",
       "observation_image": "ਨਿਰੀਖਣ ਚਿੱਤਰ",
+      "observation_image_not_editable": "ਨਿਰੀਖਣ ਚਿੱਤਰ ਸੰਪਾਦਨਯੋਗ ਨਹੀਂ ਹੈ",
       "title": "ਸਿਰਲੇਖ"
     },
     "save": "ਹੋਮਪੇਜ ਵੇਰਵਿਆਂ ਨੂੰ ਬਚਾਓ",
     "show_desc": "ਵੇਰਵਾ ਦਿਖਾਓ",
     "success": "ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੇ ਗਏ",
     "table": {
+      "actions": "ਕਾਰਵਾਈਆਂ",
       "description": "ਵੇਰਵਾ",
+      "image": "ਚਿੱਤਰ",
       "more_link": "ਲਿੰਕ",
-      "remove_image": "ਹਟਾਓ",
       "title": "ਸਿਰਲੇਖ"
     },
     "title": "ਹੋਮਪੇਜ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ",

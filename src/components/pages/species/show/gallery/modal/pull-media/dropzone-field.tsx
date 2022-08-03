@@ -26,7 +26,7 @@ interface ISpeciesDropzoneField {
 
 const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
   const { field, fieldState } = useController({ name });
-  const { observationAssets } = useObservationCreate();
+  const { observationAssets, addAssets } = useObservationCreate();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
@@ -37,7 +37,7 @@ const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl isInvalid={fieldState.invalid} minH="500px">
+    <FormControl isInvalid={!!fieldState.error} minH="500px">
       <Tabs
         className="nospace"
         index={tabIndex}
@@ -63,10 +63,10 @@ const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
             <MyUploads onDone={onSelectionDone} />
           </TabPanel>
           <TabPanel>
-            <AudioInput onDone={onSelectionDone} />
+            <AudioInput onDone={onSelectionDone} onSave={addAssets} />
           </TabPanel>
           <TabPanel>
-            <FromURL onDone={onSelectionDone} />
+            <FromURL onDone={onSelectionDone} onSave={addAssets} />
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -1,8 +1,21 @@
 import { createIcon } from "@chakra-ui/icon";
+import React from "react";
 
 const StatsIcon = createIcon({
   displayName: "Stats",
-  d: "M3 13h5v8H3v-8zM9 3h5v18H9V3zm6 5h5v13h-5V8z",
+  path: (
+    <g
+      stroke="currentColor"
+      fill="none"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="20" x2="18" y2="10" />
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <line x1="6" y1="20" x2="6" y2="14" />
+    </g>
+  ),
   viewBox: "0 0 24 24"
 });
 

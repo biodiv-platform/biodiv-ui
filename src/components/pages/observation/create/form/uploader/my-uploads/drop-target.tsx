@@ -2,12 +2,12 @@ import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
 import { AspectRatio, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import AddIcon from "@icons/add";
+import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-import { accept } from "../observation-resources/drop-target";
 import useObservationCreate from "../use-observation-resources";
 
 const DropTargetBox = styled.div`
@@ -49,7 +49,7 @@ export default function DropTarget() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
-    accept
+    accept: ACCEPTED_FILE_TYPES
   });
 
   return (

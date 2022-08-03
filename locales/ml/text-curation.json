@@ -18,9 +18,32 @@
   },
   "dataset_description": "ഡാറ്റാസെറ്റ് വിവരണം",
   "date_columns": "തീയതി കോളങ്ങൾ",
+  "edit": {
+    "location": {
+      "accuracy": "കൃത്യത",
+      "collapse_map": "മാപ്പ് ചുരുക്കുക",
+      "edit_location_accuracy": "ലൊക്കേഷൻ കൃത്യത എഡിറ്റ് ചെയ്യുക",
+      "latitude": "അക്ഷാംശം",
+      "longitude": "രേഖാംശം",
+      "show_all": "എല്ലാം കാണിക്കൂ",
+      "show_fewer": "കുറച്ച് കാണിക്കുക",
+      "show_on_map": "മാപ്പിൽ ലൊക്കേഷനുകൾ കാണിക്കുക"
+    },
+    "scientific_name": {
+      "rank": "റാങ്ക്",
+      "taxon_id": "ടാക്സൺ ഐഡി",
+      "validity": "ശാസ്ത്രീയ നാമത്തിന്റെ സാധുത"
+    }
+  },
   "location_columns": "ലൊക്കേഷൻ കോളങ്ങൾ",
   "metadata": "മെറ്റാഡാറ്റ",
   "sci_name_columns": "ശാസ്ത്രീയ നാമ നിരകൾ",
+  "section_heading": {
+    "Temporal Data": "താൽക്കാലിക ഡാറ്റ",
+    "curated_status": "ക്യൂറേറ്റ് ചെയ്ത നില",
+    "spatial_data": "സ്പേഷ്യൽ ഡാറ്റ",
+    "taxonomic_data": "ടാക്സോണമിക് ഡാറ്റ"
+  },
   "update": {
     "error": "വരി അപ്ഡേറ്റ് ചെയ്യാനായില്ല",
     "success": "വരി അപ്‌ഡേറ്റ് ചെയ്‌തു"

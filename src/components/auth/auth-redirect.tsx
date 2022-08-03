@@ -27,6 +27,7 @@ export const throwUnauthorized = (ctx) => {
  * This function should be used in SSR based functions like `getInitialProps` etc.
  * - Don't use this function on open pages
  * - Always redirects to login if user is not logged in
+ * - use `authorizedPageSSP` if you want to use it with `getServerSideProps`
  *
  * @param {Role[]} allowedRoles
  * @param {*} ctx
@@ -59,5 +60,28 @@ export const authorizedPageSSR = (
     } else {
       throwUnauthorized(ctx);
     }
+  }
+};
+
+/**
+ * Improved version of `authorizedPageSSR` redirects to login if user is not authorized
+ *
+ * @param {*} allowedRoles
+ * @param {*} ctx
+ * @return {*}
+ */
+export const authorizedPageSSP = (allowedRoles, ctx) => {
+  const isLoggedIn = hasAccess([Role.Any], ctx);
+
+  if (!hasAccess(allowedRoles, ctx)) {
+    if (isLoggedIn) throwUnauthorized(ctx);
+
+    return {
+      redirect: {
+        permanant: false,
+        destination: `/login?forward=${encode(ctx?.asPath || ctx?.resolvedUrl)}`
+      },
+      props: {}
+    };
   }
 };

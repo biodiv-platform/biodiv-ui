@@ -4,7 +4,11 @@ import useGlobalState from "@hooks/use-global-state";
 import { ObservationData, ObservationFilterProps } from "@interfaces/custom";
 import { SpeciesGroup } from "@interfaces/esmodule";
 import { UserGroup, UserGroupIbp } from "@interfaces/observation";
-import { axGetListData, axGetMaxVotedRecoPermissions } from "@services/observation.service";
+import {
+  axGetCropResources,
+  axGetListData,
+  axGetMaxVotedRecoPermissions
+} from "@services/observation.service";
 import { axGetUserGroupList, getAuthorizedUserGroupById } from "@services/usergroup.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
@@ -47,6 +51,9 @@ interface ObservationFilterContextProps {
   traits?;
   customFields?;
   loggedInUserGroups?: UserGroupIbp[];
+  cropObservationData;
+  setCropObservationData;
+  setCropObservationId;
 }
 
 const ObservationFilterContext = createContext<ObservationFilterContextProps>(
@@ -63,6 +70,12 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
   const [selectAll, setSelectAll] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [cropObservationData, setCropObservationData] = useState();
+
+  const setCropObservationId = async (id) => {
+    const response = await axGetCropResources(id);
+    setCropObservationData(response.data);
+  };
 
   const { getCheckboxProps, value: bulkObservationIds, setValue } = useCheckboxGroup();
 
@@ -219,6 +232,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         isOpen,
         onOpen,
         onClose,
+        // Crop observation data
+        cropObservationData,
+        setCropObservationData,
+        setCropObservationId,
         // Config Properties
         speciesGroup: props.speciesGroup,
         userGroup: props.userGroup,

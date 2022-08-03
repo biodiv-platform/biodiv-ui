@@ -82,7 +82,7 @@ export const RESOURCE_SIZE = {
   LIST_THUMBNAIL: "?h=300",
   MANIFEST: "${icon}?h=${size}&w=${size}&crop=fit&preserve=true",
   PREVIEW: "?h=500",
-  RECENT_THUMBNAIL: "?h=135",
+  RECENT_THUMBNAIL: "?h=230",
   THUMBNAIL: "?h=34",
   TWITTER: "?w=600&h=330&fit=center&preserve=true"
 };
@@ -108,4 +108,11 @@ export const LEAFLET_MARKER_ICON: any = {
   shadowSize: [0, 0],
   shadowAnchor: [0, 0],
   popupAnchor: [3, -40]
+};
+
+export const CROP_STATUS = {
+  NOT_CURATED: "NOT_CURATED",
+  SELECTED: "SELECTED",
+  REJECTED: "REJECTED",
+  OBSERVATION_NULL_MESSAGE: "Observation ID is null"
 };

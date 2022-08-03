@@ -28,7 +28,7 @@ export interface IDropzoneProps {
 }
 
 const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzoneProps) => {
-  const { observationAssets } = useObservationCreate();
+  const { observationAssets, addAssets } = useObservationCreate();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
@@ -49,7 +49,7 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
   const onSelectionDone = () => setTabIndex(0);
 
   return (
-    <FormControl hidden={hidden} isInvalid={fieldState.invalid} mb={mb}>
+    <FormControl hidden={hidden} isInvalid={!!fieldState.error} mb={mb}>
       <Tabs
         className="nospace"
         index={tabIndex}
@@ -71,10 +71,10 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
             <MyUploads onDone={onSelectionDone} />
           </TabPanel>
           <TabPanel>
-            <AudioInput onDone={onSelectionDone} />
+            <AudioInput onDone={onSelectionDone} onSave={addAssets} />
           </TabPanel>
           <TabPanel>
-            <FromURL onDone={onSelectionDone} />
+            <FromURL onDone={onSelectionDone} onSave={addAssets} />
           </TabPanel>
         </TabPanels>
       </Tabs>

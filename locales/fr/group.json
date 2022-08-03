@@ -105,15 +105,17 @@
       "new_image": "Tableau d'image",
       "obs_id": "ID d'observation",
       "observation_image": "Image d'observation",
+      "observation_image_not_editable": "Image d'observation non modifiable",
       "title": "Titre"
     },
     "save": "Enregistrer les détails de la page d'accueil",
     "show_desc": "Montrer la description",
     "success": "Changements mis à jour avec succès",
     "table": {
+      "actions": "Actions",
       "description": "Description",
+      "image": "Image",
       "more_link": "Lien",
-      "remove_image": "Supprimer",
       "title": "Titre"
     },
     "title": "Personnalisation de la page d'accueil",

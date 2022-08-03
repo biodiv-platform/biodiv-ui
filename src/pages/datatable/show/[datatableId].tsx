@@ -18,6 +18,7 @@ const DatatableShowPage = ({ datatableShow, speciesGroups, observationData, grou
     />
   </DataTableObservationListProvider>
 );
+
 export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
 

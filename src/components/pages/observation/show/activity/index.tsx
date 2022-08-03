@@ -12,10 +12,10 @@ export default function Activity({ resourceId, resourceType, commentFunc }) {
     <>
       <LazyLoad once={true}>
         <div ref={titleRef}></div>
-        <Box mb={4} className="fadeInUp white-box">
+        <Box mb={4} className="white-box">
           <ActivityList resourceType={resourceType} resourceId={resourceId} />
         </Box>
-        <Box mb={4} p={4} className="fadeInUp delay-1 white-box">
+        <Box mb={4} p={4} className="white-box">
           <Comment
             resourceId={resourceId}
             resourceType={resourceType}

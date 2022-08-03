@@ -3,7 +3,7 @@ import { SortableContainer } from "react-sortable-hoc";
 
 import CustomFieldRow from "./custom-field-row";
 
-const CustomFieldListItems = SortableContainer(
+const CustomFieldListItems: any = SortableContainer(
   ({ customFieldList, removeCustomField, customFieldDetails }) => (
     <tbody>
       {customFieldList.map((item, index) => (

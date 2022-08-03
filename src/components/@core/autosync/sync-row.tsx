@@ -32,13 +32,14 @@ interface SyncRowProps {
 export default function SyncRow({ syncInfo, pendingObservation, deleteObservation }: SyncRowProps) {
   const { t } = useTranslation();
   const { data, id } = pendingObservation;
-  const thumb = useMemo(
-    () =>
-      data?.resources?.[0]?.blob
-        ? window.URL.createObjectURL(data?.resources?.[0]?.blob)
-        : undefined,
-    []
-  );
+  const thumb = useMemo(() => {
+    try {
+      return window.URL.createObjectURL(data?.resources?.[0]?.blob);
+    } catch (e) {
+      console.error(e);
+      return undefined;
+    }
+  }, []);
 
   const title = `${
     data?.recoData?.taxonCommonName || data?.recoData.taxonScientificName || t("common:unknown")

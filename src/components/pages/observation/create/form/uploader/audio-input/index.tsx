@@ -5,12 +5,10 @@ import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
-import useObservationCreate from "../use-observation-resources";
 import AudioPlayer from "./audio-player";
 
-export default function AudioInput({ onDone }) {
+export default function AudioInput({ onDone, onSave }) {
   const { t } = useTranslation();
-  const { addAssets } = useObservationCreate();
   const [audioFile, setAudioFile] = useState<File>();
   const [audioFileURL, setAudioFileURL] = useState<string>();
 
@@ -25,7 +23,7 @@ export default function AudioInput({ onDone }) {
   };
 
   const onConfirm = () => {
-    addAssets([getAssetObject(audioFile)], true);
+    onSave([getAssetObject(audioFile)], true);
     setAudioFile(undefined);
     onDone();
   };
@@ -34,7 +32,7 @@ export default function AudioInput({ onDone }) {
 
   return (
     <div>
-      <Text my={5}>ℹ️ {t("form:description.audio")}</Text>
+      <Text my={4}>ℹ️ {t("form:description.audio")}</Text>
       {audioFile ? (
         <AudioPlayer src={audioFileURL} onConfirm={onConfirm} onCancel={onCancel} />
       ) : (

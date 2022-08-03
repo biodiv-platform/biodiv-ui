@@ -18,9 +18,32 @@
   },
   "dataset_description": "ডেটাসেটের বিবরণ",
   "date_columns": "তারিখ কলাম",
+  "edit": {
+    "location": {
+      "accuracy": "সঠিকতা",
+      "collapse_map": "মানচিত্র সঙ্কুচিত করুন",
+      "edit_location_accuracy": "অবস্থান নির্ভুলতা সম্পাদনা করুন",
+      "latitude": "অক্ষাংশ",
+      "longitude": "দ্রাঘিমাংশ",
+      "show_all": "সব দেখাও",
+      "show_fewer": "কম দেখান",
+      "show_on_map": "মানচিত্রে অবস্থান দেখান"
+    },
+    "scientific_name": {
+      "rank": "পদমর্যাদা",
+      "taxon_id": "ট্যাক্সন আইডি",
+      "validity": "বৈজ্ঞানিক নামের বৈধতা"
+    }
+  },
   "location_columns": "অবস্থান কলাম",
   "metadata": "মেটাডেটা",
   "sci_name_columns": "বৈজ্ঞানিক নাম কলাম",
+  "section_heading": {
+    "Temporal Data": "টেম্পোরাল ডেটা",
+    "curated_status": "কিউরেটেড স্ট্যাটাস",
+    "spatial_data": "স্থানিক তথ্য",
+    "taxonomic_data": "ট্যাক্সোনমিক ডেটা"
+  },
   "update": {
     "error": "সারি আপডেট করতে অক্ষম৷",
     "success": "সারি সফলভাবে আপডেট হয়েছে৷"
