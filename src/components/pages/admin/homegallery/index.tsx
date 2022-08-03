@@ -25,7 +25,7 @@ function HomeComponent({ homeInfo }) {
           borderRadius="md"
         >
           <AccordionButton _expanded={{ bg: "gray.100" }}>
-            <Box flex={1} textAlign="left" fontSize="lg">
+            <Box flex={1} textAlign="left" pr="960px">
               🧰 {t("group:homepage_customization.title")}
             </Box>
             <AccordionIcon />

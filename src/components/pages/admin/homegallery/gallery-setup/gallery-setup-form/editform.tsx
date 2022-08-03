@@ -36,12 +36,6 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     }
   });
 
-  const imgUrl = getResourceThumbnail(
-    RESOURCE_CTX.OBSERVATION,
-    fileName,
-    RESOURCE_SIZE.LIST_THUMBNAIL
-  );
-
   const handleFormSubmit = async (payload) => {
     const { success, data } = await axEditHomePageGallery(id, payload);
 
@@ -71,7 +65,13 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         {observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>
-            <Image src={imgUrl} />
+            <Image
+              src={getResourceThumbnail(
+                RESOURCE_CTX.OBSERVATION,
+                fileName,
+                RESOURCE_SIZE.LIST_THUMBNAIL
+              )}
+            />
           </>
         ) : (
           <ImageUploaderField

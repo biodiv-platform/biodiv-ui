@@ -1,5 +1,4 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
-// reusing GalleryListItems component from group page
 import GalleryListItems from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-tabel/gallery-list";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
@@ -7,7 +6,7 @@ import { axRemoveHomePageGallery, axReorderHomePageGallery } from "@services/uti
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const GallerySetupTable = ({
   galleryList,
@@ -18,10 +17,6 @@ const GallerySetupTable = ({
 }) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    setGalleryList(galleryList.sort((a, b) => a.displayOrder - b.displayOrder));
-  }, []);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setGalleryList(arrayMoveImmutable(galleryList, oldIndex, newIndex));
@@ -34,8 +29,8 @@ const GallerySetupTable = ({
   };
 
   const handleReorderCustomField = async () => {
-    const payload = galleryList.map(({ id }, index) => ({
-      galleryId: id,
+    const payload = galleryList.map((galleryItem, index) => ({
+      galleryId: galleryItem.id,
       displayOrder: index
     }));
 

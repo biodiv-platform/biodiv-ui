@@ -27,12 +27,10 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
 
   const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
-      gallerySlider: galleryList.reduce((acc, item, index) => {
-        if (!item.id) {
-          acc.push({ displayOrder: index, ...item });
-        }
-        return acc;
-      }, []),
+      gallerySlider: galleryList.reduce(
+        (acc, item, index) => (item.id ? acc : [...acc, { ...item, displayOrder: index }]),
+        []
+      ),
       ...value
     };
     const { success, data } = await axInsertHomePageGallery(payload);
@@ -47,7 +45,7 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
   return (
     <>
       <FormProvider {...hForm}>
-        <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade"></form>
+        <form onSubmit={hForm.handleSubmit(handleFormSubmit)}></form>
       </FormProvider>
       <GallerySetup
         isCreate={isCreate}
