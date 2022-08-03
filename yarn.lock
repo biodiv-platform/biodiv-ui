@@ -6538,6 +6538,13 @@ react-hook-form@^7.33.1:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.33.1.tgz#8c4410e3420788d3b804d62cc4c142915c2e46d0"
   integrity sha512-ydTfTxEJdvgjCZBj5DDXRc58oTEfnFupEwwTAQ9FSKzykEJkX+3CiAkGtAMiZG7IPWHuzgT6AOBfogiKhUvKgg==
 
+react-image-crop@^10.0.4:
+  version "10.0.4"
+  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-10.0.4.tgz#f51588117a35c59e4e674f542a10b6c49cdab4e0"
+  integrity sha512-ArJK1cIBRotWmsxEATLm3aYMQLo8aInjbBuz8tAM3WHCKmeUfEuZsRvDEsKsdpsZ58BbtGUvvsfsrfS21+JYug==
+  dependencies:
+    clsx "^1.1.1"
+
 react-infinite-scroll-component@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/react-infinite-scroll-component/-/react-infinite-scroll-component-6.1.0.tgz#7e511e7aa0f728ac3e51f64a38a6079ac522407f"

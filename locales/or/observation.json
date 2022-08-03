@@ -15,6 +15,19 @@
   "coordinates": "ସଂଯୋଜନାଗୁଡ଼ିକ",
   "created_on": "ସୃଷ୍ଟି ହୋଇଛି",
   "creating": "ଆମେ ତୁମର ପର୍ଯ୍ୟବେକ୍ଷଣ ସୃଷ୍ଟି କରୁଛୁ |",
+  "crop": {
+    "actions": {
+      "curate": "କ୍ୟୁରେଟ୍ |",
+      "reject": "ପ୍ରତ୍ୟାଖ୍ୟାନ କରନ୍ତୁ |",
+      "un_curate": "ଅଣ-କ୍ୟୁରେଟ୍ |"
+    },
+    "status": {
+      "not_curated": "CURATED ନୁହେଁ |",
+      "rejected": "ପ୍ରତ୍ୟାଖ୍ୟାନ |",
+      "selected": "CURATED"
+    },
+    "title": "ଫସଲ"
+  },
   "custom_fields": "କଷ୍ଟମ୍ ଫିଲ୍ଡସ୍ |",
   "delete_file": {
     "error": "ଫାଇଲ୍ ପ୍ରକ୍ରିୟାକରଣ କରିବାରେ ଅସମର୍ଥ, ଦୟାକରି ପରେ ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ |",

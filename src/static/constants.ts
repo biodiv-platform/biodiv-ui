@@ -109,3 +109,10 @@ export const LEAFLET_MARKER_ICON: any = {
   shadowAnchor: [0, 0],
   popupAnchor: [3, -40]
 };
+
+export const CROP_STATUS = {
+  NOT_CURATED: "NOT_CURATED",
+  SELECTED: "SELECTED",
+  REJECTED: "REJECTED",
+  OBSERVATION_NULL_MESSAGE: "Observation ID is null"
+};
