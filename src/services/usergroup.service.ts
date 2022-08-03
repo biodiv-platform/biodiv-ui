@@ -373,7 +373,7 @@ export const axGetGroupHompageDetails = async (userGroupId) => {
   }
 };
 
-export const axUpdateHomePageDetails = async (userGroupId, payload) => {
+export const axUpdateGroupHomePageDetails = async (userGroupId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.USERGROUP}/v1/group/homePage/update/${userGroupId}`,
@@ -386,7 +386,7 @@ export const axUpdateHomePageDetails = async (userGroupId, payload) => {
   }
 };
 
-export const axRemoveHomePageGalleryImage = async (userGroupId, galleryList, index) => {
+export const axRemoveGroupHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
     await http.put(
       `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${galleryList[index]?.id}`
@@ -403,7 +403,7 @@ export const axRemoveHomePageGalleryImage = async (userGroupId, galleryList, ind
   }
 };
 
-export const axReorderHomePageGallery = async (userGroupId, payload) => {
+export const axReorderGroupHomePageGallery = async (userGroupId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.USERGROUP}/v1/group/homePage/reordering/${userGroupId}`,
@@ -439,7 +439,7 @@ export const axcustomFieldEditDetails = async (userGroupId, customFieldId, paylo
   }
 };
 
-export const axEditHomePageGallery = async (userGroupId, galleryId, payload) => {
+export const axEditGroupHomePageGallery = async (userGroupId, galleryId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.USERGROUP}/v1/group/homePage/edit/${userGroupId}/${galleryId}`,

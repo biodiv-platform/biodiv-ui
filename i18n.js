@@ -9,7 +9,7 @@ module.exports = {
     "/": ["home"],
     "/group/[groupName]": ["home"],
     "/group/[groupName]/show": ["home"],
-    "rgx:/admin": ["admin"],
+    "rgx:/admin": ["admin", "group"],
     "rgx:/datatable/": ["activity", "datatable", "form", "observation"],
     "rgx:/document/": ["document", "observation", "filters", "activity"],
     "rgx:/group/": ["group"],

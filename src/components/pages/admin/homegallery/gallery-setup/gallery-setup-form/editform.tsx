@@ -3,9 +3,11 @@ import { Box, Button, Image } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
+// reusing ImageUploaderField and galleryFieldValidationSchema components from group page
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
+import { galleryFieldValidationSchema } from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form/common";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axEditGroupHomePageGallery } from "@services/usergroup.service";
+import { axEditHomePageGallery } from "@services/utility.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { NotificationType } from "@utils/notification";
@@ -14,12 +16,10 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { galleryFieldValidationSchema } from "./common";
-
 export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData }) {
   const { t } = useTranslation();
 
-  const { id, ugId, title, fileName, customDescripition, moreLinks, displayOrder, observationId } =
+  const { id, title, fileName, customDescripition, moreLinks, displayOrder, observationId } =
     editGalleryData;
 
   const hForm = useForm<any>({
@@ -27,7 +27,6 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     resolver: yupResolver(galleryFieldValidationSchema),
     defaultValues: {
       id,
-      ugId,
       title,
       fileName,
       customDescripition,
@@ -37,14 +36,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     }
   });
 
-  const imgUrl = getResourceThumbnail(
-    RESOURCE_CTX.OBSERVATION,
-    fileName,
-    RESOURCE_SIZE.LIST_THUMBNAIL
-  );
-
   const handleFormSubmit = async (payload) => {
-    const { success, data } = await axEditGroupHomePageGallery(ugId, id, payload);
+    const { success, data } = await axEditHomePageGallery(id, payload);
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
@@ -72,7 +65,13 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         {observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>
-            <Image src={imgUrl} />
+            <Image
+              src={getResourceThumbnail(
+                RESOURCE_CTX.OBSERVATION,
+                fileName,
+                RESOURCE_SIZE.LIST_THUMBNAIL
+              )}
+            />
           </>
         ) : (
           <ImageUploaderField
