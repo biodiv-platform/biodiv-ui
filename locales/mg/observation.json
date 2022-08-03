@@ -119,6 +119,7 @@
   "longitude": "-jarahasina",
   "mange_resources": "Mitantana loharanon-karena",
   "media_picker": "Media Picker",
+  "more_fields": "saha bebe kokoa",
   "nearby": "Teo am-piheverana",
   "no_custom_field": "Tsy misy fomba fanao manokana hita ho an'ity fandinihana ity",
   "no_empty_suggestion": "Tsy afaka mametraka soso-kevitra tsy misy na inona na inona",
@@ -164,7 +165,7 @@
   "title_edit": "Hanova ny fandinihana",
   "toolbar": {
     "delete": "Fafao voafantina",
-    "edit": "Ahitsio Voafantina",
+    "edit": "Fenoy voafantina",
     "errors": {
       "no_observations_selected": "Tsy misy fanamarihana voafantina"
     },
@@ -183,6 +184,7 @@
   "update_observation": "Hanavao ny fandinihana",
   "updated": "nohavaozina",
   "updated_on": "Nohavaozina tamin'ny",
+  "upload_info": "Mba hialana amin'ny dika mitovy dia mifidiana sy atambatra sary maromaro amin'ny zavamananaina iray ihany",
   "use_dms": "Mampiasà DMS",
   "use_last_value": "Mampiasà sandany farany",
   "use_lat_lng": "Mampiasà Lat-Long",

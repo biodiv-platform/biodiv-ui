@@ -119,6 +119,7 @@
   "longitude": "Longitude",
   "mange_resources": "Gérer les ressources",
   "media_picker": "Sélecteur de médias",
+  "more_fields": "Plus de champs",
   "nearby": "Observations à proximité",
   "no_custom_field": "Aucun champ personnalisé trouvé pour cette observation",
   "no_empty_suggestion": "Impossible de créer des suggestions vides",
@@ -164,7 +165,7 @@
   "title_edit": "Modifier l'observation",
   "toolbar": {
     "delete": "Supprimer sélectionnée",
-    "edit": "Modifier la sélection",
+    "edit": "Remplir la sélection",
     "errors": {
       "no_observations_selected": "Aucune observation sélectionnée"
     },
@@ -183,6 +184,7 @@
   "update_observation": "Mettre à jour l'observation",
   "updated": "Mise à jour",
   "updated_on": "Mis à jour le",
+  "upload_info": "Pour éviter la duplication, veuillez sélectionner et fusionner plusieurs images du même organisme",
   "use_dms": "Utiliser dms",
   "use_last_value": "Utiliser la dernière valeur",
   "use_lat_lng": "Utiliser Lat-Long",

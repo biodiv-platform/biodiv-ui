@@ -119,6 +119,7 @@
   "longitude": "Longitude.",
   "mange_resources": "Dhibiti Rasilimali",
   "media_picker": "Kiteua Vyombo vya Habari",
+  "more_fields": "Viwanja Zaidi",
   "nearby": "Uchunguzi wa karibu.",
   "no_custom_field": "Hakuna uwanja wa desturi unaopatikana kwa uchunguzi huu",
   "no_empty_suggestion": "Hawezi kuandika maoni yasiyofaa.",
@@ -164,7 +165,7 @@
   "title_edit": "Badilisha uchunguzi.",
   "toolbar": {
     "delete": "Futa Uliochaguliwa",
-    "edit": "Hariri Umechaguliwa",
+    "edit": "Jaza Iliyochaguliwa",
     "errors": {
       "no_observations_selected": "Hakuna uchunguzi uliochaguliwa"
     },
@@ -183,6 +184,7 @@
   "update_observation": "Sasisha uchunguzi",
   "updated": "Imeongezwa",
   "updated_on": "Updated On.",
+  "upload_info": "Ili kuepuka kurudia, tafadhali chagua na uunganishe picha nyingi za kiumbe kimoja",
   "use_dms": "Tumia DMS.",
   "use_last_value": "Tumia thamani ya mwisho",
   "use_lat_lng": "Tumia Lat-Long.",
