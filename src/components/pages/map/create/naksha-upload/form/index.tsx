@@ -98,18 +98,25 @@ export default function LayerUploadForm() {
                 name="layerType"
                 options={LAYER_TYPES}
                 label={t("map:layer_type")}
+                shouldPortal={true}
               />
               <SelectInputField
                 name="titleColumn"
                 options={columnOptions}
                 label={t("map:title_column")}
+                shouldPortal={true}
               />
               <SelectMultipleInputField
                 name="summaryColumns"
                 label={t("map:summary_columns")}
                 options={columnOptions}
               />
-              <SelectInputField name="colorBy" options={columnOptions} label={t("map:color_by")} />
+              <SelectInputField
+                name="colorBy"
+                options={columnOptions}
+                label={t("map:color_by")}
+                shouldPortal={true}
+              />
               <TextBoxField name="createdBy" label={t("map:created_by")} />
               <TextBoxField name="attribution" label={t("map:attribution")} />
               <TextBoxField name="url" label={t("map:url")} />
@@ -121,6 +128,7 @@ export default function LayerUploadForm() {
                 name="downloadAccess"
                 options={ACCESS}
                 label={t("map:download_access")}
+                shouldPortal={true}
               />
               <Button colorScheme="blue" type="submit">
                 {t("map:create")}

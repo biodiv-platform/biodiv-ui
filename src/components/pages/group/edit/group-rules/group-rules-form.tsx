@@ -53,7 +53,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           [`${type}`]: [
             {
               fromDate: dateToUTC(ruleValue[0]).format(),
-              toDate: dateToUTC(ruleValue[1]).format()
+              toDate: dateToUTC(ruleValue[1]).endOf("day").format()
             }
           ]
         };
@@ -90,6 +90,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           onChangeCallback={setInputType}
           options={RULES_TYPE}
           label={t("group:rules.input_types.title")}
+          shouldPortal={true}
         />
         {inputType && <RulesInputType inputType={inputType} name="ruleValue" />}
         <SubmitButton leftIcon={<CheckIcon />}>{t("group:rules.add.title")}</SubmitButton>

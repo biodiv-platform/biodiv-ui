@@ -98,6 +98,7 @@ export default function SynonymForm({
                 label={t("species:synonym.form.rank")}
                 options={taxonRanks}
                 isRequired={true}
+                shouldPortal={true}
               />
               <TextBoxField name="dataSource" label={t("species:synonym.form.datasource")} />
               <TextBoxField

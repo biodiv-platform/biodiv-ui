@@ -75,6 +75,7 @@ export default function DateEdit({ row }) {
           label={t("form:date_accuracy")}
           options={DATE_FORMAT_OPTIONS}
           mb={0}
+          shouldPortal={true}
         />
       </SimpleGrid>
     </Box>

@@ -173,6 +173,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
               label={t("form:license")}
               isRequired={true}
               options={licensesList}
+              shouldPortal={true}
             />
             <ReferencesField name="references" label={t("species:references")} />
           </ModalBody>

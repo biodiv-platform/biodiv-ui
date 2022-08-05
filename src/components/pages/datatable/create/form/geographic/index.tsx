@@ -26,6 +26,7 @@ export default function PartyContributorsForm({
           name="locationScale"
           label={t("datatable:location_scale")}
           options={translatedLocationOptions}
+          shouldPortal={true}
         />
         <WKTFieldMulti
           name="topologyData"
