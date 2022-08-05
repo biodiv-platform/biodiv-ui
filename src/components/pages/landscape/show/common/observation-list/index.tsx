@@ -71,9 +71,9 @@ export default function LandscapeObservationList({ sGroupList, title }) {
               </Box>
             </Skeleton>
             <Stack align="center" direction="row">
-              <Text>{t("landscape:All")}</Text>
+              <Text>{t("landscape:all")}</Text>
               <Switch onChange={handleToggle} />
-              <Text>{t("landscape:Validate")}</Text>
+              <Text>{t("landscape:validate")}</Text>
             </Stack>
           </Flex>
           <LifeListTable

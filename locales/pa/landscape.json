@@ -1,6 +1,5 @@
 {
-  "All": "ਸਾਰੇ",
-  "Validate": "ਪ੍ਰਮਾਣਿਤ",
+  "all": "ਸਾਰੇ",
   "download_map": "ਡਾਉਨਲੋਡ ਮੈਪ",
   "no_species_found": "ਕੋਈ ਸਪੀਸੀਜ਼ ਸੂਚੀ ਨਹੀਂ ਮਿਲੀ",
   "observation": {
@@ -16,5 +15,6 @@
   "title": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ",
   "update": {
     "success": "ਖੇਤਰ ਸੁਰੱਖਿਅਤ"
-  }
+  },
+  "validate": "ਪ੍ਰਮਾਣਿਤ"
 }

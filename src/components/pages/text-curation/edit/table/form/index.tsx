@@ -67,7 +67,7 @@ export default function EditRowForm({ row }) {
           <Section heading={t("text-curation:section_heading.spatial_data")}>
             <LocationEdit row={row} />
           </Section>
-          <Section heading={t("text-curation:section_heading.Temporal Data")}>
+          <Section heading={t("text-curation:section_heading.temporal_data")}>
             <DateEdit row={row} />
           </Section>
           <Section heading={t("text-curation:section_heading.curated_status")}>

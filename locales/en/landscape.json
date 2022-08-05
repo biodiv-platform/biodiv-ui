@@ -1,6 +1,5 @@
 {
-  "All": "All",
-  "Validate": "Validated",
+  "all": "All",
   "download_map": "Download Map",
   "no_species_found": "No Species List found",
   "observation": {
@@ -16,5 +15,6 @@
   "title": "Protected Areas",
   "update": {
     "success": "Field Saved"
-  }
+  },
+  "validate": "Validated"
 }

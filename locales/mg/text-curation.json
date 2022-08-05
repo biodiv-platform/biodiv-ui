@@ -39,10 +39,10 @@
   "metadata": "Metadata",
   "sci_name_columns": "Tsanganana anarana siantifika",
   "section_heading": {
-    "Temporal Data": "Data ara-potoana",
     "curated_status": "Sata voarindra",
     "spatial_data": "Data momba ny habaka",
-    "taxonomic_data": "Taxonomic Data"
+    "taxonomic_data": "Taxonomic Data",
+    "temporal_data": "Data ara-potoana"
   },
   "update": {
     "error": "Tsy afaka manavao ny laharana",

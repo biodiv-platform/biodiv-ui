@@ -39,10 +39,10 @@
   "metadata": "మెటాడేటా",
   "sci_name_columns": "శాస్త్రీయ నామ కాలమ్‌లు",
   "section_heading": {
-    "Temporal Data": "తాత్కాలిక డేటా",
     "curated_status": "క్యూరేటెడ్ స్థితి",
     "spatial_data": "ప్రాదేశిక డేటా",
-    "taxonomic_data": "వర్గీకరణ డేటా"
+    "taxonomic_data": "వర్గీకరణ డేటా",
+    "temporal_data": "తాత్కాలిక డేటా"
   },
   "update": {
     "error": "అడ్డు వరుసను నవీకరించడం సాధ్యం కాలేదు",

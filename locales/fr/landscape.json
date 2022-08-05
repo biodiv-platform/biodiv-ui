@@ -1,6 +1,5 @@
 {
-  "All": "Tous",
-  "Validate": "Validé",
+  "all": "Tous",
   "download_map": "Télécharger la carte",
   "no_species_found": "Aucune liste d'espèces trouvée",
   "observation": {
@@ -16,5 +15,6 @@
   "title": "Zones protégées",
   "update": {
     "success": "Champ sauvegardé"
-  }
+  },
+  "validate": "Validé"
 }

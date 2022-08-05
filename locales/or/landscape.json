@@ -1,6 +1,5 @@
 {
-  "All": "ସମସ୍ତ",
-  "Validate": "ବ valid ଧତା |",
+  "all": "ସମସ୍ତ",
   "download_map": "ମାନଚିତ୍ର ଡାଉନଲୋଡ୍ କରନ୍ତୁ |",
   "no_species_found": "କ species ଣସି ପ୍ରଜାତି ତାଲିକା ମିଳିଲା ନାହିଁ |",
   "observation": {
@@ -16,5 +15,6 @@
   "title": "ସୁରକ୍ଷିତ ଅଞ୍ଚଳଗୁଡିକ |",
   "update": {
     "success": "କ୍ଷେତ୍ର ସଞ୍ଚୟ ହୋଇଛି |"
-  }
+  },
+  "validate": "ବ valid ଧତା |"
 }

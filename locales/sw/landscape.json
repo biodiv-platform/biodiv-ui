@@ -1,6 +1,5 @@
 {
-  "All": "Wote",
-  "Validate": "Kuthibitishwa",
+  "all": "Wote",
   "download_map": "Pakua ramani",
   "no_species_found": "Hakuna orodha ya aina iliyopatikana.",
   "observation": {
@@ -16,5 +15,6 @@
   "title": "Maeneo yaliyohifadhiwa",
   "update": {
     "success": "Shamba limehifadhiwa"
-  }
+  },
+  "validate": "Kuthibitishwa"
 }

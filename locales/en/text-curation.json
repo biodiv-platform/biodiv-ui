@@ -40,10 +40,11 @@
   "metadata": "Metadata",
   "sci_name_columns": "Scientific Name Columns",
   "section_heading": {
+    "Temporal Data": "Temporal Data",
     "curated_status": "Curated Status",
     "spatial_data": "Spatial Data",
     "taxonomic_data": "Taxonomic Data",
-    "Temporal Data": "Temporal Data"
+    "temporal_data": "Temporal Data"
   },
   "update": {
     "error": "Unable to Update Row",

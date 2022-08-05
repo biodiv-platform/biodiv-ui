@@ -39,10 +39,10 @@
   "metadata": "மெட்டாடேட்டா",
   "sci_name_columns": "அறிவியல் பெயர் நெடுவரிசைகள்",
   "section_heading": {
-    "Temporal Data": "தற்காலிக தரவு",
     "curated_status": "தேர்ந்தெடுக்கப்பட்ட நிலை",
     "spatial_data": "இடஞ்சார்ந்த தரவு",
-    "taxonomic_data": "வகைபிரித்தல் தரவு"
+    "taxonomic_data": "வகைபிரித்தல் தரவு",
+    "temporal_data": "தற்காலிக தரவு"
   },
   "update": {
     "error": "வரிசையைப் புதுப்பிக்க முடியவில்லை",

@@ -39,10 +39,10 @@
   "metadata": "Métadonnées",
   "sci_name_columns": "Colonnes des noms scientifiques",
   "section_heading": {
-    "Temporal Data": "Données temporelles",
     "curated_status": "Statut organisé",
     "spatial_data": "Données spatiales",
-    "taxonomic_data": "Données taxonomiques"
+    "taxonomic_data": "Données taxonomiques",
+    "temporal_data": "Données temporelles"
   },
   "update": {
     "error": "Impossible de mettre à jour la ligne",

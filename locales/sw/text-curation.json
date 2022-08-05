@@ -39,10 +39,10 @@
   "metadata": "Metadata",
   "sci_name_columns": "Safu za Jina la Kisayansi",
   "section_heading": {
-    "Temporal Data": "Data ya Muda",
     "curated_status": "Hali Iliyoratibiwa",
     "spatial_data": "Data ya anga",
-    "taxonomic_data": "Data ya Taxonomic"
+    "taxonomic_data": "Data ya Taxonomic",
+    "temporal_data": "Data ya Muda"
   },
   "update": {
     "error": "Haiwezi Kusasisha Safu",

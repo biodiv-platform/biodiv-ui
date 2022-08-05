@@ -39,10 +39,10 @@
   "metadata": "मेटाडेटा",
   "sci_name_columns": "वैज्ञानिक नाव स्तंभ",
   "section_heading": {
-    "Temporal Data": "टेम्पोरल डेटा",
     "curated_status": "क्युरेटेड स्थिती",
     "spatial_data": "अवकाशीय डेटा",
-    "taxonomic_data": "वर्गीकरण डेटा"
+    "taxonomic_data": "वर्गीकरण डेटा",
+    "temporal_data": "टेम्पोरल डेटा"
   },
   "update": {
     "error": "पंक्ती अपडेट करण्यात अक्षम",

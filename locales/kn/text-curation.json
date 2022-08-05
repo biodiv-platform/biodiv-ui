@@ -39,10 +39,10 @@
   "metadata": "ಮೆಟಾಡೇಟಾ",
   "sci_name_columns": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು ಅಂಕಣಗಳು",
   "section_heading": {
-    "Temporal Data": "ತಾತ್ಕಾಲಿಕ ಡೇಟಾ",
     "curated_status": "ಕ್ಯುರೇಟೆಡ್ ಸ್ಥಿತಿ",
     "spatial_data": "ಪ್ರಾದೇಶಿಕ ಡೇಟಾ",
-    "taxonomic_data": "ಟಕ್ಸಾನಮಿಕ್ ಡೇಟಾ"
+    "taxonomic_data": "ಟಕ್ಸಾನಮಿಕ್ ಡೇಟಾ",
+    "temporal_data": "ತಾತ್ಕಾಲಿಕ ಡೇಟಾ"
   },
   "update": {
     "error": "ಸಾಲನ್ನು ನವೀಕರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",

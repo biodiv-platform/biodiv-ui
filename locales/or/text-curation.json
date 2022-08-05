@@ -39,10 +39,10 @@
   "metadata": "ମେଟାଡାଟା |",
   "sci_name_columns": "ବ Scientific ଜ୍ଞାନିକ ନାମ ସ୍ତମ୍ଭଗୁଡିକ |",
   "section_heading": {
-    "Temporal Data": "ସାମୟିକ ତଥ୍ୟ |",
     "curated_status": "କ୍ୟୁରେଟେଡ୍ ସ୍ଥିତି |",
     "spatial_data": "ସ୍ଥାନିକ ତଥ୍ୟ |",
-    "taxonomic_data": "ଟ୍ୟାକ୍ସୋନୋମିକ୍ ତଥ୍ୟ |"
+    "taxonomic_data": "ଟ୍ୟାକ୍ସୋନୋମିକ୍ ତଥ୍ୟ |",
+    "temporal_data": "ସାମୟିକ ତଥ୍ୟ |"
   },
   "update": {
     "error": "ଧାଡି ଅପଡେଟ୍ କରିବାକୁ ଅସମର୍ଥ |",

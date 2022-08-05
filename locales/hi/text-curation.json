@@ -39,10 +39,10 @@
   "metadata": "मेटाडाटा",
   "sci_name_columns": "वैज्ञानिक नाम कॉलम",
   "section_heading": {
-    "Temporal Data": "अस्थायी डेटा",
     "curated_status": "क्यूरेटेड स्थिति",
     "spatial_data": "स्थानिक डेटा",
-    "taxonomic_data": "टैक्सोनोमिक डेटा"
+    "taxonomic_data": "टैक्सोनोमिक डेटा",
+    "temporal_data": "अस्थायी डेटा"
   },
   "update": {
     "error": "पंक्ति अद्यतन करने में असमर्थ",

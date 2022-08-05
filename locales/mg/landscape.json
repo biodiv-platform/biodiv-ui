@@ -1,6 +1,5 @@
 {
-  "All": "rehetra",
-  "Validate": "nampanan-kery",
+  "all": "rehetra",
   "download_map": "Download Map",
   "no_species_found": "Tsy misy lisitra karazana hita",
   "observation": {
@@ -16,5 +15,6 @@
   "title": "Faritra arovana",
   "update": {
     "success": "Voavonjy ny saha"
-  }
+  },
+  "validate": "nampanan-kery"
 }

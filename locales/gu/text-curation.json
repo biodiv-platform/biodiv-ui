@@ -39,10 +39,10 @@
   "metadata": "મેટાડેટા",
   "sci_name_columns": "વૈજ્ઞાનિક નામ કૉલમ",
   "section_heading": {
-    "Temporal Data": "ટેમ્પોરલ ડેટા",
     "curated_status": "ક્યુરેટેડ સ્ટેટસ",
     "spatial_data": "અવકાશી ડેટા",
-    "taxonomic_data": "વર્ગીકરણ ડેટા"
+    "taxonomic_data": "વર્ગીકરણ ડેટા",
+    "temporal_data": "ટેમ્પોરલ ડેટા"
   },
   "update": {
     "error": "પંક્તિ અપડેટ કરવામાં અસમર્થ",

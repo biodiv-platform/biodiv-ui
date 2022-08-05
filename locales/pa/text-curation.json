@@ -39,10 +39,10 @@
   "metadata": "ਮੈਟਾਡਾਟਾ",
   "sci_name_columns": "ਵਿਗਿਆਨਕ ਨਾਮ ਕਾਲਮ",
   "section_heading": {
-    "Temporal Data": "ਅਸਥਾਈ ਡੇਟਾ",
     "curated_status": "ਚੁਣੀ ਗਈ ਸਥਿਤੀ",
     "spatial_data": "ਸਥਾਨਿਕ ਡੇਟਾ",
-    "taxonomic_data": "ਟੈਕਸੋਨੋਮਿਕ ਡੇਟਾ"
+    "taxonomic_data": "ਟੈਕਸੋਨੋਮਿਕ ਡੇਟਾ",
+    "temporal_data": "ਅਸਥਾਈ ਡੇਟਾ"
   },
   "update": {
     "error": "ਕਤਾਰ ਨੂੰ ਅੱਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
