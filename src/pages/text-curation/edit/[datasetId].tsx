@@ -35,7 +35,7 @@ export const getServerSideProps = async (ctx) => {
     hasAccess([Role.Admin], ctx) ||
     data.validators.includes(user.id.toString());
 
-  const canValidate = data.validators.length == 0 || data.validators.includes(user.id.toString());
+  const canValidate = data.validators.includes(user.id.toString());
 
   if (!canEdit) throwUnauthorized(ctx);
 
