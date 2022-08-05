@@ -18,7 +18,7 @@
   },
   "dataset_description": "Dataset Description",
   "date_columns": "Date Columns",
-  "Download": "Download",
+  "download": "Download",
   "edit": {
     "location": {
       "accuracy": "accuracy",
