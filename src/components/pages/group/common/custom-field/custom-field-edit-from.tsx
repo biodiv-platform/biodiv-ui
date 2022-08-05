@@ -100,6 +100,7 @@ export default function EditCustomField({ editCustomFieldData, setIsEdit, setCus
             disabled={true}
             isControlled={true}
             label={t("group:custom_field.field_type")}
+            shouldPortal={true}
           />
           <SelectInputField
             name="dataType"
@@ -107,6 +108,7 @@ export default function EditCustomField({ editCustomFieldData, setIsEdit, setCus
             options={DATA_TYPE}
             isControlled={true}
             label={t("group:custom_field.data_type")}
+            shouldPortal={true}
           />
         </SimpleGrid>
         {categoricalType.includes(defaultValues["fieldType"]) && (

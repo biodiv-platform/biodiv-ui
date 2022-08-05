@@ -160,6 +160,7 @@ export default function AddSuggestion({
                       label={t("form:language")}
                       options={languages}
                       selectRef={langRef}
+                      shouldPortal={true}
                     />
                   </SimpleGrid>
                   <SelectAsyncInputField

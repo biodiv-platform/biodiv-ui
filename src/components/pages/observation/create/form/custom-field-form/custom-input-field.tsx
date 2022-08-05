@@ -34,6 +34,7 @@ export default function ObservationCustomFieldInput({
           hint={hint}
           optionComponent={CustomFieldOptions}
           mb={0}
+          shouldPortal={true}
         />
       );
 

@@ -18,13 +18,19 @@ export default function PartyContributorsForm({ languages }) {
         <TextAreaField name="summary" maxLength={255} label={t("form:notes")} isRequired={true} />
         <RichTextareaField name="description" label={t("form:description.title")} />
         <SimpleGrid columns={{ md: 3 }} spacing={{ md: 4 }}>
-          <SelectInputField name="languageId" label={t("form:language")} options={languages} />
+          <SelectInputField
+            name="languageId"
+            label={t("form:language")}
+            options={languages}
+            shouldPortal={true}
+          />
           <SelectInputField
             name="basisOfData"
             label={t("datatable:basis_of_data")}
             options={BASIS_OF_DATA}
             isRequired={true}
             isControlled={true}
+            shouldPortal={true}
           />
           <SelectInputField
             name="basisOfRecord"
@@ -32,6 +38,7 @@ export default function PartyContributorsForm({ languages }) {
             options={BASIS_OF_RECORD}
             isRequired={true}
             isControlled={true}
+            shouldPortal={true}
           />
         </SimpleGrid>
       </Box>

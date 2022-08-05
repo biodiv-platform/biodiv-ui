@@ -173,6 +173,7 @@ export default function AddCustomField({
             isControlled={true}
             onChangeCallback={handleFieldChange}
             label={t("group:custom_field.field_type")}
+            shouldPortal={true}
           />
           <SelectInputField
             name="dataType"
@@ -181,6 +182,7 @@ export default function AddCustomField({
             options={dataTypes}
             isControlled={true}
             label={t("group:custom_field.data_type")}
+            shouldPortal={true}
           />
         </SimpleGrid>
         {showOption && (

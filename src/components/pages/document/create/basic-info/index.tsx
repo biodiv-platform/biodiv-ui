@@ -67,6 +67,7 @@ export default function BasicInfo({
           options={documentTypes}
           isRequired={true}
           isControlled={true}
+          shouldPortal={true}
         />
       </SimpleGrid>
 
@@ -80,6 +81,7 @@ export default function BasicInfo({
               options={licensesList}
               isRequired={true}
               isControlled={true}
+              shouldPortal={true}
             />
           </SimpleGrid>
           {showTags && <TagsInput />}

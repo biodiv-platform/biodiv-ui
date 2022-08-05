@@ -64,6 +64,7 @@ export function SpeciesValidateForm() {
               label={t("species:create.form.rank")}
               options={taxonRankOptions}
               isRequired={true}
+              shouldPortal={true}
             />
           </GridItem>
           <GridItem colSpan={4}>

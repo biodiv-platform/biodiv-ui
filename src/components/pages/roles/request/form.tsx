@@ -61,7 +61,12 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
           <ModalHeader>{isAdmin ? t("taxon:grant.title") : t("taxon:request.title")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <SelectInputField name="role" label={t("taxon:role")} options={TAXON_ROLES} />
+            <SelectInputField
+              name="role"
+              label={t("taxon:role")}
+              options={TAXON_ROLES}
+              shouldPortal={true}
+            />
             {isAdmin && (
               <SelectAsyncInputField
                 name="userId"
