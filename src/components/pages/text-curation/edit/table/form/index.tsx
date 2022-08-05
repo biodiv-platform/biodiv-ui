@@ -17,7 +17,7 @@ import Section from "./section";
 
 export default function EditRowForm({ row }) {
   const { t } = useTranslation();
-  const { rows } = useCurateEdit();
+  const { rows, userName, canValidate } = useCurateEdit();
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
@@ -42,7 +42,9 @@ export default function EditRowForm({ row }) {
         ? row.curatedDateFormat
         : DATE_FORMAT_OPTIONS[0].value,
       curatedStatus: row.curatedStatus,
-      validatedStatus: row.validatedStatus
+      validatedStatus: row.validatedStatus,
+      country: row.country,
+      countryCode: row.countryCode
     }
   });
 
@@ -55,13 +57,12 @@ export default function EditRowForm({ row }) {
     const btn: any = document.querySelector(`[data-testid=expander-button-${row.id}]`);
     btn.click();
   };
-
   return (
     <Box borderLeft="1px" borderColor="gray.200" h="full">
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <Section heading={t("text-curation:section_heading.taxonomic_data")}>
-            <ScientificNameEdit row={row} />
+            <ScientificNameEdit row={row} canValidate={canValidate} />
           </Section>
           <Section heading={t("text-curation:section_heading.spatial_data")}>
             <LocationEdit row={row} />
@@ -70,7 +71,7 @@ export default function EditRowForm({ row }) {
             <DateEdit row={row} />
           </Section>
           <Section heading={t("text-curation:section_heading.curated_status")}>
-            <EditStatus />
+            <EditStatus userName={userName} />
           </Section>
           <Box p={4}>
             <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>

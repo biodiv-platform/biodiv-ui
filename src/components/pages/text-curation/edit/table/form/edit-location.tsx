@@ -38,7 +38,9 @@ export default function LocationEdit({ row }) {
         value: value.label,
         label: value.label,
         coordinates: value.coordinates,
-        locationAccuracy: value.locationAccuracy
+        locationAccuracy: value.locationAccuracy,
+        country: value.country,
+        countryCode: value.countryCode
       },
       { name: locationRef.current.props.inputId }
     );
@@ -55,6 +57,9 @@ export default function LocationEdit({ row }) {
       "locationAccuracy",
       value.locationAccuracy ? value.locationAccuracy : row.locationAccuracy
     );
+
+    hForm.setValue("country", value.country ? value.country : row.country);
+    hForm.setValue("countryCode", value.countryCode ? value.countryCode : row.countryCode);
   };
 
   const handleOnOptionSelect = (value) => {

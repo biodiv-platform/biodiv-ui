@@ -88,6 +88,13 @@ export default function TextCurationCreateForm() {
               mb={0}
               onQuery={axUserFilterSearch}
             />
+            <SelectAsyncInputField
+              name="validators"
+              label="validators"
+              multiple={true}
+              mb={0}
+              onQuery={axUserFilterSearch}
+            />
           </Box>
         </ToggleablePanel>
 

@@ -8,6 +8,8 @@ interface CurateEditContextProps {
   isShow;
   canEdit;
   datasetId;
+  userName;
+  canValidate;
   rows: {
     filtered;
     filter;
@@ -24,6 +26,8 @@ interface CurateEditProviderProps {
   canEdit;
   isShow;
   children;
+  userName;
+  canValidate;
 }
 
 const CurateEditContext = createContext<CurateEditContextProps>({} as CurateEditContextProps);
@@ -33,6 +37,8 @@ export const CurateEditProvider = ({
   datasetId,
   canEdit,
   isShow,
+  userName,
+  canValidate,
   children
 }: CurateEditProviderProps) => {
   const [rows, setRows] = useState<any[]>(initialData.data || []);
@@ -75,6 +81,8 @@ export const CurateEditProvider = ({
         isShow,
         canEdit,
         datasetId,
+        userName,
+        canValidate,
         rows: {
           filtered: filteredRows,
           filter,

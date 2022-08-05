@@ -1,8 +1,11 @@
-import { Flex, Select, Text } from "@chakra-ui/react";
+import { Button, Flex, Select, Text } from "@chakra-ui/react";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
+import DownloadIcon from "@icons/download";
 import EditIcon from "@icons/edit";
+import { axDownloadCsv } from "@services/curate.service";
+import { sendFileFromResponse } from "@utils/download";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -18,8 +21,24 @@ const Actions = () => {
 
   const handleOnEdit = () => router.push(`/text-curation/edit/${datasetId}`);
 
+  const handleOnDownload = async (id, curatedStatus) => {
+    const { data } = await axDownloadCsv(id, curatedStatus);
+    sendFileFromResponse(data, "DataSheet" + datasetId + "Download" + ".csv");
+  };
+
   return (
     <Flex gap={4} alignItems="center">
+      {canEdit && (
+        <Button
+          p={5}
+          variant="outline"
+          colorScheme="blue"
+          leftIcon={<DownloadIcon />}
+          onClick={() => handleOnDownload(datasetId, rows.filter.curatedStatus)}
+        >
+          {t("text-curation:download")}
+        </Button>
+      )}
       <Select onChange={handleOnChange} size="sm">
         <option value="">ALL</option>
         {Object.keys(CURATED_STATUS).map((k) => (

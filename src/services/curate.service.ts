@@ -13,8 +13,10 @@ export const axExtractAllParams = async (d) => {
     formData.append("datasetDescription", d.summary);
 
     const cIds = d.contributors.map((v) => v.value);
+    const validatorIds = d.validators.map((v) => v.value);
 
     formData.append("contributorsIds", cIds);
+    formData.append("validatorIds", validatorIds);
 
     const { data } = await http.post(`${ENDPOINT.CURATE}/extract`, formData, {
       headers: formDataHeaders
@@ -56,6 +58,17 @@ export const axGetPeliasAutocompleteLocations = async (text) => {
       coordinates: l.coordinates,
       locationAccuracy: l.locationAccuracy
     }));
+  } catch (e) {
+    return { succces: false, data: [] };
+  }
+};
+
+export const axDownloadCsv = async (id, curatedStatus) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/download/${id}`, {
+      params: { curatedStatus: curatedStatus }
+    });
+    return { succes: true, data: data };
   } catch (e) {
     return { succces: false, data: [] };
   }
