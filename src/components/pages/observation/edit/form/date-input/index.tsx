@@ -42,6 +42,7 @@ export default function DateInputs({ showTags = true, disabled }) {
                 value === "UNKNOWN" ? setIsDisable(true) : setIsDisable(false)
               }
               options={translatedDateOptions}
+              shouldPortal={true}
             />
             <SelectInputField
               name="basisOfRecord"
@@ -49,6 +50,7 @@ export default function DateInputs({ showTags = true, disabled }) {
               options={BASIS_OF_RECORD}
               isRequired={true}
               isControlled={true}
+              shouldPortal={true}
             />
           </SimpleGrid>
           {showTags && (

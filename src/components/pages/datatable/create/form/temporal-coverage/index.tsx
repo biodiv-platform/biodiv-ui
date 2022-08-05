@@ -31,6 +31,7 @@ export default function TemporalCoverage() {
               value === "UNKNOWN" ? setIsDisable(true) : setIsDisable(false)
             }
             options={translatedDateOptions}
+            shouldPortal={true}
           />
         </SimpleGrid>
       </Box>

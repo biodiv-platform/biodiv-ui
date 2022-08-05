@@ -90,13 +90,20 @@ export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentPro
             name="occupation"
             label={t("user:occupation")}
             options={OCCUPATION_OPTIONS}
+            shouldPortal={true}
           />
           <SelectInputField
             name="institution"
             label={t("user:institution")}
             options={INSTITUTION_OPTIONS}
+            shouldPortal={true}
           />
-          <SelectInputField name="sexType" label={t("user:gender")} options={GENDER_OPTIONS} />
+          <SelectInputField
+            name="sexType"
+            label={t("user:gender")}
+            options={GENDER_OPTIONS}
+            shouldPortal={true}
+          />
           <TextBoxField name="website" label={t("user:website")} />
         </SimpleGrid>
         <TextAreaField name="aboutMe" label="About" />

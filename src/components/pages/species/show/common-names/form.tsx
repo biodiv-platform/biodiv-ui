@@ -89,6 +89,7 @@ export function SpeciesCommonNameForm({
                 label={t("species:common_name.form.language")}
                 options={languages}
                 mb={0}
+                shouldPortal={true}
               />
             </ModalBody>
             <ModalFooter>

@@ -64,7 +64,12 @@ export default function PageForm({
           uploadHandler={axUploadEditorPageResource}
         />
         {!hideParentId && (
-          <SelectInputField name="parentId" label={t("page:form.parent")} options={parentOptions} />
+          <SelectInputField
+            name="parentId"
+            label={t("page:form.parent")}
+            options={parentOptions}
+            shouldPortal={true}
+          />
         )}
         <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
         <SubmitButton>{submitLabel}</SubmitButton>

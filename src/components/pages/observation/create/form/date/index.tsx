@@ -37,6 +37,7 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
               name="dateAccuracy"
               label={t("form:date_accuracy")}
               options={translatedDateOptions}
+              shouldPortal={true}
             />
           </SimpleGrid>
           <SimpleGrid columns={showTags ? { base: 1, md: 2 } : 1} spacing={4}>

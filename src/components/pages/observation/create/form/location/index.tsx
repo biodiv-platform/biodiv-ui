@@ -215,7 +215,11 @@ const LocationPicker = ({ isRequired = true }) => {
               )}
             </FormControl>
           </Box>
-          <SelectInputField {...FK.locationScale} options={translatedLocationOptions} />
+          <SelectInputField
+            {...FK.locationScale}
+            options={translatedLocationOptions}
+            shouldPortal={true}
+          />
         </SimpleGrid>
         <CoordinatesInput
           show={isOpen}
