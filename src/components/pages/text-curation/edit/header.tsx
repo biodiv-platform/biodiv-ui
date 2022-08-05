@@ -36,7 +36,7 @@ const Actions = () => {
           leftIcon={<DownloadIcon />}
           onClick={() => handleOnDownload(datasetId, rows.filter.curatedStatus)}
         >
-          Download
+          {t("text-curation:Download")}
         </Button>
       )}
       <Select onChange={handleOnChange} size="sm">
