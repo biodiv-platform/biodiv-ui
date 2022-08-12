@@ -1,5 +1,5 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Flex, Image, Input, Link, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Input, Link, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
@@ -20,8 +20,10 @@ const GroupListItem = () => {
   }, 200);
 
   return (
-    <MenuList h="18rem" maxW="360px" w="90%" overflowY="scroll">
-      <Input w="20rem" onChange={onQuery} placeholder={t("header:search")} />
+    <MenuList h="18rem" w="360px" overflowY="scroll">
+      <Box px={2}>
+        <Input w="full" onChange={onQuery} placeholder={t("header:search")} />
+      </Box>
       <MenuItem minH="3rem">
         <LocalLink href="/group/list" prefixGroup={true}>
           <Link w="full">
