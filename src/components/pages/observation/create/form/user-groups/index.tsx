@@ -1,7 +1,9 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Collapse, Input, useDisclosure } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetUserGroupList } from "@services/usergroup.service";
+import debounce from "debounce-promise";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
 
@@ -17,9 +19,20 @@ export default function UserGroups({ name, label }: IUserGroupsProps) {
   const [userGroups, setUserGroups] = useState<any[]>([]);
   const { isOpen, onToggle } = useDisclosure();
   const { field } = useController({ name });
+  const { t } = useTranslation();
+  const [filterGroups, setFilterGroups] = useState<any[]>([]);
+
+  const onQuery = debounce((e) => {
+    setFilterGroups(
+      userGroups?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
+    );
+  }, 200);
 
   useEffect(() => {
-    axGetUserGroupList().then(({ data }) => setUserGroups(data || []));
+    axGetUserGroupList().then(({ data }) => {
+      setUserGroups(data || []);
+      setFilterGroups(data || []);
+    });
   }, []);
 
   return (
@@ -28,7 +41,12 @@ export default function UserGroups({ name, label }: IUserGroupsProps) {
         👥 {label} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Button>
       <Collapse in={isOpen} unmountOnExit={true}>
-        <CheckBoxItems options={userGroups} defaultValue={field.value} onChange={field.onChange} />
+        <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
+        <CheckBoxItems
+          options={filterGroups}
+          defaultValue={field.value}
+          onChange={field.onChange}
+        />
       </Collapse>
     </Box>
   );
