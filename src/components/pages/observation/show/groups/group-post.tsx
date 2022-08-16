@@ -29,7 +29,7 @@ export default function GroupPost({
   saveUserGroupsFunc,
   columns
 }: IGroupPostProps) {
-  if (groups.length == 0) return null;
+  if (groups?.length == 0) return null;
 
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
   const [selectedGroups, setSelectedGroups] = useState<any>(
