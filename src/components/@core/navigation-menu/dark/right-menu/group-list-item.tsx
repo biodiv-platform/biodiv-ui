@@ -1,18 +1,29 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Flex, Image, Link, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Input, Link, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
+import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useState } from "react";
 
 const GroupListItem = () => {
   const { groups, currentGroup } = useGlobalState();
   const { t } = useTranslation();
   const removePrefix = currentGroup.webAddress?.startsWith(SITE_CONFIG.SITE.URL);
+  const [filterGroups, setFilterGroups] = useState<any>(groups);
+
+  const onQuery = debounce((e) => {
+    setFilterGroups(
+      groups?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
+    );
+  }, 200);
 
   return (
-    <MenuList h="18rem" maxW="360px" w="90%" overflowY="scroll">
+    <MenuList h="18rem" w="360px" overflowY="scroll">
+      <Box px={2}>
+        <Input w="full" onChange={onQuery} placeholder={t("header:search")} />
+      </Box>
       <MenuItem minH="3rem">
         <LocalLink href="/group/list" prefixGroup={true}>
           <Link w="full">
@@ -20,7 +31,8 @@ const GroupListItem = () => {
           </Link>
         </LocalLink>
       </MenuItem>
-      {groups?.map((g) => {
+
+      {filterGroups?.map((g) => {
         const groupURL: any = removePrefix
           ? g?.webAddress?.replace(SITE_CONFIG.SITE.URL, "")
           : g?.webAddress;

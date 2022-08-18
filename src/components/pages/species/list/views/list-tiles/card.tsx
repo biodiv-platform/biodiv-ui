@@ -27,7 +27,14 @@ export default function GridViewCard({ o, getCheckboxProps }) {
   return (
     <Box className="hover-box fade">
       {canEdit && getCheckboxProps && (
-        <Checkbox m={2} {...getCheckboxProps({ value: o.id })}></Checkbox>
+        <Checkbox
+          position="absolute"
+          bg="white"
+          m={2}
+          zIndex={1}
+          borderRadius={2}
+          {...getCheckboxProps({ value: o.id })}
+        ></Checkbox>
       )}
 
       <LocalLink href={`/species/show/${o.id}`} prefixGroup={true}>

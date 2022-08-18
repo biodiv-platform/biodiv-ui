@@ -1,10 +1,11 @@
-import { Box, Button, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Collapse, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 
@@ -28,6 +29,8 @@ export default function GroupPost({
   saveUserGroupsFunc,
   columns
 }: IGroupPostProps) {
+  if (groups?.length == 0) return null;
+
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
   const [selectedGroups, setSelectedGroups] = useState<any>(
     selectedDefault?.map((g) => g?.id?.toString())
@@ -35,6 +38,14 @@ export default function GroupPost({
   const { t } = useTranslation();
   const { isOpen, onToggle, onClose } = useDisclosure();
   const editButtonRef: any = useRef(null);
+
+  const [filterGroups, setFilterGroups] = useState(groups);
+
+  const onQuery = debounce((e) => {
+    setFilterGroups(
+      groups?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
+    );
+  }, 200);
 
   const handleOnSave = async () => {
     const groupsList = selectedGroups.map((i) => Number(i));
@@ -89,10 +100,11 @@ export default function GroupPost({
       </SimpleGrid>
 
       <Collapse in={isOpen} unmountOnExit={true}>
+        <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
         {groups?.length > 0 ? (
           <CheckBoxItems
             gridColumns={columns || defaultGridColumns}
-            options={groups}
+            options={filterGroups}
             defaultValue={selectedGroups}
             onChange={setSelectedGroups}
           />
