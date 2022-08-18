@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
+import UserGroups from "@components/pages/observation/create/form/user-groups";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
@@ -126,6 +127,7 @@ export default function DocumentCreatePageComponent({
           />
           <Metadata bibFields={bibField.fields} />
           <Coverage speciesGroups={speciesGroups} habitats={habitats} />
+          <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
           <SubmitButton leftIcon={<CheckIcon />}>{t("document:create.title")}</SubmitButton>
         </form>
       </FormProvider>
