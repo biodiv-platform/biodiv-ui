@@ -1,11 +1,13 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import UserAbout from "./about/user-about";
 import UserLocationMap from "./about/user-location-map";
 import ObservationTab from "./observation";
 import UserGroupListTab from "./usergroup";
+
+const UserAbout = dynamic(() => import("./about/user-about"), { ssr: false });
 
 export default function UserInfoTabs({ user }) {
   const { t } = useTranslation();
