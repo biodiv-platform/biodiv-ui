@@ -66,12 +66,7 @@ export default function View({ d }) {
             children={d?.description}
           />
           <Flex alignItems="flex-end" justifyContent="space-between">
-            <MetaBlock
-              icon={<PeopleIcon />}
-              tooltip="Contributors"
-              isHtml={true}
-              children="Contributors"
-            />
+            <MetaBlock icon={<PeopleIcon />} tooltip="Curators" isHtml={true} children="Curators" />
             <AvatarGroup size="sm" max={10}>
               {d.contributors?.map((u) => (
                 <Avatar
@@ -86,9 +81,9 @@ export default function View({ d }) {
           <Flex alignItems="flex-end" justifyContent="space-between">
             <MetaBlock
               icon={<PeopleIcon />}
-              tooltip="Validators"
+              tooltip="Verifiers"
               isHtml={true}
-              children="Validators"
+              children="Verifiers"
             />
             <AvatarGroup size="sm" max={10}>
               {d.validators?.map((u) => (
