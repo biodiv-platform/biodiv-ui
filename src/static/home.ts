@@ -97,7 +97,7 @@ export const FEATURES = [
   {
     icon: "landscapes",
     title: "landscapes",
-    link: "/landscape",
+    link: "/landscape/list",
     tag: ["pa", "ibp"]
   },
   {

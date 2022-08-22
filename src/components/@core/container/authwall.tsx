@@ -8,11 +8,10 @@ import {
   Spinner,
   useDisclosure
 } from "@chakra-ui/react";
+import SignInForm from "@components/pages/login/form";
 import { AUTHWALL } from "@static/events";
 import React, { Suspense, useState } from "react";
 import { emit, useListener } from "react-gbus";
-
-const SignInForm = React.lazy(() => import("@components/pages/login/form"));
 
 export default function AuthWall() {
   const { isOpen, onOpen, onClose } = useDisclosure();

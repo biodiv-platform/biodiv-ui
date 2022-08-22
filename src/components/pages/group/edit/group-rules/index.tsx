@@ -6,12 +6,12 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import { formatGroupRules } from "@utils/userGroup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import AddGroupRulesForm from "./group-rules-form";
 import GroupRulesTable from "./group-rules-table";
+import { formatGroupRules } from "./utils";
 
 export default function GroupRules({ userGroupId, rules }) {
   const { t } = useTranslation();

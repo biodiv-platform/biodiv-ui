@@ -1,7 +1,7 @@
 import { ObservationFilterProvider } from "@components/pages/observation/common/use-observation-filter";
 import ObservationListPageComponent from "@components/pages/observation/list";
+import { axGroupList } from "@services/app.service";
 import { axGetListData, axGetObservationListConfig } from "@services/observation.service";
-import { axGroupList } from "@services/usergroup.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
