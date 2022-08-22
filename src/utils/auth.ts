@@ -1,6 +1,5 @@
 import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
-import { getAuthorizedUserGroupById } from "@services/usergroup.service";
 import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";
 import B64URL from "base64-url";
@@ -92,15 +91,6 @@ export const hasAccess = (allowedRoles: Role[], ctx?): boolean => {
     }
   }
   return false;
-};
-
-export const hasUgAccess = async (ctx?) => {
-  const u = getParsedUser(ctx);
-  if (u?.id) {
-    const { data } = await getAuthorizedUserGroupById();
-    return data;
-  }
-  return { idAdmin: false, ugList: [] };
 };
 
 /**

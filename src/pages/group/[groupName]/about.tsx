@@ -1,11 +1,8 @@
 import { throwUnauthorized } from "@components/auth/auth-redirect";
 import AboutGroupComponent from "@components/pages/group/about";
+import { axGroupList } from "@services/app.service";
 import { axGetspeciesGroups } from "@services/observation.service";
-import {
-  axGetGroupAdministratorsByGroupId,
-  axGetUserGroupById,
-  axGroupList
-} from "@services/usergroup.service";
+import { axGetGroupAdministratorsByGroupId, axGetUserGroupById } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";

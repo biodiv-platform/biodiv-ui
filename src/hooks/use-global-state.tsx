@@ -1,10 +1,8 @@
 import { UserGroupIbpExtended } from "@interfaces/custom";
-import { axGetTree } from "@services/pages.service";
-import { axCheckUserGroupMember } from "@services/usergroup.service";
+import { axCheckUserGroupMember } from "@services/app.service";
+import { axGetTree } from "@services/app.service";
 import { AUTHWALL } from "@static/events";
 import { getParsedUser } from "@utils/auth";
-import { getLanguageId } from "@utils/i18n";
-import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { useDeepCompareMemo } from "use-deep-compare";
@@ -36,9 +34,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [user, setUser] = useState<any>(initialState.user || {});
   const [pages, setPages] = useState<any[]>([]);
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
-  const { lang } = useTranslation();
 
-  const languageId = useMemo(() => getLanguageId(lang)?.ID, [lang]);
   const isLoggedIn = useMemo(() => !!user.id, [user]);
 
   const fetchIsCurrentGroupMember = async () => {
@@ -55,9 +51,9 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   useEffect(() => {
     axGetTree({
       userGroupId: initialState.currentGroup?.id,
-      languageId
+      languageId: initialState.languageId
     }).then(({ data }) => setPages(data));
-  }, [initialState.currentGroup?.id, languageId]);
+  }, [initialState.currentGroup?.id, initialState.languageId]);
 
   useListener(() => {
     setUser(getParsedUser());
@@ -80,9 +76,9 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
       setUser,
       isLoggedIn,
 
-      languageId
+      languageId: initialState.languageId
     }),
-    [value, initialState, pages, user, isLoggedIn, isCurrentGroupMember, languageId]
+    [value, initialState, pages, user, isLoggedIn, isCurrentGroupMember, initialState.languageId]
   );
 
   return <GlobalStateContext.Provider value={valueMemo}>{children}</GlobalStateContext.Provider>;

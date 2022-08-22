@@ -3,8 +3,8 @@ import {
   DEFAULT_PARAMS
 } from "@components/pages/datatable/common/use-datatableObservation-filter";
 import DataTableShowPageComponent from "@components/pages/datatable/show";
+import { axGroupList } from "@services/app.service";
 import { axGetObservationByDatatableId, axGetspeciesGroups } from "@services/observation.service";
-import { axGroupList } from "@services/usergroup.service";
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";

@@ -1,5 +1,6 @@
 import { authorizedPageSSP, throwUnauthorized } from "@components/auth/auth-redirect";
 import { Role } from "@interfaces/custom";
+import { axGroupList } from "@services/app.service";
 import { axGetspeciesGroups } from "@services/observation.service";
 import {
   axGetAllCustomFields,
@@ -7,8 +8,7 @@ import {
   axGetGroupEditInfoByGroupId,
   axGetGroupHompageDetails,
   axGetUserGroupCustomField,
-  axGetUserGroupRules,
-  axGroupList
+  axGetUserGroupRules
 } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";

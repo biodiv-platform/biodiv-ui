@@ -1,13 +1,8 @@
 import { Role } from "@interfaces/custom";
-import { DEFAULT_GROUP, ENDPOINT } from "@static/constants";
+import { ENDPOINT } from "@static/constants";
 import { hasAccess } from "@utils/auth";
-import { fetchWithCache } from "@utils/cached-fetch";
 import http, { plainHttp } from "@utils/http";
-import {
-  findCurrentUserGroup,
-  reorderRemovedGallerySetup,
-  transformUserGroupList
-} from "@utils/userGroup";
+import { reorderRemovedGallerySetup, transformUserGroupList } from "@utils/userGroup";
 
 import { axClearMemoryCache } from "./api.service";
 
@@ -28,18 +23,6 @@ export const axGetUserGroupById = async (userGroupId) => {
   } catch (e) {
     console.error(e);
     return { success: false, data: [] };
-  }
-};
-
-export const axGroupList = async (url?: string, lang?: string) => {
-  try {
-    const data = await fetchWithCache(`${ENDPOINT.USERGROUP}/v1/group/all`);
-    const groups = transformUserGroupList(data);
-    const currentGroup = url ? findCurrentUserGroup(groups, url, lang) : {};
-    return { success: true, groups, currentGroup };
-  } catch (e) {
-    console.error(e);
-    return { success: false, groups: [], currentGroup: DEFAULT_GROUP };
   }
 };
 
@@ -193,18 +176,6 @@ export const axVerifyRequest = async (token) => {
     console.error(e);
     return { success: false };
   }
-};
-
-export const axCheckUserGroupMember = async (userGroupId) => {
-  try {
-    if (userGroupId) {
-      const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/member/${userGroupId}`);
-      return data;
-    }
-  } catch (e) {
-    console.error(e);
-  }
-  return true;
 };
 
 export const axCheckUserGroupFounderOrAdmin = async (userGroupId, cleanCheck?) => {

@@ -8,7 +8,6 @@ import CheckIcon from "@icons/check";
 import { axAddUserGroupRule } from "@services/usergroup.service";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
-import { formatGroupRules } from "@utils/userGroup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -16,6 +15,7 @@ import * as Yup from "yup";
 
 import { RULES_TYPE } from "../../common/static";
 import RulesInputType from "./rules-input-type";
+import { formatGroupRules } from "./utils";
 
 export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }) {
   const { t } = useTranslation();
