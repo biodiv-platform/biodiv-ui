@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import MenuIcon from "@icons/menu";
 import { generateToC } from "@utils/pages";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import usePages from "../../common/sidebar/use-pages-sidebar";
 
@@ -30,12 +30,13 @@ const ToCContainer = styled.div`
 export function TableOfContents() {
   const { currentPage } = usePages();
   const { t } = useTranslation();
+  const showToC = useMemo(() => currentPage.content.includes("<h"), [currentPage.content]);
 
   useEffect(() => {
-    generateToC(".article", ".toc");
+    showToC && generateToC(".article", ".toc");
   }, [currentPage]);
 
-  return (
+  return showToC ? (
     <Popover placement="bottom-start">
       <PopoverTrigger>
         <Button variant="outline" size="sm" colorScheme="gray" bg="white" leftIcon={<MenuIcon />}>
@@ -48,5 +49,5 @@ export function TableOfContents() {
         </PopoverBody>
       </PopoverContent>
     </Popover>
-  );
+  ) : null;
 }

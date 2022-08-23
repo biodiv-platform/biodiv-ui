@@ -1,5 +1,5 @@
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
-import { preProcessContent } from "@utils/pages.util";
+import { preProcessContent } from "@utils/pages";
 import React from "react";
 
 export function Content({ html }) {

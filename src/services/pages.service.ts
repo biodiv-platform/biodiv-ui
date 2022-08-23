@@ -1,6 +1,6 @@
 import { ENDPOINT } from "@static/constants";
 import http, { formDataHeaders, plainHttp } from "@utils/http";
-import { treeToFlat } from "@utils/pages.util";
+import { treeToFlat } from "@utils/pages";
 import { nanoid } from "nanoid";
 
 export const axUploadEditorPageResource = async (blobInfo) => {
