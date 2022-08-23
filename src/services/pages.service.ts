@@ -84,3 +84,17 @@ export const axCreatePage = async (payload) => {
     return { success: false, data: {} };
   }
 };
+
+export const axRemovePageGalleryImage = async (pageId, galleryId) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.PAGES}/v1/page/gallery/remove/${pageId}/${galleryId}`
+    );
+
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+
+    return { success: false, data: {} };
+  }
+};

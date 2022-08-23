@@ -18,6 +18,7 @@
   },
   "dataset_description": "Maelezo ya Seti ya Data",
   "date_columns": "Safu za Tarehe",
+  "download": "Pakua",
   "edit": {
     "location": {
       "accuracy": "usahihi",
@@ -39,6 +40,7 @@
   "metadata": "Metadata",
   "sci_name_columns": "Safu za Jina la Kisayansi",
   "section_heading": {
+    "Temporal Data": "Data ya Muda",
     "curated_status": "Hali Iliyoratibiwa",
     "spatial_data": "Data ya anga",
     "taxonomic_data": "Data ya Taxonomic",

@@ -84,7 +84,8 @@ export const RESOURCE_SIZE = {
   PREVIEW: "?h=500",
   RECENT_THUMBNAIL: "?h=230",
   THUMBNAIL: "?h=34",
-  TWITTER: "?w=600&h=330&fit=center&preserve=true"
+  TWITTER: "?w=600&h=330&fit=center&preserve=true",
+  PAGE: "?w=1440&h=300&fit=center"
 };
 
 export const FORWARD_BLACKLIST = ["login", "register"];

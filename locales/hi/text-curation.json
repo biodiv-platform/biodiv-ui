@@ -18,6 +18,7 @@
   },
   "dataset_description": "डेटासेट विवरण",
   "date_columns": "दिनांक कॉलम",
+  "download": "डाउनलोड",
   "edit": {
     "location": {
       "accuracy": "शुद्धता",
@@ -39,6 +40,7 @@
   "metadata": "मेटाडाटा",
   "sci_name_columns": "वैज्ञानिक नाम कॉलम",
   "section_heading": {
+    "Temporal Data": "अस्थायी डेटा",
     "curated_status": "क्यूरेटेड स्थिति",
     "spatial_data": "स्थानिक डेटा",
     "taxonomic_data": "टैक्सोनोमिक डेटा",

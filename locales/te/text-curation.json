@@ -18,6 +18,7 @@
   },
   "dataset_description": "డేటాసెట్ వివరణ",
   "date_columns": "తేదీ నిలువు వరుసలు",
+  "download": "డౌన్‌లోడ్ చేయండి",
   "edit": {
     "location": {
       "accuracy": "ఖచ్చితత్వం",
@@ -39,6 +40,7 @@
   "metadata": "మెటాడేటా",
   "sci_name_columns": "శాస్త్రీయ నామ కాలమ్‌లు",
   "section_heading": {
+    "Temporal Data": "తాత్కాలిక డేటా",
     "curated_status": "క్యూరేటెడ్ స్థితి",
     "spatial_data": "ప్రాదేశిక డేటా",
     "taxonomic_data": "వర్గీకరణ డేటా",

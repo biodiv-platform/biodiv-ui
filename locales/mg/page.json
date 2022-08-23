@@ -8,15 +8,23 @@
   "form": {
     "content": "Votoatiny",
     "description": "Famaritana Metadata",
+    "gallery": "Gallery",
     "is_sidebar": "Asehoy amin'ny sidebar",
     "parent": "Pejy ray aman-dreny",
-    "title": "lohateny"
+    "title": "lohateny",
+    "type": {
+      "content": "Votoaty",
+      "redirect": "Redirect",
+      "title": "Type"
+    },
+    "url": "URL"
   },
   "mail": {
     "download_logs": "Download Logs",
     "sent": "Eo am-panaovana ny fampidinana. \nMisy mailaka halefa miaraka amin'ny rohy fampidinana, izay azo idirana ihany koa"
   },
   "no_parent": "Tsy ray aman-dreny",
+  "quick_navigation": "Fikarohana haingana",
   "remove": {
     "description": "Azonao antoka ve izany? Tsy azonao atao ny manaisotra io hetsika io aorian'izay.",
     "success": "Nesorina tamim-pahombiazana ny pejy",

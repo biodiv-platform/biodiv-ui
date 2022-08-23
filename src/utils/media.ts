@@ -3,17 +3,19 @@ import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { ASSET_TYPES } from "@static/observation-create";
 
 export const RESOURCE_CTX = {
-  OBSERVATION: "OBSERVATION",
   MY_UPLOADS: "MY_UPLOADS",
+  OBSERVATION: "OBSERVATION",
+  PAGES: "PAGES",
   SPECIES: "SPECIES",
   USERGROUPS: "USERGROUPS"
 };
 
 const RESOURCE_CTX_MAP = {
-  SPECIES: "img",
-  OBSERVATION: "observations",
-  SPECIES_FIELD: "img",
   MY_UPLOADS: "myUploads",
+  OBSERVATION: "observations",
+  PAGES: "pages",
+  SPECIES_FIELD: "img",
+  SPECIES: "img",
   USERGROUPS: "userGroups"
 };
 

@@ -11,5 +11,15 @@ export const getServerSideProps = async (ctx) => {
 
   if (!props.success) return { notFound: true };
 
+  if (props.data.url) {
+    return {
+      redirect: {
+        permanant: false,
+        destination: props.data.url
+      },
+      props: {}
+    };
+  }
+
   return { props };
 };
