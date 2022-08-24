@@ -25,7 +25,7 @@ const PagesListItem = ({ page, isParent }) => {
   );
 
   return (
-    <Box>
+    <div>
       <Box
         rounded="md"
         bg={isActive ? "blue.100" : "none"}
@@ -49,7 +49,7 @@ const PagesListItem = ({ page, isParent }) => {
         )}
       </Box>
       {isExpanded && hasChildren && <PagesList items={page.children} key={page.id} />}
-    </Box>
+    </div>
   );
 };
 

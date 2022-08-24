@@ -89,7 +89,6 @@ export const PageGalleryField = ({
     if (!files?.length) return;
 
     setIsProcessing(true);
-
     for (const file of files) {
       const [fileSm] = await resizeImage(file);
       const { success, data } = await axUploadResource(new File([fileSm], file.name), "pages");
@@ -99,13 +98,11 @@ export const PageGalleryField = ({
         notification(t("user:update_error"));
       }
     }
-
     setIsProcessing(false);
   };
+
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
-    accept: {
-      "image/*": [".jpg", ".jpeg", ".png"]
-    },
+    accept: { "image/*": [".jpg", ".jpeg", ".png"] },
     multiple: true,
     onDrop
   });

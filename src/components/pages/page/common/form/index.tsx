@@ -78,7 +78,7 @@ export default function PageForm({
     defaultValues
   });
 
-  const isPageTypeRedirect = hForm.watch("pageType") === PAGE_TYPE_OPTIONS[1].value;
+  const isPageTypeRedirect = hForm.watch("pageType") === PAGE_TYPES.REDIRECT;
 
   return (
     <FormProvider {...hForm}>

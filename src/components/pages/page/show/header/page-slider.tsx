@@ -23,7 +23,7 @@ export function PageSlider({ images, description }) {
           }}
         >
           {images.map((image) => (
-            <SplideSlide key={image.fileName}>
+            <SplideSlide key={image.id}>
               <img
                 src={getResourceThumbnail(RESOURCE_CTX.PAGES, image.fileName, RESOURCE_SIZE.PAGE)}
                 alt={image.fileName}
