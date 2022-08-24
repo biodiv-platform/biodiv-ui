@@ -35,6 +35,11 @@
       "validity": "ਵਿਗਿਆਨਕ ਨਾਮ ਦੀ ਵੈਧਤਾ"
     }
   },
+  "list_page": {
+    "curators": "ਕਿਊਰੇਟਰ",
+    "page_heading": "ਡਾਟਾਸ਼ੀਟਾਂ",
+    "verfiers": "ਪੁਸ਼ਟੀਕਰਤਾ"
+  },
   "location_columns": "ਟਿਕਾਣਾ ਕਾਲਮ",
   "metadata": "ਮੈਟਾਡਾਟਾ",
   "sci_name_columns": "ਵਿਗਿਆਨਕ ਨਾਮ ਕਾਲਮ",

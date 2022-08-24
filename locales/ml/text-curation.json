@@ -35,6 +35,11 @@
       "validity": "ശാസ്ത്രീയ നാമത്തിന്റെ സാധുത"
     }
   },
+  "list_page": {
+    "curators": "ക്യൂറേറ്റർമാർ",
+    "page_heading": "ഡാറ്റാഷീറ്റുകൾ",
+    "verfiers": "വെരിഫയറുകൾ"
+  },
   "location_columns": "ലൊക്കേഷൻ കോളങ്ങൾ",
   "metadata": "മെറ്റാഡാറ്റ",
   "sci_name_columns": "ശാസ്ത്രീയ നാമ നിരകൾ",

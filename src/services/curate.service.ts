@@ -73,3 +73,12 @@ export const axDownloadCsv = async (id, curatedStatus) => {
     return { succces: false, data: [] };
   }
 };
+
+export const axGetDataSheetInfo = async () => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.CURATE}/list`);
+    return { succes: true, data: data };
+  } catch (e) {
+    return { succces: false, data: [] };
+  }
+};

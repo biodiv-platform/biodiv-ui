@@ -35,6 +35,11 @@
       "validity": "Validité du nom scientifique"
     }
   },
+  "list_page": {
+    "curators": "Conservateurs",
+    "page_heading": "Feuilles de données",
+    "verfiers": "Vérificateurs"
+  },
   "location_columns": "Colonnes d'emplacement",
   "metadata": "Métadonnées",
   "sci_name_columns": "Colonnes des noms scientifiques",

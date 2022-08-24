@@ -35,6 +35,11 @@
       "validity": "वैज्ञानिक नावाची वैधता"
     }
   },
+  "list_page": {
+    "curators": "क्युरेटर्स",
+    "page_heading": "डेटाशीट",
+    "verfiers": "पडताळणी करणारे"
+  },
   "location_columns": "स्थान स्तंभ",
   "metadata": "मेटाडेटा",
   "sci_name_columns": "वैज्ञानिक नाव स्तंभ",

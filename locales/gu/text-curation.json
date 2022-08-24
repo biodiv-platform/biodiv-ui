@@ -35,6 +35,11 @@
       "validity": "વૈજ્ઞાનિક નામની માન્યતા"
     }
   },
+  "list_page": {
+    "curators": "ક્યુરેટર્સ",
+    "page_heading": "માહિતી પત્ર",
+    "verfiers": "ચકાસણીકર્તાઓ"
+  },
   "location_columns": "સ્થાન કૉલમ",
   "metadata": "મેટાડેટા",
   "sci_name_columns": "વૈજ્ઞાનિક નામ કૉલમ",

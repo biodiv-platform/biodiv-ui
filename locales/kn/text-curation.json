@@ -35,6 +35,11 @@
       "validity": "ವೈಜ್ಞಾನಿಕ ಹೆಸರಿನ ಸಿಂಧುತ್ವ"
     }
   },
+  "list_page": {
+    "curators": "ಮೇಲ್ವಿಚಾರಕರು",
+    "page_heading": "ಡೇಟಾಶೀಟ್‌ಗಳು",
+    "verfiers": "ಪರಿಶೀಲಕರು"
+  },
   "location_columns": "ಸ್ಥಳ ಕಾಲಮ್‌ಗಳು",
   "metadata": "ಮೆಟಾಡೇಟಾ",
   "sci_name_columns": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು ಅಂಕಣಗಳು",

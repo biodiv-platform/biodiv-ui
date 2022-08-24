@@ -35,6 +35,11 @@
       "validity": "বৈজ্ঞানিক নামের বৈধতা"
     }
   },
+  "list_page": {
+    "curators": "কিউরেটর",
+    "page_heading": "ডেটাশিট",
+    "verfiers": "যাচাইকারী"
+  },
   "location_columns": "অবস্থান কলাম",
   "metadata": "মেটাডেটা",
   "sci_name_columns": "বৈজ্ঞানিক নাম কলাম",

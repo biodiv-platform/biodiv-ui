@@ -35,6 +35,11 @@
       "validity": "Uhalali wa jina la kisayansi"
     }
   },
+  "list_page": {
+    "curators": "Wahifadhi",
+    "page_heading": "Laha za data",
+    "verfiers": "Vithibitishaji"
+  },
   "location_columns": "Safu wima za Mahali",
   "metadata": "Metadata",
   "sci_name_columns": "Safu za Jina la Kisayansi",

@@ -36,6 +36,11 @@
       "validity": "Validity of scientific name"
     }
   },
+  "list_page": {
+    "curators": "Curators",
+    "page_heading": "Datasheets",
+    "verfiers": "Verifiers"
+  },
   "location_columns": "Location Columns",
   "metadata": "Metadata",
   "sci_name_columns": "Scientific Name Columns",

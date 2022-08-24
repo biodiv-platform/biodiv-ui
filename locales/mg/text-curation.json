@@ -35,6 +35,11 @@
       "validity": "Valiny ny anarana siantifika"
     }
   },
+  "list_page": {
+    "curators": "Mpiandraikitra",
+    "page_heading": "Takelaka data",
+    "verfiers": "Verifiers"
+  },
   "location_columns": "Tsanganana toerana",
   "metadata": "Metadata",
   "sci_name_columns": "Tsanganana anarana siantifika",
