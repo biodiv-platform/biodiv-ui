@@ -35,6 +35,11 @@
       "validity": "శాస్త్రీయ నామం యొక్క చెల్లుబాటు"
     }
   },
+  "list_page": {
+    "curators": "క్యూరేటర్లు",
+    "page_heading": "డేటా షీట్లు",
+    "verfiers": "వెరిఫైయర్లు"
+  },
   "location_columns": "స్థాన నిలువు వరుసలు",
   "metadata": "మెటాడేటా",
   "sci_name_columns": "శాస్త్రీయ నామ కాలమ్‌లు",

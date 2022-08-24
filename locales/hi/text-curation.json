@@ -35,6 +35,11 @@
       "validity": "वैज्ञानिक नाम की वैधता"
     }
   },
+  "list_page": {
+    "curators": "क्यूरेटर",
+    "page_heading": "डाटा शीट",
+    "verfiers": "प्रमाणक"
+  },
   "location_columns": "स्थान कॉलम",
   "metadata": "मेटाडाटा",
   "sci_name_columns": "वैज्ञानिक नाम कॉलम",

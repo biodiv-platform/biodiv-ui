@@ -35,6 +35,11 @@
       "validity": "ବ scientific ଜ୍ଞାନିକ ନାମର ବ id ଧତା |"
     }
   },
+  "list_page": {
+    "curators": "କ୍ୟୁରେଟର",
+    "page_heading": "ଡାଟାସିଟ୍",
+    "verfiers": "ଯାଞ୍ଚକାରୀ |"
+  },
   "location_columns": "ଅବସ୍ଥାନ ସ୍ତମ୍ଭ",
   "metadata": "ମେଟାଡାଟା |",
   "sci_name_columns": "ବ Scientific ଜ୍ଞାନିକ ନାମ ସ୍ତମ୍ଭଗୁଡିକ |",
