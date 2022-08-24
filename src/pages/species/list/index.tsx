@@ -1,6 +1,7 @@
 import SpeciesListPageComponent from "@components/pages/species/list";
 import { SpeciesListProvider } from "@components/pages/species/list/use-species-list";
 import SITE_CONFIG from "@configs/site-config";
+import { axGroupList } from "@services/app.service";
 import { axGetObservationListConfig } from "@services/observation.service";
 import {
   axGetAllFieldsMeta,
@@ -8,7 +9,6 @@ import {
   axGetSpeciesList
 } from "@services/species.service";
 import { axGetSpeciesGroupList } from "@services/taxonomy.service";
-import { axGroupList } from "@services/usergroup.service";
 import { DEFAULT_SPECIES_FILTER } from "@static/species";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";

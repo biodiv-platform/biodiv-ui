@@ -1,8 +1,8 @@
 import { UserListContextProvider } from "@components/pages/user/common/use-user-filter";
 import UserListComponent from "@components/pages/user/list/user-list-data";
 import { Role } from "@interfaces/custom";
+import { axGroupList } from "@services/app.service";
 import { axGetUserList } from "@services/user.service";
-import { axGroupList } from "@services/usergroup.service";
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import { DEFAULT_FILTER } from "@static/user";
 import { hasAccess } from "@utils/auth";

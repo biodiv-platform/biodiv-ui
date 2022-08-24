@@ -1,12 +1,12 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import DataTableCreatePageComponent from "@components/pages/datatable/create";
 import { Role } from "@interfaces/custom";
+import { axGroupList } from "@services/app.service";
 import {
   axGetCreateObservationPageData,
   axGetObservationListConfig,
   axGetspeciesGroups
 } from "@services/observation.service";
-import { axGroupList } from "@services/usergroup.service";
 import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";

@@ -9,11 +9,10 @@ import React, { useMemo } from "react";
 export default function Sidebar({ resource }) {
   const { t } = useTranslation();
 
-  const bgThumb = useMemo(
-    () =>
-      getResourceThumbnail(RESOURCE_CTX.OBSERVATION, resource?.fileName, RESOURCE_SIZE.THUMBNAIL),
-    [resource?.fileName]
-  );
+  const bgThumb = useMemo(() => {
+    const resourceType = resource.authorId ? RESOURCE_CTX.OBSERVATION : RESOURCE_CTX.USERGROUPS;
+    return getResourceThumbnail(resourceType, resource?.fileName, RESOURCE_SIZE.THUMBNAIL);
+  }, [resource?.fileName]);
 
   return (
     <BlurBox bg={bgThumb} fallbackColor="var(--chakra-colors-gray-800)">

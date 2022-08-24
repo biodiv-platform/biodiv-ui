@@ -13,7 +13,7 @@ export default function CarouselNew({ featured }) {
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
-      loop: true,
+      loop: featured.length > 1,
       slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
     },
     [

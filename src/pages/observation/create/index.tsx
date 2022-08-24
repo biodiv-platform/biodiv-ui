@@ -1,9 +1,9 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import ObservationCreateNextComponent from "@components/pages/observation/create-next";
 import { Role } from "@interfaces/custom";
+import { axGroupList } from "@services/app.service";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
-import { axGroupList } from "@services/usergroup.service";
 import { axGetLangList } from "@services/utility.service";
 import { DB_CONFIG } from "@static/observation-create";
 import { absoluteUrl } from "@utils/basic";
