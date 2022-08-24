@@ -29,7 +29,7 @@ const MetaBlock = ({ icon, children, isHtml, tooltip }: MetaBlockProps) =>
     </HStack>
   ) : null;
 
-export default function View({ d }) {
+export default function View({ metadata }) {
   const { t } = useTranslation();
   return (
     <Flex
@@ -40,35 +40,37 @@ export default function View({ d }) {
       overflow="hidden"
     >
       <Box p={4} w="full">
-        {/* Title */}
         <Flex justifyContent="space-between" mb={2}>
-          <LocalLink href={`/text-curation/show/${d.id}`} prefixGroup={true}>
+          <LocalLink href={`/text-curation/show/${metadata.id}`} prefixGroup={true}>
             <a>
               <HStack alignItems="center" spacing={4}>
                 <Heading
                   fontSize="lg"
                   className="elipsis-2"
                   dangerouslySetInnerHTML={{
-                    __html: getInjectableHTML(d?.title || t("common:unknown"))
+                    __html: getInjectableHTML(metadata?.title || t("common:unknown"))
                   }}
                 />
               </HStack>
             </a>
           </LocalLink>
         </Flex>
-
-        {/* Meta Data */}
         <Stack color="gray.600">
           <MetaBlock
             icon={<MessageIcon />}
             tooltip={t("form:description.title")}
             isHtml={true}
-            children={d?.description}
+            children={metadata?.description}
           />
           <Flex alignItems="flex-end" justifyContent="space-between">
-            <MetaBlock icon={<PeopleIcon />} tooltip="Curators" isHtml={true} children="Curators" />
+            <MetaBlock
+              icon={<PeopleIcon />}
+              tooltip={t("text-curation:list_page.curators")}
+              isHtml={true}
+              children={t("text-curation:list_page.curators")}
+            />
             <AvatarGroup size="sm" max={10}>
-              {d.contributors?.map((u) => (
+              {metadata.contributors?.map((u) => (
                 <Avatar
                   key={u.id}
                   name={u.name}
@@ -81,12 +83,12 @@ export default function View({ d }) {
           <Flex alignItems="flex-end" justifyContent="space-between">
             <MetaBlock
               icon={<PeopleIcon />}
-              tooltip="Verifiers"
+              tooltip={t("text-curation:list_page.verfiers")}
               isHtml={true}
-              children="Verifiers"
+              children={t("text-curation:list_page.verfiers")}
             />
             <AvatarGroup size="sm" max={10}>
-              {d.validators?.map((u) => (
+              {metadata.validators?.map((u) => (
                 <Avatar
                   key={u.id}
                   name={u.name}
