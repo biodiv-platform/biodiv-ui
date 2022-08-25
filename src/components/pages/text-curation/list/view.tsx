@@ -1,4 +1,14 @@
-import { Avatar, AvatarGroup, Box, Flex, Heading, HStack, Stack } from "@chakra-ui/react";
+import {
+  Avatar,
+  AvatarGroup,
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Progress,
+  Stack,
+  Text
+} from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import MessageIcon from "@icons/message";
 import PeopleIcon from "@icons/people";
@@ -98,6 +108,13 @@ export default function View({ metadata }) {
               ))}
             </AvatarGroup>
           </Flex>
+
+          <HStack>
+            <Progress value={metadata.percentageCurated} width="sm" colorScheme="green" />
+            <Text>
+              {metadata.percentageCurated}% {t("text-curation:curation_status.curated")}
+            </Text>
+          </HStack>
         </Stack>
       </Box>
     </Flex>
