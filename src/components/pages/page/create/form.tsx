@@ -13,19 +13,19 @@ const defaultValues = {
   content: "",
   description: null,
   url: null,
+  parentId: 0,
+  sticky: true,
   pageType: PAGE_TYPES.CONTENT
 };
 
 export default function PageCreateForm(): JSX.Element {
   const { t } = useTranslation();
-  const { user, currentGroup, languageId } = useGlobalState();
+  const { user, currentGroup, languageId, getPageTree } = useGlobalState();
   const router = useLocalRouter();
 
   const handleOnPageEdit = async (values) => {
     const payload = transformPagePayload(values, {
       date: dateToUTC().format(),
-      parentId: 0,
-      sticky: true,
       pageIndex: 0,
       showInFooter: false,
       userGroupId: currentGroup.id,
@@ -33,8 +33,10 @@ export default function PageCreateForm(): JSX.Element {
       autherId: user?.id,
       autherName: user?.name
     });
+
     const { success, data } = await axCreatePage(payload);
     if (success) {
+      await getPageTree();
       notification(t("page:create.success"), NotificationType.Success);
       router.push(`/page/show/${data?.id}`, true);
     } else {

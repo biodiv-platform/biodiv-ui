@@ -23,8 +23,6 @@ export const transformPagePayload = (payload, extraProps = {}) => {
     galleryData,
     userIbp: undefined,
     languageId: undefined,
-    parentId: undefined,
-    pageIndex: undefined,
     date: undefined,
     [resetContentKey]: "",
     ...extraProps

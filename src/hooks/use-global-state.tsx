@@ -21,6 +21,7 @@ interface GlobalStateContextProps {
 
   pages?;
   setPages?;
+  getPageTree?;
 }
 
 interface GlobalStateProviderProps {
@@ -48,11 +49,20 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
     fetchIsCurrentGroupMember();
   }, [initialState.currentGroup, user]);
 
+  const getPageTree = async () => {
+    try {
+      const { data } = await axGetTree({
+        userGroupId: initialState.currentGroup?.id,
+        languageId: initialState.languageId
+      });
+      setPages(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
-    axGetTree({
-      userGroupId: initialState.currentGroup?.id,
-      languageId: initialState.languageId
-    }).then(({ data }) => setPages(data));
+    getPageTree();
   }, [initialState.currentGroup?.id, initialState.languageId]);
 
   useListener(() => {
@@ -71,6 +81,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
 
       pages,
       setPages,
+      getPageTree,
 
       user,
       setUser,
