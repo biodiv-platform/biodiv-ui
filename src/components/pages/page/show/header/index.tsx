@@ -16,7 +16,9 @@ export const PageHeader = ({ page }) => (
       h="300px"
       position="relative"
     >
-      <PageSlider images={page.galleryData} description={page.description} />
+      {page.galleryData?.length ? (
+        <PageSlider images={page.galleryData} description={page.description} />
+      ) : null}
       <PageHeading description={page.description}>{page.title}</PageHeading>
     </Box>
     <PageOptions title={page.title} pageId={page.id} />
