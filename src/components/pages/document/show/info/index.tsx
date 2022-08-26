@@ -124,6 +124,13 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
           updateFunc={axUpdateDocumentTags}
         />
       )
+    },
+    {
+      title: "document:bib.url",
+      value: document?.url,
+      cell: documentLicense && (
+        <ExternalBlueLink href={document?.url}>{document?.url}</ExternalBlueLink>
+      )
     }
   ];
 
