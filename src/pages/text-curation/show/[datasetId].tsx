@@ -24,13 +24,14 @@ export const getServerSideProps = async (ctx) => {
   const { data } = await axShowDataset(ctx.query.datasetId);
 
   const user = getParsedUser(ctx);
-  const userName = user.name;
-  const canEdit =
-    data.contributors.includes(user.id.toString()) ||
-    hasAccess([Role.Admin], ctx) ||
-    data.validators.includes(user.id.toString());
 
-  const canValidate = data.validators.includes(user.id.toString());
+  const userName = Object.keys(user).length === 0 ? "" : user.name;
+  const canEdit =
+    data.contributors.includes(user?.id.toString()) ||
+    hasAccess([Role.Admin], ctx) ||
+    data.validators.includes(user?.id.toString());
+
+  const canValidate = data.validators.includes(user?.id?.toString());
 
   return {
     props: {
@@ -38,7 +39,8 @@ export const getServerSideProps = async (ctx) => {
       datasetId: ctx.query.datasetId,
       canEdit,
       userName,
-      canValidate
+      canValidate,
+      user
     }
   };
 };
