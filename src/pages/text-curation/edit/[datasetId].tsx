@@ -1,4 +1,4 @@
-import { throwUnauthorized } from "@components/auth/auth-redirect";
+import { authorizedPageSSP, throwUnauthorized } from "@components/auth/auth-redirect";
 import { CurateEditProvider } from "@components/pages/text-curation/edit/use-curate-edit";
 import { Role } from "@interfaces/custom";
 import { axShowDataset } from "@services/curate.service";
@@ -26,6 +26,9 @@ export default function CurateEditPage({ data, datasetId, canEdit, userName, can
 }
 
 export const getServerSideProps = async (ctx) => {
+  const redirect = authorizedPageSSP([Role.Any], ctx);
+  if (redirect) return redirect;
+
   const { data } = await axShowDataset(ctx.query.datasetId);
 
   const user = getParsedUser(ctx);
