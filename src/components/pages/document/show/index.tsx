@@ -42,7 +42,12 @@ export default function DocumentShowComponent({
 }: DocumentShowProps) {
   const { isLoggedIn } = useGlobalState();
   const [permission, setPermission] = useState<DocumentUserPermission>();
-  const documentPath = document?.uFile?.path || document?.document?.externalUrl;
+  const documentPath =
+    document?.uFile?.path ||
+    document?.document?.externalUrl ||
+    document?.document?.url?.includes(".pdf")
+      ? document?.document?.url
+      : null;
 
   useEffect(() => {
     if (isLoggedIn) {
