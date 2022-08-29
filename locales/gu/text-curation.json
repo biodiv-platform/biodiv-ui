@@ -18,6 +18,7 @@
   },
   "dataset_description": "ડેટાસેટ વર્ણન",
   "date_columns": "તારીખ કૉલમ",
+  "download": "ડાઉનલોડ કરો",
   "edit": {
     "location": {
       "accuracy": "ચોકસાઈ",
@@ -44,6 +45,7 @@
   "metadata": "મેટાડેટા",
   "sci_name_columns": "વૈજ્ઞાનિક નામ કૉલમ",
   "section_heading": {
+    "Temporal Data": "ટેમ્પોરલ ડેટા",
     "curated_status": "ક્યુરેટેડ સ્ટેટસ",
     "spatial_data": "અવકાશી ડેટા",
     "taxonomic_data": "વર્ગીકરણ ડેટા",

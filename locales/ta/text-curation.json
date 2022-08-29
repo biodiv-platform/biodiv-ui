@@ -18,6 +18,7 @@
   },
   "dataset_description": "தரவுத்தொகுப்பு விளக்கம்",
   "date_columns": "தேதி நெடுவரிசைகள்",
+  "download": "பதிவிறக்க Tamil",
   "edit": {
     "location": {
       "accuracy": "துல்லியம்",
@@ -44,6 +45,7 @@
   "metadata": "மெட்டாடேட்டா",
   "sci_name_columns": "அறிவியல் பெயர் நெடுவரிசைகள்",
   "section_heading": {
+    "Temporal Data": "தற்காலிக தரவு",
     "curated_status": "தேர்ந்தெடுக்கப்பட்ட நிலை",
     "spatial_data": "இடஞ்சார்ந்த தரவு",
     "taxonomic_data": "வகைபிரித்தல் தரவு",

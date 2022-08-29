@@ -18,6 +18,7 @@
   },
   "dataset_description": "ਡਾਟਾਸੈਟ ਵਰਣਨ",
   "date_columns": "ਮਿਤੀ ਕਾਲਮ",
+  "download": "ਡਾਊਨਲੋਡ ਕਰੋ",
   "edit": {
     "location": {
       "accuracy": "ਸ਼ੁੱਧਤਾ",
@@ -44,6 +45,7 @@
   "metadata": "ਮੈਟਾਡਾਟਾ",
   "sci_name_columns": "ਵਿਗਿਆਨਕ ਨਾਮ ਕਾਲਮ",
   "section_heading": {
+    "Temporal Data": "ਅਸਥਾਈ ਡੇਟਾ",
     "curated_status": "ਚੁਣੀ ਗਈ ਸਥਿਤੀ",
     "spatial_data": "ਸਥਾਨਿਕ ਡੇਟਾ",
     "taxonomic_data": "ਟੈਕਸੋਨੋਮਿਕ ਡੇਟਾ",

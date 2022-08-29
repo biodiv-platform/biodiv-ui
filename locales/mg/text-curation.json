@@ -18,6 +18,7 @@
   },
   "dataset_description": "Dataset Description",
   "date_columns": "Tsanganana daty",
+  "download": "DOWNLOAD",
   "edit": {
     "location": {
       "accuracy": "araka ny marina",
@@ -44,6 +45,7 @@
   "metadata": "Metadata",
   "sci_name_columns": "Tsanganana anarana siantifika",
   "section_heading": {
+    "Temporal Data": "Data ara-potoana",
     "curated_status": "Sata voarindra",
     "spatial_data": "Data momba ny habaka",
     "taxonomic_data": "Taxonomic Data",

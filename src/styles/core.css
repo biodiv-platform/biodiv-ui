@@ -1,6 +1,8 @@
 :root {
   --heading-height: 124px;
   --subtle-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --chakra-colors-chakra-border-color: var(--chakra-colors-gray-300) !important;
+  --chakra-colors-chakra-body-bg: var(--chakra-colors-gray-50) !important;
 }
 
 html,

@@ -18,6 +18,7 @@
   },
   "dataset_description": "ഡാറ്റാസെറ്റ് വിവരണം",
   "date_columns": "തീയതി കോളങ്ങൾ",
+  "download": "ഡൗൺലോഡ്",
   "edit": {
     "location": {
       "accuracy": "കൃത്യത",
@@ -44,6 +45,7 @@
   "metadata": "മെറ്റാഡാറ്റ",
   "sci_name_columns": "ശാസ്ത്രീയ നാമ നിരകൾ",
   "section_heading": {
+    "Temporal Data": "താൽക്കാലിക ഡാറ്റ",
     "curated_status": "ക്യൂറേറ്റ് ചെയ്ത നില",
     "spatial_data": "സ്പേഷ്യൽ ഡാറ്റ",
     "taxonomic_data": "ടാക്സോണമിക് ഡാറ്റ",

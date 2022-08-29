@@ -1,28 +1,30 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import { PageShowMinimal } from "@interfaces/pages";
+import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
 import PagesSidebar from "../common/sidebar";
-import { UsePagesSidebarProvider } from "../common/sidebar/use-pages-sidebar";
-import Content from "./content.server";
-import PageHeader from "./header";
+import { UsePagesProvider } from "../common/sidebar/use-pages-sidebar";
+import { Content } from "./content.server";
+import { PageHeader } from "./header";
 
 interface PageShowPageComponentProps {
-  page: PageShowMinimal;
+  page;
 }
 
 export default function PageShowPageComponent({ page }: PageShowPageComponentProps) {
   return (
-    <UsePagesSidebarProvider currentPage={page} linkType="show">
-      <div className="container mt">
-        <PageHeader title={page.title} pageId={page.id} />
-        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
-          <PagesSidebar />
-          <Box gridColumn={{ md: "2/5" }} mb={8}>
+    <UsePagesProvider currentPage={page} linkType="show">
+      <PageHeader page={page} />
+
+      <div className="container">
+        <SimpleGrid columns={{ md: 7 }} spacing={{ base: 0, md: 8 }}>
+          <GridItem colSpan={{ md: 5 }}>
             <Content html={page.content} />
-          </Box>
+          </GridItem>
+          <GridItem colSpan={{ md: 2 }} pt={6}>
+            <PagesSidebar />
+          </GridItem>
         </SimpleGrid>
       </div>
-    </UsePagesSidebarProvider>
+    </UsePagesProvider>
   );
 }

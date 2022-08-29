@@ -4,8 +4,9 @@ import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { toggleExpandedForAll } from "react-sortable-tree";
 
-interface GlobalStateContextProps {
+interface UsePagesContextProps {
   pages;
   setPages;
   linkType;
@@ -13,6 +14,7 @@ interface GlobalStateContextProps {
   isEditing;
   toggleEditing;
   canEdit;
+  savePages;
 
   isLoading;
   currentPage;
@@ -25,9 +27,9 @@ interface UsePagesSidebarProviderProps {
   children;
 }
 
-const GlobalStateContext = createContext<GlobalStateContextProps>({} as GlobalStateContextProps);
+const GlobalStateContext = createContext<UsePagesContextProps>({} as UsePagesContextProps);
 
-export const UsePagesSidebarProvider = ({
+export const UsePagesProvider = ({
   linkType,
   currentPage,
   children
@@ -37,20 +39,20 @@ export const UsePagesSidebarProvider = ({
   const [isLoading, setIsLoading] = useState<boolean>();
   const [isEditing, setIsEditing] = useState<boolean>();
   const [canEdit, setCanEdit] = useState(false);
+  const [iPages, setIPages] = useState([]);
+
+  useEffect(() => {
+    setIPages(toggleExpandedForAll({ treeData: pages, expanded: true }));
+  }, [pages]);
 
   useEffect(() => {
     axCheckUserGroupFounderOrAdmin(currentGroup.id, true).then(setCanEdit);
   }, []);
 
-  useEffect(() => {
-    if (isEditing && pages.length) {
-      savePages();
-    }
-  }, [pages]);
-
   const savePages = async () => {
     setIsLoading(true);
-    const { success } = await axUpdateTree(pages);
+    const { success } = await axUpdateTree(iPages);
+    setPages(iPages);
     if (success) {
       notification(t("page:sidebar.updated"), NotificationType.Success);
     }
@@ -62,13 +64,16 @@ export const UsePagesSidebarProvider = ({
   return (
     <GlobalStateContext.Provider
       value={{
-        pages,
         currentPage,
         linkType,
         isEditing,
         toggleEditing,
         canEdit,
-        setPages,
+        savePages,
+
+        pages: iPages,
+        setPages: setIPages,
+
         isLoading
       }}
     >
@@ -77,6 +82,6 @@ export const UsePagesSidebarProvider = ({
   );
 };
 
-export default function usePagesSidebar() {
+export default function usePages() {
   return useContext(GlobalStateContext);
 }

@@ -18,6 +18,7 @@
   },
   "dataset_description": "ಡೇಟಾ ಸೆಟ್ ವಿವರಣೆ",
   "date_columns": "ದಿನಾಂಕ ಕಾಲಮ್‌ಗಳು",
+  "download": "ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
   "edit": {
     "location": {
       "accuracy": "ನಿಖರತೆ",
@@ -44,6 +45,7 @@
   "metadata": "ಮೆಟಾಡೇಟಾ",
   "sci_name_columns": "ವೈಜ್ಞಾನಿಕ ಹೆಸರು ಅಂಕಣಗಳು",
   "section_heading": {
+    "Temporal Data": "ತಾತ್ಕಾಲಿಕ ಡೇಟಾ",
     "curated_status": "ಕ್ಯುರೇಟೆಡ್ ಸ್ಥಿತಿ",
     "spatial_data": "ಪ್ರಾದೇಶಿಕ ಡೇಟಾ",
     "taxonomic_data": "ಟಕ್ಸಾನಮಿಕ್ ಡೇಟಾ",

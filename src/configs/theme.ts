@@ -30,7 +30,6 @@ export const customTheme = extendTheme(
     styles: {
       global: {
         body: {
-          bg: "gray.50",
           scrollBehavior: "smooth"
         }
       }
@@ -43,11 +42,6 @@ export const customTheme = extendTheme(
             field: { px: 2.5 }
           }
         }
-      }
-    },
-    semanticTokens: {
-      colors: {
-        "chakra-border-color": { _light: "gray.300" }
       }
     }
   },

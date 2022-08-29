@@ -18,6 +18,7 @@
   },
   "dataset_description": "ডেটাসেটের বিবরণ",
   "date_columns": "তারিখ কলাম",
+  "download": "ডাউনলোড করুন",
   "edit": {
     "location": {
       "accuracy": "সঠিকতা",
@@ -44,6 +45,7 @@
   "metadata": "মেটাডেটা",
   "sci_name_columns": "বৈজ্ঞানিক নাম কলাম",
   "section_heading": {
+    "Temporal Data": "টেম্পোরাল ডেটা",
     "curated_status": "কিউরেটেড স্ট্যাটাস",
     "spatial_data": "স্থানিক তথ্য",
     "taxonomic_data": "ট্যাক্সোনমিক ডেটা",

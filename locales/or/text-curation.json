@@ -18,6 +18,7 @@
   },
   "dataset_description": "ଡାଟାବେସ୍ ବର୍ଣ୍ଣନା",
   "date_columns": "ତାରିଖ ସ୍ତମ୍ଭ",
+  "download": "ଡାଉନଲୋଡ୍ କରନ୍ତୁ |",
   "edit": {
     "location": {
       "accuracy": "ସଠିକତା",
@@ -44,6 +45,7 @@
   "metadata": "ମେଟାଡାଟା |",
   "sci_name_columns": "ବ Scientific ଜ୍ଞାନିକ ନାମ ସ୍ତମ୍ଭଗୁଡିକ |",
   "section_heading": {
+    "Temporal Data": "ସାମୟିକ ତଥ୍ୟ |",
     "curated_status": "କ୍ୟୁରେଟେଡ୍ ସ୍ଥିତି |",
     "spatial_data": "ସ୍ଥାନିକ ତଥ୍ୟ |",
     "taxonomic_data": "ଟ୍ୟାକ୍ସୋନୋମିକ୍ ତଥ୍ୟ |",

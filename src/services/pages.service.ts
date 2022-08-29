@@ -1,6 +1,6 @@
 import { ENDPOINT } from "@static/constants";
 import http, { formDataHeaders, plainHttp } from "@utils/http";
-import { treeToFlat } from "@utils/pages.util";
+import { treeToFlat } from "@utils/pages";
 import { nanoid } from "nanoid";
 
 export const axUploadEditorPageResource = async (blobInfo) => {
@@ -81,6 +81,20 @@ export const axCreatePage = async (payload) => {
     return { success: true, data };
   } catch (e) {
     console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axRemovePageGalleryImage = async (pageId, galleryId) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.PAGES}/v1/page/gallery/remove/${pageId}/${galleryId}`
+    );
+
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+
     return { success: false, data: {} };
   }
 };

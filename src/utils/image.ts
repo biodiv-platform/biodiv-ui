@@ -10,7 +10,7 @@ import { emit } from "react-gbus";
 import { normalizeFileName } from "./basic";
 import { CleanExif } from "./location";
 
-function resizeImage(file: File, max = 3000): Promise<any> {
+export function resizeImage(file: File, max = 3000): Promise<any> {
   return new Promise((resolve) => {
     loadImage(
       file,

@@ -8,15 +8,23 @@
   "form": {
     "content": "Maudhui",
     "description": "Maelezo Metadata.",
+    "gallery": "Matunzio",
     "is_sidebar": "Onyesha katika Sidebar.",
     "parent": "Ukurasa wa wazazi",
-    "title": "Kichwa"
+    "title": "Kichwa",
+    "type": {
+      "content": "Maudhui",
+      "redirect": "Elekeza kwingine",
+      "title": "Aina"
+    },
+    "url": "URL"
   },
   "mail": {
     "download_logs": "Pakua Kumbukumbu",
     "sent": "Upakuaji unachakatwa. \nBarua pepe itatumwa na kiungo cha kupakua, ambacho kinaweza pia kufikiwa kutoka"
   },
   "no_parent": "Hakuna mzazi",
+  "quick_navigation": "Urambazaji wa Haraka",
   "remove": {
     "description": "Una uhakika? Huwezi kufuta hatua hii baadaye.",
     "success": "Ukurasa umefutwa kwa mafanikio.",

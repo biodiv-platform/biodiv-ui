@@ -18,6 +18,7 @@
   },
   "dataset_description": "Description de l'ensemble de données",
   "date_columns": "Colonnes de dates",
+  "download": "Télécharger",
   "edit": {
     "location": {
       "accuracy": "précision",
@@ -44,6 +45,7 @@
   "metadata": "Métadonnées",
   "sci_name_columns": "Colonnes des noms scientifiques",
   "section_heading": {
+    "Temporal Data": "Données temporelles",
     "curated_status": "Statut organisé",
     "spatial_data": "Données spatiales",
     "taxonomic_data": "Données taxonomiques",
