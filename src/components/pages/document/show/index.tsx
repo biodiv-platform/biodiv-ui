@@ -45,9 +45,7 @@ export default function DocumentShowComponent({
   const documentPath =
     document?.uFile?.path ||
     document?.document?.externalUrl ||
-    document?.document?.url?.includes(".pdf")
-      ? document?.document?.url
-      : null;
+    document?.document?.url
 
   useEffect(() => {
     if (isLoggedIn) {
