@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 
 import ContributorsEditor from "./contributors-edit";
 
-export default function Contributors({ type, ibpUsers, dataSheetId }) {
+export default function Contributors({ type, ibpUsers, dataSheetId, isAdmin }) {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [contributors, setContributors] = useState(ibpUsers);
   useEffect(() => {
@@ -42,13 +42,15 @@ export default function Contributors({ type, ibpUsers, dataSheetId }) {
               />
             ))}
           </AvatarGroup>
-          <IconButton
-            variant="link"
-            colorScheme="blue"
-            onClick={onToggle}
-            aria-label="Edit"
-            icon={<EditIcon />}
-          />
+          {isAdmin && (
+            <IconButton
+              variant="link"
+              colorScheme="blue"
+              onClick={onToggle}
+              aria-label="Edit"
+              icon={<EditIcon />}
+            />
+          )}
         </HStack>
       )}
     </Box>

@@ -10,7 +10,14 @@ const CurateEditPageComponent = dynamic(() => import("@components/pages/text-cur
   ssr: false
 });
 
-export default function CurateEditPage({ data, datasetId, canEdit, userName, canValidate }) {
+export default function CurateEditPage({
+  data,
+  datasetId,
+  canEdit,
+  userName,
+  canValidate,
+  isAdmin
+}) {
   return (
     <CurateEditProvider
       initialData={data}
@@ -19,6 +26,7 @@ export default function CurateEditPage({ data, datasetId, canEdit, userName, can
       isShow={false}
       userName={userName}
       canValidate={canValidate}
+      isAdmin={isAdmin}
     >
       <CurateEditPageComponent />
     </CurateEditProvider>
@@ -40,6 +48,8 @@ export const getServerSideProps = async (ctx) => {
 
   const canValidate = data.validators.includes(user.id.toString());
 
+  const isAdmin = hasAccess([Role.Admin], ctx);
+
   if (!canEdit) throwUnauthorized(ctx);
 
   return {
@@ -48,7 +58,8 @@ export const getServerSideProps = async (ctx) => {
       datasetId: ctx.query.datasetId,
       canEdit,
       userName,
-      canValidate
+      canValidate,
+      isAdmin
     }
   };
 };

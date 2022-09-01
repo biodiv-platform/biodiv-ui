@@ -63,7 +63,7 @@ const Actions = () => {
 };
 
 export default function TextCurationHeader() {
-  const { initialData } = useCurateEdit();
+  const { initialData, isAdmin } = useCurateEdit();
   const [curators, setCurators] = useState<any[]>();
   const [validators, setValidators] = useState<any[]>();
 
@@ -86,8 +86,18 @@ export default function TextCurationHeader() {
       </PageHeading>
       <Text mb={6}>{initialData.description}</Text>
 
-      <Contributors type="Curators" ibpUsers={curators} dataSheetId={initialData.id} />
-      <Contributors type="Validators" ibpUsers={validators} dataSheetId={initialData.id} />
+      <Contributors
+        type="Curators"
+        ibpUsers={curators}
+        dataSheetId={initialData.id}
+        isAdmin={isAdmin}
+      />
+      <Contributors
+        type="Validators"
+        ibpUsers={validators}
+        dataSheetId={initialData.id}
+        isAdmin={isAdmin}
+      />
     </>
   );
 }
