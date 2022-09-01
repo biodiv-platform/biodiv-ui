@@ -32,7 +32,7 @@ export default function ContributorsEditor({
     if (success) {
       setContributors(values?.contributors);
       onClose();
-      notification(t("form:tags_update_success"), NotificationType.Success);
+      notification(`${type} updated successfully`, NotificationType.Success);
     }
   };
 

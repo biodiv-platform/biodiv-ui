@@ -93,7 +93,7 @@ export const axUpdateContributors = async (contributors, id, type) => {
     formData.append("contributorsIds", ids);
     const payload = { dataSheetId: id, users: ids };
 
-    const { data } = await http.put(`${ENDPOINT.CURATE}${type.toLowerCase()}`, payload);
+    const { data } = await http.put(`${ENDPOINT.CURATE}/${type.toLowerCase()}`, payload);
 
     return { success: true, data };
   } catch (e) {
