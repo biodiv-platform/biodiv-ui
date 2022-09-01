@@ -26,7 +26,7 @@ export const axGetUsersByID = async (userIds) => {
     const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/bulk/ibp`, {
       params: { userIds }
     });
-    return data.map(({ name, id }) => ({ label: name, value: id }));
+    return data.map(({ name, id, profilePic }) => ({ label: name, value: id, pic: profilePic }));
   } catch (e) {
     notification(e.response.data.message);
     return [];
