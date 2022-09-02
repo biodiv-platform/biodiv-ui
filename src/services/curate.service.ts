@@ -86,15 +86,10 @@ export const axGetDataSheetInfo = async () => {
 
 export const axUpdateContributors = async (contributors, id, type) => {
   try {
-    await waitForAuth();
-    const formData = new FormData();
     const cIds = contributors.map((v) => v.value);
     const ids = cIds.join(", ");
-    formData.append("contributorsIds", ids);
     const payload = { dataSheetId: id, users: ids };
-
     const { data } = await http.put(`${ENDPOINT.CURATE}/${type.toLowerCase()}`, payload);
-
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };
