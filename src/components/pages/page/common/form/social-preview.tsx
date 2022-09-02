@@ -21,14 +21,10 @@ export const SocialPreviewField = ({
   helpText,
   label,
   name,
-  placeholder,
-  title,
   mb = 4,
-  disabled,
   hint,
   isRequired,
   hidden,
-  onRemoveCallback,
   ...props
 }: ITPageGalleryFieldProps) => {
   const { t } = useTranslation();
