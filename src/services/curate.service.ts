@@ -1,5 +1,4 @@
 import { ENDPOINT } from "@static/constants";
-import { waitForAuth } from "@utils/auth";
 import http, { formDataHeaders, plainHttp } from "@utils/http";
 
 export const axExtractAllParams = async (d) => {
