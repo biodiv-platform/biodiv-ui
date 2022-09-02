@@ -5,10 +5,12 @@ import { useLocalRouter } from "@components/@core/local-link";
 import DownloadIcon from "@icons/download";
 import EditIcon from "@icons/edit";
 import { axDownloadCsv } from "@services/curate.service";
+import { axGetUsersByID } from "@services/user.service";
 import { sendFileFromResponse } from "@utils/download";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
+import Contributors from "./contributors";
 import { CURATED_STATUS } from "./table/data";
 import useCurateEdit from "./use-curate-edit";
 
@@ -61,7 +63,21 @@ const Actions = () => {
 };
 
 export default function TextCurationHeader() {
-  const { initialData } = useCurateEdit();
+  const { initialData, isAdmin } = useCurateEdit();
+  const [curators, setCurators] = useState<any[]>();
+  const [validators, setValidators] = useState<any[]>();
+
+  const fetchIbpUsers = async (userIds, setter) => {
+    const users = await axGetUsersByID(userIds);
+    if (users.length > 0) {
+      setter(users);
+    }
+  };
+
+  useEffect(() => {
+    fetchIbpUsers(initialData?.contributors?.join(","), setCurators);
+    fetchIbpUsers(initialData?.validators?.join(","), setValidators);
+  }, []);
 
   return (
     <>
@@ -69,6 +85,19 @@ export default function TextCurationHeader() {
         {initialData.title}
       </PageHeading>
       <Text mb={6}>{initialData.description}</Text>
+
+      <Contributors
+        type="Curators"
+        ibpUsers={curators}
+        dataSheetId={initialData.id}
+        isAdmin={isAdmin}
+      />
+      <Contributors
+        type="Validators"
+        ibpUsers={validators}
+        dataSheetId={initialData.id}
+        isAdmin={isAdmin}
+      />
     </>
   );
 }

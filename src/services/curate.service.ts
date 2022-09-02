@@ -1,4 +1,5 @@
 import { ENDPOINT } from "@static/constants";
+import { waitForAuth } from "@utils/auth";
 import http, { formDataHeaders, plainHttp } from "@utils/http";
 
 export const axExtractAllParams = async (d) => {
@@ -80,5 +81,17 @@ export const axGetDataSheetInfo = async () => {
     return { succes: true, data: data };
   } catch (e) {
     return { succces: false, data: [] };
+  }
+};
+
+export const axUpdateContributors = async (contributors, id, type) => {
+  try {
+    const cIds = contributors.map((v) => v.value);
+    const ids = cIds.join(", ");
+    const payload = { dataSheetId: id, users: ids };
+    const { data } = await http.put(`${ENDPOINT.CURATE}/${type.toLowerCase()}`, payload);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
   }
 };
