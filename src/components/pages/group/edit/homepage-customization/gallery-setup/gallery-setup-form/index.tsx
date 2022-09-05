@@ -29,8 +29,10 @@ interface IGallerySetupForm {
 export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryList }) {
   const { t } = useTranslation();
   const [imagePicker, setImagePicker] = useState<boolean>(true);
-  const [defaultValues, setDefaultValues] = useState<IGallerySetupForm | any>({ truncated: true });
   const { currentGroup } = useGlobalState();
+
+  const [defaultValues, setDefaultValues] = !currentGroup.id ? useState<IGallerySetupForm | any>({ truncated: true }) :
+    useState<IGallerySetupForm | any>();
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -47,6 +49,7 @@ export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryL
     };
     setGalleryList([...galleryList, payload]);
     setIsCreate(false);
+    console.warn(payload);
   };
 
   const handleChange = () => {

@@ -114,6 +114,7 @@
     "table": {
       "actions": "କାର୍ଯ୍ୟ",
       "description": "ବର୍ଣ୍ଣନା",
+      "enabled": "ସକ୍ଷମ",
       "image": "ପ୍ରତିଛବି |",
       "more_link": "ଲିଙ୍କ୍ |",
       "title": "ଆଖ୍ୟା"

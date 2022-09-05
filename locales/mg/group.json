@@ -114,6 +114,7 @@
     "table": {
       "actions": "asa",
       "description": "Description",
+      "enabled": "afaka",
       "image": "SARY",
       "more_link": "Rohy",
       "title": "lohateny"

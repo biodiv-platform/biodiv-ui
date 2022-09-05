@@ -114,6 +114,7 @@
     "table": {
       "actions": "చర్యలు",
       "description": "వర్ణన",
+      "enabled": "ప్రారంభించబడింది",
       "image": "చిత్రం",
       "more_link": "లింక్",
       "title": "శీర్షికబడ్డ"

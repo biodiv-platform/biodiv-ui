@@ -114,6 +114,7 @@
     "table": {
       "actions": "ક્રિયાઓ",
       "description": "વર્ણન",
+      "enabled": "સક્ષમ",
       "image": "છબી",
       "more_link": "લિંક",
       "title": "શીર્ષક"

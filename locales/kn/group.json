@@ -114,6 +114,7 @@
     "table": {
       "actions": "ಕ್ರಿಯೆಗಳು",
       "description": "ವಿವರಣೆ",
+      "enabled": "ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ",
       "image": "ಚಿತ್ರ",
       "more_link": "ಲಿಂಕ್",
       "title": "ಶೀರ್ಷಿಕೆ"

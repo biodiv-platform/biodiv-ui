@@ -114,6 +114,7 @@
     "table": {
       "actions": "Actions",
       "description": "Description",
+      "enabled": "Activé",
       "image": "Image",
       "more_link": "Lien",
       "title": "Titre"

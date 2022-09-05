@@ -114,6 +114,7 @@
     "table": {
       "actions": "ਕਾਰਵਾਈਆਂ",
       "description": "ਵੇਰਵਾ",
+      "enabled": "ਸਮਰਥਿਤ",
       "image": "ਚਿੱਤਰ",
       "more_link": "ਲਿੰਕ",
       "title": "ਸਿਰਲੇਖ"

@@ -114,6 +114,7 @@
     "table": {
       "actions": "செயல்கள்",
       "description": "விளக்கம்",
+      "enabled": "இயக்கப்பட்டது",
       "image": "படம்",
       "more_link": "இணைப்பு",
       "title": "தலைப்பு"
