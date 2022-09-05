@@ -30,10 +30,7 @@ export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryL
   const { t } = useTranslation();
   const [imagePicker, setImagePicker] = useState<boolean>(true);
   const { currentGroup } = useGlobalState();
-  const [defaultValues, setDefaultValues] = !currentGroup.id
-    ? useState<IGallerySetupForm | any>({ truncated: true })
-    : useState<IGallerySetupForm | any>();
-
+  const [defaultValues, setDefaultValues] = useState<IGallerySetupForm | any>(currentGroup.id ? undefined : { truncated: true })
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(galleryFieldValidationSchema),

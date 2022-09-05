@@ -16,7 +16,6 @@ export const getServerSideProps = async (ctx) => {
     props: {
       homeInfo: {
         ...homeInfo,
-        gallerySlider: homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
       }
     }
   };
