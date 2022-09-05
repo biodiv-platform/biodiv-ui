@@ -22,7 +22,7 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
-const getColor = (props) => {
+export const getColor = (props) => {
   if (props.isDragAccept) {
     return "#00e676";
   }
@@ -35,7 +35,7 @@ const getColor = (props) => {
   return "#eeeeee";
 };
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -49,7 +49,7 @@ const Container = styled.div`
   border-color: var(--chakra-colors-gray-300);
 `;
 
-interface ITPageGalleryFieldProps {
+export interface ITPageGalleryFieldProps {
   helpText?: string;
   label: string;
   name: string;
@@ -129,11 +129,7 @@ export const PageGalleryField = ({
       <div id={name}>
         <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
           <input {...getInputProps()} />
-          {isProcessing ? (
-            <p>{t("common:loading")}</p>
-          ) : (
-            <p>Drag n drop some images here, or click to select files</p>
-          )}
+          {isProcessing ? <p>{t("common:loading")}</p> : <p>{t("form:uploader.label")}</p>}
         </Container>
       </div>
 
