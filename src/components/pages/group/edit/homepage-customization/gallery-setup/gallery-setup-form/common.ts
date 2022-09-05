@@ -7,5 +7,6 @@ export const galleryFieldValidationSchema = Yup.object().shape({
   fileName: Yup.string().required(),
   observationId: Yup.number().nullable(),
   moreLinks: Yup.string().required(),
-  options: Yup.array().nullable()
+  options: Yup.array().nullable(),
+  truncated: Yup.boolean()
 });
