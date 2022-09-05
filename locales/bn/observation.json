@@ -51,6 +51,7 @@
   "group": "গ্রুপ",
   "group_updated": "পর্যবেক্ষণ প্রজাতি গ্রুপ সফলভাবে আপডেট",
   "groups_updated": "গ্রুপ সফলভাবে আপডেট",
+  "groups_updated_failed": "গ্রুপ আপডেট করতে অক্ষম",
   "help_identify": "সাহায্য সনাক্ত করুন",
   "hide_precise_location": "সুনির্দিষ্ট অবস্থান লুকান",
   "id": {

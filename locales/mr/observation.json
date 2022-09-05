@@ -51,6 +51,7 @@
   "group": "गट",
   "group_updated": "निरीक्षण प्रजाती गट यशस्वीरित्या अद्यतनित केले",
   "groups_updated": "गट यशस्वीरित्या अद्यतनित केले",
+  "groups_updated_failed": "गट अद्यतनित करण्यात अक्षम",
   "help_identify": "ओळखण्यासाठी मदत",
   "hide_precise_location": "अचूक स्थान लपवा",
   "id": {

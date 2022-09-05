@@ -55,6 +55,8 @@ export default function GroupPost({
       notification(t("observation:groups_updated"), NotificationType.Success);
       editButtonRef.current.focus();
       onClose();
+    } else {
+      notification(t("observation:groups_updated_failed"), NotificationType.Error);
     }
   };
 

@@ -298,7 +298,7 @@ export const axReorderCustomField = async (userGroupId, payload) => {
 export const axGetUserGroupRules = async (userGroupId, ctx) => {
   try {
     const { data } = await http.get(
-      `${ENDPOINT.USERGROUP}/v1/group/filterRule/show/${userGroupId}`,
+      `${ENDPOINT.INTEGRATOR}/v1/services/filterRule/show/${userGroupId}`,
       { params: { ctx } }
     );
     return { success: true, data };
@@ -311,7 +311,7 @@ export const axGetUserGroupRules = async (userGroupId, ctx) => {
 export const axAddUserGroupRule = async (userGroupId, payload) => {
   try {
     const { data } = await http.post(
-      `${ENDPOINT.USERGROUP}/v1/group/filterRule/add/${userGroupId}`,
+      `${ENDPOINT.INTEGRATOR}/v1/services/filterRule/add/${userGroupId}`,
       payload
     );
     return { success: true, data };
@@ -324,7 +324,7 @@ export const axAddUserGroupRule = async (userGroupId, payload) => {
 export const axRemoveUserGroupRule = async (userGroupId, payload) => {
   try {
     const { data } = await http.post(
-      `${ENDPOINT.USERGROUP}/v1/group/filterRule/remove/${userGroupId}`,
+      `${ENDPOINT.INTEGRATOR}/v1/services/filterRule/remove/${userGroupId}`,
       payload
     );
     return { success: true, data };

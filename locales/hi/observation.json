@@ -51,6 +51,7 @@
   "group": "समूह",
   "group_updated": "अवलोकन प्रजाति समूह सफलतापूर्वक अद्यतन किया गया",
   "groups_updated": "समूह सफलतापूर्वक अपडेट किए गए",
+  "groups_updated_failed": "समूह अपडेट करने में असमर्थ",
   "help_identify": "पहचान करने में मदद करें",
   "hide_precise_location": "सटीक स्थान छुपाएं",
   "id": {
