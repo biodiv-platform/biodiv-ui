@@ -105,7 +105,7 @@
   },
   "resource": "Rasilimali",
   "scientific_name": "Jina la kisayansi",
-  "select_all": "Aina zitachaguliwa",
+  "select_all_message": "Aina zitachaguliwa",
   "share": "Shiriki aina hii",
   "species_group": "Kikundi cha Aina",
   "status": "Hali",

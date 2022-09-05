@@ -82,3 +82,15 @@ export const axGetDataSheetInfo = async () => {
     return { succces: false, data: [] };
   }
 };
+
+export const axUpdateContributors = async (contributors, id, type) => {
+  try {
+    const cIds = contributors.map((v) => v.value);
+    const ids = cIds.join(", ");
+    const payload = { dataSheetId: id, users: ids };
+    const { data } = await http.put(`${ENDPOINT.CURATE}/${type.toLowerCase()}`, payload);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};

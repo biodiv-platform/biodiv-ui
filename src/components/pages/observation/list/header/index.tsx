@@ -56,7 +56,7 @@ export default function ListHeader() {
   };
 
   const handleSelectAll = () => {
-    alert(`${observationData.n} ${t("observation:select_all")}`);
+    alert(`${observationData.n} ${t("observation:select_all_message")}`);
     handleBulkCheckbox("selectAll");
   };
 

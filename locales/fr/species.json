@@ -105,7 +105,7 @@
   },
   "resource": "Ressource",
   "scientific_name": "Nom scientifique",
-  "select_all": "Les espèces seront sélectionnées",
+  "select_all_message": "Les espèces seront sélectionnées",
   "share": "Partager cette espèce",
   "species_group": "Groupe d'espèces",
   "status": "Statut",
