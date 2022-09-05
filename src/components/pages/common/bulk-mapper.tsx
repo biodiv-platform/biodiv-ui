@@ -23,7 +23,7 @@ export default function BulkMapperHeader({
             leftIcon={<CheckCircleIcon />}
             onClick={handleSelectAll}
           >
-            {t("observation:selectAll")}
+            {t("observation:select_all")}
           </Button>
         )}
         <Button
