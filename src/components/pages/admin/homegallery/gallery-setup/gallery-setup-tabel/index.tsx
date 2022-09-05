@@ -68,7 +68,7 @@ const GallerySetupTable = ({
             <th>{t("group:homepage_customization.table.title")}</th>
             <th>{t("group:homepage_customization.table.image")}</th>
             <th>{t("group:homepage_customization.table.description")}</th>
-            <th>{t("group:homepage_customization.table.more_link")}</th>
+            <th>{t("group:homepage_customization.table.enabled")}</th>
             <th>{t("group:homepage_customization.table.actions")}</th>
           </tr>
         </thead>

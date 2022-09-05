@@ -1,8 +1,10 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Switch, Text } from "@chakra-ui/react";
+import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -21,12 +23,14 @@ interface IGallerySetupForm {
   authorName?: string;
   profilePic?: string;
   options?: any[];
+  truncated?: boolean;
 }
 
 export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryList }) {
   const { t } = useTranslation();
   const [imagePicker, setImagePicker] = useState<boolean>(true);
-  const [defaultValues, setDefaultValues] = useState<IGallerySetupForm | any>();
+  const [defaultValues, setDefaultValues] = useState<IGallerySetupForm | any>({ truncated: true });
+  const { currentGroup } = useGlobalState();
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -83,6 +87,12 @@ export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryL
           name="customDescripition"
           label={t("group:homepage_customization.table.description")}
         />
+        {!currentGroup.id &&
+          <CheckboxField
+            name="truncated"
+            label={t("group:homepage_customization.table.enabled")}
+          />
+        }
         <SubmitButton>{t("group:homepage_customization.gallery_setup.create")}</SubmitButton>
       </form>
     </FormProvider>

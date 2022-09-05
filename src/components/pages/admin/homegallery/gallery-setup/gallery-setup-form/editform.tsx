@@ -1,9 +1,9 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Image } from "@chakra-ui/react";
+import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
-// reusing ImageUploaderField and galleryFieldValidationSchema components from group page
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
 import { galleryFieldValidationSchema } from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form/common";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,7 +19,8 @@ import { FormProvider, useForm } from "react-hook-form";
 export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData }) {
   const { t } = useTranslation();
 
-  const { id, title, fileName, customDescripition, moreLinks, displayOrder, observationId } =
+  const { id, title, fileName, customDescripition, moreLinks, displayOrder, observationId,
+    truncated } =
     editGalleryData;
 
   const hForm = useForm<any>({
@@ -32,10 +33,10 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
       customDescripition,
       moreLinks,
       displayOrder,
-      observationId
+      observationId,
+      truncated
     }
   });
-
   const handleFormSubmit = async (payload) => {
     const { success, data } = await axEditHomePageGallery(id, payload);
 
@@ -84,6 +85,10 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           label={t("group:homepage_customization.table.description")}
         />
 
+        <CheckboxField
+          name="truncated"
+          label={t("group:homepage_customization.table.enabled")}
+        />
         <SubmitButton>{t("common:update")}</SubmitButton>
       </form>
     </FormProvider>

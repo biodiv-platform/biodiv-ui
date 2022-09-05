@@ -116,7 +116,8 @@
       "description": "Description",
       "image": "Image",
       "more_link": "Link",
-      "title": "Title"
+      "title": "Title",
+      "enabled":"Enabled"
     },
     "title": "Homepage Customization",
     "update": {
