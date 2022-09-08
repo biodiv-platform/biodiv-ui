@@ -3,13 +3,14 @@ import { useIsMount } from "@hooks/use-is-mount";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
+import ExternalUrl from "../resource-url";
 import useManageDocument from "./document-upload-provider";
 import DocumentDropzone from "./dropzone";
 import MyDocumentUploads from "./my-uploads";
 
-export default function DocumentUploaderTabs({ onChange }) {
+export default function DocumentUploaderTabs({ onChange, externalUrl }) {
   const { t } = useTranslation();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(externalUrl ? 2 : 0);
   const { selectedDocument } = useManageDocument();
   const isMount = useIsMount();
 
@@ -28,9 +29,10 @@ export default function DocumentUploaderTabs({ onChange }) {
       variant="soft-rounded"
       isLazy={true}
     >
-      <TabList mb={4} overflowX="auto" py={1}>
-        <Tab>✔️ {t("document:upload.selected")}</Tab>
-        <Tab>☁️ {t("document:upload.my_uploads")}</Tab>
+      <TabList mb={4} overflowX="auto" py={1} >
+        <Tab isDisabled={externalUrl}>✔️ {t("document:upload.selected")}</Tab>
+        <Tab isDisabled={externalUrl}>☁️ {t("document:upload.my_uploads")}</Tab>
+        <Tab>🌎{t("document:upload.url")}</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
@@ -38,6 +40,9 @@ export default function DocumentUploaderTabs({ onChange }) {
         </TabPanel>
         <TabPanel>
           <MyDocumentUploads />
+        </TabPanel>
+        <TabPanel >
+          <ExternalUrl />
         </TabPanel>
       </TabPanels>
     </Tabs>
