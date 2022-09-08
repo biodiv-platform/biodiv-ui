@@ -172,7 +172,7 @@
     },
     "import": "आयात",
     "merge": "मर्ज",
-    "select_all_message": "सभी का चयन करे",
+    "select_all": "सभी का चयन करे",
     "select_none": "किसी का चयन न करें",
     "split": "विभाजित करना"
   },

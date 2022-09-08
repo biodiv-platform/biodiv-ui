@@ -172,7 +172,7 @@
     },
     "import": "Import",
     "merge": "Merge",
-    "select_all_message": "Select All",
+    "select_all": "Select All",
     "select_none": "Select None",
     "split": "Split"
   },

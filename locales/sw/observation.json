@@ -172,7 +172,7 @@
     },
     "import": "Ingiza",
     "merge": "Unganisha",
-    "select_all_message": "Chagua Zote",
+    "select_all": "Chagua Zote",
     "select_none": "Chagua Hakuna",
     "split": "Gawanya"
   },
