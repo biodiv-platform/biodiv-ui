@@ -16,7 +16,10 @@ export default function DocumentUploader({ name, hint }: DocumentUploaderProps) 
   return (
     <ManageDocumentContextProvider initialDocument={field.value}>
       <FormControl isInvalid={!!fieldState.error} mb={4}>
-        <DocumentUploaderTabs {...field} />
+        {field.name == "externalUrl" ? <DocumentUploaderTabs {...field} externalUrl={true} /> :
+          <DocumentUploaderTabs {...field} externalUrl={false} />
+        }
+
         <FormErrorMessage children={fieldState?.error?.message} />
         {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
       </FormControl>

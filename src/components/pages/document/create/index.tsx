@@ -54,9 +54,9 @@ export default function DocumentCreatePageComponent({
         resource: Yup.lazy((value) =>
           value
             ? Yup.object().shape({
-                resourceURL: Yup.string().required(),
-                size: Yup.number().required()
-              })
+              resourceURL: Yup.string().required(),
+              size: Yup.number().required()
+            })
             : Yup.mixed().notRequired()
         ),
 

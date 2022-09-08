@@ -44,12 +44,12 @@ export default function DocumentEditPageComponent({
         ufileData: Yup.lazy((value) =>
           value
             ? Yup.object()
-                .shape({
-                  id: Yup.string().nullable(),
-                  resourceURL: Yup.string().required(),
-                  size: Yup.number().required()
-                })
-                .required()
+              .shape({
+                id: Yup.string().nullable(),
+                resourceURL: Yup.string().required(),
+                size: Yup.number().required()
+              })
+              .required()
             : Yup.mixed().notRequired()
         ),
 
@@ -72,13 +72,14 @@ export default function DocumentEditPageComponent({
 
       ufileData: ufileData
         ? {
-            id: ufileData.id,
-            resourceURL: ufileData.path,
-            size: Number(ufileData.size)
-          }
+          id: ufileData.id,
+          resourceURL: ufileData.path,
+          size: Number(ufileData.size)
+        }
         : null,
 
-      docCoverage: initialDocument.docCoverage
+      docCoverage: initialDocument.docCoverage,
+      externalUrl: initialDocument.externalUrl
     }
   });
 
@@ -98,11 +99,11 @@ export default function DocumentEditPageComponent({
 
       ufileData: values.ufileData
         ? {
-            id: values.ufileData.id,
-            mimeType: "application/pdf",
-            path: values.ufileData.resourceURL,
-            size: values.ufileData.size
-          }
+          id: values.ufileData.id,
+          mimeType: "application/pdf",
+          path: values.ufileData.resourceURL,
+          size: values.ufileData.size
+        }
         : null
     };
     const { success } = await axUpdateDocument(payload);
@@ -119,7 +120,8 @@ export default function DocumentEditPageComponent({
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <PageHeading>📄 {t("document:edit.title")}</PageHeading>
-          <DocumentUploader name="ufileData" />
+          {initialDocument.externalUrl ? <DocumentUploader name="externalUrl" />
+            : <DocumentUploader name="ufileData" />}
           <BasicInfo
             documentTypes={documentTypes}
             setBibField={setBibField}
