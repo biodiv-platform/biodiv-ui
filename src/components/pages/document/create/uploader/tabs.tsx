@@ -10,7 +10,7 @@ import MyDocumentUploads from "./my-uploads";
 
 export default function DocumentUploaderTabs({ onChange, externalUrl }) {
   const { t } = useTranslation();
-  const [tabIndex, setTabIndex] = externalUrl ? useState(2) : useState(0);
+  const [tabIndex, setTabIndex] = useState(externalUrl ? 2 : 0);
   const { selectedDocument } = useManageDocument();
   const isMount = useIsMount();
 

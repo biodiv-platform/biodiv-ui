@@ -120,8 +120,7 @@ export default function DocumentEditPageComponent({
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
           <PageHeading>📄 {t("document:edit.title")}</PageHeading>
-          {initialDocument.externalUrl ? <DocumentUploader name="externalUrl" />
-            : <DocumentUploader name="ufileData" />}
+          <DocumentUploader name={initialDocument.externalUrl ? "externalUrl" : "ufileData"} />
           <BasicInfo
             documentTypes={documentTypes}
             setBibField={setBibField}
