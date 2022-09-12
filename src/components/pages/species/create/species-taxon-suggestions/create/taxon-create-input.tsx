@@ -43,7 +43,10 @@ export const TaxonCreateInputField = ({
 
   useDidUpdateEffect(() => {
     if (isRequired && fieldWatch) {
-      setError(name, { type: "manual", message: "err" });
+      // scheduling validation so this will trigger always after executing form's validator
+      setTimeout(() => {
+        setError(name, { type: "manual", message: "err" });
+      }, 0);
     }
   }, [fieldWatch]);
 
