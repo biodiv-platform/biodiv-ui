@@ -15,7 +15,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       homeInfo: {
-        ...homeInfo,
+        ...homeInfo
       }
     }
   };
