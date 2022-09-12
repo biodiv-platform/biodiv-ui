@@ -1,10 +1,12 @@
 {
   "accepted_name": "Jina Lililokubaliwa",
+  "attribution": "Maelezo",
   "audio": {
     "start": "Anza kurekodi.",
     "stop": "Kuacha kurekodi",
     "title": "Rekodi ya sauti"
   },
+  "caption": "Manukuu",
   "comments": {
     "add_comment": "Ongeza maoni mapya",
     "post": "Chapisha maoni.",

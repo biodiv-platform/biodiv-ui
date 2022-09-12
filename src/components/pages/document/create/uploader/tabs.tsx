@@ -29,7 +29,7 @@ export default function DocumentUploaderTabs({ onChange, externalUrl }) {
       variant="soft-rounded"
       isLazy={true}
     >
-      <TabList mb={4} overflowX="auto" py={1} >
+      <TabList mb={4} overflowX="auto" py={1}>
         <Tab isDisabled={externalUrl}>✔️ {t("document:upload.selected")}</Tab>
         <Tab isDisabled={externalUrl}>☁️ {t("document:upload.my_uploads")}</Tab>
         <Tab>🌎{t("document:upload.url")}</Tab>
@@ -41,7 +41,7 @@ export default function DocumentUploaderTabs({ onChange, externalUrl }) {
         <TabPanel>
           <MyDocumentUploads />
         </TabPanel>
-        <TabPanel >
+        <TabPanel>
           <ExternalUrl />
         </TabPanel>
       </TabPanels>

@@ -9,16 +9,19 @@ import {
   FormLabel,
   IconButton,
   Image,
+  Input,
+  Select,
   SimpleGrid,
   Stack
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { axUploadResource } from "@services/files.service";
+import { axGetLicenseList } from "@services/resources.service";
 import { resizeImage } from "@utils/image";
 import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
@@ -82,8 +85,9 @@ export const PageGalleryField = ({
 }: ITPageGalleryFieldProps) => {
   const { t } = useTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
-  const { formState } = useFormContext();
+  const { formState, register } = useFormContext();
   const { fields, append, remove, move } = useFieldArray({ name, keyName: "hId" });
+  const [licenses, setLicenses] = useState<any[]>();
 
   const onDrop = async (files) => {
     if (!files?.length) return;
@@ -115,6 +119,12 @@ export const PageGalleryField = ({
     }
   };
 
+  useEffect(() => {
+    axGetLicenseList().then(({ data }) => {
+      setLicenses(data);
+    });
+  }, []);
+
   return (
     <FormControl
       isInvalid={!!formState.errors[name]}
@@ -129,7 +139,11 @@ export const PageGalleryField = ({
       <div id={name}>
         <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
           <input {...getInputProps()} />
-          {isProcessing ? <p>{t("common:loading")}</p> : <p>{t("form:uploader.label")}</p>}
+          {isProcessing ? (
+            <p>{t("common:loading")}</p>
+          ) : (
+            <p>Drag n drop some images here, or click to select files</p>
+          )}
         </Container>
       </div>
 
@@ -168,6 +182,23 @@ export const PageGalleryField = ({
                     borderRadius="md"
                   />
                 </AspectRatio>
+                <Input {...register(`${name}.${index}.caption`)} placeholder={t("form:caption")} />
+                <Input
+                  {...register(`${name}.${index}.attribution`)}
+                  placeholder={t("form:attribution")}
+                />
+                {licenses && (
+                  <Select
+                    {...register(`${name}.${index}.licenseId`)}
+                    defaultValue={licenses[0].value}
+                  >
+                    {licenses.map((l) => (
+                      <option value={l.value} key={l.value}>
+                        {l.label}
+                      </option>
+                    ))}
+                  </Select>
+                )}
                 <SimpleGrid columns={2} spacing={2}>
                   <IconButton
                     onClick={() => move(index, index - 1)}
