@@ -31,6 +31,18 @@ export const axGetHomeInfo = async (userGroupId?) => {
   }
 };
 
+export const axGetAdminHomeInfo = async (ctx) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
+      params: { ctx, adminList: true }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
 export const axGetYouTubeInfo = async (url) => {
   try {
     const ytID = getYouTubeId(url);

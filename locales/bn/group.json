@@ -114,6 +114,7 @@
     "table": {
       "actions": "কর্ম",
       "description": "বর্ণনা",
+      "enabled": "সক্রিয়",
       "image": "ছবি",
       "more_link": "লিঙ্ক",
       "title": "শিরোনাম"

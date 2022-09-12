@@ -114,6 +114,7 @@
     "table": {
       "actions": "क्रिया",
       "description": "वर्णन",
+      "enabled": "सक्षम केले",
       "image": "प्रतिमा",
       "more_link": "दुवा",
       "title": "शीर्षक"
