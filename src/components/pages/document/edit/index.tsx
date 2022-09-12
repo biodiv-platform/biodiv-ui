@@ -129,7 +129,7 @@ export default function DocumentEditPageComponent({
           />
           <Metadata bibFields={bibField.fields} />
           <WKTCoverage name="docCoverage" nameTopology="topologyWKT" nameTitle="placeName" />
-          <SubmitButton leftIcon={<CheckIcon />}>{t("document:edit.title")}</SubmitButton>
+          <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
         </form>
       </FormProvider>
     </Box>
