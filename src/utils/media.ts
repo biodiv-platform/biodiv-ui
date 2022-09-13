@@ -117,7 +117,7 @@ export const getFallbackByMIME = (mime) => {
  * @param {string} resourceUrl
  * @return {*}  {string}
  */
-export const getDocumentPath = (resourceUrl: string): string => {
+export const getDocumentPath = (resourceUrl): string => {
   return `/pdf-viewer/?file=${getDocumentFilePath(resourceUrl)}`;
 };
 
