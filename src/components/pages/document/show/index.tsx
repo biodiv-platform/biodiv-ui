@@ -13,6 +13,7 @@ import {
   axGetDocumentPermissions
 } from "@services/document.service";
 import { RESOURCE_TYPE } from "@static/constants";
+import { getDocumentURL } from "@utils/document";
 import { getDocumentPath } from "@utils/media";
 import React, { useEffect, useState } from "react";
 
@@ -33,17 +34,18 @@ interface DocumentShowProps {
   document: ShowDocument;
   speciesGroups;
   habitatList;
+  showViewer;
 }
 
 export default function DocumentShowComponent({
   document,
   speciesGroups,
-  habitatList
+  habitatList,
+  showViewer
 }: DocumentShowProps) {
   const { isLoggedIn } = useGlobalState();
   const [permission, setPermission] = useState<DocumentUserPermission>();
-  const documentPath =
-    document?.uFile?.path || document?.document?.externalUrl || document?.document?.url;
+  const documentPath = getDocumentURL(document);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -58,7 +60,7 @@ export default function DocumentShowComponent({
       <DocumentHeader document={document} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
-          {documentPath && (
+          {showViewer && (
             <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />
           )}
           <DocumentInfo d={document} />
