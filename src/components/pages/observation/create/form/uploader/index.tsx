@@ -1,4 +1,5 @@
 import { DB_CONFIG } from "@static/observation-create";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import IndexedDBProvider from "use-indexeddb";
@@ -12,9 +13,14 @@ interface IDropzoneExtendedProps extends IDropzoneProps {
 
 const DropzoneFieldContainer = (props: IDropzoneExtendedProps) => {
   const form = useFormContext();
+  const { t } = useTranslation();
 
   return (
-    <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
+    <IndexedDBProvider
+      config={DB_CONFIG}
+      loading={t("common:loading")}
+      fallback={t("observation:idb_not_supported")}
+    >
       <ObservationCreateProvider
         licensesList={props.licensesList}
         observationAssets={form.control._defaultValues[props.name]}

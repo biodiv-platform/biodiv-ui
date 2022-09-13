@@ -67,6 +67,7 @@
     "validate": "Validate",
     "validated": "Identification validated by curator"
   },
+  "idb_not_supported": "IndexedDB is not supported in this browser,\nsome browser do not allow IndexedDB access in private window please use normal window if you are using one.",
   "language": "Language",
   "last_location": "Use last location",
   "latitude": "Latitude",

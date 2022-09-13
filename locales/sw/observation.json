@@ -67,6 +67,7 @@
     "validate": "Kuhalalisha",
     "validated": "Kitambulisho kilichothibitishwa na Curator."
   },
+  "idb_not_supported": "IndexedDB haitumiki katika kivinjari hiki,\n\nkivinjari fulani hakiruhusu ufikiaji wa IndexedDB katika dirisha la faragha tafadhali tumia dirisha la kawaida ikiwa unatumia moja.",
   "language": "Lugha",
   "last_location": "Tumia eneo la mwisho",
   "latitude": "Latitude",

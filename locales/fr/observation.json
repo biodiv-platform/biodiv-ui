@@ -67,6 +67,7 @@
     "validate": "Valider",
     "validated": "Identification validée par le curateur"
   },
+  "idb_not_supported": "IndexedDB n'est pas pris en charge dans ce navigateur,\n\ncertains navigateurs n'autorisent pas l'accès à IndexedDB dans une fenêtre privée, veuillez utiliser une fenêtre normale si vous en utilisez une.",
   "language": "Langue",
   "last_location": "Utiliser le dernier lieu",
   "latitude": "Latitude",

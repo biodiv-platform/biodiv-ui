@@ -7,14 +7,23 @@ import { axGetLicenseList } from "@services/resources.service";
 import { axGetLangList } from "@services/utility.service";
 import { DB_CONFIG } from "@static/observation-create";
 import { absoluteUrl } from "@utils/basic";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import IndexedDBProvider from "use-indexeddb";
 
-const ObservationCreateNextPage = (props) => (
-  <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
-    <ObservationCreateNextComponent {...props} />
-  </IndexedDBProvider>
-);
+const ObservationCreateNextPage = (props) => {
+  const { t } = useTranslation();
+
+  return (
+    <IndexedDBProvider
+      config={DB_CONFIG}
+      loading={t("common:loading")}
+      fallback={t("observation:idb_not_supported")}
+    >
+      <ObservationCreateNextComponent {...props} />
+    </IndexedDBProvider>
+  );
+};
 
 export async function getServerSideProps(ctx) {
   const redirect = authorizedPageSSP([Role.Any], ctx);

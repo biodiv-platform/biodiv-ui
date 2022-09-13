@@ -67,6 +67,7 @@
     "validate": "hanamafy",
     "validated": "Fanamarinana ny Curator"
   },
+  "idb_not_supported": "IndexedDB dia tsy tohanana amin'ity navigateur ity,\n\nNy navigateur sasany dia tsy mamela ny fidirana IndexedDB amin'ny varavarankely manokana azafady ampiasao ny varavarankely mahazatra raha mampiasa iray ianao.",
   "language": "Fiteny",
   "last_location": "Mampiasà toerana farany",
   "latitude": "Mponina",
