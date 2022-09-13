@@ -114,10 +114,10 @@
     "table": {
       "actions": "Actions",
       "description": "Description",
+      "enabled": "Enabled",
       "image": "Image",
       "more_link": "Link",
-      "title": "Title",
-      "enabled":"Enabled"
+      "title": "Title"
     },
     "title": "Homepage Customization",
     "update": {

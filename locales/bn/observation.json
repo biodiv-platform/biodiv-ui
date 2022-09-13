@@ -17,16 +17,16 @@
   "creating": "আমরা আপনার পর্যবেক্ষণ তৈরি করছি",
   "crop": {
     "actions": {
-      "curate": "কিউরেট",
+      "curate": "কাটা",
       "reject": "প্রত্যাখ্যান করুন",
-      "un_curate": "আন-কিউরেট"
+      "un_curate": "আন-ফসল"
     },
     "status": {
       "not_curated": "কিউরেট করা হয়নি",
       "rejected": "প্রত্যাখ্যাত",
       "selected": "কিউরেটেড"
     },
-    "title": "ফসল"
+    "title": "পর্যবেক্ষণ মিডিয়া"
   },
   "custom_fields": "কাস্টম ক্ষেত্র",
   "delete_file": {

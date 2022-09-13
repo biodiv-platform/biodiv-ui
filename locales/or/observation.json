@@ -17,16 +17,16 @@
   "creating": "ଆମେ ତୁମର ପର୍ଯ୍ୟବେକ୍ଷଣ ସୃଷ୍ଟି କରୁଛୁ |",
   "crop": {
     "actions": {
-      "curate": "କ୍ୟୁରେଟ୍ |",
+      "curate": "ଫସଲ",
       "reject": "ପ୍ରତ୍ୟାଖ୍ୟାନ କରନ୍ତୁ |",
-      "un_curate": "ଅଣ-କ୍ୟୁରେଟ୍ |"
+      "un_curate": "ଅଣ-ଫସଲ |"
     },
     "status": {
       "not_curated": "CURATED ନୁହେଁ |",
       "rejected": "ପ୍ରତ୍ୟାଖ୍ୟାନ |",
       "selected": "CURATED"
     },
-    "title": "ଫସଲ"
+    "title": "ପର୍ଯ୍ୟବେକ୍ଷଣ ମିଡିଆ |"
   },
   "custom_fields": "କଷ୍ଟମ୍ ଫିଲ୍ଡସ୍ |",
   "delete_file": {

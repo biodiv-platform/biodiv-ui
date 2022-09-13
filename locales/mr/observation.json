@@ -17,16 +17,16 @@
   "creating": "आम्ही आपले निरीक्षण तयार करीत आहोत",
   "crop": {
     "actions": {
-      "curate": "क्युरेट",
+      "curate": "कट",
       "reject": "नकार द्या",
-      "un_curate": "अन-क्युरेट"
+      "un_curate": "अन-क्रॉप"
     },
     "status": {
       "not_curated": "क्युरेट केलेले नाही",
       "rejected": "नाकारले",
       "selected": "क्युरेट केलेले"
     },
-    "title": "पीक"
+    "title": "निरीक्षण माध्यम"
   },
   "custom_fields": "सानुकूल फील्ड",
   "delete_file": {

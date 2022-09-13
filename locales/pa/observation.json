@@ -17,16 +17,16 @@
   "creating": "ਅਸੀਂ ਤੁਹਾਡਾ ਨਿਰੀਖਣ ਬਣਾ ਰਹੇ ਹਾਂ",
   "crop": {
     "actions": {
-      "curate": "ਕਿਊਰੇਟ",
+      "curate": "ਕੱਟੋ",
       "reject": "ਅਸਵੀਕਾਰ ਕਰੋ",
-      "un_curate": "ਅਨ-ਕਿਊਰੇਟ"
+      "un_curate": "ਅਣ-ਫਸਲ"
     },
     "status": {
       "not_curated": "ਕਿਊਰੇਟ ਨਹੀਂ ਕੀਤਾ ਗਿਆ",
       "rejected": "ਅਸਵੀਕਾਰ ਕੀਤਾ ਗਿਆ",
       "selected": "ਚੁਣਿਆ ਗਿਆ"
     },
-    "title": "ਫਸਲ"
+    "title": "ਨਿਰੀਖਣ ਮੀਡੀਆ"
   },
   "custom_fields": "ਕਸਟਮ ਫੀਲਡ",
   "delete_file": {

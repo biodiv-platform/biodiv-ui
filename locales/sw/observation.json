@@ -17,16 +17,16 @@
   "creating": "Tunaunda uchunguzi wako",
   "crop": {
     "actions": {
-      "curate": "Taratibu",
+      "curate": "Kata",
       "reject": "Kataa",
-      "un_curate": "Un-curate"
+      "un_curate": "Ondoa mazao"
     },
     "status": {
       "not_curated": "HAIJATUNZWA",
       "rejected": "IMEKATAA",
       "selected": "IMETUNGWA"
     },
-    "title": "Mazao"
+    "title": "Vyombo vya Habari vya Uchunguzi"
   },
   "custom_fields": "Mashamba ya Desturi.",
   "delete_file": {

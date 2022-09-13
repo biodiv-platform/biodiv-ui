@@ -17,16 +17,16 @@
   "creating": "हम आपका अवलोकन बना रहे हैं",
   "crop": {
     "actions": {
-      "curate": "क्यूरेट",
+      "curate": "क्रॉप",
       "reject": "अस्वीकार",
-      "un_curate": "अन-क्यूरेट"
+      "un_curate": "अन-क्रॉप"
     },
     "status": {
       "not_curated": "क्यूरेटेड नहीं",
       "rejected": "अस्वीकृत",
       "selected": "क्यूरेट किया"
     },
-    "title": "फसल"
+    "title": "अवलोकन मीडिया"
   },
   "custom_fields": "कस्टम फील्ड्स",
   "delete_file": {

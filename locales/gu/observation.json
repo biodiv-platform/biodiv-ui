@@ -17,16 +17,16 @@
   "creating": "અમે તમારું અવલોકન બનાવી રહ્યા છીએ",
   "crop": {
     "actions": {
-      "curate": "ક્યુરેટ",
+      "curate": "કાપવું",
       "reject": "અસ્વીકાર કરો",
-      "un_curate": "અન-ક્યુરેટ"
+      "un_curate": "અન-ક્રોપ"
     },
     "status": {
       "not_curated": "ક્યુરેટેડ નથી",
       "rejected": "નકારેલ",
       "selected": "ક્યુરેટેડ"
     },
-    "title": "પાક"
+    "title": "અવલોકન મીડિયા"
   },
   "custom_fields": "કસ્ટમ ક્ષેત્રો",
   "delete_file": {

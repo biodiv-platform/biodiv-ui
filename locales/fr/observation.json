@@ -17,16 +17,16 @@
   "creating": "Nous créons votre observation",
   "crop": {
     "actions": {
-      "curate": "Sélectionner",
+      "curate": "Couper",
       "reject": "Rejeter",
-      "un_curate": "Non curé"
+      "un_curate": "Dé-recadrer"
     },
     "status": {
       "not_curated": "NON ORGANISÉ",
       "rejected": "REJETÉ",
       "selected": "ORGANISÉ"
     },
-    "title": "Recadrer"
+    "title": "Médias d'observation"
   },
   "custom_fields": "Champs personnalisés",
   "delete_file": {

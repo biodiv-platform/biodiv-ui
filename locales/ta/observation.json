@@ -17,7 +17,7 @@
   "creating": "உங்கள் அவதானிப்பை உருவாக்குகிறோம்",
   "crop": {
     "actions": {
-      "curate": "க்யூரேட்",
+      "curate": "வெட்டு",
       "reject": "நிராகரிக்கவும்",
       "un_curate": "அன்-குரேட்"
     },
@@ -26,7 +26,7 @@
       "rejected": "நிராகரிக்கப்பட்டது",
       "selected": "CURATED"
     },
-    "title": "பயிர்"
+    "title": "கண்காணிப்பு ஊடகம்"
   },
   "custom_fields": "விருப்ப புலங்கள்",
   "delete_file": {

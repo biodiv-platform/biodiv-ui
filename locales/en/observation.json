@@ -17,16 +17,16 @@
   "creating": "We're creating your observation(s)",
   "crop": {
     "actions": {
-      "curate": "Curate",
+      "curate": "Crop",
       "reject": "Reject",
-      "un_curate": "Un-curate"
+      "un_curate": "Un-crop"
     },
     "status": {
       "not_curated": "NOT CURATED",
       "rejected": "REJECTED",
       "selected": "CURATED"
     },
-    "title": "Crop"
+    "title": "Observation Media"
   },
   "custom_fields": "Custom Fields",
   "delete_file": {

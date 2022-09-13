@@ -89,9 +89,8 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
   }, [hasUgAccess]);
 
   const handleImageIconClick = () => {
-    if (adminOrAuthor(o.user?.id)) {
-      setCropObservationId(o.observationId);
-    }
+    const canCrop = adminOrAuthor(o.user?.id);
+    setCropObservationId(o.observationId, canCrop);
   };
 
   return (
