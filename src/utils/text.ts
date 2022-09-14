@@ -1,5 +1,7 @@
 import { filterXSS } from "xss";
 
+import { preProcessContent } from "./pages";
+
 /**
  * Detacts Links in text and automatically links them
  *
@@ -21,7 +23,7 @@ const URLify = (text) => {
 export const getInjectableHTML = (nHtml): string => {
   try {
     if (nHtml) {
-      return filterXSS(URLify(nHtml), {
+      return filterXSS(URLify(preProcessContent(nHtml)), {
         whiteList: {
           a: ["href", "title", "class", "rel", "target"],
           b: [],
