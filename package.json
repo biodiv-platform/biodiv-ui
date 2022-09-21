@@ -56,7 +56,7 @@
     "local-storage-json": "^1.1.0",
     "mapbox-gl": "^2.10.0",
     "mq-styled-components": "^2.1.2",
-    "naksha-components-react": "^4.4.4",
+    "naksha-components-react": "^4.4.6",
     "nanoid": "^4.0.0",
     "next": "^12.3.0",
     "next-seo": "^5.5.0",
