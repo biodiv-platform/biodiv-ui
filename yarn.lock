@@ -1369,10 +1369,10 @@
     boundingbox "^1.4.0"
     react-gbus "^1.1.2"
 
-"@ibp/naksha-mapbox-list@4.4.4":
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-4.4.4.tgz#853a9c0a9f63db9aa344baffce2a50ab1964a4c1"
-  integrity sha512-pKGyO6ctZGRNeTgZF2rrwPXT3oF0Ukfbe2+LMR6gZUKE94LiaIm+97ENGjAryf70sfrGkEHby0se1jC3qaGjyw==
+"@ibp/naksha-mapbox-list@4.4.6":
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/@ibp/naksha-mapbox-list/-/naksha-mapbox-list-4.4.6.tgz#449bf2da0a6c251c10fe2dfd07808b3cedf7e5bb"
+  integrity sha512-2z+MXKxcm7QN7xHoNMb8rdSRf9QBpIqDRzT5DQRZHQubEgvbQZLCPSEyvh+pFTi+IPUwFDtfm6bx+0ms2mb7lA==
   dependencies:
     "@bumaga/tabs" "^0.2.0"
     "@ibp/naksha-commons" "4.4.4"
@@ -6082,16 +6082,16 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^4.4.4:
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.4.4.tgz#c8386d6082f2bde7d9de3e707acab072bf26a0ae"
-  integrity sha512-ugBzykufIp/7KNmUcyoX6FX8TtjuTsGUqDADUEqvgeZreU+kQHwSDJjWPdDl9DZcdmxB3Hf3eCl8mHbm5gcPBw==
+naksha-components-react@^4.4.6:
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.4.6.tgz#0b0ad25c9a2b4688dd5adca8d277571fd933d2c1"
+  integrity sha512-lzP2/CQBfWsmjw8qzJ4TIqtAAWlptxaZC5Um9FnWhNWDT2yboinyyYU2gluv2sIMLZvgFP9dSdf0jyD5w43AlQ==
   dependencies:
     "@ibp/eslint-preset" "4.3.1"
     "@ibp/naksha-gmaps-draw" "4.4.4"
     "@ibp/naksha-gmaps-view" "4.4.4"
     "@ibp/naksha-mapbox-draw" "4.4.4"
-    "@ibp/naksha-mapbox-list" "4.4.4"
+    "@ibp/naksha-mapbox-list" "4.4.6"
     "@ibp/naksha-mapbox-view" "4.4.4"
     "@ibp/tsconfig" "4.3.1"
 
