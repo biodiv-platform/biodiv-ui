@@ -67,6 +67,9 @@
     "validate": "hanamafy",
     "validated": "Fanamarinana ny Curator"
   },
+  "importer": {
+    "title": "Loharano Vondrona"
+  },
   "language": "Fiteny",
   "last_location": "Mampiasà toerana farany",
   "latitude": "Mponina",
@@ -118,7 +121,7 @@
   "location_placeholder": "Ampidiro toerana",
   "location_scale": "Toerana marina",
   "longitude": "-jarahasina",
-  "mange_resources": "Mitantana loharanon-karena",
+  "manage_resources": "Mitantana loharanon-karena",
   "media_picker": "Media Picker",
   "more_fields": "saha bebe kokoa",
   "nearby": "Teo am-piheverana",

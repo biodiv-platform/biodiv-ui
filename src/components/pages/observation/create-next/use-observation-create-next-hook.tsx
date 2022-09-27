@@ -1,15 +1,17 @@
 import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
+import { useSignal } from "@preact/signals-react";
 import {
   axListMyUploads,
   axRemoveMyUploads,
   axUploadObservationResource
 } from "@services/files.service";
-import { OBSERVATION_IMPORT_RESOURCE } from "@static/events";
+import { OBSERVATION_IMPORT_DIALOUGE } from "@static/events";
 import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS } from "@static/location";
 import { STORE } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import { clusterResources } from "@utils/observation";
 import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useMemo, useState } from "react";
 import { emit } from "react-gbus";
@@ -45,6 +47,7 @@ interface ObservationCreateNextContextProps {
     disabledKeys;
     setDisabledKeys;
     selected;
+    status;
     toggleSelection;
     sync;
   };
@@ -75,6 +78,7 @@ export const ObservationCreateNextProvider = ({
 
   const { t } = useTranslation();
   const [draftList, setDraftList] = useState<any[]>([]);
+  const draftUploadStatus = useSignal({});
   const [draftDisabled, setDraftDisabled] = useState<string[]>([]);
   const [selectedHKs, setSelectedHKs] = useState<string[]>([]);
   const [draftSortBy, setDraftSortBy] = useState(MY_UPLOADS_SORT[0].value);
@@ -115,6 +119,9 @@ export const ObservationCreateNextProvider = ({
     const allUnUsedAssets = await getManyByIndex("isUsed", 0);
     const _draftList = allUnUsedAssets.sort((a, b) => b[draftSortBy] - a[draftSortBy]);
     setDraftList(_draftList);
+
+    draftUploadStatus.value = Object.fromEntries(_draftList.map((r) => [r.hashKey, r.status]));
+
     return _draftList;
   };
 
@@ -156,6 +163,8 @@ export const ObservationCreateNextProvider = ({
 
   const updateIdbMediaStatus = async (hashKey, status: AssetStatus) => {
     setDraftList(draftList.map((a) => (a.hashKey === hashKey ? { ...a, status } : a)));
+
+    draftUploadStatus.value = { ...draftUploadStatus.value, [hashKey]: status };
   };
 
   const uploadPendingMedia = async (pendingMedia, noSave = true) => {
@@ -199,21 +208,10 @@ export const ObservationCreateNextProvider = ({
   const addToDrafts = async (newMedia, addToObservation) => {
     setDraftDisabled([...draftDisabled, ...newMedia.map((o) => o.hashKey)]);
 
-    for (const o of newMedia) {
-      await add(o);
+    await Promise.all(newMedia.map((_media) => add(_media)));
 
-      const _odb = await getOneByIndex("hashKey", o.hashKey);
-      const isUploaded = await uploadPendingMedia(_odb);
-
-      if (isUploaded) {
-        const _draftList = await refreshDraftMediaFromIdb();
-
-        if (addToObservation) {
-          emit(OBSERVATION_IMPORT_RESOURCE, [_draftList.find((m) => o.hashKey === m.hashKey)]);
-        }
-      } else {
-        notification(`${t("observation:status.failed")} ${_odb.fileName}`);
-      }
+    if (addToObservation) {
+      emit(OBSERVATION_IMPORT_DIALOUGE, clusterResources(newMedia));
     }
 
     tryMediaSync();
@@ -265,6 +263,7 @@ export const ObservationCreateNextProvider = ({
           setKeys: setSelectedHKs,
           disabledKeys: draftDisabled,
           setDisabledKeys: setDraftDisabled,
+          status: draftUploadStatus.value,
           selected: selectedMediaList,
           toggleSelection: toggleDraftSelection,
           sync: tryMediaSync

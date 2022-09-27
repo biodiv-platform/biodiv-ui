@@ -1,3 +1,4 @@
+import NoSSR from "@components/@core/no-ssr";
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import ObservationCreateNextComponent from "@components/pages/observation/create-next";
 import { Role } from "@interfaces/custom";
@@ -11,9 +12,11 @@ import React from "react";
 import IndexedDBProvider from "use-indexeddb";
 
 const ObservationCreateNextPage = (props) => (
-  <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
-    <ObservationCreateNextComponent {...props} />
-  </IndexedDBProvider>
+  <NoSSR>
+    <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
+      <ObservationCreateNextComponent {...props} />
+    </IndexedDBProvider>
+  </NoSSR>
 );
 
 export async function getServerSideProps(ctx) {

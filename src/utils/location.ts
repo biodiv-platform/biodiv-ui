@@ -82,7 +82,7 @@ const ConvertDMSToDD = (dms, direction) => {
   }
 };
 
-export const CleanExif = (data) => {
+export const CleanExif = (data, blockHash) => {
   if (!data) return {};
 
   const exif = data.getAll();
@@ -90,6 +90,7 @@ export const CleanExif = (data) => {
   return {
     latitude: ConvertDMSToDD(exif?.GPSInfo?.GPSLatitude, exif?.GPSInfo?.GPSLatitudeRef),
     longitude: ConvertDMSToDD(exif?.GPSInfo?.GPSLongitude, exif?.GPSInfo?.GPSLongitudeRef),
-    dateCreated: parseEXIF(exif?.Exif?.DateTimeOriginal)
+    dateCreated: parseEXIF(exif?.Exif?.DateTimeOriginal),
+    blockHash
   };
 };

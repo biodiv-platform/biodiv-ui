@@ -21,7 +21,7 @@ export default function ProgressCard({ item }) {
   return (
     <Box position="relative" className="white-box fade" flex="0 0 250px">
       <LocalLink
-        href={item.observationId ? `/observation/show/${item.observationId}` : undefined}
+        href={item?.observationId ? `/observation/show/${item?.observationId}` : "#"}
         prefixGroup={true}
       >
         <LinkOverlay target="_blank">

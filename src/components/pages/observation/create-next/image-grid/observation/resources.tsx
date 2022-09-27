@@ -2,16 +2,21 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { AspectRatio, Box, IconButton, Image, useBoolean } from "@chakra-ui/react";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import useGlobalState from "@hooks/use-global-state";
+import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
-import React, { useMemo, useState } from "react";
-import { useFieldArray } from "react-hook-form";
+import React, { useEffect, useMemo, useState } from "react";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 
 import ManageResourcesModal from "../../manage-resources";
+import useObservationCreateNext from "../../use-observation-create-next-hook";
 import ResourceNavigation from "./resource-navigation";
 
 export default function Resources({ index, removeObservation }) {
-  const resources = useFieldArray({ name: `o.${index}.resources` });
+  const resourcesName = `o.${index}.resources`;
+  const resources = useFieldArray({ name: resourcesName });
   const [resourceEditor, setResourceEditor] = useBoolean();
+  const { media } = useObservationCreateNext();
+  const hForm = useFormContext();
 
   const { user } = useGlobalState();
   const [resourceIndex, setResourceIndex] = useState(0);
@@ -27,6 +32,23 @@ export default function Resources({ index, removeObservation }) {
       fallbackSrc: getFallbackByMIME(resources.fields[resourceIndex]?.["type"])
     }),
     [resources.fields[resourceIndex].id]
+  );
+
+  const resourceArrayValues = useWatch({ name: resourcesName });
+
+  // This will update upload status
+  useEffect(() => {
+    resourceArrayValues.forEach((r, idx) => {
+      const _status = media.status[r.hashKey];
+      if (_status && r.status !== _status) {
+        hForm.setValue(`${resourcesName}.${idx}.status`, _status);
+      }
+    });
+  }, [media.status]);
+
+  const uploadedSize = useMemo(
+    () => resourceArrayValues.map((r) => r.status).filter((s) => s === AssetStatus.Uploaded).length,
+    [resourceArrayValues]
   );
 
   return (
@@ -59,6 +81,7 @@ export default function Resources({ index, removeObservation }) {
           onReorder={setResourceEditor.on}
           setIndex={setResourceIndex}
           size={resources.fields.length}
+          sizeUploaded={uploadedSize}
         />
       </Box>
       {resourceEditor && (

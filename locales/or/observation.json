@@ -67,6 +67,9 @@
     "validate": "ବ valid ଧତା |",
     "validated": "କ୍ୟୁରଏଟର ଦ୍ୱାରା ବ valid ଧ ପରିଚୟ |"
   },
+  "importer": {
+    "title": "ଗୋଷ୍ଠୀ ସମ୍ବଳ |"
+  },
   "language": "ଭାଷା",
   "last_location": "ଶେଷ ସ୍ଥାନ ବ୍ୟବହାର କରନ୍ତୁ |",
   "latitude": "ଅକ୍ଷାଂଶ",
@@ -118,7 +121,7 @@
   "location_placeholder": "ଏକ ଅବସ୍ଥାନ ପ୍ରବେଶ କରନ୍ତୁ |",
   "location_scale": "ଅବସ୍ଥାନ ସଠିକତା |",
   "longitude": "ଦ୍ରାଘିମା",
-  "mange_resources": "ଉତ୍ସଗୁଡିକ ପରିଚାଳନା କରନ୍ତୁ |",
+  "manage_resources": "ଉତ୍ସଗୁଡିକ ପରିଚାଳନା କରନ୍ତୁ |",
   "media_picker": "ମିଡିଆ ପିକର୍ |",
   "more_fields": "ଅଧିକ କ୍ଷେତ୍ର |",
   "nearby": "ନିକଟସ୍ଥ ପର୍ଯ୍ୟବେକ୍ଷଣ |",

@@ -67,6 +67,9 @@
     "validate": "मान्य",
     "validated": "क्यूरेटर द्वारा मान्य पहचान"
   },
+  "importer": {
+    "title": "समूहीकृत संसाधन"
+  },
   "language": "भाषा",
   "last_location": "अंतिम स्थान का उपयोग करें",
   "latitude": "अक्षांश",
@@ -118,7 +121,7 @@
   "location_placeholder": "एक स्थान दर्ज करें",
   "location_scale": "स्थान सटीकता",
   "longitude": "देशान्तर",
-  "mange_resources": "संसाधन प्रबंधित करें",
+  "manage_resources": "संसाधन प्रबंधित करें",
   "media_picker": "मीडिया पिकर",
   "more_fields": "अधिक फ़ील्ड",
   "nearby": "आस-पास के अवलोकन",

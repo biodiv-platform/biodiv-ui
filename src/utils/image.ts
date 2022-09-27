@@ -9,13 +9,16 @@ import { emit } from "react-gbus";
 
 import { normalizeFileName } from "./basic";
 import { CleanExif } from "./location";
+import { getBlockHash } from "./phash";
 
-export function resizeImage(file: File, max = 3000): Promise<any> {
-  return new Promise((resolve) => {
-    loadImage(
-      file,
-      (img, data) => {
-        try {
+export async function resizeImage(file: File, max = 3000): Promise<any> {
+  try {
+    const blockHash = await getBlockHash(file);
+
+    const response = await new Promise((resolve) => {
+      loadImage(
+        file,
+        (img, data) => {
           if (data?.exif) {
             // fix orientation
             if (data.exif[274]) {
@@ -25,29 +28,30 @@ export function resizeImage(file: File, max = 3000): Promise<any> {
             // replace imageHead to restore exif of original image
             img.toBlob((blob) => {
               loadImage.replaceHead(blob, data.imageHead, (d) =>
-                resolve([d, CleanExif(data?.exif)])
+                resolve([d, CleanExif(data?.exif, blockHash)])
               );
             }, file.type);
           } else {
-            img.toBlob((d) => resolve([d, {}]));
+            img.toBlob((d) => resolve([d, { blockHash }]));
           }
-        } catch (e) {
-          console.warn("EXIF Failed", e);
-          if (!img.toBlob) {
-            notification("Outdated/Unsupported Browser");
-          }
-          img.toBlob((d) => resolve([d, {}]));
+        },
+        {
+          meta: true,
+          canvas: true,
+          orientation: true,
+          maxWidth: max,
+          maxHeight: max
         }
-      },
-      {
-        meta: true,
-        canvas: true,
-        orientation: true,
-        maxWidth: max,
-        maxHeight: max
-      }
-    );
-  });
+      );
+    });
+
+    return response;
+  } catch (e) {
+    console.warn("EXIF Failed", e);
+    notification("Outdated/Unsupported Browser");
+  }
+
+  return [file, {}];
 }
 
 export const getAssetObject = (file, meta?) => {

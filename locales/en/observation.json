@@ -67,6 +67,9 @@
     "validate": "Validate",
     "validated": "Identification validated by curator"
   },
+  "importer": {
+    "title": "Grouped Resources"
+  },
   "language": "Language",
   "last_location": "Use last location",
   "latitude": "Latitude",
@@ -118,7 +121,7 @@
   "location_placeholder": "Enter a location",
   "location_scale": "Location Accuracy",
   "longitude": "Longitude",
-  "mange_resources": "Manage Resources",
+  "manage_resources": "Manage Resources",
   "media_picker": "Media Picker",
   "more_fields": "More Fields",
   "nearby": "Nearby Observations",

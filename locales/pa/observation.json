@@ -67,6 +67,9 @@
     "validate": "ਪੜਤਾਲ",
     "validated": "ਕੁਰੇਟਰ ਦੁਆਰਾ ਪ੍ਰਮਾਣਿਤ"
   },
+  "importer": {
+    "title": "ਸਮੂਹਿਕ ਸਰੋਤ"
+  },
   "language": "ਭਾਸ਼ਾ",
   "last_location": "ਆਖਰੀ ਸਥਾਨ ਦੀ ਵਰਤੋਂ ਕਰੋ",
   "latitude": "ਵਿਥਕਾਰ",
@@ -118,7 +121,7 @@
   "location_placeholder": "ਇੱਕ ਟਿਕਾਣਾ ਦਰਜ ਕਰੋ",
   "location_scale": "ਸਥਾਨ ਦੀ ਸ਼ੁੱਧਤਾ",
   "longitude": "ਲੰਬਕਾਰ",
-  "mange_resources": "ਸਰੋਤਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
+  "manage_resources": "ਸਰੋਤਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
   "media_picker": "ਮੀਡੀਆ ਚੋਣਕਾਰ",
   "more_fields": "ਹੋਰ ਖੇਤਰ",
   "nearby": "ਨੇੜਲੇ ਨਿਰੀਖਣ",

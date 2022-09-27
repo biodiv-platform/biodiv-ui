@@ -11,7 +11,7 @@ export default function ManageResourcesModal(props) {
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{t("observation:mange_resources")}</ModalHeader>
+        <ModalHeader>{t("observation:manage_resources")}</ModalHeader>
         <ModalCloseButton />
         <ManageResourcesForm {...props} />
       </ModalContent>

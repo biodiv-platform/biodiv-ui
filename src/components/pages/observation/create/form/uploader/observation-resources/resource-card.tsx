@@ -45,6 +45,8 @@ interface IResourceCardProps {
 export const getImageThumb = (resource, userID) => {
   if (!resource) return;
 
+  if (resource.blobURL) return resource.blobURL;
+
   if (resource.status === AssetStatus.Uploaded) {
     return resource.type.match(ASSET_TYPES.VIDEO) && resource.url
       ? getYoutubeImage(resource.url)
@@ -58,10 +60,14 @@ export const getImageThumb = (resource, userID) => {
   }
 
   try {
-    return window.URL.createObjectURL(resource.blob);
+    if (resource.type.match(ASSET_TYPES.IMAGE) && resource.blob) {
+      return window.URL.createObjectURL(resource.blob);
+    }
   } catch (e) {
     console.error(e);
   }
+
+  return undefined;
 };
 
 export default function ResourceCard({ resource, index }: IResourceCardProps) {

@@ -67,6 +67,9 @@
     "validate": "ಪರಿಶೀಲಿಸಿ",
     "validated": "ಗುರುತಿಸುವಿಕೆಯನ್ನು ಮೇಲ್ವಿಚಾರಕರು ಪರಿಶೀಲಿಸಿದ್ದಾರೆ"
   },
+  "importer": {
+    "title": "ಗುಂಪು ಮಾಡಿದ ಸಂಪನ್ಮೂಲಗಳು"
+  },
   "language": "ಭಾಷೆ",
   "last_location": "ಕೊನೆಯ ಸ್ಥಳವನ್ನು ಬಳಸಿ",
   "latitude": "ಅಕ್ಷಾಂಶ",
@@ -118,7 +121,7 @@
   "location_placeholder": "ಸ್ಥಳವನ್ನು ನಮೂದಿಸಿ",
   "location_scale": "ಸ್ಥಳದ ನಿಖರತೆ",
   "longitude": "ರೇಖಾಂಶ",
-  "mange_resources": "ಸಂಪನ್ಮೂಲಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+  "manage_resources": "ಸಂಪನ್ಮೂಲಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
   "media_picker": "ಮೀಡಿಯಾ ಪಿಕರ್",
   "more_fields": "ಇನ್ನಷ್ಟು ಕ್ಷೇತ್ರಗಳು",
   "nearby": "ಸಮೀಪದ ವೀಕ್ಷಣೆಗಳು",

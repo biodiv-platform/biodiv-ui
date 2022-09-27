@@ -46,9 +46,11 @@ export default function OfflineSync() {
     successful: [],
     successMap: {}
   });
-  const { update, deleteByID: deleteResource } = useIndexedDBStore<IDBObservationAsset>(
-    STORE.ASSETS
-  );
+  const {
+    update,
+    deleteByID: deleteResource,
+    getOneByIndex
+  } = useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
   const {
     add: addObservation,
     getAll: getAllObservations,
@@ -80,7 +82,8 @@ export default function OfflineSync() {
 
     try {
       for (const resource of observation.resources) {
-        await update({ ...resource, isUsed: 1 });
+        const resourceFromDB = await getOneByIndex("hashKey", resource.hashKey);
+        await update({ ...resourceFromDB, isUsed: 1 });
       }
     } catch (e) {
       console.error("updateResourceIDB", e);
@@ -96,10 +99,12 @@ export default function OfflineSync() {
         ...observation,
         currentGroup
       });
+
       if (success) {
         await deleteObservation(idbID);
         for (const resource of observation.resources) {
-          await deleteResource(resource.id);
+          const resourceFromDB = await getOneByIndex("hashKey", resource.hashKey);
+          await deleteResource(resourceFromDB.id);
         }
 
         if (instant) {

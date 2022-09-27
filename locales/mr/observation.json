@@ -67,6 +67,9 @@
     "validate": "प्रमाणित करणे",
     "validated": "क्यूरेटर द्वारे ओळखले ओळख"
   },
+  "importer": {
+    "title": "गटबद्ध संसाधने"
+  },
   "language": "इंग्रजी",
   "last_location": "अंतिम स्थान वापरा",
   "latitude": "अक्षांश",
@@ -118,7 +121,7 @@
   "location_placeholder": "एक स्थान प्रविष्ट करा",
   "location_scale": "स्थान अचूकता",
   "longitude": "रेखांश",
-  "mange_resources": "संसाधने व्यवस्थापित करा",
+  "manage_resources": "संसाधने व्यवस्थापित करा",
   "media_picker": "मीडिया पिकर",
   "more_fields": "अधिक फील्ड",
   "nearby": "जवळील निरीक्षण",
