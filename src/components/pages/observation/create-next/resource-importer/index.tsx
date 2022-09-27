@@ -26,9 +26,16 @@ export default function ResourceImporter() {
 
   useListener(
     (o) => {
-      resourceGroups.value = o.map((group) =>
+      const _resourceGroups = o.map((group) =>
         group.map((resource) => ({ ...resource, blobURL: URL.createObjectURL(resource.blob) }))
       );
+
+      // show group dialouge only when there are more then one groups
+      if (_resourceGroups.length > 1) {
+        resourceGroups.value = _resourceGroups;
+      } else {
+        finalizeResources(_resourceGroups);
+      }
     },
     [OBSERVATION_IMPORT_DIALOUGE]
   );
@@ -41,8 +48,15 @@ export default function ResourceImporter() {
     resourceGroups.value = [...resourceGroups.value, []];
   };
 
+  const finalizeResources = (payload) => {
+    emit(
+      OBSERVATION_IMPORT_RESOURCE,
+      payload.filter((g) => g.length)
+    );
+  };
+
   const handleOnContinue = () => {
-    emit(OBSERVATION_IMPORT_RESOURCE, Array.from(resourceGroups.value));
+    finalizeResources(resourceGroups.value);
     handleOnClose();
   };
 
