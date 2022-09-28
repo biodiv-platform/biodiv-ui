@@ -5,14 +5,7 @@ import LayersIcon from "@icons/layers";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-export default function ResourceNavigation({
-  index,
-  setIndex,
-  size,
-  sizeUploaded,
-  onDelete,
-  onReorder
-}) {
+export default function ResourceNavigation({ index, setIndex, size, onDelete, onReorder }) {
   const { t } = useTranslation();
 
   const handleOnDelete = () => {
@@ -52,9 +45,8 @@ export default function ResourceNavigation({
         leftIcon={<LayersIcon />}
         onClick={onReorder}
         title={t("observation:manage_resources")}
-      >
-        {sizeUploaded} / {size}
-      </Button>
+        children={size}
+      />
     </ButtonGroup>
   );
 }

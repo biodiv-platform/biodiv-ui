@@ -6,16 +6,12 @@ import { axGroupList } from "@services/app.service";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
 import { axGetLangList } from "@services/utility.service";
-import { DB_CONFIG } from "@static/observation-create";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
-import IndexedDBProvider from "use-indexeddb";
 
 const ObservationCreateNextPage = (props) => (
   <NoSSR>
-    <IndexedDBProvider config={DB_CONFIG} loading="Loading...">
-      <ObservationCreateNextComponent {...props} />
-    </IndexedDBProvider>
+    <ObservationCreateNextComponent {...props} />
   </NoSSR>
 );
 

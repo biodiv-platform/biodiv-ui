@@ -11,7 +11,8 @@ import {
   TabPanels,
   Tabs
 } from "@chakra-ui/react";
-import { OBSERVATION_IMPORT_RESOURCE } from "@static/events";
+import { OBSERVATION_IMPORT_DIALOUGE } from "@static/events";
+import { clusterResources } from "@utils/observation";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
@@ -46,7 +47,7 @@ export function MediaPicker({ onBrowse }) {
   }, [showMediaPicker, draft.sortBy]);
 
   const handleOnImport = () => {
-    emit(OBSERVATION_IMPORT_RESOURCE, media.selected);
+    emit(OBSERVATION_IMPORT_DIALOUGE, clusterResources(media.selected));
     setShowMediaPicker(false);
   };
 

@@ -1,6 +1,5 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Button,
   Flex,
   Modal,
@@ -11,7 +10,6 @@ import {
   ModalHeader,
   ModalOverlay
 } from "@chakra-ui/react";
-import AddIcon from "@icons/add";
 import { useSignal } from "@preact/signals-react";
 import { OBSERVATION_IMPORT_DIALOUGE, OBSERVATION_IMPORT_RESOURCE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
@@ -27,7 +25,10 @@ export default function ResourceImporter() {
   useListener(
     (o) => {
       const _resourceGroups = o.map((group) =>
-        group.map((resource) => ({ ...resource, blobURL: URL.createObjectURL(resource.blob) }))
+        group.map((resource) => ({
+          ...resource,
+          blobURL: resource.blob ? URL.createObjectURL(resource.blob) : null
+        }))
       );
 
       // show group dialouge only when there are more then one groups
@@ -42,10 +43,6 @@ export default function ResourceImporter() {
 
   const handleOnClose = () => {
     resourceGroups.value = [];
-  };
-
-  const addNewGroup = () => {
-    resourceGroups.value = [...resourceGroups.value, []];
   };
 
   const finalizeResources = (payload) => {
@@ -70,12 +67,7 @@ export default function ResourceImporter() {
           <ResourceRearrange resourceGroups={resourceGroups} />
         </ModalBody>
 
-        <ModalFooter pt={0}>
-          <Box flexGrow={1}>
-            <Button colorScheme="green" leftIcon={<AddIcon />} onClick={addNewGroup}>
-              {t("common:add")}
-            </Button>
-          </Box>
+        <ModalFooter>
           <Flex flexShrink={0}>
             <Button mr={3} onClick={handleOnClose}>
               {t("common:close")}

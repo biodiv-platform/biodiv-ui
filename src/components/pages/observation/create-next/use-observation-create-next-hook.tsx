@@ -107,7 +107,7 @@ export const ObservationCreateNextProvider = ({
     []
   );
 
-  const { add, getOneByIndex, getManyByIndex, deleteByID, update } =
+  const { add, getOneByKey, getManyByKey, deleteByID, update } =
     useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
 
   const selectedMediaList = useMemo(
@@ -116,7 +116,7 @@ export const ObservationCreateNextProvider = ({
   );
 
   const refreshDraftMediaFromIdb = async () => {
-    const allUnUsedAssets = await getManyByIndex("isUsed", 0);
+    const allUnUsedAssets = await getManyByKey("isUsed", 0);
     const _draftList = allUnUsedAssets.sort((a, b) => b[draftSortBy] - a[draftSortBy]);
     setDraftList(_draftList);
 
@@ -134,7 +134,7 @@ export const ObservationCreateNextProvider = ({
 
     // housekeeping for expired assets
     const newMediaHashKeys = data.map((a) => a.hashKey);
-    const allUnUsedMedia = await getManyByIndex("isUsed", 0);
+    const allUnUsedMedia = await getManyByKey("isUsed", 0);
     for (const asset of allUnUsedMedia) {
       if (!newMediaHashKeys.includes(asset.hashKey) && asset.status === AssetStatus.Uploaded) {
         await deleteByID(asset.id);
@@ -143,7 +143,7 @@ export const ObservationCreateNextProvider = ({
 
     // Update all fetched assets into IndexedDB
     for (const asset of data) {
-      const dbAsset = await getOneByIndex("hashKey", asset.hashKey);
+      const dbAsset = await getOneByKey("hashKey", asset.hashKey);
       if (!dbAsset) {
         await add({
           ...asset,
@@ -198,7 +198,7 @@ export const ObservationCreateNextProvider = ({
    *
    */
   const tryMediaSync = async () => {
-    const pendingMedia = await getManyByIndex("status", AssetStatus.Pending);
+    const pendingMedia = await getManyByKey("status", AssetStatus.Pending);
     for (const _media of pendingMedia) {
       await uploadPendingMedia(_media);
     }

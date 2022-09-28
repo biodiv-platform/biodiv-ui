@@ -10,6 +10,7 @@ import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import ManageResourcesModal from "../../manage-resources";
 import useObservationCreateNext from "../../use-observation-create-next-hook";
 import ResourceNavigation from "./resource-navigation";
+import ResourceUploadIndicator from "./upload-indicator";
 
 export default function Resources({ index, removeObservation }) {
   const resourcesName = `o.${index}.resources`;
@@ -46,10 +47,13 @@ export default function Resources({ index, removeObservation }) {
     });
   }, [media.status]);
 
-  const uploadedSize = useMemo(
-    () => resourceArrayValues.map((r) => r.status).filter((s) => s === AssetStatus.Uploaded).length,
-    [resourceArrayValues]
-  );
+  const uploadStats = useMemo(() => {
+    const _total = resources.fields.length;
+    const _uploaded = resourceArrayValues
+      .map((r) => r.status)
+      .filter((s) => s === AssetStatus.Uploaded).length;
+    return { children: `${_uploaded}/${_total}`, hidden: _uploaded === _total };
+  }, [resourceArrayValues]);
 
   return (
     <>
@@ -81,8 +85,8 @@ export default function Resources({ index, removeObservation }) {
           onReorder={setResourceEditor.on}
           setIndex={setResourceIndex}
           size={resources.fields.length}
-          sizeUploaded={uploadedSize}
         />
+        <ResourceUploadIndicator {...uploadStats} />
       </Box>
       {resourceEditor && (
         <ManageResourcesModal

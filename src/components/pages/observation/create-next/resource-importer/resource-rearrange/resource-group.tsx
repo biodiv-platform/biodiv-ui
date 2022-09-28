@@ -1,6 +1,6 @@
-import { CloseButton, SimpleGrid } from "@chakra-ui/react";
+import { Box, CloseButton, SimpleGrid } from "@chakra-ui/react";
+import { Droppable } from "@hello-pangea/dnd";
 import React from "react";
-import { Droppable } from "react-beautiful-dnd";
 
 import { Resource } from "./resource";
 
@@ -11,7 +11,7 @@ export const ResourceGroup = ({ index, resourceGroup, removeGroup }) => (
         columns={6}
         bg="gray.100"
         borderRadius="md"
-        mb={4}
+        mb={6}
         minH="155px"
         position="relative"
         p={2}

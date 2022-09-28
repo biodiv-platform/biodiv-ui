@@ -8,6 +8,7 @@ import {
 } from "@services/files.service";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { STORE } from "@static/observation-create";
+import { setupDB } from "@utils/db";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -44,11 +45,11 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const [assets, setAssets] = useImmer({ a: props.assets || [] });
   const [resourcesSortBy, setResourcesSortBy] = useState(MY_UPLOADS_SORT[0].value);
   const { t } = useTranslation();
-  const { add, getOneByIndex, getManyByIndex, deleteByID, update } =
+  const { add, getOneByKey, getManyByKey, deleteByID, update } =
     useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
 
   const reFetchAssets = async () => {
-    const allUnUsedAssets = await getManyByIndex("isUsed", 0);
+    const allUnUsedAssets = await getManyByKey("isUsed", 0);
     setAssets((_draft) => {
       _draft.a = allUnUsedAssets.sort((a, b) => b[resourcesSortBy] - a[resourcesSortBy]);
     });
@@ -63,7 +64,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
 
     // housekeeping for expired assets
     const newAssetsHashKeys = data.map((a) => a.hashKey);
-    const allUnUsedAssets = await getManyByIndex("isUsed", 0);
+    const allUnUsedAssets = await getManyByKey("isUsed", 0);
     for (const asset of allUnUsedAssets) {
       if (!newAssetsHashKeys.includes(asset.hashKey) && asset.status === AssetStatus.Uploaded) {
         await deleteByID(asset.id);
@@ -72,7 +73,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
 
     // Update all fetched assets into IndexedDB
     for (const asset of data) {
-      const dbAsset = await getOneByIndex("hashKey", asset.hashKey);
+      const dbAsset = await getOneByKey("hashKey", asset.hashKey);
       if (!dbAsset) {
         await add({
           ...asset,
@@ -91,6 +92,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   };
 
   useEffect(() => {
+    setupDB();
     fetchMyUploads();
   }, []);
 
@@ -154,7 +156,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   };
 
   const tryResourceSync = async () => {
-    const pendingResources = await getManyByIndex("status", AssetStatus.Pending);
+    const pendingResources = await getManyByKey("status", AssetStatus.Pending);
     for (const pendingResource of pendingResources) {
       await uploadPendingResource(pendingResource);
     }
@@ -165,7 +167,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   }, [assets.a.length]);
 
   const addToObservationAssets = async (hashKey) => {
-    const a = await getOneByIndex("hashKey", hashKey);
+    const a = await getOneByKey("hashKey", hashKey);
 
     if (a?.dateCreated) {
       emit(FORM_DATEPICKER_CHANGE + "observedOn", a?.dateCreated);
@@ -207,7 +209,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
 
   const updateObservationAsset = async (index, hashKey, key, value) => {
     if (props.isCreate) {
-      const asset = await getOneByIndex("hashKey", hashKey);
+      const asset = await getOneByKey("hashKey", hashKey);
       await update({ ...asset, [key]: value });
     }
     setObservationAssets((_draft) => {

@@ -1,9 +1,9 @@
 import { AspectRatio, GridItem, Image } from "@chakra-ui/react";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
+import { Draggable } from "@hello-pangea/dnd";
 import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useMemo } from "react";
-import { Draggable } from "react-beautiful-dnd";
 
 export const Resource = ({ resource, index }) => {
   const { user } = useGlobalState();
@@ -28,8 +28,8 @@ export const Resource = ({ resource, index }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <AspectRatio bg="white" ratio={1} h="full" borderRadius="md">
-            <Image {...imgThumb} borderRadius="md" />
+          <AspectRatio bg="white" ratio={1} h="full" borderRadius="sm" overflow="hidden">
+            <Image {...imgThumb} />
           </AspectRatio>
         </GridItem>
       )}

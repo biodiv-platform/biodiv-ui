@@ -1,8 +1,10 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
+import { DragDropContext } from "@hello-pangea/dnd";
 import { Signal } from "@preact/signals-react";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
-import { DragDropContext } from "react-beautiful-dnd";
 
+import NewGroup from "./new-group";
 import { ResourceGroup } from "./resource-group";
 
 interface ResourceRearrangeProps {
@@ -10,6 +12,8 @@ interface ResourceRearrangeProps {
 }
 
 export default function ResourceRearrange({ resourceGroups }: ResourceRearrangeProps) {
+  const { t } = useTranslation();
+
   const onDragEnd = (result) => {
     const { destination, source } = result;
 
@@ -22,9 +26,18 @@ export default function ResourceRearrange({ resourceGroups }: ResourceRearrangeP
     const _resourceGroups = Array.from(resourceGroups.value);
     const el = _resourceGroups[source.droppableId][source.index];
     _resourceGroups[source.droppableId].splice(source.index, 1);
-    _resourceGroups[destination.droppableId].splice(destination.index, 0, el);
+
+    if (destination.droppableId === "new") {
+      _resourceGroups.push([el]);
+    } else {
+      _resourceGroups[destination.droppableId].splice(destination.index, 0, el);
+    }
 
     resourceGroups.value = _resourceGroups;
+  };
+
+  const addNewGroup = () => {
+    resourceGroups.value = [...resourceGroups.value, []];
   };
 
   const removeGroup = (index) => {
@@ -38,13 +51,18 @@ export default function ResourceRearrange({ resourceGroups }: ResourceRearrangeP
     <DragDropContext onDragEnd={onDragEnd}>
       <Flex direction="column">
         {resourceGroups.value.map((resourceGroup, index) => (
-          <ResourceGroup
-            key={index}
-            resourceGroup={resourceGroup}
-            index={index.toString()}
-            removeGroup={removeGroup}
-          />
+          <Box key={index}>
+            <Box as="span" py={2} px={4} borderTopRadius="md" bg="gray.100">
+              {t("observation:observation")} #{index+1}
+            </Box>
+            <ResourceGroup
+              resourceGroup={resourceGroup}
+              index={index.toString()}
+              removeGroup={removeGroup}
+            />
+          </Box>
         ))}
+        <NewGroup onAdd={addNewGroup} />
       </Flex>
     </DragDropContext>
   );
