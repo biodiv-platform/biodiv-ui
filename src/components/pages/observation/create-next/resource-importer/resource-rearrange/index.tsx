@@ -53,7 +53,7 @@ export default function ResourceRearrange({ resourceGroups }: ResourceRearrangeP
         {resourceGroups.value.map((resourceGroup, index) => (
           <Box key={index}>
             <Box as="span" py={2} px={4} borderTopRadius="md" bg="gray.100">
-              {t("observation:observation")} #{index+1}
+              {t("observation:observation")} #{index + 1}
             </Box>
             <ResourceGroup
               resourceGroup={resourceGroup}

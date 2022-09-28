@@ -1,4 +1,4 @@
-import { Box, CloseButton, SimpleGrid } from "@chakra-ui/react";
+import { CloseButton, SimpleGrid } from "@chakra-ui/react";
 import { Droppable } from "@hello-pangea/dnd";
 import React from "react";
 
