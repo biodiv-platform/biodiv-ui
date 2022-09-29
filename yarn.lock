@@ -1720,18 +1720,6 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
   integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
 
-"@preact/signals-core@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@preact/signals-core/-/signals-core-1.2.0.tgz#14721e8fea7dc687f40eced1bb62bbefdeadb30d"
-  integrity sha512-GBjq/8WJkh/aenrEMvWIOr1lRfu6nb25er0m6r+4qVqKC85mXAYIbGHnoHTooNXCKxn2KEMUrATvN54MdMHE1A==
-
-"@preact/signals-react@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@preact/signals-react/-/signals-react-1.1.0.tgz#276ad42baea0687e22ab1638807d83b8d44b249c"
-  integrity sha512-2EY5F9qxeCmm9pFsyw0/HHxbADm0sKh6rMpvpiZiaDsTmpJFW3FmKE7bPsUP7bqhmQTSrboN9RHrjpE4seGqIA==
-  dependencies:
-    "@preact/signals-core" "^1.2.0"
-
 "@reach/observe-rect@^1.1.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@reach/observe-rect/-/observe-rect-1.2.0.tgz#d7a6013b8aafcc64c778a0ccb83355a11204d3b2"

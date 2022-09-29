@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
 import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
-import NProgress from "nprogress";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -9,13 +9,31 @@ import ObservationCreateNextForm from "./form";
 import useObservationCreateNext from "./use-observation-create-next-hook";
 
 export default function DraftDropzone() {
+  const { t } = useTranslation();
+  const toast = useToast();
+  const toastIdRef = React.useRef<any>();
   const { draft } = useObservationCreateNext();
 
   const handleOnDrop = async (files) => {
-    NProgress.start();
+    toastIdRef.current = toast({
+      description: `${t("form:uploader.processing")}...`,
+      variant: "subtle",
+      position: "top",
+      status: "loading",
+      duration: 60_000
+    });
+
     const resizedAssets = await resizeMultiple(files);
     draft.add(resizedAssets, true);
-    NProgress.done();
+
+    if (toastIdRef.current) {
+      toast.update(toastIdRef.current, {
+        description: t("common:success"),
+        variant: "subtle",
+        status: "success"
+      });
+      setTimeout(() => toast.close(toastIdRef.current), 1000);
+    }
   };
 
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({

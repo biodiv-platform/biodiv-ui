@@ -1,6 +1,5 @@
 import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import { useSignal } from "@preact/signals-react";
 import {
   axListMyUploads,
   axRemoveMyUploads,
@@ -78,7 +77,7 @@ export const ObservationCreateNextProvider = ({
 
   const { t } = useTranslation();
   const [draftList, setDraftList] = useState<any[]>([]);
-  const draftUploadStatus = useSignal({});
+  const [draftUploadStatus, setDraftUploadStatus] = useState({});
   const [draftDisabled, setDraftDisabled] = useState<string[]>([]);
   const [selectedHKs, setSelectedHKs] = useState<string[]>([]);
   const [draftSortBy, setDraftSortBy] = useState(MY_UPLOADS_SORT[0].value);
@@ -120,7 +119,7 @@ export const ObservationCreateNextProvider = ({
     const _draftList = allUnUsedAssets.sort((a, b) => b[draftSortBy] - a[draftSortBy]);
     setDraftList(_draftList);
 
-    draftUploadStatus.value = Object.fromEntries(_draftList.map((r) => [r.hashKey, r.status]));
+    setDraftUploadStatus(Object.fromEntries(_draftList.map((r) => [r.hashKey, r.status])));
 
     return _draftList;
   };
@@ -164,7 +163,7 @@ export const ObservationCreateNextProvider = ({
   const updateIdbMediaStatus = async (hashKey, status: AssetStatus) => {
     setDraftList(draftList.map((a) => (a.hashKey === hashKey ? { ...a, status } : a)));
 
-    draftUploadStatus.value = { ...draftUploadStatus.value, [hashKey]: status };
+    setDraftUploadStatus({ ...draftUploadStatus, [hashKey]: status });
   };
 
   const uploadPendingMedia = async (pendingMedia, noSave = true) => {
@@ -263,7 +262,7 @@ export const ObservationCreateNextProvider = ({
           setKeys: setSelectedHKs,
           disabledKeys: draftDisabled,
           setDisabledKeys: setDraftDisabled,
-          status: draftUploadStatus.value,
+          status: draftUploadStatus,
           selected: selectedMediaList,
           toggleSelection: toggleDraftSelection,
           sync: tryMediaSync

@@ -10,17 +10,16 @@ import {
   ModalHeader,
   ModalOverlay
 } from "@chakra-ui/react";
-import { useSignal } from "@preact/signals-react";
 import { OBSERVATION_IMPORT_DIALOUGE, OBSERVATION_IMPORT_RESOURCE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
 
 import ResourceRearrange from "./resource-rearrange";
 
 export default function ResourceImporter() {
   const { t } = useTranslation();
-  const resourceGroups = useSignal([] as any);
+  const [resourceGroups, setResourceGroups] = useState<any[]>([]);
 
   useListener(
     (o) => {
@@ -31,18 +30,18 @@ export default function ResourceImporter() {
         }))
       );
 
-      // show group dialouge only when there are more then one groups
-      if (_resourceGroups.length > 1) {
-        resourceGroups.value = _resourceGroups;
-      } else {
+      // don't show dialouge when there's only one image
+      if (_resourceGroups.length === 1 && o[0].length === 1) {
         finalizeResources(_resourceGroups);
+      } else {
+        setResourceGroups(_resourceGroups);
       }
     },
     [OBSERVATION_IMPORT_DIALOUGE]
   );
 
   const handleOnClose = () => {
-    resourceGroups.value = [];
+    setResourceGroups([]);
   };
 
   const finalizeResources = (payload) => {
@@ -53,18 +52,21 @@ export default function ResourceImporter() {
   };
 
   const handleOnContinue = () => {
-    finalizeResources(resourceGroups.value);
+    finalizeResources(resourceGroups);
     handleOnClose();
   };
 
-  return resourceGroups.value.length ? (
+  return resourceGroups.length ? (
     <Modal isOpen={true} onClose={handleOnClose} size="4xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{t("observation:importer.title")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <ResourceRearrange resourceGroups={resourceGroups} />
+          <ResourceRearrange
+            resourceGroups={resourceGroups}
+            setResourceGroups={setResourceGroups}
+          />
         </ModalBody>
 
         <ModalFooter>
