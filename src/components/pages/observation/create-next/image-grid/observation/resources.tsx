@@ -48,11 +48,17 @@ export default function Resources({ index, removeObservation }) {
   }, [media.status]);
 
   const uploadStats = useMemo(() => {
+    const _resourceStatusList = resourceArrayValues.map((r) => r.status);
+
     const _total = resources.fields.length;
-    const _uploaded = resourceArrayValues
-      .map((r) => r.status)
-      .filter((s) => s === AssetStatus.Uploaded).length;
-    return { children: `${_uploaded}/${_total}`, hidden: _uploaded === _total };
+    const _uploaded = _resourceStatusList.filter((s) => s === AssetStatus.Uploaded).length;
+    const _failed = _resourceStatusList.filter((s) => s === AssetStatus.Failed).length;
+
+    return {
+      children: `${_uploaded}/${_total}`,
+      hidden: _uploaded + _failed === _total,
+      failed: _failed
+    };
   }, [resourceArrayValues]);
 
   return (

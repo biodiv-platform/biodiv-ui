@@ -106,7 +106,7 @@ export const ObservationCreateNextProvider = ({
     []
   );
 
-  const { add, getOneByKey, getManyByKey, deleteByID, update } =
+  const { add, getOneByKey, getManyByKey, getAll, deleteByID, update } =
     useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
 
   const selectedMediaList = useMemo(
@@ -173,19 +173,22 @@ export const ObservationCreateNextProvider = ({
 
     try {
       const r = await axUploadObservationResource(pendingMedia);
-      if (r.success && noSave) {
+      if (noSave) {
+        const _status = r.success ? AssetStatus.Uploaded : AssetStatus.Failed;
+
         await update({
           ...pendingMedia,
-          blob: undefined,
-          status: AssetStatus.Uploaded
+          blob: r.success ? undefined : pendingMedia.blob,
+          status: _status
         });
-        await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Uploaded);
-        return true;
+        await updateIdbMediaStatus(pendingMedia.hashKey, _status);
+
+        return _status;
       }
     } catch (e) {
       console.error(e);
       if (noSave) {
-        await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Pending);
+        await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Failed);
       }
     }
 
@@ -196,10 +199,12 @@ export const ObservationCreateNextProvider = ({
    * Picks all pending media and tries to upload
    *
    */
-  const tryMediaSync = async () => {
-    const pendingMedia = await getManyByKey("status", AssetStatus.Pending);
+  const tryMediaSync = async (_status: AssetStatus = AssetStatus.Pending) => {
+    const pendingMedia = await getAll();
     for (const _media of pendingMedia) {
-      await uploadPendingMedia(_media);
+      if (_media.status === _status) {
+        await uploadPendingMedia(_media);
+      }
     }
     await refreshDraftMediaFromIdb();
   };
