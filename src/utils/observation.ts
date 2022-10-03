@@ -3,7 +3,7 @@ import { point } from "@turf/helpers";
 import setClustering from "set-clustering";
 
 import dayjs from "./date";
-import { comparePerceptualHash } from "./phash";
+import { compareBlockHash } from "./phash";
 
 export const areImagesSimilar = (image1, image2) => {
   if (
@@ -29,7 +29,7 @@ export const areImagesSimilar = (image1, image2) => {
   if (
     !image1.dateCreated &&
     !image1.longitude &&
-    Math.abs(comparePerceptualHash(image1.blockHash, image2.blockHash)) > 0.7
+    Math.abs(compareBlockHash(image1.blockHash, image2.blockHash)) > 0.7
   ) {
     return 1;
   }

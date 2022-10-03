@@ -32,7 +32,7 @@ const hexToBin = (hexString) => {
   return result;
 };
 
-export const comparePerceptualHash = (hash1, hash2) => {
+export const compareBlockHash = (hash1, hash2) => {
   const _hash1 = hexToBin(hash1);
   const _hash2 = hexToBin(hash2);
   const minLength = Math.min(_hash1.length, _hash2.length);
