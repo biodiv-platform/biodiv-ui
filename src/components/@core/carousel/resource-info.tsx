@@ -45,6 +45,8 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
     }
   };
 
+  const url = currentResource?.resource?.url;
+
   return (
     <Box position="absolute" top={4} right={0} left={4} display="flex">
       <Popover placement="bottom-start" closeOnBlur={false} isLazy={true}>
@@ -67,6 +69,14 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
               <Box>{t("observation:contributor")}</Box>
               <Box>{currentResource?.resource?.contributor || currentResource?.userIbp?.name}</Box>
 
+              {url && (
+                <>
+                  <Box>{t("observation:url")}</Box>
+                  <Box noOfLines={1}>
+                    <ExternalBlueLink href={url} children={url} />
+                  </Box>
+                </>
+              )}
               <Box>{t("common:uploader")}</Box>
               <Box>
                 <LocalLink href={`/user/show/${currentResource?.userIbp?.id}`} prefixGroup={true}>

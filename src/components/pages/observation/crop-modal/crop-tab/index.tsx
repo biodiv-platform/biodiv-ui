@@ -20,7 +20,7 @@ const arrayToObject = (arr) => {
   return arr ? { x: arr[0], y: arr[1], width: arr[2], height: arr[3], unit: "px" } : null;
 };
 
-export default function CropTab({ data, setData }) {
+export default function CropTab({ data, setData, canCrop }) {
   if (!data.id) return <>{CROP_STATUS.OBSERVATION_NULL_MESSAGE}</>;
 
   const [crop, setCrop] = useState<any>(arrayToObject(data?.observationResource?.[0]?.bbox));
@@ -121,12 +121,7 @@ export default function CropTab({ data, setData }) {
           borderRadius="md"
           mb={4}
         >
-          <ReactCrop
-            crop={crop}
-            onChange={(c) => {
-              setCrop(c);
-            }}
-          >
+          <ReactCrop crop={crop} disabled={!canCrop} onChange={(c) => setCrop(c)}>
             <Image
               alt={`${currentCropItem?.id}`}
               src={getResourceRAW(currentCropItem.context, currentCropItem.fileName)}
@@ -137,7 +132,7 @@ export default function CropTab({ data, setData }) {
           </ReactCrop>
         </Flex>
 
-        <Flex justifyContent="space-between">
+        <Flex hidden={!canCrop} justifyContent="space-between">
           <ButtonGroup gap={2}>
             <Button colorScheme="green" onClick={() => handleValidate(currentCropItem.id)}>
               {t("observation:crop.actions.curate")}

@@ -1,5 +1,7 @@
 import { filterXSS } from "xss";
 
+import { preProcessContent } from "./pages";
+
 /**
  * Detacts Links in text and automatically links them
  *
@@ -76,7 +78,12 @@ export const stripSpecialCharacters = (text): string => {
  */
 export const getInjectableScientificName = (nHtml) => {
   try {
-    return { __html: filterXSS(URLify(nHtml), { whiteList: { i: [] }, stripIgnoreTag: true }) };
+    return {
+      __html: filterXSS(URLify(preProcessContent(nHtml)), {
+        whiteList: { i: [] },
+        stripIgnoreTag: true
+      })
+    };
   } catch (e) {
     console.error(e);
   }

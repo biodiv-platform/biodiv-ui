@@ -48,7 +48,8 @@ export const customTheme = extendTheme(
   withProse({
     baseStyle: {
       a: {
-        color: "blue.500"
+        color: "blue.500",
+        wordBreak: "break-all"
       },
       table: {
         td: {

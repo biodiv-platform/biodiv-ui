@@ -49,7 +49,7 @@ const http = axios.create(defaultHeaders);
  * Custom interceptor that allows user to pass custom context (for SSR)
  */
 http.interceptors.request.use(
-  async (options) => {
+  async (options: any) => {
     if (options?.headers?.unauthorized || options?.data?.headers?.unauthorized) {
       return options;
     }

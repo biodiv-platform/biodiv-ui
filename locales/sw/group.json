@@ -114,6 +114,7 @@
     "table": {
       "actions": "Vitendo",
       "description": "Maelezo.",
+      "enabled": "Imewashwa",
       "image": "Picha",
       "more_link": "LINK.",
       "title": "Kichwa"
