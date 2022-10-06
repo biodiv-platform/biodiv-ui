@@ -88,7 +88,7 @@ export default function CropTab({ data, setData, canCrop }) {
         >
           {data?.observationResource?.map(({ selectionStatus, resource, bbox }) => (
             <Box minW="8rem" width="full" h="7rem" position="relative">
-              <Box position="absolute" top={0} left={0} ml={3} mt={1}>
+              <Box position="absolute" top={0} left={0} ml={3} mt={1} hidden={!canCrop}>
                 <ObservationImageStatusBadge status={selectionStatus || CROP_STATUS.NOT_CURATED} />
               </Box>
               <Image
