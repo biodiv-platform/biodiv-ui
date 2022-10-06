@@ -16,7 +16,8 @@ import useObservationFilter from "../common/use-observation-filter";
 const CropTab = dynamic(() => import("./crop-tab"));
 
 export default function CropModal() {
-  const { cropObservationData, setCropObservationData } = useObservationFilter();
+  const { cropObservationData, setCropObservationData, canCropObservation } =
+    useObservationFilter();
   const { t } = useTranslation();
 
   return (
@@ -32,7 +33,11 @@ export default function CropModal() {
         <Box minH={"fit-content"}>
           <ModalBody>
             {cropObservationData && (
-              <CropTab data={cropObservationData} setData={setCropObservationData} />
+              <CropTab
+                data={cropObservationData}
+                setData={setCropObservationData}
+                canCrop={canCropObservation}
+              />
             )}
           </ModalBody>
         </Box>

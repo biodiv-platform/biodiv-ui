@@ -54,6 +54,7 @@ interface ObservationFilterContextProps {
   cropObservationData;
   setCropObservationData;
   setCropObservationId;
+  canCropObservation;
 }
 
 const ObservationFilterContext = createContext<ObservationFilterContextProps>(
@@ -71,8 +72,11 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [selectAll, setSelectAll] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cropObservationData, setCropObservationData] = useState();
+  const [canCropObservation, setCanCropObservation] = useState();
 
-  const setCropObservationId = async (id) => {
+  const setCropObservationId = async (id, canCrop) => {
+    setCanCropObservation(canCrop);
+
     const response = await axGetCropResources(id);
     setCropObservationData(response.data);
   };
@@ -236,6 +240,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         cropObservationData,
         setCropObservationData,
         setCropObservationId,
+        canCropObservation,
         // Config Properties
         speciesGroup: props.speciesGroup,
         userGroup: props.userGroup,

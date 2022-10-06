@@ -17,16 +17,16 @@
   "creating": "Nous créons votre observation",
   "crop": {
     "actions": {
-      "curate": "Sélectionner",
+      "curate": "Couper",
       "reject": "Rejeter",
-      "un_curate": "Non curé"
+      "un_curate": "Dé-recadrer"
     },
     "status": {
       "not_curated": "NON ORGANISÉ",
       "rejected": "REJETÉ",
       "selected": "ORGANISÉ"
     },
-    "title": "Recadrer"
+    "title": "Médias d'observation"
   },
   "custom_fields": "Champs personnalisés",
   "delete_file": {
@@ -188,6 +188,8 @@
   "update_observation": "Mettre à jour l'observation",
   "updated": "Mise à jour",
   "updated_on": "Mis à jour le",
+  "upload_info": "Pour éviter la duplication, veuillez sélectionner et fusionner plusieurs images du même organisme",
+  "url": "Lien",
   "use_dms": "Utiliser dms",
   "use_last_value": "Utiliser la dernière valeur",
   "use_lat_lng": "Utiliser Lat-Long",
