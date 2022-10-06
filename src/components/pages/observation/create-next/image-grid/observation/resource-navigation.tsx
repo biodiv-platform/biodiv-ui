@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { ButtonGroup, IconButton } from "@chakra-ui/react";
+import { Button, ButtonGroup, IconButton } from "@chakra-ui/react";
 import DeleteIcon from "@icons/delete";
 import LayersIcon from "@icons/layers";
 import useTranslation from "next-translate/useTranslation";
@@ -40,11 +40,12 @@ export default function ResourceNavigation({ index, setIndex, size, onDelete, on
         onClick={handleOnNext}
         title={t("common:next")}
       />
-      <IconButton
-        aria-label={t("observation:mange_resources")}
-        icon={<LayersIcon />}
+      <Button
+        aria-label={t("observation:manage_resources")}
+        leftIcon={<LayersIcon />}
         onClick={onReorder}
-        title={t("observation:mange_resources")}
+        title={t("observation:manage_resources")}
+        children={size}
       />
     </ButtonGroup>
   );

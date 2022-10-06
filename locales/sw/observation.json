@@ -67,6 +67,9 @@
     "validate": "Kuhalalisha",
     "validated": "Kitambulisho kilichothibitishwa na Curator."
   },
+  "importer": {
+    "title": "Uchunguzi Uliopangwa Kiotomatiki - Buruta na uangushe ili kupanga upya"
+  },
   "language": "Lugha",
   "last_location": "Tumia eneo la mwisho",
   "latitude": "Latitude",
@@ -118,7 +121,7 @@
   "location_placeholder": "Ingiza mahali",
   "location_scale": "Usahihi wa mahali",
   "longitude": "Longitude.",
-  "mange_resources": "Dhibiti Rasilimali",
+  "manage_resources": "Dhibiti Rasilimali",
   "media_picker": "Kiteua Vyombo vya Habari",
   "more_fields": "Viwanja Zaidi",
   "nearby": "Uchunguzi wa karibu.",
@@ -185,7 +188,6 @@
   "update_observation": "Sasisha uchunguzi",
   "updated": "Imeongezwa",
   "updated_on": "Updated On.",
-  "upload_info": "Ili kuepuka kurudia, tafadhali chagua na uunganishe picha nyingi za kiumbe kimoja",
   "use_dms": "Tumia DMS.",
   "use_last_value": "Tumia thamani ya mwisho",
   "use_lat_lng": "Tumia Lat-Long.",

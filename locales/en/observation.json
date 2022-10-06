@@ -67,6 +67,9 @@
     "validate": "Validate",
     "validated": "Identification validated by curator"
   },
+  "importer": {
+    "title": "Automatically Grouped Observations - Drag and drop to reorganise"
+  },
   "language": "Language",
   "last_location": "Use last location",
   "latitude": "Latitude",
@@ -118,13 +121,14 @@
   "location_placeholder": "Enter a location",
   "location_scale": "Location Accuracy",
   "longitude": "Longitude",
-  "mange_resources": "Manage Resources",
+  "manage_resources": "Manage Resources",
   "media_picker": "Media Picker",
   "more_fields": "More Fields",
   "nearby": "Nearby Observations",
   "no_custom_field": "No Custom field(s) found for this observation",
   "no_empty_suggestion": "Cannot crete empty suggestion",
   "notes": "Notes",
+  "observation": "Observation",
   "observed": "Observed",
   "observed_at": "Location Observed At",
   "post_to_groups": "Post to Groups",
@@ -185,7 +189,6 @@
   "update_observation": "Update Observation",
   "updated": "Updated",
   "updated_on": "Updated on",
-  "upload_info": "To avoid duplication, please select and merge multiple images of the same organism",
   "use_dms": "Use DMS",
   "use_last_value": "Use last value",
   "use_lat_lng": "Use Lat-Long",

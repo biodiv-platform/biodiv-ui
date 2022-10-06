@@ -5,11 +5,12 @@ import {
   axRemoveMyUploads,
   axUploadObservationResource
 } from "@services/files.service";
-import { OBSERVATION_IMPORT_RESOURCE } from "@static/events";
+import { OBSERVATION_IMPORT_DIALOUGE } from "@static/events";
 import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS } from "@static/location";
 import { STORE } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
+import { clusterResources } from "@utils/observation";
 import useTranslation from "next-translate/useTranslation";
 import React, { createContext, useContext, useMemo, useState } from "react";
 import { emit } from "react-gbus";
@@ -45,6 +46,7 @@ interface ObservationCreateNextContextProps {
     disabledKeys;
     setDisabledKeys;
     selected;
+    status;
     toggleSelection;
     sync;
   };
@@ -75,6 +77,7 @@ export const ObservationCreateNextProvider = ({
 
   const { t } = useTranslation();
   const [draftList, setDraftList] = useState<any[]>([]);
+  const [draftUploadStatus, setDraftUploadStatus] = useState({});
   const [draftDisabled, setDraftDisabled] = useState<string[]>([]);
   const [selectedHKs, setSelectedHKs] = useState<string[]>([]);
   const [draftSortBy, setDraftSortBy] = useState(MY_UPLOADS_SORT[0].value);
@@ -103,7 +106,7 @@ export const ObservationCreateNextProvider = ({
     []
   );
 
-  const { add, getOneByIndex, getManyByIndex, deleteByID, update } =
+  const { add, getOneByKey, getManyByKey, getAll, deleteByID, update } =
     useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
 
   const selectedMediaList = useMemo(
@@ -112,9 +115,12 @@ export const ObservationCreateNextProvider = ({
   );
 
   const refreshDraftMediaFromIdb = async () => {
-    const allUnUsedAssets = await getManyByIndex("isUsed", 0);
+    const allUnUsedAssets = await getManyByKey("isUsed", 0);
     const _draftList = allUnUsedAssets.sort((a, b) => b[draftSortBy] - a[draftSortBy]);
     setDraftList(_draftList);
+
+    setDraftUploadStatus(Object.fromEntries(_draftList.map((r) => [r.hashKey, r.status])));
+
     return _draftList;
   };
 
@@ -127,7 +133,7 @@ export const ObservationCreateNextProvider = ({
 
     // housekeeping for expired assets
     const newMediaHashKeys = data.map((a) => a.hashKey);
-    const allUnUsedMedia = await getManyByIndex("isUsed", 0);
+    const allUnUsedMedia = await getManyByKey("isUsed", 0);
     for (const asset of allUnUsedMedia) {
       if (!newMediaHashKeys.includes(asset.hashKey) && asset.status === AssetStatus.Uploaded) {
         await deleteByID(asset.id);
@@ -136,7 +142,7 @@ export const ObservationCreateNextProvider = ({
 
     // Update all fetched assets into IndexedDB
     for (const asset of data) {
-      const dbAsset = await getOneByIndex("hashKey", asset.hashKey);
+      const dbAsset = await getOneByKey("hashKey", asset.hashKey);
       if (!dbAsset) {
         await add({
           ...asset,
@@ -156,6 +162,8 @@ export const ObservationCreateNextProvider = ({
 
   const updateIdbMediaStatus = async (hashKey, status: AssetStatus) => {
     setDraftList(draftList.map((a) => (a.hashKey === hashKey ? { ...a, status } : a)));
+
+    setDraftUploadStatus({ ...draftUploadStatus, [hashKey]: status });
   };
 
   const uploadPendingMedia = async (pendingMedia, noSave = true) => {
@@ -165,19 +173,22 @@ export const ObservationCreateNextProvider = ({
 
     try {
       const r = await axUploadObservationResource(pendingMedia);
-      if (r.success && noSave) {
+      if (noSave) {
+        const _status = r.success ? AssetStatus.Uploaded : AssetStatus.Failed;
+
         await update({
           ...pendingMedia,
-          blob: undefined,
-          status: AssetStatus.Uploaded
+          blob: r.success ? undefined : pendingMedia.blob,
+          status: _status
         });
-        await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Uploaded);
-        return true;
+        await updateIdbMediaStatus(pendingMedia.hashKey, _status);
+
+        return _status;
       }
     } catch (e) {
       console.error(e);
       if (noSave) {
-        await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Pending);
+        await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Failed);
       }
     }
 
@@ -188,10 +199,12 @@ export const ObservationCreateNextProvider = ({
    * Picks all pending media and tries to upload
    *
    */
-  const tryMediaSync = async () => {
-    const pendingMedia = await getManyByIndex("status", AssetStatus.Pending);
+  const tryMediaSync = async (_status: AssetStatus = AssetStatus.Pending) => {
+    const pendingMedia = await getAll();
     for (const _media of pendingMedia) {
-      await uploadPendingMedia(_media);
+      if (_media.status === _status) {
+        await uploadPendingMedia(_media);
+      }
     }
     await refreshDraftMediaFromIdb();
   };
@@ -199,21 +212,10 @@ export const ObservationCreateNextProvider = ({
   const addToDrafts = async (newMedia, addToObservation) => {
     setDraftDisabled([...draftDisabled, ...newMedia.map((o) => o.hashKey)]);
 
-    for (const o of newMedia) {
-      await add(o);
+    await Promise.all(newMedia.map((_media) => add(_media)));
 
-      const _odb = await getOneByIndex("hashKey", o.hashKey);
-      const isUploaded = await uploadPendingMedia(_odb);
-
-      if (isUploaded) {
-        const _draftList = await refreshDraftMediaFromIdb();
-
-        if (addToObservation) {
-          emit(OBSERVATION_IMPORT_RESOURCE, [_draftList.find((m) => o.hashKey === m.hashKey)]);
-        }
-      } else {
-        notification(`${t("observation:status.failed")} ${_odb.fileName}`);
-      }
+    if (addToObservation) {
+      emit(OBSERVATION_IMPORT_DIALOUGE, clusterResources(newMedia));
     }
 
     tryMediaSync();
@@ -265,6 +267,7 @@ export const ObservationCreateNextProvider = ({
           setKeys: setSelectedHKs,
           disabledKeys: draftDisabled,
           setDisabledKeys: setDraftDisabled,
+          status: draftUploadStatus,
           selected: selectedMediaList,
           toggleSelection: toggleDraftSelection,
           sync: tryMediaSync

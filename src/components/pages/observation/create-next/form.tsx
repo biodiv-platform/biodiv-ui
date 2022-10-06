@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
+import { AssetStatus } from "@interfaces/custom";
 import {
   OBSERVATION_BULK_EDIT_DONE,
   OBSERVATION_IMPORT_RESOURCE,
@@ -23,6 +24,7 @@ import {
 } from "./common";
 import ImageGrid from "./image-grid";
 import { MediaPicker } from "./media-picker";
+import ResourceImporter from "./resource-importer";
 import Toolbar from "./toolbar";
 import UploadProgress from "./upload-progress";
 import useObservationCreateNext from "./use-observation-create-next-hook";
@@ -76,7 +78,14 @@ export default function ObservationCreateNextForm({ onBrowse }) {
 
               facts: Yup.object().notRequired(),
               userGroupId: Yup.array(),
-              resources: Yup.array().min(1).required(),
+              resources: Yup.array()
+                .of(
+                  Yup.object().shape({
+                    status: Yup.number().equals([AssetStatus.Uploaded]).required()
+                  })
+                )
+                .min(1)
+                .required(),
 
               //custom field data - detailed validation in browse modal
               customFields: Yup.array()
@@ -109,7 +118,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
    * @param {*} index
    * @param {*} data
    */
-  const updateObservationByIndex = (data, index, callback) => {
+  const updateObservationByKey = (data, index, callback) => {
     callback(index, prepareObservationData(data));
   };
 
@@ -137,7 +146,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
       .filter((obs) => obs.isSelected)
       .reduce((prev, current) => deepMergeObservations(current, prev), { isSelected: false });
 
-    updateObservationByIndex({ ...o1, isSelected: false }, selectedFirstIndex, o.update);
+    updateObservationByKey({ ...o1, isSelected: false }, selectedFirstIndex, o.update);
   };
 
   const handleOnSplit = () => {
@@ -152,7 +161,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
         const currentObservation = all[toSplitIndex];
 
         for (const [resourceIndex, resource] of currentObservation.resources.entries()) {
-          updateObservationByIndex(
+          updateObservationByKey(
             { ...currentObservation, resources: [resource], isSelected: false },
             toSplitIndex,
             resourceIndex === 0 ? o.update : o.insert
@@ -233,6 +242,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
         </form>
       </FormProvider>
       <BulkEditor />
+      <ResourceImporter />
     </>
   );
 }

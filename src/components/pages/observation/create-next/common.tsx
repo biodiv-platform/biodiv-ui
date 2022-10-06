@@ -5,13 +5,14 @@ import { cleanFacts, cleanTags } from "@utils/tags";
 import { parseDefaultCustomField } from "../create/form";
 import { setLastData } from "../create/form/location/use-last-location";
 
-export const preProcessObservations = async (resources, currentGroup, customFieldList) => {
+export const preProcessObservations = async (resourceGroups, currentGroup, customFieldList) => {
   const finalResources: any[] = [];
 
   const customFields = parseDefaultCustomField(customFieldList, currentGroup);
 
-  for (const r of resources) {
+  for (const resources of resourceGroups) {
     let geoInfo = {};
+    const r = resources[0];
 
     // If GPS is available then Reverse GeoCode given coordinates
     if (r.latitude) {
@@ -30,7 +31,7 @@ export const preProcessObservations = async (resources, currentGroup, customFiel
 
     finalResources.push({
       ...DEFAULT_OBSERVATION_PAYLOAD,
-      resources: [r],
+      resources: resources,
       observedOn: r?.dateCreated ? new Date(r?.dateCreated).toISOString() : undefined,
       ...geoInfo,
       customFields,

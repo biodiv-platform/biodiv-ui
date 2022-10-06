@@ -1,13 +1,12 @@
-import { DB_CONFIG } from "@static/observation-create";
-import React from "react";
-import IndexedDBProvider from "use-indexeddb";
+import { setupDB } from "@utils/db";
+import React, { useEffect } from "react";
 
 import OfflineSync from "./offline-sync";
 
 export default function AutoSync() {
-  return (
-    <IndexedDBProvider config={DB_CONFIG}>
-      <OfflineSync />
-    </IndexedDBProvider>
-  );
+  useEffect(() => {
+    setupDB();
+  }, []);
+
+  return <OfflineSync />;
 }
