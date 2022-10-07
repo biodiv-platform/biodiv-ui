@@ -1,11 +1,34 @@
+import SITE_CONFIG from "@configs/site-config";
+import { axGetSpeciesGroup } from "@services/api.service";
 import { dateToUTC, formatDate } from "@utils/date";
+import { resizePredictImage } from "@utils/image";
 import { reverseGeocode } from "@utils/location";
 import { cleanFacts, cleanTags } from "@utils/tags";
 
 import { parseDefaultCustomField } from "../create/form";
 import { setLastData } from "../create/form/location/use-last-location";
+import { getImageThumb } from "../create/form/uploader/observation-resources/resource-card";
 
-export const preProcessObservations = async (resourceGroups, currentGroup, customFieldList) => {
+const predictResource = async ({ resource, userId, speciesGroups }) => {
+  let _thumbURL = getImageThumb(resource, userId);
+
+  if (_thumbURL.startsWith("blob:")) {
+    _thumbURL = await resizePredictImage(resource.blob);
+  }
+
+  const _predictions = await axGetSpeciesGroup(_thumbURL);
+  const sGroup = speciesGroups.find((sg) => sg.name === _predictions.data[0]?.speciesGroup)?.id;
+
+  return { sGroup };
+};
+
+export const preProcessObservations = async (
+  resourceGroups,
+  currentGroup,
+  customFieldList,
+  speciesGroups,
+  userId
+) => {
   const finalResources: any[] = [];
 
   const customFields = parseDefaultCustomField(customFieldList, currentGroup);
@@ -29,8 +52,14 @@ export const preProcessObservations = async (resourceGroups, currentGroup, custo
       }
     }
 
+    let predictionResponse = {};
+    if (SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && r.blob) {
+      predictionResponse = await predictResource({ resource: r, userId, speciesGroups });
+    }
+
     finalResources.push({
       ...DEFAULT_OBSERVATION_PAYLOAD,
+      ...predictionResponse,
       resources: resources,
       observedOn: r?.dateCreated ? new Date(r?.dateCreated).toISOString() : undefined,
       ...geoInfo,

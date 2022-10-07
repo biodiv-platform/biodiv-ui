@@ -36,9 +36,9 @@ const deepMergeObservations = (prev, current) => {
 };
 
 export default function ObservationCreateNextForm({ onBrowse }) {
-  const { currentGroup, languageId } = useGlobalState();
+  const { currentGroup, languageId, user } = useGlobalState();
 
-  const { sortedCFList } = useObservationCreateNext();
+  const { sortedCFList, speciesGroups } = useObservationCreateNext();
 
   const [uploadSummery, setUploadSummery] = useImmer({
     isSubmittd: false,
@@ -175,7 +175,13 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   // this will inject them to hookform array
   useListener(
     async (_resources) => {
-      const finalResources = await preProcessObservations(_resources, currentGroup, sortedCFList);
+      const finalResources = await preProcessObservations(
+        _resources,
+        currentGroup,
+        sortedCFList,
+        speciesGroups,
+        user.id
+      );
       o.append(finalResources);
     },
     [OBSERVATION_IMPORT_RESOURCE]

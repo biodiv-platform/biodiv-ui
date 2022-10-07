@@ -115,7 +115,11 @@ const SITE_CONFIG_EXAMPLE = {
     DEFAULT_LAYERS: false
   },
   OBSERVATION: {
-    ACTIVE: true
+    ACTIVE: true,
+    PREDICT: {
+      ACTIVE: true,
+      ENDPOINT: "https://example.com/predictions"
+    }
   },
   OFFLINE: {
     ACTIVE: false

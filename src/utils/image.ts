@@ -54,6 +54,26 @@ export async function resizeImage(file: File, max = 3000): Promise<any> {
   return [file, {}];
 }
 
+export async function resizePredictImage(file: File): Promise<any> {
+  try {
+    const response = await new Promise((resolve) => {
+      loadImage(file, (image) => resolve(image.toDataURL()), {
+        maxWidth: 200,
+        meta: true,
+        orientation: true,
+        canvas: true
+      });
+    });
+
+    return response;
+  } catch (e) {
+    console.warn("Resize Failed", e);
+    notification("Outdated/Unsupported Browser");
+  }
+
+  return undefined;
+}
+
 export const getAssetObject = (file, meta?) => {
   const hashKey = `${LOCAL_ASSET_PREFIX}${nanoid()}`;
   const finalMeta = meta || { blob: file };
