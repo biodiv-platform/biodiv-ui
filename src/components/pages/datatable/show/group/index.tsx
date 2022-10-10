@@ -3,7 +3,7 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
-import { axUserGroupDatatableUpdate } from "@services/usergroup.service";
+import { axUserGroupDatatableUpdate } from "@services/datatable.service";
 import { hasAccess } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";

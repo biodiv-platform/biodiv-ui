@@ -1,7 +1,7 @@
 import { Box, SimpleGrid, Stack } from "@chakra-ui/react";
 import Activity from "@components/pages/observation/show/activity";
 import LocationInformation from "@components/pages/observation/show/sidebar/location-info";
-import { axAddAcitivityComment } from "@services/activity.service";
+import { axAddDataTableComment } from "@services/datatable.service";
 import { RESOURCE_TYPE } from "@static/constants";
 import React from "react";
 
@@ -32,7 +32,7 @@ export default function DataTableShowPageComponent({
             <Activity
               resourceId={datatable.id}
               resourceType={RESOURCE_TYPE.DATATABLE}
-              commentFunc={axAddAcitivityComment}
+              commentFunc={axAddDataTableComment}
             />
           </Stack>
         </Box>
