@@ -51,7 +51,6 @@ const Slide = ({ resource, alt }) => {
           src={getYouTubeEmbed(resource.url)}
           frameBorder={0}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen={true}
         ></iframe>
       ) : (
         <video width="500" height="300" controls>
