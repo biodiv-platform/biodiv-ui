@@ -1,8 +1,9 @@
 import SITE_CONFIG from "@configs/site-config";
-import { axGetSpeciesGroup } from "@services/api.service";
+import { axPredictObservation } from "@services/api.service";
 import { dateToUTC, formatDate } from "@utils/date";
 import { resizePredictImage } from "@utils/image";
 import { reverseGeocode } from "@utils/location";
+import { getLocalIcon } from "@utils/media";
 import { cleanFacts, cleanTags } from "@utils/tags";
 
 import { parseDefaultCustomField } from "../create/form";
@@ -16,10 +17,19 @@ const predictResource = async ({ resource, userId, speciesGroups }) => {
     _thumbURL = await resizePredictImage(resource.blob);
   }
 
-  const _predictions = await axGetSpeciesGroup(_thumbURL);
-  const sGroup = speciesGroups.find((sg) => sg.name === _predictions.data[0]?.speciesGroup)?.id;
+  const speciesGroupsMap = Object.fromEntries(speciesGroups.map((sg) => [sg.name, sg.id]));
+  const _predictions = await axPredictObservation(_thumbURL);
 
-  return { sGroup };
+  const sciNameOptions = _predictions.data.map((item) => ({
+    isPrediction: true,
+    label: item.speciesName,
+    value: item.speciesName,
+    groupId: speciesGroupsMap[item.speciesGroup],
+    group: getLocalIcon(item.speciesGroup),
+    status: "PREDICTION"
+  }));
+
+  return { sciNameOptions, sGroup: sciNameOptions?.[0]?.groupId };
 };
 
 export const preProcessObservations = async (

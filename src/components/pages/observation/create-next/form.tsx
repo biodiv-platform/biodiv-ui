@@ -1,4 +1,5 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
@@ -9,7 +10,9 @@ import {
   SYNC_SINGLE_OBSERVATION_DONE,
   SYNC_SINGLE_OBSERVATION_ERROR
 } from "@static/events";
+import { DEFAULT_TOAST } from "@static/observation-create";
 import deepmerge from "deepmerge";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
@@ -36,6 +39,9 @@ const deepMergeObservations = (prev, current) => {
 };
 
 export default function ObservationCreateNextForm({ onBrowse }) {
+  const toast = useToast();
+  const toastIdRef = React.useRef<any>();
+  const { t } = useTranslation();
   const { currentGroup, languageId, user } = useGlobalState();
 
   const { sortedCFList, speciesGroups } = useObservationCreateNext();
@@ -175,6 +181,13 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   // this will inject them to hookform array
   useListener(
     async (_resources) => {
+      if (SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE) {
+        toastIdRef.current = toast({
+          ...DEFAULT_TOAST.LOADING,
+          description: t("form:uploader.predicting")
+        });
+      }
+
       const finalResources = await preProcessObservations(
         _resources,
         currentGroup,
@@ -183,6 +196,14 @@ export default function ObservationCreateNextForm({ onBrowse }) {
         user.id
       );
       o.append(finalResources);
+
+      if (toastIdRef.current) {
+        toast.update(toastIdRef.current, {
+          ...DEFAULT_TOAST.SUCCESS,
+          description: t("common:success")
+        });
+        setTimeout(() => toast.close(toastIdRef.current), 1000);
+      }
     },
     [OBSERVATION_IMPORT_RESOURCE]
   );

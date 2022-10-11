@@ -66,7 +66,7 @@ export const axClearMemoryCache = async () => {
  * predicts species group from image
  *
  */
-export const axGetSpeciesGroup = async (url) => {
+export const axPredictObservation = async (url) => {
   try {
     const response = await plainHttp.post(`${ENDPOINT.API}/predict`, { input: { image: url } });
     return { success: true, data: response.data.output };

@@ -63,6 +63,7 @@ export default function Recodata({ index }) {
   };
 
   const v = form.watch(`o.${index}.tmp`);
+  const sciNameOptions = form.watch(`o.${index}.sciNameOptions`);
 
   useEffect(() => {
     if (!v) return;
@@ -97,6 +98,7 @@ export default function Recodata({ index }) {
         optionComponent={ScientificNameOption}
         placeholder={t("observation:scientific_name")}
         resetOnSubmit={false}
+        options={sciNameOptions}
         selectRef={scientificRef}
       />
       <SelectInputField

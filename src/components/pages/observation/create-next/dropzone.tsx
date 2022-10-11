@@ -1,5 +1,5 @@
 import { Box, useToast } from "@chakra-ui/react";
-import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
+import { ACCEPTED_FILE_TYPES, DEFAULT_TOAST } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -17,10 +17,7 @@ export default function DraftDropzone() {
   const handleOnDrop = async (files) => {
     toastIdRef.current = toast({
       description: `${t("form:uploader.processing")}...`,
-      variant: "subtle",
-      position: "top",
-      status: "loading",
-      duration: 60_000
+      ...DEFAULT_TOAST.LOADING
     });
 
     const resizedAssets = await resizeMultiple(files);
@@ -29,8 +26,7 @@ export default function DraftDropzone() {
     if (toastIdRef.current) {
       toast.update(toastIdRef.current, {
         description: t("common:success"),
-        variant: "subtle",
-        status: "success"
+        ...DEFAULT_TOAST.SUCCESS
       });
       setTimeout(() => toast.close(toastIdRef.current), 1000);
     }
