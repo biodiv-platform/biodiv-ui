@@ -37,7 +37,8 @@ export const preProcessObservations = async (
   currentGroup,
   customFieldList,
   speciesGroups,
-  userId
+  userId,
+  canPredict
 ) => {
   const finalResources: any[] = [];
 
@@ -63,7 +64,8 @@ export const preProcessObservations = async (
     }
 
     let predictionResponse = {};
-    if (SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && r.blob) {
+
+    if (canPredict && SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && r.blob) {
       predictionResponse = await predictResource({ resource: r, userId, speciesGroups });
     }
 

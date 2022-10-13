@@ -1,6 +1,9 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import {
+  Alert,
+  AlertIcon,
   Button,
+  Checkbox,
   Flex,
   Modal,
   ModalBody,
@@ -8,8 +11,10 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay
+  ModalOverlay,
+  useBoolean
 } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import { OBSERVATION_IMPORT_DIALOUGE, OBSERVATION_IMPORT_RESOURCE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -20,6 +25,7 @@ import ResourceRearrange from "./resource-rearrange";
 export default function ResourceImporter() {
   const { t } = useTranslation();
   const [resourceGroups, setResourceGroups] = useState<any[]>([]);
+  const [canPredict, setCanPredict] = useBoolean(SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE);
 
   useListener(
     (o) => {
@@ -45,10 +51,7 @@ export default function ResourceImporter() {
   };
 
   const finalizeResources = (payload) => {
-    emit(
-      OBSERVATION_IMPORT_RESOURCE,
-      payload.filter((g) => g.length)
-    );
+    emit(OBSERVATION_IMPORT_RESOURCE, { resources: payload.filter((g) => g.length), canPredict });
   };
 
   const handleOnContinue = () => {
@@ -60,13 +63,23 @@ export default function ResourceImporter() {
     <Modal isOpen={true} onClose={handleOnClose} size="4xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{t("observation:importer.title")}</ModalHeader>
+        <ModalHeader>📷 {t("observation:importer.title")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
+          <Alert status="info" mb={6} borderRadius="md">
+            <AlertIcon />
+            {t("observation:importer.group_info")}
+          </Alert>
           <ResourceRearrange
             resourceGroups={resourceGroups}
             setResourceGroups={setResourceGroups}
           />
+
+          {SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && (
+            <Checkbox isChecked={canPredict} onChange={setCanPredict.toggle} mt={3}>
+              {t("observation:importer.prediction_info")}
+            </Checkbox>
+          )}
         </ModalBody>
 
         <ModalFooter>

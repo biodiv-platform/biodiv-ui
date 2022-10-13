@@ -68,7 +68,9 @@
     "validated": "Identification validated by curator"
   },
   "importer": {
-    "title": "Automatically Grouped Observations - Drag and drop to reorganise"
+    "group_info": "Observations auto-organised from grouped media. Drag and drop to reorganise.",
+    "prediction_info": "Detect and predict the Scientific Name and Species Group automatically. (Automatic predictions may be inaccurate; please double-check before uploading.)",
+    "title": "Organised Media"
   },
   "language": "Language",
   "last_location": "Use last location",

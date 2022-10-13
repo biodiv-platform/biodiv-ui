@@ -1,5 +1,4 @@
 import { Box, useToast } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
@@ -180,20 +179,19 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   // when resource(s) gets imported from media picker
   // this will inject them to hookform array
   useListener(
-    async (_resources) => {
-      if (SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE) {
-        toastIdRef.current = toast({
-          ...DEFAULT_TOAST.LOADING,
-          description: t("form:uploader.predicting")
-        });
-      }
+    async (props) => {
+      toastIdRef.current = toast({
+        ...DEFAULT_TOAST.LOADING,
+        description: props.canPredict ? t("form:uploader.predicting") : t("common:loading")
+      });
 
       const finalResources = await preProcessObservations(
-        _resources,
+        props.resources,
         currentGroup,
         sortedCFList,
         speciesGroups,
-        user.id
+        user.id,
+        props.canPredict
       );
       o.append(finalResources);
 

@@ -1,4 +1,4 @@
-import { CloseButton, Flex } from "@chakra-ui/react";
+import { Box, CloseButton, Flex } from "@chakra-ui/react";
 import { Droppable } from "@hello-pangea/dnd";
 import React from "react";
 
@@ -23,13 +23,15 @@ export const ResourceGroup = ({ index, resourceGroup, removeGroup }) => (
             <Resource key={resource.hashKey} resource={resource} index={index} />
           ))
         ) : (
-          <CloseButton
-            position="absolute"
-            top={0}
-            right={0}
-            m={2}
-            onClick={() => removeGroup(index)}
-          />
+          <Box minH="150px">
+            <CloseButton
+              position="absolute"
+              top={0}
+              right={0}
+              m={2}
+              onClick={() => removeGroup(index)}
+            />
+          </Box>
         )}
         {provided.placeholder}
       </Flex>
