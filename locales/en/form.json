@@ -83,7 +83,7 @@
     "label": "Drop file(s) here",
     "label_release": "Ready to upload",
     "old_form": "Upload Form (Classic)",
-    "predicting": "Predicting...",
+    "predicting": "Generating Predictions...",
     "processing": "Processing",
     "upload": "Upload",
     "uploading": "Uploading..."
