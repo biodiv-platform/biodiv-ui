@@ -71,7 +71,8 @@ export const TAXON_BADGE_COLORS = {
   WORKING: "orange",
   CLEAN: "green",
   RAW: "pink",
-  SYNONYM: "purple"
+  SYNONYM: "purple",
+  PREDICTION: "cyan"
 };
 
 export const PAGINATION_LIMIT = 3;

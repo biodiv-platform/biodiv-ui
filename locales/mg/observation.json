@@ -68,7 +68,9 @@
     "validated": "Fanamarinana ny Curator"
   },
   "importer": {
-    "title": "Fanaraha-maso mivondrona ho azy - Tariho ary arotsaka mba handaminana indray"
+    "group_info": "Fandinihana mandeha ho azy avy amin'ny haino aman-jery mivondrona. \nTariho ary ampidino handamina indray.",
+    "prediction_info": "Fantaro sy maminavina ho azy ny Vondrona Anarana Siantifika sy Karazana. \n(Mety tsy marina ny vinavina mandeha ho azy, azafady jereo indroa alohan'ny hampidirana azy.)",
+    "title": "Media voalamina"
   },
   "language": "Fiteny",
   "last_location": "Mampiasà toerana farany",
@@ -128,6 +130,7 @@
   "no_custom_field": "Tsy misy fomba fanao manokana hita ho an'ity fandinihana ity",
   "no_empty_suggestion": "Tsy afaka mametraka soso-kevitra tsy misy na inona na inona",
   "notes": "-tsoratra",
+  "observation": "fandinihana",
   "observed": "nandinika",
   "observed_at": "Toerana hita ao",
   "post_to_groups": "Lahatsoratra amin'ny vondrona",

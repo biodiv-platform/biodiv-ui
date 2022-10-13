@@ -68,7 +68,9 @@
     "validated": "Kitambulisho kilichothibitishwa na Curator."
   },
   "importer": {
-    "title": "Uchunguzi Uliopangwa Kiotomatiki - Buruta na uangushe ili kupanga upya"
+    "group_info": "Uchunguzi umepangwa kiotomatiki kutoka kwa vyombo vya habari vilivyowekwa kwenye vikundi. \nBuruta na uangushe ili kujipanga upya.",
+    "prediction_info": "Gundua na ubashiri Jina la Kisayansi na Kikundi cha Aina kiotomatiki. \n(Utabiri wa kiotomatiki unaweza kuwa si sahihi; tafadhali angalia mara mbili kabla ya kupakia.)",
+    "title": "Vyombo vya habari vilivyoandaliwa"
   },
   "language": "Lugha",
   "last_location": "Tumia eneo la mwisho",
@@ -128,6 +130,7 @@
   "no_custom_field": "Hakuna uwanja wa desturi unaopatikana kwa uchunguzi huu",
   "no_empty_suggestion": "Hawezi kuandika maoni yasiyofaa.",
   "notes": "Vidokezo",
+  "observation": "Uchunguzi",
   "observed": "Aliona",
   "observed_at": "Eneo limezingatiwa At.",
   "post_to_groups": "Chapisha kwa makundi.",

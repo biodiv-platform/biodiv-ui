@@ -68,7 +68,9 @@
     "validated": "Identification validée par le curateur"
   },
   "importer": {
-    "title": "Observations automatiquement groupées - Glisser-déposer pour réorganiser"
+    "group_info": "Observations auto-organisées à partir de médias groupés. \nFaites glisser et déposez pour réorganiser.",
+    "prediction_info": "Détectez et prédisez automatiquement le nom scientifique et le groupe d'espèces. \n(Les prédictions automatiques peuvent être inexactes ; veuillez revérifier avant de télécharger.)",
+    "title": "Médias organisés"
   },
   "language": "Langue",
   "last_location": "Utiliser le dernier lieu",
@@ -128,6 +130,7 @@
   "no_custom_field": "Aucun champ personnalisé trouvé pour cette observation",
   "no_empty_suggestion": "Impossible de créer des suggestions vides",
   "notes": "Remarques",
+  "observation": "Observation",
   "observed": "Observé",
   "observed_at": "Lieu de l'observation",
   "post_to_groups": "Associer aux groupes",

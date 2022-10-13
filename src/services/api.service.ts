@@ -61,3 +61,17 @@ export const axClearMemoryCache = async () => {
     console.error(e);
   }
 };
+
+/**
+ * predicts species group from image
+ *
+ */
+export const axPredictObservation = async (url) => {
+  try {
+    const response = await plainHttp.post(`${ENDPOINT.API}/predict`, { input: { image: url } });
+    return { success: true, data: response.data.output };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
