@@ -22,11 +22,15 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
           {children}
           {props.data.acceptedNames && <Text color="gray.600">{props.data.acceptedNames}</Text>}
           <Stack isInline={true} mt={1} spacing={2}>
-            <Badge>{props.data.rank}</Badge>
-            <Badge colorScheme={TAXON_BADGE_COLORS[props.data.status]}>{props.data.status}</Badge>
-            <Badge colorScheme={TAXON_BADGE_COLORS[props.data.position]}>
-              {props.data.position}
-            </Badge>
+            {props.data.rank && <Badge>{props.data.rank}</Badge>}
+            {props.data.status && (
+              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.status]}>{props.data.status}</Badge>
+            )}
+            {props.data.position && (
+              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.position]}>
+                {props.data.position}
+              </Badge>
+            )}
           </Stack>
         </Box>
       </Stack>

@@ -1,11 +1,51 @@
+import SITE_CONFIG from "@configs/site-config";
+import { axPredictObservation } from "@services/api.service";
 import { dateToUTC, formatDate } from "@utils/date";
+import { resizePredictImage } from "@utils/image";
 import { reverseGeocode } from "@utils/location";
+import { getLocalIcon } from "@utils/media";
 import { cleanFacts, cleanTags } from "@utils/tags";
 
 import { parseDefaultCustomField } from "../create/form";
 import { setLastData } from "../create/form/location/use-last-location";
+import { getImageThumb } from "../create/form/uploader/observation-resources/resource-card";
 
-export const preProcessObservations = async (resourceGroups, currentGroup, customFieldList) => {
+const predictResource = async ({ resource, userId, speciesGroups }) => {
+  try {
+    let _thumbURL = getImageThumb(resource, userId);
+
+    if (_thumbURL.startsWith("blob:")) {
+      _thumbURL = await resizePredictImage(resource.blob);
+    }
+
+    const speciesGroupsMap = Object.fromEntries(speciesGroups.map((sg) => [sg.name, sg.id]));
+    const _predictions = await axPredictObservation(_thumbURL);
+
+    const sciNameOptions = _predictions.data.map((item) => ({
+      isPrediction: true,
+      label: item.speciesName,
+      value: item.speciesName,
+      groupId: speciesGroupsMap[item.speciesGroup],
+      group: getLocalIcon(item.speciesGroup),
+      status: "PREDICTION"
+    }));
+
+    return { sciNameOptions, sGroup: sciNameOptions?.[0]?.groupId };
+  } catch (e) {
+    console.error(e);
+  }
+
+  return {};
+};
+
+export const preProcessObservations = async (
+  resourceGroups,
+  currentGroup,
+  customFieldList,
+  speciesGroups,
+  userId,
+  canPredict
+) => {
   const finalResources: any[] = [];
 
   const customFields = parseDefaultCustomField(customFieldList, currentGroup);
@@ -29,8 +69,15 @@ export const preProcessObservations = async (resourceGroups, currentGroup, custo
       }
     }
 
+    let predictionResponse = {};
+
+    if (canPredict && SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && r.blob) {
+      predictionResponse = await predictResource({ resource: r, userId, speciesGroups });
+    }
+
     finalResources.push({
       ...DEFAULT_OBSERVATION_PAYLOAD,
+      ...predictionResponse,
       resources: resources,
       observedOn: r?.dateCreated ? new Date(r?.dateCreated).toISOString() : undefined,
       ...geoInfo,

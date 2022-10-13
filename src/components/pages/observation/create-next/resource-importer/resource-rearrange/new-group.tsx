@@ -1,4 +1,4 @@
-import { AspectRatio, IconButton, SimpleGrid } from "@chakra-ui/react";
+import { AspectRatio, Box, IconButton } from "@chakra-ui/react";
 import { Droppable } from "@hello-pangea/dnd";
 import AddIcon from "@icons/add";
 import useTranslation from "next-translate/useTranslation";
@@ -10,17 +10,16 @@ export default function NewGroup({ onAdd }) {
   return (
     <Droppable droppableId="new" direction="horizontal">
       {(provided) => (
-        <SimpleGrid
-          columns={6}
+        <Box
           bg="gray.100"
           borderRadius="md"
-          minH="155px"
-          p={2}
+          minH="auto"
+          p={4}
           mb={2}
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <AspectRatio ratio={1}>
+          <AspectRatio ratio={1} w="134px">
             <IconButton
               p={2}
               border="2px dashed"
@@ -34,7 +33,7 @@ export default function NewGroup({ onAdd }) {
               aria-label={t("common:add")}
             />
           </AspectRatio>
-        </SimpleGrid>
+        </Box>
       )}
     </Droppable>
   );

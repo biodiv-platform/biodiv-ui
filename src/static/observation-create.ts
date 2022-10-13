@@ -132,3 +132,16 @@ export const ACCEPTED_FILE_TYPES = {
   "audio/*": [".wav", ".mp3"],
   "application/zip": [".zip"]
 };
+
+export const DEFAULT_TOAST: any = {
+  LOADING: {
+    variant: "subtle",
+    position: "top",
+    status: "loading",
+    duration: 60_000
+  },
+  SUCCESS: {
+    variant: "subtle",
+    status: "success"
+  }
+};

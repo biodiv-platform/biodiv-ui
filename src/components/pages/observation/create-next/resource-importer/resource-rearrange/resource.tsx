@@ -23,6 +23,7 @@ export const Resource = ({ resource, index }) => {
       {(provided) => (
         <GridItem
           h="full"
+          minW="150px"
           p={2}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

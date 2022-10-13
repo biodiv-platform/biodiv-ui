@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
@@ -9,7 +9,9 @@ import {
   SYNC_SINGLE_OBSERVATION_DONE,
   SYNC_SINGLE_OBSERVATION_ERROR
 } from "@static/events";
+import { DEFAULT_TOAST } from "@static/observation-create";
 import deepmerge from "deepmerge";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
@@ -36,9 +38,12 @@ const deepMergeObservations = (prev, current) => {
 };
 
 export default function ObservationCreateNextForm({ onBrowse }) {
-  const { currentGroup, languageId } = useGlobalState();
+  const toast = useToast();
+  const toastIdRef = React.useRef<any>();
+  const { t } = useTranslation();
+  const { currentGroup, languageId, user } = useGlobalState();
 
-  const { sortedCFList } = useObservationCreateNext();
+  const { sortedCFList, speciesGroups } = useObservationCreateNext();
 
   const [uploadSummery, setUploadSummery] = useImmer({
     isSubmittd: false,
@@ -174,9 +179,29 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   // when resource(s) gets imported from media picker
   // this will inject them to hookform array
   useListener(
-    async (_resources) => {
-      const finalResources = await preProcessObservations(_resources, currentGroup, sortedCFList);
+    async (props) => {
+      toastIdRef.current = toast({
+        ...DEFAULT_TOAST.LOADING,
+        description: props.canPredict ? t("form:uploader.predicting") : t("common:loading")
+      });
+
+      const finalResources = await preProcessObservations(
+        props.resources,
+        currentGroup,
+        sortedCFList,
+        speciesGroups,
+        user.id,
+        props.canPredict
+      );
       o.append(finalResources);
+
+      if (toastIdRef.current) {
+        toast.update(toastIdRef.current, {
+          ...DEFAULT_TOAST.SUCCESS,
+          description: t("common:success")
+        });
+        setTimeout(() => toast.close(toastIdRef.current), 1000);
+      }
     },
     [OBSERVATION_IMPORT_RESOURCE]
   );
