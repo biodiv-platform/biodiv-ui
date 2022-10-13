@@ -11,25 +11,31 @@ import { setLastData } from "../create/form/location/use-last-location";
 import { getImageThumb } from "../create/form/uploader/observation-resources/resource-card";
 
 const predictResource = async ({ resource, userId, speciesGroups }) => {
-  let _thumbURL = getImageThumb(resource, userId);
+  try {
+    let _thumbURL = getImageThumb(resource, userId);
 
-  if (_thumbURL.startsWith("blob:")) {
-    _thumbURL = await resizePredictImage(resource.blob);
+    if (_thumbURL.startsWith("blob:")) {
+      _thumbURL = await resizePredictImage(resource.blob);
+    }
+
+    const speciesGroupsMap = Object.fromEntries(speciesGroups.map((sg) => [sg.name, sg.id]));
+    const _predictions = await axPredictObservation(_thumbURL);
+
+    const sciNameOptions = _predictions.data.map((item) => ({
+      isPrediction: true,
+      label: item.speciesName,
+      value: item.speciesName,
+      groupId: speciesGroupsMap[item.speciesGroup],
+      group: getLocalIcon(item.speciesGroup),
+      status: "PREDICTION"
+    }));
+
+    return { sciNameOptions, sGroup: sciNameOptions?.[0]?.groupId };
+  } catch (e) {
+    console.error(e);
   }
 
-  const speciesGroupsMap = Object.fromEntries(speciesGroups.map((sg) => [sg.name, sg.id]));
-  const _predictions = await axPredictObservation(_thumbURL);
-
-  const sciNameOptions = _predictions.data.map((item) => ({
-    isPrediction: true,
-    label: item.speciesName,
-    value: item.speciesName,
-    groupId: speciesGroupsMap[item.speciesGroup],
-    group: getLocalIcon(item.speciesGroup),
-    status: "PREDICTION"
-  }));
-
-  return { sciNameOptions, sGroup: sciNameOptions?.[0]?.groupId };
+  return {};
 };
 
 export const preProcessObservations = async (
