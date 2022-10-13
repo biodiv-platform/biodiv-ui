@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axAddUserGroupRule } from "@services/usergroup.service";
-import { dateToUTC } from "@utils/date";
+import dayjs, { dateToUTC, parseDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -53,7 +53,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           [`${type}`]: [
             {
               fromDate: dateToUTC(ruleValue[0]).format(),
-              toDate: dateToUTC(ruleValue[1]).endOf("day").format()
+              toDate: dateToUTC(dayjs(parseDate(ruleValue[1])).endOf("day")).format()
             }
           ]
         };
