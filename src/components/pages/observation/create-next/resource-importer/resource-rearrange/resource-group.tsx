@@ -1,4 +1,4 @@
-import { CloseButton, SimpleGrid } from "@chakra-ui/react";
+import { CloseButton, Flex } from "@chakra-ui/react";
 import { Droppable } from "@hello-pangea/dnd";
 import React from "react";
 
@@ -7,12 +7,12 @@ import { Resource } from "./resource";
 export const ResourceGroup = ({ index, resourceGroup, removeGroup }) => (
   <Droppable droppableId={index} direction="horizontal">
     {(provided) => (
-      <SimpleGrid
-        columns={6}
+      <Flex
+        overflowY="auto"
         bg="gray.100"
         borderRadius="md"
         mb={6}
-        minH="155px"
+        h="auto"
         position="relative"
         p={2}
         ref={provided.innerRef}
@@ -32,7 +32,7 @@ export const ResourceGroup = ({ index, resourceGroup, removeGroup }) => (
           />
         )}
         {provided.placeholder}
-      </SimpleGrid>
+      </Flex>
     )}
   </Droppable>
 );
