@@ -50,6 +50,8 @@ export default function LocationInformation({
         )}
         {layerInfo.province && <Row title="PROVINCE">{titleCase(layerInfo.province)}</Row>}
         {layerInfo.district && <Row title="DISTRICT">{titleCase(layerInfo.district)}</Row>}
+        {layerInfo.dzongkhag && <Row title="DZONGKHAG">{titleCase(layerInfo.dzongkhag)}</Row>}
+        {layerInfo.geog && <Row title="GEOG">{titleCase(layerInfo.geog)}</Row>}
       </SimpleGrid>
     </Box>
   );

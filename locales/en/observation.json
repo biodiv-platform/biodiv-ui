@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "Coordinates",
     "district": "District",
+    "dzongkhag": "Dzongkhag",
     "forest_type": "Forest Type",
+    "geog": "Geog",
     "geoprivacy_enabled": "Geoprivacy Enabled",
     "protected_area_name": "Protected Area",
     "province": "Province",

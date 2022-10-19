@@ -570,6 +570,8 @@ export interface ObservationLocationInfo {
   district?: string;
   province?: string;
   protectedAreaName?: string;
+  dzongkhag?: string;
+  geog?: string;
 }
 export interface ObservationMailData {
   observationId?: number; // int64
