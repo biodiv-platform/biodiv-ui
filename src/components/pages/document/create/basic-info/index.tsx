@@ -1,6 +1,6 @@
 import { Box, SimpleGrid, Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
-import { DatePickerField } from "@components/form/datepicker";
+import { DatePickerNextField } from "@components/form/datepicker-next";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
 import { TextBoxField } from "@components/form/text";
@@ -74,7 +74,7 @@ export default function BasicInfo({
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
         <div>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
-            <DatePickerField name="fromDate" label={t("document:publication_date")} />
+            <DatePickerNextField name="fromDate" label={t("document:publication_date")} />
             <SelectInputField
               name="licenseId"
               label={t("form:license")}

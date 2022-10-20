@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axCreateDocument } from "@services/document.service";
 import { DEFAULT_BIB_FIELDS, DEFAULT_BIB_FIELDS_SCHEMA } from "@static/document";
-import { dateToUTC } from "@utils/date";
+import { dateToUTC, formatDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanTags } from "@utils/tags";
 import useTranslation from "next-translate/useTranslation";
@@ -94,7 +94,7 @@ export default function DocumentCreatePageComponent({
       ...DEFAULT_VALUES,
       ...rest,
       resourceURL: resource?.resourceURL,
-      fromDate: dateToUTC(fromDate).format(),
+      fromDate: dateToUTC(formatDate(fromDate)).format(),
       tags: cleanTags(tags),
       size: resource?.size,
       bibFieldData: {
