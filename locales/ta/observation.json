@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "புவியலகு புள்ளிகள்",
     "district": "மாவட்டம்",
+    "dzongkhag": "ஜோங்காக்",
     "forest_type": "வன வகை",
+    "geog": "புவியியல்",
     "geoprivacy_enabled": "புவியிட தனியுரிமை செயலாக்கப்பட்டுள்ளது",
     "protected_area_name": "பாதுகாக்கப்பட்ட பகுதி",
     "province": "மாகாணம்",

@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "కోఆర్డినేట్లు",
     "district": "జిల్లా",
+    "dzongkhag": "జోంగ్‌ఖాగ్",
     "forest_type": "ఫారెస్ట్ రకం",
+    "geog": "జియోగ్",
     "geoprivacy_enabled": "Geoprivacy ఎనేబుల్",
     "protected_area_name": "రక్షిత ప్రాంతం",
     "province": "ప్రావిన్స్",

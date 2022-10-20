@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "समन्वय",
     "district": "जिल्हा",
+    "dzongkhag": "झोंगखग",
     "forest_type": "वन प्रकार",
+    "geog": "जिओग",
     "geoprivacy_enabled": "भूमिका सक्षम",
     "protected_area_name": "संरक्षित क्षेत्र",
     "province": "प्रांत",

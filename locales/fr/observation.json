@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "Coordonnées",
     "district": "Quartier",
+    "dzongkhag": "Dzongkhag",
     "forest_type": "Type de forêt",
+    "geog": "géog",
     "geoprivacy_enabled": "Géolocalisation activée",
     "protected_area_name": "Zone protégée",
     "province": "Province",
