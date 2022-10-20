@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
+import { parseDate } from "@utils/date";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -37,7 +38,7 @@ export default function EditRowForm({ row }) {
         label: row.curatedLocation,
         value: row.curatedLocation
       },
-      curatedDate: row.curatedDate,
+      curatedDate: row.curatedDate ? parseDate(row.curatedDate) : undefined,
       curatedDateFormat: row.curatedDateFormat
         ? row.curatedDateFormat
         : DATE_FORMAT_OPTIONS[0].value,
