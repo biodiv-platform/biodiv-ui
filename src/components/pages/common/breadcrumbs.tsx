@@ -5,12 +5,12 @@ import React from "react";
 
 const TaxonBreadcrumbs = ({ crumbs, type }) =>
   crumbs ? (
-    <Box p={2} px={4} mb={4} className="white-box fadeInUp delay-2">
+    <Box p={2} px={4} mb={4} className="white-box fadeInUp delay-2" overflowX="auto">
       <Breadcrumb spacing="8px" separator={<ChevronRightIcon />}>
         {crumbs.map(({ name, id }) => (
           <BreadcrumbItem key={id}>
             <LocalLink href={`/${type}/list`} params={{ taxon: id }}>
-              <BreadcrumbLink>{name}</BreadcrumbLink>
+              <BreadcrumbLink whiteSpace="nowrap">{name}</BreadcrumbLink>
             </LocalLink>
           </BreadcrumbItem>
         ))}

@@ -28,7 +28,7 @@ export const SpeciesCreateCommonTableRows = [
     Header: "Registry",
     accessor: "registry",
     Cell: ({ value }) => (
-      <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />}>
+      <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />} overflowX="auto">
         {value.map((rank) => (
           <BreadcrumbItem key={rank.id}>
             <LocalLink href={`/species/list`} params={{ taxon: rank.id }}>
