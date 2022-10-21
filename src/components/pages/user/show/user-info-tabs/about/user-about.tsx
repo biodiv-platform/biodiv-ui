@@ -1,4 +1,4 @@
-import { SimpleGrid, Stack } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLinkList from "@components/@core/blue-link/external-list";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
@@ -23,13 +23,7 @@ export default function UserAbout({ user }: UserProfileProps) {
     {
       title: "user:website",
       value: user.website,
-      cell: (
-        <Stack isInline={false}>
-          <ExternalBlueLinkList
-            hrefs={user?.website?.split(",").map((url) => (url.includes("//") ? url : `//${url}`))}
-          />
-        </Stack>
-      )
+      cell: <ExternalBlueLinkList website={user?.website} />
     },
     {
       title: "user:email",
