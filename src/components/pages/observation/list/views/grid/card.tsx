@@ -31,7 +31,7 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
           />
         )}
         <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-          <Link target="_blank">
+          <Link>
             <Image
               objectFit="cover"
               bg="gray.100"

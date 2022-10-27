@@ -23,6 +23,8 @@ interface DatePickerNextFieldProps {
   name: string;
   placeholder?;
   style?;
+  dateFormat?;
+  inputProps?;
 }
 
 const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
@@ -34,6 +36,8 @@ export const DatePickerNextField = ({
   mb = 4,
   name,
   placeholder,
+  dateFormat,
+  inputProps,
   ...props
 }: DatePickerNextFieldProps) => (
   <Controller
@@ -44,13 +48,14 @@ export const DatePickerNextField = ({
         <InputGroup>
           <DatePicker
             customInput={<Input />}
-            dateFormat="dd-MM-yyyy"
+            dateFormat={dateFormat || "dd-MM-yyyy"}
             isReadOnly={disabled}
             placeholderText={placeholder || label}
             onChange={field.onChange}
             selected={field.value ? new Date(field.value) : undefined}
             maxDate={maxDate}
             portalId={name}
+            {...(inputProps || {})}
           />
           <InputRightElement>
             <label htmlFor={name} style={{ cursor: "pointer" }}>

@@ -122,7 +122,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
       </HStack>
 
       <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-        <Link target="_blank" color="white">
+        <Link color="white">
           <Image
             className="ob-image-list"
             objectFit="cover"

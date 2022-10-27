@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "Kuratibu",
     "district": "Wilaya",
+    "dzongkhag": "Dzongkhag",
     "forest_type": "Aina ya Misitu.",
+    "geog": "Geog",
     "geoprivacy_enabled": "Geoprivacy imewezeshwa",
     "protected_area_name": "Eneo lililohifadhiwa",
     "province": "Mkoa",

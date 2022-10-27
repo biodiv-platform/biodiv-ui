@@ -3,9 +3,9 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 export const DATE_FORMAT = {
-  DAY: "d-m-Y",
-  MONTH: "m-Y",
-  YEAR: "Y"
+  DAY: "dd-MM-yyyy",
+  MONTH: "MM-yyyy",
+  YEAR: "yyyy"
 };
 
 export const DATE_FORMAT_OPTIONS = Object.keys(DATE_FORMAT).map((df) => ({ label: df, value: df }));

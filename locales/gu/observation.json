@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "કોઓર્ડિનેટ્સ",
     "district": "જિલ્લો",
+    "dzongkhag": "ઝોંગખાગ",
     "forest_type": "વન પ્રકાર",
+    "geog": "જીઓગ",
     "geoprivacy_enabled": "ભૂ-ગોપનીયતા સક્ષમ",
     "protected_area_name": "સંરક્ષિત વિસ્તાર",
     "province": "પ્રાંત",

@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "निर्देशांक",
     "district": "ज़िला",
+    "dzongkhag": "ज़ोंगखागो",
     "forest_type": "वन प्रकार",
+    "geog": "जियोगो",
     "geoprivacy_enabled": "भू-गोपनीयता सक्षम",
     "protected_area_name": "संरक्षित क्षेत्र",
     "province": "प्रांत",

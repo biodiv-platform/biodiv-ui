@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "ਤਾਲਮੇਲ",
     "district": "ਜ਼ਿਲ੍ਹਾ",
+    "dzongkhag": "ਜ਼ੋਂਗਖਗ",
     "forest_type": "ਜੰਗਲ ਦੀ ਕਿਸਮ",
+    "geog": "ਜਿਓਗ",
     "geoprivacy_enabled": "ਜਿਓਪ੍ਰਵਸੀਟੀ ਯੋਗ",
     "protected_area_name": "ਸੁਰੱਖਿਅਤ ਖੇਤਰ",
     "province": "ਸੂਬਾ",

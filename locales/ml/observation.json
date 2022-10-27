@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "കോർഡിനേറ്റുകൾ",
     "district": "ജില്ല",
+    "dzongkhag": "സോങ്ഖാഗ്",
     "forest_type": "വന തരം",
+    "geog": "ജിയോഗ്",
     "geoprivacy_enabled": "ജോവ്യവ പ്രവർത്തനക്ഷമമാക്കി",
     "protected_area_name": "സംരക്ഷിത പ്രദേശം",
     "province": "പ്രവിശ്യ",

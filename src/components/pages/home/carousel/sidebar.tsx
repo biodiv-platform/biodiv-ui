@@ -1,6 +1,7 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Center, Heading, Link, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
+import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -31,9 +32,11 @@ export default function Sidebar({ resource }) {
             {resource.customDescripition}
           </Text>
           {resource.moreLinks && (
-            <Link href={resource.moreLinks}>
-              {t("common:read_more")} <ArrowForwardIcon />
-            </Link>
+            <LocalLink href={resource.moreLinks}>
+              <Link>
+                {t("common:read_more")} <ArrowForwardIcon />
+              </Link>
+            </LocalLink>
           )}
         </div>
       </Center>

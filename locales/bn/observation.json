@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "সমন্বয়",
     "district": "জেলা",
+    "dzongkhag": "জংখাগ",
     "forest_type": "বন টাইপ",
+    "geog": "জিওগ",
     "geoprivacy_enabled": "Geoprivacy সক্রিয়",
     "protected_area_name": "সুরক্ষিত এলাকা",
     "province": "প্রদেশ",

@@ -110,7 +110,9 @@
   "location_information": {
     "coordinates": "Velarantany",
     "district": "DISTRIKA",
+    "dzongkhag": "Dzongkhag",
     "forest_type": "Ala ala",
+    "geog": "Geog",
     "geoprivacy_enabled": "Geoprivacy dia nahafahana",
     "protected_area_name": "Faritra arovana",
     "province": "-tokony eran'ny fanjakana",
