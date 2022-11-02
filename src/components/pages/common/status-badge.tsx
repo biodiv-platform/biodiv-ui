@@ -13,12 +13,12 @@ interface TaxonStatusBadgeProps {
 function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
   const { t } = useTranslation();
 
-  const taxonLink = `/taxonomy/list?taxonId=${taxonId}&showTaxon=${taxonId}`;
-
+  const taxonLink = `/taxonomy/list`;
+  
   switch (reco?.status) {
     case "ACCEPTED":
       return (
-        <LocalLink href={taxonLink}>
+        <LocalLink href={taxonLink} params={{ taxonId: taxonId, showTaxon: taxonId }}>
           <Link>
             <Badge colorScheme={TAXON_BADGE_COLORS.ACCEPTED}>{t("common:accepted")}</Badge>
           </Link>

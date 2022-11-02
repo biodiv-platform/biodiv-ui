@@ -96,7 +96,8 @@ export const RESOURCE_TYPE = {
   DOCUMENT: "document",
   OBSERVATION: "observation",
   SPECIES: "species",
-  TAXONOMY: "taxonomy"
+  TAXONOMY: "taxonomy",
+  PAGE: "page"
 };
 
 export const APP_VERSION = packageJson.version;
