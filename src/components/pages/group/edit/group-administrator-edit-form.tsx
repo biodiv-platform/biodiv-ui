@@ -9,7 +9,6 @@ import {
 import { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useGlobalState from "@hooks/use-global-state";
 import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -30,9 +29,7 @@ const discardExistingAdministrators = (updatedMembers, currentAdministrators) =>
 export default function GroupAdministratorsEditForm({ founders, moderators, userGroupId }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const {
-    currentGroup: { name }
-  } = useGlobalState();
+
   const founderIds = founders.map(({ value }) => value);
   const moderatorIds = moderators.map(({ value }) => value);
 
@@ -78,7 +75,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     const { success } = await axAddGroupAdminMembers(payload);
     if (success) {
       notification(t("group:admin.updated"), NotificationType.Success);
-      router.push(`/group/${name}/show`, false, {}, true);
+      router.push(`/show`, true, {}, true);
     } else {
       notification(t("group:admin.error"), NotificationType.Error);
     }
