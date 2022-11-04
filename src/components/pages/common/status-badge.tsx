@@ -14,7 +14,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
   const { t } = useTranslation();
 
   const taxonLink = `/taxonomy/list`;
-  
+
   switch (reco?.status) {
     case "ACCEPTED":
       return (

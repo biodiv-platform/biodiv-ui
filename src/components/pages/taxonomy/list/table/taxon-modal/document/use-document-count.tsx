@@ -8,12 +8,9 @@ export default function useDocumentCount(taxon) {
   const getData = async (taxon) => {
     setIsLoading(true);
 
-    console.log("taxn=", taxon);
-
     const { success, data } = await axGetDocumentDataByTaxonId(taxon);
 
     if (success) {
-      console.log(data);
       setCount(data.length);
     }
 
