@@ -3,6 +3,7 @@ import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { DocumentsLink } from "../../document";
 
 import { ObservationsLink } from "../../observation";
 import { SpeciesPageLink } from "../../species";
@@ -20,6 +21,7 @@ export function TaxonAttributesTable() {
         <HStack mb={4} spacing={4}>
           <SpeciesPageLink showTaxon={showTaxon} />
           <ObservationsLink showTaxon={showTaxon} />
+          <DocumentsLink showTaxon={showTaxon}/>
         </HStack>
         <Heading as="h3" size="md" mb={4}>
           {t("common:information")}

@@ -275,3 +275,13 @@ export const axUpdateScientifcNameToIsDeleted = async (nameId) => {
     return { succes: false, data: {} };
   }
 };
+
+export const axGetDocumentDataByTaxonId = async (taxonId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.DOCUMENT}/v1/services/taxonomy/${taxonId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { succes: false, data: {} };
+  }
+};
