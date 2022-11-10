@@ -22,6 +22,7 @@ export const getDocumentURL = (document) => {
 };
 
 export const isLinkPDF = async (url) => {
+  if (url === null) return false;
   // if url endsWith `.pdf` then it's pdf
   if (url.endsWith(".pdf")) return true;
 
