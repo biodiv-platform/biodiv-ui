@@ -5,7 +5,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axUpdateDocument } from "@services/document.service";
-import { dateToUTC, formatDateFromUTC } from "@utils/date";
+import { dateToUTC, parseDateFromUTC } from "@utils/date";
 import { getBibFieldsMeta } from "@utils/document";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -68,7 +68,7 @@ export default function DocumentEditPageComponent({
 
       contribution: initialDocument.contribution,
       licenseId: initialDocument?.licenseId?.toString(),
-      fromDate: formatDateFromUTC(initialDocument.fromDate),
+      fromDate: initialDocument?.fromDate ? parseDateFromUTC(initialDocument.fromDate) : null,
 
       ufileData: ufileData
         ? {
