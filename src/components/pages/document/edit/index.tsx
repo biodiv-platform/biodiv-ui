@@ -5,7 +5,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axUpdateDocument } from "@services/document.service";
-import { dateToUTC, formatDateFromUTC } from "@utils/date";
+import { dateToUTC, formatDate } from "@utils/date";
 import { getBibFieldsMeta } from "@utils/document";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -68,7 +68,9 @@ export default function DocumentEditPageComponent({
 
       contribution: initialDocument.contribution,
       licenseId: initialDocument?.licenseId?.toString(),
-      fromDate: formatDateFromUTC(initialDocument.fromDate),
+      fromDate: initialDocument?.fromDate
+        ? dateToUTC(formatDate(initialDocument?.fromDate)).format()
+        : null,
 
       ufileData: ufileData
         ? {
@@ -90,7 +92,7 @@ export default function DocumentEditPageComponent({
       attribution: initialDocument.attribution,
       contribution: initialDocument?.contribution || "",
       rating: initialDocument.rating,
-      fromDate: values.fromDate ? dateToUTC(values.fromDate) : null,
+      fromDate: values.fromDate ? values.fromDate : null,
 
       bibFieldData: {
         ...initialDocument.bibFieldData,
@@ -106,6 +108,7 @@ export default function DocumentEditPageComponent({
           }
         : null
     };
+
     const { success } = await axUpdateDocument(payload);
     if (success) {
       notification(t("document:edit.success"), NotificationType.Success);
