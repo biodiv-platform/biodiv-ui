@@ -16,7 +16,7 @@ module.exports = {
     "rgx:/landscape/": ["landscape", "observation", "filters", "activity"],
     "rgx:/map": ["page", "map"],
     "rgx:/observation/": ["observation", "datatable", "filters", "activity"],
-    "rgx:/page/": ["page"],
+    "rgx:/page/": ["page","activity"],
     "rgx:/register": ["user"],
     "rgx:/roles/": ["filters", "taxon"],
     "rgx:/species/": ["observation", "species", "filters", "activity", "taxon"],
