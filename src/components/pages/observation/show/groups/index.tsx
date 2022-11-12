@@ -49,7 +49,7 @@ const Groups = ({
         <TabPanels>
           <TabPanel>
             <GroupPost
-              groups={isLoggedIn ? permission?.userGroupMember : observationGroups}
+              groups={permission?.userGroupMember}
               selectedDefault={observationGroups}
               resourceId={resourceId}
               saveUserGroupsFunc={saveUserGroupsFunc}

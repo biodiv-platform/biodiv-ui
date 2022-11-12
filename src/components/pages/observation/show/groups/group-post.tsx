@@ -7,7 +7,7 @@ import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
@@ -29,7 +29,7 @@ export default function GroupPost({
   saveUserGroupsFunc,
   columns
 }: IGroupPostProps) {
-  if (groups?.length == 0) return null;
+  //if (groups?.length == 0) return null;
 
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
   const [selectedGroups, setSelectedGroups] = useState<any>(
@@ -43,7 +43,9 @@ export default function GroupPost({
 
   const onQuery = debounce((e) => {
     setFilterGroups(
-      groups?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
+      groups.length > 0
+        ? groups?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
+        : []
     );
   }, 200);
 
@@ -69,6 +71,10 @@ export default function GroupPost({
     await waitForAuth();
     onToggle();
   };
+
+  useEffect(() => {
+    setFilterGroups(groups);
+  }, [groups]);
 
   return (
     <>
@@ -102,7 +108,7 @@ export default function GroupPost({
       </SimpleGrid>
 
       <Collapse in={isOpen} unmountOnExit={true}>
-        <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
+        {/* <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
         {groups?.length > 0 ? (
           <CheckBoxItems
             gridColumns={columns || defaultGridColumns}
@@ -112,22 +118,41 @@ export default function GroupPost({
           />
         ) : (
           <div>{t("common:no_groups_joined")}</div>
-        )}
+        )} */}
 
-        <Box mt={2}>
-          <Button
-            size="sm"
-            colorScheme="blue"
-            aria-label="Save"
-            type="submit"
-            onClick={handleOnSave}
-          >
-            {t("common:save")}
-          </Button>
-          <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={handleOnCancel}>
-            {t("common:close")}
-          </Button>
-        </Box>
+        {groups.length > 0 ? (
+          <div>
+            <Input mb={4} onChange={onQuery} placeholder={t("header:search")} />
+            <CheckBoxItems
+              gridColumns={columns || defaultGridColumns}
+              options={filterGroups}
+              defaultValue={selectedGroups}
+              onChange={setSelectedGroups}
+            />
+            <Box mt={2}>
+              <Button
+                size="sm"
+                colorScheme="blue"
+                aria-label="Save"
+                type="submit"
+                onClick={handleOnSave}
+              >
+                {t("common:save")}
+              </Button>
+              <Button
+                size="sm"
+                ml={2}
+                colorScheme="gray"
+                aria-label="Cancel"
+                onClick={handleOnCancel}
+              >
+                {t("common:close")}
+              </Button>
+            </Box>
+          </div>
+        ) : (
+          <div>{t("common:no_groups_joined")}</div>
+        )}
       </Collapse>
     </>
   );
