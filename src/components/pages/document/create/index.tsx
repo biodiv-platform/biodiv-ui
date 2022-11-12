@@ -94,7 +94,7 @@ export default function DocumentCreatePageComponent({
       ...DEFAULT_VALUES,
       ...rest,
       resourceURL: resource?.resourceURL,
-      fromDate: dateToUTC(formatDate(fromDate)).format(),
+      fromDate: fromDate ? dateToUTC(formatDate(fromDate)).format() : null,
       tags: cleanTags(tags),
       size: resource?.size,
       bibFieldData: {
