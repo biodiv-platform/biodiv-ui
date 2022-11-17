@@ -106,7 +106,7 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
     try {
       const formData: any = new FormData();
       const mapFiles =
-        metadata?.layerFileDescription?.fileType === "tif" ? rasterFiles : shapeFiles;
+      mapFileType === MapFileType.raster ? rasterFiles : shapeFiles;
 
       Object.keys(mapFiles).map((type) => formData.append(type, mapFiles?.[type]?.file));
 

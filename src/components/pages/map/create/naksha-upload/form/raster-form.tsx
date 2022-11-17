@@ -28,7 +28,7 @@ export default function RasterUploadForm() {
 
             <SelectInputField
                 name="layerType"
-                options={LAYER_TYPES.filter(i => i.value == 'RASTER')}
+                options={LAYER_TYPES.filter(i => i.value === 'RASTER')}
                 label={t("map:layer_type")}
                 shouldPortal={true}
             />

@@ -49,7 +49,7 @@ export default function VectorUploadForm() {
           <TextAreaField name="layerDescription" label={t("map:description")} />
           <SelectInputField
             name="layerType"
-            options={LAYER_TYPES}
+            options={LAYER_TYPES.filter(i => i.value !== 'RASTER')}
             label={t("map:layer_type")}
             shouldPortal={true}
           />
