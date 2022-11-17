@@ -5,6 +5,7 @@ export function FileWithType({ type }) {
   return (
     <Flex
       boxSize="44px"
+      minW="44px"
       borderRadius="md"
       bgColor="#193772"
       color="#00D5EE"
