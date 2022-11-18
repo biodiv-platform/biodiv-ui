@@ -8,7 +8,6 @@ import dynamic from "next/dynamic";
 import React from "react";
 import wkt from "wkt";
 
-const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 const NakshaMapboxView: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
   {
@@ -23,6 +22,8 @@ interface ISidebarProps {
 }
 
 export default function Sidebar({ datatable, authorInfo, taxon }: ISidebarProps) {
+  const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
+
   return (
     <Box mb={2}>
       <User user={authorInfo} />
