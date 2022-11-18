@@ -105,8 +105,7 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
     setScreen(2);
     try {
       const formData: any = new FormData();
-      const mapFiles =
-      mapFileType === MapFileType.raster ? rasterFiles : shapeFiles;
+      const mapFiles = mapFileType === MapFileType.raster ? rasterFiles : shapeFiles;
 
       Object.keys(mapFiles).map((type) => formData.append(type, mapFiles?.[type]?.file));
 

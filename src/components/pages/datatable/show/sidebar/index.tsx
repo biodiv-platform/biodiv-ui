@@ -3,10 +3,19 @@ import ClusterMap from "@components/pages/observation/show/sidebar/cluster-map";
 import User from "@components/pages/observation/show/sidebar/user";
 import SITE_CONFIG from "@configs/site-config";
 import { UserIbp } from "@interfaces/observation";
-import { defaultViewState, NakshaMapboxView } from "naksha-components-react";
+import { getMapCenter } from "@utils/location";
+import dynamic from "next/dynamic";
 import React from "react";
 import wkt from "wkt";
 
+const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
+const NakshaMapboxView: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 interface ISidebarProps {
   datatable;
   authorInfo?: UserIbp;
