@@ -2,6 +2,8 @@ import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { fetchWithCache } from "@utils/cached-fetch";
 import http, { plainHttp } from "@utils/http";
+import * as qs from "qs";
+//import url from "url";
 
 export const axGetspeciesGroups = async () => {
   try {
@@ -527,6 +529,17 @@ export const axDeleteObservationByDatatableId = async (observationId) => {
     return { success: true, data };
   } catch (e) {
     console.error(e.response.data.message);
-    return { success: false };
+    return { success: false, data: [] };
+  }
+};
+
+export const axGetPlantnetSuggestions = async (imageUrls) => {
+  const queryParams = { images: imageUrls, "api-key": "2b10XeF54WTCFDCsBiJUJSShO" };
+  const params = qs.stringify(queryParams, { arrayFormat: "repeat" });
+  try {
+    const data = await plainHttp.get(`https://my-api.plantnet.org/v2/identify/all?${params}`);
+    return { success: true, data: data.data };
+  } catch (e) {
+    return { success: false, data: [] };
   }
 };

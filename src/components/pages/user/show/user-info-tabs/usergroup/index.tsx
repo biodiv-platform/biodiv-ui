@@ -28,6 +28,7 @@ export default function UserGroupListTab() {
       groupUserFilterData?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
     );
   }, 200);
+
   return (
     <>
       <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />

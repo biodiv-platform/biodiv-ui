@@ -14,7 +14,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
-import { axRecoSuggest } from "@services/observation.service";
+import { axGetPlantnetSuggestions, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -37,13 +37,15 @@ interface IAddSuggestionProps {
   observationId;
   recoUpdated;
   recoVotesLength;
+  images?;
 }
 
 export default function AddSuggestion({
   isLocked,
   observationId,
   recoUpdated,
-  recoVotesLength
+  recoVotesLength,
+  images
 }: IAddSuggestionProps) {
   const { t } = useTranslation();
   const scientificRef: any = useRef(null);
@@ -52,6 +54,7 @@ export default function AddSuggestion({
   const langRef: any = useRef(null);
   const { languageId } = useGlobalState();
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
+  const [plantnetData, setPlantNetData] = useState();
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
@@ -132,6 +135,19 @@ export default function AddSuggestion({
     }
   }, [recoVotesLength]);
 
+  const handleOnPlantnetSelect = async () => {
+    const imageUrls = images.map(
+      (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
+    );
+
+    const { success, data } = await axGetPlantnetSuggestions(imageUrls);
+    if (success) setPlantNetData(data.results);
+  };
+
+  console.log("images=", images);
+
+  console.log("data[results]=", plantnetData);
+
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">
@@ -163,6 +179,7 @@ export default function AddSuggestion({
                       shouldPortal={true}
                     />
                   </SimpleGrid>
+
                   <SelectAsyncInputField
                     name="scientificNameTaxonId"
                     label={t("observation:scientific_name")}
@@ -172,6 +189,10 @@ export default function AddSuggestion({
                     onChange={onScientificNameChange}
                     selectRef={scientificRef}
                   />
+                  <Button colorScheme="blue" onClick={handleOnPlantnetSelect} marginRight={5}>
+                    plantnet
+                  </Button>
+
                   <SubmitButton leftIcon={<CheckIcon />}>{t("observation:suggest")}</SubmitButton>
                 </form>
               </FormProvider>

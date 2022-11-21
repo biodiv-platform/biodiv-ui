@@ -92,7 +92,12 @@ export default function ObservationShowPageComponent({
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
           <Info observation={o} speciesGroups={speciesGroups} />
-          <RecoSuggestion o={o} setO={setO} permission={permission} />
+          <RecoSuggestion
+            o={o}
+            setO={setO}
+            permission={permission}
+            images={o.observationResource}
+          />
           <CustomFields
             o={o}
             setO={setO}
