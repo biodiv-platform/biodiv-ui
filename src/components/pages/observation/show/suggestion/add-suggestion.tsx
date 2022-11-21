@@ -54,7 +54,7 @@ export default function AddSuggestion({
   const langRef: any = useRef(null);
   const { languageId } = useGlobalState();
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
-  const [plantnetData, setPlantNetData] = useState();
+  //const [plantnetData, setPlantNetData] = useState();
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
@@ -140,8 +140,9 @@ export default function AddSuggestion({
       (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
     );
 
-    const { success, data } = await axGetPlantnetSuggestions(imageUrls);
-    if (success) setPlantNetData(data.results);
+    //const { success, data } = await axGetPlantnetSuggestions(imageUrls);
+    await axGetPlantnetSuggestions(imageUrls);
+    //if (success) setPlantNetData(data.results);
   };
 
   return languages.length > 0 ? (
