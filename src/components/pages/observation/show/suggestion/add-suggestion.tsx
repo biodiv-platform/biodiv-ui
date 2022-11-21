@@ -144,10 +144,6 @@ export default function AddSuggestion({
     if (success) setPlantNetData(data.results);
   };
 
-  console.log("images=", images);
-
-  console.log("data[results]=", plantnetData);
-
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">

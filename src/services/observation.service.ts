@@ -534,7 +534,7 @@ export const axDeleteObservationByDatatableId = async (observationId) => {
 };
 
 export const axGetPlantnetSuggestions = async (imageUrls) => {
-  const queryParams = { images: imageUrls, "api-key": "2b10XeF54WTCFDCsBiJUJSShO" };
+  const queryParams = { images: imageUrls, "api-key": "2b100tFbSc2eMjgw5eQAGS3e" };
   const params = qs.stringify(queryParams, { arrayFormat: "repeat" });
   try {
     const data = await plainHttp.get(`https://my-api.plantnet.org/v2/identify/all?${params}`);
