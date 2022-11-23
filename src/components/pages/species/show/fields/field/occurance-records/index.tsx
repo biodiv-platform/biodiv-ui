@@ -1,6 +1,6 @@
+import { MapStyles } from "@biodiv-platform/naksha-commons";
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
-import { MapStyles } from "@ibp/naksha-commons";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
