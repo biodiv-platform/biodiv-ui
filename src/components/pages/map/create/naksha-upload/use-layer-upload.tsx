@@ -91,10 +91,7 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
     try {
       const formData: any = new FormData();
       const mapFiles = mapFileType === MapFileType.raster ? rasterFiles : shapeFiles;
-      Object.keys(mapFiles).map((type) => {
-        formData.append(type, mapFiles?.[type]?.file);
-      });
-
+      //FormData append order must be maintained as below for both vector and raster file to successfully upload
       formData.append(
         "metadata",
         new File([JSON.stringify(metadata)], "metadata.json", {
@@ -102,6 +99,12 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
           lastModified: new Date().getTime()
         })
       );
+      Object.keys(mapFiles)
+        .sort()
+        .map((type) => {
+          formData.append(type, mapFiles?.[type]?.file);
+        });
+
       const response = await fetch(props.nakshaEndpoint, {
         method: "POST",
         body: formData,

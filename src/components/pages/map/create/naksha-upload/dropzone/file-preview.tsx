@@ -3,7 +3,8 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { FileWithType } from "../file-with-type";
-import useLayerUpload from "../use-layer-upload";
+import LayerUploadForm from "../form";
+import useLayerUpload, { MapFileType } from "../use-layer-upload";
 
 const SingleFile = ({ type, name }) =>
   name ? (
@@ -24,7 +25,7 @@ const SingleFile = ({ type, name }) =>
   ) : null;
 
 export default function FilePreview() {
-  const { shapeFiles, rasterFiles, canContinue, setScreen } = useLayerUpload();
+  const { shapeFiles, mapFileType, rasterFiles, canContinue, setScreen } = useLayerUpload();
   const { t } = useTranslation();
 
   const fileType = rasterFiles.tif.file ? rasterFiles : shapeFiles;
@@ -39,15 +40,19 @@ export default function FilePreview() {
             <SingleFile type={type} key={type} name={fileType?.[type]?.file?.name} />
           ))}
       </Box>
-      <Button
-        w="100%"
-        colorScheme="blue"
-        size="lg"
-        disabled={!canContinue}
-        onClick={() => setScreen(1)}
-      >
-        {t("map:continue")}
-      </Button>
+      {mapFileType === MapFileType.raster && rasterFiles.tif.file ? (
+        <LayerUploadForm />
+      ) : (
+        <Button
+          w="100%"
+          colorScheme="blue"
+          size="lg"
+          disabled={!canContinue}
+          onClick={() => setScreen(1)}
+        >
+          {t("map:continue")}
+        </Button>
+      )}
     </Flex>
   );
 }

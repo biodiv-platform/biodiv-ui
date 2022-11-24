@@ -1,5 +1,4 @@
 import { formatDate } from "@biodiv-platform/naksha-commons";
-import FormDebugger from "@components/form/debugger";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -22,10 +21,23 @@ export default function LayerUploadForm() {
         layerName: yup.string().required(),
         layerDescription: yup.string().required(),
         layerType: yup.string().required(),
-        titleColumn: yup.string(),
+        titleColumn: yup.string().when("layerType", {
+          is: (v) => v !== MapFileType.raster,
+          then: yup.string().required("title column is required")
+        }),
+        colorBy: yup.string().when("layerType", {
+          is: (v) => v !== MapFileType.raster,
+          then: yup.string().required("title column is required")
+        }),
+        summaryColumns: yup
+          .array()
+          .of(yup.mixed())
+          .when("layerType", {
+            is: (v) => v !== MapFileType.raster,
+            then: yup.array().of(yup.mixed()).required("title column is required")
+          }),
         createdBy: yup.string().required(),
-        summaryColumns: yup.array().of(yup.mixed()),
-        colorBy: yup.string(),
+
         attribution: yup.string().required(),
         url: yup.string().notRequired(),
         pdfLink: yup.string().notRequired(),
@@ -50,7 +62,7 @@ export default function LayerUploadForm() {
       ...values,
       createdDate: formatDate(values.createdDate),
       layerFileDescription: {
-        fileType: "shp",
+        fileType: mapFileType === MapFileType.raster ? "tif" : "shp",
         encoding: "UTF-8"
       },
       editAccess: "ALL",
@@ -64,7 +76,6 @@ export default function LayerUploadForm() {
         {mapFileType === MapFileType.vector && <VectorUploadForm />}
         {mapFileType === MapFileType.raster && <RasterUploadForm />}
       </form>
-      <FormDebugger />
     </FormProvider>
   );
 }
