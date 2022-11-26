@@ -1,10 +1,24 @@
-import { Badge, Box, Image, Stack, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, HStack, Image, Stack, Tag, Text } from "@chakra-ui/react";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
+
+export const Thumbmails = ({ images }) => {
+  return (
+    <HStack justifyContent="center" spacing={2} mt={2} maxW="full" overflowY="auto">
+      {images.map((img) => (
+        <Flex>
+          <a href={img.url.o}>
+            <Image src={img.url.s} boxSize="50px" />
+          </a>
+        </Flex>
+      ))}
+    </HStack>
+  );
+};
 
 export const ScientificNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
@@ -17,6 +31,12 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
             src={getSuggestionIcon(props.data.icon)}
             fallbackSrc={props.data.group}
           />
+        )}
+
+        {props.data.score && (
+          <Tag size="md" variant="solid" colorScheme="green">
+            {props.data.score}
+          </Tag>
         )}
         <Box>
           {children}
@@ -31,8 +51,10 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
                 {props.data.position}
               </Badge>
             )}
+            {props.data.prediction && <Badge colorScheme="blue">Prediction</Badge>}
           </Stack>
         </Box>
+        {props.data.images && <Thumbmails images={props.data.images} />}
       </Stack>
     </components.Option>
   );
