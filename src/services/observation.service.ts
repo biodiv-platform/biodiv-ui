@@ -533,9 +533,10 @@ export const axDeleteObservationByDatatableId = async (observationId) => {
   }
 };
 
-export const axGetPlantnetSuggestions = async (imageUrls) => {
+export const axGetPlantnetSuggestions = async (imageUrls, organs) => {
   const queryParams = {
     images: imageUrls,
+    organs: organs,
     "api-key": "2b100tFbSc2eMjgw5eQAGS3e",
     "include-related-images": true
   };

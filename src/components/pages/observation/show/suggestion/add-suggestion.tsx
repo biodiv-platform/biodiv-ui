@@ -35,6 +35,7 @@ import { axGetLangList } from "@services/utility.service";
 import { DEFAULT_TOAST } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
 import notification from "@utils/notification";
+import { ServerResponse } from "http";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -85,6 +86,7 @@ export default function AddSuggestion({
   const [x, setX] = useState<any[]>([]);
 
   const [selectedImages, setSelectedImages] = useState<any[]>([]);
+  const [organs, setSelectOrgans] = useState<any[]>([]);
 
   const { getCheckboxProps } = useCheckboxGroup({
     value: selectedImages ? selectedImages.map((o) => o?.resource?.id) : []
@@ -120,12 +122,22 @@ export default function AddSuggestion({
       (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
     );
 
+    const finalOrgans = selectedImages.map((image) => {
+      const obj = organs.find((o) => {
+        if (o.imageId === image.resource.id) {
+          return true; // stop searching
+        }
+      });
+
+      return obj.organ;
+    });
+
     toastIdRef.current = toast({
       ...DEFAULT_TOAST.LOADING,
       description: t("form:uploader.predicting")
     });
 
-    const { success, data } = await axGetPlantnetSuggestions(imageUrls);
+    const { success, data } = await axGetPlantnetSuggestions(imageUrls, finalOrgans);
 
     if (success) {
       setPlantNetData(data.results);
@@ -142,6 +154,7 @@ export default function AddSuggestion({
         ...DEFAULT_TOAST.SUCCESS,
         description: t("common:success")
       });
+      onCloseImageModal();
       setTimeout(() => toast.close(toastIdRef.current), 1000);
     }
   };
@@ -206,12 +219,14 @@ export default function AddSuggestion({
       value: v.species.scientificName,
       label: v.species.scientificName,
       group: getLocalIcon("Plants"),
-      score: v.score.toFixed(3),
+      score: (v.score * 100).toFixed(3) + " %",
       prediction: true,
       images: v.images
     }));
     setX(temp);
   }, [plantnetData]);
+
+  console.log("organs=", organs);
 
   return languages.length > 0 ? (
     isLocked ? (
@@ -285,6 +300,8 @@ export default function AddSuggestion({
                               selectedImages={selectedImages}
                               setter={setSelectedImages}
                               image={o}
+                              selectedOrgans={organs}
+                              organSetter={setSelectOrgans}
                               {...getCheckboxProps({ value: o.resource.id })}
                             />
                           ))}
@@ -299,11 +316,11 @@ export default function AddSuggestion({
 
                       <ModalFooter>
                         <Button colorScheme="green" mr={3} onClick={handleOnPlantnetSelect}>
-                          Selected
+                          Generate predictions
                         </Button>
-                        <Button colorScheme="blue" mr={3} onClick={onCloseImageModal}>
+                        {/* <Button colorScheme="blue" mr={3} onClick={onCloseImageModal}>
                           Close
-                        </Button>
+                        </Button> */}
                       </ModalFooter>
                     </ModalContent>
                   </Modal>
