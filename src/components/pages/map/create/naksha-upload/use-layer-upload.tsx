@@ -75,7 +75,7 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
     setMapFileType(val);
   };
   const updateMapFile = (fileType, file, meta = {}) => {
-    if (RASTER_FILE_TYPES.TIF.includes(fileType) || RASTER_FILE_TYPES.SLD.includes(fileType)) {
+    if (RASTER_FILE_TYPES.TIF.includes(fileType)) {
       setRasterFiles((_draft) => {
         _draft[fileType] = { file, meta };
       });
