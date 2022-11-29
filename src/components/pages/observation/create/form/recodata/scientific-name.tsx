@@ -11,9 +11,7 @@ export const Thumbmails = ({ images }) => {
     <HStack justifyContent="center" spacing={2} mt={2} maxW="full" overflowY="auto">
       {images.map((img) => (
         <Flex>
-          <a href={img.url.o}>
-            <Image src={img.url.s} boxSize="50px" />
-          </a>
+          <Image src={img.url.s} boxSize="16" />
         </Flex>
       ))}
     </HStack>

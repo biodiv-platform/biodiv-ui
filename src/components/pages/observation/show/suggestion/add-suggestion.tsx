@@ -35,7 +35,6 @@ import { axGetLangList } from "@services/utility.service";
 import { DEFAULT_TOAST } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
 import notification from "@utils/notification";
-import { ServerResponse } from "http";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -89,12 +88,23 @@ export default function AddSuggestion({
   const [organs, setSelectOrgans] = useState<any[]>([]);
 
   const { getCheckboxProps } = useCheckboxGroup({
-    value: selectedImages ? selectedImages.map((o) => o?.resource?.id) : []
+    value: selectedImages.length > 0 ? selectedImages.map((o) => o?.resource?.id) : []
+    // defaultValue: images
+    //   .slice(0, 5 <= images.length ? 5 : images.length)
+    //   .map((o) => o?.resource?.id)
   });
+
+  // setPreselectedImages([]);
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
       setLanguages(data.map((l) => ({ label: l.name, value: l.id })))
+    );
+    setSelectedImages(images.slice(0, 5 <= images.length ? 5 : images.length));
+    setSelectOrgans(
+      images
+        .slice(0, 5 <= images.length ? 5 : images.length)
+        .map((o) => ({ imageId: o.resource.id, organ: "auto" }))
     );
   }, []);
 
@@ -116,8 +126,7 @@ export default function AddSuggestion({
     }
   });
 
-  const handleOnPlantnetSelect = async (e) => {
-    console.log("e.currenTarget=", e.currentTarget.value);
+  const handleOnPlantnetSelect = async () => {
     const imageUrls = selectedImages.map(
       (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
     );
@@ -226,8 +235,6 @@ export default function AddSuggestion({
     setX(temp);
   }, [plantnetData]);
 
-  console.log("organs=", organs);
-
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">
@@ -312,6 +319,13 @@ export default function AddSuggestion({
                             }}
                           /> */}
                         </SimpleGrid>
+
+                        {/* {shouldDisplayMsg && (
+                          <Alert status="error">
+                            <AlertIcon />
+                            <AlertDescription>Please select a maximum of 5 images</AlertDescription>
+                          </Alert>
+                        )} */}
                       </ModalBody>
 
                       <ModalFooter>
