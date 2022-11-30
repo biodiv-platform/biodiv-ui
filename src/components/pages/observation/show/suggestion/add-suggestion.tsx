@@ -5,35 +5,33 @@ import {
   Box,
   Button,
   Collapse,
+  Flex,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   SimpleGrid,
   Skeleton,
-  useCheckboxGroup,
-  useDisclosure,
-  useToast
+  Spacer,
+  useDisclosure
 } from "@chakra-ui/react";
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/react";
+// import {
+//   Modal,
+//   ModalBody,
+//   ModalCloseButton,
+//   ModalContent,
+//   ModalFooter,
+//   ModalHeader,
+//   ModalOverlay
+// } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
-import { axGetPlantnetSuggestions, axRecoSuggest } from "@services/observation.service";
+import { axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
-import { DEFAULT_TOAST } from "@static/observation-create";
-import { getLocalIcon } from "@utils/media";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
@@ -49,7 +47,7 @@ import {
   onScientificNameQuery,
   ScientificNameOption
 } from "../../create/form/recodata/scientific-name";
-import ImagePicker from "./image-picker";
+import PlantnetPrediction from "./plantnet-prediction";
 
 interface IAddSuggestionProps {
   isLocked;
@@ -78,21 +76,19 @@ export default function AddSuggestion({
     onOpen: onOpenimageModal,
     onClose: onCloseImageModal
   } = useDisclosure();
-  const [plantnetData, setPlantNetData] = useState<any[]>([]);
-  const toast = useToast();
-  const toastIdRef = React.useRef<any>();
+  //const [plantnetData, setPlantNetData] = useState<any[]>([]);
+  // const toast = useToast();
+  // const toastIdRef = React.useRef<any>();
 
   const [x, setX] = useState<any[]>([]);
 
-  const [selectedImages, setSelectedImages] = useState<any[]>([]);
-  const [organs, setSelectOrgans] = useState<any[]>([]);
+  //const [selectedImages, setSelectedImages] = useState<any[]>([]);
+  //const [organs, setSelectOrgans] = useState<any[]>([]);
 
-  const { getCheckboxProps } = useCheckboxGroup({
-    value: selectedImages.length > 0 ? selectedImages.map((o) => o?.resource?.id) : []
-    // defaultValue: images
-    //   .slice(0, 5 <= images.length ? 5 : images.length)
-    //   .map((o) => o?.resource?.id)
-  });
+  // const { getCheckboxProps } = useCheckboxGroup({
+  //   value: selectedImages.length > 0 ? selectedImages.map((o) => o?.resource?.id) : []
+
+  // });
 
   // setPreselectedImages([]);
 
@@ -100,12 +96,12 @@ export default function AddSuggestion({
     axGetLangList().then(({ data }) =>
       setLanguages(data.map((l) => ({ label: l.name, value: l.id })))
     );
-    setSelectedImages(images.slice(0, 5 <= images.length ? 5 : images.length));
-    setSelectOrgans(
-      images
-        .slice(0, 5 <= images.length ? 5 : images.length)
-        .map((o) => ({ imageId: o.resource.id, organ: "auto" }))
-    );
+    // setSelectedImages(images.slice(0, 5 <= images.length ? 5 : images.length));
+    // setSelectOrgans(
+    //   images
+    //     .slice(0, 5 <= images.length ? 5 : images.length)
+    //     .map((o) => ({ imageId: o.resource.id, organ: "auto" }))
+    // );
   }, []);
 
   const hForm = useForm<any>({
@@ -126,47 +122,47 @@ export default function AddSuggestion({
     }
   });
 
-  const handleOnPlantnetSelect = async () => {
-    const imageUrls = selectedImages.map(
-      (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
-    );
+  // const handleOnPlantnetSelect = async () => {
+  //   const imageUrls = selectedImages.map(
+  //     (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
+  //   );
 
-    const finalOrgans = selectedImages.map((image) => {
-      const obj = organs.find((o) => {
-        if (o.imageId === image.resource.id) {
-          return true; // stop searching
-        }
-      });
+  //   const finalOrgans = selectedImages.map((image) => {
+  //     const obj = organs.find((o) => {
+  //       if (o.imageId === image.resource.id) {
+  //         return true; // stop searching
+  //       }
+  //     });
 
-      return obj.organ;
-    });
+  //     return obj.organ;
+  //   });
 
-    toastIdRef.current = toast({
-      ...DEFAULT_TOAST.LOADING,
-      description: t("form:uploader.predicting")
-    });
+  //   toastIdRef.current = toast({
+  //     ...DEFAULT_TOAST.LOADING,
+  //     description: t("form:uploader.predicting")
+  //   });
 
-    const { success, data } = await axGetPlantnetSuggestions(imageUrls, finalOrgans);
+  //   const { success, data } = await axGetPlantnetSuggestions(imageUrls, finalOrgans);
 
-    if (success) {
-      setPlantNetData(data.results);
-      const temp = plantnetData?.map((v) => ({
-        value: v.species.scientificName,
-        label: v.species.scientificName,
-        group: getLocalIcon("Plants"),
-        score: v.score.toFixed(3),
-        prediction: true,
-        images: v.images
-      }));
-      setX(temp);
-      toast.update(toastIdRef.current, {
-        ...DEFAULT_TOAST.SUCCESS,
-        description: t("common:success")
-      });
-      onCloseImageModal();
-      setTimeout(() => toast.close(toastIdRef.current), 1000);
-    }
-  };
+  //   if (success) {
+  //     setPlantNetData(data.results);
+  //     const temp = plantnetData?.map((v) => ({
+  //       value: v.species.scientificName,
+  //       label: v.species.scientificName,
+  //       group: getLocalIcon("Plants"),
+  //       score: v.score.toFixed(3),
+  //       prediction: true,
+  //       images: v.images
+  //     }));
+  //     setX(temp);
+  //     toast.update(toastIdRef.current, {
+  //       ...DEFAULT_TOAST.SUCCESS,
+  //       description: t("common:success")
+  //     });
+  //     onCloseImageModal();
+  //     setTimeout(() => toast.close(toastIdRef.current), 1000);
+  //   }
+  // };
 
   const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
     if (langId) {
@@ -223,17 +219,17 @@ export default function AddSuggestion({
     }
   }, [recoVotesLength]);
 
-  useEffect(() => {
-    const temp = plantnetData?.map((v) => ({
-      value: v.species.scientificName,
-      label: v.species.scientificName,
-      group: getLocalIcon("Plants"),
-      score: (v.score * 100).toFixed(3) + " %",
-      prediction: true,
-      images: v.images
-    }));
-    setX(temp);
-  }, [plantnetData]);
+  // useEffect(() => {
+  //   const temp = plantnetData?.map((v) => ({
+  //     value: v.species.scientificName,
+  //     label: v.species.scientificName,
+  //     group: getLocalIcon("Plants"),
+  //     score: (v.score * 100).toFixed(3) + " %",
+  //     prediction: true,
+  //     images: v.images
+  //   }));
+  //   setX(temp);
+  // }, [plantnetData]);
 
   return languages.length > 0 ? (
     isLocked ? (
@@ -274,22 +270,11 @@ export default function AddSuggestion({
                     optionComponent={ScientificNameOption}
                     placeholder={t("form:min_three_chars")}
                     onChange={onScientificNameChange}
-                    options={plantnetData ? x : []}
+                    options={x ? x : []}
                     selectRef={scientificRef}
                   />
 
-                  <Menu>
-                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                      identify using
-                    </MenuButton>
-                    <MenuList>
-                      <MenuItem value="plantnet" onClick={onOpenimageModal}>
-                        Plantnet
-                      </MenuItem>
-                    </MenuList>
-                  </Menu>
-
-                  <Modal isOpen={isOpenImageModal} size="6xl" onClose={onCloseImageModal}>
+                  {/* <Modal isOpen={isOpenImageModal} size="6xl" onClose={onCloseImageModal}>
                     <ModalOverlay />
                     <ModalContent>
                       <ModalHeader>Select Images</ModalHeader>
@@ -312,34 +297,38 @@ export default function AddSuggestion({
                               {...getCheckboxProps({ value: o.resource.id })}
                             />
                           ))}
-
-                          {/* <SpeciesPullMedia
-                            onDone={() => {
-                              console.log("hi");
-                            }}
-                          /> */}
                         </SimpleGrid>
-
-                        {/* {shouldDisplayMsg && (
-                          <Alert status="error">
-                            <AlertIcon />
-                            <AlertDescription>Please select a maximum of 5 images</AlertDescription>
-                          </Alert>
-                        )} */}
                       </ModalBody>
 
                       <ModalFooter>
                         <Button colorScheme="green" mr={3} onClick={handleOnPlantnetSelect}>
                           Generate predictions
                         </Button>
-                        {/* <Button colorScheme="blue" mr={3} onClick={onCloseImageModal}>
-                          Close
-                        </Button> */}
                       </ModalFooter>
                     </ModalContent>
-                  </Modal>
+                  </Modal> */}
 
-                  <SubmitButton leftIcon={<CheckIcon />}>{t("observation:suggest")}</SubmitButton>
+                  <PlantnetPrediction
+                    images={images}
+                    setX={setX}
+                    isOpenImageModal={isOpenImageModal}
+                    onCloseImageModal={onCloseImageModal}
+                  />
+
+                  <Flex>
+                    <Menu>
+                      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                        identify using
+                      </MenuButton>
+                      <MenuList>
+                        <MenuItem value="plantnet" onClick={onOpenimageModal}>
+                          Plantnet
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                    <Spacer />
+                    <SubmitButton leftIcon={<CheckIcon />}>{t("observation:suggest")}</SubmitButton>
+                  </Flex>
                 </form>
               </FormProvider>
             </Box>
