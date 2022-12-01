@@ -11,6 +11,7 @@ import {
   useCheckboxGroup,
   useToast
 } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import { axGetPlantnetSuggestions } from "@services/observation.service";
 import { DEFAULT_TOAST } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
@@ -23,11 +24,6 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
 
-  //   const {
-  //     isOpen: isOpenImageModal,
-  //     onOpen: onOpenimageModal,
-  //     onClose: onCloseImageModal
-  //   } = useDisclosure();
   const [plantnetData, setPlantNetData] = useState<any[]>([]);
 
   const [selectedImages, setSelectedImages] = useState<any[]>([]);
@@ -60,8 +56,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
 
   const handleOnPlantnetSelect = async () => {
     const imageUrls = selectedImages.map(
-      (o) =>
-        `https://venus.strandls.com/files-api/api/get/crop/plantnet/observations/${o.resource.fileName}`
+      (o) => `${SITE_CONFIG.SITE.URL}${SITE_CONFIG.PLANTNET.IMAGE_BASE_PATH}${o.resource.fileName}`
     );
 
     const finalOrgans = selectedImages.map((image) => {
@@ -99,12 +94,6 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
       onCloseImageModal();
       setTimeout(() => toast.close(toastIdRef.current), 1000);
     } else {
-      //   toast({
-      //     title: "Failed to generate predictions",
-      //     status: "error",
-      //     isClosable: true,
-      //     position: "top"
-      //   });
       toast.update(toastIdRef.current, {
         title: "Failed to generate predictions",
         status: "error",

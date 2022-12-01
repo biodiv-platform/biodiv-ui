@@ -15,18 +15,10 @@ import {
   Spacer,
   useDisclosure
 } from "@chakra-ui/react";
-// import {
-//   Modal,
-//   ModalBody,
-//   ModalCloseButton,
-//   ModalContent,
-//   ModalFooter,
-//   ModalHeader,
-//   ModalOverlay
-// } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
@@ -74,37 +66,20 @@ export default function AddSuggestion({
     onOpen: onOpenimageModal,
     onClose: onCloseImageModal
   } = useDisclosure();
-  //const [plantnetData, setPlantNetData] = useState<any[]>([]);
-  // const toast = useToast();
-  // const toastIdRef = React.useRef<any>();
 
   const [x, setX] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
-  //const [selectedImages, setSelectedImages] = useState<any[]>([]);
-  //const [organs, setSelectOrgans] = useState<any[]>([]);
-
-  // const { getCheckboxProps } = useCheckboxGroup({
-  //   value: selectedImages.length > 0 ? selectedImages.map((o) => o?.resource?.id) : []
-
-  // });
-
-  // setPreselectedImages([]);
+  const [sgroupId, setSgroupId] = useState(null);
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
       setLanguages(data.map((l) => ({ label: l.name, value: l.id })))
     );
-    // setSelectedImages(images.slice(0, 5 <= images.length ? 5 : images.length));
-    // setSelectOrgans(
-    //   images
-    //     .slice(0, 5 <= images.length ? 5 : images.length)
-    //     .map((o) => ({ imageId: o.resource.id, organ: "auto" }))
-    // );
 
-    axGetObservationById(observationId).then(({ data }) =>
-      //console.log("resource data=", data.observationResource)
-      setImages(data.observationResource)
-    );
+    axGetObservationById(observationId).then(({ data }) => {
+      setImages(data.observationResource);
+      setSgroupId(data.observation.groupId);
+    });
   }, []);
 
   const hForm = useForm<any>({
@@ -124,48 +99,6 @@ export default function AddSuggestion({
       languageId: languageId
     }
   });
-
-  // const handleOnPlantnetSelect = async () => {
-  //   const imageUrls = selectedImages.map(
-  //     (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
-  //   );
-
-  //   const finalOrgans = selectedImages.map((image) => {
-  //     const obj = organs.find((o) => {
-  //       if (o.imageId === image.resource.id) {
-  //         return true; // stop searching
-  //       }
-  //     });
-
-  //     return obj.organ;
-  //   });
-
-  //   toastIdRef.current = toast({
-  //     ...DEFAULT_TOAST.LOADING,
-  //     description: t("form:uploader.predicting")
-  //   });
-
-  //   const { success, data } = await axGetPlantnetSuggestions(imageUrls, finalOrgans);
-
-  //   if (success) {
-  //     setPlantNetData(data.results);
-  //     const temp = plantnetData?.map((v) => ({
-  //       value: v.species.scientificName,
-  //       label: v.species.scientificName,
-  //       group: getLocalIcon("Plants"),
-  //       score: v.score.toFixed(3),
-  //       prediction: true,
-  //       images: v.images
-  //     }));
-  //     setX(temp);
-  //     toast.update(toastIdRef.current, {
-  //       ...DEFAULT_TOAST.SUCCESS,
-  //       description: t("common:success")
-  //     });
-  //     onCloseImageModal();
-  //     setTimeout(() => toast.close(toastIdRef.current), 1000);
-  //   }
-  // };
 
   const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
     if (langId) {
@@ -222,18 +155,6 @@ export default function AddSuggestion({
     }
   }, [recoVotesLength]);
 
-  // useEffect(() => {
-  //   const temp = plantnetData?.map((v) => ({
-  //     value: v.species.scientificName,
-  //     label: v.species.scientificName,
-  //     group: getLocalIcon("Plants"),
-  //     score: (v.score * 100).toFixed(3) + " %",
-  //     prediction: true,
-  //     images: v.images
-  //   }));
-  //   setX(temp);
-  // }, [plantnetData]);
-
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">
@@ -277,46 +198,15 @@ export default function AddSuggestion({
                     selectRef={scientificRef}
                   />
 
-                  {/* <Modal isOpen={isOpenImageModal} size="6xl" onClose={onCloseImageModal}>
-                    <ModalOverlay />
-                    <ModalContent>
-                      <ModalHeader>Select Images</ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody>
-                        <SimpleGrid
-                          columns={[2, 3, 4, 5]}
-                          gridGap={4}
-                          mb={4}
-                          className="custom-checkbox-group"
-                        >
-                          {images.map((o) => (
-                            <ImagePicker
-                              key={o.resource.id}
-                              selectedImages={selectedImages}
-                              setter={setSelectedImages}
-                              image={o}
-                              selectedOrgans={organs}
-                              organSetter={setSelectOrgans}
-                              {...getCheckboxProps({ value: o.resource.id })}
-                            />
-                          ))}
-                        </SimpleGrid>
-                      </ModalBody>
-
-                      <ModalFooter>
-                        <Button colorScheme="green" mr={3} onClick={handleOnPlantnetSelect}>
-                          Generate predictions
-                        </Button>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal> */}
-
-                  <PlantnetPrediction
-                    images={images}
-                    setX={setX}
-                    isOpenImageModal={isOpenImageModal}
-                    onCloseImageModal={onCloseImageModal}
-                  />
+                  {SITE_CONFIG.PLANTNET.ACTIVE &&
+                    sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID && (
+                      <PlantnetPrediction
+                        images={images}
+                        setX={setX}
+                        isOpenImageModal={isOpenImageModal}
+                        onCloseImageModal={onCloseImageModal}
+                      />
+                    )}
 
                   <Flex>
                     <Menu>
@@ -324,7 +214,11 @@ export default function AddSuggestion({
                         identify using
                       </MenuButton>
                       <MenuList>
-                        <MenuItem value="plantnet" onClick={onOpenimageModal}>
+                        <MenuItem
+                          isDisabled={sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID}
+                          value="plantnet"
+                          onClick={onOpenimageModal}
+                        >
                           Plantnet
                         </MenuItem>
                       </MenuList>
