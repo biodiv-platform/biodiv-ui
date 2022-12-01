@@ -263,10 +263,10 @@
     boundingbox "^1.4.0"
     react-gbus "^1.1.2"
 
-"@biodiv-platform/naksha-mapbox-list@4.4.9":
-  version "4.4.9"
-  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-mapbox-list/-/naksha-mapbox-list-4.4.9.tgz#5da85b93a338904816cbe2a54b7a2cdd6add43b5"
-  integrity sha512-agg543f15xpJHKNp5epC2Vj+YzktuDh4irFoUktT0SpVRBy5vjHCKII11tXRcqivLvgc0UEKYCe4eHTw4tE6Iw==
+"@biodiv-platform/naksha-mapbox-list@4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-mapbox-list/-/naksha-mapbox-list-4.5.0.tgz#01f8458969fb5d47fa9b52eb0f5757099cd32e4f"
+  integrity sha512-H2GJ0RjEn9hoDUk43Jmi9kNdQfRg8scZ+WmjrRoygxMIUMz2F/5Z4LWuvHMLWANucs670DmfObgJMHiG43K2fA==
   dependencies:
     "@biodiv-platform/naksha-commons" "*"
     "@bumaga/tabs" "^0.2.0"
@@ -3256,10 +3256,10 @@
   dependencies:
     "@types/geojson" "*"
 
-"@types/node@18.11.9":
-  version "18.11.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
-  integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
+"@types/node@18.11.10":
+  version "18.11.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.10.tgz#4c64759f3c2343b7e6c4b9caf761c7a3a05cee34"
+  integrity sha512-juG3RWMBOqcOuXC643OAdSA525V44cVgGV6dUDuiFtss+8Fk5x1hI93Rsld43VeJVIeqlP9I7Fn9/qaVqoEAuQ==
 
 "@types/npmlog@^4.1.2":
   version "4.1.4"
@@ -6066,16 +6066,16 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@^4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.5.1.tgz#248fbb5fa05d60d9b3102170bdcca9012799387d"
-  integrity sha512-wc9WCzUBdOvKBZ5sriDL/1CcFk9mS4CWVVbs92pp52OAoA9nhhDQ4yAgCNxaYpUKQac6tUBwJtE21Fc6pwGiPw==
+naksha-components-react@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.5.2.tgz#21fb8b6a847ab7ff06da830d7536f5444c4520d1"
+  integrity sha512-0jpJNlbiCuYB0b+rxKvjZC5pOUTpmPVKS9AoRqafeuKr37e/THG9idnix4ekafCE7u7Tc+bGluQM0zLPJwjE/g==
   dependencies:
     "@biodiv-platform/eslint-preset" "4.4.9"
     "@biodiv-platform/naksha-gmaps-draw" "4.4.9"
     "@biodiv-platform/naksha-gmaps-view" "4.4.9"
     "@biodiv-platform/naksha-mapbox-draw" "4.4.9"
-    "@biodiv-platform/naksha-mapbox-list" "4.4.9"
+    "@biodiv-platform/naksha-mapbox-list" "4.5.0"
     "@biodiv-platform/naksha-mapbox-view" "4.4.9"
     "@biodiv-platform/tsconfig" "4.4.9"
 
