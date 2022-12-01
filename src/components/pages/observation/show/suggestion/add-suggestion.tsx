@@ -30,7 +30,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
-import { axRecoSuggest } from "@services/observation.service";
+import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -54,15 +54,13 @@ interface IAddSuggestionProps {
   observationId;
   recoUpdated;
   recoVotesLength;
-  images?;
 }
 
 export default function AddSuggestion({
   isLocked,
   observationId,
   recoUpdated,
-  recoVotesLength,
-  images
+  recoVotesLength
 }: IAddSuggestionProps) {
   const { t } = useTranslation();
   const scientificRef: any = useRef(null);
@@ -81,7 +79,7 @@ export default function AddSuggestion({
   // const toastIdRef = React.useRef<any>();
 
   const [x, setX] = useState<any[]>([]);
-
+  const [images, setImages] = useState<any[]>([]);
   //const [selectedImages, setSelectedImages] = useState<any[]>([]);
   //const [organs, setSelectOrgans] = useState<any[]>([]);
 
@@ -102,6 +100,11 @@ export default function AddSuggestion({
     //     .slice(0, 5 <= images.length ? 5 : images.length)
     //     .map((o) => ({ imageId: o.resource.id, organ: "auto" }))
     // );
+
+    axGetObservationById(observationId).then(({ data }) =>
+      //console.log("resource data=", data.observationResource)
+      setImages(data.observationResource)
+    );
   }, []);
 
   const hForm = useForm<any>({

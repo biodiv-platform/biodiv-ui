@@ -44,7 +44,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
         .slice(0, 5 <= images.length ? 5 : images.length)
         .map((o) => ({ imageId: o.resource.id, organ: "auto" }))
     );
-  }, []);
+  }, [images]);
 
   useEffect(() => {
     const temp = plantnetData?.map((v) => ({
@@ -60,7 +60,8 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
 
   const handleOnPlantnetSelect = async () => {
     const imageUrls = selectedImages.map(
-      (o) => `https://venus.strandls.com/files-api/api/get/raw/observations/${o.resource.fileName}`
+      (o) =>
+        `https://venus.strandls.com/files-api/api/get/crop/plantnet/observations/${o.resource.fileName}`
     );
 
     const finalOrgans = selectedImages.map((image) => {
@@ -98,7 +99,13 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
       onCloseImageModal();
       setTimeout(() => toast.close(toastIdRef.current), 1000);
     } else {
-      toast({
+      //   toast({
+      //     title: "Failed to generate predictions",
+      //     status: "error",
+      //     isClosable: true,
+      //     position: "top"
+      //   });
+      toast.update(toastIdRef.current, {
         title: "Failed to generate predictions",
         status: "error",
         isClosable: true,

@@ -46,7 +46,6 @@ export default function SuggesionList({ o, setO, permission }: ISuggestionListPr
           recoVotesLength={o.allRecoVotes?.length}
           observationId={o.observation?.id}
           isLocked={o.observation?.isLocked}
-          images={o.observationResource}
         />
       </LazyLoad>
     </Box>
