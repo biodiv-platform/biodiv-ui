@@ -46,13 +46,15 @@ interface IAddSuggestionProps {
   observationId;
   recoUpdated;
   recoVotesLength;
+  sgroupId;
 }
 
 export default function AddSuggestion({
   isLocked,
   observationId,
   recoUpdated,
-  recoVotesLength
+  recoVotesLength,
+  sgroupId
 }: IAddSuggestionProps) {
   const { t } = useTranslation();
   const scientificRef: any = useRef(null);
@@ -69,7 +71,14 @@ export default function AddSuggestion({
 
   const [x, setX] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
-  const [sgroupId, setSgroupId] = useState(null);
+  //const [sgroupId, setSgroupId] = useState(null);
+
+  const availablePredictionModels = [
+    {
+      model: "plantnet",
+      isActive: SITE_CONFIG.PLANTNET.ACTIVE && sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID
+    }
+  ];
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
@@ -78,7 +87,7 @@ export default function AddSuggestion({
 
     axGetObservationById(observationId).then(({ data }) => {
       setImages(data.observationResource);
-      setSgroupId(data.observation.groupId);
+      // setSgroupId(data.observation.groupId);
     });
   }, []);
 
@@ -155,6 +164,8 @@ export default function AddSuggestion({
     }
   }, [recoVotesLength]);
 
+  console.log("sgroupid=", sgroupId);
+
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">
@@ -208,24 +219,30 @@ export default function AddSuggestion({
                       />
                     )}
 
-                  <Flex>
-                    <Menu>
-                      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                        identify using
-                      </MenuButton>
-                      <MenuList>
-                        <MenuItem
-                          isDisabled={sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID}
-                          value="plantnet"
-                          onClick={onOpenimageModal}
-                        >
-                          Plantnet
-                        </MenuItem>
-                      </MenuList>
-                    </Menu>
-                    <Spacer />
+                  {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
+                    <Flex>
+                      <Menu>
+                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                          identify using
+                        </MenuButton>
+                        <MenuList>
+                          <MenuItem
+                            isDisabled={sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID}
+                            value="plantnet"
+                            onClick={onOpenimageModal}
+                          >
+                            Plantnet
+                          </MenuItem>
+                        </MenuList>
+                      </Menu>
+                      <Spacer />
+                      <SubmitButton leftIcon={<CheckIcon />}>
+                        {t("observation:suggest")}
+                      </SubmitButton>
+                    </Flex>
+                  ) : (
                     <SubmitButton leftIcon={<CheckIcon />}>{t("observation:suggest")}</SubmitButton>
-                  </Flex>
+                  )}
                 </form>
               </FormProvider>
             </Box>

@@ -9,6 +9,8 @@ export default function RecoSuggestionTab({ o, recoUpdated }) {
   const { observationData } = useObservationFilter();
   const { t } = useTranslation();
 
+  console.log("o=", o);
+
   return (
     <>
       <BoxHeading>🆔 {t("observation:id.title")}</BoxHeading>
@@ -25,6 +27,7 @@ export default function RecoSuggestionTab({ o, recoUpdated }) {
         recoVotesLength={o.recoShow.allRecoVotes?.length}
         observationId={o.observationId}
         isLocked={o.recoShow.isLocked}
+        sgroupId={o.speciesGroupId}
       />
     </>
   );
