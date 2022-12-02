@@ -73,7 +73,7 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
             <TextAreaField
               name={"requestorMessage"}
               label={t("taxon:request.message")}
-              placeholder={"Please specify your reason to contribute (Max 200 characters)"}
+              placeholder={t("taxon:request.placeholder")}
               maxLength="200"
             />
             {isAdmin && (

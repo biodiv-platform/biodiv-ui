@@ -84,6 +84,8 @@
   "request": {
     "button": "Demander",
     "failure": "Erreur lors de la demande d'autorisation",
+    "message": "Ajouter un message de demande",
+    "placeholder": "Veuillez donner un bref aperçu de vos connaissances et de votre expérience concernant le taxon choisi (Max 200 caractères)",
     "success": "Autorisation de taxons demandée avec succès",
     "title": "Demander l'autorisation",
     "user": "Utilisateur"

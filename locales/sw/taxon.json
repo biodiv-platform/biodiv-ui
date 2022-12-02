@@ -84,6 +84,8 @@
   "request": {
     "button": "Ombi",
     "failure": "Hitilafu wakati wa kuomba ruhusa",
+    "message": "Ongeza ujumbe wa ombi",
+    "placeholder": "Tafadhali toa muhtasari mfupi wa maarifa na uzoefu wako kuhusu ushuru uliochaguliwa (Upeo wa herufi 200)",
     "success": "Ruhusa ya Taxon iliomba kwa mafanikio.",
     "title": "Omba ruhusa.",
     "user": "Mtumiaji"
