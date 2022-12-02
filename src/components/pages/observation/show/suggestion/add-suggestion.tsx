@@ -164,8 +164,6 @@ export default function AddSuggestion({
     }
   }, [recoVotesLength]);
 
-  console.log("sgroupid=", sgroupId);
-
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">

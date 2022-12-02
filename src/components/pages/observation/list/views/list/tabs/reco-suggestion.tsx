@@ -9,8 +9,6 @@ export default function RecoSuggestionTab({ o, recoUpdated }) {
   const { observationData } = useObservationFilter();
   const { t } = useTranslation();
 
-  console.log("o=", o);
-
   return (
     <>
       <BoxHeading>🆔 {t("observation:id.title")}</BoxHeading>
