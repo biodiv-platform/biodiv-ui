@@ -86,7 +86,8 @@
     "failure": "error while requesting permission",
     "success": "taxon permission requested successfully",
     "title": "Request Permission",
-    "user": "User"
+    "user": "User",
+    "message": "Add a request message"
   },
   "role": "Role",
   "status": {

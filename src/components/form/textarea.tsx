@@ -11,6 +11,7 @@ import { useController } from "react-hook-form";
 interface ITextAreaProps {
   name: string;
   label: string;
+  placeholder?: string;
   mb?: number;
   disabled?: boolean;
   hint?: string;
@@ -22,6 +23,7 @@ interface ITextAreaProps {
 export const TextAreaField = ({
   name,
   label,
+  placeholder,
   mb = 4,
   disabled,
   maxLength,
@@ -35,7 +37,7 @@ export const TextAreaField = ({
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Textarea
         id={name}
-        placeholder={label}
+        placeholder={placeholder}
         minH="124px"
         isDisabled={disabled}
         bg="white"
