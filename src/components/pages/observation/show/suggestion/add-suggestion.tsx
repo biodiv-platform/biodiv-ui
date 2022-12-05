@@ -6,6 +6,7 @@ import {
   Button,
   Collapse,
   Flex,
+  Image,
   Menu,
   MenuButton,
   MenuItem,
@@ -232,7 +233,8 @@ export default function AddSuggestion({
                             value="plantnet"
                             onClick={onOpenimageModal}
                           >
-                            Plantnet
+                            <Image src="/plantnet-icon-removebg-preview.ico" />
+                            <Text>Pl@ntNet</Text>
                           </MenuItem>
                         </MenuList>
                       </Menu>
