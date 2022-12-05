@@ -9,6 +9,7 @@ import {
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
+import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
@@ -34,22 +35,24 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     resolver: yupResolver(
       Yup.object().shape({
         role: Yup.string().required(),
-        userId: isAdmin ? Yup.mixed().required() : Yup.number()
+        userId: isAdmin ? Yup.mixed().required() : Yup.number(),
+        requestorMessage: Yup.string().required()
       })
     )
   });
 
-  const handleOnSubmit = async ({ role, userId }) => {
+  const handleOnSubmit = async ({ role, userId, requestorMessage }) => {
     const taxons = taxon.split(",");
 
     for (taxon of taxons) {
-      const { success } = await axRequestTaxonPermission({ taxonId: Number(taxon), userId, role });
+      const { success } = await axRequestTaxonPermission({ taxonId: Number(taxon), userId, role, requestorMessage });
       if (success) {
         notification(t("taxon:request.success"), NotificationType.Success);
       } else {
         notification(t("taxon:request.failure"));
       }
     }
+    console.warn("role,userId,taxons ", role, userId, taxons)
 
     onClose();
   };
@@ -66,6 +69,12 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
               label={t("taxon:role")}
               options={TAXON_ROLES}
               shouldPortal={true}
+            />
+            <TextAreaField
+              name={"requestorMessage"}
+              label={t("taxon:request.message")}
+              placeholder={t("taxon:request.placeholder")}
+              maxLength="200"
             />
             {isAdmin && (
               <SelectAsyncInputField

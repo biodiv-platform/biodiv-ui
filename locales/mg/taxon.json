@@ -84,6 +84,8 @@
   "request": {
     "button": "i Paoly Apostoly",
     "failure": "Hadisoana raha mangataka alalana",
+    "message": "Manampia hafatra fangatahana",
+    "placeholder": "Azafady mba omeo topimaso fohy momba ny fahalalanao sy ny traikefanao momba ny taxon voafidy (karazana 200 max)",
     "success": "Nahazoana alalana tamim-pahombiazana ny fahazoan-dàlana",
     "title": "Mangataka ny fahazoan-dàlana",
     "user": "Mpikambana"

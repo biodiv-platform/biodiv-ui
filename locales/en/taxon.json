@@ -86,7 +86,9 @@
     "failure": "error while requesting permission",
     "success": "taxon permission requested successfully",
     "title": "Request Permission",
-    "user": "User"
+    "user": "User",
+    "message": "Add a request message",
+    "placeholder": "Please give a brief overview of your knowledge and experience regarding the chosen taxon (Max 200 characters)"
   },
   "role": "Role",
   "status": {
