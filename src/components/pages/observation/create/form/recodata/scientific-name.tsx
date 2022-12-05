@@ -9,11 +9,11 @@ import { components } from "react-select";
 
 export const Thumbnails = ({ images }) => {
   return (
-    <SimpleGrid columns={[5, 5, 5, 5]} spacing="2" alignItems="center" justifyContent="right">
+    <SimpleGrid columns={[3, 3, 3, 3]} spacing="2" alignItems="center" justifyContent="right">
       {images.map((img) => (
-        <Box>
-          <Image src={img.url.s} boxSize="16" />
-        </Box>
+        // <Box>
+        <Image src={img.url.s} boxSize="3em" />
+        // </Box>
       ))}
     </SimpleGrid>
   );
@@ -25,7 +25,7 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
 
   return (
     <components.Option {...props}>
-      <Stack isInline={true} alignItems="center">
+      <Stack isInline={true} alignItems="center" overflow="hidden" justifyContent="space-between">
         {hiddenIcon && (
           <Image
             boxSize="2rem"
@@ -63,14 +63,14 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
 
         <Spacer />
 
-        {props.data.images && (
+        {/* {props.data.images && (
           <Thumbnails
             images={props.data.images.slice(
               0,
-              props.data.images.length >= 5 ? 5 : props.data.images.length
+              props.data.images.length >= 1 ? 1 : props.data.images.length
             )}
           />
-        )}
+        )} */}
       </Stack>
     </components.Option>
   );
