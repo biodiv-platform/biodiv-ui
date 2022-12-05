@@ -67,6 +67,7 @@
     "validate": "Kuhalalisha",
     "validated": "Kitambulisho kilichothibitishwa na Curator."
   },
+  "identify_using": "Tambua kutumia",
   "importer": {
     "group_info": "Uchunguzi umepangwa kiotomatiki kutoka kwa vyombo vya habari vilivyowekwa kwenye vikundi. \nBuruta na uangushe ili kujipanga upya.",
     "prediction_info": "Gundua na ubashiri Jina la Kisayansi na Kikundi cha Aina kiotomatiki. \n(Utabiri wa kiotomatiki unaweza kuwa si sahihi; tafadhali angalia mara mbili kabla ya kupakia.)",
@@ -135,6 +136,19 @@
   "observation": "Uchunguzi",
   "observed": "Aliona",
   "observed_at": "Eneo limezingatiwa At.",
+  "plantnet": {
+    "failed_to_generate_predictions": "Imeshindwa kutoa ubashiri",
+    "organ_options": {
+      "bark": "gome",
+      "flower": "ua",
+      "fruit": "matunda",
+      "leaf": "jani"
+    },
+    "pedictions_ready": "Utabiri tayari. \nBofya hapo juu kutazama",
+    "prediction_label": "Utabiri",
+    "select_Images": "Chagua Picha",
+    "select_plant_organ": "chagua chombo cha mmea"
+  },
   "post_to_groups": "Chapisha kwa makundi.",
   "range_hint": "Tumia: kwa maadili ya mara kwa mara",
   "rate_success": "Vyombo vya habari vilipimwa kwa ufanisi",

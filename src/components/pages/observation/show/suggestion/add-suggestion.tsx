@@ -15,6 +15,7 @@ import {
   Spacer,
   useDisclosure
 } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
@@ -69,9 +70,8 @@ export default function AddSuggestion({
     onClose: onCloseImageModal
   } = useDisclosure();
 
-  const [x, setX] = useState<any[]>([]);
+  const [predictions, setPredictions] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
-  //const [sgroupId, setSgroupId] = useState(null);
 
   const availablePredictionModels = [
     {
@@ -87,7 +87,6 @@ export default function AddSuggestion({
 
     axGetObservationById(observationId).then(({ data }) => {
       setImages(data.observationResource);
-      // setSgroupId(data.observation.groupId);
     });
   }, []);
 
@@ -203,15 +202,19 @@ export default function AddSuggestion({
                     optionComponent={ScientificNameOption}
                     placeholder={t("form:min_three_chars")}
                     onChange={onScientificNameChange}
-                    options={x ? x : []}
+                    options={predictions ? predictions : []}
                     selectRef={scientificRef}
                   />
+
+                  {predictions.length > 0 && (
+                    <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
+                  )}
 
                   {SITE_CONFIG.PLANTNET.ACTIVE &&
                     sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID && (
                       <PlantnetPrediction
                         images={images}
-                        setX={setX}
+                        setX={setPredictions}
                         isOpenImageModal={isOpenImageModal}
                         onCloseImageModal={onCloseImageModal}
                       />
@@ -221,7 +224,7 @@ export default function AddSuggestion({
                     <Flex>
                       <Menu>
                         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                          identify using
+                          {t("observation:identify_using")}
                         </MenuButton>
                         <MenuList>
                           <MenuItem
@@ -239,7 +242,12 @@ export default function AddSuggestion({
                       </SubmitButton>
                     </Flex>
                   ) : (
-                    <SubmitButton leftIcon={<CheckIcon />}>{t("observation:suggest")}</SubmitButton>
+                    <Flex>
+                      <Spacer />
+                      <SubmitButton leftIcon={<CheckIcon />}>
+                        {t("observation:suggest")}
+                      </SubmitButton>
+                    </Flex>
                   )}
                 </form>
               </FormProvider>

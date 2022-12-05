@@ -3,12 +3,13 @@ import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon, getSuggestionIcon } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { components } from "react-select";
 
 export const Thumbnails = ({ images }) => {
   return (
-    <SimpleGrid columns={[1, 1, 2, 4]} spacing={4} alignItems="center" justifyContent="right">
+    <SimpleGrid columns={[5, 5, 5, 5]} spacing="2" alignItems="center" justifyContent="right">
       {images.map((img) => (
         <Box>
           <Image src={img.url.s} boxSize="16" />
@@ -20,6 +21,7 @@ export const Thumbnails = ({ images }) => {
 
 export const ScientificNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
+  const { t } = useTranslation();
 
   return (
     <components.Option {...props}>
@@ -53,16 +55,23 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
                 {props.data.position}
               </Badge>
             )}
-            {props.data.prediction && <Badge colorScheme="blue">Prediction</Badge>}
+            {props.data.prediction && (
+              <Badge colorScheme="blue">{t("observation:plantnet.prediction_label")}</Badge>
+            )}
           </Stack>
-          {/* {props.data.images && <Thumbmails images={props.data.images} />} */}
         </Box>
 
         <Spacer />
 
-        {props.data.images && <Thumbnails images={props.data.images} />}
+        {props.data.images && (
+          <Thumbnails
+            images={props.data.images.slice(
+              0,
+              props.data.images.length >= 5 ? 5 : props.data.images.length
+            )}
+          />
+        )}
       </Stack>
-      {/* </SimpleGrid> */}
     </components.Option>
   );
 };

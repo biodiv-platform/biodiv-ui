@@ -95,7 +95,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
       setTimeout(() => toast.close(toastIdRef.current), 1000);
     } else {
       toast.update(toastIdRef.current, {
-        title: "Failed to generate predictions",
+        title: `${t("observation:plantnet.failed_to_generate_predictions")}`,
         status: "error",
         isClosable: true,
         position: "top"
@@ -108,7 +108,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
       <Modal isOpen={isOpenImageModal} size="6xl" onClose={onCloseImageModal}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Select Images</ModalHeader>
+          <ModalHeader>{t("observation:plantnet.select_Images")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <SimpleGrid columns={[2, 3, 4, 5]} gridGap={4} mb={4} className="custom-checkbox-group">
@@ -128,7 +128,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
 
           <ModalFooter>
             <Button colorScheme="green" mr={3} onClick={handleOnPlantnetSelect}>
-              Generate predictions
+              {t("observation:plantnet.generate_predictions")}
             </Button>
           </ModalFooter>
         </ModalContent>

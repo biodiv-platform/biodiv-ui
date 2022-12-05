@@ -67,6 +67,7 @@
     "validate": "Valider",
     "validated": "Identification validée par le curateur"
   },
+  "identify_using": "Identifier en utilisant",
   "importer": {
     "group_info": "Observations auto-organisées à partir de médias groupés. \nFaites glisser et déposez pour réorganiser.",
     "prediction_info": "Détectez et prédisez automatiquement le nom scientifique et le groupe d'espèces. \n(Les prédictions automatiques peuvent être inexactes ; veuillez revérifier avant de télécharger.)",
@@ -135,6 +136,20 @@
   "observation": "Observation",
   "observed": "Observé",
   "observed_at": "Lieu de l'observation",
+  "plantnet": {
+    "failed_to_generate_predictions": "Échec de la génération des prédictions",
+    "generate_predictions": "Générer des prédictions",
+    "organ_options": {
+      "bark": "écorce",
+      "flower": "fleur",
+      "fruit": "fruit",
+      "leaf": "feuille"
+    },
+    "pedictions_ready": "Prédictions prêtes. \nCliquez ci-dessus pour voir",
+    "prediction_label": "Prédiction",
+    "select_Images": "Sélectionner des images",
+    "select_plant_organ": "sélectionner un organe végétal"
+  },
   "post_to_groups": "Associer aux groupes",
   "range_hint": "Utilisation: Valeurs de la plage de septates",
   "rate_success": "Médias évalués avec succès",
