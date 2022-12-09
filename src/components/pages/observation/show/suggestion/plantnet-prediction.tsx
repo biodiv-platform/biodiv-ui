@@ -49,7 +49,8 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
       group: getLocalIcon("Plants"),
       score: (v.score * 100).toFixed(3) + " %",
       prediction: true,
-      images: v.images
+      images: v.images,
+      source: "Pl@ntNet"
     }));
     setX(temp);
   }, [plantnetData]);
@@ -84,7 +85,8 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
         group: getLocalIcon("Plants"),
         score: v.score.toFixed(3),
         prediction: true,
-        images: v.images
+        images: v.images,
+        source: "Pl@ntNet"
       }));
       setX(temp);
       toast.update(toastIdRef.current, {

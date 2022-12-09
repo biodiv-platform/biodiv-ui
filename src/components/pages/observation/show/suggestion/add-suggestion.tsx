@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Alert,
   AlertIcon,
@@ -6,6 +6,7 @@ import {
   Button,
   Collapse,
   Flex,
+  IconButton,
   Image,
   Menu,
   MenuButton,
@@ -14,6 +15,7 @@ import {
   SimpleGrid,
   Skeleton,
   Spacer,
+  Stack,
   useDisclosure
 } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
@@ -74,12 +76,18 @@ export default function AddSuggestion({
   const [predictions, setPredictions] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
 
+  const [buttonValue, setButtonValue] = useState("plantnet");
+
   const availablePredictionModels = [
     {
       model: "plantnet",
       isActive: SITE_CONFIG.PLANTNET.ACTIVE && sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID
     }
   ];
+
+  const handleMenuSelect = (e) => {
+    setButtonValue(e.currentTarget.value);
+  };
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
@@ -124,7 +132,7 @@ export default function AddSuggestion({
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw }) => {
+  const onScientificNameChange = ({ label, value, groupId, raw, source }) => {
     if (value === label) {
       hForm.setValue("scientificNameTaxonId", null);
     }
@@ -135,6 +143,7 @@ export default function AddSuggestion({
       }
       hForm.setValue("sGroup", groupId);
     }
+    hForm.setValue("source", source);
   };
 
   useEffect(() => {
@@ -163,6 +172,12 @@ export default function AddSuggestion({
       onOpen();
     }
   }, [recoVotesLength]);
+
+  const handleOnClick = (e) => {
+    if (e.target.innerText == "Pl@ntNet" || e.target.id == "Pl@ntNet") {
+      onOpenimageModal();
+    }
+  };
 
   return languages.length > 0 ? (
     isLocked ? (
@@ -222,27 +237,48 @@ export default function AddSuggestion({
                     )}
 
                   {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
-                    <Flex>
-                      <Menu>
-                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                          {t("observation:identify_using")}
-                        </MenuButton>
-                        <MenuList>
-                          <MenuItem
-                            isDisabled={sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID}
-                            value="plantnet"
-                            onClick={onOpenimageModal}
-                          >
-                            <Image src="/plantnet-icon-removebg-preview.ico" />
-                            <Text>Pl@ntNet</Text>
-                          </MenuItem>
-                        </MenuList>
-                      </Menu>
-                      <Spacer />
-                      <SubmitButton leftIcon={<CheckIcon />}>
-                        {t("observation:suggest")}
-                      </SubmitButton>
-                    </Flex>
+                    <Box>
+                      <Text>{t("observation:identify_using")}</Text>
+                      <Flex>
+                        <Button size="md" onClick={handleOnClick}>
+                          {buttonValue == "plantnet" && (
+                            <Stack isInline={true} align="center">
+                              <Image
+                                id="Pl@ntNet"
+                                src="/plantnet-icon-removebg-preview.ico"
+                                onClick={handleOnClick}
+                                defaultValue="plantnet"
+                              />
+                              <Text fontWeight="light">Pl@ntNet</Text>
+                            </Stack>
+                          )}
+                        </Button>
+
+                        <Menu>
+                          <MenuButton
+                            as={IconButton}
+                            aria-label="Options"
+                            icon={<HamburgerIcon />}
+                            variant="outline"
+                          />
+                          <MenuList defaultValue="plantnet">
+                            <MenuItem
+                              isDisabled={sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID}
+                              value="plantnet"
+                              onClick={handleMenuSelect}
+                            >
+                              <Image src="/plantnet-icon-removebg-preview.ico" />
+                              <Text>Pl@ntNet</Text>
+                            </MenuItem>
+                          </MenuList>
+                        </Menu>
+
+                        <Spacer />
+                        <SubmitButton leftIcon={<CheckIcon />}>
+                          {t("observation:suggest")}
+                        </SubmitButton>
+                      </Flex>
+                    </Box>
                   ) : (
                     <Flex>
                       <Spacer />
