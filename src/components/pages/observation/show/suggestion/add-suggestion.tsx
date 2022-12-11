@@ -240,7 +240,12 @@ export default function AddSuggestion({
                     <Box>
                       <Text>{t("observation:identify_using")}</Text>
                       <Flex>
-                        <Button size="md" onClick={handleOnClick}>
+                        <Button
+                          size="md"
+                          onClick={handleOnClick}
+                          colorScheme="green"
+                          variant="outline"
+                        >
                           {buttonValue == "plantnet" && (
                             <Stack isInline={true} align="center">
                               <Image
@@ -249,7 +254,7 @@ export default function AddSuggestion({
                                 onClick={handleOnClick}
                                 defaultValue="plantnet"
                               />
-                              <Text fontWeight="light">Pl@ntNet</Text>
+                              <Text>Pl@ntNet</Text>
                             </Stack>
                           )}
                         </Button>
