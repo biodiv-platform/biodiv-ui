@@ -16,7 +16,7 @@ const ImagePicker = (props: any) => {
   const handleOnChange = (e) => {
     if (props.selectedImages.length >= 5 && e.target.checked) {
       toast({
-        title: "Please select a maximum of 5 images.",
+        title: t("observation:plantnet.please_select_a_maximum_of_5_images"),
         status: "error",
         isClosable: true,
         position: "top"

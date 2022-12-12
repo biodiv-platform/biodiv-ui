@@ -28,6 +28,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
+import { plantnetText } from "@static/constants";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
@@ -76,7 +77,9 @@ export default function AddSuggestion({
   const [predictions, setPredictions] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
 
-  const [buttonValue, setButtonValue] = useState("plantnet");
+  type PredictionEngine = "plantnet";
+
+  const [buttonValue, setButtonValue] = useState<PredictionEngine>("plantnet");
 
   const availablePredictionModels = [
     {
@@ -174,7 +177,7 @@ export default function AddSuggestion({
   }, [recoVotesLength]);
 
   const handleOnClick = (e) => {
-    if (e.target.innerText == "Pl@ntNet" || e.target.id == "Pl@ntNet") {
+    if (e.target.innerText == plantnetText || e.target.id == plantnetText) {
       onOpenimageModal();
     }
   };
@@ -218,7 +221,7 @@ export default function AddSuggestion({
                     optionComponent={ScientificNameOption}
                     placeholder={t("form:min_three_chars")}
                     onChange={onScientificNameChange}
-                    options={predictions ? predictions : []}
+                    options={predictions || []}
                     selectRef={scientificRef}
                   />
 
@@ -254,7 +257,7 @@ export default function AddSuggestion({
                                 onClick={handleOnClick}
                                 defaultValue="plantnet"
                               />
-                              <Text>Pl@ntNet</Text>
+                              <Text>{plantnetText}</Text>
                             </Stack>
                           )}
                         </Button>
@@ -268,12 +271,15 @@ export default function AddSuggestion({
                           />
                           <MenuList defaultValue="plantnet">
                             <MenuItem
-                              isDisabled={sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID}
+                              isDisabled={
+                                sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID ||
+                                availablePredictionModels.length == 1
+                              }
                               value="plantnet"
                               onClick={handleMenuSelect}
                             >
                               <Image src="/plantnet-icon-removebg-preview.ico" />
-                              <Text>Pl@ntNet</Text>
+                              <Text>{plantnetText}</Text>
                             </MenuItem>
                           </MenuList>
                         </Menu>

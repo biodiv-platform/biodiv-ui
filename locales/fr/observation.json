@@ -146,6 +146,7 @@
       "leaf": "feuille"
     },
     "pedictions_ready": "Prédictions prêtes. \nCliquez ci-dessus pour voir",
+    "please_select_a_maximum_of_5_images": "Veuillez sélectionner un maximum de 5 images.",
     "prediction_label": "Prédiction",
     "select_Images": "Sélectionner des images",
     "select_plant_organ": "sélectionner un organe végétal"

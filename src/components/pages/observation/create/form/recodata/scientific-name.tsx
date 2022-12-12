@@ -11,9 +11,7 @@ export const Thumbnails = ({ images }) => {
   return (
     <SimpleGrid columns={[3, 3, 3, 3]} spacing="2" alignItems="center" justifyContent="right">
       {images.map((img) => (
-        // <Box>
         <Image src={img.url.s} boxSize="3em" />
-        // </Box>
       ))}
     </SimpleGrid>
   );
@@ -62,15 +60,6 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
         </Box>
 
         <Spacer />
-
-        {/* {props.data.images && (
-          <Thumbnails
-            images={props.data.images.slice(
-              0,
-              props.data.images.length >= 1 ? 1 : props.data.images.length
-            )}
-          />
-        )} */}
       </Stack>
     </components.Option>
   );
