@@ -45,14 +45,19 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     const taxons = taxon.split(",");
 
     for (taxon of taxons) {
-      const { success } = await axRequestTaxonPermission({ taxonId: Number(taxon), userId, role, requestorMessage });
+      const { success } = await axRequestTaxonPermission({
+        taxonId: Number(taxon),
+        userId,
+        role,
+        requestorMessage
+      });
       if (success) {
         notification(t("taxon:request.success"), NotificationType.Success);
       } else {
         notification(t("taxon:request.failure"));
       }
     }
-    console.warn("role,userId,taxons ", role, userId, taxons)
+    console.warn("role,userId,taxons ", role, userId, taxons);
 
     onClose();
   };

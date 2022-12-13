@@ -144,6 +144,13 @@ const SITE_CONFIG_EXAMPLE = {
   PARTICIPANTS: {
     ACTIVE: true
   },
+  PLANTNET: {
+    ACTIVE: false,
+    IMAGE_BASE_PATH: "/files-api/api/get/crop/plantnet/observations/",
+    PLANT_SGROUP_ID: 833,
+    API_KEY: "xyz",
+    API_ENDPOINT: "https://my-api.plantnet.org/v2/identify/all?"
+  },
   REGISTER: {
     MOBILE: true
   },

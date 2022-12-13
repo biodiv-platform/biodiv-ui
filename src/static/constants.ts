@@ -120,4 +120,4 @@ export const CROP_STATUS = {
   OBSERVATION_NULL_MESSAGE: "Observation ID is null"
 };
 
-export const plantnetText="Pl@ntNet";
+export const plantnetText = "Pl@ntNet";
