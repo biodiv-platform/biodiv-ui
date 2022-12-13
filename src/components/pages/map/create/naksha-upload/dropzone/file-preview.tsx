@@ -3,7 +3,8 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { FileWithType } from "../file-with-type";
-import useLayerUpload from "../use-layer-upload";
+import LayerUploadForm from "../form";
+import useLayerUpload, { MapFileType } from "../use-layer-upload";
 
 const SingleFile = ({ type, name }) =>
   name ? (
@@ -16,33 +17,42 @@ const SingleFile = ({ type, name }) =>
       borderColor="gray.300"
       borderRadius="md"
     >
-      <FileWithType type={type} /> <Box ml={3}>{name}</Box>
+      <FileWithType type={type} />{" "}
+      <Box className="text-elipsis" ml={3}>
+        {name}
+      </Box>
     </Flex>
   ) : null;
 
 export default function FilePreview() {
-  const { shapeFiles, canContinue, setScreen } = useLayerUpload();
+  const { shapeFiles, mapFileType, rasterFiles, canContinue, setScreen } = useLayerUpload();
   const { t } = useTranslation();
 
+  const fileType = rasterFiles.tif.file ? rasterFiles : shapeFiles;
   return (
     <Flex h="100%" gridColumn="6/8" direction="column" justifyContent="space-between">
       <Box>
         <Heading as="h2" size="md" mb={2}>
           📄 {t("map:your_files")}
         </Heading>
-        {Object.keys(shapeFiles).map((type) => (
-          <SingleFile type={type} key={type} name={shapeFiles?.[type]?.file?.name} />
-        ))}
+        {fileType &&
+          Object.keys(fileType).map((type) => (
+            <SingleFile type={type} key={type} name={fileType?.[type]?.file?.name} />
+          ))}
       </Box>
-      <Button
-        w="100%"
-        colorScheme="blue"
-        size="lg"
-        disabled={!canContinue}
-        onClick={() => setScreen(1)}
-      >
-        {t("map:continue")}
-      </Button>
+      {mapFileType === MapFileType.raster && rasterFiles.tif.file ? (
+        <LayerUploadForm />
+      ) : (
+        <Button
+          w="100%"
+          colorScheme="blue"
+          size="lg"
+          disabled={!canContinue}
+          onClick={() => setScreen(1)}
+        >
+          {t("map:continue")}
+        </Button>
+      )}
     </Flex>
   );
 }

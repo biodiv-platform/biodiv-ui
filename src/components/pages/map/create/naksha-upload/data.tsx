@@ -17,6 +17,11 @@ export const FILE_TYPES = {
   QIX: ".qix"
 };
 
+export const RASTER_FILE_TYPES = {
+  TIF: ".tif",
+  SLD: ".sld"
+};
+
 export const LAYER_TYPES = [
   {
     label: "Multi Polygon",
@@ -33,6 +38,10 @@ export const LAYER_TYPES = [
   {
     label: "Multi Point",
     value: "MULTIPOINT"
+  },
+  {
+    label: "Raster",
+    value: "RASTER"
   }
 ];
 
