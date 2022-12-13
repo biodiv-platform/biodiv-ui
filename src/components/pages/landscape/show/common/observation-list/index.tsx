@@ -1,6 +1,7 @@
 import { Box, Flex, Heading, Skeleton, Stack, Switch, Text, useRadioGroup } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
+import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-type/filter-keys";
 import LifeListTable from "@components/pages/observation/list/views/stats/table";
 import useUniqueSpecies from "@components/pages/observation/list/views/stats/use-unique-species";
 import useTranslation from "next-translate/useTranslation";
@@ -21,7 +22,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
     }
   } = useObservationFilter();
   const [validate, setValidate] = useState<boolean>(false);
-  const [observationFilter, setFilter] = useState({ ...filter, sGroup: sGroupList[0] } || {});
+  const [observationFilter, setFilter] = useState({ ...filter, mediaFilter: MEDIA_TYPES.map(item=>item.value).toLocaleString(), sGroup: sGroupList[0] } || {});
   const uniqueSpecies = useUniqueSpecies({ filter: observationFilter, location });
 
   const speciesGroupList = useMemo(
