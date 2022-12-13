@@ -102,7 +102,7 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
       Object.keys(mapFiles)
         .sort()
         .map((type) => {
-          if(mapFiles?.[type]?.file){
+          if (mapFiles?.[type]?.file) {
             formData.append(type, mapFiles?.[type]?.file);
           }
         });

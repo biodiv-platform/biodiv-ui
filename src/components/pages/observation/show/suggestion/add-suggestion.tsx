@@ -84,7 +84,7 @@ export default function AddSuggestion({
   const availablePredictionModels = [
     {
       model: "plantnet",
-      isActive: SITE_CONFIG.PLANTNET.ACTIVE && sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID
+      isActive: SITE_CONFIG?.PLANTNET?.ACTIVE && sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID
     }
   ];
 
@@ -229,8 +229,8 @@ export default function AddSuggestion({
                     <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
                   )}
 
-                  {SITE_CONFIG.PLANTNET.ACTIVE &&
-                    sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID && (
+                  {SITE_CONFIG?.PLANTNET?.ACTIVE &&
+                    sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID && (
                       <PlantnetPrediction
                         images={images}
                         setX={setPredictions}
@@ -272,7 +272,7 @@ export default function AddSuggestion({
                           <MenuList defaultValue="plantnet">
                             <MenuItem
                               isDisabled={
-                                sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID ||
+                                sgroupId != SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID ||
                                 availablePredictionModels.length == 1
                               }
                               value="plantnet"
