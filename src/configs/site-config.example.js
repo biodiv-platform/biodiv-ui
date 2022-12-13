@@ -121,6 +121,17 @@ const SITE_CONFIG_EXAMPLE = {
       ENDPOINT: "https://example.com/predictions"
     }
   },
+  FLORA: {
+    ID: 25,
+    LIST: [833],
+    TITLE: "flora"
+  },
+  FAUNA: {
+    ID: 29,
+    LIST: [841, 837, 843, 835],
+    TITLE: "fauna"
+  },
+
   OFFLINE: {
     ACTIVE: false
   },
