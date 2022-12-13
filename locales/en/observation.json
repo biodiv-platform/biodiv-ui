@@ -67,6 +67,7 @@
     "validate": "Validate",
     "validated": "Identification validated by curator"
   },
+  "identify_using": "Identify using",
   "importer": {
     "group_info": "Observations auto-organised from grouped media. Drag and drop to reorganise.",
     "prediction_info": "Detect and predict the Scientific Name and Species Group automatically. (Automatic predictions may be inaccurate; please double-check before uploading.)",
@@ -135,6 +136,21 @@
   "observation": "Observation",
   "observed": "Observed",
   "observed_at": "Location Observed At",
+  "plantnet": {
+    "failed_to_generate_predictions": "Failed to generate predictions",
+    "generate_predictions": "Generate predictions",
+    "organ_options": {
+      "bark": "bark",
+      "flower": "flower",
+      "fruit": "fruit",
+      "leaf": "leaf"
+    },
+    "pedictions_ready": "Predictions ready. Click above to view",
+    "prediction_label": "Prediction",
+    "select_Images": "Select Images",
+    "select_plant_organ": "select plant organ",
+    "please_select_a_maximum_of_5_images":"Please select a maximum of 5 images."
+  },
   "post_to_groups": "Post to Groups",
   "range_hint": "use : to septate range values",
   "rate_success": "Media successfully rated",

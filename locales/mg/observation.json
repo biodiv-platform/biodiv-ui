@@ -67,6 +67,7 @@
     "validate": "hanamafy",
     "validated": "Fanamarinana ny Curator"
   },
+  "identify_using": "Fantaro ny fampiasana",
   "importer": {
     "group_info": "Fandinihana mandeha ho azy avy amin'ny haino aman-jery mivondrona. \nTariho ary ampidino handamina indray.",
     "prediction_info": "Fantaro sy maminavina ho azy ny Vondrona Anarana Siantifika sy Karazana. \n(Mety tsy marina ny vinavina mandeha ho azy, azafady jereo indroa alohan'ny hampidirana azy.)",
@@ -135,6 +136,21 @@
   "observation": "fandinihana",
   "observed": "nandinika",
   "observed_at": "Toerana hita ao",
+  "plantnet": {
+    "failed_to_generate_predictions": "Tsy nahavita namoaka vinavina",
+    "generate_predictions": "Mamorona faminaniana",
+    "organ_options": {
+      "bark": "hodi-kazo",
+      "flower": "voninkazo",
+      "fruit": "voankazo",
+      "leaf": "ravina"
+    },
+    "pedictions_ready": "Efa vonona ny faminaniana. \nTsindrio eo ambony raha hijery",
+    "please_select_a_maximum_of_5_images": "Misafidiana sary 5 ambony indrindra azafady.",
+    "prediction_label": "Faminaniana",
+    "select_Images": "Mifidiana sary",
+    "select_plant_organ": "mifidy taova zava-maniry"
+  },
   "post_to_groups": "Lahatsoratra amin'ny vondrona",
   "range_hint": "Ampiasao: Ny Septate Sours Range",
   "rate_success": "Nosongadina soa aman-tsara ny haino aman-jery",

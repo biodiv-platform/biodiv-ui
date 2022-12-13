@@ -119,3 +119,5 @@ export const CROP_STATUS = {
   REJECTED: "REJECTED",
   OBSERVATION_NULL_MESSAGE: "Observation ID is null"
 };
+
+export const plantnetText="Pl@ntNet";

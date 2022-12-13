@@ -35,11 +35,19 @@ export default function ActivityList({ resourceId, resourceType, title = "common
     [ACTIVITY_UPDATED]
   );
 
-  const ActivityType = ({ type }) => (
-    <Text color="gray.600" as="i">
-      {t(`activity:${toKey(type).toLowerCase()}`)}
-    </Text>
-  );
+  const ActivityType = ({ acivityData }) =>
+    acivityData.recoVote?.source ? (
+      <Text color="gray.600" as="i">
+        {t(`activity:${toKey(acivityData.activityIbp.activityType).toLowerCase()}`) +
+          " ( via " +
+          acivityData.recoVote.source +
+          " )"}
+      </Text>
+    ) : (
+      <Text color="gray.600" as="i">
+        {t(`activity:${toKey(acivityData.activityIbp.activityType).toLowerCase()}`)}
+      </Text>
+    );
 
   return (
     <>
@@ -65,7 +73,7 @@ export default function ActivityList({ resourceId, resourceType, title = "common
             <BlueLink fontWeight="bold" mr={2} href={`/user/show/${a.userIbp.id}`}>
               {a.userIbp.name} <Badge isAdmin={a.userIbp.isAdmin} />
             </BlueLink>
-            <ActivityType type={a.activityIbp.activityType} />
+            <ActivityType acivityData={a} />
             <ContentBox activity={a} />
             <Box>
               <Tooltip title={formatTimeStampFromUTC(a.activityIbp.lastUpdated)} hasArrow={true}>

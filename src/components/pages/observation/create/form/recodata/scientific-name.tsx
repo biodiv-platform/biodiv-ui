@@ -1,16 +1,29 @@
-import { Badge, Box, Image, Stack, Text } from "@chakra-ui/react";
+import { Badge, Box, Image, SimpleGrid, Spacer, Stack, Tag, Text } from "@chakra-ui/react";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon, getSuggestionIcon } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { components } from "react-select";
 
+export const Thumbnails = ({ images }) => {
+  return (
+    <SimpleGrid columns={[3, 3, 3, 3]} spacing="2" alignItems="center" justifyContent="right">
+      {images.map((img) => (
+        <Image src={img.url.s} boxSize="3em" />
+      ))}
+    </SimpleGrid>
+  );
+};
+
 export const ScientificNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
+  const { t } = useTranslation();
+
   return (
     <components.Option {...props}>
-      <Stack isInline={true} alignItems="center">
+      <Stack isInline={true} alignItems="center" overflow="hidden" justifyContent="space-between">
         {hiddenIcon && (
           <Image
             boxSize="2rem"
@@ -19,7 +32,16 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
           />
         )}
         <Box>
+          {props.data.score && (
+            <Tag variant="solid" colorScheme="green" whiteSpace="nowrap">
+              {props.data.score}
+            </Tag>
+          )}
+        </Box>
+
+        <Box>
           {children}
+
           {props.data.acceptedNames && <Text color="gray.600">{props.data.acceptedNames}</Text>}
           <Stack isInline={true} mt={1} spacing={2}>
             {props.data.rank && <Badge>{props.data.rank}</Badge>}
@@ -31,8 +53,13 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
                 {props.data.position}
               </Badge>
             )}
+            {props.data.prediction && (
+              <Badge colorScheme="blue">{t("observation:plantnet.prediction_label")}</Badge>
+            )}
           </Stack>
         </Box>
+
+        <Spacer />
       </Stack>
     </components.Option>
   );

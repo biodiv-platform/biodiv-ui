@@ -1,21 +1,34 @@
+import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Alert,
   AlertIcon,
   Box,
   Button,
   Collapse,
+  Flex,
+  IconButton,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   SimpleGrid,
   Skeleton,
+  Spacer,
+  Stack,
   useDisclosure
 } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
-import { axRecoSuggest } from "@services/observation.service";
+import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
+import { plantnetText } from "@static/constants";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
@@ -31,19 +44,22 @@ import {
   onScientificNameQuery,
   ScientificNameOption
 } from "../../create/form/recodata/scientific-name";
+import PlantnetPrediction from "./plantnet-prediction";
 
 interface IAddSuggestionProps {
   isLocked;
   observationId;
   recoUpdated;
   recoVotesLength;
+  sgroupId;
 }
 
 export default function AddSuggestion({
   isLocked,
   observationId,
   recoUpdated,
-  recoVotesLength
+  recoVotesLength,
+  sgroupId
 }: IAddSuggestionProps) {
   const { t } = useTranslation();
   const scientificRef: any = useRef(null);
@@ -52,11 +68,38 @@ export default function AddSuggestion({
   const langRef: any = useRef(null);
   const { languageId } = useGlobalState();
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
+  const {
+    isOpen: isOpenImageModal,
+    onOpen: onOpenimageModal,
+    onClose: onCloseImageModal
+  } = useDisclosure();
+
+  const [predictions, setPredictions] = useState<any[]>([]);
+  const [images, setImages] = useState<any[]>([]);
+
+  type PredictionEngine = "plantnet";
+
+  const [buttonValue, setButtonValue] = useState<PredictionEngine>("plantnet");
+
+  const availablePredictionModels = [
+    {
+      model: "plantnet",
+      isActive: SITE_CONFIG.PLANTNET.ACTIVE && sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID
+    }
+  ];
+
+  const handleMenuSelect = (e) => {
+    setButtonValue(e.currentTarget.value);
+  };
 
   useEffect(() => {
     axGetLangList().then(({ data }) =>
       setLanguages(data.map((l) => ({ label: l.name, value: l.id })))
     );
+
+    axGetObservationById(observationId).then(({ data }) => {
+      setImages(data.observationResource);
+    });
   }, []);
 
   const hForm = useForm<any>({
@@ -92,7 +135,7 @@ export default function AddSuggestion({
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw }) => {
+  const onScientificNameChange = ({ label, value, groupId, raw, source }) => {
     if (value === label) {
       hForm.setValue("scientificNameTaxonId", null);
     }
@@ -103,6 +146,7 @@ export default function AddSuggestion({
       }
       hForm.setValue("sGroup", groupId);
     }
+    hForm.setValue("source", source);
   };
 
   useEffect(() => {
@@ -131,6 +175,12 @@ export default function AddSuggestion({
       onOpen();
     }
   }, [recoVotesLength]);
+
+  const handleOnClick = (e) => {
+    if (e.target.innerText == plantnetText || e.target.id == plantnetText) {
+      onOpenimageModal();
+    }
+  };
 
   return languages.length > 0 ? (
     isLocked ? (
@@ -163,6 +213,7 @@ export default function AddSuggestion({
                       shouldPortal={true}
                     />
                   </SimpleGrid>
+
                   <SelectAsyncInputField
                     name="scientificNameTaxonId"
                     label={t("observation:scientific_name")}
@@ -170,9 +221,83 @@ export default function AddSuggestion({
                     optionComponent={ScientificNameOption}
                     placeholder={t("form:min_three_chars")}
                     onChange={onScientificNameChange}
+                    options={predictions || []}
                     selectRef={scientificRef}
                   />
-                  <SubmitButton leftIcon={<CheckIcon />}>{t("observation:suggest")}</SubmitButton>
+
+                  {predictions.length > 0 && (
+                    <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
+                  )}
+
+                  {SITE_CONFIG.PLANTNET.ACTIVE &&
+                    sgroupId == SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID && (
+                      <PlantnetPrediction
+                        images={images}
+                        setX={setPredictions}
+                        isOpenImageModal={isOpenImageModal}
+                        onCloseImageModal={onCloseImageModal}
+                      />
+                    )}
+
+                  {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
+                    <Box>
+                      <Text>{t("observation:identify_using")}</Text>
+                      <Flex>
+                        <Button
+                          size="md"
+                          onClick={handleOnClick}
+                          colorScheme="green"
+                          variant="outline"
+                        >
+                          {buttonValue == "plantnet" && (
+                            <Stack isInline={true} align="center">
+                              <Image
+                                id="Pl@ntNet"
+                                src="/plantnet-icon-removebg-preview.ico"
+                                onClick={handleOnClick}
+                                defaultValue="plantnet"
+                              />
+                              <Text>{plantnetText}</Text>
+                            </Stack>
+                          )}
+                        </Button>
+
+                        <Menu>
+                          <MenuButton
+                            as={IconButton}
+                            aria-label="Options"
+                            icon={<HamburgerIcon />}
+                            variant="outline"
+                          />
+                          <MenuList defaultValue="plantnet">
+                            <MenuItem
+                              isDisabled={
+                                sgroupId != SITE_CONFIG.PLANTNET.PLANT_SGROUP_ID ||
+                                availablePredictionModels.length == 1
+                              }
+                              value="plantnet"
+                              onClick={handleMenuSelect}
+                            >
+                              <Image src="/plantnet-icon-removebg-preview.ico" />
+                              <Text>{plantnetText}</Text>
+                            </MenuItem>
+                          </MenuList>
+                        </Menu>
+
+                        <Spacer />
+                        <SubmitButton leftIcon={<CheckIcon />}>
+                          {t("observation:suggest")}
+                        </SubmitButton>
+                      </Flex>
+                    </Box>
+                  ) : (
+                    <Flex>
+                      <Spacer />
+                      <SubmitButton leftIcon={<CheckIcon />}>
+                        {t("observation:suggest")}
+                      </SubmitButton>
+                    </Flex>
+                  )}
                 </form>
               </FormProvider>
             </Box>

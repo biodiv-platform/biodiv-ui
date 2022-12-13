@@ -25,6 +25,7 @@ export default function RecoSuggestionTab({ o, recoUpdated }) {
         recoVotesLength={o.recoShow.allRecoVotes?.length}
         observationId={o.observationId}
         isLocked={o.recoShow.isLocked}
+        sgroupId={o.speciesGroupId}
       />
     </>
   );

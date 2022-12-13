@@ -1,7 +1,10 @@
+import SITE_CONFIG from "@configs/site-config";
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { fetchWithCache } from "@utils/cached-fetch";
 import http, { plainHttp } from "@utils/http";
+import * as qs from "qs";
+//import url from "url";
 
 export const axGetspeciesGroups = async () => {
   try {
@@ -527,6 +530,22 @@ export const axDeleteObservationByDatatableId = async (observationId) => {
     return { success: true, data };
   } catch (e) {
     console.error(e.response.data.message);
-    return { success: false };
+    return { success: false, data: [] };
+  }
+};
+
+export const axGetPlantnetSuggestions = async (imageUrls, organs) => {
+  const queryParams = {
+    images: imageUrls,
+    organs: organs,
+    "api-key": SITE_CONFIG.PLANTNET.API_KEY,
+    "include-related-images": true
+  };
+  const params = qs.stringify(queryParams, { arrayFormat: "repeat" });
+  try {
+    const data = await plainHttp.get(`${SITE_CONFIG.PLANTNET.API_ENDPOINT}${params}`);
+    return { success: true, data: data.data };
+  } catch (e) {
+    return { success: false, data: [] };
   }
 };
