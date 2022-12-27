@@ -41,9 +41,9 @@ export default function ActivityList({ resourceId, resourceType, title = "common
       return (
         <Text color="gray.600" as="i">
           {t(`activity:${toKey(activityData.activityIbp.activityType).toLowerCase()}`) +
-            " ( via " +
+            " (via " +
             activityData.recoVote.source +
-            " )"}
+            ")"}
         </Text>
       );
     } else {
@@ -58,7 +58,7 @@ export default function ActivityList({ resourceId, resourceType, title = "common
           return (
             <Text color="gray.600" as="i">
               {t(`activity:${toKey(activityData?.activityIbp.activityType).toLowerCase()}`) +
-                (ad1?.reason && ` (${ad1.reason})`)}
+                (ad1?.reason ? ` (${ad1.reason})` : "")}
             </Text>
           );
         default:
