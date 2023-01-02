@@ -12,6 +12,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { useListener } from "react-gbus";
 
+import ACTIVITY_TYPE from "./activity-types";
 import ContentBox from "./content-box";
 
 export default function ActivityList({ resourceId, resourceType, title = "common:activity" }) {
@@ -35,19 +36,40 @@ export default function ActivityList({ resourceId, resourceType, title = "common
     [ACTIVITY_UPDATED]
   );
 
-  const ActivityType = ({ acivityData }) =>
-    acivityData.recoVote?.source ? (
-      <Text color="gray.600" as="i">
-        {t(`activity:${toKey(acivityData.activityIbp.activityType).toLowerCase()}`) +
-          " ( via " +
-          acivityData.recoVote.source +
-          " )"}
-      </Text>
-    ) : (
-      <Text color="gray.600" as="i">
-        {t(`activity:${toKey(acivityData.activityIbp.activityType).toLowerCase()}`)}
-      </Text>
-    );
+  const ActivityType = ({ activityData }) => {
+    if (activityData?.recoVote?.source) {
+      return (
+        <Text color="gray.600" as="i">
+          {t(`activity:${toKey(activityData.activityIbp.activityType).toLowerCase()}`) +
+            " (via " +
+            activityData.recoVote.source +
+            ")"}
+        </Text>
+      );
+    } else {
+      const at = activityData?.activityIbp?.activityType;
+
+      switch (at) {
+        case ACTIVITY_TYPE.POSTED_RESOURCE:
+        case ACTIVITY_TYPE.REMOVED_RESORUCE:
+        case ACTIVITY_TYPE.FEATURED:
+        case ACTIVITY_TYPE.UNFEATURED:
+          const ad1 = JSON.parse(activityData?.activityIbp?.activityDescription || "{}");
+          return (
+            <Text color="gray.600" as="i">
+              {t(`activity:${toKey(activityData?.activityIbp.activityType).toLowerCase()}`) +
+                (ad1?.reason ? ` (${ad1.reason})` : "")}
+            </Text>
+          );
+        default:
+          return (
+            <Text color="gray.600" as="i">
+              {t(`activity:${toKey(activityData?.activityIbp.activityType).toLowerCase()}`)}
+            </Text>
+          );
+      }
+    }
+  };
 
   return (
     <>
@@ -73,7 +95,7 @@ export default function ActivityList({ resourceId, resourceType, title = "common
             <BlueLink fontWeight="bold" mr={2} href={`/user/show/${a.userIbp.id}`}>
               {a.userIbp.name} <Badge isAdmin={a.userIbp.isAdmin} />
             </BlueLink>
-            <ActivityType acivityData={a} />
+            <ActivityType activityData={a} />
             <ContentBox activity={a} />
             <Box>
               <Tooltip title={formatTimeStampFromUTC(a.activityIbp.lastUpdated)} hasArrow={true}>
