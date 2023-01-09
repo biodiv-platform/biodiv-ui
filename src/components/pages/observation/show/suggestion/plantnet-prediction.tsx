@@ -19,7 +19,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import ImagePicker from "./image-picker";
-const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal }) => {
+const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, selectRef }) => {
   const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
@@ -95,6 +95,10 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal 
       });
       onCloseImageModal();
       setTimeout(() => toast.close(toastIdRef.current), 1000);
+
+      if (selectRef) {
+        selectRef.current.focus();
+      }
     } else {
       toast.update(toastIdRef.current, {
         title: `${t("observation:plantnet.failed_to_generate_predictions")}`,
