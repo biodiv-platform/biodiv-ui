@@ -213,17 +213,19 @@ export default function AddSuggestion({
                       shouldPortal={true}
                     />
                   </SimpleGrid>
-
-                  <SelectAsyncInputField
-                    name="scientificNameTaxonId"
-                    label={t("observation:scientific_name")}
-                    onQuery={onScientificNameQuery}
-                    optionComponent={ScientificNameOption}
-                    placeholder={t("form:min_three_chars")}
-                    onChange={onScientificNameChange}
-                    options={predictions || []}
-                    selectRef={scientificRef}
-                  />
+                  <Box onMouseEnter={() => scientificRef.current.focus()}>
+                    <SelectAsyncInputField
+                      name="scientificNameTaxonId"
+                      label={t("observation:scientific_name")}
+                      onQuery={onScientificNameQuery}
+                      optionComponent={ScientificNameOption}
+                      placeholder={t("form:min_three_chars")}
+                      onChange={onScientificNameChange}
+                      options={predictions || []}
+                      selectRef={scientificRef}
+                      openMenuOnFocus={true}
+                    />
+                  </Box>
 
                   {predictions.length > 0 && (
                     <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
@@ -236,6 +238,7 @@ export default function AddSuggestion({
                         setX={setPredictions}
                         isOpenImageModal={isOpenImageModal}
                         onCloseImageModal={onCloseImageModal}
+                        selectRef={scientificRef}
                       />
                     )}
 

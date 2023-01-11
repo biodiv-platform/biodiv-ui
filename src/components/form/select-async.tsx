@@ -1,9 +1,10 @@
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useMemo, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
-import { components } from "react-select";
+import { components, DropdownIndicatorProps } from "react-select";
 import AsyncSelect from "react-select/async";
 import AsyncSelectCreatable from "react-select/async-creatable";
 
@@ -30,6 +31,7 @@ interface ISelectProps {
   isClearable?;
   resetOnSubmit?;
   isRaw?;
+  openMenuOnFocus?: boolean;
 }
 
 const dummyOnQuery = (q) =>
@@ -40,6 +42,14 @@ const dummyOnQuery = (q) =>
   });
 
 const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
+
+const DropdownIndicator = (props: DropdownIndicatorProps) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <ChevronDownIcon />
+    </components.DropdownIndicator>
+  );
+};
 
 export const SelectAsyncInputField = ({
   name,
@@ -61,6 +71,7 @@ export const SelectAsyncInputField = ({
   resetOnSubmit = true,
   isClearable = true,
   isRaw,
+  openMenuOnFocus = false,
   ...props
 }: ISelectProps) => {
   const form = useFormContext();
@@ -112,7 +123,7 @@ export const SelectAsyncInputField = ({
         components={{
           Option: optionComponent,
           ClearIndicator,
-          DropdownIndicator: () => null,
+          DropdownIndicator,
           IndicatorSeparator: () => null
         }}
         value={selected}
@@ -123,6 +134,7 @@ export const SelectAsyncInputField = ({
         placeholder={placeholder || label}
         noOptionsMessage={() => null}
         ref={selectRef}
+        openMenuOnFocus={openMenuOnFocus}
         {...reactSelectProps}
       />
       <FormErrorMessage children={fieldState?.error?.message} />

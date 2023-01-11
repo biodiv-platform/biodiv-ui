@@ -2,9 +2,8 @@ import SITE_CONFIG from "@configs/site-config";
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { fetchWithCache } from "@utils/cached-fetch";
-import http, { plainHttp } from "@utils/http";
+import http, { formDataHeaders, plainHttp } from "@utils/http";
 import * as qs from "qs";
-//import url from "url";
 
 export const axGetspeciesGroups = async () => {
   try {
@@ -534,16 +533,33 @@ export const axDeleteObservationByDatatableId = async (observationId) => {
   }
 };
 
+const getImageFilesAsBlobs = async (url) => {
+  try {
+    const data = await fetch(url);
+    return data.blob();
+  } catch (e) {
+    console.error(e.response.data.message);
+  }
+};
+
 export const axGetPlantnetSuggestions = async (imageUrls, organs) => {
   const queryParams = {
-    images: imageUrls,
-    organs: organs,
     "api-key": SITE_CONFIG.PLANTNET.API_KEY,
     "include-related-images": true
   };
   const params = qs.stringify(queryParams, { arrayFormat: "repeat" });
+  const formData = new FormData();
+
+  const responses: Blob[] = await Promise.all(imageUrls.map((i) => getImageFilesAsBlobs(i)));
+  responses.forEach((r, index) => {
+    formData.append("images", r);
+    formData.append("organs", organs[index]);
+  });
+
   try {
-    const data = await plainHttp.get(`${SITE_CONFIG.PLANTNET.API_ENDPOINT}${params}`);
+    const data = await plainHttp.post(`${SITE_CONFIG.PLANTNET.API_ENDPOINT}${params}`, formData, {
+      headers: formDataHeaders
+    });
     return { success: true, data: data.data };
   } catch (e) {
     return { success: false, data: [] };
