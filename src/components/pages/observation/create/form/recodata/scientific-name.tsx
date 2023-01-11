@@ -7,18 +7,6 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { components } from "react-select";
 
-// export const Thumbnails = ({ images }) => {
-//   return (
-//     <SimpleGrid columns={[5, 5, 5, 5]} spacing="2" alignItems="center" justifyContent="right">
-//       {images.map((img) => (
-//         <Link href={img.url.o} isExternal={true} target="_blank">
-//           <Image src={img.url.s} boxSize="4em" onClick={(e) => e.stopPropagation()} />
-//         </Link>
-//       ))}
-//     </SimpleGrid>
-//   );
-// };
-
 export const ScientificNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
   const { t } = useTranslation();
