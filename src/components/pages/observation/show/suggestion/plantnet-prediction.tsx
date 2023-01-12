@@ -58,7 +58,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
   const handleOnPlantnetSelect = async () => {
     const imageUrls = selectedImages.map(
       (o) =>
-        `http://localhost:8010/proxy${SITE_CONFIG.PLANTNET.IMAGE_BASE_PATH}${o.resource.fileName}`
+        `${SITE_CONFIG.SITE.URL}${SITE_CONFIG.PLANTNET.IMAGE_BASE_PATH}${o.resource.fileName}`
     );
 
     const finalOrgans = selectedImages.map((image) => {
