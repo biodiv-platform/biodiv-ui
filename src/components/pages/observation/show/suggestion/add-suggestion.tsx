@@ -28,7 +28,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
-import { plantnetText } from "@static/constants";
+import { plantnetText, specRecText } from "@static/constants";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
@@ -45,6 +45,7 @@ import {
   ScientificNameOption
 } from "../../create/form/recodata/scientific-name";
 import PlantnetPrediction from "./plantnet-prediction";
+import SpecRecPrediction from "./spec-rec-prediction";
 
 interface IAddSuggestionProps {
   isLocked;
@@ -74,10 +75,16 @@ export default function AddSuggestion({
     onClose: onCloseImageModal
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenSpecRecImageModal,
+    onOpen: onOpenSpecRecImageModal,
+    onClose: onCloseSpecRecImageModal
+  } = useDisclosure();
+
   const [predictions, setPredictions] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
 
-  type PredictionEngine = "plantnet";
+  type PredictionEngine = "plantnet" | "spec-rec";
 
   const [buttonValue, setButtonValue] = useState<PredictionEngine>("plantnet");
 
@@ -85,6 +92,10 @@ export default function AddSuggestion({
     {
       model: "plantnet",
       isActive: SITE_CONFIG?.PLANTNET?.ACTIVE && sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID
+    },
+    {
+      model: "spec-rec",
+      isActive: true
     }
   ];
 
@@ -180,6 +191,10 @@ export default function AddSuggestion({
     if (e.target.innerText == plantnetText || e.target.id == plantnetText) {
       onOpenimageModal();
     }
+
+    if (e.target.innerText == specRecText || e.target.id == specRecText) {
+      onOpenSpecRecImageModal();
+    }
   };
 
   return languages.length > 0 ? (
@@ -242,6 +257,14 @@ export default function AddSuggestion({
                       />
                     )}
 
+                  <SpecRecPrediction
+                    images={images}
+                    setX={setPredictions}
+                    isOpenImageModal={isOpenSpecRecImageModal}
+                    onCloseImageModal={onCloseSpecRecImageModal}
+                    selectRef={scientificRef}
+                  />
+
                   {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
                     <Box>
                       <Text>{t("observation:identify_using")}</Text>
@@ -263,6 +286,12 @@ export default function AddSuggestion({
                               <Text>{plantnetText}</Text>
                             </Stack>
                           )}
+
+                          {buttonValue == "spec-rec" && (
+                            <Text id="spec-rec" onClick={handleOnClick}>
+                              {specRecText}
+                            </Text>
+                          )}
                         </Button>
 
                         <Menu>
@@ -283,6 +312,10 @@ export default function AddSuggestion({
                             >
                               <Image src="/plantnet-icon-removebg-preview.ico" />
                               <Text>{plantnetText}</Text>
+                            </MenuItem>
+
+                            <MenuItem value="spec-rec" onClick={handleMenuSelect}>
+                              <Text>{specRecText}</Text>
                             </MenuItem>
                           </MenuList>
                         </Menu>

@@ -533,7 +533,7 @@ export const axDeleteObservationByDatatableId = async (observationId) => {
   }
 };
 
-const getImageFilesAsBlobs = async (url) => {
+export const getImageFilesAsBlobs = async (url) => {
   try {
     const data = await fetch(url);
     return data.blob();

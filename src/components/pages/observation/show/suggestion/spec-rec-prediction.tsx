@@ -12,14 +12,17 @@ import {
   useToast
 } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
-import { axGetPlantnetSuggestions } from "@services/observation.service";
+import { axPredictObservation } from "@services/api.service";
+import { getImageFilesAsBlobs } from "@services/observation.service";
 import { DEFAULT_TOAST } from "@static/observation-create";
+import { resizePredictImage } from "@utils/image";
 import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
-import ImagePicker from "./image-picker";
-const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, selectRef }) => {
+import ImagePickerSpecRec from "./image-picker-spec-rec";
+
+const SpecRecPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, selectRef }) => {
   const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
@@ -27,67 +30,57 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
   const [plantnetData, setPlantNetData] = useState<any[]>([]);
 
   const [selectedImages, setSelectedImages] = useState<any[]>([]);
-  const [organs, setSelectOrgans] = useState<any[]>([]);
 
   const { getCheckboxProps } = useCheckboxGroup({
     value: selectedImages.length > 0 ? selectedImages.map((o) => o?.resource?.id) : []
   });
 
   useEffect(() => {
-    setSelectedImages(images.slice(0, 5 <= images.length ? 5 : images.length));
-    setSelectOrgans(
-      images
-        .slice(0, 5 <= images.length ? 5 : images.length)
-        .map((o) => ({ imageId: o.resource.id, organ: "auto" }))
-    );
+    setSelectedImages(images.slice(0, 1 <= images.length ? 1 : images.length));
   }, [images]);
 
   useEffect(() => {
     const temp = plantnetData?.map((v) => ({
-      value: v.species.scientificName,
-      label: v.species.scientificName,
-      group: getLocalIcon("Plants"),
-      score: (v.score * 100).toFixed(3) + " %",
+      value: v.speciesName,
+      label: v.speciesName,
+      group: getLocalIcon(v.speciesGroup),
+      score: v.confidence,
       prediction: true,
-      images: v.images,
-      source: "Pl@ntNet"
+      source: "spec-rec"
     }));
     setX(temp);
   }, [plantnetData]);
 
   const handleOnPlantnetSelect = async () => {
     const imageUrls = selectedImages.map(
-      (o) =>
-        `http://localhost:8010/proxy${SITE_CONFIG.PLANTNET.IMAGE_BASE_PATH}${o.resource.fileName}`
+      (o) => `${SITE_CONFIG.SITE.URL}/files-api/api/get/raw/observations/${o.resource.fileName}`
     );
 
-    const finalOrgans = selectedImages.map((image) => {
-      const obj = organs.find((o) => {
-        if (o.imageId === image.resource.id) {
-          return true; // stop searching
-        }
+    const imageBlob = await getImageFilesAsBlobs(imageUrls);
+    let imageFile;
+    if (imageBlob != undefined) {
+      imageFile = new File([imageBlob], "image.jpeg", {
+        type: imageBlob?.type
       });
+    }
 
-      return obj.organ;
-    });
+    const _thumbURL = await resizePredictImage(imageFile);
 
     toastIdRef.current = toast({
       ...DEFAULT_TOAST.LOADING,
       description: t("form:uploader.predicting")
     });
 
-    const { success, data } = await axGetPlantnetSuggestions(imageUrls, finalOrgans);
-
-    if (success) {
-      setPlantNetData(data.results);
+    const { success: predictSuccess, data } = await axPredictObservation(_thumbURL);
+    if (predictSuccess) {
+      setPlantNetData(data);
       const temp = plantnetData?.map((v) => ({
-        value: v.species.scientificName,
-        label: v.species.scientificName,
-        group: getLocalIcon("Plants"),
-        score: v.score.toFixed(3),
+        value: v.speciesName,
+        label: v.speciesName,
+        group: getLocalIcon(v.speciesGroup),
+        score: v.confidence,
         prediction: true,
-        images: v.images,
-        source: "Pl@ntNet"
+        source: "spec-rec"
       }));
       setX(temp);
       toast.update(toastIdRef.current, {
@@ -120,13 +113,13 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
           <ModalBody>
             <SimpleGrid columns={[2, 3, 4, 5]} gridGap={4} mb={4} className="custom-checkbox-group">
               {images.map((o) => (
-                <ImagePicker
+                <ImagePickerSpecRec
                   key={o.resource.id}
                   selectedImages={selectedImages}
                   setter={setSelectedImages}
                   image={o}
-                  selectedOrgans={organs}
-                  organSetter={setSelectOrgans}
+                  // selectedOrgans={organs}
+                  //organSetter={setSelectOrgans}
                   {...getCheckboxProps({ value: o.resource.id })}
                 />
               ))}
@@ -144,4 +137,4 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
   );
 };
 
-export default PlantnetPrediction;
+export default SpecRecPrediction;
