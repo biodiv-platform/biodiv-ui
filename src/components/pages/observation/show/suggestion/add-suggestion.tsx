@@ -28,7 +28,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
-import { plantnetText, specRecText } from "@static/constants";
+import { DEFAULT_GROUP, plantnetText, specRecText } from "@static/constants";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
@@ -288,9 +288,17 @@ export default function AddSuggestion({
                           )}
 
                           {buttonValue == "spec-rec" && (
-                            <Text id="spec-rec" onClick={handleOnClick}>
-                              {specRecText}
-                            </Text>
+                            <Stack isInline={true} align="center">
+                              <Image
+                                id="SpecRec"
+                                src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
+                                onClick={handleOnClick}
+                                defaultValue="spec-rec"
+                              />
+                              <Text id="spec-rec" onClick={handleOnClick}>
+                                {specRecText}
+                              </Text>
+                            </Stack>
                           )}
                         </Button>
 
@@ -315,6 +323,10 @@ export default function AddSuggestion({
                             </MenuItem>
 
                             <MenuItem value="spec-rec" onClick={handleMenuSelect}>
+                              <Image
+                                id="SpecRec"
+                                src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
+                              />
                               <Text>{specRecText}</Text>
                             </MenuItem>
                           </MenuList>

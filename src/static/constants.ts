@@ -121,4 +121,4 @@ export const CROP_STATUS = {
 };
 
 export const plantnetText = "Pl@ntNet";
-export const specRecText = "spec-rec";
+export const specRecText = "SpecRec";
