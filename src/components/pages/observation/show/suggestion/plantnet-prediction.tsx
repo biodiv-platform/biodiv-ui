@@ -19,7 +19,13 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import ImagePicker from "./image-picker";
-const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, selectRef }) => {
+const PlantnetPrediction = ({
+  images,
+  setPredictions,
+  isOpenImageModal,
+  onCloseImageModal,
+  selectRef
+}) => {
   const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
@@ -43,7 +49,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
   }, [images]);
 
   useEffect(() => {
-    const temp = plantnetData?.map((v) => ({
+    const predictionData = plantnetData?.map((v) => ({
       value: v.species.scientificName,
       label: v.species.scientificName,
       group: getLocalIcon("Plants"),
@@ -52,7 +58,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
       images: v.images,
       source: "Pl@ntNet"
     }));
-    setX(temp);
+    setPredictions(predictionData);
   }, [plantnetData]);
 
   const handleOnPlantnetSelect = async () => {
@@ -61,13 +67,13 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
     );
 
     const finalOrgans = selectedImages.map((image) => {
-      const obj = organs.find((o) => {
+      const organsObj = organs.find((o) => {
         if (o.imageId === image.resource.id) {
           return true; // stop searching
         }
       });
 
-      return obj.organ;
+      return organsObj.organ;
     });
 
     toastIdRef.current = toast({
@@ -79,7 +85,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
 
     if (success) {
       setPlantNetData(data.results);
-      const temp = plantnetData?.map((v) => ({
+      const predictionData = plantnetData?.map((v) => ({
         value: v.species.scientificName,
         label: v.species.scientificName,
         group: getLocalIcon("Plants"),
@@ -88,7 +94,7 @@ const PlantnetPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal,
         images: v.images,
         source: "Pl@ntNet"
       }));
-      setX(temp);
+      setPredictions(predictionData);
       toast.update(toastIdRef.current, {
         ...DEFAULT_TOAST.SUCCESS,
         description: t("common:success")

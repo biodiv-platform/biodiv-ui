@@ -95,7 +95,7 @@ export default function AddSuggestion({
     },
     {
       model: "spec-rec",
-      isActive: true
+      isActive: SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE
     }
   ];
 
@@ -250,20 +250,22 @@ export default function AddSuggestion({
                     sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID && (
                       <PlantnetPrediction
                         images={images}
-                        setX={setPredictions}
+                        setPredictions={setPredictions}
                         isOpenImageModal={isOpenImageModal}
                         onCloseImageModal={onCloseImageModal}
                         selectRef={scientificRef}
                       />
                     )}
 
-                  <SpecRecPrediction
-                    images={images}
-                    setX={setPredictions}
-                    isOpenImageModal={isOpenSpecRecImageModal}
-                    onCloseImageModal={onCloseSpecRecImageModal}
-                    selectRef={scientificRef}
-                  />
+                  {SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE && (
+                    <SpecRecPrediction
+                      images={images}
+                      setPredictions={setPredictions}
+                      isOpenImageModal={isOpenSpecRecImageModal}
+                      onCloseImageModal={onCloseSpecRecImageModal}
+                      selectRef={scientificRef}
+                    />
+                  )}
 
                   {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
                     <Box>
@@ -322,7 +324,11 @@ export default function AddSuggestion({
                               <Text>{plantnetText}</Text>
                             </MenuItem>
 
-                            <MenuItem value="spec-rec" onClick={handleMenuSelect}>
+                            <MenuItem
+                              value="spec-rec"
+                              onClick={handleMenuSelect}
+                              isDisabled={!SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE}
+                            >
                               <Image
                                 id="SpecRec"
                                 src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}

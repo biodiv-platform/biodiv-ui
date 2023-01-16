@@ -22,7 +22,13 @@ import React, { useEffect, useState } from "react";
 
 import ImagePickerSpecRec from "./image-picker-spec-rec";
 
-const SpecRecPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, selectRef }) => {
+const SpecRecPrediction = ({
+  images,
+  setPredictions,
+  isOpenImageModal,
+  onCloseImageModal,
+  selectRef
+}) => {
   const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
@@ -40,7 +46,7 @@ const SpecRecPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, 
   }, [images]);
 
   useEffect(() => {
-    const temp = plantnetData?.map((v) => ({
+    const predictionData = plantnetData?.map((v) => ({
       value: v.speciesName,
       label: v.speciesName,
       group: getLocalIcon(v.speciesGroup),
@@ -48,7 +54,7 @@ const SpecRecPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, 
       prediction: true,
       source: "spec-rec"
     }));
-    setX(temp);
+    setPredictions(predictionData);
   }, [plantnetData]);
 
   const handleOnPlantnetSelect = async () => {
@@ -74,7 +80,7 @@ const SpecRecPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, 
     const { success: predictSuccess, data } = await axPredictObservation(_thumbURL);
     if (predictSuccess) {
       setPlantNetData(data);
-      const temp = plantnetData?.map((v) => ({
+      const predictionData = plantnetData?.map((v) => ({
         value: v.speciesName,
         label: v.speciesName,
         group: getLocalIcon(v.speciesGroup),
@@ -82,7 +88,7 @@ const SpecRecPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, 
         prediction: true,
         source: "spec-rec"
       }));
-      setX(temp);
+      setPredictions(predictionData);
       toast.update(toastIdRef.current, {
         ...DEFAULT_TOAST.SUCCESS,
         description: t("common:success")
@@ -118,8 +124,6 @@ const SpecRecPrediction = ({ images, setX, isOpenImageModal, onCloseImageModal, 
                   selectedImages={selectedImages}
                   setter={setSelectedImages}
                   image={o}
-                  // selectedOrgans={organs}
-                  //organSetter={setSelectOrgans}
                   {...getCheckboxProps({ value: o.resource.id })}
                 />
               ))}
