@@ -52,7 +52,7 @@ const SpecRecPrediction = ({
       group: getLocalIcon(v.speciesGroup),
       score: v.confidence + " %",
       prediction: true,
-      source: "spec-rec"
+      source: "SpecRec"
     }));
     setPredictions(predictionData);
   }, [plantnetData]);
@@ -86,7 +86,7 @@ const SpecRecPrediction = ({
         group: getLocalIcon(v.speciesGroup),
         score: v.confidence + " %",
         prediction: true,
-        source: "spec-rec"
+        source: "SpecRec"
       }));
       setPredictions(predictionData);
       toast.update(toastIdRef.current, {
