@@ -83,10 +83,9 @@ export default function AddSuggestion({
 
   const [predictions, setPredictions] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
+  let defaultButtonValue;
 
   type PredictionEngine = "plantnet" | "spec-rec";
-
-  const [buttonValue, setButtonValue] = useState<PredictionEngine>("plantnet");
 
   const availablePredictionModels = [
     {
@@ -98,6 +97,19 @@ export default function AddSuggestion({
       isActive: SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE
     }
   ];
+
+  if (SITE_CONFIG?.PLANTNET?.ACTIVE && sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID) {
+    defaultButtonValue = "plantnet";
+  } else {
+    const firstActiveModel = availablePredictionModels.find((m) => {
+      if (m.isActive) {
+        return m;
+      }
+    });
+    defaultButtonValue = firstActiveModel?.model;
+  }
+
+  const [buttonValue, setButtonValue] = useState<PredictionEngine>(defaultButtonValue);
 
   const handleMenuSelect = (e) => {
     setButtonValue(e.currentTarget.value);
