@@ -50,7 +50,7 @@ const SpecRecPrediction = ({
       value: v.speciesName,
       label: v.speciesName,
       group: getLocalIcon(v.speciesGroup),
-      score: v.confidence,
+      score: v.confidence + " %",
       prediction: true,
       source: "spec-rec"
     }));
@@ -84,7 +84,7 @@ const SpecRecPrediction = ({
         value: v.speciesName,
         label: v.speciesName,
         group: getLocalIcon(v.speciesGroup),
-        score: v.confidence,
+        score: v.confidence + " %",
         prediction: true,
         source: "spec-rec"
       }));
