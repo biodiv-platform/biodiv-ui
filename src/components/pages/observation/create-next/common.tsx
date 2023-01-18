@@ -1,5 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import { axPredictObservation } from "@services/api.service";
+import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { dateToUTC, formatDate } from "@utils/date";
 import { resizePredictImage } from "@utils/image";
 import { reverseGeocode } from "@utils/location";
@@ -71,7 +72,14 @@ export const preProcessObservations = async (
 
     let predictionResponse = {};
 
-    if (canPredict && SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && r.blob) {
+    const resourceTypeFileFormat = "." + r.type.substring(r.type.indexOf("/") + 1);
+
+    if (
+      canPredict &&
+      SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE &&
+      r.blob &&
+      resourceTypeFileFormat in ACCEPTED_FILE_TYPES["image/*"]
+    ) {
       predictionResponse = await predictResource({ resource: r, userId, speciesGroups });
     }
 

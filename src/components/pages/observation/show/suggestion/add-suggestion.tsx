@@ -28,7 +28,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
-import { plantnetText } from "@static/constants";
+import { DEFAULT_GROUP, plantnetText, specRecText } from "@static/constants";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
@@ -45,6 +45,7 @@ import {
   ScientificNameOption
 } from "../../create/form/recodata/scientific-name";
 import PlantnetPrediction from "./plantnet-prediction";
+import SpecRecPrediction from "./spec-rec-prediction";
 
 interface IAddSuggestionProps {
   isLocked;
@@ -74,19 +75,41 @@ export default function AddSuggestion({
     onClose: onCloseImageModal
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenSpecRecImageModal,
+    onOpen: onOpenSpecRecImageModal,
+    onClose: onCloseSpecRecImageModal
+  } = useDisclosure();
+
   const [predictions, setPredictions] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
+  let defaultButtonValue;
 
-  type PredictionEngine = "plantnet";
-
-  const [buttonValue, setButtonValue] = useState<PredictionEngine>("plantnet");
+  type PredictionEngine = "plantnet" | "spec-rec";
 
   const availablePredictionModels = [
     {
       model: "plantnet",
       isActive: SITE_CONFIG?.PLANTNET?.ACTIVE && sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID
+    },
+    {
+      model: "spec-rec",
+      isActive: SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE
     }
   ];
+
+  if (SITE_CONFIG?.PLANTNET?.ACTIVE && sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID) {
+    defaultButtonValue = "plantnet";
+  } else {
+    const firstActiveModel = availablePredictionModels.find((m) => {
+      if (m.isActive) {
+        return m;
+      }
+    });
+    defaultButtonValue = firstActiveModel?.model;
+  }
+
+  const [buttonValue, setButtonValue] = useState<PredictionEngine>(defaultButtonValue);
 
   const handleMenuSelect = (e) => {
     setButtonValue(e.currentTarget.value);
@@ -180,6 +203,10 @@ export default function AddSuggestion({
     if (e.target.innerText == plantnetText || e.target.id == plantnetText) {
       onOpenimageModal();
     }
+
+    if (e.target.innerText == specRecText || e.target.id == specRecText) {
+      onOpenSpecRecImageModal();
+    }
   };
 
   return languages.length > 0 ? (
@@ -235,12 +262,22 @@ export default function AddSuggestion({
                     sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID && (
                       <PlantnetPrediction
                         images={images}
-                        setX={setPredictions}
+                        setPredictions={setPredictions}
                         isOpenImageModal={isOpenImageModal}
                         onCloseImageModal={onCloseImageModal}
                         selectRef={scientificRef}
                       />
                     )}
+
+                  {SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE && (
+                    <SpecRecPrediction
+                      images={images}
+                      setPredictions={setPredictions}
+                      isOpenImageModal={isOpenSpecRecImageModal}
+                      onCloseImageModal={onCloseSpecRecImageModal}
+                      selectRef={scientificRef}
+                    />
+                  )}
 
                   {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
                     <Box>
@@ -263,6 +300,20 @@ export default function AddSuggestion({
                               <Text>{plantnetText}</Text>
                             </Stack>
                           )}
+
+                          {buttonValue == "spec-rec" && (
+                            <Stack isInline={true} align="center">
+                              <Image
+                                id="SpecRec"
+                                src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
+                                onClick={handleOnClick}
+                                defaultValue="spec-rec"
+                              />
+                              <Text id="spec-rec" onClick={handleOnClick}>
+                                {specRecText}
+                              </Text>
+                            </Stack>
+                          )}
                         </Button>
 
                         <Menu>
@@ -283,6 +334,18 @@ export default function AddSuggestion({
                             >
                               <Image src="/plantnet-icon-removebg-preview.ico" />
                               <Text>{plantnetText}</Text>
+                            </MenuItem>
+
+                            <MenuItem
+                              value="spec-rec"
+                              onClick={handleMenuSelect}
+                              isDisabled={!SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE}
+                            >
+                              <Image
+                                id="SpecRec"
+                                src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
+                              />
+                              <Text>{specRecText}</Text>
                             </MenuItem>
                           </MenuList>
                         </Menu>
