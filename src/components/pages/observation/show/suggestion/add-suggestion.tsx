@@ -53,6 +53,7 @@ interface IAddSuggestionProps {
   recoUpdated;
   recoVotesLength;
   sgroupId;
+  noOfImages;
 }
 
 export default function AddSuggestion({
@@ -60,7 +61,8 @@ export default function AddSuggestion({
   observationId,
   recoUpdated,
   recoVotesLength,
-  sgroupId
+  sgroupId,
+  noOfImages
 }: IAddSuggestionProps) {
   const { t } = useTranslation();
   const scientificRef: any = useRef(null);
@@ -87,8 +89,8 @@ export default function AddSuggestion({
 
   type PredictionEngine = "plantnet" | "spec-rec";
 
-  const isSpecRecActive = SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE;
-  const isPlantnetActive = SITE_CONFIG?.PLANTNET?.ACTIVE;
+  const isSpecRecActive = SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE && noOfImages >= 1;
+  const isPlantnetActive = SITE_CONFIG?.PLANTNET?.ACTIVE && noOfImages >= 1;
   const isSgroupPlant = sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID;
 
   const availablePredictionModels = [
@@ -125,7 +127,11 @@ export default function AddSuggestion({
     );
 
     axGetObservationById(observationId).then(({ data }) => {
-      setImages(data.observationResource);
+      setImages(
+        data.observationResource.filter((o) => {
+          return o.resource.type === "IMAGE";
+        })
+      );
     });
   }, []);
 
@@ -276,18 +282,17 @@ export default function AddSuggestion({
                     <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
                   )}
 
-                  {SITE_CONFIG?.PLANTNET?.ACTIVE &&
-                    sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID && (
-                      <PlantnetPrediction
-                        images={images}
-                        setPredictions={setPredictions}
-                        isOpenImageModal={isOpenImageModal}
-                        onCloseImageModal={onCloseImageModal}
-                        selectRef={scientificRef}
-                      />
-                    )}
+                  {isPlantnetActive && isSgroupPlant && (
+                    <PlantnetPrediction
+                      images={images}
+                      setPredictions={setPredictions}
+                      isOpenImageModal={isOpenImageModal}
+                      onCloseImageModal={onCloseImageModal}
+                      selectRef={scientificRef}
+                    />
+                  )}
 
-                  {SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE && (
+                  {isSpecRecActive && (
                     <SpecRecPrediction
                       images={images}
                       setPredictions={setPredictions}
