@@ -29,6 +29,8 @@ export const areImagesSimilar = (image1, image2) => {
   if (
     !image1.dateCreated &&
     !image1.longitude &&
+    image1.blockHash &&
+    image2.blockHash &&
     Math.abs(compareBlockHash(image1.blockHash, image2.blockHash)) > 0.7
   ) {
     return 1;
