@@ -1,11 +1,10 @@
 import { Prose } from "@nikolovlazar/chakra-ui-prose";
-import { preProcessContent } from "@utils/pages";
 import React from "react";
 
 export function Content({ html }) {
   return (
     <Prose>
-      <div className="article" dangerouslySetInnerHTML={{ __html: preProcessContent(html) }} />
+      <div className="article" dangerouslySetInnerHTML={{ __html: html }} />
     </Prose>
   );
 }
