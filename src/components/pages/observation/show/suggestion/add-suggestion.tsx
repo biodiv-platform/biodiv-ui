@@ -53,6 +53,7 @@ interface IAddSuggestionProps {
   recoUpdated;
   recoVotesLength;
   sgroupId;
+  noOfImages;
 }
 
 export default function AddSuggestion({
@@ -60,7 +61,8 @@ export default function AddSuggestion({
   observationId,
   recoUpdated,
   recoVotesLength,
-  sgroupId
+  sgroupId,
+  noOfImages
 }: IAddSuggestionProps) {
   const { t } = useTranslation();
   const scientificRef: any = useRef(null);
@@ -87,18 +89,22 @@ export default function AddSuggestion({
 
   type PredictionEngine = "plantnet" | "spec-rec";
 
+  const isSpecRecActive = SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE && noOfImages >= 1;
+  const isPlantnetActive = SITE_CONFIG?.PLANTNET?.ACTIVE && noOfImages >= 1;
+  const isSgroupPlant = sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID;
+
   const availablePredictionModels = [
     {
       model: "plantnet",
-      isActive: SITE_CONFIG?.PLANTNET?.ACTIVE && sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID
+      isActive: isPlantnetActive && isSgroupPlant
     },
     {
       model: "spec-rec",
-      isActive: SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE
+      isActive: isSpecRecActive
     }
   ];
 
-  if (SITE_CONFIG?.PLANTNET?.ACTIVE && sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID) {
+  if (isPlantnetActive && isSgroupPlant) {
     defaultButtonValue = "plantnet";
   } else {
     const firstActiveModel = availablePredictionModels.find((m) => {
@@ -121,7 +127,11 @@ export default function AddSuggestion({
     );
 
     axGetObservationById(observationId).then(({ data }) => {
-      setImages(data.observationResource);
+      setImages(
+        data.observationResource.filter((o) => {
+          return o.resource.type === "IMAGE";
+        })
+      );
     });
   }, []);
 
@@ -209,6 +219,20 @@ export default function AddSuggestion({
     }
   };
 
+  const isOnlyPlantnetActive = () => {
+    let count = 0;
+    availablePredictionModels.forEach((m) => {
+      if (m.isActive) {
+        count += 1;
+      }
+    });
+    if (count == 1 && isPlantnetActive && isSgroupPlant) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return languages.length > 0 ? (
     isLocked ? (
       <Alert status="success">
@@ -258,18 +282,17 @@ export default function AddSuggestion({
                     <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
                   )}
 
-                  {SITE_CONFIG?.PLANTNET?.ACTIVE &&
-                    sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID && (
-                      <PlantnetPrediction
-                        images={images}
-                        setPredictions={setPredictions}
-                        isOpenImageModal={isOpenImageModal}
-                        onCloseImageModal={onCloseImageModal}
-                        selectRef={scientificRef}
-                      />
-                    )}
+                  {isPlantnetActive && isSgroupPlant && (
+                    <PlantnetPrediction
+                      images={images}
+                      setPredictions={setPredictions}
+                      isOpenImageModal={isOpenImageModal}
+                      onCloseImageModal={onCloseImageModal}
+                      selectRef={scientificRef}
+                    />
+                  )}
 
-                  {SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE && (
+                  {isSpecRecActive && (
                     <SpecRecPrediction
                       images={images}
                       setPredictions={setPredictions}
@@ -324,29 +347,26 @@ export default function AddSuggestion({
                             variant="outline"
                           />
                           <MenuList defaultValue="plantnet">
-                            <MenuItem
-                              isDisabled={
-                                sgroupId != SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID ||
-                                availablePredictionModels.length == 1
-                              }
-                              value="plantnet"
-                              onClick={handleMenuSelect}
-                            >
-                              <Image src="/plantnet-icon-removebg-preview.ico" />
-                              <Text>{plantnetText}</Text>
-                            </MenuItem>
+                            {isPlantnetActive && (
+                              <MenuItem
+                                isDisabled={!isSgroupPlant || isOnlyPlantnetActive()}
+                                value="plantnet"
+                                onClick={handleMenuSelect}
+                              >
+                                <Image src="/plantnet-icon-removebg-preview.ico" />
+                                <Text>{plantnetText}</Text>
+                              </MenuItem>
+                            )}
 
-                            <MenuItem
-                              value="spec-rec"
-                              onClick={handleMenuSelect}
-                              isDisabled={!SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE}
-                            >
-                              <Image
-                                id="SpecRec"
-                                src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
-                              />
-                              <Text>{specRecText}</Text>
-                            </MenuItem>
+                            {isSpecRecActive && (
+                              <MenuItem value="spec-rec" onClick={handleMenuSelect}>
+                                <Image
+                                  id="SpecRec"
+                                  src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
+                                />
+                                <Text>{specRecText}</Text>
+                              </MenuItem>
+                            )}
                           </MenuList>
                         </Menu>
 
