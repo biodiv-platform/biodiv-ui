@@ -129,7 +129,7 @@ export const LOCAL_ASSET_PREFIX = "ibpmu-";
 export const ACCEPTED_FILE_TYPES = {
   "image/*": [".jpg", ".jpeg", ".png"],
   "video/*": [".mp4"],
-  "audio/*": [".wav", ".mp3"],
+  "audio/*": [".wav", ".mp3", ".mpeg"],
   "application/zip": [".zip"]
 };
 

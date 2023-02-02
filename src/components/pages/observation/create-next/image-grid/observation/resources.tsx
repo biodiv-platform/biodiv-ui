@@ -3,6 +3,7 @@ import { AspectRatio, Box, IconButton, Image, useBoolean } from "@chakra-ui/reac
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
+import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useEffect, useMemo, useState } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
@@ -15,6 +16,7 @@ import ResourceUploadIndicator from "./upload-indicator";
 export default function Resources({ index, removeObservation }) {
   const resourcesName = `o.${index}.resources`;
   const resources = useFieldArray({ name: resourcesName });
+
   const [resourceEditor, setResourceEditor] = useBoolean();
   const { media } = useObservationCreateNext();
   const hForm = useFormContext();
@@ -30,7 +32,12 @@ export default function Resources({ index, removeObservation }) {
     () => ({
       key: resources.fields[resourceIndex].id,
       src: getImageThumb(resources.fields[resourceIndex], user?.id),
-      fallbackSrc: getFallbackByMIME(resources.fields[resourceIndex]?.["type"])
+      fallbackSrc: getFallbackByMIME(resources.fields[resourceIndex]?.["type"]),
+      fileType:
+        "." +
+        resources.fields[resourceIndex]["type"].substring(
+          resources.fields[resourceIndex]["type"].indexOf("/") + 1
+        )
     }),
     [resources.fields[resourceIndex].id]
   );
@@ -61,19 +68,46 @@ export default function Resources({ index, removeObservation }) {
     };
   }, [resourceArrayValues]);
 
+  const isImage = ACCEPTED_FILE_TYPES["image/*"].includes(imgThumb.fileType);
+  const isVideo = ACCEPTED_FILE_TYPES["video/*"].includes(imgThumb.fileType);
+  const isAudio = ACCEPTED_FILE_TYPES["audio/*"].includes(imgThumb.fileType);
+
   return (
     <>
       <Box position="relative" key={imgThumb.key}>
-        <AspectRatio maxW="100%" mb={2} ratio={1}>
-          <Image
-            borderRadius="sm"
-            objectFit="cover"
-            overflow="hidden"
-            className="o-selectable"
-            src={imgThumb.src}
-            fallbackSrc={imgThumb.fallbackSrc}
-          />
-        </AspectRatio>
+        {isImage && (
+          <AspectRatio maxW="100%" mb={2} ratio={1}>
+            <Image
+              borderRadius="sm"
+              objectFit="cover"
+              overflow="hidden"
+              className="o-selectable"
+              src={imgThumb.src}
+              fallbackSrc={imgThumb.fallbackSrc}
+            />
+          </AspectRatio>
+        )}
+
+        {isVideo && (
+          <AspectRatio maxW="100%" mb={2} ratio={1}>
+            <Box>
+              <video controls>
+                <source src={imgThumb.src} />
+              </video>
+            </Box>
+          </AspectRatio>
+        )}
+
+        {isAudio && (
+          <AspectRatio maxW="100%" mb={2} ratio={1}>
+            <Box>
+              <audio controls>
+                <source src={imgThumb.src} />
+              </audio>
+            </Box>
+          </AspectRatio>
+        )}
+
         <IconButton
           aria-label="Close"
           colorScheme="red"
