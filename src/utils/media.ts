@@ -61,7 +61,7 @@ export const getUserImage = (resourceUrl, name, w = 50) => {
 
 export const getResourceThumbnail = (resourceType, resourceUrl, size) => {
   return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/${RESOURCE_CTX_MAP[resourceType]}/${resourceUrl}${size}`
+    ? `${ENDPOINT.FILES}/get/crop/${RESOURCE_CTX_MAP[resourceType]}/${resourceUrl}?w=${size}`
     : undefined;
 };
 

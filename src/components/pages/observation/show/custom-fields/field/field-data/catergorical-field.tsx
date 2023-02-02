@@ -1,7 +1,8 @@
-import { Text } from "@chakra-ui/react";
+import { Image, Text } from "@chakra-ui/react";
 import { ClearIndicator, selectStyles } from "@components/form/configs";
 import CustomFieldOption from "@components/pages/observation/create/form/custom-field-form/custom-field-options";
 import { axGetAllCustomFieldOptionsById } from "@services/usergroup.service";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
@@ -34,7 +35,9 @@ export default function CatergoricalField({
   useEffect(() => {
     axGetAllCustomFieldOptionsById(observationId, userGroupId, cf.cfId)
       .then((res) => {
-        setOptions(res?.data?.map((item) => ({ label: item.values, value: item.id })));
+        setOptions(
+          res?.data?.map((item) => ({ label: item.values, value: item.id, iconURL: item.iconURL }))
+        );
       })
       .catch((err) => err);
   }, []);
@@ -57,6 +60,18 @@ export default function CatergoricalField({
       <Buttons onSave={onSave} onClose={onClose} />
     </>
   ) : (
-    <Text>{parseCategoricalValue(cf?.customFieldValues, isMulti) || t("common:unknown")}</Text>
+    <>
+      {cf?.customFieldValues?.singleCategoricalData?.iconURL && (
+        <Image
+          boxSize="2rem"
+          src={getResourceThumbnail(
+            RESOURCE_CTX.USERGROUPS,
+            cf?.customFieldValues?.singleCategoricalData?.iconURL,
+            32
+          )}
+        />
+      )}
+      <Text>{parseCategoricalValue(cf?.customFieldValues, isMulti) || t("common:unknown")}</Text>
+    </>
   );
 }

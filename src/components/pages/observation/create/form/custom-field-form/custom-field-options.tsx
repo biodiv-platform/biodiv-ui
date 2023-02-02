@@ -1,11 +1,14 @@
 import { Image, Stack, Text } from "@chakra-ui/react";
-import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React, { useMemo } from "react";
 import { components } from "react-select";
 
 export default function CustomFieldOption(props: any) {
   const imageURL = useMemo(
-    () => getResourceThumbnail(RESOURCE_CTX.USERGROUPS, props.data.iconURL, 32),
+    () =>
+      props?.data?.iconURL
+        ? getResourceThumbnail(RESOURCE_CTX.USERGROUPS, props?.data?.iconURL, 32)
+        : getLocalIcon(""),
     [props.data.iconURL]
   );
   return (
