@@ -75,3 +75,13 @@ export const axPredictObservation = async (url) => {
     return { success: false };
   }
 };
+
+export const axGetLayerCount = async () => {
+  try {
+    const response = await plainHttp.get(`${ENDPOINT.NAKSHA}/layer/count`);
+    return { success: true, count: response.data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
