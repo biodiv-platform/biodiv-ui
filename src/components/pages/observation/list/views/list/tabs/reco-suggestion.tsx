@@ -26,6 +26,7 @@ export default function RecoSuggestionTab({ o, recoUpdated }) {
         observationId={o.observationId}
         isLocked={o.recoShow.isLocked}
         sgroupId={o.speciesGroupId}
+        noOfImages={o.noOfImages}
       />
     </>
   );

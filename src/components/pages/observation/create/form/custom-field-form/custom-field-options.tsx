@@ -1,10 +1,16 @@
 import { Image, Stack, Text } from "@chakra-ui/react";
-import { getGroupImageThumb } from "@utils/media";
+import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React, { useMemo } from "react";
 import { components } from "react-select";
 
 export default function CustomFieldOption(props: any) {
-  const imageURL = useMemo(() => getGroupImageThumb(props.data.iconURL), [props.data.iconURL]);
+  const imageURL = useMemo(
+    () =>
+      props?.data?.iconURL
+        ? getResourceThumbnail(RESOURCE_CTX.USERGROUPS, props?.data?.iconURL, 32)
+        : getLocalIcon(""),
+    [props.data.iconURL]
+  );
   return (
     <components.Option {...props}>
       <Stack isInline={true} alignItems="center">
