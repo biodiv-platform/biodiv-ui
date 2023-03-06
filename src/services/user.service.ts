@@ -47,7 +47,7 @@ export const axUserFilterSearch = async (name) => {
 
 export const axGetUserById = async (userId, ctx) => {
   try {
-    const { data } = await http.get(`${ENDPOINT.INTEGRATOR}/v1/services/read/profile/${userId}`, {
+    const { data } = await http.get(`${ENDPOINT.USER}/v1/user/${userId}`, {
       params: { ctx, skipRefresh: true }
     });
     return { success: true, data };
