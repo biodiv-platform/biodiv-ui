@@ -235,7 +235,11 @@ export default function ObservationCreateNextForm({ onBrowse }) {
     const observations = o.map((observation) =>
       handleOnSingleObservationSubmit(
         observation,
-        { languageId, fields: [], currentGroupId: currentGroup.id },
+        {
+          languageId,
+          fields: observation.customFields,
+          currentGroupId: currentGroup.id
+        },
         false
       )
     );
