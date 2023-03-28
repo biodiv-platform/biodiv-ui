@@ -4,16 +4,23 @@
   "member_only": "Tafadhali jiunge na kikundi kupakia uchunguzi",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "Pakia Kundi",
       "add_data_package": "Ongeza mfuko wa data.",
       "add_dataset": "Ongeza Dataset.",
-      "add_datatable": "Ongeza DataTable.",
-      "add_document": "Ongeza hati.",
+      "add_datatable": "Pakia Datatable",
+      "add_document": "Pakia Hati",
       "add_fact": "Ongeza ukweli.",
       "add_list": "Ongeza orodha.",
-      "add_observation": "Ongeza uchunguzi.",
+      "add_observation": "Pakia Uchunguzi Mmoja",
       "add_trait_or_value": "Ongeza sifa / thamani",
-      "contribute_to_map": "Kuchangia kwenye ramani.",
+      "contribute_to_map": "Pakia Ramani",
       "contribute_to_species": "Kuchangia kwa aina",
+      "grouped_menu_title": {
+        "documents": "Nyaraka",
+        "maps": "Ramani",
+        "observations": "Uchunguzi",
+        "species": "Aina"
+      },
       "text_curation": "Utunzaji wa maandishi",
       "title": "Kushiriki"
     },

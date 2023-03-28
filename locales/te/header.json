@@ -4,16 +4,23 @@
   "member_only": "దయచేసి పరిశీలనలను అప్లోడ్ చేయడానికి సమూహంలో చేరండి",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "బ్యాచ్‌ని అప్‌లోడ్ చేయండి",
       "add_data_package": "డేటా ప్యాకేజీని జోడించండి",
       "add_dataset": "డేటాసెట్ను జోడించండి",
-      "add_datatable": "డేటబుల్ జోడించండి",
-      "add_document": "పత్రాన్ని జోడించండి",
+      "add_datatable": "డేటాటేబుల్‌ని అప్‌లోడ్ చేయండి",
+      "add_document": "ఒక పత్రాన్ని అప్‌లోడ్ చేయండి",
       "add_fact": "నిజానికి జోడించండి",
       "add_list": "జాబితాను జోడించండి",
-      "add_observation": "పరిశీలనను జోడించండి",
+      "add_observation": "ఒకే పరిశీలనను అప్‌లోడ్ చేయండి",
       "add_trait_or_value": "లక్షణం / విలువను జోడించండి",
-      "contribute_to_map": "మ్యాప్కు దోహదం చేస్తుంది",
+      "contribute_to_map": "మ్యాప్‌ను అప్‌లోడ్ చేయండి",
       "contribute_to_species": "జాతులకు దోహదం చేస్తుంది",
+      "grouped_menu_title": {
+        "documents": "పత్రాలు",
+        "maps": "మ్యాప్స్",
+        "observations": "పరిశీలనలు",
+        "species": "జాతులు"
+      },
       "text_curation": "టెక్స్ట్ క్యూరేషన్",
       "title": "సహకారం"
     },

@@ -4,16 +4,23 @@
   "member_only": "ਕਿਰਪਾ ਕਰਕੇ ਨਿਰੀਖਣ ਅਪਲੋਡ ਕਰਨ ਲਈ ਸਮੂਹ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "ਬੈਚ ਅੱਪਲੋਡ ਕਰੋ",
       "add_data_package": "ਡਾਟਾ ਪੈਕੇਜ ਸ਼ਾਮਲ ਕਰੋ",
       "add_dataset": "ਡੇਟਾਸੇਟ ਸ਼ਾਮਲ ਕਰੋ",
-      "add_datatable": "ਡਾਟਾਟੇਬਲ ਸ਼ਾਮਲ ਕਰੋ",
-      "add_document": "ਦਸਤਾਵੇਜ਼ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_datatable": "ਡੇਟਾਟੇਬਲ ਅੱਪਲੋਡ ਕਰੋ",
+      "add_document": "ਇੱਕ ਦਸਤਾਵੇਜ਼ ਅੱਪਲੋਡ ਕਰੋ",
       "add_fact": "ਤੱਥ ਸ਼ਾਮਲ ਕਰੋ",
       "add_list": "ਸੂਚੀ ਸ਼ਾਮਲ ਕਰੋ",
-      "add_observation": "ਨਿਰੀਖਣ ਸ਼ਾਮਲ ਕਰੋ",
+      "add_observation": "ਸਿੰਗਲ ਆਬਜ਼ਰਵੇਸ਼ਨ ਅੱਪਲੋਡ ਕਰੋ",
       "add_trait_or_value": "ਗੁਣ / ਮੁੱਲ ਸ਼ਾਮਲ ਕਰੋ",
-      "contribute_to_map": "ਨਕਸ਼ੇ ਵਿਚ ਯੋਗਦਾਨ ਪਾਓ",
+      "contribute_to_map": "ਇੱਕ ਨਕਸ਼ਾ ਅੱਪਲੋਡ ਕਰੋ",
       "contribute_to_species": "ਸਪੀਸੀਜ਼ ਵਿਚ ਯੋਗਦਾਨ ਪਾਓ",
+      "grouped_menu_title": {
+        "documents": "ਦਸਤਾਵੇਜ਼",
+        "maps": "ਨਕਸ਼ੇ",
+        "observations": "ਨਿਰੀਖਣ",
+        "species": "ਸਪੀਸੀਜ਼"
+      },
       "text_curation": "ਟੈਕਸਟ ਕਿਊਰੇਸ਼ਨ",
       "title": "ਯੋਗਦਾਨ"
     },

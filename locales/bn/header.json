@@ -4,16 +4,23 @@
   "member_only": "পর্যবেক্ষণ আপলোড করার জন্য গ্রুপে যোগদান করুন",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "আপলোড ব্যাচ",
       "add_data_package": "তথ্য প্যাকেজ যোগ করুন",
       "add_dataset": "ডেটাসেট যোগ করুন",
-      "add_datatable": "ডেটাটেবল যোগ করুন",
-      "add_document": "নথি যোগ করুন",
+      "add_datatable": "ডেটাটেবল আপলোড করুন",
+      "add_document": "একটি নথি আপলোড করুন",
       "add_fact": "সত্য যোগ করুন",
       "add_list": "তালিকা যোগ করুন",
-      "add_observation": "পর্যবেক্ষণ যোগ করুন",
+      "add_observation": "একক পর্যবেক্ষণ আপলোড করুন",
       "add_trait_or_value": "বৈশিষ্ট্য / মান যোগ করুন",
-      "contribute_to_map": "মানচিত্রে অবদান রাখুন",
+      "contribute_to_map": "একটি মানচিত্র আপলোড করুন",
       "contribute_to_species": "প্রজাতি অবদান",
+      "grouped_menu_title": {
+        "documents": "নথিপত্র",
+        "maps": "মানচিত্র",
+        "observations": "পর্যবেক্ষণ",
+        "species": "প্রজাতি"
+      },
       "text_curation": "টেক্সট কিউরেশন",
       "title": "অবদান"
     },

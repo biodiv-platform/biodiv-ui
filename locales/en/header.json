@@ -4,16 +4,23 @@
   "member_only": "Please join the group to upload observations",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "Upload Batch",
       "add_data_package": "Add data package",
       "add_dataset": "Add Dataset",
-      "add_datatable": "Add Datatable",
-      "add_document": "Add Document",
+      "add_datatable": "Upload Datatable",
+      "add_document": "Upload a Document",
       "add_fact": "Add Fact",
       "add_list": "Add List",
-      "add_observation": "Add Observation",
+      "add_observation": "Upload Single Observation",
       "add_trait_or_value": "Add Trait/Value",
-      "contribute_to_map": "Contribute to Map",
+      "contribute_to_map": "Upload a Map",
       "contribute_to_species": "Contribute to Species",
+      "grouped_menu_title": {
+        "documents": "Documents",
+        "maps": "Maps",
+        "observations": "Observations",
+        "species": "Species"
+      },
       "text_curation": "Text Curation",
       "title": "Contribute"
     },

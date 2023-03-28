@@ -4,16 +4,23 @@
   "member_only": "कृपया अवलोकन अपलोड करने के लिए समूह में शामिल हों",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "बैच अपलोड करें",
       "add_data_package": "डेटा पैकेज जोड़ें",
       "add_dataset": "डेटासेट जोड़ें",
-      "add_datatable": "डेटाटेबल जोड़ें",
-      "add_document": "दस्तावेज़ जोड़ें",
+      "add_datatable": "डेटाटेबल अपलोड करें",
+      "add_document": "एक दस्तावेज़ अपलोड करें",
       "add_fact": "तथ्य जोड़ें",
       "add_list": "सूची में जोड़ने",
-      "add_observation": "अवलोकन जोड़ें",
+      "add_observation": "एकल अवलोकन अपलोड करें",
       "add_trait_or_value": "लक्षण / मूल्य जोड़ें",
-      "contribute_to_map": "मानचित्र में योगदान",
+      "contribute_to_map": "नक्शा अपलोड करें",
       "contribute_to_species": "प्रजातियों में योगदान",
+      "grouped_menu_title": {
+        "documents": "दस्तावेज़",
+        "maps": "एमएपीएस",
+        "observations": "टिप्पणियों",
+        "species": "प्रजातियाँ"
+      },
       "text_curation": "पाठ अवधि",
       "title": "योगदान"
     },

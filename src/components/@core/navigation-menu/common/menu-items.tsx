@@ -4,6 +4,7 @@ import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import GroupedSubMenu from "./grouped-sub-menu";
 import SubMenu from "./sub-menu";
 
 const SimpleLink = ({ children, to, params }) => (
@@ -17,6 +18,8 @@ export default function MenuItems(props) {
   const isDropdown = rows.length > 0 || CCell;
   const { t } = useTranslation();
 
+  const isContributeMenu = name === "header:menu_primary.contribute.";
+
   return isDropdown ? (
     <Menu placement="bottom-end" isLazy={isLazy}>
       {({ isOpen }) => (
@@ -29,6 +32,8 @@ export default function MenuItems(props) {
           {(isLazy ? isOpen : true) ? (
             CCell ? (
               <CCell />
+            ) : isContributeMenu ? (
+              <GroupedSubMenu rows={rows} prefix={name} />
             ) : (
               <SubMenu rows={rows} prefix={name} />
             )

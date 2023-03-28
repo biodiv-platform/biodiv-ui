@@ -4,16 +4,23 @@
   "member_only": "அவதானிப்புகளை பதிவேற்ற குழுவில் சேரவும்",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "பதிவேற்ற தொகுதி",
       "add_data_package": "தரவு தொகுப்பு சேர்க்க",
       "add_dataset": "தரவுத்தளத்தைச் சேர்க்கவும்",
-      "add_datatable": "தரவு அட்டவணையை சேர்க்கவும்",
-      "add_document": "ஆவணத்தைச் சேர்க்கவும்",
+      "add_datatable": "தரவுத்தளத்தை பதிவேற்றவும்",
+      "add_document": "ஒரு ஆவணத்தைப் பதிவேற்றவும்",
       "add_fact": "தகவலை சேர்க்கவும்",
       "add_list": "பட்டியலைச் சேர்க்கவும்",
-      "add_observation": "அவதானிப்புகளை சேர்க்கவும்",
+      "add_observation": "ஒற்றை கவனிப்பைப் பதிவேற்றவும்",
       "add_trait_or_value": "பண்பு / மதிப்பு சேர்க்கவும்",
-      "contribute_to_map": "வரைபடத்திற்கு பங்களிக்கவும்",
+      "contribute_to_map": "ஒரு வரைபடத்தைப் பதிவேற்றவும்",
       "contribute_to_species": "இனங்களிற்கு பங்களிக்கவும்",
+      "grouped_menu_title": {
+        "documents": "ஆவணங்கள்",
+        "maps": "வரைபடங்கள்",
+        "observations": "அவதானிப்புகள்",
+        "species": "இனங்கள்"
+      },
       "text_curation": "உரை க்யூரேஷன்",
       "title": "பங்களிக்கவும்"
     },
