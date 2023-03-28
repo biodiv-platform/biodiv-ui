@@ -4,6 +4,7 @@
   "member_only": "કૃપા કરીને અવલોકનો અપલોડ કરવા માટે ગ્રુપમાં જોડાઓ",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "બેચ અપલોડ કરો",
       "add_data_package": "ડેટા પેકેજ ઉમેરો",
       "add_dataset": "ડેટાસેટ ઉમેરો",
       "add_datatable": "ડેટાટેબલ ઉમેરો",
@@ -14,6 +15,12 @@
       "add_trait_or_value": "વિશેષતા / મૂલ્ય ઉમેરો",
       "contribute_to_map": "નકશામાં ફાળો આપે છે",
       "contribute_to_species": "પ્રજાતિઓમા ફાળો આપો",
+      "grouped_menu_title": {
+        "documents": "દસ્તાવેજો",
+        "maps": "નકશા",
+        "observations": "અવલોકનો",
+        "species": "પ્રજાતિઓ"
+      },
       "text_curation": "ટેક્સ્ટ ક્યૂરેશન",
       "title": "ફાળો આપો"
     },

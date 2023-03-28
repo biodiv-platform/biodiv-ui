@@ -4,6 +4,7 @@
   "member_only": "ವೀಕ್ಷಣೆಗಳನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಲು ದಯವಿಟ್ಟು ಗುಂಪನ್ನು ಸೇರಿಕೊಳ್ಳಿ",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "ಬ್ಯಾಚ್ ಅನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
       "add_data_package": "ಡೇಟಾ ಪ್ಯಾಕೇಜ್ ಸೇರಿಸಿ",
       "add_dataset": "ಡೇಟಾಸೆಟ್ ಸೇರಿಸಿ",
       "add_datatable": "ಡೇಟಾಟೇಬಲ್ ಸೇರಿಸಿ",
@@ -14,6 +15,12 @@
       "add_trait_or_value": "ಗುಣಲಕ್ಷಣ / ಮೌಲ್ಯವನ್ನು ಸೇರಿಸಿ",
       "contribute_to_map": "ಭೂಪಟಕ್ಕೆ ಕೊಡುಗೆ ನೀಡಿ",
       "contribute_to_species": "ಪ್ರಭೇದಗಳಿಗೆ ಕೊಡುಗೆ ನೀಡಿ",
+      "grouped_menu_title": {
+        "documents": "ದಾಖಲೆಗಳು",
+        "maps": "ನಕ್ಷೆಗಳು",
+        "observations": "ಅವಲೋಕನಗಳು",
+        "species": "ಜಾತಿಗಳು"
+      },
       "text_curation": "ಪಠ್ಯ ಕ್ಯುರೇಶನ್",
       "title": "ಕೊಡುಗೆ ನೀಡಿ"
     },

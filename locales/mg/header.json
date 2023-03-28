@@ -4,6 +4,7 @@
   "member_only": "Miangavy anao hiaraka amin'ny vondrona mba hampakatra fandinihana",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "Upload Batch",
       "add_data_package": "Ampio ny fonosana data",
       "add_dataset": "Ampio Dataset",
       "add_datatable": "Ampio Datatable",
@@ -14,6 +15,12 @@
       "add_trait_or_value": "Manampia trait / sanda",
       "contribute_to_map": "Mandray anjara amin'ny sarintany",
       "contribute_to_species": "Mandray anjara amin'ny karazana",
+      "grouped_menu_title": {
+        "documents": "Docs",
+        "maps": "Maps",
+        "observations": "fanamarihana",
+        "species": "karazana"
+      },
       "text_curation": "Text Curation",
       "title": "Mandray anjara"
     },

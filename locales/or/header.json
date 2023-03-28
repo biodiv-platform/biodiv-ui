@@ -4,6 +4,7 @@
   "member_only": "ପର୍ଯ୍ୟବେକ୍ଷଣକୁ ଅପଲୋଡ୍ କରିବା ପାଇଁ ଦୟାକରି ଗୋଷ୍ଠୀରେ ଯୋଗ ଦିଅନ୍ତୁ |",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "ବ୍ୟାଚ୍ ଅପଲୋଡ୍ କରନ୍ତୁ |",
       "add_data_package": "ଡାଟା ପ୍ୟାକେଜ୍ ଯୋଡନ୍ତୁ |",
       "add_dataset": "ଡାଟାସେଟ୍ ଯୋଡନ୍ତୁ |",
       "add_datatable": "ଡାଟାବେସ୍ ଯୋଡନ୍ତୁ |",
@@ -14,6 +15,12 @@
       "add_trait_or_value": "ଗୁଣ / ମୂଲ୍ୟ ଯୋଡନ୍ତୁ |",
       "contribute_to_map": "ମାନଚିତ୍ରରେ ସହଯୋଗ କରନ୍ତୁ |",
       "contribute_to_species": "ପ୍ରଜାତିର ଯୋଗଦାନ କରନ୍ତୁ |",
+      "grouped_menu_title": {
+        "documents": "ଡକ୍ୟୁମେଣ୍ଟ୍ |",
+        "maps": "ମାନଚିତ୍ରଗୁଡିକ",
+        "observations": "ପର୍ଯ୍ୟବେକ୍ଷଣ",
+        "species": "ପ୍ରଜାତିଗୁଡିକ |"
+      },
       "text_curation": "ପାଠ୍ୟ କ୍ୟୁରେସନ୍ |",
       "title": "ସହଯୋଗ କରନ୍ତୁ |"
     },

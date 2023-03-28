@@ -19,26 +19,37 @@ export default [
       {
         active: SITE_CONFIG.OBSERVATION.ACTIVE,
         name: "add_observation",
+        to: "/observation/create/single",
+        memberOnly: true,
+        group: "observations"
+      },
+      {
+        active: SITE_CONFIG.OBSERVATION.ACTIVE,
+        name: "add_batch_observation",
         to: "/observation/create",
-        memberOnly: true
+        memberOnly: true,
+        group: "observations"
       },
       {
         active: SITE_CONFIG.DATATABLE.ACTIVE,
         name: "add_datatable",
         to: "/datatable/create",
-        memberOnly: true
+        memberOnly: true,
+        group: "observations"
       },
       {
         active: SITE_CONFIG.SPECIES.ACTIVE,
         name: "contribute_to_species",
         to: "/species/contribute",
-        memberOnly: true
+        memberOnly: true,
+        group: "species"
       },
       {
         active: SITE_CONFIG.MAP.ACTIVE,
         name: "contribute_to_map",
         to: "/map/create",
-        role: [Role.Admin]
+        role: [Role.Admin],
+        group: "map"
       },
       /*
     {
@@ -49,7 +60,8 @@ export default [
       {
         active: SITE_CONFIG.DOCUMENT.ACTIVE,
         name: "add_document",
-        to: "/document/create"
+        to: "/document/create",
+        group: "document"
         /*
       {
         name: "add_dataset",

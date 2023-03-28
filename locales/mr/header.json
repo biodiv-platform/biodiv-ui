@@ -4,6 +4,7 @@
   "member_only": "कृपया निरीक्षणे अपलोड करण्यासाठी गटात सामील व्हा",
   "menu_primary": {
     "contribute": {
+      "add_batch_observation": "बॅच अपलोड करा",
       "add_data_package": "डेटा पॅकेज जोडा",
       "add_dataset": "डेटासेट जोडा",
       "add_datatable": "डेटाटेबल जोडा",
@@ -14,6 +15,12 @@
       "add_trait_or_value": "गुणधर्म / मूल्य जोडा",
       "contribute_to_map": "नकाशा योगदान",
       "contribute_to_species": "प्रजातींमध्ये योगदान",
+      "grouped_menu_title": {
+        "documents": "कागदपत्रे",
+        "maps": "नकाशे",
+        "observations": "निरीक्षणे",
+        "species": "प्रजाती"
+      },
       "text_curation": "मजकूर क्युरेशन",
       "title": "योगदान"
     },
