@@ -3,8 +3,9 @@ import useGlobalState from "@hooks/use-global-state";
 import { DocumentData } from "@interfaces/custom";
 import { UserGroupIbp } from "@interfaces/document";
 import { axGroupList } from "@services/app.service";
-import { axGetDocumentSpeciesGroups, axGetListData } from "@services/document.service";
+import { axGetListData } from "@services/document.service";
 import { axGetLandscapeList } from "@services/landscape.service";
+import { axGetSpeciesGroupList } from "@services/taxonomy.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
@@ -56,7 +57,7 @@ export const DocumentFilterProvider = (props) => {
       window.history.pushState("", "", `?${stringify({ ...filter.f, offset: initialOffset })}`);
     }
 
-    axGetDocumentSpeciesGroups().then(({ data: species }) => {
+    axGetSpeciesGroupList().then(({ data: species }) => {
       setSpecies(species);
     });
     axGetAllHabitat().then(({ data: habitat }) => {
