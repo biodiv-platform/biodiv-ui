@@ -141,16 +141,6 @@ export const axGetDocumentPermissions = async (documentId) => {
   }
 };
 
-export const axGetDocumentSpeciesGroups = async () => {
-  try {
-    const { data } = await plainHttp.get(`${ENDPOINT.DOCUMENT}/v1/services/speciesGroup/all`);
-    return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false, data: [] };
-  }
-};
-
 export const axGetDocumentTypes = async () => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.DOCUMENT}/v1/services/bib/item/all`);
