@@ -237,7 +237,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
         observation,
         {
           languageId,
-          fields: observation.customFields,
+          fields: observation.customFields ? observation.customFields : [],
           currentGroupId: currentGroup.id
         },
         false
