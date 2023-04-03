@@ -49,65 +49,78 @@ export default function GroupedSubMenu({ rows, prefix = "" }) {
   const { t, lang } = useTranslation();
   const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
 
-  const observationRows = rows.filter((r) => r.group === "observations");
-  const speciesRows = rows.filter((r) => r.group === "species");
-  const mapRows = rows.filter((r) => r.group === "map");
-  const documentRows = rows.filter((r) => r.group === "document");
+  const observationRows = rows.filter((r) => r.group === "observations" && r.active == true);
+  const speciesRows = rows.filter((r) => r.group === "species" && r.active == true);
+  const mapRows = rows.filter((r) => r.group === "map" && r.active == true);
+  const documentRows = rows.filter((r) => r.group === "document" && r.active == true);
 
   return (
     <MenuList>
-      <MenuGroup
-        title={t("header:menu_primary.contribute.grouped_menu_title.observations")}
-        height="full"
-      >
-        <MenuGroupItems
-          rows={observationRows}
-          prefix={prefix}
-          translate={t}
-          lang={lang}
-          isCurrentGroupMember={isCurrentGroupMember}
-          isLoggedIn={isLoggedIn}
-        />
-      </MenuGroup>
+      {observationRows.length > 0 && (
+        <div>
+          <MenuGroup
+            title={t("header:menu_primary.contribute.grouped_menu_title.observations")}
+            height="full"
+          >
+            <MenuGroupItems
+              rows={observationRows}
+              prefix={prefix}
+              translate={t}
+              lang={lang}
+              isCurrentGroupMember={isCurrentGroupMember}
+              isLoggedIn={isLoggedIn}
+            />
+          </MenuGroup>
+          <MenuDivider />
+        </div>
+      )}
 
-      <MenuDivider />
+      {speciesRows.length > 0 && (
+        <div>
+          <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.species")}>
+            <MenuGroupItems
+              rows={speciesRows}
+              prefix={prefix}
+              translate={t}
+              lang={lang}
+              isCurrentGroupMember={isCurrentGroupMember}
+              isLoggedIn={isLoggedIn}
+            />
+          </MenuGroup>
 
-      <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.species")}>
-        <MenuGroupItems
-          rows={speciesRows}
-          prefix={prefix}
-          translate={t}
-          lang={lang}
-          isCurrentGroupMember={isCurrentGroupMember}
-          isLoggedIn={isLoggedIn}
-        />
-      </MenuGroup>
+          <MenuDivider />
+        </div>
+      )}
 
-      <MenuDivider />
+      {mapRows.length > 0 && (
+        <div>
+          <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.maps")}>
+            <MenuGroupItems
+              rows={mapRows}
+              prefix={prefix}
+              translate={t}
+              lang={lang}
+              isCurrentGroupMember={isCurrentGroupMember}
+              isLoggedIn={isLoggedIn}
+            />
+          </MenuGroup>
 
-      <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.maps")}>
-        <MenuGroupItems
-          rows={mapRows}
-          prefix={prefix}
-          translate={t}
-          lang={lang}
-          isCurrentGroupMember={isCurrentGroupMember}
-          isLoggedIn={isLoggedIn}
-        />
-      </MenuGroup>
+          <MenuDivider />
+        </div>
+      )}
 
-      <MenuDivider />
-
-      <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.documents")}>
-        <MenuGroupItems
-          rows={documentRows}
-          prefix={prefix}
-          translate={t}
-          lang={lang}
-          isCurrentGroupMember={isCurrentGroupMember}
-          isLoggedIn={isLoggedIn}
-        />
-      </MenuGroup>
+      {documentRows.length > 0 && (
+        <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.documents")}>
+          <MenuGroupItems
+            rows={documentRows}
+            prefix={prefix}
+            translate={t}
+            lang={lang}
+            isCurrentGroupMember={isCurrentGroupMember}
+            isLoggedIn={isLoggedIn}
+          />
+        </MenuGroup>
+      )}
     </MenuList>
   );
 }
