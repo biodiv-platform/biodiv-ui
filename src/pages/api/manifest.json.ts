@@ -6,7 +6,7 @@ const getIcon = (p) => ({
   src: compiledMessage(RESOURCE_SIZE.MANIFEST, p).replace("/crop/", "/logo/"),
   sizes: `${p.size}x${p.size}`,
   type: "image/png",
-  purpose: "any maskable"
+  purpose: p.purpose
 });
 
 export default (req, res) => {
@@ -24,6 +24,9 @@ export default (req, res) => {
     theme_color: "#363636",
     display: "standalone",
     start_url: "/",
-    icons: [getIcon({ icon, size: 192 }), getIcon({ icon, size: 512 })]
+    icons: [
+      getIcon({ icon, size: 192, purpose: "any" }),
+      getIcon({ icon, size: 512, purpose: "maskable" })
+    ]
   });
 };
