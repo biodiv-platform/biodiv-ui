@@ -72,3 +72,17 @@ export const axAddSpeciesComment = async (payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axDeleteObservationComment = async (commentId, payload) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.post(
+      `${ENDPOINT.OBSERVATION}/v1/observation/delete/comment/${commentId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

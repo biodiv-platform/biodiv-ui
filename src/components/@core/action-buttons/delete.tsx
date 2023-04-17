@@ -23,8 +23,14 @@ export default function DeleteActionButton({
   deleteGnfinderName = false,
   description,
   deleted,
+  deleteComment = false,
+  commentDeletePayload = {},
   refreshFunc = () => {
     return null;
+  },
+
+  refreshActivity = (): Promise<void> => {
+    return Promise.resolve();
   }
 }) {
   const { t } = useTranslation();
@@ -33,15 +39,28 @@ export default function DeleteActionButton({
   const cancelRef = React.useRef(null);
 
   const handleOnDelete = async () => {
-    const { success } = await deleteFunc(observationId);
-    if (success) {
-      notification(deleted, NotificationType.Success);
-      if (deleteGnfinderName) {
-        refreshFunc();
+    if (deleteComment) {
+      // add AJAX call for deleting the comment
+
+      const { success } = await deleteFunc(observationId, commentDeletePayload);
+
+      if (success) {
+        notification(deleted, NotificationType.Success);
+        refreshActivity();
+      } else {
+        notification("comment could not be removed", NotificationType.Error);
       }
-      onClose();
-      if (!deleteGnfinderName) {
-        router.push("/", true);
+    } else {
+      const { success } = await deleteFunc(observationId);
+      if (success) {
+        notification(deleted, NotificationType.Success);
+        if (deleteGnfinderName) {
+          refreshFunc();
+        }
+        onClose();
+        if (!deleteGnfinderName) {
+          router.push("/", true);
+        }
       }
     }
   };
