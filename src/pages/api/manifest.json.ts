@@ -26,6 +26,7 @@ export default (req, res) => {
     start_url: "/",
     icons: [
       getIcon({ icon, size: 192, purpose: "any" }),
+      getIcon({ icon, size: 192, purpose: "maskable" }),
       getIcon({ icon, size: 512, purpose: "maskable" })
     ]
   });
