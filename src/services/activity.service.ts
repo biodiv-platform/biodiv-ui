@@ -88,6 +88,12 @@ export const axDeleteObservationComment = async (commentId, payload) => {
         payload
       );
       return { success: true, data };
+    } else if (payload.rootHolderType == "species") {
+      const { data } = await http.post(
+        `${ENDPOINT.SPECIES}/v1/species/delete/comment/${commentId}`,
+        payload
+      );
+      return { success: true, data };
     }
   } catch (e) {
     console.error(e);
