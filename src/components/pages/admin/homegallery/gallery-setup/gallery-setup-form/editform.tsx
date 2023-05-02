@@ -93,6 +93,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           label={t("group:homepage_customization.table.description")}
         />
 
+        <TextBoxField name="readMoreText" label="Read more button text" maxLength={30} />
+
         <CheckboxField name="truncated" label={t("group:homepage_customization.table.enabled")} />
 
         <SubmitButton>{t("common:update")}</SubmitButton>
