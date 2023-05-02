@@ -1,5 +1,5 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Center, Heading, Link, Text } from "@chakra-ui/react";
+import { Button, Center, Heading, Link, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
 import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
@@ -9,6 +9,9 @@ import React, { useMemo } from "react";
 
 export default function Sidebar({ resource }) {
   const { t } = useTranslation();
+
+  const readMoreButtonText =
+    resource.readMoreText == null ? t("common:read_more") : resource.readMoreText;
 
   const bgThumb = useMemo(() => {
     const resourceType = resource.authorId ? RESOURCE_CTX.OBSERVATION : RESOURCE_CTX.USERGROUPS;
@@ -32,11 +35,13 @@ export default function Sidebar({ resource }) {
             {resource.customDescripition}
           </Text>
           {resource.moreLinks && (
-            <LocalLink href={resource.moreLinks}>
-              <Link>
-                {t("common:read_more")} <ArrowForwardIcon />
-              </Link>
-            </LocalLink>
+            <Button colorScheme="teal" variant="solid">
+              <LocalLink href={resource.moreLinks}>
+                <Link>
+                  {readMoreButtonText} <ArrowForwardIcon />
+                </Link>
+              </LocalLink>
+            </Button>
           )}
         </div>
       </Center>
