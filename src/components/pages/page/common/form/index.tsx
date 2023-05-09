@@ -134,6 +134,7 @@ export default function PageForm({
         )}
 
         <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
+        <SwitchField name="allowComments" mb={2} label="Allow comments" />
         <SubmitButton>{submitLabel}</SubmitButton>
       </form>
     </FormProvider>
