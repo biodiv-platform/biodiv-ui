@@ -74,7 +74,8 @@ export default function PageForm({
             then: Yup.string().required("Content is required")
           }),
         parentId: hideParentId ? Yup.number().notRequired() : Yup.number().required(),
-        sticky: Yup.boolean().required()
+        sticky: Yup.boolean().required(),
+        allowComments: Yup.boolean().required()
       })
     ),
     defaultValues
