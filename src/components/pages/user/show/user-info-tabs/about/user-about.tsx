@@ -2,15 +2,12 @@ import { SimpleGrid } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLinkList from "@components/@core/blue-link/external-list";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
-import useGlobalState from "@hooks/use-global-state";
 import { timeAgoUTC } from "@utils/date";
 import React from "react";
 
 import { UserProfileProps } from "../../";
 
 export default function UserAbout({ user }: UserProfileProps) {
-  const { isLoggedIn } = useGlobalState();
-
   const aboutLinks = [
     {
       title: "user:about",
@@ -27,7 +24,7 @@ export default function UserAbout({ user }: UserProfileProps) {
     },
     {
       title: "user:email",
-      value: isLoggedIn,
+      value: user.email,
       cell: <BlueLink href={`mailto:${user.email}`}>{user.email}</BlueLink>
     },
     {

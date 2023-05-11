@@ -32,5 +32,6 @@ export default {
   UNFLAGGED: "unflagged",
   UPDATED_COMMON_NAME: "Updated common name",
   UPDATED_FACT: "Updated fact",
-  UPDATED_SYNONYM: "Updated synonym"
+  UPDATED_SYNONYM: "Updated synonym",
+  PAGE_UPDATED: "Page updated"
 };
