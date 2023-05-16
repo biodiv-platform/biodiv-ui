@@ -78,7 +78,7 @@ export const preProcessObservations = async (
       canPredict &&
       SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE &&
       r.blob &&
-      resourceTypeFileFormat in ACCEPTED_FILE_TYPES["image/*"]
+      ACCEPTED_FILE_TYPES["image/*"].includes(resourceTypeFileFormat)
     ) {
       predictionResponse = await predictResource({ resource: r, userId, speciesGroups });
     }
