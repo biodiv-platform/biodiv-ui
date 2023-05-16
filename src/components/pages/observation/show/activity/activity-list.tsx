@@ -6,7 +6,7 @@ import Tooltip from "@components/@core/tooltip";
 import Badge from "@components/@core/user/badge";
 import useActivity from "@hooks/use-activity";
 import useGlobalState from "@hooks/use-global-state";
-import { axDeleteObservationComment } from "@services/activity.service";
+import { axDeleteComment } from "@services/activity.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import { adminOrAuthor } from "@utils/auth";
 import { toKey } from "@utils/basic";
@@ -118,7 +118,7 @@ export default function ActivityList({ resourceId, resourceType, title = "common
                 title="Delete comment"
                 description="Are you sure you want to delete this comment?"
                 deleted="comment removed successfully"
-                deleteFunc={axDeleteObservationComment}
+                deleteFunc={axDeleteComment}
                 refreshActivity={activity.refresh}
                 deleteComment={true}
                 commentDeletePayload={{

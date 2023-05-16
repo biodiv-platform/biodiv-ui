@@ -73,7 +73,7 @@ export const axAddSpeciesComment = async (payload) => {
   }
 };
 
-export const axDeleteObservationComment = async (commentId, payload) => {
+export const axDeleteComment = async (commentId, payload) => {
   try {
     await waitForAuth();
     if (payload.rootHolderType == "observation") {
