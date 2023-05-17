@@ -72,3 +72,43 @@ export const axAddSpeciesComment = async (payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axDeleteComment = async (commentId, payload) => {
+  try {
+    await waitForAuth();
+    if (payload.rootHolderType == "observation") {
+      const { data } = await http.post(
+        `${ENDPOINT.OBSERVATION}/v1/observation/delete/comment/${commentId}`,
+        payload
+      );
+      return { success: true, data };
+    } else if (payload.rootHolderType == "document") {
+      const { data } = await http.post(
+        `${ENDPOINT.DOCUMENT}/v1/services/delete/comment/${commentId}`,
+        payload
+      );
+      return { success: true, data };
+    } else if (payload.rootHolderType == "species") {
+      const { data } = await http.post(
+        `${ENDPOINT.SPECIES}/v1/species/delete/comment/${commentId}`,
+        payload
+      );
+      return { success: true, data };
+    } else if (payload.rootHolderType == "page") {
+      const { data } = await http.post(
+        `${ENDPOINT.PAGES}/v1/page/delete/comment/${commentId}`,
+        payload
+      );
+      return { success: true, data };
+    } else if (payload.rootHolderType == "datatable") {
+      const { data } = await http.post(
+        `${ENDPOINT.DATATABLE}/v1/services/delete/comment/${commentId}`,
+        payload
+      );
+      return { success: true, data };
+    }
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

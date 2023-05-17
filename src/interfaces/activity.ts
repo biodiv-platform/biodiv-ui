@@ -44,6 +44,7 @@ export interface CommentLoggingData {
   mailData?: MailData;
 }
 export interface CommentsIbp {
+  id?: number;
   body?: string;
 }
 export interface DocumentActivityLogging {

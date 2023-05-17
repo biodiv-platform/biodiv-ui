@@ -8,6 +8,7 @@
   "created_species": "species created",
   "custom_field_edited": "custom field edited",
   "datatable_created": "datatable created",
+  "deleted_a_comment": "Deleted a comment",
   "deleted_common_name": "deleted common name",
   "deleted_species_field": "deleted species field",
   "deleted_synonym": "deleted synonym",
@@ -24,6 +25,7 @@
   "observation_updated": "observation updated",
   "obv_locked": "locked observation",
   "obv_unlocked": "unlocked observation",
+  "page_updated": "page updated",
   "posted_resource": "posted to group",
   "rated_media_resource": "rated media resource",
   "removed_resoruce": "removed resource",
@@ -36,6 +38,5 @@
   "updated_fact": "updated fact",
   "updated_species_field": "updated species field",
   "updated_species_gallery": "updated species gallery",
-  "updated_synonym": "updated synonym",
-  "page_updated": "page updated"
+  "updated_synonym": "updated synonym"
 }

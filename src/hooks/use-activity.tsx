@@ -1,8 +1,8 @@
 import { axListActivity } from "@services/activity.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
-export default function useActivity() {
+export default function useActivity(resourceId, resourceType) {
   const [isLoading, setIsLoading] = useState<boolean>();
 
   const [activity, setActivity] = useImmer({
@@ -30,5 +30,11 @@ export default function useActivity() {
     setIsLoading(false);
   };
 
-  return { data: activity, isLoading, loadMore };
+  const refreshActivityList = () => loadMore(resourceType, resourceId, true);
+
+  useEffect(() => {
+    refreshActivityList();
+  }, []);
+
+  return { data: activity, isLoading, loadMore, refresh: refreshActivityList };
 }

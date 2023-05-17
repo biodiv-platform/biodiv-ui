@@ -146,10 +146,10 @@
       "leaf": "leaf"
     },
     "pedictions_ready": "Predictions ready. Click above to view",
+    "please_select_a_maximum_of_5_images": "Please select a maximum of 5 images.",
     "prediction_label": "Prediction",
     "select_Images": "Select Images",
-    "select_plant_organ": "select plant organ",
-    "please_select_a_maximum_of_5_images":"Please select a maximum of 5 images."
+    "select_plant_organ": "select plant organ"
   },
   "post_to_groups": "Post to Groups",
   "range_hint": "use : to septate range values",
