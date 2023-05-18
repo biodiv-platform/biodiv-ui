@@ -9,7 +9,7 @@ import React, { useMemo } from "react";
 
 const ReadMore = ({ resource, readMoreButtonText, readMoreUIType }) => {
   return resource.moreLinks && readMoreUIType == "button" ? (
-    <Button colorScheme="teal" variant="solid" size="lg">
+    <Button colorScheme="teal" variant="solid" size="lg" fontSize="xl">
       <LocalLink href={resource.moreLinks}>
         <Link>
           {readMoreButtonText} <ArrowForwardIcon />
