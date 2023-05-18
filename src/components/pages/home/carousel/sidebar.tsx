@@ -2,10 +2,8 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Button, Center, Heading, Link, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
 import LocalLink from "@components/@core/local-link";
-import { RESOURCE_SIZE } from "@static/constants";
-import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React from "react";
 
 const ReadMore = ({ resource, readMoreButtonText, readMoreUIType }) => {
   return resource.moreLinks && readMoreUIType == "button" ? (
@@ -33,13 +31,8 @@ export default function Sidebar({ resource }) {
 
   const readMoreUIType = resource.readMoreUIType;
 
-  const bgThumb = useMemo(() => {
-    const resourceType = resource.authorId ? RESOURCE_CTX.OBSERVATION : RESOURCE_CTX.USERGROUPS;
-    return getResourceThumbnail(resourceType, resource?.fileName, RESOURCE_SIZE.THUMBNAIL);
-  }, [resource?.fileName]);
-
   return (
-    <BlurBox bg={bgThumb} fallbackColor="var(--chakra-colors-gray-800)">
+    <BlurBox fallbackColor="var(--chakra-colors-gray-800)">
       <Center h="full" p={{ base: 6, lg: 8 }}>
         <div>
           <Heading
