@@ -1,6 +1,7 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Image } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
+import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
@@ -19,6 +20,11 @@ import { FormProvider, useForm } from "react-hook-form";
 export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData }) {
   const { t } = useTranslation();
 
+  const readMoreUIOptions = [
+    { label: "link", value: "link" },
+    { label: "button", value: "button" }
+  ];
+
   const {
     id,
     title,
@@ -27,7 +33,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     moreLinks,
     displayOrder,
     observationId,
-    truncated
+    truncated,
+    readMoreUIType
   } = editGalleryData;
 
   const hForm = useForm<any>({
@@ -41,7 +48,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
       moreLinks,
       displayOrder,
       observationId,
-      truncated
+      truncated,
+      readMoreUIType
     }
   });
 
@@ -94,6 +102,13 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         />
 
         <TextBoxField name="readMoreText" label="Read more button text" maxLength={30} />
+
+        <SelectInputField
+          name="readMoreUIType"
+          label="Read more UI type"
+          options={readMoreUIOptions}
+          shouldPortal={true}
+        />
 
         <CheckboxField name="truncated" label={t("group:homepage_customization.table.enabled")} />
 
