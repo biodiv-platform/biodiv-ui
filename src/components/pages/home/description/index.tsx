@@ -44,6 +44,7 @@ const DescriptionBox = styled.div`
 export default function HomeDescription({ description, mb = 10 }) {
   return (
     <Box
+      id="description"
       mb={mb}
       as={DescriptionBox}
       dangerouslySetInnerHTML={{
