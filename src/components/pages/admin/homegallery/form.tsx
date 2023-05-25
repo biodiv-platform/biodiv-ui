@@ -1,13 +1,16 @@
 import { Box, Button } from "@chakra-ui/react";
-import { RichTextareaField } from "@components/form/rich-textarea";
 import { SwitchField } from "@components/form/switch";
+import { axUploadEditorPageResource } from "@services/pages.service";
 import { axInsertHomePageGallery } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import GallerySetup from "./gallery-setup";
+
+const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
 export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
   const { t } = useTranslation();
@@ -84,7 +87,11 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
             <SwitchField name="showDonors" label="Show donors" />
             <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
           </Box>
-          <RichTextareaField name="description" label={t("form:description.title")} />
+          <WYSIWYGField
+            name="description"
+            label={t("form:description.title")}
+            uploadHandler={axUploadEditorPageResource}
+          />
         </form>
       </FormProvider>
       <GallerySetup
