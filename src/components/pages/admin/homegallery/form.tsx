@@ -25,6 +25,8 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
     showRecentObservation,
     showGridMap,
     showPartners,
+    showSponsors,
+    showDonors,
     showDesc,
     description
   } = homePageDetails;
@@ -38,6 +40,8 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
       showRecentObservation,
       showGridMap,
       showPartners,
+      showSponsors,
+      showDonors,
       showDesc,
       description
     }
@@ -76,6 +80,8 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
               label={t("group:homepage_customization.observation_map")}
             />
             <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
+            <SwitchField name="showSponsors" label="Show sponsors" />
+            <SwitchField name="showDonors" label="Show donors" />
             <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
           </Box>
           <RichTextareaField name="description" label={t("form:description.title")} />

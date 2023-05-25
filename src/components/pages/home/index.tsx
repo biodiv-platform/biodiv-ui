@@ -20,6 +20,7 @@ const { HOME } = SITE_CONFIG;
 export default function HomePageComponent({ homeInfo }) {
   const { currentGroup } = useGlobalState();
   const showFeatures = !currentGroup?.id;
+
   const { t } = useTranslation();
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
@@ -31,21 +32,21 @@ export default function HomePageComponent({ homeInfo }) {
       {homeInfo.showRecentObservation && SITE_CONFIG.OBSERVATION.ACTIVE && <RecentObservations />}
       {homeInfo.showGridMap && SITE_CONFIG.MAP.ACTIVE && SITE_CONFIG.HOME.MAP && <Map />}
       {showFeatures && HOME.FEATURES && <Features />}
-      {showFeatures && HOME.PARTNERS && (
+      {showFeatures && homeInfo.showPartners && (
         <Supporters
           title={t("home:partners")}
           list={partnersList}
           imagePrefix="/partners-images/"
         />
       )}
-      {showFeatures && HOME.SPONSORS && (
+      {showFeatures && homeInfo.showSponsors && (
         <Supporters
           title={t("home:sponsors")}
           list={sponsorsList}
           imagePrefix="/next-assets/sponsors/"
         />
       )}
-      {showFeatures && HOME.DONORS && (
+      {showFeatures && homeInfo.showDonors && (
         <Supporters title={t("home:donors")} list={donorsList} imagePrefix="/donors-images/" />
       )}
     </Box>
