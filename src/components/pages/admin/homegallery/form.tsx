@@ -1,6 +1,6 @@
 import { Box, Button } from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
-import { axUploadEditorPageResource } from "@services/pages.service";
+import { axUploadHomePageEditorResource } from "@services/pages.service";
 import { axInsertHomePageGallery } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
@@ -90,7 +90,7 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
           <WYSIWYGField
             name="description"
             label={t("form:description.title")}
-            uploadHandler={axUploadEditorPageResource}
+            uploadHandler={axUploadHomePageEditorResource}
           />
         </form>
       </FormProvider>
