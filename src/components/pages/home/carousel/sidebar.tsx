@@ -7,19 +7,41 @@ import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
+const ReadMore = ({ resource, readMoreButtonText, readMoreUIType }) => {
+  return resource.moreLinks && readMoreUIType == "button" ? (
+    <Button colorScheme="teal" variant="solid" size="lg" fontSize="xl">
+      <LocalLink href={resource.moreLinks}>
+        <Link>
+          {readMoreButtonText} <ArrowForwardIcon />
+        </Link>
+      </LocalLink>
+    </Button>
+  ) : (
+    <LocalLink href={resource.moreLinks}>
+      <Link>
+        {readMoreButtonText} <ArrowForwardIcon />
+      </Link>
+    </LocalLink>
+  );
+};
+
 export default function Sidebar({ resource }) {
   const { t } = useTranslation();
 
   const readMoreButtonText =
     resource.readMoreText == null ? t("common:read_more") : resource.readMoreText;
 
+  const readMoreUIType = resource.readMoreUIType;
+
   const bgThumb = useMemo(() => {
     const resourceType = resource.authorId ? RESOURCE_CTX.OBSERVATION : RESOURCE_CTX.USERGROUPS;
     return getResourceThumbnail(resourceType, resource?.fileName, RESOURCE_SIZE.THUMBNAIL);
   }, [resource?.fileName]);
 
+  const bg = resource.gallerySidebar === "translucent" ? bgThumb : "";
+
   return (
-    <BlurBox bg={bgThumb} fallbackColor="var(--chakra-colors-gray-800)">
+    <BlurBox bg={bg} fallbackColor="var(--chakra-colors-gray-800)">
       <Center h="full" p={{ base: 6, lg: 8 }}>
         <div>
           <Heading
@@ -34,15 +56,11 @@ export default function Sidebar({ resource }) {
           <Text fontSize={{ md: "sm", lg: "lg" }} mb={4} maxH="14rem" overflow="auto">
             {resource.customDescripition}
           </Text>
-          {resource.moreLinks && (
-            <Button colorScheme="teal" variant="solid">
-              <LocalLink href={resource.moreLinks}>
-                <Link>
-                  {readMoreButtonText} <ArrowForwardIcon />
-                </Link>
-              </LocalLink>
-            </Button>
-          )}
+          <ReadMore
+            resource={resource}
+            readMoreButtonText={readMoreButtonText}
+            readMoreUIType={readMoreUIType}
+          />
         </div>
       </Center>
     </BlurBox>

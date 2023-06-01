@@ -24,6 +24,26 @@ export const axUploadEditorPageResource = async (blobInfo) => {
   });
 };
 
+export const axUploadHomePageEditorResource = async (blobInfo) => {
+  return new Promise((success, failure) => {
+    const formData = new FormData();
+    formData.append("upload", blobInfo.blob(), blobInfo.filename());
+    formData.append("hash", nanoid());
+    formData.append("directory", "homePage");
+
+    http
+      .post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
+        headers: formDataHeaders
+      })
+      .then((r) => {
+        success(`${ENDPOINT.FILES}/get/raw/homePage${r.data.uri}`);
+      })
+      .catch(() => {
+        failure("Error");
+      });
+  });
+};
+
 export const axGetPageByID = async (pageId, format?) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.PAGES}/v1/page/${pageId}`, {

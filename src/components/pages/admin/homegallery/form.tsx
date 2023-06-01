@@ -1,11 +1,16 @@
 import { Box, Button } from "@chakra-ui/react";
+import { SwitchField } from "@components/form/switch";
+import { axUploadHomePageEditorResource } from "@services/pages.service";
 import { axInsertHomePageGallery } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import GallerySetup from "./gallery-setup";
+
+const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
 export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
   const { t } = useTranslation();
@@ -16,12 +21,32 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
-  const { gallerySlider } = homePageDetails;
+  const {
+    gallerySlider,
+    showGallery,
+    showStats,
+    showRecentObservation,
+    showGridMap,
+    showPartners,
+    showSponsors,
+    showDonors,
+    showDesc,
+    description
+  } = homePageDetails;
 
   const hForm = useForm<any>({
     mode: "onChange",
     defaultValues: {
-      gallerySlider
+      gallerySlider,
+      showGallery,
+      showStats,
+      showRecentObservation,
+      showGridMap,
+      showPartners,
+      showSponsors,
+      showDonors,
+      showDesc,
+      description
     }
   });
 
@@ -45,7 +70,29 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
   return (
     <>
       <FormProvider {...hForm}>
-        <form onSubmit={hForm.handleSubmit(handleFormSubmit)}></form>
+        <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+          <Box width={["100%", 350]} justifyContent="space-between">
+            <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
+            <SwitchField name="showStats" label={t("group:homepage_customization.module_stats")} />
+            <SwitchField
+              name="showRecentObservation"
+              label={t("group:homepage_customization.recent_observation")}
+            />
+            <SwitchField
+              name="showGridMap"
+              label={t("group:homepage_customization.observation_map")}
+            />
+            <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
+            <SwitchField name="showSponsors" label="Show sponsors" />
+            <SwitchField name="showDonors" label="Show donors" />
+            <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
+          </Box>
+          <WYSIWYGField
+            name="description"
+            label={t("form:description.title")}
+            uploadHandler={axUploadHomePageEditorResource}
+          />
+        </form>
       </FormProvider>
       <GallerySetup
         isCreate={isCreate}
