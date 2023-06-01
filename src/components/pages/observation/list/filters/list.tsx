@@ -17,6 +17,7 @@ import Location from "./location";
 import MediaType from "./media-type";
 import Name from "./name";
 import SpeciesGroupsFilter from "./species-groups";
+import TagsFilter from "./tags";
 import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
 import TraitsFilter from "./traits";
@@ -145,6 +146,8 @@ export default function FiltersList() {
       </AccordionItem>
 
       <UserGroupFilter />
+
+      <TagsFilter />
 
       {SITE_CONFIG.CUSTOM_FIELDS.ACTIVE && (
         <AccordionItem>

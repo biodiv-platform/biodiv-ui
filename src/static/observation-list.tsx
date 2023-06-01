@@ -24,6 +24,10 @@ export const OBSERVATION_FILTER_KEY = {
   dataTableName: {
     filterKey: "dataTableName",
     searchKey: "data_table_title"
+  },
+  tags: {
+    filterKey: "tags",
+    searchKey: "tags.name"
   }
 };
 
