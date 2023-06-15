@@ -13,6 +13,7 @@ import CalendarIcon from "@icons/calendar";
 import React from "react";
 import DatePicker from "react-datepicker";
 import { Controller } from "react-hook-form";
+import { parseDate } from "@utils/date";
 
 interface DatePickerNextFieldProps {
   disabled?: boolean;
@@ -24,6 +25,8 @@ interface DatePickerNextFieldProps {
   placeholder?;
   style?;
   dateFormat?;
+  singleObservationUpload?: boolean;
+  ref?;
   inputProps?;
 }
 
@@ -38,34 +41,47 @@ export const DatePickerNextField = ({
   placeholder,
   dateFormat,
   inputProps,
+  ref,
+  singleObservationUpload = false,
   ...props
-}: DatePickerNextFieldProps) => (
-  <Controller
-    name={name}
-    render={({ field, fieldState }) => (
-      <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
-        {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-        <InputGroup>
-          <DatePicker
-            customInput={<Input />}
-            dateFormat={dateFormat || "dd-MM-yyyy"}
-            isReadOnly={disabled}
-            placeholderText={placeholder || label}
-            onChange={field.onChange}
-            selected={field.value ? new Date(field.value) : undefined}
-            maxDate={maxDate}
-            portalId={name}
-            {...(inputProps || {})}
-          />
-          <InputRightElement>
-            <label htmlFor={name} style={{ cursor: "pointer" }}>
-              <CalendarIcon color="gray.300" />
-            </label>
-          </InputRightElement>
-        </InputGroup>
-        <FormErrorMessage children={fieldState?.error?.message} />
-        {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-      </FormControl>
-    )}
-  />
-);
+}: DatePickerNextFieldProps) => {
+  return (
+    <Controller
+      name={name}
+      render={({ field, fieldState }) => {
+        return (
+          <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
+            {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+            <InputGroup>
+              <DatePicker
+                ref={inputProps}
+                customInput={<Input />}
+                dateFormat={dateFormat || "dd-MM-yyyy"}
+                isReadOnly={disabled}
+                placeholderText={placeholder || label}
+                onChange={field.onChange}
+                selected={
+                  field.value
+                    ? singleObservationUpload
+                      ? parseDate(field.value)
+                      : new Date(field.value)
+                    : undefined
+                }
+                maxDate={maxDate}
+                portalId={name}
+                {...(inputProps || {})}
+              />
+              <InputRightElement>
+                <label htmlFor={name} style={{ cursor: "pointer" }}>
+                  <CalendarIcon color="gray.300" />
+                </label>
+              </InputRightElement>
+            </InputGroup>
+            <FormErrorMessage children={fieldState?.error?.message} />
+            {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+          </FormControl>
+        );
+      }}
+    />
+  );
+};

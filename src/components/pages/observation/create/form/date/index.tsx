@@ -1,13 +1,19 @@
 import { Box, Divider, SimpleGrid } from "@chakra-ui/react";
 import { DatePickerNextField } from "@components/form/datepicker-next";
+import FormDebugger from "@components/form/debugger";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axQueryTagsByText } from "@services/observation.service";
 import { BASIS_OF_RECORD } from "@static/datatable";
+import { FORM_DATEPICKER_CHANGE } from "@static/events";
+import { formatDate, parseDate } from "@utils/date";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useListener } from "react-gbus";
+import { useController, useFormContext } from "react-hook-form";
 
 import { DATE_ACCURACY_OPTIONS } from "../options";
 
@@ -18,8 +24,31 @@ const onTagsQuery = async (q) => {
 
 export default function DateInputs({ showTags = true, isRequired = true }) {
   const { t } = useTranslation();
+  const inputRef = useRef<any>();
 
   const translatedDateOptions = useMemo(() => translateOptions(t, DATE_ACCURACY_OPTIONS), []);
+
+  const { field } = useController({ name: "observedOn" });
+  const [date, setDate] = useState(field.value ? parseDate(field.value) : undefined);
+
+  useEffect(() => {
+    if (inputRef?.current) {
+      inputRef.current.onChange = setDate;
+    }
+
+    date && field.onChange(formatDate(date));
+  }, []);
+
+  useDidUpdateEffect(() => {
+    field.onChange(formatDate(date));
+  }, [date]);
+
+  useListener(
+    (d) => {
+      d && setDate(d);
+    },
+    [`${FORM_DATEPICKER_CHANGE}${"observedOn"}`]
+  );
 
   return (
     <>
@@ -27,11 +56,13 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
         <Box>
           <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} spacing={4}>
             <DatePickerNextField
+              singleObservationUpload={true}
               name="observedOn"
               label={t("common:observed_on")}
               style={{ gridColumn: "1/3" }}
               isRequired={isRequired}
               mb={showTags ? 4 : 0}
+              ref={inputRef}
             />
             <SelectInputField
               name="dateAccuracy"
@@ -40,6 +71,7 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
               shouldPortal={true}
             />
           </SimpleGrid>
+          <FormDebugger />
           <SimpleGrid columns={showTags ? { base: 1, md: 2 } : 1} spacing={4}>
             {showTags && (
               <SelectAsyncInputField
