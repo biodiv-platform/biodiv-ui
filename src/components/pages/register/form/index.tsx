@@ -3,6 +3,7 @@ import { Box, GridItem, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import OTPModal from "@components/auth/otp-modal";
 import { CheckboxField } from "@components/form/checkbox";
+import FormDebugger from "@components/form/debugger";
 import { PhoneNumberInputField } from "@components/form/phone-number";
 import { RadioInputField } from "@components/form/radio";
 import { RecaptchaField } from "@components/form/recaptcha";
@@ -45,7 +46,9 @@ function SignUpForm() {
     mode: "onBlur",
     resolver: yupResolver(
       Yup.object().shape({
-        username: Yup.string().required(),
+        username: Yup.string()
+          .required()
+          .matches(/^[a-zA-Z0-9]+$/, "username should only contain letters and numbers"),
         mobileNumber: Yup.string().test("mobile", "${path} is not valid", (v) =>
           v ? isPossiblePhoneNumber(v) : true
         ),
@@ -100,6 +103,8 @@ function SignUpForm() {
       credentials: { ...v, verificationType },
       groupId
     };
+
+    console.log("payload=", payload);
 
     const { success, data } = await axCreateUser(payload);
 
@@ -201,6 +206,7 @@ function SignUpForm() {
           <SubmitButton rightIcon={<ArrowForwardIcon />} w="full">
             {t("user:register")}
           </SubmitButton>
+          <FormDebugger />
         </form>
       </FormProvider>
       <OTPModal isOpen={isOpen} onClose={onClose} user={user} />
