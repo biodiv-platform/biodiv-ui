@@ -55,11 +55,11 @@ export const INSTITUTION_OPTIONS = [
   },
   {
     label: "Non Governmental Organization",
-    value: "Non_governmental_organization"
+    value: "Non Governmental Organization"
   },
   {
     label: "Educational Institution",
-    value: "Educational_institution"
+    value: "Educational Institution"
   },
   {
     label: "Other",

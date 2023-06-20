@@ -104,8 +104,6 @@ function SignUpForm() {
       groupId
     };
 
-    console.log("payload=", payload);
-
     const { success, data } = await axCreateUser(payload);
 
     if (success && data?.status) {
