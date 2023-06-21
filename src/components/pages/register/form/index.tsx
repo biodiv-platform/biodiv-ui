@@ -204,7 +204,6 @@ function SignUpForm() {
           <SubmitButton rightIcon={<ArrowForwardIcon />} w="full">
             {t("user:register")}
           </SubmitButton>
-          <FormDebugger />
         </form>
       </FormProvider>
       <OTPModal isOpen={isOpen} onClose={onClose} user={user} />
