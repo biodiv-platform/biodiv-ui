@@ -3,6 +3,7 @@ import { Box, GridItem, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import OTPModal from "@components/auth/otp-modal";
 import { CheckboxField } from "@components/form/checkbox";
+import FormDebugger from "@components/form/debugger";
 import { PhoneNumberInputField } from "@components/form/phone-number";
 import { RadioInputField } from "@components/form/radio";
 import { RecaptchaField } from "@components/form/recaptcha";
@@ -68,7 +69,12 @@ function SignUpForm() {
         institution: Yup.string().nullable(),
         latitude: Yup.number().required(),
         longitude: Yup.number().required(),
-        location: Yup.string().required(),
+        location: Yup.string()
+          .required()
+          .test("location", "select a valid location from suggestions", () => {
+            const { latitude, longitude } = this.parent;
+            return latitude && longitude;
+          }),
         verificationType: Yup.string().required(),
         mode: Yup.string(),
         terms: Yup.boolean().oneOf([true], t("user:terms.required")),
@@ -204,6 +210,7 @@ function SignUpForm() {
             {t("user:register")}
           </SubmitButton>
         </form>
+        <FormDebugger />
       </FormProvider>
       <OTPModal isOpen={isOpen} onClose={onClose} user={user} />
     </>

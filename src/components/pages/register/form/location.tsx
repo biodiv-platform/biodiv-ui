@@ -24,8 +24,8 @@ export const LocationPicker = () => {
   const { latitude: lat, longitude: lng, zoom: initialZoom } = getMapCenter(4);
 
   const fieldLocationName = useController({ name: "location", defaultValue: "" });
-  const fieldLocationLat = useController({ name: "latitude", defaultValue: 0 });
-  const fieldLocationLng = useController({ name: "longitude", defaultValue: 0 });
+  const fieldLocationLat = useController({ name: "latitude", defaultValue: null });
+  const fieldLocationLng = useController({ name: "longitude", defaultValue: null });
 
   const coordinates = useMemo(
     () => ({
