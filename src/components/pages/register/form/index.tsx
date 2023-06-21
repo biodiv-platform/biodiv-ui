@@ -3,7 +3,6 @@ import { Box, GridItem, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import OTPModal from "@components/auth/otp-modal";
 import { CheckboxField } from "@components/form/checkbox";
-import FormDebugger from "@components/form/debugger";
 import { PhoneNumberInputField } from "@components/form/phone-number";
 import { RadioInputField } from "@components/form/radio";
 import { RecaptchaField } from "@components/form/recaptcha";
