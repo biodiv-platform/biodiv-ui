@@ -48,7 +48,7 @@ function SignUpForm() {
       Yup.object().shape({
         username: Yup.string()
           .required()
-          .matches(/^[a-zA-Z0-9]+$/, "username should only contain letters and numbers"),
+          .matches(/^[a-zA-Z0-9\s]+$/, "username should only contain letters and numbers"),
         mobileNumber: Yup.string().test("mobile", "${path} is not valid", (v) =>
           v ? isPossiblePhoneNumber(v) : true
         ),
