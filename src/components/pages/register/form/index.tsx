@@ -217,7 +217,6 @@ function SignUpForm() {
             {t("user:register")}
           </SubmitButton>
         </form>
-        <FormDebugger />
       </FormProvider>
       <OTPModal isOpen={isOpen} onClose={onClose} user={user} />
     </>
