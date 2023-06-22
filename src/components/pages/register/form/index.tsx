@@ -15,6 +15,7 @@ import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { axCreateUser } from "@services/auth.service";
+import { INVALID_COORDINATE } from "@static/constants";
 import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -71,9 +72,15 @@ function SignUpForm() {
         longitude: Yup.number().required(),
         location: Yup.string()
           .required()
-          .test("location", "select a valid location from suggestions", () => {
-            const { latitude, longitude } = this.parent;
-            return latitude && longitude;
+          .test("location", "select a valid location from suggestions", (_value, context) => {
+            const { latitude, longitude } = context.parent;
+            if (
+              latitude === INVALID_COORDINATE.LATITUDE &&
+              longitude === INVALID_COORDINATE.LONGITUDE
+            ) {
+              return false;
+            }
+            return true;
           }),
         verificationType: Yup.string().required(),
         mode: Yup.string(),
