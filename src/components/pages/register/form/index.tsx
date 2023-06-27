@@ -1,5 +1,5 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, GridItem, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid, useDisclosure, useToast } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import OTPModal from "@components/auth/otp-modal";
 import { CheckboxField } from "@components/form/checkbox";
@@ -32,6 +32,27 @@ import {
   VERIFICATION_TYPE
 } from "./options";
 
+interface Payload {
+  credentials: {
+    username?: string;
+    mobileNumber?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+    gender?: string;
+    profession?: string | null;
+    institution?: string | null;
+    latitude?: number;
+    longitude?: number;
+    location?: string;
+    verificationType?: string;
+    mode?: string;
+    terms?: boolean;
+    recaptcha?: string;
+  };
+  groupId?: number;
+}
+
 function SignUpForm() {
   const { t } = useTranslation();
   const [hideVerificationMethod, setHideVerificationMethod] = useState(true);
@@ -41,6 +62,8 @@ function SignUpForm() {
   const {
     currentGroup: { id: groupId }
   } = useGlobalState();
+
+  const toast = useToast();
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -69,18 +92,17 @@ function SignUpForm() {
         institution: Yup.string().nullable(),
         latitude: Yup.number().required(),
         longitude: Yup.number().required(),
-        location: Yup.string()
-          .required()
-          .test("location", "select a valid location from suggestions", (_value, context) => {
-            const { latitude, longitude } = context.parent;
-            if (
-              latitude === INVALID_COORDINATE.LATITUDE &&
-              longitude === INVALID_COORDINATE.LONGITUDE
-            ) {
-              return false;
-            }
-            return true;
-          }),
+        location: Yup.string().required(),
+        // .test("location", "select a valid location from suggestions", (_value, context) => {
+        //   const { latitude, longitude } = context.parent;
+        //   if (
+        //     latitude === INVALID_COORDINATE.LATITUDE &&
+        //     longitude === INVALID_COORDINATE.LONGITUDE
+        //   ) {
+        //     return false;
+        //   }
+        //   return true;
+        // }),
         verificationType: Yup.string().required(),
         mode: Yup.string(),
         terms: Yup.boolean().oneOf([true], t("user:terms.required")),
@@ -110,10 +132,24 @@ function SignUpForm() {
     const verificationType =
       v.email && v.mobileNumber ? v.verificationType : VERIFICATION_TYPE[v.email ? 0 : 1].value;
 
-    const payload = {
+    const payload: Payload = {
       credentials: { ...v, verificationType },
       groupId
     };
+
+    const { latitude, longitude } = payload.credentials;
+
+    if (latitude == INVALID_COORDINATE.LATITUDE || longitude == INVALID_COORDINATE.LONGITUDE) {
+      toast({
+        title: "Invalid coordinates",
+        description: "please select location from google suggestions only",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top"
+      });
+      return;
+    }
 
     const { success, data } = await axCreateUser(payload);
 
