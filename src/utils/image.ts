@@ -1,5 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus } from "@interfaces/custom";
+import { UNSUPPORTED_FILE_TYPES } from "@static/constants";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import notification from "@utils/notification";
@@ -47,8 +48,13 @@ export async function resizeImage(file: File, max = 3000): Promise<any> {
 
     return response;
   } catch (e) {
-    console.warn("EXIF Failed", e);
-    notification("Outdated/Unsupported Browser");
+    if (UNSUPPORTED_FILE_TYPES.includes(file.type) && file.type === "image/heic") {
+      console.warn("HEIC format not supported");
+      notification("HEIC format not supported");
+    } else {
+      console.warn("EXIF Failed", e);
+      notification("Outdated/Unsupported Browser");
+    }
   }
 
   return [file, {}];
@@ -102,6 +108,9 @@ export const resizeMultiple = async (files: File[]) => {
   for (const file of files) {
     try {
       let meta;
+      // if (file.type === "image/heic") {
+      //   return;
+      // }
       if (file.type.startsWith("image")) {
         const [blob, exif] = await resizeImage(file);
 
