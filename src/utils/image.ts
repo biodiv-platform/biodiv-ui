@@ -108,9 +108,7 @@ export const resizeMultiple = async (files: File[]) => {
   for (const file of files) {
     try {
       let meta;
-      // if (file.type === "image/heic") {
-      //   return;
-      // }
+
       if (file.type.startsWith("image")) {
         const [blob, exif] = await resizeImage(file);
 
@@ -127,7 +125,10 @@ export const resizeMultiple = async (files: File[]) => {
           ...exif
         };
       }
-      assets.push(getAssetObject(file, meta));
+
+      if (!UNSUPPORTED_FILE_TYPES.includes(file.type)) {
+        assets.push(getAssetObject(file, meta));
+      }
     } catch (e) {
       console.error(e);
       assets.push({});

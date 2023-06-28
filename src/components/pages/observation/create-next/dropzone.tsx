@@ -23,12 +23,14 @@ export default function DraftDropzone() {
     const resizedAssets = await resizeMultiple(files);
     draft.add(resizedAssets, true);
 
-    if (toastIdRef.current) {
+    if (toastIdRef.current && resizedAssets.length > 0) {
       toast.update(toastIdRef.current, {
         description: t("common:success"),
         ...DEFAULT_TOAST.SUCCESS
       });
       setTimeout(() => toast.close(toastIdRef.current), 1000);
+    } else {
+      toast.close(toastIdRef.current);
     }
   };
 
