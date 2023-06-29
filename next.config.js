@@ -5,6 +5,6 @@ module.exports = nextTranslate({
   experimental: {
     legacyBrowsers: false,
     browsersListForSwc: true,
-    nextScriptWorkers: true
+    nextScriptWorkers: false
   }
 });
