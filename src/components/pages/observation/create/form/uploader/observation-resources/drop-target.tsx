@@ -3,6 +3,7 @@ import { Button, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
+import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -48,9 +49,18 @@ export default function DropTarget({ assetsSize }) {
     setIsProcessing(false);
   };
 
+  const handleOnRejected = (files) => {
+    files.map((file) => {
+      const resourceTypeFileFormat =
+        "." + file.file.name.substring(file.file.name.indexOf(".") + 1);
+      notification(resourceTypeFileFormat + " format not supported");
+    });
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleOnDrop,
-    accept: ACCEPTED_FILE_TYPES
+    accept: ACCEPTED_FILE_TYPES,
+    onDropRejected: handleOnRejected
   });
 
   return (

@@ -1,8 +1,7 @@
 import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus } from "@interfaces/custom";
-import { UNSUPPORTED_FILE_TYPES } from "@static/constants";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
-import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
+import { ACCEPTED_FILE_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import notification from "@utils/notification";
 import loadImage from "blueimp-load-image";
 import { nanoid } from "nanoid";
@@ -48,9 +47,11 @@ export async function resizeImage(file: File, max = 3000): Promise<any> {
 
     return response;
   } catch (e) {
-    if (UNSUPPORTED_FILE_TYPES.includes(file.type) && file.type === "image/heic") {
-      console.warn("HEIC format not supported");
-      notification("HEIC format not supported");
+    const resourceTypeFileFormat = "." + file.type.substring(file.type.indexOf("/") + 1);
+
+    if (!ACCEPTED_FILE_TYPES["image/*"].includes(resourceTypeFileFormat)) {
+      console.warn(resourceTypeFileFormat + " format not supported (RESIZE FUNCTION)");
+      notification(resourceTypeFileFormat + " format not supported (RESIZE FUNCTION)");
     } else {
       console.warn("EXIF Failed", e);
       notification("Outdated/Unsupported Browser");
@@ -105,7 +106,16 @@ export const getAssetObject = (file, meta?) => {
 export const resizeMultiple = async (files: File[]) => {
   const assets: any[] = [];
 
+  const SUPPORTED_FORMATS = [
+    ...ACCEPTED_FILE_TYPES["image/*"],
+    ...ACCEPTED_FILE_TYPES["audio/*"],
+    ...ACCEPTED_FILE_TYPES["video/*"],
+    ...ACCEPTED_FILE_TYPES["application/zip"]
+  ];
+
   for (const file of files) {
+    const resourceTypeFileFormat = "." + file.name.substring(file.name.indexOf(".") + 1);
+
     try {
       let meta;
 
@@ -126,8 +136,10 @@ export const resizeMultiple = async (files: File[]) => {
         };
       }
 
-      if (!UNSUPPORTED_FILE_TYPES.includes(file.type)) {
+      if (SUPPORTED_FORMATS.includes(resourceTypeFileFormat)) {
         assets.push(getAssetObject(file, meta));
+      } else if (!file.type.startsWith("image")) {
+        notification(resourceTypeFileFormat + " format not supported");
       }
     } catch (e) {
       console.error(e);
