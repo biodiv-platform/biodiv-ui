@@ -47,11 +47,11 @@ export async function resizeImage(file: File, max = 3000): Promise<any> {
 
     return response;
   } catch (e) {
-    const resourceTypeFileFormat = "." + file.type.substring(file.type.indexOf("/") + 1);
+    const resourceTypeFileFormat = "." + file.name.substring(file.type.indexOf(".") + 1);
 
     if (!ACCEPTED_FILE_TYPES["image/*"].includes(resourceTypeFileFormat)) {
-      console.warn(resourceTypeFileFormat + " format not supported (RESIZE FUNCTION)");
-      notification(resourceTypeFileFormat + " format not supported (RESIZE FUNCTION)");
+      console.warn(resourceTypeFileFormat + " format not supported ");
+      notification(resourceTypeFileFormat + " format not supported ");
     } else {
       console.warn("EXIF Failed", e);
       notification("Outdated/Unsupported Browser");
@@ -119,7 +119,7 @@ export const resizeMultiple = async (files: File[]) => {
     try {
       let meta;
 
-      if (file.type.startsWith("image")) {
+      if (file.type.startsWith("image") && SUPPORTED_FORMATS.includes(resourceTypeFileFormat)) {
         const [blob, exif] = await resizeImage(file);
 
         if (exif?.dateCreated) {
@@ -138,7 +138,7 @@ export const resizeMultiple = async (files: File[]) => {
 
       if (SUPPORTED_FORMATS.includes(resourceTypeFileFormat)) {
         assets.push(getAssetObject(file, meta));
-      } else if (!file.type.startsWith("image")) {
+      } else {
         notification(resourceTypeFileFormat + " format not supported");
       }
     } catch (e) {
