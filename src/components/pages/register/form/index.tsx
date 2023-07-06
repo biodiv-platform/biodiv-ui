@@ -69,9 +69,7 @@ function SignUpForm() {
     mode: "onBlur",
     resolver: yupResolver(
       Yup.object().shape({
-        username: Yup.string()
-          .required()
-          .matches(/^[a-zA-Z0-9\s]+$/, "username should only contain letters and numbers"),
+        username: Yup.string().required(),
         mobileNumber: Yup.string().test("mobile", "${path} is not valid", (v) =>
           v ? isPossiblePhoneNumber(v) : true
         ),
