@@ -122,5 +122,3 @@ export const CROP_STATUS = {
 
 export const plantnetText = "Pl@ntNet";
 export const specRecText = "SpecRec";
-
-export const UNSUPPORTED_FILE_TYPES = ["image/heic"];
