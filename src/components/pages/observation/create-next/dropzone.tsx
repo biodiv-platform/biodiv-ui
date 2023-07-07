@@ -1,6 +1,7 @@
 import { Box, useToast } from "@chakra-ui/react";
 import { ACCEPTED_FILE_TYPES, DEFAULT_TOAST } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
+import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useDropzone } from "react-dropzone";
@@ -23,19 +24,30 @@ export default function DraftDropzone() {
     const resizedAssets = await resizeMultiple(files);
     draft.add(resizedAssets, true);
 
-    if (toastIdRef.current) {
+    if (toastIdRef.current && resizedAssets.length > 0) {
       toast.update(toastIdRef.current, {
         description: t("common:success"),
         ...DEFAULT_TOAST.SUCCESS
       });
       setTimeout(() => toast.close(toastIdRef.current), 1000);
+    } else {
+      toast.close(toastIdRef.current);
     }
+  };
+
+  const handleOnRejected = (files) => {
+    files.map((file) => {
+      const resourceTypeFileFormat =
+        "." + file.file.name.substring(file.file.name.indexOf(".") + 1);
+      notification(resourceTypeFileFormat + " format not supported");
+    });
   };
 
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     noClick: true,
     onDrop: handleOnDrop,
-    accept: ACCEPTED_FILE_TYPES
+    accept: ACCEPTED_FILE_TYPES,
+    onDropRejected: handleOnRejected
   });
 
   return (
