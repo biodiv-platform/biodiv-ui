@@ -122,3 +122,8 @@ export const CROP_STATUS = {
 
 export const plantnetText = "Pl@ntNet";
 export const specRecText = "SpecRec";
+
+export const INVALID_COORDINATE = {
+  LATITUDE: 91,
+  LONGITUDE: 361
+};

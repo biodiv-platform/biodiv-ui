@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { Autocomplete, LoadScriptNext } from "@react-google-maps/api";
+import { INVALID_COORDINATE } from "@static/constants";
 import { AUTOCOMPLETE_FIELDS, GMAP_LIBRARIES } from "@static/location";
 import { getMapCenter } from "@utils/location";
 import useTranslation from "next-translate/useTranslation";
@@ -24,8 +25,14 @@ export const LocationPicker = () => {
   const { latitude: lat, longitude: lng, zoom: initialZoom } = getMapCenter(4);
 
   const fieldLocationName = useController({ name: "location", defaultValue: "" });
-  const fieldLocationLat = useController({ name: "latitude", defaultValue: 0 });
-  const fieldLocationLng = useController({ name: "longitude", defaultValue: 0 });
+  const fieldLocationLat = useController({
+    name: "latitude",
+    defaultValue: INVALID_COORDINATE.LATITUDE
+  });
+  const fieldLocationLng = useController({
+    name: "longitude",
+    defaultValue: INVALID_COORDINATE.LONGITUDE
+  });
 
   const coordinates = useMemo(
     () => ({
