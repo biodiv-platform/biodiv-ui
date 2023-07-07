@@ -91,16 +91,6 @@ function SignUpForm() {
         latitude: Yup.number().required(),
         longitude: Yup.number().required(),
         location: Yup.string().required(),
-        // .test("location", "select a valid location from suggestions", (_value, context) => {
-        //   const { latitude, longitude } = context.parent;
-        //   if (
-        //     latitude === INVALID_COORDINATE.LATITUDE &&
-        //     longitude === INVALID_COORDINATE.LONGITUDE
-        //   ) {
-        //     return false;
-        //   }
-        //   return true;
-        // }),
         verificationType: Yup.string().required(),
         mode: Yup.string(),
         terms: Yup.boolean().oneOf([true], t("user:terms.required")),
