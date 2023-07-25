@@ -70,7 +70,6 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
               shouldPortal={true}
             />
           </SimpleGrid>
-          <FormDebugger />
           <SimpleGrid columns={showTags ? { base: 1, md: 2 } : 1} spacing={4}>
             {showTags && (
               <SelectAsyncInputField
