@@ -1,6 +1,5 @@
 import { Box, Divider, SimpleGrid } from "@chakra-ui/react";
 import { DatePickerNextField } from "@components/form/datepicker-next";
-import FormDebugger from "@components/form/debugger";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
