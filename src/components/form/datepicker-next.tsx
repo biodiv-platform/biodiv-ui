@@ -13,7 +13,6 @@ import CalendarIcon from "@icons/calendar";
 import React from "react";
 import DatePicker from "react-datepicker";
 import { Controller } from "react-hook-form";
-import { parseDate } from "@utils/date";
 
 interface DatePickerNextFieldProps {
   disabled?: boolean;
@@ -42,7 +41,6 @@ export const DatePickerNextField = ({
   dateFormat,
   inputProps,
   ref,
-  singleObservationUpload = false,
   ...props
 }: DatePickerNextFieldProps) => {
   return (
@@ -60,13 +58,7 @@ export const DatePickerNextField = ({
                 isReadOnly={disabled}
                 placeholderText={placeholder || label}
                 onChange={field.onChange}
-                selected={
-                  field.value
-                    ? singleObservationUpload
-                      ? parseDate(field.value)
-                      : new Date(field.value)
-                    : undefined
-                }
+                selected={field.value ? new Date(field.value) : undefined}
                 maxDate={maxDate}
                 portalId={name}
                 {...(inputProps || {})}

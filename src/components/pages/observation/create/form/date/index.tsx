@@ -8,12 +8,12 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axQueryTagsByText } from "@services/observation.service";
 import { BASIS_OF_RECORD } from "@static/datatable";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
-import { formatDate, parseDate } from "@utils/date";
+import { parseDate } from "@utils/date";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useListener } from "react-gbus";
-import { useController, useFormContext } from "react-hook-form";
+import { useController } from "react-hook-form";
 
 import { DATE_ACCURACY_OPTIONS } from "../options";
 
@@ -36,11 +36,11 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
       inputRef.current.onChange = setDate;
     }
 
-    date && field.onChange(formatDate(date));
+    date && field.onChange(date);
   }, []);
 
   useDidUpdateEffect(() => {
-    field.onChange(formatDate(date));
+    field.onChange(date);
   }, [date]);
 
   useListener(
@@ -56,7 +56,6 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
         <Box>
           <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} spacing={4}>
             <DatePickerNextField
-              singleObservationUpload={true}
               name="observedOn"
               label={t("common:observed_on")}
               style={{ gridColumn: "1/3" }}

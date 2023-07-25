@@ -156,10 +156,7 @@ export const handleOnSingleObservationSubmit = (
   { languageId, fields, currentGroupId },
   isSingle?
 ) => {
-
-  console.log("before=",rest.observedOn)
   const observedOn = dateToUTC(formatDate(rest.observedOn)).format();
-  console.log("after=",observedOn)
 
   const payload = {
     hidePreciseLocation: false,
