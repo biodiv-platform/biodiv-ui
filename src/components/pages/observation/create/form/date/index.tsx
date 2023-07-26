@@ -3,11 +3,16 @@ import { DatePickerNextField } from "@components/form/datepicker-next";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
+import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axQueryTagsByText } from "@services/observation.service";
 import { BASIS_OF_RECORD } from "@static/datatable";
+import { FORM_DATEPICKER_CHANGE } from "@static/events";
+import { parseDate } from "@utils/date";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useListener } from "react-gbus";
+import { useController } from "react-hook-form";
 
 import { DATE_ACCURACY_OPTIONS } from "../options";
 
@@ -18,8 +23,31 @@ const onTagsQuery = async (q) => {
 
 export default function DateInputs({ showTags = true, isRequired = true }) {
   const { t } = useTranslation();
+  const inputRef = useRef<any>();
 
   const translatedDateOptions = useMemo(() => translateOptions(t, DATE_ACCURACY_OPTIONS), []);
+
+  const { field } = useController({ name: "observedOn" });
+  const [date, setDate] = useState(field.value ? parseDate(field.value) : undefined);
+
+  useEffect(() => {
+    if (inputRef?.current) {
+      inputRef.current.onChange = setDate;
+    }
+
+    date && field.onChange(date);
+  }, []);
+
+  useDidUpdateEffect(() => {
+    field.onChange(date);
+  }, [date]);
+
+  useListener(
+    (d) => {
+      d && setDate(d);
+    },
+    [`${FORM_DATEPICKER_CHANGE}${"observedOn"}`]
+  );
 
   return (
     <>
@@ -32,6 +60,7 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
               style={{ gridColumn: "1/3" }}
               isRequired={isRequired}
               mb={showTags ? 4 : 0}
+              ref={inputRef}
             />
             <SelectInputField
               name="dateAccuracy"
