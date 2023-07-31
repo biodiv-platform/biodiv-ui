@@ -89,6 +89,7 @@ export default function SpeciesFieldSimple({ value }) {
           )}
           <Prose>
             <Box
+              overflow="auto"
               p={2}
               className="preview"
               dangerouslySetInnerHTML={{
