@@ -62,7 +62,6 @@ export interface HomePageStats {
   observation?: number; // int64
   maps?: number; // int64
   documents?: number; // int64
-  discussions?: number; // int64
   activeUser?: number; // int64
 }
 export interface Language {

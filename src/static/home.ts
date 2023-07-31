@@ -25,11 +25,6 @@ export const CARD_META = {
     icon: "user-groups",
     link: "/user/list",
     color: "#38B2AC"
-  },
-  discussions: {
-    icon: "discussions",
-    link: "/discussion/list",
-    color: "#82C68F"
   }
 };
 
