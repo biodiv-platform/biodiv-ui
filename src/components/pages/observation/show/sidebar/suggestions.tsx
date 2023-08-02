@@ -52,12 +52,15 @@ export default function Suggestions({
                     objectFit="cover"
                     loading="lazy"
                     alt={o.name}
-                    src={getResourceThumbnail(
-                      RESOURCE_CTX.OBSERVATION,
-                      o[observationKey],
-                      RESOURCE_SIZE.RECENT_THUMBNAIL
-                    )}
-                    fallbackSrc={getLocalIcon(o?.speciesGroupName || defaultSpeciesGroup)}
+                    src={
+                      o[observationKey] != "null"
+                        ? getResourceThumbnail(
+                            RESOURCE_CTX.OBSERVATION,
+                            o[observationKey],
+                            RESOURCE_SIZE.RECENT_THUMBNAIL
+                          )
+                        : getLocalIcon(o?.speciesGroupName || defaultSpeciesGroup)
+                    }
                     bg="gray.200"
                     borderRadius="md"
                   />
