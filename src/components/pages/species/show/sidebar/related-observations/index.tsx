@@ -35,12 +35,15 @@ export default function SpeciesRelatedObservations() {
                       bg="gray.300"
                       loading="lazy"
                       alt={title}
-                      src={getResourceThumbnail(
-                        RESOURCE_CTX.OBSERVATION,
-                        observation.thumbnail,
-                        RESOURCE_SIZE.LIST_THUMBNAIL
-                      )}
-                      fallbackSrc={getLocalIcon(observation.speciesGroup)}
+                      src={
+                        observation.thumbnail
+                          ? getResourceThumbnail(
+                              RESOURCE_CTX.OBSERVATION,
+                              observation.thumbnail,
+                              RESOURCE_SIZE.LIST_THUMBNAIL
+                            )
+                          : getLocalIcon(observation.speciesGroup)
+                      }
                     />
                   </AspectRatio>
                 </Tooltip>
