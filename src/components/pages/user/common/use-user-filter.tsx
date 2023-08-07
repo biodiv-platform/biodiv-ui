@@ -66,9 +66,11 @@ export function UserListContextProvider(props: UserListContextProps) {
           _draft.l.push(...data.userList);
           _draft.hasMore =
             data.totalCount > filter?.f?.offset && data?.totalCount !== _draft.l.length;
-          _draft.ag = data.aggregationData;
         } else {
           _draft.hasMore = false;
+        }
+        if (data?.aggregationData) {
+          _draft.ag = data.aggregationData;
         }
         _draft.n = data.totalCount;
       });
