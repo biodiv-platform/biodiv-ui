@@ -52,7 +52,7 @@ export default function DropTarget({ assetsSize }) {
   const handleOnRejected = (files) => {
     files.map((file) => {
       const resourceTypeFileFormat =
-        "." + file.file.name.substring(file.file.name.indexOf(".") + 1);
+        "." + file.file.name.substring(file.file.name.lastIndexOf(".") + 1);
       notification(resourceTypeFileFormat + " format not supported");
     });
   };
