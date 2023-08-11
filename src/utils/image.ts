@@ -47,7 +47,7 @@ export async function resizeImage(file: File, max = 3000): Promise<any> {
 
     return response;
   } catch (e) {
-    const resourceTypeFileFormat = "." + file.name.substring(file.type.indexOf(".") + 1);
+    const resourceTypeFileFormat = "." + file.name.substring(file.name.lastIndexOf(".") + 1);
 
     if (!ACCEPTED_FILE_TYPES["image/*"].includes(resourceTypeFileFormat)) {
       console.warn(resourceTypeFileFormat + " format not supported ");
@@ -114,7 +114,7 @@ export const resizeMultiple = async (files: File[]) => {
   ];
 
   for (const file of files) {
-    const resourceTypeFileFormat = "." + file.name.substring(file.name.indexOf(".") + 1);
+    const resourceTypeFileFormat = "." + file.name.substring(file.name.lastIndexOf(".") + 1);
 
     try {
       let meta;
