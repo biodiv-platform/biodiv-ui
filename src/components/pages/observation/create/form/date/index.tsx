@@ -10,7 +10,7 @@ import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { parseDate } from "@utils/date";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useListener } from "react-gbus";
 import { useController } from "react-hook-form";
 
@@ -29,14 +29,6 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
 
   const { field } = useController({ name: "observedOn" });
   const [date, setDate] = useState(field.value ? parseDate(field.value) : undefined);
-
-  useEffect(() => {
-    if (inputRef?.current) {
-      inputRef.current.onChange = setDate;
-    }
-
-    date && field.onChange(date);
-  }, []);
 
   useDidUpdateEffect(() => {
     field.onChange(date);
@@ -60,7 +52,7 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
               style={{ gridColumn: "1/3" }}
               isRequired={isRequired}
               mb={showTags ? 4 : 0}
-              ref={inputRef}
+              inputRef={inputRef}
             />
             <SelectInputField
               name="dateAccuracy"
