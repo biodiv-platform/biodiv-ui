@@ -25,7 +25,7 @@ interface DatePickerNextFieldProps {
   style?;
   dateFormat?;
   singleObservationUpload?: boolean;
-  ref?;
+  inputRef?;
   inputProps?;
 }
 
@@ -40,7 +40,7 @@ export const DatePickerNextField = ({
   placeholder,
   dateFormat,
   inputProps,
-  ref,
+  inputRef,
   ...props
 }: DatePickerNextFieldProps) => {
   return (
@@ -52,7 +52,7 @@ export const DatePickerNextField = ({
             {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
             <InputGroup>
               <DatePicker
-                ref={inputProps}
+                ref={inputRef}
                 customInput={<Input />}
                 dateFormat={dateFormat || "dd-MM-yyyy"}
                 isReadOnly={disabled}
