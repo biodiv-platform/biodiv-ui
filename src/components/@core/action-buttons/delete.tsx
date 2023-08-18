@@ -24,6 +24,7 @@ export default function DeleteActionButton({
   description,
   deleted,
   deleteComment = false,
+  deleteUserGroup = false,
   commentDeletePayload = {},
   refreshFunc = () => {
     return null;
@@ -59,7 +60,11 @@ export default function DeleteActionButton({
         }
         onClose();
         if (!deleteGnfinderName) {
-          router.push("/", true);
+          if (deleteUserGroup) {
+            router.push("/", false);
+          } else {
+            router.push("/", true);
+          }
         }
       }
     }

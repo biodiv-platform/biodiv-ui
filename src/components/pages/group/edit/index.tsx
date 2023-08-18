@@ -1,7 +1,9 @@
-import { Spinner } from "@chakra-ui/react";
+import { HStack, Spinner } from "@chakra-ui/react";
+import DeleteActionButton from "@components/@core/action-buttons/delete";
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
 import { Role } from "@interfaces/custom";
+import { axDeleteUserGroup } from "@services/usergroup.service";
 import { hasAccess } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -42,8 +44,17 @@ export default function EditGroupPageComponent({
 
   return (
     <div className="container mt">
-      <PageHeading>👥 {t("group:edit.title")}</PageHeading>
-
+      <HStack justifyContent="space-between">
+        <PageHeading>👥 {t("group:edit.title")}</PageHeading>
+        <DeleteActionButton
+          observationId={userGroupId}
+          deleteFunc={axDeleteUserGroup}
+          deleted="successfully deleted"
+          title="Delete usergroup"
+          description="Are you sure? you can't undo this  action"
+          deleteUserGroup={true}
+        />
+      </HStack>
       {groupInfo ? (
         <UserGroupEditForm
           groupInfo={groupInfo}

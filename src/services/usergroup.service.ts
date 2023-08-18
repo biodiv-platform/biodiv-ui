@@ -422,3 +422,13 @@ export const axEditGroupHomePageGallery = async (userGroupId, galleryId, payload
     return { success: false, data: [] };
   }
 };
+
+export const axDeleteUserGroup = async (userGroupId) => {
+  try {
+    const { data } = await http.delete(`${ENDPOINT.USERGROUP}/v1/group/delete/${userGroupId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false };
+  }
+};
