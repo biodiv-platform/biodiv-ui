@@ -426,6 +426,7 @@ export const axEditGroupHomePageGallery = async (userGroupId, galleryId, payload
 export const axDeleteUserGroup = async (userGroupId) => {
   try {
     const { data } = await http.delete(`${ENDPOINT.USERGROUP}/v1/group/delete/${userGroupId}`);
+    await axClearMemoryCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);
