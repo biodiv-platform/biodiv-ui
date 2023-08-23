@@ -9,6 +9,7 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
+import { useGroupDelete } from "@components/pages/group/edit/use-group-delete";
 import DeleteIcon from "@icons/delete";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -61,6 +62,8 @@ export default function DeleteActionButton({
         onClose();
         if (!deleteGnfinderName) {
           if (deleteUserGroup) {
+            const { axUnpostUserGroupObservations } = useGroupDelete();
+            await axUnpostUserGroupObservations(observationId);
             router.push("/", false);
           } else {
             router.push("/", true);
