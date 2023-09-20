@@ -109,7 +109,6 @@ function Header({ o, following = false }: IHeaderProps) {
           description: pageDescription
         }}
         title={pageTitle}
-        description={pageDescription}
         additionalLinkTags={reprImage}
       />
 

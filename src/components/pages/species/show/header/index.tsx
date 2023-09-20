@@ -70,7 +70,6 @@ function SpeciesHeader() {
       <NextSeo
         openGraph={openGraph}
         title={openGraph.title}
-        description={openGraph.description}
         additionalLinkTags={openGraph?.images[0]}
       />
       <Spacer />
