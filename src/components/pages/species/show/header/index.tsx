@@ -70,7 +70,12 @@ function SpeciesHeader() {
       <NextSeo
         openGraph={openGraph}
         title={openGraph.title}
-        additionalLinkTags={openGraph?.images[0]}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: openGraph?.images[0] ? openGraph?.images[0] : openGraph.title
+          }
+        ]}
       />
       <Spacer />
       <Stack direction="column" p={3} spacing={4}>
