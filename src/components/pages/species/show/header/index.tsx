@@ -67,7 +67,16 @@ function SpeciesHeader() {
 
   return (
     <Flex direction="column" bg="gray.300" borderRadius="md" p={4} mb={4}>
-      <NextSeo openGraph={openGraph} title={openGraph.title} />
+      <NextSeo
+        openGraph={openGraph}
+        title={openGraph.title}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: openGraph?.images[0] ? openGraph?.images[0] : openGraph.title
+          }
+        ]}
+      />
       <Spacer />
       <Stack direction="column" p={3} spacing={4}>
         <PageHeading className="fadeInUp" mb={0}>

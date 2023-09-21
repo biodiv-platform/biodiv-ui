@@ -109,6 +109,12 @@ function Header({ o, following = false }: IHeaderProps) {
           description: pageDescription
         }}
         title={pageTitle}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: reprImage ? reprImage : pageTitle
+          }
+        ]}
       />
 
       <PageHeading actions={<PageActions />}>
