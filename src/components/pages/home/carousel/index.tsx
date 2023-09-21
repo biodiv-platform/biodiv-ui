@@ -4,7 +4,7 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
 import { useKeenSlider } from "keen-slider/react";
 import { NextSeo } from "next-seo";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 
 import Sidebar from "./sidebar";
 import Slide from "./slide";
@@ -13,16 +13,7 @@ import SlideInfo from "./slide-info";
 export default function CarouselNew({ featured }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const openGraph = useMemo(
-    () => ({
-      title: featured[0]?.title,
-      description: featured[0]?.customDescripition,
-      images: featured?.map((r) => ({
-        url: getResourceRAW(RESOURCE_CTX.USERGROUPS, r?.fileName)
-      }))
-    }),
-    []
-  );
+  const reprImage = getResourceRAW(RESOURCE_CTX.USERGROUPS, featured[0]?.fileName);
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
@@ -71,12 +62,10 @@ export default function CarouselNew({ featured }) {
       color="white"
     >
       <NextSeo
-        openGraph={openGraph}
-        title={openGraph.title}
         additionalLinkTags={[
           {
             rel: "icon",
-            href: openGraph?.images[0] ? openGraph.images[0] : openGraph.title
+            href: reprImage ? reprImage : featured[0]?.title
           }
         ]}
       />
