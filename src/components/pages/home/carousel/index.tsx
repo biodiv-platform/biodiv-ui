@@ -1,9 +1,7 @@
 import "keen-slider/keen-slider.min.css";
 
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
 import { useKeenSlider } from "keen-slider/react";
-import { NextSeo } from "next-seo";
 import React, { useState } from "react";
 
 import Sidebar from "./sidebar";
@@ -12,8 +10,6 @@ import SlideInfo from "./slide-info";
 
 export default function CarouselNew({ featured }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const reprImage = getResourceRAW(RESOURCE_CTX.USERGROUPS, featured[0]?.fileName);
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
@@ -61,14 +57,6 @@ export default function CarouselNew({ featured }) {
       bg="gray.300"
       color="white"
     >
-      <NextSeo
-        additionalLinkTags={[
-          {
-            rel: "icon",
-            href: reprImage ? reprImage : featured[0]?.title
-          }
-        ]}
-      />
       <Box gridColumn={{ md: "1/3" }} position="relative">
         <Box ref={sliderRef} className="keen-slider fade">
           {featured.map((o) => (

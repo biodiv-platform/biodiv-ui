@@ -13,6 +13,7 @@ import { UserGroupIbp } from "@interfaces/observation";
 import { axGroupList } from "@services/app.service";
 import { getParsedUser } from "@utils/auth";
 import { absoluteUrl } from "@utils/basic";
+import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
 import App, { AppContext } from "next/app";
 import dynamic from "next/dynamic";
 import Router from "next/router";
@@ -53,12 +54,17 @@ function MainApp({
     Router.events.on("routeChangeError", () => NProgress.done());
   }, [Router]);
 
+  const reprImage = getResourceRAW(
+    RESOURCE_CTX.USERGROUPS,
+    pageProps.homeInfo.gallerySlider[0].fileName
+  );
+
   return (
     <BusProvider>
       <ToastContainer />
       <ChakraProvider theme={customTheme}>
         <GlobalStateProvider initialState={{ user, domain, groups, currentGroup, languageId }}>
-          <Metadata />
+          <Metadata reprImage={reprImage} />
           <SkipNavLink>Skip to content</SkipNavLink>
           <div className="content">
             {config.header && (

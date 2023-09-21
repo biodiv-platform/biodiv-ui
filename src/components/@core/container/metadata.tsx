@@ -11,7 +11,7 @@ import { DefaultSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo } from "react";
 
-export default function Metadata() {
+export default function Metadata({ reprImage }) {
   const router = useRouter();
   const { isLoggedIn, currentGroup } = useGlobalState();
   const canonical = SITE_CONFIG.SITE.URL + router.asPath;
@@ -49,6 +49,12 @@ export default function Metadata() {
           site: SITE_CONFIG.FOOTER.SOCIAL.TWITTER.HANDLE,
           cardType: "summary_large_image"
         }}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: reprImage ? reprImage : currentGroup?.name
+          }
+        ]}
       />
       <Head>
         <link rel="apple-touch-icon" href={currentGroup?.icon + RESOURCE_SIZE.APPLE_TOUCH} />
