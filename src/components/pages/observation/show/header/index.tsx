@@ -18,10 +18,9 @@ import {
   axFollowObservation,
   axUnFlagObservation
 } from "@services/observation.service";
-import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDateReadableFromUTC } from "@utils/date";
-import { getResourceThumbnail } from "@utils/media";
+import { getResourceRAW } from "@utils/media";
 import { stripTags } from "@utils/text";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
@@ -49,11 +48,7 @@ function Header({ o, following = false }: IHeaderProps) {
   const reprImage: any = useMemo(() => {
     if (o.observation?.reprImageId) {
       const r = o.observationResource?.find((i) => i.resource?.id === o.observation?.reprImageId);
-      return getResourceThumbnail(
-        r?.resource?.context,
-        r?.resource?.fileName,
-        RESOURCE_SIZE.TWITTER
-      );
+      return getResourceRAW(r?.resource?.context, r?.resource?.fileName);
     }
   }, []);
 

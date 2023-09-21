@@ -6,9 +6,8 @@ import { PageHeading } from "@components/@core/layout";
 import ScientificName from "@components/@core/scientific-name";
 import TaxonStatusBadge from "@components/pages/common/status-badge";
 import { axDeleteSpecies, axFollowSpecies } from "@services/species.service";
-import { RESOURCE_SIZE } from "@static/constants";
 import { SPECIES_NAME_PREFERRED_UPDATED } from "@static/events";
-import { getLocalIcon, getResourceThumbnail } from "@utils/media";
+import { getLocalIcon, getResourceRAW } from "@utils/media";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -31,11 +30,7 @@ function SpeciesHeader() {
       title: speciesTitle,
       description: speciesTitle,
       images: species?.resourceData?.map((r) => ({
-        url: getResourceThumbnail(
-          r?.resource?.context,
-          r?.resource?.fileName,
-          RESOURCE_SIZE.TWITTER
-        )
+        url: getResourceRAW(r?.resource?.context, r?.resource?.fileName)
       }))
     }),
     []
