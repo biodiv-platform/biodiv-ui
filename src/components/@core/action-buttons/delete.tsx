@@ -62,9 +62,14 @@ export default function DeleteActionButton({
         onClose();
         if (!deleteGnfinderName) {
           if (deleteUserGroup) {
-            const { axUnpostUserGroupObservations, axUnpostUserGroupSpecies } = useGroupDelete();
+            const {
+              axUnpostUserGroupObservations,
+              axUnpostUserGroupSpecies,
+              axBulkSoftDeletePages
+            } = useGroupDelete();
             await axUnpostUserGroupObservations(observationId);
             await axUnpostUserGroupSpecies(observationId);
+            await axBulkSoftDeletePages(observationId);
             router.push("/", false);
           } else {
             router.push("/", true);

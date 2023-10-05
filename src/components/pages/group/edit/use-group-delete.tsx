@@ -1,4 +1,5 @@
 import { axGetObservationMapData } from "@services/observation.service";
+import { axDeletePagesByUgId } from "@services/pages.service";
 import { axGetSpeciesList } from "@services/species.service";
 
 export const useGroupDelete = () => {
@@ -37,8 +38,17 @@ export const useGroupDelete = () => {
       data
     };
   };
+
+  const axBulkSoftDeletePages = async (userGroupId) => {
+    const { success, data } = await axDeletePagesByUgId(userGroupId);
+    return {
+      success,
+      data
+    };
+  };
   return {
     axUnpostUserGroupObservations,
-    axUnpostUserGroupSpecies
+    axUnpostUserGroupSpecies,
+    axBulkSoftDeletePages
   };
 };

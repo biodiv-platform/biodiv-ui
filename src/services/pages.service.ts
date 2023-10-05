@@ -130,3 +130,13 @@ export const axAddPageComment = async (payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axDeletePagesByUgId = async (userGroupId) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.PAGES}/v1/page/delete/all/${userGroupId}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: false };
+  }
+};
