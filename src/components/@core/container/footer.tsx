@@ -25,7 +25,7 @@ export default function Footer() {
         {SITE_CONFIG.FOOTER.CREDITS && (
           <div>
             {t("common:footer.powered_by")}
-            <Link ml={1} href="https://github.com/strandls?q=biodiv">
+            <Link ml={1} href="https://github.com/biodiv-platform">
               Biodiversity Informatics Platform - v{APP_VERSION}
             </Link>
           </div>
