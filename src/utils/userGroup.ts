@@ -61,3 +61,7 @@ export const reorderRemovedGallerySetup = (data, index) => {
     payload: response.map(({ id, displayOrder }) => ({ galleryId: id, displayOrder }))
   };
 };
+
+export const processUserGroupName = (name) => {
+  return name.replace(/\s/g, "_");
+};

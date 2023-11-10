@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { axUserGroupCreate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import { processUserGroupName } from "@utils/userGroup";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -96,7 +97,7 @@ export default function CreateGroupPageComponent({
     const { success, data } = await axUserGroupCreate(payload);
     if (success) {
       notification(t("group:create.success"), NotificationType.Success);
-      router.push(`/group/${data.name}/show`, false, {}, true);
+      router.push(`/group/${processUserGroupName(data.name)}/show`, false, {}, true);
     } else {
       notification(t("group:create.error"));
     }
