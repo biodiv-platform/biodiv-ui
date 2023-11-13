@@ -97,7 +97,9 @@ export default function CreateGroupPageComponent({
     const { success, data } = await axUserGroupCreate(payload);
     if (success) {
       notification(t("group:create.success"), NotificationType.Success);
-      router.push(`/group/${processUserGroupName(data.name)}/show`, false, {}, true);
+      data?.webAddress?.startsWith("http")
+        ? router.push(data.webAddress, false)
+        : router.push(`/group/${processUserGroupName(data.name)}/show`, false, {}, true);
     } else {
       notification(t("group:create.error"));
     }
