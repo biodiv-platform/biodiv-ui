@@ -1,5 +1,5 @@
 import { Box, Flex, Image, SimpleGrid, useCheckbox, useCheckboxGroup } from "@chakra-ui/react";
-import { getGroupImageThumb } from "@utils/media";
+import { getGroupImageThumb, getGroupImageThumbForDatatable } from "@utils/media";
 import React from "react";
 
 interface ITraitInputProps {
@@ -9,6 +9,7 @@ interface ITraitInputProps {
   onBlur?;
   onChange;
   defaultValue?;
+  isDatatableUsergroups?;
 }
 
 const CustomCheckBox = (props: any) => {
@@ -43,7 +44,8 @@ const CheckBoxItems = ({
   options,
   onChange,
   defaultValue,
-  gridColumns = [1, 1, 3, 5]
+  gridColumns = [1, 1, 3, 5],
+  isDatatableUsergroups = false
 }: ITraitInputProps) => {
   const { getCheckboxProps } = useCheckboxGroup({
     defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
@@ -62,7 +64,13 @@ const CheckBoxItems = ({
                 boxSize="2rem"
                 mr={2}
                 objectFit="contain"
-                src={o.id === "null" ? o.icon : getGroupImageThumb(o.icon)}
+                src={
+                  o.id === "null"
+                    ? o.icon
+                    : isDatatableUsergroups
+                    ? getGroupImageThumbForDatatable(o.icon)
+                    : getGroupImageThumb(o.icon)
+                }
                 alt={o.name}
               />
               <Box lineHeight="1rem" className="elipsis-2">

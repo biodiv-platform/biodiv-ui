@@ -34,6 +34,7 @@ export default function Group({ datatableId, groups, defaultGroups }) {
           selectedDefault={defaultGroup}
           resourceId={datatableId}
           saveUserGroupsFunc={axUserGroupDatatableUpdate}
+          isDataTable={true}
         />
       </Box>
     </Box>

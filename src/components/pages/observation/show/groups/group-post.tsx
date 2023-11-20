@@ -3,7 +3,7 @@ import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
-import { getGroupImageThumb } from "@utils/media";
+import { getGroupImageThumb, getGroupImageThumbForDatatable } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
@@ -18,6 +18,7 @@ interface IGroupPostProps {
   resourceId;
   saveUserGroupsFunc;
   columns?;
+  isDataTable?;
 }
 
 const defaultGridColumns = [1, 1, 2, 3];
@@ -27,7 +28,8 @@ export default function GroupPost({
   selectedDefault,
   resourceId,
   saveUserGroupsFunc,
-  columns
+  columns,
+  isDataTable = false
 }: IGroupPostProps) {
   if (groups?.length == 0) return null;
 
@@ -95,7 +97,11 @@ export default function GroupPost({
             <GroupBox
               key={og.id}
               link={og.webAddress}
-              icon={getGroupImageThumb(og.icon, 40)}
+              icon={
+                isDataTable
+                  ? getGroupImageThumbForDatatable(og.icon, 40)
+                  : getGroupImageThumb(og.icon, 40)
+              }
               name={og.name}
             />
           ))}
@@ -109,6 +115,7 @@ export default function GroupPost({
             options={filterGroups}
             defaultValue={selectedGroups}
             onChange={setSelectedGroups}
+            isDatatableUsergroups={isDataTable}
           />
         ) : (
           <div>{t("common:no_groups_joined")}</div>
