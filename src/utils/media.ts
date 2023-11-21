@@ -86,6 +86,9 @@ export const getGroupImageThumb = (resourceUrl, height = 32) => {
     ? `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`
     : `/next-assets/species/Unknown.svg`;
 };
+export const getGroupImageThumbForDatatable = (resourceUrl, height = 32) => {
+  return resourceUrl ? `${resourceUrl}?h=${height}` : `/next-assets/species/Unknown.svg`;
+};
 
 export const getSuggestionIcon = (resourceUrl) => {
   return resourceUrl ? `${ENDPOINT.FILES}/get${cleanSlashes(resourceUrl)}?w=50` : undefined;
