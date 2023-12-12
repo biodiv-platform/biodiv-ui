@@ -23,13 +23,12 @@ export const axAddDataTableComment = async (payload) => {
   }
 };
 
-export const axUserGroupDatatableUpdate = async (datatableId, groupList) => {
+export const axUserGroupDatatableUpdate = async (userGroupId, groupList) => {
   try {
     const { data } = await http.put(
-      `${ENDPOINT.OBSERVATION}/v1/observation/update/userGroup/datatable/${datatableId}`,
+      `${ENDPOINT.DATATABLE}/v1/services/update/datatable/${userGroupId}`,
       {
-        userGroupList: groupList,
-        bulkAction: ""
+        userGroupIds: groupList
       }
     );
     return { success: true, data };
