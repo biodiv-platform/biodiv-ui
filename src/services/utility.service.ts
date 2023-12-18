@@ -19,10 +19,10 @@ export const axGetLangList = async (document = false) => {
   }
 };
 
-export const axGetHomeInfo = async (userGroupId?) => {
+export const axGetHomeInfo = async (layerCount = 0) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
-      params: { userGroupId }
+      params: { layerCount }
     });
     return { success: true, data };
   } catch (e) {
@@ -31,10 +31,10 @@ export const axGetHomeInfo = async (userGroupId?) => {
   }
 };
 
-export const axGetAdminHomeInfo = async (ctx) => {
+export const axGetAdminHomeInfo = async (ctx, layerCount = 0) => {
   try {
     const { data } = await http.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
-      params: { ctx, adminList: true }
+      params: { ctx, adminList: true, layerCount: layerCount }
     });
     return { success: true, data };
   } catch (e) {
@@ -70,7 +70,8 @@ export const axEditHomePageGallery = async (galleryId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.UTILITY}/v1/services/homePage/edit/${galleryId}`,
-      payload
+      payload,
+      { params: { layerCount: 0 } }
     );
     return { success: true, data };
   } catch (e) {
@@ -82,7 +83,8 @@ export const axEditHomePageGallery = async (galleryId, payload) => {
 export const axRemoveHomePageGallery = async (galleryId) => {
   try {
     const { data } = await http.delete(
-      `${ENDPOINT.UTILITY}/v1/services/homePage/remove/${galleryId}`
+      `${ENDPOINT.UTILITY}/v1/services/homePage/remove/${galleryId}`,
+      { params: { layerCount: 0 } }
     );
     return { success: true, data };
   } catch (e) {
@@ -93,7 +95,9 @@ export const axRemoveHomePageGallery = async (galleryId) => {
 
 export const axInsertHomePageGallery = async (payload) => {
   try {
-    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/insert`, payload);
+    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/insert`, payload, {
+      params: { layerCount: 0 }
+    });
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -103,7 +107,9 @@ export const axInsertHomePageGallery = async (payload) => {
 
 export const axReorderHomePageGallery = async (payload) => {
   try {
-    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/reorder`, payload);
+    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/reorder`, payload, {
+      params: { layerCount: 0 }
+    });
     return { success: true, data };
   } catch (e) {
     console.error(e);

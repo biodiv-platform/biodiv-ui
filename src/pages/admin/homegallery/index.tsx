@@ -1,6 +1,7 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import HomeComponent from "@components/pages/admin/homegallery";
 import { Role } from "@interfaces/custom";
+import { axGetLayerCount } from "@services/api.service";
 import { axGetAdminHomeInfo } from "@services/utility.service";
 import React from "react";
 
@@ -10,7 +11,11 @@ export const getServerSideProps = async (ctx) => {
   const redirect = authorizedPageSSP([Role.Admin], ctx);
   if (redirect) return redirect;
 
-  const { data: homeInfo } = await axGetAdminHomeInfo(ctx);
+  const { success, count } = await axGetLayerCount();
+
+  const { data: homeInfo } = success
+    ? await axGetAdminHomeInfo(ctx, count)
+    : await axGetAdminHomeInfo(ctx);
 
   return {
     props: {
