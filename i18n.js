@@ -6,7 +6,7 @@ module.exports = {
   locales: Object.keys(LANG.LIST),
   pages: {
     "*": ["common", "header", "auth", "form"],
-    "/": ["home"],
+    "/": ["home", "group"],
     "/edit": ["group"],
     "/group/[groupName]": ["home"],
     "/group/[groupName]/show": ["home"],
@@ -17,7 +17,7 @@ module.exports = {
     "rgx:/landscape/": ["landscape", "observation", "filters", "activity"],
     "rgx:/map": ["page", "map"],
     "rgx:/observation/": ["observation", "datatable", "filters", "activity"],
-    "rgx:/page/": ["page","activity"],
+    "rgx:/page/": ["page", "activity"],
     "rgx:/register": ["user"],
     "rgx:/roles/": ["filters", "taxon"],
     "rgx:/species/": ["observation", "species", "filters", "activity", "taxon"],
