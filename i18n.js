@@ -7,6 +7,7 @@ module.exports = {
   pages: {
     "*": ["common", "header", "auth", "form"],
     "/": ["home", "group"],
+    "/about": ["group"],
     "/edit": ["group"],
     "/group/[groupName]": ["home"],
     "/group/[groupName]/show": ["home"],
