@@ -7,6 +7,7 @@ module.exports = {
   pages: {
     "*": ["common", "header", "auth", "form"],
     "/": ["home"],
+    "/edit": ["group"],
     "/group/[groupName]": ["home"],
     "/group/[groupName]/show": ["home"],
     "rgx:/admin": ["admin", "group"],
