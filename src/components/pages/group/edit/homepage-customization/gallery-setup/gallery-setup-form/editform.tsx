@@ -1,5 +1,6 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Box, Button, Image } from "@chakra-ui/react";
+import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
@@ -18,9 +19,22 @@ import { galleryFieldValidationSchema } from "./common";
 
 export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData }) {
   const { t } = useTranslation();
+  const readMoreUIOptions = [
+    { label: "link", value: "link" },
+    { label: "button", value: "button" }
+  ];
 
-  const { id, ugId, title, fileName, customDescripition, moreLinks, displayOrder, observationId } =
-    editGalleryData;
+  const {
+    id,
+    ugId,
+    title,
+    fileName,
+    customDescripition,
+    moreLinks,
+    displayOrder,
+    observationId,
+    readMoreUIType
+  } = editGalleryData;
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -33,7 +47,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
       customDescripition,
       moreLinks,
       displayOrder,
-      observationId
+      observationId,
+      readMoreUIType
     }
   });
 
@@ -83,6 +98,15 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         <TextAreaField
           name="customDescripition"
           label={t("group:homepage_customization.table.description")}
+        />
+
+        <TextBoxField name="readMoreText" label="Read more button text" maxLength={30} />
+
+        <SelectInputField
+          name="readMoreUIType"
+          label="Read more UI type"
+          options={readMoreUIOptions}
+          shouldPortal={true}
         />
 
         <SubmitButton>{t("common:update")}</SubmitButton>
