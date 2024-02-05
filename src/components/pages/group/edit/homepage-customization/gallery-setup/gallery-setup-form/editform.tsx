@@ -23,6 +23,10 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     { label: "link", value: "link" },
     { label: "button", value: "button" }
   ];
+  const gallerySidebarBackgroundOptions = [
+    { label: "opaque", value: "opaque" },
+    { label: "translucent", value: "translucent" }
+  ];
 
   const {
     id,
@@ -33,7 +37,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     moreLinks,
     displayOrder,
     observationId,
-    readMoreUIType
+    readMoreUIType,
+    gallerySidebar
   } = editGalleryData;
 
   const hForm = useForm<any>({
@@ -48,7 +53,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
       moreLinks,
       displayOrder,
       observationId,
-      readMoreUIType
+      readMoreUIType,
+      gallerySidebar
     }
   });
 
@@ -106,6 +112,13 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           name="readMoreUIType"
           label="Read more UI type"
           options={readMoreUIOptions}
+          shouldPortal={true}
+        />
+
+        <SelectInputField
+          name="gallerySidebar"
+          label="Gallery sidebar background"
+          options={gallerySidebarBackgroundOptions}
           shouldPortal={true}
         />
 
