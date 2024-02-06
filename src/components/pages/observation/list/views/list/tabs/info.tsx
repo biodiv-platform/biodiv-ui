@@ -8,6 +8,7 @@ import SpeciesGroupBox from "@components/pages/observation/show/info/species-gro
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useGlobalState from "@hooks/use-global-state";
 import LocationIcon from "@icons/location";
+import NotesIcon from "@icons/notes";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axFlagObservation, axUnFlagObservation } from "@services/observation.service";
 import { formatDateReadableFromUTC } from "@utils/date";
@@ -56,6 +57,13 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
               <CalendarIcon mb={1} mr={2} />
               {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("common:unknown")}
             </Text>
+
+            {o?.observationNotes && (
+              <Text className="elipsis" title={t("common:notes")}>
+                <NotesIcon mb={1} mr={2} />
+                {o?.observationNotes ? o?.observationNotes : ""}
+              </Text>
+            )}
           </Box>
         </div>
         <Flex justify={[null, null, "flex-end", "flex-end"]} align="top" py={4}>
