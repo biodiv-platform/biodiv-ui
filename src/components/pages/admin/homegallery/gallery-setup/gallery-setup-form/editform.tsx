@@ -40,6 +40,7 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     observationId,
     truncated,
     readMoreUIType,
+    readMoreText,
     gallerySidebar
   } = editGalleryData;
 
@@ -56,6 +57,7 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
       observationId,
       truncated,
       readMoreUIType,
+      readMoreText,
       gallerySidebar
     }
   });
