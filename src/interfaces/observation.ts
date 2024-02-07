@@ -541,6 +541,7 @@ export interface ObservationListMinimalData {
   user?: UserIbp;
 }
 export interface ObservationListPageMapper {
+  observationNotes: any;
   observationId?: number; // int64
   createdOn?: string; // date-time
   lastRevised?: string; // date-time

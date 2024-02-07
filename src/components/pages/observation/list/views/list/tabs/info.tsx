@@ -1,4 +1,5 @@
 import { CalendarIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import ScientificName from "@components/@core/scientific-name";
@@ -56,6 +57,13 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
               <CalendarIcon mb={1} mr={2} />
               {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("common:unknown")}
             </Text>
+
+            {o?.observationNotes && (
+              <Text className="elipsis" title={t("observation:notes")}>
+                <EditIcon mr={2} mb={1} />
+                {o.observationNotes}
+              </Text>
+            )}
           </Box>
         </div>
         <Flex justify={[null, null, "flex-end", "flex-end"]} align="top" py={4}>
