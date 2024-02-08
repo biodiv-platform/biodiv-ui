@@ -13,7 +13,7 @@ import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
-import { axUserSearch } from "@services/auth.service";
+import { axEsUserAutoComplete } from "@services/auth.service";
 import { axRequestTaxonPermission } from "@services/taxonomy.service";
 import { TAXON_ROLES } from "@static/taxon";
 import notification, { NotificationType } from "@utils/notification";
@@ -26,8 +26,12 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
   const { t } = useTranslation();
 
   const onUserQuery = async (q) => {
-    const { data } = await axUserSearch(q);
-    return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
+    const { data } = await axEsUserAutoComplete(q);
+    return data.map((tag) => ({
+      label: `${tag.name} (${tag.id})`,
+      value: tag.id,
+      version: tag.version
+    }));
   };
 
   const hForm = useForm<any>({

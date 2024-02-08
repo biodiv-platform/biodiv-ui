@@ -1,5 +1,6 @@
 import { SelectAsyncInputField } from "@components/form/select-async";
-import { axUserSearch } from "@services/auth.service";
+import useGlobalState from "@hooks/use-global-state";
+import { axEsUserAutoComplete } from "@services/auth.service";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -17,10 +18,15 @@ export default function ManageGroupAdministratorsField({
   mb
 }: ManageGroupAdministratorsFieldProps) {
   const { t } = useTranslation();
+  const { currentGroup } = useGlobalState();
 
   const onUserQuery = async (q) => {
-    const { data } = await axUserSearch(q);
-    return data.map((tag) => ({ label: tag.name, value: tag.id, version: tag.version }));
+    const { data } = await axEsUserAutoComplete(q, currentGroup?.id);
+    return data.map((tag) => ({
+      label: `${tag.name} (${tag.id})`,
+      value: tag.id,
+      version: tag.version
+    }));
   };
 
   const handleEventCallback = async (value, event, setSelected) => {

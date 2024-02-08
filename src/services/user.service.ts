@@ -35,7 +35,7 @@ export const axGetUsersByID = async (userIds) => {
 
 export const axUserFilterSearch = async (name) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/autocomplete`, {
+    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/ibp/autocomplete`, {
       params: { name }
     });
     return data.map((u) => ({ label: u.name, value: u.id }));

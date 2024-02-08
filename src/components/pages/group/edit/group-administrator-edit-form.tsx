@@ -65,10 +65,12 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   const handleFormSubmit = async (values) => {
     const founderData = discardExistingAdministrators(values.founders, founderIds);
     const moderatorData = discardExistingAdministrators(values.moderators, moderatorIds);
+    const membersData = transformMemberPayload(values.members);
     const payload = {
       userGroupId,
       founderIds: founderData.idsList,
       moderatorsIds: moderatorData.idsList,
+      memberIds: membersData.idsList,
       founderEmail: founderData.emailList,
       moderatorsEmail: moderatorData.emailList
     };
@@ -108,6 +110,11 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
                 name="moderators"
                 label="Moderators"
                 onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+              />
+              <AdminInviteField
+                name="members"
+                label="Add Members"
+                onRemove={(o) => onMemberRemoved(o, [])}
               />
               <SubmitButton>{t("group:update_admin")}</SubmitButton>
             </form>

@@ -53,7 +53,9 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
       }
       return { label: c.name, value: c.id };
     });
-    return hasCurrentUser ? contributors : [...contributors, { label: user.name, value: user.id }];
+    return hasCurrentUser
+      ? contributors
+      : [...contributors, { label: `${user.name} (${user.id})`, value: user.id }];
   }, [initialValue.contributor]);
 
   const hForm = useForm<any>({

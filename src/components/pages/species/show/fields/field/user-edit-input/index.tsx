@@ -1,5 +1,5 @@
 import { SelectAsyncInputField } from "@components/form/select-async";
-import { axUserSearch } from "@services/auth.service";
+import { axEsUserAutoComplete } from "@services/auth.service";
 import React from "react";
 
 interface IUserSelectProps {
@@ -14,10 +14,10 @@ interface IUserSelectProps {
 
 const UserSelectField = ({ name, label, mb, isRequired }: IUserSelectProps) => {
   const onUserQuery = async (q) => {
-    const { data } = await axUserSearch(q);
+    const { data } = await axEsUserAutoComplete(q);
 
     return data.map((tag) => ({
-      label: tag.name,
+      label: `${tag.name} (${tag.id})`,
       value: tag.id,
       version: tag.version
     }));
