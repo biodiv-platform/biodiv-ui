@@ -77,7 +77,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     const { success } = await axAddGroupAdminMembers(payload);
     if (success) {
       notification(t("group:admin.updated"), NotificationType.Success);
-      router.push(`/show`, true, {}, true);
+      router.push(`/`, true, {}, true);
     } else {
       notification(t("group:admin.error"), NotificationType.Error);
     }

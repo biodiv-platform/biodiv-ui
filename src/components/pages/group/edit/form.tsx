@@ -86,10 +86,10 @@ export default function UserGroupEditForm({
       swLongitude: spacialCoverage?.se?.[0]
     };
 
-    const { success, data } = await axUserGroupUpdate(payload, userGroupId);
+    const { success } = await axUserGroupUpdate(payload, userGroupId);
     if (success) {
       notification(t("group:edit.success"), NotificationType.Success);
-      router.push(`/group/${data.name}/show`, false, {}, true);
+      router.push(`/`, true, {}, true);
     } else {
       notification(t("group:edit.error"));
     }
