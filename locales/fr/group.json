@@ -127,7 +127,7 @@
   },
   "icon": "Icône",
   "invalid_wkt": "Entrez une chaîne WKT valide",
-  "invite": "Tapez le nom d'utilisateur ou le courrier électronique",
+  "invite": "Tapez le nom d'utilisateur",
   "invite_founders": "Inviter les fondateurs",
   "invite_moderators": "Inviter des modérateurs",
   "join": "Rejoindre le groupe",
