@@ -87,9 +87,12 @@ export default function UserGroupEditForm({
     };
 
     const { success, data } = await axUserGroupUpdate(payload, userGroupId);
+
     if (success) {
       notification(t("group:edit.success"), NotificationType.Success);
-      router.push(`/group/${data.name}/show`, false, {}, true);
+      data?.webAddress?.startsWith("http")
+        ? router.push(data.webAddress, false)
+        : router.push(``, true);
     } else {
       notification(t("group:edit.error"));
     }
