@@ -14,12 +14,12 @@ import AuthorFilter from "./author";
 import DataQuality from "./data-quality";
 import ItemTypeFilter from "./itemType";
 import Location from "./location";
+import UserFilter from "./name-of-user";
 import PublisherFilter from "./publisher";
 import SpeciesGroupsFilter from "./species-groups";
 import TagsFilter from "./tags";
 import TimeFilter from "./time";
 import TitleFilter from "./title";
-import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
 
 export default function FiltersList() {
@@ -90,7 +90,7 @@ export default function FiltersList() {
           <>
             <AccordionButton>
               <Box flex={1} textAlign="left">
-                {t("filters:user.title")}
+                {t("filters:user.name_of_user")}
               </Box>
               <AccordionIcon />
             </AccordionButton>

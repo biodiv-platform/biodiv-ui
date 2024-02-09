@@ -9,8 +9,9 @@
     "founder": "Founders",
     "moderator": "Moderators",
     "no_access": "to update custom fields or group rules please contact administrator",
-    "title": "Group Administrators",
-    "updated": "Group Administrators Updated Successfully"
+    "title": "User Roles",
+    "view_members": "View All Members",
+    "updated": "Group Users Updated Successfully"
   },
   "confirm_closed_group": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
   "confirm_leave": "Leave Group?",

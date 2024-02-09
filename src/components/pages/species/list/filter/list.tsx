@@ -13,6 +13,7 @@ import React from "react";
 import AttributeFilter from "./attribute";
 import CommonNameFilter from "./commonName";
 import MediaType from "./media";
+import UserFilter from "./name-of-user";
 import RankFilter from "./rank";
 import ReferenceFilter from "./reference";
 import ScientificNameFilter from "./scientificName";
@@ -21,7 +22,6 @@ import SpeciesGroupsFilter from "./species-groups";
 import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
 import TraitsFilter from "./traits";
-import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
 
 export default function FiltersList() {

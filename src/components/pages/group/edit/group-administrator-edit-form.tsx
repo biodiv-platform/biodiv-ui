@@ -6,7 +6,8 @@ import {
   AccordionPanel,
   Box
 } from "@chakra-ui/react";
-import { useLocalRouter } from "@components/@core/local-link";
+import BlueLink from "@components/@core/blue-link";
+import LocalLink from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
@@ -28,7 +29,6 @@ const discardExistingAdministrators = (updatedMembers, currentAdministrators) =>
 
 export default function GroupAdministratorsEditForm({ founders, moderators, userGroupId }) {
   const { t } = useTranslation();
-  const router = useLocalRouter();
 
   const founderIds = founders.map(({ value }) => value);
   const moderatorIds = moderators.map(({ value }) => value);
@@ -77,7 +77,6 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     const { success } = await axAddGroupAdminMembers(payload);
     if (success) {
       notification(t("group:admin.updated"), NotificationType.Success);
-      router.push(`/`, true, {}, true);
     } else {
       notification(t("group:admin.error"), NotificationType.Error);
     }
@@ -103,20 +102,27 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
             <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
               <AdminInviteField
                 name="founders"
-                label="Founders"
+                label="Edit Founders"
                 onRemove={(o) => onMemberRemoved(o, founderIds)}
+                resetOnSubmit={false}
               />
               <AdminInviteField
                 name="moderators"
-                label="Moderators"
+                label="Edit Moderators"
                 onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+                resetOnSubmit={false}
               />
               <AdminInviteField
                 name="members"
                 label="Add Members"
                 onRemove={(o) => onMemberRemoved(o, [])}
               />
-              <SubmitButton>{t("group:update_admin")}</SubmitButton>
+              <Box mb={4}>
+                <LocalLink href={"/user/list"} prefixGroup={true}>
+                  <BlueLink display="block">{t("group:admin.view_members")}</BlueLink>
+                </LocalLink>
+              </Box>
+              <SubmitButton>{t("common:update")}</SubmitButton>
             </form>
           </FormProvider>
         </AccordionPanel>

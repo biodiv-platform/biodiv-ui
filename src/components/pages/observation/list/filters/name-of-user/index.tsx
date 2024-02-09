@@ -45,6 +45,7 @@ export default function UserFilterInput({ filterKey }) {
       onChange={handleOnChange}
       placeholder={t("filters:user.search")}
       styles={selectStyles}
+      formatOptionLabel={(option) => `${option.label} (${option.value})`}
     />
   ) : (
     <Spinner />
