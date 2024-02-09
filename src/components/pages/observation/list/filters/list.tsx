@@ -16,11 +16,11 @@ import DatasetFilter from "./dataset";
 import Location from "./location";
 import MediaType from "./media-type";
 import Name from "./name";
+import UserFilter from "./name-of-user";
 import SpeciesGroupsFilter from "./species-groups";
 import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
 import TraitsFilter from "./traits";
-import UserFilter from "./user";
 import UserGroupFilter from "./user-group";
 
 export default function FiltersList() {
@@ -119,7 +119,7 @@ export default function FiltersList() {
           <>
             <AccordionButton>
               <Box flex={1} textAlign="left">
-                {t("filters:user.title")}
+                {t("filters:user.name_of_user")}
               </Box>
               <AccordionIcon />
             </AccordionButton>

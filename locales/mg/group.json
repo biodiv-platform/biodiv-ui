@@ -9,8 +9,8 @@
     "founder": "Mpanorina",
     "moderator": "Mpanolotsaina",
     "no_access": "hanavao ny saha mahazatra na ny fitsipi-pifehezana dia azafady mba mifandraisa amin'ny Administrator",
-    "title": "Mpitantana vondrona",
-    "updated": "Nohavaozina tamim-pahombiazana ny mpitantana vondrona"
+    "title": "Andraikitry ny mpampiasa",
+    "updated": "Nahomby ny fanavaozana ny mpampiasa vondrona"
   },
   "confirm_closed_group": "Ity dia vondrona mihidy, ny fangatahana mpikambana dia tsy maintsy eken'ny mpandika teny iray. Tsindrio OK raha handefa ny fangatahana",
   "confirm_leave": "Mialà vondrona?",
@@ -127,7 +127,7 @@
   },
   "icon": "matoanteny",
   "invalid_wkt": "Ampidiro ny tady WKT manan-kery",
-  "invite": "Ampidiro ny anaran'ny mpampiasa na ny mailaka",
+  "invite": "Soraty ny anaran'ny mpampiasa",
   "invite_founders": "Asao ny mpanorina",
   "invite_moderators": "Asao ny mpanelanelana",
   "join": "Miaraha amin'ny vondrona",

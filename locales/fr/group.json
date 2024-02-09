@@ -9,8 +9,8 @@
     "founder": "Fondateur",
     "moderator": "Modérateurs",
     "no_access": "Pour mettre à jour les champs personnalisés ou les règles de groupe, veuillez contacter l'Administrateur",
-    "title": "Administrateurs de groupe",
-    "updated": "Les administrateurs de groupe sont mis à jour avec succès"
+    "title": "Rôles des utilisateurs",
+    "updated": "Les utilisateurs du groupe ont été mis à jour avec succès"
   },
   "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur. Appuyez sur OK pour envoyer une demande de requête.",
   "confirm_leave": "Quitter le groupe?",
@@ -127,7 +127,7 @@
   },
   "icon": "Icône",
   "invalid_wkt": "Entrez une chaîne WKT valide",
-  "invite": "Tapez le nom d'utilisateur ou le courrier électronique",
+  "invite": "Tapez le nom d'utilisateur",
   "invite_founders": "Inviter les fondateurs",
   "invite_moderators": "Inviter des modérateurs",
   "join": "Rejoindre le groupe",
