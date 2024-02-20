@@ -26,7 +26,7 @@ export default function MenuItems(props) {
         <>
           <MenuButton data-label={name} role="button" tabIndex={0}>
             {NameIcon && <NameIcon mr={1} />}
-            {t(`${name}title`)}
+            {t(`${name}`)}
             <ChevronDownIcon mt={[1, 0]} float={["right", "none"]} />
           </MenuButton>
           {(isLazy ? isOpen : true) ? (
@@ -44,7 +44,7 @@ export default function MenuItems(props) {
   ) : (
     <SimpleLink to={to} params={params}>
       {NameIcon && <NameIcon mr={1} />}
-      {t(`${name}title`)}
+      {t(`${name}`)}
     </SimpleLink>
   );
 }

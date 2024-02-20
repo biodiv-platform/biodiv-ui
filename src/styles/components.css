@@ -132,29 +132,3 @@
   background: white;
   min-height: 128px !important;
 }
-
-/* For pages */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.article a {
-  scroll-margin-top: 5rem;
-}
-
-.splide__slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.table-responsive {
-  overflow-x: auto;
-  max-width: 70vw;
-}
-
-.table-responsive td {
-  white-space: nowrap;
-}

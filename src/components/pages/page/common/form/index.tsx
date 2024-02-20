@@ -75,6 +75,8 @@ export default function PageForm({
           }),
         parentId: hideParentId ? Yup.number().notRequired() : Yup.number().required(),
         sticky: Yup.boolean().required(),
+        showInFooter: Yup.boolean(),
+        showInMenu: Yup.boolean(),
         allowComments: Yup.boolean().required()
       })
     ),
@@ -135,7 +137,9 @@ export default function PageForm({
         )}
 
         <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
-        <SwitchField name="allowComments" mb={2} label="Allow comments" />
+        <SwitchField name="showInMenu" mb={2} label={t("page:form.is_menu")} />
+        <SwitchField name="showInFooter" mb={2} label={t("page:form.is_footer")} />
+        <SwitchField name="allowComments" mb={2} label={t("page:form.is_allow_comments")} />
         <SubmitButton>{submitLabel}</SubmitButton>
       </form>
     </FormProvider>

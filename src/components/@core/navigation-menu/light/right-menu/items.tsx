@@ -5,12 +5,12 @@ import PagesMenuItem from "./pages-menu-item";
 export default [
   {
     active: SITE_CONFIG.SPECIES.ACTIVE,
-    name: "header:menu_secondary.species.",
+    name: "header:menu_secondary.species.title",
     to: "/species/list"
   },
   {
     active: SITE_CONFIG.OBSERVATION.ACTIVE,
-    name: "header:menu_secondary.observation.",
+    name: "header:menu_secondary.observation.title",
     rows: [
       {
         name: "all_observations",
@@ -24,21 +24,21 @@ export default [
   },
   {
     active: SITE_CONFIG.MAP.ACTIVE,
-    name: "header:menu_secondary.maps.",
+    name: "header:menu_secondary.maps.title",
     to: "/map"
   },
   {
     active: SITE_CONFIG.DOCUMENT.ACTIVE,
-    name: "header:menu_secondary.documents.",
+    name: "header:menu_secondary.documents.title",
     to: "/document/list"
   },
   {
     active: SITE_CONFIG.LANDSCAPE.ACTIVE,
-    name: "header:menu_secondary.landscapes.",
+    name: "header:menu_secondary.landscapes.title",
     to: "/landscape/list"
   },
   {
-    name: "header:menu_secondary.more.",
+    name: "header:menu_secondary.more.title",
     rows: [
       {
         name: "taxonomy",
@@ -68,13 +68,13 @@ export default [
   },
   {
     active: SITE_CONFIG.HEADER.IDAO.ACTIVE,
-    name: "header:menu_secondary.idao.",
+    name: "header:menu_secondary.idao.title",
     to: SITE_CONFIG.HEADER.IDAO.LINK
   },
   {
     active: SITE_CONFIG.PAGES.ACTIVE,
     cell: PagesMenuItem,
     isLazy: true,
-    name: "header:menu_secondary.pages."
+    name: "header:menu_secondary.pages.title"
   }
 ];

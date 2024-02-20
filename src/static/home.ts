@@ -1,5 +1,7 @@
 import SITE_CONFIG from "@configs/site-config";
 
+export const containerMaxW = { md: "6xl", lg: "7xl" };
+
 export const CARD_META = {
   species: {
     icon: "species",
