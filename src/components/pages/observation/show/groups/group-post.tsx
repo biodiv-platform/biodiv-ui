@@ -7,7 +7,7 @@ import { getGroupImageThumb, getGroupImageThumbForDatatable } from "@utils/media
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
@@ -31,8 +31,6 @@ export default function GroupPost({
   columns,
   isDataTable = false
 }: IGroupPostProps) {
-  if (groups?.length == 0) return null;
-
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
   const [selectedGroups, setSelectedGroups] = useState<any>(
     selectedDefault?.map((g) => g?.id?.toString())
@@ -42,6 +40,10 @@ export default function GroupPost({
   const editButtonRef: any = useRef(null);
 
   const [filterGroups, setFilterGroups] = useState(groups);
+
+  useEffect(() => {
+    setFilterGroups(groups);
+  }, [groups]);
 
   const onQuery = debounce((e) => {
     setFilterGroups(
