@@ -65,6 +65,12 @@
   "no_data": "କ data ଣସି ତଥ୍ୟ ନାହିଁ |",
   "no_groups_joined": "ଆପଣ କ any ଣସି ଗୋଷ୍ଠୀରେ ଯୋଗ ଦେଇ ନାହାଁନ୍ତି |",
   "no_results": "କ No ଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ |",
+  "not_a_member": {
+    "join": "ଯୋଗ ଦିଅନ୍ତୁ |",
+    "not_member": "କ any ଣସି ଗୋଷ୍ଠୀର ସଦସ୍ୟ ନୁହଁନ୍ତି |",
+    "one_or_more_groups": "ପ୍ରଥମେ ଏକ କିମ୍ବା ଅଧିକ ଗୋଷ୍ଠୀ |",
+    "please": "ଦୟାକରି"
+  },
   "notifications": {
     "invalid_credentials": "ଆପଣ ଦେଇଥିବା ଉପଭକ୍ତା ନାମ ବା ଗୁପ୍ତଶବ୍ଦ ଭୁଲ ଅଛି।",
     "token_error": "ଟୋକେନ୍ ଆଣିବାରେ ତ୍ରୁଟି |",

@@ -65,6 +65,12 @@
   "no_data": "કોઈ ડેટા નથી",
   "no_groups_joined": "તમે કોઈપણ ગ્રુપમાં જોડાયા નથી",
   "no_results": "કોઈ પરિણામો મળ્યા નથી",
+  "not_a_member": {
+    "join": "જોડાઓ",
+    "not_member": "કોઈપણ જૂથના સભ્ય નથી",
+    "one_or_more_groups": "પ્રથમ એક અથવા વધુ જૂથો",
+    "please": "મહેરબાની કરીને"
+  },
   "notifications": {
     "invalid_credentials": "તમે દાખલ કરેલ વપરાશકર્તા નામ અથવા પાસવર્ડ ખોટો છે.",
     "token_error": "ટોકન લાવવામાં ભૂલ",

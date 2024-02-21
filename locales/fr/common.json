@@ -65,6 +65,12 @@
   "no_data": "Pas de données",
   "no_groups_joined": "Vous n'avez rejoint aucun groupe",
   "no_results": "Aucun résultat trouvé",
+  "not_a_member": {
+    "join": "rejoindre",
+    "not_member": "N'est membre d'aucun groupe",
+    "one_or_more_groups": "un ou plusieurs groupes en premier",
+    "please": "S'il te plaît"
+  },
   "notifications": {
     "invalid_credentials": "Le nom d'utilisateur ou le mot de passe que vous avez saisi est incorrect.",
     "token_error": "Erreur de récupération du jeton",

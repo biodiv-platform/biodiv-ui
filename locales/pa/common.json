@@ -65,6 +65,12 @@
   "no_data": "ਕੋਈ ਡਾਟਾ ਨਹੀਂ",
   "no_groups_joined": "ਤੁਸੀਂ ਕਿਸੇ ਸਮੂਹ ਵਿੱਚ ਸ਼ਾਮਲ ਨਹੀਂ ਹੋਏ ਹੋ",
   "no_results": "ਕੋਈ ਨਤੀਜਾ ਨਹੀਂ ਮਿਲਿਆ",
+  "not_a_member": {
+    "join": "ਜੁੜੋ",
+    "not_member": "ਕਿਸੇ ਗਰੁੱਪ ਦਾ ਮੈਂਬਰ ਨਹੀਂ",
+    "one_or_more_groups": "ਪਹਿਲਾਂ ਇੱਕ ਜਾਂ ਵਧੇਰੇ ਸਮੂਹ",
+    "please": "ਕ੍ਰਿਪਾ"
+  },
   "notifications": {
     "invalid_credentials": "ਤੁਹਾਡੇ ਦੁਆਰਾ ਦਿੱਤਾ ਗਿਆ ਨਾਮ ਜਾਂ ਪਾਸਵਰਡ ਗਲਤ ਹੈ.",
     "token_error": "ਟੋਕਨ ਲਿਆਉਣ ਵਿੱਚ ਗਲਤੀ",
