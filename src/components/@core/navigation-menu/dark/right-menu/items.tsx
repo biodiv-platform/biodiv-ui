@@ -9,10 +9,10 @@ export default [
     active: SITE_CONFIG.USERGROUP.ACTIVE,
     cell: GroupListItem,
     isLazy: true,
-    name: "header:menu_primary.groups.title"
+    name: "header:menu_primary.groups."
   },
   {
-    name: "header:menu_primary.contribute.title",
+    name: "header:menu_primary.contribute.",
     nameIcon: AddIcon,
     isLazy: true,
     rows: [

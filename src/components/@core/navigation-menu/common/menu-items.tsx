@@ -14,7 +14,7 @@ const SimpleLink = ({ children, to, params }) => (
 );
 
 export default function MenuItems(props) {
-  const { name, nameIcon: NameIcon, to, rows = [], cell: CCell, params, isLazy } = props;
+  const { name, nameIcon: NameIcon, to, rows = [], cell: CCell, params, isLazy, isPage } = props;
   const isDropdown = rows.length > 0 || CCell;
   const { t } = useTranslation();
 
@@ -26,7 +26,7 @@ export default function MenuItems(props) {
         <>
           <MenuButton data-label={name} role="button" tabIndex={0}>
             {NameIcon && <NameIcon mr={1} />}
-            {t(`${name}`)}
+            {t(isPage ? `${name}` : `${name}title`)}
             <ChevronDownIcon mt={[1, 0]} float={["right", "none"]} />
           </MenuButton>
           {(isLazy ? isOpen : true) ? (
@@ -35,7 +35,7 @@ export default function MenuItems(props) {
             ) : isContributeMenu ? (
               <GroupedSubMenu rows={rows} prefix={name} />
             ) : (
-              <SubMenu rows={rows} prefix={name} />
+              <SubMenu rows={rows} prefix={name} isPage={isPage} />
             )
           ) : null}
         </>
@@ -44,7 +44,7 @@ export default function MenuItems(props) {
   ) : (
     <SimpleLink to={to} params={params}>
       {NameIcon && <NameIcon mr={1} />}
-      {t(`${name}`)}
+      {t(isPage ? `${name}` : `${name}title`)}
     </SimpleLink>
   );
 }

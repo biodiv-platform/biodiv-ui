@@ -116,7 +116,12 @@ export const removeCardWrapperParagraphs = (html) => {
   }
 };
 
-export const convertToMenuFormat = (data, basePath = "/page/", prefixGroup = true) => {
+export const convertToMenuFormat = (
+  data,
+  basePath = "/page/",
+  showInMenu = false,
+  prefixGroup = true
+) => {
   const convertNode = (node) => {
     const menuNode = {
       name: node.title,
@@ -125,8 +130,20 @@ export const convertToMenuFormat = (data, basePath = "/page/", prefixGroup = tru
       prefixGroup: prefixGroup
     };
 
+    const filteredChildren = (node.children || []).filter((child) => {
+      return child.showInMenu || !showInMenu;
+    });
+
+    if (filteredChildren.length > 0) {
+      menuNode.rows = filteredChildren.map((child) => convertNode(child));
+    }
+
     return menuNode;
   };
 
-  return data.map((node) => convertNode(node));
+  const filteredData = data.filter((node) => {
+    return node.showInMenu || !showInMenu;
+  });
+
+  return filteredData.map((node) => convertNode(node));
 };

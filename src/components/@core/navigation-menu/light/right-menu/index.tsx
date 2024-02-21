@@ -48,15 +48,11 @@ const activeItems = items.filter(({ active = true }) => active);
 export default function RightMenu({ isOpen }: IMenuProps) {
   const { pages } = useGlobalState();
 
-  const outputMenuFormat = convertToMenuFormat(
-    pages.flatMap((page) => [page, ...page.children]).filter((page) => page.showInMenu !== false),
-    "/page/",
-    true
-  );
+  const outputMenuFormat = convertToMenuFormat(pages, "/page/", true, true);
   return (
     <RightMenuContainer data-expanded={isOpen} className="fade">
       {outputMenuFormat.map((item) => (
-        <MainItems key={item.name} {...item} />
+        <MainItems key={item.name} {...item} isPage={true} />
       ))}
       {activeItems.map((item) => (
         <MainItems key={item.name} {...item} />

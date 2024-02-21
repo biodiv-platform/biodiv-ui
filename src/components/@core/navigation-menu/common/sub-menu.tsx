@@ -10,7 +10,7 @@ const getPageLink = (lang, to) => {
   return typeof to === "string" ? to : to?.[lang] || to?.[SITE_CONFIG.LANG.DEFAULT];
 };
 
-export default function SubMenu({ rows, prefix = "" }) {
+export default function SubMenu({ rows, prefix = "", isPage = false }) {
   const { t, lang } = useTranslation();
   const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
 
@@ -18,7 +18,10 @@ export default function SubMenu({ rows, prefix = "" }) {
     <MenuList>
       {rows.map((item) => {
         const [label, toLink] = useMemo(
-          () => [item.name && t(prefix + item.name), getPageLink(lang, item.to)],
+          () => [
+            item.name && t(isPage ? item.name : prefix + item.name),
+            getPageLink(lang, item.to)
+          ],
           [lang]
         );
 
