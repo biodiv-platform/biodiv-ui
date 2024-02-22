@@ -1,4 +1,4 @@
-import { Box, Container, Image, Link, SimpleGrid, Stack } from "@chakra-ui/react";
+import { Box, Container, Link, SimpleGrid, Stack } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import FacebookIcon from "@icons/facebook";
@@ -6,7 +6,7 @@ import FeedbackIcon from "@icons/feedback";
 import GithubIcon from "@icons/github";
 import MailIcon from "@icons/mail";
 import TwitterIcon from "@icons/twitter";
-import { APP_VERSION, DEFAULT_GROUP } from "@static/constants";
+import { APP_VERSION } from "@static/constants";
 import { containerMaxW } from "@static/home";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -29,12 +29,6 @@ export default function Footer() {
       <Container as={Stack} maxW={containerMaxW} py={10}>
         <SimpleGrid templateColumns={{ md: "4fr 2fr" }} spacing={8}>
           <Stack spacing={4}>
-            <Box>
-              <Image
-                alt={SITE_CONFIG.SITE.TITLE.en}
-                src={DEFAULT_GROUP.icon + `?w=128&preserve=true`}
-              />
-            </Box>
             <Box>
               {t("common:footer.powered_by")}
               <Link ml={1} href="https://github.com/biodiv-platform">
@@ -74,7 +68,7 @@ export default function Footer() {
             </Stack>
           </Stack>
           <div>
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
+            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
               {pages
                 .flatMap((page) => [page, ...page.children])
                 .filter((page) => page.showInFooter !== false)
