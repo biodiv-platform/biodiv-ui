@@ -65,12 +65,6 @@
   "no_data": "কোন তথ্য নেই",
   "no_groups_joined": "আপনি কোন গ্রুপে যোগদান করেননি",
   "no_results": "কোন ফলাফল পাওয়া যায়নি",
-  "not_a_member": {
-    "join": "যোগদান",
-    "not_member": "কোন দলের সদস্য নয়",
-    "one_or_more_groups": "এক বা একাধিক দল প্রথমে",
-    "please": "অনুগ্রহ"
-  },
   "notifications": {
     "invalid_credentials": "আপনার প্রবেশকৃত ব্যবহারিক নাম ও প্রবেশ সংকেত টি ভুল।",
     "token_error": "টোকেন fetching ত্রুটি",

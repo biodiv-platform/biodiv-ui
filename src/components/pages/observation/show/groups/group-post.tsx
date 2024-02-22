@@ -1,6 +1,4 @@
 import { Box, Button, Collapse, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
-import ExternalBlueLink from "@components/@core/blue-link/external";
-import LocalLink from "@components/@core/local-link";
 import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
@@ -122,14 +120,7 @@ export default function GroupPost({
             isDatatableUsergroups={isDataTable}
           />
         ) : (
-          <div>
-            {t("common:not_a_member.not_member")}
-            {". "} {t("common:not_a_member.please")}{" "}
-            <LocalLink href="/group/list">
-              <ExternalBlueLink> {t("common:not_a_member.join")}</ExternalBlueLink>
-            </LocalLink>{" "}
-            {t("common:not_a_member.one_or_more_groups")}
-          </div>
+          <div>{t("common:no_groups_joined")}</div>
         )}
 
         <Box mt={2}>
