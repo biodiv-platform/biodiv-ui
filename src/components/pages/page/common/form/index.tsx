@@ -1,4 +1,13 @@
-import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  GridItem,
+  SimpleGrid
+} from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { SwitchField } from "@components/form/switch";
@@ -97,16 +106,8 @@ export default function PageForm({
               name="pageType"
               label={t("page:form.type.title")}
               options={contentTypeOptions}
+              shouldPortal={true}
             />
-          </GridItem>
-        </SimpleGrid>
-
-        <SimpleGrid columns={{ md: 6 }} spacing={4}>
-          <GridItem colSpan={4}>
-            <TextAreaField name="description" label={t("page:form.description")} />
-          </GridItem>
-          <GridItem colSpan={2}>
-            <SocialPreviewField name="socialPreview" label={t("page:form.social_preview")} />
           </GridItem>
         </SimpleGrid>
 
@@ -116,30 +117,69 @@ export default function PageForm({
             label={t("page:form.content")}
             uploadHandler={axUploadEditorPageResource}
           />
-          <PageGalleryField
-            name="galleryData"
-            label={t("page:form.gallery")}
-            onRemoveCallback={axRemovePageGalleryImage}
-          />
         </Box>
 
         <Box hidden={!isPageTypeRedirect}>
           <TextBoxField name="url" label={t("page:form.url")} />
         </Box>
 
-        {!hideParentId && (
-          <SelectInputField
-            name="parentId"
-            label={t("page:form.parent")}
-            options={parentOptions}
-            shouldPortal={true}
-          />
-        )}
-
-        <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
-        <SwitchField name="showInMenu" mb={2} label={t("page:form.is_menu")} />
-        <SwitchField name="showInFooter" mb={2} label={t("page:form.is_footer")} />
-        <SwitchField name="allowComments" mb={2} label={t("page:form.is_allow_comments")} />
+        <Box hidden={isPageTypeRedirect}>
+          <Accordion allowToggle>
+            <AccordionItem
+              mb={8}
+              bg="white"
+              border="1px solid var(--chakra-colors-gray-300)"
+              borderRadius="md"
+            >
+              <AccordionButton _expanded={{ bg: "gray.100" }}>
+                <Box flex={1} textAlign="left">
+                  🖼️ {t("page:form.gallery")}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel>
+                <Box hidden={isPageTypeRedirect}>
+                  <PageGalleryField
+                    name="galleryData"
+                    label={t("page:form.gallery")}
+                    onRemoveCallback={axRemovePageGalleryImage}
+                  />
+                </Box>
+                <SocialPreviewField name="socialPreview" label={t("page:form.social_preview")} />
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        </Box>
+        <Accordion allowToggle>
+          <AccordionItem
+            mb={8}
+            bg="white"
+            border="1px solid var(--chakra-colors-gray-300)"
+            borderRadius="md"
+          >
+            <AccordionButton _expanded={{ bg: "gray.100" }}>
+              <Box flex={1} textAlign="left">
+                📝 {t("page:form.meta_data")}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel>
+              <TextAreaField name="description" label={t("page:form.description")} />
+              {!hideParentId && (
+                <SelectInputField
+                  name="parentId"
+                  label={t("page:form.parent")}
+                  options={parentOptions}
+                  shouldPortal={true}
+                />
+              )}
+              <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
+              <SwitchField name="showInMenu" mb={2} label={t("page:form.is_menu")} />
+              <SwitchField name="showInFooter" mb={2} label={t("page:form.is_footer")} />
+              <SwitchField name="allowComments" mb={2} label={t("page:form.is_allow_comments")} />
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
         <SubmitButton>{submitLabel}</SubmitButton>
       </form>
     </FormProvider>

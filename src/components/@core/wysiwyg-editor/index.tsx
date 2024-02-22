@@ -27,7 +27,7 @@ export default function WYSIWYGEditor({ uploadHandler, ...props }: WYSIWYGEditor
       init={{
         skin: false,
         width: "100%",
-        height: "300px",
+        height: "600px",
         relative_urls: false,
         convert_urls: false,
         plugins: ["link", "table", "code", "lists", uploadHandler ? "image" : "na"],
