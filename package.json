@@ -46,6 +46,7 @@
     "dayjs": "^1.11.5",
     "debounce-promise": "^3.1.2",
     "deepmerge": "^4.2.2",
+    "fetch-opengraph": "^1.0.36",
     "follow-redirects": "^1.15.2",
     "friendly-http-status": "^1.0.0",
     "human-readable-numbers": "^0.9.5",

@@ -1,3 +1,5 @@
+import { removeCardWrapperParagraphs } from "@utils/pages";
+
 export const PAGE_TYPES = {
   CONTENT: "Content",
   REDIRECT: "Redirect"
@@ -21,6 +23,7 @@ export const transformPagePayload = (payload, extraProps = {}) => {
   return {
     ...payload,
     galleryData,
+    content: removeCardWrapperParagraphs(payload.content),
     userIbp: undefined,
     languageId: undefined,
     date: undefined,

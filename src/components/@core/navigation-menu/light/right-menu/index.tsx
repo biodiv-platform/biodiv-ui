@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import useGlobalState from "@hooks/use-global-state";
+import { convertToMenuFormat } from "@utils/pages";
 import { Mq } from "mq-styled-components";
 import React from "react";
 
@@ -44,8 +46,14 @@ const RightMenuContainer = styled.div`
 const activeItems = items.filter(({ active = true }) => active);
 
 export default function RightMenu({ isOpen }: IMenuProps) {
+  const { pages } = useGlobalState();
+
+  const outputMenuFormat = convertToMenuFormat(pages, "/page/", true, true);
   return (
     <RightMenuContainer data-expanded={isOpen} className="fade">
+      {outputMenuFormat.map((item) => (
+        <MainItems key={item.name} {...item} isPage={true} />
+      ))}
       {activeItems.map((item) => (
         <MainItems key={item.name} {...item} />
       ))}

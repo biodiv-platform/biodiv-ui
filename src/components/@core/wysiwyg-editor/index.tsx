@@ -27,14 +27,27 @@ export default function WYSIWYGEditor({ uploadHandler, ...props }: WYSIWYGEditor
       init={{
         skin: false,
         width: "100%",
-        height: "300px",
+        height: "600px",
         relative_urls: false,
         convert_urls: false,
         plugins: ["link", "table", "code", "lists", uploadHandler ? "image" : "na"],
         toolbar:
           "undo redo | bold italic numlist bullist | alignleft aligncenter alignright alignjustify | link image table | code",
         images_upload_handler: uploadHandler,
-        images_upload_base_path: "/"
+        images_upload_base_path: "/",
+        link_class_list: [
+          { title: "None", value: "" },
+          { title: "Card", value: "preview-card" }
+        ],
+        image_class_list: [
+          { title: "None", value: "" },
+          { title: "Left", value: "img-wrap-left" },
+          { title: "Right", value: "img-wrap-right" }
+        ],
+        content_style: `
+          .img-wrap-left { float: left; margin-right: 40px; }
+          .img-wrap-right { float: right; margin-left: 40px; }
+        `
       }}
     />
   );
