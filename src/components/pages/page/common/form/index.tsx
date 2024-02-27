@@ -14,7 +14,7 @@ import { SwitchField } from "@components/form/switch";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PageShowMinimal } from "@interfaces/pages";
+import { PageUpdate } from "@interfaces/pages";
 import { axRemovePageGalleryImage, axUploadEditorPageResource } from "@services/pages.service";
 import { translateOptions } from "@utils/i18n";
 import dynamic from "next/dynamic";
@@ -31,7 +31,7 @@ import { SocialPreviewField } from "./social-preview";
 const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
 interface PageFormProps {
-  defaultValues: Partial<PageShowMinimal>;
+  defaultValues: Partial<PageUpdate>;
   submitLabel: string;
   onSubmit;
   hideParentId: boolean;
@@ -93,6 +93,11 @@ export default function PageForm({
   });
 
   const isPageTypeRedirect = hForm.watch("pageType") === PAGE_TYPES.REDIRECT;
+
+  const getPageShowInMenu = (pages, id) => {
+    const { showInMenu = true } = pages.find((page) => page.id === id) || {};
+    return showInMenu;
+  };
 
   return (
     <FormProvider {...hForm}>
@@ -174,7 +179,12 @@ export default function PageForm({
                 />
               )}
               <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
-              <SwitchField name="showInMenu" mb={2} label={t("page:form.is_menu")} />
+              <SwitchField
+                name="showInMenu"
+                mb={2}
+                label={t("page:form.is_menu")}
+                disabled={!getPageShowInMenu(pages, defaultValues?.parentId)}
+              />
               <SwitchField name="showInFooter" mb={2} label={t("page:form.is_footer")} />
               <SwitchField name="allowComments" mb={2} label={t("page:form.is_allow_comments")} />
             </AccordionPanel>

@@ -49,6 +49,7 @@ export interface PageUpdate {
   content?: string;
   description?: string;
   pageType?: "CONTENT" | "REDIRECT";
+  parentId?: number;
   url?: string;
   sticky?: boolean;
   showInFooter?: boolean;
