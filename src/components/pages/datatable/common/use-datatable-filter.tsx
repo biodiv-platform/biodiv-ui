@@ -22,7 +22,7 @@ export interface DataTableData {
 export interface showPageFilters {
   offset?: string;
   limit?: string;
-  sortOn?: string;
+  sort?: string;
   userGroupId?: string;
 }
 

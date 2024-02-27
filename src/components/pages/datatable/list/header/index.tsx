@@ -15,7 +15,7 @@ export default function Header() {
     const v = e?.target?.value;
     setFilter((_draft) => {
       _draft.f.offset = 0;
-      _draft.f.sortOn = `${v}`;
+      _draft.f.sort = `${v}`;
     });
   };
 
@@ -39,7 +39,7 @@ export default function Header() {
               <Select
                 maxW="10rem"
                 aria-label={t("common:list.sort_by")}
-                value={filter?.sortOn}
+                value={filter?.sort}
                 onChange={handleOnSort}
               >
                 {sortByOptions.map(({ name, key }) => (
