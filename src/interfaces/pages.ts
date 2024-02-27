@@ -30,6 +30,7 @@ export interface PageShowMinimal {
   id?: number; // int64
   title?: string;
   content?: string;
+  parentId?: number;
 }
 export interface PageTree {
   id?: number; // int64
@@ -49,7 +50,6 @@ export interface PageUpdate {
   content?: string;
   description?: string;
   pageType?: "CONTENT" | "REDIRECT";
-  parentId?: number;
   url?: string;
   sticky?: boolean;
   showInFooter?: boolean;

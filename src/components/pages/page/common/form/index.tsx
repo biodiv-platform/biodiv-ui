@@ -14,7 +14,7 @@ import { SwitchField } from "@components/form/switch";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PageUpdate } from "@interfaces/pages";
+import { PageShowMinimal } from "@interfaces/pages";
 import { axRemovePageGalleryImage, axUploadEditorPageResource } from "@services/pages.service";
 import { translateOptions } from "@utils/i18n";
 import dynamic from "next/dynamic";
@@ -31,7 +31,7 @@ import { SocialPreviewField } from "./social-preview";
 const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
 interface PageFormProps {
-  defaultValues: Partial<PageUpdate>;
+  defaultValues: Partial<PageShowMinimal>;
   submitLabel: string;
   onSubmit;
   hideParentId: boolean;
