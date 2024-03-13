@@ -67,13 +67,6 @@ export default function ListHeader() {
   const handleMediaToggle = (e) => {
     setAllMedia(e.target.checked);
     addMediaToggle(allMedia);
-    allMedia === true
-      ? setFilter((_draft) => {
-          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
-        })
-      : setFilter((_draft) => {
-          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio";
-        });
   };
 
   return (
