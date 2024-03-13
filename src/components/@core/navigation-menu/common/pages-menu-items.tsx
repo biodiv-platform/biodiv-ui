@@ -1,7 +1,6 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Box, Link, Menu, MenuButton, useBreakpointValue } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import { Mq } from "mq-styled-components";
 import React from "react";
 
 import SubMenu from "./sub-menu";
@@ -15,7 +14,6 @@ const SimpleLink = ({ children, to, params }) => (
 export default function PagesMenuItems(props) {
   const { name, nameIcon: NameIcon, to, rows = [], cell: CCell, params, isLazy } = props;
   const isDropdown = rows.length > 0 || CCell;
-  console.warn("Mq.max.sm", Mq.max.sm);
 
   const isDesktop = useBreakpointValue({ base: false, lg: true });
   const linkContent = (
