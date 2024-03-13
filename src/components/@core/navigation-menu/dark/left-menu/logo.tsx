@@ -28,7 +28,7 @@ const Logo = styled.div`
     font-size: 1.5rem;
   }
 
-  ${Mq.max.sm} {
+  ${Mq.max.lg} {
     width: 100%;
     button,
     .button {

@@ -23,7 +23,7 @@ const RightMenuContainer = styled.div`
     white-space: pre;
   }
 
-  ${Mq.max.sm} {
+  ${Mq.max.lg} {
     width: 100%;
     flex-direction: column;
     & > a,
