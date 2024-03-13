@@ -173,6 +173,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     }
   };
 
+  useDidUpdateEffect(() => {
+    fetchListData();
+  }, [filter]);
+
   useEffect(() => {
     fetchListData();
   }, [allMedia]);
@@ -217,14 +221,14 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     });
   };
 
-  const addMediaToggle = (media) => {
-    media == true
-      ? setFilter((_draft) => {
-          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
-        })
-      : setFilter((_draft) => {
-          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio";
-        });
+  const addMediaToggle = (e) => {
+    if (e.target.checked) {
+      setAllMedia(true);
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio,no_media");
+    } else {
+      setAllMedia(false);
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio");
+    }
   };
 
   return (
