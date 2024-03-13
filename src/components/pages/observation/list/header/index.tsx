@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  HStack,
   Select,
   Stack,
   Switch,
@@ -116,7 +117,11 @@ export default function ListHeader() {
         </Stack>
       </Flex>
 
-      <Switch defaultChecked={allMedia} id="media-toggle" onChange={handleMediaToggle} />
+      <HStack spacing={4}>
+        <Text>With media</Text>
+        <Switch defaultChecked={allMedia} id="media-toggle" onChange={handleMediaToggle} />
+        <Text>All</Text>
+      </HStack>
 
       {observationData && observationData.n > -1 && (
         <Flex mb={4} justifyContent="space-between" minH="32px" alignItems="center">
