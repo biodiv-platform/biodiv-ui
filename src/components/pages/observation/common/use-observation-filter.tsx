@@ -173,7 +173,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     }
   };
 
-  useDidUpdateEffect(() => {
+  useEffect(() => {
     fetchListData();
   }, [allMedia]);
 
