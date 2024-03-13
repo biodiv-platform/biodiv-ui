@@ -15,6 +15,7 @@ import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list"
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useDeepCompareEffect } from "use-deep-compare";
 import { useImmer } from "use-immer";
 
 const deDupeObservations = (existingObservations, newObservations) => {
@@ -55,6 +56,9 @@ interface ObservationFilterContextProps {
   setCropObservationData;
   setCropObservationId;
   canCropObservation;
+  allMedia;
+  setAllMedia;
+  addMediaToggle;
 }
 
 const ObservationFilterContext = createContext<ObservationFilterContextProps>(
@@ -73,6 +77,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cropObservationData, setCropObservationData] = useState();
   const [canCropObservation, setCanCropObservation] = useState();
+  const [allMedia, setAllMedia] = useState(false);
 
   const setCropObservationId = async (id, canCrop) => {
     setCanCropObservation(canCrop);
@@ -171,7 +176,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
 
   useDidUpdateEffect(() => {
     fetchListData();
-  }, [filter]);
+  }, [allMedia]);
 
   useDidUpdateEffect(() => {
     if (selectAll) {
@@ -213,6 +218,16 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     });
   };
 
+  const addMediaToggle = (media) => {
+    media == true
+      ? setFilter((_draft) => {
+          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+        })
+      : setFilter((_draft) => {
+          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio";
+        });
+  };
+
   return (
     <ObservationFilterContext.Provider
       value={{
@@ -247,7 +262,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         location: props.location,
         states: props.states,
         traits: props.traits,
-        customFields: props.customFields
+        customFields: props.customFields,
+        allMedia,
+        setAllMedia,
+        addMediaToggle
       }}
     >
       {props.children}

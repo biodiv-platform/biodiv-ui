@@ -4,6 +4,7 @@ import {
   Flex,
   Select,
   Stack,
+  Switch,
   Tab,
   TabList,
   Tabs,
@@ -29,7 +30,10 @@ export default function ListHeader() {
     observationData,
     handleBulkCheckbox,
     bulkObservationIds,
-    selectAll
+    selectAll,
+    allMedia,
+    setAllMedia,
+    addMediaToggle
   } = useObservationFilter();
   const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter?.view);
   const { t } = useTranslation();
@@ -58,6 +62,18 @@ export default function ListHeader() {
   const handleSelectAll = () => {
     alert(`${observationData.n} ${t("observation:select_all_message")}`);
     handleBulkCheckbox("selectAll");
+  };
+
+  const handleMediaToggle = (e) => {
+    setAllMedia(e.target.checked);
+    addMediaToggle(allMedia);
+    allMedia === true
+      ? setFilter((_draft) => {
+          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+        })
+      : setFilter((_draft) => {
+          _draft.f.mediaFilter = "no_of_images,no_of_videos,no_of_audio";
+        });
   };
 
   return (
@@ -106,6 +122,9 @@ export default function ListHeader() {
           </Button>
         </Stack>
       </Flex>
+
+      <Switch defaultChecked={allMedia} id="media-toggle" onChange={handleMediaToggle} />
+
       {observationData && observationData.n > -1 && (
         <Flex mb={4} justifyContent="space-between" minH="32px" alignItems="center">
           <Text color="gray.600">
