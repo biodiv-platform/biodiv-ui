@@ -15,7 +15,6 @@ import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list"
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useDeepCompareEffect } from "use-deep-compare";
 import { useImmer } from "use-immer";
 
 const deDupeObservations = (existingObservations, newObservations) => {
