@@ -11,8 +11,7 @@ Allow: /
 Disallow: /namelist/
 
 User-agent: Bingbot
-Allow: /
-Disallow: /namelist/
+Disallow: /
 
 User-agent: DuckDuckBot
 Allow: /
