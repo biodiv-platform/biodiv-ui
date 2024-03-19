@@ -1,6 +1,11 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Box, Button, chakra, useBoolean } from "@chakra-ui/react";
-import LocalLink from "@components/@core/local-link";
+import DeleteActionButton from "@components/@core/action-buttons/delete";
+import SimpleActionButton from "@components/@core/action-buttons/simple";
+import LocalLink, { useLocalRouter } from "@components/@core/local-link";
+import EditIcon from "@icons/edit";
+import { axDeletePageByID } from "@services/pages.service";
+import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import usePages from "./use-pages-sidebar";
@@ -17,12 +22,15 @@ const TogglePaneButton = ({ isExpanded, onToggle }) => (
 );
 
 const PagesListItem = ({ page, isParent }) => {
-  const { currentPage, linkType } = usePages();
+  const { currentPage, linkType, canEdit } = usePages();
   const [isExpanded, setIsExpanded] = useBoolean(true);
   const [hasChildren, isActive] = useMemo(
     () => [page.children.length > 0, currentPage?.id === page.id],
     [page, currentPage]
   );
+  const router = useLocalRouter();
+  const { t } = useTranslation();
+  const handleOnEdit = () => router.push(`/page/edit/${currentPage.id}`, true);
 
   return (
     <div>
@@ -43,6 +51,24 @@ const PagesListItem = ({ page, isParent }) => {
             {page.title}
           </chakra.a>
         </LocalLink>
+
+        {canEdit && page.pageType == "Redirect" && linkType == "show" && (
+          <>
+            <SimpleActionButton
+              icon={<EditIcon />}
+              title={t("common:edit")}
+              onClick={handleOnEdit}
+              colorScheme="teal"
+            />
+            <DeleteActionButton
+              observationId={currentPage.id}
+              title={t("page:remove.title")}
+              description={t("page:remove.description")}
+              deleted={t("page:remove.success")}
+              deleteFunc={axDeletePageByID}
+            />
+          </>
+        )}
 
         {hasChildren && (
           <TogglePaneButton isExpanded={isExpanded} onToggle={setIsExpanded.toggle} />
