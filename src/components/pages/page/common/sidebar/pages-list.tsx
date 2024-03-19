@@ -30,7 +30,7 @@ const PagesListItem = ({ page, isParent }) => {
   );
   const router = useLocalRouter();
   const { t } = useTranslation();
-  const handleOnEdit = () => router.push(`/page/edit/${currentPage.id}`, true);
+  const handleOnEdit = () => router.push(`/page/edit/${page.id}`, true);
 
   return (
     <div>
@@ -61,7 +61,7 @@ const PagesListItem = ({ page, isParent }) => {
               colorScheme="teal"
             />
             <DeleteActionButton
-              observationId={currentPage.id}
+              observationId={page.id}
               title={t("page:remove.title")}
               description={t("page:remove.description")}
               deleted={t("page:remove.success")}
