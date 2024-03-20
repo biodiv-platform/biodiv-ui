@@ -8,6 +8,7 @@ import { axDeletePageByID } from "@services/pages.service";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
+import { PAGE_TYPES } from "../data";
 import usePages from "./use-pages-sidebar";
 
 interface PagesListProps {
@@ -52,7 +53,7 @@ const PagesListItem = ({ page, isParent }) => {
           </chakra.a>
         </LocalLink>
 
-        {canEdit && page.pageType == "Redirect" && linkType == "show" && (
+        {canEdit && page.pageType == PAGE_TYPES.REDIRECT && linkType == "show" && (
           <>
             <SimpleActionButton
               icon={<EditIcon />}
