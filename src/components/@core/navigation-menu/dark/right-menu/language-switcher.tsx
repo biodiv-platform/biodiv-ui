@@ -33,7 +33,7 @@ export default function LanguageSwitcher() {
     <Menu isLazy={true}>
       <MenuButton as={Link} role="button">
         {SITE_CONFIG.LANG.LIST[lang].NAME}
-        <ChevronDownIcon />
+        <ChevronDownIcon mt={[1, 0]} float={["right", "right", "right", "none"]} />
       </MenuButton>
       <MenuList>
         {Object.entries(SITE_CONFIG.LANG.LIST).map(([langCode, info]: any) => (

@@ -27,7 +27,7 @@ export default function Footer() {
   return (
     <Box bg="gray.100" color="gray.700" className="no-print">
       <Container as={Stack} maxW={containerMaxW} py={10}>
-        <SimpleGrid templateColumns={{ md: "4fr 2fr" }} spacing={8}>
+        <SimpleGrid templateColumns={{ md: "4fr 4fr" }} spacing={8}>
           <Stack spacing={4}>
             <Box>
               {t("common:footer.powered_by")}
@@ -68,7 +68,7 @@ export default function Footer() {
             </Stack>
           </Stack>
           <div>
-            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
               {pages
                 .flatMap((page) => [page, ...page.children])
                 .filter((page) => page.showInFooter !== false)
