@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ChakraProvider,
   Flex,
   HStack,
   Select,
@@ -10,6 +11,7 @@ import {
   TabList,
   Tabs,
   Text,
+  theme,
   useDisclosure
 } from "@chakra-ui/react";
 import BulkMapperHeader from "@components/pages/common/bulk-mapper";
@@ -117,17 +119,32 @@ export default function ListHeader() {
         </Stack>
       </Flex>
 
-      <HStack spacing={4}>
-        <Text>With media</Text>
-        <Switch defaultChecked={allMedia} id="media-toggle" onChange={handleMediaToggle} />
-        <Text>All</Text>
-      </HStack>
-
       {observationData && observationData.n > -1 && (
         <Flex mb={4} justifyContent="space-between" minH="32px" alignItems="center">
-          <Text color="gray.600">
-            {format(observationData.n)} {t("observation:list.observations_found")}
-          </Text>
+          <HStack spacing={4}>
+            <Text color="gray.600">
+              {format(observationData.n)} {"observations"}
+            </Text>
+            <Text color={allMedia ? "gray.300" : "gray.600"}>with media</Text>
+            <Switch
+              defaultChecked={allMedia}
+              id="media-toggle"
+              onChange={handleMediaToggle}
+              colorScheme="gray.300"
+              sx={{
+                "& .chakra-switch__track": {
+                  bg: "gray.300"
+                },
+                "& .chakra-switch__thumb": {
+                  bg: "var(--chakra-colors-blue-500)"
+                },
+                "& .chakra-switch__thumb:after": {
+                  bg: "gray.300"
+                }
+              }}
+            />
+            <Text color={allMedia ? "gray.600" : "gray.300"}>All</Text>
+          </HStack>
           <BulkMapperHeader
             selectAll={selectAll}
             bulkIds={bulkObservationIds}
