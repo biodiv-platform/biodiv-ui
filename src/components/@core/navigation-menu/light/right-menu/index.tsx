@@ -5,6 +5,7 @@ import { Mq } from "mq-styled-components";
 import React from "react";
 
 import MainItems from "../../common/menu-items";
+import PagesMenuItems from "../../common/pages-menu-items";
 import items from "./items";
 
 interface IMenuProps {
@@ -21,7 +22,7 @@ const RightMenuContainer = styled.div`
     white-space: pre;
   }
 
-  ${Mq.max.sm} {
+  ${Mq.max.lg} {
     width: 100%;
     flex-direction: column;
     height: auto;
@@ -52,7 +53,7 @@ export default function RightMenu({ isOpen }: IMenuProps) {
   return (
     <RightMenuContainer data-expanded={isOpen} className="fade">
       {outputMenuFormat.map((item) => (
-        <MainItems key={item.name} {...item} isPage={true} />
+        <PagesMenuItems key={item.name} {...item} />
       ))}
       {activeItems.map((item) => (
         <MainItems key={item.name} {...item} />

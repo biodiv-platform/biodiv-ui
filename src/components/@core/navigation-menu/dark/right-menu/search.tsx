@@ -14,8 +14,8 @@ export default function Search() {
   return (
     <Box
       as="form"
-      mb={{ base: 3, md: 0 }}
-      w={{ base: "full", md: "10rem" }}
+      mb={{ base: 3 }}
+      w={{ base: "full", md: "full" }}
       onSubmit={handleOnSearch}
       color="initial"
     >

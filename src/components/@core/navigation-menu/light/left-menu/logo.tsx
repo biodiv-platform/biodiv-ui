@@ -52,7 +52,7 @@ const Logo = styled.div`
     margin-left: 0.75rem;
   }
 
-  ${Mq.max.sm} {
+  ${Mq.max.lg} {
     width: 100%;
 
     .menu-toggle {
