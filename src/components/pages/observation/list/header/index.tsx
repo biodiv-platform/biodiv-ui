@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  ChakraProvider,
   Flex,
   HStack,
   Select,
@@ -11,7 +10,6 @@ import {
   TabList,
   Tabs,
   Text,
-  theme,
   useDisclosure
 } from "@chakra-ui/react";
 import BulkMapperHeader from "@components/pages/common/bulk-mapper";
@@ -131,17 +129,9 @@ export default function ListHeader() {
               id="media-toggle"
               onChange={handleMediaToggle}
               colorScheme="gray.300"
-              sx={{
-                "& .chakra-switch__track": {
-                  bg: "gray.300"
-                },
-                "& .chakra-switch__thumb": {
-                  bg: "var(--chakra-colors-blue-500)"
-                },
-                "& .chakra-switch__thumb:after": {
-                  bg: "gray.300"
-                }
-              }}
+              border="1px solid"
+              borderColor="gray.500"
+              borderRadius="50px"
             />
             <Text color={allMedia ? "gray.600" : "gray.300"}>All</Text>
           </HStack>
