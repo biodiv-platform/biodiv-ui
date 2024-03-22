@@ -33,7 +33,6 @@ export default function ListHeader() {
     bulkObservationIds,
     selectAll,
     allMedia,
-    setAllMedia,
     addMediaToggle
   } = useObservationFilter();
   const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter?.view);
