@@ -177,10 +177,6 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     fetchListData();
   }, [filter]);
 
-  useEffect(() => {
-    fetchListData();
-  }, [allMedia]);
-
   useDidUpdateEffect(() => {
     if (selectAll) {
       handleBulkCheckbox("selectAll");

@@ -66,7 +66,6 @@ export default function ListHeader() {
   };
 
   const handleMediaToggle = (e) => {
-    setAllMedia(e.target.checked);
     addMediaToggle(e);
   };
 
