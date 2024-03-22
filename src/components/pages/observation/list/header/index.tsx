@@ -120,10 +120,14 @@ export default function ListHeader() {
       {observationData && observationData.n > -1 && (
         <Flex mb={4} justifyContent="space-between" minH="32px" alignItems="center">
           <HStack spacing={4}>
-            <Text color="gray.600">
-              {format(observationData.n)} {"observations"}
-            </Text>
-            <Text color={allMedia ? "gray.300" : "gray.600"}>with media</Text>
+            <Box>
+              <HStack spacing={1}>
+                <Text color="gray.600">
+                  {format(observationData.n)} {"observations"}
+                </Text>
+                <Text color={allMedia ? "gray.300" : "gray.600"}>with media</Text>
+              </HStack>
+            </Box>
             <Switch
               defaultChecked={allMedia}
               id="media-toggle"
