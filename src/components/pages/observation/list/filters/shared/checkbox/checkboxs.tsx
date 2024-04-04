@@ -60,6 +60,9 @@ export default function FilterCheckboxes({
     setFilteredOptions(options.filter(({ label }) => label.toLowerCase().includes(searchQuery)));
   };
 
+  const all = ["no_of_images", "no_of_videos", "no_of_audio", "no_media"];
+  const media = ["no_of_images", "no_of_videos", "no_of_audio"];
+
   return (
     <>
       {showSearch && (
@@ -68,7 +71,17 @@ export default function FilterCheckboxes({
           <Input type="text" placeholder={t("common:search")} onChange={handleOnSearch} />
         </InputGroup>
       )}
-      <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
+      <CheckboxGroup
+        defaultValue={
+          filterKey != "mediafilter"
+            ? defaultValue
+            : filter?.mediaFilter?.includes("no_media")
+            ? all
+            : media
+        }
+        onChange={handleOnChange}
+        key={filterKey == "mediaFilter" ? filter?.mediaFilter?.toString() : "checkbox-filter-key"}
+      >
         <Stack>
           {filteredOptions.map(({ label, value, stat, valueIcon }) => (
             <Checkbox key={label} value={value} alignItems="baseline">
