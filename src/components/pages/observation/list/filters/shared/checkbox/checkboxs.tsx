@@ -34,7 +34,7 @@ export default function FilterCheckboxes({
   skipOptionsTranslation,
   showSearch
 }: FilterCheckboxesProps) {
-  const { filter, addFilter, removeFilter } = useObservationFilter();
+  const { filter, addFilter, removeFilter, setAllMedia } = useObservationFilter();
   const defaultValue = filter?.[filterKey] ? filter?.[filterKey]?.split(",") : [];
   const { t } = useTranslation();
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -44,6 +44,14 @@ export default function FilterCheckboxes({
       addFilter(filterKey, v.toString());
     } else {
       removeFilter(filterKey);
+    }
+
+    if (filterKey == "mediaFilter") {
+      if (v.includes("no_media")) {
+        setAllMedia(true);
+      } else {
+        setAllMedia(false);
+      }
     }
   };
 
