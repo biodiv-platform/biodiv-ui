@@ -55,6 +55,9 @@ interface ObservationFilterContextProps {
   setCropObservationData;
   setCropObservationId;
   canCropObservation;
+  allMedia;
+  setAllMedia;
+  addMediaToggle;
 }
 
 const ObservationFilterContext = createContext<ObservationFilterContextProps>(
@@ -73,6 +76,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cropObservationData, setCropObservationData] = useState();
   const [canCropObservation, setCanCropObservation] = useState();
+  const [allMedia, setAllMedia] = useState(false);
 
   const setCropObservationId = async (id, canCrop) => {
     setCanCropObservation(canCrop);
@@ -213,6 +217,16 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     });
   };
 
+  const addMediaToggle = (e) => {
+    if (e.target.checked) {
+      setAllMedia(true);
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio,no_media");
+    } else {
+      setAllMedia(false);
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio");
+    }
+  };
+
   return (
     <ObservationFilterContext.Provider
       value={{
@@ -247,7 +261,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         location: props.location,
         states: props.states,
         traits: props.traits,
-        customFields: props.customFields
+        customFields: props.customFields,
+        allMedia,
+        setAllMedia,
+        addMediaToggle
       }}
     >
       {props.children}

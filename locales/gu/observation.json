@@ -128,6 +128,10 @@
   "longitude": "રેખાંશ",
   "manage_resources": "સંસાધનોનું સંચાલન કરો",
   "media_picker": "મીડિયા પીકર",
+  "media_toggle": {
+    "all": "બધા",
+    "with_media": "મીડિયા સાથે"
+  },
   "more_fields": "વધુ ક્ષેત્રો",
   "nearby": "નજીકના અવલોકનો",
   "no_custom_field": "આ અવલોકન માટે કોઈ કસ્ટમ ફીલ્ડ મળ્યું નથી",

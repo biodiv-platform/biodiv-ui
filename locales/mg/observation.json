@@ -128,6 +128,10 @@
   "longitude": "-jarahasina",
   "manage_resources": "Mitantana loharanon-karena",
   "media_picker": "Media Picker",
+  "media_toggle": {
+    "all": "rehetra",
+    "with_media": "Miaraka amin'ny Media"
+  },
   "more_fields": "saha bebe kokoa",
   "nearby": "Teo am-piheverana",
   "no_custom_field": "Tsy misy fomba fanao manokana hita ho an'ity fandinihana ity",

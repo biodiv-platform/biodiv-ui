@@ -128,6 +128,10 @@
   "longitude": "Longitude",
   "manage_resources": "Manage Resources",
   "media_picker": "Media Picker",
+  "media_toggle": {
+    "all": "All",
+    "with_media": "With Media"
+  },
   "more_fields": "More Fields",
   "nearby": "Nearby Observations",
   "no_custom_field": "No Custom field(s) found for this observation",

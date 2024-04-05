@@ -2,8 +2,10 @@ import {
   Box,
   Button,
   Flex,
+  HStack,
   Select,
   Stack,
+  Switch,
   Tab,
   TabList,
   Tabs,
@@ -29,7 +31,9 @@ export default function ListHeader() {
     observationData,
     handleBulkCheckbox,
     bulkObservationIds,
-    selectAll
+    selectAll,
+    allMedia,
+    addMediaToggle
   } = useObservationFilter();
   const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter?.view);
   const { t } = useTranslation();
@@ -58,6 +62,10 @@ export default function ListHeader() {
   const handleSelectAll = () => {
     alert(`${observationData.n} ${t("observation:select_all_message")}`);
     handleBulkCheckbox("selectAll");
+  };
+
+  const handleMediaToggle = (e) => {
+    addMediaToggle(e);
   };
 
   return (
@@ -106,11 +114,33 @@ export default function ListHeader() {
           </Button>
         </Stack>
       </Flex>
+
       {observationData && observationData.n > -1 && (
         <Flex mb={4} justifyContent="space-between" minH="32px" alignItems="center">
-          <Text color="gray.600">
-            {format(observationData.n)} {t("observation:list.observations_found")}
-          </Text>
+          <HStack spacing={4}>
+            <Box>
+              <HStack spacing={1}>
+                <Text color="gray.600">
+                  {format(observationData.n)} {t("common:temporal.observations")}
+                </Text>
+                <Text color={allMedia ? "gray.300" : "gray.600"}>
+                  {t("observation:media_toggle.with_media")}
+                </Text>
+              </HStack>
+            </Box>
+            <Switch
+              defaultChecked={allMedia}
+              id="media-toggle"
+              onChange={handleMediaToggle}
+              colorScheme="gray.300"
+              border="1px solid"
+              borderColor="gray.500"
+              borderRadius="50px"
+            />
+            <Text color={allMedia ? "gray.600" : "gray.300"}>
+              {t("observation:media_toggle.all")}
+            </Text>
+          </HStack>
           <BulkMapperHeader
             selectAll={selectAll}
             bulkIds={bulkObservationIds}
