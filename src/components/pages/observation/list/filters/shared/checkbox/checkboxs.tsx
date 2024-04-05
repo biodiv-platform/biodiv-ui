@@ -38,6 +38,8 @@ export default function FilterCheckboxes({
   const defaultValue = filter?.[filterKey] ? filter?.[filterKey]?.split(",") : [];
   const { t } = useTranslation();
   const [filteredOptions, setFilteredOptions] = useState(options);
+  const allObservations = ["no_of_images", "no_of_videos", "no_of_audio", "no_media"];
+  const observationsWithMedia = ["no_of_images", "no_of_videos", "no_of_audio"];
 
   const handleOnChange = (v) => {
     if (v.length > 0) {
@@ -47,7 +49,7 @@ export default function FilterCheckboxes({
     }
 
     if (filterKey == "mediaFilter") {
-      if (v.includes("no_media")) {
+      if (v.includes("no_media") || v.length == 0) {
         setAllMedia(true);
       } else {
         setAllMedia(false);
@@ -59,9 +61,6 @@ export default function FilterCheckboxes({
     const searchQuery = e?.target?.value.toLowerCase();
     setFilteredOptions(options.filter(({ label }) => label.toLowerCase().includes(searchQuery)));
   };
-
-  const all = ["no_of_images", "no_of_videos", "no_of_audio", "no_media"];
-  const media = ["no_of_images", "no_of_videos", "no_of_audio"];
 
   return (
     <>
@@ -76,8 +75,8 @@ export default function FilterCheckboxes({
           filterKey != "mediafilter"
             ? defaultValue
             : filter?.mediaFilter?.includes("no_media")
-            ? all
-            : media
+            ? allObservations
+            : observationsWithMedia
         }
         onChange={handleOnChange}
         key={filterKey == "mediaFilter" ? filter?.mediaFilter?.toString() : "checkbox-filter-key"}
