@@ -121,9 +121,11 @@ export default function ListHeader() {
             <Box>
               <HStack spacing={1}>
                 <Text color="gray.600">
-                  {format(observationData.n)} {"observations"}
+                  {format(observationData.n)} {t("common:temporal.observations")}
                 </Text>
-                <Text color={allMedia ? "gray.300" : "gray.600"}>with media</Text>
+                <Text color={allMedia ? "gray.300" : "gray.600"}>
+                  {t("observation:media_toggle.with_media")}
+                </Text>
               </HStack>
             </Box>
             <Switch
@@ -135,7 +137,9 @@ export default function ListHeader() {
               borderColor="gray.500"
               borderRadius="50px"
             />
-            <Text color={allMedia ? "gray.600" : "gray.300"}>All</Text>
+            <Text color={allMedia ? "gray.600" : "gray.300"}>
+              {t("observation:media_toggle.all")}
+            </Text>
           </HStack>
           <BulkMapperHeader
             selectAll={selectAll}

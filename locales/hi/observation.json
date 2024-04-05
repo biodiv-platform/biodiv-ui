@@ -128,6 +128,10 @@
   "longitude": "देशान्तर",
   "manage_resources": "संसाधन प्रबंधित करें",
   "media_picker": "मीडिया पिकर",
+  "media_toggle": {
+    "all": "सभी",
+    "with_media": "मीडिया के साथ"
+  },
   "more_fields": "अधिक फ़ील्ड",
   "nearby": "आस-पास के अवलोकन",
   "no_custom_field": "इस अवलोकन के लिए कोई कस्टम फ़ील्ड नहीं मिला",

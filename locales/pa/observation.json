@@ -128,6 +128,10 @@
   "longitude": "ਲੰਬਕਾਰ",
   "manage_resources": "ਸਰੋਤਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
   "media_picker": "ਮੀਡੀਆ ਚੋਣਕਾਰ",
+  "media_toggle": {
+    "all": "ਸਾਰੇ",
+    "with_media": "ਮੀਡੀਆ ਨਾਲ"
+  },
   "more_fields": "ਹੋਰ ਖੇਤਰ",
   "nearby": "ਨੇੜਲੇ ਨਿਰੀਖਣ",
   "no_custom_field": "ਇਸ ਨਿਰੀਖਣ ਲਈ ਕੋਈ ਕਸਟਮ ਫੀਲਡ ਨਹੀਂ (ਜ਼)",
