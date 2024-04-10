@@ -87,6 +87,7 @@ export interface ObservationData {
   n: number;
   hasMore: boolean;
   isLoading: boolean;
+  mediaToggle: string;
 }
 
 export interface DocumentData {

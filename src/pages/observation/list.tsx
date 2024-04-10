@@ -2,6 +2,7 @@ import { ObservationFilterProvider } from "@components/pages/observation/common/
 import ObservationListPageComponent from "@components/pages/observation/list";
 import { axGroupList } from "@services/app.service";
 import { axGetListData, axGetObservationListConfig } from "@services/observation.service";
+import { axGetUserGroupMediaToggle } from "@services/usergroup.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
@@ -29,7 +30,21 @@ export const getServerSideProps = async (ctx) => {
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
   const { location } = ctx.query;
-  const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup.id };
+
+  const { customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
+
+  if (currentGroup) {
+    if (customisations.mediaToggle == "All") {
+      DEFAULT_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+    }
+  }
+
+  const initialFilterParams = {
+    ...DEFAULT_FILTER,
+    ...ctx.query,
+    userGroupList: currentGroup.id
+  };
+
   const { data } = await axGetListData(initialFilterParams, location ? { location } : {});
 
   return {
@@ -40,7 +55,9 @@ export const getServerSideProps = async (ctx) => {
         ag: data.aggregationData,
         n: data.totalCount,
         mvp: {},
-        hasMore: true
+        hasMore: true,
+        mediaToggle:
+          Object.keys(customisations).length != 0 ? customisations.mediaToggle : "withMedia"
       },
       listConfig,
       nextOffset,
