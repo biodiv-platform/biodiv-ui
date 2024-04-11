@@ -144,6 +144,7 @@
     "requested": "Demande de participation au groupe envoyée"
   },
   "name": "Nom de groupe",
+  "observation_customisation": "Personnalisations des observations",
   "rules": {
     "add": {
       "failure": "Impossible d'ajouter la règle d'utilisateur du groupe",

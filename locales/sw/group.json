@@ -144,6 +144,7 @@
     "requested": "Kikundi cha Kujiunga na Kikundi kilichotumwa"
   },
   "name": "Jina la kikundi",
+  "observation_customisation": "Ubinafsishaji wa Uchunguzi",
   "rules": {
     "add": {
       "failure": "Haiwezi kuongeza utawala wa usergroup.",

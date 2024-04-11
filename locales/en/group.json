@@ -145,6 +145,7 @@
     "requested": "Group join request sent"
   },
   "name": "Group Name",
+  "observation_customisation": "Observation Customisations",
   "rules": {
     "add": {
       "failure": "Unable to add Usergroup rule",

@@ -144,6 +144,7 @@
     "requested": "Ny vondrona dia niditra ny fangatahana"
   },
   "name": "Anaran'ny tarika",
+  "observation_customisation": "Observation Customizations",
   "rules": {
     "add": {
       "failure": "Tsy afaka nanampy ny fanjakan'ny mpampiasa",

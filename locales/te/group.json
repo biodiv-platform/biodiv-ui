@@ -144,6 +144,7 @@
     "requested": "సమూహం పంపిన అభ్యర్థన చేరండి"
   },
   "name": "సముహం పేరు",
+  "observation_customisation": "పరిశీలన అనుకూలీకరణలు",
   "rules": {
     "add": {
       "failure": "Usergroup నియమాలను జోడించడం సాధ్యం కాలేదు",

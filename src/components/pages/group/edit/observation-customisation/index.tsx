@@ -23,7 +23,7 @@ export default function ObservationCustomizations({ userGroupId, mediaToggle }) 
       >
         <AccordionButton _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
-            🧰 {"Observation Customisations"}
+            🧰 {t("group:observation_customisation")}
           </Box>
           <AccordionIcon />
         </AccordionButton>

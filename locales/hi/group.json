@@ -144,6 +144,7 @@
     "requested": "समूह शामिल अनुरोध भेजा गया"
   },
   "name": "समूह नाम",
+  "observation_customisation": "अवलोकन अनुकूलन",
   "rules": {
     "add": {
       "failure": "समूह नियम जोड़ने में असमर्थ",
