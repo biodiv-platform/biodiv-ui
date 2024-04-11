@@ -11,6 +11,7 @@ import UserGroupEditForm from "./form";
 import GroupAdministratorsEditForm from "./group-administrator-edit-form";
 import GroupRules from "./group-rules";
 import GroupHomePageCustomization from "./homepage-customization";
+import ObservationCustomizations from "./observation-customisation";
 
 interface GroupEditPageProps {
   speciesGroups;
@@ -23,6 +24,7 @@ interface GroupEditPageProps {
   homePageDetails;
   moderators;
   userGroupId;
+  mediaToggle;
 }
 
 export default function EditGroupPageComponent({
@@ -35,7 +37,8 @@ export default function EditGroupPageComponent({
   founders,
   moderators,
   homePageDetails,
-  userGroupId
+  userGroupId,
+  mediaToggle
 }: GroupEditPageProps) {
   const { t } = useTranslation();
   const isAdmin = hasAccess([Role.Admin]);
@@ -68,6 +71,7 @@ export default function EditGroupPageComponent({
             groupCustomField={customFieldList}
           />
           <GroupRules rules={groupRules} userGroupId={userGroupId} />
+          <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
         </div>
       ) : (
         <ContactAdmin />
