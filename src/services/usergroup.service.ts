@@ -432,3 +432,16 @@ export const axGetUserGroupMediaToggle = async (ugId) => {
     return { success: false, customisations: {} };
   }
 };
+
+export const axUpdateGroupObsCustomisations = async (payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/observationCustomisations/update`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};

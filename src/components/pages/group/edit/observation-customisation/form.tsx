@@ -1,6 +1,8 @@
 import { Box, Button } from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { axUpdateGroupObsCustomisations } from "@services/usergroup.service";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,7 +15,7 @@ export default function ObservationCustomizationForm({ userGroupId, mediaToggle 
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
-        mediaToggle: Yup.string()
+        mediaToggle: Yup.boolean()
       })
     ),
     defaultValues: {
@@ -21,9 +23,17 @@ export default function ObservationCustomizationForm({ userGroupId, mediaToggle 
     }
   });
 
-  const handleFormSubmit = (e) => {
-    //TODO: add api call to update media toggle value
-    console.log("e=", e.mediaToggle);
+  const handleFormSubmit = async (e) => {
+    const payload = {
+      userGroupId: userGroupId,
+      mediaToggle: e.mediaToggle == true ? "withMedia" : "All"
+    };
+    const { success } = await axUpdateGroupObsCustomisations(payload);
+    if (success) {
+      notification(t("group:homepage_customization.success"), NotificationType.Success);
+    } else {
+      notification(t("group:homepage_customization.failure"), NotificationType.Error);
+    }
   };
 
   return (
