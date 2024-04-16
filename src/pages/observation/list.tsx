@@ -1,5 +1,6 @@
 import { ObservationFilterProvider } from "@components/pages/observation/common/use-observation-filter";
 import ObservationListPageComponent from "@components/pages/observation/list";
+import SITE_CONFIG from "@configs/site-config";
 import { axGroupList } from "@services/app.service";
 import { axGetListData, axGetObservationListConfig } from "@services/observation.service";
 import { axGetUserGroupMediaToggle } from "@services/usergroup.service";
@@ -37,6 +38,8 @@ export const getServerSideProps = async (ctx) => {
 
   if (currentGroup.id && customisations.mediaToggle === "All") {
     CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+  } else if (!currentGroup.id && SITE_CONFIG.OBSERVATION.MEDIA_TOGGLE === "All") {
+    CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
   }
 
   const initialFilterParams = {
@@ -56,7 +59,9 @@ export const getServerSideProps = async (ctx) => {
         n: data.totalCount,
         mvp: {},
         hasMore: true,
-        mediaToggle: currentGroup.id ? customisations.mediaToggle : "withMedia"
+        mediaToggle: currentGroup.id
+          ? customisations.mediaToggle
+          : SITE_CONFIG.OBSERVATION.MEDIA_TOGGLE
       },
       listConfig,
       nextOffset,
