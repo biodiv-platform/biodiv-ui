@@ -33,7 +33,7 @@ export const getServerSideProps = async (ctx) => {
 
   const { customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
 
-  if (currentGroup) {
+  if (currentGroup.id) {
     if (customisations.mediaToggle === "All") {
       DEFAULT_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
     }
