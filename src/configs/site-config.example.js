@@ -119,8 +119,7 @@ const SITE_CONFIG_EXAMPLE = {
     PREDICT: {
       ACTIVE: true,
       ENDPOINT: "https://example.com/predictions"
-    },
-    MEDIA_TOGGLE: "example"
+    }
   },
   FLORA: {
     ID: 25,
