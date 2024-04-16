@@ -77,9 +77,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [cropObservationData, setCropObservationData] = useState();
   const [canCropObservation, setCanCropObservation] = useState();
   const [allMedia, setAllMedia] = useState(
-    props.observationData.mediaToggle === "withMedia" || props.observationData.mediaToggle == null
-      ? false
-      : true
+    props.observationData.mediaToggle === "withMedia" ? false : true
   );
 
   const setCropObservationId = async (id, canCrop) => {

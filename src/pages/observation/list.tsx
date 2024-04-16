@@ -56,8 +56,7 @@ export const getServerSideProps = async (ctx) => {
         n: data.totalCount,
         mvp: {},
         hasMore: true,
-        mediaToggle:
-          Object.keys(customisations).length != 0 ? customisations.mediaToggle : "withMedia"
+        mediaToggle: currentGroup.id ? customisations.mediaToggle : "withMedia"
       },
       listConfig,
       nextOffset,
