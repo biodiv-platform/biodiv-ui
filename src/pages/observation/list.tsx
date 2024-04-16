@@ -35,12 +35,6 @@ export const getServerSideProps = async (ctx) => {
 
   const CUSTOM_FILTER = { ...DEFAULT_FILTER };
 
-  // if (currentGroup.id) {
-  //   if (customisations.mediaToggle === "All") {
-  //     DEFAULT_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
-  //   }
-  // }
-
   if (currentGroup.id && customisations.mediaToggle === "All") {
     CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
   }
