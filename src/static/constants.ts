@@ -127,3 +127,8 @@ export const INVALID_COORDINATE = {
   LATITUDE: 91,
   LONGITUDE: 361
 };
+
+export const MEDIA_TOGGLE = {
+  WITH_MEDIA: "withMedia",
+  ALL: "All"
+};

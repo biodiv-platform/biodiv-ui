@@ -2,6 +2,7 @@ import { Box, Button } from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axUpdateGroupObsCustomisations } from "@services/usergroup.service";
+import { MEDIA_TOGGLE } from "@static/constants";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -19,14 +20,14 @@ export default function ObservationCustomizationForm({ userGroupId, mediaToggle 
       })
     ),
     defaultValues: {
-      mediaToggle: mediaToggle == "withMedia" ? true : false
+      mediaToggle: mediaToggle === MEDIA_TOGGLE.WITH_MEDIA ? true : false
     }
   });
 
   const handleFormSubmit = async (e) => {
     const payload = {
       userGroupId: userGroupId,
-      mediaToggle: e.mediaToggle == true ? "withMedia" : "All"
+      mediaToggle: e.mediaToggle == true ? MEDIA_TOGGLE.WITH_MEDIA : MEDIA_TOGGLE.ALL
     };
     const { success } = await axUpdateGroupObsCustomisations(payload);
     if (success) {

@@ -10,7 +10,7 @@ import {
   axGetMaxVotedRecoPermissions
 } from "@services/observation.service";
 import { axGetUserGroupList, getAuthorizedUserGroupById } from "@services/usergroup.service";
-import { isBrowser } from "@static/constants";
+import { isBrowser, MEDIA_TOGGLE } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
@@ -77,7 +77,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [cropObservationData, setCropObservationData] = useState();
   const [canCropObservation, setCanCropObservation] = useState();
   const [allMedia, setAllMedia] = useState(
-    props.observationData.mediaToggle === "withMedia" ? false : true
+    props.observationData.mediaToggle === MEDIA_TOGGLE.WITH_MEDIA ? false : true
   );
 
   const setCropObservationId = async (id, canCrop) => {
