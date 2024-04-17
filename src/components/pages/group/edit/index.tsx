@@ -1,4 +1,12 @@
-import { Spinner } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Spinner
+} from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
 import { Role } from "@interfaces/custom";
@@ -63,19 +71,38 @@ export default function EditGroupPageComponent({
         moderators={moderators}
       />
       <GroupHomePageCustomization userGroupId={userGroupId} homePageDetails={homePageDetails} />
-      {isAdmin ? (
-        <div>
-          <GroupCustomField
-            allCustomField={allCustomField}
-            userGroupId={userGroupId}
-            groupCustomField={customFieldList}
-          />
-          <GroupRules rules={groupRules} userGroupId={userGroupId} />
-          <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
-        </div>
-      ) : (
-        <ContactAdmin />
-      )}
+      <Accordion allowToggle={true}>
+        <AccordionItem
+          mb={8}
+          bg="white"
+          border="1px solid var(--chakra-colors-gray-300)"
+          borderRadius="md"
+        >
+          <AccordionButton _expanded={{ bg: "gray.100" }}>
+            <Box flex={1} textAlign="left" fontSize="lg">
+              {/* 🧰 {t("group:observation_customisation")} */}
+              🧰 Observation Customisations
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+
+          <AccordionPanel p={4}>
+            {isAdmin ? (
+              <div>
+                <GroupCustomField
+                  allCustomField={allCustomField}
+                  userGroupId={userGroupId}
+                  groupCustomField={customFieldList}
+                />
+                <GroupRules rules={groupRules} userGroupId={userGroupId} />
+                <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
+              </div>
+            ) : (
+              <ContactAdmin />
+            )}
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }
