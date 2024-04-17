@@ -10,7 +10,7 @@ import {
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
 import { Role } from "@interfaces/custom";
-import { hasAccess } from "@utils/auth";
+import { getParsedUser, hasAccess } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -50,6 +50,7 @@ export default function EditGroupPageComponent({
 }: GroupEditPageProps) {
   const { t } = useTranslation();
   const isAdmin = hasAccess([Role.Admin]);
+  const isFounder = founders.some((founder) => founder.value === getParsedUser().id);
 
   return (
     <div className="container mt">
@@ -94,10 +95,12 @@ export default function EditGroupPageComponent({
                   groupCustomField={customFieldList}
                 />
                 <GroupRules rules={groupRules} userGroupId={userGroupId} />
-                <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
               </div>
             ) : (
               <ContactAdmin />
+            )}
+            {(isAdmin || isFounder) && (
+              <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
             )}
           </AccordionPanel>
         </AccordionItem>
