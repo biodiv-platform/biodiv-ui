@@ -144,6 +144,9 @@
     "requested": "गट पाठविण्याची विनंती सामील व्हा"
   },
   "name": "गटाचे नाव",
+  "observation_customisation": "निरीक्षण सानुकूलन",
+  "observation_display": "निरीक्षण प्रदर्शन",
+  "observations_having_media": "डीफॉल्टनुसार, केवळ मीडिया असलेली निरीक्षणे प्रदर्शित करा",
   "rules": {
     "add": {
       "failure": "यूजरग्रुप नियम जोडण्यात अक्षम",

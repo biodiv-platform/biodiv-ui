@@ -422,3 +422,26 @@ export const axEditGroupHomePageGallery = async (userGroupId, galleryId, payload
     return { success: false, data: [] };
   }
 };
+
+export const axGetUserGroupMediaToggle = async (ugId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/mediaToggle/${ugId}`);
+    return { success: true, customisations: data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, customisations: {} };
+  }
+};
+
+export const axUpdateGroupObsCustomisations = async (payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/observationCustomisations/update`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};

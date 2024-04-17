@@ -1,7 +1,9 @@
 import { ObservationFilterProvider } from "@components/pages/observation/common/use-observation-filter";
 import ObservationListPageComponent from "@components/pages/observation/list";
+import SITE_CONFIG from "@configs/site-config";
 import { axGroupList } from "@services/app.service";
 import { axGetListData, axGetObservationListConfig } from "@services/observation.service";
+import { axGetUserGroupMediaToggle } from "@services/usergroup.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
@@ -29,7 +31,23 @@ export const getServerSideProps = async (ctx) => {
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
   const { location } = ctx.query;
-  const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup.id };
+
+  const { customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
+
+  const CUSTOM_FILTER = { ...DEFAULT_FILTER };
+
+  if (currentGroup.id && customisations.mediaToggle === "All") {
+    CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+  } else if (!currentGroup.id && SITE_CONFIG.OBSERVATION.MEDIA_TOGGLE === "All") {
+    CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+  }
+
+  const initialFilterParams = {
+    ...CUSTOM_FILTER,
+    ...ctx.query,
+    userGroupList: currentGroup.id
+  };
+
   const { data } = await axGetListData(initialFilterParams, location ? { location } : {});
 
   return {
@@ -40,7 +58,10 @@ export const getServerSideProps = async (ctx) => {
         ag: data.aggregationData,
         n: data.totalCount,
         mvp: {},
-        hasMore: true
+        hasMore: true,
+        mediaToggle: currentGroup.id
+          ? customisations.mediaToggle
+          : SITE_CONFIG.OBSERVATION.MEDIA_TOGGLE
       },
       listConfig,
       nextOffset,

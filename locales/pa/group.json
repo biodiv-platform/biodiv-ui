@@ -144,6 +144,9 @@
     "requested": "ਸਮੂਹ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਏ ਬੇਨਤੀ ਭੇਜੀ ਗਈ"
   },
   "name": "ਸਮੂਹ ਦਾ ਨਾਮ",
+  "observation_customisation": "ਨਿਰੀਖਣ ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ",
+  "observation_display": "ਨਿਰੀਖਣ ਡਿਸਪਲੇਅ",
+  "observations_having_media": "ਮੂਲ ਰੂਪ ਵਿੱਚ, ਸਿਰਫ ਮੀਡੀਆ ਵਾਲੇ ਨਿਰੀਖਣ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰੋ",
   "rules": {
     "add": {
       "failure": "ਯੂਜ਼ਰ ਸਮੂਹ ਨਿਯਮ ਸ਼ਾਮਲ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",

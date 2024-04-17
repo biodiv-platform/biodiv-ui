@@ -144,6 +144,9 @@
     "requested": "Demande de participation au groupe envoyée"
   },
   "name": "Nom de groupe",
+  "observation_customisation": "Personnalisation des observations",
+  "observation_display": "Affichage des observations",
+  "observations_having_media": "Par défaut, afficher uniquement les observations contenant des médias",
   "rules": {
     "add": {
       "failure": "Impossible d'ajouter la règle d'utilisateur du groupe",

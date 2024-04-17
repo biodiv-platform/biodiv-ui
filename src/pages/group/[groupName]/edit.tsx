@@ -8,6 +8,7 @@ import {
   axGetGroupEditInfoByGroupId,
   axGetGroupHompageDetails,
   axGetUserGroupCustomField,
+  axGetUserGroupMediaToggle,
   axGetUserGroupRules
 } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
@@ -42,7 +43,8 @@ export const getServerSideProps = async (ctx) => {
     ctx
   );
   const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.id);
-  if (s1 && s2 && s3 && s4) {
+  const { success: s5, customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
+  if (s1 && s2 && s3 && s4 && s5) {
     return {
       props: {
         habitats,
@@ -57,7 +59,8 @@ export const getServerSideProps = async (ctx) => {
         moderators: data.moderatorList.map(({ name, id }) => ({
           label: `${name} (${id})`,
           value: id
-        }))
+        })),
+        mediaToggle: customisations.mediaToggle
       }
     };
   }

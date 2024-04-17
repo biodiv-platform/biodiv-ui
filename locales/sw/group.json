@@ -119,7 +119,7 @@
       "more_link": "LINK.",
       "title": "Kichwa"
     },
-    "title": "Utekelezaji wa Homepage.",
+    "title": "Ubinafsishaji wa Ukurasa wa Nyumbani",
     "update": {
       "failure": "Haiwezi kurekebisha maelezo ya ukurasa wa nyumbani.",
       "success": "Maelezo ya Homepage Updated kwa mafanikio."
@@ -144,6 +144,9 @@
     "requested": "Kikundi cha Kujiunga na Kikundi kilichotumwa"
   },
   "name": "Jina la kikundi",
+  "observation_customisation": "Ubinafsishaji wa Uchunguzi",
+  "observation_display": "Onyesho la Uangalizi",
+  "observations_having_media": "Kwa Chaguomsingi, Onyesha Uchunguzi Ulio na Midia Pekee",
   "rules": {
     "add": {
       "failure": "Haiwezi kuongeza utawala wa usergroup.",

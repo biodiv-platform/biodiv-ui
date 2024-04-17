@@ -120,7 +120,7 @@
       "more_link": "Link",
       "title": "Title"
     },
-    "title": "Homepage Customization",
+    "title": "Homepage Customisation",
     "update": {
       "failure": "Unable to Update Homepage Details",
       "success": "Homepage Details Updated successfully"
@@ -145,6 +145,9 @@
     "requested": "Group join request sent"
   },
   "name": "Group Name",
+  "observation_customisation": "Observation Customisation",
+  "observations_having_media": "By Default, Only Display Observations Having Media",
+  "observation_display": "Observation Display",
   "rules": {
     "add": {
       "failure": "Unable to add Usergroup rule",
