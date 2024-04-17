@@ -1,9 +1,4 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box
 } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
