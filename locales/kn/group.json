@@ -145,6 +145,7 @@
   },
   "name": "ಗುಂಪಿನ ಹೆಸರು",
   "observation_customisation": "ವೀಕ್ಷಣೆ ಗ್ರಾಹಕೀಕರಣ",
+  "observation_display": "ವೀಕ್ಷಣೆ ಪ್ರದರ್ಶನ",
   "observations_having_media": "ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ, ಮೀಡಿಯಾ ಹೊಂದಿರುವ ವೀಕ್ಷಣೆಗಳನ್ನು ಮಾತ್ರ ಪ್ರದರ್ಶಿಸಿ",
   "rules": {
     "add": {

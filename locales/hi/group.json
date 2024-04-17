@@ -145,6 +145,7 @@
   },
   "name": "समूह नाम",
   "observation_customisation": "अवलोकन अनुकूलन",
+  "observation_display": "अवलोकन प्रदर्शन",
   "observations_having_media": "डिफ़ॉल्ट रूप से, केवल मीडिया वाले अवलोकन प्रदर्शित करें",
   "rules": {
     "add": {

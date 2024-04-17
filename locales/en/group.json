@@ -147,6 +147,7 @@
   "name": "Group Name",
   "observation_customisation": "Observation Customisation",
   "observations_having_media": "By Default, Only Display Observations Having Media",
+  "observation_display": "Observation Display",
   "rules": {
     "add": {
       "failure": "Unable to add Usergroup rule",

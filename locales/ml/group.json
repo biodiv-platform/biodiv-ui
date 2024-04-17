@@ -145,6 +145,7 @@
   },
   "name": "ഗ്രൂപ്പ് പേര്",
   "observation_customisation": "നിരീക്ഷണ കസ്റ്റമൈസേഷൻ",
+  "observation_display": "നിരീക്ഷണ ഡിസ്പ്ലേ",
   "observations_having_media": "ഡിഫോൾട്ടായി, മീഡിയ ഉള്ള നിരീക്ഷണങ്ങൾ മാത്രം പ്രദർശിപ്പിക്കുക",
   "rules": {
     "add": {

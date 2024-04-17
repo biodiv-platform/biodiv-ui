@@ -145,6 +145,7 @@
   },
   "name": "குழு பெயர்",
   "observation_customisation": "கவனிப்பு தனிப்பயனாக்கம்",
+  "observation_display": "கண்காணிப்பு காட்சி",
   "observations_having_media": "இயல்பாக, மீடியாவைக் கொண்ட அவதானிப்புகளை மட்டும் காட்டு",
   "rules": {
     "add": {

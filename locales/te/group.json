@@ -145,6 +145,7 @@
   },
   "name": "సముహం పేరు",
   "observation_customisation": "పరిశీలన అనుకూలీకరణ",
+  "observation_display": "పరిశీలన ప్రదర్శన",
   "observations_having_media": "డిఫాల్ట్‌గా, మీడియాను కలిగి ఉన్న పరిశీలనలను మాత్రమే ప్రదర్శించండి",
   "rules": {
     "add": {

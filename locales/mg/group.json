@@ -145,6 +145,7 @@
   },
   "name": "Anaran'ny tarika",
   "observation_customisation": "Observation Customization",
+  "observation_display": "Fampisehoana Observation",
   "observations_having_media": "Amin'ny alàlan'ny Default, Asehoy ihany ny fanamarihana manana Media",
   "rules": {
     "add": {

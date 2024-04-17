@@ -145,6 +145,7 @@
   },
   "name": "ગ્રુપ નામ",
   "observation_customisation": "અવલોકન કસ્ટમાઇઝેશન",
+  "observation_display": "અવલોકન પ્રદર્શન",
   "observations_having_media": "મૂળભૂત રીતે, માત્ર મીડિયા ધરાવતા અવલોકનો દર્શાવો",
   "rules": {
     "add": {
