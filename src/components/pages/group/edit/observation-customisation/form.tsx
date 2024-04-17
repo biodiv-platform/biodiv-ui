@@ -41,7 +41,7 @@ export default function ObservationCustomizationForm({ userGroupId, mediaToggle 
     <>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-          <SwitchField name="mediaToggle" label="Only With Media" />
+          <SwitchField name="mediaToggle" label={t("group:observations_having_media")} />
         </form>
       </FormProvider>
 

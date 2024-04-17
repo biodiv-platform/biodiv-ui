@@ -145,6 +145,7 @@
   },
   "name": "Jina la kikundi",
   "observation_customisation": "Ubinafsishaji wa Uchunguzi",
+  "observations_having_media": "Kwa Chaguomsingi, Onyesha Uchunguzi Ulio na Midia Pekee",
   "rules": {
     "add": {
       "failure": "Haiwezi kuongeza utawala wa usergroup.",

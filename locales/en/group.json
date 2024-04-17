@@ -145,7 +145,8 @@
     "requested": "Group join request sent"
   },
   "name": "Group Name",
-  "observation_customisation": "Observation Customisations",
+  "observation_customisation": "Observation Customisation",
+  "observations_having_media": "By Default, Only Display Observations Having Media",
   "rules": {
     "add": {
       "failure": "Unable to add Usergroup rule",

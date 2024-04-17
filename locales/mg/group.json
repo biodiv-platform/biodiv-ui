@@ -144,7 +144,8 @@
     "requested": "Ny vondrona dia niditra ny fangatahana"
   },
   "name": "Anaran'ny tarika",
-  "observation_customisation": "Observation Customizations",
+  "observation_customisation": "Observation Customization",
+  "observations_having_media": "Amin'ny alàlan'ny Default, Asehoy ihany ny fanamarihana manana Media",
   "rules": {
     "add": {
       "failure": "Tsy afaka nanampy ny fanjakan'ny mpampiasa",
