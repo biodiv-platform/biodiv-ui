@@ -48,11 +48,11 @@ export const treeToFlat = (children: any[], parentId = 0) =>
     ],
     []
   );
-export const getLinkCard = ({ href, image, title, description }: any, id) => {
+export const getLinkCard = ({ href, image, title, description }: any, id, cardClass) => {
   const emptyImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
 
   return `
-        <a href="${href}" rel="noopener noreferrer" class="epc" id="${id}">
+        <a href="${href}" rel="noopener noreferrer" class="${cardClass}" id="${id}">
           <img alt="${title}" src="${image || emptyImage}"/>
           <div>
             <div class="label" title="${title}">${title || href}</div>
@@ -80,7 +80,14 @@ export const preProcessContent = (content) => {
 
   [...c1.matchAll(/<a.+preview-card.+<\/a>/gm)].forEach(([v], index) => {
     const href = /<a[\s\S]*?href=["']([^"]+)["'][\s\S]*?>/g.exec(v)?.[1];
-    const previewTag = getLinkCard({ href }, `epc-${index}`);
+    const previewTag = getLinkCard({ href }, `epc-${index}`, "epc");
+    c1 = c1.replace(v, previewTag);
+  });
+
+  // Replace each occurrence of banner-card
+  [...c1.matchAll(/<a.+banner-card.+<\/a>/gm)].forEach(([v], index) => {
+    const href = /<a[\s\S]*?href=["']([^"]+)["'][\s\S]*?>/g.exec(v)?.[1];
+    const previewTag = getLinkCard({ href }, `banner-${index}`, "banner");
     c1 = c1.replace(v, previewTag);
   });
 
@@ -103,7 +110,7 @@ export const removeCardWrapperParagraphs = (html) => {
 
     const _dom = parser.parseFromString(html, "text/html");
 
-    _dom.querySelectorAll("p > .preview-card").forEach((e: any) => {
+    _dom.querySelectorAll("p > .preview-card, p > .banner-card").forEach((e: any) => {
       if (e.parentElement.tagName === "P") {
         e.parentElement.replaceWith(...e.parentElement.childNodes);
       }

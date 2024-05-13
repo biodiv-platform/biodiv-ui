@@ -18,7 +18,7 @@ DocumentListPage.config = {
   footer: false
 };
 
-DocumentListPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
 
   const aURL = absoluteUrl(ctx).href;
@@ -28,15 +28,17 @@ DocumentListPage.getInitialProps = async (ctx) => {
   const { data } = await axGetListData(initialFilterParams);
 
   return {
-    documentData: {
-      l: data.documentList,
-      n: data.totalCount,
-      ag: data.aggregationData,
-      mvp: {},
-      hasMore: true
-    },
-    nextOffset,
-    initialFilterParams
+    props: {
+      documentData: {
+        l: data.documentList,
+        n: data.totalCount,
+        ag: data.aggregationData,
+        mvp: {},
+        hasMore: true
+      },
+      nextOffset,
+      initialFilterParams
+    }
   };
 };
 

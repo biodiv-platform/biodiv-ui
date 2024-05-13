@@ -24,6 +24,40 @@ export const axUploadEditorPageResource = async (blobInfo) => {
   });
 };
 
+export const axUploadMediaEditorPageResource = async (callback) => {
+  try {
+    const fileInput = document.createElement("input");
+    fileInput.setAttribute("type", "file");
+    fileInput.setAttribute("accept", "video/mp4");
+    fileInput.onchange = async () => {
+      if (!fileInput.files) return;
+      const file = fileInput.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append("upload", file);
+      formData.append("hash", nanoid());
+      formData.append("directory", "pages");
+
+      try {
+        const response = await http.post(`${ENDPOINT.FILES}/upload/resource-upload`, formData, {
+          headers: formDataHeaders
+        });
+        const url = `${ENDPOINT.FILES}/get/raw/pages${response.data.uri}`;
+        callback(url);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        callback(null, { text: "Upload failed" });
+      }
+    };
+
+    fileInput.click();
+  } catch (error) {
+    console.error("Error selecting file:", error);
+    callback(null, { text: "File selection failed" });
+  }
+};
+
 export const axUploadHomePageEditorResource = async (blobInfo) => {
   return new Promise((success, failure) => {
     const formData = new FormData();
