@@ -146,6 +146,7 @@ export interface Document {
   isbn?: string;
   extra?: string;
   uFileId?: number; // int64
+  documentSocialPreview?: string;
 }
 export interface DocumentCoverage {
   id?: number; // int64

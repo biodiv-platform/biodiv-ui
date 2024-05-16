@@ -1,7 +1,9 @@
 import { IconButton, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import DeleteIcon from "@icons/delete";
+import FileIcon from "@icons/file";
 import PDFIcon from "@icons/pdf";
+import VideoIcon from "@icons/video";
 import { formatTimeStampFromUTC } from "@utils/date";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -57,6 +59,23 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
 
+  const getFileExtension = (fileName: string) => {
+    return fileName.split(".").pop()?.toLowerCase();
+  };
+
+  const renderIcon = (fileExtension: string | undefined) => {
+    switch (fileExtension) {
+      case "pdf":
+        return <PDFIcon color="red.500" />;
+      case "mp4":
+        return <VideoIcon color="blue.500" fill="blue.500" boxSize={"30px"} />;
+      default:
+        return <FileIcon />;
+    }
+  };
+
+  const fileExtension = getFileExtension(fileName);
+
   const handleOnDelete = async () => {
     setIsLoading(true);
     await onDelete();
@@ -66,7 +85,7 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
   return (
     <DocumentList tabIndex={0} title={fileName} className="fade">
       <div className="icon" onClick={onSelect}>
-        <PDFIcon color="red.500" />
+        {renderIcon(fileExtension)}
       </div>
       <div className="content" onClick={onSelect}>
         <div className="elipsis">{fileName}</div>
