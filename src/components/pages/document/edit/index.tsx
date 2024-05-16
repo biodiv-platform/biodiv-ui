@@ -81,7 +81,8 @@ export default function DocumentEditPageComponent({
         : null,
 
       docCoverage: initialDocument.docCoverage,
-      externalUrl: initialDocument.externalUrl
+      externalUrl: initialDocument.externalUrl,
+      documentSocialPreview: initialDocument.documentSocialPreview
     }
   });
 

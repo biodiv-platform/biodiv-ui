@@ -7,7 +7,7 @@ export default function UploadInfo() {
 
   return (
     <div className="fade">
-      <Heading size="md">{t("form:uploader.label")}</Heading>
+      <Heading size="md">{t("document:upload.label")}</Heading>
       <Text my={2} color="gray.500">
         {t("common:or")}
       </Text>

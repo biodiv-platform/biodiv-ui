@@ -83,6 +83,7 @@
       "title": "Noms scientifiques"
     }
   },
+  "social_preview": "Aperçu social",
   "tags": {
     "not_found": "Pas de mot clé (s) trouvé (s)",
     "title": "Mots clés"
@@ -94,7 +95,9 @@
   "update_success": "Mis à jour avec succés",
   "updated_on": "Date mise à jour",
   "upload": {
+    "label": "Déposez le(s) fichier(s) PDF/Vidéo ici",
     "my_uploads": "Brouillon",
+    "pdf_link_only": "Prend en charge le lien PDF uniquement",
     "selected": "Document sélectionné",
     "url": "URL externe"
   }

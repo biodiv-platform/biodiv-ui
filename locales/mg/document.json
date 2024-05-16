@@ -83,6 +83,7 @@
       "title": "Anarana siantifika"
     }
   },
+  "social_preview": "Preview ara-tsosialy",
   "tags": {
     "not_found": "Tsy misy tags (s) hita",
     "title": "Tags"
@@ -94,7 +95,9 @@
   "update_success": "Nohavaozina soa aman-tsara",
   "updated_on": "Daty Nohavaozina",
   "upload": {
+    "label": "Alefaso eto ny rakitra PDF/Video",
     "my_uploads": "Draft Media",
+    "pdf_link_only": "Manohana rohy PDF ihany",
     "selected": "Antontan-taratasy voafantina",
     "url": "URL ivelany"
   }

@@ -5,5 +5,12 @@ import React from "react";
 export default function ExternalUrl() {
   const { t } = useTranslation();
 
-  return <TextBoxField name="externalUrl" label={t("document:upload.url")} isRequired={true} />;
+  return (
+    <TextBoxField
+      name="externalUrl"
+      label={t("document:upload.url")}
+      isRequired={true}
+      hint={t("document:upload.pdf_link_only")}
+    />
+  );
 }

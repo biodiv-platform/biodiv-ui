@@ -12,6 +12,7 @@ import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import BibImportButton from "../bib-import";
+import { DocumentSocialPreviewField } from "./document-social-preview";
 import TagsInput from "./tags-input";
 
 interface BasicInfoProps {
@@ -71,25 +72,29 @@ export default function BasicInfo({
         />
       </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
-        <div>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
-            <DatePickerNextField name="fromDate" label={t("document:publication_date")} />
-            <SelectInputField
-              name="licenseId"
-              label={t("form:license")}
-              options={licensesList}
-              isRequired={true}
-              isControlled={true}
-              shouldPortal={true}
-            />
-          </SimpleGrid>
-          {showTags && <TagsInput />}
-        </div>
-        <div>
+      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+        <Box gridColumn="1/4">
           <RichTextareaField name="bibFieldData.abstract" label={t("document:description")} />
-        </div>
+        </Box>
+
+        <DocumentSocialPreviewField
+          name="documentSocialPreview"
+          label={t("document:social_preview")}
+        />
       </SimpleGrid>
+
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
+        <DatePickerNextField name="fromDate" label={t("document:publication_date")} />
+        <SelectInputField
+          name="licenseId"
+          label={t("form:license")}
+          options={licensesList}
+          isRequired={true}
+          isControlled={true}
+          shouldPortal={true}
+        />
+      </SimpleGrid>
+      {showTags && <TagsInput />}
     </div>
   );
 }

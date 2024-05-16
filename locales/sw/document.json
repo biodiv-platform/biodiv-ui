@@ -83,6 +83,7 @@
       "title": "Majina ya kisayansi"
     }
   },
+  "social_preview": "Muhtasari wa Jamii",
   "tags": {
     "not_found": "Hakuna tags (s) zilizopatikana.",
     "title": "Tags."
@@ -94,7 +95,9 @@
   "update_success": "Imesasishwa kwa mafanikio.",
   "updated_on": "Tarehe updated.",
   "upload": {
+    "label": "Dondosha faili za PDF/Video hapa",
     "my_uploads": "Rasimu ya vyombo vya habari.",
+    "pdf_link_only": "Inasaidia kiungo cha PDF pekee",
     "selected": "Hati iliyochaguliwa",
     "url": "URL ya nje"
   }
