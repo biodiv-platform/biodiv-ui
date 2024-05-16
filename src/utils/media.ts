@@ -126,7 +126,7 @@ export const getDocumentPath = (resourceUrl): string => {
   return `/pdf-viewer/?file=${getDocumentFilePath(resourceUrl)}`;
 };
 
-export const getDocumentFilePath = (resourceUrl: string): string => {
+export const getDocumentFilePath = (resourceUrl): string => {
   return resourceUrl.startsWith("http")
     ? resourceUrl
     : `${ENDPOINT.RAW}/content/documents${resourceUrl}`;

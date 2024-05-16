@@ -2,7 +2,6 @@ import DocumentShowComponent from "@components/pages/document/show";
 import { axGetDocumentById } from "@services/document.service";
 import { axGetSpeciesGroupList } from "@services/taxonomy.service";
 import { axGetAllHabitat } from "@services/utility.service";
-import { getDocumentURL, isLinkPDF } from "@utils/document";
 import React from "react";
 
 const DocumentShowPage = (props) => <DocumentShowComponent {...props} />;
@@ -14,14 +13,11 @@ export const getServerSideProps = async (ctx) => {
     axGetAllHabitat()
   ]);
 
-  const showViewer = await isLinkPDF(getDocumentURL(document.data));
-
   return {
     props: {
       document: document.data,
       speciesGroups: speciesGroups.data,
-      habitatList: habitatList.data,
-      showViewer
+      habitatList: habitatList.data
     }
   };
 };
