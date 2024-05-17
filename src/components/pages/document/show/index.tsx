@@ -54,9 +54,6 @@ export default function DocumentShowComponent({
   }, [isLoggedIn]);
 
   const getDocumentType = (mimeType) => {
-    if (mimeType.includes("wmv")) {
-      return "wmv";
-    }
     if (mimeType.includes("video")) {
       return "video";
     }
