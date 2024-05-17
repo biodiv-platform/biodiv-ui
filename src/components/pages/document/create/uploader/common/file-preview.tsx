@@ -1,7 +1,7 @@
 import { IconButton, Text } from "@chakra-ui/react";
+import DocumentIcon from "@components/pages/document/common/document-icon";
 import styled from "@emotion/styled";
 import DeleteIcon from "@icons/delete";
-import FileIcon from "@icons/file";
 import PDFIcon from "@icons/pdf";
 import VideoIcon from "@icons/video";
 import { formatTimeStampFromUTC } from "@utils/date";
@@ -64,13 +64,16 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
   };
 
   const renderIcon = (fileExtension: string | undefined) => {
-    switch (fileExtension) {
+    const extension = fileExtension?.toLowerCase();
+    switch (extension) {
       case "pdf":
         return <PDFIcon color="red.500" />;
       case "mp4":
+      case "mov":
+      case "webm":
         return <VideoIcon color="blue.500" fill="blue.500" boxSize={"30px"} />;
       default:
-        return <FileIcon />;
+        return <DocumentIcon />;
     }
   };
 

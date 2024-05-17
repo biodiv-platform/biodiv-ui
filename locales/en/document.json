@@ -45,7 +45,8 @@
   "doi": "DOI",
   "download": {
     "citation": "Citation",
-    "pdf": "PDF"
+    "pdf": "PDF",
+    "title": "Download"
   },
   "edit": {
     "error": "There was an error updating this document",

@@ -45,7 +45,8 @@
   "doi": "DOI",
   "download": {
     "citation": "उद्धरण",
-    "pdf": "PDF"
+    "pdf": "PDF",
+    "title": "डाउनलोड करा"
   },
   "edit": {
     "error": "हा दस्तऐवज अद्यतनित करताना त्रुटी आली",

@@ -30,7 +30,10 @@ const DropTargetBox = styled.div`
   }
 `;
 
-const accept = { "application/pdf": [".pdf"], "video/*": [".mp4", ".MP4"] };
+const accept = {
+  "application/pdf": [".pdf"],
+  "video/*": [".mp4", ".MP4", ".mov", ".MOV", ".webm", ".WEBM"]
+};
 
 export default function DocumentDropzone() {
   const { selectedDocument, addDocument } = useManageDocument();

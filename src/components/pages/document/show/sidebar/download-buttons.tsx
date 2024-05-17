@@ -39,7 +39,7 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
         isDisabled={!documentPath}
         colorScheme="red"
       >
-        {t("document:download.pdf")}
+        {t("document:download.title")}
       </Button>
       <Button variant="outline" leftIcon={<PeopleIcon />} onClick={openZbib} colorScheme="teal">
         {t("document:download.citation")}

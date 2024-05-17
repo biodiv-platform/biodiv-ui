@@ -53,21 +53,28 @@ export default function DocumentShowComponent({
     }
   }, [isLoggedIn]);
 
-  const getFileExtension = (fileName) => {
-    return fileName?.split(".").pop()?.toLowerCase();
+  const getDocumentType = (mimeType) => {
+    if (mimeType.includes("wmv")) {
+      return "wmv";
+    }
+    if (mimeType.includes("video")) {
+      return "video";
+    }
+    if (mimeType.includes("pdf")) {
+      return "pdf";
+    }
+    return undefined;
   };
-
-  const fileExtension = getFileExtension(getDocumentURL(document));
 
   const renderDocument = (fileExtension: string | undefined) => {
     switch (fileExtension) {
       case "pdf":
         return <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />;
-      case "mp4":
+      case "video":
         return (
           <Box>
             <video width="100%" controls>
-              <source src={getDocumentFilePath(documentPath)} type="video/mp4" />
+              <source src={getDocumentFilePath(documentPath)} />
             </video>
           </Box>
         );
@@ -79,7 +86,7 @@ export default function DocumentShowComponent({
       <DocumentHeader document={document} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
-          {renderDocument(fileExtension)}
+          {renderDocument(getDocumentType(document?.uFile?.mimeType))}
           <DocumentInfo d={document} />
 
           {SITE_CONFIG.USERGROUP.ACTIVE && (

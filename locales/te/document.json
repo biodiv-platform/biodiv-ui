@@ -45,7 +45,8 @@
   "doi": "DOI",
   "download": {
     "citation": "Citation.",
-    "pdf": "PDF"
+    "pdf": "PDF",
+    "title": "డౌన్‌లోడ్ చేయండి"
   },
   "edit": {
     "error": "ఈ పత్రాన్ని నవీకరించడంలో లోపం ఉంది",
