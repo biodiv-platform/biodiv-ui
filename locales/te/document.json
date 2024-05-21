@@ -100,6 +100,7 @@
     "my_uploads": "డ్రాఫ్ట్ మీడియా",
     "pdf_link_only": "PDF లింక్‌కు మాత్రమే మద్దతు ఇస్తుంది",
     "selected": "ఎంచుకున్న పత్రం",
+    "supported_formats": "pdf/mp4/webm/mov ఫార్మాట్‌లకు మద్దతు ఇస్తుంది",
     "url": "బాహ్య URL."
   }
 }

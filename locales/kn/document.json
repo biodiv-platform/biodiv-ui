@@ -100,6 +100,7 @@
     "my_uploads": "ಕರಡು ಮಾಧ್ಯಮ",
     "pdf_link_only": "PDF ಲಿಂಕ್ ಅನ್ನು ಮಾತ್ರ ಬೆಂಬಲಿಸುತ್ತದೆ",
     "selected": "ಆಯ್ದ ಡಾಕ್ಯುಮೆಂಟ್",
+    "supported_formats": "pdf/mp4/webm/mov ಫಾರ್ಮ್ಯಾಟ್‌ಗಳನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ",
     "url": "ಬಾಹ್ಯ URL"
   }
 }

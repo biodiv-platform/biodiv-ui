@@ -100,6 +100,7 @@
     "my_uploads": "வரைவு ஊடகம்",
     "pdf_link_only": "PDF இணைப்பை மட்டுமே ஆதரிக்கிறது",
     "selected": "தேர்ந்தெடுக்கப்பட்ட ஆவணம்",
+    "supported_formats": "pdf/mp4/webm/mov வடிவங்களை ஆதரிக்கிறது",
     "url": "வெளிப்புற URL"
   }
 }

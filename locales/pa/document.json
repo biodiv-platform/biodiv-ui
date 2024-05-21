@@ -100,6 +100,7 @@
     "my_uploads": "ਡਰਾਫਟ ਮੀਡੀਆ",
     "pdf_link_only": "ਸਿਰਫ਼ PDF ਲਿੰਕ ਦਾ ਸਮਰਥਨ ਕਰਦਾ ਹੈ",
     "selected": "ਚੁਣੇ ਦਸਤਾਵੇਜ਼",
+    "supported_formats": "pdf/mp4/webm/mov ਫਾਰਮੈਟਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦਾ ਹੈ",
     "url": "ਬਾਹਰੀ URL"
   }
 }
