@@ -100,7 +100,7 @@
     "my_uploads": "Rasimu ya vyombo vya habari.",
     "pdf_link_only": "Inasaidia kiungo cha PDF pekee",
     "selected": "Hati iliyochaguliwa",
-    "supported_formats": "Inaauni fomati za pdf/mp4/webm/mov",
+    "supported_formats": "Miundo ya faili inayotumika ni pamoja na .PDF, .MP4, .WebM, na .MOV.",
     "url": "URL ya nje"
   }
 }

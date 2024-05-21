@@ -100,7 +100,7 @@
     "my_uploads": "Brouillon",
     "pdf_link_only": "Prend en charge le lien PDF uniquement",
     "selected": "Document sélectionné",
-    "supported_formats": "Prend en charge les formats pdf/mp4/webm/mov",
+    "supported_formats": "Les formats de fichiers pris en charge incluent .PDF, .MP4, .WebM et .MOV.",
     "url": "URL externe"
   }
 }
