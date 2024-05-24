@@ -13,6 +13,7 @@ import {
   axGetDocumentPermissions
 } from "@services/document.service";
 import { RESOURCE_TYPE } from "@static/constants";
+import { ACCEPTED_MIME_TYPE } from "@static/document";
 import { getDocumentURL } from "@utils/document";
 import { getDocumentFilePath, getDocumentPath } from "@utils/media";
 import React, { useEffect, useState } from "react";
@@ -53,21 +54,21 @@ export default function DocumentShowComponent({
     }
   }, [isLoggedIn]);
 
+
+
   const getDocumentType = (mimeType) => {
-    if (mimeType.includes("video")) {
-      return "video";
+    if (mimeType.includes(ACCEPTED_MIME_TYPE.VIDEO)) {
+      return ACCEPTED_MIME_TYPE.VIDEO;
     }
-    if (mimeType.includes("pdf")) {
-      return "pdf";
+    if (mimeType.includes(ACCEPTED_MIME_TYPE.PDF)) {
+      return ACCEPTED_MIME_TYPE.PDF;
     }
     return undefined;
   };
 
   const renderDocument = (fileExtension: string | undefined) => {
     switch (fileExtension) {
-      case "pdf":
-        return <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />;
-      case "video":
+      case ACCEPTED_MIME_TYPE.VIDEO:
         return (
           <Box>
             <video width="100%" controls>
@@ -75,6 +76,8 @@ export default function DocumentShowComponent({
             </video>
           </Box>
         );
+      default:
+        return <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />;
     }
   };
 
