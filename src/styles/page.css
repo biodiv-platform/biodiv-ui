@@ -44,6 +44,48 @@
   }
 }
 
+.banner {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--chakra-colors-gray-300);
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none !important;
+  background: var(--chakra-colors-gray-100);
+}
+
+.banner img {
+  flex: 0 0 70%;
+  max-width: 30%;
+  object-fit: cover;
+}
+
+.banner > div {
+  flex: 1;
+  padding: 1rem;
+}
+
+.banner .label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--chakra-colors-gray-700);
+}
+
+.banner p {
+  margin: 0 !important;
+  font-size: 0.9rem !important;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--chakra-colors-gray-500);
+}
+
 @media screen and (max-width: 426px) {
   .epc {
     width: 100%;

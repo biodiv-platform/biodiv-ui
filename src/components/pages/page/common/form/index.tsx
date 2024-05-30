@@ -15,7 +15,11 @@ import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PageShowMinimal } from "@interfaces/pages";
-import { axRemovePageGalleryImage, axUploadEditorPageResource } from "@services/pages.service";
+import {
+  axRemovePageGalleryImage,
+  axUploadEditorPageResource,
+  axUploadMediaEditorPageResource
+} from "@services/pages.service";
 import { translateOptions } from "@utils/i18n";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
@@ -121,6 +125,7 @@ export default function PageForm({
             name="content"
             label={t("page:form.content")}
             uploadHandler={axUploadEditorPageResource}
+            fileUploadHandler={axUploadMediaEditorPageResource}
           />
         </Box>
 
@@ -150,7 +155,6 @@ export default function PageForm({
                     onRemoveCallback={axRemovePageGalleryImage}
                   />
                 </Box>
-                <SocialPreviewField name="socialPreview" label={t("page:form.social_preview")} />
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
@@ -169,7 +173,6 @@ export default function PageForm({
               <AccordionIcon />
             </AccordionButton>
             <AccordionPanel>
-              <TextAreaField name="description" label={t("page:form.description")} />
               {!hideParentId && (
                 <SelectInputField
                   name="parentId"
@@ -178,6 +181,12 @@ export default function PageForm({
                   shouldPortal={true}
                 />
               )}
+              <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+                <Box gridColumn="1/4">
+                  <TextAreaField name="description" label={t("page:form.description")} />
+                </Box>
+                <SocialPreviewField name="socialPreview" label={t("page:form.social_preview")} />
+              </SimpleGrid>
               <SwitchField name="sticky" mb={2} label={t("page:form.is_sidebar")} />
               <SwitchField
                 name="showInMenu"

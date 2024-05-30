@@ -45,7 +45,8 @@
   "doi": "DOI",
   "download": {
     "citation": "ambadika",
-    "pdf": "PDF"
+    "pdf": "PDF",
+    "title": "DOWNLOAD"
   },
   "edit": {
     "error": "Nisy hadisoana nanavao ity tahirin-kevitra ity",
@@ -83,6 +84,7 @@
       "title": "Anarana siantifika"
     }
   },
+  "social_preview": "Preview ara-tsosialy",
   "tags": {
     "not_found": "Tsy misy tags (s) hita",
     "title": "Tags"
@@ -94,8 +96,11 @@
   "update_success": "Nohavaozina soa aman-tsara",
   "updated_on": "Daty Nohavaozina",
   "upload": {
+    "label": "Alefaso eto ny rakitra PDF/Video",
     "my_uploads": "Draft Media",
+    "pdf_link_only": "Manohana rohy PDF ihany",
     "selected": "Antontan-taratasy voafantina",
+    "supported_formats": "Ny endrika rakitra tohana dia misy .PDF, .MP4, .WebM, ary .MOV.",
     "url": "URL ivelany"
   }
 }

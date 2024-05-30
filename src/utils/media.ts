@@ -7,7 +7,8 @@ export const RESOURCE_CTX = {
   OBSERVATION: "OBSERVATION",
   PAGES: "PAGES",
   SPECIES: "SPECIES",
-  USERGROUPS: "USERGROUPS"
+  USERGROUPS: "USERGROUPS",
+  DOCUMENT_SOCIAL_PREVIEW: "DOCUMENT_SOCIAL_PREVIEW"
 };
 
 const RESOURCE_CTX_MAP = {
@@ -16,7 +17,8 @@ const RESOURCE_CTX_MAP = {
   PAGES: "pages",
   SPECIES_FIELD: "img",
   SPECIES: "img",
-  USERGROUPS: "userGroups"
+  USERGROUPS: "userGroups",
+  DOCUMENT_SOCIAL_PREVIEW: "documentSocialPreview"
 };
 
 const cleanSlashes = (path) => path.split("//").join("/");
@@ -124,7 +126,7 @@ export const getDocumentPath = (resourceUrl): string => {
   return `/pdf-viewer/?file=${getDocumentFilePath(resourceUrl)}`;
 };
 
-export const getDocumentFilePath = (resourceUrl: string): string => {
+export const getDocumentFilePath = (resourceUrl): string => {
   return resourceUrl.startsWith("http")
     ? resourceUrl
     : `${ENDPOINT.RAW}/content/documents${resourceUrl}`;

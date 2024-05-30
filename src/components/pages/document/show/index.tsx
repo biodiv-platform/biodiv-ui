@@ -13,8 +13,9 @@ import {
   axGetDocumentPermissions
 } from "@services/document.service";
 import { RESOURCE_TYPE } from "@static/constants";
+import { ACCEPTED_MIME_TYPE } from "@static/document";
 import { getDocumentURL } from "@utils/document";
-import { getDocumentPath } from "@utils/media";
+import { getDocumentFilePath, getDocumentPath } from "@utils/media";
 import React, { useEffect, useState } from "react";
 
 import DocumentHeader from "./header";
@@ -34,14 +35,12 @@ interface DocumentShowProps {
   document: ShowDocument;
   speciesGroups;
   habitatList;
-  showViewer;
 }
 
 export default function DocumentShowComponent({
   document,
   speciesGroups,
-  habitatList,
-  showViewer
+  habitatList
 }: DocumentShowProps) {
   const { isLoggedIn } = useGlobalState();
   const [permission, setPermission] = useState<DocumentUserPermission>();
@@ -55,14 +54,37 @@ export default function DocumentShowComponent({
     }
   }, [isLoggedIn]);
 
+  const getDocumentType = (mimeType) => {
+    if (mimeType.includes(ACCEPTED_MIME_TYPE.VIDEO)) {
+      return ACCEPTED_MIME_TYPE.VIDEO;
+    }
+    if (mimeType.includes(ACCEPTED_MIME_TYPE.PDF) || document?.document?.externalUrl) {
+      return ACCEPTED_MIME_TYPE.PDF;
+    }
+    return undefined;
+  };
+
+  const renderDocument = (fileExtension: string | undefined) => {
+    switch (fileExtension) {
+      case ACCEPTED_MIME_TYPE.VIDEO:
+        return (
+          <Box>
+            <video width="100%" controls>
+              <source src={getDocumentFilePath(documentPath)} />
+            </video>
+          </Box>
+        );
+      case ACCEPTED_MIME_TYPE.PDF:
+        return <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />;
+    }
+  };
+
   return (
     <div className="container mt">
       <DocumentHeader document={document} />
       <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
-          {showViewer && (
-            <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />
-          )}
+          {renderDocument(getDocumentType(document?.uFile?.mimeType))}
           <DocumentInfo d={document} />
 
           {SITE_CONFIG.USERGROUP.ACTIVE && (

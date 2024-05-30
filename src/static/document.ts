@@ -97,3 +97,8 @@ export const DOCUMNET_ITEM_TYPE = [
   "article",
   "misc"
 ];
+
+export const ACCEPTED_MIME_TYPE = {
+  VIDEO: "video",
+  PDF: "pdf"
+};
