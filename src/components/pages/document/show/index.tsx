@@ -54,13 +54,11 @@ export default function DocumentShowComponent({
     }
   }, [isLoggedIn]);
 
-
-
   const getDocumentType = (mimeType) => {
     if (mimeType.includes(ACCEPTED_MIME_TYPE.VIDEO)) {
       return ACCEPTED_MIME_TYPE.VIDEO;
     }
-    if (mimeType.includes(ACCEPTED_MIME_TYPE.PDF)) {
+    if (mimeType.includes(ACCEPTED_MIME_TYPE.PDF) || document?.document?.externalUrl) {
       return ACCEPTED_MIME_TYPE.PDF;
     }
     return undefined;
@@ -76,7 +74,7 @@ export default function DocumentShowComponent({
             </video>
           </Box>
         );
-      default:
+      case ACCEPTED_MIME_TYPE.PDF:
         return <DocumentIframe className="fadeInUp delay-2" src={getDocumentPath(documentPath)} />;
     }
   };
