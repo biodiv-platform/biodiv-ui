@@ -68,7 +68,7 @@ export default function Metadata() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'SITE_CONFIG.TRACKING.GA_ID');
+            gtag('config', '${SITE_CONFIG.TRACKING.GA_ID}');
         `
             }}
           />
