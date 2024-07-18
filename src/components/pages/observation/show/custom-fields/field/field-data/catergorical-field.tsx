@@ -28,7 +28,11 @@ export default function CatergoricalField({
   const [options, setOptions] = useState<any[]>([]);
 
   const onSave = () => {
-    onUpdate(isMulti ? { multipleCategorical: [fieldValue] } : { singleCategorical: fieldValue });
+    onUpdate(
+      isMulti
+        ? { multipleCategorical: Array.isArray(fieldValue) ? [...fieldValue] : [] }
+        : { singleCategorical: fieldValue }
+    );
   };
 
   useEffect(() => {
