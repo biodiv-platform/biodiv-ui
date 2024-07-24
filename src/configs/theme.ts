@@ -67,6 +67,12 @@ export const customTheme = extendTheme(
         tr: {
           border: 0
         }
+      },
+      h5: {
+        fontWeight: "bold"
+      },
+      h6: {
+        fontWeight: "bold"
       }
     }
   })
