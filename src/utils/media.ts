@@ -1,3 +1,4 @@
+import SITE_CONFIG from "@configs/site-config";
 import { ENDPOINT } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { ASSET_TYPES } from "@static/observation-create";
@@ -129,5 +130,5 @@ export const getDocumentPath = (resourceUrl): string => {
 export const getDocumentFilePath = (resourceUrl): string => {
   return resourceUrl.startsWith("http")
     ? resourceUrl
-    : `${ENDPOINT.RAW}/content/documents${resourceUrl}`;
+    : `${SITE_CONFIG.DOCUMENT.BASE_PATH}/content/documents${resourceUrl}`;
 };
