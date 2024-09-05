@@ -16,7 +16,7 @@ export const ENDPOINT = {
   ESMODULE: `${API_ENDPOINT}esmodule-api/api`,
   FILES: `${API_ENDPOINT}files-api/api`,
   GEOENTITIES: `${API_ENDPOINT}geoentities-api/api`,
-  GEOSERVER: `${SITE_CONFIG.SITE.API_ENDPOINT_SSR}naksha-integrator-api/api/geoserver`,
+  GEOSERVER: `${SITE_CONFIG.GEOSERVER_BASE_PATH}/geoserver`,
   INTEGRATOR: `${API_ENDPOINT}integrator-api/api`,
   LANDSCAPE: `${API_ENDPOINT}landscape-api/api`,
   NAKSHA: `${API_ENDPOINT}naksha-integrator-api/api`,
