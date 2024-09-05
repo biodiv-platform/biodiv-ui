@@ -12,7 +12,7 @@ export default function CustomFieldList({
   setO,
   cfPermission
 }: ICustomFieldsProps) {
-  const { groups, user } = useGlobalState();
+  const { groups, user, currentGroup } = useGlobalState();
 
   const getGroupNameById = (gId) => useMemo(() => groups?.find((g) => g.id === gId)?.name, [gId]);
 
@@ -20,8 +20,14 @@ export default function CustomFieldList({
     return cfPermission?.find((cfp) => cfp.userGroupId === gId)?.allowedCfId || [];
   };
 
+  const defaultTabIndex = currentGroup?.id
+    ? o.customField
+      ? o.customField.findIndex((cf) => cf.userGroupId === currentGroup.id)
+      : 0
+    : 0;
+
   return (
-    <Tabs className="nospace" isLazy={true}>
+    <Tabs className="nospace" isLazy={true} defaultIndex={defaultTabIndex}>
       <TabList>
         {o.customField?.map(({ userGroupId }) => (
           <Tab key={userGroupId}>{getGroupNameById(userGroupId)}</Tab>
