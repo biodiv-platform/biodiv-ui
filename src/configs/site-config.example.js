@@ -194,7 +194,8 @@ const SITE_CONFIG_EXAMPLE = {
   },
   WKT: {
     DEFAULT_TAB: 2
-  }
+  },
+  GEOSERVER_BASE_PATH: "path"
 };
 
 module.exports = SITE_CONFIG_EXAMPLE;
