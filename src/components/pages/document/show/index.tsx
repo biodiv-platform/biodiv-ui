@@ -55,12 +55,13 @@ export default function DocumentShowComponent({
   }, [isLoggedIn]);
 
   const getDocumentType = (mimeType) => {
+    if (document?.document?.externalUrl || mimeType.includes(ACCEPTED_MIME_TYPE.PDF)) {
+      return ACCEPTED_MIME_TYPE.PDF;
+    }
     if (mimeType.includes(ACCEPTED_MIME_TYPE.VIDEO)) {
       return ACCEPTED_MIME_TYPE.VIDEO;
     }
-    if (mimeType.includes(ACCEPTED_MIME_TYPE.PDF) || document?.document?.externalUrl) {
-      return ACCEPTED_MIME_TYPE.PDF;
-    }
+
     return undefined;
   };
 
