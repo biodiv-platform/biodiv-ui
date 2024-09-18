@@ -4,12 +4,12 @@ import React from "react";
 
 import ObservationsMap from "../map";
 import LifeList from "./life-list";
+import ObservationPerDay from "./observation-per-day";
 import SpeciesGroups from "./species-groups";
 import StatesDistribution from "./states-distribution";
 import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
-import ObservationPerDay from "./observation-per-day";
 
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
@@ -31,7 +31,6 @@ export default function StatsView() {
       <ObservationsMap />
 
       <ObservationPerDay 
-      observationData={observationData}
       filter={filter}
       />
 

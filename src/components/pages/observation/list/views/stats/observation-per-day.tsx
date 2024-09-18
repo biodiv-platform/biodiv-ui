@@ -1,20 +1,13 @@
 
-import React, { useState } from "react";
-import useCountPerDay from "./use-count-per-day";
-import { ObservationTooltipRenderer } from "./static-data";
-import CalendarHeatmap from "./calendar-heatmap";
+import React from "react";
 
-const ObservationPerDay = ({ observationData, filter }) => {
-  const [activeTab, setActiveTab] = useState(0);
+import CalendarHeatmap from "./calendar-heatmap";
+import { ObservationTooltipRenderer } from "./static-data";
+import useCountPerDay from "./use-count-per-day";
+
+const ObservationPerDay = ({ filter }) => {
 
   const count = useCountPerDay({ filter });
-
-  const containerStyle = {
-    display: 'flex',
-    overflowX: 'auto',
-    whiteSpace: 'nowrap',
-    scrollbarWidth: 'thin',
-  };
 
   const data = count.data.list;
   const isLoading = count.data.isLoading;
@@ -27,10 +20,6 @@ const ObservationPerDay = ({ observationData, filter }) => {
   }
 
   const years = Object.keys(data);
-  const activeTabButtonStyle = {
-    backgroundColor: "#00A36C",
-    height:"40px",width:"100%",
-  };
   years.reverse()
 
   return (
