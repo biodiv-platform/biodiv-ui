@@ -80,7 +80,9 @@
   "list": {
     "chart": {
       "sgroup": "Vikundi vya aina",
-      "states": "Usambazaji wa Nchi."
+      "states": "Usambazaji wa Nchi.",
+      "temporal_distribution_date_created": "Usambazaji wa Muda - Tarehe Iliyoundwa",
+      "temporal_distribution_date_observed": "Usambazaji wa Muda - Tarehe Iliyozingatiwa"
     },
     "created_on": "Imeundwa On.",
     "life_list": {

@@ -80,7 +80,9 @@
   "list": {
     "chart": {
       "sgroup": "प्रजाति समूह",
-      "states": "राज्य वितरण"
+      "states": "राज्य वितरण",
+      "temporal_distribution_date_created": "अस्थायी वितरण - निर्मित तिथि",
+      "temporal_distribution_date_observed": "अस्थायी वितरण - मनाई गई तिथि"
     },
     "created_on": "पर बनाया",
     "life_list": {

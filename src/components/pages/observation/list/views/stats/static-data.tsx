@@ -10,5 +10,5 @@ export const SpeciesTooltipRenderer = (data) =>
    `;
 
 export const ObservationTooltipRenderer = (data) =>
-  `<b>${data?.date}</b><br/>
+  `<b>${data?.date.split('-').reverse().join('/')}</b><br/>
   <nobr>count:${data?.value}</nobr><br/>`;

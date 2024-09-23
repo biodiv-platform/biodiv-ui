@@ -31,7 +31,11 @@ export default function StatsView() {
       <ObservationsMap />
 
       <ObservationPerDay 
-      filter={filter}
+      filter={filter} group = {"created"}
+      />
+
+      <ObservationPerDay 
+      filter={filter} group = {"observed"}
       />
 
       <SimpleGrid columns={{ md: 2 }} mb={4}>

@@ -80,7 +80,9 @@
   "list": {
     "chart": {
       "sgroup": "Groupes d'espèces",
-      "states": "Distribution d'État"
+      "states": "Distribution d'État",
+      "temporal_distribution_date_created": "Distribution temporelle - Date de création",
+      "temporal_distribution_date_observed": "Distribution temporelle - Date observée"
     },
     "created_on": "Créé le",
     "life_list": {
