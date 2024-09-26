@@ -2,6 +2,7 @@ import useResizeObserver from "@components/charts/hooks/use-resize-observer";
 import { tooltipHelpers, useTooltip } from "@components/charts/hooks/use-tooltip";
 import * as d3 from "d3";
 import { max } from "d3-array";
+import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand } from "d3-scale";
 import { select } from "d3-selection";
 import { useRouter } from 'next/router';
@@ -102,6 +103,10 @@ const CalendarHeatMap = ({
       .domain(counts)
       .range([height, 0]).padding(0.05);
 
+      const weekScale = scaleBand()
+      .domain(WeekDays)
+      .range([height, 0]).padding(0.05);
+
     function yValue(date) {
         const DayDate = new Date(date);
         return yScale(DayDate.getDay())
@@ -152,23 +157,18 @@ const CalendarHeatMap = ({
         router.push('/observation/list?createdOnMaxDate=' + d.date + 'T18%3A30%3A00Z&createdOnMinDate=' + `${year}-${month}-${day}` + 'T18%3A30%3A00Z&max=8&mediaFilter=no_of_images%2Cno_of_videos%2Cno_of_audio%2Cno_media&offset=0&sort=created_on&userGroupList&view=list');
       });
 
-      counts.map((name, i) => {
-        const yPos = yScale(name) ?? 0;
-        svg.append("text")
-        .attr("x",ml-25)
-        .attr("y", yPos+yScale.bandwidth()/2)
-        .attr("font-size","11px")
-        .text(WeekDays[i])
-      });
+        svg
+        .select(".x-axis")
+        .join("g")
+        .attr("transform", `translate(${ml},${height})`)
+        .call(axisBottom(monthScale))
+        .selectAll("text")
+        .style("text-anchor", "end");
+  
+      svg.select(".y-axis").join("g").attr("transform", "translate(60,0)").call(axisLeft(weekScale));
 
-      Months.map((name, i) => {
-        const xPos = monthScale(name) ?? 0;
-        svg.append("text")
-        .attr("x",xPos + monthScale.bandwidth() / 2 + 30)
-        .attr("y", height+10)
-        .attr("font-size","11px")
-        .text(Months[i])
-      })
+      svg.selectAll(".domain").remove();
+      svg.selectAll(".tick line").remove();
   }, [containerRef, ro?.width,  data]);
 
   return (

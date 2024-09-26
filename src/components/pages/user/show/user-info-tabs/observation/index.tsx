@@ -1,4 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
+import StackedHorizontalChart from "@components/pages/observation/list/views/stats/stacked-horizontal-chart";
 import React from "react";
 
 import useUserData from "../../use-user-data";
@@ -23,6 +24,7 @@ export default function ObservationTab({ userId }) {
         <SpeciesGroupChart data={ud.speciesData} />
       </SimpleGrid>
       <ObservationListTab ud={ud} />
+      <StackedHorizontalChart data={ud.observationPerMonth.list}/>
       <LifeList userId={userId} filter={ud.filter} />
     </div>
   );

@@ -7,6 +7,7 @@ import LifeList from "./life-list";
 import ObservationPerDay from "./observation-per-day";
 import SpeciesGroups from "./species-groups";
 import StatesDistribution from "./states-distribution";
+import TemporalObservedOn from "./temporal-observed-on";
 import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
@@ -34,11 +35,9 @@ export default function StatsView() {
       filter={filter} group = {"created"}
       />
 
-      <ObservationPerDay 
-      filter={filter} group = {"observed"}
-      />
+<TemporalObservedOn filter={filter} />
 
-      <SimpleGrid columns={{ md: 2 }} mb={4}>
+      <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
         <StatesDistribution observationData={observationData} filter={filter} />
       </SimpleGrid>
     </div>

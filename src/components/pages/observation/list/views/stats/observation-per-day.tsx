@@ -1,6 +1,6 @@
 
 import {ArrowBackIcon,ArrowForwardIcon} from "@chakra-ui/icons"
-import { Box } from "@chakra-ui/react";
+import { Box, Select } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -40,8 +40,10 @@ const ObservationPerDay = ({ filter , group}) => {
     );
   };
 
-  // eslint-disable-next-line no-console
-  console.log(years)
+  const handleOnChange = (e) => {
+    const v = e?.target?.value;
+    setCurrentIndex(v)
+  };
 
   return (
       <Box className="white-box" mb={4} minWidth={"1250px"}>
@@ -56,7 +58,17 @@ const ObservationPerDay = ({ filter , group}) => {
           {currentIndex!=0 &&<ArrowBackIcon style={{position:"absolute",  left:"20px", fontSize:"2rem"}} onClick={prevSlide}/>}
           {currentIndex!=years.length-1&&<ArrowForwardIcon style={{position:"absolute",  right:"20px", fontSize:"2rem"}} onClick={nextSlide}/>}
           <div>
-          <div style={{marginLeft:"600px", paddingTop:"50px"}}>{years[currentIndex]}</div>
+          <div style={{marginLeft:"45%", paddingTop:"25px", paddingBottom:"25px"}}><Select
+              maxW="6rem"
+              value={currentIndex}
+              onChange={handleOnChange}
+            >
+              {years.map((option, index) => (
+                <option key={index} value={index}>
+                  {option}
+                </option>
+              ))}
+            </Select></div>
             <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer}/></div>
         </div>
         </div>
