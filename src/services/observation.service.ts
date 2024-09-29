@@ -578,10 +578,10 @@ export const axGetPlantnetSuggestions = async (imageUrls, organs) => {
   }
 };
 
-export const axGetGroupMonthObservedOn = async (userId) => {
+export const axGetGroupByDayCreatedOn = async (userId) => {
   try {
     const { data } = await plainHttp.get(
-      `${ENDPOINT.ESMODULE}/v1/services/month-aggregation/${userId}`
+      `${ENDPOINT.OBSERVATION}/v1/observation/user/${userId}`
     );
     return { success: true, data };
   } catch (e) {

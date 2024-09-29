@@ -31,14 +31,12 @@ export default function StatsView() {
 
       <ObservationsMap />
 
-      <ObservationPerDay 
-      filter={filter} group = {"created"}
-      />
-
-<TemporalObservedOn filter={filter} />
-
-      <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
+      <SimpleGrid columns={{ md: 1 }} spacing={4} mb={4}>
         <StatesDistribution observationData={observationData} filter={filter} />
+        <ObservationPerDay 
+      filter={filter}
+      />
+      <TemporalObservedOn filter={filter} />
       </SimpleGrid>
     </div>
   );

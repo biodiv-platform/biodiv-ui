@@ -39,6 +39,7 @@
     "filter": "Filter",
     "life_list": "Life List",
     "map": "Observations Spread",
+    "temporal_created_on": "Temporal Distribution - Created On",
     "title": "Observations"
   },
   "occupation": "Profession",

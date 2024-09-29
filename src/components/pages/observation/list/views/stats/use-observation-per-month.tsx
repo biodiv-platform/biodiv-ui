@@ -1,4 +1,4 @@
-import { axGetGroupMonthObservedOn } from "@services/observation.service";
+import { axGetListData } from "@services/observation.service";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -13,11 +13,13 @@ export default function useObservationPerMonth({ filter }) {
       _draft.isLoading = true;
     });
 
-    const { success, data } = await axGetGroupMonthObservedOn(1426);
-
+    const { success, data } = await axGetListData({
+      ...filter
+    });
+    
     setter((_draft) => {
       if (success) {
-        _draft.list = data;
+        _draft.list = data.aggregateStatsData.groupObservedOn;
       }
       _draft.isLoading = false;
     });

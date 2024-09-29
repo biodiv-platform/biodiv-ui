@@ -1,6 +1,6 @@
 import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-type/filter-keys";
 import useGlobalState from "@hooks/use-global-state";
-import { axGetGroupMonthObservedOn, axGetListData, axGetspeciesGroups } from "@services/observation.service";
+import { axGetListData, axGetspeciesGroups } from "@services/observation.service";
 import { useEffect, useMemo, useState } from "react";
 import { useImmer } from "use-immer";
 
@@ -40,11 +40,6 @@ const useUserData = (userId, max = 16) => {
     speciesData: {},
     hasStats: false,
     link: ""
-  });
-
-  const [observationPerMonth, setObservationPerMonth] = useImmer({
-    list: [],
-    isLoading: true
   });
 
   const getProcessedFilters = (userKey) => ({
@@ -141,25 +136,6 @@ const useUserData = (userId, max = 16) => {
     }
   };
 
-  const fetchObservationPerMonth = async (setter) => {
-    setter((_draft) => {
-      _draft.isLoading = true;
-    });
-
-    const { success, data } = await axGetGroupMonthObservedOn(userId);
-
-    setter((_draft) => {
-      if (success) {
-        _draft.list = data;
-      }
-      _draft.isLoading = false;
-    });
-  };
-
-  useEffect(() => {
-    fetchObservationPerMonth(setObservationPerMonth);
-  }, []);
-
   useEffect(() => {
     if (speciesGroups.length) {
       loadMoreUploadedObservations(true);
@@ -179,9 +155,7 @@ const useUserData = (userId, max = 16) => {
     speciesGroups,
     filter,
     setFilter,
-    getProcessedFilters,
-
-    observationPerMonth
+    getProcessedFilters
   };
 };
 

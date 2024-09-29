@@ -10,7 +10,7 @@ import React, { useEffect, useRef } from "react";
 
 interface HeatMapChartProps {
   year : string;
-  w?: number;
+  w: number;
   data: any[];
   mt?: number;
   mr?: number;
@@ -22,7 +22,7 @@ interface HeatMapChartProps {
 const CalendarHeatMap = ({
   data,
   tooltipRenderer,
-  w = 500,
+  w,
   year,
   mt = 30,
   mr = 30,
@@ -44,9 +44,7 @@ const CalendarHeatMap = ({
     }
 
     const svg = select(svgRef.current);
-
-    w=1200;
-    const h=245;
+    const h=(w/5)+5;
     const width = w - ml - mr;
     const height = h - mt - mb;
 
@@ -148,13 +146,17 @@ const CalendarHeatMap = ({
       .attr("ry", 4)
       .attr("width", xScale.bandwidth())
       .attr("height", yScale.bandwidth())
+      .style("cursor", "pointer")
       .on("click",(event,d)=>{
         const minDay = new Date(d.date);
         minDay.setDate(minDay.getDate() - 1)
         const year = minDay.getFullYear();
-        const month = String(minDay.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so +1
+        const month = String(minDay.getMonth() + 1).padStart(2, '0'); 
         const day = String(minDay.getDate()).padStart(2, '0');
-        router.push('/observation/list?createdOnMaxDate=' + d.date + 'T18%3A30%3A00Z&createdOnMinDate=' + `${year}-${month}-${day}` + 'T18%3A30%3A00Z&max=8&mediaFilter=no_of_images%2Cno_of_videos%2Cno_of_audio%2Cno_media&offset=0&sort=created_on&userGroupList&view=list');
+        router.push({
+          pathname: '/observation/list',
+          query: { offset: 0, createdOnMaxDate: d.date+"T18:30:00Z", createdOnMinDate:`${year}-${month}-${day}T18:30:00Z` },
+        });
       });
 
         svg

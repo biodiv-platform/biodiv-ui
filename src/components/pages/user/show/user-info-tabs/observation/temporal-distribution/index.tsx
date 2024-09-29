@@ -1,23 +1,21 @@
-
-import {ArrowBackIcon,ArrowForwardIcon} from "@chakra-ui/icons"
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Select, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import CalendarHeatMap from "@components/pages/observation/list/views/stats/calendar-heatmap";
+import { ObservationTooltipRenderer } from "@components/pages/observation/list/views/stats/static-data";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
-import CalendarHeatMap from "./calendar-heatmap";
-import { ObservationTooltipRenderer } from "./static-data";
-import useCountPerDay from "./use-count-per-day";
+import useTemporalData from "./use-temporal-observation-data";
 
-const ObservationPerDay = ({ filter }) => {
-
+export default function TemporalDistribution(userId) {
   const { t } = useTranslation();
-  const count = useCountPerDay({ filter });
+  const temporalData = useTemporalData(userId.userId);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const data = count.data.list;
-  const isLoading = count.data.isLoading;
+  const data = temporalData.data.list;
+  const isLoading = temporalData.data.isLoading;
   if (isLoading) {
     return <Skeleton h={450} borderRadius="md" />;
   }
@@ -46,13 +44,13 @@ const ObservationPerDay = ({ filter }) => {
   };
 
   return (
-      <Box className="white-box" mb={4} minWidth={"1250px"}>
-        <BoxHeading>📊 {t("observation:list.chart.temporal_distribution_date_created")}</BoxHeading>
-      <Box >
+    <Box className="white-box" mb={4} minWidth={"1150px"}>
+        <BoxHeading>📊 {t("user:observations.temporal_created_on")}</BoxHeading>
+        <Box >
         <div>
         <div style={{position:"relative", display:"flex", justifyContent:"center", alignItems:"center"}}>
-          {currentIndex!=0 &&<ArrowBackIcon style={{position:"absolute",  left:"20px", fontSize:"2rem"}} onClick={prevSlide}/>}
-          {currentIndex!=years.length-1&&<ArrowForwardIcon style={{position:"absolute",  right:"20px", fontSize:"2rem"}} onClick={nextSlide}/>}
+          {currentIndex!=0 &&<ArrowBackIcon style={{position:"absolute",  left:"5px", fontSize:"2rem"}} onClick={prevSlide}/>}
+          {currentIndex!=years.length-1&&<ArrowForwardIcon style={{position:"absolute",  right:"5px", fontSize:"2rem"}} onClick={nextSlide}/>}
           <div>
           <div style={{marginLeft:"45%", paddingTop:"25px", paddingBottom:"25px"}}><Select
               maxW="6rem"
@@ -65,12 +63,10 @@ const ObservationPerDay = ({ filter }) => {
                 </option>
               ))}
             </Select></div>
-            <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} w={1200}/></div>
+            <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} w={1100}/></div>
         </div>
         </div>
       </Box>
     </Box>
   );
-};
-
-export default ObservationPerDay;
+}
