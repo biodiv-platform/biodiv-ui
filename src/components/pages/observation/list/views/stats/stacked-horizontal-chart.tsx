@@ -170,7 +170,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
       .attr("class", "legend-text")
       .attr("y", (d) => yPos(d)+(y.bandwidth()/2)+5)
       .attr("x", (d) => xValue(d[1])-xValue(d[0])+10)
-      .text((d) => d[1]-d[0]);
+      .text((d) => Number.isNaN(d[1]) ? null: d[1]-d[0]);
 
     }
 
