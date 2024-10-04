@@ -47,6 +47,16 @@ export const customTheme = extendTheme(
   },
   withProse({
     baseStyle: {
+      h5: {
+        fontSize: "md",
+        fontWeight: "bold",
+        fontFamily: defaultFontFamily
+      },
+      h6: {
+        fontSize: "sm",
+        fontWeight: "bold",
+        fontFamily: defaultFontFamily
+      },
       a: {
         color: "blue.500",
         wordBreak: "break-all"
