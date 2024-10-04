@@ -58,7 +58,9 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
 
     const colors = Array.from({ length: years.length+1 }, (_, i) => colorScale(i));
 
-    const rows = Math.floor(years.length/33);
+    const num = Math.ceil((ro.width-ml-mr)/38)+1;
+
+    const rows = Math.floor(years.length/num);
 
     const svg = select(svgRef.current).attr("width", ro.width).attr("height", h+rows*40+30);
 
@@ -110,7 +112,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
     .attr("x", (d)=>x(d[0]))
     .attr("y", (d) => yPos(d))
     .attr("height", y.bandwidth())
-    .attr("width", (d) => (x(d[1]) && x(d[0])) ? x(d[1]) - x(d[0]) : 0);
+    .attr("width", (d) => (x(d[1])) ? x(d[1]) - x(d[0]) : x(d[0]));
 
     svg
     .select(".chart")
@@ -125,7 +127,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
     .attr("y1", (d) => yPos(d))
     .attr("y2", (d) => yPos(d) + y.bandwidth()) // Extend the line for the full height of the rect
     .attr("stroke", "red")    // Set the line color for the right border
-    .attr("stroke-width", 0.6);  
+    .attr("stroke-width", 0.6);
 
     let legendWidth = (ro.width - ml - mr)/(years.length+1)
 
@@ -137,8 +139,8 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
     function handleLegendClick(key,ro) {
       const filteredData= seriesData.filter((series) => series.key === key)
 
-      const maxValue = d3.max(filteredData, series => 
-        d3.max(series, d => d[1]-d[0])  
+      const maxValue = d3.max(filteredData, series =>
+        d3.max(series, d => d[1]-d[0])
       );
 
       const xValue: any = scaleLinear()
@@ -150,7 +152,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
       .selectAll("g")
       .data(filteredData)
       .join("g")
-      .attr("fill", (d) => colors[d.index + 1])  
+      .attr("fill", (d) => colors[d.index + 1])
       .selectAll("rect")
       .data((d) => d)
       .join("rect")
@@ -172,6 +174,8 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
       .attr("x", (d) => xValue(d[1])-xValue(d[0])+10)
       .text((d) => Number.isNaN(d[1]) ? null: d[1]-d[0]);
 
+      svg.selectAll("line").remove();
+
     }
 
     function handleReset() {
@@ -188,7 +192,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
       .attr("x", (d)=>x(d[0]))
       .attr("y", (d) => yPos(d))
       .attr("height", y.bandwidth())
-      .attr("width", (d) => (x(d[1]) && x(d[0])) ? x(d[1]) - x(d[0]) : 0);
+      .attr("width", (d) => (x(d[1])) ? x(d[1]) - x(d[0]) : x(d[0]));
 
       svg
       .select(".chart")
@@ -203,7 +207,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
       .attr("y1", (d) => yPos(d))
       .attr("y2", (d) => yPos(d) + y.bandwidth()) // Extend the line for the full height of the rect
       .attr("stroke", "red")    // Set the line color for the right border
-      .attr("stroke-width", 0.6);  
+      .attr("stroke-width", 0.6);
 
       svg.selectAll(".legend-text").remove()
 
@@ -213,34 +217,21 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
     .attr('transform', `translate(${-ml}, ${h-mt-mb+10})`);
 
     legend.selectAll('rect')
-    .data(years)
+    .data(years.concat("All"))
     .join("rect")
-    .attr('x', (d, i) => (i%33) * legendWidth+ml)
-    .attr('y', (d,i) => Math.floor(i/33)*40)
+    .attr('x', (d, i) => (i%num) * legendWidth+ml)
+    .attr('y', (d,i) => Math.floor(i/num)*40)
     .attr('width', legendWidth-2)
     .attr('height', 20)
-    .attr('fill', (d, i) => colors[i+1])
+    .attr('fill', (d, i) => d=="All"?"#ccc":colors[i+1])
     .style("cursor", "pointer")
-    .on("click", (event, d) => handleLegendClick(d,ro));
-
-    const resetData = ["reset"];  
-    legend.selectAll(".reset-rect")
-    .data(resetData)
-    .join("rect")  
-    .attr("class", "reset-rect")
-    .attr("x", (years.length%33)*legendWidth+ml)
-    .attr("y", Math.floor(years.length/33)*40) 
-    .attr("width", legendWidth-2)
-    .attr("height", 20)
-    .attr("fill", "#ccc")
-    .style("cursor", "pointer")
-    .on("click", () => handleReset());
+    .on("click", (event, d) => d=="All"?handleReset():handleLegendClick(d,ro));
 
     legend.selectAll('text')
     .data(years.concat("All"))
     .join('text')
-    .attr('x', (d, i) => (i%33) * legendWidth+ml+5)
-    .attr('y',(d,i) => Math.floor(i/33)*40+35)
+    .attr('x', (d, i) => (i%num) * legendWidth+ml+5)
+    .attr('y',(d,i) => Math.floor(i/num)*40+35)
     .text(d => d)
     .style('font-size', "13px");
 
@@ -256,7 +247,9 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
 
     const years = Array.from(new Set(data.map((sg) => sg.year)));
 
-    const rows = Math.floor(years.length/33)
+    const num = Math.ceil((ro.width-ml-mr)/38)+1;
+
+    const rows = Math.floor(years.length/num);
 
     const downloadh = h+rows*40+30
 

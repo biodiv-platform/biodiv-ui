@@ -1,6 +1,8 @@
 import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
+import { axAddDownloadLog } from "@services/observation.service";
+import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useRef } from "react";
 
@@ -12,10 +14,12 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
 
   const chartRef = useRef<any>(null);
 
-  const handleDownload = () => {
+  const handleDownload = async() => {
+    await waitForAuth();
     if (chartRef.current) {
       chartRef.current.downloadChart();
     }
+    axAddDownloadLog(window.location.href,"Temporal Distribution - Created On")
   };
 
   const filteredData = useMemo(() => {

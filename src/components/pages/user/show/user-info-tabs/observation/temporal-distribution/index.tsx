@@ -1,5 +1,5 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Select, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Select, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CalendarHeatMap from "@components/pages/observation/list/views/stats/calendar-heatmap";
 import { ObservationTooltipRenderer } from "@components/pages/observation/list/views/stats/static-data";
@@ -21,7 +21,7 @@ export default function TemporalDistribution(userId) {
   }
 
   if (!data) {
-    return <p>No data available</p>;
+    return <div></div>;
   }
 
   const years = Object.keys(data);
@@ -44,27 +44,27 @@ export default function TemporalDistribution(userId) {
   };
 
   return (
-    <Box className="white-box" mb={4} minWidth={"1150px"}>
+    <Box className="white-box" mb={4}>
         <BoxHeading>📊 {t("user:observations.temporal_created_on")}</BoxHeading>
-        <Box >
-        <div>
-        <div style={{position:"relative", display:"flex", justifyContent:"center", alignItems:"center"}}>
-          {currentIndex!=0 &&<ArrowBackIcon style={{position:"absolute",  left:"5px", fontSize:"2rem"}} onClick={prevSlide}/>}
-          {currentIndex!=years.length-1&&<ArrowForwardIcon style={{position:"absolute",  right:"5px", fontSize:"2rem"}} onClick={nextSlide}/>}
-          <div>
-          <div style={{marginLeft:"45%", paddingTop:"25px", paddingBottom:"25px"}}><Select
-              maxW="6rem"
-              value={currentIndex}
-              onChange={handleOnChange}
-            >
-              {years.map((option, index) => (
-                <option key={index} value={index}>
-                  {option}
-                </option>
-              ))}
-            </Select></div>
-            <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} w={1100}/></div>
+        <Box position={'relative'}>
+        {currentIndex!=0&&<div style={{position:'absolute', top:'45%', left:'10px'}}><Button width={25} onClick={prevSlide}><ArrowBackIcon/></Button></div>}
+        {currentIndex!=years.length-1&&<div style={{position:'absolute', top:'45%', right:'10px'}}><Button width={25} onClick={nextSlide}><ArrowForwardIcon/></Button></div>}
+        <div style={{marginLeft:"45%", paddingTop:"25px", paddingBottom:"25px"}}>
+          <Select
+            fontSize="13px"
+            maxW="5rem"
+            value={currentIndex}
+            onChange={handleOnChange}
+          >
+            {years.map((option, index) => (
+              <option key={index} value={index}>
+                {option}
+              </option>
+            ))}
+          </Select>
         </div>
+        <div style={{paddingLeft:'30px',paddingRight:'35px'}}>
+          <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} />
         </div>
       </Box>
     </Box>

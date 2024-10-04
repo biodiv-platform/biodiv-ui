@@ -9,8 +9,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useRef } from "react";
 
 interface HeatMapChartProps {
+  h?: number;
   year : string;
-  w: number;
+  w?: number;
   data: any[];
   mt?: number;
   mr?: number;
@@ -21,8 +22,9 @@ interface HeatMapChartProps {
 
 const CalendarHeatMap = ({
   data,
+  w = 500,
+  h = 400,
   tooltipRenderer,
-  w,
   year,
   mt = 30,
   mr = 30,
@@ -44,7 +46,8 @@ const CalendarHeatMap = ({
     }
 
     const svg = select(svgRef.current);
-    const h=(w/5)+5;
+    w =ro.width;
+    h=(w/5)+5;
     const width = w - ml - mr;
     const height = h - mt - mb;
 
@@ -171,11 +174,11 @@ const CalendarHeatMap = ({
 
       svg.selectAll(".domain").remove();
       svg.selectAll(".tick line").remove();
-  }, [containerRef, ro?.width,  data]);
+  }, [containerRef, ro?.width, h, data]);
 
   return (
     <div ref={containerRef} style={{ position: "relative"}}>
-      <svg width={1200} height={245} ref={svgRef} >
+      <svg width={ro?.width} height={245} ref={svgRef} >
         <g className="x-axis" />
         <g className="y-axis" />
         <g className="chart" />
