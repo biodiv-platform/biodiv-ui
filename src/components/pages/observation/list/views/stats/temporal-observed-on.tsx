@@ -24,7 +24,7 @@ const TemporalObservedOn = ({ filter }) => {
     if (chartRef.current) {
       chartRef.current.downloadChart();
     }
-    axAddDownloadLog(window.location.href,"Temporal Distribution - Observed On")
+    axAddDownloadLog(window.location.href,"Temporal Distribution - Month Observed")
   };
 
   const data = count.data.list;

@@ -82,7 +82,7 @@
       "sgroup": "Species groups",
       "states": "State distribution",
       "temporal_distribution_date_created": "Temporal Distribution - Date Created",
-      "temporal_distribution_date_observed": "Temporal Distribution - Date Observed"
+      "temporal_distribution_date_observed": "Temporal Distribution - Month Observed"
     },
     "created_on": "Created on",
     "life_list": {

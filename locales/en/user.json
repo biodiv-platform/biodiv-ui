@@ -40,6 +40,7 @@
     "life_list": "Life List",
     "map": "Observations Spread",
     "temporal_created_on": "Temporal Distribution - Created On",
+    "temporal_month_observed": "Temporal Distribution - Month Observed",
     "title": "Observations"
   },
   "occupation": "Profession",

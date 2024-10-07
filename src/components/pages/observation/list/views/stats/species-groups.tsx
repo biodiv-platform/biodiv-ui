@@ -19,7 +19,7 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
     if (chartRef.current) {
       chartRef.current.downloadChart();
     }
-    axAddDownloadLog(window.location.href,"Temporal Distribution - Created On")
+    axAddDownloadLog(window.location.href,"Species groups")
   };
 
   const filteredData = useMemo(() => {

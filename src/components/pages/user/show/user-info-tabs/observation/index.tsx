@@ -24,8 +24,8 @@ export default function ObservationTab({ userId }) {
         <SpeciesGroupChart data={ud.speciesData} />
       </SimpleGrid>
       <ObservationListTab ud={ud} />
-      <TemporalDistribution userId = {userId}/>
       <LifeList userId={userId} filter={ud.filter} />
+      <TemporalDistribution userId = {userId}/>
     </div>
   );
 }

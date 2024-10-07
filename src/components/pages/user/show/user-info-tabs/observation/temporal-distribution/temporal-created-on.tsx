@@ -1,32 +1,28 @@
-
-import {ArrowBackIcon,ArrowForwardIcon} from "@chakra-ui/icons"
-import { Box, Button, Select, Skeleton } from "@chakra-ui/react";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { Box, Button, Select } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import CalendarHeatMap from "@components/pages/observation/list/views/stats/calendar-heatmap";
+import { ObservationTooltipRenderer } from "@components/pages/observation/list/views/stats/static-data";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
-import CalendarHeatMap from "./calendar-heatmap";
-import { ObservationTooltipRenderer } from "./static-data";
-import useCountPerDay from "./use-count-per-day";
 
-const ObservationPerDay = ({ filter }) => {
-
+export default function TemporalCreatedOn({data}) {
   const { t } = useTranslation();
-  const count = useCountPerDay({ filter });
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const data = count.data.list;
-  const isLoading = count.data.isLoading;
-  if (isLoading) {
-    return <Skeleton h={450} borderRadius="md" />;
-  }
 
   if (!data) {
     return <div></div>;
   }
 
-  const years = Object.keys(data);
+  let years = Object.keys(data);
+  if(years.length==0){
+    const now = new Date();
+    const year = now.getFullYear().toString();
+    data = {[year]:[{"date":year+"-01-01",value:0}]};
+    years = [year];
+  }
   years.reverse();
 
   const prevSlide = () => {
@@ -47,9 +43,9 @@ const ObservationPerDay = ({ filter }) => {
   };
 
   return (
-      <Box className="white-box" mb={4} minWidth={'800px'}>
-        <BoxHeading>📊 {t("observation:list.chart.temporal_distribution_date_created")}</BoxHeading>
-      <Box position={'relative'}>
+    <Box className="white-box" mb={4} minWidth={'800px'}>
+        <BoxHeading>📊 {t("user:observations.temporal_created_on")}</BoxHeading>
+        <Box position={'relative'}>
         {currentIndex!=0&&<div style={{position:'absolute', top:'45%', left:'10px'}}><Button width={25} onClick={prevSlide}><ArrowBackIcon/></Button></div>}
         {currentIndex!=years.length-1&&<div style={{position:'absolute', top:'45%', right:'10px'}}><Button width={25} onClick={nextSlide}><ArrowForwardIcon/></Button></div>}
         <div style={{marginLeft:"45%", paddingTop:"25px", paddingBottom:"25px"}}>
@@ -72,6 +68,4 @@ const ObservationPerDay = ({ filter }) => {
       </Box>
     </Box>
   );
-};
-
-export default ObservationPerDay;
+}
