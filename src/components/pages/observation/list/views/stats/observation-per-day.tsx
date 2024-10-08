@@ -2,8 +2,11 @@
 import {ArrowBackIcon,ArrowForwardIcon} from "@chakra-ui/icons"
 import { Box, Button, Select, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import DownloadIcon from "@icons/download";
+import { axAddDownloadLog } from "@services/observation.service";
+import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import CalendarHeatMap from "./calendar-heatmap";
 import { ObservationTooltipRenderer } from "./static-data";
@@ -12,6 +15,15 @@ import useCountPerDay from "./use-count-per-day";
 const ObservationPerDay = ({ filter }) => {
 
   const { t } = useTranslation();
+  const chartRef = useRef<any>(null);
+
+  const handleDownload = async() => {
+    await waitForAuth();
+    if (chartRef.current) {
+      chartRef.current.downloadChart();
+    }
+    axAddDownloadLog("Observations",window.location.href,"Temporal Distribution - Date Created")
+  };
   const count = useCountPerDay({ filter });
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,7 +60,7 @@ const ObservationPerDay = ({ filter }) => {
 
   return (
       <Box className="white-box" mb={4} minWidth={'800px'}>
-        <BoxHeading>📊 {t("observation:list.chart.temporal_distribution_date_created")}</BoxHeading>
+        <BoxHeading styles={{display:"flex",justifyContent:"space-between"}}>📊 {t("observation:list.chart.temporal_distribution_date_created")} <Button onClick={handleDownload} variant="ghost" colorScheme="blue"><DownloadIcon/></Button></BoxHeading>
       <Box position={'relative'}>
         {currentIndex!=0&&<div style={{position:'absolute', top:'45%', left:'10px'}}><Button width={25} onClick={prevSlide}><ArrowBackIcon/></Button></div>}
         {currentIndex!=years.length-1&&<div style={{position:'absolute', top:'45%', right:'10px'}}><Button width={25} onClick={nextSlide}><ArrowForwardIcon/></Button></div>}
@@ -67,7 +79,7 @@ const ObservationPerDay = ({ filter }) => {
           </Select>
         </div>
         <div style={{paddingLeft:'30px',paddingRight:'35px'}}>
-          <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} />
+          <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} ref={chartRef}/>
         </div>
       </Box>
     </Box>

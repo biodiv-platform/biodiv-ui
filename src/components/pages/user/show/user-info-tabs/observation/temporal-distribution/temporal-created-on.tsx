@@ -1,20 +1,40 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Button, Select } from "@chakra-ui/react";
+import { Box, Button, Select, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CalendarHeatMap from "@components/pages/observation/list/views/stats/calendar-heatmap";
 import { ObservationTooltipRenderer } from "@components/pages/observation/list/views/stats/static-data";
+import DownloadIcon from "@icons/download";
+import { axAddDownloadLog } from "@services/observation.service";
+import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+
+import useTemporalData from "./use-temporal-observation-data";
 
 
-export default function TemporalCreatedOn({data}) {
-  const { t } = useTranslation();
+export default function TemporalCreatedOn(userId) {
+    const { t } = useTranslation();
+    const chartRef = useRef<any>(null);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  if (!data) {
-    return <div></div>;
-  }
+    const handleDownload = async() => {
+      await waitForAuth();
+      if (chartRef.current) {
+        chartRef.current.downloadChart();
+      }
+      axAddDownloadLog("User",window.location.href,"Temporal Distribution - Created On")
+    };
+    const temporalData = useTemporalData(userId.userId);
+  
+    const [currentIndex, setCurrentIndex] = useState(0);
+    let data = temporalData.data.list["createdOn"];
+    const isLoading = temporalData.data.isLoading;
+    if (isLoading) {
+      return <Skeleton h={450} borderRadius="md" />;
+    }
+  
+    if (!data) {
+      return <div></div>;
+    }
 
   let years = Object.keys(data);
   if(years.length==0){
@@ -44,7 +64,7 @@ export default function TemporalCreatedOn({data}) {
 
   return (
     <Box className="white-box" mb={4} minWidth={'800px'}>
-        <BoxHeading>📊 {t("user:observations.temporal_created_on")}</BoxHeading>
+        <BoxHeading styles={{display:"flex",justifyContent:"space-between"}}>📊 {t("user:observations.temporal_created_on")} <Button onClick={handleDownload} variant="ghost" colorScheme="blue"><DownloadIcon/></Button></BoxHeading>
         <Box position={'relative'}>
         {currentIndex!=0&&<div style={{position:'absolute', top:'45%', left:'10px'}}><Button width={25} onClick={prevSlide}><ArrowBackIcon/></Button></div>}
         {currentIndex!=years.length-1&&<div style={{position:'absolute', top:'45%', right:'10px'}}><Button width={25} onClick={nextSlide}><ArrowForwardIcon/></Button></div>}
@@ -63,7 +83,7 @@ export default function TemporalCreatedOn({data}) {
           </Select>
         </div>
         <div style={{paddingLeft:'30px',paddingRight:'35px'}}>
-          <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} />
+          <CalendarHeatMap year={years[currentIndex]} data={data[years[currentIndex]]} tooltipRenderer={ObservationTooltipRenderer} ref={chartRef}/>
         </div>
       </Box>
     </Box>

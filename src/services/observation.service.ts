@@ -589,14 +589,14 @@ export const axGetGroupByDayCreatedOn = async (userId) => {
   }
 };
 
-export const axAddDownloadLog = async(filterUrl,notes) => {
+export const axAddDownloadLog = async(source,filterUrl,notes) => {
   try {
     const { data } = await http.post(`${ENDPOINT.USER}/v1/downloadLog/create`, {
       filePath: "",
       filterUrl: filterUrl,
       status: "success",
       fileType: "png",
-      sourcetype: "Observations",
+      sourcetype: source,
       notes: notes
     });
     return { success: true, data };

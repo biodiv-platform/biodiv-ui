@@ -19,7 +19,7 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
     if (chartRef.current) {
       chartRef.current.downloadChart();
     }
-    axAddDownloadLog(window.location.href,"Species groups")
+    axAddDownloadLog("Observations",window.location.href,"Species groups")
   };
 
   const filteredData = useMemo(() => {

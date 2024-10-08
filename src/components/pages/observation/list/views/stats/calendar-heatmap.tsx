@@ -6,7 +6,9 @@ import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand } from "d3-scale";
 import { select } from "d3-selection";
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+
+import DownloadAsPng from "./download-as-png";
 
 interface HeatMapChartProps {
   h?: number;
@@ -20,7 +22,7 @@ interface HeatMapChartProps {
   tooltipRenderer;
 }
 
-const CalendarHeatMap = ({
+const CalendarHeatMap = forwardRef(({
   data,
   w = 500,
   h = 400,
@@ -30,7 +32,7 @@ const CalendarHeatMap = ({
   mr = 30,
   mb = 50,
   ml = 60
-}: HeatMapChartProps) => {
+}: HeatMapChartProps,ref) => {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
   const ro = useResizeObserver(containerRef);
@@ -39,6 +41,12 @@ const CalendarHeatMap = ({
   const tipHelpers = tooltipHelpers(tip, tooltipRenderer, 10, -50);
 
   const router = useRouter();
+
+  useImperativeHandle(ref, () => ({
+    downloadChart() {
+      handleDownloadPng();
+    },
+  }));
 
   useEffect(() => {
     if (!ro?.width || !data.length) {
@@ -176,6 +184,19 @@ const CalendarHeatMap = ({
       svg.selectAll(".tick line").remove();
   }, [containerRef, ro?.width, h, data]);
 
+  const handleDownloadPng = () => {
+    const svgElement = svgRef.current;
+    if (!svgElement) return;
+
+    if(!ro) return;
+
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    w =ro.width;
+    h=(w/5)-35;
+
+    DownloadAsPng({ro,h,svgData})
+  };
+
   return (
     <div ref={containerRef} style={{ position: "relative"}}>
       <svg width={ro?.width} height={245} ref={svgRef} >
@@ -186,6 +207,6 @@ const CalendarHeatMap = ({
       <div className="tooltip" />
     </div>
   );
-};
+});
 
 export default CalendarHeatMap;

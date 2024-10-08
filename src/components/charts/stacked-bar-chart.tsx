@@ -1,8 +1,9 @@
+import DownloadAsPng from "@components/pages/observation/list/views/stats/download-as-png";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear, scaleOrdinal } from "d3-scale";
 import { select } from "d3-selection";
 import { stack } from "d3-shape";
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
 import useResizeObserver from "./hooks/use-resize-observer";
 import { tooltipHelpers, useTooltip } from "./hooks/use-tooltip";
@@ -25,7 +26,7 @@ interface StackedBarChartProps {
   tooltipRenderer;
 }
 
-export default function StackedBarChart({
+const StackedBarChart = forwardRef(({
   h = 360,
 
   mt = 10,
@@ -40,7 +41,7 @@ export default function StackedBarChart({
   meta: { groupKey, subGroupKeys, subGroupColors },
 
   tooltipRenderer
-}: StackedBarChartProps) {
+}: StackedBarChartProps,ref) => {
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const ro = useResizeObserver(containerRef);
@@ -48,6 +49,12 @@ export default function StackedBarChart({
   // tooltip
   const tip = useTooltip(containerRef);
   const tipHelpers = tooltipHelpers(tip, tooltipRenderer);
+
+  useImperativeHandle(ref, () => ({
+    downloadChart() {
+      handleDownloadPng();
+    },
+  }));
 
   useEffect(() => {
     if (!ro?.width || !data.length) return;
@@ -121,6 +128,17 @@ export default function StackedBarChart({
       .attr("width", x.bandwidth());
   }, [containerRef, ro?.width, h, data]);
 
+  const handleDownloadPng = () => {
+    const svgElement = svgRef.current;
+    if (!svgElement) return;
+
+    if(!ro) return;
+
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+
+    DownloadAsPng({ro,h,svgData})
+  };
+
   return (
     <div ref={containerRef} style={{ position: "relative" }}>
       <svg width={ro?.width} height={h} ref={svgRef}>
@@ -134,4 +152,6 @@ export default function StackedBarChart({
       <Legend keys={subGroupKeys} colors={subGroupColors} />
     </div>
   );
-}
+})
+
+export default StackedBarChart;
