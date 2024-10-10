@@ -1,13 +1,26 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import DownloadIcon from "@icons/download";
+import { axAddDownloadLog } from "@services/observation.service";
+import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 
 import { SpeciesTooltipRenderer } from "./static-data";
 import VerticalBarChart from "./vertcal-bar-chart";
 
 const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
   const { t } = useTranslation();
+
+  const chartRef = useRef<any>(null);
+
+  const handleDownload = async() => {
+    await waitForAuth();
+    if (chartRef.current) {
+      chartRef.current.downloadChart();
+    }
+    axAddDownloadLog("Observations",window.location.href,"Species groups")
+  };
 
   const filteredData = useMemo(() => {
     if (!filter.sGroup) {
@@ -28,9 +41,9 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
 
   return filteredData.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading>📊 {t("observation:list.chart.sgroup")}</BoxHeading>
+      <BoxHeading styles={{display:"flex",justifyContent:"space-between"}}>📊 {t("observation:list.chart.sgroup")} <Button onClick={handleDownload} variant="ghost" colorScheme="blue"><DownloadIcon/></Button></BoxHeading>
       <Box p={4}>
-        <VerticalBarChart h={365} data={filteredData} tooltipRenderer={SpeciesTooltipRenderer} />
+        <VerticalBarChart h={365} data={filteredData} tooltipRenderer={SpeciesTooltipRenderer} ref={chartRef}/>
       </Box>
     </Box>
   ) : null;

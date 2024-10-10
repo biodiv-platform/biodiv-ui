@@ -1,7 +1,8 @@
+import DownloadAsPng from "@components/pages/observation/list/views/stats/download-as-png";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
 import useResizeObserver from "./hooks/use-resize-observer";
 
@@ -27,7 +28,7 @@ interface HorizontalBarChartProps {
   };
 }
 
-export default function HorizontalBarChart({
+const HorizontalBarChart = forwardRef(({
   h = 300,
 
   mt = 10,
@@ -41,10 +42,16 @@ export default function HorizontalBarChart({
 
   data,
   meta: { titleKey, countKey, countTitle, barColor = "#3182CE", hideXAxis }
-}: HorizontalBarChartProps) {
+}: HorizontalBarChartProps,ref) =>{
   const containerRef = useRef(null);
   const svgRef = useRef(null);
   const ro = useResizeObserver(containerRef);
+
+  useImperativeHandle(ref, () => ({
+    downloadChart() {
+      handleDownloadPng();
+    },
+  }));
 
   useEffect(() => {
     if (!ro?.width || !data.length) return;
@@ -101,6 +108,17 @@ export default function HorizontalBarChart({
       .text((d) => (displayCountKey ? `${d[countKey]} ${countTitle || countKey}` : d[countKey]));
   }, [containerRef, ro?.width, h, data]);
 
+  const handleDownloadPng = () => {
+    const svgElement = svgRef.current;
+    if (!svgElement) return;
+
+    if(!ro) return;
+
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+
+    DownloadAsPng({ro,h,svgData})
+  };
+
   return (
     <div ref={containerRef} style={{ position: "relative" }}>
       <svg width={ro?.width} height={h} ref={svgRef}>
@@ -112,4 +130,6 @@ export default function HorizontalBarChart({
       </svg>
     </div>
   );
-}
+})
+
+export default HorizontalBarChart;

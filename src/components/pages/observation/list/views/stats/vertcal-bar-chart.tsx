@@ -4,7 +4,9 @@ import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+
+import DownloadAsPng from "./download-as-png";
 
 interface VerticalBarChartProps {
   h?: number;
@@ -18,7 +20,7 @@ interface VerticalBarChartProps {
   tooltipRenderer;
 }
 
-const VerticalBarChart = ({
+const VerticalBarChart = forwardRef(({
   data,
   tooltipRenderer,
   w = 500,
@@ -27,13 +29,19 @@ const VerticalBarChart = ({
   mr = 30,
   mb = 50,
   ml = 60
-}: VerticalBarChartProps) => {
+}: VerticalBarChartProps,ref) => {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
   const ro = useResizeObserver(containerRef);
   const tip = useTooltip(containerRef);
 
   const tipHelpers = tooltipHelpers(tip, tooltipRenderer, 10, -50);
+
+  useImperativeHandle(ref, () => ({
+    downloadChart() {
+      handleDownloadPng();
+    },
+  }));
 
   useEffect(() => {
     if (!ro?.width || !data.length) {
@@ -97,6 +105,17 @@ const VerticalBarChart = ({
       .text((d) => d.count);
   }, [containerRef, ro?.width, h, data]);
 
+  const handleDownloadPng = () => {
+    const svgElement = svgRef.current;
+    if (!svgElement) return;
+
+    if(!ro) return;
+
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+
+    DownloadAsPng({ro,h,svgData})
+  };
+
   return (
     <div ref={containerRef} style={{ position: "relative" }}>
       <svg width={ro?.width} height={h} ref={svgRef}>
@@ -107,6 +126,6 @@ const VerticalBarChart = ({
       <div className="tooltip" />
     </div>
   );
-};
+});
 
 export default VerticalBarChart;

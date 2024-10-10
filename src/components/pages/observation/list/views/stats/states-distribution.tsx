@@ -1,13 +1,26 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import HorizontalBarChart from "@components/charts/horizontal-bar-chart";
+import DownloadIcon from "@icons/download";
+import { axAddDownloadLog } from "@services/observation.service";
+import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 
 import { StatesChartMeta } from "./static-data";
 
 const StatesDistribution = ({ observationData, filter }) => {
   const { t } = useTranslation();
+
+  const chartRef = useRef<any>(null);
+
+  const handleDownload = async() => {
+    await waitForAuth();
+    if (chartRef.current) {
+      chartRef.current.downloadChart();
+    }
+    axAddDownloadLog("Observations",window.location.href,"States Distribution")
+  };
 
   const filteredStateData = useMemo(() => {
     if (!filter.state) {
@@ -27,7 +40,7 @@ const StatesDistribution = ({ observationData, filter }) => {
 
   return filteredStateData.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading>📊 {t("observation:list.chart.states")}</BoxHeading>
+      <BoxHeading styles={{display:"flex",justifyContent:"space-between"}}>📊 {t("observation:list.chart.states")} <Button onClick={handleDownload} variant="ghost" colorScheme="blue"><DownloadIcon/></Button> </BoxHeading>
       <Box p={4}>
         <HorizontalBarChart
           data={filteredStateData}
@@ -40,6 +53,7 @@ const StatesDistribution = ({ observationData, filter }) => {
           ml={58}
           leftOffset={50}
           displayCountKey={false}
+          ref={chartRef}
         />
       </Box>
     </Box>
