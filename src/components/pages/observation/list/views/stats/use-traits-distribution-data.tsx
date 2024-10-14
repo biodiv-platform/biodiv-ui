@@ -2,13 +2,13 @@ import { axGetListData } from "@services/observation.service";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
-export default function useCountPerDay({ filter }) {
-  const [countPerDay, setCountPerDay] = useImmer({
-    list: {},
+export default function useTraitsDistributionData({ filter }) {
+  const [groupByTraits, setGroupByTraits] = useImmer({
+    list: [],
     isLoading: true
   });
 
-  const fetchCountPerDay = async (setter) => {
+  const fetchGroupByTraits = async (setter) => {
     setter((_draft) => {
       _draft.isLoading = true;
     });
@@ -19,17 +19,17 @@ export default function useCountPerDay({ filter }) {
 
     setter((_draft) => {
       if (success) {
-        _draft.list = { ...data.aggregateStatsData.countPerDay };
+        _draft.list = data.aggregateStatsData.groupTraits;
       }
       _draft.isLoading = false;
     });
   };
 
   useEffect(() => {
-    fetchCountPerDay(setCountPerDay);
+    fetchGroupByTraits(setGroupByTraits);
   }, [filter]);
 
   return {
-     data: countPerDay 
+    data: groupByTraits
   };
 }

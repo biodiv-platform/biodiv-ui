@@ -82,7 +82,8 @@
       "sgroup": "Groupes d'espèces",
       "states": "Distribution d'État",
       "temporal_distribution_date_created": "Distribution temporelle - Date de création",
-      "temporal_distribution_date_observed": "Distribution temporelle - Mois observé"
+      "temporal_distribution_date_observed": "Distribution temporelle - Mois observé",
+      "traitsDistribution": "Répartition des traits"
     },
     "created_on": "Créé le",
     "life_list": {

@@ -28,6 +28,6 @@ export default function useTemporalData(userId) {
   }, [userId]);
 
   return {
-     data: countPerDay 
+    data: countPerDay
   };
 }

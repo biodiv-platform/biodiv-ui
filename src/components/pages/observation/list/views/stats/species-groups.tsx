@@ -1,7 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
-import { axAddDownloadLog } from "@services/observation.service";
+import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useRef } from "react";
@@ -14,12 +14,20 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
 
   const chartRef = useRef<any>(null);
 
-  const handleDownload = async() => {
+  const handleDownload = async () => {
     await waitForAuth();
     if (chartRef.current) {
       chartRef.current.downloadChart();
     }
-    axAddDownloadLog("Observations",window.location.href,"Species groups")
+    const payload = {
+      filePath: "",
+      filterUrl: window.location.href,
+      status: "success",
+      fileType: "png",
+      sourcetype: "Observations",
+      notes: "Species groups"
+    };
+    axAddDownloadLog(payload);
   };
 
   const filteredData = useMemo(() => {
@@ -41,9 +49,19 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
 
   return filteredData.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading styles={{display:"flex",justifyContent:"space-between"}}>📊 {t("observation:list.chart.sgroup")} <Button onClick={handleDownload} variant="ghost" colorScheme="blue"><DownloadIcon/></Button></BoxHeading>
+      <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
+        📊 {t("observation:list.chart.sgroup")}{" "}
+        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+          <DownloadIcon />
+        </Button>
+      </BoxHeading>
       <Box p={4}>
-        <VerticalBarChart h={365} data={filteredData} tooltipRenderer={SpeciesTooltipRenderer} ref={chartRef}/>
+        <VerticalBarChart
+          h={365}
+          data={filteredData}
+          tooltipRenderer={SpeciesTooltipRenderer}
+          ref={chartRef}
+        />
       </Box>
     </Box>
   ) : null;

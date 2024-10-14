@@ -1,30 +1,36 @@
-
 import { Box, Button, Select, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
-import { axAddDownloadLog } from "@services/observation.service";
+import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 
 import StackedHorizontalChart from "./stacked-horizontal-chart";
-import useObservationPerMonth from "./use-observation-per-month";
+import useTemporalDistributionMonthObserved from "./use-temporal-distribution-month-observed";
 
 const TemporalObservedOn = ({ filter }) => {
-
   const { t } = useTranslation();
-  const count = useObservationPerMonth({ filter });
+  const count = useTemporalDistributionMonthObserved({ filter });
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const chartRef = useRef<any>(null);
 
-  const handleDownload = async() => {
+  const handleDownload = async () => {
     await waitForAuth();
     if (chartRef.current) {
       chartRef.current.downloadChart();
     }
-    axAddDownloadLog("Observations",window.location.href,"Temporal Distribution - Month Observed")
+    const payload = {
+      filePath: "",
+      filterUrl: window.location.href,
+      status: "success",
+      fileType: "png",
+      sourcetype: "Observations",
+      notes: "Temporal Distribution - Month Observed"
+    };
+    axAddDownloadLog(payload);
   };
 
   const data = count.data.list;
@@ -39,24 +45,24 @@ const TemporalObservedOn = ({ filter }) => {
   }
 
   const years = Object.keys(data);
-  years.reverse()
+  years.reverse();
 
   const handleOnChange = (e) => {
     const v = e?.target?.value;
-    setCurrentIndex(v)
+    setCurrentIndex(v);
   };
 
   return (
-      <Box className="white-box" mb={4}>
-        <BoxHeading styles={{display:"flex",justifyContent:"space-between"}}>📊 {t("observation:list.chart.temporal_distribution_date_observed")} <Button onClick={handleDownload} variant="ghost" colorScheme="blue"><DownloadIcon/></Button></BoxHeading>
+    <Box className="white-box" mb={4}>
+      <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
+        📊 {t("observation:list.chart.temporal_distribution_date_observed")}{" "}
+        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+          <DownloadIcon />
+        </Button>
+      </BoxHeading>
       <Box p={4}>
-      <div style={{marginLeft:"45%", paddingTop:"25px", paddingBottom:"25px"}}>
-          <Select
-            fontSize="13px"
-            maxW="7rem"
-            value={currentIndex}
-            onChange={handleOnChange}
-          >
+        <div style={{ marginLeft: "45%", paddingTop: "25px", paddingBottom: "25px" }}>
+          <Select fontSize="13px" maxW="7rem" value={currentIndex} onChange={handleOnChange}>
             {years.map((option, index) => (
               <option key={index} value={index}>
                 {option}
@@ -64,7 +70,7 @@ const TemporalObservedOn = ({ filter }) => {
             ))}
           </Select>
         </div>
-        <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef}/>
+        <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef} />
       </Box>
     </Box>
   );

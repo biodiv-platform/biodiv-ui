@@ -405,13 +405,11 @@ export const axGetListData = async (
 
 export const axGetAggregationData = async (user) => {
   try {
-    const {data} = await plainHttp.get(
-      `${ENDPOINT.OBSERVATION}/v1/observation/user/${user}`
-    );
-    return {success: true, data };
+    const { data } = await plainHttp.get(`${ENDPOINT.OBSERVATION}/v1/observation/user/${user}`);
+    return { success: true, data };
   } catch (e) {
     console.error(e);
-    return { success: false, data: {}}
+    return { success: false, data: {} };
   }
 };
 
@@ -580,27 +578,9 @@ export const axGetPlantnetSuggestions = async (imageUrls, organs) => {
 
 export const axGetGroupByDayCreatedOn = async (userId) => {
   try {
-    const { data } = await plainHttp.get(
-      `${ENDPOINT.OBSERVATION}/v1/observation/user/${userId}`
-    );
+    const { data } = await plainHttp.get(`${ENDPOINT.OBSERVATION}/v1/observation/user/${userId}`);
     return { success: true, data };
   } catch (e) {
     return { success: false, data: [] };
   }
 };
-
-export const axAddDownloadLog = async(source,filterUrl,notes) => {
-  try {
-    const { data } = await http.post(`${ENDPOINT.USER}/v1/downloadLog/create`, {
-      filePath: "",
-      filterUrl: filterUrl,
-      status: "success",
-      fileType: "png",
-      sourcetype: source,
-      notes: notes
-    });
-    return { success: true, data };
-  } catch (e) {
-    return { success: false, data: [] };
-  }
-}

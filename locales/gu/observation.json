@@ -82,7 +82,8 @@
       "sgroup": "પ્રજાતિઓ જૂથો",
       "states": "રાજ્ય વિતરણ",
       "temporal_distribution_date_created": "ટેમ્પોરલ ડિસ્ટ્રિબ્યુશન - બનાવવાની તારીખ",
-      "temporal_distribution_date_observed": "ટેમ્પોરલ ડિસ્ટ્રિબ્યુશન - મહિનો અવલોકન"
+      "temporal_distribution_date_observed": "ટેમ્પોરલ ડિસ્ટ્રિબ્યુશન - મહિનો અવલોકન",
+      "traitsDistribution": "લક્ષણો વિતરણ"
     },
     "created_on": "બનાવ્યું",
     "life_list": {

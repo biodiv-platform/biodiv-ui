@@ -2,13 +2,13 @@ import { axGetListData } from "@services/observation.service";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
-export default function useObservationPerMonth({ filter }) {
-  const [observationPerMonth, setObservationPerMonth] = useImmer({
+export default function useTemporalDistributionMonthObserved({ filter }) {
+  const [temporalDistributionData, setTemporalDistributionData] = useImmer({
     list: [],
     isLoading: true
   });
 
-  const fetchObservationPerMonth = async (setter) => {
+  const fetchTemporalDistributionData = async (setter) => {
     setter((_draft) => {
       _draft.isLoading = true;
     });
@@ -16,7 +16,7 @@ export default function useObservationPerMonth({ filter }) {
     const { success, data } = await axGetListData({
       ...filter
     });
-    
+
     setter((_draft) => {
       if (success) {
         _draft.list = data.aggregateStatsData.groupObservedOn;
@@ -26,10 +26,10 @@ export default function useObservationPerMonth({ filter }) {
   };
 
   useEffect(() => {
-    fetchObservationPerMonth(setObservationPerMonth);
+    fetchTemporalDistributionData(setTemporalDistributionData);
   }, [filter]);
 
   return {
-     data: observationPerMonth 
+    data: temporalDistributionData
   };
 }

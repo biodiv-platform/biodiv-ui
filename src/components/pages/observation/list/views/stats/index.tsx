@@ -11,6 +11,7 @@ import TemporalObservedOn from "./temporal-observed-on";
 import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
+import TraitsPerMonth from "./traits-per-month";
 
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
@@ -33,10 +34,9 @@ export default function StatsView() {
 
       <SimpleGrid columns={{ md: 1 }} spacing={4} mb={4}>
         <StatesDistribution observationData={observationData} filter={filter} />
-        <ObservationPerDay 
-      filter={filter}
-      />
-      <TemporalObservedOn filter={filter} />
+        <ObservationPerDay filter={filter} />
+        <TemporalObservedOn filter={filter} />
+        <TraitsPerMonth filter={filter} />
       </SimpleGrid>
     </div>
   );
