@@ -82,8 +82,7 @@
       "sgroup": "प्रजाति समूह",
       "states": "राज्य वितरण",
       "temporal_distribution_date_created": "अस्थायी वितरण - निर्मित तिथि",
-      "temporal_distribution_date_observed": "अस्थायी वितरण - मनाया गया महीना",
-      "traitsDistribution": "लक्षण वितरण"
+      "temporal_distribution_date_observed": "अस्थायी वितरण - मनाया गया महीना"
     },
     "created_on": "पर बनाया",
     "life_list": {

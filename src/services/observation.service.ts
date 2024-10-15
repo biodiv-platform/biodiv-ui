@@ -403,16 +403,6 @@ export const axGetListData = async (
   }
 };
 
-export const axGetAggregationData = async (user) => {
-  try {
-    const { data } = await plainHttp.get(`${ENDPOINT.OBSERVATION}/v1/observation/user/${user}`);
-    return { success: true, data };
-  } catch (e) {
-    console.error(e);
-    return { success: false, data: {} };
-  }
-};
-
 export const axGetMaxVotedRecoPermissions = async (payload) => {
   try {
     const { data } = await http.post(
