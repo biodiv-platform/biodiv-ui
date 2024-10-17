@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "Vondrona karazana",
-      "states": "Fizarana ny fanjakana"
+      "states": "Fizarana ny fanjakana",
+      "traitsDistribution": "Fizarana toetra"
     },
     "created_on": "Noforonina",
     "life_list": {

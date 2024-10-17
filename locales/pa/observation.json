@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
-      "states": "ਰਾਜ ਵੰਡ"
+      "states": "ਰਾਜ ਵੰਡ",
+      "traitsDistribution": "ਗੁਣਾਂ ਦੀ ਵੰਡ"
     },
     "created_on": "ਤੇ ਬਣਾਇਆ",
     "life_list": {

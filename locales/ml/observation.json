@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "സ്പീഷിസ് ഗ്രൂപ്പുകൾ",
-      "states": "സംസ്ഥാന വിതരണം"
+      "states": "സംസ്ഥാന വിതരണം",
+      "traitsDistribution": "സ്വഭാവസവിശേഷതകളുടെ വിതരണം"
     },
     "created_on": "സൃഷ്ടിച്ചു",
     "life_list": {

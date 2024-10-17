@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "இனத்தொகுதி",
-      "states": "மாநில பரப்பீடு"
+      "states": "மாநில பரப்பீடு",
+      "traitsDistribution": "பண்புகள் விநியோகம்"
     },
     "created_on": "உருவாக்கப்பட்ட நாள்",
     "life_list": {

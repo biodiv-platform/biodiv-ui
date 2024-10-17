@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "प्रजाती गट",
-      "states": "राज्य वितरण"
+      "states": "राज्य वितरण",
+      "traitsDistribution": "गुणांचे वितरण"
     },
     "created_on": "चालू",
     "life_list": {

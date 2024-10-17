@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "Species groups",
-      "states": "State distribution"
+      "states": "State distribution",
+      "traitsDistribution": "Traits Distribution"
     },
     "created_on": "Created on",
     "life_list": {
