@@ -258,15 +258,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
 
     const svgData = new XMLSerializer().serializeToString(svgElement);
 
-    const years = Array.from(new Set(data.map((sg) => sg.year)));
-
-    const num = Math.ceil((ro.width - ml - mr) / 38) + 1;
-
-    const rows = Math.floor(years.length / num);
-
-    const downloadh = h + rows * 40 + 30;
-
-    DownloadAsPng({ ro, h: downloadh, svgData });
+    DownloadAsPng({ ro, h: ro.height, svgData });
   };
 
   return (
