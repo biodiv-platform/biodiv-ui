@@ -1,6 +1,4 @@
-import {
-  Box
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";

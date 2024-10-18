@@ -80,7 +80,9 @@
   "list": {
     "chart": {
       "sgroup": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
-      "states": "ਰਾਜ ਵੰਡ"
+      "states": "ਰਾਜ ਵੰਡ",
+      "temporal_distribution_date_created": "ਅਸਥਾਈ ਵੰਡ - ਬਣਾਉਣ ਦੀ ਮਿਤੀ",
+      "temporal_distribution_date_observed": "ਅਸਥਾਈ ਵੰਡ - ਮਹੀਨਾ ਦੇਖਿਆ ਗਿਆ"
     },
     "created_on": "ਤੇ ਬਣਾਇਆ",
     "life_list": {
