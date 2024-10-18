@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "પ્રજાતિઓ જૂથો",
-      "states": "રાજ્ય વિતરણ"
+      "states": "રાજ્ય વિતરણ",
+      "traitsDistribution": "લક્ષણો વિતરણ"
     },
     "created_on": "બનાવ્યું",
     "life_list": {

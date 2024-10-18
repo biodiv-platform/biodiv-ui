@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "Vikundi vya aina",
-      "states": "Usambazaji wa Nchi."
+      "states": "Usambazaji wa Nchi.",
+      "traitsDistribution": "Usambazaji wa Tabia"
     },
     "created_on": "Imeundwa On.",
     "life_list": {

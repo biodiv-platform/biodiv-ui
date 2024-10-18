@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "ପ୍ରଜାତି ଗୋଷ୍ଠୀ |",
-      "states": "ରାଜ୍ୟ ବଣ୍ଟନ"
+      "states": "ରାଜ୍ୟ ବଣ୍ଟନ",
+      "traitsDistribution": "ଗୁଣ ବଣ୍ଟନ"
     },
     "created_on": "ସୃଷ୍ଟି ହୋଇଛି",
     "life_list": {

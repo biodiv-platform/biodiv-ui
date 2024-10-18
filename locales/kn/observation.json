@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "ಪ್ರಭೇದದ ಗುಂಪುಗಳು",
-      "states": "ರಾಜ್ಯ ವಿತರಣೆ"
+      "states": "ರಾಜ್ಯ ವಿತರಣೆ",
+      "traitsDistribution": "ಗುಣಲಕ್ಷಣಗಳ ವಿತರಣೆ"
     },
     "created_on": "ರಂದು ರಚಿಸಲಾಗಿದೆ",
     "life_list": {

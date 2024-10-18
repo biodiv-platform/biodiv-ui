@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "జాతుల గుంపులు",
-      "states": "రాష్ట్ర పంపిణీ"
+      "states": "రాష్ట్ర పంపిణీ",
+      "traitsDistribution": "లక్షణాల పంపిణీ"
     },
     "created_on": "సృష్టించబడింది",
     "life_list": {

@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "प्रजाति समूह",
-      "states": "राज्य वितरण"
+      "states": "राज्य वितरण",
+      "traitsDistribution": "लक्षण वितरण"
     },
     "created_on": "पर बनाया",
     "life_list": {

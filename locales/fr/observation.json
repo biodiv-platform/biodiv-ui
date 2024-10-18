@@ -80,7 +80,8 @@
   "list": {
     "chart": {
       "sgroup": "Groupes d'espèces",
-      "states": "Distribution d'État"
+      "states": "Distribution d'État",
+      "traitsDistribution": "Répartition des traits"
     },
     "created_on": "Créé le",
     "life_list": {
