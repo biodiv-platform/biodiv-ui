@@ -1,14 +1,14 @@
 import useResizeObserver from "@components/charts/hooks/use-resize-observer";
 import { tooltipHelpers, useTooltip } from "@components/charts/hooks/use-tooltip";
+import { Months, WeekDays } from "@static/constants";
 import { max, range } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleSequential } from "d3-scale";
 import { interpolateBuGn } from "d3-scale-chromatic";
 import { select } from "d3-selection";
+import { toPng } from "html-to-image";
 import { useRouter } from "next/router";
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-
-import DownloadAsPng from "./download-as-png";
 
 interface HeatMapChartProps {
   h?: number;
@@ -109,10 +109,7 @@ const CalendarHeatMap = forwardRef(
       const counts = range(0, 7);
       counts.reverse();
 
-      const WeekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       WeekDays.reverse();
-      const Months = ["Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
       const xScale = scaleBand().domain(labels).range([0, width]).padding(0.05);
 
       const yScale = scaleBand().domain(counts).range([height, 0]).padding(0.05);
@@ -196,17 +193,19 @@ const CalendarHeatMap = forwardRef(
       svg.selectAll(".tick line").remove();
     }, [containerRef, ro?.width, h, data]);
 
-    const handleDownloadPng = () => {
-      const svgElement = svgRef.current;
-      if (!svgElement) return;
-
-      if (!ro) return;
-
-      const svgData = new XMLSerializer().serializeToString(svgElement);
-      w = ro.width;
-      h = w / 5 - 35;
-
-      DownloadAsPng({ ro, h, svgData });
+    const handleDownloadPng = async () => {
+      if (!svgRef.current) return;
+      try {
+        const pngUrl = await toPng(svgRef.current, {
+          backgroundColor: "#FFFFFF" // Ensure background is white
+        });
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = ".png";
+        downloadLink.click();
+      } catch (error) {
+        console.error("Error generating PNG:", error);
+      }
     };
 
     return (

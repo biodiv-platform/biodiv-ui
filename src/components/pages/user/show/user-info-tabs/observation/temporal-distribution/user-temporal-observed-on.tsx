@@ -14,19 +14,23 @@ export default function UserTemporalObservedOn(userId) {
   const chartRef = useRef<any>(null);
 
   const handleDownload = async () => {
-    await waitForAuth();
-    if (chartRef.current) {
-      chartRef.current.downloadChart();
+    try {
+      await waitForAuth();
+      if (chartRef.current) {
+        chartRef.current.downloadChart();
+      }
+      const payload = {
+        filePath: "",
+        filterUrl: window.location.href,
+        status: "success",
+        fileType: "png",
+        sourcetype: "Observations",
+        notes: "Temporal Distribution - Date Created"
+      };
+      axAddDownloadLog(payload);
+    } catch (error) {
+      console.error("Download error:", error);
     }
-    const payload = {
-      filePath: "",
-      filterUrl: window.location.href,
-      status: "success",
-      fileType: "png",
-      sourcetype: "User",
-      notes: "Temporal Distribution - Month Observed"
-    };
-    axAddDownloadLog(payload);
   };
   const temporalData = useTemporalData(userId.userId);
 
@@ -58,7 +62,7 @@ export default function UserTemporalObservedOn(userId) {
         </Button>
       </BoxHeading>
       <Box p={4}>
-        <div style={{ marginLeft: "45%", paddingTop: "25px", paddingBottom: "25px" }}>
+        <Box marginLeft="45%" paddingTop="25px" paddingBottom="25px">
           <Select fontSize="13px" maxW="7rem" value={currentIndex} onChange={handleOnChange}>
             {years.map((option, index) => (
               <option key={index} value={index}>
@@ -66,7 +70,7 @@ export default function UserTemporalObservedOn(userId) {
               </option>
             ))}
           </Select>
-        </div>
+        </Box>
         <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef} />
       </Box>
     </Box>

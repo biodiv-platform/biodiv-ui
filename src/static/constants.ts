@@ -132,3 +132,20 @@ export const MEDIA_TOGGLE = {
   WITH_MEDIA: "withMedia",
   ALL: "All"
 };
+
+export const Months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+
+export const WeekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

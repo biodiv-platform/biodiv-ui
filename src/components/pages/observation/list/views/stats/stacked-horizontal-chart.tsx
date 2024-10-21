@@ -1,13 +1,13 @@
 import useResizeObserver from "@components/charts/hooks/use-resize-observer";
+import { Months } from "@static/constants";
 import { max, rollup } from "d3-array";
 import { axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear, scaleSequential } from "d3-scale";
 import { interpolateYlGnBu } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { stack } from "d3-shape";
+import { toPng } from "html-to-image";
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-
-import DownloadAsPng from "./download-as-png";
 
 interface HorizontalBarChartProps {
   h?: number;
@@ -49,21 +49,6 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
   useEffect(() => {
     if (!ro?.width || !data.length) return;
 
-    const groups = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
-
     const years = Array.from(new Set(data.map((sg) => sg.year)));
 
     const colorScale = scaleSequential(interpolateYlGnBu).domain([
@@ -102,7 +87,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
 
     const y = scaleBand()
       .range([0, h - mt - mb])
-      .domain(groups)
+      .domain(Months)
       .padding(barPadding);
     svg
       .select(".y-axis")
@@ -250,15 +235,19 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
       .style("font-size", "13px");
   }, [containerRef, ro?.width, h, data]);
 
-  const handleDownloadPng = () => {
-    const svgElement = svgRef.current;
-    if (!svgElement) return;
-
-    if (!ro) return;
-
-    const svgData = new XMLSerializer().serializeToString(svgElement);
-
-    DownloadAsPng({ ro, h: ro.height, svgData });
+  const handleDownloadPng = async () => {
+    if (!svgRef.current) return;
+    try {
+      const pngUrl = await toPng(svgRef.current, {
+        backgroundColor: "#FFFFFF" // Ensure background is white
+      });
+      const downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = ".png";
+      downloadLink.click();
+    } catch (error) {
+      console.error("Error generating PNG:", error);
+    }
   };
 
   return (

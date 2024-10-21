@@ -1,7 +1,7 @@
-import DownloadAsPng from "@components/pages/observation/list/views/stats/download-as-png";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
+import { toPng } from "html-to-image";
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
 import useResizeObserver from "./hooks/use-resize-observer";
@@ -112,15 +112,19 @@ const HorizontalBarChart = forwardRef(
         .text((d) => (displayCountKey ? `${d[countKey]} ${countTitle || countKey}` : d[countKey]));
     }, [containerRef, ro?.width, h, data]);
 
-    const handleDownloadPng = () => {
-      const svgElement = svgRef.current;
-      if (!svgElement) return;
-
-      if (!ro) return;
-
-      const svgData = new XMLSerializer().serializeToString(svgElement);
-
-      DownloadAsPng({ ro, h, svgData });
+    const handleDownloadPng = async () => {
+      if (!svgRef.current) return;
+      try {
+        const pngUrl = await toPng(svgRef.current, {
+          backgroundColor: "#FFFFFF" // Ensure background is white
+        });
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = ".png";
+        downloadLink.click();
+      } catch (error) {
+        console.error("Error generating PNG:", error);
+      }
     };
 
     return (

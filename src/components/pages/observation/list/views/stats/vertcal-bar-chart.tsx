@@ -4,9 +4,8 @@ import { max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
+import { toPng } from "html-to-image";
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-
-import DownloadAsPng from "./download-as-png";
 
 interface VerticalBarChartProps {
   h?: number;
@@ -113,15 +112,19 @@ const VerticalBarChart = forwardRef(
         .text((d) => d.count);
     }, [containerRef, ro?.width, h, data]);
 
-    const handleDownloadPng = () => {
-      const svgElement = svgRef.current;
-      if (!svgElement) return;
-
-      if (!ro) return;
-
-      const svgData = new XMLSerializer().serializeToString(svgElement);
-
-      DownloadAsPng({ ro, h, svgData });
+    const handleDownloadPng = async () => {
+      if (!svgRef.current) return;
+      try {
+        const pngUrl = await toPng(svgRef.current, {
+          backgroundColor: "#FFFFFF" // Ensure background is white
+        });
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = ".png";
+        downloadLink.click();
+      } catch (error) {
+        console.error("Error generating PNG:", error);
+      }
     };
 
     return (

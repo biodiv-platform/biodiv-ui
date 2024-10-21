@@ -14,19 +14,23 @@ export default function SpeciesGroupChart({ data }) {
   const chartRef = useRef<any>(null);
 
   const handleDownload = async () => {
-    await waitForAuth();
-    if (chartRef.current) {
-      chartRef.current.downloadChart();
+    try {
+      await waitForAuth();
+      if (chartRef.current) {
+        chartRef.current.downloadChart();
+      }
+      const payload = {
+        filePath: "",
+        filterUrl: window.location.href,
+        status: "success",
+        fileType: "png",
+        sourcetype: "Observations",
+        notes: "Temporal Distribution - Date Created"
+      };
+      axAddDownloadLog(payload);
+    } catch (error) {
+      console.error("Download error:", error);
     }
-    const payload = {
-      filePath: "",
-      filterUrl: window.location.href,
-      status: "success",
-      fileType: "png",
-      sourcetype: "User",
-      notes: "Observations by Species Group"
-    };
-    axAddDownloadLog(payload);
   };
 
   return (

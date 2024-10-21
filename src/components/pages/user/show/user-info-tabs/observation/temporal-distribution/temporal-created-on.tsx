@@ -16,19 +16,23 @@ export default function TemporalCreatedOn(userId) {
   const chartRef = useRef<any>(null);
 
   const handleDownload = async () => {
-    await waitForAuth();
-    if (chartRef.current) {
-      chartRef.current.downloadChart();
+    try {
+      await waitForAuth();
+      if (chartRef.current) {
+        chartRef.current.downloadChart();
+      }
+      const payload = {
+        filePath: "",
+        filterUrl: window.location.href,
+        status: "success",
+        fileType: "png",
+        sourcetype: "Observations",
+        notes: "Temporal Distribution - Date Created"
+      };
+      axAddDownloadLog(payload);
+    } catch (error) {
+      console.error("Download error:", error);
     }
-    const payload = {
-      filePath: "",
-      filterUrl: window.location.href,
-      status: "success",
-      fileType: "png",
-      sourcetype: "User",
-      notes: "Temporal Distribution - Created On"
-    };
-    axAddDownloadLog(payload);
   };
   const temporalData = useTemporalData(userId.userId);
 
@@ -75,20 +79,20 @@ export default function TemporalCreatedOn(userId) {
       </BoxHeading>
       <Box position={"relative"}>
         {currentIndex != 0 && (
-          <div style={{ position: "absolute", top: "45%", left: "10px" }}>
+          <Box position="absolute" top="45%" left="10px">
             <Button width={25} onClick={prevSlide}>
               <ArrowBackIcon />
             </Button>
-          </div>
+          </Box>
         )}
         {currentIndex != years.length - 1 && (
-          <div style={{ position: "absolute", top: "45%", right: "10px" }}>
+          <Box position="absolute" top="45%" right="10px">
             <Button width={25} onClick={nextSlide}>
               <ArrowForwardIcon />
             </Button>
-          </div>
+          </Box>
         )}
-        <div style={{ marginLeft: "45%", paddingTop: "25px", paddingBottom: "25px" }}>
+        <Box marginLeft="45%" paddingTop="25px" paddingBottom="25px">
           <Select fontSize="13px" maxW="5rem" value={currentIndex} onChange={handleOnChange}>
             {years.map((option, index) => (
               <option key={index} value={index}>
@@ -96,15 +100,15 @@ export default function TemporalCreatedOn(userId) {
               </option>
             ))}
           </Select>
-        </div>
-        <div style={{ paddingLeft: "30px", paddingRight: "35px" }}>
+        </Box>
+        <Box paddingLeft="30px" paddingRight="35px">
           <CalendarHeatMap
             year={years[currentIndex]}
             data={data[years[currentIndex]]}
             tooltipRenderer={ObservationTooltipRenderer}
             ref={chartRef}
           />
-        </div>
+        </Box>
       </Box>
     </Box>
   );
