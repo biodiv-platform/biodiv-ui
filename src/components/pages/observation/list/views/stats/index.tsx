@@ -4,8 +4,10 @@ import React from "react";
 
 import ObservationsMap from "../map";
 import LifeList from "./life-list";
+import ObservationPerDay from "./observation-per-day";
 import SpeciesGroups from "./species-groups";
 import StatesDistribution from "./states-distribution";
+import TemporalObservedOn from "./temporal-observed-on";
 import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
@@ -29,8 +31,10 @@ export default function StatsView() {
 
       <ObservationsMap />
 
-      <SimpleGrid columns={{ md: 2 }} mb={4}>
+      <SimpleGrid columns={{ md: 1 }} spacing={4} mb={4}>
         <StatesDistribution observationData={observationData} filter={filter} />
+        <ObservationPerDay filter={filter} />
+        <TemporalObservedOn filter={filter} />
       </SimpleGrid>
     </div>
   );

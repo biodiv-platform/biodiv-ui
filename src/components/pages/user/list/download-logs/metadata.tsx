@@ -74,7 +74,7 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
                   : `${ENDPOINT.RAW}${values.filePath}`
               }
               download={true}
-              disabled={!adminOrAuthor(values.user.id)}
+              disabled={!adminOrAuthor(values.user.id) || values.type == "PNG"}
               leftIcon={<DownloadIcon />}
               colorScheme="blue"
             >
