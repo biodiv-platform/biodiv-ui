@@ -124,6 +124,7 @@ const VerticalBarChart = forwardRef(
         downloadLink.click();
       } catch (error) {
         console.error("Error generating PNG:", error);
+        throw error;
       }
     };
 

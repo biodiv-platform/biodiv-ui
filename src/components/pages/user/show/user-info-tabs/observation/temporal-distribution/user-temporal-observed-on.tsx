@@ -1,4 +1,4 @@
-import { Box, Button, Select, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Select, Skeleton, useToast } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import StackedHorizontalChart from "@components/pages/observation/list/views/stats/stacked-horizontal-chart";
 import DownloadIcon from "@icons/download";
@@ -12,24 +12,31 @@ import useTemporalData from "./use-temporal-observation-data";
 export default function UserTemporalObservedOn(userId) {
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
+  const toast = useToast();
 
   const handleDownload = async () => {
     try {
       await waitForAuth();
       if (chartRef.current) {
         chartRef.current.downloadChart();
+        const payload = {
+          filePath: "",
+          filterUrl: window.location.href,
+          status: "success",
+          fileType: "png",
+          sourcetype: "Observations",
+          notes: "Temporal Distribution - Date Created"
+        };
+        axAddDownloadLog(payload);
       }
-      const payload = {
-        filePath: "",
-        filterUrl: window.location.href,
-        status: "success",
-        fileType: "png",
-        sourcetype: "Observations",
-        notes: "Temporal Distribution - Date Created"
-      };
-      axAddDownloadLog(payload);
     } catch (error) {
       console.error("Download error:", error);
+      toast({
+        title: "Error while downloading",
+        status: "error",
+        isClosable: true,
+        position: "top"
+      });
     }
   };
   const temporalData = useTemporalData(userId.userId);

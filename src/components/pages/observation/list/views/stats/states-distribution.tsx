@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useToast } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import HorizontalBarChart from "@components/charts/horizontal-bar-chart";
 import DownloadIcon from "@icons/download";
@@ -13,24 +13,31 @@ const StatesDistribution = ({ observationData, filter }) => {
   const { t } = useTranslation();
 
   const chartRef = useRef<any>(null);
+  const toast = useToast();
 
   const handleDownload = async () => {
     try {
       await waitForAuth();
       if (chartRef.current) {
         chartRef.current.downloadChart();
+        const payload = {
+          filePath: "",
+          filterUrl: window.location.href,
+          status: "success",
+          fileType: "png",
+          sourcetype: "Observations",
+          notes: "Temporal Distribution - Date Created"
+        };
+        axAddDownloadLog(payload);
       }
-      const payload = {
-        filePath: "",
-        filterUrl: window.location.href,
-        status: "success",
-        fileType: "png",
-        sourcetype: "Observations",
-        notes: "Temporal Distribution - Date Created"
-      };
-      axAddDownloadLog(payload);
     } catch (error) {
       console.error("Download error:", error);
+      toast({
+        title: "Error while downloading",
+        status: "error",
+        isClosable: true,
+        position: "top"
+      });
     }
   };
 
