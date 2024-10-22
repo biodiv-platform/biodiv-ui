@@ -180,7 +180,7 @@ const LineGraph = forwardRef(function LineGraph(
       .data(traits)
       .join("text")
       .attr("x", ml)
-      .attr("y", (d) => y(d) + y.bandwidth() - 10)
+      .attr("y", (d) => y(d) + y.bandwidth()+10)
       .text((d) => d + " :")
       .style("font-size", "16.5px");
 
