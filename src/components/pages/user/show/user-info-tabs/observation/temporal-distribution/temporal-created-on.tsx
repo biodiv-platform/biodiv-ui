@@ -1,5 +1,5 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Button, Select, Skeleton, useToast } from "@chakra-ui/react";
+import { Box, Button, Select, Skeleton, useBreakpointValue, useToast } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CalendarHeatMap from "@components/pages/observation/list/views/stats/calendar-heatmap";
 import { ObservationTooltipRenderer } from "@components/pages/observation/list/views/stats/static-data";
@@ -16,6 +16,11 @@ export default function TemporalCreatedOn(userId) {
   const chartRef = useRef<any>(null);
   const toast = useToast();
 
+   // Add useBreakpointValue to hide icons based on screen width
+   const showNavigationIcons = useBreakpointValue({ base: false, md: true }); // Hide on small screens, show on medium and larger screens
+
+   const padding = useBreakpointValue({ base: "5px 10px", md: "30px 35px" });
+
   const handleDownload = async () => {
     try {
       await waitForAuth();
@@ -26,8 +31,8 @@ export default function TemporalCreatedOn(userId) {
           filterUrl: window.location.href,
           status: "success",
           fileType: "png",
-          sourcetype: "Observations",
-          notes: "Temporal Distribution - Date Created"
+          sourcetype: "User",
+          notes: "Temporal Distribution - Created On"
         };
         axAddDownloadLog(payload);
       }
@@ -72,12 +77,12 @@ export default function TemporalCreatedOn(userId) {
   };
 
   const handleOnChange = (e) => {
-    const v = e?.target?.value;
+    const v = parseInt(e.target.value, 10); // Ensure the value is an integer
     setCurrentIndex(v);
   };
 
   return (
-    <Box className="white-box" mb={4} minWidth={"800px"}>
+    <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("user:observations.temporal_created_on")}{" "}
         <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
@@ -85,16 +90,16 @@ export default function TemporalCreatedOn(userId) {
         </Button>
       </BoxHeading>
       <Box position={"relative"}>
-        {currentIndex != 0 && (
+        {showNavigationIcons && currentIndex != 0 && (
           <Box position="absolute" top="45%" left="10px">
-            <Button width={25} onClick={prevSlide}>
+            <Button width={25} onClick={prevSlide} variant="ghost">
               <ArrowBackIcon />
             </Button>
           </Box>
         )}
-        {currentIndex != years.length - 1 && (
+        {showNavigationIcons && currentIndex != years.length - 1 && (
           <Box position="absolute" top="45%" right="10px">
-            <Button width={25} onClick={nextSlide}>
+            <Button width={25} onClick={nextSlide} variant="ghost">
               <ArrowForwardIcon />
             </Button>
           </Box>
@@ -108,7 +113,7 @@ export default function TemporalCreatedOn(userId) {
             ))}
           </Select>
         </Box>
-        <Box paddingLeft="30px" paddingRight="35px">
+        <Box padding={padding}>
           <CalendarHeatMap
             year={years[currentIndex]}
             data={data[years[currentIndex]]}

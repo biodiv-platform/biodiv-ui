@@ -81,6 +81,7 @@
     "chart": {
       "sgroup": "ਸਪੀਸੀਜ਼ ਸਮੂਹ",
       "states": "ਰਾਜ ਵੰਡ",
+      "traitsDistribution": "ਗੁਣਾਂ ਦੀ ਵੰਡ",
       "temporal_distribution_date_created": "ਅਸਥਾਈ ਵੰਡ - ਬਣਾਉਣ ਦੀ ਮਿਤੀ",
       "temporal_distribution_date_observed": "ਅਸਥਾਈ ਵੰਡ - ਮਹੀਨਾ ਦੇਖਿਆ ਗਿਆ"
     },

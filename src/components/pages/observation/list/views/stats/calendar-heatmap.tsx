@@ -1,3 +1,4 @@
+import { useBreakpointValue } from "@chakra-ui/react";
 import useResizeObserver from "@components/charts/hooks/use-resize-observer";
 import { tooltipHelpers, useTooltip } from "@components/charts/hooks/use-tooltip";
 import { Months, WeekDays } from "@static/constants";
@@ -43,6 +44,7 @@ const CalendarHeatMap = forwardRef(
     const tip = useTooltip(containerRef);
 
     const tipHelpers = tooltipHelpers(tip, tooltipRenderer, 10, -50);
+    const isSmall = useBreakpointValue({ base: true, md: false });
 
     const router = useRouter();
 
@@ -59,7 +61,11 @@ const CalendarHeatMap = forwardRef(
 
       const svg = select(svgRef.current);
       w = ro.width;
-      h = w / 5 + 5;
+      h = Math.max(w / 5 + 5,185);
+      if(isSmall){
+        ml = 18
+        mr = 5
+      }
       const width = w - ml - mr;
       const height = h - mt - mb;
 
@@ -108,8 +114,6 @@ const CalendarHeatMap = forwardRef(
       const labels = range(0, 54);
       const counts = range(0, 7);
       counts.reverse();
-
-      WeekDays.reverse();
       const xScale = scaleBand().domain(labels).range([0, width]).padding(0.05);
 
       const yScale = scaleBand().domain(counts).range([height, 0]).padding(0.05);
@@ -186,8 +190,12 @@ const CalendarHeatMap = forwardRef(
       svg
         .select(".y-axis")
         .join("g")
-        .attr("transform", "translate(60,0)")
+        .attr("transform", `translate(${ml},0)`)
         .call(axisLeft(weekScale));
+      
+      if(isSmall){
+      svg.selectAll(".y-axis .tick text").text((d) => d[0]);
+      }
 
       svg.selectAll(".domain").remove();
       svg.selectAll(".tick line").remove();

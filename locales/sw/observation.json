@@ -81,6 +81,7 @@
     "chart": {
       "sgroup": "Vikundi vya aina",
       "states": "Usambazaji wa Nchi.",
+      "traitsDistribution": "Usambazaji wa Tabia",
       "temporal_distribution_date_created": "Usambazaji wa Muda - Tarehe Iliyoundwa",
       "temporal_distribution_date_observed": "Usambazaji wa Muda - Mwezi Umezingatiwa"
     },

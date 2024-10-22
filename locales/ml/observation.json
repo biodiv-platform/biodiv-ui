@@ -81,6 +81,7 @@
     "chart": {
       "sgroup": "സ്പീഷിസ് ഗ്രൂപ്പുകൾ",
       "states": "സംസ്ഥാന വിതരണം",
+      "traitsDistribution": "സ്വഭാവസവിശേഷതകളുടെ വിതരണം",
       "temporal_distribution_date_created": "താൽക്കാലിക വിതരണം - സൃഷ്ടിച്ച തീയതി",
       "temporal_distribution_date_observed": "താൽക്കാലിക വിതരണം - നിരീക്ഷിക്കപ്പെട്ട മാസം"
     },

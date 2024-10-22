@@ -148,4 +148,4 @@ export const Months = [
   "Dec"
 ];
 
-export const WeekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+export const WeekDays = ["Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"];

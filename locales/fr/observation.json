@@ -81,6 +81,7 @@
     "chart": {
       "sgroup": "Groupes d'espèces",
       "states": "Distribution d'État",
+      "traitsDistribution": "Répartition des traits",
       "temporal_distribution_date_created": "Distribution temporelle - Date de création",
       "temporal_distribution_date_observed": "Distribution temporelle - Mois observé"
     },

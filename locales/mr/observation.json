@@ -81,6 +81,7 @@
     "chart": {
       "sgroup": "प्रजाती गट",
       "states": "राज्य वितरण",
+      "traitsDistribution": "गुणांचे वितरण",
       "temporal_distribution_date_created": "तात्पुरती वितरण - तयार करण्याची तारीख",
       "temporal_distribution_date_observed": "तात्पुरती वितरण - महिना साजरा"
     },

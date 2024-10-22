@@ -81,6 +81,7 @@
     "chart": {
       "sgroup": "ಪ್ರಭೇದದ ಗುಂಪುಗಳು",
       "states": "ರಾಜ್ಯ ವಿತರಣೆ",
+      "traitsDistribution": "ಗುಣಲಕ್ಷಣಗಳ ವಿತರಣೆ",
       "temporal_distribution_date_created": "ತಾತ್ಕಾಲಿಕ ವಿತರಣೆ - ದಿನಾಂಕವನ್ನು ರಚಿಸಲಾಗಿದೆ",
       "temporal_distribution_date_observed": "ತಾತ್ಕಾಲಿಕ ವಿತರಣೆ - ತಿಂಗಳು ವೀಕ್ಷಿಸಲಾಗಿದೆ"
     },

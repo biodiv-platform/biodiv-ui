@@ -24,8 +24,8 @@ export default function UserTemporalObservedOn(userId) {
           filterUrl: window.location.href,
           status: "success",
           fileType: "png",
-          sourcetype: "Observations",
-          notes: "Temporal Distribution - Date Created"
+          sourcetype: "User",
+          notes: "Temporal Distribution - Month Observed"
         };
         axAddDownloadLog(payload);
       }

@@ -24,8 +24,8 @@ export default function SpeciesGroupChart({ data }) {
           filterUrl: window.location.href,
           status: "success",
           fileType: "png",
-          sourcetype: "Observations",
-          notes: "Temporal Distribution - Date Created"
+          sourcetype: "User",
+          notes: "Group by Species Group"
         };
         axAddDownloadLog(payload);
       }
