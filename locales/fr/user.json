@@ -39,6 +39,8 @@
     "filter": "Filtre",
     "life_list": "Liste de vie",
     "map": "Observations propagées",
+    "temporal_created_on": "Distribution temporelle - Créé le",
+    "temporal_month_observed": "Distribution temporelle - Mois observé",
     "title": "Observations"
   },
   "occupation": "Profession",

@@ -81,7 +81,9 @@
     "chart": {
       "sgroup": "Species groups",
       "states": "State distribution",
-      "traitsDistribution": "Traits Distribution"
+      "traitsDistribution": "Traits Distribution",
+      "temporal_distribution_date_created": "Temporal Distribution - Date Created",
+      "temporal_distribution_date_observed": "Temporal Distribution - Month Observed"
     },
     "created_on": "Created on",
     "life_list": {

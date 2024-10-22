@@ -42,7 +42,7 @@ const TraitsPerMonth = ({ filter }) => {
   data = data.slice().reverse();
 
   return (
-    <Box className="white-box" mb={4} minWidth={"800px"}>
+    <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.traitsDistribution")}{" "}
         <Button onClick={handleDownload} variant="ghost" colorScheme="blue">

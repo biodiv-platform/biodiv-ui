@@ -1,14 +1,16 @@
+import { useBreakpointValue } from "@chakra-ui/react";
 import useResizeObserver from "@components/charts/hooks/use-resize-observer";
 import { tooltipHelpers, useTooltip } from "@components/charts/hooks/use-tooltip";
+import { Months } from "@static/constants";
 import { max, min } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scalePoint, scaleSequential } from "d3-scale";
 import { interpolateSpectral } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { area, line } from "d3-shape";
+import { toPng } from "html-to-image";
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
-import DownloadAsPng from "./download-as-png";
 import { TraitsTooltipRenderer } from "./static-data";
 
 interface HorizontalBarChartProps {
@@ -34,6 +36,7 @@ const LineGraph = forwardRef(function LineGraph(
   const tip = useTooltip(containerRef);
 
   const tipHelpers = tooltipHelpers(tip, TraitsTooltipRenderer, 10, -50);
+  const isSmall = useBreakpointValue({ base: true, md: false });
 
   useImperativeHandle(ref, () => ({
     downloadChart() {
@@ -43,22 +46,12 @@ const LineGraph = forwardRef(function LineGraph(
 
   useEffect(() => {
     if (!ro?.width) return;
+    if (isSmall) {
+      ml = 30;
+      mr = 30;
+    }
     data.sort((a, b) => a.name.localeCompare(b.name));
     const traits = Array.from(new Set(data.map((series) => series.name.split("|")[0])));
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
     const colorScale = scaleSequential(interpolateSpectral).domain([0, traits.length - 1]);
     function color(d) {
       const index = traits.indexOf(d);
@@ -75,7 +68,7 @@ const LineGraph = forwardRef(function LineGraph(
     }
 
     const x = scalePoint()
-      .domain(months)
+      .domain(Months)
       .range([0, width - ml]);
 
     const modifiedData: any[] = [{ name: data[0].name.split("|")[0], values: [] }];
@@ -128,14 +121,14 @@ const LineGraph = forwardRef(function LineGraph(
     svg
       .select(".y-axis")
       .join("g")
-      .attr("transform", `translate(50,${y.bandwidth() / 2})`)
+      .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
       .call(axisLeft(y).tickSize(0))
       .call((g) => g.select(".domain").remove());
 
     svg.selectAll(".y-axis .tick text").text((d) => d.split("|")[1]);
 
     const areaGenerator = area()
-      .x((d, i) => x(months[i]) + ml + x.bandwidth() / 2 || 0)
+      .x((d, i) => x(Months[i]) + ml + x.bandwidth() / 2 || 0)
       .y1((d) => y(d.seriesName) + y.bandwidth() - ridge(d.value, d.seriesName.split("|")[0]) * 45)
       .y0((d) => y(d.seriesName) + y.bandwidth());
 
@@ -171,7 +164,7 @@ const LineGraph = forwardRef(function LineGraph(
       .attr("stroke-width", 1.5)
       .attr("d", (series) =>
         line()
-          .x((d: any, i: number) => x(months[i]) + ml + x.bandwidth() / 2 || ml)
+          .x((d: any, i: number) => x(Months[i]) + ml + x.bandwidth() / 2 || ml)
           .y(
             (d: any) =>
               y(series.name) + y.bandwidth() - ridge(d.value, series.name.split("|")[0]) * 45
@@ -219,7 +212,7 @@ const LineGraph = forwardRef(function LineGraph(
       svg
         .select(".y-axis")
         .join("g")
-        .attr("transform", `translate(50,${y.bandwidth() / 2})`)
+        .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
         .call(axisLeft(y).tickSize(0))
         .call((g) => g.select(".domain").remove());
       svg.select(".chart").selectAll("*").remove();
@@ -240,7 +233,7 @@ const LineGraph = forwardRef(function LineGraph(
         .attr("stroke-width", 1.5)
         .attr("d", (series) =>
           line()
-            .x((d: any, i: number) => x(months[i]) + ml + x.bandwidth() / 2 || ml)
+            .x((d: any, i: number) => x(Months[i]) + ml + x.bandwidth() / 2 || ml)
             .y((d: any) => y(series.name.split("|")[1]) + y.bandwidth() - ridge(d.value) * 45)(
             series.values
           )
@@ -249,7 +242,7 @@ const LineGraph = forwardRef(function LineGraph(
         .on("mousemove", tipHelpers.mousemove)
         .on("mouseleave", tipHelpers.mouseleave);
       const areaGenerator = area()
-        .x((d, i) => x(months[i]) + ml + x.bandwidth() / 2 || 0)
+        .x((d, i) => x(Months[i]) + ml + x.bandwidth() / 2 || 0)
         .y1((d) => y(d.seriesName.split("|")[1]) + y.bandwidth() - ridge(d.value) * 45)
         .y0((d) => y(d.seriesName.split("|")[1]) + y.bandwidth());
 
@@ -312,7 +305,7 @@ const LineGraph = forwardRef(function LineGraph(
       svg
         .select(".y-axis")
         .join("g")
-        .attr("transform", `translate(50,${y.bandwidth() / 2})`)
+        .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
         .call(axisLeft(y).tickSize(0))
         .call((g) => g.select(".domain").remove());
 
@@ -335,7 +328,7 @@ const LineGraph = forwardRef(function LineGraph(
         .attr("stroke-width", 1.5)
         .attr("d", (series) =>
           line()
-            .x((d: any, i: number) => x(months[i]) + ml + x.bandwidth() / 2 || ml)
+            .x((d: any, i: number) => x(Months[i]) + ml + x.bandwidth() / 2 || ml)
             .y(
               (d: any) =>
                 y(series.name) + y.bandwidth() - ridge(d.value, series.name.split("|")[0]) * 45
@@ -346,7 +339,7 @@ const LineGraph = forwardRef(function LineGraph(
         .on("mouseleave", tipHelpers.mouseleave);
 
       const areaGenerator = area()
-        .x((d, i) => x(months[i]) + ml + x.bandwidth() / 2 || 0)
+        .x((d, i) => x(Months[i]) + ml + x.bandwidth() / 2 || 0)
         .y1(
           (d) => y(d.seriesName) + y.bandwidth() - ridge(d.value, d.seriesName.split("|")[0]) * 45
         )
@@ -426,19 +419,24 @@ const LineGraph = forwardRef(function LineGraph(
       .join("text")
       .attr("x", (d, i) => i * legendWidth + ml + ml + 5)
       .attr("y", () => 55)
-      .text((d) => abbreviateLabel(d, 4))
+      .text((d) => abbreviateLabel(d, legendWidth / 13))
       .style("font-size", "13px");
   }, [containerRef, ro?.width, h, data]);
 
-  const handleDownloadPng = () => {
-    const svgElement = svgRef.current;
-    if (!svgElement) return;
-
-    if (!ro) return;
-
-    const svgData = new XMLSerializer().serializeToString(svgElement);
-
-    DownloadAsPng({ ro, h: ro.height, svgData });
+  const handleDownloadPng = async () => {
+    if (!svgRef.current) return;
+    try {
+      const pngUrl = await toPng(svgRef.current, {
+        backgroundColor: "#FFFFFF" // Ensure background is white
+      });
+      const downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = ".png";
+      downloadLink.click();
+    } catch (error) {
+      console.error("Error generating PNG:", error);
+      throw error;
+    }
   };
 
   return (

@@ -81,7 +81,9 @@
     "chart": {
       "sgroup": "প্রজাতি গ্রুপ",
       "states": "রাষ্ট্র বন্টন",
-      "traitsDistribution": "বৈশিষ্ট্য বিতরণ"
+      "traitsDistribution": "বৈশিষ্ট্য বিতরণ",
+      "temporal_distribution_date_created": "টেম্পোরাল ডিস্ট্রিবিউশন - তৈরির তারিখ",
+      "temporal_distribution_date_observed": "টেম্পোরাল ডিস্ট্রিবিউশন - মাস পালন করা হয়েছে"
     },
     "created_on": "তৈরি",
     "life_list": {
