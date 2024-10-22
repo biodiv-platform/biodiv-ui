@@ -48,7 +48,7 @@ const TemporalObservedOn = ({ filter }) => {
   const isLoading = count.data.isLoading;
 
   if (isLoading) {
-    return <Skeleton h={450} borderRadius="md" />;
+    return <Skeleton h={450} borderRadius="md" mb={4}/>;
   }
 
   if (!data) {

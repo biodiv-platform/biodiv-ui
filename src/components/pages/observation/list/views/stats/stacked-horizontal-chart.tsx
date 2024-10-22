@@ -113,7 +113,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
       .attr("x", (d) => x(d[0]))
       .attr("y", (d) => yPos(d))
       .attr("height", y.bandwidth())
-      .attr("width", (d) => (x(d[1]) ? x(d[1]) - x(d[0]) : x(d[0])));
+      .attr("width", (d) => (x(d[1]) - x(d[0])));
 
     svg
       .select(".chart")
@@ -236,9 +236,9 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
   }, [containerRef, ro?.width, h, data]);
 
   const handleDownloadPng = async () => {
-    if (!svgRef.current) return;
+    if (!containerRef.current || !ro) return;
     try {
-      const pngUrl = await toPng(svgRef.current, {
+      const pngUrl = await toPng(containerRef.current, {
         backgroundColor: "#FFFFFF" // Ensure background is white
       });
       const downloadLink = document.createElement("a");
