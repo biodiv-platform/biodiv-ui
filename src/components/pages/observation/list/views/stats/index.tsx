@@ -12,9 +12,13 @@ import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
 import TraitsPerMonth from "./traits-per-month";
+import useObservationData from "./use-observation-data";
 
 export default function StatsView() {
   const { observationData, speciesGroup, filter } = useObservationFilter();
+  const stats = useObservationData({ filter });
+  const data = stats.data.list;
+  const isLoading = stats.data.isLoading;
 
   return (
     <div>
@@ -31,11 +35,11 @@ export default function StatsView() {
       </SimpleGrid>
 
       <ObservationsMap />
-        <StatesDistribution observationData={observationData} filter={filter} />
-        <ObservationPerDay filter={filter} />
-        <TemporalObservedOn filter={filter} />
+      <StatesDistribution observationData={observationData} filter={filter} />
+      <ObservationPerDay data={data.countPerDay} isLoading={isLoading} />
+      <TemporalObservedOn data={data.groupObservedOn} isLoading={isLoading} />
 
-      <TraitsPerMonth filter={filter} />
+      <TraitsPerMonth data={data.groupTraits} isLoading={isLoading} />
     </div>
   );
 }

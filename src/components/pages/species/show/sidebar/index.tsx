@@ -4,6 +4,7 @@ import React from "react";
 import SpeciesRelatedObservations from "./related-observations";
 import TaxonTable from "./taxon-table";
 import SpeciesTemportalDistribution from "./temporal";
+import SpeciesTraitsGraph from "./traits-graph";
 
 export default function SpeciesSidebar() {
   return (
@@ -11,6 +12,7 @@ export default function SpeciesSidebar() {
       <TaxonTable />
       <SpeciesTemportalDistribution />
       <SpeciesRelatedObservations />
+      <SpeciesTraitsGraph />
     </GridItem>
   );
 }

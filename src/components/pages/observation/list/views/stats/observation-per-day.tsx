@@ -9,13 +9,12 @@ import React, { useRef, useState } from "react";
 
 import CalendarHeatMap from "./calendar-heatmap";
 import { ObservationTooltipRenderer } from "./static-data";
-import useTemporalDistributionCreatedOnData from "./use-temporal-distribution-created-on-data";
 
-const ObservationPerDay = ({ filter }) => {
+const ObservationPerDay = ({ data, isLoading }) => {
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
   const toast = useToast();
-  
+
   // Add useBreakpointValue to hide icons based on screen width
   const showNavigationIcons = useBreakpointValue({ base: false, md: true }); // Hide on small screens, show on medium and larger screens
 
@@ -47,15 +46,10 @@ const ObservationPerDay = ({ filter }) => {
     }
   };
 
-  const count = useTemporalDistributionCreatedOnData({ filter });
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const data = count.data.list;
-  const isLoading = count.data.isLoading;
-
   if (isLoading) {
-    return <Skeleton h={450} borderRadius="md" mb={4}/>;
+    return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
   if (!data) {
@@ -87,16 +81,16 @@ const ObservationPerDay = ({ filter }) => {
         </Button>
       </BoxHeading>
       <Box position={"relative"}>
-        {showNavigationIcons && currentIndex != 0 && (
+        {showNavigationIcons && currentIndex != years.length - 1 && (
           <Box position="absolute" top="45%" left="10px">
-            <Button width={25} onClick={prevSlide} variant="ghost">
+            <Button width={25} onClick={nextSlide} variant="ghost">
               <ArrowBackIcon />
             </Button>
           </Box>
         )}
-        {showNavigationIcons && currentIndex != years.length - 1 && (
+        {showNavigationIcons && currentIndex != 0 && (
           <Box position="absolute" top="45%" right="10px">
-            <Button width={25} onClick={nextSlide} variant="ghost">
+            <Button width={25} onClick={prevSlide} variant="ghost">
               <ArrowForwardIcon />
             </Button>
           </Box>

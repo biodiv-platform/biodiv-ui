@@ -78,7 +78,7 @@ export default function UserTemporalObservedOn(userId) {
             ))}
           </Select>
         </Box>
-        <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef} />
+        <StackedHorizontalChart data={data[years[currentIndex]]} isStacked={true} ref={chartRef} />
       </Box>
     </Box>
   );
