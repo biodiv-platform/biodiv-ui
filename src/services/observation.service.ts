@@ -565,3 +565,14 @@ export const axGetPlantnetSuggestions = async (imageUrls, organs) => {
     return { success: false, data: [] };
   }
 };
+
+export const axGetGroupByDayCreatedOn = async (userId) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.OBSERVATION}/v1/observation/userTemporalAggregation/${userId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};

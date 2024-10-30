@@ -178,7 +178,7 @@ export const axParseBib = async (bibFile: File) => {
 
 export const axCreateDocument = async (payload) => {
   try {
-    const { data } = await http.post(`${ENDPOINT.DOCUMENT}/v1/services/create`, payload);
+    const { data } = await http.put(`${ENDPOINT.DOCUMENT}/v1/services/create`, payload);
     return { success: true, data };
   } catch (e) {
     console.error(e);

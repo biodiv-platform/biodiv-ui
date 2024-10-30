@@ -182,3 +182,12 @@ export const axUnsubscribeUser = async (key) => {
     return { success: false, data: e?.response?.data };
   }
 };
+
+export const axAddDownloadLog = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.USER}/v1/downloadLog/create`, payload);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
