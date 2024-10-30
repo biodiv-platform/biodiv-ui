@@ -1,5 +1,5 @@
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Button, Select, Skeleton, useBreakpointValue, useToast } from "@chakra-ui/react";
+import { Box, Button, Select, Skeleton, useToast } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -15,11 +15,6 @@ const ObservationPerDay = ({ filter }) => {
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
   const toast = useToast();
-  
-  // Add useBreakpointValue to hide icons based on screen width
-  const showNavigationIcons = useBreakpointValue({ base: false, md: true }); // Hide on small screens, show on medium and larger screens
-
-  const padding = useBreakpointValue({ base: "5px 10px", md: "30px 35px" });
 
   const handleDownload = async () => {
     try {
@@ -46,16 +41,14 @@ const ObservationPerDay = ({ filter }) => {
       });
     }
   };
-
   const count = useTemporalDistributionCreatedOnData({ filter });
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const data = count.data.list;
   const isLoading = count.data.isLoading;
-
   if (isLoading) {
-    return <Skeleton h={450} borderRadius="md" mb={4}/>;
+    return <Skeleton h={450} borderRadius="md" />;
   }
 
   if (!data) {
@@ -74,12 +67,12 @@ const ObservationPerDay = ({ filter }) => {
   };
 
   const handleOnChange = (e) => {
-    const v = parseInt(e.target.value, 10); // Ensure the value is an integer
+    const v = e?.target?.value;
     setCurrentIndex(v);
   };
 
   return (
-    <Box className="white-box" mb={4}>
+    <Box className="white-box" mb={4} minWidth={"800px"}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.temporal_distribution_date_created")}{" "}
         <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
@@ -87,16 +80,16 @@ const ObservationPerDay = ({ filter }) => {
         </Button>
       </BoxHeading>
       <Box position={"relative"}>
-        {showNavigationIcons && currentIndex != 0 && (
+        {currentIndex != 0 && (
           <Box position="absolute" top="45%" left="10px">
-            <Button width={25} onClick={prevSlide} variant="ghost">
+            <Button width={25} onClick={prevSlide}>
               <ArrowBackIcon />
             </Button>
           </Box>
         )}
-        {showNavigationIcons && currentIndex != years.length - 1 && (
+        {currentIndex != years.length - 1 && (
           <Box position="absolute" top="45%" right="10px">
-            <Button width={25} onClick={nextSlide} variant="ghost">
+            <Button width={25} onClick={nextSlide}>
               <ArrowForwardIcon />
             </Button>
           </Box>
@@ -110,7 +103,7 @@ const ObservationPerDay = ({ filter }) => {
             ))}
           </Select>
         </Box>
-        <Box padding={padding}>
+        <Box paddingLeft="30px" paddingRight="35px">
           <CalendarHeatMap
             year={years[currentIndex]}
             data={data[years[currentIndex]]}

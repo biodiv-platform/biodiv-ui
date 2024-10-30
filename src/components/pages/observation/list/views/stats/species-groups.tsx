@@ -26,7 +26,7 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
           status: "success",
           fileType: "png",
           sourcetype: "Observations",
-          notes: "Species Groups"
+          notes: "Temporal Distribution - Date Created"
         };
         axAddDownloadLog(payload);
       }

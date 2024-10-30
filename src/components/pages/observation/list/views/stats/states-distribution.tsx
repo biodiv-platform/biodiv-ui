@@ -26,7 +26,7 @@ const StatesDistribution = ({ observationData, filter }) => {
           status: "success",
           fileType: "png",
           sourcetype: "Observations",
-          notes: "States Distribution"
+          notes: "Temporal Distribution - Date Created"
         };
         axAddDownloadLog(payload);
       }
@@ -58,7 +58,7 @@ const StatesDistribution = ({ observationData, filter }) => {
   }, [filter, observationData]);
 
   return filteredStateData.length > 0 ? (
-    <Box className="white-box" mb={4}>
+    <Box className="white-box">
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.states")}{" "}
         <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
