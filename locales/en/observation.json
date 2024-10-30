@@ -80,9 +80,7 @@
   "list": {
     "chart": {
       "sgroup": "Species groups",
-      "states": "State distribution",
-      "temporal_distribution_date_created": "Temporal Distribution - Date Created",
-      "temporal_distribution_date_observed": "Temporal Distribution - Month Observed"
+      "states": "State distribution"
     },
     "created_on": "Created on",
     "life_list": {

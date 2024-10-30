@@ -1,45 +1,13 @@
-import { Box, Button, useToast } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import HorizontalBarChart from "@components/charts/horizontal-bar-chart";
-import DownloadIcon from "@icons/download";
-import { axAddDownloadLog } from "@services/user.service";
-import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 
 import { StatesChartMeta } from "./static-data";
 
 const StatesDistribution = ({ observationData, filter }) => {
   const { t } = useTranslation();
-
-  const chartRef = useRef<any>(null);
-  const toast = useToast();
-
-  const handleDownload = async () => {
-    try {
-      await waitForAuth();
-      if (chartRef.current) {
-        chartRef.current.downloadChart();
-        const payload = {
-          filePath: "",
-          filterUrl: window.location.href,
-          status: "success",
-          fileType: "png",
-          sourcetype: "Observations",
-          notes: "Temporal Distribution - Date Created"
-        };
-        axAddDownloadLog(payload);
-      }
-    } catch (error) {
-      console.error("Download error:", error);
-      toast({
-        title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
-      });
-    }
-  };
 
   const filteredStateData = useMemo(() => {
     if (!filter.state) {
@@ -59,12 +27,7 @@ const StatesDistribution = ({ observationData, filter }) => {
 
   return filteredStateData.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
-        📊 {t("observation:list.chart.states")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
-          <DownloadIcon />
-        </Button>{" "}
-      </BoxHeading>
+      <BoxHeading>📊 {t("observation:list.chart.states")}</BoxHeading>
       <Box p={4}>
         <HorizontalBarChart
           data={filteredStateData}
@@ -77,7 +40,6 @@ const StatesDistribution = ({ observationData, filter }) => {
           ml={58}
           leftOffset={50}
           displayCountKey={false}
-          ref={chartRef}
         />
       </Box>
     </Box>
