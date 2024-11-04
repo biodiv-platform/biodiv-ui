@@ -106,15 +106,35 @@ const TreeMapChart = forwardRef(
           .on("click", (event, d) => zoomIn(d.data.name, dataPath.concat(d.data.name)));
 
         svg
+          .selectAll("clipPath")
+          .data(root.leaves())
+          .join("clipPath")
+          .attr("id", (d) => `clip-${d.data.name}`)
+          .append("rect")
+          .attr("x", (d) => d.x0 + ml)
+          .attr("y", (d) => d.y0 + mt)
+          .attr("width", (d) => d.x1 - d.x0)
+          .attr("height", (d) => d.y1 - d.y0);
+
+        svg
           .select(".chart")
           .selectAll("text")
           .data(root.leaves())
           .join("text")
-          .attr("x", (d) => d.x0 + ml + 5) // Adjust x position for centering
-          .attr("y", (d) => d.y0 + mt + 15) // Adjust y position for centering
-          .text((d) => format(d.data.name)) // Use the name from the data
-          .attr("font-size", "13px") // Set font size
-          .attr("fill", "white"); // Set text color
+          .attr("x", (d) => d.x0 + ml + 3) // Add padding from left
+          .attr("y", (d) => d.y0 + mt + 15) // Position near top of rectangle
+          .attr("clip-path", (d) => `url(#clip-${d.data.name})`)
+          .selectAll("tspan")
+          .data((d) => {
+            // Split name into lines (based on spaces and capital letters), add value as last line
+            const lines = format(d.data.name).split(/(?=[A-Z][a-z])|\s+/g);
+            return lines;
+          })
+          .join("tspan")
+          .attr("x", (d) => d.x0 + ml + 3) // Align tspan to rectangle padding
+          .attr("y", (d, i) => `${d.y0 + mt + 12 + i * 12}`) // Space out lines vertically
+          .attr("fill", "white") // Opacity for value line
+          .text((d) => d);
 
         const path = parent.replaceAll(".", "/");
         svg.select(".root-title").selectAll("*").remove();
@@ -190,15 +210,35 @@ const TreeMapChart = forwardRef(
         .on("click", (event, d) => zoomIn(d.data.name, dataPath.concat(d.data.name)));
 
       svg
+        .selectAll("clipPath")
+        .data(root.leaves())
+        .join("clipPath")
+        .attr("id", (d) => `clip-${d.data.name}`)
+        .append("rect")
+        .attr("x", (d) => d.x0 + ml)
+        .attr("y", (d) => d.y0 + mt)
+        .attr("width", (d) => d.x1 - d.x0)
+        .attr("height", (d) => d.y1 - d.y0);
+
+      svg
         .select(".chart")
         .selectAll("text")
         .data(root.leaves())
         .join("text")
-        .attr("x", (d) => d.x0 + ml + 5) // Adjust x position for centering
-        .attr("y", (d) => d.y0 + mt + 15) // Adjust y position for centering
-        .text((d) => format(d.data.name)) // Use the name from the data
-        .attr("font-size", "13px") // Set font size
-        .attr("fill", "white"); // Set text color
+        .attr("x", (d) => d.x0 + ml + 3) // Add padding from left
+        .attr("y", (d) => d.y0 + mt + 15) // Position near top of rectangle
+        .attr("clip-path", (d) => `url(#clip-${d.data.name})`)
+        .selectAll("tspan")
+        .data((d) => {
+          // Split name into lines (based on spaces and capital letters), add value as last line
+          const lines = format(d.data.name).split(/(?=[A-Z][a-z])|\s+/g);
+          return lines;
+        })
+        .join("tspan")
+        .attr("x", (d) => d.x0 + ml + 3) // Align tspan to rectangle padding
+        .attr("y", (d, i) => `${d.y0 + mt + 12 + i * 12}`) // Space out lines vertically
+        .attr("fill", "white") // Opacity for value line
+        .text((d) => d);
     }, [containerRef, ro?.width, h, data]);
 
     const handleDownloadPng = async () => {
