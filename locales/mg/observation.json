@@ -81,9 +81,10 @@
     "chart": {
       "sgroup": "Vondrona karazana",
       "states": "Fizarana ny fanjakana",
-      "traitsDistribution": "Fizarana toetra",
+      "taxonomic_distribution": "Fizarana taksonômika",
       "temporal_distribution_date_created": "Fizarana ara-potoana - Daty noforonina",
-      "temporal_distribution_date_observed": "Fizarana ara-potoana - Nankalazaina ny volana"
+      "temporal_distribution_date_observed": "Fizarana ara-potoana - Nankalazaina ny volana",
+      "traitsDistribution": "Fizarana toetra"
     },
     "created_on": "Noforonina",
     "life_list": {

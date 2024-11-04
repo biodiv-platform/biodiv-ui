@@ -7,7 +7,8 @@ export default function useObservationData({ filter }) {
     list: {
       countPerDay: {},
       groupObservedOn: {},
-      groupTraits: []
+      groupTraits: [],
+      groupTaxon:{}
     },
     isLoading: true
   });

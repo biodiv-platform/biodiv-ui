@@ -199,7 +199,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
         .attr("y1", (d) => y(d.data.month))
         .attr("y2", (d) => y(d.data.month) + y.bandwidth()) // Extend the line for the full height of the rect
         .attr("stroke", "red") // Set the line color for the right border
-        .attr("stroke-width", 0.6);
+        .attr("stroke-width", (d)=>d[1] ?0.6:0);
 
       let legendWidth = (ro.width - ml - mr) / (years.length + 1);
 

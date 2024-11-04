@@ -7,6 +7,7 @@ import LifeList from "./life-list";
 import ObservationPerDay from "./observation-per-day";
 import SpeciesGroups from "./species-groups";
 import StatesDistribution from "./states-distribution";
+import TaxanomicDistribution from "./taxanomic-distribution";
 import TemporalObservedOn from "./temporal-observed-on";
 import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
@@ -38,8 +39,8 @@ export default function StatsView() {
       <StatesDistribution observationData={observationData} filter={filter} />
       <ObservationPerDay data={data.countPerDay} isLoading={isLoading} />
       <TemporalObservedOn data={data.groupObservedOn} isLoading={isLoading} />
-
       <TraitsPerMonth data={data.groupTraits} isLoading={isLoading} />
+      <TaxanomicDistribution data ={data.groupTaxon} isLoading={isLoading}/>
     </div>
   );
 }
