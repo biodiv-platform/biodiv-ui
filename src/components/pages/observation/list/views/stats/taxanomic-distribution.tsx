@@ -8,7 +8,7 @@ import React, { useRef } from "react";
 
 import TreeMapChart from "./tree-map";
 
-const TaxanomicDistribution = ({ data,isLoading }) => {
+const TaxanomicDistribution = ({ data, isLoading, taxon }) => {
   const { t } = useTranslation();
 
   const chartRef = useRef<any>(null);
@@ -57,7 +57,7 @@ const TaxanomicDistribution = ({ data,isLoading }) => {
         </Button>
       </BoxHeading>
       <Box p={4}>
-        <TreeMapChart data={data}/>
+        <TreeMapChart data={data} taxon={taxon} ref={chartRef}/>
       </Box>
     </Box>
   );

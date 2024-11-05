@@ -34,13 +34,12 @@ export default function StatsView() {
         />
         <LifeList filter={filter} />
       </SimpleGrid>
-
+      <TaxanomicDistribution data={data.groupTaxon} isLoading={isLoading} taxon={filter?.taxon} />
       <ObservationsMap />
       <StatesDistribution observationData={observationData} filter={filter} />
       <ObservationPerDay data={data.countPerDay} isLoading={isLoading} />
       <TemporalObservedOn data={data.groupObservedOn} isLoading={isLoading} />
       <TraitsPerMonth data={data.groupTraits} isLoading={isLoading} />
-      <TaxanomicDistribution data ={data.groupTaxon} isLoading={isLoading}/>
     </div>
   );
 }

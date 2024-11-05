@@ -20,6 +20,6 @@ export const TraitsTooltipRenderer = (data) =>
     `;
 
 export const TaxonTreeTooltipRendered = (data) =>
-  `<b>${data.data.name.split("|")[0].charAt(0).toUpperCase()+data.data.name.split("|")[0].slice(1)}</b><br/>
-  Parent : ${data.parent.data.name.split("|")[0].charAt(0).toUpperCase()+data.parent.data.name.split("|")[0].slice(1)} <br/>
+  `<b>${data.data.name.split("|")[0]}</b><br/>
+  Parent : ${data.parent.data.name.split("|")[0]} <br/>
   ${data.data.value} Observations`;
