@@ -89,6 +89,11 @@ const TreeMapChart = forwardRef(
         0,
         Object.entries(children).length - 1
       ]);
+      let colors = Array.from({ length: children.length }, (_, i) => colorScale(i));
+      if(color!=""){
+        colors = colors.filter(c => c !== color);
+        colors.unshift(color)
+      }
       svg.select(".chart").selectAll("*").remove();
 
       svg
@@ -100,11 +105,7 @@ const TreeMapChart = forwardRef(
         .attr("y", (d) => d.y0 + mt) // Use d.y0 for y position
         .attr("width", (d) => d.x1 - d.x0) // Calculate width
         .attr("height", (d) => d.y1 - d.y0) // Calculate height
-        .attr("fill", (d, i) =>
-          Object.entries(children).length != 0 && d.parent.data.name == rootParent
-            ? colorScale(i)
-            : color
-        )
+        .attr("fill", (d, i) =>colors[i])
         .attr("stroke", "black") // Set border color
         .attr("stroke-width", 0.5)
         .on("mouseover", (event, d) => tipHelpers.mouseover(event, { data: d }))
@@ -112,12 +113,10 @@ const TreeMapChart = forwardRef(
         .on("mouseleave", tipHelpers.mouseleave)
         .on("click", (event, d) => {
           if (Object.entries(children).length != 0) {
-            if (d.parent.data.name == rootParent) {
               const c = children
                 .sort((a, b) => b.value - a.value)
                 .findIndex((child) => child.name === d.data.name);
-              setColor(colorScale(c));
-            }
+              setColor(colors[c]);
             setCurrentParent(d.data.name);
             setCurrentDataPath(currentDataPath.concat(d.data.name));
           }
@@ -200,11 +199,12 @@ const TreeMapChart = forwardRef(
             .split(/(<i>|<\/i>)/)
             .filter((part) => part !== "");
           const plainText = parts.join("").replace(/<i>|<\/i>/g, "");
-          return i === 0 ? plainText : `/${plainText}`;
+          return i === 0 ? plainText : ` / ${plainText}`;
         })
         .on("click", function (event, d) {
           setCurrentParent(d);
           setCurrentDataPath(currentDataPath.slice(0, currentDataPath.indexOf(d) + 1));
+          setColor("");
         });
     }, [containerRef, ro?.width, h, data, currentParent]);
 
