@@ -1,4 +1,4 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 
@@ -27,6 +27,13 @@ export default function StatsView() {
       <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
         <TopUploaders filter={filter} />
         <TopIdentifiers filter={filter} />
+        <GridItem colSpan={2}>
+          <TaxanomicDistribution
+            data={data.groupTaxon}
+            isLoading={isLoading}
+            taxon={filter?.taxon}
+          />
+        </GridItem>
         <SpeciesGroups
           observationData={observationData}
           speciesGroup={speciesGroup}
@@ -34,7 +41,6 @@ export default function StatsView() {
         />
         <LifeList filter={filter} />
       </SimpleGrid>
-      <TaxanomicDistribution data={data.groupTaxon} isLoading={isLoading} taxon={filter?.taxon} />
       <ObservationsMap />
       <StatesDistribution observationData={observationData} filter={filter} />
       <ObservationPerDay data={data.countPerDay} isLoading={isLoading} />
