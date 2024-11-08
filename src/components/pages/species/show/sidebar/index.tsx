@@ -15,8 +15,8 @@ export default function SpeciesSidebar() {
     <GridItem colSpan={2}>
       <TaxonTable />
       <SpeciesTemportalDistribution data={data} />
-      <SpeciesRelatedObservations />
       <SpeciesTraitsGraph data={data} />
+      <SpeciesRelatedObservations />
     </GridItem>
   );
 }

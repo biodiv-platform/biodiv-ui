@@ -45,7 +45,7 @@ const LineGraph = forwardRef(function LineGraph(
   }));
 
   useEffect(() => {
-    if (!ro?.width) return;
+    if (!ro?.width || !data.length) return;
     if (isSmall) {
       ml = 30;
       mr = 30;

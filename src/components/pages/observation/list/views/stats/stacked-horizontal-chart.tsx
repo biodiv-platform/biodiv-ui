@@ -139,6 +139,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
     }
 
     if (isStacked) {
+      svg.selectAll(".legend-text").remove();
       const years = Array.from(new Set(data.map((sg) => sg.year)));
 
       const colorScale = scaleSequential(interpolateYlGnBu).domain([
@@ -199,7 +200,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
         .attr("y1", (d) => y(d.data.month))
         .attr("y2", (d) => y(d.data.month) + y.bandwidth()) // Extend the line for the full height of the rect
         .attr("stroke", "red") // Set the line color for the right border
-        .attr("stroke-width", (d)=>d[1] ?0.6:0);
+        .attr("stroke-width", (d) => (d[1] ? 0.6 : 0));
 
       let legendWidth = (ro.width - ml - mr) / (years.length + 1);
 

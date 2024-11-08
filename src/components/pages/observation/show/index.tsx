@@ -1,5 +1,6 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import CarouselObservation from "@components/@core/carousel";
+import useObservationStatsData from "@components/pages/species/show/sidebar/use-observation-stats-data";
 import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
@@ -18,6 +19,8 @@ import { RESOURCE_TYPE } from "@static/constants";
 import React, { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
+import TemporalObservedOn from "../list/views/stats/temporal-observed-on";
+import TraitsPerMonth from "../list/views/stats/traits-per-month";
 import Activity from "./activity";
 import CheckListAnnotation from "./checkListAnnotation";
 import CustomFields from "./custom-fields";
@@ -27,7 +30,6 @@ import Info from "./info";
 import Sidebar from "./sidebar";
 import LocationInformation from "./sidebar/location-info";
 import Suggestions from "./sidebar/suggestions";
-import Temporal from "./sidebar/temporal";
 import RecoSuggestion from "./suggestion";
 import TraitsPanel from "./traits";
 
@@ -46,6 +48,7 @@ export default function ObservationShowPageComponent({
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
+  const statsData = useObservationStatsData(o.recoIbp?.taxonId);
 
   useEffect(() => {
     setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name || "");
@@ -138,9 +141,20 @@ export default function ObservationShowPageComponent({
               geoprivacy={o.observation?.geoPrivacy}
             />
           )}
+          {o.recoIbp?.taxonId && (
+            <>
+              <TemporalObservedOn
+                data={statsData.data.list.groupObservedOn}
+                isLoading={statsData.data.isLoading}
+              />
+              <TraitsPerMonth
+                data={statsData.data.list.groupTraits}
+                isLoading={statsData.data.isLoading}
+              />
+            </>
+          )}
           {o.esLayerInfo && (
             <>
-              <Temporal data={o.esLayerInfo.monthAggregation} />
               <Suggestions
                 title="observation:related"
                 list={o.esLayerInfo.similarObservation}

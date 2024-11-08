@@ -10,7 +10,8 @@ export default function useObservationStatsData(speciesId, max = 8) {
   const { currentGroup } = useGlobalState();
   const [temporalDistributionData, setTemporalDistributionData] = useImmer({
     list: {
-      groupTraits: []
+      groupTraits: [],
+      groupObservedOn: {}
     },
     isLoading: true
   });
