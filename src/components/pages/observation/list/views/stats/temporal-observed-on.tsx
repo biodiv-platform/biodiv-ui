@@ -46,7 +46,7 @@ const TemporalObservedOn = ({ data, isLoading }) => {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
-  if (!data) {
+  if (!data || Object.keys(data).length == 0) {
     return <div></div>;
   }
 

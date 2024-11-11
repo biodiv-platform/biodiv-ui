@@ -31,7 +31,7 @@ const TraitsPerMonth = ({ data, isLoading }) => {
     return <Skeleton h={450} borderRadius="md" />;
   }
 
-  if (!data) {
+  if (!data || data.length==0) {
     return <div></div>;
   }
 
