@@ -81,9 +81,10 @@
     "chart": {
       "sgroup": "Vikundi vya aina",
       "states": "Usambazaji wa Nchi.",
-      "traitsDistribution": "Usambazaji wa Tabia",
+      "taxonomic_distribution": "Usambazaji wa Taxonomic",
       "temporal_distribution_date_created": "Usambazaji wa Muda - Tarehe Iliyoundwa",
-      "temporal_distribution_date_observed": "Usambazaji wa Muda - Mwezi Umezingatiwa"
+      "temporal_distribution_date_observed": "Usambazaji wa Muda - Mwezi Umezingatiwa",
+      "traitsDistribution": "Usambazaji wa Tabia"
     },
     "created_on": "Imeundwa On.",
     "life_list": {

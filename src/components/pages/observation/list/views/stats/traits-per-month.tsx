@@ -7,9 +7,8 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useRef } from "react";
 
 import LineGraph from "./line-graph";
-import useTraitsDistributionData from "./use-traits-distribution-data";
 
-const TraitsPerMonth = ({ filter }) => {
+const TraitsPerMonth = ({ data, isLoading }) => {
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
 
@@ -28,14 +27,11 @@ const TraitsPerMonth = ({ filter }) => {
     };
     axAddDownloadLog(payload);
   };
-  const groupByTraits = useTraitsDistributionData({ filter });
-  let data = groupByTraits.data.list;
-  const isLoading = groupByTraits.data.isLoading;
   if (isLoading) {
     return <Skeleton h={450} borderRadius="md" />;
   }
 
-  if (!data) {
+  if (!data || data.length==0) {
     return <div></div>;
   }
 

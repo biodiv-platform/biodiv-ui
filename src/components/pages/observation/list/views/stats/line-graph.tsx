@@ -45,7 +45,7 @@ const LineGraph = forwardRef(function LineGraph(
   }));
 
   useEffect(() => {
-    if (!ro?.width) return;
+    if (!ro?.width || !data.length) return;
     if (isSmall) {
       ml = 30;
       mr = 30;
@@ -180,8 +180,8 @@ const LineGraph = forwardRef(function LineGraph(
       .data(traits)
       .join("text")
       .attr("x", ml)
-      .attr("y", (d) => y(d) + y.bandwidth()+10)
-      .text((d) => d + " :")
+      .attr("y", (d) => y(d) + y.bandwidth() + 10)
+      .text((d) => abbreviateLabel(d + " :", (ro.width - mr) / 14))
       .style("font-size", "16.5px");
 
     function handleLegendClick(key, ro) {
