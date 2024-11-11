@@ -1,9 +1,8 @@
-import Temporal from "@components/pages/observation/show/sidebar/temporal";
+import TemporalObservedOn from "@components/pages/observation/list/views/stats/temporal-observed-on";
 import React from "react";
 
-import useSpecies from "../../use-species";
-
-export default function SpeciesTemportalDistribution() {
-  const { species } = useSpecies();
-  return <Temporal data={species.temporalData} />;
+export default function SpeciesTemportalDistribution({ data }) {
+  return (
+    <TemporalObservedOn data={data.data.list.groupObservedOn} isLoading={data.data.isLoading} />
+  );
 }

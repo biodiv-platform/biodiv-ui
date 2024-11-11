@@ -1,17 +1,15 @@
-import { Box, Button, Select, Skeleton, useToast } from "@chakra-ui/react";
+import { Box, Button, Skeleton, useToast } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
-import StackedHorizontalChart from "./stacked-horizontal-chart";
+import TreeMapChart from "./tree-map";
 
-const TemporalObservedOn = ({ data, isLoading }) => {
+const TaxanomicDistribution = ({ data, isLoading, taxon }) => {
   const { t } = useTranslation();
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const chartRef = useRef<any>(null);
   const toast = useToast();
@@ -27,7 +25,7 @@ const TemporalObservedOn = ({ data, isLoading }) => {
           status: "success",
           fileType: "png",
           sourcetype: "Observations",
-          notes: "Temporal Distribution - Month Observed"
+          notes: "Taxonomic Distribution"
         };
         axAddDownloadLog(payload);
       }
@@ -46,40 +44,23 @@ const TemporalObservedOn = ({ data, isLoading }) => {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
-  if (!data || Object.keys(data).length == 0) {
+  if (!data) {
     return <div></div>;
   }
-
-  const years = Object.keys(data);
-  years.reverse();
-
-  const handleOnChange = (e) => {
-    const v = e?.target?.value;
-    setCurrentIndex(v);
-  };
 
   return (
     <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
-        📊 {t("observation:list.chart.temporal_distribution_date_observed")}{" "}
+        📊 {t("observation:list.chart.taxonomic_distribution")}{" "}
         <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>
       <Box p={4}>
-        <Box marginLeft="45%" paddingTop="25px" paddingBottom="25px">
-          <Select fontSize="13px" maxW="7rem" value={currentIndex} onChange={handleOnChange}>
-            {years.map((option, index) => (
-              <option key={index} value={index}>
-                {option}
-              </option>
-            ))}
-          </Select>
-        </Box>
-        <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef} isStacked={true} />
+        <TreeMapChart data={data} taxon={taxon} ref={chartRef}/>
       </Box>
     </Box>
   );
 };
 
-export default TemporalObservedOn;
+export default TaxanomicDistribution;

@@ -81,9 +81,10 @@
     "chart": {
       "sgroup": "प्रजाति समूह",
       "states": "राज्य वितरण",
-      "traitsDistribution": "लक्षण वितरण",
+      "taxonomic_distribution": "टैक्सोनोमिक वितरण",
       "temporal_distribution_date_created": "अस्थायी वितरण - निर्मित तिथि",
-      "temporal_distribution_date_observed": "अस्थायी वितरण - मनाया गया महीना"
+      "temporal_distribution_date_observed": "अस्थायी वितरण - मनाया गया महीना",
+      "traitsDistribution": "लक्षण वितरण"
     },
     "created_on": "पर बनाया",
     "life_list": {
