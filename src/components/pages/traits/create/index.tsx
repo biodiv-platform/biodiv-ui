@@ -1,26 +1,43 @@
-import { CloseIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   Checkbox,
-  Divider,
   FormControl,
   FormLabel,
   GridItem,
   Heading,
-  IconButton,
   Input,
   Select,
   SimpleGrid,
   Textarea
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
+import { useLocalRouter } from "@components/@core/local-link";
+import { SelectAsyncInputField } from "@components/form/select-async";
+import {
+  onScientificNameQuery,
+  ScientificNameOption
+} from "@components/pages/observation/create/form/recodata/scientific-name";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Role } from "@interfaces/custom";
+import { axUploadResource } from "@services/files.service";
 import { axCreateTrait } from "@services/traits.service";
-import React, { useState } from "react";
+import { hasAccess } from "@utils/auth";
+import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
+import React, { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { FormProvider, useForm } from "react-hook-form";
+import * as Yup from "yup";
+
+import TraitsValueComponent from "./trait-value-component";
+
+const onQuery = (q) => onScientificNameQuery(q, "name");
 
 interface TraitValue {
   description: string;
   value: string;
+  file: File | null;
 }
 
 interface Trait {
@@ -31,10 +48,43 @@ interface Trait {
   Paritcipatory: boolean;
   type: string;
   dataType: string;
-  values: TraitValue[]; // Define values as an array of strings
+  values: TraitValue[];
+  generalFile: File | null; // Define values as an array of strings
 }
 
 export default function TraitsCreateComponent() {
+  const router = useLocalRouter();
+  const { t } = useTranslation();
+
+  const [canSubmit, setCanSubmit] = useState<boolean>();
+
+  useEffect(() => {
+    setCanSubmit(hasAccess([Role.Admin]));
+  }, []);
+
+  const hForm = useForm<any>({
+    resolver: yupResolver(
+      Yup.object().shape({
+        query: Yup.string()
+      })
+    )
+  });
+
+  // Dropzone setup, with a single file restriction
+  const handleGeneralDrop = useDropzone({
+    accept: { "image/*": [".jpg", ".jpeg", ".png"] },
+    maxFiles: 1,
+    onDrop: (acceptedFiles) => {
+      if (acceptedFiles.length > 0) {
+        const file = acceptedFiles[0];
+        setTrait((prevTrait) => ({
+          ...prevTrait,
+          generalFile: file
+        }));
+      }
+    }
+  });
+
   const [trait, setTrait] = useState<Trait>({
     name: "",
     description: "",
@@ -46,14 +96,41 @@ export default function TraitsCreateComponent() {
     values: [
       {
         description: "",
-        value: ""
+        value: "",
+        file: null
       }
-    ]
+    ],
+    generalFile: null
   });
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    const traitValues = trait.values.map((item) => `${item.description}:${item.value}`).join("|");
+    let taxonIds = "";
+    if (hForm.getValues("query") != null) {
+      taxonIds = hForm
+        .getValues("query")
+        .map((taxon) => `${taxon.taxonId}`)
+        .join("|");
+    }
+    // Use Promise.all to wait for all uploads to complete before creating the trait
+    const valueStringArray = await Promise.all(
+      trait.values.map(async (value) => {
+        if (value.file != null) {
+          const { success, data } = await axUploadResource(value.file, "traits", undefined);
+          if (success) {
+            return `${value.description}:${value.value}:${data}`;
+          }
+        }
+        // Return a default formatted string if no file or upload fails
+        else {
+          return `${value.description}:${value.value}`;
+        }
+      })
+    );
+
+    // Join all parts into a single string
+    const valueString = valueStringArray.join("|");
+
     const params = {
       dataType: trait.dataType,
       description: trait.description,
@@ -61,39 +138,25 @@ export default function TraitsCreateComponent() {
       traitTypes: trait.type,
       showInObservation: trait.isObservation,
       isParticipatory: trait.Paritcipatory,
-      values: traitValues
+      values: valueString.slice(0, -1),
+      taxonIds: taxonIds,
+      icon: null
     };
-    axCreateTrait(params);
+
+    if (trait.generalFile != null) {
+      const { success, data } = await axUploadResource(trait.generalFile, "traits", undefined);
+      if (success) {
+        params.icon = data;
+      }
+    }
+    const { success, data } = await axCreateTrait(params);
+    if (success) {
+      notification("Trait Created", NotificationType.Success);
+      router.push(`/traits/show/${data}`, true);
+    } else {
+      notification("Unable to create");
+    }
   }
-
-  function handleAddValue() {
-    setTrait((prevTrait) => ({
-      ...prevTrait,
-      values: prevTrait.values.concat({ description: "", value: "" }) // Append an empty string for a new input
-    }));
-  }
-
-  const removeValue = (index: number) => {
-    setTrait((prevTrait) => {
-      const updatedValues = prevTrait.values.filter((_, i) => i !== index);
-      return {
-        ...prevTrait,
-        values: updatedValues
-      };
-    });
-  };
-
-  const handleValueChange = (index: number, field: keyof TraitValue, newValue: string) => {
-    setTrait((prevTrait) => {
-      const updatedValues = prevTrait.values;
-      updatedValues[index] = { ...updatedValues[index], [field]: newValue };
-      return {
-        ...prevTrait,
-        values: updatedValues
-      };
-    });
-  };
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setTrait((prevTrait) => ({
@@ -102,12 +165,34 @@ export default function TraitsCreateComponent() {
     }));
   };
 
+  const handleValueChange = (index, updatedValueObj) => {
+    setTrait((prevTrait) => {
+      const updatedValues = [...prevTrait.values];
+      updatedValues[index] = updatedValueObj;
+      return { ...prevTrait, values: updatedValues };
+    });
+  };
+
+  function handleAddValue() {
+    setTrait((prevTrait) => ({
+      ...prevTrait,
+      values: prevTrait.values.concat({ description: "", value: "", file: null }) // Append an empty string for a new input
+    }));
+  }
+
+  const removeValue = (index) => {
+    setTrait((prevTrait) => ({
+      ...prevTrait,
+      values: prevTrait.values.filter((_, i) => i !== index)
+    }));
+  };
+
   return (
     <div className="container mt">
       <PageHeading>Add Traits</PageHeading>
       <form onSubmit={handleSubmit}>
-        <SimpleGrid columns={{ base: 1, md: 6 }} spacing={{ md: 4 }} mb={4}>
-          <GridItem colSpan={2}>
+        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+          <Box>
             <FormControl>
               <FormLabel htmlFor="name">Trait Name</FormLabel>
               <Input
@@ -120,8 +205,8 @@ export default function TraitsCreateComponent() {
                 required
               />
             </FormControl>
-          </GridItem>
-          <GridItem colSpan={2}>
+          </Box>
+          <Box>
             <FormControl>
               <FormLabel htmlFor="dataType">Data Type</FormLabel>
               <Select
@@ -138,8 +223,8 @@ export default function TraitsCreateComponent() {
                 <option value="COLOR">Color</option>
               </Select>
             </FormControl>
-          </GridItem>
-          <GridItem colSpan={2}>
+          </Box>
+          <Box>
             <FormControl>
               <FormLabel htmlFor="type">Type</FormLabel>
               <Select
@@ -155,8 +240,32 @@ export default function TraitsCreateComponent() {
                 <option value="RANGE">Range</option>
               </Select>
             </FormControl>
-          </GridItem>
-          <GridItem colSpan={1}>
+          </Box>
+          {/* Drop area for drag-and-drop */}
+          <div
+            {...handleGeneralDrop.getRootProps()}
+            style={{
+              border: "2px dashed #aaa",
+              padding: "5px",
+              textAlign: "center",
+              width: "80px",
+              height: "80px"
+            }}
+          >
+            <input {...handleGeneralDrop.getInputProps()} />
+            {trait.generalFile ? (
+              <div>
+                <img
+                  src={URL.createObjectURL(trait.generalFile)}
+                  alt="Icon Preview"
+                  style={{ height: "70px", objectFit: "cover" }}
+                />
+              </div>
+            ) : (
+              <p style={{ padding: "20px" }}>+</p>
+            )}
+          </div>
+          <Box>
             <FormControl>
               <Checkbox
                 id="isObservation"
@@ -167,8 +276,8 @@ export default function TraitsCreateComponent() {
                 Observation Trait
               </Checkbox>
             </FormControl>
-          </GridItem>
-          <GridItem colSpan={5}>
+          </Box>
+          <GridItem colSpan={{ md: 2 }}>
             <FormControl>
               <Checkbox
                 id="Paritcipatory"
@@ -180,7 +289,7 @@ export default function TraitsCreateComponent() {
               </Checkbox>
             </FormControl>
           </GridItem>
-          <GridItem colSpan={6}>
+          <GridItem colSpan={{ md: 3 }}>
             <FormControl>
               <FormLabel htmlFor="description">Description</FormLabel>
               <Textarea
@@ -193,46 +302,49 @@ export default function TraitsCreateComponent() {
               />
             </FormControl>
           </GridItem>
+          <GridItem colSpan={{ md: 3 }}>
+            <FormProvider {...hForm}>
+              <FormLabel htmlFor="taxon">Taxon</FormLabel>
+              <SelectAsyncInputField
+                name="query"
+                onQuery={onQuery}
+                optionComponent={ScientificNameOption}
+                placeholder={t("filters:taxon_browser.search")}
+                resetOnSubmit={false}
+                isClearable={true}
+                multiple={true}
+              />
+            </FormProvider>
+          </GridItem>
+          {trait.dataType == "STRING" && (
+            <GridItem colSpan={{ md: 3 }}>
+              <Heading mb={4} fontSize="xl">
+                Define Trait Values
+              </Heading>
+              {trait.values.map((valueObj, index) => (
+                <TraitsValueComponent
+                  key={index}
+                  valueObj={valueObj}
+                  index={index}
+                  onValueChange={handleValueChange}
+                  onRemove={removeValue}
+                />
+              ))}
+              <Box mb={4}>
+                <Button onClick={handleAddValue} colorScheme="green" mb={4}>
+                  Add Trait Value
+                </Button>
+              </Box>
+            </GridItem>
+          )}
         </SimpleGrid>
-        <Divider mb={4} mt={4}/>
-        <Heading mb={4} fontSize="xl">
-          Define Trait Values
-        </Heading>
-        {trait.values.map((valueObj, index) => (
-          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }} mb={4}>
-            <GridItem>
-              <Input
-                placeholder="Name"
-                value={valueObj.value}
-                onChange={(e) => handleValueChange(index, "value", e.target.value)}
-                required
-              />
-            </GridItem>
-            <GridItem colSpan={2}>
-              <Input
-                placeholder="Description"
-                value={valueObj.description}
-                onChange={(e) => handleValueChange(index, "description", e.target.value)}
-              />
-            </GridItem>
-            <GridItem>
-              <IconButton
-                aria-label="Remove value"
-                icon={<CloseIcon />}
-                onClick={() => removeValue(index)}
-                size="sm"
-                colorScheme="red"
-              />
-            </GridItem>
-          </SimpleGrid>
-        ))}
-        <Box mb={4}>
-          <Button onClick={handleAddValue} colorScheme="green" mb={4}>
-            Add Trait Value
-          </Button>
-          <Divider/>
-        </Box>
-        <Button type="submit" colorScheme="blue">Add Traits</Button>
+        {canSubmit && (
+          <Box mb={4}>
+            <Button type="submit" colorScheme="blue">
+              Add Traits
+            </Button>
+          </Box>
+        )}
       </form>
     </div>
   );
