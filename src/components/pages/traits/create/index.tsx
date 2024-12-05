@@ -24,12 +24,12 @@ import { axUploadResource } from "@services/files.service";
 import { axCreateTrait } from "@services/traits.service";
 import { hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
-import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import Error from "../../_error";
 import TraitsValueComponent from "./trait-value-component";
 
 const onQuery = (q) => onScientificNameQuery(q, "name");
@@ -50,11 +50,24 @@ interface Trait {
   dataType: string;
   values: TraitValue[];
   generalFile: File | null; // Define values as an array of strings
+  source: string;
+  speciesField: string | undefined;
+  units: string | undefined;
+  min: number | undefined;
+  max: number | undefined;
+  minDate: string | undefined;
+  maxDate: string | undefined;
 }
 
-export default function TraitsCreateComponent() {
+export default function TraitsCreateComponent({ speciesField }) {
+  const speciesCategoryField = speciesField.speciesField
+    .filter((item) => item.childFields.length == 0)
+    .map((item) => item.parentField);
+  const speciesSubCategoryField = speciesField.speciesField
+    .filter((item) => item.childFields.length != 0)
+    .map((item) => item.childFields)
+    .flat();
   const router = useLocalRouter();
-  const { t } = useTranslation();
 
   const [canSubmit, setCanSubmit] = useState<boolean>();
 
@@ -100,7 +113,14 @@ export default function TraitsCreateComponent() {
         file: null
       }
     ],
-    generalFile: null
+    generalFile: null,
+    source: "",
+    speciesField: undefined,
+    units: undefined,
+    min: undefined,
+    max: undefined,
+    minDate: undefined,
+    maxDate: undefined
   });
 
   async function handleSubmit(event) {
@@ -138,11 +158,22 @@ export default function TraitsCreateComponent() {
       traitTypes: trait.type,
       showInObservation: trait.isObservation,
       isParticipatory: trait.Paritcipatory,
-      values: valueString.slice(0, -1),
+      values: valueString,
       taxonIds: taxonIds,
-      icon: null
+      icon: null,
+      units: trait.units,
+      speciesField: "39",
+      source: trait.source
     };
 
+    if (trait.dataType == "NUMERIC") {
+      if (trait.min != undefined) {
+        params["min"] = trait.min;
+      }
+      if (trait.max != undefined) {
+        params["max"] = trait.max;
+      }
+    }
     if (trait.generalFile != null) {
       const { success, data } = await axUploadResource(trait.generalFile, "traits", undefined);
       if (success) {
@@ -163,6 +194,26 @@ export default function TraitsCreateComponent() {
       ...prevTrait,
       [name]: type === "checkbox" ? checked : value
     }));
+    if (name == "dataType") {
+      if (value == "COLOR") {
+        setTrait((prevTrait) => ({
+          ...prevTrait,
+          type: "MULTIPLE_CATEGORICAL"
+        }));
+      }
+      if (value == "DATE") {
+        setTrait((prevTrait) => ({
+          ...prevTrait,
+          type: "RANGE"
+        }));
+      }
+      if (value == "NUMERIC") {
+        setTrait((prevTrait) => ({
+          ...prevTrait,
+          type: "RANGE"
+        }));
+      }
+    }
   };
 
   const handleValueChange = (index, updatedValueObj) => {
@@ -187,7 +238,7 @@ export default function TraitsCreateComponent() {
     }));
   };
 
-  return (
+  return canSubmit ? (
     <div className="container mt">
       <PageHeading>Add Traits</PageHeading>
       <form onSubmit={handleSubmit}>
@@ -235,9 +286,13 @@ export default function TraitsCreateComponent() {
                 placeholder="Select type"
                 required
               >
-                <option value="MULTIPLE_CATEGORICAL">Multiple Categorical</option>
-                <option value="SINGLE_CATEGORICAL">Single Categorical</option>
-                <option value="RANGE">Range</option>
+                {(trait.dataType == "STRING" || trait.dataType == "COLOR") && (
+                  <option value="MULTIPLE_CATEGORICAL">Multiple Categorical</option>
+                )}
+                {trait.dataType == "STRING" && (
+                  <option value="SINGLE_CATEGORICAL">Single Categorical</option>
+                )}
+                {trait.dataType != "COLOR" && <option value="RANGE">Range</option>}
               </Select>
             </FormControl>
           </Box>
@@ -265,6 +320,69 @@ export default function TraitsCreateComponent() {
               <p style={{ padding: "20px" }}>+</p>
             )}
           </div>
+          <Box>
+            <FormControl>
+              <FormLabel htmlFor="speciesField">Species Field</FormLabel>
+              <Select
+                id="speciesField"
+                name="speciesField"
+                value={trait.speciesField}
+                onChange={handleChange}
+                placeholder="Select field"
+              >
+                {speciesCategoryField.concat(speciesSubCategoryField).map((valueObj) => (
+                  <option value={valueObj.id}>{valueObj.header}</option>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl>
+              <FormLabel htmlFor="source">Source</FormLabel>
+              <Input
+                type="text"
+                id="source"
+                name="source"
+                value={trait.source}
+                onChange={handleChange}
+                placeholder="Enter source"
+                required
+              />
+            </FormControl>
+          </Box>
+          <Box>
+            {trait.dataType == "NUMERIC" && (
+              <FormControl>
+                <FormLabel htmlFor="units">Units</FormLabel>
+                <Input
+                  type="text"
+                  id="units"
+                  name="units"
+                  value={trait.units}
+                  onChange={handleChange}
+                  placeholder="Enter units"
+                  required
+                />
+              </FormControl>
+            )}
+            {trait.dataType == "DATE" && (
+              <FormControl>
+                <FormLabel htmlFor="units">Units</FormLabel>
+                <Select
+                  id="units"
+                  name="units"
+                  value={trait.units}
+                  onChange={handleChange}
+                  placeholder="Units"
+                  required
+                >
+                  <option value="MONTH">Month</option>
+                  <option value="YEAR">Year</option>
+                </Select>
+              </FormControl>
+            )}
+          </Box>
+          <Box></Box>
           <Box>
             <FormControl>
               <Checkbox
@@ -309,13 +427,42 @@ export default function TraitsCreateComponent() {
                 name="query"
                 onQuery={onQuery}
                 optionComponent={ScientificNameOption}
-                placeholder={t("filters:taxon_browser.search")}
+                placeholder={"Search"}
                 resetOnSubmit={false}
                 isClearable={true}
                 multiple={true}
               />
             </FormProvider>
           </GridItem>
+          {trait.dataType == "NUMERIC" && (
+            <>
+              <GridItem colSpan={{ md: 4 }}>
+                <Heading fontSize="xl">Define Min and Max</Heading>
+              </GridItem>
+              <FormControl mb={4}>
+                <FormLabel htmlFor="min">Min value</FormLabel>
+                <Input
+                  type="number"
+                  id="min"
+                  name="min"
+                  value={trait.min}
+                  onChange={handleChange}
+                  placeholder="Enter min value"
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="max">Max value</FormLabel>
+                <Input
+                  type="number"
+                  id="max"
+                  name="max"
+                  value={trait.max}
+                  onChange={handleChange}
+                  placeholder="Enter max value"
+                />
+              </FormControl>
+            </>
+          )}
           {trait.dataType == "STRING" && (
             <GridItem colSpan={{ md: 3 }}>
               <Heading mb={4} fontSize="xl">
@@ -347,5 +494,7 @@ export default function TraitsCreateComponent() {
         )}
       </form>
     </div>
+  ) : (
+    <Error statusCode={404} />
   );
 }

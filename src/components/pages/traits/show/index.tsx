@@ -55,8 +55,10 @@ export default function TraitsShowComponent({ data }) {
           <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
             {data.traits.description}
           </Box>
-          {data.values.length != 0 && <Text fontWeight={600}>Values</Text>}
-          {data.values.length != 0 && (
+          {data.values.length != 0 && data.traits.dataType == "STRING" && (
+            <Text fontWeight={600}>Values</Text>
+          )}
+          {data.values.length != 0 && data.traits.dataType == "STRING" && (
             <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
               <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
                 <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all" fontWeight={600}>
@@ -72,30 +74,32 @@ export default function TraitsShowComponent({ data }) {
                   Source
                 </Box>
               </SimpleGrid>
-              {data.values.map((valueObj) => (
-                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
-                  <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
-                    {valueObj.icon != null && (
-                      <Image
-                        boxSize="2.2rem"
-                        objectFit="contain"
-                        src={getTraitIcon(valueObj.icon)}
-                        alt={valueObj.icon}
-                        ignoreFallback={true}
-                      />
-                    )}
-                  </Box>
-                  <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
-                    {valueObj.value}
-                  </Box>
-                  <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
-                    {valueObj.description}
-                  </Box>
-                  <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
-                    {data.traits.source}
-                  </Box>
-                </SimpleGrid>
-              ))}
+              {data.values
+                .sort((a, b) => a.displayOrder - b.displayOrder)
+                .map((valueObj) => (
+                  <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
+                    <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
+                      {valueObj.icon != null && (
+                        <Image
+                          boxSize="2.2rem"
+                          objectFit="contain"
+                          src={getTraitIcon(valueObj.icon)}
+                          alt={valueObj.icon}
+                          ignoreFallback={true}
+                        />
+                      )}
+                    </Box>
+                    <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
+                      {valueObj.value}
+                    </Box>
+                    <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
+                      {valueObj.description}
+                    </Box>
+                    <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
+                      {data.traits.source}
+                    </Box>
+                  </SimpleGrid>
+                ))}
             </Box>
           )}
           <Text fontWeight={600}>Trait Type</Text>
