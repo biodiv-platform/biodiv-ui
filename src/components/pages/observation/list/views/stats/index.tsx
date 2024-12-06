@@ -28,11 +28,7 @@ export default function StatsView() {
         <TopUploaders filter={filter} />
         <TopIdentifiers filter={filter} />
         <GridItem colSpan={2}>
-          <TaxanomicDistribution
-            data={data.groupTaxon}
-            isLoading={isLoading}
-            taxon={filter?.taxon}
-          />
+          <TaxanomicDistribution data={data.groupTaxon} isLoading={isLoading} />
         </GridItem>
         <SpeciesGroups
           observationData={observationData}
