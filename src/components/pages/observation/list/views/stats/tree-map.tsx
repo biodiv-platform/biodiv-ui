@@ -13,7 +13,6 @@ interface TreeMapProps {
   h?: number;
   w?: number;
   data: any[];
-  taxon: string;
   mt?: number;
   mr?: number;
   mb?: number;
@@ -21,14 +20,8 @@ interface TreeMapProps {
 }
 
 const TreeMapChart = forwardRef(
-  ({ data, taxon, w = 500, h = 400, mt = 30, mr = 30, mb = 30, ml = 30 }: TreeMapProps, ref) => {
-    let rootParent = "Root|1";
-    if (taxon != undefined && taxon != "") {
-      const taxonId = Object.entries(data).filter(([key]) => {
-        return key.endsWith(`.${taxon}`); // No dots (length 1) or one dot (length 2)
-      });
-      rootParent = taxonId[0][0];
-    }
+  ({ data, w = 500, h = 400, mt = 30, mr = 30, mb = 30, ml = 30 }: TreeMapProps, ref) => {
+    const rootParent = "Root|1";
     const [currentParent, setCurrentParent] = useState(rootParent);
     const [currentDataPath, setCurrentDataPath] = useState([rootParent]);
     const [color, setColor] = useState("");
@@ -90,9 +83,9 @@ const TreeMapChart = forwardRef(
         Object.entries(children).length - 1
       ]);
       let colors = Array.from({ length: children.length }, (_, i) => colorScale(i));
-      if(color!=""){
-        colors = colors.filter(c => c !== color);
-        colors.unshift(color)
+      if (color != "") {
+        colors = colors.filter((c) => c !== color);
+        colors.unshift(color);
       }
       svg.select(".chart").selectAll("*").remove();
 
@@ -105,7 +98,7 @@ const TreeMapChart = forwardRef(
         .attr("y", (d) => d.y0 + mt) // Use d.y0 for y position
         .attr("width", (d) => d.x1 - d.x0) // Calculate width
         .attr("height", (d) => d.y1 - d.y0) // Calculate height
-        .attr("fill", (d, i) =>colors[i])
+        .attr("fill", (d, i) => colors[i])
         .attr("stroke", "black") // Set border color
         .attr("stroke-width", 0.5)
         .on("mouseover", (event, d) => tipHelpers.mouseover(event, { data: d }))
@@ -113,10 +106,10 @@ const TreeMapChart = forwardRef(
         .on("mouseleave", tipHelpers.mouseleave)
         .on("click", (event, d) => {
           if (Object.entries(children).length != 0) {
-              const c = children
-                .sort((a, b) => b.value - a.value)
-                .findIndex((child) => child.name === d.data.name);
-              setColor(colors[c]);
+            const c = children
+              .sort((a, b) => b.value - a.value)
+              .findIndex((child) => child.name === d.data.name);
+            setColor(colors[c]);
             setCurrentParent(d.data.name);
             setCurrentDataPath(currentDataPath.concat(d.data.name));
           }
