@@ -81,11 +81,11 @@ export default function SpeciesFieldGroup({
     }
 
     // References
-    case 81: {
-      return (
-        <ReferencesField currentField={currentField} parentField={parentField} level={level} />
-      );
-    }
+    // case 81: {
+    //   return (
+    //     <ReferencesField currentField={currentField} parentField={parentField} level={level} />
+    //   );
+    // }
 
     // Documents
     case 82: {
