@@ -11,7 +11,6 @@ import useSpeciesFields from "../use-species-field";
 import DocumentsField from "./documents";
 import SpeciesFieldHeading from "./heading";
 import OccuranceRecoardSpeciesField from "./occurance-records";
-import ReferencesField from "./references";
 import SpeciesFieldSimple from "./simple";
 import SpeciesFieldSimpleCreate from "./simple/create";
 
