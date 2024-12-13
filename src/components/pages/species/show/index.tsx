@@ -13,7 +13,8 @@ import {
   ModalOverlay,
   OrderedList,
   SimpleGrid,
-  useDisclosure
+  useDisclosure,
+  VStack
 } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
@@ -21,9 +22,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
-import { axCreateSpeciesReferences } from "@services/species.service";
+import EditIcon from "@icons/edit";
+import { Reference } from "@interfaces/species";
+import { axCreateSpeciesReferences, axUpdateSpeciesReferences } from "@services/species.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
@@ -40,9 +43,16 @@ import SpeciesSidebar from "./sidebar";
 import SpeciesSynonymsContainer from "./synonyms";
 import { SpeciesProvider } from "./use-species";
 
-export default function SpeciesShowPageComponent({ species, permissions, licensesList }) {
-  console.debug("Species", species, permissions);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export default function SpeciesShowPageComponent({
+  species: initialSpecies,
+  permissions,
+  licensesList
+}) {
+  console.debug("Species", initialSpecies, permissions);
+  const { isOpen: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
+  const { isOpen: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure();
+  const [selectedReference, setSelectedReference] = useState<Reference | null>(null);
+  const [species, setSpecies] = useState(initialSpecies);
 
   const { t } = useTranslation();
 
@@ -51,7 +61,7 @@ export default function SpeciesShowPageComponent({ species, permissions, license
     [species.fieldData]
   );
 
-  const hFormRef = useForm<any>({
+  const formRef = useForm<any>({
     resolver: yupResolver(
       Yup.object().shape({
         references: Yup.array().of(
@@ -65,26 +75,68 @@ export default function SpeciesShowPageComponent({ species, permissions, license
     ),
     defaultValues: {
       references: []
-      // Add default values for references array
-      // references: species.referencesListing || [] // Initialize with existing data
     }
   });
 
-  const handleOnSave = async (values) => {
-    const payload: any[] = [];
+  const handleSave = async (values) => {
+    if (selectedReference) {
+      // Handle edit
+      const payload = {
+        title: values.references[0].title,
+        url: values.references[0].url === "" ? null : values.references[0].url,
+        speciesId: species.species.id,
+        id: selectedReference.id,
+        speciesFieldId: null
+      };
 
-    values.references.forEach((ref) =>
-      payload.push({
+      const { success, data } = await axUpdateSpeciesReferences(payload, species.species.id);
+      if (success) {
+        // Update the local state
+        setSpecies((prevSpecies) => ({
+          ...prevSpecies,
+          referencesListing: prevSpecies.referencesListing.map((ref) =>
+            ref.id === selectedReference.id ? { ...ref, ...payload } : ref
+          )
+        }));
+        onEditClose();
+        setSelectedReference(null);
+      }
+    } else {
+      // Handle add
+      const payload = values.references.map((ref) => ({
         title: ref.title,
-        url: ref.url,
+        url: ref.url === "" ? null : ref.url,
         speciesId: species.species.id
-      })
-    );
-
-    const { success } = await axCreateSpeciesReferences(payload, species.species.id);
-    if (success) {
-      onClose();
+      }));
+      const { success, data } = await axCreateSpeciesReferences(payload, species.species.id);
+      if (success && data) {
+        // Update the local state with the newly created references
+        setSpecies((prevSpecies) => ({
+          ...prevSpecies,
+          referencesListing: [...prevSpecies.referencesListing, ...data]
+        }));
+        onAddClose();
+      }
     }
+  };
+
+  const handleAddClick = () => {
+    formRef.reset({ references: [] });
+    onAddOpen();
+  };
+
+  const handleEditClick = (reference) => {
+    setSelectedReference(reference);
+    formRef.reset({
+      references: [
+        {
+          id: reference.id,
+          title: reference.title,
+          url: reference.url
+        }
+      ]
+    });
+    onEditOpen();
   };
 
   return (
@@ -102,10 +154,6 @@ export default function SpeciesShowPageComponent({ species, permissions, license
             <SpeciesCommonNamesContainer />
             <SpeciesFields />
 
-            {/*
-            This should be the new component 
-            */}
-
             <ToggleablePanel id="123" icon="📚" title="References">
               <Box margin={3}>
                 <Button
@@ -113,20 +161,25 @@ export default function SpeciesShowPageComponent({ species, permissions, license
                   size="xs"
                   colorScheme="green"
                   leftIcon={<AddIcon />}
-                  onClick={onOpen}
+                  onClick={handleAddClick}
                 >
                   {t("common:add")}
                 </Button>
 
-                <Modal isOpen={isOpen} onClose={onClose}>
+                {/* Add Reference Modal */}
+                <Modal isOpen={isAddOpen} onClose={onAddClose}>
                   <ModalOverlay />
                   <ModalContent>
-                    <FormProvider {...hFormRef}>
-                      <form onSubmit={hFormRef.handleSubmit(handleOnSave)}>
-                        <ModalHeader>References</ModalHeader>
+                    <FormProvider {...formRef}>
+                      <form onSubmit={formRef.handleSubmit(handleSave)}>
+                        <ModalHeader>Add References</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                          <ReferencesField name="references" label={t("species:references")} />
+                          <ReferencesField
+                            name="references"
+                            label={t("species:references")}
+                            isCommonRefEdit={true}
+                          />
                         </ModalBody>
                         <ModalFooter>
                           <Button type="submit" colorScheme="blue" leftIcon={<CheckIcon />}>
@@ -135,8 +188,41 @@ export default function SpeciesShowPageComponent({ species, permissions, license
                           <Button
                             ml={4}
                             leftIcon={<CrossIcon />}
-                            onClick={onClose}
-                            type="button" // Important: specify type="button" to prevent form submission
+                            onClick={onAddClose}
+                            type="button"
+                          >
+                            {t("common:cancel")}
+                          </Button>
+                        </ModalFooter>
+                      </form>
+                    </FormProvider>
+                  </ModalContent>
+                </Modal>
+
+                {/* Edit Reference Modal */}
+                <Modal isOpen={isEditOpen} onClose={onEditClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <FormProvider {...formRef}>
+                      <form onSubmit={formRef.handleSubmit(handleSave)}>
+                        <ModalHeader>Edit Reference</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          <ReferencesField
+                            name="references"
+                            label={t("species:references")}
+                            isCommonRefEdit={false}
+                          />
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button type="submit" colorScheme="blue" leftIcon={<CheckIcon />}>
+                            {t("common:save")}
+                          </Button>
+                          <Button
+                            ml={4}
+                            leftIcon={<CrossIcon />}
+                            onClick={onEditClose}
+                            type="button"
                           >
                             {t("common:cancel")}
                           </Button>
@@ -146,6 +232,8 @@ export default function SpeciesShowPageComponent({ species, permissions, license
                   </ModalContent>
                 </Modal>
               </Box>
+
+              {/* Field References Section */}
               <Box p={4} pb={0}>
                 {fieldsRender.map(([path, references]) => (
                   <Box key={path} mb={3}>
@@ -162,6 +250,8 @@ export default function SpeciesShowPageComponent({ species, permissions, license
                   </Box>
                 ))}
               </Box>
+
+              {/* Common References Section */}
               <Box p={4} pb={0}>
                 <Box fontSize="md" mb={1}>
                   <Box fontWeight={600} fontSize="md" mb={1}>
@@ -170,9 +260,22 @@ export default function SpeciesShowPageComponent({ species, permissions, license
                   <Box>
                     <OrderedList>
                       {species.referencesListing.map((r) => (
-                        <ListItem key={r.id}>
-                          {r.title} {r.url && <ExternalBlueLink href={r.url} />}
-                        </ListItem>
+                        <Box margin={3} key={r.id}>
+                          <VStack align="flex-start">
+                            <Button
+                              variant="outline"
+                              size="xs"
+                              colorScheme="red"
+                              leftIcon={<EditIcon />}
+                              onClick={() => handleEditClick(r)}
+                            >
+                              edit
+                            </Button>
+                            <ListItem>
+                              {r.title} {r.url && <ExternalBlueLink href={r.url} />}
+                            </ListItem>
+                          </VStack>
+                        </Box>
                       ))}
                     </OrderedList>
                   </Box>
@@ -180,7 +283,9 @@ export default function SpeciesShowPageComponent({ species, permissions, license
               </Box>
             </ToggleablePanel>
           </GridItem>
-          <SpeciesSidebar />
+          <GridItem colSpan={2}>
+            <SpeciesSidebar />
+          </GridItem>
         </Grid>
 
         <SpeciesGroups />
