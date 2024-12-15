@@ -170,7 +170,7 @@ export default function SpeciesShowPageComponent({
                 )}
 
                 {/* Add Reference Modal */}
-                <Modal isOpen={isAddOpen} onClose={onAddClose}>
+                <Modal isOpen={isAddOpen} onClose={onAddClose} size="6xl">
                   <ModalOverlay />
                   <ModalContent>
                     <FormProvider {...formRef}>
@@ -203,7 +203,7 @@ export default function SpeciesShowPageComponent({
                 </Modal>
 
                 {/* Edit Reference Modal */}
-                <Modal isOpen={isEditOpen} onClose={onEditClose}>
+                <Modal isOpen={isEditOpen} onClose={onEditClose} size="6xl">
                   <ModalOverlay />
                   <ModalContent>
                     <FormProvider {...formRef}>
@@ -273,7 +273,7 @@ export default function SpeciesShowPageComponent({
                                 leftIcon={<EditIcon />}
                                 onClick={() => handleEditClick(r)}
                               >
-                                edit
+                                Edit
                               </Button>
                             )}
 
