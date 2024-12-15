@@ -138,6 +138,7 @@ export default function SpeciesShowPageComponent({
     });
     onEditOpen();
   };
+  console.log("permissions=", permissions);
 
   return (
     <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
@@ -156,15 +157,17 @@ export default function SpeciesShowPageComponent({
 
             <ToggleablePanel id="123" icon="📚" title="References">
               <Box margin={3}>
-                <Button
-                  variant="outline"
-                  size="xs"
-                  colorScheme="green"
-                  leftIcon={<AddIcon />}
-                  onClick={handleAddClick}
-                >
-                  {t("common:add")}
-                </Button>
+                {permissions.isContributor && (
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    colorScheme="green"
+                    leftIcon={<AddIcon />}
+                    onClick={handleAddClick}
+                  >
+                    {t("common:add")}
+                  </Button>
+                )}
 
                 {/* Add Reference Modal */}
                 <Modal isOpen={isAddOpen} onClose={onAddClose}>
@@ -262,15 +265,18 @@ export default function SpeciesShowPageComponent({
                       {species.referencesListing.map((r) => (
                         <Box margin={3} key={r.id}>
                           <VStack align="flex-start">
-                            <Button
-                              variant="outline"
-                              size="xs"
-                              colorScheme="red"
-                              leftIcon={<EditIcon />}
-                              onClick={() => handleEditClick(r)}
-                            >
-                              edit
-                            </Button>
+                            {permissions.isContributor && (
+                              <Button
+                                variant="outline"
+                                size="xs"
+                                colorScheme="red"
+                                leftIcon={<EditIcon />}
+                                onClick={() => handleEditClick(r)}
+                              >
+                                edit
+                              </Button>
+                            )}
+
                             <ListItem>
                               {r.title} {r.url && <ExternalBlueLink href={r.url} />}
                             </ListItem>
