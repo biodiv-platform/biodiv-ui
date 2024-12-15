@@ -89,7 +89,7 @@ export default function SpeciesShowPageComponent({
         speciesFieldId: null
       };
 
-      const { success, data } = await axUpdateSpeciesReferences(payload, species.species.id);
+      const { success } = await axUpdateSpeciesReferences(payload, species.species.id);
       if (success) {
         // Update the local state
         setSpecies((prevSpecies) => ({
@@ -138,7 +138,6 @@ export default function SpeciesShowPageComponent({
     });
     onEditOpen();
   };
-  console.log("permissions=", permissions);
 
   return (
     <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
