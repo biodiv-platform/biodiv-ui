@@ -25,6 +25,7 @@ import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
 import { Reference } from "@interfaces/species";
 import { axCreateSpeciesReferences, axUpdateSpeciesReferences } from "@services/species.service";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -98,8 +99,11 @@ export default function SpeciesShowPageComponent({
             ref.id === selectedReference.id ? { ...ref, ...payload } : ref
           )
         }));
+        notification("Reference updated successfully", NotificationType.Success);
         onEditClose();
         setSelectedReference(null);
+      } else {
+        notification("Reference could not be updated", NotificationType.Error);
       }
     } else {
       // Handle add
@@ -115,7 +119,10 @@ export default function SpeciesShowPageComponent({
           ...prevSpecies,
           referencesListing: [...prevSpecies.referencesListing, ...data]
         }));
+        notification("Reference added successfully", NotificationType.Success);
         onAddClose();
+      } else {
+        notification("Reference could not be added", NotificationType.Error);
       }
     }
   };
@@ -262,23 +269,22 @@ export default function SpeciesShowPageComponent({
                   <Box>
                     <OrderedList>
                       {species.referencesListing.map((r) => (
-                        <Box margin={3} key={r.id}>
+                        <Box margin={4} key={r.id}>
                           <VStack align="flex-start">
+                            <ListItem>
+                              {r.title} {r.url && <ExternalBlueLink href={r.url} />}
+                            </ListItem>
                             {permissions.isContributor && (
                               <Button
                                 variant="outline"
                                 size="xs"
-                                colorScheme="red"
+                                colorScheme="blue"
                                 leftIcon={<EditIcon />}
                                 onClick={() => handleEditClick(r)}
                               >
-                                Edit
+                                {t("common:edit")}
                               </Button>
                             )}
-
-                            <ListItem>
-                              {r.title} {r.url && <ExternalBlueLink href={r.url} />}
-                            </ListItem>
                           </VStack>
                         </Box>
                       ))}
