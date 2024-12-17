@@ -252,3 +252,27 @@ export const axGetSpeciesIdFromTaxonId = async (taxonId) => {
     return { success: false, data: {} };
   }
 };
+
+export const axCreateSpeciesReferences = async (payload, speciesId) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.SPECIES}/v1/species/add/reference/${speciesId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
+  }
+};
+
+export const axUpdateSpeciesReferences = async (payload, speciesId) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.SPECIES}/v1/species/update/reference/${speciesId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
+  }
+};

@@ -161,12 +161,13 @@ export interface PermissionData {
   role?: string;
 }
 export interface Reference {
-  id?: number; // int64
-  version?: number; // int64
-  speciesFieldId?: number; // int64
-  title?: string;
-  url?: string;
+  id: number | string;
+  title: string;
+  url?: string | null;
+  speciesId?: number | string;
+  speciesFieldId?: number | string | null;
 }
+
 export interface Resource {
   id?: number; // int64
   version?: number; // int64
