@@ -79,13 +79,6 @@ export default function SpeciesFieldGroup({
       return <OccuranceRecoardSpeciesField valueCallback={setChildFieldsHasValue} />;
     }
 
-    // References
-    // case 81: {
-    //   return (
-    //     <ReferencesField currentField={currentField} parentField={parentField} level={level} />
-    //   );
-    // }
-
     // Documents
     case 82: {
       return <DocumentsField />;
