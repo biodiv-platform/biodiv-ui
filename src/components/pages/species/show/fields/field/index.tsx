@@ -11,7 +11,6 @@ import useSpeciesFields from "../use-species-field";
 import DocumentsField from "./documents";
 import SpeciesFieldHeading from "./heading";
 import OccuranceRecoardSpeciesField from "./occurance-records";
-import ReferencesField from "./references";
 import SpeciesFieldSimple from "./simple";
 import SpeciesFieldSimpleCreate from "./simple/create";
 
@@ -78,13 +77,6 @@ export default function SpeciesFieldGroup({
     // ParentField
     case 65: {
       return <OccuranceRecoardSpeciesField valueCallback={setChildFieldsHasValue} />;
-    }
-
-    // References
-    case 81: {
-      return (
-        <ReferencesField currentField={currentField} parentField={parentField} level={level} />
-      );
     }
 
     // Documents

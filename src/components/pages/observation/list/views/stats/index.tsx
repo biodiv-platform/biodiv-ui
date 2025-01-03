@@ -27,12 +27,8 @@ export default function StatsView() {
       <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
         <TopUploaders filter={filter} />
         <TopIdentifiers filter={filter} />
-        <GridItem colSpan={{ base: 1, md: 2 }}>
-          <TaxanomicDistribution
-            data={data.groupTaxon}
-            isLoading={isLoading}
-            taxon={filter?.taxon}
-          />
+        <GridItem colSpan={2}>
+          <TaxanomicDistribution data={data.groupTaxon} isLoading={isLoading} />
         </GridItem>
         <SpeciesGroups
           observationData={observationData}

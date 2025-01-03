@@ -6,7 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFieldArray } from "react-hook-form";
 
-export default function ReferencesField({ name, label }) {
+export default function ReferencesField({ name, label, isCommonRefEdit }) {
   const { t } = useTranslation();
   const { fields, append, remove } = useFieldArray({ name });
 
@@ -19,27 +19,33 @@ export default function ReferencesField({ name, label }) {
           <HStack spacing={4} mb={4}>
             <TextBoxField name={`${name}.${index}.title`} showLabel={false} label="Title" mb={0} />
             <TextBoxField name={`${name}.${index}.url`} showLabel={false} label="URL" mb={0} />
-            <Button
-              variant="outline"
-              colorScheme="red"
-              minW="7rem"
-              onClick={() => remove(index)}
-              leftIcon={<DeleteIcon />}
-            >
-              {t("common:delete")}
-            </Button>
+
+            {isCommonRefEdit && (
+              <Button
+                variant="outline"
+                colorScheme="red"
+                minW="7rem"
+                onClick={() => remove(index)}
+                leftIcon={<DeleteIcon />}
+              >
+                {t("common:delete")}
+              </Button>
+            )}
           </HStack>
         </div>
       ))}
-      <Button
-        variant="outline"
-        colorScheme="green"
-        leftIcon={<AddIcon />}
-        type="button"
-        onClick={() => append({ title: "", url: "" })}
-      >
-        {t("species:add_reference")}
-      </Button>
+
+      {isCommonRefEdit && (
+        <Button
+          variant="outline"
+          colorScheme="green"
+          leftIcon={<AddIcon />}
+          type="button"
+          onClick={() => append({ title: "", url: "" })}
+        >
+          {t("species:add_reference")}
+        </Button>
+      )}
     </Box>
   );
 }
