@@ -15,12 +15,30 @@ export const axCreateTrait = async (params) => {
   }
 };
 
-export const axUpdateTrait = async (params) => {
+export const axUpdateTrait = async (params, traitValues) => {
   try {
     const { data } = await plainHttp.post(
       `${ENDPOINT.TRAITS}/v1/factservice/trait/update`,
-      {}, // Empty object for request body if not needed
+      { traitValues },
       { params }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axUpdateSpeciesTrait = async (id, newFacts) => {
+  try {
+    const { data } = await plainHttp.put(
+      `${ENDPOINT.TRAITS}/v1/factservice/update/type/${id}`,
+      newFacts,
+      {
+        headers: {
+          "Content-Type": "application/json" // Important for file uploads
+        }
+      }
     );
     return { success: true, data };
   } catch (e) {

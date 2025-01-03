@@ -162,7 +162,7 @@ export default function TraitsCreateComponent({ speciesField }) {
       taxonIds: taxonIds,
       icon: null,
       units: trait.units,
-      speciesField: "39",
+      speciesField: trait.speciesField,
       source: trait.source
     };
 

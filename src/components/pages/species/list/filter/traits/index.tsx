@@ -11,8 +11,9 @@ import useSpeciesList from "../../use-species-list";
 import CheckboxFilterPanel from "../shared/checkbox";
 import HsvColorFilter from "../shared/hsv-color-picker";
 import SubAccordion from "../shared/sub-accordion";
+import TraitDateRangeFilter from "../shared/trait-date-range";
 
-const includedDataType = ["COLOR", "STRING"];
+const includedDataType = ["COLOR", "STRING", "DATE"];
 const filterTraitsfromAggregation = (traits, ag) => {
   if (Object.keys(ag?.groupTraitsName)?.length <= 0) return [];
   return traits.map(({ categoryName, traitsValuePairList }) => ({
@@ -54,7 +55,13 @@ export default function TraitsFilter() {
                               label={trait.name}
                             />
                           );
-
+                        case "DATE":
+                          return (
+                            <TraitDateRangeFilter
+                              filterKey={`trait_${trait.id}.season`}
+                              translateKey={trait.name}
+                            />
+                          );
                         default:
                           return (
                             <CheckboxFilterPanel

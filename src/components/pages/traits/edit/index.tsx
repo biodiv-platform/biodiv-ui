@@ -1,14 +1,5 @@
 import { CloseIcon, DragHandleIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  GridItem,
-  Icon,
-  IconButton,
-  Image,
-  SimpleGrid,
-  VisuallyHidden
-} from "@chakra-ui/react";
+import { Box, Button, GridItem, Image, SimpleGrid, VisuallyHidden } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
@@ -90,44 +81,46 @@ export default function TraitsEditComponent({ data }) {
       cursor="grab"
       _hover={{ bg: "lightgray" }}
     >
-      <Box
-        position="relative"
-        left={0}
-        top="50%"
-        transform="translateY(-50%)"
-        cursor="grab"
-        zIndex={2}
-      >
-        <DragHandleIcon boxSize={5} color="gray.500" />
-      </Box>
+      {hForm.watch("dataType") == "STRING" && hForm.watch("traitType") == "RANGE" && (
+        <Box
+          position="relative"
+          left={0}
+          top="50%"
+          transform="translateY(-50%)"
+          cursor="grab"
+          zIndex={2}
+        >
+          <DragHandleIcon boxSize={5} color="gray.500" />
+        </Box>
+      )}
       <TextBoxField name={`values[${value}].value`} label={`Value ${value + 1}`} />
       <TextBoxField name={`values[${value}].description`} label={`Description ${value + 1}`} />
       <Box ml={4}>
-        {hForm.watch("values")[value].icon && (
-          <Image
-            boxSize="2.2rem"
-            objectFit="contain"
-            src={getTraitIcon(hForm.watch("values")[value].icon)}
-            alt={hForm.watch("values")[value].icon}
-            ignoreFallback={true}
-            mb={2}
-          />
-        )}
         <Button
           type="button"
           as="label"
           cursor="pointer"
           w="15"
           size={"sm"}
-          htmlFor="user-profile"
+          htmlFor={value}
           height={70}
           width={70}
           border={"2px dashed #aaa"}
         >
+          {hForm.watch("values")[value].icon && (
+            <Image
+              boxSize="2.2rem"
+              objectFit="contain"
+              src={getTraitIcon(hForm.watch("values")[value].icon)}
+              alt={hForm.watch("values")[value].icon}
+              ignoreFallback={true}
+              mb={2}
+            />
+          )}
           <VisuallyHidden
             as="input"
             type="file"
-            id="user-profile"
+            id={value}
             accept="image/*"
             onChange={handleOnPhotoUpload}
           />
@@ -177,7 +170,13 @@ export default function TraitsEditComponent({ data }) {
   };
 
   const handleOnPhotoUpload = async (e) => {
-    console.log(e.target.files[0]);
+    const index = Number(e.target.id);
+    const { success, data } = await axUploadResource(e.target.files[0], "traits", undefined);
+    if (success) {
+      const values = hForm.watch("values");
+      values[index].icon = data;
+      hForm.setValue("values", values);
+    }
   };
 
   const handleOnUpdate = async (payload) => {
@@ -188,13 +187,9 @@ export default function TraitsEditComponent({ data }) {
       traitTypes: payload.traitType,
       showInObservation: payload.isObservation,
       isParticipatory: payload.isParticipatory,
-      source: payload.source,
-      traitValues: hForm
-        .getValues("values")
-        .map((value) => `${value.id}:${value.description}:${value.value}:${value.icon}`)
-        .join("|")
+      source: payload.source
     };
-    const { success } = await axUpdateTrait(params);
+    const { success } = await axUpdateTrait(params, hForm.getValues("values"));
     if (success) {
       notification("Trait Updated", NotificationType.Success);
       router.push(`/traits/show/${data.traits.id}`, true);
@@ -249,13 +244,11 @@ export default function TraitsEditComponent({ data }) {
                     />
                   </Box>
                 )}
-                {hForm.watch("dataType") == "STRING" && hForm.watch("traitType") == "RANGE" && (
-                  <Box mb={4}>
-                    <Button onClick={handleAddValue} colorScheme="green" mb={4}>
-                      Add Trait Value
-                    </Button>
-                  </Box>
-                )}
+                <Box mb={4}>
+                  <Button onClick={handleAddValue} colorScheme="green" mb={4}>
+                    Add Trait Value
+                  </Button>
+                </Box>
                 <SubmitButton mb={4}>{"Save"}</SubmitButton>
               </Box>
             </form>
