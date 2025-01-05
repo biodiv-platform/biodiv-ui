@@ -15,6 +15,7 @@ import {
   ModalOverlay,
   SimpleGrid
 } from "@chakra-ui/react";
+import { useLocalRouter } from "@components/@core/local-link";
 import TraitInput from "@components/pages/observation/common/trait-input";
 import MultipleCategorialTrait from "@components/pages/observation/common/trait-input/multiple-categorical";
 import SITE_CONFIG from "@configs/site-config";
@@ -23,12 +24,14 @@ import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { axUpdateSpeciesTrait } from "@services/traits.service";
 import { SPECIES_FIELD_UPDATE } from "@static/events";
+import { getParsedUser } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { emit } from "react-gbus";
 
+import useSpecies from "../../../use-species";
 import { ColorEditSwatch } from "../../traits/color/color-edit-swatch";
 
 interface SpeciesFieldSimpleCreateProps {
@@ -42,6 +45,12 @@ export default function SpeciesFieldSimpleCreate({
   traits,
   referencesOnly
 }: SpeciesFieldSimpleCreateProps) {
+  const router = useLocalRouter();
+  const {
+    species: {
+      species: { id: speciesId, taxonConceptId }
+    }
+  } = useSpecies();
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [traitValues, setTraitValues] = useState<any[]>([]);
@@ -227,10 +236,16 @@ export default function SpeciesFieldSimpleCreate({
               <Button
                 leftIcon={<CheckIcon />}
                 onClick={async () => {
-                  const { success, data } = await axUpdateSpeciesTrait("238743", traitValues);
+                  const { success } = await axUpdateSpeciesTrait(
+                    speciesId,
+                    traitValues,
+                    getParsedUser().id,
+                    taxonConceptId
+                  );
                   if (success) {
                     notification("Traits Added", NotificationType.Success);
                     setIsModalOpen(false);
+                    router.reload();
                   } else {
                     notification("Unable to add traits");
                   }

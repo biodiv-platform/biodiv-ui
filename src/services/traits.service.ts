@@ -29,10 +29,10 @@ export const axUpdateTrait = async (params, traitValues) => {
   }
 };
 
-export const axUpdateSpeciesTrait = async (id, newFacts) => {
+export const axUpdateSpeciesTrait = async (id, newFacts, userId, taxonId) => {
   try {
     const { data } = await plainHttp.put(
-      `${ENDPOINT.TRAITS}/v1/factservice/update/type/${id}`,
+      `${ENDPOINT.TRAITS}/v1/factservice/update/species.Species/${id}?userId=${userId}&taxonId=${taxonId}`,
       newFacts,
       {
         headers: {
