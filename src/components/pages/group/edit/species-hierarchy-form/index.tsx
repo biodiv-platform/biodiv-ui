@@ -8,7 +8,7 @@ import { FormProvider, useForm } from "react-hook-form";
 interface SelectedNode {
   id: number;
   header: string;
-  path: null;
+  path: string;
   label: string;
 }
 
@@ -44,7 +44,7 @@ const TreeItem = React.memo(
         onSelect({
           id: parentField.id,
           header: parentField.header,
-          path: null,
+          path: parentField.path,
           label: parentField.label
         });
       }
@@ -134,7 +134,7 @@ const TreeItem = React.memo(
                       onSelect({
                         id: subItem.id,
                         header: subItem.header,
-                        path: null,
+                        path: subItem.path,
                         label: subItem.label
                       })
                     }
@@ -189,13 +189,7 @@ export default function SpeciesHierarchyForm({
       if (isSelected) {
         newSelections = prev.filter((n) => n.id !== node.id);
       } else {
-        newSelections = [
-          ...prev,
-          {
-            ...node,
-            path: null
-          }
-        ];
+        newSelections = [...prev, node];
       }
 
       setValue("selectedNodes", newSelections);
