@@ -20,6 +20,7 @@ import GroupAdministratorsEditForm from "./group-administrator-edit-form";
 import GroupRules from "./group-rules";
 import GroupHomePageCustomization from "./homepage-customization";
 import ObservationCustomizations from "./observation-customisation";
+import SpeciesHierarchyForm from "./species-hierarchy-form";
 
 interface GroupEditPageProps {
   speciesGroups;
@@ -102,6 +103,29 @@ export default function EditGroupPageComponent({
             {(isAdmin || isFounder) && (
               <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
             )}
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem
+          mb={8}
+          bg="white"
+          border="1px solid var(--chakra-colors-gray-300)"
+          borderRadius="md"
+        >
+          <h2>
+            <AccordionButton _expanded={{ bg: "gray.100" }}>
+              <Box flex={1} textAlign="left" fontSize="lg">
+                Species fields
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            <SpeciesHierarchyForm
+              onSubmit={(selectedNodes) => {
+                console.log("Selected nodes:", selectedNodes);
+              }}
+            />
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
