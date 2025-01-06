@@ -122,8 +122,8 @@ export default function EditGroupPageComponent({
           </h2>
           <AccordionPanel pb={4}>
             <SpeciesHierarchyForm
-              onSubmit={(selectedNodes) => {
-                console.log("Selected nodes:", selectedNodes);
+              onSubmit={() => {
+                undefined;
               }}
             />
           </AccordionPanel>

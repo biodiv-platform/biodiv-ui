@@ -1,27 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { Check } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object().shape({
-  selectedNodes: Yup.array().of(
-    Yup.object().shape({
-      id: Yup.number().required(),
-      header: Yup.string().required(),
-      path: Yup.string().nullable(),
-      label: Yup.string().required()
-    })
-  )
-});
 
 interface SelectedNode {
   id: number;
   header: string;
-  path: string | null;
+  path: null;
   label: string;
 }
 
@@ -54,11 +41,10 @@ const TreeItem = React.memo(
 
     const handleSelect = () => {
       if (parentField) {
-        console.log("Selecting node:", parentField);
         onSelect({
           id: parentField.id,
           header: parentField.header,
-          path: parentField.path || null,
+          path: null,
           label: parentField.label
         });
       }
@@ -148,7 +134,7 @@ const TreeItem = React.memo(
                       onSelect({
                         id: subItem.id,
                         header: subItem.header,
-                        path: subItem.path || null,
+                        path: null,
                         label: subItem.label
                       })
                     }
@@ -183,9 +169,8 @@ export default function SpeciesHierarchyForm({
 }: SpeciesHierarchyProps) {
   const [data, setData] = useState<any[]>(initialData);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [apiStatus, setApiStatus] = useState({ loading: false, error: null });
-  const [selectedNodesData, setSelectedNodesData] = useState<SelectedNode[]>([]);
+  const [error, setError] = useState<string>("");
+  const [apiStatus, setApiStatus] = useState({ loading: false, error: "" });
 
   const methods = useForm({
     defaultValues: {
@@ -193,16 +178,10 @@ export default function SpeciesHierarchyForm({
     }
   });
 
-  // Get the form state functions
-  const { setValue, getValues } = methods;
-
-  // Use state to track selections
+  const { setValue } = methods;
   const [selections, setSelections] = useState<SelectedNode[]>([]);
 
-  // Updated handler
   const handleNodeSelect = (node: SelectedNode) => {
-    console.log("Node clicked:", node);
-
     setSelections((prev) => {
       const isSelected = prev.some((n) => n.id === node.id);
       let newSelections;
@@ -210,12 +189,16 @@ export default function SpeciesHierarchyForm({
       if (isSelected) {
         newSelections = prev.filter((n) => n.id !== node.id);
       } else {
-        newSelections = [...prev, node];
+        newSelections = [
+          ...prev,
+          {
+            ...node,
+            path: null
+          }
+        ];
       }
 
-      // Update form values
       setValue("selectedNodes", newSelections);
-      console.log("New selections:", newSelections);
       return newSelections;
     });
   };
@@ -247,9 +230,9 @@ export default function SpeciesHierarchyForm({
     }
 
     try {
-      setApiStatus({ loading: true, error: null });
+      setApiStatus({ loading: true, error: "" });
       await Promise.resolve(onSubmit(selections));
-      setApiStatus({ loading: false, error: null });
+      setApiStatus({ loading: false, error: "" });
     } catch (err) {
       setApiStatus({
         loading: false,
@@ -329,14 +312,7 @@ export default function SpeciesHierarchyForm({
                   )}
                 </Box>
                 <Box>
-                  <SubmitButton
-                    type="submit"
-                    isLoading={apiStatus.loading}
-                    loadingText="Submitting..."
-                    disabled={!selections.length}
-                  >
-                    Submit Selections
-                  </SubmitButton>
+                  <SubmitButton isDisabled={!selections.length}>Submit Selections</SubmitButton>
                 </Box>
               </Box>
             </Box>
