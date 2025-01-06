@@ -68,7 +68,7 @@ export default function TraitsEditComponent({ data }) {
     }
   });
 
-  const SortableItem = SortableElement(({ value }) => (
+  const SortableItem = SortableElement<{ value: number }>(({ value }) => (
     <SimpleGrid
       columns={{ base: 1, md: 5 }}
       spacingX={4}
@@ -144,7 +144,7 @@ export default function TraitsEditComponent({ data }) {
     </SimpleGrid>
   ));
 
-  const SortableList = SortableContainer(({ items }) => {
+  const SortableList = SortableContainer<{items:any}>(({ items }) => {
     return (
       <Box>
         {items.map((value, index) => (
