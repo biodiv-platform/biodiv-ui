@@ -137,6 +137,9 @@
   "list": {
     "title": "Groups"
   },
+  "map": {
+    "title": "Create a map"
+  },
   "member": {
     "joined": "Group joined successfully",
     "joined_error": "Unable to join Group",
@@ -146,8 +149,8 @@
   },
   "name": "Group Name",
   "observation_customisation": "Observation Customisation",
-  "observations_having_media": "By Default, Only Display Observations Having Media",
   "observation_display": "Observation Display",
+  "observations_having_media": "By Default, Only Display Observations Having Media",
   "rules": {
     "add": {
       "failure": "Unable to add Usergroup rule",
@@ -176,6 +179,9 @@
   "save": "Create Group",
   "spatial_coverge": "Spatial Coverage",
   "tags": "Tags",
+  "trait": {
+    "title": "Create a trait"
+  },
   "update": "Update Group",
   "update_admin": "Update Administrators"
 }

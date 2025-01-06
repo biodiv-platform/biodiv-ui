@@ -284,6 +284,7 @@ export default function TraitsCreateComponent({ speciesField }) {
                 value={trait.type}
                 onChange={handleChange}
                 placeholder="Select type"
+                disabled={trait.dataType != "STRING"}
                 required
               >
                 {(trait.dataType == "STRING" || trait.dataType == "COLOR") && (

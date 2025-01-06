@@ -61,7 +61,7 @@ function AdminComponent() {
               borderRadius="md"
               _hover={{ bg: "teal", color: "white" }}
             >
-              <Link href="/map/create">{t("map:create")}</Link>
+              <Link href="/map/create">{t("group:map.title")}</Link>
             </ListItem>
           </List>
         </Box>
@@ -77,7 +77,7 @@ function AdminComponent() {
               borderRadius="md"
               _hover={{ bg: "teal", color: "white" }}
             >
-              <Link href="/traits/create">{"Create a trait"}</Link>
+              <Link href="/traits/create">{t("group:trait.title")}</Link>
             </ListItem>
           </List>
         </Box>

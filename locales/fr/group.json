@@ -136,6 +136,9 @@
   "list": {
     "title": "Groupes"
   },
+  "map": {
+    "title": "Créer une carte"
+  },
   "member": {
     "joined": "Groupe rejoint avec succès",
     "joined_error": "Impossible de rejoindre le groupe",
@@ -175,6 +178,9 @@
   "save": "Créer un groupe",
   "spatial_coverge": "Couverture spatiale",
   "tags": "Mots clés",
+  "trait": {
+    "title": "Créer un trait"
+  },
   "update": "Mise à jour du groupe",
   "update_admin": "Mettre à jour les administrateurs"
 }

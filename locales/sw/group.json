@@ -136,6 +136,9 @@
   "list": {
     "title": "Vikundi."
   },
+  "map": {
+    "title": "Unda ramani"
+  },
   "member": {
     "joined": "Kikundi kilijiunga na mafanikio.",
     "joined_error": "Haiwezi kujiunga na kikundi",
@@ -175,6 +178,9 @@
   "save": "Unda kikundi",
   "spatial_coverge": "Chanjo ya nafasi.",
   "tags": "Tags.",
+  "trait": {
+    "title": "Unda sifa"
+  },
   "update": "Sasisha Group.",
   "update_admin": "Sasisha watendaji"
 }
