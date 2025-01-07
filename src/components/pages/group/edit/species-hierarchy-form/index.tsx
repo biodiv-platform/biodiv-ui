@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { Check } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface SelectedNode {
@@ -17,41 +17,30 @@ interface SpeciesHierarchyProps {
   initialData?: any[];
 }
 
+interface FormValues {
+  selectedNodes: SelectedNode[];
+}
+
 const TreeItem = React.memo(
   ({
     item,
     level,
-    onSelect,
-    selectedNodes = []
+    selectedNodes,
+    onToggleSelect
   }: {
     item: any;
     level: number;
-    onSelect: (node: SelectedNode) => void;
-    selectedNodes: SelectedNode[];
+    selectedNodes: Set<number>;
+    onToggleSelect: (node: SelectedNode) => void;
   }) => {
+    if (!item?.parentField) return null;
+
     const { parentField, childField = [], childFields = [] } = item;
-
-    if (!parentField) {
-      return null;
-    }
-
     const isLeaf = !childField?.length && !childFields?.length;
-    const nodesList = Array.isArray(selectedNodes) ? selectedNodes : [];
-    const isSelected = nodesList.some((node) => node?.id === parentField?.id);
-
-    const handleSelect = () => {
-      if (parentField) {
-        onSelect({
-          id: parentField.id,
-          header: parentField.header,
-          path: parentField.path,
-          label: parentField.label
-        });
-      }
-    };
+    const isSelected = selectedNodes.has(parentField.id);
 
     return (
-      <Box position="relative">
+      <Box>
         <Box display="flex" alignItems="center" py={1.5}>
           {level > 0 && (
             <Box display="flex" alignItems="center">
@@ -72,7 +61,14 @@ const TreeItem = React.memo(
 
             {isLeaf && (
               <Box
-                onClick={handleSelect}
+                onClick={() =>
+                  onToggleSelect({
+                    id: parentField.id,
+                    header: parentField.header,
+                    path: parentField.path,
+                    label: parentField.label
+                  })
+                }
                 cursor="pointer"
                 w="5"
                 h="5"
@@ -98,13 +94,13 @@ const TreeItem = React.memo(
               key={child.parentField?.id}
               item={child}
               level={level + 1}
-              onSelect={onSelect}
               selectedNodes={selectedNodes}
+              onToggleSelect={onToggleSelect}
             />
           ))}
 
           {childFields?.map((subItem: any) => {
-            const isSubItemSelected = nodesList.some((node) => node?.id === subItem?.id);
+            const isSubItemSelected = selectedNodes.has(subItem.id);
 
             return (
               <Box key={subItem.id} position="relative" display="flex" alignItems="center" py={1.5}>
@@ -131,7 +127,7 @@ const TreeItem = React.memo(
 
                   <Box
                     onClick={() =>
-                      onSelect({
+                      onToggleSelect({
                         id: subItem.id,
                         header: subItem.header,
                         path: subItem.path,
@@ -168,72 +164,63 @@ export default function SpeciesHierarchyForm({
   initialData = []
 }: SpeciesHierarchyProps) {
   const [data, setData] = useState<any[]>(initialData);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>("");
-  const [apiStatus, setApiStatus] = useState({ loading: false, error: "" });
+  const [loading, setLoading] = useState(initialData.length === 0);
+  const [error, setError] = useState("");
+  const [selectedNodeMap] = useState(() => new Map<number, SelectedNode>());
+  const [selectedNodeIds] = useState(() => new Set<number>());
 
-  const methods = useForm({
+  // Initialize form context with proper type
+  const methods = useForm<FormValues>({
     defaultValues: {
       selectedNodes: []
     }
   });
 
-  const { setValue } = methods;
-  const [selections, setSelections] = useState<SelectedNode[]>([]);
-
-  const handleNodeSelect = (node: SelectedNode) => {
-    setSelections((prev) => {
-      const isSelected = prev.some((n) => n.id === node.id);
-      let newSelections;
-
-      if (isSelected) {
-        newSelections = prev.filter((n) => n.id !== node.id);
+  const handleToggleSelect = useCallback(
+    (node: SelectedNode) => {
+      if (selectedNodeMap.has(node.id)) {
+        selectedNodeMap.delete(node.id);
+        selectedNodeIds.delete(node.id);
       } else {
-        newSelections = [...prev, node];
+        selectedNodeMap.set(node.id, node);
+        selectedNodeIds.add(node.id);
       }
+      // Update form value
+      methods.setValue("selectedNodes", Array.from(selectedNodeMap.values()));
+    },
+    [selectedNodeMap, selectedNodeIds, methods]
+  );
 
-      setValue("selectedNodes", newSelections);
-      return newSelections;
-    });
-  };
+  const handleSubmit = methods.handleSubmit(async () => {
+    if (selectedNodeMap.size === 0) return;
+
+    try {
+      await onSubmit(Array.from(selectedNodeMap.values()));
+    } catch (err) {
+      console.error(err);
+    }
+  });
 
   useEffect(() => {
+    if (initialData.length > 0) return;
+
+    let mounted = true;
     const loadData = async () => {
       try {
         const { data } = await axGetAllFieldsMeta({ langId: 205 });
-        setData(data);
-        setLoading(false);
+        if (mounted) setData(data);
       } catch (err) {
-        console.error("Error loading data:", err);
-        setError(err instanceof Error ? err.message : "Unknown error occurred");
-        setLoading(false);
+        if (mounted) setError(err instanceof Error ? err.message : "Unknown error");
+      } finally {
+        if (mounted) setLoading(false);
       }
     };
 
-    if (initialData.length === 0) {
-      loadData();
-    } else {
-      setLoading(false);
-    }
+    loadData();
+    return () => {
+      mounted = false;
+    };
   }, [initialData]);
-
-  const handleFormSubmit = async () => {
-    if (!selections.length) {
-      setApiStatus({ loading: false, error: "Please select at least one item" });
-      return;
-    }
-
-    try {
-      setApiStatus({ loading: true, error: "" });
-      await Promise.resolve(onSubmit(selections));
-      setApiStatus({ loading: false, error: "" });
-    } catch (err) {
-      setApiStatus({
-        loading: false,
-        error: err instanceof Error ? err.message : "Unknown error occurred"
-      });
-    }
-  };
 
   if (loading) {
     return (
@@ -261,24 +248,12 @@ export default function SpeciesHierarchyForm({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleFormSubmit)} className="fadeInUp">
+      <form onSubmit={handleSubmit}>
         <Box maxW="4xl" mx="auto" p={6}>
           <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200">
             <Box p={6}>
-              <Box display="flex" alignItems="center" justifyContent="space-between" mb={6}>
-                <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900">
-                  Species Structure
-                </Box>
-                {apiStatus.loading && (
-                  <Box fontSize="sm" color="gray.500">
-                    Saving selections...
-                  </Box>
-                )}
-                {apiStatus.error && (
-                  <Box fontSize="sm" color="red.500">
-                    Error: {apiStatus.error}
-                  </Box>
-                )}
+              <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900" mb={6}>
+                Species Structure
               </Box>
               <Box>
                 {data.map((item) => (
@@ -286,8 +261,8 @@ export default function SpeciesHierarchyForm({
                     key={item.parentField?.id}
                     item={item}
                     level={0}
-                    onSelect={handleNodeSelect}
-                    selectedNodes={selections}
+                    selectedNodes={selectedNodeIds}
+                    onToggleSelect={handleToggleSelect}
                   />
                 ))}
               </Box>
@@ -295,18 +270,13 @@ export default function SpeciesHierarchyForm({
 
             <Box mt={6} borderTopWidth={1} borderColor="gray.200" pt={4} px={6} pb={6}>
               <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Box>
-                  <Box as="span" fontSize="sm" color="gray.600">
-                    Selected items: {selections.length}
-                  </Box>
-                  {apiStatus.error && (
-                    <Box color="red.500" fontSize="sm" mt={1}>
-                      {apiStatus.error}
-                    </Box>
-                  )}
+                <Box as="span" fontSize="sm" color="gray.600">
+                  Selected items: {selectedNodeMap.size}
                 </Box>
                 <Box>
-                  <SubmitButton isDisabled={!selections.length}>Submit Selections</SubmitButton>
+                  <SubmitButton isDisabled={selectedNodeMap.size === 0}>
+                    Submit Selections
+                  </SubmitButton>
                 </Box>
               </Box>
             </Box>
