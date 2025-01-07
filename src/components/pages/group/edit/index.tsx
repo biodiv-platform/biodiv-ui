@@ -137,7 +137,7 @@ export default function EditGroupPageComponent({
           <h2>
             <AccordionButton _expanded={{ bg: "gray.100" }}>
               <Box flex={1} textAlign="left" fontSize="lg">
-                Species fields
+                🧰 Species Fields Customisation
               </Box>
               <AccordionIcon />
             </AccordionButton>
