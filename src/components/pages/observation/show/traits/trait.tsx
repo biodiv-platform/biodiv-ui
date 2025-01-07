@@ -63,7 +63,11 @@ export default function Trait({
         break;
 
       case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
-        setSelectedTraits(speciesTrait.values.filter((tr) => finalTraitValue.includes(tr.id)));
+        if (speciesTrait.traits.dataType != "COLOR") {
+          setSelectedTraits(speciesTrait.values.filter((tr) => finalTraitValue.includes(tr.id)));
+        } else {
+          setSelectedTraits(finalTraitValue.map((v) => ({ value: v })));
+        }
         break;
 
       default:
@@ -139,19 +143,19 @@ export default function Trait({
                 ref={inputRef} // Attach ref to DatePicker's input element
                 customInput={<Input />}
                 selected={
-                  finalTraitValue.length > 0 ? new Date(finalTraitValue[0].split(":")[0]) : null
+                  traitInputValue.length > 0 ? new Date(traitInputValue[0].split(":")[0]) : null
                 }
                 startDate={
-                  finalTraitValue.length > 0 ? new Date(finalTraitValue[0].split(":")[0]) : null
+                  traitInputValue.length > 0 ? new Date(traitInputValue[0].split(":")[0]) : null
                 }
                 endDate={
-                  finalTraitValue.length > 0 && finalTraitValue[0].split(":").length > 1
-                    ? new Date(finalTraitValue[0].split(":")[1])
+                  traitInputValue.length > 0 && traitInputValue[0].split(":").length > 1
+                    ? new Date(traitInputValue[0].split(":")[1])
                     : null
                 }
                 dateFormat={"dd-MM-yyyy"}
                 onChange={(v) => {
-                  setFinalTraitValue([
+                  setTraitInputValue([
                     v
                       .filter((d) => d) // Filter out null or undefined values
                       .map((d) => d.toISOString().split("T")[0]) // Process remaining values
@@ -170,18 +174,18 @@ export default function Trait({
           </Box>
         ) : speciesTrait.traits?.dataType === "COLOR" ? (
           <SimpleGrid columns={{ md: 3 }} spacing={4} mb={3}>
-            {finalTraitValue.map((value, index) => (
+            {traitInputValue.map((value, index) => (
               <ColorEditSwatch
                 key={index}
                 index={index}
                 color={value}
                 onDelete={(index) => {
-                  setFinalTraitValue(finalTraitValue.filter((_, i) => i !== index));
+                  setTraitInputValue(traitInputValue.filter((_, i) => i !== index));
                 }}
                 onChange={(i, v) => {
-                  const updatedTraitValues = [...finalTraitValue];
+                  const updatedTraitValues = [...traitInputValue];
                   updatedTraitValues[i] = v;
-                  setFinalTraitValue(updatedTraitValues);
+                  setTraitInputValue(updatedTraitValues);
                 }}
               />
             ))}
@@ -190,7 +194,7 @@ export default function Trait({
               alignItems="center"
               justifyContent="center"
               onClick={() => {
-                setFinalTraitValue([...finalTraitValue, "rgb(255,255,255)"]);
+                setTraitInputValue([...traitInputValue, "rgb(255,255,255)"]);
               }}
             >
               {"Add"}
@@ -199,7 +203,7 @@ export default function Trait({
         ) : (
           <p>Unsupported Data type</p>
         )
-      ) : (
+      ) : speciesTrait.traits.dataType == "STRING" ? (
         <SimpleGrid columns={[1, 1, 2, 3]} spacing={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
@@ -229,6 +233,110 @@ export default function Trait({
             <Text color="gray.600">{t("common:unknown")}</Text>
           )}
         </SimpleGrid>
+      ) : speciesTrait.traits.dataType == "NUMERIC" ? (
+        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+          {selectedTraits.length ? (
+            selectedTraits.map((tr) => (
+              <Flex
+                key={tr.id}
+                border="2px"
+                borderColor="gray.300"
+                alignItems="center"
+                justifyContent="center"
+                borderRadius="md"
+                lineHeight={1}
+                h="3.25rem"
+              >
+                <div>{tr.value}</div>
+              </Flex>
+            ))
+          ) : (
+            <Text color="gray.600">{t("common:unknown")}</Text>
+          )}
+        </SimpleGrid>
+      ) : speciesTrait.traits.dataType == "NUMERIC" ? (
+        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+          {selectedTraits.length ? (
+            selectedTraits.map((tr) => (
+              <Flex
+                key={tr.id}
+                border="2px"
+                borderColor="gray.300"
+                alignItems="center"
+                justifyContent="center"
+                borderRadius="md"
+                lineHeight={1}
+                h="3.25rem"
+              >
+                <div>{tr.value}</div>
+              </Flex>
+            ))
+          ) : (
+            <Text color="gray.600">{t("common:unknown")}</Text>
+          )}
+        </SimpleGrid>
+      ) : speciesTrait.traits.dataType == "NUMERIC" ? (
+        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+          {selectedTraits.length ? (
+            selectedTraits.map((tr) => (
+              <Flex
+                key={tr.id}
+                border="2px"
+                borderColor="gray.300"
+                alignItems="center"
+                justifyContent="center"
+                borderRadius="md"
+                lineHeight={1}
+                h="3.25rem"
+              >
+                <div>{tr.value}</div>
+              </Flex>
+            ))
+          ) : (
+            <Text color="gray.600">{t("common:unknown")}</Text>
+          )}
+        </SimpleGrid>
+      ) : speciesTrait.traits.dataType == "DATE" ? (
+        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+          {selectedTraits.length ? (
+            selectedTraits.map((tr) => (
+              <Flex
+                key={tr.id}
+                border="2px"
+                borderColor="gray.300"
+                alignItems="center"
+                justifyContent="center"
+                borderRadius="md"
+                lineHeight={1}
+                h="3.25rem"
+              >
+                <div>{tr.value}</div>
+              </Flex>
+            ))
+          ) : (
+            <Text color="gray.600">{t("common:unknown")}</Text>
+          )}
+        </SimpleGrid>
+      ) : speciesTrait.traits.dataType == "COLOR" ? (
+        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+          {selectedTraits.length ? (
+            selectedTraits.map((tr) => (
+              <Box
+                key={tr.value}
+                border="2px"
+                borderColor="rgba(0,0,0,0.1)"
+                borderRadius="md"
+                lineHeight={1}
+                h="3.25rem"
+                bg={tr.value}
+              />
+            ))
+          ) : (
+            <Text color="gray.600">{t("common:unknown")}</Text>
+          )}
+        </SimpleGrid>
+      ) : (
+        <Box></Box>
       )}
 
       <Collapse in={isOpen} unmountOnExit={true}>
