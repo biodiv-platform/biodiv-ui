@@ -10,7 +10,9 @@ import {
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
 import { Role } from "@interfaces/custom";
+import { axUpdateSpeciesFieldsMapping } from "@services/usergroup.service";
 import { getParsedUser, hasAccess } from "@utils/auth";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -20,6 +22,7 @@ import GroupAdministratorsEditForm from "./group-administrator-edit-form";
 import GroupRules from "./group-rules";
 import GroupHomePageCustomization from "./homepage-customization";
 import ObservationCustomizations from "./observation-customisation";
+import SpeciesHierarchyForm from "./species-hierarchy-form";
 
 interface GroupEditPageProps {
   speciesGroups;
@@ -51,6 +54,26 @@ export default function EditGroupPageComponent({
   const { t } = useTranslation();
   const isAdmin = hasAccess([Role.Admin]);
   const isFounder = founders.some((founder) => founder.value === getParsedUser().id);
+
+  const handleSpeciesFieldsSubmit = async (selectedNodes) => {
+    // const payload = {
+    //   speciesFields: selectedNodes.map(node => ({
+    //     fieldId: node.id,
+    //     // Add any other required fields based on your API requirements
+    //   }))
+    // };
+
+    const { success, data } = await axUpdateSpeciesFieldsMapping(userGroupId, selectedNodes);
+
+    if (success) {
+      notification("Fields successfully added", NotificationType.Success);
+      // Optional: Add any post-success logic like refresh or redirect
+    } else {
+      notification("Fields could not be added successfully");
+    }
+
+    return data;
+  };
 
   return (
     <div className="container mt">
@@ -102,6 +125,25 @@ export default function EditGroupPageComponent({
             {(isAdmin || isFounder) && (
               <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
             )}
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem
+          mb={8}
+          bg="white"
+          border="1px solid var(--chakra-colors-gray-300)"
+          borderRadius="md"
+        >
+          <h2>
+            <AccordionButton _expanded={{ bg: "gray.100" }}>
+              <Box flex={1} textAlign="left" fontSize="lg">
+                Species fields
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            <SpeciesHierarchyForm onSubmit={handleSpeciesFieldsSubmit} />
           </AccordionPanel>
         </AccordionItem>
       </Accordion>

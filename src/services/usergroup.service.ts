@@ -282,6 +282,19 @@ export const axAddExsistingCustomField = async (userGroupId, payload) => {
   }
 };
 
+export const axUpdateSpeciesFieldsMapping = async (userGroupId, payload) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.USERGROUP}/v1/group/update/speciesFieldsMapping/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axReorderCustomField = async (userGroupId, payload) => {
   try {
     const { data } = await http.put(
