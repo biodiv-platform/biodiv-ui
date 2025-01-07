@@ -136,6 +136,9 @@
   "list": {
     "title": "Vondrona vondrona"
   },
+  "map": {
+    "title": "Mamorona sarintany"
+  },
   "member": {
     "joined": "Niditra am-pahombiazana ny vondrona",
     "joined_error": "Tsy afaka niditra vondrona",
@@ -175,6 +178,9 @@
   "save": "Mamorona vondrona",
   "spatial_coverge": "Fandrakofana an-tsokosoko",
   "tags": "Tags",
+  "trait": {
+    "title": "Mamorona toetra"
+  },
   "update": "Update Group",
   "update_admin": "Manavao ny mpitantana"
 }
