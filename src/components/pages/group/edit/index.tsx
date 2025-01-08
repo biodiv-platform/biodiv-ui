@@ -56,18 +56,10 @@ export default function EditGroupPageComponent({
   const isFounder = founders.some((founder) => founder.value === getParsedUser().id);
 
   const handleSpeciesFieldsSubmit = async (selectedNodes) => {
-    // const payload = {
-    //   speciesFields: selectedNodes.map(node => ({
-    //     fieldId: node.id,
-    //     // Add any other required fields based on your API requirements
-    //   }))
-    // };
-
     const { success, data } = await axUpdateSpeciesFieldsMapping(userGroupId, selectedNodes);
 
     if (success) {
       notification("Fields successfully added", NotificationType.Success);
-      // Optional: Add any post-success logic like refresh or redirect
     } else {
       notification("Fields could not be added successfully");
     }
