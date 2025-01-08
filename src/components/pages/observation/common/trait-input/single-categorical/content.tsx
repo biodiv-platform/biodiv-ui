@@ -28,13 +28,15 @@ export default function TraitContent(props) {
           boxShadow: "outline"
         }}
       >
-        <Image
-          boxSize="2rem"
-          mr={2}
-          objectFit="contain"
-          src={getTraitIcon(props.icon)}
-          alt={props.value}
-        />
+        {props.icon && (
+          <Image
+            boxSize="2rem"
+            mr={2}
+            objectFit="contain"
+            src={getTraitIcon(props.icon)}
+            alt={props.value}
+          />
+        )}
         <Text>{props.label}</Text>
       </Flex>
     </Box>
