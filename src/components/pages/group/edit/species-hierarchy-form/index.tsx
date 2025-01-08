@@ -17,6 +17,41 @@ interface SpeciesHierarchyProps {
   initialData?: any[];
 }
 
+// Helper function to get all leaf nodes recursively
+const getAllLeafNodes = (items: any[]): SelectedNode[] => {
+  const leafNodes: SelectedNode[] = [];
+
+  const traverse = (item: any) => {
+    const { parentField, childField = [], childFields = [] } = item;
+
+    // Check if it's a leaf node
+    if (!childField?.length && !childFields?.length && parentField) {
+      leafNodes.push({
+        id: parentField.id,
+        header: parentField.header,
+        path: parentField.path,
+        label: parentField.label
+      });
+    }
+
+    // Traverse child fields
+    childField?.forEach(traverse);
+
+    // Check child fields array
+    childFields?.forEach((subItem) => {
+      leafNodes.push({
+        id: subItem.id,
+        header: subItem.header,
+        path: subItem.path,
+        label: subItem.label
+      });
+    });
+  };
+
+  items.forEach(traverse);
+  return leafNodes;
+};
+
 const TreeItem = React.memo(
   ({
     item,
@@ -208,6 +243,10 @@ export default function SpeciesHierarchyForm({
 
     if (initialData.length > 0) {
       setData(initialData);
+      // Pre-select all leaf nodes from initial data
+      const allLeafNodes = getAllLeafNodes(initialData);
+      setSelections(allLeafNodes);
+      setValue("selectedNodes", allLeafNodes);
       setLoading(false);
       setHasLoaded(true);
       return;
@@ -217,6 +256,10 @@ export default function SpeciesHierarchyForm({
       try {
         const { data } = await axGetAllFieldsMeta({ langId: 205 });
         setData(data);
+        // Pre-select all leaf nodes from fetched data
+        const allLeafNodes = getAllLeafNodes(data);
+        setSelections(allLeafNodes);
+        setValue("selectedNodes", allLeafNodes);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error");
       } finally {
@@ -226,7 +269,7 @@ export default function SpeciesHierarchyForm({
     };
 
     loadData();
-  }, [hasLoaded, initialData]);
+  }, [hasLoaded, initialData, setValue]);
 
   const handleFormSubmit = async () => {
     if (!selections.length) {
