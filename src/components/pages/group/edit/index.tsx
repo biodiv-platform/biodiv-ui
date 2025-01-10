@@ -36,6 +36,7 @@ interface GroupEditPageProps {
   moderators;
   userGroupId;
   mediaToggle;
+  langId;
 }
 
 export default function EditGroupPageComponent({
@@ -49,7 +50,8 @@ export default function EditGroupPageComponent({
   moderators,
   homePageDetails,
   userGroupId,
-  mediaToggle
+  mediaToggle,
+  langId
 }: GroupEditPageProps) {
   const { t } = useTranslation();
   const isAdmin = hasAccess([Role.Admin]);
@@ -135,7 +137,7 @@ export default function EditGroupPageComponent({
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <SpeciesHierarchyForm onSubmit={handleSpeciesFieldsSubmit} />
+            <SpeciesHierarchyForm onSubmit={handleSpeciesFieldsSubmit} langId={langId} />
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
