@@ -15,6 +15,7 @@ interface SelectedNode {
 interface SpeciesHierarchyProps {
   onSubmit: (selectedNodes: SelectedNode[]) => void | Promise<void>;
   initialData?: any[];
+  langId: number;
 }
 
 // Helper function to get all leaf nodes recursively
@@ -200,7 +201,8 @@ const TreeItem = React.memo(
 
 export default function SpeciesHierarchyForm({
   onSubmit,
-  initialData = []
+  initialData = [],
+  langId
 }: SpeciesHierarchyProps) {
   const [data, setData] = useState<any[]>(initialData);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -254,7 +256,7 @@ export default function SpeciesHierarchyForm({
 
     const loadData = async () => {
       try {
-        const { data } = await axGetAllFieldsMeta({ langId: 205 });
+        const { data } = await axGetAllFieldsMeta({ langId });
         setData(data);
         // Pre-select all leaf nodes from fetched data
         const allLeafNodes = getAllLeafNodes(data);
