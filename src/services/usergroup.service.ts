@@ -295,6 +295,18 @@ export const axUpdateSpeciesFieldsMapping = async (userGroupId, payload) => {
   }
 };
 
+export const axGetSpeciesFieldsMapping = async (userGroupId) => {
+  try {
+    const { data: ugSfMappingData } = await plainHttp.get(
+      `${ENDPOINT.USERGROUP}/v1/group/userGroupSpeciesFields/${userGroupId}`
+    );
+    return { success: true, ugSfMappingData };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axReorderCustomField = async (userGroupId, payload) => {
   try {
     const { data } = await http.put(

@@ -1,6 +1,7 @@
 import { Box, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
+import { axGetSpeciesFieldsMapping } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -15,6 +16,7 @@ interface SpeciesHierarchyProps {
   onSubmit: (selectedNodes: SelectedNode[]) => void | Promise<void>;
   initialData?: any[];
   langId: number;
+  userGroupId: string;
 }
 
 // Helper function to get all leaf nodes recursively
@@ -181,7 +183,8 @@ const TreeItem = React.memo(
 export default function SpeciesHierarchyForm({
   onSubmit,
   initialData = [],
-  langId
+  langId,
+  userGroupId
 }: SpeciesHierarchyProps) {
   const [data, setData] = useState<any[]>(initialData);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -237,10 +240,13 @@ export default function SpeciesHierarchyForm({
       try {
         const { data } = await axGetAllFieldsMeta({ langId });
         setData(data);
-        // Pre-select all leaf nodes from fetched data
         const allLeafNodes = getAllLeafNodes(data);
-        setSelections(allLeafNodes);
-        setValue("selectedNodes", allLeafNodes);
+        const { ugSfMappingData } = await axGetSpeciesFieldsMapping(userGroupId);
+        const speciesFieldIdSet = new Set(ugSfMappingData.map((item) => item.speciesFieldId));
+        const filtered = allLeafNodes.filter((field) => speciesFieldIdSet.has(field.id));
+
+        setSelections(ugSfMappingData.length > 0 ? filtered : allLeafNodes);
+        setValue("selectedNodes", ugSfMappingData.length > 0 ? filtered : allLeafNodes);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error");
       } finally {
