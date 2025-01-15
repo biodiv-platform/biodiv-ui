@@ -1,7 +1,6 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
-import { Check } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -107,23 +106,13 @@ const TreeItem = React.memo(
             </Box>
 
             {isLeaf && (
-              <Box
-                onClick={handleSelect}
-                cursor="pointer"
-                w="5"
-                h="5"
-                rounded="md"
-                borderWidth={1}
+              <Checkbox
+                isChecked={isSelected}
+                onChange={handleSelect}
+                colorScheme="blue"
+                size="md"
                 mr={2}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                bg={isSelected ? "blue.500" : "white"}
-                borderColor={isSelected ? "blue.500" : "gray.300"}
-                _hover={{ borderColor: "blue.300" }}
-              >
-                {isSelected && <Check size={16} color="white" />}
-              </Box>
+              />
             )}
           </Box>
         </Box>
@@ -165,8 +154,9 @@ const TreeItem = React.memo(
                     </Box>
                   </Box>
 
-                  <Box
-                    onClick={() =>
+                  <Checkbox
+                    isChecked={isSubItemSelected}
+                    onChange={() =>
                       onSelect({
                         id: subItem.id,
                         header: subItem.header,
@@ -174,21 +164,10 @@ const TreeItem = React.memo(
                         label: subItem.label
                       })
                     }
-                    cursor="pointer"
-                    w="5"
-                    h="5"
-                    rounded="md"
-                    borderWidth={1}
+                    colorScheme="blue"
+                    size="md"
                     mr={2}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    bg={isSubItemSelected ? "blue.500" : "white"}
-                    borderColor={isSubItemSelected ? "blue.500" : "gray.300"}
-                    _hover={{ borderColor: "blue.300" }}
-                  >
-                    {isSubItemSelected && <Check size={16} color="white" />}
-                  </Box>
+                  />
                 </Box>
               </Box>
             );
