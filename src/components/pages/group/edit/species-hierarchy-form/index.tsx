@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
-import { Check } from "lucide-react";
+import { axGetSpeciesFieldsMapping } from "@services/usergroup.service";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -16,6 +16,7 @@ interface SpeciesHierarchyProps {
   onSubmit: (selectedNodes: SelectedNode[]) => void | Promise<void>;
   initialData?: any[];
   langId: number;
+  userGroupId: string;
 }
 
 // Helper function to get all leaf nodes recursively
@@ -107,23 +108,13 @@ const TreeItem = React.memo(
             </Box>
 
             {isLeaf && (
-              <Box
-                onClick={handleSelect}
-                cursor="pointer"
-                w="5"
-                h="5"
-                rounded="md"
-                borderWidth={1}
+              <Checkbox
+                isChecked={isSelected}
+                onChange={handleSelect}
+                colorScheme="blue"
+                size="md"
                 mr={2}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                bg={isSelected ? "blue.500" : "white"}
-                borderColor={isSelected ? "blue.500" : "gray.300"}
-                _hover={{ borderColor: "blue.300" }}
-              >
-                {isSelected && <Check size={16} color="white" />}
-              </Box>
+              />
             )}
           </Box>
         </Box>
@@ -165,8 +156,9 @@ const TreeItem = React.memo(
                     </Box>
                   </Box>
 
-                  <Box
-                    onClick={() =>
+                  <Checkbox
+                    isChecked={isSubItemSelected}
+                    onChange={() =>
                       onSelect({
                         id: subItem.id,
                         header: subItem.header,
@@ -174,21 +166,10 @@ const TreeItem = React.memo(
                         label: subItem.label
                       })
                     }
-                    cursor="pointer"
-                    w="5"
-                    h="5"
-                    rounded="md"
-                    borderWidth={1}
+                    colorScheme="blue"
+                    size="md"
                     mr={2}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    bg={isSubItemSelected ? "blue.500" : "white"}
-                    borderColor={isSubItemSelected ? "blue.500" : "gray.300"}
-                    _hover={{ borderColor: "blue.300" }}
-                  >
-                    {isSubItemSelected && <Check size={16} color="white" />}
-                  </Box>
+                  />
                 </Box>
               </Box>
             );
@@ -202,7 +183,8 @@ const TreeItem = React.memo(
 export default function SpeciesHierarchyForm({
   onSubmit,
   initialData = [],
-  langId
+  langId,
+  userGroupId
 }: SpeciesHierarchyProps) {
   const [data, setData] = useState<any[]>(initialData);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -258,10 +240,13 @@ export default function SpeciesHierarchyForm({
       try {
         const { data } = await axGetAllFieldsMeta({ langId });
         setData(data);
-        // Pre-select all leaf nodes from fetched data
         const allLeafNodes = getAllLeafNodes(data);
-        setSelections(allLeafNodes);
-        setValue("selectedNodes", allLeafNodes);
+        const { ugSfMappingData } = await axGetSpeciesFieldsMapping(userGroupId);
+        const speciesFieldIdSet = new Set(ugSfMappingData.map((item) => item.speciesFieldId));
+        const filtered = allLeafNodes.filter((field) => speciesFieldIdSet.has(field.id));
+
+        setSelections(ugSfMappingData.length > 0 ? filtered : allLeafNodes);
+        setValue("selectedNodes", ugSfMappingData.length > 0 ? filtered : allLeafNodes);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error");
       } finally {

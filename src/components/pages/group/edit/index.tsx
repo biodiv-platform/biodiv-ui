@@ -137,7 +137,11 @@ export default function EditGroupPageComponent({
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <SpeciesHierarchyForm onSubmit={handleSpeciesFieldsSubmit} langId={langId} />
+            <SpeciesHierarchyForm
+              onSubmit={handleSpeciesFieldsSubmit}
+              langId={langId}
+              userGroupId={userGroupId}
+            />
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
