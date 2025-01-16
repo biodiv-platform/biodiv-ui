@@ -3,6 +3,8 @@ import {
   Button,
   Grid,
   GridItem,
+  HStack,
+  IconButton,
   ListItem,
   Modal,
   ModalBody,
@@ -16,6 +18,7 @@ import {
   useDisclosure,
   VStack
 } from "@chakra-ui/react";
+import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -24,7 +27,11 @@ import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
 import { Reference } from "@interfaces/species";
-import { axCreateSpeciesReferences, axUpdateSpeciesReferences } from "@services/species.service";
+import {
+  axCreateSpeciesReferences,
+  axDeleteSpeciesReferences,
+  axUpdateSpeciesReferences
+} from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -145,6 +152,10 @@ export default function SpeciesShowPageComponent({
     });
     onEditOpen();
   };
+
+  const commonReferences = species.referencesListing.filter(
+    (reference: Reference) => !reference.isDeleted
+  );
 
   return (
     <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
@@ -268,24 +279,46 @@ export default function SpeciesShowPageComponent({
                   </Box>
                   <Box>
                     <OrderedList>
-                      {species.referencesListing.map((r) => (
+                      {commonReferences.map((r: Reference) => (
                         <Box margin={4} key={r.id}>
-                          <VStack align="flex-start">
-                            <ListItem>
-                              {r.title} {r.url && <ExternalBlueLink href={r.url} />}
-                            </ListItem>
-                            {permissions.isContributor && (
-                              <Button
-                                variant="outline"
-                                size="xs"
-                                colorScheme="blue"
-                                leftIcon={<EditIcon />}
-                                onClick={() => handleEditClick(r)}
-                              >
-                                {t("common:edit")}
-                              </Button>
-                            )}
-                          </VStack>
+                          {!r.isDeleted && (
+                            <VStack align="flex-start">
+                              <ListItem>
+                                {r.title} {r.url && <ExternalBlueLink href={r.url} />}
+                              </ListItem>
+                              {permissions.isContributor && (
+                                <HStack>
+                                  <IconButton
+                                    colorScheme="blue"
+                                    variant="unstyled"
+                                    size="s"
+                                    icon={<EditIcon />}
+                                    onClick={() => handleEditClick(r)}
+                                    aria-label={t("common:edit")}
+                                    title={t("common:edit")}
+                                  />
+                                  <DeleteActionButton
+                                    observationId={r.id}
+                                    title="Delete reference"
+                                    description="Are you sure you want to delete this reference?"
+                                    deleted="Reference deleted successfully"
+                                    deleteFunc={axDeleteSpeciesReferences}
+                                    deleteGnfinderName={true}
+                                    refreshFunc={() => {
+                                      setSpecies((prevSpecies) => ({
+                                        ...prevSpecies,
+                                        referencesListing: prevSpecies.referencesListing.map(
+                                          (ref) =>
+                                            ref.id === r.id ? { ...ref, isDeleted: true } : ref
+                                        )
+                                      }));
+                                      return null; // Keep the null return to satisfy TypeScript
+                                    }}
+                                  />
+                                </HStack>
+                              )}
+                            </VStack>
+                          )}
                         </Box>
                       ))}
                     </OrderedList>
