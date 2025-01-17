@@ -134,6 +134,7 @@ export default function SpeciesShowPageComponent({
 
   const handleAddClick = () => {
     formRef.reset({ references: [] });
+    setSelectedReference(null); // Reset selectedReference when adding new
     onAddOpen();
   };
 
