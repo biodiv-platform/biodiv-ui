@@ -3,7 +3,6 @@ import {
   Button,
   Grid,
   GridItem,
-  HStack,
   IconButton,
   ListItem,
   Modal,
@@ -15,8 +14,7 @@ import {
   ModalOverlay,
   OrderedList,
   SimpleGrid,
-  useDisclosure,
-  VStack
+  useDisclosure
 } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
@@ -280,44 +278,46 @@ export default function SpeciesShowPageComponent({
                   <Box>
                     <OrderedList>
                       {commonReferences.map((r: Reference) => (
-                        <Box margin={4} key={r.id}>
+                        <Box key={r.id}>
                           {!r.isDeleted && (
-                            <VStack align="flex-start">
-                              <ListItem>
-                                {r.title} {r.url && <ExternalBlueLink href={r.url} />}
-                              </ListItem>
-                              {permissions.isContributor && (
-                                <HStack>
-                                  <IconButton
-                                    colorScheme="blue"
-                                    variant="unstyled"
-                                    size="s"
-                                    icon={<EditIcon />}
-                                    onClick={() => handleEditClick(r)}
-                                    aria-label={t("common:edit")}
-                                    title={t("common:edit")}
-                                  />
-                                  <DeleteActionButton
-                                    observationId={r.id}
-                                    title="Delete reference"
-                                    description="Are you sure you want to delete this reference?"
-                                    deleted="Reference deleted successfully"
-                                    deleteFunc={axDeleteSpeciesReferences}
-                                    deleteGnfinderName={true}
-                                    refreshFunc={() => {
-                                      setSpecies((prevSpecies) => ({
-                                        ...prevSpecies,
-                                        referencesListing: prevSpecies.referencesListing.map(
-                                          (ref) =>
-                                            ref.id === r.id ? { ...ref, isDeleted: true } : ref
-                                        )
-                                      }));
+                            <ListItem mb={2}>
+                              <Box display="flex" flexWrap="wrap" alignItems="flex-end" pl={1}>
+                                <Box flex="1" minWidth="0">
+                                  {r.title} {r.url && <ExternalBlueLink href={r.url} />}
+                                </Box>
+                                {permissions.isContributor && (
+                                  <Box display="inline-flex" ml={2}>
+                                    <IconButton
+                                      colorScheme="blue"
+                                      variant="unstyled"
+                                      size="s"
+                                      icon={<EditIcon />}
+                                      onClick={() => handleEditClick(r)}
+                                      aria-label={t("common:edit")}
+                                      title={t("common:edit")}
+                                    />
+                                    <DeleteActionButton
+                                      observationId={r.id}
+                                      title="Delete reference"
+                                      description="Are you sure you want to delete this reference?"
+                                      deleted="Reference deleted successfully"
+                                      deleteFunc={axDeleteSpeciesReferences}
+                                      deleteGnfinderName={true}
+                                      refreshFunc={() => {
+                                        setSpecies((prevSpecies) => ({
+                                          ...prevSpecies,
+                                          referencesListing: prevSpecies.referencesListing.map(
+                                            (ref) =>
+                                              ref.id === r.id ? { ...ref, isDeleted: true } : ref
+                                          )
+                                        }));
                                       return null; // Keep the null return to satisfy TypeScript
-                                    }}
-                                  />
-                                </HStack>
-                              )}
-                            </VStack>
+                                      }}
+                                    />
+                                  </Box>
+                                )}
+                              </Box>
+                            </ListItem>
                           )}
                         </Box>
                       ))}
