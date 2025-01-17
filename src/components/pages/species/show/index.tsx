@@ -40,8 +40,8 @@ import * as Yup from "yup";
 
 import { SpeciesActivity } from "./activity";
 import SpeciesCommonNamesContainer from "./common-names";
+import CommonReferencesField from "./common-references-field";
 import SpeciesFields from "./fields";
-import ReferencesField from "./fields/field/edit/references-field";
 import { generateReferencesList } from "./fields/field/references/utils";
 import SpeciesGallery from "./gallery";
 import SpeciesGroups from "./group";
@@ -195,7 +195,7 @@ export default function SpeciesShowPageComponent({
                         <ModalHeader>Add References</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                          <ReferencesField
+                          <CommonReferencesField
                             name="references"
                             label={t("species:references")}
                             isCommonRefEdit={true}
@@ -228,10 +228,10 @@ export default function SpeciesShowPageComponent({
                         <ModalHeader>Edit Reference</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                          <ReferencesField
+                          <CommonReferencesField
                             name="references"
                             label={t("species:references")}
-                            isCommonRefEdit={false}
+                            isCommonRefEdit={true}
                           />
                         </ModalBody>
                         <ModalFooter>
