@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
+import { SubmitButton } from "@components/form/submit-button";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AddIcon from "@icons/add";
@@ -201,9 +202,7 @@ export default function SpeciesShowPageComponent({
                           />
                         </ModalBody>
                         <ModalFooter>
-                          <Button type="submit" colorScheme="blue" leftIcon={<CheckIcon />}>
-                            {t("common:save")}
-                          </Button>
+                          <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
                           <Button
                             ml={4}
                             leftIcon={<CrossIcon />}
@@ -234,9 +233,7 @@ export default function SpeciesShowPageComponent({
                           />
                         </ModalBody>
                         <ModalFooter>
-                          <Button type="submit" colorScheme="blue" leftIcon={<CheckIcon />}>
-                            {t("common:save")}
-                          </Button>
+                          <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
                           <Button
                             ml={4}
                             leftIcon={<CrossIcon />}
@@ -312,7 +309,7 @@ export default function SpeciesShowPageComponent({
                                               ref.id === r.id ? { ...ref, isDeleted: true } : ref
                                           )
                                         }));
-                                      return null; // Keep the null return to satisfy TypeScript
+                                        return null; // Keep the null return to satisfy TypeScript
                                       }}
                                     />
                                   </Box>
