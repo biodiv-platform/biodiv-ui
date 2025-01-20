@@ -153,9 +153,9 @@ export default function SpeciesShowPageComponent({
     onEditOpen();
   };
 
-  const commonReferences = species.referencesListing.filter(
-    (reference: Reference) => !reference.isDeleted
-  );
+  const commonReferences = species.referencesListing
+    .filter((reference: Reference) => !reference.isDeleted)
+    .sort((a: Reference, b: Reference) => a.title.localeCompare(b.title));
 
   return (
     <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
