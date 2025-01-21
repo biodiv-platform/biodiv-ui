@@ -6,7 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { useFieldArray } from "react-hook-form";
 
-export default function CommonReferencesField({ name, label, isCommonRefEdit }) {
+export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
   const { t } = useTranslation();
   const { fields, append, remove } = useFieldArray({ name });
 
@@ -32,7 +32,7 @@ export default function CommonReferencesField({ name, label, isCommonRefEdit }) 
               multiline={true}
             />
             <TextBoxField name={`${name}.${index}.url`} showLabel={false} label="URL" mb={0} />
-            {isCommonRefEdit && fields.length > 1 && (
+            {isCommonRefAdd && fields.length > 1 && (
               <Button
                 variant="outline"
                 colorScheme="red"
@@ -47,7 +47,7 @@ export default function CommonReferencesField({ name, label, isCommonRefEdit }) 
         </div>
       ))}
 
-      {isCommonRefEdit && (
+      {isCommonRefAdd && (
         <Button
           variant="outline"
           colorScheme="green"

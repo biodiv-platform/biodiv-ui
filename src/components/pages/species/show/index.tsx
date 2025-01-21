@@ -199,7 +199,7 @@ export default function SpeciesShowPageComponent({
                           <CommonReferencesField
                             name="references"
                             label={t("species:references")}
-                            isCommonRefEdit={true}
+                            isCommonRefAdd={true}
                           />
                         </ModalBody>
                         <ModalFooter>
@@ -230,7 +230,7 @@ export default function SpeciesShowPageComponent({
                           <CommonReferencesField
                             name="references"
                             label={t("species:references")}
-                            isCommonRefEdit={true}
+                            isCommonRefAdd={false}
                           />
                         </ModalBody>
                         <ModalFooter>
