@@ -110,7 +110,7 @@ const ReferenceListItem: React.FC<ReferenceListItemProps> = ({
   <ListItem mb={2}>
     <Box display="flex" flexWrap="wrap" alignItems="flex-end" pl={1}>
       <Box flex="1" minWidth="0">
-        <AutoLinkText text={reference.title} />
+        <AutoLinkText text={reference.title} />{" "}
         {reference.url && <ExternalBlueLink href={reference.url} />}
       </Box>
       {permissions.isContributor && children}
