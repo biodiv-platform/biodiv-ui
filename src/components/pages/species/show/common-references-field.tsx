@@ -35,7 +35,7 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
             <TextBoxField
               name={`${name}.${index}.title`}
               showLabel={false}
-              label="Title"
+              label="Text"
               mb={0}
               multiline={true}
             />
