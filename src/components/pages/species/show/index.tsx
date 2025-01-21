@@ -48,6 +48,7 @@ import SpeciesHeader from "./header";
 import SpeciesNavigation from "./navigation";
 import SpeciesSidebar from "./sidebar";
 import SpeciesSynonymsContainer from "./synonyms";
+import { ReferenceListItem } from "./url-utils";
 import { SpeciesProvider } from "./use-species";
 
 export default function SpeciesShowPageComponent({
@@ -278,44 +279,36 @@ export default function SpeciesShowPageComponent({
                       {commonReferences.map((r: Reference) => (
                         <Box key={r.id}>
                           {!r.isDeleted && (
-                            <ListItem mb={2}>
-                              <Box display="flex" flexWrap="wrap" alignItems="flex-end" pl={1}>
-                                <Box flex="1" minWidth="0">
-                                  {r.title} {r.url && <ExternalBlueLink href={r.url} />}
-                                </Box>
-                                {permissions.isContributor && (
-                                  <Box display="inline-flex" ml={2}>
-                                    <IconButton
-                                      colorScheme="blue"
-                                      variant="unstyled"
-                                      size="s"
-                                      icon={<EditIcon />}
-                                      onClick={() => handleEditClick(r)}
-                                      aria-label={t("common:edit")}
-                                      title={t("common:edit")}
-                                    />
-                                    <DeleteActionButton
-                                      observationId={r.id}
-                                      title="Delete reference"
-                                      description="Are you sure you want to delete this reference?"
-                                      deleted="Reference deleted successfully"
-                                      deleteFunc={axDeleteSpeciesReferences}
-                                      deleteGnfinderName={true}
-                                      refreshFunc={() => {
-                                        setSpecies((prevSpecies) => ({
-                                          ...prevSpecies,
-                                          referencesListing: prevSpecies.referencesListing.map(
-                                            (ref) =>
-                                              ref.id === r.id ? { ...ref, isDeleted: true } : ref
-                                          )
-                                        }));
-                                        return null; // Keep the null return to satisfy TypeScript
-                                      }}
-                                    />
-                                  </Box>
-                                )}
+                            <ReferenceListItem reference={r} permissions={permissions}>
+                              <Box display="inline-flex" ml={2}>
+                                <IconButton
+                                  colorScheme="blue"
+                                  variant="unstyled"
+                                  size="s"
+                                  icon={<EditIcon />}
+                                  onClick={() => handleEditClick(r)}
+                                  aria-label={t("common:edit")}
+                                  title={t("common:edit")}
+                                />
+                                <DeleteActionButton
+                                  observationId={r.id}
+                                  title="Delete reference"
+                                  description="Are you sure you want to delete this reference?"
+                                  deleted="Reference deleted successfully"
+                                  deleteFunc={axDeleteSpeciesReferences}
+                                  deleteGnfinderName={true}
+                                  refreshFunc={() => {
+                                    setSpecies((prevSpecies) => ({
+                                      ...prevSpecies,
+                                      referencesListing: prevSpecies.referencesListing.map((ref) =>
+                                        ref.id === r.id ? { ...ref, isDeleted: true } : ref
+                                      )
+                                    }));
+                                    return null;
+                                  }}
+                                />
                               </Box>
-                            </ListItem>
+                            </ReferenceListItem>
                           )}
                         </Box>
                       ))}
