@@ -21,9 +21,17 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
     <Box mb={4}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       {fields.map((reference, index) => (
-        <div data-key={reference.id} key={index}>
+        <Box
+          data-key={reference.id}
+          key={index}
+          borderWidth="1px"
+          borderColor="gray.300"
+          borderRadius="md"
+          p={4}
+          mb={4}
+        >
           <TextBoxField name={`${name}.${index}.id`} hidden={true} label="id" />
-          <VStack spacing={4} mb={10} align="start">
+          <VStack spacing={4} align="start">
             <TextBoxField
               name={`${name}.${index}.title`}
               showLabel={false}
@@ -44,7 +52,7 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
               </Button>
             )}
           </VStack>
-        </div>
+        </Box>
       ))}
 
       {isCommonRefAdd && (
