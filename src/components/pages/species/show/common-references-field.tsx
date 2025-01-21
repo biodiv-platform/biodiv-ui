@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, HStack } from "@chakra-ui/react";
+import { Box, Button, FormLabel, VStack } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
@@ -23,10 +23,15 @@ export default function CommonReferencesField({ name, label, isCommonRefEdit }) 
       {fields.map((reference, index) => (
         <div data-key={reference.id} key={index}>
           <TextBoxField name={`${name}.${index}.id`} hidden={true} label="id" />
-          <HStack spacing={4} mb={4}>
-            <TextBoxField name={`${name}.${index}.title`} showLabel={false} label="Title" mb={0} />
+          <VStack spacing={4} mb={10} align="start">
+            <TextBoxField
+              name={`${name}.${index}.title`}
+              showLabel={false}
+              label="Title"
+              mb={0}
+              multiline={true}
+            />
             <TextBoxField name={`${name}.${index}.url`} showLabel={false} label="URL" mb={0} />
-
             {isCommonRefEdit && fields.length > 1 && (
               <Button
                 variant="outline"
@@ -38,7 +43,7 @@ export default function CommonReferencesField({ name, label, isCommonRefEdit }) 
                 {t("common:delete")}
               </Button>
             )}
-          </HStack>
+          </VStack>
         </div>
       ))}
 
