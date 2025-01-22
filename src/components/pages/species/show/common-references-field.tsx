@@ -38,6 +38,7 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
               label="Text"
               mb={0}
               multiline={true}
+              isRequired={true}
             />
             <TextBoxField name={`${name}.${index}.url`} showLabel={false} label="URL" mb={0} />
             {isCommonRefAdd && fields.length > 1 && (
