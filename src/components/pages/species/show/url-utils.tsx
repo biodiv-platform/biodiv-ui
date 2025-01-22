@@ -60,23 +60,6 @@ interface AutoLinkTextProps {
   text: string;
 }
 
-// Component to render text with automatic URL detection
-// const AutoLinkText: React.FC<AutoLinkTextProps> = ({ text }) => {
-//   const parts = parseTextWithUrls(text);
-
-//   return (
-//     <>
-//       {parts.map((part, index) =>
-//         part.type === "url" ? (
-//           <ExternalBlueLink key={index} href={part.href!} />
-//         ) : (
-//           <span key={index}>{part.content}</span>
-//         )
-//       )}
-//     </>
-//   );
-// };
-
 const AutoLinkText: React.FC<AutoLinkTextProps> = ({ text }) => {
   const parts = parseTextWithUrls(text);
 
