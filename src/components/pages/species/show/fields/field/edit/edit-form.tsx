@@ -178,7 +178,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
               options={licensesList}
               shouldPortal={true}
             />
-            <ReferencesField name="references" label={t("species:references")} isCommonRefEdit={true} />
+            <ReferencesField name="references" label={t("species:references")} />
           </ModalBody>
           <ModalFooter>
             <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />

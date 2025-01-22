@@ -3,6 +3,7 @@ import {
   Button,
   Grid,
   GridItem,
+  IconButton,
   ListItem,
   Modal,
   ModalBody,
@@ -13,10 +14,11 @@ import {
   ModalOverlay,
   OrderedList,
   SimpleGrid,
-  useDisclosure,
-  VStack
+  useDisclosure
 } from "@chakra-ui/react";
+import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
+import { SubmitButton } from "@components/form/submit-button";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AddIcon from "@icons/add";
@@ -24,7 +26,11 @@ import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
 import { Reference } from "@interfaces/species";
-import { axCreateSpeciesReferences, axUpdateSpeciesReferences } from "@services/species.service";
+import {
+  axCreateSpeciesReferences,
+  axDeleteSpeciesReferences,
+  axUpdateSpeciesReferences
+} from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -33,8 +39,8 @@ import * as Yup from "yup";
 
 import { SpeciesActivity } from "./activity";
 import SpeciesCommonNamesContainer from "./common-names";
+import CommonReferencesField from "./common-references-field";
 import SpeciesFields from "./fields";
-import ReferencesField from "./fields/field/edit/references-field";
 import { generateReferencesList } from "./fields/field/references/utils";
 import SpeciesGallery from "./gallery";
 import SpeciesGroups from "./group";
@@ -42,6 +48,7 @@ import SpeciesHeader from "./header";
 import SpeciesNavigation from "./navigation";
 import SpeciesSidebar from "./sidebar";
 import SpeciesSynonymsContainer from "./synonyms";
+import { ReferenceListItem } from "./url-utils";
 import { SpeciesProvider } from "./use-species";
 
 export default function SpeciesShowPageComponent({
@@ -129,6 +136,7 @@ export default function SpeciesShowPageComponent({
 
   const handleAddClick = () => {
     formRef.reset({ references: [] });
+    setSelectedReference(null); // Reset selectedReference when adding new
     onAddOpen();
   };
 
@@ -145,6 +153,10 @@ export default function SpeciesShowPageComponent({
     });
     onEditOpen();
   };
+
+  const commonReferences = species.referencesListing
+    .filter((reference: Reference) => !reference.isDeleted)
+    .sort((a: Reference, b: Reference) => a.title.localeCompare(b.title));
 
   return (
     <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
@@ -184,16 +196,14 @@ export default function SpeciesShowPageComponent({
                         <ModalHeader>Add References</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                          <ReferencesField
+                          <CommonReferencesField
                             name="references"
                             label={t("species:references")}
-                            isCommonRefEdit={true}
+                            isCommonRefAdd={true}
                           />
                         </ModalBody>
                         <ModalFooter>
-                          <Button type="submit" colorScheme="blue" leftIcon={<CheckIcon />}>
-                            {t("common:save")}
-                          </Button>
+                          <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
                           <Button
                             ml={4}
                             leftIcon={<CrossIcon />}
@@ -217,16 +227,14 @@ export default function SpeciesShowPageComponent({
                         <ModalHeader>Edit Reference</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                          <ReferencesField
+                          <CommonReferencesField
                             name="references"
                             label={t("species:references")}
-                            isCommonRefEdit={false}
+                            isCommonRefAdd={false}
                           />
                         </ModalBody>
                         <ModalFooter>
-                          <Button type="submit" colorScheme="blue" leftIcon={<CheckIcon />}>
-                            {t("common:save")}
-                          </Button>
+                          <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
                           <Button
                             ml={4}
                             leftIcon={<CrossIcon />}
@@ -268,24 +276,40 @@ export default function SpeciesShowPageComponent({
                   </Box>
                   <Box>
                     <OrderedList>
-                      {species.referencesListing.map((r) => (
-                        <Box margin={4} key={r.id}>
-                          <VStack align="flex-start">
-                            <ListItem>
-                              {r.title} {r.url && <ExternalBlueLink href={r.url} />}
-                            </ListItem>
-                            {permissions.isContributor && (
-                              <Button
-                                variant="outline"
-                                size="xs"
-                                colorScheme="blue"
-                                leftIcon={<EditIcon />}
-                                onClick={() => handleEditClick(r)}
-                              >
-                                {t("common:edit")}
-                              </Button>
-                            )}
-                          </VStack>
+                      {commonReferences.map((r: Reference) => (
+                        <Box key={r.id}>
+                          {!r.isDeleted && (
+                            <ReferenceListItem reference={r} permissions={permissions}>
+                              <Box display="inline-flex" ml={2}>
+                                <IconButton
+                                  colorScheme="blue"
+                                  variant="unstyled"
+                                  size="s"
+                                  icon={<EditIcon />}
+                                  onClick={() => handleEditClick(r)}
+                                  aria-label={t("common:edit")}
+                                  title={t("common:edit")}
+                                />
+                                <DeleteActionButton
+                                  observationId={r.id}
+                                  title="Delete reference"
+                                  description="Are you sure you want to delete this reference?"
+                                  deleted="Reference deleted successfully"
+                                  deleteFunc={axDeleteSpeciesReferences}
+                                  deleteGnfinderName={true}
+                                  refreshFunc={() => {
+                                    setSpecies((prevSpecies) => ({
+                                      ...prevSpecies,
+                                      referencesListing: prevSpecies.referencesListing.map((ref) =>
+                                        ref.id === r.id ? { ...ref, isDeleted: true } : ref
+                                      )
+                                    }));
+                                    return null;
+                                  }}
+                                />
+                              </Box>
+                            </ReferenceListItem>
+                          )}
                         </Box>
                       ))}
                     </OrderedList>
