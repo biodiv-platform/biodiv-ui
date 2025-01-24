@@ -20,6 +20,23 @@ export const axRequestTaxonPermission = async (payload) => {
   }
 };
 
+export const axUploadTaxonFile = async (formData) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/upload/search`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data" // Important for file uploads
+        }
+      }
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
 export const axVerifyTaxonPermission = async (token) => {
   try {
     await http.post(`${ENDPOINT.SPECIES}/v1/species/grant`, { token });

@@ -55,3 +55,20 @@ export const axGetTraitShowData = async (traitId) => {
     return { success: false, data: {} };
   }
 };
+
+export const axUploadTraitsFile = async (formData) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.TRAITS}/v1/factservice/upload/batch-upload`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data" // Important for file uploads
+        }
+      }
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};

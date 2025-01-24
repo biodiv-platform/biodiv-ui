@@ -99,13 +99,21 @@ export default function TraitsCreateComponent({ speciesField }) {
   });
 
   const [trait, setTrait] = useState<Trait>({
-    name: "",
+    name: Array.isArray(router?.query?.name)
+      ? router.query.name[0] ?? ""
+      : router?.query?.name?.split("(")?.[0] ?? "",
     description: "",
     category: "",
     isObservation: false,
     Paritcipatory: false,
     type: "",
-    dataType: "",
+    dataType: Array.isArray(router?.query?.name)
+      ? router.query.name[0]?.split("(")?.[1]
+        ? "NUMERIC"
+        : router.query.name[0] ?? ""
+      : router?.query?.name?.split("(")?.[1]
+      ? "NUMERIC"
+      : router.query.name?.split("(")?.[0] ?? "",
     values: [
       {
         description: "",
@@ -116,7 +124,13 @@ export default function TraitsCreateComponent({ speciesField }) {
     generalFile: null,
     source: "",
     speciesField: undefined,
-    units: undefined,
+    units: Array.isArray(router?.query?.name)
+      ? router.query.name[0]?.split("(")?.[1]
+        ? router.query.name[0]?.split("(")?.[1]?.slice(0, -1) ?? undefined
+        : router.query.name[0] ?? undefined
+      : router?.query?.name?.split("(")?.[1]
+      ? router.query.name?.split("(")?.[1]?.slice(0, -1) ?? undefined
+      : router.query.name?.split("(")?.[0] ?? undefined,
     min: undefined,
     max: undefined,
     minDate: undefined,
