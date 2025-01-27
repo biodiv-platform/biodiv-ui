@@ -1,7 +1,6 @@
 import SpeciesShowPageComponent from "@components/pages/species/show";
 import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
-import { axGroupList } from "@services/app.service";
 import { axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
 import {
@@ -11,7 +10,6 @@ import {
   axGetSpeciesById
 } from "@services/species.service";
 import { hasAccess } from "@utils/auth";
-import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
 import { normalizeSpeciesPayload } from "@utils/species";
 import React from "react";
@@ -29,13 +27,10 @@ export const getServerSideProps = async (ctx) => {
     ? getLanguageId(ctx.locale)?.ID
     : SITE_CONFIG.LANG.DEFAULT_ID;
 
-  const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL);
-
   const [fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
     await Promise.all([
-      axGetAllFieldsMeta({ langId, userGroupId: currentGroup.id }),
-      axGetSpeciesById(ctx.query.speciesId, currentGroup.id != null ? currentGroup : null),
+      axGetAllFieldsMeta({ langId }),
+      axGetSpeciesById(ctx.query.speciesId),
       axGetspeciesGroups(),
       axCheckSpeciesPermission(ctx, ctx.query.speciesId),
       axGetLicenseList()

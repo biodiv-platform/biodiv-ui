@@ -2,12 +2,9 @@ import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
 
-export const axGetSpeciesById = async (speciesId, payload) => {
+export const axGetSpeciesById = async (speciesId) => {
   try {
-    const { data } = await plainHttp.post(
-      `${ENDPOINT.SPECIES}/v1/species/show/${speciesId}`,
-      payload
-    );
+    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/show/${speciesId}`);
 
     return { success: true, data };
   } catch (e) {
