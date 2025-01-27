@@ -110,6 +110,10 @@ export default function NameMatchingComponent() {
             setCurrentStep(2);
           })();
         } // Proceed to the next step
+        else {
+          setLoading(false);
+          alert("Something went wrong!");
+        }
       } else {
         alert("No file selected!");
       }
@@ -170,30 +174,32 @@ export default function NameMatchingComponent() {
               </Text>
 
               {/* Right-aligned content */}
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rightIcon={<ChevronDownIcon />}
-                  disabled={uploadResult.filter(([, value]) => value.length == 0).length != 0}
-                >
-                  Import As
-                </MenuButton>
-                <MenuList>
-                  <MenuItem onClick={importAsExcel}>Microsoft Excel (.xlsx)</MenuItem>
-                  <MenuItem>
-                    {" "}
-                    <CSVLink
-                      data={finalResult.map((name) => ({
-                        Species: name[1]?.name,
-                        TaxonId: name[1]?.id
-                      }))}
-                      filename="names.csv"
-                    >
-                      Comma Seperated Values (.csv)
-                    </CSVLink>
-                  </MenuItem>
-                </MenuList>
-              </Menu>
+              <Flex justifyContent="flex-end">
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rightIcon={<ChevronDownIcon />}
+                    disabled={uploadResult.filter(([, value]) => value.length == 0).length != 0}
+                  >
+                    Import As
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={importAsExcel}>Microsoft Excel (.xlsx)</MenuItem>
+                    <MenuItem>
+                      {" "}
+                      <CSVLink
+                        data={finalResult.map((name) => ({
+                          Species: name[1]?.name,
+                          TaxonId: name[1]?.id
+                        }))}
+                        filename="names.csv"
+                      >
+                        Comma Seperated Values (.csv)
+                      </CSVLink>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </Flex>
             </Flex>
             <Box mb={4}>
               {uploadResult.filter(([, value]) => value.length == 0).length != 0 && (

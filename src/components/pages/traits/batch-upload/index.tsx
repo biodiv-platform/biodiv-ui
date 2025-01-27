@@ -216,7 +216,11 @@ export default function TraitsBatchUpload() {
                 colorScheme="blue"
                 onClick={handleSubmit}
                 disabled={
-                  Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length != 0
+                  Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length !=
+                    0 ||
+                  Object.entries(uploadResult[0]).filter(
+                    ([key, value]) => key.includes("|DATE") && value.split("|").length != 2
+                  ).length != 0
                 }
               >
                 Batch Upload
@@ -248,6 +252,21 @@ export default function TraitsBatchUpload() {
                         {key.split("|")[0]}
                       </Link>
                     </Box>
+                  ))}
+              </Box>
+            )}
+            {Object.entries(uploadResult[0]).filter(
+              ([key, value]) => key.includes("|DATE") && value.split("|").length != 2
+            ).length != 0 && (
+              <Box bg="red.500" color="white" p={4} borderRadius="md" boxShadow="md" mb={4}>
+                <Text fontSize="md" fontWeight="bold">
+                  <Icon as={WarningIcon} w={5} h={5} mr={4} />
+                  Warning: {"Please add a units column for the following date traits"}!
+                </Text>
+                {Object.entries(uploadResult[0])
+                  .filter(([key, value]) => key.includes("|DATE") && value.split("|").length != 2)
+                  .map(([key]) => (
+                    <Box ml={9}>{key.split("|")[0]}</Box>
                   ))}
               </Box>
             )}
@@ -284,124 +303,137 @@ export default function TraitsBatchUpload() {
                                 <tbody>
                                   {Object.entries(item).map(([key, values]) => (
                                     <>
-                                      {key.split("|")[1] == "true" && values != null && (
-                                        <tr>
-                                          <td>
-                                            <LocalLink
-                                              href={`/traits/show/${key.split("|")[3]}`}
-                                              prefixGroup={true}
-                                            >
-                                              <BlueLink>{key.split("|")[0]} </BlueLink>
-                                            </LocalLink>
-                                          </td>
-                                          <td>
-                                            {key.split("|")[2] == "STRING" && (
-                                              <>
+                                      {key.split("|")[1] == "true" &&
+                                        values != null &&
+                                        (key.split("|")[2] !== "DATE" ||
+                                          values.split("|").length === 2) && (
+                                          <tr>
+                                            <td>
+                                              <LocalLink
+                                                href={`/traits/show/${key.split("|")[3]}`}
+                                                prefixGroup={true}
+                                              >
+                                                <BlueLink>{key.split("|")[0]} </BlueLink>
+                                              </LocalLink>
+                                            </td>
+                                            <td>
+                                              {key.split("|")[2] == "STRING" && (
+                                                <>
+                                                  <SimpleGrid
+                                                    columns={{ base: 1, md: 3 }}
+                                                    spacing={4}
+                                                  >
+                                                    {values
+                                                      .slice(0, -1)
+                                                      .split(",")
+                                                      .filter(
+                                                        (value) => value.split("|")[0] !== "NoMatch"
+                                                      )
+                                                      .map((value) => (
+                                                        <Stack borderWidth={2} borderRadius="md">
+                                                          {value.split("|")[2] && (
+                                                            <Image
+                                                              src={getTraitIcon(
+                                                                value.split("|")[2],
+                                                                20
+                                                              )}
+                                                              boxSize="1.25rem"
+                                                              objectFit="contain"
+                                                              display="inline"
+                                                              verticalAlign="center"
+                                                              mr={1}
+                                                              ignoreFallback={true}
+                                                            />
+                                                          )}
+                                                          <Text>{value.split("|")[1]}</Text>
+                                                        </Stack>
+                                                      ))}
+                                                  </SimpleGrid>
+                                                  {values
+                                                    .slice(0, -1)
+                                                    .split(",")
+                                                    .filter(
+                                                      (value) => value.split("|")[0] === "NoMatch"
+                                                    ).length != 0 && (
+                                                    <Alert bg="red.500" color="white" mt={2}>
+                                                      <AlertIcon color="white" />
+                                                      <Text>
+                                                        {"Couldn't find values: " +
+                                                          values
+                                                            .slice(0, -1) // Slice the array as before
+                                                            .split(",") // Split each value by comma
+                                                            .flat() // Flatten the resulting array of arrays into a single array
+                                                            .filter(
+                                                              (value) =>
+                                                                value.split("|")[0] === "NoMatch"
+                                                            ) // Filter for NoMatch
+                                                            .map((value) => value.split("|")[1]) // Extract the value part after "NoMatch"
+                                                            .join(", ")}
+                                                      </Text>
+                                                    </Alert>
+                                                  )}
+                                                </>
+                                              )}
+                                              {key.split("|")[2] == "NUMERIC" && (
+                                                <SimpleGrid
+                                                  columns={{ base: 1, md: 3 }}
+                                                  spacing={4}
+                                                >
+                                                  <Flex
+                                                    border="2px"
+                                                    borderColor="gray.300"
+                                                    alignItems="center"
+                                                    justifyContent="center"
+                                                    borderRadius="md"
+                                                    lineHeight={1}
+                                                    h="3.25rem"
+                                                  >
+                                                    <div>{values}</div>
+                                                  </Flex>
+                                                </SimpleGrid>
+                                              )}
+                                              {key.split("|")[2] == "DATE" &&
+                                                values.split("|").length == 2 && (
+                                                  <SimpleGrid
+                                                    columns={{ base: 1, md: 3 }}
+                                                    spacing={4}
+                                                  >
+                                                    <Flex
+                                                      border="2px"
+                                                      borderColor="gray.300"
+                                                      alignItems="center"
+                                                      justifyContent="center"
+                                                      borderRadius="md"
+                                                      lineHeight={1}
+                                                      h="3.25rem"
+                                                    >
+                                                      <div>{values.split("|")[0]}</div>
+                                                    </Flex>
+                                                  </SimpleGrid>
+                                                )}
+                                              {key.split("|")[2] == "COLOR" && (
                                                 <SimpleGrid
                                                   columns={{ base: 1, md: 3 }}
                                                   spacing={4}
                                                 >
                                                   {values
                                                     .slice(0, -1)
-                                                    .split(",")
-                                                    .filter(
-                                                      (value) => value.split("|")[0] !== "NoMatch"
-                                                    )
+                                                    .split("|")
                                                     .map((value) => (
-                                                      <Stack borderWidth={2} borderRadius="md">
-                                                        {value.split("|")[2] && (
-                                                          <Image
-                                                            src={getTraitIcon(
-                                                              value.split("|")[2],
-                                                              20
-                                                            )}
-                                                            boxSize="1.25rem"
-                                                            objectFit="contain"
-                                                            display="inline"
-                                                            verticalAlign="center"
-                                                            mr={1}
-                                                            ignoreFallback={true}
-                                                          />
-                                                        )}
-                                                        <Text>{value.split("|")[1]}</Text>
-                                                      </Stack>
+                                                      <Box
+                                                        border="2px"
+                                                        borderColor="rgba(0,0,0,0.1)"
+                                                        borderRadius="md"
+                                                        lineHeight={1}
+                                                        h="3.25rem"
+                                                        bg={value}
+                                                      />
                                                     ))}
                                                 </SimpleGrid>
-                                                {values
-                                                  .slice(0, -1)
-                                                  .split(",")
-                                                  .filter(
-                                                    (value) => value.split("|")[0] === "NoMatch"
-                                                  ).length != 0 && (
-                                                  <Alert bg="red.500" color="white" mt={2}>
-                                                    <AlertIcon color="white" />
-                                                    <Text>
-                                                      {"Couldn't find values: " +
-                                                        values
-                                                          .slice(0, -1) // Slice the array as before
-                                                          .split(",") // Split each value by comma
-                                                          .flat() // Flatten the resulting array of arrays into a single array
-                                                          .filter(
-                                                            (value) =>
-                                                              value.split("|")[0] === "NoMatch"
-                                                          ) // Filter for NoMatch
-                                                          .map((value) => value.split("|")[1]) // Extract the value part after "NoMatch"
-                                                          .join(", ")}
-                                                    </Text>
-                                                  </Alert>
-                                                )}
-                                              </>
-                                            )}
-                                            {key.split("|")[2] == "NUMERIC" && (
-                                              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
-                                                <Flex
-                                                  border="2px"
-                                                  borderColor="gray.300"
-                                                  alignItems="center"
-                                                  justifyContent="center"
-                                                  borderRadius="md"
-                                                  lineHeight={1}
-                                                  h="3.25rem"
-                                                >
-                                                  <div>{values}</div>
-                                                </Flex>
-                                              </SimpleGrid>
-                                            )}
-                                            {key.split("|")[2] == "DATE" && (
-                                              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
-                                                <Flex
-                                                  border="2px"
-                                                  borderColor="gray.300"
-                                                  alignItems="center"
-                                                  justifyContent="center"
-                                                  borderRadius="md"
-                                                  lineHeight={1}
-                                                  h="3.25rem"
-                                                >
-                                                  <div>{values.split("|")[0]}</div>
-                                                </Flex>
-                                              </SimpleGrid>
-                                            )}
-                                            {key.split("|")[2] == "COLOR" && (
-                                              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
-                                                {values
-                                                  .slice(0, -1)
-                                                  .split("|")
-                                                  .map((value) => (
-                                                    <Box
-                                                      border="2px"
-                                                      borderColor="rgba(0,0,0,0.1)"
-                                                      borderRadius="md"
-                                                      lineHeight={1}
-                                                      h="3.25rem"
-                                                      bg={value}
-                                                    />
-                                                  ))}
-                                              </SimpleGrid>
-                                            )}
-                                          </td>
-                                        </tr>
-                                      )}
+                                              )}
+                                            </td>
+                                          </tr>
+                                        )}
                                     </>
                                   ))}
                                 </tbody>

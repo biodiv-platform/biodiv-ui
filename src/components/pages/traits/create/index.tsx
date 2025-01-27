@@ -101,7 +101,7 @@ export default function TraitsCreateComponent({ speciesField }) {
   const [trait, setTrait] = useState<Trait>({
     name: Array.isArray(router?.query?.name)
       ? router.query.name[0] ?? ""
-      : router?.query?.name?.split("(")?.[0] ?? "",
+      : router?.query?.name ?? "",
     description: "",
     category: "",
     isObservation: false,
