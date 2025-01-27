@@ -9,7 +9,7 @@ import { SpeciesTaxonSuggestions } from "./species-taxon-suggestions";
 import { SpeciesCreateProvider } from "./species-taxon-suggestions/create/use-species-create";
 import { SpeciesValidateForm } from "./validate-form";
 
-export function SpeciesCreatePageComponent({ taxonRanksMeta, isSpeciesPage }) {
+export function SpeciesCreatePageComponent({ taxonRanksMeta, isSpeciesPage, name }) {
   const { t } = useTranslation();
 
   return (
@@ -32,7 +32,7 @@ export function SpeciesCreatePageComponent({ taxonRanksMeta, isSpeciesPage }) {
       )}
 
       <SpeciesCreateProvider taxonRanksMeta={taxonRanksMeta} isSpeciesPage={isSpeciesPage}>
-        <SpeciesValidateForm />
+        <SpeciesValidateForm name={name} />
         <CreateSpeciesPageCheck />
         <SpeciesTaxonSuggestions />
       </SpeciesCreateProvider>
