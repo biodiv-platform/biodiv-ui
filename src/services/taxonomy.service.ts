@@ -31,9 +31,9 @@ export const axUploadTaxonFile = async (formData) => {
         }
       }
     );
-    return { success: true, data };
+    return { success: true, data, error: null };
   } catch (e) {
-    return { success: false, data: {} };
+    return { success: false, data: {}, error: e };
   }
 };
 

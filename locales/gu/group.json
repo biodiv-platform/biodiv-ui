@@ -179,6 +179,9 @@
   "spatial_coverge": "સ્પેસિયલ કવરેજ",
   "tags": "ટૅગ્સ",
   "trait": {
+    "batchUpload": {
+      "title": "બેચ અપલોડ લક્ષણો"
+    },
     "title": "એક લક્ષણ બનાવો"
   },
   "update": "ગ્રુપ સુધારો",

@@ -179,6 +179,9 @@
   "spatial_coverge": "Fandrakofana an-tsokosoko",
   "tags": "Tags",
   "trait": {
+    "batchUpload": {
+      "title": "Toetra fandefasana batch"
+    },
     "title": "Mamorona toetra"
   },
   "update": "Update Group",

@@ -179,6 +179,9 @@
   "spatial_coverge": "स्थानिक कवरेज",
   "tags": "टैग",
   "trait": {
+    "batchUpload": {
+      "title": "बैच अपलोड लक्षण"
+    },
     "title": "एक विशेषता बनाएँ"
   },
   "update": "अद्यतन समूह",

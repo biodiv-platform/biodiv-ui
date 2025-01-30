@@ -179,6 +179,9 @@
   "spatial_coverge": "ਸਪੈਟੀਅਲ ਕਵਰੇਜ",
   "tags": "ਟੈਗਸ",
   "trait": {
+    "batchUpload": {
+      "title": "ਬੈਚ ਅਪਲੋਡ ਦੇ ਗੁਣ"
+    },
     "title": "ਇੱਕ ਗੁਣ ਬਣਾਓ"
   },
   "update": "ਅਪਡੇਟ ਸਮੂਹ",

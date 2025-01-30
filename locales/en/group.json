@@ -180,6 +180,9 @@
   "spatial_coverge": "Spatial Coverage",
   "tags": "Tags",
   "trait": {
+    "batchUpload": {
+      "title": "Batch Upload Traits"
+    },
     "title": "Create a trait"
   },
   "update": "Update Group",

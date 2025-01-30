@@ -179,6 +179,9 @@
   "spatial_coverge": "Chanjo ya nafasi.",
   "tags": "Tags.",
   "trait": {
+    "batchUpload": {
+      "title": "Batch kupakia sifa"
+    },
     "title": "Unda sifa"
   },
   "update": "Sasisha Group.",

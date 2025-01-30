@@ -1,6 +1,12 @@
 import { ChevronDownIcon, EditIcon, WarningIcon } from "@chakra-ui/icons";
 import {
   Alert,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   AlertIcon,
   Badge,
   Box,
@@ -13,14 +19,25 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  SimpleGrid,
   Spinner,
-  Text
+  Text,
+  useDisclosure
 } from "@chakra-ui/react";
+import SimpleActionButton from "@components/@core/action-buttons/simple";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
 import DeleteIcon from "@icons/delete";
 import { axCheckSpecies } from "@services/species.service";
 import { axUploadTaxonFile } from "@services/taxonomy.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
+import notification from "@utils/notification";
 import ExcelJS from "exceljs";
 import React, { useState } from "react";
 import { CSVLink } from "react-csv";
@@ -37,8 +54,16 @@ type TaxonData = {
 export default function NameMatchingComponent() {
   const [uploadResult, setUploadResult] = useState<[string, TaxonData[]][]>([]);
   const [finalResult, setFinalResult] = useState<[string, TaxonData, any | null, boolean][]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>();
+  const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const cancelRef = React.useRef(null);
   const [headers, setHeaders] = useState<string[]>([]);
   const [isLoading, setLoading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [selectedColumn, setSelectedColumn] = useState<number | null>(null);
+  const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
+  const options = ["Scientific name"];
   const importAsExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Sheet1");
@@ -50,16 +75,20 @@ export default function NameMatchingComponent() {
     ];
 
     // Add new columns dynamically
-    const newColumns = headers.slice(1).map((header) => ({
-      header: header,
-      key: header
-    }));
+    const newColumns = headers
+      .filter((_, index) => index !== selectedColumn)
+      .map((header) => ({
+        header: header,
+        key: header
+      }));
     worksheet.columns = [...worksheet.columns, ...newColumns];
     finalResult.forEach((name) => {
       if (name[1]) {
         const row = {};
-        for (let i = 1; i < headers.length; i++) {
-          row[headers[i]] = name[0].slice(0, -1).split("|")[i];
+        for (let i = 0; i < headers.length; i++) {
+          if (i != selectedColumn) {
+            row[headers[i]] = name[0].slice(0, -1).split("|")[i];
+          }
         }
         row["Species"] = name[1]["name"];
         (row["TaxonConceptId"] = name[1]["id"]),
@@ -85,37 +114,47 @@ export default function NameMatchingComponent() {
     noClick: true,
     onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
-        const formData = new FormData();
-        formData.append("file", acceptedFiles[0]);
-        setLoading(true); // Add file to formData
+        setFile(acceptedFiles[0]);
+        try {
+          const workbook = new ExcelJS.Workbook();
+          const arrayBuffer = await acceptedFiles[0].arrayBuffer();
+          await workbook.xlsx.load(arrayBuffer);
 
-        const { success, data } = await axUploadTaxonFile(formData);
-        if (success) {
-          setUploadResult(data.data.flatMap((obj) => Object.entries(obj)));
-          setHeaders(data.headers);
-          (async () => {
-            const processedData = await Promise.all(
-              data.data.flatMap((obj) =>
-                Object.entries(obj).map(async ([key, value]: [string, TaxonData[]]) => {
-                  const { success, data } = await axCheckSpecies(value[0]?.id);
-                  if (success) {
-                    return [key, value[0], data, false]; // Return key and the first item of the value array
+          // Assuming the headers are in the first sheet and the first row
+          const worksheet = workbook.worksheets[0]; // Get the first worksheet
+          const firstRow = worksheet.getRow(1); // Get the first row
+          const extractedHeaders: string[] = [];
+
+          firstRow.eachCell((cell, colNumber) => {
+            if (cell.value) {
+              const cellValue = cell.value.toString();
+              extractedHeaders.push(cellValue); // Extract the value of each cell
+              if (cell.value == "Sci Name" || cell.value == "Scientific name") {
+                setColumnMapping((prev) => {
+                  const updatedOptions = [...prev];
+
+                  const existingIndex = updatedOptions.findIndex(([i]) => i === colNumber - 1);
+
+                  if (existingIndex !== -1) {
+                    // Update existing entry
+                    updatedOptions[existingIndex] = [colNumber - 1, "Scientific name"];
+                  } else {
+                    // Add new entry
+                    updatedOptions.push([colNumber - 1, "Scientific name"]);
                   }
-                  return [key, value[0], null, false]; // Return the original key-value pair even if unsuccessful
-                })
-              )
-            );
-            setFinalResult(processedData);
-            setLoading(false);
-            setCurrentStep(2);
-          })();
-        } // Proceed to the next step
-        else {
-          setLoading(false);
-          alert("Something went wrong!");
+
+                  return updatedOptions;
+                });
+              }
+            }
+          });
+          setHeaders(extractedHeaders);
+          onOpen1();
+        } catch (error) {
+          console.error("Error reading Excel file:", error);
         }
       } else {
-        alert("No file selected!");
+        notification("No file selected!");
       }
     },
     accept: {
@@ -151,6 +190,13 @@ export default function NameMatchingComponent() {
                 <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
                   {"Drag and Drop excel files"}
                 </Heading>
+                <Box>
+                  This functionality allows you to match a list of provided names to the
+                  portal&apos;s taxonomy. To validate scientific names, upload a spreadsheet (.xlsx)
+                  containing one column with valid scientific names. The system will display matches
+                  to the provided names. Select a match and download the resulting sheet, which will
+                  include a TaxonConceptId column.
+                </Box>
                 <Button colorScheme="blue" onClick={open} mb={8}>
                   {"Browse"}
                 </Button>
@@ -158,6 +204,107 @@ export default function NameMatchingComponent() {
             </Flex>
           </Box>
         )}
+        <Modal isOpen={isOpen1} onClose={onClose1}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Column Mapping</ModalHeader>
+            <ModalBody>
+              <Text>Please select Scientific Name column</Text>
+              {headers.map((column, index) => {
+                const selectedValue = columnMapping.find(([i]) => i === index)?.[1] || "";
+                return (
+                  <Box borderWidth={"thin"} m={2} borderRadius="md">
+                    <SimpleGrid columns={2} m={2}>
+                      <Text>{column}</Text>
+                      <Select
+                        id="dataType"
+                        name="dataType"
+                        value={selectedValue}
+                        onChange={(e) => {
+                          const { value } = e.target;
+                          setColumnMapping((prev) => {
+                            const updatedOptions = [...prev];
+
+                            // Find if the index already exists
+                            const existingIndex = updatedOptions.findIndex(([i]) => i === index);
+
+                            if (existingIndex !== -1) {
+                              // Update existing entry
+                              updatedOptions[existingIndex] = [index, value];
+                            } else {
+                              // Add new entry
+                              updatedOptions.push([index, value]);
+                            }
+
+                            return updatedOptions;
+                          });
+                        }}
+                        placeholder=" "
+                        required
+                      >
+                        {options.map((field) => (
+                          <option value={field.toString()} style={{ cursor: "pointer" }}>
+                            {field}
+                          </option>
+                        ))}
+                      </Select>
+                    </SimpleGrid>
+                  </Box>
+                );
+              })}
+            </ModalBody>
+            <ModalFooter>
+              <Button mr={3} onClick={onClose1}>
+                Cancel
+              </Button>
+              <Button
+                colorScheme="blue"
+                disabled={columnMapping.filter(([, i]) => i === "Scientific name").length == 0}
+                onClick={async () => {
+                  onClose1();
+                  const formData = new FormData();
+                  if (file) {
+                    formData.append("file", file);
+                  }
+                  const foundItem = columnMapping.find(([, i]) => i === "Scientific name");
+                  if (foundItem) {
+                    setSelectedColumn(foundItem[0]);
+                    formData.append("column", foundItem[0].toString());
+                  }
+                  setLoading(true); // Add file to formData
+
+                  const { success, data, error } = await axUploadTaxonFile(formData);
+                  if (success) {
+                    setUploadResult(data.data.flatMap((obj) => Object.entries(obj)));
+                    setHeaders(data.headers);
+                    (async () => {
+                      const processedData = await Promise.all(
+                        data.data.flatMap((obj) =>
+                          Object.entries(obj).map(async ([key, value]: [string, TaxonData[]]) => {
+                            const { success, data } = await axCheckSpecies(value[0]?.id);
+                            if (success) {
+                              return [key, value[0], data, false]; // Return key and the first item of the value array
+                            }
+                            return [key, value[0], null, false]; // Return the original key-value pair even if unsuccessful
+                          })
+                        )
+                      );
+                      setFinalResult(processedData);
+                      setLoading(false);
+                      setCurrentStep(2);
+                    })();
+                  } // Proceed to the next step
+                  else {
+                    setLoading(false);
+                    notification(error?.message || "Something went wrong!");
+                  }
+                }}
+              >
+                Continue
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
         {currentStep == 2 && (
           <>
             <Flex justifyContent="space-between" alignItems="center" bg="white" p={4}>
@@ -181,7 +328,7 @@ export default function NameMatchingComponent() {
                     rightIcon={<ChevronDownIcon />}
                     disabled={uploadResult.filter(([, value]) => value.length == 0).length != 0}
                   >
-                    Import As
+                    Download As
                   </MenuButton>
                   <MenuList>
                     <MenuItem onClick={importAsExcel}>Microsoft Excel (.xlsx)</MenuItem>
@@ -212,9 +359,15 @@ export default function NameMatchingComponent() {
                     .filter(([, value]) => value.length == 0)
                     .map(([key]) => (
                       <Box ml={9}>
-                        <Link href={`/species/create?name=${key.slice(0, -1).split("|")[0]}`}>
-                          {key.slice(0, -1).split("|")[0]}
-                        </Link>
+                        {selectedColumn && (
+                          <Link
+                            href={`/species/create?name=${
+                              key.slice(0, -1).split("|")[selectedColumn]
+                            }`}
+                          >
+                            {key.slice(0, -1).split("|")[selectedColumn]}
+                          </Link>
+                        )}
                       </Box>
                     ))}
                   <Text>Click on species name for creating species</Text>
@@ -232,17 +385,53 @@ export default function NameMatchingComponent() {
                     finalResult.map((item, index) => (
                       <tr>
                         <td>
-                          <DeleteIcon
-                            ml={2}
-                            mr={4}
-                            color={"red"}
-                            cursor="pointer"
+                          <SimpleActionButton
                             onClick={() => {
-                              setFinalResult(finalResult.filter((_, i) => i !== index));
-                              setUploadResult(uploadResult.filter((_, i) => i != index));
+                              setCurrentIndex(index);
+                              onOpen();
                             }}
+                            icon={<DeleteIcon />}
+                            title={"Delete Scientific Name"}
+                            colorScheme="red"
                           />
-                          {item[0].slice(0, -1).split("|")[0]}
+                          <AlertDialog
+                            isOpen={isOpen}
+                            onClose={onClose}
+                            leastDestructiveRef={cancelRef}
+                          >
+                            <AlertDialogOverlay>
+                              <AlertDialogContent>
+                                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                                  🗑️ {"Delete Scientific Name"}
+                                </AlertDialogHeader>
+                                <AlertDialogBody>
+                                  {"Are you sure you want to delete this scientific name?"}
+                                </AlertDialogBody>
+
+                                <AlertDialogFooter>
+                                  <Button ref={cancelRef} onClick={onClose}>
+                                    {"Cancel"}
+                                  </Button>
+                                  <Button
+                                    colorScheme="red"
+                                    onClick={() => {
+                                      setFinalResult(
+                                        finalResult.filter((_, i) => i !== currentIndex)
+                                      );
+                                      setUploadResult(
+                                        uploadResult.filter((_, i) => i != currentIndex)
+                                      );
+                                      onClose();
+                                    }}
+                                    ml={3}
+                                  >
+                                    {"Delete"}
+                                  </Button>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialogOverlay>
+                          </AlertDialog>
+                          {selectedColumn && item[0].slice(0, -1).split("|")[selectedColumn]}
                         </td>
                         <td>
                           {item[3] == false && (
@@ -286,6 +475,12 @@ export default function NameMatchingComponent() {
                             <Alert bg="blue.50">
                               <AlertIcon />
                               <Text>{"Species Page exists for this name match"}</Text>
+                            </Alert>
+                          )}
+                          {!item[2] && item[3] == false && uploadResult[index][1].length != 0 && (
+                            <Alert bg="red.500" color="white">
+                              <AlertIcon color="white" />
+                              <Text>{"Species Page does not exist for this name match"}</Text>
                             </Alert>
                           )}
                           {item[3] == true && (
