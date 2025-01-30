@@ -55,7 +55,7 @@ export default function ObservationCustomFieldInput({
       return (
         <TextBoxField
           name={name}
-          type={dataType === ("INTEGER" || "DECIMAL") ? "number" : "text"}
+          type={dataType === "INTEGER" || dataType === "DECIMAL" ? "number" : "text"}
           label={label}
           hint={hint}
           isRequired={isRequired}
