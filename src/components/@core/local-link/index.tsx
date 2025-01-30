@@ -67,7 +67,12 @@ function LocalLink({ prefixGroup, params, ...props }: Props) {
   return localPath.startsWith("http") || props?.hardLink ? (
     cloneElement(props.children, { ...props?.children?.props, href: localPath })
   ) : (
-    <NextLink {...props} href={localPath} prefetch={false} passHref={true} />
+    <NextLink
+      {...props}
+      href={localPath}
+      prefetch={false}
+      passHref={true}
+      legacyBehavior />
   );
 }
 

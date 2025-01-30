@@ -12,9 +12,9 @@ const SpeciesGroupsFilter = () => {
   const speciesGroupList = useMemo(
     () =>
       speciesGroup
-        ?.filter((o) => o.name !== "All") // removes All from filter explicitly
+        ?.filter((o) => o.name !== "All")
         .sort((a, b) => (a?.order || 0) - (b.order || 0)),
-    speciesGroup
+    [speciesGroup]
   );
 
   const onChange = (v) => {
