@@ -1,14 +1,6 @@
-import { ChevronDownIcon, EditIcon, WarningIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, WarningIcon } from "@chakra-ui/icons";
 import {
   Alert,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  AlertIcon,
-  Badge,
   Box,
   Button,
   Flex,
@@ -19,29 +11,23 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Select,
-  SimpleGrid,
   Spinner,
   Text,
   useDisclosure
 } from "@chakra-ui/react";
-import SimpleActionButton from "@components/@core/action-buttons/simple";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
-import DeleteIcon from "@icons/delete";
 import { axCheckSpecies } from "@services/species.service";
 import { axUploadTaxonFile } from "@services/taxonomy.service";
-import { TAXON_BADGE_COLORS } from "@static/constants";
 import notification from "@utils/notification";
 import ExcelJS from "exceljs";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { CSVLink } from "react-csv";
 import { useDropzone } from "react-dropzone";
+
+import ColumnMapper from "../common/column-mapper";
+import NameTable from "./name-table";
 
 type TaxonData = {
   id: string; // or whatever the correct type is for 'id'
@@ -53,22 +39,23 @@ type TaxonData = {
 
 export default function NameMatchingComponent() {
   const [uploadResult, setUploadResult] = useState<[string, TaxonData[]][]>([]);
-  const [finalResult, setFinalResult] = useState<[string, TaxonData, any | null, boolean][]>([]);
-  const [currentIndex, setCurrentIndex] = useState<number>();
+  const [finalResult, setFinalResult] = useState<
+    [string, TaxonData, any | null, boolean, number][]
+  >([]);
   const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const cancelRef = React.useRef(null);
   const [headers, setHeaders] = useState<string[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [selectedColumn, setSelectedColumn] = useState<number | null>(null);
   const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
+  const [filter, setFilter] = useState<string>("Matched");
+  const { t } = useTranslation();
   const options = ["Scientific name"];
   const importAsExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Sheet1");
     worksheet.columns = [
-      { header: "Species", key: "Species" },
+      { header: "ScientificName", key: "ScientificName" },
       { header: "TaxonConceptId", key: "TaxonConceptId" },
       { header: "GroupName", key: "GroupName" },
       { header: "SpeciesId", key: "SpeciesId" }
@@ -83,20 +70,30 @@ export default function NameMatchingComponent() {
       }));
     worksheet.columns = [...worksheet.columns, ...newColumns];
     finalResult.forEach((name) => {
-      if (name[1]) {
+      if (name[1] && filter != "Unmatched") {
         const row = {};
         for (let i = 0; i < headers.length; i++) {
           if (i != selectedColumn) {
             row[headers[i]] = name[0].slice(0, -1).split("|")[i];
           }
         }
-        row["Species"] = name[1]["name"];
+        row["ScientificName"] = name[1]["name"];
         (row["TaxonConceptId"] = name[1]["id"]),
           (row["GroupName"] = name[1]["group_name"]),
           (row["SpeciesId"] = name[2]);
         worksheet.addRow(row);
-      } else {
-        worksheet.addRow({});
+      } else if (name[1] == undefined && filter != "Matched") {
+        const row = {};
+        for (let i = 0; i < headers.length; i++) {
+          if (i != selectedColumn) {
+            row[headers[i]] = name[0].slice(0, -1).split("|")[i];
+          }
+        }
+
+        row["ScientificName"] = name[0].slice(0, -1).split("|")[
+          selectedColumn ? selectedColumn : 0
+        ];
+        worksheet.addRow(row);
       }
     });
     const buffer = await workbook.xlsx.writeBuffer();
@@ -109,6 +106,45 @@ export default function NameMatchingComponent() {
     a.download = "names.xlsx";
     a.click();
     window.URL.revokeObjectURL(url);
+  };
+  const columnMappingSubmit = async () => {
+    onClose1();
+    const formData = new FormData();
+    if (file) {
+      formData.append("file", file);
+    }
+    const foundItem = columnMapping.find(([, i]) => i === "Scientific name");
+    if (foundItem) {
+      setSelectedColumn(foundItem[0]);
+      formData.append("column", foundItem[0].toString());
+    }
+    setLoading(true); // Add file to formData
+
+    const { success, data, error } = await axUploadTaxonFile(formData);
+    if (success) {
+      setUploadResult(data.data.flatMap((obj) => Object.entries(obj)));
+      setHeaders(data.headers);
+      (async () => {
+        const processedData = await Promise.all(
+          data.data.flatMap((obj, objindex) =>
+            Object.entries(obj).map(async ([key, value]: [string, TaxonData[]]) => {
+              const { success, data } = await axCheckSpecies(value[0]?.id);
+              if (success) {
+                return [key, value[0], data, false, objindex]; // Ensure index is correctly mapped
+              }
+              return [key, value[0], null, false, objindex]; // Keep index consistent even on failure
+            })
+          )
+        );
+        setFinalResult(processedData);
+        setLoading(false);
+        setCurrentStep(2);
+      })();
+    } // Proceed to the next step
+    else {
+      setLoading(false);
+      notification(error?.message || "Something went wrong!");
+    }
   };
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     noClick: true,
@@ -129,7 +165,10 @@ export default function NameMatchingComponent() {
             if (cell.value) {
               const cellValue = cell.value.toString();
               extractedHeaders.push(cellValue); // Extract the value of each cell
-              if (cell.value == "Sci Name" || cell.value == "Scientific name") {
+              if (
+                cell.value.toString().toLowerCase() == "Sci Name".toLowerCase() ||
+                cell.value.toString().toLowerCase() == "Scientific name".toLowerCase()
+              ) {
                 setColumnMapping((prev) => {
                   const updatedOptions = [...prev];
 
@@ -168,7 +207,9 @@ export default function NameMatchingComponent() {
   return (
     <Box p={4}>
       {/* Progress Bar */}
-
+      <Alert status="info" borderRadius="md" mb={4} alignItems="top">
+        {t("traits:name_matching.description")}
+      </Alert>
       <Box mt={6} p={4} borderWidth={1} borderRadius="md" bg="gray.50">
         {isLoading && <Spinner></Spinner>}
         {currentStep == 1 && !isLoading && (
@@ -190,13 +231,6 @@ export default function NameMatchingComponent() {
                 <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
                   {"Drag and Drop excel files"}
                 </Heading>
-                <Box>
-                  This functionality allows you to match a list of provided names to the
-                  portal&apos;s taxonomy. To validate scientific names, upload a spreadsheet (.xlsx)
-                  containing one column with valid scientific names. The system will display matches
-                  to the provided names. Select a match and download the resulting sheet, which will
-                  include a TaxonConceptId column.
-                </Box>
                 <Button colorScheme="blue" onClick={open} mb={8}>
                   {"Browse"}
                 </Button>
@@ -204,107 +238,18 @@ export default function NameMatchingComponent() {
             </Flex>
           </Box>
         )}
-        <Modal isOpen={isOpen1} onClose={onClose1}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Column Mapping</ModalHeader>
-            <ModalBody>
-              <Text>Please select Scientific Name column</Text>
-              {headers.map((column, index) => {
-                const selectedValue = columnMapping.find(([i]) => i === index)?.[1] || "";
-                return (
-                  <Box borderWidth={"thin"} m={2} borderRadius="md">
-                    <SimpleGrid columns={2} m={2}>
-                      <Text>{column}</Text>
-                      <Select
-                        id="dataType"
-                        name="dataType"
-                        value={selectedValue}
-                        onChange={(e) => {
-                          const { value } = e.target;
-                          setColumnMapping((prev) => {
-                            const updatedOptions = [...prev];
-
-                            // Find if the index already exists
-                            const existingIndex = updatedOptions.findIndex(([i]) => i === index);
-
-                            if (existingIndex !== -1) {
-                              // Update existing entry
-                              updatedOptions[existingIndex] = [index, value];
-                            } else {
-                              // Add new entry
-                              updatedOptions.push([index, value]);
-                            }
-
-                            return updatedOptions;
-                          });
-                        }}
-                        placeholder=" "
-                        required
-                      >
-                        {options.map((field) => (
-                          <option value={field.toString()} style={{ cursor: "pointer" }}>
-                            {field}
-                          </option>
-                        ))}
-                      </Select>
-                    </SimpleGrid>
-                  </Box>
-                );
-              })}
-            </ModalBody>
-            <ModalFooter>
-              <Button mr={3} onClick={onClose1}>
-                Cancel
-              </Button>
-              <Button
-                colorScheme="blue"
-                disabled={columnMapping.filter(([, i]) => i === "Scientific name").length == 0}
-                onClick={async () => {
-                  onClose1();
-                  const formData = new FormData();
-                  if (file) {
-                    formData.append("file", file);
-                  }
-                  const foundItem = columnMapping.find(([, i]) => i === "Scientific name");
-                  if (foundItem) {
-                    setSelectedColumn(foundItem[0]);
-                    formData.append("column", foundItem[0].toString());
-                  }
-                  setLoading(true); // Add file to formData
-
-                  const { success, data, error } = await axUploadTaxonFile(formData);
-                  if (success) {
-                    setUploadResult(data.data.flatMap((obj) => Object.entries(obj)));
-                    setHeaders(data.headers);
-                    (async () => {
-                      const processedData = await Promise.all(
-                        data.data.flatMap((obj) =>
-                          Object.entries(obj).map(async ([key, value]: [string, TaxonData[]]) => {
-                            const { success, data } = await axCheckSpecies(value[0]?.id);
-                            if (success) {
-                              return [key, value[0], data, false]; // Return key and the first item of the value array
-                            }
-                            return [key, value[0], null, false]; // Return the original key-value pair even if unsuccessful
-                          })
-                        )
-                      );
-                      setFinalResult(processedData);
-                      setLoading(false);
-                      setCurrentStep(2);
-                    })();
-                  } // Proceed to the next step
-                  else {
-                    setLoading(false);
-                    notification(error?.message || "Something went wrong!");
-                  }
-                }}
-              >
-                Continue
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+        <ColumnMapper
+          options={options}
+          manyOptions={[]}
+          isOpen={isOpen1}
+          onClose={onClose1}
+          description={"Please select Scientific Name column"}
+          headers={headers}
+          columnMapping={columnMapping}
+          setColumnMapping={setColumnMapping}
+          onSubmit={columnMappingSubmit}
+          optionDisabled={columnMapping.filter(([, i]) => i === "Scientific name").length == 0}
+        />
         {currentStep == 2 && (
           <>
             <Flex justifyContent="space-between" alignItems="center" bg="white" p={4}>
@@ -323,11 +268,7 @@ export default function NameMatchingComponent() {
               {/* Right-aligned content */}
               <Flex justifyContent="flex-end">
                 <Menu>
-                  <MenuButton
-                    as={Button}
-                    rightIcon={<ChevronDownIcon />}
-                    disabled={uploadResult.filter(([, value]) => value.length == 0).length != 0}
-                  >
+                  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                     Download As
                   </MenuButton>
                   <MenuList>
@@ -359,7 +300,7 @@ export default function NameMatchingComponent() {
                     .filter(([, value]) => value.length == 0)
                     .map(([key]) => (
                       <Box ml={9}>
-                        {selectedColumn && (
+                        {selectedColumn != null && (
                           <Link
                             href={`/species/create?name=${
                               key.slice(0, -1).split("|")[selectedColumn]
@@ -373,167 +314,55 @@ export default function NameMatchingComponent() {
                   <Text>Click on species name for creating species</Text>
                 </Box>
               )}
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>{"Species Name"}</th>
-                    <th>{"Name Matches"}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {finalResult &&
-                    finalResult.map((item, index) => (
-                      <tr>
-                        <td>
-                          <SimpleActionButton
-                            onClick={() => {
-                              setCurrentIndex(index);
-                              onOpen();
-                            }}
-                            icon={<DeleteIcon />}
-                            title={"Delete Scientific Name"}
-                            colorScheme="red"
-                          />
-                          <AlertDialog
-                            isOpen={isOpen}
-                            onClose={onClose}
-                            leastDestructiveRef={cancelRef}
-                          >
-                            <AlertDialogOverlay>
-                              <AlertDialogContent>
-                                <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                                  🗑️ {"Delete Scientific Name"}
-                                </AlertDialogHeader>
-                                <AlertDialogBody>
-                                  {"Are you sure you want to delete this scientific name?"}
-                                </AlertDialogBody>
-
-                                <AlertDialogFooter>
-                                  <Button ref={cancelRef} onClick={onClose}>
-                                    {"Cancel"}
-                                  </Button>
-                                  <Button
-                                    colorScheme="red"
-                                    onClick={() => {
-                                      setFinalResult(
-                                        finalResult.filter((_, i) => i !== currentIndex)
-                                      );
-                                      setUploadResult(
-                                        uploadResult.filter((_, i) => i != currentIndex)
-                                      );
-                                      onClose();
-                                    }}
-                                    ml={3}
-                                  >
-                                    {"Delete"}
-                                  </Button>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialogOverlay>
-                          </AlertDialog>
-                          {selectedColumn && item[0].slice(0, -1).split("|")[selectedColumn]}
-                        </td>
-                        <td>
-                          {item[3] == false && (
-                            <Text m={4}>
-                              {item[1]?.name}
-                              <Badge ml={2}>{item[1]?.rank}</Badge>
-                              <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.status]}>
-                                {item[1]?.status}
-                              </Badge>
-                              <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.position]}>
-                                {item[1]?.position}
-                              </Badge>
-                              {uploadResult[index][1].length > 1 && (
-                                <Text float="right" color="green.700" fontWeight="bold">
-                                  {uploadResult[index][1].length + " Matches Found"}
-                                  <EditIcon
-                                    ml={2}
-                                    color="teal"
-                                    cursor="pointer"
-                                    onClick={() => {
-                                      const updatedMatching = [...finalResult];
-                                      updatedMatching[index][3] = true;
-                                      setFinalResult(updatedMatching);
-                                    }}
-                                  />
-                                </Text>
-                              )}
-                              {uploadResult[index][1].length == 1 && (
-                                <Text float="right" color="green.700" fontWeight="bold">
-                                  {"1 Match Found"}
-                                </Text>
-                              )}
-                              {uploadResult[index][1].length == 0 && (
-                                <Text float="right" color="red.700" fontWeight="bold">
-                                  {"No Match Found"}
-                                </Text>
-                              )}
-                            </Text>
-                          )}
-                          {item[2] && item[3] == false && (
-                            <Alert bg="blue.50">
-                              <AlertIcon />
-                              <Text>{"Species Page exists for this name match"}</Text>
-                            </Alert>
-                          )}
-                          {!item[2] && item[3] == false && uploadResult[index][1].length != 0 && (
-                            <Alert bg="red.500" color="white">
-                              <AlertIcon color="white" />
-                              <Text>{"Species Page does not exist for this name match"}</Text>
-                            </Alert>
-                          )}
-                          {item[3] == true && (
-                            <Box>
-                              {uploadResult &&
-                                uploadResult[index][1].map((option) => (
-                                  <Box
-                                    padding={4}
-                                    _hover={{
-                                      bg: "lightgrey"
-                                    }}
-                                    cursor="pointer"
-                                    onClick={async () => {
-                                      const updatedMatching = [...finalResult];
-                                      updatedMatching[index][1] = option;
-                                      const { success, data } = await axCheckSpecies(option["id"]);
-                                      if (success) {
-                                        updatedMatching[index][2] = data;
-                                      } else {
-                                        updatedMatching[index][2] = null;
-                                      }
-                                      updatedMatching[index][3] = false;
-                                      setFinalResult(updatedMatching);
-                                    }}
-                                  >
-                                    {option["name"]}
-                                    <Badge ml={2}>{option["rank"]}</Badge>
-                                    <Badge
-                                      ml={2}
-                                      colorScheme={TAXON_BADGE_COLORS[option["status"]]}
-                                    >
-                                      {option["status"]}
-                                    </Badge>
-                                    <Badge
-                                      ml={2}
-                                      colorScheme={TAXON_BADGE_COLORS[option["position"]]}
-                                    >
-                                      {option["position"]}
-                                    </Badge>
-                                    {option["id"] == item[1]?.id && (
-                                      <Badge ml={2} colorScheme="blue">
-                                        {"Selected"}
-                                      </Badge>
-                                    )}
-                                  </Box>
-                                ))}
-                            </Box>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <Box mb={4} width="100%">
+                <Select
+                  maxW="10rem"
+                  ml="auto"
+                  value={filter}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setFilter(value);
+                  }}
+                >
+                  <option value="All">All</option>
+                  <option value="Matched">Matched</option>
+                  <option value="Unmatched">Unmatched</option>
+                </Select>
+              </Box>
+              {filter == "Matched" && (
+                <>
+                <NameTable
+                  finalResult={finalResult.filter(([, value, ,]) => value != undefined)}
+                  selectedColumn={selectedColumn}
+                  uploadResult={uploadResult}
+                  setFinalResult={setFinalResult}
+                  setUploadResult={setUploadResult}
+                />
+                <Button mt={4} colorScheme="blue" onClick={()=>{
+                  importAsExcel()
+                }}>
+                  Continue with Batch Upload
+                </Button>
+                </>
+              )}
+              {filter == "All" && (
+                <NameTable
+                  finalResult={finalResult}
+                  selectedColumn={selectedColumn}
+                  uploadResult={uploadResult}
+                  setFinalResult={setFinalResult}
+                  setUploadResult={setUploadResult}
+                />
+              )}
+              {filter == "Unmatched" && (
+                <NameTable
+                  finalResult={finalResult.filter(([, value, ,]) => value == undefined)}
+                  selectedColumn={selectedColumn}
+                  uploadResult={uploadResult}
+                  setFinalResult={setFinalResult}
+                  setUploadResult={setUploadResult}
+                />
+              )}
             </Box>
           </>
         )}

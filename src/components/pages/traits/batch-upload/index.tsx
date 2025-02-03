@@ -12,7 +12,8 @@ import {
   Progress,
   SimpleGrid,
   Stack,
-  Text
+  Text,
+  useDisclosure
 } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
@@ -22,26 +23,68 @@ import { axGetUserList } from "@services/user.service";
 import { getTraitIcon } from "@utils/media";
 import notification from "@utils/notification";
 import dayjs from "dayjs";
+import ExcelJS from "exceljs";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+
+import ColumnMapper from "../common/column-mapper";
 
 export default function TraitsBatchUpload() {
   const [uploadResult, setUploadResult] = useState<Map<string, string>[]>([]);
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
+  const [file, setFile] = useState<File | null>(null);
+  const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
+  const [headers, setHeaders] = useState<string[]>([]);
+  const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
   const [successfulUpload, setSuccessfulUpload] = useState(0);
   const [failedUpload, setFailedUpload] = useState(0);
   const [showstats, setshowstats] = useState(false);
+  const options = ["ScientificName", "TaxonConceptId", "SpeciesId", "Attribution", "Contributor"];
+  const manyOptions = ["Traits"];
+  const { t } = useTranslation();
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     noClick: true,
     onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
-        const formData = new FormData();
-        formData.append("file", acceptedFiles[0]); // Add file to formData
+        setFile(acceptedFiles[0]);
+        try {
+          const workbook = new ExcelJS.Workbook();
+          const arrayBuffer = await acceptedFiles[0].arrayBuffer();
+          await workbook.xlsx.load(arrayBuffer);
 
-        const { success, data } = await axUploadTraitsFile(formData);
-        if (success) {
-          setUploadResult(data);
-          setCurrentStep(2);
+          // Assuming the headers are in the first sheet and the first row
+          const worksheet = workbook.worksheets[0]; // Get the first worksheet
+          const firstRow = worksheet.getRow(1); // Get the first row
+          const extractedHeaders: string[] = [];
+
+          firstRow.eachCell((cell, colNumber) => {
+            if (cell.value) {
+              const cellValue = cell.value.toString();
+              extractedHeaders.push(cellValue);
+              if (options.some((option) => option.toLowerCase() === cellValue.toLowerCase())) {
+                setColumnMapping((prev) => {
+                  const updatedOptions = [...prev];
+
+                  const existingIndex = updatedOptions.findIndex(([i]) => i === colNumber - 1);
+
+                  if (existingIndex !== -1) {
+                    // Update existing entry
+                    updatedOptions[existingIndex] = [colNumber - 1, cellValue];
+                  } else {
+                    // Add new entry
+                    updatedOptions.push([colNumber - 1, cellValue]);
+                  }
+
+                  return updatedOptions;
+                });
+              }
+            }
+          });
+          setHeaders(extractedHeaders);
+          onOpen1();
+        } catch (error) {
+          console.error("Error reading Excel file:", error);
         }
       } else {
         alert("No file selected!");
@@ -68,13 +111,19 @@ export default function TraitsBatchUpload() {
             .split(",")
             .filter((value) => value.split("|")[0] === "NoMatch").length == 0
         ) {
-          facts[key.split("|")[3]] = value
+          facts[
+            key.split("|")[3] +
+              ("Attribution" in uploadResult[i] ? "|" + uploadResult[i]["Attribution"] : "")
+          ] = value
             .slice(0, -1)
             .split(",")
             .map((trait) => trait.split("|")[0]);
         }
         if (key.split("|")[2] == "NUMERIC" && value) {
-          facts[key.split("|")[3]] = [value];
+          facts[
+            key.split("|")[3] +
+              ("Attribution" in uploadResult[i] ? "|" + uploadResult[i]["Attribution"] : "")
+          ] = [value];
         }
         if (key.split("|")[2] == "DATE" && value) {
           const dates: string[] = [];
@@ -100,36 +149,44 @@ export default function TraitsBatchUpload() {
                 dates.push(dayjs(date).format("YYYY-MM-DD"));
               });
           }
-          facts[key.split("|")[3]] = dates;
+          facts[
+            key.split("|")[3] +
+              ("Attribution" in uploadResult[i] ? "|" + uploadResult[i]["Attribution"] : "")
+          ] = dates;
         }
         if (key.split("|")[2] == "COLOR" && value) {
-          facts[key.split("|")[3]] = value.slice(0, -1).split("|");
+          facts[
+            key.split("|")[3] +
+              ("Attribution" in uploadResult[i] ? "|" + uploadResult[i]["Attribution"] : "")
+          ] = value.slice(0, -1).split("|");
         }
       });
-      const { success, data } = await axGetUserList({ email: uploadResult[i]["Contributor"] });
+      const { success, data } = await axGetUserList({
+        email: uploadResult[i]["Contributor"]
+      });
       if (success) {
         if (Object.keys(facts).length != 0) {
-          if (uploadResult[i]["SpeciesId"] && uploadResult[i]["TaxonConceptId"]) {
+          if (uploadResult[i]["Species Id"] && uploadResult[i]["Taxon Concept Id"]) {
             const { success } = await axUpdateSpeciesTrait(
-              parseInt(uploadResult[i]["SpeciesId"], 10),
+              parseInt(uploadResult[i]["Species Id"], 10),
               facts,
               data["userList"][0]["id"],
-              parseInt(uploadResult[i]["TaxonConceptId"], 10)
+              parseInt(uploadResult[i]["Taxon Concept Id"], 10)
             );
             if (success) {
               setSuccessfulUpload((prev) => prev + 1);
             } else {
               setFailedUpload((prev) => prev + 1);
               notification(
-                `Something went wrong while adding traits to ${uploadResult[i]["Species"]}`
+                `Something went wrong while adding traits to ${uploadResult[i]["Scientific Name"]}`
               );
             }
-          } else if (!uploadResult[i]["TaxonConceptId"]) {
+          } else if (!uploadResult[i]["Taxon Concept Id"]) {
             setFailedUpload((prev) => prev + 1);
-            notification(`Taxon Id not available for ${uploadResult[i]["Species"]}`);
-          } else if (!uploadResult[i]["SpeciesId"]) {
+            notification(`Taxon Id not available for ${uploadResult[i]["Scientific Name"]}`);
+          } else if (!uploadResult[i]["Species Id"]) {
             setFailedUpload((prev) => prev + 1);
-            notification(`Species Page doesn't exist for ${uploadResult[i]["Species"]}`);
+            notification(`Species Page doesn't exist for ${uploadResult[i]["Scientific Name"]}`);
           }
         }
       } else {
@@ -139,9 +196,61 @@ export default function TraitsBatchUpload() {
     }
   };
 
+  const columnMappingSubmit = async () => {
+    const formData = new FormData();
+    if (file) {
+      formData.append("file", file);
+    }
+
+    formData.append(
+      "scientificName",
+      columnMapping.filter(([, i]) => i === "ScientificName")[0][0].toString()
+    );
+
+    formData.append(
+      "TaxonConceptId",
+      columnMapping.filter(([, i]) => i === "TaxonConceptId")[0][0].toString()
+    );
+
+    formData.append(
+      "SpeciesId",
+      columnMapping.filter(([, i]) => i === "SpeciesId")[0][0].toString()
+    );
+
+    formData.append(
+      "Contributor",
+      columnMapping.filter(([, i]) => i === "Contributor")[0][0].toString()
+    );
+
+    if (columnMapping.filter(([, i]) => i === "Attribution").length > 0) {
+      formData.append(
+        "Attribution",
+        columnMapping.filter(([, i]) => i === "Attribution")[0][0].toString()
+      );
+    }
+
+    formData.append(
+      "traits",
+      columnMapping
+        .filter(([, i]) => i === "Traits")
+        .map(([first]) => first) // Extract the first element
+        .join("|")
+    );
+
+    const { success, data } = await axUploadTraitsFile(formData);
+    onClose1();
+    if (success) {
+      setUploadResult(data);
+      setCurrentStep(2);
+    }
+  };
+
   const [currentStep, setCurrentStep] = useState(1);
   return (
     <Box p={4}>
+      <Alert status="info" borderRadius="md" mb={4} alignItems="top">
+        {t("traits:trait_matching.description")}
+      </Alert>
       {currentStep == 1 && (
         <Box
           {...getRootProps()}
@@ -168,6 +277,20 @@ export default function TraitsBatchUpload() {
           </Flex>
         </Box>
       )}
+      <ColumnMapper
+        options={options}
+        manyOptions={manyOptions}
+        isOpen={isOpen1}
+        onClose={onClose1}
+        description={
+          "Please map atleast one column to traits. Make sure to map Scientific Name,TaxonConceptId, SpeciesId, Attribution, Contributor."
+        }
+        headers={headers}
+        columnMapping={columnMapping}
+        setColumnMapping={setColumnMapping}
+        onSubmit={columnMappingSubmit}
+        optionDisabled={columnMapping.filter(([, i]) => i === "Traits").length == 0}
+      />
       {currentStep != 1 && (
         <>
           {showstats && (
@@ -234,7 +357,7 @@ export default function TraitsBatchUpload() {
               </Text>{" "}
               out of{" "}
               <Text as="span" fontWeight="bold">
-                {Object.keys(uploadResult[0]).length - 8}
+                {Object.keys(uploadResult[0]).filter((key) => key.split("|").length > 1).length}
               </Text>{" "}
               traits matched successfully.
             </Text>
@@ -249,7 +372,11 @@ export default function TraitsBatchUpload() {
                   .map((key) => (
                     <Box ml={9}>
                       <Link href={`/traits/create?name=${key.split("|")[0]}`}>
-                        {key.split("|")[0]}
+                        {
+                          key.split("|")[
+                            columnMapping.filter(([, i]) => i === "ScientificName")[0][0]
+                          ]
+                        }
                       </Link>
                     </Box>
                   ))}
@@ -292,7 +419,7 @@ export default function TraitsBatchUpload() {
                         >
                           {expandedRows.includes(index) ? "-" : "+"}
                         </Button>
-                        <span style={{ fontWeight: "bold" }}>{item["Species"]}</span>
+                        <span style={{ fontWeight: "bold" }}>{item["Scientific Name"]}</span>
                         {expandedRows.includes(index) && (
                           <Box ml={8}>
                             <Heading fontSize="medium" m={2}>

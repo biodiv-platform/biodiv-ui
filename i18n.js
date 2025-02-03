@@ -25,6 +25,7 @@ module.exports = {
     "rgx:/taxonomy/": ["activity", "filters", "taxon", "species"],
     "rgx:/text-curation/": ["text-curation", "observation"],
     "rgx:/user/": ["user", "group", "filters"],
-    "rgx:/user/leaderboard": ["leaderboard"]
+    "rgx:/user/leaderboard": ["leaderboard"],
+    "rgx:/traits/": ["traits"]
   }
 };
