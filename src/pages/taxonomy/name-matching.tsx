@@ -1,5 +1,5 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
-import NameMatchingComponent from "@components/pages/traits/name-matching";
+import NameMatchingComponent from "@components/pages/taxonomy/name-matching";
 import { Role } from "@interfaces/custom";
 import React from "react";
 

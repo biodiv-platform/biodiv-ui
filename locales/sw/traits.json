@@ -1,7 +1,4 @@
 {
-  "name_matching": {
-    "description": "Utendaji huu hukuruhusu kulinganisha orodha ya majina yaliyotolewa na ushuru wa portal. \nIli kudhibitisha majina ya kisayansi, pakia lahajedwali (.xlsx) iliyo na safu moja na majina halali ya kisayansi. \nMfumo utaonyesha mechi kwa majina yaliyotolewa. \nChagua mechi na upakue karatasi inayosababishwa, ambayo itajumuisha safu ya taxonConceptId."
-  },
   "trait_matching": {
     "description": "Sasisha karatasi iliyo na safu iliyoandikwa taxonConceptId na safu moja au zaidi na vichwa kama majina ya tabia. \nKila seli inapaswa kuwa na maadili yaliyotengwa na comma yanayolingana na safu ya taxon. \nHakikisha kuwa sifa na maadili tayari zipo kwenye mfumo. \nIkiwa hawafanyi hivyo, tafadhali waunde kabla ya kujaribu kulinganisha."
   }

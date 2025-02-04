@@ -75,6 +75,9 @@
     "synonyms": "Synonyms",
     "title": "Taxonomy Information"
   },
+  "name_matching": {
+    "description": "This functionality allows you to match a list of provided names to the portal's taxonomy. To validate scientific names, upload a spreadsheet (.xlsx) containing one column with valid scientific names. The system will display matches to the provided names. Select a match and download the resulting sheet, which will include a TaxonConceptId column."
+  },
   "position": {
     "title": "Position"
   },

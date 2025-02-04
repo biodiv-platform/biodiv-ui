@@ -1,7 +1,4 @@
 {
-  "name_matching": {
-    "description": "This functionality allows you to match a list of provided names to the portal's taxonomy. To validate scientific names, upload a spreadsheet (.xlsx) containing one column with valid scientific names. The system will display matches to the provided names. Select a match and download the resulting sheet, which will include a TaxonConceptId column."
-  },
   "trait_matching": {
     "description": "Upload a sheet with a column labelled TaxonConceptID and one or more columns with headers as the trait names. Each cell should contain comma-separated values corresponding to the row of the taxon. Ensure that traits and values already exist in the system. If they do not, please create them before attempting to match."
   }

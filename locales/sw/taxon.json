@@ -75,6 +75,9 @@
     "synonyms": "Vidokezo",
     "title": "Taarifa ya Taxonomy."
   },
+  "name_matching": {
+    "description": "Utendaji huu hukuruhusu kulinganisha orodha ya majina yaliyotolewa na ushuru wa portal. \nIli kudhibitisha majina ya kisayansi, pakia lahajedwali (.xlsx) iliyo na safu moja na majina halali ya kisayansi. \nMfumo utaonyesha mechi kwa majina yaliyotolewa. \nChagua mechi na upakue karatasi inayosababishwa, ambayo itajumuisha safu ya taxonConceptId."
+  },
   "position": {
     "title": "Nafasi"
   },

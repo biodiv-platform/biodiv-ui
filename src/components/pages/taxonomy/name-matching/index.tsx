@@ -17,6 +17,7 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
+import ColumnMapper from "@components/pages/traits/common/column-mapper";
 import { axCheckSpecies } from "@services/species.service";
 import { axUploadTaxonFile } from "@services/taxonomy.service";
 import notification from "@utils/notification";
@@ -26,7 +27,6 @@ import React, { useState } from "react";
 import { CSVLink } from "react-csv";
 import { useDropzone } from "react-dropzone";
 
-import ColumnMapper from "../common/column-mapper";
 import NameTable from "./name-table";
 
 type TaxonData = {
@@ -208,7 +208,7 @@ export default function NameMatchingComponent() {
     <Box p={4}>
       {/* Progress Bar */}
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
-        {t("traits:name_matching.description")}
+        {t("taxon:name_matching.description")}
       </Alert>
       <Box mt={6} p={4} borderWidth={1} borderRadius="md" bg="gray.50">
         {isLoading && <Spinner></Spinner>}
@@ -330,7 +330,6 @@ export default function NameMatchingComponent() {
                 </Select>
               </Box>
               {filter == "Matched" && (
-                <>
                 <NameTable
                   finalResult={finalResult.filter(([, value, ,]) => value != undefined)}
                   selectedColumn={selectedColumn}
@@ -338,12 +337,6 @@ export default function NameMatchingComponent() {
                   setFinalResult={setFinalResult}
                   setUploadResult={setUploadResult}
                 />
-                <Button mt={4} colorScheme="blue" onClick={()=>{
-                  importAsExcel()
-                }}>
-                  Continue with Batch Upload
-                </Button>
-                </>
               )}
               {filter == "All" && (
                 <NameTable

@@ -11,12 +11,14 @@ import {
   Badge,
   Box,
   Button,
+  Image,
   Text,
   useDisclosure
 } from "@chakra-ui/react";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { axCheckSpecies } from "@services/species.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
+import { getLocalIcon } from "@utils/media";
 import React, { useState } from "react";
 
 const NameTable = ({
@@ -89,6 +91,13 @@ const NameTable = ({
               <td>
                 {item[3] == false && (
                   <Text m={4}>
+                    <Image
+                      boxSize="2.2rem"
+                      objectFit="contain"
+                      src={getLocalIcon(item[1]?.group_name)}
+                      alt={item[1]?.group_name}
+                      ignoreFallback={true}
+                    />
                     {item[1]?.name}
                     <Badge ml={2}>{item[1]?.rank}</Badge>
                     <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.status]}>

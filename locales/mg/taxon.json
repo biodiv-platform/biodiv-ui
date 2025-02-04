@@ -75,6 +75,9 @@
     "synonyms": "Synonymes",
     "title": "Fampahalalana momba ny hetra"
   },
+  "name_matching": {
+    "description": "Io fiasa io dia ahafahanao mifanandrify amin'ny lisitry ny anarana nomena anarana nomena ny hetra nomen'ny vavahadin-tserasera. \nMba hanamafisana ny anarana siantifika, ampidiro ny splanceet (.xlsx) misy tsanganana iray misy anarana siantifika manan-kery. \nNy rafitra dia hampiseho lalao amin'ny anarana nomena. \nMisafidiana lalao ary ampidiro ny takelaka vokarina, izay ahitana tsanganana taxoncopeptid."
+  },
   "position": {
     "title": "Toerana"
   },
