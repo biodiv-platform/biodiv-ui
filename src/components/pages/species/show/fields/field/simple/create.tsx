@@ -81,7 +81,7 @@ export default function SpeciesFieldSimpleCreate({
 
       return {
         ...prevTraitValues,
-        [traitId]: [...existingValues, { value: undefined }]
+        [traitId]: [...existingValues, "rgb(255,255,255)"]
       };
     });
   };
@@ -100,7 +100,7 @@ export default function SpeciesFieldSimpleCreate({
   const onSwatchChange = (traitId, index, updatedValue) => {
     setTraitValues((prevTraitValues) => {
       const existingValues = prevTraitValues[traitId];
-      existingValues[index].value = updatedValue;
+      existingValues[index] = updatedValue;
 
       return {
         ...prevTraitValues,
@@ -186,7 +186,7 @@ export default function SpeciesFieldSimpleCreate({
                             <ColorEditSwatch
                               key={index}
                               index={index}
-                              color={value.value}
+                              color={value}
                               onDelete={(i) => onSwatchDelete(t.id, i)}
                               onChange={(i, v) => onSwatchChange(t.id, i, v)}
                             />

@@ -90,48 +90,55 @@ const NameTable = ({
               </td>
               <td>
                 {item[3] == false && (
-                  <Text m={4}>
-                    <Image
-                      boxSize="2.2rem"
-                      objectFit="contain"
-                      src={getLocalIcon(item[1]?.group_name)}
-                      alt={item[1]?.group_name}
-                      ignoreFallback={true}
-                    />
-                    {item[1]?.name}
-                    <Badge ml={2}>{item[1]?.rank}</Badge>
-                    <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.status]}>
-                      {item[1]?.status}
-                    </Badge>
-                    <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.position]}>
-                      {item[1]?.position}
-                    </Badge>
-                    {uploadResult[item[4]][1].length > 1 && (
-                      <Text float="right" color="green.700" fontWeight="bold">
-                        {uploadResult[item[4]][1].length + " Matches Found"}
-                        <EditIcon
-                          ml={2}
-                          color="teal"
-                          cursor="pointer"
-                          onClick={() => {
-                            const updatedMatching = [...finalResult];
-                            updatedMatching[index][3] = true;
-                            setFinalResult(updatedMatching);
-                          }}
-                        />
+                  <>
+                    <Text m={4}>
+                      <Image
+                        boxSize="2.2rem"
+                        objectFit="contain"
+                        src={getLocalIcon(item[1]?.group_name)}
+                        alt={item[1]?.group_name}
+                        ignoreFallback={true}
+                      />
+                      {item[1]?.name}
+                      <Badge ml={2}>{item[1]?.rank}</Badge>
+                      <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.status]}>
+                        {item[1]?.status}
+                      </Badge>
+                      <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.position]}>
+                        {item[1]?.position}
+                      </Badge>
+                      {uploadResult[item[4]][1].length > 1 && (
+                        <Text float="right" color="green.700" fontWeight="bold">
+                          {uploadResult[item[4]][1].length + " Matches Found"}
+                          <EditIcon
+                            ml={2}
+                            color="teal"
+                            cursor="pointer"
+                            onClick={() => {
+                              const updatedMatching = [...finalResult];
+                              updatedMatching[index][3] = true;
+                              setFinalResult(updatedMatching);
+                            }}
+                          />
+                        </Text>
+                      )}
+                      {uploadResult[item[4]][1].length == 1 && (
+                        <Text float="right" color="green.700" fontWeight="bold">
+                          {"1 Match Found"}
+                        </Text>
+                      )}
+                      {uploadResult[item[4]][1].length == 0 && (
+                        <Text float="right" color="red.700" fontWeight="bold">
+                          {"No Match Found"}
+                        </Text>
+                      )}
+                    </Text>
+                    <Box p={2} px={4} mb={4} className="white-box fadeInUp delay-2">
+                      <Text maxWidth="100%">
+                        {item[1]?.hierarchy.map((name) => name["taxon_name"]).join(" / ")}
                       </Text>
-                    )}
-                    {uploadResult[item[4]][1].length == 1 && (
-                      <Text float="right" color="green.700" fontWeight="bold">
-                        {"1 Match Found"}
-                      </Text>
-                    )}
-                    {uploadResult[item[4]][1].length == 0 && (
-                      <Text float="right" color="red.700" fontWeight="bold">
-                        {"No Match Found"}
-                      </Text>
-                    )}
-                  </Text>
+                    </Box>
+                  </>
                 )}
                 {item[2] && item[3] == false && (
                   <Alert bg="blue.50">

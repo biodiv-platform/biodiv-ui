@@ -1,4 +1,7 @@
 {
+  "terms": {
+    "description": "Kwa kuwasilisha fomu hii, unathibitisha kuwa data unayopakia ni kazi yako mwenyewe, au unayo ruhusa kutoka kwa mmiliki wa hakimiliki ili kuishiriki chini ya leseni ya Creative Commons Attribution (CC-BY)."
+  },
   "trait_matching": {
     "description": "Sasisha karatasi iliyo na safu iliyoandikwa taxonConceptId na safu moja au zaidi na vichwa kama majina ya tabia. \nKila seli inapaswa kuwa na maadili yaliyotengwa na comma yanayolingana na safu ya taxon. \nHakikisha kuwa sifa na maadili tayari zipo kwenye mfumo. \nIkiwa hawafanyi hivyo, tafadhali waunde kabla ya kujaribu kulinganisha."
   }

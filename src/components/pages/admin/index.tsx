@@ -31,15 +31,6 @@ function AdminComponent() {
             >
               <Link href="/admin/homegallery">{t("group:homepage_customization.title")}</Link>
             </ListItem>
-            <ListItem
-              display="flex"
-              alignItems="center"
-              p="2"
-              borderRadius="md"
-              _hover={{ bg: "teal", color: "white" }}
-            >
-              <Link href="/traits/name-matching">{t("admin:links.name-macthing")}</Link>
-            </ListItem>
           </List>
         </Box>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
@@ -96,6 +87,22 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/traits/batch-upload">{t("group:trait.batchUpload.title")}</Link>
+            </ListItem>
+          </List>
+        </Box>
+        <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
+          <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
+            Taxonomy
+          </Heading>
+          <List>
+          <ListItem
+              display="flex"
+              alignItems="center"
+              p="2"
+              borderRadius="md"
+              _hover={{ bg: "teal", color: "white" }}
+            >
+              <Link href="/taxonomy/name-matching">{t("admin:links.name-macthing")}</Link>
             </ListItem>
           </List>
         </Box>

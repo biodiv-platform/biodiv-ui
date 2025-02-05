@@ -1,4 +1,7 @@
 {
+  "terms": {
+    "description": "By submitting this form, you confirm that the data you are uploading is your own work, or you have permission from the copyright holder to share it under the Creative Commons Attribution (CC-BY) license."
+  },
   "trait_matching": {
     "description": "Upload a sheet with a column labelled TaxonConceptID and one or more columns with headers as the trait names. Each cell should contain comma-separated values corresponding to the row of the taxon. Ensure that traits and values already exist in the system. If they do not, please create them before attempting to match."
   }

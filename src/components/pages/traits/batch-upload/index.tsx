@@ -4,6 +4,7 @@ import {
   AlertIcon,
   Box,
   Button,
+  Checkbox,
   Flex,
   Heading,
   Icon,
@@ -33,6 +34,8 @@ import ColumnMapper from "../common/column-mapper";
 export default function TraitsBatchUpload() {
   const [uploadResult, setUploadResult] = useState<Map<string, string>[]>([]);
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
+  const [termsAccepted, setTermsAccepted] = useState<boolean>(true);
+  const [failedTraitNames, setFailedTraitNames] = useState<string[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
   const [headers, setHeaders] = useState<string[]>([]);
@@ -40,7 +43,14 @@ export default function TraitsBatchUpload() {
   const [successfulUpload, setSuccessfulUpload] = useState(0);
   const [failedUpload, setFailedUpload] = useState(0);
   const [showstats, setshowstats] = useState(false);
-  const options = ["ScientificName", "TaxonConceptId", "SpeciesId", "Attribution", "Contributor"];
+  const options = [
+    "ScientificName",
+    "TaxonConceptId",
+    "SpeciesId",
+    "Attribution",
+    "Contributor",
+    "License"
+  ];
   const manyOptions = ["Traits"];
   const { t } = useTranslation();
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
@@ -99,6 +109,7 @@ export default function TraitsBatchUpload() {
 
   const handleSubmit = async () => {
     setshowstats(true);
+    const failedNames:string[] = [];
     for (let i = 0; i < uploadResult.length; i++) {
       const item = Object.entries(uploadResult[i]).filter(([key]) => key.split("|")[1] == "true");
       const facts = {};
@@ -177,71 +188,94 @@ export default function TraitsBatchUpload() {
               setSuccessfulUpload((prev) => prev + 1);
             } else {
               setFailedUpload((prev) => prev + 1);
+              failedNames.push(uploadResult[i]["Scientific Name"]);
               notification(
                 `Something went wrong while adding traits to ${uploadResult[i]["Scientific Name"]}`
               );
             }
           } else if (!uploadResult[i]["Taxon Concept Id"]) {
             setFailedUpload((prev) => prev + 1);
+            failedNames.push(uploadResult[i]["Scientific Name"]);
             notification(`Taxon Id not available for ${uploadResult[i]["Scientific Name"]}`);
           } else if (!uploadResult[i]["Species Id"]) {
             setFailedUpload((prev) => prev + 1);
+            failedNames.push(uploadResult[i]["Scientific Name"]);
             notification(`Species Page doesn't exist for ${uploadResult[i]["Scientific Name"]}`);
           }
+        } else {
+          setSuccessfulUpload((prev) => prev + 1);
         }
       } else {
         setFailedUpload((prev) => prev + 1);
+        failedNames.push(uploadResult[i]["Scientific Name"]);
         notification(`Couldn't retrieve userId of ${uploadResult[i]["Contributor"]}`);
       }
     }
+    setFailedTraitNames(failedNames);
   };
 
   const columnMappingSubmit = async () => {
-    const formData = new FormData();
-    if (file) {
-      formData.append("file", file);
-    }
+    if (
+      columnMapping.filter(([, i]) => i === "ScientificName").length == 0 ||
+      columnMapping.filter(([, i]) => i === "TaxonConceptId").length == 0 ||
+      columnMapping.filter(([, i]) => i === "SpeciesId").length == 0 ||
+      columnMapping.filter(([, i]) => i === "Contributor").length == 0
+    ) {
+      notification("Please map ScientificName, TaxonConceptId, SpeciesId and Contributor");
+    } else {
+      const formData = new FormData();
+      if (file) {
+        formData.append("file", file);
+      }
 
-    formData.append(
-      "scientificName",
-      columnMapping.filter(([, i]) => i === "ScientificName")[0][0].toString()
-    );
-
-    formData.append(
-      "TaxonConceptId",
-      columnMapping.filter(([, i]) => i === "TaxonConceptId")[0][0].toString()
-    );
-
-    formData.append(
-      "SpeciesId",
-      columnMapping.filter(([, i]) => i === "SpeciesId")[0][0].toString()
-    );
-
-    formData.append(
-      "Contributor",
-      columnMapping.filter(([, i]) => i === "Contributor")[0][0].toString()
-    );
-
-    if (columnMapping.filter(([, i]) => i === "Attribution").length > 0) {
       formData.append(
-        "Attribution",
-        columnMapping.filter(([, i]) => i === "Attribution")[0][0].toString()
+        "scientificName",
+        columnMapping.filter(([, i]) => i === "ScientificName")[0][0].toString()
       );
-    }
 
-    formData.append(
-      "traits",
-      columnMapping
-        .filter(([, i]) => i === "Traits")
-        .map(([first]) => first) // Extract the first element
-        .join("|")
-    );
+      formData.append(
+        "TaxonConceptId",
+        columnMapping.filter(([, i]) => i === "TaxonConceptId")[0][0].toString()
+      );
 
-    const { success, data } = await axUploadTraitsFile(formData);
-    onClose1();
-    if (success) {
-      setUploadResult(data);
-      setCurrentStep(2);
+      formData.append(
+        "SpeciesId",
+        columnMapping.filter(([, i]) => i === "SpeciesId")[0][0].toString()
+      );
+
+      formData.append(
+        "Contributor",
+        columnMapping.filter(([, i]) => i === "Contributor")[0][0].toString()
+      );
+
+      if (columnMapping.filter(([, i]) => i === "Attribution").length > 0) {
+        formData.append(
+          "Attribution",
+          columnMapping.filter(([, i]) => i === "Attribution")[0][0].toString()
+        );
+      }
+
+      if (columnMapping.filter(([, i]) => i === "License").length > 0) {
+        formData.append(
+          "License",
+          columnMapping.filter(([, i]) => i === "License")[0][0].toString()
+        );
+      }
+
+      formData.append(
+        "traits",
+        columnMapping
+          .filter(([, i]) => i === "Traits")
+          .map(([first]) => first) // Extract the first element
+          .join("|")
+      );
+
+      const { success, data } = await axUploadTraitsFile(formData);
+      onClose1();
+      if (success) {
+        setUploadResult(data);
+        setCurrentStep(2);
+      }
     }
   };
 
@@ -295,13 +329,7 @@ export default function TraitsBatchUpload() {
         <>
           {showstats && (
             <Box textAlign="center" p={4} borderWidth="1px" borderRadius="md" boxShadow="md" mb={2}>
-              <Heading
-                size="md"
-                mb={2}
-                color={
-                  successfulUpload + failedUpload === uploadResult.length ? "green.600" : "blue.600"
-                }
-              >
+              <Heading size="md" mb={2} color={"blue.600"}>
                 {successfulUpload + failedUpload === uploadResult.length
                   ? failedUpload > 0
                     ? "Traits Saved"
@@ -312,7 +340,7 @@ export default function TraitsBatchUpload() {
               <Text fontSize="sm" color="gray.600">
                 {successfulUpload + failedUpload === uploadResult.length
                   ? failedUpload > 0
-                    ? "Some traits failed to upload. Please review the errors."
+                    ? "Some traits failed to upload."
                     : "All traits have been uploaded successfully."
                   : "Please wait while the traits are being uploaded."}
               </Text>
@@ -320,9 +348,7 @@ export default function TraitsBatchUpload() {
               <Box mt={4}>
                 <Progress
                   value={((successfulUpload + failedUpload) / uploadResult.length) * 100}
-                  colorScheme={
-                    successfulUpload + failedUpload === uploadResult.length ? "green" : "blue"
-                  }
+                  colorScheme={"blue"}
                   size="sm"
                   borderRadius="md"
                 />
@@ -330,25 +356,21 @@ export default function TraitsBatchUpload() {
                   Uploading Traits: [{successfulUpload + failedUpload}/{uploadResult.length}]
                 </Text>
               </Box>
+              {failedUpload > 0 && failedTraitNames.length > 0 && (
+                <Box mt={3} p={2} bg="red.50" borderRadius="md">
+                  <Text fontSize="sm" fontWeight="semibold" color="red.600">
+                    Traits upload failed for the following species:
+                  </Text>
+                  <Box>
+                    {failedTraitNames.map((name, index) => (
+                      <Text key={index} fontSize="sm" color="red.500">
+                        - {name}
+                      </Text>
+                    ))}
+                  </Box>
+                </Box>
+              )}
             </Box>
-          )}
-
-          {!showstats && (
-            <Flex justifyContent="flex-end">
-              <Button
-                colorScheme="blue"
-                onClick={handleSubmit}
-                disabled={
-                  Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length !=
-                    0 ||
-                  Object.entries(uploadResult[0]).filter(
-                    ([key, value]) => key.includes("|DATE") && value.split("|").length != 2
-                  ).length != 0
-                }
-              >
-                Batch Upload
-              </Button>
-            </Flex>
           )}
           <Box>
             <Text fontSize="lg" mb={4}>
@@ -573,6 +595,30 @@ export default function TraitsBatchUpload() {
                   ))}
               </tbody>
             </table>
+            <Box mt={4}>
+              <Checkbox isChecked={termsAccepted} onChange={() => setTermsAccepted(!termsAccepted)}>
+                {t("traits:terms.description")}
+              </Checkbox>
+              {!termsAccepted && <Text color="red.500">* Terms need to be accepted</Text>}
+            </Box>
+            {!showstats && (
+              <Flex justifyContent="flex-end" mt={4}>
+                <Button
+                  colorScheme="blue"
+                  onClick={handleSubmit}
+                  disabled={
+                    Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length !=
+                      0 ||
+                    Object.entries(uploadResult[0]).filter(
+                      ([key, value]) => key.includes("|DATE") && value.split("|").length != 2
+                    ).length != 0 ||
+                    !termsAccepted
+                  }
+                >
+                  Batch Upload
+                </Button>
+              </Flex>
+            )}
           </Box>
         </>
       )}

@@ -1,4 +1,7 @@
 {
+  "terms": {
+    "description": "En soumettant ce formulaire, vous confirmez que les données que vous téléchargez sont votre propre travail, ou que vous avez la permission du titulaire du droit d'auteur pour les partager sous la licence Creative Commons Attribution (CC-BY)."
+  },
   "trait_matching": {
     "description": "Téléchargez une feuille avec une colonne étiquetée TaxonConceptid et une ou plusieurs colonnes avec des en-têtes comme noms de traits. \nChaque cellule doit contenir des valeurs séparées par les virgules correspondant à la ligne du taxon. \nAssurez-vous que les traits et les valeurs existent déjà dans le système. \nS'ils ne le font pas, veuillez les créer avant d'essayer de correspondre."
   }
