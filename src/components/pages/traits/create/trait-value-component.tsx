@@ -1,5 +1,6 @@
 import { CloseIcon } from "@chakra-ui/icons";
 import { Box, GridItem, IconButton, Input, SimpleGrid } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -13,11 +14,12 @@ export default function TraitsValueComponent({ valueObj, index, onValueChange, o
       }
     }
   });
+  const { t } = useTranslation();
   return (
     <SimpleGrid columns={{ base: 1, md: 5 }} spacing={{ md: 4 }} mb={4}>
       <Box>
         <Input
-          placeholder="Name"
+          placeholder={t("traits:create_form.name")}
           value={valueObj.value}
           onChange={(e) => onValueChange(index, { ...valueObj, value: e.target.value })}
           required
@@ -25,7 +27,7 @@ export default function TraitsValueComponent({ valueObj, index, onValueChange, o
       </Box>
       <GridItem colSpan={{ md: 2 }}>
         <Input
-          placeholder="Description"
+          placeholder={t("traits:create_form.description")}
           value={valueObj.description}
           onChange={(e) => onValueChange(index, { ...valueObj, description: e.target.value })}
         />

@@ -6,11 +6,13 @@ import { useLocalRouter } from "@components/@core/local-link";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { getTraitIcon } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 export default function TraitsShowComponent({ data }) {
   const router = useLocalRouter();
   const [canEdit, setCanEdit] = useState<boolean>();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setCanEdit(hasAccess([Role.Admin]));
@@ -39,7 +41,7 @@ export default function TraitsShowComponent({ data }) {
       </SimpleGrid>
       <Box className="white-box" mb={4}>
         <SimpleGrid columns={[1, 1, 3, 3]} spacingY={4} p={4}>
-          {data.traits.icon && <Text fontWeight={600}>Icon</Text>}
+          {data.traits.icon && <Text fontWeight={600}>{t("traits:traits_show.icon")}</Text>}
           {data.traits.icon && (
             <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
               <Image
@@ -51,27 +53,27 @@ export default function TraitsShowComponent({ data }) {
               />
             </Box>
           )}
-          <Text fontWeight={600}>Description</Text>
+          <Text fontWeight={600}>{t("traits:traits_show.description")}</Text>
           <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
             {data.traits.description}
           </Box>
           {data.values.length != 0 && data.traits.dataType == "STRING" && (
-            <Text fontWeight={600}>Values</Text>
+            <Text fontWeight={600}>{t("traits:traits_show.values")}</Text>
           )}
           {data.values.length != 0 && data.traits.dataType == "STRING" && (
             <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
               <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
                 <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all" fontWeight={600}>
-                  Icon
+                  {t("traits:traits_show.icon")}
                 </Box>
                 <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all" fontWeight={600}>
-                  Value
+                  {t("traits:traits_show.value")}
                 </Box>
                 <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all" fontWeight={600}>
-                  Description
+                  {t("traits:traits_show.description")}
                 </Box>
                 <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all" fontWeight={600}>
-                  Source
+                  {t("traits:traits_show.source")}
                 </Box>
               </SimpleGrid>
               {data.values
@@ -102,11 +104,11 @@ export default function TraitsShowComponent({ data }) {
                 ))}
             </Box>
           )}
-          <Text fontWeight={600}>Trait Type</Text>
+          <Text fontWeight={600}>{t("traits:traits_show.trait_type")}</Text>
           <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
             {data.traits.traitTypes}
           </Box>
-          <Text fontWeight={600}>Data Type</Text>
+          <Text fontWeight={600}>{t("traits:traits_show.data_type")}</Text>
           <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
             {data.traits.dataType}
           </Box>

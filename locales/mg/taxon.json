@@ -76,7 +76,29 @@
     "title": "Fampahalalana momba ny hetra"
   },
   "name_matching": {
-    "description": "Io fiasa io dia ahafahanao mifanandrify amin'ny lisitry ny anarana nomena anarana nomena ny hetra nomen'ny vavahadin-tserasera. \nMba hanamafisana ny anarana siantifika, ampidiro ny splanceet (.xlsx) misy tsanganana iray misy anarana siantifika manan-kery. \nNy rafitra dia hampiseho lalao amin'ny anarana nomena. \nMisafidiana lalao ary ampidiro ny takelaka vokarina, izay ahitana tsanganana taxoncopeptid."
+    "all_filter": "rehetra",
+    "cancel": "hanafoana",
+    "columnMapping_description": "Safidio azafady ny tsanganana anarana siantifika",
+    "delete": "Mamafa",
+    "delete_description": "Azo antoka ve fa te hamafa io anarana siantifika io ianao?",
+    "delete_title": "Hamafa ny anarana siantifika",
+    "description": "Io fiasa io dia ahafahanao mifanandrify amin'ny lisitry ny anarana nomena anarana nomena ny hetra nomen'ny vavahadin-tserasera. \nMba hanamafisana ny anarana siantifika, ampidiro ny splanceet (.xlsx) misy tsanganana iray misy anarana siantifika manan-kery. \nNy rafitra dia hampiseho lalao amin'ny anarana nomena. \nMisafidiana lalao ary ampidiro ny takelaka vokarina, izay ahitana tsanganana taxoncopeptid.",
+    "download_button": "Download as",
+    "download_csv": "Ny soatoavin'i Comma (.csv)",
+    "download_excel": "Microsoft Excel (.xlsx)",
+    "matched_filter": "mifanentana",
+    "multiple_matches": "Lalao hita",
+    "name_matches": "Lalao mifanandrify anarana",
+    "no_match": "Tsy misy lalao hita",
+    "no_species_page": "Ny pejy karazana dia tsy misy amin'ity lalao ity",
+    "one_match": "1 lalao hita",
+    "species_create_description": "Kitiho ny anaran'ny karazana ho an'ny namorona karazana",
+    "species_name": "Anaran'ny karazana",
+    "species_page_exist": "Ny pejin-tsoratra karazana dia misy ho an'ity lalao ity",
+    "unmatched_filter": "tsy manan- tsahala",
+    "upload_button": "Browse",
+    "upload_description": "Tariho sy dropy rakitra Excel",
+    "warning_text": "Fampitandremana: tsy nahita lalao ho an'ny anarana manaraka ireto!"
   },
   "position": {
     "title": "Toerana"

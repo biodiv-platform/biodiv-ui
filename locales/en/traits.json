@@ -1,8 +1,64 @@
 {
+  "create_form": {
+    "add_trait_button": "Add Traits",
+    "add_trait_values_button": "Add Trait Value",
+    "data_type": "Data Type",
+    "data_type_color": "Color",
+    "data_type_date": "Date",
+    "data_type_numeric": "Numeric",
+    "data_type_placeholder": "Select type",
+    "data_type_string": "String",
+    "description": "Description",
+    "description_placeholder": "Enter trait description",
+    "heading": "Add Traits",
+    "max": "Max value",
+    "max_placeholder": "Enter max value",
+    "min": "Min value",
+    "min_and_max": "Define Min and Max",
+    "min_placeholder": "Enter min value",
+    "name": "Name",
+    "observation_trait": "Observation Trait",
+    "participatory": "Paritcipatory",
+    "source": "Source",
+    "source_placeholder": "Enter source",
+    "species_field": "Species Field",
+    "species_field_placeholder": "Select field",
+    "taxon": "Taxon",
+    "taxon_placeholder": "Search",
+    "trait_name": "Trait Name",
+    "trait_name_placeholder": "Enter trait name",
+    "trait_values_heading": "Define Trait Values",
+    "type": "Type",
+    "type_multiple_categorical": "Multiple Categorical",
+    "type_placeholder": "Select type",
+    "type_range": "Range",
+    "type_single_categorical": "Single Categorical",
+    "units": "Units",
+    "units_month": "Month",
+    "units_placeholder": "Enter units",
+    "units_year": "Year"
+  },
   "terms": {
     "description": "By submitting this form, you confirm that the data you are uploading is your own work, or you have permission from the copyright holder to share it under the Creative Commons Attribution (CC-BY) license."
   },
   "trait_matching": {
-    "description": "Upload a sheet with a column labelled TaxonConceptID and one or more columns with headers as the trait names. Each cell should contain comma-separated values corresponding to the row of the taxon. Ensure that traits and values already exist in the system. If they do not, please create them before attempting to match."
+    "batch_upload": "Batch Upload",
+    "browse_button": "Browse",
+    "browse_description": "Drag and Drop excel files",
+    "cancel": "Cancel",
+    "column_mapping_description": "Please map atleast one column to traits. Make sure to map Scientific Name,TaxonConceptId, SpeciesId, Attribution, Contributor.",
+    "continue": "Continue",
+    "description": "Upload a sheet with a column labelled TaxonConceptID and one or more columns with headers as the trait names. Each cell should contain comma-separated values corresponding to the row of the taxon. Ensure that traits and values already exist in the system. If they do not, please create them before attempting to match.",
+    "terms_warning": "* Terms need to be accepted",
+    "traits": "Traits"
+  },
+  "traits_show": {
+    "data_type": "Data Type",
+    "description": "Description",
+    "icon": "Icon",
+    "source": "Source",
+    "trait_type": "Trait Type",
+    "value": "Value",
+    "values": "Values"
   }
 }

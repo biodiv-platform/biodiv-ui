@@ -1,8 +1,64 @@
 {
+  "create_form": {
+    "add_trait_button": "Ajouter des traits",
+    "add_trait_values_button": "Ajouter la valeur des traits",
+    "data_type": "Type de données",
+    "data_type_color": "Couleur",
+    "data_type_date": "Date",
+    "data_type_numeric": "Numérique",
+    "data_type_placeholder": "Sélectionner le type",
+    "data_type_string": "Chaîne",
+    "description": "Description",
+    "description_placeholder": "Entrez la description des traits",
+    "heading": "Ajouter des traits",
+    "max": "Valeur maximale",
+    "max_placeholder": "Entrez la valeur maximale",
+    "min": "Valeur min",
+    "min_and_max": "Définir Min et Max",
+    "min_placeholder": "Entrez la valeur min",
+    "name": "Nom",
+    "observation_trait": "Trait d'observation",
+    "participatory": "Palipatoire",
+    "source": "Source",
+    "source_placeholder": "Entrez la source",
+    "species_field": "Champ d'espèces",
+    "species_field_placeholder": "Sélectionner le champ",
+    "taxon": "Taxon",
+    "taxon_placeholder": "Recherche",
+    "trait_name": "Nom de trait",
+    "trait_name_placeholder": "Entrez le nom des traits",
+    "trait_values_heading": "Définir les valeurs des traits",
+    "type": "Taper",
+    "type_multiple_categorical": "Multiples catégoriques",
+    "type_placeholder": "Sélectionner le type",
+    "type_range": "Gamme",
+    "type_single_categorical": "Catégorique unique",
+    "units": "Unités",
+    "units_month": "Mois",
+    "units_placeholder": "Entrer des unités",
+    "units_year": "Année"
+  },
   "terms": {
     "description": "En soumettant ce formulaire, vous confirmez que les données que vous téléchargez sont votre propre travail, ou que vous avez la permission du titulaire du droit d'auteur pour les partager sous la licence Creative Commons Attribution (CC-BY)."
   },
   "trait_matching": {
-    "description": "Téléchargez une feuille avec une colonne étiquetée TaxonConceptid et une ou plusieurs colonnes avec des en-têtes comme noms de traits. \nChaque cellule doit contenir des valeurs séparées par les virgules correspondant à la ligne du taxon. \nAssurez-vous que les traits et les valeurs existent déjà dans le système. \nS'ils ne le font pas, veuillez les créer avant d'essayer de correspondre."
+    "batch_upload": "Téléchargement par lots",
+    "browse_button": "Parcourir",
+    "browse_description": "Faites glisser et déposez les fichiers Excel",
+    "cancel": "Annuler",
+    "column_mapping_description": "Veuillez mapper au moins une colonne aux traits. \nAssurez-vous de cartographier le nom scientifique, TaxonConceptid, SpeciesId, Attribution, Contributeur.",
+    "continue": "Continuer",
+    "description": "Téléchargez une feuille avec une colonne étiquetée TaxonConceptid et une ou plusieurs colonnes avec des en-têtes comme noms de traits. \nChaque cellule doit contenir des valeurs séparées par les virgules correspondant à la ligne du taxon. \nAssurez-vous que les traits et les valeurs existent déjà dans le système. \nS'ils ne le font pas, veuillez les créer avant d'essayer de correspondre.",
+    "terms_warning": "* Les termes doivent être acceptés",
+    "traits": "Caractéristiques"
+  },
+  "traits_show": {
+    "data_type": "Type de données",
+    "description": "Description",
+    "icon": "Icône",
+    "source": "Source",
+    "trait_type": "Type de trait",
+    "value": "Valeur",
+    "values": "Valeurs"
   }
 }

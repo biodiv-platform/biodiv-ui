@@ -19,6 +19,7 @@ import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { axCheckSpecies } from "@services/species.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon } from "@utils/media";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 const NameTable = ({
@@ -31,12 +32,13 @@ const NameTable = ({
   const [currentIndex, setCurrentIndex] = useState<number>();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const cancelRef = React.useRef(null);
+  const { t } = useTranslation();
   return (
     <table className="table table-bordered">
       <thead>
         <tr>
-          <th>{"Species Name"}</th>
-          <th>{"Name Matches"}</th>
+          <th>{t("taxon:name_matching.species_name")}</th>
+          <th>{t("taxon:name_matching.name_matches")}</th>
         </tr>
       </thead>
       <tbody>
@@ -57,15 +59,15 @@ const NameTable = ({
                   <AlertDialogOverlay>
                     <AlertDialogContent>
                       <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                        🗑️ {"Delete Scientific Name"}
+                        🗑️ {t("taxon:name_matching.delete_title")}
                       </AlertDialogHeader>
                       <AlertDialogBody>
-                        {"Are you sure you want to delete this scientific name?"}
+                        {t("taxon:name_matching.delete_description")}
                       </AlertDialogBody>
 
                       <AlertDialogFooter>
                         <Button ref={cancelRef} onClick={onClose}>
-                          {"Cancel"}
+                        {t("taxon:name_matching.cancel")}
                         </Button>
                         <Button
                           colorScheme="red"
@@ -80,7 +82,7 @@ const NameTable = ({
                           }}
                           ml={3}
                         >
-                          {"Delete"}
+                          {t("taxon:name_matching.delete")}
                         </Button>
                       </AlertDialogFooter>
                     </AlertDialogContent>
@@ -109,7 +111,7 @@ const NameTable = ({
                       </Badge>
                       {uploadResult[item[4]][1].length > 1 && (
                         <Text float="right" color="green.700" fontWeight="bold">
-                          {uploadResult[item[4]][1].length + " Matches Found"}
+                          {`${uploadResult[item[4]][1].length}  ${t("taxon:name_matching.multiple_matches")}`}
                           <EditIcon
                             ml={2}
                             color="teal"
@@ -124,32 +126,34 @@ const NameTable = ({
                       )}
                       {uploadResult[item[4]][1].length == 1 && (
                         <Text float="right" color="green.700" fontWeight="bold">
-                          {"1 Match Found"}
+                          {t("taxon:name_matching.one_match")}
                         </Text>
                       )}
                       {uploadResult[item[4]][1].length == 0 && (
                         <Text float="right" color="red.700" fontWeight="bold">
-                          {"No Match Found"}
+                          {t("taxon:name_matching.no_match")}
                         </Text>
                       )}
                     </Text>
-                    <Box p={2} px={4} mb={4} className="white-box fadeInUp delay-2">
-                      <Text maxWidth="100%">
-                        {item[1]?.hierarchy.map((name) => name["taxon_name"]).join(" / ")}
-                      </Text>
-                    </Box>
+                    {item[1]?.hierarchy && (
+                      <Box p={2} px={4} mb={4} className="white-box fadeInUp delay-2">
+                        <Text maxWidth="100%">
+                          {item[1]?.hierarchy.map((name) => name["taxon_name"]).join(" / ")}
+                        </Text>
+                      </Box>
+                    )}
                   </>
                 )}
                 {item[2] && item[3] == false && (
                   <Alert bg="blue.50">
                     <AlertIcon />
-                    <Text>{"Species Page exists for this name match"}</Text>
+                    <Text>{t("taxon:name_matching.species_page_exist")}</Text>
                   </Alert>
                 )}
                 {!item[2] && item[3] == false && uploadResult[item[4]][1].length != 0 && (
                   <Alert bg="red.500" color="white">
                     <AlertIcon color="white" />
-                    <Text>{"Species Page does not exist for this name match"}</Text>
+                    <Text>{t("taxon:name_matching.no_species_page")}</Text>
                   </Alert>
                 )}
                 {item[3] == true && (

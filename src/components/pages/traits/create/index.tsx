@@ -24,6 +24,7 @@ import { axUploadResource } from "@services/files.service";
 import { axCreateTrait } from "@services/traits.service";
 import { hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
@@ -60,6 +61,7 @@ interface Trait {
 }
 
 export default function TraitsCreateComponent({ speciesField }) {
+  const { t } = useTranslation();
   const speciesCategoryField = speciesField.speciesField
     .filter((item) => item.childFields.length == 0)
     .map((item) => item.parentField);
@@ -254,60 +256,60 @@ export default function TraitsCreateComponent({ speciesField }) {
 
   return canSubmit ? (
     <div className="container mt">
-      <PageHeading>Add Traits</PageHeading>
+      <PageHeading>{t("traits:create_form.heading")}</PageHeading>
       <form onSubmit={handleSubmit}>
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
           <Box>
             <FormControl>
-              <FormLabel htmlFor="name">Trait Name</FormLabel>
+              <FormLabel htmlFor="name">{t("traits:create_form.trait_name")}</FormLabel>
               <Input
                 type="text"
                 id="name"
                 name="name"
                 value={trait.name}
                 onChange={handleChange}
-                placeholder="Enter trait name"
+                placeholder={t("traits:create_form.trait_name_placeholder")}
                 required
               />
             </FormControl>
           </Box>
           <Box>
             <FormControl>
-              <FormLabel htmlFor="dataType">Data Type</FormLabel>
+              <FormLabel htmlFor="dataType">{t("traits:create_form.data_type")}</FormLabel>
               <Select
                 id="dataType"
                 name="dataType"
                 value={trait.dataType}
                 onChange={handleChange}
-                placeholder="Select type"
+                placeholder={t("traits:create_form.data_type_placeholder")}
                 required
               >
-                <option value="STRING">String</option>
-                <option value="NUMERIC">Numeric</option>
-                <option value="DATE">Date</option>
-                <option value="COLOR">Color</option>
+                <option value="STRING">{t("traits:create_form.data_type_string")}</option>
+                <option value="NUMERIC">{t("traits:create_form.data_type_numeric")}</option>
+                <option value="DATE">{t("traits:create_form.data_type_date")}</option>
+                <option value="COLOR">{t("traits:create_form.data_type_color")}</option>
               </Select>
             </FormControl>
           </Box>
           <Box>
             <FormControl>
-              <FormLabel htmlFor="type">Type</FormLabel>
+              <FormLabel htmlFor="type">{t("traits:create_form.type")}</FormLabel>
               <Select
                 id="type"
                 name="type"
                 value={trait.type}
                 onChange={handleChange}
-                placeholder="Select type"
+                placeholder={t("traits:create_form.type_placeholder")}
                 disabled={trait.dataType != "STRING"}
                 required
               >
                 {(trait.dataType == "STRING" || trait.dataType == "COLOR") && (
-                  <option value="MULTIPLE_CATEGORICAL">Multiple Categorical</option>
+                  <option value="MULTIPLE_CATEGORICAL">{t("traits:create_form.type_multiple_categorical")}</option>
                 )}
                 {trait.dataType == "STRING" && (
-                  <option value="SINGLE_CATEGORICAL">Single Categorical</option>
+                  <option value="SINGLE_CATEGORICAL">{t("traits:create_form.type_single_categorical")}</option>
                 )}
-                {trait.dataType != "COLOR" && <option value="RANGE">Range</option>}
+                {trait.dataType != "COLOR" && <option value="RANGE">{t("traits:create_form.type_range")}</option>}
               </Select>
             </FormControl>
           </Box>
@@ -337,13 +339,13 @@ export default function TraitsCreateComponent({ speciesField }) {
           </div>
           <Box>
             <FormControl>
-              <FormLabel htmlFor="speciesField">Species Field</FormLabel>
+              <FormLabel htmlFor="speciesField">{t("traits:create_form.species_field")}</FormLabel>
               <Select
                 id="speciesField"
                 name="speciesField"
                 value={trait.speciesField}
                 onChange={handleChange}
-                placeholder="Select field"
+                placeholder={t("traits:create_form.species_field_placeholder")}
               >
                 {speciesCategoryField.concat(speciesSubCategoryField).map((valueObj) => (
                   <option value={valueObj.id}>{valueObj.header}</option>
@@ -353,14 +355,14 @@ export default function TraitsCreateComponent({ speciesField }) {
           </Box>
           <Box>
             <FormControl>
-              <FormLabel htmlFor="source">Source</FormLabel>
+              <FormLabel htmlFor="source">{t("traits:create_form.source")}</FormLabel>
               <Input
                 type="text"
                 id="source"
                 name="source"
                 value={trait.source}
                 onChange={handleChange}
-                placeholder="Enter source"
+                placeholder={t("traits:create_form.source_placeholder")}
                 required
               />
             </FormControl>
@@ -368,31 +370,31 @@ export default function TraitsCreateComponent({ speciesField }) {
           <Box>
             {trait.dataType == "NUMERIC" && (
               <FormControl>
-                <FormLabel htmlFor="units">Units</FormLabel>
+                <FormLabel htmlFor="units">{t("traits:create_form.units")}</FormLabel>
                 <Input
                   type="text"
                   id="units"
                   name="units"
                   value={trait.units}
                   onChange={handleChange}
-                  placeholder="Enter units"
+                  placeholder={t("traits:create_form.units_placeholder")}
                   required
                 />
               </FormControl>
             )}
             {trait.dataType == "DATE" && (
               <FormControl>
-                <FormLabel htmlFor="units">Units</FormLabel>
+                <FormLabel htmlFor="units">{t("traits:create_form.units")}</FormLabel>
                 <Select
                   id="units"
                   name="units"
                   value={trait.units}
                   onChange={handleChange}
-                  placeholder="Units"
+                  placeholder={t("traits:create_form.units_placeholder")}
                   required
                 >
-                  <option value="MONTH">Month</option>
-                  <option value="YEAR">Year</option>
+                  <option value="MONTH">{t("traits:create_form.units_month")}</option>
+                  <option value="YEAR">{t("traits:create_form.units_year")}</option>
                 </Select>
               </FormControl>
             )}
@@ -406,7 +408,7 @@ export default function TraitsCreateComponent({ speciesField }) {
                 isChecked={trait.isObservation}
                 onChange={handleChange}
               >
-                Observation Trait
+                {t("traits:create_form.observation_trait")}
               </Checkbox>
             </FormControl>
           </Box>
@@ -418,31 +420,31 @@ export default function TraitsCreateComponent({ speciesField }) {
                 isChecked={trait.Paritcipatory}
                 onChange={handleChange}
               >
-                Paritcipatory
+                {t("traits:create_form.participatory")}
               </Checkbox>
             </FormControl>
           </GridItem>
           <GridItem colSpan={{ md: 3 }}>
             <FormControl>
-              <FormLabel htmlFor="description">Description</FormLabel>
+              <FormLabel htmlFor="description">{t("traits:create_form.description")}</FormLabel>
               <Textarea
                 id="description"
                 name="description"
                 value={trait.description}
                 onChange={handleChange}
-                placeholder="Enter trait description"
+                placeholder={t("traits:create_form.description_placeholder")}
                 rows={4}
               />
             </FormControl>
           </GridItem>
           <GridItem colSpan={{ md: 3 }}>
             <FormProvider {...hForm}>
-              <FormLabel htmlFor="taxon">Taxon</FormLabel>
+              <FormLabel htmlFor="taxon">{t("traits:create_form.taxon")}</FormLabel>
               <SelectAsyncInputField
                 name="query"
                 onQuery={onQuery}
                 optionComponent={ScientificNameOption}
-                placeholder={"Search"}
+                placeholder={t("traits:create_form.taxon_placeholder")}
                 resetOnSubmit={false}
                 isClearable={true}
                 multiple={true}
@@ -452,28 +454,28 @@ export default function TraitsCreateComponent({ speciesField }) {
           {trait.dataType == "NUMERIC" && (
             <>
               <GridItem colSpan={{ md: 4 }}>
-                <Heading fontSize="xl">Define Min and Max</Heading>
+                <Heading fontSize="xl">{t("traits:create_form.min_and_max")}</Heading>
               </GridItem>
               <FormControl mb={4}>
-                <FormLabel htmlFor="min">Min value</FormLabel>
+                <FormLabel htmlFor="min">{t("traits:create_form.min")}</FormLabel>
                 <Input
                   type="number"
                   id="min"
                   name="min"
                   value={trait.min}
                   onChange={handleChange}
-                  placeholder="Enter min value"
+                  placeholder={t("traits:create_form.min_placeholder")}
                 />
               </FormControl>
               <FormControl>
-                <FormLabel htmlFor="max">Max value</FormLabel>
+                <FormLabel htmlFor="max">{t("traits:create_form.max")}</FormLabel>
                 <Input
                   type="number"
                   id="max"
                   name="max"
                   value={trait.max}
                   onChange={handleChange}
-                  placeholder="Enter max value"
+                  placeholder={t("traits:create_form.max_placeholder")}
                 />
               </FormControl>
             </>
@@ -481,7 +483,7 @@ export default function TraitsCreateComponent({ speciesField }) {
           {trait.dataType == "STRING" && (
             <GridItem colSpan={{ md: 3 }}>
               <Heading mb={4} fontSize="xl">
-                Define Trait Values
+              {t("traits:create_form.trait_values_heading")}
               </Heading>
               {trait.values.map((valueObj, index) => (
                 <TraitsValueComponent
@@ -494,7 +496,7 @@ export default function TraitsCreateComponent({ speciesField }) {
               ))}
               <Box mb={4}>
                 <Button onClick={handleAddValue} colorScheme="green" mb={4}>
-                  Add Trait Value
+                {t("traits:create_form.add_trait_values_button")}
                 </Button>
               </Box>
             </GridItem>
@@ -503,7 +505,7 @@ export default function TraitsCreateComponent({ speciesField }) {
         {canSubmit && (
           <Box mb={4}>
             <Button type="submit" colorScheme="blue">
-              Add Traits
+            {t("traits:create_form.add_trait_button")}
             </Button>
           </Box>
         )}

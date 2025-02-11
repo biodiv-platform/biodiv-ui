@@ -229,10 +229,10 @@ export default function NameMatchingComponent() {
               <Flex flexDir="column" alignItems="center" p={4}>
                 <UploadIcon size={100} />
                 <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
-                  {"Drag and Drop excel files"}
+                {t("taxon:name_matching.upload_description")}
                 </Heading>
                 <Button colorScheme="blue" onClick={open} mb={8}>
-                  {"Browse"}
+                {t("taxon:name_matching.upload_button")}
                 </Button>
               </Flex>
             </Flex>
@@ -243,7 +243,7 @@ export default function NameMatchingComponent() {
           manyOptions={[]}
           isOpen={isOpen1}
           onClose={onClose1}
-          description={"Please select Scientific Name column"}
+          description={t("taxon:name_matching.columnMapping_description")}
           headers={headers}
           columnMapping={columnMapping}
           setColumnMapping={setColumnMapping}
@@ -269,10 +269,10 @@ export default function NameMatchingComponent() {
               <Flex justifyContent="flex-end">
                 <Menu>
                   <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                    Download As
+                  {t("taxon:name_matching.download_button")}
                   </MenuButton>
                   <MenuList>
-                    <MenuItem onClick={importAsExcel}>Microsoft Excel (.xlsx)</MenuItem>
+                    <MenuItem onClick={importAsExcel}>{t("taxon:name_matching.download_excel")}</MenuItem>
                     <MenuItem>
                       {" "}
                       <CSVLink
@@ -282,7 +282,7 @@ export default function NameMatchingComponent() {
                         }))}
                         filename="names.csv"
                       >
-                        Comma Seperated Values (.csv)
+                        {t("taxon:name_matching.download_csv")}
                       </CSVLink>
                     </MenuItem>
                   </MenuList>
@@ -294,7 +294,7 @@ export default function NameMatchingComponent() {
                 <Box bg="red.500" color="white" p={4} borderRadius="md" boxShadow="md" mb={4}>
                   <Text fontSize="md" fontWeight="bold">
                     <Icon as={WarningIcon} w={5} h={5} mr={4} />
-                    Warning: {"Couldn't find any matches for the following species name"}!
+                    {t("taxon:name_matching.warning_text")}
                   </Text>
                   {uploadResult
                     .filter(([, value]) => value.length == 0)
@@ -305,13 +305,14 @@ export default function NameMatchingComponent() {
                             href={`/species/create?name=${
                               key.slice(0, -1).split("|")[selectedColumn]
                             }`}
+                            target="_blank"
                           >
                             {key.slice(0, -1).split("|")[selectedColumn]}
                           </Link>
                         )}
                       </Box>
                     ))}
-                  <Text>Click on species name for creating species</Text>
+                  <Text>{t("taxon:name_matching.species_create_description")}</Text>
                 </Box>
               )}
               <Box mb={4} width="100%">
@@ -324,9 +325,9 @@ export default function NameMatchingComponent() {
                     setFilter(value);
                   }}
                 >
-                  <option value="All">All</option>
-                  <option value="Matched">Matched</option>
-                  <option value="Unmatched">Unmatched</option>
+                  <option value="All">{t("taxon:name_matching.all_filter")}</option>
+                  <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
+                  <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>
                 </Select>
               </Box>
               {filter == "Matched" && (

@@ -31,7 +31,9 @@ import { useDropzone } from "react-dropzone";
 
 import ColumnMapper from "../common/column-mapper";
 
-export default function TraitsBatchUpload() {
+export default function TraitsBatchUpload({traits}) {
+  const traitOptions =traits.flatMap((item) =>
+    item.traitsValuePairList.map((traitObj) => "Traits|"+traitObj.traits.name+"|"+traitObj.traits.id))
   const [uploadResult, setUploadResult] = useState<Map<string, string>[]>([]);
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
   const [termsAccepted, setTermsAccepted] = useState<boolean>(true);
@@ -51,7 +53,6 @@ export default function TraitsBatchUpload() {
     "Contributor",
     "License"
   ];
-  const manyOptions = ["Traits"];
   const { t } = useTranslation();
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     noClick: true,
@@ -264,10 +265,7 @@ export default function TraitsBatchUpload() {
 
       formData.append(
         "traits",
-        columnMapping
-          .filter(([, i]) => i === "Traits")
-          .map(([first]) => first) // Extract the first element
-          .join("|")
+        columnMapping.filter(([, i]) => i.split("|")[0] === "Traits").map(([first,second]) => first+":"+second.split("|")[2]).join("|")
       );
 
       const { success, data } = await axUploadTraitsFile(formData);
@@ -302,10 +300,10 @@ export default function TraitsBatchUpload() {
             <Flex flexDir="column" alignItems="center" p={4}>
               <UploadIcon size={100} />
               <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
-                {"Drag and Drop excel files"}
+              {t("traits:trait_matching.browse_description")}
               </Heading>
               <Button colorScheme="blue" onClick={open} mb={8}>
-                {"Browse"}
+              {t("traits:trait_matching.browse_button")}
               </Button>
             </Flex>
           </Flex>
@@ -313,17 +311,15 @@ export default function TraitsBatchUpload() {
       )}
       <ColumnMapper
         options={options}
-        manyOptions={manyOptions}
+        manyOptions={traitOptions}
         isOpen={isOpen1}
         onClose={onClose1}
-        description={
-          "Please map atleast one column to traits. Make sure to map Scientific Name,TaxonConceptId, SpeciesId, Attribution, Contributor."
-        }
+        description={t("traits:trait_matching.column_mapping_description")}
         headers={headers}
         columnMapping={columnMapping}
         setColumnMapping={setColumnMapping}
         onSubmit={columnMappingSubmit}
-        optionDisabled={columnMapping.filter(([, i]) => i === "Traits").length == 0}
+        optionDisabled={columnMapping.filter(([, i]) => i.split("|")[0] === "Traits").length == 0}
       />
       {currentStep != 1 && (
         <>
@@ -373,37 +369,6 @@ export default function TraitsBatchUpload() {
             </Box>
           )}
           <Box>
-            <Text fontSize="lg" mb={4}>
-              <Text as="span" color="blue.500" fontWeight="bold">
-                {Object.keys(uploadResult[0]).filter((key) => key.includes("|true")).length}
-              </Text>{" "}
-              out of{" "}
-              <Text as="span" fontWeight="bold">
-                {Object.keys(uploadResult[0]).filter((key) => key.split("|").length > 1).length}
-              </Text>{" "}
-              traits matched successfully.
-            </Text>
-            {Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length != 0 && (
-              <Box bg="red.500" color="white" p={4} borderRadius="md" boxShadow="md" mb={4}>
-                <Text fontSize="md" fontWeight="bold">
-                  <Icon as={WarningIcon} w={5} h={5} mr={4} />
-                  Warning: {"Couldn't find any matches for the following traits"}!
-                </Text>
-                {Object.keys(uploadResult[0])
-                  .filter((key) => key.includes("|false"))
-                  .map((key) => (
-                    <Box ml={9}>
-                      <Link href={`/traits/create?name=${key.split("|")[0]}`}>
-                        {
-                          key.split("|")[
-                            columnMapping.filter(([, i]) => i === "ScientificName")[0][0]
-                          ]
-                        }
-                      </Link>
-                    </Box>
-                  ))}
-              </Box>
-            )}
             {Object.entries(uploadResult[0]).filter(
               ([key, value]) => key.includes("|DATE") && value.split("|").length != 2
             ).length != 0 && (
@@ -441,11 +406,14 @@ export default function TraitsBatchUpload() {
                         >
                           {expandedRows.includes(index) ? "-" : "+"}
                         </Button>
-                        <span style={{ fontWeight: "bold" }}>{item["Scientific Name"]}</span>
+                        <span style={{ fontWeight: "bold" }}><Link
+                            href={`/species/show/${parseInt(item["Species Id"], 10)}`}
+                            target="_blank"
+                          >{item["Scientific Name"]}</Link></span>
                         {expandedRows.includes(index) && (
                           <Box ml={8}>
                             <Heading fontSize="medium" m={2}>
-                              💎 {"Traits"}
+                              💎 {t("traits:trait_matching.traits")}
                             </Heading>
                             <Box ml={8}>
                               <table className="table table-bordered">
@@ -599,7 +567,7 @@ export default function TraitsBatchUpload() {
               <Checkbox isChecked={termsAccepted} onChange={() => setTermsAccepted(!termsAccepted)}>
                 {t("traits:terms.description")}
               </Checkbox>
-              {!termsAccepted && <Text color="red.500">* Terms need to be accepted</Text>}
+              {!termsAccepted && <Text color="red.500">{t("traits:trait_matching.terms_warning")}</Text>}
             </Box>
             {!showstats && (
               <Flex justifyContent="flex-end" mt={4}>
@@ -615,7 +583,7 @@ export default function TraitsBatchUpload() {
                     !termsAccepted
                   }
                 >
-                  Batch Upload
+                  {t("traits:trait_matching.batch_upload")}
                 </Button>
               </Flex>
             )}

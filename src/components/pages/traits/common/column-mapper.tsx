@@ -11,6 +11,7 @@ import {
   SimpleGrid,
   Text
 } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const ColumnMapper = ({
@@ -25,6 +26,7 @@ const ColumnMapper = ({
   optionDisabled,
   onSubmit
 }) => {
+  const { t } = useTranslation();
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -73,11 +75,19 @@ const ColumnMapper = ({
                         {field}
                       </option>
                     ))}
-                    {manyOptions.map((field) => (
-                      <option key={field} value={field}>
-                        {field}
-                      </option>
-                    ))}
+                    {manyOptions.length > 1 && (
+                      <optgroup label="Traits">
+                        {manyOptions.map((field) => (
+                          <option
+                            key={field}
+                            value={field}
+                            disabled={columnMapping.some(([, i]) => i === field)}
+                          >
+                            {field.split("|")[1]}
+                          </option>
+                        ))}
+                      </optgroup>
+                    )}
                   </Select>
                 </SimpleGrid>
               </Box>
@@ -92,10 +102,10 @@ const ColumnMapper = ({
               onClose();
             }}
           >
-            Cancel
+            {t("traits:trait_matching.cancel")}
           </Button>
           <Button colorScheme="blue" disabled={optionDisabled} onClick={onSubmit}>
-            Continue
+            {t("traits:trait_matching.continue")}
           </Button>
         </ModalFooter>
       </ModalContent>

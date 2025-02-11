@@ -1,8 +1,64 @@
 {
+  "create_form": {
+    "add_trait_button": "Manampy toetra",
+    "add_trait_values_button": "Ampio ny sandan'ny toetra",
+    "data_type": "Type data",
+    "data_type_color": "Loko",
+    "data_type_date": "Daty",
+    "data_type_numeric": "Nomery",
+    "data_type_placeholder": "Safidio ny karazana",
+    "data_type_string": "tady",
+    "description": "Description",
+    "description_placeholder": "Ampidiro ny famaritana toetra",
+    "heading": "Manampy toetra",
+    "max": "Ny sandan'ny Max",
+    "max_placeholder": "Ampidiro ny sandan'ny Max",
+    "min": "MIN sanda",
+    "min_and_max": "Farito ny Min sy Max",
+    "min_placeholder": "Ampidiro ny lanjan'ny min",
+    "name": "Anarana",
+    "observation_trait": "Trait fandinihana",
+    "participatory": "Paritcipatory",
+    "source": "Source",
+    "source_placeholder": "Ampidiro loharano",
+    "species_field": "Sehatra karazana",
+    "species_field_placeholder": "Safidio ny saha",
+    "taxon": "Taxon",
+    "taxon_placeholder": "karohy",
+    "trait_name": "Anarana iombonana",
+    "trait_name_placeholder": "Ampidiro anarana ny anarana",
+    "trait_values_heading": "Farito ny soatoavina trait",
+    "type": "Type",
+    "type_multiple_categorical": "Sokajy marobe",
+    "type_placeholder": "Safidio ny karazana",
+    "type_range": "isan-karazany",
+    "type_single_categorical": "Sokajy tokana",
+    "units": "vondrona",
+    "units_month": "VOLANA",
+    "units_placeholder": "Ampidiro ireo unit",
+    "units_year": "TAOM-"
+  },
   "terms": {
     "description": "Amin'ny fandefasana ity taratasy ity dia manamafy ianao fa ny angon-drakitra ampidirinao dia ny asanao manokana, na manana alalana avy amin'ny tompon'andraikitry ny zon'ny mpamorona ianao mba hizara azy io eo ambany lisansa Creative Commons Attribution (CC-BY)."
   },
   "trait_matching": {
-    "description": "Alefaso ny takelaka misy taxonconceptid tsanganana iray ary tsanganana iray na maromaro amin'ny lohateny ho anarana. \nNy sela tsirairay dia tokony ahitana ny soatoavina misaraka amin'ny komma mifanandrify amin'ny andalana ny hetra. \nHamarino fa ny toetra sy ny soatoavina dia efa misy ao amin'ny rafitra. \nRaha tsy manao izany izy ireo dia avelao izy ireo alohan'ny hanandrana mifanandrify."
+    "batch_upload": "Bibikely Upload",
+    "browse_button": "Browse",
+    "browse_description": "Tariho sy dropy rakitra Excel",
+    "cancel": "hanafoana",
+    "column_mapping_description": "Azafady azafady atleast ny tsanganana iray amin'ny toetra. \nAtaovy azo antoka fa manome anarana siantifika, taxonconceptid, karazana, ny attramus, mpandray anjara.",
+    "continue": "FOANA",
+    "description": "Alefaso ny takelaka misy taxonconceptid tsanganana iray ary tsanganana iray na maromaro amin'ny lohateny ho anarana. \nNy sela tsirairay dia tokony ahitana ny soatoavina misaraka amin'ny komma mifanandrify amin'ny andalana ny hetra. \nHamarino fa ny toetra sy ny soatoavina dia efa misy ao amin'ny rafitra. \nRaha tsy manao izany izy ireo dia avelao izy ireo alohan'ny hanandrana mifanandrify.",
+    "terms_warning": "* Mila ekena ny teny",
+    "traits": "toetra"
+  },
+  "traits_show": {
+    "data_type": "Type data",
+    "description": "Description",
+    "icon": "matoanteny",
+    "source": "Source",
+    "trait_type": "Karazana trait",
+    "value": "sarobidy",
+    "values": "TARI-DALANA"
   }
 }
