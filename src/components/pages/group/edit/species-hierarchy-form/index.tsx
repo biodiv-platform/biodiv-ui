@@ -1,4 +1,4 @@
-import { Box, Checkbox } from "@chakra-ui/react";
+import { Box, Button, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { axGetSpeciesFieldsMapping } from "@services/usergroup.service";
@@ -201,6 +201,17 @@ export default function SpeciesHierarchyForm({
 
   const { setValue } = methods;
 
+  const handleSelectAll = () => {
+    const allLeafNodes = getAllLeafNodes(data);
+    setSelections(allLeafNodes);
+    setValue("selectedNodes", allLeafNodes);
+  };
+
+  const handleClearAll = () => {
+    setSelections([]);
+    setValue("selectedNodes", []);
+  };
+
   const handleNodeSelect = (node: SelectedNode) => {
     setSelections((prev) => {
       const currentNodes = [...prev];
@@ -310,6 +321,15 @@ export default function SpeciesHierarchyForm({
                 <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900">
                   Species Structure
                 </Box>
+                <Box display="flex" gap={4}>
+                  <Button size="sm" variant="outline" colorScheme="blue" onClick={handleSelectAll}>
+                    Select All
+                  </Button>
+                  <Button size="sm" variant="outline" colorScheme="gray" onClick={handleClearAll}>
+                    Clear All
+                  </Button>
+                </Box>
+
                 {apiStatus.loading && (
                   <Box fontSize="sm" color="gray.500">
                     Saving selections...
