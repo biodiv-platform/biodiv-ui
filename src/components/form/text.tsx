@@ -1,5 +1,12 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
-import React from "react";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Textarea
+} from "@chakra-ui/react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useController } from "react-hook-form";
 
 interface ITextBoxProps {
@@ -16,6 +23,7 @@ interface ITextBoxProps {
   showLabel?: boolean;
   hidden?;
   autoComplete?;
+  multiline?: boolean;
 }
 
 export const TextBoxField = ({
@@ -31,12 +39,28 @@ export const TextBoxField = ({
   maxLength,
   hidden,
   autoComplete,
+  multiline = false,
   ...props
 }: ITextBoxProps) => {
   const { field, fieldState } = useController({
     name,
     defaultValue: "" // to prevent uncontrolled to controlled error
   });
+
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const adjustHeight = useCallback(() => {
+    if (multiline && textareaRef.current) {
+      textareaRef.current.style.height = "inherit";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [multiline]);
+
+  useEffect(() => {
+    adjustHeight();
+  }, [field.value, adjustHeight]);
+
+  const InputComponent = multiline ? Textarea : Input;
 
   return (
     <FormControl
@@ -47,14 +71,37 @@ export const TextBoxField = ({
       {...props}
     >
       {showLabel && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <Input
+      <InputComponent
         id={id || name}
         placeholder={label}
         type={type}
         maxLength={maxLength}
         isDisabled={disabled}
         autoComplete={autoComplete}
+        resize="none"
+        overflow="hidden"
+        rows={1}
         {...field}
+        onChange={(e) => {
+          field.onChange(e);
+          adjustHeight();
+        }}
+        ref={(element) => {
+          if (multiline) {
+            textareaRef.current = element;
+          }
+          field.ref(element);
+        }}
+        sx={
+          multiline
+            ? {
+                "&": {
+                  minHeight: "40px",
+                  height: "auto"
+                }
+              }
+            : undefined
+        }
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {maxLength && field.value && (

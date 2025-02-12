@@ -166,6 +166,7 @@ export interface Reference {
   url?: string | null;
   speciesId?: number | string;
   speciesFieldId?: number | string | null;
+  isDeleted: string;
 }
 
 export interface Resource {

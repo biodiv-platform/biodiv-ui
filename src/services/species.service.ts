@@ -280,3 +280,14 @@ export const axUpdateSpeciesReferences = async (payload, speciesId) => {
     return { success: false, data: null };
   }
 };
+
+export const axDeleteSpeciesReferences = async (referenceId) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.SPECIES}/v1/species/delete/reference/${referenceId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
+  }
+};
