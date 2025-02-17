@@ -1,9 +1,13 @@
 import { Box, Button, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
-import { axGetSpeciesFieldsMapping } from "@services/usergroup.service";
+import { axGetSpeciesFieldsMapping, axUpdateSpeciesFieldContributors } from "@services/usergroup.service";
+import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
+import AdminInviteField from "../../common/admin-invite-field";
 
 interface SelectedNode {
   id: number;
@@ -18,6 +22,16 @@ interface SpeciesHierarchyProps {
   langId: number;
   userGroupId: string;
 }
+
+const onMemberRemoved = async ({ value }, initialMembers) => {
+  // if (initialMembers.includes(value)) {
+  //   return await axUserGroupRemoveAdminMembers(userGroupId, value);
+  // }
+
+  // return { success: true };
+  console.log("initialMembers", initialMembers);
+  console.log("remove member", value);
+};
 
 // Helper function to get all leaf nodes recursively
 const getAllLeafNodes = (items: any[]): SelectedNode[] => {
@@ -186,6 +200,7 @@ export default function SpeciesHierarchyForm({
   langId,
   userGroupId
 }: SpeciesHierarchyProps) {
+  const { t } = useTranslation();
   const [data, setData] = useState<any[]>(initialData);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -193,9 +208,10 @@ export default function SpeciesHierarchyForm({
   const [apiStatus, setApiStatus] = useState({ loading: false, error: "" });
   const [selections, setSelections] = useState<SelectedNode[]>([]);
 
-  const methods = useForm<{ selectedNodes: SelectedNode[] }>({
+  const methods = useForm<{ selectedNodes: SelectedNode[]; members: any[] }>({
     defaultValues: {
-      selectedNodes: [] as SelectedNode[]
+      selectedNodes: [],
+      members: []
     }
   });
 
@@ -287,6 +303,37 @@ export default function SpeciesHierarchyForm({
     }
   };
 
+  const handleContributorsSubmit = async (memberValues) => {
+    if (!memberValues?.length) {
+      setApiStatus({ loading: false, error: "Please select at least one member" });
+      return;
+    }
+
+    try {
+      setApiStatus({ loading: true, error: "" });
+      const payload = memberValues.map(member => ({
+        valueType: "contributor",
+        valueId: member.value
+      }));
+      
+      const { success, data } = await axUpdateSpeciesFieldContributors(userGroupId, payload);
+      
+      if (success) {
+        notification("Contributors added successfully", NotificationType.Success);
+        methods.setValue("members", []); // Clear the selection
+      } else {
+        notification("Failed to add contributors", NotificationType.Error);
+      }
+      
+      setApiStatus({ loading: false, error: "" });
+    } catch (err) {
+      setApiStatus({
+        loading: false,
+        error: err instanceof Error ? err.message : "Unknown error occurred"
+      });
+    }
+  };
+
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minH="64">
@@ -315,7 +362,7 @@ export default function SpeciesHierarchyForm({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleFormSubmit)} className="fadeInUp">
         <Box maxW="4xl" mx="auto" p={6}>
-          <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200">
+          <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200" mb={6}>
             <Box p={6}>
               <Box display="flex" alignItems="center" justifyContent="space-between" mb={6}>
                 <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900">
@@ -341,6 +388,7 @@ export default function SpeciesHierarchyForm({
                   </Box>
                 )}
               </Box>
+
               <Box>
                 {data.map((item) => (
                   <TreeItem
@@ -369,6 +417,33 @@ export default function SpeciesHierarchyForm({
                 <Box>
                   <SubmitButton isDisabled={!selections.length}>Submit Selections</SubmitButton>
                 </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          {/* Members Selection Box */}
+          <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200" mt={6}>
+            <Box p={6}>
+              <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900" mb={4}>
+                Add species field contributors
+              </Box>
+              {/* <UserSelectField name="members" label="Search and select members" mb={4} /> */}
+              <AdminInviteField
+                name="members"
+                label="Search and select members"
+                onRemove={(o) => onMemberRemoved(o, [])}
+              />
+              <Box display="flex" justifyContent="flex-end">
+                <Button
+                  colorScheme="blue"
+                  isLoading={apiStatus.loading}
+                  onClick={() => {
+                    const memberValues = methods.getValues("members");
+                    handleContributorsSubmit(memberValues);
+                  }}
+                >
+                  Add contributors
+                </Button>
               </Box>
             </Box>
           </Box>

@@ -470,3 +470,16 @@ export const axUpdateGroupObsCustomisations = async (payload) => {
     return { success: false, data: null };
   }
 };
+
+export const axUpdateSpeciesFieldContributors = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/speciesField/metadata/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
