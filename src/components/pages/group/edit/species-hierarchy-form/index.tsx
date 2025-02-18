@@ -1,13 +1,14 @@
 import { Box, Button, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
+import UserSelectField from "@components/pages/species/show/fields/field/user-edit-input";
 import { axGetAllFieldsMeta } from "@services/species.service";
-import { axGetSpeciesFieldsMapping, axUpdateSpeciesFieldContributors } from "@services/usergroup.service";
+import {
+  axGetSpeciesFieldsMapping,
+  axUpdateSpeciesFieldContributors
+} from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
-import AdminInviteField from "../../common/admin-invite-field";
 
 interface SelectedNode {
   id: number;
@@ -22,16 +23,6 @@ interface SpeciesHierarchyProps {
   langId: number;
   userGroupId: string;
 }
-
-const onMemberRemoved = async ({ value }, initialMembers) => {
-  // if (initialMembers.includes(value)) {
-  //   return await axUserGroupRemoveAdminMembers(userGroupId, value);
-  // }
-
-  // return { success: true };
-  console.log("initialMembers", initialMembers);
-  console.log("remove member", value);
-};
 
 // Helper function to get all leaf nodes recursively
 const getAllLeafNodes = (items: any[]): SelectedNode[] => {
@@ -200,7 +191,6 @@ export default function SpeciesHierarchyForm({
   langId,
   userGroupId
 }: SpeciesHierarchyProps) {
-  const { t } = useTranslation();
   const [data, setData] = useState<any[]>(initialData);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -311,20 +301,20 @@ export default function SpeciesHierarchyForm({
 
     try {
       setApiStatus({ loading: true, error: "" });
-      const payload = memberValues.map(member => ({
+      const payload = memberValues.map((member) => ({
         valueType: "contributor",
         valueId: member.value
       }));
-      
-      const { success, data } = await axUpdateSpeciesFieldContributors(userGroupId, payload);
-      
+
+      const { success } = await axUpdateSpeciesFieldContributors(userGroupId, payload);
+
       if (success) {
         notification("Contributors added successfully", NotificationType.Success);
         methods.setValue("members", []); // Clear the selection
       } else {
         notification("Failed to add contributors", NotificationType.Error);
       }
-      
+
       setApiStatus({ loading: false, error: "" });
     } catch (err) {
       setApiStatus({
@@ -427,12 +417,7 @@ export default function SpeciesHierarchyForm({
               <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900" mb={4}>
                 Add species field contributors
               </Box>
-              {/* <UserSelectField name="members" label="Search and select members" mb={4} /> */}
-              <AdminInviteField
-                name="members"
-                label="Search and select members"
-                onRemove={(o) => onMemberRemoved(o, [])}
-              />
+              <UserSelectField name="members" label="Search and select members" mb={4} />
               <Box display="flex" justifyContent="flex-end">
                 <Button
                   colorScheme="blue"
