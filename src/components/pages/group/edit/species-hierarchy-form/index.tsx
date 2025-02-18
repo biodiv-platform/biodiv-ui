@@ -2,8 +2,10 @@ import { Box, Button, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import UserSelectField from "@components/pages/species/show/fields/field/user-edit-input";
 import { axGetAllFieldsMeta } from "@services/species.service";
+import { axGetUsersByID } from "@services/user.service";
 import {
   axGetSpeciesFieldsMapping,
+  axGetUgSpeciesFieldsMetaData,
   axUpdateSpeciesFieldContributors
 } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
@@ -264,6 +266,15 @@ export default function SpeciesHierarchyForm({
 
         setSelections(ugSfMappingData.length > 0 ? filtered : allLeafNodes);
         setValue("selectedNodes", ugSfMappingData.length > 0 ? filtered : allLeafNodes);
+
+        const { ugSfMetaData } = await axGetUgSpeciesFieldsMetaData(userGroupId);
+        const contributorIds = ugSfMetaData
+          .filter((v) => v.valueType == "contributor")
+          .map((m) => m.valueId);
+
+        const contributors = await axGetUsersByID(contributorIds.join(","));
+
+        setValue("members", contributors);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error");
       } finally {
