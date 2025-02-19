@@ -305,10 +305,10 @@ export default function SpeciesHierarchyForm({
   };
 
   const handleContributorsSubmit = async (memberValues) => {
-    if (!memberValues?.length) {
-      setApiStatus({ loading: false, error: "Please select at least one member" });
-      return;
-    }
+    // if (!memberValues?.length) {
+    //   setApiStatus({ loading: false, error: "Please select at least one member" });
+    //   return;
+    // }
 
     try {
       setApiStatus({ loading: true, error: "" });
