@@ -1,6 +1,5 @@
 import { Box, Button, Checkbox } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
-import UserSelectField from "@components/pages/species/show/fields/field/user-edit-input";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { axGetUsersByID } from "@services/user.service";
 import {
@@ -11,6 +10,8 @@ import {
 import notification, { NotificationType } from "@utils/notification";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
+import ContributorSelectField from "./contributor-select-field";
 
 interface SelectedNode {
   id: number;
@@ -428,7 +429,7 @@ export default function SpeciesHierarchyForm({
               <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900" mb={4}>
                 Add species field contributors
               </Box>
-              <UserSelectField name="members" label="Search and select members" mb={4} />
+              <ContributorSelectField name="members" label="Search and select members" mb={4} />
               <Box display="flex" justifyContent="flex-end">
                 <Button
                   colorScheme="blue"
