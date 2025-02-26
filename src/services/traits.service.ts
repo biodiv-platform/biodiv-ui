@@ -15,13 +15,11 @@ export const axCreateTrait = async (params) => {
   }
 };
 
-export const axUpdateTrait = async (params, traitValues) => {
+export const axUpdateTrait = async (id, translations) => {
   try {
-    const { data } = await plainHttp.post(
-      `${ENDPOINT.TRAITS}/v1/factservice/trait/update`,
-      { traitValues },
-      { params }
-    );
+    const { data } = await plainHttp.post(`${ENDPOINT.TRAITS}/v1/factservice/trait/update/${id}`, {
+      translations
+    });
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -48,6 +46,18 @@ export const axUpdateSpeciesTrait = async (id, newFacts, userId, taxonId) => {
 };
 
 export const axGetTraitShowData = async (traitId) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.TRAITS}/v1/factservice/trait/${traitId}/205`,
+      {}
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
+export const axGetTraitTranslationData = async (traitId) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.TRAITS}/v1/factservice/trait/${traitId}`, {});
     return { success: true, data };
