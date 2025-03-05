@@ -155,7 +155,7 @@ export default function SpeciesShowPageComponent({
   };
 
   const commonReferences = species.referencesListing
-    .filter((reference: Reference) => !reference.isDeleted)
+    .filter((reference: Reference) => !reference.isDeleted && reference.title)
     .sort((a: Reference, b: Reference) => a.title.localeCompare(b.title));
 
   return (
