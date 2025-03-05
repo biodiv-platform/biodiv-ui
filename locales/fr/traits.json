@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "Ajouter des traits",
     "add_trait_values_button": "Ajouter la valeur des traits",
+    "add_translation_button": "Ajouter une traduction",
+    "cancel": "Annuler",
+    "continue": "Continuer",
     "data_type": "Type de données",
     "data_type_color": "Couleur",
     "data_type_date": "Date",
@@ -11,6 +14,8 @@
     "description": "Description",
     "description_placeholder": "Entrez la description des traits",
     "heading": "Ajouter des traits",
+    "language": "Langue",
+    "language_placeholder": "Sélectionner la langue",
     "max": "Valeur maximale",
     "max_placeholder": "Entrez la valeur maximale",
     "min": "Valeur min",
@@ -19,6 +24,7 @@
     "name": "Nom",
     "observation_trait": "Trait d'observation",
     "participatory": "Palipatoire",
+    "save": "Sauvegarder",
     "source": "Source",
     "source_placeholder": "Entrez la source",
     "species_field": "Champ d'espèces",
@@ -28,6 +34,7 @@
     "trait_name": "Nom de trait",
     "trait_name_placeholder": "Entrez le nom des traits",
     "trait_values_heading": "Définir les valeurs des traits",
+    "translate_values_heading": "Traduire les valeurs de traits",
     "type": "Taper",
     "type_multiple_categorical": "Multiples catégoriques",
     "type_placeholder": "Sélectionner le type",
@@ -36,7 +43,8 @@
     "units": "Unités",
     "units_month": "Mois",
     "units_placeholder": "Entrer des unités",
-    "units_year": "Année"
+    "units_year": "Année",
+    "value": "Valeur"
   },
   "terms": {
     "description": "En soumettant ce formulaire, vous confirmez que les données que vous téléchargez sont votre propre travail, ou que vous avez la permission du titulaire du droit d'auteur pour les partager sous la licence Creative Commons Attribution (CC-BY)."

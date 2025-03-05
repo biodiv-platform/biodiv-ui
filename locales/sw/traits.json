@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "Ongeza sifa",
     "add_trait_values_button": "Ongeza thamani ya tabia",
+    "add_translation_button": "Ongeza tafsiri",
+    "cancel": "Ghairi",
+    "continue": "Endelea",
     "data_type": "Aina ya data",
     "data_type_color": "Rangi",
     "data_type_date": "Tarehe",
@@ -11,6 +14,8 @@
     "description": "Maelezo",
     "description_placeholder": "Ingiza maelezo ya tabia",
     "heading": "Ongeza sifa",
+    "language": "Lugha",
+    "language_placeholder": "Chagua lugha",
     "max": "Thamani ya Max",
     "max_placeholder": "Ingiza Thamani ya Max",
     "min": "Thamani ya min",
@@ -19,6 +24,7 @@
     "name": "Jina",
     "observation_trait": "Tabia ya uchunguzi",
     "participatory": "Paritcipatory",
+    "save": "Kuokoa",
     "source": "Chanzo",
     "source_placeholder": "Ingiza chanzo",
     "species_field": "Uwanja wa spishi",
@@ -28,6 +34,7 @@
     "trait_name": "Jina la tabia",
     "trait_name_placeholder": "Ingiza jina la tabia",
     "trait_values_heading": "Fafanua maadili ya tabia",
+    "translate_values_heading": "Tafsiri maadili ya tabia",
     "type": "Aina",
     "type_multiple_categorical": "Kategoria nyingi",
     "type_placeholder": "Chagua Aina",
@@ -36,7 +43,8 @@
     "units": "Vitengo",
     "units_month": "Mwezi",
     "units_placeholder": "Ingiza vitengo",
-    "units_year": "Mwaka"
+    "units_year": "Mwaka",
+    "value": "Thamani"
   },
   "terms": {
     "description": "Kwa kuwasilisha fomu hii, unathibitisha kuwa data unayopakia ni kazi yako mwenyewe, au unayo ruhusa kutoka kwa mmiliki wa hakimiliki ili kuishiriki chini ya leseni ya Creative Commons Attribution (CC-BY)."

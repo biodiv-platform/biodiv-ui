@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "लक्षण जोड़ें",
     "add_trait_values_button": "विशेषता मान जोड़ें",
+    "add_translation_button": "अनुवाद जोड़ें",
+    "cancel": "रद्द करना",
+    "continue": "जारी रखना",
     "data_type": "डेटा प्रकार",
     "data_type_color": "रंग",
     "data_type_date": "तारीख",
@@ -11,6 +14,8 @@
     "description": "विवरण",
     "description_placeholder": "विशेषता विवरण दर्ज करें",
     "heading": "लक्षण जोड़ें",
+    "language": "भाषा",
+    "language_placeholder": "भाषा चुने",
     "max": "अधिकतम मूल्य",
     "max_placeholder": "अधिकतम मान दर्ज करें",
     "min": "न्यूनतम मूल्य",
@@ -19,6 +24,7 @@
     "name": "नाम",
     "observation_trait": "अवलोकन गुण",
     "participatory": "परतदार",
+    "save": "बचाना",
     "source": "स्रोत",
     "source_placeholder": "स्रोत दर्ज करें",
     "species_field": "प्रजाति क्षेत्र",
@@ -28,6 +34,7 @@
     "trait_name": "विशेष नाम",
     "trait_name_placeholder": "विशेषता का नाम दर्ज करें",
     "trait_values_heading": "विशेषता मूल्यों को परिभाषित करें",
+    "translate_values_heading": "विशेषता मूल्यों का अनुवाद करें",
     "type": "प्रकार",
     "type_multiple_categorical": "बहुभुज",
     "type_placeholder": "प्रकार का चयन करें",
@@ -36,7 +43,8 @@
     "units": "इकाइयों",
     "units_month": "महीना",
     "units_placeholder": "इकाइयाँ दर्ज करें",
-    "units_year": "वर्ष"
+    "units_year": "वर्ष",
+    "value": "कीमत"
   },
   "terms": {
     "description": "इस फॉर्म को सबमिट करके, आप पुष्टि करते हैं कि आप जो डेटा अपलोड कर रहे हैं, वह आपका अपना काम है, या आपके पास कॉपीराइट धारक से क्रिएटिव कॉमन्स एट्रिब्यूशन (CC-BY) लाइसेंस के तहत इसे साझा करने की अनुमति है।"

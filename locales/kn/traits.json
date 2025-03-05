@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "ಗುಣಲಕ್ಷಣಗಳನ್ನು ಸೇರಿಸಿ",
     "add_trait_values_button": "ಗುಣಲಕ್ಷಣ ಮೌಲ್ಯವನ್ನು ಸೇರಿಸಿ",
+    "add_translation_button": "ಅನುವಾದವನ್ನು ಸೇರಿಸಿ",
+    "cancel": "ರದ್ದುಮಾಡು",
+    "continue": "ಮುಂದುವರಿಸು",
     "data_type": "ದತ್ತಾಂಶಗಳ ಪ್ರಕಾರ",
     "data_type_color": "ಬಣ್ಣ",
     "data_type_date": "ದಿನಾಂಕ",
@@ -11,6 +14,8 @@
     "description": "ವಿವರಣೆ",
     "description_placeholder": "ಗುಣಲಕ್ಷಣ ವಿವರಣೆಯನ್ನು ನಮೂದಿಸಿ",
     "heading": "ಗುಣಲಕ್ಷಣಗಳನ್ನು ಸೇರಿಸಿ",
+    "language": "ಭಾಷೆ",
+    "language_placeholder": "ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ",
     "max": "ಗರಿಷ್ಠ ಮೌಲ್ಯ",
     "max_placeholder": "ಗರಿಷ್ಠ ಮೌಲ್ಯವನ್ನು ನಮೂದಿಸಿ",
     "min": "ಕನಿಷ್ಠ ಮೌಲ್ಯ",
@@ -19,6 +24,7 @@
     "name": "ಹೆಸರು",
     "observation_trait": "ವೀಕ್ಷಣಾ ಲಕ್ಷಣ",
     "participatory": "ಚಾಚುವ",
+    "save": "ಉಳಿಸು",
     "source": "ಮೂಲ",
     "source_placeholder": "ಮೂಲವನ್ನು ನಮೂದಿಸಿ",
     "species_field": "ಜಾತಿ ಕ್ಷೇತ್ರ",
@@ -28,6 +34,7 @@
     "trait_name": "ಗುಣಲಕ್ಷಣದ ಹೆಸರು",
     "trait_name_placeholder": "ಗುಣಲಕ್ಷಣದ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
     "trait_values_heading": "ಗುಣಲಕ್ಷಣ ಮೌಲ್ಯಗಳನ್ನು ವಿವರಿಸಿ",
+    "translate_values_heading": "ಗುಣಲಕ್ಷಣ ಮೌಲ್ಯಗಳನ್ನು ಅನುವಾದಿಸಿ",
     "type": "ವಿಧ",
     "type_multiple_categorical": "ಬಹು ವರ್ಗದ",
     "type_placeholder": "ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
@@ -36,7 +43,8 @@
     "units": "ಘಟಕಗಳು",
     "units_month": "ತಿಂಗಳ",
     "units_placeholder": "ಘಟಕಗಳನ್ನು ನಮೂದಿಸಿ",
-    "units_year": "ವರ್ಷ"
+    "units_year": "ವರ್ಷ",
+    "value": "ಮೌಲ್ಯ"
   },
   "terms": {
     "description": "ಈ ಫಾರ್ಮ್ ಅನ್ನು ಸಲ್ಲಿಸುವ ಮೂಲಕ, ನೀವು ಅಪ್‌ಲೋಡ್ ಮಾಡುತ್ತಿರುವ ಡೇಟಾ ನಿಮ್ಮ ಸ್ವಂತ ಕೆಲಸ ಎಂದು ನೀವು ಖಚಿತಪಡಿಸುತ್ತೀರಿ, ಅಥವಾ ಕ್ರಿಯೇಟಿವ್ ಕಾಮನ್ಸ್ ಆಟ್ರಿಬ್ಯೂಷನ್ (ಸಿಸಿ-ಬಿವೈ) ಪರವಾನಗಿ ಅಡಿಯಲ್ಲಿ ಅದನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಹಕ್ಕುಸ್ವಾಮ್ಯ ಹೋಲ್ಡರ್‌ನಿಂದ ನಿಮಗೆ ಅನುಮತಿ ಇದೆ."

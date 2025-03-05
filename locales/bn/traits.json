@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "বৈশিষ্ট্য যুক্ত করুন",
     "add_trait_values_button": "বৈশিষ্ট্য মান যোগ করুন",
+    "add_translation_button": "অনুবাদ যোগ করুন",
+    "cancel": "বাতিল",
+    "continue": "চালিয়ে যান",
     "data_type": "ডেটা টাইপ",
     "data_type_color": "রঙ",
     "data_type_date": "তারিখ",
@@ -11,6 +14,8 @@
     "description": "বর্ণনা",
     "description_placeholder": "বৈশিষ্ট্য বর্ণনা লিখুন",
     "heading": "বৈশিষ্ট্য যুক্ত করুন",
+    "language": "ভাষা",
+    "language_placeholder": "ভাষা নির্বাচন করুন",
     "max": "সর্বাধিক মান",
     "max_placeholder": "সর্বাধিক মান লিখুন",
     "min": "ন্যূনতম মান",
@@ -19,6 +24,7 @@
     "name": "নাম",
     "observation_trait": "পর্যবেক্ষণ বৈশিষ্ট্য",
     "participatory": "Paritcipatory",
+    "save": "সংরক্ষণ করুন",
     "source": "উত্স",
     "source_placeholder": "উত্স প্রবেশ করুন",
     "species_field": "প্রজাতির ক্ষেত্র",
@@ -28,6 +34,7 @@
     "trait_name": "বৈশিষ্ট্য নাম",
     "trait_name_placeholder": "বৈশিষ্ট্য নাম লিখুন",
     "trait_values_heading": "বৈশিষ্ট্য মানগুলি সংজ্ঞায়িত করুন",
+    "translate_values_heading": "বৈশিষ্ট্য মান অনুবাদ করুন",
     "type": "প্রকার",
     "type_multiple_categorical": "একাধিক শ্রেণিবদ্ধ",
     "type_placeholder": "প্রকার নির্বাচন করুন",
@@ -36,7 +43,8 @@
     "units": "ইউনিট",
     "units_month": "মাস",
     "units_placeholder": "ইউনিট লিখুন",
-    "units_year": "বছর"
+    "units_year": "বছর",
+    "value": "মান"
   },
   "terms": {
     "description": "এই ফর্মটি জমা দিয়ে, আপনি নিশ্চিত করেছেন যে আপনি যে ডেটা আপলোড করছেন তা আপনার নিজের কাজ, বা কপিরাইট হোল্ডারের কাছ থেকে ক্রিয়েটিভ কমন্স অ্যাট্রিবিউশন (সিসি-বাই) লাইসেন্সের অধীনে এটি ভাগ করার অনুমতি রয়েছে।"

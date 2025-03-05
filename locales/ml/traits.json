@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "സ്വഭാവവിശേഷങ്ങൾ ചേർക്കുക",
     "add_trait_values_button": "സ്വഭാവമൂല്യങ്ങൾ ചേർക്കുക",
+    "add_translation_button": "വിവർത്തനം ചേർക്കുക",
+    "cancel": "റദ്ദാക്കുക",
+    "continue": "തുടരുക",
     "data_type": "ഡാറ്റ തരം",
     "data_type_color": "നിറം",
     "data_type_date": "തീയതി",
@@ -11,6 +14,8 @@
     "description": "വിവരണം",
     "description_placeholder": "സ്വഭാവ വിവരണം നൽകുക",
     "heading": "സ്വഭാവവിശേഷങ്ങൾ ചേർക്കുക",
+    "language": "ഭാഷ",
+    "language_placeholder": "ഭാഷ തിരഞ്ഞെടുക്കുക",
     "max": "പരമാവധി മൂല്യം",
     "max_placeholder": "പരമാവധി മൂല്യം നൽകുക",
     "min": "കുറഞ്ഞ മൂല്യം",
@@ -19,6 +24,7 @@
     "name": "പേര്",
     "observation_trait": "നിരീക്ഷണ സ്വഭാവം",
     "participatory": "പകര്ച്ചയായ",
+    "save": "രക്ഷിക്കുക",
     "source": "ഉല്ഭവസ്ഥാനം",
     "source_placeholder": "ഉറവിടം നൽകുക",
     "species_field": "സ്പീഷിസ് ഫീൽഡ്",
@@ -28,6 +34,7 @@
     "trait_name": "സ്വഭാവത്തിന്റെ പേര്",
     "trait_name_placeholder": "സ്വഭാവത്തിന്റെ പേര് നൽകുക",
     "trait_values_heading": "സ്വഭാവഗുണങ്ങൾ നിർവചിക്കുക",
+    "translate_values_heading": "സ്വഭാവഗുണങ്ങൾ വിവർത്തനം ചെയ്യുക",
     "type": "ടൈപ്പ് ചെയ്യുക",
     "type_multiple_categorical": "ഒന്നിലധികം വർഗ്ഗീകരണം",
     "type_placeholder": "തരം തിരഞ്ഞെടുക്കുക",
@@ -36,7 +43,8 @@
     "units": "യൂണിറ്റുകൾ",
     "units_month": "മാസം",
     "units_placeholder": "യൂണിറ്റുകൾ നൽകുക",
-    "units_year": "വര്ഷം"
+    "units_year": "വര്ഷം",
+    "value": "വിലമതിക്കുക"
   },
   "terms": {
     "description": "ഈ ഫോം സമർപ്പിക്കുന്നതിലൂടെ, നിങ്ങൾ അപ്ലോഡുചെയ്യുന്ന ഡാറ്റ നിങ്ങളുടെ സ്വന്തം ജോലിയാണെന്ന് നിങ്ങൾ സ്ഥിരീകരിക്കുന്നു, അല്ലെങ്കിൽ ക്രിയേറ്റീവ് കോമൺസ് ആട്രിബ്യൂഷൻ (സിസി-ബൈ) ലൈസൻസിന് കീഴിൽ ഇത് പങ്കിടാൻ നിങ്ങൾക്ക് അനുമതിയുണ്ട്."

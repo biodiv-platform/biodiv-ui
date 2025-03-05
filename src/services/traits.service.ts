@@ -5,8 +5,11 @@ export const axCreateTrait = async (params) => {
   try {
     const { data } = await plainHttp.post(
       `${ENDPOINT.TRAITS}/v1/factservice/trait/create`,
-      {}, // Empty object for request body if not needed
-      { params }
+      params
+    , // Empty object for request body if not needed
+      {
+        headers: { "Content-Type": "application/json" }
+      }
     );
     return { success: true, data };
   } catch (e) {
@@ -17,9 +20,11 @@ export const axCreateTrait = async (params) => {
 
 export const axUpdateTrait = async (id, translations) => {
   try {
-    const { data } = await plainHttp.post(`${ENDPOINT.TRAITS}/v1/factservice/trait/update/${id}`, {
-      translations
-    });
+    const { data } = await plainHttp.post(`${ENDPOINT.TRAITS}/v1/factservice/trait/update/${id}`, translations,
+      {
+        headers: { "Content-Type": "application/json" }
+      }
+    );
     return { success: true, data };
   } catch (e) {
     console.error(e);

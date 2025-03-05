@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "Manampy toetra",
     "add_trait_values_button": "Ampio ny sandan'ny toetra",
+    "add_translation_button": "Manampy fandikana",
+    "cancel": "hanafoana",
+    "continue": "FOANA",
     "data_type": "Type data",
     "data_type_color": "Loko",
     "data_type_date": "Daty",
@@ -11,6 +14,8 @@
     "description": "Description",
     "description_placeholder": "Ampidiro ny famaritana toetra",
     "heading": "Manampy toetra",
+    "language": "Fiteny",
+    "language_placeholder": "Safidio ny fiteny",
     "max": "Ny sandan'ny Max",
     "max_placeholder": "Ampidiro ny sandan'ny Max",
     "min": "MIN sanda",
@@ -19,6 +24,7 @@
     "name": "Anarana",
     "observation_trait": "Trait fandinihana",
     "participatory": "Paritcipatory",
+    "save": "afa-tsy",
     "source": "Source",
     "source_placeholder": "Ampidiro loharano",
     "species_field": "Sehatra karazana",
@@ -28,6 +34,7 @@
     "trait_name": "Anarana iombonana",
     "trait_name_placeholder": "Ampidiro anarana ny anarana",
     "trait_values_heading": "Farito ny soatoavina trait",
+    "translate_values_heading": "Handika ny soatoavin'ny toetra",
     "type": "Type",
     "type_multiple_categorical": "Sokajy marobe",
     "type_placeholder": "Safidio ny karazana",
@@ -36,7 +43,8 @@
     "units": "vondrona",
     "units_month": "VOLANA",
     "units_placeholder": "Ampidiro ireo unit",
-    "units_year": "TAOM-"
+    "units_year": "TAOM-",
+    "value": "sarobidy"
   },
   "terms": {
     "description": "Amin'ny fandefasana ity taratasy ity dia manamafy ianao fa ny angon-drakitra ampidirinao dia ny asanao manokana, na manana alalana avy amin'ny tompon'andraikitry ny zon'ny mpamorona ianao mba hizara azy io eo ambany lisansa Creative Commons Attribution (CC-BY)."

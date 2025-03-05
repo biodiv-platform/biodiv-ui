@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "Add Traits",
     "add_trait_values_button": "Add Trait Value",
+    "add_translation_button": "Add Translation",
+    "cancel": "Cancel",
+    "continue": "Continue",
     "data_type": "Data Type",
     "data_type_color": "Color",
     "data_type_date": "Date",
@@ -11,6 +14,8 @@
     "description": "Description",
     "description_placeholder": "Enter trait description",
     "heading": "Add Traits",
+    "language": "Language",
+    "language_placeholder": "Select Language",
     "max": "Max value",
     "max_placeholder": "Enter max value",
     "min": "Min value",
@@ -19,6 +24,7 @@
     "name": "Name",
     "observation_trait": "Observation Trait",
     "participatory": "Paritcipatory",
+    "save": "Save",
     "source": "Source",
     "source_placeholder": "Enter source",
     "species_field": "Species Field",
@@ -28,6 +34,7 @@
     "trait_name": "Trait Name",
     "trait_name_placeholder": "Enter trait name",
     "trait_values_heading": "Define Trait Values",
+    "translate_values_heading": "Translate Trait Values",
     "type": "Type",
     "type_multiple_categorical": "Multiple Categorical",
     "type_placeholder": "Select type",
@@ -36,7 +43,8 @@
     "units": "Units",
     "units_month": "Month",
     "units_placeholder": "Enter units",
-    "units_year": "Year"
+    "units_year": "Year",
+    "value": "Value"
   },
   "terms": {
     "description": "By submitting this form, you confirm that the data you are uploading is your own work, or you have permission from the copyright holder to share it under the Creative Commons Attribution (CC-BY) license."

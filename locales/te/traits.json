@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "లక్షణాలను జోడించండి",
     "add_trait_values_button": "లక్షణ విలువను జోడించండి",
+    "add_translation_button": "అనువాదాన్ని జోడించండి",
+    "cancel": "రద్దు చేయండి",
+    "continue": "కొనసాగించండి",
     "data_type": "డేటా రకం",
     "data_type_color": "రంగు",
     "data_type_date": "తేదీ",
@@ -11,6 +14,8 @@
     "description": "వివరణ",
     "description_placeholder": "లక్షణ వివరణను నమోదు చేయండి",
     "heading": "లక్షణాలను జోడించండి",
+    "language": "భాష",
+    "language_placeholder": "భాషను ఎంచుకోండి",
     "max": "గరిష్ట విలువ",
     "max_placeholder": "గరిష్ట విలువను నమోదు చేయండి",
     "min": "కనిష్ట విలువ",
@@ -19,6 +24,7 @@
     "name": "పేరు",
     "observation_trait": "పరిశీలన లక్షణం",
     "participatory": "Paritcipatory",
+    "save": "సేవ్",
     "source": "మూలం",
     "source_placeholder": "మూలాన్ని నమోదు చేయండి",
     "species_field": "జాతుల క్షేత్రం",
@@ -28,6 +34,7 @@
     "trait_name": "లక్షణం పేరు",
     "trait_name_placeholder": "లక్షణ పేరును నమోదు చేయండి",
     "trait_values_heading": "లక్షణ విలువలను నిర్వచించండి",
+    "translate_values_heading": "లక్షణ విలువలను అనువదించండి",
     "type": "రకం",
     "type_multiple_categorical": "బహుళ వర్గీకరణ",
     "type_placeholder": "రకాన్ని ఎంచుకోండి",
@@ -36,7 +43,8 @@
     "units": "యూనిట్లు",
     "units_month": "నెల",
     "units_placeholder": "యూనిట్లను నమోదు చేయండి",
-    "units_year": "సంవత్సరం"
+    "units_year": "సంవత్సరం",
+    "value": "విలువ"
   },
   "terms": {
     "description": "ఈ ఫారమ్‌ను సమర్పించడం ద్వారా, మీరు అప్‌లోడ్ చేస్తున్న డేటా మీ స్వంత పని అని మీరు ధృవీకరిస్తారు లేదా క్రియేటివ్ కామన్స్ అట్రిబ్యూషన్ (సిసి-బై) లైసెన్స్ క్రింద భాగస్వామ్యం చేయడానికి కాపీరైట్ హోల్డర్ నుండి మీకు అనుమతి ఉంది."

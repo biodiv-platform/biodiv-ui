@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "ਗੁਣ ਸ਼ਾਮਲ ਕਰੋ",
     "add_trait_values_button": "ਗੁਣ ਮੁੱਲ ਸ਼ਾਮਲ ਕਰੋ",
+    "add_translation_button": "ਅਨੁਵਾਦ ਸ਼ਾਮਲ ਕਰੋ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "continue": "ਜਾਰੀ ਰੱਖੋ",
     "data_type": "ਡਾਟਾ ਕਿਸਮ",
     "data_type_color": "ਰੰਗ",
     "data_type_date": "ਤਾਰੀਖ",
@@ -11,6 +14,8 @@
     "description": "ਵੇਰਵਾ",
     "description_placeholder": "ਗੁਣ ਵੇਰਵਾ ਦਿਓ",
     "heading": "ਗੁਣ ਸ਼ਾਮਲ ਕਰੋ",
+    "language": "ਭਾਸ਼ਾ",
+    "language_placeholder": "ਭਾਸ਼ਾ ਚੁਣੋ",
     "max": "ਅਧਿਕਤਮ ਮੁੱਲ",
     "max_placeholder": "ਅਧਿਕਤਮ ਮੁੱਲ ਦਰਜ ਕਰੋ",
     "min": "ਮਿਨ ਵੈਲਯੂ",
@@ -19,6 +24,7 @@
     "name": "ਨਾਮ",
     "observation_trait": "ਨਿਰੀਖਣ ਕਰਨ ਦਾ ਗੁਣ",
     "participatory": "ਪੈਰਪੈਸੀਟਰ",
+    "save": "ਸੇਵ",
     "source": "ਸਰੋਤ",
     "source_placeholder": "ਸਰੋਤ ਦਾਖਲ ਕਰੋ",
     "species_field": "ਸਪੀਸੀਜ਼ ਫੀਲਡ",
@@ -28,6 +34,7 @@
     "trait_name": "ਗੁਣ ਦਾ ਨਾਮ",
     "trait_name_placeholder": "ਟਰੂ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
     "trait_values_heading": "ਗੁਣ ਮੁੱਲ ਨੂੰ ਪ੍ਰਭਾਸ਼ਿਤ ਕਰੋ",
+    "translate_values_heading": "ਗੁਣਾਂ ਦੇ ਮੁੱਲ ਦਾ ਅਨੁਵਾਦ ਕਰੋ",
     "type": "ਕਿਸਮ",
     "type_multiple_categorical": "ਕਈ ਵੀ ਸ਼੍ਰੇਣੀਵਾਦੀ",
     "type_placeholder": "ਕਿਸਮ ਦੀ ਚੋਣ ਕਰੋ",
@@ -36,7 +43,8 @@
     "units": "ਇਕਾਈਆਂ",
     "units_month": "ਮਹੀਨਾ",
     "units_placeholder": "ਇਕਾਈਆਂ ਦਾਖਲ ਕਰੋ",
-    "units_year": "ਸਾਲ"
+    "units_year": "ਸਾਲ",
+    "value": "ਮੁੱਲ"
   },
   "terms": {
     "description": "ਇਸ ਫਾਰਮ ਨੂੰ ਜਮ੍ਹਾ ਕਰਕੇ, ਤੁਸੀਂ ਪੁਸ਼ਟੀ ਕਰਦੇ ਹੋ ਕਿ ਤੁਸੀਂ ਅਪਲੋਡ ਕਰ ਰਹੇ ਹੋ ਆਪਣਾ ਆਪਣਾ ਕੰਮ ਹੈ, ਜਾਂ ਇਸ ਨੂੰ ਕਰੀਏਟਿਵ ਕਾਮਨਜ਼ ਐਖਾ (ਸੀਸੀ-ਦੁਆਰਾ) ਲਾਇਸੈਂਸ ਦੇ ਅਧੀਨ ਸਾਂਝਾ ਕਰੋ."

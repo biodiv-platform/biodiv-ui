@@ -1,517 +1,645 @@
 import {
   Box,
   Button,
-  Checkbox,
+  Flex,
   FormControl,
   FormLabel,
   GridItem,
   Heading,
   Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
   SimpleGrid,
-  Textarea
+  Tab,
+  TabList,
+  Tabs,
+  Textarea,
+  useDisclosure
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
+import { CheckboxField } from "@components/form/checkbox";
+import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
+import { SubmitButton } from "@components/form/submit-button";
+import { TextBoxField } from "@components/form/text";
+import { TextAreaField } from "@components/form/textarea";
 import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Role } from "@interfaces/custom";
 import { axUploadResource } from "@services/files.service";
 import { axCreateTrait } from "@services/traits.service";
-import { hasAccess } from "@utils/auth";
+import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import Error from "../../_error";
 import TraitsValueComponent from "./trait-value-component";
 
 const onQuery = (q) => onScientificNameQuery(q, "name");
 
-interface TraitValue {
-  description: string;
-  value: string;
-  file: File | null;
-}
-
-interface Trait {
-  name: string;
-  description: string;
-  category: string;
-  isObservation: boolean;
-  Paritcipatory: boolean;
-  type: string;
-  dataType: string;
-  values: TraitValue[];
-  generalFile: File | null; // Define values as an array of strings
-  source: string;
-  speciesField: string | undefined;
-  units: string | undefined;
-  min: number | undefined;
-  max: number | undefined;
-  minDate: string | undefined;
-  maxDate: string | undefined;
-}
-
-export default function TraitsCreateComponent({ speciesField }) {
+export default function TraitsCreateComponent({ speciesField, languages, langId }) {
   const { t } = useTranslation();
-  const speciesCategoryField = speciesField.speciesField
+  const TRAIT_TYPES = [
+    { label: t("traits:create_form.type_multiple_categorical"), value: "MULTIPLE_CATEGORICAL" },
+    { label: t("traits:create_form.type_single_categorical"), value: "SINGLE_CATEGORICAL" },
+    { label: t("traits:create_form.type_range"), value: "RANGE" }
+  ];
+  const DATA_TYPES = [
+    { label: t("traits:create_form.data_type_date"), value: "DATE" },
+    { label: t("traits:create_form.data_type_string"), value: "STRING" },
+    { label: t("traits:create_form.data_type_numeric"), value: "NUMERIC" },
+    { label: t("traits:create_form.data_type_color"), value: "COLOR" }
+  ];
+  const speciesCategoryField = speciesField
     .filter((item) => item.childFields.length == 0)
     .map((item) => item.parentField);
-  const speciesSubCategoryField = speciesField.speciesField
+  const speciesSubCategoryField = speciesField
     .filter((item) => item.childFields.length != 0)
     .map((item) => item.childFields)
     .flat();
   const router = useLocalRouter();
-
-  const [canSubmit, setCanSubmit] = useState<boolean>();
-
-  useEffect(() => {
-    setCanSubmit(hasAccess([Role.Admin]));
-  }, []);
-
-  const hForm = useForm<any>({
-    resolver: yupResolver(
+  const [translationSelected, setTranslationSelected] = useState<number>(0);
+  const formSchema = Yup.object().shape({
+    translations: Yup.array().of(
       Yup.object().shape({
-        query: Yup.string()
+        traits: Yup.object().shape({
+          id: Yup.number().nullable(),
+          createdOn: Yup.date().nullable(),
+          lastRevised: Yup.date().nullable(),
+          fieldId: Yup.number().nullable().optional(),
+          units: Yup.string().nullable().optional(),
+          isNotObservationTraits: Yup.boolean(),
+          isDeleted: Yup.boolean(),
+          icon: Yup.string().nullable(),
+          traitId: Yup.number().nullable(),
+          languageId: Yup.number(),
+          name: Yup.string(),
+          description: Yup.string(),
+          traitTypes: Yup.string(),
+          dataType: Yup.string(),
+          source: Yup.string(),
+          showInObservation: Yup.boolean(),
+          isParticipatory: Yup.boolean()
+        }),
+        values: Yup.array().of(
+          Yup.object().shape({
+            description: Yup.string(),
+            icon: Yup.string().nullable(),
+            id: Yup.number().nullable(),
+            isDeleted: Yup.boolean(),
+            source: Yup.string(),
+            traitInstanceId: Yup.number().nullable(),
+            value: Yup.string(),
+            displayOrder: Yup.number().nullable(),
+            languageId: Yup.number().nullable(),
+            traitValueId: Yup.number().nullable()
+          })
+        ),
+        query: Yup.array().of(
+          Yup.object().shape({
+            taxonId: Yup.number()
+          })
+        )
       })
     )
+  });
+
+  const hForm = useForm<any>({
+    mode: "onBlur",
+    resolver: yupResolver(formSchema),
+    defaultValues: {
+      translations: [
+        {
+          traits: {
+            id: null,
+            createdOn: null,
+            lastRevised: null,
+            fieldId: undefined,
+            units: undefined,
+            isNotObservationTraits: true,
+            isDeleted: false,
+            icon: null,
+            traitId: null,
+            languageId: langId,
+            name: "",
+            description: "",
+            traitTypes: "",
+            dataType: "",
+            source: "",
+            showInObservation: false,
+            isParticipatory: false
+          },
+          values: [],
+          query: []
+        }
+      ]
+    }
+  });
+
+  const options = (() => {
+    switch (hForm.watch(`translations[${translationSelected}].traits.dataType`)) {
+      case "COLOR":
+        return [TRAIT_TYPES[0]];
+      case "DATE":
+        return [TRAIT_TYPES[2]];
+      case "NUMERIC":
+          return [TRAIT_TYPES[2]];
+      default:
+        return TRAIT_TYPES;
+    }
+  })();
+
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const [trait, setTrait] = useState({
+    name: "",
+    description: "",
+    langId: 0,
+    source: ""
   });
 
   // Dropzone setup, with a single file restriction
   const handleGeneralDrop = useDropzone({
     accept: { "image/*": [".jpg", ".jpeg", ".png"] },
     maxFiles: 1,
-    onDrop: (acceptedFiles) => {
+    onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
         const file = acceptedFiles[0];
-        setTrait((prevTrait) => ({
-          ...prevTrait,
-          generalFile: file
-        }));
+        const { success, data } = await axUploadResource(file, "traits", undefined);
+        if (success) {
+          hForm.watch("translations").forEach((_, index) => {
+            hForm.setValue(`translations[${index}].traits.icon`, data);
+          });
+        }
       }
     }
   });
 
-  const [trait, setTrait] = useState<Trait>({
-    name: Array.isArray(router?.query?.name)
-      ? router.query.name[0] ?? ""
-      : router?.query?.name ?? "",
-    description: "",
-    category: "",
-    isObservation: false,
-    Paritcipatory: false,
-    type: "",
-    dataType: Array.isArray(router?.query?.name)
-      ? router.query.name[0]?.split("(")?.[1]
-        ? "NUMERIC"
-        : router.query.name[0] ?? ""
-      : router?.query?.name?.split("(")?.[1]
-      ? "NUMERIC"
-      : router.query.name?.split("(")?.[0] ?? "",
-    values: [
-      {
-        description: "",
-        value: "",
-        file: null
-      }
-    ],
-    generalFile: null,
-    source: "",
-    speciesField: undefined,
-    units: Array.isArray(router?.query?.name)
-      ? router.query.name[0]?.split("(")?.[1]
-        ? router.query.name[0]?.split("(")?.[1]?.slice(0, -1) ?? undefined
-        : router.query.name[0] ?? undefined
-      : router?.query?.name?.split("(")?.[1]
-      ? router.query.name?.split("(")?.[1]?.slice(0, -1) ?? undefined
-      : router.query.name?.split("(")?.[0] ?? undefined,
-    min: undefined,
-    max: undefined,
-    minDate: undefined,
-    maxDate: undefined
-  });
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    let taxonIds = "";
-    if (hForm.getValues("query") != null) {
-      taxonIds = hForm
-        .getValues("query")
-        .map((taxon) => `${taxon.taxonId}`)
-        .join("|");
-    }
-    // Use Promise.all to wait for all uploads to complete before creating the trait
-    const valueStringArray = await Promise.all(
-      trait.values.map(async (value) => {
-        if (value.file != null) {
-          const { success, data } = await axUploadResource(value.file, "traits", undefined);
-          if (success) {
-            return `${value.description}:${value.value}:${data}`;
-          }
-        }
-        // Return a default formatted string if no file or upload fails
-        else {
-          return `${value.description}:${value.value}`;
-        }
-      })
+  const handleOnSubmit = async (payload) => {
+    const query = payload.translations[0].query.map((taxan) => ({
+      taxonomyDefifintionId: taxan.taxonId,
+      traitTaxonId: null
+    }));
+    const { success, data } = await axCreateTrait(
+      payload.translations.map((value) => ({ ...value, query: query }))
     );
-
-    // Join all parts into a single string
-    const valueString = valueStringArray.join("|");
-
-    const params = {
-      dataType: trait.dataType,
-      description: trait.description,
-      name: trait.name,
-      traitTypes: trait.type,
-      showInObservation: trait.isObservation,
-      isParticipatory: trait.Paritcipatory,
-      values: valueString,
-      taxonIds: taxonIds,
-      icon: null,
-      units: trait.units,
-      speciesField: trait.speciesField,
-      source: trait.source
-    };
-
-    if (trait.dataType == "NUMERIC") {
-      if (trait.min != undefined) {
-        params["min"] = trait.min;
-      }
-      if (trait.max != undefined) {
-        params["max"] = trait.max;
-      }
-    }
-    if (trait.generalFile != null) {
-      const { success, data } = await axUploadResource(trait.generalFile, "traits", undefined);
-      if (success) {
-        params.icon = data;
-      }
-    }
-    const { success, data } = await axCreateTrait(params);
     if (success) {
       notification("Trait Created", NotificationType.Success);
       router.push(`/traits/show/${data}`, true);
     } else {
       notification("Unable to create");
     }
-  }
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setTrait((prevTrait) => ({
-      ...prevTrait,
-      [name]: type === "checkbox" ? checked : value
-    }));
-    if (name == "dataType") {
-      if (value == "COLOR") {
-        setTrait((prevTrait) => ({
-          ...prevTrait,
-          type: "MULTIPLE_CATEGORICAL"
-        }));
-      }
-      if (value == "DATE") {
-        setTrait((prevTrait) => ({
-          ...prevTrait,
-          type: "RANGE"
-        }));
-      }
-      if (value == "NUMERIC") {
-        setTrait((prevTrait) => ({
-          ...prevTrait,
-          type: "RANGE"
-        }));
-      }
-    }
-  };
-
-  const handleValueChange = (index, updatedValueObj) => {
-    setTrait((prevTrait) => {
-      const updatedValues = [...prevTrait.values];
-      updatedValues[index] = updatedValueObj;
-      return { ...prevTrait, values: updatedValues };
-    });
   };
 
   function handleAddValue() {
-    setTrait((prevTrait) => ({
-      ...prevTrait,
-      values: prevTrait.values.concat({ description: "", value: "", file: null }) // Append an empty string for a new input
-    }));
+    hForm.watch("translations").forEach((_, index) => {
+      hForm.setValue(`translations[${index}].values`, [
+        ...hForm.watch(`translations[${index}].values`),
+        {
+          description: "",
+          icon: null,
+          id: null,
+          isDeleted: false,
+          source: "",
+          traitInstanceId: null,
+          value: "",
+          displayOrder: null,
+          languageId: hForm.watch(`translations[${index}].traits.languageId`),
+          traitValueId: null
+        }
+      ]);
+    });
   }
 
-  const removeValue = (index) => {
+  const removeValue = (DeleteIndex) => {
+    if (hForm.watch(`translations[${translationSelected}].traits.languageId`) == langId) {
+      hForm.watch("translations").forEach((_, index) => {
+        hForm.setValue(
+          `translations[${index}].values`,
+          hForm.watch(`translations[${index}].values`).filter((_, i) => i !== DeleteIndex)
+        );
+      });
+    }
+  };
+
+  const valueImageChange = (index, value) => {
+    hForm.watch("translations").forEach((_, i) => {
+      const values = hForm.watch(`translations[${i}].values`);
+      values[index].icon = value;
+      hForm.setValue(`translations[${i}].values`, values);
+    });
+  };
+
+  const handleAddTranslation = () => {
+    setTranslationSelected(hForm.watch("translations").length);
+    hForm.setValue(`translations`, [
+      ...hForm.watch(`translations`),
+      {
+        traits: {
+          id: null,
+          createdOn: null,
+          lastRevised: null,
+          fieldId: hForm.watch(`translations[0].traits.fieldId`),
+          units: hForm.watch(`translations[0].traits.units`),
+          isNotObservationTraits: hForm.watch(`translations[0].traits.isNotObservationTraits`),
+          isDeleted: false,
+          icon: hForm.watch(`translations[0].traits.icon`),
+          traitId: null,
+          languageId: parseInt(trait.langId.toString(), 10),
+          name: trait.name,
+          description: trait.description,
+          traitTypes: hForm.watch(`translations[0].traits.traitTypes`),
+          dataType: hForm.watch(`translations[0].traits.dataType`),
+          source: trait.source,
+          showInObservation: hForm.watch(`translations[0].traits.showInObservation`),
+          isParticipatory: hForm.watch(`translations[0].traits.isParticipatory`)
+        },
+        values: hForm
+          .watch(`translations`)
+          .filter((t) => t.traits.languageId == langId)[0]
+          .values.map((value) => ({
+            description: "",
+            icon: value.icon,
+            id: null,
+            isDeleted: false,
+            source: "",
+            traitInstanceId: null,
+            value: "",
+            displayOrder: null,
+            languageId: parseInt(trait.langId.toString(), 10),
+            traitValueId: null
+          })),
+        query: hForm.watch(`translations[0].query`)
+      }
+    ]);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setTrait((prevTrait) => ({
       ...prevTrait,
-      values: prevTrait.values.filter((_, i) => i !== index)
+      [name]: value
     }));
   };
 
-  return canSubmit ? (
+  return (
     <div className="container mt">
       <PageHeading>{t("traits:create_form.heading")}</PageHeading>
-      <form onSubmit={handleSubmit}>
-        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
-          <Box>
-            <FormControl>
-              <FormLabel htmlFor="name">{t("traits:create_form.trait_name")}</FormLabel>
-              <Input
-                type="text"
-                id="name"
-                name="name"
-                value={trait.name}
-                onChange={handleChange}
-                placeholder={t("traits:create_form.trait_name_placeholder")}
-                required
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl>
-              <FormLabel htmlFor="dataType">{t("traits:create_form.data_type")}</FormLabel>
-              <Select
-                id="dataType"
-                name="dataType"
-                value={trait.dataType}
-                onChange={handleChange}
-                placeholder={t("traits:create_form.data_type_placeholder")}
-                required
-              >
-                <option value="STRING">{t("traits:create_form.data_type_string")}</option>
-                <option value="NUMERIC">{t("traits:create_form.data_type_numeric")}</option>
-                <option value="DATE">{t("traits:create_form.data_type_date")}</option>
-                <option value="COLOR">{t("traits:create_form.data_type_color")}</option>
-              </Select>
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl>
-              <FormLabel htmlFor="type">{t("traits:create_form.type")}</FormLabel>
-              <Select
-                id="type"
-                name="type"
-                value={trait.type}
-                onChange={handleChange}
-                placeholder={t("traits:create_form.type_placeholder")}
-                disabled={trait.dataType != "STRING"}
-                required
-              >
-                {(trait.dataType == "STRING" || trait.dataType == "COLOR") && (
-                  <option value="MULTIPLE_CATEGORICAL">{t("traits:create_form.type_multiple_categorical")}</option>
-                )}
-                {trait.dataType == "STRING" && (
-                  <option value="SINGLE_CATEGORICAL">{t("traits:create_form.type_single_categorical")}</option>
-                )}
-                {trait.dataType != "COLOR" && <option value="RANGE">{t("traits:create_form.type_range")}</option>}
-              </Select>
-            </FormControl>
-          </Box>
-          {/* Drop area for drag-and-drop */}
-          <div
-            {...handleGeneralDrop.getRootProps()}
-            style={{
-              border: "2px dashed #aaa",
-              padding: "5px",
-              textAlign: "center",
-              width: "80px",
-              height: "80px"
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              handleAddTranslation();
+              setTrait({
+                name: "",
+                description: "",
+                langId: 0,
+                source: ""
+              });
+              onClose();
             }}
           >
-            <input {...handleGeneralDrop.getInputProps()} />
-            {trait.generalFile ? (
-              <div>
-                <img
-                  src={URL.createObjectURL(trait.generalFile)}
-                  alt="Icon Preview"
-                  style={{ height: "70px", objectFit: "cover" }}
-                />
-              </div>
-            ) : (
-              <p style={{ padding: "20px" }}>+</p>
-            )}
-          </div>
-          <Box>
-            <FormControl>
-              <FormLabel htmlFor="speciesField">{t("traits:create_form.species_field")}</FormLabel>
-              <Select
-                id="speciesField"
-                name="speciesField"
-                value={trait.speciesField}
-                onChange={handleChange}
-                placeholder={t("traits:create_form.species_field_placeholder")}
+            <ModalHeader> {t("traits:create_form.add_translation_button")}</ModalHeader>
+            <ModalBody>
+              <Box>
+                <FormControl mb={2} isRequired={true}>
+                  <FormLabel htmlFor="name">{t("traits:create_form.language")}</FormLabel>
+                  <Select
+                    id="langId"
+                    name="langId"
+                    placeholder={t("traits:create_form.language_placeholder")}
+                    value={trait.langId}
+                    onChange={handleChange}
+                  >
+                    {languages.map((lang) => (
+                      <option value={lang.id}>{lang.name}</option>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl mb={2} isRequired={true}>
+                  <FormLabel htmlFor="name">{t("traits:create_form.trait_name")}</FormLabel>
+                  <Input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder={t("traits:create_form.trait_name_placeholder")}
+                    value={trait.name}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                <FormControl mb={2}>
+                  <FormLabel htmlFor="name">{t("traits:create_form.source")}</FormLabel>
+                  <Input
+                    type="text"
+                    id="source"
+                    name="source"
+                    placeholder={t("traits:create_form.source_placeholder")}
+                    value={trait.source}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                <FormControl mb={2}>
+                  <FormLabel htmlFor="name">{t("traits:create_form.description")}</FormLabel>
+                  <Textarea
+                    id="description"
+                    name="description"
+                    placeholder={t("traits:create_form.description_placeholder")}
+                    value={trait.description}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+              </Box>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                mr={3}
+                onClick={() => {
+                  setTrait({
+                    name: "",
+                    description: "",
+                    langId: 0,
+                    source: ""
+                  });
+                  onClose();
+                }}
               >
-                {speciesCategoryField.concat(speciesSubCategoryField).map((valueObj) => (
-                  <option value={valueObj.id}>{valueObj.header}</option>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl>
-              <FormLabel htmlFor="source">{t("traits:create_form.source")}</FormLabel>
-              <Input
-                type="text"
-                id="source"
-                name="source"
-                value={trait.source}
-                onChange={handleChange}
-                placeholder={t("traits:create_form.source_placeholder")}
-                required
+                {t("traits:create_form.cancel")}
+              </Button>
+              <Button colorScheme="blue" type="submit">
+                {t("traits:create_form.continue")}
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
+        <Button colorScheme="green">{t("traits:create_form.add_translation_button")}</Button>
+      </Flex>
+      <Tabs
+        overflowX="auto"
+        mb={4}
+        variant="unstyled"
+        bg="gray.100"
+        rounded="md"
+        index={translationSelected}
+        onChange={(index) => setTranslationSelected(index)}
+      >
+        <TabList>
+          {hForm.watch(`translations`).map((translation) => (
+            <Tab
+              key={translation.traits.languageId}
+              _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
+              m={1}
+            >
+              {languages.filter((lang) => lang.id === translation.traits.languageId)[0].name}
+            </Tab>
+          ))}
+        </TabList>
+      </Tabs>
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+            <Box>
+              <TextBoxField
+                key={`name-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.name`}
+                label={t("traits:create_form.trait_name")}
+                isRequired={true}
               />
-            </FormControl>
-          </Box>
-          <Box>
-            {trait.dataType == "NUMERIC" && (
-              <FormControl>
-                <FormLabel htmlFor="units">{t("traits:create_form.units")}</FormLabel>
-                <Input
-                  type="text"
-                  id="units"
-                  name="units"
-                  value={trait.units}
-                  onChange={handleChange}
-                  placeholder={t("traits:create_form.units_placeholder")}
-                  required
-                />
-              </FormControl>
-            )}
-            {trait.dataType == "DATE" && (
-              <FormControl>
-                <FormLabel htmlFor="units">{t("traits:create_form.units")}</FormLabel>
-                <Select
-                  id="units"
-                  name="units"
-                  value={trait.units}
-                  onChange={handleChange}
-                  placeholder={t("traits:create_form.units_placeholder")}
-                  required
-                >
-                  <option value="MONTH">{t("traits:create_form.units_month")}</option>
-                  <option value="YEAR">{t("traits:create_form.units_year")}</option>
-                </Select>
-              </FormControl>
-            )}
-          </Box>
-          <Box></Box>
-          <Box>
-            <FormControl>
-              <Checkbox
-                id="isObservation"
-                name="isObservation"
-                isChecked={trait.isObservation}
-                onChange={handleChange}
-              >
-                {t("traits:create_form.observation_trait")}
-              </Checkbox>
-            </FormControl>
-          </Box>
-          <GridItem colSpan={{ md: 2 }}>
-            <FormControl>
-              <Checkbox
-                id="Paritcipatory"
-                name="Paritcipatory"
-                isChecked={trait.Paritcipatory}
-                onChange={handleChange}
-              >
-                {t("traits:create_form.participatory")}
-              </Checkbox>
-            </FormControl>
-          </GridItem>
-          <GridItem colSpan={{ md: 3 }}>
-            <FormControl>
-              <FormLabel htmlFor="description">{t("traits:create_form.description")}</FormLabel>
-              <Textarea
-                id="description"
-                name="description"
-                value={trait.description}
-                onChange={handleChange}
-                placeholder={t("traits:create_form.description_placeholder")}
-                rows={4}
+            </Box>
+            <Box>
+              <SelectInputField
+                key={`dataType-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.dataType`}
+                label={t("traits:create_form.data_type")}
+                options={DATA_TYPES}
+                onChangeCallback={(value) =>
+                  hForm.watch("translations").forEach((_, index) => {
+                    hForm.setValue(`translations[${index}].traits.dataType`, value);
+                    if (value == "COLOR") {
+                      hForm.setValue(
+                        `translations[${index}].traits.traitTypes`,
+                        "MULTIPLE_CATEGORICAL"
+                      );
+                    } else if (value == "DATE") {
+                      hForm.setValue(`translations[${index}].traits.traitTypes`, "RANGE");
+                    } else if (value == "NUMERIC") {
+                      hForm.setValue(`translations[${index}].traits.traitTypes`, "RANGE");
+                    }
+                  })
+                }
+                isRequired={true}
               />
-            </FormControl>
-          </GridItem>
-          <GridItem colSpan={{ md: 3 }}>
-            <FormProvider {...hForm}>
+            </Box>
+            <Box>
+              <SelectInputField
+                key={`traitType-${translationSelected}-${hForm.watch(
+                  `translations[${translationSelected}].traits.traitTypes`
+                )}`}
+                name={`translations[${translationSelected}].traits.traitTypes`}
+                label={t("traits:create_form.type")}
+                options={options}
+                onChangeCallback={(value) =>
+                  hForm.watch("translations").forEach((_, index) => {
+                    hForm.setValue(`translations[${index}].traits.traitTypes`, value);
+                  })
+                }
+                isRequired={true}
+              />
+            </Box>
+            <div
+              {...handleGeneralDrop.getRootProps()}
+              style={{
+                border: "2px dashed #aaa",
+                padding: "5px",
+                textAlign: "center",
+                width: "80px",
+                height: "80px"
+              }}
+            >
+              <input {...handleGeneralDrop.getInputProps()} />
+              {hForm.watch(`translations[${translationSelected}].traits.icon`) ? (
+                <div>
+                  <img
+                    src={getTraitIcon(
+                      hForm.watch(`translations[${translationSelected}].traits.icon`)
+                    )}
+                    alt="Icon Preview"
+                    style={{ height: "70px", objectFit: "cover" }}
+                  />
+                </div>
+              ) : (
+                <p style={{ padding: "20px" }}>+</p>
+              )}
+            </div>
+            <Box>
+              <SelectInputField
+                key={`field-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.fieldId`}
+                label={t("traits:create_form.species_field")}
+                options={speciesCategoryField.concat(speciesSubCategoryField).map((valueObj) => ({
+                  label: valueObj.header,
+                  value: valueObj.id
+                }))}
+                onChangeCallback={(value) =>
+                  hForm.watch("translations").forEach((_, index) => {
+                    hForm.setValue(`translations[${index}].traits.fieldId`, value);
+                  })
+                }
+                isRequired={true}
+              />
+            </Box>
+            <Box>
+              <TextBoxField
+                key={`source-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.source`}
+                label={t("traits:create_form.source")}
+              />
+            </Box>
+            <Box>
+              {hForm.watch(`translations[${translationSelected}].traits.dataType`) == "NUMERIC" && (
+                <TextBoxField
+                  key={`units-${translationSelected}`}
+                  name={`translations[${translationSelected}].traits.units`}
+                  label={t("traits:create_form.units")}
+                  onChangeCallback={(value) =>
+                    hForm.watch("translations").forEach((_, index) => {
+                      hForm.setValue(`translations[${index}].traits.units`, value);
+                    })
+                  }
+                />
+              )}
+              {hForm.watch(`translations[${translationSelected}].traits.dataType`) == "DATE" && (
+                <SelectInputField
+                  key={`units-${translationSelected}`}
+                  name={`translations[${translationSelected}].traits.units`}
+                  label={t("traits:create_form.units")}
+                  options={[
+                    { label: t("traits:create_form.units_month"), value: "MONTH" },
+                    { label: t("traits:create_form.units_year"), value: "YEAR" }
+                  ]}
+                  onChangeCallback={(value) =>
+                    hForm.watch("translations").forEach((_, index) => {
+                      hForm.setValue(`translations[${index}].traits.units`, value);
+                    })
+                  }
+                />
+              )}
+            </Box>
+            <Box></Box>
+            <Box>
+              <CheckboxField
+                key={`isObservation-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.showInObservation`}
+                label={t("traits:create_form.observation_trait")}
+                onChangeCallback={(value) =>
+                  hForm.watch("translations").forEach((_, index) => {
+                    hForm.setValue(`translations[${index}].traits.showInObservation`, value);
+                    hForm.setValue(`translations[${index}].traits.isNotObservationTraits`, !value);
+                  })
+                }
+              />
+            </Box>
+            <GridItem colSpan={{ md: 2 }}>
+              <CheckboxField
+                key={`isParticipatory-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.isParticipatory`}
+                label={t("traits:create_form.participatory")}
+                onChangeCallback={(value) =>
+                  hForm.watch("translations").forEach((_, index) => {
+                    hForm.setValue(`translations[${index}].traits.isParticipatory`, value);
+                  })
+                }
+              />
+            </GridItem>
+            <GridItem colSpan={{ md: 3 }}>
+              <TextAreaField
+                key={`description-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.description`}
+                label={t("traits:create_form.description")}
+              />
+            </GridItem>
+            <GridItem colSpan={{ md: 3 }}>
+              <SelectInputField
+                key={`traitType-${translationSelected}`}
+                name={`translations[${translationSelected}].traits.languageId`}
+                label={t("traits:create_form.language")}
+                options={languages.map((valueObj) => ({
+                  label: valueObj.name,
+                  value: valueObj.id
+                }))}
+              />
+            </GridItem>
+            <GridItem colSpan={{ md: 3 }}>
               <FormLabel htmlFor="taxon">{t("traits:create_form.taxon")}</FormLabel>
               <SelectAsyncInputField
-                name="query"
+                name={`translations[${translationSelected}].query`}
                 onQuery={onQuery}
                 optionComponent={ScientificNameOption}
                 placeholder={t("traits:create_form.taxon_placeholder")}
                 resetOnSubmit={false}
                 isClearable={true}
                 multiple={true}
+                onChange={(value) =>
+                  hForm.watch("translations").forEach((_, index) => {
+                    hForm.setValue(`translations[${index}].query`, value);
+                  })
+                }
               />
-            </FormProvider>
-          </GridItem>
-          {trait.dataType == "NUMERIC" && (
-            <>
-              <GridItem colSpan={{ md: 4 }}>
-                <Heading fontSize="xl">{t("traits:create_form.min_and_max")}</Heading>
-              </GridItem>
-              <FormControl mb={4}>
-                <FormLabel htmlFor="min">{t("traits:create_form.min")}</FormLabel>
-                <Input
-                  type="number"
-                  id="min"
-                  name="min"
-                  value={trait.min}
-                  onChange={handleChange}
-                  placeholder={t("traits:create_form.min_placeholder")}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="max">{t("traits:create_form.max")}</FormLabel>
-                <Input
-                  type="number"
-                  id="max"
-                  name="max"
-                  value={trait.max}
-                  onChange={handleChange}
-                  placeholder={t("traits:create_form.max_placeholder")}
-                />
-              </FormControl>
-            </>
-          )}
-          {trait.dataType == "STRING" && (
-            <GridItem colSpan={{ md: 3 }}>
-              <Heading mb={4} fontSize="xl">
-              {t("traits:create_form.trait_values_heading")}
-              </Heading>
-              {trait.values.map((valueObj, index) => (
-                <TraitsValueComponent
-                  key={index}
-                  valueObj={valueObj}
-                  index={index}
-                  onValueChange={handleValueChange}
-                  onRemove={removeValue}
-                />
-              ))}
-              <Box mb={4}>
-                <Button onClick={handleAddValue} colorScheme="green" mb={4}>
-                {t("traits:create_form.add_trait_values_button")}
-                </Button>
-              </Box>
             </GridItem>
-          )}
-        </SimpleGrid>
-        {canSubmit && (
+            {hForm.watch(`translations[${translationSelected}].traits.dataType`) == "STRING" && (
+              <GridItem colSpan={{ md: 3 }}>
+                {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
+                  langId && (
+                  <Heading mb={4} fontSize="xl">
+                    {t("traits:create_form.trait_values_heading")}
+                  </Heading>
+                )}
+                {hForm.watch(`translations[${translationSelected}].traits.languageId`) !=
+                  langId && (
+                  <Heading mb={4} fontSize="xl">
+                    {t("traits:create_form.translate_values_heading")}
+                  </Heading>
+                )}
+                {hForm.watch(`translations[${translationSelected}].values`).map((_, index) => (
+                  <TraitsValueComponent
+                    key={index}
+                    valueObj={hForm.watch(`translations`)}
+                    index={index}
+                    onRemove={removeValue}
+                    translationSelected={translationSelected}
+                    langId={langId}
+                    onValueImageChange={valueImageChange}
+                  />
+                ))}
+                <Box mb={4}>
+                  {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
+                    langId && (
+                    <Button onClick={handleAddValue} colorScheme="green" mb={4}>
+                      {t("traits:create_form.add_trait_values_button")}
+                    </Button>
+                  )}
+                </Box>
+              </GridItem>
+            )}
+          </SimpleGrid>
           <Box mb={4}>
-            <Button type="submit" colorScheme="blue">
-            {t("traits:create_form.add_trait_button")}
-            </Button>
+            <SubmitButton>{t("traits:create_form.add_trait_button")}</SubmitButton>
           </Box>
-        )}
-      </form>
+        </form>
+      </FormProvider>
     </div>
-  ) : (
-    <Error statusCode={404} />
   );
 }

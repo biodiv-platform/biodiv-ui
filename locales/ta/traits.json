@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "பண்புகளைச் சேர்க்கவும்",
     "add_trait_values_button": "பண்பு மதிப்பைச் சேர்க்கவும்",
+    "add_translation_button": "மொழிபெயர்ப்பைச் சேர்க்கவும்",
+    "cancel": "ரத்துசெய்",
+    "continue": "தொடரவும்",
     "data_type": "தரவு வகை",
     "data_type_color": "நிறம்",
     "data_type_date": "தேதி",
@@ -11,6 +14,8 @@
     "description": "விளக்கம்",
     "description_placeholder": "பண்பு விளக்கத்தை உள்ளிடவும்",
     "heading": "பண்புகளைச் சேர்க்கவும்",
+    "language": "மொழி",
+    "language_placeholder": "மொழியைத் தேர்ந்தெடுக்கவும்",
     "max": "அதிகபட்ச மதிப்பு",
     "max_placeholder": "அதிகபட்ச மதிப்பை உள்ளிடவும்",
     "min": "குறைந்தபட்ச மதிப்பு",
@@ -19,6 +24,7 @@
     "name": "பெயர்",
     "observation_trait": "கவனிப்பு பண்பு",
     "participatory": "Paritcipatory",
+    "save": "சேமிக்கவும்",
     "source": "ஆதாரம்",
     "source_placeholder": "மூலத்தை உள்ளிடவும்",
     "species_field": "இனங்கள் புலம்",
@@ -28,6 +34,7 @@
     "trait_name": "பண்பு பெயர்",
     "trait_name_placeholder": "பண்பு பெயரை உள்ளிடவும்",
     "trait_values_heading": "பண்பு மதிப்புகளை வரையறுக்கவும்",
+    "translate_values_heading": "பண்பு மதிப்புகளை மொழிபெயர்க்கவும்",
     "type": "தட்டச்சு செய்க",
     "type_multiple_categorical": "பல வகைப்படுத்தப்பட்ட",
     "type_placeholder": "வகை என்பதைத் தேர்ந்தெடுக்கவும்",
@@ -36,7 +43,8 @@
     "units": "அலகுகள்",
     "units_month": "மாதம்",
     "units_placeholder": "அலகுகளை உள்ளிடவும்",
-    "units_year": "ஆண்டு"
+    "units_year": "ஆண்டு",
+    "value": "மதிப்பு"
   },
   "terms": {
     "description": "இந்த படிவத்தை சமர்ப்பிப்பதன் மூலம், நீங்கள் பதிவேற்றும் தரவு உங்கள் சொந்த வேலை என்பதை உறுதிப்படுத்துகிறீர்கள், அல்லது கிரியேட்டிவ் காமன்ஸ் பண்புக்கூறு (சிசி-பை) உரிமத்தின் கீழ் பகிர்வதற்கு பதிப்புரிமை வைத்திருப்பவரிடமிருந்து உங்களுக்கு அனுமதி உள்ளது."

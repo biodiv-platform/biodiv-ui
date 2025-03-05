@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "ଗୁଣଗୁଡିକ ଯୋଡନ୍ତୁ |",
     "add_trait_values_button": "ଗୁଣବତ୍ତା ମୂଲ୍ୟ ଯୋଗକରନ୍ତୁ |",
+    "add_translation_button": "ଅନୁବାଦ ଯୋଡନ୍ତୁ |",
+    "cancel": "ବାତିଲ୍ କରନ୍ତୁ |",
+    "continue": "ଜାରି ରଖ |",
     "data_type": "ଡାଟା ପ୍ରକାର |",
     "data_type_color": "ରଙ୍ଗ",
     "data_type_date": "ତାରିଖ",
@@ -11,6 +14,8 @@
     "description": "ବର୍ଣ୍ଣନା",
     "description_placeholder": "ଗୁଣ ବର୍ଣ୍ଣନା ପ୍ରବେଶ କରନ୍ତୁ |",
     "heading": "ଗୁଣଗୁଡିକ ଯୋଡନ୍ତୁ |",
+    "language": "ଭାଷା",
+    "language_placeholder": "ଭାଷା ଚୟନ କରନ୍ତୁ |",
     "max": "ସର୍ବାଧିକ ମୂଲ୍ୟ",
     "max_placeholder": "ସର୍ବାଧିକ ମୂଲ୍ୟ ପ୍ରବେଶ କରନ୍ତୁ |",
     "min": "ମୋର ମିନିମସ୍",
@@ -19,6 +24,7 @@
     "name": "ନାମ",
     "observation_trait": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଗୁଣ |",
     "participatory": "ParitCipatory",
+    "save": "ସଞ୍ଚୟ କରନ୍ତୁ |",
     "source": "ଉତ୍ସ",
     "source_placeholder": "ଉତ୍ସ ପ୍ରବେଶ କରନ୍ତୁ |",
     "species_field": "ନିର୍ଦ୍ଦିଷ୍ଟ କ୍ଷେତ୍ର |",
@@ -28,6 +34,7 @@
     "trait_name": "ସମ୍ପତ୍ତି ନାମ",
     "trait_name_placeholder": "ଗୁଣ ନାମ ପ୍ରବେଶ କର |",
     "trait_values_heading": "ଗୁଣ ମୂଲ୍ୟଗୁଡିକ ବ୍ୟାଖ୍ୟା କରନ୍ତୁ |",
+    "translate_values_heading": "ଗୁଣଗୁଡିକ ଅନୁବାଦ କରନ୍ତୁ |",
     "type": "ଟାଇପ୍ କରନ୍ତୁ |",
     "type_multiple_categorical": "ଏକାଧିକ ବର୍ଗ ଗୁଣ",
     "type_placeholder": "ପ୍ରକାର ଚୟନ କରନ୍ତୁ |",
@@ -36,7 +43,8 @@
     "units": "ଏକକ",
     "units_month": "ମାସ",
     "units_placeholder": "ଏକକ ପ୍ରବେଶ କରନ୍ତୁ |",
-    "units_year": "ବର୍ଷ"
+    "units_year": "ବର୍ଷ",
+    "value": "ମୂଲ୍ୟ"
   },
   "terms": {
     "description": "ଏହି ଫର୍ମ ଦାଖଲ କରି, ଆପଣ ନିଶ୍ଚିତ କରନ୍ତି ଯେ ଆପଣ ଏହାକୁ ଅପଲୋଡ୍ କରୁଛନ୍ତି ତାହା ହେଉଛି ଆପଣଙ୍କର ନିଜର କାର୍ଯ୍ୟ, କିମ୍ବା କ୍ରିଏପ-ବାଇ) ଲାଇସେନ୍ସରେ ଏହାକୁ କ୍ରିଏପନ ଧାଡୋଧୀରୁ ଆପଣଙ୍କର ଅନୁମତି ଅଛି |"

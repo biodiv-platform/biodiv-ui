@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "લક્ષણ ઉમેરો",
     "add_trait_values_button": "લક્ષણ મૂલ્ય ઉમેરો",
+    "add_translation_button": "અનુવાદ ઉમેરો",
+    "cancel": "રદ કરવું",
+    "continue": "ચાલુ રાખવું",
     "data_type": "આધાર સામગ્રી",
     "data_type_color": "રંગ",
     "data_type_date": "તારીખ",
@@ -11,6 +14,8 @@
     "description": "વર્ણન",
     "description_placeholder": "લક્ષણ દાખલ કરો",
     "heading": "લક્ષણ ઉમેરો",
+    "language": "ભાષા",
+    "language_placeholder": "ભાષા પસંદ કરો",
     "max": "મહત્તમ મૂલ્ય",
     "max_placeholder": "મહત્તમ મૂલ્ય દાખલ કરો",
     "min": "લઘુ કિંમત",
@@ -19,6 +24,7 @@
     "name": "નામ",
     "observation_trait": "નિરીક્ષણ લક્ષણ",
     "participatory": "બારીક",
+    "save": "બચત કરવી",
     "source": "મૂળ કારણ",
     "source_placeholder": "સ્રોત દાખલ કરો",
     "species_field": "જાતિઓ",
@@ -28,6 +34,7 @@
     "trait_name": "લક્ષણ",
     "trait_name_placeholder": "લક્ષણ નામ દાખલ કરો",
     "trait_values_heading": "લક્ષણ મૂલ્યો વ્યાખ્યાયિત કરો",
+    "translate_values_heading": "લક્ષણ મૂલ્યોનું ભાષાંતર કરો",
     "type": "પ્રકાર",
     "type_multiple_categorical": "બહુવિધ વર્ગીકૃત",
     "type_placeholder": "પ્રકાર પસંદ કરો",
@@ -36,7 +43,8 @@
     "units": "એકમો",
     "units_month": "મહિનો",
     "units_placeholder": "એકમો દાખલ કરો",
-    "units_year": "વર્ષ"
+    "units_year": "વર્ષ",
+    "value": "મૂલ્ય"
   },
   "terms": {
     "description": "આ ફોર્મ સબમિટ કરીને, તમે પુષ્ટિ કરો છો કે તમે જે ડેટા અપલોડ કરી રહ્યા છો તે તમારું પોતાનું કાર્ય છે, અથવા તમારી પાસે ક copyright પિરાઇટ ધારક પાસેથી ક્રિએટિવ ક ons મન્સ એટ્રિબ્યુશન (સીસી-બાય) લાઇસન્સ હેઠળ શેર કરવાની પરવાનગી છે."

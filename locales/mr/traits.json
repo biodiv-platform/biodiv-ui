@@ -2,6 +2,9 @@
   "create_form": {
     "add_trait_button": "वैशिष्ट्ये जोडा",
     "add_trait_values_button": "वैशिष्ट्य मूल्य जोडा",
+    "add_translation_button": "भाषांतर जोडा",
+    "cancel": "रद्द करा",
+    "continue": "सुरू ठेवा",
     "data_type": "डेटा प्रकार",
     "data_type_color": "रंग",
     "data_type_date": "तारीख",
@@ -11,6 +14,8 @@
     "description": "वर्णन",
     "description_placeholder": "वैशिष्ट्य वर्णन प्रविष्ट करा",
     "heading": "वैशिष्ट्ये जोडा",
+    "language": "भाषा",
+    "language_placeholder": "भाषा निवडा",
     "max": "कमाल मूल्य",
     "max_placeholder": "कमाल मूल्य प्रविष्ट करा",
     "min": "किमान मूल्य",
@@ -19,6 +24,7 @@
     "name": "नाव",
     "observation_trait": "निरीक्षणाचे वैशिष्ट्य",
     "participatory": "पॅरिटसिपेटरी",
+    "save": "जतन करा",
     "source": "स्त्रोत",
     "source_placeholder": "स्त्रोत प्रविष्ट करा",
     "species_field": "प्रजाती क्षेत्र",
@@ -28,6 +34,7 @@
     "trait_name": "वैशिष्ट्य नाव",
     "trait_name_placeholder": "वैशिष्ट्य नाव प्रविष्ट करा",
     "trait_values_heading": "वैशिष्ट्य मूल्ये परिभाषित करा",
+    "translate_values_heading": "वैशिष्ट्य मूल्यांचे भाषांतर करा",
     "type": "प्रकार",
     "type_multiple_categorical": "एकाधिक वर्गीकरण",
     "type_placeholder": "प्रकार निवडा",
@@ -36,7 +43,8 @@
     "units": "युनिट्स",
     "units_month": "महिना",
     "units_placeholder": "युनिट्स प्रविष्ट करा",
-    "units_year": "वर्ष"
+    "units_year": "वर्ष",
+    "value": "मूल्य"
   },
   "terms": {
     "description": "हा फॉर्म सबमिट करून, आपण पुष्टी करता की आपण अपलोड करीत असलेला डेटा आपले स्वतःचे कार्य आहे किंवा आपल्याला कॉपीराइट धारकाची क्रिएटिव्ह कॉमन्स एट्रिब्यूशन (सीसी-बाय) परवान्याअंतर्गत सामायिक करण्याची परवानगी आहे."

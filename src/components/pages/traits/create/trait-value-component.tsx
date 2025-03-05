@@ -1,16 +1,29 @@
 import { CloseIcon } from "@chakra-ui/icons";
-import { Box, GridItem, IconButton, Input, SimpleGrid } from "@chakra-ui/react";
+import { Box, GridItem, IconButton, SimpleGrid } from "@chakra-ui/react";
+import { TextBoxField } from "@components/form/text";
+import { axUploadResource } from "@services/files.service";
+import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function TraitsValueComponent({ valueObj, index, onValueChange, onRemove }) {
+export default function TraitsValueComponent({
+  valueObj,
+  index,
+  onRemove,
+  translationSelected,
+  langId,
+  onValueImageChange
+}) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: { "image/*": [".jpg", ".jpeg", ".png"] },
     maxFiles: 1,
-    onDrop: (acceptedFiles) => {
+    onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
-        onValueChange(index, { ...valueObj, file: acceptedFiles[0] });
+        const { success, data } = await axUploadResource(acceptedFiles[0], "traits", undefined);
+        if (success) {
+          onValueImageChange(index, data);
+        }
       }
     }
   });
@@ -18,18 +31,22 @@ export default function TraitsValueComponent({ valueObj, index, onValueChange, o
   return (
     <SimpleGrid columns={{ base: 1, md: 5 }} spacing={{ md: 4 }} mb={4}>
       <Box>
-        <Input
-          placeholder={t("traits:create_form.name")}
-          value={valueObj.value}
-          onChange={(e) => onValueChange(index, { ...valueObj, value: e.target.value })}
-          required
+        <TextBoxField
+          key={`Value ${valueObj[translationSelected].values[index].value}`}
+          name={`translations[${translationSelected}].values[${index}].value`}
+          label={
+            valueObj.filter((t) => t.traits.languageId == langId)[0].values[index].value &&
+            valueObj[translationSelected].traits.languageId != langId
+              ? valueObj.filter((t) => t.traits.languageId == langId)[0].values[index].value
+              : `${t("traits:create_form.value")} ${index + 1}`
+          }
         />
       </Box>
       <GridItem colSpan={{ md: 2 }}>
-        <Input
-          placeholder={t("traits:create_form.description")}
-          value={valueObj.description}
-          onChange={(e) => onValueChange(index, { ...valueObj, description: e.target.value })}
+        <TextBoxField
+          key={`Value ${valueObj[translationSelected].values[index].description}`}
+          name={`translations[${translationSelected}].values[${index}].description`}
+          label={`${t("traits:create_form.description")} ${index + 1}`}
         />
       </GridItem>
       <Box>
@@ -44,9 +61,9 @@ export default function TraitsValueComponent({ valueObj, index, onValueChange, o
           }}
         >
           <input {...getInputProps()} />
-          {valueObj.file ? (
+          {valueObj[translationSelected].values[index].icon ? (
             <img
-              src={URL.createObjectURL(valueObj.file)}
+              src={getTraitIcon(valueObj[translationSelected].values[index].icon)}
               alt="Trait Value Icon Preview"
               style={{ width: "40px", height: "40px" }}
             />
@@ -55,15 +72,17 @@ export default function TraitsValueComponent({ valueObj, index, onValueChange, o
           )}
         </div>
       </Box>
-      <Box>
-        <IconButton
-          aria-label="Remove value"
-          icon={<CloseIcon />}
-          onClick={() => onRemove(index)}
-          size="sm"
-          colorScheme="red"
-        />
-      </Box>
+      {valueObj[translationSelected].traits.languageId == langId && (
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <IconButton
+            aria-label="Remove value"
+            icon={<CloseIcon />}
+            onClick={() => onRemove(index)}
+            size="sm"
+            colorScheme="red"
+          />
+        </Box>
+      )}
     </SimpleGrid>
   );
 }
