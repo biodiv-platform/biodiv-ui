@@ -1,4 +1,5 @@
 import { authorizedPageSSP, throwUnauthorized } from "@components/auth/auth-redirect";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import { axGetspeciesGroups } from "@services/observation.service";
@@ -13,6 +14,7 @@ import {
 } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -27,6 +29,10 @@ export const getServerSideProps = async (ctx) => {
   if (redirect) return redirect;
 
   const aReq = absoluteUrl(ctx);
+
+  const langId = SITE_CONFIG.SPECIES.MULTILINGUAL_FIELDS
+    ? getLanguageId(ctx.locale)?.ID
+    : SITE_CONFIG.LANG.DEFAULT_ID;
 
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitats } = await axGetAllHabitat();
@@ -60,7 +66,8 @@ export const getServerSideProps = async (ctx) => {
           label: `${name} (${id})`,
           value: id
         })),
-        mediaToggle: customisations.mediaToggle
+        mediaToggle: customisations.mediaToggle,
+        langId
       }
     };
   }

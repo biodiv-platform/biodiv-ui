@@ -282,6 +282,43 @@ export const axAddExsistingCustomField = async (userGroupId, payload) => {
   }
 };
 
+export const axUpdateSpeciesFieldsMapping = async (userGroupId, payload) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.USERGROUP}/v1/group/update/speciesFieldsMapping/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axGetSpeciesFieldsMapping = async (userGroupId) => {
+  try {
+    const { data: ugSfMappingData } = await plainHttp.get(
+      `${ENDPOINT.USERGROUP}/v1/group/userGroupSpeciesFields/${userGroupId}`
+    );
+    return { success: true, ugSfMappingData };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axGetUgSpeciesFieldsMetaData = async (userGroupId) => {
+  try {
+    const { data: ugSfMetaData } = await plainHttp.get(
+      `${ENDPOINT.USERGROUP}/v1/group/speciesField/metadata/${userGroupId}`
+    );
+    return { success: true, ugSfMetaData };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axReorderCustomField = async (userGroupId, payload) => {
   try {
     const { data } = await http.put(
@@ -443,5 +480,18 @@ export const axUpdateGroupObsCustomisations = async (payload) => {
   } catch (e) {
     console.error(e);
     return { success: false, data: null };
+  }
+};
+
+export const axUpdateSpeciesFieldContributors = async (userGroupId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.USERGROUP}/v1/group/speciesField/metadata/${userGroupId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
   }
 };

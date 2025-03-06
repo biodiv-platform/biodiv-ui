@@ -174,6 +174,13 @@
   },
   "save": "సమూహం సృష్టించండి",
   "spatial_coverge": "ప్రాదేశిక కవరేజ్",
+  "species_fields": {
+    "clear_all": "అన్నీ క్లియర్ చేయండి",
+    "filter_by_contributors": "సహాయకుల వడపోత",
+    "filter_species_fields": "జాతుల క్షేత్రాల ద్వారా వడపోత",
+    "select_all": "అన్నీ ఎంచుకోండి",
+    "submit_selections": "ఎంపికలను సమర్పించండి"
+  },
   "tags": "టాగ్లు",
   "update": "సమూహాన్ని నవీకరించండి",
   "update_admin": "నిర్వాహకులను నవీకరించండి"

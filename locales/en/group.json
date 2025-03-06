@@ -146,8 +146,8 @@
   },
   "name": "Group Name",
   "observation_customisation": "Observation Customisation",
-  "observations_having_media": "By Default, Only Display Observations Having Media",
   "observation_display": "Observation Display",
+  "observations_having_media": "By Default, Only Display Observations Having Media",
   "rules": {
     "add": {
       "failure": "Unable to add Usergroup rule",
@@ -175,6 +175,14 @@
   },
   "save": "Create Group",
   "spatial_coverge": "Spatial Coverage",
+  "species_fields": {
+    "clear_all": "Clear All",
+    "filter_by_contributors": "Filter By Contributors",
+    "filter_species_fields": "Filter By Species Fields",
+    "select_all": "Select All",
+    "species_fields": "Select species fields to display",
+    "submit_selections": "Submit Selections"
+  },
   "tags": "Tags",
   "update": "Update Group",
   "update_admin": "Update Administrators"

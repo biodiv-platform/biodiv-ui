@@ -57,7 +57,7 @@ export const getServerSideProps = async (ctx) => {
 
   const { data: traits } = await axGetAllTraitsMeta();
 
-  const { data: fieldsMeta } = await axGetAllFieldsMeta({ langId });
+  const { data: fieldsMeta } = await axGetAllFieldsMeta({ langId, userGroupId: currentGroup.id });
 
   const { data: listConfig } = await axGetObservationListConfig();
 
