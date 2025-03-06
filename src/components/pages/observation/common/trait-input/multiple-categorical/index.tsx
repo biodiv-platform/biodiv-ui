@@ -28,7 +28,7 @@ const MultipleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getCheckboxProps({ value: String(o.id) })}
+          {...getCheckboxProps({ value: String(o.traitValueId) })}
         />
       ))}
     </SimpleGrid>

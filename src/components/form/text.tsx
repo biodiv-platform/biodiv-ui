@@ -23,6 +23,7 @@ interface ITextBoxProps {
   showLabel?: boolean;
   hidden?;
   autoComplete?;
+  onChangeCallback?;
   multiline?: boolean;
 }
 
@@ -39,6 +40,7 @@ export const TextBoxField = ({
   maxLength,
   hidden,
   autoComplete,
+  onChangeCallback,
   multiline = false,
   ...props
 }: ITextBoxProps) => {
@@ -84,6 +86,7 @@ export const TextBoxField = ({
         {...field}
         onChange={(e) => {
           field.onChange(e);
+          onChangeCallback && onChangeCallback(e);
           adjustHeight();
         }}
         ref={(element) => {

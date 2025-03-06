@@ -136,6 +136,9 @@
   "list": {
     "title": "Groupes"
   },
+  "map": {
+    "title": "Créer une carte"
+  },
   "member": {
     "joined": "Groupe rejoint avec succès",
     "joined_error": "Impossible de rejoindre le groupe",
@@ -182,6 +185,12 @@
     "submit_selections": "Soumettre des sélections"
   },
   "tags": "Mots clés",
+  "trait": {
+    "batchUpload": {
+      "title": "Traits de téléchargement par lots"
+    },
+    "title": "Créer un trait"
+  },
   "update": "Mise à jour du groupe",
   "update_admin": "Mettre à jour les administrateurs"
 }

@@ -26,7 +26,7 @@ export const normalizeSpeciesPayload = (fieldsMeta, traitsMeta, speciesData, spe
   });
 
   const traitsMeta_2 = traitsMeta_1.map(({ traits, values: options }) => {
-    const values = traitsData.filter((o) => o.nameId === traits.id);
+    const values = traitsData.filter((o) => o.nameId === traits.traitId);
     return { ...traits, options, values };
   });
 
