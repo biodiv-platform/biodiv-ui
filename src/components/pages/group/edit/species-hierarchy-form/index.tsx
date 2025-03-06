@@ -372,7 +372,7 @@ export default function SpeciesHierarchyForm({
           <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200" mb={6}>
             <Box p={6}>
               <Box display="flex" alignItems="center" justifyContent="space-between" mb={6}>
-                <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900">
+                <Box as="h2" fontSize="md" fontWeight="light" color="gray.900">
                   {t("group:species_fields.species_fields")}
                 </Box>
                 <Box display="flex" gap={4}>
