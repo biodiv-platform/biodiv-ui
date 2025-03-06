@@ -177,6 +177,13 @@
   },
   "save": "গ্রুপ তৈরি করুন",
   "spatial_coverge": "স্থানিক কভারেজ",
+  "species_fields": {
+    "clear_all": "সব পরিষ্কার",
+    "filter_by_contributors": "অবদানকারীদের দ্বারা ফিল্টার",
+    "filter_species_fields": "প্রজাতির ক্ষেত্র দ্বারা ফিল্টার",
+    "select_all": "সমস্ত নির্বাচন করুন",
+    "submit_selections": "নির্বাচন জমা দিন"
+  },
   "tags": "ট্যাগ",
   "trait": {
     "batchUpload": {

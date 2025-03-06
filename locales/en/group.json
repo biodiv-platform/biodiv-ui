@@ -178,6 +178,14 @@
   },
   "save": "Create Group",
   "spatial_coverge": "Spatial Coverage",
+  "species_fields": {
+    "clear_all": "Clear All",
+    "filter_by_contributors": "Filter By Contributors",
+    "filter_species_fields": "Filter By Species Fields",
+    "select_all": "Select All",
+    "species_fields": "Select species fields to display",
+    "submit_selections": "Submit Selections"
+  },
   "tags": "Tags",
   "trait": {
     "batchUpload": {

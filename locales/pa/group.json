@@ -177,6 +177,13 @@
   },
   "save": "ਸਮੂਹ ਬਣਾਓ",
   "spatial_coverge": "ਸਪੈਟੀਅਲ ਕਵਰੇਜ",
+  "species_fields": {
+    "clear_all": "ਸਭ ਨੂੰ ਸਾਫ ਕਰੋ",
+    "filter_by_contributors": "ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲਿਆਂ ਦੁਆਰਾ ਫਿਲਟਰ",
+    "filter_species_fields": "ਸਪੀਸੀਜ਼ ਦੇ ਖੇਤਰਾਂ ਦੁਆਰਾ ਫਿਲਟਰ",
+    "select_all": "ਸਭ ਚੁਣੋ",
+    "submit_selections": "ਚੋਣ ਜਮ੍ਹਾਂ ਕਰੋ"
+  },
   "tags": "ਟੈਗਸ",
   "trait": {
     "batchUpload": {

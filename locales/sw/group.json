@@ -177,6 +177,13 @@
   },
   "save": "Unda kikundi",
   "spatial_coverge": "Chanjo ya nafasi.",
+  "species_fields": {
+    "clear_all": "Futa zote",
+    "filter_by_contributors": "Kichujio na wachangiaji",
+    "filter_species_fields": "Kichujio na shamba za spishi",
+    "select_all": "Chagua Zote",
+    "submit_selections": "Wasilisha chaguzi"
+  },
   "tags": "Tags.",
   "trait": {
     "batchUpload": {

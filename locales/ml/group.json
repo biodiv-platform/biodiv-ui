@@ -177,6 +177,13 @@
   },
   "save": "ഗ്രൂപ്പ് സൃഷ്ടിക്കുക",
   "spatial_coverge": "സ്പേഷ്യൽ കവറേജ്",
+  "species_fields": {
+    "clear_all": "എല്ലാം മായ്ക്കുക",
+    "filter_by_contributors": "സംഭാവകരെ ഫിൽട്ടർ ചെയ്യുക",
+    "filter_species_fields": "സ്പീഷിസ് ഫീൽഡുകൾ ഉപയോഗിച്ച് ഫിൽട്ടർ ചെയ്യുക",
+    "select_all": "എല്ലാം തിരഞ്ഞെടുക്കുക",
+    "submit_selections": "തിരഞ്ഞെടുപ്പുകൾ സമർപ്പിക്കുക"
+  },
   "tags": "ടാഗുകൾ",
   "trait": {
     "batchUpload": {

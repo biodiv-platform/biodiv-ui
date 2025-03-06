@@ -177,6 +177,13 @@
   },
   "save": "குழுவை உருவாக்கு",
   "spatial_coverge": "புவியிட பரப்பு",
+  "species_fields": {
+    "clear_all": "அனைத்தையும் அழிக்கவும்",
+    "filter_by_contributors": "பங்களிப்பாளர்களால் வடிகட்டவும்",
+    "filter_species_fields": "இனங்கள் புலங்களால் வடிகட்டவும்",
+    "select_all": "அனைத்தையும் தேர்ந்தெடுக்கவும்",
+    "submit_selections": "தேர்வுகளை சமர்ப்பிக்கவும்"
+  },
   "tags": "குறிச்சொற்கள்",
   "trait": {
     "batchUpload": {

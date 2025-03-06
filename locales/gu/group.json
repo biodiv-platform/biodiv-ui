@@ -177,6 +177,13 @@
   },
   "save": "ગ્રુપ બનાવો",
   "spatial_coverge": "સ્પેસિયલ કવરેજ",
+  "species_fields": {
+    "clear_all": "બધુ સાફ કરવું",
+    "filter_by_contributors": "ફાળો આપનારાઓ દ્વારા ફિલ્ટર",
+    "filter_species_fields": "પ્રજાતિના ક્ષેત્રો દ્વારા ફિલ્ટર",
+    "select_all": "બધા પસંદ કરો",
+    "submit_selections": "પસંદગીઓ સબમિટ કરો"
+  },
   "tags": "ટૅગ્સ",
   "trait": {
     "batchUpload": {

@@ -177,6 +177,13 @@
   },
   "save": "गट तयार करा",
   "spatial_coverge": "स्थानिक कव्हरेज",
+  "species_fields": {
+    "clear_all": "सर्व साफ करा",
+    "filter_by_contributors": "योगदानकर्त्यांद्वारे फिल्टर",
+    "filter_species_fields": "प्रजाती शेतात फिल्टर",
+    "select_all": "सर्व निवडा",
+    "submit_selections": "निवडी सबमिट करा"
+  },
   "tags": "टॅग्ज",
   "trait": {
     "batchUpload": {

@@ -177,6 +177,13 @@
   },
   "save": "समूह बनाएँ",
   "spatial_coverge": "स्थानिक कवरेज",
+  "species_fields": {
+    "clear_all": "सभी साफ करें",
+    "filter_by_contributors": "योगदानकर्ताओं द्वारा फ़िल्टर",
+    "filter_species_fields": "प्रजातियों के खेतों द्वारा फ़िल्टर",
+    "select_all": "सबका चयन करें",
+    "submit_selections": "चयन प्रस्तुत करें"
+  },
   "tags": "टैग",
   "trait": {
     "batchUpload": {
