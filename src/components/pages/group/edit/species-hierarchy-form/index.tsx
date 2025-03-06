@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Heading } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { axGetUsersByID } from "@services/user.service";
@@ -8,6 +8,7 @@ import {
   axUpdateSpeciesFieldContributors
 } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -200,6 +201,7 @@ export default function SpeciesHierarchyForm({
   const [error, setError] = useState<string>("");
   const [apiStatus, setApiStatus] = useState({ loading: false, error: "" });
   const [selections, setSelections] = useState<SelectedNode[]>([]);
+  const { t } = useTranslation();
 
   const methods = useForm<{ selectedNodes: SelectedNode[]; members: any[] }>({
     defaultValues: {
@@ -364,18 +366,21 @@ export default function SpeciesHierarchyForm({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleFormSubmit)} className="fadeInUp">
         <Box maxW="4xl" mx="auto" p={6}>
+          <Heading size="md" mb={6}>
+            {t("group:species_fields.filter_species_fields")}
+          </Heading>
           <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200" mb={6}>
             <Box p={6}>
               <Box display="flex" alignItems="center" justifyContent="space-between" mb={6}>
                 <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900">
-                  Species Structure
+                  {t("group:species_fields.species_fields")}
                 </Box>
                 <Box display="flex" gap={4}>
                   <Button size="sm" variant="outline" colorScheme="blue" onClick={handleSelectAll}>
-                    Select All
+                    {t("group:species_fields.select_all")}
                   </Button>
                   <Button size="sm" variant="outline" colorScheme="gray" onClick={handleClearAll}>
-                    Clear All
+                    {t("group:species_fields.clear_all")}
                   </Button>
                 </Box>
 
@@ -417,7 +422,9 @@ export default function SpeciesHierarchyForm({
                   )}
                 </Box>
                 <Box>
-                  <SubmitButton isDisabled={!selections.length}>Submit Selections</SubmitButton>
+                  <SubmitButton isDisabled={!selections.length}>
+                    {t("group:species_fields.submit_selections")}
+                  </SubmitButton>
                 </Box>
               </Box>
             </Box>
@@ -427,7 +434,7 @@ export default function SpeciesHierarchyForm({
           <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200" mt={6}>
             <Box p={6}>
               <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900" mb={4}>
-                Add species field contributors
+                {t("group:species_fields.filter_by_contributors")}
               </Box>
               <ContributorSelectField name="members" label="Search and select members" mb={4} />
               <Box display="flex" justifyContent="flex-end">
@@ -439,7 +446,7 @@ export default function SpeciesHierarchyForm({
                     handleContributorsSubmit(memberValues);
                   }}
                 >
-                  Add contributors
+                  {t("group:species_fields.submit_selections")}
                 </Button>
               </Box>
             </Box>

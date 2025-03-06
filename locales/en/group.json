@@ -177,5 +177,13 @@
   "spatial_coverge": "Spatial Coverage",
   "tags": "Tags",
   "update": "Update Group",
-  "update_admin": "Update Administrators"
+  "update_admin": "Update Administrators",
+  "species_fields": {
+    "submit_selections": "Submit Selections",
+    "filter_species_fields": "Filter Species Fields",
+    "species_fields": "Species Fields",
+    "select_all": "Select All",
+    "clear_all": "Clear All",
+    "filter_by_contributors": "Filter By Contributors"
+  }
 }
