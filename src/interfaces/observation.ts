@@ -815,6 +815,7 @@ export interface Traits {
   traitValues?: TraitValue[];
 }
 export interface TraitsValue {
+  traitValueId: number;
   id?: number; // int64
   value?: string;
   icon?: string;

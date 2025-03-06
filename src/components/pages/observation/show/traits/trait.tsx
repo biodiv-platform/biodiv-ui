@@ -92,7 +92,7 @@ export default function Trait({
   return (
     <FormControl mb={4} key={speciesTrait.traits?.id}>
       <Flex mb={1} alignItems="center">
-        <LocalLink href={`/traits/show/${speciesTrait.traits?.id}`} prefixGroup={true}>
+        <LocalLink href={`/traits/show/${speciesTrait.traits?.traitId}`} prefixGroup={true}>
           <BlueLink mr={2}>
             {speciesTrait.traits?.name}{" "}
             {speciesTrait.traits?.units && `(${speciesTrait.traits.units})`}

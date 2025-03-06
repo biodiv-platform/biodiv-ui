@@ -68,7 +68,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
         {traitsPairs.map(({ traits, values }) => (
           <FormControl mb={4} key={traits.id}>
             <FormLabel mb={1}>
-              <LocalLink href={`/traits/show/${traits?.id}`} prefixGroup={true}>
+              <LocalLink href={`/traits/show/${traits?.traitId}`} prefixGroup={true}>
                 <BlueLink mr={2}>
                   {traits?.name} {traits?.units && `(${traits.units})`}
                 </BlueLink>

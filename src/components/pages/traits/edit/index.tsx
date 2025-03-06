@@ -7,19 +7,16 @@ import {
   FormLabel,
   GridItem,
   Image,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   SimpleGrid,
   Tab,
   TabList,
   Tabs,
-  Textarea,
   useDisclosure,
   VisuallyHidden
 } from "@chakra-ui/react";
@@ -38,6 +35,7 @@ import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import Select from "react-select";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import * as Yup from "yup";
 
@@ -57,12 +55,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
   const [translationSelected, setTranslationSelected] = useState<number>(0);
   const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [trait, setTrait] = useState({
-    name: "",
-    description: "",
-    langId: 0,
-    source: ""
-  });
+  const [languageId, setLanguageId] = useState(0);
   const formSchema = Yup.object().shape({
     translations: Yup.array().of(
       Yup.object().shape({
@@ -320,12 +313,12 @@ export default function TraitsEditComponent({ data, languages, langId }) {
           isDeleted: false,
           icon: hForm.watch(`translations[0].traits.icon`),
           traitId: null,
-          languageId: parseInt(trait.langId.toString(), 10),
-          name: trait.name,
-          description: trait.description,
+          languageId: parseInt(languageId.toString(), 10),
+          name: "",
+          description: "",
           traitTypes: hForm.watch(`translations[0].traits.traitTypes`),
           dataType: hForm.watch(`translations[0].traits.dataType`),
-          source: trait.source,
+          source: "",
           showInObservation: hForm.watch(`translations[0].traits.showInObservation`),
           isParticipatory: hForm.watch(`translations[0].traits.isParticipatory`)
         },
@@ -341,7 +334,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
             traitInstanceId: null,
             value: "",
             displayOrder: null,
-            languageId: parseInt(trait.langId.toString(), 10),
+            languageId: parseInt(languageId.toString(), 10),
             traitValueId: value.traitValueId
           }))
       }
@@ -359,14 +352,6 @@ export default function TraitsEditComponent({ data, languages, langId }) {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTrait((prevTrait) => ({
-      ...prevTrait,
-      [name]: value
-    }));
-  };
-
   return (
     <div className="container mt">
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -376,12 +361,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
             onSubmit={(event) => {
               event.preventDefault();
               handleAddTranslation();
-              setTrait({
-                name: "",
-                description: "",
-                langId: 0,
-                source: ""
-              });
+              setLanguageId(0);
               onClose();
             }}
           >
@@ -392,47 +372,22 @@ export default function TraitsEditComponent({ data, languages, langId }) {
                   <FormLabel htmlFor="name">{t("traits:create_form.language")}</FormLabel>
                   <Select
                     id="langId"
+                    inputId="langId"
                     name="langId"
                     placeholder={t("traits:create_form.language_placeholder")}
-                    required
-                    value={trait.langId}
-                    onChange={handleChange}
-                  >
-                    {languages.map((lang) => (
-                      <option value={lang.id}>{lang.name}</option>
-                    ))}
-                  </Select>
-                </FormControl>
-                <FormControl mb={2} isRequired={true}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.trait_name")}</FormLabel>
-                  <Input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder={t("traits:create_form.trait_name_placeholder")}
-                    value={trait.name}
-                    onChange={handleChange}
-                  />
-                </FormControl>
-                <FormControl mb={2}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.source")}</FormLabel>
-                  <Input
-                    type="text"
-                    id="source"
-                    name="source"
-                    placeholder={t("traits:create_form.source_placeholder")}
-                    value={trait.source}
-                    onChange={handleChange}
-                  />
-                </FormControl>
-                <FormControl mb={2}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.description")}</FormLabel>
-                  <Textarea
-                    id="description"
-                    name="description"
-                    placeholder={t("traits:create_form.description_placeholder")}
-                    value={trait.description}
-                    onChange={handleChange}
+                    onChange={(o:{value:number,label:string}) => {
+                      setLanguageId(o.value)
+                    }}
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                    options={languages
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((lang) => ({
+                        value: lang.id,
+                        label: lang.name
+                      }))}
+                    isSearchable={true} // Enables search
                   />
                 </FormControl>
               </Box>
@@ -441,12 +396,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
               <Button
                 mr={3}
                 onClick={() => {
-                  setTrait({
-                    name: "",
-                    description: "",
-                    langId: 0,
-                    source: ""
-                  });
+                  setLanguageId(0)
                   onClose();
                 }}
               >
@@ -501,12 +451,8 @@ export default function TraitsEditComponent({ data, languages, langId }) {
                   name={`translations[${translationSelected}].traits.traitTypes`}
                   label={t("traits:create_form.type")}
                   options={TRAIT_TYPES}
-                  onChangeCallback={(value) =>
-                    hForm.watch("translations").forEach((_, index) => {
-                      hForm.setValue(`translations[${index}].traits.traitTypes`, value);
-                    })
-                  }
                   isRequired={true}
+                  disabled={true}
                 />
                 <SelectInputField
                   key={`dataType-${translationSelected}`}

@@ -50,10 +50,10 @@ export const axUpdateSpeciesTrait = async (id, newFacts, userId, taxonId) => {
   }
 };
 
-export const axGetTraitShowData = async (traitId) => {
+export const axGetTraitShowData = async (traitId,languageId) => {
   try {
     const { data } = await plainHttp.get(
-      `${ENDPOINT.TRAITS}/v1/factservice/trait/${traitId}/205`,
+      `${ENDPOINT.TRAITS}/v1/factservice/trait/${traitId}/${languageId}`,
       {}
     );
     return { success: true, data };

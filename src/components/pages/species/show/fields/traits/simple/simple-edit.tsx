@@ -25,7 +25,7 @@ export default function SimpleTraitEdit({ trait, initialValue, onSave, onClose }
       traitValueList: Array.isArray(value) ? value : [value]
     };
 
-    const { success, data } = await axUpdateSpeciesTrait(speciesId, trait.id, payload);
+    const { success, data } = await axUpdateSpeciesTrait(speciesId, trait.traitId, payload);
     if (success) {
       onSave(data);
       onClose();
