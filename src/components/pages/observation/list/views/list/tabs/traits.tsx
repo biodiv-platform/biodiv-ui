@@ -7,10 +7,10 @@ import React, { useEffect, useState } from "react";
 
 export default function TraitsTab({ o }) {
   const [traits, setTraits] = useState();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
-    axGetTraitsByGroupId(o.speciesGroupId).then(({ data }) => setTraits(data));
+    axGetTraitsByGroupId(o.speciesGroupId, lang).then(({ data }) => setTraits(data));
   }, []);
 
   return (

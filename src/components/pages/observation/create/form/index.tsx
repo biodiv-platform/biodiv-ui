@@ -191,7 +191,7 @@ export default function ObservationCreateForm({
             <LocationPicker />
             <DateInputs />
             {customFieldList && <ObservationCustomFieldForm fields={fields} />}
-            <TraitsPicker name="facts" label={t("observation:traits")} />
+            <TraitsPicker name="facts" label={t("observation:traits")} languageId={languageId} />
             <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
             <Box mt={4}>
               <CheckboxField name="terms" label={t("form:terms")} />

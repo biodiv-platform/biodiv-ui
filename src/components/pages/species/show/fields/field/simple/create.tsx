@@ -164,8 +164,8 @@ export default function SpeciesFieldSimpleCreate({
                         name={t.name}
                         type={t.traitTypes}
                         values={t.options}
-                        defaultValue={traits.id ? traitValues[traits.id] : undefined}
-                        onUpdate={(v) => handleOnChange(t.id, v)}
+                        defaultValue={traits.traitId ? traitValues[traits.traitId] : undefined}
+                        onUpdate={(v) => handleOnChange(t.traitId, v)}
                         gridColumns={3}
                       />
                     )}
@@ -174,28 +174,28 @@ export default function SpeciesFieldSimpleCreate({
                         name={t.name}
                         type={t.traitTypes}
                         values={t.options}
-                        defaultValue={traits.id ? traitValues[traits.id] : undefined}
-                        onUpdate={(v) => handleOnChange(t.id, v)}
+                        defaultValue={traits.traitId ? traitValues[traits.traitId] : undefined}
+                        onUpdate={(v) => handleOnChange(t.traitId, v)}
                         gridColumns={3}
                       />
                     )}
                     {t.dataType == "COLOR" && (
                       <SimpleGrid columns={{ md: 3 }} spacing={4} mb={3}>
-                        {traitValues[t.id] &&
-                          traitValues[t.id].map((value, index) => (
+                        {traitValues[t.traitId] &&
+                          traitValues[t.traitId].map((value, index) => (
                             <ColorEditSwatch
                               key={index}
                               index={index}
                               color={value}
-                              onDelete={(i) => onSwatchDelete(t.id, i)}
-                              onChange={(i, v) => onSwatchChange(t.id, i, v)}
+                              onDelete={(i) => onSwatchDelete(t.traitId, i)}
+                              onChange={(i, v) => onSwatchChange(t.traitId, i, v)}
                             />
                           ))}
                         <Button
                           h="3.25rem"
                           alignItems="center"
                           justifyContent="center"
-                          onClick={() => addUndefinedValue(t.id)}
+                          onClick={() => addUndefinedValue(t.traitId)}
                         >
                           {"Add"}
                         </Button>
@@ -205,15 +205,20 @@ export default function SpeciesFieldSimpleCreate({
                       <Box mb={3} maxW="md">
                         <InputGroup>
                           <Flatpickr
-                            value={traitValues[t.id] || []}
+                            value={traitValues[t.traitId] || []}
                             options={{ allowInput: true, dateFormat: "d-m-Y", mode: "range" }}
-                            onChange={(v) => handleOnChangeDate(t.id, v)}
+                            onChange={(v) => handleOnChangeDate(t.traitId, v)}
                             render={({ defaultValue, value, ...props }, ref) => (
-                              <Input id={t.id} {...props} defaultValue={defaultValue} ref={ref} />
+                              <Input
+                                id={t.traitId}
+                                {...props}
+                                defaultValue={defaultValue}
+                                ref={ref}
+                              />
                             )}
                           />
                           <InputRightElement>
-                            <label htmlFor={t.id} style={{ cursor: "pointer" }}>
+                            <label htmlFor={t.traitId} style={{ cursor: "pointer" }}>
                               <CalendarIcon color="gray.300" />
                             </label>
                           </InputRightElement>
@@ -225,8 +230,8 @@ export default function SpeciesFieldSimpleCreate({
                         name={t.name}
                         type={t.traitTypes}
                         values={t.options}
-                        defaultValue={traits.id ? traitValues[traits.id] : undefined}
-                        onUpdate={(v) => handleOnChange(t.id, v)}
+                        defaultValue={traits.traitId ? traitValues[traits.traitId] : undefined}
+                        onUpdate={(v) => handleOnChange(t.traitId, v)}
                         gridColumns={3}
                       />
                     )}

@@ -59,12 +59,16 @@ export default function Trait({
   useEffect(() => {
     switch (traitType) {
       case TRAIT_TYPES.SINGLE_CATEGORICAL:
-        setSelectedTraits(speciesTrait.values.filter((tr) => Number(finalTraitValue) === tr.id));
+        setSelectedTraits(
+          speciesTrait.values.filter((tr) => Number(finalTraitValue) === tr.traitValueId)
+        );
         break;
 
       case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
         if (speciesTrait.traits.dataType != "COLOR") {
-          setSelectedTraits(speciesTrait.values.filter((tr) => finalTraitValue.includes(tr.id)));
+          setSelectedTraits(
+            speciesTrait.values.filter((tr) => finalTraitValue.includes(tr.traitValueId))
+          );
         } else {
           setSelectedTraits(finalTraitValue.map((v) => ({ value: v })));
         }
@@ -79,7 +83,7 @@ export default function Trait({
   const handleTraitUpdate = async () => {
     const { success } = await axUpdateTraitById(
       observationId,
-      speciesTrait.traits?.id,
+      speciesTrait.traits?.traitId,
       cleanSingleFact(traitInputValue)
     );
     if (success) {

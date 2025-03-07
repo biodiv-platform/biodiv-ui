@@ -90,10 +90,10 @@ export const axUpdateObservationTags = async (payload) => {
   }
 };
 
-export const axGetTraitsByGroupId = async (groupId) => {
+export const axGetTraitsByGroupId = async (groupId, languageId) => {
   try {
     const { data } = await plainHttp.get(
-      `${ENDPOINT.OBSERVATION}/v1/observation/species/${groupId}`
+      `${ENDPOINT.OBSERVATION}/v1/observation/species/${groupId}/${languageId}`
     );
     return { success: true, data };
   } catch (e) {

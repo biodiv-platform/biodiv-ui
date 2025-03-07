@@ -3,6 +3,7 @@ import { FactValuePair, TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useListener } from "react-gbus";
 
@@ -23,10 +24,11 @@ export default function TraitsList({
 }: ITraitsProps) {
   const [newTraitsList, setNewTraitsList] = useState<any[]>([]);
   const [speciesTraitsList, setSpeciesTraitsList] = useState(speciesTraitsListDefault);
+  const { lang } = useTranslation();
 
   useListener(
     (groupId) => {
-      axGetTraitsByGroupId(groupId).then(
+      axGetTraitsByGroupId(groupId, lang).then(
         ({ success, data }) => success && setSpeciesTraitsList(data)
       );
     },
@@ -42,7 +44,7 @@ export default function TraitsList({
             switch (speciesTrait.traits?.traitTypes) {
               case TRAIT_TYPES.SINGLE_CATEGORICAL:
                 return {
-                  defaultValue: factsList?.find((v) => v.nameId === speciesTrait.traits?.id)
+                  defaultValue: factsList?.find((v) => v.nameId === speciesTrait.traits?.traitId)
                     ?.valueId,
                   speciesTrait,
                   traitType
@@ -51,7 +53,7 @@ export default function TraitsList({
               case TRAIT_TYPES.RANGE:
                 return {
                   defaultValue: factsList
-                    ?.filter((v) => v.nameId === speciesTrait.traits?.id)
+                    ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
                     .map((o) => o.value),
                   speciesTrait,
                   traitType
@@ -60,7 +62,7 @@ export default function TraitsList({
               case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
                 return {
                   defaultValue: factsList
-                    ?.filter((v) => v.nameId === speciesTrait.traits?.id)
+                    ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
                     .map((v) => v.valueId),
                   speciesTrait,
                   traitType

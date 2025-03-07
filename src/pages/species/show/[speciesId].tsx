@@ -43,7 +43,10 @@ export const getServerSideProps = async (ctx) => {
 
   if (!speciesData.success) return { notFound: true };
 
-  const traitsMeta = await axGetAllTraitsMetaByTaxonId(speciesData.data.species.taxonConceptId);
+  const traitsMeta = await axGetAllTraitsMetaByTaxonId(
+    speciesData.data.species.taxonConceptId,
+    langId
+  );
 
   const species = normalizeSpeciesPayload(
     fieldsMeta.data,

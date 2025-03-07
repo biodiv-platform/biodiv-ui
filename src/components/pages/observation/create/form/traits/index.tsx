@@ -29,9 +29,10 @@ import TraitInput from "../../../common/trait-input";
 interface ITraitsPickerProps {
   name: string;
   label: string;
+  languageId: number;
 }
 
-const TraitsPicker = ({ name }: ITraitsPickerProps) => {
+const TraitsPicker = ({ name, languageId }: ITraitsPickerProps) => {
   const form = useFormContext();
   const initialFacts = form.control._defaultValues[name] || {};
   const [traitsPairs, setTraitsPairs] = useState<Required<TraitsValuePair>[]>([]);
@@ -43,7 +44,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
 
   useEffect(() => {
     if (sGroup) {
-      axGetTraitsByGroupId(sGroup).then(({ data }) => setTraitsPairs(data));
+      axGetTraitsByGroupId(sGroup, languageId).then(({ data }) => setTraitsPairs(data));
     }
   }, [sGroup]);
 
@@ -78,8 +79,8 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
               <TraitInput
                 type={traits.traitTypes}
                 values={values}
-                defaultValue={traits.id ? facts[traits.id] : undefined}
-                onUpdate={(v) => handleOnChange(traits.id, v)}
+                defaultValue={traits.traitId ? facts[traits.traitId] : undefined}
+                onUpdate={(v) => handleOnChange(traits.traitId, v)}
               />
             )}
             {traits.dataType == "STRING" && traits.traitTypes == "RANGE" && (
@@ -87,8 +88,8 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
                 name={traits.name}
                 type={traits.traitTypes}
                 values={values}
-                defaultValue={traits.id ? facts[traits.id] : undefined}
-                onUpdate={(v) => handleOnChange(traits.id, v)}
+                defaultValue={traits.traitId ? facts[traits.traitId] : undefined}
+                onUpdate={(v) => handleOnChange(traits.traitId, v)}
                 gridColumns={3}
               />
             )}
@@ -96,8 +97,8 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
               <TraitInput
                 type={traits.traitTypes}
                 values={values}
-                defaultValue={traits.id ? facts[traits.id] : undefined}
-                onUpdate={(v) => handleOnChange(traits.id, v)}
+                defaultValue={traits.traitId ? facts[traits.traitId] : undefined}
+                onUpdate={(v) => handleOnChange(traits.traitId, v)}
               />
             )}
             {traits.dataType == "DATE" && (
@@ -107,23 +108,25 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
                     ref={inputRef}
                     customInput={<Input />}
                     selected={
-                      traits.id && facts[traits.id]
-                        ? new Date(facts[traits.id][0].split(":")[0])
+                      traits.traitId && facts[traits.traitId]
+                        ? new Date(facts[traits.traitId][0].split(":")[0])
                         : null
                     }
                     startDate={
-                      traits.id && facts[traits.id]
-                        ? new Date(facts[traits.id][0].split(":")[0])
+                      traits.traitId && facts[traits.traitId]
+                        ? new Date(facts[traits.traitId][0].split(":")[0])
                         : null
                     }
                     endDate={
-                      traits.id && facts[traits.id] && facts[traits.id][0].split(":").length > 1
-                        ? new Date(facts[traits.id][0].split(":")[1])
+                      traits.traitId &&
+                      facts[traits.traitId] &&
+                      facts[traits.traitId][0].split(":").length > 1
+                        ? new Date(facts[traits.traitId][0].split(":")[1])
                         : null
                     }
                     dateFormat={"dd-MM-yyyy"}
                     onChange={(v) => {
-                      handleOnChange(traits.id, [
+                      handleOnChange(traits.traitId, [
                         v
                           .filter((d) => d) // Filter out null or undefined values
                           .map((d) => d.toISOString().split("T")[0]) // Process remaining values
@@ -143,33 +146,35 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
             )}
             {traits.dataType == "COLOR" && (
               <SimpleGrid columns={{ md: 3 }} spacing={4} mb={3}>
-                {traits.id &&
-                  facts[traits.id] &&
-                  facts[traits.id].map((value, index) => (
+                {traits.traitId &&
+                  facts[traits.traitId] &&
+                  facts[traits.traitId].map((value, index) => (
                     <ColorEditSwatch
                       key={index}
                       index={index}
                       color={value}
                       onDelete={(index) =>
                         setFacts((prevFacts) => {
-                          if (traits.id) {
-                            const newValues = prevFacts[traits.id].filter((_, i) => i !== index);
+                          if (traits.traitId) {
+                            const newValues = prevFacts[traits.traitId].filter(
+                              (_, i) => i !== index
+                            );
 
                             return {
                               ...prevFacts,
-                              [traits.id]: newValues
+                              [traits.traitId]: newValues
                             };
                           }
                         })
                       }
                       onChange={(i, v) =>
                         setFacts((prevFacts) => {
-                          if (traits.id) {
-                            const existingFacts = prevFacts[traits.id];
+                          if (traits.traitId) {
+                            const existingFacts = prevFacts[traits.traitId];
                             existingFacts[i] = v;
                             return {
                               ...prevFacts,
-                              [traits.id]: existingFacts
+                              [traits.traitId]: existingFacts
                             };
                           }
                         })
@@ -182,11 +187,11 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
                   justifyContent="center"
                   onClick={() =>
                     setFacts((prevFacts) => {
-                      if (traits.id) {
-                        const existingFacts = prevFacts[traits.id] || [];
+                      if (traits.traitId) {
+                        const existingFacts = prevFacts[traits.traitId] || [];
                         return {
                           ...prevFacts,
-                          [traits.id]: [...existingFacts, "rgb(255,255,255"]
+                          [traits.traitId]: [...existingFacts, "rgb(255,255,255"]
                         };
                       }
                     })
