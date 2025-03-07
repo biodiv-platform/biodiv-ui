@@ -29,7 +29,7 @@ import TraitInput from "../../../common/trait-input";
 interface ITraitsPickerProps {
   name: string;
   label: string;
-  languageId: number;
+  languageId;
 }
 
 const TraitsPicker = ({ name, languageId }: ITraitsPickerProps) => {
