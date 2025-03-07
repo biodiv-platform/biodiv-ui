@@ -7,14 +7,12 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   IconButton,
+  Tooltip,
   useDisclosure
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import AddIcon from "@icons/add";
-import DeleteIcon from "@icons/delete";
-import EditIcon from "@icons/edit";
 import { axCreateSpeciesField, axGetAllFieldsMeta } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -207,16 +205,18 @@ export default function SpeciesFieldsAdmin() {
                   {concept.name}
                 </Box>
                 <Flex mr={2}>
-                  <IconButton
-                    aria-label="Add category"
-                    icon={<AddIcon />}
-                    size="sm"
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openAddFieldModal(concept);
-                    }}
-                  />
+                  <Tooltip label="Add Category" hasArrow placement="top">
+                    <IconButton
+                      aria-label="Add category"
+                      icon={<AddIcon />}
+                      size="sm"
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openAddFieldModal(concept);
+                      }}
+                    />
+                  </Tooltip>
                   {/* <IconButton
                     aria-label="Edit concept"
                     icon={<EditIcon />}
@@ -246,16 +246,18 @@ export default function SpeciesFieldsAdmin() {
                           {category.name}
                         </Box>
                         <Flex mr={2}>
-                          <IconButton
-                            aria-label="Add subcategory"
-                            icon={<AddIcon />}
-                            size="sm"
-                            variant="ghost"
+                          <Tooltip label="Add Subcategory" hasArrow placement="top">
+                            <IconButton
+                              aria-label="Add subcategory"
+                              icon={<AddIcon />}
+                              size="sm"
+                              variant="ghost"
                             onClick={(e) => {
                               e.stopPropagation();
                               openAddFieldModal(concept, category);
-                            }}
-                          />
+                              }}
+                            />
+                          </Tooltip>
                           {/* <IconButton
                             aria-label="Edit category"
                             icon={<EditIcon />}
