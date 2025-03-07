@@ -14,7 +14,7 @@ const SpeciesGroupsFilter = () => {
       speciesGroup
         ?.filter((o) => o.name !== "All") // removes All from filter explicitly
         .sort((a, b) => (a?.order || 0) - (b.order || 0)),
-    speciesGroup
+    [speciesGroup]
   );
 
   const onChange = (v) => {
