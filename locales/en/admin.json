@@ -28,6 +28,8 @@
     "no_categories": "No categories found. Add a category using the + button.",
     "no_subcategories": "No subcategories found. Add a subcategory using the + button.",
     "add_concept_error": "Error adding concept",
-    "add_field_error": "Error adding field"
+    "add_field_error": "Error adding field",
+    "description": "Description",
+    "url_identifier": "URL Identifier"
   }
 }

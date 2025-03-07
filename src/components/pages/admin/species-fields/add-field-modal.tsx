@@ -26,11 +26,15 @@ export default function AddFieldModal({ isOpen, onClose, onSubmit, parentType, p
   const hForm = useForm({
     resolver: yupResolver(
       Yup.object().shape({
-        name: Yup.string().required(t("form:required"))
+        name: Yup.string().required(t("form:required")),
+        description: Yup.string().required(t("form:required")),
+        urlIdentifier: Yup.string().required(t("form:required"))
       })
     ),
     defaultValues: {
-      name: ""
+      name: "",
+      description: "",
+      urlIdentifier: ""
     }
   });
 
@@ -59,6 +63,16 @@ export default function AddFieldModal({ isOpen, onClose, onSubmit, parentType, p
                 name="name" 
                 label={t(`admin:species_fields.${fieldType}_name`)} 
                 isRequired={true} 
+              />
+              <TextBoxField 
+                name="description" 
+                label={t("admin:species_fields.description")} 
+                isRequired={false} 
+              />
+              <TextBoxField 
+                name="urlIdentifier" 
+                label={t("admin:species_fields.url_identifier")} 
+                isRequired={false} 
               />
             </ModalBody>
             <ModalFooter>

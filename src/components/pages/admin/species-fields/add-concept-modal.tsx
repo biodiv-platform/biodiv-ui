@@ -49,6 +49,16 @@ export default function AddConceptModal({ isOpen, onClose, onSubmit }) {
                 label={t("admin:species_fields.concept_name")} 
                 isRequired={true} 
               />
+               <TextBoxField 
+                name="description" 
+                label="Description"
+                isRequired={false} 
+              />
+               <TextBoxField 
+                name="urlIdentifier" 
+                label="Url Identifier" 
+                isRequired={false} 
+              />
             </ModalBody>
             <ModalFooter>
               <SubmitButton leftIcon={<CheckIcon />} mr={3}>

@@ -92,5 +92,6 @@
   },
   "use_in_observation": "Use Selected",
   "wkt": "WKT",
-  "youtube_placeholder": "Input YouTube link"
+  "youtube_placeholder": "Input YouTube link",
+  "required": "This field is required"
 }

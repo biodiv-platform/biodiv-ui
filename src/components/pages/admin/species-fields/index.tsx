@@ -15,7 +15,7 @@ import { PageHeading } from "@components/@core/layout";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
-import { axCreateSpeciesField,axGetAllFieldsMeta } from "@services/species.service";
+import { axCreateSpeciesField, axGetAllFieldsMeta } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
@@ -86,14 +86,14 @@ export default function SpeciesFieldsAdmin() {
 
   const handleAddConcept = async (newConcept) => {
     try {
-      const payload = {
-        parentId: 0, // root level concept has no parent
-        label: "concept",
-        header: newConcept.name,
-        displayOrder: speciesFields.length + 1
-      };
-
-      const { success, data } = await axCreateSpeciesField(payload);
+      const { success, data } = await axCreateSpeciesField(
+        {
+          header: newConcept.name,
+          description: newConcept.description,
+          urlIdentifier: newConcept.urlIdentifier
+        },
+        0   // parentId for root concept
+      );
 
       if (success && data) {
         setSpeciesFields([
@@ -137,7 +137,14 @@ export default function SpeciesFieldsAdmin() {
         };
       }
 
-      const { success, data } = await axCreateSpeciesField(payload);
+      const { success, data } = await axCreateSpeciesField(
+        {
+          header: newField.name,
+          description: "",
+          urlIdentifier: ""
+        },
+        payload.parentId
+      );
 
       if (success && data && selectedConcept) {
         const updatedFields = [...speciesFields];

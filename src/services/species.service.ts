@@ -1,6 +1,8 @@
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
+import notification from "@utils/notification";
+import { createSpeciesFieldPayload, SpeciesFieldInput } from "@utils/species";
 
 export const axGetSpeciesById = async (speciesId, payload) => {
   try {
@@ -292,14 +294,30 @@ export const axDeleteSpeciesReferences = async (referenceId) => {
   }
 };
 
-export const axCreateSpeciesField = async (payload) => {
+// export const axCreateSpeciesField = async (payload) => {
+//   try {
+//     const { data } = await http.post(
+//       `${ENDPOINT.SPECIES}/v1/species/create/field`,
+//       payload
+//     );
+//     return { success: true, data };
+//   } catch (e) {
+//     return { success: false, data: null };
+//   }
+// };
+
+export const axCreateSpeciesField = async (
+  input: SpeciesFieldInput,
+  parentId: number,
+  displayOrder = 1
+) => {
   try {
-    const { data } = await http.post(
-      `${ENDPOINT.SPECIES}/v1/species/create/field`,
-      payload
-    );
+    const payload = createSpeciesFieldPayload(input, parentId, displayOrder);
+    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/field/create`, payload);
     return { success: true, data };
   } catch (e) {
-    return { success: false, data: null };
+    console.error(e);
+    notification(e?.response?.data?.message);
+    return { success: false, data: {} };
   }
 };
