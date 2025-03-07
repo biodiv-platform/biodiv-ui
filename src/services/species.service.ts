@@ -291,3 +291,15 @@ export const axDeleteSpeciesReferences = async (referenceId) => {
     return { success: false, data: null };
   }
 };
+
+export const axCreateSpeciesField = async (payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.SPECIES}/v1/species/create/field`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
+  }
+};

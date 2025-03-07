@@ -14,5 +14,20 @@
       },
       "heading": "Send Push-Notifications"
     }
+  },
+  "species_fields": {
+    "title": "Species Fields Management",
+    "add_concept": "Add New Concept",
+    "add_category": "Add New Category",
+    "add_subcategory": "Add New Subcategory",
+    "concept_name": "Concept Name",
+    "category_name": "Category Name",
+    "subcategory_name": "Subcategory Name",
+    "adding_to_concept": "Adding to concept: {{name}}",
+    "adding_to_category": "Adding to category: {{name}}",
+    "no_categories": "No categories found. Add a category using the + button.",
+    "no_subcategories": "No subcategories found. Add a subcategory using the + button.",
+    "add_concept_error": "Error adding concept",
+    "add_field_error": "Error adding field"
   }
 }
