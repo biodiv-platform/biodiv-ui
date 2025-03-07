@@ -22,13 +22,13 @@ export default function LandscapeObservationList({ sGroupList, title }) {
     }
   } = useObservationFilter();
   const [validate, setValidate] = useState<boolean>(false);
-  const [observationFilter, setFilter] = useState(
-    {
-      ...filter,
-      mediaFilter: MEDIA_TYPES.map((item) => item.value).toLocaleString(),
-      sGroup: sGroupList[0]
-    } || {}
-  );
+  const [observationFilter, setFilter] = useState({
+    ...filter,
+
+    mediaFilter: MEDIA_TYPES.map((item) => item.value).toLocaleString(),
+
+    sGroup: sGroupList[0]
+  });
   const uniqueSpecies = useUniqueSpecies({ filter: observationFilter, location });
 
   const speciesGroupList = useMemo(

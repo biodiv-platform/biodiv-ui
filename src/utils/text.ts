@@ -59,7 +59,8 @@ export const getInjectableHTML = (nHtml): string => {
   return "";
 };
 
-export const stripTags = (html): string => (html ? html.replace(/<[^>]*>?/gm, "") : null);
+export const stripTags = (html: string | null | undefined): string =>
+  html ? html.replace(/<[^>]*>?/gm, "") : "";
 
 export const covertToSentenceCase = (text): string => {
   const result = text.replace(/[^a-zA-Z ]/g, " ").toLowerCase();
