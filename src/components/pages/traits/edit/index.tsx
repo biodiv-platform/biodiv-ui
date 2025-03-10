@@ -27,6 +27,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateTrait } from "@services/traits.service";
 import { getTraitIcon } from "@utils/media";
@@ -39,8 +40,9 @@ import Select from "react-select";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import * as Yup from "yup";
 
-export default function TraitsEditComponent({ data, languages, langId }) {
+export default function TraitsEditComponent({ data, languages }) {
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
   const TRAIT_TYPES = [
     { label: t("traits:create_form.type_multiple_categorical"), value: "MULTIPLE_CATEGORICAL" },
     { label: t("traits:create_form.type_single_categorical"), value: "SINGLE_CATEGORICAL" },
@@ -55,7 +57,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
   const [translationSelected, setTranslationSelected] = useState<number>(0);
   const router = useLocalRouter();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [languageId, setLanguageId] = useState(0);
+  const [langId, setLangId] = useState(0);
   const formSchema = Yup.object().shape({
     translations: Yup.array().of(
       Yup.object().shape({
@@ -126,11 +128,11 @@ export default function TraitsEditComponent({ data, languages, langId }) {
   });
 
   useEffect(() => {
-    const index = data.findIndex((obj) => obj.traits.languageId == langId);
+    const index = data.findIndex((obj) => obj.traits.languageId == languageId);
     if (index !== -1) {
       setTranslationSelected(index);
     }
-  }, [langId, data]);
+  }, [languageId, data]);
 
   const SortableItem = SortableElement<{ value: number }>(({ value }) => (
     <SimpleGrid
@@ -161,11 +163,12 @@ export default function TraitsEditComponent({ data, languages, langId }) {
       <TextBoxField
         name={`translations[${translationSelected}].values[${value}].value`}
         label={
-          hForm.watch(`translations`).filter((t) => t.traits.languageId == langId)[0].values[value]
-            .value && hForm.watch(`translations`)[translationSelected].traits.languageId != langId
-            ? hForm.watch(`translations`).filter((t) => t.traits.languageId == langId)[0].values[
-                value
-              ].value
+          hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0].values[
+            value
+          ].value &&
+          hForm.watch(`translations`)[translationSelected].traits.languageId != languageId
+            ? hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0]
+                .values[value].value
             : t("traits:create_form.value")
         }
       />
@@ -208,7 +211,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
       </Box>
       <Box display="flex" justifyContent="center" alignItems="center">
         {!hForm.watch(`translations[${translationSelected}].values`)[value].id &&
-          hForm.watch(`translations`)[translationSelected].traits.languageId == langId && (
+          hForm.watch(`translations`)[translationSelected].traits.languageId == languageId && (
             <Button
               aria-label="Remove value"
               onClick={(e) => {
@@ -313,7 +316,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
           isDeleted: false,
           icon: hForm.watch(`translations[0].traits.icon`),
           traitId: null,
-          languageId: parseInt(languageId.toString(), 10),
+          languageId: parseInt(langId.toString(), 10),
           name: "",
           description: "",
           traitTypes: hForm.watch(`translations[0].traits.traitTypes`),
@@ -324,7 +327,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
         },
         values: hForm
           .watch(`translations`)
-          .filter((t) => t.traits.languageId == langId)[0]
+          .filter((t) => t.traits.languageId == languageId)[0]
           .values.map((value) => ({
             description: "",
             icon: value.icon,
@@ -334,7 +337,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
             traitInstanceId: null,
             value: "",
             displayOrder: null,
-            languageId: parseInt(languageId.toString(), 10),
+            languageId: parseInt(langId.toString(), 10),
             traitValueId: value.traitValueId
           }))
       }
@@ -342,7 +345,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
   };
 
   const removeValue = (DeleteIndex) => {
-    if (hForm.watch(`translations[${translationSelected}].traits.languageId`) == langId) {
+    if (hForm.watch(`translations[${translationSelected}].traits.languageId`) == languageId) {
       hForm.watch("translations").forEach((_, index) => {
         hForm.setValue(
           `translations[${index}].values`,
@@ -361,7 +364,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
             onSubmit={(event) => {
               event.preventDefault();
               handleAddTranslation();
-              setLanguageId(0);
+              setLangId(0);
               onClose();
             }}
           >
@@ -375,8 +378,8 @@ export default function TraitsEditComponent({ data, languages, langId }) {
                     inputId="langId"
                     name="langId"
                     placeholder={t("traits:create_form.language_placeholder")}
-                    onChange={(o:{value:number,label:string}) => {
-                      setLanguageId(o.value)
+                    onChange={(o: { value: number; label: string }) => {
+                      setLangId(o.value);
                     }}
                     components={{
                       IndicatorSeparator: () => null
@@ -396,7 +399,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
               <Button
                 mr={3}
                 onClick={() => {
-                  setLanguageId(0)
+                  setLangId(0);
                   onClose();
                 }}
               >
@@ -512,7 +515,7 @@ export default function TraitsEditComponent({ data, languages, langId }) {
                 )}
                 <Box mb={4}>
                   {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
-                    langId && (
+                    languageId && (
                     <Button onClick={handleAddValue} colorScheme="green" mb={4}>
                       {t("traits:create_form.add_trait_values_button")}
                     </Button>
