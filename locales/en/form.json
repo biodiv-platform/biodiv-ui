@@ -93,5 +93,6 @@
   "use_in_observation": "Use Selected",
   "wkt": "WKT",
   "youtube_placeholder": "Input YouTube link",
-  "required": "This field is required"
+  "required": "This field is required",
+  "at_least_one_translation": "At least one translation is required"
 }

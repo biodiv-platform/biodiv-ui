@@ -115,34 +115,29 @@ export default function SpeciesFieldsAdmin() {
 
   const handleAddField = async (newField) => {
     try {
-      let payload;
+      let parentId;
 
       if (selectedCategory && selectedConcept) {
-        // Add subcategory to a category
-        payload = {
-          parentId: selectedCategory.id,
-          label: "subcategory",
-          header: newField.name,
-          displayOrder: selectedCategory.children?.length + 1 || 1
-        };
+        parentId = selectedCategory.id;
       } else if (selectedConcept) {
-        // Add category to a concept
-        payload = {
-          parentId: selectedConcept.id,
-          label: "category",
-          header: newField.name,
-          displayOrder: selectedConcept.children?.length + 1 || 1
-        };
+        parentId = selectedConcept.id;
       }
 
-      const { success, data } = await axCreateSpeciesField(
-        {
-          header: newField.name,
-          description: "",
-          urlIdentifier: ""
-        },
-        payload.parentId
-      );
+      // Create payload with only the required fields
+      const payload = {
+        parentId,
+        displayOrder: 1, // Add this if needed by your API
+        translations: newField.translations.map(t => ({
+          header: t.header,
+          description: t.description,
+          urlIdentifier: t.urlIdentifier,
+          languageId: t.languageId
+        }))
+      };
+
+      console.log('Field creation payload:', payload);
+
+      const { success, data } = await axCreateSpeciesField(payload, parentId);
 
       if (success && data && selectedConcept) {
         const updatedFields = [...speciesFields];

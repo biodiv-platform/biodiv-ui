@@ -93,6 +93,12 @@ export interface SpeciesFieldInput {
   description: string;
   urlIdentifier: string;
   languageId?: number;
+  translations?: Array<{
+    header: string;
+    description: string;
+    urlIdentifier: string;
+    languageId: number;
+  }>;
 }
 
 /**
@@ -109,12 +115,5 @@ export const createSpeciesFieldPayload = (
 ) => ({
   parentId: parentId === 0 ? null : parentId,
   displayOrder,
-  translations: [
-    {
-      header: input.header,
-      description: input.description,
-      urlIdentifier: input.urlIdentifier,
-      languageId: input.languageId || 123
-    }
-  ]
+  translations: input.translations
 });

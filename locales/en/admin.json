@@ -30,6 +30,9 @@
     "add_concept_error": "Error adding concept",
     "add_field_error": "Error adding field",
     "description": "Description",
-    "url_identifier": "URL Identifier"
+    "url_identifier": "URL Identifier",
+    "translation": "Translation",
+    "language": "Language",
+    "add_translation": "Add Translation"
   }
 }
