@@ -32,7 +32,7 @@ import RecoInputs from "./reco-inputs";
 export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
   const { t } = useTranslation();
   const { speciesGroupOptions, sortedCFList } = useObservationCreateNext();
-  const { currentGroup, languageId } = useGlobalState();
+  const { currentGroup } = useGlobalState();
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -111,7 +111,7 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
               <DateInputs isRequired={false} />
 
               {sortedCFList?.length && <ObservationCustomFieldForm fields={fields} />}
-              <TraitsPicker name="facts" label={t("observation:traits")} languageId={languageId} />
+              <TraitsPicker name="facts" label={t("observation:traits")} />
               <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
             </ModalBody>
 

@@ -45,7 +45,7 @@ export const getServerSideProps = async (ctx) => {
 
   const traitsMeta = await axGetAllTraitsMetaByTaxonId(
     speciesData.data.species.taxonConceptId,
-    langId
+    getLanguageId(ctx.locale)?.ID
   );
 
   const species = normalizeSpeciesPayload(

@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
+import useGlobalState from "@hooks/use-global-state";
 import { FactValuePair, TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
-import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useListener } from "react-gbus";
 
@@ -24,11 +24,11 @@ export default function TraitsList({
 }: ITraitsProps) {
   const [newTraitsList, setNewTraitsList] = useState<any[]>([]);
   const [speciesTraitsList, setSpeciesTraitsList] = useState(speciesTraitsListDefault);
-  const { lang } = useTranslation();
+  const { languageId } = useGlobalState();
 
   useListener(
     (groupId) => {
-      axGetTraitsByGroupId(groupId, lang).then(
+      axGetTraitsByGroupId(groupId, languageId).then(
         ({ success, data }) => success && setSpeciesTraitsList(data)
       );
     },

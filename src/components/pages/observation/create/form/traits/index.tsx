@@ -17,6 +17,7 @@ import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import MultipleCategorialTrait from "@components/pages/observation/common/trait-input/multiple-categorical";
 import { ColorEditSwatch } from "@components/pages/species/show/fields/traits/color/color-edit-swatch";
+import useGlobalState from "@hooks/use-global-state";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import useTranslation from "next-translate/useTranslation";
@@ -29,10 +30,9 @@ import TraitInput from "../../../common/trait-input";
 interface ITraitsPickerProps {
   name: string;
   label: string;
-  languageId;
 }
 
-const TraitsPicker = ({ name, languageId }: ITraitsPickerProps) => {
+const TraitsPicker = ({ name }: ITraitsPickerProps) => {
   const form = useFormContext();
   const initialFacts = form.control._defaultValues[name] || {};
   const [traitsPairs, setTraitsPairs] = useState<Required<TraitsValuePair>[]>([]);
@@ -40,6 +40,7 @@ const TraitsPicker = ({ name, languageId }: ITraitsPickerProps) => {
   const sGroup = form.watch("sGroup");
   const { t } = useTranslation();
   const { isOpen, onToggle } = useDisclosure();
+  const { languageId } = useGlobalState();
   const inputRef = useRef<any>();
 
   useEffect(() => {
