@@ -313,7 +313,7 @@ export const axCreateSpeciesField = async (
 ) => {
   try {
     const payload = createSpeciesFieldPayload(input, parentId, displayOrder);
-    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/field/create`, payload);
+    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/species/create/field`, payload);
     return { success: true, data };
   } catch (e) {
     console.error(e);
