@@ -33,6 +33,7 @@
     "url_identifier": "URL Identifier",
     "translation": "Translation",
     "language": "Language",
-    "add_translation": "Add Translation"
+    "add_translation": "Add Translation",
+    "translate": "Translate"
   }
 }

@@ -18,6 +18,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
+import TranslateIcon from "@icons/translate";
 import AddConceptModal from "./add-concept-modal";
 import AddFieldModal from "./add-field-modal";
 
@@ -181,6 +182,11 @@ export default function SpeciesFieldsAdmin() {
     onFieldModalOpen();
   };
 
+  const openTranslateModal = (field: SpeciesField) => {
+    setSelectedField(field);
+    onFieldModalOpen();
+  };
+
   return (
     <Box className="container mt">
       <PageHeading>🧬 {t("admin:species_fields.title")}</PageHeading>
@@ -200,7 +206,19 @@ export default function SpeciesFieldsAdmin() {
                   {concept.name}
                 </Box>
                 <Flex mr={2}>
-                  <Tooltip label="Add Category" hasArrow placement="top">
+                  <Tooltip label={t("admin:species_fields.translate")} hasArrow placement="top">
+                    <IconButton
+                      aria-label="Translate concept"
+                      icon={<TranslateIcon />}
+                      size="sm"
+                      variant="ghost"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openTranslateModal(concept);
+                      }}
+                    />
+                  </Tooltip>
+                  <Tooltip label={t("admin:species_fields.add_category")} hasArrow placement="top">
                     <IconButton
                       aria-label="Add category"
                       icon={<AddIcon />}
@@ -212,21 +230,6 @@ export default function SpeciesFieldsAdmin() {
                       }}
                     />
                   </Tooltip>
-                  {/* <IconButton
-                    aria-label="Edit concept"
-                    icon={<EditIcon />}
-                    size="sm"
-                    variant="ghost"
-                    ml={1}
-                  />
-                  <IconButton
-                    aria-label="Delete concept"
-                    icon={<DeleteIcon />}
-                    size="sm"
-                    variant="ghost"
-                    ml={1}
-                    colorScheme="red"
-                  /> */}
                 </Flex>
                 <AccordionIcon />
               </AccordionButton>
@@ -241,33 +244,30 @@ export default function SpeciesFieldsAdmin() {
                           {category.name}
                         </Box>
                         <Flex mr={2}>
-                          <Tooltip label="Add Subcategory" hasArrow placement="top">
+                          <Tooltip label={t("admin:species_fields.translate")} hasArrow placement="top">
+                            <IconButton
+                              aria-label="Translate category"
+                              icon={<TranslateIcon />}
+                              size="sm"
+                              variant="ghost"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openTranslateModal(category);
+                              }}
+                            />
+                          </Tooltip>
+                          <Tooltip label={t("admin:species_fields.add_subcategory")} hasArrow placement="top">
                             <IconButton
                               aria-label="Add subcategory"
                               icon={<AddIcon />}
                               size="sm"
                               variant="ghost"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openAddFieldModal(concept, category);
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openAddFieldModal(concept, category);
                               }}
                             />
                           </Tooltip>
-                          {/* <IconButton
-                            aria-label="Edit category"
-                            icon={<EditIcon />}
-                            size="sm"
-                            variant="ghost"
-                            ml={1}
-                          />
-                          <IconButton
-                            aria-label="Delete category"
-                            icon={<DeleteIcon />}
-                            size="sm"
-                            variant="ghost"
-                            ml={1}
-                            colorScheme="red"
-                          /> */}
                         </Flex>
                         <AccordionIcon />
                       </AccordionButton>
@@ -285,20 +285,15 @@ export default function SpeciesFieldsAdmin() {
                             >
                               <Box>{subcategory.name}</Box>
                               <Flex>
-                                {/* <IconButton
-                                  aria-label="Edit subcategory"
-                                  icon={<EditIcon />}
-                                  size="sm"
-                                  variant="ghost"
-                                />
-                                <IconButton
-                                  aria-label="Delete subcategory"
-                                  icon={<DeleteIcon />}
-                                  size="sm"
-                                  variant="ghost"
-                                  ml={1}
-                                  colorScheme="red"
-                                /> */}
+                                <Tooltip label={t("admin:species_fields.translate")} hasArrow placement="top">
+                                  <IconButton
+                                    aria-label="Translate subcategory"
+                                    icon={<TranslateIcon />}
+                                    size="sm"
+                                    variant="ghost"
+                                    onClick={() => openTranslateModal(subcategory)}
+                                  />
+                                </Tooltip>
                               </Flex>
                             </Flex>
                           ))}
