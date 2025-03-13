@@ -182,7 +182,7 @@ export const axSpeciesPullResourcesList = async (speciesId, offset) => {
 
 export const axUpdateSpeciesGalleryResources = async (speciesId, payload) => {
   try {
-    const { data } = await http.put(
+    const { data } = await http.post(
       `${ENDPOINT.SPECIES}/v1/species/update/resource/${speciesId}`,
       payload
     );
