@@ -24,6 +24,8 @@ import {
   Spinner,
   Tab,
   TabList,
+  TabPanel,
+  TabPanels,
   Tabs,
   Text,
   Textarea,
@@ -34,8 +36,9 @@ import { SubmitButton } from "@components/form/submit-button";
 import CheckIcon from "@icons/check";
 import { axGetAllFieldsMeta, axUpdateSpeciesFieldTranslations } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
+import { debounce } from "lodash";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import React, { useCallback,useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 export default function SpeciesFieldTranslations() {
@@ -51,22 +54,29 @@ export default function SpeciesFieldTranslations() {
     { label: "French", code: "fr", id: "219" }
   ]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
+  const [activeLanguages, setActiveLanguages] = useState<string[]>(["en"]);
   const [modalLanguage, setModalLanguage] = useState<string>("");
   const [translations, setTranslations] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState({});
+  const [languageData, setLanguageData] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    fetchSpeciesFields();
+    // Fetch English data by default
+    fetchSpeciesFields("en");
   }, []);
 
-  const fetchSpeciesFields = async () => {
-    setLoading(true);
+  const fetchSpeciesFields = async (langCode) => {
+    console.log(`Fetching data for language: ${langCode}`);
+    setLoading((prev) => ({ ...prev, [langCode]: true }));
+
     try {
-      const { data } = await axGetAllFieldsMeta({ langId: "205" });
+      const langId = languages.find((lang) => lang.code === langCode)?.id || "205";
+      console.log(`Using language ID: ${langId} for ${langCode}`);
+
+      const { data } = await axGetAllFieldsMeta({ langId });
 
       if (data) {
-        // Transform the data to match our expected format
         const transformedData = data.map((item) => ({
           id: item.parentField.id,
           name: item.parentField.header,
@@ -90,15 +100,19 @@ export default function SpeciesFieldTranslations() {
           }))
         }));
 
-        setFields(transformedData);
+        console.log(`Data fetched for ${langCode}:`, transformedData.length, "items");
+        setLanguageData((prev) => ({
+          ...prev,
+          [langCode]: transformedData
+        }));
       } else {
         notification(t("admin:species_fields.fetch_error"));
       }
     } catch (error) {
-      console.error("Error fetching species fields:", error);
+      console.error(`Error fetching species fields for ${langCode}:`, error);
       notification(t("admin:species_fields.fetch_error"));
     } finally {
-      setLoading(false);
+      setLoading((prev) => ({ ...prev, [langCode]: false }));
     }
   };
 
@@ -112,28 +126,55 @@ export default function SpeciesFieldTranslations() {
   };
 
   const handleSelectLanguage = () => {
-    if (modalLanguage) {
-      setSelectedLanguage(modalLanguage);
+    if (modalLanguage && modalLanguage.trim() !== "") {
+      console.log("Selected language from modal:", modalLanguage);
+
+      if (!activeLanguages.includes(modalLanguage)) {
+        console.log("Adding to active languages:", modalLanguage);
+        const newActiveLanguages = [...activeLanguages, modalLanguage];
+        console.log("New active languages:", newActiveLanguages);
+        setActiveLanguages(newActiveLanguages);
+
+        // Fetch the data for this language if we haven't already
+        if (!languageData[modalLanguage]) {
+          fetchSpeciesFields(modalLanguage);
+        }
+      }
+
       onClose();
     }
   };
 
-  const handleInputChange = (field: any, property: string, value: string) => {
-    setTranslations((prev) => ({
-      ...prev,
-      [field.id]: {
-        ...prev[field.id],
-        [selectedLanguage]: {
-          ...(prev[field.id]?.[selectedLanguage] || {}),
-          [property]: value
+  // Create debounced input handler
+  const debouncedHandleInputChange = useCallback(
+    debounce((fieldId, property, value, langCode) => {
+      setTranslations((prev) => ({
+        ...prev,
+        [fieldId]: {
+          ...prev[fieldId],
+          [langCode]: {
+            ...(prev[fieldId]?.[langCode] || {}),
+            [property]: value
+          }
         }
-      }
-    }));
+      }));
+    }, 200),
+    []
+  );
+
+  const handleInputChange = (field: any, property: string, value: string) => {
+    // Update UI immediately with local state
+    const input = document.activeElement as HTMLInputElement | HTMLTextAreaElement;
+    if (input) {
+      input.value = value;
+    }
+    
+    // Debounce the actual state update
+    debouncedHandleInputChange(field.id, property, value, selectedLanguage);
   };
 
   const handleSaveTranslations = async () => {
     try {
-      // Format translations for API
       const formattedTranslations = Object.entries(translations).map(([fieldId, langData]) => ({
         fieldId,
         translations: Object.entries(langData).map(([langCode, fieldData]) => ({
@@ -155,14 +196,14 @@ export default function SpeciesFieldTranslations() {
     handleSaveTranslations();
   };
 
-  const renderTranslationInputs = (field: any) => {
-    const currentTranslation = translations[field.id]?.[selectedLanguage] || {};
+  const renderTranslationInputs = React.useMemo(() => (field: any, langCode: string) => {
+    const currentTranslation = translations[field.id]?.[langCode] || {};
 
     return (
-      <VStack 
-        align="stretch" 
-        spacing={4} 
-        mt={2} 
+      <VStack
+        align="stretch"
+        spacing={4}
+        mt={2}
         mb={4}
         p={4}
         bg="white"
@@ -182,7 +223,7 @@ export default function SpeciesFieldTranslations() {
           </FormLabel>
           <Input
             placeholder={field.name}
-            value={currentTranslation.header || ""}
+            defaultValue={currentTranslation.header || ""}
             onChange={(e) => handleInputChange(field, "header", e.target.value)}
           />
         </FormControl>
@@ -191,7 +232,7 @@ export default function SpeciesFieldTranslations() {
           <FormLabel>Description *</FormLabel>
           <Textarea
             placeholder={field.description}
-            value={currentTranslation.description || ""}
+            defaultValue={currentTranslation.description || ""}
             onChange={(e) => handleInputChange(field, "description", e.target.value)}
           />
         </FormControl>
@@ -200,11 +241,93 @@ export default function SpeciesFieldTranslations() {
           <FormLabel>URL Identifier *</FormLabel>
           <Input
             placeholder={field.urlIdentifier}
-            value={currentTranslation.urlIdentifier || ""}
+            defaultValue={currentTranslation.urlIdentifier || ""}
             onChange={(e) => handleInputChange(field, "urlIdentifier", e.target.value)}
           />
         </FormControl>
       </VStack>
+    );
+  }, [translations, handleInputChange]);
+
+  const renderLanguageContent = (langCode) => {
+    const isLoading = loading[langCode];
+    const langFields = languageData[langCode] || [];
+
+    if (isLoading) {
+      return (
+        <Flex justifyContent="center" alignItems="center" height="200px">
+          <Spinner size="xl" />
+        </Flex>
+      );
+    }
+
+    return (
+      <Accordion allowMultiple mb={6}>
+        {langFields.map((concept) => (
+          <AccordionItem key={concept.id} mb={4} border="none">
+            <Box bg="gray.50" borderRadius="md" boxShadow="md" overflow="hidden">
+              <AccordionButton bg="blue.50" _hover={{ bg: "blue.100" }} py={3}>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  {concept.name}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel bg="gray.50" p={4}>
+                {renderTranslationInputs(concept, langCode)}
+
+                {concept.children?.length > 0 && (
+                  <Accordion allowMultiple mt={4}>
+                    {concept.children.map((category) => (
+                      <AccordionItem key={category.id} mb={3} border="none">
+                        <Box bg="white" borderRadius="md" boxShadow="sm" overflow="hidden">
+                          <AccordionButton bg="green.50" _hover={{ bg: "green.100" }} py={2}>
+                            <Box flex="1" textAlign="left" fontWeight="bold">
+                              {category.name}
+                            </Box>
+                            <AccordionIcon />
+                          </AccordionButton>
+                          <AccordionPanel bg="white" p={4}>
+                            {renderTranslationInputs(category, langCode)}
+
+                            {category.children?.length > 0 && (
+                              <Accordion allowMultiple mt={4}>
+                                {category.children.map((subcategory) => (
+                                  <AccordionItem key={subcategory.id} mb={3} border="none">
+                                    <Box
+                                      bg="gray.50"
+                                      borderRadius="md"
+                                      boxShadow="sm"
+                                      overflow="hidden"
+                                    >
+                                      <AccordionButton
+                                        bg="purple.50"
+                                        _hover={{ bg: "purple.100" }}
+                                        py={2}
+                                      >
+                                        <Box flex="1" textAlign="left" fontWeight="bold">
+                                          {subcategory.name}
+                                        </Box>
+                                        <AccordionIcon />
+                                      </AccordionButton>
+                                      <AccordionPanel bg="gray.50" p={4}>
+                                        {renderTranslationInputs(subcategory, langCode)}
+                                      </AccordionPanel>
+                                    </Box>
+                                  </AccordionItem>
+                                ))}
+                              </Accordion>
+                            )}
+                          </AccordionPanel>
+                        </Box>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                )}
+              </AccordionPanel>
+            </Box>
+          </AccordionItem>
+        ))}
+      </Accordion>
     );
   };
 
@@ -214,141 +337,47 @@ export default function SpeciesFieldTranslations() {
         <Heading as="h1" size="lg">
           {t("admin:species_fields.translations")}
         </Heading>
-        <Button colorScheme="green" onClick={onOpen}>
+        <Button colorScheme="green" onClick={handleAddTranslation}>
           {t("admin:species_fields.add_translation")}
         </Button>
       </Flex>
 
-      {/* Full-width tabs for language selection */}
-      <Box
-        mx="-24px" // Negative margin to extend beyond container
-        mb={6}
-      >
-        <Tabs
-          variant="unstyled"
-          bg="gray.100"
-          rounded="md"
-          index={0} // Always show the first tab as selected
-        >
-          <TabList>
-            <Tab _selected={{ bg: "white", borderRadius: "4px", boxShadow: "lg" }} m={1}>
-              {languages.find((lang) => lang.code === selectedLanguage)?.label || "English"}
-            </Tab>
-          </TabList>
-        </Tabs>
-      </Box>
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+          {/* Chakra Tabs Component */}
+          <Tabs
+            variant="unstyled"
+            mb={6}
+            rounded="md"
+            overflowX="auto"
+            onChange={(index) => setSelectedLanguage(activeLanguages[index])}
+          >
+            <TabList bg="gray.100" rounded="md">
+              {activeLanguages.map((langCode) => (
+                <Tab 
+                  key={langCode}
+                  _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
+                  m={1}
+                >
+                  {languages.find((lang) => lang.code === langCode)?.label || langCode}
+                </Tab>
+              ))}
+            </TabList>
 
-      {loading ? (
-        <Flex justifyContent="center" alignItems="center" height="200px">
-          <Spinner size="xl" />
-        </Flex>
-      ) : (
-        <Box>
-          <FormProvider {...hForm}>
-            <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-              <Accordion allowMultiple mb={6}>
-                {fields.map((concept) => (
-                  <AccordionItem 
-                    key={concept.id}
-                    mb={4}
-                    border="none"
-                  >
-                    <Box 
-                      bg="gray.50" 
-                      borderRadius="md" 
-                      boxShadow="md"
-                      overflow="hidden"
-                    >
-                      <AccordionButton 
-                        bg="blue.50" 
-                        _hover={{ bg: "blue.100" }}
-                        py={3}
-                      >
-                        <Box flex="1" textAlign="left" fontWeight="bold">
-                          {concept.name}
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                      <AccordionPanel bg="gray.50" p={4}>
-                        {renderTranslationInputs(concept)}
+            <TabPanels>
+              {activeLanguages.map((langCode) => (
+                <TabPanel key={langCode} pt={4}>
+                  {renderLanguageContent(langCode)}
+                </TabPanel>
+              ))}
+            </TabPanels>
+          </Tabs>
 
-                        {concept.children?.length > 0 && (
-                          <Accordion allowMultiple mt={4}>
-                            {concept.children.map((category) => (
-                              <AccordionItem 
-                                key={category.id}
-                                mb={3}
-                                border="none"
-                              >
-                                <Box 
-                                  bg="white" 
-                                  borderRadius="md" 
-                                  boxShadow="sm"
-                                  overflow="hidden"
-                                >
-                                  <AccordionButton 
-                                    bg="green.50" 
-                                    _hover={{ bg: "green.100" }}
-                                    py={2}
-                                  >
-                                    <Box flex="1" textAlign="left" fontWeight="bold">
-                                      {category.name}
-                                    </Box>
-                                    <AccordionIcon />
-                                  </AccordionButton>
-                                  <AccordionPanel bg="white" p={4}>
-                                    {renderTranslationInputs(category)}
-
-                                    {category.children?.length > 0 && (
-                                      <Accordion allowMultiple mt={4}>
-                                        {category.children.map((subcategory) => (
-                                          <AccordionItem 
-                                            key={subcategory.id}
-                                            mb={3}
-                                            border="none"
-                                          >
-                                            <Box 
-                                              bg="gray.50" 
-                                              borderRadius="md" 
-                                              boxShadow="sm"
-                                              overflow="hidden"
-                                            >
-                                              <AccordionButton 
-                                                bg="purple.50" 
-                                                _hover={{ bg: "purple.100" }}
-                                                py={2}
-                                              >
-                                                <Box flex="1" textAlign="left" fontWeight="bold">
-                                                  {subcategory.name}
-                                                </Box>
-                                                <AccordionIcon />
-                                              </AccordionButton>
-                                              <AccordionPanel bg="gray.50" p={4}>
-                                                {renderTranslationInputs(subcategory)}
-                                              </AccordionPanel>
-                                            </Box>
-                                          </AccordionItem>
-                                        ))}
-                                      </Accordion>
-                                    )}
-                                  </AccordionPanel>
-                                </Box>
-                              </AccordionItem>
-                            ))}
-                          </Accordion>
-                        )}
-                      </AccordionPanel>
-                    </Box>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-              <Box mb={6}>
-                <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-              </Box>
-            </form>
-          </FormProvider>
-        </Box>
-      )}
+          <Box mb={6}>
+            <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
+          </Box>
+        </form>
+      </FormProvider>
 
       {/* Language Selection Modal */}
       <Modal isOpen={isOpen} onClose={onClose}>
