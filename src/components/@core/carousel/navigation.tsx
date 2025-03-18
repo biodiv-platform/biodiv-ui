@@ -1,8 +1,8 @@
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 const NavigationBox = styled.div`
   .right,
@@ -30,21 +30,23 @@ function CarouselNavigation({ prev, next, current, total }) {
       <IconButton
         className="left"
         aria-label={t("common:slider_left")}
-        icon={<ArrowBackIcon />}
         onClick={prev}
         opacity={0.2}
         _hover={{ opacity: 1 }}
         disabled={current === 0}
-      />
+      >
+        <LuArrowLeft />
+      </IconButton>
       <IconButton
         className="right"
         aria-label={t("common:slider_right")}
-        icon={<ArrowForwardIcon />}
         onClick={next}
         opacity={0.2}
         _hover={{ opacity: 1 }}
         disabled={current === total - 1}
-      />
+      >
+        <LuArrowRight />
+      </IconButton>
     </NavigationBox>
   );
 }

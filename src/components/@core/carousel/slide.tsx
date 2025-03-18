@@ -35,7 +35,7 @@ const Slide = ({ resource, alt }) => {
           <Image
             className="carousel--image"
             loading="lazy"
-            ignoreFallback={true}
+            // ignoreFallback={true}
             src={getResourceThumbnail(resource.context, resource.fileName, RESOURCE_SIZE.PREVIEW)}
             alt={resource.description || alt || resource.fileName}
           />

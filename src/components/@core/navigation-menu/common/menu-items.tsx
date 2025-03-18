@@ -1,8 +1,10 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Link, Menu, MenuButton } from "@chakra-ui/react";
+import { Box, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuChevronDown } from "react-icons/lu";
+
+import { MenuRoot, MenuTrigger } from "@/components/ui/menu";
 
 import GroupedSubMenu from "./grouped-sub-menu";
 import SubMenu from "./sub-menu";
@@ -21,26 +23,26 @@ export default function MenuItems(props) {
   const isContributeMenu = name === "header:menu_primary.contribute.";
 
   return isDropdown ? (
-    <Menu placement="bottom-end" isLazy={isLazy}>
-      {({ isOpen }) => (
-        <>
-          <MenuButton data-label={name} role="button" tabIndex={0}>
+    <MenuRoot positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
+      <>
+        <MenuTrigger data-label={name} role="button" asChild pl={4}>
+          <Box display="flex" alignItems="center">
             {NameIcon && <NameIcon mr={1} />}
             {t(`${name}title`)}
-            <ChevronDownIcon mt={[1, 0]} float={["right", "right", "right", "none"]} />
-          </MenuButton>
-          {(isLazy ? isOpen : true) ? (
-            CCell ? (
-              <CCell />
-            ) : isContributeMenu ? (
-              <GroupedSubMenu rows={rows} prefix={name} />
-            ) : (
-              <SubMenu rows={rows} prefix={name} />
-            )
-          ) : null}
-        </>
-      )}
-    </Menu>
+            <Box as="button" role="button" tabIndex={0}>
+              <LuChevronDown />
+            </Box>
+          </Box>
+        </MenuTrigger>
+        {CCell ? (
+          <CCell />
+        ) : isContributeMenu ? (
+          <GroupedSubMenu rows={rows} prefix={name} />
+        ) : (
+          <SubMenu rows={rows} prefix={name} />
+        )}
+      </>
+    </MenuRoot>
   ) : (
     <SimpleLink to={to} params={params}>
       {NameIcon && <NameIcon mr={1} />}

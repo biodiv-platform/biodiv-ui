@@ -1,11 +1,13 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Flex, Image, Input, Link, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Input, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+import { LuArrowRight } from "react-icons/lu";
+
+import { MenuContent, MenuItem } from "@/components/ui/menu";
 
 const GroupListItem = () => {
   const { groups, currentGroup } = useGlobalState();
@@ -20,14 +22,14 @@ const GroupListItem = () => {
   }, 200);
 
   return (
-    <MenuList h="18rem" w="360px" overflowY="scroll">
+    <MenuContent h="18rem" w="360px" overflowY="scroll">
       <Box px={2}>
         <Input w="full" onChange={onQuery} placeholder={t("header:search")} />
       </Box>
-      <MenuItem minH="3rem">
+      <MenuItem minH="3rem" value="seeAll">
         <LocalLink href="/group/list" prefixGroup={true}>
           <Link w="full">
-            {t("header:menu_primary.groups.see_all")} <ArrowForwardIcon />
+            {t("header:menu_primary.groups.see_all")} <LuArrowRight />
           </Link>
         </LocalLink>
       </MenuItem>
@@ -38,7 +40,7 @@ const GroupListItem = () => {
           : g?.webAddress;
 
         return (
-          <MenuItem key={g.id} minH="3rem">
+          <MenuItem key={g.id} minH="3rem" value={g.id}>
             <LocalLink href={groupURL}>
               <Link w="full">
                 <Flex alignItems="center">
@@ -57,7 +59,7 @@ const GroupListItem = () => {
           </MenuItem>
         );
       })}
-    </MenuList>
+    </MenuContent>
   );
 };
 

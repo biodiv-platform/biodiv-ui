@@ -1,11 +1,14 @@
+import { Badge as B } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
-import VerifiedIcon from "@icons/verified";
 import React from "react";
+import { LuBadgeCheck } from "react-icons/lu";
 
 const Badge = ({ isAdmin }) =>
   isAdmin ? (
-    <Tooltip hasArrow={true} placement="right" shouldWrapChildren={true} title="Administrator">
-      <VerifiedIcon color="green.500" />
+    <Tooltip showArrow={true} positioning={{ placement: "right" }} title="Administrator">
+      <B variant="plain" colorPalette="green.500" fontSize={"2xl"}>
+        <LuBadgeCheck />
+      </B>
     </Tooltip>
   ) : null;
 

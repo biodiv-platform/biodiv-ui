@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormHelperText, FormLabel, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Input, Text } from "@chakra-ui/react";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
 import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
@@ -13,6 +13,8 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
+
+import { Field } from "@/components/ui/field";
 
 const NakshaGmapsDraw: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaGmapsDraw),
@@ -72,8 +74,8 @@ export default function WKTSearch({
   return (
     <Box mb={mb}>
       <div data-hidden={!SITE_CONFIG.DOCUMENT.GEOENTITY_SEARCH}>
-        <FormControl>
-          <FormLabel htmlFor="geoentities-search">{labelTitle}</FormLabel>
+        <Field>
+          <Field htmlFor="geoentities-search">{labelTitle}</Field>
           <AsyncSelect
             name="geoentities-search"
             id="geoentities-search"
@@ -86,7 +88,7 @@ export default function WKTSearch({
             placeholder={t("form:geoentities")}
             loadOptions={onQueryDebounce}
           />
-        </FormControl>
+        </Field>
         {gMapTab && <Text color="gray.500" mb={2} children={t("common:or")} />}
       </div>
       {gMapTab ? (
@@ -102,11 +104,11 @@ export default function WKTSearch({
             gmapAccessToken={SITE_CONFIG.TOKENS.GMAP}
             mapStyle={{ height: "22rem", width: "100%", borderRadius: ".25rem" }}
             autocompleteComponent={
-              <FormControl mb={4}>
-                <FormLabel htmlFor="gmaps-search">{t("form:find_gmaps")}</FormLabel>
+              <Field mb={4}>
+                <Field htmlFor="gmaps-search">{t("form:find_gmaps")}</Field>
                 <Input ref={gmapsSearchRef} w="full" />
-                <FormHelperText>{t("form:coverage.hint")}</FormHelperText>
-              </FormControl>
+                <Field helperText={t("form:coverage.hint")} />
+              </Field>
             }
           />
         </Box>
@@ -118,12 +120,12 @@ export default function WKTSearch({
 
       <Button
         type="button"
-        colorScheme="blue"
+        colorPalette="blue"
         maxW="6rem"
-        leftIcon={<AddIcon />}
-        isDisabled={isDisabled}
+        disabled={isDisabled}
         onClick={handleOnSave}
       >
+        <AddIcon />
         {t("common:add")}
       </Button>
     </Box>

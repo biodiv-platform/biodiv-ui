@@ -1,12 +1,4 @@
-import {
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  SimpleGrid
-} from "@chakra-ui/react";
+import { Box, HStack, Input, SimpleGrid } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import SITE_CONFIG from "@configs/site-config";
@@ -20,6 +12,9 @@ import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import wkt from "wkt";
+
+import { Field } from "@/components/ui/field";
+import { InputGroup } from "@/components/ui/input-group";
 
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
@@ -139,8 +134,8 @@ export default function WKTDrawViewer({
 
   return (
     <div>
-      <SimpleGrid columns={[1, 1, 5, 5]} alignItems="flex-end" spacing={3} mb={mb}>
-        <FormControl gridColumn="1/3">
+      <SimpleGrid columns={[1, 1, 5, 5]} alignItems="flex-end" gap={3} mb={mb}>
+        <Field gridColumn="1/3">
           <SelectAsyncInputField
             name="geoentities-search"
             placeholder={t("form:geoentities")}
@@ -152,34 +147,39 @@ export default function WKTDrawViewer({
             label={labelTitle}
             selectRef={TitleInputRef}
           />
-        </FormControl>
-        <FormControl gridColumn="3/5">
-          <FormLabel htmlFor={nameTopology}>{labelTopology}</FormLabel>
-          <InputGroup>
-            <Input
-              name={nameTopology}
-              id={nameTopology}
-              ref={WKTInputRef}
-              placeholder={labelTopology}
-              onChange={onWKTInputChange}
-              isDisabled={disabled}
-            />
+        </Field>
+        <Field gridColumn="3/5">
+          <Field htmlFor={nameTopology}>{labelTopology}</Field>
+          <HStack gap="10" width="full">
+            <InputGroup>
+              <Input
+                name={nameTopology}
+                id={nameTopology}
+                ref={WKTInputRef}
+                placeholder={labelTopology}
+                onChange={onWKTInputChange}
+                disabled={disabled}
+              />
+            </InputGroup>
+
             {geojson && (
-              <InputRightElement>
-                <IconButton
-                  className="left"
-                  aria-label={t("common:clear")}
-                  icon={<DeleteIcon />}
-                  color="red.300"
-                  colorScheme="red.300"
-                  onClick={clearWktForm}
-                  disabled={disabled}
-                />
-              </InputRightElement>
+              <InputGroup flex="1">
+                <Input ps="4.75em">
+                  <IconButton
+                    className="left"
+                    aria-label={t("common:clear")}
+                    color="red.300"
+                    colorPalette="red.300"
+                    onClick={clearWktForm}
+                    disabled={disabled}
+                  />
+                  <DeleteIcon />
+                </Input>
+              </InputGroup>
             )}
-          </InputGroup>
-        </FormControl>
-        <SaveButton isDisabled={disabled} onClick={handleOnSave} />
+          </HStack>
+        </Field>
+        <SaveButton disabled={disabled} onClick={handleOnSave} />
       </SimpleGrid>
       {geojson ? (
         <GeoJSONPreview data={geojson} />

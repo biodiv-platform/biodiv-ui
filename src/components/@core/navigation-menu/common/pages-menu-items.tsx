@@ -1,9 +1,9 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Box, Link, Menu, MenuButton, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
+import { LuChevronDown } from "react-icons/lu";
 
-import SubMenu from "./sub-menu";
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
 
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
@@ -11,57 +11,34 @@ const SimpleLink = ({ children, to, params }) => (
   </LocalLink>
 );
 
-export default function PagesMenuItems(props) {
-  const { name, nameIcon: NameIcon, to, rows = [], cell: CCell, params, isLazy } = props;
-  const isDropdown = rows.length > 0 || CCell;
-
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-  const linkContent = (
-    <>
-      {NameIcon && <NameIcon mr={1} />}
-      {name}
-    </>
-  );
-  const desktopLinkStyle = { display: "flex", marginLeft: "20px" };
-
-  const mobileLinkStyle = {
-    display: "flex",
-    width: "100%",
-    justifyContent: "space-between"
-  };
-  const menuButton = (
-    <Box
-      as="button"
-      role="button"
-      tabIndex={0}
-      display="flex"
-      alignItems="left"
-      mb={isDesktop ? 0 : 4}
-    >
-      <MenuButton data-label={name} role="button" tabIndex={0}>
-        <ChevronDownIcon aria-label="Open Menu" mt={[1, 0]} float={["right", "none"]} />
-      </MenuButton>
-    </Box>
-  );
+export default function MenuItems(props) {
+  const { name, to, rows = [], params, isLazy } = props;
+  const isDropdown = rows.length > 0;
 
   return isDropdown ? (
-    <Menu placement="bottom-end" isLazy={isLazy}>
-      {({ isOpen }) => (
-        <>
-          <Box sx={isDesktop ? desktopLinkStyle : mobileLinkStyle}>
-            <SimpleLink to={to} params={params}>
-              {linkContent}
-            </SimpleLink>
-            {menuButton}
+    <MenuRoot positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
+      <MenuTrigger data-label={name} role="button" asChild pl={4}>
+        <Box display="flex" alignItems="center">
+          {name}
+          <Box as="button" role="button" tabIndex={0}>
+            <LuChevronDown />
           </Box>
-          {(isLazy ? isOpen : true) &&
-            (CCell ? <CCell /> : <SubMenu rows={rows} prefix={name} isPage={true} />)}
-        </>
-      )}
-    </Menu>
+        </Box>
+      </MenuTrigger>
+
+      <MenuContent>
+        {rows.map((row, index) => (
+          <MenuItem key={index} value={index}>
+            <SimpleLink to={to} params={params}>
+              {row.name}
+            </SimpleLink>
+          </MenuItem>
+        ))}
+      </MenuContent>
+    </MenuRoot>
   ) : (
     <SimpleLink to={to} params={params}>
-      {linkContent}
+      {name}
     </SimpleLink>
   );
 }

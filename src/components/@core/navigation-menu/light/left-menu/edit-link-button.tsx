@@ -24,7 +24,8 @@ export default function EditLinkButton({ label }) {
 
   return canEdit ? (
     <LocalLink href={`${webAddress}/edit`}>
-      <Button className="join-usergroup" leftIcon={<EditIcon />} m={2} colorScheme="blue" size="sm">
+      <Button className="join-usergroup"  m={2} colorPalette="blue" size="sm">
+      <EditIcon />
         {label}
       </Button>
     </LocalLink>

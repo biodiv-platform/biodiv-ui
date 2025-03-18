@@ -1,9 +1,11 @@
-import { FormControl, FormLabel, Input, SimpleGrid } from "@chakra-ui/react";
+import { Input, SimpleGrid } from "@chakra-ui/react";
 import center from "@turf/center";
 import { feature } from "@turf/helpers";
 import notification from "@utils/notification";
 import React, { useRef, useState } from "react";
 import wkt from "wkt";
+
+import { Field } from "@/components/ui/field";
 
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
@@ -64,29 +66,29 @@ export default function WKT({
 
   return (
     <div>
-      <SimpleGrid columns={[1, 1, 7, 7]} spacing={4} mb={mb}>
-        <FormControl gridColumn="1/4">
-          <FormLabel htmlFor={nameTitle}>{labelTitle}</FormLabel>
+      <SimpleGrid columns={[1, 1, 7, 7]} gap={4} mb={mb}>
+        <Field gridColumn="1/4">
+          <Field htmlFor={nameTitle}>{labelTitle}</Field>
           <Input
             id={nameTitle}
             ref={TitleInputRef}
             name={nameTitle}
             placeholder={labelTitle}
-            isDisabled={disabled}
+            disabled={disabled}
           />
-        </FormControl>
-        <FormControl gridColumn="4/7">
-          <FormLabel htmlFor={nameTopology}>{labelTopology}</FormLabel>
+        </Field>
+        <Field gridColumn="4/7">
+          <Field htmlFor={nameTopology}>{labelTopology}</Field>
           <Input
             name={nameTopology}
             id={nameTopology}
             ref={WKTInputRef}
             placeholder={labelTopology}
             onChange={onWKTInputChange}
-            isDisabled={disabled}
+            disabled={disabled}
           />
-        </FormControl>
-        <SaveButton isDisabled={disabled} onClick={handleOnSave} />
+        </Field>
+        <SaveButton disabled={disabled} onClick={handleOnSave} />
       </SimpleGrid>
       <GeoJSONPreview data={geojson} />
     </div>

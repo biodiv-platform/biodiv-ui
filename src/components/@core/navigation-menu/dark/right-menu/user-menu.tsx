@@ -1,10 +1,16 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Avatar, Link, Menu, MenuButton } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuChevronDown } from "react-icons/lu";
+
+import { Avatar } from "@/components/ui/avatar";
+import {
+  MenuRoot,
+  MenuTrigger,
+} from "@/components/ui/menu"
 
 import SubMenu from "../../common/sub-menu";
 import LoginButton from "./login";
@@ -36,12 +42,13 @@ export default function UserMenu() {
   ];
 
   return isLoggedIn ? (
-    <Menu placement="bottom-end" isLazy={true}>
-      <MenuButton
+    <MenuRoot positioning={{placement:"bottom-end"}} lazyMount>
+      <MenuTrigger
         as={Link}
         role="button"
         tabIndex={0}
         aria-label={t("header:menu_primary.settings.title")}
+        css={{ color: "white" }}
       >
         <Avatar
           size="xs"
@@ -49,10 +56,10 @@ export default function UserMenu() {
           name={user?.name}
           src={getUserImage(user?.profile_pic, user.name)}
         />
-        {user?.name} <ChevronDownIcon />
-      </MenuButton>
+        {user?.name} <LuChevronDown />
+      </MenuTrigger>
       <SubMenu rows={userMenuRows} prefix="header:menu_primary.settings." />
-    </Menu>
+    </MenuRoot>
   ) : (
     <LoginButton />
   );

@@ -1,7 +1,7 @@
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { Box, chakra, Table, Tbody, Td, Thead, Tr } from "@chakra-ui/react";
+import { Box, chakra, Table } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo } from "react";
+import { LuMoveDown, LuMoveUp } from "react-icons/lu";
 import { useRowSelect, useSortBy, useTable } from "react-table";
 
 interface BasicTableColumn {
@@ -85,12 +85,12 @@ export function BasicTable({
   }, [state.selectedRowIds]);
 
   return data?.length ? (
-    <Table variant="striped" style={tableStyle} size={size} {...getTableProps()}>
-      <Thead>
+    <Table.Root variant="line" style={tableStyle} size={size} {...getTableProps()}>
+      <Table.Header>
         {headerGroups.map((headerGroup) => (
-          <Tr {...headerGroup.getHeaderGroupProps()}>
+          <Table.Row {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <Td
+              <Table.ColumnHeader
                 fontWeight="bold"
                 {...column.getHeaderProps(column.getSortByToggleProps())}
                 isNumeric={column.isNumeric}
@@ -99,35 +99,35 @@ export function BasicTable({
                 <chakra.span pl="2">
                   {column.isSorted ? (
                     column.isSortedDesc ? (
-                      <TriangleDownIcon aria-label="sorted descending" />
+                      <LuMoveDown aria-label="sorted descending" />
                     ) : (
-                      <TriangleUpIcon aria-label="sorted ascending" />
+                      <LuMoveUp aria-label="sorted ascending" />
                     )
                   ) : null}
                 </chakra.span>
-              </Td>
+              </Table.ColumnHeader>
             ))}
-          </Tr>
+          </Table.Row>
         ))}
-      </Thead>
-      <Tbody {...getTableBodyProps()}>
+      </Table.Header>
+      <Table.Body {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <Tr {...row.getRowProps()}>
+            <Table.Row {...row.getRowProps()}>
               {row.cells.map((cell) => (
-                <Td
+                <Table.Cell
                   {...cell.getCellProps({ style: cell.column.style })}
                   isNumeric={cell.column.isNumeric}
                 >
                   {cell.render("Cell")}
-                </Td>
+                </Table.Cell>
               ))}
-            </Tr>
+            </Table.Row>
           );
         })}
-      </Tbody>
-    </Table>
+      </Table.Body>
+    </Table.Root>
   ) : (
     <Box p={4}>{t("common:no_results")}</Box>
   );

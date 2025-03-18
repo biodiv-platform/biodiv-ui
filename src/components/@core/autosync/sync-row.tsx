@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
-import ExternalBlueLink from "../blue-link/external";
 import { SyncInfo } from "./offline-sync";
 
 const PendingObservationBox = styled.div`
@@ -57,28 +56,23 @@ export default function SyncRow({ syncInfo, pendingObservation, deleteObservatio
       <div>
         <Text lineHeight="1rem" mb={1}>
           {title}
-          {isUploading && <Badge colorScheme="orange">{t("observation:sync.uploading")}</Badge>}
-          {isDone && <Badge colorScheme="green">{t("observation:sync.done")}</Badge>}
-          {isFailed && <Badge colorScheme="red">{t("observation:sync.failed")}</Badge>}
+          {isUploading && <Badge colorPalette="orange">{t("observation:sync.uploading")}</Badge>}
+          {isDone && <Badge colorPalette="green">{t("observation:sync.done")}</Badge>}
+          {isFailed && <Badge colorPalette="red">{t("observation:sync.failed")}</Badge>}
         </Text>
         <small>{data?.reverseGeocoded}</small>
         <Button
-          colorScheme="red"
+          colorPalette="red"
           mr={2}
-          isDisabled={isDone || isUploading}
+          disabled={isDone || isUploading}
           size="xs"
           onClick={handleOnDelte}
         >
           {t("common:delete")}
         </Button>
         {isDone && (
-          <Button
-            as={ExternalBlueLink}
-            colorScheme="blue"
-            size="xs"
-            href={`/observation/show/${syncInfo.successMap[id]}`}
-          >
-            View
+          <Button asChild colorPalette="blue" size="xs">
+            <a href={`/observation/show/${syncInfo.successMap[id]}`}>View</a>
           </Button>
         )}
       </div>

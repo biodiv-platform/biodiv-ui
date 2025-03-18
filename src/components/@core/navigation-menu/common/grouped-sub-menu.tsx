@@ -1,10 +1,12 @@
-import { Link, MenuDivider, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
+
+import { MenuContent, MenuItem, MenuItemGroup, MenuSeparator } from "@/components/ui/menu";
 
 const getPageLink = (lang, to) => {
   return typeof to === "string" ? to : to?.[lang] || to?.[SITE_CONFIG.LANG.DEFAULT];
@@ -28,7 +30,7 @@ const MenuGroupItems = ({
 
         // explicit false check is necessary to avoid button flickr
         return (
-          <MenuItem key={item.name}>
+          <MenuItem key={item.name} value={item.name}>
             {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
               <Link w="full" onClick={() => notification(translate("header:member_only"))}>
                 {label}
@@ -55,10 +57,10 @@ export default function GroupedSubMenu({ rows, prefix = "" }) {
   const documentRows = rows.filter((r) => r.group === "document" && r.active == true);
 
   return (
-    <MenuList>
+    <MenuContent>
       {observationRows.length > 0 && (
         <div>
-          <MenuGroup
+          <MenuItemGroup
             title={t("header:menu_primary.contribute.grouped_menu_title.observations")}
             height="full"
           >
@@ -70,14 +72,14 @@ export default function GroupedSubMenu({ rows, prefix = "" }) {
               isCurrentGroupMember={isCurrentGroupMember}
               isLoggedIn={isLoggedIn}
             />
-          </MenuGroup>
-          <MenuDivider />
+          </MenuItemGroup>
+          <MenuSeparator />
         </div>
       )}
 
       {speciesRows.length > 0 && (
         <div>
-          <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.species")}>
+          <MenuItemGroup title={t("header:menu_primary.contribute.grouped_menu_title.species")}>
             <MenuGroupItems
               rows={speciesRows}
               prefix={prefix}
@@ -86,15 +88,15 @@ export default function GroupedSubMenu({ rows, prefix = "" }) {
               isCurrentGroupMember={isCurrentGroupMember}
               isLoggedIn={isLoggedIn}
             />
-          </MenuGroup>
+          </MenuItemGroup>
 
-          <MenuDivider />
+          <MenuSeparator />
         </div>
       )}
 
       {mapRows.length > 0 && (
         <div>
-          <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.maps")}>
+          <MenuItemGroup title={t("header:menu_primary.contribute.grouped_menu_title.maps")}>
             <MenuGroupItems
               rows={mapRows}
               prefix={prefix}
@@ -103,14 +105,14 @@ export default function GroupedSubMenu({ rows, prefix = "" }) {
               isCurrentGroupMember={isCurrentGroupMember}
               isLoggedIn={isLoggedIn}
             />
-          </MenuGroup>
+          </MenuItemGroup>
 
-          <MenuDivider />
+          <MenuSeparator />
         </div>
       )}
 
       {documentRows.length > 0 && (
-        <MenuGroup title={t("header:menu_primary.contribute.grouped_menu_title.documents")}>
+        <MenuItemGroup title={t("header:menu_primary.contribute.grouped_menu_title.documents")}>
           <MenuGroupItems
             rows={documentRows}
             prefix={prefix}
@@ -119,8 +121,8 @@ export default function GroupedSubMenu({ rows, prefix = "" }) {
             isCurrentGroupMember={isCurrentGroupMember}
             isLoggedIn={isLoggedIn}
           />
-        </MenuGroup>
+        </MenuItemGroup>
       )}
-    </MenuList>
+    </MenuContent>
   );
 }

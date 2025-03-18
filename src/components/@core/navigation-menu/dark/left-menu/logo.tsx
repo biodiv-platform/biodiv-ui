@@ -42,7 +42,7 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
 
   return (
     <Logo>
-      <Link href={SITE_CONFIG.SITE.URL} className="logo">
+      <Link href={SITE_CONFIG.SITE.URL} className="logo" css={{ color: "white" }} >
         {SITE_CONFIG.SITE.TITLE?.[lang]}
       </Link>
       <LocalLink href="/observation/create" prefixGroup={true}>
@@ -55,14 +55,9 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
           <AddCircleIcon />
         </Link>
       </LocalLink>
-      <IconButton
-        onClick={onToggle}
-        ml={2}
-        p={2}
-        variant="link"
-        icon={isOpen ? <CrossIcon /> : <MenuIcon />}
-        aria-label="toggle primary menu"
-      />
+      <IconButton onClick={onToggle} ml={2} p={2} variant="plain" aria-label="toggle primary menu">
+        {isOpen ? <CrossIcon /> : <MenuIcon />}
+      </IconButton>
     </Logo>
   );
 }

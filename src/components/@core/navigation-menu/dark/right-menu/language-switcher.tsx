@@ -1,11 +1,12 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Link, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { parseCookies, setCookie } from "nookies";
 import React, { useEffect } from "react";
+import { LuChevronDown } from "react-icons/lu";
 
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
 const LOCALE_COOKIE = "NEXT_LOCALE";
 
 export default function LanguageSwitcher() {
@@ -30,18 +31,18 @@ export default function LanguageSwitcher() {
   }, []);
 
   return (
-    <Menu isLazy={true}>
-      <MenuButton as={Link} role="button">
+    <MenuRoot>
+      <MenuTrigger as={Link} role="button" css={{ color: "white" }}>
         {SITE_CONFIG.LANG.LIST[lang].NAME}
-        <ChevronDownIcon mt={[1, 0]} float={["right", "right", "right", "none"]} />
-      </MenuButton>
-      <MenuList>
+        <LuChevronDown />
+      </MenuTrigger>
+      <MenuContent>
         {Object.entries(SITE_CONFIG.LANG.LIST).map(([langCode, info]: any) => (
-          <MenuItem onClick={() => changeLanguage(langCode, true)} key={langCode}>
+          <MenuItem onClick={() => changeLanguage(langCode, true)} key={langCode} value={langCode}>
             {info.NAME}
           </MenuItem>
         ))}
-      </MenuList>
-    </Menu>
+      </MenuContent>
+    </MenuRoot>
   );
 }

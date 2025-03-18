@@ -21,7 +21,7 @@ export default function PageHeading({
       justify="space-between"
       mb={mb}
       className={className}
-      spacing={0}
+      gap={0}
     >
       <Heading as="h1" display="inline-block" {...props}>
         {children}

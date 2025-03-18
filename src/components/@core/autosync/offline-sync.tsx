@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";
 import useOnlineStatus from "@rehooks/online-status";
@@ -16,6 +16,8 @@ import React, { useEffect, useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { useImmer } from "use-immer";
 import { useIndexedDBStore } from "use-indexeddb";
+
+import { Alert } from "@/components/ui/alert";
 
 import { useLocalRouter } from "../local-link";
 import SyncBox from "./syncbox";
@@ -38,7 +40,7 @@ export default function OfflineSync() {
   const isOnline = useOnlineStatus();
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { open, onOpen, onClose } = useDisclosure({ defaultOpen: true });
   const [pendingObservations, setPendingObservations] = useState<any[]>([]);
   const [syncInfo, setSyncInfo] = useImmer<SyncInfo>({
     current: null,
@@ -178,7 +180,7 @@ export default function OfflineSync() {
 
   return (
     <div>
-      {isOpen && pendingObservations.length > 0 && (
+      {open && pendingObservations.length > 0 && (
         <SyncBox
           syncInfo={syncInfo}
           pendingObservations={pendingObservations}
@@ -188,7 +190,6 @@ export default function OfflineSync() {
       )}
       {!isOnline && (
         <Alert status="error" variant="solid" display="flex" justifyContent="center">
-          <AlertIcon />
           {t("common:offline")}
         </Alert>
       )}

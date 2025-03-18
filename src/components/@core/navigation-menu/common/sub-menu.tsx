@@ -1,10 +1,12 @@
-import { Link, MenuItem, MenuList } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
+
+import { MenuContent, MenuItem } from "@/components/ui/menu";
 
 const getPageLink = (lang, to) => {
   return typeof to === "string" ? to : to?.[lang] || to?.[SITE_CONFIG.LANG.DEFAULT];
@@ -15,7 +17,7 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
   const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
 
   return (
-    <MenuList>
+    <MenuContent>
       {rows.map((item) => {
         const [label, toLink] = useMemo(
           () => [
@@ -27,7 +29,7 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
 
         // explicit false check is necessary to avoid button flickr
         return (
-          <MenuItem key={item.name}>
+          <MenuItem key={item.name} value={item.name}>
             {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
               <Link w="full" onClick={() => notification(t("header:member_only"))}>
                 {label}
@@ -40,6 +42,6 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
           </MenuItem>
         );
       })}
-    </MenuList>
+    </MenuContent>
   );
 }

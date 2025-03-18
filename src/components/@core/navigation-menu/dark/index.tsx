@@ -8,7 +8,7 @@ import PrimaryLogo from "./left-menu/logo";
 import RightMenu from "./right-menu";
 
 export default function NavigationMenuDark() {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
 
   useEffect(() => {
     Router.events.on("routeChangeStart", onClose);
@@ -33,8 +33,8 @@ export default function NavigationMenuDark() {
   return (
     <Box bg="gray.800" color="white">
       <DarkMenuContainer className="container-fluid">
-        <PrimaryLogo isOpen={isOpen} onToggle={onToggle} />
-        <RightMenu isOpen={isOpen} />
+        <PrimaryLogo isOpen={open} onToggle={onToggle} />
+        <RightMenu isOpen={open} />
       </DarkMenuContainer>
     </Box>
   );
