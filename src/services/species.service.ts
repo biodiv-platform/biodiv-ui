@@ -3,6 +3,7 @@ import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
 import { createSpeciesFieldPayload, SpeciesFieldInput } from "@utils/species";
+import axios from "axios";
 
 export const axGetSpeciesById = async (speciesId, payload) => {
   try {
@@ -319,5 +320,17 @@ export const axCreateSpeciesField = async (
     console.error(e);
     notification(e?.response?.data?.message);
     return { success: false, data: {} };
+  }
+};
+
+export const axUpdateSpeciesFieldTranslations = async (translations, language) => {
+  try {
+    const { data } = await axios.post(`${ENDPOINT.SPECIES}/v1/species/fields/translations`, {
+      translations,
+      language
+    });
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: null };
   }
 };

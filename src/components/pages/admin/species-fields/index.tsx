@@ -13,12 +13,12 @@ import {
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import AddIcon from "@icons/add";
+import TranslateIcon from "@icons/translate";
 import { axCreateSpeciesField, axGetAllFieldsMeta } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
-import TranslateIcon from "@icons/translate";
 import AddConceptModal from "./add-concept-modal";
 import AddFieldModal from "./add-field-modal";
 
@@ -91,7 +91,7 @@ export default function SpeciesFieldsAdmin() {
           description: newConcept.description,
           urlIdentifier: newConcept.urlIdentifier
         },
-        0   // parentId for root concept
+        0 // parentId for root concept
       );
 
       if (success && data) {
@@ -128,15 +128,13 @@ export default function SpeciesFieldsAdmin() {
       const payload = {
         parentId,
         displayOrder: 1, // Add this if needed by your API
-        translations: newField.translations.map(t => ({
+        translations: newField.translations.map((t) => ({
           header: t.header,
           description: t.description,
           urlIdentifier: t.urlIdentifier,
           languageId: t.languageId
         }))
       };
-
-      console.log('Field creation payload:', payload);
 
       const { success, data } = await axCreateSpeciesField(payload, parentId);
 
@@ -244,7 +242,11 @@ export default function SpeciesFieldsAdmin() {
                           {category.name}
                         </Box>
                         <Flex mr={2}>
-                          <Tooltip label={t("admin:species_fields.translate")} hasArrow placement="top">
+                          <Tooltip
+                            label={t("admin:species_fields.translate")}
+                            hasArrow
+                            placement="top"
+                          >
                             <IconButton
                               aria-label="Translate category"
                               icon={<TranslateIcon />}
@@ -256,7 +258,11 @@ export default function SpeciesFieldsAdmin() {
                               }}
                             />
                           </Tooltip>
-                          <Tooltip label={t("admin:species_fields.add_subcategory")} hasArrow placement="top">
+                          <Tooltip
+                            label={t("admin:species_fields.add_subcategory")}
+                            hasArrow
+                            placement="top"
+                          >
                             <IconButton
                               aria-label="Add subcategory"
                               icon={<AddIcon />}
@@ -285,7 +291,11 @@ export default function SpeciesFieldsAdmin() {
                             >
                               <Box>{subcategory.name}</Box>
                               <Flex>
-                                <Tooltip label={t("admin:species_fields.translate")} hasArrow placement="top">
+                                <Tooltip
+                                  label={t("admin:species_fields.translate")}
+                                  hasArrow
+                                  placement="top"
+                                >
                                   <IconButton
                                     aria-label="Translate subcategory"
                                     icon={<TranslateIcon />}

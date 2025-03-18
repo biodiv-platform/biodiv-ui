@@ -34,6 +34,18 @@
     "translation": "Translation",
     "language": "Language",
     "add_translation": "Add Translation",
-    "translate": "Translate"
+    "translate": "Translate",
+    "bulk_translate": "Bulk Translate",
+    "bulk_translate_title": "Bulk Translate Fields",
+    "translations_management": "Species Fields Translations Management",
+    "translations_description": "Manage translations for all species fields across different languages.",
+    "add_translations": "Add Translations",
+    "translations_title": "Manage Field Translations",
+    "selected_language": "Selected Language",
+    "translation_instructions": "Click on 'Bulk Translate' to add translations for all fields in the selected language.",
+    "fetch_error": "Unable to fetch species fields",
+    "translation_success": "Translations updated successfully",
+    "translation_error": "Error updating translations",
+    "translations": "Species Fields Translations"
   }
 }
