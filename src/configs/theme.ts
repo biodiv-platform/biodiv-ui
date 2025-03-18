@@ -1,73 +1,49 @@
-import { extendTheme } from "@chakra-ui/react";
-import { withProse } from "@nikolovlazar/chakra-ui-prose";
+import { createSystem, defaultConfig } from "@chakra-ui/react";
 
 const defaultFontFamily =
   "-apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji";
 
-export const customTheme = extendTheme(
-  {
-    colors: {
-      blue: {
-        "50": "#ecf8ff",
-        "100": "#bee3f8",
-        "200": "#90cdf4",
-        "300": "#63b3ed",
-        "400": "#4299e1",
-        "500": "#2E75C2",
-        "600": "#2b6cb0",
-        "700": "#2c5282",
-        "800": "#2a4365",
-        "900": "#273c58"
-      }
-    },
-    fonts: {
-      body: defaultFontFamily,
-      heading: defaultFontFamily
-    },
-    fontWeights: {
-      bold: 600
-    },
-    styles: {
-      global: {
-        body: {
-          scrollBehavior: "smooth"
-        }
-      }
-    },
-    components: {
-      Input: {
-        sizes: {
-          md: {
-            addon: { px: 2.5 },
-            field: { px: 2.5 }
-          }
-        }
-      }
+export const customTheme = createSystem(defaultConfig, {
+  globalCss: {
+    body: {
+      scrollBehavior: "smooth"
     }
   },
-  withProse({
-    baseStyle: {
-      a: {
-        color: "blue.500",
-        wordBreak: "break-all"
+
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: defaultFontFamily },
+        body: { value: defaultFontFamily }
       },
-      table: {
-        td: {
-          border: "1px solid",
-          borderColor: "gray.300",
-          p: 2,
-          verticalAlign: "inherit"
-        },
-        th: {
-          border: "1px solid",
-          borderColor: "gray.300",
-          p: 2,
-          verticalAlign: "inherit"
-        },
-        tr: {
-          border: 0
+      fontWeights: {
+        bold: { value: 600 }
+      },
+      colors: {
+        blue: {
+          50: { value: "#ecf8ff" },
+          100: { value: "#bee3f8" },
+          200: { value: "#90cdf4" },
+          300: { value: "#63b3ed" },
+          400: { value: "#4299e1" },
+          500: { value: "#2E75C2" },
+          600: { value: "#2b6cb0" },
+          700: { value: "#2c5282" },
+          800: { value: "#2a4365" },
+          900: { value: "#273c58" }
         }
       }
     }
-  })
-);
+  }
+
+  // components: {
+  //   Input: {
+  //     sizes: {
+  //       md: {
+  //         addon: { px: 2.5 },
+  //         field: { px: 2.5 }
+  //       }
+  //     }
+  //   }
+  // }
+});

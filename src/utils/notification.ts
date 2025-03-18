@@ -1,6 +1,6 @@
-import { createStandaloneToast } from "@chakra-ui/toast";
-import { customTheme } from "@configs/theme";
 import { isBrowser } from "@static/constants";
+
+import { toaster } from "@/components/ui/toaster";
 
 import { compiledMessage } from "./basic";
 
@@ -16,14 +16,9 @@ const notification = (message, type = NotificationType.Error, variables = {}) =>
     return;
   }
   if (isBrowser) {
-    const { toast } = createStandaloneToast({ theme: customTheme });
-
-    toast({
+    toaster.create({
       description: typeof message === "string" ? compiledMessage(`${message}`, variables) : message,
-      isClosable: true,
-      position: "top",
-      status: type as any,
-      variant: "left-accent"
+      type: type
     });
   }
 };
