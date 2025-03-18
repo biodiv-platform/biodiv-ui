@@ -1,6 +1,8 @@
-import { Alert, AlertIcon, Box, Button } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+
+import { Alert } from "../ui/alert";
 
 export default function FormDebugger() {
   const [data, setData] = useState<any>();
@@ -17,10 +19,9 @@ export default function FormDebugger() {
   return (
     <Box my={4}>
       <Alert status="warning" mb={2} borderRadius="md">
-        <AlertIcon />
         FOR DEVELOPMENT PURPOSES ONLY
       </Alert>
-      <Button w="100%" colorScheme="red" onClick={update} mb={2}>
+      <Button w="100%" colorPalette="red" onClick={update} mb={2}>
         Refresh Values
       </Button>
       <Box bg="gray.100" p={4}>

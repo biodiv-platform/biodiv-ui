@@ -1,13 +1,13 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useMemo, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
+import { LuChevronDown } from "react-icons/lu";
 import { components, DropdownIndicatorProps } from "react-select";
 import AsyncSelect from "react-select/async";
 import AsyncSelectCreatable from "react-select/async-creatable";
 
+import { Field } from "../ui/field";
 import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface ISelectProps {
@@ -46,7 +46,7 @@ const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
 const DropdownIndicator = (props: DropdownIndicatorProps) => {
   return (
     <components.DropdownIndicator {...props}>
-      <ChevronDownIcon />
+      <LuChevronDown />
     </components.DropdownIndicator>
   );
 };
@@ -104,14 +104,14 @@ export const SelectAsyncInputField = ({
   }, [form.formState.submitCount]);
 
   return (
-    <FormControl
-      isInvalid={!!fieldState.error}
+    <Field
+      invalid={!!fieldState.error}
       aria-invalid={!!fieldState.error}
-      isRequired={isRequired}
+      required={isRequired}
       mb={mb}
       {...props}
     >
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      {label && <Field htmlFor={name} label={label} />}
       <Select
         name={name}
         inputId={name}
@@ -137,8 +137,8 @@ export const SelectAsyncInputField = ({
         openMenuOnFocus={openMenuOnFocus}
         {...reactSelectProps}
       />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Field errorText={fieldState?.error?.message} />
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

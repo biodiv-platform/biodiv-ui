@@ -1,9 +1,9 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
+import { Field } from "../ui/field";
 import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface SelectInputFieldProps {
@@ -44,16 +44,16 @@ export const SelectInputField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl
-      isInvalid={!!fieldState.error}
+    <Field
+      invalid={!!fieldState.error}
       className="dropdown"
       aria-invalid={!!fieldState.error}
       mb={mb}
       hidden={hidden}
-      isRequired={isRequired}
+      required={isRequired}
       {...props}
     >
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      {label && <Field htmlFor={name} label={label} />}
       <Select
         id={name}
         inputId={name}
@@ -78,8 +78,8 @@ export const SelectInputField = ({
         ref={selectRef}
         {...reactSelectProps}
       />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Field errorText={fieldState?.error?.message} />
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

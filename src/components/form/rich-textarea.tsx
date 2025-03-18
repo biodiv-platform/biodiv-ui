@@ -1,7 +1,8 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "../ui/field";
 
 const DefaultEditor: any = dynamic(
   () => import("react-simple-wysiwyg").then((m) => m.DefaultEditor),
@@ -20,11 +21,11 @@ export const RichTextareaField = ({ name, label, hint, mb = 4, ...props }: IRich
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
-      {label && <FormLabel>{label}</FormLabel>}
+    <Field invalid={!!fieldState.error} mb={mb} {...props}>
+      {label && <Field label={label} />}
       <DefaultEditor placeholder={label} {...field} title={label} />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Field errorText={fieldState?.error?.message} />
+      {hint && <Field color="gray.600" helperText={hint}></Field>}
+    </Field>
   );
 };

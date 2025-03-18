@@ -1,9 +1,11 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS } from "@static/location";
 import React from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useController, useFormContext } from "react-hook-form";
+
+import { Field } from "../ui/field";
 
 interface ILocationInputProps {
   name: string;
@@ -44,18 +46,18 @@ export const LocationInputField = ({
   });
 
   return (
-    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+    <Field invalid={!!fieldState.error} mb={mb} {...props}>
+      {label && <Field htmlFor={name} label={label} />}
       <Input
         defaultValue={field.value}
         id={name}
-        isDisabled={disabled}
+        disabled={disabled}
         name={name}
         placeholder={placeholder}
         ref={ref}
       />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Field errorText={fieldState?.error?.message} />
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };
