@@ -45,7 +45,7 @@ export default function Contributors({ type, ibpUsers, dataSheetId, isAdmin }) {
           {isAdmin && (
             <IconButton
               variant="link"
-              colorScheme="blue"
+              colorPalette="blue"
               onClick={onToggle}
               aria-label="Edit"
               icon={<EditIcon />}

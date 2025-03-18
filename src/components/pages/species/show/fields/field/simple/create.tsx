@@ -35,7 +35,7 @@ export default function SpeciesFieldSimpleCreate({
       <Button
         variant="outline"
         size="xs"
-        colorScheme="green"
+        colorPalette="green"
         leftIcon={<AddIcon />}
         onClick={handleOnCreate}
       >

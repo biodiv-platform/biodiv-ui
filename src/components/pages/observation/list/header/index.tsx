@@ -106,7 +106,7 @@ export default function ListHeader() {
           </Box>
           <Button
             variant="outline"
-            colorScheme="blue"
+            colorPalette="blue"
             leftIcon={<DownloadIcon />}
             onClick={onListDownload}
           >
@@ -132,7 +132,7 @@ export default function ListHeader() {
               defaultChecked={allMedia}
               id="media-toggle"
               onChange={handleMediaToggle}
-              colorScheme="gray.300"
+              colorPalette="gray.300"
               border="1px solid"
               borderColor="gray.500"
               borderRadius="50px"

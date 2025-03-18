@@ -40,7 +40,7 @@ export function ColorEditSwatch({ color, onChange, onDelete, index }) {
         h="full"
         borderRadius={0}
         onClick={() => onDelete(index)}
-        colorScheme="red"
+        colorPalette="red"
         aria-label="Delete"
         icon={<DeleteIcon />}
       />

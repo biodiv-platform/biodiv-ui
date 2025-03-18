@@ -49,7 +49,7 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
                 {canEdit && (
                   <IconButton
                     variant="link"
-                    colorScheme="blue"
+                    colorPalette="blue"
                     aria-label={`Edit ${child.header}`}
                     icon={<EditIcon />}
                     onClick={onToggle}

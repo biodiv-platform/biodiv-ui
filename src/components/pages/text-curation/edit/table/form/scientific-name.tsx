@@ -73,7 +73,7 @@ export default function ScientificNameEdit({ row, canValidate }) {
           size="xs"
           bg="blue.50"
           key={nanoid()}
-          colorScheme="blue"
+          colorPalette="blue"
           borderRadius="3xl"
           onClick={() => onTagSelect(suggestion)}
           mb={2}

@@ -38,7 +38,7 @@ export default function TaxonCreateModal({ isOpen, onClose, validateResults }) {
       Cell: ({ cell }) => (
         <Button
           variant="link"
-          colorScheme="blue"
+          colorPalette="blue"
           rightIcon={<ArrowForwardIcon />}
           onClick={() => applySuggestion(cell.row.original)}
         >

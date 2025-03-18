@@ -131,7 +131,7 @@ const SpecRecPrediction = ({
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="green" mr={3} onClick={handleOnPlantnetSelect}>
+            <Button colorPalette="green" mr={3} onClick={handleOnPlantnetSelect}>
               {t("observation:plantnet.generate_predictions")}
             </Button>
           </ModalFooter>

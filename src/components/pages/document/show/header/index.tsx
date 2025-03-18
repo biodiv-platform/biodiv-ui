@@ -81,7 +81,7 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
               icon={<EditIcon />}
               title={t("document:edit_document")}
               onClick={handleOnEdit}
-              colorScheme="teal"
+              colorPalette="teal"
             />
           )}
           <FollowActionButton

@@ -56,7 +56,7 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
             <Heading size="sm" className="elipsis" title={o.recoIbp?.commonName}>
               <ScientificName value={o.recoIbp?.scientificName || t("common:unknown")} />{" "}
               {!o.recoIbp?.scientificName && (
-                <Badge colorScheme="red">{t("observation:help_identify")}</Badge>
+                <Badge colorPalette="red">{t("observation:help_identify")}</Badge>
               )}
             </Heading>
 

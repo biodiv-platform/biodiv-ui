@@ -24,7 +24,7 @@ export default function AudioPlayer({ src, onConfirm, onCancel }) {
       </Box>
       <Button
         type="button"
-        colorScheme="blue"
+        colorPalette="blue"
         onClick={onConfirm}
         leftIcon={<CheckIcon />}
         mr={4}

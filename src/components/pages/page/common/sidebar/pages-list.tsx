@@ -17,7 +17,7 @@ interface PagesListProps {
 }
 
 const TogglePaneButton = ({ isExpanded, onToggle }) => (
-  <Button variant="ghost" fontSize="xl" colorScheme="transparent" onClick={onToggle} pl={0}>
+  <Button variant="ghost" fontSize="xl" colorPalette="transparent" onClick={onToggle} pl={0}>
     {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
   </Button>
 );
@@ -59,7 +59,7 @@ const PagesListItem = ({ page, isParent }) => {
               icon={<EditIcon />}
               title={t("common:edit")}
               onClick={handleOnEdit}
-              colorScheme="teal"
+              colorPalette="teal"
             />
             <DeleteActionButton
               observationId={page.id}

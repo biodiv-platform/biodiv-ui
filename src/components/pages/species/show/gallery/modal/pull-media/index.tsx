@@ -19,7 +19,7 @@ const SpeciesPullMedia = ({ onDone }) => {
   return (
     <Box>
       <Box mb={4}>
-        <Button type="button" leftIcon={<CheckIcon />} onClick={onDone} colorScheme="blue">
+        <Button type="button" leftIcon={<CheckIcon />} onClick={onDone} colorPalette="blue">
           {t("form:use_in_observation")}
         </Button>
       </Box>

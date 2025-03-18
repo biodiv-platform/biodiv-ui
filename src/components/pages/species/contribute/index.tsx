@@ -22,12 +22,12 @@ export default function SpeciesContributePageComponent() {
           {t("species:contribute.online.description")}
           <Box my={4}>
             <LocalLink href="/roles/request">
-              <Button colorScheme="blue" leftIcon={<PeopleIcon />} mr={4} as="a">
+              <Button colorPalette="blue" leftIcon={<PeopleIcon />} mr={4} as="a">
                 {t("species:contribute.request_permission")}
               </Button>
             </LocalLink>
             <LocalLink href="/species/create">
-              <Button colorScheme="blue" leftIcon={<AddIcon />} as="a">
+              <Button colorPalette="blue" leftIcon={<AddIcon />} as="a">
                 {t("species:contribute.create_species")}
               </Button>
             </LocalLink>
@@ -41,7 +41,7 @@ export default function SpeciesContributePageComponent() {
             <Button
               as="a"
               href="/biodiv/content/SimpleSpeciesPagesTemplateWithExample.xlsx"
-              colorScheme="blue"
+              colorPalette="blue"
               leftIcon={<DownloadIcon />}
               mr={4}
             >
@@ -50,7 +50,7 @@ export default function SpeciesContributePageComponent() {
             <Button
               as="a"
               href={SITE_CONFIG.FOOTER.SOCIAL.MAIL.URL}
-              colorScheme="blue"
+              colorPalette="blue"
               leftIcon={<MailIcon />}
             >
               {t("species:contribute.email")}

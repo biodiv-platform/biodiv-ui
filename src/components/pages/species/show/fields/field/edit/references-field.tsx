@@ -21,7 +21,7 @@ export default function ReferencesField({ name, label }) {
             <TextBoxField name={`${name}.${index}.url`} showLabel={false} label="URL" mb={0} />
             <Button
               variant="outline"
-              colorScheme="red"
+              colorPalette="red"
               minW="7rem"
               onClick={() => remove(index)}
               leftIcon={<DeleteIcon />}
@@ -33,7 +33,7 @@ export default function ReferencesField({ name, label }) {
       ))}
       <Button
         variant="outline"
-        colorScheme="green"
+        colorPalette="green"
         leftIcon={<AddIcon />}
         type="button"
         onClick={() => append({ title: "", url: "" })}

@@ -68,7 +68,7 @@ const Checkbox = (props: any) => {
           <IconButton
             className="remove fade"
             variant="ghost"
-            colorScheme="red"
+            colorPalette="red"
             hidden={props.isChecked}
             aria-label={t("common:delete")}
             onClick={() => removeAsset(props.asset)}

@@ -110,7 +110,7 @@ export default function View({ metadata }) {
           </Flex>
 
           <HStack>
-            <Progress value={metadata.percentageCurated} width="sm" colorScheme="green" />
+            <Progress value={metadata.percentageCurated} width="sm" colorPalette="green" />
             <Text>
               {metadata.percentageCurated}% {t("text-curation:curation_status.curated")}
             </Text>

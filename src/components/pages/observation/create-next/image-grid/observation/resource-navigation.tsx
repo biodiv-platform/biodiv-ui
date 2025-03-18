@@ -27,7 +27,7 @@ export default function ResourceNavigation({ index, setIndex, size, onDelete, on
       />
       <IconButton
         aria-label={t("common:delete")}
-        colorScheme="red"
+        colorPalette="red"
         icon={<DeleteIcon />}
         isDisabled={size === 1}
         onClick={handleOnDelete}

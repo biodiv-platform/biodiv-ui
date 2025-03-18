@@ -73,7 +73,7 @@ export default function SpeciesGroupBox({
           <Box flexShrink={0}>
             <IconButton
               size="xs"
-              colorScheme="blue"
+              colorPalette="blue"
               aria-label="Save"
               type="submit"
               onClick={handleOnSave}
@@ -82,7 +82,7 @@ export default function SpeciesGroupBox({
             <IconButton
               size="xs"
               ml={2}
-              colorScheme="gray"
+              colorPalette="gray"
               aria-label="Cancel"
               onClick={onClose}
               icon={<CrossIcon />}
@@ -98,7 +98,7 @@ export default function SpeciesGroupBox({
               aria-label="edit"
               icon={<EditIcon />}
               variant="ghost"
-              colorScheme="blue"
+              colorPalette="blue"
               minW="auto"
               onClick={onToggle}
             />

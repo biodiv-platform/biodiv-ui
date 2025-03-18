@@ -30,7 +30,7 @@ export default function ScientificNamesTable({
     <Box className="white-box">
       <BoxHeading>⭐ {title}</BoxHeading>
       <Box w="full" overflowY="auto" h={360}>
-        <Table variant="striped" colorScheme="gray" size="sm">
+        <Table variant="striped" colorPalette="gray" size="sm">
           <Thead>
             <Tr>
               <Th {...stickyTh}>{t("document:show.scientific_names_table.name_header")}</Th>

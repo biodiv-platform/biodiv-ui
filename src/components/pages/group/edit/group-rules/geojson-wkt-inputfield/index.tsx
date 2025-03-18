@@ -112,7 +112,7 @@ export default function GeoJsonWktParserInput({
           <InputRightElement>
             <IconButton
               aria-label="verify-wkt"
-              colorScheme="blue"
+              colorPalette="blue"
               onClick={handleWktInput}
               icon={<ViewIcon />}
             />

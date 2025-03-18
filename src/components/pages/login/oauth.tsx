@@ -20,7 +20,7 @@ export default function Oauth({ onSuccess, text, mb = 4 }) {
           mb={mb}
           onClick={renderProps.onClick}
           isDisabled={renderProps.disabled}
-          colorScheme="messenger"
+          colorPalette="messenger"
         >
           {text}
         </Button>

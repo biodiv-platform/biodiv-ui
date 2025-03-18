@@ -62,7 +62,7 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
                     <ButtonGroup spacing={4}>
                       <Button
                         variant="outline"
-                        colorScheme="blue"
+                        colorPalette="blue"
                         isDisabled={idx === 0}
                         leftIcon={<ArrowUpIcon />}
                         onClick={() => resources.move(idx, idx - 1)}
@@ -71,7 +71,7 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
                       </Button>
                       <Button
                         variant="outline"
-                        colorScheme="blue"
+                        colorPalette="blue"
                         isDisabled={idx === resources.fields.length - 1}
                         leftIcon={<ArrowDownIcon />}
                         onClick={() => resources.move(idx, idx + 1)}

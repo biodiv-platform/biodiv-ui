@@ -44,7 +44,7 @@ export default function SpeciesGroupChart({ data }) {
     <Box className="white-box">
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("user:observations.chart")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>

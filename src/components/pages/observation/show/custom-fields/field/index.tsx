@@ -56,7 +56,7 @@ export default function CustomField({
         {canEdit && (
           <IconButton
             variant="link"
-            colorScheme="blue"
+            colorPalette="blue"
             icon={<EditIcon />}
             aria-label="edit"
             onClick={onToggle}

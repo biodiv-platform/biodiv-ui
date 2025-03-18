@@ -8,13 +8,13 @@ function ObservationImageStatusBadge({ status }) {
 
   switch (status) {
     case `${CROP_STATUS.SELECTED}`:
-      return <Badge colorScheme="green"> {t("observation:crop.status.selected")} </Badge>;
+      return <Badge colorPalette="green"> {t("observation:crop.status.selected")} </Badge>;
 
     case `${CROP_STATUS.REJECTED}`:
-      return <Badge colorScheme="red"> {t("observation:crop.status.rejected")} </Badge>;
+      return <Badge colorPalette="red"> {t("observation:crop.status.rejected")} </Badge>;
 
     default:
-      return <Badge colorScheme="blue"> {t("observation:crop.status.not_curated")} </Badge>;
+      return <Badge colorPalette="blue"> {t("observation:crop.status.not_curated")} </Badge>;
   }
 }
 

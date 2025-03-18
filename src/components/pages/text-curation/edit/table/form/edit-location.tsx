@@ -106,7 +106,7 @@ export default function LocationEdit({ row }) {
         <Box>
           <Button
             variant="solid"
-            colorScheme="gray"
+            colorPalette="gray"
             size="sm"
             onClick={onToggle}
             mb={4}
@@ -139,7 +139,7 @@ export default function LocationEdit({ row }) {
             size="xs"
             bg="blue.50"
             key={suggestion.coordinates.toString()}
-            colorScheme="blue"
+            colorPalette="blue"
             borderRadius="3xl"
             onClick={() => onTagSelect(suggestion)}
             mb={2}
@@ -151,12 +151,12 @@ export default function LocationEdit({ row }) {
         ))}
 
         {listOfLocations.length < row.peliasLocations.length && (
-          <Button variant="link" onClick={handleLoadMore} colorScheme="blue">
+          <Button variant="link" onClick={handleLoadMore} colorPalette="blue">
             {t("text-curation:edit.location.show_all")}
           </Button>
         )}
         {listOfLocations.length === row.peliasLocations.length && listOfLocations.length > 4 && (
-          <Button variant="link" onClick={handleCollapse} colorScheme="blue">
+          <Button variant="link" onClick={handleCollapse} colorPalette="blue">
             {t("text-curation:edit.location.show_fewer")}
           </Button>
         )}

@@ -64,7 +64,7 @@ export default function FromURL({ onDone, onSave }) {
         leftIcon={<CheckIcon />}
         onClick={handleonInsert}
         type="button"
-        colorScheme="blue"
+        colorPalette="blue"
       >
         {t("form:use_in_observation")}
       </Button>

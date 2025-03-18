@@ -37,7 +37,7 @@ const CustomMarker = ({ position, setCoordinates, onTextUpdate }) => {
                 {formatted_address}
                 <Button
                   variant="link"
-                  colorScheme="blue"
+                  colorPalette="blue"
                   size="xs"
                   onClick={() => setTitle(formatted_address)}
                 >

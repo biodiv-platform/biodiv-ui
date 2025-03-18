@@ -23,7 +23,7 @@ export default function SpeciesTaxonMatched() {
       }) => (
         <Button
           variant="link"
-          colorScheme="blue"
+          colorPalette="blue"
           rightIcon={<ArrowForwardIcon />}
           onClick={() => setSelectedTaxon(original.taxonomyDefinition)}
         >

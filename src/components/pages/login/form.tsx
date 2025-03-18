@@ -1,4 +1,3 @@
-import { ArrowForwardIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
@@ -17,6 +16,7 @@ import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuArrowRight, LuChevronRight } from "react-icons/lu";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
@@ -33,7 +33,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
   const { t } = useTranslation();
   const [user, setUser] = useState();
   const [showMobile, setShowMobile] = useState(false);
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -126,7 +126,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
             label={t("auth:form.password")}
           />
           <Flex justifyContent="space-between" alignItems="center">
-            <SubmitButton rightIcon={<ArrowForwardIcon />}>{t("auth:form.submit")}</SubmitButton>
+            <SubmitButton rightIcon={<LuArrowRight />}>{t("auth:form.submit")}</SubmitButton>
             <LocalLink href="/register/forgotPassword">
               <BlueLink display="block">{t("auth:forgot_password_link")}</BlueLink>
             </LocalLink>
@@ -144,11 +144,11 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
       <LocalLink href="/register">
         <BlueLink ml={2}>
           {t("auth:sign_up_link")}
-          <ChevronRightIcon />
+          <LuChevronRight />
         </BlueLink>
       </LocalLink>
 
-      <OTPModal isOpen={isOpen} onClose={onClose} user={user} />
+      <OTPModal isOpen={open} onClose={onClose} user={user} />
     </>
   );
 }

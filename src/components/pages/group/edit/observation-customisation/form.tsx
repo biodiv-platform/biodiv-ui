@@ -46,7 +46,7 @@ export default function ObservationCustomizationForm({ userGroupId, mediaToggle 
       </FormProvider>
 
       <Box display="flex" m={4} justifyContent="flex-end">
-        <Button colorScheme="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
+        <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
           Update
         </Button>
       </Box>

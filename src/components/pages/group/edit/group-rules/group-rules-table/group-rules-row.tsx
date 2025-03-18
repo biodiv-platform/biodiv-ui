@@ -19,7 +19,7 @@ const GroupRulesRow = ({ itemDetails, onDelete }) => {
         <Button
           onClick={onDelete}
           variant="link"
-          colorScheme="red"
+          colorPalette="red"
           leftIcon={<DeleteIcon />}
           ml={2}
         >

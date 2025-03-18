@@ -41,10 +41,10 @@ export default function TagsEditor({ objectId, queryFunc, updateFunc, tags, setT
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
         <SelectAsyncInputField name="tags" multiple={true} onQuery={onTagsQuery} mb={2} />
-        <Button size="sm" colorScheme="blue" aria-label="Save" type="submit">
+        <Button size="sm" colorPalette="blue" aria-label="Save" type="submit">
           {t("common:save")}
         </Button>
-        <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
+        <Button size="sm" ml={2} colorPalette="gray" aria-label="Cancel" onClick={onClose}>
           {t("common:cancel")}
         </Button>
       </form>

@@ -30,7 +30,7 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
       <BoxHeading>⭐ {title}</BoxHeading>
 
       <Box w="full" overflowY="auto" h={360}>
-        <Table variant="striped" colorScheme="gray" size="sm">
+        <Table variant="striped" colorPalette="gray" size="sm">
           <Thead>
             <Tr>
               <Th {...stickyTh}>{t("observation:list.top_identifiers_list.author_header")}</Th>

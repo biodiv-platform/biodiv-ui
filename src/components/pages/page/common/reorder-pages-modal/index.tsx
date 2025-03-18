@@ -27,7 +27,7 @@ export default function ReOrderPagesModal() {
 
   return (
     <>
-      <Button mb={3} w="full" colorScheme="blue" onClick={p.toggleEditing}>
+      <Button mb={3} w="full" colorPalette="blue" onClick={p.toggleEditing}>
         {t("page:sidebar.reorder")}
       </Button>
 
@@ -41,7 +41,7 @@ export default function ReOrderPagesModal() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" onClick={handleOnSave}>
+            <Button colorPalette="blue" onClick={handleOnSave}>
               {t("common:save")}
             </Button>
           </ModalFooter>

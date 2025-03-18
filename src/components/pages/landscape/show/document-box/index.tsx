@@ -35,7 +35,7 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
                   }}
                 />
               </Heading>
-              <Badge colorScheme="red">{document.itemtype}</Badge>
+              <Badge colorPalette="red">{document.itemtype}</Badge>
             </HStack>
           </a>
         </LocalLink>

@@ -29,7 +29,7 @@ export default function BibImportButton() {
       as="label"
       size="sm"
       leftIcon={<ArrowUpIcon />}
-      colorScheme="blue"
+      colorPalette="blue"
       borderRadius="3rem"
     >
       <VisuallyHidden

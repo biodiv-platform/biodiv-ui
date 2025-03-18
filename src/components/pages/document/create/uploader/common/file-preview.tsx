@@ -98,7 +98,7 @@ export default function FilePreview({ fileName, date, onSelect, onDelete }: File
       </div>
       <IconButton
         variant="link"
-        colorScheme="red"
+        colorPalette="red"
         icon={<DeleteIcon />}
         className="action"
         isLoading={isLoading}

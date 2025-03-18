@@ -112,7 +112,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
         setIsEdit={setIsEdit}
       />
       <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
-        <Button colorScheme="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
+        <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
           {t("group:homepage_customization.save")}
         </Button>
       </Box>

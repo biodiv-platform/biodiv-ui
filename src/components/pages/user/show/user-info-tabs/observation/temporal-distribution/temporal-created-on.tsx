@@ -85,7 +85,7 @@ export default function TemporalCreatedOn(userId) {
     <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("user:observations.temporal_created_on")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>

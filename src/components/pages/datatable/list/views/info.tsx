@@ -69,7 +69,7 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
                     __html: getInjectableHTML(datatable?.title || t("common:unknown"))
                   }}
                 />
-                <Badge colorScheme="red">{datatable.dataTableType}</Badge>
+                <Badge colorPalette="red">{datatable.dataTableType}</Badge>
               </HStack>
             </a>
           </LocalLink>

@@ -42,7 +42,7 @@ export default function TagsShow({
           ))}
           <IconButton
             variant="link"
-            colorScheme="blue"
+            colorPalette="blue"
             onClick={onToggle}
             aria-label="Edit"
             icon={<EditIcon />}

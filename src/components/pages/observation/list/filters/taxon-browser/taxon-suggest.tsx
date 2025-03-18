@@ -86,7 +86,7 @@ export default function TaxonSuggest({ setParentState, parentState }) {
           />
           <IconButton
             variant="solid"
-            colorScheme="blue"
+            colorPalette="blue"
             isLoading={isLoading}
             type="submit"
             icon={<SearchIcon />}

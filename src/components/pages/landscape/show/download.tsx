@@ -28,7 +28,7 @@ export default function DownloadLandscape({ id, title }) {
           bg="white"
           size="sm"
           variant="outline"
-          colorScheme="blue"
+          colorPalette="blue"
         >
           {t("landscape:download_map")}
         </MenuButton>

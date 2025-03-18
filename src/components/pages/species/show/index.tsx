@@ -179,7 +179,7 @@ export default function SpeciesShowPageComponent({
                   <Button
                     variant="outline"
                     size="xs"
-                    colorScheme="green"
+                    colorPalette="green"
                     leftIcon={<AddIcon />}
                     onClick={handleAddClick}
                   >
@@ -282,7 +282,7 @@ export default function SpeciesShowPageComponent({
                             <ReferenceListItem reference={r} permissions={permissions}>
                               <Box display="inline-flex" ml={2}>
                                 <IconButton
-                                  colorScheme="blue"
+                                  colorPalette="blue"
                                   variant="unstyled"
                                   size="s"
                                   icon={<EditIcon />}

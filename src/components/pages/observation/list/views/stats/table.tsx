@@ -31,7 +31,7 @@ export default function LifeListTable({
       {title && <BoxHeading>🔍 {title}</BoxHeading>}
 
       <Box w="full" overflowY="auto" h={360}>
-        <Table variant="striped" colorScheme="gray" size="sm">
+        <Table variant="striped" colorPalette="gray" size="sm">
           <Thead>
             <Tr>
               {group && speciesGroups && <Th {...stickyTh}>{t("observation:group")}</Th>}

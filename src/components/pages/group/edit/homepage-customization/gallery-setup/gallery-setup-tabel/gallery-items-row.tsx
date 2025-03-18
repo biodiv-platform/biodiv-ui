@@ -47,7 +47,7 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
         <Button
           onClick={onDelete}
           variant="link"
-          colorScheme="red"
+          colorPalette="red"
           leftIcon={<DeleteIcon />}
           ml={2}
         >
@@ -55,7 +55,7 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
         </Button>
       </td>
       <td>
-        <Button onClick={onEdit} variant="link" colorScheme="blue" leftIcon={<EditIcon />} ml={2}>
+        <Button onClick={onEdit} variant="link" colorPalette="blue" leftIcon={<EditIcon />} ml={2}>
           {t("common:edit")}
         </Button>
       </td>

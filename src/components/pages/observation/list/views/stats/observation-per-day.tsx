@@ -76,7 +76,7 @@ const ObservationPerDay = ({ data, isLoading }) => {
     <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.temporal_distribution_date_created")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>

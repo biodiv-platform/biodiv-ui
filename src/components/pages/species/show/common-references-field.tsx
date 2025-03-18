@@ -44,7 +44,7 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
             {isCommonRefAdd && fields.length > 1 && (
               <Button
                 variant="outline"
-                colorScheme="red"
+                colorPalette="red"
                 minW="7rem"
                 onClick={() => remove(index)}
                 leftIcon={<DeleteIcon />}
@@ -59,7 +59,7 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
       {isCommonRefAdd && (
         <Button
           variant="outline"
-          colorScheme="green"
+          colorPalette="green"
           leftIcon={<AddIcon />}
           type="button"
           onClick={() => append({ title: "", url: "" })}

@@ -74,7 +74,7 @@ export default function InfoTab({
                     __html: getInjectableHTML(document?.title || t("document:unknown"))
                   }}
                 />
-                <Badge colorScheme="red">{document.itemtype}</Badge>
+                <Badge colorPalette="red">{document.itemtype}</Badge>
               </HStack>
             </a>
           </LocalLink>

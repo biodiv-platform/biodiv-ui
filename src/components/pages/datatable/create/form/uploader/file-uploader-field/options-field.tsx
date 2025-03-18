@@ -92,12 +92,12 @@ export default function Fields({
             ) : (
               <FormHelperText color="gray.600">{t("datatable:field_mapping_hint")}</FormHelperText>
             )}
-            <Button colorScheme="blue" onClick={toggleFieldMapping} leftIcon={<ArrowBackIcon />}>
+            <Button colorPalette="blue" onClick={toggleFieldMapping} leftIcon={<ArrowBackIcon />}>
               {t("datatable:upload_again")}
             </Button>
           </Stack>
           <Box style={{ overflowX: "scroll", width: "100%" }}>
-            <Table mt={4} variant="striped" colorScheme="gray" size="sm">
+            <Table mt={4} variant="striped" colorPalette="gray" size="sm">
               <Thead>
                 <Tr>
                   {tabelHeaders.map((item, index) => (

@@ -22,7 +22,7 @@ export function TaxonAttributesTab() {
       <Button
         mb={4}
         size="sm"
-        colorScheme="blue"
+        colorPalette="blue"
         variant="outline"
         hidden={!hasAccess([Role.Admin])}
         leftIcon={<EditIcon />}

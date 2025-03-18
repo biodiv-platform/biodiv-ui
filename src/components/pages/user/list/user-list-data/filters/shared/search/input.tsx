@@ -42,7 +42,7 @@ export default function TextFilterInput({ filterKey, label, mb = 0 }) {
         <TextBoxField name="query" id={filterKey} label={label} showLabel={false} mb={mb} />
         <IconButton
           variant="solid"
-          colorScheme="blue"
+          colorPalette="blue"
           type="submit"
           icon={<SearchIcon />}
           aria-label={`Find ${label}`}

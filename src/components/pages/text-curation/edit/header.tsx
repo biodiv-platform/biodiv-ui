@@ -34,7 +34,7 @@ const Actions = () => {
         <Button
           p={5}
           variant="outline"
-          colorScheme="blue"
+          colorPalette="blue"
           leftIcon={<DownloadIcon />}
           onClick={() => handleOnDownload(datasetId, rows.filter.curatedStatus)}
         >
@@ -55,7 +55,7 @@ const Actions = () => {
           icon={<EditIcon />}
           title={t("common:edit")}
           onClick={handleOnEdit}
-          colorScheme="teal"
+          colorPalette="teal"
         />
       )}
     </Flex>

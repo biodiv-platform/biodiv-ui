@@ -37,11 +37,11 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
         leftIcon={<DownloadIcon />}
         onClick={downloadPDF}
         isDisabled={!documentPath}
-        colorScheme="red"
+        colorPalette="red"
       >
         {t("document:download.title")}
       </Button>
-      <Button variant="outline" leftIcon={<PeopleIcon />} onClick={openZbib} colorScheme="teal">
+      <Button variant="outline" leftIcon={<PeopleIcon />} onClick={openZbib} colorPalette="teal">
         {t("document:download.citation")}
       </Button>
     </SimpleGrid>

@@ -153,7 +153,7 @@ const LocationPicker = ({ isRequired = true }) => {
     >
       <>
         {!isOnline && !hideLocationPicker && (
-          <Button mb={4} colorScheme="red" onClick={getCurrentLocation}>
+          <Button mb={4} colorPalette="red" onClick={getCurrentLocation}>
             Click Here for Manual Coordinates
           </Button>
         )}
@@ -177,7 +177,7 @@ const LocationPicker = ({ isRequired = true }) => {
                     size="xs"
                     ml={1}
                     verticalAlign="baseline"
-                    colorScheme="blue"
+                    colorPalette="blue"
                     onClick={ll.use}
                   >
                     {t("observation:last_location")}

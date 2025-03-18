@@ -28,7 +28,7 @@ const ImageGrid = ({ fields, onRemove, onBrowse }) => {
           {t("common:or")}
         </Text>
 
-        <Button colorScheme="blue" onClick={onBrowse} mb={8}>
+        <Button colorPalette="blue" onClick={onBrowse} mb={8}>
           {t("form:uploader.browse")}
         </Button>
 

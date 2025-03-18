@@ -55,7 +55,7 @@ export default function Fields({ name, radioGroupName, disabled, isEdit }) {
                   <TextBoxField name={`values.${index}.notes`} disabled={disabled} label="Notes" />
                 </SimpleGrid>
                 <Button
-                  colorScheme="red"
+                  colorPalette="red"
                   variant="outline"
                   leftIcon={<DeleteIcon />}
                   isDisabled={fields.length < 3 || disabled}
@@ -75,7 +75,7 @@ export default function Fields({ name, radioGroupName, disabled, isEdit }) {
               <Flex alignItems="center">
                 <Badge
                   hidden={index.toString() !== radioGroupController.field.value}
-                  colorScheme="green"
+                  colorPalette="green"
                 >
                   {t("group:custom_field.default")}
                 </Badge>
@@ -88,7 +88,7 @@ export default function Fields({ name, radioGroupName, disabled, isEdit }) {
       <Button
         variant="outline"
         onClick={() => append({ value: "", notes: "" })}
-        colorScheme="blue"
+        colorPalette="blue"
         leftIcon={<AddIcon />}
         isDisabled={disabled}
         mr={4}

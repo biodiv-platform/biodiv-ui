@@ -10,7 +10,7 @@ export default function Buttons({ onSave, onClose }) {
     <Stack isInline={true} spacing={2} mt={2}>
       <Button
         size="sm"
-        colorScheme="blue"
+        colorPalette="blue"
         aria-label={t("common:save")}
         type="submit"
         leftIcon={<CheckIcon />}
@@ -18,7 +18,7 @@ export default function Buttons({ onSave, onClose }) {
       >
         {t("common:save")}
       </Button>
-      <Button size="sm" colorScheme="gray" aria-label={t("common:close")} onClick={onClose}>
+      <Button size="sm" colorPalette="gray" aria-label={t("common:close")} onClick={onClose}>
         {t("common:close")}
       </Button>
     </Stack>

@@ -309,7 +309,7 @@ export default function AddSuggestion({
                         <Button
                           size="md"
                           onClick={handleOnClick}
-                          colorScheme="green"
+                          colorPalette="green"
                           variant="outline"
                         >
                           {buttonValue == "plantnet" && (
@@ -392,7 +392,7 @@ export default function AddSuggestion({
         <Alert status="success" hidden={isOpen}>
           <AlertIcon />
           {t("observation:id.suggestion_success")}
-          <Button variant="link" colorScheme="blue" onClick={onOpen} ml={1}>
+          <Button variant="link" colorPalette="blue" onClick={onOpen} ml={1}>
             {t("observation:id.resuggest")}
           </Button>
         </Alert>

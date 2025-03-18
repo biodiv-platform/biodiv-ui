@@ -62,7 +62,7 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
     <Box className="white-box">
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.sgroup")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>

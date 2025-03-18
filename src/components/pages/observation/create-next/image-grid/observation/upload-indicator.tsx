@@ -19,7 +19,7 @@ export default function ResourceUploadIndicator({ children, hidden, failed }) {
       {failed ? (
         <Button
           size="xs"
-          colorScheme="red"
+          colorPalette="red"
           variant="solid"
           leftIcon={<WarningIcon />}
           onClick={handleOnRetryFailed}

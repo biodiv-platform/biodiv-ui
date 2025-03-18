@@ -31,7 +31,7 @@ export default function DeleteAccount({ userId }) {
 
   return (
     <>
-      <Button w="full" colorScheme="red" onClick={onOpen} mb={4}>
+      <Button w="full" colorPalette="red" onClick={onOpen} mb={4}>
         {t("common:delete")}
       </Button>
 
@@ -48,7 +48,7 @@ export default function DeleteAccount({ userId }) {
               <Button ref={cancelRef} onClick={onClose}>
                 {t("common:cancel")}
               </Button>
-              <Button colorScheme="red" onClick={handleOnDelete} ml={3}>
+              <Button colorPalette="red" onClick={handleOnDelete} ml={3}>
                 {t("common:delete")}
               </Button>
             </AlertDialogFooter>

@@ -18,7 +18,7 @@ export function SynonymAdd() {
         <Button
           variant="outline"
           size="xs"
-          colorScheme="green"
+          colorPalette="green"
           leftIcon={<AddIcon />}
           onClick={handleOnAdd}
         >
@@ -42,14 +42,14 @@ export function SynonymEditButtons({ synonym }) {
       </Box>
       <ButtonGroup spacing={0} variant="link">
         <IconButton
-          colorScheme="blue"
+          colorPalette="blue"
           icon={<EditIcon />}
           onClick={handleOnEdit}
           aria-label={t("common:edit")}
           title={t("common:edit")}
         />
         <IconButton
-          colorScheme="red"
+          colorPalette="red"
           icon={<DeleteIcon />}
           onClick={handleOnDelete}
           aria-label={t("common:delete")}

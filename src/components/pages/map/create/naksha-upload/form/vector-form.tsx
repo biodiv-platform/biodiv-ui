@@ -92,7 +92,7 @@ export default function VectorUploadForm() {
             label={t("map:download_access")}
             shouldPortal={true}
           />
-          <Button colorScheme="blue" type="submit">
+          <Button colorPalette="blue" type="submit">
             {t("map:create")}
           </Button>
         </Stack>

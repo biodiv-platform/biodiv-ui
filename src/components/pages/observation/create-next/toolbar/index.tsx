@@ -135,7 +135,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     leftIcon={<ImageIcon />}
                     rightIcon={<ChevronDownIcon />}
                     variant="outline"
-                    colorScheme="blue"
+                    colorPalette="blue"
                   >
                     {t("observation:toolbar.import")}
                   </MenuButton>
@@ -149,7 +149,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                   </MenuList>
                 </Menu>
 
-                <ButtonGroup isAttached={true} variant="outline" colorScheme="orange">
+                <ButtonGroup isAttached={true} variant="outline" colorPalette="orange">
                   <Button type="button" onClick={onMerge} leftIcon={<MergeIcon />} borderRight={0}>
                     {t("observation:toolbar.merge")}
                   </Button>
@@ -157,7 +157,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     {t("observation:toolbar.split")}
                   </Button>
                 </ButtonGroup>
-                <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
+                <ButtonGroup isAttached={true} variant="outline" colorPalette="teal">
                   <Button
                     type="button"
                     onClick={onSelectAll}
@@ -170,13 +170,13 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     {t("observation:toolbar.select_none")}
                   </Button>
                 </ButtonGroup>
-                <ButtonGroup isAttached={true} variant="outline" colorScheme="teal">
+                <ButtonGroup isAttached={true} variant="outline" colorPalette="teal">
                   <Button
                     type="button"
                     onClick={bulkEdit}
                     leftIcon={<EditIcon />}
                     variant="outline"
-                    colorScheme="purple"
+                    colorPalette="purple"
                   >
                     {t("observation:toolbar.edit")} <SelectionCounter />
                   </Button>
@@ -185,14 +185,14 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     onClick={bulkDelete}
                     leftIcon={<DeleteIcon />}
                     variant="outline"
-                    colorScheme="red"
+                    colorPalette="red"
                   >
                     {t("observation:toolbar.delete")}
                   </Button>
                 </ButtonGroup>
               </Flex>
               <Box>
-                <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
+                <SubmitButton colorPalette="green" leftIcon={<CheckIcon />}>
                   {t("form:uploader.upload")}
                 </SubmitButton>
               </Box>
@@ -203,7 +203,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                 <MenuButton
                   as={Button}
                   maxW="120px"
-                  colorScheme="gray"
+                  colorPalette="gray"
                   leftIcon={<HamburgerIcon />}
                 >
                   {t("observation:actions")}
@@ -242,7 +242,7 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                   </MenuGroup>
                 </MenuList>
               </Menu>
-              <SubmitButton colorScheme="green" leftIcon={<CheckIcon />}>
+              <SubmitButton colorPalette="green" leftIcon={<CheckIcon />}>
                 {t("form:uploader.upload")}
               </SubmitButton>
             </Flex>

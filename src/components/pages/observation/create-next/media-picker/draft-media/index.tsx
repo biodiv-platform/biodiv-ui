@@ -79,7 +79,7 @@ const DraftResource = ({ resource: r }) => {
       </Box>
       <IconButton
         aria-label="Delete Resource"
-        colorScheme="red"
+        colorPalette="red"
         hidden={isDisabled}
         icon={<DeleteIcon />}
         m={4}
@@ -106,7 +106,7 @@ export default function DraftMedia({ onBrowse, onImport }) {
       >
         <Text mb={4}>💡 {t("form:description.my_uploads")}</Text>
         <Flex mb={4}>
-          <Button colorScheme="blue" leftIcon={<CheckIcon />} onClick={onImport} mr={4}>
+          <Button colorPalette="blue" leftIcon={<CheckIcon />} onClick={onImport} mr={4}>
             {t("common:import")}
           </Button>
           <Select

@@ -20,7 +20,7 @@ export function ClearFilters() {
         variant="link"
         className="fade"
         size="lg"
-        colorScheme="red"
+        colorPalette="red"
         aria-label={message}
         leftIcon={<DeleteIcon />}
       >

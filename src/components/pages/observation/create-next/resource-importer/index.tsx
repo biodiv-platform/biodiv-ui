@@ -87,7 +87,7 @@ export default function ResourceImporter() {
             <Button mr={3} onClick={handleOnClose}>
               {t("common:close")}
             </Button>
-            <Button colorScheme="blue" rightIcon={<ArrowForwardIcon />} onClick={handleOnContinue}>
+            <Button colorPalette="blue" rightIcon={<ArrowForwardIcon />} onClick={handleOnContinue}>
               {t("observation:continue")}
             </Button>
           </Flex>

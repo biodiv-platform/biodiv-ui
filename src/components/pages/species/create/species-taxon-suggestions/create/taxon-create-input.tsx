@@ -72,7 +72,7 @@ export const TaxonCreateInputField = ({
         />
         {errors[name] && (
           <InputRightElement width="5.4rem">
-            <Button onClick={onValidateClick} h="1.75rem" size="sm" colorScheme="red">
+            <Button onClick={onValidateClick} h="1.75rem" size="sm" colorPalette="red">
               validate
             </Button>
           </InputRightElement>

@@ -82,7 +82,7 @@ export default function GroupPost({
         mb={2}
         variant="link"
         rightIcon={<EditIcon />}
-        colorScheme="blue"
+        colorPalette="blue"
         ref={editButtonRef}
         onClick={onEditClick}
       >
@@ -130,14 +130,14 @@ export default function GroupPost({
         <Box mt={2}>
           <Button
             size="sm"
-            colorScheme="blue"
+            colorPalette="blue"
             aria-label="Save"
             type="submit"
             onClick={handleOnSave}
           >
             {t("common:save")}
           </Button>
-          <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={handleOnCancel}>
+          <Button size="sm" ml={2} colorPalette="gray" aria-label="Cancel" onClick={handleOnCancel}>
             {t("common:close")}
           </Button>
         </Box>

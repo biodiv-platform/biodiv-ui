@@ -58,7 +58,7 @@ export default function UploadProgress({ payload, data }) {
             <LocalLink prefixGroup={true} href="/observation/list">
               <Button
                 as={LinkOverlay}
-                colorScheme="blue"
+                colorPalette="blue"
                 variant="outline"
                 leftIcon={<ListIcon />}
                 isDisabled={count.done !== count.total}
@@ -67,7 +67,7 @@ export default function UploadProgress({ payload, data }) {
               </Button>
             </LocalLink>
             <Button
-              colorScheme="blue"
+              colorPalette="blue"
               variant="outline"
               rightIcon={<ArrowForwardIcon />}
               isDisabled={count.done !== count.total}

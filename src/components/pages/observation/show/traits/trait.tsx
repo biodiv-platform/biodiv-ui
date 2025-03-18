@@ -82,7 +82,7 @@ export default function Trait({
             aria-label="Edit"
             icon={<EditIcon />}
             variant="link"
-            colorScheme="blue"
+            colorPalette="blue"
             onClick={onToggle}
           />
         )}
@@ -131,14 +131,14 @@ export default function Trait({
         <Box mt={2}>
           <Button
             size="sm"
-            colorScheme="blue"
+            colorPalette="blue"
             aria-label="Save"
             type="submit"
             onClick={handleTraitUpdate}
           >
             {t("common:save")}
           </Button>
-          <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
+          <Button size="sm" ml={2} colorPalette="gray" aria-label="Cancel" onClick={onClose}>
             {t("common:cancel")}
           </Button>
         </Box>

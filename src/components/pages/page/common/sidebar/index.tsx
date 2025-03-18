@@ -22,7 +22,7 @@ export default function PagesSidebar() {
   return pages.length ? (
     <div>
       {!isDesktop && (
-        <Button colorScheme="blue" w="full" mb={4} onClick={onToggle} leftIcon={<MenuIcon />}>
+        <Button colorPalette="blue" w="full" mb={4} onClick={onToggle} leftIcon={<MenuIcon />}>
           {t("page:sidebar.toggle")}
         </Button>
       )}

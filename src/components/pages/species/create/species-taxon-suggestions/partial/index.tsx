@@ -43,7 +43,7 @@ export default function SpeciesTaxonPartial() {
       }) => (
         <Button
           variant="link"
-          colorScheme="blue"
+          colorPalette="blue"
           disabled={isLoading}
           rightIcon={<ArrowForwardIcon />}
           onClick={() => createPartialTaxon(original.registry)}

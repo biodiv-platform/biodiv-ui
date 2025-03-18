@@ -31,7 +31,7 @@ export default function TaxonShowModal() {
             <TaxonModalTabs />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" onClick={handleOnClose}>
+            <Button colorPalette="blue" onClick={handleOnClose}>
               {t("common:close")}
             </Button>
           </ModalFooter>

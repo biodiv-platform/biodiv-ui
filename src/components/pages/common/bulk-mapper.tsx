@@ -19,7 +19,7 @@ export default function BulkMapperHeader({
         {!selectAll && (
           <Button
             variant="outline"
-            colorScheme="blue"
+            colorPalette="blue"
             leftIcon={<CheckCircleIcon />}
             onClick={handleSelectAll}
           >
@@ -28,7 +28,7 @@ export default function BulkMapperHeader({
         )}
         <Button
           variant="outline"
-          colorScheme="red"
+          colorPalette="red"
           leftIcon={<RepeatIcon />}
           onClick={() => handleBulkCheckbox("UnsSelectAll")}
         >
@@ -36,7 +36,7 @@ export default function BulkMapperHeader({
         </Button>
         <Button
           variant="outline"
-          colorScheme="green"
+          colorPalette="green"
           leftIcon={<SettingsIcon />}
           onClick={openBulkMappingModal}
         >

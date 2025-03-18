@@ -55,7 +55,7 @@ export default function DateEdit({ row }) {
               size="xs"
               bg="blue.50"
               key={type + v}
-              colorScheme="blue"
+              colorPalette="blue"
               borderRadius="3xl"
               mb={2}
               mr={2}

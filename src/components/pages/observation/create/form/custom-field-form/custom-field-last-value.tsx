@@ -25,7 +25,7 @@ export default function CustomFieldLastValue({ id, name, set }) {
     <Button
       type="button"
       variant="link"
-      colorScheme="blue"
+      colorPalette="blue"
       fontSize="xs"
       title={cfValue.toString()}
       onClick={use}

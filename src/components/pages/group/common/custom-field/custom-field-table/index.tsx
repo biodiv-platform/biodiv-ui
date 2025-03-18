@@ -81,11 +81,11 @@ const CustomFieldTable = ({
         />
       </table>
       <ButtonGroup spacing={4} mt={4}>
-        <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
+        <Button colorPalette="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
           {t("group:custom_field.create")}
         </Button>
         <Button
-          colorScheme="blue"
+          colorPalette="blue"
           leftIcon={<CheckIcon />}
           float="right"
           hidden={!canReorder}

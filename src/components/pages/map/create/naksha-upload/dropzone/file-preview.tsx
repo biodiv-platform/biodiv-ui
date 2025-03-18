@@ -45,7 +45,7 @@ export default function FilePreview() {
       ) : (
         <Button
           w="100%"
-          colorScheme="blue"
+          colorPalette="blue"
           size="lg"
           disabled={!canContinue}
           onClick={() => setScreen(1)}

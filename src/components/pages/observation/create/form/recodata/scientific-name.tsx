@@ -24,7 +24,7 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
 
         {props.data.score && (
           <Box>
-            <Tag variant="solid" colorScheme="green" whiteSpace="nowrap">
+            <Tag variant="solid" colorPalette="green" whiteSpace="nowrap">
               {props.data.score}
             </Tag>
           </Box>
@@ -36,15 +36,15 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
           <Stack isInline={true} mt={1} spacing={2}>
             {props.data.rank && <Badge>{props.data.rank}</Badge>}
             {props.data.status && (
-              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.status]}>{props.data.status}</Badge>
+              <Badge colorPalette={TAXON_BADGE_COLORS[props.data.status]}>{props.data.status}</Badge>
             )}
             {props.data.position && (
-              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.position]}>
+              <Badge colorPalette={TAXON_BADGE_COLORS[props.data.position]}>
                 {props.data.position}
               </Badge>
             )}
             {props.data.prediction && (
-              <Badge colorScheme="blue">{t("observation:plantnet.prediction_label")}</Badge>
+              <Badge colorPalette="blue">{t("observation:plantnet.prediction_label")}</Badge>
             )}
           </Stack>
         </Box>

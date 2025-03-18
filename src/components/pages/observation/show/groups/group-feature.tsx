@@ -99,7 +99,7 @@ export default function GroupFeature({
         mb={2}
         variant="link"
         rightIcon={<EditIcon />}
-        colorScheme="blue"
+        colorPalette="blue"
         ref={editButtonRef}
         onClick={onToggle}
       >
@@ -139,7 +139,7 @@ export default function GroupFeature({
           <Stack isInline={true} spacing={2} mt={2}>
             <Button
               size="sm"
-              colorScheme="blue"
+              colorPalette="blue"
               aria-label="Save"
               type="submit"
               onClick={handleOnFeature}
@@ -148,14 +148,14 @@ export default function GroupFeature({
             </Button>
             <Button
               size="sm"
-              colorScheme="red"
+              colorPalette="red"
               aria-label="Save"
               type="submit"
               onClick={handleOnUnfeature}
             >
               {t("observation:unfeature")}
             </Button>
-            <Button size="sm" colorScheme="gray" aria-label="Cancel" onClick={handleOnCancel}>
+            <Button size="sm" colorPalette="gray" aria-label="Cancel" onClick={handleOnCancel}>
               {t("common:close")}
             </Button>
           </Stack>

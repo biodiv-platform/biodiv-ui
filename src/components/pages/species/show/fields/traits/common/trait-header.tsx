@@ -31,7 +31,7 @@ export function TraitHeader({ trait, onOpen }) {
         <Tooltip hasArrow={true} title={t("common:edit")}>
           <IconButton
             variant="link"
-            colorScheme="blue"
+            colorPalette="blue"
             icon={<EditIcon />}
             aria-label={t("common:edit")}
             onClick={onOpen}

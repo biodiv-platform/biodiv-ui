@@ -76,7 +76,7 @@ export default function Resources({ index, removeObservation }) {
         </AspectRatio>
         <IconButton
           aria-label="Close"
-          colorScheme="red"
+          colorPalette="red"
           icon={<CloseIcon />}
           m={2}
           onClick={handleOnRemoveObservation}

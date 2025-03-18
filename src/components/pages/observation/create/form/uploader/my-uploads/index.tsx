@@ -52,7 +52,7 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
               type="button"
               leftIcon={<CheckIcon />}
               onClick={onDone}
-              colorScheme="blue"
+              colorPalette="blue"
             >
               {t("form:use_in_observation")}
             </Button>

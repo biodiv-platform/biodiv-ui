@@ -86,7 +86,7 @@ export default function DropTarget({ assetsSize }) {
           <Text my={2} color="gray.500">
             {t("common:or")}
           </Text>
-          <Button colorScheme="blue" variant="outline" children={t("form:uploader.browse")} />
+          <Button colorPalette="blue" variant="outline" children={t("form:uploader.browse")} />
         </div>
       )}
     </DropTargetBox>

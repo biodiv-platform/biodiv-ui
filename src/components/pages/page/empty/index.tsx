@@ -25,7 +25,7 @@ export default function EmptyPageComponent() {
           </Text>
           {canCreate && (
             <LocalLink prefixGroup={true} href="/page/create">
-              <Button as="a" colorScheme="blue" rightIcon={<ArrowForwardIcon />}>
+              <Button as="a" colorPalette="blue" rightIcon={<ArrowForwardIcon />}>
                 {t("page:create.title")}
               </Button>
             </LocalLink>

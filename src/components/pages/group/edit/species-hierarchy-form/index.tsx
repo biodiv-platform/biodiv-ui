@@ -120,7 +120,7 @@ const TreeItem = React.memo(
               <Checkbox
                 isChecked={isSelected}
                 onChange={handleSelect}
-                colorScheme="blue"
+                colorPalette="blue"
                 size="md"
                 mr={2}
               />
@@ -175,7 +175,7 @@ const TreeItem = React.memo(
                         label: subItem.label
                       })
                     }
-                    colorScheme="blue"
+                    colorPalette="blue"
                     size="md"
                     mr={2}
                   />
@@ -376,10 +376,10 @@ export default function SpeciesHierarchyForm({
                   {t("group:species_fields.species_fields")}
                 </Box>
                 <Box display="flex" gap={4}>
-                  <Button size="sm" variant="outline" colorScheme="blue" onClick={handleSelectAll}>
+                  <Button size="sm" variant="outline" colorPalette="blue" onClick={handleSelectAll}>
                     {t("group:species_fields.select_all")}
                   </Button>
-                  <Button size="sm" variant="outline" colorScheme="gray" onClick={handleClearAll}>
+                  <Button size="sm" variant="outline" colorPalette="gray" onClick={handleClearAll}>
                     {t("group:species_fields.clear_all")}
                   </Button>
                 </Box>
@@ -439,7 +439,7 @@ export default function SpeciesHierarchyForm({
               <ContributorSelectField name="members" label="Search and select members" mb={4} />
               <Box display="flex" justifyContent="flex-end">
                 <Button
-                  colorScheme="blue"
+                  colorPalette="blue"
                   isLoading={apiStatus.loading}
                   onClick={() => {
                     const memberValues = methods.getValues("members");

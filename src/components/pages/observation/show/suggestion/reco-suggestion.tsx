@@ -132,7 +132,7 @@ export default function RecoSuggestion({
                     variant="outline"
                     size="sm"
                     minW="100px"
-                    colorScheme={canAccept ? "red" : "green"}
+                    colorPalette={canAccept ? "red" : "green"}
                     leftIcon={canAccept ? <CrossIcon /> : <CheckIcon />}
                     onClick={() =>
                       recoVoteAction(reco, canAccept ? RecoAction.Remove : RecoAction.Agree)
@@ -149,7 +149,7 @@ export default function RecoSuggestion({
                       minW="100px"
                       size="sm"
                       variant="outline"
-                      colorScheme={isLocked ? "blue" : "red"}
+                      colorPalette={isLocked ? "blue" : "red"}
                       ml={2}
                       leftIcon={isLocked ? <UnlockIcon /> : <LockIcon />}
                       onClick={() =>

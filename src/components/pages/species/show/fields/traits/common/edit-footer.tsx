@@ -9,7 +9,7 @@ export function TraitEditFooter({ onSave, onCancel }) {
 
   return (
     <ButtonGroup size="sm" spacing={3}>
-      <Button leftIcon={<CheckIcon />} onClick={onSave} colorScheme="blue">
+      <Button leftIcon={<CheckIcon />} onClick={onSave} colorPalette="blue">
         {t("common:save")}
       </Button>
       <Button leftIcon={<CrossIcon />} onClick={onCancel}>

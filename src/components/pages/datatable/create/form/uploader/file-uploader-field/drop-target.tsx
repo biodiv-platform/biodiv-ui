@@ -92,14 +92,14 @@ export default function DropTarget({
           <span>{t("form:uploader.processing")}</span>
         </div>
       ) : simpleUpload ? (
-        <Button colorScheme="blue" variant="outline" children={t("form:uploader.upload")} />
+        <Button colorPalette="blue" variant="outline" children={t("form:uploader.upload")} />
       ) : (
         <div className="fade">
           <Heading size="md">{t("form:uploader.label")}</Heading>
           <Text my={2} color="gray.500">
             {t("common:or")}
           </Text>
-          <Button colorScheme="blue" variant="outline" children={t("form:uploader.browse")} />
+          <Button colorPalette="blue" variant="outline" children={t("form:uploader.browse")} />
         </div>
       )}
     </DropTargetBox>

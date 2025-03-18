@@ -19,17 +19,17 @@ export function SpeciesTaxonSuggestions() {
     <>
       {validateResponse && !isLoading && (
         <Box className="white-box" mb={4}>
-          <Tabs colorScheme="blue" isLazy={true}>
+          <Tabs colorPalette="blue" isLazy={true}>
             <TabList>
               <Tab>
                 {t("species:create.form.taxon.select")}
-                <Tag colorScheme="blue" ml={2}>
+                <Tag colorPalette="blue" ml={2}>
                   {counts.full}
                 </Tag>
               </Tab>
               <Tab>
                 {t("species:create.form.taxon.parent")}
-                <Tag colorScheme="blue" ml={2}>
+                <Tag colorPalette="blue" ml={2}>
                   {counts.partial}
                 </Tag>
               </Tab>

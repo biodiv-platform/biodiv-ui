@@ -23,7 +23,7 @@ export function CommonNameAdd() {
         <Button
           variant="outline"
           size="xs"
-          colorScheme="green"
+          colorPalette="green"
           leftIcon={<AddIcon />}
           onClick={handleOnAdd}
         >
@@ -46,14 +46,14 @@ export function CommonNameEditButtons({ commonName, showPreferred }) {
       <Box>{commonName.name}</Box>
       <ButtonGroup spacing={0} variant="link">
         <IconButton
-          colorScheme="blue"
+          colorPalette="blue"
           icon={<EditIcon />}
           onClick={handleOnEdit}
           aria-label={t("common:edit")}
           title={t("common:edit")}
         />
         <IconButton
-          colorScheme="red"
+          colorPalette="red"
           icon={<DeleteIcon />}
           onClick={handleOnDelete}
           aria-label={t("common:delete")}
@@ -61,7 +61,7 @@ export function CommonNameEditButtons({ commonName, showPreferred }) {
         />
         {showPreferred && (
           <IconButton
-            colorScheme="orange"
+            colorPalette="orange"
             icon={<StarOutlineIcon />}
             onClick={handleOnPreferred}
             aria-label={t("species:common_name.preferred.title")}

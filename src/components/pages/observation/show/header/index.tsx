@@ -70,7 +70,7 @@ function Header({ o, following = false }: IHeaderProps) {
           icon={<EditIcon />}
           title={t("observation:edit_observation")}
           onClick={handleOnEdit}
-          colorScheme="teal"
+          colorPalette="teal"
         />
       )}
       <FollowActionButton
