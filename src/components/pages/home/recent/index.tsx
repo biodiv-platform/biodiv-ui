@@ -1,8 +1,8 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Flex, Heading, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuArrowRight } from "react-icons/lu";
 
 import RecentObservationList from "./list";
 
@@ -22,7 +22,7 @@ export default function RecentObservations() {
         </Heading>
         <LocalLink href={`/observation/list`} prefixGroup={true}>
           <Link>
-            {t("home:more")} <ArrowForwardIcon />
+            {t("home:more")} <LuArrowRight />
           </Link>
         </LocalLink>
       </Flex>

@@ -6,9 +6,9 @@ const Supporters = ({ title, list, imagePrefix }) => (
     <Heading as="h2" mb={6} fontSize="2rem">
       {title}
     </Heading>
-    <SimpleGrid className="fade" columns={[2, 2, 4, 7]} spacing={6} mb={10}>
+    <SimpleGrid className="fade" columns={[2, 2, 4, 7]} gap={6} mb={10}>
       {list.map(({ image, name, link }) => (
-        <Link isExternal={true} href={link || "#"} title={name} key={link}>
+        <Link href={link || "#"} title={name} key={link}>
           <Image
             w="100%"
             h="5rem"

@@ -13,7 +13,7 @@ export default function Slide({ resource }) {
       w="full"
       objectFit="cover"
       loading="lazy"
-      ignoreFallback={true}
+      // ignoreFallback={true}
       alt={resource.id}
     />
   );

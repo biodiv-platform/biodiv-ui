@@ -4,7 +4,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { ObservationListMinimalData } from "@interfaces/observation";
 import { axGetListData } from "@services/observation.service";
 import { RESOURCE_SIZE } from "@static/constants";
-import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
+import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
@@ -38,7 +38,7 @@ export default function RecentObservationList() {
       borderColor="gray.200"
       overflowX="auto"
     >
-      <SimpleGrid columns={{ base: 2, sm: 6, md: 8, lg: 10 }} spacing={4}>
+      <SimpleGrid columns={{ base: 2, sm: 6, md: 8, lg: 10 }} gap={4}>
         {isLoading ? (
           Array(OBSERVATIONS_SIZE)
             .fill(null)
@@ -65,7 +65,7 @@ export default function RecentObservationList() {
                       o?.thumbnail,
                       RESOURCE_SIZE.RECENT_THUMBNAIL
                     )}
-                    fallbackSrc={getLocalIcon(o?.speciesGroup)}
+                    // fallbackSrc={getLocalIcon(o?.speciesGroup)}
                     alt={o?.recoIbp?.scientificName || t("common:unknown")}
                   />
                 </AspectRatio>
