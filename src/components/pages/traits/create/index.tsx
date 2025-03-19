@@ -6,19 +6,16 @@ import {
   FormLabel,
   GridItem,
   Heading,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   SimpleGrid,
   Tab,
   TabList,
   Tabs,
-  Textarea,
   useDisclosure
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
@@ -34,6 +31,7 @@ import {
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import { axUploadResource } from "@services/files.service";
 import { axCreateTrait } from "@services/traits.service";
 import { getTraitIcon } from "@utils/media";
@@ -42,14 +40,16 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
+import Select from "react-select";
 import * as Yup from "yup";
 
 import TraitsValueComponent from "./trait-value-component";
 
 const onQuery = (q) => onScientificNameQuery(q, "name");
 
-export default function TraitsCreateComponent({ speciesField, languages, langId }) {
+export default function TraitsCreateComponent({ speciesField, languages }) {
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
   const TRAIT_TYPES = [
     { label: t("traits:create_form.type_multiple_categorical"), value: "MULTIPLE_CATEGORICAL" },
     { label: t("traits:create_form.type_single_categorical"), value: "SINGLE_CATEGORICAL" },
@@ -131,7 +131,7 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
             isDeleted: false,
             icon: null,
             traitId: null,
-            languageId: langId,
+            languageId: languageId,
             name: "",
             description: "",
             traitTypes: "",
@@ -154,19 +154,14 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
       case "DATE":
         return [TRAIT_TYPES[2]];
       case "NUMERIC":
-          return [TRAIT_TYPES[2]];
+        return [TRAIT_TYPES[2]];
       default:
         return TRAIT_TYPES;
     }
   })();
 
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [trait, setTrait] = useState({
-    name: "",
-    description: "",
-    langId: 0,
-    source: ""
-  });
+  const [langId, setLangId] = useState(0);
 
   // Dropzone setup, with a single file restriction
   const handleGeneralDrop = useDropzone({
@@ -222,7 +217,7 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
   }
 
   const removeValue = (DeleteIndex) => {
-    if (hForm.watch(`translations[${translationSelected}].traits.languageId`) == langId) {
+    if (hForm.watch(`translations[${translationSelected}].traits.languageId`) == languageId) {
       hForm.watch("translations").forEach((_, index) => {
         hForm.setValue(
           `translations[${index}].values`,
@@ -255,18 +250,18 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
           isDeleted: false,
           icon: hForm.watch(`translations[0].traits.icon`),
           traitId: null,
-          languageId: parseInt(trait.langId.toString(), 10),
-          name: trait.name,
-          description: trait.description,
+          languageId: parseInt(langId.toString(), 10),
+          name: "",
+          description: "",
           traitTypes: hForm.watch(`translations[0].traits.traitTypes`),
           dataType: hForm.watch(`translations[0].traits.dataType`),
-          source: trait.source,
+          source: "",
           showInObservation: hForm.watch(`translations[0].traits.showInObservation`),
           isParticipatory: hForm.watch(`translations[0].traits.isParticipatory`)
         },
         values: hForm
           .watch(`translations`)
-          .filter((t) => t.traits.languageId == langId)[0]
+          .filter((t) => t.traits.languageId == languageId)[0]
           .values.map((value) => ({
             description: "",
             icon: value.icon,
@@ -276,20 +271,12 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
             traitInstanceId: null,
             value: "",
             displayOrder: null,
-            languageId: parseInt(trait.langId.toString(), 10),
+            languageId: parseInt(langId.toString(), 10),
             traitValueId: null
           })),
         query: hForm.watch(`translations[0].query`)
       }
     ]);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTrait((prevTrait) => ({
-      ...prevTrait,
-      [name]: value
-    }));
   };
 
   return (
@@ -302,12 +289,7 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
             onSubmit={(event) => {
               event.preventDefault();
               handleAddTranslation();
-              setTrait({
-                name: "",
-                description: "",
-                langId: 0,
-                source: ""
-              });
+              setLangId(0);
               onClose();
             }}
           >
@@ -318,46 +300,22 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
                   <FormLabel htmlFor="name">{t("traits:create_form.language")}</FormLabel>
                   <Select
                     id="langId"
+                    inputId="langId"
                     name="langId"
                     placeholder={t("traits:create_form.language_placeholder")}
-                    value={trait.langId}
-                    onChange={handleChange}
-                  >
-                    {languages.map((lang) => (
-                      <option value={lang.id}>{lang.name}</option>
-                    ))}
-                  </Select>
-                </FormControl>
-                <FormControl mb={2} isRequired={true}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.trait_name")}</FormLabel>
-                  <Input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder={t("traits:create_form.trait_name_placeholder")}
-                    value={trait.name}
-                    onChange={handleChange}
-                  />
-                </FormControl>
-                <FormControl mb={2}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.source")}</FormLabel>
-                  <Input
-                    type="text"
-                    id="source"
-                    name="source"
-                    placeholder={t("traits:create_form.source_placeholder")}
-                    value={trait.source}
-                    onChange={handleChange}
-                  />
-                </FormControl>
-                <FormControl mb={2}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.description")}</FormLabel>
-                  <Textarea
-                    id="description"
-                    name="description"
-                    placeholder={t("traits:create_form.description_placeholder")}
-                    value={trait.description}
-                    onChange={handleChange}
+                    onChange={(o: { value: number; label: string }) => {
+                      setLangId(o.value);
+                    }}
+                    components={{
+                      IndicatorSeparator: () => null
+                    }}
+                    options={languages
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .map((lang) => ({
+                        value: lang.id,
+                        label: lang.name
+                      }))}
+                    isSearchable={true} // Enables search
                   />
                 </FormControl>
               </Box>
@@ -366,12 +324,7 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
               <Button
                 mr={3}
                 onClick={() => {
-                  setTrait({
-                    name: "",
-                    description: "",
-                    langId: 0,
-                    source: ""
-                  });
+                  setLangId(0);
                   onClose();
                 }}
               >
@@ -415,7 +368,15 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
               <TextBoxField
                 key={`name-${translationSelected}`}
                 name={`translations[${translationSelected}].traits.name`}
-                label={t("traits:create_form.trait_name")}
+                label={
+                  hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0]
+                    .traits.name &&
+                  hForm.watch(`translations`)[translationSelected].traits.languageId != languageId
+                    ? hForm
+                        .watch(`translations`)
+                        .filter((t) => t.traits.languageId == languageId)[0].traits.name
+                    : t("traits:create_form.trait_name")
+                }
                 isRequired={true}
               />
             </Box>
@@ -602,13 +563,13 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
             {hForm.watch(`translations[${translationSelected}].traits.dataType`) == "STRING" && (
               <GridItem colSpan={{ md: 3 }}>
                 {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
-                  langId && (
+                  languageId && (
                   <Heading mb={4} fontSize="xl">
                     {t("traits:create_form.trait_values_heading")}
                   </Heading>
                 )}
                 {hForm.watch(`translations[${translationSelected}].traits.languageId`) !=
-                  langId && (
+                  languageId && (
                   <Heading mb={4} fontSize="xl">
                     {t("traits:create_form.translate_values_heading")}
                   </Heading>
@@ -620,13 +581,13 @@ export default function TraitsCreateComponent({ speciesField, languages, langId 
                     index={index}
                     onRemove={removeValue}
                     translationSelected={translationSelected}
-                    langId={langId}
+                    langId={languageId}
                     onValueImageChange={valueImageChange}
                   />
                 ))}
                 <Box mb={4}>
                   {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
-                    langId && (
+                    languageId && (
                     <Button onClick={handleAddValue} colorScheme="green" mb={4}>
                       {t("traits:create_form.add_trait_values_button")}
                     </Button>

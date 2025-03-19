@@ -14,13 +14,15 @@ export interface ITraitsProps {
   speciesTraitsListDefault: TraitsValuePair[] | undefined;
   observationId;
   authorId?;
+  groupId?;
 }
 
 export default function TraitsList({
   factsList,
   speciesTraitsListDefault,
   observationId,
-  authorId = -1
+  authorId = -1,
+  groupId
 }: ITraitsProps) {
   const [newTraitsList, setNewTraitsList] = useState<any[]>([]);
   const [speciesTraitsList, setSpeciesTraitsList] = useState(speciesTraitsListDefault);
@@ -34,6 +36,10 @@ export default function TraitsList({
     },
     [SPECIES_GROUP_UPDATED]
   );
+
+  useEffect(() => {
+    axGetTraitsByGroupId(groupId, languageId).then(({ data }) => setSpeciesTraitsList(data));
+  }, [languageId]);
 
   useEffect(() => {
     setNewTraitsList(
@@ -51,6 +57,15 @@ export default function TraitsList({
                 };
 
               case TRAIT_TYPES.RANGE:
+                if (speciesTrait.traits?.dataType == "DATE") {
+                  return {
+                    defaultValue: factsList
+                      ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
+                      .map((o) => o.fromDate),
+                    speciesTrait,
+                    traitType
+                  };
+                }
                 return {
                   defaultValue: factsList
                     ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
@@ -60,13 +75,23 @@ export default function TraitsList({
                 };
 
               case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
-                return {
-                  defaultValue: factsList
-                    ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
-                    .map((v) => v.valueId),
-                  speciesTrait,
-                  traitType
-                };
+                if (speciesTrait.traits?.dataType == "COLOR") {
+                  return {
+                    defaultValue: factsList
+                      ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
+                      .map((v) => v.value),
+                    speciesTrait,
+                    traitType
+                  };
+                } else {
+                  return {
+                    defaultValue: factsList
+                      ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
+                      .map((v) => v.valueId),
+                    speciesTrait,
+                    traitType
+                  };
+                }
 
               default:
                 return { defaultValue: null, speciesTrait };

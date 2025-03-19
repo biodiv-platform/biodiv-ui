@@ -142,7 +142,7 @@ export default function SpeciesFieldSimpleCreate({
           leftIcon={<AddIcon />}
           onClick={openModal}
         >
-          {"Add Trait"}
+          {t("common:add_trait")}
         </Button>
       )}
       <Modal onClose={closeModal} trapFocus={false} size="6xl" isOpen={isModalOpen}>

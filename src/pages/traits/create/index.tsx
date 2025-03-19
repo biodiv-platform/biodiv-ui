@@ -7,8 +7,8 @@ import { axGetLangList } from "@services/utility.service";
 import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
-const traitsCreate = ({speciesField, languagesList, langId}) => (
-  <TraitsCreateComponent speciesField={speciesField} languages={languagesList} langId={langId} />
+const traitsCreate = ({ speciesField, languagesList }) => (
+  <TraitsCreateComponent speciesField={speciesField} languages={languagesList} />
 );
 
 export const getServerSideProps = async (ctx) => {
@@ -20,16 +20,17 @@ export const getServerSideProps = async (ctx) => {
 
   const fieldsMeta = await axGetAllFieldsMeta({ langId });
 
-  return redirect || {
-    props: {
-      speciesField: fieldsMeta.data
-        .map((item) => item.childField)
-        .filter((item) => item.length > 0)
-        .flat(),
-      languagesList: languagesList.data,
-      langId: langId
+  return (
+    redirect || {
+      props: {
+        speciesField: fieldsMeta.data
+          .map((item) => item.childField)
+          .filter((item) => item.length > 0)
+          .flat(),
+        languagesList: languagesList.data
+      }
     }
-  };
+  );
 };
 
 export default traitsCreate;

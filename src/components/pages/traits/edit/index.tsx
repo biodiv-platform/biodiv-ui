@@ -23,14 +23,19 @@ import {
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
+import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
+import {
+  onScientificNameQuery,
+  ScientificNameOption
+} from "@components/pages/observation/create/form/recodata/scientific-name";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateTrait } from "@services/traits.service";
-import { getTraitIcon } from "@utils/media";
+import { getLocalIcon, getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
@@ -39,6 +44,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import Select from "react-select";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import * as Yup from "yup";
+
+const onQuery = (q) => onScientificNameQuery(q, "name");
 
 export default function TraitsEditComponent({ data, languages }) {
   const { t } = useTranslation();
@@ -93,6 +100,11 @@ export default function TraitsEditComponent({ data, languages }) {
             languageId: Yup.number().nullable(),
             traitValueId: Yup.number().nullable()
           })
+        ),
+        query: Yup.array().of(
+          Yup.object().shape({
+            taxonId: Yup.number()
+          })
         )
       })
     )
@@ -122,7 +134,21 @@ export default function TraitsEditComponent({ data, languages }) {
           showInObservation: trait.traits.showInObservation,
           isParticipatory: trait.traits.isParticipatory
         },
-        values: trait.values.sort((a, b) => a.displayOrder - b.displayOrder)
+        values: trait.values.sort((a, b) => a.displayOrder - b.displayOrder),
+        query: trait.taxon.map((o) => ({
+          value: o.id,
+          label: o.name,
+          position: o.position,
+          status: o.status,
+          groupId: o.group_id,
+          acceptedNames:
+            Array.isArray(o.accepted_names) && o.accepted_names.length ? o.accepted_names[0] : "",
+          rank: o.rank,
+          group: getLocalIcon(o.group_name),
+          raw: o,
+          taxonId: o.id,
+          hierarchy: o.hierarchy
+        }))
       }))
     }
   });
@@ -272,7 +298,14 @@ export default function TraitsEditComponent({ data, languages }) {
   };
 
   const handleOnUpdate = async (payload) => {
-    const { success } = await axUpdateTrait(data[0].traits.traitId, payload.translations);
+    const query = payload.translations[0].query.map((taxan) => ({
+      taxonomyDefifintionId: taxan.taxonId,
+      traitTaxonId: data[0].traits.traitId
+    }));
+    const { success } = await axUpdateTrait(
+      data[0].traits.traitId,
+      payload.translations.map((value) => ({ ...value, query: query }))
+    );
     if (success) {
       notification("Trait Updated", NotificationType.Success);
       router.push(`/traits/show/${data[0].traits.traitId}`, true);
@@ -339,7 +372,8 @@ export default function TraitsEditComponent({ data, languages }) {
             displayOrder: null,
             languageId: parseInt(langId.toString(), 10),
             traitValueId: value.traitValueId
-          }))
+          })),
+        query: hForm.watch(`translations[0].query`)
       }
     ]);
   };
@@ -445,7 +479,17 @@ export default function TraitsEditComponent({ data, languages }) {
                   <TextBoxField
                     key={`name-${translationSelected}`}
                     name={`translations[${translationSelected}].traits.name`}
-                    label={t("traits:create_form.trait_name")}
+                    label={
+                      hForm
+                        .watch(`translations`)
+                        .filter((t) => t.traits.languageId == languageId)[0].traits.name &&
+                      hForm.watch(`translations`)[translationSelected].traits.languageId !=
+                        languageId
+                        ? hForm
+                            .watch(`translations`)
+                            .filter((t) => t.traits.languageId == languageId)[0].traits.name
+                        : t("traits:create_form.trait_name")
+                    }
                     isRequired={true}
                   />
                 </Box>
@@ -485,6 +529,7 @@ export default function TraitsEditComponent({ data, languages }) {
                       );
                     })
                   }
+                  disabled={hForm.watch(`translations[${translationSelected}].traits.id`) == null}
                 />
                 <CheckboxField
                   key={`isParticipatory-${translationSelected}`}
@@ -495,6 +540,7 @@ export default function TraitsEditComponent({ data, languages }) {
                       hForm.setValue(`translations[${index}].traits.isParticipatory`, value);
                     })
                   }
+                  disabled={hForm.watch(`translations[${translationSelected}].traits.id`) == null}
                 />
               </SimpleGrid>
               <Box ml={3} mr={3}>
@@ -502,6 +548,21 @@ export default function TraitsEditComponent({ data, languages }) {
                   key={`description-${translationSelected}`}
                   name={`translations[${translationSelected}].traits.description`}
                   label={t("traits:create_form.description")}
+                />
+                <FormLabel htmlFor="taxon">{t("traits:create_form.taxon")}</FormLabel>
+                <SelectAsyncInputField
+                  name={`translations[${translationSelected}].query`}
+                  onQuery={onQuery}
+                  optionComponent={ScientificNameOption}
+                  placeholder={t("traits:create_form.taxon_placeholder")}
+                  resetOnSubmit={false}
+                  isClearable={true}
+                  multiple={true}
+                  onChange={(value) =>
+                    hForm.watch("translations").forEach((_, index) => {
+                      hForm.setValue(`translations[${index}].query`, value);
+                    })
+                  }
                 />
                 {hForm.watch(`translations[${translationSelected}].traits.dataType`) ==
                   "STRING" && (

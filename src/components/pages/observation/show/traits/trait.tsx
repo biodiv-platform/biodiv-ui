@@ -24,6 +24,7 @@ import { TraitsValue } from "@interfaces/traits";
 import { axUpdateTraitById } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
+import { formatDate } from "@utils/date";
 import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanSingleFact } from "@utils/tags";
@@ -41,6 +42,11 @@ interface ITraitProp {
   authorId;
   traitType?;
 }
+
+const TRAIT_DATE_FORMAT = {
+  MONTH: "MMMM",
+  YEAR: "YYYY"
+};
 
 export default function Trait({
   speciesTrait,
@@ -147,13 +153,19 @@ export default function Trait({
                 ref={inputRef} // Attach ref to DatePicker's input element
                 customInput={<Input />}
                 selected={
-                  traitInputValue.length > 0 ? new Date(traitInputValue[0].split(":")[0]) : null
+                  traitInputValue?.length > 0 && traitInputValue[0]
+                    ? new Date(traitInputValue[0].split(":")[0])
+                    : null
                 }
                 startDate={
-                  traitInputValue.length > 0 ? new Date(traitInputValue[0].split(":")[0]) : null
+                  traitInputValue?.length > 0 && traitInputValue[0]
+                    ? new Date(traitInputValue[0].split(":")[0])
+                    : null
                 }
                 endDate={
-                  traitInputValue.length > 0 && traitInputValue[0].split(":").length > 1
+                  traitInputValue?.length > 0 &&
+                  traitInputValue[0] &&
+                  traitInputValue[0].split(":").length > 1
                     ? new Date(traitInputValue[0].split(":")[1])
                     : null
                 }
@@ -314,7 +326,7 @@ export default function Trait({
                 lineHeight={1}
                 h="3.25rem"
               >
-                <div>{tr.value}</div>
+                <div>{formatDate(tr.value, TRAIT_DATE_FORMAT[speciesTrait.traits.units])}</div>
               </Flex>
             ))
           ) : (

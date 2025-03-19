@@ -47,7 +47,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
     if (sGroup) {
       axGetTraitsByGroupId(sGroup, languageId).then(({ data }) => setTraitsPairs(data));
     }
-  }, [sGroup]);
+  }, [sGroup, languageId]);
 
   const handleOnChange = (traitId, value) => {
     setFacts({ ...facts, [traitId]: Array.isArray(value) ? value : value ? [value] : [] });

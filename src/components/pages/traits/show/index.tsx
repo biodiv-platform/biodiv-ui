@@ -18,7 +18,7 @@ export default function TraitsShowComponent({ data }) {
     setCanEdit(hasAccess([Role.Admin]));
   }, []);
   function handleOnEdit() {
-    router.push(`/traits/edit/${data.traits.id}`, true);
+    router.push(`/traits/edit/${data.traits.traitId}`, true);
   }
   return (
     <div className="container mt">

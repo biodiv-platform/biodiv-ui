@@ -5,8 +5,7 @@ export const axCreateTrait = async (params) => {
   try {
     const { data } = await plainHttp.post(
       `${ENDPOINT.TRAITS}/v1/factservice/trait/create`,
-      params
-    , // Empty object for request body if not needed
+      params, // Empty object for request body if not needed
       {
         headers: { "Content-Type": "application/json" }
       }
@@ -20,7 +19,9 @@ export const axCreateTrait = async (params) => {
 
 export const axUpdateTrait = async (id, translations) => {
   try {
-    const { data } = await plainHttp.post(`${ENDPOINT.TRAITS}/v1/factservice/trait/update/${id}`, translations,
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.TRAITS}/v1/factservice/trait/update/${id}`,
+      translations,
       {
         headers: { "Content-Type": "application/json" }
       }
@@ -50,12 +51,21 @@ export const axUpdateSpeciesTrait = async (id, newFacts, userId, taxonId) => {
   }
 };
 
-export const axGetTraitShowData = async (traitId,languageId) => {
+export const axGetTraitShowData = async (traitId, languageId) => {
   try {
     const { data } = await plainHttp.get(
       `${ENDPOINT.TRAITS}/v1/factservice/trait/${traitId}/${languageId}`,
       {}
     );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
+export const axGetTraitListData = async (languageId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/traits/${languageId}`, {});
     return { success: true, data };
   } catch (e) {
     return { success: false, data: {} };

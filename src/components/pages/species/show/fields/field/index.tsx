@@ -105,7 +105,7 @@ export default function SpeciesFieldGroup({
               )}
 
               {/* Field Traits */}
-              {currentField.traits.map((trait) => (
+              {parentField.traits.map((trait) => (
                 <SpeciesTraitView
                   key={trait.id}
                   trait={trait}
