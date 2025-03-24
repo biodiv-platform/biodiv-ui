@@ -18,10 +18,10 @@ export const cleanFacts = (facts = {}) => {
 
   Object.entries(facts).map(([factKey, factValue]: any) => {
     if (factValue[0]) {
-      if (isNaN(factValue[0])) {
-        factValueStringPairs.push([factKey, factValue]);
+      if (factKey.split("|")[1] != "STRING") {
+        factValueStringPairs.push([factKey.split("|")[0], factValue]);
       } else {
-        factValuePairs.push([factKey, factValue.map((o) => Number(o))]);
+        factValuePairs.push([factKey.split("|")[0], factValue.map((o) => Number(o))]);
       }
     }
   });

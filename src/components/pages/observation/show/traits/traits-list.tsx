@@ -4,6 +4,7 @@ import { FactValuePair, TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
+import { formatDate } from "@utils/date";
 import React, { useEffect, useState } from "react";
 import { useListener } from "react-gbus";
 
@@ -61,7 +62,13 @@ export default function TraitsList({
                   return {
                     defaultValue: factsList
                       ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
-                      .map((o) => o.fromDate),
+                      .map((o) =>
+                        o.toDate
+                          ? formatDate(o.fromDate, "YYYY-MM-DD") +
+                            ":" +
+                            formatDate(o.toDate, "YYYY-MM-DD")
+                          : formatDate(o.fromDate, "YYYY-MM-DD")
+                      ),
                     speciesTrait,
                     traitType
                   };

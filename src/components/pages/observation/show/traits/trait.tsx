@@ -326,7 +326,22 @@ export default function Trait({
                 lineHeight={1}
                 h="3.25rem"
               >
-                <div>{formatDate(tr.value, TRAIT_DATE_FORMAT[speciesTrait.traits.units])}</div>
+                <div>
+                  {tr.value && tr.value.split(":").length > 1
+                    ? formatDate(
+                        tr.value?.split(":")[0],
+                        TRAIT_DATE_FORMAT[speciesTrait.traits.units]
+                      ) +
+                      " - " +
+                      formatDate(
+                        tr.value?.split(":")[1],
+                        TRAIT_DATE_FORMAT[speciesTrait.traits.units]
+                      )
+                    : formatDate(
+                        tr.value?.split(":")[0],
+                        TRAIT_DATE_FORMAT[speciesTrait.traits.units]
+                      )}
+                </div>
               </Flex>
             ))
           ) : (

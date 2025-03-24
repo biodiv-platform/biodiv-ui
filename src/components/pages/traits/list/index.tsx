@@ -41,18 +41,18 @@ export default function TraitsListComponent({ data, filterKey }) {
       <Box mb={4} width="100%">
         <Select maxW="10rem" ml="auto" value={filter} onChange={(e) => applyFilter(e.target.value)}>
           <option value="All">All</option>
-          <option value="Observation">Observation</option>
-          <option value="Species">Species</option>
+          <option value="Observation">Observation Traits</option>
+          <option value="Species">Species Traits</option>
         </Select>
       </Box>
 
       <Box>
         {Object.entries(groupedData).map(([mainCategory, subCategories]) => (
-          <Box className="white-box" key={mainCategory} mb={4}>
+          <Box className="white-box" key={mainCategory} mb={4} bgColor={"#e6e9ec"}>
             <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
               {mainCategory}
             </BoxHeading>
-            <Box m={4} ml={4}>
+            <Box m={4} ml={4} bgColor={"##e6e9ec"}>
               {Array.isArray(subCategories) &&
                 subCategories.map((subCategory, index) => (
                   <Box key={`${subCategory.categoryName}-${index}`}>

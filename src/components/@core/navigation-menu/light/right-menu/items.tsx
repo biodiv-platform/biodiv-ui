@@ -45,6 +45,10 @@ export default [
         to: "/taxonomy/list"
       },
       {
+        name: "traits",
+        to: "/traits/list"
+      },
+      {
         active: SITE_CONFIG.PARTICIPANTS.ACTIVE,
         name: "users",
         to: "/user/list"

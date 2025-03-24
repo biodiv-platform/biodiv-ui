@@ -31,12 +31,24 @@ import { useDropzone } from "react-dropzone";
 
 import ColumnMapper from "../common/column-mapper";
 
-export default function TraitsBatchUpload({ traits }) {
-  const traitOptions = traits.flatMap((item) =>
-    item.traitsValuePairList.map(
-      (traitObj) => "Traits|" + traitObj.traits.name + "|" + traitObj.traits.traitId
-    )
-  );
+export default function TraitsBatchUpload({ traits, languages }) {
+  function groupByLanguageId(list) {
+    const grouped = {}; // Initialize an empty object
+
+    for (let i = 0; i < list.length; i++) {
+      // Loop through the list manually
+      const obj = list[i]; // Get the current object
+      const key = languages.filter((lang) => lang.id === obj.languageId)[0].name; // Get the languageId
+
+      if (!grouped[key]) {
+        grouped[key] = []; // Initialize array if key doesn't exist
+      }
+
+      grouped[key].push("Traits|" + obj.name + "|" + obj.traitId); // Add object to the respective array
+    }
+
+    return grouped;
+  }
   const [uploadResult, setUploadResult] = useState<Map<string, string>[]>([]);
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
   const [termsAccepted, setTermsAccepted] = useState<boolean>(true);
@@ -317,7 +329,7 @@ export default function TraitsBatchUpload({ traits }) {
       )}
       <ColumnMapper
         options={options}
-        manyOptions={traitOptions}
+        manyOptions={Object.entries(groupByLanguageId(traits))}
         isOpen={isOpen1}
         onClose={onClose1}
         description={t("traits:trait_matching.column_mapping_description")}

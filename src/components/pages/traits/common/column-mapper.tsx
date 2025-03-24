@@ -75,19 +75,19 @@ const ColumnMapper = ({
                         {field}
                       </option>
                     ))}
-                    {manyOptions.length > 1 && (
-                      <optgroup label="Traits">
-                        {manyOptions.map((field) => (
+                    {manyOptions.map((traitsCat) => (
+                      <optgroup label={"Traits (" + traitsCat[0] + ")"}>
+                        {traitsCat[1].map((trait) => (
                           <option
-                            key={field}
-                            value={field}
-                            disabled={columnMapping.some(([, i]) => i === field)}
+                            key={trait}
+                            value={trait}
+                            disabled={columnMapping.some(([, i]) => i === trait)}
                           >
-                            {field.split("|")[1]}
+                            {trait.split("|")[1]}
                           </option>
                         ))}
                       </optgroup>
-                    )}
+                    ))}
                   </Select>
                 </SimpleGrid>
               </Box>

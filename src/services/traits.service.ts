@@ -63,6 +63,15 @@ export const axGetTraitShowData = async (traitId, languageId) => {
   }
 };
 
+export const axGetTraitNames = async () => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.TRAITS}/v1/factservice/trait/list`, {});
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
 export const axGetTraitListData = async (languageId) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/traits/${languageId}`, {});
