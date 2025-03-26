@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Separator, Stack, Text } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
@@ -15,6 +15,8 @@ import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { useListener } from "react-gbus";
+
+import { Avatar } from "@/components/ui/avatar";
 
 import ACTIVITY_TYPE from "./activity-types";
 import ContentBox from "./content-box";
@@ -82,63 +84,68 @@ export default function ActivityList({ resourceId, resourceType, title = "common
       <BoxHeading subTitle={`${activity.data.commentCount} ${t("form:comments.title")}`}>
         🕒 {t(title)}
       </BoxHeading>
+      <Separator />
       {activity.data.list.map((a: any) => (
-        <Stack
-          key={a?.activityIbp?.dateCreated}
-          isInline={true}
-          spacing={3}
-          p={4}
-          borderBottom="1px"
-          borderColor="gray.300"
-          className="fade"
-        >
-          <Avatar
-            size="sm"
-            name={a.userIbp.name}
-            src={getUserImage(a.userIbp.profilePic, a.userIbp.name)}
-          />
-          <Box>
-            <BlueLink fontWeight="bold" mr={2} href={`/user/show/${a.userIbp.id}`}>
-              {a.userIbp.name} <Badge isAdmin={a.userIbp.isAdmin} />
-            </BlueLink>
-            <ActivityType activityData={a} />
-            <ContentBox activity={a} />
+        <>
+          <Stack
+            key={a?.activityIbp?.dateCreated}
+            direction={"row"}
+            gap={3}
+            p={4}
+            borderBottom="1px"
+            borderColor="gray.300"
+            className="fade"
+          >
+            <Avatar
+              size="sm"
+              name={a.userIbp.name}
+              src={getUserImage(a.userIbp.profilePic, a.userIbp.name)}
+            />
             <Box>
-              <Tooltip title={formatTimeStampFromUTC(a.activityIbp.lastUpdated)} hasArrow={true}>
-                <Text color="gray.600" as="small">
-                  {timeAgoUTC(a.activityIbp.lastUpdated)}
-                </Text>
-              </Tooltip>
+              <BlueLink fontWeight="bold" mr={2} href={`/user/show/${a.userIbp.id}`}>
+                {a.userIbp.name} <Badge isAdmin={a.userIbp.isAdmin} />
+              </BlueLink>
+              <ActivityType activityData={a} />
+              <ContentBox activity={a} />
+              <Box>
+                <Tooltip title={formatTimeStampFromUTC(a.activityIbp.lastUpdated)} showArrow={true}>
+                  <Text color="gray.600" as="small">
+                    {timeAgoUTC(a.activityIbp.lastUpdated)}
+                  </Text>
+                </Tooltip>
+              </Box>
             </Box>
-          </Box>
-          {a?.activityIbp?.activityType == ACTIVITY_TYPE.ADDED_A_COMMENT &&
-            adminOrAuthor(a.userIbp.id) && (
-              <DeleteActionButton
-                observationId={a?.commentsIbp?.id}
-                title="Delete comment"
-                description="Are you sure you want to delete this comment?"
-                deleted="comment removed successfully"
-                deleteFunc={axDeleteComment}
-                refreshActivity={activity.refresh}
-                deleteComment={true}
-                commentDeletePayload={{
-                  body: a?.commentsIbp?.body,
-                  languageId: languageId,
-                  rootHolderId: resourceId,
-                  rootHolderType: resourceType,
-                  subRootHolderId: null,
-                  subRootHolderType: null
-                }}
-              />
-            )}
-        </Stack>
+            {a?.activityIbp?.activityType == ACTIVITY_TYPE.ADDED_A_COMMENT &&
+              adminOrAuthor(a.userIbp.id) && (
+                <DeleteActionButton
+                  observationId={a?.commentsIbp?.id}
+                  title="Delete comment"
+                  description="Are you sure you want to delete this comment?"
+                  deleted="comment removed successfully"
+                  deleteFunc={axDeleteComment}
+                  refreshActivity={activity.refresh}
+                  deleteComment={true}
+                  commentDeletePayload={{
+                    body: a?.commentsIbp?.body,
+                    languageId: languageId,
+                    rootHolderId: resourceId,
+                    rootHolderType: resourceType,
+                    subRootHolderId: null,
+                    subRootHolderType: null
+                  }}
+                />
+              )}
+          </Stack>
+          <Separator />
+        </>
       ))}
       {activity.data.hasMore && (
         <Button
           w="full"
           rounded={0}
-          isLoading={activity.isLoading}
+          loading={activity.isLoading}
           onClick={() => loadActivity(false)}
+          variant={"subtle"}
         >
           {t("activity:load_more_activity")}
         </Button>

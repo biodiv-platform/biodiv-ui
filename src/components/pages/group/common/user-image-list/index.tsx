@@ -1,6 +1,8 @@
-import { Avatar, Box, Heading, Link, Stack } from "@chakra-ui/react";
+import { Box, Heading, Link, Stack } from "@chakra-ui/react";
 import { getUserImage } from "@utils/media";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 export default function UserAvatarList({ userList, title }) {
   return (
@@ -8,7 +10,7 @@ export default function UserAvatarList({ userList, title }) {
       <Heading size="lg" as="h2" mb={4}>
         {title}
       </Heading>
-      <Stack isInline={true} spacing={4}>
+      <Stack direction="row" gap={4}>
         {userList.map(({ name, id, profilePic }) => (
           <Link href={`/user/show/${id}`} key={id} target="_blank">
             <Avatar

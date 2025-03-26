@@ -1,12 +1,4 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Spinner
-} from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
 import { Role } from "@interfaces/custom";
@@ -15,6 +7,13 @@ import { getParsedUser, hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot
+} from "@/components/ui/accordion";
 
 import ContactAdmin from "./contact-admin";
 import UserGroupEditForm from "./form";
@@ -89,21 +88,21 @@ export default function EditGroupPageComponent({
         moderators={moderators}
       />
       <GroupHomePageCustomization userGroupId={userGroupId} homePageDetails={homePageDetails} />
-      <Accordion allowToggle={true}>
+      <AccordionRoot>
         <AccordionItem
           mb={8}
           bg="white"
           border="1px solid var(--chakra-colors-gray-300)"
           borderRadius="md"
+          value="observation"
         >
-          <AccordionButton _expanded={{ bg: "gray.100" }}>
+          <AccordionItemTrigger _expanded={{ bg: "gray.100" }}>
             <Box flex={1} textAlign="left" fontSize="lg">
               🧰 {t("group:observation_customisation")}
             </Box>
-            <AccordionIcon />
-          </AccordionButton>
+          </AccordionItemTrigger>
 
-          <AccordionPanel p={4}>
+          <AccordionItemContent p={4}>
             {isAdmin ? (
               <div>
                 <GroupCustomField
@@ -119,7 +118,7 @@ export default function EditGroupPageComponent({
             {(isAdmin || isFounder) && (
               <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
             )}
-          </AccordionPanel>
+          </AccordionItemContent>
         </AccordionItem>
 
         <AccordionItem
@@ -127,24 +126,24 @@ export default function EditGroupPageComponent({
           bg="white"
           border="1px solid var(--chakra-colors-gray-300)"
           borderRadius="md"
+          value="species"
         >
           <h2>
-            <AccordionButton _expanded={{ bg: "gray.100" }}>
+            <AccordionItemTrigger _expanded={{ bg: "gray.100" }}>
               <Box flex={1} textAlign="left" fontSize="lg">
                 🧰 Species Fields Customisation
               </Box>
-              <AccordionIcon />
-            </AccordionButton>
+            </AccordionItemTrigger>
           </h2>
-          <AccordionPanel pb={4}>
+          <AccordionItemContent pb={4}>
             <SpeciesHierarchyForm
               onSubmit={handleSpeciesFieldsSubmit}
               langId={langId}
               userGroupId={userGroupId}
             />
-          </AccordionPanel>
+          </AccordionItemContent>
         </AccordionItem>
-      </Accordion>
+      </AccordionRoot>
     </div>
   );
 }

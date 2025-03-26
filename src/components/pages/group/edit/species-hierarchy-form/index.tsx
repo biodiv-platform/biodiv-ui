@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { axGetUsersByID } from "@services/user.service";
@@ -11,6 +11,8 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
+import { Checkbox } from "@/components/ui/checkbox";
 
 import ContributorSelectField from "./contributor-select-field";
 
@@ -118,7 +120,7 @@ const TreeItem = React.memo(
 
             {isLeaf && (
               <Checkbox
-                isChecked={isSelected}
+                checked={isSelected}
                 onChange={handleSelect}
                 colorPalette="blue"
                 size="md"
@@ -166,7 +168,7 @@ const TreeItem = React.memo(
                   </Box>
 
                   <Checkbox
-                    isChecked={isSubItemSelected}
+                    checked={isSubItemSelected}
                     onChange={() =>
                       onSelect({
                         id: subItem.id,
@@ -440,7 +442,7 @@ export default function SpeciesHierarchyForm({
               <Box display="flex" justifyContent="flex-end">
                 <Button
                   colorPalette="blue"
-                  isLoading={apiStatus.loading}
+                  loading={apiStatus.loading}
                   onClick={() => {
                     const memberValues = methods.getValues("members");
                     handleContributorsSubmit(memberValues);

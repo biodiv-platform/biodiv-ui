@@ -1,11 +1,4 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
@@ -16,6 +9,13 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot
+} from "@/components/ui/accordion";
 
 import AdminInviteField from "../common/admin-invite-field";
 import { transformMemberPayload } from "../create";
@@ -83,21 +83,21 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   return (
-    <Accordion allowToggle={true}>
+    <AccordionRoot multiple >
       <AccordionItem
         mb={8}
         bg="white"
         border="1px solid var(--chakra-colors-gray-300)"
         borderRadius="md"
+        value="roles"
       >
-        <AccordionButton _expanded={{ bg: "gray.100" }}>
+        <AccordionItemTrigger _expanded={{ bg: "gray.100" }}>
           <Box flex={1} textAlign="left" fontSize="lg">
             🛡️ {t("group:admin.title")}
           </Box>
-          <AccordionIcon />
-        </AccordionButton>
+        </AccordionItemTrigger>
 
-        <AccordionPanel>
+        <AccordionItemContent>
           <FormProvider {...hForm}>
             <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
               <AdminInviteField
@@ -125,8 +125,8 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
               <SubmitButton>{t("common:update")}</SubmitButton>
             </form>
           </FormProvider>
-        </AccordionPanel>
+        </AccordionItemContent>
       </AccordionItem>
-    </Accordion>
+    </AccordionRoot>
   );
 }

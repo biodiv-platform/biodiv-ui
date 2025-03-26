@@ -88,13 +88,13 @@ const GallerySetupTable = ({
           onSortEnd={onSortEnd}
         />
       </table>
-      <ButtonGroup spacing={4} mt={4}>
-        <Button colorPalette="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
+      <ButtonGroup gap={4} mt={4}>
+        <Button colorPalette="blue" onClick={() => setIsCreate(true)}>
           {t("group:homepage_customization.gallery_setup.create")}
+          <AddIcon />
         </Button>
         <Button
           colorPalette="blue"
-          leftIcon={<CheckIcon />}
           float="right"
           hidden={!showReorder}
           onClick={
@@ -104,6 +104,7 @@ const GallerySetupTable = ({
           }
         >
           {t("group:homepage_customization.gallery_setup.save_order")}
+          <CheckIcon />
         </Button>
       </ButtonGroup>
     </>

@@ -1,10 +1,10 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Button, Center, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+import { LuMoveRight } from "react-icons/lu";
 
 export default function EmptyPageComponent() {
   const { currentGroup } = useGlobalState();
@@ -25,8 +25,9 @@ export default function EmptyPageComponent() {
           </Text>
           {canCreate && (
             <LocalLink prefixGroup={true} href="/page/create">
-              <Button as="a" colorPalette="blue" rightIcon={<ArrowForwardIcon />}>
+              <Button as="a" colorPalette="blue">
                 {t("page:create.title")}
+                <LuMoveRight />
               </Button>
             </LocalLink>
           )}

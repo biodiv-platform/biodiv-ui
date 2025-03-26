@@ -14,7 +14,7 @@ export const PageHeading = ({ children, description }: PageHeadingProps) => (
           {children}
         </Heading>
         {description && (
-          <Text fontSize="xl" noOfLines={2} fontWeight="semibold">
+          <Text fontSize="xl" lineClamp={2} fontWeight="semibold">
             {description}
           </Text>
         )}

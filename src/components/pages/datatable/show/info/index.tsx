@@ -5,7 +5,7 @@ import SpeciesGroupBox from "@components/pages/observation/show/info/species-gro
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { SpeciesGroup } from "@interfaces/observation";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
+import { Prose } from "@/components/ui/prose";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { covertToSentenceCase, getInjectableHTML } from "@utils/text";

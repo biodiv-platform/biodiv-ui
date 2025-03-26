@@ -1,4 +1,4 @@
-import { Box, HStack, Image, useRadio, useRadioGroup } from "@chakra-ui/react";
+import { Box, HStack, Image, useRadioGroup } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
@@ -41,7 +41,7 @@ const CustomRadio = (props: any) => {
 };
 
 const RadioItems = ({ options, name, defaultValue, onChange }: ITraitInputProps) => {
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const { getRootProps, getItemProps } = useRadioGroup({
     name,
     defaultValue,
     onChange
@@ -51,11 +51,11 @@ const RadioItems = ({ options, name, defaultValue, onChange }: ITraitInputProps)
     <HStack {...getRootProps()}>
       {options.map((o) => {
         return (
-          <CustomRadio key={o.id} {...getRadioProps({ value: o.value })}>
-            <Tooltip title={o.name} placement="top" hasArrow={true}>
+          <CustomRadio key={o.id} {...getItemProps({ value: o.value })}>
+            <Tooltip title={o.name} positioning={{placement:"top"}} showArrow={true}>
               <Image
                 boxSize="5rem"
-                ignoreFallback={true}
+                // ignoreFallback={true}
                 loading="lazy"
                 src={getResourceThumbnail(RESOURCE_CTX.OBSERVATION, o.value, RESOURCE_SIZE.DEFAULT)}
                 alt={o.name}

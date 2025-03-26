@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import React from "react";
 import { useController } from "react-hook-form";
@@ -54,30 +55,33 @@ export const SelectInputField = ({
       {...props}
     >
       {label && <Field htmlFor={name} label={label} />}
-      <Select
-        id={name}
-        inputId={name}
-        onChange={(o) => {
-          field.onChange(o.value);
-          onChangeCallback && onChangeCallback(o.value);
-        }}
-        onBlur={field.onBlur}
-        options={options}
-        components={{
-          Option: optionComponent,
-          ClearIndicator,
-          IndicatorSeparator: () => null
-        }}
-        placeholder={placeholder}
-        menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
-        isSearchable={true}
-        isDisabled={disabled}
-        {...{
-          [isControlled ? "value" : "defaultValue"]: options.find((o) => o.value === field.value)
-        }}
-        ref={selectRef}
-        {...reactSelectProps}
-      />
+      <Box width={"full"}>
+        <Select
+          id={name}
+          inputId={name}
+          onChange={(o) => {
+            field.onChange(o.value);
+            onChangeCallback && onChangeCallback(o.value);
+          }}
+          onBlur={field.onBlur}
+          options={options}
+          components={{
+            Option: optionComponent,
+            ClearIndicator,
+            IndicatorSeparator: () => null
+          }}
+          placeholder={placeholder}
+          menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
+          isSearchable={true}
+          isDisabled={disabled}
+          {...{
+            [isControlled ? "value" : "defaultValue"]: options.find((o) => o.value === field.value)
+          }}
+          ref={selectRef}
+          {...reactSelectProps}
+        />
+      </Box>
+
       <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>

@@ -27,7 +27,7 @@ export default function CoverageEdit({ value, onChange, items, type, onClose }) 
   return (
     <EditContainer>
       <CheckBoxItems options={items} defaultValue={value} onChange={setCoverage} type={type} />
-      <ButtonGroup spacing={4} mt={4}>
+      <ButtonGroup gap={4} mt={4}>
         <Button onClick={onSave} colorPalette="blue">
           {t("common:save")}
         </Button>

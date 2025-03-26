@@ -29,7 +29,6 @@ export default function ResourceCard({ resource, setValue, imageSize, simpleUplo
         h="full"
         w="full"
         borderRadius="md"
-        ignoreFallback={true}
         src={imageURL}
       />
       {!disabled && (

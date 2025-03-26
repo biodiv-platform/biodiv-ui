@@ -1,19 +1,12 @@
-import {
-  Badge,
-  Button,
-  Flex,
-  GridItem,
-  HStack,
-  Radio,
-  RadioGroup,
-  SimpleGrid
-} from "@chakra-ui/react";
+import { Badge, Button, Flex, GridItem, HStack, SimpleGrid } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useController, useFieldArray } from "react-hook-form";
+
+import { Radio, RadioGroup } from "@/components/ui/radio";
 
 import ImageUploaderField from "../image-uploader-field";
 
@@ -33,10 +26,11 @@ export default function Fields({ name, radioGroupName, disabled, isEdit }) {
       >
         {fields.map((_item, index) => (
           <HStack key={_item.id} mb={4}>
-            <Radio value={index.toString()} size="lg" />
-            <SimpleGrid columns={{ base: 1, md: 5 }} spacingX={4} ml={4}>
+            {/* size="lg"  */}
+            <Radio value={index.toString()} />
+            <SimpleGrid columns={{ base: 1, md: 5 }} gapX={4} ml={4}>
               <GridItem colSpan={3}>
-                <SimpleGrid columns={2} spacingX={4}>
+                <SimpleGrid columns={2} gapX={4}>
                   {isEdit ? (
                     <TextBoxField
                       isRequired={true}
@@ -57,10 +51,10 @@ export default function Fields({ name, radioGroupName, disabled, isEdit }) {
                 <Button
                   colorPalette="red"
                   variant="outline"
-                  leftIcon={<DeleteIcon />}
-                  isDisabled={fields.length < 3 || disabled}
+                  disabled={fields.length < 3 || disabled}
                   onClick={() => remove(index)}
                 >
+                  <DeleteIcon />
                   {t("group:custom_field.remove.title")}
                 </Button>
               </GridItem>
@@ -89,11 +83,11 @@ export default function Fields({ name, radioGroupName, disabled, isEdit }) {
         variant="outline"
         onClick={() => append({ value: "", notes: "" })}
         colorPalette="blue"
-        leftIcon={<AddIcon />}
-        isDisabled={disabled}
+        disabled={disabled}
         mr={4}
         mb={4}
       >
+        <AddIcon />
         {t("group:custom_field.add.options")}
       </Button>
     </>
