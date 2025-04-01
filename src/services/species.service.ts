@@ -46,6 +46,7 @@ export const axGetAllFieldsMeta = async (params) => {
     const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/fields/render`, {
       params
     });
+    console.log('API Response:', data);
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -323,14 +324,23 @@ export const axCreateSpeciesField = async (
   }
 };
 
-export const axUpdateSpeciesFieldTranslations = async (translations, language) => {
+export const axUpdateSpeciesFieldTranslations = async (fieldTranslations: Array<{
+  fieldId: number;
+  translations: Array<{
+    langId: number;
+    header: string;
+    description: string;
+    urlIdentifier: string;
+  }>;
+}>) => {
   try {
-    const { data } = await axios.post(`${ENDPOINT.SPECIES}/v1/species/fields/translations`, {
-      translations,
-      language
-    });
+    const { data } = await http.put(
+      `${ENDPOINT.SPECIES}/v1/species/field/translations`,
+      fieldTranslations
+    );
     return { success: true, data };
   } catch (e) {
+    console.error(e);
     return { success: false, data: null };
   }
 };

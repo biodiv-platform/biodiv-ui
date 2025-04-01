@@ -38,8 +38,96 @@ import { axGetAllFieldsMeta, axUpdateSpeciesFieldTranslations } from "@services/
 import notification, { NotificationType } from "@utils/notification";
 import { debounce } from "lodash";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback,useEffect, useState } from "react";
+import React, { memo, useCallback,useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
+const TranslationField = memo(({ 
+  label, 
+  value, 
+  onChange, 
+  isTextArea 
+}: { 
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  isTextArea?: boolean;
+}) => {
+  const InputComponent = isTextArea ? Textarea : Input;
+  
+  return (
+    <FormControl>
+      <FormLabel>{label}</FormLabel>
+      <InputComponent
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </FormControl>
+  );
+});
+
+const TranslationInputs = memo(({ field, langCode, onFieldUpdate }: { field: any; langCode: string; onFieldUpdate?: (fieldId: string, values: any) => void }) => {
+  const [values, setValues] = useState({
+    header: field.name || field.header || '',
+    description: field.description || '',
+    urlIdentifier: field.urlIdentifier || ''
+  });
+
+  const updateField = useCallback((key: string, value: string) => {
+    setValues(prev => ({
+      ...prev,
+      [key]: value
+    }));
+  }, []);
+
+  const getFieldLabel = () => {
+    if (field.type === "concept") return "Concept Name *";
+    if (field.type === "category") return "Category Name *";
+    return "Subcategory Name *";
+  };
+
+  useEffect(() => {
+    // Only sync with parent state when the user stops typing for 500ms
+    const timeoutId = setTimeout(() => {
+      onFieldUpdate?.(field.id, values);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [values, field.id, onFieldUpdate]);
+
+  return (
+    <VStack
+      align="stretch"
+      spacing={4}
+      mt={2}
+      mb={4}
+      p={4}
+      bg="white"
+      borderRadius="md"
+      boxShadow="sm"
+      border="1px solid"
+      borderColor="gray.200"
+    >
+      <TranslationField
+        label={getFieldLabel()}
+        value={values.header}
+        onChange={(value) => updateField('header', value)}
+      />
+
+      <TranslationField
+        label="Description *"
+        value={values.description}
+        onChange={(value) => updateField('description', value)}
+        isTextArea
+      />
+
+      <TranslationField
+        label="URL Identifier *"
+        value={values.urlIdentifier}
+        onChange={(value) => updateField('urlIdentifier', value)}
+      />
+    </VStack>
+  );
+});
 
 export default function SpeciesFieldTranslations() {
   const { t } = useTranslation();
@@ -60,11 +148,53 @@ export default function SpeciesFieldTranslations() {
   const [loading, setLoading] = useState({});
   const [languageData, setLanguageData] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [editableTranslations, setEditableTranslations] = useState<any>({});
 
   useEffect(() => {
     // Fetch English data by default
     fetchSpeciesFields("en");
   }, []);
+
+  useEffect(() => {
+    const initialEditableValues: any = {};
+
+    const processField = (field: any, parentPath?: string) => {
+      const fieldId = field.id || field.parentField?.id;
+      if (!fieldId) return;
+
+      initialEditableValues[fieldId] = {
+        [selectedLanguage]: {
+          header:
+            selectedLanguage === "en"
+              ? field.header || field.parentField?.header || ""
+              : translations[fieldId]?.[selectedLanguage]?.header || "",
+          description:
+            selectedLanguage === "en"
+              ? field.description || field.parentField?.description || ""
+              : translations[fieldId]?.[selectedLanguage]?.description || "",
+          urlIdentifier:
+            selectedLanguage === "en"
+              ? field.urlIdentifier || field.parentField?.urlIdentifier || ""
+              : translations[fieldId]?.[selectedLanguage]?.urlIdentifier || ""
+        }
+      };
+
+      // Process child fields
+      if (field.childField) {
+        field.childField.forEach((child: any) => processField(child, fieldId));
+      }
+      if (field.childFields) {
+        field.childFields.forEach((child: any) => processField(child, fieldId));
+      }
+    };
+
+    // Process all top-level fields
+    fields.forEach((item) => {
+      processField(item);
+    });
+
+    setEditableTranslations(initialEditableValues);
+  }, [fields, selectedLanguage, translations]);
 
   const fetchSpeciesFields = async (langCode) => {
     console.log(`Fetching data for language: ${langCode}`);
@@ -77,30 +207,38 @@ export default function SpeciesFieldTranslations() {
       const { data } = await axGetAllFieldsMeta({ langId });
 
       if (data) {
-        const transformedData = data.map((item) => ({
-          id: item.parentField.id,
-          name: item.parentField.header,
-          description: item.parentField.description || "",
-          urlIdentifier: item.parentField.urlIdentifier || "",
-          type: item.parentField.label.toLowerCase(),
-          children: (item.childField || []).map((child) => ({
-            id: child.parentField.id,
-            name: child.parentField.header,
-            description: child.parentField.description || "",
-            urlIdentifier: child.parentField.urlIdentifier || "",
-            type: child.parentField.label.toLowerCase(),
-            children: (child.childFields || []).map((subChild) => ({
-              id: subChild.id,
-              name: subChild.header,
-              description: subChild.description || "",
-              urlIdentifier: subChild.urlIdentifier || "",
-              type: subChild.label.toLowerCase(),
-              children: []
-            }))
-          }))
-        }));
+        if (!data || data.length === 0) return;
 
-        console.log(`Data fetched for ${langCode}:`, transformedData.length, "items");
+        // Transform the data to a more usable format
+        const transformedData = data.map((item) => {
+          const parentField = item.parentField || item;
+          return {
+            id: parentField.id,
+            name: parentField.header,
+            description: parentField.description || "",
+            urlIdentifier: parentField.urlIdentifier || "",
+            type: parentField.label?.toLowerCase() || "concept",
+            children: (item.childField || []).map((child) => {
+              const childParentField = child.parentField || child;
+              return {
+                id: childParentField.id,
+                name: childParentField.header,
+                description: childParentField.description || "",
+                urlIdentifier: childParentField.urlIdentifier || "",
+                type: childParentField.label?.toLowerCase() || "category",
+                children: (child.childFields || []).map((subChild) => ({
+                  id: subChild.id,
+                  name: subChild.header,
+                  description: subChild.description || "",
+                  urlIdentifier: subChild.urlIdentifier || "",
+                  type: subChild.label?.toLowerCase() || "subcategory"
+                }))
+              };
+            })
+          };
+        });
+
+        console.log("Transformed Data:", transformedData);
         setLanguageData((prev) => ({
           ...prev,
           [langCode]: transformedData
@@ -145,109 +283,35 @@ export default function SpeciesFieldTranslations() {
     }
   };
 
-  // Create debounced input handler
-  const debouncedHandleInputChange = useCallback(
-    debounce((fieldId, property, value, langCode) => {
-      setTranslations((prev) => ({
-        ...prev,
-        [fieldId]: {
-          ...prev[fieldId],
-          [langCode]: {
-            ...(prev[fieldId]?.[langCode] || {}),
-            [property]: value
-          }
-        }
-      }));
-    }, 200),
-    []
-  );
-
-  const handleInputChange = (field: any, property: string, value: string) => {
-    // Update UI immediately with local state
-    const input = document.activeElement as HTMLInputElement | HTMLTextAreaElement;
-    if (input) {
-      input.value = value;
-    }
+  const handleFieldUpdate = useCallback((fieldId: string, values: any) => {
+    console.log("handleFieldUpdate called with:", { fieldId, values, selectedLanguage });
     
-    // Debounce the actual state update
-    debouncedHandleInputChange(field.id, property, value, selectedLanguage);
-  };
+    const updatedTranslations = {
+      [fieldId]: {
+        [selectedLanguage]: values
+      }
+    };
 
-  const handleSaveTranslations = async () => {
-    try {
-      const formattedTranslations = Object.entries(translations).map(([fieldId, langData]) => ({
-        fieldId,
-        translations: Object.entries(langData).map(([langCode, fieldData]) => ({
-          langId: languages.find((l) => l.code === langCode)?.id,
-          ...fieldData
-        }))
-      }));
+    setTranslations(prev => ({
+      ...prev,
+      ...updatedTranslations
+    }));
 
-      await axUpdateSpeciesFieldTranslations(formattedTranslations);
-      notification(t("admin:species_fields.translations_saved"), NotificationType.Success);
-      setTranslations({});
-    } catch (error) {
-      console.error("Error saving translations:", error);
-      notification(t("admin:species_fields.save_error"));
-    }
-  };
+    setEditableTranslations(prev => ({
+      ...prev,
+      ...updatedTranslations
+    }));
+  }, [selectedLanguage]);
 
-  const handleOnSubmit = (values) => {
-    handleSaveTranslations();
-  };
-
-  const renderTranslationInputs = React.useMemo(() => (field: any, langCode: string) => {
-    const currentTranslation = translations[field.id]?.[langCode] || {};
-
+  const renderTranslationInputs = (field: any, langCode: string) => {
     return (
-      <VStack
-        align="stretch"
-        spacing={4}
-        mt={2}
-        mb={4}
-        p={4}
-        bg="white"
-        borderRadius="md"
-        boxShadow="sm"
-        border="1px solid"
-        borderColor="gray.200"
-      >
-        <FormControl>
-          <FormLabel>
-            {field.type === "concept"
-              ? "Concept Name"
-              : field.type === "category"
-              ? "Category Name"
-              : "Subcategory Name"}{" "}
-            *
-          </FormLabel>
-          <Input
-            placeholder={field.name}
-            defaultValue={currentTranslation.header || ""}
-            onChange={(e) => handleInputChange(field, "header", e.target.value)}
-          />
-        </FormControl>
-
-        <FormControl>
-          <FormLabel>Description *</FormLabel>
-          <Textarea
-            placeholder={field.description}
-            defaultValue={currentTranslation.description || ""}
-            onChange={(e) => handleInputChange(field, "description", e.target.value)}
-          />
-        </FormControl>
-
-        <FormControl>
-          <FormLabel>URL Identifier *</FormLabel>
-          <Input
-            placeholder={field.urlIdentifier}
-            defaultValue={currentTranslation.urlIdentifier || ""}
-            onChange={(e) => handleInputChange(field, "urlIdentifier", e.target.value)}
-          />
-        </FormControl>
-      </VStack>
+      <TranslationInputs 
+        field={field} 
+        langCode={langCode} 
+        onFieldUpdate={handleFieldUpdate}
+      />
     );
-  }, [translations, handleInputChange]);
+  };
 
   const renderLanguageContent = (langCode) => {
     const isLoading = loading[langCode];
@@ -331,6 +395,44 @@ export default function SpeciesFieldTranslations() {
     );
   };
 
+  const handleOnSubmit = (values) => {
+    handleSaveTranslations();
+  };
+
+  const handleSaveTranslations = async () => {
+    try {
+      // Combine both states to ensure we have all translations
+      const translationsData = { ...translations, ...editableTranslations };
+      
+      const formattedTranslations = Object.entries(translationsData).map(
+        ([fieldId, langData]) => ({
+          fieldId,
+          translations: Object.entries(langData as Record<string, any>).map(([langCode, fieldData]) => ({
+            langId: languages.find((l) => l.code === langCode)?.id,
+            ...fieldData
+          }))
+        })
+      );
+
+      console.log("Final Formatted Translations:", formattedTranslations);
+
+      if (formattedTranslations.length === 0) {
+        notification(t("admin:species_fields.no_translations"), NotificationType.Error);
+        return;
+      }
+
+      await axUpdateSpeciesFieldTranslations(
+        formattedTranslations, 
+        languages.find(l => l.code === selectedLanguage)?.id
+      );
+      
+      notification(t("admin:species_fields.translations_saved"), NotificationType.Success);
+    } catch (error) {
+      console.error("Error saving translations:", error);
+      notification(t("admin:species_fields.save_error"));
+    }
+  };
+
   return (
     <Container maxW="container.xl" py={5}>
       <Flex justifyContent="space-between" alignItems="center" mb={6}>
@@ -354,7 +456,7 @@ export default function SpeciesFieldTranslations() {
           >
             <TabList bg="gray.100" rounded="md">
               {activeLanguages.map((langCode) => (
-                <Tab 
+                <Tab
                   key={langCode}
                   _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
                   m={1}
