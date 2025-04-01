@@ -35,99 +35,109 @@ import {
 import { SubmitButton } from "@components/form/submit-button";
 import CheckIcon from "@icons/check";
 import { axGetAllFieldsMeta, axUpdateSpeciesFieldTranslations } from "@services/species.service";
+import { axGetLangList } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import { debounce } from "lodash";
 import useTranslation from "next-translate/useTranslation";
-import React, { memo, useCallback,useEffect, useMemo, useState } from "react";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-const TranslationField = memo(({ 
-  label, 
-  value, 
-  onChange, 
-  isTextArea 
-}: { 
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  isTextArea?: boolean;
-}) => {
-  const InputComponent = isTextArea ? Textarea : Input;
-  
-  return (
-    <FormControl>
-      <FormLabel>{label}</FormLabel>
-      <InputComponent
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    </FormControl>
-  );
-});
+const TranslationField = memo(
+  ({
+    label,
+    value,
+    onChange,
+    isTextArea
+  }: {
+    label: string;
+    value: string;
+    onChange: (value: string) => void;
+    isTextArea?: boolean;
+  }) => {
+    const InputComponent = isTextArea ? Textarea : Input;
 
-const TranslationInputs = memo(({ field, langCode, onFieldUpdate }: { field: any; langCode: string; onFieldUpdate?: (fieldId: string, values: any) => void }) => {
-  const [values, setValues] = useState({
-    header: field.name || field.header || '',
-    description: field.description || '',
-    urlIdentifier: field.urlIdentifier || ''
-  });
+    return (
+      <FormControl>
+        <FormLabel>{label}</FormLabel>
+        <InputComponent value={value} onChange={(e) => onChange(e.target.value)} />
+      </FormControl>
+    );
+  }
+);
 
-  const updateField = useCallback((key: string, value: string) => {
-    setValues(prev => ({
-      ...prev,
-      [key]: value
-    }));
-  }, []);
+const TranslationInputs = memo(
+  ({
+    field,
+    langCode,
+    onFieldUpdate
+  }: {
+    field: any;
+    langCode: string;
+    onFieldUpdate?: (fieldId: string, values: any) => void;
+  }) => {
+    const [values, setValues] = useState({
+      header: field.name || field.header || "",
+      description: field.description || "",
+      urlIdentifier: field.urlIdentifier || ""
+    });
 
-  const getFieldLabel = () => {
-    if (field.type === "concept") return "Concept Name *";
-    if (field.type === "category") return "Category Name *";
-    return "Subcategory Name *";
-  };
+    const updateField = useCallback((key: string, value: string) => {
+      setValues((prev) => ({
+        ...prev,
+        [key]: value
+      }));
+    }, []);
 
-  useEffect(() => {
-    // Only sync with parent state when the user stops typing for 500ms
-    const timeoutId = setTimeout(() => {
-      onFieldUpdate?.(field.id, values);
-    }, 500);
+    const getFieldLabel = () => {
+      if (field.type === "concept") return "Concept Name *";
+      if (field.type === "category") return "Category Name *";
+      return "Subcategory Name *";
+    };
 
-    return () => clearTimeout(timeoutId);
-  }, [values, field.id, onFieldUpdate]);
+    useEffect(() => {
+      // Only sync with parent state when the user stops typing for 500ms
+      const timeoutId = setTimeout(() => {
+        onFieldUpdate?.(field.id, values);
+      }, 500);
 
-  return (
-    <VStack
-      align="stretch"
-      spacing={4}
-      mt={2}
-      mb={4}
-      p={4}
-      bg="white"
-      borderRadius="md"
-      boxShadow="sm"
-      border="1px solid"
-      borderColor="gray.200"
-    >
-      <TranslationField
-        label={getFieldLabel()}
-        value={values.header}
-        onChange={(value) => updateField('header', value)}
-      />
+      return () => clearTimeout(timeoutId);
+    }, [values, field.id, onFieldUpdate]);
 
-      <TranslationField
-        label="Description *"
-        value={values.description}
-        onChange={(value) => updateField('description', value)}
-        isTextArea
-      />
+    return (
+      <VStack
+        align="stretch"
+        spacing={4}
+        mt={2}
+        mb={4}
+        p={4}
+        bg="white"
+        borderRadius="md"
+        boxShadow="sm"
+        border="1px solid"
+        borderColor="gray.200"
+      >
+        <TranslationField
+          label={getFieldLabel()}
+          value={values.header}
+          onChange={(value) => updateField("header", value)}
+        />
 
-      <TranslationField
-        label="URL Identifier *"
-        value={values.urlIdentifier}
-        onChange={(value) => updateField('urlIdentifier', value)}
-      />
-    </VStack>
-  );
-});
+        <TranslationField
+          label="Description *"
+          value={values.description}
+          onChange={(value) => updateField("description", value)}
+          isTextArea
+        />
+
+        <TranslationField
+          label="URL Identifier *"
+          value={values.urlIdentifier}
+          onChange={(value) => updateField("urlIdentifier", value)}
+        />
+      </VStack>
+    );
+  }
+);
 
 export default function SpeciesFieldTranslations() {
   const { t } = useTranslation();
@@ -137,10 +147,7 @@ export default function SpeciesFieldTranslations() {
     }
   });
   const [fields, setFields] = useState([]);
-  const [languages] = useState([
-    { label: "English", code: "en", id: "205" },
-    { label: "French", code: "fr", id: "219" }
-  ]);
+  const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
   const [activeLanguages, setActiveLanguages] = useState<string[]>(["en"]);
   const [modalLanguage, setModalLanguage] = useState<string>("");
@@ -149,6 +156,31 @@ export default function SpeciesFieldTranslations() {
   const [languageData, setLanguageData] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editableTranslations, setEditableTranslations] = useState<any>({});
+  const [isLoadingLanguages, setIsLoadingLanguages] = useState(false);
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      setIsLoadingLanguages(true);
+      try {
+        const { success, data } = await axGetLangList();
+        if (success) {
+          const formattedLanguages = data.map(lang => ({
+            label: lang.name,
+            code: lang.twoLetterCode || lang.threeLetterCode || 'en',
+            id: lang.id.toString()
+          }));
+          console.log('Fetched languages:', formattedLanguages); // Debug log
+          setLanguages(formattedLanguages);
+        }
+      } catch (error) {
+        console.error('Error fetching languages:', error);
+      } finally {
+        setIsLoadingLanguages(false);
+      }
+    };
+
+    fetchLanguages();
+  }, []);
 
   useEffect(() => {
     // Fetch English data by default
@@ -283,33 +315,32 @@ export default function SpeciesFieldTranslations() {
     }
   };
 
-  const handleFieldUpdate = useCallback((fieldId: string, values: any) => {
-    console.log("handleFieldUpdate called with:", { fieldId, values, selectedLanguage });
-    
-    const updatedTranslations = {
-      [fieldId]: {
-        [selectedLanguage]: values
-      }
-    };
+  const handleFieldUpdate = useCallback(
+    (fieldId: string, values: any) => {
+      console.log("handleFieldUpdate called with:", { fieldId, values, selectedLanguage });
 
-    setTranslations(prev => ({
-      ...prev,
-      ...updatedTranslations
-    }));
+      const updatedTranslations = {
+        [fieldId]: {
+          [selectedLanguage]: values
+        }
+      };
 
-    setEditableTranslations(prev => ({
-      ...prev,
-      ...updatedTranslations
-    }));
-  }, [selectedLanguage]);
+      setTranslations((prev) => ({
+        ...prev,
+        ...updatedTranslations
+      }));
+
+      setEditableTranslations((prev) => ({
+        ...prev,
+        ...updatedTranslations
+      }));
+    },
+    [selectedLanguage]
+  );
 
   const renderTranslationInputs = (field: any, langCode: string) => {
     return (
-      <TranslationInputs 
-        field={field} 
-        langCode={langCode} 
-        onFieldUpdate={handleFieldUpdate}
-      />
+      <TranslationInputs field={field} langCode={langCode} onFieldUpdate={handleFieldUpdate} />
     );
   };
 
@@ -403,16 +434,16 @@ export default function SpeciesFieldTranslations() {
     try {
       // Combine both states to ensure we have all translations
       const translationsData = { ...translations, ...editableTranslations };
-      
-      const formattedTranslations = Object.entries(translationsData).map(
-        ([fieldId, langData]) => ({
-          fieldId,
-          translations: Object.entries(langData as Record<string, any>).map(([langCode, fieldData]) => ({
+
+      const formattedTranslations = Object.entries(translationsData).map(([fieldId, langData]) => ({
+        fieldId,
+        translations: Object.entries(langData as Record<string, any>).map(
+          ([langCode, fieldData]) => ({
             langId: languages.find((l) => l.code === langCode)?.id,
             ...fieldData
-          }))
-        })
-      );
+          })
+        )
+      }));
 
       console.log("Final Formatted Translations:", formattedTranslations);
 
@@ -422,10 +453,10 @@ export default function SpeciesFieldTranslations() {
       }
 
       await axUpdateSpeciesFieldTranslations(
-        formattedTranslations, 
-        languages.find(l => l.code === selectedLanguage)?.id
+        formattedTranslations,
+        languages.find((l) => l.code === selectedLanguage)?.id
       );
-      
+
       notification(t("admin:species_fields.translations_saved"), NotificationType.Success);
     } catch (error) {
       console.error("Error saving translations:", error);
@@ -491,15 +522,18 @@ export default function SpeciesFieldTranslations() {
             <FormControl isRequired>
               <FormLabel color="red.500">{t("admin:species_fields.language")} *</FormLabel>
               <Select
-                placeholder="Select Language"
+                placeholder={isLoadingLanguages ? "Loading languages..." : "Select Language"}
                 value={modalLanguage}
                 onChange={handleModalLanguageChange}
+                isDisabled={isLoadingLanguages}
               >
-                {languages.map((lang) => (
-                  <option key={lang.code} value={lang.code}>
-                    {lang.label}
-                  </option>
-                ))}
+                {languages
+                  .filter(lang => !activeLanguages.includes(lang.code))
+                  .map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.label}
+                    </option>
+                  ))}
               </Select>
             </FormControl>
           </ModalBody>
@@ -507,7 +541,11 @@ export default function SpeciesFieldTranslations() {
             <Button variant="ghost" mr={3} onClick={onClose}>
               {t("common:cancel")}
             </Button>
-            <Button colorScheme="blue" onClick={handleSelectLanguage} isDisabled={!modalLanguage}>
+            <Button 
+              colorScheme="blue" 
+              onClick={handleSelectLanguage}
+              isDisabled={!modalLanguage}
+            >
               {t("common:select")}
             </Button>
           </ModalFooter>
