@@ -9,7 +9,7 @@ export default function MyDocumentUploads() {
 
   return (
     <Box mb={4} h="14.4rem" overflowX="auto">
-      <SimpleGrid columns={[1, 2, 2, 3]} spacing={4}>
+      <SimpleGrid columns={[1, 2, 2, 3]} gap={4}>
         {documentList?.map((d) => (
           <FilePreview
             fileName={d.fileName}

@@ -23,7 +23,7 @@ export default function PageHeading({
       className={className}
       gap={0}
     >
-      <Heading as="h1" display="inline-block" {...props}>
+      <Heading as="h1" size="3xl" display="inline-block" {...props}>
         {children}
       </Heading>
       {actions}

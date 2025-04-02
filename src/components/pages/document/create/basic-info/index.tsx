@@ -52,13 +52,13 @@ export default function BasicInfo({
   return (
     <div>
       <Stack flexDirection={["column", "row"]} alignItems="top" mb={1}>
-        <PageHeading as="h2" size="lg" mb={4} mr={4}>
+        <PageHeading as="h2" mb={4} mr={4}>
           ℹ️ {t("document:basic_information")}
         </PageHeading>
         {canImport && <BibImportButton />}
       </Stack>
 
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+      <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 0, md: 4 }}>
         <Box gridColumn="1/4">
           <TextBoxField name="bibFieldData.title" label={t("form:title")} isRequired={true} />
         </Box>
@@ -72,7 +72,7 @@ export default function BasicInfo({
         />
       </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+      <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 0, md: 4 }}>
         <Box gridColumn="1/4">
           <RichTextareaField name="bibFieldData.abstract" label={t("document:description")} />
         </Box>
@@ -83,7 +83,7 @@ export default function BasicInfo({
         />
       </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 0, md: 4 }}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 0, md: 4 }}>
         <DatePickerNextField name="fromDate" label={t("document:publication_date")} />
         <SelectInputField
           name="licenseId"

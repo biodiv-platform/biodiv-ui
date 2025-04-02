@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useMemo, useState } from "react";
@@ -104,39 +105,35 @@ export const SelectAsyncInputField = ({
   }, [form.formState.submitCount]);
 
   return (
-    <Field
-      invalid={!!fieldState.error}
-      aria-invalid={!!fieldState.error}
-      required={isRequired}
-      mb={mb}
-      {...props}
-    >
-      {label && <Field htmlFor={name} label={label} />}
-      <Select
-        name={name}
-        inputId={name}
-        menuPortalTarget={MENU_PORTAL_TARGET}
-        formatCreateLabel={(v) => `Add "${v}"`}
-        isMulti={multiple}
-        defaultOptions={options}
-        loadOptions={onQueryDebounce}
-        components={{
-          Option: optionComponent,
-          ClearIndicator,
-          DropdownIndicator,
-          IndicatorSeparator: () => null
-        }}
-        value={selected}
-        isSearchable={true}
-        isDisabled={disabled}
-        isClearable={isClearable}
-        onChange={handleOnChange}
-        placeholder={placeholder || label}
-        noOptionsMessage={() => null}
-        ref={selectRef}
-        openMenuOnFocus={openMenuOnFocus}
-        {...reactSelectProps}
-      />
+    <Field invalid={!!fieldState.error} aria-invalid={!!fieldState.error} mb={mb} {...props}>
+      {label && <Field htmlFor={name} label={label} required={isRequired} />}
+      <Box width={"full"}>
+        <Select
+          name={name}
+          inputId={name}
+          menuPortalTarget={MENU_PORTAL_TARGET}
+          formatCreateLabel={(v) => `Add "${v}"`}
+          isMulti={multiple}
+          defaultOptions={options}
+          loadOptions={onQueryDebounce}
+          components={{
+            Option: optionComponent,
+            ClearIndicator,
+            DropdownIndicator,
+            IndicatorSeparator: () => null
+          }}
+          value={selected}
+          isSearchable={true}
+          isDisabled={disabled}
+          isClearable={isClearable}
+          onChange={handleOnChange}
+          placeholder={placeholder || label}
+          noOptionsMessage={() => null}
+          ref={selectRef}
+          openMenuOnFocus={openMenuOnFocus}
+          {...reactSelectProps}
+        />
+      </Box>
       <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>

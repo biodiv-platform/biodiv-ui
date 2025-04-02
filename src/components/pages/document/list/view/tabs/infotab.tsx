@@ -1,4 +1,4 @@
-import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import LocalLink from "@components/@core/local-link";
 import DocumentIcon from "@components/pages/document/common/document-icon";
@@ -17,6 +17,8 @@ import { getInjectableHTML, stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { Avatar } from "@/components/ui/avatar";
+
 interface InfoTabInterface {
   document;
   user;
@@ -34,7 +36,7 @@ interface MetaBlockProps {
 
 const MetaBlock = ({ icon, children, isHtml, tooltip }: MetaBlockProps) =>
   children ? (
-    <HStack alignItems="center" spacing={2} title={tooltip}>
+    <HStack w="full" alignItems="center" title={tooltip}>
       {icon}
       {isHtml ? (
         <div
@@ -65,7 +67,7 @@ export default function InfoTab({
         <Flex justifyContent="space-between" mb={3}>
           <LocalLink href={`/document/show/${document.id}`}>
             <a>
-              <HStack alignItems="center" spacing={4}>
+              <HStack alignItems="center" gap={4}>
                 <DocumentIcon />
                 <Heading
                   fontSize="lg"
@@ -91,22 +93,22 @@ export default function InfoTab({
           </Box>
         </Flex>
         <MetaBlock
-          icon={<PeopleIcon />}
+          icon={<PeopleIcon size={"sm"} />}
           tooltip={t("document:bib.author")}
           children={document?.author}
         />
         <MetaBlock
-          icon={<CalendarIcon />}
+          icon={<CalendarIcon size={"sm"} />}
           tooltip={t("document:bib.year")}
           children={document?.year}
         />
         <MetaBlock
-          icon={<BookIcon />}
+          icon={<BookIcon size={"sm"} />}
           tooltip={t("document:bib.journal")}
           children={stripTags(document?.journal)}
         />
         <MetaBlock
-          icon={<MessageIcon />}
+          icon={<MessageIcon size={"sm"} />}
           tooltip={t("document:bib.abstract")}
           children={stripTags(document?.notes)}
         />
@@ -136,7 +138,7 @@ export default function InfoTab({
           <Flex alignItems="center">
             <Avatar
               mr={1}
-              size="sm"
+              size="xs"
               name={user?.name}
               src={getUserImage(user?.profilePic, user?.name)}
             />

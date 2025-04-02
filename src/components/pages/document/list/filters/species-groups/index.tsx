@@ -1,7 +1,9 @@
-import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import { stringToArray } from "@utils/basic";
 import React, { useMemo } from "react";
+
+import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import CustomCheckbox from "./checkbox";
 
@@ -49,7 +51,7 @@ const SpeciesGroupsFilter = () => {
 
   return (
     <>
-      <SimpleGrid gridGap={2} columns={5}>
+      <SimpleGrid gridGap={2} columns={5} p={4}>
         {speciesGroupList?.map((o) => (
           <CustomCheckbox
             key={o.id}

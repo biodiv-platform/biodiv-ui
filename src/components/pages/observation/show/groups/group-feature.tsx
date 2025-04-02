@@ -1,9 +1,7 @@
 import {
   Box,
   Button,
-  Collapse,
-  FormControl,
-  FormLabel,
+  Collapsible,
   SimpleGrid,
   Stack,
   Textarea,
@@ -17,6 +15,8 @@ import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
+
+import { Field } from "@/components/ui/field";
 
 import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
@@ -45,7 +45,7 @@ export default function GroupFeature({
 
   const { languageId } = useGlobalState();
   const { t } = useTranslation();
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const editButtonRef: any = useRef(null);
 
   useEffect(() => {
@@ -95,18 +95,12 @@ export default function GroupFeature({
 
   return (
     <>
-      <Button
-        mb={2}
-        variant="link"
-        rightIcon={<EditIcon />}
-        colorPalette="blue"
-        ref={editButtonRef}
-        onClick={onToggle}
-      >
+      <Button mb={2} variant="plain" colorPalette="blue" ref={editButtonRef} onClick={onToggle}>
         {t("common:edit")}
+        <EditIcon />
       </Button>
 
-      <SimpleGrid columns={[1, 1, 3, 3]} spacing={4} hidden={isOpen}>
+      <SimpleGrid columns={[1, 1, 3, 3]} gap={4} hidden={open}>
         {finalGroups.map((og) => (
           <GroupBox
             key={og.id}
@@ -117,50 +111,52 @@ export default function GroupFeature({
         ))}
       </SimpleGrid>
 
-      <Collapse in={isOpen} unmountOnExit={true}>
-        {groupsN.length > 0 && (
-          <CheckBoxItems
-            gridColumns={[1, 1, 3, 3]}
-            options={groupsN}
-            defaultValue={selectedGroups}
-            onChange={setSelectedGroups}
-          />
-        )}
-        <Box mt={2}>
-          <FormControl>
-            <FormLabel htmlFor="description">{t("observation:why_featuring")}</FormLabel>
-            <Textarea
-              id="description"
-              resize="none"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+      <Collapsible.Root open={open} unmountOnExit={true}>
+        <Collapsible.Content>
+          {groupsN.length > 0 && (
+            <CheckBoxItems
+              gridColumns={[1, 1, 3, 3]}
+              options={groupsN}
+              defaultValue={selectedGroups}
+              onChange={setSelectedGroups}
             />
-          </FormControl>
-          <Stack isInline={true} spacing={2} mt={2}>
-            <Button
-              size="sm"
-              colorPalette="blue"
-              aria-label="Save"
-              type="submit"
-              onClick={handleOnFeature}
-            >
-              {t("common:feature")}
-            </Button>
-            <Button
-              size="sm"
-              colorPalette="red"
-              aria-label="Save"
-              type="submit"
-              onClick={handleOnUnfeature}
-            >
-              {t("observation:unfeature")}
-            </Button>
-            <Button size="sm" colorPalette="gray" aria-label="Cancel" onClick={handleOnCancel}>
-              {t("common:close")}
-            </Button>
-          </Stack>
-        </Box>
-      </Collapse>
+          )}
+          <Box mt={2}>
+            <Field>
+              <Field htmlFor="description">{t("observation:why_featuring")}</Field>
+              <Textarea
+                id="description"
+                resize="none"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Field>
+            <Stack direction={"row"} gap={2} mt={2}>
+              <Button
+                size="sm"
+                colorPalette="blue"
+                aria-label="Save"
+                type="submit"
+                onClick={handleOnFeature}
+              >
+                {t("common:feature")}
+              </Button>
+              <Button
+                size="sm"
+                colorPalette="red"
+                aria-label="Save"
+                type="submit"
+                onClick={handleOnUnfeature}
+              >
+                {t("observation:unfeature")}
+              </Button>
+              <Button size="sm" aria-label="Cancel" onClick={handleOnCancel} variant={"subtle"}>
+                {t("common:close")}
+              </Button>
+            </Stack>
+          </Box>
+        </Collapsible.Content>
+      </Collapsible.Root>
     </>
   );
 }

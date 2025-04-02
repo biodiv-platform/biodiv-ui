@@ -1,17 +1,12 @@
-import { SearchIcon } from "@chakra-ui/icons";
-import {
-  Checkbox,
-  CheckboxGroup,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack
-} from "@chakra-ui/react";
+import { CheckboxGroup, Image, Input, Stack } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+import { LuSearch } from "react-icons/lu";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { InputGroup } from "@/components/ui/input-group";
 
 import FilterStat from "../stat";
 
@@ -55,8 +50,7 @@ export default function FilterCheckboxes({
   return (
     <>
       {showSearch && (
-        <InputGroup mb={2}>
-          <InputLeftElement children={<SearchIcon color="gray.300" />} />
+        <InputGroup mb={2} startElement={<LuSearch color="gray.300" />} width={"full"}>
           <Input type="text" placeholder={t("common:search")} onChange={handleOnSearch} />
         </InputGroup>
       )}
@@ -71,8 +65,7 @@ export default function FilterCheckboxes({
                   objectFit="contain"
                   display="inline"
                   verticalAlign="center"
-                  mr={1}
-                  ignoreFallback={true}
+                  marginEnd={1}
                 />
               )}
               {skipOptionsTranslation ? label || value : t(translateKey + label)}

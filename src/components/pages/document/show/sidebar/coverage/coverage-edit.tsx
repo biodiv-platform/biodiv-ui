@@ -31,7 +31,9 @@ export default function CoverageEdit({ value, onChange, items, type, onClose }) 
         <Button onClick={onSave} colorPalette="blue">
           {t("common:save")}
         </Button>
-        <Button onClick={onClose}>{t("common:cancel")}</Button>
+        <Button onClick={onClose} variant={"subtle"}>
+          {t("common:cancel")}
+        </Button>
       </ButtonGroup>
     </EditContainer>
   );

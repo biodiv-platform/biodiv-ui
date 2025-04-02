@@ -1,4 +1,4 @@
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Flex, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
@@ -21,8 +21,11 @@ const VerticalTabs = styled.div`
 
     > .tab-content {
       flex-grow: 1;
+      height: 100%;
+      overflow: hidden;
 
-      > [role="tabpanel"] {
+      > [role="tabpanel"],
+      > div[data-state="active"] {
         padding: 0;
         height: 100%;
         max-height: 18rem;
@@ -55,7 +58,8 @@ const VerticalTabs = styled.div`
         border-bottom: 0;
       }
 
-      > [role="tab"][aria-selected="true"] {
+      > [role="tab"][aria-selected="true"],
+      > [role="tab"][data-state="active"] {
         white-space: nowrap;
 
         color: inherit;
@@ -90,7 +94,6 @@ const VerticalTabs = styled.div`
 
 export default function Container({ o }) {
   const { t } = useTranslation();
-  const [tabIndex, setTabIndex] = useState(0);
   const [filterTabs] = useState(actionTabs.filter((item) => item.active === true));
 
   return (
@@ -102,15 +105,15 @@ export default function Container({ o }) {
       overflow="hidden"
     >
       <VerticalTabs>
-        <Tabs
-          variant="unstyled"
-          className="tabs"
-          index={tabIndex}
-          onChange={setTabIndex}
-          isLazy={true}
-        >
-          <TabPanels height={["fit-content"]} className="tab-content" position="relative">
-            <TabPanel>
+        <Tabs.Root variant="plain" className="tabs" lazyMount defaultValue="common:information">
+          <Tabs.Content
+            value="common:information"
+            height="100%"
+            className="tab-content"
+            position="relative"
+            style={{ overflow: "hidden" }}
+          >
+            <Box height="100%" overflowY="auto">
               <InfoTab
                 habitatIds={o.habitatIds}
                 specieIds={o.speciesGroupIds}
@@ -118,32 +121,56 @@ export default function Container({ o }) {
                 user={o.userIbp}
                 flags={o.flag[0] ? o.flag.map((item) => ({ flag: item, user: o.userIbp })) : null}
               />
-            </TabPanel>
-            {SITE_CONFIG.USERGROUP.ACTIVE && (
-              <TabPanel>
+            </Box>
+          </Tabs.Content>
+          {SITE_CONFIG.USERGROUP.ACTIVE && (
+            <Tabs.Content
+              value="common:usergroups"
+              height="100%"
+              className="tab-content"
+              position="relative"
+              style={{ overflow: "hidden" }}
+            >
+              <Box height="100%" overflowY="auto">
                 <GroupTab o={o} />
-              </TabPanel>
-            )}
-            <TabPanel>
+              </Box>
+            </Tabs.Content>
+          )}
+          <Tabs.Content
+            value="document:tags.title"
+            height="100%"
+            className="tab-content"
+            position="relative"
+            style={{ overflow: "hidden" }}
+          >
+            <Box height="100%" overflowY="auto">
               <TagsTab documentId={o.document.id} tags={o.tags} />
-            </TabPanel>
-            <TabPanel>
+            </Box>
+          </Tabs.Content>
+          <Tabs.Content
+            value="form:comments.title"
+            height="100%"
+            className="tab-content"
+            position="relative"
+            style={{ overflow: "hidden" }}
+          >
+            <Box height="100%" overflowY="auto">
               <CommentsTab documentId={o.document.id} />
-            </TabPanel>
-          </TabPanels>
-          <TabList>
+            </Box>
+          </Tabs.Content>
+          <Tabs.List>
             {filterTabs.map(({ name, icon }) => (
-              <Tab key={name}>
+              <Tabs.Trigger key={name} value={name}>
                 <Tooltip title={t(name)}>
                   <div>
                     {icon} <span>{t(name)}</span>
                   </div>
                 </Tooltip>
-              </Tab>
+              </Tabs.Trigger>
             ))}
-            <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-          </TabList>
-        </Tabs>
+            {/* <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} /> */}
+          </Tabs.List>
+        </Tabs.Root>
       </VerticalTabs>
     </Flex>
   );

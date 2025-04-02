@@ -1,10 +1,12 @@
-import { Avatar, Box, Link, SimpleGrid } from "@chakra-ui/react";
+import { Box, Link, SimpleGrid } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
 import { UserIbp } from "@interfaces/observation";
 import { getUserImage } from "@utils/media";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 interface UserProps {
   user: UserIbp | undefined;

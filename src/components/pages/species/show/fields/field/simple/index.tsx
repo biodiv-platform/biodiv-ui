@@ -1,23 +1,9 @@
-import { ChevronDownIcon, ChevronRightIcon, InfoOutlineIcon } from "@chakra-ui/icons";
-import {
-  Alert,
-  Box,
-  Flex,
-  IconButton,
-  ListItem,
-  OrderedList,
-  Table,
-  Tbody,
-  Td,
-  Tr,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Box, Flex, IconButton, List, Table, useDisclosure } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
 import useGlobalState from "@hooks/use-global-state";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
 import { getLanguageNameById } from "@utils/i18n";
@@ -26,22 +12,26 @@ import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { emit } from "react-gbus";
+import { LuChevronDown, LuChevronRight, LuInfo } from "react-icons/lu";
+
+import { Alert } from "@/components/ui/alert";
+import { Prose } from "@/components/ui/prose";
 
 import useSpecies from "../../../use-species";
 import FieldEditActionButtons from "./action-buttons";
 import SpeciesFieldResource from "./resource";
 
 const BlockList = ({ title, children }) => (
-  <Tr>
-    <Td verticalAlign="baseline" fontWeight="bold">
+  <Table.Row>
+    <Table.Cell verticalAlign="baseline" fontWeight="bold">
       {title}&emsp;
-    </Td>
-    <Td>{children}</Td>
-  </Tr>
+    </Table.Cell>
+    <Table.Cell>{children}</Table.Cell>
+  </Table.Row>
 );
 
 export default function SpeciesFieldSimple({ value }) {
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
   const { t } = useTranslation();
   const { getFieldPermission } = useSpecies();
   const { languageId } = useGlobalState();
@@ -77,7 +67,7 @@ export default function SpeciesFieldSimple({ value }) {
           onClick={() => setLangShow(!langShow)}
           cursor="pointer"
         >
-          {langShow ? <ChevronDownIcon /> : <ChevronRightIcon />}{" "}
+          {langShow ? <LuChevronDown /> : <LuChevronRight />}{" "}
           {t("species:content_another_language")} ({fieldLanguageName})
         </Alert>
       )}
@@ -105,16 +95,18 @@ export default function SpeciesFieldSimple({ value }) {
                   minW="auto"
                   size="sm"
                   m={1}
-                  variant="link"
+                  variant="plain"
                   aria-label="toggle"
-                  icon={<InfoOutlineIcon />}
                   onClick={onToggle}
-                />
+                >
+                  <LuInfo />
+                </IconButton>
               </div>
             </Flex>
-            <div data-hidden={!isOpen}>
-              <Table size="xs" variant="unstyled" mt={3}>
-                <Tbody>
+            <div data-hidden={!open}>
+              {/* size="xs" variant="unstyled" */}
+              <Table.Root mt={3}>
+                <Table.Body>
                   <BlockList title={t("species:attributions")}>{value?.attributions}</BlockList>
                   <BlockList title={t("species:contributors")}>
                     {value?.contributor.map((user) => (
@@ -134,16 +126,16 @@ export default function SpeciesFieldSimple({ value }) {
                     </ExternalBlueLink>
                   </BlockList>
                   <BlockList title={t("species:references")}>
-                    <OrderedList>
+                    <List.Root as="ol">
                       {value?.references.map(({ title, url }, index) => (
-                        <ListItem key={index}>
+                        <List.Item key={index}>
                           {title} {url && <ExternalBlueLink href={url} />}
-                        </ListItem>
+                        </List.Item>
                       ))}
-                    </OrderedList>
+                    </List.Root>
                   </BlockList>
-                </Tbody>
-              </Table>
+                </Table.Body>
+              </Table.Root>
             </div>
           </Box>
         </Box>

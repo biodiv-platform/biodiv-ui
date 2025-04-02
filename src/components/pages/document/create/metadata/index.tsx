@@ -14,11 +14,9 @@ export default function Metadata({ bibFields }: MetadataProps) {
 
   return (
     <Box mb={6}>
-      <PageHeading as="h2" size="lg">
-        📖 {t("document:metadata")}
-      </PageHeading>
+      <PageHeading as="h2">📖 {t("document:metadata")}</PageHeading>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={{ base: 0, md: 4 }}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} gapX={{ base: 0, md: 4 }}>
         {META_BIB_FIELDS.map((name) => (
           <TextBoxField
             key={name}

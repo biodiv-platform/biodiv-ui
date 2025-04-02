@@ -58,8 +58,8 @@ export const TextBoxField = ({
   const InputComponent = multiline ? Textarea : Input;
 
   return (
-    <Field invalid={!!fieldState.error} mb={mb} hidden={hidden} required={isRequired} {...props}>
-      {showLabel && <Field htmlFor={name} label={label} />}
+    <Field invalid={!!fieldState.error} mb={mb} hidden={hidden} {...props}>
+      {showLabel && <Field htmlFor={name} label={label} required={isRequired} />}
       <InputComponent
         id={id || name}
         placeholder={label}

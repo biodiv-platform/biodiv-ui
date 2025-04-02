@@ -1,6 +1,8 @@
-import { Box, Flex, Image, SimpleGrid, useCheckbox, useCheckboxGroup } from "@chakra-ui/react";
+import { Box, Flex, Image, SimpleGrid, useCheckbox } from "@chakra-ui/react";
 import { getGroupImageThumb, getGroupImageThumbForDatatable } from "@utils/media";
 import React from "react";
+
+import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 interface ITraitInputProps {
   type?: string;
@@ -13,13 +15,13 @@ interface ITraitInputProps {
 }
 
 const CustomCheckBox = (props: any) => {
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getControlProps, getLabelProps } = useCheckbox(props);
 
   return (
     <label>
-      <input {...getInputProps()} required={false} />
+      <input {...getControlProps()} required={false} />
       <Box
-        {...getCheckboxProps()}
+        {...getLabelProps()}
         p={2}
         cursor="pointer"
         borderWidth="2px"
@@ -60,7 +62,7 @@ const CheckBoxItems = ({
             <Flex alignItems="center" h="2rem" overflow="hidden" title={o.name}>
               <Image
                 loading="lazy"
-                ignoreFallback={true}
+                // ignoreFallback={true}
                 boxSize="2rem"
                 mr={2}
                 objectFit="contain"

@@ -42,10 +42,9 @@ export const SelectMultipleInputField = ({
       className="dropdown"
       aria-invalid={!!fieldState.error}
       mb={mb}
-      required={isRequired}
       {...props}
     >
-      <Field htmlFor={name} label={label} />
+      <Field htmlFor={name} label={label} required={isRequired} />
       <Select
         id={name}
         inputId={name}

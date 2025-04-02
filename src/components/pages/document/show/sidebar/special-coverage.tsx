@@ -1,4 +1,4 @@
-import { Box, ListItem, OrderedList } from "@chakra-ui/react";
+import { Box, List } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
@@ -10,17 +10,17 @@ export default function SpatialCoverage({ documentCoverage }) {
   return documentCoverage?.length > 0 ? (
     <Box mb={4} className="white-box">
       <BoxHeading>🌎 {t("form:coverage.spatial")}</BoxHeading>
-      <OrderedList p={4}>
+      <List.Root  p={4}>
         {documentCoverage.map(({ placeName, id, landscapeIds }) => (
-          <ListItem key={id}>
+          <List.Item key={id}>
             {landscapeIds ? (
               <BlueLink href={`/landscape/show/${landscapeIds}`}>{placeName}</BlueLink>
             ) : (
               placeName
             )}
-          </ListItem>
+          </List.Item>
         ))}
-      </OrderedList>
+      </List.Root>
     </Box>
   ) : null;
 }

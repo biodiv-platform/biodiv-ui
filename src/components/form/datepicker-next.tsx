@@ -51,6 +51,7 @@ export const DatePickerNextField = ({
                   <CalendarIcon color="gray.300" />
                 </label>
               }
+              width={"full"}
             >
               <DatePicker
                 ref={inputRef}

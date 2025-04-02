@@ -1,4 +1,4 @@
-import { Box, Button, Collapse, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Collapsible, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import EditIcon from "@icons/edit";
@@ -38,7 +38,7 @@ export default function GroupPost({
     selectedDefault?.map((g) => g?.id?.toString())
   );
   const { t } = useTranslation();
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const editButtonRef: any = useRef(null);
 
   const [filterGroups, setFilterGroups] = useState(groups);
@@ -80,16 +80,16 @@ export default function GroupPost({
     <>
       <Button
         mb={2}
-        variant="link"
-        rightIcon={<EditIcon />}
+        variant="plain"
         colorPalette="blue"
         ref={editButtonRef}
         onClick={onEditClick}
       >
         {t("common:edit")}
+        <EditIcon />
       </Button>
 
-      <SimpleGrid columns={columns || defaultGridColumns} spacing={4} hidden={isOpen}>
+      <SimpleGrid columns={columns || defaultGridColumns} gap={4} hidden={open}>
         <GroupBox
           link={DEFAULT_GROUP.webAddress}
           icon={`${DEFAULT_GROUP.icon}?h=40`}
@@ -111,37 +111,45 @@ export default function GroupPost({
           ))}
       </SimpleGrid>
 
-      <Collapse in={isOpen} unmountOnExit={true}>
-        <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
-        {groups?.length > 0 ? (
-          <CheckBoxItems
-            gridColumns={columns || defaultGridColumns}
-            options={filterGroups}
-            defaultValue={selectedGroups}
-            onChange={setSelectedGroups}
-            isDatatableUsergroups={isDataTable}
-          />
-        ) : (
-          <LocalLink href="/group/list">
-            <ExternalBlueLink>{t("common:no_groups_joined")}</ExternalBlueLink>
-          </LocalLink>
-        )}
+      <Collapsible.Root open={open} unmountOnExit={true} p={4}>
+        <Collapsible.Content>
+          <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
+          {groups?.length > 0 ? (
+            <CheckBoxItems
+              gridColumns={columns || defaultGridColumns}
+              options={filterGroups}
+              defaultValue={selectedGroups}
+              onChange={setSelectedGroups}
+              isDatatableUsergroups={isDataTable}
+            />
+          ) : (
+            <LocalLink href="/group/list">
+              <ExternalBlueLink>{t("common:no_groups_joined")}</ExternalBlueLink>
+            </LocalLink>
+          )}
 
-        <Box mt={2}>
-          <Button
-            size="sm"
-            colorPalette="blue"
-            aria-label="Save"
-            type="submit"
-            onClick={handleOnSave}
-          >
-            {t("common:save")}
-          </Button>
-          <Button size="sm" ml={2} colorPalette="gray" aria-label="Cancel" onClick={handleOnCancel}>
-            {t("common:close")}
-          </Button>
-        </Box>
-      </Collapse>
+          <Box mt={2}>
+            <Button
+              size="sm"
+              colorPalette="blue"
+              aria-label="Save"
+              type="submit"
+              onClick={handleOnSave}
+            >
+              {t("common:save")}
+            </Button>
+            <Button
+              size="sm"
+              ml={2}
+              colorPalette="gray"
+              aria-label="Cancel"
+              onClick={handleOnCancel}
+            >
+              {t("common:close")}
+            </Button>
+          </Box>
+        </Collapsible.Content>
+      </Collapsible.Root>
     </>
   );
 }
