@@ -19,6 +19,7 @@ import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axUpdateSpeciesFieldTranslations } from "@services/species.service";
+import { axGetLangList } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
@@ -35,6 +36,8 @@ interface TranslateFieldModalProps {
 const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClose, field }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
+  const [languages, setLanguages] = React.useState<Array<{id: number, name: string}>>([]);
+  const [isLoadingLanguages, setIsLoadingLanguages] = React.useState(false);
   
   const getFieldTypeLabel = () => {
     if (field?.type === "concept") return "concept";
@@ -85,6 +88,22 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
     }
   }, [isOpen, field, remove, hForm]);
 
+  // Fetch languages when the modal opens
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      setIsLoadingLanguages(true);
+      const response = await axGetLangList();
+      if (response.success && response.data) {
+        setLanguages(response.data);
+      }
+      setIsLoadingLanguages(false);
+    };
+    
+    if (isOpen) {
+      fetchLanguages();
+    }
+  }, [isOpen]);
+
   const handleSubmit = async (values) => {
     if (!field) return;
     
@@ -99,7 +118,7 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
         }))
       };
 
-      await axUpdateSpeciesFieldTranslations([formattedTranslations], 205);
+      await axUpdateSpeciesFieldTranslations([formattedTranslations]);
       notification(t("admin:species_fields.translations_saved"), NotificationType.Success);
       hForm.reset();
       onClose();
@@ -124,7 +143,7 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
             <ModalBody>
               {/* Original Field Information (Read-only) */}
               <Box p={4} mb={4} bg="blue.50" borderRadius="md">
-                <Text fontWeight="bold" mb={2}>{t("admin:species_fields.original_text")}</Text>
+                {/* <Text fontWeight="bold" mb={2}>{t("admin:species_fields.original_text")}</Text> */}
                 <VStack align="stretch" spacing={3}>
                   <Box>
                     <Text fontWeight="medium">{t(`admin:species_fields.${fieldType}_name`)}</Text>
@@ -173,7 +192,7 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                     variant={activeTab === index ? "solid" : "outline"}
                     onClick={() => setActiveTab(index)}
                   >
-                    {hForm.watch(`translations.${index}.languageId`) === 205 ? "English" : "French"}
+                    {languages.find(lang => lang.id === hForm.watch(`translations.${index}.languageId`))?.name || t("admin:species_fields.language")}
                     {index > 0 && (
                       <IconButton
                         size="xs"
@@ -202,24 +221,32 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                   bg="gray.50"
                   borderRadius="md"
                 >
-                  <ReactSelect
-                    name={`translations.${index}.languageId`}
-                    placeholder={t("admin:species_fields.language")}
-                    options={[
-                      { value: 205, label: "English" },
-                      { value: 219, label: "French" }
-                    ]}
-                    value={
-                      hForm.watch(`translations.${index}.languageId`) === 205
-                        ? { value: 205, label: "English" }
-                        : { value: 219, label: "French" }
-                    }
-                    onChange={(option) => {
-                      if (option) {
-                        hForm.setValue(`translations.${index}.languageId`, option.value);
+                  <Text mb={1} fontWeight="medium">
+                    {t("admin:species_fields.language")} <Box as="span" color="red.500">*</Box>
+                  </Text>
+                  <Box mb={6}>
+                    <ReactSelect
+                      name={`translations.${index}.languageId`}
+                      placeholder={t("admin:species_fields.language")}
+                      options={languages.map(lang => ({ value: lang.id, label: lang.name }))}
+                      isLoading={isLoadingLanguages}
+                      value={
+                        languages.find(lang => lang.id === hForm.watch(`translations.${index}.languageId`))
+                          ? { 
+                              value: hForm.watch(`translations.${index}.languageId`), 
+                              label: languages.find(lang => lang.id === hForm.watch(`translations.${index}.languageId`))?.name 
+                            }
+                          : null
                       }
-                    }}
-                  />
+                      onChange={(option) => {
+                        if (option) {
+                          hForm.setValue(`translations.${index}.languageId`, option.value);
+                        }
+                      }}
+                      className="react-select-container"
+                      classNamePrefix="react-select"
+                    />
+                  </Box>
 
                   <TextBoxField 
                     name={`translations.${index}.header`}
