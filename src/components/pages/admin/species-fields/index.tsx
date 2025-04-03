@@ -14,7 +14,7 @@ import {
 import { PageHeading } from "@components/@core/layout";
 import AddIcon from "@icons/add";
 import TranslateIcon from "@icons/translate";
-import { axCreateSpeciesField, axGetAllFieldsMeta } from "@services/species.service";
+import { axCreateSpeciesField, axGetAllFieldsMeta, axGetFieldTranslations } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
@@ -33,12 +33,20 @@ interface SpeciesField {
   children: SpeciesField[];
 }
 
+interface FieldTranslation {
+  languageId: string;
+  header: string;
+  description: string;
+  urlIdentifier: string;
+}
+
 export default function SpeciesFieldsAdmin() {
   const { t } = useTranslation();
   const [selectedField, setSelectedField] = useState<SpeciesField | null>(null);
   const [selectedConcept, setSelectedConcept] = useState<SpeciesField | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<SpeciesField | null>(null);
   const [speciesFields, setSpeciesFields] = useState<SpeciesField[]>([]);
+  const [fieldTranslations, setFieldTranslations] = useState<FieldTranslation[]>([]);
 
   const {
     isOpen: isFieldModalOpen,
@@ -187,8 +195,19 @@ export default function SpeciesFieldsAdmin() {
     onFieldModalOpen();
   };
 
-  const openTranslateModal = (field: SpeciesField) => {
+  const openTranslateModal = async (field: SpeciesField) => {
     setSelectedField(field);
+    
+    try {
+      // Fetch existing translations for the field
+      const { data } = await axGetFieldTranslations(field.id);
+      setFieldTranslations(data || []);
+    } catch (error) {
+      console.error("Error fetching field translations:", error);
+      notification(t("admin:species_fields.translation_fetch_error"), NotificationType.Error);
+      setFieldTranslations([]);
+    }
+    
     onTranslateModalOpen();
   };
 
@@ -355,6 +374,7 @@ export default function SpeciesFieldsAdmin() {
         isOpen={isTranslateModalOpen}
         onClose={onTranslateModalClose}
         field={selectedField}
+        translations={fieldTranslations}
       />
     </Box>
   );

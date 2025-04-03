@@ -27,13 +27,21 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import ReactSelect from "react-select";
 import * as Yup from "yup";
 
+interface FieldTranslation {
+  languageId: string;
+  header: string;
+  description: string;
+  urlIdentifier: string;
+}
+
 interface TranslateFieldModalProps {
   isOpen: boolean;
   onClose: () => void;
   field: any;
+  translations: FieldTranslation[];
 }
 
-const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClose, field }) => {
+const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClose, field, translations = [] }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
   const [languages, setLanguages] = React.useState<Array<{id: number, name: string}>>([]);
@@ -72,7 +80,7 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
     }
   });
 
-  const { fields: formFields, append, remove } = useFieldArray({
+  const { fields: formFields, append, remove, replace } = useFieldArray({
     control: hForm.control,
     name: "translations"
   });
@@ -103,6 +111,21 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
       fetchLanguages();
     }
   }, [isOpen]);
+
+  // Pre-populate form with existing translations when they become available
+  useEffect(() => {
+    if (translations?.length > 0) {
+      const formattedTranslations = translations.map(translation => ({
+        languageId: parseInt(translation.languageId),
+        header: translation.header,
+        description: translation.description,
+        urlIdentifier: translation.urlIdentifier
+      }));
+      
+      replace(formattedTranslations);
+      setActiveTab(0);
+    }
+  }, [translations, replace]);
 
   const handleSubmit = async (values) => {
     if (!field) return;
@@ -143,7 +166,6 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
             <ModalBody>
               {/* Original Field Information (Read-only) */}
               <Box p={4} mb={4} bg="blue.50" borderRadius="md">
-                {/* <Text fontWeight="bold" mb={2}>{t("admin:species_fields.original_text")}</Text> */}
                 <VStack align="stretch" spacing={3}>
                   <Box>
                     <Text fontWeight="medium">{t(`admin:species_fields.${fieldType}_name`)}</Text>
@@ -284,4 +306,4 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
   );
 };
 
-export default TranslateFieldModal; 
+export default TranslateFieldModal;
