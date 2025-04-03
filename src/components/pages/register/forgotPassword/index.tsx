@@ -1,4 +1,3 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
@@ -14,6 +13,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuMoveRight } from "react-icons/lu";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 
@@ -24,7 +24,7 @@ export default function ForgotPasswordComponent() {
   const router = useLocalRouter();
   const [showMobile, setShowMobile] = useState(false);
   const [user, setUser] = useState<any>();
-  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { open, onClose } = useDisclosure({ defaultOpen: true });
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -107,7 +107,7 @@ export default function ForgotPasswordComponent() {
   return (
     <Flex className="container fadeInUp" align="center" justify="center" pt={6}>
       <Box maxW="xs" width="full" pb={4}>
-        {isOpen ? (
+        {open ? (
           <>
             <PageHeading>{t("auth:forgot.title")}</PageHeading>
             <FormProvider {...hForm}>
@@ -125,7 +125,7 @@ export default function ForgotPasswordComponent() {
                 ) : (
                   <TextBoxField name="email" label={t("user:email")} />
                 )}
-                <SubmitButton rightIcon={<ArrowForwardIcon />}>
+                <SubmitButton rightIcon={<LuMoveRight />}>
                   {t("auth:forgot.form.submit")}
                 </SubmitButton>
               </form>
@@ -153,7 +153,7 @@ export default function ForgotPasswordComponent() {
                   autoComplete="new-password"
                 />
                 <Flex justifyContent="space-between" alignItems="center">
-                  <SubmitButton rightIcon={<ArrowForwardIcon />}>
+                  <SubmitButton rightIcon={<LuMoveRight />}>
                     {t("auth:otp.form.submit")}
                   </SubmitButton>
                   <BlueLink onClick={handleRegenerate}>{t("auth:otp.resend")}</BlueLink>

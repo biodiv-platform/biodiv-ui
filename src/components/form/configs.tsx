@@ -52,15 +52,21 @@ export const ClearIndicator = (props) => {
             type="button"
             minW={0}
             mr={2}
-            mt={1}
             aria-label={t("common:copy")}
             onClick={() => navigator.clipboard.writeText(props.selectProps.value.label)}
+            variant={"plain"}
           >
             <LuCopy />
           </IconButton>
         </Tooltip>
       </div>
-      <IconButton minW="auto" type="button" mr={1} aria-label={t("common:clear")} fontSize="0.8rem">
+      <IconButton
+        minW="auto"
+        type="button"
+        mr={1}
+        aria-label={t("common:clear")}
+        variant={"plain"}
+      >
         <LuX />
       </IconButton>
     </div>

@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Tag } from "@chakra-ui/react";
+import { Box, Button, HStack } from "@chakra-ui/react";
 import { RadioInputField } from "@components/form/radio";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import {
@@ -9,6 +9,8 @@ import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+
+import { Tag } from "@/components/ui/tag";
 
 import CurationTaxonBreadcrumbs from "./curation-breadcrumbs";
 
@@ -105,7 +107,7 @@ export default function ScientificNameEdit({ row, canValidate }) {
       )}
 
       <Box mb={4}>
-        <HStack spacing={4}>
+        <HStack gap={4}>
           {breadCrumbs.length > 0 ? (
             <Tag>
               {t("text-curation:edit.scientific_name.taxon_id")} :

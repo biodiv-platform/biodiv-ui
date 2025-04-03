@@ -1,9 +1,11 @@
-import { Avatar, Flex, Link } from "@chakra-ui/react";
+import { Flex, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
 import { UserIbp } from "@interfaces/activity";
 import { getUserImage } from "@utils/media";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 const UserBox = styled.div`
   position: absolute;

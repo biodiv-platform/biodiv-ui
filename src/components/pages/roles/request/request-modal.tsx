@@ -1,13 +1,14 @@
-import { Modal, ModalOverlay } from "@chakra-ui/modal";
 import React from "react";
+
+import { DialogBackdrop, DialogRoot } from "@/components/ui/dialog";
 
 import { TaxonPermissionRequestForm } from "./form";
 
 export function TaxonPermissionRequestModal({ taxon, isOpen, onClose, isAdmin }) {
   return (
-    <Modal onClose={onClose} size="md" isOpen={isOpen}>
-      <ModalOverlay />
+    <DialogRoot onOpenChange={onClose} size="md" open={isOpen}>
+      <DialogBackdrop />
       {isOpen && <TaxonPermissionRequestForm taxon={taxon} isAdmin={isAdmin} onClose={onClose} />}
-    </Modal>
+    </DialogRoot>
   );
 }

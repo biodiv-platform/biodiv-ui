@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Input, Tag, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Input, Text, useDisclosure, VStack } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axGetPeliasAutocompleteLocations } from "@services/curate.service";
@@ -7,12 +7,14 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
+import { Tag } from "@/components/ui/tag";
+
 const MapWithNoSSR = dynamic(() => import("./map-locations"), {
   ssr: false
 });
 
 export default function LocationEdit({ row }) {
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
   const { t } = useTranslation();
   const hForm = useFormContext();
   const locationRef: any = useRef(null);
@@ -105,7 +107,7 @@ export default function LocationEdit({ row }) {
       {row.peliasLocations.length > 0 && (
         <Box>
           <Button
-            variant="solid"
+            variant="subtle"
             colorPalette="gray"
             size="sm"
             onClick={onToggle}
@@ -113,12 +115,12 @@ export default function LocationEdit({ row }) {
             borderColor="gray.300"
             borderWidth="medium"
           >
-            {isOpen
+            {open
               ? t("text-curation:edit.location.collapse_map")
               : t("text-curation:edit.location.show_on_map")}
           </Button>
 
-          {isOpen && (
+          {open && (
             <MapWithNoSSR
               row={row}
               setLatitude={setLatitude}
@@ -126,7 +128,7 @@ export default function LocationEdit({ row }) {
               setLocationAccuracy={setLocationAccuracy}
               hForm={hForm}
               locationRef={locationRef}
-              isOpen={isOpen}
+              isOpen={open}
             />
           )}
         </Box>
@@ -151,12 +153,12 @@ export default function LocationEdit({ row }) {
         ))}
 
         {listOfLocations.length < row.peliasLocations.length && (
-          <Button variant="link" onClick={handleLoadMore} colorPalette="blue">
+          <Button variant="plain" onClick={handleLoadMore} colorPalette="blue">
             {t("text-curation:edit.location.show_all")}
           </Button>
         )}
         {listOfLocations.length === row.peliasLocations.length && listOfLocations.length > 4 && (
-          <Button variant="link" onClick={handleCollapse} colorPalette="blue">
+          <Button variant="plain" onClick={handleCollapse} colorPalette="blue">
             {t("text-curation:edit.location.show_fewer")}
           </Button>
         )}

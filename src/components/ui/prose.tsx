@@ -19,7 +19,7 @@ export const Prose = chakra("div", {
       borderInlineStartWidth: "0.25em",
     },
     "& a": {
-      color: "fg",
+      color: "blue.500",
       textDecoration: "underline",
       textUnderlineOffset: "3px",
       textDecorationThickness: "2px",

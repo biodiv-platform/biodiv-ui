@@ -13,6 +13,7 @@ interface ITextBoxProps {
   disabled?: boolean;
   hint?: string;
   hidden?;
+  colorPalette?: string;
 }
 
 export const CheckboxField = ({
@@ -22,6 +23,8 @@ export const CheckboxField = ({
   hint,
   disabled,
   children,
+  colorPalette = "blue",
+
   ...props
 }: ITextBoxProps) => {
   const {
@@ -37,6 +40,7 @@ export const CheckboxField = ({
         onBlur={onBlur}
         defaultChecked={value}
         disabled={disabled}
+        colorPalette={colorPalette}
       >
         {children || label}
       </Checkbox>

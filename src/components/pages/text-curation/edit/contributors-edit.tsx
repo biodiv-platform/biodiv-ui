@@ -43,7 +43,7 @@ export default function ContributorsEditor({
         <Button size="sm" colorPalette="blue" aria-label="Save" type="submit">
           {t("common:save")}
         </Button>
-        <Button size="sm" ml={2} colorPalette="gray" aria-label="Cancel" onClick={onClose}>
+        <Button size="sm" ml={2} variant="subtle" aria-label="Cancel" onClick={onClose}>
           {t("common:cancel")}
         </Button>
       </form>
