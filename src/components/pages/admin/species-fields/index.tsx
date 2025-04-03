@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 
 import AddConceptModal from "./add-concept-modal";
 import AddFieldModal from "./add-field-modal";
+import TranslateFieldModal from "./translate-field-modal";
 
 // import AddConceptModal from "../add-concept-modal";
 // import AddFieldModal from "./add-field-modal";
@@ -34,7 +35,7 @@ interface SpeciesField {
 
 export default function SpeciesFieldsAdmin() {
   const { t } = useTranslation();
-  const [selectedField, setSelectedField] = useState(null);
+  const [selectedField, setSelectedField] = useState<SpeciesField | null>(null);
   const [selectedConcept, setSelectedConcept] = useState<SpeciesField | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<SpeciesField | null>(null);
   const [speciesFields, setSpeciesFields] = useState<SpeciesField[]>([]);
@@ -49,6 +50,12 @@ export default function SpeciesFieldsAdmin() {
     isOpen: isConceptModalOpen,
     onOpen: onConceptModalOpen,
     onClose: onConceptModalClose
+  } = useDisclosure();
+
+  const {
+    isOpen: isTranslateModalOpen,
+    onOpen: onTranslateModalOpen,
+    onClose: onTranslateModalClose
   } = useDisclosure();
 
   // Add useEffect to fetch data when component mounts
@@ -182,7 +189,7 @@ export default function SpeciesFieldsAdmin() {
 
   const openTranslateModal = (field: SpeciesField) => {
     setSelectedField(field);
-    onFieldModalOpen();
+    onTranslateModalOpen();
   };
 
   return (
@@ -341,6 +348,13 @@ export default function SpeciesFieldsAdmin() {
         isOpen={isConceptModalOpen}
         onClose={onConceptModalClose}
         onSubmit={handleAddConcept}
+      />
+
+      {/* Modal for translating a field */}
+      <TranslateFieldModal
+        isOpen={isTranslateModalOpen}
+        onClose={onTranslateModalClose}
+        field={selectedField}
       />
     </Box>
   );
