@@ -2,7 +2,7 @@ import { authorizedPageSSP, throwUnauthorized } from "@components/auth/auth-redi
 import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
-import { axGetspeciesGroups } from "@services/observation.service";
+import { axGetspeciesGroups, axGetTraitsByGroupId } from "@services/observation.service";
 import {
   axGetAllCustomFields,
   axGetGroupAdministratorsByGroupId,
@@ -50,7 +50,8 @@ export const getServerSideProps = async (ctx) => {
   );
   const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.id);
   const { success: s5, customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
-  if (s1 && s2 && s3 && s4 && s5) {
+  const { success : s6 , data:traits} = await axGetTraitsByGroupId(829)
+  if (s1 && s2 && s3 && s4 && s5 && s6) {
     return {
       props: {
         habitats,
@@ -67,7 +68,8 @@ export const getServerSideProps = async (ctx) => {
           value: id
         })),
         mediaToggle: customisations.mediaToggle,
-        langId
+        langId,
+        traits
       }
     };
   }

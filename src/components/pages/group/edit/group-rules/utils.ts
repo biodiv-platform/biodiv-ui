@@ -7,7 +7,8 @@ export const formatGroupRules = (rules) => {
     taxonomicRuleList,
     spartialRuleList,
     observedOnDateRule,
-    createdOnDateRuleList
+    createdOnDateRuleList,
+    traitRuleList
   } = rules;
   //populate user rules
   groupRules.push({ name: "userRule", value: hasUserRule ? "true" : "false" });
@@ -36,6 +37,14 @@ export const formatGroupRules = (rules) => {
       value: `${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`
     });
   });
+  //populate trait rules array
+  traitRuleList?.forEach((item)=> {
+    groupRules.push({
+      id: item.id,
+      name: "traitRule",
+      value: `${item.traitId} : ${item.value}`
+    })
+  })
 
   return groupRules;
 };
