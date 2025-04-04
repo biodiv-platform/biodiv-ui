@@ -57,8 +57,17 @@
     "column_mapping_description": "Veuillez mapper au moins une colonne aux traits. \nAssurez-vous de cartographier le nom scientifique, TaxonConceptid, SpeciesId, Attribution, Contributeur.",
     "continue": "Continuer",
     "description": "Téléchargez une feuille avec une colonne étiquetée TaxonConceptid et une ou plusieurs colonnes avec des en-têtes comme noms de traits. \nChaque cellule doit contenir des valeurs séparées par les virgules correspondant à la ligne du taxon. \nAssurez-vous que les traits et les valeurs existent déjà dans le système. \nS'ils ne le font pas, veuillez les créer avant d'essayer de correspondre.",
+    "excel_file_error": "Erreur de lecture du fichier Excel:",
+    "failed_description": "Le téléchargement des traits a échoué pour les espèces suivantes:",
+    "failed_upload": "Certains traits n'ont pas réussi à télécharger.",
+    "no_file_error": "Aucun fichier sélectionné!",
+    "processing": "Traitement...",
+    "processing_message": "Veuillez patienter pendant que les traits sont téléchargés.",
+    "successfull_upload_message": "Tous les traits ont été téléchargés avec succès.",
     "terms_warning": "* Les termes doivent être acceptés",
-    "traits": "Caractéristiques"
+    "traits": "Caractéristiques",
+    "traits_saved": "Traits enregistrés",
+    "traits_successfull": "Traits téléchargés avec succès"
   },
   "traits_show": {
     "data_type": "Type de données",

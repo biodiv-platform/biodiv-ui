@@ -2,18 +2,31 @@ import { Box, Flex, Heading, Image, Select, SimpleGrid } from "@chakra-ui/react"
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
+import { SelectInputField } from "@components/form/select";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { CATEGORY_TYPE } from "@static/constants";
 import { getTraitIcon } from "@utils/media";
 import React, { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import * as Yup from "yup";
 
 export default function TraitsListComponent({ data, filterKey }) {
   const router = useLocalRouter();
-  const [filter, setFilter] = useState<string>(filterKey);
+  const hForm = useForm<any>({
+    defaultValues: {
+      filter: filterKey
+    },
+    resolver: yupResolver(
+      Yup.object().shape({
+        filter: Yup.string().required()
+      })
+    )
+  });
 
   // ✅ Define groupedData type to prevent "unknown" errors
   const groupedData: Record<string, { categoryName: string; traitsValuePairList: any[] }[]> = {};
 
   const applyFilter = (category) => {
-    setFilter(category);
     router.push("/traits/list", true, { filter: category }, true);
   };
 
@@ -38,13 +51,20 @@ export default function TraitsListComponent({ data, filterKey }) {
 
   return (
     <div className="container mt">
-      <Box mb={4} width="100%">
-        <Select maxW="10rem" ml="auto" value={filter} onChange={(e) => applyFilter(e.target.value)}>
-          <option value="All">All</option>
-          <option value="Observation">Observation Traits</option>
-          <option value="Species">Species Traits</option>
-        </Select>
-      </Box>
+      <FormProvider {...hForm}>
+        <form>
+          <Box mb={4} width="100%">
+            <SelectInputField
+              key={`Category`}
+              name={"filter"}
+              label={"Category"}
+              options={CATEGORY_TYPE}
+              onChangeCallback={(value) => applyFilter(value)}
+              isRequired={true}
+            />
+          </Box>
+        </form>
+      </FormProvider>
 
       <Box>
         {Object.entries(groupedData).map(([mainCategory, subCategories]) => (

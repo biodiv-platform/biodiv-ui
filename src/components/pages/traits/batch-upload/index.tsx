@@ -30,6 +30,7 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import ColumnMapper from "../common/column-mapper";
+import { REQUIRED_COLUMNS } from "@static/constants";
 
 export default function TraitsBatchUpload({ traits, languages }) {
   function groupByLanguageId(list) {
@@ -55,7 +56,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
   const [failedTraitNames, setFailedTraitNames] = useState<string[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
-  const [headers, setHeaders] = useState<string[]>([]);
+  const [headersMapping, setHeadersMapping] = useState<string[]>([]);
   const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
   const [successfulUpload, setSuccessfulUpload] = useState(0);
   const [failedUpload, setFailedUpload] = useState(0);
@@ -107,13 +108,13 @@ export default function TraitsBatchUpload({ traits, languages }) {
               }
             }
           });
-          setHeaders(extractedHeaders);
+          setHeadersMapping(extractedHeaders);
           onOpen1();
         } catch (error) {
-          console.error("Error reading Excel file:", error);
+          console.error(t("traits:trait_matching.excel_file_error"), error);
         }
       } else {
-        alert("No file selected!");
+        alert(t("traits.trait_matching.no_file_error"));
       }
     },
     accept: {
@@ -232,10 +233,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
 
   const columnMappingSubmit = async () => {
     if (
-      columnMapping.filter(([, i]) => i === "ScientificName").length == 0 ||
-      columnMapping.filter(([, i]) => i === "TaxonConceptId").length == 0 ||
-      columnMapping.filter(([, i]) => i === "SpeciesId").length == 0 ||
-      columnMapping.filter(([, i]) => i === "Contributor").length == 0
+      REQUIRED_COLUMNS.some((col) => !columnMapping.some(([, i]) => i === col))
     ) {
       notification("Please map ScientificName, TaxonConceptId, SpeciesId and Contributor");
     } else {
@@ -333,7 +331,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
         isOpen={isOpen1}
         onClose={onClose1}
         description={t("traits:trait_matching.column_mapping_description")}
-        headers={headers}
+        headers={headersMapping}
         columnMapping={columnMapping}
         setColumnMapping={setColumnMapping}
         onSubmit={columnMappingSubmit}
@@ -346,17 +344,17 @@ export default function TraitsBatchUpload({ traits, languages }) {
               <Heading size="md" mb={2} color={"blue.600"}>
                 {successfulUpload + failedUpload === uploadResult.length
                   ? failedUpload > 0
-                    ? "Traits Saved"
-                    : "Traits Uploaded Successfully"
-                  : "Processing..."}
+                    ? t("traits.trait_matching.traits_saved")
+                    : t("traits.trait_matching.traits_successfull")
+                  : t("traits.trait_matching.processing")}
               </Heading>
 
               <Text fontSize="sm" color="gray.600">
                 {successfulUpload + failedUpload === uploadResult.length
                   ? failedUpload > 0
-                    ? "Some traits failed to upload."
-                    : "All traits have been uploaded successfully."
-                  : "Please wait while the traits are being uploaded."}
+                    ? t("traits.trait_matching.failed_upload")
+                    : t("traits.trait_matching.successfull_upload_message")
+                  : t("traits.trait_matching.processing_message")}
               </Text>
 
               <Box mt={4}>
@@ -373,7 +371,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
               {failedUpload > 0 && failedTraitNames.length > 0 && (
                 <Box mt={3} p={2} bg="red.50" borderRadius="md">
                   <Text fontSize="sm" fontWeight="semibold" color="red.600">
-                    Traits upload failed for the following species:
+                    {t("traits.trait_matching.failed_description")}
                   </Text>
                   <Box>
                     {failedTraitNames.map((name, index) => (

@@ -35,6 +35,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateTrait } from "@services/traits.service";
+import { PREVENT_CLICK_TAGS } from "@static/constants";
 import { getLocalIcon, getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
@@ -189,7 +190,8 @@ export default function TraitsEditComponent({ data, languages }) {
       <TextBoxField
         name={`translations[${translationSelected}].values[${value}].value`}
         label={
-          hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0].values[
+          hForm.watch(`translations`).find((t) => t.traits.languageId == languageId)!=null
+          &&hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0].values[
             value
           ].value &&
           hForm.watch(`translations`)[translationSelected].traits.languageId != languageId
@@ -267,9 +269,7 @@ export default function TraitsEditComponent({ data, languages }) {
   const shouldCancelStart = (e) => {
     // Ignore clicks on file inputs or labels
     return (
-      e.target.tagName === "INPUT" ||
-      e.target.tagName === "LABEL" ||
-      e.target.tagName === "BUTTON" ||
+      PREVENT_CLICK_TAGS.includes(e.target.tagName)||
       hForm.watch(`translations[${translationSelected}].traits.traitTypes`) !== "RANGE"
     );
   };
@@ -480,6 +480,9 @@ export default function TraitsEditComponent({ data, languages }) {
                     key={`name-${translationSelected}`}
                     name={`translations[${translationSelected}].traits.name`}
                     label={
+                      hForm
+                        .watch(`translations`)
+                        .find((t) => t.traits.languageId == languageId)!=undefined &&
                       hForm
                         .watch(`translations`)
                         .filter((t) => t.traits.languageId == languageId)[0].traits.name &&

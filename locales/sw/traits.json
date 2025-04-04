@@ -57,8 +57,17 @@
     "column_mapping_description": "Tafadhali ramani Atleast safu moja kwa sifa. \nHakikisha ramani ya jina la kisayansi, taxonConceptId, spishi, sifa, mchangiaji.",
     "continue": "Endelea",
     "description": "Sasisha karatasi iliyo na safu iliyoandikwa taxonConceptId na safu moja au zaidi na vichwa kama majina ya tabia. \nKila seli inapaswa kuwa na maadili yaliyotengwa na comma yanayolingana na safu ya taxon. \nHakikisha kuwa sifa na maadili tayari zipo kwenye mfumo. \nIkiwa hawafanyi hivyo, tafadhali waunde kabla ya kujaribu kulinganisha.",
+    "excel_file_error": "Faili ya Kusoma Kosa:",
+    "failed_description": "Tabia za kupakia zilishindwa kwa spishi zifuatazo:",
+    "failed_upload": "Tabia zingine zilishindwa kupakia.",
+    "no_file_error": "Hakuna faili iliyochaguliwa!",
+    "processing": "Usindikaji ...",
+    "processing_message": "Tafadhali subiri wakati sifa zinapakiwa.",
+    "successfull_upload_message": "Tabia zote zimepakiwa kwa mafanikio.",
     "terms_warning": "* Masharti yanahitaji kukubaliwa",
-    "traits": "Sifa"
+    "traits": "Sifa",
+    "traits_saved": "Tabia zilizookolewa",
+    "traits_successfull": "Tabia zilizopakiwa kwa mafanikio"
   },
   "traits_show": {
     "data_type": "Aina ya data",

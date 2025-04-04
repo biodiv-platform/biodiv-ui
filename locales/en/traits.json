@@ -57,8 +57,17 @@
     "column_mapping_description": "Please map atleast one column to traits. Make sure to map Scientific Name,TaxonConceptId, SpeciesId, Attribution, Contributor.",
     "continue": "Continue",
     "description": "Upload a sheet with a column labelled TaxonConceptID and one or more columns with headers as the trait names. Each cell should contain comma-separated values corresponding to the row of the taxon. Ensure that traits and values already exist in the system. If they do not, please create them before attempting to match.",
+    "excel_file_error": "Error reading Excel file:",
+    "failed_description": "Traits upload failed for the following species:",
+    "failed_upload": "Some traits failed to upload.",
+    "no_file_error": "No file selected!",
+    "processing": "Processing...",
+    "processing_message": "Please wait while the traits are being uploaded.",
+    "successfull_upload_message": "All traits have been uploaded successfully.",
     "terms_warning": "* Terms need to be accepted",
-    "traits": "Traits"
+    "traits": "Traits",
+    "traits_saved": "Traits Saved",
+    "traits_successfull": "Traits Uploaded Successfully"
   },
   "traits_show": {
     "data_type": "Data Type",

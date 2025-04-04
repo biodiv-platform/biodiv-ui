@@ -57,8 +57,17 @@
     "column_mapping_description": "Azafady azafady atleast ny tsanganana iray amin'ny toetra. \nAtaovy azo antoka fa manome anarana siantifika, taxonconceptid, karazana, ny attramus, mpandray anjara.",
     "continue": "FOANA",
     "description": "Alefaso ny takelaka misy taxonconceptid tsanganana iray ary tsanganana iray na maromaro amin'ny lohateny ho anarana. \nNy sela tsirairay dia tokony ahitana ny soatoavina misaraka amin'ny komma mifanandrify amin'ny andalana ny hetra. \nHamarino fa ny toetra sy ny soatoavina dia efa misy ao amin'ny rafitra. \nRaha tsy manao izany izy ireo dia avelao izy ireo alohan'ny hanandrana mifanandrify.",
+    "excel_file_error": "Hadisoana ny famakiana rakitra Excel:",
+    "failed_description": "Tsy nahomby ny fiatrehana ny fampidinana ho an'ireo karazana manaraka ireto:",
+    "failed_upload": "Ny toetoetra sasany dia tsy nahomby.",
+    "no_file_error": "Tsy misy rakitra voafidy!",
+    "processing": "Fanodinana ...",
+    "processing_message": "Miandrasa azafady raha ampidirina ireo toetra.",
+    "successfull_upload_message": "Ny toetra rehetra dia nampakarina soa aman-tsara.",
     "terms_warning": "* Mila ekena ny teny",
-    "traits": "toetra"
+    "traits": "toetra",
+    "traits_saved": "Ny toetra voatondro",
+    "traits_successfull": "Ireo toetra nampakarina tamim-pahombiazana"
   },
   "traits_show": {
     "data_type": "Type data",

@@ -24,7 +24,6 @@ import notification from "@utils/notification";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
-import { CSVLink } from "react-csv";
 import { useDropzone } from "react-dropzone";
 
 import NameTable from "./name-table";
@@ -273,18 +272,6 @@ export default function NameMatchingComponent() {
                   </MenuButton>
                   <MenuList>
                     <MenuItem onClick={importAsExcel}>{t("taxon:name_matching.download_excel")}</MenuItem>
-                    <MenuItem>
-                      {" "}
-                      <CSVLink
-                        data={finalResult.map((name) => ({
-                          Species: name[1]?.name,
-                          TaxonId: name[1]?.id
-                        }))}
-                        filename="names.csv"
-                      >
-                        {t("taxon:name_matching.download_csv")}
-                      </CSVLink>
-                    </MenuItem>
                   </MenuList>
                 </Menu>
               </Flex>

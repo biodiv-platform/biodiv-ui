@@ -3,7 +3,7 @@ import { axGetTraitListData } from "@services/traits.service";
 import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
-const traitsCreate = ({ data, filter }) => <TraitsListComponent data={data} filterKey={filter} />;
+const traitsList = ({ data, filter }) => <TraitsListComponent data={data} filterKey={filter} />;
 
 export const getServerSideProps = async (ctx) => {
   const { data: traits } = await axGetTraitListData(getLanguageId(ctx.locale)?.ID);
@@ -16,4 +16,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default traitsCreate;
+export default traitsList;

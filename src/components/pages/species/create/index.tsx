@@ -9,7 +9,7 @@ import { SpeciesTaxonSuggestions } from "./species-taxon-suggestions";
 import { SpeciesCreateProvider } from "./species-taxon-suggestions/create/use-species-create";
 import { SpeciesValidateForm } from "./validate-form";
 
-export function SpeciesCreatePageComponent({ taxonRanksMeta, isSpeciesPage, name }) {
+export function SpeciesCreatePageComponent({ taxonRanksMeta, isSpeciesPage, name = undefined }) {
   const { t } = useTranslation();
 
   return (

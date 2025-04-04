@@ -19,7 +19,7 @@ export const axCreateTrait = async (params) => {
 
 export const axUpdateTrait = async (id, translations) => {
   try {
-    const { data } = await plainHttp.post(
+    const { data } = await plainHttp.put(
       `${ENDPOINT.TRAITS}/v1/factservice/trait/update/${id}`,
       translations,
       {

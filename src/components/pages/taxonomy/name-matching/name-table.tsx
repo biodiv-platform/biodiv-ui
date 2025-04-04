@@ -12,6 +12,7 @@ import {
   Box,
   Button,
   Image,
+  Table,
   Text,
   useDisclosure
 } from "@chakra-ui/react";
@@ -34,7 +35,7 @@ const NameTable = ({
   const cancelRef = React.useRef(null);
   const { t } = useTranslation();
   return (
-    <table className="table table-bordered">
+    <Table className="table table-bordered">
       <thead>
         <tr>
           <th>{t("taxon:name_matching.species_name")}</th>
@@ -200,7 +201,7 @@ const NameTable = ({
             </tr>
           ))}
       </tbody>
-    </table>
+    </Table>
   );
 };
 
