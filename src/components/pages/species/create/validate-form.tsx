@@ -13,7 +13,7 @@ import * as Yup from "yup";
 
 import useSpeciesCreate from "./species-taxon-suggestions/create/use-species-create";
 
-export function SpeciesValidateForm() {
+export function SpeciesValidateForm({ name }) {
   const { t } = useTranslation();
   const {
     setValidateResponse,
@@ -34,7 +34,8 @@ export function SpeciesValidateForm() {
       })
     ),
     defaultValues: {
-      rankName: taxonRankOptions[1]?.value
+      rankName: taxonRankOptions[1]?.value,
+      ...(name != undefined && { scientificName: name })
     }
   });
 

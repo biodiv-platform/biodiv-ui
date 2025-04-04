@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import TraitInput from "@components/pages/observation/common/trait-input";
+import MultipleCategorialTrait from "@components/pages/observation/common/trait-input/multiple-categorical";
 import useSpecies from "@components/pages/species/show/use-species";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
@@ -24,7 +25,7 @@ export default function SimpleTraitEdit({ trait, initialValue, onSave, onClose }
       traitValueList: Array.isArray(value) ? value : [value]
     };
 
-    const { success, data } = await axUpdateSpeciesTrait(speciesId, trait.id, payload);
+    const { success, data } = await axUpdateSpeciesTrait(speciesId, trait.traitId, payload);
     if (success) {
       onSave(data);
       onClose();
@@ -39,14 +40,26 @@ export default function SimpleTraitEdit({ trait, initialValue, onSave, onClose }
   return (
     <div>
       <Box mb={3}>
-        <TraitInput
-          name={trait.name}
-          type={trait.traitTypes}
-          values={trait.options}
-          defaultValue={value}
-          onUpdate={handleOnChange}
-          gridColumns={3}
-        />
+        {trait.traitTypes != "RANGE" && (
+          <TraitInput
+            name={trait.name}
+            type={trait.traitTypes}
+            values={trait.options}
+            defaultValue={value}
+            onUpdate={handleOnChange}
+            gridColumns={3}
+          />
+        )}
+        {trait.traitTypes == "RANGE" && (
+          <MultipleCategorialTrait
+            name={trait.name}
+            type={trait.traitTypes}
+            values={trait.options}
+            defaultValue={value}
+            onUpdate={handleOnChange}
+            gridColumns={3}
+          />
+        )}
       </Box>
       <TraitEditFooter onSave={handleOnSave} onCancel={onClose} />
     </div>

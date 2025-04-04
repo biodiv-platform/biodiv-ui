@@ -101,11 +101,11 @@ export default function SpeciesFieldGroup({
 
               {/* Create Field */}
               {permissions.isContributor && childField.length === 0 && (
-                <SpeciesFieldSimpleCreate fieldId={parentField?.id} />
+                <SpeciesFieldSimpleCreate fieldId={parentField?.id} traits={currentField.traits} />
               )}
 
               {/* Field Traits */}
-              {currentField.traits.map((trait) => (
+              {parentField.traits.map((trait) => (
                 <SpeciesTraitView
                   key={trait.id}
                   trait={trait}

@@ -16,9 +16,9 @@ export const axGetSpeciesById = async (speciesId, payload) => {
   }
 };
 
-export const axGetAllTraitsMeta = async () => {
+export const axGetAllTraitsMeta = async (langId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/traits/all`);
+    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/traits/all/${langId}`);
     return { success: true, data: data };
   } catch (e) {
     console.error(e);
@@ -26,10 +26,10 @@ export const axGetAllTraitsMeta = async () => {
   }
 };
 
-export const axGetAllTraitsMetaByTaxonId = async (taxonId) => {
+export const axGetAllTraitsMetaByTaxonId = async (taxonId, langId) => {
   try {
     const { data } = await plainHttp.get(
-      `${ENDPOINT.SPECIES}/v1/species/traits/taxonomy/${taxonId}`
+      `${ENDPOINT.SPECIES}/v1/species/traits/taxonomy/${taxonId}/${langId}`
     );
     return { success: true, data: data };
   } catch (e) {

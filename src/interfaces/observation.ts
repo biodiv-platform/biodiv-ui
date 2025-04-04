@@ -812,9 +812,11 @@ export interface Traits {
   id?: number; // int64
   name?: string;
   type?: string;
+  traitId: number;
   traitValues?: TraitValue[];
 }
 export interface TraitsValue {
+  traitValueId: number;
   id?: number; // int64
   value?: string;
   icon?: string;

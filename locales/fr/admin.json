@@ -1,5 +1,6 @@
 {
   "links": {
+    "name-macthing": "Nom correspondant",
     "notification": "Envoyer une notification push"
   },
   "pages": {

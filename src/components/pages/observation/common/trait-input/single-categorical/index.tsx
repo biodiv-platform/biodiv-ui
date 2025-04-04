@@ -30,7 +30,7 @@ const SingleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getRadioProps({ value: o?.id?.toString() })}
+          {...getRadioProps({ value: o?.traitValueId?.toString() })}
         />
       ))}
     </SimpleGrid>
