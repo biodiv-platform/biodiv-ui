@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image, Select, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, SimpleGrid } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
@@ -6,7 +6,7 @@ import { SelectInputField } from "@components/form/select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CATEGORY_TYPE } from "@static/constants";
 import { getTraitIcon } from "@utils/media";
-import React, { useState } from "react";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

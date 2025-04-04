@@ -12,7 +12,6 @@ import {
   Link,
   Progress,
   SimpleGrid,
-  Stack,
   Text,
   useDisclosure
 } from "@chakra-ui/react";
@@ -21,6 +20,7 @@ import LocalLink from "@components/@core/local-link";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
 import { axUpdateSpeciesTrait, axUploadTraitsFile } from "@services/traits.service";
 import { axGetUserList } from "@services/user.service";
+import { REQUIRED_COLUMNS } from "@static/constants";
 import { getTraitIcon } from "@utils/media";
 import notification from "@utils/notification";
 import dayjs from "dayjs";
@@ -30,7 +30,6 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import ColumnMapper from "../common/column-mapper";
-import { REQUIRED_COLUMNS } from "@static/constants";
 
 export default function TraitsBatchUpload({ traits, languages }) {
   function groupByLanguageId(list) {
@@ -114,7 +113,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
           console.error(t("traits:trait_matching.excel_file_error"), error);
         }
       } else {
-        alert(t("traits.trait_matching.no_file_error"));
+        alert(t("traits:trait_matching.no_file_error"));
       }
     },
     accept: {
@@ -232,9 +231,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
   };
 
   const columnMappingSubmit = async () => {
-    if (
-      REQUIRED_COLUMNS.some((col) => !columnMapping.some(([, i]) => i === col))
-    ) {
+    if (REQUIRED_COLUMNS.some((col) => !columnMapping.some(([, i]) => i === col))) {
       notification("Please map ScientificName, TaxonConceptId, SpeciesId and Contributor");
     } else {
       const formData = new FormData();
@@ -344,17 +341,17 @@ export default function TraitsBatchUpload({ traits, languages }) {
               <Heading size="md" mb={2} color={"blue.600"}>
                 {successfulUpload + failedUpload === uploadResult.length
                   ? failedUpload > 0
-                    ? t("traits.trait_matching.traits_saved")
-                    : t("traits.trait_matching.traits_successfull")
-                  : t("traits.trait_matching.processing")}
+                    ? t("traits:trait_matching.traits_saved")
+                    : t("traits:trait_matching.traits_successfull")
+                  : t("traits:trait_matching.processing")}
               </Heading>
 
               <Text fontSize="sm" color="gray.600">
                 {successfulUpload + failedUpload === uploadResult.length
                   ? failedUpload > 0
-                    ? t("traits.trait_matching.failed_upload")
-                    : t("traits.trait_matching.successfull_upload_message")
-                  : t("traits.trait_matching.processing_message")}
+                    ? t("traits:trait_matching.failed_upload")
+                    : t("traits:trait_matching.successfull_upload_message")
+                  : t("traits:trait_matching.processing_message")}
               </Text>
 
               <Box mt={4}>
@@ -371,7 +368,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
               {failedUpload > 0 && failedTraitNames.length > 0 && (
                 <Box mt={3} p={2} bg="red.50" borderRadius="md">
                   <Text fontSize="sm" fontWeight="semibold" color="red.600">
-                    {t("traits.trait_matching.failed_description")}
+                    {t("traits:trait_matching.failed_description")}
                   </Text>
                   <Box>
                     {failedTraitNames.map((name, index) => (
@@ -467,23 +464,31 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                                         (value) => value.split("|")[0] !== "NoMatch"
                                                       )
                                                       .map((value) => (
-                                                        <Stack borderWidth={2} borderRadius="md">
+                                                        <Flex
+                                                          key={value.id}
+                                                          alignItems="center"
+                                                          border="2px"
+                                                          borderColor="gray.200"
+                                                          borderRadius="md"
+                                                          lineHeight={1}
+                                                          p={2}
+                                                          h="3.25rem"
+                                                        >
                                                           {value.split("|")[2] && (
                                                             <Image
+                                                              objectFit="contain"
+                                                              boxSize="32px"
+                                                              mr={2}
                                                               src={getTraitIcon(
                                                                 value.split("|")[2],
                                                                 20
                                                               )}
-                                                              boxSize="1.25rem"
-                                                              objectFit="contain"
-                                                              display="inline"
-                                                              verticalAlign="center"
-                                                              mr={1}
+                                                              alt={value.split("|")[1]}
                                                               ignoreFallback={true}
                                                             />
                                                           )}
-                                                          <Text>{value.split("|")[1]}</Text>
-                                                        </Stack>
+                                                          <div>{value.split("|")[1]}</div>
+                                                        </Flex>
                                                       ))}
                                                   </SimpleGrid>
                                                   {values

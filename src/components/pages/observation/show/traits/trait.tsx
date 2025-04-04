@@ -90,7 +90,7 @@ export default function Trait({
     const { success } = await axUpdateTraitById(
       observationId,
       speciesTrait.traits?.traitId,
-      cleanSingleFact(traitInputValue)
+      cleanSingleFact(speciesTrait.traits?.dataType,traitInputValue)
     );
     if (success) {
       setFinalTraitValue(traitInputValue);
