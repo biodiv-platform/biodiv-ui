@@ -4,8 +4,10 @@ import { Role } from "@interfaces/custom";
 import { axGetTaxonRanks } from "@services/taxonomy.service";
 import React from "react";
 
-export default function SpeciesCreatePage({ taxonRanksMeta }) {
-  return <SpeciesCreatePageComponent taxonRanksMeta={taxonRanksMeta} isSpeciesPage={true} />;
+export default function SpeciesCreatePage({ taxonRanksMeta, name }) {
+  return (
+    <SpeciesCreatePageComponent taxonRanksMeta={taxonRanksMeta} isSpeciesPage={true} name={name} />
+  );
 }
 
 SpeciesCreatePage.getInitialProps = async (ctx) => {
@@ -13,5 +15,5 @@ SpeciesCreatePage.getInitialProps = async (ctx) => {
 
   const { data } = await axGetTaxonRanks();
 
-  return { taxonRanksMeta: data };
+  return { taxonRanksMeta: data, name: ctx.query.name };
 };

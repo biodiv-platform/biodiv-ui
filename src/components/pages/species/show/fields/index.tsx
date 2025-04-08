@@ -7,7 +7,6 @@ import { SpeciesFieldsProvider } from "./use-species-field";
 
 export default function SpeciesFields() {
   const { species, permissions } = useSpecies();
-
   return (
     <div>
       {permissions.isContributor && <SpeciesFieldSimpleEdit />}

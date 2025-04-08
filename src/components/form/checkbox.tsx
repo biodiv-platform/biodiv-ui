@@ -11,6 +11,7 @@ interface ITextBoxProps {
   disabled?: boolean;
   hint?: string;
   hidden?;
+  onChangeCallback?;
 }
 
 export const CheckboxField = ({
@@ -19,6 +20,7 @@ export const CheckboxField = ({
   mb = 4,
   hint,
   disabled,
+  onChangeCallback,
   children,
   ...props
 }: ITextBoxProps) => {
@@ -31,7 +33,10 @@ export const CheckboxField = ({
     <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
       <Checkbox
         name={name}
-        onChange={(e) => onChange(e.target["checked"])}
+        onChange={(e) => {
+          onChange(e.target["checked"]);
+          onChangeCallback && onChangeCallback(e.target["checked"]);
+        }}
         placeholder={label}
         onBlur={onBlur}
         defaultChecked={value}

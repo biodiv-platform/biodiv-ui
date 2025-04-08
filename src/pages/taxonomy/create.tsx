@@ -5,7 +5,7 @@ import { axGetTaxonRanks } from "@services/taxonomy.service";
 import React from "react";
 
 export default function TaxonomyCreatePage({ taxonRanksMeta }) {
-  return <SpeciesCreatePageComponent taxonRanksMeta={taxonRanksMeta} isSpeciesPage={false} />;
+  return <SpeciesCreatePageComponent taxonRanksMeta={taxonRanksMeta} isSpeciesPage={false}/>;
 }
 
 TaxonomyCreatePage.getInitialProps = async (ctx) => {

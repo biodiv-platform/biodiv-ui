@@ -17,7 +17,9 @@ export function TraitDateShow({ values, format }) {
           h="3.25rem"
         >
           <div>
-            {formatDate(fromDate, format)} - {formatDate(fromDate, format)}
+            {toDate
+              ? formatDate(fromDate, format) + " - " + formatDate(toDate, format)
+              : formatDate(fromDate, format)}
           </div>
         </Flex>
       ))}

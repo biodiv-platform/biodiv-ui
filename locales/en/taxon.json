@@ -75,6 +75,31 @@
     "synonyms": "Synonyms",
     "title": "Taxonomy Information"
   },
+  "name_matching": {
+    "all_filter": "All",
+    "cancel": "Cancel",
+    "columnMapping_description": "Please select Scientific Name column",
+    "delete": "Delete",
+    "delete_description": "Are you sure you want to delete this scientific name?",
+    "delete_title": "Delete Scientific Name",
+    "description": "This functionality allows you to match a list of provided names to the portal's taxonomy. To validate scientific names, upload a spreadsheet (.xlsx) containing one column with valid scientific names. The system will display matches to the provided names. Select a match and download the resulting sheet, which will include a TaxonConceptId column.",
+    "download_button": "Download As",
+    "download_csv": "Comma Seperated Values (.csv)",
+    "download_excel": "Microsoft Excel (.xlsx)",
+    "matched_filter": "Matched",
+    "multiple_matches": "Matches Found",
+    "name_matches": "Name Matches",
+    "no_match": "No Match Found",
+    "no_species_page": "Species Page does not exist for this name match",
+    "one_match": "1 Match Found",
+    "species_create_description": "Click on species name for creating species",
+    "species_name": "Species Name",
+    "species_page_exist": "Species Page exists for this name match",
+    "unmatched_filter": "Unmatched",
+    "upload_button": "Browse",
+    "upload_description": "Drag and Drop excel files",
+    "warning_text": "Warning: Couldn't find any matches for the following species name!"
+  },
   "position": {
     "title": "Position"
   },
