@@ -1,8 +1,10 @@
-import { Box, Flex, Select, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { sortByOptions } from "@static/user";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import useUserList from "../../../common/use-user-filter";
 
@@ -26,20 +28,22 @@ export default function ListHeader() {
         alignItems="center"
         justify="space-between"
       >
-        <Stack isInline={true} spacing={4} mb={4}>
+        <Stack direction={"row"} gap={4} mb={4}>
           <Box>
-            <Select
-              maxW="10rem"
-              aria-label={t("common:list.sort_by")}
-              value={filter?.sort}
-              onChange={handleOnSort}
-            >
-              {sortByOptions.map(({ name, key }) => (
-                <option key={key} value={key}>
-                  {t(name)}
-                </option>
-              ))}
-            </Select>
+            <NativeSelectRoot>
+              <NativeSelectField
+                maxW="10rem"
+                aria-label={t("common:list.sort_by")}
+                value={filter?.sort}
+                onChange={handleOnSort}
+              >
+                {sortByOptions.map(({ name, key }) => (
+                  <option key={key} value={key}>
+                    {t(name)}
+                  </option>
+                ))}
+              </NativeSelectField>
+            </NativeSelectRoot>
           </Box>
         </Stack>
         <Text color="gray.600" mb={4}>

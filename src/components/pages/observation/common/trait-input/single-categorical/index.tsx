@@ -1,5 +1,7 @@
-import { SimpleGrid, useRadioGroup } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+
+import { useRadioGroup } from "@/hooks/use-radio-group";
 
 import { ITraitInputProps } from "..";
 import TraitContent from "./content";
@@ -24,7 +26,7 @@ const SingleCategorialTrait = ({
   });
 
   return (
-    <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4} {...getRootProps()}>
+    <SimpleGrid columns={[1, 1, 2, gridColumns]} gap={4} {...getRootProps()}>
       {values?.map((o) => (
         <TraitContent
           key={o.id}

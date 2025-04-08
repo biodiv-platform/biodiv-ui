@@ -1,14 +1,9 @@
-import {
-  Box,
-  Divider,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  useRadioGroup
-} from "@chakra-ui/react";
+import { Box, Separator } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
+import { useRadioGroup } from "@/hooks/use-radio-group";
 
 import CustomRadio from "./custom-radio";
 
@@ -57,17 +52,24 @@ const GroupSelector = ({
 
   return (
     <>
-      <FormControl isInvalid={!!fieldState.error} isRequired={isRequired} mb={mb} {...props}>
-        <FormLabel htmlFor={name}>{label}</FormLabel>
+      <Field
+        invalid={!!fieldState.error}
+        errorText={fieldState?.error?.message}
+        required={isRequired}
+        mb={mb}
+        htmlFor={name}
+        label={label}
+        {...props}
+      >
+        <Field></Field>
         <Box {...getRootProps()}>
           {options.map((o) => (
             <CustomRadio key={o.id} icon={o.name} {...getRadioProps({ value: o.id.toString() })} />
           ))}
         </Box>
-        <FormErrorMessage children={fieldState?.error?.message} />
-        {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-      </FormControl>
-      {!hideDevider && <Divider mb={4} />}
+        {hint && <Field color="gray.600" helperText={hint} />}
+      </Field>
+      {!hideDevider && <Separator mb={4} />}
     </>
   );
 };

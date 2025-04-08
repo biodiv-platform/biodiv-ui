@@ -1,8 +1,10 @@
-import { Box, HStack, Image, useRadioGroup } from "@chakra-ui/react";
+import { Box, HStack, Image } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import React from "react";
+
+import { useRadioGroup } from "@/hooks/use-radio-group";
 
 interface ITraitInputProps {
   onChange?;

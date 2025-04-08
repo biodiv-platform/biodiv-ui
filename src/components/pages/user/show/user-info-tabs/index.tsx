@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Tabs } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -14,25 +14,23 @@ export default function UserInfoTabs({ user }) {
 
   return (
     <Box gridColumn={{ md: "2/5" }} mb={8}>
-      <Tabs isLazy={true} variant="soft-rounded">
-        <TabList>
-          <Tab>👤 {t("user:about")}</Tab>
-          <Tab>🐾 {t("user:observations.title")}</Tab>
-          <Tab>👥 {t("common:usergroups")}</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel px={0}>
-            <UserLocationMap coordinates={[user.longitude, user.latitude]} />
-            <UserAbout user={user} />
-          </TabPanel>
-          <TabPanel pb={0}>
-            <ObservationTab userId={user.id} />
-          </TabPanel>
-          <TabPanel>
-            <UserGroupListTab />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <Tabs.Root defaultValue="about" lazyMount>
+        <Tabs.List>
+          <Tabs.Trigger value="about">👤 {t("user:about")}</Tabs.Trigger>
+          <Tabs.Trigger value="observation">🐾 {t("user:observations.title")}</Tabs.Trigger>
+          <Tabs.Trigger value="usergroups">👥 {t("common:usergroups")}</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="about" px={0}>
+          <UserLocationMap coordinates={[user.longitude, user.latitude]} />
+          <UserAbout user={user} />
+        </Tabs.Content>
+        <Tabs.Content value="observation" px={0}>
+          <ObservationTab userId={user.id} />
+        </Tabs.Content>
+        <Tabs.Content value="usergroups" px={0}>
+          <UserGroupListTab />
+        </Tabs.Content>
+      </Tabs.Root>
     </Box>
   );
 }

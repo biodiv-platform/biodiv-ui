@@ -21,7 +21,7 @@ export default function ObservationTab({ userId }) {
         setFilter={ud.setFilter}
       />
       <TemporalCreatedOn userId={userId} />
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mb={4}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} gap={4} mb={4}>
         <UserObservationsMap userId={userId} groupId={ud.filter.sGroupId} />
         <SpeciesGroupChart data={ud.speciesData} />
       </SimpleGrid>

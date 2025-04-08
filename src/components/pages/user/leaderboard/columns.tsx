@@ -1,10 +1,12 @@
-import { Avatar, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import { getUserImage } from "@utils/media";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 const ObservationCell = (props) => {
   const values: any = Object.values(props?.cell?.value || {});
@@ -98,7 +100,7 @@ export const LEADERBOARD_TABLE_COLUMNS = [
       const { t } = useTranslation();
 
       return (
-        <Stack isInline={true} spacing={2} minW="12rem">
+        <Stack direction={"row"} gap={2} minW="12rem">
           <Avatar
             size="md"
             name={props?.cell?.value?.authorName}

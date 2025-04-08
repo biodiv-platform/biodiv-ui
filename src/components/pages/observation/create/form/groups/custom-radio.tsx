@@ -1,4 +1,4 @@
-import { Box, Image, useRadio } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
 import React from "react";
@@ -13,7 +13,7 @@ const CustomRadio = (props) => {
   return (
     <Box as="label" display="inline-block" mr={2}>
       <input {...getInputProps()} onChange={() => null} onClick={handleOnChange} />
-      <Tooltip title={props.icon} placement="top" hasArrow={true}>
+      <Tooltip title={props.icon} positioning={{placement:"top"}} showArrow={true}>
         <Box
           {...getCheckboxProps()}
           p={1}

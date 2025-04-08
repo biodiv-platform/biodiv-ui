@@ -1,8 +1,10 @@
-import { Select, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { LEADERBOARD_MODULES, LEADERBOARD_STOPS } from "@static/leaderboard";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import {
   LEADERBOARD_MODULES_COLUMNS,
@@ -29,39 +31,47 @@ function UserLeaderboardComponent() {
     <div className="container mt">
       <PageHeading
         actions={
-          <Stack isInline={true} alignItems="center" spacing={4}>
-            <Select
-              minW="8rem"
-              onChange={(event) => onChange("module", event.target.value)}
-              defaultValue={filter?.module}
-            >
-              {LEADERBOARD_MODULES.map((option) => (
-                <option key={option.label} value={option.value}>
-                  {t(option.label)}
-                </option>
-              ))}
-            </Select>
-            <Select
-              minW="10rem"
-              onChange={(event) => onChange("period", event.target.value)}
-              defaultValue={filter?.period}
-            >
-              {LEADERBOARD_STOPS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {t(option.label)}
-                </option>
-              ))}
-            </Select>
-            <Select
-              onChange={(event) => onChange("limit", event.target.value)}
-              value={filter?.limit}
-            >
-              {STOPS.map((stop) => (
-                <option key={stop} value={stop}>
-                  {stop}
-                </option>
-              ))}
-            </Select>
+          <Stack direction="row" alignItems="center" gap={4}>
+            <NativeSelectRoot>
+              <NativeSelectField
+                minW="8rem"
+                onChange={(event) => onChange("module", event.target.value)}
+                defaultValue={filter?.module}
+              >
+                {LEADERBOARD_MODULES.map((option) => (
+                  <option key={option.label} value={option.value}>
+                    {t(option.label)}
+                  </option>
+                ))}
+              </NativeSelectField>
+            </NativeSelectRoot>
+
+            <NativeSelectRoot>
+              <NativeSelectField
+                minW="10rem"
+                onChange={(event) => onChange("period", event.target.value)}
+                defaultValue={filter?.period}
+              >
+                {LEADERBOARD_STOPS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {t(option.label)}
+                  </option>
+                ))}
+              </NativeSelectField>
+            </NativeSelectRoot>
+
+            <NativeSelectRoot>
+              <NativeSelectField
+                onChange={(event) => onChange("limit", event.target.value)}
+                value={filter?.limit}
+              >
+                {STOPS.map((stop) => (
+                  <option key={stop} value={stop}>
+                    {stop}
+                  </option>
+                ))}
+              </NativeSelectField>
+            </NativeSelectRoot>
           </Stack>
         }
       >

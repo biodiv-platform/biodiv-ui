@@ -1,22 +1,22 @@
-import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Button,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import { axDeleteUser } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+
 export default function DeleteAccount({ userId }) {
   const { t } = useTranslation();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef(null);
   const router = useLocalRouter();
 
@@ -35,26 +35,26 @@ export default function DeleteAccount({ userId }) {
         {t("common:delete")}
       </Button>
 
-      <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+      <DialogRoot open={open} onOpenChange={onClose}>
+        <DialogBackdrop>
+          <DialogContent>
+            <DialogHeader fontSize="lg" fontWeight="bold">
               {t("user:delete.title")}
-            </AlertDialogHeader>
+            </DialogHeader>
 
-            <AlertDialogBody>{t("user:delete.message")}</AlertDialogBody>
+            <DialogBody>{t("user:delete.message")}</DialogBody>
 
-            <AlertDialogFooter>
+            <DialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
                 {t("common:cancel")}
               </Button>
               <Button colorPalette="red" onClick={handleOnDelete} ml={3}>
                 {t("common:delete")}
               </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+            </DialogFooter>
+          </DialogContent>
+        </DialogBackdrop>
+      </DialogRoot>
     </>
   );
 }

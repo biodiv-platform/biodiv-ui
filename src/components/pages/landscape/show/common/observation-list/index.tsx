@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Skeleton, Stack, Switch, Text, useRadioGroup } from "@chakra-ui/react";
+import { Box, Flex, Heading, Skeleton, Stack, Text } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
 import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-type/filter-keys";
@@ -6,6 +6,9 @@ import LifeListTable from "@components/pages/observation/list/views/stats/table"
 import useUniqueSpecies from "@components/pages/observation/list/views/stats/use-unique-species";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
+
+import { Switch } from "@/components/ui/switch";
+import { useRadioGroup } from "@/hooks/use-radio-group";
 
 export const observationListParams = {
   geoShapeFilterField: "location"
@@ -65,7 +68,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
       {groupSpeciesName && uniqueSpecies?.speciesData?.data?.list?.length > 0 ? (
         <Box p={4} className="white-box">
           <Flex justifyContent="space-between">
-            <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
+            <Skeleton mt={4} loading={speciesGroupList && speciesGroupList.length > 0} mb={2}>
               <Box {...getRootProps()} minH="3.75rem">
                 {speciesGroupList?.map((o) => (
                   <CustomRadio

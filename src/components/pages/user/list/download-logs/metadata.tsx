@@ -6,6 +6,7 @@ import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import { stripSpecialCharacters, stripTags } from "@utils/text";
+import Link from "next/link";
 import React from "react";
 
 const doFilter = (data) => {
@@ -41,7 +42,7 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
                 borderRadius={50}
                 title={value.name}
                 boxSize="2rem"
-                fallbackSrc={`/api/avatar?t=${value.name}&s=${100}`}
+                alt={`/api/avatar?t=${value.name}&s=${100}`}
                 src={getUserImage(value.profilePic, value.name, 100)}
               />
             </a>
@@ -68,16 +69,18 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
               variant="outline"
               size="sm"
               as="a"
-              href={
-                values.filePath.startsWith("/naksha")
-                  ? values.filePath
-                  : `${ENDPOINT.RAW}${values.filePath}`
-              }
-              download={true}
               disabled={!adminOrAuthor(values.user.id) || values.type == "PNG"}
-              leftIcon={<DownloadIcon />}
               colorPalette="blue"
             >
+              <DownloadIcon />
+              <Link
+                href={
+                  values.filePath.startsWith("/naksha")
+                    ? values.filePath
+                    : `${ENDPOINT.RAW}${values.filePath}`
+                }
+              />
+
               {downloadLabel}
             </Button>
           )
