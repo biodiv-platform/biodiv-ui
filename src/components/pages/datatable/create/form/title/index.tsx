@@ -17,7 +17,7 @@ export default function PartyContributorsForm({ languages }) {
         <TextBoxField name="title" label={t("form:title")} isRequired={true} />
         <TextAreaField name="summary" maxLength={255} label={t("form:notes")} isRequired={true} />
         <RichTextareaField name="description" label={t("form:description.title")} />
-        <SimpleGrid columns={{ md: 3 }} spacing={{ md: 4 }}>
+        <SimpleGrid columns={{ md: 3 }} gap={{ md: 4 }}>
           <SelectInputField
             name="languageId"
             label={t("form:language")}

@@ -1,16 +1,10 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Select,
-  SimpleGrid,
-  Spinner,
-  Text,
-  useCheckboxGroup
-} from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import { MY_UPLOADS_SORT } from "../../options";
 import useObservationCreate from "../use-observation-resources";
@@ -39,21 +33,23 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
       >
         <Text mb={2}>💡 {t("form:description.my_uploads")}</Text>
         <Flex>
-          <Select mr={4} value={resourcesSortBy} onChange={handleOnSort} maxW="10rem">
-            {MY_UPLOADS_SORT.map((o) => (
-              <option key={o.value} value={o.value}>
-                {t(`form:my_uploads_sort.${o.label}`)}
-              </option>
-            ))}
-          </Select>
+          <NativeSelectRoot
+            mr={4}
+            defaultValue={resourcesSortBy}
+            onChange={handleOnSort}
+            maxW="10rem"
+          >
+            <NativeSelectField>
+              {MY_UPLOADS_SORT.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {t(`form:my_uploads_sort.${o.label}`)}
+                </option>
+              ))}
+            </NativeSelectField>
+          </NativeSelectRoot>
           {hasTabs && (
-            <Button
-              flexShrink={0}
-              type="button"
-              leftIcon={<CheckIcon />}
-              onClick={onDone}
-              colorPalette="blue"
-            >
+            <Button flexShrink={0} type="button" onClick={onDone} colorPalette="blue">
+              <CheckIcon />
               {t("form:use_in_observation")}
             </Button>
           )}

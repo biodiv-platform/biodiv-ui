@@ -1,4 +1,3 @@
-import { TimeIcon } from "@chakra-ui/icons";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { axUploadObservationResource } from "@services/files.service";
@@ -7,6 +6,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { LuTimer } from "react-icons/lu";
 
 const DropTargetBox = styled.div`
   border: 2px dashed var(--chakra-colors-gray-300);
@@ -88,7 +88,7 @@ export default function DropTarget({
       <input {...getInputProps()} />
       {isProcessing ? (
         <div className="fade">
-          <TimeIcon />
+          <LuTimer />
           <span>{t("form:uploader.processing")}</span>
         </div>
       ) : simpleUpload ? (

@@ -1,4 +1,3 @@
-import { CheckIcon } from "@chakra-ui/icons";
 import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
 import CrossIcon from "@icons/cross";
@@ -12,6 +11,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit } from "react-gbus";
+import { LuCheck } from "react-icons/lu";
 import Select, { components } from "react-select";
 
 interface ISpeciesGroupsProps {
@@ -23,7 +23,7 @@ interface ISpeciesGroupsProps {
 
 const CustomOption = ({ children, ...props }: any) => (
   <components.Option {...props}>
-    <Stack isInline={true} alignItems="center">
+    <Stack direction={"row"} alignItems="center">
       <Image boxSize="2rem" src={getLocalIcon(props.data.label)} />
       <Box>{children}</Box>
     </Stack>
@@ -39,7 +39,7 @@ export default function SpeciesGroupBox({
   const options = speciesGroups?.map((g) => ({ label: g.name, value: g.id }));
   const [finalType, setFinalType] = useState(options?.find((o) => o.value === id));
   const [type, setType] = useState(finalType);
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
 
   const handleOnSave = async () => {
@@ -54,8 +54,9 @@ export default function SpeciesGroupBox({
 
   return (
     <>
-      {isOpen ? (
-        <Stack isInline={false} w="full">
+      {open ? (
+        // isInline={false}
+        <Stack direction={"row-reverse"} w="full">
           <Box w="full">
             <Select
               name="group"
@@ -77,31 +78,28 @@ export default function SpeciesGroupBox({
               aria-label="Save"
               type="submit"
               onClick={handleOnSave}
-              icon={<CheckIcon />}
-            />
-            <IconButton
-              size="xs"
-              ml={2}
-              colorPalette="gray"
-              aria-label="Cancel"
-              onClick={onClose}
-              icon={<CrossIcon />}
-            />
+            >
+              <LuCheck />
+            </IconButton>
+            <IconButton size="xs" ml={2} colorPalette="gray" aria-label="Cancel" onClick={onClose}>
+              <CrossIcon />
+            </IconButton>
           </Box>
         </Stack>
       ) : (
-        <Stack isInline={true} alignItems="top">
+        <Stack direction={"row"} alignItems="top">
           <Image title={finalType?.label} boxSize="2.5rem" src={getLocalIcon(finalType?.label)} />
           {canEdit && (
             <IconButton
               size="lg"
               aria-label="edit"
-              icon={<EditIcon />}
               variant="ghost"
               colorPalette="blue"
               minW="auto"
               onClick={onToggle}
-            />
+            >
+              <EditIcon />
+            </IconButton>
           )}
         </Stack>
       )}

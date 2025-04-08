@@ -85,7 +85,7 @@ export function BasicTable({
   }, [state.selectedRowIds]);
 
   return data?.length ? (
-    <Table.Root variant="line" style={tableStyle} size={size} {...getTableProps()}>
+    <Table.Root striped style={tableStyle} size={size} {...getTableProps()}>
       <Table.Header>
         {headerGroups.map((headerGroup) => (
           <Table.Row {...headerGroup.getHeaderGroupProps()}>

@@ -1,4 +1,4 @@
-import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import useGlobalState from "@hooks/use-global-state";
@@ -12,6 +12,8 @@ import { getUserImage } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 import useDataTableList from "../../common/use-datatable-filter";
 
@@ -30,7 +32,7 @@ interface MetaBlockProps {
 
 const MetaBlock = ({ icon, children, isHtml, tooltip }: MetaBlockProps) =>
   children ? (
-    <HStack alignItems="center" spacing={2} title={tooltip}>
+    <HStack alignItems="center" gap={2} title={tooltip}>
       {icon}
       {isHtml ? (
         <div
@@ -61,7 +63,7 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
         <Flex justifyContent="space-between" mb={2}>
           <LocalLink href={`/datatable/show/${datatable.id}`} prefixGroup={true}>
             <a>
-              <HStack alignItems="center" spacing={4}>
+              <HStack alignItems="center" gap={4}>
                 <Heading
                   fontSize="lg"
                   className="elipsis-2"
@@ -78,13 +80,13 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
         {/* Meta Data */}
         <Stack color="gray.600">
           <MetaBlock
-            icon={<MapIcon />}
+            icon={<MapIcon size={"sm"} />}
             tooltip={t("datatable:location")}
             children={datatable?.geographicalCoveragePlaceName}
           />
 
           <MetaBlock
-            icon={<CalendarIcon />}
+            icon={<CalendarIcon size={"sm"} />}
             tooltip={t("common:observed_on")}
             children={
               datatable?.temporalCoverageDateAccuracy === DATE_ACCURACY.UNKNOWN ? (
@@ -96,7 +98,7 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
           />
 
           <MetaBlock
-            icon={<MessageIcon />}
+            icon={<MessageIcon size={"sm"} />}
             tooltip={t("form:description.title")}
             isHtml={true}
             children={datatable?.summary}
@@ -104,7 +106,7 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
           <Flex alignItems="flex-end" justifyContent="space-between">
             <Stack>
               <MetaBlock
-                icon={<PawIcon />}
+                icon={<PawIcon size={"sm"} />}
                 tooltip={t("form:coverage.title")}
                 children={
                   datatable?.taxonomicCoverageGroupIds ? (
