@@ -17,7 +17,7 @@ export default function ColorTrait({ trait, traitValues, setTraitValues, setShow
       <TraitHeader trait={trait} onOpen={onOpen} />
       {isOpen ? (
         <TraitColorEdit
-          traitId={trait.id}
+          traitId={trait.traitId}
           initialValue={traitValues}
           onSave={setTraitValues}
           onClose={onClose}

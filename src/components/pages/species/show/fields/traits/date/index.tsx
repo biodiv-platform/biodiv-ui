@@ -22,7 +22,7 @@ export default function DateTrait({ trait, traitValues, setTraitValues, setShowC
       <TraitHeader trait={trait} onOpen={onOpen} />
       {isOpen ? (
         <TraitDateEdit
-          traitId={trait.id}
+          traitId={trait.traitId}
           initialValue={traitValues}
           onSave={setTraitValues}
           onClose={onClose}
