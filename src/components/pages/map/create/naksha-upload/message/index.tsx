@@ -1,6 +1,8 @@
-import { Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
+import { AlertTitle } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
+
+import { Alert } from "@/components/ui/alert";
 
 import useLayerUpload from "../use-layer-upload";
 
@@ -28,7 +30,6 @@ export default function FormUploadMessage() {
       h="100%"
       borderRadius="md"
     >
-      <AlertIcon boxSize="40px" mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
         {data.message}
       </AlertTitle>

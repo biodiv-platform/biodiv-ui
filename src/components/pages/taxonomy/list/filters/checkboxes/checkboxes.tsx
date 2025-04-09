@@ -1,7 +1,9 @@
-import { Box, Checkbox, CheckboxGroup, Image, Stack } from "@chakra-ui/react";
+import { Box, CheckboxGroup, Image, Stack } from "@chakra-ui/react";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Checkbox } from "@/components/ui/checkbox";
 
 import useTaxonFilter from "../../use-taxon";
 
@@ -48,7 +50,6 @@ export function FilterCheckboxes({
                   display="inline"
                   verticalAlign="center"
                   mr={1}
-                  ignoreFallback={true}
                 />
               )}
               {skipOptionsTranslation ? label || value : t(translateKey + label)}

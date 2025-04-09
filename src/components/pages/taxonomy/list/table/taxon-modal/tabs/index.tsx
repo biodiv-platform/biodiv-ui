@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Tabs } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -11,27 +11,25 @@ export function TaxonModalTabs() {
   const { t } = useTranslation();
 
   return (
-    <Tabs variant="soft-rounded" className="nospace" isLazy={true}>
-      <TabList>
-        <Tab>{t("taxon:modal.attributes.title")}</Tab>
-        <Tab>{t("taxon:modal.synonyms")}</Tab>
-        <Tab>{t("taxon:modal.common_names")}</Tab>
-        <Tab>{t("taxon:modal.activity")}</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <TaxonAttributesTab />
-        </TabPanel>
-        <TabPanel>
-          <TaxonSynonymsTab />
-        </TabPanel>
-        <TabPanel>
-          <TaxonCommonNamesTab />
-        </TabPanel>
-        <TabPanel>
-          <TaxonActivityTab />
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+    <Tabs.Root className="nospace" lazyMount>
+      <Tabs.List>
+        <Tabs.Trigger value="attributes">{t("taxon:modal.attributes.title")}</Tabs.Trigger>
+        <Tabs.Trigger value="synonyms">{t("taxon:modal.synonyms")}</Tabs.Trigger>
+        <Tabs.Trigger value="commonNames">{t("taxon:modal.common_names")}</Tabs.Trigger>
+        <Tabs.Trigger value="activity">{t("taxon:modal.activity")}</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="attributes">
+        <TaxonAttributesTab />
+      </Tabs.Content>
+      <Tabs.Content value="synonyms">
+        <TaxonSynonymsTab />
+      </Tabs.Content>
+      <Tabs.Content value="commonNames">
+        <TaxonCommonNamesTab />
+      </Tabs.Content>
+      <Tabs.Content value="activity">
+        <TaxonActivityTab />
+      </Tabs.Content>
+    </Tabs.Root>
   );
 }

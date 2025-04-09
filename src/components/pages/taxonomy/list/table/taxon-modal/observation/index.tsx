@@ -12,7 +12,7 @@ export function ObservationsLink({ showTaxon }) {
 
   return (
     <div>
-      <Skeleton isLoaded={!countsData.isLoading} borderRadius="md">
+      <Skeleton loading={!countsData.isLoading} borderRadius="md">
         <Box p={2} className="white-box" lineHeight={1} minWidth={200}>
           <Text fontSize="3xl" mb={2}>
             {countsData.value || 0}

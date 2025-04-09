@@ -14,16 +14,16 @@ export function ClearFilters() {
   const message = t("filters:clear", { filterCount });
 
   return filterCount > 0 ? (
-    <Tooltip title={message} hasArrow={true}>
+    <Tooltip title={message} showArrow={true}>
       <Button
         onClick={resetFilter}
-        variant="link"
+        variant="plain"
         className="fade"
         size="lg"
         colorPalette="red"
         aria-label={message}
-        leftIcon={<DeleteIcon />}
       >
+        <DeleteIcon />
         {filterCount}
       </Button>
     </Tooltip>

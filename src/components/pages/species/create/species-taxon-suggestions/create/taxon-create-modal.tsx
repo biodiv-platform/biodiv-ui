@@ -1,18 +1,19 @@
-import { Button } from "@chakra-ui/button";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/modal";
+import { Button } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { LuMoveRight } from "react-icons/lu";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import { SpeciesCreateCommonTableRows } from "../common-table-rows";
 
@@ -37,33 +38,33 @@ export default function TaxonCreateModal({ isOpen, onClose, validateResults }) {
       accessor: "taxonomyDefinition.nameSourceId",
       Cell: ({ cell }) => (
         <Button
-          variant="link"
+          variant="plain"
           colorPalette="blue"
-          rightIcon={<ArrowForwardIcon />}
           onClick={() => applySuggestion(cell.row.original)}
         >
           {t("species:create.form.select")}
+          <LuMoveRight />
         </Button>
       )
     }
   ];
 
   return (
-    <Modal isOpen={isOpen} size="6xl" onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Results</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
+    <DialogRoot open={isOpen} size="cover" onOpenChange={onClose}>
+      <DialogBackdrop />
+      <DialogContent>
+        <DialogHeader>Results</DialogHeader>
+        <DialogCloseTrigger />
+        <DialogBody>
           <ResponsiveContainer>
             <BasicTable data={validateResults || []} columns={TaxonValidateTable} />
           </ResponsiveContainer>
-        </ModalBody>
+        </DialogBody>
 
-        <ModalFooter>
+        <DialogFooter>
           <Button onClick={onClose}>{t("common:close")}</Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </DialogFooter>
+      </DialogContent>
+    </DialogRoot>
   );
 }

@@ -21,8 +21,7 @@ export default function GridViewCard({ o }: { o: Landscape }) {
               w="full"
               h="full"
               src={`${ENDPOINT.GEOENTITIES}/v1/services/image/${o.geoEntityId}`}
-              fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
-              alt={o?.shortName?.toString()}
+              alt={OBSERVATION_FALLBACK.PHOTO || o?.shortName?.toString()}
             />
           </Link>
         </LocalLink>
