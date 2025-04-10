@@ -30,6 +30,9 @@ export default function SpeciesFieldGroup({
   const { permissions } = useSpecies();
 
   const [currentField, setCurrentField] = useImmer<any>(parentField);
+  useEffect(() => {
+    setCurrentField(parentField);
+  }, [parentField]);
 
   // subscription for created or updated field
   useListener(
@@ -105,7 +108,7 @@ export default function SpeciesFieldGroup({
               )}
 
               {/* Field Traits */}
-              {parentField.traits.map((trait) => (
+              {currentField.traits.map((trait) => (
                 <SpeciesTraitView
                   key={trait.id}
                   trait={trait}

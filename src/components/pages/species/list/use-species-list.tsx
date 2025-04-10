@@ -67,7 +67,11 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const [speciesData, setSpeciesData] = useImmer<any>(props.speciesData);
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
   const [species] = useImmer<{ f: any }>(props.species);
-  const [traits] = useImmer<{ f: any }>(props.traits);
+  const [traits, setTraits] = useImmer<any>(props.traits);
+
+  useEffect(() => {
+    setTraits(() => props.traits);
+  }, [props.traits]);
   const [fieldsMeta] = useImmer<any>(getSpeciesFieldHeaders(props.fieldsMeta));
 
   const [hasUgAccess, setHasUgAdminAccess] = useState<boolean>(false);

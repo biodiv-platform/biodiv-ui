@@ -50,7 +50,7 @@ export const getServerSideProps = async (ctx) => {
   );
   const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.id);
   const { success: s5, customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
-  const { success : s6 , data:traits} = await axGetTraitsByGroupId(829)
+  const { success: s6, data: traits } = await axGetTraitsByGroupId(829, langId);
   if (s1 && s2 && s3 && s4 && s5 && s6) {
     return {
       props: {

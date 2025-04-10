@@ -2,6 +2,7 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { DateRangePickerField } from "@components/form/daterangepicker";
 import { SelectInputField } from "@components/form/select";
+import { TraitsValue } from "@interfaces/traits";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
@@ -10,7 +11,7 @@ import TaxonInputField from "./taxon-filter-field";
 
 export default function RulesInputType({ inputType, name, traits }) {
   const { t } = useTranslation();
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useState<TraitsValue[]>([]);
   switch (inputType) {
     case "hasUserRule":
       return <CheckboxField name={name} label={t("group:rules.input_types.user")} />;
@@ -35,25 +36,27 @@ export default function RulesInputType({ inputType, name, traits }) {
           <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4} mt={2}>
             <Box>
               <SelectInputField
-              name= {name+"[0].trait"}
-              label={"Trait Name"}
-              options={traits.filter(trait => trait.traits.dataType === "STRING").map((trait,index) => ({
-                label: trait.traits.name,
-                value: trait.traits.id+"|"+index
-              }))}
-              shouldPortal={true}
-              onChangeCallback={(v)=>setOptions(traits[parseInt(v.split("|")[1],10)].values)}
+                name={name + "[0].trait"}
+                label={"Trait Name"}
+                options={traits
+                  .filter((trait) => trait.traits.dataType === "STRING")
+                  .map((trait, index) => ({
+                    label: trait.traits.name,
+                    value: trait.traits.traitId + "|" + index
+                  }))}
+                shouldPortal={true}
+                onChangeCallback={(v) => setOptions(traits[parseInt(v.split("|")[1], 10)].values)}
               />
             </Box>
             <Box>
-            <SelectInputField
-              name= {name+"[0].value"}
-              label={"Trait Value"}
-              options={options.map(option=>({
-                label: option.value,
-                value: option.id
-              }))}
-              shouldPortal={true}
+              <SelectInputField
+                name={name + "[0].value"}
+                label={"Trait Value"}
+                options={options.map((option) => ({
+                  label: option.value,
+                  value: option.traitValueId
+                }))}
+                shouldPortal={true}
               />
             </Box>
           </SimpleGrid>
