@@ -24,7 +24,7 @@ export default function StatsView() {
   return (
     <div>
       <Totals filter={filter} observationData={observationData} speciesGroup={speciesGroup} />
-      <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
+      <SimpleGrid columns={{ md: 2 }} gap={4} mb={4}>
         <TopUploaders filter={filter} />
         <TopIdentifiers filter={filter} />
         <GridItem colSpan={2}>

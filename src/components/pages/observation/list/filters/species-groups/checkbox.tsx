@@ -36,17 +36,17 @@ const CheckboxLabel = styled.label`
 `;
 
 const Checkbox = (props: any) => {
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getControlProps, getLabelProps } = useCheckbox(props);
   const { t } = useTranslation();
 
   return (
     <Tooltip
-      label={t(`filters:species_group.${props.label.toLowerCase()}`)}
-      hasArrow={true}
-      placement="top"
+      content={t(`filters:species_group.${props.label.toLowerCase()}`)}
+      showArrow={true}
+      positioning={{ placement: "top" }}
     >
       <Box
-        {...getCheckboxProps()}
+        {...getLabelProps()}
         as={CheckboxLabel}
         borderRadius="md"
         aria-checked={props.isChecked}
@@ -59,13 +59,12 @@ const Checkbox = (props: any) => {
         }}
         style={undefined}
       >
-        <input {...getInputProps()} required={false} />
+        <input {...getControlProps()} required={false} />
         <Image
           boxSize="2.2rem"
           objectFit="contain"
           src={getLocalIcon(props.label)}
           alt={props.label}
-          ignoreFallback={true}
         />
         <div className="badge">{toHumanString(props.stat || 0)}</div>
       </Box>

@@ -1,9 +1,8 @@
 import {
   Box,
   Button,
-  Collapse,
+  Collapsible,
   Flex,
-  FormControl,
   IconButton,
   Image,
   SimpleGrid,
@@ -20,6 +19,8 @@ import notification, { NotificationType } from "@utils/notification";
 import { cleanSingleFact } from "@utils/tags";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+
+import { Field } from "@/components/ui/field";
 
 import TraitInput from "../../common/trait-input";
 
@@ -41,7 +42,7 @@ export default function Trait({
   const [finalTraitValue, setFinalTraitValue] = useState(defaultValue);
   const [traitInputValue, setTraitInputValue] = useState(defaultValue);
   const [selectedTraits, setSelectedTraits] = useState<TraitsValue[]>([]);
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -74,21 +75,17 @@ export default function Trait({
   };
 
   return (
-    <FormControl mb={4} key={speciesTrait.traits?.id}>
+    <Field mb={4} key={speciesTrait.traits?.id}>
       <Flex mb={1} alignItems="center">
         {speciesTrait.traits?.name}
         {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
-          <IconButton
-            aria-label="Edit"
-            icon={<EditIcon />}
-            variant="link"
-            colorPalette="blue"
-            onClick={onToggle}
-          />
+          <IconButton aria-label="Edit" variant="plain" colorPalette="blue" onClick={onToggle}>
+            <EditIcon />
+          </IconButton>
         )}
       </Flex>
 
-      {isOpen ? (
+      {open ? (
         <TraitInput
           type={speciesTrait.traits?.traitTypes}
           values={speciesTrait.values}
@@ -97,7 +94,7 @@ export default function Trait({
           onUpdate={setTraitInputValue}
         />
       ) : (
-        <SimpleGrid columns={[1, 1, 2, 3]} spacing={4}>
+        <SimpleGrid columns={[1, 1, 2, 3]} gap={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Flex
@@ -127,22 +124,24 @@ export default function Trait({
           )}
         </SimpleGrid>
       )}
-      <Collapse in={isOpen} unmountOnExit={true}>
-        <Box mt={2}>
-          <Button
-            size="sm"
-            colorPalette="blue"
-            aria-label="Save"
-            type="submit"
-            onClick={handleTraitUpdate}
-          >
-            {t("common:save")}
-          </Button>
-          <Button size="sm" ml={2} colorPalette="gray" aria-label="Cancel" onClick={onClose}>
-            {t("common:cancel")}
-          </Button>
-        </Box>
-      </Collapse>
-    </FormControl>
+      <Collapsible.Root open={open} unmountOnExit={true}>
+        <Collapsible.Content>
+          <Box mt={2}>
+            <Button
+              size="sm"
+              colorPalette="blue"
+              aria-label="Save"
+              type="submit"
+              onClick={handleTraitUpdate}
+            >
+              {t("common:save")}
+            </Button>
+            <Button size="sm" ml={2} colorPalette="gray" aria-label="Cancel" onClick={onClose}>
+              {t("common:cancel")}
+            </Button>
+          </Box>
+        </Collapsible.Content>
+      </Collapsible.Root>
+    </Field>
   );
 }

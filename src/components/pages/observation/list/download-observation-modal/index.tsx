@@ -1,13 +1,4 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
@@ -24,6 +15,16 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import {
+  DrawerBackdrop,
+  DrawerBody,
+  DrawerCloseTrigger,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerRoot
+} from "@/components/ui/drawer";
 
 import CheckboxGroupField from "./checkbox-group-field";
 import { OBSERVATION_FILTERS } from "./filters";
@@ -112,14 +113,14 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+    <DrawerRoot open={isOpen} onOpenChange={onClose} size="lg">
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <ModalOverlay>
-            <ModalContent hidden={isHidden}>
-              <ModalHeader>☑️ {t("observation:download.modal.title")}</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
+          <DrawerBackdrop>
+            <DrawerContent hidden={isHidden}>
+              <DrawerHeader>☑️ {t("observation:download.modal.title")}</DrawerHeader>
+              <DrawerCloseTrigger />
+              <DrawerBody>
                 {OBSERVATION_FILTERS.map((f) => (
                   <CheckboxGroupField {...f} key={f.name} />
                 ))}
@@ -144,20 +145,20 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
                   label="Download as Resource Dataset"
                   name="view"
                 />
-              </ModalBody>
+              </DrawerBody>
 
-              <ModalFooter>
+              <DrawerFooter>
                 <SubmitButton leftIcon={<DownloadIcon />}>
                   {t("observation:download.title")}
                 </SubmitButton>
                 <Button ml={3} onClick={onClose}>
                   {t("common:cancel")}
                 </Button>
-              </ModalFooter>
-            </ModalContent>
-          </ModalOverlay>
+              </DrawerFooter>
+            </DrawerContent>
+          </DrawerBackdrop>
         </form>
       </FormProvider>
-    </Modal>
+    </DrawerRoot>
   );
 }

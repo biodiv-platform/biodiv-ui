@@ -1,4 +1,4 @@
-import { Box, Button, useToast } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import HorizontalBarChart from "@components/charts/horizontal-bar-chart";
 import DownloadIcon from "@icons/download";
@@ -7,13 +7,14 @@ import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useRef } from "react";
 
+import { toaster } from "@/components/ui/toaster";
+
 import { StatesChartMeta } from "./static-data";
 
 const StatesDistribution = ({ observationData, filter }) => {
   const { t } = useTranslation();
 
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
   const handleDownload = async () => {
     try {
@@ -32,11 +33,11 @@ const StatesDistribution = ({ observationData, filter }) => {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        // isClosable: true,
+        placement: "top"
       });
     }
   };

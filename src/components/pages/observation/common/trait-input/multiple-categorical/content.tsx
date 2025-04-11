@@ -3,13 +3,13 @@ import { getTraitIcon } from "@utils/media";
 import React from "react";
 
 export default function TraitContent(props) {
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getControlProps, getLabelProps } = useCheckbox(props);
 
   return (
     <Box as="label">
-      <input {...getInputProps()} required={false} />
+      <input {...getControlProps()} required={false} />
       <Flex
-        {...getCheckboxProps()}
+        {...getLabelProps()}
         alignItems="center"
         p={2}
         cursor="pointer"

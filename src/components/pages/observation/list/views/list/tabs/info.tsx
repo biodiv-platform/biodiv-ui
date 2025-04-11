@@ -1,6 +1,4 @@
-import { CalendarIcon } from "@chakra-ui/icons";
-import { EditIcon } from "@chakra-ui/icons";
-import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import ScientificName from "@components/@core/scientific-name";
 import ObservationStatusBadge from "@components/pages/common/status-badge";
@@ -16,13 +14,17 @@ import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { Alert } from "@/components/ui/alert";
+import CalendarIcon from "@/icons/calendar";
+import EditIcon from "@/icons/edit";
+
 interface IInfoTabProps {
   o: ObservationListPageMapper;
   recoUpdated;
-  setTabIndex;
+  setTab;
 }
 
-export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) {
+export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
   const { t } = useTranslation();
   const { speciesGroup, observationData } = useObservationFilter();
   const { user } = useGlobalState();
@@ -50,11 +52,11 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
             <Text className="elipsis" title={t("observation:list.location")}>
-              <LocationIcon mb={1} mr={2} />
+              <LocationIcon mb={1} mr={2} size={"sm"} />
               {o.placeName}
             </Text>
             <Text title={t("common:observed_on")}>
-              <CalendarIcon mb={1} mr={2} />
+              <CalendarIcon mb={1} mr={2} size={"sm"} />
               {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("common:unknown")}
             </Text>
 
@@ -81,7 +83,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           />
         </Flex>
       </SimpleGrid>
-      <Box borderTop="1px" borderColor="gray.300">
+      <Box borderTop="1px" borderColor="gray.300" width={"full"}>
         <RecoSuggestion
           observationId={o.observationId}
           isLocked={o.recoShow?.isLocked}
@@ -91,19 +93,18 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           permissionOverride={observationData?.mvp[o.observationId || 0]}
         />
         <Alert bg="blue.50">
-          <AlertIcon />
           {o.recoShow?.isLocked
             ? t("observation:id.validated")
             : o.recoShow?.recoIbp
             ? t("observation:id.suggest_new_reco")
             : t("observation:id.no_suggestion")}
           <Button
-            variant="link"
+            variant="plain"
             color="blue.600"
             hidden={o.recoShow?.isLocked}
             m="auto"
             mr={0}
-            onClick={() => setTabIndex(1)}
+            onClick={() => setTab("observation:id.title")}
           >
             {t("observation:suggest")}
           </Button>

@@ -1,5 +1,4 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
+import { Link, Spinner, useDisclosure } from "@chakra-ui/react";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,7 +12,10 @@ import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { LuMoveUpRight } from "react-icons/lu";
 import * as Yup from "yup";
+
+import { Alert } from "@/components/ui/alert";
 
 import LocationPicker from "../../create/form/location";
 import Uploader from "../../create/form/uploader";
@@ -33,7 +35,7 @@ export default function ObservationEditForm({
 }: IObservationEditFormProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { open, onClose } = useDisclosure({ defaultOpen: true });
 
   const parsechecklistAnnotations = (checklistAnnotations) => {
     if (checklistAnnotations) {
@@ -141,7 +143,7 @@ export default function ObservationEditForm({
     }
   };
 
-  return isOpen ? (
+  return open ? (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
         <Uploader name="resources" licensesList={licensesList} isCreate={false} />
@@ -154,7 +156,7 @@ export default function ObservationEditForm({
         <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
           <Link>
             <Alert mb={4} borderRadius="md">
-              {t("observation:edit_hint")} <ArrowForwardIcon />
+              {t("observation:edit_hint")} <LuMoveUpRight />
             </Alert>
           </Link>
         </LocalLink>

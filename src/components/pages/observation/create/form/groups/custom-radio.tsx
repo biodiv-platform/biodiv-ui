@@ -4,7 +4,7 @@ import { getLocalIcon } from "@utils/media";
 import React from "react";
 
 const CustomRadio = (props) => {
-  const { getInputProps, getCheckboxProps } = useRadio(props);
+  // const { getInputProps, getCheckboxProps } = useRadio(props);
 
   const handleOnChange = (e) => {
     props.onChange(props.isChecked ? "" : Number(e.target.value));
@@ -12,10 +12,11 @@ const CustomRadio = (props) => {
 
   return (
     <Box as="label" display="inline-block" mr={2}>
-      <input {...getInputProps()} onChange={() => null} onClick={handleOnChange} />
-      <Tooltip title={props.icon} positioning={{placement:"top"}} showArrow={true}>
+      {/* {...getInputProps()} */}
+      <input onChange={() => null} onClick={handleOnChange} />
+      <Tooltip title={props.icon} positioning={{ placement: "top" }} showArrow={true}>
         <Box
-          {...getCheckboxProps()}
+          // {...getCheckboxProps()}
           p={1}
           cursor="pointer"
           borderWidth="2px"

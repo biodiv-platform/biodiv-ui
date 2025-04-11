@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
@@ -17,16 +17,20 @@ const GroupsTab = React.lazy(() => import("./tabs/groups"));
 const RecoSuggestionTab = React.lazy(() => import("./tabs/reco-suggestion"));
 const TraitsTab = React.lazy(() => import("./tabs/traits"));
 
-export const VerticalTabs = styled.div`
+const VerticalTabs = styled.div`
   flex-grow: 1;
 
   .tabs {
     display: flex;
+    height: 18rem;
 
     > .tab-content {
       flex-grow: 1;
+      height: 100%;
+      overflow: hidden;
 
-      > [role="tabpanel"] {
+      > [role="tabpanel"],
+      > div[data-state="active"] {
         padding: 0;
         height: 100%;
         max-height: 18rem;
@@ -37,7 +41,6 @@ export const VerticalTabs = styled.div`
 
     > [role="tablist"] {
       flex-direction: column;
-
       flex-shrink: 0;
 
       > [role="tab"] {
@@ -60,7 +63,8 @@ export const VerticalTabs = styled.div`
         border-bottom: 0;
       }
 
-      > [role="tab"][aria-selected="true"] {
+      > [role="tab"][aria-selected="true"],
+      > [role="tab"][data-state="active"] {
         white-space: nowrap;
 
         color: inherit;
@@ -95,7 +99,8 @@ export const VerticalTabs = styled.div`
 
 export default function Container({ o }) {
   const { t } = useTranslation();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tab, setTab] = useState("common:information");
+
   const { setObservationData, getCheckboxProps } = useObservationFilter();
 
   const recoUpdated = (payload) => {
@@ -115,57 +120,97 @@ export default function Container({ o }) {
     >
       <ImageBoxComponent o={o} getCheckboxProps={getCheckboxProps} />
       <VerticalTabs>
-        <Tabs
-          isLazy={true}
-          h={{ md: "100%" }}
-          variant="unstyled"
-          className="tabs"
-          index={tabIndex}
-          onChange={setTabIndex}
-        >
-          <TabPanels className="tab-content" position="relative">
-            <TabPanel>
-              <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
-            </TabPanel>
-            <TabPanel>
+        <Tabs.Root variant="plain" className="tabs" lazyMount defaultValue={tab}>
+          <Tabs.Content
+            value="common:information"
+            height="100%"
+            className="tab-content"
+            position="relative"
+            style={{ overflow: "hidden" }}
+          >
+            <Box height="100%" overflowY="auto">
+              <InfoTab o={o} recoUpdated={recoUpdated} setTab={setTab} />
+            </Box>
+          </Tabs.Content>
+
+          <Tabs.Content
+            value="observation:id.title"
+            height={["fit-content"]}
+            className="tab-content"
+            position="relative"
+          >
+            <Box height="100%" overflowY="auto">
               <Suspense fallback={<Spinner />}>
                 <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Box>
+          </Tabs.Content>
+
+          <Tabs.Content
+            value="common:usergroups"
+            height={["fit-content"]}
+            className="tab-content"
+            position="relative"
+          >
+            <Box height="100%" overflowY="auto">
               <Suspense fallback={<Spinner />}>
                 <GroupsTab o={o} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Box>
+          </Tabs.Content>
+
+          <Tabs.Content
+            value="observation:traits"
+            height={["fit-content"]}
+            className="tab-content"
+            position="relative"
+          >
+            <Box height="100%" overflowY="auto">
               <Suspense fallback={<Spinner />}>
                 <TraitsTab o={o} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Box>
+          </Tabs.Content>
+
+          <Tabs.Content
+            value="observation:custom_fields"
+            height={["fit-content"]}
+            className="tab-content"
+            position="relative"
+          >
+            <Box height="100%" overflowY="auto">
               <Suspense fallback={<Spinner />}>
                 <CustomFieldsTab o={o} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Box>
+          </Tabs.Content>
+
+          <Tabs.Content
+            value="form:comments.title"
+            height={["fit-content"]}
+            className="tab-content"
+            position="relative"
+          >
+            <Box height="100%" overflowY="auto">
               <Suspense fallback={<Spinner />}>
                 <CommentsTab observationId={o.observationId} />
               </Suspense>
-            </TabPanel>
-          </TabPanels>
-          <TabList>
+            </Box>
+          </Tabs.Content>
+
+          <Tabs.List>
             {actionTabs.map(({ name, icon, active = true }) => (
-              <Tab key={name} data-hidden={!active}>
+              <Tabs.Trigger value={name} key={name} data-hidden={!active}>
                 <Tooltip title={t(name)}>
                   <div>
                     {icon} <span>{t(name)}</span>
                   </div>
                 </Tooltip>
-              </Tab>
+              </Tabs.Trigger>
             ))}
             <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-          </TabList>
-        </Tabs>
+          </Tabs.List>
+        </Tabs.Root>
       </VerticalTabs>
     </Flex>
   );

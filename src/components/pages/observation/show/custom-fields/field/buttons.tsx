@@ -7,15 +7,15 @@ export default function Buttons({ onSave, onClose }) {
   const { t } = useTranslation();
 
   return (
-    <Stack isInline={true} spacing={2} mt={2}>
+    <Stack direction={"row"} gap={2} mt={2}>
       <Button
         size="sm"
         colorPalette="blue"
         aria-label={t("common:save")}
         type="submit"
-        leftIcon={<CheckIcon />}
         onClick={onSave}
       >
+        <CheckIcon />
         {t("common:save")}
       </Button>
       <Button size="sm" colorPalette="gray" aria-label={t("common:close")} onClick={onClose}>

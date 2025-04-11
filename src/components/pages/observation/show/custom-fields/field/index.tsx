@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  IconButton,
-  useDisclosure
-} from "@chakra-ui/react";
+import { IconButton, useDisclosure } from "@chakra-ui/react";
 import EditIcon from "@icons/edit";
 import { CustomFieldData } from "@interfaces/observation";
 import { axUpdateCustomField } from "@services/observation.service";
@@ -13,6 +7,8 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { emit } from "react-gbus";
+
+import { Field } from "@/components/ui/field";
 
 import FieldData from "./field-data";
 
@@ -31,7 +27,7 @@ export default function CustomField({
   observationId,
   canEdit
 }: ICustomFieldProps) {
-  const { isOpen, onClose, onToggle } = useDisclosure();
+  const { open, onClose, onToggle } = useDisclosure();
   const { t } = useTranslation();
 
   const onUpdate = async (fieldData) => {
@@ -50,32 +46,26 @@ export default function CustomField({
   };
 
   return (
-    <FormControl borderBottom="1px" borderColor="gray.300" p={4}>
-      <FormLabel fontWeight="bold" htmlFor={cf.cfId?.toString()}>
+    <Field borderBottom="1px" borderColor="gray.300" p={4}>
+      <Field fontWeight="bold" htmlFor={cf.cfId?.toString()}>
         {cf.cfName}
         {canEdit && (
-          <IconButton
-            variant="link"
-            colorPalette="blue"
-            icon={<EditIcon />}
-            aria-label="edit"
-            onClick={onToggle}
-          />
+          <IconButton variant="plain" colorPalette="blue" aria-label="edit" onClick={onToggle}>
+            <EditIcon />
+          </IconButton>
         )}
-      </FormLabel>
-      {isOpen && cf.cfNotes && (
-        <FormHelperText mt={0} mb={2} id={`${cf.cfId}-helper`}>
-          {cf.cfNotes}
-        </FormHelperText>
+      </Field>
+      {open && cf.cfNotes && (
+        <Field mt={0} mb={2} id={`${cf.cfId}-helper`} helperText={cf.cfNotes}></Field>
       )}
       <FieldData
         onClose={onClose}
         cf={cf}
-        isOpen={isOpen}
+        isOpen={open}
         onUpdate={onUpdate}
         userGroupId={userGroupId}
         observationId={observationId}
       />
-    </FormControl>
+    </Field>
   );
 }

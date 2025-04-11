@@ -1,4 +1,4 @@
-import { Box, useToast } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { ACCEPTED_FILE_TYPES, DEFAULT_TOAST } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import notification from "@utils/notification";
@@ -6,17 +6,18 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
+import { toaster } from "@/components/ui/toaster";
+
 import ObservationCreateNextForm from "./form";
 import useObservationCreateNext from "./use-observation-create-next-hook";
 
 export default function DraftDropzone() {
   const { t } = useTranslation();
-  const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { draft } = useObservationCreateNext();
 
   const handleOnDrop = async (files) => {
-    toastIdRef.current = toast({
+    toastIdRef.current = toaster.create({
       description: `${t("form:uploader.processing")}...`,
       ...DEFAULT_TOAST.LOADING
     });
@@ -25,13 +26,13 @@ export default function DraftDropzone() {
     draft.add(resizedAssets, true);
 
     if (toastIdRef.current && resizedAssets.length > 0) {
-      toast.update(toastIdRef.current, {
+      toaster.update(toastIdRef.current, {
         description: t("common:success"),
         ...DEFAULT_TOAST.SUCCESS
       });
-      setTimeout(() => toast.close(toastIdRef.current), 1000);
+      setTimeout(() => toaster.dismiss(toastIdRef.current), 1000);
     } else {
-      toast.close(toastIdRef.current);
+      toaster.dismiss(toastIdRef.current);
     }
   };
 

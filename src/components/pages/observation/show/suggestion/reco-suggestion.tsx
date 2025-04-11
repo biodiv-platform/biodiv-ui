@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Box, Button, Stack, Text } from "@chakra-ui/react";
+import { AvatarGroup, Box, Button, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
 import ScientificName from "@components/@core/scientific-name";
@@ -19,6 +19,8 @@ import { getUserImage } from "@utils/media";
 import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 enum RecoAction {
   Agree,
@@ -96,7 +98,7 @@ export default function RecoSuggestion({
               px={4}
               py={2}
             >
-              <Stack flexGrow={1} isInline={true} justifyContent="space-between">
+              <Stack flexGrow={1} direction={"row"} justifyContent="space-between">
                 <Box minH="3rem">
                   {reco.speciesId ? (
                     <BlueLink
@@ -115,7 +117,8 @@ export default function RecoSuggestion({
                     {reco.commonName}
                   </Text>
                 </Box>
-                <AvatarGroup size="sm" max={2}>
+                {/* max={2} */}
+                <AvatarGroup size="sm">
                   {reco.userList?.map((u) => (
                     <Avatar
                       key={u.id}
@@ -126,18 +129,18 @@ export default function RecoSuggestion({
                   ))}
                 </AvatarGroup>
               </Stack>
-              <Stack isInline={true} minW="210px" flexShrink={0} className="reco-actions">
+              <Stack direction={"row"} minW="210px" flexShrink={0} className="reco-actions">
                 {!isLocked && (
                   <Button
                     variant="outline"
                     size="sm"
                     minW="100px"
                     colorPalette={canAccept ? "red" : "green"}
-                    leftIcon={canAccept ? <CrossIcon /> : <CheckIcon />}
                     onClick={() =>
                       recoVoteAction(reco, canAccept ? RecoAction.Remove : RecoAction.Agree)
                     }
                   >
+                    {canAccept ? <CrossIcon /> : <CheckIcon />}
                     {t(canAccept ? "observation:id.remove" : "observation:id.agree")}
                   </Button>
                 )}
@@ -151,11 +154,11 @@ export default function RecoSuggestion({
                       variant="outline"
                       colorPalette={isLocked ? "blue" : "red"}
                       ml={2}
-                      leftIcon={isLocked ? <UnlockIcon /> : <LockIcon />}
                       onClick={() =>
                         recoVoteAction(reco, isLocked ? RecoAction.Unlock : RecoAction.Validate)
                       }
                     >
+                      {isLocked ? <UnlockIcon /> : <LockIcon />}
                       {t(isLocked ? "observation:id.unlock" : "observation:id.validate")}
                     </Button>
                   )}

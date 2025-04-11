@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  SimpleGrid,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Box, Button, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import { SelectInputField } from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config";
@@ -22,6 +12,9 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { useFormContext } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
+import { InputGroup } from "@/components/ui/input-group";
 
 import { LOCATION_ACCURACY_OPTIONS } from "../options";
 import CoordinatesInput from "./coordinates";
@@ -66,7 +59,7 @@ const LocationPicker = ({ isRequired = true }) => {
 
   const defaultValues = form.control._defaultValues;
 
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
   const [zoom, setZoom] = useState(initialZoom);
   const [center, setCenter] = useState({ lat, lng });
   const [searchBoxRef, setSearchBoxRef] = useState<any>();
@@ -157,23 +150,24 @@ const LocationPicker = ({ isRequired = true }) => {
             Click Here for Manual Coordinates
           </Button>
         )}
-        <SimpleGrid columns={[1, 1, 4, 4]} spacing={4}>
+        <SimpleGrid columns={[1, 1, 4, 4]} gap={4}>
           <Box style={{ gridColumn: "1/4" }}>
-            <FormControl
-              isInvalid={
+            <Field
+              invalid={
                 (form.formState.errors[FK.observedAt.name] ||
                   form.formState.errors[FK.latitude.name] ||
                   form.formState.errors[FK.longitude.name]) &&
                 true
               }
-              isRequired={isRequired}
+              required={isRequired}
+              htmlFor="places-search"
             >
-              <FormLabel htmlFor="places-search">
+              <Field htmlFor="places-search">
                 {FK.observedAt.label}
                 {ll.has && (
                   <Button
                     title={ll.value?.address}
-                    variant="link"
+                    variant="plain"
                     size="xs"
                     ml={1}
                     verticalAlign="baseline"
@@ -183,8 +177,18 @@ const LocationPicker = ({ isRequired = true }) => {
                     {t("observation:last_location")}
                   </Button>
                 )}
-              </FormLabel>
-              <InputGroup size="md" className="places-search">
+              </Field>
+              <InputGroup
+                // size="md"
+                className="places-search"
+                endElement={
+                  <Box>
+                    <Button variant="plain" size="sm" onClick={onToggle}>
+                      {t(open ? "form:map.hide" : "form:map.show")}
+                    </Button>
+                  </Box>
+                }
+              >
                 <Autocomplete
                   onLoad={setSearchBoxRef}
                   onPlaceChanged={handleOnSearchSelected}
@@ -195,25 +199,20 @@ const LocationPicker = ({ isRequired = true }) => {
                     id="places-search"
                     value={observedAtText}
                     onChange={handleOnSearchChange}
-                    isRequired={false}
+                    required={false}
                     pr="5rem"
                     placeholder={t("observation:location_placeholder")}
                   />
                 </Autocomplete>
-                <InputRightElement w="7rem">
-                  <Button variant="link" size="sm" onClick={onToggle}>
-                    {t(isOpen ? "form:map.hide" : "form:map.show")}
-                  </Button>
-                </InputRightElement>
               </InputGroup>
               <ErrorMessage name={FK.observedAt.name} errors={form.formState.errors} />
-              {!isOpen && (
+              {!open && (
                 <>
                   <ErrorMessage name={FK.latitude.name} errors={form.formState.errors} />
                   <ErrorMessage name={FK.longitude.name} errors={form.formState.errors} />
                 </>
               )}
-            </FormControl>
+            </Field>
           </Box>
           <SelectInputField
             {...FK.locationScale}
@@ -222,7 +221,7 @@ const LocationPicker = ({ isRequired = true }) => {
           />
         </SimpleGrid>
         <CoordinatesInput
-          show={isOpen}
+          show={open}
           fk={FK}
           coordinates={coordinates}
           setCoordinates={setCoordinates}
@@ -230,7 +229,7 @@ const LocationPicker = ({ isRequired = true }) => {
         <LocationMap
           coordinates={coordinates}
           setCoordinates={setCoordinates}
-          isOpen={isOpen}
+          isOpen={open}
           onTextUpdate={setObservedAtText}
           zoom={zoom}
           center={center}

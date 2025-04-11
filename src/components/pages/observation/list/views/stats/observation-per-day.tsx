@@ -1,11 +1,14 @@
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Button, Select, Skeleton, useBreakpointValue, useToast } from "@chakra-ui/react";
+import { Box, Button, Skeleton, useBreakpointValue } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
+import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { toaster } from "@/components/ui/toaster";
 
 import CalendarHeatMap from "./calendar-heatmap";
 import { ObservationTooltipRenderer } from "./static-data";
@@ -13,7 +16,6 @@ import { ObservationTooltipRenderer } from "./static-data";
 const ObservationPerDay = ({ data, isLoading }) => {
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
   // Add useBreakpointValue to hide icons based on screen width
   const showNavigationIcons = useBreakpointValue({ base: false, md: true }); // Hide on small screens, show on medium and larger screens
@@ -37,11 +39,11 @@ const ObservationPerDay = ({ data, isLoading }) => {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        // isClosable: true,
+        placement: "top"
       });
     }
   };
@@ -84,25 +86,32 @@ const ObservationPerDay = ({ data, isLoading }) => {
         {showNavigationIcons && currentIndex != years.length - 1 && (
           <Box position="absolute" top="45%" left="10px">
             <Button width={25} onClick={nextSlide} variant="ghost">
-              <ArrowBackIcon />
+              <LuMoveLeft />
             </Button>
           </Box>
         )}
         {showNavigationIcons && currentIndex != 0 && (
           <Box position="absolute" top="45%" right="10px">
             <Button width={25} onClick={prevSlide} variant="ghost">
-              <ArrowForwardIcon />
+              <LuMoveRight />
             </Button>
           </Box>
         )}
         <Box marginLeft="45%" paddingTop="25px" paddingBottom="25px">
-          <Select fontSize="13px" maxW="5rem" value={currentIndex} onChange={handleOnChange}>
-            {years.map((option, index) => (
-              <option key={index} value={index}>
-                {option}
-              </option>
-            ))}
-          </Select>
+          <NativeSelectRoot
+            fontSize="13px"
+            maxW="5rem"
+            defaultValue={currentIndex}
+            onChange={handleOnChange}
+          >
+            <NativeSelectField>
+              {years.map((option, index) => (
+                <option key={index} value={index}>
+                  {option}
+                </option>
+              ))}
+            </NativeSelectField>
+          </NativeSelectRoot>
         </Box>
         <Box padding={padding}>
           <CalendarHeatMap

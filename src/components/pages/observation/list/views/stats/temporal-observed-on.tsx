@@ -1,10 +1,13 @@
-import { Box, Button, Select, Skeleton, useToast } from "@chakra-ui/react";
+import { Box, Button, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { toaster } from "@/components/ui/toaster";
 
 import StackedHorizontalChart from "./stacked-horizontal-chart";
 
@@ -14,7 +17,6 @@ const TemporalObservedOn = ({ data, isLoading }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
   const handleDownload = async () => {
     try {
@@ -33,11 +35,11 @@ const TemporalObservedOn = ({ data, isLoading }) => {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        // isClosable: true,
+        placement: "top"
       });
     }
   };
@@ -68,13 +70,20 @@ const TemporalObservedOn = ({ data, isLoading }) => {
       </BoxHeading>
       <Box p={4}>
         <Box marginLeft="45%" paddingTop="25px" paddingBottom="25px">
-          <Select fontSize="13px" maxW="7rem" value={currentIndex} onChange={handleOnChange}>
-            {years.map((option, index) => (
-              <option key={index} value={index}>
-                {option}
-              </option>
-            ))}
-          </Select>
+          <NativeSelectRoot
+            fontSize="13px"
+            maxW="7rem"
+            defaultValue={currentIndex}
+            onChange={handleOnChange}
+          >
+            <NativeSelectField>
+              {years.map((option, index) => (
+                <option key={index} value={index}>
+                  {option}
+                </option>
+              ))}
+            </NativeSelectField>
+          </NativeSelectRoot>
         </Box>
         <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef} isStacked={true} />
       </Box>

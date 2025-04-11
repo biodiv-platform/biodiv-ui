@@ -12,12 +12,12 @@ export default function CheckListAnnotation({ customData }) {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📚 {t("observation:checklist_annotation")}</BoxHeading>
-      <SimpleGrid columns={[1, 1, 5, 5]} spacing={2} p={4}>
+      <SimpleGrid columns={[1, 1, 5, 5]} gap={2} p={4}>
         {Object.keys(customData).map(
           (key, index) =>
             customData[key] && (
               <ResponsiveInfo key={index} title={stripSpecialCharacters(key)}>
-                <Stack ml={4} isInline={true}>
+                <Stack ml={4} direction={"row"}>
                   <Text>{`${customData[key]}`}</Text>
                 </Stack>
               </ResponsiveInfo>

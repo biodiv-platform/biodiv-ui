@@ -1,5 +1,7 @@
-import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+
+import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import { ITraitInputProps } from "..";
 import TraitContent from "./content";
@@ -22,7 +24,7 @@ const MultipleCategorialTrait = ({
   });
 
   return (
-    <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4}>
+    <SimpleGrid columns={[1, 1, 2, gridColumns]} gap={4}>
       {values?.map((o) => (
         <TraitContent
           key={o.id}

@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Tabs } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { adminOrAuthor } from "@utils/auth";
 import React, { useMemo } from "react";
@@ -12,7 +12,7 @@ export default function CustomFieldList({
   setO,
   cfPermission
 }: ICustomFieldsProps) {
-  const { groups, user, currentGroup } = useGlobalState();
+  const { groups, user } = useGlobalState();
 
   const getGroupNameById = (gId) => useMemo(() => groups?.find((g) => g.id === gId)?.name, [gId]);
 
@@ -20,22 +20,25 @@ export default function CustomFieldList({
     return cfPermission?.find((cfp) => cfp.userGroupId === gId)?.allowedCfId || [];
   };
 
-  const defaultTabIndex = currentGroup?.id
-    ? o.customField
-      ? o.customField.findIndex((cf) => cf.userGroupId === currentGroup.id)
-      : 0
-    : 0;
+  // const defaultTabIndex = currentGroup?.id
+  //   ? o.customField
+  //     ? o.customField.findIndex((cf) => cf.userGroupId === currentGroup.id)
+  //     : 0
+  //   : 0;
 
   return (
-    <Tabs className="nospace" isLazy={true} defaultIndex={defaultTabIndex}>
-      <TabList>
+    // defaultIndex={defaultTabIndex}
+    <Tabs.Root className="nospace" lazyMount={true}>
+      <Tabs.List>
         {o.customField?.map(({ userGroupId }) => (
-          <Tab key={userGroupId}>{getGroupNameById(userGroupId)}</Tab>
+          <Tabs.Trigger value={"userGroupId"} key={userGroupId}>
+            {getGroupNameById(userGroupId)}
+          </Tabs.Trigger>
         ))}
-      </TabList>
-      <TabPanels>
+      </Tabs.List>
+      <Tabs.ContentGroup>
         {o.customField?.map((cfList) => (
-          <TabPanel key={cfList.userGroupId}>
+          <Tabs.Content key={cfList.userGroupId} value={"cfList.userGroupId"}>
             {cfList?.customField?.map((cf) => (
               <CustomField
                 key={cf.cfId}
@@ -50,9 +53,9 @@ export default function CustomFieldList({
                 }
               />
             ))}
-          </TabPanel>
+          </Tabs.Content>
         ))}
-      </TabPanels>
-    </Tabs>
+      </Tabs.ContentGroup>
+    </Tabs.Root>
   );
 }

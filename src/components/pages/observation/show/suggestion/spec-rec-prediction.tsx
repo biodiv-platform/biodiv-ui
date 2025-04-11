@@ -1,16 +1,4 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  SimpleGrid,
-  useCheckboxGroup,
-  useToast
-} from "@chakra-ui/react";
+import { Button, SimpleGrid } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axPredictObservation } from "@services/api.service";
 import { getImageFilesAsBlobs } from "@services/observation.service";
@@ -19,6 +7,18 @@ import { resizePredictImage } from "@utils/image";
 import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { toaster } from "@/components/ui/toaster";
+import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import ImagePickerSpecRec from "./image-picker-spec-rec";
 
@@ -29,7 +29,6 @@ const SpecRecPrediction = ({
   onCloseImageModal,
   selectRef
 }) => {
-  const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
 
@@ -72,7 +71,7 @@ const SpecRecPrediction = ({
 
     const _thumbURL = await resizePredictImage(imageFile);
 
-    toastIdRef.current = toast({
+    toastIdRef.current = toaster.create({
       ...DEFAULT_TOAST.LOADING,
       description: t("form:uploader.predicting")
     });
@@ -89,34 +88,34 @@ const SpecRecPrediction = ({
         source: "SpecRec"
       }));
       setPredictions(predictionData);
-      toast.update(toastIdRef.current, {
+      toaster.update(toastIdRef.current, {
         ...DEFAULT_TOAST.SUCCESS,
         description: t("common:success")
       });
       onCloseImageModal();
-      setTimeout(() => toast.close(toastIdRef.current), 1000);
+      setTimeout(() => toaster.dismiss(toastIdRef.current), 1000);
 
       if (selectRef) {
         selectRef.current.focus();
       }
     } else {
-      toast.update(toastIdRef.current, {
+      toaster.update(toastIdRef.current, {
         title: `${t("observation:plantnet.failed_to_generate_predictions")}`,
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        // isClosable: true,
+        placement: "top"
       });
     }
   };
 
   return (
     <div>
-      <Modal isOpen={isOpenImageModal} size="6xl" onClose={onCloseImageModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{t("observation:plantnet.select_Images")}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+      <DialogRoot open={isOpenImageModal} size="cover" onOpenChange={onCloseImageModal}>
+        <DialogBackdrop />
+        <DialogContent>
+          <DialogHeader>{t("observation:plantnet.select_Images")}</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody>
             <SimpleGrid columns={[2, 3, 4, 5]} gridGap={4} mb={4} className="custom-checkbox-group">
               {images.map((o) => (
                 <ImagePickerSpecRec
@@ -128,15 +127,15 @@ const SpecRecPrediction = ({
                 />
               ))}
             </SimpleGrid>
-          </ModalBody>
+          </DialogBody>
 
-          <ModalFooter>
+          <DialogFooter>
             <Button colorPalette="green" mr={3} onClick={handleOnPlantnetSelect}>
               {t("observation:plantnet.generate_predictions")}
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </DialogRoot>
     </div>
   );
 };

@@ -21,7 +21,7 @@ import useObservationCreateNext from "../../use-observation-create-next-hook";
 export const SpeciesGroupOption = ({ children, ...props }: any) => (
   <components.Option {...props}>
     <Flex alignItems="center" gap={2}>
-      <Image boxSize="2rem" src={props.data.image} fallbackSrc={props.data.group} />
+      <Image boxSize="2rem" src={props.data.image} alt={props.data.group} />
       <div>{children}</div>
     </Flex>
   </components.Option>

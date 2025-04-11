@@ -11,13 +11,9 @@ export const CommonNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
   return (
     <components.Option {...props}>
-      <Stack isInline={true} alignItems="center">
+      <Stack direction={"row"} alignItems="center">
         {hiddenIcon && (
-          <Image
-            boxSize="2rem"
-            src={getSuggestionIcon(props.data.icon)}
-            fallbackSrc={props.data.group}
-          />
+          <Image boxSize="2rem" src={getSuggestionIcon(props.data.icon)} alt={props.data.group} />
         )}
         <Box>
           <Flex alignItems="center">

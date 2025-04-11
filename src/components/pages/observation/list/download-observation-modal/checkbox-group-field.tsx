@@ -1,13 +1,9 @@
-import {
-  Checkbox,
-  CheckboxGroup,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Stack
-} from "@chakra-ui/react";
+import { CheckboxGroup, Stack } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { Field } from "@/components/ui/field";
 
 interface ITextBoxProps {
   name: string;
@@ -28,19 +24,24 @@ const CheckboxGroupField = ({
   const { field, fieldState } = useController({ name, defaultValue: [] });
 
   return (
-    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
-      <FormLabel htmlFor="email">{label}</FormLabel>
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor="email"
+      label={label}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
       <CheckboxGroup defaultValue={field.value} onChange={field.onChange}>
         <Stack className="custom-checkbox-group">
           {options.map((item) => (
-            <Checkbox w="22rem" isDisabled={disabled} key={item.value} value={item.value}>
+            <Checkbox w="22rem" disabled={disabled} key={item.value} value={item.value}>
               {item.label}
             </Checkbox>
           ))}
         </Stack>
       </CheckboxGroup>
-      <FormErrorMessage children={fieldState?.error?.message} />
-    </FormControl>
+    </Field>
   );
 };
 

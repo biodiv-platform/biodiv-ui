@@ -9,7 +9,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
   switch (type) {
     case AssetStatus.Uploaded:
       return (
-        <Tooltip title={t("form:upload_status.uploaded")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.uploaded")} showArrow={true}>
           <svg
             className="icon"
             width="24"
@@ -34,7 +34,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
 
     case AssetStatus.InProgress:
       return (
-        <Tooltip title={t("form:upload_status.uploading")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.uploading")} showArrow={true}>
           <svg
             className="icon bounce"
             width="24"
@@ -59,7 +59,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
 
     case AssetStatus.Failed:
       return (
-        <Tooltip title={t("form:upload_status.failed")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.failed")} showArrow={true}>
           <svg
             className="icon"
             width="24"
@@ -86,7 +86,7 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
 
     default:
       return (
-        <Tooltip title={t("form:upload_status.pending")} hasArrow={true}>
+        <Tooltip title={t("form:upload_status.pending")} showArrow={true}>
           <svg
             className="icon"
             width="24"

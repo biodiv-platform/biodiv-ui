@@ -1,4 +1,4 @@
-import { Box, Divider, SimpleGrid } from "@chakra-ui/react";
+import { Box, Separator, SimpleGrid } from "@chakra-ui/react";
 import { DatePickerNextField } from "@components/form/datepicker-next";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
@@ -24,9 +24,9 @@ export default function DateInputs({ showTags = true, disabled }) {
 
   return (
     <>
-      <SimpleGrid columns={[1, 1, 1, 2]} spacing={4}>
+      <SimpleGrid columns={[1, 1, 1, 2]} gap={4}>
         <Box>
-          <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} spacing={4}>
+          <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} gap={4}>
             <DatePickerNextField
               name="observedOn"
               label={t("common:observed_on")}
@@ -67,7 +67,7 @@ export default function DateInputs({ showTags = true, disabled }) {
 
         <RichTextareaField name="notes" label={t("observation:notes")} />
       </SimpleGrid>
-      {showTags && <Divider mb={3} />}
+      {showTags && <Separator mb={3} />}
     </>
   );
 }

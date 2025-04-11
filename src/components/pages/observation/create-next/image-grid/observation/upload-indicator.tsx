@@ -1,8 +1,8 @@
-import { WarningIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Spinner } from "@chakra-ui/react";
 import { AssetStatus } from "@interfaces/custom";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuCircleAlert } from "react-icons/lu";
 
 import useObservationCreateNext from "../../use-observation-create-next-hook";
 
@@ -17,13 +17,8 @@ export default function ResourceUploadIndicator({ children, hidden, failed }) {
   return (
     <Box position="absolute" top={0} left={0} p={2}>
       {failed ? (
-        <Button
-          size="xs"
-          colorPalette="red"
-          variant="solid"
-          leftIcon={<WarningIcon />}
-          onClick={handleOnRetryFailed}
-        >
+        <Button size="xs" colorPalette="red" variant="solid" onClick={handleOnRetryFailed}>
+          <LuCircleAlert />
           {failed}
         </Button>
       ) : (

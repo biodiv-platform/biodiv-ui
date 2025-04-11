@@ -59,13 +59,8 @@ export default function FromURL({ onDone, onSave }) {
         onChange={handleOnChange}
       />
       {thumbURL && <Image mb={4} borderRadius="lg" maxW="full" h="15rem" src={thumbURL} />}
-      <Button
-        isDisabled={!thumbURL}
-        leftIcon={<CheckIcon />}
-        onClick={handleonInsert}
-        type="button"
-        colorPalette="blue"
-      >
+      <Button disabled={!thumbURL} onClick={handleonInsert} type="button" colorPalette="blue">
+        <CheckIcon />
         {t("form:use_in_observation")}
       </Button>
     </Box>

@@ -22,14 +22,8 @@ export default function AudioPlayer({ src, onConfirm, onCancel }) {
           <source src={src} type="audio/wav" />
         </AudioControl>
       </Box>
-      <Button
-        type="button"
-        colorPalette="blue"
-        onClick={onConfirm}
-        leftIcon={<CheckIcon />}
-        mr={4}
-        mt={4}
-      >
+      <Button type="button" colorPalette="blue" onClick={onConfirm} mr={4} mt={4}>
+        <CheckIcon />
         {t("form:use_in_observation")}
       </Button>
       <Button type="button" mt={4} onClick={onCancel}>

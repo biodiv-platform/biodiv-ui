@@ -31,7 +31,7 @@ export default function ProgressCard({ item }) {
               objectFit="cover"
               overflow="hidden"
               src={getImageThumb(item.resource, user?.id)}
-              fallbackSrc={getFallbackByMIME(item.resource?.type)}
+              alt={getFallbackByMIME(item.resource?.type)}
             />
           </AspectRatio>
 

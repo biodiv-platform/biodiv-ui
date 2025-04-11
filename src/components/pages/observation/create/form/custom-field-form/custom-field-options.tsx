@@ -7,7 +7,7 @@ export default function CustomFieldOption(props: any) {
   const imageURL = useMemo(() => getGroupImageThumb(props.data.iconURL), [props.data.iconURL]);
   return (
     <components.Option {...props}>
-      <Stack isInline={true} alignItems="center">
+      <Stack direction={"row"} alignItems="center">
         <Image boxSize="2rem" src={imageURL} />
         <Text color="gray.600">{props.data.label}</Text>
       </Stack>

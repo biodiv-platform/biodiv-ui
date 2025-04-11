@@ -1,6 +1,8 @@
-import { Link, Tag } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
+
+import { Tag } from "@/components/ui/tag";
 
 interface LinkTagProps {
   label;

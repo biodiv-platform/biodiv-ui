@@ -1,31 +1,29 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import {
-  Alert,
-  AlertIcon,
-  Button,
-  Checkbox,
-  Flex,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useBoolean
-} from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { OBSERVATION_IMPORT_DIALOUGE, OBSERVATION_IMPORT_RESOURCE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
+import { LuMoveRight } from "react-icons/lu";
+
+import { Alert } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import ResourceRearrange from "./resource-rearrange";
 
 export default function ResourceImporter() {
   const { t } = useTranslation();
   const [resourceGroups, setResourceGroups] = useState<any[]>([]);
-  const [canPredict, setCanPredict] = useBoolean(SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE);
+  const [canPredict, setCanPredict] = useState(SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE);
 
   useListener(
     (o) => {
@@ -60,14 +58,13 @@ export default function ResourceImporter() {
   };
 
   return resourceGroups.length ? (
-    <Modal isOpen={true} onClose={handleOnClose} size="4xl">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>📷 {t("observation:importer.title")}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
+    <DialogRoot open={true} onOpenChange={handleOnClose} size="lg">
+      <DialogBackdrop />
+      <DialogContent>
+        <DialogHeader>📷 {t("observation:importer.title")}</DialogHeader>
+        <DialogCloseTrigger />
+        <DialogBody>
           <Alert status="info" mb={6} borderRadius="md">
-            <AlertIcon />
             {t("observation:importer.group_info")}
           </Alert>
           <ResourceRearrange
@@ -76,23 +73,24 @@ export default function ResourceImporter() {
           />
 
           {SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && (
-            <Checkbox isChecked={canPredict} onChange={setCanPredict.toggle} mt={3}>
+            <Checkbox checked={canPredict} onChange={() => setCanPredict(!canPredict)} mt={3}>
               {t("observation:importer.prediction_info")}
             </Checkbox>
           )}
-        </ModalBody>
+        </DialogBody>
 
-        <ModalFooter>
+        <DialogFooter>
           <Flex flexShrink={0}>
             <Button mr={3} onClick={handleOnClose}>
               {t("common:close")}
             </Button>
-            <Button colorPalette="blue" rightIcon={<ArrowForwardIcon />} onClick={handleOnContinue}>
+            <Button colorPalette="blue" onClick={handleOnContinue}>
               {t("observation:continue")}
+              <LuMoveRight />
             </Button>
           </Flex>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </DialogFooter>
+      </DialogContent>
+    </DialogRoot>
   ) : null;
 }

@@ -1,22 +1,19 @@
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs
-} from "@chakra-ui/react";
+import { Tabs } from "@chakra-ui/react";
 import { OBSERVATION_IMPORT_DIALOUGE } from "@static/events";
 import { clusterResources } from "@utils/observation";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import AudioInput from "../../create/form/uploader/audio-input";
 import FromURL from "../../create/form/uploader/from-url";
@@ -25,7 +22,8 @@ import DraftMedia from "./draft-media";
 
 export function MediaPicker({ onBrowse }) {
   const { setShowMediaPicker, showMediaPicker, draft, media } = useObservationCreateNext();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState("draftMedia");
+
   const { t } = useTranslation();
   const form = useFormContext();
 
@@ -51,41 +49,39 @@ export function MediaPicker({ onBrowse }) {
     setShowMediaPicker(false);
   };
 
-  const onSelectionDone = () => setTabIndex(0);
+  const onSelectionDone = () => setTabIndex("draftMedia");
 
   return (
-    <Modal isOpen={showMediaPicker} onClose={onClose} id="media-picker" size="6xl">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>🖼 {t("observation:media_picker")}</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody pb={6}>
-          <Tabs
+    <DialogRoot open={showMediaPicker} onOpenChange={onClose} id="media-picker" size="cover">
+      <DialogBackdrop />
+      <DialogContent>
+        <DialogHeader>🖼 {t("observation:media_picker")}</DialogHeader>
+        <DialogCloseTrigger />
+        <DialogBody pb={6}>
+          <Tabs.Root
             className="nospace"
-            index={tabIndex}
-            isLazy={true}
-            onChange={setTabIndex}
-            variant="soft-rounded"
+            defaultValue={tabIndex}
+            lazyMount={true}
+            // onChange={setTabIndex}
+            // variant="soft-rounded"
           >
-            <TabList mb={2} overflowX="auto" py={1}>
-              <Tab>☁️ {t("form:my_uploads")}</Tab>
-              <Tab>🎙️ {t("form:audio.title")}</Tab>
-              <Tab>📹 {t("form:from_url")}</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <DraftMedia onBrowse={onBrowse} onImport={handleOnImport} />
-              </TabPanel>
-              <TabPanel>
-                <AudioInput onDone={onSelectionDone} onSave={draft.add} />
-              </TabPanel>
-              <TabPanel>
-                <FromURL onDone={onSelectionDone} onSave={draft.add} />
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+            <Tabs.List mb={2} overflowX="auto" py={1}>
+              <Tabs.Trigger value="draftMedia">☁️ {t("form:my_uploads")}</Tabs.Trigger>
+              <Tabs.Trigger value="audio">🎙️ {t("form:audio.title")}</Tabs.Trigger>
+              <Tabs.Trigger value="youtube">📹 {t("form:from_url")}</Tabs.Trigger>
+            </Tabs.List>
+            <Tabs.Content value="draftMedia">
+              <DraftMedia onBrowse={onBrowse} onImport={handleOnImport} />
+            </Tabs.Content>
+            <Tabs.Content value="audio">
+              <AudioInput onDone={onSelectionDone} onSave={draft.add} />
+            </Tabs.Content>
+            <Tabs.Content value="youtube">
+              <FromURL onDone={onSelectionDone} onSave={draft.add} />
+            </Tabs.Content>
+          </Tabs.Root>
+        </DialogBody>
+      </DialogContent>
+    </DialogRoot>
   );
 }

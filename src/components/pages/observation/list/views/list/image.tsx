@@ -1,4 +1,4 @@
-import { Checkbox, HStack, Image, Link } from "@chakra-ui/react";
+import { HStack, Image, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
@@ -14,6 +14,8 @@ import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React, { useEffect } from "react";
 import { useState } from "react";
+
+import { Checkbox } from "@/components/ui/checkbox";
 
 const ImageBox = styled.div`
   position: relative;
@@ -132,8 +134,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
               o.reprImageUrl,
               RESOURCE_SIZE.LIST_THUMBNAIL
             )}
-            fallbackSrc={getLocalIcon(o?.speciesGroup)}
-            alt={o.observationId?.toString()}
+            alt={getLocalIcon(o?.speciesGroup) || o.observationId?.toString()}
           />
         </Link>
       </LocalLink>

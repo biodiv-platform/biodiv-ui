@@ -1,4 +1,4 @@
-import { Button, List, ListItem, useDisclosure } from "@chakra-ui/react";
+import { Button, List, useDisclosure } from "@chakra-ui/react";
 import { InfoWindow, Marker } from "@react-google-maps/api";
 import { reverseGeocode } from "@utils/location";
 import React, { useEffect, useState } from "react";
@@ -6,17 +6,17 @@ import React, { useEffect, useState } from "react";
 const CustomMarker = ({ position, setCoordinates, onTextUpdate }) => {
   const [markerRef, setMarkerRef] = useState<any>();
   const [suggestons, setSuggestions] = useState<{ formatted_address; place_id }[]>([]);
-  const { isOpen, onClose, onToggle } = useDisclosure();
+  const { open, onClose, onToggle } = useDisclosure();
 
   useEffect(() => {
     setSuggestions([]);
   }, [position]);
 
   useEffect(() => {
-    if (isOpen) {
+    if (open) {
       reverseGeocode(position).then((results) => setSuggestions(results));
     }
-  }, [position, isOpen]);
+  }, [position, open]);
 
   const onMarkerDrag = ({ latLng }) => {
     setCoordinates({ lat: latLng.lat(), lng: latLng.lng() });
@@ -29,23 +29,23 @@ const CustomMarker = ({ position, setCoordinates, onTextUpdate }) => {
 
   return (
     <>
-      {isOpen && (
+      {open && (
         <InfoWindow anchor={markerRef} onCloseClick={onClose}>
-          <List styleType="disc">
+          <List.Root listStyle="decimal">
             {suggestons.map(({ formatted_address, place_id }) => (
-              <ListItem key={place_id}>
+              <List.Item key={place_id}>
                 {formatted_address}
                 <Button
-                  variant="link"
+                  variant="plain"
                   colorPalette="blue"
                   size="xs"
                   onClick={() => setTitle(formatted_address)}
                 >
                   Use as title
                 </Button>
-              </ListItem>
+              </List.Item>
             ))}
-          </List>
+          </List.Root>
         </InfoWindow>
       )}
       {position?.lat && (

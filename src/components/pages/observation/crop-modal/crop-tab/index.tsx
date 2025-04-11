@@ -99,8 +99,7 @@ export default function CropTab({ data, setData, canCrop }) {
                 borderColor={currentCropItem?.id === resource.id ? "blue.500" : "gray.300"}
                 bg="gray.200"
                 objectFit="contain"
-                fallbackSrc={getFallbackByMIME(resource.type)}
-                alt={`${resource.id}`}
+                alt={getFallbackByMIME(resource.type) || `${resource.id}`}
                 src={getResourceThumbnail(
                   resource.context,
                   resource.fileName,

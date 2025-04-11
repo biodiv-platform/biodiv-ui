@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton, useToast } from "@chakra-ui/react";
+import { Box, Button, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -6,13 +6,14 @@ import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef } from "react";
 
+import { toaster } from "@/components/ui/toaster";
+
 import TreeMapChart from "./tree-map";
 
 const TaxanomicDistribution = ({ data, isLoading }) => {
   const { t } = useTranslation();
 
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
   const handleDownload = async () => {
     try {
@@ -31,11 +32,11 @@ const TaxanomicDistribution = ({ data, isLoading }) => {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        // isClosable: true,
+        placement: "top"
       });
     }
   };

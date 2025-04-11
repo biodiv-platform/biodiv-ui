@@ -5,7 +5,6 @@ import {
   Flex,
   IconButton,
   Image,
-  Select,
   SimpleGrid,
   Text
 } from "@chakra-ui/react";
@@ -19,6 +18,8 @@ import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import useObservationCreateNext from "../../use-observation-create-next-hook";
 import UploadIcon from "../upload-icon";
@@ -49,7 +50,7 @@ const DraftResource = ({ resource: r }) => {
     () => ({
       key: r.id,
       src: getImageThumb(r, user?.id),
-      fallbackSrc: getFallbackByMIME(r?.type)
+      alt: getFallbackByMIME(r?.type)
     }),
     [r.id, r.status]
   );
@@ -71,7 +72,7 @@ const DraftResource = ({ resource: r }) => {
           borderRadius="0.4rem"
           objectFit="cover"
           src={imgThumb.src}
-          fallbackSrc={imgThumb.fallbackSrc}
+          // fallbackSrc={imgThumb.fallbackSrc}
         />
       </AspectRatio>
       <Box position="absolute" bottom={0} left={0} m={4}>
@@ -81,14 +82,15 @@ const DraftResource = ({ resource: r }) => {
         aria-label="Delete Resource"
         colorPalette="red"
         hidden={isDisabled}
-        icon={<DeleteIcon />}
         m={4}
         onClick={handleOnResourceDelete}
         position="absolute"
         right={0}
         size="sm"
         top={0}
-      />
+      >
+        <DeleteIcon />
+      </IconButton>
     </Box>
   );
 };
@@ -106,23 +108,26 @@ export default function DraftMedia({ onBrowse, onImport }) {
       >
         <Text mb={4}>💡 {t("form:description.my_uploads")}</Text>
         <Flex mb={4}>
-          <Button colorPalette="blue" leftIcon={<CheckIcon />} onClick={onImport} mr={4}>
+          <Button colorPalette="blue" onClick={onImport} mr={4}>
+            <CheckIcon />
             {t("common:import")}
           </Button>
-          <Select
-            value={draft.sortBy}
-            onChange={(e) => draft.setSortBy(e.target.value)}
-            maxW="9rem"
-          >
-            {MY_UPLOADS_SORT.map((o) => (
-              <option key={o.value} value={o.value}>
-                {t(`form:my_uploads_sort.${o.label}`)}
-              </option>
-            ))}
-          </Select>
+          <NativeSelectRoot>
+            <NativeSelectField
+              value={draft.sortBy}
+              onChange={(e) => draft.setSortBy(e.target.value)}
+              maxW="9rem"
+            >
+              {MY_UPLOADS_SORT.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {t(`form:my_uploads_sort.${o.label}`)}
+                </option>
+              ))}
+            </NativeSelectField>
+          </NativeSelectRoot>
         </Flex>
       </Flex>
-      <SimpleGrid columns={{ base: 2, sm: 5, md: 6 }} spacing={4}>
+      <SimpleGrid columns={{ base: 2, sm: 5, md: 6 }} gap={4}>
         <Box
           border="2px"
           borderColor="gray.300"

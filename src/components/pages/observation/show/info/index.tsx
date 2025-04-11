@@ -62,7 +62,7 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
             {o.observation?.dateAccuracy === DATE_ACCURACY.ACCURATE && (
               // shouldWrapChildren={true}
               <Tooltip title={t("observation:accurate")} showArrow={true}>
-                <CheckIcon color="green.500" />
+                <CheckIcon color="green.500" size={"sm"} />
               </Tooltip>
             )}
           </Stack>

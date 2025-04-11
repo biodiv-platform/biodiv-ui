@@ -1,4 +1,4 @@
-import { Badge, Box, Checkbox, Heading, Image, Link, Text } from "@chakra-ui/react";
+import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import ShadowedUser from "@components/pages/common/shadowed-user";
@@ -7,6 +7,8 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Checkbox } from "@/components/ui/checkbox";
 
 export interface ObservationMinList {
   o: ObservationListMinimalData;
@@ -31,22 +33,19 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
           />
         )}
         <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-          <Link>
-            <Image
-              objectFit="cover"
-              bg="gray.100"
-              w="full"
-              h="full"
-              borderTopRadius="md"
-              src={getResourceThumbnail(
-                RESOURCE_CTX.OBSERVATION,
-                o?.thumbnail,
-                RESOURCE_SIZE.LIST_THUMBNAIL
-              )}
-              fallbackSrc={getLocalIcon(o?.speciesGroup)}
-              alt={o.observationId?.toString()}
-            />
-          </Link>
+          <Image
+            objectFit="cover"
+            bg="gray.100"
+            w="full"
+            h="full"
+            borderTopRadius="md"
+            src={getResourceThumbnail(
+              RESOURCE_CTX.OBSERVATION,
+              o?.thumbnail,
+              RESOURCE_SIZE.LIST_THUMBNAIL
+            )}
+            alt={getLocalIcon(o?.speciesGroup) || o.observationId?.toString()}
+          />
         </LocalLink>
         <ShadowedUser user={o?.user} />
       </Box>

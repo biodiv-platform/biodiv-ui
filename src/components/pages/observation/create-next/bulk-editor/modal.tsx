@@ -1,13 +1,4 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
@@ -18,6 +9,16 @@ import React from "react";
 import { emit } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import { parseDefaultCustomField } from "../../create/form";
 import ObservationCustomFieldForm from "../../create/form/custom-field-form";
@@ -92,14 +93,14 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
   };
 
   return (
-    <Modal isOpen={initialValue} onClose={onClose} size="6xl">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{t("observation:title_edit")}</ModalHeader>
-        <ModalCloseButton />
+    <DialogRoot open={initialValue} onOpenChange={onClose} size="cover">
+      <DialogBackdrop />
+      <DialogContent>
+        <DialogHeader>{t("observation:title_edit")}</DialogHeader>
+        <DialogCloseTrigger />
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnFormSubmit)} noValidate>
-            <ModalBody>
+            <DialogBody>
               <RecoInputs />
               <GroupSelector
                 name="sGroup"
@@ -113,17 +114,17 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
               {sortedCFList?.length && <ObservationCustomFieldForm fields={fields} />}
               <TraitsPicker name="facts" label={t("observation:traits")} />
               <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
-            </ModalBody>
+            </DialogBody>
 
-            <ModalFooter>
+            <DialogFooter>
               <SubmitButton leftIcon={<CheckIcon />} mr={3}>
                 {t("common:save")}
               </SubmitButton>
               <Button onClick={onClose}>{t("common:close")}</Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
         </FormProvider>
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </DialogRoot>
   );
 }

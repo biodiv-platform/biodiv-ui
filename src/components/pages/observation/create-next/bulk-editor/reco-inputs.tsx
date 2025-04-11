@@ -65,7 +65,7 @@ export default function RecoInputs() {
   }, [v]);
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
+    <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
       <SelectAsyncInputField
         name="taxonCommonName"
         label={t("observation:common_name")}

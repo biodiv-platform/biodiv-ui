@@ -1,19 +1,12 @@
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Collapse,
-  Divider,
-  FormControl,
-  FormLabel,
-  Text,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Box, Button, Collapsible, Separator, Text, useDisclosure } from "@chakra-ui/react";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { LuChevronDown, LuChevronUp } from "react-icons/lu";
+
+import { Field } from "@/components/ui/field";
 
 import TraitInput from "../../../common/trait-input";
 
@@ -29,7 +22,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
   const [facts, setFacts] = useState<any>(initialFacts);
   const sGroup = form.watch("sGroup");
   const { t } = useTranslation();
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
 
   useEffect(() => {
     if (sGroup) {
@@ -51,24 +44,25 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
 
   return (
     <Box>
-      <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
-        💎 {t("observation:traits")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+      <Button variant="ghost" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
+        💎 {t("observation:traits")} {open ? <LuChevronUp /> : <LuChevronDown />}
       </Button>
-      <Collapse in={isOpen} unmountOnExit={true}>
-        {traitsPairs.map(({ traits, values }) => (
-          <FormControl mb={4} key={traits.id}>
-            <FormLabel mb={1}>{traits.name}</FormLabel>
-            <TraitInput
-              type={traits.traitTypes}
-              values={values}
-              defaultValue={traits.id ? facts[traits.id] : undefined}
-              onUpdate={(v) => handleOnChange(traits.id, v)}
-            />
-          </FormControl>
-        ))}
-        {!sGroup && <Text>{t("observation:traits_no_group")}</Text>}
-      </Collapse>
-      <Divider mb={3} />
+      <Collapsible.Root open={open} unmountOnExit={true}>
+        <Collapsible.Content>
+          {traitsPairs.map(({ traits, values }) => (
+            <Field mb={4} key={traits.id} label={traits.name}>
+              <TraitInput
+                type={traits.traitTypes}
+                values={values}
+                defaultValue={traits.id ? facts[traits.id] : undefined}
+                onUpdate={(v) => handleOnChange(traits.id, v)}
+              />
+            </Field>
+          ))}
+          {!sGroup && <Text>{t("observation:traits_no_group")}</Text>}
+        </Collapsible.Content>
+      </Collapsible.Root>
+      <Separator mb={3} />
     </Box>
   );
 };

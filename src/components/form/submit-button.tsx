@@ -12,6 +12,7 @@ interface ISubmitButtonProps {
   mb?;
   w?;
   mt?;
+  mr?;
   icon?;
 }
 

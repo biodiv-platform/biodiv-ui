@@ -1,9 +1,9 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Button, ButtonGroup, IconButton } from "@chakra-ui/react";
 import DeleteIcon from "@icons/delete";
 import LayersIcon from "@icons/layers";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 export default function ResourceNavigation({ index, setIndex, size, onDelete, onReorder }) {
   const { t } = useTranslation();
@@ -20,33 +20,37 @@ export default function ResourceNavigation({ index, setIndex, size, onDelete, on
     <ButtonGroup size="xs" position="absolute" bottom={0} right={0} m={2}>
       <IconButton
         aria-label={t("common:prev")}
-        icon={<ChevronLeftIcon />}
-        isDisabled={index === 0}
+        disabled={index === 0}
         onClick={handleOnPrev}
         title={t("common:prev")}
-      />
+      >
+        <LuChevronLeft />
+      </IconButton>
       <IconButton
         aria-label={t("common:delete")}
         colorPalette="red"
-        icon={<DeleteIcon />}
-        isDisabled={size === 1}
+        disabled={size === 1}
         onClick={handleOnDelete}
         title={t("common:delete")}
-      />
+      >
+        <DeleteIcon />
+      </IconButton>
       <IconButton
         aria-label={t("common:next")}
-        icon={<ChevronRightIcon />}
-        isDisabled={index === size - 1}
+        disabled={index === size - 1}
         onClick={handleOnNext}
         title={t("common:next")}
-      />
+      >
+        <LuChevronRight />
+      </IconButton>
       <Button
         aria-label={t("observation:manage_resources")}
-        leftIcon={<LayersIcon />}
         onClick={onReorder}
         title={t("observation:manage_resources")}
-        children={size}
-      />
+        // children={size}
+      >
+        <LayersIcon />
+      </Button>
     </ButtonGroup>
   );
 }

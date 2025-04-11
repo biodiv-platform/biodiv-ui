@@ -24,7 +24,7 @@ export default function CustomFieldLastValue({ id, name, set }) {
   return show ? (
     <Button
       type="button"
-      variant="link"
+      variant="plain"
       colorPalette="blue"
       fontSize="xs"
       title={cfValue.toString()}

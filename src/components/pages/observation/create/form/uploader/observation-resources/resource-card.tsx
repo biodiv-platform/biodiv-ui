@@ -93,7 +93,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
         <Image
           objectFit="cover"
           borderRadius="md"
-          fallbackSrc={getFallbackByMIME(resource.type)}
+          alt={getFallbackByMIME(resource.type)}
           src={imageURL}
         />
         <StatusIcon type={resource.status} />

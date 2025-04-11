@@ -1,20 +1,16 @@
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
-  Heading,
-  Stack,
-  useBreakpointValue,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Box, Button, Heading, Stack, useBreakpointValue, useDisclosure } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import {
+  DrawerBackdrop,
+  DrawerBody,
+  DrawerCloseTrigger,
+  DrawerContent,
+  DrawerRoot
+} from "@/components/ui/drawer";
 
 import FiltersList from "./list";
 import ClearFilters from "./taxon-browser/clear-filters";
@@ -41,13 +37,13 @@ export const FilterWrapper = styled.div`
 `;
 
 export default function Filters() {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
   const isDesktopFilter = useBreakpointValue({ base: false, lg: true });
 
   return isDesktopFilter ? (
     <Box as={FilterWrapper} gridColumn={{ lg: "1/4" }}>
-      <Stack m={4} isInline={true} align="center" justify="space-between">
+      <Stack m={4} direction={"row"} align="center" justify="space-between">
         <Heading size="md">{t("filters:title")}</Heading>
         <ClearFilters />
       </Stack>
@@ -58,15 +54,15 @@ export default function Filters() {
       <Button w="full" className="toggle-button" onClick={onToggle}>
         {t("filters:toggle")}
       </Button>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-        <DrawerOverlay>
+      <DrawerRoot open={open} placement={"end"} onOpenChange={onClose}>
+        <DrawerBackdrop>
           <DrawerContent>
-            <DrawerCloseButton />
+            <DrawerCloseTrigger />
             <BoxHeading>{t("filters:title")}</BoxHeading>
-            <DrawerBody p={0}>{isOpen && <FiltersList />}</DrawerBody>
+            <DrawerBody p={0}>{open && <FiltersList />}</DrawerBody>
           </DrawerContent>
-        </DrawerOverlay>
-      </Drawer>
+        </DrawerBackdrop>
+      </DrawerRoot>
     </FilterWrapper>
   );
 }

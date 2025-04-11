@@ -28,7 +28,7 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
   const isLoading = totalsData.data.isLoading;
 
   return (
-    <SimpleGrid columns={{ md: 4 }} spacing={4} mb={4}>
+    <SimpleGrid columns={{ md: 4 }} gap={4} mb={4}>
       <TableTotals
         title={t("observation:list.stats_bar.total_observations")}
         count={totals["totalObservations"]}
