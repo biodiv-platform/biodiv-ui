@@ -7,17 +7,41 @@ import {
   Box,
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   IconButton,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Spinner,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Textarea,
   Tooltip,
-  useDisclosure
+  useDisclosure,
+  VStack
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import AddIcon from "@icons/add";
 import TranslateIcon from "@icons/translate";
-import { axCreateSpeciesField, axGetAllFieldsMeta, axGetFieldTranslations } from "@services/species.service";
+import {
+  axCreateSpeciesField,
+  axGetAllFieldsMeta,
+  axGetFieldTranslations
+} from "@services/species.service";
+import { axGetLangList } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 
 import AddConceptModal from "./add-concept-modal";
 import AddFieldModal from "./add-field-modal";
@@ -47,6 +71,21 @@ export default function SpeciesFieldsAdmin() {
   const [selectedCategory, setSelectedCategory] = useState<SpeciesField | null>(null);
   const [speciesFields, setSpeciesFields] = useState<SpeciesField[]>([]);
   const [fieldTranslations, setFieldTranslations] = useState<FieldTranslation[]>([]);
+
+  const [languages, setLanguages] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
+  const [activeLanguages, setActiveLanguages] = useState<string[]>(["en"]);
+
+  const [loading, setLoading] = useState({});
+  const [languageData, setLanguageData] = useState({});
+
+  const [translations, setTranslations] = useState({});
+  const [editableTranslations, setEditableTranslations] = useState<any>({});
+
+  const [isLoadingLanguages, setIsLoadingLanguages] = useState(false);
+
+  const [modalLanguage, setModalLanguage] = useState<string>("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
     isOpen: isFieldModalOpen,
@@ -96,6 +135,30 @@ export default function SpeciesFieldsAdmin() {
     };
 
     fetchFields();
+  }, []);
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      setIsLoadingLanguages(true);
+      try {
+        const { success, data } = await axGetLangList();
+        if (success) {
+          const formattedLanguages = data.map((lang) => ({
+            label: lang.name,
+            code: lang.twoLetterCode || lang.threeLetterCode || "en",
+            id: lang.id.toString()
+          }));
+          console.log("Fetched languages:", formattedLanguages);
+          setLanguages(formattedLanguages);
+        }
+      } catch (error) {
+        console.error("Error fetching languages:", error);
+      } finally {
+        setIsLoadingLanguages(false);
+      }
+    };
+
+    fetchLanguages();
   }, []);
 
   const handleAddConcept = async (newConcept) => {
@@ -197,7 +260,7 @@ export default function SpeciesFieldsAdmin() {
 
   const openTranslateModal = async (field: SpeciesField) => {
     setSelectedField(field);
-    
+
     try {
       // Fetch existing translations for the field
       const { data } = await axGetFieldTranslations(field.id);
@@ -207,8 +270,302 @@ export default function SpeciesFieldsAdmin() {
       notification(t("admin:species_fields.translation_fetch_error"), NotificationType.Error);
       setFieldTranslations([]);
     }
-    
+
     onTranslateModalOpen();
+  };
+
+  const renderLanguageContent = (langCode) => {
+    const isLoading = loading[langCode];
+    const langFields = languageData[langCode] || [];
+
+    if (isLoading) {
+      return (
+        <Flex justifyContent="center" alignItems="center" height="200px">
+          <Spinner size="xl" />
+        </Flex>
+      );
+    }
+    const TranslationField = memo(
+      ({
+        label,
+        value,
+        onChange,
+        isTextArea
+      }: {
+        label: string;
+        value: string;
+        onChange: (value: string) => void;
+        isTextArea?: boolean;
+      }) => {
+        const InputComponent = isTextArea ? Textarea : Input;
+
+        return (
+          <FormControl>
+            <FormLabel>{label}</FormLabel>
+            <InputComponent value={value} onChange={(e) => onChange(e.target.value)} />
+          </FormControl>
+        );
+      }
+    );
+
+    const TranslationInputs = memo(
+      ({
+        field,
+        langCode,
+        onFieldUpdate
+      }: {
+        field: any;
+        langCode: string;
+        onFieldUpdate?: (fieldId: string, values: any) => void;
+      }) => {
+        const [values, setValues] = useState({
+          header: field.name || field.header || "",
+          description: field.description || "",
+          urlIdentifier: field.urlIdentifier || ""
+        });
+
+        const updateField = useCallback((key: string, value: string) => {
+          setValues((prev) => ({
+            ...prev,
+            [key]: value
+          }));
+        }, []);
+
+        const getFieldLabel = () => {
+          if (field.type === "concept") return "Concept Name *";
+          if (field.type === "category") return "Category Name *";
+          return "Subcategory Name *";
+        };
+
+        useEffect(() => {
+          // Only sync with parent state when the user stops typing for 500ms
+          const timeoutId = setTimeout(() => {
+            onFieldUpdate?.(field.id, values);
+          }, 500);
+
+          return () => clearTimeout(timeoutId);
+        }, [values, field.id, onFieldUpdate]);
+
+        return (
+          <VStack
+            align="stretch"
+            spacing={4}
+            mt={2}
+            mb={4}
+            p={4}
+            bg="white"
+            borderRadius="md"
+            boxShadow="sm"
+            border="1px solid"
+            borderColor="gray.200"
+          >
+            <TranslationField
+              label={getFieldLabel()}
+              value={values.header}
+              onChange={(value) => updateField("header", value)}
+            />
+
+            <TranslationField
+              label="Description *"
+              value={values.description}
+              onChange={(value) => updateField("description", value)}
+              isTextArea
+            />
+
+            <TranslationField
+              label="URL Identifier *"
+              value={values.urlIdentifier}
+              onChange={(value) => updateField("urlIdentifier", value)}
+            />
+          </VStack>
+        );
+      }
+    );
+
+    const handleFieldUpdate = useCallback(
+      (fieldId: string, values: any) => {
+        console.log("handleFieldUpdate called with:", { fieldId, values, selectedLanguage });
+
+        setTranslations((prev) => ({
+          ...prev,
+          [fieldId]: {
+            ...prev[fieldId],
+            [selectedLanguage]: values
+          }
+        }));
+
+        setEditableTranslations((prev) => ({
+          ...prev,
+          [fieldId]: {
+            ...prev[fieldId],
+            [selectedLanguage]: values
+          }
+        }));
+      },
+      [selectedLanguage]
+    );
+
+    const renderTranslationInputs = (field: any, langCode: string) => {
+      return (
+        <TranslationInputs field={field} langCode={langCode} onFieldUpdate={handleFieldUpdate} />
+      );
+    };
+
+    return (
+      <Accordion allowMultiple mb={6}>
+        {langFields.map((concept) => (
+          <AccordionItem key={concept.id} mb={4} border="none">
+            <Box bg="gray.50" borderRadius="md" boxShadow="md" overflow="hidden">
+              <AccordionButton bg="blue.50" _hover={{ bg: "blue.100" }} py={3}>
+                <Box flex="1" textAlign="left" fontWeight="bold">
+                  {concept.name}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel bg="gray.50" p={4}>
+                {renderTranslationInputs(concept, langCode)}
+
+                {concept.children?.length > 0 && (
+                  <Accordion allowMultiple mt={4}>
+                    {concept.children.map((category) => (
+                      <AccordionItem key={category.id} mb={3} border="none">
+                        <Box bg="white" borderRadius="md" boxShadow="sm" overflow="hidden">
+                          <AccordionButton bg="green.50" _hover={{ bg: "green.100" }} py={2}>
+                            <Box flex="1" textAlign="left" fontWeight="bold">
+                              {category.name}
+                            </Box>
+                            <AccordionIcon />
+                          </AccordionButton>
+                          <AccordionPanel bg="white" p={4}>
+                            {renderTranslationInputs(category, langCode)}
+
+                            {category.children?.length > 0 && (
+                              <Accordion allowMultiple mt={4}>
+                                {category.children.map((subcategory) => (
+                                  <AccordionItem key={subcategory.id} mb={3} border="none">
+                                    <Box
+                                      bg="gray.50"
+                                      borderRadius="md"
+                                      boxShadow="sm"
+                                      overflow="hidden"
+                                    >
+                                      <AccordionButton
+                                        bg="purple.50"
+                                        _hover={{ bg: "purple.100" }}
+                                        py={2}
+                                      >
+                                        <Box flex="1" textAlign="left" fontWeight="bold">
+                                          {subcategory.name}
+                                        </Box>
+                                        <AccordionIcon />
+                                      </AccordionButton>
+                                      <AccordionPanel bg="gray.50" p={4}>
+                                        {renderTranslationInputs(subcategory, langCode)}
+                                      </AccordionPanel>
+                                    </Box>
+                                  </AccordionItem>
+                                ))}
+                              </Accordion>
+                            )}
+                          </AccordionPanel>
+                        </Box>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                )}
+              </AccordionPanel>
+            </Box>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    );
+  };
+
+  const handleSelectLanguage = () => {
+    if (modalLanguage && modalLanguage.trim() !== "") {
+      console.log("Selected language from modal:", modalLanguage);
+
+      if (!activeLanguages.includes(modalLanguage)) {
+        console.log("Adding to active languages:", modalLanguage);
+        const newActiveLanguages = [...activeLanguages, modalLanguage];
+        console.log("New active languages:", newActiveLanguages);
+        setActiveLanguages(newActiveLanguages);
+
+        // Fetch the data for this language if we haven't already
+        if (!languageData[modalLanguage]) {
+          fetchSpeciesFields(modalLanguage);
+        }
+      }
+
+      onClose();
+    }
+  };
+
+  const handleAddTranslation = () => {
+    setModalLanguage("");
+    onOpen();
+  };
+
+  const handleModalLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setModalLanguage(e.target.value);
+  };
+
+  const fetchSpeciesFields = async (langCode) => {
+    console.log(`Fetching data for language: ${langCode}`);
+    setLoading((prev) => ({ ...prev, [langCode]: true }));
+
+    try {
+      const langId = languages.find((lang) => lang.code === langCode)?.id || "205";
+      console.log(`Using language ID: ${langId} for ${langCode}`);
+
+      const { data } = await axGetAllFieldsMeta({ langId });
+
+      if (data) {
+        if (!data || data.length === 0) return;
+
+        // Transform the data to a more usable format
+        const transformedData = data.map((item) => {
+          const parentField = item.parentField || item;
+          return {
+            id: parentField.id,
+            name: parentField.header,
+            description: parentField.description || "",
+            urlIdentifier: parentField.urlIdentifier || "",
+            type: parentField.label?.toLowerCase() || "concept",
+            children: (item.childField || []).map((child) => {
+              const childParentField = child.parentField || child;
+              return {
+                id: childParentField.id,
+                name: childParentField.header,
+                description: childParentField.description || "",
+                urlIdentifier: childParentField.urlIdentifier || "",
+                type: childParentField.label?.toLowerCase() || "category",
+                children: (child.childFields || []).map((subChild) => ({
+                  id: subChild.id,
+                  name: subChild.header,
+                  description: subChild.description || "",
+                  urlIdentifier: subChild.urlIdentifier || "",
+                  type: subChild.label?.toLowerCase() || "subcategory"
+                }))
+              };
+            })
+          };
+        });
+
+        console.log("Transformed Data:", transformedData);
+        setLanguageData((prev) => ({
+          ...prev,
+          [langCode]: transformedData
+        }));
+      } else {
+        notification(t("admin:species_fields.fetch_error"));
+      }
+    } catch (error) {
+      console.error(`Error fetching species fields for ${langCode}:`, error);
+      notification(t("admin:species_fields.fetch_error"));
+    } finally {
+      setLoading((prev) => ({ ...prev, [langCode]: false }));
+    }
   };
 
   return (
@@ -216,10 +573,40 @@ export default function SpeciesFieldsAdmin() {
       <PageHeading>🧬 {t("admin:species_fields.title")}</PageHeading>
 
       <Flex justifyContent="flex-end" mb={4}>
+        <Button colorScheme="green" onClick={handleAddTranslation}>
+          {t("admin:species_fields.add_translation")}
+        </Button>
         <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={onConceptModalOpen}>
           {t("admin:species_fields.add_concept")}
         </Button>
       </Flex>
+      <Tabs
+        variant="unstyled"
+        mb={6}
+        rounded="md"
+        overflowX="auto"
+        onChange={(index) => setSelectedLanguage(activeLanguages[index])}
+      >
+        <TabList bg="gray.100" rounded="md">
+          {activeLanguages.map((langCode) => (
+            <Tab
+              key={langCode}
+              _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
+              m={1}
+            >
+              {languages.find((lang) => lang.code === langCode)?.label || langCode}
+            </Tab>
+          ))}
+        </TabList>
+
+        <TabPanels>
+          {activeLanguages.map((langCode) => (
+            <TabPanel key={langCode} pt={4}>
+              {renderLanguageContent(langCode)}
+            </TabPanel>
+          ))}
+        </TabPanels>
+      </Tabs>
 
       <Accordion allowMultiple className="white-box">
         {speciesFields.map((concept) => (
@@ -376,6 +763,42 @@ export default function SpeciesFieldsAdmin() {
         field={selectedField}
         translations={fieldTranslations}
       />
+
+      {/* Language Selection Modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{t("admin:species_fields.add_translation")}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl isRequired>
+              <FormLabel color="red.500">{t("admin:species_fields.language")} *</FormLabel>
+              <Select
+                placeholder={isLoadingLanguages ? "Loading languages..." : "Select Language"}
+                value={modalLanguage}
+                onChange={handleModalLanguageChange}
+                isDisabled={isLoadingLanguages}
+              >
+                {languages
+                  .filter((lang) => !activeLanguages.includes(lang.code))
+                  .map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.label}
+                    </option>
+                  ))}
+              </Select>
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" mr={3} onClick={onClose}>
+              {t("common:cancel")}
+            </Button>
+            <Button colorScheme="blue" onClick={handleSelectLanguage} isDisabled={!modalLanguage}>
+              {t("common:select")}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
