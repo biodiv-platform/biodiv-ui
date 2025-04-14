@@ -1,4 +1,4 @@
-import { Checkbox, Image, Link, Stack } from "@chakra-ui/react";
+import { Image, Link, Stack } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
@@ -7,6 +7,8 @@ import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
 import React from "react";
+
+import { Checkbox } from "@/components/ui/checkbox";
 
 const doFilter = (speciesTiles) => {
   const { name, reprImage, sGroup, commonName } = speciesTiles[0];
@@ -25,7 +27,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
           Cell: ({ value, cell, getCheckboxProps }) => {
             return (
               cell.row.original.id && (
-                <Stack isInline>
+                <Stack direction={"row"}>
                   {canEdit && (
                     <Checkbox
                       m={2}
@@ -58,7 +60,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
                 value,
                 RESOURCE_SIZE.LIST_THUMBNAIL
               )}
-              fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
+              alt={OBSERVATION_FALLBACK.PHOTO}
             />
           )
         };

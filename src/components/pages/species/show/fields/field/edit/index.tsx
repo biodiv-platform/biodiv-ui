@@ -1,7 +1,8 @@
-import { Modal, ModalOverlay } from "@chakra-ui/react";
 import { SPECIES_FIELD_UPDATE, SPECIES_FIELD_UPDATED } from "@static/events";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
+
+import { DialogBackdrop, DialogRoot } from "@/components/ui/dialog";
 
 import SpeciesFieldEditForm from "./edit-form";
 
@@ -18,8 +19,8 @@ export default function SpeciesFieldSimpleEdit() {
   useListener(setInitialFormValue, [SPECIES_FIELD_UPDATE]);
 
   return (
-    <Modal onClose={doCleanup} trapFocus={false} size="6xl" isOpen={!!initialFormValue}>
-      <ModalOverlay />
+    <DialogRoot onOpenChange={doCleanup} trapFocus={false} size="cover" open={!!initialFormValue}>
+      <DialogBackdrop />
       {initialFormValue && (
         <SpeciesFieldEditForm
           initialValue={initialFormValue}
@@ -27,6 +28,6 @@ export default function SpeciesFieldSimpleEdit() {
           onCancel={doCleanup}
         />
       )}
-    </Modal>
+    </DialogRoot>
   );
 }

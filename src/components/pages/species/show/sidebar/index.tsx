@@ -1,4 +1,4 @@
-import { GridItem } from "@chakra-ui/layout";
+import { GridItem } from "@chakra-ui/react";
 import React from "react";
 
 import useSpecies from "../use-species";

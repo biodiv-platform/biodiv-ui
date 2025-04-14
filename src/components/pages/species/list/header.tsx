@@ -1,4 +1,4 @@
-import { Box, Flex, Select, Stack, Tab, TabList, Tabs, Text } from "@chakra-ui/react";
+import { Box, Flex, Stack, Tabs, Text } from "@chakra-ui/react";
 import BulkMapperHeader from "@components/pages/common/bulk-mapper";
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
@@ -7,17 +7,19 @@ import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+
 import useSpeciesList from "./use-species-list";
 
 export const viewTabs = [
   {
     name: "common:list.view_type.grid",
-    icon: <GridIcon />,
+    icon: <GridIcon size={"sm"} />,
     key: "grid"
   },
   {
     name: "common:list.view_type.list",
-    icon: <ListIcon />,
+    icon: <ListIcon size={"sm"} />,
     key: "list"
   }
 ];
@@ -35,10 +37,10 @@ export default function ListHeader() {
     });
   };
 
-  const handleOnViewChange = (index: number) => {
+  const handleOnViewChange = (value) => {
     setFilter((_draft) => {
       _draft.f.offset = 0;
-      _draft.f.view = viewTabs[index].key;
+      _draft.f.view = value;
     });
   };
 
@@ -55,46 +57,52 @@ export default function ListHeader() {
         alignItems="center"
         justify="space-between"
       >
-        <Tabs
+        <Tabs.Root
           display="inline-block"
           className="icon-tabs"
-          onChange={handleOnViewChange}
-          variant="soft-rounded"
-          isManual={true}
-          defaultIndex={viewTabs.findIndex((i) => i.key === filter.f.view)}
+          onValueChange={(e) => handleOnViewChange(e.value)}
+          activationMode="manual"
+          defaultValue={viewTabs[0].key}
           mb={4}
-          isLazy={true}
+          lazyMount
         >
-          <TabList aria-orientation="vertical">
+          <Tabs.List aria-orientation="vertical">
             {viewTabs.map(({ name, icon, key }) => (
-              <Tab key={key} aria-label={t(name)} aria-controls={`view_${key}`}>
+              <Tabs.Trigger
+                value={key}
+                key={key}
+                aria-label={t(name)}
+                aria-controls={`view_${key}`}
+              >
                 {icon} {t(name)}
-              </Tab>
+              </Tabs.Trigger>
             ))}
-          </TabList>
-        </Tabs>
+          </Tabs.List>
+        </Tabs.Root>
 
-        <Stack isInline={true} alignItems="baseline" spacing={4} mb={4}>
+        <Stack direction={"row"} alignItems="baseline" gap={4} mb={4}>
           <Text color="gray.600" mb={4}>
             {format(speciesData?.n || 0)} {t("species:list.title")}
           </Text>
           <Box>
-            <Select
+            <NativeSelectRoot
               maxW="10rem"
               aria-label={t("common:list.sort_by")}
-              value={filter?.sort}
+              defaultValue={filter?.sort}
               onChange={handleOnSort}
             >
-              {sortByOptions.map(({ name, key }) => (
-                <option key={key} value={key}>
-                  {t(name)}
-                </option>
-              ))}
-            </Select>
+              <NativeSelectField>
+                {sortByOptions.map(({ name, key }) => (
+                  <option key={key} value={key}>
+                    {t(name)}
+                  </option>
+                ))}
+              </NativeSelectField>
+            </NativeSelectRoot>
           </Box>
         </Stack>
       </Flex>
-      <Stack mb={4} isInline justifyContent="flex-end">
+      <Stack mb={4} direction={"row"} justifyContent="flex-end">
         <BulkMapperHeader
           selectAll={selectAll}
           bulkIds={bulkSpeciesIds}

@@ -9,7 +9,7 @@ export default function SimpleTraitShow({ values, options }) {
   }, [values]);
 
   return (
-    <SimpleGrid columns={{ md: 3 }} spacing={4}>
+    <SimpleGrid columns={{ md: 3 }} gap={4}>
       {finalValues.map((value) => (
         <Flex
           key={value.id}
@@ -28,7 +28,7 @@ export default function SimpleTraitShow({ values, options }) {
               mr={2}
               src={getTraitIcon(value?.icon)}
               alt={value.value}
-              ignoreFallback={true}
+              // ignoreFallback={true}
             />
           )}
           <div>{value.value}</div>

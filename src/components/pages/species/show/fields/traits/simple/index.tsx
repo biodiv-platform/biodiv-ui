@@ -6,7 +6,7 @@ import SimpleTraitEdit from "./simple-edit";
 import SimpleTraitShow from "./simple-show";
 
 export default function SimpleTrait({ trait, traitValues, setTraitValues, setShowCategory }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     traitValues.length && setShowCategory(true);
@@ -15,7 +15,7 @@ export default function SimpleTrait({ trait, traitValues, setTraitValues, setSho
   return (
     <Box lineHeight={1}>
       <TraitHeader trait={trait} onOpen={onOpen} />
-      {isOpen ? (
+      {open ? (
         <SimpleTraitEdit
           trait={trait}
           initialValue={traitValues}

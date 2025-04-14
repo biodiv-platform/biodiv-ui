@@ -1,5 +1,4 @@
-import { IconButton } from "@chakra-ui/button";
-import { Box } from "@chakra-ui/layout";
+import { Box, IconButton } from "@chakra-ui/react";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import EyeIcon from "@icons/eye";
 import EyeSlashIcon from "@icons/eye-slash";
@@ -23,8 +22,9 @@ export default function FieldGroupPanel({ parentField, childField }: SpeciesFiel
       variant="ghost"
       size="lg"
       onClick={toggleHiddenFields}
-      icon={showHiddenFields ? <EyeIcon /> : <EyeSlashIcon />}
-    />
+    >
+      {showHiddenFields ? <EyeIcon /> : <EyeSlashIcon />}
+    </IconButton>
   );
 
   return (

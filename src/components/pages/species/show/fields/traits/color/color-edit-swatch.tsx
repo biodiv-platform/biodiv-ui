@@ -1,16 +1,16 @@
-import {
-  Flex,
-  IconButton,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger
-} from "@chakra-ui/react";
+import { Flex, IconButton } from "@chakra-ui/react";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
 import React from "react";
 import { RgbStringColorPicker } from "react-colorful";
+
+import {
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverRoot,
+  PopoverTrigger
+} from "@/components/ui/popover";
 
 export function ColorEditSwatch({ color, onChange, onDelete, index }) {
   return (
@@ -25,9 +25,11 @@ export function ColorEditSwatch({ color, onChange, onDelete, index }) {
       bg={color}
       overflow="hidden"
     >
-      <Popover isLazy={true}>
+      <PopoverRoot lazyMount={true}>
         <PopoverTrigger>
-          <IconButton h="full" borderRadius={0} aria-label="Edit" icon={<EditIcon />} />
+          <IconButton h="full" borderRadius={0} aria-label="Edit">
+            <EditIcon />
+          </IconButton>
         </PopoverTrigger>
         <PopoverContent maxW="14rem">
           <PopoverArrow />
@@ -35,15 +37,16 @@ export function ColorEditSwatch({ color, onChange, onDelete, index }) {
             <RgbStringColorPicker color={color} onChange={(v) => onChange(index, v)} />
           </PopoverBody>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
       <IconButton
         h="full"
         borderRadius={0}
         onClick={() => onDelete(index)}
         colorPalette="red"
         aria-label="Delete"
-        icon={<DeleteIcon />}
-      />
+      >
+        <DeleteIcon />
+      </IconButton>
     </Flex>
   );
 }

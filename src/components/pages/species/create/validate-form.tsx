@@ -1,4 +1,3 @@
-import { SearchIcon } from "@chakra-ui/icons";
 import { GridItem, Heading, SimpleGrid } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
@@ -9,6 +8,7 @@ import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuSearch } from "react-icons/lu";
 import * as Yup from "yup";
 
 import useSpeciesCreate from "./species-taxon-suggestions/create/use-species-create";
@@ -57,7 +57,7 @@ export function SpeciesValidateForm() {
         <Heading mb={4} fontSize="2xl">
           🔍 {t("species:create.form.search")}
         </Heading>
-        <SimpleGrid columns={{ base: 1, md: 6 }} spacing={{ md: 4 }} mb={2}>
+        <SimpleGrid columns={{ base: 1, md: 6 }} gap={{ md: 4 }} mb={2}>
           <GridItem colSpan={1}>
             <SelectInputField
               name="rankName"
@@ -75,7 +75,7 @@ export function SpeciesValidateForm() {
               isRequired={true}
             />
           </GridItem>
-          <SubmitButton mt={{ md: "31px" }} leftIcon={<SearchIcon />}>
+          <SubmitButton mt={{ md: "31px" }} leftIcon={<LuSearch />}>
             {t("species:create.form.validate")}
           </SubmitButton>
         </SimpleGrid>

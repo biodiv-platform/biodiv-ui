@@ -32,13 +32,8 @@ export default function SpeciesFieldSimpleCreate({
 
   return (
     <div>
-      <Button
-        variant="outline"
-        size="xs"
-        colorPalette="green"
-        leftIcon={<AddIcon />}
-        onClick={handleOnCreate}
-      >
+      <Button variant="outline" size="xs" colorPalette="green" onClick={handleOnCreate}>
+        <AddIcon />
         {t("common:add")}
       </Button>
     </div>

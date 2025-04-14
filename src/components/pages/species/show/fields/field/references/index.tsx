@@ -1,4 +1,4 @@
-import { Box, ListItem, OrderedList, Stack } from "@chakra-ui/react";
+import { Box, List, Stack } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import React, { useMemo } from "react";
 
@@ -17,7 +17,7 @@ export default function ReferencesField({ currentField, parentField, level }) {
   );
 
   return (
-    <Stack spacing={3} wordBreak="break-word">
+    <Stack gap={3} wordBreak="break-word">
       <SpeciesFieldHeading id={parentField?.header} title={parentField?.header} level={level} />
 
       {/* Create Field */}
@@ -36,13 +36,13 @@ export default function ReferencesField({ currentField, parentField, level }) {
           <Box fontWeight={600} fontSize="md" mb={1}>
             {path}
           </Box>
-          <OrderedList>
+          <List.Root as="ol">
             {references.map(([title, url], index) => (
-              <ListItem key={index}>
+              <List.Item key={index}>
                 {title} {url && <ExternalBlueLink href={url} />}
-              </ListItem>
+              </List.Item>
             ))}
-          </OrderedList>
+          </List.Root>
         </Box>
       ))}
     </Stack>

@@ -1,4 +1,4 @@
-import { Alert, ListItem, UnorderedList } from "@chakra-ui/react";
+import { Alert, List } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { PageHeading } from "@components/@core/layout";
 import useTranslation from "next-translate/useTranslation";
@@ -18,17 +18,17 @@ export function SpeciesCreatePageComponent({ taxonRanksMeta, isSpeciesPage }) {
         {isSpeciesPage ? t("species:create.title") : t("taxon:create.title")}
       </PageHeading>
       {isSpeciesPage && (
-        <Alert status="info" borderRadius="md" mb={4} alignItems="top">
-          <UnorderedList>
-            <ListItem>
+        <Alert.Root borderRadius="lg" mb={4} alignItems="top">
+          <List.Root as="ul" fontSize={"md"}>
+            <List.Item>
               {t("species:create.desc_1")}{" "}
               <ExternalBlueLink href="/roles/request">
                 {t("species:contribute.request_permission")}
               </ExternalBlueLink>
-            </ListItem>
-            <ListItem>{t("species:create.desc_2")}</ListItem>
-          </UnorderedList>
-        </Alert>
+            </List.Item>
+            <List.Item>{t("species:create.desc_2")}</List.Item>
+          </List.Root>
+        </Alert.Root>
       )}
 
       <SpeciesCreateProvider taxonRanksMeta={taxonRanksMeta} isSpeciesPage={isSpeciesPage}>

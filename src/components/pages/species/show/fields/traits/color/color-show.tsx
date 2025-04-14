@@ -2,7 +2,7 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
 export const TraitColorShow = ({ traitValues }) => (
-  <SimpleGrid columns={{ md: 3 }} spacing={4}>
+  <SimpleGrid columns={{ md: 3 }} gap={4}>
     {traitValues.map((value) => (
       <Box
         key={value.value}

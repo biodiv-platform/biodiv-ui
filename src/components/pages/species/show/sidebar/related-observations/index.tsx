@@ -19,7 +19,7 @@ export default function SpeciesRelatedObservations() {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📷 {t("species:related.title")}</BoxHeading>
-      <SimpleGrid className="fade" w="full" columns={4} spacing={4} p={4}>
+      <SimpleGrid className="fade" w="full" columns={4} gap={4} p={4}>
         {speciesOccurances.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
@@ -28,7 +28,7 @@ export default function SpeciesRelatedObservations() {
               key={observation.observationId}
             >
               <Link target="_blank" className="fade">
-                <Tooltip hasArrow={true} title={<ScientificName value={title} />}>
+                <Tooltip showArrow={true} title={<ScientificName value={title} />}>
                   <AspectRatio ratio={1}>
                     <Image
                       borderRadius="md"
@@ -64,7 +64,7 @@ export default function SpeciesRelatedObservations() {
         w="full"
         rounded={0}
         hidden={!speciesOccurances.hasMore}
-        isLoading={speciesOccurances.isLoading}
+        loading={speciesOccurances.isLoading}
         onClick={() => loadMore()}
       >
         {t("common:load_more")}

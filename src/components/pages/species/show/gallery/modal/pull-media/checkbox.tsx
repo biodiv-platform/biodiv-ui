@@ -23,14 +23,14 @@ const Checkbox = (props: any) => {
     });
   };
 
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getControlProps, getLabelProps } = useCheckbox(props);
 
   return (
     <Box as="label" className="fade" aria-checked={props.isChecked}>
-      <input {...getInputProps()} onChange={handleOnChange} required={false} />
+      <input {...getControlProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
-        {...getCheckboxProps()}
+        {...getLabelProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"
@@ -43,9 +43,8 @@ const Checkbox = (props: any) => {
             style={{ filter: "none" }}
             boxSize="full"
             objectFit="cover"
-            src={imageURL}
+            src={imageURL || getFallbackByMIME(props.asset.type)}
             borderRadius="md"
-            fallbackSrc={getFallbackByMIME(props.asset.type)}
             alt={props.asset.fileName}
           />
           <ShadowedUser user={props.asset.userIbp} />

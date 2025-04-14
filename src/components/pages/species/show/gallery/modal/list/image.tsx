@@ -10,17 +10,17 @@ interface SpeciesGalleryImageProps {
 }
 
 export const SpeciesGalleryImage = ({ resources, isLoading }: SpeciesGalleryImageProps) => (
-  <SimpleGrid spacing={4} columns={{ md: 3, lg: 5 }} mb={4}>
+  <SimpleGrid gap={4} columns={{ md: 3, lg: 5 }} mb={4}>
     {resources.map(({ resource, userIbp, observationId }) => (
       <Box className="white-box fade" key={resource.id} overflow="hidden">
         <a href={`/observation/show/${observationId}`}>{observationId}</a>
         <Box position="relative">
-          <Link isExternal={true} href={getResourceRAW(resource.context, resource.fileName)}>
+          <Link href={getResourceRAW(resource.context, resource.fileName)}>
             <Image
               w="full"
               h="12.5rem"
               objectFit="cover"
-              fallbackSrc={getFallbackByMIME(resource.type)}
+              alt={getFallbackByMIME(resource.type)}
               src={getResourceThumbnail(resource.context, resource.fileName, RESOURCE_SIZE.DEFAULT)}
             />
           </Link>

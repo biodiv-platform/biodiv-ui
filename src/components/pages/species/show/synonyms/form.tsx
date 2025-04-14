@@ -1,12 +1,4 @@
-import {
-  Button,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Spinner
-} from "@chakra-ui/react";
+import { Button, Spinner } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -19,6 +11,14 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import {
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader
+} from "@/components/ui/dialog";
 
 interface SynonymFormProps {
   synonym;
@@ -85,13 +85,13 @@ export default function SynonymForm({
   };
 
   return (
-    <ModalContent>
+    <DialogContent>
       {taxonRanks.length ? (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-            <ModalHeader>{t("species:edit_synonym")}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+            <DialogHeader>{t("species:edit_synonym")}</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
               <TextBoxField name="name" label={t("species:synonym.form.name")} isRequired={true} />
               <SelectInputField
                 name="rank"
@@ -106,18 +106,19 @@ export default function SynonymForm({
                 label={t("species:synonym.form.datasource_id")}
                 mb={0}
               />
-            </ModalBody>
-            <ModalFooter>
+            </DialogBody>
+            <DialogFooter>
               <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-              <Button ml={3} leftIcon={<CrossIcon />} onClick={onClose}>
+              <Button ml={3} onClick={onClose}>
+                <CrossIcon />
                 {t("common:cancel")}
               </Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
         </FormProvider>
       ) : (
         <Spinner m={4} />
       )}
-    </ModalContent>
+    </DialogContent>
   );
 }

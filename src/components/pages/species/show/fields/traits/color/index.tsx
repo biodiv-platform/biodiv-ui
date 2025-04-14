@@ -6,7 +6,7 @@ import { TraitColorEdit } from "./color-edit";
 import { TraitColorShow } from "./color-show";
 
 export default function ColorTrait({ trait, traitValues, setTraitValues, setShowCategory }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     traitValues.length > 0 && setShowCategory(true);
@@ -15,7 +15,7 @@ export default function ColorTrait({ trait, traitValues, setTraitValues, setShow
   return (
     <div>
       <TraitHeader trait={trait} onOpen={onOpen} />
-      {isOpen ? (
+      {open ? (
         <TraitColorEdit
           traitId={trait.id}
           initialValue={traitValues}

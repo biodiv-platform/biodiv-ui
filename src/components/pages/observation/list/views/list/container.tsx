@@ -17,7 +17,7 @@ const GroupsTab = React.lazy(() => import("./tabs/groups"));
 const RecoSuggestionTab = React.lazy(() => import("./tabs/reco-suggestion"));
 const TraitsTab = React.lazy(() => import("./tabs/traits"));
 
-const VerticalTabs = styled.div`
+export const VerticalTabs = styled.div`
   flex-grow: 1;
 
   .tabs {

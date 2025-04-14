@@ -1,15 +1,4 @@
-import {
-  AspectRatio,
-  Box,
-  Grid,
-  Image,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  SimpleGrid
-} from "@chakra-ui/react";
+import { AspectRatio, Box, Grid, Image, SimpleGrid } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
@@ -19,15 +8,23 @@ import { getResourceRAW, getResourceThumbnail } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import {
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverRoot,
+  PopoverTrigger
+} from "@/components/ui/popover";
+
 export default function SpeciesFieldResource({ resources }) {
   const { t } = useTranslation();
 
   return (
     <>
       {resources?.length > 0 && (
-        <SimpleGrid columns={{ base: 2, sm: 4, md: 6 }} spacing={4} p={3} pb={0}>
+        <SimpleGrid columns={{ base: 2, sm: 4, md: 6 }} gap={4} p={3} pb={0}>
           {resources.map(({ resource, userIbp }) => (
-            <Popover key={resource.id}>
+            <PopoverRoot key={resource.id}>
               <PopoverTrigger>
                 <AspectRatio ratio={1}>
                   <Image
@@ -35,7 +32,7 @@ export default function SpeciesFieldResource({ resources }) {
                     objectFit="cover"
                     borderRadius="md"
                     loading="lazy"
-                    ignoreFallback={true}
+                    // ignoreFallback={true}
                     bg="gray.200"
                     src={getResourceThumbnail(
                       resource.context,
@@ -73,7 +70,7 @@ export default function SpeciesFieldResource({ resources }) {
                   </div>
                 </PopoverBody>
               </PopoverContent>
-            </Popover>
+            </PopoverRoot>
           ))}
         </SimpleGrid>
       )}

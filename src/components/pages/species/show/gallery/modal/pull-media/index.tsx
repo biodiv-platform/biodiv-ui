@@ -1,8 +1,10 @@
-import { Box, Button, SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
+import { Box, Button, SimpleGrid } from "@chakra-ui/react";
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import Checkbox from "./checkbox";
 import usePullMedia from "./use-pull-media";
@@ -19,7 +21,8 @@ const SpeciesPullMedia = ({ onDone }) => {
   return (
     <Box>
       <Box mb={4}>
-        <Button type="button" leftIcon={<CheckIcon />} onClick={onDone} colorPalette="blue">
+        <Button type="button" onClick={onDone} colorPalette="blue">
+          <CheckIcon />
           {t("form:use_in_observation")}
         </Button>
       </Box>
@@ -31,7 +34,7 @@ const SpeciesPullMedia = ({ onDone }) => {
       <Button
         w="full"
         disabled={!resourcesList.hasMore}
-        isLoading={isLoading}
+        loading={isLoading}
         onClick={loadMoreResources}
       >
         {t("common:load_more")}

@@ -1,10 +1,10 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import { axSaveTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+import { LuMoveRight } from "react-icons/lu";
 
 import { SpeciesCreateCommonTableRows } from "../common-table-rows";
 import useSpeciesCreate from "../create/use-species-create";
@@ -42,13 +42,13 @@ export default function SpeciesTaxonPartial() {
         }
       }) => (
         <Button
-          variant="link"
+          variant="plain"
           colorPalette="blue"
           disabled={isLoading}
-          rightIcon={<ArrowForwardIcon />}
           onClick={() => createPartialTaxon(original.registry)}
         >
           {t("species:create.form.select")}
+          <LuMoveRight/>
         </Button>
       )
     }

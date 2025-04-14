@@ -1,22 +1,17 @@
-import {
-  Box,
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Spinner,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Tooltip
-} from "@chakra-ui/react";
+import { Box, Spinner, Tabs } from "@chakra-ui/react";
 import { VerticalTabs } from "@components/pages/observation/list/views/list/container";
 import { bulkActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
+
+import {
+  DrawerBackdrop,
+  DrawerCloseTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerRoot
+} from "@/components/ui/drawer";
+import { Tooltip } from "@/components/ui/tooltip";
 
 import useSpeciesList from "../use-species-list";
 import GroupPost from "./actions/groupTab";
@@ -29,45 +24,48 @@ export enum bulkActions {
 export default function BulkMapperModal() {
   const { t } = useTranslation();
   const { onClose, isOpen } = useSpeciesList();
-  const [tabIndex, setTabIndex] = useState(0);
 
   return (
-    <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
-      <DrawerOverlay />
+    <DrawerRoot placement="bottom" onOpenChange={onClose} open={isOpen}>
+      <DrawerBackdrop />
       <DrawerContent>
-        <DrawerCloseButton />
+        <DrawerCloseTrigger />
         <DrawerHeader>{t("observation:bulk_actions")}</DrawerHeader>
         <VerticalTabs>
-          <Tabs
-            isLazy={true}
+          <Tabs.Root
+            lazyMount={true}
             h={{ md: "100%" }}
-            variant="unstyled"
             className="tabs"
-            index={tabIndex}
-            onChange={setTabIndex}
+            defaultValue={"common:usergroups"}
           >
-            <TabList>
+            <Tabs.List>
               {bulkActionTabs.map(({ name, icon, active = true }) => (
-                <Tab key={name} data-hidden={!active}>
-                  <Tooltip title={t(name)}>
+                <Tabs.Trigger value={name} key={name} data-hidden={!active}>
+                  <Tooltip content={t(name)}>
                     <div>
                       {icon} <span>{t(name)}</span>
                     </div>
                   </Tooltip>
-                </Tab>
+                </Tabs.Trigger>
               ))}
               <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-            </TabList>
-            <TabPanels position="relative">
-              <TabPanel>
+            </Tabs.List>
+            <Tabs.Content
+              value="common:usergroups"
+              height="100%"
+              className="tab-content"
+              position="relative"
+              style={{ overflow: "hidden" }}
+            >
+              <Box height="100%" overflowY="auto">
                 <Suspense fallback={<Spinner />}>
                   <GroupPost />
                 </Suspense>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+              </Box>
+            </Tabs.Content>
+          </Tabs.Root>
         </VerticalTabs>
       </DrawerContent>
-    </Drawer>
+    </DrawerRoot>
   );
 }

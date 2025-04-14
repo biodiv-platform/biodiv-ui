@@ -1,18 +1,12 @@
-import { HamburgerIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  IconButton,
-  Link,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  useToken
-} from "@chakra-ui/react";
+import { Box, IconButton, Link as ChakraLink, useToken } from "@chakra-ui/react";
 import { getSpeciesFieldHeaders } from "@utils/species";
+import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuMenu } from "react-icons/lu";
 import urlSlug from "url-slug";
+
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
 
 import useSpecies from "../use-species";
 
@@ -24,29 +18,31 @@ export default function SpeciesNavigation() {
 
   return (
     <Box position="sticky" top="0" h={0} zIndex={zIndicesSticky}>
-      <Menu>
-        <MenuButton
-          m={1}
-          as={IconButton}
-          aria-label="Options"
-          icon={<HamburgerIcon />}
-          variant="outline"
-          bg="white"
-        />
-        <MenuList>
-          <MenuItem as={Link} href="#synonyms">
-            {t("species:synonyms")}
-          </MenuItem>
-          <MenuItem as={Link} href="#common-names">
-            {t("species:common_names")}
-          </MenuItem>
-          {fieldHeaders.map(({ header }) => (
-            <MenuItem as={Link} href={`#${urlSlug(header)}`} key={header}>
-              {header}
+      <MenuRoot>
+        <MenuTrigger m={1} as={IconButton} aria-label="Options" bg="white">
+          <LuMenu />
+        </MenuTrigger>
+        <MenuContent>
+          <Link href="#synonyms">
+            <MenuItem as={ChakraLink} value="#synonyms">
+              {t("species:synonyms")}
             </MenuItem>
+          </Link>
+          <Link href="#common-names">
+            <MenuItem as={ChakraLink} value="#common-names">
+              {t("species:common_names")}
+            </MenuItem>
+          </Link>
+
+          {fieldHeaders.map(({ header }) => (
+            <Link href={`#${urlSlug(header)}`}>
+              <MenuItem as={ChakraLink} value={`#${urlSlug(header)}`} key={header}>
+                {header}
+              </MenuItem>
+            </Link>
           ))}
-        </MenuList>
-      </Menu>
+        </MenuContent>
+      </MenuRoot>
     </Box>
   );
 }

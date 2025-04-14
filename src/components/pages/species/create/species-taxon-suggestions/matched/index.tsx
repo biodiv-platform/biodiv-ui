@@ -1,8 +1,8 @@
-import { Button } from "@chakra-ui/button";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Button } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuMoveRight } from "react-icons/lu";
 
 import { SpeciesCreateCommonTableRows } from "../common-table-rows";
 import useSpeciesCreate from "../create/use-species-create";
@@ -22,12 +22,12 @@ export default function SpeciesTaxonMatched() {
         }
       }) => (
         <Button
-          variant="link"
+          variant="plain"
           colorPalette="blue"
-          rightIcon={<ArrowForwardIcon />}
           onClick={() => setSelectedTaxon(original.taxonomyDefinition)}
         >
           {t("species:create.form.use_taxon")}
+          <LuMoveRight/>
         </Button>
       )
     }

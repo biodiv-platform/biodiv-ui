@@ -1,6 +1,8 @@
-import { Box, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs, Tag } from "@chakra-ui/react";
+import { Box, Spinner, Tabs } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Tag } from "@/components/ui/tag";
 
 import { SpeciesTaxonCreateForm } from "./create";
 import useSpeciesCreate from "./create/use-species-create";
@@ -19,35 +21,35 @@ export function SpeciesTaxonSuggestions() {
     <>
       {validateResponse && !isLoading && (
         <Box className="white-box" mb={4}>
-          <Tabs colorPalette="blue" isLazy={true}>
-            <TabList>
-              <Tab>
+          <Tabs.Root colorPalette="blue" lazyMount={true}>
+            <Tabs.List>
+              <Tabs.Trigger value="matched">
                 {t("species:create.form.taxon.select")}
                 <Tag colorPalette="blue" ml={2}>
                   {counts.full}
                 </Tag>
-              </Tab>
-              <Tab>
+              </Tabs.Trigger>
+              <Tabs.Trigger value="parentMatched">
                 {t("species:create.form.taxon.parent")}
                 <Tag colorPalette="blue" ml={2}>
                   {counts.partial}
                 </Tag>
-              </Tab>
-              <Tab>{t("species:create.form.taxon.create")}</Tab>
-            </TabList>
+              </Tabs.Trigger>
+              <Tabs.Trigger value="createTaxon">
+                {t("species:create.form.taxon.create")}
+              </Tabs.Trigger>
+            </Tabs.List>
 
-            <TabPanels>
-              <TabPanel>
-                <SpeciesTaxonMatched />
-              </TabPanel>
-              <TabPanel>
-                <SpeciesTaxonPartial />
-              </TabPanel>
-              <TabPanel>
-                <SpeciesTaxonCreateForm />
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+            <Tabs.Content value="matched">
+              <SpeciesTaxonMatched />
+            </Tabs.Content>
+            <Tabs.Content value="parentMatched">
+              <SpeciesTaxonPartial />
+            </Tabs.Content>
+            <Tabs.Content value="createTaxon">
+              <SpeciesTaxonCreateForm />
+            </Tabs.Content>
+          </Tabs.Root>
         </Box>
       )}
       {isLoading && <Spinner mb={6} />}

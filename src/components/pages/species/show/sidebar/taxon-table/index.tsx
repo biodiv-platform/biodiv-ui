@@ -1,6 +1,4 @@
-import { Box } from "@chakra-ui/layout";
-import { Td, Tr } from "@chakra-ui/react";
-import { Table, Tbody } from "@chakra-ui/table";
+import { Box, Table } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
@@ -16,18 +14,18 @@ export default function TaxonTable() {
     <Box mb={4} className="white-box">
       <BoxHeading>🐾 {t("species:taxon")}</BoxHeading>
       <Box>
-        <Table size="sm">
-          <Tbody>
+        <Table.Root size="sm">
+          <Table.Body>
             {species?.breadCrumbs?.map(({ name, rankName, id }) => (
-              <Tr key={id}>
-                <Td>{t(`taxon:hierarchy.${rankName}`)}</Td>
-                <Td>
+              <Table.Row key={id}>
+                <Table.Cell>{t(`taxon:hierarchy.${rankName}`)}</Table.Cell>
+                <Table.Cell>
                   <ExternalBlueLink href={`/species/list?taxon=${id}`}>{name}</ExternalBlueLink>
-                </Td>
-              </Tr>
+                </Table.Cell>
+              </Table.Row>
             ))}
-          </Tbody>
-        </Table>
+          </Table.Body>
+        </Table.Root>
       </Box>
     </Box>
   );

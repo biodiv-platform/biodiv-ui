@@ -3,7 +3,7 @@ import React from "react";
 
 export default function NumericTraitShow({ values }) {
   return (
-    <SimpleGrid columns={{ md: 3 }} spacing={4}>
+    <SimpleGrid columns={{ md: 3 }} gap={4}>
       {values.map((value) => (
         <Flex
           key={value.id}

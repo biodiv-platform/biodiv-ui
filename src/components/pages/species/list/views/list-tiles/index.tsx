@@ -17,7 +17,7 @@ export default function SpeciesList() {
       loader={<SpeciesLoading key={0} />}
       scrollableTarget="items-container"
     >
-      <SimpleGrid columns={{ base: 1, md: 5 }} spacing={4}>
+      <SimpleGrid columns={{ base: 1, md: 5 }} gap={4}>
         {speciesData.l.map((o) => (
           <GridViewCard getCheckboxProps={getCheckboxProps} key={o.id} o={o} />
         ))}

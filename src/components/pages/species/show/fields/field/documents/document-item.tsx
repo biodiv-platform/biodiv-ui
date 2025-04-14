@@ -1,4 +1,4 @@
-import { Avatar, Box, Heading, HStack, Link } from "@chakra-ui/react";
+import { Box, Heading, HStack, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import DocumentIcon from "@components/pages/document/common/document-icon";
 import useGlobalState from "@hooks/use-global-state";
@@ -6,6 +6,8 @@ import { getUserImage } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 export default function DocumentItem({ document: d }) {
   const { t } = useTranslation();
@@ -15,7 +17,7 @@ export default function DocumentItem({ document: d }) {
     <Box p={3} mt={4} borderWidth="1px" borderColor="gray.300" borderRadius="md">
       <LocalLink href={`/document/show/${d.id}`}>
         <a>
-          <HStack alignItems="center" spacing={4} mb={4}>
+          <HStack alignItems="center" gap={4} mb={4}>
             <DocumentIcon />
             <Heading fontSize="lg" className="elipsis-2">
               <span
