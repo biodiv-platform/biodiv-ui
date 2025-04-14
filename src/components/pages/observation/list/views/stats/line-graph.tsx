@@ -143,7 +143,31 @@ const LineGraph = forwardRef(function LineGraph(
       .call(axisLeft(y).tickSize(0))
       .call((g) => g.select(".domain").remove());
 
-    svg.selectAll(".y-axis .tick text").text((d) => d.split("|")[1]);
+    svg.selectAll(".y-axis .tick").each(function (d) {
+      const tick = select(this);
+      const label = d?.split?.("|")[1];
+      const textEl = tick.select("text");
+
+      // Cleanup any previous rects
+      tick.selectAll("rect").remove();
+
+      if (label?.startsWith("rgb")) {
+        const bbox = textEl.node()?.getBBox();
+
+        if (bbox) {
+          tick
+            .append("rect")
+            .attr("x", -20)
+            .attr("y", -20)
+            .attr("width", 20)
+            .attr("height", 20)
+            .attr("fill", d?.split?.("|")[1]);
+        }
+      }
+
+      // Always show the label text
+      textEl.text(label?.startsWith("rgb") ? null : label?.replace(/00:00:00/g, ""));
+    });
 
     const areaGenerator = area()
       .x((d, i) => x(Months[i]) + ml + x.bandwidth() / 2 || 0)
@@ -233,12 +257,41 @@ const LineGraph = forwardRef(function LineGraph(
         .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
         .call(axisLeft(y).tickSize(0))
         .call((g) => g.select(".domain").remove());
+      svg.selectAll(".y-axis .tick").each(function (d) {
+        const tick = select(this);
+        const textEl = tick.select("text");
+
+        // Cleanup any previous rects
+        tick.selectAll("rect").remove();
+
+        if (d?.startsWith("rgb")) {
+          const bbox = textEl.node()?.getBBox();
+
+          if (bbox) {
+            tick
+              .append("rect")
+              .attr("x", -20)
+              .attr("y", -20)
+              .attr("width", 20)
+              .attr("height", 20)
+              .attr("fill", d);
+          }
+        }
+
+        // Always show the label text
+        textEl.text(d?.startsWith("rgb") ? null : d?.replace(/00:00:00/g, ""));
+      });
       svg.select(".chart").selectAll("*").remove();
       svg
         .select(".x-axis")
         .join("g")
         .attr("transform", `translate(${ml},${h - mt - mb})`)
-        .call(axisBottom(x))
+        .call(
+          axisBottom(x).tickFormat((d) => {
+            const label = String(d); // ensure it's a string
+            return isSmall ? label.charAt(0) : label;
+          })
+        )
         .selectAll("text");
       svg
         .select(".chart")
@@ -331,13 +384,42 @@ const LineGraph = forwardRef(function LineGraph(
         .call(axisLeft(y).tickSize(0))
         .call((g) => g.select(".domain").remove());
 
-      svg.selectAll(".y-axis .tick text").text((d) => d.split("|")[1]);
+      svg.selectAll(".y-axis .tick").each(function (d) {
+        const tick = select(this);
+        const label = d?.split?.("|")[1];
+        const textEl = tick.select("text");
+
+        // Cleanup any previous rects
+        tick.selectAll("rect").remove();
+
+        if (label?.startsWith("rgb")) {
+          const bbox = textEl.node()?.getBBox();
+
+          if (bbox) {
+            tick
+              .append("rect")
+              .attr("x", -20)
+              .attr("y", -20)
+              .attr("width", 20)
+              .attr("height", 20)
+              .attr("fill", d?.split?.("|")[1]);
+          }
+        }
+
+        // Always show the label text
+        textEl.text(label?.startsWith("rgb") ? null : label?.replace(/00:00:00/g, ""));
+      });
       svg.select(".chart").selectAll("*").remove();
       svg
         .select(".x-axis")
         .join("g")
         .attr("transform", `translate(${ml},${h - mt - mb})`)
-        .call(axisBottom(x))
+        .call(
+          axisBottom(x).tickFormat((d) => {
+            const label = String(d); // ensure it's a string
+            return isSmall ? label.charAt(0) : label;
+          })
+        )
         .selectAll("text");
       svg
         .select(".chart")
