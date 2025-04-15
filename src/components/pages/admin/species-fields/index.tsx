@@ -600,6 +600,52 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
   // Add this function to handle successful translation
   const handleTranslationSuccess = (newTranslation) => {
+    console.log("Translation success:", newTranslation);
+    
+    // First, let's directly update our current view data
+    if (selectedField && tabLanguage) {
+      // Create a deep copy of speciesFields to modify
+      const updatedFields = JSON.parse(JSON.stringify(speciesFields));
+      
+      // Helper function to update a field in the hierarchy
+      const updateFieldInHierarchy = (fields, fieldId, newData) => {
+        // Check top level (concepts)
+        for (let i = 0; i < fields.length; i++) {
+          if (fields[i].id === fieldId) {
+            fields[i].name = newData.header || fields[i].name;
+            return true;
+          }
+          
+          // Check categories
+          if (fields[i].children) {
+            for (let j = 0; j < fields[i].children.length; j++) {
+              if (fields[i].children[j].id === fieldId) {
+                fields[i].children[j].name = newData.header || fields[i].children[j].name;
+                return true;
+              }
+              
+              // Check subcategories
+              if (fields[i].children[j].children) {
+                for (let k = 0; k < fields[i].children[j].children.length; k++) {
+                  if (fields[i].children[j].children[k].id === fieldId) {
+                    fields[i].children[j].children[k].name = newData.header || fields[i].children[j].children[k].name;
+                    return true;
+                  }
+                }
+              }
+            }
+          }
+        }
+        return false;
+      };
+      
+      // Find and update the field with new translation data
+      if (updateFieldInHierarchy(updatedFields, selectedField.id, newTranslation)) {
+        console.log("Updated fields:", updatedFields);
+        setSpeciesFields(updatedFields);
+      }
+    }
+    
     // Check if this language already exists in our tabs
     const languageExists = availableLanguages.some(
       lang => lang.id === newTranslation.languageId
@@ -610,19 +656,47 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
       const language = languages.find(lang => lang.id === newTranslation.languageId);
       
       if (language) {
-        // Add the new language to our tabs
+        // Add the new language to our available languages
         const newLanguage = {
           id: language.id,
           name: language.label,
           code: language.code
         };
         
-        // Update the available languages
         setAvailableLanguages(prev => [...prev, newLanguage]);
-        
-        // Refresh the species fields
-        fetchSpeciesFields(language.code);
       }
+    }
+    
+    // Force reload the data from API as a backup
+    if (tabLanguage) {
+      console.log("Reloading data for language:", tabLanguage);
+      axGetAllFieldsMeta({ langId: tabLanguage.id })
+        .then(response => {
+          if (response.data) {
+            // Transform the data to match our expected format
+            const transformedData = response.data.map((item) => ({
+              id: item.parentField.id,
+              name: item.parentField.header,
+              type: item.parentField.label.toLowerCase(),
+              children: (item.childField || []).map((child) => ({
+                id: child.parentField.id,
+                name: child.parentField.header,
+                type: child.parentField.label.toLowerCase(),
+                children: (child.childFields || []).map((subChild) => ({
+                  id: subChild.id,
+                  name: subChild.header,
+                  type: subChild.label.toLowerCase(),
+                  children: []
+                }))
+              }))
+            }));
+            console.log("Refreshed data from API:", transformedData);
+            setSpeciesFields(transformedData);
+          }
+        })
+        .catch(error => {
+          console.error("Error refreshing fields after translation:", error);
+        });
     }
     
     // Close the modal
