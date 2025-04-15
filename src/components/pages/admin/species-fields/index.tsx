@@ -64,7 +64,7 @@ interface FieldTranslation {
   urlIdentifier: string;
 }
 
-export default function SpeciesFieldsAdmin() {
+export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   const { t } = useTranslation();
   const [selectedField, setSelectedField] = useState<SpeciesField | null>(null);
   const [selectedConcept, setSelectedConcept] = useState<SpeciesField | null>(null);
@@ -86,6 +86,11 @@ export default function SpeciesFieldsAdmin() {
 
   const [modalLanguage, setModalLanguage] = useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  console.log("fieldLanguages", fieldLanguages);
+
+  const [tabLanguage, setTabLanguage] = useState({});
+
 
   const {
     isOpen: isFieldModalOpen,
@@ -109,7 +114,8 @@ export default function SpeciesFieldsAdmin() {
   useEffect(() => {
     const fetchFields = async () => {
       try {
-        const { data } = await axGetAllFieldsMeta({ langId: "205" });
+        
+        const { data } = await axGetAllFieldsMeta({ langId: tabLanguage?tabLanguage.id:205 });
         // Transform the data to match our expected format
         const transformedData = data.map((item) => ({
           id: item.parentField.id,
@@ -135,7 +141,7 @@ export default function SpeciesFieldsAdmin() {
     };
 
     fetchFields();
-  }, []);
+  }, [tabLanguage]);
 
   useEffect(() => {
     const fetchLanguages = async () => {
@@ -568,6 +574,9 @@ export default function SpeciesFieldsAdmin() {
     }
   };
 
+  console.log("selectedLanguage", selectedLanguage);
+  console.log("activeLanguages", activeLanguages);
+  console.log("tabLanguage", tabLanguage);
   return (
     <Box className="container mt">
       <PageHeading>🧬 {t("admin:species_fields.title")}</PageHeading>
@@ -585,27 +594,28 @@ export default function SpeciesFieldsAdmin() {
         mb={6}
         rounded="md"
         overflowX="auto"
-        onChange={(index) => setSelectedLanguage(activeLanguages[index])}
+        onChange={(v) => setTabLanguage(fieldLanguages[v])}
       >
         <TabList bg="gray.100" rounded="md">
-          {activeLanguages.map((langCode) => (
+          {fieldLanguages.map((fieldlLanguage) => (
             <Tab
-              key={langCode}
+              key={fieldlLanguage.id}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >
-              {languages.find((lang) => lang.code === langCode)?.label || langCode}
+              {/* {languages.find((lang) => lang.code === langCode)?.label || langCode} */}
+              {fieldlLanguage.name}
             </Tab>
           ))}
         </TabList>
 
-        <TabPanels>
+        {/* <TabPanels>
           {activeLanguages.map((langCode) => (
             <TabPanel key={langCode} pt={4}>
               {renderLanguageContent(langCode)}
             </TabPanel>
           ))}
-        </TabPanels>
+        </TabPanels> */}
       </Tabs>
 
       <Accordion allowMultiple className="white-box">
