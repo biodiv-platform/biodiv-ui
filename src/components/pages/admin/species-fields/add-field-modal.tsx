@@ -26,15 +26,22 @@ interface AddFieldModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (values: any) => void;
-  parentType: string;
+  parentType?: string;
   parentName?: string;
 }
 
-const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit, parentType, parentName }) => {
+const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit, parentType = "root", parentName }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
   
-  const fieldType = parentType === "concept" ? "category" : "subcategory";
+  let fieldType;
+  if (parentType === "root") {
+    fieldType = "concept";
+  } else if (parentType === "concept") {
+    fieldType = "category";
+  } else {
+    fieldType = "subcategory";
+  }
 
   const hForm = useForm({
     resolver: yupResolver(

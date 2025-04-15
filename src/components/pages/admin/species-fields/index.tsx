@@ -43,7 +43,6 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { memo, useCallback, useEffect, useState } from "react";
 
-import AddConceptModal from "./add-concept-modal";
 import AddFieldModal from "./add-field-modal";
 import TranslateFieldModal from "./translate-field-modal";
 
@@ -178,11 +177,16 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
   const handleAddConcept = async (newConcept) => {
     try {
+      // Extract the first translation (for backward compatibility)
+      const firstTranslation = newConcept.translations[0];
+      
       const { success, data } = await axCreateSpeciesField(
         {
-          header: newConcept.name,
-          description: newConcept.description,
-          urlIdentifier: newConcept.urlIdentifier
+          header: firstTranslation.header,
+          description: firstTranslation.description,
+          urlIdentifier: firstTranslation.urlIdentifier,
+          // Include translations if API supports it
+          translations: newConcept.translations
         },
         0 // parentId for root concept
       );
@@ -806,10 +810,11 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
       />
 
       {/* Modal for adding a new concept */}
-      <AddConceptModal
+      <AddFieldModal
         isOpen={isConceptModalOpen}
         onClose={onConceptModalClose}
         onSubmit={handleAddConcept}
+        parentType="root" // This indicates we're adding a root concept
       />
 
       {/* Modal for translating a field */}
