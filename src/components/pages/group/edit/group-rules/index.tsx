@@ -9,7 +9,7 @@ import { formatGroupRules } from "./utils";
 
 export default function GroupRules({ userGroupId, rules, traits }) {
   const { t } = useTranslation();
-  const [groupRules, setGroupRules] = useState(formatGroupRules(rules));
+  const [groupRules, setGroupRules] = useState(formatGroupRules(rules,traits));
   const [isCreate, setIsCreate] = useState(false);
 
   return (

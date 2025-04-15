@@ -1,6 +1,6 @@
 import { formatDateFromUTC } from "@utils/date";
 
-export const formatGroupRules = (rules) => {
+export const formatGroupRules = (rules, traits) => {
   const groupRules: any[] = [];
   const {
     hasUserRule,
@@ -39,10 +39,11 @@ export const formatGroupRules = (rules) => {
   });
   //populate trait rules array
   traitRuleList?.forEach((item)=> {
+    const trait = traits.filter(trait => trait.traits.traitId === item.traitId)[0]
     groupRules.push({
       id: item.id,
       name: "traitRule",
-      value: `${item.traitId} : ${item.value}`
+      value: `${trait.traits.name} : ${trait.values.filter(v => v.traitValueId ===item.value)[0].value}`
     })
   })
 

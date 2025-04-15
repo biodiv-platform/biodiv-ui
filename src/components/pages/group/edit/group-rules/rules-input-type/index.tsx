@@ -2,6 +2,7 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { DateRangePickerField } from "@components/form/daterangepicker";
 import { SelectInputField } from "@components/form/select";
+import { SelectMultipleInputField } from "@components/form/select-multiple";
 import { TraitsValue } from "@interfaces/traits";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -49,13 +50,15 @@ export default function RulesInputType({ inputType, name, traits }) {
               />
             </Box>
             <Box>
-              <SelectInputField
+              <SelectMultipleInputField
                 name={name + "[0].value"}
                 label={"Trait Value"}
+                isRequired={true}
                 options={options.map((option) => ({
                   label: option.value,
                   value: option.traitValueId
                 }))}
+                mb={0}
                 shouldPortal={true}
               />
             </Box>

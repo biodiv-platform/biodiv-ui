@@ -71,9 +71,10 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
       case "taxonomicIdList":
         return { [`${type}`]: ruleValue?.map((o) => o.id) };
       case "traitList":
-        return { [`${type}`]: Object.fromEntries(
-          ruleValue.map(({ trait, value }) => [trait.split("|")[0], value])
-        ) };
+        return ruleValue.flatMap(([trait, values]) => {
+          const traitId = trait.split("|")[0];
+          return values.map(value => [traitId, value]);
+        });
     }
   };
 
@@ -82,7 +83,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
     const { success, data } = await axAddUserGroupRule(userGroupId, payload);
     if (success && groupRules) {
       notification(t("group:rules.add.success"), NotificationType.Success);
-      setGroupRules(formatGroupRules(data));
+      setGroupRules(formatGroupRules(data,traits));
       setIsCreate(false);
     } else {
       notification(t("group:rules.add.failure"));

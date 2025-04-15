@@ -40,6 +40,7 @@ export default function TraitsValueComponent({
               ? valueObj.filter((t) => t.traits.languageId == langId)[0].values[index].value
               : `${t("traits:create_form.value")} ${index + 1}`
           }
+          isRequired={true}
         />
       </Box>
       <GridItem colSpan={{ md: 2 }}>
