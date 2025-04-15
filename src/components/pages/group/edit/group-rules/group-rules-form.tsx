@@ -37,13 +37,13 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
           otherwise: Yup.mixed().when("type", {
             is: "traitList",
             then: Yup.array()
-            .of(
-              Yup.object().shape({
-                trait: Yup.string().required("Trait is required"), // Ensuring trait is a required string
-                value: Yup.mixed().required("Value is required") // Value must be present
-              })
-            )
-            .min(1, "At least one trait is required"),
+              .of(
+                Yup.object().shape({
+                  trait: Yup.string().required("Trait is required"), // Ensuring trait is a required string
+                  value: Yup.mixed().required("Value is required") // Value must be present
+                })
+              )
+              .min(1, "At least one trait is required"),
             otherwise: Yup.mixed().required()
           })
         })
@@ -71,10 +71,12 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
       case "taxonomicIdList":
         return { [`${type}`]: ruleValue?.map((o) => o.id) };
       case "traitList":
-        return ruleValue.flatMap(([trait, values]) => {
-          const traitId = trait.split("|")[0];
-          return values.map(value => [traitId, value]);
-        });
+        return {
+          [`${type}`]: ruleValue.flatMap(({ trait, value }) => {
+            const traitId = trait.split("|")[0];
+            return value.map((v) => ({ [traitId]: v }));
+          })
+        };
     }
   };
 
@@ -83,7 +85,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
     const { success, data } = await axAddUserGroupRule(userGroupId, payload);
     if (success && groupRules) {
       notification(t("group:rules.add.success"), NotificationType.Success);
-      setGroupRules(formatGroupRules(data,traits));
+      setGroupRules(formatGroupRules(data, traits));
       setIsCreate(false);
     } else {
       notification(t("group:rules.add.failure"));
