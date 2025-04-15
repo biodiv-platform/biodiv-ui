@@ -39,9 +39,10 @@ interface TranslateFieldModalProps {
   onClose: () => void;
   field: any;
   translations: FieldTranslation[];
+  onSuccess: (translation: any) => void;
 }
 
-const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClose, field, translations = [] }) => {
+const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClose, field, translations = [], onSuccess }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
   const [languages, setLanguages] = React.useState<Array<{id: number, name: string}>>([]);
@@ -141,13 +142,27 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
         }))
       };
 
-      await axUpdateSpeciesFieldTranslations([formattedTranslations]);
-      notification(t("admin:species_fields.translations_saved"), NotificationType.Success);
-      hForm.reset();
-      onClose();
+      const response = await axUpdateSpeciesFieldTranslations([formattedTranslations]);
+      
+      if (response.success) {
+        // Pass the complete translation data to the parent component
+        // This will allow the parent to update tabs immediately
+        const newTranslations = values.translations.map(translation => ({
+          languageId: translation.languageId,
+          header: translation.header,
+          description: translation.description,
+          urlIdentifier: translation.urlIdentifier
+        }));
+        
+        onSuccess(newTranslations);
+        hForm.reset();
+        onClose();
+      } else {
+        notification(t("admin:species_fields.translation_save_error"), NotificationType.Error);
+      }
     } catch (error) {
-      console.error("Error saving translations:", error);
-      notification(t("admin:species_fields.save_error"), NotificationType.Error);
+      console.error("Error saving translation:", error);
+      notification(t("admin:species_fields.translation_save_error"), NotificationType.Error);
     }
   };
 

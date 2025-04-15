@@ -91,7 +91,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
   const [tabLanguage, setTabLanguage] = useState({});
 
-
   const {
     isOpen: isFieldModalOpen,
     onOpen: onFieldModalOpen,
@@ -110,12 +109,22 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     onClose: onTranslateModalClose
   } = useDisclosure();
 
+  const [availableLanguages, setAvailableLanguages] = useState(fieldLanguages || []);
+
+  // Calculate the English tab index once
+  const defaultTabIndex = React.useMemo(() => {
+    if (fieldLanguages && fieldLanguages.length > 0) {
+      const englishIndex = fieldLanguages.findIndex((lang) => lang.name === "English");
+      return englishIndex !== -1 ? englishIndex : 0;
+    }
+    return 0;
+  }, [fieldLanguages]);
+
   // Add useEffect to fetch data when component mounts
   useEffect(() => {
     const fetchFields = async () => {
       try {
-        
-        const { data } = await axGetAllFieldsMeta({ langId: tabLanguage?tabLanguage.id:205 });
+        const { data } = await axGetAllFieldsMeta({ langId: tabLanguage ? tabLanguage.id : 205 });
         // Transform the data to match our expected format
         const transformedData = data.map((item) => ({
           id: item.parentField.id,
@@ -574,17 +583,53 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     }
   };
 
+  // Initialize tabLanguage with the default language
+  useEffect(() => {
+    if (fieldLanguages && fieldLanguages.length > 0) {
+      setTabLanguage(fieldLanguages[defaultTabIndex]);
+    }
+  }, [fieldLanguages, defaultTabIndex]);
+
   console.log("selectedLanguage", selectedLanguage);
   console.log("activeLanguages", activeLanguages);
   console.log("tabLanguage", tabLanguage);
+
+  // Add this function to handle successful translation
+  const handleTranslationSuccess = (newTranslation) => {
+    // Check if this language already exists in our tabs
+    const languageExists = availableLanguages.some(
+      lang => lang.id === newTranslation.languageId
+    );
+    
+    if (!languageExists) {
+      // Find the language details from our languages list
+      const language = languages.find(lang => lang.id === newTranslation.languageId);
+      
+      if (language) {
+        // Add the new language to our tabs
+        const newLanguage = {
+          id: language.id,
+          name: language.label,
+          code: language.code
+        };
+        
+        // Update the available languages
+        setAvailableLanguages(prev => [...prev, newLanguage]);
+        
+        // Refresh the species fields
+        fetchSpeciesFields(language.code);
+      }
+    }
+    
+    // Close the modal
+    onTranslateModalClose();
+  };
+
   return (
     <Box className="container mt">
       <PageHeading>🧬 {t("admin:species_fields.title")}</PageHeading>
 
       <Flex justifyContent="flex-end" mb={4}>
-        <Button colorScheme="green" onClick={handleAddTranslation}>
-          {t("admin:species_fields.add_translation")}
-        </Button>
         <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={onConceptModalOpen}>
           {t("admin:species_fields.add_concept")}
         </Button>
@@ -595,6 +640,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
         rounded="md"
         overflowX="auto"
         onChange={(v) => setTabLanguage(fieldLanguages[v])}
+        defaultIndex={defaultTabIndex}
       >
         <TabList bg="gray.100" rounded="md">
           {fieldLanguages.map((fieldlLanguage) => (
@@ -772,6 +818,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
         onClose={onTranslateModalClose}
         field={selectedField}
         translations={fieldTranslations}
+        onSuccess={handleTranslationSuccess}
       />
 
       {/* Language Selection Modal */}
