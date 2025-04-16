@@ -10,7 +10,6 @@ import {
   FormControl,
   FormLabel,
   IconButton,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -19,16 +18,14 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
-  Spinner,
   Tab,
   TabList,
   Tabs,
-  Textarea,
   Tooltip,
-  useDisclosure,
-  VStack
+  useDisclosure
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
+import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import TranslateIcon from "@icons/translate";
 import {
@@ -39,13 +36,10 @@ import {
 import { axGetLangList } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import AddFieldModal from "./add-field-modal";
 import TranslateFieldModal from "./translate-field-modal";
-
-// import AddConceptModal from "../add-concept-modal";
-// import AddFieldModal from "./add-field-modal";
 
 interface SpeciesField {
   id: number;
@@ -67,6 +61,13 @@ interface TabLanguage {
   code: string;
 }
 
+interface Language {
+  id: string;
+  name: string;
+  code: string;
+  label: string;
+}
+
 export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   const { t } = useTranslation();
   const [selectedField, setSelectedField] = useState<SpeciesField | null>(null);
@@ -75,17 +76,16 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   const [speciesFields, setSpeciesFields] = useState<SpeciesField[]>([]);
   const [fieldTranslations, setFieldTranslations] = useState<FieldTranslation[]>([]);
 
-  const [languages, setLanguages] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
+  const [languages, setLanguages] = useState<Language[]>([]);
+
   const [activeLanguages, setActiveLanguages] = useState<string[]>(["en"]);
 
-  const [loading, setLoading] = useState({});
   const [languageData, setLanguageData] = useState({});
 
   const [isLoadingLanguages, setIsLoadingLanguages] = useState(false);
 
   const [modalLanguage, setModalLanguage] = useState<string>("");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
 
   const [tabLanguage, setTabLanguage] = useState<TabLanguage | null>(null);
 
@@ -122,7 +122,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   useEffect(() => {
     const fetchFields = async () => {
       try {
-        const { data } = await axGetAllFieldsMeta({ langId: tabLanguage ? tabLanguage.id : 205 });
+        const { data } = await axGetAllFieldsMeta({ langId: tabLanguage ? tabLanguage.id : SITE_CONFIG.LANGUAGE.DEFAULT_ID });
         // Transform the data to match our expected format
         const transformedData = data.map((item) => ({
           id: item.parentField.id,
@@ -161,7 +161,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
             code: lang.twoLetterCode || lang.threeLetterCode || "en",
             id: lang.id.toString()
           }));
-          console.log("Fetched languages:", formattedLanguages);
           setLanguages(formattedLanguages);
         }
       } catch (error) {
@@ -294,12 +293,8 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
   const handleSelectLanguage = () => {
     if (modalLanguage && modalLanguage.trim() !== "") {
-      console.log("Selected language from modal:", modalLanguage);
-
       if (!activeLanguages.includes(modalLanguage)) {
-        console.log("Adding to active languages:", modalLanguage);
         const newActiveLanguages = [...activeLanguages, modalLanguage];
-        console.log("New active languages:", newActiveLanguages);
         setActiveLanguages(newActiveLanguages);
 
         // Fetch the data for this language if we haven't already
@@ -312,23 +307,13 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     }
   };
 
-  const handleAddTranslation = () => {
-    setModalLanguage("");
-    onOpen();
-  };
-
   const handleModalLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setModalLanguage(e.target.value);
   };
 
   const fetchSpeciesFields = async (langCode) => {
-    console.log(`Fetching data for language: ${langCode}`);
-    setLoading((prev) => ({ ...prev, [langCode]: true }));
-
     try {
-      const langId = languages.find((lang) => lang.code === langCode)?.id || "205";
-      console.log(`Using language ID: ${langId} for ${langCode}`);
-
+      const langId = languages.find((lang) => lang.code === langCode)?.id || SITE_CONFIG.LANGUAGE.DEFAULT_ID;
       const { data } = await axGetAllFieldsMeta({ langId });
 
       if (data) {
@@ -363,7 +348,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
           };
         });
 
-        console.log("Transformed Data:", transformedData);
         setLanguageData((prev) => ({
           ...prev,
           [langCode]: transformedData
@@ -374,8 +358,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     } catch (error) {
       console.error(`Error fetching species fields for ${langCode}:`, error);
       notification(t("admin:species_fields.fetch_error"));
-    } finally {
-      setLoading((prev) => ({ ...prev, [langCode]: false }));
     }
   };
 
@@ -386,14 +368,8 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     }
   }, [fieldLanguages, defaultTabIndex]);
 
-  console.log("selectedLanguage", selectedLanguage);
-  console.log("activeLanguages", activeLanguages);
-  console.log("tabLanguage", tabLanguage);
-
   // Add this function to handle successful translation
   const handleTranslationSuccess = (newTranslation) => {
-    console.log("Translation success:", newTranslation);
-
     // First, let's directly update our current view data
     if (selectedField && tabLanguage) {
       // Create a deep copy of speciesFields to modify
@@ -434,7 +410,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
       // Find and update the field with new translation data
       if (updateFieldInHierarchy(updatedFields, selectedField.id, newTranslation)) {
-        console.log("Updated fields:", updatedFields);
         setSpeciesFields(updatedFields);
       }
     }
@@ -460,7 +435,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
     // Force reload the data from API as a backup
     if (tabLanguage) {
-      console.log("Reloading data for language:", tabLanguage);
       axGetAllFieldsMeta({ langId: tabLanguage.id })
         .then((response) => {
           if (response.data) {
@@ -481,7 +455,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                 }))
               }))
             }));
-            console.log("Refreshed data from API:", transformedData);
             setSpeciesFields(transformedData);
           }
         })

@@ -33,6 +33,7 @@ import {
   VStack
 } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
+import SITE_CONFIG from "@configs/site-config";
 import CheckIcon from "@icons/check";
 import { axGetAllFieldsMeta, axUpdateSpeciesFieldTranslations } from "@services/species.service";
 import { axGetLangList } from "@services/utility.service";
@@ -41,6 +42,13 @@ import { debounce } from "lodash";
 import useTranslation from "next-translate/useTranslation";
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
+interface Language {
+  id: string;
+  name: string;
+  code: string;
+  label: string;
+}
 
 const TranslationField = memo(
   ({
@@ -147,7 +155,7 @@ export default function SpeciesFieldTranslations() {
     }
   });
   const [fields, setFields] = useState([]);
-  const [languages, setLanguages] = useState([]);
+  const [languages, setLanguages] = useState<Language[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
   const [activeLanguages, setActiveLanguages] = useState<string[]>(["en"]);
   const [modalLanguage, setModalLanguage] = useState<string>("");
@@ -233,7 +241,7 @@ export default function SpeciesFieldTranslations() {
     setLoading((prev) => ({ ...prev, [langCode]: true }));
 
     try {
-      const langId = languages.find((lang) => lang.code === langCode)?.id || "205";
+      const langId = languages.find((lang) => lang.code === langCode)?.id || SITE_CONFIG.LANGUAGE.DEFAULT_ID;
       console.log(`Using language ID: ${langId} for ${langCode}`);
 
       const { data } = await axGetAllFieldsMeta({ langId });
@@ -436,10 +444,10 @@ export default function SpeciesFieldTranslations() {
       const translationsData = { ...translations, ...editableTranslations };
 
       const formattedTranslations = Object.entries(translationsData).map(([fieldId, langData]) => ({
-        fieldId,
+        fieldId: parseInt(fieldId),
         translations: Object.entries(langData as Record<string, any>).map(
           ([langCode, fieldData]) => ({
-            langId: languages.find((l) => l.code === langCode)?.id,
+            langId: parseInt(languages.find((l) => l.code === langCode)?.id || SITE_CONFIG.LANGUAGE.DEFAULT_ID),
             ...fieldData
           })
         )
@@ -452,10 +460,7 @@ export default function SpeciesFieldTranslations() {
         return;
       }
 
-      await axUpdateSpeciesFieldTranslations(
-        formattedTranslations,
-        languages.find((l) => l.code === selectedLanguage)?.id
-      );
+      await axUpdateSpeciesFieldTranslations(formattedTranslations);
 
       notification(t("admin:species_fields.translations_saved"), NotificationType.Success);
     } catch (error) {

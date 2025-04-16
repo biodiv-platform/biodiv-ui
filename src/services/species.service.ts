@@ -3,7 +3,6 @@ import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
 import { createSpeciesFieldPayload, SpeciesFieldInput } from "@utils/species";
-import axios from "axios";
 
 export const axGetSpeciesById = async (speciesId, payload) => {
   try {
