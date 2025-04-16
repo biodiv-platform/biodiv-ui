@@ -87,7 +87,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
           firstRow.eachCell((cell, colNumber) => {
             if (cell.value) {
               const cellValue = cell.value.toString();
-              extractedHeaders.push(cellValue);
+              extractedHeaders.push(`${cellValue}|${colNumber-1}`);
               if (options.some((option) => option.toLowerCase() === cellValue.toLowerCase())) {
                 setColumnMapping((prev) => {
                   const updatedOptions = [...prev];
