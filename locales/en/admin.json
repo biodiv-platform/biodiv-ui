@@ -1,7 +1,8 @@
 {
   "links": {
     "name-macthing": "Name Matching",
-    "notification": "Send Push-Notification"
+    "notification": "Send Push-Notification",
+    "species_fields": "Species Fields"
   },
   "pages": {
     "notification": {
