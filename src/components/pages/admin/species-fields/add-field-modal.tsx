@@ -11,7 +11,8 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text} from "@chakra-ui/react";
+  Text
+} from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,7 +20,7 @@ import CheckIcon from "@icons/check";
 import { axGetLangList } from "@services/utility.service";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
-import { FormProvider, useFieldArray,useForm } from "react-hook-form";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import ReactSelect from "react-select";
 import * as Yup from "yup";
 
@@ -31,16 +32,22 @@ interface AddFieldModalProps {
   parentName?: string;
 }
 
-const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit, parentType = "root", parentName }) => {
+const AddFieldModal: React.FC<AddFieldModalProps> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  parentType = "root",
+  parentName
+}) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
-  const [languages, setLanguages] = React.useState<{ value: number, label: string }[]>([]);
-  
+  const [languages, setLanguages] = React.useState<{ value: number; label: string }[]>([]);
+
   React.useEffect(() => {
     const fetchLanguages = async () => {
       const response = await axGetLangList();
       if (response.success && response.data.length > 0) {
-        const formattedLanguages = response.data.map(lang => ({
+        const formattedLanguages = response.data.map((lang) => ({
           value: lang.id,
           label: lang.name
         }));
@@ -53,10 +60,10 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
         ]);
       }
     };
-    
+
     fetchLanguages();
   }, []);
-  
+
   let fieldType;
   if (parentType === "root") {
     fieldType = "concept";
@@ -69,14 +76,16 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
   const hForm = useForm({
     resolver: yupResolver(
       Yup.object().shape({
-        translations: Yup.array().of(
-          Yup.object().shape({
-            languageId: Yup.number().required(t("form:required")),
-            header: Yup.string().required(t("form:required")),
-            description: Yup.string().required(t("form:required")),
-            urlIdentifier: Yup.string().required(t("form:required"))
-          })
-        ).min(1, t("form:at_least_one_translation"))
+        translations: Yup.array()
+          .of(
+            Yup.object().shape({
+              languageId: Yup.number().required(t("form:required")),
+              header: Yup.string().required(t("form:required")),
+              description: Yup.string().required(t("form:required")),
+              urlIdentifier: Yup.string().required(t("form:required"))
+            })
+          )
+          .min(1, t("form:at_least_one_translation"))
       })
     ),
     defaultValues: {
@@ -107,9 +116,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
       <ModalContent>
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleSubmit)}>
-            <ModalHeader>
-              {t(`admin:species_fields.add_${fieldType}`)}
-            </ModalHeader>
+            <ModalHeader>{t(`admin:species_fields.add_${fieldType}`)}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               {parentName && (
@@ -117,7 +124,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
                   {t(`admin:species_fields.adding_to_${parentType}`, { name: parentName })}
                 </Text>
               )}
-              
+
               {/* Add Translation Button */}
               <Flex justify="flex-end" mb={4}>
                 <Button
@@ -146,7 +153,9 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
                     variant={activeTab === index ? "solid" : "outline"}
                     onClick={() => setActiveTab(index)}
                   >
-                    {languages.find(lang => lang.value === hForm.watch(`translations.${index}.languageId`))?.label || "Unknown"}
+                    {languages.find(
+                      (lang) => lang.value === hForm.watch(`translations.${index}.languageId`)
+                    )?.label || "Unknown"}
                     {index > 0 && (
                       <IconButton
                         size="xs"
@@ -173,33 +182,37 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
                   bg="gray.50"
                   borderRadius="md"
                 >
-                  <ReactSelect
-                    name={`translations.${index}.languageId`}
-                    placeholder={t("admin:species_fields.language")}
-                    options={languages}
-                    value={
-                      languages.find(lang => lang.value === hForm.watch(`translations.${index}.languageId`))
-                    }
-                    onChange={(option) => {
-                      if (option) {
-                        hForm.setValue(`translations.${index}.languageId`, option.value);
-                      }
-                    }}
-                  />
+                  <Box mb={4}>
+                    <Text mb={2}>Select Language</Text>
+                    <ReactSelect
+                      name={`translations.${index}.languageId`}
+                      placeholder={t("admin:species_fields.language")}
+                      options={languages}
+                      value={languages.find(
+                        (lang) => lang.value === hForm.watch(`translations.${index}.languageId`)
+                      )}
+                      onChange={(option) => {
+                        if (option) {
+                          hForm.setValue(`translations.${index}.languageId`, option.value);
+                        }
+                      }}
+                    />
 
-                  <TextBoxField 
+                  </Box>
+
+                  <TextBoxField
                     name={`translations.${index}.header`}
                     label={t(`admin:species_fields.${fieldType}_name`)}
                     isRequired={true}
                   />
-                  
-                  <TextBoxField 
+
+                  <TextBoxField
                     name={`translations.${index}.description`}
                     label={t("admin:species_fields.description")}
                     isRequired={true}
                   />
-                  
-                  <TextBoxField 
+
+                  <TextBoxField
                     name={`translations.${index}.urlIdentifier`}
                     label={t("admin:species_fields.url_identifier")}
                     isRequired={true}
@@ -207,7 +220,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
                 </Box>
               ))}
             </ModalBody>
-            
+
             <ModalFooter>
               <SubmitButton leftIcon={<CheckIcon />} mr={3}>
                 {t("common:save")}
@@ -221,6 +234,6 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
       </ModalContent>
     </Modal>
   );
-}
+};
 
-export default AddFieldModal; 
+export default AddFieldModal;
