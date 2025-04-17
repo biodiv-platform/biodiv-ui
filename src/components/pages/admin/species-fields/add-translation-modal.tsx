@@ -18,8 +18,6 @@ import { axGetLangList } from "@services/utility.service";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
-import BulkTranslateModal from "./bulk-translate-modal";
-
 interface AddTranslationModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -27,16 +25,10 @@ interface AddTranslationModalProps {
   onSubmit: (translations: any, language: string) => void;
 }
 
-export default function AddTranslationModal({
-  isOpen,
-  onClose,
-  fields,
-  onSubmit
-}: AddTranslationModalProps) {
+export default function AddTranslationModal({ isOpen, onClose }: AddTranslationModalProps) {
   const { t } = useTranslation();
   const [languages, setLanguages] = useState<any[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
-  const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
 
   // Fetch available languages
   useEffect(() => {
@@ -53,14 +45,6 @@ export default function AddTranslationModal({
     }
   };
 
-  const handleBulkTranslate = () => {
-    setIsBulkModalOpen(true);
-  };
-
-  const handleBulkSubmit = (translations: any) => {
-    onSubmit(translations, selectedLanguage);
-  };
-
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -71,9 +55,9 @@ export default function AddTranslationModal({
           <ModalBody overflowY="auto">
             <Flex direction="column" gap={4}>
               <Box>
-                <Tabs 
-                  variant="soft-rounded" 
-                  colorScheme="green" 
+                <Tabs
+                  variant="soft-rounded"
+                  colorScheme="green"
                   onChange={handleLanguageChange}
                   isLazy
                 >
@@ -84,27 +68,14 @@ export default function AddTranslationModal({
                   </TabList>
                 </Tabs>
               </Box>
-              
+
               <VStack align="stretch" spacing={4}>
-                <Box>
-                  <Button 
-                    colorScheme="blue" 
-                    onClick={handleBulkTranslate}
-                    isDisabled={languages.length === 0}
-                  >
-                    {t("admin:species_fields.bulk_translate")}
-                  </Button>
-                </Box>
-                
                 <Box p={4} borderWidth="1px" borderRadius="md">
                   <Box fontWeight="bold" mb={2}>
-                    {t("admin:species_fields.selected_language")}: {
-                      languages.find(l => l.code === selectedLanguage)?.label || selectedLanguage
-                    }
+                    {t("admin:species_fields.selected_language")}:{" "}
+                    {languages.find((l) => l.code === selectedLanguage)?.label || selectedLanguage}
                   </Box>
-                  <Box>
-                    {t("admin:species_fields.translation_instructions")}
-                  </Box>
+                  <Box>{t("admin:species_fields.translation_instructions")}</Box>
                 </Box>
               </VStack>
             </Flex>
@@ -116,14 +87,6 @@ export default function AddTranslationModal({
           </ModalFooter>
         </ModalContent>
       </Modal>
-
-      <BulkTranslateModal
-        isOpen={isBulkModalOpen}
-        onClose={() => setIsBulkModalOpen(false)}
-        fields={fields}
-        onSubmit={handleBulkSubmit}
-        selectedLanguage={selectedLanguage}
-      />
     </>
   );
-} 
+}

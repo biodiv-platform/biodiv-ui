@@ -2,7 +2,7 @@ import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
-import { createSpeciesFieldPayload, SpeciesFieldInput } from "@utils/species";
+import { createSpeciesFieldPayload } from "@utils/species";
 
 export const axGetSpeciesById = async (speciesId, payload) => {
   try {
@@ -306,11 +306,7 @@ export const axDeleteSpeciesReferences = async (referenceId) => {
 //   }
 // };
 
-export const axCreateSpeciesField = async (
-  input: SpeciesFieldInput,
-  parentId: number,
-  displayOrder = 1
-) => {
+export const axCreateSpeciesField = async (input, parentId: number, displayOrder = 1) => {
   try {
     const payload = createSpeciesFieldPayload(input, parentId, displayOrder);
     const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/species/create/field`, payload);

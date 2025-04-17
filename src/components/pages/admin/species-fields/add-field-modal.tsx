@@ -16,6 +16,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
+import { axGetLangList } from "@services/utility.service";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useFieldArray,useForm } from "react-hook-form";
@@ -33,6 +34,28 @@ interface AddFieldModalProps {
 const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit, parentType = "root", parentName }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
+  const [languages, setLanguages] = React.useState<{ value: number, label: string }[]>([]);
+  
+  React.useEffect(() => {
+    const fetchLanguages = async () => {
+      const response = await axGetLangList();
+      if (response.success && response.data.length > 0) {
+        const formattedLanguages = response.data.map(lang => ({
+          value: lang.id,
+          label: lang.name
+        }));
+        setLanguages(formattedLanguages);
+      } else {
+        // Fallback to default languages if API fails
+        setLanguages([
+          { value: 205, label: "English" },
+          { value: 219, label: "French" }
+        ]);
+      }
+    };
+    
+    fetchLanguages();
+  }, []);
   
   let fieldType;
   if (parentType === "root") {
@@ -123,7 +146,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
                     variant={activeTab === index ? "solid" : "outline"}
                     onClick={() => setActiveTab(index)}
                   >
-                    {hForm.watch(`translations.${index}.languageId`) === 205 ? "English" : "French"}
+                    {languages.find(lang => lang.value === hForm.watch(`translations.${index}.languageId`))?.label || "Unknown"}
                     {index > 0 && (
                       <IconButton
                         size="xs"
@@ -153,14 +176,9 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({ isOpen, onClose, onSubmit
                   <ReactSelect
                     name={`translations.${index}.languageId`}
                     placeholder={t("admin:species_fields.language")}
-                    options={[
-                      { value: 205, label: "English" },
-                      { value: 219, label: "French" }
-                    ]}
+                    options={languages}
                     value={
-                      hForm.watch(`translations.${index}.languageId`) === 205
-                        ? { value: 205, label: "English" }
-                        : { value: 219, label: "French" }
+                      languages.find(lang => lang.value === hForm.watch(`translations.${index}.languageId`))
                     }
                     onChange={(option) => {
                       if (option) {

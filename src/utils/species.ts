@@ -88,18 +88,18 @@ const assignTraitsToFieldMeta = (meta, data) => {
   }));
 };
 
-export interface SpeciesFieldInput {
-  header: string;
-  description: string;
-  urlIdentifier: string;
-  languageId?: number;
-  translations?: Array<{
-    header: string;
-    description: string;
-    urlIdentifier: string;
-    languageId: number;
-  }>;
-}
+// export interface SpeciesFieldInput {
+//   header: string;
+//   description: string;
+//   urlIdentifier: string;
+//   languageId?: number;
+//   translations?: Array<{
+//     header: string;
+//     description: string;
+//     urlIdentifier: string;
+//     languageId: number;
+//   }>;
+// }
 
 /**
  * Creates payload for species field creation from modal inputs
@@ -108,11 +108,7 @@ export interface SpeciesFieldInput {
  * @param displayOrder Display order for the field
  * @returns Formatted payload for API
  */
-export const createSpeciesFieldPayload = (
-  input: SpeciesFieldInput,
-  parentId: number,
-  displayOrder = 1
-) => ({
+export const createSpeciesFieldPayload = (input, parentId: number, displayOrder = 1) => ({
   parentId: parentId === 0 ? null : parentId,
   displayOrder,
   translations: input.translations
