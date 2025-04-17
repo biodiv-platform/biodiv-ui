@@ -15,5 +15,10 @@
       },
       "heading": "પુશ-સૂચનાઓ મોકલો"
     }
+  },
+  "species_fields": {
+    "no_translations": "બચાવવા માટે કોઈ અનુવાદો નથી",
+    "translation_success": "અનુવાદો સફળતાપૂર્વક અપડેટ થયા",
+    "translations": "પ્રજાતિના ક્ષેત્રો અનુવાદો"
   }
 }

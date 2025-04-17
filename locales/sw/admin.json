@@ -15,5 +15,10 @@
       },
       "heading": "Tuma arifa za kushinikiza"
     }
+  },
+  "species_fields": {
+    "no_translations": "Hakuna tafsiri za kuokoa",
+    "translation_success": "Tafsiri zimesasishwa kwa mafanikio",
+    "translations": "Tafsiri za shamba za spishi"
   }
 }

@@ -15,5 +15,10 @@
       },
       "heading": "पुश-अधिसूचनाएं भेजें"
     }
+  },
+  "species_fields": {
+    "no_translations": "बचाने के लिए कोई अनुवाद नहीं",
+    "translation_success": "अनुवाद सफलतापूर्वक अपडेट किए गए",
+    "translations": "प्रजाति क्षेत्र अनुवाद"
   }
 }

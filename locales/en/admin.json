@@ -48,6 +48,8 @@
     "fetch_error": "Unable to fetch species fields",
     "translation_success": "Translations updated successfully",
     "translation_error": "Error updating translations",
-    "translations": "Species Fields Translations"
+    "translations": "Species Fields Translations",
+    "no_translations": "No translations to save",
+    "translation_save_error": "Error saving translations"
   }
 }

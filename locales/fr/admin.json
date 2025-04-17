@@ -15,5 +15,10 @@
       },
       "heading": "Envoyer des notifications push-push"
     }
+  },
+  "species_fields": {
+    "no_translations": "Pas de traductions à enregistrer",
+    "translation_success": "Traductions mises à jour avec succès",
+    "translations": "Traductions de champs d'espèces"
   }
 }

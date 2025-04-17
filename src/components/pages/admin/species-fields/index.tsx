@@ -284,7 +284,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
       setFieldTranslations(data || []);
     } catch (error) {
       console.error("Error fetching field translations:", error);
-      notification(t("admin:species_fields.translation_fetch_error"), NotificationType.Error);
       setFieldTranslations([]);
     }
 
@@ -694,7 +693,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
               {t("common:cancel")}
             </Button>
             <Button colorScheme="blue" onClick={handleSelectLanguage} isDisabled={!modalLanguage}>
-              {t("common:select")}
+              Select
             </Button>
           </ModalFooter>
         </ModalContent>

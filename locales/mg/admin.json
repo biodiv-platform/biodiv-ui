@@ -15,5 +15,10 @@
       },
       "heading": "Mandefasa fanamarihana"
     }
+  },
+  "species_fields": {
+    "no_translations": "Tsy misy fandikan-teny hamonjy",
+    "translation_success": "Fandikana nohavaozina soa aman-tsara",
+    "translations": "Karazana karazana fandikan-teny"
   }
 }

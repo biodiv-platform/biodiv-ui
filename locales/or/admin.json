@@ -15,5 +15,10 @@
       },
       "heading": "ପୁସ୍-ବିଜ୍ଞପ୍ତି ପଠାନ୍ତୁ |"
     }
+  },
+  "species_fields": {
+    "no_translations": "ସଞ୍ଚୟ କରିବାକୁ କ translus ଣସି ଅନୁବାଦ ନାହିଁ |",
+    "translation_success": "ଅନୁବାଦଗୁଡିକ ସଫଳତାର ସହିତ ଅଦ୍ୟତନ ହୋଇଛି |",
+    "translations": "ପ୍ରଜାତି କ୍ଷେତ୍ର ଅନୁବାଦ |"
   }
 }
