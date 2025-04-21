@@ -34,12 +34,12 @@ const ColumnMapper = ({
         <ModalHeader>Column Mapping</ModalHeader>
         <ModalBody>
           <Text>{description}</Text>
-          {headers.map((column, index) => {
-            const selectedValue = columnMapping.find(([i]) => i === index)?.[1] || "";
+          {headers.map((column) => {
+            const selectedValue = columnMapping.find(([i]) => i === parseInt(column.split("|")[1]))?.[1] || "";
             return (
               <Box borderWidth={"thin"} m={2} borderRadius="md">
                 <SimpleGrid columns={2} m={2}>
-                  <Text>{column}</Text>
+                  <Text>{column.split("|")[0]}</Text>
                   <Select
                     id="dataType"
                     name="dataType"
@@ -50,14 +50,14 @@ const ColumnMapper = ({
                         const updatedOptions = [...prev];
 
                         // Find if the index already exists
-                        const existingIndex = updatedOptions.findIndex(([i]) => i === index);
+                        const existingIndex = updatedOptions.findIndex(([i]) => i === parseInt(column.split("|")[1]));
 
                         if (existingIndex !== -1) {
                           // Update existing entry
-                          updatedOptions[existingIndex] = [index, value];
+                          updatedOptions[existingIndex] = [parseInt(column.split("|")[1]), value];
                         } else {
                           // Add new entry
-                          updatedOptions.push([index, value]);
+                          updatedOptions.push([parseInt(column.split("|")[1]), value]);
                         }
 
                         return updatedOptions;

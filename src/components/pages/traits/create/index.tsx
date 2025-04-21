@@ -181,6 +181,22 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
   });
 
   const handleOnSubmit = async (payload) => {
+    const seenLangIds: Set<number> = new Set(); // or Set<string> if IDs are strings
+    const duplicates: number[] = [];
+
+    for (const translation of payload.translations) {
+      const langId = translation.traits.languageId;
+      if (seenLangIds.has(langId)) {
+        duplicates.push(langId);
+      } else {
+        seenLangIds.add(langId);
+      }
+    }
+
+    if (duplicates.length > 0) {
+      notification("Please remove duplicate language translations");
+      return; // stop update if duplicate found
+    }
     const query = payload.translations[0].query.map((taxan) => ({
       taxonomyDefifintionId: taxan.taxonId,
       traitTaxonId: null

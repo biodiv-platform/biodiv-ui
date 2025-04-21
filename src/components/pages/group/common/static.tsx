@@ -31,5 +31,6 @@ export const RULES_TYPE = [
   { label: "Spatial", value: "spartialDataList" },
   { label: "Taxonomic", value: "taxonomicIdList" },
   { label: "Created Date", value: "createdOnDateList" },
-  { label: "Observed Date", value: "observedOnDateList" }
+  { label: "Observed Date", value: "observedOnDateList" },
+  { label: "Trait", value: "traitList" }
 ];

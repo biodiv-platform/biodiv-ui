@@ -163,7 +163,7 @@ export default function NameMatchingComponent() {
           firstRow.eachCell((cell, colNumber) => {
             if (cell.value) {
               const cellValue = cell.value.toString();
-              extractedHeaders.push(cellValue); // Extract the value of each cell
+              extractedHeaders.push(`${cellValue}|${colNumber-1}`); // Extract the value of each cell
               if (
                 cell.value.toString().toLowerCase() == "Sci Name".toLowerCase() ||
                 cell.value.toString().toLowerCase() == "Scientific name".toLowerCase()

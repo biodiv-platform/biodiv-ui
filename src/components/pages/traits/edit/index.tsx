@@ -190,8 +190,8 @@ export default function TraitsEditComponent({ data, languages }) {
       <TextBoxField
         name={`translations[${translationSelected}].values[${value}].value`}
         label={
-          hForm.watch(`translations`).find((t) => t.traits.languageId == languageId)!=null
-          &&hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0].values[
+          hForm.watch(`translations`).find((t) => t.traits.languageId == languageId) != null &&
+          hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0].values[
             value
           ].value &&
           hForm.watch(`translations`)[translationSelected].traits.languageId != languageId
@@ -199,6 +199,7 @@ export default function TraitsEditComponent({ data, languages }) {
                 .values[value].value
             : t("traits:create_form.value")
         }
+        isRequired={true}
       />
       <TextBoxField
         name={`translations[${translationSelected}].values[${value}].description`}
@@ -269,7 +270,7 @@ export default function TraitsEditComponent({ data, languages }) {
   const shouldCancelStart = (e) => {
     // Ignore clicks on file inputs or labels
     return (
-      PREVENT_CLICK_TAGS.includes(e.target.tagName)||
+      PREVENT_CLICK_TAGS.includes(e.target.tagName) ||
       hForm.watch(`translations[${translationSelected}].traits.traitTypes`) !== "RANGE"
     );
   };
@@ -298,6 +299,22 @@ export default function TraitsEditComponent({ data, languages }) {
   };
 
   const handleOnUpdate = async (payload) => {
+    const seenLangIds: Set<number> = new Set(); // or Set<string> if IDs are strings
+    const duplicates: number[] = [];
+
+    for (const translation of payload.translations) {
+      const langId = translation.traits.languageId;
+      if (seenLangIds.has(langId)) {
+        duplicates.push(langId);
+      } else {
+        seenLangIds.add(langId);
+      }
+    }
+
+    if (duplicates.length > 0) {
+      notification("Please remove duplicate language translations");
+      return; // stop update if duplicate found
+    }
     const query = payload.translations[0].query.map((taxan) => ({
       taxonomyDefifintionId: taxan.taxonId,
       traitTaxonId: data[0].traits.traitId
@@ -480,9 +497,8 @@ export default function TraitsEditComponent({ data, languages }) {
                     key={`name-${translationSelected}`}
                     name={`translations[${translationSelected}].traits.name`}
                     label={
-                      hForm
-                        .watch(`translations`)
-                        .find((t) => t.traits.languageId == languageId)!=undefined &&
+                      hForm.watch(`translations`).find((t) => t.traits.languageId == languageId) !=
+                        undefined &&
                       hForm
                         .watch(`translations`)
                         .filter((t) => t.traits.languageId == languageId)[0].traits.name &&
