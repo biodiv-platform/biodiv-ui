@@ -26,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import SITE_CONFIG from "@configs/site-config";
+import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import TranslateIcon from "@icons/translate";
 import {
@@ -109,14 +110,29 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
   const [availableLanguages, setAvailableLanguages] = useState(fieldLanguages || []);
 
-  // Calculate the English tab index once
-  const defaultTabIndex = React.useMemo(() => {
-    if (fieldLanguages && fieldLanguages.length > 0) {
-      const englishIndex = fieldLanguages.findIndex((lang) => lang.name === "English");
-      return englishIndex !== -1 ? englishIndex : 0;
+  const {languageId} = useGlobalState();
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  // Reset tab when field languages change or language ID changes
+  useEffect(() => {
+    if (fieldLanguages?.length > 0) {
+      // Convert both to strings to ensure reliable comparison
+      const matchingLangIndex = fieldLanguages.findIndex(
+        lang => String(lang.id) === String(languageId)
+      );
+      
+      if (matchingLangIndex !== -1) {
+        setSelectedTabIndex(matchingLangIndex);
+        setTabLanguage(fieldLanguages[matchingLangIndex]);
+      } else {
+        // Default to English or first tab
+        const englishIndex = fieldLanguages.findIndex(lang => lang.name === "English");
+        const defaultIndex = englishIndex !== -1 ? englishIndex : 0;
+        setSelectedTabIndex(defaultIndex);
+        setTabLanguage(fieldLanguages[defaultIndex]);
+      }
     }
-    return 0;
-  }, [fieldLanguages]);
+  }, [fieldLanguages, languageId]);
 
   // Add useEffect to fetch data when component mounts
   useEffect(() => {
@@ -360,13 +376,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     }
   };
 
-  // Initialize tabLanguage with the default language
-  useEffect(() => {
-    if (fieldLanguages && fieldLanguages.length > 0) {
-      setTabLanguage(fieldLanguages[defaultTabIndex]);
-    }
-  }, [fieldLanguages, defaultTabIndex]);
-
   // Add this function to handle successful translation
   const handleTranslationSuccess = (newTranslation) => {
     // First, let's directly update our current view data
@@ -480,8 +489,11 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
         mb={6}
         rounded="md"
         overflowX="auto"
-        onChange={(v) => setTabLanguage(fieldLanguages[v])}
-        defaultIndex={defaultTabIndex}
+        index={selectedTabIndex}
+        onChange={(index) => {
+          setSelectedTabIndex(index);
+          setTabLanguage(fieldLanguages[index]);
+        }}
       >
         <TabList bg="gray.100" rounded="md">
           {fieldLanguages.map((fieldlLanguage) => (
