@@ -108,7 +108,7 @@ function AdminComponent() {
         </Box>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
           <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
-            Species
+            Species Page
           </Heading>
           <List>
           <ListItem
