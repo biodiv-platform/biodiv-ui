@@ -63,8 +63,8 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
           Yup.object().shape({
             languageId: Yup.number().required(t("form:required")),
             header: Yup.string().required(t("form:required")),
-            description: Yup.string().required(t("form:required")),
-            urlIdentifier: Yup.string().required(t("form:required"))
+            description: Yup.string(),
+            urlIdentifier: Yup.string()
           })
         ).min(1, t("form:at_least_one_translation"))
       })
@@ -294,13 +294,13 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                   <TextBoxField 
                     name={`translations.${index}.description`}
                     label={t("admin:species_fields.description")}
-                    isRequired={true}
+                    isRequired={false}
                   />
                   
                   <TextBoxField 
                     name={`translations.${index}.urlIdentifier`}
                     label={t("admin:species_fields.url_identifier")}
-                    isRequired={true}
+                    isRequired={false}
                   />
                 </Box>
               ))}
