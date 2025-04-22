@@ -1,5 +1,6 @@
 import "../styles/global.css";
 
+import { ChakraProvider } from "@chakra-ui/react";
 import Footer from "@components/@core/container/footer";
 import Metadata from "@components/@core/container/metadata";
 import NavigationMenuDark from "@components/@core/navigation-menu/dark";
@@ -17,8 +18,8 @@ import NProgress from "nprogress";
 import React, { useEffect } from "react";
 import BusProvider from "react-gbus";
 
-import { Provider } from "@/components/ui/provider";
 import { Toaster } from "@/components/ui/toaster";
+import { customTheme } from "@/configs/theme";
 
 const AuthWall = dynamic(() => import("@components/@core/container/authwall"), {
   ssr: false
@@ -54,7 +55,7 @@ function MainApp({
 
   return (
     <BusProvider>
-      <Provider>
+      <ChakraProvider value={customTheme}>
         <Toaster />
         <GlobalStateProvider initialState={{ user, domain, groups, currentGroup, languageId }}>
           <Metadata />
@@ -72,7 +73,7 @@ function MainApp({
           {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
           <AuthWall />
         </GlobalStateProvider>
-      </Provider>
+      </ChakraProvider>
     </BusProvider>
   );
 }
