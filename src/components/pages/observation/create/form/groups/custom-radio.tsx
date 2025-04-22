@@ -1,47 +1,40 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { RadioCard } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
 import React from "react";
 
 const CustomRadio = (props) => {
-  // const { getInputProps, getCheckboxProps } = useRadio(props);
-
-  const handleOnChange = (e) => {
-    props.onChange(props.isChecked ? "" : Number(e.target.value));
-  };
-
   return (
-    <Box as="label" display="inline-block" mr={2}>
-      {/* {...getInputProps()} */}
-      <input onChange={() => null} onClick={handleOnChange} />
-      <Tooltip title={props.icon} positioning={{ placement: "top" }} showArrow={true}>
-        <Box
-          // {...getCheckboxProps()}
-          p={1}
-          cursor="pointer"
-          borderWidth="2px"
-          borderRadius="md"
-          bg="white"
-          _checked={{
-            borderColor: "blue.500",
-            bg: "blue.50"
-          }}
-          _focus={{
-            boxShadow: "outline"
-          }}
-          style={undefined}
-          className="fade"
-        >
-          <Image
-            boxSize="2.6rem"
-            style={{ filter: props.isChecked ? "none" : "grayscale(1)" }}
-            src={getLocalIcon(props.icon)}
-            alt={props.icon}
-            overflow="hidden"
-          />
-        </Box>
-      </Tooltip>
-    </Box>
+    <RadioCard.Item value={props.value}>
+      <RadioCard.ItemHiddenInput />
+      <RadioCard.ItemControl>
+        <Tooltip title={props.icon} positioning={{ placement: "top" }} showArrow={true}>
+          <Box
+            p={1}
+            cursor="pointer"
+            borderWidth="2px"
+            borderRadius="md"
+            borderColor={props.isChecked ? "blue.500" : "transparent"}
+            bg={props.checked ? "blue.50" : "white"}
+            _focus={{
+              boxShadow: "outline"
+            }}
+            className="fade"
+          >
+            <img
+              style={{
+                width: "2.6rem",
+                height: "2.6rem",
+                filter: props.isChecked ? "none" : "grayscale(1)"
+              }}
+              src={getLocalIcon(props.icon)}
+              alt={props.icon}
+            />
+          </Box>
+        </Tooltip>
+      </RadioCard.ItemControl>
+    </RadioCard.Item>
   );
 };
 

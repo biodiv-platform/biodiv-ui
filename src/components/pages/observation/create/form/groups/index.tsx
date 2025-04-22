@@ -1,9 +1,9 @@
-import { Box, Separator } from "@chakra-ui/react";
+import { HStack, Separator } from "@chakra-ui/react";
+import { RadioCard } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";
-import { useRadioGroup } from "@/hooks/use-radio-group";
 
 import CustomRadio from "./custom-radio";
 
@@ -18,20 +18,6 @@ interface ISpeciesSelecProps {
   isRequired?;
 }
 
-/**
- * As radio specs only accepts string to use number wrapper is required
- *
- * @param {ISpeciesSelecProps} {
- *   name,
- *   label,
- *   hint,
- *   mb = 4,
- *   options = [],
- *   form,
- *   ...props
- * }
- * @returns
- */
 const GroupSelector = ({
   name,
   label,
@@ -44,12 +30,6 @@ const GroupSelector = ({
 }: ISpeciesSelecProps) => {
   const { field, fieldState } = useController({ name });
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name,
-    value: field.value ? field.value.toString() : null,
-    onChange: field.onChange
-  });
-
   return (
     <>
       <Field
@@ -61,12 +41,19 @@ const GroupSelector = ({
         label={label}
         {...props}
       >
-        <Field></Field>
-        <Box {...getRootProps()}>
-          {options.map((o) => (
-            <CustomRadio key={o.id} icon={o.name} {...getRadioProps({ value: o.id.toString() })} />
-          ))}
-        </Box>
+        <RadioCard.Root
+          name={name}
+          value={field.value ? field.value.toString() : ""}
+          onValueChange={field.onChange}
+          orientation="horizontal"
+          align="center"
+        >
+          <HStack align="stretch">
+            {options.map((o) => (
+              <CustomRadio key={o.id} value={o.id.toString()} icon={o.name} />
+            ))}
+          </HStack>
+        </RadioCard.Root>
         {hint && <Field color="gray.600" helperText={hint} />}
       </Field>
       {!hideDevider && <Separator mb={4} />}
