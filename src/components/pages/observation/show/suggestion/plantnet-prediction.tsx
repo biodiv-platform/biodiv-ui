@@ -1,4 +1,4 @@
-import { Button, SimpleGrid } from "@chakra-ui/react";
+import { Button, SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetPlantnetSuggestions } from "@services/observation.service";
 import { DEFAULT_TOAST } from "@static/observation-create";
@@ -16,7 +16,6 @@ import {
   DialogRoot
 } from "@/components/ui/dialog";
 import { toaster } from "@/components/ui/toaster";
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import ImagePicker from "./image-picker";
 const PlantnetPrediction = ({
@@ -34,7 +33,7 @@ const PlantnetPrediction = ({
   const [selectedImages, setSelectedImages] = useState<any[]>([]);
   const [organs, setSelectOrgans] = useState<any[]>([]);
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     value: selectedImages.length > 0 ? selectedImages.map((o) => o?.resource?.id) : []
   });
 
@@ -131,7 +130,7 @@ const PlantnetPrediction = ({
                   image={o}
                   selectedOrgans={organs}
                   organSetter={setSelectOrgans}
-                  {...getCheckboxProps({ value: o.resource.id })}
+                  {...getItemProps({ value: o.resource.id })}
                 />
               ))}
             </SimpleGrid>

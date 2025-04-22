@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Skeleton, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Skeleton, Stack, Text, useRadioGroup } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
 import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-type/filter-keys";
@@ -8,7 +8,6 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 
 import { Switch } from "@/components/ui/switch";
-import { useRadioGroup } from "@/hooks/use-radio-group";
 
 export const observationListParams = {
   geoShapeFilterField: "location"
@@ -54,10 +53,11 @@ export default function LandscapeObservationList({ sGroupList, title }) {
       : setFilter({ ...observationFilter, validate: "" });
   };
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const { getRootProps, getItemProps } = useRadioGroup({
     name: "sGroup",
     defaultValue: sGroupList[0],
-    onChange: (v) => setFilter({ ...observationFilter, sGroup: v && v !== "null" ? v : undefined })
+    onValueChange: (v) =>
+      setFilter({ ...observationFilter, sGroup: v && v !== null ? v : undefined })
   });
 
   return (
@@ -74,7 +74,7 @@ export default function LandscapeObservationList({ sGroupList, title }) {
                   <CustomRadio
                     key={o.id}
                     icon={o.name}
-                    {...getRadioProps({ value: o?.id })}
+                    {...getItemProps({ value: o?.id?.toString() || "" })}
                     sm={true}
                   />
                 ))}

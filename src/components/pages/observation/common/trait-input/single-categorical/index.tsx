@@ -1,7 +1,5 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, useRadioGroup } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-
-import { useRadioGroup } from "@/hooks/use-radio-group";
 
 import { ITraitInputProps } from "..";
 import TraitContent from "./content";
@@ -19,10 +17,10 @@ const SingleCategorialTrait = ({
     onUpdate(value);
   }, [value]);
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const { getRootProps, getItemProps } = useRadioGroup({
     name,
     value: value ? value.toString() : null,
-    onChange: setValue
+    onValueChange: setValue
   });
 
   return (
@@ -32,7 +30,7 @@ const SingleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getRadioProps({ value: o?.id?.toString() })}
+          {...getItemProps({ value: o?.id?.toString() || "" })}
         />
       ))}
     </SimpleGrid>

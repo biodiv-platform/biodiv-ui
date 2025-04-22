@@ -1,4 +1,4 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { ObservationData, ObservationFilterProps } from "@interfaces/custom";
@@ -16,8 +16,6 @@ import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
-
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 const deDupeObservations = (existingObservations, newObservations) => {
   const existingIDs = existingObservations.map(({ observationId }) => observationId);
@@ -89,7 +87,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     setCropObservationData(response.data);
   };
 
-  const { getCheckboxProps, value: bulkObservationIds, setValue } = useCheckboxGroup();
+  const { getItemProps, value: bulkObservationIds, setValue } = useCheckboxGroup();
 
   const handleBulkCheckbox = (actionType: string) => {
     switch (actionType) {
@@ -244,7 +242,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         nextPage,
         resetFilter,
         loggedInUserGroups,
-        getCheckboxProps,
+        getCheckboxProps: getItemProps,
         selectAll,
         setSelectAll,
         bulkObservationIds,

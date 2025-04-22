@@ -49,14 +49,14 @@ const Checkbox = (props: any) => {
       : removeObservationAsset(props.asset.hashKey);
   };
 
-  const { getControlProps, getLabelProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
     <Box as="label" className="fade" aria-checked={props.isChecked}>
-      <input {...getControlProps()} onChange={handleOnChange} required={false} />
+      <input {...getHiddenInputProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
-        {...getLabelProps()}
+        {...getControlProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"

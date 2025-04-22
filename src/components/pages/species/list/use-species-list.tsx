@@ -1,4 +1,4 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { UserGroup } from "@interfaces/userGroup";
@@ -10,8 +10,6 @@ import { getSpeciesFieldHeaders } from "@utils/species";
 import NProgress from "nprogress";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
-
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 export interface SpeciesListData {
   l: any[];
@@ -76,7 +74,7 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
   const [selectAll, setSelectAll] = useState(false);
   const { open, onOpen, onClose } = useDisclosure();
-  const { getCheckboxProps, value: bulkSpeciesIds, setValue } = useCheckboxGroup();
+  const { getItemProps, value: bulkSpeciesIds, setValue } = useCheckboxGroup();
   const { isLoggedIn } = useGlobalState();
 
   const handleBulkCheckbox = (actionType: string) => {
@@ -219,7 +217,7 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         bulkSpeciesIds,
         handleBulkCheckbox,
         authorizedUserGroupList,
-        getCheckboxProps,
+        getCheckboxProps: getItemProps,
         hasUgAccess,
         isOpen: open,
         onOpen,

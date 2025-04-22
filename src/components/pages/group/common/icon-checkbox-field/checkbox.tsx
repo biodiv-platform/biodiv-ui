@@ -1,9 +1,8 @@
-import { Box, HStack, Image, useCheckbox } from "@chakra-ui/react";
+import { Box, HStack, Image, useCheckbox, useCheckboxGroup } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
 import React from "react";
 
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 interface ITraitInputProps {
   type?: string;
@@ -15,13 +14,13 @@ interface ITraitInputProps {
 }
 
 const CustomCheckBox = (props: any) => {
-  const { getControlProps, getLabelProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
     <label>
-      <input {...getControlProps()} required={false} />
+      <input {...getHiddenInputProps()} required={false} />
       <Box
-        {...getLabelProps()}
+        {...getControlProps()}
         p={1}
         cursor="pointer"
         borderWidth="2px"
@@ -43,16 +42,16 @@ const CustomCheckBox = (props: any) => {
 };
 
 const CheckBoxItems = ({ options, type, onChange, defaultValue }: ITraitInputProps) => {
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
-    onChange: (v) => onChange(v.map((i) => Number(i)))
+    onValueChange: (v) => onChange(v.map((i) => Number(i)))
   });
 
   return (
     <HStack className="cb-items">
       {options.map((o) => {
         return (
-          <CustomCheckBox key={o.id} {...getCheckboxProps({ value: o.id.toString() })}>
+          <CustomCheckBox key={o.id} {...getItemProps({ value: o.id.toString() })}>
             <Tooltip title={o.name} positioning={{ placement: "top" }} showArrow={true}>
               <Image
                 boxSize="2.6rem"

@@ -1,10 +1,9 @@
-import { Box, Button, Flex, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid, Spinner, Text, useCheckboxGroup } from "@chakra-ui/react";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import { MY_UPLOADS_SORT } from "../../options";
 import useObservationCreate from "../use-observation-resources";
@@ -19,7 +18,7 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
     setResourcesSortBy(e.target.value);
   };
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     value: observationAssets?.map((o) => o.hashKey)
   });
 
@@ -58,11 +57,7 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
       <SimpleGrid columns={[3, 4, 5, 8]} gridGap={4} className="custom-checkbox-group">
         <DropTarget />
         {assets.map((asset) => (
-          <Checkbox
-            key={asset.hashKey}
-            asset={asset}
-            {...getCheckboxProps({ value: asset.hashKey })}
-          />
+          <Checkbox key={asset.hashKey} asset={asset} {...getItemProps({ value: asset.hashKey })} />
         ))}
       </SimpleGrid>
     </Box>

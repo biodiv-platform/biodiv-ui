@@ -1,7 +1,5 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import { ITraitInputProps } from "..";
 import TraitContent from "./content";
@@ -18,9 +16,9 @@ const MultipleCategorialTrait = ({
     onUpdate(value);
   }, [value]);
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
-    onChange: (v) => setValue(v.map((i) => Number(i)))
+    onValueChange: (v) => setValue(v.map((i) => Number(i)))
   });
 
   return (
@@ -30,7 +28,7 @@ const MultipleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getCheckboxProps({ value: String(o.id) })}
+          {...getItemProps({ value: String(o.id) })}
         />
       ))}
     </SimpleGrid>

@@ -1,11 +1,10 @@
-import { Box, Skeleton } from "@chakra-ui/react";
+import { Box, Skeleton, useRadioGroup } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import { useRadioGroup } from "@/hooks/use-radio-group";
 
 export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups }) {
   const { t } = useTranslation();
@@ -14,10 +13,10 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
     setFilter({ ...filter, hasMedia: e.target.checked });
   };
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const { getRootProps, getItemProps } = useRadioGroup({
     name: "sGroup",
     value: filter?.sGroupId,
-    onChange: (v) => setFilter({ ...filter, sGroupId: v && v !== "null" ? v : undefined })
+    onValueChange: (v) => setFilter({ ...filter, sGroupId: v && v !== null ? v : undefined })
   });
 
   return (
@@ -25,14 +24,14 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
       <Box mb={4} className="white-box">
         <BoxHeading>🎛 {t("user:observations.filter")}</BoxHeading>
         <Box p={4}>
-          <Skeleton loading={speciesGroups.length > 0} mb={2}>
+          <Skeleton loading={speciesGroups.length < 0} mb={2}>
             <Box {...getRootProps()} minH="3.75rem">
               {speciesGroups.map((o) => (
                 <CustomRadio
                   key={o.id}
                   icon={o.name}
-                  {...getRadioProps({ value: o.id.toString() })}
-                  sm={true}
+                  {...getItemProps({ value: o.id.toString() })}
+                  // sm={true}
                 />
               ))}
             </Box>

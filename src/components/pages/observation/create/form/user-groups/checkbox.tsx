@@ -1,8 +1,6 @@
-import { Box, Flex, Image, SimpleGrid, useCheckbox } from "@chakra-ui/react";
+import { Box, Flex, Image, SimpleGrid, useCheckbox, useCheckboxGroup } from "@chakra-ui/react";
 import { getGroupImageThumb, getGroupImageThumbForDatatable } from "@utils/media";
 import React from "react";
-
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 interface ITraitInputProps {
   type?: string;
@@ -15,13 +13,13 @@ interface ITraitInputProps {
 }
 
 const CustomCheckBox = (props: any) => {
-  const { getControlProps, getLabelProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
     <label>
-      <input {...getControlProps()} required={false} />
+      <input {...getHiddenInputProps()} required={false} />
       <Box
-        {...getLabelProps()}
+        {...getControlProps()}
         p={2}
         cursor="pointer"
         borderWidth="2px"
@@ -49,16 +47,16 @@ const CheckBoxItems = ({
   gridColumns = [1, 1, 3, 5],
   isDatatableUsergroups = false
 }: ITraitInputProps) => {
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
-    onChange: (v) => onChange(v.map((i) => Number(i)))
+    onValueChange: (v) => onChange(v.map((i) => Number(i)))
   });
 
   return (
     <SimpleGrid columns={gridColumns} gridGap={4}>
       {options.map((o) => {
         return (
-          <CustomCheckBox key={o.id} {...getCheckboxProps({ value: String(o.id) })}>
+          <CustomCheckBox key={o.id} {...getItemProps({ value: String(o.id) })}>
             <Flex alignItems="center" h="2rem" overflow="hidden" title={o.name}>
               <Image
                 loading="lazy"

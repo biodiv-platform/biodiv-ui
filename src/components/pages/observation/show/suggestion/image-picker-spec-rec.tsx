@@ -5,7 +5,7 @@ import React from "react";
 import { toaster } from "@/components/ui/toaster";
 
 const ImagePickerSpecRec = (props: any) => {
-  const { getControlProps, getLabelProps, setChecked, checked } = useCheckbox(props);
+  const { getControlProps, getHiddenInputProps, setChecked, checked } = useCheckbox(props);
 
   const handleOnChange = (e) => {
     if (props.selectedImages.length >= 1 && e.target.checked) {
@@ -32,10 +32,10 @@ const ImagePickerSpecRec = (props: any) => {
 
   return (
     <Box as="label" className="fade" aria-checked={checked}>
-      <input {...getControlProps()} onChange={handleOnChange} required={false} />
+      <input {...getHiddenInputProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
-        {...getLabelProps()}
+        {...getControlProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"

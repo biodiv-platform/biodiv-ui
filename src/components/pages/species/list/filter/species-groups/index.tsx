@@ -1,8 +1,6 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import { stringToArray } from "@utils/basic";
 import React, { useMemo } from "react";
-
-import { useCheckboxGroup } from "@/hooks/use-checkbox-group";
 
 import useSpeciesList from "../../use-species-list";
 import CustomCheckbox from "./checkbox";
@@ -31,7 +29,7 @@ const SpeciesGroupsFilter = () => {
   const defaultValue = useMemo(() => stringToArray(filter.sGroup), []);
   const speciesGroupList = useMemo(() => speciesMapper(), [species]);
 
-  const onChange = (v) => {
+  const onValueChange = (v) => {
     setFilter((_draft) => {
       _draft.f.offset = 0;
       if (v.length > 0) {
@@ -42,9 +40,9 @@ const SpeciesGroupsFilter = () => {
     });
   };
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue,
-    onChange
+    onValueChange
   });
 
   return (
@@ -56,7 +54,7 @@ const SpeciesGroupsFilter = () => {
             id={o.id.toString()}
             label={o.name}
             stat={o.agg} //replace with ag stats
-            {...getCheckboxProps({ value: o.id.toString() })}
+            {...getItemProps({ value: o.id.toString() })}
           />
         ))}
       </SimpleGrid>

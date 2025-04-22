@@ -36,7 +36,7 @@ const CheckboxLabel = styled.label`
 `;
 
 const Checkbox = (props: any) => {
-  const { getControlProps, getLabelProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
   const { t } = useTranslation();
 
   return (
@@ -46,7 +46,7 @@ const Checkbox = (props: any) => {
       positioning={{ placement: "top" }}
     >
       <Box
-        {...getLabelProps()}
+        {...getControlProps()}
         as={CheckboxLabel}
         borderRadius="md"
         aria-checked={props.isChecked}
@@ -59,7 +59,7 @@ const Checkbox = (props: any) => {
         }}
         style={undefined}
       >
-        <input {...getControlProps()} required={false} />
+        <input {...getHiddenInputProps()} required={false} />
         <Image
           boxSize="2.2rem"
           objectFit="contain"

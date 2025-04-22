@@ -183,7 +183,7 @@ export default function ObservationCreateForm({
           <Uploader
             name="resources"
             licensesList={licensesList}
-            onTabIndexChanged={(ti) => setIsSelectedImages(ti > 0)}
+            onTabIndexChanged={(ti) => setIsSelectedImages(ti != "selectedMedia")}
           />
           <Box hidden={isSelectedImages}>
             <Recodata languages={languages} />

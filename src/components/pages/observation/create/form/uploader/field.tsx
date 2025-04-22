@@ -52,9 +52,10 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
     >
       <Tabs.Root
         className="nospace"
-        // onChange={setTabIndex}
+        onValueChange={(e) => setTab(e.value)}
         defaultValue={tab}
         lazyMount={true}
+        width={"full"}
       >
         <Tabs.List mb={4} overflowX="auto" py={1}>
           <Tabs.Trigger value="selectedMedia">✔️ {t("form:selected_media")}</Tabs.Trigger>
