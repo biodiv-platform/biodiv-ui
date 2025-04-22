@@ -1,4 +1,3 @@
-import { Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
@@ -31,12 +30,10 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
         return (
           <MenuItem key={item.name} value={item.name}>
             {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
-              <Link w="full" onClick={() => notification(t("header:member_only"))}>
-                {label}
-              </Link>
+              <a onClick={() => notification(t("header:member_only"))}>{label}</a>
             ) : (
               <LocalLink href={toLink} params={item.params} prefixGroup={true}>
-                <Link w="full">{label}</Link>
+                <a>{label}</a>
               </LocalLink>
             )}
           </MenuItem>

@@ -29,7 +29,7 @@ function HomeComponent({ homeInfo }) {
               🧰 {t("group:homepage_customization.title")}
             </Box>
           </AccordionItemTrigger>
-          <AccordionItemContent>
+          <AccordionItemContent p={4}>
             <HomePageGalleryCustomizationForm homePageDetails={homeInfo} />
           </AccordionItemContent>
         </AccordionItem>

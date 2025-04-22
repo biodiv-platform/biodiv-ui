@@ -1,4 +1,3 @@
-import { Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { FORWARD_BLACKLIST } from "@static/constants";
 import { encode } from "base64-url";
@@ -21,7 +20,7 @@ export default function LoginButton() {
 
   return (
     <LocalLink href="/login" params={params} prefixGroup={true}>
-      <Link>{t("header:sign_in")}</Link>
+      {t("header:sign_in")}
     </LocalLink>
   );
 }

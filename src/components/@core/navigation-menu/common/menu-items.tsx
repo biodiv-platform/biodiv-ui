@@ -1,4 +1,4 @@
-import { Box, Link } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -11,7 +11,7 @@ import SubMenu from "./sub-menu";
 
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
-    <Link>{children}</Link>
+    <a>{children}</a>
   </LocalLink>
 );
 

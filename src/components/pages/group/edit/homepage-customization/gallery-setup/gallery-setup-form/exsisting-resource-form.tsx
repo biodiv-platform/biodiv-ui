@@ -42,7 +42,7 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
           mb={0}
           label={t("group:homepage_customization.resources.obs_id")}
         />
-        <Button ml={2} onClick={handleObservationLink}>
+        <Button ml={2} onClick={handleObservationLink} variant={"subtle"}>
           {t("common:search")}
         </Button>
       </Flex>

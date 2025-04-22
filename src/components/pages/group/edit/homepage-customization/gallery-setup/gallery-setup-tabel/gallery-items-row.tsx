@@ -1,4 +1,4 @@
-import { Box, Button, Image, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Link } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
@@ -18,7 +18,10 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
   return (
     <tr>
       <Box as="td" w="16rem">
-        <LuGripVertical cursor="move" /> {title}
+        <Flex align="center">
+          <LuGripVertical style={{ marginRight: "0.5rem" }} />
+          {title}
+        </Flex>
       </Box>
       <td>
         <Image src={imgUrl} />

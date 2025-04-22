@@ -10,27 +10,29 @@ export const Prose = chakra("div", {
     "& p": {
       marginTop: "1em",
       marginBottom: "1em",
-      lineHeight: "1.6em",
+      lineHeight: "1.6em"
     },
     "& blockquote": {
       marginTop: "1.285em",
       marginBottom: "1.285em",
       paddingInline: "1.285em",
-      borderInlineStartWidth: "0.25em",
+      borderInlineStartWidth: "0.25em"
     },
     "& a": {
       color: "blue.500",
-      textDecoration: "underline",
       textUnderlineOffset: "3px",
+      _hover: {
+        textDecoration: "underline"
+      },
       textDecorationThickness: "2px",
       textDecorationColor: "border.muted",
-      fontWeight: "500",
+      fontWeight: "500"
     },
     "& strong": {
-      fontWeight: "600",
+      fontWeight: "600"
     },
     "& a strong": {
-      color: "inherit",
+      color: "inherit"
     },
     "& h1": {
       fontFamily: "heading",
@@ -39,7 +41,7 @@ export const Prose = chakra("div", {
       letterSpacing: "-0.02em",
       marginTop: "0",
       marginBottom: "0.8em",
-      lineHeight: "1.2em",
+      lineHeight: "1.2em"
     },
     "& h2": {
       fontFamily: "heading",
@@ -48,7 +50,7 @@ export const Prose = chakra("div", {
       letterSpacing: "-0.02em",
       marginTop: "1.6em",
       marginBottom: "0.8em",
-      lineHeight: "1.4em",
+      lineHeight: "1.4em"
     },
     "& h3": {
       fontFamily: "heading",
@@ -56,7 +58,7 @@ export const Prose = chakra("div", {
       letterSpacing: "-0.01em",
       marginTop: "1.5em",
       marginBottom: "0.4em",
-      lineHeight: "1.5em",
+      lineHeight: "1.5em"
     },
     "& h4": {
       fontFamily: "heading",
@@ -65,7 +67,7 @@ export const Prose = chakra("div", {
       marginTop: "1.4em",
       marginBottom: "0.5em",
       letterSpacing: "-0.01em",
-      lineHeight: "1.5em",
+      lineHeight: "1.5em"
     },
     "& kbd": {
       fontSize: "0.85em",
@@ -77,26 +79,26 @@ export const Prose = chakra("div", {
       fontFamily: "inherit",
       color: "fg.muted",
       "--shadow": "colors.border",
-      boxShadow: "0 0 0 1px var(--shadow),0 1px 0 1px var(--shadow)",
+      boxShadow: "0 0 0 1px var(--shadow),0 1px 0 1px var(--shadow)"
     },
     "& code": {
       fontSize: "0.925em",
       letterSpacing: "-0.01em",
       borderRadius: "md",
       borderWidth: "1px",
-      padding: "0.25em",
+      padding: "0.25em"
     },
     "& pre code": {
       fontSize: "inherit",
       letterSpacing: "inherit",
       borderWidth: "inherit",
-      padding: "0",
+      padding: "0"
     },
     "& h2 code": {
-      fontSize: "0.9em",
+      fontSize: "0.9em"
     },
     "& h3 code": {
-      fontSize: "0.8em",
+      fontSize: "0.8em"
     },
     "& pre": {
       backgroundColor: "bg.subtle",
@@ -109,74 +111,74 @@ export const Prose = chakra("div", {
       paddingInlineEnd: "1em",
       paddingInlineStart: "1em",
       overflowX: "auto",
-      fontWeight: "400",
+      fontWeight: "400"
     },
     "& ol": {
       marginTop: "1em",
       marginBottom: "1em",
-      paddingInlineStart: "1.5em",
+      paddingInlineStart: "1.5em"
     },
     "& ul": {
       marginTop: "1em",
       marginBottom: "1em",
-      paddingInlineStart: "1.5em",
+      paddingInlineStart: "1.5em"
     },
     "& li": {
       marginTop: "0.285em",
-      marginBottom: "0.285em",
+      marginBottom: "0.285em"
     },
     "& ol > li": {
       paddingInlineStart: "0.4em",
       listStyleType: "decimal",
       "&::marker": {
-        color: "fg.muted",
-      },
+        color: "fg.muted"
+      }
     },
     "& ul > li": {
       paddingInlineStart: "0.4em",
       listStyleType: "disc",
       "&::marker": {
-        color: "fg.muted",
-      },
+        color: "fg.muted"
+      }
     },
     "& > ul > li p": {
       marginTop: "0.5em",
-      marginBottom: "0.5em",
+      marginBottom: "0.5em"
     },
     "& > ul > li > p:first-of-type": {
-      marginTop: "1em",
+      marginTop: "1em"
     },
     "& > ul > li > p:last-of-type": {
-      marginBottom: "1em",
+      marginBottom: "1em"
     },
     "& > ol > li > p:first-of-type": {
-      marginTop: "1em",
+      marginTop: "1em"
     },
     "& > ol > li > p:last-of-type": {
-      marginBottom: "1em",
+      marginBottom: "1em"
     },
     "& ul ul, ul ol, ol ul, ol ol": {
       marginTop: "0.5em",
-      marginBottom: "0.5em",
+      marginBottom: "0.5em"
     },
     "& dl": {
       marginTop: "1em",
-      marginBottom: "1em",
+      marginBottom: "1em"
     },
     "& dt": {
       fontWeight: "600",
-      marginTop: "1em",
+      marginTop: "1em"
     },
     "& dd": {
       marginTop: "0.285em",
-      paddingInlineStart: "1.5em",
+      paddingInlineStart: "1.5em"
     },
     "& hr": {
       marginTop: "2.25em",
-      marginBottom: "2.25em",
+      marginBottom: "2.25em"
     },
     "& :is(h1,h2,h3,h4,h5,hr) + *": {
-      marginTop: "0",
+      marginTop: "0"
     },
     "& table": {
       width: "100%",
@@ -184,71 +186,71 @@ export const Prose = chakra("div", {
       textAlign: "start",
       lineHeight: "1.5em",
       marginTop: "2em",
-      marginBottom: "2em",
+      marginBottom: "2em"
     },
     "& thead": {
       borderBottomWidth: "1px",
-      color: "fg",
+      color: "fg"
     },
     "& tbody tr": {
       borderBottomWidth: "1px",
-      borderBottomColor: "border",
+      borderBottomColor: "border"
     },
     "& thead th": {
       paddingInlineEnd: "1em",
       paddingBottom: "0.65em",
       paddingInlineStart: "1em",
       fontWeight: "medium",
-      textAlign: "start",
+      textAlign: "start"
     },
     "& thead th:first-of-type": {
-      paddingInlineStart: "0",
+      paddingInlineStart: "0"
     },
     "& thead th:last-of-type": {
-      paddingInlineEnd: "0",
+      paddingInlineEnd: "0"
     },
     "& tbody td, tfoot td": {
       paddingTop: "0.65em",
       paddingInlineEnd: "1em",
       paddingBottom: "0.65em",
-      paddingInlineStart: "1em",
+      paddingInlineStart: "1em"
     },
     "& tbody td:first-of-type, tfoot td:first-of-type": {
-      paddingInlineStart: "0",
+      paddingInlineStart: "0"
     },
     "& tbody td:last-of-type, tfoot td:last-of-type": {
-      paddingInlineEnd: "0",
+      paddingInlineEnd: "0"
     },
     "& figure": {
       marginTop: "1.625em",
-      marginBottom: "1.625em",
+      marginBottom: "1.625em"
     },
     "& figure > *": {
       marginTop: "0",
-      marginBottom: "0",
+      marginBottom: "0"
     },
     "& figcaption": {
       fontSize: "0.85em",
       lineHeight: "1.25em",
       marginTop: "0.85em",
-      color: "fg.muted",
+      color: "fg.muted"
     },
     "& h1, h2, h3, h4": {
       color: "fg",
-      fontWeight: "600",
-    },
+      fontWeight: "600"
+    }
   },
   variants: {
     size: {
       md: {
-        fontSize: "md",
+        fontSize: "md"
       },
       lg: {
-        fontSize: "lg",
-      },
-    },
+        fontSize: "lg"
+      }
+    }
   },
   defaultVariants: {
-    size: "lg",
-  },
+    size: "lg"
+  }
 });

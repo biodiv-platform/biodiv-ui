@@ -1,4 +1,4 @@
-import { Button, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { axUploadResource } from "@services/files.service";
 import useTranslation from "next-translate/useTranslation";
@@ -68,28 +68,30 @@ export default function DropTarget({
   });
 
   return (
-    <DropTargetBox
-      style={{ minHeight: simpleUpload ? "6rem" : "13rem" }}
-      {...getRootProps()}
-      data-dropping={isDragActive}
-    >
-      <input {...getInputProps()} />
-      {isProcessing ? (
-        <div className="fade">
-          <LuTimer />
-          <span>{t("form:uploader.processing")}</span>
-        </div>
-      ) : simpleUpload ? (
-        <Button colorPalette="blue" variant="outline" children={t("form:uploader.upload")} />
-      ) : (
-        <div className="fade">
-          <Heading size="md">{t("form:uploader.label")}</Heading>
-          <Text my={2} color="gray.500">
-            {t("common:or")}
-          </Text>
-          <Button colorPalette="blue" variant="outline" children={t("form:uploader.browse")} />
-        </div>
-      )}
-    </DropTargetBox>
+    <Box width={"full"}>
+      <DropTargetBox
+        style={{ minHeight: simpleUpload ? "6rem" : "13rem" }}
+        {...getRootProps()}
+        data-dropping={isDragActive}
+      >
+        <input {...getInputProps()} />
+        {isProcessing ? (
+          <div className="fade">
+            <LuTimer />
+            <span>{t("form:uploader.processing")}</span>
+          </div>
+        ) : simpleUpload ? (
+          <Button colorPalette="blue" variant="outline" children={t("form:uploader.upload")} />
+        ) : (
+          <div className="fade">
+            <Heading size="md">{t("form:uploader.label")}</Heading>
+            <Text my={2} color="gray.500">
+              {t("common:or")}
+            </Text>
+            <Button colorPalette="blue" variant="outline" children={t("form:uploader.browse")} />
+          </div>
+        )}
+      </DropTargetBox>
+    </Box>
   );
 }
