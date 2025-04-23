@@ -18,8 +18,7 @@ const ImagePicker = (props: any) => {
       toaster.create({
         title: t("observation:plantnet.please_select_a_maximum_of_5_images"),
         type: "error",
-        // isClosable: true,
-        placement: "top"
+        closable: true
       });
       setIsOrganSelectionDisabled(true);
       return;

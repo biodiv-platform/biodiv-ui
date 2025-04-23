@@ -46,10 +46,9 @@ export default function MapPageComponent({ defaultLayers }) {
           </ExternalBlueLink>
         </div>
       ),
-      // variant: "left-accent",
       type: "success",
-      duration: 9000
-      // isClosable: true
+      duration: 9000,
+      closable: true
     });
   };
 

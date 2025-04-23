@@ -36,8 +36,7 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
       toaster.create({
         title: "Error while downloading",
         type: "error",
-        // isClosable: true,
-        placement: "top"
+        closable: true
       });
     }
   };

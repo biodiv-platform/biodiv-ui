@@ -12,8 +12,7 @@ const ImagePickerSpecRec = (props: any) => {
       toaster.create({
         title: "Please select a maximum of 1 image",
         type: "error",
-        // isClosable: true,
-        placement: "top"
+        closable: true
       });
 
       return;

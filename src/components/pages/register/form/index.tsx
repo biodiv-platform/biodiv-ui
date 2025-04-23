@@ -135,8 +135,7 @@ function SignUpForm() {
         description: "please select location from google suggestions only",
         type: "error",
         duration: 5000,
-        // isClosable: true,
-        placement: "top"
+        closable: true
       });
       return;
     }

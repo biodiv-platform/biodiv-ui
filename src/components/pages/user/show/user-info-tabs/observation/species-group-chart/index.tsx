@@ -35,8 +35,7 @@ export default function SpeciesGroupChart({ data }) {
       toaster.create({
         title: "Error while downloading",
         type: "error",
-        // isClosable: true,
-        placement: "top"
+        closable: true
       });
     }
   };

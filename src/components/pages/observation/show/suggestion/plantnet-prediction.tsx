@@ -107,8 +107,7 @@ const PlantnetPrediction = ({
       toaster.update(toastIdRef.current, {
         title: `${t("observation:plantnet.failed_to_generate_predictions")}`,
         type: "error",
-        // isClosable: true,
-        placement: "top"
+        closable: true
       });
     }
   };
