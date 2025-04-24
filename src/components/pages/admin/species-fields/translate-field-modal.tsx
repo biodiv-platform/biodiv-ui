@@ -207,12 +207,19 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                   size="sm"
                   leftIcon={<AddIcon />}
                   onClick={() => {
+                    // Find the English translation data (assuming English languageId is 38)
+                    const englishTranslation = hForm.getValues("translations").find(
+                      t => t.languageId === 205 // Use the correct English language ID
+                    );
+                    
+                    // If English translation exists, copy its content, otherwise use empty strings
                     append({
                       languageId: 219, // Default to French for new translations
-                      header: "",
-                      description: "",
-                      urlIdentifier: ""
+                      header: englishTranslation?.header || "",
+                      description: englishTranslation?.description || "",
+                      urlIdentifier: englishTranslation?.urlIdentifier || ""
                     });
+                    
                     setActiveTab(formFields.length);
                   }}
                 >
