@@ -72,7 +72,7 @@ const assignFieldDataToMeta = (meta, data) => {
   return meta.map((m) => ({
     parentField: {
       ...m.parentField,
-      values: data.filter((d) => d.fieldId === m.parentField.id && d.fieldData.description) // matches id and removes empty fields
+      values: data.filter((d) => d.fieldId === m.parentField.id && d.fieldData?.description) // matches id and removes empty fields
     },
     childField: m.childField.length ? assignFieldDataToMeta(m.childField, data) : m.childField
   }));
