@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axGetLangList } from "@services/utility.service";
@@ -54,10 +55,10 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
         setLanguages(formattedLanguages);
       } else {
         // Fallback to default languages if API fails
-        setLanguages([
-          { value: 205, label: "English" },
-          { value: 219, label: "French" }
-        ]);
+        // setLanguages([
+        //   { value: 205, label: "English" },
+        //   { value: 219, label: "French" }
+        // ]);
       }
     };
 
@@ -91,7 +92,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
     defaultValues: {
       translations: [
         {
-          languageId: 205, // Default language ID
+          languageId: SITE_CONFIG.LANG.DEFAULT_ID, // Default language ID
           header: "",
           description: "",
           urlIdentifier: ""
@@ -132,7 +133,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                   leftIcon={<AddIcon />}
                   onClick={() => {
                     append({
-                      languageId: 205,
+                      languageId: SITE_CONFIG.LANG.DEFAULT_ID,
                       header: "",
                       description: "",
                       urlIdentifier: ""

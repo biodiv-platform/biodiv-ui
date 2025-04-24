@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axUpdateSpeciesFieldTranslations } from "@services/species.service";
@@ -72,7 +73,7 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
     defaultValues: {
       translations: [
         {
-          languageId: 219, // Default language ID for French (since original is likely in English)
+          languageId: SITE_CONFIG.LANG.DEFAULT_ID, // Default language ID for French (since original is likely in English)
           header: "",
           description: "",
           urlIdentifier: ""
@@ -209,12 +210,12 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                   onClick={() => {
                     // Find the English translation data (assuming English languageId is 38)
                     const englishTranslation = hForm.getValues("translations").find(
-                      t => t.languageId === 205 // Use the correct English language ID
+                      t => t.languageId === SITE_CONFIG.LANG.DEFAULT_ID // Use the correct English language ID
                     );
                     
                     // If English translation exists, copy its content, otherwise use empty strings
                     append({
-                      languageId: 219, // Default to French for new translations
+                      languageId: SITE_CONFIG.LANG.DEFAULT_ID, // Default to French for new translations
                       header: englishTranslation?.header || "",
                       description: englishTranslation?.description || "",
                       urlIdentifier: englishTranslation?.urlIdentifier || ""
