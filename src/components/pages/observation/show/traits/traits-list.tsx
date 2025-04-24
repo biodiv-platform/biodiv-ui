@@ -22,8 +22,7 @@ export default function TraitsList({
   factsList,
   speciesTraitsListDefault,
   observationId,
-  authorId = -1,
-  groupId
+  authorId = -1
 }: ITraitsProps) {
   const [newTraitsList, setNewTraitsList] = useState<any[]>([]);
   const [speciesTraitsList, setSpeciesTraitsList] = useState(speciesTraitsListDefault);
@@ -39,8 +38,8 @@ export default function TraitsList({
   );
 
   useEffect(() => {
-    axGetTraitsByGroupId(groupId, languageId).then(({ data }) => setSpeciesTraitsList(data));
-  }, [languageId]);
+    setSpeciesTraitsList(speciesTraitsListDefault);
+  }, [speciesTraitsListDefault]);
 
   useEffect(() => {
     setNewTraitsList(

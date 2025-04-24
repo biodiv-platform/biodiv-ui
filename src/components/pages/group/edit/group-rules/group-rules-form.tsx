@@ -17,7 +17,7 @@ import { RULES_TYPE } from "../../common/static";
 import RulesInputType from "./rules-input-type";
 import { formatGroupRules } from "./utils";
 
-export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }) {
+export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, traits }) {
   const { t } = useTranslation();
 
   const {
@@ -34,7 +34,18 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           is: (type) =>
             ["observedOnDateList", "taxonomicIdList", "createdOnDateList"].includes(type),
           then: Yup.array().min(1),
-          otherwise: Yup.mixed().required()
+          otherwise: Yup.mixed().when("type", {
+            is: "traitList",
+            then: Yup.array()
+              .of(
+                Yup.object().shape({
+                  trait: Yup.string().required("Trait is required"), // Ensuring trait is a required string
+                  value: Yup.mixed().required("Value is required") // Value must be present
+                })
+              )
+              .min(1, "At least one trait is required"),
+            otherwise: Yup.mixed().required()
+          })
         })
       })
     )
@@ -59,6 +70,13 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
         };
       case "taxonomicIdList":
         return { [`${type}`]: ruleValue?.map((o) => o.id) };
+      case "traitList":
+        return {
+          [`${type}`]: ruleValue.flatMap(({ trait, value }) => {
+            const traitId = trait.split("|")[0];
+            return value.map((v) => ({ [traitId]: v }));
+          })
+        };
     }
   };
 
@@ -67,7 +85,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
     const { success, data } = await axAddUserGroupRule(userGroupId, payload);
     if (success && groupRules) {
       notification(t("group:rules.add.success"), NotificationType.Success);
-      setGroupRules(formatGroupRules(data));
+      setGroupRules(formatGroupRules(data, traits));
       setIsCreate(false);
     } else {
       notification(t("group:rules.add.failure"));
@@ -92,7 +110,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate }
           label={t("group:rules.input_types.title")}
           shouldPortal={true}
         />
-        {inputType && <RulesInputType inputType={inputType} name="ruleValue" />}
+        {inputType && <RulesInputType inputType={inputType} name="ruleValue" traits={traits} />}
         <SubmitButton leftIcon={<CheckIcon />}>{t("group:rules.add.title")}</SubmitButton>
       </form>
     </FormProvider>

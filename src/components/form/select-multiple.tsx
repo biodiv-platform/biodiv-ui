@@ -1,4 +1,5 @@
 import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { MENU_PORTAL_TARGET } from "@static/constants";
 import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
@@ -16,6 +17,7 @@ interface SelectMultipleProps {
   selectRef?;
   isRequired?: boolean;
   isSearchable?: boolean;
+  shouldPortal?:boolean;
 }
 
 const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
@@ -31,6 +33,7 @@ export const SelectMultipleInputField = ({
   selectRef,
   isRequired,
   isSearchable,
+  shouldPortal,
   ...props
 }: SelectMultipleProps) => {
   const { field, fieldState } = useController({ name });
@@ -63,6 +66,7 @@ export const SelectMultipleInputField = ({
         isDisabled={disabled}
         ref={selectRef}
         {...reactSelectProps}
+        menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
