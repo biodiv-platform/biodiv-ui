@@ -1,5 +1,4 @@
 import SpeciesShowPageComponent from "@components/pages/species/show";
-import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import { axGetspeciesGroups } from "@services/observation.service";
