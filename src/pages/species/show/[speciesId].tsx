@@ -25,16 +25,18 @@ const SpeciesShowPage = ({ species, licensesList, permissions }) => (
 );
 
 export const getServerSideProps = async (ctx) => {
-  const langId = SITE_CONFIG.SPECIES.MULTILINGUAL_FIELDS
-    ? getLanguageId(ctx.locale)?.ID
-    : SITE_CONFIG.LANG.DEFAULT_ID;
+  const currentLocaleId = getLanguageId(ctx.locale)?.ID;
+
+  // const langId = SITE_CONFIG.SPECIES.MULTILINGUAL_FIELDS
+  //   ? currentLocaleId
+  //   : SITE_CONFIG.LANG.DEFAULT_ID;
 
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
 
   const [fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
     await Promise.all([
-      axGetAllFieldsMeta({ langId, userGroupId: currentGroup.id }),
+      axGetAllFieldsMeta({ langId: currentLocaleId, userGroupId: currentGroup.id }),
       axGetSpeciesById(ctx.query.speciesId, currentGroup.id != null ? currentGroup : null),
       axGetspeciesGroups(),
       axCheckSpeciesPermission(ctx, ctx.query.speciesId),
