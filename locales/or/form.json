@@ -1,5 +1,6 @@
 {
   "accepted_name": "ଗ୍ରହଣ କରାଯାଇଥିବା ନାମ",
+  "at_least_one_translation": "ଅତିକମରେ ଗୋଟିଏ ଅନୁବାଦ ଆବଶ୍ୟକ |",
   "attribution": "ଗୁଣ",
   "audio": {
     "start": "ରେକର୍ଡିଂ ଆରମ୍ଭ କରନ୍ତୁ |",
@@ -60,6 +61,7 @@
   "notes": "ଟିପ୍ପଣୀ |",
   "place": "ସ୍ଥାନ",
   "recommended_social_preview": "600 * 330 px କୁ ସୁପାରିଶ କରାଯାଇଛି |",
+  "required": "ଏହି କ୍ଷେତ୍ର ଆବଶ୍ୟକ |",
   "search_point": "ସନ୍ଧାନ ବିନ୍ଦୁ |",
   "selected_media": "ମନୋନୀତ ମିଡିଆ |",
   "selected_places": "ମନୋନୀତ ସ୍ଥାନଗୁଡିକ |",

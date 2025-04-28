@@ -1,5 +1,6 @@
 {
   "accepted_name": "Jina Lililokubaliwa",
+  "at_least_one_translation": "Angalau tafsiri moja inahitajika",
   "attribution": "Maelezo",
   "audio": {
     "start": "Anza kurekodi.",
@@ -60,6 +61,7 @@
   "notes": "Vidokezo",
   "place": "Mahali",
   "recommended_social_preview": "Imependekezwa 600*330 px",
+  "required": "Uwanja huu unahitajika",
   "search_point": "Tafuta Pointi",
   "selected_media": "Vyombo vya habari vilivyochaguliwa.",
   "selected_places": "Maeneo yaliyochaguliwa",

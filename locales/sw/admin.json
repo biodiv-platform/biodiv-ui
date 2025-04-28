@@ -17,7 +17,20 @@
     }
   },
   "species_fields": {
+    "add_category": "Ongeza jamii mpya",
+    "add_concept": "Ongeza dhana mpya",
+    "add_concept_error": "Hitilafu ya kuongeza dhana",
+    "add_field_error": "ERROR Kuongeza uwanja",
+    "add_subcategory": "Ongeza kifungu kipya",
+    "add_translation": "Ongeza tafsiri",
+    "fetch_error": "Haiwezi kuchukua shamba za spishi",
+    "language": "Lugha",
+    "no_categories": "Hakuna kategoria zilizopatikana. \nOngeza kitengo kwa kutumia kitufe.",
+    "no_subcategories": "Hakuna kifungu kidogo kilichopatikana. \nOngeza kifungu kidogo kwa kutumia kitufe.",
     "no_translations": "Hakuna tafsiri za kuokoa",
+    "title": "Usimamizi wa uwanja wa spishi",
+    "translate": "Tafsiri",
+    "translation_save_error": "Kuokoa Tafsiri",
     "translation_success": "Tafsiri zimesasishwa kwa mafanikio",
     "translations": "Tafsiri za shamba za spishi"
   }
