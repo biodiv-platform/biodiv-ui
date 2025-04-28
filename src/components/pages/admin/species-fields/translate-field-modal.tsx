@@ -48,6 +48,11 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
   const [activeTab, setActiveTab] = React.useState(0);
   const [languages, setLanguages] = React.useState<Array<{id: number, name: string}>>([]);
   const [isLoadingLanguages, setIsLoadingLanguages] = React.useState(false);
+  const [englishPlaceholders, setEnglishPlaceholders] = React.useState({
+    header: "",
+    description: "",
+    urlIdentifier: ""
+  });
   
   const getFieldTypeLabel = () => {
     if (field?.type === "concept") return "concept";
@@ -210,16 +215,25 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                   onClick={() => {
                     // Find the English translation data (assuming English languageId is 38)
                     const englishTranslation = hForm.getValues("translations").find(
-                      t => t.languageId === SITE_CONFIG.LANG.DEFAULT_ID // Use the correct English language ID
+                      t => t.languageId === SITE_CONFIG.LANG.DEFAULT_ID
                     );
                     
-                    // If English translation exists, copy its content, otherwise use empty strings
+                    // Set empty values but store English values to use as placeholders later
                     append({
                       languageId: SITE_CONFIG.LANG.DEFAULT_ID, // Default to French for new translations
-                      header: englishTranslation?.header || "",
-                      description: englishTranslation?.description || "",
-                      urlIdentifier: englishTranslation?.urlIdentifier || ""
+                      header: "",
+                      description: "",
+                      urlIdentifier: ""
                     });
+                    
+                    // Store English values in React state instead of form
+                    if (englishTranslation) {
+                      setEnglishPlaceholders({
+                        header: englishTranslation.header || "",
+                        description: englishTranslation.description || "",
+                        urlIdentifier: englishTranslation.urlIdentifier || ""
+                      });
+                    }
                     
                     setActiveTab(formFields.length);
                   }}
@@ -297,18 +311,21 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                     name={`translations.${index}.header`}
                     label={t(`admin:species_fields.${fieldType}_name`)}
                     isRequired={true}
+                    placeholder={index > 0 ? englishPlaceholders.header : ''}
                   />
                   
                   <TextBoxField 
                     name={`translations.${index}.description`}
                     label={t("admin:species_fields.description")}
                     isRequired={false}
+                    placeholder={index > 0 ? englishPlaceholders.description : ''}
                   />
                   
                   <TextBoxField 
                     name={`translations.${index}.urlIdentifier`}
                     label={t("admin:species_fields.url_identifier")}
                     isRequired={false}
+                    placeholder={index > 0 ? englishPlaceholders.urlIdentifier : ''}
                   />
                 </Box>
               ))}
