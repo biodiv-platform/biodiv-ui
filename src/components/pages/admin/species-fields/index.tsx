@@ -113,7 +113,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   const {languageId} = useGlobalState();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
-  const [allIndices, setAllIndices] = useState([]);
+  const [allIndices, setAllIndices] = useState<number[]>([]);
   useEffect(() => {
     if (fieldLanguages?.length > 0) {
       // Convert both to strings to ensure reliable comparison
@@ -525,9 +525,12 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
         allowMultiple 
         className="white-box" 
         index={allIndices}
-        onChange={(expandedIndices) => setAllIndices(expandedIndices)}
+        onChange={(expandedIndices) => {
+          // Ensure we're setting an array of numbers
+          setAllIndices(Array.isArray(expandedIndices) ? expandedIndices : []);
+        }}
       >
-        {speciesFields.map((concept, idx) => (
+        {speciesFields.map((concept) => (
           <AccordionItem key={concept.id}>
             <h2>
               <AccordionButton>
