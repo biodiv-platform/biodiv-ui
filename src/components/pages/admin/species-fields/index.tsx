@@ -117,7 +117,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   const { languageId } = useGlobalState();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
-  const [allIndices, setAllIndices] = useState<number[]>([]);
+  // Reset tab when field languages change or language ID changes
   useEffect(() => {
     if (fieldLanguages?.length > 0) {
       // Convert both to strings to ensure reliable comparison
@@ -137,6 +137,8 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
       }
     }
   }, [fieldLanguages, languageId]);
+
+  // Add useEffect to fetch data when component mounts
   useEffect(() => {
     const fetchFields = async () => {
       try {
@@ -198,12 +200,6 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
     fetchLanguages();
   }, []);
-
-  useEffect(() => {
-    // Get all possible indices based on the data
-    const indices = Array.from({ length: speciesFields.length }, (_, i) => i);
-    setAllIndices(indices);
-  }, [speciesFields.length]);
 
   const handleAddConcept = async (newConcept) => {
     try {
@@ -546,15 +542,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
         </TabPanels> */}
       </Tabs>
 
-      <Accordion
-        allowMultiple
-        className="white-box"
-        index={allIndices}
-        onChange={(expandedIndices) => {
-          // Ensure we're setting an array of numbers
-          setAllIndices(Array.isArray(expandedIndices) ? expandedIndices : []);
-        }}
-      >
+      <Accordion allowMultiple className="white-box">
         {speciesFields.map((concept) => (
           <AccordionItem key={concept.id}>
             <h2>
@@ -614,11 +602,8 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Accordion
-                allowMultiple
-                index={Array.from({ length: concept.children?.length || 0 }, (_, i) => i)}
-              >
-                {concept.children?.map((category) => (
+              <Accordion allowMultiple>
+                {(concept.children || []).map((category) => (
                   <AccordionItem key={category.id}>
                     <h3>
                       <AccordionButton>
