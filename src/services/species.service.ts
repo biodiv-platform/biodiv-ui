@@ -1,6 +1,8 @@
 import { ENDPOINT } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import http, { plainHttp } from "@utils/http";
+import notification from "@utils/notification";
+import { createSpeciesFieldPayload } from "@utils/species";
 
 export const axGetSpeciesById = async (speciesId, payload) => {
   try {
@@ -289,5 +291,84 @@ export const axDeleteSpeciesReferences = async (referenceId) => {
     return { success: true, data };
   } catch (e) {
     return { success: false, data: null };
+  }
+};
+
+// export const axCreateSpeciesField = async (payload) => {
+//   try {
+//     const { data } = await http.post(
+//       `${ENDPOINT.SPECIES}/v1/species/create/field`,
+//       payload
+//     );
+//     return { success: true, data };
+//   } catch (e) {
+//     return { success: false, data: null };
+//   }
+// };
+
+export const axCreateSpeciesField = async (input, parentId: number, displayOrder = 1) => {
+  try {
+    const payload = createSpeciesFieldPayload(input, parentId, displayOrder);
+    const { data } = await http.post(`${ENDPOINT.SPECIES}/v1/species/create/field`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    notification(e?.response?.data?.message);
+    return { success: false, data: {} };
+  }
+};
+
+export const axUpdateSpeciesFieldTranslations = async (
+  fieldTranslations: Array<{
+    fieldId: number;
+    translations: Array<{
+      langId: number;
+      header: string;
+      description: string;
+      urlIdentifier: string;
+    }>;
+  }>
+) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.SPECIES}/v1/species/field/translations`,
+      fieldTranslations
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+/**
+ * Fetches all translations for a species field
+ * @param fieldId - The ID of the field to fetch translations for
+ * @returns Promise with the field translations
+ */
+export const axGetFieldTranslations = async (fieldId: number) => {
+  try {
+    // Update the endpoint to match your existing API
+    const response = await http.get(`${ENDPOINT.SPECIES}/v1/species/field/${fieldId}/translations`);
+
+    // Map the response data to match the expected FieldTranslation interface
+    const mappedTranslations = response.data.map((item) => ({
+      languageId: item.languageId.toString(),
+      header: item.header,
+      description: item.description,
+      urlIdentifier: item.urlIdentifier
+    }));
+
+    return {
+      success: true,
+      data: mappedTranslations
+    };
+  } catch (error) {
+    console.error("Error fetching field translations:", error);
+    return {
+      success: false,
+      data: null,
+      error
+    };
   }
 };

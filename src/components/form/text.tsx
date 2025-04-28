@@ -25,6 +25,8 @@ interface ITextBoxProps {
   autoComplete?;
   onChangeCallback?;
   multiline?: boolean;
+  placeholder?: string;
+  helperText?: string;
 }
 
 export const TextBoxField = ({
@@ -42,6 +44,8 @@ export const TextBoxField = ({
   autoComplete,
   onChangeCallback,
   multiline = false,
+  placeholder,
+  helperText,
   ...props
 }: ITextBoxProps) => {
   const { field, fieldState } = useController({
@@ -75,7 +79,7 @@ export const TextBoxField = ({
       {showLabel && <FormLabel htmlFor={name}>{label}</FormLabel>}
       <InputComponent
         id={id || name}
-        placeholder={label}
+        placeholder={placeholder}
         type={type}
         maxLength={maxLength}
         isDisabled={disabled}
@@ -111,6 +115,7 @@ export const TextBoxField = ({
         <FormHelperText color="gray.600" children={`${field.value.length}/${maxLength}`} />
       )}
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
+      {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

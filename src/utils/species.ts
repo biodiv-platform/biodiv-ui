@@ -72,7 +72,7 @@ const assignFieldDataToMeta = (meta, data) => {
   return meta.map((m) => ({
     parentField: {
       ...m.parentField,
-      values: data.filter((d) => d.fieldId === m.parentField.id && d.fieldData.description) // matches id and removes empty fields
+      values: data.filter((d) => d.fieldId === m.parentField.id && d.fieldData?.description) // matches id and removes empty fields
     },
     childField: m.childField.length ? assignFieldDataToMeta(m.childField, data) : m.childField
   }));
@@ -87,3 +87,29 @@ const assignTraitsToFieldMeta = (meta, data) => {
     childField: m.childField.length ? assignTraitsToFieldMeta(m.childField, data) : m.childField
   }));
 };
+
+// export interface SpeciesFieldInput {
+//   header: string;
+//   description: string;
+//   urlIdentifier: string;
+//   languageId?: number;
+//   translations?: Array<{
+//     header: string;
+//     description: string;
+//     urlIdentifier: string;
+//     languageId: number;
+//   }>;
+// }
+
+/**
+ * Creates payload for species field creation from modal inputs
+ * @param input Modal form inputs
+ * @param parentId Parent field ID
+ * @param displayOrder Display order for the field
+ * @returns Formatted payload for API
+ */
+export const createSpeciesFieldPayload = (input, parentId: number, displayOrder = 1) => ({
+  parentId: parentId === 0 ? null : parentId,
+  displayOrder,
+  translations: input.translations
+});

@@ -110,3 +110,13 @@ export const axReorderHomePageGallery = async (payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axGetLanguagesWithSpeciesFields = async () => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/languages/fieldHeader`);
+    return { success: true, data };
+  } catch (error) {
+    console.error(error);
+    return { success: false, data: [] };
+  }
+};  

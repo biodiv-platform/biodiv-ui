@@ -1,7 +1,8 @@
 {
   "links": {
     "name-macthing": "Name Matching",
-    "notification": "Send Push-Notification"
+    "notification": "Send Push-Notification",
+    "species_fields": "Species Fields"
   },
   "pages": {
     "notification": {
@@ -15,5 +16,40 @@
       },
       "heading": "Send Push-Notifications"
     }
+  },
+  "species_fields": {
+    "add_category": "Add New Category",
+    "add_concept": "Add New Concept",
+    "add_concept_error": "Error adding concept",
+    "add_field_error": "Error adding field",
+    "add_subcategory": "Add New Subcategory",
+    "add_translation": "Add Translation",
+    "add_translations": "Add Translations",
+    "adding_to_category": "Adding to category: {{name}}",
+    "adding_to_concept": "Adding to concept: {{name}}",
+    "bulk_translate": "Bulk Translate",
+    "bulk_translate_title": "Bulk Translate Fields",
+    "category_name": "Category Name",
+    "concept_name": "Concept Name",
+    "description": "Description",
+    "fetch_error": "Unable to fetch species fields",
+    "language": "Language",
+    "no_categories": "No categories found. Add a category using the + button.",
+    "no_subcategories": "No subcategories found. Add a subcategory using the + button.",
+    "no_translations": "No translations to save",
+    "selected_language": "Selected Language",
+    "subcategory_name": "Subcategory Name",
+    "title": "Species Fields Management",
+    "translate": "Translate",
+    "translation": "Translation",
+    "translation_error": "Error updating translations",
+    "translation_instructions": "Click on 'Bulk Translate' to add translations for all fields in the selected language.",
+    "translation_save_error": "Error saving translations",
+    "translation_success": "Translations updated successfully",
+    "translations": "Species Fields Translations",
+    "translations_description": "Manage translations for all species fields across different languages.",
+    "translations_management": "Species Fields Translations Management",
+    "translations_title": "Manage Field Translations",
+    "url_identifier": "URL Identifier"
   }
 }
