@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   IconButton,
+  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -22,7 +23,8 @@ import {
   TabList,
   Tabs,
   Tooltip,
-  useDisclosure
+  useDisclosure,
+  VStack
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import SITE_CONFIG from "@configs/site-config";
@@ -47,6 +49,8 @@ interface SpeciesField {
   name: string;
   type: string;
   children: SpeciesField[];
+  description: string;
+  urlIdentifier: string;
 }
 
 interface FieldTranslation {
@@ -110,7 +114,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
   const [availableLanguages, setAvailableLanguages] = useState(fieldLanguages || []);
 
-  const {languageId} = useGlobalState();
+  const { languageId } = useGlobalState();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
   const [allIndices, setAllIndices] = useState<number[]>([]);
@@ -118,15 +122,15 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     if (fieldLanguages?.length > 0) {
       // Convert both to strings to ensure reliable comparison
       const matchingLangIndex = fieldLanguages.findIndex(
-        lang => String(lang.id) === String(languageId)
+        (lang) => String(lang.id) === String(languageId)
       );
-      
+
       if (matchingLangIndex !== -1) {
         setSelectedTabIndex(matchingLangIndex);
         setTabLanguage(fieldLanguages[matchingLangIndex]);
       } else {
         // Default to English or first tab
-        const englishIndex = fieldLanguages.findIndex(lang => lang.name === "English");
+        const englishIndex = fieldLanguages.findIndex((lang) => lang.name === "English");
         const defaultIndex = englishIndex !== -1 ? englishIndex : 0;
         setSelectedTabIndex(defaultIndex);
         setTabLanguage(fieldLanguages[defaultIndex]);
@@ -136,20 +140,28 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   useEffect(() => {
     const fetchFields = async () => {
       try {
-        const { data } = await axGetAllFieldsMeta({ langId: tabLanguage ? tabLanguage.id : SITE_CONFIG.LANGUAGE.DEFAULT_ID });
+        const { data } = await axGetAllFieldsMeta({
+          langId: tabLanguage ? tabLanguage.id : SITE_CONFIG.LANGUAGE.DEFAULT_ID
+        });
         // Transform the data to match our expected format
         const transformedData = data.map((item) => ({
           id: item.parentField.id,
           name: item.parentField.header,
           type: item.parentField.label.toLowerCase(),
+          description: item.parentField.description || "",
+          urlIdentifier: item.parentField.urlIdentifier || "",
           children: (item.childField || []).map((child) => ({
             id: child.parentField.id,
             name: child.parentField.header,
             type: child.parentField.label.toLowerCase(),
+            description: child.parentField.description || "",
+            urlIdentifier: child.parentField.urlIdentifier || "",
             children: (child.childFields || []).map((subChild) => ({
               id: subChild.id,
               name: subChild.header,
               type: subChild.label.toLowerCase(),
+              description: subChild.description || "",
+              urlIdentifier: subChild.urlIdentifier || "",
               children: []
             }))
           }))
@@ -216,7 +228,9 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
             id: data.id,
             name: data.header,
             type: "concept",
-            children: []
+            children: [],
+            description: data.description,
+            urlIdentifier: data.urlIdentifier
           }
         ]);
         onConceptModalClose();
@@ -266,7 +280,9 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
             id: data.id,
             name: data.header,
             type: "subcategory",
-            children: []
+            children: [],
+            description: data.description || "",
+            urlIdentifier: data.urlIdentifier || ""
           });
         } else {
           // Add category
@@ -274,7 +290,9 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
             id: data.id,
             name: data.header,
             type: "category",
-            children: []
+            children: [],
+            description: data.description || "",
+            urlIdentifier: data.urlIdentifier || ""
           });
         }
 
@@ -332,7 +350,8 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
 
   const fetchSpeciesFields = async (langCode) => {
     try {
-      const langId = languages.find((lang) => lang.code === langCode)?.id || SITE_CONFIG.LANGUAGE.DEFAULT_ID;
+      const langId =
+        languages.find((lang) => lang.code === langCode)?.id || SITE_CONFIG.LANGUAGE.DEFAULT_ID;
       const { data } = await axGetAllFieldsMeta({ langId });
 
       if (data) {
@@ -455,14 +474,20 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
               id: item.parentField.id,
               name: item.parentField.header,
               type: item.parentField.label.toLowerCase(),
+              description: item.parentField.description || "",
+              urlIdentifier: item.parentField.urlIdentifier || "",
               children: (item.childField || []).map((child) => ({
                 id: child.parentField.id,
                 name: child.parentField.header,
                 type: child.parentField.label.toLowerCase(),
+                description: child.parentField.description || "",
+                urlIdentifier: child.parentField.urlIdentifier || "",
                 children: (child.childFields || []).map((subChild) => ({
                   id: subChild.id,
                   name: subChild.header,
                   type: subChild.label.toLowerCase(),
+                  description: subChild.description || "",
+                  urlIdentifier: subChild.urlIdentifier || "",
                   children: []
                 }))
               }))
@@ -521,9 +546,9 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
         </TabPanels> */}
       </Tabs>
 
-      <Accordion 
-        allowMultiple 
-        className="white-box" 
+      <Accordion
+        allowMultiple
+        className="white-box"
         index={allIndices}
         onChange={(expandedIndices) => {
           // Ensure we're setting an array of numbers
@@ -534,9 +559,31 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
           <AccordionItem key={concept.id}>
             <h2>
               <AccordionButton>
-                <Box flex="1" textAlign="left" fontWeight="bold">
-                  {concept.name}
-                </Box>
+                <VStack spacing={1} alignItems="flex-start" width="full">
+                  <Box flex="1" textAlign="left" fontWeight="bold">
+                    {concept.name}
+                  </Box>
+                  {concept.description && (
+                    <Box fontSize="sm" color="gray.600" textAlign="left">
+                      <span style={{ fontWeight: "medium" }}>Description:</span>{" "}
+                      {concept.description}
+                    </Box>
+                  )}
+                  {concept.urlIdentifier && (
+                    <Box fontSize="sm" color="gray.500" textAlign="left">
+                      <span style={{ fontWeight: "medium" }}>URL:</span>{" "}
+                      <Link
+                        href={concept.urlIdentifier}
+                        isExternal
+                        color="blue.500"
+                        textDecoration="underline"
+                      >
+                        {concept.urlIdentifier}
+                      </Link>
+                    </Box>
+                  )}
+                </VStack>
+
                 <Flex mr={2}>
                   <Tooltip label={t("admin:species_fields.translate")} hasArrow placement="top">
                     <IconButton
@@ -567,17 +614,38 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <Accordion 
-                allowMultiple 
+              <Accordion
+                allowMultiple
                 index={Array.from({ length: concept.children?.length || 0 }, (_, i) => i)}
               >
                 {concept.children?.map((category) => (
                   <AccordionItem key={category.id}>
                     <h3>
                       <AccordionButton>
-                        <Box flex="1" textAlign="left" pl={4}>
-                          {category.name}
-                        </Box>
+                        <VStack spacing={1} alignItems="flex-start" width="full">
+                          <Box flex="1" textAlign="left" pl={4}>
+                            {category.name}
+                          </Box>
+                          {category.description && (
+                            <Box fontSize="sm" color="gray.600" textAlign="left" pl={4}>
+                              <span style={{ fontWeight: "medium" }}>Description:</span>{" "}
+                              {category.description}
+                            </Box>
+                          )}
+                          {category.urlIdentifier && (
+                            <Box fontSize="sm" color="gray.500" textAlign="left" pl={4}>
+                              <span style={{ fontWeight: "medium" }}>URL:</span>{" "}
+                              <Link
+                                href={category.urlIdentifier}
+                                isExternal
+                                color="blue.500"
+                                textDecoration="underline"
+                              >
+                                {category.urlIdentifier}
+                              </Link>
+                            </Box>
+                          )}
+                        </VStack>
                         <Flex mr={2}>
                           <Tooltip
                             label={t("admin:species_fields.translate")}
@@ -626,7 +694,28 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                               borderBottom="1px solid"
                               borderColor="gray.200"
                             >
-                              <Box>{subcategory.name}</Box>
+                              <VStack spacing={1} alignItems="flex-start" width="full">
+                                <Box>{subcategory.name}</Box>
+                                {subcategory.description && (
+                                  <Box fontSize="sm" color="gray.600" textAlign="left">
+                                    <span style={{ fontWeight: "medium" }}>Description:</span>{" "}
+                                    {subcategory.description}
+                                  </Box>
+                                )}
+                                {subcategory.urlIdentifier && (
+                                  <Box fontSize="sm" color="gray.500" textAlign="left">
+                                    <span style={{ fontWeight: "medium" }}>URL:</span>{" "}
+                                    <Link
+                                      href={subcategory.urlIdentifier}
+                                      isExternal
+                                      color="blue.500"
+                                      textDecoration="underline"
+                                    >
+                                      {subcategory.urlIdentifier}
+                                    </Link>
+                                  </Box>
+                                )}
+                              </VStack>
                               <Flex>
                                 <Tooltip
                                   label={t("admin:species_fields.translate")}
