@@ -1,5 +1,6 @@
 {
   "accepted_name": "Accepted Name",
+  "at_least_one_translation": "At least one translation is required",
   "attribution": "Attribution",
   "audio": {
     "start": "Start Recording",
@@ -59,9 +60,12 @@
   "name": "Name",
   "notes": "Notes",
   "place": "Place",
+  "recommended_social_preview": "Recommended 600*330 px",
+  "required": "This field is required",
   "search_point": "Search Point",
   "selected_media": "Selected Media",
   "selected_places": "Selected Places",
+  "social_preview": "Social Preview",
   "species_groups": "Species Groups",
   "tags": "Tags",
   "tags_hint": "Start typing to search tags",
@@ -75,8 +79,6 @@
     "uploaded": "Uploaded to Draft Media",
     "uploading": "Uploading"
   },
-  "recommended_social_preview": "Recommended 600*330 px",
-  "social_preview": "Social Preview",
   "uploader": {
     "browse": "Browse",
     "description": "(Only JPG, JPEG, PNG, MP3 ,MP4 files will be accepted)",
@@ -92,7 +94,5 @@
   },
   "use_in_observation": "Use Selected",
   "wkt": "WKT",
-  "youtube_placeholder": "Input YouTube link",
-  "required": "This field is required",
-  "at_least_one_translation": "At least one translation is required"
+  "youtube_placeholder": "Input YouTube link"
 }
