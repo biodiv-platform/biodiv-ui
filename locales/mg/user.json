@@ -1,6 +1,14 @@
 {
   "about": "About",
+  "actions": "asa",
   "autofill_with_google": "Autofill miaraka amin'ny google",
+  "bulk_action": {
+    "apply": "AMPIHARO",
+    "failure": "Tsy afaka nitaona hetsika betsaka",
+    "select_actions": "Safidio ny hetsika",
+    "success": "Nahatalanjona tamim-pahombiazana ny hetsika be dia be, ny fiovana dia hita taratra tsy ho ela",
+    "title": "Esory ny mpampiasa amin'ny vondrona -"
+  },
   "change_password": "Hanova tenimiafina",
   "confirm_new_password": "Hamarino ny tenimiafina vaovao",
   "confirm_password": "Hamafiso ny tenimiafina",
@@ -60,6 +68,7 @@
     "terms": "Fepetran'ny serivisy",
     "text": "Manaiky an'ity tranonkala ity aho"
   },
+  "unselect_all": "Unselect rehetra",
   "unsubscribe": {
     "error": {
       "contact_us": "Contact",

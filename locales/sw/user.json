@@ -1,6 +1,14 @@
 {
   "about": "Kuhusu",
+  "actions": "Vitendo",
   "autofill_with_google": "Autofill na google.",
+  "bulk_action": {
+    "apply": "Omba",
+    "failure": "Haiwezi kusababisha hatua ya wingi",
+    "select_actions": "Chagua Vitendo",
+    "success": "Hatua iliyosababishwa kwa mafanikio, mabadiliko yataonyeshwa hivi karibuni",
+    "title": "Ondoa watumiaji kutoka kwa kikundi -"
+  },
   "change_password": "Badilisha neno la siri",
   "confirm_new_password": "Thibitisha nenosiri mpya",
   "confirm_password": "Thibitisha nenosiri.",
@@ -60,6 +68,7 @@
     "terms": "Masharti ya Huduma.",
     "text": "Nakubaliana na tovuti hii"
   },
+  "unselect_all": "Usisiteze yote",
   "unsubscribe": {
     "error": {
       "contact_us": "Wasiliana",
