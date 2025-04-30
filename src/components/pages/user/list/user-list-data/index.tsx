@@ -1,6 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
+import BulkMapperModal from "./bulk-mapper";
 import Filters from "./filters";
 import ListHeader from "./header";
 import Views from "./view/grid";
@@ -22,6 +23,7 @@ export default function UserListComponent() {
           <Views />
         </Box>
       </SimpleGrid>
+      <BulkMapperModal />
     </Box>
   );
 }
