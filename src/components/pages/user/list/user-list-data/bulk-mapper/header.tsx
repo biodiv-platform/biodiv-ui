@@ -1,5 +1,6 @@
 import { RepeatIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Button, ButtonGroup } from "@chakra-ui/react";
+import { ACTIONS } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -14,7 +15,7 @@ export default function BulkMapperHeader({ bulkIds, handleBulkCheckbox, openBulk
           variant="outline"
           colorScheme="red"
           leftIcon={<RepeatIcon />}
-          onClick={() => handleBulkCheckbox("UnsSelectAll")}
+          onClick={() => handleBulkCheckbox(ACTIONS.UNSELECTALL)}
         >
           {t("user:unselect_all")}
         </Button>

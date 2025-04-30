@@ -1,7 +1,7 @@
 import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axGetUserList } from "@services/user.service";
-import { isBrowser } from "@static/constants";
+import { ACTIONS, isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
@@ -62,15 +62,15 @@ export function UserListContextProvider(props) {
 
   const handleBulkCheckbox = (actionType: string) => {
     switch (actionType) {
-      case "selectAll":
+      case ACTIONS.SELECTALL:
         setSelectAll(true);
         setValue(userListData?.l?.map((i) => String(i.id)));
         break;
-      case "UnsSelectAll":
+      case ACTIONS.UNSELECTALL:
         setValue([]);
         setSelectAll(false);
         break;
-      case "nextPageSelect":
+      case ACTIONS.NEXTPAGESELECT:
         if (selectAll) {
           setValue(allUserIds.filter((id) => unselectedUserIds.includes(id)));
         }
