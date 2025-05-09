@@ -101,7 +101,7 @@
     "set-clustering": "^1.1.0",
     "shapefile": "^0.6.6",
     "styled-components": "^5.3.6",
-    "tinymce": "^6.2.0",
+    "tinymce": "^6.3.1",
     "url-slug": "^3.0.4",
     "use-deep-compare": "^1.1.0",
     "use-immer": "^0.7.0",
