@@ -96,7 +96,7 @@ export default function TraitsListComponent({ data, filterKey }) {
                           Category: {trait.traits.showInObservation ? "Observation" : "Species"}
                         </Box>
                         <Box m={2}>Datatype: {trait.traits.dataType}</Box>
-                        <SimpleGrid columns={{ md: 3 }} spacing={4} m={2}>
+                        <SimpleGrid columns={{ md: 3 }} gap={4} m={2}>
                           {trait.values.map((value) => (
                             <Flex
                               key={value.id}
@@ -115,7 +115,7 @@ export default function TraitsListComponent({ data, filterKey }) {
                                   mr={2}
                                   src={getTraitIcon(value?.icon)}
                                   alt={value.value}
-                                  ignoreFallback={true}
+                                  // ignoreFallback={true}
                                 />
                               )}
                               <div>{value.value}</div>

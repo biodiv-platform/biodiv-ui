@@ -35,7 +35,7 @@ const GridViewBox = styled.div`
 `;
 
 export default function GridView() {
-  const { userListData, getCheckboxProps, nextPage } = useUserListFilter();
+  const { userListData, getItemProps, nextPage } = useUserListFilter();
   const {
     currentGroup: { id }
   } = useGlobalState();
@@ -64,7 +64,7 @@ export default function GridView() {
               key={user?.id}
               user={user}
               canEdit={canEdit}
-              getCheckboxProps={getCheckboxProps}
+              getItemProps={getItemProps}
             />
           ))}
         </div>

@@ -1,19 +1,4 @@
-import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Flex,
-  IconButton,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  VStack
-} from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Text, VStack } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import SITE_CONFIG from "@configs/site-config";
@@ -25,8 +10,19 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { LuDelete, LuPlus } from "react-icons/lu";
 import ReactSelect from "react-select";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 interface FieldTranslation {
   languageId: string;
@@ -43,17 +39,23 @@ interface TranslateFieldModalProps {
   onSuccess: (translation: any) => void;
 }
 
-const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClose, field, translations = [], onSuccess }) => {
+const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({
+  isOpen,
+  onClose,
+  field,
+  translations = [],
+  onSuccess
+}) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
-  const [languages, setLanguages] = React.useState<Array<{id: number, name: string}>>([]);
+  const [languages, setLanguages] = React.useState<Array<{ id: number; name: string }>>([]);
   const [isLoadingLanguages, setIsLoadingLanguages] = React.useState(false);
   const [englishPlaceholders, setEnglishPlaceholders] = React.useState({
     header: "",
     description: "",
     urlIdentifier: ""
   });
-  
+
   const getFieldTypeLabel = () => {
     if (field?.type === "concept") return "concept";
     if (field?.type === "category") return "category";
@@ -65,14 +67,16 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
   const hForm = useForm({
     resolver: yupResolver(
       Yup.object().shape({
-        translations: Yup.array().of(
-          Yup.object().shape({
-            languageId: Yup.number().required(t("form:required")),
-            header: Yup.string().required(t("form:required")),
-            description: Yup.string(),
-            urlIdentifier: Yup.string()
-          })
-        ).min(1, t("form:at_least_one_translation"))
+        translations: Yup.array()
+          .of(
+            Yup.object().shape({
+              languageId: Yup.number().required(t("form:required")),
+              header: Yup.string().required(t("form:required")),
+              description: Yup.string(),
+              urlIdentifier: Yup.string()
+            })
+          )
+          .min(1, t("form:at_least_one_translation"))
       })
     ),
     defaultValues: {
@@ -87,7 +91,12 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
     }
   });
 
-  const { fields: formFields, append, remove, replace } = useFieldArray({
+  const {
+    fields: formFields,
+    append,
+    remove,
+    replace
+  } = useFieldArray({
     control: hForm.control,
     name: "translations"
   });
@@ -113,7 +122,7 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
       }
       setIsLoadingLanguages(false);
     };
-    
+
     if (isOpen) {
       fetchLanguages();
     }
@@ -122,13 +131,13 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
   // Pre-populate form with existing translations when they become available
   useEffect(() => {
     if (translations?.length > 0) {
-      const formattedTranslations = translations.map(translation => ({
+      const formattedTranslations = translations.map((translation) => ({
         languageId: parseInt(translation.languageId),
         header: translation.header,
         description: translation.description,
         urlIdentifier: translation.urlIdentifier
       }));
-      
+
       replace(formattedTranslations);
       setActiveTab(0);
     }
@@ -136,11 +145,11 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
 
   const handleSubmit = async (values) => {
     if (!field) return;
-    
+
     try {
       const formattedTranslations = {
         fieldId: field.id,
-        translations: values.translations.map(translation => ({
+        translations: values.translations.map((translation) => ({
           langId: translation.languageId,
           header: translation.header,
           description: translation.description,
@@ -149,17 +158,17 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
       };
 
       const response = await axUpdateSpeciesFieldTranslations([formattedTranslations]);
-      
+
       if (response.success) {
         // Pass the complete translation data to the parent component
         // This will allow the parent to update tabs immediately
-        const newTranslations = values.translations.map(translation => ({
+        const newTranslations = values.translations.map((translation) => ({
           languageId: translation.languageId,
           header: translation.header,
           description: translation.description,
           urlIdentifier: translation.urlIdentifier
         }));
-        
+
         onSuccess(newTranslations);
         hForm.reset();
         onClose();
@@ -175,19 +184,19 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
   if (!field) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
-      <ModalOverlay />
-      <ModalContent>
+    <DialogRoot open={isOpen} onOpenChange={onClose} size="xl">
+      <DialogBackdrop />
+      <DialogContent>
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleSubmit)}>
-            <ModalHeader>
+            <DialogHeader>
               {t("admin:species_fields.translate")} {fieldType}
-            </ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+            </DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
               {/* Original Field Information (Read-only) */}
               <Box p={4} mb={4} bg="blue.50" borderRadius="md">
-                <VStack align="stretch" spacing={3}>
+                <VStack align="stretch" gap={3}>
                   <Box>
                     <Text fontWeight="medium">{t(`admin:species_fields.${fieldType}_name`)}</Text>
                     <Text>{field.name}</Text>
@@ -206,18 +215,17 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                   )}
                 </VStack>
               </Box>
-              
+
               {/* Add Translation Button */}
               <Flex justify="flex-end" mb={4}>
                 <Button
                   size="sm"
-                  leftIcon={<AddIcon />}
                   onClick={() => {
                     // Find the English translation data (assuming English languageId is 38)
-                    const englishTranslation = hForm.getValues("translations").find(
-                      t => t.languageId === SITE_CONFIG.LANG.DEFAULT_ID
-                    );
-                    
+                    const englishTranslation = hForm
+                      .getValues("translations")
+                      .find((t) => t.languageId === SITE_CONFIG.LANG.DEFAULT_ID);
+
                     // Set empty values but store English values to use as placeholders later
                     append({
                       languageId: SITE_CONFIG.LANG.DEFAULT_ID, // Default to French for new translations
@@ -225,7 +233,7 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                       description: "",
                       urlIdentifier: ""
                     });
-                    
+
                     // Store English values in React state instead of form
                     if (englishTranslation) {
                       setEnglishPlaceholders({
@@ -234,10 +242,11 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                         urlIdentifier: englishTranslation.urlIdentifier || ""
                       });
                     }
-                    
+
                     setActiveTab(formFields.length);
                   }}
                 >
+                  <LuPlus />
                   {t("admin:species_fields.add_translation")}
                 </Button>
               </Flex>
@@ -251,11 +260,12 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                     variant={activeTab === index ? "solid" : "outline"}
                     onClick={() => setActiveTab(index)}
                   >
-                    {languages.find(lang => lang.id === hForm.watch(`translations.${index}.languageId`))?.name || t("admin:species_fields.language")}
+                    {languages.find(
+                      (lang) => lang.id === hForm.watch(`translations.${index}.languageId`)
+                    )?.name || t("admin:species_fields.language")}
                     {index > 0 && (
                       <IconButton
                         size="xs"
-                        icon={<DeleteIcon />}
                         onClick={(e) => {
                           e.stopPropagation();
                           remove(index);
@@ -265,7 +275,9 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                         }}
                         ml={2}
                         aria-label="Remove translation"
-                      />
+                      >
+                        <LuDelete />
+                      </IconButton>
                     )}
                   </Button>
                 ))}
@@ -281,19 +293,27 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                   borderRadius="md"
                 >
                   <Text mb={1} fontWeight="medium">
-                    {t("admin:species_fields.language")} <Box as="span" color="red.500">*</Box>
+                    {t("admin:species_fields.language")}{" "}
+                    <Box as="span" color="red.500">
+                      *
+                    </Box>
                   </Text>
                   <Box mb={6}>
                     <ReactSelect
                       name={`translations.${index}.languageId`}
                       placeholder={t("admin:species_fields.language")}
-                      options={languages.map(lang => ({ value: lang.id, label: lang.name }))}
+                      options={languages.map((lang) => ({ value: lang.id, label: lang.name }))}
                       isLoading={isLoadingLanguages}
                       value={
-                        languages.find(lang => lang.id === hForm.watch(`translations.${index}.languageId`))
-                          ? { 
-                              value: hForm.watch(`translations.${index}.languageId`), 
-                              label: languages.find(lang => lang.id === hForm.watch(`translations.${index}.languageId`))?.name 
+                        languages.find(
+                          (lang) => lang.id === hForm.watch(`translations.${index}.languageId`)
+                        )
+                          ? {
+                              value: hForm.watch(`translations.${index}.languageId`),
+                              label: languages.find(
+                                (lang) =>
+                                  lang.id === hForm.watch(`translations.${index}.languageId`)
+                              )?.name
                             }
                           : null
                       }
@@ -307,42 +327,42 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({ isOpen, onClo
                     />
                   </Box>
 
-                  <TextBoxField 
+                  <TextBoxField
                     name={`translations.${index}.header`}
                     label={t(`admin:species_fields.${fieldType}_name`)}
                     isRequired={true}
-                    placeholder={index > 0 ? englishPlaceholders.header : ''}
+                    placeholder={index > 0 ? englishPlaceholders.header : ""}
                   />
-                  
-                  <TextBoxField 
+
+                  <TextBoxField
                     name={`translations.${index}.description`}
                     label={t("admin:species_fields.description")}
                     isRequired={false}
-                    placeholder={index > 0 ? englishPlaceholders.description : ''}
+                    placeholder={index > 0 ? englishPlaceholders.description : ""}
                   />
-                  
-                  <TextBoxField 
+
+                  <TextBoxField
                     name={`translations.${index}.urlIdentifier`}
                     label={t("admin:species_fields.url_identifier")}
                     isRequired={false}
-                    placeholder={index > 0 ? englishPlaceholders.urlIdentifier : ''}
+                    placeholder={index > 0 ? englishPlaceholders.urlIdentifier : ""}
                   />
                 </Box>
               ))}
-            </ModalBody>
-            
-            <ModalFooter>
+            </DialogBody>
+
+            <DialogFooter>
               <SubmitButton leftIcon={<CheckIcon />} mr={3}>
                 {t("common:save")}
               </SubmitButton>
               <Button variant="ghost" onClick={onClose}>
                 {t("common:cancel")}
               </Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
         </FormProvider>
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </DialogRoot>
   );
 };
 

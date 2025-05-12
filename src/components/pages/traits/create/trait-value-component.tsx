@@ -1,4 +1,3 @@
-import { CloseIcon } from "@chakra-ui/icons";
 import { Box, GridItem, IconButton, SimpleGrid } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import { axUploadResource } from "@services/files.service";
@@ -6,6 +5,7 @@ import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import { LuX } from "react-icons/lu";
 
 export default function TraitsValueComponent({
   valueObj,
@@ -29,7 +29,7 @@ export default function TraitsValueComponent({
   });
   const { t } = useTranslation();
   return (
-    <SimpleGrid columns={{ base: 1, md: 5 }} spacing={{ md: 4 }} mb={4}>
+    <SimpleGrid columns={{ base: 1, md: 5 }} gap={{ md: 4 }} mb={4}>
       <Box>
         <TextBoxField
           key={`Value ${valueObj[translationSelected].values[index].value}`}
@@ -77,11 +77,12 @@ export default function TraitsValueComponent({
         <Box display="flex" justifyContent="center" alignItems="center">
           <IconButton
             aria-label="Remove value"
-            icon={<CloseIcon />}
             onClick={() => onRemove(index)}
             size="sm"
             colorScheme="red"
-          />
+          >
+            <LuX />
+          </IconButton>
         </Box>
       )}
     </SimpleGrid>

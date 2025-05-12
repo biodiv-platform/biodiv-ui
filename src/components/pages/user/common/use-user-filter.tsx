@@ -25,7 +25,7 @@ interface UserListContextProps {
   nextPage?;
   setFilter?;
   resetFilter?;
-  getCheckboxProps?;
+  getItemProps?;
   selectAll?: boolean;
   setSelectAll?;
   bulkUserIds?: any[];
@@ -55,8 +55,8 @@ export function UserListContextProvider(props) {
   }, [filter]);
 
   const [selectAll, setSelectAll] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { getCheckboxProps, value: bulkUserIds, setValue } = useCheckboxGroup();
+  const { open, onOpen, onClose } = useDisclosure();
+  const { getItemProps, value: bulkUserIds, setValue } = useCheckboxGroup();
   const allUserIds = userListData?.l?.map((item) => String(item.id)) || [];
   const unselectedUserIds = allUserIds.filter((id) => !bulkUserIds.includes(id)).join(",");
 
@@ -150,13 +150,13 @@ export function UserListContextProvider(props) {
         removeFilter,
         nextPage,
         resetFilter,
-        getCheckboxProps,
+        getItemProps,
         selectAll,
         setSelectAll,
         bulkUserIds,
         unselectedUserIds,
         handleBulkCheckbox,
-        isOpen,
+        isOpen: open,
         onOpen,
         onClose
       }}

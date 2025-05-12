@@ -1,4 +1,3 @@
-import { EditIcon } from "@chakra-ui/icons";
 import { Box, Heading, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { PageHeading } from "@components/@core/layout";
@@ -8,6 +7,7 @@ import { hasAccess } from "@utils/auth";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+import { LuPencil } from "react-icons/lu";
 
 export default function TraitsShowComponent({ data }) {
   const router = useLocalRouter();
@@ -24,23 +24,23 @@ export default function TraitsShowComponent({ data }) {
     <div className="container mt">
       <SimpleGrid columns={{ base: 1, md: 2 }}>
         <PageHeading>
-          <Heading as="div" size="l" mt={2}>
+          <Heading as="div" size="2xl" mt={2}>
             {data.traits.name}
           </Heading>
         </PageHeading>
         {canEdit && (
           <Box alignContent={"center"} paddingLeft={"90%"}>
             <SimpleActionButton
-              icon={<EditIcon />}
+              icon={<LuPencil />}
               title={"Trait edit"}
               onClick={handleOnEdit}
-              colorScheme="teal"
+              colorPalette="teal"
             />
           </Box>
         )}
       </SimpleGrid>
       <Box className="white-box" mb={4}>
-        <SimpleGrid columns={[1, 1, 3, 3]} spacingY={4} p={4}>
+        <SimpleGrid columns={[1, 1, 3, 3]} gapY={4} p={4}>
           {data.traits.icon && <Text fontWeight={600}>{t("traits:traits_show.icon")}</Text>}
           {data.traits.icon && (
             <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
@@ -49,7 +49,7 @@ export default function TraitsShowComponent({ data }) {
                 objectFit="contain"
                 src={getTraitIcon(data.traits.icon)}
                 alt={data.traits.icon}
-                ignoreFallback={true}
+                // ignoreFallback={true}
               />
             </Box>
           )}
@@ -62,7 +62,7 @@ export default function TraitsShowComponent({ data }) {
           )}
           {data.values.length != 0 && data.traits.dataType == "STRING" && (
             <Box gridColumn={[1, 1, "2/4", "2/4"]} wordBreak="break-all" mb={[4, 4, 0, 0]}>
-              <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
+              <SimpleGrid columns={[1, 2, 3, 4]} gap={4}>
                 <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all" fontWeight={600}>
                   {t("traits:traits_show.icon")}
                 </Box>
@@ -79,7 +79,7 @@ export default function TraitsShowComponent({ data }) {
               {data.values
                 .sort((a, b) => a.displayOrder - b.displayOrder)
                 .map((valueObj) => (
-                  <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
+                  <SimpleGrid columns={[1, 2, 3, 4]} gap={4}>
                     <Box p={4} borderRadius="md" boxShadow="sm" wordBreak="break-all">
                       {valueObj.icon != null && (
                         <Image
@@ -87,7 +87,7 @@ export default function TraitsShowComponent({ data }) {
                           objectFit="contain"
                           src={getTraitIcon(valueObj.icon)}
                           alt={valueObj.icon}
-                          ignoreFallback={true}
+                          // ignoreFallback={true}
                         />
                       )}
                     </Box>

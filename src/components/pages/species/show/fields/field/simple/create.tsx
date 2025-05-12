@@ -1,27 +1,8 @@
-import { CalendarIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Heading,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  SimpleGrid
-} from "@chakra-ui/react";
+import { Box, Button, Heading, Input, InputGroup, SimpleGrid } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import TraitInput from "@components/pages/observation/common/trait-input";
 import MultipleCategorialTrait from "@components/pages/observation/common/trait-input/multiple-categorical";
 import SITE_CONFIG from "@configs/site-config";
-import AddIcon from "@icons/add";
-import CheckIcon from "@icons/check";
-import CrossIcon from "@icons/cross";
 import { axUpdateSpeciesTrait } from "@services/traits.service";
 import { SPECIES_FIELD_UPDATE } from "@static/events";
 import { getParsedUser } from "@utils/auth";
@@ -30,6 +11,17 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { emit } from "react-gbus";
+import { LuCalendar, LuCheck, LuPlus, LuX } from "react-icons/lu";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import useSpecies from "../../../use-species";
 import { ColorEditSwatch } from "../../traits/color/color-edit-swatch";
@@ -125,27 +117,21 @@ export default function SpeciesFieldSimpleCreate({
   return (
     <div>
       <Button variant="outline" size="xs" colorPalette="green" onClick={handleOnCreate}>
-        <AddIcon />
+        <LuPlus />
         {t("common:add")}
       </Button>
       {!hasNewTraits && (
-        <Button
-          ml={4}
-          variant="outline"
-          size="xs"
-          colorScheme="green"
-          leftIcon={<AddIcon />}
-          onClick={openModal}
-        >
+        <Button ml={4} variant="outline" size="xs" colorPalette="green" onClick={openModal}>
+          <LuPlus />
           {t("common:add_trait")}
         </Button>
       )}
-      <Modal onClose={closeModal} trapFocus={false} size="6xl" isOpen={isModalOpen}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{"Add New Trait"}</ModalHeader>
-          <ModalCloseButton onClick={() => setTraitValues([])} />
-          <ModalBody>
+      <DialogRoot onOpenChange={closeModal} trapFocus={false} size="xl" open={isModalOpen}>
+        <DialogBackdrop />
+        <DialogContent>
+          <DialogHeader>{"Add New Trait"}</DialogHeader>
+          <DialogCloseTrigger onClick={() => setTraitValues([])} />
+          <DialogBody>
             {!hasNewTraits &&
               traits
                 .filter((item) => item.values.length === 0)
@@ -175,7 +161,7 @@ export default function SpeciesFieldSimpleCreate({
                       />
                     )}
                     {t.dataType == "COLOR" && (
-                      <SimpleGrid columns={{ md: 3 }} spacing={4} mb={3}>
+                      <SimpleGrid columns={{ md: 3 }} gap={4} mb={3}>
                         {traitValues[t.traitId] &&
                           traitValues[t.traitId].map((value, index) => (
                             <ColorEditSwatch
@@ -198,7 +184,13 @@ export default function SpeciesFieldSimpleCreate({
                     )}
                     {t.dataType == "DATE" && (
                       <Box mb={3} maxW="md">
-                        <InputGroup>
+                        <InputGroup
+                          endElement={
+                            <label htmlFor={t.traitId} style={{ cursor: "pointer" }}>
+                              <LuCalendar color="gray.300" />
+                            </label>
+                          }
+                        >
                           <Flatpickr
                             value={traitValues[t.traitId] || []}
                             options={{ allowInput: true, dateFormat: "d-m-Y", mode: "range" }}
@@ -212,11 +204,6 @@ export default function SpeciesFieldSimpleCreate({
                               />
                             )}
                           />
-                          <InputRightElement>
-                            <label htmlFor={t.traitId} style={{ cursor: "pointer" }}>
-                              <CalendarIcon color="gray.300" />
-                            </label>
-                          </InputRightElement>
                         </InputGroup>
                       </Box>
                     )}
@@ -232,9 +219,8 @@ export default function SpeciesFieldSimpleCreate({
                     )}
                   </Box>
                 ))}
-            <ModalFooter>
+            <DialogFooter>
               <Button
-                leftIcon={<CheckIcon />}
                 onClick={async () => {
                   const { success } = await axUpdateSpeciesTrait(
                     speciesId,
@@ -251,22 +237,23 @@ export default function SpeciesFieldSimpleCreate({
                   }
                 }}
               >
+                <LuCheck />
                 {t("common:save")}
               </Button>
               <Button
                 ml={4}
-                leftIcon={<CrossIcon />}
                 onClick={() => {
                   setTraitValues([]);
                   setIsModalOpen(false);
                 }}
               >
+                <LuX />
                 {t("common:cancel")}
               </Button>
-            </ModalFooter>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+            </DialogFooter>
+          </DialogBody>
+        </DialogContent>
+      </DialogRoot>
     </div>
   );
 }
