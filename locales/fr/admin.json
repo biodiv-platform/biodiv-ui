@@ -1,5 +1,6 @@
 {
   "links": {
+    "name-macthing": "Nom correspondant",
     "notification": "Envoyer une notification push"
   },
   "pages": {
@@ -14,5 +15,23 @@
       },
       "heading": "Envoyer des notifications push-push"
     }
+  },
+  "species_fields": {
+    "add_category": "Ajouter une nouvelle catégorie",
+    "add_concept": "Ajouter un nouveau concept",
+    "add_concept_error": "Erreur d'ajout de concept",
+    "add_field_error": "Erreur d'ajout de champ",
+    "add_subcategory": "Ajouter une nouvelle sous-catégorie",
+    "add_translation": "Ajouter une traduction",
+    "fetch_error": "Impossible de récupérer les champs d'espèces",
+    "language": "Langue",
+    "no_categories": "Aucune catégorie trouvée. \nAjoutez une catégorie à l'aide du bouton.",
+    "no_subcategories": "Aucune sous-catégorie trouvée. \nAjoutez une sous-catégorie à l'aide du bouton.",
+    "no_translations": "Pas de traductions à enregistrer",
+    "title": "Gestion des champs d'espèces",
+    "translate": "Traduire",
+    "translation_save_error": "Traductions de sauvegarde d'erreur",
+    "translation_success": "Traductions mises à jour avec succès",
+    "translations": "Traductions de champs d'espèces"
   }
 }

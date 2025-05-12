@@ -98,9 +98,9 @@
   "upload": {
     "label": "Drop PDF/Video file(s) here",
     "my_uploads": "Draft Media",
+    "pdf_link_only": "Supports PDF link only",
     "selected": "Selected Document",
     "supported_formats": "Supported file formats include .PDF, .MP4, .WebM, and .MOV.",
-    "pdf_link_only": "Supports PDF link only",
     "url": "External URL"
   }
 }

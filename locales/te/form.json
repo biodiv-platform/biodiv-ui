@@ -1,5 +1,6 @@
 {
   "accepted_name": "ఆమోదించబడిన పేరు",
+  "at_least_one_translation": "కనీసం ఒక అనువాదం అవసరం",
   "attribution": "ఆపాదింపు",
   "audio": {
     "start": "రికార్డింగ్ ప్రారంభించండి",
@@ -60,6 +61,7 @@
   "notes": "గమనికలు",
   "place": "స్థలం",
   "recommended_social_preview": "600*330 px సిఫార్సు చేయబడింది",
+  "required": "ఈ ఫీల్డ్ అవసరం",
   "search_point": "సెర్చ్ పాయింట్",
   "selected_media": "ఎంచుకున్న మీడియా",
   "selected_places": "ఎంచుకున్న ప్రదేశాలు",

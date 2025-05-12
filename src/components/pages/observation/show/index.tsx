@@ -112,6 +112,7 @@ export default function ObservationShowPageComponent({
             speciesTraitsListDefault={traits}
             observationId={o.observation?.id}
             authorId={o.authorInfo?.id}
+            groupId={o.observation?.groupId}
           />
           <Groups
             resourceId={o.observation?.id}

@@ -15,7 +15,7 @@ export function TraitHeader({ trait, onOpen }) {
 
   return (
     <Heading as="h4" size="sm" mb={2} alignItems="center" display="flex">
-      <LocalLink href={`/trait/show/${trait?.id}`} prefixGroup={true}>
+      <LocalLink href={`/traits/show/${trait?.traitId}`} prefixGroup={true}>
         <BlueLink mr={2}>
           {trait?.name} {trait?.units && `(${trait.units})`}
         </BlueLink>

@@ -17,7 +17,7 @@ export default function NumericTrait({ trait, traitValues, setTraitValues, setSh
       <TraitHeader trait={trait} onOpen={onOpen} />
       {open ? (
         <NumericTraitEdit
-          traitId={trait.id}
+          traitId={trait.traitId}
           initialValue={traitValues}
           onSave={setTraitValues}
           onClose={onClose}

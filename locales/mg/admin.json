@@ -1,5 +1,6 @@
 {
   "links": {
+    "name-macthing": "Anarana mifanandrify",
     "notification": "Alefaso ny fanosehana"
   },
   "pages": {
@@ -14,5 +15,23 @@
       },
       "heading": "Mandefasa fanamarihana"
     }
+  },
+  "species_fields": {
+    "add_category": "Ampio sokajy vaovao",
+    "add_concept": "Ampio ny foto-kevitra vaovao",
+    "add_concept_error": "Hadisoana manampy ny foto-kevitra",
+    "add_field_error": "Hadisoana manampy saha",
+    "add_subcategory": "Ampio ny Subcategory vaovao",
+    "add_translation": "Manampy fandikana",
+    "fetch_error": "Tsy afaka naka sary ny karazana karazana",
+    "language": "Fiteny",
+    "no_categories": "Tsy misy sokajy hita. \nManampia sokajy mampiasa ny bokotra.",
+    "no_subcategories": "Tsy misy tohan-kevitra hita. \nManampia sokajy iray amin'ny fampiasana ny bokotra.",
+    "no_translations": "Tsy misy fandikan-teny hamonjy",
+    "title": "Fitantanana karazana karazana",
+    "translate": "translate",
+    "translation_save_error": "Hadisoana ny manavotra fandikana",
+    "translation_success": "Fandikana nohavaozina soa aman-tsara",
+    "translations": "Karazana karazana fandikan-teny"
   }
 }

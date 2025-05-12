@@ -149,3 +149,19 @@ export const Months = [
 ];
 
 export const WeekDays = ["Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"];
+
+export const PREVENT_CLICK_TAGS = ["INPUT", "LABEL", "BUTTON"];
+
+export const REQUIRED_COLUMNS = ["ScientificName", "TaxonConceptId", "SpeciesId", "Contributor"];
+
+export const CATEGORY_TYPE = [
+  { label: "All", value: "All" },
+  { label: "Observation Traits", value: "Observation" },
+  { label: "Species Traits", value: "Species" }
+];
+
+export const ACTIONS = {
+  SELECTALL: "selectAll",
+  UNSELECTALL: "unSelectAll",
+  NEXTPAGESELECT: "nextPageSelect"
+};

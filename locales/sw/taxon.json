@@ -75,6 +75,31 @@
     "synonyms": "Vidokezo",
     "title": "Taarifa ya Taxonomy."
   },
+  "name_matching": {
+    "all_filter": "Zote",
+    "cancel": "Ghairi",
+    "columnMapping_description": "Tafadhali chagua safu ya jina la kisayansi",
+    "delete": "Futa",
+    "delete_description": "Je! Una uhakika unataka kufuta jina hili la kisayansi?",
+    "delete_title": "Futa jina la kisayansi",
+    "description": "Utendaji huu hukuruhusu kulinganisha orodha ya majina yaliyotolewa na ushuru wa portal. \nIli kudhibitisha majina ya kisayansi, pakia lahajedwali (.xlsx) iliyo na safu moja na majina halali ya kisayansi. \nMfumo utaonyesha mechi kwa majina yaliyotolewa. \nChagua mechi na upakue karatasi inayosababishwa, ambayo itajumuisha safu ya taxonConceptId.",
+    "download_button": "Pakua kama",
+    "download_csv": "Maadili ya Comma Seperated (.csv)",
+    "download_excel": "Microsoft Excel (.xlsx)",
+    "matched_filter": "Inayofanana",
+    "multiple_matches": "Mechi zilizopatikana",
+    "name_matches": "Mechi za jina",
+    "no_match": "Hakuna mechi iliyopatikana",
+    "no_species_page": "Ukurasa wa spishi haipo kwa mechi hii ya jina",
+    "one_match": "Mechi 1 imepatikana",
+    "species_create_description": "Bonyeza kwa jina la spishi kwa kuunda spishi",
+    "species_name": "Jina la spishi",
+    "species_page_exist": "Ukurasa wa spishi upo kwa mechi hii ya jina",
+    "unmatched_filter": "Hailinganishwi",
+    "upload_button": "Vinjari",
+    "upload_description": "Buruta na kuacha faili za Excel",
+    "warning_text": "Onyo: Haikuweza kupata mechi zozote kwa jina la spishi zifuatazo!"
+  },
   "position": {
     "title": "Nafasi"
   },

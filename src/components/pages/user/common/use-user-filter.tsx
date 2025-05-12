@@ -1,10 +1,11 @@
+import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { axGetUserList } from "@services/user.service";
-import { isBrowser } from "@static/constants";
+import { ACTIONS, isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 export interface UserListData {
@@ -24,11 +25,20 @@ interface UserListContextProps {
   nextPage?;
   setFilter?;
   resetFilter?;
+  getCheckboxProps?;
+  selectAll?: boolean;
+  setSelectAll?;
+  bulkUserIds?: any[];
+  unselectedUserIds?;
+  handleBulkCheckbox: (arg: string) => void;
+  isOpen?;
+  onOpen?;
+  onClose?;
 }
 
 const UserListContext = createContext<UserListContextProps>({} as UserListContextProps);
 
-export function UserListContextProvider(props: UserListContextProps) {
+export function UserListContextProvider(props) {
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
   const [isAdmin] = useImmer<boolean>(props.isAdmin);
 
@@ -43,6 +53,29 @@ export function UserListContextProvider(props: UserListContextProps) {
       window.history.pushState("", "", `?${stringify({ ...filter.f })}`);
     }
   }, [filter]);
+
+  const [selectAll, setSelectAll] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { getCheckboxProps, value: bulkUserIds, setValue } = useCheckboxGroup();
+  const allUserIds = userListData?.l?.map((item) => String(item.id)) || [];
+  const unselectedUserIds = allUserIds.filter((id) => !bulkUserIds.includes(id)).join(",");
+
+  const handleBulkCheckbox = (actionType: string) => {
+    switch (actionType) {
+      case ACTIONS.SELECTALL:
+        setSelectAll(true);
+        setValue(userListData?.l?.map((i) => String(i.id)));
+        break;
+      case ACTIONS.UNSELECTALL:
+        setValue([]);
+        setSelectAll(false);
+        break;
+      case ACTIONS.NEXTPAGESELECT:
+        if (selectAll) {
+          setValue(allUserIds.filter((id) => unselectedUserIds.includes(id)));
+        }
+    }
+  };
 
   const fetchListData = async () => {
     try {
@@ -116,7 +149,16 @@ export function UserListContextProvider(props: UserListContextProps) {
         setFilter,
         removeFilter,
         nextPage,
-        resetFilter
+        resetFilter,
+        getCheckboxProps,
+        selectAll,
+        setSelectAll,
+        bulkUserIds,
+        unselectedUserIds,
+        handleBulkCheckbox,
+        isOpen,
+        onOpen,
+        onClose
       }}
     >
       {props.children}

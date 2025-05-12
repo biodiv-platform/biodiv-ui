@@ -69,6 +69,7 @@ export interface SpeciesMailData {
   authorId?: number; // int64
 }
 export interface Traits {
+  traitId: number;
   id?: number; // int64
   dataType?: string;
   description?: string;
@@ -83,6 +84,7 @@ export interface Traits {
   source?: string;
 }
 export interface TraitsValue {
+  traitValueId: number;
   id?: number; // int64
   value?: string;
   icon?: string;

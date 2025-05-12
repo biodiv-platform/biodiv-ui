@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 export default function SimpleTraitShow({ values, options }) {
   const finalValues = useMemo(() => {
     const valueIds = values.map((fact) => fact.valueId);
-    return options.filter((option) => valueIds.includes(option.id));
+    return options.filter((option) => valueIds.includes(option.traitValueId));
   }, [values]);
 
   return (

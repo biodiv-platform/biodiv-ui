@@ -160,7 +160,7 @@
     "select_plant_organ": "sélectionner un organe végétal"
   },
   "post_to_groups": "Associer aux groupes",
-  "range_hint": "Utilisation: Valeurs de la plage de septates",
+  "range_hint": "utiliser : pour séparer les valeurs de plage",
   "rate_success": "Médias évalués avec succès",
   "rating": "Notation",
   "related": "Observations connexes",

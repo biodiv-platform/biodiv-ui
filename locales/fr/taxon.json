@@ -75,6 +75,31 @@
     "synonyms": "Synonymes",
     "title": "Informations sur la taxonomie"
   },
+  "name_matching": {
+    "all_filter": "Tous",
+    "cancel": "Annuler",
+    "columnMapping_description": "Veuillez sélectionner la colonne de nom scientifique",
+    "delete": "Supprimer",
+    "delete_description": "Êtes-vous sûr de vouloir supprimer ce nom scientifique?",
+    "delete_title": "Supprimer le nom scientifique",
+    "description": "Cette fonctionnalité vous permet de correspondre à une liste de noms fournis à la taxonomie du portail. \nPour valider les noms scientifiques, téléchargez une feuille de calcul (.xlsx) contenant une colonne avec des noms scientifiques valides. \nLe système affichera les correspondances des noms fournis. \nSélectionnez une correspondance et téléchargez la feuille résultante, qui comprendra une colonne TaxonConceptid.",
+    "download_button": "Télécharger comme",
+    "download_csv": "Valeurs de virgule séparées (.csv)",
+    "download_excel": "Microsoft Excel (.xlsx)",
+    "matched_filter": "Assorti",
+    "multiple_matches": "Matchs trouvés",
+    "name_matches": "Nom correspond",
+    "no_match": "Aucun match trouvé",
+    "no_species_page": "La page de l'espèce n'existe pas pour ce match de nom",
+    "one_match": "1 match trouvé",
+    "species_create_description": "Cliquez sur le nom de l'espèce pour créer des espèces",
+    "species_name": "Nom de l'espèce",
+    "species_page_exist": "La page des espèces existe pour ce match de nom",
+    "unmatched_filter": "Incomparable",
+    "upload_button": "Parcourir",
+    "upload_description": "Faites glisser et déposez les fichiers Excel",
+    "warning_text": "AVERTISSEMENT: je n'ai trouvé aucune correspondance pour le nom de l'espèce suivant!"
+  },
   "position": {
     "title": "Position"
   },

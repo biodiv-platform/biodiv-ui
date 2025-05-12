@@ -1,18 +1,21 @@
 import { Box } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
   AccordionItem,
   AccordionItemContent,
   AccordionItemTrigger
 } from "@/components/ui/accordion";
+import useGlobalState from "@/hooks/use-global-state";
+import { axGetAllTraitsMeta } from "@/services/species.service";
 
 import useSpeciesList from "../../use-species-list";
 import CheckboxFilterPanel from "../shared/checkbox";
 import HsvColorFilter from "../shared/hsv-color-picker";
 import SubAccordion from "../shared/sub-accordion";
+import TraitDateRangeFilter from "../shared/trait-date-range";
 
-const includedDataType = ["COLOR", "STRING"];
+const includedDataType = ["COLOR", "STRING", "DATE"];
 const filterTraitsfromAggregation = (traits, ag) => {
   if (Object.keys(ag?.groupTraitsName)?.length <= 0) return [];
   return traits.map(({ categoryName, traitsValuePairList }) => ({
@@ -27,8 +30,14 @@ export default function TraitsFilter() {
     traits,
     speciesData: { ag }
   } = useSpeciesList();
+  const [traitsData, setTraitsData] = useState(traits);
 
-  const traitsList = useMemo(() => filterTraitsfromAggregation(traits, ag), traits);
+  const { languageId } = useGlobalState();
+  useEffect(() => {
+    axGetAllTraitsMeta(languageId).then(({ data }) => setTraitsData(data));
+  }, [languageId]);
+
+  const traitsList = useMemo(() => filterTraitsfromAggregation(traitsData, ag), traitsData);
 
   return traitsList?.length > 0 ? (
     <SubAccordion>
@@ -46,8 +55,15 @@ export default function TraitsFilter() {
                   case "COLOR":
                     return (
                       <HsvColorFilter
-                        filterKey={`trait_${trait.id}.color_hsl`}
+                        filterKey={`trait_${trait.traitId}.color_hsl`}
                         label={trait.name}
+                      />
+                    );
+                  case "DATE":
+                    return (
+                      <TraitDateRangeFilter
+                        filterKey={`trait_${trait.traitId}.season`}
+                        translateKey={trait.name}
                       />
                     );
 
@@ -56,11 +72,11 @@ export default function TraitsFilter() {
                       <CheckboxFilterPanel
                         key={trait.id}
                         label={trait.name}
-                        filterKey={`trait_${trait.id}.string`}
-                        options={values.map(({ value, icon, id }) => ({
+                        filterKey={`trait_${trait.traitId}.string`}
+                        options={values.map(({ value, icon, traitValueId }) => ({
                           label: value,
                           valueIcon: icon,
-                          value: id.toString()
+                          value: traitValueId.toString()
                         }))}
                         statKey={`groupTraits`}
                         skipOptionsTranslation={true}

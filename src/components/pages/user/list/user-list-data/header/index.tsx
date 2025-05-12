@@ -7,9 +7,17 @@ import React from "react";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import useUserList from "../../../common/use-user-filter";
+import BulkMapperHeader from "../bulk-mapper/header";
 
 export default function ListHeader() {
-  const { filter, setFilter, userListData } = useUserList();
+  const {
+    filter,
+    setFilter,
+    userListData,
+    bulkUserIds,
+    handleBulkCheckbox,
+    onOpen: openBulkMappingModal
+  } = useUserList();
   const { t } = useTranslation();
 
   const handleOnSort = (e) => {
@@ -29,6 +37,11 @@ export default function ListHeader() {
         justify="space-between"
       >
         <Stack direction={"row"} gap={4} mb={4}>
+          <BulkMapperHeader
+            bulkIds={bulkUserIds}
+            handleBulkCheckbox={handleBulkCheckbox}
+            openBulkMappingModal={openBulkMappingModal}
+          />
           <Box>
             <NativeSelectRoot>
               <NativeSelectField

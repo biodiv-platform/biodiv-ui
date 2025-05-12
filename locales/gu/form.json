@@ -1,5 +1,6 @@
 {
   "accepted_name": "સ્વીકૃત નામ",
+  "at_least_one_translation": "ઓછામાં ઓછું એક અનુવાદ જરૂરી છે",
   "attribution": "એટ્રિબ્યુશન",
   "audio": {
     "start": "રેકોર્ડિંગ શરૂ કરો",
@@ -60,6 +61,7 @@
   "notes": "નોંધ",
   "place": "સ્થળ",
   "recommended_social_preview": "ભલામણ કરેલ 600*330 px",
+  "required": "આ ક્ષેત્ર જરૂરી છે",
   "search_point": "સર્ચ પોઈન્ટ",
   "selected_media": "પસંદ કરેલ મીડિયા",
   "selected_places": "પસંદ કરેલ સ્થાનો",

@@ -1,5 +1,6 @@
 {
   "accepted_name": "গৃহীত নাম",
+  "at_least_one_translation": "কমপক্ষে একটি অনুবাদ প্রয়োজন",
   "attribution": "অ্যাট্রিবিউশন",
   "audio": {
     "start": "রেকর্ডিং শুরু করুন",
@@ -60,6 +61,7 @@
   "notes": "মন্তব্য",
   "place": "স্থান",
   "recommended_social_preview": "প্রস্তাবিত 600*330 পিক্সেল",
+  "required": "এই ক্ষেত্র প্রয়োজন",
   "search_point": "অনুসন্ধান পয়েন্ট",
   "selected_media": "নির্বাচিত মিডিয়া",
   "selected_places": "নির্বাচিত জায়গা",

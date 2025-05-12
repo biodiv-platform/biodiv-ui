@@ -30,7 +30,7 @@ const SingleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getItemProps({ value: o?.id?.toString() || "" })}
+          {...getItemProps({ value: o?.traitValueId?.toString() || "" })}
         />
       ))}
     </SimpleGrid>

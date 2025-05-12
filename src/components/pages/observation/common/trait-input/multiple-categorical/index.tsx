@@ -28,7 +28,7 @@ const MultipleCategorialTrait = ({
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getItemProps({ value: String(o.id) })}
+          {...getItemProps({ value: String(o.traitValueId) })}
         />
       ))}
     </SimpleGrid>

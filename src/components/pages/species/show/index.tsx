@@ -13,6 +13,7 @@ import ExternalBlueLink from "@components/@core/blue-link/external";
 import { SubmitButton } from "@components/form/submit-button";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
@@ -24,7 +25,7 @@ import {
 } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuPencil } from "react-icons/lu";
 import * as Yup from "yup";
@@ -59,6 +60,7 @@ export default function SpeciesShowPageComponent({
   licensesList
 }) {
   console.debug("Species", initialSpecies, permissions);
+  const { languageId } = useGlobalState();
   const { open: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
   const { open: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure();
   const [selectedReference, setSelectedReference] = useState<Reference | null>(null);
@@ -70,6 +72,10 @@ export default function SpeciesShowPageComponent({
     () => generateReferencesList(species.fieldData),
     [species.fieldData]
   );
+
+  useEffect(() => {
+    setSpecies(initialSpecies);
+  }, [languageId]);
 
   const formRef = useForm<any>({
     resolver: yupResolver(

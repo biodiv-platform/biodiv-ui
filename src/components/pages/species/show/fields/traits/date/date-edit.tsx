@@ -34,7 +34,7 @@ export function TraitDateEdit({ traitId, initialValue, onSave, onClose }) {
   const handleOnSave = async () => {
     const payload = {
       pageTaxonId: taxonConceptId,
-      valuesString: [value.map((d) => d.toISOString().split("t")[0]).join(":")]
+      valuesString: [value.map((d) => d.toISOString().split("T")[0]).join(":")]
     };
 
     const { success } = await axUpdateSpeciesTrait(speciesId, traitId, payload);

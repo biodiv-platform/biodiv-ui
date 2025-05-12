@@ -18,7 +18,10 @@ interface ITextBoxProps {
   showLabel?: boolean;
   hidden?;
   autoComplete?;
+  onChangeCallback?;
   multiline?: boolean;
+  placeholder?: string;
+  helperText?: string;
 }
 
 export const TextBoxField = ({
@@ -34,7 +37,10 @@ export const TextBoxField = ({
   maxLength,
   hidden,
   autoComplete,
+  onChangeCallback,
   multiline = false,
+  placeholder,
+  helperText,
   ...props
 }: ITextBoxProps) => {
   const { field, fieldState } = useController({
@@ -62,7 +68,7 @@ export const TextBoxField = ({
       {showLabel && <Field htmlFor={name} label={label} required={isRequired} />}
       <InputComponent
         id={id || name}
-        placeholder={label}
+        placeholder={placeholder}
         type={type}
         maxLength={maxLength}
         disabled={disabled}
@@ -73,6 +79,7 @@ export const TextBoxField = ({
         {...field}
         onChange={(e) => {
           field.onChange(e);
+          onChangeCallback && onChangeCallback(e);
           adjustHeight();
         }}
         ref={(element) => {
@@ -97,6 +104,7 @@ export const TextBoxField = ({
         <Field color="gray.600" helperText={`${field.value.length}/${maxLength}`} />
       )}
       {hint && <Field color="gray.600" helperText={hint}></Field>}
+      {helperText && <Field helperText={helperText} />}
     </Field>
   );
 };

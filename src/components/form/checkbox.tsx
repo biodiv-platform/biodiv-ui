@@ -14,6 +14,7 @@ interface ITextBoxProps {
   hint?: string;
   hidden?;
   colorPalette?: string;
+  onChangeCallback?;
 }
 
 export const CheckboxField = ({
@@ -22,9 +23,9 @@ export const CheckboxField = ({
   mb = 4,
   hint,
   disabled,
+  onChangeCallback,
   children,
   colorPalette = "blue",
-
   ...props
 }: ITextBoxProps) => {
   const {
@@ -36,7 +37,10 @@ export const CheckboxField = ({
     <Field invalid={!!fieldState.error} mb={mb} {...props} errorText={fieldState?.error?.message}>
       <Checkbox
         name={name}
-        onChange={(e) => onChange(e.target["checked"])}
+        onChange={(e) => {
+          onChange(e.target["checked"]);
+          onChangeCallback && onChangeCallback(e.target["checked"]);
+        }}
         onBlur={onBlur}
         defaultChecked={value}
         disabled={disabled}

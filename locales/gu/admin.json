@@ -1,5 +1,6 @@
 {
   "links": {
+    "name-macthing": "નામ મેચિંગ",
     "notification": "પુશ-સૂચના મોકલો"
   },
   "pages": {
@@ -14,5 +15,23 @@
       },
       "heading": "પુશ-સૂચનાઓ મોકલો"
     }
+  },
+  "species_fields": {
+    "add_category": "નવી કેટેગરી ઉમેરો",
+    "add_concept": "નવી કન્સેપ્ટ ઉમેરો",
+    "add_concept_error": "ખ્યાલ ઉમેરવામાં ખ્યાલ",
+    "add_field_error": "ક્ષેત્ર ઉમેરવામાં ભૂલ",
+    "add_subcategory": "નવી ઉપકેટેગરી ઉમેરો",
+    "add_translation": "અનુવાદ ઉમેરો",
+    "fetch_error": "પ્રજાતિઓના ક્ષેત્રો લાવવામાં અસમર્થ",
+    "language": "ભાષા",
+    "no_categories": "કોઈ વર્ગો મળી નથી. \nબટનનો ઉપયોગ કરીને કેટેગરી ઉમેરો.",
+    "no_subcategories": "કોઈ ઉપકેટેગરીઝ મળી નથી. \nબટનનો ઉપયોગ કરીને સબક ateg ટેગરી ઉમેરો.",
+    "no_translations": "બચાવવા માટે કોઈ અનુવાદો નથી",
+    "title": "પ્રજાતિઓનું સંચાલન",
+    "translate": "-નુંવું ભાષાંતર કરવું",
+    "translation_save_error": "અનુવાદો બચાવવા ભૂલ",
+    "translation_success": "અનુવાદો સફળતાપૂર્વક અપડેટ થયા",
+    "translations": "પ્રજાતિના ક્ષેત્રો અનુવાદો"
   }
 }

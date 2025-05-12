@@ -22,7 +22,11 @@ export default function ReferencesField({ currentField, parentField, level }) {
 
       {/* Create Field */}
       {permissions.isContributor && (
-        <SpeciesFieldSimpleCreate fieldId={parentField?.id} referencesOnly={true} />
+        <SpeciesFieldSimpleCreate
+          fieldId={parentField?.id}
+          traits={currentField.traits}
+          referencesOnly={true}
+        />
       )}
 
       {/* Field Content */}

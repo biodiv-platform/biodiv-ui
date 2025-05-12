@@ -1,7 +1,10 @@
 import ObservationLoading from "@components/pages/common/loading";
 import useUserListFilter from "@components/pages/user/common/use-user-filter";
 import styled from "@emotion/styled";
-import React from "react";
+import useGlobalState from "@hooks/use-global-state";
+import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import GridViewCard from "./card";
@@ -32,7 +35,19 @@ const GridViewBox = styled.div`
 `;
 
 export default function GridView() {
-  const { userListData, nextPage } = useUserListFilter();
+  const { userListData, getCheckboxProps, nextPage } = useUserListFilter();
+  const {
+    currentGroup: { id }
+  } = useGlobalState();
+  const { pathname } = useRouter();
+  const [canEdit, setCanEdit] = useState(false);
+  useEffect(() => {
+    if (id) {
+      axCheckUserGroupFounderOrAdmin(id).then((data) => {
+        setCanEdit(data && !pathname.endsWith("edit"));
+      });
+    }
+  }, [pathname]);
 
   return userListData && Array.isArray(userListData.l) ? (
     <GridViewBox className="view_list_minimal">
@@ -45,7 +60,12 @@ export default function GridView() {
       >
         <div className="grid-card">
           {userListData?.l?.map((user) => (
-            <GridViewCard key={user?.id} user={user} />
+            <GridViewCard
+              key={user?.id}
+              user={user}
+              canEdit={canEdit}
+              getCheckboxProps={getCheckboxProps}
+            />
           ))}
         </div>
       </InfiniteScroll>

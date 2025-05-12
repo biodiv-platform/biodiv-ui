@@ -36,6 +36,7 @@ interface GroupEditPageProps {
   userGroupId;
   mediaToggle;
   langId;
+  traits;
 }
 
 export default function EditGroupPageComponent({
@@ -50,7 +51,8 @@ export default function EditGroupPageComponent({
   homePageDetails,
   userGroupId,
   mediaToggle,
-  langId
+  langId,
+  traits
 }: GroupEditPageProps) {
   const { t } = useTranslation();
   const isAdmin = hasAccess([Role.Admin]);
@@ -110,7 +112,7 @@ export default function EditGroupPageComponent({
                   userGroupId={userGroupId}
                   groupCustomField={customFieldList}
                 />
-                <GroupRules rules={groupRules} userGroupId={userGroupId} />
+                <GroupRules rules={groupRules} userGroupId={userGroupId} traits = {traits}/>
               </div>
             ) : (
               <ContactAdmin />

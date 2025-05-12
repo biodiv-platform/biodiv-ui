@@ -26,7 +26,7 @@ export const normalizeSpeciesPayload = (fieldsMeta, traitsMeta, speciesData, spe
   });
 
   const traitsMeta_2 = traitsMeta_1.map(({ traits, values: options }) => {
-    const values = traitsData.filter((o) => o.nameId === traits.id);
+    const values = traitsData.filter((o) => o.nameId === traits.traitId);
     return { ...traits, options, values };
   });
 
@@ -87,3 +87,29 @@ const assignTraitsToFieldMeta = (meta, data) => {
     childField: m.childField.length ? assignTraitsToFieldMeta(m.childField, data) : m.childField
   }));
 };
+
+// export interface SpeciesFieldInput {
+//   header: string;
+//   description: string;
+//   urlIdentifier: string;
+//   languageId?: number;
+//   translations?: Array<{
+//     header: string;
+//     description: string;
+//     urlIdentifier: string;
+//     languageId: number;
+//   }>;
+// }
+
+/**
+ * Creates payload for species field creation from modal inputs
+ * @param input Modal form inputs
+ * @param parentId Parent field ID
+ * @param displayOrder Display order for the field
+ * @returns Formatted payload for API
+ */
+export const createSpeciesFieldPayload = (input, parentId: number, displayOrder = 1) => ({
+  parentId: parentId === 0 ? null : parentId,
+  displayOrder,
+  translations: input.translations
+});
