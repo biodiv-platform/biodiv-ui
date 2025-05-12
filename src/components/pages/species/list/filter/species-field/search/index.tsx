@@ -13,7 +13,7 @@ import TextFilterInput from "./input";
 
 export default function TextFilterPanel({ filterKey, label, childHeader, path }) {
   return (
-    <AccordionItem value={filterKey}>
+    <AccordionItem value={filterKey} pl={4} pr={4}>
       <AccordionItemTrigger>
         <Flex mr={3} flex={1} justifyContent="space-between" alignItems="center" textAlign="left">
           {label}

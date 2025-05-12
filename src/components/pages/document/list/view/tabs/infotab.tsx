@@ -66,7 +66,6 @@ export default function InfoTab({
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={3}>
           <LocalLink href={`/document/show/${document.id}`}>
-            <a>
               <HStack alignItems="center" gap={4}>
                 <DocumentIcon />
                 <Heading
@@ -78,7 +77,6 @@ export default function InfoTab({
                 />
                 <Badge colorPalette="red">{document.itemtype}</Badge>
               </HStack>
-            </a>
           </LocalLink>
           {/* Meta Data */}
           <Box>

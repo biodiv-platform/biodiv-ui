@@ -22,9 +22,7 @@ export default function Slide({ resource }) {
     <Box className="keen-slider__slide" style={{ minWidth: "100%" }}>
       {resource.observationId ? (
         <LocalLink href={`/observation/show/${resource.observationId}`} prefixGroup={true}>
-          <a>
             <SlideImage />
-          </a>
         </LocalLink>
       ) : (
         <SlideImage />

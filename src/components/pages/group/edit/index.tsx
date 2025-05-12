@@ -88,7 +88,7 @@ export default function EditGroupPageComponent({
         moderators={moderators}
       />
       <GroupHomePageCustomization userGroupId={userGroupId} homePageDetails={homePageDetails} />
-      <AccordionRoot>
+      <AccordionRoot multiple>
         <AccordionItem
           mb={8}
           bg="white"
@@ -96,8 +96,8 @@ export default function EditGroupPageComponent({
           borderRadius="md"
           value="observation"
         >
-          <AccordionItemTrigger _expanded={{ bg: "gray.100" }}>
-            <Box flex={1} textAlign="left" fontSize="lg">
+          <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pr={4}>
+            <Box flex={1} textAlign="left" fontSize="lg" pl={4}>
               🧰 {t("group:observation_customisation")}
             </Box>
           </AccordionItemTrigger>
@@ -129,13 +129,13 @@ export default function EditGroupPageComponent({
           value="species"
         >
           <h2>
-            <AccordionItemTrigger _expanded={{ bg: "gray.100" }}>
-              <Box flex={1} textAlign="left" fontSize="lg">
+            <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pr={4}>
+              <Box flex={1} textAlign="left" fontSize="lg" pl={4}>
                 🧰 Species Fields Customisation
               </Box>
             </AccordionItemTrigger>
           </h2>
-          <AccordionItemContent pb={4}>
+          <AccordionItemContent p={4}>
             <SpeciesHierarchyForm
               onSubmit={handleSpeciesFieldsSubmit}
               langId={langId}

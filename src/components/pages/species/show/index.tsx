@@ -16,7 +16,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
-import EditIcon from "@icons/edit";
 import { Reference } from "@interfaces/species";
 import {
   axCreateSpeciesReferences,
@@ -27,6 +26,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuPencil } from "react-icons/lu";
 import * as Yup from "yup";
 
 import {
@@ -246,7 +246,7 @@ export default function SpeciesShowPageComponent({
                     <Box fontWeight={600} fontSize="md" mb={1}>
                       {path}
                     </Box>
-                    <List.Root as="ol">
+                    <List.Root as="ol" pl={2}>
                       {references.map(([title, url], index) => (
                         <List.Item key={index}>
                           {title} {url && <ExternalBlueLink href={url} />}
@@ -264,21 +264,20 @@ export default function SpeciesShowPageComponent({
                     Common references
                   </Box>
                   <Box>
-                    <List.Root as="ol">
+                    <List.Root as="ol" pl={2}>
                       {commonReferences.map((r: Reference) => (
                         <Box key={r.id}>
                           {!r.isDeleted && (
                             <ReferenceListItem reference={r} permissions={permissions}>
                               <Box display="inline-flex" ml={2}>
                                 <IconButton
-                                  colorPalette="blue"
-                                  // variant="unstyled"
+                                  variant="plain"
                                   // size="s"
                                   onClick={() => handleEditClick(r)}
                                   aria-label={t("common:edit")}
                                   title={t("common:edit")}
                                 >
-                                  <EditIcon />
+                                  <LuPencil />
                                 </IconButton>
                                 <DeleteActionButton
                                   observationId={r.id}

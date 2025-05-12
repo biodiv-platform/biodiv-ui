@@ -26,6 +26,7 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
       <Box w="full" position="relative" h="16rem">
         {canEdit && getCheckboxProps && (
           <Checkbox
+            colorPalette={"blue"}
             position="absolute"
             bg="white"
             m={2}

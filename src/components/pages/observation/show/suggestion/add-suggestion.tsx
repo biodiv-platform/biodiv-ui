@@ -115,7 +115,7 @@ export default function AddSuggestion({
   const [buttonValue, setButtonValue] = useState<PredictionEngine>(defaultButtonValue);
 
   const handleMenuSelect = (e) => {
-    setButtonValue(e.currentTarget.value);
+    setButtonValue(e.value);
   };
 
   useEffect(() => {
@@ -335,19 +335,17 @@ export default function AddSuggestion({
                             )}
                           </Button>
 
-                          <MenuRoot >
-                            <MenuTrigger
-                              as={IconButton}
-                              aria-label="Options"
-                            >
-                              <LuMenu  />
+                          <MenuRoot onSelect={(e) => handleMenuSelect(e)}>
+                            <MenuTrigger as={IconButton} aria-label="Options">
+                              <Button variant="subtle" size="sm">
+                                <LuMenu />
+                              </Button>
                             </MenuTrigger>
                             <MenuContent defaultValue="plantnet">
                               {isPlantnetActive && (
                                 <MenuItem
                                   disabled={!isSgroupPlant || isOnlyPlantnetActive()}
                                   value="plantnet"
-                                  onClick={handleMenuSelect}
                                 >
                                   <Image src="/plantnet-icon-removebg-preview.ico" />
                                   <Text>{plantnetText}</Text>
@@ -355,7 +353,7 @@ export default function AddSuggestion({
                               )}
 
                               {isSpecRecActive && (
-                                <MenuItem value="spec-rec" onClick={handleMenuSelect}>
+                                <MenuItem value="spec-rec">
                                   <Image
                                     id="SpecRec"
                                     src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}

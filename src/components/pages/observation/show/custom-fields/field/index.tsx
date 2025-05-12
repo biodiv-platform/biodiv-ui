@@ -46,14 +46,28 @@ export default function CustomField({
   };
 
   return (
-    <Field borderBottom="1px" borderColor="gray.300" p={4}>
+    <Field
+      borderBottom="1px"
+      borderColor="gray.300"
+      fontWeight="bold"
+      htmlFor={cf.cfId?.toString()}
+      p={4}
+    >
       <Field fontWeight="bold" htmlFor={cf.cfId?.toString()}>
-        {cf.cfName}
-        {canEdit && (
-          <IconButton variant="plain" colorPalette="blue" aria-label="edit" onClick={onToggle}>
-            <EditIcon />
-          </IconButton>
-        )}
+        <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          {cf.cfName}
+          {canEdit && (
+            <IconButton
+              variant="plain"
+              colorPalette="blue"
+              aria-label="edit"
+              onClick={onToggle}
+              size="sm"
+            >
+              <EditIcon size="sm" />
+            </IconButton>
+          )}
+        </span>
       </Field>
       {open && cf.cfNotes && (
         <Field mt={0} mb={2} id={`${cf.cfId}-helper`} helperText={cf.cfNotes}></Field>

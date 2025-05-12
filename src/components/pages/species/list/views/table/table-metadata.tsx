@@ -6,7 +6,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
-import React from "react";
+import React, { useState } from "react";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -30,13 +30,14 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
                 <Stack direction={"row"}>
                   {canEdit && (
                     <Checkbox
+                      colorPalette={"blue"}
                       m={2}
                       {...getCheckboxProps({ value: cell.row.original.id })}
                     ></Checkbox>
                   )}
 
                   <LocalLink href={`/species/show/${cell.row.original.id}`} prefixGroup={true}>
-                    <Link>
+                    <Link unstyled>
                       <ScientificName value={value} />
                     </Link>
                   </LocalLink>
@@ -50,19 +51,26 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
         return {
           Header: "species:resource",
           accessor: "reprImage",
-          Cell: ({ value, cell }) => (
-            <Image
-              borderRadius={4}
-              title={stripTags(cell.row.original.name)}
-              boxSize="5rem"
-              src={getResourceThumbnail(
-                cell.row.original.context,
-                value,
-                RESOURCE_SIZE.LIST_THUMBNAIL
-              )}
-              alt={OBSERVATION_FALLBACK.PHOTO}
-            />
-          )
+          Cell: ({ value, cell }) => {
+            const [imageError, setImageError] = useState(false);
+            return (
+              <Image
+                borderRadius={4}
+                title={stripTags(cell.row.original.name)}
+                boxSize="5rem"
+                src={
+                  imageError
+                    ? OBSERVATION_FALLBACK.PHOTO
+                    : getResourceThumbnail(
+                        cell.row.original.context,
+                        value,
+                        RESOURCE_SIZE.LIST_THUMBNAIL
+                      )
+                }
+                onError={() => setImageError(true)}
+              />
+            );
+          }
         };
 
       case "sGroup":

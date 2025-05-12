@@ -30,7 +30,9 @@ export default function BulkMapperModal() {
       <DrawerBackdrop />
       <DrawerContent>
         <DrawerCloseTrigger />
-        <DrawerHeader>{t("observation:bulk_actions")}</DrawerHeader>
+        <DrawerHeader fontSize={"2xl"} fontWeight={"bold"}>
+          {t("observation:bulk_actions")}
+        </DrawerHeader>
         <VerticalTabs>
           <Tabs.Root
             lazyMount={true}

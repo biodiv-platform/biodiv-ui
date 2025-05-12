@@ -44,17 +44,15 @@ export default function View({ metadata }) {
       <Box p={4} w="full">
         <Flex justifyContent="space-between" mb={2}>
           <LocalLink href={`/text-curation/show/${metadata.id}`} prefixGroup={true}>
-            <a>
-              <HStack alignItems="center" gap={4}>
-                <Heading
-                  fontSize="lg"
-                  className="elipsis-2"
-                  dangerouslySetInnerHTML={{
-                    __html: getInjectableHTML(metadata?.title || t("common:unknown"))
-                  }}
-                />
-              </HStack>
-            </a>
+            <HStack alignItems="center" gap={4}>
+              <Heading
+                fontSize="lg"
+                className="elipsis-2"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(metadata?.title || t("common:unknown"))
+                }}
+              />
+            </HStack>
           </LocalLink>
         </Flex>
         <Stack color="gray.600">

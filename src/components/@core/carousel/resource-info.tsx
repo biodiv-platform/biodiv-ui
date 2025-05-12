@@ -1,7 +1,4 @@
-import { Box, Grid, IconButton } from "@chakra-ui/react";
-import Rating from "@components/@core/rating";
-import StarIcon from "@icons/star";
-import StarOutlineIcon from "@icons/star-outline";
+import { Box, Grid, IconButton, RatingGroup } from "@chakra-ui/react";
 import { axRateObservationResource } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -57,6 +54,7 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
             opacity={0.4}
             rounded={"full"}
             _hover={{ opacity: 1 }}
+            variant={"subtle"}
           >
             <LuInfo />
           </IconButton>
@@ -94,13 +92,16 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
 
               <Box>{t("observation:rating")}</Box>
               <Box>
-                <Rating
-                  readonly={!observationId}
-                  initialRating={currentResource?.resource?.rating}
-                  onChange={onRateHandler}
-                  emptySymbol={<StarOutlineIcon />}
-                  fullSymbol={<StarIcon />}
-                />
+                <RatingGroup.Root
+                  count={5}
+                  defaultValue={currentResource?.resource?.rating}
+                  size="sm"
+                  readOnly={!observationId}
+                  onValueChange={(e) => onRateHandler(e.value)}
+                >
+                  <RatingGroup.HiddenInput />
+                  <RatingGroup.Control />
+                </RatingGroup.Root>
               </Box>
             </Grid>
           </PopoverBody>

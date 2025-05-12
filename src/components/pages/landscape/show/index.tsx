@@ -37,7 +37,7 @@ export default function LandscapeShowComponent({
   return (
     <div className="container mt">
       <Flex justifyContent="space-between" direction={{ base: "column", md: "row" }} mb={4}>
-        <Heading as="h1" size="xl">
+        <Heading as="h1" size="4xl">
           {landscape.shortName}
           <Text as="span" color="gray.500" ml={4}>
             {t("landscape:site_number")}
@@ -55,7 +55,7 @@ export default function LandscapeShowComponent({
       </Box>
       <LandscapeFields childs={landscapeShow.contents.childs} />
       <Stack mb={3}>
-        <Heading mb={3} size="lg">
+        <Heading mb={3} size="4xl">
           {t("landscape:related_documents")}
         </Heading>
         {documentList.map((o) => (

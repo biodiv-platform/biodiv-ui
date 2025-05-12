@@ -33,7 +33,7 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
               <a onClick={() => notification(t("header:member_only"))}>{label}</a>
             ) : (
               <LocalLink href={toLink} params={item.params} prefixGroup={true}>
-                <a>{label}</a>
+                {label}
               </LocalLink>
             )}
           </MenuItem>

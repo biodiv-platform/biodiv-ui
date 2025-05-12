@@ -79,7 +79,7 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
         </DialogBody>
         <DialogFooter>
           <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-          <Button ml={4} onClick={onClose}>
+          <Button ml={4} onClick={onClose} variant={"subtle"}>
             <CrossIcon />
             {t("common:cancel")}
           </Button>

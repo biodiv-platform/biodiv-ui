@@ -19,7 +19,7 @@ export function SpeciesCreatePageComponent({ taxonRanksMeta, isSpeciesPage }) {
       </PageHeading>
       {isSpeciesPage && (
         <Alert.Root borderRadius="lg" mb={4} alignItems="top">
-          <List.Root as="ul" fontSize={"md"}>
+          <List.Root as="ul" fontSize={"md"} pl={2}>
             <List.Item>
               {t("species:create.desc_1")}{" "}
               <ExternalBlueLink href="/roles/request">

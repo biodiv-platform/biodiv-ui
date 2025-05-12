@@ -44,7 +44,7 @@ export default function Suggestions({
             href={`/observation/show/${o.observationId}`}
             prefixGroup={true}
           >
-            <Link className="fade" title={o.name}>
+            <Link unstyled>
               <Tooltip showArrow={true} title={<ScientificName value={o.name} />}>
                 <AspectRatio ratio={1}>
                   <Image
@@ -70,7 +70,7 @@ export default function Suggestions({
           </LocalLink>
         ))}
       </SimpleGrid>
-      <Button w="full" rounded={0} hidden={hideMore} onClick={loadMore}>
+      <Button w="full" rounded={0} hidden={hideMore} onClick={loadMore} variant={"subtle"}>
         {t("common:load_more")}
       </Button>
     </Box>

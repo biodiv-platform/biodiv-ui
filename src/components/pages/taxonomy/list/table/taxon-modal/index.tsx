@@ -23,10 +23,12 @@ export default function TaxonShowModal() {
 
   return (
     <>
-      <DialogRoot open={showTaxon} onOpenChange={handleOnClose} size="cover">
+      <DialogRoot open={showTaxon} onOpenChange={handleOnClose} size="xl">
         <DialogBackdrop />
         <DialogContent>
-          <DialogHeader>{t("taxon:modal.title")}</DialogHeader>
+          <DialogHeader fontSize={"2xl"} fontWeight={"bold"}>
+            {t("taxon:modal.title")}
+          </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody>
             <TaxonModalTabs />

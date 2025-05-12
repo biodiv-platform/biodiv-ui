@@ -31,7 +31,7 @@ export default function DateInputs({ showTags = true, disabled }) {
               name="observedOn"
               label={t("common:observed_on")}
               style={{ gridColumn: "1/3" }}
-              isRequired={!isDisable}
+              required={!isDisable}
               disabled={isDisable}
               mb={showTags ? 4 : 0}
             />

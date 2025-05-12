@@ -122,7 +122,7 @@ export default function UserGroupEditForm({
         <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
         <AreaDrawField
           label={t("group:spatial_coverge")}
-          name={"spacialCoverage"}
+          name="spacialCoverage"
           isRequired={true}
         />
 

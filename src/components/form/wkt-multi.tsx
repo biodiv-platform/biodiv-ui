@@ -59,14 +59,14 @@ export default function WKTFieldMulti(props: WKTInputProps) {
             </Box>
             <Tabs.Content value="draw">
               <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} />
-              <Tabs.Content value="search">
-                <GmapsWktLocationPicker
-                  {...props}
-                  label={t("form:coverage.place")}
-                  disabled={isDisabled}
-                  onSave={handleOnSave}
-                />
-              </Tabs.Content>
+            </Tabs.Content>
+            <Tabs.Content value="search">
+              <GmapsWktLocationPicker
+                {...props}
+                label={t("form:coverage.place")}
+                disabled={isDisabled}
+                onSave={handleOnSave}
+              />
             </Tabs.Content>
           </Tabs.Root>
         </Box>

@@ -7,7 +7,7 @@ import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/me
 
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
-    <a>{children}</a>
+    {children}
   </LocalLink>
 );
 

@@ -24,12 +24,12 @@ export default function GroupHomePageCustomization({ userGroupId, homePageDetail
         borderRadius="md"
         value={"home"}
       >
-        <AccordionItemTrigger _expanded={{ bg: "gray.100" }}>
-          <Box flex={1} textAlign="left" fontSize="lg">
+        <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pr={4}>
+          <Box flex={1} textAlign="left" fontSize="lg" pl={4}>
             🧰 {t("group:homepage_customization.title")}
           </Box>
         </AccordionItemTrigger>
-        <AccordionItemContent>
+        <AccordionItemContent p={4}>
           <HomePageCustomizationForm userGroupId={userGroupId} homePageDetails={homePageDetails} />
         </AccordionItemContent>
       </AccordionItem>

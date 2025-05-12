@@ -27,19 +27,17 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
     <Stack color="gray.600" display="flex" flexDir="column" justifyContent="flex-start" bg="white">
       <Box p={3} borderWidth="1px" borderColor="gray.300" borderRadius="md">
         <LocalLink href={`/document/show/${document.id}`}>
-          <a>
-            <HStack alignItems="center" gap={4}>
-              <DocumentIcon />
-              <Heading fontSize="lg" className="elipsis-2">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: getInjectableHTML(document?.title || t("document:unknown"))
-                  }}
-                />
-              </Heading>
-              <Badge colorPalette="red">{document.itemtype}</Badge>
-            </HStack>
-          </a>
+          <HStack alignItems="center" gap={4}>
+            <DocumentIcon />
+            <Heading fontSize="lg" className="elipsis-2">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(document?.title || t("document:unknown"))
+                }}
+              />
+            </Heading>
+            <Badge colorPalette="red">{document.itemtype}</Badge>
+          </HStack>
         </LocalLink>
 
         <Stack direction={"row"} justifyContent="space-between" alignItems="flex-end">
@@ -50,19 +48,19 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
                 maxWidth={{ base: "30vh", sm: "40vh", md: "120vh" }}
                 title="Author"
               >
-                <PeopleIcon mr={2} />
+                <PeopleIcon size={"sm"} mr={2} />
                 {document.author}
               </Text>
             )}
             {document.year && (
               <Text title="Date">
-                <CalendarIcon mr={2} />
+                <CalendarIcon size={"sm"} mr={2} />
                 {document.year}
               </Text>
             )}
             {document.journal && (
               <Text title="journal">
-                <LockIcon mr={2} />
+                <LockIcon size={"sm"} mr={2} />
                 <span
                   dangerouslySetInnerHTML={{
                     __html: getInjectableHTML(document.journal)

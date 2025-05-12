@@ -92,23 +92,32 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
           recoUpdated={recoUpdated}
           permissionOverride={observationData?.mvp[o.observationId || 0]}
         />
-        <Alert bg="blue.50">
-          {o.recoShow?.isLocked
-            ? t("observation:id.validated")
-            : o.recoShow?.recoIbp
-            ? t("observation:id.suggest_new_reco")
-            : t("observation:id.no_suggestion")}
-          <Button
-            variant="plain"
-            color="blue.600"
-            hidden={o.recoShow?.isLocked}
-            m="auto"
-            mr={0}
-            onClick={() => setTab("observation:id.title")}
-          >
-            {t("observation:suggest")}
-          </Button>
-        </Alert>
+        <Alert
+          alignItems={"center"}
+          bg="blue.50"
+          title={
+            <Flex justify="space-between" align="center" width="100%">
+              <Box>
+                {o.recoShow?.isLocked
+                  ? t("observation:id.validated")
+                  : o.recoShow?.recoIbp
+                  ? t("observation:id.suggest_new_reco")
+                  : t("observation:id.no_suggestion")}
+              </Box>
+
+              {!o.recoShow?.isLocked && (
+                <Button
+                  variant="plain"
+                  color="blue.600"
+                  size="sm"
+                  onClick={() => setTab("observation:id.title")}
+                >
+                  {t("observation:suggest")}
+                </Button>
+              )}
+            </Flex>
+          }
+        />
       </Box>
     </Box>
   );

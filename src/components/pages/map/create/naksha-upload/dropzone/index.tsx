@@ -89,11 +89,12 @@ export default function LayerUploadDropzone() {
   };
 
   const handleTabInex = (val) => {
+    console.warn("val", val);
     switch (val) {
-      case 0:
+      case "vector":
         setMapFileType(MapFileType.vector);
         break;
-      case 1:
+      case "raster":
         setMapFileType(MapFileType.raster);
         break;
     }
@@ -113,7 +114,13 @@ export default function LayerUploadDropzone() {
 
   return (
     <VerticalTabs>
-      <Tabs.Root className="tabs" onChange={handleTabInex} lazyMount defaultValue={"vector"} variant={"outline"}>
+      <Tabs.Root
+        className="tabs"
+        onValueChange={(e) => handleTabInex(e.value)}
+        lazyMount
+        defaultValue={"vector"}
+        variant={"outline"}
+      >
         <Tabs.List>
           <Tabs.Trigger value={"vector"}>
             <Tooltip content={t("Vector")}>

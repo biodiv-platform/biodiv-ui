@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
 
@@ -38,12 +39,14 @@ export default function ImageUploaderField({
       errorText={fieldState?.error?.message}
       mb={mb}
     >
-      <DropTarget
-        simpleUpload={simpleUpload}
-        setFieldMapping={setFieldMapping}
-        setShowMapping={setShowMapping}
-        field={field}
-      />
+      <Box width={"full"}>
+        <DropTarget
+          simpleUpload={simpleUpload}
+          setFieldMapping={setFieldMapping}
+          setShowMapping={setShowMapping}
+          field={field}
+        />
+      </Box>
     </Field>
   );
 }

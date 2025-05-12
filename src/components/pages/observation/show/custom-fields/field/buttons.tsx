@@ -18,7 +18,7 @@ export default function Buttons({ onSave, onClose }) {
         <CheckIcon />
         {t("common:save")}
       </Button>
-      <Button size="sm" colorPalette="gray" aria-label={t("common:close")} onClick={onClose}>
+      <Button size="sm" variant={"subtle"} aria-label={t("common:close")} onClick={onClose}>
         {t("common:close")}
       </Button>
     </Stack>

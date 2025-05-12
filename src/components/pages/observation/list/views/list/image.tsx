@@ -119,6 +119,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
           <Checkbox
             {...getCheckboxProps({ value: String(o.observationId) })}
             className="topCheckbox"
+            colorPalette={"blue"}
           ></Checkbox>
         )}
       </HStack>

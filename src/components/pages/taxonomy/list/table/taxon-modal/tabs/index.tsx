@@ -11,7 +11,7 @@ export function TaxonModalTabs() {
   const { t } = useTranslation();
 
   return (
-    <Tabs.Root className="nospace" lazyMount>
+    <Tabs.Root className="nospace" lazyMount defaultValue={"attributes"}>
       <Tabs.List>
         <Tabs.Trigger value="attributes">{t("taxon:modal.attributes.title")}</Tabs.Trigger>
         <Tabs.Trigger value="synonyms">{t("taxon:modal.synonyms")}</Tabs.Trigger>

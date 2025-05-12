@@ -34,6 +34,7 @@ const SpeciesPullMedia = ({ onDone }) => {
         disabled={!resourcesList.hasMore}
         loading={isLoading}
         onClick={loadMoreResources}
+        variant={"subtle"}
       >
         {t("common:load_more")}
       </Button>

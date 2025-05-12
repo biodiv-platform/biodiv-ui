@@ -114,7 +114,7 @@ const PlantnetPrediction = ({
 
   return (
     <div>
-      <DialogRoot open={isOpenImageModal} size="cover" onOpenChange={onCloseImageModal}>
+      <DialogRoot open={isOpenImageModal} size="xl" onOpenChange={onCloseImageModal}>
         <DialogBackdrop />
         <DialogContent>
           <DialogHeader>{t("observation:plantnet.select_Images")}</DialogHeader>

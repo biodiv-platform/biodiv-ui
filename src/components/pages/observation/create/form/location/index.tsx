@@ -162,24 +162,28 @@ const LocationPicker = ({ isRequired = true }) => {
               required={isRequired}
               htmlFor="places-search"
             >
-              <Field htmlFor="places-search">
-                {FK.observedAt.label}
-                {ll.has && (
-                  <Button
-                    title={ll.value?.address}
-                    variant="plain"
-                    size="xs"
-                    ml={1}
-                    verticalAlign="baseline"
-                    colorPalette="blue"
-                    onClick={ll.use}
-                  >
-                    {t("observation:last_location")}
-                  </Button>
-                )}
-              </Field>
+              <Field
+                htmlFor="places-search"
+                required={isRequired}
+                label={
+                  <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                    {FK.observedAt.label}
+                    {ll.has && (
+                      <Button
+                        title={ll.value?.address}
+                        variant="plain"
+                        size="xs"
+                        colorPalette="blue"
+                        onClick={ll.use}
+                      >
+                        {t("observation:last_location")}
+                      </Button>
+                    )}
+                  </div>
+                }
+              ></Field>
               <InputGroup
-                // size="md"
+                width={"full"}
                 className="places-search"
                 endElement={
                   <Box>

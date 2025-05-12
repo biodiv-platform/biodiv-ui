@@ -62,7 +62,6 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={2}>
           <LocalLink href={`/datatable/show/${datatable.id}`} prefixGroup={true}>
-            <a>
               <HStack alignItems="center" gap={4}>
                 <Heading
                   fontSize="lg"
@@ -73,7 +72,6 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
                 />
                 <Badge colorPalette="red">{datatable.dataTableType}</Badge>
               </HStack>
-            </a>
           </LocalLink>
         </Flex>
 

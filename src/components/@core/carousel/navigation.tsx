@@ -34,6 +34,7 @@ function CarouselNavigation({ prev, next, current, total }) {
         opacity={0.2}
         _hover={{ opacity: 1 }}
         disabled={current === 0}
+        variant={"subtle"}
       >
         <LuArrowLeft />
       </IconButton>
@@ -44,6 +45,7 @@ function CarouselNavigation({ prev, next, current, total }) {
         opacity={0.2}
         _hover={{ opacity: 1 }}
         disabled={current === total - 1}
+        variant={"subtle"}
       >
         <LuArrowRight />
       </IconButton>

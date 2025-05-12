@@ -1,4 +1,4 @@
-import { Button, Center, Heading, Text } from "@chakra-ui/react";
+import { Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
 import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
@@ -9,18 +9,16 @@ import { LuArrowRight } from "react-icons/lu";
 
 const ReadMore = ({ resource, readMoreButtonText, readMoreUIType }) => {
   return resource.moreLinks && readMoreUIType == "button" ? (
-    <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl">
-      <LocalLink href={resource.moreLinks}>
-        <a>
-          {readMoreButtonText} <LuArrowRight />
-        </a>
-      </LocalLink>
-    </Button>
+    <LocalLink href={resource.moreLinks}>
+      <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl">
+        {readMoreButtonText} <LuArrowRight />
+      </Button>
+    </LocalLink>
   ) : (
     <LocalLink href={resource.moreLinks}>
-      <a>
+      <Flex alignItems="center">
         {readMoreButtonText} <LuArrowRight />
-      </a>
+      </Flex>
     </LocalLink>
   );
 };

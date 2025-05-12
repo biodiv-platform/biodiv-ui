@@ -16,18 +16,16 @@ export default function DocumentItem({ document: d }) {
   return (
     <Box p={3} mt={4} borderWidth="1px" borderColor="gray.300" borderRadius="md">
       <LocalLink href={`/document/show/${d.id}`}>
-        <a>
-          <HStack alignItems="center" gap={4} mb={4}>
-            <DocumentIcon />
-            <Heading fontSize="lg" className="elipsis-2">
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: getInjectableHTML(d?.title || t("document:unknown"))
-                }}
-              />
-            </Heading>
-          </HStack>
-        </a>
+        <HStack alignItems="center" gap={4} mb={4}>
+          <DocumentIcon />
+          <Heading fontSize="lg" className="elipsis-2">
+            <span
+              dangerouslySetInnerHTML={{
+                __html: getInjectableHTML(d?.title || t("document:unknown"))
+              }}
+            />
+          </Heading>
+        </HStack>
       </LocalLink>
 
       <Link href={`${currentGroup?.webAddress}/user/show/${d.author?.id}`}>

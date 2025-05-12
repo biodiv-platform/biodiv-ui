@@ -1,4 +1,4 @@
-import { Link, Spinner, useDisclosure } from "@chakra-ui/react";
+import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,11 +12,10 @@ import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { LuMoveUpRight } from "react-icons/lu";
+import { LuMoveRight } from "react-icons/lu";
 import * as Yup from "yup";
 
-import { Alert } from "@/components/ui/alert";
-
+// import { Alert } from "@/components/ui/alert";
 import LocationPicker from "../../create/form/location";
 import Uploader from "../../create/form/uploader";
 import CheckListAnnotationForm from "./checklist-annotation";
@@ -154,10 +153,12 @@ export default function ObservationEditForm({
         />
         {observation.checklistAnnotations && <CheckListAnnotationForm fields={fields} />}
         <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
-          <Link>
-            <Alert mb={4} borderRadius="md">
-              {t("observation:edit_hint")} <LuMoveUpRight />
-            </Alert>
+          <Link unstyled>
+            <Alert.Root status="info" mb={4} borderRadius="md">
+              <Alert.Title>
+                {t("observation:edit_hint")} <LuMoveRight />
+              </Alert.Title>
+            </Alert.Root>
           </Link>
         </LocalLink>
         <SubmitButton leftIcon={<CheckIcon />} mb={4}>

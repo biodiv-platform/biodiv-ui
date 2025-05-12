@@ -24,12 +24,12 @@ export default function SpeciesGalleryModal({ resources, setResources }) {
   return (
     <>
       <Box position="absolute" top={0} right={0} p={4} zIndex={1}>
-        <Button onClick={onOpen}>
+        <Button onClick={onOpen} variant={"subtle"}>
           <GridIcon />
           {t("species:all_media")}
         </Button>
       </Box>
-      <DialogRoot open={open} size="cover" onOpenChange={onClose}>
+      <DialogRoot open={open} size="xl" onOpenChange={onClose}>
         <DialogBackdrop />
         <DialogContent>
           <DialogHeader>{t("species:all_media")}</DialogHeader>

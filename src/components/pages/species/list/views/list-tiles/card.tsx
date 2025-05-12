@@ -35,46 +35,45 @@ export default function GridViewCard({ o, getCheckboxProps }) {
           m={2}
           zIndex={1}
           borderRadius={2}
+          colorPalette={"blue"}
           {...getCheckboxProps({ value: o.id })}
         ></Checkbox>
       )}
 
       <LocalLink href={`/species/show/${o.id}`} prefixGroup={true}>
-        <a>
-          <Box w="full" position="relative" h="14rem">
-            <Image
-              objectFit="cover"
-              p={0}
-              bg="white"
-              w="full"
-              h="full"
-              borderTopRadius="md"
-              src={
-                getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL) ||
-                thumbFallbackSrc
-              }
-              loading="lazy"
-              alt={simpleName || thumbFallbackSrc}
-            />
-          </Box>
-          <Flex
-            direction="column"
-            justifyContent="space-between"
-            h="4.6rem"
-            p={4}
-            bg="gray.100"
-            borderBottomRadius="md"
-          >
-            <Heading className="elipsis-2" size="sm" title={simpleName}>
-              <ScientificName value={name} />
-            </Heading>
-            {o.commonName && (
-              <Text color="gray.600" fontSize="sm" title={o.commonName}>
-                {o.commonName}
-              </Text>
-            )}
-          </Flex>
-        </a>
+        <Box w="full" position="relative" h="14rem">
+          <Image
+            objectFit="cover"
+            p={0}
+            bg="white"
+            w="full"
+            h="full"
+            borderTopRadius="md"
+            src={
+              getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL) ||
+              thumbFallbackSrc
+            }
+            loading="lazy"
+            alt={simpleName || thumbFallbackSrc}
+          />
+        </Box>
+        <Flex
+          direction="column"
+          justifyContent="space-between"
+          h="4.6rem"
+          p={4}
+          bg="gray.100"
+          borderBottomRadius="md"
+        >
+          <Heading className="elipsis-2" size="sm" title={simpleName}>
+            <ScientificName value={name} />
+          </Heading>
+          {o.commonName && (
+            <Text color="gray.600" fontSize="sm" title={o.commonName}>
+              {o.commonName}
+            </Text>
+          )}
+        </Flex>
       </LocalLink>
     </Box>
   );

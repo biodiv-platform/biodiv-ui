@@ -11,7 +11,7 @@ import SubMenu from "./sub-menu";
 
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
-    <a>{children}</a>
+    {children}
   </LocalLink>
 );
 

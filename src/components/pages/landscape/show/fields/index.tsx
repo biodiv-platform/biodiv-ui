@@ -21,7 +21,7 @@ interface IFieldsProps {
   ml?;
 }
 
-export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IFieldsProps) {
+export default function LandscapeFields({ childs = [], size = "3xl", ml = 0 }: IFieldsProps) {
   const { isLoggedIn } = useGlobalState();
   const [canEdit, setCanEdit] = useState(false);
   const { t } = useTranslation();

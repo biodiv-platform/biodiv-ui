@@ -12,7 +12,7 @@ import { InputGroup } from "../ui/input-group";
 interface DatePickerNextFieldProps {
   disabled?: boolean;
   hint?: string;
-  isRequired?: boolean;
+  required?: boolean;
   label?: string;
   mb?: number;
   name: string;
@@ -29,6 +29,7 @@ const maxDate = new Date().setHours(23, 59, 59, 999); // End of Day
 export const DatePickerNextField = ({
   disabled,
   hint,
+  required,
   label,
   mb = 4,
   name,
@@ -44,7 +45,7 @@ export const DatePickerNextField = ({
       render={({ field, fieldState }) => {
         return (
           <Field invalid={!!fieldState.error} mb={mb} {...props}>
-            {label && <Field htmlFor={name} label={label} />}
+            {label && <Field htmlFor={name} label={label} required={required} />}
             <InputGroup
               endElement={
                 <label htmlFor={name} style={{ cursor: "pointer" }}>

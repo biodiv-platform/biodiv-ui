@@ -163,7 +163,7 @@ export default function ObservationShowPageComponent({
               />
             </>
           )}
-          {/* {o.observationNearBy && (
+          {o.observationNearBy && (
             <>
               <Suggestions
                 title="observation:nearby"
@@ -171,7 +171,7 @@ export default function ObservationShowPageComponent({
                 observationKey="thumbnail"
               />
             </>
-          )} */}
+          )}
         </Box>
       </SimpleGrid>
     </div>
