@@ -6,7 +6,7 @@ import React from "react";
 
 export default function FilterStat({ statKey, subStatKey }) {
   const { observationData } = useObservationFilter();
-  const path = statKey ? [statKey, subStatKey.split("|")[0]].join(".") : subStatKey.split("|")[0];
+  const path = statKey ? [statKey, subStatKey].join(".") : subStatKey;
   const count = getByPath(observationData?.ag, path);
 
   return (

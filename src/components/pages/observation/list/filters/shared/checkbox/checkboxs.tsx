@@ -95,7 +95,7 @@ export default function FilterCheckboxes({
                   ignoreFallback={true}
                 />
               )}
-              {skipOptionsTranslation ? label || value.split("|")[0] : t(translateKey + label)}
+              {skipOptionsTranslation ? label || value : t(translateKey + label)}
               <FilterStat statKey={statKey} subStatKey={stat || value} />
             </Checkbox>
           ))}
