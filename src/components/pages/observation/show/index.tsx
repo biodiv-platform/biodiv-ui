@@ -48,7 +48,18 @@ export default function ObservationShowPageComponent({
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
-  const statsData = useObservationStatsData(o.recoIbp?.taxonId);
+  let statsData = {
+    data: {
+      list: {
+        groupTraits: [],
+        groupObservedOn: {}
+      },
+      isLoading: false
+    }
+  };
+  if (o.recoIbp?.taxonId != null && o.recoIbp?.taxonId != undefined) {
+    statsData = useObservationStatsData(o.recoIbp?.taxonId);
+  }
 
   useEffect(() => {
     setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name || "");

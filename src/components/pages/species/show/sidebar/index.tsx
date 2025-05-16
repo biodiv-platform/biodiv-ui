@@ -10,7 +10,18 @@ import useObservationStatsData from "./use-observation-stats-data";
 
 export default function SpeciesSidebar() {
   const { species } = useSpecies();
-  const data = useObservationStatsData(species.species.taxonConceptId);
+  let data = {
+    data: {
+      list: {
+        groupTraits: [],
+        groupObservedOn: {}
+      },
+      isLoading: false
+    }
+  };
+  if (species.species.taxonConceptId != null && species.species.taxonConceptId != undefined) {
+    data = useObservationStatsData(species.species.taxonConceptId);
+  }
   return (
     <GridItem colSpan={2}>
       <TaxonTable />
