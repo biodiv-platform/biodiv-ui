@@ -1,6 +1,14 @@
 {
   "about": "About",
+  "actions": "Actions",
   "autofill_with_google": "Autofill with Google",
+  "bulk_action": {
+    "apply": "Apply",
+    "select_actions": "Select Actions",
+    "title": "Remove Users from Group - ",
+    "failure": "Unable to trigger bulk action",
+    "success": "Successfully triggered  bulk action, Changes will be reflected  shortly"
+  },
   "change_password": "Change Password",
   "confirm_new_password": "Confirm New Password",
   "confirm_password": "Confirm Password",
@@ -60,6 +68,7 @@
     "terms": "Terms of Service",
     "text": "I agree to this website's"
   },
+  "unselect_all": "Unselect All",
   "unsubscribe": {
     "error": {
       "contact_us": "Contact",

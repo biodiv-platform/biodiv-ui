@@ -1,6 +1,14 @@
 {
   "about": "बद्दल",
+  "actions": "क्रिया",
   "autofill_with_google": "Google सह ऑटोफिल",
+  "bulk_action": {
+    "apply": "अर्ज करा",
+    "failure": "बल्क अ‍ॅक्शन ट्रिगर करण्यात अक्षम",
+    "select_actions": "क्रिया निवडा",
+    "success": "यशस्वीरित्या मोठ्या प्रमाणात कृती, बदल लवकरच प्रतिबिंबित होईल",
+    "title": "गटातून वापरकर्त्यांना काढा -"
+  },
   "change_password": "पासवर्ड बदला",
   "confirm_new_password": "नवीन परवलीच्या शब्दाची खात्री करा",
   "confirm_password": "पासवर्डची पुष्टी करा",
@@ -60,6 +68,7 @@
     "terms": "सेवा अटी",
     "text": "मी या वेबसाइटशी सहमत आहे"
   },
+  "unselect_all": "सर्व निवडून घ्या",
   "unsubscribe": {
     "error": {
       "contact_us": "संपर्क करा",

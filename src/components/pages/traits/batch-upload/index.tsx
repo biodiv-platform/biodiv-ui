@@ -44,7 +44,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
         grouped[key] = []; // Initialize array if key doesn't exist
       }
 
-      grouped[key].push("Traits|" + obj.name + "|" + obj.traitId); // Add object to the respective array
+      grouped[key].push("Traits|" + obj.name + "|" + obj.id); // Add object to the respective array
     }
 
     return grouped;
@@ -87,7 +87,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
           firstRow.eachCell((cell, colNumber) => {
             if (cell.value) {
               const cellValue = cell.value.toString();
-              extractedHeaders.push(cellValue);
+              extractedHeaders.push(`${cellValue}|${colNumber-1}`);
               if (options.some((option) => option.toLowerCase() === cellValue.toLowerCase())) {
                 setColumnMapping((prev) => {
                   const updatedOptions = [...prev];

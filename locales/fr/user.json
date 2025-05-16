@@ -1,6 +1,13 @@
 {
   "about": "À propos",
+  "actions": "Actes",
   "autofill_with_google": "Auto-enregistrement avec Google",
+  "bulk_action": {
+    "apply": "Appliquer",
+    "select_actions": "Sélectionner des actions",
+    "success": "Action en vrac déclenchée avec succès, les modifications seront reflétées sous peu",
+    "title": "Supprimer les utilisateurs du groupe -"
+  },
   "change_password": "Changer le mot de passe",
   "confirm_new_password": "Confirmer le nouveau mot de passe",
   "confirm_password": "Confirmez le mot de passe",
@@ -60,6 +67,7 @@
     "terms": "Conditions d'utilisation",
     "text": "Je suis d'accord avec ce site"
   },
+  "unselect_all": "UNSELECT TOUS",
   "unsubscribe": {
     "error": {
       "contact_us": "Contact",

@@ -159,3 +159,9 @@ export const CATEGORY_TYPE = [
   { label: "Observation Traits", value: "Observation" },
   { label: "Species Traits", value: "Species" }
 ];
+
+export const ACTIONS = {
+  SELECTALL: "selectAll",
+  UNSELECTALL: "unSelectAll",
+  NEXTPAGESELECT: "nextPageSelect"
+};

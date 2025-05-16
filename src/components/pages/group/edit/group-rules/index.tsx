@@ -7,9 +7,9 @@ import AddGroupRulesForm from "./group-rules-form";
 import GroupRulesTable from "./group-rules-table";
 import { formatGroupRules } from "./utils";
 
-export default function GroupRules({ userGroupId, rules }) {
+export default function GroupRules({ userGroupId, rules, traits }) {
   const { t } = useTranslation();
-  const [groupRules, setGroupRules] = useState(formatGroupRules(rules));
+  const [groupRules, setGroupRules] = useState(formatGroupRules(rules,traits));
   const [isCreate, setIsCreate] = useState(false);
 
   return (
@@ -21,6 +21,7 @@ export default function GroupRules({ userGroupId, rules }) {
             groupRules={groupRules}
             setGroupRules={setGroupRules}
             setIsCreate={setIsCreate}
+            traits = {traits}
           />
         ) : (
           <GroupRulesTable

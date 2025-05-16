@@ -34,6 +34,17 @@ const LineGraph = forwardRef(function LineGraph(
   const svgRef = useRef(null);
   const ro = useResizeObserver(containerRef);
   const tip = useTooltip(containerRef);
+  const tooltip = select("body")
+    .append("div")
+    .attr("id", "tooltip")
+    .style("position", "absolute")
+    .style("display", "none")
+    .style("background", "#333")
+    .style("color", "#fff")
+    .style("padding", "5px 10px")
+    .style("border-radius", "5px")
+    .style("font-size", "12px")
+    .style("pointer-events", "none");
 
   const tipHelpers = tooltipHelpers(tip, TraitsTooltipRenderer, 10, -50);
   const isSmall = useBreakpointValue({ base: true, md: false });
@@ -61,6 +72,8 @@ const LineGraph = forwardRef(function LineGraph(
     const svg = select(svgRef.current);
     const width = ro.width - ml - mr;
     h = mt + mb + (data.length + traits.length) * 50;
+    const num = Math.ceil((ro.width - ml - mr - ml) / 38);
+    const rows = Math.floor(traits.length / num);
     const height = h - mt - mb;
 
     function abbreviateLabel(label, maxLength) {
@@ -92,7 +105,7 @@ const LineGraph = forwardRef(function LineGraph(
 
     svg
       .attr("width", ro.width)
-      .attr("height", h + 30)
+      .attr("height", h + 30 + rows * 40)
       .append("g")
       .attr("transform", `translate(${ml},${mt})`);
 
@@ -115,7 +128,12 @@ const LineGraph = forwardRef(function LineGraph(
       .select(".x-axis")
       .join("g")
       .attr("transform", `translate(${ml},${height})`)
-      .call(axisBottom(x))
+      .call(
+        axisBottom(x).tickFormat((d) => {
+          const label = String(d); // ensure it's a string
+          return isSmall ? label.charAt(0) : label;
+        })
+      )
       .selectAll("text");
 
     svg
@@ -125,7 +143,31 @@ const LineGraph = forwardRef(function LineGraph(
       .call(axisLeft(y).tickSize(0))
       .call((g) => g.select(".domain").remove());
 
-    svg.selectAll(".y-axis .tick text").text((d) => d.split("|")[1]);
+    svg.selectAll(".y-axis .tick").each(function (d) {
+      const tick = select(this);
+      const label = d?.split?.("|")[1];
+      const textEl = tick.select("text");
+
+      // Cleanup any previous rects
+      tick.selectAll("rect").remove();
+
+      if (label?.startsWith("rgb")) {
+        const bbox = textEl.node()?.getBBox();
+
+        if (bbox) {
+          tick
+            .append("rect")
+            .attr("x", -20)
+            .attr("y", -20)
+            .attr("width", 20)
+            .attr("height", 20)
+            .attr("fill", d?.split?.("|")[1]);
+        }
+      }
+
+      // Always show the label text
+      textEl.text(label?.startsWith("rgb") ? null : label?.replace(/00:00:00/g, ""));
+    });
 
     const areaGenerator = area()
       .x((d, i) => x(Months[i]) + ml + x.bandwidth() / 2 || 0)
@@ -180,7 +222,7 @@ const LineGraph = forwardRef(function LineGraph(
       .data(traits)
       .join("text")
       .attr("x", ml)
-      .attr("y", (d) => y(d) + y.bandwidth() + 10)
+      .attr("y", (d) => y(d) + y.bandwidth() - 10)
       .text((d) => abbreviateLabel(d + " :", (ro.width - mr) / 14))
       .style("font-size", "16.5px");
 
@@ -188,7 +230,7 @@ const LineGraph = forwardRef(function LineGraph(
       svg.select(".heading").selectAll("*").remove();
       const filteredData = data.filter((series) => series.name.split("|")[0] === key);
       h = mt + mb + (filteredData.length + 1) * 50;
-      svg.attr("height", h + 30);
+      svg.attr("height", h + 30 + rows * 40);
       const colorScale = scaleSequential(interpolateSpectral).domain([0, filteredData.length - 1]);
       const y = scaleBand()
         .domain(filteredData.map((d) => d.name.split("|")[1]))
@@ -215,12 +257,41 @@ const LineGraph = forwardRef(function LineGraph(
         .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
         .call(axisLeft(y).tickSize(0))
         .call((g) => g.select(".domain").remove());
+      svg.selectAll(".y-axis .tick").each(function (d) {
+        const tick = select(this);
+        const textEl = tick.select("text");
+
+        // Cleanup any previous rects
+        tick.selectAll("rect").remove();
+
+        if (d?.startsWith("rgb")) {
+          const bbox = textEl.node()?.getBBox();
+
+          if (bbox) {
+            tick
+              .append("rect")
+              .attr("x", -20)
+              .attr("y", -20)
+              .attr("width", 20)
+              .attr("height", 20)
+              .attr("fill", d);
+          }
+        }
+
+        // Always show the label text
+        textEl.text(d?.startsWith("rgb") ? null : d?.replace(/00:00:00/g, ""));
+      });
       svg.select(".chart").selectAll("*").remove();
       svg
         .select(".x-axis")
         .join("g")
         .attr("transform", `translate(${ml},${h - mt - mb})`)
-        .call(axisBottom(x))
+        .call(
+          axisBottom(x).tickFormat((d) => {
+            const label = String(d); // ensure it's a string
+            return isSmall ? label.charAt(0) : label;
+          })
+        )
         .selectAll("text");
       svg
         .select(".chart")
@@ -281,14 +352,18 @@ const LineGraph = forwardRef(function LineGraph(
         .select(".legend")
         .attr("transform", `translate(${-ml}, ${h - mt - mb + 10})`);
 
-      const legendWidth = (ro.width - ml - mr - ml) / (traits.length + 1);
+      let legendWidth = (ro.width - ml - mr - ml) / (traits.length + 1);
+
+      if (legendWidth < 38) {
+        legendWidth = 38;
+      }
 
       legend
         .selectAll("rect")
         .data(traits.concat("All"))
         .join("rect")
-        .attr("x", (d, i) => i * legendWidth + ml + ml)
-        .attr("y", () => 20)
+        .attr("x", (d, i) => (i % num) * legendWidth + ml + ml)
+        .attr("y", (d, i) => Math.floor(i / num) * 45 + 20)
         .attr("width", legendWidth - 2)
         .attr("height", 20)
         .attr("fill", (d) => (d == "All" ? "#ccc" : color(d)))
@@ -299,7 +374,7 @@ const LineGraph = forwardRef(function LineGraph(
     function handleReset(ro) {
       svg.select(".heading").selectAll("*").remove();
       h = mt + mb + (data.length + traits.length) * 50;
-      svg.attr("height", h + 30);
+      svg.attr("height", h + 30 + rows * 40);
 
       svg.select(".y-axis").selectAll("*").remove();
       svg
@@ -309,13 +384,42 @@ const LineGraph = forwardRef(function LineGraph(
         .call(axisLeft(y).tickSize(0))
         .call((g) => g.select(".domain").remove());
 
-      svg.selectAll(".y-axis .tick text").text((d) => d.split("|")[1]);
+      svg.selectAll(".y-axis .tick").each(function (d) {
+        const tick = select(this);
+        const label = d?.split?.("|")[1];
+        const textEl = tick.select("text");
+
+        // Cleanup any previous rects
+        tick.selectAll("rect").remove();
+
+        if (label?.startsWith("rgb")) {
+          const bbox = textEl.node()?.getBBox();
+
+          if (bbox) {
+            tick
+              .append("rect")
+              .attr("x", -20)
+              .attr("y", -20)
+              .attr("width", 20)
+              .attr("height", 20)
+              .attr("fill", d?.split?.("|")[1]);
+          }
+        }
+
+        // Always show the label text
+        textEl.text(label?.startsWith("rgb") ? null : label?.replace(/00:00:00/g, ""));
+      });
       svg.select(".chart").selectAll("*").remove();
       svg
         .select(".x-axis")
         .join("g")
         .attr("transform", `translate(${ml},${h - mt - mb})`)
-        .call(axisBottom(x))
+        .call(
+          axisBottom(x).tickFormat((d) => {
+            const label = String(d); // ensure it's a string
+            return isSmall ? label.charAt(0) : label;
+          })
+        )
         .selectAll("text");
       svg
         .select(".chart")
@@ -380,14 +484,18 @@ const LineGraph = forwardRef(function LineGraph(
         .select(".legend")
         .attr("transform", `translate(${-ml}, ${h - mt - mb + 10})`);
 
-      const legendWidth = (ro.width - ml - mr - ml) / (traits.length + 1);
+      let legendWidth = (ro.width - ml - mr - ml) / (traits.length + 1);
+
+      if (legendWidth < 38) {
+        legendWidth = 38;
+      }
 
       legend
         .selectAll("rect")
         .data(traits.concat("All"))
         .join("rect")
-        .attr("x", (d, i) => i * legendWidth + ml + ml)
-        .attr("y", () => 20)
+        .attr("x", (d, i) => (i % num) * legendWidth + ml + ml)
+        .attr("y", (d, i) => Math.floor(i / num) * 45 + 20)
         .attr("width", legendWidth - 2)
         .attr("height", 20)
         .attr("fill", (d) => (d == "All" ? "#ccc" : color(d)))
@@ -399,14 +507,18 @@ const LineGraph = forwardRef(function LineGraph(
       .select(".legend")
       .attr("transform", `translate(${-ml}, ${h - mt - mb + 10})`);
 
-    const legendWidth = (ro.width - ml - mr - ml) / (traits.length + 1);
+    let legendWidth = (ro.width - ml - mr - ml) / (traits.length + 1);
+
+    if (legendWidth < 38) {
+      legendWidth = 38;
+    }
 
     legend
       .selectAll("rect")
       .data(traits.concat("All"))
       .join("rect")
-      .attr("x", (d, i) => i * legendWidth + ml + ml)
-      .attr("y", () => 20)
+      .attr("x", (d, i) => (i % num) * legendWidth + ml + ml)
+      .attr("y", (d, i) => Math.floor(i / num) * 45 + 20)
       .attr("width", legendWidth - 2)
       .attr("height", 20)
       .attr("fill", (d) => (d == "All" ? "#ccc" : color(d)))
@@ -417,10 +529,19 @@ const LineGraph = forwardRef(function LineGraph(
       .selectAll("text")
       .data(traits.concat("All"))
       .join("text")
-      .attr("x", (d, i) => i * legendWidth + ml + ml + 5)
-      .attr("y", () => 55)
+      .attr("x", (d, i) => (i % num) * legendWidth + ml + ml + 5)
+      .attr("y", (d, i) => Math.floor(i / num) * 45 + 55)
       .text((d) => abbreviateLabel(d, legendWidth / 13))
-      .style("font-size", "13px");
+      .style("font-size", "13px")
+      .on("mouseover", (event, d) => {
+        tooltip.style("display", "block").html(`<strong>${d}</strong>`);
+      })
+      .on("mousemove", (event) => {
+        tooltip.style("left", `${event.pageX + 10}px`).style("top", `${event.pageY - 20}px`);
+      })
+      .on("mouseleave", () => {
+        tooltip.style("display", "none");
+      });
   }, [containerRef, ro?.width, h, data]);
 
   const handleDownloadPng = async () => {
