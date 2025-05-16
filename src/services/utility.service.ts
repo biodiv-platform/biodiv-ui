@@ -101,6 +101,16 @@ export const axInsertHomePageGallery = async (payload) => {
   }
 };
 
+export const axInsertMiniGallery = async (payload) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/miniGallery/insert`, payload);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axReorderHomePageGallery = async (payload) => {
   try {
     const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/reorder`, payload);
