@@ -1,7 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
-import StatsIcon from "@icons/stats";
 import { ObservationFilterProps } from "@interfaces/custom";
 import React from "react";
 
@@ -37,11 +36,6 @@ export const viewTabs = [
     name: "common:list.view_type.grid",
     icon: <GridIcon />,
     key: "list_minimal"
-  },
-  {
-    name: "common:list.view_type.stats",
-    icon: <StatsIcon />,
-    key: "stats"
   }
 ];
 
