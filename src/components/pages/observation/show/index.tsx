@@ -1,6 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import CarouselObservation from "@components/@core/carousel";
-import useObservationStatsData from "@components/pages/species/show/sidebar/use-observation-stats-data";
 import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
@@ -48,7 +47,7 @@ export default function ObservationShowPageComponent({
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
-  let statsData = {
+  const statsData = {
     data: {
       list: {
         groupTraits: [],
@@ -57,9 +56,6 @@ export default function ObservationShowPageComponent({
       isLoading: false
     }
   };
-  if (o.recoIbp?.taxonId != null && o.recoIbp?.taxonId != undefined) {
-    statsData = useObservationStatsData(o.recoIbp?.taxonId);
-  }
 
   useEffect(() => {
     setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name || "");

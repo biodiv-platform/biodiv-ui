@@ -1,18 +1,6 @@
-import LandscapeShowPageComponent from "@components/pages/landscape/show";
-import { observationListParams } from "@components/pages/landscape/show/common/observation-list";
-import { ObservationFilterProvider } from "@components/pages/observation/common/use-observation-filter";
-import { axGetListData } from "@services/document.service";
-import { axGetLandscapeById, axGetLandscapeShowById } from "@services/landscape.service";
-import {
-  axGetListData as axGetObservationList,
-  axGetObservationListConfig
-} from "@services/observation.service";
-import { DEFAULT_FILTER } from "@static/documnet-list";
-import { DEFAULT_FILTER as OBSERVATION_FILTER } from "@static/observation-list";
-import envelope from "@turf/envelope";
-import { getLanguageId } from "@utils/i18n";
+import { WarningTwoIcon } from "@chakra-ui/icons";
+import { Box, Heading, Icon, Text } from "@chakra-ui/react";
 import React from "react";
-import wkt from "wkt";
 
 export const documentsListParams = {
   geoShapeFilterField: "documentCoverages.topology",
@@ -20,67 +8,23 @@ export const documentsListParams = {
   max: 6
 };
 
-const ObservationShowPage = ({
-  landscape,
-  landscapeShow,
-  documentList,
-  observationData,
-  listConfig,
-  initialParamsObservation
-}) => (
-  <ObservationFilterProvider
-    {...listConfig}
-    filter={initialParamsObservation}
-    observationData={observationData}
-  >
-    <LandscapeShowPageComponent
-      landscape={landscape}
-      documentList={documentList}
-      landscapeShow={landscapeShow}
-    />
-  </ObservationFilterProvider>
+const ObservationShowPage = () => (
+  <Box display="flex" alignItems="center" justifyContent="center" px={6}>
+    <Box textAlign="center" maxW="md">
+      <Icon as={WarningTwoIcon} boxSize={16} mb={6} color="yellow.400" />
+      <Heading size="lg" mb={4}>
+        Page Temporarily Unavailable
+      </Heading>
+      <Text color="gray.500" mb={6}>
+        This page is currently down for maintenance. Please check back later.
+      </Text>
+    </Box>
+  </Box>
 );
 
-export const getServerSideProps = async (ctx) => {
-  const { data: listConfig } = await axGetObservationListConfig();
-  const langId = getLanguageId(ctx.locale)?.ID;
-  const { data: landscape } = await axGetLandscapeById(ctx.query.landscapeId);
-  const { data: landscapeShow } = await axGetLandscapeShowById(ctx.query.landscapeId, langId);
-  const coord = wkt.parse(landscapeShow.wktData);
-  const location = `${envelope(coord).geometry.coordinates}`.replace(/[[\]]/g, "");
-
-  const initialFilterParams = {
-    ...DEFAULT_FILTER,
-    ...documentsListParams,
-    location
-  };
-
-  const initialParamsObservation = {
-    ...OBSERVATION_FILTER,
-    ...observationListParams,
-    view: "stats",
-    location
-  };
-
-  const { data: documents } = await axGetListData(initialFilterParams);
-  const { data: observations } = await axGetObservationList(initialParamsObservation);
+export const getServerSideProps = async () => {
   return {
-    props: {
-      landscape,
-      landscapeShow,
-      observationData: {
-        l: observations.observationList || [],
-        ml: observations.observationListMinimal || [],
-        ag: observations?.aggregationData || {},
-        n: observations?.totalCount || {},
-        mvp: {},
-        hasMore: true
-      },
-      documentList: documents?.documentList || [],
-      location,
-      listConfig: { ...listConfig, location },
-      initialParamsObservation
-    }
+    props: {}
   };
 };
 
