@@ -43,7 +43,7 @@ export default function FilterCheckboxes({
 
   const handleOnChange = (v) => {
     if (v.length > 0) {
-      addFilter(filterKey, v.toString());
+      addFilter(filterKey,v.toString().split("_").length>1? v.toString().split("_")[0]+"|"+v.toString().split("_")[1]:v.toString().split("_")[0]);
     } else {
       removeFilter(filterKey);
     }
@@ -95,7 +95,7 @@ export default function FilterCheckboxes({
                   ignoreFallback={true}
                 />
               )}
-              {skipOptionsTranslation ? label || value : t(translateKey + label)}
+              {skipOptionsTranslation ? label || value.split("_")[0] : t(translateKey + label)}
               <FilterStat statKey={statKey} subStatKey={stat || value} />
             </Checkbox>
           ))}
