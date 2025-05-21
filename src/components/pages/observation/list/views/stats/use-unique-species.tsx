@@ -25,7 +25,7 @@ export default function useUniqueSpecies({ filter, location = "" }) {
     );
 
     setter((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData.groupUniqueSpecies!=null) {
         if (reset) {
           _draft.list = Object.entries(data.aggregateStatsData.groupUniqueSpecies);
           _draft.lifelistoffset = LIFE_LIST_LIMIT;
