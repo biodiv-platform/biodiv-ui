@@ -68,6 +68,9 @@ export default function FilterCheckboxes({
   };
 
   const toTitleCase = (input) => {
+    if (typeof input !== "string" || input.length === 0) {
+      return "";
+    }
     let titleCase = "";
     let nextTitleCase = true;
 
@@ -121,7 +124,7 @@ export default function FilterCheckboxes({
                 />
               )}
               {skipOptionsTranslation
-                ? toTitleCase(label) || toTitleCase(value.split("_")[0])
+                ? label || toTitleCase(value.split("_")[0])
                 : t(translateKey + label)}
               <FilterStat statKey={statKey} subStatKey={stat || value} />
             </Checkbox>
