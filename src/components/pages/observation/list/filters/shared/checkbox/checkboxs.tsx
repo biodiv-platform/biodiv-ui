@@ -43,7 +43,12 @@ export default function FilterCheckboxes({
 
   const handleOnChange = (v) => {
     if (v.length > 0) {
-      addFilter(filterKey,v.toString().split("_").length>1? v.toString().split("_")[0]+"|"+v.toString().split("_")[1]:v.toString().split("_")[0]);
+      addFilter(
+        filterKey,
+        v.toString().split("_").length > 1
+          ? v.toString().split("_")[0] + "|" + v.toString().split("_")[1]
+          : v.toString().split("_")[0]
+      );
     } else {
       removeFilter(filterKey);
     }
@@ -60,6 +65,26 @@ export default function FilterCheckboxes({
   const handleOnSearch = (e) => {
     const searchQuery = e?.target?.value.toLowerCase();
     setFilteredOptions(options.filter(({ label }) => label.toLowerCase().includes(searchQuery)));
+  };
+
+  const toTitleCase = (input) => {
+    let titleCase = "";
+    let nextTitleCase = true;
+
+    for (let i = 0; i < input.length; i++) {
+      let c = input[i];
+
+      if (c === " ") {
+        nextTitleCase = true;
+      } else if (nextTitleCase) {
+        c = c.toUpperCase();
+        nextTitleCase = false;
+      }
+
+      titleCase += c;
+    }
+
+    return titleCase;
   };
 
   return (
@@ -95,7 +120,9 @@ export default function FilterCheckboxes({
                   ignoreFallback={true}
                 />
               )}
-              {skipOptionsTranslation ? label || value.split("_")[0] : t(translateKey + label)}
+              {skipOptionsTranslation
+                ? toTitleCase(label) || toTitleCase(value.split("_")[0])
+                : t(translateKey + label)}
               <FilterStat statKey={statKey} subStatKey={stat || value} />
             </Checkbox>
           ))}
