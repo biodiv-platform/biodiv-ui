@@ -12,36 +12,52 @@ import TemporalObservedOn from "./temporal-observed-on";
 import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
-import TraitsPerMonth from "./traits-per-month";
-import useObservationData from "./use-observation-data";
 
 export default function StatsView() {
-  const { observationData, speciesGroup, filter } = useObservationFilter();
-  const stats = useObservationData({ filter });
+  const {
+    observationData,
+    speciesGroup,
+    filter,
+    totalCounts,
+    topUploaders,
+    topIdentifiers,
+    uniqueSpecies,
+    taxon,
+    countPerDay,
+    groupObservedOn,
+    isLoading
+  } = useObservationFilter();
+  /*const stats = useObservationData({ filter });
   const data = stats.data.list;
-  const isLoading = stats.data.isLoading;
+  const isLoading = stats.data.isLoading;*/
 
   return (
     <div>
-      <Totals filter={filter} observationData={observationData} speciesGroup={speciesGroup} />
+      <Totals
+        filter={filter}
+        observationData={observationData}
+        speciesGroup={speciesGroup}
+        totalCounts={totalCounts}
+        isLoading={isLoading}
+      />
       <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
-        <TopUploaders filter={filter} />
-        <TopIdentifiers filter={filter} />
+        <TopUploaders filter={filter} topUploaders={topUploaders} isLoading={isLoading} />
+        <TopIdentifiers filter={filter} topIdentifiers={topIdentifiers} />
         <GridItem colSpan={2}>
-          <TaxanomicDistribution data={data.groupTaxon} isLoading={isLoading} />
+          <TaxanomicDistribution data={taxon} isLoading={isLoading} />
         </GridItem>
         <SpeciesGroups
           observationData={observationData}
           speciesGroup={speciesGroup}
           filter={filter}
         />
-        <LifeList filter={filter} />
+        <LifeList filter={filter} uniqueSpecies={uniqueSpecies} />
       </SimpleGrid>
       <ObservationsMap />
       <StatesDistribution observationData={observationData} filter={filter} />
-      <ObservationPerDay data={data.countPerDay} isLoading={isLoading} />
-      <TemporalObservedOn data={data.groupObservedOn} isLoading={isLoading} />
-      <TraitsPerMonth data={data.groupTraits} isLoading={isLoading} />
+      <ObservationPerDay data={countPerDay} isLoading={isLoading} />
+      <TemporalObservedOn data={groupObservedOn} isLoading={isLoading} />
+      {/*<TraitsPerMonth data={data.groupTraits} isLoading={isLoading} />*/}
     </div>
   );
 }

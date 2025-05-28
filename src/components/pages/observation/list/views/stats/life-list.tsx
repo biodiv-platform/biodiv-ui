@@ -2,17 +2,16 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import LifeListTable from "./table";
-import useUniqueSpecies from "./use-unique-species";
 
-const LifeList = ({ filter }) => {
-  const uniqueSpecies = useUniqueSpecies({ filter });
+const LifeList = ({ filter, uniqueSpecies }) => {
+  //const uniqueSpecies = useUniqueSpecies({ filter });
   const { t } = useTranslation();
 
   return (
     <LifeListTable
-      data={uniqueSpecies.speciesData.data}
+      data={{ isLoading: false, list: Object.entries(uniqueSpecies) }}
       title={t("observation:list.life_list.heading")}
-      loadMoreUniqueSpecies={uniqueSpecies.speciesData.loadMore}
+      loadMoreUniqueSpecies={() => console.log("hi")}
       filter={filter}
     />
   );

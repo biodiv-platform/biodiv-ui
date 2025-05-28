@@ -2,7 +2,7 @@ import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { ObservationData, ObservationFilterProps } from "@interfaces/custom";
-import { SpeciesGroup } from "@interfaces/esmodule";
+import { SpeciesGroup, TopUploaders, TotalCounts } from "@interfaces/esmodule";
 import { UserGroup, UserGroupIbp } from "@interfaces/observation";
 import {
   axGetCropResources,
@@ -37,6 +37,36 @@ interface ObservationFilterContextProps {
   nextPage?;
   resetFilter?;
   speciesGroup?: SpeciesGroup[];
+  totalCounts?: TotalCounts;
+  topUploaders?: TopUploaders[];
+  topIdentifiers?: TopUploaders[];
+  uniqueSpecies?: {
+    [speciesName: string]: number;
+  };
+  taxon?: {
+    [speciesName: string]: number;
+  };
+  countPerDay?: {
+    [year: string]: {
+      date: string;
+      value: number;
+    }[];
+  };
+  groupObservedOn?: {
+    [groupRange: string]: {
+      month: string;
+      year: string;
+      value: number;
+    };
+  };
+  groupTraits?: {
+    name: string; // Format: "TraitName|TraitId|TraitValue|TraitValueId"
+    values: {
+      name: string;
+      value: number;
+    }[];
+  }[];
+  isLoading: boolean;
   userGroup?: UserGroup[];
   authorizedUserGroupList?: UserGroup[];
   hasUgAccess?: boolean;
@@ -79,6 +109,15 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [allMedia, setAllMedia] = useState(
     props.observationData.mediaToggle === MEDIA_TOGGLE.WITH_MEDIA ? false : true
   );
+  const [totalCounts, setTotalCounts] = useImmer<{ f: any }>({ f: props.totalCounts });
+  const [topUploaders, setTopUploaders] = useImmer<{ f: any }>({ f: props.topUploaders });
+  const [topIdentifiers, setTopIdentifiers] = useImmer<{ f: any }>({ f: props.topIdentifiers });
+  const [uniqueSpecies, setUniqueSpecies] = useImmer<{ f: any }>({ f: props.uniqueSpecies });
+  const [taxon, setTaxon] = useImmer<{ f: any }>({ f: props.taxon });
+  const [countPerDay, setCountPerDay] = useImmer<{ f: any }>({ f: props.countPerDay });
+  const [groupObservedOn, setGroupObservedOn] = useImmer<{ f: any }>({ f: props.groupObservedOn });
+  const [groupTraits, setGroupTraits] = useImmer<{ f: any }>({ f: props.groupTraits });
+  const [isLoading, setIsLoading] = useState(false);
 
   const setCropObservationId = async (id, canCrop) => {
     setCanCropObservation(canCrop);
@@ -168,6 +207,47 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft.ag = data.aggregationData;
         }
       });
+      if (data?.aggregateStatsData?.totalCounts) {
+        setTotalCounts((_draft) => {
+          _draft.f = data.aggregateStatsData.totalCounts;
+        });
+      }
+      if (data?.aggregateStatsData?.groupTopUploaders) {
+        setTopUploaders((_draft) => {
+          _draft.f = data.aggregateStatsData.groupTopUploaders;
+        });
+      }
+      if (data?.aggregateStatsData?.groupTopIdentifiers) {
+        setTopIdentifiers((_draft) => {
+          _draft.f = data.aggregateStatsData.groupTopIdentifiers;
+        });
+      }
+      if (data?.aggregateStatsData?.groupTopIdentifiers) {
+        setUniqueSpecies((_draft) => {
+          _draft.f = data.aggregateStatsData.groupTopIdentifiers;
+        });
+      }
+      if (data?.aggregateStatsData?.groupTaxon) {
+        setTaxon((_draft) => {
+          _draft.f = data.aggregateStatsData.groupTaxon;
+        });
+      }
+      if (data?.aggregateStatsData?.countPerDay) {
+        setCountPerDay((_draft) => {
+          _draft.f = data.aggregateStatsData.countPerDay;
+        });
+      }
+      if (data?.aggregateStatsData?.groupObservedOn) {
+        setGroupObservedOn((_draft) => {
+          _draft.f = data.aggregateStatsData.groupObservedOn;
+        });
+      }
+      if (data?.aggregateStatsData?.groupTraits) {
+        setGroupTraits((_draft) => {
+          _draft.f = data.aggregateStatsData.groupTraits;
+        });
+      }
+      setIsLoading(false);
       NProgress.done();
     } catch (e) {
       console.error(e);
@@ -190,12 +270,14 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
       _draft.f.offset = 0;
       _draft.f[key] = value;
     });
+    setIsLoading(true);
   };
 
   const removeFilter = (key) => {
     setFilter((_draft) => {
       delete _draft.f[key];
     });
+    setIsLoading(true);
   };
 
   const nextPage = (max = LIST_PAGINATION_LIMIT) => {
@@ -211,6 +293,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     setFilter((_draft) => {
       _draft.f = DEFAULT_FILTER;
     });
+    setIsLoading(true);
   };
 
   const observationListAdd = (items) => {
@@ -259,6 +342,15 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         canCropObservation,
         // Config Properties
         speciesGroup: props.speciesGroup,
+        totalCounts: totalCounts.f,
+        topUploaders: topUploaders.f,
+        topIdentifiers: topIdentifiers.f,
+        uniqueSpecies: uniqueSpecies.f,
+        taxon: taxon.f,
+        countPerDay: countPerDay.f,
+        groupObservedOn: groupObservedOn.f,
+        groupTraits: groupTraits.f,
+        isLoading: isLoading,
         userGroup: props.userGroup,
         location: props.location,
         states: props.states,

@@ -14,6 +14,22 @@ export interface CommonName {
   id?: number; // int32
   language_id?: number; // int32
 }
+export interface TotalCounts {
+  totalTaxa: number;
+  totalIdentifiers: number;
+  totalUploaders: number;
+}
+export interface TopUploaders {
+  authorId: number;
+  count: number;
+  name: string;
+  pic: string;
+}
+export interface Stats {
+  totalCounts: TotalCounts;
+  groupTopUploaders: TopUploaders[];
+  groupTopIdentifiers: TopUploaders[];
+}
 export interface CustomFieldValues {
   value?: string;
   valueIcon?: string;
