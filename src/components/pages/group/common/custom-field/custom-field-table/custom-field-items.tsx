@@ -10,7 +10,9 @@ const CustomFieldListItems: any = SortableContainer(
         <CustomFieldRow
           key={item.customFields.id}
           index={index}
-          onDelete={() => removeCustomField(item.customFields.id)}
+          onDelete={() =>
+            removeCustomField(item.customFields.authorId ? item.customFields.id : index)
+          }
           onEdit={() => customFieldDetails(item.customFields.id)}
           itemDetails={item}
         />

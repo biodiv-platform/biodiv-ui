@@ -24,9 +24,15 @@ interface IGallerySetupForm {
   profilePic?: string;
   options?: any[];
   truncated?: boolean;
+  galleryId?: number;
 }
 
-export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryList }) {
+export default function GallerySetupFrom({
+  setIsCreate,
+  galleryList,
+  setGalleryList,
+  galleryId = null
+}) {
   const { t } = useTranslation();
   const [imagePicker, setImagePicker] = useState<boolean>(true);
   const { currentGroup } = useGlobalState();
@@ -44,6 +50,7 @@ export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryL
       authorId: defaultValues?.authorInfo?.id,
       authorName: defaultValues?.authorInfo?.name,
       authorImage: defaultValues?.authorInfo?.profilePic,
+      galleryId: galleryId,
       ...value
     };
     setGalleryList([...galleryList, payload]);

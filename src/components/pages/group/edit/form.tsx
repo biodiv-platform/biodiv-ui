@@ -24,13 +24,15 @@ interface IuserGroupEditProps {
   userGroupId;
   habitats;
   speciesGroups;
+  currentStep;
 }
 
 export default function UserGroupEditForm({
   groupInfo,
   userGroupId,
   habitats,
-  speciesGroups
+  speciesGroups,
+  currentStep = -1
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -98,35 +100,43 @@ export default function UserGroupEditForm({
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
-        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
-          <Box gridColumn="1/4">
-            <TextBoxField name="name" isRequired={true} label={t("group:name")} />
-            <RichTextareaField name="description" label={t("form:description.title")} />
-          </Box>
-          <ImageUploaderField label="Logo" name="icon" />
-        </SimpleGrid>
-        <IconCheckboxField
-          name="speciesGroupId"
-          label={t("common:species_coverage")}
-          options={speciesGroups}
-          type="species"
-          isRequired={true}
-        />
-        <IconCheckboxField
-          name="habitatId"
-          label={t("common:habitats_covered")}
-          options={habitats}
-          type="habitat"
-          isRequired={true}
-        />
-        <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
-        <AreaDrawField
-          label={t("group:spatial_coverge")}
-          name={"spacialCoverage"}
-          isRequired={true}
-        />
+        {(currentStep == -1 || currentStep == 0) && (
+          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+            <Box gridColumn="1/4">
+              <TextBoxField name="name" isRequired={true} label={t("group:name")} />
+              <RichTextareaField name="description" label={t("form:description.title")} />
+            </Box>
+            <ImageUploaderField label="Logo" name="icon" />
+          </SimpleGrid>
+        )}
+        {(currentStep == -1 || currentStep == 1) && (
+          <>
+            <IconCheckboxField
+              name="speciesGroupId"
+              label={t("common:species_coverage")}
+              options={speciesGroups}
+              type="species"
+              isRequired={true}
+            />
+            <IconCheckboxField
+              name="habitatId"
+              label={t("common:habitats_covered")}
+              options={habitats}
+              type="habitat"
+              isRequired={true}
+            />
+            <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
+            <AreaDrawField
+              label={t("group:spatial_coverge")}
+              name={"spacialCoverage"}
+              isRequired={true}
+            />
+          </>
+        )}
 
-        <SubmitButton mb={8}>{t("group:update")}</SubmitButton>
+        {(currentStep == 0 || currentStep == 1) && (
+          <SubmitButton mb={8}>{t("group:update")}</SubmitButton>
+        )}
       </form>
     </FormProvider>
   );

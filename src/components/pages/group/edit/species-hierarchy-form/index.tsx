@@ -25,7 +25,7 @@ interface SpeciesHierarchyProps {
   onSubmit: (selectedNodes: SelectedNode[]) => void | Promise<void>;
   initialData?: any[];
   langId: number;
-  userGroupId: string;
+  userGroupId: string | null;
 }
 
 // Helper function to get all leaf nodes recursively
@@ -263,14 +263,18 @@ export default function SpeciesHierarchyForm({
         const { data } = await axGetAllFieldsMeta({ langId });
         setData(data);
         const allLeafNodes = getAllLeafNodes(data);
-        const { ugSfMappingData } = await axGetSpeciesFieldsMapping(userGroupId);
+        const { ugSfMappingData } = userGroupId
+          ? await axGetSpeciesFieldsMapping(userGroupId)
+          : { ugSfMappingData: [] };
         const speciesFieldIdSet = new Set(ugSfMappingData.map((item) => item.speciesFieldId));
         const filtered = allLeafNodes.filter((field) => speciesFieldIdSet.has(field.id));
 
         setSelections(ugSfMappingData.length > 0 ? filtered : allLeafNodes);
         setValue("selectedNodes", ugSfMappingData.length > 0 ? filtered : allLeafNodes);
 
-        const { ugSfMetaData } = await axGetUgSpeciesFieldsMetaData(userGroupId);
+        const { ugSfMetaData } = userGroupId
+          ? await axGetUgSpeciesFieldsMetaData(userGroupId)
+          : { ugSfMetaData: [] };
         const contributorIds = ugSfMetaData
           .filter((v) => v.valueType == "contributor")
           .map((m) => m.valueId);
@@ -421,36 +425,40 @@ export default function SpeciesHierarchyForm({
                     </Box>
                   )}
                 </Box>
-                <Box>
-                  <SubmitButton isDisabled={!selections.length}>
-                    {t("group:species_fields.submit_selections")}
-                  </SubmitButton>
-                </Box>
+                {
+                  <Box>
+                    <SubmitButton isDisabled={!selections.length}>
+                      {t("group:species_fields.submit_selections")}
+                    </SubmitButton>
+                  </Box>
+                }
               </Box>
             </Box>
           </Box>
 
           {/* Members Selection Box */}
-          <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200" mt={6}>
-            <Box p={6}>
-              <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900" mb={4}>
-                {t("group:species_fields.filter_by_contributors")}
-              </Box>
-              <ContributorSelectField name="members" label="Search and select members" mb={4} />
-              <Box display="flex" justifyContent="flex-end">
-                <Button
-                  colorScheme="blue"
-                  isLoading={apiStatus.loading}
-                  onClick={() => {
-                    const memberValues = methods.getValues("members");
-                    handleContributorsSubmit(memberValues);
-                  }}
-                >
-                  {t("group:species_fields.submit_selections")}
-                </Button>
+          {userGroupId != null && (
+            <Box bg="white" rounded="lg" shadow="sm" borderWidth={1} borderColor="gray.200" mt={6}>
+              <Box p={6}>
+                <Box as="h2" fontSize="xl" fontWeight="semibold" color="gray.900" mb={4}>
+                  {t("group:species_fields.filter_by_contributors")}
+                </Box>
+                <ContributorSelectField name="members" label="Search and select members" mb={4} />
+                <Box display="flex" justifyContent="flex-end">
+                  <Button
+                    colorScheme="blue"
+                    isLoading={apiStatus.loading}
+                    onClick={() => {
+                      const memberValues = methods.getValues("members");
+                      handleContributorsSubmit(memberValues);
+                    }}
+                  >
+                    {t("group:species_fields.submit_selections")}
+                  </Button>
+                </Box>
               </Box>
             </Box>
-          </Box>
+          )}
         </Box>
       </form>
     </FormProvider>

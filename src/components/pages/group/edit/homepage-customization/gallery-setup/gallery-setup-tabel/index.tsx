@@ -34,7 +34,9 @@ const GallerySetupTable = ({
 
   const handleReorderAlter = () => {
     setCanReorder(false);
-    notification(t("group:homepage_customization.gallery_setup.alert"));
+    if (userGroupId != null) {
+      notification(t("group:homepage_customization.gallery_setup.alert"));
+    }
   };
 
   const handleReorderCustomField = async () => {

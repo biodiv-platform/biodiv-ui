@@ -1,11 +1,4 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
@@ -83,50 +76,32 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   return (
-    <Accordion allowToggle={true}>
-      <AccordionItem
-        mb={8}
-        bg="white"
-        border="1px solid var(--chakra-colors-gray-300)"
-        borderRadius="md"
-      >
-        <AccordionButton _expanded={{ bg: "gray.100" }}>
-          <Box flex={1} textAlign="left" fontSize="lg">
-            🛡️ {t("group:admin.title")}
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-
-        <AccordionPanel>
-          <FormProvider {...hForm}>
-            <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-              <AdminInviteField
-                name="founders"
-                label="Edit Founders"
-                onRemove={(o) => onMemberRemoved(o, founderIds)}
-                resetOnSubmit={false}
-              />
-              <AdminInviteField
-                name="moderators"
-                label="Edit Moderators"
-                onRemove={(o) => onMemberRemoved(o, moderatorIds)}
-                resetOnSubmit={false}
-              />
-              <AdminInviteField
-                name="members"
-                label="Add Members"
-                onRemove={(o) => onMemberRemoved(o, [])}
-              />
-              <Box mb={4}>
-                <LocalLink href={"/user/list"} prefixGroup={true}>
-                  <BlueLink display="block">{t("group:admin.view_members")}</BlueLink>
-                </LocalLink>
-              </Box>
-              <SubmitButton>{t("common:update")}</SubmitButton>
-            </form>
-          </FormProvider>
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+        <AdminInviteField
+          name="founders"
+          label="Edit Founders"
+          onRemove={(o) => onMemberRemoved(o, founderIds)}
+          resetOnSubmit={false}
+        />
+        <AdminInviteField
+          name="moderators"
+          label="Edit Moderators"
+          onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+          resetOnSubmit={false}
+        />
+        <AdminInviteField
+          name="members"
+          label="Add Members"
+          onRemove={(o) => onMemberRemoved(o, [])}
+        />
+        <Box mb={4}>
+          <LocalLink href={"/user/list"} prefixGroup={true}>
+            <BlueLink display="block">{t("group:admin.view_members")}</BlueLink>
+          </LocalLink>
+        </Box>
+        <SubmitButton>{t("common:update")}</SubmitButton>
+      </form>
+    </FormProvider>
   );
 }

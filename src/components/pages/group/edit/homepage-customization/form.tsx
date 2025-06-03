@@ -14,7 +14,7 @@ import GallerySetup from "./gallery-setup";
 
 const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
-export default function HomePageCustomizationForm({ userGroupId, homePageDetails }) {
+export default function HomePageCustomizationForm({ userGroupId, homePageDetails, currentStep }) {
   const { t } = useTranslation();
   const [galleryList, setGalleryList] = useState(
     homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
@@ -79,38 +79,45 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
 
   return (
     <>
-      <FormProvider {...hForm}>
-        <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-          <Box width={["100%", 350]} justifyContent="space-between">
-            <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
-            <SwitchField name="showStats" label={t("group:homepage_customization.module_stats")} />
-            <SwitchField
-              name="showRecentObservation"
-              label={t("group:homepage_customization.recent_observation")}
+      {currentStep == 3 && (
+        <FormProvider {...hForm}>
+          <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+            <Box width={["100%", 350]} justifyContent="space-between">
+              <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
+              <SwitchField
+                name="showStats"
+                label={t("group:homepage_customization.module_stats")}
+              />
+              <SwitchField
+                name="showRecentObservation"
+                label={t("group:homepage_customization.recent_observation")}
+              />
+              <SwitchField
+                name="showGridMap"
+                label={t("group:homepage_customization.observation_map")}
+              />
+              <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
+              <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
+            </Box>
+            <WYSIWYGField
+              name="description"
+              label={t("form:description.title")}
+              uploadHandler={axUploadEditorPageResource}
             />
-            <SwitchField
-              name="showGridMap"
-              label={t("group:homepage_customization.observation_map")}
-            />
-            <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
-            <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
-          </Box>
-          <WYSIWYGField
-            name="description"
-            label={t("form:description.title")}
-            uploadHandler={axUploadEditorPageResource}
-          />
-        </form>
-      </FormProvider>
-      <GallerySetup
-        userGroupId={userGroupId}
-        isCreate={isCreate}
-        setIsCreate={setIsCreate}
-        setGalleryList={setGalleryList}
-        galleryList={galleryList}
-        isEdit={isEdit}
-        setIsEdit={setIsEdit}
-      />
+          </form>
+        </FormProvider>
+      )}
+      {currentStep == 4 && (
+        <GallerySetup
+          userGroupId={userGroupId}
+          isCreate={isCreate}
+          setIsCreate={setIsCreate}
+          setGalleryList={setGalleryList}
+          galleryList={galleryList}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+        />
+      )}
       <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
         <Button colorScheme="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
           {t("group:homepage_customization.save")}
