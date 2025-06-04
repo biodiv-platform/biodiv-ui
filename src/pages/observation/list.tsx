@@ -8,12 +8,38 @@ import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list"
 import { absoluteUrl } from "@utils/basic";
 import React from "react";
 
-function ObservationListPage({ observationData, listConfig, initialFilterParams, nextOffset }) {
+function ObservationListPage({
+  observationData,
+  listConfig,
+  initialFilterParams,
+  nextOffset,
+  includeTotals,
+  totalCounts,
+  topUploaders,
+  topIdentifiers,
+  uniqueSpecies,
+  taxon,
+  countPerDay,
+  groupObservedOn,
+  traits
+}) {
   return (
     <ObservationFilterProvider
       {...listConfig}
       filter={initialFilterParams}
       observationData={observationData}
+      {...(includeTotals
+        ? {
+            totalCounts: totalCounts,
+            topUploaders: topUploaders,
+            topIdentifiers: topIdentifiers,
+            uniqueSpecies: uniqueSpecies,
+            taxon: taxon,
+            countPerDay: countPerDay,
+            groupObservedOn: groupObservedOn,
+            groupTraits: traits
+          }
+        : {})}
     >
       <ObservationListPageComponent nextOffset={nextOffset} />
     </ObservationFilterProvider>
@@ -49,6 +75,7 @@ export const getServerSideProps = async (ctx) => {
   };
 
   const { data } = await axGetListData(initialFilterParams, location ? { location } : {});
+  const includeTotals = ctx.query.view == "stats";
 
   return {
     props: {
@@ -65,7 +92,20 @@ export const getServerSideProps = async (ctx) => {
       },
       listConfig,
       nextOffset,
-      initialFilterParams
+      initialFilterParams,
+      ...(includeTotals
+        ? {
+            totalCounts: data.aggregateStatsData.totalCounts,
+            topUploaders: data.aggregateStatsData.groupTopUploaders,
+            topIdentifiers: data.aggregateStatsData.groupTopIdentifiers,
+            uniqueSpecies: data.aggregateStatsData.groupUniqueSpecies,
+            taxon: data.aggregateStatsData.groupTaxon,
+            countPerDay: data.aggregateStatsData.countPerDay,
+            groupObservedOn: data.aggregateStatsData.groupObservedOn,
+            traits: data.aggregateStatsData.groupTraits
+          }
+        : {}),
+      includeTotals: includeTotals
     }
   };
 };

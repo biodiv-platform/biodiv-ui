@@ -3,10 +3,9 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
 import TableTotals from "./table-totals";
-import useTotals from "./use-totals";
 
-const Totals = ({ filter, observationData, speciesGroup }) => {
-  const { totalsData } = useTotals({ filter });
+const Totals = ({ filter, observationData, speciesGroup, totalCounts, isLoading }) => {
+  //const { totalsData } = useTotals({ filter });
   const { t } = useTranslation();
 
   const s = useMemo(() => {
@@ -22,10 +21,9 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
     );
 
     return filteredCounts.reduce((a, b) => a + b);
-  }, [filter]);
+  }, [filter, observationData]);
 
-  const totals = { totalObservations: s, ...totalsData.data.list };
-  const isLoading = totalsData.data.isLoading;
+  const totals = { totalObservations: s, ...totalCounts };
 
   return (
     <SimpleGrid columns={{ md: 4 }} spacing={4} mb={4}>
