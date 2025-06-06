@@ -7,8 +7,10 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useRef } from "react";
 
 import TreeMapChart from "./tree-map";
+import useTaxonTreeData from "./use-taxon-tree-data";
 
-const TaxanomicDistribution = ({ data, isLoading }) => {
+const TaxanomicDistribution = ({filter }) => {
+  const taxon = useTaxonTreeData({filter});
   const { t } = useTranslation();
 
   const chartRef = useRef<any>(null);
@@ -40,11 +42,11 @@ const TaxanomicDistribution = ({ data, isLoading }) => {
     }
   };
 
-  if (isLoading) {
+  if (taxon.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
-  if (!data) {
+  if (!taxon.data.list) {
     return <div></div>;
   }
 
@@ -57,7 +59,7 @@ const TaxanomicDistribution = ({ data, isLoading }) => {
         </Button>
       </BoxHeading>
       <Box p={4}>
-        <TreeMapChart data={data} ref={chartRef} />
+        <TreeMapChart data={taxon.data.list} ref={chartRef} />
       </Box>
     </Box>
   );

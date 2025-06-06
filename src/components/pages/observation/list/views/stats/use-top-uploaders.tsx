@@ -18,7 +18,8 @@ export default function useTopUploaders({ filter }) {
 
     const { success, data } = await axGetListData({
       ...filter,
-      uploadersoffset: reset ? 0 : getter.uploadersoffset
+      uploadersoffset: reset ? 0 : getter.uploadersoffset,
+      statsFilter: "uploaders"
     });
 
     setter((_draft) => {

@@ -18,7 +18,8 @@ export default function useTopIdentifiers({ filter }) {
 
     const { success, data } = await axGetListData({
       ...filter,
-      identifiersoffset: reset ? 0 : getter.identifiersoffset
+      identifiersoffset: reset ? 0 : getter.identifiersoffset,
+      statsFilter: "identifiers"
     });
 
     setter((_draft) => {

@@ -9,8 +9,10 @@ import React, { useRef, useState } from "react";
 
 import CalendarHeatMap from "./calendar-heatmap";
 import { ObservationTooltipRenderer } from "./static-data";
+import useTemporalDistributionCreatedOnData from "./use-temporal-distribution-created-on-data";
 
-const ObservationPerDay = ({ data, isLoading }) => {
+const ObservationPerDay = ({ filter }) => {
+  const countPerDay = useTemporalDistributionCreatedOnData({ filter });
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
   const toast = useToast();
@@ -48,15 +50,15 @@ const ObservationPerDay = ({ data, isLoading }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  if (isLoading) {
+  if (countPerDay.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
-  if (!data) {
+  if (!countPerDay.data.list) {
     return <div></div>;
   }
 
-  const years = Object.keys(data);
+  const years = Object.keys(countPerDay.data.list);
   years.reverse();
 
   const prevSlide = () => {
@@ -107,7 +109,7 @@ const ObservationPerDay = ({ data, isLoading }) => {
         <Box padding={padding}>
           <CalendarHeatMap
             year={years[currentIndex]}
-            data={data[years[currentIndex]]}
+            data={countPerDay.data.list[years[currentIndex]]}
             tooltipRenderer={ObservationTooltipRenderer}
             ref={chartRef}
           />

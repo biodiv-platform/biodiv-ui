@@ -8,14 +8,14 @@ export default function useTaxonTreeData({ filter }) {
     isLoading: true
   });
 
-  const fetchGroupByTaxon = async (setter, taxonId) => {
+  const fetchGroupByTaxon = async (setter) => {
     setter((_draft) => {
       _draft.isLoading = true;
     });
 
     const { success, data } = await axGetListData({
       ...filter,
-      taxon: taxonId
+      statsFilter:"taxon"
     });
 
     setter((_draft) => {
@@ -26,14 +26,11 @@ export default function useTaxonTreeData({ filter }) {
     });
   };
 
-  const loadMore = (taxonId) => fetchGroupByTaxon(setGroupByTaxon, taxonId);
-
   useEffect(() => {
-    fetchGroupByTaxon(setGroupByTaxon, "1");
+    fetchGroupByTaxon(setGroupByTaxon);
   }, [filter]);
 
   return {
-    data: groupByTaxon,
-    loadMore: loadMore
+    data: groupByTaxon
   };
 }

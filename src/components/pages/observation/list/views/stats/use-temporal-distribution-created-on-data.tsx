@@ -14,7 +14,8 @@ export default function useTemporalDistributionCreatedOnData({ filter }) {
     });
 
     const { success, data } = await axGetListData({
-      ...filter
+      ...filter,
+      statsFilter: "countPerDay"
     });
 
     setter((_draft) => {

@@ -7,8 +7,10 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 
 import StackedHorizontalChart from "./stacked-horizontal-chart";
+import useTemporalDistributionMonthObserved from "./use-temporal-distribution-month-observed";
 
-const TemporalObservedOn = ({ data, isLoading }) => {
+const TemporalObservedOn = ({filter}) => {
+  const observedOn = useTemporalDistributionMonthObserved({ filter });
   const { t } = useTranslation();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,15 +44,15 @@ const TemporalObservedOn = ({ data, isLoading }) => {
     }
   };
 
-  if (isLoading) {
+  if (observedOn.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
-  if (!data || Object.keys(data).length == 0) {
+  if (!observedOn.data.list || Object.keys(observedOn.data.list).length == 0) {
     return <div></div>;
   }
 
-  const years = Object.keys(data);
+  const years = Object.keys(observedOn.data.list);
   years.reverse();
 
   const handleOnChange = (e) => {
@@ -76,7 +78,7 @@ const TemporalObservedOn = ({ data, isLoading }) => {
             ))}
           </Select>
         </Box>
-        <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef} isStacked={true} />
+        <StackedHorizontalChart data={observedOn.data.list[years[currentIndex]]} ref={chartRef} isStacked={true} />
       </Box>
     </Box>
   );

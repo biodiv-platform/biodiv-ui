@@ -14,7 +14,8 @@ export default function useTemporalDistributionMonthObserved({ filter }) {
     });
 
     const { success, data } = await axGetListData({
-      ...filter
+      ...filter,
+      statsFilter: "observedOn"
     });
 
     setter((_draft) => {
