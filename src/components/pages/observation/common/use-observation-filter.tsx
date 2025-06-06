@@ -158,7 +158,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   }, [filter]);
 
   const updateMaxVotedRecoPermissions = async (observationList) => {
-    if (isLoggedIn) {
+    if (isLoggedIn && Array.isArray(observationList)) {
       const payload = observationList.reduce((acc, cv) => {
         const taxonId = cv?.recoShow?.recoIbp?.taxonId;
         return taxonId ? { ...acc, [cv.observationId]: taxonId } : acc;
@@ -185,9 +185,33 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft.n = -1;
           _draft.ml = [];
         });
+        setTotalCounts((_draft) => {
+          _draft.f = null;
+        });
+        setTopUploaders((_draft) => {
+          _draft.f = [];
+        })
+        setTopIdentifiers((_draft) => {
+          _draft.f = [];
+        })
+        setTaxon((_draft) => {
+          _draft.f = [];
+        })
+        setGroupObservedOn((_draft) => {
+          _draft.f = [];
+        })
+        setCountPerDay((_draft) => {
+          _draft.f = null;
+        })
+        setUniqueSpecies((_draft) => {
+          _draft.f = {};
+        })
+        setGroupTraits((_draft) => {
+          _draft.f = [];
+        })
       }
       const { location, ...otherValues } = filter.f;
-      const { data } = await axGetListData(
+      const { success, data } = await axGetListData(
         { ...otherValues },
         props.location ? { location: props.location } : location ? { location } : {}
       );
@@ -199,7 +223,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft?.l?.push(...deDupeObservations(_draft.l, data.observationList));
           _draft.hasMore = data.observationList?.length === Number(filter.f.max);
         } else {
-          _draft?.ml?.push(...deDupeObservations(_draft.ml, data.observationListMinimal));
+          _draft?.ml?.push(...(deDupeObservations(_draft.ml, data.observationListMinimal) || []));
           _draft.hasMore = data?.observationListMinimal?.length === Number(filter.f.max);
         }
         _draft.n = data.totalCount;
@@ -222,9 +246,9 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft.f = data.aggregateStatsData.groupTopIdentifiers;
         });
       }
-      if (data?.aggregateStatsData?.groupTopIdentifiers) {
+      if (data?.aggregateStatsData?.groupUniqueSpecies) {
         setUniqueSpecies((_draft) => {
-          _draft.f = data.aggregateStatsData.groupTopIdentifiers;
+          _draft.f = data.aggregateStatsData.groupUniqueSpecies;
         });
       }
       if (data?.aggregateStatsData?.groupTaxon) {
@@ -247,7 +271,9 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft.f = data.aggregateStatsData.groupTraits;
         });
       }
-      setIsLoading(false);
+      if (success) {
+        setIsLoading(false);
+      }
       NProgress.done();
     } catch (e) {
       console.error(e);

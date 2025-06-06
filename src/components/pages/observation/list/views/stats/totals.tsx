@@ -11,7 +11,7 @@ const Totals = ({ filter, observationData, speciesGroup, totalCounts, isLoading 
   const s = useMemo(() => {
     if (!filter.sGroup) {
       const sgroups = Object.values(observationData.ag.groupSpeciesName);
-      return sgroups.reduce((a: number, b: number) => a + b);
+      return sgroups.reduce((a: number, b: number) => a + b, 0);
     }
 
     const filteredGroups = speciesGroup.filter((sg) => filter.sGroup.includes(sg.id));

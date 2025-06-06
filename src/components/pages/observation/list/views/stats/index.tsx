@@ -1,4 +1,5 @@
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
+import Loading from "@components/pages/common/loading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import React from "react";
 
@@ -12,6 +13,7 @@ import TemporalObservedOn from "./temporal-observed-on";
 import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
+import TraitsPerMonth from "./traits-per-month";
 
 export default function StatsView() {
   const {
@@ -25,39 +27,45 @@ export default function StatsView() {
     taxon,
     countPerDay,
     groupObservedOn,
+    groupTraits,
     isLoading
   } = useObservationFilter();
-  /*const stats = useObservationData({ filter });
-  const data = stats.data.list;
-  const isLoading = stats.data.isLoading;*/
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div>
-      <Totals
-        filter={filter}
-        observationData={observationData}
-        speciesGroup={speciesGroup}
-        totalCounts={totalCounts}
-        isLoading={isLoading}
-      />
-      <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
-        <TopUploaders filter={filter} topUploaders={topUploaders} isLoading={isLoading} />
-        <TopIdentifiers filter={filter} topIdentifiers={topIdentifiers} />
-        <GridItem colSpan={2}>
-          <TaxanomicDistribution data={taxon} isLoading={isLoading} />
-        </GridItem>
-        <SpeciesGroups
+      {
+        <Totals
+          filter={filter}
           observationData={observationData}
           speciesGroup={speciesGroup}
-          filter={filter}
+          totalCounts={totalCounts}
+          isLoading={totalCounts==null}
         />
-        <LifeList filter={filter} uniqueSpecies={uniqueSpecies} />
+      }
+      <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
+        {topUploaders?.length && topUploaders?.length > 0 && <TopUploaders filter={filter} topUploaders={topUploaders} isLoading={isLoading} />}
+        <TopIdentifiers filter={filter} topIdentifiers={topIdentifiers} />
+        {
+          <GridItem colSpan={2}>
+            <TaxanomicDistribution data={taxon} isLoading={taxon==null || Object.keys(taxon).length == 0} />
+          </GridItem>
+        }
+        {totalCounts && (
+          <SpeciesGroups
+            observationData={observationData}
+            speciesGroup={speciesGroup}
+            filter={filter}
+          />
+        )}
+        {uniqueSpecies && Object.entries(uniqueSpecies)?.length  && Object.entries(uniqueSpecies)?.length>0 && <LifeList filter={filter} uniqueSpecies={uniqueSpecies} />}
       </SimpleGrid>
-      <ObservationsMap />
-      <StatesDistribution observationData={observationData} filter={filter} />
+      {isLoading && <ObservationsMap />}
+      {isLoading && <StatesDistribution observationData={observationData} filter={filter} />}
       <ObservationPerDay data={countPerDay} isLoading={isLoading} />
       <TemporalObservedOn data={groupObservedOn} isLoading={isLoading} />
-      {/*<TraitsPerMonth data={data.groupTraits} isLoading={isLoading} />*/}
+      <TraitsPerMonth data={groupTraits} isLoading={isLoading} />
     </div>
   );
 }

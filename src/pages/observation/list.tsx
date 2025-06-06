@@ -95,14 +95,14 @@ export const getServerSideProps = async (ctx) => {
       initialFilterParams,
       ...(includeTotals
         ? {
-            totalCounts: data.aggregateStatsData.totalCounts,
-            topUploaders: data.aggregateStatsData.groupTopUploaders,
-            topIdentifiers: data.aggregateStatsData.groupTopIdentifiers,
-            uniqueSpecies: data.aggregateStatsData.groupUniqueSpecies,
-            taxon: data.aggregateStatsData.groupTaxon,
-            countPerDay: data.aggregateStatsData.countPerDay,
-            groupObservedOn: data.aggregateStatsData.groupObservedOn,
-            traits: data.aggregateStatsData.groupTraits
+            totalCounts: data.aggregateStatsData?.totalCounts ?? null,
+            topUploaders: data.aggregateStatsData?.groupTopUploaders ?? [],
+            topIdentifiers: data.aggregateStatsData?.groupTopIdentifiers ?? [],
+            uniqueSpecies: data.aggregateStatsData?.groupUniqueSpecies ?? {},
+            taxon: data.aggregateStatsData?.groupTaxon ?? [],
+            countPerDay: data.aggregateStatsData?.countPerDay ?? [],
+            groupObservedOn: data.aggregateStatsData?.groupObservedOn ?? [],
+            traits: data.aggregateStatsData?.groupTraits ?? []
           }
         : {}),
       includeTotals: includeTotals
