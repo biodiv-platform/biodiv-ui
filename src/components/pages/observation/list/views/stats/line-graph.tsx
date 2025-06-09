@@ -145,7 +145,7 @@ const LineGraph = forwardRef(function LineGraph(
 
     svg.selectAll(".y-axis .tick").each(function (d) {
       const tick = select(this);
-      const label = d?.split?.("|")[1];
+      const label = d?.split?.("|")[2];
       const textEl = tick.select("text");
 
       // Cleanup any previous rects
@@ -161,7 +161,7 @@ const LineGraph = forwardRef(function LineGraph(
             .attr("y", -20)
             .attr("width", 20)
             .attr("height", 20)
-            .attr("fill", d?.split?.("|")[1]);
+            .attr("fill", d?.split?.("|")[2]);
         }
       }
 
@@ -233,7 +233,7 @@ const LineGraph = forwardRef(function LineGraph(
       svg.attr("height", h + 30 + rows * 40);
       const colorScale = scaleSequential(interpolateSpectral).domain([0, filteredData.length - 1]);
       const y = scaleBand()
-        .domain(filteredData.map((d) => d.name.split("|")[1]))
+        .domain(filteredData.map((d) => d.name.split("|")[2]))
         .range([50, h - mt - mb]);
 
       const maxValue = max(
@@ -305,7 +305,7 @@ const LineGraph = forwardRef(function LineGraph(
         .attr("d", (series) =>
           line()
             .x((d: any, i: number) => x(Months[i]) + ml + x.bandwidth() / 2 || ml)
-            .y((d: any) => y(series.name.split("|")[1]) + y.bandwidth() - ridge(d.value) * 45)(
+            .y((d: any) => y(series.name.split("|")[2]) + y.bandwidth() - ridge(d.value) * 45)(
             series.values
           )
         )
@@ -314,8 +314,8 @@ const LineGraph = forwardRef(function LineGraph(
         .on("mouseleave", tipHelpers.mouseleave);
       const areaGenerator = area()
         .x((d, i) => x(Months[i]) + ml + x.bandwidth() / 2 || 0)
-        .y1((d) => y(d.seriesName.split("|")[1]) + y.bandwidth() - ridge(d.value) * 45)
-        .y0((d) => y(d.seriesName.split("|")[1]) + y.bandwidth());
+        .y1((d) => y(d.seriesName.split("|")[2]) + y.bandwidth() - ridge(d.value) * 45)
+        .y0((d) => y(d.seriesName.split("|")[2]) + y.bandwidth());
 
       svg
         .select(".chart")
@@ -386,7 +386,7 @@ const LineGraph = forwardRef(function LineGraph(
 
       svg.selectAll(".y-axis .tick").each(function (d) {
         const tick = select(this);
-        const label = d?.split?.("|")[1];
+        const label = d?.split?.("|")[2];
         const textEl = tick.select("text");
 
         // Cleanup any previous rects
@@ -402,7 +402,7 @@ const LineGraph = forwardRef(function LineGraph(
               .attr("y", -20)
               .attr("width", 20)
               .attr("height", 20)
-              .attr("fill", d?.split?.("|")[1]);
+              .attr("fill", d?.split?.("|")[2]);
           }
         }
 
