@@ -536,10 +536,6 @@ export default function CreateGroupPageComponent({
                     label={t("group:homepage_customization.observation_map")}
                   />
                   <SwitchField
-                    name="showPartners"
-                    label={t("group:homepage_customization.about_us")}
-                  />
-                  <SwitchField
                     name="showDesc"
                     label={t("group:homepage_customization.show_desc")}
                   />

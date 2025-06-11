@@ -16,15 +16,11 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
 
   return (
     <MenuList>
-      {rows.map((item) => {
+      {rows.filter((item) => !(item.name === "about_us" && currentGroup?.id)).map((item) => {
         const [label, toLink] = useMemo(
           () => [
             item.name && t(isPage ? item.name : prefix + item.name),
-            item.name == "about_us"
-              ? currentGroup?.id
-                ? "/about"
-                : getPageLink(lang, item.to)
-              : getPageLink(lang, item.to)
+            getPageLink(lang, item.to)
           ],
           [lang]
         );

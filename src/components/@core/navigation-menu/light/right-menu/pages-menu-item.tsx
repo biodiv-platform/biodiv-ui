@@ -18,9 +18,14 @@ const SubMenuLink = ({ item, onClose }) => (
 );
 
 export default function PagesMenuItem({ onClose }) {
-  const { pages } = useGlobalState();
+  const { pages, currentGroup } = useGlobalState();
   const { t } = useTranslation();
-  const pagesMenu = useMemo(() => getPagesMenu(pages), [pages]);
+  const pagesMenu = useMemo(() => {
+    const menu = getPagesMenu(pages);
+    return currentGroup?.id
+      ? [...menu, { name: t("header:menu_secondary.more.about_us"), to: "/about" }]
+      : menu;
+  }, [pages]);
 
   return (
     <MenuList maxH="18.5rem" overflow="auto">
