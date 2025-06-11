@@ -7,7 +7,18 @@ import {
   EditIcon,
   ViewIcon
 } from "@chakra-ui/icons";
-import { Box, Button, Circle, Flex, Heading, Icon, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Circle,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Icon,
+  SimpleGrid,
+  Text
+} from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
 import { CheckboxField } from "@components/form/checkbox";
@@ -94,13 +105,13 @@ const steps = [
   { label: "Basic Details", content: "Enter personal details", icon: EditIcon },
   { label: "Group Coverage", content: "Select preferences", icon: GlobeIcon },
   { label: "User Roles", content: "Review & Submit", icon: UserCheckIcon },
-  { label: "Homepage Customisation", content: "Review & Submit", icon: HomeIcon },
-  { label: "Main Gallery Management", content: "Review & Submit", icon: ImageIcon },
+  { label: "Homepage Components", content: "Review & Submit", icon: HomeIcon },
+  { label: "Main Gallery", content: "Review & Submit", icon: ImageIcon },
   // { label: "Mini Gallery Management", content: "Review & Submit", icon: EditIcon },
-  { label: "Custom Fields Customisation", content: "Review & Submit", icon: ListIcon },
-  { label: "Group Rules Customisation", content: "Review & Submit", icon: CheckCircleIcon },
+  { label: "Custom Fields", content: "Review & Submit", icon: ListIcon },
+  { label: "Group Rules", content: "Review & Submit", icon: CheckCircleIcon },
   { label: "Observation Display", content: "Review & Submit", icon: ViewIcon },
-  { label: "Species Fields Customisation", content: "Review & Submit", icon: AtSignIcon }
+  { label: "Species Fields", content: "Review & Submit", icon: AtSignIcon }
 ];
 
 export default function CreateGroupPageComponent({
@@ -392,41 +403,70 @@ export default function CreateGroupPageComponent({
     <div className="container mt">
       <PageHeading>👥 {t("group:create.title")}</PageHeading>
       <Box mb={8}>
-        <Flex justify="space-between" align="center" mb={4}>
+        <Grid
+          templateColumns={`repeat(${steps.length * 2 - 1}, 1fr)`} // icon, arrow, icon, arrow...
+          gap={0}
+          alignItems="center"
+        >
+          {/* === ICONS AND ARROWS === */}
           {steps.map((step, index) => {
             const StepIcon = step.icon;
             const isActive = index === currentStep;
             const isCompleted = index < currentStep;
 
             const bgColor = isActive ? "blue.600" : isCompleted ? "green.500" : "white";
-
             const borderColor = isActive ? "blue.600" : isCompleted ? "green.500" : "gray.300";
-
-            const textColor = isActive ? "blue.600" : isCompleted ? "green.600" : "black.500";
-
             const iconColor = isActive || isCompleted ? "white" : "gray.400";
 
             return (
-              <Flex key={index} direction="column" align="center" flex="1">
-                <Circle
-                  as={Button}
-                  size="48px"
-                  border="2px solid"
-                  borderColor={borderColor}
-                  bg={bgColor}
-                  color={iconColor}
-                  mb={2}
-                  _hover={!isActive && !isCompleted ? { borderColor: "gray.400" } : {}}
-                >
-                  {isCompleted ? <CheckIcon boxSize={4} /> : <Icon as={StepIcon} boxSize={4} />}
-                </Circle>
-                <Text fontSize="sm" fontWeight="medium" textAlign="center" color={textColor}>
-                  {step.label}
-                </Text>
-              </Flex>
+              <>
+                {/* Step Icon */}
+                <GridItem key={`icon-${index}`} colSpan={1}>
+                  <Flex justify="center" align="center" w="100%">
+                    <Circle
+                      as={Button}
+                      size="48px"
+                      border="2px solid"
+                      borderColor={borderColor}
+                      bg={bgColor}
+                      color={iconColor}
+                      _hover={!isActive && !isCompleted ? { borderColor: "gray.400" } : {}}
+                    >
+                      {isCompleted ? <CheckIcon boxSize={4} /> : <Icon as={StepIcon} boxSize={4} />}
+                    </Circle>
+                  </Flex>
+                </GridItem>
+
+                {/* Arrow (skip for last item) */}
+                {index !== steps.length - 1 && (
+                  <GridItem key={`arrow-${index}`} colSpan={1} textAlign="center">
+                    <ChevronRightIcon boxSize={6} color="gray.400" />
+                  </GridItem>
+                )}
+              </>
             );
           })}
-        </Flex>
+
+          {/* === LABELS === */}
+          {steps.map((step, index) => {
+            const isActive = index === currentStep;
+            const isCompleted = index < currentStep;
+            const textColor = isActive ? "blue.600" : isCompleted ? "green.600" : "gray.600";
+
+            return (
+              <>
+                <GridItem key={`label-${index}`} colSpan={1} mt={2} textAlign="center">
+                  <Text fontSize="sm" fontWeight="medium" color={textColor}>
+                    {step.label}
+                  </Text>
+                </GridItem>
+
+                {/* Skip empty GridItem after last label */}
+                {index !== steps.length - 1 && <GridItem key={`label-gap-${index}`} colSpan={1} />}
+              </>
+            );
+          })}
+        </Grid>
       </Box>
       <Box p={6} rounded="lg" border="1px solid" borderColor="gray.200" boxShadow="sm" mb={4}>
         <Heading as="h2" fontSize={22} fontWeight="bold" color="gray.900" mb={2}>
@@ -585,43 +625,45 @@ export default function CreateGroupPageComponent({
           />
         )}
       </Box>
-      <Flex justify="space-between" align="center" mb={4}>
-        <Button
-          onClick={() => setCurrentStep((s) => s - 1)}
-          isDisabled={currentStep === 0}
-          leftIcon={<ChevronLeftIcon />}
-          px={6}
-          py={3}
-          borderRadius="lg"
-          transition="all 0.2s"
-          bg={currentStep === 0 ? "gray.100" : "gray.100"}
-          color={currentStep === 0 ? "gray.400" : "gray.700"}
-          _hover={currentStep === 0 ? {} : { bg: "gray.200" }}
-          cursor={currentStep === 0 ? "not-allowed" : "pointer"}
-        >
-          Previous
-        </Button>
+      {!isCreate && (
+        <Flex justify="space-between" align="center" mb={4}>
+          <Button
+            onClick={() => setCurrentStep((s) => s - 1)}
+            isDisabled={currentStep === 0}
+            leftIcon={<ChevronLeftIcon />}
+            px={6}
+            py={3}
+            borderRadius="lg"
+            transition="all 0.2s"
+            bg={currentStep === 0 ? "gray.100" : "blue.600"}
+            color={currentStep === 0 ? "gray.400" : "white"}
+            _hover={currentStep === 0 ? {} : { bg: "gray.200" }}
+            cursor={currentStep === 0 ? "not-allowed" : "pointer"}
+          >
+            Previous
+          </Button>
 
-        <Text fontSize="sm" color="gray.500">
-          Step {currentStep + 1} of {steps.length}
-        </Text>
+          <Text fontSize="sm" color="gray.500">
+            Step {currentStep + 1} of {steps.length}
+          </Text>
 
-        <Button
-          onClick={currentStep === steps.length - 1 ? handleFormSubmit : handleNext}
-          rightIcon={<ChevronRightIcon />}
-          px={6}
-          py={3}
-          borderRadius="lg"
-          transition="all 0.2s"
-          bg={currentStep === steps.length - 1 ? "green.600" : "blue.600"}
-          color="white"
-          _hover={{
-            bg: currentStep === steps.length - 1 ? "green.700" : "blue.700"
-          }}
-        >
-          {currentStep === steps.length - 1 ? "Create Group" : "Next"}
-        </Button>
-      </Flex>
+          <Button
+            onClick={currentStep === steps.length - 1 ? handleFormSubmit : handleNext}
+            rightIcon={<ChevronRightIcon />}
+            px={6}
+            py={3}
+            borderRadius="lg"
+            transition="all 0.2s"
+            bg={currentStep === steps.length - 1 ? "green.600" : "blue.600"}
+            color="white"
+            _hover={{
+              bg: currentStep === steps.length - 1 ? "green.700" : "blue.700"
+            }}
+          >
+            {currentStep === steps.length - 1 ? "Create Group" : "Next"}
+          </Button>
+        </Flex>
+      )}
     </div>
   );
 }

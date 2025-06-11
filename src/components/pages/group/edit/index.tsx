@@ -1,5 +1,16 @@
 import { AtSignIcon, CheckCircleIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
-import { Box, Button, Circle, Flex, Heading, Icon, Spinner, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Circle,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Icon,
+  Spinner,
+  Text
+} from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
 import GlobeIcon from "@icons/globe";
@@ -42,13 +53,13 @@ const steps = [
   { label: "Basic Details", content: "Enter personal details", icon: EditIcon },
   { label: "Group Coverage", content: "Select preferences", icon: GlobeIcon },
   { label: "User Roles", content: "Review & Submit", icon: UserCheckIcon },
-  { label: "Homepage Customisation", content: "Review & Submit", icon: HomeIcon },
-  { label: "Main Gallery Management", content: "Review & Submit", icon: ImageIcon },
+  { label: "Homepage Components", content: "Review & Submit", icon: HomeIcon },
+  { label: "Main Gallery", content: "Review & Submit", icon: ImageIcon },
   // { label: "Mini Gallery Management", content: "Review & Submit", icon: EditIcon },
-  { label: "Custom Fields Customisation", content: "Review & Submit", icon: ListIcon },
-  { label: "Group Rules Customisation", content: "Review & Submit", icon: CheckCircleIcon },
+  { label: "Custom Fields", content: "Review & Submit", icon: ListIcon },
+  { label: "Group Rules", content: "Review & Submit", icon: CheckCircleIcon },
   { label: "Observation Display", content: "Review & Submit", icon: ViewIcon },
-  { label: "Species Fields Customisation", content: "Review & Submit", icon: AtSignIcon }
+  { label: "Species Fields", content: "Review & Submit", icon: AtSignIcon }
 ];
 
 export default function EditGroupPageComponent({
@@ -87,7 +98,12 @@ export default function EditGroupPageComponent({
     <div className="container mt">
       <PageHeading>👥 {t("group:edit.title")}</PageHeading>
       <Box mb={8}>
-        <Flex justify="space-between" align="center" mb={4}>
+        <Grid
+          templateColumns={`repeat(${steps.length}, 1fr)`} // icon, arrow, icon, arrow...
+          gap={0}
+          alignItems="center"
+        >
+          {/* === ICONS AND ARROWS === */}
           {steps.map((step, index) => {
             const StepIcon = step.icon;
             const isActive = index === currentStep;
@@ -96,32 +112,47 @@ export default function EditGroupPageComponent({
 
             const borderColor = isActive ? "blue.600" : "gray.300";
 
-            const textColor = isActive ? "blue.600" : "black.500";
-
             const iconColor = isActive ? "white" : "gray.400";
 
             return (
-              <Flex key={index} direction="column" align="center" flex="1">
-                <Circle
-                  as={Button}
-                  onClick={() => setCurrentStep(index)}
-                  size="48px"
-                  border="2px solid"
-                  borderColor={borderColor}
-                  bg={bgColor}
-                  color={iconColor}
-                  mb={2}
-                  _hover={{ borderColor: "blue.400", bgColor: "blue.400", color: "white" }}
-                >
-                  {<Icon as={StepIcon} boxSize={4} />}
-                </Circle>
-                <Text fontSize="sm" fontWeight="medium" textAlign="center" color={textColor}>
-                  {step.label}
-                </Text>
-              </Flex>
+              <>
+                {/* Step Icon */}
+                <GridItem key={`icon-${index}`} colSpan={1}>
+                  <Flex justify="center" align="center" w="100%">
+                    <Circle
+                      as={Button}
+                      onClick={() => setCurrentStep(index)}
+                      size="48px"
+                      border="2px solid"
+                      borderColor={borderColor}
+                      bg={bgColor}
+                      color={iconColor}
+                      _hover={{ borderColor: "blue.400", bgColor: "blue.400", color: "white" }}
+                    >
+                      {<Icon as={StepIcon} boxSize={4} />}
+                    </Circle>
+                  </Flex>
+                </GridItem>
+              </>
             );
           })}
-        </Flex>
+
+          {/* === LABELS === */}
+          {steps.map((step, index) => {
+            const isActive = index === currentStep;
+            const textColor = isActive ? "blue.600" : "black.500";
+
+            return (
+              <>
+                <GridItem key={`label-${index}`} colSpan={1} mt={2} textAlign="center">
+                  <Text fontSize="sm" fontWeight="medium" color={textColor}>
+                    {step.label}
+                  </Text>
+                </GridItem>
+              </>
+            );
+          })}
+        </Grid>
       </Box>
       <Box p={6} rounded="lg" border="1px solid" borderColor="gray.200" boxShadow="sm" mb={4}>
         <Heading as="h2" fontSize={22} fontWeight="bold" color="gray.900" mb={2}>

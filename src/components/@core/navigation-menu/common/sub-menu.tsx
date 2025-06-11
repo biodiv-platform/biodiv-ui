@@ -12,7 +12,7 @@ const getPageLink = (lang, to) => {
 
 export default function SubMenu({ rows, prefix = "", isPage = false }) {
   const { t, lang } = useTranslation();
-  const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
+  const { isCurrentGroupMember, isLoggedIn, currentGroup } = useGlobalState();
 
   return (
     <MenuList>
@@ -20,7 +20,11 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
         const [label, toLink] = useMemo(
           () => [
             item.name && t(isPage ? item.name : prefix + item.name),
-            getPageLink(lang, item.to)
+            item.name == "about_us"
+              ? currentGroup?.id
+                ? "/about"
+                : getPageLink(lang, item.to)
+              : getPageLink(lang, item.to)
           ],
           [lang]
         );

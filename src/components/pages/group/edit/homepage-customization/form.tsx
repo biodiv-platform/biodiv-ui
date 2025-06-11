@@ -1,18 +1,14 @@
 import { Box, Button } from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axUploadEditorPageResource } from "@services/pages.service";
 import { axUpdateGroupHomePageDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import GallerySetup from "./gallery-setup";
-
-const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
 export default function HomePageCustomizationForm({ userGroupId, homePageDetails, currentStep }) {
   const { t } = useTranslation();
@@ -99,11 +95,6 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
               <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
               <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
             </Box>
-            <WYSIWYGField
-              name="description"
-              label={t("form:description.title")}
-              uploadHandler={axUploadEditorPageResource}
-            />
           </form>
         </FormProvider>
       )}
