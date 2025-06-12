@@ -32,11 +32,14 @@ export default function PagesMenuItem({ onClose }) {
       {pages.length ? (
         pagesMenu.map((item) => <SubMenuLink item={item} onClose={onClose} key={item.name} />)
       ) : (
+        <>
+        {pagesMenu.map((item) => <SubMenuLink item={item} onClose={onClose} key={item.name} />)}
         <LocalLink prefixGroup={true} href="/page/empty">
           <MenuItem as="a" w="full" onClick={onClose}>
             {t("header:menu_secondary.pages.empty")}
           </MenuItem>
         </LocalLink>
+        </>
       )}
     </MenuList>
   );

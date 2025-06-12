@@ -47,8 +47,8 @@ export default function AreaDrawField({
 
     const [minlng, minlat, maxlng, maxlat] = bbox({ type: "FeatureCollection", features });
     setCoordinates({
-      ne: [maxlng, minlat],
-      se: [minlng, maxlat]
+      ne: [maxlat, minlng],
+      se: [minlat, maxlng]
     });
   };
 
