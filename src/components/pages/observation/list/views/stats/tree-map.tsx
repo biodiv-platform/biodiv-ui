@@ -17,13 +17,14 @@ interface TreeMapProps {
   mr?: number;
   mb?: number;
   ml?: number;
+  loadMore;
+  currentParent: string;
+  currentDataPath;
+  decrease;
 }
 
 const TreeMapChart = forwardRef(
-  ({ data, w = 500, h = 400, mt = 30, mr = 30, mb = 30, ml = 30 }: TreeMapProps, ref) => {
-    const rootParent = "Root|1";
-    const [currentParent, setCurrentParent] = useState(rootParent);
-    const [currentDataPath, setCurrentDataPath] = useState([rootParent]);
+  ({ data, w = 500, h = 400, mt = 30, mr = 30, mb = 30, ml = 30 ,loadMore, currentParent, currentDataPath, decrease}: TreeMapProps, ref) => {
     const [color, setColor] = useState("");
     const svgRef = useRef(null);
     const containerRef = useRef(null);
@@ -109,9 +110,8 @@ const TreeMapChart = forwardRef(
             const c = children
               .sort((a, b) => b.value - a.value)
               .findIndex((child) => child.name === d.data.name);
+            loadMore(d.data.name);
             setColor(colors[c]);
-            setCurrentParent(d.data.name);
-            setCurrentDataPath(currentDataPath.concat(d.data.name));
           }
         });
 
@@ -195,8 +195,9 @@ const TreeMapChart = forwardRef(
           return i === 0 ? plainText : ` / ${plainText}`;
         })
         .on("click", function (event, d) {
-          setCurrentParent(d);
-          setCurrentDataPath(currentDataPath.slice(0, currentDataPath.indexOf(d) + 1));
+          decrease(d)
+          //setCurrentParent(d);
+          //setCurrentDataPath(currentDataPath.slice(0, currentDataPath.indexOf(d) + 1));
           setColor("");
         });
     }, [containerRef, ro?.width, h, data, currentParent]);

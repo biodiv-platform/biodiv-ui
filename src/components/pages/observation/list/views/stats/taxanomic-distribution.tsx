@@ -4,7 +4,7 @@ import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import TreeMapChart from "./tree-map";
 import useTaxonTreeData from "./use-taxon-tree-data";
@@ -12,6 +12,13 @@ import useTaxonTreeData from "./use-taxon-tree-data";
 const TaxanomicDistribution = ({filter }) => {
   const taxon = useTaxonTreeData({filter});
   const { t } = useTranslation();
+  const [currentParent, setCurrentParent] = useState("Root|1");
+  const [currentDataPath, setCurrentDataPath] = useState(["Root|1"]);
+  useEffect(() => {
+    // Whenever `filter` changes, reset both states
+    setCurrentParent("Root|1");
+    setCurrentDataPath(["Root|1"]);
+  }, [filter]);
 
   const chartRef = useRef<any>(null);
   const toast = useToast();
@@ -42,6 +49,17 @@ const TaxanomicDistribution = ({filter }) => {
     }
   };
 
+  const increaseDepth = (data) => {
+    setCurrentParent(data)
+    taxon.loadMore(data)
+    setCurrentDataPath(currentDataPath.concat(data));
+  }
+
+  const decrease = (data) => {
+    setCurrentParent(data)
+    setCurrentDataPath(currentDataPath.slice(0, currentDataPath.indexOf(data) + 1))
+  }
+
   if (taxon.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
@@ -59,7 +77,7 @@ const TaxanomicDistribution = ({filter }) => {
         </Button>
       </BoxHeading>
       <Box p={4}>
-        <TreeMapChart data={taxon.data.list} ref={chartRef} />
+        <TreeMapChart data={taxon.data.list} ref={chartRef} loadMore={increaseDepth} currentParent={currentParent} currentDataPath={currentDataPath} decrease={decrease}/>
       </Box>
     </Box>
   );

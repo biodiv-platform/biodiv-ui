@@ -9,7 +9,7 @@ import React, { useRef, useState } from "react";
 import StackedHorizontalChart from "./stacked-horizontal-chart";
 import useTemporalDistributionMonthObserved from "./use-temporal-distribution-month-observed";
 
-const TemporalObservedOn = ({filter}) => {
+const TemporalObservedOn = ({ filter }) => {
   const observedOn = useTemporalDistributionMonthObserved({ filter });
   const { t } = useTranslation();
 
@@ -17,6 +17,24 @@ const TemporalObservedOn = ({filter}) => {
 
   const chartRef = useRef<any>(null);
   const toast = useToast();
+
+  function get50YearIntervalKeys(maxYear, minYear) {
+    const intervals: string[] = [];
+
+    maxYear = parseInt(maxYear, 10);
+    minYear = parseInt(minYear, 10);
+
+    let end = maxYear;
+
+    while (end >= minYear) {
+      const start = Math.max(end - 49, 0); // 50-year span
+      const key = `${String(start).padStart(4, "0")}-${String(end).padStart(4, "0")}`;
+      intervals.push(key);
+      end = start - 1; // next interval block
+    }
+
+    return intervals;
+  }
 
   const handleDownload = async () => {
     try {
@@ -52,11 +70,11 @@ const TemporalObservedOn = ({filter}) => {
     return <div></div>;
   }
 
-  const years = Object.keys(observedOn.data.list);
-  years.reverse();
+  const years = get50YearIntervalKeys(observedOn.data.maxDate, observedOn.data.minDate);
 
   const handleOnChange = (e) => {
-    const v = e?.target?.value;
+    const v = parseInt(e?.target?.value, 10);
+    observedOn.loadMore(years[v]);
     setCurrentIndex(v);
   };
 
@@ -78,7 +96,11 @@ const TemporalObservedOn = ({filter}) => {
             ))}
           </Select>
         </Box>
-        <StackedHorizontalChart data={observedOn.data.list[years[currentIndex]]} ref={chartRef} isStacked={true} />
+        <StackedHorizontalChart
+          data={observedOn.data.list[years[currentIndex]] || []}
+          ref={chartRef}
+          isStacked={true}
+        />
       </Box>
     </Box>
   );

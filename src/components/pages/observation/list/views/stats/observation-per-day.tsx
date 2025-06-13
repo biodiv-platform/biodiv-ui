@@ -58,19 +58,30 @@ const ObservationPerDay = ({ filter }) => {
     return <div></div>;
   }
 
-  const years = Object.keys(countPerDay.data.list);
+  function getYearRange(startYear, endYear) {
+    const years : string[]= [];
+    for (let y = parseInt(startYear); y <= parseInt(endYear); y++) {
+      years.push(y.toString());
+    }
+    return years;
+  }
+
+  const years = getYearRange(countPerDay.data.minDate, countPerDay.data.maxDate)
   years.reverse();
 
   const prevSlide = () => {
+    countPerDay.loadMore(years[(currentIndex === years.length - 1 ? 0 : currentIndex + 1)])
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? years.length - 1 : prevIndex - 1));
   };
 
   const nextSlide = () => {
+    countPerDay.loadMore(years[(currentIndex === years.length - 1 ? 0 : currentIndex + 1)])
     setCurrentIndex((prevIndex) => (prevIndex === years.length - 1 ? 0 : prevIndex + 1));
   };
 
   const handleOnChange = (e) => {
     const v = parseInt(e.target.value, 10); // Ensure the value is an integer
+    countPerDay.loadMore(years[v])
     setCurrentIndex(v);
   };
 
@@ -109,7 +120,7 @@ const ObservationPerDay = ({ filter }) => {
         <Box padding={padding}>
           <CalendarHeatMap
             year={years[currentIndex]}
-            data={countPerDay.data.list[years[currentIndex]]}
+            data={countPerDay.data.list[years[currentIndex]]||[]}
             tooltipRenderer={ObservationTooltipRenderer}
             ref={chartRef}
           />

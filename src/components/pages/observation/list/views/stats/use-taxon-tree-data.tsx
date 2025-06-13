@@ -8,29 +8,34 @@ export default function useTaxonTreeData({ filter }) {
     isLoading: true
   });
 
-  const fetchGroupByTaxon = async (setter) => {
-    setter((_draft) => {
+  const fetchGroupByTaxon = async (offset) => {
+    setGroupByTaxon((_draft) => {
       _draft.isLoading = true;
     });
 
     const { success, data } = await axGetListData({
       ...filter,
-      statsFilter:"taxon"
+      statsFilter:offset
     });
 
-    setter((_draft) => {
+    setGroupByTaxon((_draft) => {
       if (success) {
-        _draft.list = data.aggregateStatsData.groupTaxon;
+        _draft.list = {...groupByTaxon.list,...data.aggregateStatsData.groupTaxon};
       }
       _draft.isLoading = false;
     });
   };
 
   useEffect(() => {
-    fetchGroupByTaxon(setGroupByTaxon);
+    fetchGroupByTaxon("taxon");
   }, [filter]);
 
+  const fetchMoreChildren = (taxon) => {
+    fetchGroupByTaxon(`taxon|${taxon.split("|")[1]}`)
+  }
+
   return {
-    data: groupByTaxon
+    data: groupByTaxon,
+    loadMore: fetchMoreChildren
   };
 }
