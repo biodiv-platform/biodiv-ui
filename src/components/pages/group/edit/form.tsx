@@ -71,7 +71,10 @@ export default function UserGroupEditForm({
       habitatId,
       speciesGroupId,
       allowUserToJoin,
-      spacialCoverage: `${neLongitude},${neLatitude},${neLongitude},${swLatitude},${swLongitude},${swLatitude},${swLongitude},${neLatitude},${neLongitude},${neLatitude}`
+      spacialCoverage: {
+        ne: [neLongitude, neLatitude],
+        se: [swLongitude, swLatitude]
+      }
     }
   });
 
