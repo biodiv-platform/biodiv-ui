@@ -81,16 +81,15 @@ export const getTraitIcon = (resourceUrl, w = 40) => {
 };
 
 export const getGroupImage = (resourceUrl) => {
-  return `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}`;
+  return `${SITE_CONFIG.SITE.API_ENDPOINT}files-api/api/get/crop/userGroups${resourceUrl}`;
 };
 
 export const getGroupImageThumb = (resourceUrl, height = 32) => {
   return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`
+    ? resourceUrl.startsWith("http")
+      ? `${resourceUrl}?h=${height}`
+      : `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`
     : `/next-assets/species/Unknown.svg`;
-};
-export const getGroupImageThumbForDatatable = (resourceUrl, height = 32) => {
-  return resourceUrl ? `${resourceUrl}?h=${height}` : `/next-assets/species/Unknown.svg`;
 };
 
 export const getSuggestionIcon = (resourceUrl) => {

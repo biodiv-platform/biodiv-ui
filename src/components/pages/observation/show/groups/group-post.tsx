@@ -5,7 +5,7 @@ import EditIcon from "@icons/edit";
 import { UserGroupIbp } from "@interfaces/observation";
 import { DEFAULT_GROUP } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
-import { getGroupImageThumb, getGroupImageThumbForDatatable } from "@utils/media";
+import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
@@ -30,8 +30,7 @@ export default function GroupPost({
   selectedDefault,
   resourceId,
   saveUserGroupsFunc,
-  columns,
-  isDataTable = false
+  columns
 }: IGroupPostProps) {
   const [finalGroups, setFinalGroups] = useState(selectedDefault);
   const [selectedGroups, setSelectedGroups] = useState<any>(
@@ -101,11 +100,7 @@ export default function GroupPost({
             <GroupBox
               key={og.id}
               link={og.webAddress}
-              icon={
-                isDataTable
-                  ? getGroupImageThumbForDatatable(og.icon, 40)
-                  : getGroupImageThumb(og.icon, 40)
-              }
+              icon={getGroupImageThumb(og.icon, 40)}
               name={og.name}
             />
           ))}
@@ -119,7 +114,6 @@ export default function GroupPost({
             options={filterGroups}
             defaultValue={selectedGroups}
             onChange={setSelectedGroups}
-            isDatatableUsergroups={isDataTable}
           />
         ) : (
           <LocalLink href="/group/list">
