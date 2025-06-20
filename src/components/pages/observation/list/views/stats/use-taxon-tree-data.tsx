@@ -15,12 +15,12 @@ export default function useTaxonTreeData({ filter }) {
 
     const { success, data } = await axGetListData({
       ...filter,
-      statsFilter:offset
+      statsFilter: offset
     });
 
     setGroupByTaxon((_draft) => {
       if (success) {
-        _draft.list = {...groupByTaxon.list,...data.aggregateStatsData.groupTaxon};
+        _draft.list = { ...groupByTaxon.list, ...data.aggregateStatsData.groupTaxon };
       }
       _draft.isLoading = false;
     });
@@ -31,8 +31,10 @@ export default function useTaxonTreeData({ filter }) {
   }, [filter]);
 
   const fetchMoreChildren = (taxon) => {
-    fetchGroupByTaxon(`taxon|${taxon.split("|")[1]}`)
-  }
+    if (Object.keys(groupByTaxon.list).filter((key) => key.split("|")[1].startsWith(taxon.split("|")[1])).length==1) {
+      fetchGroupByTaxon(`taxon|${taxon.split("|")[1]}`);
+    }
+  };
 
   return {
     data: groupByTaxon,

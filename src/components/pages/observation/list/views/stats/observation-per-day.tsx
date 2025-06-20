@@ -70,7 +70,7 @@ const ObservationPerDay = ({ filter }) => {
   years.reverse();
 
   const prevSlide = () => {
-    countPerDay.loadMore(years[(currentIndex === years.length - 1 ? 0 : currentIndex + 1)])
+    countPerDay.loadMore(years[(currentIndex === years.length - 1 ? 0 : currentIndex - 1)])
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? years.length - 1 : prevIndex - 1));
   };
 
