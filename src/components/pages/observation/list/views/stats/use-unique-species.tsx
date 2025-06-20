@@ -19,13 +19,14 @@ export default function useUniqueSpecies({ filter, location = "" }) {
     const { success, data } = await axGetListData(
       {
         ...filter,
-        lifelistoffset: reset ? 0 : getter.lifelistoffset
+        lifelistoffset: reset ? 0 : getter.lifelistoffset,
+        statsFilter: "lifelist"
       },
       location ? { location } : {}
     );
 
     setter((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData.groupUniqueSpecies!=null) {
         if (reset) {
           _draft.list = Object.entries(data.aggregateStatsData.groupUniqueSpecies);
           _draft.lifelistoffset = LIFE_LIST_LIMIT;

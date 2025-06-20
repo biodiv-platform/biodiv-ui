@@ -9,8 +9,10 @@ import React, { useRef, useState } from "react";
 
 import CalendarHeatMap from "./calendar-heatmap";
 import { ObservationTooltipRenderer } from "./static-data";
+import useTemporalDistributionCreatedOnData from "./use-temporal-distribution-created-on-data";
 
-const ObservationPerDay = ({ data, isLoading }) => {
+const ObservationPerDay = ({ filter }) => {
+  const countPerDay = useTemporalDistributionCreatedOnData({ filter });
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
   const toast = useToast();
@@ -48,27 +50,38 @@ const ObservationPerDay = ({ data, isLoading }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  if (isLoading) {
+  if (countPerDay.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
-  if (!data) {
+  if (!countPerDay.data.list) {
     return <div></div>;
   }
 
-  const years = Object.keys(data);
+  function getYearRange(startYear, endYear) {
+    const years : string[]= [];
+    for (let y = parseInt(startYear); y <= parseInt(endYear); y++) {
+      years.push(y.toString());
+    }
+    return years;
+  }
+
+  const years = getYearRange(countPerDay.data.minDate, countPerDay.data.maxDate)
   years.reverse();
 
   const prevSlide = () => {
+    countPerDay.loadMore(years[(currentIndex === years.length - 1 ? 0 : currentIndex - 1)])
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? years.length - 1 : prevIndex - 1));
   };
 
   const nextSlide = () => {
+    countPerDay.loadMore(years[(currentIndex === years.length - 1 ? 0 : currentIndex + 1)])
     setCurrentIndex((prevIndex) => (prevIndex === years.length - 1 ? 0 : prevIndex + 1));
   };
 
   const handleOnChange = (e) => {
     const v = parseInt(e.target.value, 10); // Ensure the value is an integer
+    countPerDay.loadMore(years[v])
     setCurrentIndex(v);
   };
 
@@ -107,7 +120,7 @@ const ObservationPerDay = ({ data, isLoading }) => {
         <Box padding={padding}>
           <CalendarHeatMap
             year={years[currentIndex]}
-            data={data[years[currentIndex]]}
+            data={countPerDay.data.list[years[currentIndex]]||[]}
             tooltipRenderer={ObservationTooltipRenderer}
             ref={chartRef}
           />

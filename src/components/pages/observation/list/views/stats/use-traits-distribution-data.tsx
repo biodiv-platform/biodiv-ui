@@ -14,7 +14,8 @@ export default function useTraitsDistributionData({ filter }) {
     });
 
     const { success, data } = await axGetListData({
-      ...filter
+      ...filter,
+      statsFilter: "traits"
     });
 
     setter((_draft) => {

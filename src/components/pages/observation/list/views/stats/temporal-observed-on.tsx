@@ -7,14 +7,34 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 
 import StackedHorizontalChart from "./stacked-horizontal-chart";
+import useTemporalDistributionMonthObserved from "./use-temporal-distribution-month-observed";
 
-const TemporalObservedOn = ({ data, isLoading }) => {
+const TemporalObservedOn = ({ filter }) => {
+  const observedOn = useTemporalDistributionMonthObserved({ filter });
   const { t } = useTranslation();
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const chartRef = useRef<any>(null);
   const toast = useToast();
+
+  function get50YearIntervalKeys(maxYear, minYear) {
+    const intervals: string[] = [];
+
+    maxYear = parseInt(maxYear, 10);
+    minYear = parseInt(minYear, 10);
+
+    let end = maxYear;
+
+    while (end >= minYear) {
+      const start = Math.max(end - 49, 0); // 50-year span
+      const key = `${String(start).padStart(4, "0")}-${String(end).padStart(4, "0")}`;
+      intervals.push(key);
+      end = start - 1; // next interval block
+    }
+
+    return intervals;
+  }
 
   const handleDownload = async () => {
     try {
@@ -42,19 +62,19 @@ const TemporalObservedOn = ({ data, isLoading }) => {
     }
   };
 
-  if (isLoading) {
+  if (observedOn.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
   }
 
-  if (!data || Object.keys(data).length == 0) {
+  if (!observedOn.data.list || Object.keys(observedOn.data.list).length == 0) {
     return <div></div>;
   }
 
-  const years = Object.keys(data);
-  years.reverse();
+  const years = get50YearIntervalKeys(observedOn.data.maxDate, observedOn.data.minDate);
 
   const handleOnChange = (e) => {
-    const v = e?.target?.value;
+    const v = parseInt(e?.target?.value, 10);
+    observedOn.loadMore(years[v]);
     setCurrentIndex(v);
   };
 
@@ -76,7 +96,11 @@ const TemporalObservedOn = ({ data, isLoading }) => {
             ))}
           </Select>
         </Box>
-        <StackedHorizontalChart data={data[years[currentIndex]]} ref={chartRef} isStacked={true} />
+        <StackedHorizontalChart
+          data={observedOn.data.list[years[currentIndex]] || []}
+          ref={chartRef}
+          isStacked={true}
+        />
       </Box>
     </Box>
   );

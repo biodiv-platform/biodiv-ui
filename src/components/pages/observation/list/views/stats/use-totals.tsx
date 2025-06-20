@@ -14,7 +14,8 @@ export default function useTotals({ filter }) {
     });
 
     const { success, data } = await axGetListData({
-      ...filter
+      ...filter,
+      statsFilter: "totals"
     });
 
     setter((_draft) => {

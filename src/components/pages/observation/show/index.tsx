@@ -1,6 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import CarouselObservation from "@components/@core/carousel";
-import useObservationStatsData from "@components/pages/species/show/sidebar/use-observation-stats-data";
 import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
@@ -19,8 +18,6 @@ import { RESOURCE_TYPE } from "@static/constants";
 import React, { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
-import TemporalObservedOn from "../list/views/stats/temporal-observed-on";
-import TraitsPerMonth from "../list/views/stats/traits-per-month";
 import Activity from "./activity";
 import CheckListAnnotation from "./checkListAnnotation";
 import CustomFields from "./custom-fields";
@@ -48,18 +45,6 @@ export default function ObservationShowPageComponent({
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
-  let statsData = {
-    data: {
-      list: {
-        groupTraits: [],
-        groupObservedOn: {}
-      },
-      isLoading: false
-    }
-  };
-  if (o.recoIbp?.taxonId != null && o.recoIbp?.taxonId != undefined) {
-    statsData = useObservationStatsData(o.recoIbp?.taxonId);
-  }
 
   useEffect(() => {
     setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name || "");
@@ -152,18 +137,6 @@ export default function ObservationShowPageComponent({
               longitude={o.observation?.longitude}
               geoprivacy={o.observation?.geoPrivacy}
             />
-          )}
-          {o.recoIbp?.taxonId && (
-            <>
-              <TemporalObservedOn
-                data={statsData.data.list.groupObservedOn}
-                isLoading={statsData.data.isLoading}
-              />
-              <TraitsPerMonth
-                data={statsData.data.list.groupTraits}
-                isLoading={statsData.data.isLoading}
-              />
-            </>
           )}
           {o.esLayerInfo && (
             <>
