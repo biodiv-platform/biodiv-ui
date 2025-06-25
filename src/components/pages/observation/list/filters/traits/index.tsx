@@ -5,17 +5,19 @@ import CheckboxFilterPanel from "../shared/checkbox";
 import SubAccordion from "../shared/sub-accordion";
 
 export default function TraitsFilter() {
-  const { traits } = useObservationFilter();
+  const { observationData } = useObservationFilter();
 
-  return traits.length ? (
+  return Object.keys(observationData.ag.groupTraits||{}).length ? (
     <SubAccordion>
-      {traits.map((trait) => (
+      {Object.keys(observationData.ag.groupTraits||{}).map((trait) => (
         <CheckboxFilterPanel
-          key={trait.id}
-          label={trait.name}
-          filterKey={`trait_${trait.id}.string`}
-          options={trait.traitValues}
-          statKey={`groupTraits.${trait.name}`}
+          key={trait.split("|")[1]}
+          label={trait.split("|")[0]}
+          filterKey={`trait_${trait.split("|")[1]}.string`}
+          options={Object.keys(observationData.ag.groupTraits?.[trait] || {}).map(
+            (value) => ({ value })
+          )}
+          statKey={`groupTraits.${trait.split("|")[0]}|${trait.split("|")[1]}`}
           skipOptionsTranslation={true}
         />
       ))}

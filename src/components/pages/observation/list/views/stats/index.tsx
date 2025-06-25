@@ -16,14 +16,14 @@ import TraitsPerMonth from "./traits-per-month";
 import useObservationData from "./use-observation-data";
 
 export default function StatsView() {
-  const { observationData, speciesGroup, filter } = useObservationFilter();
+  const { observationData, filter } = useObservationFilter();
   const stats = useObservationData({ filter });
   const data = stats.data.list;
   const isLoading = stats.data.isLoading;
 
   return (
     <div>
-      <Totals filter={filter} observationData={observationData} speciesGroup={speciesGroup} />
+      <Totals filter={filter} observationData={observationData} />
       <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
         <TopUploaders filter={filter} />
         <TopIdentifiers filter={filter} />
@@ -32,7 +32,6 @@ export default function StatsView() {
         </GridItem>
         <SpeciesGroups
           observationData={observationData}
-          speciesGroup={speciesGroup}
           filter={filter}
         />
         <LifeList filter={filter} />

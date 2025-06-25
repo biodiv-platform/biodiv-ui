@@ -9,7 +9,7 @@ import React, { useMemo, useRef } from "react";
 import { SpeciesTooltipRenderer } from "./static-data";
 import VerticalBarChart from "./vertcal-bar-chart";
 
-const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
+const SpeciesGroups = ({ observationData, filter }) => {
   const { t } = useTranslation();
 
   const chartRef = useRef<any>(null);
@@ -45,16 +45,21 @@ const SpeciesGroups = ({ observationData, speciesGroup, filter }) => {
     if (!filter.sGroup) {
       const sgroups = Object.keys(observationData.ag.groupSpeciesName);
       return sgroups.map((v) => ({
-        sgroup: v,
+        sgroup: v.split("|")[1],
         count: observationData.ag.groupSpeciesName[v]
       }));
     }
 
-    const filteredGroups = speciesGroup.filter((sg) => filter.sGroup.includes(sg.id));
+    const sGroupArray = Array.isArray(filter.sGroup) ? filter.sGroup : [filter.sGroup];
+
+    const filteredGroups = Object.keys(observationData.ag.groupSpeciesName).filter((sg) => {
+      const id = sg.split("|")[0];
+      return sGroupArray.includes(id);
+    });
 
     return filteredGroups.map((sg) => ({
-      sgroup: sg.name,
-      count: observationData.ag.groupSpeciesName[sg.name]
+      sgroup: sg.split("|")[1],
+      count: observationData.ag.groupSpeciesName[sg]
     }));
   }, [filter, observationData]);
 

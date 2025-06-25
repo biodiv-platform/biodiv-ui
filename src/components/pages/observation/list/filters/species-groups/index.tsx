@@ -6,16 +6,18 @@ import React, { useMemo } from "react";
 import CustomCheckbox from "./checkbox";
 
 const SpeciesGroupsFilter = () => {
-  const { speciesGroup, filter, setFilter, observationData } = useObservationFilter();
+  const { filter, setFilter, observationData } = useObservationFilter();
 
   const defaultValue = useMemo(() => stringToArray(filter?.sGroup), []);
-  const speciesGroupList = useMemo(
-    () =>
-      speciesGroup
-        ?.filter((o) => o.name !== "All") // removes All from filter explicitly
-        .sort((a, b) => (a?.order || 0) - (b.order || 0)),
-    speciesGroup
-  );
+  const speciesGroupList = useMemo(() => {
+    return Object.keys(observationData?.ag?.groupSpeciesName || {})
+      .filter((o) => o.split("|")[1] !== "All") // removes All from filter explicitly
+      .sort(
+        (a, b) =>
+          parseInt(a.split("|")[2] || "0", 10) -
+          parseInt(b.split("|")[2] || "0", 10)
+      );
+  }, [observationData?.ag?.groupSpeciesName]);
 
   const onChange = (v) => {
     setFilter((_draft) => {
@@ -37,11 +39,11 @@ const SpeciesGroupsFilter = () => {
     <SimpleGrid gridGap={2} columns={5}>
       {speciesGroupList?.map((o) => (
         <CustomCheckbox
-          key={o.id}
-          id={o.id?.toString()}
-          label={o.name}
-          stat={o.name ? observationData?.ag?.groupSpeciesName?.[o.name] : 0}
-          {...getCheckboxProps({ value: o.id?.toString() })}
+          key={o.split("|")[0]}
+          id={o.split("|")[0]?.toString()}
+          label={o.split("|")[1]}
+          stat={o.split("|")[1] ? observationData?.ag?.groupSpeciesName?.[o] : 0}
+          {...getCheckboxProps({ value: o.split("|")[0]?.toString() })}
         />
       ))}
     </SimpleGrid>
