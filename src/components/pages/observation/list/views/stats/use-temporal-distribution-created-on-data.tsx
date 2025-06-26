@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -42,7 +43,7 @@ export default function useTemporalDistributionCreatedOnData({ filter }) {
         ...remaining_filter,
         createdOnMinDate: (createdOnMinDate && createdOnMinDate>`${year}-01-01T00:00:00Z`)?createdOnMinDate:`${year}-01-01T00:00:00Z`,
         createdOnMaxDate: (createdOnMaxDate && createdOnMaxDate<`${year}-12-31T00:00:00Z`)?createdOnMaxDate:`${year}-12-31T00:00:00Z`,
-        statsFilter: "countPerDay"
+        statsFilter: STATS_FILTER.COUNT_PER_DAY
       });
 
       if (success && data.aggregateStatsData) {

@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -15,7 +16,7 @@ export default function useTotals({ filter }) {
 
     const { success, data } = await axGetListData({
       ...filter,
-      statsFilter: "totals"
+      statsFilter: STATS_FILTER.TOTALS
     });
 
     setter((_draft) => {

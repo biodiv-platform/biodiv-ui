@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -49,7 +50,7 @@ export default function useTemporalDistributionMonthObserved({ filter }) {
           maxDate && maxDate < year.split("-")[1] + "-12-31T00:00:00Z"
             ? maxDate
             : year.split("-")[1] + "-12-31T00:00:00Z",
-        statsFilter: "observedOn"
+        statsFilter: STATS_FILTER.OBSERVED_ON
       });
 
       setTemporalDistributionData((_draft) => {

@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -15,7 +16,7 @@ export default function useTraitsDistributionData({ filter }) {
 
     const { success, data } = await axGetListData({
       ...filter,
-      statsFilter: "traits"
+      statsFilter: STATS_FILTER.TRAITS
     });
 
     setter((_draft) => {

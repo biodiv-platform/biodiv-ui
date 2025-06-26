@@ -196,8 +196,6 @@ const TreeMapChart = forwardRef(
         })
         .on("click", function (event, d) {
           decrease(d)
-          //setCurrentParent(d);
-          //setCurrentDataPath(currentDataPath.slice(0, currentDataPath.indexOf(d) + 1));
           setColor("");
         });
     }, [containerRef, ro?.width, h, data, currentParent]);

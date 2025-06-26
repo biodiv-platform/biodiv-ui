@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -20,7 +21,7 @@ export default function useUniqueSpecies({ filter, location = "" }) {
       {
         ...filter,
         lifelistoffset: reset ? 0 : getter.lifelistoffset,
-        statsFilter: "lifelist"
+        statsFilter: STATS_FILTER.LIFELIST
       },
       location ? { location } : {}
     );

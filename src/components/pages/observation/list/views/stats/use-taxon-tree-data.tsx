@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -27,12 +28,12 @@ export default function useTaxonTreeData({ filter }) {
   };
 
   useEffect(() => {
-    fetchGroupByTaxon("taxon");
+    fetchGroupByTaxon(STATS_FILTER.TAXON);
   }, [filter]);
 
   const fetchMoreChildren = (taxon) => {
     if (Object.keys(groupByTaxon.list).filter((key) => key.split("|")[1].startsWith(taxon.split("|")[1])).length==1) {
-      fetchGroupByTaxon(`taxon|${taxon.split("|")[1]}`);
+      fetchGroupByTaxon(`${STATS_FILTER.TAXON}|${taxon.split("|")[1]}`);
     }
   };
 
