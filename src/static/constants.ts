@@ -14,7 +14,7 @@ export const ENDPOINT = {
   DATATABLE: `${API_ENDPOINT}dataTable-api/api`,
   DOCUMENT: `${API_ENDPOINT}document-api/api`,
   ESMODULE: `${API_ENDPOINT}esmodule-api/api`,
-  FILES: `${API_ENDPOINT}files-api/api`,
+  FILES: `${SITE_CONFIG.SITE.API_ENDPOINT}files-api/api`,
   GEOENTITIES: `${API_ENDPOINT}geoentities-api/api`,
   GEOSERVER: `${SITE_CONFIG.GEOSERVER_BASE_PATH}/geoserver`,
   INTEGRATOR: `${API_ENDPOINT}integrator-api/api`,
@@ -175,4 +175,4 @@ export const STATS_FILTER = {
   TOTALS: "totals",
   TRAITS: "traits",
   LIFELIST: "lifelist"
-}
+};
