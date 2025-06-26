@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -18,11 +19,12 @@ export default function useTopUploaders({ filter }) {
 
     const { success, data } = await axGetListData({
       ...filter,
-      uploadersoffset: reset ? 0 : getter.uploadersoffset
+      uploadersoffset: reset ? 0 : getter.uploadersoffset,
+      statsFilter: STATS_FILTER.UPLOADERS
     });
 
     setter((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData) {
         if (reset) {
           _draft.list = data.aggregateStatsData.groupTopUploaders;
           _draft.uploadersoffset = UPLOADERS_LIMIT;

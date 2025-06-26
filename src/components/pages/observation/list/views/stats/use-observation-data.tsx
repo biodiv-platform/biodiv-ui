@@ -19,7 +19,8 @@ export default function useObservationData({ filter }) {
     });
 
     const { success, data } = await axGetListData({
-      ...filter
+      ...filter,
+      statsFilter: "taxon"
     });
 
     setter((_draft) => {

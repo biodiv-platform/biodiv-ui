@@ -1,6 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import CarouselObservation from "@components/@core/carousel";
-import useObservationStatsData from "@components/pages/species/show/sidebar/use-observation-stats-data";
 import useGlobalState from "@hooks/use-global-state";
 import {
   ObservationUserPermission,
@@ -44,22 +43,10 @@ export default function ObservationShowPageComponent({
   traits,
   speciesGroups
 }: IObservationShowPageComponentProps) {
-  const { isLoggedIn } = useGlobalState();
+  const { isLoggedIn, currentGroup } = useGlobalState();
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
-  let statsData = {
-    data: {
-      list: {
-        groupTraits: [],
-        groupObservedOn: {}
-      },
-      isLoading: false
-    }
-  };
-  if (o.recoIbp?.taxonId != null && o.recoIbp?.taxonId != undefined) {
-    statsData = useObservationStatsData(o.recoIbp?.taxonId);
-  }
 
   useEffect(() => {
     setSpeciesGroup(speciesGroups.find((sg) => sg.id === o.observation?.groupId)?.name || "");
@@ -156,12 +143,24 @@ export default function ObservationShowPageComponent({
           {o.recoIbp?.taxonId && (
             <>
               <TemporalObservedOn
-                data={statsData.data.list.groupObservedOn}
-                isLoading={statsData.data.isLoading}
+                filter={{
+                  view: "stats",
+                  max:8,
+                  offset: 0,
+                  userGroupList: currentGroup?.id || undefined,
+                  taxon: String(o.recoIbp?.taxonId),
+                  showData: "true"
+                }}
               />
               <TraitsPerMonth
-                data={statsData.data.list.groupTraits}
-                isLoading={statsData.data.isLoading}
+                filter={{
+                  view: "stats",
+                  max:8,
+                  offset: 0,
+                  userGroupList: currentGroup?.id || undefined,
+                  taxon: String(o.recoIbp?.taxonId),
+                  showData: "true"
+                }}
               />
             </>
           )}

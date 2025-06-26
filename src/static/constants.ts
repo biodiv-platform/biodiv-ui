@@ -165,3 +165,14 @@ export const ACTIONS = {
   UNSELECTALL: "unSelectAll",
   NEXTPAGESELECT: "nextPageSelect"
 };
+
+export const STATS_FILTER = {
+  TAXON: "taxon",
+  COUNT_PER_DAY: "countPerDay",
+  OBSERVED_ON: "observedOn",
+  IDENTIFIERS: "identifiers",
+  UPLOADERS: "uploaders",
+  TOTALS: "totals",
+  TRAITS: "traits",
+  LIFELIST: "lifelist"
+}

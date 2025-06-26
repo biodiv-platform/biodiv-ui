@@ -22,7 +22,7 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
     );
 
     return filteredCounts.reduce((a, b) => a + b);
-  }, [filter]);
+  }, [filter, observationData.ag.groupSpeciesName]);
 
   const totals = { totalObservations: s, ...totalsData.data.list };
   const isLoading = totalsData.data.isLoading;
