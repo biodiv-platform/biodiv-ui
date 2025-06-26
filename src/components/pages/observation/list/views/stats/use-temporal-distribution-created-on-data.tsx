@@ -18,7 +18,7 @@ export default function useTemporalDistributionCreatedOnData({ filter }) {
       statsFilter: "min|created_on"
     });
 
-    if (success) {
+    if (success && data.aggregateStatsData) {
       const maxYear = data.aggregateStatsData.maxDate?.split("-")[0];
       const minYear = data.aggregateStatsData.minDate?.split("-")[0];
 
@@ -45,7 +45,7 @@ export default function useTemporalDistributionCreatedOnData({ filter }) {
         statsFilter: "countPerDay"
       });
 
-      if (success) {
+      if (success && data.aggregateStatsData) {
         setTemporalDistributionData((_draft) => {
           _draft.list = {
             ..._draft.list, // use _draft.list, not stale outer state

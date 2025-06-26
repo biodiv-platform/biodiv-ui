@@ -23,7 +23,7 @@ export default function useTopIdentifiers({ filter }) {
     });
 
     setter((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData) {
         if (reset) {
           _draft.list = data.aggregateStatsData.groupTopIdentifiers;
           _draft.identifiersoffset = IDENTIFIERS_LIMIT;

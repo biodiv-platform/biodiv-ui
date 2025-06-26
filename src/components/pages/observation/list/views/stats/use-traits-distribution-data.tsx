@@ -20,7 +20,7 @@ export default function useTraitsDistributionData({ filter }) {
 
     setter((_draft) => {
       if (success) {
-        _draft.list = data.aggregateStatsData.groupTraits;
+        _draft.list = data.aggregateStatsData?.groupTraits;
       }
       _draft.isLoading = false;
     });

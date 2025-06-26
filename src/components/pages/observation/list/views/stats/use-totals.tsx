@@ -19,7 +19,7 @@ export default function useTotals({ filter }) {
     });
 
     setter((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData) {
         _draft.list = { ...data.aggregateStatsData.totalCounts };
       }
       _draft.isLoading = false;

@@ -18,9 +18,9 @@ export default function useTemporalDistributionMonthObserved({ filter }) {
       statsFilter: "min|from_date"
     });
 
-    if (success) {
-      const maxYear = data.aggregateStatsData.maxDate?.split("-")[0];
-      const minYear = data.aggregateStatsData.minDate?.split("-")[0];
+    if (success && data.aggregateStatsData) {
+      const maxYear = data.aggregateStatsData?.maxDate?.split("-")[0];
+      const minYear = data.aggregateStatsData?.minDate?.split("-")[0];
 
       setTemporalDistributionData((_draft) => {
         _draft.maxDate = maxYear;
@@ -53,7 +53,7 @@ export default function useTemporalDistributionMonthObserved({ filter }) {
       });
 
       setTemporalDistributionData((_draft) => {
-        if (success) {
+        if (success && data.aggregateStatsData) {
           _draft.list = {
             ...temporalDistributionData.list,
             ...data.aggregateStatsData.groupObservedOn

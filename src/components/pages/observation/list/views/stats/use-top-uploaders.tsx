@@ -23,7 +23,7 @@ export default function useTopUploaders({ filter }) {
     });
 
     setter((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData) {
         if (reset) {
           _draft.list = data.aggregateStatsData.groupTopUploaders;
           _draft.uploadersoffset = UPLOADERS_LIMIT;

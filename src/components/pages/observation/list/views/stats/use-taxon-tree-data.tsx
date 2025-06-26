@@ -19,7 +19,7 @@ export default function useTaxonTreeData({ filter }) {
     });
 
     setGroupByTaxon((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData) {
         _draft.list = { ...groupByTaxon.list, ...data.aggregateStatsData.groupTaxon };
       }
       _draft.isLoading = false;
