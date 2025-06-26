@@ -43,7 +43,7 @@ export default function ScientificNamesTable({
                 <Td>
                   {taxonConceptId != null ? (
                     <LocalLink
-                      href={`/taxonomy/list?showTaxon=${taxonConceptId}&taxonId=${taxonConceptId}`}
+                      href={`/taxonomy/list&showTaxon=${taxonConceptId}&taxonId=${taxonConceptId}`}
                       prefixGroup={true}
                     >
                       <ExternalBlueLink>{canonicalForm}</ExternalBlueLink>

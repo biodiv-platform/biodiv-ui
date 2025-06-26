@@ -75,7 +75,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [cropObservationData, setCropObservationData] = useState();
   const [canCropObservation, setCanCropObservation] = useState();
   const [allMedia, setAllMedia] = useState(
-    props.observationData.mediaToggle === MEDIA_TOGGLE.WITH_MEDIA ? false : true
+    props.observationData.mediaToggle === MEDIA_TOGGLE.WITH_MEDIA ? true : false
   );
 
   const setCropObservationId = async (id, canCrop) => {
@@ -220,10 +220,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const addMediaToggle = (e) => {
     if (e.target.checked) {
       setAllMedia(true);
-      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio,no_media");
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio");
     } else {
       setAllMedia(false);
-      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio");
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio,no_media");
     }
   };
 
