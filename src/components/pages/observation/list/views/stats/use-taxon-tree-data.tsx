@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -8,32 +9,36 @@ export default function useTaxonTreeData({ filter }) {
     isLoading: true
   });
 
-  const fetchGroupByTaxon = async (setter, taxonId) => {
-    setter((_draft) => {
+  const fetchGroupByTaxon = async (offset) => {
+    setGroupByTaxon((_draft) => {
       _draft.isLoading = true;
     });
 
     const { success, data } = await axGetListData({
       ...filter,
-      taxon: taxonId
+      statsFilter: offset
     });
 
-    setter((_draft) => {
-      if (success) {
-        _draft.list = data.aggregateStatsData.groupTaxon;
+    setGroupByTaxon((_draft) => {
+      if (success && data.aggregateStatsData) {
+        _draft.list = { ...groupByTaxon.list, ...data.aggregateStatsData.groupTaxon };
       }
       _draft.isLoading = false;
     });
   };
 
-  const loadMore = (taxonId) => fetchGroupByTaxon(setGroupByTaxon, taxonId);
-
   useEffect(() => {
-    fetchGroupByTaxon(setGroupByTaxon, "1");
+    fetchGroupByTaxon(STATS_FILTER.TAXON);
   }, [filter]);
+
+  const fetchMoreChildren = (taxon) => {
+    if (Object.keys(groupByTaxon.list).filter((key) => key.split("|")[1].startsWith(taxon.split("|")[1])).length==1) {
+      fetchGroupByTaxon(`${STATS_FILTER.TAXON}|${taxon.split("|")[1]}`);
+    }
+  };
 
   return {
     data: groupByTaxon,
-    loadMore: loadMore
+    loadMore: fetchMoreChildren
   };
 }

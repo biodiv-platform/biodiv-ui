@@ -7,8 +7,10 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useRef } from "react";
 
 import LineGraph from "./line-graph";
+import useTraitsDistributionData from "./use-traits-distribution-data";
 
-const TraitsPerMonth = ({ data, isLoading }) => {
+const TraitsPerMonth = ({filter}) => {
+  const traits = useTraitsDistributionData({ filter });
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
 
@@ -27,15 +29,15 @@ const TraitsPerMonth = ({ data, isLoading }) => {
     };
     axAddDownloadLog(payload);
   };
-  if (isLoading) {
+  if (traits.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" />;
   }
 
-  if (!data || data.length==0) {
+  if (!traits.data.list || traits.data.list.length==0) {
     return <div></div>;
   }
 
-  data = data.slice().reverse();
+  const reversedList = traits.data.list.slice().reverse();
 
   return (
     <Box className="white-box" mb={4}>
@@ -46,7 +48,7 @@ const TraitsPerMonth = ({ data, isLoading }) => {
         </Button>
       </BoxHeading>
       <Box position={"relative"}>
-        <LineGraph data={data} ref={chartRef} />
+        <LineGraph data={reversedList} ref={chartRef} />
       </Box>
     </Box>
   );
