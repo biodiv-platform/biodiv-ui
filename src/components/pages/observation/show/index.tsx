@@ -18,6 +18,8 @@ import { RESOURCE_TYPE } from "@static/constants";
 import React, { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
+import TemporalObservedOn from "../list/views/stats/temporal-observed-on";
+import TraitsPerMonth from "../list/views/stats/traits-per-month";
 import Activity from "./activity";
 import CheckListAnnotation from "./checkListAnnotation";
 import CustomFields from "./custom-fields";
@@ -41,7 +43,7 @@ export default function ObservationShowPageComponent({
   traits,
   speciesGroups
 }: IObservationShowPageComponentProps) {
-  const { isLoggedIn } = useGlobalState();
+  const { isLoggedIn, currentGroup } = useGlobalState();
   const [o, setO] = useImmer<ShowData>(observation);
   const [permission, setPermission] = useState<ObservationUserPermission>();
   const [speciesGroup, setSpeciesGroup] = useState<any>("");
@@ -137,6 +139,30 @@ export default function ObservationShowPageComponent({
               longitude={o.observation?.longitude}
               geoprivacy={o.observation?.geoPrivacy}
             />
+          )}
+          {o.recoIbp?.taxonId && (
+            <>
+              <TemporalObservedOn
+                filter={{
+                  viw: "stats",
+                  max:8,
+                  offset: 0,
+                  userGroupList: currentGroup?.id || undefined,
+                  taxon: String(o.recoIbp?.taxonId),
+                  showData: "true"
+                }}
+              />
+              <TraitsPerMonth
+                filter={{
+                  viw: "stats",
+                  max:8,
+                  offset: 0,
+                  userGroupList: currentGroup?.id || undefined,
+                  taxon: String(o.recoIbp?.taxonId),
+                  showData: "true"
+                }}
+              />
+            </>
           )}
           {o.esLayerInfo && (
             <>
