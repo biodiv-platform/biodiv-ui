@@ -17,9 +17,6 @@ import TraitsPerMonth from "./traits-per-month";
 
 export default function StatsView() {
   const { observationData, filter } = useObservationFilter();
-  const stats = useObservationData({ filter });
-  const data = stats.data.list;
-  const isLoading = stats.data.isLoading;
 
   return (
     <div>
