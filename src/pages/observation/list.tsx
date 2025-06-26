@@ -36,9 +36,9 @@ export const getServerSideProps = async (ctx) => {
   const CUSTOM_FILTER = { ...DEFAULT_FILTER };
 
   if (currentGroup.id && customisations.mediaToggle === "All") {
-    CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+    CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio";
   } else if (!currentGroup.id && SITE_CONFIG.OBSERVATION.MEDIA_TOGGLE === "All") {
-    CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio,no_media";
+    CUSTOM_FILTER.mediaFilter = "no_of_images,no_of_videos,no_of_audio";
   }
 
   const initialFilterParams = {
