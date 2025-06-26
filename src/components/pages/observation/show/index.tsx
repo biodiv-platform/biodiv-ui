@@ -144,7 +144,7 @@ export default function ObservationShowPageComponent({
             <>
               <TemporalObservedOn
                 filter={{
-                  viw: "stats",
+                  view: "stats",
                   max:8,
                   offset: 0,
                   userGroupList: currentGroup?.id || undefined,
@@ -154,7 +154,7 @@ export default function ObservationShowPageComponent({
               />
               <TraitsPerMonth
                 filter={{
-                  viw: "stats",
+                  view: "stats",
                   max:8,
                   offset: 0,
                   userGroupList: currentGroup?.id || undefined,
