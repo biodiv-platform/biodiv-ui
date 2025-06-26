@@ -2,10 +2,10 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { DocumentData } from "@interfaces/custom";
 import { UserGroupIbp } from "@interfaces/document";
-import { axGroupList } from "@services/app.service";
 import { axGetListData } from "@services/document.service";
 import { axGetLandscapeList } from "@services/landscape.service";
 import { axGetSpeciesGroupList } from "@services/taxonomy.service";
+import { axGetUserGroupList } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
@@ -48,7 +48,7 @@ export const DocumentFilterProvider = (props) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      axGroupList().then(({ groups }) => setLoggedInUserGroups(groups));
+      axGetUserGroupList().then(({ data }) => setLoggedInUserGroups(data));
     }
   }, [isLoggedIn]);
 
