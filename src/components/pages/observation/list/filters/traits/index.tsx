@@ -6,21 +6,33 @@ import SubAccordion from "../shared/sub-accordion";
 
 export default function TraitsFilter() {
   const { observationData } = useObservationFilter();
+  const groupTraits = observationData.ag.groupTraits || {};
+  const traitKeys = Object.keys(groupTraits);
 
-  return Object.keys(observationData.ag.groupTraits||{}).length ? (
+  if (!traitKeys.length) return null;
+
+  return Object.keys(observationData.ag.groupTraits || {}).length ? (
     <SubAccordion>
-      {Object.keys(observationData.ag.groupTraits||{}).map((trait) => (
-        <CheckboxFilterPanel
-          key={trait.split("|")[1]}
-          label={trait.split("|")[0]}
-          filterKey={`trait_${trait.split("|")[1]}.string`}
-          options={Object.keys(observationData.ag.groupTraits?.[trait] || {}).map(
-            (value) => ({ value })
-          )}
-          statKey={`groupTraits.${trait.split("|")[0]}|${trait.split("|")[1]}`}
-          skipOptionsTranslation={true}
-        />
-      ))}
+      {traitKeys.map((traitKey) => {
+        const [traitName, traitId] = traitKey.split("|");
+        const optionsMap = groupTraits[traitKey] || {};
+        const options = Object.keys(optionsMap).map((value) => ({
+          value,
+          stat: `${value}.count`,
+          valueIcon: optionsMap[value].valueIcon
+        }));
+
+        return (
+          <CheckboxFilterPanel
+            key={traitId}
+            label={traitName}
+            filterKey={`trait_${traitId}.string`}
+            options={options}
+            statKey={`groupTraits.${traitName}|${traitId}`}
+            skipOptionsTranslation={true}
+          />
+        );
+      })}
     </SubAccordion>
   ) : null;
 }
