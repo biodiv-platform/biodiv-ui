@@ -3,7 +3,6 @@ import { Box, IconButton, Image, Stack, useDisclosure } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
 import CrossIcon from "@icons/cross";
 import EditIcon from "@icons/edit";
-import { SpeciesGroup } from "@interfaces/observation";
 import { axUpdateSpeciesGroup } from "@services/observation.service";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
@@ -16,7 +15,7 @@ import Select, { components } from "react-select";
 
 interface ISpeciesGroupsProps {
   id;
-  speciesGroups: SpeciesGroup[] | undefined;
+  speciesGroups: { label: string; value: number; }[] | undefined;
   canEdit?: boolean;
   observationId;
 }
@@ -36,7 +35,7 @@ export default function SpeciesGroupBox({
   observationId,
   canEdit = true
 }: ISpeciesGroupsProps) {
-  const options = speciesGroups?.map((g) => ({ label: g.name, value: g.id }));
+  const options = speciesGroups;
   const [finalType, setFinalType] = useState(options?.find((o) => o.value === id));
   const [type, setType] = useState(finalType);
   const { isOpen, onToggle, onClose } = useDisclosure();

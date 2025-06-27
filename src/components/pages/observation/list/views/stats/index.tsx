@@ -16,12 +16,12 @@ import Totals from "./totals";
 import TraitsPerMonth from "./traits-per-month";
 
 export default function StatsView() {
-  const { observationData, speciesGroup, filter } = useObservationFilter();
+  const { observationData, filter } = useObservationFilter();
 
   return (
     <div>
       <LazyLoadOnScroll>
-        <Totals filter={filter} observationData={observationData} speciesGroup={speciesGroup} />
+        <Totals filter={filter} observationData={observationData} />
       </LazyLoadOnScroll>
       <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
         <LazyLoadOnScroll>
@@ -37,7 +37,6 @@ export default function StatsView() {
         </GridItem>
         <SpeciesGroups
           observationData={observationData}
-          speciesGroup={speciesGroup}
           filter={filter}
         />
         <LazyLoadOnScroll>

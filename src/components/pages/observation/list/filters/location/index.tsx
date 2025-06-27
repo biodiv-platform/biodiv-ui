@@ -9,10 +9,9 @@ import MapAreaFilter from "./map-area";
 
 export default function LocationFilter() {
   const {
-    states,
     observationData: { ag }
   } = useObservationFilter();
-  const STATE_OPTIONS = states?.map((state) => ({ label: state, value: state, stat: state }));
+  const STATE_OPTIONS = Object.keys(ag.groupState||{})?.map((state) => ({ label: state, value: state, stat: state }));
   const GEO_ENTITY_LOCATION =
     ag &&
     ag?.geoEntity &&

@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 import TableTotals from "./table-totals";
 import useTotals from "./use-totals";
 
-const Totals = ({ filter, observationData, speciesGroup }) => {
+const Totals = ({ filter, observationData }) => {
   const { totalsData } = useTotals({ filter });
   const { t } = useTranslation();
 
@@ -15,14 +15,15 @@ const Totals = ({ filter, observationData, speciesGroup }) => {
       return sgroups.reduce((a: number, b: number) => a + b);
     }
 
-    const filteredGroups = speciesGroup.filter((sg) => filter.sGroup.includes(sg.id));
+    const sGroupArray = Array.isArray(filter.sGroup) ? filter.sGroup : [filter.sGroup];
 
-    const filteredCounts = filteredGroups.map(
-      (v) => observationData.ag.groupSpeciesName[v.name] || 0
-    );
+    const filteredGroups = Object.keys(observationData.ag.groupSpeciesName).filter((sg) => {
+      const id = sg.split("|")[0];
+      return sGroupArray.includes(id);
+    });
 
-    return filteredCounts.reduce((a, b) => a + b);
-  }, [filter, observationData.ag.groupSpeciesName]);
+    return filteredGroups.map((key) => observationData.ag.groupSpeciesName[key] || 0).reduce((a, b) => a + b, 0);
+  }, [filter.sGroup, observationData.ag.groupSpeciesName]);
 
   const totals = { totalObservations: s, ...totalsData.data.list };
   const isLoading = totalsData.data.isLoading;

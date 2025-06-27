@@ -5,7 +5,7 @@ import { axGetTraitsByGroupId } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
 import { formatDate } from "@utils/date";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 
 import Trait from "./trait";
@@ -24,7 +24,6 @@ export default function TraitsList({
   observationId,
   authorId = -1
 }: ITraitsProps) {
-  const [newTraitsList, setNewTraitsList] = useState<any[]>([]);
   const [speciesTraitsList, setSpeciesTraitsList] = useState(speciesTraitsListDefault);
   const { languageId } = useGlobalState();
 
@@ -41,9 +40,8 @@ export default function TraitsList({
     setSpeciesTraitsList(speciesTraitsListDefault);
   }, [speciesTraitsListDefault]);
 
-  useEffect(() => {
-    setNewTraitsList(
-      speciesTraitsList
+  const newTraitsList = useMemo(() => {
+      return speciesTraitsList
         ? speciesTraitsList.map((speciesTrait) => {
             const traitType = speciesTrait.traits?.traitTypes;
 
@@ -104,14 +102,13 @@ export default function TraitsList({
             }
           })
         : []
-    );
   }, [factsList, speciesTraitsList]);
 
   return (
     <Box p={4} pb={0}>
       {newTraitsList.map(({ defaultValue, speciesTrait, traitType }) => (
         <Trait
-          key={speciesTrait.traits.id}
+          key={speciesTrait.traits?.id}
           speciesTrait={speciesTrait}
           defaultValue={defaultValue}
           observationId={observationId}

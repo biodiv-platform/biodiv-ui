@@ -24,7 +24,7 @@ interface IInfoTabProps {
 
 export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) {
   const { t } = useTranslation();
-  const { speciesGroup, observationData } = useObservationFilter();
+  const { observationData } = useObservationFilter();
   const { user } = useGlobalState();
 
   return (
@@ -69,7 +69,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
         <Flex justify={[null, null, "flex-end", "flex-end"]} align="top" py={4}>
           <SpeciesGroupBox
             id={o?.speciesGroupId}
-            speciesGroups={speciesGroup}
+            speciesGroups={Object.keys(observationData.ag.groupSpeciesName || {}).map((g) => ({ label: g.split("|")[1], value: Number(g.split("|")[0]) }))}
             observationId={o.observationId}
           />
           <FlagActionButton
