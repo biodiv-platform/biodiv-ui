@@ -220,10 +220,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const addMediaToggle = (e) => {
     if (e.target.checked) {
       setAllMedia(true);
-      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio");
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio,no_media");
     } else {
       setAllMedia(false);
-      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio,no_media");
+      addFilter("mediaFilter", "no_of_images,no_of_videos,no_of_audio");
     }
   };
 
