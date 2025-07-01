@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -14,12 +15,13 @@ export default function useTraitsDistributionData({ filter }) {
     });
 
     const { success, data } = await axGetListData({
-      ...filter
+      ...filter,
+      statsFilter: STATS_FILTER.TRAITS
     });
 
     setter((_draft) => {
       if (success) {
-        _draft.list = data.aggregateStatsData.groupTraits;
+        _draft.list = data.aggregateStatsData?.groupTraits;
       }
       _draft.isLoading = false;
     });

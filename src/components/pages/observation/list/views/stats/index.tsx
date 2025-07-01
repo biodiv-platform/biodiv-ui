@@ -3,6 +3,7 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import React from "react";
 
 import ObservationsMap from "../map";
+import LazyLoadOnScroll from "./lazy-load-on-scroll";
 import LifeList from "./life-list";
 import ObservationPerDay from "./observation-per-day";
 import SpeciesGroups from "./species-groups";
@@ -13,35 +14,46 @@ import TopIdentifiers from "./top-identifiers";
 import TopUploaders from "./top-uploaders";
 import Totals from "./totals";
 import TraitsPerMonth from "./traits-per-month";
-import useObservationData from "./use-observation-data";
 
 export default function StatsView() {
-  const { observationData, speciesGroup, filter } = useObservationFilter();
-  const stats = useObservationData({ filter });
-  const data = stats.data.list;
-  const isLoading = stats.data.isLoading;
+  const { observationData, filter } = useObservationFilter();
 
   return (
     <div>
-      <Totals filter={filter} observationData={observationData} speciesGroup={speciesGroup} />
+      <LazyLoadOnScroll>
+        <Totals filter={filter} observationData={observationData} />
+      </LazyLoadOnScroll>
       <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
-        <TopUploaders filter={filter} />
-        <TopIdentifiers filter={filter} />
+        <LazyLoadOnScroll>
+          <TopUploaders filter={filter} />
+        </LazyLoadOnScroll>
+        <LazyLoadOnScroll>
+          <TopIdentifiers filter={filter} />
+        </LazyLoadOnScroll>
         <GridItem colSpan={2}>
-          <TaxanomicDistribution data={data.groupTaxon} isLoading={isLoading} />
+          <LazyLoadOnScroll>
+            <TaxanomicDistribution filter={filter} />
+          </LazyLoadOnScroll>
         </GridItem>
         <SpeciesGroups
           observationData={observationData}
-          speciesGroup={speciesGroup}
           filter={filter}
         />
-        <LifeList filter={filter} />
+        <LazyLoadOnScroll>
+          <LifeList filter={filter} />
+        </LazyLoadOnScroll>
       </SimpleGrid>
       <ObservationsMap />
       <StatesDistribution observationData={observationData} filter={filter} />
-      <ObservationPerDay data={data.countPerDay} isLoading={isLoading} />
-      <TemporalObservedOn data={data.groupObservedOn} isLoading={isLoading} />
-      <TraitsPerMonth data={data.groupTraits} isLoading={isLoading} />
+      <LazyLoadOnScroll>
+        <ObservationPerDay filter={filter} />
+      </LazyLoadOnScroll>
+      <LazyLoadOnScroll>
+        <TemporalObservedOn filter={filter} />
+      </LazyLoadOnScroll>
+      <LazyLoadOnScroll>
+        <TraitsPerMonth filter={filter} />
+      </LazyLoadOnScroll>
     </div>
   );
 }

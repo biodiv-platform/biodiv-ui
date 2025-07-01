@@ -1,4 +1,5 @@
 import { axGetListData } from "@services/observation.service";
+import { STATS_FILTER } from "@static/constants";
 import { useEffect } from "react";
 import { useImmer } from "use-immer";
 
@@ -19,13 +20,14 @@ export default function useUniqueSpecies({ filter, location = "" }) {
     const { success, data } = await axGetListData(
       {
         ...filter,
-        lifelistoffset: reset ? 0 : getter.lifelistoffset
+        lifelistoffset: reset ? 0 : getter.lifelistoffset,
+        statsFilter: STATS_FILTER.LIFELIST
       },
       location ? { location } : {}
     );
 
     setter((_draft) => {
-      if (success) {
+      if (success && data.aggregateStatsData && data.aggregateStatsData.groupUniqueSpecies!=null) {
         if (reset) {
           _draft.list = Object.entries(data.aggregateStatsData.groupUniqueSpecies);
           _draft.lifelistoffset = LIFE_LIST_LIMIT;

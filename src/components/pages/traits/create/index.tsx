@@ -612,7 +612,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
               </GridItem>
             )}
           </SimpleGrid>
-          <Box mb={4}>
+          <Box mb={4} display="flex" justifyContent="flex-end">
             <SubmitButton>{t("traits:create_form.add_trait_button")}</SubmitButton>
           </Box>
         </form>
