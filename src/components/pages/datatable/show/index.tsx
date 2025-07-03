@@ -13,7 +13,6 @@ import Sidebar from "./sidebar";
 
 export default function DataTableShowPageComponent({
   datatableShow: { datatable, authorInfo, layerInfo },
-  groups,
   speciesGroups
 }) {
   return (
@@ -24,11 +23,7 @@ export default function DataTableShowPageComponent({
         <Box gridColumn="1/3">
           <Stack>
             <Info dataTable={datatable} speciesGroups={speciesGroups} />
-            <Group
-              datatableId={datatable.id}
-              groups={groups}
-              defaultGroups={datatable?.userGroup?.map((item) => item.id) || []}
-            />
+            <Group datatableId={datatable.id} defaultGroups={datatable?.userGroup || []} />
             <Activity
               resourceId={datatable.id}
               resourceType={RESOURCE_TYPE.DATATABLE}

@@ -1,11 +1,11 @@
 export const CONTENT_TYPES = [
   {
-    label: "HAS_CONTENT",
+    label: "has_content",
     value: "1",
     stat: "HAS CONTENT"
   },
   {
-    label: "NO_CONTENT",
+    label: "no_content",
     value: "0",
     stat: "NO CONTENT"
   }

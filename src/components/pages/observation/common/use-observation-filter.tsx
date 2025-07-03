@@ -37,10 +37,8 @@ interface ObservationFilterContextProps {
   nextPage?;
   resetFilter?;
   speciesGroup?: SpeciesGroup[];
-  userGroup?: UserGroup[];
   authorizedUserGroupList?: UserGroup[];
   hasUgAccess?: boolean;
-  states?: string[];
   selectAll?: boolean;
   setSelectAll?;
   bulkObservationIds?: any[];
@@ -259,9 +257,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         canCropObservation,
         // Config Properties
         speciesGroup: props.speciesGroup,
-        userGroup: props.userGroup,
         location: props.location,
-        states: props.states,
         traits: props.traits,
         customFields: props.customFields,
         allMedia,

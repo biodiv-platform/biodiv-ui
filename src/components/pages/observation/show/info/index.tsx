@@ -45,7 +45,9 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         <ResponsiveInfo title="observation:group">
           <SpeciesGroupBox
             id={o.observation?.groupId}
-            speciesGroups={speciesGroups}
+            speciesGroups={speciesGroups
+              ?.filter((g) => g.name !== undefined && g.id !== undefined)
+              .map((g) => ({ label: g.name as string, value: g.id as number }))}
             observationId={o.observation?.id}
           />
         </ResponsiveInfo>

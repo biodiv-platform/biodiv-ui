@@ -38,7 +38,12 @@ export default function FilterCheckboxes({
 
   const handleOnChange = (v) => {
     if (v.length > 0) {
-      addFilter(filterKey, v.toString());
+      addFilter(
+        filterKey,
+        v.toString().split("_").length > 1
+          ? v.toString().split("_")[0] + "|" + v.toString().split("_")[1]
+          : v.toString().split("_")[0]
+      );
     } else {
       removeFilter(filterKey);
     }
@@ -57,6 +62,29 @@ export default function FilterCheckboxes({
     setFilteredOptions(options.filter(({ label }) => label.toLowerCase().includes(searchQuery)));
   };
 
+  const toTitleCase = (input) => {
+    if (typeof input !== "string" || input.length === 0) {
+      return "";
+    }
+    let titleCase = "";
+    let nextTitleCase = true;
+
+    for (let i = 0; i < input.length; i++) {
+      let c = input[i];
+
+      if (c === " ") {
+        nextTitleCase = true;
+      } else if (nextTitleCase) {
+        c = c.toUpperCase();
+        nextTitleCase = false;
+      }
+
+      titleCase += c;
+    }
+
+    return titleCase;
+  };
+
   return (
     <>
       {showSearch && (
@@ -72,7 +100,7 @@ export default function FilterCheckboxes({
             ? allObservations
             : observationsWithMedia
         }
-        onChange={handleOnChange}
+        onValueChange={handleOnChange}
         key={filterKey == "mediaFilter" ? filter?.mediaFilter?.toString() : "checkbox-filter-key"}
         colorPalette={"blue"}
       >
@@ -90,7 +118,9 @@ export default function FilterCheckboxes({
                   // ignoreFallback={true}
                 />
               )}
-              {skipOptionsTranslation ? label || value : t(translateKey + label)}
+              {skipOptionsTranslation
+                ? label || toTitleCase(value.split("_")[0])
+                : t(translateKey + label)}
               <FilterStat statKey={statKey} subStatKey={stat || value} />
             </Checkbox>
           ))}

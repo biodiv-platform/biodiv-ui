@@ -5,7 +5,7 @@ import TextFilterInput from "../../shared/search/input";
 import { CONTENT_TYPES } from "./filter-keys";
 
 export default function TextFilter({ field }) {
-  const { id, name } = field;
+  const { id, name, fieldtype } = field;
 
   return (
     <div>
@@ -13,7 +13,7 @@ export default function TextFilter({ field }) {
       <FilterCheckboxes
         filterKey={`custom_${id}.field_content`}
         options={CONTENT_TYPES}
-        statKey={`groupCustomField.${name}`}
+        statKey={`groupCustomField.${name}|${id}|${fieldtype}`}
         translateKey="filters:custom_fields."
       />
     </div>

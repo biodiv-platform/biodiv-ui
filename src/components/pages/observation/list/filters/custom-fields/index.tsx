@@ -13,20 +13,30 @@ import SubAccordion from "../shared/sub-accordion";
 import CustomFieldTypes from "./filter-types";
 
 export default function CustomFieldsFilter() {
-  const { customFields } = useObservationFilter();
+  const { observationData } = useObservationFilter();
   const { t } = useTranslation();
 
-  return customFields.length ? (
+  return Object.keys(observationData.ag.groupCustomField || {}).length ? (
     <SubAccordion>
-      {customFields.map((customField) => (
-        <AccordionItem key={customField.id} value={customField.id} pl={4}>
+      {Object.keys(observationData.ag.groupCustomField || {}).map((customField) => (
+        <AccordionItem key={customField.split("|")[1]} value={customField.split("|")[1]} pl={4}>
           <AccordionItemTrigger pr={4}>
             <Box flex={1} textAlign="left">
-              {customField.name}
+              {customField.split("|")[0]}
             </Box>
           </AccordionItemTrigger>
           <AccordionItemContent pr={4}>
-            <CustomFieldTypes field={customField} key={customField.id} />
+            <CustomFieldTypes
+              field={{
+                name: customField.split("|")[0],
+                id: customField.split("|")[1],
+                fieldtype: customField.split("|")[2],
+                values: Object.keys(observationData.ag.groupCustomField?.[customField] || {}).map(
+                  (value) => ({ value })
+                )
+              }}
+              key={customField.split("|")[1]}
+            />
           </AccordionItemContent>
         </AccordionItem>
       ))}

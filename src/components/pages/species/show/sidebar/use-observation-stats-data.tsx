@@ -26,7 +26,8 @@ export default function useObservationStatsData(speciesId, max = 8) {
       max,
       offset: 0,
       userGroupList: currentGroup?.id || undefined,
-      taxon: String(speciesId)
+      taxon: String(speciesId),
+      showData: "true"
     });
 
     setter((_draft) => {

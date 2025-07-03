@@ -2,7 +2,7 @@ import { ObservationFilterProvider } from "@components/pages/observation/common/
 import ObservationListPageComponent from "@components/pages/observation/list";
 import SITE_CONFIG from "@configs/site-config";
 import { axGroupList } from "@services/app.service";
-import { axGetListData, axGetObservationListConfig } from "@services/observation.service";
+import { axGetListData } from "@services/observation.service";
 import { axGetUserGroupMediaToggle } from "@services/usergroup.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { absoluteUrl } from "@utils/basic";
@@ -26,7 +26,6 @@ ObservationListPage.config = {
 
 export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
-  const { data: listConfig } = await axGetObservationListConfig();
 
   const aURL = absoluteUrl(ctx).href;
   const { currentGroup } = await axGroupList(aURL);
@@ -63,7 +62,6 @@ export const getServerSideProps = async (ctx) => {
           ? customisations.mediaToggle
           : SITE_CONFIG.OBSERVATION.MEDIA_TOGGLE
       },
-      listConfig,
       nextOffset,
       initialFilterParams
     }

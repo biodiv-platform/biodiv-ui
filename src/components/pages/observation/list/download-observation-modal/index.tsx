@@ -29,12 +29,14 @@ import {
 import CheckboxGroupField from "./checkbox-group-field";
 import { OBSERVATION_FILTERS } from "./filters";
 
-const getFilterOptions = (options) => options.map(({ name }) => ({ value: name, label: name }));
+const getFilterOptions = (options) => options.map(( name ) => ({ value: name.split("|")[0], label: name.split("|")[0] }));
 
 export default function DownloadObservationDataModal({ isOpen, onClose }) {
   const { t } = useTranslation();
   const { user, isLoggedIn } = useGlobalState();
-  const { customFields, traits, filter } = useObservationFilter();
+  const { observationData, filter } = useObservationFilter();
+  const traits = Object.keys(observationData.ag.groupTraits||{})
+  const customFields = Object.keys(observationData.ag.groupCustomField||{})
   const [isHidden, setIsHidden] = useState(false);
 
   const hForm = useForm<any>({
@@ -129,11 +131,11 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
                   label="Traits"
                   options={getFilterOptions(traits)}
                 />
-                <CheckboxGroupField
+                {<CheckboxGroupField
                   name="customfields"
                   label="Custom Fields"
                   options={getFilterOptions(customFields)}
-                />
+                />}
                 <TextAreaField
                   name="notes"
                   label={t("observation:download.modal.note")}

@@ -86,11 +86,10 @@ export const getGroupImage = (resourceUrl) => {
 
 export const getGroupImageThumb = (resourceUrl, height = 32) => {
   return resourceUrl
-    ? `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`
+    ? resourceUrl.startsWith("http")
+      ? `${resourceUrl}?h=${height}`
+      : `${ENDPOINT.FILES}/get/crop/userGroups${resourceUrl}?h=${height}`
     : `/next-assets/species/Unknown.svg`;
-};
-export const getGroupImageThumbForDatatable = (resourceUrl, height = 32) => {
-  return resourceUrl ? `${resourceUrl}?h=${height}` : `/next-assets/species/Unknown.svg`;
 };
 
 export const getSuggestionIcon = (resourceUrl) => {

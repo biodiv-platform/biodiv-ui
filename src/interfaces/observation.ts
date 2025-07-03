@@ -322,7 +322,10 @@ export interface MapAggregationResponse {
   };
   groupTraits?: {
     [name: string]: {
-      [name: string]: number; // int64
+      [name: string]: {
+        count: number;
+        valueIcon: string;
+      };
     };
   };
   groupState?: {

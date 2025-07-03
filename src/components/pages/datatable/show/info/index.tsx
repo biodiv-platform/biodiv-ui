@@ -32,7 +32,9 @@ export default function Info({ dataTable: dt, speciesGroups }: IInfoProps) {
           <SpeciesGroupBox
             id={parseInt(dt?.taxonomicCoverageGroupIds)}
             canEdit={false}
-            speciesGroups={speciesGroups}
+            speciesGroups={speciesGroups
+              ?.filter((g) => g.name !== undefined && g.id !== undefined)
+              .map((g) => ({ label: g.name as string, value: g.id as number }))}
             observationId={dt?.id}
           />
         </ResponsiveInfo>
