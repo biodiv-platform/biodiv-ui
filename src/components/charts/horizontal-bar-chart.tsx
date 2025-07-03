@@ -87,6 +87,7 @@ const HorizontalBarChart = forwardRef(
         .select(".y-axis")
         .join("g")
         .attr("transform", `translate(${leftOffset},0)`)
+        .style("font-size", "10px")
         .call(axisLeft(y).tickSizeOuter(0) as any);
 
       //Bars
@@ -106,7 +107,7 @@ const HorizontalBarChart = forwardRef(
         .selectAll("text")
         .data(data)
         .join("text")
-        .attr("font-size", 10)
+        .style("font-size", "10px")
         .attr("y", (d) => y(d[titleKey]) + y.bandwidth() / 2 + 4)
         .attr("x", (d) => x(d[countKey]) + 3 + leftOffset)
         .text((d) => (displayCountKey ? `${d[countKey]} ${countTitle || countKey}` : d[countKey]));

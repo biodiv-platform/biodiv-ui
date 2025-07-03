@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Separator, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -9,7 +9,7 @@ import React, { useRef } from "react";
 import LineGraph from "./line-graph";
 import useTraitsDistributionData from "./use-traits-distribution-data";
 
-const TraitsPerMonth = ({filter}) => {
+const TraitsPerMonth = ({ filter }) => {
   const traits = useTraitsDistributionData({ filter });
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
@@ -33,7 +33,7 @@ const TraitsPerMonth = ({filter}) => {
     return <Skeleton h={450} borderRadius="md" />;
   }
 
-  if (!traits.data.list || traits.data.list.length==0) {
+  if (!traits.data.list || traits.data.list.length == 0) {
     return <div></div>;
   }
 
@@ -47,6 +47,7 @@ const TraitsPerMonth = ({filter}) => {
           <DownloadIcon />
         </Button>
       </BoxHeading>
+      <Separator />
       <Box position={"relative"}>
         <LineGraph data={reversedList} ref={chartRef} />
       </Box>

@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Skeleton, Table } from "@chakra-ui/react";
+import { Box, Button, HStack, Separator, Skeleton, Table } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
@@ -16,6 +16,7 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
   return data?.list?.length > 0 ? (
     <Box className="white-box">
       <BoxHeading>⭐ {title}</BoxHeading>
+      <Separator />
 
       <Box w="full" overflowY="auto" h={360}>
         <Table.Root striped colorPalette="gray" size="sm">

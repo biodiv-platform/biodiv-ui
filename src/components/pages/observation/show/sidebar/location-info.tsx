@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Separator, SimpleGrid, Text } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import { ObservationLocationInfo } from "@interfaces/observation";
 import { titleCase } from "@utils/basic";
@@ -34,6 +34,7 @@ export default function LocationInformation({
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>🏜 {t("observation:location_information.title")}</BoxHeading>
+      <Separator />
       <SimpleGrid columns={[1, 1, 3, 3]} gapY={4} p={4}>
         <Row title="COORDINATES">
           {geoprivacy

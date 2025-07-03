@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Separator, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -87,6 +87,7 @@ const TemporalObservedOn = ({ filter }) => {
           <DownloadIcon />
         </Button>
       </BoxHeading>
+      <Separator />
       <Box p={4}>
         <Box marginLeft="45%" paddingTop="25px" paddingBottom="25px">
           <NativeSelectRoot

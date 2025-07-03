@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Separator } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import MONTHS from "@static/months";
 import useTranslation from "next-translate/useTranslation";
@@ -21,6 +21,7 @@ export default function Temporal({ data }) {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📊 {t("common:temporal.title")}</BoxHeading>
+      <Separator />
       <Box px={4} className="fade" w="full">
         <StackedHorizontalChart data={temporalData} isStacked={false} h={300} />
       </Box>

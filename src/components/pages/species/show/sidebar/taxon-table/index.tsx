@@ -1,4 +1,4 @@
-import { Box, Table } from "@chakra-ui/react";
+import { Box, Separator, Table } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
@@ -13,6 +13,7 @@ export default function TaxonTable() {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>🐾 {t("species:taxon")}</BoxHeading>
+      <Separator />
       <Box>
         <Table.Root size="sm">
           <Table.Body>
