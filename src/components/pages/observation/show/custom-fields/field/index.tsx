@@ -46,13 +46,7 @@ export default function CustomField({
   };
 
   return (
-    <Field
-      borderBottom="1px"
-      borderColor="gray.300"
-      fontWeight="bold"
-      htmlFor={cf.cfId?.toString()}
-      p={4}
-    >
+    <Field borderBottom="1px" borderColor="gray.300" htmlFor={cf.cfId?.toString()} p={4}>
       <Field fontWeight="bold" htmlFor={cf.cfId?.toString()}>
         <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           {cf.cfName}

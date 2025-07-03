@@ -23,6 +23,7 @@ export default function ResourceNavigation({ index, setIndex, size, onDelete, on
         disabled={index === 0}
         onClick={handleOnPrev}
         title={t("common:prev")}
+        variant={"subtle"}
       >
         <LuChevronLeft />
       </IconButton>
@@ -40,6 +41,7 @@ export default function ResourceNavigation({ index, setIndex, size, onDelete, on
         disabled={index === size - 1}
         onClick={handleOnNext}
         title={t("common:next")}
+        variant={"subtle"}
       >
         <LuChevronRight />
       </IconButton>
@@ -47,9 +49,10 @@ export default function ResourceNavigation({ index, setIndex, size, onDelete, on
         aria-label={t("observation:manage_resources")}
         onClick={onReorder}
         title={t("observation:manage_resources")}
-        // children={size}
+        variant={"subtle"}
       >
         <LayersIcon />
+        {size}
       </Button>
     </ButtonGroup>
   );

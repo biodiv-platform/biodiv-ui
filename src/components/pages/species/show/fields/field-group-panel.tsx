@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@chakra-ui/react";
+import { Box, IconButton, Separator } from "@chakra-ui/react";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import EyeIcon from "@icons/eye";
 import EyeSlashIcon from "@icons/eye-slash";
@@ -34,6 +34,7 @@ export default function FieldGroupPanel({ parentField, childField }: SpeciesFiel
       title={parentField.header}
       options={<PanelOptions />}
     >
+      <Separator />
       <Box p={4} pb={0}>
         <SpeciesFieldGroup
           key={parentField.id}

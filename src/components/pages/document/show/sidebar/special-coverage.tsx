@@ -10,17 +10,19 @@ export default function SpatialCoverage({ documentCoverage }) {
   return documentCoverage?.length > 0 ? (
     <Box mb={4} className="white-box">
       <BoxHeading>🌎 {t("form:coverage.spatial")}</BoxHeading>
-      <List.Root  p={4}>
-        {documentCoverage.map(({ placeName, id, landscapeIds }) => (
-          <List.Item key={id}>
-            {landscapeIds ? (
-              <BlueLink href={`/landscape/show/${landscapeIds}`}>{placeName}</BlueLink>
-            ) : (
-              placeName
-            )}
-          </List.Item>
-        ))}
-      </List.Root>
+      <Box pl={4}>
+        <List.Root p={4} as="ol">
+          {documentCoverage.map(({ placeName, id, landscapeIds }) => (
+            <List.Item key={id} _marker={{ color: "inherit" }}>
+              {landscapeIds ? (
+                <BlueLink href={`/landscape/show/${landscapeIds}`}>{placeName}</BlueLink>
+              ) : (
+                placeName
+              )}
+            </List.Item>
+          ))}
+        </List.Root>
+      </Box>
     </Box>
   ) : null;
 }

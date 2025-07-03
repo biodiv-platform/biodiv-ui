@@ -63,7 +63,7 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
           {t(translateKey)}
         </Box>
       </AccordionItemTrigger>
-      <AccordionItemContent>
+      <AccordionItemContent pr={4}>
         <Flatpickr
           options={options}
           onChange={handleOnDateChange}

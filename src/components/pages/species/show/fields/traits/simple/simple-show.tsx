@@ -17,6 +17,7 @@ export default function SimpleTraitShow({ values, options }) {
           border="2px"
           borderColor="gray.200"
           borderRadius="md"
+          borderStyle="solid"
           lineHeight={1}
           p={2}
           h="3.25rem"

@@ -76,7 +76,9 @@ export function SpeciesCommonNameForm({
       {languages.length ? (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-            <DialogHeader>{t("species:edit_name")}</DialogHeader>
+            <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+              {t("species:edit_name")}
+            </DialogHeader>
             <DialogCloseTrigger />
             <DialogBody>
               <TextBoxField
@@ -89,12 +91,11 @@ export function SpeciesCommonNameForm({
                 label={t("species:common_name.form.language")}
                 options={languages}
                 mb={0}
-                shouldPortal={true}
               />
             </DialogBody>
             <DialogFooter>
               <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-              <Button ml={4} onClick={onClose}>
+              <Button ml={4} onClick={onClose} variant={"subtle"}>
                 <CrossIcon />
                 {t("common:cancel")}
               </Button>

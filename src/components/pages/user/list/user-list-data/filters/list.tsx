@@ -30,7 +30,7 @@ export default function FiltersList() {
   return (
     <AccordionRoot multiple={true} lazyMount defaultValue={["location"]}>
       <AccordionItem value="location">
-        <AccordionItemTrigger>
+        <AccordionItemTrigger pr={4}>
           <Box flex={1} textAlign="left" pl={4}>
             {t("filters:location.title")}
           </Box>
@@ -71,7 +71,7 @@ export default function FiltersList() {
             {t("filters:user.name_of_user")}
           </Box>
         </AccordionItemTrigger>
-        <AccordionItemContent>{<UserFilter filterKey="user" />}</AccordionItemContent>
+        <AccordionItemContent pr={4}>{<UserFilter filterKey="user" />}</AccordionItemContent>
       </AccordionItem>
       {SITE_CONFIG.USERGROUP.ACTIVE && <UserGroupFilter />}
     </AccordionRoot>

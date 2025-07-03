@@ -135,7 +135,9 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
     <DialogContent>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSave)}>
-          <DialogHeader>{t("species:field.manage")}</DialogHeader>
+          <DialogHeader fontWeight={"bold"} fontSize={"xl"}>
+            {t("species:field.manage")}
+          </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody>
             <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
@@ -182,7 +184,7 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
           </DialogBody>
           <DialogFooter>
             <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
-            <Button ml={4} onClick={onCancel}>
+            <Button ml={4} onClick={onCancel} variant={"subtle"}>
               <CrossIcon />
               {t("common:cancel")}
             </Button>

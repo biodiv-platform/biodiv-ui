@@ -77,7 +77,13 @@ export default function ScientificNamesTable({
           </Table.Body>
         </Table.Root>
       </Box>
-      <Button w="full" onClick={loadMoreNames} loading={data.isLoading} borderTopRadius={0}>
+      <Button
+        w="full"
+        onClick={loadMoreNames}
+        loading={data.isLoading}
+        borderTopRadius={0}
+        variant={"subtle"}
+      >
         {t("common:load_more")}
       </Button>
     </Box>

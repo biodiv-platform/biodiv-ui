@@ -89,7 +89,9 @@ export default function SynonymForm({
       {taxonRanks.length ? (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-            <DialogHeader>{t("species:edit_synonym")}</DialogHeader>
+            <DialogHeader fontWeight={"bold"} fontSize={"xl"}>
+              {t("species:edit_synonym")}
+            </DialogHeader>
             <DialogCloseTrigger />
             <DialogBody>
               <TextBoxField name="name" label={t("species:synonym.form.name")} isRequired={true} />
@@ -98,7 +100,6 @@ export default function SynonymForm({
                 label={t("species:synonym.form.rank")}
                 options={taxonRanks}
                 isRequired={true}
-                shouldPortal={true}
               />
               <TextBoxField name="dataSource" label={t("species:synonym.form.datasource")} />
               <TextBoxField
@@ -109,7 +110,7 @@ export default function SynonymForm({
             </DialogBody>
             <DialogFooter>
               <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-              <Button ml={3} onClick={onClose}>
+              <Button ml={3} onClick={onClose} variant={"subtle"}>
                 <CrossIcon />
                 {t("common:cancel")}
               </Button>

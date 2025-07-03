@@ -93,10 +93,12 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
   };
 
   return (
-    <DialogRoot open={initialValue} onOpenChange={onClose} size="cover">
+    <DialogRoot open={initialValue} onOpenChange={onClose} size="full">
       <DialogBackdrop />
       <DialogContent>
-        <DialogHeader>{t("observation:title_edit")}</DialogHeader>
+        <DialogHeader fontSize={"2xl"} fontWeight={"bold"}>
+          {t("observation:title_edit")}
+        </DialogHeader>
         <DialogCloseTrigger />
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnFormSubmit)} noValidate>
@@ -120,7 +122,9 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
               <SubmitButton leftIcon={<CheckIcon />} mr={3}>
                 {t("common:save")}
               </SubmitButton>
-              <Button onClick={onClose}>{t("common:close")}</Button>
+              <Button onClick={onClose} variant={"subtle"}>
+                {t("common:close")}
+              </Button>
             </DialogFooter>
           </form>
         </FormProvider>

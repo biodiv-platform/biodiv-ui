@@ -21,7 +21,7 @@ export default function CheckboxFilterPanel(props: FilterCheckboxesProps) {
           {props.label || t(props.translateKey + "title")}
         </Box>
       </AccordionItemTrigger>
-      <AccordionItemContent>
+      <AccordionItemContent pr={4}>
         {props.isTaxonFilter && (
           <TaxonInputField translateKey="filters:user.taxon_browser" filterKey="taxonomyList" />
         )}

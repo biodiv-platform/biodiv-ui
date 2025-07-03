@@ -60,7 +60,7 @@ export default function FilterCheckboxes({
   return (
     <>
       {showSearch && (
-        <InputGroup mb={2} startElement={<LuSearch color="gray.300" />}>
+        <InputGroup mb={2} pr={4} width={"full"} startElement={<LuSearch color="gray.300" />}>
           <Input type="text" placeholder={t("common:search")} onChange={handleOnSearch} />
         </InputGroup>
       )}
@@ -74,6 +74,7 @@ export default function FilterCheckboxes({
         }
         onChange={handleOnChange}
         key={filterKey == "mediaFilter" ? filter?.mediaFilter?.toString() : "checkbox-filter-key"}
+        colorPalette={"blue"}
       >
         <Stack>
           {filteredOptions.map(({ label, value, stat, valueIcon }) => (

@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/react";
+import { Box, IconButton } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import {
   onScientificNameQuery,
@@ -74,7 +74,7 @@ export default function TaxonSuggest({ setParentState, parentState }) {
   };
 
   return (
-    <>
+    <Box pl={4} pr={4}>
       <FormProvider {...hForm}>
         <SearchForm onSubmit={hForm.handleSubmit(handleOnSearch)}>
           <SelectAsyncInputField
@@ -95,6 +95,6 @@ export default function TaxonSuggest({ setParentState, parentState }) {
           </IconButton>
         </SearchForm>
       </FormProvider>
-    </>
+    </Box>
   );
 }

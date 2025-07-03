@@ -21,7 +21,7 @@ export default function TextFilterPanel({ filterKey, translateKey }) {
           {label}
         </Box>
       </AccordionItemTrigger>
-      <AccordionItemContent>
+      <AccordionItemContent pr={4}>
         <TextFilterInput filterKey={filterKey} label={label} />
       </AccordionItemContent>
     </AccordionItem>

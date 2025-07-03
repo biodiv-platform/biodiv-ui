@@ -62,7 +62,7 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
 
             {o?.observationNotes && (
               <Text className="elipsis" title={t("observation:notes")}>
-                <EditIcon mr={2} mb={1} />
+                <EditIcon mr={2} mb={1} size={"sm"} />
                 {o.observationNotes}
               </Text>
             )}

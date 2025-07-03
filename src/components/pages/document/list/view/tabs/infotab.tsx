@@ -66,17 +66,17 @@ export default function InfoTab({
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={3}>
           <LocalLink href={`/document/show/${document.id}`}>
-              <HStack alignItems="center" gap={4}>
-                <DocumentIcon />
-                <Heading
-                  fontSize="lg"
-                  className="elipsis-2"
-                  dangerouslySetInnerHTML={{
-                    __html: getInjectableHTML(document?.title || t("document:unknown"))
-                  }}
-                />
-                <Badge colorPalette="red">{document.itemtype}</Badge>
-              </HStack>
+            <HStack alignItems="center" gap={4}>
+              <DocumentIcon />
+              <Heading
+                fontSize="lg"
+                className="elipsis-2"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(document?.title || t("document:unknown"))
+                }}
+              />
+              <Badge colorPalette="red">{document.itemtype}</Badge>
+            </HStack>
           </LocalLink>
           {/* Meta Data */}
           <Box>
@@ -114,7 +114,7 @@ export default function InfoTab({
       <Flex alignItems="flex-end" justifyContent="space-between">
         <Stack>
           <MetaBlock
-            icon={<MapIcon />}
+            icon={<MapIcon size={"sm"} />}
             tooltip={t("common:habitats_covered")}
             children={
               habitatIds[0] ? (
@@ -123,7 +123,7 @@ export default function InfoTab({
             }
           />
           <MetaBlock
-            icon={<PawIcon />}
+            icon={<PawIcon size={"sm"} />}
             tooltip={t("common:species_coverage")}
             children={
               specieIds[0] ? (

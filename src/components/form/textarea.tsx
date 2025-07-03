@@ -24,13 +24,14 @@ export const TextAreaField = ({
   disabled,
   maxLength,
   hint,
+  isRequired,
   ...props
 }: ITextAreaProps) => {
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
   return (
     <Field invalid={!!fieldState.error} mb={mb} {...props}>
-      <Field htmlFor={name} label={label} />
+      <Field htmlFor={name} label={label} required={isRequired} />
       <Textarea
         id={name}
         placeholder={placeholder}

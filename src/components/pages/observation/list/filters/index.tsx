@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Stack, useBreakpointValue, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Heading, Stack, useBreakpointValue } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
@@ -9,7 +9,8 @@ import {
   DrawerBody,
   DrawerCloseTrigger,
   DrawerContent,
-  DrawerRoot
+  DrawerRoot,
+  DrawerTrigger
 } from "@/components/ui/drawer";
 
 import FiltersList from "./list";
@@ -37,7 +38,6 @@ export const FilterWrapper = styled.div`
 `;
 
 export default function Filters() {
-  const { open, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
   const isDesktopFilter = useBreakpointValue({ base: false, lg: true });
 
@@ -51,15 +51,17 @@ export default function Filters() {
     </Box>
   ) : (
     <FilterWrapper>
-      <Button w="full" className="toggle-button" onClick={onToggle}>
-        {t("filters:toggle")}
-      </Button>
-      <DrawerRoot open={open} placement={"end"} onOpenChange={onClose}>
+      <DrawerRoot placement={"end"}>
+        <DrawerTrigger asChild>
+          <Button w="full" className="toggle-button" variant={"subtle"}>
+            {t("filters:toggle")}
+          </Button>
+        </DrawerTrigger>
         <DrawerBackdrop>
           <DrawerContent>
             <DrawerCloseTrigger />
             <BoxHeading>{t("filters:title")}</BoxHeading>
-            <DrawerBody p={0}>{open && <FiltersList />}</DrawerBody>
+            <DrawerBody p={0}>{<FiltersList />}</DrawerBody>
           </DrawerContent>
         </DrawerBackdrop>
       </DrawerRoot>

@@ -5,7 +5,7 @@ const defaultFontFamily =
 
 export const customTheme = createSystem(defaultConfig, {
   globalCss: {
-    body: {
+    "html, body": {
       scrollBehavior: "smooth"
     }
   },
@@ -33,17 +33,11 @@ export const customTheme = createSystem(defaultConfig, {
           900: { value: "#273c58" }
         }
       }
+    },
+    semanticTokens: {
+      colors: {
+        "chakra-border-color": { value: "{colors.gray.300}" }
+      }
     }
   }
-
-  // components: {
-  //   Input: {
-  //     sizes: {
-  //       md: {
-  //         addon: { px: 2.5 },
-  //         field: { px: 2.5 }
-  //       }
-  //     }
-  //   }
-  // }
 });

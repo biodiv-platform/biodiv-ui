@@ -111,7 +111,7 @@ export default function FiltersList() {
             {t("filters:user.name_of_user")}
           </Box>
         </AccordionItemTrigger>
-        <AccordionItemContent>
+        <AccordionItemContent pl={4} pr={4}>
           <UserFilter filterKey="user" />
         </AccordionItemContent>
       </AccordionItem>

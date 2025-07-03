@@ -16,6 +16,7 @@ export default function TraitContent(props) {
         borderWidth="2px"
         borderRadius="md"
         bg="white"
+        minW="200px"
         _checked={{
           borderColor: "blue.500",
           bg: "blue.50"

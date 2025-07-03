@@ -7,7 +7,7 @@ import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/me
 
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
-    {children}
+    <Link>{children}</Link>
   </LocalLink>
 );
 
@@ -19,7 +19,9 @@ export default function MenuItems(props) {
     <MenuRoot positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
       <MenuTrigger data-label={name} role="button" asChild pl={4}>
         <Box display="flex" alignItems="center">
-          <Link>{name}</Link>
+          <SimpleLink to={to} params={params}>
+            {name}
+          </SimpleLink>
           <Box as="button" role="button" tabIndex={0}>
             <LuChevronDown />
           </Box>
@@ -29,9 +31,9 @@ export default function MenuItems(props) {
       <MenuContent>
         {rows.map((row, index) => (
           <MenuItem key={index} value={index}>
-            <SimpleLink to={to} params={params}>
-              {row.name}
-            </SimpleLink>
+            <LocalLink href={row.to} params={row.params} prefixGroup={true}>
+              <Link>{row.name}</Link>
+            </LocalLink>
           </MenuItem>
         ))}
       </MenuContent>

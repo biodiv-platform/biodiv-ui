@@ -18,7 +18,7 @@
   "dependencies": {
     "@avinlab/react-flash-change": "^1.2.0",
     "@braintree/sanitize-url": "^6.0.0",
-    "@chakra-ui/react": "^3.16.1",
+    "@chakra-ui/react": "^3.21.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@hello-pangea/dnd": "^16.0.1",

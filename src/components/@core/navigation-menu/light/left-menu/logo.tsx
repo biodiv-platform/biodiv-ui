@@ -21,7 +21,7 @@ const Logo = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0.25rem 0;
-  min-height: 3.4rem;
+  min-height: 3.75rem;
   flex-wrap: wrap;
 
   .right-logo {

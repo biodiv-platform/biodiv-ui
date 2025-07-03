@@ -207,7 +207,7 @@ export default function SpeciesShowPageComponent({
                         </DialogBody>
                         <DialogFooter>
                           <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
-                          <Button ml={4} onClick={onAddClose} type="button">
+                          <Button ml={4} onClick={onAddClose} type="button" variant={"subtle"}>
                             <CrossIcon />
                             {t("common:cancel")}
                           </Button>
@@ -234,7 +234,7 @@ export default function SpeciesShowPageComponent({
                         </DialogBody>
                         <DialogFooter>
                           <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
-                          <Button ml={4} onClick={onEditClose} type="button">
+                          <Button ml={4} onClick={onEditClose} type="button" variant={"subtle"}>
                             <CrossIcon />
                             {t("common:cancel")}
                           </Button>

@@ -135,7 +135,7 @@ export default function WKTDrawViewer({
   return (
     <div>
       <SimpleGrid columns={[1, 1, 5, 5]} alignItems="flex-end" gap={3} mb={mb}>
-        <Field gridColumn="1/3">
+        <Field gridColumn="1/3" >
           <SelectAsyncInputField
             name="geoentities-search"
             placeholder={t("form:geoentities")}
@@ -149,9 +149,9 @@ export default function WKTDrawViewer({
           />
         </Field>
         <Field gridColumn="3/5">
-          <Field htmlFor={nameTopology}>{labelTopology}</Field>
+          <Field htmlFor={nameTopology} label={labelTopology} />
           <HStack gap="10" width="full">
-            <InputGroup>
+            <InputGroup width={"full"}>
               <Input
                 name={nameTopology}
                 id={nameTopology}

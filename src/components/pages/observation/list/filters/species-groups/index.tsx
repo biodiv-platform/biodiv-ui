@@ -34,7 +34,7 @@ const SpeciesGroupsFilter = () => {
   });
 
   return (
-    <SimpleGrid gridGap={2} columns={5}>
+    <SimpleGrid gridGap={2} columns={5} p={4}>
       {speciesGroupList?.map((o) => (
         <CustomCheckbox
           key={o.id}

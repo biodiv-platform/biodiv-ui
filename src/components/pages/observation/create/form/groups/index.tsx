@@ -43,14 +43,23 @@ const GroupSelector = ({
       >
         <RadioCard.Root
           name={name}
-          value={field.value ? field.value.toString() : ""}
-          onValueChange={field.onChange}
+          onValueChange={({ value }) => {
+            field.onChange(value);
+          }}
           orientation="horizontal"
           align="center"
+          colorPalette={"blue"}
+          size={"sm"}
         >
-          <HStack align="stretch">
-            {options.map((o) => (
-              <CustomRadio key={o.id} value={o.id.toString()} icon={o.name} />
+          <HStack>
+            {options?.map((o) => (
+              <CustomRadio
+                key={o.id}
+                value={o.id.toString()}
+                icon={o.name}
+                title={o.name}
+                selectedValue={field.value}
+              />
             ))}
           </HStack>
         </RadioCard.Root>

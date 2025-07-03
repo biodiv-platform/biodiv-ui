@@ -52,11 +52,15 @@ export default function FilterCheckboxes({
   return (
     <>
       {showSearch && (
-        <InputGroup mb={2} startElement={<LuSearch color="gray.300" />}>
+        <InputGroup width={"full"} pr={4} mb={2} startElement={<LuSearch color="gray.300" />}>
           <Input type="text" placeholder={t("common:search")} onChange={handleOnSearch} />
         </InputGroup>
       )}
-      <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
+      <CheckboxGroup
+        defaultValue={defaultValue}
+        onValueChange={handleOnChange}
+        colorPalette={"blue"}
+      >
         <Stack>
           {filteredOptions.map(({ label, value, valueIcon }) => (
             <Checkbox mr={4} key={label} value={value} alignItems="baseline">

@@ -70,7 +70,7 @@ function SpeciesHeader() {
       <NextSeo openGraph={openGraph} title={openGraph.title} />
       <Spacer />
       <Stack direction="column" p={3} gap={4}>
-        <PageHeading className="fadeInUp" mb={0}>
+        <PageHeading className="fadeInUp" mb={0} size="4xl">
           <ScientificName value={species?.taxonomyDefinition?.italicisedForm} />
         </PageHeading>
 

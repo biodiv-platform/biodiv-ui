@@ -19,7 +19,7 @@ export default function TemporalCoverage() {
           <DateRangePickerField
             hasMaxDate={true}
             disableInput={isDisable}
-            isRequired={!isDisable}
+            required={!isDisable}
             name="observedDateRange"
             label={t("form:date_range")}
           />

@@ -13,7 +13,7 @@ export function TraitEditFooter({ onSave, onCancel }) {
         <CheckIcon />
         {t("common:save")}
       </Button>
-      <Button onClick={onCancel}>
+      <Button onClick={onCancel} variant={"subtle"}>
         <CrossIcon />
         {t("common:cancel")}
       </Button>

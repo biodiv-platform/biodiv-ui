@@ -61,7 +61,7 @@ export default function ResourceImporter() {
     <DialogRoot open={true} onOpenChange={handleOnClose} size="lg">
       <DialogBackdrop />
       <DialogContent>
-        <DialogHeader>📷 {t("observation:importer.title")}</DialogHeader>
+        <DialogHeader fontSize={"3xl"}>📷 {t("observation:importer.title")}</DialogHeader>
         <DialogCloseTrigger />
         <DialogBody>
           <Alert status="info" mb={6} borderRadius="md">
@@ -73,7 +73,12 @@ export default function ResourceImporter() {
           />
 
           {SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE && (
-            <Checkbox checked={canPredict} onChange={() => setCanPredict(!canPredict)} mt={3}>
+            <Checkbox
+              checked={canPredict}
+              onChange={() => setCanPredict(!canPredict)}
+              mt={3}
+              colorPalette={"blue"}
+            >
               {t("observation:importer.prediction_info")}
             </Checkbox>
           )}
@@ -81,7 +86,7 @@ export default function ResourceImporter() {
 
         <DialogFooter>
           <Flex flexShrink={0}>
-            <Button mr={3} onClick={handleOnClose}>
+            <Button mr={3} onClick={handleOnClose} variant={"subtle"}>
               {t("common:close")}
             </Button>
             <Button colorPalette="blue" onClick={handleOnContinue}>

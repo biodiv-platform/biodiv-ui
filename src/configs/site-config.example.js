@@ -193,7 +193,7 @@ const SITE_CONFIG_EXAMPLE = {
     ACTIVE: true
   },
   WKT: {
-    DEFAULT_TAB: 2
+    DEFAULT_TAB: "search"
   },
   GEOSERVER_BASE_PATH: "path"
 };

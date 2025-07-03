@@ -1,13 +1,12 @@
 import { Button, Image, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
-import DownloadIcon from "@icons/download";
 import { ENDPOINT } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import { stripSpecialCharacters, stripTags } from "@utils/text";
-import Link from "next/link";
 import React from "react";
+import { LuDownload } from "react-icons/lu";
 
 const doFilter = (data) => {
   if (data[0]) {
@@ -42,7 +41,6 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
                 borderRadius={50}
                 title={value.name}
                 boxSize="2rem"
-                alt={`/api/avatar?t=${value.name}&s=${100}`}
                 src={getUserImage(value.profilePic, value.name, 100)}
               />
             </a>
@@ -64,26 +62,32 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
         return {
           Header: "File",
           accessor: item,
-          Cell: ({ row: { values } }) => (
-            <Button
-              variant="outline"
-              size="sm"
-              as="a"
-              disabled={!adminOrAuthor(values.user.id) || values.type == "PNG"}
-              colorPalette="blue"
-            >
-              <DownloadIcon />
-              <Link
-                href={
-                  values.filePath.startsWith("/naksha")
-                    ? values.filePath
-                    : `${ENDPOINT.RAW}${values.filePath}`
-                }
-              />
-
-              {downloadLabel}
-            </Button>
-          )
+          Cell: ({ row: { values } }) => {
+            const isDisabled = !adminOrAuthor(values.user.id) || values.type == "PNG";
+            return (
+              <Button
+                variant="outline"
+                size="sm"
+                as={isDisabled ? "button" : "a"}
+                disabled={isDisabled}
+                colorPalette="blue"
+                asChild
+              >
+                <a
+                  href={
+                    !isDisabled
+                      ? values.filePath.startsWith("/naksha")
+                        ? values.filePath
+                        : `${ENDPOINT.RAW}${values.filePath}`
+                      : undefined
+                  }
+                >
+                  <LuDownload />
+                  {downloadLabel}
+                </a>
+              </Button>
+            );
+          }
         };
 
       default:

@@ -227,6 +227,7 @@ export default function Trait({
                 borderWidth="2px"
                 borderRadius="md"
                 bg="white"
+                minW="200px"
               >
                 {tr?.icon && (
                   <Image
@@ -258,6 +259,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -279,6 +281,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -300,6 +303,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -321,6 +325,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>
                   {tr.value && tr.value.split(":").length > 1
@@ -356,6 +361,7 @@ export default function Trait({
                 lineHeight={1}
                 h="3.25rem"
                 bg={tr.value}
+                minW="200px"
               />
             ))
           ) : (
@@ -371,14 +377,14 @@ export default function Trait({
           <Box mt={2}>
             <Button
               size="sm"
-              colorScheme="blue"
+              colorPalette="blue"
               aria-label="Save"
               type="submit"
               onClick={handleTraitUpdate}
             >
               {t("common:save")}
             </Button>
-            <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
+            <Button size="sm" ml={2} variant={"subtle"} aria-label="Cancel" onClick={onClose}>
               {t("common:cancel")}
             </Button>
           </Box>

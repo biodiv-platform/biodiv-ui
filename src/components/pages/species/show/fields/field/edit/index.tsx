@@ -19,7 +19,12 @@ export default function SpeciesFieldSimpleEdit() {
   useListener(setInitialFormValue, [SPECIES_FIELD_UPDATE]);
 
   return (
-    <DialogRoot onOpenChange={doCleanup} trapFocus={false} size="cover" open={!!initialFormValue}>
+    <DialogRoot
+      onOpenChange={doCleanup}
+      trapFocus={false}
+      size="xl"
+      open={!!initialFormValue}
+    >
       <DialogBackdrop />
       {initialFormValue && (
         <SpeciesFieldEditForm

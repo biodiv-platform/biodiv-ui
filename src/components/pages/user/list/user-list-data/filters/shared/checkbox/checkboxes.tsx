@@ -57,7 +57,7 @@ export default function FilterCheckboxes({
           <Input type="text" placeholder={t("common:search")} onChange={handleOnSearch} />
         </InputGroup>
       )}
-      <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
+      <CheckboxGroup defaultValue={defaultValue} onValueChange={handleOnChange}>
         <Stack>
           {filteredOptions.map(({ label, value, valueIcon }) => (
             <Checkbox mr={4} key={label} value={value} alignItems="baseline">

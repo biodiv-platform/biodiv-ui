@@ -129,7 +129,9 @@ export default function SpeciesFieldSimpleCreate({
       <DialogRoot onOpenChange={closeModal} trapFocus={false} size="xl" open={isModalOpen}>
         <DialogBackdrop />
         <DialogContent>
-          <DialogHeader>{"Add New Trait"}</DialogHeader>
+          <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+            {"Add New Trait"}
+          </DialogHeader>
           <DialogCloseTrigger onClick={() => setTraitValues([])} />
           <DialogBody>
             {!hasNewTraits &&
@@ -137,7 +139,7 @@ export default function SpeciesFieldSimpleCreate({
                 .filter((item) => item.values.length === 0)
                 .map((t) => (
                   <Box mb={4}>
-                    <Heading as="h4" size="sm" mb={2} alignItems="center" display="flex">
+                    <Heading as="h4" size="md" mb={2} alignItems="center" display="flex">
                       {t.name}
                     </Heading>
                     {t.dataType == "STRING" && t.traitTypes != "RANGE" && (
@@ -236,6 +238,7 @@ export default function SpeciesFieldSimpleCreate({
                     notification("Unable to add traits");
                   }
                 }}
+                variant={"subtle"}
               >
                 <LuCheck />
                 {t("common:save")}
@@ -246,6 +249,7 @@ export default function SpeciesFieldSimpleCreate({
                   setTraitValues([]);
                   setIsModalOpen(false);
                 }}
+                variant={"subtle"}
               >
                 <LuX />
                 {t("common:cancel")}

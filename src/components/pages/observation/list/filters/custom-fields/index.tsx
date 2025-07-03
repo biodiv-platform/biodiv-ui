@@ -25,7 +25,7 @@ export default function CustomFieldsFilter() {
               {customField.name}
             </Box>
           </AccordionItemTrigger>
-          <AccordionItemContent>
+          <AccordionItemContent pr={4}>
             <CustomFieldTypes field={customField} key={customField.id} />
           </AccordionItemContent>
         </AccordionItem>

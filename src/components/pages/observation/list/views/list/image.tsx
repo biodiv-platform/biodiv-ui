@@ -1,11 +1,8 @@
-import { HStack, Image, Link } from "@chakra-ui/react";
+import { HStack, Image } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
-import AudioIcon from "@icons/audio";
-import ImageIcon from "@icons/image";
-import VideoIcon from "@icons/video";
 import { Role } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { RESOURCE_SIZE } from "@static/constants";
@@ -14,6 +11,7 @@ import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { LuAudioLines, LuImage, LuVideo } from "react-icons/lu";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -101,17 +99,18 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
         <div className="stats" onClick={handleImageIconClick}>
           {o.noOfImages ? (
             <>
-              {o.noOfImages} <ImageIcon />
+              {o.noOfImages}
+              <LuImage />
             </>
           ) : null}
           {o.noOfVideos ? (
             <>
-              {o.noOfVideos} <VideoIcon />
+              {o.noOfVideos} <LuVideo />
             </>
           ) : null}
           {o.noOfAudios ? (
             <>
-              {o.noOfAudios} <AudioIcon />
+              {o.noOfAudios} <LuAudioLines />
             </>
           ) : null}
         </div>
@@ -125,19 +124,19 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
       </HStack>
 
       <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-        <Link color="white">
-          <Image
-            className="ob-image-list"
-            objectFit="cover"
-            bg="gray.100"
-            src={getResourceThumbnail(
-              RESOURCE_CTX.OBSERVATION,
-              o.reprImageUrl,
-              RESOURCE_SIZE.LIST_THUMBNAIL
-            )}
-            alt={getLocalIcon(o?.speciesGroup) || o.observationId?.toString()}
-          />
-        </Link>
+        <Image
+          className="ob-image-list"
+          objectFit="cover"
+          bg="gray.100"
+          src={getResourceThumbnail(
+            RESOURCE_CTX.OBSERVATION,
+            o.reprImageUrl,
+            RESOURCE_SIZE.LIST_THUMBNAIL
+          )}
+          onError={(e) => {
+            e.currentTarget.src = getLocalIcon(o?.speciesGroup || o.observationId?.toString());
+          }}
+        />
       </LocalLink>
 
       <ShadowedUser user={o.user} />

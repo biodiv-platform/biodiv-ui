@@ -63,24 +63,23 @@ export default function AreaDrawField({
   }, []);
 
   return (
-    <Field
-      required={isRequired}
-      invalid={!!fieldState.error}
-      mb={mb}
-      {...props}
-      htmlFor={name}
-      label={label}
-    >
-      <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
-        <NakshaMapboxDraw
-          defaultViewState={defaultViewState}
-          features={defaultFeatures}
-          onFeaturesChange={handleOnFeatureChange}
-          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
-        />
-      </Box>
-      <Field errorText={JSON.stringify(fieldState?.error?.message)} />
+    <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
+      <Field
+        required={isRequired}
+        invalid={!!fieldState.error}
+        mb={mb}
+        {...props}
+        htmlFor={name}
+        label={label}
+        errorText={JSON.stringify(fieldState?.error?.message)}
+      />
       {hint && <Field color="gray.600" helperText={hint} />}
-    </Field>
+      <NakshaMapboxDraw
+        defaultViewState={defaultViewState}
+        features={defaultFeatures}
+        onFeaturesChange={handleOnFeatureChange}
+        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+      />
+    </Box>
   );
 }

@@ -42,50 +42,48 @@ export default function TraitsFilter() {
   return traitsList?.length > 0 ? (
     <SubAccordion>
       {traitsList?.map(({ categoryName, traitsValuePairList }) => (
-        <AccordionItem value={categoryName}>
-          <AccordionItemTrigger>
+        <AccordionItem value={categoryName} pl={4}>
+          <AccordionItemTrigger pr={4}>
             <Box flex={1} textAlign="left">
               {categoryName.split(">")[1]}
             </Box>
           </AccordionItemTrigger>
-          <SubAccordion>
-            <AccordionItemContent>
-              {traitsValuePairList?.map(({ traits: trait, values }) => {
-                switch (trait.dataType) {
-                  case "COLOR":
-                    return (
-                      <HsvColorFilter
-                        filterKey={`trait_${trait.traitId}.color_hsl`}
-                        label={trait.name}
-                      />
-                    );
-                  case "DATE":
-                    return (
-                      <TraitDateRangeFilter
-                        filterKey={`trait_${trait.traitId}.season`}
-                        translateKey={trait.name}
-                      />
-                    );
+          <AccordionItemContent>
+            {traitsValuePairList?.map(({ traits: trait, values }) => {
+              switch (trait.dataType) {
+                case "COLOR":
+                  return (
+                    <HsvColorFilter
+                      filterKey={`trait_${trait.traitId}.color_hsl`}
+                      label={trait.name}
+                    />
+                  );
+                case "DATE":
+                  return (
+                    <TraitDateRangeFilter
+                      filterKey={`trait_${trait.traitId}.season`}
+                      translateKey={trait.name}
+                    />
+                  );
 
-                  default:
-                    return (
-                      <CheckboxFilterPanel
-                        key={trait.id}
-                        label={trait.name}
-                        filterKey={`trait_${trait.traitId}.string`}
-                        options={values.map(({ value, icon, traitValueId }) => ({
-                          label: value,
-                          valueIcon: icon,
-                          value: traitValueId.toString()
-                        }))}
-                        statKey={`groupTraits`}
-                        skipOptionsTranslation={true}
-                      />
-                    );
-                }
-              })}
-            </AccordionItemContent>
-          </SubAccordion>
+                default:
+                  return (
+                    <CheckboxFilterPanel
+                      key={trait.id}
+                      label={trait.name}
+                      filterKey={`trait_${trait.traitId}.string`}
+                      options={values.map(({ value, icon, traitValueId }) => ({
+                        label: value,
+                        valueIcon: icon,
+                        value: traitValueId.toString()
+                      }))}
+                      statKey={`groupTraits`}
+                      skipOptionsTranslation={true}
+                    />
+                  );
+              }
+            })}
+          </AccordionItemContent>
         </AccordionItem>
       ))}
     </SubAccordion>

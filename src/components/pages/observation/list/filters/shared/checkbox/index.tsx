@@ -5,7 +5,7 @@ import React from "react";
 import {
   AccordionItem,
   AccordionItemContent,
-  AccordionItemTrigger,
+  AccordionItemTrigger
 } from "@/components/ui/accordion";
 
 import FilterCheckboxes, { FilterCheckboxesProps } from "./checkboxs";

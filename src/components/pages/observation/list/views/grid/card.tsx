@@ -45,7 +45,9 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
               o?.thumbnail,
               RESOURCE_SIZE.LIST_THUMBNAIL
             )}
-            alt={getLocalIcon(o?.speciesGroup) || o.observationId?.toString()}
+            onError={(e) => {
+              e.currentTarget.src = getLocalIcon(o?.speciesGroup || o.observationId?.toString());
+            }}
           />
         </LocalLink>
         <ShadowedUser user={o?.user} />

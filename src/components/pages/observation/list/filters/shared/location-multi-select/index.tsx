@@ -25,7 +25,7 @@ export default function FilterMultiSelectPanel({
           {label}
         </Box>
       </AccordionItemTrigger>
-      <AccordionItemContent>
+      <AccordionItemContent pl={4} pr={4}>
         <FilterMultiSelectInput filterKey={filterKey} label={label} options={options} />
       </AccordionItemContent>
     </AccordionItem>

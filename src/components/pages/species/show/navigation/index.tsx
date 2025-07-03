@@ -1,4 +1,4 @@
-import { Box, IconButton, Link as ChakraLink, useToken } from "@chakra-ui/react";
+import { Box, IconButton, useToken } from "@chakra-ui/react";
 import { getSpeciesFieldHeaders } from "@utils/species";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
@@ -19,27 +19,24 @@ export default function SpeciesNavigation() {
   return (
     <Box position="sticky" top="0" h={0} zIndex={zIndicesSticky}>
       <MenuRoot>
-        <MenuTrigger m={1} as={IconButton} aria-label="Options" bg="white">
-          <LuMenu />
+        <MenuTrigger m={1} aria-label="Options">
+          <IconButton variant={"subtle"}>
+            <LuMenu />
+          </IconButton>
         </MenuTrigger>
         <MenuContent>
-          <Link href="#synonyms">
-            <MenuItem as={ChakraLink} value="#synonyms">
-              {t("species:synonyms")}
-            </MenuItem>
-          </Link>
-          <Link href="#common-names">
-            <MenuItem as={ChakraLink} value="#common-names">
-              {t("species:common_names")}
-            </MenuItem>
-          </Link>
+          <MenuItem value="#synonyms">
+            <Link href="#synonyms">{t("species:synonyms")}</Link>
+          </MenuItem>
+
+          <MenuItem value="#common-names">
+            <Link href="#common-names">{t("species:common_names")}</Link>
+          </MenuItem>
 
           {fieldHeaders.map(({ header }) => (
-            <Link href={`#${urlSlug(header)}`}>
-              <MenuItem as={ChakraLink} value={`#${urlSlug(header)}`} key={header}>
-                {header}
-              </MenuItem>
-            </Link>
+            <MenuItem value={`#${urlSlug(header)}`} key={header}>
+              <Link href={`#${urlSlug(header)}`}>{header}</Link>
+            </MenuItem>
           ))}
         </MenuContent>
       </MenuRoot>

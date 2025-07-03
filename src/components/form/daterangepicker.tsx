@@ -22,7 +22,7 @@ interface IDatePickerBoxProps {
   dateFormat?: string;
   style?;
   hasMaxDate?: boolean;
-  isRequired?: boolean;
+  required?: boolean;
   subscribe?: boolean;
 }
 
@@ -36,6 +36,7 @@ export const DateRangePickerField = ({
   subscribe = false,
   hasMaxDate = true,
   dateFormat = "d-m-Y",
+  required,
   ...props
 }: IDatePickerBoxProps) => {
   const { field, fieldState } = useController({ name });
@@ -57,13 +58,14 @@ export const DateRangePickerField = ({
 
   return (
     <Field invalid={!!fieldState.error} mb={mb} {...props}>
-      <Field htmlFor={name} label={label} />
+      <Field htmlFor={name} label={label} required={required} />
       <InputGroup
         endElement={
           <label htmlFor={name} style={{ cursor: "pointer" }}>
             <CalendarIcon color="gray.300" />
           </label>
         }
+        width={"full"}
       >
         <Flatpickr
           value={date}
