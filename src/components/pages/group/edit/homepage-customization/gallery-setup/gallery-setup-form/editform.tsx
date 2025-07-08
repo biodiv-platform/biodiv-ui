@@ -95,7 +95,7 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         languageId: langId,
         moreLinks: editGalleryData[1][translationSelected][0].moreLinks,
         observationId: editGalleryData[1][translationSelected][0].observationId,
-        readMoreText: editGalleryData[1][translationSelected][0].readMoreText,
+        readMoreText: null,
         readMoreUIType: editGalleryData[1][translationSelected][0].readMoreUIType,
         sliderId: Number(editGalleryData[0].split("|")[0]),
         title: "",
@@ -262,17 +262,6 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           name={`${translationSelected}.0.readMoreText`}
           label="Read more button text"
           maxLength={30}
-          disabled={hForm.getValues()[translationSelected][0].id == null}
-          onChangeCallback={(e) => {
-            const values = hForm.getValues();
-
-            for (const langId in values) {
-              const entry = values[langId]?.[0];
-              if (entry) {
-                hForm.setValue(`${langId}.0.readMoreText`, e.target.value);
-              }
-            }
-          }}
         />
 
         <SelectInputField

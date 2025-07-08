@@ -127,7 +127,7 @@ export default function GallerySetupFrom({
         moreLinks: hForm.getValues()[translationSelected][0].moreLinks,
         title: "",
         observationId: hForm.getValues()[translationSelected][0].observationId,
-        readMoreText: hForm.getValues()[translationSelected][0].readMoreText,
+        readMoreText: null,
         readMoreUIType: hForm.getValues()[translationSelected][0].readMoreUIType,
         gallerySidebar: hForm.getValues()[translationSelected][0].gallerySidebar,
         authorInfo: hForm.getValues()[translationSelected][0].authorInfo,
@@ -260,16 +260,6 @@ export default function GallerySetupFrom({
             name={`${translationSelected}.0.readMoreText`}
             label="Read more button text"
             maxLength={30}
-            onChangeCallback={(e) => {
-              const values = hForm.getValues();
-
-              for (const langId in values) {
-                const entry = values[langId]?.[0];
-                if (entry) {
-                  hForm.setValue(`${langId}.0.readMoreText`, e.target.value);
-                }
-              }
-            }}
           />
           <SelectInputField
             key={`readmoreui-${translationSelected}`}
