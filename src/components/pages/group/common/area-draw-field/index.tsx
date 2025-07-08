@@ -52,7 +52,7 @@ export default function AreaDrawField({
         ]
       }
     }
-  ]:[], []);
+  ]:[], [field.value]);
 
   const handleOnFeatureChange = (features) => {
     if (!features.length) {

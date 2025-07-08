@@ -12,10 +12,14 @@ import GallerySetup from "./gallery-setup";
 
 const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
-export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
+export default function HomePageGalleryCustomizationForm({ homePageDetails, languages, currentStep }) {
   const { t } = useTranslation();
   const [galleryList, setGalleryList] = useState(
-    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
+    Object.entries(homePageDetails?.gallerySlider || {}).sort((a, b) => {
+      const aOrder = parseInt(a[0].split("|")[1], 10);
+      const bOrder = parseInt(b[0].split("|")[1], 10);
+      return aOrder - bOrder;
+    })
   );
 
   const [isCreate, setIsCreate] = useState(false);
@@ -52,15 +56,31 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
 
   const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
-      gallerySlider: galleryList.reduce(
-        (acc, item, index) => (item.id ? acc : [...acc, { ...item, displayOrder: index }]),
-        []
-      ),
+      gallerySlider: galleryList.reduce((acc, item, index) => {
+        const sliderId = item[0].split("|")[0];
+        const languageMap = item[1] as Record<number, any[]>;
+
+        if (sliderId === "null") {
+          for (const langId in languageMap) {
+            languageMap[langId] = languageMap[langId].map((entry) => ({
+              ...entry,
+              displayOrder: index
+            }));
+          }
+          acc[`null|${index}`]=languageMap;
+        }
+
+        return acc;
+      }, {}),
       ...value
     };
     const { success, data } = await axInsertHomePageGallery(payload);
     if (success) {
-      setGalleryList(data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder));
+      setGalleryList(Object.entries(data.gallerySlider || {}).sort((a, b) => {
+        const aOrder = parseInt(a[0].split("|")[1], 10);
+        const bOrder = parseInt(b[0].split("|")[1], 10);
+        return aOrder - bOrder;
+      }));
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
@@ -69,7 +89,7 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
 
   return (
     <>
-      <FormProvider {...hForm}>
+      {currentStep==0 && <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
           <Box width={["100%", 350]} justifyContent="space-between">
             <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
@@ -93,15 +113,16 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails }) {
             uploadHandler={axUploadHomePageEditorResource}
           />
         </form>
-      </FormProvider>
-      <GallerySetup
+      </FormProvider>}
+      {currentStep == 1 && <GallerySetup
         isCreate={isCreate}
         setIsCreate={setIsCreate}
         setGalleryList={setGalleryList}
         galleryList={galleryList}
         isEdit={isEdit}
         setIsEdit={setIsEdit}
-      />
+        languages={languages}
+      />}
       <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
         <Button colorScheme="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
           {t("common:save")}

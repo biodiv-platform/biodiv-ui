@@ -10,10 +10,19 @@ import * as Yup from "yup";
 
 import GallerySetup from "./gallery-setup";
 
-export default function HomePageCustomizationForm({ userGroupId, homePageDetails, currentStep }) {
+export default function HomePageCustomizationForm({
+  userGroupId,
+  homePageDetails,
+  currentStep,
+  languages
+}) {
   const { t } = useTranslation();
   const [galleryList, setGalleryList] = useState(
-    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
+    Object.entries(homePageDetails?.gallerySlider || {}).sort((a, b) => {
+      const aOrder = parseInt(a[0].split("|")[1], 10);
+      const bOrder = parseInt(b[0].split("|")[1], 10);
+      return aOrder - bOrder;
+    })
   );
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -56,17 +65,35 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
 
   const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
-      gallerySlider: galleryList.reduce((acc, item, index) => {
-        if (!item.id) {
-          acc.push({ ugId: userGroupId, displayOrder: index, ...item });
+      gallerySlider: galleryList.reduce<Record<number, any[]>[]>((acc, item, index) => {
+        const sliderId = item[0].split("|")[0];
+        const languageMap = item[1] as Record<number, any[]>;
+
+        if (sliderId === "null") {
+          for (const langId in languageMap) {
+            languageMap[langId] = languageMap[langId].map((entry) => ({
+              ...entry,
+              ugId: userGroupId,
+              displayOrder: index
+            }));
+          }
+          acc.push(languageMap);
         }
+
         return acc;
       }, []),
       ...value
     };
+
     const { success, data } = await axUpdateGroupHomePageDetails(userGroupId, payload);
     if (success) {
-      setGalleryList(data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder));
+      setGalleryList(
+        Object.entries(data.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        })
+      );
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
@@ -106,6 +133,7 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
           galleryList={galleryList}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
+          languages={languages}
         />
       )}
       <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">

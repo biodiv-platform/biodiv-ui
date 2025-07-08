@@ -1,5 +1,6 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import GalleryListItems from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-tabel/gallery-list";
+import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import { axRemoveHomePageGallery, axReorderHomePageGallery } from "@services/utility.service";
@@ -17,6 +18,7 @@ const GallerySetupTable = ({
 }) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setGalleryList(arrayMoveImmutable(galleryList, oldIndex, newIndex));
@@ -29,8 +31,8 @@ const GallerySetupTable = ({
   };
 
   const handleReorderCustomField = async () => {
-    const payload = galleryList.map((galleryItem, index) => ({
-      galleryId: galleryItem.id,
+    const payload = galleryList.map((id, index) => ({
+      galleryId: Number(id[0].split("|")[0]),
       displayOrder: index
     }));
 
@@ -44,11 +46,11 @@ const GallerySetupTable = ({
   };
 
   const removeGalleryItem = async (index) => {
-    if (galleryList[index]?.id) {
-      const { success } = await axRemoveHomePageGallery(galleryList[index].id);
+    if (galleryList[index][0].split("|")[0]!="null") {
+      const { success } = await axRemoveHomePageGallery(Number(galleryList[index][0].split("|")[0]));
       if (success) {
         notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
-        setGalleryList(galleryList.filter((item, idx) => idx !== index));
+        setGalleryList(galleryList.filter((_, idx) => idx !== index));
       } else {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
@@ -78,6 +80,7 @@ const GallerySetupTable = ({
           helperClass="sorting-row"
           galleryList={galleryList}
           onSortEnd={onSortEnd}
+          languageId = {languageId}
         />
       </table>
       <ButtonGroup spacing={4} mt={4}>
@@ -90,7 +93,7 @@ const GallerySetupTable = ({
           float="right"
           hidden={!showReorder}
           onClick={
-            galleryList.some((e) => e.id === undefined)
+            galleryList.some((e)=>e[0].split("|")[0]=="null")
               ? handleReorderAlter
               : handleReorderCustomField
           }

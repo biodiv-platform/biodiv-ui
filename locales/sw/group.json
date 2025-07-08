@@ -12,6 +12,7 @@
     "title": "Majukumu ya Mtumiaji",
     "updated": "Watumiaji wa Kikundi Wamesasishwa Kwa Mafanikio"
   },
+  "basic_details": "Maelezo ya kimsingi",
   "confirm_closed_group": "Hii ni kikundi kilichofungwa, ombi la uanachama linapaswa kupitishwa na msimamizi. Bonyeza OK kutuma ombi la kujiunga.",
   "confirm_leave": "Acha Group?",
   "create": {
@@ -73,6 +74,7 @@
     "success": "Kikundi kilichosasishwa kwa mafanikio.",
     "title": "Hariri Group."
   },
+  "group_coverage": "Chanjo ya kikundi",
   "homepage_customization": {
     "about_us": "Kuhusu sisi",
     "add_options": "Ongeza chaguzi.",
@@ -182,7 +184,8 @@
     "filter_by_contributors": "Kichujio na wachangiaji",
     "filter_species_fields": "Kichujio na shamba za spishi",
     "select_all": "Chagua Zote",
-    "submit_selections": "Wasilisha chaguzi"
+    "submit_selections": "Wasilisha chaguzi",
+    "title": "Sehemu za spishi"
   },
   "tags": "Tags.",
   "trait": {

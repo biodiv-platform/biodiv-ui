@@ -12,6 +12,7 @@
     "title": "ਉਪਭੋਗਤਾ ਰੋਲ",
     "updated": "ਸਮੂਹ ਉਪਭੋਗਤਾਵਾਂ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ"
   },
+  "basic_details": "ਮੁ nets ਲੇ ਵੇਰਵੇ",
   "confirm_closed_group": "ਇਹ ਇੱਕ ਬੰਦ ਸਮੂਹ ਹੈ, ਮੈਂਬਰਸ਼ਿਪ ਬੇਨਤੀ ਨੂੰ ਇੱਕ ਸੰਚਾਲਕ ਦੁਆਰਾ ਮਨਜ਼ੂਰੀ ਦੇਣੀ ਪੈਂਦੀ ਹੈ. ਬੇਨਤੀ ਭੇਜਣ ਲਈ ਠੀਕ ਦਬਾਓ",
   "confirm_leave": "ਨੰਬਰ ਛੱਡੋ?",
   "create": {
@@ -73,6 +74,7 @@
     "success": "ਸਮੂਹ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
     "title": "ਸੋਧ ਸਮੂਹ"
   },
+  "group_coverage": "ਸਮੂਹ ਕਵਰੇਜ",
   "homepage_customization": {
     "about_us": "ਸਾਡੇ ਬਾਰੇ",
     "add_options": "ਵਿਕਲਪ ਸ਼ਾਮਲ ਕਰੋ",
@@ -182,7 +184,8 @@
     "filter_by_contributors": "ਯੋਗਦਾਨ ਪਾਉਣ ਵਾਲਿਆਂ ਦੁਆਰਾ ਫਿਲਟਰ",
     "filter_species_fields": "ਸਪੀਸੀਜ਼ ਦੇ ਖੇਤਰਾਂ ਦੁਆਰਾ ਫਿਲਟਰ",
     "select_all": "ਸਭ ਚੁਣੋ",
-    "submit_selections": "ਚੋਣ ਜਮ੍ਹਾਂ ਕਰੋ"
+    "submit_selections": "ਚੋਣ ਜਮ੍ਹਾਂ ਕਰੋ",
+    "title": "ਸਪੀਸੀਜ਼ ਦੇ ਖੇਤਰ"
   },
   "tags": "ਟੈਗਸ",
   "trait": {

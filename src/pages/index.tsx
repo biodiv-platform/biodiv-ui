@@ -20,7 +20,11 @@ export async function getServerSideProps(ctx) {
     props: {
       homeInfo: {
         ...homeInfo,
-        gallerySlider: homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+        gallerySlider: Object.entries(homeInfo.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        })
       }
     }
   };

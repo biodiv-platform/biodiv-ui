@@ -21,6 +21,13 @@
   "clear": "Nettoyer",
   "close": "Fermer",
   "copy": "Copier dans le presse-papier",
+  "create_form": {
+    "add_translation_button": "Ajouter une traduction",
+    "cancel": "Annuler",
+    "create": "Créer",
+    "language": "Langue",
+    "language_placeholder": "Sélectionner la langue"
+  },
   "datatable": "Datable",
   "delete": "Effacer",
   "edit": "Éditer",

@@ -47,19 +47,27 @@ interface GroupEditPageProps {
   mediaToggle;
   langId;
   traits;
+  languagesList;
 }
 
 const steps = [
-  { label: "Basic Details", content: "Enter personal details", icon: EditIcon },
-  { label: "Group Coverage", content: "Select preferences", icon: GlobeIcon },
-  { label: "User Roles", content: "Review & Submit", icon: UserCheckIcon },
-  { label: "Homepage Components", content: "Review & Submit", icon: HomeIcon },
-  { label: "Main Gallery", content: "Review & Submit", icon: ImageIcon },
-  // { label: "Mini Gallery Management", content: "Review & Submit", icon: EditIcon },
-  { label: "Custom Fields", content: "Review & Submit", icon: ListIcon },
-  { label: "Group Rules", content: "Review & Submit", icon: CheckCircleIcon },
-  { label: "Observation Display", content: "Review & Submit", icon: ViewIcon },
-  { label: "Species Fields", content: "Review & Submit", icon: AtSignIcon }
+  { label: "Basic Details", translation: "group:basic_details", icon: EditIcon },
+  { label: "Group Coverage", translation: "group:group_coverage", icon: GlobeIcon },
+  { label: "User Roles", translation: "group:admin.title", icon: UserCheckIcon },
+  {
+    label: "Homepage Components",
+    translation: "group:homepage_customization.title",
+    icon: HomeIcon
+  },
+  {
+    label: "Main Gallery",
+    translation: "group:homepage_customization.gallery_setup.title",
+    icon: ImageIcon
+  },
+  { label: "Custom Fields", translation: "group:custom_field.title", icon: ListIcon },
+  { label: "Group Rules", translation: "group:rules.title", icon: CheckCircleIcon },
+  { label: "Observation Display", translation: "group:observation_display", icon: ViewIcon },
+  { label: "Species Fields", translation: "group:species_fields.title", icon: AtSignIcon }
 ];
 
 export default function EditGroupPageComponent({
@@ -75,7 +83,8 @@ export default function EditGroupPageComponent({
   userGroupId,
   mediaToggle,
   langId,
-  traits
+  traits,
+  languagesList
 }: GroupEditPageProps) {
   const { t } = useTranslation();
   const isAdmin = hasAccess([Role.Admin]);
@@ -146,7 +155,7 @@ export default function EditGroupPageComponent({
               <>
                 <GridItem key={`label-${index}`} colSpan={1} mt={2} textAlign="center">
                   <Text fontSize="sm" fontWeight="medium" color={textColor}>
-                    {step.label}
+                    {t(step.translation)}
                   </Text>
                 </GridItem>
               </>
@@ -156,7 +165,7 @@ export default function EditGroupPageComponent({
       </Box>
       <Box p={6} rounded="lg" border="1px solid" borderColor="gray.200" boxShadow="sm" mb={4}>
         <Heading as="h2" fontSize={22} fontWeight="bold" color="gray.900" mb={2}>
-          {steps[currentStep].label}
+          {t(steps[currentStep].translation)}
         </Heading>
         {groupInfo ? (
           <UserGroupEditForm
@@ -169,42 +178,44 @@ export default function EditGroupPageComponent({
         ) : (
           <Spinner mb={10} />
         )}
-        {currentStep == 2 && (
+        {steps[currentStep].translation == "group:admin.title" && (
           <GroupAdministratorsEditForm
             userGroupId={userGroupId}
             founders={founders}
             moderators={moderators}
           />
         )}
-        {(currentStep == 3 || currentStep == 4) && (
+        {(steps[currentStep].translation == "group:homepage_customization.title" ||
+          steps[currentStep].translation == "group:homepage_customization.gallery_setup.title") && (
           <GroupHomePageCustomization
             userGroupId={userGroupId}
             homePageDetails={homePageDetails}
             currentStep={currentStep}
+            languages = {languagesList}
           />
         )}
         {isAdmin ? (
           <div>
-            {currentStep == 5 && (
+            {steps[currentStep].translation == "group:custom_field.title" && (
               <GroupCustomField
                 allCustomField={allCustomField}
                 userGroupId={userGroupId}
                 groupCustomField={customFieldList}
               />
             )}
-            {currentStep == 6 && (
+            {steps[currentStep].translation == "group:rules.title" && (
               <GroupRules rules={groupRules} userGroupId={userGroupId} traits={traits} />
             )}
           </div>
-        ) : currentStep == 5 || currentStep == 6 ? (
+        ) : steps[currentStep].translation == "group:custom_field.title" || steps[currentStep].translation == "group:rules.title" ? (
           <ContactAdmin />
         ) : (
           <Box></Box>
         )}
-        {(isAdmin || isFounder) && currentStep == 7 && (
+        {(isAdmin || isFounder) && steps[currentStep].translation == "group:observation_display" && (
           <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
         )}
-        {currentStep == 8 && (
+        {steps[currentStep].translation == "group:species_fields.title" && (
           <SpeciesHierarchyForm
             onSubmit={handleSpeciesFieldsSubmit}
             langId={langId}

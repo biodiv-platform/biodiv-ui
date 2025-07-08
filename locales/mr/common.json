@@ -21,6 +21,13 @@
   "clear": "स्पष्ट",
   "close": "बंद",
   "copy": "क्लिपबोर्डवर कॉपी करा",
+  "create_form": {
+    "add_translation_button": "भाषांतर जोडा",
+    "cancel": "रद्द करा",
+    "create": "तयार करा",
+    "language": "भाषा",
+    "language_placeholder": "भाषा निवडा"
+  },
   "datatable": "डेटाटेबल",
   "delete": "हटवा",
   "edit": "सुधारणे",

@@ -12,6 +12,7 @@
     "title": "વપરાશકર્તા ભૂમિકાઓ",
     "updated": "જૂથ વપરાશકર્તાઓ સફળતાપૂર્વક અપડેટ થયા"
   },
+  "basic_details": "મૂળ વિગતો",
   "confirm_closed_group": "આ એક બંધ ગ્રુપ છે, સભ્યપદ વિનંતીને મધ્યસ્થી દ્વારા મંજૂર કરવાની જરૂર છે. જોડાવા માટે ઠીક દબાવો",
   "confirm_leave": "ગ્રુપ છોડી દો?",
   "create": {
@@ -73,6 +74,7 @@
     "success": "ગ્રુપ સફળતાપૂર્વક સુધારાશે",
     "title": "ગ્રુપ સંપાદિત કરો"
   },
+  "group_coverage": "સમૂહ -કવર",
   "homepage_customization": {
     "about_us": "અમારા વિશે",
     "add_options": "વિકલ્પો ઉમેરો",
@@ -182,7 +184,8 @@
     "filter_by_contributors": "ફાળો આપનારાઓ દ્વારા ફિલ્ટર",
     "filter_species_fields": "પ્રજાતિના ક્ષેત્રો દ્વારા ફિલ્ટર",
     "select_all": "બધા પસંદ કરો",
-    "submit_selections": "પસંદગીઓ સબમિટ કરો"
+    "submit_selections": "પસંદગીઓ સબમિટ કરો",
+    "title": "જાતિઓ"
   },
   "tags": "ટૅગ્સ",
   "trait": {

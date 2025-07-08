@@ -12,7 +12,7 @@ import {
   axGetUserGroupMediaToggle,
   axGetUserGroupRules
 } from "@services/usergroup.service";
-import { axGetAllHabitat } from "@services/utility.service";
+import { axGetAllHabitat, axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
 import dynamic from "next/dynamic";
@@ -51,6 +51,7 @@ export const getServerSideProps = async (ctx) => {
   const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.id);
   const { success: s5, customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
   const { success: s6, data: traits } = await axGetTraitsByGroupId(829, langId);
+  const { data: languagesList } = await axGetLangList();
   if (s1 && s2 && s3 && s4 && s5 && s6) {
     return {
       props: {
@@ -69,7 +70,8 @@ export const getServerSideProps = async (ctx) => {
         })),
         mediaToggle: customisations.mediaToggle,
         langId,
-        traits
+        traits,
+        languagesList
       }
     };
   }

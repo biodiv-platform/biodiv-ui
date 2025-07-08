@@ -21,6 +21,13 @@
   "clear": "స్పష్టమైన",
   "close": "దగ్గరగా",
   "copy": "క్లిప్బోర్డ్కు కాపీ చేయండి",
+  "create_form": {
+    "add_translation_button": "అనువాదాన్ని జోడించండి",
+    "cancel": "రద్దు చేయండి",
+    "create": "సృష్టించండి",
+    "language": "భాష",
+    "language_placeholder": "భాషను ఎంచుకోండి"
+  },
   "datatable": "Datatable.",
   "delete": "తొలగింపు",
   "edit": "మార్చు",

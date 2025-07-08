@@ -21,6 +21,13 @@
   "clear": "ସଫା",
   "close": "ବନ୍ଦ",
   "copy": "କ୍ଲିପବୋର୍ଡକୁ କପି କରନ୍ତୁ |",
+  "create_form": {
+    "add_translation_button": "ଅନୁବାଦ ଯୋଡନ୍ତୁ |",
+    "cancel": "ବାତିଲ୍ କରନ୍ତୁ |",
+    "create": "ସୃଷ୍ଟି କରନ୍ତୁ |",
+    "language": "ଭାଷା",
+    "language_placeholder": "ଭାଷା ଚୟନ କରନ୍ତୁ |"
+  },
   "datatable": "ଡାଟାଟେବଲ୍",
   "delete": "ବିଲୋପ କରନ୍ତୁ |",
   "edit": "ସଂପାଦନ କରନ୍ତୁ |",

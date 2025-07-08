@@ -12,6 +12,7 @@
     "title": "वापरकर्ता भूमिका",
     "updated": "गट वापरकर्ते यशस्वीरित्या अद्यतनित केले"
   },
+  "basic_details": "मूलभूत तपशील",
   "confirm_closed_group": "हे एक बंद गट आहे, सदस्यता विनंती मॉडरेटरद्वारे मंजूर करणे आवश्यक आहे. विनंती पाठविण्यासाठी ओके दाबा",
   "confirm_leave": "गट सोडा?",
   "create": {
@@ -73,6 +74,7 @@
     "success": "समूह यशस्वीरित्या अद्यतनित केला",
     "title": "गट संपादित करा"
   },
+  "group_coverage": "गट कव्हरेज",
   "homepage_customization": {
     "about_us": "आमच्याबद्दल",
     "add_options": "पर्याय जोडा",
@@ -182,7 +184,8 @@
     "filter_by_contributors": "योगदानकर्त्यांद्वारे फिल्टर",
     "filter_species_fields": "प्रजाती शेतात फिल्टर",
     "select_all": "सर्व निवडा",
-    "submit_selections": "निवडी सबमिट करा"
+    "submit_selections": "निवडी सबमिट करा",
+    "title": "प्रजाती फील्ड"
   },
   "tags": "टॅग्ज",
   "trait": {

@@ -21,6 +21,13 @@
   "clear": "পরিষ্কার",
   "close": "বন্ধ",
   "copy": "ক্লিপবোর্ডে কপি করুন",
+  "create_form": {
+    "add_translation_button": "অনুবাদ যোগ করুন",
+    "cancel": "বাতিল",
+    "create": "তৈরি করুন",
+    "language": "ভাষা",
+    "language_placeholder": "ভাষা নির্বাচন করুন"
+  },
   "datatable": "Datatable.",
   "delete": "মুছে ফেলা",
   "edit": "সম্পাদনা করুন",

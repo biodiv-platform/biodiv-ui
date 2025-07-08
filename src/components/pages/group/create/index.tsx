@@ -70,6 +70,7 @@ interface GroupCreatePageComponentProps {
   habitats;
   allCustomField;
   traits;
+  languages;
 }
 interface WithId {
   customFieldId: number;
@@ -102,23 +103,24 @@ export const transformMemberPayload = (membersList) => {
 };
 
 const steps = [
-  { label: "Basic Details", content: "Enter personal details", icon: EditIcon },
-  { label: "Group Coverage", content: "Select preferences", icon: GlobeIcon },
-  { label: "User Roles", content: "Review & Submit", icon: UserCheckIcon },
-  { label: "Homepage Components", content: "Review & Submit", icon: HomeIcon },
-  { label: "Main Gallery", content: "Review & Submit", icon: ImageIcon },
+  { label: "Basic Details", translation: "Enter personal details", icon: EditIcon },
+  { label: "Group Coverage", translation: "Select preferences", icon: GlobeIcon },
+  { label: "User Roles", translation: "Review & Submit", icon: UserCheckIcon },
+  { label: "Homepage Components", translation: "Review & Submit", icon: HomeIcon },
+  { label: "Main Gallery", translation: "Review & Submit", icon: ImageIcon },
   // { label: "Mini Gallery Management", content: "Review & Submit", icon: EditIcon },
-  { label: "Custom Fields", content: "Review & Submit", icon: ListIcon },
-  { label: "Group Rules", content: "Review & Submit", icon: CheckCircleIcon },
-  { label: "Observation Display", content: "Review & Submit", icon: ViewIcon },
-  { label: "Species Fields", content: "Review & Submit", icon: AtSignIcon }
+  { label: "Custom Fields", translation: "group:custom_field.title", icon: ListIcon },
+  { label: "Group Rules", translation: "Review & Submit", icon: CheckCircleIcon },
+  { label: "Observation Display", translation: "Review & Submit", icon: ViewIcon },
+  { label: "Species Fields", translation: "Review & Submit", icon: AtSignIcon }
 ];
 
 export default function CreateGroupPageComponent({
   speciesGroups,
   habitats,
   allCustomField,
-  traits
+  traits,
+  languages
 }: GroupCreatePageComponentProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -231,15 +233,23 @@ export default function CreateGroupPageComponent({
         description
       } = hForm.getValues();
       const gallerypaylpad = {
-        gallerySlider: galleryList.reduce<{ ugId: string; displayOrder: number }[]>(
-          (acc, item, index) => {
-            if (!item.id) {
-              acc.push({ ugId: data.id, displayOrder: index, ...item });
+        gallerySlider: galleryList.reduce<Record<number, any[]>[]>((acc, item, index) => {
+          const sliderId = item[0].split("|")[0];
+          const languageMap = item[1] as Record<number, any[]>;
+
+          if (sliderId === "null") {
+            for (const langId in languageMap) {
+              languageMap[langId] = languageMap[langId].map((entry) => ({
+                ...entry,
+                ugId: data.id,
+                displayOrder: index
+              }));
             }
-            return acc;
-          },
-          []
-        ),
+            acc.push(languageMap);
+          }
+
+          return acc;
+        }, []),
         showDesc,
         showGallery,
         showGridMap,
@@ -554,6 +564,7 @@ export default function CreateGroupPageComponent({
                 setIsCreate={setIsCreate}
                 galleryList={galleryList}
                 setGalleryList={setGalleryList}
+                languages={languages}
               />
             ) : (
               <GallerySetupTable

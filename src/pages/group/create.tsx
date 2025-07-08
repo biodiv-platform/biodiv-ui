@@ -4,16 +4,17 @@ import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGetspeciesGroups, axGetTraitsByGroupId } from "@services/observation.service";
 import { axGetAllCustomFields } from "@services/usergroup.service";
-import { axGetAllHabitat } from "@services/utility.service";
+import { axGetAllHabitat, axGetLangList } from "@services/utility.service";
 import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
-const createGroup = ({ speciesGroups, habitats, allCustomField, traits }) => (
+const createGroup = ({ speciesGroups, habitats, allCustomField, traits, languagesList }) => (
   <CreateGroupPage
     habitats={habitats}
     speciesGroups={speciesGroups}
     allCustomField={allCustomField}
     traits={traits}
+    languages={languagesList}
   />
 );
 
@@ -26,11 +27,13 @@ createGroup.getInitialProps = async (ctx) => {
   const { data: habitatList } = await axGetAllHabitat();
   const { data: allCustomField } = await axGetAllCustomFields(ctx);
   const { data: traits } = await axGetTraitsByGroupId(829, langId);
+  const { data: languagesList } = await axGetLangList();
   return {
     speciesGroups,
     habitats: habitatList.map(({ name, id }) => ({ name, id, value: id })),
     allCustomField,
-    traits
+    traits,
+    languagesList
   };
 };
 

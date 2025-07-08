@@ -41,13 +41,13 @@ export const getManifestURL = (group: UserGroupIbp) => {
 
 export const reorderRemovedGallerySetup = (data, index) => {
   const list = data.sort((a, b) => a.displayOrder - b.displayOrder);
-  const removedDisplayOrder = data[index].displayOrder;
+  const removedDisplayOrder = Number(data[index][0].split("|")[1]);
 
   const serializeDisplayOrder = () => {
     return list.reduce((acc, item) => {
-      if (item.displayOrder !== removedDisplayOrder) {
-        if (item.displayOrder > removedDisplayOrder) {
-          item.displayOrder = item.displayOrder - 1;
+      if (Number(item[0].split("|")[1]) !== removedDisplayOrder) {
+        if (Number(item[0].split("|")[1]) > removedDisplayOrder) {
+          item[0] = `${Number(item[0].split("|")[0])}|${Number(item[0].split("|")[1]) - 1}`;
         }
         acc.push(item);
       }
@@ -58,6 +58,6 @@ export const reorderRemovedGallerySetup = (data, index) => {
 
   return {
     response,
-    payload: response.map(({ id, displayOrder }) => ({ galleryId: id, displayOrder }))
+    payload: response.map((item) => ({ galleryId: Number(item[0].split("|")[0]), displayOrder: Number(item[0].split("|")[1]) }))
   };
 };

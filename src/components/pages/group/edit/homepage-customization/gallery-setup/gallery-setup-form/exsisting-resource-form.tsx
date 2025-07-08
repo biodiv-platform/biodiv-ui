@@ -8,25 +8,33 @@ import { useFormContext } from "react-hook-form";
 
 import IconRadioField from "./icon-radio-field";
 
-export default function ExsistingResourceForm({ defaultValues, setDefaultValues }) {
+export default function ExsistingResourceForm({ defaultValues, setDefaultValues, translation }) {
   const form = useFormContext();
   const { t } = useTranslation();
 
   const handleObservationLink = async () => {
-    const observationId = form.getValues("observationId");
+    const observationId = form.getValues(`${translation}.0.observationId`);
     const {
       success,
       data: { recoIbp, authorInfo, observationResource }
     } = await axGetObservationById(observationId);
     if (success) {
-      setDefaultValues({
-        authorInfo,
-        observationId,
-        moreLinks: `observation/show/${observationId}`,
-        title: recoIbp?.scientificName || t("common:unknown"),
-        fileName: observationResource[0]?.resource?.fileName,
-        options: observationResource.map((item) => ({ value: item?.resource?.fileName }))
-      });
+      const payload = Object.fromEntries(
+        Object.entries(form.getValues()).map(([langId, entries]) => [
+          langId,
+          entries.map(() => ({
+            authorInfo,
+            observationId,
+            moreLinks: `observation/show/${observationId}`,
+            title: recoIbp?.scientificName || t("common:unknown"),
+            fileName: observationResource[0]?.resource?.fileName,
+            options: observationResource.map((item) => ({ value: item?.resource?.fileName }))
+          }))
+        ])
+      );
+      setDefaultValues(
+        payload
+      );
     } else {
       setDefaultValues({});
       notification(t("group:homepage_customization.resources.error"), NotificationType.Error);
@@ -37,7 +45,8 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
     <>
       <Flex mb={4} alignItems="flex-end">
         <TextBoxField
-          name="observationId"
+          key={`observationId-${translation}`}
+          name={`${translation}.0.observationId`}
           isRequired={true}
           mb={0}
           label={t("group:homepage_customization.resources.obs_id")}
@@ -49,20 +58,32 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
       {defaultValues && (
         <>
           <TextBoxField
-            name="title"
+            key={`title-${translation}`}
+            name={`${translation}.0.title`}
             isRequired={true}
             label={t("group:homepage_customization.resources.title")}
           />
           <TextBoxField
-            name="moreLinks"
+            key={`moreLinks-${translation}`}
+            name={`${translation}.0.moreLinks`}
             isRequired={true}
             label={t("group:homepage_customization.resources.link")}
+            onChangeCallback={(e) => {
+              const values = form.getValues();
+
+              for (const langId in values) {
+                const entry = values[langId]?.[0];
+                if (entry) {
+                  form.setValue(`${langId}.0.moreLinks`, e.target.value);
+                }
+              }
+            }}
           />
-          <IconRadioField
+          {<IconRadioField
             name="fileName"
             label={t("group:homepage_customization.resources.imageurl")}
             options={defaultValues?.options}
-          />
+          />}
         </>
       )}
     </>

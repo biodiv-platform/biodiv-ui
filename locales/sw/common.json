@@ -21,6 +21,13 @@
   "clear": "Futa",
   "close": "Karibu",
   "copy": "Nakili kwenye clipboard.",
+  "create_form": {
+    "add_translation_button": "Ongeza tafsiri",
+    "cancel": "Ghairi",
+    "create": "Unda",
+    "language": "Lugha",
+    "language_placeholder": "Chagua lugha"
+  },
   "datatable": "DataTable",
   "delete": "Futa",
   "edit": "Hariri",

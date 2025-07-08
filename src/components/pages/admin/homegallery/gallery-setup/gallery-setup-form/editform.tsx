@@ -1,5 +1,22 @@
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Button, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Tab,
+  TabList,
+  Tabs,
+  useDisclosure
+} from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
@@ -8,16 +25,19 @@ import { TextAreaField } from "@components/form/textarea";
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
 import { galleryFieldValidationSchema } from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form/common";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useGlobalState from "@hooks/use-global-state";
 import { axEditHomePageGallery } from "@services/utility.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { NotificationType } from "@utils/notification";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import Select from "react-select";
+import * as Yup from "yup";
 
-export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData }) {
+export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData, languages }) {
   const { t } = useTranslation();
 
   const readMoreUIOptions = [
@@ -30,44 +50,68 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     { label: "translucent", value: "translucent" }
   ];
 
-  const {
-    id,
-    title,
-    fileName,
-    customDescripition,
-    moreLinks,
-    displayOrder,
-    observationId,
-    truncated,
-    readMoreUIType,
-    readMoreText,
-    gallerySidebar
-  } = editGalleryData;
+  const { languageId } = useGlobalState();
+  const [translationSelected, setTranslationSelected] = useState<number>(
+    Number(Object.keys(editGalleryData[1])[0])
+  );
+  const [langId, setLangId] = useState(0);
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const validationSchema = Yup.lazy((value) => {
+    const languageMapShape: Record<string, Yup.ArraySchema<any>> = {};
+
+    for (const langId in value || {}) {
+      languageMapShape[langId] = Yup.array().of(galleryFieldValidationSchema);
+    }
+
+    return Yup.object().shape(languageMapShape);
+  });
 
   const hForm = useForm<any>({
     mode: "onChange",
-    resolver: yupResolver(galleryFieldValidationSchema),
-    defaultValues: {
-      id,
-      title,
-      fileName,
-      customDescripition,
-      moreLinks,
-      displayOrder,
-      observationId,
-      truncated,
-      readMoreUIType,
-      readMoreText,
-      gallerySidebar
-    }
+    resolver: yupResolver(validationSchema),
+    defaultValues: editGalleryData[1]
   });
 
+  if (Object.keys(hForm.getValues()).includes(languageId)) {
+    setTranslationSelected(languageId);
+  }
+
+  const handleAddTranslation = () => {
+    hForm.setValue(`${langId}`, [
+      {
+        authorId: editGalleryData[1][translationSelected][0].authorId,
+        authorImage: editGalleryData[1][translationSelected][0].authorImage,
+        authorName: editGalleryData[1][translationSelected][0].authorName,
+        customDescripition: "",
+        displayOrder: editGalleryData[1][translationSelected][0].displayOrder,
+        fileName: editGalleryData[1][translationSelected][0].fileName,
+        gallerySidebar: editGalleryData[1][translationSelected][0].gallerySidebar,
+        id: null,
+        languageId: langId,
+        moreLinks: editGalleryData[1][translationSelected][0].moreLinks,
+        observationId: editGalleryData[1][translationSelected][0].observationId,
+        readMoreText: editGalleryData[1][translationSelected][0].readMoreText,
+        readMoreUIType: editGalleryData[1][translationSelected][0].readMoreUIType,
+        sliderId: Number(editGalleryData[0].split("|")[0]),
+        title: "",
+        truncated: editGalleryData[1][translationSelected][0].truncated,
+        ugId: editGalleryData[1][translationSelected][0].ugId
+      }
+    ]);
+    setTranslationSelected(langId);
+  };
+
   const handleFormSubmit = async (payload) => {
-    const { success, data } = await axEditHomePageGallery(id, payload);
+    const { success, data } = await axEditHomePageGallery(Number(editGalleryData[0].split("|")[0]), payload);
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-      setGalleryList(data.gallerySlider);
+      setGalleryList(Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+        const aOrder = parseInt(a[0].split("|")[1], 10);
+        const bOrder = parseInt(b[0].split("|")[1], 10);
+        return aOrder - bOrder;
+      }));
       setIsEdit(false);
     } else {
       notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
@@ -76,25 +120,128 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
 
   return (
     <FormProvider {...hForm}>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Button m={3} type="button" onClick={() => setIsEdit(false)} leftIcon={<ArrowBackIcon />}>
+          {t("group:homepage_customization.back")}
+        </Button>
+      </Box>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              handleAddTranslation();
+              setLangId(0);
+              onClose();
+            }}
+          >
+            <ModalHeader> {t("common:create_form.add_translation_button")}</ModalHeader>
+            <ModalBody>
+              <Box>
+                <FormControl mb={2} isRequired={true}>
+                  <FormLabel htmlFor="name">{t("common:create_form.language")}</FormLabel>
+                  {
+                    <Select
+                      id="langId"
+                      inputId="langId"
+                      name="langId"
+                      placeholder={t("common:create_form.language_placeholder")}
+                      onChange={(o: { value: number; label: string }) => {
+                        setLangId(o.value);
+                      }}
+                      components={{
+                        IndicatorSeparator: () => null
+                      }}
+                      options={languages
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map((lang) => ({
+                          value: lang.id,
+                          label: lang.name
+                        }))}
+                      isSearchable={true} // Enables search
+                    />
+                  }
+                </FormControl>
+              </Box>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                mr={3}
+                onClick={() => {
+                  setLangId(0);
+                  onClose();
+                }}
+              >
+                {t("common:create_form.cancel")}
+              </Button>
+              <Button colorScheme="blue" type="submit">
+                {t("common:create_form.create")}
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
+        <Button colorScheme="green">{t("common:create_form.add_translation_button")}</Button>
+      </Flex>
+      <Tabs
+        overflowX="auto"
+        mb={4}
+        variant="unstyled"
+        bg="gray.100"
+        rounded="md"
+        index={Object.keys(hForm.getValues()).findIndex(
+          (key) => key === translationSelected.toString()
+        )}
+        onChange={(index) => setTranslationSelected(Number(Object.keys(hForm.getValues())[index]))}
+      >
+        <TabList>
+          {Object.keys(hForm.getValues()).map((language) => (
+            <Tab
+              key={language}
+              _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
+              m={1}
+            >
+              {languages.filter((lang) => lang.id === Number(language))[0].name}
+            </Tab>
+          ))}
+        </TabList>
+      </Tabs>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Button m={3} type="button" onClick={() => setIsEdit(false)} leftIcon={<ArrowBackIcon />}>
-            {t("group:homepage_customization.back")}
-          </Button>
-        </Box>
         <TextBoxField
-          name="title"
+          key={`title-${translationSelected}`}
+          name={`${translationSelected}.0.title`}
           isRequired={true}
-          label={t("group:homepage_customization.resources.title")}
+          label={
+            translationSelected != languageId && hForm.getValues()[languageId]
+              ? hForm.getValues()[languageId][0].title
+              : t("group:homepage_customization.resources.title")
+          }
         />
-        <TextBoxField name="moreLinks" label={t("group:homepage_customization.resources.link")} />
-        {observationId ? (
+        <TextBoxField
+          key={`moreLinks-${translationSelected}`}
+          name={`${translationSelected}.0.moreLinks`}
+          label={t("group:homepage_customization.resources.link")}
+          disabled={hForm.getValues()[translationSelected][0].id == null}
+          onChangeCallback={(e) => {
+            const values = hForm.getValues();
+
+            for (const langId in values) {
+              const entry = values[langId]?.[0];
+              if (entry) {
+                hForm.setValue(`${langId}.0.moreLinks`, e.target.value);
+              }
+            }
+          }}
+        />
+        {hForm.getValues()[translationSelected][0].observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>
             <Image
               src={getResourceThumbnail(
                 RESOURCE_CTX.OBSERVATION,
-                fileName,
+                hForm.getValues()[translationSelected][0].fileName,
                 RESOURCE_SIZE.LIST_THUMBNAIL
               )}
             />
@@ -102,31 +249,87 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         ) : (
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
-            name="fileName"
+            name={`${translationSelected}.0.fileName`}
           />
         )}
         <TextAreaField
-          name="customDescripition"
+          key={`description-${translationSelected}`}
+          name={`${translationSelected}.0.customDescripition`}
           label={t("group:homepage_customization.table.description")}
         />
 
-        <TextBoxField name="readMoreText" label="Read more button text" maxLength={30} />
+        <TextBoxField
+          key={`readMoreText-${translationSelected}`}
+          name={`${translationSelected}.0.readMoreText`}
+          label="Read more button text"
+          maxLength={30}
+          disabled={hForm.getValues()[translationSelected][0].id == null}
+          onChangeCallback={(e) => {
+            const values = hForm.getValues();
+
+            for (const langId in values) {
+              const entry = values[langId]?.[0];
+              if (entry) {
+                hForm.setValue(`${langId}.0.readMoreText`, e.target.value);
+              }
+            }
+          }}
+        />
 
         <SelectInputField
-          name="readMoreUIType"
+          key={`readMoreUIType-${translationSelected}`}
+          name={`${translationSelected}.0.readMoreUIType`}
           label="Read more UI type"
           options={readMoreUIOptions}
           shouldPortal={true}
+          disabled={hForm.getValues()[translationSelected][0].id == null}
+          onChangeCallback={(value) => {
+            const values = hForm.getValues();
+
+            for (const langId in values) {
+              const entry = values[langId]?.[0];
+              if (entry) {
+                hForm.setValue(`${langId}.0.readMoreUIType`, value);
+              }
+            }
+          }}
         />
 
         <SelectInputField
-          name="gallerySidebar"
+          key={`gallerySidebar-${translationSelected}`}
+          name={`${translationSelected}.0.gallerySidebar`}
           label="Gallery sidebar background"
           options={gallerySidebarBackgroundOptions}
           shouldPortal={true}
+          disabled={hForm.getValues()[translationSelected][0].id == null}
+          onChangeCallback={(value) => {
+            const values = hForm.getValues();
+
+            for (const langId in values) {
+              const entry = values[langId]?.[0];
+              if (entry) {
+                hForm.setValue(`${langId}.0.gallerySidebar`, value);
+              }
+            }
+          }}
         />
 
-        <CheckboxField name="truncated" label={t("group:homepage_customization.table.enabled")} />
+        <CheckboxField
+          key={`truncated-${translationSelected}`}
+          name={`${translationSelected}.0.truncated`}
+          label={t("group:homepage_customization.table.enabled")}
+          disabled={hForm.getValues()[translationSelected][0].id == null}
+          onChangeCallback={(value) => {
+            const values = hForm.getValues();
+
+            for (const langId in values) {
+              const entry = values[langId]?.[0];
+              if (entry) {
+                hForm.setValue(`${langId}.0.truncated`, value);
+              }
+            }
+          }}
+        />
 
         <SubmitButton>{t("common:update")}</SubmitButton>
       </form>

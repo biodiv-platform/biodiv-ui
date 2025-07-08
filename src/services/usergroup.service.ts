@@ -397,7 +397,7 @@ export const axUpdateGroupHomePageDetails = async (userGroupId, payload) => {
 export const axRemoveGroupHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
     await http.put(
-      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${galleryList[index]?.id}`
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${Number(galleryList[index][0].split("|")[0])}`
     );
     const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
     if (payload.length > 1) {

@@ -12,6 +12,7 @@
     "title": "Rôles des utilisateurs",
     "updated": "Les utilisateurs du groupe ont été mis à jour avec succès"
   },
+  "basic_details": "Détails de base",
   "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur. Appuyez sur OK pour envoyer une demande de requête.",
   "confirm_leave": "Quitter le groupe?",
   "create": {
@@ -73,6 +74,7 @@
     "success": "Groupe mis à jour avec succès",
     "title": "Groupe d'édition"
   },
+  "group_coverage": "Couverture de groupe",
   "homepage_customization": {
     "about_us": "À propos de nous",
     "add_options": "Ajouter des options",
@@ -182,7 +184,8 @@
     "filter_by_contributors": "Filtre par contributeurs",
     "filter_species_fields": "Filtre par champs d'espèces",
     "select_all": "Sélectionnez tout",
-    "submit_selections": "Soumettre des sélections"
+    "submit_selections": "Soumettre des sélections",
+    "title": "Champs d'espèces"
   },
   "tags": "Mots clés",
   "trait": {

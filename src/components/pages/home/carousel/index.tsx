@@ -1,6 +1,8 @@
 import "keen-slider/keen-slider.min.css";
 
 import { Box, SimpleGrid } from "@chakra-ui/react";
+import { LANG } from "@configs/site-config";
+import useGlobalState from "@hooks/use-global-state";
 import { useKeenSlider } from "keen-slider/react";
 import React, { useState } from "react";
 
@@ -10,6 +12,7 @@ import SlideInfo from "./slide-info";
 
 export default function CarouselNew({ featured }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { languageId } = useGlobalState();
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
@@ -60,17 +63,25 @@ export default function CarouselNew({ featured }) {
       <Box gridColumn={{ md: "1/3" }} position="relative">
         <Box ref={sliderRef} className="keen-slider fade">
           {featured.map((o) => (
-            <Slide resource={o} key={o.id} />
+            <Slide resource={o[1]?.[languageId]?.[0] || o[1]?.[LANG.DEFAULT_ID]?.[0]} key={o.id} />
           ))}
         </Box>
         <SlideInfo
           size={featured.length}
-          resource={featured[currentSlide]}
+          resource={
+            featured[currentSlide][1]?.[languageId]?.[0] ||
+            featured[currentSlide][1]?.[LANG.DEFAULT_ID]?.[0]
+          }
           currentSlide={currentSlide}
           scrollTo={iSlider?.current?.moveToIdx}
         />
       </Box>
-      <Sidebar resource={featured[currentSlide]} />
+      <Sidebar
+        resource={
+          featured[currentSlide][1]?.[languageId]?.[0] ||
+          featured[currentSlide][1]?.[LANG.DEFAULT_ID]?.[0]
+        }
+      />
     </SimpleGrid>
   );
 }

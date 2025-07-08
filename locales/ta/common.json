@@ -21,6 +21,13 @@
   "clear": "அகற்று",
   "close": "மூடு",
   "copy": "ஒட்டுப்பலகைக்கு நகலெடு",
+  "create_form": {
+    "add_translation_button": "மொழிபெயர்ப்பைச் சேர்க்கவும்",
+    "cancel": "ரத்துசெய்",
+    "create": "உருவாக்கு",
+    "language": "மொழி",
+    "language_placeholder": "மொழியைத் தேர்ந்தெடுக்கவும்"
+  },
   "datatable": "தரவு அட்டவணை",
   "delete": "அழி",
   "edit": "திருத்து",

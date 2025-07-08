@@ -13,7 +13,8 @@ export default function GallerySetup({
   galleryList,
   setGalleryList,
   isEdit,
-  setIsEdit
+  setIsEdit,
+  languages
 }) {
   const [editGalleryData, setEditGalleryData] = useState(galleryList);
 
@@ -27,12 +28,15 @@ export default function GallerySetup({
           setIsEdit={setIsEdit}
           setGalleryList={setGalleryList}
           editGalleryData={editGalleryData}
+          languages = {languages}
         />
       ) : isCreate ? (
         <GallerySetupFrom
           setIsCreate={setIsCreate}
           galleryList={galleryList}
           setGalleryList={setGalleryList}
+          languages={languages}
+          group={false}
         />
       ) : (
         <GallerySetupTable
