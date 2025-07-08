@@ -58,10 +58,12 @@ export default function ResourceImporter() {
   };
 
   return resourceGroups.length ? (
-    <DialogRoot open={true} onOpenChange={handleOnClose} size="lg">
+    <DialogRoot open={true} onOpenChange={handleOnClose} size="xl">
       <DialogBackdrop />
       <DialogContent>
-        <DialogHeader fontSize={"3xl"}>📷 {t("observation:importer.title")}</DialogHeader>
+        <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+          📷 {t("observation:importer.title")}
+        </DialogHeader>
         <DialogCloseTrigger />
         <DialogBody>
           <Alert status="info" mb={6} borderRadius="md">

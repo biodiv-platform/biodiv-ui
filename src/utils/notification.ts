@@ -18,7 +18,8 @@ const notification = (message, type = NotificationType.Error, variables = {}) =>
   if (isBrowser) {
     toaster.create({
       description: typeof message === "string" ? compiledMessage(`${message}`, variables) : message,
-      type: type
+      type: type,
+      closable: true
     });
   }
 };

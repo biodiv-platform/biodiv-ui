@@ -1,4 +1,4 @@
-import { Heading, Stack } from "@chakra-ui/react";
+import { Heading, HeadingProps, Stack } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 
 interface PageHeadingProps {
@@ -6,6 +6,7 @@ interface PageHeadingProps {
   mb?: number;
   actions?: ReactNode;
   [x: string]: any;
+  size?: HeadingProps["size"];
 }
 
 export default function PageHeading({
@@ -13,6 +14,7 @@ export default function PageHeading({
   className,
   mb = 4,
   actions,
+  size = "4xl",
   ...props
 }: PageHeadingProps) {
   return (
@@ -23,7 +25,7 @@ export default function PageHeading({
       className={className}
       gap={0}
     >
-      <Heading as="h1" size="3xl" display="inline-block" {...props}>
+      <Heading as="h1" size={size} display="inline-block" {...props}>
         {children}
       </Heading>
       {actions}

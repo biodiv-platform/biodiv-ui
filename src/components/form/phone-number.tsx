@@ -52,8 +52,15 @@ export const PhoneNumberInputField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <Field as={PhoneFormControl} invalid={!!fieldState.error} mb={mb} {...props}>
-      <Field htmlFor={name} label={label} />
+    <Field
+      as={PhoneFormControl}
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
       <Box width={"full"}>
         <MobileInput
           id={name}
@@ -64,7 +71,6 @@ export const PhoneNumberInputField = ({
           {...field}
         />
       </Box>
-      <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>
   );

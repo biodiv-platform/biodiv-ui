@@ -46,8 +46,14 @@ export const LocationInputField = ({
   });
 
   return (
-    <Field invalid={!!fieldState.error} mb={mb} {...props}>
-      {label && <Field htmlFor={name} label={label} />}
+    <Field
+      invalid={!!fieldState.error}
+      errorText={fieldState?.error?.message}
+      htmlFor={name}
+      mb={mb}
+      label={label}
+      {...props}
+    >
       <Input
         defaultValue={field.value}
         id={name}
@@ -56,7 +62,6 @@ export const LocationInputField = ({
         placeholder={placeholder}
         ref={ref}
       />
-      <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>
   );

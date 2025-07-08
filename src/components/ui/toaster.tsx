@@ -20,7 +20,7 @@ export const Toaster = () => {
     <Portal>
       <ChakraToaster toaster={toaster} insetInline={{ mdDown: "4" }}>
         {(toast) => (
-          <Toast.Root width={{ md: "sm" }}>
+          <Toast.Root width={"fit"}>
             {toast.type === "loading" ? (
               <Spinner size="sm" color="blue.solid" />
             ) : (
@@ -31,7 +31,7 @@ export const Toaster = () => {
               {toast.description && <Toast.Description>{toast.description}</Toast.Description>}
             </Stack>
             {toast.action && <Toast.ActionTrigger>{toast.action.label}</Toast.ActionTrigger>}
-            {toast.meta?.closable && <Toast.CloseTrigger />}
+            {toast.closable && <Toast.CloseTrigger />}
           </Toast.Root>
         )}
       </ChakraToaster>

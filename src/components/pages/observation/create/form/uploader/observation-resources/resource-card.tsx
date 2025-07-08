@@ -92,7 +92,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
         <Image
           objectFit="cover"
           borderRadius="md"
-          src={imageError ? imageURL : getFallbackByMIME(resource.type)}
+          src={imageError ? getFallbackByMIME(resource.type) : imageURL}
           onError={() => setImageError(true)}
         />
         <StatusIcon type={resource.status} />

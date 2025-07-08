@@ -124,7 +124,7 @@ export default function ListHeader() {
               defaultChecked={allMedia}
               id="media-toggle"
               onChange={handleMediaToggle}
-              // colorPalette="gray.300"
+              colorPalette="blue"
               border="1px solid"
               borderColor="gray.500"
               borderRadius="50px"

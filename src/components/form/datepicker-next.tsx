@@ -44,8 +44,15 @@ export const DatePickerNextField = ({
       name={name}
       render={({ field, fieldState }) => {
         return (
-          <Field invalid={!!fieldState.error} mb={mb} {...props}>
-            {label && <Field htmlFor={name} label={label} required={required} />}
+          <Field
+            invalid={!!fieldState.error}
+            mb={mb}
+            required={required}
+            htmlFor={name}
+            errorText={fieldState?.error?.message}
+            label={label}
+            {...props}
+          >
             <InputGroup
               endElement={
                 <label htmlFor={name} style={{ cursor: "pointer" }}>
@@ -67,7 +74,6 @@ export const DatePickerNextField = ({
                 {...(inputProps || {})}
               />
             </InputGroup>
-            <Field errorText={fieldState?.error?.message} />
             {hint && <Field color="gray.600" helperText={hint} />}
           </Field>
         );

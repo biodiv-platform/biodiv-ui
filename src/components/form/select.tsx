@@ -51,9 +51,12 @@ export const SelectInputField = ({
       aria-invalid={!!fieldState.error}
       mb={mb}
       hidden={hidden}
+      required={isRequired}
+      htmlFor={name}
+      label={label}
+      errorText={fieldState?.error?.message}
       {...props}
     >
-      {label && <Field htmlFor={name} label={label} required={isRequired} />}
       <Box width={"full"}>
         <Select
           id={name}
@@ -81,7 +84,6 @@ export const SelectInputField = ({
         />
       </Box>
 
-      <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>
   );

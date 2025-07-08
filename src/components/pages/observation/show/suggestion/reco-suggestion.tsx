@@ -1,4 +1,4 @@
-import { AvatarGroup, Box, Button, Stack, Text } from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Box, Button, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import Flash from "@components/@core/flash";
 import ScientificName from "@components/@core/scientific-name";
@@ -19,8 +19,6 @@ import { getUserImage } from "@utils/media";
 import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
-
-import { Avatar } from "@/components/ui/avatar";
 
 enum RecoAction {
   Agree,
@@ -118,15 +116,18 @@ export default function RecoSuggestion({
                   </Text>
                 </Box>
                 {/* max={2} */}
-                <AvatarGroup size="sm">
-                  {reco.userList?.map((u) => (
-                    <Avatar
-                      key={u.id}
-                      name={u.name}
-                      src={getUserImage(u.profilePic, u.name)}
-                      title={u.name}
-                    />
+                <AvatarGroup size="sm" stacking="first-on-top">
+                  {reco.userList?.slice(0, 2).map((u) => (
+                    <Avatar.Root key={u.id}>
+                      <Avatar.Fallback name={u.name} />
+                      <Avatar.Image src={getUserImage(u.profilePic, u.name)} />
+                    </Avatar.Root>
                   ))}
+                  {reco.userList && reco.userList.length > 2 && (
+                    <Avatar.Root>
+                      <Avatar.Fallback>+{reco.userList.length - 2}</Avatar.Fallback>
+                    </Avatar.Root>
+                  )}
                 </AvatarGroup>
               </Stack>
               <Stack direction={"row"} minW="210px" flexShrink={0} className="reco-actions">

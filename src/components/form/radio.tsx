@@ -28,8 +28,13 @@ export const RadioInputField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <Field invalid={!!fieldState.error} mb={mb} {...props}>
-      {label && <Field label={label} />}
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb}
+      errorText={fieldState?.error?.message}
+      label={label}
+      {...props}
+    >
       <RadioGroup key={name} {...field}>
         <Stack direction={isInline ? "row" : "column"} py={2}>
           {options.map((o) => (
@@ -39,7 +44,6 @@ export const RadioInputField = ({
           ))}
         </Stack>
       </RadioGroup>
-      <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint}></Field>}
     </Field>
   );

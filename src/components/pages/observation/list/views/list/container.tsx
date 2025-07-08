@@ -120,7 +120,7 @@ export default function Container({ o }) {
     >
       <ImageBoxComponent o={o} getCheckboxProps={getCheckboxProps} />
       <VerticalTabs>
-        <Tabs.Root variant="plain" className="tabs" lazyMount defaultValue={tab}>
+        <Tabs.Root variant="plain" className="tabs" lazyMount value={tab}>
           <Tabs.Content
             value="common:information"
             height="100%"
@@ -200,7 +200,12 @@ export default function Container({ o }) {
 
           <Tabs.List>
             {actionTabs.map(({ name, icon, active = true }) => (
-              <Tabs.Trigger value={name} key={name} data-hidden={!active}>
+              <Tabs.Trigger
+                value={name}
+                key={name}
+                data-hidden={!active}
+                onClick={() => setTab(name)}
+              >
                 <Tooltip title={t(name)}>
                   <div>
                     {icon} <span>{t(name)}</span>

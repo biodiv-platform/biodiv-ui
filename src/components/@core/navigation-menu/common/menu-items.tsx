@@ -1,10 +1,8 @@
-import { Box } from "@chakra-ui/react";
+import { Button, Flex, Menu, Portal } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { LuChevronDown } from "react-icons/lu";
-
-import { MenuRoot, MenuTrigger } from "@/components/ui/menu";
 
 import GroupedSubMenu from "./grouped-sub-menu";
 import SubMenu from "./sub-menu";
@@ -23,26 +21,28 @@ export default function MenuItems(props) {
   const isContributeMenu = name === "header:menu_primary.contribute.";
 
   return isDropdown ? (
-    <MenuRoot positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
-      <>
-        <MenuTrigger data-label={name} role="button" asChild pl={4}>
-          <Box display="flex" alignItems="center">
-            {NameIcon && <NameIcon mr={1} />}
+    <Menu.Root positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
+      <Menu.Trigger data-label={name} role="button" asChild>
+        <Button variant="plain" size="sm" color="inherit" px={0}>
+          <Flex align="center" gap={0}>
+            {NameIcon && <NameIcon />}
             {t(`${name}title`)}
-            <Box as="button" role="button" tabIndex={0}>
-              <LuChevronDown />
-            </Box>
-          </Box>
-        </MenuTrigger>
-        {CCell ? (
-          <CCell />
-        ) : isContributeMenu ? (
-          <GroupedSubMenu rows={rows} prefix={name} />
-        ) : (
-          <SubMenu rows={rows} prefix={name} />
-        )}
-      </>
-    </MenuRoot>
+            <LuChevronDown />
+          </Flex>
+        </Button>
+      </Menu.Trigger>
+      <Portal>
+        <Menu.Positioner>
+          {CCell ? (
+            <CCell />
+          ) : isContributeMenu ? (
+            <GroupedSubMenu rows={rows} prefix={name} />
+          ) : (
+            <SubMenu rows={rows} prefix={name} />
+          )}
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
   ) : (
     <SimpleLink to={to} params={params}>
       {NameIcon && <NameIcon mr={1} />}

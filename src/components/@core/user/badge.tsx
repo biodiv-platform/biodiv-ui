@@ -6,7 +6,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 const Badge = ({ isAdmin }) =>
   isAdmin ? (
     <Tooltip showArrow={true} positioning={{ placement: "right" }} title="Administrator">
-      <B variant="plain" colorPalette="green.500" fontSize={"2xl"}>
+      <B variant="plain" colorPalette="green" fontSize={"xl"}>
         <LuBadgeCheck />
       </B>
     </Tooltip>

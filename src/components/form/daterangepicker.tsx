@@ -57,8 +57,15 @@ export const DateRangePickerField = ({
   }
 
   return (
-    <Field invalid={!!fieldState.error} mb={mb} {...props}>
-      <Field htmlFor={name} label={label} required={required} />
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      required={required}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
       <InputGroup
         endElement={
           <label htmlFor={name} style={{ cursor: "pointer" }}>
@@ -84,7 +91,6 @@ export const DateRangePickerField = ({
           )}
         />
       </InputGroup>
-      <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>
   );

@@ -15,7 +15,7 @@ import Select, { components } from "react-select";
 
 interface ISpeciesGroupsProps {
   id;
-  speciesGroups: { label: string; value: number; }[] | undefined;
+  speciesGroups: { label: string; value: number }[] | undefined;
   canEdit?: boolean;
   observationId;
 }
@@ -80,7 +80,7 @@ export default function SpeciesGroupBox({
             >
               <LuCheck />
             </IconButton>
-            <IconButton size="xs" ml={2} colorPalette="gray" aria-label="Cancel" onClick={onClose}>
+            <IconButton size="xs" ml={2} variant={"subtle"} aria-label="Cancel" onClick={onClose}>
               <CrossIcon />
             </IconButton>
           </Box>

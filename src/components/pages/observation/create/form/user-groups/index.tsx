@@ -37,10 +37,10 @@ export default function UserGroups({ name, label }: IUserGroupsProps) {
 
   return (
     <Box data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE}>
-      <Button color="gray.900" fontSize="2xl" mb={4} onClick={onToggle} variant={"plain"}>
+      <Button color="gray.900" fontSize="2xl" mb={4} onClick={onToggle} variant={"plain"} pl={0}>
         👥 {label} {open ? <LuChevronUp /> : <LuChevronDown />}
       </Button>
-      <Collapsible.Root open={open} >
+      <Collapsible.Root open={open}>
         <Collapsible.Content>
           <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
           <CheckBoxItems

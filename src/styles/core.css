@@ -55,3 +55,7 @@ span svg,
 [data-hidden="true"] {
   display: none !important;
 }
+
+i {
+  font-style: italic;
+}

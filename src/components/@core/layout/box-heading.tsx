@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, Separator, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface IBoxHeadingProps {
@@ -21,23 +21,24 @@ export default function BoxHeading({
   styles
 }: IBoxHeadingProps) {
   return (
-    <Flex
-      borderBottom={border ? "1px" : 0}
-      borderColor="gray.300"
-      fontSize={fontSize}
-      px={p}
-      minH="3rem"
-      fontWeight="bold"
-      align="center"
-      onClick={onClick}
-      {...styles}
-    >
-      {children}
-      {subTitle && (
-        <Text as="span" fontSize="sm" color="gray.700" ml={2}>
-          {subTitle}
-        </Text>
-      )}
-    </Flex>
+    <>
+      <Flex
+        fontSize={fontSize}
+        px={p}
+        minH="3rem"
+        fontWeight="bold"
+        align="center"
+        onClick={onClick}
+        {...styles}
+      >
+        {children}
+        {subTitle && (
+          <Text as="span" fontSize="sm" color="gray.700" ml={2}>
+            {subTitle}
+          </Text>
+        )}
+      </Flex>
+      {border && <Separator />}
+    </>
   );
 }

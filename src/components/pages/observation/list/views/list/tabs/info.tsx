@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Alert, Box, Button, Flex, Heading, Separator, SimpleGrid, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import ScientificName from "@components/@core/scientific-name";
 import ObservationStatusBadge from "@components/pages/common/status-badge";
@@ -14,7 +14,6 @@ import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import { Alert } from "@/components/ui/alert";
 import CalendarIcon from "@/icons/calendar";
 import EditIcon from "@/icons/edit";
 
@@ -31,11 +30,10 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
 
   return (
     <Box boxSize="full" display="flex" flexDir="column" justifyContent="space-between">
-      <SimpleGrid columns={[1, 1, 3, 3]} px={4} pt={1}>
+      <SimpleGrid columns={[1, 1, 3, 3]} px={4}>
         <div style={{ gridColumn: "1/3" }}>
           <Heading
-            size="md"
-            pt={2}
+            size="xl"
             mb={1}
             className="elipsis-2"
             title={stripTags(o?.recoShow?.recoIbp?.scientificName)}
@@ -71,7 +69,10 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
         <Flex justify={[null, null, "flex-end", "flex-end"]} align="top" py={4}>
           <SpeciesGroupBox
             id={o?.speciesGroupId}
-            speciesGroups={Object.keys(observationData.ag.groupSpeciesName || {}).map((g) => ({ label: g.split("|")[1], value: Number(g.split("|")[0]) }))}
+            speciesGroups={Object.keys(observationData.ag.groupSpeciesName || {}).map((g) => ({
+              label: g.split("|")[1],
+              value: Number(g.split("|")[0])
+            }))}
             observationId={o.observationId}
           />
           <FlagActionButton
@@ -84,6 +85,7 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
         </Flex>
       </SimpleGrid>
       <Box borderTop="1px" borderColor="gray.300" width={"full"}>
+        <Separator />
         <RecoSuggestion
           observationId={o.observationId}
           isLocked={o.recoShow?.isLocked}
@@ -92,32 +94,32 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
           recoUpdated={recoUpdated}
           permissionOverride={observationData?.mvp[o.observationId || 0]}
         />
-        <Alert
-          alignItems={"center"}
-          bg="blue.50"
-          title={
-            <Flex justify="space-between" align="center" width="100%">
-              <Box>
+        <Alert.Root alignItems={"center"} bg="blue.50" status={"info"}>
+          <Alert.Indicator />
+          <Alert.Content>
+            <Alert.Title>
+              <Text>
                 {o.recoShow?.isLocked
                   ? t("observation:id.validated")
                   : o.recoShow?.recoIbp
                   ? t("observation:id.suggest_new_reco")
                   : t("observation:id.no_suggestion")}
-              </Box>
+              </Text>
+            </Alert.Title>
+          </Alert.Content>
 
-              {!o.recoShow?.isLocked && (
-                <Button
-                  variant="plain"
-                  color="blue.600"
-                  size="sm"
-                  onClick={() => setTab("observation:id.title")}
-                >
-                  {t("observation:suggest")}
-                </Button>
-              )}
-            </Flex>
-          }
-        />
+          {!o.recoShow?.isLocked && (
+            <Button
+              variant="plain"
+              color="blue.600"
+              size="sm"
+              onClick={() => setTab("observation:id.title")}
+              fontWeight={"bold"}
+            >
+              {t("observation:suggest")}
+            </Button>
+          )}
+        </Alert.Root>
       </Box>
     </Box>
   );

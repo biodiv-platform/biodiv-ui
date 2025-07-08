@@ -18,6 +18,7 @@ export default function Resources({ index, removeObservation }) {
   const [resourceEditor, setResourceEditor] = useState(false);
   const { media } = useObservationCreateNext();
   const hForm = useFormContext();
+  const [imageError, setImageError] = useState(false);
 
   const { user } = useGlobalState();
   const [resourceIndex, setResourceIndex] = useState(0);
@@ -70,8 +71,8 @@ export default function Resources({ index, removeObservation }) {
             objectFit="cover"
             overflow="hidden"
             className="o-selectable"
-            src={imgThumb.src}
-            alt={imgThumb.fallbackSrc}
+            src={imageError ? imgThumb.fallbackSrc : imgThumb.src}
+            onError={() => setImageError(true)}
           />
         </AspectRatio>
         <IconButton

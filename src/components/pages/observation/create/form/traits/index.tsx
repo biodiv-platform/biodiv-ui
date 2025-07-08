@@ -62,7 +62,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
 
   return (
     <Box>
-      <Button variant="ghost" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
+      <Button variant="ghost" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle} pl={0}>
         💎 {t("observation:traits")} {open ? <LuChevronUp /> : <LuChevronDown />}
       </Button>
       <Collapsible.Root open={open} unmountOnExit={true}>

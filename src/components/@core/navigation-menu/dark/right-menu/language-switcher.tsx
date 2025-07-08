@@ -1,4 +1,4 @@
-import { Link } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
@@ -32,9 +32,13 @@ export default function LanguageSwitcher() {
 
   return (
     <MenuRoot>
-      <MenuTrigger as={Link} role="button" css={{ color: "white" }}>
-        {SITE_CONFIG.LANG.LIST[lang].NAME}
-        <LuChevronDown />
+      <MenuTrigger asChild>
+        <Button variant="plain" size="lg" color="inherit" px={0}>
+          <Flex align="center" gap={0}>
+            {SITE_CONFIG.LANG.LIST[lang].NAME}
+            <LuChevronDown />
+          </Flex>
+        </Button>
       </MenuTrigger>
       <MenuContent>
         {Object.entries(SITE_CONFIG.LANG.LIST).map(([langCode, info]: any) => (

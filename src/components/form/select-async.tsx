@@ -105,8 +105,16 @@ export const SelectAsyncInputField = ({
   }, [form.formState.submitCount]);
 
   return (
-    <Field invalid={!!fieldState.error} aria-invalid={!!fieldState.error} mb={mb} {...props}>
-      {label && <Field htmlFor={name} label={label} required={isRequired} />}
+    <Field
+      invalid={!!fieldState.error}
+      aria-invalid={!!fieldState.error}
+      mb={mb}
+      required={isRequired}
+      htmlFor={name}
+      errorText={fieldState?.error?.message}
+      label={label}
+      {...props}
+    >
       <Box width={"full"}>
         <Select
           name={name}
@@ -134,7 +142,6 @@ export const SelectAsyncInputField = ({
           {...reactSelectProps}
         />
       </Box>
-      <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>
   );

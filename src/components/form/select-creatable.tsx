@@ -39,10 +39,12 @@ export const SelectCreatableInputField = ({
       className="dropdown"
       aria-invalid={!!fieldState.error}
       mb={mb}
+      htmlFor={name}
+      label={label}
+      required={isRequired}
+      errorText={fieldState?.error?.message}
       {...props}
     >
-      <Field htmlFor={name} label={label} required={isRequired} />
-
       <Select
         id={name}
         inputId={name}

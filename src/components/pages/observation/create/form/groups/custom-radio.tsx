@@ -5,6 +5,7 @@ import { getLocalIcon } from "@utils/media";
 import React from "react";
 
 const CustomRadio = (props) => {
+  const isSelected = props.value === props.selectedValue;
   return (
     <RadioCard.Item value={props.value} key={props.value}>
       <RadioCard.ItemHiddenInput />
@@ -15,7 +16,8 @@ const CustomRadio = (props) => {
               <Image
                 boxSize="2.6rem"
                 style={{
-                  filter: props?.selectedValue?.value == props?.value ? "none" : "grayscale(1)"
+                  filter: isSelected ? "none" : "grayscale(1)",
+                  opacity: isSelected ? 1 : 0.7
                 }}
                 src={getLocalIcon(props.icon)}
                 alt={props.icon}

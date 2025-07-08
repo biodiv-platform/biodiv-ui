@@ -30,8 +30,15 @@ export const TextAreaField = ({
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
   return (
-    <Field invalid={!!fieldState.error} mb={mb} {...props}>
-      <Field htmlFor={name} label={label} required={isRequired} />
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      required={isRequired}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
       <Textarea
         id={name}
         placeholder={placeholder}
@@ -41,7 +48,6 @@ export const TextAreaField = ({
         maxLength={maxLength}
         {...field}
       />
-      <Field errorText={fieldState?.error?.message} />
       {maxLength && field.value && (
         <Field color="gray.600" helperText={`${field.value.length}/${maxLength}`} />
       )}

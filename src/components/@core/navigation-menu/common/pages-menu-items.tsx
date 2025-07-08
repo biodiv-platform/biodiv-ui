@@ -1,13 +1,11 @@
-import { Box, Link } from "@chakra-ui/react";
+import { Box, Menu, Portal } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
 import { LuChevronDown } from "react-icons/lu";
 
-import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
-
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
-    <Link>{children}</Link>
+    {children}
   </LocalLink>
 );
 
@@ -16,8 +14,8 @@ export default function MenuItems(props) {
   const isDropdown = rows.length > 0;
 
   return isDropdown ? (
-    <MenuRoot positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
-      <MenuTrigger data-label={name} role="button" asChild pl={4}>
+    <Menu.Root positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
+      <Menu.Trigger data-label={name} role="button" asChild pl={4}>
         <Box display="flex" alignItems="center">
           <SimpleLink to={to} params={params}>
             {name}
@@ -26,18 +24,21 @@ export default function MenuItems(props) {
             <LuChevronDown />
           </Box>
         </Box>
-      </MenuTrigger>
-
-      <MenuContent>
-        {rows.map((row, index) => (
-          <MenuItem key={index} value={index}>
-            <LocalLink href={row.to} params={row.params} prefixGroup={true}>
-              <Link>{row.name}</Link>
-            </LocalLink>
-          </MenuItem>
-        ))}
-      </MenuContent>
-    </MenuRoot>
+      </Menu.Trigger>
+      <Portal>
+        <Menu.Positioner>
+          <Menu.Content>
+            {rows.map((row) => (
+              <Menu.Item key={row.to} value={row.name} asChild>
+                <LocalLink href={row.to} params={row.params} prefixGroup={true}>
+                  {row.name}
+                </LocalLink>
+              </Menu.Item>
+            ))}
+          </Menu.Content>
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
   ) : (
     <SimpleLink to={to} params={params}>
       {name}

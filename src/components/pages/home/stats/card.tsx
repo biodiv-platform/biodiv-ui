@@ -49,7 +49,7 @@ export default function Card({ name, count, index, meta }) {
           borderRadius="lg"
           _hover={{ borderColor: color }}
         >
-          <Image src={iconPath} alt={icon} boxSize="70" />
+          <Image src={iconPath} alt={icon} boxSize="70" height="70px" />
           <Text className="count" fontSize="3xl" mt={2}>
             {toHumanString(count || 0)}
           </Text>

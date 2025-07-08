@@ -1,4 +1,13 @@
-import { Badge, Box, Button, Heading, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Heading,
+  Separator,
+  Stack,
+  Text,
+  useDisclosure
+} from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import UserBadge from "@components/@core/user/badge";
 import { SelectInputField } from "@components/form/select";
@@ -102,18 +111,21 @@ export default function FlagActionButton({
         colorPalette={flags && flags?.length ? "red" : "purple"}
         onClick={onOpen}
       />
-      <DialogRoot open={open} size="lg" onOpenChange={onClose}>
+      <DialogRoot open={open} size="md" onOpenChange={onClose}>
         <DialogBackdrop className="fade">
           <DialogContent className="fadeInUp" borderRadius="md">
             <FormProvider {...hForm}>
               <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
-                <DialogHeader>🚩 Flag {resourceType}</DialogHeader>
+                <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+                  🚩 Flag {resourceType}
+                </DialogHeader>
                 <DialogCloseTrigger />
                 {flags && flags.length > 0 && (
                   <>
                     <Heading size="sm" px={6} mb={3}>
                       flagged by {flags?.length} member(s)
                     </Heading>
+                    <Separator />
                     {flags?.map(
                       ({ flag, user }) =>
                         flag &&
@@ -168,7 +180,6 @@ export default function FlagActionButton({
                       name="flag"
                       label={t("common:actions.flag.category")}
                       options={flagOptions}
-                      shouldPortal={true}
                     />
                     <TextAreaField mb={0} name="notes" label={t("common:actions.flag.notes")} />
                   </DialogBody>
@@ -176,7 +187,7 @@ export default function FlagActionButton({
 
                 {!userFlag && (
                   <DialogFooter>
-                    <Button onClick={onClose} mr={4}>
+                    <Button onClick={onClose} mr={4} variant={"subtle"}>
                       Close
                     </Button>
                     <SubmitButton colorPalette="red">Flag</SubmitButton>

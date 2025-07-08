@@ -13,7 +13,7 @@ export default function GroupsTab({ o }) {
   return (
     <>
       <BoxHeading>👥 {t("common:usergroups")}</BoxHeading>
-      <Box p={4}>
+      <Box>
         <GroupPost
           groups={loggedInUserGroups}
           selectedDefault={o.userGroup}

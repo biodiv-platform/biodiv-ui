@@ -3,7 +3,6 @@ import {
   Button,
   Collapsible,
   Flex,
-  IconButton,
   Image,
   SimpleGrid,
   Skeleton,
@@ -336,8 +335,8 @@ export default function AddSuggestion({
                           </Button>
 
                           <MenuRoot onSelect={(e) => handleMenuSelect(e)}>
-                            <MenuTrigger as={IconButton} aria-label="Options">
-                              <Button variant="subtle" size="sm">
+                            <MenuTrigger aria-label="Options">
+                              <Button variant="outline" size="sm">
                                 <LuMenu />
                               </Button>
                             </MenuTrigger>

@@ -52,19 +52,22 @@ export function MediaPicker({ onBrowse }) {
   const onSelectionDone = () => setTabIndex("draftMedia");
 
   return (
-    <DialogRoot open={showMediaPicker} onOpenChange={onClose} id="media-picker" size="cover">
+    <DialogRoot
+      open={showMediaPicker}
+      onOpenChange={onClose}
+      id="media-picker"
+      size="xl"
+      closeOnInteractOutside={true}
+      modal={false}
+    >
       <DialogBackdrop />
       <DialogContent>
-        <DialogHeader>🖼 {t("observation:media_picker")}</DialogHeader>
+        <DialogHeader fontSize={"2xl"} fontWeight={"bold"}>
+          🖼 {t("observation:media_picker")}
+        </DialogHeader>
         <DialogCloseTrigger />
         <DialogBody pb={6}>
-          <Tabs.Root
-            className="nospace"
-            defaultValue={tabIndex}
-            lazyMount={true}
-            // onChange={setTabIndex}
-            // variant="soft-rounded"
-          >
+          <Tabs.Root className="nospace" defaultValue={tabIndex} lazyMount={true}>
             <Tabs.List mb={2} overflowX="auto" py={1}>
               <Tabs.Trigger value="draftMedia">☁️ {t("form:my_uploads")}</Tabs.Trigger>
               <Tabs.Trigger value="audio">🎙️ {t("form:audio.title")}</Tabs.Trigger>

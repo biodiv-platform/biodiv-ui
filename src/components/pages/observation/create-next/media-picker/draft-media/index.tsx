@@ -17,7 +17,7 @@ import DeleteIcon from "@icons/delete";
 import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
@@ -27,6 +27,7 @@ import UploadIcon from "../upload-icon";
 const DraftResource = ({ resource: r }) => {
   const { media, draft } = useObservationCreateNext();
   const { user } = useGlobalState();
+  const [imageError, setImageError] = useState(false);
 
   const [isSelected, isDisabled] = useMemo(
     () => [
@@ -50,7 +51,7 @@ const DraftResource = ({ resource: r }) => {
     () => ({
       key: r.id,
       src: getImageThumb(r, user?.id),
-      alt: getFallbackByMIME(r?.type)
+      fallbackSrc: getFallbackByMIME(r?.type)
     }),
     [r.id, r.status]
   );
@@ -71,8 +72,8 @@ const DraftResource = ({ resource: r }) => {
           alt={r.hashKey}
           borderRadius="0.4rem"
           objectFit="cover"
-          src={imgThumb.src}
-          // fallbackSrc={imgThumb.fallbackSrc}
+          src={imageError ? imgThumb.fallbackSrc : imgThumb.src}
+          onError={() => setImageError(true)}
         />
       </AspectRatio>
       <Box position="absolute" bottom={0} left={0} m={4}>

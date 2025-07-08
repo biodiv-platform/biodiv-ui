@@ -53,15 +53,23 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
       <Tabs.Root
         className="nospace"
         onValueChange={(e) => setTab(e.value)}
-        defaultValue={tab}
+        value={tab}
         lazyMount={true}
         width={"full"}
       >
         <Tabs.List mb={4} overflowX="auto" py={1}>
-          <Tabs.Trigger value="selectedMedia">✔️ {t("form:selected_media")}</Tabs.Trigger>
-          <Tabs.Trigger value="draftMedia">☁️ {t("form:my_uploads")}</Tabs.Trigger>
-          <Tabs.Trigger value="audio">🎙️ {t("form:audio.title")}</Tabs.Trigger>
-          <Tabs.Trigger value="youtube">📹 {t("form:from_url")}</Tabs.Trigger>
+          <Tabs.Trigger value="selectedMedia" onClick={() => setTab("selectedMedia")}>
+            ✔️ {t("form:selected_media")}
+          </Tabs.Trigger>
+          <Tabs.Trigger value="draftMedia" onClick={() => setTab("draftMedia")}>
+            ☁️ {t("form:my_uploads")}
+          </Tabs.Trigger>
+          <Tabs.Trigger value="audio" onClick={() => setTab("audio")}>
+            🎙️ {t("form:audio.title")}
+          </Tabs.Trigger>
+          <Tabs.Trigger value="youtube" onClick={() => setTab("youtube")}>
+            📹 {t("form:from_url")}
+          </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="selectedMedia">
           <ResourcesList showHint={true} />

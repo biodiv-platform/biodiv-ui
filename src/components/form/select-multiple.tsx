@@ -46,9 +46,12 @@ export const SelectMultipleInputField = ({
       className="dropdown"
       aria-invalid={!!fieldState.error}
       mb={mb}
+      htmlFor={name}
+      label={label}
+      required={isRequired}
+      errorText={fieldState?.error?.message}
       {...props}
     >
-      <Field htmlFor={name} label={label} required={isRequired} />
       <Box width={"full"}>
         <Select
           id={name}
@@ -70,7 +73,6 @@ export const SelectMultipleInputField = ({
           menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
         />
       </Box>
-      <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
     </Field>
   );

@@ -16,6 +16,7 @@ const TextFilterForm = styled.form`
   > button {
     flex-shrink: 0;
     margin-left: 0.75rem;
+    margin-right: 0.75rem;
   }
 `;
 

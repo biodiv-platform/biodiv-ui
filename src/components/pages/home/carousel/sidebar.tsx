@@ -1,6 +1,5 @@
 import { Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
-import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -9,17 +8,17 @@ import { LuArrowRight } from "react-icons/lu";
 
 const ReadMore = ({ resource, readMoreButtonText, readMoreUIType }) => {
   return resource.moreLinks && readMoreUIType == "button" ? (
-    <LocalLink href={resource.moreLinks}>
-      <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl">
+    <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+      <a href={resource.moreLinks}>
         {readMoreButtonText} <LuArrowRight />
-      </Button>
-    </LocalLink>
+      </a>
+    </Button>
   ) : (
-    <LocalLink href={resource.moreLinks}>
+    <a href={resource.moreLinks}>
       <Flex alignItems="center">
         {readMoreButtonText} <LuArrowRight />
       </Flex>
-    </LocalLink>
+    </a>
   );
 };
 

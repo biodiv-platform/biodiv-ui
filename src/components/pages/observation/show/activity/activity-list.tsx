@@ -84,7 +84,6 @@ export default function ActivityList({ resourceId, resourceType, title = "common
       <BoxHeading subTitle={`${activity.data.commentCount} ${t("form:comments.title")}`}>
         🕒 {t(title)}
       </BoxHeading>
-      <Separator />
       {activity.data.list.map((a: any) => (
         <>
           <Stack

@@ -76,12 +76,12 @@ export default function GroupPost({
 
   return (
     <>
-      <Button mb={2} variant="plain" colorPalette="blue" ref={editButtonRef} onClick={onEditClick}>
+      <Button variant="plain" colorPalette="blue" ref={editButtonRef} onClick={onEditClick}>
         {t("common:edit")}
         <EditIcon />
       </Button>
 
-      <SimpleGrid columns={columns || defaultGridColumns} gap={4} hidden={open}>
+      <SimpleGrid columns={columns || defaultGridColumns} gap={4} hidden={open} pl={4}>
         <GroupBox
           link={DEFAULT_GROUP.webAddress}
           icon={`${DEFAULT_GROUP.icon}?h=40`}
@@ -99,9 +99,9 @@ export default function GroupPost({
           ))}
       </SimpleGrid>
 
-      <Collapsible.Root open={open} unmountOnExit={true} p={4}>
+      <Collapsible.Root open={open} unmountOnExit={true} pl={4} pr={4}>
         <Collapsible.Content>
-          <Input mb={12} onChange={onQuery} placeholder={t("header:search")} />
+          <Input mb={8} onChange={onQuery} placeholder={t("header:search")} />
           {groups?.length > 0 ? (
             <CheckBoxItems
               gridColumns={columns || defaultGridColumns}
@@ -128,7 +128,7 @@ export default function GroupPost({
             <Button
               size="sm"
               ml={2}
-              colorPalette="gray"
+              variant={"subtle"}
               aria-label="Cancel"
               onClick={handleOnCancel}
             >
