@@ -12,6 +12,7 @@ interface CheckboxProps {
   hint?: string;
   options?: any[];
   isRequired?: boolean;
+  onChangeCallback?;
 }
 
 export default function IconRadioField({
@@ -21,9 +22,17 @@ export default function IconRadioField({
   mb = 4,
   options = [],
   isRequired,
+  onChangeCallback,
   ...props
 }: CheckboxProps) {
   const { field, fieldState } = useController({ name });
+
+  const handleChange = (value) => {
+    field.onChange(value);
+    if (onChangeCallback) {
+      onChangeCallback(value);
+    }
+  };
 
   return (
     <FormControl isInvalid={!!fieldState.error} isRequired={isRequired} mb={mb} {...props}>
@@ -32,7 +41,7 @@ export default function IconRadioField({
         options={options}
         name={name}
         defaultValue={field.value}
-        onChange={field.onChange}
+        onChange={handleChange}
       />
       <FormErrorMessage children={fieldState?.error?.message} />
       {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}

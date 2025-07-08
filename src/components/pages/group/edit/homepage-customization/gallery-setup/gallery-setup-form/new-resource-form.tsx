@@ -35,6 +35,16 @@ export default function NewResourceForm({ translation }) {
         key={`file-${translation}`}
         label={t("group:homepage_customization.resources.imageurl")}
         name={`${translation}.0.fileName`}
+        onChangeCallback={(value) => {
+          const values = form.getValues();
+
+          for (const langId in values) {
+            const entry = values[langId]?.[0];
+            if (entry) {
+              form.setValue(`${langId}.0.fileName`, value);
+            }
+          }
+        }}
       />
     </>
   );

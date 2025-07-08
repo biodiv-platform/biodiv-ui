@@ -131,7 +131,8 @@ export default function GallerySetupFrom({
         readMoreUIType: hForm.getValues()[translationSelected][0].readMoreUIType,
         gallerySidebar: hForm.getValues()[translationSelected][0].gallerySidebar,
         authorInfo: hForm.getValues()[translationSelected][0].authorInfo,
-        truncated: hForm.getValues()[translationSelected][0].truncated
+        truncated: hForm.getValues()[translationSelected][0].truncated,
+        options: hForm.getValues()[translationSelected][0].options
       }
     ]);
     setTranslationSelected(langId);

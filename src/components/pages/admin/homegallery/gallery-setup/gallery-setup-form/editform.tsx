@@ -103,15 +103,20 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
   };
 
   const handleFormSubmit = async (payload) => {
-    const { success, data } = await axEditHomePageGallery(Number(editGalleryData[0].split("|")[0]), payload);
+    const { success, data } = await axEditHomePageGallery(
+      Number(editGalleryData[0].split("|")[0]),
+      payload
+    );
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-      setGalleryList(Object.entries(data?.gallerySlider || {}).sort((a, b) => {
-        const aOrder = parseInt(a[0].split("|")[1], 10);
-        const bOrder = parseInt(b[0].split("|")[1], 10);
-        return aOrder - bOrder;
-      }));
+      setGalleryList(
+        Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        })
+      );
       setIsEdit(false);
     } else {
       notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
@@ -250,6 +255,16 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
             name={`${translationSelected}.0.fileName`}
+            onChangeCallback={(value) => {
+              const values = hForm.getValues();
+
+              for (const langId in values) {
+                const entry = values[langId]?.[0];
+                if (entry) {
+                  hForm.setValue(`${langId}.0.fileName`, value);
+                }
+              }
+            }}
           />
         )}
         <TextAreaField

@@ -249,6 +249,16 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
             name={`${translationSelected}.0.fileName`}
+            onChangeCallback={(value) => {
+              const values = hForm.getValues();
+
+              for (const langId in values) {
+                const entry = values[langId]?.[0];
+                if (entry) {
+                  hForm.setValue(`${langId}.0.fileName`, value);
+                }
+              }
+            }}
           />
         )}
         <TextAreaField
