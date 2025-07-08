@@ -36,10 +36,10 @@ export default function AreaDrawField({
   const { field, fieldState } = useController({ name });
   const [coordinates, setCoordinates] = useState({});
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
-  const isEmptyObject = 
-  typeof field.value === "object" && 
-  field.value !== null &&
-  Object.keys(field.value).length === 0;
+  const isEmptyObject =
+    typeof field.value === "object" &&
+    field.value !== null &&
+    Object.keys(field.value).length === 0;
 
   const defaultFeatures = useMemo(
     () =>
@@ -72,17 +72,15 @@ export default function AreaDrawField({
       return;
     }
 
-    if (Array.isArray(features) && features.length > 0) {
-      const [minlng, minlat, maxlng, maxlat] = bbox({
-        type: "FeatureCollection",
-        features
-      });
+    const [minlng, minlat, maxlng, maxlat] = bbox({
+      type: "FeatureCollection",
+      features
+    });
 
-      setCoordinates({
-        ne: [maxlng, minlat],
-        se: [minlng, maxlat]
-      });
-    }
+    setCoordinates({
+      ne: [maxlng, minlat],
+      se: [minlng, maxlat]
+    });
   };
 
   useEffect(() => {
