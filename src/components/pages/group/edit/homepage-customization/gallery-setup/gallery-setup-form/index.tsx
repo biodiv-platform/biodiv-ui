@@ -98,9 +98,9 @@ export default function GallerySetupFrom({
         langId,
         entries.map((entry) => ({
           ...entry,
-          authorId: defaultValues?.[langId]?.[0]?.authorInfo?.id,
-          authorName: defaultValues?.[langId]?.[0]?.authorInfo?.name,
-          authorImage: defaultValues?.[langId]?.[0]?.authorInfo?.profilePic,
+          authorId: entry?.authorInfo?.id,
+          authorName: entry?.authorInfo?.name,
+          authorImage: entry?.authorInfo?.profilePic,
           galleryId: galleryId
         }))
       ])

@@ -22,7 +22,8 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
       const payload = Object.fromEntries(
         Object.entries(form.getValues()).map(([langId, entries]) => [
           langId,
-          entries.map(() => ({
+          entries.map((entry) => ({
+            ...entry,
             authorInfo,
             observationId,
             moreLinks: `observation/show/${observationId}`,

@@ -48,13 +48,12 @@ const GallerySetupTable = ({
   const removeGalleryItem = async (index) => {
     if (galleryList[index][0].split("|")[0]!="null") {
       const { success } = await axRemoveHomePageGallery(Number(galleryList[index][0].split("|")[0]));
-      if (success) {
-        notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
-        setGalleryList(galleryList.filter((_, idx) => idx !== index));
-      } else {
+      if (!success) {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
     }
+    setGalleryList(galleryList.filter((_, idx) => idx !== index));
+    notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
   };
 
   const editGalleryItem = async (index) => {

@@ -4,7 +4,7 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React from "react";
 
 const getPageLink = (lang, to) => {
   return typeof to === "string" ? to : to?.[lang] || to?.[SITE_CONFIG.LANG.DEFAULT];
@@ -17,15 +17,9 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
   return (
     <MenuList>
       {rows.filter((item) => !(item.name === "about_us" && currentGroup?.id)).map((item) => {
-        const [label, toLink] = useMemo(
-          () => [
-            item.name && t(isPage ? item.name : prefix + item.name),
-            getPageLink(lang, item.to)
-          ],
-          [lang]
-        );
+        const label = item.name && t(isPage ? item.name : prefix + item.name);
+        const toLink = getPageLink(lang, item.to);
 
-        // explicit false check is necessary to avoid button flickr
         return (
           <MenuItem key={item.name}>
             {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
