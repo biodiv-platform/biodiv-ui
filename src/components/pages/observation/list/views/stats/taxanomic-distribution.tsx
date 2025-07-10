@@ -1,4 +1,4 @@
-import { Box, Button, Separator, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -76,7 +76,6 @@ const TaxanomicDistribution = ({ filter }) => {
           <DownloadIcon />
         </Button>
       </BoxHeading>
-      <Separator />
       <Box p={4}>
         <TreeMapChart
           data={taxon.data.list}

@@ -54,7 +54,7 @@ export default function CommonNamesList({
                   {language}
                 </Table.Cell>
                 <Table.Cell>
-                  <List.Root gap={2}>
+                  <List.Root gap={2} unstyled>
                     {languagesData[language].map((commonName) => (
                       <List.Item key={commonName.name}>
                         {isContributor ? (

@@ -29,7 +29,7 @@ export function PageOptions({ title, pageId }) {
       top={0}
       zIndex={1}
       backdropFilter="saturate(180%) blur(20px)"
-      shadow="sm"
+      shadow="xs"
     >
       <div className="container">
         <Flex alignItems="center" justifyContent="space-between">

@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Image, Separator, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
@@ -19,7 +19,6 @@ export default function SpeciesRelatedObservations() {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📷 {t("species:related.title")}</BoxHeading>
-      <Separator />
       <SimpleGrid className="fade" w="full" columns={4} gap={4} p={4}>
         {speciesOccurances.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("common:unknown");

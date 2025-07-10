@@ -32,7 +32,9 @@ export default function SpeciesGalleryModal({ resources, setResources }) {
       <DialogRoot open={open} size="xl" onOpenChange={onClose}>
         <DialogBackdrop />
         <DialogContent>
-          <DialogHeader>{t("species:all_media")}</DialogHeader>
+          <DialogHeader fontSize={"2xl"} fontWeight={"bold"}>
+            {t("species:all_media")}
+          </DialogHeader>
           <DialogCloseTrigger />
           {open ? (
             permissions.isContributor ? (

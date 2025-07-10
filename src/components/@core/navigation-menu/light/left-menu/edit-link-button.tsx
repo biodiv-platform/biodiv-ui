@@ -1,5 +1,4 @@
 import { Button } from "@chakra-ui/react";
-import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
@@ -23,11 +22,11 @@ export default function EditLinkButton({ label }) {
   }, [pathname]);
 
   return canEdit ? (
-    <LocalLink href={`${webAddress}/edit`}>
-      <Button className="join-usergroup"  m={2} colorPalette="blue" size="sm">
-      <EditIcon />
+    <Button className="join-usergroup" m={2} colorPalette="blue" size="sm" asChild>
+      <a href={`${webAddress}/edit`}>
+        <EditIcon />
         {label}
-      </Button>
-    </LocalLink>
+      </a>
+    </Button>
   ) : null;
 }

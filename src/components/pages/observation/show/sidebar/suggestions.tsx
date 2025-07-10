@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Image, Link, Separator, SimpleGrid } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
@@ -36,7 +36,6 @@ export default function Suggestions({
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📍 {t(title)}</BoxHeading>
-      <Separator />
       <SimpleGrid columns={4} gap={4} p={4}>
         {list?.slice(0, page * pageSize).map((o) => (
           <LocalLink

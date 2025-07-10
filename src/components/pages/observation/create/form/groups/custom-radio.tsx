@@ -16,8 +16,7 @@ const CustomRadio = (props) => {
               <Image
                 boxSize="2.6rem"
                 style={{
-                  filter: isSelected ? "none" : "grayscale(1)",
-                  opacity: isSelected ? 1 : 0.7
+                  filter: props?.checked || isSelected ? "none" : "grayscale(1)"
                 }}
                 src={getLocalIcon(props.icon)}
                 alt={props.icon}

@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, RatingGroup } from "@chakra-ui/react";
+import { Box, Grid, IconButton, RatingGroup, Separator } from "@chakra-ui/react";
 import { axRateObservationResource } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -45,7 +45,6 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
 
   return (
     <Box position="absolute" top={4} right={0} left={4} display="flex">
-      {/* closeOnBlur={false} */}
       <PopoverRoot positioning={{ placement: "bottom-start" }} lazyMount>
         <PopoverTrigger>
           <IconButton
@@ -63,6 +62,7 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
           <PopoverArrow />
           <PopoverCloseTrigger />
           <PopoverHeader>{t("observation:resource_info")}</PopoverHeader>
+          <Separator />
           <PopoverBody>
             <Grid templateColumns="1fr 2fr" gap={3}>
               <Box>{t("observation:contributor")}</Box>

@@ -65,8 +65,6 @@ function SignUpForm() {
     currentGroup: { id: groupId }
   } = useGlobalState();
 
-  // const toast = useToast();
-
   const hForm = useForm<any>({
     mode: "onBlur",
     resolver: yupResolver(

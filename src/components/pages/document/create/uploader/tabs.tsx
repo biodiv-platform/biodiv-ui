@@ -27,8 +27,7 @@ export default function DocumentUploaderTabs({ onChange, externalUrl }) {
       defaultValue={tabIndex}
       lazyMount={true}
       width={"full"}
-      variant={"subtle"}
-      colorPalette={"blue"}
+
     >
       <Tabs.List mb={4} overflowX="auto" py={1}>
         <Tabs.Trigger value="selectedDocument" disabled={externalUrl}>

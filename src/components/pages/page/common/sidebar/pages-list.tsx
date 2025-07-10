@@ -1,4 +1,4 @@
-import { Box, Button, chakra } from "@chakra-ui/react";
+import { Box, Button, chakra, HStack } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
@@ -44,17 +44,17 @@ const PagesListItem = ({ page, isParent }) => {
         alignItems="center"
         justifyContent="space-between"
         fontWeight={isParent ? "semibold" : "normal"}
-        mb={2}
+        mb={4}
       >
         <LocalLink prefixGroup={true} href={`/page/${linkType}/${page.id}`}>
-          <chakra.a flexGrow={1} pl={3} py={2}>
+          <chakra.p flexGrow={1} pl={3} py={2}>
             {!isParent && <chakra.span opacity={0.5} mr={3} children="#" />}
             {page.title}
-          </chakra.a>
+          </chakra.p>
         </LocalLink>
 
         {canEdit && page.pageType == PAGE_TYPES.REDIRECT && linkType == "show" && (
-          <>
+          <HStack>
             <SimpleActionButton
               icon={<EditIcon />}
               title={t("common:edit")}
@@ -68,7 +68,7 @@ const PagesListItem = ({ page, isParent }) => {
               deleted={t("page:remove.success")}
               deleteFunc={axDeletePageByID}
             />
-          </>
+          </HStack>
         )}
 
         {hasChildren && (

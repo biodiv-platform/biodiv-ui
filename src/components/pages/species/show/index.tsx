@@ -191,7 +191,7 @@ export default function SpeciesShowPageComponent({
                 )}
 
                 {/* Add Reference Modal */}
-                <DialogRoot open={isAddOpen} onOpenChange={onAddClose} size="cover">
+                <DialogRoot open={isAddOpen} onOpenChange={onAddClose} size="cover" unmountOnExit>
                   <DialogBackdrop />
                   <DialogContent>
                     <FormProvider {...formRef}>

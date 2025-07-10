@@ -1,4 +1,4 @@
-import { Image, Link, Stack } from "@chakra-ui/react";
+import { Image, Stack } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
@@ -30,6 +30,8 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
                 <Stack direction={"row"}>
                   {canEdit && (
                     <Checkbox
+                      size={"sm"}
+                      borderWidth={"thin"}
                       colorPalette={"blue"}
                       m={2}
                       {...getCheckboxProps({ value: cell.row.original.id })}
@@ -37,9 +39,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
                   )}
 
                   <LocalLink href={`/species/show/${cell.row.original.id}`} prefixGroup={true}>
-                    <Link unstyled>
-                      <ScientificName value={value} />
-                    </Link>
+                    <ScientificName value={value} />
                   </LocalLink>
                 </Stack>
               )

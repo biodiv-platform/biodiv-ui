@@ -1,11 +1,9 @@
-import { Button, PopoverBody, PopoverContent, PopoverTrigger } from "@chakra-ui/react";
+import { Button, Popover, Portal } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import MenuIcon from "@icons/menu";
 import { generateToC } from "@utils/pages";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
-
-import { PopoverRoot } from "@/components/ui/popover";
 
 import usePages from "../../common/sidebar/use-pages-sidebar";
 
@@ -41,22 +39,26 @@ export function TableOfContents() {
   }, [currentPage]);
 
   return showToC ? (
-    <PopoverRoot
+    <Popover.Root
       open={isOpen}
-      onOpenChange={() => setIsOpen(true)}
+      onOpenChange={(e) => setIsOpen(e.open)}
       positioning={{ placement: "bottom-start" }}
     >
-      <PopoverTrigger>
-        <Button variant="outline" size="sm" colorScheme="gray" bg="white" fontWeight={"bold"}>
+      <Popover.Trigger asChild>
+        <Button size="sm" variant="outline" fontSize={"md"} fontWeight={"bold"}>
           <MenuIcon />
           {t("page:quick_navigation")}
         </Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverBody maxH="20rem" overflow="auto" onClick={() => setIsOpen(false)}>
-          <ToCContainer className="toc" />
-        </PopoverBody>
-      </PopoverContent>
-    </PopoverRoot>
+      </Popover.Trigger>
+      <Portal>
+        <Popover.Positioner>
+          <Popover.Content>
+            <Popover.Body maxH="20rem" overflow="auto" onClick={() => setIsOpen(false)}>
+              <ToCContainer className="toc" />
+            </Popover.Body>
+          </Popover.Content>
+        </Popover.Positioner>
+      </Portal>
+    </Popover.Root>
   ) : null;
 }

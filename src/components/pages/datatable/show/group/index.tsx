@@ -1,4 +1,4 @@
-import { Box, Separator } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
@@ -25,13 +25,8 @@ export default function Group({ datatableId, defaultGroups }) {
   }, [isLoggedIn]);
 
   return (
-    <Box
-      mb={4}
-      className="white-box"
-      data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE && hideFeature}
-    >
+    <Box mb={4} className="white-box" data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE && hideFeature}>
       <BoxHeading>👥 {t("common:usergroups")}</BoxHeading>
-      <Separator />
       <Box>
         <GroupPost
           groups={loggedInUserGroups}

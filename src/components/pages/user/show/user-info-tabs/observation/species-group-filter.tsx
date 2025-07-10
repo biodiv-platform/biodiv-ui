@@ -27,6 +27,7 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
               }
               orientation="horizontal"
               align="center"
+              colorPalette={"blue"}
             >
               <HStack align="stretch">
                 {speciesGroups.map((o) => (
@@ -34,14 +35,18 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
                     key={o.id}
                     value={o.id.toString()}
                     icon={o.name}
-                    isChecked={filter?.sGroupId === o.id}
+                    checked={filter?.sGroupId == o.id}
                   />
                 ))}
               </HStack>
             </RadioCard.Root>
           </Skeleton>
           <Skeleton loading={speciesGroups.length < 0} maxW="8rem">
-            <Checkbox defaultChecked={filter.hasMedia} onChange={handleOnMediaChange}>
+            <Checkbox
+              defaultChecked={filter.hasMedia}
+              onChange={handleOnMediaChange}
+              colorPalette={"blue"}
+            >
               {t("user:with_media")}
             </Checkbox>
           </Skeleton>

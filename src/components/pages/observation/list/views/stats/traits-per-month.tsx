@@ -1,4 +1,4 @@
-import { Box, Button, Separator, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -47,7 +47,6 @@ const TraitsPerMonth = ({ filter }) => {
           <DownloadIcon />
         </Button>
       </BoxHeading>
-      <Separator />
       <Box position={"relative"}>
         <LineGraph data={reversedList} ref={chartRef} />
       </Box>

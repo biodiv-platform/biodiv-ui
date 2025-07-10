@@ -1,4 +1,4 @@
-import { Box, Button, Separator } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -71,7 +71,6 @@ const SpeciesGroups = ({ observationData, filter }) => {
           <DownloadIcon />
         </Button>
       </BoxHeading>
-      <Separator />
       <Box p={4}>
         <VerticalBarChart
           h={365}

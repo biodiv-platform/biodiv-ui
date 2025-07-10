@@ -105,7 +105,7 @@ export default function SpeciesFieldSimple({ value }) {
             </Flex>
             <div data-hidden={!open}>
               {/* size="xs" variant="unstyled" */}
-              <Table.Root mt={3}>
+              <Table.Root mt={3} size={"sm"} unstyled>
                 <Table.Body>
                   <BlockList title={t("species:attributions")}>{value?.attributions}</BlockList>
                   <BlockList title={t("species:contributors")}>

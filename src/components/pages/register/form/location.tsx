@@ -82,7 +82,7 @@ export const LocationPicker = () => {
               flex="1"
               className="places-search"
               endElement={
-                <Button variant="ghost" size="sm" onClick={onToggle}>
+                <Button variant="plain" size="sm" onClick={onToggle}>
                   {t(open ? "form:map.hide" : "form:map.show")}
                 </Button>
               }

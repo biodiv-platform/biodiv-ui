@@ -18,7 +18,8 @@ const inputRecipe = defineRecipe({
 export const customTheme = createSystem(defaultConfig, {
   globalCss: {
     "html, body": {
-      scrollBehavior: "smooth"
+      scrollBehavior: "smooth",
+      bg: "gray.50"
     }
   },
 

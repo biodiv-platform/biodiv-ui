@@ -1,4 +1,4 @@
-import { CloseButton, Image } from "@chakra-ui/react";
+import { Box, CloseButton, Image } from "@chakra-ui/react";
 import { axUploadResource } from "@services/files.service";
 import { resizeImage } from "@utils/image";
 import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
@@ -67,7 +67,7 @@ export const SocialPreviewField = ({
       {label && <Field htmlFor={name} label={label} />}
 
       {/* Dropzone */}
-      <div id={name}>
+      <Box id={name} width={"full"}>
         <Container
           style={{ height: "124px", padding: "1rem", position: "relative" }}
           {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
@@ -90,7 +90,7 @@ export const SocialPreviewField = ({
             <p>{t("form:uploader.label")}</p>
           )}
         </Container>
-      </div>
+      </Box>
 
       {hint && <Field color="gray.600" helperText={hint}></Field>}
     </Field>
