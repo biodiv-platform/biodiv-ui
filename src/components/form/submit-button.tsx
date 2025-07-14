@@ -1,7 +1,6 @@
+import { Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-
-import { Button } from "../ui/button";
 
 interface ISubmitButtonProps {
   children;

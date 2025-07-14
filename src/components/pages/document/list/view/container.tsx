@@ -11,7 +11,6 @@ import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";
 import InfoTab from "./tabs/infotab";
 import TagsTab from "./tabs/tags";
-
 const VerticalTabs = styled.div`
   flex-grow: 1;
 
@@ -21,11 +20,8 @@ const VerticalTabs = styled.div`
 
     > .tab-content {
       flex-grow: 1;
-      height: 100%;
-      overflow: hidden;
 
-      > [role="tabpanel"],
-      > div[data-state="active"] {
+      > [role="tabpanel"] {
         padding: 0;
         height: 100%;
         max-height: 18rem;
@@ -58,8 +54,7 @@ const VerticalTabs = styled.div`
         border-bottom: 0;
       }
 
-      > [role="tab"][aria-selected="true"],
-      > [role="tab"][data-state="active"] {
+      > [role="tab"][aria-selected="true"] {
         white-space: nowrap;
 
         color: inherit;
@@ -106,14 +101,8 @@ export default function Container({ o }) {
     >
       <VerticalTabs>
         <Tabs.Root variant="plain" className="tabs" lazyMount defaultValue="common:information">
-          <Tabs.Content
-            value="common:information"
-            height="100%"
-            className="tab-content"
-            position="relative"
-            style={{ overflow: "hidden" }}
-          >
-            <Box height="100%" overflowY="auto">
+          <Tabs.ContentGroup className="tab-content" position="relative">
+            <Tabs.Content value="common:information">
               <InfoTab
                 habitatIds={o.habitatIds}
                 specieIds={o.speciesGroupIds}
@@ -121,43 +110,19 @@ export default function Container({ o }) {
                 user={o.userIbp}
                 flags={o.flag[0] ? o.flag.map((item) => ({ flag: item, user: o.userIbp })) : null}
               />
-            </Box>
-          </Tabs.Content>
-          {SITE_CONFIG.USERGROUP.ACTIVE && (
-            <Tabs.Content
-              value="common:usergroups"
-              height="100%"
-              className="tab-content"
-              position="relative"
-              style={{ overflow: "hidden" }}
-            >
-              <Box height="100%" overflowY="auto">
-                <GroupTab o={o} />
-              </Box>
             </Tabs.Content>
-          )}
-          <Tabs.Content
-            value="document:tags.title"
-            height="100%"
-            className="tab-content"
-            position="relative"
-            style={{ overflow: "hidden" }}
-          >
-            <Box height="100%" overflowY="auto">
+            {SITE_CONFIG.USERGROUP.ACTIVE && (
+              <Tabs.Content value="common:usergroups">
+                <GroupTab o={o} />
+              </Tabs.Content>
+            )}
+            <Tabs.Content value="document:tags.title">
               <TagsTab documentId={o.document.id} tags={o.tags} />
-            </Box>
-          </Tabs.Content>
-          <Tabs.Content
-            value="form:comments.title"
-            height="100%"
-            className="tab-content"
-            position="relative"
-            style={{ overflow: "hidden" }}
-          >
-            <Box height="100%" overflowY="auto">
+            </Tabs.Content>
+            <Tabs.Content value="form:comments.title">
               <CommentsTab documentId={o.document.id} />
-            </Box>
-          </Tabs.Content>
+            </Tabs.Content>
+          </Tabs.ContentGroup>
           <Tabs.List>
             {filterTabs.map(({ name, icon }) => (
               <Tabs.Trigger key={name} value={name}>
@@ -168,7 +133,7 @@ export default function Container({ o }) {
                 </Tooltip>
               </Tabs.Trigger>
             ))}
-            {/* <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} /> */}
+            <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
           </Tabs.List>
         </Tabs.Root>
       </VerticalTabs>

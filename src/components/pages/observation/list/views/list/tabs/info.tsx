@@ -30,7 +30,7 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
 
   return (
     <Box boxSize="full" display="flex" flexDir="column" justifyContent="space-between">
-      <SimpleGrid columns={[1, 1, 3, 3]} px={4}>
+      <SimpleGrid columns={[1, 1, 3, 3]} px={4} pt={1}>
         <div style={{ gridColumn: "1/3" }}>
           <Heading
             size="xl"

@@ -22,15 +22,11 @@ export const VerticalTabs = styled.div`
 
   .tabs {
     display: flex;
-    height: 18rem;
 
     > .tab-content {
       flex-grow: 1;
-      height: 100%;
-      overflow: hidden;
 
-      > [role="tabpanel"],
-      > div[data-state="active"] {
+      > [role="tabpanel"] {
         padding: 0;
         height: 100%;
         max-height: 18rem;
@@ -41,12 +37,14 @@ export const VerticalTabs = styled.div`
 
     > [role="tablist"] {
       flex-direction: column;
+
       flex-shrink: 0;
 
       > [role="tab"] {
         display: block;
 
         width: 100%;
+        min-width: 10rem;
         height: 3rem;
 
         text-align: left;
@@ -63,8 +61,7 @@ export const VerticalTabs = styled.div`
         border-bottom: 0;
       }
 
-      > [role="tab"][aria-selected="true"],
-      > [role="tab"][data-state="active"] {
+      > [role="tab"][aria-selected="true"] {
         white-space: nowrap;
 
         color: inherit;
@@ -121,82 +118,41 @@ export default function Container({ o }) {
       <ImageBoxComponent o={o} getCheckboxProps={getCheckboxProps} />
       <VerticalTabs>
         <Tabs.Root variant="plain" className="tabs" lazyMount value={tab}>
-          <Tabs.Content
-            value="common:information"
-            height="100%"
-            className="tab-content"
-            position="relative"
-            style={{ overflow: "hidden" }}
-          >
-            <Box height="100%" overflowY="auto">
+          <Tabs.ContentGroup className="tab-content" position="relative">
+            <Tabs.Content value="common:information">
               <InfoTab o={o} recoUpdated={recoUpdated} setTab={setTab} />
-            </Box>
-          </Tabs.Content>
+            </Tabs.Content>
 
-          <Tabs.Content
-            value="observation:id.title"
-            height={["fit-content"]}
-            className="tab-content"
-            position="relative"
-          >
-            <Box height="100%" overflowY="auto">
+            <Tabs.Content value="observation:id.title">
               <Suspense fallback={<Spinner />}>
                 <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
               </Suspense>
-            </Box>
-          </Tabs.Content>
+            </Tabs.Content>
 
-          <Tabs.Content
-            value="common:usergroups"
-            height={["fit-content"]}
-            className="tab-content"
-            position="relative"
-          >
-            <Box height="100%" overflowY="auto">
+            <Tabs.Content value="common:usergroups">
               <Suspense fallback={<Spinner />}>
                 <GroupsTab o={o} />
               </Suspense>
-            </Box>
-          </Tabs.Content>
+            </Tabs.Content>
 
-          <Tabs.Content
-            value="observation:traits"
-            height={["fit-content"]}
-            className="tab-content"
-            position="relative"
-          >
-            <Box height="100%" overflowY="auto">
+            <Tabs.Content value="observation:traits">
               <Suspense fallback={<Spinner />}>
                 <TraitsTab o={o} />
               </Suspense>
-            </Box>
-          </Tabs.Content>
+            </Tabs.Content>
 
-          <Tabs.Content
-            value="observation:custom_fields"
-            height={["fit-content"]}
-            className="tab-content"
-            position="relative"
-          >
-            <Box height="100%" overflowY="auto">
+            <Tabs.Content value="observation:custom_fields">
               <Suspense fallback={<Spinner />}>
                 <CustomFieldsTab o={o} />
               </Suspense>
-            </Box>
-          </Tabs.Content>
+            </Tabs.Content>
 
-          <Tabs.Content
-            value="form:comments.title"
-            height={["fit-content"]}
-            className="tab-content"
-            position="relative"
-          >
-            <Box height="100%" overflowY="auto">
+            <Tabs.Content value="form:comments.title">
               <Suspense fallback={<Spinner />}>
                 <CommentsTab observationId={o.observationId} />
               </Suspense>
-            </Box>
-          </Tabs.Content>
+            </Tabs.Content>
+          </Tabs.ContentGroup>
 
           <Tabs.List>
             {actionTabs.map(({ name, icon, active = true }) => (
