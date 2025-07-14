@@ -30,7 +30,7 @@ export function Filters() {
     </Box>
   ) : (
     <FilterWrapper>
-      <Button w="full" className="toggle-button" onClick={onToggle}>
+      <Button w="full" className="toggle-button" onClick={onToggle} variant={"subtle"}>
         {t("filters:toggle")}
       </Button>
       <DrawerRoot open={open} placement="end" onOpenChange={onClose}>
