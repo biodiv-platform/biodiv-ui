@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Dialog, Portal } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
@@ -9,16 +9,6 @@ import React from "react";
 import { emit } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
-
-import {
-  DialogBackdrop,
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogRoot
-} from "@/components/ui/dialog";
 
 import { parseDefaultCustomField } from "../../create/form";
 import ObservationCustomFieldForm from "../../create/form/custom-field-form";
@@ -93,42 +83,46 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
   };
 
   return (
-    <DialogRoot open={initialValue} onOpenChange={onClose} size="full">
-      <DialogBackdrop />
-      <DialogContent>
-        <DialogHeader fontSize={"2xl"} fontWeight={"bold"}>
-          {t("observation:title_edit")}
-        </DialogHeader>
-        <DialogCloseTrigger />
-        <FormProvider {...hForm}>
-          <form onSubmit={hForm.handleSubmit(handleOnFormSubmit)} noValidate>
-            <DialogBody>
-              <RecoInputs />
-              <GroupSelector
-                name="sGroup"
-                label={t("form:species_groups")}
-                options={speciesGroupOptions}
-                isRequired={false}
-              />
-              <LocationPicker isRequired={false} />
-              <DateInputs isRequired={false} />
+    <Dialog.Root open={initialValue} onOpenChange={onClose} size="full" modal={false}>
+      <Portal>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.Header fontSize={"2xl"} fontWeight={"bold"}>
+              {t("observation:title_edit")}
+            </Dialog.Header>
+            <Dialog.CloseTrigger />
+            <FormProvider {...hForm}>
+              <form onSubmit={hForm.handleSubmit(handleOnFormSubmit)} noValidate>
+                <Dialog.Body>
+                  <RecoInputs />
+                  <GroupSelector
+                    name="sGroup"
+                    label={t("form:species_groups")}
+                    options={speciesGroupOptions}
+                    isRequired={false}
+                  />
+                  <LocationPicker isRequired={false} />
+                  <DateInputs isRequired={false} />
 
-              {sortedCFList?.length && <ObservationCustomFieldForm fields={fields} />}
-              <TraitsPicker name="facts" label={t("observation:traits")} />
-              <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
-            </DialogBody>
+                  {sortedCFList?.length && <ObservationCustomFieldForm fields={fields} />}
+                  <TraitsPicker name="facts" label={t("observation:traits")} />
+                  <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
+                </Dialog.Body>
 
-            <DialogFooter>
-              <SubmitButton leftIcon={<CheckIcon />} mr={3}>
-                {t("common:save")}
-              </SubmitButton>
-              <Button onClick={onClose} variant={"subtle"}>
-                {t("common:close")}
-              </Button>
-            </DialogFooter>
-          </form>
-        </FormProvider>
-      </DialogContent>
-    </DialogRoot>
+                <Dialog.Footer>
+                  <SubmitButton leftIcon={<CheckIcon />} mr={3}>
+                    {t("common:save")}
+                  </SubmitButton>
+                  <Button onClick={onClose} variant={"subtle"}>
+                    {t("common:close")}
+                  </Button>
+                </Dialog.Footer>
+              </form>
+            </FormProvider>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
   );
 }

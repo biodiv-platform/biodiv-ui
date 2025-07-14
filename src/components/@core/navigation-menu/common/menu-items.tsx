@@ -23,12 +23,21 @@ export default function MenuItems(props) {
   return isDropdown ? (
     <Menu.Root positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
       <Menu.Trigger data-label={name} role="button" asChild>
-        <Button variant="plain" size="sm" color="inherit" px={0}>
-          <Flex align="center" gap={0}>
+        <Button
+          variant="plain"
+          size="sm"
+          color="inherit"
+          px={0}
+          width={{ base: "100%", lg: "auto" }}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Flex align="center">
             {NameIcon && <NameIcon />}
             {t(`${name}title`)}
-            <LuChevronDown />
           </Flex>
+          <LuChevronDown />
         </Button>
       </Menu.Trigger>
       <Portal>
@@ -45,8 +54,10 @@ export default function MenuItems(props) {
     </Menu.Root>
   ) : (
     <SimpleLink to={to} params={params}>
-      {NameIcon && <NameIcon mr={1} />}
-      {t(`${name}title`)}
+      <Flex align="center" gap={2}>
+        {NameIcon && <NameIcon />}
+        {t(`${name}title`)}
+      </Flex>
     </SimpleLink>
   );
 }

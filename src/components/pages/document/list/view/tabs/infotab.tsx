@@ -61,8 +61,8 @@ export default function InfoTab({
   const { currentGroup } = useGlobalState();
 
   return (
-    <Flex direction="column" minH="18rem" justifyContent="space-between" p={4}>
-      <Stack color="gray.600">
+    <Box boxSize="full" display="flex" flexDir="column" justifyContent="space-between">
+      <Stack color="gray.600" px={4}>
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={3}>
           <LocalLink href={`/document/show/${document.id}`}>
@@ -111,7 +111,7 @@ export default function InfoTab({
           children={stripTags(document?.notes)}
         />
       </Stack>
-      <Flex alignItems="flex-end" justifyContent="space-between">
+      <Flex alignItems="flex-end" justifyContent="space-between" p={4}>
         <Stack>
           <MetaBlock
             icon={<MapIcon size={"sm"} />}
@@ -144,6 +144,6 @@ export default function InfoTab({
           </Flex>
         </Link>
       </Flex>
-    </Flex>
+    </Box>
   );
 }

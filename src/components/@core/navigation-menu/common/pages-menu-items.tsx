@@ -1,4 +1,4 @@
-import { Box, Menu, Portal } from "@chakra-ui/react";
+import { Button, Flex, Menu, Portal } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
 import { LuChevronDown } from "react-icons/lu";
@@ -15,15 +15,24 @@ export default function MenuItems(props) {
 
   return isDropdown ? (
     <Menu.Root positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
-      <Menu.Trigger data-label={name} role="button" asChild pl={4}>
-        <Box display="flex" alignItems="center">
-          <SimpleLink to={to} params={params}>
-            {name}
-          </SimpleLink>
-          <Box as="button" role="button" tabIndex={0}>
-            <LuChevronDown />
-          </Box>
-        </Box>
+      <Menu.Trigger data-label={name} role="button" asChild>
+        <Button
+          variant="plain"
+          size="sm"
+          color="inherit"
+          px={0}
+          width={{ base: "100%", lg: "auto" }}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Flex align="center">
+            <SimpleLink to={to} params={params}>
+              {name}
+            </SimpleLink>
+          </Flex>
+          <LuChevronDown />
+        </Button>
       </Menu.Trigger>
       <Portal>
         <Menu.Positioner>

@@ -50,6 +50,7 @@ const GroupSelector = ({
           align="center"
           colorPalette={"blue"}
           size={"sm"}
+          value={String(field.value)}
         >
           <HStack>
             {options?.map((o) => (
@@ -58,7 +59,7 @@ const GroupSelector = ({
                 value={o.id.toString()}
                 icon={o.name}
                 title={o.name}
-                selectedValue={field.value}
+                checked={field.value == o.id}
               />
             ))}
           </HStack>

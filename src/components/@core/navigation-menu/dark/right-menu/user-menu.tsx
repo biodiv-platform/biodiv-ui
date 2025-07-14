@@ -40,16 +40,26 @@ export default function UserMenu() {
   return isLoggedIn ? (
     <Menu.Root positioning={{ placement: "bottom-end" }} lazyMount>
       <Menu.Trigger tabIndex={0} aria-label={t("header:menu_primary.settings.title")} asChild>
-        <Button variant="plain" size="lg" color="inherit" px={0}>
-          <Flex align="center" gap={0}>
+        <Button
+          variant="plain"
+          size="sm"
+          color="inherit"
+          px={0}
+          width={{ base: "100%", lg: "auto" }}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Flex align="center">
             <Avatar
               size="xs"
               mr={2}
               name={user?.name}
               src={getUserImage(user?.profile_pic, user.name)}
             />
-            {user?.name} <LuChevronDown />
+            {user?.name}
           </Flex>
+          <LuChevronDown />
         </Button>
       </Menu.Trigger>
       <Portal>

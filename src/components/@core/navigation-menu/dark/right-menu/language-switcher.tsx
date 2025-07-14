@@ -33,11 +33,20 @@ export default function LanguageSwitcher() {
   return (
     <MenuRoot>
       <MenuTrigger asChild>
-        <Button variant="plain" size="lg" color="inherit" px={0}>
-          <Flex align="center" gap={0}>
+        <Button
+          variant="plain"
+          size="lg"
+          color="inherit"
+          px={0}
+          width={{ base: "100%", lg: "auto" }}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Flex align="center" gap={2}>
             {SITE_CONFIG.LANG.LIST[lang].NAME}
-            <LuChevronDown />
           </Flex>
+          <LuChevronDown style={{ marginLeft: "auto" }} />
         </Button>
       </MenuTrigger>
       <MenuContent>

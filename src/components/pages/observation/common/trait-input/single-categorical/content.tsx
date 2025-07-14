@@ -14,7 +14,7 @@ export default function TraitContent({ value, label, icon }) {
         borderWidth="2px"
         borderRadius="md"
         bg="white"
-        minW="200px"
+        w="200px"
         _checked={{
           bg: "blue.50"
         }}
