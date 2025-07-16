@@ -11,7 +11,7 @@ const TRAIT_DATE_FORMAT = {
 };
 
 export default function DateTrait({ trait, traitValues, setTraitValues, setShowCategory }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     traitValues.length > 0 && setShowCategory(true);
@@ -20,7 +20,7 @@ export default function DateTrait({ trait, traitValues, setTraitValues, setShowC
   return (
     <div>
       <TraitHeader trait={trait} onOpen={onOpen} />
-      {isOpen ? (
+      {open ? (
         <TraitDateEdit
           traitId={trait.traitId}
           initialValue={traitValues}

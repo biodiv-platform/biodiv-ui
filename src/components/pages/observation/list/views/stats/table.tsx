@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, Skeleton, Table } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
@@ -31,34 +31,41 @@ export default function LifeListTable({
       {title && <BoxHeading>🔍 {title}</BoxHeading>}
 
       <Box w="full" overflowY="auto" h={360}>
-        <Table variant="striped" colorScheme="gray" size="sm">
-          <Thead>
-            <Tr>
-              {group && speciesGroups && <Th {...stickyTh}>{t("observation:group")}</Th>}
-              <Th {...stickyTh}>{t("observation:list.life_list.species_header")}</Th>
-              <Th {...stickyTh} isNumeric={true}>
-                {t("observation:list.life_list.count_header")}
-              </Th>
-            </Tr>
-          </Thead>
+        <Table.Root striped colorPalette="gray" size="sm">
+          <Table.Header>
+            <Table.Row>
+              {group && speciesGroups && (
+                <Table.ColumnHeader {...stickyTh}>{t("observation:group")}</Table.ColumnHeader>
+              )}
+              <Table.ColumnHeader {...stickyTh}>
+                {t("observation:list.life_list.species_header")}
+              </Table.ColumnHeader>
 
-          <Tbody>
+              {/* isNumeric={true} */}
+              <Table.ColumnHeader {...stickyTh}>
+                {t("observation:list.life_list.count_header")}
+              </Table.ColumnHeader>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
             {data.list.map(([specieName, specieCount]) => (
-              <Tr key={specieName} className="fade">
+              <Table.Row key={specieName} className="fade">
                 {group && speciesGroups && (
-                  <Td>
+                  <Table.Cell>
                     <SpeciesGroupBox
                       id={parseInt(group)}
                       canEdit={false}
                       speciesGroups={speciesGroups}
                       observationId={group}
                     />
-                  </Td>
+                  </Table.Cell>
                 )}
-                <Td>
+                <Table.Cell>
                   <i>{specieName}</i>
-                </Td>
-                <Td isNumeric={true}>
+                </Table.Cell>
+                {/* isNumeric={true} */}
+                <Table.Cell>
                   {specieCount && (
                     <LocalLink
                       href="/observation/list"
@@ -68,17 +75,18 @@ export default function LifeListTable({
                       <ExternalBlueLink>{specieCount}</ExternalBlueLink>
                     </LocalLink>
                   )}
-                </Td>
-              </Tr>
+                </Table.Cell>
+              </Table.Row>
             ))}
-          </Tbody>
-        </Table>
+          </Table.Body>
+        </Table.Root>
       </Box>
       <Button
         w="full"
         onClick={loadMoreUniqueSpecies}
-        isLoading={data.isLoading}
+        loading={data.isLoading}
         borderTopRadius={0}
+        variant={"surface"}
       >
         {t("common:load_more")}
       </Button>

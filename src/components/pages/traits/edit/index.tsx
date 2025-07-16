@@ -1,21 +1,10 @@
-import { CloseIcon, DragHandleIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   Flex,
-  FormControl,
-  FormLabel,
   GridItem,
   Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   SimpleGrid,
-  Tab,
-  TabList,
   Tabs,
   useDisclosure,
   VisuallyHidden
@@ -42,9 +31,20 @@ import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuGrip, LuX } from "react-icons/lu";
 import Select from "react-select";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { Field } from "@/components/ui/field";
 
 const onQuery = (q) => onScientificNameQuery(q, "name");
 
@@ -64,7 +64,7 @@ export default function TraitsEditComponent({ data, languages }) {
   ];
   const [translationSelected, setTranslationSelected] = useState<number>(0);
   const router = useLocalRouter();
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
   const [langId, setLangId] = useState(0);
   const formSchema = Yup.object().shape({
     translations: Yup.array().of(
@@ -164,7 +164,7 @@ export default function TraitsEditComponent({ data, languages }) {
   const SortableItem = SortableElement<{ value: number }>(({ value }) => (
     <SimpleGrid
       columns={{ base: 1, md: 5 }}
-      spacingX={4}
+      gapX={4}
       mt={2}
       ml={3}
       mr={3}
@@ -184,7 +184,7 @@ export default function TraitsEditComponent({ data, languages }) {
             cursor="grab"
             zIndex={2}
           >
-            <DragHandleIcon boxSize={5} color="gray.500" />
+            <LuGrip color="gray.500" />
           </Box>
         )}
       <TextBoxField
@@ -212,7 +212,7 @@ export default function TraitsEditComponent({ data, languages }) {
           cursor="pointer"
           w="15"
           size={"sm"}
-          htmlFor={value}
+          // htmlFor={value}
           height={70}
           width={70}
           border={"2px dashed #aaa"}
@@ -225,17 +225,13 @@ export default function TraitsEditComponent({ data, languages }) {
                 hForm.watch(`translations[${translationSelected}].values`)[value].icon
               )}
               alt={hForm.watch(`translations[${translationSelected}].values`)[value].icon}
-              ignoreFallback={true}
+              // ignoreFallback={true}
               mb={2}
             />
           )}
-          <VisuallyHidden
-            as="input"
-            type="file"
-            id={value}
-            accept="image/*"
-            onChange={handleOnPhotoUpload}
-          />
+          <VisuallyHidden asChild>
+            <input type="file" id={value} accept="image/*" onChange={handleOnPhotoUpload} />
+          </VisuallyHidden>
         </Button>
       </Box>
       <Box display="flex" justifyContent="center" alignItems="center">
@@ -250,7 +246,7 @@ export default function TraitsEditComponent({ data, languages }) {
               size="sm"
               colorScheme="red"
             >
-              <CloseIcon />
+              <LuX />
             </Button>
           )}
       </Box>
@@ -408,9 +404,9 @@ export default function TraitsEditComponent({ data, languages }) {
 
   return (
     <div className="container mt">
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
+      <DialogRoot open={open} onOpenChange={onClose}>
+        <DialogBackdrop />
+        <DialogContent>
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -419,11 +415,15 @@ export default function TraitsEditComponent({ data, languages }) {
               onClose();
             }}
           >
-            <ModalHeader> {t("traits:create_form.add_translation_button")}</ModalHeader>
-            <ModalBody>
+            <DialogHeader> {t("traits:create_form.add_translation_button")}</DialogHeader>
+            <DialogBody>
               <Box>
-                <FormControl mb={2} isRequired={true}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.language")}</FormLabel>
+                <Field
+                  mb={2}
+                  required={true}
+                  htmlFor="name"
+                  label={t("traits:create_form.language")}
+                >
                   <Select
                     id="langId"
                     inputId="langId"
@@ -443,10 +443,10 @@ export default function TraitsEditComponent({ data, languages }) {
                       }))}
                     isSearchable={true} // Enables search
                   />
-                </FormControl>
+                </Field>
               </Box>
-            </ModalBody>
-            <ModalFooter>
+            </DialogBody>
+            <DialogFooter>
               <Button
                 mr={3}
                 onClick={() => {
@@ -459,39 +459,39 @@ export default function TraitsEditComponent({ data, languages }) {
               <Button colorScheme="blue" type="submit">
                 {t("traits:create_form.continue")}
               </Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
-        </ModalContent>
-      </Modal>
+        </DialogContent>
+      </DialogRoot>
       <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
         <Button colorScheme="green">{t("traits:create_form.add_translation_button")}</Button>
       </Flex>
-      <Tabs
+      <Tabs.Root
         overflowX="auto"
         mb={4}
-        variant="unstyled"
         bg="gray.100"
         rounded="md"
-        index={translationSelected}
-        onChange={(index) => setTranslationSelected(index)}
+        // value={translationSelected}
+        // onValueChange={(e) => setTranslationSelected(e.value)}
       >
-        <TabList>
+        <Tabs.List>
           {hForm.watch(`translations`).map((translation) => (
-            <Tab
+            <Tabs.Trigger
               key={translation.language}
+              value={translation.language}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >
               {languages.filter((lang) => lang.id === translation.traits.languageId)[0].name}
-            </Tab>
+            </Tabs.Trigger>
           ))}
-        </TabList>
-      </Tabs>
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+        </Tabs.List>
+      </Tabs.Root>
+      <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 0, md: 4 }}>
         <GridItem className="white-box" mb={4} colSpan={{ md: 4 }}>
           <FormProvider {...hForm}>
             <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-              <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4} mt={4} ml={3} mr={3}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gapX={4} mt={4} ml={3} mr={3}>
                 <Box>
                   <TextBoxField
                     key={`name-${translationSelected}`}
@@ -534,7 +534,7 @@ export default function TraitsEditComponent({ data, languages }) {
                   label={t("traits:create_form.source")}
                 />
               </SimpleGrid>
-              <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4} mt={4} ml={3} mr={3}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} gapX={4} mt={4} ml={3} mr={3}>
                 <CheckboxField
                   key={`isObservation-${translationSelected}`}
                   name={`translations[${translationSelected}].traits.showInObservation`}
@@ -568,7 +568,7 @@ export default function TraitsEditComponent({ data, languages }) {
                   name={`translations[${translationSelected}].traits.description`}
                   label={t("traits:create_form.description")}
                 />
-                <FormLabel htmlFor="taxon">{t("traits:create_form.taxon")}</FormLabel>
+                <Field htmlFor="taxon" label={t("traits:create_form.taxon")} />
                 <SelectAsyncInputField
                   name={`translations[${translationSelected}].query`}
                   onQuery={onQuery}

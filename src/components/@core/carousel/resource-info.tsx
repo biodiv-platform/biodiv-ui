@@ -1,23 +1,19 @@
-import { InfoOutlineIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Grid,
-  IconButton,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger
-} from "@chakra-ui/react";
-import Rating from "@components/@core/rating";
-import StarIcon from "@icons/star";
-import StarOutlineIcon from "@icons/star-outline";
+import { Box, Grid, IconButton, RatingGroup, Separator } from "@chakra-ui/react";
 import { axRateObservationResource } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuInfo } from "react-icons/lu";
+
+import {
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverRoot,
+  PopoverTrigger
+} from "@/components/ui/popover";
 
 import ExternalBlueLink from "../blue-link/external";
 import LocalLink from "../local-link";
@@ -49,21 +45,24 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
 
   return (
     <Box position="absolute" top={4} right={0} left={4} display="flex">
-      <Popover placement="bottom-start" closeOnBlur={false} isLazy={true}>
+      <PopoverRoot positioning={{ placement: "bottom-start" }} lazyMount>
         <PopoverTrigger>
           <IconButton
             aria-label={t("observation:resource_info")}
-            icon={<InfoOutlineIcon />}
             zIndex={4}
             opacity={0.4}
-            isRound={true}
+            rounded={"full"}
             _hover={{ opacity: 1 }}
-          />
+            variant={"subtle"}
+          >
+            <LuInfo />
+          </IconButton>
         </PopoverTrigger>
         <PopoverContent zIndex={4}>
           <PopoverArrow />
-          <PopoverCloseButton />
+          <PopoverCloseTrigger />
           <PopoverHeader>{t("observation:resource_info")}</PopoverHeader>
+          <Separator />
           <PopoverBody>
             <Grid templateColumns="1fr 2fr" gap={3}>
               <Box>{t("observation:contributor")}</Box>
@@ -72,7 +71,7 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
               {url && (
                 <>
                   <Box>{t("observation:url")}</Box>
-                  <Box noOfLines={1}>
+                  <Box lineClamp={1}>
                     <ExternalBlueLink href={url} children={url} />
                   </Box>
                 </>
@@ -93,18 +92,21 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
 
               <Box>{t("observation:rating")}</Box>
               <Box>
-                <Rating
-                  readonly={!observationId}
-                  initialRating={currentResource?.resource?.rating}
-                  onChange={onRateHandler}
-                  emptySymbol={<StarOutlineIcon />}
-                  fullSymbol={<StarIcon />}
-                />
+                <RatingGroup.Root
+                  count={5}
+                  defaultValue={currentResource?.resource?.rating}
+                  size="sm"
+                  readOnly={!observationId}
+                  onValueChange={(e) => onRateHandler(e.value)}
+                >
+                  <RatingGroup.HiddenInput />
+                  <RatingGroup.Control />
+                </RatingGroup.Root>
               </Box>
             </Grid>
           </PopoverBody>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
     </Box>
   );
 }

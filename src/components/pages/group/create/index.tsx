@@ -108,7 +108,7 @@ export default function CreateGroupPageComponent({
 
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
-          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+          <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
             <Box gridColumn="1/4">
               <TextBoxField name="name" isRequired={true} label={t("group:name")} />
               <RichTextareaField name="description" label={t("form:description.title")} />
@@ -132,7 +132,7 @@ export default function CreateGroupPageComponent({
           <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
           <AreaDrawField
             label={t("group:spatial_coverge")}
-            name={"spacialCoverage"}
+            name="spacialCoverage"
             mb={8}
             isRequired={true}
           />

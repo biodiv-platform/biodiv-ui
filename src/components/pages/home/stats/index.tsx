@@ -11,7 +11,7 @@ interface IStatsProps {
 
 export default function Stats({ portalStats }: IStatsProps) {
   return portalStats ? (
-    <SimpleGrid columns={[2, 2, 3, 5]} spacing={6} mb={10}>
+    <SimpleGrid columns={[2, 2, 3, 5]} gap={6} mb={10}>
       {Object.keys(CARD_META).map((name, index) => (
         <Card
           key={name}

@@ -15,7 +15,7 @@ export default function LifeList({ userId, filter }) {
     <Box className="white-box" mb={4}>
       <BoxHeading>📃 {t("user:observations.life_list")}</BoxHeading>
       <Box p={4}>
-        <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
+        <SimpleGrid columns={{ base: 1, sm: 2 }} gap={4}>
           <LifeListTable
             {...ll.uploaded}
             title={t("user:uploaded")}

@@ -1,5 +1,4 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Switch, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextAreaField } from "@components/form/textarea";
@@ -8,6 +7,9 @@ import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuArrowLeft } from "react-icons/lu";
+
+import { Switch } from "@/components/ui/switch";
 
 import { galleryFieldValidationSchema } from "./common";
 import ExsistingResourceForm from "./exsisting-resource-form";
@@ -62,17 +64,13 @@ export default function GallerySetupFrom({ setIsCreate, galleryList, setGalleryL
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Button
-            m={3}
-            type="button"
-            onClick={() => setIsCreate(false)}
-            leftIcon={<ArrowBackIcon />}
-          >
+          <Button m={3} type="button" onClick={() => setIsCreate(false)} variant={"subtle"}>
+            <LuArrowLeft />
             {t("group:homepage_customization.back")}
           </Button>
           <Flex alignItems="center">
             <Text m={3}>{t("group:homepage_customization.resources.new_image")}</Text>
-            <Switch onChange={handleChange} />
+            <Switch onChange={handleChange} colorPalette={"blue"} />
             <Text m={3}>{t("group:homepage_customization.resources.observation_image")}</Text>
           </Flex>
         </Box>

@@ -1,4 +1,4 @@
-import { Box, useToast } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
@@ -17,6 +17,8 @@ import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { useImmer } from "use-immer";
 import * as Yup from "yup";
+
+import { toaster } from "@/components/ui/toaster";
 
 import BulkEditor from "./bulk-editor";
 import {
@@ -38,7 +40,6 @@ const deepMergeObservations = (prev, current) => {
 };
 
 export default function ObservationCreateNextForm({ onBrowse }) {
-  const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
   const { currentGroup, languageId, user } = useGlobalState();
@@ -180,7 +181,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
   // this will inject them to hookform array
   useListener(
     async (props) => {
-      toastIdRef.current = toast({
+      toastIdRef.current = toaster.create({
         ...DEFAULT_TOAST.LOADING,
         description: props.canPredict ? t("form:uploader.predicting") : t("common:loading")
       });
@@ -196,11 +197,11 @@ export default function ObservationCreateNextForm({ onBrowse }) {
       o.append(finalResources);
 
       if (toastIdRef.current) {
-        toast.update(toastIdRef.current, {
+        toaster.update(toastIdRef.current, {
           ...DEFAULT_TOAST.SUCCESS,
           description: t("common:success")
         });
-        setTimeout(() => toast.close(toastIdRef.current), 1000);
+        setTimeout(() => toaster.dismiss(toastIdRef.current), 1000);
       }
     },
     [OBSERVATION_IMPORT_RESOURCE]

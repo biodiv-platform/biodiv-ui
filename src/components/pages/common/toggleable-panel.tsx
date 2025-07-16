@@ -1,8 +1,8 @@
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Box, Collapse, IconButton, useDisclosure } from "@chakra-ui/react";
+import { Box, Collapsible, IconButton, useDisclosure } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 
 interface ToggleablePanelProps {
   id?;
@@ -19,7 +19,7 @@ export default function ToggleablePanel({
   options,
   children
 }: ToggleablePanelProps) {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
+  const { open, onToggle } = useDisclosure({ defaultOpen: true });
   const { t } = useTranslation();
 
   return (
@@ -30,16 +30,15 @@ export default function ToggleablePanel({
         </div>
         <div>
           {options}
-          <IconButton
-            aria-label={t("common:toggle")}
-            variant="ghost"
-            size="lg"
-            onClick={onToggle}
-            icon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-          />
+          <IconButton aria-label={t("common:toggle")} variant="ghost" size="lg" onClick={onToggle}>
+            {open ? <LuChevronUp /> : <LuChevronDown />}
+          </IconButton>
         </div>
       </BoxHeading>
-      <Collapse in={isOpen} animateOpacity={true} children={children} />
+      {/* animateOpacity={true} */}
+      <Collapsible.Root open={open}>
+        <Collapsible.Content children={children}></Collapsible.Content>
+      </Collapsible.Root>
     </Box>
   );
 }

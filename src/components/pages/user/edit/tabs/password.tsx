@@ -43,7 +43,7 @@ export default function ChangePasswordTab({ userId }) {
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gapX={4}>
           <div>
             <TextBoxField
               name="oldPassword"

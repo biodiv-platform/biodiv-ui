@@ -1,7 +1,8 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
+import { LuChevronRight } from "react-icons/lu";
+
+import { BreadcrumbLink, BreadcrumbRoot } from "@/components/ui/breadcrumb";
 
 export const SpeciesCreateCommonTableRows = [
   {
@@ -28,15 +29,13 @@ export const SpeciesCreateCommonTableRows = [
     Header: "Registry",
     accessor: "registry",
     Cell: ({ value }) => (
-      <Breadcrumb spacing="8px" separator={<ChevronRightIcon color="gray.500" />} overflowX="auto">
+      <BreadcrumbRoot gap="8px" separator={<LuChevronRight color="gray.500" />} overflowX="auto">
         {value.map((rank) => (
-          <BreadcrumbItem key={rank.id}>
-            <LocalLink href={`/species/list`} params={{ taxon: rank.id }}>
-              <BreadcrumbLink title={rank.rank}>{rank.name}</BreadcrumbLink>
-            </LocalLink>
-          </BreadcrumbItem>
+          <LocalLink href={`/species/list`} params={{ taxon: rank.id }}>
+            <BreadcrumbLink title={rank.rank}>{rank.name}</BreadcrumbLink>
+          </LocalLink>
         ))}
-      </Breadcrumb>
+      </BreadcrumbRoot>
     )
   }
 ];

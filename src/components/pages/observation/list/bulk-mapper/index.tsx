@@ -1,21 +1,16 @@
-import {
-  Box,
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Spinner,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Tooltip
-} from "@chakra-ui/react";
+import { Box, Spinner, Tabs } from "@chakra-ui/react";
 import { bulkActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
 import React, { Suspense, useState } from "react";
+
+import {
+  DrawerBackdrop,
+  DrawerCloseTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerRoot
+} from "@/components/ui/drawer";
+import { Tooltip } from "@/components/ui/tooltip";
 
 import useObservationFilter from "../../common/use-observation-filter";
 import { VerticalTabs } from "../views/list/container";
@@ -29,45 +24,45 @@ export enum bulkActions {
 export default function BulkMapperModal() {
   const { t } = useTranslation();
   const { onClose, isOpen } = useObservationFilter();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState<string | null>("common:usergroups");
 
   return (
-    <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
-      <DrawerOverlay />
+    <DrawerRoot placement="bottom" onOpenChange={onClose} open={isOpen}>
+      <DrawerBackdrop />
       <DrawerContent>
-        <DrawerCloseButton />
+        <DrawerCloseTrigger />
         <DrawerHeader>{t("observation:bulk_actions")}</DrawerHeader>
         <VerticalTabs>
-          <Tabs
-            isLazy={true}
+          <Tabs.Root
+            lazyMount={true}
             h={{ md: "100%" }}
-            variant="unstyled"
+            // variant="unstyled"
             className="tabs"
-            index={tabIndex}
-            onChange={setTabIndex}
+            defaultValue={tabIndex}
+            onValueChange={(e) => setTabIndex(e.value)}
           >
-            <TabList>
+            <Tabs.List>
               {bulkActionTabs.map(({ name, icon, active = true }) => (
-                <Tab key={name} data-hidden={!active}>
-                  <Tooltip title={t(name)}>
+                <Tabs.Trigger key={name} data-hidden={!active} value={name}>
+                  <Tooltip content={t(name)}>
                     <div>
                       {icon} <span>{t(name)}</span>
                     </div>
                   </Tooltip>
-                </Tab>
+                </Tabs.Trigger>
               ))}
               <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-            </TabList>
-            <TabPanels position="relative">
-              <TabPanel>
+            </Tabs.List>
+            <Box position="relative">
+              <Tabs.Content value="common:usergroups">
                 <Suspense fallback={<Spinner />}>
                   <GroupPost />
                 </Suspense>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+              </Tabs.Content>
+            </Box>
+          </Tabs.Root>
         </VerticalTabs>
       </DrawerContent>
-    </Drawer>
+    </DrawerRoot>
   );
 }

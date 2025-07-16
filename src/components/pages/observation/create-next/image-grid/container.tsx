@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box,Flex } from "@chakra-ui/react";
 import React from "react";
 
 const ImageGridContainer = ({ children }) => (

@@ -1,6 +1,7 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 import CheckBoxItems from "./checkbox";
 
@@ -28,16 +29,22 @@ export default function IconCheckboxField({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl isInvalid={!!fieldState.error} isRequired={isRequired} mb={mb} {...props}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+    <Field
+      invalid={!!fieldState.error}
+      errorText={fieldState?.error?.message}
+      required={isRequired}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      {...props}
+    >
       <CheckBoxItems
         options={options}
         defaultValue={field.value}
         onChange={field.onChange}
         type={type}
       />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 }

@@ -3,11 +3,12 @@ import ExternalBlueLink from "@components/@core/blue-link/external";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
 import TagsShow from "@components/pages/observation/show/info/tags";
 import { ShowDocument } from "@interfaces/document";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
 import React from "react";
+
+import { Prose } from "@/components/ui/prose";
 
 interface DocumentInfoProps {
   d: ShowDocument;
@@ -134,7 +135,7 @@ export default function DocumentInfo({ d }: DocumentInfoProps) {
 
   return (
     <Box p={4} mb={4} className="white-box">
-      <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
+      <SimpleGrid columns={[1, 1, 5, 5]} gap={2}>
         {INFO_LINKS.map(({ title, value, isHtml, cell }) =>
           value ? (
             <ResponsiveInfo key={title} title={title} isHtml={isHtml} children={cell || value} />

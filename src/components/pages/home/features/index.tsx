@@ -14,7 +14,7 @@ export default function Features() {
       <Heading as="h2" mb={6} fontSize="2rem">
         {t("home:features.title")}
       </Heading>
-      <SimpleGrid columns={[1, 1, 1, 2]} spacing={6}>
+      <SimpleGrid columns={[1, 1, 1, 2]} gap={6}>
         {FEATURES.filter((o) => o.tag.includes(SITE_CONFIG.HOME.FEATURES)).map(
           ({ icon, title, link }) => (
             <Info key={title} icon={icon} title={title} link={link} />

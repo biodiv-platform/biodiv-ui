@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import BlueLink from ".";
 
 const ExternalBlueLink = forwardRef((props: LinkProps, ref) => (
-  <BlueLink {...props} isExternal={true} wordBreak="break-word" ref={ref}>
+  <BlueLink {...props} wordBreak="break-word" ref={ref}>
     {props?.children || (props.href && decodeURIComponent(props.href))}
   </BlueLink>
 ));

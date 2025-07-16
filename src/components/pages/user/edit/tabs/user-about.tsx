@@ -81,7 +81,7 @@ export default function UserAboutTab({ user, isAdmin }: UserEditPageComponentPro
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gapX={4}>
           <TextBoxField name="userName" label={t("user:username")} />
           <TextBoxField name="name" label={t("user:name")} />
           <TextBoxField name="email" type="email" disabled={!isAdmin} label={t("user:email")} />

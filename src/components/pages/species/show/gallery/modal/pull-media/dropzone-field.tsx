@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs
-} from "@chakra-ui/react";
+import { Tabs } from "@chakra-ui/react";
 import AudioInput from "@components/pages/observation/create/form/uploader/audio-input";
 import FromURL from "@components/pages/observation/create/form/uploader/from-url";
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
@@ -15,6 +7,8 @@ import useObservationCreate from "@components/pages/observation/create/form/uplo
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 import SpeciesPullMedia from ".";
 
@@ -27,51 +21,49 @@ interface ISpeciesDropzoneField {
 const SpeciesDropzoneField = ({ name }: ISpeciesDropzoneField) => {
   const { field, fieldState } = useController({ name });
   const { observationAssets, addAssets } = useObservationCreate();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabValue, setTabValue] = useState("selectedMedia");
   const { t } = useTranslation();
 
   useEffect(() => {
     field.onChange(observationAssets);
   }, [observationAssets]);
 
-  const onSelectionDone = () => setTabIndex(0);
+  const onSelectionDone = () => setTabValue("selectedMedia");
 
   return (
-    <FormControl isInvalid={!!fieldState.error} minH="500px">
-      <Tabs
+    <Field invalid={!!fieldState.error} minH="500px">
+      <Tabs.Root
         className="nospace"
-        index={tabIndex}
-        onChange={setTabIndex}
-        variant="soft-rounded"
-        isLazy={true}
+        value={tabValue}
+        onValueChange={(e) => setTabValue(e.value)}
+        variant={"subtle"}
+        lazyMount={true}
       >
-        <TabList mb={4} overflowX="auto" py={1}>
-          <Tab>✔️ {t("form:selected_media")}</Tab>
-          <Tab>🖼️ {t("species:pull_media")}</Tab>
-          <Tab>☁️ {t("form:my_uploads")}</Tab>
-          <Tab>🎙️ {t("form:audio.title")}</Tab>
-          <Tab>📹 {t("form:from_url")}</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <ResourcesList />
-          </TabPanel>
-          <TabPanel>
-            <SpeciesPullMedia onDone={onSelectionDone} />
-          </TabPanel>
-          <TabPanel>
-            <MyUploads onDone={onSelectionDone} />
-          </TabPanel>
-          <TabPanel>
-            <AudioInput onDone={onSelectionDone} onSave={addAssets} />
-          </TabPanel>
-          <TabPanel>
-            <FromURL onDone={onSelectionDone} onSave={addAssets} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-      <FormErrorMessage children={JSON.stringify(fieldState?.error?.message)} />
-    </FormControl>
+        <Tabs.List mb={4} overflowX="auto" py={1}>
+          <Tabs.Trigger value="selectedMedia">✔️ {t("form:selected_media")}</Tabs.Trigger>
+          <Tabs.Trigger value="pullMedia">🖼️ {t("species:pull_media")}</Tabs.Trigger>
+          <Tabs.Trigger value="draftMedia">☁️ {t("form:my_uploads")}</Tabs.Trigger>
+          <Tabs.Trigger value="audio">🎙️ {t("form:audio.title")}</Tabs.Trigger>
+          <Tabs.Trigger value="youtube">📹 {t("form:from_url")}</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="selectedMedia">
+          <ResourcesList />
+        </Tabs.Content>
+        <Tabs.Content value="pullMedia">
+          <SpeciesPullMedia onDone={onSelectionDone} />
+        </Tabs.Content>
+        <Tabs.Content value="draftMedia">
+          <MyUploads onDone={onSelectionDone} />
+        </Tabs.Content>
+        <Tabs.Content value="audio">
+          <AudioInput onDone={onSelectionDone} onSave={addAssets} />
+        </Tabs.Content>
+        <Tabs.Content value="youtube">
+          <FromURL onDone={onSelectionDone} onSave={addAssets} />
+        </Tabs.Content>
+      </Tabs.Root>
+      <Field errorText={JSON.stringify(fieldState?.error?.message)} />
+    </Field>
   );
 };
 

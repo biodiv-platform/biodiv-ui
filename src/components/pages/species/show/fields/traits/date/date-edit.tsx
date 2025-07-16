@@ -1,6 +1,6 @@
 import "flatpickr/dist/themes/material_blue.css";
 
-import { Box, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Box, Input } from "@chakra-ui/react";
 import useSpecies from "@components/pages/species/show/use-species";
 import CalendarIcon from "@icons/calendar";
 import { axUpdateSpeciesTrait } from "@services/species.service";
@@ -8,6 +8,8 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import Flatpickr from "react-flatpickr";
+
+import { InputGroup } from "@/components/ui/input-group";
 
 import { TraitEditFooter } from "../common/edit-footer";
 
@@ -48,7 +50,13 @@ export function TraitDateEdit({ traitId, initialValue, onSave, onClose }) {
   return (
     <div>
       <Box mb={3} maxW="md">
-        <InputGroup>
+        <InputGroup
+          endElement={
+            <label htmlFor={traitId} style={{ cursor: "pointer" }}>
+              <CalendarIcon color="gray.300" />
+            </label>
+          }
+        >
           <Flatpickr
             value={value}
             options={{ allowInput: true, dateFormat: "d-m-Y", mode: "range" }}
@@ -57,11 +65,6 @@ export function TraitDateEdit({ traitId, initialValue, onSave, onClose }) {
               <Input id={traitId} {...props} defaultValue={defaultValue} ref={ref} />
             )}
           />
-          <InputRightElement>
-            <label htmlFor={traitId} style={{ cursor: "pointer" }}>
-              <CalendarIcon color="gray.300" />
-            </label>
-          </InputRightElement>
         </InputGroup>
       </Box>
       <TraitEditFooter onSave={handleOnSave} onCancel={onClose} />

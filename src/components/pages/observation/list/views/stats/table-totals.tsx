@@ -3,7 +3,7 @@ import React from "react";
 
 export default function TableTotals({ title, count, isLoading }) {
   return (
-    <Skeleton isLoaded={!isLoading} borderRadius="md">
+    <Skeleton loading={isLoading} borderRadius="md">
       <Box p={4} className="white-box" borderRadius="lg" lineHeight={1}>
         <Text fontSize="3xl" mb={2}>
           {count || 0}

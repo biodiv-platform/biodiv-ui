@@ -1,20 +1,13 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
-import {
-  AspectRatio,
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  Image,
-  ModalBody,
-  ModalFooter
-} from "@chakra-ui/react";
+import { AspectRatio, Box, Button, ButtonGroup, Flex, Image } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { TextBoxField } from "@components/form/text";
 import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
+import { LuMoveDown, LuMoveUp } from "react-icons/lu";
+
+import { DialogBody, DialogFooter } from "@/components/ui/dialog";
 
 import { getImageThumb } from "../../create/form/uploader/observation-resources/resource-card";
 import useObservationCreateNext from "../use-observation-create-next-hook";
@@ -26,7 +19,7 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
 
   return (
     <>
-      <ModalBody pt={0}>
+      <DialogBody pt={0}>
         <Box>
           {resources.fields.map((field: any, idx) => {
             const imgThumb = useMemo(
@@ -42,11 +35,7 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
               <Box key={field.id} w="396px" mb={4} className="fade white-box" p={4} bg="gray.50">
                 <Flex gap={4} w="full">
                   <AspectRatio minW="150px" ratio={1}>
-                    <Image
-                      borderRadius="md"
-                      src={imgThumb.src}
-                      fallbackSrc={imgThumb.fallbackSrc}
-                    />
+                    <Image borderRadius="md" src={imgThumb.src} alt={imgThumb.fallbackSrc} />
                   </AspectRatio>
                   <Box>
                     <SelectInputField
@@ -59,23 +48,23 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
                       showLabel={false}
                       name={`o.${index}.resources.${idx}.contributor`}
                     />
-                    <ButtonGroup spacing={4}>
+                    <ButtonGroup gap={4}>
                       <Button
                         variant="outline"
-                        colorScheme="blue"
-                        isDisabled={idx === 0}
-                        leftIcon={<ArrowUpIcon />}
+                        colorPalette="blue"
+                        disabled={idx === 0}
                         onClick={() => resources.move(idx, idx - 1)}
                       >
+                        <LuMoveUp />
                         {t("common:move.up")}
                       </Button>
                       <Button
                         variant="outline"
-                        colorScheme="blue"
-                        isDisabled={idx === resources.fields.length - 1}
-                        leftIcon={<ArrowDownIcon />}
+                        colorPalette="blue"
+                        disabled={idx === resources.fields.length - 1}
                         onClick={() => resources.move(idx, idx + 1)}
                       >
+                        <LuMoveDown />
                         {t("common:move.down")}
                       </Button>
                     </ButtonGroup>
@@ -85,11 +74,11 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
             );
           })}
         </Box>
-      </ModalBody>
+      </DialogBody>
 
-      <ModalFooter>
+      <DialogFooter>
         <Button onClick={onClose}>{t("common:close")}</Button>
-      </ModalFooter>
+      </DialogFooter>
     </>
   );
 }

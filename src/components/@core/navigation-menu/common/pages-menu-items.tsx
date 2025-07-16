@@ -1,67 +1,56 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Box, Link, Menu, MenuButton, useBreakpointValue } from "@chakra-ui/react";
+import { Button, Flex, Menu, Portal } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
-
-import SubMenu from "./sub-menu";
+import { LuChevronDown } from "react-icons/lu";
 
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
-    <Link>{children}</Link>
+    {children}
   </LocalLink>
 );
 
-export default function PagesMenuItems(props) {
-  const { name, nameIcon: NameIcon, to, rows = [], cell: CCell, params, isLazy } = props;
-  const isDropdown = rows.length > 0 || CCell;
-
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-  const linkContent = (
-    <>
-      {NameIcon && <NameIcon mr={1} />}
-      {name}
-    </>
-  );
-  const desktopLinkStyle = { display: "flex", marginLeft: "20px" };
-
-  const mobileLinkStyle = {
-    display: "flex",
-    width: "100%",
-    justifyContent: "space-between"
-  };
-  const menuButton = (
-    <Box
-      as="button"
-      role="button"
-      tabIndex={0}
-      display="flex"
-      alignItems="left"
-      mb={isDesktop ? 0 : 4}
-    >
-      <MenuButton data-label={name} role="button" tabIndex={0}>
-        <ChevronDownIcon aria-label="Open Menu" mt={[1, 0]} float={["right", "none"]} />
-      </MenuButton>
-    </Box>
-  );
+export default function MenuItems(props) {
+  const { name, to, rows = [], params, isLazy } = props;
+  const isDropdown = rows.length > 0;
 
   return isDropdown ? (
-    <Menu placement="bottom-end" isLazy={isLazy}>
-      {({ isOpen }) => (
-        <>
-          <Box sx={isDesktop ? desktopLinkStyle : mobileLinkStyle}>
+    <Menu.Root positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
+      <Menu.Trigger data-label={name} role="button" asChild>
+        <Button
+          variant="plain"
+          size="sm"
+          color="inherit"
+          px={0}
+          width={{ base: "100%", lg: "auto" }}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Flex align="center">
             <SimpleLink to={to} params={params}>
-              {linkContent}
+              {name}
             </SimpleLink>
-            {menuButton}
-          </Box>
-          {(isLazy ? isOpen : true) &&
-            (CCell ? <CCell /> : <SubMenu rows={rows} prefix={name} isPage={true} />)}
-        </>
-      )}
-    </Menu>
+          </Flex>
+          <LuChevronDown />
+        </Button>
+      </Menu.Trigger>
+      <Portal>
+        <Menu.Positioner>
+          <Menu.Content>
+            {rows.map((row) => (
+              <Menu.Item key={row.to} value={row.name} asChild>
+                <LocalLink href={row.to} params={row.params} prefixGroup={true}>
+                  {row.name}
+                </LocalLink>
+              </Menu.Item>
+            ))}
+          </Menu.Content>
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
   ) : (
     <SimpleLink to={to} params={params}>
-      {linkContent}
+      {name}
     </SimpleLink>
   );
 }

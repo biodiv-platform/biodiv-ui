@@ -99,8 +99,7 @@ export default function CropTab({ data, setData, canCrop }) {
                 borderColor={currentCropItem?.id === resource.id ? "blue.500" : "gray.300"}
                 bg="gray.200"
                 objectFit="contain"
-                fallbackSrc={getFallbackByMIME(resource.type)}
-                alt={`${resource.id}`}
+                alt={getFallbackByMIME(resource.type) || `${resource.id}`}
                 src={getResourceThumbnail(
                   resource.context,
                   resource.fileName,
@@ -134,14 +133,14 @@ export default function CropTab({ data, setData, canCrop }) {
 
         <Flex hidden={!canCrop} justifyContent="space-between">
           <ButtonGroup gap={2}>
-            <Button colorScheme="green" onClick={() => handleValidate(currentCropItem.id)}>
+            <Button colorPalette="green" onClick={() => handleValidate(currentCropItem.id)}>
               {t("observation:crop.actions.curate")}
             </Button>
-            <Button colorScheme="red" onClick={() => handleReject(currentCropItem.id)}>
+            <Button colorPalette="red" onClick={() => handleReject(currentCropItem.id)}>
               {t("observation:crop.actions.reject")}
             </Button>
           </ButtonGroup>
-          <Button colorScheme="blue" onClick={() => handleReset(currentCropItem.id)}>
+          <Button colorPalette="blue" onClick={() => handleReset(currentCropItem.id)}>
             {t("observation:crop.actions.un_curate")}
           </Button>
         </Flex>

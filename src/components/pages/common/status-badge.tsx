@@ -20,7 +20,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
       return (
         <LocalLink href={taxonLink} params={{ taxonId: taxonId, showTaxon: taxonId }}>
           <Link>
-            <Badge colorScheme={TAXON_BADGE_COLORS.ACCEPTED}>{t("common:accepted")}</Badge>
+            <Badge colorPalette={TAXON_BADGE_COLORS.ACCEPTED}>{t("common:accepted")}</Badge>
           </Link>
         </LocalLink>
       );
@@ -30,7 +30,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
       return (
         <LocalLink href={taxonLink}>
           <Link>
-            <Badge colorScheme={TAXON_BADGE_COLORS.SYNONYM}>
+            <Badge colorPalette={TAXON_BADGE_COLORS.SYNONYM}>
               {t("observation:synonym")}
               {lastCrumb?.name && `: ${lastCrumb.name}`}
             </Badge>
@@ -41,7 +41,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
     default:
       return !reco?.scientificName ? (
         <span>
-          <Badge colorScheme="red">{t("observation:help_identify")}</Badge>
+          <Badge colorPalette="red">{t("observation:help_identify")}</Badge>
         </span>
       ) : null;
   }

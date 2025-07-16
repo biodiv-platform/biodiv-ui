@@ -9,6 +9,7 @@ const StatsVew = React.lazy(() => import("./stats"));
 
 export default function Views({ no }) {
   const { filter } = useObservationFilter();
+  console.error("filter?.view", filter);
 
   switch (filter?.view) {
     case "list":

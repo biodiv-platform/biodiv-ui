@@ -52,7 +52,7 @@ export default function RasterUploadForm() {
       />
       <TextAreaField name="layerDescription" label={t("map:description")} />
 
-      <Button disabled={!canContinue} colorScheme="blue" type="submit">
+      <Button disabled={!canContinue} colorPalette="blue" type="submit">
         {t("map:create")}
       </Button>
     </Stack>

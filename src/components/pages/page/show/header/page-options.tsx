@@ -29,7 +29,7 @@ export function PageOptions({ title, pageId }) {
       top={0}
       zIndex={1}
       backdropFilter="saturate(180%) blur(20px)"
-      shadow="sm"
+      shadow="xs"
     >
       <div className="container">
         <Flex alignItems="center" justifyContent="space-between">
@@ -44,13 +44,13 @@ export function PageOptions({ title, pageId }) {
                   icon={<AddIcon />}
                   title={t("page:create.title")}
                   onClick={handleOnCreate}
-                  colorScheme="yellow"
+                  colorPalette="yellow"
                 />
                 <SimpleActionButton
                   icon={<EditIcon />}
                   title={t("common:edit")}
                   onClick={handleOnEdit}
-                  colorScheme="teal"
+                  colorPalette="teal"
                 />
                 <DeleteActionButton
                   observationId={pageId}

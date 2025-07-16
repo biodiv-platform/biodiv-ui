@@ -1,4 +1,4 @@
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Flex, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
@@ -11,7 +11,6 @@ import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";
 import InfoTab from "./tabs/infotab";
 import TagsTab from "./tabs/tags";
-
 const VerticalTabs = styled.div`
   flex-grow: 1;
 
@@ -90,7 +89,6 @@ const VerticalTabs = styled.div`
 
 export default function Container({ o }) {
   const { t } = useTranslation();
-  const [tabIndex, setTabIndex] = useState(0);
   const [filterTabs] = useState(actionTabs.filter((item) => item.active === true));
 
   return (
@@ -102,15 +100,9 @@ export default function Container({ o }) {
       overflow="hidden"
     >
       <VerticalTabs>
-        <Tabs
-          variant="unstyled"
-          className="tabs"
-          index={tabIndex}
-          onChange={setTabIndex}
-          isLazy={true}
-        >
-          <TabPanels height={["fit-content"]} className="tab-content" position="relative">
-            <TabPanel>
+        <Tabs.Root variant="plain" className="tabs" lazyMount defaultValue="common:information">
+          <Tabs.ContentGroup className="tab-content" position="relative">
+            <Tabs.Content value="common:information">
               <InfoTab
                 habitatIds={o.habitatIds}
                 specieIds={o.speciesGroupIds}
@@ -118,32 +110,32 @@ export default function Container({ o }) {
                 user={o.userIbp}
                 flags={o.flag[0] ? o.flag.map((item) => ({ flag: item, user: o.userIbp })) : null}
               />
-            </TabPanel>
+            </Tabs.Content>
             {SITE_CONFIG.USERGROUP.ACTIVE && (
-              <TabPanel>
+              <Tabs.Content value="common:usergroups">
                 <GroupTab o={o} />
-              </TabPanel>
+              </Tabs.Content>
             )}
-            <TabPanel>
+            <Tabs.Content value="document:tags.title">
               <TagsTab documentId={o.document.id} tags={o.tags} />
-            </TabPanel>
-            <TabPanel>
+            </Tabs.Content>
+            <Tabs.Content value="form:comments.title">
               <CommentsTab documentId={o.document.id} />
-            </TabPanel>
-          </TabPanels>
-          <TabList>
+            </Tabs.Content>
+          </Tabs.ContentGroup>
+          <Tabs.List>
             {filterTabs.map(({ name, icon }) => (
-              <Tab key={name}>
+              <Tabs.Trigger key={name} value={name}>
                 <Tooltip title={t(name)}>
                   <div>
                     {icon} <span>{t(name)}</span>
                   </div>
                 </Tooltip>
-              </Tab>
+              </Tabs.Trigger>
             ))}
             <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-          </TabList>
-        </Tabs>
+          </Tabs.List>
+        </Tabs.Root>
       </VerticalTabs>
     </Flex>
   );

@@ -1,4 +1,4 @@
-import { Link, MenuItem, MenuList } from "@chakra-ui/react";
+import { Menu } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
@@ -15,7 +15,7 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
   const { isCurrentGroupMember, isLoggedIn } = useGlobalState();
 
   return (
-    <MenuList>
+    <Menu.Content>
       {rows.map((item) => {
         const [label, toLink] = useMemo(
           () => [
@@ -27,19 +27,17 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
 
         // explicit false check is necessary to avoid button flickr
         return (
-          <MenuItem key={item.name}>
+          <Menu.Item key={item.name} value={item.name} asChild>
             {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
-              <Link w="full" onClick={() => notification(t("header:member_only"))}>
-                {label}
-              </Link>
+              <a onClick={() => notification(t("header:member_only"))}>{label}</a>
             ) : (
               <LocalLink href={toLink} params={item.params} prefixGroup={true}>
-                <Link w="full">{label}</Link>
+                {label}
               </LocalLink>
             )}
-          </MenuItem>
+          </Menu.Item>
         );
       })}
-    </MenuList>
+    </Menu.Content>
   );
 }

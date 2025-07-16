@@ -30,7 +30,7 @@ export default function ObservationList({ title, data, loadMore }) {
           <ExternalBlueLink>{t("user:view_all")}</ExternalBlueLink>
         </LocalLink>
       </Flex>
-      <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} spacing={4}>
+      <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} gap={4}>
         {data.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
@@ -39,18 +39,17 @@ export default function ObservationList({ title, data, loadMore }) {
               key={observation.observationId}
             >
               <Link target="_blank" className="fade">
-                <Tooltip title={<ScientificName value={title} />} hasArrow={true}>
+                <Tooltip title={<ScientificName value={title} />} showArrow={true}>
                   <AspectRatio ratio={1}>
                     <Image
                       borderRadius="md"
                       bg="gray.300"
-                      alt={title}
+                      alt={getLocalIcon(observation.speciesGroup) || title}
                       src={getResourceThumbnail(
                         RESOURCE_CTX.OBSERVATION,
                         observation.thumbnail,
                         RESOURCE_SIZE.LIST_THUMBNAIL
                       )}
-                      fallbackSrc={getLocalIcon(observation.speciesGroup)}
                     />
                   </AspectRatio>
                 </Tooltip>
@@ -69,7 +68,7 @@ export default function ObservationList({ title, data, loadMore }) {
         w="full"
         hidden={!data.hasMore}
         className="fade"
-        isLoading={data.isLoading}
+        loading={data.isLoading}
         onClick={() => loadMore()}
         mt={4}
       >

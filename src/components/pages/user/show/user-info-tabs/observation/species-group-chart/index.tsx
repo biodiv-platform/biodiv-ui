@@ -1,4 +1,4 @@
-import { Box, Button, useToast } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import StackedBarChart from "@components/charts/stacked-bar-chart";
 import DownloadIcon from "@icons/download";
@@ -7,12 +7,13 @@ import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef } from "react";
 
+import { toaster } from "@/components/ui/toaster";
+
 import { ChartMeta, TooltipRenderer } from "./data";
 
 export default function SpeciesGroupChart({ data }) {
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
   const handleDownload = async () => {
     try {
@@ -31,11 +32,10 @@ export default function SpeciesGroupChart({ data }) {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        closable: true
       });
     }
   };
@@ -44,7 +44,7 @@ export default function SpeciesGroupChart({ data }) {
     <Box className="white-box">
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("user:observations.chart")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>

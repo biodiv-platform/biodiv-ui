@@ -1,10 +1,11 @@
-import { Accordion } from "@chakra-ui/react";
 import React from "react";
+
+import { AccordionRoot } from "@/components/ui/accordion";
 
 export default function SubAccordion({ children }) {
   return (
-    <Accordion
-      allowMultiple={true}
+    <AccordionRoot
+      multiple={true}
       borderRadius="lg"
       borderX="1px solid"
       borderColor="gray.200"
@@ -12,6 +13,6 @@ export default function SubAccordion({ children }) {
       overflow="hidden"
     >
       {children}
-    </Accordion>
+    </AccordionRoot>
   );
 }

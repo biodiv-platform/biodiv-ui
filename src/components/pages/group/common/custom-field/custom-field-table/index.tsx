@@ -80,17 +80,18 @@ const CustomFieldTable = ({
           onSortEnd={onSortEnd}
         />
       </table>
-      <ButtonGroup spacing={4} mt={4}>
-        <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
+      <ButtonGroup gap={4} mt={4}>
+        <Button colorPalette="blue" onClick={() => setIsCreate(true)}>
+          <AddIcon />
           {t("group:custom_field.create")}
         </Button>
         <Button
-          colorScheme="blue"
-          leftIcon={<CheckIcon />}
+          colorPalette="blue"
           float="right"
           hidden={!canReorder}
           onClick={handleReorderCustomField}
         >
+          <CheckIcon />
           {t("group:custom_field.save_order")}
         </Button>
       </ButtonGroup>

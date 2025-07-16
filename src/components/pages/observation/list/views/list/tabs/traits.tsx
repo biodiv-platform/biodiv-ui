@@ -12,9 +12,9 @@ export default function TraitsTab({ o }) {
   const { languageId } = useGlobalState();
 
   useEffect(() => {
-    if (o.speciesGroupId==null) return;
+    if (o.speciesGroupId == null) return;
     axGetTraitsByGroupId(o.speciesGroupId, languageId).then(({ data }) => setTraits(data));
-  }, [o.speciesGroupId,languageId]);
+  }, [o.speciesGroupId, languageId]);
 
   return (
     <>

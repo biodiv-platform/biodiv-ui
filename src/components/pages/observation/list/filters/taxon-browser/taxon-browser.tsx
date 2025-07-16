@@ -1,6 +1,6 @@
 import "rc-tree/assets/index.css";
 
-import { Spinner } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { axGetTaxonList } from "@services/api.service";
 import Tree from "rc-tree";
@@ -98,7 +98,7 @@ export default class TaxonBrowser extends Component<TaxonBrowserProps, TaxonBrow
       <TaxonBrowserContainer id="taxon-browser">
         <TaxonSuggest setParentState={this.setParentState} parentState={this.state} />
 
-        <div id="taxon-browser-tree">
+        <Box id="taxon-browser-tree" pl={4} pr={4}>
           {this.state.treeData.length ? (
             <Tree
               checkable={true}
@@ -119,7 +119,7 @@ export default class TaxonBrowser extends Component<TaxonBrowserProps, TaxonBrow
           ) : (
             <Spinner m={2} />
           )}
-        </div>
+        </Box>
 
         <TaxonResultArrows resultsCount={this.state.resultsCount} />
       </TaxonBrowserContainer>

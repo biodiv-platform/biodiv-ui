@@ -43,7 +43,7 @@ const Thumbnail = ({ resource }) => {
 
 function Thumbnails({ resources, moveTo, current }) {
   return (
-    <HStack justifyContent="center" spacing={2} mt={2} maxW="full" overflowY="auto">
+    <HStack justifyContent="center" gap={2} mt={2} maxW="full" overflowY="auto">
       {resources.map(({ resource }, index) => (
         <Flex
           cursor="pointer"

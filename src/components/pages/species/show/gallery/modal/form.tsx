@@ -1,4 +1,4 @@
-import { Button, ModalBody, ModalFooter } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
@@ -10,6 +10,8 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import { DialogBody, DialogFooter } from "@/components/ui/dialog";
 
 import useSpecies from "../../use-species";
 import SpeciesFieldContainer from "./species-gallery-container";
@@ -67,20 +69,21 @@ export default function SpeciesGalleryForm({ resources, setResources, onClose })
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-        <ModalBody>
+        <DialogBody>
           <SpeciesFieldContainer
             name="resources"
             licensesList={licensesList}
             form={hForm}
             isCreate={false}
           />
-        </ModalBody>
-        <ModalFooter>
+        </DialogBody>
+        <DialogFooter>
           <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-          <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
+          <Button ml={4} onClick={onClose} variant={"subtle"}>
+            <CrossIcon />
             {t("common:cancel")}
           </Button>
-        </ModalFooter>
+        </DialogFooter>
       </form>
     </FormProvider>
   );

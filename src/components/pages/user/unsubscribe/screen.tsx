@@ -12,7 +12,7 @@ export default function UnsubscribeScreen({ onClick, icon, title, description, b
         <Text mb={6} color="gray.600" fontSize="xl">
           {description}
         </Text>
-        <Button shadow="md" colorScheme="blue" onClick={onClick}>
+        <Button shadow="md" colorPalette="blue" onClick={onClick}>
           {buttonText}
         </Button>
       </Box>

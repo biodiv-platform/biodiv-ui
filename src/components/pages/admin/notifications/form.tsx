@@ -1,4 +1,3 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -8,6 +7,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuArrowRight } from "react-icons/lu";
 import * as Yup from "yup";
 
 function NotificationsForm() {
@@ -46,7 +46,7 @@ function NotificationsForm() {
           label={t("admin:pages.notification.form.link")}
         />
         <Flex justifyContent="space-between" alignItems="center">
-          <SubmitButton rightIcon={<ArrowForwardIcon />}>Submit</SubmitButton>
+          <SubmitButton rightIcon={<LuArrowRight />}>Submit</SubmitButton>
         </Flex>
       </form>
     </FormProvider>

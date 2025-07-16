@@ -1,4 +1,3 @@
-import { ColorModeScript } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
@@ -17,7 +16,6 @@ class MyDocument extends Document<IDocumentProps> {
           <meta name="theme-color" content="#363636" />
         </Head>
         <body>
-          <ColorModeScript />
           <Main />
           <NextScript />
         </body>

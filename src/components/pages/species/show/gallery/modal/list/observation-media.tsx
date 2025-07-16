@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/button";
+import { Button } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -18,7 +18,7 @@ export default function ObservationMedia() {
         w="full"
         disabled={!resourcesList.hasMore}
         onClick={loadMoreResources}
-        isLoading={isLoading}
+        loading={isLoading}
         mb={4}
       >
         {t("common:load_more")}

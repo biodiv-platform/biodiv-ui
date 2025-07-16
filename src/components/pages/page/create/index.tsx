@@ -9,7 +9,7 @@ export default function PageCreatePageComponent() {
   return (
     <div className="container mt">
       <UsePagesProvider linkType="show">
-        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+        <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 0, md: 4 }}>
           <PagesSidebar />
           <Box gridColumn={{ md: "2/5" }}>
             <PageCreateForm />

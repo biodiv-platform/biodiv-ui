@@ -1,14 +1,14 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { TAXON_POSITION, TAXON_STATUS } from "@static/taxon";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot
+} from "@/components/ui/accordion";
 
 import useTaxonFilter from "../use-taxon";
 import { CheckboxFilterPanel } from "./checkboxes";
@@ -19,19 +19,18 @@ export function FiltersList() {
   const { taxonRanks } = useTaxonFilter();
 
   return (
-    <Accordion defaultIndex={[0]} allowMultiple={true}>
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton>
-              <Box flex={1} textAlign="left">
-                {t("filters:taxon_browser.title")}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>{isExpanded && <TaxonBrowser />}</AccordionPanel>
-          </>
-        )}
+    <AccordionRoot multiple={true} lazyMount defaultValue={["taxon"]}>
+      <AccordionItem value="taxon">
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
+            {t("filters:taxon_browser.title")}
+          </Box>
+        </AccordionItemTrigger>
+        <AccordionItemContent>
+          <Box p={4}>
+            <TaxonBrowser />
+          </Box>
+        </AccordionItemContent>
       </AccordionItem>
       <CheckboxFilterPanel
         filterKey="rankList"
@@ -51,6 +50,6 @@ export function FiltersList() {
         options={TAXON_POSITION}
         skipOptionsTranslation={true}
       />
-    </Accordion>
+    </AccordionRoot>
   );
 }

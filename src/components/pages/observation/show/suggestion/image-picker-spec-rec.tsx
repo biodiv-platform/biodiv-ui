@@ -1,19 +1,18 @@
-import { AspectRatio, Box, Flex, Image, useCheckbox, useToast } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, Image, useCheckbox } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import React from "react";
 
-const ImagePickerSpecRec = (props: any) => {
-  const { getInputProps, getCheckboxProps, state } = useCheckbox(props);
+import { toaster } from "@/components/ui/toaster";
 
-  const toast = useToast();
+const ImagePickerSpecRec = (props: any) => {
+  const { getControlProps, getHiddenInputProps, setChecked, checked } = useCheckbox(props);
 
   const handleOnChange = (e) => {
     if (props.selectedImages.length >= 1 && e.target.checked) {
-      toast({
+      toaster.create({
         title: "Please select a maximum of 1 image",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        closable: true
       });
 
       return;
@@ -26,16 +25,16 @@ const ImagePickerSpecRec = (props: any) => {
         ...props.selectedImages.filter((o) => o?.resource?.id !== props.image.resource.id)
       ]);
 
-      state.isChecked = false;
+      setChecked(false);
     }
   };
 
   return (
-    <Box as="label" className="fade" aria-checked={state.isChecked}>
-      <input {...getInputProps()} onChange={handleOnChange} required={false} />
+    <Box as="label" className="fade" aria-checked={checked}>
+      <input {...getHiddenInputProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
-        {...getCheckboxProps()}
+        {...getControlProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"

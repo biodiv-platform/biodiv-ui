@@ -1,6 +1,8 @@
-import { Box, Image, Stack, Tooltip } from "@chakra-ui/react";
+import { Box, Image, Stack } from "@chakra-ui/react";
 import { getLocalIcon } from "@utils/media";
 import React, { useMemo } from "react";
+
+import { Tooltip } from "@/components/ui/tooltip";
 
 interface FilterIconListProps {
   filterIds;
@@ -23,13 +25,18 @@ export default function FilterIconList({
   }
 
   return (
-    <Stack isInline={true} spacing={0}>
+    <Stack direction={"row"} gap={0}>
       {filters.map(({ name, id }) => (
         <Box key={id}>
-          <Tooltip aria-label={name} label={name} placement="top" hasArrow={true}>
+          <Tooltip
+            aria-label={name}
+            content={name}
+            positioning={{ placement: "top" }}
+            showArrow={true}
+          >
             <Image
               boxSize="1.7em"
-              ignoreFallback={true}
+              // ignoreFallback={true}
               src={getLocalIcon(name, type)}
               alt={name}
             />

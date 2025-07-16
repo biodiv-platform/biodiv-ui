@@ -14,6 +14,7 @@ export default function ResourceCard({ resource, setValue, imageSize, simpleUplo
 
   return (
     <Flex
+      width={"full"}
       className="fade"
       h={simpleUpload ? "6rem" : "13rem"}
       borderRadius="lg"
@@ -24,14 +25,7 @@ export default function ResourceCard({ resource, setValue, imageSize, simpleUplo
       position="relative"
       p={simpleUpload ? 0 : 2}
     >
-      <Image
-        objectFit="contain"
-        h="full"
-        w="full"
-        borderRadius="md"
-        ignoreFallback={true}
-        src={imageURL}
-      />
+      <Image objectFit="contain" h="full" w="full" borderRadius="md" src={imageURL} />
       {!disabled && (
         <CloseButton position="absolute" top={0} right={0} size="lg" onClick={handleRemovePhoto} />
       )}

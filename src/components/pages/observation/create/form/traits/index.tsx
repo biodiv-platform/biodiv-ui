@@ -1,14 +1,10 @@
-import { CalendarIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  Collapse,
-  Divider,
-  FormControl,
-  FormLabel,
+  Collapsible,
   Input,
   InputGroup,
-  InputRightElement,
+  Separator,
   SimpleGrid,
   Text,
   useDisclosure
@@ -24,6 +20,9 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { useFormContext } from "react-hook-form";
+import { LuCalendar, LuChevronDown, LuChevronUp } from "react-icons/lu";
+
+import { Field } from "@/components/ui/field";
 
 import TraitInput from "../../../common/trait-input";
 
@@ -39,7 +38,7 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
   const [facts, setFacts] = useState<any>(initialFacts);
   const sGroup = form.watch("sGroup");
   const { t } = useTranslation();
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
   const { languageId } = useGlobalState();
   const inputRef = useRef<any>();
 
@@ -63,160 +62,163 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
 
   return (
     <Box>
-      <Button variant="link" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle}>
-        💎 {t("observation:traits")} {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+      <Button variant="ghost" color="gray.900" fontSize="2xl" mb={2} onClick={onToggle} pl={0}>
+        💎 {t("observation:traits")} {open ? <LuChevronUp /> : <LuChevronDown />}
       </Button>
-      <Collapse in={isOpen} unmountOnExit={true}>
-        {traitsPairs.map(({ traits, values }) => (
-          <FormControl mb={4} key={traits.id}>
-            <FormLabel mb={1}>
-              <LocalLink href={`/traits/show/${traits?.traitId}`} prefixGroup={true}>
-                <BlueLink mr={2}>
-                  {traits?.name} {traits?.units && `(${traits.units})`}
-                </BlueLink>
-              </LocalLink>
-            </FormLabel>
-            {traits.dataType == "STRING" && traits.traitTypes != "RANGE" && (
-              <TraitInput
-                type={traits.traitTypes}
-                values={values}
-                defaultValue={
-                  traits.traitId ? facts[traits.traitId + "|" + traits.dataType] : undefined
-                }
-                onUpdate={(v) => handleOnChange(traits.traitId + "|" + traits.dataType, v)}
-              />
-            )}
-            {traits.dataType == "STRING" && traits.traitTypes == "RANGE" && (
-              <MultipleCategorialTrait
-                name={traits.name}
-                type={traits.traitTypes}
-                values={values}
-                defaultValue={
-                  traits.traitId ? facts[traits.traitId + "|" + traits.dataType] : undefined
-                }
-                onUpdate={(v) => handleOnChange(traits.traitId + "|" + traits.dataType, v)}
-                gridColumns={3}
-              />
-            )}
-            {traits.dataType == "NUMERIC" && (
-              <TraitInput
-                type={traits.traitTypes}
-                values={values}
-                defaultValue={
-                  traits.traitId ? facts[traits.traitId + "|" + traits.dataType] : undefined
-                }
-                onUpdate={(v) => handleOnChange(traits.traitId + "|" + traits.dataType, v)}
-              />
-            )}
-            {traits.dataType == "DATE" && (
-              <Box mb={3} maxW="md">
-                <InputGroup>
-                  <DatePicker
-                    ref={inputRef}
-                    customInput={<Input />}
-                    selected={
-                      traits.traitId && facts[traits.traitId + "|" + traits.dataType]
-                        ? new Date(facts[traits.traitId + "|" + traits.dataType][0].split(":")[0])
-                        : null
-                    }
-                    startDate={
-                      traits.traitId && facts[traits.traitId + "|" + traits.dataType]
-                        ? new Date(facts[traits.traitId + "|" + traits.dataType][0].split(":")[0])
-                        : null
-                    }
-                    endDate={
-                      traits.traitId &&
-                      facts[traits.traitId + "|" + traits.dataType] &&
-                      facts[traits.traitId + "|" + traits.dataType][0].split(":").length > 1
-                        ? new Date(facts[traits.traitId + "|" + traits.dataType][0].split(":")[1])
-                        : null
-                    }
-                    dateFormat={"dd-MM-yyyy"}
-                    onChange={(v) => {
-                      handleOnChange(traits.traitId + "|" + traits.dataType, [
-                        v
-                          .filter((d) => d) // Filter out null or undefined values
-                          .map((d) => d.toISOString().split("T")[0]) // Process remaining values
-                          .join(":")
-                      ]);
-                    }}
-                    selectsRange
-                  />
-
-                  <InputRightElement>
-                    <label htmlFor={name} style={{ cursor: "pointer" }}>
-                      <CalendarIcon color="gray.300" />
-                    </label>
-                  </InputRightElement>
-                </InputGroup>
-              </Box>
-            )}
-            {traits.dataType == "COLOR" && (
-              <SimpleGrid columns={{ md: 3 }} spacing={4} mb={3}>
-                {traits.traitId &&
-                  facts[traits.traitId + "|" + traits.dataType] &&
-                  facts[traits.traitId + "|" + traits.dataType].map((value, index) => (
-                    <ColorEditSwatch
-                      key={index}
-                      index={index}
-                      color={value}
-                      onDelete={(index) =>
-                        setFacts((prevFacts) => {
-                          if (traits.traitId) {
-                            const newValues = prevFacts[
-                              traits.traitId + "|" + traits.dataType
-                            ].filter((_, i) => i !== index);
-
-                            return {
-                              ...prevFacts,
-                              [traits.traitId + "|" + traits.dataType]: newValues
-                            };
-                          }
-                        })
-                      }
-                      onChange={(i, v) =>
-                        setFacts((prevFacts) => {
-                          if (traits.traitId) {
-                            const existingFacts = prevFacts[traits.traitId + "|" + traits.dataType];
-                            existingFacts[i] = v;
-                            return {
-                              ...prevFacts,
-                              [traits.traitId + "|" + traits.dataType]: existingFacts
-                            };
-                          }
-                        })
-                      }
-                    />
-                  ))}
-                <Button
-                  h="3.25rem"
-                  alignItems="center"
-                  justifyContent="center"
-                  onClick={() =>
-                    setFacts((prevFacts) => {
-                      if (traits.traitId) {
-                        const existingFacts =
-                          prevFacts[traits.traitId + "|" + traits.dataType] || [];
-                        return {
-                          ...prevFacts,
-                          [traits.traitId + "|" + traits.dataType]: [
-                            ...existingFacts,
-                            "rgb(255,255,255"
-                          ]
-                        };
-                      }
-                    })
+      <Collapsible.Root open={open} unmountOnExit={true}>
+        <Collapsible.Content>
+          {traitsPairs.map(({ traits, values }) => (
+            <Field mb={4} key={traits.id}>
+              <Field mb={1}>
+                <LocalLink href={`/traits/show/${traits?.traitId}`} prefixGroup={true}>
+                  <BlueLink mr={2}>
+                    {traits?.name} {traits?.units && `(${traits.units})`}
+                  </BlueLink>
+                </LocalLink>
+              </Field>
+              {traits.dataType == "STRING" && traits.traitTypes != "RANGE" && (
+                <TraitInput
+                  type={traits.traitTypes}
+                  values={values}
+                  defaultValue={
+                    traits.traitId ? facts[traits.traitId + "|" + traits.dataType] : undefined
                   }
-                >
-                  {"Add"}
-                </Button>
-              </SimpleGrid>
-            )}
-          </FormControl>
-        ))}
-        {!sGroup && <Text>{t("observation:traits_no_group")}</Text>}
-      </Collapse>
-      <Divider mb={3} />
+                  onUpdate={(v) => handleOnChange(traits.traitId + "|" + traits.dataType, v)}
+                />
+              )}
+              {traits.dataType == "STRING" && traits.traitTypes == "RANGE" && (
+                <MultipleCategorialTrait
+                  name={traits.name}
+                  type={traits.traitTypes}
+                  values={values}
+                  defaultValue={
+                    traits.traitId ? facts[traits.traitId + "|" + traits.dataType] : undefined
+                  }
+                  onUpdate={(v) => handleOnChange(traits.traitId + "|" + traits.dataType, v)}
+                  gridColumns={3}
+                />
+              )}
+              {traits.dataType == "NUMERIC" && (
+                <TraitInput
+                  type={traits.traitTypes}
+                  values={values}
+                  defaultValue={
+                    traits.traitId ? facts[traits.traitId + "|" + traits.dataType] : undefined
+                  }
+                  onUpdate={(v) => handleOnChange(traits.traitId + "|" + traits.dataType, v)}
+                />
+              )}
+              {traits.dataType == "DATE" && (
+                <Box mb={3} maxW="md">
+                  <InputGroup
+                    endElement={
+                      <label htmlFor={name} style={{ cursor: "pointer" }}>
+                        <LuCalendar color="gray.300" />
+                      </label>
+                    }
+                  >
+                    <DatePicker
+                      ref={inputRef}
+                      customInput={<Input />}
+                      selected={
+                        traits.traitId && facts[traits.traitId + "|" + traits.dataType]
+                          ? new Date(facts[traits.traitId + "|" + traits.dataType][0].split(":")[0])
+                          : null
+                      }
+                      startDate={
+                        traits.traitId && facts[traits.traitId + "|" + traits.dataType]
+                          ? new Date(facts[traits.traitId + "|" + traits.dataType][0].split(":")[0])
+                          : null
+                      }
+                      endDate={
+                        traits.traitId &&
+                        facts[traits.traitId + "|" + traits.dataType] &&
+                        facts[traits.traitId + "|" + traits.dataType][0].split(":").length > 1
+                          ? new Date(facts[traits.traitId + "|" + traits.dataType][0].split(":")[1])
+                          : null
+                      }
+                      dateFormat={"dd-MM-yyyy"}
+                      onChange={(v) => {
+                        handleOnChange(traits.traitId + "|" + traits.dataType, [
+                          v
+                            .filter((d) => d) // Filter out null or undefined values
+                            .map((d) => d.toISOString().split("T")[0]) // Process remaining values
+                            .join(":")
+                        ]);
+                      }}
+                      selectsRange
+                    />
+                  </InputGroup>
+                </Box>
+              )}
+              {traits.dataType == "COLOR" && (
+                <SimpleGrid columns={{ md: 3 }} gap={4} mb={3}>
+                  {traits.traitId &&
+                    facts[traits.traitId + "|" + traits.dataType] &&
+                    facts[traits.traitId + "|" + traits.dataType].map((value, index) => (
+                      <ColorEditSwatch
+                        key={index}
+                        index={index}
+                        color={value}
+                        onDelete={(index) =>
+                          setFacts((prevFacts) => {
+                            if (traits.traitId) {
+                              const newValues = prevFacts[
+                                traits.traitId + "|" + traits.dataType
+                              ].filter((_, i) => i !== index);
+
+                              return {
+                                ...prevFacts,
+                                [traits.traitId + "|" + traits.dataType]: newValues
+                              };
+                            }
+                          })
+                        }
+                        onChange={(i, v) =>
+                          setFacts((prevFacts) => {
+                            if (traits.traitId) {
+                              const existingFacts =
+                                prevFacts[traits.traitId + "|" + traits.dataType];
+                              existingFacts[i] = v;
+                              return {
+                                ...prevFacts,
+                                [traits.traitId + "|" + traits.dataType]: existingFacts
+                              };
+                            }
+                          })
+                        }
+                      />
+                    ))}
+                  <Button
+                    h="3.25rem"
+                    alignItems="center"
+                    justifyContent="center"
+                    onClick={() =>
+                      setFacts((prevFacts) => {
+                        if (traits.traitId) {
+                          const existingFacts =
+                            prevFacts[traits.traitId + "|" + traits.dataType] || [];
+                          return {
+                            ...prevFacts,
+                            [traits.traitId + "|" + traits.dataType]: [
+                              ...existingFacts,
+                              "rgb(255,255,255"
+                            ]
+                          };
+                        }
+                      })
+                    }
+                  >
+                    {"Add"}
+                  </Button>
+                </SimpleGrid>
+              )}
+            </Field>
+          ))}
+          {!sGroup && <Text>{t("observation:traits_no_group")}</Text>}
+        </Collapsible.Content>
+      </Collapsible.Root>
+      <Separator mb={3} />
     </Box>
   );
 };

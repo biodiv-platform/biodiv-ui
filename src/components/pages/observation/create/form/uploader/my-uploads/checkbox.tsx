@@ -49,14 +49,14 @@ const Checkbox = (props: any) => {
       : removeObservationAsset(props.asset.hashKey);
   };
 
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
     <Box as="label" className="fade" aria-checked={props.isChecked}>
-      <input {...getInputProps()} onChange={handleOnChange} required={false} />
+      <input {...getHiddenInputProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
-        {...getCheckboxProps()}
+        {...getControlProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"
@@ -68,12 +68,13 @@ const Checkbox = (props: any) => {
           <IconButton
             className="remove fade"
             variant="ghost"
-            colorScheme="red"
+            colorPalette="red"
             hidden={props.isChecked}
             aria-label={t("common:delete")}
             onClick={() => removeAsset(props.asset)}
-            icon={<DeleteIcon />}
-          />
+          >
+            <DeleteIcon />
+          </IconButton>
           <StatusIcon type={props.asset.status} />
           <Image
             style={{ filter: "none" }}
@@ -81,8 +82,7 @@ const Checkbox = (props: any) => {
             objectFit="cover"
             src={imageURL}
             borderRadius="md"
-            fallbackSrc={getFallbackByMIME(props.asset.type)}
-            alt={props.asset.fileName}
+            alt={getFallbackByMIME(props.asset.type) || props.asset.fileName}
           />
         </ImageBox>
       </AspectRatio>

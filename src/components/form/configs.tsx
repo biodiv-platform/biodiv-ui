@@ -1,8 +1,8 @@
-import { CloseIcon, CopyIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuCopy, LuX } from "react-icons/lu";
 
 export const reactSelectProps = {
   styles: {
@@ -47,28 +47,28 @@ export const ClearIndicator = (props) => {
           e.preventDefault();
         }}
       >
-        <Tooltip hasArrow={true} title={t("common:copy")}>
+        <Tooltip showArrow={true} title={t("common:copy")}>
           <IconButton
             type="button"
             minW={0}
             mr={2}
-            mt={1}
-            variant="link"
-            icon={<CopyIcon />}
             aria-label={t("common:copy")}
             onClick={() => navigator.clipboard.writeText(props.selectProps.value.label)}
-          />
+            variant={"plain"}
+          >
+            <LuCopy />
+          </IconButton>
         </Tooltip>
       </div>
       <IconButton
         minW="auto"
         type="button"
-        variant="link"
         mr={1}
         aria-label={t("common:clear")}
-        icon={<CloseIcon />}
-        fontSize="0.8rem"
-      />
+        variant={"plain"}
+      >
+        <LuX />
+      </IconButton>
     </div>
   );
 };

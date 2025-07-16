@@ -1,4 +1,4 @@
-import { TableColumnHeaderProps } from "@chakra-ui/table";
+import { TableColumnHeaderProps } from "@chakra-ui/react";
 
 export const stickyTh: TableColumnHeaderProps = {
   color: "black",

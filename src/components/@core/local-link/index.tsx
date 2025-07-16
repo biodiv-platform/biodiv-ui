@@ -1,6 +1,6 @@
 import useGlobalState from "@hooks/use-global-state";
 import { parseUrl, stringify } from "@utils/query-string";
-import NextLink, { LinkProps } from "next/link";
+import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
 import React, { cloneElement } from "react";
 
@@ -67,7 +67,7 @@ function LocalLink({ prefixGroup, params, ...props }: Props) {
   return localPath.startsWith("http") || props?.hardLink ? (
     cloneElement(props.children, { ...props?.children?.props, href: localPath })
   ) : (
-    <NextLink {...props} href={localPath} prefetch={false} passHref={true} />
+    <Link {...props} href={localPath} prefetch={false} passHref={true} />
   );
 }
 

@@ -1,6 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
-import AddIcon from "@icons/add";
 import { Role } from "@interfaces/custom";
+import { LuPlus } from "react-icons/lu";
 
 import GroupListItem from "./group-list-item";
 
@@ -13,7 +13,7 @@ export default [
   },
   {
     name: "header:menu_primary.contribute.",
-    nameIcon: AddIcon,
+    nameIcon: LuPlus,
     isLazy: true,
     rows: [
       {

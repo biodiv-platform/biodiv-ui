@@ -1,14 +1,13 @@
-import { Box, Link } from "@chakra-ui/react";
+import { Box, IconButton } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
-import CrossIcon from "@icons/cross";
-import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuMenu, LuX } from "react-icons/lu";
 
 const EditLinkButton = dynamic(() => import("./edit-link-button"), { ssr: false });
 const JoinUserGroup = dynamic(() => import("@components/pages/group/common/join-group"), {
@@ -21,7 +20,7 @@ const Logo = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0.25rem 0;
-  min-height: 3.4rem;
+  min-height: 3.75rem;
   flex-wrap: wrap;
 
   .right-logo {
@@ -52,6 +51,14 @@ const Logo = styled.div`
     margin-left: 0.75rem;
   }
 
+  button,
+  .button {
+    flex-shrink: 0;
+    display: none;
+    color: inherit;
+    font-size: 1.5rem;
+  }
+
   ${Mq.max.lg} {
     width: 100%;
 
@@ -80,14 +87,13 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
   return (
     <Logo>
       <LocalLink href="/" prefixGroup={true}>
-        <Link>
-          <img src={`${icon}?w=128&preserve=true`} width="128px" alt={name} title={name} />
-          <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
-            {nameLocal && <Box mb={1}>{nameLocal}</Box>}
-            {name}
-          </Box>
-        </Link>
+        <img src={`${icon}?w=128&preserve=true`} width="128px" alt={name} title={name} />
+        <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
+          {nameLocal && <Box mb={1}>{nameLocal}</Box>}
+          {name}
+        </Box>
       </LocalLink>
+
       {SITE_CONFIG.SITE?.GOV?.ACTIVE && (
         <img
           className="icon-gov"
@@ -96,9 +102,15 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
           title={SITE_CONFIG.SITE?.GOV?.NAME}
         />
       )}
-      <button className="menu-toggle" onClick={onToggle} aria-label={t("header:toggle_menu")}>
-        {isOpen ? <CrossIcon /> : <MenuIcon />}
-      </button>
+
+      <IconButton
+        className="menu-toggle"
+        onClick={onToggle}
+        aria-label={t("header:toggle_menu")}
+        unstyled
+      >
+        {isOpen ? <LuX /> : <LuMenu />}
+      </IconButton>
       {currentGroup.id && (
         <>
           <JoinUserGroup

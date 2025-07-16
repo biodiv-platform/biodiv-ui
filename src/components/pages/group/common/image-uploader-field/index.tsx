@@ -1,8 +1,9 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import { RESOURCE_SIZE } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 import DropTarget from "./drop-target";
 import ResourceCard from "./image-card";
@@ -34,8 +35,13 @@ export default function ImageUploaderField({
   const { t } = useTranslation();
 
   return (
-    <FormControl isInvalid={!!fieldState.error} mb={mb}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+    <Field
+      invalid={!!fieldState.error}
+      errorText={fieldState?.error?.message}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+    >
       {field.value ? (
         <ResourceCard
           simpleUpload={simpleUpload}
@@ -54,8 +60,7 @@ export default function ImageUploaderField({
           setValue={field.onChange}
         />
       )}
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 }

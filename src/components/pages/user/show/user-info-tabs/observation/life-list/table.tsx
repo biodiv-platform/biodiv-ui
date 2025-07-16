@@ -48,7 +48,7 @@ const LifeListTable = ({ data, loadMore, title, extraParams }) => {
         </Table>
       </Box>
 
-      <Button w="full" onClick={loadMore} isLoading={data.isLoading} borderTopRadius={0}>
+      <Button w="full" onClick={loadMore} loading={data.isLoading} borderTopRadius={0}>
         {t("common:load_more")}
       </Button>
     </Box>

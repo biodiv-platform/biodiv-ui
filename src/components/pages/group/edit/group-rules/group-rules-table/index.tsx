@@ -32,8 +32,9 @@ const GroupRulesTable = ({ userGroupId, groupRules, setGroupRules, setIsCreate }
         </thead>
         <GroupRules removeGroupRules={removeGroupRules} groupRules={groupRules} />
       </table>
-      <ButtonGroup spacing={4} mt={4}>
-        <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
+      <ButtonGroup gap={4} mt={4}>
+        <Button colorPalette="blue" onClick={() => setIsCreate(true)}>
+          <AddIcon />
           {t("group:rules.add.title")}
         </Button>
       </ButtonGroup>

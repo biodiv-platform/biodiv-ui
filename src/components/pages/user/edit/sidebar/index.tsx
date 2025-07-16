@@ -1,10 +1,12 @@
-import { AspectRatio, Avatar, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Flex, VisuallyHidden } from "@chakra-ui/react";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateUserImage } from "@services/user.service";
 import { getUserImage } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 import { UserEditPageComponentProps } from "..";
 
@@ -38,14 +40,15 @@ export default function UserInfoSidebar({ user }: UserEditPageComponentProps) {
           <Avatar position="absolute" boxSize="full" src={userImage} name={user.name} />
         </AspectRatio>
         <Box pl={{ base: 4, md: 0 }}>
-          <Button type="button" as="label" cursor="pointer" w="full" colorScheme="blue">
-            <VisuallyHidden
-              as="input"
-              type="file"
-              id="user-profile"
-              accept="image/*"
-              onChange={handleOnPhotoUpload}
-            />
+          <Button type="button" as="label" cursor="pointer" w="full" colorPalette="blue">
+            <VisuallyHidden asChild>
+              <input
+                type="file"
+                id="user-profile"
+                accept="image/*"
+                onChange={handleOnPhotoUpload}
+              />
+            </VisuallyHidden>
             {t("user:upload_photo")}
           </Button>
         </Box>

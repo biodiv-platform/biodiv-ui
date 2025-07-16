@@ -13,13 +13,13 @@ interface ITraitInputProps {
 }
 
 const CustomCheckBox = (props: any) => {
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
     <label>
-      <input {...getInputProps()} required={false} />
+      <input {...getHiddenInputProps()} required={false} />
       <Box
-        {...getCheckboxProps()}
+        {...getControlProps()}
         p={2}
         cursor="pointer"
         borderWidth="2px"
@@ -46,20 +46,20 @@ const CheckBoxItems = ({
   defaultValue,
   gridColumns = [1, 1, 3, 5]
 }: ITraitInputProps) => {
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
-    onChange: (v) => onChange(v.map((i) => Number(i)))
+    onValueChange: (v) => onChange(v.map((i) => Number(i)))
   });
 
   return (
     <SimpleGrid columns={gridColumns} gridGap={4}>
       {options.map((o) => {
         return (
-          <CustomCheckBox key={o.id} {...getCheckboxProps({ value: String(o.id) })}>
+          <CustomCheckBox key={o.id} {...getItemProps({ value: String(o.id) })}>
             <Flex alignItems="center" h="2rem" overflow="hidden" title={o.name}>
               <Image
                 loading="lazy"
-                ignoreFallback={true}
+                // ignoreFallback={true}
                 boxSize="2rem"
                 mr={2}
                 objectFit="contain"

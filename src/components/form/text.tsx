@@ -1,13 +1,8 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Textarea
-} from "@chakra-ui/react";
+import { Input, Textarea } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useRef } from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "../ui/field";
 
 interface ITextBoxProps {
   id?: string;
@@ -69,20 +64,22 @@ export const TextBoxField = ({
   const InputComponent = multiline ? Textarea : Input;
 
   return (
-    <FormControl
-      isInvalid={!!fieldState.error}
+    <Field
+      invalid={!!fieldState.error}
       mb={mb}
       hidden={hidden}
-      isRequired={isRequired}
+      htmlFor={name}
+      required={isRequired}
+      errorText={fieldState?.error?.message}
       {...props}
     >
-      {showLabel && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      {showLabel && <Field label={label} required={isRequired} />}
       <InputComponent
         id={id || name}
         placeholder={placeholder}
         type={type}
         maxLength={maxLength}
-        isDisabled={disabled}
+        disabled={disabled}
         autoComplete={autoComplete}
         resize="none"
         overflow="hidden"
@@ -99,7 +96,7 @@ export const TextBoxField = ({
           }
           field.ref(element);
         }}
-        sx={
+        css={
           multiline
             ? {
                 "&": {
@@ -110,12 +107,11 @@ export const TextBoxField = ({
             : undefined
         }
       />
-      <FormErrorMessage children={fieldState?.error?.message} />
       {maxLength && field.value && (
-        <FormHelperText color="gray.600" children={`${field.value.length}/${maxLength}`} />
+        <Field color="gray.600" helperText={`${field.value.length}/${maxLength}`} />
       )}
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
-    </FormControl>
+      {hint && <Field color="gray.600" helperText={hint}></Field>}
+      {helperText && <Field helperText={helperText} />}
+    </Field>
   );
 };

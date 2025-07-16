@@ -1,4 +1,4 @@
-import { Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import { Table } from "@chakra-ui/react";
 import ScientificName from "@components/@core/scientific-name";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -41,31 +41,31 @@ export default function SynonymList({
         updateFunc={updateFunc}
         deleteFunc={deleteFunc}
       />
-      <Table size="sm" variant="striped">
-        <Tbody>
+      <Table.Root size="sm" striped>
+        <Table.Body>
           {synonymsListSorted.length ? (
             synonymsListSorted.map((synonym) => (
-              <Tr key={synonym.id}>
-                <Td w={{ md: "10rem" }} verticalAlign="top">
+              <Table.Row key={synonym.id}>
+                <Table.Cell w={{ md: "10rem" }} verticalAlign="top">
                   {synonym.status.toLowerCase()}
-                </Td>
-                <Td>
+                </Table.Cell>
+                <Table.Cell>
                   {isContributor ? (
                     <SynonymEditButtons synonym={synonym} />
                   ) : (
                     <ScientificName value={synonym.italicisedForm} />
                   )}
-                </Td>
-              </Tr>
+                </Table.Cell>
+              </Table.Row>
             ))
           ) : (
-            <Tr>
-              <Td>{t("common:no_data")}</Td>
-            </Tr>
+            <Table.Row>
+              <Table.Cell>{t("common:no_data")}</Table.Cell>
+            </Table.Row>
           )}
           {isContributor && <SynonymAdd />}
-        </Tbody>
-      </Table>
+        </Table.Body>
+      </Table.Root>
     </>
   );
 }

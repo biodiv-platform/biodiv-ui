@@ -1,4 +1,4 @@
-import { Button, Flex, Select, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { PageHeading } from "@components/@core/layout";
 import { useLocalRouter } from "@components/@core/local-link";
@@ -9,6 +9,8 @@ import { axGetUsersByID } from "@services/user.service";
 import { sendFileFromResponse } from "@utils/download";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import Contributors from "./contributors";
 import { CURATED_STATUS } from "./table/data";
@@ -34,28 +36,30 @@ const Actions = () => {
         <Button
           p={5}
           variant="outline"
-          colorScheme="blue"
-          leftIcon={<DownloadIcon />}
+          colorPalette="blue"
           onClick={() => handleOnDownload(datasetId, rows.filter.curatedStatus)}
         >
+          <DownloadIcon />
           {t("text-curation:download")}
         </Button>
       )}
-      <Select onChange={handleOnChange} size="sm">
-        <option value="">ALL</option>
-        {Object.keys(CURATED_STATUS).map((k) => (
-          <option key={k} value={k}>
-            {k}
-          </option>
-        ))}
-      </Select>
+      <NativeSelectRoot onChange={handleOnChange} size="sm">
+        <NativeSelectField>
+          <option value="">ALL</option>
+          {Object.keys(CURATED_STATUS).map((k) => (
+            <option key={k} value={k}>
+              {k}
+            </option>
+          ))}
+        </NativeSelectField>
+      </NativeSelectRoot>
 
       {isShow && canEdit && (
         <SimpleActionButton
           icon={<EditIcon />}
           title={t("common:edit")}
           onClick={handleOnEdit}
-          colorScheme="teal"
+          colorPalette="teal"
         />
       )}
     </Flex>

@@ -1,14 +1,6 @@
 import "flatpickr/dist/themes/material_blue.css";
 
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement
-} from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { formatDateRange, parseDateRange } from "@utils/date";
@@ -16,6 +8,9 @@ import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
 import { useController } from "react-hook-form";
+
+import { Field } from "../ui/field";
+import { InputGroup } from "../ui/input-group";
 
 interface IDatePickerBoxProps {
   name: string;
@@ -27,7 +22,7 @@ interface IDatePickerBoxProps {
   dateFormat?: string;
   style?;
   hasMaxDate?: boolean;
-  isRequired?: boolean;
+  required?: boolean;
   subscribe?: boolean;
 }
 
@@ -41,6 +36,7 @@ export const DateRangePickerField = ({
   subscribe = false,
   hasMaxDate = true,
   dateFormat = "d-m-Y",
+  required,
   ...props
 }: IDatePickerBoxProps) => {
   const { field, fieldState } = useController({ name });
@@ -61,9 +57,23 @@ export const DateRangePickerField = ({
   }
 
   return (
-    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <InputGroup>
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      required={required}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
+      <InputGroup
+        endElement={
+          <label htmlFor={name} style={{ cursor: "pointer" }}>
+            <CalendarIcon color="gray.300" />
+          </label>
+        }
+        width={"full"}
+      >
         <Flatpickr
           value={date}
           options={{ allowInput: true, maxDate, dateFormat, mode: "range" }}
@@ -71,7 +81,7 @@ export const DateRangePickerField = ({
           render={({ defaultValue, value, ...props }, ref) => (
             <Input
               disabled={disableInput}
-              isReadOnly={disabled}
+              readOnly={disabled}
               id={name}
               {...props}
               placeholder={label}
@@ -80,14 +90,8 @@ export const DateRangePickerField = ({
             />
           )}
         />
-        <InputRightElement>
-          <label htmlFor={name} style={{ cursor: "pointer" }}>
-            <CalendarIcon color="gray.300" />
-          </label>
-        </InputRightElement>
       </InputGroup>
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

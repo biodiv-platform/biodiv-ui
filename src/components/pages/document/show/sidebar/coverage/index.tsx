@@ -19,7 +19,7 @@ export default function CoveragePanel({
   endpointType
 }) {
   const { t } = useTranslation();
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const [coverageValue, setCoverageValue] = useState(initialValue);
 
   const onSave = async (newCoverageValue) => {
@@ -39,9 +39,11 @@ export default function CoveragePanel({
         <span>
           {icon} {title}
         </span>
-        <IconButton onClick={onToggle} variant="link" aria-label="Edit" icon={<EditIcon />} />
+        <IconButton onClick={onToggle} aria-label="Edit" variant={"plain"}>
+          <EditIcon />
+        </IconButton>
       </BoxHeading>
-      {isOpen ? (
+      {open ? (
         <CoverageEdit
           value={coverageValue}
           onChange={onSave}

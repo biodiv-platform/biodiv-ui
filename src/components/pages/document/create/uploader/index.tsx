@@ -1,6 +1,7 @@
-import { FormControl, FormErrorMessage, FormHelperText } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 import { ManageDocumentContextProvider } from "./document-upload-provider";
 import DocumentUploaderTabs from "./tabs";
@@ -15,11 +16,10 @@ export default function DocumentUploader({ name, hint }: DocumentUploaderProps) 
 
   return (
     <ManageDocumentContextProvider initialDocument={field.value}>
-      <FormControl isInvalid={!!fieldState.error} mb={4}>
+      <Field invalid={!!fieldState.error} errorText={fieldState?.error?.message} mb={4}>
         <DocumentUploaderTabs {...field} externalUrl={field.name == "externalUrl"} />
-        <FormErrorMessage children={fieldState?.error?.message} />
-        {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-      </FormControl>
+        {hint && <Field color="gray.600" helperText={hint} />}
+      </Field>
     </ManageDocumentContextProvider>
   );
 }

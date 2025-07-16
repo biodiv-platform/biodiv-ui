@@ -1,4 +1,4 @@
-import { Box, Divider, Text, VisuallyHidden } from "@chakra-ui/react";
+import { Box, Separator, Text, VisuallyHidden } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -41,7 +41,7 @@ export default function ObservationCustomFieldForm({ fields }) {
         }
       )}
 
-      <Divider mb={3} />
+      <Separator mb={3} />
     </Box>
   );
 }

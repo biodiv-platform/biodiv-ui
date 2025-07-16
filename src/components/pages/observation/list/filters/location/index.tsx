@@ -22,7 +22,7 @@ export default function LocationFilter() {
     }));
 
   return (
-    <SubAccordion>
+    <SubAccordion >
       <MapAreaFilter />
 
       {SITE_CONFIG.FILTER.STATE && (

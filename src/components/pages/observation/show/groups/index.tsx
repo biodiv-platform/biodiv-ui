@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Tabs } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
@@ -40,33 +40,33 @@ const Groups = ({
   }, [isLoggedIn]);
 
   return (
-    <Box mb={4} className="white-box" data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE}>
-      <Tabs isLazy={true}>
-        <TabList>
-          <Tab>👥 {t("common:usergroups")}</Tab>
-          <Tab hidden={hideFeature}>🌟 {t("common:feature_in_groups")}</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <GroupPost
-              groups={permission?.userGroupMember}
-              selectedDefault={observationGroups}
-              resourceId={resourceId}
-              saveUserGroupsFunc={saveUserGroupsFunc}
-            />
-          </TabPanel>
-          <TabPanel>
-            <GroupFeature
-              groups={permission?.userGroupFeature}
-              selectedDefault={featured}
-              resourceId={resourceId}
-              resourceType={resourceType}
-              featureFunc={featureFunc}
-              unfeatureFunc={unfeatureFunc}
-            />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+    <Box mb={4} className="white-box" data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE} p={2}>
+      <Tabs.Root lazyMount={true} defaultValue={"userGroups"}>
+        <Tabs.List>
+          <Tabs.Trigger value="userGroups">👥 {t("common:usergroups")}</Tabs.Trigger>
+          <Tabs.Trigger hidden={hideFeature} value="hideFeature">
+            🌟 {t("common:feature_in_groups")}
+          </Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="userGroups">
+          <GroupPost
+            groups={permission?.userGroupMember}
+            selectedDefault={observationGroups}
+            resourceId={resourceId}
+            saveUserGroupsFunc={saveUserGroupsFunc}
+          />
+        </Tabs.Content>
+        <Tabs.Content value="hideFeature">
+          <GroupFeature
+            groups={permission?.userGroupFeature}
+            selectedDefault={featured}
+            resourceId={resourceId}
+            resourceType={resourceType}
+            featureFunc={featureFunc}
+            unfeatureFunc={unfeatureFunc}
+          />
+        </Tabs.Content>
+      </Tabs.Root>
     </Box>
   );
 };

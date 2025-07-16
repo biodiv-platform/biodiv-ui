@@ -1,14 +1,14 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot
+} from "@/components/ui/accordion";
 
 import AttributeFilter from "./attribute";
 import CommonNameFilter from "./commonName";
@@ -28,99 +28,83 @@ export default function FiltersList() {
   const { t } = useTranslation();
 
   return (
-    <Accordion defaultIndex={[0]} allowMultiple={true}>
-      <AccordionItem>
-        <AccordionButton>
-          <Box flex={1} textAlign="left">
+    <AccordionRoot multiple defaultValue={["species_group"]}>
+      <AccordionItem value="species_group">
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
             {t("filters:species_group.title")}
           </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
+        </AccordionItemTrigger>
+        <AccordionItemContent>
           <SpeciesGroupsFilter />
-        </AccordionPanel>
+        </AccordionItemContent>
       </AccordionItem>
 
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton>
-              <Box flex={1} textAlign="left">
-                {t("filters:taxon_browser.title")}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>{isExpanded && <TaxonBrowser />}</AccordionPanel>
-          </>
-        )}
+      <AccordionItem value="taxon_browser">
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
+            {t("filters:taxon_browser.title")}
+          </Box>
+        </AccordionItemTrigger>
+        <AccordionItemContent>
+          <TaxonBrowser />
+        </AccordionItemContent>
       </AccordionItem>
 
       <ScientificNameFilter />
-
       <CommonNameFilter />
-
       <RankFilter />
 
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton>
-              <Box flex={1} textAlign="left">
-                {t("filters:species_field.title")}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>{isExpanded && <SpeciesFieldFilter />}</AccordionPanel>
-          </>
-        )}
+      <AccordionItem value="species_field">
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
+            {t("filters:species_field.title")}
+          </Box>
+        </AccordionItemTrigger>
+        <AccordionItemContent>
+          <SpeciesFieldFilter />
+        </AccordionItemContent>
       </AccordionItem>
 
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton>
-              <Box flex={1} textAlign="left">
-                {t("filters:traits.title")}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>{isExpanded && <TraitsFilter />}</AccordionPanel>
-          </>
-        )}
+      <AccordionItem value="traits">
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
+            {t("filters:traits.title")}
+          </Box>
+        </AccordionItemTrigger>
+        <AccordionItemContent>
+          <TraitsFilter />
+        </AccordionItemContent>
       </AccordionItem>
 
       <AttributeFilter />
 
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <AccordionButton>
-              <Box flex={1} textAlign="left">
-                {t("filters:user.contributor")}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel>{isExpanded && <UserFilter filterKey="user" />}</AccordionPanel>
-          </>
-        )}
+      <AccordionItem value="user" >
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
+            {t("filters:user.contributor")}
+          </Box>
+        </AccordionItemTrigger>
+        <AccordionItemContent pl={4} pr={4}>
+          <UserFilter filterKey="user" />
+        </AccordionItemContent>
       </AccordionItem>
 
       <ReferenceFilter />
-
       <MediaType />
 
-      <AccordionItem>
-        <AccordionButton>
-          <Box flex={1} textAlign="left">
+      <AccordionItem value="time">
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
             {t("filters:time.title")}
           </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel>
+        </AccordionItemTrigger>
+        <AccordionItemContent>
           <TimeFilter />
-        </AccordionPanel>
+        </AccordionItemContent>
       </AccordionItem>
+
       {SITE_CONFIG.USERGROUP.ACTIVE && <UserGroupFilter />}
-    </Accordion>
+    </AccordionRoot>
   );
 }

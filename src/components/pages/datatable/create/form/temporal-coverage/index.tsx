@@ -15,11 +15,11 @@ export default function TemporalCoverage() {
   return (
     <ToggleablePanel icon="📅" title={t("datatable:temporal")}>
       <Box p={4} pb={0}>
-        <SimpleGrid columns={{ md: 2 }} spacing={{ md: 4 }}>
+        <SimpleGrid columns={{ md: 2 }} gap={{ md: 4 }}>
           <DateRangePickerField
             hasMaxDate={true}
             disableInput={isDisable}
-            isRequired={!isDisable}
+            required={!isDisable}
             name="observedDateRange"
             label={t("form:date_range")}
           />

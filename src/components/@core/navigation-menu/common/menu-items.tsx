@@ -1,15 +1,15 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Link, Menu, MenuButton } from "@chakra-ui/react";
+import { Button, Flex, Menu, Portal } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuChevronDown } from "react-icons/lu";
 
 import GroupedSubMenu from "./grouped-sub-menu";
 import SubMenu from "./sub-menu";
 
 const SimpleLink = ({ children, to, params }) => (
   <LocalLink href={to} params={params} prefixGroup={true}>
-    <Link>{children}</Link>
+    {children}
   </LocalLink>
 );
 
@@ -21,30 +21,43 @@ export default function MenuItems(props) {
   const isContributeMenu = name === "header:menu_primary.contribute.";
 
   return isDropdown ? (
-    <Menu placement="bottom-end" isLazy={isLazy}>
-      {({ isOpen }) => (
-        <>
-          <MenuButton data-label={name} role="button" tabIndex={0}>
-            {NameIcon && <NameIcon mr={1} />}
+    <Menu.Root positioning={{ placement: "bottom-end" }} lazyMount={isLazy}>
+      <Menu.Trigger data-label={name} role="button" asChild>
+        <Button
+          variant="plain"
+          size="sm"
+          color="inherit"
+          px={0}
+          width={{ base: "100%", lg: "auto" }}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Flex align="center">
+            {NameIcon && <NameIcon />}
             {t(`${name}title`)}
-            <ChevronDownIcon mt={[1, 0]} float={["right", "right", "right", "none"]} />
-          </MenuButton>
-          {(isLazy ? isOpen : true) ? (
-            CCell ? (
-              <CCell />
-            ) : isContributeMenu ? (
-              <GroupedSubMenu rows={rows} prefix={name} />
-            ) : (
-              <SubMenu rows={rows} prefix={name} />
-            )
-          ) : null}
-        </>
-      )}
-    </Menu>
+          </Flex>
+          <LuChevronDown />
+        </Button>
+      </Menu.Trigger>
+      <Portal>
+        <Menu.Positioner>
+          {CCell ? (
+            <CCell />
+          ) : isContributeMenu ? (
+            <GroupedSubMenu rows={rows} prefix={name} />
+          ) : (
+            <SubMenu rows={rows} prefix={name} />
+          )}
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
   ) : (
     <SimpleLink to={to} params={params}>
-      {NameIcon && <NameIcon mr={1} />}
-      {t(`${name}title`)}
+      <Flex align="center" gap={2}>
+        {NameIcon && <NameIcon />}
+        {t(`${name}title`)}
+      </Flex>
     </SimpleLink>
   );
 }

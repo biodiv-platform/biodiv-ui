@@ -1,13 +1,14 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import React, { useEffect, useMemo, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
+import { LuChevronDown } from "react-icons/lu";
 import { components, DropdownIndicatorProps } from "react-select";
 import AsyncSelect from "react-select/async";
 import AsyncSelectCreatable from "react-select/async-creatable";
 
+import { Field } from "../ui/field";
 import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface ISelectProps {
@@ -46,7 +47,7 @@ const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
 const DropdownIndicator = (props: DropdownIndicatorProps) => {
   return (
     <components.DropdownIndicator {...props}>
-      <ChevronDownIcon />
+      <LuChevronDown />
     </components.DropdownIndicator>
   );
 };
@@ -104,41 +105,44 @@ export const SelectAsyncInputField = ({
   }, [form.formState.submitCount]);
 
   return (
-    <FormControl
-      isInvalid={!!fieldState.error}
+    <Field
+      invalid={!!fieldState.error}
       aria-invalid={!!fieldState.error}
-      isRequired={isRequired}
       mb={mb}
+      required={isRequired}
+      htmlFor={name}
+      errorText={fieldState?.error?.message}
+      label={label}
       {...props}
     >
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <Select
-        name={name}
-        inputId={name}
-        menuPortalTarget={MENU_PORTAL_TARGET}
-        formatCreateLabel={(v) => `Add "${v}"`}
-        isMulti={multiple}
-        defaultOptions={options}
-        loadOptions={onQueryDebounce}
-        components={{
-          Option: optionComponent,
-          ClearIndicator,
-          DropdownIndicator,
-          IndicatorSeparator: () => null
-        }}
-        value={selected}
-        isSearchable={true}
-        isDisabled={disabled}
-        isClearable={isClearable}
-        onChange={handleOnChange}
-        placeholder={placeholder || label}
-        noOptionsMessage={() => null}
-        ref={selectRef}
-        openMenuOnFocus={openMenuOnFocus}
-        {...reactSelectProps}
-      />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Box width={"full"}>
+        <Select
+          name={name}
+          inputId={name}
+          menuPortalTarget={MENU_PORTAL_TARGET}
+          formatCreateLabel={(v) => `Add "${v}"`}
+          isMulti={multiple}
+          defaultOptions={options}
+          loadOptions={onQueryDebounce}
+          components={{
+            Option: optionComponent,
+            ClearIndicator,
+            DropdownIndicator,
+            IndicatorSeparator: () => null
+          }}
+          value={selected}
+          isSearchable={true}
+          isDisabled={disabled}
+          isClearable={isClearable}
+          onChange={handleOnChange}
+          placeholder={placeholder || label}
+          noOptionsMessage={() => null}
+          ref={selectRef}
+          openMenuOnFocus={openMenuOnFocus}
+          {...reactSelectProps}
+        />
+      </Box>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

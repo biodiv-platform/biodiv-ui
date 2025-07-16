@@ -30,17 +30,17 @@ export const OBSERVATION_FILTER_KEY = {
 export const viewTabs = [
   {
     name: "common:list.view_type.list",
-    icon: <ListIcon />,
+    icon: <ListIcon size={"sm"} />,
     key: "list"
   },
   {
     name: "common:list.view_type.grid",
-    icon: <GridIcon />,
+    icon: <GridIcon  size={"sm"}/>,
     key: "list_minimal"
   },
   {
     name: "common:list.view_type.stats",
-    icon: <StatsIcon />,
+    icon: <StatsIcon size={"sm"} />,
     key: "stats"
   }
 ];

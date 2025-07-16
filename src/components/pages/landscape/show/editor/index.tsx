@@ -34,11 +34,12 @@ export default function FieldEditor({ initialContent, id, onChange, onClose }) {
         onEditorChange={setContent}
         uploadHandler={axUploadEditorResource}
       />
-      <Stack isInline={true} spacing={2} mt={2}>
-        <Button type="button" colorScheme="blue" onClick={handleOnSave} leftIcon={<CheckIcon />}>
+      <Stack direction={"row"} gap={2} mt={2}>
+        <Button type="button" colorPalette="blue" onClick={handleOnSave}>
+          <CheckIcon />
           {t("common:save")}
         </Button>
-        <Button type="button" colorScheme="red" onClick={onClose}>
+        <Button type="button" colorPalette="red" onClick={onClose}>
           {t("common:cancel")}
         </Button>
       </Stack>

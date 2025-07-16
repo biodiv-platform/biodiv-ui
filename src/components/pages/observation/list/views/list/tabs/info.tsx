@@ -1,6 +1,4 @@
-import { CalendarIcon } from "@chakra-ui/icons";
-import { EditIcon } from "@chakra-ui/icons";
-import { Alert, AlertIcon, Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Alert, Box, Button, Flex, Heading, Separator, SimpleGrid, Text } from "@chakra-ui/react";
 import FlagActionButton from "@components/@core/action-buttons/flag";
 import ScientificName from "@components/@core/scientific-name";
 import ObservationStatusBadge from "@components/pages/common/status-badge";
@@ -16,13 +14,16 @@ import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import CalendarIcon from "@/icons/calendar";
+import EditIcon from "@/icons/edit";
+
 interface IInfoTabProps {
   o: ObservationListPageMapper;
   recoUpdated;
-  setTabIndex;
+  setTab;
 }
 
-export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) {
+export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
   const { t } = useTranslation();
   const { observationData } = useObservationFilter();
   const { user } = useGlobalState();
@@ -32,8 +33,7 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
       <SimpleGrid columns={[1, 1, 3, 3]} px={4} pt={1}>
         <div style={{ gridColumn: "1/3" }}>
           <Heading
-            size="md"
-            pt={2}
+            size="xl"
             mb={1}
             className="elipsis-2"
             title={stripTags(o?.recoShow?.recoIbp?.scientificName)}
@@ -50,17 +50,17 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
             <Text className="elipsis" title={t("observation:list.location")}>
-              <LocationIcon mb={1} mr={2} />
+              <LocationIcon mb={1} mr={2} size={"sm"} />
               {o.placeName}
             </Text>
             <Text title={t("common:observed_on")}>
-              <CalendarIcon mb={1} mr={2} />
+              <CalendarIcon mb={1} mr={2} size={"sm"} />
               {o?.observedOn ? formatDateReadableFromUTC(o.observedOn) : t("common:unknown")}
             </Text>
 
             {o?.observationNotes && (
               <Text className="elipsis" title={t("observation:notes")}>
-                <EditIcon mr={2} mb={1} />
+                <EditIcon mr={2} mb={1} size={"sm"} />
                 {o.observationNotes}
               </Text>
             )}
@@ -69,7 +69,10 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
         <Flex justify={[null, null, "flex-end", "flex-end"]} align="top" py={4}>
           <SpeciesGroupBox
             id={o?.speciesGroupId}
-            speciesGroups={Object.keys(observationData.ag.groupSpeciesName || {}).map((g) => ({ label: g.split("|")[1], value: Number(g.split("|")[0]) }))}
+            speciesGroups={Object.keys(observationData.ag.groupSpeciesName || {}).map((g) => ({
+              label: g.split("|")[1],
+              value: Number(g.split("|")[0])
+            }))}
             observationId={o.observationId}
           />
           <FlagActionButton
@@ -81,7 +84,8 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           />
         </Flex>
       </SimpleGrid>
-      <Box borderTop="1px" borderColor="gray.300">
+      <Box borderTop="1px" borderColor="gray.300" width={"full"}>
+        <Separator />
         <RecoSuggestion
           observationId={o.observationId}
           isLocked={o.recoShow?.isLocked}
@@ -90,24 +94,32 @@ export default function InfoTab({ o, recoUpdated, setTabIndex }: IInfoTabProps) 
           recoUpdated={recoUpdated}
           permissionOverride={observationData?.mvp[o.observationId || 0]}
         />
-        <Alert bg="blue.50">
-          <AlertIcon />
-          {o.recoShow?.isLocked
-            ? t("observation:id.validated")
-            : o.recoShow?.recoIbp
-            ? t("observation:id.suggest_new_reco")
-            : t("observation:id.no_suggestion")}
-          <Button
-            variant="link"
-            color="blue.600"
-            hidden={o.recoShow?.isLocked}
-            m="auto"
-            mr={0}
-            onClick={() => setTabIndex(1)}
-          >
-            {t("observation:suggest")}
-          </Button>
-        </Alert>
+        <Alert.Root alignItems={"center"} bg="blue.50" status={"info"}>
+          <Alert.Indicator />
+          <Alert.Content>
+            <Alert.Title>
+              <Text>
+                {o.recoShow?.isLocked
+                  ? t("observation:id.validated")
+                  : o.recoShow?.recoIbp
+                  ? t("observation:id.suggest_new_reco")
+                  : t("observation:id.no_suggestion")}
+              </Text>
+            </Alert.Title>
+          </Alert.Content>
+
+          {!o.recoShow?.isLocked && (
+            <Button
+              variant="plain"
+              color="blue.600"
+              size="sm"
+              onClick={() => setTab("observation:id.title")}
+              fontWeight={"bold"}
+            >
+              {t("observation:suggest")}
+            </Button>
+          )}
+        </Alert.Root>
       </Box>
     </Box>
   );

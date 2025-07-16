@@ -11,19 +11,15 @@ export const CommonNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
   return (
     <components.Option {...props}>
-      <Stack isInline={true} alignItems="center">
+      <Stack direction={"row"} alignItems="center">
         {hiddenIcon && (
-          <Image
-            boxSize="2rem"
-            src={getSuggestionIcon(props.data.icon)}
-            fallbackSrc={props.data.group}
-          />
+          <Image boxSize="2rem" src={getSuggestionIcon(props.data.icon)} alt={props.data.group} />
         )}
         <Box>
           <Flex alignItems="center">
             {children}
             {props.data.lang && (
-              <Badge colorScheme="red" ml={1}>
+              <Badge colorPalette="red" ml={1}>
                 {props.data.lang}
               </Badge>
             )}
@@ -31,10 +27,10 @@ export const CommonNameOption = ({ children, ...props }: any) => {
           {props.data.sLabel && (
             <Box fontSize="sm" lineHeight="1rem" color="gray.600">
               {props.data.sLabel}
-              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.sStatus]} ml={1}>
+              <Badge colorPalette={TAXON_BADGE_COLORS[props.data.sStatus]} ml={1}>
                 {props.data.sStatus}
               </Badge>
-              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.sPosition]} ml={1}>
+              <Badge colorPalette={TAXON_BADGE_COLORS[props.data.sPosition]} ml={1}>
                 {props.data.sPosition}
               </Badge>
             </Box>

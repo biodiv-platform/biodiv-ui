@@ -1,19 +1,17 @@
 import "flatpickr/dist/themes/material_blue.css";
 
-import {
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Input
-} from "@chakra-ui/react";
+import { Box, Input } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import dayjs from "@utils/date";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import Flatpickr from "react-flatpickr";
 
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger
+} from "@/components/ui/accordion";
 interface MinMaxKey {
   min: any;
   max: any;
@@ -58,14 +56,13 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
   };
 
   return (
-    <AccordionItem>
-      <AccordionButton>
+    <AccordionItem value="time">
+      <AccordionItemTrigger>
         <Box flex={1} textAlign="left">
           {t(translateKey)}
         </Box>
-        <AccordionIcon />
-      </AccordionButton>
-      <AccordionPanel>
+      </AccordionItemTrigger>
+      <AccordionItemContent>
         <Flatpickr
           options={options}
           onChange={handleOnDateChange}
@@ -73,7 +70,7 @@ export default function DateRangeFilter({ filterKey, translateKey }: DateRangeFi
             <Input {...props} placeholder={t(translateKey)} defaultValue={defaultValue} ref={ref} />
           )}
         />
-      </AccordionPanel>
+      </AccordionItemContent>
     </AccordionItem>
   );
 }

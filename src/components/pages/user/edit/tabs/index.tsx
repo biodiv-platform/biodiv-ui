@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Tabs } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -13,30 +13,28 @@ export default function UserEditTabs({ user, isAdmin }) {
   return (
     <Box gridColumn={{ md: "2/5" }} mb={4}>
       <div className="white-box">
-        <Tabs isLazy={true}>
-          <TabList>
-            <Tab>👤 {t("user:about")}</Tab>
-            <Tab>🔑 {t("user:change_password")}</Tab>
-            <Tab>🔔 {t("user:notifications")}</Tab>
-            {isAdmin && <Tab>🛡️ {t("user:permissions")}</Tab>}
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <UserAboutTab user={user} isAdmin={isAdmin} />
-            </TabPanel>
-            <TabPanel>
-              <ChangePasswordTab userId={user.id} />
-            </TabPanel>
-            <TabPanel>
-              <NotificationsTab user={user} />
-            </TabPanel>
-            {isAdmin && (
-              <TabPanel>
-                <PermissionsTab user={user} />
-              </TabPanel>
-            )}
-          </TabPanels>
-        </Tabs>
+        <Tabs.Root lazyMount defaultValue="about" size={"lg"} p={4}>
+          <Tabs.List>
+            <Tabs.Trigger value="about">👤 {t("user:about")}</Tabs.Trigger>
+            <Tabs.Trigger value="password">🔑 {t("user:change_password")}</Tabs.Trigger>
+            <Tabs.Trigger value="notifications">🔔 {t("user:notifications")}</Tabs.Trigger>
+            {isAdmin && <Tabs.Trigger value="permision">🛡️ {t("user:permissions")}</Tabs.Trigger>}
+          </Tabs.List>
+          <Tabs.Content value="about">
+            <UserAboutTab user={user} isAdmin={isAdmin} />
+          </Tabs.Content>
+          <Tabs.Content value="password">
+            <ChangePasswordTab userId={user.id} />
+          </Tabs.Content>
+          <Tabs.Content value="notifications">
+            <NotificationsTab user={user} />
+          </Tabs.Content>
+          {isAdmin && (
+            <Tabs.Content value="permision">
+              <PermissionsTab user={user} />
+            </Tabs.Content>
+          )}
+        </Tabs.Root>
       </div>
     </Box>
   );

@@ -12,7 +12,7 @@ export interface UserProfileProps {
 export default function UserShowPageComponent({ user }: UserProfileProps) {
   return (
     <div className="container mt">
-      <SimpleGrid mt={12} columns={{ base: 1, md: 4 }} spacing={{ base: 0, md: 4 }}>
+      <SimpleGrid mt={12} columns={{ base: 1, md: 4 }} gap={{ base: 0, md: 4 }}>
         <UserInfoSidebar user={user} />
         <UserInfoTabs user={user} />
       </SimpleGrid>

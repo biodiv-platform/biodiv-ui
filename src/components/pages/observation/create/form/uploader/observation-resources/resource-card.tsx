@@ -1,10 +1,7 @@
-import { CloseButton, Flex, Image, Input } from "@chakra-ui/react";
-import Rating from "@components/@core/rating";
+import { CloseButton, Flex, Image, Input, RatingGroup } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
-import StarIcon from "@icons/star";
-import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { MENU_PORTAL_TARGET, RESOURCE_SIZE } from "@static/constants";
 import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
@@ -14,7 +11,7 @@ import {
   getYoutubeImage,
   RESOURCE_CTX
 } from "@utils/media";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Select from "react-select";
 
 import StatusIcon from "../statusicon";
@@ -76,6 +73,8 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
 
   const imageURL = useMemo(() => getImageThumb(resource, user?.id), []);
 
+  const [imageError, setImageError] = useState(false);
+
   return (
     <Flex
       className="fade"
@@ -93,8 +92,8 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
         <Image
           objectFit="cover"
           borderRadius="md"
-          fallbackSrc={getFallbackByMIME(resource.type)}
-          src={imageURL}
+          src={imageError ? getFallbackByMIME(resource.type) : imageURL}
+          onError={() => setImageError(true)}
         />
         <StatusIcon type={resource.status} />
       </ImageBox>
@@ -138,12 +137,17 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
           }
         />
         <Flex justify="center" fontSize="1.5rem" lineHeight="1rem">
-          <Rating
-            initialRating={resource.rating}
-            onChange={(v) => updateObservationAsset(index, resource.hashKey, "rating", v)}
-            emptySymbol={<StarOutlineIcon />}
-            fullSymbol={<StarIcon />}
-          />
+          <RatingGroup.Root
+            count={5}
+            defaultValue={resource.rating}
+            size="sm"
+            onValueChange={(e) =>
+              updateObservationAsset(index, resource.hashKey, "rating", e.value)
+            }
+          >
+            <RatingGroup.HiddenInput />
+            <RatingGroup.Control />
+          </RatingGroup.Root>
         </Flex>
       </Flex>
     </Flex>

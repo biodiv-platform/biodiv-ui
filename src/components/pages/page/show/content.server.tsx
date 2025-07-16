@@ -1,7 +1,8 @@
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { axGetOpenGraphMeta } from "@services/api.service";
 import { getLinkCard, preProcessContent } from "@utils/pages";
 import React, { useEffect } from "react";
+
+import { Prose } from "@/components/ui/prose";
 
 export function Content({ html }) {
   const getCards = async (selector, cardType) => {

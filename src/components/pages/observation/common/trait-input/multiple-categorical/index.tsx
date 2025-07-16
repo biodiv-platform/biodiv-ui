@@ -16,19 +16,19 @@ const MultipleCategorialTrait = ({
     onUpdate(value);
   }, [value]);
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue: defaultValue && defaultValue.map((o) => o.toString()),
-    onChange: (v) => setValue(v.map((i) => Number(i)))
+    onValueChange: (v) => setValue(v.map((i) => Number(i)))
   });
 
   return (
-    <SimpleGrid columns={[1, 1, 2, gridColumns]} spacing={4}>
+    <SimpleGrid columns={[1, 1, 2, gridColumns]} gap={4}>
       {values?.map((o) => (
         <TraitContent
           key={o.id}
           label={o.value}
           icon={o.icon}
-          {...getCheckboxProps({ value: String(o.traitValueId) })}
+          {...getItemProps({ value: String(o.traitValueId) })}
         />
       ))}
     </SimpleGrid>

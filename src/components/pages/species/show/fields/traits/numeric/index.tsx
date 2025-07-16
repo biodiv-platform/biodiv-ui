@@ -6,7 +6,7 @@ import NumericTraitEdit from "./numeric-edit";
 import NumericTraitShow from "./numeric-show";
 
 export default function NumericTrait({ trait, traitValues, setTraitValues, setShowCategory }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     traitValues.length > 0 && setShowCategory(true);
@@ -15,7 +15,7 @@ export default function NumericTrait({ trait, traitValues, setTraitValues, setSh
   return (
     <div>
       <TraitHeader trait={trait} onOpen={onOpen} />
-      {isOpen ? (
+      {open ? (
         <NumericTraitEdit
           traitId={trait.traitId}
           initialValue={traitValues}

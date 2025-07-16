@@ -10,7 +10,7 @@ import { TaxonAttributesTable } from "./attributes-table";
 
 export function TaxonAttributesTab() {
   const { t } = useTranslation();
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
 
   const handleOnEdit = async () => {
     await waitForAuth();
@@ -22,15 +22,15 @@ export function TaxonAttributesTab() {
       <Button
         mb={4}
         size="sm"
-        colorScheme="blue"
+        colorPalette="blue"
         variant="outline"
         hidden={!hasAccess([Role.Admin])}
-        leftIcon={<EditIcon />}
         onClick={handleOnEdit}
       >
+        <EditIcon />
         {t("common:edit")}
       </Button>
-      <div>{isOpen ? <TaxonAttributesForm onClose={onClose} /> : <TaxonAttributesTable />}</div>
+      <div>{open ? <TaxonAttributesForm onClose={onClose} /> : <TaxonAttributesTable />}</div>
     </Box>
   );
 }

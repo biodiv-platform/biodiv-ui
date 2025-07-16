@@ -1,4 +1,3 @@
-import { InfoIcon } from "@chakra-ui/icons";
 import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
@@ -6,13 +5,15 @@ import ScientificName from "@components/@core/scientific-name";
 import Tooltip from "@components/@core/tooltip";
 import CheckIcon from "@icons/check";
 import { ShowData, SpeciesGroup } from "@interfaces/observation";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { axQueryTagsByText, axUpdateObservationTags } from "@services/observation.service";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { covertToSentenceCase, getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuInfo } from "react-icons/lu";
+
+import { Prose } from "@/components/ui/prose";
 
 import { ResponsiveInfo } from "./responsive-info";
 import SpeciesGroupBox from "./species-group";
@@ -28,13 +29,13 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
   return (
     <Box p={4} mb={4} className="white-box">
-      <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
+      <SimpleGrid columns={[1, 1, 5, 5]} gap={2}>
         <ResponsiveInfo title="form:name">
           <ScientificName value={o.recoIbp?.scientificName || t("common:unknown")} />
           {o.recoIbp?.speciesId && (
             <LocalLink href={`/species/show/${o.recoIbp.speciesId}`}>
               <BlueLink ml={2}>
-                <InfoIcon /> {t("observation:species_page")}
+                <LuInfo /> {t("observation:species_page")}
               </BlueLink>
             </LocalLink>
           )}
@@ -54,22 +55,23 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         <ResponsiveInfo title="form:place">{o.observation?.placeName}</ResponsiveInfo>
 
         <ResponsiveInfo title="common:observed_on">
-          <Stack isInline={true}>
+          <Stack direction={"row"}>
             <Text mr={1}>
               {o.observation?.fromDate
                 ? formatDateReadableFromUTC(o.observation?.fromDate)
                 : t("common:unknown")}
             </Text>
             {o.observation?.dateAccuracy === DATE_ACCURACY.ACCURATE && (
-              <Tooltip title={t("observation:accurate")} shouldWrapChildren={true} hasArrow={true}>
-                <CheckIcon color="green.500" />
+              // shouldWrapChildren={true}
+              <Tooltip title={t("observation:accurate")} showArrow={true}>
+                <CheckIcon color="green.500" size={"sm"} />
               </Tooltip>
             )}
           </Stack>
         </ResponsiveInfo>
 
         <ResponsiveInfo title="observation:created_on">
-          <Stack isInline={true}>
+          <Stack direction={"row"}>
             <Text mr={1}>{formatDateReadableFromUTC(o.observation?.createdOn)}</Text>
           </Stack>
         </ResponsiveInfo>

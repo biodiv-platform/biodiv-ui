@@ -1,4 +1,3 @@
-import { ExternalLinkIcon } from "@chakra-ui/icons";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import BlueLink from "@components/@core/blue-link";
 import { PageHeading } from "@components/@core/layout";
@@ -10,6 +9,7 @@ import { formatDateReadableFromUTC } from "@utils/date";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuExternalLink } from "react-icons/lu";
 
 export default function Header({ datatable, authorName }) {
   const { t } = useTranslation();
@@ -33,8 +33,8 @@ export default function Header({ datatable, authorName }) {
         }}
       >
         <BlueLink>
-          <Tooltip title={t("datatable:list.all")} placement="bottom">
-            <ExternalLinkIcon />
+          <Tooltip title={t("datatable:list.all")} positioning={{ placement: "bottom" }}>
+            <LuExternalLink />
           </Tooltip>
         </BlueLink>
       </LocalLink>

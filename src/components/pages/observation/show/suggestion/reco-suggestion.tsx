@@ -96,7 +96,7 @@ export default function RecoSuggestion({
               px={4}
               py={2}
             >
-              <Stack flexGrow={1} isInline={true} justifyContent="space-between">
+              <Stack flexGrow={1} direction={"row"} justifyContent="space-between">
                 <Box minH="3rem">
                   {reco.speciesId ? (
                     <BlueLink
@@ -115,29 +115,33 @@ export default function RecoSuggestion({
                     {reco.commonName}
                   </Text>
                 </Box>
-                <AvatarGroup size="sm" max={2}>
-                  {reco.userList?.map((u) => (
-                    <Avatar
-                      key={u.id}
-                      name={u.name}
-                      src={getUserImage(u.profilePic, u.name)}
-                      title={u.name}
-                    />
+                {/* max={2} */}
+                <AvatarGroup size="sm" stacking="first-on-top">
+                  {reco.userList?.slice(0, 2).map((u) => (
+                    <Avatar.Root key={u.id}>
+                      <Avatar.Fallback name={u.name} />
+                      <Avatar.Image src={getUserImage(u.profilePic, u.name)} />
+                    </Avatar.Root>
                   ))}
+                  {reco.userList && reco.userList.length > 2 && (
+                    <Avatar.Root>
+                      <Avatar.Fallback>+{reco.userList.length - 2}</Avatar.Fallback>
+                    </Avatar.Root>
+                  )}
                 </AvatarGroup>
               </Stack>
-              <Stack isInline={true} minW="210px" flexShrink={0} className="reco-actions">
+              <Stack direction={"row"} minW="210px" flexShrink={0} className="reco-actions">
                 {!isLocked && (
                   <Button
                     variant="outline"
                     size="sm"
                     minW="100px"
-                    colorScheme={canAccept ? "red" : "green"}
-                    leftIcon={canAccept ? <CrossIcon /> : <CheckIcon />}
+                    colorPalette={canAccept ? "red" : "green"}
                     onClick={() =>
                       recoVoteAction(reco, canAccept ? RecoAction.Remove : RecoAction.Agree)
                     }
                   >
+                    {canAccept ? <CrossIcon /> : <CheckIcon />}
                     {t(canAccept ? "observation:id.remove" : "observation:id.agree")}
                   </Button>
                 )}
@@ -149,13 +153,13 @@ export default function RecoSuggestion({
                       minW="100px"
                       size="sm"
                       variant="outline"
-                      colorScheme={isLocked ? "blue" : "red"}
+                      colorPalette={isLocked ? "blue" : "red"}
                       ml={2}
-                      leftIcon={isLocked ? <UnlockIcon /> : <LockIcon />}
                       onClick={() =>
                         recoVoteAction(reco, isLocked ? RecoAction.Unlock : RecoAction.Validate)
                       }
                     >
+                      {isLocked ? <UnlockIcon /> : <LockIcon />}
                       {t(isLocked ? "observation:id.unlock" : "observation:id.validate")}
                     </Button>
                   )}

@@ -35,12 +35,12 @@ const CheckboxLabel = styled.label`
 `;
 
 const Checkbox = (props: any) => {
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getControlProps, getHiddenInputProps } = useCheckbox(props);
 
   return (
-    <Tooltip label={props.label} hasArrow={true} placement="top">
+    <Tooltip content={props.label} showArrow={true} positioning={{ placement: "top" }}>
       <Box
-        {...getCheckboxProps()}
+        {...getControlProps()}
         as={CheckboxLabel}
         borderRadius="md"
         aria-checked={props.isChecked}
@@ -53,13 +53,12 @@ const Checkbox = (props: any) => {
         }}
         style={undefined}
       >
-        <input {...getInputProps()} required={false} />
+        <input {...getHiddenInputProps()} required={false} />
         <Image
           boxSize="2.2rem"
           objectFit="contain"
           src={getLocalIcon(props.label)}
           alt={props.label}
-          ignoreFallback={true}
         />
         <div className="badge">{toHumanString(props.stat || 0)}</div>
       </Box>

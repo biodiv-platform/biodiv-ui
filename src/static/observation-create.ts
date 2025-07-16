@@ -137,11 +137,11 @@ export const DEFAULT_TOAST: any = {
   LOADING: {
     variant: "subtle",
     position: "top",
-    status: "loading",
+    type: "loading",
     duration: 60_000
   },
   SUCCESS: {
     variant: "subtle",
-    status: "success"
+    type: "success",
   }
 };

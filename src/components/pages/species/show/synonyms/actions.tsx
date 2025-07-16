@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, IconButton, Td, Tr } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, IconButton, Table } from "@chakra-ui/react";
 import ScientificName from "@components/@core/scientific-name";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
@@ -13,19 +13,14 @@ export function SynonymAdd() {
   const handleOnAdd = () => emit(SPECIES_SYNONYM_ADD, {});
 
   return (
-    <Tr>
-      <Td colSpan={2}>
-        <Button
-          variant="outline"
-          size="xs"
-          colorScheme="green"
-          leftIcon={<AddIcon />}
-          onClick={handleOnAdd}
-        >
+    <Table.Row>
+      <Table.Cell colSpan={2}>
+        <Button variant="outline" size="xs" colorPalette="green" onClick={handleOnAdd}>
+          <AddIcon />
           {t("common:add")}
         </Button>
-      </Td>
-    </Tr>
+      </Table.Cell>
+    </Table.Row>
   );
 }
 
@@ -40,21 +35,23 @@ export function SynonymEditButtons({ synonym }) {
       <Box>
         <ScientificName value={synonym.italicisedForm} />
       </Box>
-      <ButtonGroup spacing={0} variant="link">
+      <ButtonGroup gap={0} variant="plain">
         <IconButton
-          colorScheme="blue"
-          icon={<EditIcon />}
+          colorPalette="blue"
           onClick={handleOnEdit}
           aria-label={t("common:edit")}
           title={t("common:edit")}
-        />
+        >
+          <EditIcon />
+        </IconButton>
         <IconButton
-          colorScheme="red"
-          icon={<DeleteIcon />}
+          colorPalette="red"
           onClick={handleOnDelete}
           aria-label={t("common:delete")}
           title={t("common:delete")}
-        />
+        >
+          <DeleteIcon />
+        </IconButton>
       </ButtonGroup>
     </Flex>
   );

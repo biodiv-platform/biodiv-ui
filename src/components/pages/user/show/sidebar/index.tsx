@@ -1,4 +1,4 @@
-import { AspectRatio, Avatar, Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
 import { Role } from "@interfaces/custom";
@@ -6,6 +6,8 @@ import { adminOrAuthor, hasAccess } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 import { UserProfileProps } from "..";
 import DeleteAccount from "./delete-account";
@@ -39,7 +41,7 @@ export default function UserInfoSidebar({ user }: UserProfileProps) {
         </Box>
       </Flex>
       <LocalLink href={`/user/edit/${user.id}`}>
-        <Button as="a" w="full" colorScheme="blue" mb={4} hidden={!canEdit}>
+        <Button as="a" w="full" colorPalette="blue" mb={4} hidden={!canEdit}>
           {t("user:edit_profile")}
         </Button>
       </LocalLink>

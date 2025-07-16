@@ -42,7 +42,7 @@ export default function SavingObservation() {
       <Saving />
       {status === ObservationStatus.Done && (
         <>
-          <CheckIcon className="fadeInUp" mt={6} fontSize="3rem" color="green.500" />
+          <CheckIcon className="fadeInUp" mt={6} fontSize="3rem" color="green.500" size={"2xl"} />
           <Heading className="fadeInUp delay-1" my={4}>
             {t("observation:success")}
           </Heading>

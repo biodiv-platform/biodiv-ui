@@ -1,11 +1,4 @@
-import {
-  Button,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
@@ -21,6 +14,14 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import {
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader
+} from "@/components/ui/dialog";
 
 export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
   const { t } = useTranslation();
@@ -67,12 +68,12 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
   };
 
   return (
-    <ModalContent>
+    <DialogContent>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <ModalHeader>{isAdmin ? t("taxon:grant.title") : t("taxon:request.title")}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+          <DialogHeader>{isAdmin ? t("taxon:grant.title") : t("taxon:request.title")}</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody>
             <SelectInputField
               name="role"
               label={t("taxon:role")}
@@ -95,17 +96,18 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
                 mb={0}
               />
             )}
-          </ModalBody>
-          <ModalFooter>
+          </DialogBody>
+          <DialogFooter>
             <SubmitButton leftIcon={<CheckIcon />}>
               {isAdmin ? t("taxon:grant.button") : t("taxon:request.button")}
             </SubmitButton>
-            <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
+            <Button ml={4} onClick={onClose}>
+              <CrossIcon />
               {t("common:cancel")}
             </Button>
-          </ModalFooter>
+          </DialogFooter>
         </form>
       </FormProvider>
-    </ModalContent>
+    </DialogContent>
   );
 }

@@ -71,7 +71,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [hasUgAccess, setHasUgAdminAccess] = useState<boolean>(false);
   const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
   const [selectAll, setSelectAll] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
   const [cropObservationData, setCropObservationData] = useState();
   const [canCropObservation, setCanCropObservation] = useState();
   const [allMedia, setAllMedia] = useState(
@@ -85,7 +85,7 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
     setCropObservationData(response.data);
   };
 
-  const { getCheckboxProps, value: bulkObservationIds, setValue } = useCheckboxGroup();
+  const { getItemProps, value: bulkObservationIds, setValue } = useCheckboxGroup();
 
   const handleBulkCheckbox = (actionType: string) => {
     switch (actionType) {
@@ -240,14 +240,14 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         nextPage,
         resetFilter,
         loggedInUserGroups,
-        getCheckboxProps,
+        getCheckboxProps: getItemProps,
         selectAll,
         setSelectAll,
         bulkObservationIds,
         handleBulkCheckbox,
         authorizedUserGroupList,
         hasUgAccess,
-        isOpen,
+        isOpen: open,
         onOpen,
         onClose,
         // Crop observation data

@@ -92,26 +92,26 @@ export default function AudioRecorder({
         <SecondsToMinutes totalSeconds={time} />
       </Box>
       <Button
-        isDisabled={status === "RUNNING"}
-        leftIcon={<MicrophoneIcon />}
+        disabled={status === "RUNNING"}
         mr={4}
         mt={4}
         onClick={startRecording}
         type="button"
         variant="solid"
-        colorScheme="blue"
+        colorPalette="blue"
       >
+        <MicrophoneIcon />
         {t("form:audio.start")}
       </Button>
       <Button
-        isDisabled={status !== "RUNNING"}
-        leftIcon={<StopIcon />}
+        disabled={status !== "RUNNING"}
         mt={4}
         onClick={stopRecording}
         type="button"
         variant="solid"
-        colorScheme="red"
+        colorPalette="red"
       >
+        <StopIcon />
         {t("form:audio.stop")}
       </Button>
     </div>

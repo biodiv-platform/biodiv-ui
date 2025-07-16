@@ -4,15 +4,7 @@ import {
   Grid,
   GridItem,
   IconButton,
-  ListItem,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  OrderedList,
+  List,
   SimpleGrid,
   useDisclosure
 } from "@chakra-ui/react";
@@ -25,7 +17,6 @@ import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
-import EditIcon from "@icons/edit";
 import { Reference } from "@interfaces/species";
 import {
   axCreateSpeciesReferences,
@@ -36,7 +27,18 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuPencil } from "react-icons/lu";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import { SpeciesActivity } from "./activity";
 import SpeciesCommonNamesContainer from "./common-names";
@@ -59,8 +61,8 @@ export default function SpeciesShowPageComponent({
 }) {
   console.debug("Species", initialSpecies, permissions);
   const { languageId } = useGlobalState();
-  const { isOpen: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
-  const { isOpen: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure();
+  const { open: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
+  const { open: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure();
   const [selectedReference, setSelectedReference] = useState<Reference | null>(null);
   const [species, setSpecies] = useState(initialSpecies);
 
@@ -167,7 +169,7 @@ export default function SpeciesShowPageComponent({
   return (
     <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
       <div className="container mt">
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ md: 4 }}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ md: 4 }}>
           <SpeciesHeader />
           <SpeciesGallery />
         </SimpleGrid>
@@ -182,78 +184,65 @@ export default function SpeciesShowPageComponent({
             <ToggleablePanel id="123" icon="📚" title="References">
               <Box margin={3}>
                 {permissions.isContributor && (
-                  <Button
-                    variant="outline"
-                    size="xs"
-                    colorScheme="green"
-                    leftIcon={<AddIcon />}
-                    onClick={handleAddClick}
-                  >
+                  <Button variant="outline" size="xs" colorPalette="green" onClick={handleAddClick}>
+                    <AddIcon />
                     {t("common:add")}
                   </Button>
                 )}
 
                 {/* Add Reference Modal */}
-                <Modal isOpen={isAddOpen} onClose={onAddClose} size="6xl">
-                  <ModalOverlay />
-                  <ModalContent>
+                <DialogRoot open={isAddOpen} onOpenChange={onAddClose} size="cover" unmountOnExit>
+                  <DialogBackdrop />
+                  <DialogContent>
                     <FormProvider {...formRef}>
                       <form onSubmit={formRef.handleSubmit(handleSave)}>
-                        <ModalHeader>Add References</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
+                        <DialogHeader>Add References</DialogHeader>
+                        <DialogCloseTrigger />
+                        <DialogBody>
                           <CommonReferencesField
                             name="references"
                             label={t("species:references")}
                             isCommonRefAdd={true}
                           />
-                        </ModalBody>
-                        <ModalFooter>
+                        </DialogBody>
+                        <DialogFooter>
                           <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
-                          <Button
-                            ml={4}
-                            leftIcon={<CrossIcon />}
-                            onClick={onAddClose}
-                            type="button"
-                          >
+                          <Button ml={4} onClick={onAddClose} type="button" variant={"subtle"}>
+                            <CrossIcon />
                             {t("common:cancel")}
                           </Button>
-                        </ModalFooter>
+                        </DialogFooter>
                       </form>
                     </FormProvider>
-                  </ModalContent>
-                </Modal>
+                  </DialogContent>
+                </DialogRoot>
 
                 {/* Edit Reference Modal */}
-                <Modal isOpen={isEditOpen} onClose={onEditClose} size="6xl">
-                  <ModalOverlay />
-                  <ModalContent>
+                <DialogRoot open={isEditOpen} onOpenChange={onEditClose} size="cover">
+                  <DialogBackdrop />
+                  <DialogContent>
                     <FormProvider {...formRef}>
                       <form onSubmit={formRef.handleSubmit(handleSave)}>
-                        <ModalHeader>Edit Reference</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
+                        <DialogHeader>Edit Reference</DialogHeader>
+                        <DialogCloseTrigger />
+                        <DialogBody>
                           <CommonReferencesField
                             name="references"
                             label={t("species:references")}
                             isCommonRefAdd={false}
                           />
-                        </ModalBody>
-                        <ModalFooter>
+                        </DialogBody>
+                        <DialogFooter>
                           <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
-                          <Button
-                            ml={4}
-                            leftIcon={<CrossIcon />}
-                            onClick={onEditClose}
-                            type="button"
-                          >
+                          <Button ml={4} onClick={onEditClose} type="button" variant={"subtle"}>
+                            <CrossIcon />
                             {t("common:cancel")}
                           </Button>
-                        </ModalFooter>
+                        </DialogFooter>
                       </form>
                     </FormProvider>
-                  </ModalContent>
-                </Modal>
+                  </DialogContent>
+                </DialogRoot>
               </Box>
 
               {/* Field References Section */}
@@ -263,13 +252,13 @@ export default function SpeciesShowPageComponent({
                     <Box fontWeight={600} fontSize="md" mb={1}>
                       {path}
                     </Box>
-                    <OrderedList>
+                    <List.Root as="ol" pl={2}>
                       {references.map(([title, url], index) => (
-                        <ListItem key={index}>
+                        <List.Item key={index}>
                           {title} {url && <ExternalBlueLink href={url} />}
-                        </ListItem>
+                        </List.Item>
                       ))}
-                    </OrderedList>
+                    </List.Root>
                   </Box>
                 ))}
               </Box>
@@ -281,21 +270,21 @@ export default function SpeciesShowPageComponent({
                     Common references
                   </Box>
                   <Box>
-                    <OrderedList>
+                    <List.Root as="ol" pl={2}>
                       {commonReferences.map((r: Reference) => (
                         <Box key={r.id}>
                           {!r.isDeleted && (
                             <ReferenceListItem reference={r} permissions={permissions}>
                               <Box display="inline-flex" ml={2}>
                                 <IconButton
-                                  colorScheme="blue"
-                                  variant="unstyled"
-                                  size="s"
-                                  icon={<EditIcon />}
+                                  variant="plain"
+                                  // size="s"
                                   onClick={() => handleEditClick(r)}
                                   aria-label={t("common:edit")}
                                   title={t("common:edit")}
-                                />
+                                >
+                                  <LuPencil />
+                                </IconButton>
                                 <DeleteActionButton
                                   observationId={r.id}
                                   title="Delete reference"
@@ -318,7 +307,7 @@ export default function SpeciesShowPageComponent({
                           )}
                         </Box>
                       ))}
-                    </OrderedList>
+                    </List.Root>
                   </Box>
                 </Box>
               </Box>

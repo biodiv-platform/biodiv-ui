@@ -1,35 +1,7 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  IconButton,
-  Link,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  Tab,
-  TabList,
-  Tabs,
-  Tooltip,
-  useDisclosure,
-  VStack
-} from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Link, Tabs, useDisclosure, VStack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
-import AddIcon from "@icons/add";
 import TranslateIcon from "@icons/translate";
 import {
   axCreateSpeciesField,
@@ -40,6 +12,26 @@ import { axGetLangList } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+import { LuExternalLink, LuPlus } from "react-icons/lu";
+
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot
+} from "@/components/ui/accordion";
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { Field } from "@/components/ui/field";
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { Tooltip } from "@/components/ui/tooltip";
 
 import AddFieldModal from "./add-field-modal";
 import TranslateFieldModal from "./translate-field-modal";
@@ -90,24 +82,24 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   const [isLoadingLanguages, setIsLoadingLanguages] = useState(false);
 
   const [modalLanguage, setModalLanguage] = useState<string>("");
-  const { isOpen, onClose } = useDisclosure();
+  const { open, onClose } = useDisclosure();
 
   const [tabLanguage, setTabLanguage] = useState<TabLanguage | null>(null);
 
   const {
-    isOpen: isFieldModalOpen,
+    open: isFieldModalOpen,
     onOpen: onFieldModalOpen,
     onClose: onFieldModalClose
   } = useDisclosure();
 
   const {
-    isOpen: isConceptModalOpen,
+    open: isConceptModalOpen,
     onOpen: onConceptModalOpen,
     onClose: onConceptModalClose
   } = useDisclosure();
 
   const {
-    isOpen: isTranslateModalOpen,
+    open: isTranslateModalOpen,
     onOpen: onTranslateModalOpen,
     onClose: onTranslateModalClose
   } = useDisclosure();
@@ -115,25 +107,48 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
   const [availableLanguages, setAvailableLanguages] = useState(fieldLanguages || []);
 
   const { languageId } = useGlobalState();
-  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  // const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  // // Reset tab when field languages change or language ID changes
+  // useEffect(() => {
+  //   if (fieldLanguages?.length > 0) {
+  //     // Convert both to strings to ensure reliable comparison
+  //     const matchingLangIndex = fieldLanguages.findIndex(
+  //       (lang) => String(lang.id) === String(languageId)
+  //     );
+
+  //     if (matchingLangIndex !== -1) {
+  //       setSelectedTabIndex(matchingLangIndex);
+  //       setTabLanguage(fieldLanguages[matchingLangIndex]);
+  //     } else {
+  //       // Default to English or first tab
+  //       const englishIndex = fieldLanguages.findIndex((lang) => lang.name === "English");
+  //       const defaultIndex = englishIndex !== -1 ? englishIndex : 0;
+  //       setSelectedTabIndex(defaultIndex);
+  //       setTabLanguage(fieldLanguages[defaultIndex]);
+  //     }
+  //   }
+  // }, [fieldLanguages, languageId]);
+
+  const [selectedTabValue, setSelectedTabValue] = useState("0"); // Default to string "0"
 
   // Reset tab when field languages change or language ID changes
   useEffect(() => {
     if (fieldLanguages?.length > 0) {
-      // Convert both to strings to ensure reliable comparison
-      const matchingLangIndex = fieldLanguages.findIndex(
-        (lang) => String(lang.id) === String(languageId)
-      );
+      // Find the language that matches the current languageId
+      const matchingLang = fieldLanguages.find((lang) => String(lang.id) === String(languageId));
 
-      if (matchingLangIndex !== -1) {
-        setSelectedTabIndex(matchingLangIndex);
-        setTabLanguage(fieldLanguages[matchingLangIndex]);
+      if (matchingLang) {
+        const matchingValue = String(fieldLanguages.indexOf(matchingLang));
+        setSelectedTabValue(matchingValue);
+        setTabLanguage(matchingLang);
       } else {
         // Default to English or first tab
-        const englishIndex = fieldLanguages.findIndex((lang) => lang.name === "English");
-        const defaultIndex = englishIndex !== -1 ? englishIndex : 0;
-        setSelectedTabIndex(defaultIndex);
-        setTabLanguage(fieldLanguages[defaultIndex]);
+        const englishLang = fieldLanguages.find((lang) => lang.name === "English");
+        const defaultLang = englishLang || fieldLanguages[0];
+        const defaultValue = String(fieldLanguages.indexOf(defaultLang));
+        setSelectedTabValue(defaultValue);
+        setTabLanguage(defaultLang);
       }
     }
   }, [fieldLanguages, languageId]);
@@ -340,7 +355,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
     }
   };
 
-  const handleModalLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleModalLanguageChange = (e) => {
     setModalLanguage(e.target.value);
   };
 
@@ -505,33 +520,36 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
       <PageHeading>🧬 {t("admin:species_fields.title")}</PageHeading>
 
       <Flex justifyContent="flex-end" mb={4}>
-        <Button leftIcon={<AddIcon />} colorScheme="blue" onClick={onConceptModalOpen}>
+        <Button colorScheme="blue" onClick={onConceptModalOpen}>
+          <LuPlus />
           {t("admin:species_fields.add_concept")}
         </Button>
       </Flex>
-      <Tabs
-        variant="unstyled"
+      <Tabs.Root
+        // variant="unstyled"
         mb={6}
         rounded="md"
         overflowX="auto"
-        index={selectedTabIndex}
-        onChange={(index) => {
-          setSelectedTabIndex(index);
-          setTabLanguage(fieldLanguages[index]);
-        }}
+        value={selectedTabValue}
+        // index={selectedTabIndex}
+        // onChange={(index) => {
+        //   setSelectedTabIndex(index);
+        //   setTabLanguage(fieldLanguages[index]);
+        // }}
       >
-        <TabList bg="gray.100" rounded="md">
+        <Tabs.List bg="gray.100" rounded="md">
           {fieldLanguages.map((fieldlLanguage) => (
-            <Tab
+            <Tabs.Trigger
               key={fieldlLanguage.id}
+              value={fieldlLanguage.id}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >
               {/* {languages.find((lang) => lang.code === langCode)?.label || langCode} */}
               {fieldlLanguage.name}
-            </Tab>
+            </Tabs.Trigger>
           ))}
-        </TabList>
+        </Tabs.List>
 
         {/* <TabPanels>
           {activeLanguages.map((langCode) => (
@@ -540,14 +558,14 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
             </TabPanel>
           ))}
         </TabPanels> */}
-      </Tabs>
+      </Tabs.Root>
 
-      <Accordion allowMultiple className="white-box">
+      <AccordionRoot multiple className="white-box">
         {speciesFields.map((concept) => (
-          <AccordionItem key={concept.id}>
+          <AccordionItem key={concept.id} value={concept.id.toString()}>
             <h2>
-              <AccordionButton>
-                <VStack spacing={1} alignItems="flex-start" width="full">
+              <AccordionItemTrigger>
+                <VStack gap={1} alignItems="flex-start" width="full">
                   <Box flex="1" textAlign="left" fontWeight="bold">
                     {concept.name}
                   </Box>
@@ -562,52 +580,61 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                       <span style={{ fontWeight: "medium" }}>URL:</span>{" "}
                       <Link
                         href={concept.urlIdentifier}
-                        isExternal
                         color="blue.500"
                         textDecoration="underline"
                       >
                         {concept.urlIdentifier}
+                        <LuExternalLink />
                       </Link>
                     </Box>
                   )}
                 </VStack>
 
                 <Flex mr={2}>
-                  <Tooltip label={t("admin:species_fields.translate")} hasArrow placement="top">
+                  <Tooltip
+                    content={t("admin:species_fields.translate")}
+                    showArrow
+                    positioning={{ placement: "top" }}
+                  >
                     <IconButton
                       aria-label="Translate concept"
-                      icon={<TranslateIcon />}
                       size="sm"
                       variant="ghost"
                       onClick={(e) => {
                         e.stopPropagation();
                         openTranslateModal(concept);
                       }}
-                    />
+                    >
+                      <TranslateIcon />
+                    </IconButton>
                   </Tooltip>
-                  <Tooltip label={t("admin:species_fields.add_category")} hasArrow placement="top">
+                  <Tooltip
+                    content={t("admin:species_fields.add_category")}
+                    showArrow
+                    positioning={{ placement: "top" }}
+                  >
                     <IconButton
                       aria-label="Add category"
-                      icon={<AddIcon />}
                       size="sm"
                       variant="ghost"
                       onClick={(e) => {
                         e.stopPropagation();
                         openAddFieldModal(concept);
                       }}
-                    />
+                    >
+                      <LuPlus />
+                    </IconButton>
                   </Tooltip>
                 </Flex>
-                <AccordionIcon />
-              </AccordionButton>
+              </AccordionItemTrigger>
             </h2>
-            <AccordionPanel pb={4}>
-              <Accordion allowMultiple>
+            <AccordionItemContent pb={4}>
+              <AccordionRoot multiple>
                 {(concept.children || []).map((category) => (
-                  <AccordionItem key={category.id}>
+                  <AccordionItem key={category.id} value={category.id.toString()}>
                     <h3>
-                      <AccordionButton>
-                        <VStack spacing={1} alignItems="flex-start" width="full">
+                      <AccordionItemTrigger>
+                        <VStack gap={1} alignItems="flex-start" width="full">
                           <Box flex="1" textAlign="left" pl={4}>
                             {category.name}
                           </Box>
@@ -622,53 +649,54 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                               <span style={{ fontWeight: "medium" }}>URL:</span>{" "}
                               <Link
                                 href={category.urlIdentifier}
-                                isExternal
                                 color="blue.500"
                                 textDecoration="underline"
                               >
                                 {category.urlIdentifier}
+                                <LuExternalLink />
                               </Link>
                             </Box>
                           )}
                         </VStack>
                         <Flex mr={2}>
                           <Tooltip
-                            label={t("admin:species_fields.translate")}
-                            hasArrow
-                            placement="top"
+                            content={t("admin:species_fields.translate")}
+                            showArrow
+                            positioning={{ placement: "top" }}
                           >
                             <IconButton
                               aria-label="Translate category"
-                              icon={<TranslateIcon />}
                               size="sm"
                               variant="ghost"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 openTranslateModal(category);
                               }}
-                            />
+                            >
+                              <TranslateIcon />
+                            </IconButton>
                           </Tooltip>
                           <Tooltip
-                            label={t("admin:species_fields.add_subcategory")}
-                            hasArrow
-                            placement="top"
+                            content={t("admin:species_fields.add_subcategory")}
+                            showArrow
+                            positioning={{ placement: "top" }}
                           >
                             <IconButton
                               aria-label="Add subcategory"
-                              icon={<AddIcon />}
                               size="sm"
                               variant="ghost"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 openAddFieldModal(concept, category);
                               }}
-                            />
+                            >
+                              <LuPlus />
+                            </IconButton>
                           </Tooltip>
                         </Flex>
-                        <AccordionIcon />
-                      </AccordionButton>
+                      </AccordionItemTrigger>
                     </h3>
-                    <AccordionPanel pb={4}>
+                    <AccordionItemContent pb={4}>
                       {category.children && category.children.length > 0 ? (
                         <Box pl={8}>
                           {category.children.map((subcategory) => (
@@ -679,7 +707,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                               borderBottom="1px solid"
                               borderColor="gray.200"
                             >
-                              <VStack spacing={1} alignItems="flex-start" width="full">
+                              <VStack gap={1} alignItems="flex-start" width="full">
                                 <Box>{subcategory.name}</Box>
                                 {subcategory.description && (
                                   <Box fontSize="sm" color="gray.600" textAlign="left">
@@ -692,28 +720,29 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                                     <span style={{ fontWeight: "medium" }}>URL:</span>{" "}
                                     <Link
                                       href={subcategory.urlIdentifier}
-                                      isExternal
                                       color="blue.500"
                                       textDecoration="underline"
                                     >
                                       {subcategory.urlIdentifier}
+                                      <LuExternalLink />
                                     </Link>
                                   </Box>
                                 )}
                               </VStack>
                               <Flex>
                                 <Tooltip
-                                  label={t("admin:species_fields.translate")}
-                                  hasArrow
-                                  placement="top"
+                                  content={t("admin:species_fields.translate")}
+                                  showArrow
+                                  positioning={{ placement: "top" }}
                                 >
                                   <IconButton
                                     aria-label="Translate subcategory"
-                                    icon={<TranslateIcon />}
                                     size="sm"
                                     variant="ghost"
                                     onClick={() => openTranslateModal(subcategory)}
-                                  />
+                                  >
+                                    <TranslateIcon />
+                                  </IconButton>
                                 </Tooltip>
                               </Flex>
                             </Flex>
@@ -724,7 +753,7 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                           {t("admin:species_fields.no_subcategories")}
                         </Box>
                       )}
-                    </AccordionPanel>
+                    </AccordionItemContent>
                   </AccordionItem>
                 ))}
                 {concept.children.length === 0 && (
@@ -732,11 +761,11 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
                     {t("admin:species_fields.no_categories")}
                   </Box>
                 )}
-              </Accordion>
-            </AccordionPanel>
+              </AccordionRoot>
+            </AccordionItemContent>
           </AccordionItem>
         ))}
-      </Accordion>
+      </AccordionRoot>
 
       {/* Modal for adding a new field (category or subcategory) */}
       <AddFieldModal
@@ -765,40 +794,44 @@ export default function SpeciesFieldsAdmin({ fieldLanguages }) {
       />
 
       {/* Language Selection Modal */}
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{t("admin:species_fields.add_translation")}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <FormControl isRequired>
-              <FormLabel color="red.500">{t("admin:species_fields.language")} *</FormLabel>
-              <Select
-                placeholder={isLoadingLanguages ? "Loading languages..." : "Select Language"}
-                value={modalLanguage}
+      <DialogRoot open={open} onOpenChange={onClose}>
+        <DialogBackdrop />
+        <DialogContent>
+          <DialogHeader>{t("admin:species_fields.add_translation")}</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody>
+            <Field>
+              <Field required color="red.500">
+                {t("admin:species_fields.language")} *
+              </Field>
+              <NativeSelectRoot
+                // placeholder={isLoadingLanguages ? "Loading languages..." : "Select Language"}
+                defaultValue={modalLanguage}
                 onChange={handleModalLanguageChange}
-                isDisabled={isLoadingLanguages}
+                disabled={isLoadingLanguages}
               >
-                {languages
-                  .filter((lang) => !activeLanguages.includes(lang.code))
-                  .map((lang) => (
-                    <option key={lang.code} value={lang.code}>
-                      {lang.label}
-                    </option>
-                  ))}
-              </Select>
-            </FormControl>
-          </ModalBody>
-          <ModalFooter>
+                <NativeSelectField>
+                  {languages
+                    .filter((lang) => !activeLanguages.includes(lang.code))
+                    .map((lang) => (
+                      <option key={lang.code} value={lang.code}>
+                        {lang.label}
+                      </option>
+                    ))}
+                </NativeSelectField>
+              </NativeSelectRoot>
+            </Field>
+          </DialogBody>
+          <DialogFooter>
             <Button variant="ghost" mr={3} onClick={onClose}>
               {t("common:cancel")}
             </Button>
-            <Button colorScheme="blue" onClick={handleSelectLanguage} isDisabled={!modalLanguage}>
+            <Button colorScheme="blue" onClick={handleSelectLanguage} disabled={!modalLanguage}>
               Select
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </DialogRoot>
     </Box>
   );
 }

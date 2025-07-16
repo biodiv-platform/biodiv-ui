@@ -2,19 +2,9 @@ import {
   Box,
   Button,
   Flex,
-  FormControl,
-  FormLabel,
   GridItem,
   Heading,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   SimpleGrid,
-  Tab,
-  TabList,
   Tabs,
   useDisclosure
 } from "@chakra-ui/react";
@@ -42,6 +32,16 @@ import { useDropzone } from "react-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
 import Select from "react-select";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { Field } from "@/components/ui/field";
 
 import TraitsValueComponent from "./trait-value-component";
 
@@ -160,7 +160,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
     }
   })();
 
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
   const [langId, setLangId] = useState(0);
 
   // Dropzone setup, with a single file restriction
@@ -298,9 +298,9 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
   return (
     <div className="container mt">
       <PageHeading>{t("traits:create_form.heading")}</PageHeading>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
+      <DialogRoot open={open} onOpenChange={onClose}>
+        <DialogBackdrop />
+        <DialogContent>
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -309,11 +309,15 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
               onClose();
             }}
           >
-            <ModalHeader> {t("traits:create_form.add_translation_button")}</ModalHeader>
-            <ModalBody>
+            <DialogHeader> {t("traits:create_form.add_translation_button")}</DialogHeader>
+            <DialogBody>
               <Box>
-                <FormControl mb={2} isRequired={true}>
-                  <FormLabel htmlFor="name">{t("traits:create_form.language")}</FormLabel>
+                <Field
+                  mb={2}
+                  required={true}
+                  htmlFor="name"
+                  label={t("traits:create_form.language")}
+                >
                   <Select
                     id="langId"
                     inputId="langId"
@@ -333,10 +337,10 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
                       }))}
                     isSearchable={true} // Enables search
                   />
-                </FormControl>
+                </Field>
               </Box>
-            </ModalBody>
-            <ModalFooter>
+            </DialogBody>
+            <DialogFooter>
               <Button
                 mr={3}
                 onClick={() => {
@@ -349,37 +353,37 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
               <Button colorScheme="blue" type="submit">
                 {t("traits:create_form.continue")}
               </Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
-        </ModalContent>
-      </Modal>
+        </DialogContent>
+      </DialogRoot>
       <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
         <Button colorScheme="green">{t("traits:create_form.add_translation_button")}</Button>
       </Flex>
-      <Tabs
+      <Tabs.Root
         overflowX="auto"
         mb={4}
-        variant="unstyled"
         bg="gray.100"
         rounded="md"
-        index={translationSelected}
-        onChange={(index) => setTranslationSelected(index)}
+        // index={translationSelected}
+        // onChange={(index) => setTranslationSelected(index)}
       >
-        <TabList>
+        <Tabs.List>
           {hForm.watch(`translations`).map((translation) => (
-            <Tab
+            <Tabs.Trigger
               key={translation.traits.languageId}
+              value={translation.traits.languageId}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >
               {languages.filter((lang) => lang.id === translation.traits.languageId)[0].name}
-            </Tab>
+            </Tabs.Trigger>
           ))}
-        </TabList>
-      </Tabs>
+        </Tabs.List>
+      </Tabs.Root>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+          <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
             <Box>
               <TextBoxField
                 key={`name-${translationSelected}`}
@@ -560,7 +564,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
               />
             </GridItem>
             <GridItem colSpan={{ md: 3 }}>
-              <FormLabel htmlFor="taxon">{t("traits:create_form.taxon")}</FormLabel>
+              <Field htmlFor="taxon" label={t("traits:create_form.taxon")} />
               <SelectAsyncInputField
                 name={`translations[${translationSelected}].query`}
                 onQuery={onQuery}

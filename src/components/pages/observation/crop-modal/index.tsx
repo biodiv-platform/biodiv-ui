@@ -1,12 +1,4 @@
-import {
-  Box,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -15,23 +7,32 @@ import useObservationFilter from "../common/use-observation-filter";
 
 const CropTab = dynamic(() => import("./crop-tab"));
 
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+
 export default function CropModal() {
   const { cropObservationData, setCropObservationData, canCropObservation } =
     useObservationFilter();
   const { t } = useTranslation();
 
   return (
-    <Modal
-      isOpen={cropObservationData}
-      onClose={() => setCropObservationData(undefined)}
-      size="5xl"
+    <DialogRoot
+      open={cropObservationData}
+      onOpenChange={() => setCropObservationData(undefined)}
+      size="cover"
     >
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{t("observation:crop.title")}</ModalHeader>
-        <ModalCloseButton />
+      <DialogBackdrop />
+      <DialogContent>
+        <DialogHeader>{t("observation:crop.title")}</DialogHeader>
+        <DialogCloseTrigger />
         <Box minH={"fit-content"}>
-          <ModalBody>
+          <DialogBody>
             {cropObservationData && (
               <CropTab
                 data={cropObservationData}
@@ -39,9 +40,9 @@ export default function CropModal() {
                 canCrop={canCropObservation}
               />
             )}
-          </ModalBody>
+          </DialogBody>
         </Box>
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </DialogRoot>
   );
 }

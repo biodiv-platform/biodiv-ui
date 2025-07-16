@@ -1,10 +1,12 @@
-import { Box, Button, useToast } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useRef } from "react";
+
+import { toaster } from "@/components/ui/toaster";
 
 import { SpeciesTooltipRenderer } from "./static-data";
 import VerticalBarChart from "./vertcal-bar-chart";
@@ -13,7 +15,6 @@ const SpeciesGroups = ({ observationData, filter }) => {
   const { t } = useTranslation();
 
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
   const handleDownload = async () => {
     try {
@@ -32,11 +33,10 @@ const SpeciesGroups = ({ observationData, filter }) => {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        closable: true
       });
     }
   };
@@ -66,8 +66,8 @@ const SpeciesGroups = ({ observationData, filter }) => {
   return filteredData.length > 0 ? (
     <Box className="white-box">
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
-        📊 {t("observation:list.chart.sgroup")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        📊 {t("observation:list.chart.sgroup")}
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>

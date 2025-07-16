@@ -19,7 +19,7 @@ const SpeciesGroupsFilter = () => {
       );
   }, [observationData?.ag?.groupSpeciesName]);
 
-  const onChange = (v) => {
+  const onValueChange = (v) => {
     setFilter((_draft) => {
       _draft.f.offset = 0;
       if (v.length > 0) {
@@ -30,20 +30,20 @@ const SpeciesGroupsFilter = () => {
     });
   };
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue,
-    onChange
+    onValueChange
   });
 
   return (
-    <SimpleGrid gridGap={2} columns={5}>
+    <SimpleGrid gridGap={2} columns={5} p={4}>
       {speciesGroupList?.map((o) => (
         <CustomCheckbox
           key={o.split("|")[0]}
           id={o.split("|")[0]?.toString()}
           label={o.split("|")[1]}
           stat={o.split("|")[1] ? observationData?.ag?.groupSpeciesName?.[o] : 0}
-          {...getCheckboxProps({ value: o.split("|")[0]?.toString() })}
+          {...getItemProps({ value: o.split("|")[0]?.toString() })}
         />
       ))}
     </SimpleGrid>

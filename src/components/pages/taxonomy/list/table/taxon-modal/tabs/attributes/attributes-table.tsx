@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, SimpleGrid, Spinner, Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import { Box, Heading, HStack, SimpleGrid, Spinner, Table } from "@chakra-ui/react";
 import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
@@ -12,12 +12,12 @@ export function TaxonAttributesTable() {
   const { t } = useTranslation();
 
   return modalTaxon ? (
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
+    <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
       <Box gridColumn="1/3">
         <Heading as="h3" size="md" mb={4}>
           {t("taxon:modal.data_links.title")}
         </Heading>
-        <HStack mb={4} spacing={4}>
+        <HStack mb={4} gap={4}>
           <SpeciesPageLink showTaxon={showTaxon} />
           <ObservationsLink showTaxon={showTaxon} />
         </HStack>
@@ -25,85 +25,85 @@ export function TaxonAttributesTable() {
           {t("common:information")}
         </Heading>
 
-        <Table borderRadius="lg" variant="striped" overflow="hidden">
-          <Tbody>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.name.desc")} w="12rem">
+        <Table.Root borderRadius="lg" striped overflow="hidden">
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.name.desc")} w="12rem">
                 {t("taxon:modal.attributes.name.title")}
-              </Td>
-              <Td>
+              </Table.Cell>
+              <Table.Cell>
                 <span
                   dangerouslySetInnerHTML={{
                     __html: getInjectableHTML(modalTaxon?.italicisedForm)
                   }}
                 />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.canonical.desc")}>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.canonical.desc")}>
                 {t("taxon:modal.attributes.canonical.title")}
-              </Td>
-              <Td>{modalTaxon?.canonicalForm}</Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.author.desc")}>
+              </Table.Cell>
+              <Table.Cell>{modalTaxon?.canonicalForm}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.author.desc")}>
                 {t("taxon:modal.attributes.author.title")}
-              </Td>
-              <Td>{modalTaxon?.authorYear}</Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.status.desc")}>
+              </Table.Cell>
+              <Table.Cell>{modalTaxon?.authorYear}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.status.desc")}>
                 {t("taxon:modal.attributes.status.title")}
-              </Td>
-              <Td>{modalTaxon?.status}</Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.rank.desc")}>
+              </Table.Cell>
+              <Table.Cell>{modalTaxon?.status}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.rank.desc")}>
                 {t("taxon:modal.attributes.rank.title")}
-              </Td>
-              <Td>{t(`taxon:hierarchy.${modalTaxon?.rank}`)}</Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.source.desc")}>
+              </Table.Cell>
+              <Table.Cell>{t(`taxon:hierarchy.${modalTaxon?.rank}`)}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.source.desc")}>
                 {t("taxon:modal.attributes.source.title")}
-              </Td>
-              <Td>{modalTaxon?.uploaderId}</Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.via.desc")}>
+              </Table.Cell>
+              <Table.Cell>{modalTaxon?.uploaderId}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.via.desc")}>
                 {t("taxon:modal.attributes.via.title")}
-              </Td>
-              <Td>{modalTaxon?.viaDatasource}</Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.id.desc")}>
+              </Table.Cell>
+              <Table.Cell>{modalTaxon?.viaDatasource}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.id.desc")}>
                 {t("taxon:modal.attributes.id.title")}
-              </Td>
-              <Td>{modalTaxon?.matchId}</Td>
-            </Tr>
-            <Tr>
-              <Td title={t("taxon:modal.attributes.position.desc")}>
+              </Table.Cell>
+              <Table.Cell>{modalTaxon?.matchId}</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell title={t("taxon:modal.attributes.position.desc")}>
                 {t("taxon:modal.attributes.position.title")}
-              </Td>
-              <Td>{modalTaxon?.position}</Td>
-            </Tr>
-          </Tbody>
-        </Table>
+              </Table.Cell>
+              <Table.Cell>{modalTaxon?.position}</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Root>
       </Box>
       <Box>
         <Heading as="h3" size="md" mb={4}>
           {t("taxon:modal.attributes.rank.title")}
         </Heading>
-        <Table borderRadius="lg" variant="striped" overflow="hidden">
-          <Tbody>
+        <Table.Root borderRadius="lg" striped overflow="hidden">
+          <Table.Body>
             {modalTaxon?.hierarchy?.map((rank) => (
-              <Tr key={rank.rankName}>
-                <Td>{t(`taxon:hierarchy.${rank.rankName}`)}</Td>
-                <Td>{rank.name}</Td>
-              </Tr>
+              <Table.Row key={rank.rankName}>
+                <Table.Cell>{t(`taxon:hierarchy.${rank.rankName}`)}</Table.Cell>
+                <Table.Cell>{rank.name}</Table.Cell>
+              </Table.Row>
             ))}
-          </Tbody>
-        </Table>
+          </Table.Body>
+        </Table.Root>
       </Box>
     </SimpleGrid>
   ) : (

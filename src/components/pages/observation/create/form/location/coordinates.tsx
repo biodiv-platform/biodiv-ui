@@ -1,9 +1,12 @@
-import { Collapse, FormControl, FormLabel, Input, InputGroup } from "@chakra-ui/react";
+import { Collapsible, Input } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import ErrorMessage from "@components/form/common/error-message";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
+import { InputGroup } from "@/components/ui/input-group";
 
 interface ICoordinatesProps {
   show: boolean;
@@ -25,42 +28,46 @@ export default function CoordinatesInput({
   const setLng = (e) => setCoordinates({ lng: e.target.value, lat });
 
   return (
-    <Collapse in={show}>
-      <FormControl
-        mb={4}
-        isInvalid={
-          (form.formState.errors[fk.latitude.name] || form.formState.errors[fk.longitude.name]) &&
-          true
-        }
-        isRequired={true}
-      >
-        <FormLabel htmlFor="coordinates">{t("observation:coordinates")}</FormLabel>
-
-        <InputGroup id="coordinates">
-          <Input
-            id="lat"
-            roundedRight={0}
-            placeholder={t("observation:latitude")}
-            value={lat}
-            onChange={setLat}
-          />
-          <Input
-            id="lng"
-            roundedLeft={0}
-            placeholder={t("observation:longitude")}
-            value={lng}
-            onChange={setLng}
-            borderLeft={0}
-          />
-        </InputGroup>
-        <ErrorMessage name={fk.latitude.name} errors={form.formState.errors} />
-        <ErrorMessage name={fk.longitude.name} errors={form.formState.errors} />
-      </FormControl>
-      <CheckboxField
-        mt={2}
-        name="hidePreciseLocation"
-        label={t("observation:hide_precise_location")}
-      />
-    </Collapse>
+    <Collapsible.Root open={show}>
+      <Collapsible.Content>
+        <Field
+          mb={4}
+          invalid={
+            (form.formState.errors[fk.latitude.name] || form.formState.errors[fk.longitude.name]) &&
+            true
+          }
+          required={true}
+          htmlFor="coordinates"
+          label={t("observation:coordinates")}
+        >
+          <InputGroup id="coordinates">
+            <>
+              <Input
+                id="lat"
+                roundedRight={0}
+                placeholder={t("observation:latitude")}
+                value={lat}
+                onChange={setLat}
+              />
+              <Input
+                id="lng"
+                roundedLeft={0}
+                placeholder={t("observation:longitude")}
+                value={lng}
+                onChange={setLng}
+                borderLeft={0}
+              />
+            </>
+          </InputGroup>
+          <ErrorMessage name={fk.latitude.name} errors={form.formState.errors} />
+          <ErrorMessage name={fk.longitude.name} errors={form.formState.errors} />
+        </Field>
+        <CheckboxField
+          mt={2}
+          name="hidePreciseLocation"
+          label={t("observation:hide_precise_location")}
+        />
+      </Collapsible.Content>
+    </Collapsible.Root>
   );
 }

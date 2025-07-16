@@ -1,4 +1,4 @@
-import { List, ListItem, Table, Tbody, Td, Tr } from "@chakra-ui/react";
+import { List, Table } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 
@@ -45,18 +45,18 @@ export default function CommonNamesList({
         speciesId={speciesId}
         taxonId={taxonId}
       />
-      <Table size="sm" variant="striped" w="full">
-        <Tbody>
+      <Table.Root size="sm" striped w="full">
+        <Table.Body>
           {languagesList.length ? (
             languagesList.map((language) => (
-              <Tr key={language}>
-                <Td w={{ md: "10rem" }} verticalAlign="top">
+              <Table.Row key={language}>
+                <Table.Cell w={{ md: "10rem" }} verticalAlign="top">
                   {language}
-                </Td>
-                <Td>
-                  <List spacing={2}>
+                </Table.Cell>
+                <Table.Cell>
+                  <List.Root gap={2} unstyled>
                     {languagesData[language].map((commonName) => (
-                      <ListItem key={commonName.name}>
+                      <List.Item key={commonName.name}>
                         {isContributor ? (
                           <CommonNameEditButtons
                             commonName={commonName}
@@ -65,20 +65,20 @@ export default function CommonNamesList({
                         ) : (
                           <div>{commonName.name}</div>
                         )}
-                      </ListItem>
+                      </List.Item>
                     ))}
-                  </List>
-                </Td>
-              </Tr>
+                  </List.Root>
+                </Table.Cell>
+              </Table.Row>
             ))
           ) : (
-            <Tr>
-              <Td>{t("common:no_data")}</Td>
-            </Tr>
+            <Table.Row>
+              <Table.Cell>{t("common:no_data")}</Table.Cell>
+            </Table.Row>
           )}
           {isContributor && <CommonNameAdd />}
-        </Tbody>
-      </Table>
+        </Table.Body>
+      </Table.Root>
     </>
   );
 }

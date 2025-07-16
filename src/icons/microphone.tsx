@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/icon";
+import { createIcon } from "@chakra-ui/react";
 
 const MicrophoneIcon = createIcon({
   displayName: "Microphone",

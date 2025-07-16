@@ -19,7 +19,7 @@ export default function DeveloperOptionsComponentPage() {
     <div className="container mt">
       <PageHeading mb={6}>👨‍💻 Developer Options</PageHeading>
 
-      <Button colorScheme="red" onClick={handleOnIndexedDBDelete}>
+      <Button colorPalette="red" onClick={handleOnIndexedDBDelete}>
         💥 Remove IndexedDB
       </Button>
     </div>

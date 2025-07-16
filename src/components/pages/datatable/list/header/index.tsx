@@ -1,9 +1,11 @@
-import { Box, Flex, Select, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { sortByOptions } from "@static/datatable";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import useDataTableList from "../../common/use-datatable-filter";
 
@@ -34,20 +36,22 @@ export default function Header() {
           </Text>
         )}
         {dataTableData.n > 0 && (
-          <Stack isInline={true} spacing={4} mb={4}>
+          <Stack direction={"row"} gap={4} mb={4}>
             <Box>
-              <Select
+              <NativeSelectRoot
                 maxW="10rem"
                 aria-label={t("common:list.sort_by")}
-                value={filter?.sort}
+                defaultValue={filter?.sort}
                 onChange={handleOnSort}
               >
-                {sortByOptions.map(({ name, key }) => (
-                  <option key={key} value={key}>
-                    {t(name)}
-                  </option>
-                ))}
-              </Select>
+                <NativeSelectField>
+                  {sortByOptions.map(({ name, key }) => (
+                    <option key={key} value={key}>
+                      {t(name)}
+                    </option>
+                  ))}
+                </NativeSelectField>
+              </NativeSelectRoot>
             </Box>
           </Stack>
         )}

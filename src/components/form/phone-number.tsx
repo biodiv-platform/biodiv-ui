@@ -1,9 +1,11 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
+import { Box, Input } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import React from "react";
 import { useController } from "react-hook-form";
 import MobileInput from "react-phone-number-input";
+
+import { Field } from "../ui/field";
 
 const PhoneFormControl = styled.div`
   .PhoneInput {
@@ -50,18 +52,26 @@ export const PhoneNumberInputField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl as={PhoneFormControl} isInvalid={!!fieldState.error} mb={mb} {...props}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <MobileInput
-        id={name}
-        inputComponent={Input}
-        countrySelectProps={{ unicodeFlags: true }}
-        defaultCountry={defaultCountry as any}
-        disabled={disabled}
-        {...field}
-      />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+    <Field
+      as={PhoneFormControl}
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
+      <Box width={"full"}>
+        <MobileInput
+          id={name}
+          inputComponent={Input}
+          countrySelectProps={{ unicodeFlags: true }}
+          defaultCountry={defaultCountry as any}
+          disabled={disabled}
+          {...field}
+        />
+      </Box>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

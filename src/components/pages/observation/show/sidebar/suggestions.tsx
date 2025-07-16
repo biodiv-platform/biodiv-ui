@@ -36,7 +36,7 @@ export default function Suggestions({
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📍 {t(title)}</BoxHeading>
-      <SimpleGrid columns={4} spacing={4} p={4}>
+      <SimpleGrid columns={4} gap={4} p={4}>
         {list?.slice(0, page * pageSize).map((o) => (
           <LocalLink
             key={o.observationId}
@@ -44,8 +44,8 @@ export default function Suggestions({
             href={`/observation/show/${o.observationId}`}
             prefixGroup={true}
           >
-            <Link className="fade" title={o.name}>
-              <Tooltip hasArrow={true} title={<ScientificName value={o.name} />}>
+            <Link unstyled>
+              <Tooltip showArrow={true} title={<ScientificName value={o.name} />}>
                 <AspectRatio ratio={1}>
                   <Image
                     overflow="hidden"
@@ -70,7 +70,7 @@ export default function Suggestions({
           </LocalLink>
         ))}
       </SimpleGrid>
-      <Button w="full" rounded={0} hidden={hideMore} onClick={loadMore}>
+      <Button w="full" rounded={0} hidden={hideMore} onClick={loadMore} variant={"subtle"}>
         {t("common:load_more")}
       </Button>
     </Box>

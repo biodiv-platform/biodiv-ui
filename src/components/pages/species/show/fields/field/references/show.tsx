@@ -1,4 +1,4 @@
-import { Box, ListItem, OrderedList } from "@chakra-ui/react";
+import { Box, List } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
@@ -38,13 +38,13 @@ export default function ReferencesShow({ value }) {
       {hasFieldPermission && (
         <FieldEditActionButtons onEdit={handleOnEdit} onDelete={handleOnDelete} p={0} pb={1} />
       )}
-      <OrderedList>
+      <List.Root as="ol">
         {value.references.map(({ title, url }, index) => (
-          <ListItem key={index}>
+          <List.Item key={index}>
             {title} {url && <ExternalBlueLink href={url} />}
-          </ListItem>
+          </List.Item>
         ))}
-      </OrderedList>
+      </List.Root>
     </Box>
   );
 }

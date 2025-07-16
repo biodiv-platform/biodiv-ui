@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { ClearIndicator, selectStyles } from "@components/form/configs";
 import CustomFieldOption from "@components/pages/observation/create/form/custom-field-form/custom-field-options";
 import { axGetAllCustomFieldOptionsById } from "@services/usergroup.service";
@@ -44,7 +44,7 @@ export default function CatergoricalField({
   }, []);
 
   return isOpen ? (
-    <>
+    <Box width={"full"}>
       <Select
         onChange={(o) => {
           setFieldValue(isMulti ? o.map((item) => item.value) : o.value);
@@ -59,7 +59,7 @@ export default function CatergoricalField({
         styles={selectStyles}
       />
       <Buttons onSave={onSave} onClose={onClose} />
-    </>
+    </Box>
   ) : (
     <Text>{parseCategoricalValue(cf?.customFieldValues, isMulti) || t("common:unknown")}</Text>
   );

@@ -25,9 +25,9 @@ export default function Group({ datatableId, defaultGroups }) {
   }, [isLoggedIn]);
 
   return (
-    <Box m={4} className="white-box" data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE && hideFeature}>
+    <Box mb={4} className="white-box" data-hidden={!SITE_CONFIG.USERGROUP.ACTIVE && hideFeature}>
       <BoxHeading>👥 {t("common:usergroups")}</BoxHeading>
-      <Box m={4}>
+      <Box>
         <GroupPost
           groups={loggedInUserGroups}
           selectedDefault={defaultGroups}

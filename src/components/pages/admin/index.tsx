@@ -1,4 +1,4 @@
-import { Box, Heading, Link, List, ListItem, SimpleGrid } from "@chakra-ui/react";
+import { Box, Heading, Link, List, SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -7,13 +7,13 @@ function AdminComponent() {
 
   return (
     <Box className="container fadeInUp" pt={6}>
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+      <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
           <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
             Utils
           </Heading>
-          <List>
-            <ListItem
+          <List.Root>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -21,8 +21,8 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/admin/notifications">{t("admin:links.notification")}</Link>
-            </ListItem>
-            <ListItem
+            </List.Item>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -30,15 +30,15 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/admin/homegallery">{t("group:homepage_customization.title")}</Link>
-            </ListItem>
-          </List>
+            </List.Item>
+          </List.Root>
         </Box>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
           <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
             Groups
           </Heading>
-          <List>
-            <ListItem
+          <List.Root>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -46,15 +46,15 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/group/create">{t("group:create.title")}</Link>
-            </ListItem>
-          </List>
+            </List.Item>
+          </List.Root>
         </Box>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
           <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
             Maps
           </Heading>
-          <List>
-            <ListItem
+          <List.Root>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -62,15 +62,15 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/map/create">{t("group:map.title")}</Link>
-            </ListItem>
-          </List>
+            </List.Item>
+          </List.Root>
         </Box>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
           <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
             Traits
           </Heading>
-          <List>
-            <ListItem
+          <List.Root>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -78,8 +78,8 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/traits/create">{t("group:trait.title")}</Link>
-            </ListItem>
-            <ListItem
+            </List.Item>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -87,15 +87,15 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/traits/batch-upload">{t("group:trait.batchUpload.title")}</Link>
-            </ListItem>
-          </List>
+            </List.Item>
+          </List.Root>
         </Box>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
           <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
             Taxonomy
           </Heading>
-          <List>
-          <ListItem
+          <List.Root>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -103,15 +103,15 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/taxonomy/name-matching">{t("admin:links.name-macthing")}</Link>
-            </ListItem>
-          </List>
+            </List.Item>
+          </List.Root>
         </Box>
         <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
           <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
             Species Page
           </Heading>
-          <List>
-          <ListItem
+          <List.Root>
+            <List.Item
               display="flex"
               alignItems="center"
               p="2"
@@ -119,8 +119,8 @@ function AdminComponent() {
               _hover={{ bg: "teal", color: "white" }}
             >
               <Link href="/admin/species-fields">{t("admin:links.species_fields")}</Link>
-            </ListItem>
-          </List>
+            </List.Item>
+          </List.Root>
         </Box>
       </SimpleGrid>
     </Box>

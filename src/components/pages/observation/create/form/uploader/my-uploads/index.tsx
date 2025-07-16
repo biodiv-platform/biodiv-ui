@@ -1,16 +1,9 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Select,
-  SimpleGrid,
-  Spinner,
-  Text,
-  useCheckboxGroup
-} from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid, Spinner, Text, useCheckboxGroup } from "@chakra-ui/react";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import { MY_UPLOADS_SORT } from "../../options";
 import useObservationCreate from "../use-observation-resources";
@@ -25,7 +18,7 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
     setResourcesSortBy(e.target.value);
   };
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     value: observationAssets?.map((o) => o.hashKey)
   });
 
@@ -39,21 +32,23 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
       >
         <Text mb={2}>💡 {t("form:description.my_uploads")}</Text>
         <Flex>
-          <Select mr={4} value={resourcesSortBy} onChange={handleOnSort} maxW="10rem">
-            {MY_UPLOADS_SORT.map((o) => (
-              <option key={o.value} value={o.value}>
-                {t(`form:my_uploads_sort.${o.label}`)}
-              </option>
-            ))}
-          </Select>
+          <NativeSelectRoot
+            mr={4}
+            defaultValue={resourcesSortBy}
+            onChange={handleOnSort}
+            maxW="10rem"
+          >
+            <NativeSelectField>
+              {MY_UPLOADS_SORT.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {t(`form:my_uploads_sort.${o.label}`)}
+                </option>
+              ))}
+            </NativeSelectField>
+          </NativeSelectRoot>
           {hasTabs && (
-            <Button
-              flexShrink={0}
-              type="button"
-              leftIcon={<CheckIcon />}
-              onClick={onDone}
-              colorScheme="blue"
-            >
+            <Button flexShrink={0} type="button" onClick={onDone} colorPalette="blue">
+              <CheckIcon />
               {t("form:use_in_observation")}
             </Button>
           )}
@@ -62,11 +57,7 @@ const MyUploadsImages = ({ onDone, hasTabs = true }) => {
       <SimpleGrid columns={[3, 4, 5, 8]} gridGap={4} className="custom-checkbox-group">
         <DropTarget />
         {assets.map((asset) => (
-          <Checkbox
-            key={asset.hashKey}
-            asset={asset}
-            {...getCheckboxProps({ value: asset.hashKey })}
-          />
+          <Checkbox key={asset.hashKey} asset={asset} {...getItemProps({ value: asset.hashKey })} />
         ))}
       </SimpleGrid>
     </Box>

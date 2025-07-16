@@ -1,9 +1,10 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
+import { Field } from "../ui/field";
 import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface SelectMultipleProps {
@@ -17,7 +18,7 @@ interface SelectMultipleProps {
   selectRef?;
   isRequired?: boolean;
   isSearchable?: boolean;
-  shouldPortal?:boolean;
+  shouldPortal?: boolean;
 }
 
 const DefaultOptionComponent = (p: any) => <components.Option {...p} />;
@@ -40,36 +41,39 @@ export const SelectMultipleInputField = ({
   const initialValue = options.filter((v) => (field.value || []).includes(v.value));
 
   return (
-    <FormControl
-      isInvalid={!!fieldState.error}
+    <Field
+      invalid={!!fieldState.error}
       className="dropdown"
       aria-invalid={!!fieldState.error}
       mb={mb}
-      isRequired={isRequired}
+      htmlFor={name}
+      label={label}
+      required={isRequired}
+      errorText={fieldState?.error?.message}
       {...props}
     >
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Select
-        id={name}
-        inputId={name}
-        onChange={(o) => field.onChange(o ? o.map(({ value }) => value) : [])}
-        onBlur={field.onBlur}
-        options={options}
-        components={{
-          Option: optionComponent,
-          ClearIndicator,
-          IndicatorSeparator: () => null
-        }}
-        defaultValue={initialValue}
-        isSearchable={true}
-        isMulti={true}
-        isDisabled={disabled}
-        ref={selectRef}
-        {...reactSelectProps}
-        menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
-      />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Box width={"full"}>
+        <Select
+          id={name}
+          inputId={name}
+          onChange={(o) => field.onChange(o ? o.map(({ value }) => value) : [])}
+          onBlur={field.onBlur}
+          options={options}
+          components={{
+            Option: optionComponent,
+            ClearIndicator,
+            IndicatorSeparator: () => null
+          }}
+          defaultValue={initialValue}
+          isSearchable={true}
+          isMulti={true}
+          isDisabled={disabled}
+          ref={selectRef}
+          {...reactSelectProps}
+          menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
+        />
+      </Box>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

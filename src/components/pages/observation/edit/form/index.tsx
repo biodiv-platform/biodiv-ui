@@ -1,4 +1,3 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
@@ -13,8 +12,10 @@ import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { LuMoveRight } from "react-icons/lu";
 import * as Yup from "yup";
 
+// import { Alert } from "@/components/ui/alert";
 import LocationPicker from "../../create/form/location";
 import Uploader from "../../create/form/uploader";
 import CheckListAnnotationForm from "./checklist-annotation";
@@ -33,7 +34,7 @@ export default function ObservationEditForm({
 }: IObservationEditFormProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { open, onClose } = useDisclosure({ defaultOpen: true });
 
   const parsechecklistAnnotations = (checklistAnnotations) => {
     if (checklistAnnotations) {
@@ -141,7 +142,7 @@ export default function ObservationEditForm({
     }
   };
 
-  return isOpen ? (
+  return open ? (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
         <Uploader name="resources" licensesList={licensesList} isCreate={false} />
@@ -152,10 +153,12 @@ export default function ObservationEditForm({
         />
         {observation.checklistAnnotations && <CheckListAnnotationForm fields={fields} />}
         <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
-          <Link>
-            <Alert mb={4} borderRadius="md">
-              {t("observation:edit_hint")} <ArrowForwardIcon />
-            </Alert>
+          <Link unstyled>
+            <Alert.Root status="info" mb={4} borderRadius="md">
+              <Alert.Title>
+                {t("observation:edit_hint")} <LuMoveRight />
+              </Alert.Title>
+            </Alert.Root>
           </Link>
         </LocalLink>
         <SubmitButton leftIcon={<CheckIcon />} mb={4}>

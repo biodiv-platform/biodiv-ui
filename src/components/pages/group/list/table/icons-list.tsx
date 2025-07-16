@@ -10,11 +10,15 @@ export default function IconsList({ items, values, type }) {
   return (
     <SimpleGrid columns={5}>
       {itemsFiltered.map((item) => (
-        <Tooltip title={item.name} key={item.id} placement="top" hasArrow={true}>
+        <Tooltip
+          title={item.name}
+          key={item.id}
+          positioning={{ placement: "top" }}
+          showArrow={true}
+        >
           <Image
             boxSize="2rem"
             minW="1.5rem"
-            ignoreFallback={true}
             loading="lazy"
             src={getLocalIcon(item.name, type)}
             alt={item.name}

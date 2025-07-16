@@ -60,7 +60,8 @@ export default function ObservationBox({ remove, index }) {
         placeholder={t("observation:observed_at")}
         mb={2}
       />
-      <Button w="full" leftIcon={<EditIcon />} onClick={handleOnEdit}>
+      <Button w="full" onClick={handleOnEdit} variant={"subtle"}>
+        <EditIcon />
         {t("observation:more_fields")}
       </Button>
       <CustomfieldsError idx={index} />

@@ -1,17 +1,14 @@
 import "react-datepicker/dist/react-datepicker.css";
 
-import { CalendarIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
-  Collapse,
+  Collapsible,
   Flex,
-  FormControl,
   IconButton,
   Image,
   Input,
   InputGroup,
-  InputRightElement,
   SimpleGrid,
   Text,
   useDisclosure
@@ -31,6 +28,9 @@ import { cleanSingleFact } from "@utils/tags";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
+import { LuCalendar } from "react-icons/lu";
+
+import { Field } from "@/components/ui/field";
 
 import TraitInput from "../../common/trait-input";
 import MultipleCategorialTrait from "../../common/trait-input/multiple-categorical";
@@ -58,7 +58,7 @@ export default function Trait({
   const [finalTraitValue, setFinalTraitValue] = useState(defaultValue);
   const [traitInputValue, setTraitInputValue] = useState(defaultValue);
   const [selectedTraits, setSelectedTraits] = useState<TraitsValue[]>([]);
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null); // ref for the input element
 
@@ -90,7 +90,7 @@ export default function Trait({
     const { success } = await axUpdateTraitById(
       observationId,
       speciesTrait.traits?.traitId,
-      cleanSingleFact(speciesTrait.traits?.dataType,traitInputValue)
+      cleanSingleFact(speciesTrait.traits?.dataType, traitInputValue)
     );
     if (success) {
       setFinalTraitValue(traitInputValue);
@@ -100,7 +100,7 @@ export default function Trait({
   };
 
   return (
-    <FormControl mb={4} key={speciesTrait.traits?.id}>
+    <Field mb={4} key={speciesTrait.traits?.id}>
       <Flex mb={1} alignItems="center">
         <LocalLink href={`/traits/show/${speciesTrait.traits?.traitId}`} prefixGroup={true}>
           <BlueLink mr={2}>
@@ -109,17 +109,13 @@ export default function Trait({
           </BlueLink>
         </LocalLink>
         {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
-          <IconButton
-            aria-label="Edit"
-            icon={<EditIcon />}
-            variant="link"
-            colorScheme="blue"
-            onClick={onToggle}
-          />
+          <IconButton aria-label="Edit" variant="plain" colorPalette="blue" onClick={onToggle}>
+            <EditIcon />
+          </IconButton>
         )}
       </Flex>
 
-      {isOpen ? (
+      {open ? (
         speciesTrait.traits?.dataType === "STRING" && speciesTrait.traits?.traitTypes != "RANGE" ? (
           <TraitInput
             type={speciesTrait.traits?.traitTypes}
@@ -148,7 +144,13 @@ export default function Trait({
           />
         ) : speciesTrait.traits?.dataType === "DATE" ? (
           <Box mb={3} maxW="md">
-            <InputGroup>
+            <InputGroup
+              endElement={
+                <label htmlFor={speciesTrait.traits.name} style={{ cursor: "pointer" }}>
+                  <LuCalendar color="gray.300" />
+                </label>
+              }
+            >
               <DatePicker
                 ref={inputRef} // Attach ref to DatePicker's input element
                 customInput={<Input />}
@@ -180,16 +182,10 @@ export default function Trait({
                 }}
                 selectsRange
               />
-
-              <InputRightElement>
-                <label htmlFor={speciesTrait.traits.name} style={{ cursor: "pointer" }}>
-                  <CalendarIcon color="gray.300" />
-                </label>
-              </InputRightElement>
             </InputGroup>
           </Box>
         ) : speciesTrait.traits?.dataType === "COLOR" ? (
-          <SimpleGrid columns={{ md: 3 }} spacing={4} mb={3}>
+          <SimpleGrid columns={{ md: 3 }} gap={4} mb={3}>
             {traitInputValue.map((value, index) => (
               <ColorEditSwatch
                 key={index}
@@ -220,7 +216,7 @@ export default function Trait({
           <p>Unsupported Data type</p>
         )
       ) : speciesTrait.traits.dataType == "STRING" ? (
-        <SimpleGrid columns={[1, 1, 2, 3]} spacing={4}>
+        <SimpleGrid columns={[1, 1, 2, 3]} gap={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Flex
@@ -231,6 +227,7 @@ export default function Trait({
                 borderWidth="2px"
                 borderRadius="md"
                 bg="white"
+                minW="200px"
               >
                 {tr?.icon && (
                   <Image
@@ -250,7 +247,7 @@ export default function Trait({
           )}
         </SimpleGrid>
       ) : speciesTrait.traits.dataType == "NUMERIC" ? (
-        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+        <SimpleGrid columns={{ md: 3 }} gap={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Flex
@@ -262,6 +259,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -271,7 +269,7 @@ export default function Trait({
           )}
         </SimpleGrid>
       ) : speciesTrait.traits.dataType == "NUMERIC" ? (
-        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+        <SimpleGrid columns={{ md: 3 }} gap={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Flex
@@ -283,6 +281,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -292,7 +291,7 @@ export default function Trait({
           )}
         </SimpleGrid>
       ) : speciesTrait.traits.dataType == "NUMERIC" ? (
-        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+        <SimpleGrid columns={{ md: 3 }} gap={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Flex
@@ -304,6 +303,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -313,7 +313,7 @@ export default function Trait({
           )}
         </SimpleGrid>
       ) : speciesTrait.traits.dataType == "DATE" ? (
-        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+        <SimpleGrid columns={{ md: 3 }} gap={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Flex
@@ -325,6 +325,7 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
+                minW="200px"
               >
                 <div>
                   {tr.value && tr.value.split(":").length > 1
@@ -349,7 +350,7 @@ export default function Trait({
           )}
         </SimpleGrid>
       ) : speciesTrait.traits.dataType == "COLOR" ? (
-        <SimpleGrid columns={{ md: 3 }} spacing={4}>
+        <SimpleGrid columns={{ md: 3 }} gap={4}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Box
@@ -360,6 +361,7 @@ export default function Trait({
                 lineHeight={1}
                 h="3.25rem"
                 bg={tr.value}
+                minW="200px"
               />
             ))
           ) : (
@@ -370,22 +372,24 @@ export default function Trait({
         <Box></Box>
       )}
 
-      <Collapse in={isOpen} unmountOnExit={true}>
-        <Box mt={2}>
-          <Button
-            size="sm"
-            colorScheme="blue"
-            aria-label="Save"
-            type="submit"
-            onClick={handleTraitUpdate}
-          >
-            {t("common:save")}
-          </Button>
-          <Button size="sm" ml={2} colorScheme="gray" aria-label="Cancel" onClick={onClose}>
-            {t("common:cancel")}
-          </Button>
-        </Box>
-      </Collapse>
-    </FormControl>
+      <Collapsible.Root open={open} unmountOnExit={true}>
+        <Collapsible.Content>
+          <Box mt={2}>
+            <Button
+              size="sm"
+              colorPalette="blue"
+              aria-label="Save"
+              type="submit"
+              onClick={handleTraitUpdate}
+            >
+              {t("common:save")}
+            </Button>
+            <Button size="sm" ml={2} variant={"subtle"} aria-label="Cancel" onClick={onClose}>
+              {t("common:cancel")}
+            </Button>
+          </Box>
+        </Collapsible.Content>
+      </Collapsible.Root>
+    </Field>
   );
 }

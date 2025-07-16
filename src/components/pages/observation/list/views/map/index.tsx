@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import SITE_CONFIG from "@configs/site-config";

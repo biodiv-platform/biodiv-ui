@@ -1,22 +1,21 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  SimpleGrid,
-  useCheckboxGroup,
-  useToast
-} from "@chakra-ui/react";
+import { Button, SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetPlantnetSuggestions } from "@services/observation.service";
 import { DEFAULT_TOAST } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { toaster } from "@/components/ui/toaster";
 
 import ImagePicker from "./image-picker";
 const PlantnetPrediction = ({
@@ -26,7 +25,6 @@ const PlantnetPrediction = ({
   onCloseImageModal,
   selectRef
 }) => {
-  const toast = useToast();
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
 
@@ -35,7 +33,7 @@ const PlantnetPrediction = ({
   const [selectedImages, setSelectedImages] = useState<any[]>([]);
   const [organs, setSelectOrgans] = useState<any[]>([]);
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     value: selectedImages.length > 0 ? selectedImages.map((o) => o?.resource?.id) : []
   });
 
@@ -76,7 +74,7 @@ const PlantnetPrediction = ({
       return organsObj.organ;
     });
 
-    toastIdRef.current = toast({
+    toastIdRef.current = toaster.create({
       ...DEFAULT_TOAST.LOADING,
       description: t("form:uploader.predicting")
     });
@@ -95,34 +93,33 @@ const PlantnetPrediction = ({
         source: "Pl@ntNet"
       }));
       setPredictions(predictionData);
-      toast.update(toastIdRef.current, {
+      toaster.update(toastIdRef.current, {
         ...DEFAULT_TOAST.SUCCESS,
         description: t("common:success")
       });
       onCloseImageModal();
-      setTimeout(() => toast.close(toastIdRef.current), 1000);
+      setTimeout(() => toaster.dismiss(toastIdRef.current), 1000);
 
       if (selectRef) {
         selectRef.current.focus();
       }
     } else {
-      toast.update(toastIdRef.current, {
+      toaster.update(toastIdRef.current, {
         title: `${t("observation:plantnet.failed_to_generate_predictions")}`,
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        closable: true
       });
     }
   };
 
   return (
     <div>
-      <Modal isOpen={isOpenImageModal} size="6xl" onClose={onCloseImageModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{t("observation:plantnet.select_Images")}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+      <DialogRoot open={isOpenImageModal} size="xl" onOpenChange={onCloseImageModal}>
+        <DialogBackdrop />
+        <DialogContent>
+          <DialogHeader>{t("observation:plantnet.select_Images")}</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody>
             <SimpleGrid columns={[2, 3, 4, 5]} gridGap={4} mb={4} className="custom-checkbox-group">
               {images.map((o) => (
                 <ImagePicker
@@ -132,19 +129,19 @@ const PlantnetPrediction = ({
                   image={o}
                   selectedOrgans={organs}
                   organSetter={setSelectOrgans}
-                  {...getCheckboxProps({ value: o.resource.id })}
+                  {...getItemProps({ value: o.resource.id })}
                 />
               ))}
             </SimpleGrid>
-          </ModalBody>
+          </DialogBody>
 
-          <ModalFooter>
-            <Button colorScheme="green" mr={3} onClick={handleOnPlantnetSelect}>
+          <DialogFooter>
+            <Button colorPalette="green" mr={3} onClick={handleOnPlantnetSelect}>
               {t("observation:plantnet.generate_predictions")}
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </DialogRoot>
     </div>
   );
 };

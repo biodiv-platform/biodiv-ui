@@ -29,9 +29,10 @@ export default function NewGroup({ onAdd }) {
               boxSize="full"
               bg="none!important"
               onClick={onAdd}
-              icon={<AddIcon />}
               aria-label={t("common:add")}
-            />
+            >
+              <AddIcon size={"sm"} />
+            </IconButton>
           </AspectRatio>
         </Box>
       )}

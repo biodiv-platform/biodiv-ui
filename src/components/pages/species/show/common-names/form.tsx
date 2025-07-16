@@ -1,12 +1,4 @@
-import {
-  Button,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  Spinner
-} from "@chakra-ui/react";
+import { Button, Spinner } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -19,6 +11,14 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import {
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader
+} from "@/components/ui/dialog";
 
 export function SpeciesCommonNameForm({
   commonName,
@@ -72,13 +72,15 @@ export function SpeciesCommonNameForm({
   }, []);
 
   return (
-    <ModalContent>
+    <DialogContent>
       {languages.length ? (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-            <ModalHeader>{t("species:edit_name")}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+            <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+              {t("species:edit_name")}
+            </DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
               <TextBoxField
                 name="name"
                 label={t("species:common_name.form.name")}
@@ -89,20 +91,20 @@ export function SpeciesCommonNameForm({
                 label={t("species:common_name.form.language")}
                 options={languages}
                 mb={0}
-                shouldPortal={true}
               />
-            </ModalBody>
-            <ModalFooter>
+            </DialogBody>
+            <DialogFooter>
               <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>
-              <Button ml={4} leftIcon={<CrossIcon />} onClick={onClose}>
+              <Button ml={4} onClick={onClose} variant={"subtle"}>
+                <CrossIcon />
                 {t("common:cancel")}
               </Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
         </FormProvider>
       ) : (
         <Spinner m={4} />
       )}
-    </ModalContent>
+    </DialogContent>
   );
 }

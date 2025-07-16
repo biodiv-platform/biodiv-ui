@@ -68,7 +68,7 @@ export default function PermissionsTab({ user }: UserEditPageComponentProps) {
   return rolesOptionList.length ? (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnUpdate)}>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gapX={4}>
           <div>
             <SwitchField name="enabled" label={t("user:enabled")} />
             <SwitchField name="accountExpired" label={t("user:expired")} />

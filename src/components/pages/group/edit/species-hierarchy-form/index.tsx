@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { axGetUsersByID } from "@services/user.service";
@@ -11,6 +11,8 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
+import { Checkbox } from "@/components/ui/checkbox";
 
 import ContributorSelectField from "./contributor-select-field";
 
@@ -118,9 +120,9 @@ const TreeItem = React.memo(
 
             {isLeaf && (
               <Checkbox
-                isChecked={isSelected}
+                checked={isSelected}
                 onChange={handleSelect}
-                colorScheme="blue"
+                colorPalette="blue"
                 size="md"
                 mr={2}
               />
@@ -166,7 +168,7 @@ const TreeItem = React.memo(
                   </Box>
 
                   <Checkbox
-                    isChecked={isSubItemSelected}
+                    checked={isSubItemSelected}
                     onChange={() =>
                       onSelect({
                         id: subItem.id,
@@ -175,7 +177,7 @@ const TreeItem = React.memo(
                         label: subItem.label
                       })
                     }
-                    colorScheme="blue"
+                    colorPalette="blue"
                     size="md"
                     mr={2}
                   />
@@ -376,10 +378,10 @@ export default function SpeciesHierarchyForm({
                   {t("group:species_fields.species_fields")}
                 </Box>
                 <Box display="flex" gap={4}>
-                  <Button size="sm" variant="outline" colorScheme="blue" onClick={handleSelectAll}>
+                  <Button size="sm" variant="outline" colorPalette="blue" onClick={handleSelectAll}>
                     {t("group:species_fields.select_all")}
                   </Button>
-                  <Button size="sm" variant="outline" colorScheme="gray" onClick={handleClearAll}>
+                  <Button size="sm" variant="outline" colorPalette="gray" onClick={handleClearAll}>
                     {t("group:species_fields.clear_all")}
                   </Button>
                 </Box>
@@ -439,8 +441,8 @@ export default function SpeciesHierarchyForm({
               <ContributorSelectField name="members" label="Search and select members" mb={4} />
               <Box display="flex" justifyContent="flex-end">
                 <Button
-                  colorScheme="blue"
-                  isLoading={apiStatus.loading}
+                  colorPalette="blue"
+                  loading={apiStatus.loading}
                   onClick={() => {
                     const memberValues = methods.getValues("members");
                     handleContributorsSubmit(memberValues);

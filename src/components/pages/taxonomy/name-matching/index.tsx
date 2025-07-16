@@ -1,17 +1,10 @@
-import { ChevronDownIcon, WarningIcon } from "@chakra-ui/icons";
 import {
-  Alert,
   Box,
   Button,
   Flex,
   Heading,
   Icon,
   Link,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Select,
   Spinner,
   Text,
   useDisclosure
@@ -25,6 +18,11 @@ import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { LuChevronDown, LuCircleAlert } from "react-icons/lu";
+
+import { Alert } from "@/components/ui/alert";
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import NameTable from "./name-table";
 
@@ -41,7 +39,7 @@ export default function NameMatchingComponent() {
   const [finalResult, setFinalResult] = useState<
     [string, TaxonData, any | null, boolean, number][]
   >([]);
-  const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
+  const { open: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
   const [headers, setHeaders] = useState<string[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -163,7 +161,7 @@ export default function NameMatchingComponent() {
           firstRow.eachCell((cell, colNumber) => {
             if (cell.value) {
               const cellValue = cell.value.toString();
-              extractedHeaders.push(`${cellValue}|${colNumber-1}`); // Extract the value of each cell
+              extractedHeaders.push(`${cellValue}|${colNumber - 1}`); // Extract the value of each cell
               if (
                 cell.value.toString().toLowerCase() == "Sci Name".toLowerCase() ||
                 cell.value.toString().toLowerCase() == "Scientific name".toLowerCase()
@@ -228,10 +226,10 @@ export default function NameMatchingComponent() {
               <Flex flexDir="column" alignItems="center" p={4}>
                 <UploadIcon size={100} />
                 <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
-                {t("taxon:name_matching.upload_description")}
+                  {t("taxon:name_matching.upload_description")}
                 </Heading>
                 <Button colorScheme="blue" onClick={open} mb={8}>
-                {t("taxon:name_matching.upload_button")}
+                  {t("taxon:name_matching.upload_button")}
                 </Button>
               </Flex>
             </Flex>
@@ -266,21 +264,26 @@ export default function NameMatchingComponent() {
 
               {/* Right-aligned content */}
               <Flex justifyContent="flex-end">
-                <Menu>
-                  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                  {t("taxon:name_matching.download_button")}
-                  </MenuButton>
-                  <MenuList>
-                    <MenuItem onClick={importAsExcel}>{t("taxon:name_matching.download_excel")}</MenuItem>
-                  </MenuList>
-                </Menu>
+                <MenuRoot>
+                  <MenuTrigger as={Button}>
+                    {t("taxon:name_matching.download_button")}
+                    <LuChevronDown />
+                  </MenuTrigger>
+                  <MenuContent>
+                    <MenuItem value="importAsExcel" onClick={importAsExcel}>
+                      {t("taxon:name_matching.download_excel")}
+                    </MenuItem>
+                  </MenuContent>
+                </MenuRoot>
               </Flex>
             </Flex>
             <Box mb={4}>
               {uploadResult.filter(([, value]) => value.length == 0).length != 0 && (
                 <Box bg="red.500" color="white" p={4} borderRadius="md" boxShadow="md" mb={4}>
                   <Text fontSize="md" fontWeight="bold">
-                    <Icon as={WarningIcon} w={5} h={5} mr={4} />
+                    <Icon w={5} h={5} mr={4}>
+                      <LuCircleAlert />
+                    </Icon>
                     {t("taxon:name_matching.warning_text")}
                   </Text>
                   {uploadResult
@@ -303,19 +306,13 @@ export default function NameMatchingComponent() {
                 </Box>
               )}
               <Box mb={4} width="100%">
-                <Select
-                  maxW="10rem"
-                  ml="auto"
-                  value={filter}
-                  onChange={(e) => {
-                    const { value } = e.target;
-                    setFilter(value);
-                  }}
-                >
-                  <option value="All">{t("taxon:name_matching.all_filter")}</option>
-                  <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
-                  <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>
-                </Select>
+                <NativeSelectRoot maxW="10rem" ml="auto" defaultValue={filter}>
+                  <NativeSelectField onChange={(e) => setFilter(e?.currentTarget?.value)}>
+                    <option value="All">{t("taxon:name_matching.all_filter")}</option>
+                    <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
+                    <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>
+                  </NativeSelectField>
+                </NativeSelectRoot>
               </Box>
               {filter == "Matched" && (
                 <NameTable
