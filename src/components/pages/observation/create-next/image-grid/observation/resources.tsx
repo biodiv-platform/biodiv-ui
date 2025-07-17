@@ -1,4 +1,4 @@
-import { AspectRatio, Box, IconButton, Image } from "@chakra-ui/react";
+import { AspectRatio, Box, IconButton } from "@chakra-ui/react";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
@@ -6,6 +6,8 @@ import { getFallbackByMIME } from "@utils/media";
 import React, { useEffect, useMemo, useState } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { LuX } from "react-icons/lu";
+
+import { FallbackImage } from "@/components/@core/fallback-image";
 
 import ManageResourcesModal from "../../manage-resources";
 import useObservationCreateNext from "../../use-observation-create-next-hook";
@@ -18,7 +20,6 @@ export default function Resources({ index, removeObservation }) {
   const [resourceEditor, setResourceEditor] = useState(false);
   const { media } = useObservationCreateNext();
   const hForm = useFormContext();
-  const [imageError, setImageError] = useState(false);
 
   const { user } = useGlobalState();
   const [resourceIndex, setResourceIndex] = useState(0);
@@ -66,13 +67,13 @@ export default function Resources({ index, removeObservation }) {
     <>
       <Box position="relative" key={imgThumb.key}>
         <AspectRatio maxW="100%" mb={2} ratio={1}>
-          <Image
+          <FallbackImage
             borderRadius="sm"
             objectFit="cover"
             overflow="hidden"
             className="o-selectable"
-            src={imageError ? imgThumb.fallbackSrc : imgThumb.src}
-            onError={() => setImageError(true)}
+            src={imgThumb.src}
+            fallbackSrc={imgThumb.fallbackSrc}
           />
         </AspectRatio>
         <IconButton

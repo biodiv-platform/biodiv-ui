@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import { Role } from "@interfaces/custom";
@@ -8,6 +8,7 @@ import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
 import React, { useEffect, useState } from "react";
 
+import { FallbackImage } from "@/components/@core/fallback-image";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import useSpeciesList from "../../use-species-list";
@@ -42,7 +43,7 @@ export default function GridViewCard({ o, getCheckboxProps }) {
 
       <LocalLink href={`/species/show/${o.id}`} prefixGroup={true}>
         <Box w="full" position="relative" h="14rem">
-          <Image
+          <FallbackImage
             objectFit="cover"
             p={0}
             bg="white"
@@ -53,8 +54,9 @@ export default function GridViewCard({ o, getCheckboxProps }) {
               getResourceThumbnail(o.context, o.reprImage, RESOURCE_SIZE.LIST_THUMBNAIL) ||
               thumbFallbackSrc
             }
+            fallbackSrc={thumbFallbackSrc}
             loading="lazy"
-            alt={simpleName || thumbFallbackSrc}
+            alt={simpleName}
           />
         </Box>
         <Flex

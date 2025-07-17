@@ -1,10 +1,12 @@
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { Landscape } from "@interfaces/landscape";
 import { ENDPOINT } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { FallbackImage } from "@/components/@core/fallback-image";
 
 export default function GridViewCard({ o }: { o: Landscape }) {
   const { t } = useTranslation();
@@ -13,14 +15,15 @@ export default function GridViewCard({ o }: { o: Landscape }) {
     <Box className="hover-box fade">
       <Box w="full" position="relative" h="14rem">
         <LocalLink href={`/landscape/show/${o.id}`} prefixGroup={true}>
-          <Image
+          <FallbackImage
             objectFit="contain"
             p={3}
             bg="white"
             w="full"
             h="full"
             src={`${ENDPOINT.GEOENTITIES}/v1/services/image/${o.geoEntityId}`}
-            alt={OBSERVATION_FALLBACK.PHOTO || o?.shortName?.toString()}
+            fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
+            alt={o?.shortName?.toString()}
           />
         </LocalLink>
       </Box>

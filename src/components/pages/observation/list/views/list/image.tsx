@@ -1,4 +1,4 @@
-import { HStack, Image } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
@@ -13,6 +13,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { LuAudioLines, LuImage, LuVideo } from "react-icons/lu";
 
+import { FallbackImage } from "@/components/@core/fallback-image";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const ImageBox = styled.div`
@@ -124,7 +125,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
       </HStack>
 
       <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-        <Image
+        <FallbackImage
           className="ob-image-list"
           objectFit="cover"
           bg="gray.100"
@@ -133,9 +134,8 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
             o.reprImageUrl,
             RESOURCE_SIZE.LIST_THUMBNAIL
           )}
-          onError={(e) => {
-            e.currentTarget.src = getLocalIcon(o?.speciesGroup || o.observationId?.toString());
-          }}
+          fallbackSrc={getLocalIcon(o?.speciesGroup)}
+          alt={o.observationId?.toString()}
         />
       </LocalLink>
 

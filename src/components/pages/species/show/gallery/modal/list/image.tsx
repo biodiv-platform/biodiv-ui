@@ -1,8 +1,10 @@
-import { Box, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { Box, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getFallbackByMIME, getResourceRAW, getResourceThumbnail } from "@utils/media";
 import React from "react";
+
+import { FallbackImage } from "@/components/@core/fallback-image";
 
 interface SpeciesGalleryImageProps {
   resources;
@@ -16,11 +18,11 @@ export const SpeciesGalleryImage = ({ resources, isLoading }: SpeciesGalleryImag
         <a href={`/observation/show/${observationId}`}>{observationId}</a>
         <Box position="relative">
           <Link href={getResourceRAW(resource.context, resource.fileName)}>
-            <Image
+            <FallbackImage
               w="full"
               h="12.5rem"
               objectFit="cover"
-              alt={getFallbackByMIME(resource.type)}
+              fallbackSrc={getFallbackByMIME(resource.type)}
               src={getResourceThumbnail(resource.context, resource.fileName, RESOURCE_SIZE.DEFAULT)}
             />
           </Link>

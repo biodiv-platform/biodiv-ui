@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { AspectRatio, Box, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import { ObservationListMinimalData } from "@interfaces/observation";
@@ -8,14 +8,14 @@ import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
+import { FallbackImage } from "@/components/@core/fallback-image";
+
 const OBSERVATIONS_SIZE = 10;
 
 export default function RecentObservationList() {
   const { t } = useTranslation();
   const { currentGroup } = useGlobalState();
   const [isLoading, setIsLoading] = useState(true);
-
-  const [imageError, setImageError] = useState(false);
 
   const [observations, setObservations] = useState<ObservationListMinimalData[]>([]);
 
@@ -57,20 +57,16 @@ export default function RecentObservationList() {
               key={o.observationId}
             >
               <AspectRatio ratio={1}>
-                <Image
+                <FallbackImage
                   objectFit="cover"
                   borderRadius="md"
                   bg="gray.200"
-                  src={
-                    imageError
-                      ? getLocalIcon(o?.speciesGroup)
-                      : getResourceThumbnail(
-                          RESOURCE_CTX.OBSERVATION,
-                          o?.thumbnail,
-                          RESOURCE_SIZE.RECENT_THUMBNAIL
-                        )
-                  }
-                  onError={() => setImageError(true)}
+                  src={getResourceThumbnail(
+                    RESOURCE_CTX.OBSERVATION,
+                    o?.thumbnail,
+                    RESOURCE_SIZE.RECENT_THUMBNAIL
+                  )}
+                  fallbackSrc={getLocalIcon(o?.speciesGroup)}
                   alt={o?.recoIbp?.scientificName || t("common:unknown")}
                 />
               </AspectRatio>

@@ -36,7 +36,6 @@ export default function FilterIconList({
           >
             <Image
               boxSize="1.7em"
-              // ignoreFallback={true}
               src={getLocalIcon(name, type)}
               alt={name}
             />

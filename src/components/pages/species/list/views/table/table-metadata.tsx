@@ -1,4 +1,4 @@
-import { Image, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
@@ -6,8 +6,9 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
-import React, { useState } from "react";
+import React from "react";
 
+import { FallbackImage } from "@/components/@core/fallback-image";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const doFilter = (speciesTiles) => {
@@ -52,22 +53,17 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
           Header: "species:resource",
           accessor: "reprImage",
           Cell: ({ value, cell }) => {
-            const [imageError, setImageError] = useState(false);
             return (
-              <Image
+              <FallbackImage
                 borderRadius={4}
                 title={stripTags(cell.row.original.name)}
                 boxSize="5rem"
-                src={
-                  imageError
-                    ? OBSERVATION_FALLBACK.PHOTO
-                    : getResourceThumbnail(
-                        cell.row.original.context,
-                        value,
-                        RESOURCE_SIZE.LIST_THUMBNAIL
-                      )
-                }
-                onError={() => setImageError(true)}
+                src={getResourceThumbnail(
+                  cell.row.original.context,
+                  value,
+                  RESOURCE_SIZE.LIST_THUMBNAIL
+                )}
+                fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
               />
             );
           }

@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, ButtonGroup, Flex, Image } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { TextBoxField } from "@components/form/text";
 import useGlobalState from "@hooks/use-global-state";
@@ -7,6 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { LuMoveDown, LuMoveUp } from "react-icons/lu";
 
+import { FallbackImage } from "@/components/@core/fallback-image";
 import { DialogBody, DialogFooter } from "@/components/ui/dialog";
 
 import { getImageThumb } from "../../create/form/uploader/observation-resources/resource-card";
@@ -35,7 +36,11 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
               <Box key={field.id} w="396px" mb={4} className="fade white-box" p={4} bg="gray.50">
                 <Flex gap={4} w="full">
                   <AspectRatio minW="150px" ratio={1}>
-                    <Image borderRadius="md" src={imgThumb.src} alt={imgThumb.fallbackSrc} />
+                    <FallbackImage
+                      borderRadius="md"
+                      src={imgThumb.src}
+                      fallbackSrc={imgThumb.fallbackSrc}
+                    />
                   </AspectRatio>
                   <Box>
                     <SelectInputField
