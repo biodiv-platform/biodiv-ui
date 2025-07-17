@@ -45,7 +45,12 @@ export default function Footer() {
             )}
             <Stack direction="row" gap={6}>
               {Object.entries(SITE_CONFIG.FOOTER.SOCIAL).map(([icon, { LABEL, URL }]) => (
-                <Link aria-label={t(LABEL)} title={t(LABEL)} href={URL} key={icon}>
+                <Link
+                  aria-label={t(`common:${LABEL}`)}
+                  title={t(`common:${LABEL}`)}
+                  href={URL}
+                  key={icon}
+                >
                   <chakra.button
                     bg="blackAlpha.100"
                     rounded="full"
