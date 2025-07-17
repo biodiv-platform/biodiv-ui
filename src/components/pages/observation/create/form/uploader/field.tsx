@@ -56,20 +56,26 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
         value={tab}
         lazyMount={true}
         width={"full"}
+        variant={"plain"}
       >
-        <Tabs.List mb={4} overflowX="auto" py={1}>
-          <Tabs.Trigger value="selectedMedia" onClick={() => setTab("selectedMedia")}>
+        <Tabs.List mb={4} width={"full"}>
+          <Tabs.Trigger
+            value="selectedMedia"
+            onClick={() => setTab("selectedMedia")}
+            height={"full"}
+          >
             ✔️ {t("form:selected_media")}
           </Tabs.Trigger>
-          <Tabs.Trigger value="draftMedia" onClick={() => setTab("draftMedia")}>
+          <Tabs.Trigger value="draftMedia" onClick={() => setTab("draftMedia")} height={"full"}>
             ☁️ {t("form:my_uploads")}
           </Tabs.Trigger>
-          <Tabs.Trigger value="audio" onClick={() => setTab("audio")}>
+          <Tabs.Trigger value="audio" onClick={() => setTab("audio")} height={"full"}>
             🎙️ {t("form:audio.title")}
           </Tabs.Trigger>
-          <Tabs.Trigger value="youtube" onClick={() => setTab("youtube")}>
+          <Tabs.Trigger value="youtube" onClick={() => setTab("youtube")} height={"full"}>
             📹 {t("form:from_url")}
           </Tabs.Trigger>
+          <Tabs.Indicator rounded="full" bg="blue.100" height={{ base: "full", md: "10" }} />
         </Tabs.List>
         <Tabs.Content value="selectedMedia">
           <ResourcesList showHint={true} />

@@ -58,7 +58,6 @@ export default function Recodata({ languages }: IRecodataProps) {
   return (
     <>
       <CheckboxField name="helpIdentify" label={t("observation:help_identify")} />
-      {/* startingHeight={1} animateOpacity={true} */}
       <Collapsible.Root open={!helpIdentify}>
         <Collapsible.Content>
           <SimpleGrid columns={[1, 1, 2, 2]} gap={4}>

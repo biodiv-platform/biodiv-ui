@@ -7,7 +7,7 @@ import Slide, { NoSlide } from "@components/@core/carousel/slide";
 import Thumbnails from "@components/@core/carousel/thumbnails";
 import { ResourceType } from "@interfaces/custom";
 import { useKeenSlider } from "keen-slider/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import useSpecies from "../use-species";
 import SpeciesGalleryModal from "./modal";
@@ -15,6 +15,7 @@ import SpeciesGalleryModal from "./modal";
 export default function SpeciesGallery() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { species } = useSpecies();
+  const [sliderReady, setSliderReady] = useState(false);
   const [resources, setResources] = useState(
     species?.resourceData?.filter((r) => r.resource.type !== ResourceType.Icon) || []
   );
@@ -23,6 +24,12 @@ export default function SpeciesGallery() {
     loop: false,
     slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
   });
+
+  useEffect(() => {
+    if (slider?.current) {
+      setSliderReady(true);
+    }
+  }, [slider]);
 
   return (
     <Box gridColumn={{ md: "2/4" }} className="fadeInUp delay-3">
@@ -47,7 +54,7 @@ export default function SpeciesGallery() {
             <NoSlide speciesGroup={species.currentSpeciesGroup} />
           )}
         </Box>
-        {resources?.length && (
+        {resources.length > 0 && sliderReady && (
           <>
             <CarouselNavigation
               prev={slider?.current?.prev}
