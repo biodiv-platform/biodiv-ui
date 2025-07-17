@@ -8,7 +8,7 @@ import { stripSpecialCharacters, stripTags } from "@utils/text";
 import React from "react";
 import { LuDownload } from "react-icons/lu";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 const doFilter = (data) => {
   if (data[0]) {
@@ -39,7 +39,7 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
           accessor: "user",
           Cell: ({ value }) => (
             <a href={`/user/show/${value.id}`}>
-              <FallbackImage
+              <ImageWithFallback
                 borderRadius={50}
                 title={value.name}
                 boxSize="2rem"

@@ -8,7 +8,7 @@ import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
 import React, { useEffect, useState } from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import useSpeciesList from "../../use-species-list";
@@ -43,7 +43,7 @@ export default function GridViewCard({ o, getCheckboxProps }) {
 
       <LocalLink href={`/species/show/${o.id}`} prefixGroup={true}>
         <Box w="full" position="relative" h="14rem">
-          <FallbackImage
+          <ImageWithFallback
             objectFit="cover"
             p={0}
             bg="white"

@@ -5,7 +5,7 @@ interface FallbackImageProps extends ImageProps {
   fallbackSrc: string;
 }
 
-export function FallbackImage({ src, fallbackSrc, alt = "", ...props }: FallbackImageProps) {
+export function ImageWithFallback({ src, fallbackSrc, alt = "", ...props }: FallbackImageProps) {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {

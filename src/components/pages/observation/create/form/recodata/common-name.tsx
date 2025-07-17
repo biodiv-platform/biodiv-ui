@@ -7,7 +7,7 @@ import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 export const CommonNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
@@ -15,7 +15,7 @@ export const CommonNameOption = ({ children, ...props }: any) => {
     <components.Option {...props}>
       <Stack direction={"row"} alignItems="center">
         {hiddenIcon && (
-          <FallbackImage
+          <ImageWithFallback
             boxSize="2rem"
             src={getSuggestionIcon(props.data.icon)}
             fallbackSrc={props.data.group}

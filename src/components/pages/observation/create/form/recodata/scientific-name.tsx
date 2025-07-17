@@ -7,7 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { components } from "react-select";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Tag } from "@/components/ui/tag";
 
 export const ScientificNameOption = ({ children, ...props }: any) => {
@@ -18,7 +18,7 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
     <components.Option {...props}>
       <Stack direction={"row"} alignItems="center">
         {hiddenIcon && (
-          <FallbackImage
+          <ImageWithFallback
             boxSize="2rem"
             src={getSuggestionIcon(props.data.icon)}
             fallbackSrc={props.data.group}

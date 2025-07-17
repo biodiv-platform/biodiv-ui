@@ -10,7 +10,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import ReactCrop from "react-image-crop";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import ObservationImageStatusBadge from "../status-badge";
 
@@ -93,7 +93,7 @@ export default function CropTab({ data, setData, canCrop }) {
               <Box position="absolute" top={0} left={0} ml={3} mt={1} hidden={!canCrop}>
                 <ObservationImageStatusBadge status={selectionStatus || CROP_STATUS.NOT_CURATED} />
               </Box>
-              <FallbackImage
+              <ImageWithFallback
                 w="full"
                 h="full"
                 borderRadius="md"

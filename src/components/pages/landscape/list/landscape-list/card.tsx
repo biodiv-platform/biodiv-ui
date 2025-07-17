@@ -6,7 +6,7 @@ import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 export default function GridViewCard({ o }: { o: Landscape }) {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ export default function GridViewCard({ o }: { o: Landscape }) {
     <Box className="hover-box fade">
       <Box w="full" position="relative" h="14rem">
         <LocalLink href={`/landscape/show/${o.id}`} prefixGroup={true}>
-          <FallbackImage
+          <ImageWithFallback
             objectFit="contain"
             p={3}
             bg="white"

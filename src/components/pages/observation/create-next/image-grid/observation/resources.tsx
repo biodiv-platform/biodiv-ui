@@ -7,7 +7,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { LuX } from "react-icons/lu";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import ManageResourcesModal from "../../manage-resources";
 import useObservationCreateNext from "../../use-observation-create-next-hook";
@@ -67,7 +67,7 @@ export default function Resources({ index, removeObservation }) {
     <>
       <Box position="relative" key={imgThumb.key}>
         <AspectRatio maxW="100%" mb={2} ratio={1}>
-          <FallbackImage
+          <ImageWithFallback
             borderRadius="sm"
             objectFit="cover"
             overflow="hidden"

@@ -6,7 +6,7 @@ import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import { getImageThumb } from "../observation-resources/resource-card";
 import StatusIcon from "../statusicon";
@@ -83,7 +83,7 @@ const Checkbox = (props: any) => {
             <DeleteIcon />
           </IconButton>
           <StatusIcon type={props.asset.status} />
-          <FallbackImage
+          <ImageWithFallback
             style={{ filter: "none" }}
             boxSize="full"
             objectFit="cover"

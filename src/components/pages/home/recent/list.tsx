@@ -8,7 +8,7 @@ import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 const OBSERVATIONS_SIZE = 10;
 
@@ -57,7 +57,7 @@ export default function RecentObservationList() {
               key={o.observationId}
             >
               <AspectRatio ratio={1}>
-                <FallbackImage
+                <ImageWithFallback
                   objectFit="cover"
                   borderRadius="md"
                   bg="gray.200"

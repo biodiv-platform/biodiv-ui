@@ -4,7 +4,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getFallbackByMIME, getResourceRAW, getResourceThumbnail } from "@utils/media";
 import React from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 interface SpeciesGalleryImageProps {
   resources;
@@ -18,7 +18,7 @@ export const SpeciesGalleryImage = ({ resources, isLoading }: SpeciesGalleryImag
         <a href={`/observation/show/${observationId}`}>{observationId}</a>
         <Box position="relative">
           <Link href={getResourceRAW(resource.context, resource.fileName)}>
-            <FallbackImage
+            <ImageWithFallback
               w="full"
               h="12.5rem"
               objectFit="cover"

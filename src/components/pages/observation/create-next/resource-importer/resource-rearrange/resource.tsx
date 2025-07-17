@@ -5,7 +5,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useMemo } from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 export const Resource = ({ resource, index }) => {
   const { user } = useGlobalState();
@@ -32,7 +32,7 @@ export const Resource = ({ resource, index }) => {
           ref={provided.innerRef}
         >
           <AspectRatio bg="white" ratio={1} h="full" borderRadius="sm" overflow="hidden">
-            <FallbackImage {...imgThumb} />
+            <ImageWithFallback {...imgThumb} />
           </AspectRatio>
         </GridItem>
       )}

@@ -8,7 +8,7 @@ import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 export default function ObservationList({ title, data, loadMore }) {
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ export default function ObservationList({ title, data, loadMore }) {
               <Link target="_blank" className="fade">
                 <Tooltip title={<ScientificName value={title} />} showArrow={true}>
                   <AspectRatio ratio={1}>
-                    <FallbackImage
+                    <ImageWithFallback
                       borderRadius="md"
                       bg="gray.300"
                       alt={title}

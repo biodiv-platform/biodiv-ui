@@ -7,7 +7,7 @@ import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import { getImageThumb } from "../../create/form/uploader/observation-resources/resource-card";
 
@@ -28,7 +28,7 @@ export default function ProgressCard({ item }) {
       >
         <LinkOverlay target="_blank">
           <AspectRatio maxW="100%" mb={2} ratio={1}>
-            <FallbackImage
+            <ImageWithFallback
               borderTopRadius="md"
               objectFit="cover"
               overflow="hidden"

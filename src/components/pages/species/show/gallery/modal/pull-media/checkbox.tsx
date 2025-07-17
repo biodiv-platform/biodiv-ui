@@ -6,7 +6,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useMemo } from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 const Checkbox = (props: any) => {
   const { user } = useGlobalState();
@@ -41,7 +41,7 @@ const Checkbox = (props: any) => {
         style={undefined}
       >
         <Flex cursor="pointer" position="relative" p={2}>
-          <FallbackImage
+          <ImageWithFallback
             style={{ filter: "none" }}
             boxSize="full"
             objectFit="cover"

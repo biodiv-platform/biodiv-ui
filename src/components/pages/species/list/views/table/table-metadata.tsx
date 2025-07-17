@@ -8,7 +8,7 @@ import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
 import React from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const doFilter = (speciesTiles) => {
@@ -54,7 +54,7 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
           accessor: "reprImage",
           Cell: ({ value, cell }) => {
             return (
-              <FallbackImage
+              <ImageWithFallback
                 borderRadius={4}
                 title={stripTags(cell.row.original.name)}
                 boxSize="5rem"

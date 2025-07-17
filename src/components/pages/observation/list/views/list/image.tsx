@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { LuAudioLines, LuImage, LuVideo } from "react-icons/lu";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const ImageBox = styled.div`
@@ -125,7 +125,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
       </HStack>
 
       <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-        <FallbackImage
+        <ImageWithFallback
           className="ob-image-list"
           objectFit="cover"
           bg="gray.100"

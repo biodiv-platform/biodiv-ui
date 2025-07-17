@@ -16,14 +16,14 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { components } from "react-select";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import useObservationCreateNext from "../../use-observation-create-next-hook";
 
 export const SpeciesGroupOption = ({ children, ...props }: any) => (
   <components.Option {...props}>
     <Flex alignItems="center" gap={2}>
-      <FallbackImage boxSize="2rem" src={props.data.image} fallbackSrc={props.data.group} />
+      <ImageWithFallback boxSize="2rem" src={props.data.image} fallbackSrc={props.data.group} />
       <div>{children}</div>
     </Flex>
   </components.Option>

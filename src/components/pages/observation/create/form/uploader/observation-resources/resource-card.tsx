@@ -14,7 +14,7 @@ import {
 import React, { useMemo } from "react";
 import Select from "react-select";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import StatusIcon from "../statusicon";
 import useObservationCreate from "../use-observation-resources";
@@ -89,7 +89,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
       key={resource.hashKey}
     >
       <ImageBox>
-        <FallbackImage
+        <ImageWithFallback
           objectFit="cover"
           borderRadius="md"
           fallbackSrc={getFallbackByMIME(resource.type)}

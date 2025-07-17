@@ -10,7 +10,7 @@ import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import useObservationCreateNext from "../../use-observation-create-next-hook";
@@ -59,7 +59,7 @@ const DraftResource = ({ resource: r }) => {
       position="relative"
     >
       <AspectRatio ratio={1}>
-        <FallbackImage
+        <ImageWithFallback
           alt={r.hashKey}
           borderRadius="0.4rem"
           objectFit="cover"

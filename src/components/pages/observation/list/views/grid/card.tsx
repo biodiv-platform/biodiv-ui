@@ -8,7 +8,7 @@ import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import { FallbackImage } from "@/components/@core/fallback-image";
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export interface ObservationMinList {
@@ -35,7 +35,7 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
           />
         )}
         <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-          <FallbackImage
+          <ImageWithFallback
             objectFit="cover"
             bg="gray.100"
             w="full"
