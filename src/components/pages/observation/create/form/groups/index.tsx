@@ -1,4 +1,4 @@
-import { Box, Separator,Wrap, WrapItem } from "@chakra-ui/react";
+import { Box, Separator, Wrap, WrapItem } from "@chakra-ui/react";
 import { RadioCard } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
@@ -66,7 +66,11 @@ const GroupSelector = ({
         </RadioCard.Root>
         {hint && <Field color="gray.600" helperText={hint} />}
       </Field>
-      {!hideDevider && <Box mb={4}><Separator /></Box>}
+      {!hideDevider && (
+        <Box mb={4}>
+          <Separator />
+        </Box>
+      )}
     </>
   );
 };

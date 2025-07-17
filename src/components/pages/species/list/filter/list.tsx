@@ -79,7 +79,7 @@ export default function FiltersList() {
 
       <AttributeFilter />
 
-      <AccordionItem value="user" >
+      <AccordionItem value="user">
         <AccordionItemTrigger pr={4}>
           <Box flex={1} textAlign="left" pl={4}>
             {t("filters:user.contributor")}

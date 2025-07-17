@@ -26,7 +26,8 @@ export function tooltipHelpers(tip, tooltipRenderer, leftOffset = 40, topOffset 
 
   const mouseleave = () => tip.style("display", "none").style("opacity", 0);
 
-  const mouseover = (_, { data }) => tip.style("display", "block").style("opacity", 1).html(tooltipRenderer(data));
+  const mouseover = (_, { data }) =>
+    tip.style("display", "block").style("opacity", 1).html(tooltipRenderer(data));
 
   return { mousemove, mouseleave, mouseover };
 }

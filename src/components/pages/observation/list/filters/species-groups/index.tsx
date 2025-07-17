@@ -12,11 +12,7 @@ const SpeciesGroupsFilter = () => {
   const speciesGroupList = useMemo(() => {
     return Object.keys(observationData?.ag?.groupSpeciesName || {})
       .filter((o) => o.split("|")[1] !== "All") // removes All from filter explicitly
-      .sort(
-        (a, b) =>
-          parseInt(a.split("|")[2] || "0", 10) -
-          parseInt(b.split("|")[2] || "0", 10)
-      );
+      .sort((a, b) => parseInt(a.split("|")[2] || "0", 10) - parseInt(b.split("|")[2] || "0", 10));
   }, [observationData?.ag?.groupSpeciesName]);
 
   const onValueChange = (v) => {

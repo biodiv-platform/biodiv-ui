@@ -142,6 +142,6 @@ export const DEFAULT_TOAST: any = {
   },
   SUCCESS: {
     variant: "subtle",
-    type: "success",
+    type: "success"
   }
 };

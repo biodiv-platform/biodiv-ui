@@ -18,7 +18,7 @@ import {
   DialogCloseTrigger,
   DialogContent,
   DialogFooter,
-  DialogRoot,
+  DialogRoot
 } from "@/components/ui/dialog";
 
 import OTPIcon from "./otp-icon";

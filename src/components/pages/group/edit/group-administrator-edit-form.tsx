@@ -92,7 +92,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
         value="roles"
       >
         <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pr={4}>
-          <Box flex={1} textAlign="left" fontSize="lg" pl={4} >
+          <Box flex={1} textAlign="left" fontSize="lg" pl={4}>
             🛡️ {t("group:admin.title")}
           </Box>
         </AccordionItemTrigger>

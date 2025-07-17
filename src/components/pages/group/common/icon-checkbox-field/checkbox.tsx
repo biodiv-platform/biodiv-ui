@@ -3,7 +3,6 @@ import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
 import React from "react";
 
-
 interface ITraitInputProps {
   type?: string;
   options: any[];

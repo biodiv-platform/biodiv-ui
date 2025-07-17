@@ -8,7 +8,7 @@ import {
   Input,
   mergeRefs,
   Stack,
-  useControllableState,
+  useControllableState
 } from "@chakra-ui/react";
 import * as React from "react";
 import { LuEye, LuEyeOff } from "react-icons/lu";
@@ -40,7 +40,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
     const [visible, setVisible] = useControllableState({
       value: visibleProp,
       defaultValue: defaultVisible || false,
-      onChange: onVisibleChange,
+      onChange: onVisibleChange
     });
 
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -113,7 +113,7 @@ export const PasswordStrengthMeter = React.forwardRef<HTMLDivElement, PasswordSt
               colorPalette="gray"
               _selected={{
                 colorPalette,
-                layerStyle: "fill.solid",
+                layerStyle: "fill.solid"
               }}
             />
           ))}

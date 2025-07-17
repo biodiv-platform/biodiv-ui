@@ -1,4 +1,4 @@
-import { Box, BreadcrumbItem, } from "@chakra-ui/react";
+import { Box, BreadcrumbItem } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React from "react";
 import { LuChevronRight } from "react-icons/lu";

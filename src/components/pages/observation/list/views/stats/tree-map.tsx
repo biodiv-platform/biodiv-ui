@@ -24,7 +24,22 @@ interface TreeMapProps {
 }
 
 const TreeMapChart = forwardRef(
-  ({ data, w = 500, h = 400, mt = 30, mr = 30, mb = 30, ml = 30 ,loadMore, currentParent, currentDataPath, decrease}: TreeMapProps, ref) => {
+  (
+    {
+      data,
+      w = 500,
+      h = 400,
+      mt = 30,
+      mr = 30,
+      mb = 30,
+      ml = 30,
+      loadMore,
+      currentParent,
+      currentDataPath,
+      decrease
+    }: TreeMapProps,
+    ref
+  ) => {
     const [color, setColor] = useState("");
     const svgRef = useRef(null);
     const containerRef = useRef(null);
@@ -195,7 +210,7 @@ const TreeMapChart = forwardRef(
           return i === 0 ? plainText : ` / ${plainText}`;
         })
         .on("click", function (event, d) {
-          decrease(d)
+          decrease(d);
           setColor("");
         });
     }, [containerRef, ro?.width, h, data, currentParent]);

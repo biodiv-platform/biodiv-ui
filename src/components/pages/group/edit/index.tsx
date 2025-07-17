@@ -112,7 +112,7 @@ export default function EditGroupPageComponent({
                   userGroupId={userGroupId}
                   groupCustomField={customFieldList}
                 />
-                <GroupRules rules={groupRules} userGroupId={userGroupId} traits = {traits}/>
+                <GroupRules rules={groupRules} userGroupId={userGroupId} traits={traits} />
               </div>
             ) : (
               <ContactAdmin />

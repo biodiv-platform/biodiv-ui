@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import Container from "./container";
 
-export default function   ListView({ no }) {
+export default function ListView({ no }) {
   const { observationData, nextPage } = useObservationFilter();
   const { t } = useTranslation();
 

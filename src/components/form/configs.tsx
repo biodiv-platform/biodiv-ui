@@ -60,13 +60,7 @@ export const ClearIndicator = (props) => {
           </IconButton>
         </Tooltip>
       </div>
-      <IconButton
-        minW="auto"
-        type="button"
-        mr={1}
-        aria-label={t("common:clear")}
-        variant={"plain"}
-      >
+      <IconButton minW="auto" type="button" mr={1} aria-label={t("common:clear")} variant={"plain"}>
         <LuX />
       </IconButton>
     </div>

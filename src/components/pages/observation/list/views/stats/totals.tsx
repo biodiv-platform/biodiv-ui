@@ -22,7 +22,9 @@ const Totals = ({ filter, observationData }) => {
       return sGroupArray.includes(id);
     });
 
-    return filteredGroups.map((key) => observationData.ag.groupSpeciesName[key] || 0).reduce((a, b) => a + b, 0);
+    return filteredGroups
+      .map((key) => observationData.ag.groupSpeciesName[key] || 0)
+      .reduce((a, b) => a + b, 0);
   }, [filter.sGroup, observationData.ag.groupSpeciesName]);
 
   const totals = { totalObservations: s, ...totalsData.data.list };

@@ -11,9 +11,7 @@ export default function ContactAdmin() {
 
   return (
     <Box mb={4}>
-      <BlueLink href={SITE_CONFIG.FOOTER.SOCIAL.MAIL.URL} >
-        {t("group:admin.no_access")}
-      </BlueLink>
+      <BlueLink href={SITE_CONFIG.FOOTER.SOCIAL.MAIL.URL}>{t("group:admin.no_access")}</BlueLink>
     </Box>
   );
 }

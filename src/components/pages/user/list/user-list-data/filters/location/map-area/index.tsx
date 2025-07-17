@@ -22,7 +22,7 @@ export default function MapAreaFilter() {
             {t("filters:location.map.title")}
           </Box>
         </AccordionItemTrigger>
-        <AccordionItemContent >{<MapDrawContainer />}</AccordionItemContent>
+        <AccordionItemContent>{<MapDrawContainer />}</AccordionItemContent>
       </AccordionItem>
     </AccordionRoot>
   );
