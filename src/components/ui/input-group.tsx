@@ -38,10 +38,10 @@ export const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(func
       )}
       {React.cloneElement(child, {
         ...(startElement && {
-          ps: `calc(var(--input-height) - ${startOffset})`,
+          ps: `calc(var(--input-height) - ${startOffset})`
         }),
         ...(endElement && { pe: `calc(var(--input-height) - ${endOffset})` }),
-        ...children.props,
+        ...children.props
       })}
       {endElement && (
         <InputElement placement="end" {...endElementProps}>

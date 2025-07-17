@@ -1,4 +1,4 @@
-import { HStack, Separator } from "@chakra-ui/react";
+import { Box, Separator, Wrap, WrapItem } from "@chakra-ui/react";
 import { RadioCard } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
@@ -14,8 +14,8 @@ interface ISpeciesSelecProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
-  hideDevider?;
-  isRequired?;
+  hideDevider?: boolean;
+  isRequired?: boolean;
 }
 
 const GroupSelector = ({
@@ -46,27 +46,31 @@ const GroupSelector = ({
           onValueChange={({ value }) => {
             field.onChange(value);
           }}
-          orientation="horizontal"
           align="center"
-          colorPalette={"blue"}
-          size={"sm"}
+          colorPalette="blue"
+          size="sm"
           value={String(field.value)}
         >
-          <HStack>
+          <Wrap gap={4} justify="flex-start">
             {options?.map((o) => (
-              <CustomRadio
-                key={o.id}
-                value={o.id.toString()}
-                icon={o.name}
-                title={o.name}
-                checked={field.value == o.id}
-              />
+              <WrapItem key={o.id}>
+                <CustomRadio
+                  value={o.id.toString()}
+                  icon={o.name}
+                  title={o.name}
+                  checked={field.value == o.id}
+                />
+              </WrapItem>
             ))}
-          </HStack>
+          </Wrap>
         </RadioCard.Root>
         {hint && <Field color="gray.600" helperText={hint} />}
       </Field>
-      {!hideDevider && <Separator mb={4} />}
+      {!hideDevider && (
+        <Box mb={4}>
+          <Separator />
+        </Box>
+      )}
     </>
   );
 };

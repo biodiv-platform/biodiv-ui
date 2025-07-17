@@ -145,7 +145,7 @@ export default function ObservationShowPageComponent({
               <TemporalObservedOn
                 filter={{
                   view: "stats",
-                  max:8,
+                  max: 8,
                   offset: 0,
                   userGroupList: currentGroup?.id || undefined,
                   taxon: String(o.recoIbp?.taxonId),
@@ -155,7 +155,7 @@ export default function ObservationShowPageComponent({
               <TraitsPerMonth
                 filter={{
                   view: "stats",
-                  max:8,
+                  max: 8,
                   offset: 0,
                   userGroupList: currentGroup?.id || undefined,
                   taxon: String(o.recoIbp?.taxonId),

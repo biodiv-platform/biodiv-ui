@@ -9,7 +9,7 @@ import { formatGroupRules } from "./utils";
 
 export default function GroupRules({ userGroupId, rules, traits }) {
   const { t } = useTranslation();
-  const [groupRules, setGroupRules] = useState(formatGroupRules(rules,traits));
+  const [groupRules, setGroupRules] = useState(formatGroupRules(rules, traits));
   const [isCreate, setIsCreate] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ export default function GroupRules({ userGroupId, rules, traits }) {
             groupRules={groupRules}
             setGroupRules={setGroupRules}
             setIsCreate={setIsCreate}
-            traits = {traits}
+            traits={traits}
           />
         ) : (
           <GroupRulesTable

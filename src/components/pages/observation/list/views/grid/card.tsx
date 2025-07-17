@@ -1,4 +1,4 @@
-import { Badge, Box, Heading, Image, Link, Text } from "@chakra-ui/react";
+import { Badge, Box, Heading, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import ShadowedUser from "@components/pages/common/shadowed-user";
@@ -8,6 +8,7 @@ import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export interface ObservationMinList {
@@ -34,7 +35,7 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
           />
         )}
         <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-          <Image
+          <ImageWithFallback
             objectFit="cover"
             bg="gray.100"
             w="full"
@@ -45,9 +46,8 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
               o?.thumbnail,
               RESOURCE_SIZE.LIST_THUMBNAIL
             )}
-            onError={(e) => {
-              e.currentTarget.src = getLocalIcon(o?.speciesGroup || o.observationId?.toString());
-            }}
+            fallbackSrc={getLocalIcon(o?.speciesGroup)}
+            alt={o.observationId?.toString()}
           />
         </LocalLink>
         <ShadowedUser user={o?.user} />

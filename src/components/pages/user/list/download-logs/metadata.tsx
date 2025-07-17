@@ -1,4 +1,4 @@
-import { Button, Image, Text } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import { ENDPOINT } from "@static/constants";
 import { adminOrAuthor } from "@utils/auth";
@@ -7,6 +7,8 @@ import { getUserImage } from "@utils/media";
 import { stripSpecialCharacters, stripTags } from "@utils/text";
 import React from "react";
 import { LuDownload } from "react-icons/lu";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 const doFilter = (data) => {
   if (data[0]) {
@@ -37,10 +39,11 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
           accessor: "user",
           Cell: ({ value }) => (
             <a href={`/user/show/${value.id}`}>
-              <Image
+              <ImageWithFallback
                 borderRadius={50}
                 title={value.name}
                 boxSize="2rem"
+                fallbackSrc={`/api/avatar?t=${value.name}&s=${100}`}
                 src={getUserImage(value.profilePic, value.name, 100)}
               />
             </a>

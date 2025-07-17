@@ -1,9 +1,9 @@
 import { Button, Popover, Portal } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import MenuIcon from "@icons/menu";
 import { generateToC } from "@utils/pages";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
+import { LuMenu } from "react-icons/lu";
 
 import usePages from "../../common/sidebar/use-pages-sidebar";
 
@@ -45,8 +45,8 @@ export function TableOfContents() {
       positioning={{ placement: "bottom-start" }}
     >
       <Popover.Trigger asChild>
-        <Button size="sm" variant="outline" fontSize={"md"} fontWeight={"bold"}>
-          <MenuIcon />
+        <Button size="xs" variant="outline" fontSize={"sm"} fontWeight={"bold"}>
+          <LuMenu />
           {t("page:quick_navigation")}
         </Button>
       </Popover.Trigger>

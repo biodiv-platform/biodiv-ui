@@ -165,7 +165,7 @@ export default function PageForm({
             borderRadius="md"
             value={"metaData"}
           >
-            <AccordionItemTrigger _expanded={{ bg: "gray.100" }}  pl={4} pr={4}>
+            <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pl={4} pr={4}>
               <Box flex={1} textAlign="left">
                 📝 {t("page:form.meta_data")}
               </Box>

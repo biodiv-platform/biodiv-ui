@@ -1,13 +1,4 @@
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Flex,
-  IconButton,
-  Image,
-  SimpleGrid,
-  Text
-} from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Flex, IconButton, SimpleGrid, Text } from "@chakra-ui/react";
 import { MY_UPLOADS_SORT } from "@components/pages/observation/create/form/options";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import StatusIcon from "@components/pages/observation/create/form/uploader/statusicon";
@@ -17,8 +8,9 @@ import DeleteIcon from "@icons/delete";
 import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import useObservationCreateNext from "../../use-observation-create-next-hook";
@@ -27,7 +19,6 @@ import UploadIcon from "../upload-icon";
 const DraftResource = ({ resource: r }) => {
   const { media, draft } = useObservationCreateNext();
   const { user } = useGlobalState();
-  const [imageError, setImageError] = useState(false);
 
   const [isSelected, isDisabled] = useMemo(
     () => [
@@ -68,12 +59,12 @@ const DraftResource = ({ resource: r }) => {
       position="relative"
     >
       <AspectRatio ratio={1}>
-        <Image
+        <ImageWithFallback
           alt={r.hashKey}
           borderRadius="0.4rem"
           objectFit="cover"
-          src={imageError ? imgThumb.fallbackSrc : imgThumb.src}
-          onError={() => setImageError(true)}
+          src={imgThumb.src}
+          fallbackSrc={imgThumb.fallbackSrc}
         />
       </AspectRatio>
       <Box position="absolute" bottom={0} left={0} m={4}>

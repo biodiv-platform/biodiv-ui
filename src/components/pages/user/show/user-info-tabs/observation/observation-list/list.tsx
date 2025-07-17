@@ -1,13 +1,4 @@
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Flex,
-  Image,
-  Link,
-  SimpleGrid,
-  Skeleton
-} from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Flex, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
@@ -16,6 +7,8 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 export default function ObservationList({ title, data, loadMore }) {
   const { t } = useTranslation();
@@ -41,15 +34,16 @@ export default function ObservationList({ title, data, loadMore }) {
               <Link target="_blank" className="fade">
                 <Tooltip title={<ScientificName value={title} />} showArrow={true}>
                   <AspectRatio ratio={1}>
-                    <Image
+                    <ImageWithFallback
                       borderRadius="md"
                       bg="gray.300"
-                      alt={getLocalIcon(observation.speciesGroup) || title}
+                      alt={title}
                       src={getResourceThumbnail(
                         RESOURCE_CTX.OBSERVATION,
                         observation.thumbnail,
                         RESOURCE_SIZE.LIST_THUMBNAIL
                       )}
+                      fallbackSrc={getLocalIcon(observation.speciesGroup)}
                     />
                   </AspectRatio>
                 </Tooltip>

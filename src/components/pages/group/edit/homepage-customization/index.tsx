@@ -1,6 +1,4 @@
-import {
-  Box
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 

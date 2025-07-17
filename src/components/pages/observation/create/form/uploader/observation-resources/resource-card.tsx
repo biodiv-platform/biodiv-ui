@@ -1,4 +1,4 @@
-import { CloseButton, Flex, Image, Input, RatingGroup } from "@chakra-ui/react";
+import { CloseButton, Flex, Input, RatingGroup } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
@@ -11,8 +11,10 @@ import {
   getYoutubeImage,
   RESOURCE_CTX
 } from "@utils/media";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import Select from "react-select";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import StatusIcon from "../statusicon";
 import useObservationCreate from "../use-observation-resources";
@@ -73,8 +75,6 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
 
   const imageURL = useMemo(() => getImageThumb(resource, user?.id), []);
 
-  const [imageError, setImageError] = useState(false);
-
   return (
     <Flex
       className="fade"
@@ -89,11 +89,11 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
       key={resource.hashKey}
     >
       <ImageBox>
-        <Image
+        <ImageWithFallback
           objectFit="cover"
           borderRadius="md"
-          src={imageError ? getFallbackByMIME(resource.type) : imageURL}
-          onError={() => setImageError(true)}
+          fallbackSrc={getFallbackByMIME(resource.type)}
+          src={imageURL}
         />
         <StatusIcon type={resource.status} />
       </ImageBox>

@@ -62,16 +62,16 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={2}>
           <LocalLink href={`/datatable/show/${datatable.id}`} prefixGroup={true}>
-              <HStack alignItems="center" gap={4}>
-                <Heading
-                  fontSize="lg"
-                  className="elipsis-2"
-                  dangerouslySetInnerHTML={{
-                    __html: getInjectableHTML(datatable?.title || t("common:unknown"))
-                  }}
-                />
-                <Badge colorPalette="red">{datatable.dataTableType}</Badge>
-              </HStack>
+            <HStack alignItems="center" gap={4}>
+              <Heading
+                fontSize="lg"
+                className="elipsis-2"
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(datatable?.title || t("common:unknown"))
+                }}
+              />
+              <Badge colorPalette="red">{datatable.dataTableType}</Badge>
+            </HStack>
           </LocalLink>
         </Flex>
 

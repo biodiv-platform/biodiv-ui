@@ -41,67 +41,67 @@ export default function TraitsList({
   }, [speciesTraitsListDefault]);
 
   const newTraitsList = useMemo(() => {
-      return speciesTraitsList
-        ? speciesTraitsList.map((speciesTrait) => {
-            const traitType = speciesTrait.traits?.traitTypes;
+    return speciesTraitsList
+      ? speciesTraitsList.map((speciesTrait) => {
+          const traitType = speciesTrait.traits?.traitTypes;
 
-            switch (speciesTrait.traits?.traitTypes) {
-              case TRAIT_TYPES.SINGLE_CATEGORICAL:
-                return {
-                  defaultValue: factsList?.find((v) => v.nameId === speciesTrait.traits?.traitId)
-                    ?.valueId,
-                  speciesTrait,
-                  traitType
-                };
+          switch (speciesTrait.traits?.traitTypes) {
+            case TRAIT_TYPES.SINGLE_CATEGORICAL:
+              return {
+                defaultValue: factsList?.find((v) => v.nameId === speciesTrait.traits?.traitId)
+                  ?.valueId,
+                speciesTrait,
+                traitType
+              };
 
-              case TRAIT_TYPES.RANGE:
-                if (speciesTrait.traits?.dataType == "DATE") {
-                  return {
-                    defaultValue: factsList
-                      ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
-                      .map((o) =>
-                        o.toDate
-                          ? formatDate(o.fromDate, "YYYY-MM-DD") +
-                            ":" +
-                            formatDate(o.toDate, "YYYY-MM-DD")
-                          : formatDate(o.fromDate, "YYYY-MM-DD")
-                      ),
-                    speciesTrait,
-                    traitType
-                  };
-                }
+            case TRAIT_TYPES.RANGE:
+              if (speciesTrait.traits?.dataType == "DATE") {
                 return {
                   defaultValue: factsList
                     ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
-                    .map((o) => o.value),
+                    .map((o) =>
+                      o.toDate
+                        ? formatDate(o.fromDate, "YYYY-MM-DD") +
+                          ":" +
+                          formatDate(o.toDate, "YYYY-MM-DD")
+                        : formatDate(o.fromDate, "YYYY-MM-DD")
+                    ),
                   speciesTrait,
                   traitType
                 };
+              }
+              return {
+                defaultValue: factsList
+                  ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
+                  .map((o) => o.value),
+                speciesTrait,
+                traitType
+              };
 
-              case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
-                if (speciesTrait.traits?.dataType == "COLOR") {
-                  return {
-                    defaultValue: factsList
-                      ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
-                      .map((v) => v.value),
-                    speciesTrait,
-                    traitType
-                  };
-                } else {
-                  return {
-                    defaultValue: factsList
-                      ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
-                      .map((v) => v.valueId),
-                    speciesTrait,
-                    traitType
-                  };
-                }
+            case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
+              if (speciesTrait.traits?.dataType == "COLOR") {
+                return {
+                  defaultValue: factsList
+                    ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
+                    .map((v) => v.value),
+                  speciesTrait,
+                  traitType
+                };
+              } else {
+                return {
+                  defaultValue: factsList
+                    ?.filter((v) => v.nameId === speciesTrait.traits?.traitId)
+                    .map((v) => v.valueId),
+                  speciesTrait,
+                  traitType
+                };
+              }
 
-              default:
-                return { defaultValue: null, speciesTrait };
-            }
-          })
-        : []
+            default:
+              return { defaultValue: null, speciesTrait };
+          }
+        })
+      : [];
   }, [factsList, speciesTraitsList]);
 
   return (

@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, Image, Stack } from "@chakra-ui/react";
+import { Badge, Box, Flex, Stack } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
@@ -7,13 +7,19 @@ import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import React from "react";
 import { components } from "react-select";
 
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
+
 export const CommonNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
   return (
     <components.Option {...props}>
       <Stack direction={"row"} alignItems="center">
         {hiddenIcon && (
-          <Image boxSize="2rem" src={getSuggestionIcon(props.data.icon)} alt={props.data.group} />
+          <ImageWithFallback
+            boxSize="2rem"
+            src={getSuggestionIcon(props.data.icon)}
+            fallbackSrc={props.data.group}
+          />
         )}
         <Box>
           <Flex alignItems="center">

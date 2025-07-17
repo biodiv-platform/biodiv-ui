@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionItemContent,
   AccordionItemTrigger,
-  AccordionRoot,
+  AccordionRoot
 } from "@/components/ui/accordion";
 
 import MapDrawContainer from "./map-draw-container";

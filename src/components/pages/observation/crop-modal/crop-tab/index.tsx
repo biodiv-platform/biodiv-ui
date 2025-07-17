@@ -10,6 +10,8 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import ReactCrop from "react-image-crop";
 
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
+
 import ObservationImageStatusBadge from "../status-badge";
 
 const objectToArray = (obj) => {
@@ -91,7 +93,7 @@ export default function CropTab({ data, setData, canCrop }) {
               <Box position="absolute" top={0} left={0} ml={3} mt={1} hidden={!canCrop}>
                 <ObservationImageStatusBadge status={selectionStatus || CROP_STATUS.NOT_CURATED} />
               </Box>
-              <Image
+              <ImageWithFallback
                 w="full"
                 h="full"
                 borderRadius="md"
@@ -99,7 +101,8 @@ export default function CropTab({ data, setData, canCrop }) {
                 borderColor={currentCropItem?.id === resource.id ? "blue.500" : "gray.300"}
                 bg="gray.200"
                 objectFit="contain"
-                alt={getFallbackByMIME(resource.type) || `${resource.id}`}
+                fallbackSrc={getFallbackByMIME(resource.type)}
+                alt={`${resource.id}`}
                 src={getResourceThumbnail(
                   resource.context,
                   resource.fileName,

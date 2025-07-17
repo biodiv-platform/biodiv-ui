@@ -1,6 +1,6 @@
 {
   "name": "biodiv-ui",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "India Biodiversity Portal",
   "scripts": {
     "dev": "next",
@@ -55,7 +55,7 @@
     "immer": "^9.0.15",
     "indian-number-format": "^1.0.5",
     "jwt-decode": "^3.1.2",
-    "keen-slider": "^6.8.3",
+    "keen-slider": "^6.8.6",
     "leaflet": "^1.9.2",
     "local-storage-json": "^1.1.0",
     "mapbox-gl": "^2.10.0",

@@ -38,14 +38,16 @@ export const formatGroupRules = (rules, traits) => {
     });
   });
   //populate trait rules array
-  traitRuleList?.forEach((item)=> {
-    const trait = traits.filter(trait => trait.traits.traitId === item.traitId)[0]
+  traitRuleList?.forEach((item) => {
+    const trait = traits.filter((trait) => trait.traits.traitId === item.traitId)[0];
     groupRules.push({
       id: item.id,
       name: "traitRule",
-      value: `${trait.traits.name} : ${trait.values.filter(v => v.traitValueId ===item.value)[0].value}`
-    })
-  })
+      value: `${trait.traits.name} : ${
+        trait.values.filter((v) => v.traitValueId === item.value)[0].value
+      }`
+    });
+  });
 
   return groupRules;
 };

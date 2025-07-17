@@ -35,7 +35,7 @@ export const viewTabs = [
   },
   {
     name: "common:list.view_type.grid",
-    icon: <GridIcon  size={"sm"}/>,
+    icon: <GridIcon size={"sm"} />,
     key: "list_minimal"
   },
   {

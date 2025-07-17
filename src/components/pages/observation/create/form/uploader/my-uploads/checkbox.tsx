@@ -1,10 +1,12 @@
-import { AspectRatio, Box, IconButton, Image, useCheckbox } from "@chakra-ui/react";
+import { AspectRatio, Box, IconButton, useCheckbox } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import { getImageThumb } from "../observation-resources/resource-card";
 import StatusIcon from "../statusicon";
@@ -53,7 +55,12 @@ const Checkbox = (props: any) => {
 
   return (
     <Box as="label" className="fade" aria-checked={props.isChecked}>
-      <input {...getHiddenInputProps()} onChange={handleOnChange} required={false} />
+      <input
+        {...getHiddenInputProps()}
+        onChange={handleOnChange}
+        required={false}
+        type="checkbox"
+      />
       <AspectRatio
         ratio={1}
         {...getControlProps()}
@@ -76,13 +83,14 @@ const Checkbox = (props: any) => {
             <DeleteIcon />
           </IconButton>
           <StatusIcon type={props.asset.status} />
-          <Image
+          <ImageWithFallback
             style={{ filter: "none" }}
             boxSize="full"
             objectFit="cover"
             src={imageURL}
             borderRadius="md"
-            alt={getFallbackByMIME(props.asset.type) || props.asset.fileName}
+            fallbackSrc={getFallbackByMIME(props.asset.type)}
+            alt={props.asset.fileName}
           />
         </ImageBox>
       </AspectRatio>

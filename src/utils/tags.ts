@@ -35,9 +35,9 @@ export const cleanFacts = (facts = {}) => {
 /**
  * Same as `cleanFacts()` but for singular
  */
-export const cleanSingleFact = (dataType,valueList) => {
+export const cleanSingleFact = (dataType, valueList) => {
   const factValueArray = Array.isArray(valueList) ? valueList : [valueList];
-  return (dataType!="STRING")
+  return dataType != "STRING"
     ? { valuesString: factValueArray, traitValueList: [] }
     : { traitValueList: factValueArray, valuesString: [] };
 };

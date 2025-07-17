@@ -34,12 +34,7 @@ export default function FilterIconList({
             positioning={{ placement: "top" }}
             showArrow={true}
           >
-            <Image
-              boxSize="1.7em"
-              // ignoreFallback={true}
-              src={getLocalIcon(name, type)}
-              alt={name}
-            />
+            <Image boxSize="1.7em" src={getLocalIcon(name, type)} alt={name} />
           </Tooltip>
         </Box>
       ))}

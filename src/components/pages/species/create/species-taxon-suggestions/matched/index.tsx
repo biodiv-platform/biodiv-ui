@@ -27,7 +27,7 @@ export default function SpeciesTaxonMatched() {
           onClick={() => setSelectedTaxon(original.taxonomyDefinition)}
         >
           {t("species:create.form.use_taxon")}
-          <LuMoveRight/>
+          <LuMoveRight />
         </Button>
       )
     }

@@ -48,7 +48,7 @@ export default function SpeciesTaxonPartial() {
           onClick={() => createPartialTaxon(original.registry)}
         >
           {t("species:create.form.select")}
-          <LuMoveRight/>
+          <LuMoveRight />
         </Button>
       )
     }

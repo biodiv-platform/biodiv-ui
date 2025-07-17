@@ -22,13 +22,7 @@ export default function DocumentUploaderTabs({ onChange, externalUrl }) {
   }, [selectedDocument]);
 
   return (
-    <Tabs.Root
-      className="nospace"
-      defaultValue={tabIndex}
-      lazyMount={true}
-      width={"full"}
-
-    >
+    <Tabs.Root className="nospace" defaultValue={tabIndex} lazyMount={true} width={"full"}>
       <Tabs.List mb={4} overflowX="auto" py={1}>
         <Tabs.Trigger value="selectedDocument" disabled={externalUrl}>
           ✔️ {t("document:upload.selected")}

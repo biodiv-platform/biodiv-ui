@@ -9,7 +9,7 @@ export default function SpeciesFields() {
   const { species, permissions } = useSpecies();
   return (
     <div>
-        {permissions.isContributor && <SpeciesFieldSimpleEdit />}
+      {permissions.isContributor && <SpeciesFieldSimpleEdit />}
       {species.fieldData.map((fieldGroup) => (
         <SpeciesFieldsProvider key={fieldGroup.parentField.id}>
           <FieldGroupPanel key={fieldGroup.parentField.id} {...fieldGroup} />
