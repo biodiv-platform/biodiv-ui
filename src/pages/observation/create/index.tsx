@@ -7,6 +7,7 @@ import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/ob
 import { axGetLicenseList } from "@services/resources.service";
 import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
 const ObservationCreateNextPage = (props) => (
@@ -24,12 +25,12 @@ export async function getServerSideProps(ctx) {
   const [speciesGroups, languageList, groupData, licensesList] = await Promise.all([
     axGetspeciesGroups(),
     axGetLangList(),
-    axGroupList(aReq.href),
+    axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID),
     axGetLicenseList()
   ]);
 
   const observationCreateFormData = await axGetCreateObservationPageData(
-    groupData?.currentGroup?.id,
+    groupData?.currentGroup?.groupId,
     ctx
   );
 

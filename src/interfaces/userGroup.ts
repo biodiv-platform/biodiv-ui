@@ -326,6 +326,7 @@ export interface UserGroupEditData {
   newFilterRule?: string;
   speciesGroupId?: number /* int64 */[];
   habitatId?: number /* int64 */[];
+  translation?;
 }
 export interface UserGroupFilterDate {
   fromDate?: string; // date-time

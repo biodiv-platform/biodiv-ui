@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
@@ -74,6 +74,7 @@ const GallerySetupTable = ({
 
   return (
     <>
+    <Box w="full" overflowX="auto" className="fade">
       <table style={{ minWidth: "750px" }} className="table table-bordered">
         <thead>
           <tr>
@@ -111,6 +112,7 @@ const GallerySetupTable = ({
           {t("group:homepage_customization.gallery_setup.save_order")}
         </Button>
       </ButtonGroup>
+      </Box>
     </>
   );
 };

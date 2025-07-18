@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 import GallerySetupFrom from "./gallery-setup-form";
@@ -17,27 +18,33 @@ export default function GallerySetup({
   const [editGalleryData, setEditGalleryData] = useState(galleryList);
 
   return isEdit ? (
-    <GalleryEditForm
-      setIsEdit={setIsEdit}
-      setGalleryList={setGalleryList}
-      editGalleryData={editGalleryData}
-      languages = {languages}
-    />
+    <Box p={3}>
+      <GalleryEditForm
+        setIsEdit={setIsEdit}
+        setGalleryList={setGalleryList}
+        editGalleryData={editGalleryData}
+        languages={languages}
+      />
+    </Box>
   ) : isCreate ? (
-    <GallerySetupFrom
-      setIsCreate={setIsCreate}
-      galleryList={galleryList}
-      setGalleryList={setGalleryList}
-      languages={languages}
-    />
+    <Box p={3}>
+      <GallerySetupFrom
+        setIsCreate={setIsCreate}
+        galleryList={galleryList}
+        setGalleryList={setGalleryList}
+        languages={languages}
+      />
+    </Box>
   ) : (
-    <GallerySetupTable
-      userGroupId={userGroupId}
-      setIsCreate={setIsCreate}
-      setGalleryList={setGalleryList}
-      galleryList={galleryList}
-      setIsEdit={setIsEdit}
-      setEditGalleryData={setEditGalleryData}
-    />
+    <Box p={3}>
+      <GallerySetupTable
+        userGroupId={userGroupId}
+        setIsCreate={setIsCreate}
+        setGalleryList={setGalleryList}
+        galleryList={galleryList}
+        setIsEdit={setIsEdit}
+        setEditGalleryData={setEditGalleryData}
+      />
+    </Box>
   );
 }

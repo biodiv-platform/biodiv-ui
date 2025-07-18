@@ -157,7 +157,9 @@ export default function CreateGroupPageComponent({
   const hForm = useForm<any>({
     resolver: yupResolver(
       Yup.object().shape({
-        name: Yup.string().required(),
+        name: Yup.string()
+          .required()
+          .matches(/^[^/]*$/, "Name cannot contain '/'"),
         speciesGroup: Yup.array().required(),
         habitatId: Yup.array().required(),
         allowUserToJoin: Yup.boolean().required(),
@@ -391,14 +393,9 @@ export default function CreateGroupPageComponent({
     if (currentStep === 0) {
       isValid = await hForm.trigger(["name"]);
     } else if (currentStep === 1) {
-      isValid = await hForm.trigger([
-        "speciesGroup",
-        "habitatId",
-        "allowUserToJoin",
-        "spacialCoverage"
-      ]);
+      isValid = await hForm.trigger(["speciesGroup", "habitatId", "spacialCoverage"]);
     } else if (currentStep === 2) {
-      isValid = await hForm.trigger(["founder", "moderator"]);
+      isValid = await hForm.trigger(["allowUserToJoin", "founder", "moderator"]);
     } else if (currentStep === 3) {
       isValid = true;
     } else if (currentStep === 4) {
@@ -487,10 +484,23 @@ export default function CreateGroupPageComponent({
             {currentStep == 0 && (
               <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
                 <Box gridColumn="1/4">
-                  <TextBoxField name="name" isRequired={true} label={t("group:name")} />
-                  <RichTextareaField name="description" label={t("form:description.title")} />
+                  <TextBoxField
+                    name="name"
+                    isRequired={true}
+                    label={t("group:name")}
+                    hint="Kindly provide the name of your group. Keep the name concise, as longer names may not be properly formatted in all locations, and the group URL will be generated based on this."
+                  />
+                  <RichTextareaField
+                    name="description"
+                    label={t("form:description.title")}
+                    hint="Please provide a concise overview of the aims and objectives of the group."
+                  />
                 </Box>
-                <ImageUploaderField label="Logo" name="icon" />
+                <ImageUploaderField
+                  label="Logo"
+                  name="icon"
+                  hint="Upload a logo for the group. It should preferably be cropped to a square."
+                />
               </SimpleGrid>
             )}
             {currentStep == 1 && (
@@ -501,6 +511,7 @@ export default function CreateGroupPageComponent({
                   options={speciesGroups}
                   type="species"
                   isRequired={true}
+                  hint="Select the species groups that this group will cover. If none of the other groups are available, select Other."
                 />
                 <IconCheckboxField
                   name="habitatId"
@@ -508,47 +519,66 @@ export default function CreateGroupPageComponent({
                   options={habitats}
                   type="habitat"
                   isRequired={true}
+                  hint="Select which habitats will be included in this group. If none of the provided habitats are available, select Other."
                 />
-                <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
                 <AreaDrawField
                   label={t("group:spatial_coverge")}
                   name={"spacialCoverage"}
                   mb={8}
                   isRequired={true}
+                  hint="Using the tools on the map, draw a rough polygon around the areas this group covers."
                 />
               </>
             )}
 
             {currentStep == 2 && (
               <>
-                <AdminInviteField name="founder" label={t("group:invite_founders")} />
-                <AdminInviteField name="moderator" label={t("group:invite_moderators")} />
+                <CheckboxField
+                  name="allowUserToJoin"
+                  label={t("group:join_without_invitation")}
+                  hint="Allow users to join the group as members without invitation? Closed groups will need moderators to approve requests before joining."
+                />
+                <AdminInviteField
+                  name="founder"
+                  label={t("group:invite_founders")}
+                  hint="Founders will be able to edit the group and change all group settings."
+                />
+                <AdminInviteField
+                  name="moderator"
+                  label={t("group:invite_moderators")}
+                  hint="Moderators cannot edit the group settings but will have additional privileges such as posting content in bulk and featuring objects."
+                />
               </>
             )}
 
             {currentStep == 3 && (
               <>
-                <Box width={["100%", 350]} justifyContent="space-between">
-                  <SwitchField
-                    name="showGallery"
-                    label={t("group:homepage_customization.gallery")}
-                  />
-                  <SwitchField
-                    name="showStats"
-                    label={t("group:homepage_customization.module_stats")}
-                  />
-                  <SwitchField
-                    name="showRecentObservation"
-                    label={t("group:homepage_customization.recent_observation")}
-                  />
-                  <SwitchField
-                    name="showGridMap"
-                    label={t("group:homepage_customization.observation_map")}
-                  />
-                  <SwitchField
-                    name="showDesc"
-                    label={t("group:homepage_customization.show_desc")}
-                  />
+                <Box className="fade">
+                  <Box color="gray.600">
+                    Switch on or off homepage components such as descriptions, content stats, etc.
+                  </Box>
+                  <Box width={["100%", 350]} justifyContent="space-between" mt={4}>
+                    <SwitchField
+                      name="showGallery"
+                      label={t("group:homepage_customization.gallery")}
+                    />
+                    <SwitchField
+                      name="showStats"
+                      label={t("group:homepage_customization.module_stats")}
+                    />
+                    <SwitchField
+                      name="showRecentObservation"
+                      label={t("group:homepage_customization.recent_observation")}
+                    />
+                    <SwitchField
+                      name="showGridMap"
+                      label={t("group:homepage_customization.observation_map")}
+                    />
+                    <SwitchField
+                      name="showDesc"
+                      label={t("group:homepage_customization.show_desc")}
+                    />
+                  </Box>
                 </Box>
               </>
             )}
@@ -559,6 +589,9 @@ export default function CreateGroupPageComponent({
         </FormProvider>
         {currentStep == 4 && (
           <>
+            <Box color="gray.600">
+              Upload images to the homepage gallery or use observations as gallery images.
+            </Box>
             {isCreate ? (
               <GallerySetupFrom
                 setIsCreate={setIsCreate}
@@ -581,6 +614,9 @@ export default function CreateGroupPageComponent({
         {currentStep == 5 &&
           (isAdmin ? (
             <Box p={3}>
+              <Box color="gray.600">
+                Additional queries/fields within the observation upload form for your group.
+              </Box>
               {isCreate ? (
                 <AddCustomFieldForm
                   customFields={customFields}
@@ -605,6 +641,9 @@ export default function CreateGroupPageComponent({
         {currentStep == 6 &&
           (isAdmin ? (
             <Box p={3}>
+              <Box color="gray.600">
+                Automated rules that will allow posting of qualifying observations to the grou
+              </Box>
               {isCreate ? (
                 <AddGroupRulesForm
                   groupRules={groupRules}

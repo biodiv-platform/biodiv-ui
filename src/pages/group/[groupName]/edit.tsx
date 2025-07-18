@@ -3,6 +3,7 @@ import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import { axGetspeciesGroups, axGetTraitsByGroupId } from "@services/observation.service";
+import { axGetTaxonDetails } from "@services/taxonomy.service";
 import {
   axGetAllCustomFields,
   axGetGroupAdministratorsByGroupId,
@@ -37,21 +38,39 @@ export const getServerSideProps = async (ctx) => {
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitats } = await axGetAllHabitat();
 
-  const { currentGroup } = await axGroupList(aReq.href);
+  const { currentGroup } = await axGroupList(aReq.href, langId);
 
   // This can throw error if user is not authorized
   const { data: allCustomField } = await axGetAllCustomFields(ctx);
-  const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(currentGroup.id, ctx);
-  const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.id);
-  const { success: s4, data: groupRules } = await axGetUserGroupRules(currentGroup.id, ctx);
-  const { success: s3, data: customFieldList } = await axGetUserGroupCustomField(
-    currentGroup.id,
+  const { success: s1, data: groupInfo } = await axGetGroupEditInfoByGroupId(
+    currentGroup.groupId,
     ctx
   );
-  const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.id);
-  const { success: s5, customisations } = await axGetUserGroupMediaToggle(currentGroup.id);
+  const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.groupId);
+  const { success: s4, data: groupRules } = await axGetUserGroupRules(currentGroup.groupId, ctx);
+  const { success: s3, data: customFieldList } = await axGetUserGroupCustomField(
+    currentGroup.groupId,
+    ctx
+  );
+  const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.groupId, langId);
+  const { success: s5, customisations } = await axGetUserGroupMediaToggle(currentGroup.groupId);
   const { success: s6, data: traits } = await axGetTraitsByGroupId(829, langId);
   const { data: languagesList } = await axGetLangList();
+  if (groupRules.taxonomicRuleList?.length) {
+    const taxonPromises = groupRules.taxonomicRuleList.map(async (item) => {
+      const details = await axGetTaxonDetails(item.taxonomyId);
+      return {
+        ...item,
+        name: details.data.taxonomyDefinition.name
+      };
+    });
+    groupRules.taxonomicRuleList = await Promise.all(taxonPromises);
+  }
+  /*groupInfo.translation.sort((a, b) => {
+    const nameA = languagesList.find((lang) => lang.id === Number(a.language))?.name || "";
+    const nameB = languagesList.find((lang) => lang.id === Number(b.language))?.name || "";
+    return nameA.localeCompare(nameB);
+  });*/
   if (s1 && s2 && s3 && s4 && s5 && s6) {
     return {
       props: {
@@ -62,7 +81,7 @@ export const getServerSideProps = async (ctx) => {
         allCustomField,
         groupRules,
         homePageDetails,
-        userGroupId: currentGroup.id,
+        userGroupId: currentGroup.groupId,
         founders: data.founderList.map(({ name, id }) => ({ label: `${name} (${id})`, value: id })),
         moderators: data.moderatorList.map(({ name, id }) => ({
           label: `${name} (${id})`,

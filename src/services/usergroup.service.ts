@@ -26,9 +26,9 @@ export const axGetUserGroupById = async (userGroupId) => {
   }
 };
 
-export const axGroupListExpanded = async () => {
+export const axGroupListExpanded = async (langId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/list`);
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/list/${langId}`);
     return { success: true, data: transformUserGroupList(data) };
   } catch (e) {
     console.error(e);
@@ -371,9 +371,9 @@ export const axRemoveUserGroupRule = async (userGroupId, payload) => {
   }
 };
 
-export const axGetGroupHompageDetails = async (userGroupId) => {
+export const axGetGroupHompageDetails = async (userGroupId, langId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/homePage/${userGroupId}`);
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/homePage/${userGroupId}/${langId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);

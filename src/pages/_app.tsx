@@ -88,7 +88,7 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
   const user = getParsedUser(appContext.ctx);
   const languageId = SITE_CONFIG.LANG.LIST[appContext.ctx.locale]?.ID;
 
-  const { currentGroup, groups } = await axGroupList(aReq.href, appContext.ctx.locale);
+  const { currentGroup, groups } = await axGroupList(aReq.href, languageId,appContext.ctx.locale);
 
   return {
     pageProps,

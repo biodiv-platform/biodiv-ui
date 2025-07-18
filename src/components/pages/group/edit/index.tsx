@@ -174,6 +174,7 @@ export default function EditGroupPageComponent({
             habitats={habitats}
             speciesGroups={speciesGroups}
             currentStep={currentStep}
+            languages={languagesList}
           />
         ) : (
           <Spinner mb={10} />
@@ -183,16 +184,19 @@ export default function EditGroupPageComponent({
             userGroupId={userGroupId}
             founders={founders}
             moderators={moderators}
+            allowUsersToJoin = {groupInfo}
           />
         )}
         {(steps[currentStep].translation == "group:homepage_customization.title" ||
           steps[currentStep].translation == "group:homepage_customization.gallery_setup.title") && (
-          <GroupHomePageCustomization
-            userGroupId={userGroupId}
-            homePageDetails={homePageDetails}
-            currentStep={currentStep}
-            languages = {languagesList}
-          />
+          <Box mt={4}>
+            <GroupHomePageCustomization
+              userGroupId={userGroupId}
+              homePageDetails={homePageDetails}
+              currentStep={currentStep}
+              languages={languagesList}
+            />
+          </Box>
         )}
         {isAdmin ? (
           <div>
@@ -207,14 +211,16 @@ export default function EditGroupPageComponent({
               <GroupRules rules={groupRules} userGroupId={userGroupId} traits={traits} />
             )}
           </div>
-        ) : steps[currentStep].translation == "group:custom_field.title" || steps[currentStep].translation == "group:rules.title" ? (
+        ) : steps[currentStep].translation == "group:custom_field.title" ||
+          steps[currentStep].translation == "group:rules.title" ? (
           <ContactAdmin />
         ) : (
           <Box></Box>
         )}
-        {(isAdmin || isFounder) && steps[currentStep].translation == "group:observation_display" && (
-          <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
-        )}
+        {(isAdmin || isFounder) &&
+          steps[currentStep].translation == "group:observation_display" && (
+            <ObservationCustomizations userGroupId={userGroupId} mediaToggle={mediaToggle} />
+          )}
         {steps[currentStep].translation == "group:species_fields.title" && (
           <SpeciesHierarchyForm
             onSubmit={handleSpeciesFieldsSubmit}

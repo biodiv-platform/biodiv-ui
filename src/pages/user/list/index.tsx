@@ -7,6 +7,7 @@ import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import { DEFAULT_FILTER } from "@static/user";
 import { hasAccess } from "@utils/auth";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
 function UserListPage({ userListData, initialFilterParams, isAdmin }) {
@@ -29,8 +30,8 @@ export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const aURL = absoluteUrl(ctx).href;
   const isAdmin = hasAccess([Role.Admin], ctx);
-  const { currentGroup } = await axGroupList(aURL);
-  const initialFilterParams = { ...ctx.query, ...DEFAULT_FILTER, userGroupList: currentGroup?.id };
+  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID);
+  const initialFilterParams = { ...ctx.query, ...DEFAULT_FILTER, userGroupList: currentGroup?.groupId };
   const { data } = await axGetUserList(initialFilterParams);
 
   return {

@@ -1,9 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
+import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
+import {
+  axAddGroupAdminMembers,
+  axUserGroupRemoveAdminMembers,
+  axUserGroupUpdate
+} from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -20,11 +25,17 @@ const discardExistingAdministrators = (updatedMembers, currentAdministrators) =>
   return transformMemberPayload(newAdministrators);
 };
 
-export default function GroupAdministratorsEditForm({ founders, moderators, userGroupId }) {
+export default function GroupAdministratorsEditForm({
+  founders,
+  moderators,
+  userGroupId,
+  allowUsersToJoin
+}) {
   const { t } = useTranslation();
 
   const founderIds = founders.map(({ value }) => value);
   const moderatorIds = moderators.map(({ value }) => value);
+  const allowUsers = allowUsersToJoin.allowUserToJoin;
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -36,7 +47,8 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     ),
     defaultValues: {
       founders,
-      moderators
+      moderators,
+      allowUsers
     }
   });
 
@@ -56,6 +68,13 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   const handleFormSubmit = async (values) => {
+    const { success: s1 } = await axUserGroupUpdate(
+      {
+        ...allowUsersToJoin,
+        allowUserToJoin: values.allowUsers
+      },
+      userGroupId
+    );
     const founderData = discardExistingAdministrators(values.founders, founderIds);
     const moderatorData = discardExistingAdministrators(values.moderators, moderatorIds);
     const membersData = transformMemberPayload(values.members);
@@ -68,7 +87,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
       moderatorsEmail: moderatorData.emailList
     };
     const { success } = await axAddGroupAdminMembers(payload);
-    if (success) {
+    if (success && s1) {
       notification(t("group:admin.updated"), NotificationType.Success);
     } else {
       notification(t("group:admin.error"), NotificationType.Error);
@@ -78,6 +97,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+        <CheckboxField name="allowUsers" label={t("group:join_without_invitation")} mt={2} />
         <AdminInviteField
           name="founders"
           label="Edit Founders"

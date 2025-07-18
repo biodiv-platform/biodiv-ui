@@ -1,6 +1,22 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  SimpleGrid,
+  Tab,
+  TabList,
+  Tabs,
+  useDisclosure
+} from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import { CheckboxField } from "@components/form/checkbox";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -10,8 +26,9 @@ import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import Select from "react-select";
 import * as Yup from "yup";
 
 import AreaDrawField from "../common/area-draw-field";
@@ -25,6 +42,7 @@ interface IuserGroupEditProps {
   habitats;
   speciesGroups;
   currentStep;
+  languages;
 }
 
 export default function UserGroupEditForm({
@@ -32,7 +50,8 @@ export default function UserGroupEditForm({
   userGroupId,
   habitats,
   speciesGroups,
-  currentStep = -1
+  currentStep = -1,
+  languages
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -43,8 +62,7 @@ export default function UserGroupEditForm({
     neLongitude,
     swLatitude,
     swLongitude,
-    name,
-    description,
+    translation,
     icon,
     habitatId,
     speciesGroupId,
@@ -55,7 +73,15 @@ export default function UserGroupEditForm({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
-        name: Yup.string().required(),
+        translation: Yup.array()
+          .of(
+            Yup.object({
+              name: Yup.string().required().matches(/^[^/]*$/, "Name cannot contain '/'"),
+              language: Yup.number().integer().required(),
+              description: Yup.string()
+            })
+          )
+          .required(),
         speciesGroupId: Yup.array().required(),
         habitatId: Yup.array().required(),
         spacialCoverage: Yup.object().shape({
@@ -65,8 +91,7 @@ export default function UserGroupEditForm({
       })
     ),
     defaultValues: {
-      name,
-      description,
+      translation,
       icon,
       habitatId,
       speciesGroupId,
@@ -100,14 +125,128 @@ export default function UserGroupEditForm({
     }
   };
 
+  const languageMap = Object.fromEntries(translation.map((item, index) => [item.language, index]));
+
+  const [translationSelected, setTranslationSelected] = useState<number>(
+    languageId in languageMap ? languageMap[languageId] : 0
+  );
+  const [langId, setLangId] = useState(0);
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const handleAddTranslation = () => {
+    const currentList = hForm.getValues("translation");
+
+    const newEntry = { name: "", language: langId, description: "" };
+    hForm.setValue("translation", [...currentList, newEntry]);
+    languageMap[langId] = currentList.length;
+    setTranslationSelected(currentList.length);
+  };
+
   return (
     <FormProvider {...hForm}>
+      {(currentStep == -1 || currentStep == 0) && (
+        <>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  handleAddTranslation();
+                  setLangId(0);
+                  onClose();
+                }}
+              >
+                <ModalHeader> {t("common:create_form.add_translation_button")}</ModalHeader>
+                <ModalBody>
+                  <Box>
+                    <FormControl mb={2} isRequired={true}>
+                      <FormLabel htmlFor="name">{t("common:create_form.language")}</FormLabel>
+                      {
+                        <Select
+                          id="langId"
+                          inputId="langId"
+                          name="langId"
+                          placeholder={t("common:create_form.language_placeholder")}
+                          onChange={(o: { value: number; label: string }) => {
+                            setLangId(o.value);
+                          }}
+                          components={{
+                            IndicatorSeparator: () => null
+                          }}
+                          options={languages
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((lang) => ({
+                              value: lang.id,
+                              label: lang.name
+                            }))}
+                          isSearchable={true} // Enables search
+                        />
+                      }
+                    </FormControl>
+                  </Box>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    mr={3}
+                    onClick={() => {
+                      setLangId(0);
+                      onClose();
+                    }}
+                  >
+                    {t("common:create_form.cancel")}
+                  </Button>
+                  <Button colorScheme="blue" type="submit">
+                    {t("common:create_form.create")}
+                  </Button>
+                </ModalFooter>
+              </form>
+            </ModalContent>
+          </Modal>
+          <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
+            <Button colorScheme="green">{t("common:create_form.add_translation_button")}</Button>
+          </Flex>
+          <Tabs
+            overflowX="auto"
+            mb={4}
+            variant="unstyled"
+            bg="gray.100"
+            rounded="md"
+            index={translationSelected}
+            onChange={(index) => setTranslationSelected(index)}
+          >
+            <TabList>
+              {hForm
+                .getValues()
+                .translation
+                .map((t) => (
+                  <Tab
+                    key={t.language}
+                    _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
+                    m={1}
+                  >
+                    {languages.filter((lang) => lang.id === Number(t.language))[0].name}
+                  </Tab>
+                ))}
+            </TabList>
+          </Tabs>
+        </>
+      )}
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
         {(currentStep == -1 || currentStep == 0) && (
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
             <Box gridColumn="1/4">
-              <TextBoxField name="name" isRequired={true} label={t("group:name")} />
-              <RichTextareaField name="description" label={t("form:description.title")} />
+              <TextBoxField
+                key={`name-${translationSelected}`}
+                name={`translation.${translationSelected}.name`}
+                isRequired={true}
+                label={t("group:name")}
+              />
+              <RichTextareaField
+                key={`description-${translationSelected}`}
+                name={`translation.${translationSelected}.description`}
+                label={t("form:description.title")}
+              />
             </Box>
             <ImageUploaderField label="Logo" name="icon" />
           </SimpleGrid>
@@ -128,7 +267,6 @@ export default function UserGroupEditForm({
               type="habitat"
               isRequired={true}
             />
-            <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
             <AreaDrawField
               label={t("group:spatial_coverge")}
               name={"spacialCoverage"}

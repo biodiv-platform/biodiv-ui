@@ -9,6 +9,7 @@ import {
 } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
 const DataTableCreatePage = (props) => <DataTableCreatePageComponent {...props} />;
@@ -27,8 +28,8 @@ export async function getServerSideProps(ctx) {
   const aReq = absoluteUrl(ctx);
 
   const {
-    currentGroup: { id: userGroupId }
-  } = await axGroupList(aReq.href);
+    currentGroup: { groupId: userGroupId }
+  } = await axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID);
   const {
     data: { customField }
   } = await axGetCreateObservationPageData(userGroupId, ctx);

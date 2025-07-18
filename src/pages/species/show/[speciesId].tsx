@@ -31,12 +31,12 @@ export const getServerSideProps = async (ctx) => {
   //   : SITE_CONFIG.LANG.DEFAULT_ID;
 
   const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL);
+  const { currentGroup } = await axGroupList(aURL, currentLocaleId);
 
   const [fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
     await Promise.all([
-      axGetAllFieldsMeta({ langId: currentLocaleId, userGroupId: currentGroup.id }),
-      axGetSpeciesById(ctx.query.speciesId, currentGroup.id != null ? currentGroup : null),
+      axGetAllFieldsMeta({ langId: currentLocaleId, userGroupId: currentGroup.groupId }),
+      axGetSpeciesById(ctx.query.speciesId, currentGroup.groupId != null ? currentGroup : null),
       axGetspeciesGroups(),
       axCheckSpeciesPermission(ctx, ctx.query.speciesId),
       axGetLicenseList()
