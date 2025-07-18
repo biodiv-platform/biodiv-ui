@@ -1,5 +1,6 @@
 import { UserListContextProvider } from "@components/pages/user/common/use-user-filter";
 import UserListComponent from "@components/pages/user/list/user-list-data";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import { axGetUserList } from "@services/user.service";
@@ -30,7 +31,7 @@ export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const aURL = absoluteUrl(ctx).href;
   const isAdmin = hasAccess([Role.Admin], ctx);
-  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID);
+  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
   const initialFilterParams = { ...ctx.query, ...DEFAULT_FILTER, userGroupList: currentGroup?.groupId };
   const { data } = await axGetUserList(initialFilterParams);
 

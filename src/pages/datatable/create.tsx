@@ -1,5 +1,6 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import DataTableCreatePageComponent from "@components/pages/datatable/create";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import {
@@ -29,7 +30,7 @@ export async function getServerSideProps(ctx) {
 
   const {
     currentGroup: { groupId: userGroupId }
-  } = await axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID);
+  } = await axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
   const {
     data: { customField }
   } = await axGetCreateObservationPageData(userGroupId, ctx);

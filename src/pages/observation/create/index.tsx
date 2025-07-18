@@ -1,6 +1,7 @@
 import NoSSR from "@components/@core/no-ssr";
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import ObservationCreateNextComponent from "@components/pages/observation/create-next";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
@@ -25,7 +26,7 @@ export async function getServerSideProps(ctx) {
   const [speciesGroups, languageList, groupData, licensesList] = await Promise.all([
     axGetspeciesGroups(),
     axGetLangList(),
-    axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID),
+    axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID),
     axGetLicenseList()
   ]);
 

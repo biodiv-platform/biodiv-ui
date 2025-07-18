@@ -1,5 +1,6 @@
 import GroupListPageComponent from "@components/pages/group/list";
 import { GroupListFilterProvider } from "@components/pages/group/list/use-group-list";
+import SITE_CONFIG from "@configs/site-config";
 import { axGetspeciesGroups } from "@services/observation.service";
 import { axGroupListExpanded } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
@@ -15,7 +16,7 @@ const GroupListPage = (props) => (
 
 export const getServerSideProps = async (ctx) => {
   const [groupListExpanded, speciesGroups, habitat] = await Promise.all([
-    axGroupListExpanded(getLanguageId(ctx.locale)?.ID),
+    axGroupListExpanded(getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID),
     axGetspeciesGroups(),
     axGetAllHabitat()
   ]);

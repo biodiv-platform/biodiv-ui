@@ -1,5 +1,6 @@
 import { DocumentFilterProvider } from "@components/pages/document/common/use-document-filter";
 import DocumentListPageComponent from "@components/pages/document/list";
+import SITE_CONFIG from "@configs/site-config";
 import { axGroupList } from "@services/app.service";
 import { axGetListData } from "@services/document.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
@@ -23,7 +24,7 @@ export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
 
   const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID);
+  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
 
   const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup?.groupId };
   const { data } = await axGetListData(initialFilterParams);

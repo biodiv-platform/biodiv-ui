@@ -1,5 +1,6 @@
 import { GroupListFilterProvider } from "@components/pages/group/list/use-group-list";
 import UserShowPageComponent from "@components/pages/user/show";
+import SITE_CONFIG from "@configs/site-config";
 import { axGetspeciesGroups } from "@services/observation.service";
 import { axGetUserById } from "@services/user.service";
 import { axGroupListExpanded } from "@services/usergroup.service";
@@ -16,7 +17,7 @@ const UserShowPage = ({ user, groupFilter }) => (
 export const getServerSideProps = async (ctx) => {
   const { success, data: user } = await axGetUserById(ctx.query.userId, ctx);
   const [groupListExpanded, speciesGroups, habitat] = await Promise.all([
-    axGroupListExpanded(getLanguageId(ctx.locale)?.ID),
+    axGroupListExpanded(getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID),
     axGetspeciesGroups(),
     axGetAllHabitat()
   ]);

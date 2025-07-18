@@ -1,4 +1,5 @@
 import HomePageComponent from "@components/pages/home";
+import SITE_CONFIG from "@configs/site-config";
 import { axGroupList } from "@services/app.service";
 import { axGetGroupHompageDetails } from "@services/usergroup.service";
 import { axGetHomeInfo } from "@services/utility.service";
@@ -12,9 +13,9 @@ function index({ homeInfo }) {
 
 export async function getServerSideProps(ctx) {
   const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID);
+  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
   const { data: homeInfo } = currentGroup?.groupId
-    ? await axGetGroupHompageDetails(currentGroup?.groupId, getLanguageId(ctx.locale)?.ID)
+    ? await axGetGroupHompageDetails(currentGroup?.groupId, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID)
     : await axGetHomeInfo();
 
   return {
