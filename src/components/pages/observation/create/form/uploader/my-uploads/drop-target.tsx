@@ -1,12 +1,11 @@
-import { ArrowUpIcon, TimeIcon } from "@chakra-ui/icons";
 import { AspectRatio, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import AddIcon from "@icons/add";
 import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { LuMoveUp, LuPlus, LuTimer } from "react-icons/lu";
 
 import useObservationCreate from "../use-observation-resources";
 
@@ -58,17 +57,17 @@ export default function DropTarget() {
         <input {...getInputProps()} />
         {isProcessing ? (
           <div className="fade">
-            <TimeIcon />
+            <LuTimer />
             <span>{t("form:uploader.processing")}</span>
           </div>
         ) : isDragActive ? (
           <div className="fade">
-            <ArrowUpIcon mb={4} />
+            <LuMoveUp />
             <span>{t("form:uploader.label_release")}</span>
           </div>
         ) : (
           <Text my={2} color="gray.500">
-            <AddIcon />
+            <LuPlus />
           </Text>
         )}
       </DropTargetBox>

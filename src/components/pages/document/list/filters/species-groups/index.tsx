@@ -31,7 +31,7 @@ const SpeciesGroupsFilter = () => {
   const defaultValue = useMemo(() => stringToArray(filter.sGroup), []);
   const speciesGroupList = useMemo(() => speciesMapper(), [species]);
 
-  const onChange = (v) => {
+  const onValueChange = (v) => {
     setFilter((_draft) => {
       _draft.f.offset = 0;
       if (v.length > 0) {
@@ -42,21 +42,21 @@ const SpeciesGroupsFilter = () => {
     });
   };
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue,
-    onChange
+    onValueChange
   });
 
   return (
     <>
-      <SimpleGrid gridGap={2} columns={5}>
+      <SimpleGrid gridGap={2} columns={5} p={4}>
         {speciesGroupList?.map((o) => (
           <CustomCheckbox
             key={o.id}
             id={o.id.toString()}
             label={o.name}
-            stat={o.agg} //replace with ag stats
-            {...getCheckboxProps({ value: o.id.toString() })}
+            stat={o.agg}
+            {...getItemProps({ value: o.id.toString() })}
           />
         ))}
       </SimpleGrid>

@@ -12,27 +12,29 @@ const SpeciesPullMedia = ({ onDone }) => {
   const { isLoading, loadMoreResources, resourcesList } = usePullMedia();
   const { t } = useTranslation();
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     value: observationAssets?.map((o) => o.id) as any
   });
 
   return (
     <Box>
       <Box mb={4}>
-        <Button type="button" leftIcon={<CheckIcon />} onClick={onDone} colorScheme="blue">
+        <Button type="button" onClick={onDone} colorPalette="blue">
+          <CheckIcon />
           {t("form:use_in_observation")}
         </Button>
       </Box>
       <SimpleGrid columns={[2, 3, 4, 5]} gridGap={4} mb={4} className="custom-checkbox-group">
         {resourcesList.list.map((asset) => (
-          <Checkbox key={asset.id} asset={asset} {...getCheckboxProps({ value: asset.id })} />
+          <Checkbox key={asset.id} asset={asset} {...getItemProps({ value: asset.id })} />
         ))}
       </SimpleGrid>
       <Button
         w="full"
         disabled={!resourcesList.hasMore}
-        isLoading={isLoading}
+        loading={isLoading}
         onClick={loadMoreResources}
+        variant={"subtle"}
       >
         {t("common:load_more")}
       </Button>

@@ -1,5 +1,4 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, GridItem, SimpleGrid, useDisclosure, useToast } from "@chakra-ui/react";
+import { Box, GridItem, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import OTPModal from "@components/auth/otp-modal";
 import { CheckboxField } from "@components/form/checkbox";
@@ -20,8 +19,11 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuMoveRight } from "react-icons/lu";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
+
+import { toaster } from "@/components/ui/toaster";
 
 import { LocationPicker } from "./location";
 import {
@@ -57,13 +59,11 @@ function SignUpForm() {
   const { t } = useTranslation();
   const [hideVerificationMethod, setHideVerificationMethod] = useState(true);
   const [user, setUser] = useState(null);
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
   const [isOAuth, setIsOAuth] = useState(false);
   const {
     currentGroup: { id: groupId }
   } = useGlobalState();
-
-  const toast = useToast();
 
   const hForm = useForm<any>({
     mode: "onBlur",
@@ -128,13 +128,12 @@ function SignUpForm() {
     const { latitude, longitude } = payload.credentials;
 
     if (latitude == INVALID_COORDINATE.LATITUDE || longitude == INVALID_COORDINATE.LONGITUDE) {
-      toast({
+      toaster.create({
         title: "Invalid coordinates",
         description: "please select location from google suggestions only",
-        status: "error",
+        type: "error",
         duration: 5000,
-        isClosable: true,
-        position: "top"
+        closable: true
       });
       return;
     }
@@ -167,7 +166,7 @@ function SignUpForm() {
     <>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacingX={4}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} gapX={4}>
             <GridItem colSpan={{ md: 2 }} hidden={isOAuth}>
               <Oauth text={t("user:autofill_with_google")} onSuccess={onOAuthSuccess} />
             </GridItem>
@@ -236,12 +235,12 @@ function SignUpForm() {
               />
             </CheckboxField>
           </Box>
-          <SubmitButton rightIcon={<ArrowForwardIcon />} w="full">
+          <SubmitButton rightIcon={<LuMoveRight />} w="full">
             {t("user:register")}
           </SubmitButton>
         </form>
       </FormProvider>
-      <OTPModal isOpen={isOpen} onClose={onClose} user={user} />
+      <OTPModal isOpen={open} onClose={onClose} user={user} />
     </>
   );
 }

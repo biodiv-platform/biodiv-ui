@@ -1,16 +1,9 @@
 import {
-  Avatar,
   Badge,
   Box,
   Button,
   Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
+  Separator,
   Stack,
   Text,
   useDisclosure
@@ -35,6 +28,17 @@ import { emit } from "react-gbus";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import { Avatar } from "@/components/ui/avatar";
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+
 import LocalLink from "../local-link";
 import SimpleActionButton from "./simple";
 
@@ -58,7 +62,7 @@ export default function FlagActionButton({
   const { t } = useTranslation();
   const [flags, setFlags] = useState(initialFlags);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   const flagOptions = FLAG_OPTIONS.map((f) => ({
     label: t(`common:actions.flag.flags.${f.toLowerCase()}`),
@@ -104,29 +108,32 @@ export default function FlagActionButton({
       <SimpleActionButton
         icon={flags && flags.length ? <FlagFillIcon /> : <FlagOutlineIcon />}
         title={t("common:actions.flag.title")}
-        colorScheme={flags && flags?.length ? "red" : "purple"}
+        colorPalette={flags && flags?.length ? "red" : "purple"}
         onClick={onOpen}
       />
-      <Modal isOpen={isOpen} size="lg" onClose={onClose}>
-        <ModalOverlay className="fade">
-          <ModalContent className="fadeInUp" borderRadius="md">
+      <DialogRoot open={open} size="md" onOpenChange={onClose}>
+        <DialogBackdrop className="fade">
+          <DialogContent className="fadeInUp" borderRadius="md">
             <FormProvider {...hForm}>
               <form onSubmit={hForm.handleSubmit(handleOnFlag)}>
-                <ModalHeader>🚩 Flag {resourceType}</ModalHeader>
-                <ModalCloseButton />
+                <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+                  🚩 Flag {resourceType}
+                </DialogHeader>
+                <DialogCloseTrigger />
                 {flags && flags.length > 0 && (
                   <>
                     <Heading size="sm" px={6} mb={3}>
                       flagged by {flags?.length} member(s)
                     </Heading>
+                    <Separator />
                     {flags?.map(
                       ({ flag, user }) =>
                         flag &&
                         user && (
                           <Stack
                             key={flag.id}
-                            isInline={true}
-                            spacing={4}
+                            direction={"row"}
+                            gap={4}
                             px={6}
                             py={3}
                             mb={2}
@@ -145,7 +152,7 @@ export default function FlagActionButton({
                                   {user.name} <UserBadge isAdmin={user.isAdmin} />
                                 </BlueLink>
                               </LocalLink>
-                              <Badge colorScheme="red" verticalAlign="baseline">
+                              <Badge colorPalette="red" verticalAlign="baseline">
                                 {t(`common:actions.flag.flags.${flag.flag?.toLowerCase()}`)}
                               </Badge>
                               <Text>{flag.notes}</Text>
@@ -155,7 +162,7 @@ export default function FlagActionButton({
                                 <Button
                                   size="sm"
                                   variant="outline"
-                                  colorScheme="red"
+                                  colorPalette="red"
                                   onClick={() => handleOnUnFlag(flag.id)}
                                 >
                                   Remove
@@ -168,30 +175,29 @@ export default function FlagActionButton({
                   </>
                 )}
                 {!userFlag && (
-                  <ModalBody>
+                  <DialogBody>
                     <SelectInputField
                       name="flag"
                       label={t("common:actions.flag.category")}
                       options={flagOptions}
-                      shouldPortal={true}
                     />
                     <TextAreaField mb={0} name="notes" label={t("common:actions.flag.notes")} />
-                  </ModalBody>
+                  </DialogBody>
                 )}
 
                 {!userFlag && (
-                  <ModalFooter>
-                    <Button onClick={onClose} mr={4}>
+                  <DialogFooter>
+                    <Button onClick={onClose} mr={4} variant={"subtle"}>
                       Close
                     </Button>
-                    <SubmitButton colorScheme="red">Flag</SubmitButton>
-                  </ModalFooter>
+                    <SubmitButton colorPalette="red">Flag</SubmitButton>
+                  </DialogFooter>
                 )}
               </form>
             </FormProvider>
-          </ModalContent>
-        </ModalOverlay>
-      </Modal>
+          </DialogContent>
+        </DialogBackdrop>
+      </DialogRoot>
     </>
   );
 }

@@ -1,10 +1,7 @@
-import { CloseButton, Flex, Image, Input } from "@chakra-ui/react";
-import Rating from "@components/@core/rating";
+import { CloseButton, Flex, Input, RatingGroup } from "@chakra-ui/react";
 import { selectStyles } from "@components/form/configs";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
-import StarIcon from "@icons/star";
-import StarOutlineIcon from "@icons/star-outline";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import { MENU_PORTAL_TARGET, RESOURCE_SIZE } from "@static/constants";
 import { ASSET_TYPES, LOCAL_ASSET_PREFIX } from "@static/observation-create";
@@ -16,6 +13,8 @@ import {
 } from "@utils/media";
 import React, { useMemo } from "react";
 import Select from "react-select";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import StatusIcon from "../statusicon";
 import useObservationCreate from "../use-observation-resources";
@@ -90,7 +89,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
       key={resource.hashKey}
     >
       <ImageBox>
-        <Image
+        <ImageWithFallback
           objectFit="cover"
           borderRadius="md"
           fallbackSrc={getFallbackByMIME(resource.type)}
@@ -138,12 +137,17 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
           }
         />
         <Flex justify="center" fontSize="1.5rem" lineHeight="1rem">
-          <Rating
-            initialRating={resource.rating}
-            onChange={(v) => updateObservationAsset(index, resource.hashKey, "rating", v)}
-            emptySymbol={<StarOutlineIcon />}
-            fullSymbol={<StarIcon />}
-          />
+          <RatingGroup.Root
+            count={5}
+            defaultValue={resource.rating}
+            size="sm"
+            onValueChange={(e) =>
+              updateObservationAsset(index, resource.hashKey, "rating", e.value)
+            }
+          >
+            <RatingGroup.HiddenInput />
+            <RatingGroup.Control />
+          </RatingGroup.Root>
         </Flex>
       </Flex>
     </Flex>

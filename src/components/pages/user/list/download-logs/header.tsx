@@ -1,8 +1,10 @@
-import { Select } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
 import useDownloadLogsList from "../../common/use-download-log";
 
@@ -27,13 +29,24 @@ export default function Header() {
   return (
     aggregate && (
       <PageHeading
+        size={"3xl"}
         actions={
-          <Select maxW="10rem" aria-label={t("common:list.sort_by")} onChange={handleOnSort}>
-            <option>All</option>
-            {aggregate?.map((item) => (
-              <option>{`${Object.keys(item)[0]}`}</option>
-            ))}
-          </Select>
+          <Stack direction="row" gap={4} mb={4}>
+            <Box>
+              <NativeSelectRoot>
+                <NativeSelectField
+                  maxW="10rem"
+                  aria-label={t("common:list.sort_by")}
+                  onChange={handleOnSort}
+                >
+                  <option>All</option>
+                  {aggregate?.map((item) => (
+                    <option>{`${Object.keys(item)[0]}`}</option>
+                  ))}
+                </NativeSelectField>
+              </NativeSelectRoot>
+            </Box>
+          </Stack>
         }
       >
         ⬇️ {t("user:download_logs")} ({format(totalCount)})

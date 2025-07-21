@@ -1,17 +1,12 @@
-import { SearchIcon } from "@chakra-ui/icons";
-import {
-  Checkbox,
-  CheckboxGroup,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack
-} from "@chakra-ui/react";
+import { CheckboxGroup, Image, Input, Stack } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+import { LuSearch } from "react-icons/lu";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { InputGroup } from "@/components/ui/input-group";
 
 import FilterStat from "../stat";
 
@@ -93,8 +88,7 @@ export default function FilterCheckboxes({
   return (
     <>
       {showSearch && (
-        <InputGroup mb={2}>
-          <InputLeftElement children={<SearchIcon color="gray.300" />} />
+        <InputGroup mb={2} pr={4} width={"full"} startElement={<LuSearch color="gray.300" />}>
           <Input type="text" placeholder={t("common:search")} onChange={handleOnSearch} />
         </InputGroup>
       )}
@@ -106,8 +100,9 @@ export default function FilterCheckboxes({
             ? allObservations
             : observationsWithMedia
         }
-        onChange={handleOnChange}
+        onValueChange={handleOnChange}
         key={filterKey == "mediaFilter" ? filter?.mediaFilter?.toString() : "checkbox-filter-key"}
+        colorPalette={"blue"}
       >
         <Stack>
           {filteredOptions.map(({ label, value, stat, valueIcon }) => (
@@ -120,7 +115,7 @@ export default function FilterCheckboxes({
                   display="inline"
                   verticalAlign="center"
                   mr={1}
-                  ignoreFallback={true}
+                  // ignoreFallback={true}
                 />
               )}
               {skipOptionsTranslation

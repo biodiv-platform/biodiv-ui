@@ -4,7 +4,7 @@ import React from "react";
 
 export function TraitDateShow({ values, format }) {
   return (
-    <SimpleGrid columns={{ md: 3 }} spacing={4}>
+    <SimpleGrid columns={{ md: 3 }} gap={4}>
       {values.map(({ fromDate, toDate }) => (
         <Flex
           key={fromDate + toDate}

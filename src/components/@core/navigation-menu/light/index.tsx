@@ -24,17 +24,17 @@ const LightMenuContainer = styled.div`
 `;
 
 export default function NavigationMenuLight() {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
 
   useEffect(() => {
     Router.events.on("routeChangeStart", onClose);
   }, []);
 
   return (
-    <Box borderBottom="1px solid" bg="white" borderColor="gray.300">
+    <Box borderBottom="1px solid" bg="whiteAlpha.800" borderColor="gray.300">
       <LightMenuContainer className="container-fluid">
-        <PrimaryLogo isOpen={isOpen} onToggle={onToggle} />
-        <RightMenu isOpen={isOpen} />
+        <PrimaryLogo isOpen={open} onToggle={onToggle} />
+        <RightMenu isOpen={open} />
       </LightMenuContainer>
     </Box>
   );

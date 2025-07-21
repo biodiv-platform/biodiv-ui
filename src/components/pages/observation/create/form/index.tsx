@@ -61,7 +61,7 @@ export default function ObservationCreateForm({
   ObservationCreateFormData
 }) {
   const { t } = useTranslation();
-  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { open, onClose } = useDisclosure({ defaultOpen: true });
   const [isSelectedImages, setIsSelectedImages] = useState<boolean>();
   const [isSubmitDisabled, setIsSubmitDisabled] = useState();
   const [customFieldList] = useState(
@@ -175,7 +175,7 @@ export default function ObservationCreateForm({
     onClose();
   };
 
-  return isOpen ? (
+  return open ? (
     <Box mb={8} minH="calc(100vh - var(--heading-height))">
       <PageHeading>👋 {t("observation:title")}</PageHeading>
       <FormProvider {...hForm}>
@@ -183,7 +183,7 @@ export default function ObservationCreateForm({
           <Uploader
             name="resources"
             licensesList={licensesList}
-            onTabIndexChanged={(ti) => setIsSelectedImages(ti > 0)}
+            onTabIndexChanged={(ti) => setIsSelectedImages(ti != "selectedMedia")}
           />
           <Box hidden={isSelectedImages}>
             <Recodata languages={languages} />

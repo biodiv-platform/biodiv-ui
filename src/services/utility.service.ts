@@ -119,4 +119,4 @@ export const axGetLanguagesWithSpeciesFields = async () => {
     console.error(error);
     return { success: false, data: [] };
   }
-};  
+};

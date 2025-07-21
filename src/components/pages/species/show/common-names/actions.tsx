@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, IconButton, Td, Tr } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, IconButton, Table } from "@chakra-ui/react";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
@@ -18,19 +18,14 @@ export function CommonNameAdd() {
   const handleOnAdd = () => emit(SPECIES_NAME_ADD, {});
 
   return (
-    <Tr>
-      <Td colSpan={2}>
-        <Button
-          variant="outline"
-          size="xs"
-          colorScheme="green"
-          leftIcon={<AddIcon />}
-          onClick={handleOnAdd}
-        >
+    <Table.Row>
+      <Table.Cell colSpan={2}>
+        <Button variant="outline" size="xs" colorPalette="green" onClick={handleOnAdd}>
+          <AddIcon />
           {t("common:add")}
         </Button>
-      </Td>
-    </Tr>
+      </Table.Cell>
+    </Table.Row>
   );
 }
 
@@ -44,29 +39,32 @@ export function CommonNameEditButtons({ commonName, showPreferred }) {
   return (
     <Flex alignItems="center" justifyContent="space-between">
       <Box>{commonName.name}</Box>
-      <ButtonGroup spacing={0} variant="link">
+      <ButtonGroup gap={0} variant="plain">
         <IconButton
-          colorScheme="blue"
-          icon={<EditIcon />}
+          colorPalette="blue"
           onClick={handleOnEdit}
           aria-label={t("common:edit")}
           title={t("common:edit")}
-        />
+        >
+          <EditIcon />
+        </IconButton>
         <IconButton
-          colorScheme="red"
-          icon={<DeleteIcon />}
+          colorPalette="red"
           onClick={handleOnDelete}
           aria-label={t("common:delete")}
           title={t("common:delete")}
-        />
+        >
+          <DeleteIcon />
+        </IconButton>
         {showPreferred && (
           <IconButton
-            colorScheme="orange"
-            icon={<StarOutlineIcon />}
+            colorPalette="orange"
             onClick={handleOnPreferred}
             aria-label={t("species:common_name.preferred.title")}
             title={t("species:common_name.preferred.title")}
-          />
+          >
+            <StarOutlineIcon />
+          </IconButton>
         )}
       </ButtonGroup>
     </Flex>

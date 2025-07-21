@@ -10,6 +10,8 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import ReactCrop from "react-image-crop";
 
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
+
 import ObservationImageStatusBadge from "../status-badge";
 
 const objectToArray = (obj) => {
@@ -91,7 +93,7 @@ export default function CropTab({ data, setData, canCrop }) {
               <Box position="absolute" top={0} left={0} ml={3} mt={1} hidden={!canCrop}>
                 <ObservationImageStatusBadge status={selectionStatus || CROP_STATUS.NOT_CURATED} />
               </Box>
-              <Image
+              <ImageWithFallback
                 w="full"
                 h="full"
                 borderRadius="md"
@@ -134,14 +136,14 @@ export default function CropTab({ data, setData, canCrop }) {
 
         <Flex hidden={!canCrop} justifyContent="space-between">
           <ButtonGroup gap={2}>
-            <Button colorScheme="green" onClick={() => handleValidate(currentCropItem.id)}>
+            <Button colorPalette="green" onClick={() => handleValidate(currentCropItem.id)}>
               {t("observation:crop.actions.curate")}
             </Button>
-            <Button colorScheme="red" onClick={() => handleReject(currentCropItem.id)}>
+            <Button colorPalette="red" onClick={() => handleReject(currentCropItem.id)}>
               {t("observation:crop.actions.reject")}
             </Button>
           </ButtonGroup>
-          <Button colorScheme="blue" onClick={() => handleReset(currentCropItem.id)}>
+          <Button colorPalette="blue" onClick={() => handleReset(currentCropItem.id)}>
             {t("observation:crop.actions.un_curate")}
           </Button>
         </Flex>

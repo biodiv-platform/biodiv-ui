@@ -81,10 +81,15 @@ const VerticalBarChart = forwardRef(
         .call(axisBottom(xScale))
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
+        .style("text-anchor", "end")
+        .style("font-size", "10px");
 
-      svg.select(".y-axis").join("g").attr("transform", "translate(60,10)").call(axisLeft(yScale));
-
+      svg
+        .select(".y-axis")
+        .join("g")
+        .attr("transform", "translate(60,10)")
+        .call(axisLeft(yScale))
+        .style("font-size", "10px");
       svg
         .select(".chart")
         .selectAll("rect")

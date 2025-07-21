@@ -1,27 +1,21 @@
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import {
-  Alert,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  AlertIcon,
-  Badge,
-  Box,
-  Button,
-  Image,
-  Table,
-  Text,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Badge, Box, Button, IconButton, Image, Text, useDisclosure } from "@chakra-ui/react";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { axCheckSpecies } from "@services/species.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+import { LuDelete, LuPencil } from "react-icons/lu";
+
+import { Alert } from "@/components/ui/alert";
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 const NameTable = ({
   finalResult,
@@ -31,11 +25,10 @@ const NameTable = ({
   setUploadResult
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>();
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const cancelRef = React.useRef(null);
+  const { open, onClose, onOpen } = useDisclosure();
   const { t } = useTranslation();
   return (
-    <Table className="table table-bordered">
+    <table className="table table-bordered">
       <thead>
         <tr>
           <th>{t("taxon:name_matching.species_name")}</th>
@@ -52,24 +45,20 @@ const NameTable = ({
                     setCurrentIndex(index);
                     onOpen();
                   }}
-                  icon={<DeleteIcon />}
+                  icon={<LuDelete />}
                   title={"Delete Scientific Name"}
-                  colorScheme="red"
+                  colorPalette="red"
                 />
-                <AlertDialog isOpen={isOpen} onClose={onClose} leastDestructiveRef={cancelRef}>
-                  <AlertDialogOverlay>
-                    <AlertDialogContent>
-                      <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                <DialogRoot open={open} onOpenChange={onClose}>
+                  <DialogBackdrop>
+                    <DialogContent>
+                      <DialogHeader fontSize="lg" fontWeight="bold">
                         🗑️ {t("taxon:name_matching.delete_title")}
-                      </AlertDialogHeader>
-                      <AlertDialogBody>
-                        {t("taxon:name_matching.delete_description")}
-                      </AlertDialogBody>
+                      </DialogHeader>
+                      <DialogBody>{t("taxon:name_matching.delete_description")}</DialogBody>
 
-                      <AlertDialogFooter>
-                        <Button ref={cancelRef} onClick={onClose}>
-                        {t("taxon:name_matching.cancel")}
-                        </Button>
+                      <DialogFooter>
+                        <Button onClick={onClose}>{t("taxon:name_matching.cancel")}</Button>
                         <Button
                           colorScheme="red"
                           onClick={() => {
@@ -85,10 +74,10 @@ const NameTable = ({
                         >
                           {t("taxon:name_matching.delete")}
                         </Button>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialogOverlay>
-                </AlertDialog>
+                      </DialogFooter>
+                    </DialogContent>
+                  </DialogBackdrop>
+                </DialogRoot>
                 {selectedColumn !== null && item[0]?.slice(0, -1).split("|")[selectedColumn]}
               </td>
               <td>
@@ -100,7 +89,7 @@ const NameTable = ({
                         objectFit="contain"
                         src={getLocalIcon(item[1]?.group_name)}
                         alt={item[1]?.group_name}
-                        ignoreFallback={true}
+                        // ignoreFallback={true}
                       />
                       {item[1]?.name}
                       <Badge ml={2}>{item[1]?.rank}</Badge>
@@ -112,8 +101,10 @@ const NameTable = ({
                       </Badge>
                       {uploadResult[item[4]][1].length > 1 && (
                         <Text float="right" color="green.700" fontWeight="bold">
-                          {`${uploadResult[item[4]][1].length}  ${t("taxon:name_matching.multiple_matches")}`}
-                          <EditIcon
+                          {`${uploadResult[item[4]][1].length}  ${t(
+                            "taxon:name_matching.multiple_matches"
+                          )}`}
+                          <IconButton
                             ml={2}
                             color="teal"
                             cursor="pointer"
@@ -122,7 +113,9 @@ const NameTable = ({
                               updatedMatching[index][3] = true;
                               setFinalResult(updatedMatching);
                             }}
-                          />
+                          >
+                            <LuPencil />
+                          </IconButton>
                         </Text>
                       )}
                       {uploadResult[item[4]][1].length == 1 && (
@@ -147,13 +140,11 @@ const NameTable = ({
                 )}
                 {item[2] && item[3] == false && (
                   <Alert bg="blue.50">
-                    <AlertIcon />
                     <Text>{t("taxon:name_matching.species_page_exist")}</Text>
                   </Alert>
                 )}
                 {!item[2] && item[3] == false && uploadResult[item[4]][1].length != 0 && (
                   <Alert bg="red.500" color="white">
-                    <AlertIcon color="white" />
                     <Text>{t("taxon:name_matching.no_species_page")}</Text>
                   </Alert>
                 )}
@@ -201,7 +192,7 @@ const NameTable = ({
             </tr>
           ))}
       </tbody>
-    </Table>
+    </table>
   );
 };
 

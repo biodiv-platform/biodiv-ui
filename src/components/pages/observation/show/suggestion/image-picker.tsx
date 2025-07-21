@@ -1,25 +1,24 @@
-import { AspectRatio, Box, Flex, Image, useCheckbox, useToast } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, Image, useCheckbox } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
 
-const ImagePicker = (props: any) => {
-  const { getInputProps, getCheckboxProps, state } = useCheckbox(props);
-  const langRef: any = useRef(null);
+import { toaster } from "@/components/ui/toaster";
 
-  const toast = useToast();
+const ImagePicker = (props: any) => {
+  const { getControlProps, getHiddenInputProps, setChecked, checked } = useCheckbox(props);
+  const langRef: any = useRef(null);
 
   const [isOrganSelectionDisabled, setIsOrganSelectionDisabled] = useState(false);
   const { t } = useTranslation();
 
   const handleOnChange = (e) => {
     if (props.selectedImages.length >= 5 && e.target.checked) {
-      toast({
+      toaster.create({
         title: t("observation:plantnet.please_select_a_maximum_of_5_images"),
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        closable: true
       });
       setIsOrganSelectionDisabled(true);
       return;
@@ -40,7 +39,7 @@ const ImagePicker = (props: any) => {
       props.organSetter([
         ...props.selectedOrgans.filter((o) => o?.imageId !== props.image.resource.id)
       ]);
-      state.isChecked = false;
+      setChecked(false);
     }
   };
 
@@ -66,11 +65,11 @@ const ImagePicker = (props: any) => {
   ];
 
   return (
-    <Box as="label" className="fade" aria-checked={state.isChecked}>
-      <input {...getInputProps()} onChange={handleOnChange} required={false} />
+    <Box as="label" className="fade" aria-checked={checked}>
+      <input {...getHiddenInputProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
-        {...getCheckboxProps()}
+        {...getControlProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"

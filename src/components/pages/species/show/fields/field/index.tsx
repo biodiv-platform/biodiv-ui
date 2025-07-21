@@ -1,4 +1,4 @@
-import { Stack } from "@chakra-ui/layout";
+import { Stack } from "@chakra-ui/react";
 import { SpeciesField } from "@interfaces/custom";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATED } from "@static/events";
 import React, { useEffect, useState } from "react";
@@ -94,7 +94,7 @@ export default function SpeciesFieldGroup({
             data-hidden={!childFieldsHasValue && !showHiddenFields}
             style={{ overflow: "initial" }}
           >
-            <Stack spacing={3} mb={6}>
+            <Stack gap={3} mb={6}>
               {/* Field Heading */}
               <SpeciesFieldHeading
                 id={parentField?.header}

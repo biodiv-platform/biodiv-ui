@@ -1,4 +1,3 @@
-import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { Heading, IconButton } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
@@ -6,6 +5,7 @@ import Tooltip from "@components/@core/tooltip";
 import EditIcon from "@icons/edit";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuInfo } from "react-icons/lu";
 
 import useSpecies from "../../../use-species";
 
@@ -22,20 +22,21 @@ export function TraitHeader({ trait, onOpen }) {
       </LocalLink>
 
       {trait?.description && (
-        <Tooltip hasArrow={true} title={trait?.description}>
-          <InfoOutlineIcon />
+        <Tooltip showArrow={true} title={trait?.description}>
+          <LuInfo />
         </Tooltip>
       )}
 
       {onOpen && permissions.isContributor && (
-        <Tooltip hasArrow={true} title={t("common:edit")}>
+        <Tooltip showArrow={true} title={t("common:edit")}>
           <IconButton
-            variant="link"
-            colorScheme="blue"
-            icon={<EditIcon />}
+            variant="plain"
+            colorPalette="blue"
             aria-label={t("common:edit")}
             onClick={onOpen}
-          />
+          >
+            <EditIcon />
+          </IconButton>
         </Tooltip>
       )}
     </Heading>

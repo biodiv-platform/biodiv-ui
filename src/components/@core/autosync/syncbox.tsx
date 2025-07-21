@@ -66,7 +66,7 @@ export default function SyncBox({
   deleteObservation,
   onClose
 }: SyncBoxProps) {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
+  const { open, onToggle } = useDisclosure({ defaultOpen: true });
   const { t } = useTranslation();
 
   return (
@@ -77,23 +77,25 @@ export default function SyncBox({
           <div className="icons">
             <IconButton
               aria-label={t("common:toggle")}
-              icon={<ChevronIcon />}
-              variant="link"
+              variant="plain"
               minW="auto"
-              transform={isOpen ? "rotate(180deg)" : undefined}
+              transform={open ? "rotate(180deg)" : undefined}
               onClick={onToggle}
               mr={5}
-            />
+            >
+              <ChevronIcon />
+            </IconButton>
             <IconButton
               aria-label={t("common:close")}
-              icon={<CrossIcon />}
-              variant="link"
+              variant="plain"
               minW="auto"
               onClick={onClose}
-            />
+            >
+              <CrossIcon />
+            </IconButton>
           </div>
         </div>
-        {isOpen && (
+        {open && (
           <Box className="content fade" alignItems="center">
             {pendingObservations.map((pendingObservation) => (
               <SyncRow

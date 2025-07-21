@@ -1,18 +1,4 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  Stack,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr
-} from "@chakra-ui/react";
+import { Box, Button, Stack, Table } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import useGlobalState from "@hooks/use-global-state";
@@ -20,6 +6,9 @@ import { OBSERVATION_FIELDS } from "@static/observation-create";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import { LuMoveLeft } from "react-icons/lu";
+
+import { Field } from "@/components/ui/field";
 
 // formats field mapping  dropdown options
 const formatOptions = (options, observationConfig, userGroupId) => {
@@ -83,32 +72,33 @@ export default function Fields({
   };
 
   return (
-    <FormControl isInvalid={!form.formState.isValid}>
+    <Field invalid={!form.formState.isValid}>
       <ToggleablePanel icon="🧩" title={t("datatable:field_mapping_table")}>
         <Box p={4} pb={0}>
           <Stack m={2} alignItems="center" justifyContent="space-between" direction="row">
             {form.formState?.errors[name]?.message ? (
-              <FormErrorMessage children={form.formState?.errors[name]?.message?.toString()} />
+              <Field errorText={form.formState?.errors[name]?.message?.toString()} />
             ) : (
-              <FormHelperText color="gray.600">{t("datatable:field_mapping_hint")}</FormHelperText>
+              <Field color="gray.600" helperText={t("datatable:field_mapping_hint")} />
             )}
-            <Button colorScheme="blue" onClick={toggleFieldMapping} leftIcon={<ArrowBackIcon />}>
+            <Button colorPalette="blue" onClick={toggleFieldMapping}>
+              <LuMoveLeft />
               {t("datatable:upload_again")}
             </Button>
           </Stack>
           <Box style={{ overflowX: "scroll", width: "100%" }}>
-            <Table mt={4} variant="striped" colorScheme="gray" size="sm">
-              <Thead>
-                <Tr>
+            <Table.Root mt={4} striped colorPalette="gray" size="sm">
+              <Table.Header>
+                <Table.Row>
                   {tabelHeaders.map((item, index) => (
-                    <Th key={index}>{item}</Th>
+                    <Table.ColumnHeader key={index}>{item}</Table.ColumnHeader>
                   ))}
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                <Table.Row>
                   {fields.map((field, index) => (
-                    <Td key={field.id}>
+                    <Table.Cell key={field.id}>
                       <SelectInputField
                         shouldPortal={true}
                         name={`columnsMapping.${index}.fieldKey`}
@@ -119,21 +109,21 @@ export default function Fields({
                           currentGroup?.id
                         )}
                       />
-                    </Td>
+                    </Table.Cell>
                   ))}
-                </Tr>
+                </Table.Row>
                 {fieldValues.map((tableData, _index) => (
-                  <Tr key={_index}>
+                  <Table.Row key={_index}>
                     {tableData.map((data, index) => (
-                      <Td key={index}>{data}</Td>
+                      <Table.Cell key={index}>{data}</Table.Cell>
                     ))}
-                  </Tr>
+                  </Table.Row>
                 ))}
-              </Tbody>
-            </Table>
+              </Table.Body>
+            </Table.Root>
           </Box>
         </Box>
       </ToggleablePanel>
-    </FormControl>
+    </Field>
   );
 }

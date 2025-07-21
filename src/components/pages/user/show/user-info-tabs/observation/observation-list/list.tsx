@@ -1,13 +1,4 @@
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Flex,
-  Image,
-  Link,
-  SimpleGrid,
-  Skeleton
-} from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Flex, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
@@ -16,6 +7,8 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 export default function ObservationList({ title, data, loadMore }) {
   const { t } = useTranslation();
@@ -30,7 +23,7 @@ export default function ObservationList({ title, data, loadMore }) {
           <ExternalBlueLink>{t("user:view_all")}</ExternalBlueLink>
         </LocalLink>
       </Flex>
-      <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} spacing={4}>
+      <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} gap={4}>
         {data.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
@@ -39,9 +32,9 @@ export default function ObservationList({ title, data, loadMore }) {
               key={observation.observationId}
             >
               <Link target="_blank" className="fade">
-                <Tooltip title={<ScientificName value={title} />} hasArrow={true}>
+                <Tooltip title={<ScientificName value={title} />} showArrow={true}>
                   <AspectRatio ratio={1}>
-                    <Image
+                    <ImageWithFallback
                       borderRadius="md"
                       bg="gray.300"
                       alt={title}
@@ -69,7 +62,7 @@ export default function ObservationList({ title, data, loadMore }) {
         w="full"
         hidden={!data.hasMore}
         className="fade"
-        isLoading={data.isLoading}
+        loading={data.isLoading}
         onClick={() => loadMore()}
         mt={4}
       >

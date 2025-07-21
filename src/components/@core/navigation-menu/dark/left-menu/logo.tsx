@@ -2,12 +2,10 @@ import { IconButton, Link } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
-import AddCircleIcon from "@icons/add-circle";
-import CrossIcon from "@icons/cross";
-import MenuIcon from "@icons/menu";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuCirclePlus, LuMenu, LuX } from "react-icons/lu";
 
 const Logo = styled.div`
   display: flex;
@@ -42,27 +40,22 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
 
   return (
     <Logo>
-      <Link href={SITE_CONFIG.SITE.URL} className="logo">
+      <Link href={SITE_CONFIG.SITE.URL} className="logo" unstyled>
         {SITE_CONFIG.SITE.TITLE?.[lang]}
       </Link>
-      <LocalLink href="/observation/create" prefixGroup={true}>
-        <Link
-          p={2}
-          lineHeight={1}
-          className="button"
-          aria-label={t("header:menu_primary.contribute.add_observation")}
-        >
-          <AddCircleIcon />
-        </Link>
-      </LocalLink>
       <IconButton
-        onClick={onToggle}
-        ml={2}
-        p={2}
-        variant="link"
-        icon={isOpen ? <CrossIcon /> : <MenuIcon />}
-        aria-label="toggle primary menu"
-      />
+        className="button"
+        aria-label={t("header:menu_primary.contribute.add_observation")}
+        unstyled
+        asChild
+      >
+        <LocalLink href="/observation/create" prefixGroup={true}>
+          <LuCirclePlus />
+        </LocalLink>
+      </IconButton>
+      <IconButton onClick={onToggle} ml={2} unstyled aria-label="toggle primary menu">
+        {isOpen ? <LuX /> : <LuMenu />}
+      </IconButton>
     </Logo>
   );
 }

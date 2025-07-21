@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, Skeleton, Table } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
@@ -30,17 +30,21 @@ export default function ScientificNamesTable({
     <Box className="white-box">
       <BoxHeading>⭐ {title}</BoxHeading>
       <Box w="full" overflowY="auto" h={360}>
-        <Table variant="striped" colorScheme="gray" size="sm">
-          <Thead>
-            <Tr>
-              <Th {...stickyTh}>{t("document:show.scientific_names_table.name_header")}</Th>
-              <Th {...stickyTh}>{t("document:show.scientific_names_table.count_header")}</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
+        <Table.Root striped colorPalette="gray" size="sm">
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeader {...stickyTh}>
+                {t("document:show.scientific_names_table.name_header")}
+              </Table.ColumnHeader>
+              <Table.ColumnHeader {...stickyTh}>
+                {t("document:show.scientific_names_table.count_header")}
+              </Table.ColumnHeader>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {data.list.map(({ id, canonicalForm, frequency, taxonConceptId }) => (
-              <Tr>
-                <Td>
+              <Table.Row>
+                <Table.Cell>
                   {taxonConceptId != null ? (
                     <LocalLink
                       href={`/taxonomy/list`}
@@ -52,9 +56,10 @@ export default function ScientificNamesTable({
                   ) : (
                     canonicalForm
                   )}
-                </Td>
+                </Table.Cell>
 
-                <Td isNumeric={true}>
+                {/* isNumeric={true} */}
+                <Table.Cell>
                   {frequency}
                   {showActions && (
                     <DeleteActionButton
@@ -67,13 +72,19 @@ export default function ScientificNamesTable({
                       refreshFunc={refreshFunc}
                     />
                   )}
-                </Td>
-              </Tr>
+                </Table.Cell>
+              </Table.Row>
             ))}
-          </Tbody>
-        </Table>
+          </Table.Body>
+        </Table.Root>
       </Box>
-      <Button w="full" onClick={loadMoreNames} isLoading={data.isLoading} borderTopRadius={0}>
+      <Button
+        w="full"
+        onClick={loadMoreNames}
+        loading={data.isLoading}
+        borderTopRadius={0}
+        variant={"subtle"}
+      >
         {t("common:load_more")}
       </Button>
     </Box>

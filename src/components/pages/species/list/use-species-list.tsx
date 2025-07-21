@@ -77,8 +77,8 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const [hasUgAccess, setHasUgAdminAccess] = useState<boolean>(false);
   const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
   const [selectAll, setSelectAll] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { getCheckboxProps, value: bulkSpeciesIds, setValue } = useCheckboxGroup();
+  const { open, onOpen, onClose } = useDisclosure();
+  const { getItemProps, value: bulkSpeciesIds, setValue } = useCheckboxGroup();
   const { isLoggedIn } = useGlobalState();
 
   const handleBulkCheckbox = (actionType: string) => {
@@ -221,9 +221,9 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         bulkSpeciesIds,
         handleBulkCheckbox,
         authorizedUserGroupList,
-        getCheckboxProps,
+        getCheckboxProps: getItemProps,
         hasUgAccess,
-        isOpen,
+        isOpen: open,
         onOpen,
         onClose
       }}

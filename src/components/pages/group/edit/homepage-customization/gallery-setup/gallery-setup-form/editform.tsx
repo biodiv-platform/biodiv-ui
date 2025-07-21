@@ -1,22 +1,4 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Tab,
-  TabList,
-  Tabs,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Tabs, useDisclosure } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -32,8 +14,19 @@ import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuArrowLeft } from "react-icons/lu";
 import Select from "react-select";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { Field } from "@/components/ui/field";
 
 import { galleryFieldValidationSchema } from "./common";
 
@@ -52,7 +45,7 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     Number(Object.keys(editGalleryData[1])[0])
   );
   const [langId, setLangId] = useState(0);
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
 
   const validationSchema = Yup.lazy((value) => {
     const languageMapShape: Record<string, Yup.ArraySchema<any>> = {};
@@ -113,11 +106,13 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-      setGalleryList(Object.entries(data?.gallerySlider || {}).sort((a, b) => {
-        const aOrder = parseInt(a[0].split("|")[1], 10);
-        const bOrder = parseInt(b[0].split("|")[1], 10);
-        return aOrder - bOrder;
-      }));
+      setGalleryList(
+        Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        })
+      );
       setIsEdit(false);
     } else {
       notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
@@ -126,13 +121,14 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
   return (
     <FormProvider {...hForm}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Button m={3} type="button" onClick={() => setIsEdit(false)} leftIcon={<ArrowBackIcon />}>
+        <Button m={3} type="button" onClick={() => setIsEdit(false)}>
+          <LuArrowLeft />
           {t("group:homepage_customization.back")}
         </Button>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
+      <DialogRoot open={open} onOpenChange={onClose}>
+        <DialogBackdrop />
+        <DialogContent>
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -141,11 +137,15 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
               onClose();
             }}
           >
-            <ModalHeader> {t("common:create_form.add_translation_button")}</ModalHeader>
-            <ModalBody>
+            <DialogHeader> {t("common:create_form.add_translation_button")}</DialogHeader>
+            <DialogBody>
               <Box>
-                <FormControl mb={2} isRequired={true}>
-                  <FormLabel htmlFor="name">{t("common:create_form.language")}</FormLabel>
+                <Field
+                  mb={2}
+                  required={true}
+                  htmlFor="name"
+                  label={t("traits:create_form.language")}
+                >
                   {
                     <Select
                       id="langId"
@@ -167,10 +167,10 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
                       isSearchable={true} // Enables search
                     />
                   }
-                </FormControl>
+                </Field>
               </Box>
-            </ModalBody>
-            <ModalFooter>
+            </DialogBody>
+            <DialogFooter>
               <Button
                 mr={3}
                 onClick={() => {
@@ -183,36 +183,35 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
               <Button colorScheme="blue" type="submit">
                 {t("common:create_form.create")}
               </Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
-        </ModalContent>
-      </Modal>
+        </DialogContent>
+      </DialogRoot>
       <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
         <Button colorScheme="green">{t("common:create_form.add_translation_button")}</Button>
       </Flex>
-      <Tabs
+      <Tabs.Root
         overflowX="auto"
         mb={4}
-        variant="unstyled"
         bg="gray.100"
-        rounded="md"
-        index={Object.keys(hForm.getValues()).findIndex(
-          (key) => key === translationSelected.toString()
-        )}
-        onChange={(index) => setTranslationSelected(Number(Object.keys(hForm.getValues())[index]))}
+        //</FormProvider>index={Object.keys(hForm.getValues()).findIndex(
+        //(key) => key === translationSelected.toString()
+        //)}
+        //onChange={(index) => setTranslationSelected(Number(Object.keys(hForm.getValues())[index]))}
       >
-        <TabList>
+        <Tabs.List>
           {Object.keys(hForm.getValues()).map((language) => (
-            <Tab
+            <Tabs.Trigger
               key={language}
+              value={language}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >
               {languages.filter((lang) => lang.id === Number(language))[0].name}
-            </Tab>
+            </Tabs.Trigger>
           ))}
-        </TabList>
-      </Tabs>
+        </Tabs.List>
+      </Tabs.Root>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <TextBoxField
           key={`title-${translationSelected}`}

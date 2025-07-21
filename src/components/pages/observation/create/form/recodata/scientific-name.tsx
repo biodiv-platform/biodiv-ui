@@ -1,4 +1,4 @@
-import { Badge, Box, Image, Link, Spacer, Stack, Tag, Text } from "@chakra-ui/react";
+import { Badge, Box, Image, Link, Spacer, Stack, Text } from "@chakra-ui/react";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
@@ -7,15 +7,18 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { components } from "react-select";
 
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
+import { Tag } from "@/components/ui/tag";
+
 export const ScientificNameOption = ({ children, ...props }: any) => {
   const hiddenIcon = !props.data["__isNew__"];
   const { t } = useTranslation();
 
   return (
     <components.Option {...props}>
-      <Stack isInline={true} alignItems="center">
+      <Stack direction={"row"} alignItems="center">
         {hiddenIcon && (
-          <Image
+          <ImageWithFallback
             boxSize="2rem"
             src={getSuggestionIcon(props.data.icon)}
             fallbackSrc={props.data.group}
@@ -24,7 +27,7 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
 
         {props.data.score && (
           <Box>
-            <Tag variant="solid" colorScheme="green" whiteSpace="nowrap">
+            <Tag variant="solid" colorPalette="green" whiteSpace="nowrap">
               {props.data.score}
             </Tag>
           </Box>
@@ -33,18 +36,20 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
         <Box>
           {children}
           {props.data.acceptedNames && <Text color="gray.600">{props.data.acceptedNames}</Text>}
-          <Stack isInline={true} mt={1} spacing={2}>
+          <Stack direction={"row"} mt={1} gap={2}>
             {props.data.rank && <Badge>{props.data.rank}</Badge>}
             {props.data.status && (
-              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.status]}>{props.data.status}</Badge>
+              <Badge colorPalette={TAXON_BADGE_COLORS[props.data.status]}>
+                {props.data.status}
+              </Badge>
             )}
             {props.data.position && (
-              <Badge colorScheme={TAXON_BADGE_COLORS[props.data.position]}>
+              <Badge colorPalette={TAXON_BADGE_COLORS[props.data.position]}>
                 {props.data.position}
               </Badge>
             )}
             {props.data.prediction && (
-              <Badge colorScheme="blue">{t("observation:plantnet.prediction_label")}</Badge>
+              <Badge colorPalette="blue">{t("observation:plantnet.prediction_label")}</Badge>
             )}
           </Stack>
         </Box>
@@ -53,7 +58,7 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
 
         {props.data.images &&
           props.data.images.slice(0, 1).map((img) => (
-            <Link href={img.url.o} isExternal={true} target="_blank">
+            <Link href={img.url.o} target="_blank">
               <Image src={img.url.s} boxSize="4em" onClick={(e) => e.stopPropagation()} />
             </Link>
           ))}

@@ -20,11 +20,11 @@ const GroupRulesRow = ({ itemDetails, onDelete }) => {
       <td>
         <Button
           onClick={onDelete}
-          variant="link"
-          colorScheme="red"
-          leftIcon={<DeleteIcon />}
+          // variant="link"
+          colorPalette="red"
           ml={2}
         >
+          <DeleteIcon />
           {t("common:delete")}
         </Button>
       </td>

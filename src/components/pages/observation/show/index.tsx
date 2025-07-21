@@ -73,7 +73,7 @@ export default function ObservationShowPageComponent({
   return (
     <div className="container mt" key={o.observation?.id}>
       <Header o={o} following={permission?.following} />
-      <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
+      <SimpleGrid columns={[1, 1, 3, 3]} gap={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
           <CarouselObservation
             observationId={o.observation?.id}
@@ -90,7 +90,7 @@ export default function ObservationShowPageComponent({
           />
         </Box>
       </SimpleGrid>
-      <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
+      <SimpleGrid columns={[1, 1, 3, 3]} gap={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
           <Info observation={o} speciesGroups={speciesGroups} />
           <RecoSuggestion
@@ -145,7 +145,7 @@ export default function ObservationShowPageComponent({
               <TemporalObservedOn
                 filter={{
                   view: "stats",
-                  max:8,
+                  max: 8,
                   offset: 0,
                   userGroupList: currentGroup?.id || undefined,
                   taxon: String(o.recoIbp?.taxonId),
@@ -155,7 +155,7 @@ export default function ObservationShowPageComponent({
               <TraitsPerMonth
                 filter={{
                   view: "stats",
-                  max:8,
+                  max: 8,
                   offset: 0,
                   userGroupList: currentGroup?.id || undefined,
                   taxon: String(o.recoIbp?.taxonId),
@@ -175,11 +175,13 @@ export default function ObservationShowPageComponent({
             </>
           )}
           {o.observationNearBy && (
-            <Suggestions
-              title="observation:nearby"
-              list={o.observationNearBy}
-              observationKey="thumbnail"
-            />
+            <>
+              <Suggestions
+                title="observation:nearby"
+                list={o.observationNearBy}
+                observationKey="thumbnail"
+              />
+            </>
           )}
         </Box>
       </SimpleGrid>

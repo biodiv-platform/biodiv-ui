@@ -56,7 +56,7 @@ export function TraitColorEdit({ traitId, initialValue, onSave, onClose }) {
 
   return (
     <div>
-      <SimpleGrid columns={{ md: 3 }} spacing={4} mb={3}>
+      <SimpleGrid columns={{ md: 3 }} gap={4} mb={3}>
         {value.l.map((value, index) => (
           <ColorEditSwatch
             key={index}

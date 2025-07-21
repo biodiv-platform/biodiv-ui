@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
 import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
@@ -11,6 +11,8 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
+
+import { Field } from "@/components/ui/field";
 
 const onQuery = async (q) => {
   const { data } = await axQueryGeoEntitiesByPlaceName(q);
@@ -50,8 +52,8 @@ export default function WKTSearch({
   return (
     <Box mb={mb}>
       <div data-hidden={!SITE_CONFIG.DOCUMENT.GEOENTITY_SEARCH}>
-        <FormControl>
-          <FormLabel htmlFor="geoentities-search">{labelTitle}</FormLabel>
+        <Field>
+          <Field htmlFor="geoentities-search">{labelTitle}</Field>
           <AsyncSelect
             name="geoentities-search"
             id="geoentities-search"
@@ -64,19 +66,19 @@ export default function WKTSearch({
             placeholder={t("form:geoentities")}
             loadOptions={onQueryDebounce}
           />
-        </FormControl>
+        </Field>
       </div>
       <Box position="relative" borderRadius="md" mb={2} mt={2}>
         <GeoJSONPreview data={selected?.value || undefined} />
       </Box>
       <Button
         type="button"
-        colorScheme="blue"
+        colorPalette="blue"
         maxW="6rem"
-        leftIcon={<AddIcon />}
-        isDisabled={isDisabled}
+        disabled={isDisabled}
         onClick={handleOnSave}
       >
+        <AddIcon />
         {t("common:add")}
       </Button>
     </Box>

@@ -1,7 +1,8 @@
-import { Alert, AlertIcon } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
+
+import { Alert } from "@/components/ui/alert";
 
 interface ProcessingProps {
   loading: boolean;
@@ -21,12 +22,10 @@ export default function Processing({ success, loading, redirect = true }: Proces
 
   return loading ? (
     <Alert m={6} borderRadius="md">
-      <AlertIcon />
       {t("processing")}
     </Alert>
   ) : (
     <Alert m={6} borderRadius="md" status={success ? "success" : "error"}>
-      <AlertIcon />
       {t(success ? "SUCCESS" : "INVALID_REQUEST")}
     </Alert>
   );

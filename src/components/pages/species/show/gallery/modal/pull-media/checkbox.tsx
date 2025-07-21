@@ -1,10 +1,12 @@
-import { AspectRatio, Box, Flex, Image, useCheckbox } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, useCheckbox } from "@chakra-ui/react";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useMemo } from "react";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 const Checkbox = (props: any) => {
   const { user } = useGlobalState();
@@ -23,14 +25,14 @@ const Checkbox = (props: any) => {
     });
   };
 
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getControlProps, getHiddenInputProps } = useCheckbox(props);
 
   return (
     <Box as="label" className="fade" aria-checked={props.isChecked}>
-      <input {...getInputProps()} onChange={handleOnChange} required={false} />
+      <input {...getHiddenInputProps()} onChange={handleOnChange} required={false} />
       <AspectRatio
         ratio={1}
-        {...getCheckboxProps()}
+        {...getControlProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"
@@ -39,7 +41,7 @@ const Checkbox = (props: any) => {
         style={undefined}
       >
         <Flex cursor="pointer" position="relative" p={2}>
-          <Image
+          <ImageWithFallback
             style={{ filter: "none" }}
             boxSize="full"
             objectFit="cover"

@@ -1,4 +1,3 @@
-import { AtSignIcon, CheckCircleIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -24,6 +23,9 @@ import { getParsedUser, hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
+import { LuAtSign, LuCircleCheck, LuView } from "react-icons/lu";
+
+import EditIcon from "@/icons/edit";
 
 import ContactAdmin from "./contact-admin";
 import UserGroupEditForm from "./form";
@@ -65,9 +67,9 @@ const steps = [
     icon: ImageIcon
   },
   { label: "Custom Fields", translation: "group:custom_field.title", icon: ListIcon },
-  { label: "Group Rules", translation: "group:rules.title", icon: CheckCircleIcon },
-  { label: "Observation Display", translation: "group:observation_display", icon: ViewIcon },
-  { label: "Species Fields", translation: "group:species_fields.title", icon: AtSignIcon }
+  { label: "Group Rules", translation: "group:rules.title", icon: LuCircleCheck },
+  { label: "Observation Display", translation: "group:observation_display", icon: LuView },
+  { label: "Species Fields", translation: "group:species_fields.title", icon: LuAtSign }
 ];
 
 export default function EditGroupPageComponent({

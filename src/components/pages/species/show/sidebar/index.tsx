@@ -1,4 +1,4 @@
-import { GridItem } from "@chakra-ui/layout";
+import { GridItem } from "@chakra-ui/react";
 import TemporalObservedOn from "@components/pages/observation/list/views/stats/temporal-observed-on";
 import TraitsPerMonth from "@components/pages/observation/list/views/stats/traits-per-month";
 import useGlobalState from "@hooks/use-global-state";

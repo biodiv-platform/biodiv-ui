@@ -1,4 +1,4 @@
-import { Checkbox, Image, Link, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
@@ -7,6 +7,9 @@ import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
 import React from "react";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const doFilter = (speciesTiles) => {
   const { name, reprImage, sGroup, commonName } = speciesTiles[0];
@@ -25,18 +28,19 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
           Cell: ({ value, cell, getCheckboxProps }) => {
             return (
               cell.row.original.id && (
-                <Stack isInline>
+                <Stack direction={"row"}>
                   {canEdit && (
                     <Checkbox
+                      size={"sm"}
+                      borderWidth={"thin"}
+                      colorPalette={"blue"}
                       m={2}
                       {...getCheckboxProps({ value: cell.row.original.id })}
                     ></Checkbox>
                   )}
 
                   <LocalLink href={`/species/show/${cell.row.original.id}`} prefixGroup={true}>
-                    <Link>
-                      <ScientificName value={value} />
-                    </Link>
+                    <ScientificName value={value} />
                   </LocalLink>
                 </Stack>
               )
@@ -48,19 +52,21 @@ export const speciesTableMetaData = (speciesTiles, speciesGroups, canEdit) => {
         return {
           Header: "species:resource",
           accessor: "reprImage",
-          Cell: ({ value, cell }) => (
-            <Image
-              borderRadius={4}
-              title={stripTags(cell.row.original.name)}
-              boxSize="5rem"
-              src={getResourceThumbnail(
-                cell.row.original.context,
-                value,
-                RESOURCE_SIZE.LIST_THUMBNAIL
-              )}
-              fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
-            />
-          )
+          Cell: ({ value, cell }) => {
+            return (
+              <ImageWithFallback
+                borderRadius={4}
+                title={stripTags(cell.row.original.name)}
+                boxSize="5rem"
+                src={getResourceThumbnail(
+                  cell.row.original.context,
+                  value,
+                  RESOURCE_SIZE.LIST_THUMBNAIL
+                )}
+                fallbackSrc={OBSERVATION_FALLBACK.PHOTO}
+              />
+            );
+          }
         };
 
       case "sGroup":

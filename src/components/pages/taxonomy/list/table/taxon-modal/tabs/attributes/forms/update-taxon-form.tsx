@@ -1,4 +1,4 @@
-import { Box, FormLabel, useDisclosure } from "@chakra-ui/react";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
@@ -19,11 +19,13 @@ import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import { Field } from "@/components/ui/field";
+
 export default function UpdateTaxonForm({ onDone }) {
   const { modalTaxon, taxonRanks, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
   const [validateResults, setValidateResults] = useState([]);
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
 
   const [formValidationSchema, formDisabled] = useMemo(() => {
     const validation: [string, any][] = [];
@@ -125,7 +127,7 @@ export default function UpdateTaxonForm({ onDone }) {
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnStatusFormSubmit)}>
-        <TaxonCreateModal isOpen={isOpen} onClose={onClose} validateResults={validateResults} />
+        <TaxonCreateModal isOpen={open} onClose={onClose} validateResults={validateResults} />
 
         <SelectInputField
           name="status"
@@ -135,7 +137,7 @@ export default function UpdateTaxonForm({ onDone }) {
           isRequired={true}
         />
 
-        <FormLabel>{t("taxon:modal.attributes.rank.title")}</FormLabel>
+        <Field label={t("taxon:modal.attributes.rank.title")} />
         <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.ACCEPTED}>
           {formDisabled.map(([name, isRequired, isDisabled]) => (
             <TaxonCreateInputField

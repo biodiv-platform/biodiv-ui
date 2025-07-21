@@ -1,4 +1,4 @@
-import { AspectRatio, Badge, Box, Heading, Image, LinkOverlay, Text } from "@chakra-ui/react";
+import { AspectRatio, Badge, Box, Heading, LinkOverlay, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import useGlobalState from "@hooks/use-global-state";
@@ -7,12 +7,14 @@ import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
+
 import { getImageThumb } from "../../create/form/uploader/observation-resources/resource-card";
 
 const ASSET_STATUS = {
-  [AssetStatus.InProgress]: { colorScheme: "orange", text: "observation:status.in_progress" },
-  [AssetStatus.Uploaded]: { colorScheme: "green", text: "observation:status.uploaded" },
-  [AssetStatus.Failed]: { colorScheme: "red", text: "observation:status.failed" }
+  [AssetStatus.InProgress]: { colorPalette: "orange", text: "observation:status.in_progress" },
+  [AssetStatus.Uploaded]: { colorPalette: "green", text: "observation:status.uploaded" },
+  [AssetStatus.Failed]: { colorPalette: "red", text: "observation:status.failed" }
 };
 export default function ProgressCard({ item }) {
   const { user } = useGlobalState();
@@ -26,7 +28,7 @@ export default function ProgressCard({ item }) {
       >
         <LinkOverlay target="_blank">
           <AspectRatio maxW="100%" mb={2} ratio={1}>
-            <Image
+            <ImageWithFallback
               borderTopRadius="md"
               objectFit="cover"
               overflow="hidden"
@@ -39,7 +41,7 @@ export default function ProgressCard({ item }) {
             <Heading size="sm" className="elipsis" title={item?.commonName}>
               <ScientificName value={item?.scientificName || t("common:unknown")} />{" "}
               {!item?.scientificName && (
-                <Badge colorScheme="red">{t("observation:help_identify")}</Badge>
+                <Badge colorPalette="red">{t("observation:help_identify")}</Badge>
               )}
             </Heading>
 
@@ -52,7 +54,7 @@ export default function ProgressCard({ item }) {
       <Badge
         borderRadius="xl"
         children={t(ASSET_STATUS[item.status]?.text)}
-        colorScheme={ASSET_STATUS[item.status]?.colorScheme}
+        colorPalette={ASSET_STATUS[item.status]?.colorPalette}
         m={3}
         position="absolute"
         px={2}

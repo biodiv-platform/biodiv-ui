@@ -22,14 +22,16 @@ const Totals = ({ filter, observationData }) => {
       return sGroupArray.includes(id);
     });
 
-    return filteredGroups.map((key) => observationData.ag.groupSpeciesName[key] || 0).reduce((a, b) => a + b, 0);
+    return filteredGroups
+      .map((key) => observationData.ag.groupSpeciesName[key] || 0)
+      .reduce((a, b) => a + b, 0);
   }, [filter.sGroup, observationData.ag.groupSpeciesName]);
 
   const totals = { totalObservations: s, ...totalsData.data.list };
   const isLoading = totalsData.data.isLoading;
 
   return (
-    <SimpleGrid columns={{ md: 4 }} spacing={4} mb={4}>
+    <SimpleGrid columns={{ md: 4 }} gap={4} mb={4}>
       <TableTotals
         title={t("observation:list.stats_bar.total_observations")}
         count={totals["totalObservations"]}

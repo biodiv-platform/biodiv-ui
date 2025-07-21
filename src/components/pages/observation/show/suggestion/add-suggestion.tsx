@@ -1,17 +1,9 @@
-import { HamburgerIcon } from "@chakra-ui/icons";
 import {
-  Alert,
-  AlertIcon,
   Box,
   Button,
-  Collapse,
+  Collapsible,
   Flex,
-  IconButton,
   Image,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   SimpleGrid,
   Skeleton,
   Spacer,
@@ -33,7 +25,11 @@ import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuMenu } from "react-icons/lu";
 import * as Yup from "yup";
+
+import { Alert } from "@/components/ui/alert";
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
 
 import {
   CommonNameOption,
@@ -70,15 +66,15 @@ export default function AddSuggestion({
   const [languages, setLanguages] = useState<any[]>([]);
   const langRef: any = useRef(null);
   const { languageId } = useGlobalState();
-  const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen: true });
+  const { open, onClose, onOpen } = useDisclosure({ defaultOpen: true });
   const {
-    isOpen: isOpenImageModal,
+    open: isOpenImageModal,
     onOpen: onOpenimageModal,
     onClose: onCloseImageModal
   } = useDisclosure();
 
   const {
-    isOpen: isOpenSpecRecImageModal,
+    open: isOpenSpecRecImageModal,
     onOpen: onOpenSpecRecImageModal,
     onClose: onCloseSpecRecImageModal
   } = useDisclosure();
@@ -118,7 +114,7 @@ export default function AddSuggestion({
   const [buttonValue, setButtonValue] = useState<PredictionEngine>(defaultButtonValue);
 
   const handleMenuSelect = (e) => {
-    setButtonValue(e.currentTarget.value);
+    setButtonValue(e.value);
   };
 
   useEffect(() => {
@@ -235,164 +231,161 @@ export default function AddSuggestion({
 
   return languages.length > 0 ? (
     isLocked ? (
-      <Alert status="success">
-        <AlertIcon /> {t("observation:id.validated")}
-      </Alert>
+      <Alert status="success">{t("observation:id.validated")}</Alert>
     ) : (
       <>
-        <Box className="fade" hidden={!isOpen}>
-          <Collapse in={isOpen} unmountOnExit={true}>
-            <Box p={4}>
-              <FormProvider {...hForm}>
-                <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-                  <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
-                    <SelectAsyncInputField
-                      name="taxonCommonName"
-                      label={t("observation:common_name")}
-                      style={{ gridColumn: "1/3" }}
-                      onQuery={onCommonNameQuery}
-                      options={commonNameOptions}
-                      optionComponent={CommonNameOption}
-                      placeholder={t("form:min_three_chars")}
-                      onChange={onCommonNameChange}
-                    />
-                    <SelectInputField
-                      name="languageId"
-                      label={t("form:language")}
-                      options={languages}
-                      selectRef={langRef}
-                      shouldPortal={true}
-                    />
-                  </SimpleGrid>
-                  <Box onMouseEnter={() => scientificRef.current.focus()}>
-                    <SelectAsyncInputField
-                      name="scientificNameTaxonId"
-                      label={t("observation:scientific_name")}
-                      onQuery={onScientificNameQuery}
-                      optionComponent={ScientificNameOption}
-                      placeholder={t("form:min_three_chars")}
-                      onChange={onScientificNameChange}
-                      options={predictions || []}
-                      selectRef={scientificRef}
-                      openMenuOnFocus={true}
-                    />
-                  </Box>
+        <Box className="fade" hidden={!open}>
+          <Collapsible.Root open={open} unmountOnExit={true}>
+            <Collapsible.Content>
+              <Box p={4}>
+                <FormProvider {...hForm}>
+                  <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+                    <SimpleGrid columns={[1, 1, 3, 3]} gap={4}>
+                      <SelectAsyncInputField
+                        name="taxonCommonName"
+                        label={t("observation:common_name")}
+                        style={{ gridColumn: "1/3" }}
+                        onQuery={onCommonNameQuery}
+                        options={commonNameOptions}
+                        optionComponent={CommonNameOption}
+                        placeholder={t("form:min_three_chars")}
+                        onChange={onCommonNameChange}
+                      />
+                      <SelectInputField
+                        name="languageId"
+                        label={t("form:language")}
+                        options={languages}
+                        selectRef={langRef}
+                        shouldPortal={true}
+                      />
+                    </SimpleGrid>
+                    <Box onMouseEnter={() => scientificRef.current.focus()}>
+                      <SelectAsyncInputField
+                        name="scientificNameTaxonId"
+                        label={t("observation:scientific_name")}
+                        onQuery={onScientificNameQuery}
+                        optionComponent={ScientificNameOption}
+                        placeholder={t("form:min_three_chars")}
+                        onChange={onScientificNameChange}
+                        options={predictions || []}
+                        selectRef={scientificRef}
+                        openMenuOnFocus={true}
+                      />
+                    </Box>
 
-                  {predictions.length > 0 && (
-                    <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
-                  )}
+                    {predictions.length > 0 && (
+                      <Text color="green">{t("observation:plantnet.pedictions_ready")}</Text>
+                    )}
 
-                  {isPlantnetActive && isSgroupPlant && (
-                    <PlantnetPrediction
-                      images={images}
-                      setPredictions={setPredictions}
-                      isOpenImageModal={isOpenImageModal}
-                      onCloseImageModal={onCloseImageModal}
-                      selectRef={scientificRef}
-                    />
-                  )}
+                    {isPlantnetActive && isSgroupPlant && (
+                      <PlantnetPrediction
+                        images={images}
+                        setPredictions={setPredictions}
+                        isOpenImageModal={isOpenImageModal}
+                        onCloseImageModal={onCloseImageModal}
+                        selectRef={scientificRef}
+                      />
+                    )}
 
-                  {isSpecRecActive && (
-                    <SpecRecPrediction
-                      images={images}
-                      setPredictions={setPredictions}
-                      isOpenImageModal={isOpenSpecRecImageModal}
-                      onCloseImageModal={onCloseSpecRecImageModal}
-                      selectRef={scientificRef}
-                    />
-                  )}
+                    {isSpecRecActive && (
+                      <SpecRecPrediction
+                        images={images}
+                        setPredictions={setPredictions}
+                        isOpenImageModal={isOpenSpecRecImageModal}
+                        onCloseImageModal={onCloseSpecRecImageModal}
+                        selectRef={scientificRef}
+                      />
+                    )}
 
-                  {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
-                    <Box>
-                      <Text>{t("observation:identify_using")}</Text>
-                      <Flex>
-                        <Button
-                          size="md"
-                          onClick={handleOnClick}
-                          colorScheme="green"
-                          variant="outline"
-                        >
-                          {buttonValue == "plantnet" && (
-                            <Stack isInline={true} align="center">
-                              <Image
-                                id="Pl@ntNet"
-                                src="/plantnet-icon-removebg-preview.ico"
-                                onClick={handleOnClick}
-                                defaultValue="plantnet"
-                              />
-                              <Text>{plantnetText}</Text>
-                            </Stack>
-                          )}
-
-                          {buttonValue == "spec-rec" && (
-                            <Stack isInline={true} align="center">
-                              <Image
-                                id="SpecRec"
-                                src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
-                                onClick={handleOnClick}
-                                defaultValue="spec-rec"
-                              />
-                              <Text id="spec-rec" onClick={handleOnClick}>
-                                {specRecText}
-                              </Text>
-                            </Stack>
-                          )}
-                        </Button>
-
-                        <Menu>
-                          <MenuButton
-                            as={IconButton}
-                            aria-label="Options"
-                            icon={<HamburgerIcon />}
+                    {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
+                      <Box>
+                        <Text>{t("observation:identify_using")}</Text>
+                        <Flex>
+                          <Button
+                            size="md"
+                            onClick={handleOnClick}
+                            colorPalette="green"
                             variant="outline"
-                          />
-                          <MenuList defaultValue="plantnet">
-                            {isPlantnetActive && (
-                              <MenuItem
-                                isDisabled={!isSgroupPlant || isOnlyPlantnetActive()}
-                                value="plantnet"
-                                onClick={handleMenuSelect}
-                              >
-                                <Image src="/plantnet-icon-removebg-preview.ico" />
+                          >
+                            {buttonValue == "plantnet" && (
+                              <Stack direction={"row"} align="center">
+                                <Image
+                                  id="Pl@ntNet"
+                                  src="/plantnet-icon-removebg-preview.ico"
+                                  onClick={handleOnClick}
+                                  defaultValue="plantnet"
+                                />
                                 <Text>{plantnetText}</Text>
-                              </MenuItem>
+                              </Stack>
                             )}
 
-                            {isSpecRecActive && (
-                              <MenuItem value="spec-rec" onClick={handleMenuSelect}>
+                            {buttonValue == "spec-rec" && (
+                              <Stack direction={"row"} align="center">
                                 <Image
                                   id="SpecRec"
                                   src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
+                                  onClick={handleOnClick}
+                                  defaultValue="spec-rec"
                                 />
-                                <Text>{specRecText}</Text>
-                              </MenuItem>
+                                <Text id="spec-rec" onClick={handleOnClick}>
+                                  {specRecText}
+                                </Text>
+                              </Stack>
                             )}
-                          </MenuList>
-                        </Menu>
+                          </Button>
 
+                          <MenuRoot onSelect={(e) => handleMenuSelect(e)}>
+                            <MenuTrigger aria-label="Options">
+                              <Button variant="outline" size="sm">
+                                <LuMenu />
+                              </Button>
+                            </MenuTrigger>
+                            <MenuContent defaultValue="plantnet">
+                              {isPlantnetActive && (
+                                <MenuItem
+                                  disabled={!isSgroupPlant || isOnlyPlantnetActive()}
+                                  value="plantnet"
+                                >
+                                  <Image src="/plantnet-icon-removebg-preview.ico" />
+                                  <Text>{plantnetText}</Text>
+                                </MenuItem>
+                              )}
+
+                              {isSpecRecActive && (
+                                <MenuItem value="spec-rec">
+                                  <Image
+                                    id="SpecRec"
+                                    src={DEFAULT_GROUP.icon + "?w=30&preserve=true"}
+                                  />
+                                  <Text>{specRecText}</Text>
+                                </MenuItem>
+                              )}
+                            </MenuContent>
+                          </MenuRoot>
+
+                          <Spacer />
+                          <SubmitButton leftIcon={<CheckIcon />}>
+                            {t("observation:suggest")}
+                          </SubmitButton>
+                        </Flex>
+                      </Box>
+                    ) : (
+                      <Flex>
                         <Spacer />
                         <SubmitButton leftIcon={<CheckIcon />}>
                           {t("observation:suggest")}
                         </SubmitButton>
                       </Flex>
-                    </Box>
-                  ) : (
-                    <Flex>
-                      <Spacer />
-                      <SubmitButton leftIcon={<CheckIcon />}>
-                        {t("observation:suggest")}
-                      </SubmitButton>
-                    </Flex>
-                  )}
-                </form>
-              </FormProvider>
-            </Box>
-          </Collapse>
+                    )}
+                  </form>
+                </FormProvider>
+              </Box>
+            </Collapsible.Content>
+          </Collapsible.Root>
         </Box>
-        <Alert status="success" hidden={isOpen}>
-          <AlertIcon />
+        <Alert status="success" hidden={open}>
           {t("observation:id.suggestion_success")}
-          <Button variant="link" colorScheme="blue" onClick={onOpen} ml={1}>
+          <Button variant="plain" colorPalette="blue" onClick={onOpen} ml={1}>
             {t("observation:id.resuggest")}
           </Button>
         </Alert>

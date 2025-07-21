@@ -1,7 +1,8 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { getInjectableHTML } from "@utils/text";
 import React, { useEffect, useState } from "react";
+
+import { Prose } from "@/components/ui/prose";
 
 const userMatch = /@\[([^\]]+?)\]\((\d+)\)/gm;
 

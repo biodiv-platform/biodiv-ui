@@ -34,7 +34,7 @@ export default function LocationInformation({
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>🏜 {t("observation:location_information.title")}</BoxHeading>
-      <SimpleGrid columns={[1, 1, 3, 3]} spacingY={4} p={4}>
+      <SimpleGrid columns={[1, 1, 3, 3]} gapY={4} p={4}>
         <Row title="COORDINATES">
           {geoprivacy
             ? t("observation:location_information.geoprivacy_enabled")

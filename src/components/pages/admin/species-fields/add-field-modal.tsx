@@ -1,18 +1,4 @@
-import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Flex,
-  IconButton,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text
-} from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Text } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import SITE_CONFIG from "@configs/site-config";
@@ -22,8 +8,19 @@ import { axGetLangList } from "@services/utility.service";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { LuDelete, LuPlus } from "react-icons/lu";
 import ReactSelect from "react-select";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 interface AddFieldModalProps {
   isOpen: boolean;
@@ -112,14 +109,14 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
-      <ModalOverlay />
-      <ModalContent>
+    <DialogRoot open={isOpen} onOpenChange={onClose} size="xl">
+      <DialogBackdrop />
+      <DialogContent>
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleSubmit)}>
-            <ModalHeader>{t(`admin:species_fields.add_${fieldType}`)}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+            <DialogHeader>{t(`admin:species_fields.add_${fieldType}`)}</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
               {parentName && (
                 <Text mb={4}>
                   {t(`admin:species_fields.adding_to_${parentType}`, { name: parentName })}
@@ -130,7 +127,6 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
               <Flex justify="flex-end" mb={4}>
                 <Button
                   size="sm"
-                  leftIcon={<AddIcon />}
                   onClick={() => {
                     append({
                       languageId: SITE_CONFIG.LANG.DEFAULT_ID,
@@ -141,6 +137,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                     setActiveTab(fields.length);
                   }}
                 >
+                  <LuPlus />
                   {t("admin:species_fields.add_translation")}
                 </Button>
               </Flex>
@@ -160,7 +157,6 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                     {index > 0 && (
                       <IconButton
                         size="xs"
-                        icon={<DeleteIcon />}
                         onClick={(e) => {
                           e.stopPropagation();
                           remove(index);
@@ -168,7 +164,9 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                         }}
                         ml={2}
                         aria-label="Remove translation"
-                      />
+                      >
+                        <LuDelete />
+                      </IconButton>
                     )}
                   </Button>
                 ))}
@@ -198,7 +196,6 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                         }
                       }}
                     />
-
                   </Box>
 
                   <TextBoxField
@@ -220,20 +217,20 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                   />
                 </Box>
               ))}
-            </ModalBody>
+            </DialogBody>
 
-            <ModalFooter>
+            <DialogFooter>
               <SubmitButton leftIcon={<CheckIcon />} mr={3}>
                 {t("common:save")}
               </SubmitButton>
               <Button variant="ghost" onClick={onClose}>
                 {t("common:cancel")}
               </Button>
-            </ModalFooter>
+            </DialogFooter>
           </form>
         </FormProvider>
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </DialogRoot>
   );
 };
 

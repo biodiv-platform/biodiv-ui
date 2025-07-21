@@ -3,12 +3,13 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { Role } from "@interfaces/custom";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+
+import { Prose } from "@/components/ui/prose";
 
 import LandscapeObservationList from "../common/observation-list";
 
@@ -20,7 +21,7 @@ interface IFieldsProps {
   ml?;
 }
 
-export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IFieldsProps) {
+export default function LandscapeFields({ childs = [], size = "3xl", ml = 0 }: IFieldsProps) {
   const { isLoggedIn } = useGlobalState();
   const [canEdit, setCanEdit] = useState(false);
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
   return (
     <div>
       {childs.map((child) => {
-        const { isOpen, onClose, onToggle } = useDisclosure();
+        const { open, onClose, onToggle } = useDisclosure();
         const [content, setContent] = useState(child.content);
 
         useEffect(() => {
@@ -48,15 +49,16 @@ export default function LandscapeFields({ childs = [], size = "lg", ml = 0 }: IF
                 {child.header}
                 {canEdit && (
                   <IconButton
-                    variant="link"
-                    colorScheme="blue"
+                    variant="plain"
+                    colorPalette="blue"
                     aria-label={`Edit ${child.header}`}
-                    icon={<EditIcon />}
                     onClick={onToggle}
-                  />
+                  >
+                    <EditIcon />
+                  </IconButton>
                 )}
               </Heading>
-              {isOpen ? (
+              {open ? (
                 <FieldEditor
                   id={child.pageFieldId}
                   onChange={setContent}

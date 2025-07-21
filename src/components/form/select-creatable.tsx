@@ -1,8 +1,8 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
 import Select from "react-select/creatable";
 
+import { Field } from "../ui/field";
 import { reactSelectProps } from "./configs";
 
 interface ISelectCreatableProps {
@@ -34,16 +34,17 @@ export const SelectCreatableInputField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl
-      isInvalid={!!fieldState.error}
+    <Field
+      invalid={!!fieldState.error}
       className="dropdown"
       aria-invalid={!!fieldState.error}
       mb={mb}
-      isRequired={isRequired}
+      htmlFor={name}
+      label={label}
+      required={isRequired}
+      errorText={fieldState?.error?.message}
       {...props}
     >
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-
       <Select
         id={name}
         inputId={name}
@@ -63,8 +64,8 @@ export const SelectCreatableInputField = ({
         components={{ IndicatorSeparator: () => null }}
         {...reactSelectProps}
       />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Field errorText={fieldState?.error?.message} />
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

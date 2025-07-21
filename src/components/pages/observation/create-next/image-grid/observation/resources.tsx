@@ -1,11 +1,13 @@
-import { CloseIcon } from "@chakra-ui/icons";
-import { AspectRatio, Box, IconButton, Image, useBoolean } from "@chakra-ui/react";
+import { AspectRatio, Box, IconButton } from "@chakra-ui/react";
 import { getImageThumb } from "@components/pages/observation/create/form/uploader/observation-resources/resource-card";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
 import React, { useEffect, useMemo, useState } from "react";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+import { LuX } from "react-icons/lu";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import ManageResourcesModal from "../../manage-resources";
 import useObservationCreateNext from "../../use-observation-create-next-hook";
@@ -15,7 +17,7 @@ import ResourceUploadIndicator from "./upload-indicator";
 export default function Resources({ index, removeObservation }) {
   const resourcesName = `o.${index}.resources`;
   const resources = useFieldArray({ name: resourcesName });
-  const [resourceEditor, setResourceEditor] = useBoolean();
+  const [resourceEditor, setResourceEditor] = useState(false);
   const { media } = useObservationCreateNext();
   const hForm = useFormContext();
 
@@ -65,7 +67,7 @@ export default function Resources({ index, removeObservation }) {
     <>
       <Box position="relative" key={imgThumb.key}>
         <AspectRatio maxW="100%" mb={2} ratio={1}>
-          <Image
+          <ImageWithFallback
             borderRadius="sm"
             objectFit="cover"
             overflow="hidden"
@@ -76,19 +78,20 @@ export default function Resources({ index, removeObservation }) {
         </AspectRatio>
         <IconButton
           aria-label="Close"
-          colorScheme="red"
-          icon={<CloseIcon />}
+          colorPalette="red"
           m={2}
           onClick={handleOnRemoveObservation}
           position="absolute"
           right="0"
           size="xs"
           top="0"
-        />
+        >
+          <LuX />
+        </IconButton>
         <ResourceNavigation
           index={resourceIndex}
           onDelete={handleOnRemoveResource}
-          onReorder={setResourceEditor.on}
+          onReorder={() => setResourceEditor(true)}
           setIndex={setResourceIndex}
           size={resources.fields.length}
         />
@@ -99,7 +102,7 @@ export default function Resources({ index, removeObservation }) {
           index={index}
           resources={resources}
           isOpen={resourceEditor}
-          onClose={setResourceEditor.off}
+          onClose={() => setResourceEditor(false)}
         />
       )}
     </>

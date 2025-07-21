@@ -34,7 +34,7 @@ export default function RulesInputType({ inputType, name, traits }) {
     case "traitList":
       return (
         <Box mb={2}>
-          <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4} mt={2}>
+          <SimpleGrid columns={{ md: 2 }} gap={4} mb={4} mt={2}>
             <Box>
               <SelectInputField
                 name={name + "[0].trait"}

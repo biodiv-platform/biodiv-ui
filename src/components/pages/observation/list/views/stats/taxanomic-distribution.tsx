@@ -1,4 +1,4 @@
-import { Box, Button, Skeleton, useToast } from "@chakra-ui/react";
+import { Box, Button, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
@@ -6,11 +6,13 @@ import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 
+import { toaster } from "@/components/ui/toaster";
+
 import TreeMapChart from "./tree-map";
 import useTaxonTreeData from "./use-taxon-tree-data";
 
-const TaxanomicDistribution = ({filter }) => {
-  const taxon = useTaxonTreeData({filter});
+const TaxanomicDistribution = ({ filter }) => {
+  const taxon = useTaxonTreeData({ filter });
   const { t } = useTranslation();
   const [currentParent, setCurrentParent] = useState("Root|1");
   const [currentDataPath, setCurrentDataPath] = useState(["Root|1"]);
@@ -21,7 +23,6 @@ const TaxanomicDistribution = ({filter }) => {
   }, [filter]);
 
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
   const handleDownload = async () => {
     try {
@@ -40,25 +41,24 @@ const TaxanomicDistribution = ({filter }) => {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        closable: true
       });
     }
   };
 
   const increaseDepth = (data) => {
-    setCurrentParent(data)
-    taxon.loadMore(data)
+    setCurrentParent(data);
+    taxon.loadMore(data);
     setCurrentDataPath(currentDataPath.concat(data));
-  }
+  };
 
   const decrease = (data) => {
-    setCurrentParent(data)
-    setCurrentDataPath(currentDataPath.slice(0, currentDataPath.indexOf(data) + 1))
-  }
+    setCurrentParent(data);
+    setCurrentDataPath(currentDataPath.slice(0, currentDataPath.indexOf(data) + 1));
+  };
 
   if (taxon.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" mb={4} />;
@@ -72,12 +72,19 @@ const TaxanomicDistribution = ({filter }) => {
     <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.taxonomic_distribution")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>
       <Box p={4}>
-        <TreeMapChart data={taxon.data.list} ref={chartRef} loadMore={increaseDepth} currentParent={currentParent} currentDataPath={currentDataPath} decrease={decrease}/>
+        <TreeMapChart
+          data={taxon.data.list}
+          ref={chartRef}
+          loadMore={increaseDepth}
+          currentParent={currentParent}
+          currentDataPath={currentDataPath}
+          decrease={decrease}
+        />
       </Box>
     </Box>
   );

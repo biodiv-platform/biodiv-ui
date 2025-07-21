@@ -8,11 +8,13 @@ export function TraitEditFooter({ onSave, onCancel }) {
   const { t } = useTranslation();
 
   return (
-    <ButtonGroup size="sm" spacing={3}>
-      <Button leftIcon={<CheckIcon />} onClick={onSave} colorScheme="blue">
+    <ButtonGroup size="sm" gap={3}>
+      <Button onClick={onSave} colorPalette="blue">
+        <CheckIcon />
         {t("common:save")}
       </Button>
-      <Button leftIcon={<CrossIcon />} onClick={onCancel}>
+      <Button onClick={onCancel} variant={"subtle"}>
+        <CrossIcon />
         {t("common:cancel")}
       </Button>
     </ButtonGroup>

@@ -57,7 +57,7 @@ export default function AboutGroupComponent({
         <PageHeading mb={0} mr={4}>
           👥 {t("group:about.title")} {name}
         </PageHeading>
-        <Badge colorScheme={allowUserToJoin ? "blue" : "yellow"}>
+        <Badge colorPalette={allowUserToJoin ? "blue" : "yellow"}>
           {t(allowUserToJoin ? t("group:about.open_group") : t("group:about.closed_group"))}
         </Badge>
       </Flex>
@@ -89,7 +89,7 @@ export default function AboutGroupComponent({
             {t("group:custom_field.title")}
           </Heading>
           {customFieldList.map((item) => (
-            <Box fontSize={"md"} sx={{ fontSize: "1.125rem", color: "gray.600" }}>
+            <Box fontSize={"md"} color={"gray.600"}>
               <Flex alignItems="center">
                 <Box mr={4}>{item.customFields.name}</Box>
                 <Badge colorScheme="blue">{item.customFields.dataType}</Badge>
@@ -106,11 +106,11 @@ export default function AboutGroupComponent({
           {"User Rule"}
         </Heading>
         {groupRules.hasUserRule ? (
-          <Box fontSize={"sm"} sx={{ fontSize: "1.125rem", color: "gray.600" }} mb={2}>
+          <Box fontSize={"sm"} color={"gray.600"} mb={2}>
             {"Only member’s content will be posted"}
           </Box>
         ) : (
-          <Box fontSize={"sm"} sx={{ fontSize: "1.125rem", color: "gray.600" }} mb={2}>
+          <Box fontSize={"sm"} color={"gray.600"} mb={2}>
             {"Any user’s content will be posted"}
           </Box>
         )}
@@ -122,12 +122,7 @@ export default function AboutGroupComponent({
             </Heading>
             {groupRules.taxonomicRuleList.map((item, idx) => {
               return (
-                <Box
-                  key={idx}
-                  fontSize="sm"
-                  sx={{ fontSize: "1.125rem", color: "gray.600" }}
-                  mb={2}
-                >
+                <Box key={idx} fontSize={"sm"} color={"gray.600"} mb={2}>
                   {item.name}
                 </Box>
               );

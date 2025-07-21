@@ -1,5 +1,4 @@
-import { SearchIcon } from "@chakra-ui/icons";
-import { IconButton } from "@chakra-ui/react";
+import { Box, IconButton } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import {
   onScientificNameQuery,
@@ -11,6 +10,7 @@ import { axGetTaxonList, doTaxonSearch } from "@services/api.service";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuSearch } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { mergeDeep } from "./taxon-browser-helpers";
@@ -74,7 +74,7 @@ export default function TaxonSuggest({ setParentState, parentState }) {
   };
 
   return (
-    <>
+    <Box pl={4} pr={4}>
       <FormProvider {...hForm}>
         <SearchForm onSubmit={hForm.handleSubmit(handleOnSearch)}>
           <SelectAsyncInputField
@@ -86,14 +86,15 @@ export default function TaxonSuggest({ setParentState, parentState }) {
           />
           <IconButton
             variant="solid"
-            colorScheme="blue"
-            isLoading={isLoading}
+            colorPalette="blue"
+            loading={isLoading}
             type="submit"
-            icon={<SearchIcon />}
             aria-label={t("filters:taxon_browser.search")}
-          />
+          >
+            <LuSearch />
+          </IconButton>
         </SearchForm>
       </FormProvider>
-    </>
+    </Box>
   );
 }

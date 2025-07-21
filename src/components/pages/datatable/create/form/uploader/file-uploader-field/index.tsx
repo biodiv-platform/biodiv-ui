@@ -1,6 +1,8 @@
-import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 import DropTarget from "./drop-target";
 
@@ -29,15 +31,22 @@ export default function ImageUploaderField({
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={!!fieldState.error} mb={mb}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <DropTarget
-        simpleUpload={simpleUpload}
-        setFieldMapping={setFieldMapping}
-        setShowMapping={setShowMapping}
-        field={field}
-      />
-      <FormErrorMessage children={fieldState?.error?.message} />
-    </FormControl>
+    <Field
+      required={isRequired}
+      invalid={!!fieldState.error}
+      htmlFor={name}
+      label={label}
+      errorText={fieldState?.error?.message}
+      mb={mb}
+    >
+      <Box width={"full"}>
+        <DropTarget
+          simpleUpload={simpleUpload}
+          setFieldMapping={setFieldMapping}
+          setShowMapping={setShowMapping}
+          field={field}
+        />
+      </Box>
+    </Field>
   );
 }

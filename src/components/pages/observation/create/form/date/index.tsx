@@ -1,4 +1,4 @@
-import { Box, Divider, SimpleGrid } from "@chakra-ui/react";
+import { Box, Separator, SimpleGrid } from "@chakra-ui/react";
 import { DatePickerNextField } from "@components/form/datepicker-next";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SelectInputField } from "@components/form/select";
@@ -43,14 +43,14 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
 
   return (
     <>
-      <SimpleGrid columns={[1, 1, 1, 2]} spacing={4}>
+      <SimpleGrid columns={[1, 1, 1, 2]} gap={4}>
         <Box>
-          <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} spacing={4}>
+          <SimpleGrid columns={showTags ? [1, 1, 3, 3] : [1]} gap={4}>
             <DatePickerNextField
               name="observedOn"
               label={t("common:observed_on")}
               style={{ gridColumn: "1/3" }}
-              isRequired={isRequired}
+              required={isRequired}
               mb={showTags ? 4 : 0}
               inputRef={inputRef}
             />
@@ -61,7 +61,7 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
               shouldPortal={true}
             />
           </SimpleGrid>
-          <SimpleGrid columns={showTags ? { base: 1, md: 2 } : 1} spacing={4}>
+          <SimpleGrid columns={showTags ? { base: 1, md: 2 } : 1} gap={4}>
             {showTags && (
               <SelectAsyncInputField
                 name="tags"
@@ -83,7 +83,7 @@ export default function DateInputs({ showTags = true, isRequired = true }) {
         </Box>
         <RichTextareaField name="notes" label={t("observation:notes")} />
       </SimpleGrid>
-      {showTags && <Divider mb={3} />}
+      {showTags && <Separator mb={3} />}
     </>
   );
 }

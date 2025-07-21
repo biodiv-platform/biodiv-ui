@@ -5,12 +5,13 @@ import SpeciesGroupBox from "@components/pages/observation/show/info/species-gro
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { SpeciesGroup } from "@interfaces/observation";
-import { Prose } from "@nikolovlazar/chakra-ui-prose";
 import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { covertToSentenceCase, getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Prose } from "@/components/ui/prose";
 
 interface IInfoProps {
   dataTable;
@@ -22,7 +23,7 @@ export default function Info({ dataTable: dt, speciesGroups }: IInfoProps) {
 
   return (
     <Box p={4} mb={4} className="white-box">
-      <SimpleGrid columns={[1, 1, 5, 5]} spacing={2}>
+      <SimpleGrid columns={[1, 1, 5, 5]} gap={2}>
         <ResponsiveInfo title="form:name">
           <i>{dt?.title || t("common:unknown")}</i>
         </ResponsiveInfo>
@@ -41,7 +42,7 @@ export default function Info({ dataTable: dt, speciesGroups }: IInfoProps) {
         <ResponsiveInfo title="form:place">{dt?.geographicalCoveragePlaceName}</ResponsiveInfo>
 
         <ResponsiveInfo title="common:observed_on">
-          <Stack isInline={true}>
+          <Stack direction={"row"}>
             <Text mr={1}>
               {dt?.temporalCoverageDateAccuracy === DATE_ACCURACY.UNKNOWN
                 ? t("common:unknown")
@@ -50,17 +51,17 @@ export default function Info({ dataTable: dt, speciesGroups }: IInfoProps) {
             {dt?.temporalCoverageDateAccuracy === DATE_ACCURACY.ACCURATE && (
               <Tooltip
                 title={t("form:date_accuracy_options.accurate")}
-                shouldWrapChildren={true}
-                hasArrow={true}
+                // shouldWrapChildren={true}
+                showArrow={true}
               >
-                <CheckIcon color="green.500" />
+                <CheckIcon color="green.500" size={"sm"} />
               </Tooltip>
             )}
           </Stack>
         </ResponsiveInfo>
 
         <ResponsiveInfo title="form:created_on">
-          <Stack isInline={true}>
+          <Stack direction={"row"}>
             <Text mr={1}>{formatDateReadableFromUTC(dt?.createdOn)}</Text>
           </Stack>
         </ResponsiveInfo>
@@ -143,8 +144,12 @@ export default function Info({ dataTable: dt, speciesGroups }: IInfoProps) {
         )}
 
         <ResponsiveInfo title="datatable:is_verified">
-          <Stack isInline={true}>
-            {dt?.isVerified ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />}
+          <Stack direction={"row"}>
+            {dt?.isVerified ? (
+              <CheckIcon color="green.500" size={"sm"} />
+            ) : (
+              <CrossIcon color="red.500" size={"sm"} />
+            )}
           </Stack>
         </ResponsiveInfo>
       </SimpleGrid>

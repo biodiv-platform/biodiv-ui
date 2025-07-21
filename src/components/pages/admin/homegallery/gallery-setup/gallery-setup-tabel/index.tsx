@@ -82,13 +82,13 @@ const GallerySetupTable = ({
           languageId = {languageId}
         />
       </table>
-      <ButtonGroup spacing={4} mt={4}>
-        <Button colorScheme="blue" onClick={() => setIsCreate(true)} leftIcon={<AddIcon />}>
+      <ButtonGroup gap={4} mt={4}>
+        <Button colorPalette="blue" onClick={() => setIsCreate(true)}>
+          <AddIcon />
           {"Create Gallery Image"}
         </Button>
         <Button
-          colorScheme="blue"
-          leftIcon={<CheckIcon />}
+          colorPalette="blue"
           float="right"
           hidden={!showReorder}
           onClick={
@@ -97,6 +97,7 @@ const GallerySetupTable = ({
               : handleReorderCustomField
           }
         >
+          <CheckIcon />
           {t("group:homepage_customization.gallery_setup.save_order")}
         </Button>
       </ButtonGroup>

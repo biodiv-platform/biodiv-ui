@@ -31,17 +31,13 @@ export default function DownloadButtons({ documentPath, documentId, title }) {
   };
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} mb={4} spacing={4}>
-      <Button
-        variant="outline"
-        leftIcon={<DownloadIcon />}
-        onClick={downloadPDF}
-        isDisabled={!documentPath}
-        colorScheme="red"
-      >
+    <SimpleGrid columns={{ base: 1, md: 2 }} mb={4} gap={4}>
+      <Button variant="outline" onClick={downloadPDF} disabled={!documentPath} colorPalette="red">
+        <DownloadIcon />
         {t("document:download.title")}
       </Button>
-      <Button variant="outline" leftIcon={<PeopleIcon />} onClick={openZbib} colorScheme="teal">
+      <Button variant="outline" onClick={openZbib} colorPalette="teal">
+        <PeopleIcon />
         {t("document:download.citation")}
       </Button>
     </SimpleGrid>

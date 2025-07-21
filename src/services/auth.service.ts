@@ -98,9 +98,12 @@ export const axUserSearch = async (name) => {
 
 export const axSpeciesContributorUserSearch = async (name) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USER}/v1/user/speciesContributor/autocomplete`, {
-      params: { name }
-    });
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.USER}/v1/user/speciesContributor/autocomplete`,
+      {
+        params: { name }
+      }
+    );
     return { success: true, data: data.map((o) => ({ ...o, display: o.name })) };
   } catch (e) {
     console.error(e);

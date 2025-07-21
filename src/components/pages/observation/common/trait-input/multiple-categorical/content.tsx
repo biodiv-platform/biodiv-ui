@@ -3,19 +3,20 @@ import { getTraitIcon } from "@utils/media";
 import React from "react";
 
 export default function TraitContent(props) {
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
     <Box as="label">
-      <input {...getInputProps()} required={false} />
+      <input {...getHiddenInputProps()} required={false} />
       <Flex
-        {...getCheckboxProps()}
+        {...getControlProps()}
         alignItems="center"
         p={2}
         cursor="pointer"
         borderWidth="2px"
         borderRadius="md"
         bg="white"
+        w="200px"
         _checked={{
           borderColor: "blue.500",
           bg: "blue.50"

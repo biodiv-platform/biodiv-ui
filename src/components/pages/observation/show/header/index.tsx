@@ -70,7 +70,7 @@ function Header({ o, following = false }: IHeaderProps) {
           icon={<EditIcon />}
           title={t("observation:edit_observation")}
           onClick={handleOnEdit}
-          colorScheme="teal"
+          colorPalette="teal"
         />
       )}
       <FollowActionButton
@@ -111,7 +111,7 @@ function Header({ o, following = false }: IHeaderProps) {
         title={pageTitle}
       />
 
-      <PageHeading actions={<PageActions />}>
+      <PageHeading actions={<PageActions />} size={"4xl"}>
         <>
           <Flex direction={{ base: "column", md: "row" }}>
             <Box mr={2}>
@@ -124,7 +124,7 @@ function Header({ o, following = false }: IHeaderProps) {
             />
           </Flex>
           {o.recoIbp?.commonName && (
-            <Heading as="div" size="lg" mt={2}>
+            <Heading as="div" size="3xl" mt={2}>
               {o.recoIbp?.commonName}
             </Heading>
           )}

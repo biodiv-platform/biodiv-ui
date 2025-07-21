@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader
-} from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -26,6 +18,14 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
+
+import {
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader
+} from "@/components/ui/dialog";
 
 import useSpecies from "../../../use-species";
 import UserSelectField from "../user-edit-input";
@@ -132,12 +132,14 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
   };
 
   return (
-    <ModalContent>
+    <DialogContent>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSave)}>
-          <ModalHeader>{t("species:field.manage")}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+          <DialogHeader fontWeight={"bold"} fontSize={"xl"}>
+            {t("species:field.manage")}
+          </DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody>
             <Box mb={3} minH="300px" bg="gray.200" borderRadius="md" data-hidden={referencesOnly}>
               <WYSIWYGField
                 name="sfDescription"
@@ -179,15 +181,16 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
               shouldPortal={true}
             />
             <ReferencesField name="references" label={t("species:references")} />
-          </ModalBody>
-          <ModalFooter>
+          </DialogBody>
+          <DialogFooter>
             <SubmitButton leftIcon={<CheckIcon />} children={t("common:save")} />
-            <Button ml={4} leftIcon={<CrossIcon />} onClick={onCancel}>
+            <Button ml={4} onClick={onCancel} variant={"subtle"}>
+              <CrossIcon />
               {t("common:cancel")}
             </Button>
-          </ModalFooter>
+          </DialogFooter>
         </form>
       </FormProvider>
-    </ModalContent>
+    </DialogContent>
   );
 }

@@ -1,10 +1,12 @@
-import { Box, Button, FormLabel, VStack } from "@chakra-ui/react";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { useFieldArray } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
   const { t } = useTranslation();
@@ -19,7 +21,7 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
 
   return (
     <Box mb={4}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+      <Field htmlFor={name}>{label}</Field>
       {fields.map((reference, index) => (
         <Box
           data-key={reference.id}
@@ -31,7 +33,7 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
           mb={4}
         >
           <TextBoxField name={`${name}.${index}.id`} hidden={true} label="id" />
-          <VStack spacing={4} align="start">
+          <VStack gap={4} align="start">
             <TextBoxField
               name={`${name}.${index}.title`}
               showLabel={false}
@@ -44,11 +46,11 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
             {isCommonRefAdd && fields.length > 1 && (
               <Button
                 variant="outline"
-                colorScheme="red"
+                colorPalette="red"
                 minW="7rem"
                 onClick={() => remove(index)}
-                leftIcon={<DeleteIcon />}
               >
+                <DeleteIcon />
                 {t("common:delete")}
               </Button>
             )}
@@ -59,11 +61,11 @@ export default function CommonReferencesField({ name, label, isCommonRefAdd }) {
       {isCommonRefAdd && (
         <Button
           variant="outline"
-          colorScheme="green"
-          leftIcon={<AddIcon />}
+          colorPalette="green"
           type="button"
           onClick={() => append({ title: "", url: "" })}
         >
+          <AddIcon />
           {t("species:add_reference")}
         </Button>
       )}

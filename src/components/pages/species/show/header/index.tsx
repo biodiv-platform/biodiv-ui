@@ -69,8 +69,8 @@ function SpeciesHeader() {
     <Flex direction="column" bg="gray.300" borderRadius="md" p={4} mb={4}>
       <NextSeo openGraph={openGraph} title={openGraph.title} />
       <Spacer />
-      <Stack direction="column" p={3} spacing={4}>
-        <PageHeading className="fadeInUp" mb={0}>
+      <Stack direction="column" p={3} gap={4}>
+        <PageHeading className="fadeInUp" mb={0} size="4xl">
           <ScientificName value={species?.taxonomyDefinition?.italicisedForm} />
         </PageHeading>
 

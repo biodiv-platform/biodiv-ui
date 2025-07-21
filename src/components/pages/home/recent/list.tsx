@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { AspectRatio, Box, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import { ObservationListMinimalData } from "@interfaces/observation";
@@ -7,6 +7,8 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 const OBSERVATIONS_SIZE = 10;
 
@@ -38,7 +40,7 @@ export default function RecentObservationList() {
       borderColor="gray.200"
       overflowX="auto"
     >
-      <SimpleGrid columns={{ base: 2, sm: 6, md: 8, lg: 10 }} spacing={4}>
+      <SimpleGrid columns={{ base: 2, sm: 6, md: 8, lg: 10 }} gap={4}>
         {isLoading ? (
           Array(OBSERVATIONS_SIZE)
             .fill(null)
@@ -54,22 +56,20 @@ export default function RecentObservationList() {
               prefixGroup={true}
               key={o.observationId}
             >
-              <a aria-label={o?.recoIbp?.scientificName || t("common:unknown")}>
-                <AspectRatio ratio={1}>
-                  <Image
-                    objectFit="cover"
-                    borderRadius="md"
-                    bg="gray.200"
-                    src={getResourceThumbnail(
-                      RESOURCE_CTX.OBSERVATION,
-                      o?.thumbnail,
-                      RESOURCE_SIZE.RECENT_THUMBNAIL
-                    )}
-                    fallbackSrc={getLocalIcon(o?.speciesGroup)}
-                    alt={o?.recoIbp?.scientificName || t("common:unknown")}
-                  />
-                </AspectRatio>
-              </a>
+              <AspectRatio ratio={1}>
+                <ImageWithFallback
+                  objectFit="cover"
+                  borderRadius="md"
+                  bg="gray.200"
+                  src={getResourceThumbnail(
+                    RESOURCE_CTX.OBSERVATION,
+                    o?.thumbnail,
+                    RESOURCE_SIZE.RECENT_THUMBNAIL
+                  )}
+                  fallbackSrc={getLocalIcon(o?.speciesGroup)}
+                  alt={o?.recoIbp?.scientificName || t("common:unknown")}
+                />
+              </AspectRatio>
             </LocalLink>
           ))
         ) : (

@@ -32,7 +32,11 @@ export default function useTaxonTreeData({ filter }) {
   }, [filter]);
 
   const fetchMoreChildren = (taxon) => {
-    if (Object.keys(groupByTaxon.list).filter((key) => key.split("|")[1].startsWith(taxon.split("|")[1])).length==1) {
+    if (
+      Object.keys(groupByTaxon.list).filter((key) =>
+        key.split("|")[1].startsWith(taxon.split("|")[1])
+      ).length == 1
+    ) {
       fetchGroupByTaxon(`${STATS_FILTER.TAXON}|${taxon.split("|")[1]}`);
     }
   };

@@ -43,7 +43,7 @@ const LineGraph = forwardRef(function LineGraph(
     .style("color", "#fff")
     .style("padding", "5px 10px")
     .style("border-radius", "5px")
-    .style("font-size", "12px")
+    .style("font-size", "10px")
     .style("pointer-events", "none");
 
   const tipHelpers = tooltipHelpers(tip, TraitsTooltipRenderer, 10, -50);
@@ -134,14 +134,17 @@ const LineGraph = forwardRef(function LineGraph(
           return isSmall ? label.charAt(0) : label;
         })
       )
-      .selectAll("text");
+      .selectAll("text")
+      .style("font-size", "10px");
 
     svg
       .select(".y-axis")
       .join("g")
       .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
       .call(axisLeft(y).tickSize(0))
-      .call((g) => g.select(".domain").remove());
+      .call((g) => g.select(".domain").remove())
+      .selectAll("text")
+      .style("font-size", "10px");
 
     svg.selectAll(".y-axis .tick").each(function (d) {
       const tick = select(this);
@@ -256,7 +259,9 @@ const LineGraph = forwardRef(function LineGraph(
         .join("g")
         .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
         .call(axisLeft(y).tickSize(0))
-        .call((g) => g.select(".domain").remove());
+        .call((g) => g.select(".domain").remove())
+        .selectAll("text")
+        .style("font-size", "10px");
       svg.selectAll(".y-axis .tick").each(function (d) {
         const tick = select(this);
         const textEl = tick.select("text");
@@ -292,7 +297,8 @@ const LineGraph = forwardRef(function LineGraph(
             return isSmall ? label.charAt(0) : label;
           })
         )
-        .selectAll("text");
+        .selectAll("text")
+        .style("font-size", "10px");
       svg
         .select(".chart")
         .selectAll(".ridgeline")
@@ -382,7 +388,9 @@ const LineGraph = forwardRef(function LineGraph(
         .join("g")
         .attr("transform", `translate(${ml - 10},${y.bandwidth() / 2})`)
         .call(axisLeft(y).tickSize(0))
-        .call((g) => g.select(".domain").remove());
+        .call((g) => g.select(".domain").remove())
+        .selectAll("text")
+        .style("font-size", "10px");
 
       svg.selectAll(".y-axis .tick").each(function (d) {
         const tick = select(this);
@@ -416,11 +424,12 @@ const LineGraph = forwardRef(function LineGraph(
         .attr("transform", `translate(${ml},${h - mt - mb})`)
         .call(
           axisBottom(x).tickFormat((d) => {
-            const label = String(d); // ensure it's a string
+            const label = String(d);
             return isSmall ? label.charAt(0) : label;
           })
         )
-        .selectAll("text");
+        .selectAll("text")
+        .style("font-size", "10px");
       svg
         .select(".chart")
         .selectAll(".ridgeline")

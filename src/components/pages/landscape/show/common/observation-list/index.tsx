@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Skeleton, Stack, Switch, Text, useRadioGroup } from "@chakra-ui/react";
+import { Box, Flex, Heading, Skeleton, Stack, Text, useRadioGroup } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
 import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-type/filter-keys";
@@ -6,6 +6,8 @@ import LifeListTable from "@components/pages/observation/list/views/stats/table"
 import useUniqueSpecies from "@components/pages/observation/list/views/stats/use-unique-species";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
+
+import { Switch } from "@/components/ui/switch";
 
 export const observationListParams = {
   geoShapeFilterField: "location"
@@ -22,13 +24,13 @@ export default function LandscapeObservationList({ sGroupList, title }) {
     }
   } = useObservationFilter();
   const [validate, setValidate] = useState<boolean>(false);
-  const [observationFilter, setFilter] = useState(
-    {
-      ...filter,
-      mediaFilter: MEDIA_TYPES.map((item) => item.value).toLocaleString(),
-      sGroup: sGroupList[0]
-    } || {}
-  );
+  const [observationFilter, setFilter] = useState({
+    ...filter,
+
+    mediaFilter: MEDIA_TYPES.map((item) => item.value).toLocaleString(),
+
+    sGroup: sGroupList[0]
+  });
   const uniqueSpecies = useUniqueSpecies({ filter: observationFilter, location });
 
   const speciesGroupList = useMemo(
@@ -51,10 +53,11 @@ export default function LandscapeObservationList({ sGroupList, title }) {
       : setFilter({ ...observationFilter, validate: "" });
   };
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
+  const { getRootProps, getItemProps } = useRadioGroup({
     name: "sGroup",
     defaultValue: sGroupList[0],
-    onChange: (v) => setFilter({ ...observationFilter, sGroup: v && v !== "null" ? v : undefined })
+    onValueChange: (v) =>
+      setFilter({ ...observationFilter, sGroup: v && v !== null ? v : undefined })
   });
 
   return (
@@ -65,13 +68,13 @@ export default function LandscapeObservationList({ sGroupList, title }) {
       {groupSpeciesName && uniqueSpecies?.speciesData?.data?.list?.length > 0 ? (
         <Box p={4} className="white-box">
           <Flex justifyContent="space-between">
-            <Skeleton mt={4} isLoaded={speciesGroupList && speciesGroupList.length > 0} mb={2}>
+            <Skeleton mt={4} loading={speciesGroupList && speciesGroupList.length > 0} mb={2}>
               <Box {...getRootProps()} minH="3.75rem">
                 {speciesGroupList?.map((o) => (
                   <CustomRadio
                     key={o.id}
                     icon={o.name}
-                    {...getRadioProps({ value: o?.id })}
+                    {...getItemProps({ value: o?.id?.toString() || "" })}
                     sm={true}
                   />
                 ))}

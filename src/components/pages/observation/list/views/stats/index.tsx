@@ -23,7 +23,7 @@ export default function StatsView() {
       <LazyLoadOnScroll>
         <Totals filter={filter} observationData={observationData} />
       </LazyLoadOnScroll>
-      <SimpleGrid columns={{ md: 2 }} spacing={4} mb={4}>
+      <SimpleGrid columns={{ md: 2 }} gap={4} mb={4}>
         <LazyLoadOnScroll>
           <TopUploaders filter={filter} />
         </LazyLoadOnScroll>
@@ -35,10 +35,7 @@ export default function StatsView() {
             <TaxanomicDistribution filter={filter} />
           </LazyLoadOnScroll>
         </GridItem>
-        <SpeciesGroups
-          observationData={observationData}
-          filter={filter}
-        />
+        <SpeciesGroups observationData={observationData} filter={filter} />
         <LazyLoadOnScroll>
           <LifeList filter={filter} />
         </LazyLoadOnScroll>

@@ -1,4 +1,3 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Button, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
@@ -14,6 +13,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { FormProvider } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import { LuArrowLeft } from "react-icons/lu";
 
 import ImageUploaderField from "../image-uploader-field";
 import { DATA_TYPE, FIELD_TYPE } from "../static";
@@ -82,17 +82,18 @@ export default function EditCustomField({ editCustomFieldData, setIsEdit, setCus
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-        <Button mb={4} type="button" onClick={() => setIsEdit(false)} leftIcon={<ArrowBackIcon />}>
+        <Button mb={4} type="button" onClick={() => setIsEdit(false)}>
+          <LuArrowLeft />
           {t("group:custom_field.back")}
         </Button>
-        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+        <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
           <GridItem colSpan={3}>
             <TextBoxField name="name" label={t("group:custom_field.name")} />
             <TextAreaField name="notes" label={t("form:notes")} />
           </GridItem>
           <ImageUploaderField nestedPath="customField" label="icon" name="iconURL" />
         </SimpleGrid>
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacingX={4}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} gapX={4}>
           <TextBoxField name="units" disabled={false} label={t("group:custom_field.units")} />
           <SelectInputField
             name="fieldType"

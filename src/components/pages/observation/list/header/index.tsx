@@ -1,17 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Select,
-  Stack,
-  Switch,
-  Tab,
-  TabList,
-  Tabs,
-  Text,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Stack, Tabs, Text, useDisclosure } from "@chakra-ui/react";
 import BulkMapperHeader from "@components/pages/common/bulk-mapper";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";
@@ -20,6 +7,9 @@ import { waitForAuth } from "@utils/auth";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React, { Suspense } from "react";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { Switch } from "@/components/ui/switch";
 
 const DownloadObservationDataModal = React.lazy(() => import("../download-observation-modal"));
 
@@ -35,14 +25,14 @@ export default function ListHeader() {
     allMedia,
     addMediaToggle
   } = useObservationFilter();
-  const defaultIndex = viewTabs.findIndex((tab) => tab.key === filter?.view);
   const { t } = useTranslation();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
-  const handleOnViewChange = (index: number) => {
+  const handleOnViewChange = (e) => {
+    console.error("handleOnViewChange", e);
     setFilter((_draft) => {
       _draft.f.offset = 0;
-      _draft.f.view = viewTabs[index].key;
+      _draft.f.view = e;
     });
   };
 
@@ -71,45 +61,47 @@ export default function ListHeader() {
   return (
     <>
       <Flex mt={4} direction={{ base: "column", md: "row" }} justify="space-between">
-        <Tabs
+        <Tabs.Root
           display="inline-block"
           className="icon-tabs"
-          onChange={handleOnViewChange}
-          variant="soft-rounded"
-          isManual={true}
-          defaultIndex={defaultIndex}
+          onValueChange={(e) => handleOnViewChange(e.value)}
+          defaultValue={viewTabs[0].key}
+          activationMode="manual"
           mb={4}
-          isLazy={true}
+          lazyMount
         >
-          <TabList aria-orientation="vertical">
+          <Tabs.List aria-orientation="vertical">
             {viewTabs.map(({ name, icon, key }) => (
-              <Tab key={key} aria-label={t(name)} aria-controls={`view_${key}`}>
+              <Tabs.Trigger
+                key={key}
+                value={key}
+                aria-label={t(name)}
+                aria-controls={`view_${key}`}
+              >
                 {icon} {t(name)}
-              </Tab>
+              </Tabs.Trigger>
             ))}
-          </TabList>
-        </Tabs>
-        <Stack isInline={true} spacing={4} mb={4}>
+          </Tabs.List>
+        </Tabs.Root>
+        <Stack direction="row" gap={4} mb={4}>
           <Box>
-            <Select
+            <NativeSelectRoot
               maxW="10rem"
               aria-label={t("common:list.sort_by")}
-              value={filter?.sort}
+              defaultValue={filter?.sort}
               onChange={handleOnSort}
             >
-              {sortByOptions.map(({ name, key }) => (
-                <option key={key} value={key}>
-                  {t(name)}
-                </option>
-              ))}
-            </Select>
+              <NativeSelectField>
+                {sortByOptions.map(({ name, key }) => (
+                  <option key={key} value={key}>
+                    {t(name)}
+                  </option>
+                ))}
+              </NativeSelectField>
+            </NativeSelectRoot>
           </Box>
-          <Button
-            variant="outline"
-            colorScheme="blue"
-            leftIcon={<DownloadIcon />}
-            onClick={onListDownload}
-          >
+          <Button variant="outline" colorPalette="blue" onClick={onListDownload}>
+            <DownloadIcon />
             {t("observation:download.title")}
           </Button>
         </Stack>
@@ -117,9 +109,9 @@ export default function ListHeader() {
 
       {observationData && observationData.n > -1 && (
         <Flex mb={4} justifyContent="space-between" minH="32px" alignItems="center">
-          <HStack spacing={4}>
+          <HStack gap={4}>
             <Box>
-              <HStack spacing={1}>
+              <HStack gap={1}>
                 <Text color="gray.600">
                   {format(observationData.n)} {t("common:temporal.observations")}
                 </Text>
@@ -132,7 +124,7 @@ export default function ListHeader() {
               defaultChecked={allMedia}
               id="media-toggle"
               onChange={handleMediaToggle}
-              colorScheme="gray.300"
+              colorPalette="blue"
               border="1px solid"
               borderColor="gray.500"
               borderRadius="50px"
@@ -151,9 +143,9 @@ export default function ListHeader() {
         </Flex>
       )}
 
-      {isOpen && (
+      {open && (
         <Suspense fallback={null}>
-          <DownloadObservationDataModal isOpen={isOpen} onClose={onClose} />
+          <DownloadObservationDataModal isOpen={open} onClose={onClose} />
         </Suspense>
       )}
     </>

@@ -26,7 +26,7 @@ export default function VectorUploadForm() {
   const columnOptions = useMemo(() => dbf?.meta?.keys?.map((k) => ({ label: k, value: k })), []);
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 7 }} spacing={4} h="100%">
+    <SimpleGrid columns={{ base: 1, md: 7 }} gap={4} h="100%">
       <Box gridColumn="1/6" h="100%">
         <DataPreview />
 
@@ -35,7 +35,7 @@ export default function VectorUploadForm() {
         </Heading>
 
         {dbf.meta.keys.map((key) => (
-          <HStack spacing={4} key={key} maxW="32rem" mb={4}>
+          <HStack gap={4} key={key} maxW="32rem" mb={4}>
             <TextBoxField label={key} name={`layerColumnDescription.${key}`} />
           </HStack>
         ))}
@@ -44,7 +44,7 @@ export default function VectorUploadForm() {
         <Heading size="md" mb={4}>
           🗺️ {t("map:layer_information")}
         </Heading>
-        <Stack spacing={4}>
+        <Stack gap={4}>
           <TextBoxField name="layerName" label={t("map:name")} />
           <TextAreaField name="layerDescription" label={t("map:description")} />
           <SelectInputField
@@ -92,7 +92,7 @@ export default function VectorUploadForm() {
             label={t("map:download_access")}
             shouldPortal={true}
           />
-          <Button colorScheme="blue" type="submit">
+          <Button colorPalette="blue" type="submit">
             {t("map:create")}
           </Button>
         </Stack>

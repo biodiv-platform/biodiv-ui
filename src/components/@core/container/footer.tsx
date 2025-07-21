@@ -1,4 +1,4 @@
-import { Box, Container, Link, SimpleGrid, Stack } from "@chakra-ui/react";
+import { Box, chakra, Container, Link, SimpleGrid, Stack } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import FacebookIcon from "@icons/facebook";
@@ -14,10 +14,10 @@ import React from "react";
 import LocalLink from "../local-link";
 
 const ICONS = {
-  FACEBOOK: <FacebookIcon />,
-  GITHUB: <GithubIcon />,
-  MAIL: <MailIcon />,
-  TWITTER: <TwitterIcon />
+  FACEBOOK: <FacebookIcon size={"sm"} />,
+  GITHUB: <GithubIcon size={"sm"} />,
+  MAIL: <MailIcon size={"sm"} />,
+  TWITTER: <TwitterIcon size={"sm"} />
 };
 
 export default function Footer() {
@@ -27,8 +27,8 @@ export default function Footer() {
   return (
     <Box bg="gray.100" color="gray.700" className="no-print">
       <Container as={Stack} maxW={containerMaxW} py={10}>
-        <SimpleGrid templateColumns={{ md: "4fr 4fr" }} spacing={8}>
-          <Stack spacing={4}>
+        <SimpleGrid templateColumns={{ md: "4fr 4fr" }} gap={8}>
+          <Stack gap={4}>
             <Box>
               {t("common:footer.powered_by")}
               <Link ml={1} href="https://github.com/biodiv-platform">
@@ -43,21 +43,34 @@ export default function Footer() {
                 </Link>
               </div>
             )}
-            <Stack direction="row" spacing={6}>
+            <Stack direction="row" gap={6}>
               {Object.entries(SITE_CONFIG.FOOTER.SOCIAL).map(([icon, { LABEL, URL }]) => (
                 <Link
-                  aria-label={t(LABEL)}
-                  title={t(LABEL)}
+                  aria-label={t(`common:${LABEL}`)}
+                  title={t(`common:${LABEL}`)}
                   href={URL}
                   key={icon}
-                  isExternal={true}
                 >
-                  {ICONS[icon]}
+                  <chakra.button
+                    bg="blackAlpha.100"
+                    rounded="full"
+                    w={8}
+                    h={8}
+                    cursor="pointer"
+                    as="a"
+                    display="inline-flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    transition="background 0.3s ease"
+                    _hover={{ bg: "blackAlpha.200" }}
+                    rel="noreferrer noopener"
+                  >
+                    {ICONS[icon]}
+                  </chakra.button>
                 </Link>
               ))}
               {SITE_CONFIG.FEEDBACK.ACTIVE && (
                 <Link
-                  isExternal={true}
                   aria-label={t("common:feedback")}
                   title={t("common:feedback")}
                   href={SITE_CONFIG.FEEDBACK.URL}
@@ -68,7 +81,7 @@ export default function Footer() {
             </Stack>
           </Stack>
           <div>
-            <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+            <SimpleGrid columns={{ base: 1, md: 4 }} gap={4}>
               {pages
                 .flatMap((page) => [page, ...page.children])
                 .filter((page) => page.showInFooter !== false)

@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Tabs } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import styled from "@emotion/styled";
@@ -44,6 +44,7 @@ export const VerticalTabs = styled.div`
         display: block;
 
         width: 100%;
+        min-width: 10rem;
         height: 3rem;
 
         text-align: left;
@@ -95,7 +96,8 @@ export const VerticalTabs = styled.div`
 
 export default function Container({ o }) {
   const { t } = useTranslation();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tab, setTab] = useState("common:information");
+
   const { setObservationData, getCheckboxProps } = useObservationFilter();
 
   const recoUpdated = (payload) => {
@@ -115,57 +117,61 @@ export default function Container({ o }) {
     >
       <ImageBoxComponent o={o} getCheckboxProps={getCheckboxProps} />
       <VerticalTabs>
-        <Tabs
-          isLazy={true}
-          h={{ md: "100%" }}
-          variant="unstyled"
-          className="tabs"
-          index={tabIndex}
-          onChange={setTabIndex}
-        >
-          <TabPanels className="tab-content" position="relative">
-            <TabPanel>
-              <InfoTab o={o} recoUpdated={recoUpdated} setTabIndex={setTabIndex} />
-            </TabPanel>
-            <TabPanel>
+        <Tabs.Root variant="plain" className="tabs" lazyMount value={tab}>
+          <Tabs.ContentGroup className="tab-content" position="relative">
+            <Tabs.Content value="common:information">
+              <InfoTab o={o} recoUpdated={recoUpdated} setTab={setTab} />
+            </Tabs.Content>
+
+            <Tabs.Content value="observation:id.title">
               <Suspense fallback={<Spinner />}>
                 <RecoSuggestionTab o={o} recoUpdated={recoUpdated} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Tabs.Content>
+
+            <Tabs.Content value="common:usergroups">
               <Suspense fallback={<Spinner />}>
                 <GroupsTab o={o} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Tabs.Content>
+
+            <Tabs.Content value="observation:traits">
               <Suspense fallback={<Spinner />}>
                 <TraitsTab o={o} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Tabs.Content>
+
+            <Tabs.Content value="observation:custom_fields">
               <Suspense fallback={<Spinner />}>
                 <CustomFieldsTab o={o} />
               </Suspense>
-            </TabPanel>
-            <TabPanel>
+            </Tabs.Content>
+
+            <Tabs.Content value="form:comments.title">
               <Suspense fallback={<Spinner />}>
                 <CommentsTab observationId={o.observationId} />
               </Suspense>
-            </TabPanel>
-          </TabPanels>
-          <TabList>
+            </Tabs.Content>
+          </Tabs.ContentGroup>
+
+          <Tabs.List>
             {actionTabs.map(({ name, icon, active = true }) => (
-              <Tab key={name} data-hidden={!active}>
+              <Tabs.Trigger
+                value={name}
+                key={name}
+                data-hidden={!active}
+                onClick={() => setTab(name)}
+              >
                 <Tooltip title={t(name)}>
                   <div>
                     {icon} <span>{t(name)}</span>
                   </div>
                 </Tooltip>
-              </Tab>
+              </Tabs.Trigger>
             ))}
             <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-          </TabList>
-        </Tabs>
+          </Tabs.List>
+        </Tabs.Root>
       </VerticalTabs>
     </Flex>
   );

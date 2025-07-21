@@ -26,8 +26,8 @@ export default function Tag({ text, remove }: TagProps) {
       <Button
         size="xs"
         type="button"
-        variant="link"
-        colorScheme="red"
+        variant="plain"
+        colorPalette="red"
         onClick={handleOnRemove}
         aria-label={`remove ${text}`}
       >

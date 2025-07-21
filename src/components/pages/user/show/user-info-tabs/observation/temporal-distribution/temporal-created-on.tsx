@@ -1,5 +1,4 @@
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Button, Select, Skeleton, useBreakpointValue, useToast } from "@chakra-ui/react";
+import { Box, Button, Skeleton, useBreakpointValue } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CalendarHeatMap from "@components/pages/observation/list/views/stats/calendar-heatmap";
 import { ObservationTooltipRenderer } from "@components/pages/observation/list/views/stats/static-data";
@@ -8,18 +7,21 @@ import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useRef, useState } from "react";
+import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
+
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { toaster } from "@/components/ui/toaster";
 
 import useTemporalData from "./use-temporal-observation-data";
 
 export default function TemporalCreatedOn(userId) {
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
-  const toast = useToast();
 
-   // Add useBreakpointValue to hide icons based on screen width
-   const showNavigationIcons = useBreakpointValue({ base: false, md: true }); // Hide on small screens, show on medium and larger screens
+  // Add useBreakpointValue to hide icons based on screen width
+  const showNavigationIcons = useBreakpointValue({ base: false, md: true }); // Hide on small screens, show on medium and larger screens
 
-   const padding = useBreakpointValue({ base: "5px 10px", md: "30px 35px" });
+  const padding = useBreakpointValue({ base: "5px 10px", md: "30px 35px" });
 
   const handleDownload = async () => {
     try {
@@ -38,11 +40,10 @@ export default function TemporalCreatedOn(userId) {
       }
     } catch (error) {
       console.error("Download error:", error);
-      toast({
+      toaster.create({
         title: "Error while downloading",
-        status: "error",
-        isClosable: true,
-        position: "top"
+        type: "error",
+        closable: true
       });
     }
   };
@@ -85,7 +86,7 @@ export default function TemporalCreatedOn(userId) {
     <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("user:observations.temporal_created_on")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>
@@ -93,25 +94,32 @@ export default function TemporalCreatedOn(userId) {
         {showNavigationIcons && currentIndex != 0 && (
           <Box position="absolute" top="45%" left="10px">
             <Button width={25} onClick={prevSlide} variant="ghost">
-              <ArrowBackIcon />
+              <LuMoveLeft />
             </Button>
           </Box>
         )}
         {showNavigationIcons && currentIndex != years.length - 1 && (
           <Box position="absolute" top="45%" right="10px">
             <Button width={25} onClick={nextSlide} variant="ghost">
-              <ArrowForwardIcon />
+              <LuMoveRight />
             </Button>
           </Box>
         )}
         <Box marginLeft="45%" paddingTop="25px" paddingBottom="25px">
-          <Select fontSize="13px" maxW="5rem" value={currentIndex} onChange={handleOnChange}>
-            {years.map((option, index) => (
-              <option key={index} value={index}>
-                {option}
-              </option>
-            ))}
-          </Select>
+          <NativeSelectRoot
+            fontSize="13px"
+            maxW="5rem"
+            // value={currentIndex}
+            onChange={handleOnChange}
+          >
+            <NativeSelectField>
+              {years.map((option, index) => (
+                <option key={index} value={index}>
+                  {option}
+                </option>
+              ))}
+            </NativeSelectField>
+          </NativeSelectRoot>
         </Box>
         <Box padding={padding}>
           <CalendarHeatMap

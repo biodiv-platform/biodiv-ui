@@ -1,7 +1,7 @@
-import { CheckCircleIcon, RepeatIcon, SettingsIcon } from "@chakra-ui/icons";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuCircleCheck, LuRepeat, LuSettings } from "react-icons/lu";
 
 export default function BulkMapperHeader({
   bulkIds,
@@ -17,29 +17,21 @@ export default function BulkMapperHeader({
     bulkIds?.length > 0 && (
       <ButtonGroup size="sm" variant="outline">
         {!selectAll && (
-          <Button
-            variant="outline"
-            colorScheme="blue"
-            leftIcon={<CheckCircleIcon />}
-            onClick={handleSelectAll}
-          >
+          <Button variant="outline" colorPalette="blue" onClick={handleSelectAll}>
+            <LuCircleCheck />
             {t("observation:select_all")}
           </Button>
         )}
         <Button
           variant="outline"
-          colorScheme="red"
-          leftIcon={<RepeatIcon />}
+          colorPalette="red"
           onClick={() => handleBulkCheckbox("UnsSelectAll")}
         >
+          <LuRepeat />
           {t("observation:unselect")}
         </Button>
-        <Button
-          variant="outline"
-          colorScheme="green"
-          leftIcon={<SettingsIcon />}
-          onClick={openBulkMappingModal}
-        >
+        <Button variant="outline" colorPalette="green" onClick={openBulkMappingModal}>
+          <LuSettings />
           {t("observation:actions")}
         </Button>
       </ButtonGroup>

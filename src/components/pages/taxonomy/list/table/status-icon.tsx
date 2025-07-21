@@ -13,10 +13,10 @@ import React from "react";
 export default function StatusIcon({ status }) {
   switch (status) {
     case TAXON_STATUS_VALUES.ACCEPTED:
-      return <CircleIcon mr={1} />;
+      return <CircleIcon mr={1} size={"xs"} />;
 
     case TAXON_STATUS_VALUES.SYNONYM:
-      return <EqualsIcon mr={1} ml={4} />;
+      return <EqualsIcon mr={1} ml={4} size={"xs"} />;
 
     default:
       return null;

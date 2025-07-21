@@ -1,14 +1,9 @@
-import {
-  Box,
-  Divider,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  useRadioGroup
-} from "@chakra-ui/react";
+import { Box, Separator, Wrap, WrapItem } from "@chakra-ui/react";
+import { RadioCard } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 import CustomRadio from "./custom-radio";
 
@@ -19,24 +14,10 @@ interface ISpeciesSelecProps {
   disabled?: boolean;
   hint?: string;
   options?: any[];
-  hideDevider?;
-  isRequired?;
+  hideDevider?: boolean;
+  isRequired?: boolean;
 }
 
-/**
- * As radio specs only accepts string to use number wrapper is required
- *
- * @param {ISpeciesSelecProps} {
- *   name,
- *   label,
- *   hint,
- *   mb = 4,
- *   options = [],
- *   form,
- *   ...props
- * }
- * @returns
- */
 const GroupSelector = ({
   name,
   label,
@@ -49,25 +30,47 @@ const GroupSelector = ({
 }: ISpeciesSelecProps) => {
   const { field, fieldState } = useController({ name });
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name,
-    value: field.value ? field.value.toString() : null,
-    onChange: field.onChange
-  });
-
   return (
     <>
-      <FormControl isInvalid={!!fieldState.error} isRequired={isRequired} mb={mb} {...props}>
-        <FormLabel htmlFor={name}>{label}</FormLabel>
-        <Box {...getRootProps()}>
-          {options.map((o) => (
-            <CustomRadio key={o.id} icon={o.name} {...getRadioProps({ value: o.id.toString() })} />
-          ))}
+      <Field
+        invalid={!!fieldState.error}
+        errorText={fieldState?.error?.message}
+        required={isRequired}
+        mb={mb}
+        htmlFor={name}
+        label={label}
+        {...props}
+      >
+        <RadioCard.Root
+          name={name}
+          onValueChange={({ value }) => {
+            field.onChange(value);
+          }}
+          align="center"
+          colorPalette="blue"
+          size="sm"
+          value={String(field.value)}
+        >
+          <Wrap gap={4} justify="flex-start">
+            {options?.map((o) => (
+              <WrapItem key={o.id}>
+                <CustomRadio
+                  value={o.id.toString()}
+                  icon={o.name}
+                  title={o.name}
+                  checked={field.value == o.id}
+                />
+              </WrapItem>
+            ))}
+          </Wrap>
+        </RadioCard.Root>
+        {hint && <Field color="gray.600" helperText={hint} />}
+      </Field>
+      {!hideDevider && (
+        <Box mb={4}>
+          <Separator />
         </Box>
-        <FormErrorMessage children={fieldState?.error?.message} />
-        {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-      </FormControl>
-      {!hideDevider && <Divider mb={4} />}
+      )}
     </>
   );
 };

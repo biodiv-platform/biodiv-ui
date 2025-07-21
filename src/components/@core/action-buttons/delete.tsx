@@ -1,18 +1,18 @@
-import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Button,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import DeleteIcon from "@icons/delete";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import SimpleActionButton from "./simple";
 
@@ -35,7 +35,7 @@ export default function DeleteActionButton({
 }) {
   const { t } = useTranslation();
   const router = useLocalRouter();
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
   const cancelRef = React.useRef(null);
 
   const handleOnDelete = async () => {
@@ -67,27 +67,27 @@ export default function DeleteActionButton({
 
   return (
     <>
-      <SimpleActionButton onClick={onOpen} icon={<DeleteIcon />} title={title} colorScheme="red" />
-      <AlertDialog isOpen={isOpen} onClose={onClose} leastDestructiveRef={cancelRef}>
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+      <SimpleActionButton onClick={onOpen} icon={<DeleteIcon />} title={title} colorPalette="red" />
+      <DialogRoot open={open} onOpenChange={onClose}>
+        <DialogBackdrop>
+          <DialogContent>
+            <DialogHeader fontSize="lg" fontWeight="bold">
               🗑️ {title}
-            </AlertDialogHeader>
+            </DialogHeader>
 
-            <AlertDialogBody>{description}</AlertDialogBody>
+            <DialogBody>{description}</DialogBody>
 
-            <AlertDialogFooter>
+            <DialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
                 {t("common:cancel")}
               </Button>
-              <Button colorScheme="red" onClick={handleOnDelete} ml={3}>
+              <Button colorPalette="red" onClick={handleOnDelete} ml={3}>
                 {t("common:delete")}
               </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+            </DialogFooter>
+          </DialogContent>
+        </DialogBackdrop>
+      </DialogRoot>
     </>
   );
 }

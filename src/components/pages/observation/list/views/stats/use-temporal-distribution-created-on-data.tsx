@@ -11,7 +11,7 @@ export default function useTemporalDistributionCreatedOnData({ filter }) {
     minDate: "2025"
   });
 
-  const {createdOnMinDate,createdOnMaxDate, ...remaining_filter} = filter
+  const { createdOnMinDate, createdOnMaxDate, ...remaining_filter } = filter;
 
   const fetchMinAndMaxDates = async () => {
     const { success, data } = await axGetListData({
@@ -41,8 +41,14 @@ export default function useTemporalDistributionCreatedOnData({ filter }) {
 
       const { success, data } = await axGetListData({
         ...remaining_filter,
-        createdOnMinDate: (createdOnMinDate && createdOnMinDate>`${year}-01-01T00:00:00Z`)?createdOnMinDate:`${year}-01-01T00:00:00Z`,
-        createdOnMaxDate: (createdOnMaxDate && createdOnMaxDate<`${year}-12-31T00:00:00Z`)?createdOnMaxDate:`${year}-12-31T00:00:00Z`,
+        createdOnMinDate:
+          createdOnMinDate && createdOnMinDate > `${year}-01-01T00:00:00Z`
+            ? createdOnMinDate
+            : `${year}-01-01T00:00:00Z`,
+        createdOnMaxDate:
+          createdOnMaxDate && createdOnMaxDate < `${year}-12-31T00:00:00Z`
+            ? createdOnMaxDate
+            : `${year}-12-31T00:00:00Z`,
         statsFilter: STATS_FILTER.COUNT_PER_DAY
       });
 

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Separator } from "@chakra-ui/react";
 import { ResponsiveContainer } from "@components/@core/table";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { axDeleteSpeciesCommonName, axUpdateSpeciesCommonName } from "@services/species.service";
@@ -14,6 +14,7 @@ export default function SpeciesCommonNamesContainer() {
 
   return (
     <ToggleablePanel id="common-names" icon="🗒" title={t("species:common_names")}>
+      <Separator />
       <Box w="full">
         <ResponsiveContainer maxH="300px" noBorder={true}>
           <CommonNamesList

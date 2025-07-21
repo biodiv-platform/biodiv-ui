@@ -62,11 +62,11 @@ export default function TaxonListTable() {
       )}
       <Flex alignItems="center" justifyContent="center" p={4}>
         <Button
-          isLoading={isLoading}
+          loading={isLoading}
           disabled={taxonListData.hasMore}
           loadingText={t("common:loading")}
           onClick={nextPage}
-          colorScheme="blue"
+          colorPalette="blue"
         >
           {t("common:load_more")}
         </Button>

@@ -1,5 +1,4 @@
-import { Alert, AlertIcon } from "@chakra-ui/alert";
-import { useDisclosure } from "@chakra-ui/hooks";
+import { useDisclosure } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axCheckTaxonomy, axSaveTaxonomy } from "@services/taxonomy.service";
@@ -9,6 +8,8 @@ import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import { Alert } from "@/components/ui/alert";
+
 import { TaxonCreateInputField } from "./taxon-create-input";
 import TaxonCreateModal from "./taxon-create-modal";
 import useSpeciesCreate from "./use-species-create";
@@ -17,7 +18,7 @@ export function SpeciesTaxonCreateForm() {
   const { taxonRanksMeta, validationParams, setSelectedTaxon } = useSpeciesCreate();
   const { t } = useTranslation();
   const [validateResults, setValidateResults] = useState([]);
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
   const [disableForm, setDisableForm] = useState<boolean>();
 
   const [formValidationSchema, formDisabled] = useMemo(() => {
@@ -85,14 +86,11 @@ export function SpeciesTaxonCreateForm() {
   };
 
   return disableForm ? (
-    <Alert status="info">
-      <AlertIcon />
-      {t("species:create.creating_page")}
-    </Alert>
+    <Alert status="info">{t("species:create.creating_page")}</Alert>
   ) : (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleOnTaxonCreate)}>
-        <TaxonCreateModal isOpen={isOpen} onClose={onClose} validateResults={validateResults} />
+        <TaxonCreateModal isOpen={open} onClose={onClose} validateResults={validateResults} />
         {formDisabled.map(([name, isRequired, isDisabled]) => (
           <TaxonCreateInputField
             key={name}

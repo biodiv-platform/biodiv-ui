@@ -1,11 +1,4 @@
-import {
-  CloseButton,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Image
-} from "@chakra-ui/react";
+import { Box, CloseButton, Image } from "@chakra-ui/react";
 import { axUploadResource } from "@services/files.service";
 import { resizeImage } from "@utils/image";
 import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
@@ -14,6 +7,8 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useController, useFormContext } from "react-hook-form";
+
+import { Field } from "@/components/ui/field";
 
 import { Container, ITPageGalleryFieldProps } from "./gallery-field";
 
@@ -61,17 +56,18 @@ export const SocialPreviewField = ({
   };
 
   return (
-    <FormControl
-      isInvalid={!!formState.errors[name]}
+    <Field
+      invalid={!!formState.errors[name]}
+      errorText={formState?.errors?.[name]?.message?.toString()}
       mb={mb}
       hidden={hidden}
-      isRequired={isRequired}
+      required={isRequired}
       {...props}
     >
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      {label && <Field htmlFor={name} label={label} />}
 
       {/* Dropzone */}
-      <div id={name}>
+      <Box id={name} width={"full"}>
         <Container
           style={{ height: "124px", padding: "1rem", position: "relative" }}
           {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
@@ -94,10 +90,9 @@ export const SocialPreviewField = ({
             <p>{t("form:uploader.label")}</p>
           )}
         </Container>
-      </div>
+      </Box>
 
-      <FormErrorMessage children={formState?.errors?.[name]?.message?.toString()} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      {hint && <Field color="gray.600" helperText={hint}></Field>}
+    </Field>
   );
 };

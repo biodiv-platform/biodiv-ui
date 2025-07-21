@@ -1,4 +1,3 @@
-import { Modal, ModalOverlay } from "@chakra-ui/modal";
 import { axPreferredSpeciesCommonName } from "@services/species.service";
 import {
   SPECIES_NAME_ADD,
@@ -11,6 +10,8 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { emit, useListener } from "react-gbus";
+
+import { DialogBackdrop, DialogRoot } from "@/components/ui/dialog";
 
 import { SpeciesCommonNameForm } from "./form";
 
@@ -49,8 +50,8 @@ export function CommonNameEditModal({ onUpdate, speciesId, updateFunc, deleteFun
   const onClose = () => setInitialEdit(undefined);
 
   return (
-    <Modal onClose={onClose} size="md" isOpen={!!initialEdit}>
-      <ModalOverlay />
+    <DialogRoot onOpenChange={onClose} size="md" open={!!initialEdit}>
+      <DialogBackdrop />
       {initialEdit && (
         <SpeciesCommonNameForm
           commonName={initialEdit}
@@ -61,6 +62,6 @@ export function CommonNameEditModal({ onUpdate, speciesId, updateFunc, deleteFun
           onClose={onClose}
         />
       )}
-    </Modal>
+    </DialogRoot>
   );
 }

@@ -61,10 +61,10 @@ const CalendarHeatMap = forwardRef(
 
       const svg = select(svgRef.current);
       w = ro.width;
-      h = Math.max(w / 5 + 5,185);
-      if(isSmall){
-        ml = 18
-        mr = 5
+      h = Math.max(w / 5 + 5, 185);
+      if (isSmall) {
+        ml = 18;
+        mr = 5;
       }
       const width = w - ml - mr;
       const height = h - mt - mb;
@@ -192,9 +192,9 @@ const CalendarHeatMap = forwardRef(
         .join("g")
         .attr("transform", `translate(${ml},0)`)
         .call(axisLeft(weekScale));
-      
-      if(isSmall){
-      svg.selectAll(".y-axis .tick text").text((d) => d[0]);
+
+      if (isSmall) {
+        svg.selectAll(".y-axis .tick text").text((d) => d[0]);
       }
 
       svg.selectAll(".domain").remove();

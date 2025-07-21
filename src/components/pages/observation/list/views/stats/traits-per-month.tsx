@@ -9,7 +9,7 @@ import React, { useRef } from "react";
 import LineGraph from "./line-graph";
 import useTraitsDistributionData from "./use-traits-distribution-data";
 
-const TraitsPerMonth = ({filter}) => {
+const TraitsPerMonth = ({ filter }) => {
   const traits = useTraitsDistributionData({ filter });
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
@@ -33,7 +33,7 @@ const TraitsPerMonth = ({filter}) => {
     return <Skeleton h={450} borderRadius="md" />;
   }
 
-  if (!traits.data.list || traits.data.list.length==0) {
+  if (!traits.data.list || traits.data.list.length == 0) {
     return <div></div>;
   }
 
@@ -43,7 +43,7 @@ const TraitsPerMonth = ({filter}) => {
     <Box className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.traitsDistribution")}{" "}
-        <Button onClick={handleDownload} variant="ghost" colorScheme="blue">
+        <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
           <DownloadIcon />
         </Button>
       </BoxHeading>

@@ -1,13 +1,4 @@
 import {
-  AtSignIcon,
-  CheckCircleIcon,
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  EditIcon,
-  ViewIcon
-} from "@chakra-ui/icons";
-import {
   Box,
   Button,
   Circle,
@@ -49,7 +40,17 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import {
+  LuAtSign,
+  LuCheck,
+  LuChevronLeft,
+  LuChevronRight,
+  LuCircleCheck,
+  LuView
+} from "react-icons/lu";
 import * as Yup from "yup";
+
+import EditIcon from "@/icons/edit";
 
 import AdminInviteField from "../common/admin-invite-field";
 import AreaDrawField from "../common/area-draw-field";
@@ -110,9 +111,9 @@ const steps = [
   { label: "Main Gallery", translation: "Review & Submit", icon: ImageIcon },
   // { label: "Mini Gallery Management", content: "Review & Submit", icon: EditIcon },
   { label: "Custom Fields", translation: "group:custom_field.title", icon: ListIcon },
-  { label: "Group Rules", translation: "Review & Submit", icon: CheckCircleIcon },
-  { label: "Observation Display", translation: "Review & Submit", icon: ViewIcon },
-  { label: "Species Fields", translation: "Review & Submit", icon: AtSignIcon }
+  { label: "Group Rules", translation: "Review & Submit", icon: LuCircleCheck },
+  { label: "Observation Display", translation: "Review & Submit", icon: LuView },
+  { label: "Species Fields", translation: "Review & Submit", icon: LuAtSign }
 ];
 
 export default function CreateGroupPageComponent({
@@ -439,7 +440,7 @@ export default function CreateGroupPageComponent({
                       color={iconColor}
                       _hover={!isActive && !isCompleted ? { borderColor: "gray.400" } : {}}
                     >
-                      {isCompleted ? <CheckIcon boxSize={4} /> : <Icon as={StepIcon} boxSize={4} />}
+                      {isCompleted ? <LuCheck size={4} /> : <Icon as={StepIcon} boxSize={4} />}
                     </Circle>
                   </Flex>
                 </GridItem>
@@ -447,7 +448,9 @@ export default function CreateGroupPageComponent({
                 {/* Arrow (skip for last item) */}
                 {index !== steps.length - 1 && (
                   <GridItem key={`arrow-${index}`} colSpan={1} textAlign="center">
-                    <ChevronRightIcon boxSize={6} color="gray.400" />
+                    <Icon boxSize={6}>
+                      <LuChevronRight color="gray.400" />
+                    </Icon>
                   </GridItem>
                 )}
               </>
@@ -482,7 +485,7 @@ export default function CreateGroupPageComponent({
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
             {currentStep == 0 && (
-              <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+              <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
                 <Box gridColumn="1/4">
                   <TextBoxField
                     name="name"
@@ -675,8 +678,7 @@ export default function CreateGroupPageComponent({
         <Flex justify="space-between" align="center" mb={4}>
           <Button
             onClick={() => setCurrentStep((s) => s - 1)}
-            isDisabled={currentStep === 0}
-            leftIcon={<ChevronLeftIcon />}
+            disabled={currentStep === 0}
             px={6}
             py={3}
             borderRadius="lg"
@@ -686,6 +688,7 @@ export default function CreateGroupPageComponent({
             _hover={currentStep === 0 ? {} : { bg: "gray.200" }}
             cursor={currentStep === 0 ? "not-allowed" : "pointer"}
           >
+            <Icon as={LuChevronLeft} boxSize={5} />
             Previous
           </Button>
 
@@ -695,7 +698,6 @@ export default function CreateGroupPageComponent({
 
           <Button
             onClick={currentStep === steps.length - 1 ? handleFormSubmit : handleNext}
-            rightIcon={<ChevronRightIcon />}
             px={6}
             py={3}
             borderRadius="lg"
@@ -707,6 +709,7 @@ export default function CreateGroupPageComponent({
             }}
           >
             {currentStep === steps.length - 1 ? "Create Group" : "Next"}
+            <LuChevronRight />
           </Button>
         </Flex>
       )}

@@ -1,12 +1,8 @@
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Textarea
-} from "@chakra-ui/react";
+import { Textarea } from "@chakra-ui/react";
 import React from "react";
 import { useController } from "react-hook-form";
+
+import { Field } from "../ui/field";
 
 interface ITextAreaProps {
   name: string;
@@ -28,27 +24,34 @@ export const TextAreaField = ({
   disabled,
   maxLength,
   hint,
+  isRequired,
   ...props
 }: ITextAreaProps) => {
   const { field, fieldState } = useController({ name, defaultValue: "" });
 
   return (
-    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      required={isRequired}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
       <Textarea
         id={name}
         placeholder={placeholder}
         minH="124px"
-        isDisabled={disabled}
+        disabled={disabled}
         bg="white"
         maxLength={maxLength}
         {...field}
       />
-      <FormErrorMessage children={fieldState?.error?.message} />
       {maxLength && field.value && (
-        <FormHelperText color="gray.600" children={`${field.value.length}/${maxLength}`} />
+        <Field color="gray.600" helperText={`${field.value.length}/${maxLength}`} />
       )}
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

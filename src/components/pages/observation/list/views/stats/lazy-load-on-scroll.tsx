@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 
 export default function LazyLoadOnScroll({
   children,
-  fallback = "Loading...",
+  fallback = "Loading..."
 }: {
   children: React.ReactNode;
   fallback?: React.ReactNode;
@@ -13,11 +13,7 @@ export default function LazyLoadOnScroll({
 
   return (
     <div ref={ref}>
-      {inView && (
-        <Suspense fallback={<div>{fallback}</div>}>
-          {children}
-        </Suspense>
-      )}
+      {inView && <Suspense fallback={<div>{fallback}</div>}>{children}</Suspense>}
     </div>
   );
 }

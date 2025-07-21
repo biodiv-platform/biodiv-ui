@@ -1,4 +1,4 @@
-import { Collapse, SimpleGrid } from "@chakra-ui/react";
+import { Collapsible, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
@@ -58,41 +58,43 @@ export default function Recodata({ languages }: IRecodataProps) {
   return (
     <>
       <CheckboxField name="helpIdentify" label={t("observation:help_identify")} />
-      <Collapse in={!helpIdentify} startingHeight={1} animateOpacity={true}>
-        <SimpleGrid columns={[1, 1, 2, 2]} spacing={4}>
-          <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
+      <Collapsible.Root open={!helpIdentify}>
+        <Collapsible.Content>
+          <SimpleGrid columns={[1, 1, 2, 2]} gap={4}>
+            <SimpleGrid columns={[1, 1, 3, 3]} gap={4}>
+              <SelectAsyncInputField
+                name="taxonCommonName"
+                label={t("observation:common_name")}
+                style={{ gridColumn: "1/3" }}
+                disabled={helpIdentify}
+                onQuery={onCommonNameQuery}
+                options={commonNameOptions}
+                optionComponent={CommonNameOption}
+                placeholder={t("form:min_three_chars")}
+                onChange={onCommonNameChange}
+              />
+              <SelectInputField
+                name="obsvLanguageId"
+                label={t("form:language")}
+                options={languages}
+                disabled={helpIdentify}
+                shouldPortal={true}
+                selectRef={langRef}
+              />
+            </SimpleGrid>
             <SelectAsyncInputField
-              name="taxonCommonName"
-              label={t("observation:common_name")}
-              style={{ gridColumn: "1/3" }}
+              name="scientificNameTaxonId"
+              label={t("observation:scientific_name")}
               disabled={helpIdentify}
-              onQuery={onCommonNameQuery}
-              options={commonNameOptions}
-              optionComponent={CommonNameOption}
+              onQuery={onScientificNameQuery}
+              optionComponent={ScientificNameOption}
               placeholder={t("form:min_three_chars")}
-              onChange={onCommonNameChange}
-            />
-            <SelectInputField
-              name="obsvLanguageId"
-              label={t("form:language")}
-              options={languages}
-              disabled={helpIdentify}
-              shouldPortal={true}
-              selectRef={langRef}
+              onChange={onScientificNameChange}
+              selectRef={scientificRef}
             />
           </SimpleGrid>
-          <SelectAsyncInputField
-            name="scientificNameTaxonId"
-            label={t("observation:scientific_name")}
-            disabled={helpIdentify}
-            onQuery={onScientificNameQuery}
-            optionComponent={ScientificNameOption}
-            placeholder={t("form:min_three_chars")}
-            onChange={onScientificNameChange}
-            selectRef={scientificRef}
-          />
-        </SimpleGrid>
-      </Collapse>
+        </Collapsible.Content>
+      </Collapsible.Root>
     </>
   );
 }

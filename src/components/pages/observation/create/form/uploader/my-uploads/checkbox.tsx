@@ -1,10 +1,12 @@
-import { AspectRatio, Box, IconButton, Image, useCheckbox } from "@chakra-ui/react";
+import { AspectRatio, Box, IconButton, useCheckbox } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
+
+import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 
 import { getImageThumb } from "../observation-resources/resource-card";
 import StatusIcon from "../statusicon";
@@ -49,14 +51,19 @@ const Checkbox = (props: any) => {
       : removeObservationAsset(props.asset.hashKey);
   };
 
-  const { getInputProps, getCheckboxProps } = useCheckbox(props);
+  const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
     <Box as="label" className="fade" aria-checked={props.isChecked}>
-      <input {...getInputProps()} onChange={handleOnChange} required={false} />
+      <input
+        {...getHiddenInputProps()}
+        onChange={handleOnChange}
+        required={false}
+        type="checkbox"
+      />
       <AspectRatio
         ratio={1}
-        {...getCheckboxProps()}
+        {...getControlProps()}
         borderRadius="lg"
         overflow="hidden"
         borderWidth="2px"
@@ -68,14 +75,15 @@ const Checkbox = (props: any) => {
           <IconButton
             className="remove fade"
             variant="ghost"
-            colorScheme="red"
+            colorPalette="red"
             hidden={props.isChecked}
             aria-label={t("common:delete")}
             onClick={() => removeAsset(props.asset)}
-            icon={<DeleteIcon />}
-          />
+          >
+            <DeleteIcon />
+          </IconButton>
           <StatusIcon type={props.asset.status} />
-          <Image
+          <ImageWithFallback
             style={{ filter: "none" }}
             boxSize="full"
             objectFit="cover"

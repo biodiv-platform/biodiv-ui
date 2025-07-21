@@ -1,13 +1,9 @@
-import { WarningIcon } from "@chakra-ui/icons";
 import {
-  Alert,
-  AlertIcon,
   Box,
   Button,
-  Checkbox,
   Flex,
   Heading,
-  Icon,
+  IconButton,
   Image,
   Link,
   Progress,
@@ -28,6 +24,10 @@ import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { LuCircleAlert } from "react-icons/lu";
+
+import { Alert } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import ColumnMapper from "../common/column-mapper";
 
@@ -56,7 +56,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
   const [file, setFile] = useState<File | null>(null);
   const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
   const [headersMapping, setHeadersMapping] = useState<string[]>([]);
-  const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
+  const { open: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
   const [successfulUpload, setSuccessfulUpload] = useState(0);
   const [failedUpload, setFailedUpload] = useState(0);
   const [showstats, setshowstats] = useState(false);
@@ -87,7 +87,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
           firstRow.eachCell((cell, colNumber) => {
             if (cell.value) {
               const cellValue = cell.value.toString();
-              extractedHeaders.push(`${cellValue}|${colNumber-1}`);
+              extractedHeaders.push(`${cellValue}|${colNumber - 1}`);
               if (options.some((option) => option.toLowerCase() === cellValue.toLowerCase())) {
                 setColumnMapping((prev) => {
                   const updatedOptions = [...prev];
@@ -355,12 +355,13 @@ export default function TraitsBatchUpload({ traits, languages }) {
               </Text>
 
               <Box mt={4}>
-                <Progress
+                <Progress.Root
                   value={((successfulUpload + failedUpload) / uploadResult.length) * 100}
-                  colorScheme={"blue"}
-                  size="sm"
-                  borderRadius="md"
-                />
+                >
+                  <Progress.Track>
+                    <Progress.Range bg="blue.500" />
+                  </Progress.Track>
+                </Progress.Root>
                 <Text mt={2} fontSize="sm" fontWeight="semibold" color="gray.700">
                   Uploading Traits: [{successfulUpload + failedUpload}/{uploadResult.length}]
                 </Text>
@@ -387,7 +388,8 @@ export default function TraitsBatchUpload({ traits, languages }) {
             ).length != 0 && (
               <Box bg="red.500" color="white" p={4} borderRadius="md" boxShadow="md" mb={4}>
                 <Text fontSize="md" fontWeight="bold">
-                  <Icon as={WarningIcon} w={5} h={5} mr={4} />
+                  <IconButton w={5} h={5} mr={4} />
+                  <LuCircleAlert />
                   Warning: {"Please add a units column for the following date traits"}!
                 </Text>
                 {Object.entries(uploadResult[0])
@@ -453,10 +455,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                             <td>
                                               {key.split("|")[2] == "STRING" && (
                                                 <>
-                                                  <SimpleGrid
-                                                    columns={{ base: 1, md: 3 }}
-                                                    spacing={4}
-                                                  >
+                                                  <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                                                     {values
                                                       .slice(0, -1)
                                                       .split(",")
@@ -484,7 +483,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                                                 20
                                                               )}
                                                               alt={value.split("|")[1]}
-                                                              ignoreFallback={true}
+                                                              // ignoreFallback={true}
                                                             />
                                                           )}
                                                           <div>{value.split("|")[1]}</div>
@@ -498,7 +497,6 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                                       (value) => value.split("|")[0] === "NoMatch"
                                                     ).length != 0 && (
                                                     <Alert bg="red.500" color="white" mt={2}>
-                                                      <AlertIcon color="white" />
                                                       <Text>
                                                         {"Couldn't find values: " +
                                                           values
@@ -517,10 +515,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                                 </>
                                               )}
                                               {key.split("|")[2] == "NUMERIC" && (
-                                                <SimpleGrid
-                                                  columns={{ base: 1, md: 3 }}
-                                                  spacing={4}
-                                                >
+                                                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                                                   <Flex
                                                     border="2px"
                                                     borderColor="gray.300"
@@ -536,10 +531,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                               )}
                                               {key.split("|")[2] == "DATE" &&
                                                 values.split("|").length == 2 && (
-                                                  <SimpleGrid
-                                                    columns={{ base: 1, md: 3 }}
-                                                    spacing={4}
-                                                  >
+                                                  <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                                                     <Flex
                                                       border="2px"
                                                       borderColor="gray.300"
@@ -554,10 +546,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                                   </SimpleGrid>
                                                 )}
                                               {key.split("|")[2] == "COLOR" && (
-                                                <SimpleGrid
-                                                  columns={{ base: 1, md: 3 }}
-                                                  spacing={4}
-                                                >
+                                                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                                                   {values
                                                     .slice(0, -1)
                                                     .split("|")
@@ -589,7 +578,11 @@ export default function TraitsBatchUpload({ traits, languages }) {
               </tbody>
             </table>
             <Box mt={4}>
-              <Checkbox isChecked={termsAccepted} onChange={() => setTermsAccepted(!termsAccepted)}>
+              <Checkbox
+                checked={termsAccepted}
+                onChange={() => setTermsAccepted(!termsAccepted)}
+                colorPalette={"blue"}
+              >
                 {t("traits:terms.description")}
               </Checkbox>
               {!termsAccepted && (

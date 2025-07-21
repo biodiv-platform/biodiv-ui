@@ -6,20 +6,21 @@ interface SimpleActionButtonProps {
   icon;
   title;
   onClick?;
-  colorScheme?;
+  colorPalette?;
 }
 
-const SimpleActionButton = ({ icon, title, onClick, colorScheme }: SimpleActionButtonProps) => (
-  <Tooltip title={title} placement="bottom">
+const SimpleActionButton = ({ icon, title, onClick, colorPalette }: SimpleActionButtonProps) => (
+  <Tooltip title={title} positioning={{ placement: "bottom" }}>
     <IconButton
       size="lg"
-      isRound={true}
+      rounded={"full"}
       variant="ghost"
-      colorScheme={colorScheme || "blue"}
-      icon={icon}
+      colorPalette={colorPalette || "blue"}
       aria-label={title}
       onClick={onClick}
-    />
+    >
+      {icon}
+    </IconButton>
   </Tooltip>
 );
 

@@ -1,10 +1,10 @@
-import { SearchIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import styled from "@emotion/styled";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuSearch } from "react-icons/lu";
 import * as Yup from "yup";
 
 import useSpeciesList from "../../../use-species-list";
@@ -45,13 +45,9 @@ export default function TextFilterInput({ filterKey, path, label, mb = 0 }) {
     <FormProvider {...hForm}>
       <TextFilterForm onSubmit={hForm.handleSubmit(handleOnChange)}>
         <TextBoxField name="query" id={filterKey} label={label} showLabel={false} mb={mb} />
-        <IconButton
-          variant="solid"
-          colorScheme="blue"
-          type="submit"
-          icon={<SearchIcon />}
-          aria-label={`Find ${label}`}
-        />
+        <IconButton variant="solid" colorPalette="blue" type="submit" aria-label={`Find ${label}`}>
+          <LuSearch />
+        </IconButton>
       </TextFilterForm>
     </FormProvider>
   );

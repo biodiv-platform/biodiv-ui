@@ -1,4 +1,4 @@
-import { Avatar, Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, Heading, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import DocumentIcon from "@components/pages/document/common/document-icon";
 import useGlobalState from "@hooks/use-global-state";
@@ -9,6 +9,8 @@ import { getUserImage } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { Avatar } from "@/components/ui/avatar";
 
 interface InfoTabInterface {
   document;
@@ -25,42 +27,40 @@ export default function InfoTab({ document, user }: InfoTabInterface) {
     <Stack color="gray.600" display="flex" flexDir="column" justifyContent="flex-start" bg="white">
       <Box p={3} borderWidth="1px" borderColor="gray.300" borderRadius="md">
         <LocalLink href={`/document/show/${document.id}`}>
-          <a>
-            <HStack alignItems="center" spacing={4}>
-              <DocumentIcon />
-              <Heading fontSize="lg" className="elipsis-2">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: getInjectableHTML(document?.title || t("document:unknown"))
-                  }}
-                />
-              </Heading>
-              <Badge colorScheme="red">{document.itemtype}</Badge>
-            </HStack>
-          </a>
+          <HStack alignItems="center" gap={4}>
+            <DocumentIcon />
+            <Heading fontSize="lg" className="elipsis-2">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: getInjectableHTML(document?.title || t("document:unknown"))
+                }}
+              />
+            </Heading>
+            <Badge colorPalette="red">{document.itemtype}</Badge>
+          </HStack>
         </LocalLink>
 
-        <Stack isInline justifyContent="space-between" alignItems="flex-end">
-          <Stack isInline justify="space-between" alignItems="flex-end">
+        <Stack direction={"row"} justifyContent="space-between" alignItems="flex-end">
+          <Stack direction={"row"} justify="space-between" alignItems="flex-end">
             {document?.author && (
               <Text
-                noOfLines={1}
+                lineClamp={1}
                 maxWidth={{ base: "30vh", sm: "40vh", md: "120vh" }}
                 title="Author"
               >
-                <PeopleIcon mr={2} />
+                <PeopleIcon size={"sm"} mr={2} />
                 {document.author}
               </Text>
             )}
             {document.year && (
               <Text title="Date">
-                <CalendarIcon mr={2} />
+                <CalendarIcon size={"sm"} mr={2} />
                 {document.year}
               </Text>
             )}
             {document.journal && (
               <Text title="journal">
-                <LockIcon mr={2} />
+                <LockIcon size={"sm"} mr={2} />
                 <span
                   dangerouslySetInnerHTML={{
                     __html: getInjectableHTML(document.journal)

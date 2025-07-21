@@ -17,7 +17,7 @@ export default function ResourcesList({ showHint }: ResourcesListProps) {
   return (
     <>
       {showHint && <Text my={5}>💡 {t("form:description.resources")}</Text>}
-      <SimpleGrid borderRadius="lg" columns={[1, 3, 4, 5]} spacing={4}>
+      <SimpleGrid borderRadius="lg" columns={[1, 3, 4, 5]} gap={4}>
         {observationAssets?.map((r, index) => (
           <ResourceCard resource={r} key={r.hashKey} index={index} />
         ))}

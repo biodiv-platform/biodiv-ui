@@ -1,9 +1,10 @@
-import { FormControl, FormErrorMessage, FormHelperText, FormLabel } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 
+import { Field } from "../ui/field";
 import { ClearIndicator, reactSelectProps } from "./configs";
 
 interface SelectInputFieldProps {
@@ -44,42 +45,46 @@ export const SelectInputField = ({
   const { field, fieldState } = useController({ name });
 
   return (
-    <FormControl
-      isInvalid={!!fieldState.error}
+    <Field
+      invalid={!!fieldState.error}
       className="dropdown"
       aria-invalid={!!fieldState.error}
       mb={mb}
       hidden={hidden}
-      isRequired={isRequired}
+      required={isRequired}
+      htmlFor={name}
+      label={label}
+      errorText={fieldState?.error?.message}
       {...props}
     >
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <Select
-        id={name}
-        inputId={name}
-        onChange={(o) => {
-          field.onChange(o.value);
-          onChangeCallback && onChangeCallback(o.value);
-        }}
-        onBlur={field.onBlur}
-        options={options}
-        components={{
-          Option: optionComponent,
-          ClearIndicator,
-          IndicatorSeparator: () => null
-        }}
-        placeholder={placeholder}
-        menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
-        isSearchable={true}
-        isDisabled={disabled}
-        {...{
-          [isControlled ? "value" : "defaultValue"]: options.find((o) => o.value === field.value)
-        }}
-        ref={selectRef}
-        {...reactSelectProps}
-      />
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      <Box width={"full"}>
+        <Select
+          id={name}
+          inputId={name}
+          onChange={(o) => {
+            field.onChange(o.value);
+            onChangeCallback && onChangeCallback(o.value);
+          }}
+          onBlur={field.onBlur}
+          options={options}
+          components={{
+            Option: optionComponent,
+            ClearIndicator,
+            IndicatorSeparator: () => null
+          }}
+          placeholder={placeholder}
+          menuPortalTarget={shouldPortal ? MENU_PORTAL_TARGET : undefined}
+          isSearchable={true}
+          isDisabled={disabled}
+          {...{
+            [isControlled ? "value" : "defaultValue"]: options.find((o) => o.value === field.value)
+          }}
+          ref={selectRef}
+          {...reactSelectProps}
+        />
+      </Box>
+
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

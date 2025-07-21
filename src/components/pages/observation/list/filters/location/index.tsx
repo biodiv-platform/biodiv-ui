@@ -11,7 +11,11 @@ export default function LocationFilter() {
   const {
     observationData: { ag }
   } = useObservationFilter();
-  const STATE_OPTIONS = Object.keys(ag.groupState||{})?.map((state) => ({ label: state, value: state, stat: state }));
+  const STATE_OPTIONS = Object.keys(ag.groupState || {})?.map((state) => ({
+    label: state,
+    value: state,
+    stat: state
+  }));
   const GEO_ENTITY_LOCATION =
     ag &&
     ag?.geoEntity &&

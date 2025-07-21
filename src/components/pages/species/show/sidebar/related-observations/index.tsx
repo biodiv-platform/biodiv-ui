@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Image, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
@@ -19,7 +19,7 @@ export default function SpeciesRelatedObservations() {
   return (
     <Box mb={4} className="white-box">
       <BoxHeading>📷 {t("species:related.title")}</BoxHeading>
-      <SimpleGrid className="fade" w="full" columns={4} spacing={4} p={4}>
+      <SimpleGrid className="fade" w="full" columns={4} gap={4} p={4}>
         {speciesOccurances.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
@@ -27,27 +27,25 @@ export default function SpeciesRelatedObservations() {
               href={`/observation/show/${observation.observationId}`}
               key={observation.observationId}
             >
-              <Link target="_blank" className="fade">
-                <Tooltip hasArrow={true} title={<ScientificName value={title} />}>
-                  <AspectRatio ratio={1}>
-                    <Image
-                      borderRadius="md"
-                      bg="gray.300"
-                      loading="lazy"
-                      alt={title}
-                      src={
-                        observation.thumbnail
-                          ? getResourceThumbnail(
-                              RESOURCE_CTX.OBSERVATION,
-                              observation.thumbnail,
-                              RESOURCE_SIZE.LIST_THUMBNAIL
-                            )
-                          : getLocalIcon(observation.speciesGroup)
-                      }
-                    />
-                  </AspectRatio>
-                </Tooltip>
-              </Link>
+              <Tooltip showArrow={true} title={<ScientificName value={title} />}>
+                <AspectRatio ratio={1}>
+                  <Image
+                    borderRadius="md"
+                    bg="gray.300"
+                    loading="lazy"
+                    alt={title}
+                    src={
+                      observation.thumbnail
+                        ? getResourceThumbnail(
+                            RESOURCE_CTX.OBSERVATION,
+                            observation.thumbnail,
+                            RESOURCE_SIZE.LIST_THUMBNAIL
+                          )
+                        : getLocalIcon(observation.speciesGroup)
+                    }
+                  />
+                </AspectRatio>
+              </Tooltip>
             </LocalLink>
           );
         })}
@@ -64,8 +62,9 @@ export default function SpeciesRelatedObservations() {
         w="full"
         rounded={0}
         hidden={!speciesOccurances.hasMore}
-        isLoading={speciesOccurances.isLoading}
+        loading={speciesOccurances.isLoading}
         onClick={() => loadMore()}
+        variant={"subtle"}
       >
         {t("common:load_more")}
       </Button>

@@ -81,7 +81,7 @@ export default function GroupPost() {
           disabled={selectedGroups.length <= 0}
           size="sm"
           variant="outline"
-          colorScheme="blue"
+          colorPalette="blue"
           aria-label="Save"
           type="submit"
           onClick={() => handleOnSave(bulkActions.post)}
@@ -93,7 +93,7 @@ export default function GroupPost() {
           size="sm"
           variant="outline"
           ml={2}
-          colorScheme="red"
+          colorPalette="red"
           aria-label="Unpost"
           onClick={() => handleOnSave(bulkActions.unPost)}
         >

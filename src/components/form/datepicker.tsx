@@ -1,14 +1,6 @@
 import "flatpickr/dist/themes/material_blue.css";
 
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement
-} from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
@@ -17,6 +9,9 @@ import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
 import { useController } from "react-hook-form";
+
+import { Field } from "../ui/field";
+import { InputGroup } from "../ui/input-group";
 
 interface IDatePickerBoxProps {
   name: string;
@@ -73,16 +68,28 @@ export const DatePickerField = ({
   }
 
   return (
-    <FormControl isInvalid={!!fieldState.error} mb={mb} {...props}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <InputGroup>
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb}
+      htmlFor={name}
+      label={label}
+      errorText={fieldState?.error?.message}
+      {...props}
+    >
+      <InputGroup
+        endElement={
+          <label htmlFor={name} style={{ cursor: "pointer" }}>
+            <CalendarIcon color="gray.300" />
+          </label>
+        }
+      >
         <Flatpickr
           value={date}
           options={{ allowInput: true, maxDate, dateFormat }}
           onChange={setDate}
           render={({ defaultValue, value, ...props }, ref) => (
             <Input
-              isReadOnly={disabled}
+              readOnly={disabled}
               id={name}
               {...props}
               disabled={disabled}
@@ -92,14 +99,8 @@ export const DatePickerField = ({
             />
           )}
         />
-        <InputRightElement>
-          <label htmlFor={name} style={{ cursor: "pointer" }}>
-            <CalendarIcon color="gray.300" />
-          </label>
-        </InputRightElement>
       </InputGroup>
-      <FormErrorMessage children={fieldState?.error?.message} />
-      {hint && <FormHelperText color="gray.600">{hint}</FormHelperText>}
-    </FormControl>
+      {hint && <Field color="gray.600" helperText={hint} />}
+    </Field>
   );
 };

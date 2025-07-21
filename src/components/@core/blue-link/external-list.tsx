@@ -15,7 +15,8 @@ export default function ExternalBlueLinkList({ website }: { website?: string }) 
   );
 
   return (
-    <Stack isInline={false}>
+    // isInline={false}
+    <Stack>
       {websiteList?.map((props) => (
         <ExternalBlueLink {...props} />
       ))}

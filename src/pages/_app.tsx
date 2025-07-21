@@ -1,13 +1,11 @@
 import "../styles/global.css";
 
-import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
-import { SkipNavContent, SkipNavLink } from "@chakra-ui/skip-nav";
+import { ChakraProvider } from "@chakra-ui/react";
 import Footer from "@components/@core/container/footer";
 import Metadata from "@components/@core/container/metadata";
 import NavigationMenuDark from "@components/@core/navigation-menu/dark";
 import NavigationMenuLight from "@components/@core/navigation-menu/light";
 import SITE_CONFIG from "@configs/site-config";
-import { customTheme } from "@configs/theme";
 import { GlobalStateProvider } from "@hooks/use-global-state";
 import { UserGroupIbp } from "@interfaces/observation";
 import { axGroupList } from "@services/app.service";
@@ -19,6 +17,9 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import React, { useEffect } from "react";
 import BusProvider from "react-gbus";
+
+import { Toaster } from "@/components/ui/toaster";
+import { customTheme } from "@/configs/theme";
 
 const AuthWall = dynamic(() => import("@components/@core/container/authwall"), {
   ssr: false
@@ -44,7 +45,6 @@ function MainApp({
   languageId,
   pageProps
 }: AppProps) {
-  const { ToastContainer } = createStandaloneToast();
   const config = { header: true, footer: true, ...Component?.config };
 
   useEffect(() => {
@@ -55,11 +55,10 @@ function MainApp({
 
   return (
     <BusProvider>
-      <ToastContainer />
-      <ChakraProvider theme={customTheme}>
+      <ChakraProvider value={customTheme}>
+        <Toaster />
         <GlobalStateProvider initialState={{ user, domain, groups, currentGroup, languageId }}>
           <Metadata />
-          <SkipNavLink>Skip to content</SkipNavLink>
           <div className="content">
             {config.header && (
               <>
@@ -67,7 +66,6 @@ function MainApp({
                 <NavigationMenuLight />
               </>
             )}
-            <SkipNavContent />
             <div id="main">
               <Component {...pageProps} />
             </div>

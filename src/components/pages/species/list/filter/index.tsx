@@ -1,12 +1,8 @@
 import {
   Box,
   Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
   Heading,
+  Separator,
   Spinner,
   Stack,
   useBreakpointValue,
@@ -16,6 +12,14 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
 import React, { Suspense } from "react";
+
+import {
+  DrawerBackdrop,
+  DrawerBody,
+  DrawerCloseTrigger,
+  DrawerContent,
+  DrawerRoot
+} from "@/components/ui/drawer";
 
 import ClearFilters from "./clear-filter";
 
@@ -43,41 +47,42 @@ const FilterWrapper = styled.div`
 `;
 
 export default function Filters() {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const { open, onToggle, onClose } = useDisclosure();
   const { t } = useTranslation();
   const isDesktopFilter = useBreakpointValue({ base: false, lg: true });
 
   return isDesktopFilter ? (
     <Box as={FilterWrapper} gridColumn={{ lg: "1/4" }}>
-      <Stack m={4} isInline={true} align="center" justify="space-between">
-        <Heading size="md">{t("filters:title")}</Heading>
+      <Stack m={4} direction={"row"} align="center" justify="space-between">
+        <Heading size="xl">{t("filters:title")}</Heading>
         <ClearFilters />
       </Stack>
+      <Separator />
       <Suspense fallback={<Spinner />}>
         <FiltersList />
       </Suspense>
     </Box>
   ) : (
     <FilterWrapper>
-      <Button w="full" className="toggle-button" onClick={onToggle}>
+      <Button w="full" className="toggle-button" onClick={onToggle} variant={"subtle"}>
         {t("filters:toggle")}
       </Button>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-        <DrawerOverlay>
+      <DrawerRoot open={open} placement="end" onOpenChange={onClose}>
+        <DrawerBackdrop>
           <DrawerContent>
-            <DrawerCloseButton />
+            <DrawerCloseTrigger />
             <BoxHeading>{t("filters:title")}</BoxHeading>
             <ClearFilters />
             <DrawerBody p={0}>
-              {isOpen && (
+              {open && (
                 <Suspense fallback={<Spinner />}>
                   <FiltersList />
                 </Suspense>
               )}
             </DrawerBody>
           </DrawerContent>
-        </DrawerOverlay>
-      </Drawer>
+        </DrawerBackdrop>
+      </DrawerRoot>
     </FilterWrapper>
   );
 }

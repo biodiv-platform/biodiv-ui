@@ -1,17 +1,18 @@
 import "react-sortable-tree/style.css";
 
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 import usePages from "../sidebar/use-pages-sidebar";
 import ReOrderTree from "./reorder-tree";
@@ -27,26 +28,26 @@ export default function ReOrderPagesModal() {
 
   return (
     <>
-      <Button mb={3} w="full" colorScheme="blue" onClick={p.toggleEditing}>
+      <Button mb={3} w="full" colorPalette="blue" onClick={p.toggleEditing}>
         {t("page:sidebar.reorder")}
       </Button>
 
-      <Modal isOpen={p.isEditing} onClose={p.toggleEditing}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{t("page:sidebar.reorder")}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+      <DialogRoot open={p.isEditing} onOpenChange={p.toggleEditing}>
+        <DialogBackdrop />
+        <DialogContent>
+          <DialogHeader>{t("page:sidebar.reorder")}</DialogHeader>
+          <DialogCloseTrigger />
+          <DialogBody>
             <ReOrderTree />
-          </ModalBody>
+          </DialogBody>
 
-          <ModalFooter>
-            <Button colorScheme="blue" onClick={handleOnSave}>
+          <DialogFooter>
+            <Button colorPalette="blue" onClick={handleOnSave}>
               {t("common:save")}
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          </DialogFooter>
+        </DialogContent>
+      </DialogRoot>
     </>
   );
 }

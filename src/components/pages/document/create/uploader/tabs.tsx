@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Tabs } from "@chakra-ui/react";
 import { useIsMount } from "@hooks/use-is-mount";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
@@ -10,41 +10,37 @@ import MyDocumentUploads from "./my-uploads";
 
 export default function DocumentUploaderTabs({ onChange, externalUrl }) {
   const { t } = useTranslation();
-  const [tabIndex, setTabIndex] = useState(externalUrl ? 2 : 0);
+  const [tabIndex, setTabIndex] = useState(externalUrl ? "externalUrl" : "selectedDocument");
   const { selectedDocument } = useManageDocument();
   const isMount = useIsMount();
 
   useEffect(() => {
     if (!isMount) {
-      setTabIndex(0);
+      setTabIndex("selectedDocument");
       onChange(selectedDocument);
     }
   }, [selectedDocument]);
 
   return (
-    <Tabs
-      className="nospace"
-      index={tabIndex}
-      onChange={setTabIndex}
-      variant="soft-rounded"
-      isLazy={true}
-    >
-      <TabList mb={4} overflowX="auto" py={1}>
-        <Tab isDisabled={externalUrl}>✔️ {t("document:upload.selected")}</Tab>
-        <Tab isDisabled={externalUrl}>☁️ {t("document:upload.my_uploads")}</Tab>
-        <Tab>🌎{t("document:upload.url")}</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <DocumentDropzone />
-        </TabPanel>
-        <TabPanel>
-          <MyDocumentUploads />
-        </TabPanel>
-        <TabPanel>
-          <ExternalUrl />
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+    <Tabs.Root className="nospace" defaultValue={tabIndex} lazyMount={true} width={"full"}>
+      <Tabs.List mb={4} overflowX="auto" py={1}>
+        <Tabs.Trigger value="selectedDocument" disabled={externalUrl}>
+          ✔️ {t("document:upload.selected")}
+        </Tabs.Trigger>
+        <Tabs.Trigger value="draftmedia" disabled={externalUrl}>
+          ☁️ {t("document:upload.my_uploads")}
+        </Tabs.Trigger>
+        <Tabs.Trigger value="externalUrl">🌎{t("document:upload.url")}</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="selectedDocument">
+        <DocumentDropzone />
+      </Tabs.Content>
+      <Tabs.Content value="draftmedia">
+        <MyDocumentUploads />
+      </Tabs.Content>
+      <Tabs.Content value="externalUrl">
+        <ExternalUrl />
+      </Tabs.Content>
+    </Tabs.Root>
   );
 }

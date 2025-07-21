@@ -1,21 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  SimpleGrid,
-  Tab,
-  TabList,
-  Tabs,
-  useDisclosure
-} from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid, Tabs, useDisclosure } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
@@ -30,6 +13,16 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Select from "react-select";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { Field } from "@/components/ui/field";
 
 import AreaDrawField from "../common/area-draw-field";
 import IconCheckboxField from "../common/icon-checkbox-field";
@@ -76,7 +69,9 @@ export default function UserGroupEditForm({
         translation: Yup.array()
           .of(
             Yup.object({
-              name: Yup.string().required().matches(/^[^/]*$/, "Name cannot contain '/'"),
+              name: Yup.string()
+                .required()
+                .matches(/^[^/]*$/, "Name cannot contain '/'"),
               language: Yup.number().integer().required(),
               description: Yup.string()
             })
@@ -131,7 +126,7 @@ export default function UserGroupEditForm({
     languageId in languageMap ? languageMap[languageId] : 0
   );
   const [langId, setLangId] = useState(0);
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { open, onClose, onOpen } = useDisclosure();
 
   const handleAddTranslation = () => {
     const currentList = hForm.getValues("translation");
@@ -146,9 +141,9 @@ export default function UserGroupEditForm({
     <FormProvider {...hForm}>
       {(currentStep == -1 || currentStep == 0) && (
         <>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
+          <DialogRoot open={open} onOpenChange={onClose}>
+            <DialogBackdrop />
+            <DialogContent>
               <form
                 onSubmit={(event) => {
                   event.preventDefault();
@@ -157,11 +152,15 @@ export default function UserGroupEditForm({
                   onClose();
                 }}
               >
-                <ModalHeader> {t("common:create_form.add_translation_button")}</ModalHeader>
-                <ModalBody>
+                <DialogHeader> {t("common:create_form.add_translation_button")}</DialogHeader>
+                <DialogBody>
                   <Box>
-                    <FormControl mb={2} isRequired={true}>
-                      <FormLabel htmlFor="name">{t("common:create_form.language")}</FormLabel>
+                    <Field
+                      mb={2}
+                      required={true}
+                      htmlFor="name"
+                      label={t("traits:create_form.language")}
+                    >
                       {
                         <Select
                           id="langId"
@@ -183,10 +182,10 @@ export default function UserGroupEditForm({
                           isSearchable={true} // Enables search
                         />
                       }
-                    </FormControl>
+                    </Field>
                   </Box>
-                </ModalBody>
-                <ModalFooter>
+                </DialogBody>
+                <DialogFooter>
                   <Button
                     mr={3}
                     onClick={() => {
@@ -199,42 +198,41 @@ export default function UserGroupEditForm({
                   <Button colorScheme="blue" type="submit">
                     {t("common:create_form.create")}
                   </Button>
-                </ModalFooter>
+                </DialogFooter>
               </form>
-            </ModalContent>
-          </Modal>
+            </DialogContent>
+          </DialogRoot>
           <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
-            <Button colorScheme="green">{t("common:create_form.add_translation_button")}</Button>
+            <Button colorPalette="green">{t("common:create_form.add_translation_button")}</Button>
           </Flex>
-          <Tabs
+          <Tabs.Root
             overflowX="auto"
             mb={4}
-            variant="unstyled"
             bg="gray.100"
             rounded="md"
-            index={translationSelected}
-            onChange={(index) => setTranslationSelected(index)}
+            value={translationSelected.toString()}
+            variant={"plain"}
+            //index={translationSelected}
+            //onChange={(index) => setTranslationSelected(index)}
           >
-            <TabList>
-              {hForm
-                .getValues()
-                .translation
-                .map((t) => (
-                  <Tab
-                    key={t.language}
-                    _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
-                    m={1}
-                  >
-                    {languages.filter((lang) => lang.id === Number(t.language))[0].name}
-                  </Tab>
-                ))}
-            </TabList>
-          </Tabs>
+            <Tabs.List>
+              {hForm.getValues().translation.map((t) => (
+                <Tabs.Trigger
+                  key={t.language}
+                  value={t.language}
+                  _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
+                  m={1}
+                >
+                  {languages.filter((lang) => lang.id === Number(t.language))[0].name}
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+          </Tabs.Root>
         </>
       )}
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
         {(currentStep == -1 || currentStep == 0) && (
-          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+          <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
             <Box gridColumn="1/4">
               <TextBoxField
                 key={`name-${translationSelected}`}
@@ -269,7 +267,7 @@ export default function UserGroupEditForm({
             />
             <AreaDrawField
               label={t("group:spatial_coverge")}
-              name={"spacialCoverage"}
+              name="spacialCoverage"
               isRequired={true}
             />
           </>

@@ -12,14 +12,10 @@ const SpeciesGroupsFilter = () => {
   const speciesGroupList = useMemo(() => {
     return Object.keys(observationData?.ag?.groupSpeciesName || {})
       .filter((o) => o.split("|")[1] !== "All") // removes All from filter explicitly
-      .sort(
-        (a, b) =>
-          parseInt(a.split("|")[2] || "0", 10) -
-          parseInt(b.split("|")[2] || "0", 10)
-      );
+      .sort((a, b) => parseInt(a.split("|")[2] || "0", 10) - parseInt(b.split("|")[2] || "0", 10));
   }, [observationData?.ag?.groupSpeciesName]);
 
-  const onChange = (v) => {
+  const onValueChange = (v) => {
     setFilter((_draft) => {
       _draft.f.offset = 0;
       if (v.length > 0) {
@@ -30,20 +26,20 @@ const SpeciesGroupsFilter = () => {
     });
   };
 
-  const { getCheckboxProps } = useCheckboxGroup({
+  const { getItemProps } = useCheckboxGroup({
     defaultValue,
-    onChange
+    onValueChange
   });
 
   return (
-    <SimpleGrid gridGap={2} columns={5}>
+    <SimpleGrid gridGap={2} columns={5} p={4}>
       {speciesGroupList?.map((o) => (
         <CustomCheckbox
           key={o.split("|")[0]}
           id={o.split("|")[0]?.toString()}
           label={o.split("|")[1]}
           stat={o.split("|")[1] ? observationData?.ag?.groupSpeciesName?.[o] : 0}
-          {...getCheckboxProps({ value: o.split("|")[0]?.toString() })}
+          {...getItemProps({ value: o.split("|")[0]?.toString() })}
         />
       ))}
     </SimpleGrid>

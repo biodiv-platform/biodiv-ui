@@ -1,38 +1,37 @@
-import { InfoIcon } from "@chakra-ui/icons";
-import {
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Flex
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import React from "react";
+import { LuInfo } from "react-icons/lu";
+
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger
+} from "@/components/ui/accordion";
 
 import TextFilterInput from "./input";
 
 export default function TextFilterPanel({ filterKey, label, childHeader, path }) {
   return (
-    <AccordionItem>
-      <AccordionButton>
+    <AccordionItem value={filterKey} pl={4} pr={4}>
+      <AccordionItemTrigger>
         <Flex mr={3} flex={1} justifyContent="space-between" alignItems="center" textAlign="left">
           {label}
           {childHeader?.length > 0 && (
             <Tooltip
               title={childHeader.join(", ")}
-              placement="top-start"
-              shouldWrapChildren={true}
-              hasArrow={true}
+              positioning={{ placement: "top-start" }}
+              // shouldWrapChildren={true}
+              showArrow={true}
             >
-              <InfoIcon color="gray.600" />
+              <LuInfo color="gray.600" />
             </Tooltip>
           )}
         </Flex>
-        <AccordionIcon />
-      </AccordionButton>
-      <AccordionPanel>
+      </AccordionItemTrigger>
+      <AccordionItemContent>
         <TextFilterInput filterKey={filterKey} path={path} label={label} />
-      </AccordionPanel>
+      </AccordionItemContent>
     </AccordionItem>
   );
 }

@@ -85,7 +85,7 @@ export default function DocumentShowComponent({
   return (
     <div className="container mt">
       <DocumentHeader document={document} />
-      <SimpleGrid columns={[1, 1, 3, 3]} spacing={[1, 1, 4, 4]}>
+      <SimpleGrid columns={[1, 1, 3, 3]} gap={[1, 1, 4, 4]}>
         <Box gridColumn="1/3">
           {renderDocument(getDocumentType(document?.uFile?.mimeType))}
           <DocumentInfo d={document} />

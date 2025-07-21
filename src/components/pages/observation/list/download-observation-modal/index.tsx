@@ -1,14 +1,4 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay
-} from "@chakra-ui/react";
-import ExternalBlueLink from "@components/@core/blue-link/external";
+import { Button, CloseButton, Dialog, Link, Portal } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextAreaField } from "@components/form/textarea";
@@ -23,19 +13,21 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuExternalLink } from "react-icons/lu";
 import * as Yup from "yup";
 
 import CheckboxGroupField from "./checkbox-group-field";
 import { OBSERVATION_FILTERS } from "./filters";
 
-const getFilterOptions = (options) => options.map(( name ) => ({ value: name.split("|")[0], label: name.split("|")[0] }));
+const getFilterOptions = (options) =>
+  options.map((name) => ({ value: name.split("|")[0], label: name.split("|")[0] }));
 
 export default function DownloadObservationDataModal({ isOpen, onClose }) {
   const { t } = useTranslation();
   const { user, isLoggedIn } = useGlobalState();
   const { observationData, filter } = useObservationFilter();
-  const traits = Object.keys(observationData.ag.groupTraits||{})
-  const customFields = Object.keys(observationData.ag.groupCustomField||{})
+  const traits = Object.keys(observationData.ag.groupTraits || {});
+  const customFields = Object.keys(observationData.ag.groupCustomField || {});
   const [isHidden, setIsHidden] = useState(false);
 
   const hForm = useForm<any>({
@@ -101,9 +93,9 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
       notification(
         <>
           {t("observation:download.success")}{" "}
-          <ExternalBlueLink href="/user/download-logs">
-            {t("header:menu_secondary.more.download_logs")}
-          </ExternalBlueLink>
+          <Link href="/user/download-logs">
+            {t("header:menu_secondary.more.download_logs")} <LuExternalLink />
+          </Link>
         </>,
         NotificationType.Success
       );
@@ -114,52 +106,62 @@ export default function DownloadObservationDataModal({ isOpen, onClose }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
-      <FormProvider {...hForm}>
-        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <ModalOverlay>
-            <ModalContent hidden={isHidden}>
-              <ModalHeader>☑️ {t("observation:download.modal.title")}</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                {OBSERVATION_FILTERS.map((f) => (
-                  <CheckboxGroupField {...f} key={f.name} />
-                ))}
-                <CheckboxGroupField
-                  name="traits"
-                  label="Traits"
-                  options={getFilterOptions(traits)}
-                />
-                {<CheckboxGroupField
-                  name="customfields"
-                  label="Custom Fields"
-                  options={getFilterOptions(customFields)}
-                />}
-                <TextAreaField
-                  name="notes"
-                  label={t("observation:download.modal.note")}
-                  hint={t("observation:download.modal.note_hint")}
-                  isRequired={true}
-                />
-                <CheckboxField
-                  hidden={!hasAccess([Role.Admin])}
-                  label="Download as Resource Dataset"
-                  name="view"
-                />
-              </ModalBody>
+    <Dialog.Root open={isOpen} onOpenChange={onClose} size="xl" scrollBehavior="outside">
+      <Portal>
+        <Dialog.Backdrop>
+          <Dialog.Positioner>
+            <Dialog.Content hidden={isHidden}>
+              <FormProvider {...hForm}>
+                <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+                  <Dialog.Header fontSize={"xl"} fontWeight={"bold"}>
+                    ☑️ {t("observation:download.modal.title")}
+                  </Dialog.Header>
+                  <Dialog.CloseTrigger asChild>
+                    <CloseButton size="sm" />
+                  </Dialog.CloseTrigger>
+                  <Dialog.Body>
+                    {OBSERVATION_FILTERS.map((f) => (
+                      <CheckboxGroupField {...f} key={f.name} />
+                    ))}
+                    <CheckboxGroupField
+                      name="traits"
+                      label="Traits"
+                      options={getFilterOptions(traits)}
+                    />
+                    {
+                      <CheckboxGroupField
+                        name="customfields"
+                        label="Custom Fields"
+                        options={getFilterOptions(customFields)}
+                      />
+                    }
+                    <TextAreaField
+                      name="notes"
+                      label={t("observation:download.modal.note")}
+                      hint={t("observation:download.modal.note_hint")}
+                      isRequired={true}
+                    />
+                    <CheckboxField
+                      hidden={!hasAccess([Role.Admin])}
+                      label="Download as Resource Dataset"
+                      name="view"
+                    />
+                  </Dialog.Body>
 
-              <ModalFooter>
-                <SubmitButton leftIcon={<DownloadIcon />}>
-                  {t("observation:download.title")}
-                </SubmitButton>
-                <Button ml={3} onClick={onClose}>
-                  {t("common:cancel")}
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </ModalOverlay>
-        </form>
-      </FormProvider>
-    </Modal>
+                  <Dialog.Footer>
+                    <SubmitButton leftIcon={<DownloadIcon />}>
+                      {t("observation:download.title")}
+                    </SubmitButton>
+                    <Button ml={3} onClick={onClose} variant={"subtle"}>
+                      {t("common:cancel")}
+                    </Button>
+                  </Dialog.Footer>
+                </form>
+              </FormProvider>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Dialog.Backdrop>
+      </Portal>
+    </Dialog.Root>
   );
 }

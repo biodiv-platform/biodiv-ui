@@ -1,4 +1,3 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Button, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
@@ -14,6 +13,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuArrowLeft } from "react-icons/lu";
 
 import ImageUploaderField from "../image-uploader-field";
 import { DATA_TYPE, DEFAULT_CUSTOMFIELD_VALUE, FIELD_TYPE } from "../static";
@@ -156,15 +156,11 @@ export default function AddCustomField({
   return (
     <FormProvider {...hForm}>
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-        <Button
-          mb={4}
-          type="button"
-          onClick={() => setIsCreate(false)}
-          leftIcon={<ArrowBackIcon />}
-        >
+        <Button mb={4} type="button" onClick={() => setIsCreate(false)}>
+          <LuArrowLeft />
           {t("group:custom_field.back")}
         </Button>
-        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ md: 4 }}>
+        <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
           <GridItem colSpan={3}>
             <SelectCreatableInputField
               onChangeCallback={handleCustomFieldName}
@@ -184,7 +180,7 @@ export default function AddCustomField({
             name="iconURL"
           />
         </SimpleGrid>
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacingX={4}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} gapX={4}>
           <TextBoxField
             name="units"
             disabled={customFieldExist}

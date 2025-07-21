@@ -1,4 +1,4 @@
-import { Box, Collapse } from "@chakra-ui/react";
+import { Box, Collapsible } from "@chakra-ui/react";
 import { DrawingManager, GoogleMap } from "@react-google-maps/api";
 import React from "react";
 
@@ -16,33 +16,35 @@ const LocationMap = ({ coordinates, setCoordinates, isOpen, onTextUpdate, zoom, 
   };
 
   return (
-    <Collapse in={isOpen}>
-      <Box borderRadius="md" overflow="hidden" mb={4}>
-        <GoogleMap
-          id="observation-create-map"
-          mapContainerStyle={mapContainerStyle}
-          zoom={zoom}
-          center={center}
-        >
-          <DrawingManager
-            options={
-              {
-                drawingControl: true,
-                drawingControlOptions: {
-                  drawingModes: ["marker"]
-                }
-              } as any
-            }
-            onMarkerComplete={onMarkerComplete}
-          />
-          <Marker
-            position={coordinates}
-            setCoordinates={setCoordinates}
-            onTextUpdate={onTextUpdate}
-          />
-        </GoogleMap>
-      </Box>
-    </Collapse>
+    <Collapsible.Root open={isOpen}>
+      <Collapsible.Content>
+        <Box borderRadius="md" overflow="hidden" mb={4}>
+          <GoogleMap
+            id="observation-create-map"
+            mapContainerStyle={mapContainerStyle}
+            zoom={zoom}
+            center={center}
+          >
+            <DrawingManager
+              options={
+                {
+                  drawingControl: true,
+                  drawingControlOptions: {
+                    drawingModes: ["marker"]
+                  }
+                } as any
+              }
+              onMarkerComplete={onMarkerComplete}
+            />
+            <Marker
+              position={coordinates}
+              setCoordinates={setCoordinates}
+              onTextUpdate={onTextUpdate}
+            />
+          </GoogleMap>
+        </Box>
+      </Collapsible.Content>
+    </Collapsible.Root>
   );
 };
 
