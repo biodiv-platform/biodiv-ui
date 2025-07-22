@@ -422,8 +422,8 @@ export default function CreateGroupPageComponent({
             const isActive = index === currentStep;
             const isCompleted = index < currentStep;
 
-            const bgColor = isActive ? "blue.600" : isCompleted ? "green.500" : "white";
-            const borderColor = isActive ? "blue.600" : isCompleted ? "green.500" : "gray.300";
+            const bgColor = isActive ? "blue.600" : isCompleted ? "green" : "white";
+            const borderColor = isActive ? "blue.600" : isCompleted ? "green" : "gray.300";
             const iconColor = isActive || isCompleted ? "white" : "gray.400";
 
             return (

@@ -141,7 +141,7 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
                   mb={2}
                   required={true}
                   htmlFor="name"
-                  label={t("traits:create_form.language")}
+                  label={t("common:create_form.language")}
                 >
                   <Select
                     id="langId"
@@ -175,7 +175,7 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
               >
                 {t("common:create_form.cancel")}
               </Button>
-              <Button colorScheme="blue" type="submit">
+              <Button colorPalette="blue" type="submit">
                 {t("common:create_form.create")}
               </Button>
             </DialogFooter>
@@ -183,23 +183,22 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         </DialogContent>
       </DialogRoot>
       <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
-        <Button colorScheme="green">{t("common:create_form.add_translation_button")}</Button>
+        <Button colorPalette="green">{t("common:create_form.add_translation_button")}</Button>
       </Flex>
       <Tabs.Root
         overflowX="auto"
         mb={4}
         bg="gray.100"
         rounded="md"
-        //index={Object.keys(hForm.getValues()).findIndex(
-        //(key) => key === translationSelected.toString()
-        //)}
-        //onChange={(index) => setTranslationSelected(Number(Object.keys(hForm.getValues())[index]))}
+        variant="plain"
+        value= {translationSelected.toString()}
+        onValueChange={({value})=> setTranslationSelected(Number(value))}
       >
         <Tabs.List>
           {Object.keys(hForm.getValues()).map((language) => (
             <Tabs.Trigger
               key={language}
-              value={language}
+              value={language.toString()}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >

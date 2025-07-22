@@ -159,7 +159,7 @@ export default function UserGroupEditForm({
                       mb={2}
                       required={true}
                       htmlFor="name"
-                      label={t("traits:create_form.language")}
+                      label={t("common:create_form.language")}
                     >
                       {
                         <Select
@@ -192,10 +192,11 @@ export default function UserGroupEditForm({
                       setLangId(0);
                       onClose();
                     }}
+                    variant="subtle"
                   >
                     {t("common:create_form.cancel")}
                   </Button>
-                  <Button colorScheme="blue" type="submit">
+                  <Button colorPalette="blue" type="submit" >
                     {t("common:create_form.create")}
                   </Button>
                 </DialogFooter>
@@ -210,16 +211,15 @@ export default function UserGroupEditForm({
             mb={4}
             bg="gray.100"
             rounded="md"
-            value={translationSelected.toString()}
+            value={`${translationSelected}`}
             variant={"plain"}
-            //index={translationSelected}
-            //onChange={(index) => setTranslationSelected(index)}
+            onValueChange={({value}) => setTranslationSelected(Number(value))}
           >
             <Tabs.List>
-              {hForm.getValues().translation.map((t) => (
+              {hForm.getValues().translation.map((t, index) => (
                 <Tabs.Trigger
                   key={t.language}
-                  value={t.language}
+                  value={`${index}`}
                   _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
                   m={1}
                 >
