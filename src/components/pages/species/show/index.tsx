@@ -50,9 +50,11 @@ import SpeciesGroups from "./group";
 import SpeciesHeader from "./header";
 import SpeciesNavigation from "./navigation";
 import SpeciesSidebar from "./sidebar";
+
 import SpeciesSynonymsContainer from "./synonyms";
 import { ReferenceListItem } from "./url-utils";
 import { SpeciesProvider } from "./use-species";
+import TaxonEditModal from "./taxon-edit-modal";
 
 export default function SpeciesShowPageComponent({
   species: initialSpecies,
@@ -63,6 +65,8 @@ export default function SpeciesShowPageComponent({
   const { languageId } = useGlobalState();
   const { open: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
   const { open: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure();
+  const { open: isTaxonEditOpen, onOpen: onTaxonEditOpen, onClose: onTaxonEditClose } = useDisclosure();
+  
   const [selectedReference, setSelectedReference] = useState<Reference | null>(null);
   const [species, setSpecies] = useState(initialSpecies);
 
@@ -167,7 +171,16 @@ export default function SpeciesShowPageComponent({
     .sort((a: Reference, b: Reference) => a.title.localeCompare(b.title));
 
   return (
-    <SpeciesProvider species={species} permissions={permissions} licensesList={licensesList}>
+    <SpeciesProvider 
+      species={species} 
+      permissions={permissions} 
+      licensesList={licensesList}
+      taxonEditActions={{
+        isOpen: isTaxonEditOpen,
+        onOpen: onTaxonEditOpen,
+        onClose: onTaxonEditClose
+      }}
+    >
       <div className="container mt">
         <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }} maxW="100%" w="full">
           <SpeciesHeader />
@@ -326,6 +339,18 @@ export default function SpeciesShowPageComponent({
         <SpeciesGroups />
         <SpeciesActivity />
       </div>
+      
+      {/* Taxon Edit Modal */}
+      <TaxonEditModal
+        isOpen={isTaxonEditOpen}
+        onClose={onTaxonEditClose}
+        //species={species}
+        // onTaxonUpdated={() => {
+        //   onTaxonEditClose();
+        //   // Refresh species data
+        //   setSpecies((prev) => ({ ...prev }));
+        // }}
+      />
     </SpeciesProvider>
   );
 }
