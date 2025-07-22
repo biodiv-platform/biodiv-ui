@@ -2,7 +2,7 @@ import { throwUnauthorized } from "@components/auth/auth-redirect";
 import AboutGroupComponent from "@components/pages/group/about";
 import SITE_CONFIG from "@configs/site-config";
 import { axGroupList } from "@services/app.service";
-import { axGetspeciesGroups } from "@services/observation.service";
+import { axGetspeciesGroups, axGetTraitsByGroupId } from "@services/observation.service";
 import { axGetTaxonDetails } from "@services/taxonomy.service";
 import {
   axGetGroupAdministratorsByGroupId,
@@ -25,7 +25,10 @@ export const getServerSideProps = async (ctx) => {
   const { data: speciesGroups } = await axGetspeciesGroups();
   const { data: habitats } = await axGetAllHabitat();
 
-  const { currentGroup } = await axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
+  const { currentGroup } = await axGroupList(
+    aReq.href,
+    getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+  );
 
   // This can throw error if user is not authorized
   const { success: s1, data: groupInfo } = await axGetUserGroupById(currentGroup.groupId);
@@ -40,13 +43,19 @@ export const getServerSideProps = async (ctx) => {
       const details = await axGetTaxonDetails(item.taxonomyId);
       return {
         ...item,
-        name: details.data.taxonomyDefinition.name
+        name: details.data.taxonomyDefinition.name,
+        status: details.data.taxonomyDefinition.status,
+        position: details.data.taxonomyDefinition.position
       };
     });
     groupRules.taxonomicRuleList = await Promise.all(taxonPromises);
   }
+  const { success: s5, data: traits } = await axGetTraitsByGroupId(
+    829,
+    getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+  );
 
-  if (s1 && s2 && s3 && s4 && currentGroup?.groupId) {
+  if (s1 && s2 && s3 && s4 && s5 && currentGroup?.groupId) {
     return {
       props: {
         habitats,
@@ -56,7 +65,8 @@ export const getServerSideProps = async (ctx) => {
         founders: data.founderList,
         moderators: data.moderatorList,
         groupRules,
-        customFieldList
+        customFieldList,
+        traits
       }
     };
   }

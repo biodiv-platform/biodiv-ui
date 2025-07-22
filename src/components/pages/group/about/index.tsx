@@ -1,8 +1,11 @@
-import { Badge, Box, Flex, Heading } from "@chakra-ui/react";
+import { Badge, Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+
+import { TAXON_BADGE_COLORS } from "@/static/constants";
+import { formatDateFromUTC } from "@/utils/date";
 
 import UserAvatarList from "../common/user-image-list";
 import FilterIconsList from "./filter-icon-list";
@@ -27,6 +30,7 @@ interface GroupEditPageProps {
   founders;
   moderators;
   groupRules;
+  traits;
 }
 
 export default function AboutGroupComponent({
@@ -36,7 +40,8 @@ export default function AboutGroupComponent({
   founders,
   moderators,
   customFieldList,
-  groupRules
+  groupRules,
+  traits
 }: GroupEditPageProps) {
   const { t } = useTranslation();
   const {
@@ -118,12 +123,82 @@ export default function AboutGroupComponent({
         {groupRules.hasTaxonomicRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>
-              {"Taxonomic Rule"}
+              Taxonomic Rule
             </Heading>
-            {groupRules.taxonomicRuleList.map((item, idx) => {
-              return (
-                <Box key={idx} fontSize={"sm"} color={"gray.600"} mb={2}>
+            <Box fontSize="sm">
+              {groupRules.taxonomicRuleList.map((item, idx) => (
+                <Box
+                  key={idx}
+                  display="inline-block"
+                  px={2}
+                  py={1}
+                  mr={2}
+                  mb={2}
+                  border="1px solid"
+                  borderColor="gray.300"
+                  borderRadius="md"
+                >
                   {item.name}
+                  <Stack direction={"row"} mt={1} gap={2}>
+                    {item.status && (
+                      <Badge colorPalette={TAXON_BADGE_COLORS[item.status]}>{item.status}</Badge>
+                    )}
+                    {item.position && (
+                      <Badge colorPalette={TAXON_BADGE_COLORS[item.position]}>
+                        {item.position}
+                      </Badge>
+                    )}
+                  </Stack>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        )}
+        {groupRules.hasObservedOnDateRule && (
+          <Box>
+            <Heading size="md" as="h2" mb={2}>
+              Observed On Date Rule
+            </Heading>
+            {groupRules.observedOnDateRule.map((item) => (
+              <Box fontSize={"sm"} color={"gray.600"} mb={2}>
+                {`${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`}
+              </Box>
+            ))}
+          </Box>
+        )}
+        {groupRules.hasCreatedOnDateRule && (
+          <Box>
+            <Heading size="md" as="h2" mb={2}>
+              Created On Date Rule
+            </Heading>
+            {groupRules.createdOnDateRuleList.map((item) => (
+              <Box fontSize={"sm"} color={"gray.600"} mb={2}>
+                {`${formatDateFromUTC(item.fromDate)} to ${formatDateFromUTC(item.toDate)}`}
+              </Box>
+            ))}
+          </Box>
+        )}
+        {/*traitRuleList?.forEach((item) => {
+    const trait = traits.filter((trait) => trait.traits.traitId === item.traitId)[0];
+    groupRules.push({
+      id: item.id,
+      name: "traitRule",
+      value: `${trait.traits.name} : ${
+        trait.values.filter((v) => v.traitValueId === item.value)[0].value
+      }`
+    });
+  });*/}
+        {groupRules.hasTraitRule && (
+          <Box>
+            <Heading size="md" as="h2" mb={2}>
+              Trait Rule
+            </Heading>
+            {groupRules.traitRuleList.map((item) => {
+              const trait = traits.filter((trait) => trait.traits.traitId === item.traitId)[0];
+              return (
+                <Box fontSize={"sm"} color={"gray.600"} mb={2}>
+                  {trait.traits.name}:
+                  {trait.values.filter((v) => v.traitValueId === item.value)[0].value}
                 </Box>
               );
             })}
