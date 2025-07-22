@@ -6,7 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-// import IconRadioField from "./icon-radio-field";
+import IconRadioField from "./icon-radio-field";
 
 export default function ExsistingResourceForm({ defaultValues, setDefaultValues, translation }) {
   const form = useFormContext();
@@ -78,23 +78,21 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
               }
             }}
           />
-          {/*
-            <IconRadioField
-              name={`${translation}.0.fileName`}
-              label={t("group:homepage_customization.resources.imageurl")}
-              options={form.getValues()[translation][0]?.options}
-              onChangeCallback={(value) => {
-                const values = form.getValues();
+          <IconRadioField
+            name={`${translation}.0.fileName`}
+            label={t("group:homepage_customization.resources.imageurl")}
+            options={form.getValues()[translation][0]?.options}
+            onChangeCallback={(value) => {
+              const values = form.getValues();
 
-                for (const langId in values) {
-                  const entry = values[langId]?.[0];
-                  if (entry) {
-                    form.setValue(`${langId}.0.fileName`, value);
-                  }
+              for (const langId in values) {
+                const entry = values[langId]?.[0];
+                if (entry) {
+                  form.setValue(`${langId}.0.fileName`, value);
                 }
-              }}
-            />
-          */}
+              }
+            }}
+          />
         </>
       )}
     </>

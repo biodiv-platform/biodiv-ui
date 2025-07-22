@@ -214,6 +214,7 @@ export default function GallerySetupFrom({
           mb={4}
           bg="gray.100"
           rounded="md"
+          variant="plain"
           value = {translationSelected.toString()}
           onValueChange={({value})=>setTranslationSelected(Number(value))}
         >
