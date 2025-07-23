@@ -26,9 +26,9 @@ export const axGetUserGroupById = async (userGroupId) => {
   }
 };
 
-export const axGroupListExpanded = async () => {
+export const axGroupListExpanded = async (langId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/list`);
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/list/${langId}`);
     return { success: true, data: transformUserGroupList(data) };
   } catch (e) {
     console.error(e);
@@ -371,9 +371,9 @@ export const axRemoveUserGroupRule = async (userGroupId, payload) => {
   }
 };
 
-export const axGetGroupHompageDetails = async (userGroupId) => {
+export const axGetGroupHompageDetails = async (userGroupId, langId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/homePage/${userGroupId}`);
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/homePage/${userGroupId}/${langId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -397,7 +397,7 @@ export const axUpdateGroupHomePageDetails = async (userGroupId, payload) => {
 export const axRemoveGroupHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
     await http.put(
-      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${galleryList[index]?.id}`
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${Number(galleryList[index][0].split("|")[0])}`
     );
     const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
     if (payload.length > 1) {

@@ -19,7 +19,7 @@ export const formatGroupRules = (rules, traits) => {
 
   //populate taxon rules array
   taxonomicRuleList?.forEach((item) => {
-    groupRules.push({ id: item.id, name: "taxonomicRule", value: item.taxonomyId });
+    groupRules.push({ id: item.id, name: "taxonomicRule", value: item.name });
   });
   //observed on date
   observedOnDateRule?.forEach((item) => {

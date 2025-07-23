@@ -21,6 +21,13 @@
   "clear": "Mazava",
   "close": "AKAIKY",
   "copy": "Adikao amin'ny Clipboard",
+  "create_form": {
+    "add_translation_button": "Manampy fandikana",
+    "cancel": "hanafoana",
+    "create": "MANANGANA",
+    "language": "Fiteny",
+    "language_placeholder": "Safidio ny fiteny"
+  },
   "datatable": "Ditable",
   "delete": "Mamafa",
   "edit": "Ovay",

@@ -21,6 +21,13 @@
   "clear": "ਸਾਫ",
   "close": "ਨੇੜੇ",
   "copy": "ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ",
+  "create_form": {
+    "add_translation_button": "ਅਨੁਵਾਦ ਸ਼ਾਮਲ ਕਰੋ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "create": "ਬਣਾਓ",
+    "language": "ਭਾਸ਼ਾ",
+    "language_placeholder": "ਭਾਸ਼ਾ ਚੁਣੋ"
+  },
   "datatable": "ਡੇਟਾਟੇਬਲ",
   "delete": "ਮਿਟਾਓ",
   "edit": "ਸੋਧ",

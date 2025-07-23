@@ -21,6 +21,13 @@
   "clear": "Clear",
   "close": "Close",
   "copy": "Copy to Clipboard",
+  "create_form": {
+    "add_translation_button": "Add Translation",
+    "cancel": "Cancel",
+    "create": "Create",
+    "language": "Language",
+    "language_placeholder": "Select Language"
+  },
   "datatable": "Datatable",
   "delete": "Delete",
   "edit": "Edit",

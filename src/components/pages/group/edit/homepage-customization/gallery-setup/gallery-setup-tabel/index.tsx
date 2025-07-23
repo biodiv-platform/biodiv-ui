@@ -1,4 +1,5 @@
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup } from "@chakra-ui/react";
+import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import {
@@ -22,6 +23,7 @@ const GallerySetupTable = ({
 }) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
 
   useEffect(() => {
     setGalleryList(galleryList.sort((a, b) => a.displayOrder - b.displayOrder));
@@ -34,12 +36,14 @@ const GallerySetupTable = ({
 
   const handleReorderAlter = () => {
     setCanReorder(false);
-    notification(t("group:homepage_customization.gallery_setup.alert"));
+    if (userGroupId != null) {
+      notification(t("group:homepage_customization.gallery_setup.alert"));
+    }
   };
 
   const handleReorderCustomField = async () => {
-    const payload = galleryList.map(({ id }, index) => ({
-      galleryId: id,
+    const payload = galleryList.map((id, index) => ({
+      galleryId: Number(id[0].split("|")[0]),
       displayOrder: index
     }));
 
@@ -53,13 +57,13 @@ const GallerySetupTable = ({
   };
 
   const removeGalleryItem = async (index) => {
-    if (galleryList[index]?.id) {
+    if (galleryList[index][0].split("|")[0]!="null") {
       const { success } = await axRemoveGroupHomePageGalleryImage(userGroupId, galleryList, index);
       if (!success) {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
     }
-    setGalleryList(galleryList.filter((item, idx) => idx !== index));
+    setGalleryList(galleryList.filter((_, idx) => idx !== index));
     notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
   };
 
@@ -70,6 +74,7 @@ const GallerySetupTable = ({
 
   return (
     <>
+    <Box w="full" overflowX="auto" className="fade">
       <table style={{ minWidth: "750px" }} className="table table-bordered">
         <thead>
           <tr>
@@ -86,6 +91,7 @@ const GallerySetupTable = ({
           helperClass="sorting-row"
           galleryList={galleryList}
           onSortEnd={onSortEnd}
+          languageId = {languageId}
         />
       </table>
       <ButtonGroup gap={4} mt={4}>
@@ -98,7 +104,7 @@ const GallerySetupTable = ({
           float="right"
           hidden={!showReorder}
           onClick={
-            galleryList.some((e) => e.id === undefined)
+            galleryList.some((e)=>e[0].split("|")[0]=="null")
               ? handleReorderAlter
               : handleReorderCustomField
           }
@@ -107,6 +113,7 @@ const GallerySetupTable = ({
           <CheckIcon />
         </Button>
       </ButtonGroup>
+      </Box>
     </>
   );
 };

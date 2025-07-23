@@ -13,6 +13,7 @@
     "updated": "Group Users Updated Successfully",
     "view_members": "View All Members"
   },
+  "basic_details": "Basic Details",
   "confirm_closed_group": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
   "confirm_leave": "Leave Group?",
   "create": {
@@ -74,6 +75,7 @@
     "success": "Group Updated Successfully",
     "title": "Edit Group"
   },
+  "group_coverage": "Group Coverage",
   "homepage_customization": {
     "about_us": "About Us",
     "add_options": "Add Options",
@@ -184,7 +186,8 @@
     "filter_species_fields": "Filter By Species Fields",
     "select_all": "Select All",
     "species_fields": "Select species fields to display",
-    "submit_selections": "Submit Selections"
+    "submit_selections": "Submit Selections",
+    "title": "Species Fields"
   },
   "tags": "Tags",
   "trait": {

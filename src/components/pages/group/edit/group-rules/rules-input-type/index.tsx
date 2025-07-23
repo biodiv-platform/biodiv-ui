@@ -43,7 +43,7 @@ export default function RulesInputType({ inputType, name, traits }) {
                   .filter((trait) => trait.traits.dataType === "STRING")
                   .map((trait, index) => ({
                     label: trait.traits.name,
-                    value: trait.traits.traitId + "|" + index
+                    value: trait.traits.traitId + "|" + index + "|" + trait.traits.name
                   }))}
                 shouldPortal={true}
                 onChangeCallback={(v) => setOptions(traits[parseInt(v.split("|")[1], 10)].values)}
@@ -56,7 +56,7 @@ export default function RulesInputType({ inputType, name, traits }) {
                 isRequired={true}
                 options={options.map((option) => ({
                   label: option.value,
-                  value: option.traitValueId
+                  value: option.traitValueId + "|" + option.value
                 }))}
                 mb={0}
                 shouldPortal={true}

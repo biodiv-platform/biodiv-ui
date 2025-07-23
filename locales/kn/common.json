@@ -21,6 +21,13 @@
   "clear": "ತೆರವುಗೊಳಿಸಿ",
   "close": "ಮುಚ್ಚಿ",
   "copy": "ಕ್ಲಿಪ್‍‍‍‍‍‍‍‍‍‍ಬೋರ್ಡಿಗೆ ನಕಲಿಸಿ ",
+  "create_form": {
+    "add_translation_button": "ಅನುವಾದವನ್ನು ಸೇರಿಸಿ",
+    "cancel": "ರದ್ದುಮಾಡು",
+    "create": "ರಚಿಸು",
+    "language": "ಭಾಷೆ",
+    "language_placeholder": "ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ"
+  },
   "datatable": "ಡೇಟಾ ಟೇಬಲ್",
   "delete": "ಅಳಿಸಿ",
   "edit": "ತಿದ್ದಿರಿ",

@@ -37,12 +37,14 @@ const CustomFieldRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) 
           {t("common:delete")}
         </Button>
       </td>
-      <td>
-        <Button onClick={onEdit} variant="plain" colorPalette="blue" ml={2}>
+      {itemDetails.customFields.authorId && (
+        <td>
+          <Button onClick={onEdit} variant="plain" colorPalette="blue" ml={2}>
           <EditIcon />
-          {t("common:edit")}
-        </Button>
-      </td>
+            {t("common:edit")}
+          </Button>
+        </td>
+      )}
     </tr>
   );
 });

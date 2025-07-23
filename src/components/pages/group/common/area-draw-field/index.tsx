@@ -38,8 +38,35 @@ export default function AreaDrawField({
   const { field, fieldState } = useController({ name });
   const [coordinates, setCoordinates] = useState({});
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
+  const isEmptyObject =
+    typeof field.value === "object" &&
+    field.value !== null &&
+    Object.keys(field.value).length === 0;
 
-  const defaultFeatures = useMemo(() => stringToFeature(field.value), []);
+  const defaultFeatures = useMemo(
+    () =>
+      typeof field.value === "string" || isEmptyObject
+        ? stringToFeature(field.value)
+        : field.value
+        ? [
+            {
+              type: "Feature",
+              properties: {},
+              geometry: {
+                type: "Polygon",
+                coordinates: [
+                  field.value?.ne,
+                  [field.value?.ne?.[0], field.value?.se?.[1]],
+                  field.value?.se,
+                  [field.value?.se?.[0], field.value?.ne?.[1]],
+                  field.value?.ne
+                ]
+              }
+            }
+          ]
+        : [],
+    [field.value]
+  );
 
   const handleOnFeatureChange = (features) => {
     if (!features.length) {
@@ -47,10 +74,14 @@ export default function AreaDrawField({
       return;
     }
 
-    const [minlng, minlat, maxlng, maxlat] = bbox({ type: "FeatureCollection", features });
+    const [minlng, minlat, maxlng, maxlat] = bbox({
+      type: "FeatureCollection",
+      features
+    });
+
     setCoordinates({
-      ne: [maxlat, minlng],
-      se: [minlat, maxlng]
+      ne: [maxlng, minlat],
+      se: [minlng, maxlat]
     });
   };
 

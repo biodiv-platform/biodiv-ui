@@ -21,6 +21,13 @@
   "clear": "સાફ કરો",
   "close": "બંધ",
   "copy": "ક્લિપબોર્ડ પર કૉપિ કરો",
+  "create_form": {
+    "add_translation_button": "અનુવાદ ઉમેરો",
+    "cancel": "રદ કરવું",
+    "create": "બનાવવી",
+    "language": "ભાષા",
+    "language_placeholder": "ભાષા પસંદ કરો"
+  },
   "datatable": "ડેટાટેબલ",
   "delete": "કાઢી નાખો",
   "edit": "ફેરફાર કરો",

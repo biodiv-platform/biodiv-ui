@@ -1,6 +1,5 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid, Tabs, useDisclosure } from "@chakra-ui/react";
 import { useLocalRouter } from "@components/@core/local-link";
-import { CheckboxField } from "@components/form/checkbox";
 import { RichTextareaField } from "@components/form/rich-textarea";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -10,9 +9,20 @@ import { UserGroupEditData } from "@interfaces/userGroup";
 import { axUserGroupUpdate } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import Select from "react-select";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
+import { Field } from "@/components/ui/field";
 
 import AreaDrawField from "../common/area-draw-field";
 import IconCheckboxField from "../common/icon-checkbox-field";
@@ -24,13 +34,17 @@ interface IuserGroupEditProps {
   userGroupId;
   habitats;
   speciesGroups;
+  currentStep;
+  languages;
 }
 
 export default function UserGroupEditForm({
   groupInfo,
   userGroupId,
   habitats,
-  speciesGroups
+  speciesGroups,
+  currentStep = -1,
+  languages
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -41,8 +55,7 @@ export default function UserGroupEditForm({
     neLongitude,
     swLatitude,
     swLongitude,
-    name,
-    description,
+    translation,
     icon,
     habitatId,
     speciesGroupId,
@@ -53,7 +66,17 @@ export default function UserGroupEditForm({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
-        name: Yup.string().required(),
+        translation: Yup.array()
+          .of(
+            Yup.object({
+              name: Yup.string()
+                .required()
+                .matches(/^[^/]*$/, "Name cannot contain '/'"),
+              language: Yup.number().integer().required(),
+              description: Yup.string()
+            })
+          )
+          .required(),
         speciesGroupId: Yup.array().required(),
         habitatId: Yup.array().required(),
         spacialCoverage: Yup.object().shape({
@@ -63,13 +86,15 @@ export default function UserGroupEditForm({
       })
     ),
     defaultValues: {
-      name,
-      description,
+      translation,
       icon,
       habitatId,
       speciesGroupId,
       allowUserToJoin,
-      spacialCoverage: `${neLongitude},${neLatitude},${neLongitude},${swLatitude},${swLongitude},${swLatitude},${swLongitude},${neLatitude},${neLongitude},${neLatitude}`
+      spacialCoverage: {
+        ne: [neLongitude, neLatitude],
+        se: [swLongitude, swLatitude]
+      }
     }
   });
 
@@ -95,38 +120,162 @@ export default function UserGroupEditForm({
     }
   };
 
+  const languageMap = Object.fromEntries(translation.map((item, index) => [item.language, index]));
+
+  const [translationSelected, setTranslationSelected] = useState<number>(
+    languageId in languageMap ? languageMap[languageId] : 0
+  );
+  const [langId, setLangId] = useState(0);
+  const { open, onClose, onOpen } = useDisclosure();
+
+  const handleAddTranslation = () => {
+    const currentList = hForm.getValues("translation");
+
+    const newEntry = { name: "", language: langId, description: "" };
+    hForm.setValue("translation", [...currentList, newEntry]);
+    languageMap[langId] = currentList.length;
+    setTranslationSelected(currentList.length);
+  };
+
   return (
     <FormProvider {...hForm}>
+      {(currentStep == -1 || currentStep == 0) && (
+        <>
+          <DialogRoot open={open} onOpenChange={onClose}>
+            <DialogBackdrop />
+            <DialogContent>
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  handleAddTranslation();
+                  setLangId(0);
+                  onClose();
+                }}
+              >
+                <DialogHeader> {t("common:create_form.add_translation_button")}</DialogHeader>
+                <DialogBody>
+                  <Box>
+                    <Field
+                      mb={2}
+                      required={true}
+                      htmlFor="name"
+                      label={t("common:create_form.language")}
+                    >
+                      {
+                        <Select
+                          id="langId"
+                          inputId="langId"
+                          name="langId"
+                          placeholder={t("common:create_form.language_placeholder")}
+                          onChange={(o: { value: number; label: string }) => {
+                            setLangId(o.value);
+                          }}
+                          components={{
+                            IndicatorSeparator: () => null
+                          }}
+                          options={languages
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((lang) => ({
+                              value: lang.id,
+                              label: lang.name
+                            }))}
+                          isSearchable={true} // Enables search
+                        />
+                      }
+                    </Field>
+                  </Box>
+                </DialogBody>
+                <DialogFooter>
+                  <Button
+                    mr={3}
+                    onClick={() => {
+                      setLangId(0);
+                      onClose();
+                    }}
+                    variant="subtle"
+                  >
+                    {t("common:create_form.cancel")}
+                  </Button>
+                  <Button colorPalette="blue" type="submit" >
+                    {t("common:create_form.create")}
+                  </Button>
+                </DialogFooter>
+              </form>
+            </DialogContent>
+          </DialogRoot>
+          <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
+            <Button colorPalette="green">{t("common:create_form.add_translation_button")}</Button>
+          </Flex>
+          <Tabs.Root
+            overflowX="auto"
+            mb={4}
+            bg="gray.100"
+            rounded="md"
+            value={`${translationSelected}`}
+            variant={"plain"}
+            onValueChange={({value}) => setTranslationSelected(Number(value))}
+          >
+            <Tabs.List>
+              {hForm.getValues().translation.map((t, index) => (
+                <Tabs.Trigger
+                  key={t.language}
+                  value={`${index}`}
+                  _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
+                  m={1}
+                >
+                  {languages.filter((lang) => lang.id === Number(t.language))[0].name}
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+          </Tabs.Root>
+        </>
+      )}
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
-        <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
-          <Box gridColumn="1/4">
-            <TextBoxField name="name" isRequired={true} label={t("group:name")} />
-            <RichTextareaField name="description" label={t("form:description.title")} />
-          </Box>
-          <ImageUploaderField label="Logo" name="icon" />
-        </SimpleGrid>
-        <IconCheckboxField
-          name="speciesGroupId"
-          label={t("common:species_coverage")}
-          options={speciesGroups}
-          type="species"
-          isRequired={true}
-        />
-        <IconCheckboxField
-          name="habitatId"
-          label={t("common:habitats_covered")}
-          options={habitats}
-          type="habitat"
-          isRequired={true}
-        />
-        <CheckboxField name="allowUserToJoin" label={t("group:join_without_invitation")} />
-        <AreaDrawField
-          label={t("group:spatial_coverge")}
-          name="spacialCoverage"
-          isRequired={true}
-        />
+        {(currentStep == -1 || currentStep == 0) && (
+          <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
+            <Box gridColumn="1/4">
+              <TextBoxField
+                key={`name-${translationSelected}`}
+                name={`translation.${translationSelected}.name`}
+                isRequired={true}
+                label={t("group:name")}
+              />
+              <RichTextareaField
+                key={`description-${translationSelected}`}
+                name={`translation.${translationSelected}.description`}
+                label={t("form:description.title")}
+              />
+            </Box>
+            <ImageUploaderField label="Logo" name="icon" />
+          </SimpleGrid>
+        )}
+        {(currentStep == -1 || currentStep == 1) && (
+          <>
+            <IconCheckboxField
+              name="speciesGroupId"
+              label={t("common:species_coverage")}
+              options={speciesGroups}
+              type="species"
+              isRequired={true}
+            />
+            <IconCheckboxField
+              name="habitatId"
+              label={t("common:habitats_covered")}
+              options={habitats}
+              type="habitat"
+              isRequired={true}
+            />
+            <AreaDrawField
+              label={t("group:spatial_coverge")}
+              name="spacialCoverage"
+              isRequired={true}
+            />
+          </>
+        )}
 
-        <SubmitButton mb={8}>{t("group:update")}</SubmitButton>
+        {(currentStep == 0 || currentStep == 1) && (
+          <SubmitButton mb={8}>{t("group:update")}</SubmitButton>
+        )}
       </form>
     </FormProvider>
   );
