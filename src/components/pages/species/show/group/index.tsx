@@ -27,7 +27,7 @@ export default function SpeciesGroups() {
       <Box p={4}>
         <GroupPost
           groups={userGroups}
-          selectedDefault={species.userGroups}
+          selectedDefault={species.userGroups?.filter((g) => g?.id != null)}
           resourceId={species.species.id}
           saveUserGroupsFunc={axSaveUserGroups}
           columns={[1, 1, 4, 5]}

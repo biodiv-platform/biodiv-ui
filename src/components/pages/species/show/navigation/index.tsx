@@ -1,12 +1,10 @@
-import { Box, IconButton, useToken } from "@chakra-ui/react";
+import { Box, IconButton, Menu, Portal, useToken } from "@chakra-ui/react";
 import { getSpeciesFieldHeaders } from "@utils/species";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { LuMenu } from "react-icons/lu";
 import urlSlug from "url-slug";
-
-import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
 
 import useSpecies from "../use-species";
 
@@ -18,28 +16,32 @@ export default function SpeciesNavigation() {
 
   return (
     <Box position="sticky" top="0" h={0} zIndex={zIndicesSticky}>
-      <MenuRoot>
-        <MenuTrigger m={1} aria-label="Options">
+      <Menu.Root>
+        <Menu.Trigger m={1} aria-label="Options" asChild>
           <IconButton variant={"subtle"}>
             <LuMenu />
           </IconButton>
-        </MenuTrigger>
-        <MenuContent>
-          <MenuItem value="#synonyms">
-            <Link href="#synonyms">{t("species:synonyms")}</Link>
-          </MenuItem>
+        </Menu.Trigger>
+        <Portal>
+          <Menu.Positioner>
+            <Menu.Content>
+              <Menu.Item value="#synonyms" asChild>
+                <Link href="#synonyms">{t("species:synonyms")}</Link>
+              </Menu.Item>
 
-          <MenuItem value="#common-names">
-            <Link href="#common-names">{t("species:common_names")}</Link>
-          </MenuItem>
+              <Menu.Item value="#common-names" asChild>
+                <Link href="#common-names">{t("species:common_names")}</Link>
+              </Menu.Item>
 
-          {fieldHeaders.map(({ header }) => (
-            <MenuItem value={`#${urlSlug(header)}`} key={header}>
-              <Link href={`#${urlSlug(header)}`}>{header}</Link>
-            </MenuItem>
-          ))}
-        </MenuContent>
-      </MenuRoot>
+              {fieldHeaders.map(({ header }) => (
+                <Menu.Item value={`#${urlSlug(header)}`} asChild>
+                  <Link href={`#${urlSlug(header)}`}>{header}</Link>
+                </Menu.Item>
+              ))}
+            </Menu.Content>
+          </Menu.Positioner>
+        </Portal>
+      </Menu.Root>
     </Box>
   );
 }

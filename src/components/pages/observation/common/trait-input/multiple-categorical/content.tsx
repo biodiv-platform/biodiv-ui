@@ -10,19 +10,21 @@ export default function TraitContent(props) {
       <input {...getHiddenInputProps()} required={false} />
       <Flex
         {...getControlProps()}
-        alignItems="center"
-        p={2}
         cursor="pointer"
-        borderWidth="2px"
+        _focus={{
+          boxShadow: "outline"
+        }}
+        alignItems="center"
+        border="2px"
+        borderColor="gray.200"
         borderRadius="md"
-        bg="white"
-        w="200px"
+        borderStyle="solid"
+        lineHeight={1}
+        p={2}
+        h="3.25rem"
         _checked={{
           borderColor: "blue.500",
           bg: "blue.50"
-        }}
-        _focus={{
-          boxShadow: "outline"
         }}
       >
         {props.icon && (
