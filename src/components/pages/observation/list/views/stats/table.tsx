@@ -64,16 +64,17 @@ export default function LifeListTable({
                 <Table.Cell>
                   <i>{specieName}</i>
                 </Table.Cell>
-                {/* isNumeric={true} */}
                 <Table.Cell>
                   {specieCount && (
-                    <LocalLink
-                      href="/observation/list"
-                      params={{ ...filter, view: "list", recoName: specieName }}
-                      prefixGroup={true}
-                    >
-                      <ExternalBlueLink>{specieCount}</ExternalBlueLink>
-                    </LocalLink>
+                    <ExternalBlueLink asChild>
+                      <LocalLink
+                        href="/observation/list"
+                        params={{ ...filter, view: "list", recoName: specieName }}
+                        prefixGroup={true}
+                      >
+                        {specieCount}
+                      </LocalLink>
+                    </ExternalBlueLink>
                   )}
                 </Table.Cell>
               </Table.Row>

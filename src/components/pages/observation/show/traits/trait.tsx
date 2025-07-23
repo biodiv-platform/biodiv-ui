@@ -30,6 +30,7 @@ import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { LuCalendar } from "react-icons/lu";
 
+import NoSSR from "@/components/@core/no-ssr";
 import { Field } from "@/components/ui/field";
 
 import TraitInput from "../../common/trait-input";
@@ -102,17 +103,20 @@ export default function Trait({
   return (
     <Field mb={4} key={speciesTrait.traits?.id}>
       <Flex mb={1} alignItems="center">
-        <LocalLink href={`/traits/show/${speciesTrait.traits?.traitId}`} prefixGroup={true}>
-          <BlueLink mr={2}>
+        <BlueLink mr={2} asChild>
+          <LocalLink href={`/traits/show/${speciesTrait.traits?.traitId}`} prefixGroup={true}>
             {speciesTrait.traits?.name}{" "}
             {speciesTrait.traits?.units && `(${speciesTrait.traits.units})`}
-          </BlueLink>
-        </LocalLink>
-        {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
-          <IconButton aria-label="Edit" variant="plain" colorPalette="blue" onClick={onToggle}>
-            <EditIcon />
-          </IconButton>
-        )}
+          </LocalLink>
+        </BlueLink>
+
+        <NoSSR>
+          {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
+            <IconButton aria-label="Edit" variant="plain" colorPalette="blue" onClick={onToggle}>
+              <EditIcon />
+            </IconButton>
+          )}
+        </NoSSR>
       </Flex>
 
       {open ? (

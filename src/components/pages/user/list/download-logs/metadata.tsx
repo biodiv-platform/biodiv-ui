@@ -27,9 +27,9 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
           Header: "Source",
           accessor: "sourceType",
           Cell: ({ row }) => (
-            <a href={`${data[row.index].filterUrl}`}>
-              <BlueLink> {row.values.sourceType || unknown} </BlueLink>
-            </a>
+            <BlueLink href={`${data[row.index].filterUrl}`}>
+              {row.values.sourceType || unknown}
+            </BlueLink>
           )
         };
 

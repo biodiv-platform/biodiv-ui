@@ -46,13 +46,15 @@ export default function ScientificNamesTable({
               <Table.Row>
                 <Table.Cell>
                   {taxonConceptId != null ? (
-                    <LocalLink
-                      href={`/taxonomy/list`}
-                      params={{ showTaxon: taxonConceptId, taxonId: taxonConceptId }}
-                      prefixGroup={true}
-                    >
-                      <ExternalBlueLink>{canonicalForm}</ExternalBlueLink>
-                    </LocalLink>
+                    <ExternalBlueLink asChild>
+                      <LocalLink
+                        href={`/taxonomy/list`}
+                        params={{ showTaxon: taxonConceptId, taxonId: taxonConceptId }}
+                        prefixGroup={true}
+                      >
+                        {canonicalForm}
+                      </LocalLink>
+                    </ExternalBlueLink>
                   ) : (
                     canonicalForm
                   )}

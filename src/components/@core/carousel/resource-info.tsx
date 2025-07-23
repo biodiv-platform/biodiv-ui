@@ -46,7 +46,7 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
   return (
     <Box position="absolute" top={4} right={0} left={4} display="flex">
       <PopoverRoot positioning={{ placement: "bottom-start" }} lazyMount>
-        <PopoverTrigger>
+        <PopoverTrigger asChild>
           <IconButton
             aria-label={t("observation:resource_info")}
             zIndex={4}
@@ -78,9 +78,11 @@ function CarouselResourceInfo({ currentResource, observationId }: CarouselResour
               )}
               <Box>{t("common:uploader")}</Box>
               <Box>
-                <LocalLink href={`/user/show/${currentResource?.userIbp?.id}`} prefixGroup={true}>
-                  <ExternalBlueLink>{currentResource?.userIbp?.name}</ExternalBlueLink>
-                </LocalLink>
+                <ExternalBlueLink asChild>
+                  <LocalLink href={`/user/show/${currentResource?.userIbp?.id}`} prefixGroup={true}>
+                    {currentResource?.userIbp?.name}
+                  </LocalLink>
+                </ExternalBlueLink>
               </Box>
 
               <Box>{t("observation:license")}</Box>

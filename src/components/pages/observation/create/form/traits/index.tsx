@@ -70,11 +70,11 @@ const TraitsPicker = ({ name }: ITraitsPickerProps) => {
           {traitsPairs.map(({ traits, values }) => (
             <Field mb={4} key={traits.id}>
               <Field mb={1}>
-                <LocalLink href={`/traits/show/${traits?.traitId}`} prefixGroup={true}>
-                  <BlueLink mr={2}>
+                <BlueLink mr={2} asChild>
+                  <LocalLink href={`/traits/show/${traits?.traitId}`} prefixGroup={true}>
                     {traits?.name} {traits?.units && `(${traits.units})`}
-                  </BlueLink>
-                </LocalLink>
+                  </LocalLink>
+                </BlueLink>
               </Field>
               {traits.dataType == "STRING" && traits.traitTypes != "RANGE" && (
                 <TraitInput

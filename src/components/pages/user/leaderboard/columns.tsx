@@ -1,6 +1,5 @@
 import { Stack } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
-import LocalLink from "@components/@core/local-link";
 import { getUserImage } from "@utils/media";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
@@ -107,9 +106,9 @@ export const LEADERBOARD_TABLE_COLUMNS = [
             src={getUserImage(props?.cell?.value?.profilePic, props?.cell?.value?.authorName)}
           />
           <div>
-            <LocalLink href={`/user/show/${props?.cell?.value?.author_id}`}>
-              <BlueLink>{props?.cell?.value?.authorName}</BlueLink>
-            </LocalLink>
+            <BlueLink href={`/user/show/${props?.cell?.value?.author_id}`}>
+              {props?.cell?.value?.authorName}
+            </BlueLink>
             <br />
             <span>{[t("leaderboard:activity_score"), props?.cell?.value?.activity_score]}</span>
           </div>

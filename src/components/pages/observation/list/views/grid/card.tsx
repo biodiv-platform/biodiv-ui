@@ -52,8 +52,8 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
         </LocalLink>
         <ShadowedUser user={o?.user} />
       </Box>
-      <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
-        <Link textDecoration="none!important">
+      <Link textDecoration="none!important" asChild>
+        <LocalLink href={`/observation/show/${o.observationId}`} prefixGroup={true}>
           <Box h="4.6rem" p={4}>
             <Heading size="sm" className="elipsis" title={o.recoIbp?.commonName}>
               <ScientificName value={o.recoIbp?.scientificName || t("common:unknown")} />{" "}
@@ -66,8 +66,8 @@ export default function GridViewCard({ o, getCheckboxProps, canEdit }: Observati
               {o.recoIbp?.commonName}
             </Text>
           </Box>
-        </Link>
-      </LocalLink>
+        </LocalLink>
+      </Link>
     </Box>
   );
 }

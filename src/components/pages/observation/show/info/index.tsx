@@ -1,6 +1,5 @@
 import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
-import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
 import Tooltip from "@components/@core/tooltip";
 import CheckIcon from "@icons/check";
@@ -33,11 +32,9 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
         <ResponsiveInfo title="form:name">
           <ScientificName value={o.recoIbp?.scientificName || t("common:unknown")} />
           {o.recoIbp?.speciesId && (
-            <LocalLink href={`/species/show/${o.recoIbp.speciesId}`}>
-              <BlueLink ml={2}>
-                <LuInfo /> {t("observation:species_page")}
-              </BlueLink>
-            </LocalLink>
+            <BlueLink ml={2} href={`/species/show/${o.recoIbp.speciesId}`}>
+              <LuInfo /> {t("observation:species_page")}
+            </BlueLink>
           )}
           {o.recoIbp?.commonName && <div>{o.recoIbp.commonName}</div>}
         </ResponsiveInfo>
@@ -91,11 +88,9 @@ export default function Info({ observation: o, speciesGroups }: IInfoProps) {
 
         {o.dataTable?.id && (
           <ResponsiveInfo title="common:datatable">
-            <LocalLink href={`/datatable/show/${o.dataTable?.id}`}>
-              <BlueLink>
-                <i> {o.dataTable?.title || t("common:unknown")}</i>
-              </BlueLink>
-            </LocalLink>
+            <BlueLink href={`/datatable/show/${o.dataTable?.id}`}>
+              <i> {o.dataTable?.title || t("common:unknown")}</i>
+            </BlueLink>
           </ResponsiveInfo>
         )}
         <ResponsiveInfo title="form:tags">

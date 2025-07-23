@@ -7,7 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { LuArrowRight } from "react-icons/lu";
 
-const CardLink = styled.a`
+const CardLink = styled.div`
   div {
     border: 2px solid var(--chakra-colors-gray-200);
     transition: 0.2s ease-in-out;

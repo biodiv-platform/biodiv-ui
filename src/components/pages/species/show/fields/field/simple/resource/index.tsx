@@ -1,7 +1,6 @@
 import { AspectRatio, Box, Grid, Image, SimpleGrid } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLink from "@components/@core/blue-link/external";
-import LocalLink from "@components/@core/local-link";
 import Badge from "@components/@core/user/badge";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceRAW, getResourceThumbnail } from "@utils/media";
@@ -32,7 +31,6 @@ export default function SpeciesFieldResource({ resources }) {
                     objectFit="cover"
                     borderRadius="md"
                     loading="lazy"
-                    // ignoreFallback={true}
                     bg="gray.200"
                     src={getResourceThumbnail(
                       resource.context,
@@ -55,11 +53,9 @@ export default function SpeciesFieldResource({ resources }) {
 
                     <Box>{t("common:uploader")}</Box>
                     <Box>
-                      <LocalLink href={`/user/show/${userIbp.id}`}>
-                        <BlueLink>
-                          {userIbp.name} <Badge isAdmin={userIbp?.isAdmin} />
-                        </BlueLink>
-                      </LocalLink>
+                      <BlueLink href={`/user/show/${userIbp.id}`}>
+                        {userIbp.name} <Badge isAdmin={userIbp?.isAdmin} />
+                      </BlueLink>
                     </Box>
                   </Grid>
 

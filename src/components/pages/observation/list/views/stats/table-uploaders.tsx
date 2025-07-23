@@ -35,22 +35,25 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter 
                 <Table.Cell>
                   <HStack>
                     <Avatar size="xs" src={getUserImage(pic, name, 24)} name={name} />
-                    <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
-                      <ExternalBlueLink>{name}</ExternalBlueLink>
-                    </LocalLink>
+                    <ExternalBlueLink asChild>
+                      <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
+                        {name}
+                      </LocalLink>
+                    </ExternalBlueLink>
                   </HStack>
                 </Table.Cell>
 
-                {/* isNumeric={true} */}
                 <Table.Cell>
                   {count && (
-                    <LocalLink
-                      href="/observation/list"
-                      params={{ ...filter, view: "list", user: authorId }}
-                      prefixGroup={true}
-                    >
-                      <ExternalBlueLink>{count}</ExternalBlueLink>
-                    </LocalLink>
+                    <ExternalBlueLink asChild>
+                      <LocalLink
+                        href="/observation/list"
+                        params={{ ...filter, view: "list", user: authorId }}
+                        prefixGroup={true}
+                      >
+                        {count}
+                      </LocalLink>
+                    </ExternalBlueLink>
                   )}
                 </Table.Cell>
               </Table.Row>

@@ -9,11 +9,11 @@ export default function ReadMore({ params, dataType }) {
   const { t } = useTranslation();
   return (
     <Flex py={2} justifyContent="flex-end">
-      <LocalLink href={`/${dataType}/list`} params={params}>
-        <BlueLink>
+      <BlueLink asChild>
+        <LocalLink href={`/${dataType}/list`} params={params}>
           {t("common:read_more")} <LuMoveRight />
-        </BlueLink>
-      </LocalLink>
+        </LocalLink>
+      </BlueLink>
     </Flex>
   );
 }
