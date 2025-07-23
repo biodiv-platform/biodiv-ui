@@ -15,11 +15,11 @@ export function TraitHeader({ trait, onOpen }) {
 
   return (
     <Heading as="h4" size="sm" mb={2} alignItems="center" display="flex">
-      <LocalLink href={`/traits/show/${trait?.traitId}`} prefixGroup={true}>
-        <BlueLink mr={2}>
+      <BlueLink mr={2} asChild>
+        <LocalLink href={`/traits/show/${trait?.traitId}`} prefixGroup={true}>
           {trait?.name} {trait?.units && `(${trait.units})`}
-        </BlueLink>
-      </LocalLink>
+        </LocalLink>
+      </BlueLink>
 
       {trait?.description && (
         <Tooltip showArrow={true} title={trait?.description}>

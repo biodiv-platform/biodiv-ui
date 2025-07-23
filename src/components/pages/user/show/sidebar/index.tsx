@@ -41,7 +41,7 @@ export default function UserInfoSidebar({ user }: UserProfileProps) {
         </Box>
       </Flex>
       <LocalLink href={`/user/edit/${user.id}`}>
-        <Button as="a" w="full" colorPalette="blue" mb={4} hidden={!canEdit}>
+        <Button w="full" colorPalette="blue" mb={4} hidden={!canEdit}>
           {t("user:edit_profile")}
         </Button>
       </LocalLink>

@@ -38,9 +38,12 @@ export default function WKTFieldMulti(props: WKTInputProps) {
   }, [value]);
 
   return (
-    <Field invalid={!!fieldState.error} errorText={JSON.stringify(fieldState?.error?.message)}>
+    <Field
+      invalid={!!fieldState.error}
+      errorText={JSON.stringify(fieldState?.error?.message)}
+      label={props.label}
+    >
       <Box mb={props.mb || 4} width={"full"}>
-        <Field>{props.label}</Field>
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
           <Tabs.Root defaultValue={SITE_CONFIG?.WKT?.DEFAULT_TAB} lazyMount={true} variant={"line"}>
             <Tabs.List>

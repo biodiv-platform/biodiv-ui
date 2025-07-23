@@ -35,21 +35,19 @@ const GroupListItem = () => {
 
         return (
           <Menu.Item key={g.id} minH="3rem" value={g.id} asChild>
-            <LocalLink href={groupURL}>
-              <Link w="full">
-                <Flex alignItems="center">
-                  <Image
-                    boxSize="2rem"
-                    objectFit="contain"
-                    loading="lazy"
-                    src={`${g.icon}?w=40`}
-                    aria-label={`${g.name} Logo`}
-                    mr={2}
-                  />
-                  <Text lineHeight="1rem">{g.name}</Text>
-                </Flex>
-              </Link>
-            </LocalLink>
+            <Link w="full" href={groupURL}>
+              <Flex alignItems="center">
+                <Image
+                  boxSize="2rem"
+                  objectFit="contain"
+                  loading="lazy"
+                  src={`${g.icon}?w=40`}
+                  aria-label={`${g.name} Logo`}
+                  mr={2}
+                />
+                <Text lineHeight="1rem">{g.name}</Text>
+              </Flex>
+            </Link>
           </Menu.Item>
         );
       })}

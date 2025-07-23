@@ -39,7 +39,6 @@ import {
   DialogRoot
 } from "@/components/ui/dialog";
 
-import LocalLink from "../local-link";
 import SimpleActionButton from "./simple";
 
 interface IFlagObservationProps {
@@ -147,11 +146,9 @@ export default function FlagActionButton({
                               src={getUserImage(user.profilePic, user.name)}
                             />
                             <Box>
-                              <LocalLink href={`/user/show/${user.id}`}>
-                                <BlueLink mr={2}>
-                                  {user.name} <UserBadge isAdmin={user.isAdmin} />
-                                </BlueLink>
-                              </LocalLink>
+                              <BlueLink mr={2} href={`/user/show/${user.id}`}>
+                                {user.name} <UserBadge isAdmin={user.isAdmin} />
+                              </BlueLink>
                               <Badge colorPalette="red" verticalAlign="baseline">
                                 {t(`common:actions.flag.flags.${flag.flag?.toLowerCase()}`)}
                               </Badge>

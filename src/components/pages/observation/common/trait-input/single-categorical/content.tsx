@@ -8,18 +8,20 @@ export default function TraitContent({ value, label, icon }) {
     <RadioCard.Item value={value} key={value} as="label">
       <RadioCard.ItemHiddenInput />
       <RadioCard.ItemControl
-        alignItems="center"
-        p={2}
         cursor="pointer"
-        borderWidth="2px"
-        borderRadius="md"
-        bg="white"
-        w="200px"
-        _checked={{
-          bg: "blue.50"
-        }}
         _focus={{
           boxShadow: "outline"
+        }}
+        alignItems="center"
+        borderColor="gray.200"
+        borderRadius="md"
+        borderStyle="solid"
+        lineHeight={1}
+        p={2}
+        h="3.25rem"
+        _checked={{
+          borderColor: "blue.500",
+          bg: "blue.50"
         }}
       >
         <RadioCard.ItemText>

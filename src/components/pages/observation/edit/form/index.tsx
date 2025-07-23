@@ -1,4 +1,4 @@
-import { Alert, Link, Spinner, useDisclosure } from "@chakra-ui/react";
+import { Alert, Spinner, useDisclosure } from "@chakra-ui/react";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,7 +15,6 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { LuMoveRight } from "react-icons/lu";
 import * as Yup from "yup";
 
-// import { Alert } from "@/components/ui/alert";
 import LocationPicker from "../../create/form/location";
 import Uploader from "../../create/form/uploader";
 import CheckListAnnotationForm from "./checklist-annotation";
@@ -153,13 +152,11 @@ export default function ObservationEditForm({
         />
         {observation.checklistAnnotations && <CheckListAnnotationForm fields={fields} />}
         <LocalLink href={`/observation/show/${observationId}`} prefixGroup={true}>
-          <Link unstyled>
-            <Alert.Root status="info" mb={4} borderRadius="md">
-              <Alert.Title>
-                {t("observation:edit_hint")} <LuMoveRight />
-              </Alert.Title>
-            </Alert.Root>
-          </Link>
+          <Alert.Root status="info" mb={4} borderRadius="md">
+            <Alert.Title>
+              {t("observation:edit_hint")} <LuMoveRight />
+            </Alert.Title>
+          </Alert.Root>
         </LocalLink>
         <SubmitButton leftIcon={<CheckIcon />} mb={4}>
           {t("observation:update_observation")}

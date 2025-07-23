@@ -1,6 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
-import LocalLink from "@components/@core/local-link";
 import { axGetSpeciesIdFromTaxonId } from "@services/species.service";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
@@ -26,9 +25,9 @@ export function SpeciesPageLink({ showTaxon }) {
           {speciesId ? 1 : 0}
         </Text>
         {speciesId ? (
-          <LocalLink href={`/species/show/${speciesId}`}>
-            <ExternalBlueLink>{t("taxon:modal.data_links.species")}</ExternalBlueLink>
-          </LocalLink>
+          <ExternalBlueLink href={`/species/show/${speciesId}`}>
+            {t("taxon:modal.data_links.species")}
+          </ExternalBlueLink>
         ) : (
           <Text>{t("taxon:modal.data_links.species")}</Text>
         )}
