@@ -81,13 +81,26 @@
     "back": "Miverina ao anaty lisitra",
     "default": "toerana misy anao",
     "failure": "Tsy afaka namonjy fanovana",
-    "gallery": "Gallery",
+    "gallery": "Gallery lehibe",
     "gallery_setup": {
       "alert": "Azafady vonjeo ny fanovana mba handefasana indray",
       "create": "Mamorona sary gallery",
       "save_order": "Tehirizo ny filaharan'ny galera (s)",
       "show_image_upload": "Asehoy ny Uploader sary",
-      "title": "Fametahana galera"
+      "title": "Gallery lehibe"
+    },
+    "mini_gallery_setup": {
+      "active_label": "afaka",
+      "create": "Mamorona galeriana mini",
+      "create_error": "Tsy afaka namorona galeriana mini",
+      "create_success": "Mini Gallery namorona soa aman-tsara",
+      "delete_error": "Tsy afaka mamafa",
+      "delete_success": "Nahomby ny galeria mini",
+      "edit_error": "Tsy afaka nanavao ny Gallery Mini",
+      "edit_success": "Nohavaozina tamim-pahombiazana ny galeri Mini",
+      "slides_per_view": "Slides isaky ny fijery",
+      "title": "Mini Gallery",
+      "vertical_label": "mijidina"
     },
     "module_stats": "Stats Module",
     "observation_map": "Sarintany fizarana fandinihana",

@@ -81,13 +81,26 @@
     "back": "Rudi kwenye orodha",
     "default": "Default.",
     "failure": "Haiwezi kuhifadhi mabadiliko.",
-    "gallery": "Nyumba ya sanaa",
+    "gallery": "Matunzio makuu",
     "gallery_setup": {
       "alert": "Tafadhali salama mabadiliko ili uagize tena",
       "create": "Unda picha ya sanaa",
       "save_order": "Hifadhi amri ya picha ya sanaa",
       "show_image_upload": "Onyesha Upakiaji wa Image.",
-      "title": "Setup ya Nyumba ya sanaa"
+      "title": "Matunzio makuu"
+    },
+    "mini_gallery_setup": {
+      "active_label": "Kuwezeshwa",
+      "create": "Unda Matunzio ya Mini",
+      "create_error": "Haiwezi kuunda Matunzio ya Mini",
+      "create_success": "Matunzio ya Mini yameundwa kwa mafanikio",
+      "delete_error": "Haiwezi kufuta",
+      "delete_success": "Matunzio ya Mini yalifutwa kwa mafanikio",
+      "edit_error": "Haiwezi kusasisha nyumba ya sanaa ya mini",
+      "edit_success": "Matunzio ya Mini yalisasishwa kwa mafanikio",
+      "slides_per_view": "Slaidi kwa kila mtazamo",
+      "title": "Matunzio ya Mini",
+      "vertical_label": "Wima"
     },
     "module_stats": "Takwimu za moduli.",
     "observation_map": "Ramani ya usambazaji wa uchunguzi",

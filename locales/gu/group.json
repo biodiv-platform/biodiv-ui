@@ -81,13 +81,26 @@
     "back": "પાછા યાદી",
     "default": "મૂળભૂત",
     "failure": "ફેરફારો સાચવવામાં અસમર્થ",
-    "gallery": "ગેલેરી",
+    "gallery": "મુખ્ય ખેલ",
     "gallery_setup": {
       "alert": "કૃપા કરીને ક્રમમાં ફેરફારો સાચવો",
       "create": "ગેલેરી ફોટો બનાવો",
       "save_order": "ગેલેરી ફોટાઓનો ઓર્ડર સાચવો",
       "show_image_upload": "ફોટો અપલોડર બતાવો",
-      "title": "ગેલેરી સેટઅપ"
+      "title": "મુખ્ય ખેલ"
+    },
+    "mini_gallery_setup": {
+      "active_label": "સક્ષમ",
+      "create": "મીની ગેલેરી બનાવો",
+      "create_error": "મીની ગેલેરી બનાવવામાં અસમર્થ",
+      "create_success": "મીની ગેલેરી સફળતાપૂર્વક બનાવી",
+      "delete_error": "કા delete ી નાખવા અસમર્થ",
+      "delete_success": "મીની ગેલેરી સફળતાપૂર્વક કા deleted ી નાખી",
+      "edit_error": "મીની ગેલેરી અપડેટ કરવામાં અસમર્થ",
+      "edit_success": "મીની ગેલેરી સફળતાપૂર્વક અપડેટ થઈ",
+      "slides_per_view": "દૃષ્ટિકોણથી સ્લાઇડ્સ",
+      "title": "લઘુ વજારો",
+      "vertical_label": "Ticalભું"
     },
     "module_stats": "મોડ્યુલ ના આંકડા",
     "observation_map": "નિરીક્ષણ વિતરણ નકશો",

@@ -27,6 +27,11 @@ const steps = [
     label: "Main Gallery",
     translation: "group:homepage_customization.gallery_setup.title",
     icon: ImageIcon
+  },
+  {
+    label: "Mini Gallery",
+    translation: "group:homepage_customization.mini_gallery_setup.title",
+    icon: ImageIcon
   }
 ];
 

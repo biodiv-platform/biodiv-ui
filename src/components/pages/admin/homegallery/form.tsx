@@ -1,4 +1,7 @@
-import { Box, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Button
+} from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
 import { axUploadHomePageEditorResource } from "@services/pages.service";
 import { axInsertHomePageGallery } from "@services/utility.service";
@@ -9,6 +12,7 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import GallerySetup from "./gallery-setup";
+import MiniGallery from "./mini-gallery";
 
 const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
 
@@ -24,6 +28,7 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails, lang
 
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [miniGalleryList, setMiniGalleryList] = useState(homePageDetails?.miniGallery);
 
   const {
     gallerySlider,
@@ -76,11 +81,13 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails, lang
     };
     const { success, data } = await axInsertHomePageGallery(payload);
     if (success) {
-      setGalleryList(Object.entries(data.gallerySlider || {}).sort((a, b) => {
-        const aOrder = parseInt(a[0].split("|")[1], 10);
-        const bOrder = parseInt(b[0].split("|")[1], 10);
-        return aOrder - bOrder;
-      }));
+      setGalleryList(
+        Object.entries(data.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        })
+      );
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
@@ -123,6 +130,7 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails, lang
         setIsEdit={setIsEdit}
         languages={languages}
       />}
+      {currentStep == 2 && <MiniGallery miniGallery={miniGalleryList} setMiniGallery={setMiniGalleryList}/>}
       <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
         <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
           {t("common:save")}

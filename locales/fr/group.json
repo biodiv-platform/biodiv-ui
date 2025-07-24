@@ -81,13 +81,26 @@
     "back": "Retour à la liste",
     "default": "Défaut",
     "failure": "Impossible d'enregistrer les modifications",
-    "gallery": "Galerie",
+    "gallery": "Galerie principale",
     "gallery_setup": {
       "alert": "Veuillez enregistrer les modifications pour refaire la demande",
       "create": "Créer une galerie d'images",
       "save_order": "Enregistrer la demande d'images de la galerie",
       "show_image_upload": "Afficher le téléchargeur d'image",
-      "title": "Configuration de la galerie"
+      "title": "Galerie principale"
+    },
+    "mini_gallery_setup": {
+      "active_label": "Activé",
+      "create": "Créer une mini galerie",
+      "create_error": "Impossible de créer une mini galerie",
+      "create_success": "La mini galerie créée avec succès",
+      "delete_error": "Impossible de supprimer",
+      "delete_success": "Mini Gallery supprimée avec succès",
+      "edit_error": "Impossible de mettre à jour Mini Gallery",
+      "edit_success": "Mini Galerie mise à jour avec succès",
+      "slides_per_view": "Diapositives par vue",
+      "title": "Mini-galerie",
+      "vertical_label": "Verticale"
     },
     "module_stats": "Statistiques de module",
     "observation_map": "Carte de distribution d'observations",

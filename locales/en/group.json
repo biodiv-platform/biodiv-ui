@@ -82,13 +82,26 @@
     "back": "Back to List",
     "default": "Default",
     "failure": "Unable to Save changes",
-    "gallery": "Gallery",
+    "gallery": "Main Gallery",
     "gallery_setup": {
       "alert": "Please save changes to re-order",
       "create": "Create Gallery Image",
       "save_order": "Save Gallery Image(s) Order",
       "show_image_upload": "Show Image Uploader",
-      "title": "Gallery Setup"
+      "title": "Main Gallery"
+    },
+    "mini_gallery_setup": {
+      "active_label": "Enabled",
+      "create": "Create Mini Gallery",
+      "create_error": "Unable to create mini gallery",
+      "create_success": "Mini Gallery Created Successfully",
+      "delete_error": "Unable to delete",
+      "delete_success": "Mini Gallery Deleted Successfully",
+      "edit_error": "Unable to update mini gallery",
+      "edit_success": "Mini Gallery Updated Successfully",
+      "slides_per_view": "Slides Per View",
+      "title": "Mini Gallery",
+      "vertical_label": "Vertical"
     },
     "module_stats": "Module Stats",
     "observation_map": "Observation Distribution Map",
