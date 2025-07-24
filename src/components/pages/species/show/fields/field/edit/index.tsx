@@ -24,6 +24,8 @@ export default function SpeciesFieldSimpleEdit() {
       size="xl"
       open={!!initialFormValue}
       closeOnInteractOutside={false}
+      trapFocus={false}
+      modal={false}
     >
       <DialogBackdrop />
       {initialFormValue && (
