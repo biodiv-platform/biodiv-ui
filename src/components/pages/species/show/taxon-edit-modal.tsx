@@ -88,10 +88,9 @@ export default function TaxonEditModal({
               {/* <div>Hello</div> */}
               <SelectAsyncInputField
                 name="taxon"
-                label="taxon"
                 onQuery={onQuery}
                 optionComponent={ScientificNameOption}
-                placeholder="search name"
+                placeholder="Search for a new taxon name"
                 resetOnSubmit={false}
                 openMenuOnFocus={true}
                 style={{
