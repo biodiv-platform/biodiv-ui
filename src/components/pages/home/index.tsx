@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import donorsList from "@static/donors";
@@ -26,7 +26,22 @@ export default function HomePageComponent({ homeInfo }) {
     <Box className="container" mt={[6, 6, 6, 10]}>
       {homeInfo?.showGallery &&
         Array.isArray(homeInfo.gallerySlider) &&
-        homeInfo.gallerySlider.length > 0 && <Carousel featured={homeInfo.gallerySlider} />}
+        homeInfo.gallerySlider.length > 0 && (
+          <Carousel featured={homeInfo.gallerySlider} mini={false} />
+        )}
+      {homeInfo.miniGallery &&
+        homeInfo.miniGallery.map((item) => (
+          <>
+            <Heading as="h2" fontSize="2rem">
+              {item.title}
+            </Heading>
+            <Carousel
+              featured={homeInfo.gallerySlider}
+              mini={true}
+              slidesPerView={item.slidesPerView}
+            />
+          </>
+        ))}
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}
       {homeInfo.showDesc && <HomeDescription description={homeInfo.description} />}
       {homeInfo.showRecentObservation && SITE_CONFIG.OBSERVATION.ACTIVE && <RecentObservations />}

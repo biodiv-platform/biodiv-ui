@@ -6,7 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { LuArrowRight } from "react-icons/lu";
 
-const ReadMore = ({ resource, readMoreButtonText, readMoreUIType }) => {
+const ReadMore = ({ resource, readMoreButtonText, readMoreUIType /*mini*/ }) => {
   return resource.moreLinks && readMoreUIType == "button" ? (
     <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
       <a href={resource.moreLinks}>
@@ -22,7 +22,7 @@ const ReadMore = ({ resource, readMoreButtonText, readMoreUIType }) => {
   );
 };
 
-export default function Sidebar({ resource }) {
+export default function Sidebar({ resource, mini = false }) {
   const { t } = useTranslation();
 
   const readMoreButtonText =
@@ -38,25 +38,35 @@ export default function Sidebar({ resource }) {
   const bg = resource.gallerySidebar === "translucent" ? bgThumb : "";
 
   return (
-    <BlurBox bg={bg} fallbackColor="var(--chakra-colors-gray-800)">
+    <BlurBox
+      bg={bg}
+      fallbackColor="var(--chakra-colors-gray-800)"
+      {...(mini && { height: 350 })}
+    >
       <Center h="full" p={{ base: 6, lg: 8 }}>
         <div>
           <Heading
             as="h1"
             fontWeight={500}
             mb={2}
-            fontSize={{ base: "1.2rem", lg: "2.2rem" }}
+            fontSize={mini ? "1.2rem" : { base: "1.2rem", lg: "2.2rem" }}
             lineHeight="1.3em"
           >
             {resource.title}
           </Heading>
-          <Text fontSize={{ md: "sm", lg: "lg" }} mb={4} maxH="14rem" overflow="auto">
+          <Text
+            fontSize={mini ? "sm" : { md: "sm", lg: "lg" }}
+            mb={4}
+            maxH={mini ? "6rem" : "14rem"}
+            overflow="auto"
+          >
             {resource.customDescripition}
           </Text>
           <ReadMore
             resource={resource}
             readMoreButtonText={readMoreButtonText}
             readMoreUIType={readMoreUIType}
+            //mini={mini}
           />
         </div>
       </Center>
