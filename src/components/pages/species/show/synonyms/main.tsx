@@ -1,7 +1,7 @@
 import { Table } from "@chakra-ui/react";
 import ScientificName from "@components/@core/scientific-name";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import React, { useEffect,useMemo, useState } from "react";
 
 import { SynonymAdd, SynonymEditButtons } from "./actions";
 import SynonymEditModal from "./edit-modal";
@@ -26,6 +26,10 @@ export default function SynonymList({
   const { t } = useTranslation();
 
   const [synonymsList, setSynonymsList] = useState(synonyms || []);
+
+  useEffect(() => {
+    setSynonymsList(synonyms || []);
+  }, [synonyms]);
 
   const synonymsListSorted = useMemo(
     () => synonymsList.sort((a, b) => a.name?.localeCompare(b.name)),

@@ -10,6 +10,7 @@ interface SpeciesContextProps {
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
+    onTaxonUpdated: (newTaxonId: number) => void;
   };
 }
 
@@ -22,6 +23,7 @@ interface CounterProviderProps {
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
+    onTaxonUpdated: (newTaxonId: number) => void
   };
 }
 

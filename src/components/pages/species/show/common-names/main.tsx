@@ -1,6 +1,6 @@
 import { List, Table } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import React, { useEffect,useMemo, useState } from "react";
 
 import { CommonNameAdd, CommonNameEditButtons } from "./actions";
 import { CommonNameEditModal } from "./edit-modal";
@@ -24,6 +24,10 @@ export default function CommonNamesList({
 }: CommonNamesListProps) {
   const { t } = useTranslation();
   const [commonNamesList, setCommonNamesList] = useState(commonNames || []);
+
+  useEffect(() => {
+    setCommonNamesList(commonNames || []);
+  }, [commonNames]);
 
   // groups common names by language
   const [languagesList, languagesData] = useMemo(() => {

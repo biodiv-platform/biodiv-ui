@@ -18,12 +18,18 @@ import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { Reference } from "@interfaces/species";
+import { axGroupList } from "@services/app.service";
+import { axGetspeciesGroups } from "@services/observation.service";
 import {
   axCreateSpeciesReferences,
   axDeleteSpeciesReferences,
+  axGetAllFieldsMeta,
+  axGetAllTraitsMetaByTaxonId,
+  axGetSpeciesById,
   axUpdateSpeciesReferences
 } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
+import { normalizeSpeciesPayload } from "@utils/species";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -50,11 +56,10 @@ import SpeciesGroups from "./group";
 import SpeciesHeader from "./header";
 import SpeciesNavigation from "./navigation";
 import SpeciesSidebar from "./sidebar";
-
 import SpeciesSynonymsContainer from "./synonyms";
+import TaxonEditModal from "./taxon-edit-modal";
 import { ReferenceListItem } from "./url-utils";
 import { SpeciesProvider } from "./use-species";
-import TaxonEditModal from "./taxon-edit-modal";
 
 export default function SpeciesShowPageComponent({
   species: initialSpecies,
@@ -65,11 +70,14 @@ export default function SpeciesShowPageComponent({
   const { languageId } = useGlobalState();
   const { open: isAddOpen, onOpen: onAddOpen, onClose: onAddClose } = useDisclosure();
   const { open: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure();
-  const { open: isTaxonEditOpen, onOpen: onTaxonEditOpen, onClose: onTaxonEditClose } = useDisclosure();
-  
+  const {
+    open: isTaxonEditOpen,
+    onOpen: onTaxonEditOpen,
+    onClose: onTaxonEditClose
+  } = useDisclosure();
+
   const [selectedReference, setSelectedReference] = useState<Reference | null>(null);
   const [species, setSpecies] = useState(initialSpecies);
-
   const { t } = useTranslation();
 
   const fieldsRender = useMemo(
@@ -170,15 +178,55 @@ export default function SpeciesShowPageComponent({
     .filter((reference: Reference) => !reference.isDeleted && reference.title)
     .sort((a: Reference, b: Reference) => a.title.localeCompare(b.title));
 
+  const handleTaxonUpdate = async (newTaxonId) => {
+    try {
+      // Get current group info
+      const { currentGroup } = await axGroupList(window.location.href);
+
+      // Fetch updated species data with new taxon ID
+      const [fieldsMetaResponse, speciesDataResponse, speciesGroupsResponse, traitsMetaResponse] =
+        await Promise.all([
+          axGetAllFieldsMeta({ langId: languageId, userGroupId: currentGroup?.id }),
+          axGetSpeciesById(species.species.id, currentGroup?.id != null ? currentGroup : null),
+          axGetspeciesGroups(),
+          axGetAllTraitsMetaByTaxonId(newTaxonId, languageId)
+        ]);
+
+      if (speciesDataResponse.success && fieldsMetaResponse.success && traitsMetaResponse.success) {
+        // Normalize the species payload with updated data
+        const updatedSpecies = normalizeSpeciesPayload(
+          fieldsMetaResponse.data,
+          traitsMetaResponse.data,
+          speciesDataResponse.data,
+          speciesGroupsResponse.data
+        );
+
+        // Update the species state with new breadcrumbs, taxonomyDefinition, and taxonomicNames
+        setSpecies(updatedSpecies);
+      }
+    } catch (error) {
+      console.error("Error updating species data:", error);
+      // Fallback to just updating the taxonConceptId
+      setSpecies((prev) => ({
+        ...prev,
+        species: {
+          ...prev.species,
+          taxonConceptId: newTaxonId
+        }
+      }));
+    }
+  };
+
   return (
-    <SpeciesProvider 
-      species={species} 
-      permissions={permissions} 
+    <SpeciesProvider
+      species={species}
+      permissions={permissions}
       licensesList={licensesList}
       taxonEditActions={{
         isOpen: isTaxonEditOpen,
         onOpen: onTaxonEditOpen,
-        onClose: onTaxonEditClose
+        onClose: onTaxonEditClose,
+        onTaxonUpdated: handleTaxonUpdate
       }}
     >
       <div className="container mt">
@@ -339,17 +387,13 @@ export default function SpeciesShowPageComponent({
         <SpeciesGroups />
         <SpeciesActivity />
       </div>
-      
+
       {/* Taxon Edit Modal */}
       <TaxonEditModal
         isOpen={isTaxonEditOpen}
         onClose={onTaxonEditClose}
-        //species={species}
-        // onTaxonUpdated={() => {
-        //   onTaxonEditClose();
-        //   // Refresh species data
-        //   setSpecies((prev) => ({ ...prev }));
-        // }}
+        species={species}
+        onTaxonUpdated={handleTaxonUpdate}
       />
     </SpeciesProvider>
   );
