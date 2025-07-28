@@ -55,9 +55,9 @@ const useUserData = (userId, max = 16) => {
 
   const speciesData = useMemo(
     () =>
-      speciesGroups.map(({ id, name }) => {
-        const uploaded = uploadedObservations.speciesData[name] || 0;
-        const identified = identifiedObservations.speciesData[name] || 0;
+      speciesGroups.map(({ id, name, groupOrder }) => {
+        const uploaded = uploadedObservations.speciesData[`${id}|${name}|${groupOrder}`] || 0;
+        const identified = identifiedObservations.speciesData[`${id}|${name}|${groupOrder}`] || 0;
         const isFilterMatch = filter.sGroupId === id.toString();
         return {
           group: name,
