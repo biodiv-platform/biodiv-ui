@@ -47,7 +47,7 @@ export default function GallerySetupFrom({
   galleryList,
   setGalleryList,
   languages,
-  galleryId = null,
+  galleryId = -1,
   group = true
 }) {
   const { t } = useTranslation();

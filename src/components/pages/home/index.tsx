@@ -39,6 +39,7 @@ export default function HomePageComponent({ homeInfo }) {
               featured={homeInfo.gallerySlider}
               mini={true}
               slidesPerView={item.slidesPerView}
+              vertical = {item.isVertical}
             />
           </>
         ))}

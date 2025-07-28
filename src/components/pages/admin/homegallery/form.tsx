@@ -130,7 +130,7 @@ export default function HomePageGalleryCustomizationForm({ homePageDetails, lang
         setIsEdit={setIsEdit}
         languages={languages}
       />}
-      {currentStep == 2 && <MiniGallery miniGallery={miniGalleryList} setMiniGallery={setMiniGalleryList}/>}
+      {currentStep == 2 && <MiniGallery miniGallery={miniGalleryList} setMiniGallery={setMiniGalleryList} languages={languages}/>}
       <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
         <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
           {t("common:save")}
