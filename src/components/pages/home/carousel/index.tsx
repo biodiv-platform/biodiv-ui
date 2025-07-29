@@ -34,12 +34,17 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1, vertica
       vertical: vertical,
       loop: featured.length > slidesPerView,
       slides: {
-        //!vertical?
-        perView: slidesPerView,
-        //: featured.length > slidesPerView
-        //? slidesPerView
-        //: featured.length,
-        spacing: 16
+        perView: vertical?featured.length > slidesPerView
+        ? slidesPerView
+        : featured.length:1
+      },
+      breakpoints: vertical?{}:{
+        "(min-width: 700px)": {
+          slides: {
+            perView: slidesPerView,
+            spacing: 16
+          }
+        }
       },
       slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
     },
@@ -82,11 +87,10 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1, vertica
       overflow="hidden"
       mb={10}
       bg="gray.300"
-      color="white"
       {...(mini && { mt: 8, mb: 8 })}
     >
       <Box gridColumn={{ md: mini ? "1/4" : "1/3" }} position="relative">
-        {mini && (
+        {mini && featured.length > slidesPerView && (
           <IconButton
             aria-label="Next Slide"
             onClick={() => iSlider.current?.prev()}
@@ -110,7 +114,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1, vertica
             </>
           ))}
         </Box>
-        {mini && (
+        {mini && featured.length > slidesPerView && (
           <IconButton
             aria-label="Next Slide"
             onClick={() => iSlider.current?.next()}
@@ -148,22 +152,24 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1, vertica
     </SimpleGrid>
   ) : (
     <Box position={"relative"} mt={8} mb={8}>
-      <IconButton
-        aria-label="Prev Slide"
-        onClick={() => iSlider.current?.prev()}
-        position="absolute"
-        top={-7}
-        left={"50%"}
-        zIndex={1}
-        colorPalette="gray"
-        size="lg"
-      >
-        <LuArrowUp size={12} color="white" />
-      </IconButton>
+      {featured.length > slidesPerView && (
+        <IconButton
+          aria-label="Prev Slide"
+          onClick={() => iSlider.current?.prev()}
+          position="absolute"
+          top={-7}
+          left={"50%"}
+          zIndex={1}
+          colorPalette="gray"
+          size="lg"
+        >
+          <LuArrowUp size={12} color="white" />
+        </IconButton>
+      )}
       <Box
         ref={sliderRef}
         className="keen-slider"
-        height={featured.length > slidesPerView ? 200 * slidesPerView : 200 * featured.length}
+        h={featured.length > slidesPerView ? 200 * slidesPerView : 200 * featured.length}
       >
         {featured.map((o, index) => {
           const resource = o[1]?.[languageId]?.[0] || o[1]?.[LANG.DEFAULT_ID]?.[0];
@@ -174,23 +180,25 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1, vertica
             <Box
               key={index}
               className="keen-slider__slide"
-              bg="var(--chakra-colors-gray-800)"
-              color="white"
+              bg={resource.bgColor ? resource.bgColor : "var(--chakra-colors-gray-800)"}
+              color={resource.color ? resource.color : "white"}
             >
               <HStack h="full" gap={6}>
-                <Image
-                  src={getResourceThumbnail(
-                    resourceType,
-                    resource?.fileName,
-                    RESOURCE_SIZE.PREVIEW
-                  )}
-                  h={200}
-                  w={200}
-                  objectFit="cover"
-                  loading="lazy"
-                  alt={resource.id}
-                  bg="gray.300"
-                />
+                {resource.fileName && (
+                  <Image
+                    src={getResourceThumbnail(
+                      resourceType,
+                      resource?.fileName,
+                      RESOURCE_SIZE.PREVIEW
+                    )}
+                    h={200}
+                    w={200}
+                    objectFit="cover"
+                    loading="lazy"
+                    alt={resource.id}
+                    bg="gray.300"
+                  />
+                )}
                 <Center flex="1" h="full" p={{ base: 5 }}>
                   <Box>
                     <Heading as="h1" fontWeight={500} mb={2} fontSize="1.2rem">
@@ -221,18 +229,20 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1, vertica
           );
         })}
       </Box>
-      <IconButton
-        aria-label="Next Slide"
-        onClick={() => iSlider.current?.next()}
-        position="absolute"
-        bottom={-5}
-        left={"50%"}
-        zIndex={1}
-        colorPalette="gray"
-        size="lg"
-      >
-        <LuArrowDown size={12} color="white" />
-      </IconButton>
+      {featured.length > slidesPerView && (
+        <IconButton
+          aria-label="Next Slide"
+          onClick={() => iSlider.current?.next()}
+          position="absolute"
+          bottom={-5}
+          left={"50%"}
+          zIndex={1}
+          colorPalette="gray"
+          size="lg"
+        >
+          <LuArrowDown size={12} color="white" />
+        </IconButton>
+      )}
     </Box>
   );
 }

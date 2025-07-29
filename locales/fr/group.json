@@ -98,9 +98,9 @@
       "delete_success": "Mini Gallery supprimée avec succès",
       "edit_error": "Impossible de mettre à jour Mini Gallery",
       "edit_success": "Mini Galerie mise à jour avec succès",
-      "slides_per_view": "Diapositives par vue",
+      "slides_per_view": "Diapositives en vue",
       "title": "Mini-galerie",
-      "vertical_label": "Verticale"
+      "vertical_label": "Type de curseur"
     },
     "module_stats": "Statistiques de module",
     "observation_map": "Carte de distribution d'observations",

@@ -3,7 +3,9 @@ import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { parse } from "wkt";
 
+import GeoJSONPreview from "@/components/@core/map-preview/geojson";
 import { TAXON_BADGE_COLORS } from "@/static/constants";
 import { formatDateFromUTC } from "@/utils/date";
 
@@ -178,16 +180,20 @@ export default function AboutGroupComponent({
             ))}
           </Box>
         )}
-        {/*traitRuleList?.forEach((item) => {
-    const trait = traits.filter((trait) => trait.traits.traitId === item.traitId)[0];
-    groupRules.push({
-      id: item.id,
-      name: "traitRule",
-      value: `${trait.traits.name} : ${
-        trait.values.filter((v) => v.traitValueId === item.value)[0].value
-      }`
-    });
-  });*/}
+        {groupRules.hasSpatialRule && (
+          <Box>
+            <Heading size="md" as="h2" mb={2}>
+              Spatial Rule
+            </Heading>
+            <GeoJSONPreview
+              data={{
+                type: "Feature",
+                properties: {},
+                geometry:parse(groupRules.spartialRuleList[0].spatialData)
+              }}
+            />
+          </Box>
+        )}
         {groupRules.hasTraitRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>

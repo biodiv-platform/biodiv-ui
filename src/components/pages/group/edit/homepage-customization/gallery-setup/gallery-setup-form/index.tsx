@@ -1,7 +1,11 @@
 import {
   Box,
   Button,
+  ColorPicker,
   Flex,
+  HStack,
+  parseColor,
+  Portal,
   Tabs,
   Text,
   useDisclosure
@@ -20,7 +24,14 @@ import { LuArrowLeft } from "react-icons/lu";
 import Select from "react-select";
 import * as Yup from "yup";
 
-import { DialogBackdrop, DialogBody, DialogContent, DialogFooter, DialogHeader, DialogRoot } from "@/components/ui/dialog";
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 import { Field } from "@/components/ui/field";
 import { Switch } from "@/components/ui/switch";
 
@@ -40,6 +51,7 @@ interface IGallerySetupForm {
   options?: any[];
   truncated?: boolean;
   galleryId?: number;
+  index?: number;
 }
 
 export default function GallerySetupFrom({
@@ -48,7 +60,8 @@ export default function GallerySetupFrom({
   setGalleryList,
   languages,
   galleryId = -1,
-  group = true
+  group = true,
+  vertical = false
 }) {
   const { t } = useTranslation();
   const readMoreUIOptions = [
@@ -75,14 +88,34 @@ export default function GallerySetupFrom({
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(validationSchema),
+      context: { isVertical: vertical },
     defaultValues: {
       [languageId]: group
-        ? [{ customDescripition: "", fileName: undefined, moreLinks: "", title: "" }]
-        : [{ customDescripition: "", fileName: undefined, moreLinks: "", title: "", truncated:true }]
+        ? [
+            {
+              customDescripition: "",
+              fileName: undefined,
+              moreLinks: "",
+              title: "",
+              galleryId: galleryId
+            }
+          ]
+        : [
+            {
+              customDescripition: "",
+              fileName: undefined,
+              moreLinks: "",
+              title: "",
+              truncated: true,
+              galleryId: galleryId
+            }
+          ]
     }
   });
 
   const [langId, setLangId] = useState(0);
+  const [color, setColor] = useState("rgba(255,255,255,1)");
+  const [bgColor, setBgColor] = useState("rgba(26, 32, 44, 1)");
   const { open, onClose, onOpen } = useDisclosure();
 
   const handleFormSubmit = (value) => {
@@ -94,7 +127,9 @@ export default function GallerySetupFrom({
           authorId: entry?.authorInfo?.id,
           authorName: entry?.authorInfo?.name,
           authorImage: entry?.authorInfo?.profilePic,
-          galleryId: galleryId
+          galleryId: galleryId,
+          color: color,
+          bgColor: bgColor
         }))
       ])
     );
@@ -159,12 +194,12 @@ export default function GallerySetupFrom({
               <DialogHeader> {t("common:create_form.add_translation_button")}</DialogHeader>
               <DialogBody>
                 <Box>
-                <Field
-                  mb={2}
-                  required={true}
-                  htmlFor="name"
-                  label={t("common:create_form.language")}
-                >
+                  <Field
+                    mb={2}
+                    required={true}
+                    htmlFor="name"
+                    label={t("common:create_form.language")}
+                  >
                     {
                       <Select
                         id="langId"
@@ -215,14 +250,14 @@ export default function GallerySetupFrom({
           bg="gray.100"
           rounded="md"
           variant="plain"
-          value = {translationSelected.toString()}
-          onValueChange={({value})=>setTranslationSelected(Number(value))}
+          value={translationSelected.toString()}
+          onValueChange={({ value }) => setTranslationSelected(Number(value))}
         >
           <Tabs.List>
             {Object.keys(hForm.getValues()).map((language) => (
               <Tabs.Trigger
                 key={language}
-                value = {language.toString()}
+                value={language.toString()}
                 _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
                 m={1}
               >
@@ -269,27 +304,85 @@ export default function GallerySetupFrom({
               }
             }}
           />
-          <SelectInputField
-            key={`sidebar-${translationSelected}`}
-            name={`${translationSelected}.0.gallerySidebar`}
-            label="Gallery sidebar background"
-            options={gallerySidebarBackgroundOptions}
-            shouldPortal={true}
-            onChangeCallback={(value) => {
-              const values = hForm.getValues();
+          {galleryId == -1 && (
+            <SelectInputField
+              key={`sidebar-${translationSelected}`}
+              name={`${translationSelected}.0.gallerySidebar`}
+              label="Gallery sidebar background"
+              options={gallerySidebarBackgroundOptions}
+              shouldPortal={true}
+              onChangeCallback={(value) => {
+                const values = hForm.getValues();
 
-              for (const langId in values) {
-                const entry = values[langId]?.[0];
-                if (entry) {
-                  hForm.setValue(`${langId}.0.gallerySidebar`, value);
+                for (const langId in values) {
+                  const entry = values[langId]?.[0];
+                  if (entry) {
+                    hForm.setValue(`${langId}.0.gallerySidebar`, value);
+                  }
                 }
-              }
-            }}
-          />
+              }}
+            />
+          )}
+
+          {galleryId!=-1 && <>
+            <ColorPicker.Root
+              defaultValue={parseColor(color)}
+              maxW="200px"
+              onValueChange={(v) => setColor(v.valueAsString)}
+              mb={4}
+            >
+              <ColorPicker.HiddenInput />
+              <ColorPicker.Label>Text Color</ColorPicker.Label>
+              <ColorPicker.Control>
+                <ColorPicker.Trigger p="2">
+                  <ColorPicker.ValueSwatch boxSize="8" />
+                </ColorPicker.Trigger>
+              </ColorPicker.Control>
+              <Portal>
+                <ColorPicker.Positioner>
+                  <ColorPicker.Content>
+                    <ColorPicker.Area />
+                    <HStack>
+                      <ColorPicker.EyeDropper size="sm" variant="outline" />
+                      <ColorPicker.Sliders />
+                      <ColorPicker.ValueSwatch />
+                    </HStack>
+                  </ColorPicker.Content>
+                </ColorPicker.Positioner>
+              </Portal>
+            </ColorPicker.Root>
+
+            <ColorPicker.Root
+              defaultValue={parseColor(bgColor)}
+              maxW="200px"
+              onValueChange={(v) => setBgColor(v.valueAsString)}
+              mb={4}
+            >
+              <ColorPicker.HiddenInput />
+              <ColorPicker.Label>Background Color</ColorPicker.Label>
+              <ColorPicker.Control>
+                <ColorPicker.Trigger p="2">
+                  <ColorPicker.ValueSwatch boxSize="8" />
+                </ColorPicker.Trigger>
+              </ColorPicker.Control>
+              <Portal>
+                <ColorPicker.Positioner>
+                  <ColorPicker.Content>
+                    <ColorPicker.Area />
+                    <HStack>
+                      <ColorPicker.EyeDropper size="sm" variant="outline" />
+                      <ColorPicker.Sliders />
+                      <ColorPicker.ValueSwatch />
+                    </HStack>
+                  </ColorPicker.Content>
+                </ColorPicker.Positioner>
+              </Portal>
+            </ColorPicker.Root>
+          </>}
 
           {!group && (
             <CheckboxField
-              key = {`truncated-${translationSelected}`}
+              key={`truncated-${translationSelected}`}
               name={`${translationSelected}.0.truncated`}
               label={t("group:homepage_customization.table.enabled")}
             />

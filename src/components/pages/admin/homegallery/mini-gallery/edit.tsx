@@ -8,10 +8,22 @@ import { LuArrowLeft } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { NumberInputField } from "@/components/form/number-input";
+import { RadioInputField } from "@/components/form/radio";
 import { SwitchField } from "@/components/form/switch";
 import { TextBoxField } from "@/components/form/text";
 import { axEditMiniGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
+
+export const SLIDER_TYPE = [
+  {
+    label: "Horizontal Slide (Slides move left and right)",
+    value: false
+  },
+  {
+    label: "Vertical Slide (Slides move up and down)",
+    value: true
+  }
+];
 
 export default function EditMiniGalleryForm({
   setIsEdit,
@@ -22,7 +34,7 @@ export default function EditMiniGalleryForm({
 }) {
   const { t } = useTranslation();
 
-  const {slidesPerView, ...value} = editGalleryData
+  const { slidesPerView, ...value } = editGalleryData;
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -35,13 +47,13 @@ export default function EditMiniGalleryForm({
       })
     ),
     defaultValues: {
-        slidesPerView: slidesPerView.toString(),
-        ...value
+      slidesPerView: slidesPerView.toString(),
+      ...value
     }
   });
 
   const handleFormSubmit = async ({ slidesPerView, ...value }) => {
-    const { success, data } = await axEditMiniGallery(editGalleryData.id,{
+    const { success, data } = await axEditMiniGallery(editGalleryData.id, {
       slidesPerView: Number(slidesPerView),
       ...value
     });
@@ -78,10 +90,7 @@ export default function EditMiniGalleryForm({
               isRequired={true}
               label={t("group:homepage_customization.resources.title")}
             />
-            <SwitchField
-              name="isVertical"
-              label={t("group:homepage_customization.mini_gallery_setup.vertical_label")}
-            />
+            <RadioInputField name="isVertical" label={t("group:homepage_customization.mini_gallery_setup.vertical_label")} options={SLIDER_TYPE} />
             <SwitchField
               name="isActive"
               label={t("group:homepage_customization.mini_gallery_setup.active_label")}
@@ -90,9 +99,7 @@ export default function EditMiniGalleryForm({
               name="slidesPerView"
               label={t("group:homepage_customization.mini_gallery_setup.slides_per_view")}
             />
-            <SubmitButton>
-              {t("common:update")}
-            </SubmitButton>
+            <SubmitButton>{t("common:update")}</SubmitButton>
           </Box>
         </form>
       </FormProvider>

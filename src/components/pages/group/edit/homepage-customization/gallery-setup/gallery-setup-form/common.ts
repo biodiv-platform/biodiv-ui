@@ -4,10 +4,10 @@ import * as Yup from "yup";
 export const galleryFieldValidationSchema = Yup.object().shape({
   title: Yup.string().required(),
   customDescripition: Yup.string(),
-  fileName: Yup.string().when("galleryId", {
-    is: (val) => val == -1,
+  fileName: Yup.string().when("$isVertical", {
+    is: false,
     then: (schema) => schema.required(),
-    otherwise: (schema) => schema.notRequired()
+    otherwise: (schema) => schema.notRequired().nullable()
   }),
   observationId: Yup.number().nullable(),
   moreLinks: Yup.string().required(),

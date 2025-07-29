@@ -97,9 +97,9 @@
       "delete_error": "हटाने में असमर्थ",
       "delete_success": "मिनी गैलरी सफलतापूर्वक हटा दी गई",
       "edit_error": "मिनी गैलरी अपडेट करने में असमर्थ",
-      "slides_per_view": "प्रति दृश्य स्लाइड",
+      "slides_per_view": "देखने में स्लाइड",
       "title": "मिनी गैलरी",
-      "vertical_label": "खड़ा"
+      "vertical_label": "स्लाइडर प्रकार"
     },
     "module_stats": "मॉड्यूल आँकड़े",
     "observation_map": "अवलोकन वितरण मानचित्र",

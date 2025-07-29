@@ -98,9 +98,9 @@
       "delete_success": "Matunzio ya Mini yalifutwa kwa mafanikio",
       "edit_error": "Haiwezi kusasisha nyumba ya sanaa ya mini",
       "edit_success": "Matunzio ya Mini yalisasishwa kwa mafanikio",
-      "slides_per_view": "Slaidi kwa kila mtazamo",
+      "slides_per_view": "Slaidi kwa mtazamo",
       "title": "Matunzio ya Mini",
-      "vertical_label": "Wima"
+      "vertical_label": "Aina ya slider"
     },
     "module_stats": "Takwimu za moduli.",
     "observation_map": "Ramani ya usambazaji wa uchunguzi",

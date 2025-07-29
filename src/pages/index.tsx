@@ -13,10 +13,31 @@ function index({ homeInfo }) {
 
 export async function getServerSideProps(ctx) {
   const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
+  const { currentGroup } = await axGroupList(
+    aURL,
+    getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+  );
   const { data: homeInfo } = currentGroup?.groupId
-    ? await axGetGroupHompageDetails(currentGroup?.groupId, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID)
+    ? await axGetGroupHompageDetails(
+        currentGroup?.groupId,
+        getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+      )
     : await axGetHomeInfo();
+
+  const updatedMiniGallery = homeInfo?.miniGallery
+    ?.filter((item) => Object.keys(item?.gallerySlider || {}).length > 0)
+    .map((item) => {
+      const sortedGallerySlider = Object.entries(item.gallerySlider).sort((a, b) => {
+        const aOrder = parseInt(a[0].split("|")[1], 10);
+        const bOrder = parseInt(b[0].split("|")[1], 10);
+        return aOrder - bOrder;
+      });
+
+      return {
+        ...item,
+        gallerySlider: sortedGallerySlider
+      };
+    });
 
   return {
     props: {
@@ -26,7 +47,8 @@ export async function getServerSideProps(ctx) {
           const aOrder = parseInt(a[0].split("|")[1], 10);
           const bOrder = parseInt(b[0].split("|")[1], 10);
           return aOrder - bOrder;
-        })
+        }),
+        ...(!currentGroup?.groupId && { miniGallery: updatedMiniGallery })
       }
     }
   };

@@ -3,7 +3,12 @@ import GalleryListItems from "@components/pages/group/edit/homepage-customizatio
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
-import { axRemoveHomePageGallery, axReorderHomePageGallery } from "@services/utility.service";
+import {
+  axRemoveHomePageGallery,
+  axRemoveMiniHomePageGallery,
+  axReorderHomePageGallery,
+  axReorderMiniHomePageGallery
+} from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
@@ -14,7 +19,8 @@ const GallerySetupTable = ({
   setGalleryList,
   setIsCreate,
   setIsEdit,
-  setEditGalleryData
+  setEditGalleryData,
+  galleryId = -1
 }) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
@@ -36,7 +42,7 @@ const GallerySetupTable = ({
       displayOrder: index
     }));
 
-    const { success } = await axReorderHomePageGallery(payload);
+    const { success } = galleryId==-1 ?await axReorderHomePageGallery(payload):await axReorderMiniHomePageGallery(payload);
     if (success) {
       notification(t("group:homepage_customization.reorder.success"), NotificationType.Success);
     } else {
@@ -46,8 +52,11 @@ const GallerySetupTable = ({
   };
 
   const removeGalleryItem = async (index) => {
-    if (galleryList[index][0].split("|")[0]!="null") {
-      const { success } = await axRemoveHomePageGallery(Number(galleryList[index][0].split("|")[0]));
+    if (galleryList[index][0].split("|")[0] != "null") {
+      const { success } =
+        galleryId == -1
+          ? await axRemoveHomePageGallery(Number(galleryList[index][0].split("|")[0]))
+          : await axRemoveMiniHomePageGallery(Number(galleryList[index][0].split("|")[0]));
       if (!success) {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
@@ -79,7 +88,7 @@ const GallerySetupTable = ({
           helperClass="sorting-row"
           galleryList={galleryList}
           onSortEnd={onSortEnd}
-          languageId = {languageId}
+          languageId={languageId}
         />
       </table>
       <ButtonGroup gap={4} mt={4}>
@@ -92,7 +101,7 @@ const GallerySetupTable = ({
           float="right"
           hidden={!showReorder}
           onClick={
-            galleryList.some((e)=>e[0].split("|")[0]=="null")
+            galleryList.some((e) => e[0].split("|")[0] == "null")
               ? handleReorderAlter
               : handleReorderCustomField
           }

@@ -13,6 +13,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { LuMoveRight } from "react-icons/lu";
 import * as Yup from "yup";
 
+import { axGetTaxonDetails } from "@/services/taxonomy.service";
+
 import { RULES_TYPE } from "../../common/static";
 import RulesInputType from "./rules-input-type";
 import { formatGroupRules } from "./utils";
@@ -86,6 +88,16 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
       const { success, data } = await axAddUserGroupRule(userGroupId, payload);
       if (success && groupRules) {
         notification(t("group:rules.add.success"), NotificationType.Success);
+        if (data.taxonomicRuleList?.length) {
+          const taxonPromises = data.taxonomicRuleList.map(async (item) => {
+            const details = await axGetTaxonDetails(item.taxonomyId);
+            return {
+              ...item,
+              name: details.data.taxonomyDefinition.name
+            };
+          });
+          data.taxonomicRuleList = await Promise.all(taxonPromises);
+        }
         setGroupRules(formatGroupRules(data, traits));
         setIsCreate(false);
       } else {

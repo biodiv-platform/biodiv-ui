@@ -1,10 +1,15 @@
 import {
   Box,
   Button,
+  ColorPicker,
   Flex,
+  HStack,
   Image,
+  parseColor,
+  Portal,
   Tabs,
-  useDisclosure} from "@chakra-ui/react";
+  useDisclosure
+} from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
@@ -14,7 +19,7 @@ import ImageUploaderField from "@components/pages/group/common/image-uploader-fi
 import { galleryFieldValidationSchema } from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form/common";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import { axEditHomePageGallery } from "@services/utility.service";
+import { axEditHomePageGallery, axMiniEditHomePageGallery } from "@services/utility.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { NotificationType } from "@utils/notification";
@@ -26,10 +31,25 @@ import { LuArrowLeft } from "react-icons/lu";
 import Select from "react-select";
 import * as Yup from "yup";
 
-import { DialogBackdrop, DialogBody, DialogContent, DialogFooter, DialogHeader, DialogRoot } from "@/components/ui/dialog";
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 import { Field } from "@/components/ui/field";
 
-export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData, languages }) {
+export default function GalleryEditForm({
+  setIsEdit,
+  setGalleryList,
+  editGalleryData,
+  languages,
+  galleryId = -1,
+  index = 0,
+  vertical = false
+}) {
   const { t } = useTranslation();
 
   const readMoreUIOptions = [
@@ -58,10 +78,17 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
 
     return Yup.object().shape(languageMapShape);
   });
+  const [color, setColor] = useState(
+    editGalleryData[1][205][0].color ? editGalleryData[1][205][0].color : "rgba(255,255,255,1)"
+  );
+  const [bgColor, setBgColor] = useState(
+    editGalleryData[1][205][0].bgColor ? editGalleryData[1][205][0].bgColor : "rgba(26, 32, 44, 1)"
+  );
 
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(validationSchema),
+    context: { isVertical: vertical },
     defaultValues: editGalleryData[1]
   });
 
@@ -94,16 +121,32 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     setTranslationSelected(langId);
   };
 
-  const handleFormSubmit = async (payload) => {
-    const { success, data } = await axEditHomePageGallery(
-      Number(editGalleryData[0].split("|")[0]),
-      payload
+  const handleFormSubmit = async (value) => {
+    const payload = Object.fromEntries(
+      Object.entries(value as Record<number, any[]>).map(([langId, entries]) => [
+        langId,
+        entries.map((entry) => ({
+          ...entry,
+          color: color,
+          bgColor: bgColor
+        }))
+      ])
     );
+    const { success, data } =
+      galleryId == -1
+        ? await axEditHomePageGallery(Number(editGalleryData[0].split("|")[0]), payload)
+        : await axMiniEditHomePageGallery(Number(editGalleryData[0].split("|")[0]), payload);
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
       setGalleryList(
+        galleryId==-1?
         Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        }):
+        Object.entries(data?.miniGallery[index]?.gallerySlider || {}).sort((a, b) => {
           const aOrder = parseInt(a[0].split("|")[1], 10);
           const bOrder = parseInt(b[0].split("|")[1], 10);
           return aOrder - bOrder;
@@ -191,8 +234,8 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         bg="gray.100"
         rounded="md"
         variant="plain"
-        value= {translationSelected.toString()}
-        onValueChange={({value})=> setTranslationSelected(Number(value))}
+        value={translationSelected.toString()}
+        onValueChange={({ value }) => setTranslationSelected(Number(value))}
       >
         <Tabs.List>
           {Object.keys(hForm.getValues()).map((language) => (
@@ -293,24 +336,84 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           }}
         />
 
-        <SelectInputField
-          key={`gallerySidebar-${translationSelected}`}
-          name={`${translationSelected}.0.gallerySidebar`}
-          label="Gallery sidebar background"
-          options={gallerySidebarBackgroundOptions}
-          shouldPortal={true}
-          disabled={hForm.getValues()[translationSelected][0].id == null}
-          onChangeCallback={(value) => {
-            const values = hForm.getValues();
+        {galleryId == -1 && (
+          <SelectInputField
+            key={`gallerySidebar-${translationSelected}`}
+            name={`${translationSelected}.0.gallerySidebar`}
+            label="Gallery sidebar background"
+            options={gallerySidebarBackgroundOptions}
+            shouldPortal={true}
+            disabled={hForm.getValues()[translationSelected][0].id == null}
+            onChangeCallback={(value) => {
+              const values = hForm.getValues();
 
-            for (const langId in values) {
-              const entry = values[langId]?.[0];
-              if (entry) {
-                hForm.setValue(`${langId}.0.gallerySidebar`, value);
+              for (const langId in values) {
+                const entry = values[langId]?.[0];
+                if (entry) {
+                  hForm.setValue(`${langId}.0.gallerySidebar`, value);
+                }
               }
-            }
-          }}
-        />
+            }}
+          />
+        )}
+
+        {galleryId != -1 && (
+          <>
+            <ColorPicker.Root
+              defaultValue={parseColor(color)}
+              maxW="200px"
+              onValueChange={(v) => setColor(v.valueAsString)}
+              mb={4}
+            >
+              <ColorPicker.HiddenInput />
+              <ColorPicker.Label>Text Color</ColorPicker.Label>
+              <ColorPicker.Control>
+                <ColorPicker.Trigger p="2">
+                  <ColorPicker.ValueSwatch boxSize="8" />
+                </ColorPicker.Trigger>
+              </ColorPicker.Control>
+              <Portal>
+                <ColorPicker.Positioner>
+                  <ColorPicker.Content>
+                    <ColorPicker.Area />
+                    <HStack>
+                      <ColorPicker.EyeDropper size="sm" variant="outline" />
+                      <ColorPicker.Sliders />
+                      <ColorPicker.ValueSwatch />
+                    </HStack>
+                  </ColorPicker.Content>
+                </ColorPicker.Positioner>
+              </Portal>
+            </ColorPicker.Root>
+
+            <ColorPicker.Root
+              defaultValue={parseColor(bgColor)}
+              maxW="200px"
+              onValueChange={(v) => setBgColor(v.valueAsString)}
+              mb={4}
+            >
+              <ColorPicker.HiddenInput />
+              <ColorPicker.Label>Background Color</ColorPicker.Label>
+              <ColorPicker.Control>
+                <ColorPicker.Trigger p="2">
+                  <ColorPicker.ValueSwatch boxSize="8" />
+                </ColorPicker.Trigger>
+              </ColorPicker.Control>
+              <Portal>
+                <ColorPicker.Positioner>
+                  <ColorPicker.Content>
+                    <ColorPicker.Area />
+                    <HStack>
+                      <ColorPicker.EyeDropper size="sm" variant="outline" />
+                      <ColorPicker.Sliders />
+                      <ColorPicker.ValueSwatch />
+                    </HStack>
+                  </ColorPicker.Content>
+                </ColorPicker.Positioner>
+              </Portal>
+            </ColorPicker.Root>
+          </>
+        )}
 
         <CheckboxField
           key={`truncated-${translationSelected}`}

@@ -20,6 +20,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo, /*in
       left={0}
       right={0}
       p={6}
+      color= {resource.color?resource.color:"white"}
     >
       <Flex justifyContent="space-between" alignItems="flex-end">
         {resource?.authorId > 1 ? (

@@ -99,9 +99,9 @@
       "delete_success": "Mini Gallery Deleted Successfully",
       "edit_error": "Unable to update mini gallery",
       "edit_success": "Mini Gallery Updated Successfully",
-      "slides_per_view": "Slides Per View",
+      "slides_per_view": "Slides In View",
       "title": "Mini Gallery",
-      "vertical_label": "Vertical"
+      "vertical_label": "Slider Type"
     },
     "module_stats": "Module Stats",
     "observation_map": "Observation Distribution Map",

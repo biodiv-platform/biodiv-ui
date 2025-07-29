@@ -8,10 +8,21 @@ import { LuArrowLeft } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { NumberInputField } from "@/components/form/number-input";
-import { SwitchField } from "@/components/form/switch";
+import { RadioInputField } from "@/components/form/radio";
 import { TextBoxField } from "@/components/form/text";
 import { axCreateMiniGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
+
+export const SLIDER_TYPE = [
+  {
+    label: "Horizontal Slide (Slides move left and right)",
+    value: false
+  },
+  {
+    label: "Vertical Slide (Slides move up and down)",
+    value: true
+  }
+];
 
 export default function CreateMiniGalleryForm({ setIsCreate, miniGalleryList, setMiniGalleryList }) {
   const { t } = useTranslation();
@@ -62,10 +73,7 @@ export default function CreateMiniGalleryForm({ setIsCreate, miniGalleryList, se
               isRequired={true}
               label={t("group:homepage_customization.resources.title")}
             />
-            <SwitchField
-              name="isVertical"
-              label={t("group:homepage_customization.mini_gallery_setup.vertical_label")}
-            />
+            <RadioInputField name="isVertical" label={t("group:homepage_customization.mini_gallery_setup.vertical_label")} options={SLIDER_TYPE} />
             <NumberInputField
               name="slidesPerView"
               label={t("group:homepage_customization.mini_gallery_setup.slides_per_view")}

@@ -40,10 +40,10 @@ export default function Sidebar({ resource, mini = false }) {
   return (
     <BlurBox
       bg={bg}
-      fallbackColor="var(--chakra-colors-gray-800)"
+      fallbackColor={resource.bgColor?resource.bgColor:"var(--chakra-colors-gray-800)"}
       {...(mini && { height: 350 })}
     >
-      <Center h="full" p={{ base: 6, lg: 8 }}>
+      <Center h="full" p={{ base: 6, lg: 8 }} color= {resource.color?resource.color:"white"}>
         <div>
           <Heading
             as="h1"

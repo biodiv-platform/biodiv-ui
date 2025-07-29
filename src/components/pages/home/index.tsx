@@ -36,7 +36,7 @@ export default function HomePageComponent({ homeInfo }) {
               {item.title}
             </Heading>
             <Carousel
-              featured={homeInfo.gallerySlider}
+              featured={item?.gallerySlider}
               mini={true}
               slidesPerView={item.slidesPerView}
               vertical = {item.isVertical}
