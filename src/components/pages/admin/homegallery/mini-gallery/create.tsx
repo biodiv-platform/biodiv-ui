@@ -16,11 +16,11 @@ import notification, { NotificationType } from "@/utils/notification";
 export const SLIDER_TYPE = [
   {
     label: "Horizontal Slide (Slides move left and right)",
-    value: false
+    value: "false"
   },
   {
     label: "Vertical Slide (Slides move up and down)",
-    value: true
+    value: "true"
   }
 ];
 
@@ -32,19 +32,20 @@ export default function CreateMiniGalleryForm({ setIsCreate, miniGalleryList, se
     resolver: yupResolver(
       Yup.object().shape({
         title: Yup.string().required("Title is required"),
-        isVertical: Yup.boolean(),
+        isVertical: Yup.string(),
         slidesPerView: Yup.string()
       })
     ),
     defaultValues: {
-      isVertical: false,
+      isVertical: "false",
       slidesPerView: "3"
     }
   });
 
-  const handleFormSubmit = async ({ slidesPerView, ...value }) => {
+  const handleFormSubmit = async ({ slidesPerView,isVertical, ...value }) => {
     const { success, data } = await axCreateMiniGallery({
       slidesPerView: Number(slidesPerView),
+      isVertical: Boolean(isVertical),
       ...value
     });
     if (success) {

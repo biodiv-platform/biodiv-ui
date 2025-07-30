@@ -17,11 +17,11 @@ import notification, { NotificationType } from "@/utils/notification";
 export const SLIDER_TYPE = [
   {
     label: "Horizontal Slide (Slides move left and right)",
-    value: false
+    value: "false"
   },
   {
     label: "Vertical Slide (Slides move up and down)",
-    value: true
+    value: "true"
   }
 ];
 
@@ -34,27 +34,29 @@ export default function EditMiniGalleryForm({
 }) {
   const { t } = useTranslation();
 
-  const { slidesPerView, gallerySlider ,...value } = editGalleryData;
+  const { slidesPerView, gallerySlider, isVertical,...value } = editGalleryData;
 
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
         title: Yup.string().required("Title is required"),
-        isVertical: Yup.boolean(),
+        isVertical: Yup.string(),
         slidesPerView: Yup.string(),
         isActive: Yup.boolean()
       })
     ),
     defaultValues: {
       slidesPerView: slidesPerView.toString(),
+      isVertical:isVertical.toString(),
       ...value
     }
   });
 
-  const handleFormSubmit = async ({ slidesPerView, ...value }) => {
+  const handleFormSubmit = async ({ slidesPerView,isVertical, ...value }) => {
     const { success, data } = await axEditMiniGallery(editGalleryData.id, {
       slidesPerView: Number(slidesPerView),
+      isVertical: Boolean(isVertical),
       ...value,
       gallerySlider: null
     });
