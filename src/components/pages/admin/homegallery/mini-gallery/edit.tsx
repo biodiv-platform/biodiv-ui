@@ -34,7 +34,7 @@ export default function EditMiniGalleryForm({
 }) {
   const { t } = useTranslation();
 
-  const { slidesPerView, ...value } = editGalleryData;
+  const { slidesPerView, gallerySlider ,...value } = editGalleryData;
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -55,7 +55,8 @@ export default function EditMiniGalleryForm({
   const handleFormSubmit = async ({ slidesPerView, ...value }) => {
     const { success, data } = await axEditMiniGallery(editGalleryData.id, {
       slidesPerView: Number(slidesPerView),
-      ...value
+      ...value,
+      gallerySlider: null
     });
     if (success) {
       notification(
@@ -63,6 +64,12 @@ export default function EditMiniGalleryForm({
         NotificationType.Success
       );
       miniGalleryList[index] = data;
+      const sortedGallerySlider = Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+        const aOrder = parseInt(a[0].split("|")[1], 10);
+        const bOrder = parseInt(b[0].split("|")[1], 10);
+        return aOrder - bOrder;
+      });
+      miniGalleryList[index].gallerySlider = sortedGallerySlider;
       setMiniGalleryList(miniGalleryList);
       setIsEdit(false);
     } else {

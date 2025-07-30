@@ -49,7 +49,12 @@ export default function CreateMiniGalleryForm({ setIsCreate, miniGalleryList, se
     });
     if (success) {
         notification(t("group:homepage_customization.mini_gallery_setup.create_success"), NotificationType.Success);
-        setMiniGalleryList([...miniGalleryList, data])
+        const sortedGallerySlider = Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        });
+        setMiniGalleryList([...miniGalleryList, {...data, gallerySlider:sortedGallerySlider}])
         setIsCreate(false);
       } else {
         notification(t("group:homepage_customization.mini_gallery_setup.create_error"), NotificationType.Error);
