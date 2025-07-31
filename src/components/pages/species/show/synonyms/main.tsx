@@ -41,14 +41,14 @@ export default function SynonymList({
         updateFunc={updateFunc}
         deleteFunc={deleteFunc}
       />
+      {isContributor && <SynonymAdd />}
+
       <Table.Root size="sm" striped>
         <Table.Body>
           {synonymsListSorted.length ? (
             synonymsListSorted.map((synonym) => (
               <Table.Row key={synonym.id}>
-                <Table.Cell w={{ md: "10rem" }} verticalAlign="top">
-                  {synonym.status.toLowerCase()}
-                </Table.Cell>
+                <Table.Cell w={{ md: "10rem" }}>{synonym.status.toLowerCase()}</Table.Cell>
                 <Table.Cell>
                   {isContributor ? (
                     <SynonymEditButtons synonym={synonym} />
@@ -63,7 +63,6 @@ export default function SynonymList({
               <Table.Cell>{t("common:no_data")}</Table.Cell>
             </Table.Row>
           )}
-          {isContributor && <SynonymAdd />}
         </Table.Body>
       </Table.Root>
     </>

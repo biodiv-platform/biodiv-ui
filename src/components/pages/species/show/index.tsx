@@ -196,12 +196,14 @@ export default function SpeciesShowPageComponent({
                 )}
 
                 {/* Add Reference Modal */}
-                <DialogRoot open={isAddOpen} onOpenChange={onAddClose} size="cover" unmountOnExit>
+                <DialogRoot open={isAddOpen} onOpenChange={onAddClose} size="xl" unmountOnExit>
                   <DialogBackdrop />
                   <DialogContent>
                     <FormProvider {...formRef}>
                       <form onSubmit={formRef.handleSubmit(handleSave)}>
-                        <DialogHeader>Add References</DialogHeader>
+                        <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+                          Add References
+                        </DialogHeader>
                         <DialogCloseTrigger />
                         <DialogBody>
                           <CommonReferencesField

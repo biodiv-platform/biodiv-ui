@@ -20,6 +20,8 @@ import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { Tooltip } from "@/components/ui/tooltip";
+
 enum RecoAction {
   Agree,
   Remove,
@@ -117,11 +119,16 @@ export default function RecoSuggestion({
                 </Box>
                 {/* max={2} */}
                 <AvatarGroup size="sm" stacking="first-on-top">
-                  {reco.userList?.slice(0, 2).map((u) => (
-                    <Avatar.Root key={u.id}>
-                      <Avatar.Fallback name={u.name} />
-                      <Avatar.Image src={getUserImage(u.profilePic, u.name)} />
-                    </Avatar.Root>
+                  {reco.userList?.slice(0, 2).map((u, index) => (
+                    <Tooltip
+                      ids={{ trigger: `obs-${observationId}-user-${u.id}-i-${index}` }}
+                      content={u.name}
+                    >
+                      <Avatar.Root ids={{ root: `obs-${observationId}-user-${u.id}-i-${index}` }}>
+                        <Avatar.Fallback name={u.name} />
+                        <Avatar.Image src={getUserImage(u.profilePic, u.name)} />
+                      </Avatar.Root>
+                    </Tooltip>
                   ))}
                   {reco.userList && reco.userList.length > 2 && (
                     <Avatar.Root>

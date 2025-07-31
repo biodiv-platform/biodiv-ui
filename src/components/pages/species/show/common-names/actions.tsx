@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, IconButton, Table } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, IconButton } from "@chakra-ui/react";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
@@ -18,14 +18,12 @@ export function CommonNameAdd() {
   const handleOnAdd = () => emit(SPECIES_NAME_ADD, {});
 
   return (
-    <Table.Row>
-      <Table.Cell colSpan={2}>
-        <Button variant="outline" size="xs" colorPalette="green" onClick={handleOnAdd}>
-          <AddIcon />
-          {t("common:add")}
-        </Button>
-      </Table.Cell>
-    </Table.Row>
+    <Box p={2}>
+      <Button variant="outline" size="xs" colorPalette="green" onClick={handleOnAdd}>
+        <AddIcon />
+        {t("common:add")}
+      </Button>
+    </Box>
   );
 }
 

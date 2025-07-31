@@ -40,13 +40,13 @@ export function SpeciesTaxonSuggestions() {
               </Tabs.Trigger>
             </Tabs.List>
 
-            <Tabs.Content value="matched">
+            <Tabs.Content value="matched" p={4}>
               <SpeciesTaxonMatched />
             </Tabs.Content>
-            <Tabs.Content value="parentMatched">
+            <Tabs.Content value="parentMatched" p={4}>
               <SpeciesTaxonPartial />
             </Tabs.Content>
-            <Tabs.Content value="createTaxon">
+            <Tabs.Content value="createTaxon" p={4}>
               <SpeciesTaxonCreateForm />
             </Tabs.Content>
           </Tabs.Root>
