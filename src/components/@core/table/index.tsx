@@ -117,7 +117,9 @@ export function BasicTable({
             <Table.Row {...row.getRowProps()}>
               {row.cells.map((cell) => (
                 <Table.Cell
-                  {...cell.getCellProps({ style: cell.column.style })}
+                  {...cell.getCellProps({
+                    style: { whiteSpace: "nowrap", wordBreak: "keep-all", ...cell.column.style }
+                  })}
                   isNumeric={cell.column.isNumeric}
                 >
                   {cell.render("Cell")}

@@ -43,10 +43,12 @@ const Checkbox = (props: any) => {
     <Tooltip
       content={t(`filters:species_group.${props.label.toLowerCase()}`)}
       showArrow={true}
+      ids={{ trigger: props.id }}
       positioning={{ placement: "top" }}
     >
       <Box
         {...getControlProps()}
+        id={props.id}
         as={CheckboxLabel}
         borderRadius="md"
         aria-checked={props.isChecked}

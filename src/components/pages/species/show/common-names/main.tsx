@@ -45,14 +45,14 @@ export default function CommonNamesList({
         speciesId={speciesId}
         taxonId={taxonId}
       />
+      {isContributor && <CommonNameAdd />}
+
       <Table.Root size="sm" striped w="full">
         <Table.Body>
           {languagesList.length ? (
             languagesList.map((language) => (
-              <Table.Row key={language}>
-                <Table.Cell w={{ md: "10rem" }} verticalAlign="top">
-                  {language}
-                </Table.Cell>
+              <Table.Row key={language} boxSize={"1/12"}>
+                <Table.Cell w={{ md: "10rem" }}>{language}</Table.Cell>
                 <Table.Cell>
                   <List.Root gap={2} unstyled>
                     {languagesData[language].map((commonName) => (
@@ -76,7 +76,6 @@ export default function CommonNamesList({
               <Table.Cell>{t("common:no_data")}</Table.Cell>
             </Table.Row>
           )}
-          {isContributor && <CommonNameAdd />}
         </Table.Body>
       </Table.Root>
     </>

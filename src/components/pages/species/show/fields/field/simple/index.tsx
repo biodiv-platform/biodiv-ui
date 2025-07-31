@@ -72,7 +72,7 @@ export default function SpeciesFieldSimple({ value }) {
         </Alert>
       )}
       {(langShow || isDefaultLang) && (
-        <Box border="1px" borderColor="gray.300" overflow="hidden" borderRadius="md">
+        <Box borderWidth="1px" borderColor="gray.300" overflow="hidden" borderRadius="md">
           <SpeciesFieldResource resources={value?.speciesFieldResource} />
           {hasFieldPermission && (
             <FieldEditActionButtons onEdit={handleOnEdit} onDelete={handleOnDelete} />
@@ -127,7 +127,7 @@ export default function SpeciesFieldSimple({ value }) {
                   <BlockList title={t("species:references")}>
                     <List.Root as="ol">
                       {value?.references.map(({ title, url }, index) => (
-                        <List.Item key={index}>
+                        <List.Item key={index} _marker={{ color: "inherit" }}>
                           {title} {url && <ExternalBlueLink href={url} />}
                         </List.Item>
                       ))}

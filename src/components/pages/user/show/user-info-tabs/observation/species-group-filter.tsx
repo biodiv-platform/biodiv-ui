@@ -1,4 +1,4 @@
-import { Box, HStack, Skeleton } from "@chakra-ui/react";
+import { Box, Skeleton, Wrap, WrapItem } from "@chakra-ui/react";
 import { RadioCard } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import CustomRadio from "@components/pages/observation/create/form/groups/custom-radio";
@@ -28,17 +28,20 @@ export default function SpeciesGroupFilter({ filter, setFilter, speciesGroups })
               orientation="horizontal"
               align="center"
               colorPalette={"blue"}
+              size={"sm"}
             >
-              <HStack align="stretch">
+              <Wrap gap={4} justify="flex-start">
                 {speciesGroups.map((o) => (
-                  <CustomRadio
-                    key={o.id}
-                    value={o.id.toString()}
-                    icon={o.name}
-                    checked={filter?.sGroupId == o.id}
-                  />
+                  <WrapItem key={o.id}>
+                    <CustomRadio
+                      key={o.id}
+                      value={o.id.toString()}
+                      icon={o.name}
+                      checked={filter?.sGroupId == o.id}
+                    />
+                  </WrapItem>
                 ))}
-              </HStack>
+              </Wrap>
             </RadioCard.Root>
           </Skeleton>
           <Skeleton loading={speciesGroups.length < 0} maxW="8rem">
