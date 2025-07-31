@@ -118,9 +118,11 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
                 onRemove={(o) => onMemberRemoved(o, [])}
               />
               <Box mb={4}>
-                <LocalLink href={"/user/list"} prefixGroup={true}>
-                  <BlueLink display="block">{t("group:admin.view_members")}</BlueLink>
-                </LocalLink>
+                <BlueLink display="block" asChild>
+                  <LocalLink href={"/user/list"} prefixGroup={true}>
+                    {t("group:admin.view_members")}
+                  </LocalLink>
+                </BlueLink>
               </Box>
               <SubmitButton>{t("common:update")}</SubmitButton>
             </form>

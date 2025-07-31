@@ -445,12 +445,14 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                           values.split("|").length === 2) && (
                                           <tr>
                                             <td>
-                                              <LocalLink
-                                                href={`/traits/show/${key.split("|")[3]}`}
-                                                prefixGroup={true}
-                                              >
-                                                <BlueLink>{key.split("|")[0]} </BlueLink>
-                                              </LocalLink>
+                                              <BlueLink asChild>
+                                                <LocalLink
+                                                  href={`/traits/show/${key.split("|")[3]}`}
+                                                  prefixGroup={true}
+                                                >
+                                                  {key.split("|")[0]}
+                                                </LocalLink>
+                                              </BlueLink>
                                             </td>
                                             <td>
                                               {key.split("|")[2] == "STRING" && (

@@ -1,4 +1,4 @@
-import { Box, Flex, IconButton, Stack, Tabs, Text } from "@chakra-ui/react";
+import { Box, Flex, Stack, Tabs, Text } from "@chakra-ui/react";
 import { sortByOptions, viewTabs } from "@static/documnet-list";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
@@ -33,21 +33,20 @@ export default function ListHeader() {
           variant={"plain"}
           colorPalette={"blue"}
         >
-          <IconButton rounded={"full"} variant={"subtle"}>
-            <Tabs.List aria-orientation="vertical">
-              {viewTabs.map(({ name, icon, key }) => (
-                <Tabs.Trigger
-                  value={name}
-                  key={key}
-                  aria-label={t(name)}
-                  aria-controls={`view_${key}`}
-                >
-                  {icon}
-                  {t(name)}
-                </Tabs.Trigger>
-              ))}
-            </Tabs.List>
-          </IconButton>
+          <Tabs.List aria-orientation="vertical">
+            {viewTabs.map(({ name, icon, key }) => (
+              <Tabs.Trigger
+                value={name}
+                key={key}
+                aria-label={t(name)}
+                aria-controls={`view_${key}`}
+              >
+                {icon}
+                {t(name)}
+              </Tabs.Trigger>
+            ))}
+            <Tabs.Indicator rounded="full" bg="blue.100" width={"full"} />
+          </Tabs.List>
         </Tabs.Root>
         <Stack direction="row" gap={4} mb={4}>
           <Box>

@@ -110,9 +110,9 @@ export default function GroupPost({
               onChange={setSelectedGroups}
             />
           ) : (
-            <LocalLink href="/group/list">
-              <ExternalBlueLink>{t("common:no_groups_joined")}</ExternalBlueLink>
-            </LocalLink>
+            <ExternalBlueLink asChild>
+              <LocalLink href="/group/list">{t("common:no_groups_joined")}</LocalLink>
+            </ExternalBlueLink>
           )}
 
           <Box mt={2}>

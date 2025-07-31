@@ -1,4 +1,4 @@
-import { Button, Flex, Menu, Portal } from "@chakra-ui/react";
+import { Button, Flex, Link, Menu, Portal } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
@@ -8,9 +8,17 @@ import GroupedSubMenu from "./grouped-sub-menu";
 import SubMenu from "./sub-menu";
 
 const SimpleLink = ({ children, to, params }) => (
-  <LocalLink href={to} params={params} prefixGroup={true}>
-    {children}
-  </LocalLink>
+  <>
+    {to.startsWith("http") ? (
+      <Link unstyled href={to}>
+        {children}
+      </Link>
+    ) : (
+      <LocalLink href={to} params={params} prefixGroup={true} hardLink={false}>
+        {children}
+      </LocalLink>
+    )}
+  </>
 );
 
 export default function MenuItems(props) {

@@ -19,19 +19,21 @@ export default function ObservationList({ title, data, loadMore }) {
         <Box fontWeight="bold" mb={2}>
           {title} ({data.total})
         </Box>
-        <LocalLink href="/observation/list" params={data.link}>
-          <ExternalBlueLink>{t("user:view_all")}</ExternalBlueLink>
-        </LocalLink>
+        <ExternalBlueLink asChild>
+          <LocalLink href="/observation/list" params={data.link}>
+            {t("user:view_all")}
+          </LocalLink>
+        </ExternalBlueLink>
       </Flex>
       <SimpleGrid columns={{ base: 2, sm: 4, md: 6, lg: 8 }} gap={4}>
         {data.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
-            <LocalLink
-              href={`/observation/show/${observation.observationId}`}
-              key={observation.observationId}
-            >
-              <Link target="_blank" className="fade">
+            <Link target="_blank" className="fade" asChild>
+              <LocalLink
+                href={`/observation/show/${observation.observationId}`}
+                key={observation.observationId}
+              >
                 <Tooltip title={<ScientificName value={title} />} showArrow={true}>
                   <AspectRatio ratio={1}>
                     <ImageWithFallback
@@ -47,8 +49,8 @@ export default function ObservationList({ title, data, loadMore }) {
                     />
                   </AspectRatio>
                 </Tooltip>
-              </Link>
-            </LocalLink>
+              </LocalLink>
+            </Link>
           );
         })}
         {data.isLoading &&

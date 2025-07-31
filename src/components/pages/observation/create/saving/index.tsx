@@ -70,9 +70,11 @@ export default function SavingObservation() {
           <Text mb={4} maxW="35rem" className="fadeInUp delay-4">
             {t("observation:saved_message")}
           </Text>
-          <LocalLink href="/observation/recreate" prefixGroup={true}>
-            <BlueLink mb={6}>{t("observation:continue")}</BlueLink>
-          </LocalLink>
+          <BlueLink mb={6} asChild>
+            <LocalLink href="/observation/recreate" prefixGroup={true}>
+              {t("observation:continue")}
+            </LocalLink>
+          </BlueLink>
         </>
       )}
     </ProcessingBox>
