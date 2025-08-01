@@ -44,6 +44,7 @@
     "twitter": "Twitter"
   },
   "habitats_covered": "Voasarona",
+  "habitats_covered_hint": "Safidio izay honenana izay hampidirina ao amin'ity vondrona ity. \nRaha tsy misy ny trano fonenana nomena, mifidiana hafa.",
   "import": "Import",
   "information": "Information",
   "invalid_request": "Fangatahana tsy mety",
@@ -95,6 +96,7 @@
   "slider_left": "ANKA",
   "slider_right": "TSARA",
   "species_coverage": "Karazana vondrona vondrona",
+  "species_coverage_hint": "Safidio ny vondrona karazana izay hotrandroka ity vondrona ity. \nRaha tsy misy ny vondrona hafa dia misafidy hafa.",
   "success": "FETY",
   "temporal": {
     "observations": "fanamarihana",

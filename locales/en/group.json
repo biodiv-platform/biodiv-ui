@@ -69,6 +69,7 @@
     },
     "value": "Value"
   },
+  "custom_field_hint": "Additional queries/fields within the observation upload form for your group.",
   "delete_member": "Are you sure you want to delete?",
   "edit": {
     "error": "There was some error while updating Group",
@@ -83,6 +84,7 @@
     "default": "Default",
     "failure": "Unable to Save changes",
     "gallery": "Main Gallery",
+    "gallery_hint": "Upload images to the homepage gallery or use observations as gallery images.",
     "gallery_setup": {
       "alert": "Please save changes to re-order",
       "create": "Create Gallery Image",
@@ -90,6 +92,7 @@
       "show_image_upload": "Show Image Uploader",
       "title": "Main Gallery"
     },
+    "hint": "Switch on or off homepage components such as descriptions, content stats, etc.",
     "mini_gallery_setup": {
       "active_label": "Enabled",
       "create": "Create Mini Gallery",
@@ -139,19 +142,24 @@
     "update": {
       "failure": "Unable to Update Homepage Details",
       "success": "Homepage Details Updated successfully"
-    }
+    },
+    "update_for_all": "Update For All Languages"
   },
   "icon": "Icon",
   "invalid_wkt": "Enter Valid WKT String",
   "invite": "Type user name",
   "invite_founders": "Invite Founders",
+  "invite_founders_hint": "Founders will be able to edit the group and change all group settings.",
   "invite_moderators": "Invite Moderators",
+  "invite_moderators_hint": "Moderators cannot edit the group settings but will have additional privileges such as posting content in bulk and featuring objects.",
   "join": "Join Group",
   "join_without_invitation": "Allow user to join the group without invitation",
+  "join_without_invitation_hint": "Allow users to join the group as members without invitation? Closed groups will need moderators to approve requests before joining.",
   "leave": "Leave Group",
   "list": {
     "title": "Groups"
   },
+  "logo_hint": "Upload a logo for the group. It should preferably be cropped to a square.",
   "map": {
     "title": "Create a map"
   },
@@ -163,6 +171,7 @@
     "requested": "Group join request sent"
   },
   "name": "Group Name",
+  "name_hint": "Kindly provide the name of your group. Keep the name concise, as longer names may not be properly formatted in all locations, and the group URL will be generated based on this.",
   "observation_customisation": "Observation Customisation",
   "observation_display": "Observation Display",
   "observations_having_media": "By Default, Only Display Observations Having Media",
@@ -172,6 +181,7 @@
       "success": "Created successfully",
       "title": "Create Group Rule"
     },
+    "hint": "Automated rules that will allow posting of qualifying observations to the group.",
     "input_types": {
       "spatial": "Add Spatial Rule",
       "taxonomy": "Add taxonomic Rule",
@@ -193,6 +203,7 @@
   },
   "save": "Create Group",
   "spatial_coverge": "Spatial Coverage",
+  "spatial_coverge_hint": "Using the tools on the map, draw a rough polygon around the areas this group covers.",
   "species_fields": {
     "clear_all": "Clear All",
     "filter_by_contributors": "Filter By Contributors",

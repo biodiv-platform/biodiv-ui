@@ -44,6 +44,7 @@
     "twitter": "twitter"
   },
   "habitats_covered": "Habitats couverts",
+  "habitats_covered_hint": "Sélectionnez quels habitats seront inclus dans ce groupe. \nSi aucun des habitats fournis n'est disponible, sélectionnez d'autres.",
   "import": "Importer",
   "information": "Informations",
   "invalid_request": "requête invalide",
@@ -95,6 +96,7 @@
   "slider_left": "Gauche",
   "slider_right": "Droite",
   "species_coverage": "Couverture de groupe d'espèces",
+  "species_coverage_hint": "Sélectionnez les groupes d'espèces que ce groupe couvrira. \nSi aucun des autres groupes n'est disponible, sélectionnez un autre.",
   "success": "Succès",
   "temporal": {
     "observations": "Observations",

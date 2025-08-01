@@ -68,6 +68,7 @@
     },
     "value": "Thamani"
   },
+  "custom_field_hint": "Maswali/uwanja wa ziada ndani ya fomu ya upakiaji wa uchunguzi kwa kikundi chako.",
   "delete_member": "Una uhakika unataka kufuta?",
   "edit": {
     "error": "Kulikuwa na hitilafu wakati wa uppdatering Group.",
@@ -82,6 +83,7 @@
     "default": "Default.",
     "failure": "Haiwezi kuhifadhi mabadiliko.",
     "gallery": "Matunzio makuu",
+    "gallery_hint": "Pakia picha kwenye nyumba ya sanaa ya ukurasa wa nyumbani au tumia uchunguzi kama picha za sanaa.",
     "gallery_setup": {
       "alert": "Tafadhali salama mabadiliko ili uagize tena",
       "create": "Unda picha ya sanaa",
@@ -89,6 +91,7 @@
       "show_image_upload": "Onyesha Upakiaji wa Image.",
       "title": "Matunzio makuu"
     },
+    "hint": "Zima au mbali vifaa vya ukurasa wa nyumbani kama maelezo, takwimu za yaliyomo, nk.",
     "mini_gallery_setup": {
       "active_label": "Kuwezeshwa",
       "create": "Unda Matunzio ya Mini",
@@ -138,19 +141,24 @@
     "update": {
       "failure": "Haiwezi kurekebisha maelezo ya ukurasa wa nyumbani.",
       "success": "Maelezo ya Homepage Updated kwa mafanikio."
-    }
+    },
+    "update_for_all": "Sasisha kwa lugha zote"
   },
   "icon": "Icon.",
   "invalid_wkt": "Ingiza Kamba Halali ya WKT",
   "invite": "Andika jina la mtumiaji",
   "invite_founders": "Waalike waanzilishi",
+  "invite_founders_hint": "Waanzilishi wataweza kuhariri kikundi na kubadilisha mipangilio yote ya kikundi.",
   "invite_moderators": "Paribisha wasimamizi",
+  "invite_moderators_hint": "Wasimamizi hawawezi kuhariri mipangilio ya kikundi lakini watakuwa na marupurupu ya ziada kama vile kuchapisha yaliyomo kwa wingi na vitu vyenye vitu.",
   "join": "Jiunge na Group.",
   "join_without_invitation": "Ruhusu mtumiaji kujiunga na kikundi bila mwaliko.",
+  "join_without_invitation_hint": "Ruhusu watumiaji kujiunga na kikundi kama washiriki bila mwaliko? \nVikundi vilivyofungwa vitahitaji wasimamizi kupitisha maombi kabla ya kujiunga.",
   "leave": "Acha Group.",
   "list": {
     "title": "Vikundi."
   },
+  "logo_hint": "Pakia nembo kwa kikundi. \nInapaswa kupigwa kwa mraba.",
   "map": {
     "title": "Unda ramani"
   },
@@ -162,6 +170,7 @@
     "requested": "Kikundi cha Kujiunga na Kikundi kilichotumwa"
   },
   "name": "Jina la kikundi",
+  "name_hint": "Kwaheri kutoa jina la kikundi chako. \nWeka jina mafupi, kwa kuwa majina marefu hayawezi kutengenezwa vizuri katika maeneo yote, na URL ya kikundi itatolewa kulingana na hii.",
   "observation_customisation": "Ubinafsishaji wa Uchunguzi",
   "observation_display": "Onyesho la Uangalizi",
   "observations_having_media": "Kwa Chaguomsingi, Onyesha Uchunguzi Ulio na Midia Pekee",
@@ -171,6 +180,7 @@
       "success": "Imeundwa kwa mafanikio.",
       "title": "Unda utawala wa kikundi"
     },
+    "hint": "Sheria za kiotomatiki ambazo zitaruhusu kutuma uchunguzi wa kufuzu kwa kikundi.",
     "input_types": {
       "spatial": "Ongeza utawala wa anga.",
       "taxonomy": "Ongeza utawala wa taxonomic",
@@ -192,6 +202,7 @@
   },
   "save": "Unda kikundi",
   "spatial_coverge": "Chanjo ya nafasi.",
+  "spatial_coverge_hint": "Kutumia zana kwenye ramani, chora polygon mbaya karibu na maeneo ambayo kikundi hiki kinashughulikia.",
   "species_fields": {
     "clear_all": "Futa zote",
     "filter_by_contributors": "Kichujio na wachangiaji",

@@ -133,7 +133,14 @@ export default function CreateGroupPageComponent({
   const [, setEditGalleryData] = useState([]);
   const [customFields, setCustomFields] = useState<
     {
-      customFields?: { id?: number };
+      customFields?: {
+        id?: number;
+        dataType: string;
+        fieldType?: string;
+        name?: string;
+        notes?: string;
+        units?: string;
+      };
       isMandatory: boolean;
       allowedParticipation: any;
       dataType?: string;
@@ -148,6 +155,7 @@ export default function CreateGroupPageComponent({
   const [, setEditCustomFieldData] = useState([]);
   const [groupRules, setGroupRules] = useState<
     {
+      taxonId: number;
       id?: number;
       name: string;
       value: any;
@@ -284,13 +292,13 @@ export default function CreateGroupPageComponent({
           } else {
             withoutId.push({
               allowedParticipation: item.allowedParticipation,
-              dataType: item.dataType,
+              dataType: item.customFields?.dataType ?? "",
               displayOrder: index,
-              fieldType: item.fieldType,
+              fieldType: item.customFields?.fieldType ?? "",
               isMandatory: item.isMandatory,
-              name: item.name,
-              notes: item.notes,
-              units: item.units,
+              name: item.customFields?.name ?? "",
+              notes: item.customFields?.notes ?? "",
+              units: item.customFields?.units ?? "",
               userGroupId: data.id,
               values: item.cfValues
             });
@@ -309,8 +317,18 @@ export default function CreateGroupPageComponent({
         }
       }
       if (customFieldsWithoutId.length > 0) {
-        const { success: custom_success } = await axAddCustomField(customFieldsWithoutId);
-        if (custom_success) {
+        let custom_overall_success = true;
+
+        for (const custom of customFieldsWithoutId) {
+          const { success: custom_success } = await axAddCustomField(custom);
+          custom_overall_success = custom_success;
+
+          if (!custom_success) {
+            break;
+          }
+        }
+
+        if (custom_overall_success) {
           notification("Successfully updated customFields", NotificationType.Success);
         }
       }
@@ -333,7 +351,7 @@ export default function CreateGroupPageComponent({
       >(
         ([taxon, createdOn, observedOn, trait, spatial, user], item) => {
           if (item.name == "taxonomicRule") {
-            taxon.push(item.value);
+            taxon.push(item.taxonId);
           } else if (item.name == "traitRule") {
             const traitId = item.value.split(":")[0].split("|")[0];
             item.value
@@ -415,6 +433,7 @@ export default function CreateGroupPageComponent({
           templateColumns={`repeat(${steps.length * 2 - 1}, 1fr)`} // icon, arrow, icon, arrow...
           gap={0}
           alignItems="center"
+          overflow={"auto"}
         >
           {/* === ICONS AND ARROWS === */}
           {steps.map((step, index) => {
@@ -491,19 +510,15 @@ export default function CreateGroupPageComponent({
                     name="name"
                     isRequired={true}
                     label={t("group:name")}
-                    hint="Kindly provide the name of your group. Keep the name concise, as longer names may not be properly formatted in all locations, and the group URL will be generated based on this."
+                    hint={t("group:name_hint")}
                   />
                   <RichTextareaField
                     name="description"
                     label={t("form:description.title")}
-                    hint="Please provide a concise overview of the aims and objectives of the group."
+                    hint={t("form:description.hint")}
                   />
                 </Box>
-                <ImageUploaderField
-                  label="Logo"
-                  name="icon"
-                  hint="Upload a logo for the group. It should preferably be cropped to a square."
-                />
+                <ImageUploaderField label="Logo" name="icon" hint={t("group:logo_hint")} />
               </SimpleGrid>
             )}
             {currentStep == 1 && (
@@ -514,7 +529,7 @@ export default function CreateGroupPageComponent({
                   options={speciesGroups}
                   type="species"
                   isRequired={true}
-                  hint="Select the species groups that this group will cover. If none of the other groups are available, select Other."
+                  hint={t("common:species_coverage_hint")}
                 />
                 <IconCheckboxField
                   name="habitatId"
@@ -522,14 +537,14 @@ export default function CreateGroupPageComponent({
                   options={habitats}
                   type="habitat"
                   isRequired={true}
-                  hint="Select which habitats will be included in this group. If none of the provided habitats are available, select Other."
+                  hint={t("common:habitats_covered_hint")}
                 />
                 <AreaDrawField
                   label={t("group:spatial_coverge")}
                   name={"spacialCoverage"}
                   mb={8}
                   isRequired={true}
-                  hint="Using the tools on the map, draw a rough polygon around the areas this group covers."
+                  hint={t("group:spatial_coverge_hint")}
                 />
               </>
             )}
@@ -539,17 +554,17 @@ export default function CreateGroupPageComponent({
                 <CheckboxField
                   name="allowUserToJoin"
                   label={t("group:join_without_invitation")}
-                  hint="Allow users to join the group as members without invitation? Closed groups will need moderators to approve requests before joining."
+                  hint={t("group:join_without_invitation_hint")}
                 />
                 <AdminInviteField
                   name="founder"
                   label={t("group:invite_founders")}
-                  hint="Founders will be able to edit the group and change all group settings."
+                  hint={t("group:invite_founders_hint")}
                 />
                 <AdminInviteField
                   name="moderator"
                   label={t("group:invite_moderators")}
-                  hint="Moderators cannot edit the group settings but will have additional privileges such as posting content in bulk and featuring objects."
+                  hint={t("group:invite_moderators_hint")}
                 />
               </>
             )}
@@ -557,9 +572,7 @@ export default function CreateGroupPageComponent({
             {currentStep == 3 && (
               <>
                 <Box className="fade">
-                  <Box color="gray.600">
-                    Switch on or off homepage components such as descriptions, content stats, etc.
-                  </Box>
+                  <Box color="gray.600">{t("group:homepage_customization.hint")}</Box>
                   <Box width={["100%", 350]} justifyContent="space-between" mt={4}>
                     <SwitchField
                       name="showGallery"
@@ -592,9 +605,7 @@ export default function CreateGroupPageComponent({
         </FormProvider>
         {currentStep == 4 && (
           <>
-            <Box color="gray.600">
-              Upload images to the homepage gallery or use observations as gallery images.
-            </Box>
+            <Box color="gray.600">{t("group:homepage_customization.gallery_hint")}</Box>
             {isCreate ? (
               <GallerySetupFrom
                 setIsCreate={setIsCreate}
@@ -617,9 +628,7 @@ export default function CreateGroupPageComponent({
         {currentStep == 5 &&
           (isAdmin ? (
             <Box p={3}>
-              <Box color="gray.600">
-                Additional queries/fields within the observation upload form for your group.
-              </Box>
+              <Box color="gray.600">{t("group:custom_field_hint")}</Box>
               {isCreate ? (
                 <AddCustomFieldForm
                   customFields={customFields}
@@ -644,9 +653,7 @@ export default function CreateGroupPageComponent({
         {currentStep == 6 &&
           (isAdmin ? (
             <Box p={3}>
-              <Box color="gray.600">
-                Automated rules that will allow posting of qualifying observations to the grou
-              </Box>
+              <Box color="gray.600">{t("group:rules.hint")}</Box>
               {isCreate ? (
                 <AddGroupRulesForm
                   groupRules={groupRules}

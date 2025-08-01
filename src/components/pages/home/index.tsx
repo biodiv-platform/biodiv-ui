@@ -8,6 +8,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import Carousel from "./carousel";
+import VerticalCarousel from "./carousel/vertical";
 import HomeDescription from "./description";
 import Features from "./features";
 import Map from "./map";
@@ -35,12 +36,11 @@ export default function HomePageComponent({ homeInfo }) {
             <Heading as="h2" fontSize="2rem">
               {item.title}
             </Heading>
-            <Carousel
+            {item.isVertical?<VerticalCarousel featured={item?.gallerySlider} slidesPerView={item.slidesPerView}/>:<Carousel
               featured={item?.gallerySlider}
               mini={true}
               slidesPerView={item.slidesPerView}
-              vertical = {item.isVertical}
-            />
+            />}
           </>
         ))}
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}

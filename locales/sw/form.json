@@ -30,6 +30,7 @@
   "date_range": "Ongeza upeo wa tarehe.",
   "description": {
     "audio": "Kurekodi itaacha moja kwa moja baada ya dakika mbili.",
+    "hint": "Tafadhali toa muhtasari mfupi wa malengo na malengo ya kikundi.",
     "my_uploads": "Pakia na kuhifadhi vyombo vya habari hapa kwa kipindi cha siku 20. Chagua picha za kutumia katika uchunguzi",
     "resources": "Pakia picha, sauti au video za uchunguzi mmoja kutoka kwenye kifaa chako. (Tumia ratings ili kuagiza picha)",
     "title": "Maelezo"

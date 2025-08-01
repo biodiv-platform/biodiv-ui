@@ -68,6 +68,7 @@
     },
     "value": "sarobidy"
   },
+  "custom_field_hint": "Fikasihitana fanampiny / saha fanampiny ao anatin'ny fampidirana ny fandinihana ny tarika.",
   "delete_member": "Azonao antoka ve fa te hamafa?",
   "edit": {
     "error": "Nisy hadisoana teo raha nanavao ny vondrona",
@@ -82,6 +83,7 @@
     "default": "toerana misy anao",
     "failure": "Tsy afaka namonjy fanovana",
     "gallery": "Gallery lehibe",
+    "gallery_hint": "Alefaso ao amin'ny tranokala an-trano ny sary na fampiasana ny fandinihana ho sary galeri.",
     "gallery_setup": {
       "alert": "Azafady vonjeo ny fanovana mba handefasana indray",
       "create": "Mamorona sary gallery",
@@ -89,6 +91,7 @@
       "show_image_upload": "Asehoy ny Uploader sary",
       "title": "Gallery lehibe"
     },
+    "hint": "Mifamadiha na ivelan'ny singa an-trano amin'ny alàlan'ny famaritana ireo famaritana, stats atoto, sns.",
     "mini_gallery_setup": {
       "active_label": "afaka",
       "create": "Mamorona galeriana mini",
@@ -138,19 +141,24 @@
     "update": {
       "failure": "Tsy afaka nanavao ny antsipirian'ny tranokala",
       "success": "Ny antsipiriany momba ny tranokala dia nanavao soa aman-tsara"
-    }
+    },
+    "update_for_all": "Fanavaozana ho an'ny fiteny rehetra"
   },
   "icon": "matoanteny",
   "invalid_wkt": "Ampidiro ny tady WKT manan-kery",
   "invite": "Soraty ny anaran'ny mpampiasa",
   "invite_founders": "Asao ny mpanorina",
+  "invite_founders_hint": "Ny mpanorina dia afaka hanova ny tarika ary hanova ny filaharan'ny vondrona rehetra.",
   "invite_moderators": "Asao ny mpanelanelana",
+  "invite_moderators_hint": "Tsy afaka manova ny toe-javatra vondrona ny mpandray anjara fa hanana tombontsoa fanampiny toy ny fandefasana votoaty amin'ny be dia be ary manasongadina zavatra.",
   "join": "Miaraha amin'ny vondrona",
   "join_without_invitation": "Avelao ny mpampiasa hiditra ao amin'ilay vondrona tsy misy fanasana",
+  "join_without_invitation_hint": "Avelao ny mpampiasa hiditra ao amin'ny vondrona ho mpikambana tsy misy fanasana? \nIreo vondrona mihidy dia mila mpanam-pahaizana mba hankatoavana ny fangatahana alohan'ny hidirany.",
   "leave": "Avelao ny vondrona",
   "list": {
     "title": "Vondrona vondrona"
   },
+  "logo_hint": "Alefaso ny sary ho an'ny vondrona. \nTokony ho tsara kokoa ny horesahina amin'ny kianja iray.",
   "map": {
     "title": "Mamorona sarintany"
   },
@@ -162,6 +170,7 @@
     "requested": "Ny vondrona dia niditra ny fangatahana"
   },
   "name": "Anaran'ny tarika",
+  "name_hint": "Omeo tsara ny anaran'ny vondrona misy anao. \nTandremo tsara ny anarana, raha ny anarana lava kokoa dia mety tsy ho voafandrika tsara amin'ny toerana rehetra, ary ny URL tarika dia hamoaka miorina amin'izany.",
   "observation_customisation": "Observation Customization",
   "observation_display": "Fampisehoana Observation",
   "observations_having_media": "Amin'ny alàlan'ny Default, Asehoy ihany ny fanamarihana manana Media",
@@ -171,6 +180,7 @@
       "success": "Namboarina soa aman-tsara",
       "title": "Mamorona fitsipika"
     },
+    "hint": "Fitsipika automatique izay mamela ny fandefasana ny fandinihana ny fandinihana ny vondrona.",
     "input_types": {
       "spatial": "Ampio ny fitsipika spatial",
       "taxonomy": "Ampio ny lalàna momba ny hetra",
@@ -192,6 +202,7 @@
   },
   "save": "Mamorona vondrona",
   "spatial_coverge": "Fandrakofana an-tsokosoko",
+  "spatial_coverge_hint": "Mampiasa ny fitaovana amin'ny sari-tany, manaova polygon henjana manodidina ny faritra ity vondrona ity.",
   "species_fields": {
     "clear_all": "Mazava ny rehetra",
     "filter_by_contributors": "Filter avy amin'ny mpandray anjara",

@@ -30,6 +30,7 @@
   "date_range": "Manampy daty daty",
   "description": {
     "audio": "Ny firaketana dia hijanona ho azy roa minitra",
+    "hint": "Azafady mba omeo fomba fijery fohy momba ny tanjona sy ny tanjon'ny vondrona.",
     "my_uploads": "Upload sy Store Media eto mandritra ny 20 andro. Safidio ny sary ampiasaina amin'ny fandinihana",
     "resources": "Alefaso ny sary, audio na horonan-tsary amin'ny fandinihana tokana avy amin'ny fitaovanao. (Ampiasao ny salanisa mba handefasana sary)",
     "title": "Description"

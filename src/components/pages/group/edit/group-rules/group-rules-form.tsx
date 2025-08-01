@@ -110,7 +110,7 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
         setIsCreate(false);
       } else if (formData.type == "taxonomicIdList") {
         formData.ruleValue?.map((o) =>
-          groupRules.push({ id: null, name: "taxonomicRule", value: o.id })
+          groupRules.push({ id: null, name: "taxonomicRule", value: o.label, taxonId: o.id })
         );
         setGroupRules(groupRules);
         setIsCreate(false);

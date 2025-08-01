@@ -56,7 +56,7 @@ export default function EditMiniGalleryForm({
   const handleFormSubmit = async ({ slidesPerView,isVertical, ...value }) => {
     const { success, data } = await axEditMiniGallery(editGalleryData.id, {
       slidesPerView: Number(slidesPerView),
-      isVertical: Boolean(isVertical),
+      isVertical: isVertical=="true"?true:false,
       ...value,
       gallerySlider: null
     });
@@ -66,12 +66,7 @@ export default function EditMiniGalleryForm({
         NotificationType.Success
       );
       miniGalleryList[index] = data;
-      const sortedGallerySlider = Object.entries(data?.gallerySlider || {}).sort((a, b) => {
-        const aOrder = parseInt(a[0].split("|")[1], 10);
-        const bOrder = parseInt(b[0].split("|")[1], 10);
-        return aOrder - bOrder;
-      });
-      miniGalleryList[index].gallerySlider = sortedGallerySlider;
+      miniGalleryList[index].gallerySlider = gallerySlider;
       setMiniGalleryList(miniGalleryList);
       setIsEdit(false);
     } else {

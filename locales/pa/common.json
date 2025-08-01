@@ -44,6 +44,7 @@
     "twitter": "ਟਵਿੱਟਰ"
   },
   "habitats_covered": "ਨਿਵਾਸ",
+  "habitats_covered_hint": "ਇਸ ਸਮੂਹ ਵਿੱਚ ਕਿਹੜੀਆਂ ਰਿਹਾਇਸ਼ਾਂ ਨੂੰ ਸ਼ਾਮਲ ਕੀਤਾ ਜਾਵੇਗਾ. \nਜੇ ਕਿਸੇ ਵੀ ਮੁਹੱਈਆ ਕੀਤੀ ਗਈ ਰਿਹਾਇਸ਼ ਉਪਲਬਧ ਨਹੀਂ ਹੈ, ਹੋਰ ਚੁਣੋ.",
   "import": "ਆਯਾਤ ਕਰੋ",
   "information": "ਜਾਣਕਾਰੀ",
   "invalid_request": "ਗਲਤ ਬੇਨਤੀ",
@@ -95,6 +96,7 @@
   "slider_left": "ਖੱਬੇ",
   "slider_right": "ਸਹੀ",
   "species_coverage": "ਸਪੀਸੀਜ਼ ਗਰੁੱਪ ਕਵਰੇਜ",
+  "species_coverage_hint": "ਸਪੀਸੀਜ਼ ਸਮੂਹ ਚੁਣੋ ਜੋ ਇਹ ਸਮੂਹ ਕਵਰ ਕਰੇਗਾ. \nਜੇ ਕੋਈ ਹੋਰ ਸਮੂਹ ਉਪਲਬਧ ਨਹੀਂ ਹਨ, ਤਾਂ ਹੋਰ ਚੁਣੋ.",
   "success": "ਸਫਲਤਾ",
   "temporal": {
     "observations": "ਨਿਰੀਖਣ",

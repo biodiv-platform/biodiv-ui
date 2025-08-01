@@ -113,6 +113,7 @@ export default function EditGroupPageComponent({
           templateColumns={`repeat(${steps.length}, 1fr)`} // icon, arrow, icon, arrow...
           gap={0}
           alignItems="center"
+          overflow={"auto"}
         >
           {/* === ICONS AND ARROWS === */}
           {steps.map((step, index) => {

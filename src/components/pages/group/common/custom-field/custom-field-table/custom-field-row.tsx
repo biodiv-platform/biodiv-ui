@@ -10,7 +10,7 @@ import { SortableElement } from "react-sortable-hoc";
 
 const BooleanIcon = ({ isChecked }) => (
   <Box as="td" w="8rem">
-    {isChecked ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />}
+    {isChecked ? <CheckIcon color="green.500" boxSize={8}/> : <CrossIcon color="red.500" boxSize={8}/>}
   </Box>
 );
 
