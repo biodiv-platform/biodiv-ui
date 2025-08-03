@@ -16,9 +16,9 @@ export const axGetUserGroupList = async () => {
   }
 };
 
-export const axGetUserGroupById = async (userGroupId) => {
+export const axGetUserGroupById = async (userGroupId, langId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/${userGroupId}`);
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/${userGroupId}/${langId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
