@@ -3,7 +3,8 @@ import "keen-slider/keen-slider.min.css";
 import {
   Box,
   IconButton,
-  SimpleGrid
+  SimpleGrid,
+  useMediaQuery
 } from "@chakra-ui/react";
 import { LANG } from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
@@ -67,17 +68,19 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
     ]
   );
 
+  const [isBig] = useMediaQuery(["(min-width: 700px)"]);
+
   return (
     <SimpleGrid
       columns={{ base: 1, md: 3 }}
       borderRadius="md"
       overflow="hidden"
       mb={10}
-      bg="gray.300"
+      bg={mini?"white":"gray.300"}
       {...(mini && { mt: 8, mb: 8 })}
     >
       <Box gridColumn={{ md: mini ? "1/4" : "1/3" }} position="relative">
-        {mini && featured.length > slidesPerView && (
+        {mini && (!isBig || featured.length > slidesPerView) && (
           <IconButton
             aria-label="Next Slide"
             onClick={() => iSlider.current?.prev()}
@@ -101,7 +104,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
             </>
           ))}
         </Box>
-        {mini && featured.length > slidesPerView && (
+        {mini && (!isBig || featured.length > slidesPerView) && (
           <IconButton
             aria-label="Next Slide"
             onClick={() => iSlider.current?.next()}

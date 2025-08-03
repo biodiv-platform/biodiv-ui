@@ -11,7 +11,7 @@ import Sidebar from "./sidebar";
 export default function Slide({ resource, mini }) {
   const resourceType = resource.authorId ? RESOURCE_CTX.OBSERVATION : RESOURCE_CTX.USERGROUPS;
   const SlideImage = () => (
-    <>
+    <Box position="relative" w="full">
       <Image
         src={getResourceThumbnail(resourceType, resource?.fileName, RESOURCE_SIZE.PREVIEW)}
         h={{ base: mini ? 160 : 240, md: mini ? 220 : 420, lg: mini ? 220 : 500 }}
@@ -27,6 +27,7 @@ export default function Slide({ resource, mini }) {
           left={0}
           right={0}
           p={6}
+          position={"absolute"}
         >
           <Flex justifyContent="space-between" alignItems="flex-end">
             {resource?.authorId > 1 ? (
@@ -57,11 +58,11 @@ export default function Slide({ resource, mini }) {
           </Flex>
         </Box>
       )}
-    </>
+    </Box>
   );
 
   return (
-    <Box className="keen-slider__slide" style={{ minWidth: "100%" }} color={resource.color?resource.color:"white"}>
+    <Box className="keen-slider__slide" style={{ minWidth: "100%" }} color={resource.color?resource.color:"white"} {...(mini && {bg:"gray.300"})}>
       {resource.observationId ? (
         <>
           <LocalLink href={`/observation/show/${resource.observationId}`} prefixGroup={true}>

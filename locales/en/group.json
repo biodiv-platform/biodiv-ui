@@ -221,5 +221,6 @@
     "title": "Create a trait"
   },
   "update": "Update Group",
-  "update_admin": "Update Administrators"
+  "update_admin": "Update Administrators",
+  "webAddress": "WebAddress"
 }

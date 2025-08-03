@@ -59,7 +59,8 @@ export default function UserGroupEditForm({
     icon,
     habitatId,
     speciesGroupId,
-    allowUserToJoin
+    allowUserToJoin,
+    webAddress
   } = groupInfo;
 
   const hForm = useForm<any>({
@@ -82,7 +83,10 @@ export default function UserGroupEditForm({
         spacialCoverage: Yup.object().shape({
           ne: Yup.array().required(),
           se: Yup.array().required()
-        })
+        }),
+        webAddress: Yup.string()
+          .required("Web address is required")
+          .matches(/^[^\s/]*$/, "Web address cannot contain '/' or spaces")
       })
     ),
     defaultValues: {
@@ -91,7 +95,8 @@ export default function UserGroupEditForm({
       habitatId,
       speciesGroupId,
       allowUserToJoin,
-      spacialCoverage: `${neLongitude},${neLatitude},${neLongitude},${swLatitude},${swLongitude},${swLatitude},${swLongitude},${neLatitude},${neLongitude},${neLatitude}`
+      spacialCoverage: `${neLongitude},${neLatitude},${neLongitude},${swLatitude},${swLongitude},${swLatitude},${swLongitude},${neLatitude},${neLongitude},${neLatitude}`,
+      webAddress
     }
   });
 
@@ -111,7 +116,7 @@ export default function UserGroupEditForm({
     const { success } = await axUserGroupUpdate(payload, userGroupId);
     if (success) {
       notification(t("group:edit.success"), NotificationType.Success);
-      router.push(`/`, true, {}, true);
+      router.push(`/group/${values.webAddress}`, false, {}, false);
     } else {
       notification(t("group:edit.error"));
     }
@@ -193,7 +198,7 @@ export default function UserGroupEditForm({
                   >
                     {t("common:create_form.cancel")}
                   </Button>
-                  <Button colorPalette="blue" type="submit" >
+                  <Button colorPalette="blue" type="submit">
                     {t("common:create_form.create")}
                   </Button>
                 </DialogFooter>
@@ -210,7 +215,7 @@ export default function UserGroupEditForm({
             rounded="md"
             value={`${translationSelected}`}
             variant={"plain"}
-            onValueChange={({value}) => setTranslationSelected(Number(value))}
+            onValueChange={({ value }) => setTranslationSelected(Number(value))}
           >
             <Tabs.List>
               {hForm.getValues().translation.map((t, index) => (
@@ -236,6 +241,12 @@ export default function UserGroupEditForm({
                 name={`translation.${translationSelected}.name`}
                 isRequired={true}
                 label={t("group:name")}
+              />
+              <TextBoxField
+                key={"webAddress"}
+                name="webAddress"
+                isRequired={true}
+                label={t("group:webAddress")}
               />
               <RichTextareaField
                 key={`description-${translationSelected}`}

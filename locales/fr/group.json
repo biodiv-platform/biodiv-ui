@@ -219,5 +219,6 @@
     "title": "Créer un trait"
   },
   "update": "Mise à jour du groupe",
-  "update_admin": "Mettre à jour les administrateurs"
+  "update_admin": "Mettre à jour les administrateurs",
+  "webAddress": "Webaddress"
 }
