@@ -31,15 +31,15 @@ export default function HomePageComponent({ homeInfo }) {
           <Carousel featured={homeInfo.gallerySlider} mini={false} />
         )}
       {homeInfo.miniGallery &&
-        homeInfo.miniGallery.map((item) => (
+        homeInfo.miniGallery.map((item,index) => (
           <>
             <Heading as="h2" fontSize="2rem">
-              {item.title}
+              {item[1][205][0].title}
             </Heading>
-            {item.isVertical?<VerticalCarousel featured={item?.gallerySlider} slidesPerView={item.slidesPerView}/>:<Carousel
-              featured={item?.gallerySlider}
+            {item[1][205][0].isVertical?<VerticalCarousel featured={homeInfo.miniGallerySlider[index]} slidesPerView={item[1][205][0].slidesPerView}/>:<Carousel
+              featured={homeInfo.miniGallerySlider[index]}
               mini={true}
-              slidesPerView={item.slidesPerView}
+              slidesPerView={item[1][205][0].slidesPerView}
             />}
           </>
         ))}

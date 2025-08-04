@@ -24,19 +24,14 @@ export async function getServerSideProps(ctx) {
       )
     : await axGetHomeInfo();
 
-  const updatedMiniGallery = homeInfo?.miniGallery
-    ?.filter((item) => Object.keys(item?.gallerySlider || {}).length > 0)
-    .map((item) => {
-      const sortedGallerySlider = Object.entries(item.gallerySlider).sort((a, b) => {
+  const updatedMiniGallery = homeInfo?.miniGallerySlider?.map((item) => {
+      const sortedGallerySlider = Object.entries(item).sort((a, b) => {
         const aOrder = parseInt(a[0].split("|")[1], 10);
         const bOrder = parseInt(b[0].split("|")[1], 10);
         return aOrder - bOrder;
       });
 
-      return {
-        ...item,
-        gallerySlider: sortedGallerySlider
-      };
+      return sortedGallerySlider;
     });
 
   return {
@@ -48,7 +43,7 @@ export async function getServerSideProps(ctx) {
           const bOrder = parseInt(b[0].split("|")[1], 10);
           return aOrder - bOrder;
         }),
-        ...(!currentGroup?.groupId && { miniGallery: updatedMiniGallery })
+        ...(!currentGroup?.groupId && { miniGallerySlider: updatedMiniGallery, miniGallery:Object.entries(homeInfo?.miniGallery) })
       }
     }
   };
