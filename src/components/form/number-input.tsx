@@ -10,6 +10,8 @@ interface IRadioProps {
   label?: string;
   mb?: number;
   hint?: string;
+  disabled?: boolean;
+  onChangeCallback?;
 }
 
 export const NumberInputField = ({
@@ -17,6 +19,8 @@ export const NumberInputField = ({
   label,
   hint,
   mb = 4,
+  disabled,
+  onChangeCallback,
   ...props
 }: IRadioProps) => {
   const { field, fieldState } = useController({ name });
@@ -29,7 +33,15 @@ export const NumberInputField = ({
       label={label}
       {...props}
     >
-      <NumberInput.Root value={field.value} spinOnPress={false}  onValueChange={(e)=>field.onChange(e.value)}>
+      <NumberInput.Root
+        value={field.value}
+        spinOnPress={false}
+        onValueChange={(e) => {
+          field.onChange(e.value);
+          onChangeCallback && onChangeCallback(e.value);
+        }}
+        disabled={disabled}
+      >
         <HStack gap="2">
           <NumberInput.DecrementTrigger asChild>
             <IconButton variant="outline" size="sm">

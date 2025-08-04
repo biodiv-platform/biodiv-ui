@@ -21,23 +21,18 @@ import notification, { NotificationType } from "@/utils/notification";
 import GalleryEditForm from "../gallery-setup/gallery-setup-form/editform";
 import GallerySetupTable from "../gallery-setup/gallery-setup-tabel";
 
-export default function MiniGalleryItem({ item, index, languages, onEdit, onDelete, miniGallery, setMiniGallery }) {
+export default function MiniGalleryItem({ item, index, languages, onEdit, onDelete, sliderList, setSliderList }) {
   const { t } = useTranslation();
 
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [editData, setEditData] = useState(item?.gallerySlider);
-  const [galleryList, setGalleryList] = useState(item?.gallerySlider)
-  /*const [galleryList, setGalleryList] = useState(
-    Object.entries(item?.gallerySlider || {}).sort((a, b) => {
-      const aOrder = parseInt(a[0].split("|")[1], 10);
-      const bOrder = parseInt(b[0].split("|")[1], 10);
-      return aOrder - bOrder;
-    })
-  );*/
+  const [editData, setEditData] = useState(sliderList[index]);
+  const [galleryList, setGalleryList] = useState(
+    sliderList[index]
+  );
 
   const handleDelete = async () => {
-    const { success } = await axRemoveMiniGallery(item.id);
+    const { success } = await axRemoveMiniGallery(item[0]);
     if (success) {
       notification(
         t("group:homepage_customization.mini_gallery_setup.delete_success"),
@@ -65,9 +60,9 @@ export default function MiniGalleryItem({ item, index, languages, onEdit, onDele
           <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pl={4} pr={4}>
             <Flex flex={1} align="center" justify="space-between">
               <Heading as="h2" fontSize="1.2rem">
-                {`${item.title} Setup`}
-                <Badge colorPalette={item.isActive ? "blue" : "red"} ml={2}>
-                  {item.isActive ? "ACTIVE" : "INACTIVE"}
+                {`${item[1][205][0].title} Setup`}
+                <Badge colorPalette={item[1][205][0].isActive ? "blue" : "red"} ml={2}>
+                  {item[1][205][0].isActive ? "ACTIVE" : "INACTIVE"}
                 </Badge>
               </Heading>
               <Box>
@@ -103,41 +98,41 @@ export default function MiniGalleryItem({ item, index, languages, onEdit, onDele
                   setIsEdit={setIsEdit}
                   setGalleryList={(v)=>{
                     setGalleryList(v)
-                    miniGallery[index].gallerySlider = v;
-                    setMiniGallery(miniGallery)
+                    sliderList[index] = v;
+                    setSliderList(sliderList)
                   }}
                   editGalleryData={editData}
                   languages={languages}
-                  galleryId={item.id}
+                  galleryId={Number(item[0])}
                   index={index}
-                  vertical={item.isVertical}
+                  vertical={item[1][205][0].isVertical}
                 />
               ) : isCreate ? (
                 <GallerySetupFrom
                   setIsCreate={setIsCreate}
-                  galleryList={miniGallery[index].gallerySlider}
+                  galleryList={galleryList}
                   setGalleryList={(v)=>{
                     setGalleryList(v)
-                    miniGallery[index].gallerySlider = v;
-                    setMiniGallery(miniGallery)
+                    sliderList[index] = v;
+                    setSliderList(sliderList)
                   }}
                   languages={languages}
                   group={false}
-                  galleryId={item.id}
-                  vertical={item.isVertical}
+                  galleryId={Number(item[0])}
+                  vertical={item[1][205][0].isVertical}
                 />
               ) : (
                 <GallerySetupTable
                   setIsCreate={setIsCreate}
                   setGalleryList={(v)=>{
                     setGalleryList(v)
-                    miniGallery[index].gallerySlider = v;
-                    setMiniGallery(miniGallery)
+                    sliderList[index] = v;
+                    setSliderList(sliderList)
                   }}
                   galleryList={galleryList}
                   setIsEdit={setIsEdit}
                   setEditGalleryData={setEditData}
-                  galleryId={item.id}
+                  galleryId={item[0]}
                 />
               )}
             </Box>

@@ -12,7 +12,7 @@ import CreateMiniGalleryForm from "./create";
 import EditMiniGalleryForm from "./edit";
 import MiniGalleryItem from "./mini-gallery-item";
 
-export default function MiniGallery({ miniGallery, setMiniGallery, languages }) {
+export default function MiniGallery({ miniGallery, setMiniGallery, languages, sliderList , setSliderList}) {
   const { t } = useTranslation();
   const [isGalleryCreate, setIsGalleryCreate] = useState(false);
   const [isGalleryEdit, setIsGalleryEdit] = useState(false);
@@ -28,6 +28,7 @@ export default function MiniGallery({ miniGallery, setMiniGallery, languages }) 
             miniGalleryList={miniGallery}
             setMiniGalleryList={setMiniGallery}
             index={editIndex}
+            languages={languages}
           />
         </Box>
       ) : isGalleryCreate ? (
@@ -36,6 +37,9 @@ export default function MiniGallery({ miniGallery, setMiniGallery, languages }) 
             setIsCreate={setIsGalleryCreate}
             miniGalleryList={miniGallery}
             setMiniGalleryList={setMiniGallery}
+            languages={languages}
+            sliderList = {sliderList}
+            setSliderList = {setSliderList}
           />
         </Box>
       ) : (
@@ -54,8 +58,8 @@ export default function MiniGallery({ miniGallery, setMiniGallery, languages }) 
               onDelete={(i) => {
                 setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
               }}
-              miniGallery = {miniGallery}
-              setMiniGallery = {setMiniGallery}
+              sliderList = {sliderList}
+              setSliderList = {setSliderList}
             />
           ))}
           <ButtonGroup gap={4} mt={4}>

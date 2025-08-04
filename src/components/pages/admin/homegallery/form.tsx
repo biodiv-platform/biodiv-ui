@@ -27,21 +27,19 @@ export default function HomePageGalleryCustomizationForm({
     })
   );
 
-  const [isCreate, setIsCreate] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-  const updatedMiniGallery = homePageDetails?.miniGallery?.map((item) => {
-    const sortedGallerySlider = Object.entries(item?.gallerySlider || {}).sort((a, b) => {
+  const updatedMiniGallery = homePageDetails?.miniGallerySlider.map((item) => {
+    const sortedGallerySlider = Object.entries(item || {}).sort((a, b) => {
       const aOrder = parseInt(a[0].split("|")[1], 10);
       const bOrder = parseInt(b[0].split("|")[1], 10);
       return aOrder - bOrder;
     });
 
-    return {
-      ...item,
-      gallerySlider: sortedGallerySlider
-    };
+    return sortedGallerySlider;
   });
-  const [miniGalleryList, setMiniGalleryList] = useState(updatedMiniGallery);
+  const [isCreate, setIsCreate] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [miniGalleryList, setMiniGalleryList] = useState(Object.entries(homePageDetails?.miniGallery));
+  const [miniGallerySliderList, setMiniGallerySliderList] = useState(updatedMiniGallery)
 
   const {
     gallerySlider,
@@ -91,8 +89,8 @@ export default function HomePageGalleryCustomizationForm({
         return acc;
       }, {}),
 
-      miniGallery: miniGalleryList.map(({ gallerySlider, ...item }) => {
-        const updatedGallerySlider = gallerySlider.reduce((acc: any, item: any, index: number) => {
+      miniGallerySlider: miniGallerySliderList.map((item) => {
+        const updatedGallerySlider = item.reduce((acc: any, item: any, index: number) => {
           const sliderId = item[0].split("|")[0];
           const languageMap = item[1] as Record<number, any[]>;
 
@@ -109,10 +107,7 @@ export default function HomePageGalleryCustomizationForm({
           return acc;
         }, {});
 
-        return {
-          ...item,
-          gallerySlider: updatedGallerySlider
-        };
+        return updatedGallerySlider
       }),
 
       ...value
@@ -126,19 +121,16 @@ export default function HomePageGalleryCustomizationForm({
           return aOrder - bOrder;
         })
       );
-      const updatedMiniGallery = data?.miniGallery.map((item) => {
-        const sortedGallerySlider = Object.entries(item?.gallerySlider || {}).sort((a, b) => {
+      const updatedMiniGallery = data?.miniGallerySlider.map((item) => {
+        const sortedGallerySlider = Object.entries(item || {}).sort((a, b) => {
           const aOrder = parseInt(a[0].split("|")[1], 10);
           const bOrder = parseInt(b[0].split("|")[1], 10);
           return aOrder - bOrder;
         });
 
-        return {
-          ...item,
-          gallerySlider: sortedGallerySlider
-        };
+        return sortedGallerySlider;
       });
-      setMiniGalleryList(updatedMiniGallery);
+      setMiniGallerySliderList(updatedMiniGallery);
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
@@ -193,6 +185,8 @@ export default function HomePageGalleryCustomizationForm({
           miniGallery={miniGalleryList}
           setMiniGallery={setMiniGalleryList}
           languages={languages}
+          sliderList={miniGallerySliderList}
+          setSliderList = {setMiniGallerySliderList}
         />
       )}
       <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">

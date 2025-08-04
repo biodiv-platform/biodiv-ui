@@ -146,7 +146,7 @@ export default function GalleryEditForm({
           const bOrder = parseInt(b[0].split("|")[1], 10);
           return aOrder - bOrder;
         }):
-        Object.entries(data?.miniGallery[index]?.gallerySlider || {}).sort((a, b) => {
+        Object.entries(data?.miniGallerySlider[index] || {}).sort((a, b) => {
           const aOrder = parseInt(a[0].split("|")[1], 10);
           const bOrder = parseInt(b[0].split("|")[1], 10);
           return aOrder - bOrder;
