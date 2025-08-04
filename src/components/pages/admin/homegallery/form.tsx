@@ -139,7 +139,7 @@ export default function HomePageGalleryCustomizationForm({
 
   return (
     <>
-      {currentStep == 0 && (
+      {currentStep == "group:homepage_customization.title"&& (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
             <Box width={["100%", 350]} justifyContent="space-between">
@@ -157,8 +157,8 @@ export default function HomePageGalleryCustomizationForm({
                 label={t("group:homepage_customization.observation_map")}
               />
               <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
-              <SwitchField name="showSponsors" label="Show sponsors" />
-              <SwitchField name="showDonors" label="Show donors" />
+              <SwitchField name="showSponsors" label={t("group:homepage_customization.show_sponsors")} />
+              <SwitchField name="showDonors" label={t("group:homepage_customization.show_donors")} />
               <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
             </Box>
             <WYSIWYGField
@@ -169,7 +169,7 @@ export default function HomePageGalleryCustomizationForm({
           </form>
         </FormProvider>
       )}
-      {currentStep == 1 && (
+      {currentStep == "group:homepage_customization.gallery_setup.title" && (
         <GallerySetup
           isCreate={isCreate}
           setIsCreate={setIsCreate}
@@ -180,7 +180,7 @@ export default function HomePageGalleryCustomizationForm({
           languages={languages}
         />
       )}
-      {currentStep == 2 && (
+      {currentStep == "group:homepage_customization.mini_gallery_setup.title"&& (
         <MiniGallery
           miniGallery={miniGalleryList}
           setMiniGallery={setMiniGalleryList}

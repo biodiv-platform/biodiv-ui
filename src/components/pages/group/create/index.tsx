@@ -104,16 +104,23 @@ export const transformMemberPayload = (membersList) => {
 };
 
 const steps = [
-  { label: "Basic Details", translation: "Enter personal details", icon: EditIcon },
-  { label: "Group Coverage", translation: "Select preferences", icon: GlobeIcon },
-  { label: "User Roles", translation: "Review & Submit", icon: UserCheckIcon },
-  { label: "Homepage Components", translation: "Review & Submit", icon: HomeIcon },
-  { label: "Main Gallery", translation: "Review & Submit", icon: ImageIcon },
-  // { label: "Mini Gallery Management", content: "Review & Submit", icon: EditIcon },
+  { label: "Basic Details", translation: "group:basic_details", icon: EditIcon },
+  { label: "Group Coverage", translation: "group:group_coverage", icon: GlobeIcon },
+  { label: "User Roles", translation: "group:admin.title", icon: UserCheckIcon },
+  {
+    label: "Homepage Components",
+    translation: "group:homepage_customization.title",
+    icon: HomeIcon
+  },
+  {
+    label: "Main Gallery",
+    translation: "group:homepage_customization.gallery_setup.title",
+    icon: ImageIcon
+  },
   { label: "Custom Fields", translation: "group:custom_field.title", icon: ListIcon },
-  { label: "Group Rules", translation: "Review & Submit", icon: LuCircleCheck },
-  { label: "Observation Display", translation: "Review & Submit", icon: LuView },
-  { label: "Species Fields", translation: "Review & Submit", icon: LuAtSign }
+  { label: "Group Rules", translation: "group:rules.title", icon: LuCircleCheck },
+  { label: "Observation Display", translation: "group:observation_display", icon: LuView },
+  { label: "Species Fields", translation: "group:species_fields.title", icon: LuAtSign }
 ];
 
 export default function CreateGroupPageComponent({
@@ -406,18 +413,24 @@ export default function CreateGroupPageComponent({
 
   const handleNext = async () => {
     let isValid = false;
-    if (currentStep === 5 || currentStep === 6 || currentStep === 7) {
+    if (
+      steps[currentStep].translation === "group:custom_field.title" ||
+      steps[currentStep].translation === "group:rules.title" ||
+      steps[currentStep].translation === "group:rules.title"
+    ) {
       isValid = true;
     }
-    if (currentStep === 0) {
+    if (steps[currentStep].translation === "group:basic_details") {
       isValid = await hForm.trigger(["name"]);
-    } else if (currentStep === 1) {
+    } else if (steps[currentStep].translation === "group:group_coverage") {
       isValid = await hForm.trigger(["speciesGroup", "habitatId", "spacialCoverage"]);
-    } else if (currentStep === 2) {
+    } else if (steps[currentStep].translation === "group:admin.title") {
       isValid = await hForm.trigger(["allowUserToJoin", "founder", "moderator"]);
-    } else if (currentStep === 3) {
+    } else if (steps[currentStep].translation === "group:homepage_customization.title") {
       isValid = true;
-    } else if (currentStep === 4) {
+    } else if (
+      steps[currentStep].translation === "group:homepage_customization.gallery_setup.title"
+    ) {
       isValid = galleryList.length > 0;
     }
     if (isValid) {
@@ -486,7 +499,7 @@ export default function CreateGroupPageComponent({
               <>
                 <GridItem key={`label-${index}`} colSpan={1} mt={2} textAlign="center">
                   <Text fontSize="sm" fontWeight="medium" color={textColor}>
-                    {step.label}
+                    {t(step.translation)}
                   </Text>
                 </GridItem>
 
@@ -499,11 +512,11 @@ export default function CreateGroupPageComponent({
       </Box>
       <Box p={6} rounded="lg" border="1px solid" borderColor="gray.200" boxShadow="sm" mb={4}>
         <Heading as="h2" fontSize={22} fontWeight="bold" color="gray.900" mb={2}>
-          {steps[currentStep].label}
+          {t(steps[currentStep].translation)}
         </Heading>
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
-            {currentStep == 0 && (
+            {steps[currentStep].translation == "group:basic_details" && (
               <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
                 <Box gridColumn="1/4">
                   <TextBoxField
@@ -521,7 +534,7 @@ export default function CreateGroupPageComponent({
                 <ImageUploaderField label="Logo" name="icon" hint={t("group:logo_hint")} />
               </SimpleGrid>
             )}
-            {currentStep == 1 && (
+            {steps[currentStep].translation == "group:group_coverage" && (
               <>
                 <IconCheckboxField
                   name="speciesGroup"
@@ -549,7 +562,7 @@ export default function CreateGroupPageComponent({
               </>
             )}
 
-            {currentStep == 2 && (
+            {steps[currentStep].translation == "group:admin.title" && (
               <>
                 <CheckboxField
                   name="allowUserToJoin"
@@ -569,7 +582,7 @@ export default function CreateGroupPageComponent({
               </>
             )}
 
-            {currentStep == 3 && (
+            {steps[currentStep].translation == "group:homepage_customization.title" && (
               <>
                 <Box className="fade">
                   <Box color="gray.600">{t("group:homepage_customization.hint")}</Box>
@@ -598,12 +611,12 @@ export default function CreateGroupPageComponent({
                 </Box>
               </>
             )}
-            {currentStep == 7 && (
+            {steps[currentStep].translation == "group:observation_display" && (
               <SwitchField name="mediaToggle" label={t("group:observations_having_media")} />
             )}
           </form>
         </FormProvider>
-        {currentStep == 4 && (
+        {steps[currentStep].translation == "group:homepage_customization.gallery_setup.title" && (
           <>
             <Box color="gray.600">{t("group:homepage_customization.gallery_hint")}</Box>
             {isCreate ? (
@@ -625,7 +638,7 @@ export default function CreateGroupPageComponent({
             )}
           </>
         )}
-        {currentStep == 5 &&
+        {steps[currentStep].translation == "group:custom_field.title" &&
           (isAdmin ? (
             <Box p={3}>
               <Box color="gray.600">{t("group:custom_field_hint")}</Box>
@@ -650,7 +663,7 @@ export default function CreateGroupPageComponent({
           ) : (
             <ContactAdmin />
           ))}
-        {currentStep == 6 &&
+        {steps[currentStep].translation == "group:rules.title" &&
           (isAdmin ? (
             <Box p={3}>
               <Box color="gray.600">{t("group:rules.hint")}</Box>
@@ -673,7 +686,7 @@ export default function CreateGroupPageComponent({
           ) : (
             <ContactAdmin />
           ))}
-        {currentStep == 8 && (
+        {steps[currentStep].translation == "group:species_fields.title" && (
           <SpeciesHierarchyForm
             onSubmit={(payload) => setSelectedNodes(payload)}
             langId={languageId}
@@ -696,11 +709,11 @@ export default function CreateGroupPageComponent({
             cursor={currentStep === 0 ? "not-allowed" : "pointer"}
           >
             <Icon as={LuChevronLeft} boxSize={5} />
-            Previous
+            {t("group:create.previous")}
           </Button>
 
           <Text fontSize="sm" color="gray.500">
-            Step {currentStep + 1} of {steps.length}
+          {t("group:create.step")} {currentStep + 1} of {steps.length}
           </Text>
 
           <Button
@@ -715,7 +728,7 @@ export default function CreateGroupPageComponent({
               bg: currentStep === steps.length - 1 ? "green.700" : "blue.700"
             }}
           >
-            {currentStep === steps.length - 1 ? "Create Group" : "Next"}
+            {currentStep === steps.length - 1 ? t("group:create.title") : t("group:create.next")}
             <LuChevronRight />
           </Button>
         </Flex>

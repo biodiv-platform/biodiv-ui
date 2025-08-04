@@ -16,7 +16,7 @@ import RecentObservations from "./recent";
 import Stats from "./stats";
 import Supporters from "./supporters";
 
-const { HOME } = SITE_CONFIG;
+const { HOME, LANG } = SITE_CONFIG;
 
 export default function HomePageComponent({ homeInfo }) {
   const { currentGroup } = useGlobalState();
@@ -34,12 +34,12 @@ export default function HomePageComponent({ homeInfo }) {
         homeInfo.miniGallery.map((item,index) => (
           <>
             <Heading as="h2" fontSize="2rem">
-              {item[1][205][0].title}
+              {item[1][LANG.DEFAULT_ID][0].title}
             </Heading>
-            {item[1][205][0].isVertical?<VerticalCarousel featured={homeInfo.miniGallerySlider[index]} slidesPerView={item[1][205][0].slidesPerView}/>:<Carousel
+            {item[1][LANG.DEFAULT_ID][0].isVertical?<VerticalCarousel featured={homeInfo.miniGallerySlider[index]} slidesPerView={item[1][LANG.DEFAULT_ID][0].slidesPerView}/>:<Carousel
               featured={homeInfo.miniGallerySlider[index]}
               mini={true}
-              slidesPerView={item[1][205][0].slidesPerView}
+              slidesPerView={item[1][LANG.DEFAULT_ID][0].slidesPerView}
             />}
           </>
         ))}

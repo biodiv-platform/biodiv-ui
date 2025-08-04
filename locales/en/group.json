@@ -18,6 +18,9 @@
   "confirm_leave": "Leave Group?",
   "create": {
     "error": "There was some error while creating Group",
+    "next": "Next",
+    "previous": "Previous",
+    "step": "Step",
     "success": "Group Created Successfully",
     "title": "Create a Group"
   },
@@ -118,17 +121,24 @@
       "success": "Gallery List reordered successfully"
     },
     "resources": {
+      "background_color": "Background Color",
       "error": "Enter valid observation id",
+      "gallery_sidebar": "Gallery sidebar background",
       "imageurl": "Choose Gallery Image",
       "link": "Show Page Link",
       "new_image": "Image Upload",
       "obs_id": "Observation Id",
       "observation_image": "Observation Image",
       "observation_image_not_editable": "Observation Image Not Editable",
+      "read_more": "Read more button text",
+      "read_more_ui": "Read more UI type",
+      "text_color": "Text Color",
       "title": "Title"
     },
     "save": "Save Homepage Details",
     "show_desc": "Show Description",
+    "show_donors": "Show Donors",
+    "show_sponsors": "Show Sponsors",
     "success": "Updated changes successfully",
     "table": {
       "actions": "Actions",
@@ -181,6 +191,8 @@
       "success": "Created successfully",
       "title": "Create Group Rule"
     },
+    "created_on_rule_title": "Created On Date Rule",
+    "has_user_rule": "Only member’s content will be posted",
     "hint": "Automated rules that will allow posting of qualifying observations to the group.",
     "input_types": {
       "spatial": "Add Spatial Rule",
@@ -188,10 +200,13 @@
       "title": "Select Input Type",
       "user": "Aggregate observation of all group members"
     },
+    "no_user_rule": "Any user’s content will be posted",
+    "observed_on_rule_title": "Observed On Date Rule",
     "remove": {
       "failure": "unable to delete user group rule",
       "success": "user group rule deleted"
     },
+    "spatial_rule_title": "Spatial Rule",
     "table": {
       "actions": "Actions",
       "read_less": "Read Less",
@@ -199,7 +214,10 @@
       "rule_type": "Rule Type",
       "value": "Value"
     },
-    "title": "Group Rules"
+    "taxon_rule_title": "Taxonomic Rule",
+    "title": "Group Rules",
+    "trait_rule_title": "Trait Rule",
+    "user_title": "User Rule"
   },
   "save": "Create Group",
   "spatial_coverge": "Spatial Coverage",

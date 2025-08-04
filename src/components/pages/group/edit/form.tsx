@@ -36,6 +36,7 @@ interface IuserGroupEditProps {
   speciesGroups;
   currentStep;
   languages;
+  isAdmin;
 }
 
 export default function UserGroupEditForm({
@@ -44,7 +45,8 @@ export default function UserGroupEditForm({
   habitats,
   speciesGroups,
   currentStep = -1,
-  languages
+  languages,
+  isAdmin
 }: IuserGroupEditProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
@@ -233,7 +235,7 @@ export default function UserGroupEditForm({
         </>
       )}
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fadeInUp">
-        {(currentStep == -1 || currentStep == 0) && (
+        {(currentStep == -1 || currentStep == "group:basic_details") && (
           <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ md: 4 }}>
             <Box gridColumn="1/4">
               <TextBoxField
@@ -247,6 +249,7 @@ export default function UserGroupEditForm({
                 name="webAddress"
                 isRequired={true}
                 label={t("group:webAddress")}
+                disabled={!isAdmin}
               />
               <RichTextareaField
                 key={`description-${translationSelected}`}
@@ -257,7 +260,7 @@ export default function UserGroupEditForm({
             <ImageUploaderField label="Logo" name="icon" />
           </SimpleGrid>
         )}
-        {(currentStep == -1 || currentStep == 1) && (
+        {(currentStep == -1 || currentStep == "group:group_coverage") && (
           <>
             <IconCheckboxField
               name="speciesGroupId"

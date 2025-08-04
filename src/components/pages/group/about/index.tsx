@@ -110,22 +110,22 @@ export default function AboutGroupComponent({
           {t("group:rules.title")}
         </Heading>
         <Heading size="md" as="h2" mb={2}>
-          {"User Rule"}
+          {t("group:rules.user_title")}
         </Heading>
         {groupRules.hasUserRule ? (
           <Box fontSize={"sm"} color={"gray.600"} mb={2}>
-            {"Only member’s content will be posted"}
+            {t("group:rules.has_user_rule")}
           </Box>
         ) : (
           <Box fontSize={"sm"} color={"gray.600"} mb={2}>
-            {"Any user’s content will be posted"}
+            {t("group:rules.no_user_rule")}
           </Box>
         )}
 
         {groupRules.hasTaxonomicRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>
-              Taxonomic Rule
+              {t("group:rules.taxon_rule_title")}
             </Heading>
             <Box fontSize="sm">
               {groupRules.taxonomicRuleList.map((item, idx) => (
@@ -159,7 +159,7 @@ export default function AboutGroupComponent({
         {groupRules.hasObservedOnDateRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>
-              Observed On Date Rule
+              {t("group:rules.observed_on_rule_title")}
             </Heading>
             {groupRules.observedOnDateRule.map((item) => (
               <Box fontSize={"sm"} color={"gray.600"} mb={2}>
@@ -171,7 +171,7 @@ export default function AboutGroupComponent({
         {groupRules.hasCreatedOnDateRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>
-              Created On Date Rule
+              {t("group:rules.created_on_rule_title")}
             </Heading>
             {groupRules.createdOnDateRuleList.map((item) => (
               <Box fontSize={"sm"} color={"gray.600"} mb={2}>
@@ -183,7 +183,7 @@ export default function AboutGroupComponent({
         {groupRules.hasSpatialRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>
-              Spatial Rule
+              {t("group:rules.spatial_rule_title")}
             </Heading>
             <GeoJSONPreview
               data={{
@@ -197,7 +197,7 @@ export default function AboutGroupComponent({
         {groupRules.hasTraitRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>
-              Trait Rule
+            {t("group:rules.trait_rule_title")}
             </Heading>
             {groupRules.traitRuleList.map((item) => {
               const trait = traits.filter((trait) => trait.traits.traitId === item.traitId)[0];

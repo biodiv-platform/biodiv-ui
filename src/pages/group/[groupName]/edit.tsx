@@ -66,11 +66,6 @@ export const getServerSideProps = async (ctx) => {
     });
     groupRules.taxonomicRuleList = await Promise.all(taxonPromises);
   }
-  /*groupInfo.translation.sort((a, b) => {
-    const nameA = languagesList.find((lang) => lang.id === Number(a.language))?.name || "";
-    const nameB = languagesList.find((lang) => lang.id === Number(b.language))?.name || "";
-    return nameA.localeCompare(nameB);
-  });*/
   if (s1 && s2 && s3 && s4 && s5 && s6) {
     return {
       props: {

@@ -17,6 +17,9 @@
   "confirm_leave": "Quitter le groupe?",
   "create": {
     "error": "Il y avait une erreur lors de la création de groupe",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "step": "Étape",
     "success": "Groupe créé avec succès",
     "title": "Créer un groupe"
   },
@@ -117,17 +120,24 @@
       "success": "Liste de la galerie redemandée avec succès"
     },
     "resources": {
+      "background_color": "Couleur de fond",
       "error": "Entrez une carte d'observation valide",
+      "gallery_sidebar": "Contexte latérale de la galerie",
       "imageurl": "Choisissez l'image de la galerie",
       "link": "Afficher le lien de page",
       "new_image": "Tableau d'image",
       "obs_id": "ID d'observation",
       "observation_image": "Image d'observation",
       "observation_image_not_editable": "Image d'observation non modifiable",
+      "read_more": "Lire la suite du texte du bouton",
+      "read_more_ui": "Lire la suite de type d'interface utilisateur",
+      "text_color": "Couleur de texte",
       "title": "Titre"
     },
     "save": "Enregistrer les détails de la page d'accueil",
     "show_desc": "Montrer la description",
+    "show_donors": "Montrer les donateurs",
+    "show_sponsors": "Sponsors de show",
     "success": "Changements mis à jour avec succès",
     "table": {
       "actions": "Actions",
@@ -180,6 +190,8 @@
       "success": "Créé avec succès",
       "title": "Créer une règle de groupe"
     },
+    "created_on_rule_title": "Créé sur la règle de date",
+    "has_user_rule": "Le seul contenu du membre sera publié",
     "hint": "Règles automatisées qui permettront de publier des observations éligibles au groupe.",
     "input_types": {
       "spatial": "Ajouter une règle spatiale",
@@ -187,10 +199,13 @@
       "title": "Sélectionnez le type d'entrée",
       "user": "Aggrégation des observations de tous les membres du groupe"
     },
+    "no_user_rule": "Tout contenu de l'utilisateur sera publié",
+    "observed_on_rule_title": "Règle observée sur la date",
     "remove": {
       "failure": "Impossible de supprimer la règle du groupe d'utilisateurs",
       "success": "règle du groupe d'utilisateurs supprimée"
     },
+    "spatial_rule_title": "Règle spatiale",
     "table": {
       "actions": "actions",
       "read_less": "Lire moins",
@@ -198,7 +213,10 @@
       "rule_type": "Type de règle",
       "value": "Valeur"
     },
-    "title": "Règles de groupe"
+    "taxon_rule_title": "Règle taxonomique",
+    "title": "Règles de groupe",
+    "trait_rule_title": "Règle de trait",
+    "user_title": "Règle"
   },
   "save": "Créer un groupe",
   "spatial_coverge": "Couverture spatiale",

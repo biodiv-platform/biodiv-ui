@@ -9,6 +9,7 @@ import {
   Heading,
   IconButton
 } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
@@ -60,9 +61,9 @@ export default function MiniGalleryItem({ item, index, languages, onEdit, onDele
           <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pl={4} pr={4}>
             <Flex flex={1} align="center" justify="space-between">
               <Heading as="h2" fontSize="1.2rem">
-                {`${item[1][205][0].title} Setup`}
-                <Badge colorPalette={item[1][205][0].isActive ? "blue" : "red"} ml={2}>
-                  {item[1][205][0].isActive ? "ACTIVE" : "INACTIVE"}
+                {`${item[1][SITE_CONFIG.LANG.DEFAULT_ID][0].title} Setup`}
+                <Badge colorPalette={item[1][SITE_CONFIG.LANG.DEFAULT_ID][0].isActive ? "blue" : "red"} ml={2}>
+                  {item[1][SITE_CONFIG.LANG.DEFAULT_ID][0].isActive ? "ACTIVE" : "INACTIVE"}
                 </Badge>
               </Heading>
               <Box>
@@ -105,7 +106,7 @@ export default function MiniGalleryItem({ item, index, languages, onEdit, onDele
                   languages={languages}
                   galleryId={Number(item[0])}
                   index={index}
-                  vertical={item[1][205][0].isVertical}
+                  vertical={item[1][SITE_CONFIG.LANG.DEFAULT_ID][0].isVertical}
                 />
               ) : isCreate ? (
                 <GallerySetupFrom
@@ -119,7 +120,7 @@ export default function MiniGalleryItem({ item, index, languages, onEdit, onDele
                   languages={languages}
                   group={false}
                   galleryId={Number(item[0])}
-                  vertical={item[1][205][0].isVertical}
+                  vertical={item[1][SITE_CONFIG.LANG.DEFAULT_ID][0].isVertical}
                 />
               ) : (
                 <GallerySetupTable

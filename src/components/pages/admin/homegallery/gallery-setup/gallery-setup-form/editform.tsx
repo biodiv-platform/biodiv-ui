@@ -2,13 +2,10 @@ import {
   Box,
   Button,
   ColorPicker,
-  Flex,
   HStack,
   Image,
   parseColor,
-  Portal,
-  Tabs,
-  useDisclosure
+  Portal
 } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
@@ -17,6 +14,7 @@ import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
 import { galleryFieldValidationSchema } from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form/common";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { axEditHomePageGallery, axMiniEditHomePageGallery } from "@services/utility.service";
@@ -28,18 +26,9 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuArrowLeft } from "react-icons/lu";
-import Select from "react-select";
 import * as Yup from "yup";
 
-import {
-  DialogBackdrop,
-  DialogBody,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogRoot
-} from "@/components/ui/dialog";
-import { Field } from "@/components/ui/field";
+import TranslationTab from "@/components/pages/common/translation-tab";
 
 export default function GalleryEditForm({
   setIsEdit,
@@ -67,7 +56,6 @@ export default function GalleryEditForm({
     Number(Object.keys(editGalleryData[1])[0])
   );
   const [langId, setLangId] = useState(0);
-  const { open, onClose, onOpen } = useDisclosure();
 
   const validationSchema = Yup.lazy((value) => {
     const languageMapShape: Record<string, Yup.ArraySchema<any>> = {};
@@ -140,17 +128,17 @@ export default function GalleryEditForm({
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
       setGalleryList(
-        galleryId==-1?
-        Object.entries(data?.gallerySlider || {}).sort((a, b) => {
-          const aOrder = parseInt(a[0].split("|")[1], 10);
-          const bOrder = parseInt(b[0].split("|")[1], 10);
-          return aOrder - bOrder;
-        }):
-        Object.entries(data?.miniGallerySlider[index] || {}).sort((a, b) => {
-          const aOrder = parseInt(a[0].split("|")[1], 10);
-          const bOrder = parseInt(b[0].split("|")[1], 10);
-          return aOrder - bOrder;
-        })
+        galleryId == -1
+          ? Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+              const aOrder = parseInt(a[0].split("|")[1], 10);
+              const bOrder = parseInt(b[0].split("|")[1], 10);
+              return aOrder - bOrder;
+            })
+          : Object.entries(data?.miniGallerySlider[index] || {}).sort((a, b) => {
+              const aOrder = parseInt(a[0].split("|")[1], 10);
+              const bOrder = parseInt(b[0].split("|")[1], 10);
+              return aOrder - bOrder;
+            })
       );
       setIsEdit(false);
     } else {
@@ -166,98 +154,22 @@ export default function GalleryEditForm({
           {t("group:homepage_customization.back")}
         </Button>
       </Box>
-      <DialogRoot open={open} onOpenChange={onClose}>
-        <DialogBackdrop />
-        <DialogContent>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              handleAddTranslation();
-              setLangId(0);
-              onClose();
-            }}
-          >
-            <DialogHeader> {t("common:create_form.add_translation_button")}</DialogHeader>
-            <DialogBody>
-              <Box>
-                <Field
-                  mb={2}
-                  required={true}
-                  htmlFor="name"
-                  label={t("common:create_form.language")}
-                >
-                  <Select
-                    id="langId"
-                    inputId="langId"
-                    name="langId"
-                    placeholder={t("common:create_form.language_placeholder")}
-                    onChange={(o: { value: number; label: string }) => {
-                      setLangId(o.value);
-                    }}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
-                    options={languages
-                      .sort((a, b) => a.name.localeCompare(b.name))
-                      .map((lang) => ({
-                        value: lang.id,
-                        label: lang.name
-                      }))}
-                    isSearchable={true} // Enables search
-                  />
-                </Field>
-              </Box>
-            </DialogBody>
-            <DialogFooter>
-              <Button
-                mr={3}
-                onClick={() => {
-                  setLangId(0);
-                  onClose();
-                }}
-              >
-                {t("common:create_form.cancel")}
-              </Button>
-              <Button colorPalette="blue" type="submit">
-                {t("common:create_form.create")}
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </DialogRoot>
-      <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
-        <Button colorPalette="green">{t("common:create_form.add_translation_button")}</Button>
-      </Flex>
-      <Tabs.Root
-        overflowX="auto"
-        mb={4}
-        bg="gray.100"
-        rounded="md"
-        variant="plain"
-        value={translationSelected.toString()}
-        onValueChange={({ value }) => setTranslationSelected(Number(value))}
-      >
-        <Tabs.List>
-          {Object.keys(hForm.getValues()).map((language) => (
-            <Tabs.Trigger
-              key={language}
-              value={language.toString()}
-              _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
-              m={1}
-            >
-              {languages.filter((lang) => lang.id === Number(language))[0].name}
-            </Tabs.Trigger>
-          ))}
-        </Tabs.List>
-      </Tabs.Root>
+      <TranslationTab
+        values={Object.keys(hForm.getValues())}
+        setLangId={setLangId}
+        languages={languages}
+        handleAddTranslation={handleAddTranslation}
+        translationSelected={translationSelected}
+        setTranslationSelected={setTranslationSelected}
+      />
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <TextBoxField
           key={`title-${translationSelected}`}
           name={`${translationSelected}.0.title`}
           isRequired={true}
           label={
-            translationSelected != languageId && hForm.getValues()[languageId]
-              ? hForm.getValues()[languageId][0].title
+            translationSelected != SITE_CONFIG.LANG.DEFAULT_ID
+              ? hForm.getValues()[SITE_CONFIG.LANG.DEFAULT_ID][0].title
               : t("group:homepage_customization.resources.title")
           }
         />
@@ -265,7 +177,7 @@ export default function GalleryEditForm({
           key={`moreLinks-${translationSelected}`}
           name={`${translationSelected}.0.moreLinks`}
           label={t("group:homepage_customization.resources.link")}
-          disabled={hForm.getValues()[translationSelected][0].id == null}
+          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
           onChangeCallback={(e) => {
             const values = hForm.getValues();
 
@@ -313,17 +225,17 @@ export default function GalleryEditForm({
         <TextBoxField
           key={`readMoreText-${translationSelected}`}
           name={`${translationSelected}.0.readMoreText`}
-          label="Read more button text"
+          label= {t("group:homepage_customization.resources.read_more")}
           maxLength={30}
         />
 
         <SelectInputField
           key={`readMoreUIType-${translationSelected}`}
           name={`${translationSelected}.0.readMoreUIType`}
-          label="Read more UI type"
+          label={t("group:homepage_customization.resources.read_more_ui")}
           options={readMoreUIOptions}
           shouldPortal={true}
-          disabled={hForm.getValues()[translationSelected][0].id == null}
+          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
           onChangeCallback={(value) => {
             const values = hForm.getValues();
 
@@ -340,10 +252,10 @@ export default function GalleryEditForm({
           <SelectInputField
             key={`gallerySidebar-${translationSelected}`}
             name={`${translationSelected}.0.gallerySidebar`}
-            label="Gallery sidebar background"
+            label= {t("group:homepage_customization.resources.gallery_sidebar")}
             options={gallerySidebarBackgroundOptions}
             shouldPortal={true}
-            disabled={hForm.getValues()[translationSelected][0].id == null}
+            disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             onChangeCallback={(value) => {
               const values = hForm.getValues();
 
@@ -366,7 +278,7 @@ export default function GalleryEditForm({
               mb={4}
             >
               <ColorPicker.HiddenInput />
-              <ColorPicker.Label>Text Color</ColorPicker.Label>
+              <ColorPicker.Label>{t("group:homepage_customization.resources.text_color")}</ColorPicker.Label>
               <ColorPicker.Control>
                 <ColorPicker.Trigger p="2">
                   <ColorPicker.ValueSwatch boxSize="8" />
@@ -393,7 +305,7 @@ export default function GalleryEditForm({
               mb={4}
             >
               <ColorPicker.HiddenInput />
-              <ColorPicker.Label>Background Color</ColorPicker.Label>
+              <ColorPicker.Label>{t("group:homepage_customization.resources.background_color")}</ColorPicker.Label>
               <ColorPicker.Control>
                 <ColorPicker.Trigger p="2">
                   <ColorPicker.ValueSwatch boxSize="8" />
@@ -419,7 +331,7 @@ export default function GalleryEditForm({
           key={`truncated-${translationSelected}`}
           name={`${translationSelected}.0.truncated`}
           label={t("group:homepage_customization.table.enabled")}
-          disabled={hForm.getValues()[translationSelected][0].id == null}
+          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
           onChangeCallback={(value) => {
             const values = hForm.getValues();
 

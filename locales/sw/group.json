@@ -17,6 +17,9 @@
   "confirm_leave": "Acha Group?",
   "create": {
     "error": "Kulikuwa na hitilafu wakati wa kujenga kikundi.",
+    "next": "Ifuatayo",
+    "previous": "Zamani",
+    "step": "Hatua",
     "success": "Kikundi kilichoundwa kwa mafanikio.",
     "title": "Unda kikundi"
   },
@@ -117,17 +120,24 @@
       "success": "Orodha ya Nyumba ya sanaa ilirekebishwa kwa mafanikio."
     },
     "resources": {
+      "background_color": "Rangi ya asili",
       "error": "Ingiza ID ya uchunguzi wa halali.",
+      "gallery_sidebar": "Matunzio ya sanaa ya pembeni",
       "imageurl": "Chagua picha ya sanaa",
       "link": "Onyesha kiungo cha ukurasa.",
       "new_image": "Upakiaji wa picha.",
       "obs_id": "Kitambulisho cha uchunguzi",
       "observation_image": "Picha ya uchunguzi",
       "observation_image_not_editable": "Picha ya Uchunguzi Haibadiliki",
+      "read_more": "Soma maandishi zaidi ya kitufe",
+      "read_more_ui": "Soma aina zaidi ya UI",
+      "text_color": "Rangi ya maandishi",
       "title": "Kichwa"
     },
     "save": "Hifadhi maelezo ya ukurasa wa nyumbani.",
     "show_desc": "Onyesha maelezo",
+    "show_donors": "Onyesha wafadhili",
+    "show_sponsors": "Onyesha wadhamini",
     "success": "Mabadiliko yaliyopangwa kwa mafanikio.",
     "table": {
       "actions": "Vitendo",
@@ -180,6 +190,8 @@
       "success": "Imeundwa kwa mafanikio.",
       "title": "Unda utawala wa kikundi"
     },
+    "created_on_rule_title": "Iliyoundwa kwa sheria ya tarehe",
+    "has_user_rule": "Yaliyomo tu ya mwanachama yatatumwa",
     "hint": "Sheria za kiotomatiki ambazo zitaruhusu kutuma uchunguzi wa kufuzu kwa kikundi.",
     "input_types": {
       "spatial": "Ongeza utawala wa anga.",
@@ -187,10 +199,13 @@
       "title": "Chagua aina ya kuingiza.",
       "user": "Uchunguzi wa jumla wa wanachama wote wa kikundi"
     },
+    "no_user_rule": "Yaliyomo yoyote ya mtumiaji yatatumwa",
+    "observed_on_rule_title": "Inazingatiwa juu ya sheria ya tarehe",
     "remove": {
       "failure": "Haiwezi kufuta utawala wa kikundi cha mtumiaji",
       "success": "Utawala wa kikundi cha mtumiaji umefutwa."
     },
+    "spatial_rule_title": "Utawala wa anga",
     "table": {
       "actions": "Vitendo",
       "read_less": "Soma chini.",
@@ -198,7 +213,10 @@
       "rule_type": "Kanuni ya aina.",
       "value": "Thamani"
     },
-    "title": "Kanuni za Kikundi"
+    "taxon_rule_title": "Utawala wa taxonomic",
+    "title": "Kanuni za Kikundi",
+    "trait_rule_title": "Sheria ya tabia",
+    "user_title": "Sheria ya Mtumiaji"
   },
   "save": "Unda kikundi",
   "spatial_coverge": "Chanjo ya nafasi.",

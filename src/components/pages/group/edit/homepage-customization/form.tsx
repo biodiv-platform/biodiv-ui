@@ -102,7 +102,7 @@ export default function HomePageCustomizationForm({
 
   return (
     <>
-      {currentStep == 3 && (
+      {currentStep == "group:homepage_customization.title" && (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
             <Box width={["100%", 350]} justifyContent="space-between">
@@ -124,7 +124,7 @@ export default function HomePageCustomizationForm({
           </form>
         </FormProvider>
       )}
-      {currentStep == 4 && (
+      {currentStep == "group:homepage_customization.gallery_setup.title" && (
         <GallerySetup
           userGroupId={userGroupId}
           isCreate={isCreate}

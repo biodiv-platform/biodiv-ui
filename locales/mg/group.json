@@ -17,6 +17,9 @@
   "confirm_leave": "Mialà vondrona?",
   "create": {
     "error": "Nisy ny fahadisoana raha namorona vondrona",
+    "next": "Manaraka",
+    "previous": "Teo aloha",
+    "step": "Dingana",
     "success": "Noforonina soa aman-tsara ny vondrona",
     "title": "Mamorona vondrona"
   },
@@ -117,17 +120,24 @@
       "success": "Lisitry ny galera novaina soa aman-tsara"
     },
     "resources": {
+      "background_color": "Loko aoriana",
       "error": "Ampidiro ny ID fandinihana marina",
+      "gallery_sidebar": "Gallery Sidebar background",
       "imageurl": "Safidio ny sary galeri",
       "link": "Asehoy ny rohy pejy",
       "new_image": "Sary nampidirina",
       "obs_id": "ID fandinihana",
       "observation_image": "Sary fandinihana",
       "observation_image_not_editable": "Sary Observation Tsy azo ovaina",
+      "read_more": "Vakio bebe kokoa ny lahatsoratra bokotra bokotra",
+      "read_more_ui": "Vakio bebe kokoa ny karazana ui",
+      "text_color": "Loko an-tsoratra",
       "title": "lohateny"
     },
     "save": "Tehirizo ny antsipirian'ny tranokala",
     "show_desc": "Asehoy ny famaritana",
+    "show_donors": "Asehoy ireo mpamatsy vola",
+    "show_sponsors": "Asehoy ny mpanohana",
     "success": "Nohavaozina nahomby",
     "table": {
       "actions": "asa",
@@ -180,6 +190,8 @@
       "success": "Namboarina soa aman-tsara",
       "title": "Mamorona fitsipika"
     },
+    "created_on_rule_title": "Noforonina tamin'ny fitsipika farany",
+    "has_user_rule": "Ny votoatin'ny mpikambana ihany no halefa",
     "hint": "Fitsipika automatique izay mamela ny fandefasana ny fandinihana ny fandinihana ny vondrona.",
     "input_types": {
       "spatial": "Ampio ny fitsipika spatial",
@@ -187,10 +199,13 @@
       "title": "Safidio ny karazana fidirana",
       "user": "Ny fanaraha-maso ny mpikambana ao amin'ny vondrona rehetra"
     },
+    "no_user_rule": "Izay atiny mpampiasa dia halefa",
+    "observed_on_rule_title": "Voamarika tamin'ny fitsipika farany",
     "remove": {
       "failure": "Tsy afaka namafa ny fitsipiky ny vondrona mpampiasa",
       "success": "Nesorina ny lalàna mifehy ny vondrona vondrona"
     },
+    "spatial_rule_title": "Fitsipika spatial",
     "table": {
       "actions": "asa",
       "read_less": "Vakio kely kokoa",
@@ -198,7 +213,10 @@
       "rule_type": "Fitsipika karazana",
       "value": "sarobidy"
     },
-    "title": "Fitsipika vondrona"
+    "taxon_rule_title": "Fitsipika momba ny hetra",
+    "title": "Fitsipika vondrona",
+    "trait_rule_title": "Trait Fitsipika",
+    "user_title": "Fitsipika mpampiasa"
   },
   "save": "Mamorona vondrona",
   "spatial_coverge": "Fandrakofana an-tsokosoko",
