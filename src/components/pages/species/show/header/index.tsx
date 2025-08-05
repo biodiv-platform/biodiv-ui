@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Spacer, Stack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image, Spacer, Stack } from "@chakra-ui/react";
 import DeleteActionButton from "@components/@core/action-buttons/delete";
 import FollowActionButton from "@components/@core/action-buttons/follow";
 import ShareActionButton from "@components/@core/action-buttons/share";
@@ -52,14 +52,6 @@ function SpeciesHeader() {
 
   const PageActions = () => (
     <div>
-      {canEditTaxon && currentTaxonId && (
-        <SimpleActionButton
-          icon={<LuPencil />}
-          title="Edit Taxon"
-          onClick={taxonEditActions?.onOpen}
-          colorPalette="green"
-        />
-      )}
       <FollowActionButton
         following={permissions.isFollower}
         resourceId={species.species?.id}
@@ -86,7 +78,17 @@ function SpeciesHeader() {
       <Spacer />
       <Stack direction="column" p={3} gap={4}>
         <PageHeading className="fadeInUp" mb={0} size="4xl">
-          <ScientificName value={species?.taxonomyDefinition?.italicisedForm} />
+          <HStack>
+            <ScientificName value={species?.taxonomyDefinition?.italicisedForm} />
+            {canEditTaxon && currentTaxonId && (
+              <SimpleActionButton
+                icon={<LuPencil />}
+                title="Edit Taxon"
+                onClick={taxonEditActions?.onOpen}
+                colorPalette="green"
+              />
+            )}
+          </HStack>
         </PageHeading>
 
         {prefferedCommonName && (
