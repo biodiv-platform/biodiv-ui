@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import GallerySetupFrom from "@/components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form";
 import useGlobalState from "@/hooks/use-global-state";
@@ -44,6 +44,11 @@ export default function MiniGalleryItem({
   const [galleryList, setGalleryList] = useState(sliderList[index]);
   const miniGalleryDetails =
     item[1]?.[languageId]?.[0] || item[1]?.[SITE_CONFIG.LANG.DEFAULT_ID]?.[0];
+
+    useEffect(() => {
+      setGalleryList(sliderList[index]);
+      setEditData(sliderList[index]);
+    }, [sliderList]);
 
   const handleDelete = async () => {
     const { success } = await axRemoveMiniGallery(item[0]);
