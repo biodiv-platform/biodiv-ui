@@ -103,9 +103,11 @@
       "delete_error": "हटाने में असमर्थ",
       "delete_success": "मिनी गैलरी सफलतापूर्वक हटा दी गई",
       "edit_error": "मिनी गैलरी अपडेट करने में असमर्थ",
+      "horizontal_slider_label": "क्षैतिज स्लाइड (स्लाइड बाएं और दाएं स्थानांतरित करें)",
       "slides_per_view": "देखने में स्लाइड",
       "title": "मिनी गैलरी",
-      "vertical_label": "स्लाइडर प्रकार"
+      "vertical_label": "स्लाइडर प्रकार",
+      "vertical_slider_label": "ऊर्ध्वाधर स्लाइड (स्लाइड ऊपर और नीचे की ओर)"
     },
     "module_stats": "मॉड्यूल आँकड़े",
     "observation_map": "अवलोकन वितरण मानचित्र",
@@ -129,7 +131,11 @@
       "observation_image": "अवलोकन छवि",
       "observation_image_not_editable": "अवलोकन छवि संपादन योग्य नहीं है",
       "read_more": "अधिक बटन पाठ पढ़ें",
+      "read_more_button": "बटन",
+      "read_more_link": "जोड़ना",
       "read_more_ui": "अधिक UI प्रकार पढ़ें",
+      "sidebar_opaque": "अस्पष्ट",
+      "sidebar_translucent": "पारदर्शी",
       "text_color": "पाठ का रंग",
       "title": "शीर्षक"
     },

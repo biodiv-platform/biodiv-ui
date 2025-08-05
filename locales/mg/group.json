@@ -104,9 +104,11 @@
       "delete_success": "Nahomby ny galeria mini",
       "edit_error": "Tsy afaka nanavao ny Gallery Mini",
       "edit_success": "Nohavaozina tamim-pahombiazana ny galeri Mini",
+      "horizontal_slider_label": "Slide horizontal (mihetsika ankavia sy havanana)",
       "slides_per_view": "Slides raha jerena",
       "title": "Mini Gallery",
-      "vertical_label": "Slider karazana"
+      "vertical_label": "Slider karazana",
+      "vertical_slider_label": "Slide vertical (slide mihetsika sy midina)"
     },
     "module_stats": "Stats Module",
     "observation_map": "Sarintany fizarana fandinihana",
@@ -130,7 +132,11 @@
       "observation_image": "Sary fandinihana",
       "observation_image_not_editable": "Sary Observation Tsy azo ovaina",
       "read_more": "Vakio bebe kokoa ny lahatsoratra bokotra bokotra",
+      "read_more_button": "button",
+      "read_more_link": "rohy",
       "read_more_ui": "Vakio bebe kokoa ny karazana ui",
+      "sidebar_opaque": "manjavozavo",
+      "sidebar_translucent": "translucent",
       "text_color": "Loko an-tsoratra",
       "title": "lohateny"
     },

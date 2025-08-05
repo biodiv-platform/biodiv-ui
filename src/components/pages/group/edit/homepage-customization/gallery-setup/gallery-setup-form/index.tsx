@@ -13,6 +13,7 @@ import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import useTranslation from "next-translate/useTranslation";
@@ -54,12 +55,12 @@ export default function GallerySetupFrom({
 }) {
   const { t } = useTranslation();
   const readMoreUIOptions = [
-    { label: "link", value: "link" },
-    { label: "button", value: "button" }
+    { label: t("group:homepage_customization.resources.read_more_link"), value: "link" },
+    { label: t("group:homepage_customization.resources.read_more_button"), value: "button" }
   ];
   const gallerySidebarBackgroundOptions = [
-    { label: "opaque", value: "opaque" },
-    { label: "translucent", value: "translucent" }
+    { label: t("group:homepage_customization.resources.sidebar_opaque"), value: "opaque" },
+    { label: t("group:homepage_customization.resources.sidebar_translucent"), value: "translucent" }
   ];
   const [imagePicker, setImagePicker] = useState<boolean>(true);
   const { languageId } = useGlobalState();
@@ -79,7 +80,7 @@ export default function GallerySetupFrom({
     resolver: yupResolver(validationSchema),
     context: { isVertical: vertical },
     defaultValues: {
-      [languageId]: group
+      [SITE_CONFIG.LANG.DEFAULT_ID]: group
         ? [
             {
               customDescripition: "",
@@ -202,6 +203,7 @@ export default function GallerySetupFrom({
             name={`${translationSelected}.0.readMoreUIType`}
             label={t("group:homepage_customization.resources.read_more_ui")}
             options={readMoreUIOptions}
+            disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             shouldPortal={true}
             onChangeCallback={(value) => {
               const values = hForm.getValues();
@@ -220,6 +222,7 @@ export default function GallerySetupFrom({
               name={`${translationSelected}.0.gallerySidebar`}
               label={t("group:homepage_customization.resources.gallery_sidebar")}
               options={gallerySidebarBackgroundOptions}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               shouldPortal={true}
               onChangeCallback={(value) => {
                 const values = hForm.getValues();
@@ -241,6 +244,7 @@ export default function GallerySetupFrom({
                 maxW="200px"
                 onValueChange={(v) => setColor(v.valueAsString)}
                 mb={4}
+                disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               >
                 <ColorPicker.HiddenInput />
                 <ColorPicker.Label>{t("group:homepage_customization.resources.text_color")}</ColorPicker.Label>
@@ -268,6 +272,7 @@ export default function GallerySetupFrom({
                 maxW="200px"
                 onValueChange={(v) => setBgColor(v.valueAsString)}
                 mb={4}
+                disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               >
                 <ColorPicker.HiddenInput />
                 <ColorPicker.Label>{t("group:homepage_customization.resources.background_color")}</ColorPicker.Label>
@@ -295,6 +300,7 @@ export default function GallerySetupFrom({
           {!group && (
             <CheckboxField
               key={`truncated-${translationSelected}`}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               name={`${translationSelected}.0.truncated`}
               label={t("group:homepage_customization.table.enabled")}
             />

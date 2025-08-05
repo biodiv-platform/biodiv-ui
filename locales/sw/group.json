@@ -104,9 +104,11 @@
       "delete_success": "Matunzio ya Mini yalifutwa kwa mafanikio",
       "edit_error": "Haiwezi kusasisha nyumba ya sanaa ya mini",
       "edit_success": "Matunzio ya Mini yalisasishwa kwa mafanikio",
+      "horizontal_slider_label": "Slaidi ya usawa (slaidi kusonga kushoto na kulia)",
       "slides_per_view": "Slaidi kwa mtazamo",
       "title": "Matunzio ya Mini",
-      "vertical_label": "Aina ya slider"
+      "vertical_label": "Aina ya slider",
+      "vertical_slider_label": "Slaidi ya wima (slaidi kusonga juu na chini)"
     },
     "module_stats": "Takwimu za moduli.",
     "observation_map": "Ramani ya usambazaji wa uchunguzi",
@@ -130,7 +132,11 @@
       "observation_image": "Picha ya uchunguzi",
       "observation_image_not_editable": "Picha ya Uchunguzi Haibadiliki",
       "read_more": "Soma maandishi zaidi ya kitufe",
+      "read_more_button": "Kitufe",
+      "read_more_link": "kiungo",
       "read_more_ui": "Soma aina zaidi ya UI",
+      "sidebar_opaque": "opaque",
+      "sidebar_translucent": "Translucent",
       "text_color": "Rangi ya maandishi",
       "title": "Kichwa"
     },

@@ -31,7 +31,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
       loop: featured.length > slidesPerView,
       slides: {
         perView: featured.length > slidesPerView ? slidesPerView : featured.length,
-        spacing: 16
+        spacing: 4
       },
       slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel),
       created: () => setSliderLoaded(true)
@@ -88,7 +88,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
         ref={sliderRef}
         className="keen-slider"
         style={{ visibility: sliderLoaded ? "visible" : "hidden" }}
-        h={featured.length > slidesPerView ? 200 * slidesPerView : 200 * featured.length}
+        h={featured.length > slidesPerView ? 100 * slidesPerView : (100 * featured.length)}
       >
         {featured.map((o, index) => {
           const resource = o[1]?.[languageId]?.[0] || o[1]?.[LANG.DEFAULT_ID]?.[0];
@@ -110,8 +110,8 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
                       resource?.fileName,
                       RESOURCE_SIZE.PREVIEW
                     )}
-                    h={200}
-                    w={200}
+                    h={100}
+                    w={100}
                     objectFit="cover"
                     loading="lazy"
                     alt={resource.id}
@@ -120,29 +120,31 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
                 )}
                 <Center flex="1" h="full" p={{ base: 5 }}>
                   <Box>
-                    <Heading as="h1" fontWeight={500} mb={2} fontSize="1.2rem">
+                    <Heading as="h1" fontWeight={500} mb={2} fontSize="1.5rem">
                       {resource?.title}
                     </Heading>
                     <Text fontSize={"sm"} mb={4} maxH="6rem" overflow="auto">
                       {resource?.customDescripition}
                     </Text>
-                    {resource.moreLinks && resource.readMoreUIType == "button" ? (
-                      <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
-                        <a href={resource.moreLinks}>
-                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
-                          <LuArrowRight />
-                        </a>
-                      </Button>
-                    ) : (
-                      <a href={resource.moreLinks}>
-                        <Flex alignItems="center">
-                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
-                          <LuArrowRight />
-                        </Flex>
-                      </a>
-                    )}
                   </Box>
                 </Center>
+                <Box mr={6}>
+                  {resource.moreLinks && resource.readMoreUIType == "button" ? (
+                    <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+                      <a href={resource.moreLinks}>
+                        {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                        <LuArrowRight />
+                      </a>
+                    </Button>
+                  ) : (
+                    <a href={resource.moreLinks}>
+                      <Flex alignItems="center">
+                        {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                        <LuArrowRight />
+                      </Flex>
+                    </a>
+                  )}
+                </Box>
               </HStack>
             </Box>
           );

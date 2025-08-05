@@ -42,13 +42,13 @@ export default function GalleryEditForm({
   const { t } = useTranslation();
 
   const readMoreUIOptions = [
-    { label: "link", value: "link" },
-    { label: "button", value: "button" }
+    { label: t("group:homepage_customization.resources.read_more_link"), value: "link" },
+    { label: t("group:homepage_customization.resources.read_more_button"), value: "button" }
   ];
 
   const gallerySidebarBackgroundOptions = [
-    { label: "opaque", value: "opaque" },
-    { label: "translucent", value: "translucent" }
+    { label: t("group:homepage_customization.resources.sidebar_opaque"), value: "opaque" },
+    { label: t("group:homepage_customization.resources.sidebar_translucent"), value: "translucent" }
   ];
 
   const { languageId } = useGlobalState();
@@ -67,10 +67,10 @@ export default function GalleryEditForm({
     return Yup.object().shape(languageMapShape);
   });
   const [color, setColor] = useState(
-    editGalleryData[1][205][0].color ? editGalleryData[1][205][0].color : "rgba(255,255,255,1)"
+    editGalleryData[1][205][0].color ? editGalleryData[1][SITE_CONFIG.LANG.DEFAULT_ID][0].color : "rgba(255,255,255,1)"
   );
   const [bgColor, setBgColor] = useState(
-    editGalleryData[1][205][0].bgColor ? editGalleryData[1][205][0].bgColor : "rgba(26, 32, 44, 1)"
+    editGalleryData[1][205][0].bgColor ? editGalleryData[1][SITE_CONFIG.LANG.DEFAULT_ID][0].bgColor : "rgba(26, 32, 44, 1)"
   );
 
   const hForm = useForm<any>({
@@ -87,23 +87,24 @@ export default function GalleryEditForm({
   const handleAddTranslation = () => {
     hForm.setValue(`${langId}`, [
       {
-        authorId: editGalleryData[1][translationSelected][0].authorId,
-        authorImage: editGalleryData[1][translationSelected][0].authorImage,
-        authorName: editGalleryData[1][translationSelected][0].authorName,
+        authorId: hForm.getValues()[translationSelected][0].authorId,
+        authorImage: hForm.getValues()[translationSelected][0].authorImage,
+        authorName: hForm.getValues()[translationSelected][0].authorName,
         customDescripition: "",
-        displayOrder: editGalleryData[1][translationSelected][0].displayOrder,
-        fileName: editGalleryData[1][translationSelected][0].fileName,
-        gallerySidebar: editGalleryData[1][translationSelected][0].gallerySidebar,
+        displayOrder: hForm.getValues()[translationSelected][0].displayOrder,
+        fileName: hForm.getValues()[translationSelected][0].fileName,
+        gallerySidebar: hForm.getValues()[translationSelected][0].gallerySidebar,
         id: null,
         languageId: langId,
-        moreLinks: editGalleryData[1][translationSelected][0].moreLinks,
-        observationId: editGalleryData[1][translationSelected][0].observationId,
+        moreLinks: hForm.getValues()[translationSelected][0].moreLinks,
+        observationId: hForm.getValues()[translationSelected][0].observationId,
         readMoreText: null,
-        readMoreUIType: editGalleryData[1][translationSelected][0].readMoreUIType,
+        readMoreUIType: hForm.getValues()[translationSelected][0].readMoreUIType,
         sliderId: Number(editGalleryData[0].split("|")[0]),
         title: "",
-        truncated: editGalleryData[1][translationSelected][0].truncated,
-        ugId: editGalleryData[1][translationSelected][0].ugId
+        truncated: hForm.getValues()[translationSelected][0].truncated,
+        ugId: hForm.getValues()[translationSelected][0].ugId,
+        galleryId: galleryId
       }
     ]);
     setTranslationSelected(langId);
@@ -204,6 +205,7 @@ export default function GalleryEditForm({
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
             name={`${translationSelected}.0.fileName`}
+            disabled= {translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             onChangeCallback={(value) => {
               const values = hForm.getValues();
 
@@ -276,6 +278,7 @@ export default function GalleryEditForm({
               maxW="200px"
               onValueChange={(v) => setColor(v.valueAsString)}
               mb={4}
+              disabled = {translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             >
               <ColorPicker.HiddenInput />
               <ColorPicker.Label>{t("group:homepage_customization.resources.text_color")}</ColorPicker.Label>
@@ -303,6 +306,7 @@ export default function GalleryEditForm({
               maxW="200px"
               onValueChange={(v) => setBgColor(v.valueAsString)}
               mb={4}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             >
               <ColorPicker.HiddenInput />
               <ColorPicker.Label>{t("group:homepage_customization.resources.background_color")}</ColorPicker.Label>

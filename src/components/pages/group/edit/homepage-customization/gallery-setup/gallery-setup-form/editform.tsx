@@ -25,12 +25,12 @@ import { galleryFieldValidationSchema } from "./common";
 export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData, languages }) {
   const { t } = useTranslation();
   const readMoreUIOptions = [
-    { label: "link", value: "link" },
-    { label: "button", value: "button" }
+    { label: t("group:homepage_customization.resources.read_more_link"), value: "link" },
+    { label: t("group:homepage_customization.resources.read_more_button"), value: "button" }
   ];
   const gallerySidebarBackgroundOptions = [
-    { label: "opaque", value: "opaque" },
-    { label: "translucent", value: "translucent" }
+    { label: t("group:homepage_customization.resources.sidebar_opaque"), value: "opaque" },
+    { label: t("group:homepage_customization.resources.sidebar_translucent"), value: "translucent" }
   ];
   const { languageId } = useGlobalState();
   const [translationSelected, setTranslationSelected] = useState<number>(
@@ -68,22 +68,22 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
     setTranslationSelected(langId);
     hForm.setValue(`${langId}`, [
       {
-        authorId: editGalleryData[1][translationSelected][0].authorId,
-        authorImage: editGalleryData[1][translationSelected][0].authorImage,
-        authorName: editGalleryData[1][translationSelected][0].authorName,
+        authorId: hForm.getValues()[translationSelected][0].authorId,
+        authorImage: hForm.getValues()[translationSelected][0].authorImage,
+        authorName: hForm.getValues()[translationSelected][0].authorName,
         customDescripition: "",
-        displayOrder: editGalleryData[1][translationSelected][0].displayOrder,
-        fileName: editGalleryData[1][translationSelected][0].fileName,
-        gallerySidebar: editGalleryData[1][translationSelected][0].gallerySidebar,
+        displayOrder: hForm.getValues()[translationSelected][0].displayOrder,
+        fileName: hForm.getValues()[translationSelected][0].fileName,
+        gallerySidebar: hForm.getValues()[translationSelected][0].gallerySidebar,
         id: null,
         languageId: langId,
-        moreLinks: editGalleryData[1][translationSelected][0].moreLinks,
-        observationId: editGalleryData[1][translationSelected][0].observationId,
+        moreLinks: hForm.getValues()[translationSelected][0].moreLinks,
+        observationId: hForm.getValues()[translationSelected][0].observationId,
         readMoreText: null,
-        readMoreUIType: editGalleryData[1][translationSelected][0].readMoreUIType,
+        readMoreUIType: hForm.getValues()[translationSelected][0].readMoreUIType,
         sliderId: Number(editGalleryData[0].split("|")[0]),
         title: "",
-        ugId: editGalleryData[1][translationSelected][0].ugId
+        ugId: hForm.getValues()[translationSelected][0].ugId
       }
     ]);
   };
@@ -161,6 +161,7 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
             name={`${translationSelected}.0.fileName`}
+            disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             onChangeCallback={(value) => {
               const values = hForm.getValues();
 

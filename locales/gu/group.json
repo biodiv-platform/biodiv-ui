@@ -104,9 +104,11 @@
       "delete_success": "મીની ગેલેરી સફળતાપૂર્વક કા deleted ી નાખી",
       "edit_error": "મીની ગેલેરી અપડેટ કરવામાં અસમર્થ",
       "edit_success": "મીની ગેલેરી સફળતાપૂર્વક અપડેટ થઈ",
+      "horizontal_slider_label": "આડી સ્લાઇડ (સ્લાઇડ્સ ડાબી અને જમણી તરફ આગળ વધે છે)",
       "slides_per_view": "દૃષ્ટિકોણથી સ્લાઇડ્સ",
       "title": "લઘુ વજારો",
-      "vertical_label": "સ્લાઇડર પ્રકાર"
+      "vertical_label": "સ્લાઇડર પ્રકાર",
+      "vertical_slider_label": "Tical ભી સ્લાઇડ (સ્લાઇડ્સ ઉપર અને નીચે આગળ વધે છે)"
     },
     "module_stats": "મોડ્યુલ ના આંકડા",
     "observation_map": "નિરીક્ષણ વિતરણ નકશો",
@@ -130,7 +132,11 @@
       "observation_image": "અવલોકન ફોટો",
       "observation_image_not_editable": "અવલોકન છબી સંપાદનયોગ્ય નથી",
       "read_more": "વધુ વાંચો બટન ટેક્સ્ટ",
+      "read_more_button": "બટન",
+      "read_more_link": "સંબંધ",
       "read_more_ui": "વધુ UI પ્રકાર વાંચો",
+      "sidebar_opaque": "અપારદર્શક",
+      "sidebar_translucent": "પહોળું",
       "text_color": "લખાણનો રંગ",
       "title": "શીર્ષક"
     },

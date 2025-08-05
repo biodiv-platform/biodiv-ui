@@ -104,9 +104,11 @@
       "delete_success": "మినీ గ్యాలరీ విజయవంతంగా తొలగించబడింది",
       "edit_error": "మినీ గ్యాలరీని నవీకరించడం సాధ్యం కాలేదు",
       "edit_success": "మినీ గ్యాలరీ విజయవంతంగా నవీకరించబడింది",
+      "horizontal_slider_label": "క్షితిజ సమాంతర స్లైడ్ (స్లైడ్లు ఎడమ మరియు కుడి వైపుకు కదులుతాయి)",
       "slides_per_view": "ప్రతి వీక్షణకు స్లైడ్లు",
       "title": "మినీ గ్యాలరీ",
-      "vertical_label": "స్లైడర్ రకం"
+      "vertical_label": "స్లైడర్ రకం",
+      "vertical_slider_label": "నిలువు స్లైడ్ (స్లైడ్‌లు పైకి క్రిందికి కదులుతాయి)"
     },
     "module_stats": "మాడ్యూల్ గణాంకాలు",
     "observation_map": "పరిశీలన పంపిణీ మ్యాప్",
@@ -130,7 +132,11 @@
       "observation_image": "పరిశీలన చిత్రం",
       "observation_image_not_editable": "పరిశీలన చిత్రం సవరించబడదు",
       "read_more": "మరింత చదవండి బటన్ వచనం",
+      "read_more_button": "బటన్",
+      "read_more_link": "లింక్",
       "read_more_ui": "మరింత చదవండి UI రకం",
+      "sidebar_opaque": "అపారదర్శక",
+      "sidebar_translucent": "అపారదర్శక",
       "text_color": "టెక్స్ట్ కలర్",
       "title": "శీర్షికబడ్డ"
     },

@@ -105,9 +105,11 @@
       "delete_success": "Mini Gallery Deleted Successfully",
       "edit_error": "Unable to update mini gallery",
       "edit_success": "Mini Gallery Updated Successfully",
+      "horizontal_slider_label": "Horizontal Slide (Slides move left and right)",
       "slides_per_view": "Slides In View",
       "title": "Mini Gallery",
-      "vertical_label": "Slider Type"
+      "vertical_label": "Slider Type",
+      "vertical_slider_label": "Vertical Slide (Slides move up and down)"
     },
     "module_stats": "Module Stats",
     "observation_map": "Observation Distribution Map",
@@ -131,7 +133,11 @@
       "observation_image": "Observation Image",
       "observation_image_not_editable": "Observation Image Not Editable",
       "read_more": "Read more button text",
+      "read_more_button": "button",
+      "read_more_link": "link",
       "read_more_ui": "Read more UI type",
+      "sidebar_opaque": "opaque",
+      "sidebar_translucent": "translucent",
       "text_color": "Text Color",
       "title": "Title"
     },

@@ -143,7 +143,7 @@ export default function UserGroupEditForm({
 
   return (
     <FormProvider {...hForm}>
-      {(currentStep == -1 || currentStep == 0) && (
+      {(currentStep == -1 || currentStep == "group:basic_details") && (
         <>
           <DialogRoot open={open} onOpenChange={onClose}>
             <DialogBackdrop />
@@ -284,7 +284,7 @@ export default function UserGroupEditForm({
           </>
         )}
 
-        {(currentStep == 0 || currentStep == 1) && (
+        {(currentStep == "group:basic_details" || currentStep == "group:group_coverage") && (
           <SubmitButton mb={8}>{t("group:update")}</SubmitButton>
         )}
       </form>

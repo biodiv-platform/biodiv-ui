@@ -104,9 +104,11 @@
       "delete_success": "ମିନି ଗ୍ୟାଲେରୀ ସଫଳତାର ସହିତ ବିଲୋପ ହେଲା |",
       "edit_error": "ମିନି ଗ୍ୟାଲେରୀ ଅପଡେଟ୍ କରିବାକୁ ଅସମର୍ଥ |",
       "edit_success": "ମିନି ଗ୍ୟାଲେରୀ ସଫଳତାର ସହିତ ଅଦ୍ୟତନ ହେଲା |",
+      "horizontal_slider_label": "ଭୂସମାନ୍ତର ସ୍ଲାଇଡ୍ (ସ୍ଲାଇଡ୍ ବାମ ଏବଂ ଡାହାଣକୁ ଘୁଞ୍ଚାଏ)",
       "slides_per_view": "ଦୃଶ୍ୟରେ ସ୍ଲାଇଡ୍ |",
       "title": "ମିନି ଗ୍ୟାଲେରୀ |",
-      "vertical_label": "ସ୍ଲାଇଡର୍ ପ୍ରକାର |"
+      "vertical_label": "ସ୍ଲାଇଡର୍ ପ୍ରକାର |",
+      "vertical_slider_label": "ଭୂଲମ୍ବ ସ୍ଲାଇଡ୍ (ସ୍ଲାଇଡ୍ ଅପ୍ ଏବଂ ତଳକୁ ଯାଏ)"
     },
     "module_stats": "ମଡ୍ୟୁଲ୍ ଷ୍ଟାଟସ୍ |",
     "observation_map": "ପର୍ଯ୍ୟବେକ୍ଷଣ ବଣ୍ଟନ ମାନଚିତ୍ର |",
@@ -130,7 +132,11 @@
       "observation_image": "ପର୍ଯ୍ୟବେକ୍ଷଣ ପ୍ରତିଛବି |",
       "observation_image_not_editable": "ପର୍ଯ୍ୟବେକ୍ଷଣ ପ୍ରତିଛବି ସମ୍ପାଦନାଯୋଗ୍ୟ ନୁହେଁ |",
       "read_more": "ଅଧିକ ବଟନ୍ ଟେକ୍ସଟ୍ ପ Read ନ୍ତୁ |",
+      "read_more_button": "ବଟନ୍",
+      "read_more_link": "ଲିଙ୍କ୍",
       "read_more_ui": "ଅଧିକ UI ପ୍ରକାର ପ Read ନ୍ତୁ |",
+      "sidebar_opaque": "ଅସ୍ପଷ୍ଟ |",
+      "sidebar_translucent": "ସ୍ୱଚ୍ଛ",
       "text_color": "ପାଠ୍ୟ ରଙ୍ଗ",
       "title": "ଆଖ୍ୟା"
     },

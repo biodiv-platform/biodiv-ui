@@ -104,9 +104,11 @@
       "delete_success": "Mini Gallery supprimée avec succès",
       "edit_error": "Impossible de mettre à jour Mini Gallery",
       "edit_success": "Mini Galerie mise à jour avec succès",
+      "horizontal_slider_label": "Glissement horizontal (les diapositives se déplacent à gauche et à droite)",
       "slides_per_view": "Diapositives en vue",
       "title": "Mini-galerie",
-      "vertical_label": "Type de curseur"
+      "vertical_label": "Type de curseur",
+      "vertical_slider_label": "Glissement vertical (les diapositives se déplacent de haut en bas)"
     },
     "module_stats": "Statistiques de module",
     "observation_map": "Carte de distribution d'observations",
@@ -130,7 +132,11 @@
       "observation_image": "Image d'observation",
       "observation_image_not_editable": "Image d'observation non modifiable",
       "read_more": "Lire la suite du texte du bouton",
+      "read_more_button": "bouton",
+      "read_more_link": "lien",
       "read_more_ui": "Lire la suite de type d'interface utilisateur",
+      "sidebar_opaque": "opaque",
+      "sidebar_translucent": "translucide",
       "text_color": "Couleur de texte",
       "title": "Titre"
     },

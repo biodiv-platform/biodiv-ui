@@ -104,9 +104,11 @@
       "delete_success": "ਮਿਨੀ ਗੈਲਰੀ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾ ਦਿੱਤੀ ਗਈ",
       "edit_error": "ਮਿਨੀ ਗੈਲਰੀ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
       "edit_success": "ਮਿਨੀ ਗੈਲਰੀ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੀ ਗਈ",
+      "horizontal_slider_label": "ਖਿਤਿਜੀ ਸਲਾਈਡ (ਸਲਾਈਡ ਖੱਬੇ ਅਤੇ ਸੱਜੇ ਹਿਲਾ",
       "slides_per_view": "ਵੇਖਣ ਵਿੱਚ ਸਲਾਈਡ",
       "title": "ਮਿਨੀ ਗੈਲਰੀ",
-      "vertical_label": "ਸਲਾਇਡਰ ਕਿਸਮ"
+      "vertical_label": "ਸਲਾਇਡਰ ਕਿਸਮ",
+      "vertical_slider_label": "ਲੰਬਕਾਰੀ ਸਲਾਈਡ (ਸਲਾਈਡਾਂ ਉੱਪਰ ਅਤੇ ਹੇਠਾਂ ਵੱਲ ਵਧਦੀਆਂ ਹਨ)"
     },
     "module_stats": "ਮੋਡੀ ule ਲ ਅੰਕੜੇ",
     "observation_map": "ਨਿਰੀਖਣ ਡਿਸਟਰੀਬਿ .ਸ਼ਨ ਦਾ ਨਕਸ਼ਾ",
@@ -130,7 +132,11 @@
       "observation_image": "ਨਿਰੀਖਣ ਚਿੱਤਰ",
       "observation_image_not_editable": "ਨਿਰੀਖਣ ਚਿੱਤਰ ਸੰਪਾਦਨਯੋਗ ਨਹੀਂ ਹੈ",
       "read_more": "ਹੋਰ ਬਟਨ ਟੈਕਸਟ ਪੜ੍ਹੋ",
+      "read_more_button": "ਬਟਨ",
+      "read_more_link": "ਲਿੰਕ",
       "read_more_ui": "ਹੋਰ ਛੁਪਾਓ",
+      "sidebar_opaque": "ਧੁੰਦਲਾ",
+      "sidebar_translucent": "ਪਾਰਦਰਸ਼ੀ",
       "text_color": "ਟੈਕਸਟ ਰੰਗ",
       "title": "ਸਿਰਲੇਖ"
     },

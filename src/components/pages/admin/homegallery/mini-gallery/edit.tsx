@@ -17,17 +17,6 @@ import useGlobalState from "@/hooks/use-global-state";
 import { axEditMiniGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
 
-export const SLIDER_TYPE = [
-  {
-    label: "Horizontal Slide (Slides move left and right)",
-    value: "false"
-  },
-  {
-    label: "Vertical Slide (Slides move up and down)",
-    value: "true"
-  }
-];
-
 export default function EditMiniGalleryForm({
   setIsEdit,
   editGalleryData,
@@ -37,6 +26,17 @@ export default function EditMiniGalleryForm({
   languages
 }) {
   const { t } = useTranslation();
+
+  const SLIDER_TYPE = [
+    {
+      label: t("group:homepage_customization.mini_gallery_setup.horizontal_slider_label"),
+      value: "false"
+    },
+    {
+      label: t("group:homepage_customization.mini_gallery_setup.vertical_slider_label"),
+      value: "true"
+    }
+  ];
 
   const { languageId } = useGlobalState();
   const [translationSelected, setTranslationSelected] = useState<number>(
@@ -154,6 +154,7 @@ export default function EditMiniGalleryForm({
               name={`${translationSelected}.0.isVertical`}
               label={t("group:homepage_customization.mini_gallery_setup.vertical_label")}
               options={SLIDER_TYPE}
+              disabled = {translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               onChangeCallback={(e) => {
                 const values = hForm.getValues();
 

@@ -104,9 +104,11 @@
       "delete_success": "ಮಿನಿ ಗ್ಯಾಲರಿ ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ",
       "edit_error": "ಮಿನಿ ಗ್ಯಾಲರಿಯನ್ನು ನವೀಕರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
       "edit_success": "ಮಿನಿ ಗ್ಯಾಲರಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
+      "horizontal_slider_label": "ಸಮತಲ ಸ್ಲೈಡ್ (ಸ್ಲೈಡ್‌ಗಳು ಎಡ ಮತ್ತು ಬಲಕ್ಕೆ ಚಲಿಸುತ್ತವೆ)",
       "slides_per_view": "ಪ್ರತಿ ವೀಕ್ಷಣೆಗೆ ಸ್ಲೈಡ್‌ಗಳು",
       "title": "ಮಿನಿ ಗ್ಯಾಲರಿ",
-      "vertical_label": "ಸ್ಲೈಡರ್ ಪ್ರಕಾರ"
+      "vertical_label": "ಸ್ಲೈಡರ್ ಪ್ರಕಾರ",
+      "vertical_slider_label": "ಲಂಬ ಸ್ಲೈಡ್ (ಸ್ಲೈಡ್‌ಗಳು ಮೇಲಕ್ಕೆ ಮತ್ತು ಕೆಳಕ್ಕೆ ಚಲಿಸುತ್ತವೆ)"
     },
     "module_stats": "ಘಟಕದ ಅಂಕಿಅಂಶಗಳು",
     "observation_map": "ವೀಕ್ಷಣೆಯ ವಿತರಣಾ ಭೂಪಟ",
@@ -130,7 +132,11 @@
       "observation_image": "ವೀಕ್ಷಣೆ ಚಿತ್ರ",
       "observation_image_not_editable": "ವೀಕ್ಷಣೆ ಚಿತ್ರ ಸಂಪಾದಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
       "read_more": "ಇನ್ನಷ್ಟು ಓದಿ ಬಟನ್ ಪಠ್ಯ ಪಠ್ಯ",
+      "read_more_button": "ಗುಂಡು",
+      "read_more_link": "ಮರ",
       "read_more_ui": "ಹೆಚ್ಚು ಓದಿ ಯುಐ ಪ್ರಕಾರ",
+      "sidebar_opaque": "ಅಪಾರ",
+      "sidebar_translucent": "ಅರೆಪಕ್ಷೀಯ",
       "text_color": "ಪಠ್ಯ ಬಣ್ಣ",
       "title": "ಶೀರ್ಷಿಕೆ"
     },

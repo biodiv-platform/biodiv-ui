@@ -104,9 +104,11 @@
       "delete_success": "মিনি গ্যালারী সফলভাবে মুছে ফেলা হয়েছে",
       "edit_error": "মিনি গ্যালারী আপডেট করতে অক্ষম",
       "edit_success": "মিনি গ্যালারী সফলভাবে আপডেট হয়েছে",
+      "horizontal_slider_label": "অনুভূমিক স্লাইড (স্লাইডগুলি বাম এবং ডানদিকে সরানো)",
       "slides_per_view": "দৃষ্টিতে স্লাইড",
       "title": "মিনি গ্যালারী",
-      "vertical_label": "স্লাইডার টাইপ"
+      "vertical_label": "স্লাইডার টাইপ",
+      "vertical_slider_label": "উল্লম্ব স্লাইড (স্লাইডগুলি উপরে এবং নীচে সরানো)"
     },
     "module_stats": "মডিউল পরিসংখ্যান",
     "observation_map": "পর্যবেক্ষণ বিতরণ মানচিত্র",
@@ -130,7 +132,11 @@
       "observation_image": "পর্যবেক্ষণ ইমেজ",
       "observation_image_not_editable": "পর্যবেক্ষণ চিত্র সম্পাদনাযোগ্য নয়",
       "read_more": "আরও বোতাম পাঠ্য পড়ুন",
+      "read_more_button": "বোতাম",
+      "read_more_link": "লিঙ্ক",
       "read_more_ui": "আরও ইউআই টাইপ পড়ুন",
+      "sidebar_opaque": "অস্বচ্ছ",
+      "sidebar_translucent": "স্বচ্ছ",
       "text_color": "পাঠ্য রঙ",
       "title": "শিরোনাম"
     },

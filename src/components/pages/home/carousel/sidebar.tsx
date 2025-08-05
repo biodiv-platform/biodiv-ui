@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import BlurBox from "@components/@core/blur-box";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
@@ -44,12 +44,12 @@ export default function Sidebar({ resource, mini = false }) {
       {...(mini && { height: 350 })}
     >
       <Center h="full" p={{ base: 6, lg: 8 }} color= {resource.color?resource.color:"white"}>
-        <div>
+        <Box>
           <Heading
             as="h1"
             fontWeight={500}
             mb={2}
-            fontSize={mini ? "1.2rem" : { base: "1.2rem", lg: "2.2rem" }}
+            fontSize={mini ? "1.5rem" : { base: "1.2rem", lg: "2.2rem" }}
             lineHeight="1.3em"
           >
             {resource.title}
@@ -57,7 +57,7 @@ export default function Sidebar({ resource, mini = false }) {
           <Text
             fontSize={mini ? "sm" : { md: "sm", lg: "lg" }}
             mb={4}
-            maxH={mini ? "6rem" : "14rem"}
+            maxH={"14rem"}
             overflow="auto"
           >
             {resource.customDescripition}
@@ -68,7 +68,7 @@ export default function Sidebar({ resource, mini = false }) {
             readMoreUIType={readMoreUIType}
             //mini={mini}
           />
-        </div>
+        </Box>
       </Center>
     </BlurBox>
   );

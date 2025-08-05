@@ -38,8 +38,10 @@ export default function HomePageGalleryCustomizationForm({
   });
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [miniGalleryList, setMiniGalleryList] = useState(Object.entries(homePageDetails?.miniGallery));
-  const [miniGallerySliderList, setMiniGallerySliderList] = useState(updatedMiniGallery)
+  const [miniGalleryList, setMiniGalleryList] = useState(
+    Object.entries(homePageDetails?.miniGallery)
+  );
+  const [miniGallerySliderList, setMiniGallerySliderList] = useState(updatedMiniGallery);
 
   const {
     gallerySlider,
@@ -107,7 +109,7 @@ export default function HomePageGalleryCustomizationForm({
           return acc;
         }, {});
 
-        return updatedGallerySlider
+        return updatedGallerySlider;
       }),
 
       ...value
@@ -139,7 +141,7 @@ export default function HomePageGalleryCustomizationForm({
 
   return (
     <>
-      {currentStep == "group:homepage_customization.title"&& (
+      {currentStep == "group:homepage_customization.title" && (
         <FormProvider {...hForm}>
           <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
             <Box width={["100%", 350]} justifyContent="space-between">
@@ -157,8 +159,14 @@ export default function HomePageGalleryCustomizationForm({
                 label={t("group:homepage_customization.observation_map")}
               />
               <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
-              <SwitchField name="showSponsors" label={t("group:homepage_customization.show_sponsors")} />
-              <SwitchField name="showDonors" label={t("group:homepage_customization.show_donors")} />
+              <SwitchField
+                name="showSponsors"
+                label={t("group:homepage_customization.show_sponsors")}
+              />
+              <SwitchField
+                name="showDonors"
+                label={t("group:homepage_customization.show_donors")}
+              />
               <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
             </Box>
             <WYSIWYGField
@@ -180,20 +188,23 @@ export default function HomePageGalleryCustomizationForm({
           languages={languages}
         />
       )}
-      {currentStep == "group:homepage_customization.mini_gallery_setup.title"&& (
+      {currentStep == "group:homepage_customization.mini_gallery_setup.title" && (
         <MiniGallery
           miniGallery={miniGalleryList}
           setMiniGallery={setMiniGalleryList}
           languages={languages}
           sliderList={miniGallerySliderList}
-          setSliderList = {setMiniGallerySliderList}
+          setSliderList={setMiniGallerySliderList}
+          handleFormSubmit = {hForm.handleSubmit(handleFormSubmit)}
         />
       )}
-      <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
-        <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
-          {t("common:save")}
-        </Button>
-      </Box>
+      {currentStep != "group:homepage_customization.mini_gallery_setup.title" && (
+        <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
+          <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
+            {t("common:save")}
+          </Button>
+        </Box>
+      )}
     </>
   );
 }

@@ -19,7 +19,7 @@ import Supporters from "./supporters";
 const { HOME, LANG } = SITE_CONFIG;
 
 export default function HomePageComponent({ homeInfo }) {
-  const { currentGroup } = useGlobalState();
+  const { currentGroup, languageId } = useGlobalState();
   const showFeatures = !currentGroup?.id;
 
   const { t } = useTranslation();
@@ -31,16 +31,24 @@ export default function HomePageComponent({ homeInfo }) {
           <Carousel featured={homeInfo.gallerySlider} mini={false} />
         )}
       {homeInfo.miniGallery &&
-        homeInfo.miniGallery.map((item,index) => (
+        homeInfo.miniGallery.map((item, index) => (
           <>
             <Heading as="h2" fontSize="2rem">
-              {item[1][LANG.DEFAULT_ID][0].title}
+              {item[1]?.[languageId]?.[0].title ||
+                item[1]?.[SITE_CONFIG.LANG.DEFAULT_ID]?.[0].title}
             </Heading>
-            {item[1][LANG.DEFAULT_ID][0].isVertical?<VerticalCarousel featured={homeInfo.miniGallerySlider[index]} slidesPerView={item[1][LANG.DEFAULT_ID][0].slidesPerView}/>:<Carousel
-              featured={homeInfo.miniGallerySlider[index]}
-              mini={true}
-              slidesPerView={item[1][LANG.DEFAULT_ID][0].slidesPerView}
-            />}
+            {item[1][LANG.DEFAULT_ID][0].isVertical ? (
+              <VerticalCarousel
+                featured={homeInfo.miniGallerySlider[index]}
+                slidesPerView={item[1][LANG.DEFAULT_ID][0].slidesPerView}
+              />
+            ) : (
+              <Carousel
+                featured={homeInfo.miniGallerySlider[index]}
+                mini={true}
+                slidesPerView={item[1][LANG.DEFAULT_ID][0].slidesPerView}
+              />
+            )}
           </>
         ))}
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}

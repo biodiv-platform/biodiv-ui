@@ -104,9 +104,11 @@
       "delete_success": "മിനി ഗാലറി വിജയകരമായി ഇല്ലാതാക്കി",
       "edit_error": "മിനി ഗാലറി അപ്ഡേറ്റ് ചെയ്യാൻ കഴിയില്ല",
       "edit_success": "മിനി ഗാലറി വിജയകരമായി അപ്ഡേറ്റുചെയ്തു",
+      "horizontal_slider_label": "തിരശ്ചീന സ്ലൈഡ് (സ്ലൈഡുകൾ ഇടത്, വലത്)",
       "slides_per_view": "കാഴ്ചയിൽ സ്ലൈഡുകൾ",
       "title": "മിനി ഗാലറി",
-      "vertical_label": "സ്ലൈഡർ തരം"
+      "vertical_label": "സ്ലൈഡർ തരം",
+      "vertical_slider_label": "ലംബ സ്ലൈഡ് (സ്ലൈഡുകൾ മുകളിലേക്കും താഴേക്കും നീങ്ങുന്നു)"
     },
     "module_stats": "മൊഡ്യൂൾ സ്ഥിതിവിവരക്കണക്കുകൾ",
     "observation_map": "നിരീക്ഷണ വിതരണ മാപ്പ്",
@@ -130,7 +132,11 @@
       "observation_image": "നിരീക്ഷണ ചിത്രം",
       "observation_image_not_editable": "നിരീക്ഷണ ചിത്രം എഡിറ്റ് ചെയ്യാനാകുന്നില്ല",
       "read_more": "കൂടുതൽ വായിക്കുക ബട്ടൺ വാചകം",
+      "read_more_button": "കുടുക്ക്",
+      "read_more_link": "ബന്ധം",
       "read_more_ui": "കൂടുതൽ വായിക്കുക യുഐ തരം",
+      "sidebar_opaque": "അതാക്ഷണ",
+      "sidebar_translucent": "സ്ഥാതാരവും",
       "text_color": "ടെക്സ്റ്റ് നിറം",
       "title": "തലക്കെട്ട്"
     },

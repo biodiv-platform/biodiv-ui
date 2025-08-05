@@ -104,9 +104,11 @@
       "delete_success": "மினி கேலரி வெற்றிகரமாக நீக்கப்பட்டது",
       "edit_error": "மினி கேலரியைப் புதுப்பிக்க முடியவில்லை",
       "edit_success": "மினி கேலரி வெற்றிகரமாக புதுப்பிக்கப்பட்டது",
+      "horizontal_slider_label": "கிடைமட்ட ஸ்லைடு (ஸ்லைடுகள் இடது மற்றும் வலதுபுறம் நகரும்)",
       "slides_per_view": "பார்வையில் ஸ்லைடுகள்",
       "title": "மினி கேலரி",
-      "vertical_label": "ஸ்லைடர் வகை"
+      "vertical_label": "ஸ்லைடர் வகை",
+      "vertical_slider_label": "செங்குத்து ஸ்லைடு (ஸ்லைடுகள் மேலும் கீழும் நகரும்)"
     },
     "module_stats": "பகுதி புள்ளிவிவரங்கள்",
     "observation_map": "அவதானிப்பு பரப்பீடு வரைபடம்",
@@ -130,7 +132,11 @@
       "observation_image": "அவதானிப்பு படம்",
       "observation_image_not_editable": "கண்காணிப்பு படம் திருத்த முடியாது",
       "read_more": "மேலும் படிக்க பொத்தான் உரையைப் படியுங்கள்",
+      "read_more_button": "பொத்தான்",
+      "read_more_link": "இணைப்பு",
       "read_more_ui": "மேலும் படிக்க UI வகை",
+      "sidebar_opaque": "ஒளிபுகா",
+      "sidebar_translucent": "கசியும்",
       "text_color": "உரை நிறம்",
       "title": "தலைப்பு"
     },

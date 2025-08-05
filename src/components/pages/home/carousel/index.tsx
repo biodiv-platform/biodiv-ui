@@ -19,6 +19,7 @@ import SlideInfo from "./slide-info";
 export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { languageId } = useGlobalState();
+  const [sliderLoaded, setSliderLoaded] = useState(false);
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
@@ -34,7 +35,8 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
           }
         }
       },
-      slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
+      slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel),
+      created: () => setSliderLoaded(true)
     },
     [
       (slider) => {
@@ -93,7 +95,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
             <LuArrowLeft size={12} color={"white"} />
           </IconButton>
         )}
-        <Box ref={sliderRef} className="keen-slider fade">
+        <Box ref={sliderRef} className="keen-slider fade" style={{ visibility: sliderLoaded ? "visible" : "hidden" }}>
           {featured.map((o) => (
             <>
               <Slide

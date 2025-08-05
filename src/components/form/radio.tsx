@@ -14,6 +14,7 @@ interface IRadioProps {
   isInline?: boolean;
   colorPalette?: string;
   onChangeCallback?;
+  disabled?: boolean;
 }
 
 export const RadioInputField = ({
@@ -21,6 +22,7 @@ export const RadioInputField = ({
   label,
   hint,
   mb = 4,
+  disabled,
   isInline = true,
   colorPalette = "blue",
   options = [],
@@ -46,10 +48,11 @@ export const RadioInputField = ({
           field.onChange(value);
           onChangeCallback && onChangeCallback(value);
         }}
+        disabled = {disabled}
       >
         <Stack direction={isInline ? "row" : "column"} py={2}>
           {options.map((o) => (
-            <Radio key={o.value} id={o.value} value={o.value} colorPalette={colorPalette}>
+            <Radio key={o.value} id={o.value} value={o.value} colorPalette={colorPalette} disabled={disabled}>
               {o.label}
             </Radio>
           ))}
