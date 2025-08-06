@@ -5,7 +5,7 @@ import {
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axUpdateSpeciesTaxonId } from "@services/species.service";
+import { axGetSpeciesIdFromTaxonId, axUpdateSpeciesTaxonId } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -49,6 +49,13 @@ export default function TaxonEditModal({
   const handleSave = async (value) => {
     if (!value) {
       notification("Please select a taxon");
+      return;
+    }
+
+    const { success, data: speciesIdFromTaxon } = await axGetSpeciesIdFromTaxonId(value.taxon);
+
+    if (success && speciesIdFromTaxon != species.species.id) {
+      notification("species with this taxon already exists");
       return;
     }
 
