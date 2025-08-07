@@ -63,9 +63,9 @@ export default function AreaDrawField({
     field.onChange(coordinates);
   }, [coordinates]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     handleOnFeatureChange(defaultFeatures);
-  }, []);
+  }, []);*/
 
   return (
     <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
@@ -82,7 +82,7 @@ export default function AreaDrawField({
       <NakshaMapboxDraw
         defaultViewState={defaultViewState}
         features={defaultFeatures}
-        onFeaturesChange={handleOnFeatureChange}
+        //onFeaturesChange={handleOnFeatureChange}
         mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       />
     </Box>
