@@ -10,6 +10,8 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
+import { getLogo } from "@/utils/media";
+
 const EditLinkButton = dynamic(() => import("./edit-link-button"), { ssr: false });
 const JoinUserGroup = dynamic(() => import("@components/pages/group/common/join-group"), {
   ssr: false
@@ -89,13 +91,7 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
     <Logo>
       <LocalLink href="/" prefixGroup={true}>
         <>
-          <Image
-            src={`${icon}?w=128&preserve=true`}
-            alt={name ?? ""}
-            title={name}
-            width={128}
-            height={60}
-          />
+          <Image src={getLogo(icon)} alt={name ?? ""} title={name} width={128} height={60} />
           <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
             {nameLocal && <Box mb={1}>{nameLocal}</Box>}
             {name}
