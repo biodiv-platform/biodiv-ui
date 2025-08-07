@@ -97,7 +97,7 @@ export default function UserGroupEditForm({
       habitatId,
       speciesGroupId,
       allowUserToJoin,
-      spacialCoverage: `${neLongitude},${neLatitude},${neLongitude},${swLatitude},${swLongitude},${swLatitude},${swLongitude},${neLatitude},${neLongitude},${neLatitude}`,
+      spacialCoverage:`POLYGON((${neLongitude} ${neLatitude},${neLongitude} ${swLatitude},${swLongitude} ${swLatitude},${swLongitude} ${neLatitude},${neLongitude} ${neLatitude}))`,
       webAddress
     }
   });

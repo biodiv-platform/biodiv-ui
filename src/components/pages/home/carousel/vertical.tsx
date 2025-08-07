@@ -88,7 +88,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
         ref={sliderRef}
         className="keen-slider"
         style={{ visibility: sliderLoaded ? "visible" : "hidden" }}
-        h={featured.length > slidesPerView ? 100 * slidesPerView : (100 * featured.length)}
+        h={featured.length > slidesPerView ? 100 * slidesPerView : 100 * featured.length}
       >
         {featured.map((o, index) => {
           const resource = o[1]?.[languageId]?.[0] || o[1]?.[LANG.DEFAULT_ID]?.[0];
@@ -128,7 +128,14 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
                     </Text>
                   </Box>
                 </Center>
-                <Box mr={6}>
+                <Box
+                  width={150}
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="flex-end"
+                  alignItems="flex-end"
+                  mr={6}
+                >
                   {resource.moreLinks && resource.readMoreUIType == "button" ? (
                     <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
                       <a href={resource.moreLinks}>

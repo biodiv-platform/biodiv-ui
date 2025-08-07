@@ -1,4 +1,4 @@
-import { Box, Button, Image } from "@chakra-ui/react";
+import { Box, Button, ColorPicker, HStack, Image, parseColor, Portal } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
@@ -7,7 +7,10 @@ import ImageUploaderField from "@components/pages/group/common/image-uploader-fi
 import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
-import { axEditGroupHomePageGallery } from "@services/usergroup.service";
+import {
+  axEditGroupHomePageGallery,
+  axEditMiniGroupHomePageGallery
+} from "@services/usergroup.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { NotificationType } from "@utils/notification";
@@ -22,7 +25,15 @@ import TranslationTab from "@/components/pages/common/translation-tab";
 
 import { galleryFieldValidationSchema } from "./common";
 
-export default function GalleryEditForm({ setIsEdit, setGalleryList, editGalleryData, languages }) {
+export default function GalleryEditForm({
+  setIsEdit,
+  setGalleryList,
+  editGalleryData,
+  languages,
+  galleryId = -1,
+  index = 0,
+  vertical = false
+}) {
   const { t } = useTranslation();
   const readMoreUIOptions = [
     { label: t("group:homepage_customization.resources.read_more_link"), value: "link" },
@@ -51,8 +62,20 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(validationSchema),
+    context: { isVertical: vertical },
     defaultValues: editGalleryData[1]
   });
+
+  const [color, setColor] = useState(
+    editGalleryData[1][205][0].color
+      ? editGalleryData[1][SITE_CONFIG.LANG.DEFAULT_ID][0].color
+      : "rgba(255,255,255,1)"
+  );
+  const [bgColor, setBgColor] = useState(
+    editGalleryData[1][205][0].bgColor
+      ? editGalleryData[1][SITE_CONFIG.LANG.DEFAULT_ID][0].bgColor
+      : "rgba(26, 32, 44, 1)"
+  );
 
   const imgUrl = getResourceThumbnail(
     RESOURCE_CTX.OBSERVATION,
@@ -83,26 +106,50 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
         readMoreUIType: hForm.getValues()[translationSelected][0].readMoreUIType,
         sliderId: Number(editGalleryData[0].split("|")[0]),
         title: "",
-        ugId: hForm.getValues()[translationSelected][0].ugId
+        ugId: hForm.getValues()[translationSelected][0].ugId,
+        galleryId: galleryId
       }
     ]);
   };
 
-  const handleFormSubmit = async (payload) => {
-    const { success, data } = await axEditGroupHomePageGallery(
-      editGalleryData[1][Object.keys(editGalleryData[1])[0]][0].ugId,
-      Number(editGalleryData[0].split("|")[0]),
-      payload
+  const handleFormSubmit = async (value) => {
+    const payload = Object.fromEntries(
+      Object.entries(value as Record<number, any[]>).map(([langId, entries]) => [
+        langId,
+        entries.map((entry) => ({
+          ...entry,
+          color: color,
+          bgColor: bgColor
+        }))
+      ])
     );
+    const { success, data } =
+      galleryId == -1
+        ? await axEditGroupHomePageGallery(
+            editGalleryData[1][Object.keys(editGalleryData[1])[0]][0].ugId,
+            Number(editGalleryData[0].split("|")[0]),
+            payload
+          )
+        : await axEditMiniGroupHomePageGallery(
+            editGalleryData[1][Object.keys(editGalleryData[1])[0]][0].ugId,
+            Number(editGalleryData[0].split("|")[0]),
+            payload
+          );
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
       setGalleryList(
-        Object.entries(data?.gallerySlider || {}).sort((a, b) => {
-          const aOrder = parseInt(a[0].split("|")[1], 10);
-          const bOrder = parseInt(b[0].split("|")[1], 10);
-          return aOrder - bOrder;
-        })
+        galleryId == -1
+          ? Object.entries(data?.gallerySlider || {}).sort((a, b) => {
+              const aOrder = parseInt(a[0].split("|")[1], 10);
+              const bOrder = parseInt(b[0].split("|")[1], 10);
+              return aOrder - bOrder;
+            })
+          : Object.entries(data?.miniGallerySlider[index] || {}).sort((a, b) => {
+              const aOrder = parseInt(a[0].split("|")[1], 10);
+              const bOrder = parseInt(b[0].split("|")[1], 10);
+              return aOrder - bOrder;
+            })
       );
       setIsEdit(false);
     } else {
@@ -206,24 +253,90 @@ export default function GalleryEditForm({ setIsEdit, setGalleryList, editGallery
           }}
         />
 
-        <SelectInputField
-          key={`sidebar-${translationSelected}`}
-          name={`${translationSelected}.0.gallerySidebar`}
-          label= {t("group:homepage_customization.resources.gallery_sidebar")}
-          options={gallerySidebarBackgroundOptions}
-          shouldPortal={true}
-          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-          onChangeCallback={(value) => {
-            const values = hForm.getValues();
+        {galleryId == -1 && (
+          <SelectInputField
+            key={`sidebar-${translationSelected}`}
+            name={`${translationSelected}.0.gallerySidebar`}
+            label={t("group:homepage_customization.resources.gallery_sidebar")}
+            options={gallerySidebarBackgroundOptions}
+            shouldPortal={true}
+            disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+            onChangeCallback={(value) => {
+              const values = hForm.getValues();
 
-            for (const langId in values) {
-              const entry = values[langId]?.[0];
-              if (entry) {
-                hForm.setValue(`${langId}.0.gallerySidebar`, value);
+              for (const langId in values) {
+                const entry = values[langId]?.[0];
+                if (entry) {
+                  hForm.setValue(`${langId}.0.gallerySidebar`, value);
+                }
               }
-            }
-          }}
-        />
+            }}
+          />
+        )}
+
+        {galleryId != -1 && (
+          <>
+            <ColorPicker.Root
+              defaultValue={parseColor(color)}
+              maxW="200px"
+              onValueChange={(v) => setColor(v.valueAsString)}
+              mb={4}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+            >
+              <ColorPicker.HiddenInput />
+              <ColorPicker.Label>
+                {t("group:homepage_customization.resources.text_color")}
+              </ColorPicker.Label>
+              <ColorPicker.Control>
+                <ColorPicker.Trigger p="2">
+                  <ColorPicker.ValueSwatch boxSize="8" />
+                </ColorPicker.Trigger>
+              </ColorPicker.Control>
+              <Portal>
+                <ColorPicker.Positioner>
+                  <ColorPicker.Content>
+                    <ColorPicker.Area />
+                    <HStack>
+                      <ColorPicker.EyeDropper size="sm" variant="outline" />
+                      <ColorPicker.Sliders />
+                      <ColorPicker.ValueSwatch />
+                    </HStack>
+                  </ColorPicker.Content>
+                </ColorPicker.Positioner>
+              </Portal>
+            </ColorPicker.Root>
+
+            <ColorPicker.Root
+              defaultValue={parseColor(bgColor)}
+              maxW="200px"
+              onValueChange={(v) => setBgColor(v.valueAsString)}
+              mb={4}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+            >
+              <ColorPicker.HiddenInput />
+              <ColorPicker.Label>
+                {t("group:homepage_customization.resources.background_color")}
+              </ColorPicker.Label>
+              <ColorPicker.Control>
+                <ColorPicker.Trigger p="2">
+                  <ColorPicker.ValueSwatch boxSize="8" />
+                </ColorPicker.Trigger>
+              </ColorPicker.Control>
+              <Portal>
+                <ColorPicker.Positioner>
+                  <ColorPicker.Content>
+                    <ColorPicker.Area />
+                    <HStack>
+                      <ColorPicker.EyeDropper size="sm" variant="outline" />
+                      <ColorPicker.Sliders />
+                      <ColorPicker.ValueSwatch />
+                    </HStack>
+                  </ColorPicker.Content>
+                </ColorPicker.Positioner>
+              </Portal>
+            </ColorPicker.Root>
+          </>
+        )}
 
         <SubmitButton>{t("common:update")}</SubmitButton>
       </form>

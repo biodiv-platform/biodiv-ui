@@ -18,13 +18,13 @@ import GallerySetupFrom from "@/components/pages/group/edit/homepage-customizati
 import useGlobalState from "@/hooks/use-global-state";
 import DeleteIcon from "@/icons/delete";
 import EditIcon from "@/icons/edit";
-import { axRemoveMiniGallery } from "@/services/utility.service";
+import { axRemoveMiniGroupGallery } from "@/services/usergroup.service";
 import notification, { NotificationType } from "@/utils/notification";
 
 import GalleryEditForm from "../gallery-setup/gallery-setup-form/editform";
 import GallerySetupTable from "../gallery-setup/gallery-setup-tabel";
 
-export default function MiniGalleryItem({
+export default function MiniGroupGalleryItem({
   item,
   index,
   languages,
@@ -33,7 +33,8 @@ export default function MiniGalleryItem({
   sliderList,
   setSliderList,
   handleFormSubmit,
-  shouldOpen
+  shouldOpen,
+  groupId
 }) {
   const { t } = useTranslation();
   const { languageId } = useGlobalState();
@@ -51,7 +52,7 @@ export default function MiniGalleryItem({
   }, [sliderList]);
 
   const handleDelete = async () => {
-    const { success } = await axRemoveMiniGallery(item[0]);
+    const { success } = await axRemoveMiniGroupGallery(groupId, item[0]);
     if (success) {
       notification(
         t("group:homepage_customization.mini_gallery_setup.delete_success"),
@@ -136,7 +137,6 @@ export default function MiniGalleryItem({
                     setSliderList(sliderList);
                   }}
                   languages={languages}
-                  group={false}
                   galleryId={Number(item[0])}
                   vertical={miniGalleryDetails.isVertical}
                 />
@@ -152,6 +152,7 @@ export default function MiniGalleryItem({
                   setIsEdit={setIsEdit}
                   setEditGalleryData={setEditData}
                   galleryId={item[0]}
+                  userGroupId={groupId}
                 />
               )}
             </Box>

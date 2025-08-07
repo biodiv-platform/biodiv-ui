@@ -2,6 +2,7 @@ import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
+import MiniGroupGalleryItem from "@/components/pages/group/edit/homepage-customization/mini-group-gallery/mini-group-gallery-item";
 import AddIcon from "@/icons/add";
 
 import CreateMiniGalleryForm from "./create";
@@ -14,7 +15,8 @@ export default function MiniGallery({
   languages,
   sliderList,
   setSliderList,
-  handleFormSubmit
+  handleFormSubmit,
+  groupId = -1
 }) {
   const { t } = useTranslation();
   const [isGalleryCreate, setIsGalleryCreate] = useState(false);
@@ -33,6 +35,7 @@ export default function MiniGallery({
             setMiniGalleryList={setMiniGallery}
             index={editIndex}
             languages={languages}
+            groupId = {groupId}
           />
         </Box>
       ) : isGalleryCreate ? (
@@ -45,11 +48,12 @@ export default function MiniGallery({
             sliderList={sliderList}
             setSliderList={setSliderList}
             setOpenIndex={setOpenIndex}
+            groupId = {groupId}
           />
         </Box>
       ) : (
         <>
-          {miniGallery?.map((item, index) => (
+          {groupId==-1 ? miniGallery?.map((item, index) => (
             <MiniGalleryItem
               key={index}
               item={item}
@@ -68,6 +72,27 @@ export default function MiniGallery({
               setSliderList={setSliderList}
               handleFormSubmit={handleFormSubmit}
               shouldOpen={index==openIndex}
+            />
+          )):miniGallery?.map((item, index) => (
+            <MiniGroupGalleryItem
+              key={index}
+              item={item}
+              index={index}
+              languages={languages}
+              onEdit={(i, data) => {
+                setIsGalleryEdit(true);
+                setEditGalleryData(data);
+                setEditIndex(i);
+              }}
+              onDelete={(i) => {
+                setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
+                setSliderList(sliderList.filter((_, idx) => idx !== i));
+              }}
+              sliderList={sliderList}
+              setSliderList={setSliderList}
+              handleFormSubmit={handleFormSubmit}
+              shouldOpen={index==openIndex}
+              groupId={groupId}
             />
           ))}
           <ButtonGroup gap={4} mt={4}>

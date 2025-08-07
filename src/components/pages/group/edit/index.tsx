@@ -1,8 +1,4 @@
-import {
-  Box,
-  Heading,
-  Spinner
-} from "@chakra-ui/react";
+import { Box, Heading, Spinner } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import GroupCustomField from "@components/pages/group/common/custom-field";
 import GlobeIcon from "@icons/globe";
@@ -60,6 +56,11 @@ const steps = [
     translation: "group:homepage_customization.gallery_setup.title",
     icon: ImageIcon
   },
+  {
+    label: "Mini Gallery",
+    translation: "group:homepage_customization.mini_gallery_setup.title",
+    icon: ImageIcon
+  },
   { label: "Custom Fields", translation: "group:custom_field.title", icon: ListIcon },
   { label: "Group Rules", translation: "group:rules.title", icon: LuCircleCheck },
   { label: "Observation Display", translation: "group:observation_display", icon: LuView },
@@ -102,7 +103,7 @@ export default function EditGroupPageComponent({
   return (
     <div className="container mt">
       <PageHeading>👥 {t("group:edit.title")}</PageHeading>
-      <Wizard steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep}/>
+      <Wizard steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} />
       <Box p={6} rounded="lg" border="1px solid" borderColor="gray.200" boxShadow="sm" mb={4}>
         <Heading as="h2" fontSize={22} fontWeight="bold" color="gray.900" mb={2}>
           {t(steps[currentStep].translation)}
@@ -115,7 +116,7 @@ export default function EditGroupPageComponent({
             speciesGroups={speciesGroups}
             currentStep={steps[currentStep].translation}
             languages={languagesList}
-            isAdmin = {isAdmin}
+            isAdmin={isAdmin}
           />
         ) : (
           <Spinner mb={10} />
@@ -125,11 +126,13 @@ export default function EditGroupPageComponent({
             userGroupId={userGroupId}
             founders={founders}
             moderators={moderators}
-            allowUsersToJoin = {groupInfo}
+            allowUsersToJoin={groupInfo}
           />
         )}
         {(steps[currentStep].translation == "group:homepage_customization.title" ||
-          steps[currentStep].translation == "group:homepage_customization.gallery_setup.title") && (
+          steps[currentStep].translation == "group:homepage_customization.gallery_setup.title" ||
+          steps[currentStep].translation ==
+            "group:homepage_customization.mini_gallery_setup.title") && (
           <Box mt={4}>
             <GroupHomePageCustomization
               userGroupId={userGroupId}

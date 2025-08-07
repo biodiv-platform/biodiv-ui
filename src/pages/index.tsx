@@ -25,14 +25,14 @@ export async function getServerSideProps(ctx) {
     : await axGetHomeInfo();
 
   const updatedMiniGallery = homeInfo?.miniGallerySlider?.map((item) => {
-      const sortedGallerySlider = Object.entries(item).sort((a, b) => {
-        const aOrder = parseInt(a[0].split("|")[1], 10);
-        const bOrder = parseInt(b[0].split("|")[1], 10);
-        return aOrder - bOrder;
-      });
-
-      return sortedGallerySlider;
+    const sortedGallerySlider = Object.entries(item).sort((a, b) => {
+      const aOrder = parseInt(a[0].split("|")[1], 10);
+      const bOrder = parseInt(b[0].split("|")[1], 10);
+      return aOrder - bOrder;
     });
+
+    return sortedGallerySlider;
+  });
 
   return {
     props: {
@@ -43,7 +43,8 @@ export async function getServerSideProps(ctx) {
           const bOrder = parseInt(b[0].split("|")[1], 10);
           return aOrder - bOrder;
         }),
-        ...(!currentGroup?.groupId && { miniGallerySlider: updatedMiniGallery, miniGallery:Object.entries(homeInfo?.miniGallery) })
+        miniGallerySlider: updatedMiniGallery,
+        miniGallery: Object.entries(homeInfo?.miniGallery)
       }
     }
   };

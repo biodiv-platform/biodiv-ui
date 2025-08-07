@@ -7,18 +7,22 @@ import React, { useMemo } from "react";
 import { LuArrowRight } from "react-icons/lu";
 
 const ReadMore = ({ resource, readMoreButtonText, readMoreUIType /*mini*/ }) => {
-  return resource.moreLinks && readMoreUIType == "button" ? (
-    <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
-      <a href={resource.moreLinks}>
-        {readMoreButtonText} <LuArrowRight />
-      </a>
-    </Button>
-  ) : (
-    <a href={resource.moreLinks}>
-      <Flex alignItems="center">
-        {readMoreButtonText} <LuArrowRight />
-      </Flex>
-    </a>
+  return (
+    <Box textAlign="right">
+      {resource.moreLinks && readMoreUIType === "button" ? (
+        <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+          <a href={resource.moreLinks}>
+            {readMoreButtonText} <LuArrowRight />
+          </a>
+        </Button>
+      ) : (
+        <a href={resource.moreLinks}>
+          <Flex alignItems="center" justifyContent="flex-end">
+            {readMoreButtonText} <LuArrowRight />
+          </Flex>
+        </a>
+      )}
+    </Box>
   );
 };
 
@@ -40,10 +44,10 @@ export default function Sidebar({ resource, mini = false }) {
   return (
     <BlurBox
       bg={bg}
-      fallbackColor={resource.bgColor?resource.bgColor:"var(--chakra-colors-gray-800)"}
+      fallbackColor={resource.bgColor ? resource.bgColor : "var(--chakra-colors-gray-800)"}
       {...(mini && { height: 350 })}
     >
-      <Center h="full" p={{ base: 6, lg: 8 }} color= {resource.color?resource.color:"white"}>
+      <Center h="full" p={{ base: 6, lg: 8 }} color={resource.color ? resource.color : "white"}>
         <Box>
           <Heading
             as="h1"
@@ -57,7 +61,8 @@ export default function Sidebar({ resource, mini = false }) {
           <Text
             fontSize={mini ? "sm" : { md: "sm", lg: "lg" }}
             mb={4}
-            maxH={"14rem"}
+            {...(mini && { height: "13rem" })}
+            maxH={mini ? "13rem" : "14rem"}
             overflow="auto"
           >
             {resource.customDescripition}

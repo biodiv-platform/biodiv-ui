@@ -14,6 +14,7 @@ import { SwitchField } from "@/components/form/switch";
 import { TextBoxField } from "@/components/form/text";
 import TranslationTab from "@/components/pages/common/translation-tab";
 import useGlobalState from "@/hooks/use-global-state";
+import { axEditMiniGroupGallery } from "@/services/usergroup.service";
 import { axEditMiniGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
 
@@ -23,7 +24,8 @@ export default function EditMiniGalleryForm({
   miniGalleryList,
   setMiniGalleryList,
   index,
-  languages
+  languages,
+  groupId
 }) {
   const { t } = useTranslation();
 
@@ -86,7 +88,8 @@ export default function EditMiniGalleryForm({
         isVertical: hForm.getValues()[translationSelected][0].isVertical,
         languageId: langId,
         slidesPerView: hForm.getValues()[translationSelected][0].slidesPerView,
-        title: ""
+        title: "",
+        ugId: hForm.getValues()[translationSelected][0].ugId
       }
     ]);
     setTranslationSelected(langId);
@@ -103,7 +106,10 @@ export default function EditMiniGalleryForm({
         }))
       ])
     );
-    const { success, data } = await axEditMiniGallery(editGalleryData[0], payload);
+    const { success, data } =
+      groupId == -1
+        ? await axEditMiniGallery(editGalleryData[0], payload)
+        : await axEditMiniGroupGallery(groupId, editGalleryData[0], payload);
     if (success) {
       notification(
         t("group:homepage_customization.mini_gallery_setup.edit_success"),
@@ -154,7 +160,7 @@ export default function EditMiniGalleryForm({
               name={`${translationSelected}.0.isVertical`}
               label={t("group:homepage_customization.mini_gallery_setup.vertical_label")}
               options={SLIDER_TYPE}
-              disabled = {translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               onChangeCallback={(e) => {
                 const values = hForm.getValues();
 

@@ -13,6 +13,7 @@ import { RadioInputField } from "@/components/form/radio";
 import { TextBoxField } from "@/components/form/text";
 import TranslationTab from "@/components/pages/common/translation-tab";
 import useGlobalState from "@/hooks/use-global-state";
+import { axCreateMiniGroupGallery } from "@/services/usergroup.service";
 import { axCreateMiniGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
 
@@ -23,7 +24,8 @@ export default function CreateMiniGalleryForm({
   languages,
   sliderList,
   setSliderList,
-  setOpenIndex
+  setOpenIndex,
+  groupId
 }) {
   const { t } = useTranslation();
 
@@ -83,13 +85,16 @@ export default function CreateMiniGalleryForm({
         }))
       ])
     );
-    const { success, data } = await axCreateMiniGallery(payload);
+    const { success, data } =
+      groupId == -1
+        ? await axCreateMiniGallery(payload)
+        : await axCreateMiniGroupGallery(payload, groupId);
     if (success) {
       notification(
         t("group:homepage_customization.mini_gallery_setup.create_success"),
         NotificationType.Success
       );
-      setOpenIndex(miniGalleryList.length)
+      setOpenIndex(miniGalleryList.length);
       setMiniGalleryList([...miniGalleryList, ...Object.entries(data)]);
       setSliderList([...sliderList, []]);
       setIsCreate(false);
