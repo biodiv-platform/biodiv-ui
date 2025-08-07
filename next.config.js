@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const nextTranslate = require("next-translate");
+const { SITE } = require("./src/configs/site-config");
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
-const siteHostname = siteUrl ? new URL(siteUrl).hostname.replace('www.', '') : '';
+const siteUrl = new URL(SITE.URL);
+const mainDomain = siteUrl.hostname;
 
 module.exports = nextTranslate({
   experimental: {
@@ -12,28 +13,19 @@ module.exports = nextTranslate({
     nextScriptWorkers: false,
   },
   images: {
-    domains: siteHostname ? [siteHostname] : [],
     remotePatterns: [
+      // Main domain
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '',
+        protocol: siteUrl.protocol.replace(':', ''),
+        hostname: mainDomain,
         pathname: '/**',
       },
-      ...(siteHostname ? [
-        {
-          protocol: 'https',
-          hostname: siteHostname,
-          port: '',
-          pathname: '/**',
-        },
-        {
-          protocol: 'https',
-          hostname: `*.${siteHostname}`,
-          port: '',
-          pathname: '/**',
-        }
-      ] : []),
+      // All subdomains
+      {
+        protocol: 'https',
+        hostname: `*.${mainDomain}`,
+        pathname: '/**',
+      },
     ],
   },
 });
