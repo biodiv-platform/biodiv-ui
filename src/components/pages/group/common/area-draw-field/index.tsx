@@ -2,12 +2,11 @@ import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useController } from "react-hook-form";
-import { parse } from "wkt";
+import { parse, stringify } from "wkt";
 
 import { Field } from "@/components/ui/field";
-
 const NakshaMapboxDraw: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
   {
@@ -36,35 +35,37 @@ export default function AreaDrawField({
   ...props
 }: AreaDrawFieldProps) {
   const { field, fieldState } = useController({ name });
-  //const [coordinates, setCoordinates] = useState({});
+  const [, setCurrentFeatures] = useState([]);
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
-  //const defaultFeatures = useMemo(() => {parse(field.value)}, []);
+  const defaultFeatures = useMemo(() => {
+    const geometry = parse(field.value); // Convert WKT to GeoJSON geometry
+    return [
+      {
+        type: "Feature",
+        properties: {},
+        geometry
+      }
+    ];
+  }, []);
 
-  /*const handleOnFeatureChange = (features) => {
+  const handleOnFeatureChange = (features) => {
+    setCurrentFeatures(features);
     if (!features.length) {
-      setCoordinates({});
+      field.onChange("");
       return;
     }
 
-    const [minlng, minlat, maxlng, maxlat] = bbox({
-      type: "FeatureCollection",
-      features
-    });
+    const wktString = stringify(features[0].geometry); // Convert to WKT
+    field.onChange(wktString);
+  };
 
-    setCoordinates({
-      ne: [maxlng, minlat],
-      se: [minlng, maxlat]
-    });
-  };*/
-
-  /*useEffect(() => {
-    field.onChange(coordinates);
-  }, [coordinates]);*/
-
-  /*useEffect(() => {
-    handleOnFeatureChange(defaultFeatures);
-  }, []);*/
+  useEffect(() => {
+    // Trigger initial onChange in case there's a default value (WKT)
+    if (defaultFeatures.length) {
+      handleOnFeatureChange(defaultFeatures);
+    }
+  }, []);
 
   return (
     <Box position="relative" h="22rem" borderRadius="md" overflow="hidden">
@@ -80,12 +81,8 @@ export default function AreaDrawField({
       {hint && <Field color="gray.600" helperText={hint} />}
       <NakshaMapboxDraw
         defaultViewState={defaultViewState}
-        data={{
-          type: "Feature",
-          properties: {},
-          geometry:parse(field.value)
-        }}
-        //onFeaturesChange={handleOnFeatureChange}
+        features={defaultFeatures}
+        onFeaturesChange={handleOnFeatureChange}
         mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       />
     </Box>
