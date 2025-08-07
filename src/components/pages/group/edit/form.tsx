@@ -12,8 +12,10 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Select from "react-select";
+import { parse } from "wkt";
 import * as Yup from "yup";
 
+import GeoJSONPreview from "@/components/@core/map-preview/geojson";
 import {
   DialogBackdrop,
   DialogBody,
@@ -24,7 +26,6 @@ import {
 } from "@/components/ui/dialog";
 import { Field } from "@/components/ui/field";
 
-import AreaDrawField from "../common/area-draw-field";
 import IconCheckboxField from "../common/icon-checkbox-field";
 import ImageUploaderField from "../common/image-uploader-field";
 import { STATIC_GROUP_PAYLOAD } from "../common/static";
@@ -97,7 +98,7 @@ export default function UserGroupEditForm({
       habitatId,
       speciesGroupId,
       allowUserToJoin,
-      spacialCoverage:`POLYGON((${neLongitude} ${neLatitude},${neLongitude} ${swLatitude},${swLongitude} ${swLatitude},${swLongitude} ${neLatitude},${neLongitude} ${neLatitude}))`,
+      spacialCoverage: `POLYGON((${neLongitude} ${neLatitude},${neLongitude} ${swLatitude},${swLongitude} ${swLatitude},${swLongitude} ${neLatitude},${neLongitude} ${neLatitude}))`,
       webAddress
     }
   });
@@ -276,10 +277,12 @@ export default function UserGroupEditForm({
               type="habitat"
               isRequired={true}
             />
-            <AreaDrawField
-              label={t("group:spatial_coverge")}
-              name="spacialCoverage"
-              isRequired={true}
+            <GeoJSONPreview
+              data={{
+                type: "Feature",
+                properties: {},
+                geometry: parse(hForm.getValues().spacialCoverage)
+              }}
             />
           </>
         )}
