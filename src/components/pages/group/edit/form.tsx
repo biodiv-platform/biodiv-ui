@@ -82,10 +82,7 @@ export default function UserGroupEditForm({
           .required(),
         speciesGroupId: Yup.array().required(),
         habitatId: Yup.array().required(),
-        spacialCoverage: Yup.object().shape({
-          ne: Yup.array().required(),
-          se: Yup.array().required()
-        }),
+        spacialCoverage: Yup.string().required(),
         webAddress: Yup.string()
           .required("Web address is required")
           .matches(/^[^\s/]*$/, "Web address cannot contain '/' or spaces")
