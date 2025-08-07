@@ -40,7 +40,6 @@ export default function AreaDrawField({
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
   const defaultFeatures = useMemo(() => {parse(field.value)}, []);
-  console.log(defaultFeatures)
 
   /*const handleOnFeatureChange = (features) => {
     if (!features.length) {
