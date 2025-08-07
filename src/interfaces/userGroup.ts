@@ -328,6 +328,7 @@ export interface UserGroupEditData {
   habitatId?: number /* int64 */[];
   translation?;
   webAddress?: string;
+  spatialData?: string;
 }
 export interface UserGroupFilterDate {
   fromDate?: string; // date-time

@@ -53,16 +53,13 @@ export default function UserGroupEditForm({
   const { languageId } = useGlobalState();
 
   const {
-    neLatitude,
-    neLongitude,
-    swLatitude,
-    swLongitude,
     translation,
     icon,
     habitatId,
     speciesGroupId,
     allowUserToJoin,
-    webAddress
+    webAddress,
+    spatialData
   } = groupInfo;
 
   const hForm = useForm<any>({
@@ -94,7 +91,7 @@ export default function UserGroupEditForm({
       habitatId,
       speciesGroupId,
       allowUserToJoin,
-      spacialCoverage:`POLYGON ((${neLongitude} ${neLatitude},${neLongitude} ${swLatitude},${swLongitude} ${swLatitude},${swLongitude} ${neLatitude},${neLongitude} ${neLatitude}))`,
+      spacialCoverage: spatialData,
       webAddress
     }
   });
@@ -106,10 +103,7 @@ export default function UserGroupEditForm({
       ...STATIC_GROUP_PAYLOAD,
       ...otherValues,
       languageId: values.languageId || languageId,
-      neLatitude: spacialCoverage?.ne?.[1],
-      neLongitude: spacialCoverage?.ne?.[0],
-      swLatitude: spacialCoverage?.se?.[1],
-      swLongitude: spacialCoverage?.se?.[0]
+      spatialData: spatialData
     };
 
     const { success } = await axUserGroupUpdate(payload, userGroupId);
