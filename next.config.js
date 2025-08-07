@@ -10,22 +10,22 @@ module.exports = nextTranslate({
     optimizePackageImports: ["@chakra-ui/react"],
     legacyBrowsers: false,
     browsersListForSwc: true,
-    nextScriptWorkers: false,
+    nextScriptWorkers: false
   },
   images: {
     remotePatterns: [
       // Main domain
       {
-        protocol: siteUrl.protocol.replace(':', ''),
+        protocol: siteUrl.protocol.replace(":", ""),
         hostname: mainDomain,
-        pathname: '/**',
+        pathname: "/**"
       },
       // All subdomains
       {
-        protocol: 'https',
+        protocol: "https",
         hostname: `*.${mainDomain}`,
-        pathname: '/**',
-      },
-    ],
-  },
+        pathname: "/**"
+      }
+    ]
+  }
 });
