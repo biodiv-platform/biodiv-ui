@@ -1,9 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
-import bbox from "@turf/bbox";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useController } from "react-hook-form";
 import { parse } from "wkt";
 
@@ -37,12 +36,12 @@ export default function AreaDrawField({
   ...props
 }: AreaDrawFieldProps) {
   const { field, fieldState } = useController({ name });
-  const [coordinates, setCoordinates] = useState({});
+  //const [coordinates, setCoordinates] = useState({});
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
   const defaultFeatures = useMemo(() => parse(field.value), []);
 
-  const handleOnFeatureChange = (features) => {
+  /*const handleOnFeatureChange = (features) => {
     if (!features.length) {
       setCoordinates({});
       return;
@@ -57,11 +56,11 @@ export default function AreaDrawField({
       ne: [maxlng, minlat],
       se: [minlng, maxlat]
     });
-  };
+  };*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     field.onChange(coordinates);
-  }, [coordinates]);
+  }, [coordinates]);*/
 
   /*useEffect(() => {
     handleOnFeatureChange(defaultFeatures);
