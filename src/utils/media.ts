@@ -131,3 +131,8 @@ export const getDocumentFilePath = (resourceUrl): string => {
     ? resourceUrl
     : `${SITE_CONFIG.DOCUMENT.BASE_PATH}/content/documents${resourceUrl}`;
 };
+
+export const getLogo = (resourceUrl) =>
+  resourceUrl.startsWith("http")
+    ? `${resourceUrl}?w=128&preserve=true`
+    : `${SITE_CONFIG.SITE.URL}${resourceUrl}?w=128&preserve=true`;
