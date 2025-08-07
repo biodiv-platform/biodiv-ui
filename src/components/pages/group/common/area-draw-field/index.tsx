@@ -39,7 +39,8 @@ export default function AreaDrawField({
   //const [coordinates, setCoordinates] = useState({});
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
-  const defaultFeatures = useMemo(() => parse(field.value), []);
+  const defaultFeatures = useMemo(() => {parse(field.value)}, []);
+  console.log(defaultFeatures)
 
   /*const handleOnFeatureChange = (features) => {
     if (!features.length) {
@@ -80,7 +81,11 @@ export default function AreaDrawField({
       {hint && <Field color="gray.600" helperText={hint} />}
       <NakshaMapboxDraw
         defaultViewState={defaultViewState}
-        data={defaultFeatures}
+        data={{
+          type: "Feature",
+          properties: {},
+          geometry:defaultFeatures
+        }}
         //onFeaturesChange={handleOnFeatureChange}
         mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       />
