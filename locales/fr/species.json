@@ -66,6 +66,7 @@
   },
   "edit_name": "Gérer le nom commun",
   "edit_synonym": "Gérer les synonymes",
+  "failed_to_update_taxon": "Échec de la mise à jour du taxon",
   "field": {
     "delete": {
       "failure": "Impossible de supprimer le champ",
@@ -93,6 +94,7 @@
   },
   "manage_media": "Gérer les médias",
   "observation_media": "Média d'observation",
+  "please_select_a_taxon": "Veuillez sélectionner un taxon",
   "pull_media": "Prendre le média",
   "references": "Références",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "Ressource",
   "scientific_name": "Nom scientifique",
+  "search_for_a_new_taxon_name": "Recherchez un nouveau nom de taxon",
   "select_all_message": "Les espèces seront sélectionnées",
   "share": "Partager cette espèce",
   "species_group": "Groupe d'espèces",
@@ -133,6 +136,7 @@
   },
   "synonyms": "Synonymes",
   "taxon": "Taxonomie",
+  "taxon_updated_successfully": "Taxon mis à jour avec succès",
   "toggle_empty": "Boggle",
   "traits": {
     "range_hint": "Utilisation: Valeurs de la plage de septates",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "Suivre l'espèce",
+  "update_taxon": "Mettre à jour le taxon",
   "view_original": "voir l'original"
 }

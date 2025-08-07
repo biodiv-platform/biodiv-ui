@@ -56,7 +56,7 @@ const useSpeciesOccurancesList = (speciesId, max = 16) => {
 
   useEffect(() => {
     loadMore(true);
-  }, []);
+  }, [speciesId]);
 
   return {
     speciesOccurances,

@@ -143,5 +143,11 @@
     }
   },
   "unfollow_species": "Follow Species",
-  "view_original": "view original"
+  "view_original": "view original",
+  "please_select_a_taxon": "Please select a taxon",
+  "species_already_exists": "species with this taxon already exists",
+  "taxon_updated_successfully": "Taxon updated successfully",
+  "failed_to_update_taxon": "Failed to update taxon",
+  "search_for_a_new_taxon_name": "Search for a new taxon name",
+  "update_taxon": "Update Taxon"
 }

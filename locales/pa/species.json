@@ -66,6 +66,7 @@
   },
   "edit_name": "ਆਮ ਨਾਮ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
   "edit_synonym": "ਮਨਜੂਰ",
+  "failed_to_update_taxon": "ਟੈਕਸ ਨੂੰ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
   "field": {
     "delete": {
       "failure": "ਫੀਲਡ ਨੂੰ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ",
@@ -93,6 +94,7 @@
   },
   "manage_media": "ਮੀਡੀਆ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
   "observation_media": "ਨਿਰੀਖਣ ਮੀਡੀਆ",
+  "please_select_a_taxon": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਟੈਕ ਚੁਣੋ",
   "pull_media": "ਮੀਡੀਆ ਨੂੰ ਖਿੱਚੋ",
   "references": "ਹਵਾਲੇ",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "ਸਰੋਤ",
   "scientific_name": "ਵਿਗਿਆਨਕ ਨਾਮ",
+  "search_for_a_new_taxon_name": "ਇੱਕ ਨਵੇਂ ਟੈਕਨੀ ਨਾਮ ਦੀ ਭਾਲ ਕਰੋ",
   "select_all_message": "ਪ੍ਰਜਾਤੀਆਂ ਦੀ ਚੋਣ ਕੀਤੀ ਜਾਵੇਗੀ",
   "share": "ਇਸ ਸਪੀਸੀਜ਼ ਨੂੰ ਸਾਂਝਾ ਕਰੋ",
   "species_group": "ਸਪੀਸੀਜ਼ ਗਰੁੱਪ",
@@ -133,6 +136,7 @@
   },
   "synonyms": "ਸਮਾਨਾਰਥੀ",
   "taxon": "ਟੈਕਸੋਨਮੀ",
+  "taxon_updated_successfully": "ਟੈਕਸ ਸਰਕਾਰ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤੀ ਗਈ",
   "toggle_empty": "ਟੌਗਲ ਖਾਲੀ",
   "traits": {
     "range_hint": "ਵਰਤੋਂ: ਸੇਬੈਟ ਰੇਂਜ ਦੇ ਮੁੱਲਾਂ ਨੂੰ",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "ਸਪੀਸੀਜ਼ ਦੀ ਪਾਲਣਾ ਕਰੋ",
+  "update_taxon": "ਟੈਕਸ ਅਪਡੇਟ ਕਰੋ",
   "view_original": "ਅਸਲ ਵੇਖੋ"
 }

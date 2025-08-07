@@ -66,6 +66,7 @@
   },
   "edit_name": "ସାଧାରଣ ନାମ ପରିଚାଳନା କରନ୍ତୁ |",
   "edit_synonym": "ମନେଞ୍ଜ ସମନେବା |",
+  "failed_to_update_taxon": "ଟ୍ୟାକ୍ସନ୍ ଅପଡେଟ୍ କରିବାରେ ବିଫଳ |",
   "field": {
     "delete": {
       "failure": "କ୍ଷେତ୍ର ବିଲୋପ କରିବାରେ ଅସମର୍ଥ |",
@@ -93,6 +94,7 @@
   },
   "manage_media": "ମିଡିଆ ପରିଚାଳନା କରନ୍ତୁ |",
   "observation_media": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଗଣମାଧ୍ୟମ |",
+  "please_select_a_taxon": "ଦୟାକରି ଏକ ଟ୍ୟାକ୍ସନ୍ ଚୟନ କରନ୍ତୁ |",
   "pull_media": "ମିଡିଆ ଟାଣନ୍ତୁ |",
   "references": "ସନ୍ଦର୍ଭ",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "ଉତ୍ସ",
   "scientific_name": "ବ Scientific ଜ୍ଞାନିକ ନାମ |",
+  "search_for_a_new_taxon_name": "ଏକ ନୂତନ ଟ୍ୟାକ୍ସନ୍ ନାମ ଖୋଜ |",
   "select_all_message": "ପ୍ରଜାତିଗୁଡିକ ଚୟନ କରାଯିବ |",
   "share": "ଏହି ପ୍ରଜାତିଗୁଡିକ ଅଂଶୀଦାର କରନ୍ତୁ |",
   "species_group": "ପ୍ରଜାତି ଗୋଷ୍ଠୀ |",
@@ -133,6 +136,7 @@
   },
   "synonyms": "ସମାର୍ଥକ",
   "taxon": "ଟ୍ୟାକୋନୋମି",
+  "taxon_updated_successfully": "ଟ୍ୟାକ୍ସନ୍ ସଫଳତାର ସହିତ ଅଦ୍ୟତନ ହୋଇଛି |",
   "toggle_empty": "ଖାଲି ଟୋଗଲ୍ କରନ୍ତୁ |",
   "traits": {
     "range_hint": "ବ୍ୟବହାର: ରେଜେଟ୍ ପରିସର ମୂଲ୍ୟଗୁଡିକ |",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "ପ୍ରଜାତିଗୁଡିକ ଅନୁସରଣ କରନ୍ତୁ |",
+  "update_taxon": "ଟ୍ୟାକ୍ସନ୍ ଅପଡେଟ୍ କରନ୍ତୁ |",
   "view_original": "ମୂଳ ଦେଖନ୍ତୁ |"
 }
