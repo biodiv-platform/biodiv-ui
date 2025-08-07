@@ -83,7 +83,7 @@ export default function AreaDrawField({
         data={{
           type: "Feature",
           properties: {},
-          geometry:defaultFeatures
+          geometry:parse(field.value)
         }}
         //onFeaturesChange={handleOnFeatureChange}
         mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
