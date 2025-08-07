@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
-import React, { useMemo } from "react";
+import React from "react";
 import { useController } from "react-hook-form";
 import { parse } from "wkt";
 
