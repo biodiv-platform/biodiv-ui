@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const nextTranslate = require("next-translate");
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
+const siteHostname = siteUrl ? new URL(siteUrl).hostname.replace('www.', '') : '';
+
 module.exports = nextTranslate({
   experimental: {
     optimizePackageImports: ["@chakra-ui/react"],
@@ -9,19 +12,28 @@ module.exports = nextTranslate({
     nextScriptWorkers: false,
   },
   images: {
+    domains: siteHostname ? [siteHostname] : [],
     remotePatterns: [
-      // Always allow localhost
       {
-        protocol: "http",
-        hostname: "localhost",
-        pathname: "/**",
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '',
+        pathname: '/**',
       },
-      // Only add production domain if env var is set
-      ...(process.env.NEXT_PUBLIC_SITE_URL ? [{
-        protocol: "https",
-        hostname: `**.${new URL(process.env.NEXT_PUBLIC_SITE_URL).hostname.replace("www.", "")}`,
-        pathname: "/**",
-      }] : []),
+      ...(siteHostname ? [
+        {
+          protocol: 'https',
+          hostname: siteHostname,
+          port: '',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: `*.${siteHostname}`,
+          port: '',
+          pathname: '/**',
+        }
+      ] : []),
     ],
   },
 });
