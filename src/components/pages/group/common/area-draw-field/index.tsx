@@ -80,7 +80,7 @@ export default function AreaDrawField({
       {hint && <Field color="gray.600" helperText={hint} />}
       <NakshaMapboxDraw
         defaultViewState={defaultViewState}
-        features={defaultFeatures}
+        data={defaultFeatures}
         //onFeaturesChange={handleOnFeatureChange}
         mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       />
