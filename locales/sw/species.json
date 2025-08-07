@@ -66,6 +66,7 @@
   },
   "edit_name": "Dhibiti jina la kawaida",
   "edit_synonym": "Manange ya Manange",
+  "failed_to_update_taxon": "Imeshindwa kusasisha taxon",
   "field": {
     "delete": {
       "failure": "Haiwezi kufuta shamba",
@@ -93,6 +94,7 @@
   },
   "manage_media": "Dhibiti vyombo vya habari.",
   "observation_media": "Uchunguzi wa vyombo vya habari.",
+  "please_select_a_taxon": "Tafadhali chagua taxon",
   "pull_media": "Piga vyombo vya habari.",
   "references": "Marejeleo",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "Rasilimali",
   "scientific_name": "Jina la kisayansi",
+  "search_for_a_new_taxon_name": "Tafuta jina mpya la taxon",
   "select_all_message": "Aina zitachaguliwa",
   "share": "Shiriki aina hii",
   "species_group": "Kikundi cha Aina",
@@ -133,6 +136,7 @@
   },
   "synonyms": "Vidokezo",
   "taxon": "Taxonomy",
+  "taxon_updated_successfully": "Taxon imesasishwa kwa mafanikio",
   "toggle_empty": "Badilisha tupu.",
   "traits": {
     "range_hint": "Tumia: kwa maadili ya mara kwa mara",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "Fuata aina hiyo",
+  "update_taxon": "Sasisha taxon",
   "view_original": "Angalia awali"
 }

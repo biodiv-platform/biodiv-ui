@@ -66,6 +66,7 @@
   },
   "edit_name": "सामान्य नाव व्यवस्थापित करा",
   "edit_synonym": "व्यवस्थापकीय समानार्थी शब्द",
+  "failed_to_update_taxon": "टॅक्सन अद्यतनित करण्यात अयशस्वी",
   "field": {
     "delete": {
       "failure": "फील्ड हटविण्यात अक्षम",
@@ -93,6 +94,7 @@
   },
   "manage_media": "माध्यम व्यवस्थापित करा",
   "observation_media": "निरीक्षण माध्यम",
+  "please_select_a_taxon": "कृपया टॅक्सन निवडा",
   "pull_media": "मीडिया खेचणे",
   "references": "संदर्भ",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "संसाधन",
   "scientific_name": "शास्त्रीय नाव",
+  "search_for_a_new_taxon_name": "नवीन टॅक्सन नाव शोधा",
   "select_all_message": "प्रजाती निवडल्या जातील",
   "share": "ही प्रजाती सामायिक करा",
   "species_group": "प्रजाती गट",
@@ -133,6 +136,7 @@
   },
   "synonyms": "समानार्थी शब्द",
   "taxon": "वर्गीकरण",
+  "taxon_updated_successfully": "टॅक्सन यशस्वीरित्या अद्यतनित केले",
   "toggle_empty": "रिक्त टॉगल करा",
   "traits": {
     "range_hint": "वापरा: सेपेट श्रेणी मूल्यांकडे",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "प्रजातींचे अनुसरण करा",
+  "update_taxon": "टॅक्सॉन अद्यतनित करा",
   "view_original": "मूळ पहा"
 }

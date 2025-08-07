@@ -66,6 +66,7 @@
   },
   "edit_name": "સામાન્ય નામ મેનેજ કરો",
   "edit_synonym": "માનસિક સમાનાર્થી",
+  "failed_to_update_taxon": "ટેક્સનને અપડેટ કરવામાં નિષ્ફળ",
   "field": {
     "delete": {
       "failure": "ક્ષેત્ર કાઢી નાખવામાં અસમર્થ",
@@ -93,6 +94,7 @@
   },
   "manage_media": "મીડિયા મેનેજ કરો",
   "observation_media": "નિરીક્ષણ મીડિયા",
+  "please_select_a_taxon": "કૃપા કરીને ટેક્સન પસંદ કરો",
   "pull_media": "ખેંચવું",
   "references": "સંદર્ભ",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "સંસાધન",
   "scientific_name": "વૈજ્ઞાનિક નામ",
+  "search_for_a_new_taxon_name": "નવા ટેક્સન નામ માટે શોધ કરો",
   "select_all_message": "જાતિઓ પસંદ કરવામાં આવશે",
   "share": "આ જાતિઓ શેર કરો",
   "species_group": "જાતિ જૂથ",
@@ -133,6 +136,7 @@
   },
   "synonyms": "સમાનાર્થી",
   "taxon": "વર્ગીકરણ",
+  "taxon_updated_successfully": "ટેક્સન સફળતાપૂર્વક અપડેટ થયું",
   "toggle_empty": "ખાલી ટૉગલ કરો",
   "traits": {
     "range_hint": "ઉપયોગ કરો: સેપ્ટટેટ રેન્જ મૂલ્યો",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "જાતિઓ અનુસરો",
+  "update_taxon": "અપડેટ ટેક્સન",
   "view_original": "મૂળ જુઓ"
 }

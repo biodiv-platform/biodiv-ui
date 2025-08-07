@@ -7,6 +7,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axGetSpeciesIdFromTaxonId, axUpdateSpeciesTaxonId } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
+import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
@@ -46,16 +47,18 @@ export default function TaxonEditModal({
     )
   });
 
+  const { t } = useTranslation();
+
   const handleSave = async (value) => {
     if (!value) {
-      notification("Please select a taxon");
+      notification(t("species:please_select_a_taxon"));
       return;
     }
 
     const { success, data: speciesIdFromTaxon } = await axGetSpeciesIdFromTaxonId(value.taxon);
 
     if (success && speciesIdFromTaxon != species.species.id) {
-      notification("species with this taxon already exists");
+      notification(t("species:species_already_exists"));
       return;
     }
 
@@ -63,17 +66,16 @@ export default function TaxonEditModal({
       const result = await axUpdateSpeciesTaxonId(species.species.id, value.taxon);
 
       if (result.success) {
-        notification("Taxon updated successfully", NotificationType.Success);
-        //  setTaxon(value.taxon);
+        notification(t("species:taxon_updated_successfully"), NotificationType.Success);
         onTaxonUpdated(value.taxon);
 
         onClose();
       } else {
-        notification("Failed to update taxon");
+        notification(t("species:failed_to_update_taxon"));
       }
     } catch (error) {
       console.error("Failed to update taxon:", error);
-      notification("Failed to update taxon", NotificationType.Error);
+      notification(t("species:failed_to_update_taxon"), NotificationType.Error);
     }
   };
   return (
@@ -89,15 +91,14 @@ export default function TaxonEditModal({
       <DialogContent>
         <FormProvider {...formRef}>
           <form onSubmit={formRef.handleSubmit(handleSave)}>
-            <DialogHeader>Update Taxon</DialogHeader>
+            <DialogHeader>{t("species:update_taxon")}</DialogHeader>
             <DialogCloseTrigger />
             <DialogBody>
-              {/* <div>Hello</div> */}
               <SelectAsyncInputField
                 name="taxon"
                 onQuery={onQuery}
                 optionComponent={ScientificNameOption}
-                placeholder="Search for a new taxon name"
+                placeholder={t("species:search_for_a_new_taxon_name")}
                 resetOnSubmit={false}
                 openMenuOnFocus={true}
                 style={{
@@ -113,10 +114,6 @@ export default function TaxonEditModal({
                 </Button>
               </DialogActionTrigger>
               <SubmitButton leftIcon={<CheckIcon />} children="Save" />
-              {/* <Button ml={4} onClick={onEditClose} type="button" variant={"subtle"}>
-                <CrossIcon />
-                {t("common:cancel")}
-              </Button> */}
             </DialogFooter>
           </form>
         </FormProvider>
