@@ -103,7 +103,7 @@ export default function UserGroupEditForm({
       ...STATIC_GROUP_PAYLOAD,
       ...otherValues,
       languageId: values.languageId || languageId,
-      spatialData: spatialData
+      spatialData: spacialCoverage
     };
 
     const { success } = await axUserGroupUpdate(payload, userGroupId);
