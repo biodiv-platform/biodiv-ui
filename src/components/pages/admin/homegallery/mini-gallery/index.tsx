@@ -16,7 +16,8 @@ export default function MiniGallery({
   sliderList,
   setSliderList,
   handleFormSubmit,
-  groupId = -1
+  groupId = -1,
+  mode = "edit"
 }) {
   const { t } = useTranslation();
   const [isGalleryCreate, setIsGalleryCreate] = useState(false);
@@ -26,7 +27,7 @@ export default function MiniGallery({
   const [openIndex, setOpenIndex] = useState(null);
   return (
     <Box>
-      {isGalleryEdit ? (
+      {mode=="edit" && isGalleryEdit ? (
         <Box w="full" p={4} className="fadeInUp white-box" overflowX="auto">
           <EditMiniGalleryForm
             setIsEdit={setIsGalleryEdit}
@@ -49,11 +50,12 @@ export default function MiniGallery({
             setSliderList={setSliderList}
             setOpenIndex={setOpenIndex}
             groupId = {groupId}
+            mode= {mode}
           />
         </Box>
       ) : (
         <>
-          {groupId==-1 ? miniGallery?.map((item, index) => (
+          {mode=="edit" && groupId==-1 ? miniGallery?.map((item, index) => (
             <MiniGalleryItem
               key={index}
               item={item}

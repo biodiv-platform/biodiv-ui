@@ -25,7 +25,8 @@ export default function CreateMiniGalleryForm({
   sliderList,
   setSliderList,
   setOpenIndex,
-  groupId
+  groupId,
+  mode
 }) {
   const { t } = useTranslation();
 
@@ -81,28 +82,40 @@ export default function CreateMiniGalleryForm({
         (items as any[]).map((item) => ({
           ...item,
           slidesPerView: Number(item.slidesPerView),
-          isVertical: Boolean(item.isVertical)
+          isVertical: Boolean(item.isVertical),
+          isActive: true
         }))
       ])
     );
-    const { success, data } =
-      groupId == -1
-        ? await axCreateMiniGallery(payload)
-        : await axCreateMiniGroupGallery(payload, groupId);
-    if (success) {
+    if (mode == "edit") {
+      const { success, data } =
+        groupId == -1
+          ? await axCreateMiniGallery(payload)
+          : await axCreateMiniGroupGallery(payload, groupId);
+      if (success) {
+        notification(
+          t("group:homepage_customization.mini_gallery_setup.create_success"),
+          NotificationType.Success
+        );
+        setOpenIndex(miniGalleryList.length);
+        setMiniGalleryList([...miniGalleryList, ...Object.entries(data)]);
+        setSliderList([...sliderList, []]);
+        setIsCreate(false);
+      } else {
+        notification(
+          t("group:homepage_customization.mini_gallery_setup.create_error"),
+          NotificationType.Error
+        );
+      }
+    } else {
       notification(
         t("group:homepage_customization.mini_gallery_setup.create_success"),
         NotificationType.Success
       );
       setOpenIndex(miniGalleryList.length);
-      setMiniGalleryList([...miniGalleryList, ...Object.entries(data)]);
+      setMiniGalleryList([...miniGalleryList, [null,payload]]);
       setSliderList([...sliderList, []]);
       setIsCreate(false);
-    } else {
-      notification(
-        t("group:homepage_customization.mini_gallery_setup.create_error"),
-        NotificationType.Error
-      );
     }
   };
 

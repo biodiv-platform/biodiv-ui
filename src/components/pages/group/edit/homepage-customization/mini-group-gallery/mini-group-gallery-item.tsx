@@ -52,18 +52,26 @@ export default function MiniGroupGalleryItem({
   }, [sliderList]);
 
   const handleDelete = async () => {
-    const { success } = await axRemoveMiniGroupGallery(groupId, item[0]);
-    if (success) {
+    if (item[0]) {
+      const { success } = await axRemoveMiniGroupGallery(groupId, item[0]);
+      if (success) {
+        notification(
+          t("group:homepage_customization.mini_gallery_setup.delete_success"),
+          NotificationType.Success
+        );
+        onDelete(index);
+      } else {
+        notification(
+          t("group:homepage_customization.mini_gallery_setup.delete_error"),
+          NotificationType.Error
+        );
+      }
+    } else {
       notification(
         t("group:homepage_customization.mini_gallery_setup.delete_success"),
         NotificationType.Success
       );
       onDelete(index);
-    } else {
-      notification(
-        t("group:homepage_customization.mini_gallery_setup.delete_error"),
-        NotificationType.Error
-      );
     }
   };
 
@@ -86,17 +94,19 @@ export default function MiniGroupGalleryItem({
                 </Badge>
               </Heading>
               <Box>
-                <IconButton
-                  colorPalette="blue"
-                  className="action"
-                  aria-label={t("common:edit")}
-                  title={t("common:edit")}
-                  variant="plain"
-                  size="xl"
-                  onClick={() => onEdit(index, item)}
-                >
-                  <EditIcon />
-                </IconButton>
+                {item[0] && (
+                  <IconButton
+                    colorPalette="blue"
+                    className="action"
+                    aria-label={t("common:edit")}
+                    title={t("common:edit")}
+                    variant="plain"
+                    size="xl"
+                    onClick={() => onEdit(index, item)}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                )}
                 <IconButton
                   colorPalette="red"
                   className="action"
@@ -152,15 +162,15 @@ export default function MiniGroupGalleryItem({
                   setIsEdit={setIsEdit}
                   setEditGalleryData={setEditData}
                   galleryId={item[0]}
-                  userGroupId={groupId}
+                  userGroupId={item[0]? groupId: null}
                 />
               )}
             </Box>
-            <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
+            {item[0] && <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
               <Button colorPalette="blue" onClick={handleFormSubmit}>
                 {t("common:save")}
               </Button>
-            </Box>
+            </Box>}
           </AccordionItemContent>
         </AccordionItem>
       </AccordionRoot>

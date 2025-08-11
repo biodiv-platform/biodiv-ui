@@ -29,6 +29,7 @@ import {
   axAddCustomField,
   axAddExsistingCustomField,
   axAddUserGroupRule,
+  axCreateMiniGroupGallery,
   axUpdateGroupHomePageDetails,
   axUpdateSpeciesFieldsMapping,
   axUserGroupCreate
@@ -52,6 +53,7 @@ import * as Yup from "yup";
 
 import EditIcon from "@/icons/edit";
 
+import MiniGallery from "../../admin/homegallery/mini-gallery";
 import AdminInviteField from "../common/admin-invite-field";
 import AreaDrawField from "../common/area-draw-field";
 import AddCustomFieldForm from "../common/custom-field/custom-field-form";
@@ -117,6 +119,11 @@ const steps = [
     translation: "group:homepage_customization.gallery_setup.title",
     icon: ImageIcon
   },
+  {
+    label: "Mini Gallery",
+    translation: "group:homepage_customization.mini_gallery_setup.title",
+    icon: ImageIcon
+  },
   { label: "Custom Fields", translation: "group:custom_field.title", icon: ListIcon },
   { label: "Group Rules", translation: "group:rules.title", icon: LuCircleCheck },
   { label: "Observation Display", translation: "group:observation_display", icon: LuView },
@@ -137,6 +144,8 @@ export default function CreateGroupPageComponent({
   const [isCreate, setIsCreate] = useState(false);
   const [, setIsEdit] = useState(false);
   const [galleryList, setGalleryList] = useState<GallerySlider[]>([]);
+  const [miniGalleryList, setMiniGalleryList] = useState([]);
+  const [miniGallerySliderList, setMiniGallerySliderList] = useState([]);
   const [, setEditGalleryData] = useState([]);
   const [customFields, setCustomFields] = useState<
     {
@@ -179,10 +188,7 @@ export default function CreateGroupPageComponent({
         speciesGroup: Yup.array().required(),
         habitatId: Yup.array().required(),
         allowUserToJoin: Yup.boolean().required(),
-        spacialCoverage: Yup.object().shape({
-          ne: Yup.array().required(),
-          se: Yup.array().required()
-        }),
+        spacialCoverage: Yup.string().required(),
         icon: Yup.string().nullable(),
         founder: Yup.array().nullable(),
         moderator: Yup.array().nullable(),
@@ -203,20 +209,14 @@ export default function CreateGroupPageComponent({
       showGridMap: true,
       showPartners: true,
       showDesc: true,
-      mediaToggle: true
+      mediaToggle: true,
+      spacialCoverage: null
     }
   });
   const isAdmin = hasAccess([Role.Admin]);
 
   const handleFormSubmit = async () => {
     const { spacialCoverage, founder, moderator, mediaToggle, ...otherValues } = hForm.getValues();
-
-    const spacialCoverageBounds = {
-      neLatitude: spacialCoverage?.ne?.[1],
-      neLongitude: spacialCoverage?.ne?.[0],
-      swLatitude: spacialCoverage?.se?.[1],
-      swLongitude: spacialCoverage?.se?.[0]
-    };
 
     const founderFormat = transformMemberPayload(founder);
     const moderatorFormat = transformMemberPayload(moderator);
@@ -234,7 +234,7 @@ export default function CreateGroupPageComponent({
       mediaToggle: media,
       ...STATIC_GROUP_PAYLOAD,
       ...otherValues,
-      ...spacialCoverageBounds,
+      spatialData: spacialCoverage,
       invitationData
     };
 
@@ -284,6 +284,18 @@ export default function CreateGroupPageComponent({
         notification(t("group:homepage_customization.success"), NotificationType.Success);
       } else {
         notification("Unable to add gallery slides", NotificationType.Error);
+      }
+      let miniGallery_overall_success = true;
+      for (const miniGallery of miniGalleryList){
+        const { success: miniGallery_success } = await axCreateMiniGroupGallery(miniGallery, data.id);
+          miniGallery_overall_success = miniGallery_success;
+
+          if (!miniGallery_success) {
+            break;
+          }
+      }
+      if (miniGallery_overall_success) {
+        notification("Successfully created miniGalleries", NotificationType.Success);
       }
       const [customFieldsWithId, customFieldsWithoutId] = customFields.reduce<
         [WithId[], WithoutId[]]
@@ -638,6 +650,18 @@ export default function CreateGroupPageComponent({
             )}
           </>
         )}
+        {steps[currentStep].translation ==
+          "group:homepage_customization.mini_gallery_setup.title" && (
+          <MiniGallery
+            miniGallery={miniGalleryList}
+            setMiniGallery={setMiniGalleryList}
+            languages={languages}
+            sliderList={miniGallerySliderList}
+            setSliderList={setMiniGallerySliderList}
+            handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
+            mode = {"create"}
+          />
+        )}
         {steps[currentStep].translation == "group:custom_field.title" &&
           (isAdmin ? (
             <Box p={3}>
@@ -713,7 +737,7 @@ export default function CreateGroupPageComponent({
           </Button>
 
           <Text fontSize="sm" color="gray.500">
-          {t("group:create.step")} {currentStep + 1} of {steps.length}
+            {t("group:create.step")} {currentStep + 1} of {steps.length}
           </Text>
 
           <Button

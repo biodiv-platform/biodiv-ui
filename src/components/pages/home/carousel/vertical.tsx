@@ -103,6 +103,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
               color={resource.color ? resource.color : "white"}
             >
               <HStack h="full" gap={6}>
+                <Box w={100}>
                 {resource.fileName && (
                   <Image
                     src={getResourceThumbnail(
@@ -118,6 +119,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
                     bg="gray.300"
                   />
                 )}
+                </Box>
                 <Center flex="1" h="full" p={{ base: 5 }}>
                   <Box>
                     <Heading as="h1" fontWeight={500} mb={2} fontSize="1.5rem">

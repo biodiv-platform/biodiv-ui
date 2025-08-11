@@ -39,6 +39,9 @@ export default function AreaDrawField({
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
   const defaultFeatures = useMemo(() => {
+    if (!field.value || typeof field.value !== "string" || field.value.trim() === "") {
+      return [];
+    }
     const geometry = parse(field.value); // Convert WKT to GeoJSON geometry
     return [
       {
