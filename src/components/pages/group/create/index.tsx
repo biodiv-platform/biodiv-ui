@@ -286,7 +286,7 @@ export default function CreateGroupPageComponent({
         notification("Unable to add gallery slides", NotificationType.Error);
       }
       let miniGallery_overall_success = true;
-      for (const miniGallery of miniGalleryList){
+      for (const miniGallery of miniGalleryList) {
         const { success: miniGallery_success } = await axCreateMiniGroupGallery(
           miniGallery[1],
           data.id
@@ -429,6 +429,7 @@ export default function CreateGroupPageComponent({
   const handleNext = async () => {
     let isValid = false;
     if (
+      steps[currentStep].translation === "group:homepage_customization.mini_gallery_setup.title" ||
       steps[currentStep].translation === "group:custom_field.title" ||
       steps[currentStep].translation === "group:rules.title" ||
       steps[currentStep].translation === "group:rules.title"
