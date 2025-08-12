@@ -261,7 +261,7 @@ export default function UserGroupEditForm({
               isRequired={true}
             />
             <WKTFieldMulti
-              name="spatialCoverage"
+              name="spacialCoverage"
               isMultiple={false}
               gMapTab={false}
               centroid={"centroid"}
@@ -269,7 +269,7 @@ export default function UserGroupEditForm({
               nameTitle={"nameTitle"}
               canDraw={true}
               labelTitle={t("form:coverage.place")}
-              nameTopology={"spatialCoverage"}
+              nameTopology={"spacialCoverage"}
               labelTopology={t("form:coverage.wkt")}
               group={true}
             />
