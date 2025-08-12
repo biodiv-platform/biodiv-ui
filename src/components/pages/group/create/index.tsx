@@ -250,23 +250,6 @@ export default function CreateGroupPageComponent({
         showStats,
         description
       } = hForm.getValues();
-      let miniGallery_overall_success = true;
-      const miniGalleryIds: string[] = [];
-      for (const [miniGallery] of miniGalleryList.entries()) {
-        const { success: miniGallery_success, data: mini } = await axCreateMiniGroupGallery(
-          miniGallery[1],
-          data.id
-        );
-        miniGallery_overall_success = miniGallery_success;
-        miniGalleryIds.push(Object.keys(mini)[0]);
-
-        if (!miniGallery_success) {
-          break;
-        }
-      }
-      if (miniGallery_overall_success) {
-        notification("Successfully created miniGalleries", NotificationType.Success);
-      }
       const gallerypaylpad = {
         gallerySlider: galleryList.reduce<Record<number, any[]>[]>((acc, item, index) => {
           const sliderId = item[0].split("|")[0];
@@ -285,28 +268,6 @@ export default function CreateGroupPageComponent({
 
           return acc;
         }, []),
-        miniGallerySlider : miniGallerySliderList.map((item) => {
-          const updatedGallerySlider = item.reduce((acc: any, item: any, index: number) => {
-            const sliderId = item[0].split("|")[0];
-            const languageMap = item[1] as Record<number, any[]>;
-
-            if (sliderId === "null") {
-              for (const langId in languageMap) {
-                languageMap[langId] = languageMap[langId].map((entry) => ({
-                  ...entry,
-                  ugId: data.id,
-                  displayOrder: index,
-                  galleryId: Number(miniGalleryIds[index])
-                }));
-              }
-              acc[`null|${index}`] = languageMap;
-            }
-
-            return acc;
-          }, {});
-
-          return updatedGallerySlider;
-        }),
         showDesc,
         showGallery,
         showGridMap,
@@ -323,6 +284,21 @@ export default function CreateGroupPageComponent({
         notification(t("group:homepage_customization.success"), NotificationType.Success);
       } else {
         notification("Unable to add gallery slides", NotificationType.Error);
+      }
+      let miniGallery_overall_success = true;
+      for (const miniGallery of miniGalleryList.entries()) {
+        const { success: miniGallery_success } = await axCreateMiniGroupGallery(
+          miniGallery[1],
+          data.id
+        );
+        miniGallery_overall_success = miniGallery_success;
+
+        if (!miniGallery_success) {
+          break;
+        }
+      }
+      if (miniGallery_overall_success) {
+        notification("Successfully created miniGalleries", NotificationType.Success);
       }
       const [customFieldsWithId, customFieldsWithoutId] = customFields.reduce<
         [WithId[], WithoutId[]]
