@@ -38,7 +38,7 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
   };
 
   useEffect(() => {
-    setIsdisabled(!props.isMultiple && value.length >= 1);
+    setIsdisabled(!props.isMultiple && (value.length >= 1 && !group));
     field.onChange(value);
   }, [value]);
 

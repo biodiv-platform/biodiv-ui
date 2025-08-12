@@ -51,11 +51,11 @@ import {
 } from "react-icons/lu";
 import * as Yup from "yup";
 
+import WKTFieldMulti from "@/components/form/wkt-multi";
 import EditIcon from "@/icons/edit";
 
 import MiniGallery from "../../admin/homegallery/mini-gallery";
 import AdminInviteField from "../common/admin-invite-field";
-import AreaDrawField from "../common/area-draw-field";
 import AddCustomFieldForm from "../common/custom-field/custom-field-form";
 import CustomFieldTable from "../common/custom-field/custom-field-table";
 import IconCheckboxField from "../common/icon-checkbox-field";
@@ -288,7 +288,7 @@ export default function CreateGroupPageComponent({
       let miniGallery_overall_success = true;
       let miniSlider_overall_success = true;
       for (const [index, miniGallery] of miniGalleryList.entries()) {
-        const { success: miniGallery_success, data:mini } = await axCreateMiniGroupGallery(
+        const { success: miniGallery_success, data: mini } = await axCreateMiniGroupGallery(
           miniGallery[1],
           data.id
         );
@@ -328,8 +328,11 @@ export default function CreateGroupPageComponent({
           showStats,
           description
         };
-        const { success: miniSlider_success } = await axUpdateGroupHomePageDetails(data.id, payload);
-        miniSlider_overall_success = miniSlider_success
+        const { success: miniSlider_success } = await axUpdateGroupHomePageDetails(
+          data.id,
+          payload
+        );
+        miniSlider_overall_success = miniSlider_success;
         if (!miniSlider_success) {
           break;
         }
@@ -337,7 +340,7 @@ export default function CreateGroupPageComponent({
       if (miniGallery_overall_success) {
         notification("Successfully created miniGalleries", NotificationType.Success);
       }
-      if (miniSlider_overall_success){
+      if (miniSlider_overall_success) {
         notification("Successfully created miniSliders", NotificationType.Success);
       }
       const [customFieldsWithId, customFieldsWithoutId] = customFields.reduce<
@@ -608,12 +611,18 @@ export default function CreateGroupPageComponent({
                   isRequired={true}
                   hint={t("common:habitats_covered_hint")}
                 />
-                <AreaDrawField
-                  label={t("group:spatial_coverge")}
-                  name={"spacialCoverage"}
-                  mb={8}
-                  isRequired={true}
-                  hint={t("group:spatial_coverge_hint")}
+                <WKTFieldMulti
+                  name="spacialCoverage"
+                  isMultiple={false}
+                  gMapTab={false}
+                  centroid={"centroid"}
+                  label={t("form:coverage.spatial")}
+                  nameTitle={"nameTitle"}
+                  canDraw={true}
+                  labelTitle={t("form:coverage.place")}
+                  nameTopology={"spacialCoverage"}
+                  labelTopology={t("form:coverage.wkt")}
+                  group={true}
                 />
               </>
             )}

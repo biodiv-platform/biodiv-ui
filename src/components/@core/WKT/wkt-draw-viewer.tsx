@@ -86,7 +86,7 @@ export default function WKTDrawViewer({
       }
       WKTInputRef.current.value = "";
     } else {
-      notification(group?"Valid WKT is required":"Valid PlaceName and WKT both are required");
+      notification(group ? "Valid WKT is required" : "Valid PlaceName and WKT both are required");
     }
   };
 
@@ -137,14 +137,20 @@ export default function WKTDrawViewer({
 
   useEffect(() => {
     if (!disabled) {
-      WKTInputRef.current.value = "";
       if (!group) {
-        TitleInputRef.current.clearValue();
+        WKTInputRef.current.value = "";
+        if (!group) {
+          TitleInputRef.current.clearValue();
+        }
+        setGeojson(undefined);
+      } else {
+        WKTInputRef.current.value = value;
+        if (value != "") {
+          setGeojson(wkt.parse(value));
+        } else {
+          setGeojson(undefined)
+        }
       }
-      setGeojson(undefined);
-    } else {
-      WKTInputRef.current.value = value;
-      setGeojson(wkt.parse(WKTInputRef.current.value))
     }
   }, [disabled]);
 
