@@ -432,7 +432,7 @@ export default function CreateGroupPageComponent({
       steps[currentStep].translation === "group:homepage_customization.mini_gallery_setup.title" ||
       steps[currentStep].translation === "group:custom_field.title" ||
       steps[currentStep].translation === "group:rules.title" ||
-      steps[currentStep].translation === "group:rules.title"
+      steps[currentStep].translation === "group:observation_display"
     ) {
       isValid = true;
     }
