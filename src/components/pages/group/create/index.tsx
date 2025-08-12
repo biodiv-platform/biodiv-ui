@@ -250,6 +250,23 @@ export default function CreateGroupPageComponent({
         showStats,
         description
       } = hForm.getValues();
+      let miniGallery_overall_success = true;
+      const miniGalleryIds: string[] = [];
+      for (const [miniGallery] of miniGalleryList.entries()) {
+        const { success: miniGallery_success, data: mini } = await axCreateMiniGroupGallery(
+          miniGallery[1],
+          data.id
+        );
+        miniGallery_overall_success = miniGallery_success;
+        miniGalleryIds.push(Object.keys(mini)[0]);
+
+        if (!miniGallery_success) {
+          break;
+        }
+      }
+      if (miniGallery_overall_success) {
+        notification("Successfully created miniGalleries", NotificationType.Success);
+      }
       const gallerypaylpad = {
         gallerySlider: galleryList.reduce<Record<number, any[]>[]>((acc, item, index) => {
           const sliderId = item[0].split("|")[0];
@@ -268,6 +285,28 @@ export default function CreateGroupPageComponent({
 
           return acc;
         }, []),
+        miniGallerySlider : miniGallerySliderList.map((item) => {
+          const updatedGallerySlider = item.reduce((acc: any, item: any, index: number) => {
+            const sliderId = item[0].split("|")[0];
+            const languageMap = item[1] as Record<number, any[]>;
+
+            if (sliderId === "null") {
+              for (const langId in languageMap) {
+                languageMap[langId] = languageMap[langId].map((entry) => ({
+                  ...entry,
+                  ugId: data.id,
+                  displayOrder: index,
+                  galleryId: Number(miniGalleryIds[index])
+                }));
+              }
+              acc[`null|${index}`] = languageMap;
+            }
+
+            return acc;
+          }, {});
+
+          return updatedGallerySlider;
+        }),
         showDesc,
         showGallery,
         showGridMap,
@@ -284,64 +323,6 @@ export default function CreateGroupPageComponent({
         notification(t("group:homepage_customization.success"), NotificationType.Success);
       } else {
         notification("Unable to add gallery slides", NotificationType.Error);
-      }
-      let miniGallery_overall_success = true;
-      let miniSlider_overall_success = true;
-      for (const [index, miniGallery] of miniGalleryList.entries()) {
-        const { success: miniGallery_success, data: mini } = await axCreateMiniGroupGallery(
-          miniGallery[1],
-          data.id
-        );
-        miniGallery_overall_success = miniGallery_success;
-
-        if (!miniGallery_success) {
-          break;
-        }
-
-        const miniGallerySlider = miniGallerySliderList[index]
-          .map((item, i) => {
-            const sliderId = item[0].split("|")[0];
-            const languageMap = item[1] as Record<number, any[]>;
-
-            if (sliderId === "null") {
-              for (const langId in languageMap) {
-                languageMap[langId] = languageMap[langId].map((entry) => ({
-                  ...entry,
-                  ugId: data.id,
-                  displayOrder: i,
-                  galleryId: Object.keys(mini)[0]
-                }));
-              }
-              return languageMap; // keep this item
-            }
-            return null; // skip this item
-          })
-          .filter(Boolean); // remove null entries
-
-        const payload = {
-          miniGallerySlider: miniGallerySlider,
-          showDesc,
-          showGallery,
-          showGridMap,
-          showPartners,
-          showRecentObservation,
-          showStats,
-          description
-        };
-        const { success: miniSlider_success } = await axUpdateGroupHomePageDetails(
-          data.id,
-          payload
-        );
-        miniSlider_overall_success = miniSlider_success;
-        if (!miniSlider_success) {
-          break;
-        }
-      }
-      if (miniGallery_overall_success) {
-        notification("Successfully created miniGalleries", NotificationType.Success);
-      }
-      if (miniSlider_overall_success) {
-        notification("Successfully created miniSliders", NotificationType.Success);
       }
       const [customFieldsWithId, customFieldsWithoutId] = customFields.reduce<
         [WithId[], WithoutId[]]
