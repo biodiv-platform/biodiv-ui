@@ -197,7 +197,7 @@
       "title": "Créer une règle de groupe"
     },
     "created_on_rule_title": "Créé sur la règle de date",
-    "has_user_rule": "Le seul contenu du membre sera publié",
+    "has_user_rule": "Seul le contenu des membres du groupe est autorisé",
     "hint": "Règles automatisées qui permettront de publier des observations éligibles au groupe.",
     "input_types": {
       "spatial": "Ajouter une règle spatiale",

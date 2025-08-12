@@ -198,7 +198,7 @@
       "title": "Create Group Rule"
     },
     "created_on_rule_title": "Created On Date Rule",
-    "has_user_rule": "Only member’s content will be posted",
+    "has_user_rule": " Only content from the group members is permitted",
     "hint": "Automated rules that will allow posting of qualifying observations to the group.",
     "input_types": {
       "spatial": "Add Spatial Rule",

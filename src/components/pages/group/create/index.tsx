@@ -287,12 +287,15 @@ export default function CreateGroupPageComponent({
       }
       let miniGallery_overall_success = true;
       for (const miniGallery of miniGalleryList){
-        const { success: miniGallery_success } = await axCreateMiniGroupGallery(miniGallery, data.id);
-          miniGallery_overall_success = miniGallery_success;
+        const { success: miniGallery_success } = await axCreateMiniGroupGallery(
+          miniGallery[1],
+          data.id
+        );
+        miniGallery_overall_success = miniGallery_success;
 
-          if (!miniGallery_success) {
-            break;
-          }
+        if (!miniGallery_success) {
+          break;
+        }
       }
       if (miniGallery_overall_success) {
         notification("Successfully created miniGalleries", NotificationType.Success);
@@ -659,7 +662,7 @@ export default function CreateGroupPageComponent({
             sliderList={miniGallerySliderList}
             setSliderList={setMiniGallerySliderList}
             handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
-            mode = {"create"}
+            mode={"create"}
           />
         )}
         {steps[currentStep].translation == "group:custom_field.title" &&

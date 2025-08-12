@@ -24,10 +24,7 @@ interface GroupEditPageProps {
     allowUserToJoin;
     speciesGroupIds;
     habitatIds;
-    neLongitude;
-    neLatitude;
-    swLatitude;
-    swLongitude;
+    spatialCoverage;
   };
   founders;
   moderators;
@@ -52,10 +49,7 @@ export default function AboutGroupComponent({
     allowUserToJoin,
     speciesGroupIds,
     habitatIds,
-    neLongitude,
-    neLatitude,
-    swLatitude,
-    swLongitude
+    spatialCoverage
   } = groupInfo;
 
   return (
@@ -83,10 +77,7 @@ export default function AboutGroupComponent({
       />
       <MapDrawView
         title={t("group:spatial_coverge")}
-        neLongitude={neLongitude}
-        neLatitude={neLatitude}
-        swLatitude={swLatitude}
-        swLongitude={swLongitude}
+        geometry={spatialCoverage}
       />
       <UserAvatarList title={t("group:admin.founder")} userList={founders} />
       <UserAvatarList title={t("group:admin.moderator")} userList={moderators} />

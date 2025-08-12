@@ -197,7 +197,7 @@
       "title": "Unda utawala wa kikundi"
     },
     "created_on_rule_title": "Iliyoundwa kwa sheria ya tarehe",
-    "has_user_rule": "Yaliyomo tu ya mwanachama yatatumwa",
+    "has_user_rule": "Yaliyomo tu kutoka kwa washiriki wa kikundi yanaruhusiwa",
     "hint": "Sheria za kiotomatiki ambazo zitaruhusu kutuma uchunguzi wa kufuzu kwa kikundi.",
     "input_types": {
       "spatial": "Ongeza utawala wa anga.",
