@@ -15,17 +15,22 @@ interface WKTInputProps extends Omit<WKTProps, "onSave"> {
   isMultiple?;
   canDraw?;
   gMapTab: boolean;
+  group?;
 }
 
-export default function WKTFieldMulti(props: WKTInputProps) {
+export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps) {
   const { t } = useTranslation();
   const { field, fieldState } = useController({ name: props.name });
   const [value, setValue] = useState(field.value || []);
   const [isDisabled, setIsdisabled] = useState<boolean>(false);
-  const Viewer = props.canDraw ? WKTDrawViewer : WKT;
+  const Viewer = props.canDraw || group? WKTDrawViewer : WKT;
 
   const handleOnSave = (o) => {
+    if (!group){
     setValue([...value, o]);
+    } else{
+      setValue(o)
+    }
   };
 
   const handleOnDelete = (index) => {
@@ -42,33 +47,43 @@ export default function WKTFieldMulti(props: WKTInputProps) {
       <Box mb={props.mb || 4} width={"full"}>
         <Field>{props.label}</Field>
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
-          <Tabs.Root defaultValue={SITE_CONFIG?.WKT?.DEFAULT_TAB} lazyMount={true} variant={"line"}>
-            <Tabs.List>
-              <Tabs.Trigger value="draw">{t("form:gmaps")}</Tabs.Trigger>
-              <Tabs.Trigger value="search">{t("form:search_point")}</Tabs.Trigger>
-            </Tabs.List>
-            <Box>
-              {value.length > 0 && (
-                <Box>
-                  <Box px={4} pt={2} pb={2}>
-                    {t("form:selected_places")}
-                  </Box>
-                  <WKTList list={value} onDelete={handleOnDelete} {...props} />
-                </Box>
-              )}
+          {group ? (
+            <Box mt={4}>
+              <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group}/>
             </Box>
-            <Tabs.Content value="draw">
-              <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} />
-            </Tabs.Content>
-            <Tabs.Content value="search">
-              <GmapsWktLocationPicker
-                {...props}
-                label={t("form:coverage.place")}
-                disabled={isDisabled}
-                onSave={handleOnSave}
-              />
-            </Tabs.Content>
-          </Tabs.Root>
+          ) : (
+            <Tabs.Root
+              defaultValue={SITE_CONFIG?.WKT?.DEFAULT_TAB}
+              lazyMount={true}
+              variant={"line"}
+            >
+              <Tabs.List>
+                <Tabs.Trigger value="draw">{t("form:gmaps")}</Tabs.Trigger>
+                <Tabs.Trigger value="search">{t("form:search_point")}</Tabs.Trigger>
+              </Tabs.List>
+              <Box>
+                {value.length > 0 && (
+                  <Box>
+                    <Box px={4} pt={2} pb={2}>
+                      {t("form:selected_places")}
+                    </Box>
+                    <WKTList list={value} onDelete={handleOnDelete} {...props} />
+                  </Box>
+                )}
+              </Box>
+              <Tabs.Content value="draw">
+                <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group}/>
+              </Tabs.Content>
+              <Tabs.Content value="search">
+                <GmapsWktLocationPicker
+                  {...props}
+                  label={t("form:coverage.place")}
+                  disabled={isDisabled}
+                  onSave={handleOnSave}
+                />
+              </Tabs.Content>
+            </Tabs.Root>
+          )}
         </Box>
       </Box>
     </Field>

@@ -14,6 +14,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import Select from "react-select";
 import * as Yup from "yup";
 
+import WKTFieldMulti from "@/components/form/wkt-multi";
 import {
   DialogBackdrop,
   DialogBody,
@@ -24,7 +25,6 @@ import {
 } from "@/components/ui/dialog";
 import { Field } from "@/components/ui/field";
 
-import AreaDrawField from "../common/area-draw-field";
 import IconCheckboxField from "../common/icon-checkbox-field";
 import ImageUploaderField from "../common/image-uploader-field";
 import { STATIC_GROUP_PAYLOAD } from "../common/static";
@@ -52,15 +52,8 @@ export default function UserGroupEditForm({
   const router = useLocalRouter();
   const { languageId } = useGlobalState();
 
-  const {
-    translation,
-    icon,
-    habitatId,
-    speciesGroupId,
-    allowUserToJoin,
-    webAddress,
-    spatialData
-  } = groupInfo;
+  const { translation, icon, habitatId, speciesGroupId, allowUserToJoin, webAddress, spatialData } =
+    groupInfo;
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -267,10 +260,18 @@ export default function UserGroupEditForm({
               type="habitat"
               isRequired={true}
             />
-            <AreaDrawField
-              label={t("group:spatial_coverge")}
-              name="spacialCoverage"
-              isRequired={true}
+            <WKTFieldMulti
+              name="spatialCoverage"
+              isMultiple={false}
+              gMapTab={false}
+              centroid={"centroid"}
+              label={t("form:coverage.spatial")}
+              nameTitle={"nameTitle"}
+              canDraw={true}
+              labelTitle={t("form:coverage.place")}
+              nameTopology={"spatialCoverage"}
+              labelTopology={t("form:coverage.wkt")}
+              group={true}
             />
           </>
         )}
