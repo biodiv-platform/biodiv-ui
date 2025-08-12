@@ -29,7 +29,7 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
     if (!group){
     setValue([...value, o]);
     } else{
-      setValue([o])
+      setValue(o)
     }
   };
 
@@ -49,7 +49,7 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
           {group ? (
             <Box mt={4}>
-              <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group}/>
+              <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group} value={value}/>
             </Box>
           ) : (
             <Tabs.Root
@@ -72,7 +72,7 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
                 )}
               </Box>
               <Tabs.Content value="draw">
-                <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group}/>
+                <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group} value={value}/>
               </Tabs.Content>
               <Tabs.Content value="search">
                 <GmapsWktLocationPicker

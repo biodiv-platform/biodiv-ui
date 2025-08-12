@@ -47,6 +47,7 @@ export interface WKTProps {
   isMultiple?: boolean;
   onSave;
   group: boolean;
+  value;
 }
 
 export default function WKTDrawViewer({
@@ -58,7 +59,8 @@ export default function WKTDrawViewer({
   mb = 4,
   disabled,
   group,
-  onSave
+  onSave,
+  value
 }: WKTProps) {
   const WKTInputRef: any = useRef(null);
   const TitleInputRef: any = useRef(null);
@@ -140,6 +142,9 @@ export default function WKTDrawViewer({
         TitleInputRef.current.clearValue();
       }
       setGeojson(undefined);
+    } else {
+      WKTInputRef.current.value = value;
+      setGeojson(wkt.parse(WKTInputRef.current.value))
     }
   }, [disabled]);
 
