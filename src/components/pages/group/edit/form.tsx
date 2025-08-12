@@ -84,7 +84,7 @@ export default function UserGroupEditForm({
       habitatId,
       speciesGroupId,
       allowUserToJoin,
-      spacialCoverage: spatialData,
+      spacialCoverage: [spatialData],
       webAddress
     }
   });

@@ -29,7 +29,7 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
     if (!group){
     setValue([...value, o]);
     } else{
-      setValue(o)
+      setValue([o])
     }
   };
 
