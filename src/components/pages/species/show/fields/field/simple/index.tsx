@@ -72,7 +72,7 @@ export default function SpeciesFieldSimple({ value }) {
         </Alert>
       )}
       {(langShow || isDefaultLang) && (
-        <Box border="1px" borderColor="gray.300" overflow="hidden" borderRadius="md">
+        <Box borderWidth="1px" borderColor="gray.300" overflow="hidden" borderRadius="md">
           <SpeciesFieldResource resources={value?.speciesFieldResource} />
           {hasFieldPermission && (
             <FieldEditActionButtons onEdit={handleOnEdit} onDelete={handleOnDelete} />
@@ -104,18 +104,17 @@ export default function SpeciesFieldSimple({ value }) {
               </div>
             </Flex>
             <div data-hidden={!open}>
-              {/* size="xs" variant="unstyled" */}
               <Table.Root mt={3} size={"sm"} unstyled>
                 <Table.Body>
                   <BlockList title={t("species:attributions")}>{value?.attributions}</BlockList>
                   <BlockList title={t("species:contributors")}>
                     {value?.contributor.map((user) => (
                       <div key={user.id}>
-                        <LocalLink href={`/user/show/${user.id}`} prefixGroup={true}>
-                          <BlueLink>
+                        <BlueLink asChild>
+                          <LocalLink href={`/user/show/${user.id}`} prefixGroup={true}>
                             {user.name} <Badge isAdmin={user.isAdmin} />
-                          </BlueLink>
-                        </LocalLink>
+                          </LocalLink>
+                        </BlueLink>
                       </div>
                     ))}
                   </BlockList>
@@ -128,7 +127,7 @@ export default function SpeciesFieldSimple({ value }) {
                   <BlockList title={t("species:references")}>
                     <List.Root as="ol">
                       {value?.references.map(({ title, url }, index) => (
-                        <List.Item key={index}>
+                        <List.Item key={index} _marker={{ color: "inherit" }}>
                           {title} {url && <ExternalBlueLink href={url} />}
                         </List.Item>
                       ))}

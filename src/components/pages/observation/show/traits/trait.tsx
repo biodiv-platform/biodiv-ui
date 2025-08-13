@@ -30,6 +30,7 @@ import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { LuCalendar } from "react-icons/lu";
 
+import NoSSR from "@/components/@core/no-ssr";
 import { Field } from "@/components/ui/field";
 
 import TraitInput from "../../common/trait-input";
@@ -102,121 +103,127 @@ export default function Trait({
   return (
     <Field mb={4} key={speciesTrait.traits?.id}>
       <Flex mb={1} alignItems="center">
-        <LocalLink href={`/traits/show/${speciesTrait.traits?.traitId}`} prefixGroup={true}>
-          <BlueLink mr={2}>
+        <BlueLink mr={2} asChild>
+          <LocalLink href={`/traits/show/${speciesTrait.traits?.traitId}`} prefixGroup={true}>
             {speciesTrait.traits?.name}{" "}
             {speciesTrait.traits?.units && `(${speciesTrait.traits.units})`}
-          </BlueLink>
-        </LocalLink>
-        {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
-          <IconButton aria-label="Edit" variant="plain" colorPalette="blue" onClick={onToggle}>
-            <EditIcon />
-          </IconButton>
-        )}
+          </LocalLink>
+        </BlueLink>
+
+        <NoSSR>
+          {(speciesTrait.traits?.isParticipatory || adminOrAuthor(authorId)) && (
+            <IconButton aria-label="Edit" variant="plain" colorPalette="blue" onClick={onToggle}>
+              <EditIcon />
+            </IconButton>
+          )}
+        </NoSSR>
       </Flex>
 
       {open ? (
-        speciesTrait.traits?.dataType === "STRING" && speciesTrait.traits?.traitTypes != "RANGE" ? (
-          <TraitInput
-            type={speciesTrait.traits?.traitTypes}
-            values={speciesTrait.values}
-            defaultValue={finalTraitValue}
-            gridColumns={3}
-            onUpdate={setTraitInputValue}
-          />
-        ) : speciesTrait.traits?.dataType === "STRING" &&
-          speciesTrait.traits?.traitTypes == "RANGE" ? (
-          <MultipleCategorialTrait
-            name={speciesTrait.traits?.name}
-            type={speciesTrait.traits?.traitTypes}
-            values={speciesTrait.values}
-            defaultValue={finalTraitValue}
-            onUpdate={setTraitInputValue}
-            gridColumns={3}
-          />
-        ) : speciesTrait.traits?.dataType === "NUMERIC" ? (
-          <TraitInput
-            type={speciesTrait.traits?.traitTypes}
-            values={speciesTrait.values}
-            defaultValue={finalTraitValue}
-            gridColumns={3}
-            onUpdate={setTraitInputValue}
-          />
-        ) : speciesTrait.traits?.dataType === "DATE" ? (
-          <Box mb={3} maxW="md">
-            <InputGroup
-              endElement={
-                <label htmlFor={speciesTrait.traits.name} style={{ cursor: "pointer" }}>
-                  <LuCalendar color="gray.300" />
-                </label>
-              }
-            >
-              <DatePicker
-                ref={inputRef} // Attach ref to DatePicker's input element
-                customInput={<Input />}
-                selected={
-                  traitInputValue?.length > 0 && traitInputValue[0]
-                    ? new Date(traitInputValue[0].split(":")[0])
-                    : null
+        <Box width={"full"}>
+          {speciesTrait.traits?.dataType === "STRING" &&
+          speciesTrait.traits?.traitTypes != "RANGE" ? (
+            <TraitInput
+              type={speciesTrait.traits?.traitTypes}
+              values={speciesTrait.values}
+              defaultValue={finalTraitValue}
+              gridColumns={3}
+              onUpdate={setTraitInputValue}
+            />
+          ) : speciesTrait.traits?.dataType === "STRING" &&
+            speciesTrait.traits?.traitTypes == "RANGE" ? (
+            <MultipleCategorialTrait
+              name={speciesTrait.traits?.name}
+              type={speciesTrait.traits?.traitTypes}
+              values={speciesTrait.values}
+              defaultValue={finalTraitValue}
+              onUpdate={setTraitInputValue}
+              gridColumns={3}
+            />
+          ) : speciesTrait.traits?.dataType === "NUMERIC" ? (
+            <TraitInput
+              type={speciesTrait.traits?.traitTypes}
+              values={speciesTrait.values}
+              defaultValue={finalTraitValue}
+              gridColumns={3}
+              onUpdate={setTraitInputValue}
+            />
+          ) : speciesTrait.traits?.dataType === "DATE" ? (
+            <Box mb={3} maxW="md">
+              <InputGroup
+                endElement={
+                  <label htmlFor={speciesTrait.traits.name} style={{ cursor: "pointer" }}>
+                    <LuCalendar color="gray.300" />
+                  </label>
                 }
-                startDate={
-                  traitInputValue?.length > 0 && traitInputValue[0]
-                    ? new Date(traitInputValue[0].split(":")[0])
-                    : null
-                }
-                endDate={
-                  traitInputValue?.length > 0 &&
-                  traitInputValue[0] &&
-                  traitInputValue[0].split(":").length > 1
-                    ? new Date(traitInputValue[0].split(":")[1])
-                    : null
-                }
-                dateFormat={"dd-MM-yyyy"}
-                onChange={(v) => {
-                  setTraitInputValue([
-                    v
-                      .filter((d) => d) // Filter out null or undefined values
-                      .map((d) => d.toISOString().split("T")[0]) // Process remaining values
-                      .join(":")
-                  ]);
+              >
+                <DatePicker
+                  ref={inputRef} // Attach ref to DatePicker's input element
+                  customInput={<Input />}
+                  selected={
+                    traitInputValue?.length > 0 && traitInputValue[0]
+                      ? new Date(traitInputValue[0].split(":")[0])
+                      : null
+                  }
+                  startDate={
+                    traitInputValue?.length > 0 && traitInputValue[0]
+                      ? new Date(traitInputValue[0].split(":")[0])
+                      : null
+                  }
+                  endDate={
+                    traitInputValue?.length > 0 &&
+                    traitInputValue[0] &&
+                    traitInputValue[0].split(":").length > 1
+                      ? new Date(traitInputValue[0].split(":")[1])
+                      : null
+                  }
+                  dateFormat={"dd-MM-yyyy"}
+                  onChange={(v) => {
+                    setTraitInputValue([
+                      v
+                        .filter((d) => d) // Filter out null or undefined values
+                        .map((d) => d.toISOString().split("T")[0]) // Process remaining values
+                        .join(":")
+                    ]);
+                  }}
+                  selectsRange
+                />
+              </InputGroup>
+            </Box>
+          ) : speciesTrait.traits?.dataType === "COLOR" ? (
+            <SimpleGrid columns={{ md: 3 }} gap={4} mb={3}>
+              {traitInputValue.map((value, index) => (
+                <ColorEditSwatch
+                  key={index}
+                  index={index}
+                  color={value}
+                  onDelete={(index) => {
+                    setTraitInputValue(traitInputValue.filter((_, i) => i !== index));
+                  }}
+                  onChange={(i, v) => {
+                    const updatedTraitValues = [...traitInputValue];
+                    updatedTraitValues[i] = v;
+                    setTraitInputValue(updatedTraitValues);
+                  }}
+                />
+              ))}
+              <Button
+                h="3.25rem"
+                alignItems="center"
+                justifyContent="center"
+                onClick={() => {
+                  setTraitInputValue([...traitInputValue, "rgb(255,255,255)"]);
                 }}
-                selectsRange
-              />
-            </InputGroup>
-          </Box>
-        ) : speciesTrait.traits?.dataType === "COLOR" ? (
-          <SimpleGrid columns={{ md: 3 }} gap={4} mb={3}>
-            {traitInputValue.map((value, index) => (
-              <ColorEditSwatch
-                key={index}
-                index={index}
-                color={value}
-                onDelete={(index) => {
-                  setTraitInputValue(traitInputValue.filter((_, i) => i !== index));
-                }}
-                onChange={(i, v) => {
-                  const updatedTraitValues = [...traitInputValue];
-                  updatedTraitValues[i] = v;
-                  setTraitInputValue(updatedTraitValues);
-                }}
-              />
-            ))}
-            <Button
-              h="3.25rem"
-              alignItems="center"
-              justifyContent="center"
-              onClick={() => {
-                setTraitInputValue([...traitInputValue, "rgb(255,255,255)"]);
-              }}
-            >
-              {"Add"}
-            </Button>
-          </SimpleGrid>
-        ) : (
-          <p>Unsupported Data type</p>
-        )
+              >
+                {"Add"}
+              </Button>
+            </SimpleGrid>
+          ) : (
+            <p>Unsupported Data type</p>
+          )}
+        </Box>
       ) : speciesTrait.traits.dataType == "STRING" ? (
-        <SimpleGrid columns={[1, 1, 2, 3]} gap={4}>
+        <SimpleGrid columns={[1, 1, 2, 3]} gap={4} width={"full"}>
           {selectedTraits.length ? (
             selectedTraits.map((tr) => (
               <Flex
@@ -227,7 +234,6 @@ export default function Trait({
                 borderWidth="2px"
                 borderRadius="md"
                 bg="white"
-                minW="200px"
               >
                 {tr?.icon && (
                   <Image
@@ -259,7 +265,6 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
-                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -281,7 +286,6 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
-                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -303,7 +307,6 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
-                minW="200px"
               >
                 <div>{tr.value}</div>
               </Flex>
@@ -325,7 +328,6 @@ export default function Trait({
                 borderRadius="md"
                 lineHeight={1}
                 h="3.25rem"
-                minW="200px"
               >
                 <div>
                   {tr.value && tr.value.split(":").length > 1
@@ -361,7 +363,6 @@ export default function Trait({
                 lineHeight={1}
                 h="3.25rem"
                 bg={tr.value}
-                minW="200px"
               />
             ))
           ) : (

@@ -372,3 +372,16 @@ export const axGetFieldTranslations = async (fieldId: number) => {
     };
   }
 };
+
+export const axUpdateSpeciesTaxonId = async (speciesId: number, newTaxonId: number) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.put(
+      `${ENDPOINT.SPECIES}/v1/species/update/${speciesId}/${newTaxonId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error("Failed to update species taxon ID:", e);
+    return { success: false, data: null };
+  }
+};

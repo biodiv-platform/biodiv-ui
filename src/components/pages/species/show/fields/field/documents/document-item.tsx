@@ -1,5 +1,4 @@
 import { Box, Heading, HStack, Link } from "@chakra-ui/react";
-import LocalLink from "@components/@core/local-link";
 import DocumentIcon from "@components/pages/document/common/document-icon";
 import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
@@ -15,7 +14,7 @@ export default function DocumentItem({ document: d }) {
 
   return (
     <Box p={3} mt={4} borderWidth="1px" borderColor="gray.300" borderRadius="md">
-      <LocalLink href={`/document/show/${d.id}`}>
+      <Link href={`/document/show/${d.id}`}>
         <HStack alignItems="center" gap={4} mb={4}>
           <DocumentIcon />
           <Heading fontSize="lg" className="elipsis-2">
@@ -26,7 +25,7 @@ export default function DocumentItem({ document: d }) {
             />
           </Heading>
         </HStack>
-      </LocalLink>
+      </Link>
 
       <Link href={`${currentGroup?.webAddress}/user/show/${d.author?.id}`}>
         <Avatar

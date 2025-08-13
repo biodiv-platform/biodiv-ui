@@ -5,6 +5,11 @@
   --chakra-colors-chakra-body-bg: var(--chakra-colors-gray-50) !important;
 }
 
+::selection {
+  background-color: var(--chakra-colors-orange-600) !important;
+  color: white !important;
+}
+
 html,
 body,
 #__next {
@@ -56,6 +61,7 @@ span svg,
   display: none !important;
 }
 
-i {
+i,
+em {
   font-style: italic;
 }

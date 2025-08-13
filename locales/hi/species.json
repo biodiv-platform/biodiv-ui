@@ -66,6 +66,7 @@
   },
   "edit_name": "सामान्य नाम प्रबंधित करें",
   "edit_synonym": "मैनेंज पर्यायवाची",
+  "failed_to_update_taxon": "टैक्सन को अपडेट करने में विफल",
   "field": {
     "delete": {
       "failure": "फ़ील्ड को हटाने में असमर्थ",
@@ -93,6 +94,7 @@
   },
   "manage_media": "मीडिया प्रबंधित करें",
   "observation_media": "अवलोकन मीडिया",
+  "please_select_a_taxon": "कृपया एक टैक्सन चुनें",
   "pull_media": "पुल मीडिया",
   "references": "संदर्भ",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "संसाधन",
   "scientific_name": "वैज्ञानिक नाम",
+  "search_for_a_new_taxon_name": "एक नए टैक्सन नाम के लिए खोजें",
   "select_all_message": "प्रजातियों का चयन किया जाएगा",
   "share": "इस प्रजाति को साझा करें",
   "species_group": "प्रजाति समूह",
@@ -133,6 +136,7 @@
   },
   "synonyms": "समानार्थक शब्द",
   "taxon": "वर्गीकरण",
+  "taxon_updated_successfully": "टैक्सन को सफलतापूर्वक अपडेट किया गया",
   "toggle_empty": "खाली टॉगल करें",
   "traits": {
     "range_hint": "उपयोग: रेंज मान सेपटल करने के लिए",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "प्रजातियों का पालन करें",
+  "update_taxon": "अद्यतन कर",
   "view_original": "मूल देखें"
 }

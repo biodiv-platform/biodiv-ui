@@ -1,5 +1,4 @@
 import { Flex, Link } from "@chakra-ui/react";
-import LocalLink from "@components/@core/local-link";
 import styled from "@emotion/styled";
 import { UserIbp } from "@interfaces/activity";
 import { getUserImage } from "@utils/media";
@@ -27,22 +26,20 @@ export default function ShadowedUser({
 }) {
   return (
     <UserBox>
-      <LocalLink href={`/user/show/${user?.id}`}>
-        <Link color="white">
-          <Flex alignItems="center">
-            {avatar && (
-              <Avatar
-                mr={2}
-                flexShrink={0}
-                size="sm"
-                name={user?.name}
-                src={getUserImage(user?.profilePic, user?.name)}
-              />
-            )}
-            <div className="elipsis-2">{user?.name}</div>
-          </Flex>
-        </Link>
-      </LocalLink>
+      <Link href={`/user/show/${user?.id}`} color="white">
+        <Flex alignItems="center">
+          {avatar && (
+            <Avatar
+              mr={2}
+              flexShrink={0}
+              size="sm"
+              name={user?.name}
+              src={getUserImage(user?.profilePic, user?.name)}
+            />
+          )}
+          <div className="elipsis-2">{user?.name}</div>
+        </Flex>
+      </Link>
     </UserBox>
   );
 }

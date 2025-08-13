@@ -170,7 +170,6 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
               label={t("form:language")}
               isRequired={true}
               options={languagesList}
-              shouldPortal={true}
             />
             <SelectInputField
               hidden={referencesOnly}
@@ -178,7 +177,6 @@ export default function SpeciesFieldEditForm({ initialValue, onSave, onCancel })
               label={t("form:license")}
               isRequired={true}
               options={licensesList}
-              shouldPortal={true}
             />
             <ReferencesField name="references" label={t("species:references")} />
           </DialogBody>

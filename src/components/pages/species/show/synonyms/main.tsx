@@ -1,7 +1,7 @@
 import { Table } from "@chakra-ui/react";
 import ScientificName from "@components/@core/scientific-name";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import React, { useEffect,useMemo, useState } from "react";
 
 import { SynonymAdd, SynonymEditButtons } from "./actions";
 import SynonymEditModal from "./edit-modal";
@@ -27,6 +27,10 @@ export default function SynonymList({
 
   const [synonymsList, setSynonymsList] = useState(synonyms || []);
 
+  useEffect(() => {
+    setSynonymsList(synonyms || []);
+  }, [synonyms]);
+
   const synonymsListSorted = useMemo(
     () => synonymsList.sort((a, b) => a.name?.localeCompare(b.name)),
     [synonymsList]
@@ -41,14 +45,14 @@ export default function SynonymList({
         updateFunc={updateFunc}
         deleteFunc={deleteFunc}
       />
+      {isContributor && <SynonymAdd />}
+
       <Table.Root size="sm" striped>
         <Table.Body>
           {synonymsListSorted.length ? (
             synonymsListSorted.map((synonym) => (
               <Table.Row key={synonym.id}>
-                <Table.Cell w={{ md: "10rem" }} verticalAlign="top">
-                  {synonym.status.toLowerCase()}
-                </Table.Cell>
+                <Table.Cell w={{ md: "10rem" }}>{synonym.status.toLowerCase()}</Table.Cell>
                 <Table.Cell>
                   {isContributor ? (
                     <SynonymEditButtons synonym={synonym} />
@@ -63,7 +67,6 @@ export default function SynonymList({
               <Table.Cell>{t("common:no_data")}</Table.Cell>
             </Table.Row>
           )}
-          {isContributor && <SynonymAdd />}
         </Table.Body>
       </Table.Root>
     </>

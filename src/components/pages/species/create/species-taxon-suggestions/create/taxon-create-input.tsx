@@ -1,11 +1,10 @@
-import { Box, Button, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, InputGroup } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { getByPath } from "@utils/basic";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";
-import { InputGroup } from "@/components/ui/input-group";
 
 interface TaxonCreateInputFieldProps {
   name: string;
@@ -56,11 +55,12 @@ export const TaxonCreateInputField = ({
       disabled={isDisabled}
     >
       <InputGroup
-        // startAddon={
-        //   <Box minW="8rem">
-        //     {label} <Box color="red.500">{isRequired && "*"}</Box>
-        //   </Box>
-        // }
+        startAddon={
+          <Flex minW="8rem" align="center" gap={1}>
+            <Box>{label}</Box>
+            {isRequired && <Box color="red.500">*</Box>}
+          </Flex>
+        }
         endElement={
           errors[name] && (
             <Box width="5.4rem">

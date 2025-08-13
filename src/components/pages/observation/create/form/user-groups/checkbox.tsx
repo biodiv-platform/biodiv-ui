@@ -59,7 +59,6 @@ const CheckBoxItems = ({
             <Flex alignItems="center" h="2rem" overflow="hidden" title={o.name}>
               <Image
                 loading="lazy"
-                // ignoreFallback={true}
                 boxSize="2rem"
                 mr={2}
                 objectFit="contain"

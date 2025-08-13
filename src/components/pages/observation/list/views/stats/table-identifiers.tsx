@@ -37,22 +37,25 @@ export default function IdentifiersTable({ data, title, loadMoreIdentifiers, fil
                 <Table.Cell>
                   <HStack p="md">
                     <Avatar size="xs" src={getUserImage(pic, name, 24)} name={name} />
-                    <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
-                      <ExternalBlueLink>{name}</ExternalBlueLink>
-                    </LocalLink>
+                    <ExternalBlueLink asChild>
+                      <LocalLink href={`/user/show/${authorId}/`} prefixGroup={true}>
+                        {name}
+                      </LocalLink>
+                    </ExternalBlueLink>
                   </HStack>
                 </Table.Cell>
 
-                {/* isNumeric={true} */}
                 <Table.Cell>
                   {count && (
-                    <LocalLink
-                      href={`/observation/list`}
-                      params={{ ...queryParams, view: "list", authorVoted: authorId }}
-                      prefixGroup={true}
-                    >
-                      <ExternalBlueLink>{count}</ExternalBlueLink>
-                    </LocalLink>
+                    <ExternalBlueLink asChild>
+                      <LocalLink
+                        href={`/observation/list`}
+                        params={{ ...queryParams, view: "list", authorVoted: authorId }}
+                        prefixGroup={true}
+                      >
+                        {count}
+                      </LocalLink>
+                    </ExternalBlueLink>
                   )}
                 </Table.Cell>
               </Table.Row>

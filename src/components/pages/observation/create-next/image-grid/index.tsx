@@ -32,9 +32,11 @@ const ImageGrid = ({ fields, onRemove, onBrowse }) => {
           {t("form:uploader.browse")}
         </Button>
 
-        <LocalLink prefixGroup={true} href="/observation/create/single">
-          <Link color="gray.500">{t("form:uploader.old_form")}</Link>
-        </LocalLink>
+        <Link color="gray.500" asChild>
+          <LocalLink prefixGroup={true} href="/observation/create/single">
+            {t("form:uploader.old_form")}
+          </LocalLink>
+        </Link>
       </Flex>
     </Flex>
   );

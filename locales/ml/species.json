@@ -66,6 +66,7 @@
   },
   "edit_name": "പൊതുവായ പേര് കൈകാര്യം ചെയ്യുക",
   "edit_synonym": "നാംഗോ പര്യായം",
+  "failed_to_update_taxon": "ടാക്സൺ അപ്ഡേറ്റ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു",
   "field": {
     "delete": {
       "failure": "ഫീൽഡ് ഇല്ലാതാക്കാൻ കഴിയില്ല",
@@ -93,6 +94,7 @@
   },
   "manage_media": "മീഡിയ നിയന്ത്രിക്കുക",
   "observation_media": "നിരീക്ഷണ മീഡിയ",
+  "please_select_a_taxon": "ഒരു ടാക്സൺ തിരഞ്ഞെടുക്കുക",
   "pull_media": "മാധ്യമങ്ങൾ വലിക്കുക",
   "references": "പരാമർശങ്ങൾ",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "വിഭവം",
   "scientific_name": "ശാസ്ത്രീയ നാമം",
+  "search_for_a_new_taxon_name": "ഒരു പുതിയ ടാക്സൺ നാമത്തിനായി തിരയുക",
   "select_all_message": "ഇനങ്ങളെ തിരഞ്ഞെടുക്കും",
   "share": "ഈ ഇനം പങ്കിടുക",
   "species_group": "സ്പീഷീസ് ഗ്രൂപ്പ്",
@@ -133,6 +136,7 @@
   },
   "synonyms": "പര്യായങ്ങൾ",
   "taxon": "ടാക്സോണമി",
+  "taxon_updated_successfully": "ടാക്സൺ വിജയകരമായി അപ്ഡേറ്റുചെയ്തു",
   "toggle_empty": "ചൂടാക്കുക",
   "traits": {
     "range_hint": "ഉപയോഗം: റേഞ്ച് മൂല്യങ്ങൾ",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "സ്പീഷിസുകൾ പിന്തുടരുക",
+  "update_taxon": "ടാക്സൺ അപ്ഡേറ്റുചെയ്യുക",
   "view_original": "ഒറിജിനൽ കാണുക"
 }

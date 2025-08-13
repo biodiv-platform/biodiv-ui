@@ -66,6 +66,7 @@
   },
   "edit_name": "Mitantana anarana mahazatra",
   "edit_synonym": "Manange manangem",
+  "failed_to_update_taxon": "Tsy nahomby ny fanavaozana taxon",
   "field": {
     "delete": {
       "failure": "Tsy afaka mamafa ny saha",
@@ -93,6 +94,7 @@
   },
   "manage_media": "Mitantana haino aman-jery",
   "observation_media": "Media fandinihana",
+  "please_select_a_taxon": "Safidio azafady ny taxon iray",
   "pull_media": "Pull Media",
   "references": "References",
   "related": {
@@ -105,6 +107,7 @@
   },
   "resource": "loharano",
   "scientific_name": "Anarana siantifika",
+  "search_for_a_new_taxon_name": "Mikaroka anarana momba ny hetra vaovao",
   "select_all_message": "Karazana karazana no hofantenana",
   "share": "Zarao ity karazana ity",
   "species_group": "Vondrona karazana",
@@ -133,6 +136,7 @@
   },
   "synonyms": "Synonymes",
   "taxon": "panasokajiana",
+  "taxon_updated_successfully": "Nohavaozina tamim-pahombiazana ny taxon",
   "toggle_empty": "Toggle foana",
   "traits": {
     "range_hint": "Ampiasao: Ny Septate Sours Range",
@@ -143,5 +147,6 @@
     }
   },
   "unfollow_species": "Araho ny karazana",
+  "update_taxon": "Hanavao ny taxon",
   "view_original": "Jereo tany am-boalohany"
 }

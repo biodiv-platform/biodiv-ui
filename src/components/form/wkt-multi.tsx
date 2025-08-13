@@ -43,9 +43,12 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
   }, [value]);
 
   return (
-    <Field invalid={!!fieldState.error} errorText={JSON.stringify(fieldState?.error?.message)}>
+    <Field
+      invalid={!!fieldState.error}
+      errorText={JSON.stringify(fieldState?.error?.message)}
+      label={props.label}
+    >
       <Box mb={props.mb || 4} width={"full"}>
-        <Field>{props.label}</Field>
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
           {group ? (
             <Box mt={4}>

@@ -34,11 +34,7 @@ export const dataTableObservationRow = (data, speciesGroups, dataTable) => {
         return {
           Header: "datatable:table.id",
           accessor: "id",
-          Cell: ({ value }) => (
-            <a href={`/observation/show/${value}`}>
-              <BlueLink> {value} </BlueLink>
-            </a>
-          )
+          Cell: ({ value }) => <BlueLink href={`/observation/show/${value}`}> {value} </BlueLink>
         };
       case "scientificName":
         return {

@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Image, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
@@ -44,29 +44,27 @@ export default function Suggestions({
             href={`/observation/show/${o.observationId}`}
             prefixGroup={true}
           >
-            <Link unstyled>
-              <Tooltip showArrow={true} title={<ScientificName value={o.name} />}>
-                <AspectRatio ratio={1}>
-                  <Image
-                    overflow="hidden"
-                    objectFit="cover"
-                    loading="lazy"
-                    alt={o.name}
-                    src={
-                      o[observationKey] != "null"
-                        ? getResourceThumbnail(
-                            RESOURCE_CTX.OBSERVATION,
-                            o[observationKey],
-                            RESOURCE_SIZE.RECENT_THUMBNAIL
-                          )
-                        : getLocalIcon(o?.speciesGroupName || defaultSpeciesGroup)
-                    }
-                    bg="gray.200"
-                    borderRadius="md"
-                  />
-                </AspectRatio>
-              </Tooltip>
-            </Link>
+            <Tooltip showArrow={true} title={<ScientificName value={o.name} />}>
+              <AspectRatio ratio={1}>
+                <Image
+                  overflow="hidden"
+                  objectFit="cover"
+                  loading="lazy"
+                  alt={o.name}
+                  src={
+                    o[observationKey] != "null"
+                      ? getResourceThumbnail(
+                          RESOURCE_CTX.OBSERVATION,
+                          o[observationKey],
+                          RESOURCE_SIZE.RECENT_THUMBNAIL
+                        )
+                      : getLocalIcon(o?.speciesGroupName || defaultSpeciesGroup)
+                  }
+                  bg="gray.200"
+                  borderRadius="md"
+                />
+              </AspectRatio>
+            </Tooltip>
           </LocalLink>
         ))}
       </SimpleGrid>

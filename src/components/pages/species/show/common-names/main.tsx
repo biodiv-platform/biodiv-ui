@@ -1,6 +1,6 @@
 import { List, Table } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import React, { useEffect,useMemo, useState } from "react";
 
 import { CommonNameAdd, CommonNameEditButtons } from "./actions";
 import { CommonNameEditModal } from "./edit-modal";
@@ -25,6 +25,10 @@ export default function CommonNamesList({
   const { t } = useTranslation();
   const [commonNamesList, setCommonNamesList] = useState(commonNames || []);
 
+  useEffect(() => {
+    setCommonNamesList(commonNames || []);
+  }, [commonNames]);
+
   // groups common names by language
   const [languagesList, languagesData] = useMemo(() => {
     const newList = commonNamesList.reduce((acc, curr) => {
@@ -45,14 +49,14 @@ export default function CommonNamesList({
         speciesId={speciesId}
         taxonId={taxonId}
       />
+      {isContributor && <CommonNameAdd />}
+
       <Table.Root size="sm" striped w="full">
         <Table.Body>
           {languagesList.length ? (
             languagesList.map((language) => (
-              <Table.Row key={language}>
-                <Table.Cell w={{ md: "10rem" }} verticalAlign="top">
-                  {language}
-                </Table.Cell>
+              <Table.Row key={language} boxSize={"1/12"}>
+                <Table.Cell w={{ md: "10rem" }}>{language}</Table.Cell>
                 <Table.Cell>
                   <List.Root gap={2} unstyled>
                     {languagesData[language].map((commonName) => (
@@ -76,7 +80,6 @@ export default function CommonNamesList({
               <Table.Cell>{t("common:no_data")}</Table.Cell>
             </Table.Row>
           )}
-          {isContributor && <CommonNameAdd />}
         </Table.Body>
       </Table.Root>
     </>

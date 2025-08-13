@@ -6,6 +6,12 @@ interface SpeciesContextProps {
   permissions;
   getFieldPermission;
   licensesList;
+  taxonEditActions?: {
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+    onTaxonUpdated: (newTaxonId: number) => void;
+  };
 }
 
 interface CounterProviderProps {
@@ -13,6 +19,12 @@ interface CounterProviderProps {
   permissions;
   licensesList;
   children;
+  taxonEditActions?: {
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+    onTaxonUpdated: (newTaxonId: number) => void
+  };
 }
 
 const SpeciesContext = createContext<SpeciesContextProps>({} as SpeciesContextProps);

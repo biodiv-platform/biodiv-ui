@@ -38,9 +38,15 @@ const Checkbox = (props: any) => {
   const { getHiddenInputProps, getControlProps } = useCheckbox(props);
 
   return (
-    <Tooltip content={props.label} showArrow={true} positioning={{ placement: "top" }}>
+    <Tooltip
+      content={props.label}
+      showArrow={true}
+      positioning={{ placement: "top" }}
+      ids={{ trigger: props.id }}
+    >
       <Box
         {...getControlProps()}
+        id={props.id}
         as={CheckboxLabel}
         borderRadius="md"
         aria-checked={props.isChecked}

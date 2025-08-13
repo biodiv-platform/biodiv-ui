@@ -82,15 +82,15 @@ export default function TraitsListComponent({ data, filterKey }) {
                     {subCategory.traitsValuePairList.map((trait, traitIndex) => (
                       <Box key={`trait-${traitIndex}`} m={2} className="white-box">
                         <Heading as="h4" size="sm" mb={2} alignItems="center" display="flex" m={2}>
-                          <LocalLink
-                            href={`/traits/show/${trait.traits?.traitId}`}
-                            prefixGroup={true}
-                          >
-                            <BlueLink mr={2}>
+                          <BlueLink mr={2} asChild>
+                            <LocalLink
+                              href={`/traits/show/${trait.traits?.traitId}`}
+                              prefixGroup={true}
+                            >
                               {trait.traits?.name}{" "}
                               {trait.traits?.units && `(${trait.traits.units})`}
-                            </BlueLink>
-                          </LocalLink>
+                            </LocalLink>
+                          </BlueLink>
                         </Heading>
                         <Box m={2}>
                           Category: {trait.traits.showInObservation ? "Observation" : "Species"}
@@ -101,7 +101,7 @@ export default function TraitsListComponent({ data, filterKey }) {
                             <Flex
                               key={value.id}
                               alignItems="center"
-                              border="2px"
+                              borderWidth="2px"
                               borderColor="gray.200"
                               borderRadius="md"
                               lineHeight={1}
@@ -115,10 +115,9 @@ export default function TraitsListComponent({ data, filterKey }) {
                                   mr={2}
                                   src={getTraitIcon(value?.icon)}
                                   alt={value.value}
-                                  // ignoreFallback={true}
                                 />
                               )}
-                              <div>{value.value}</div>
+                              <div>{value.value} </div>
                             </Flex>
                           ))}
                         </SimpleGrid>
