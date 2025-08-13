@@ -21,6 +21,13 @@
   "clear": "સાફ કરો",
   "close": "બંધ",
   "copy": "ક્લિપબોર્ડ પર કૉપિ કરો",
+  "create_form": {
+    "add_translation_button": "અનુવાદ ઉમેરો",
+    "cancel": "રદ કરવું",
+    "create": "બનાવવી",
+    "language": "ભાષા",
+    "language_placeholder": "ભાષા પસંદ કરો"
+  },
   "datatable": "ડેટાટેબલ",
   "delete": "કાઢી નાખો",
   "edit": "ફેરફાર કરો",
@@ -37,6 +44,7 @@
     "twitter": "ટવીટર"
   },
   "habitats_covered": "વસવાટનું કવરેજ",
+  "habitats_covered_hint": "આ જૂથમાં કયા આવાસોનો સમાવેશ કરવામાં આવશે તે પસંદ કરો. \nજો પૂરા પાડવામાં આવેલ આવાસમાંથી કોઈ ઉપલબ્ધ નથી, તો અન્ય પસંદ કરો.",
   "import": "આયાત કરો",
   "information": "માહિતી",
   "invalid_request": "અમાન્ય વિનંતી",
@@ -88,6 +96,7 @@
   "slider_left": "પાછળ",
   "slider_right": "આગળ",
   "species_coverage": "પ્રજાતિઓ ગ્રુપ કવરેજ",
+  "species_coverage_hint": "પ્રજાતિ જૂથો પસંદ કરો કે જે આ જૂથ આવરી લેશે. \nજો અન્ય જૂથોમાંથી કોઈ ઉપલબ્ધ નથી, તો અન્ય પસંદ કરો.",
   "success": "સફળતા",
   "temporal": {
     "observations": "અવલોકન",

@@ -77,7 +77,13 @@ export default function GeoJsonWktParserInput({
   }, [wkt]);
 
   return (
-    <Field invalid={!!fieldState.error} data-select-invalid={!!fieldState.error} mb={mb} {...props}>
+    <>
+      <Field
+        invalid={!!fieldState.error}
+        data-select-invalid={!!fieldState.error}
+        mb={mb}
+        {...props}
+      />
       <Flex justifyContent="flex-end">
         <Checkbox onChange={toggleWktInput}>{t("form:wkt")}</Checkbox>
       </Flex>
@@ -107,6 +113,6 @@ export default function GeoJsonWktParserInput({
       )}
       <Field errorText={fieldState?.error?.message} />
       {hint && <Field color="gray.600" helperText={hint} />}
-    </Field>
+    </>
   );
 }

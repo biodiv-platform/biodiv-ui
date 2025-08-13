@@ -2,22 +2,11 @@ import { Box, Heading } from "@chakra-ui/react";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
 import React from "react";
 
-export default function MapDrawView({ neLongitude, neLatitude, swLatitude, swLongitude, title }) {
+export default function MapDrawView({ geometry, title }) {
   const coverage = {
     type: "Feature",
     properties: {},
-    geometry: {
-      type: "Polygon",
-      coordinates: [
-        [
-          [neLongitude, swLatitude],
-          [swLongitude, swLatitude],
-          [swLongitude, neLatitude],
-          [neLongitude, neLatitude],
-          [neLongitude, swLatitude]
-        ]
-      ]
-    }
+    geometry: geometry
   };
 
   return (

@@ -1,24 +1,44 @@
 import { Box, Button } from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axUploadEditorPageResource } from "@services/pages.service";
 import { axUpdateGroupHomePageDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
-import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import MiniGallery from "@/components/pages/admin/homegallery/mini-gallery";
+
 import GallerySetup from "./gallery-setup";
 
-const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
-
-export default function HomePageCustomizationForm({ userGroupId, homePageDetails }) {
+export default function HomePageCustomizationForm({
+  userGroupId,
+  homePageDetails,
+  currentStep,
+  languages
+}) {
   const { t } = useTranslation();
   const [galleryList, setGalleryList] = useState(
-    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
+    Object.entries(homePageDetails?.gallerySlider || {}).sort((a, b) => {
+      const aOrder = parseInt(a[0].split("|")[1], 10);
+      const bOrder = parseInt(b[0].split("|")[1], 10);
+      return aOrder - bOrder;
+    })
   );
+  const updatedMiniGallery = homePageDetails?.miniGallerySlider.map((item) => {
+    const sortedGallerySlider = Object.entries(item || {}).sort((a, b) => {
+      const aOrder = parseInt(a[0].split("|")[1], 10);
+      const bOrder = parseInt(b[0].split("|")[1], 10);
+      return aOrder - bOrder;
+    });
+
+    return sortedGallerySlider;
+  });
+  const [miniGalleryList, setMiniGalleryList] = useState(
+    Object.entries(homePageDetails?.miniGallery)
+  );
+  const [miniGallerySliderList, setMiniGallerySliderList] = useState(updatedMiniGallery);
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -60,17 +80,67 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
 
   const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
-      gallerySlider: galleryList.reduce((acc, item, index) => {
-        if (!item.id) {
-          acc.push({ ugId: userGroupId, displayOrder: index, ...item });
+      gallerySlider: galleryList.reduce<Record<number, any[]>[]>((acc, item, index) => {
+        const sliderId = item[0].split("|")[0];
+        const languageMap = item[1] as Record<number, any[]>;
+
+        if (sliderId === "null") {
+          for (const langId in languageMap) {
+            languageMap[langId] = languageMap[langId].map((entry) => ({
+              ...entry,
+              ugId: userGroupId,
+              displayOrder: index
+            }));
+          }
+          acc.push(languageMap);
         }
+
         return acc;
       }, []),
+
+      miniGallerySlider: miniGallerySliderList.map((item) => {
+        const updatedGallerySlider = item.reduce((acc: any, item: any, index: number) => {
+          const sliderId = item[0].split("|")[0];
+          const languageMap = item[1] as Record<number, any[]>;
+
+          if (sliderId === "null") {
+            for (const langId in languageMap) {
+              languageMap[langId] = languageMap[langId].map((entry) => ({
+                ...entry,
+                ugId: userGroupId,
+                displayOrder: index
+              }));
+            }
+            acc[`null|${index}`] = languageMap;
+          }
+
+          return acc;
+        }, {});
+
+        return updatedGallerySlider;
+      }),
       ...value
     };
+
     const { success, data } = await axUpdateGroupHomePageDetails(userGroupId, payload);
     if (success) {
-      setGalleryList(data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder));
+      setGalleryList(
+        Object.entries(data.gallerySlider || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        })
+      );
+      const updatedMiniGallery = data?.miniGallerySlider.map((item) => {
+        const sortedGallerySlider = Object.entries(item || {}).sort((a, b) => {
+          const aOrder = parseInt(a[0].split("|")[1], 10);
+          const bOrder = parseInt(b[0].split("|")[1], 10);
+          return aOrder - bOrder;
+        });
+
+        return sortedGallerySlider;
+      });
+      setMiniGallerySliderList(updatedMiniGallery);
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
@@ -79,43 +149,58 @@ export default function HomePageCustomizationForm({ userGroupId, homePageDetails
 
   return (
     <>
-      <FormProvider {...hForm}>
-        <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-          <Box width={["100%", 350]} justifyContent="space-between">
-            <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
-            <SwitchField name="showStats" label={t("group:homepage_customization.module_stats")} />
-            <SwitchField
-              name="showRecentObservation"
-              label={t("group:homepage_customization.recent_observation")}
-            />
-            <SwitchField
-              name="showGridMap"
-              label={t("group:homepage_customization.observation_map")}
-            />
-            <SwitchField name="showPartners" label={t("group:homepage_customization.about_us")} />
-            <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
-          </Box>
-          <WYSIWYGField
-            name="description"
-            label={t("form:description.title")}
-            uploadHandler={axUploadEditorPageResource}
-          />
-        </form>
-      </FormProvider>
-      <GallerySetup
-        userGroupId={userGroupId}
-        isCreate={isCreate}
-        setIsCreate={setIsCreate}
-        setGalleryList={setGalleryList}
-        galleryList={galleryList}
-        isEdit={isEdit}
-        setIsEdit={setIsEdit}
-      />
-      <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
-        <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
-          {t("group:homepage_customization.save")}
-        </Button>
-      </Box>
+      {currentStep == "group:homepage_customization.title" && (
+        <FormProvider {...hForm}>
+          <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+            <Box width={["100%", 350]} justifyContent="space-between">
+              <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
+              <SwitchField
+                name="showStats"
+                label={t("group:homepage_customization.module_stats")}
+              />
+              <SwitchField
+                name="showRecentObservation"
+                label={t("group:homepage_customization.recent_observation")}
+              />
+              <SwitchField
+                name="showGridMap"
+                label={t("group:homepage_customization.observation_map")}
+              />
+              <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
+            </Box>
+          </form>
+        </FormProvider>
+      )}
+      {currentStep == "group:homepage_customization.gallery_setup.title" && (
+        <GallerySetup
+          userGroupId={userGroupId}
+          isCreate={isCreate}
+          setIsCreate={setIsCreate}
+          setGalleryList={setGalleryList}
+          galleryList={galleryList}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          languages={languages}
+        />
+      )}
+      {currentStep == "group:homepage_customization.mini_gallery_setup.title" && (
+        <MiniGallery
+          miniGallery={miniGalleryList}
+          setMiniGallery={setMiniGalleryList}
+          languages={languages}
+          sliderList={miniGallerySliderList}
+          setSliderList={setMiniGallerySliderList}
+          handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
+          groupId={userGroupId}
+        />
+      )}
+      {currentStep != "group:homepage_customization.mini_gallery_setup.title" && (
+        <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
+          <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
+            {t("group:homepage_customization.save")}
+          </Button>
+        </Box>
+      )}
     </>
   );
 }

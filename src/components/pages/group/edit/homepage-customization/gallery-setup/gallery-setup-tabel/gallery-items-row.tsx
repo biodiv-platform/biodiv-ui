@@ -51,12 +51,14 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
           {t("common:delete")}
         </Button>
       </td>
-      <td>
-        <Button onClick={onEdit} colorPalette="blue" ml={2}>
-          <LuPencil />
+      {itemDetails.id && (
+        <td>
+          <Button onClick={onEdit} colorPalette="blue" ml={2}>
+            <LuPencil />
           {t("common:edit")}
-        </Button>
-      </td>
+          </Button>
+        </td>
+      )}
     </tr>
   );
 });

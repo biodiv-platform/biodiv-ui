@@ -12,7 +12,9 @@ const GroupRulesRow = ({ itemDetails, onDelete }) => {
       <td>{name}</td>
       <td>
         <Box userSelect="all" className="elipsis">
-          {value}
+          {name == "traitRule" && !itemDetails.id
+            ? value.split(":")[0].split("|")[2] + " : " + value.split(":")[1].split("|")[1]
+            : value}
         </Box>
       </td>
       <td>

@@ -8,7 +8,9 @@ const GroupRulesListItems = ({ groupRules, removeGroupRules }) => {
       {groupRules.map((item, index) => (
         <GroupRulesRow
           key={index}
-          onDelete={() => removeGroupRules({ filterName: item.name, filterId: item.id })}
+          onDelete={() =>
+            removeGroupRules({ filterName: item.name, filterId: item.id ? item.id : index })
+          }
           itemDetails={item}
         />
       ))}

@@ -13,6 +13,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { LuMoveRight } from "react-icons/lu";
 import * as Yup from "yup";
 
+import { axGetTaxonDetails } from "@/services/taxonomy.service";
+
 import { RULES_TYPE } from "../../common/static";
 import RulesInputType from "./rules-input-type";
 import { formatGroupRules } from "./utils";
@@ -74,21 +76,73 @@ export default function AddGroupRules({ groupRules, setGroupRules, setIsCreate, 
         return {
           [`${type}`]: ruleValue.flatMap(({ trait, value }) => {
             const traitId = trait.split("|")[0];
-            return value.map((v) => ({ [traitId]: v }));
+            return value.map((v) => ({ [traitId]: v.split("|")[0] }));
           })
         };
     }
   };
 
   const handleFormSubmit = async (formData) => {
-    const payload = formatPayload(formData);
-    const { success, data } = await axAddUserGroupRule(userGroupId, payload);
-    if (success && groupRules) {
-      notification(t("group:rules.add.success"), NotificationType.Success);
-      setGroupRules(formatGroupRules(data, traits));
-      setIsCreate(false);
+    if (userGroupId != null) {
+      const payload = formatPayload(formData);
+      const { success, data } = await axAddUserGroupRule(userGroupId, payload);
+      if (success && groupRules) {
+        notification(t("group:rules.add.success"), NotificationType.Success);
+        if (data.taxonomicRuleList?.length) {
+          const taxonPromises = data.taxonomicRuleList.map(async (item) => {
+            const details = await axGetTaxonDetails(item.taxonomyId);
+            return {
+              ...item,
+              name: details.data.taxonomyDefinition.name
+            };
+          });
+          data.taxonomicRuleList = await Promise.all(taxonPromises);
+        }
+        setGroupRules(formatGroupRules(data, traits));
+        setIsCreate(false);
+      } else {
+        notification(t("group:rules.add.failure"));
+      }
     } else {
-      notification(t("group:rules.add.failure"));
+      if (formData.type == "hasUserRule") {
+        groupRules.push({ name: "userRule", value: (formData.ruleValue || false).toString() });
+        setGroupRules(groupRules);
+        setIsCreate(false);
+      } else if (formData.type == "taxonomicIdList") {
+        formData.ruleValue?.map((o) =>
+          groupRules.push({ id: null, name: "taxonomicRule", value: o.label, taxonId: o.id })
+        );
+        setGroupRules(groupRules);
+        setIsCreate(false);
+      } else if (formData.type == "observedOnDateList" || formData.type == "createdOnDateList") {
+        groupRules.push({
+          id: null,
+          name: formData.type == "createdOnDateList" ? "createdOnDateRule" : "observedOnDateRule",
+          value: `${formData.ruleValue[0]} to ${formData.ruleValue[1]}`
+        });
+        setGroupRules(groupRules);
+        setIsCreate(false);
+      } else if (formData.type == "traitList") {
+        formData.ruleValue.flatMap(({ trait, value }) => {
+          value.map((v) =>
+            groupRules.push({
+              id: null,
+              name: "traitRule",
+              value: `${trait} : ${v}`
+            })
+          );
+        });
+        setGroupRules(groupRules);
+        setIsCreate(false);
+      } else {
+        groupRules.push({
+          id: null,
+          name: "spatialRule",
+          value: formData.ruleValue
+        });
+        setGroupRules(groupRules);
+        setIsCreate(false);
+      }
     }
   };
 

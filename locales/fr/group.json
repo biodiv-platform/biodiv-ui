@@ -12,10 +12,14 @@
     "title": "Rôles des utilisateurs",
     "updated": "Les utilisateurs du groupe ont été mis à jour avec succès"
   },
+  "basic_details": "Détails de base",
   "confirm_closed_group": "Il s'agit d'un groupe fermé, la demande d'adhésion doit être approuvée par un modérateur. Appuyez sur OK pour envoyer une demande de requête.",
   "confirm_leave": "Quitter le groupe?",
   "create": {
     "error": "Il y avait une erreur lors de la création de groupe",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "step": "Étape",
     "success": "Groupe créé avec succès",
     "title": "Créer un groupe"
   },
@@ -67,25 +71,44 @@
     },
     "value": "Valeur"
   },
+  "custom_field_hint": "Des requêtes / champs supplémentaires dans le formulaire de téléchargement d'observation pour votre groupe.",
   "delete_member": "Etes-vous sûr que vous voulez supprimer?",
   "edit": {
     "error": "Il y avait une erreur lors de la mise à jour du groupe",
     "success": "Groupe mis à jour avec succès",
     "title": "Groupe d'édition"
   },
+  "group_coverage": "Couverture de groupe",
   "homepage_customization": {
     "about_us": "À propos de nous",
     "add_options": "Ajouter des options",
     "back": "Retour à la liste",
     "default": "Défaut",
     "failure": "Impossible d'enregistrer les modifications",
-    "gallery": "Galerie",
+    "gallery": "Galerie principale",
+    "gallery_hint": "Téléchargez des images dans la galerie de la page d'accueil ou utilisez des observations comme images de la galerie.",
     "gallery_setup": {
       "alert": "Veuillez enregistrer les modifications pour refaire la demande",
       "create": "Créer une galerie d'images",
       "save_order": "Enregistrer la demande d'images de la galerie",
       "show_image_upload": "Afficher le téléchargeur d'image",
-      "title": "Configuration de la galerie"
+      "title": "Galerie principale"
+    },
+    "hint": "Affonter ou désactiver les composants de la page d'accueil tels que les descriptions, les statistiques de contenu, etc.",
+    "mini_gallery_setup": {
+      "active_label": "Activé",
+      "create": "Créer une mini galerie",
+      "create_error": "Impossible de créer une mini galerie",
+      "create_success": "La mini galerie créée avec succès",
+      "delete_error": "Impossible de supprimer",
+      "delete_success": "Mini Gallery supprimée avec succès",
+      "edit_error": "Impossible de mettre à jour Mini Gallery",
+      "edit_success": "Mini Galerie mise à jour avec succès",
+      "horizontal_slider_label": "Glissement horizontal (les diapositives se déplacent à gauche et à droite)",
+      "slides_per_view": "Diapositives en vue",
+      "title": "Mini-galerie",
+      "vertical_label": "Type de curseur",
+      "vertical_slider_label": "Glissement vertical (les diapositives se déplacent de haut en bas)"
     },
     "module_stats": "Statistiques de module",
     "observation_map": "Carte de distribution d'observations",
@@ -99,17 +122,28 @@
       "success": "Liste de la galerie redemandée avec succès"
     },
     "resources": {
+      "background_color": "Couleur de fond",
       "error": "Entrez une carte d'observation valide",
+      "gallery_sidebar": "Contexte latérale de la galerie",
       "imageurl": "Choisissez l'image de la galerie",
       "link": "Afficher le lien de page",
       "new_image": "Tableau d'image",
       "obs_id": "ID d'observation",
       "observation_image": "Image d'observation",
       "observation_image_not_editable": "Image d'observation non modifiable",
+      "read_more": "Lire la suite du texte du bouton",
+      "read_more_button": "bouton",
+      "read_more_link": "lien",
+      "read_more_ui": "Lire la suite de type d'interface utilisateur",
+      "sidebar_opaque": "opaque",
+      "sidebar_translucent": "translucide",
+      "text_color": "Couleur de texte",
       "title": "Titre"
     },
     "save": "Enregistrer les détails de la page d'accueil",
     "show_desc": "Montrer la description",
+    "show_donors": "Montrer les donateurs",
+    "show_sponsors": "Sponsors de show",
     "success": "Changements mis à jour avec succès",
     "table": {
       "actions": "Actions",
@@ -123,19 +157,24 @@
     "update": {
       "failure": "Impossible de mettre à jour les détails de la page d'accueil",
       "success": "Détails de la page d'accueil mis à jour avec succès"
-    }
+    },
+    "update_for_all": "Mise à jour de toutes les langues"
   },
   "icon": "Icône",
   "invalid_wkt": "Entrez une chaîne WKT valide",
   "invite": "Tapez le nom d'utilisateur",
   "invite_founders": "Inviter les fondateurs",
+  "invite_founders_hint": "Les fondateurs pourront modifier le groupe et modifier tous les paramètres de groupe.",
   "invite_moderators": "Inviter des modérateurs",
+  "invite_moderators_hint": "Les modérateurs ne peuvent pas modifier les paramètres de groupe mais auront des privilèges supplémentaires tels que la publication de contenu en vrac et la présence d'objets.",
   "join": "Rejoindre le groupe",
   "join_without_invitation": "Autoriser l'utilisateur à rejoindre le groupe sans invitation",
+  "join_without_invitation_hint": "Permettre aux utilisateurs de rejoindre le groupe en tant que membres sans invitation? \nLes groupes fermés auront besoin de modérateurs pour approuver les demandes avant de se joindre.",
   "leave": "Quitter le groupe",
   "list": {
     "title": "Groupes"
   },
+  "logo_hint": "Téléchargez un logo pour le groupe. \nIl doit de préférence être recadré sur un carré.",
   "map": {
     "title": "Créer une carte"
   },
@@ -147,6 +186,7 @@
     "requested": "Demande de participation au groupe envoyée"
   },
   "name": "Nom de groupe",
+  "name_hint": "Veuillez fournir le nom de votre groupe. \nGardez le nom concis, car les noms plus longs peuvent ne pas être correctement formatés à tous les endroits, et l'URL de groupe sera générée en fonction de cela.",
   "observation_customisation": "Personnalisation des observations",
   "observation_display": "Affichage des observations",
   "observations_having_media": "Par défaut, afficher uniquement les observations contenant des médias",
@@ -156,16 +196,22 @@
       "success": "Créé avec succès",
       "title": "Créer une règle de groupe"
     },
+    "created_on_rule_title": "Créé sur la règle de date",
+    "has_user_rule": "Seul le contenu des membres du groupe est autorisé",
+    "hint": "Règles automatisées qui permettront de publier des observations éligibles au groupe.",
     "input_types": {
       "spatial": "Ajouter une règle spatiale",
       "taxonomy": "Ajouter une règle taxonomique",
       "title": "Sélectionnez le type d'entrée",
       "user": "Aggrégation des observations de tous les membres du groupe"
     },
+    "no_user_rule": "Tout contenu de l'utilisateur sera publié",
+    "observed_on_rule_title": "Règle observée sur la date",
     "remove": {
       "failure": "Impossible de supprimer la règle du groupe d'utilisateurs",
       "success": "règle du groupe d'utilisateurs supprimée"
     },
+    "spatial_rule_title": "Règle spatiale",
     "table": {
       "actions": "actions",
       "read_less": "Lire moins",
@@ -173,16 +219,21 @@
       "rule_type": "Type de règle",
       "value": "Valeur"
     },
-    "title": "Règles de groupe"
+    "taxon_rule_title": "Règle taxonomique",
+    "title": "Règles de groupe",
+    "trait_rule_title": "Règle de trait",
+    "user_title": "Règle"
   },
   "save": "Créer un groupe",
   "spatial_coverge": "Couverture spatiale",
+  "spatial_coverge_hint": "À l'aide des outils sur la carte, dessinez un polygone rugueux autour des zones que ce groupe couvre.",
   "species_fields": {
     "clear_all": "Effacer tout",
     "filter_by_contributors": "Filtre par contributeurs",
     "filter_species_fields": "Filtre par champs d'espèces",
     "select_all": "Sélectionnez tout",
-    "submit_selections": "Soumettre des sélections"
+    "submit_selections": "Soumettre des sélections",
+    "title": "Champs d'espèces"
   },
   "tags": "Mots clés",
   "trait": {
@@ -192,5 +243,6 @@
     "title": "Créer un trait"
   },
   "update": "Mise à jour du groupe",
-  "update_admin": "Mettre à jour les administrateurs"
+  "update_admin": "Mettre à jour les administrateurs",
+  "webAddress": "Webaddress"
 }

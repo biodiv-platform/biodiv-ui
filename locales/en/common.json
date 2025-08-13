@@ -21,6 +21,13 @@
   "clear": "Clear",
   "close": "Close",
   "copy": "Copy to Clipboard",
+  "create_form": {
+    "add_translation_button": "Add Translation",
+    "cancel": "Cancel",
+    "create": "Create",
+    "language": "Language",
+    "language_placeholder": "Select Language"
+  },
   "datatable": "Datatable",
   "delete": "Delete",
   "edit": "Edit",
@@ -37,6 +44,7 @@
     "twitter": "Twitter"
   },
   "habitats_covered": "Habitats Covered",
+  "habitats_covered_hint": "Select which habitats will be included in this group. If none of the provided habitats are available, select Other.",
   "import": "Import",
   "information": "Information",
   "invalid_request": "Invalid Request",
@@ -88,6 +96,7 @@
   "slider_left": "Left",
   "slider_right": "Right",
   "species_coverage": "Species Group Coverage",
+  "species_coverage_hint": "Select the species groups that this group will cover. If none of the other groups are available, select Other.",
   "success": "Success",
   "temporal": {
     "observations": "Observations",

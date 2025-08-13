@@ -19,6 +19,7 @@ interface IDropzoneProps {
   simpleUpload?: boolean;
   children?;
   disabled?: boolean;
+  onChangeCallback?
 }
 
 export default function ImageUploaderField({
@@ -29,10 +30,18 @@ export default function ImageUploaderField({
   hint,
   simpleUpload,
   mb = 4,
-  disabled
+  disabled,
+  onChangeCallback
 }: IDropzoneProps) {
   const { field, fieldState } = useController({ name });
   const { t } = useTranslation();
+
+  const handleChange = (value) => {
+    field.onChange(value);
+    if (onChangeCallback) {
+      onChangeCallback(value);
+    }
+  };
 
   return (
     <Field
@@ -46,7 +55,7 @@ export default function ImageUploaderField({
         <ResourceCard
           simpleUpload={simpleUpload}
           imageSize={simpleUpload ? "?h=60" : RESOURCE_SIZE.LIST_THUMBNAIL}
-          setValue={field.onChange}
+          setValue={handleChange}
           resource={field.value}
           disabled={disabled}
         />
@@ -57,7 +66,7 @@ export default function ImageUploaderField({
           simpleUpload={simpleUpload}
           nestedPath={nestedPath}
           resourcePath={resourcePath}
-          setValue={field.onChange}
+          setValue={handleChange}
         />
       )}
       {hint && <Field color="gray.600" helperText={hint} />}

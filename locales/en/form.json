@@ -30,6 +30,7 @@
   "date_range": "Add Date range",
   "description": {
     "audio": "Recording will automatically stop after two minutes",
+    "hint": "Please provide a concise overview of the aims and objectives of the group.",
     "my_uploads": "Upload and store media here for a period of 20 days. Select images to use in observation",
     "resources": "Upload image, audio or video files of a single observation from your device. (Use ratings to order images)",
     "title": "Description"

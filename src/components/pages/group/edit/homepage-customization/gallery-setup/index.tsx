@@ -1,6 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import BoxHeading from "@components/@core/layout/box-heading";
-import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 
 import GallerySetupFrom from "./gallery-setup-form";
@@ -14,36 +12,39 @@ export default function GallerySetup({
   galleryList,
   setGalleryList,
   isEdit,
-  setIsEdit
+  setIsEdit,
+  languages
 }) {
-  const { t } = useTranslation();
   const [editGalleryData, setEditGalleryData] = useState(galleryList);
 
-  return (
-    <Box w="full" p={4} className="fadeInUp white-box" overflowX="auto">
-      <BoxHeading>{t("group:homepage_customization.gallery_setup.title")}</BoxHeading>
-      {isEdit ? (
-        <GalleryEditForm
-          setIsEdit={setIsEdit}
-          setGalleryList={setGalleryList}
-          editGalleryData={editGalleryData}
-        />
-      ) : isCreate ? (
-        <GallerySetupFrom
-          setIsCreate={setIsCreate}
-          galleryList={galleryList}
-          setGalleryList={setGalleryList}
-        />
-      ) : (
-        <GallerySetupTable
-          userGroupId={userGroupId}
-          setIsCreate={setIsCreate}
-          setGalleryList={setGalleryList}
-          galleryList={galleryList}
-          setIsEdit={setIsEdit}
-          setEditGalleryData={setEditGalleryData}
-        />
-      )}
+  return isEdit ? (
+    <Box p={3}>
+      <GalleryEditForm
+        setIsEdit={setIsEdit}
+        setGalleryList={setGalleryList}
+        editGalleryData={editGalleryData}
+        languages={languages}
+      />
+    </Box>
+  ) : isCreate ? (
+    <Box p={3}>
+      <GallerySetupFrom
+        setIsCreate={setIsCreate}
+        galleryList={galleryList}
+        setGalleryList={setGalleryList}
+        languages={languages}
+      />
+    </Box>
+  ) : (
+    <Box p={3}>
+      <GallerySetupTable
+        userGroupId={userGroupId}
+        setIsCreate={setIsCreate}
+        setGalleryList={setGalleryList}
+        galleryList={galleryList}
+        setIsEdit={setIsEdit}
+        setEditGalleryData={setEditGalleryData}
+      />
     </Box>
   );
 }

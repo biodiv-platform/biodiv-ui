@@ -12,10 +12,14 @@
     "title": "Majukumu ya Mtumiaji",
     "updated": "Watumiaji wa Kikundi Wamesasishwa Kwa Mafanikio"
   },
+  "basic_details": "Maelezo ya kimsingi",
   "confirm_closed_group": "Hii ni kikundi kilichofungwa, ombi la uanachama linapaswa kupitishwa na msimamizi. Bonyeza OK kutuma ombi la kujiunga.",
   "confirm_leave": "Acha Group?",
   "create": {
     "error": "Kulikuwa na hitilafu wakati wa kujenga kikundi.",
+    "next": "Ifuatayo",
+    "previous": "Zamani",
+    "step": "Hatua",
     "success": "Kikundi kilichoundwa kwa mafanikio.",
     "title": "Unda kikundi"
   },
@@ -67,25 +71,44 @@
     },
     "value": "Thamani"
   },
+  "custom_field_hint": "Maswali/uwanja wa ziada ndani ya fomu ya upakiaji wa uchunguzi kwa kikundi chako.",
   "delete_member": "Una uhakika unataka kufuta?",
   "edit": {
     "error": "Kulikuwa na hitilafu wakati wa uppdatering Group.",
     "success": "Kikundi kilichosasishwa kwa mafanikio.",
     "title": "Hariri Group."
   },
+  "group_coverage": "Chanjo ya kikundi",
   "homepage_customization": {
     "about_us": "Kuhusu sisi",
     "add_options": "Ongeza chaguzi.",
     "back": "Rudi kwenye orodha",
     "default": "Default.",
     "failure": "Haiwezi kuhifadhi mabadiliko.",
-    "gallery": "Nyumba ya sanaa",
+    "gallery": "Matunzio makuu",
+    "gallery_hint": "Pakia picha kwenye nyumba ya sanaa ya ukurasa wa nyumbani au tumia uchunguzi kama picha za sanaa.",
     "gallery_setup": {
       "alert": "Tafadhali salama mabadiliko ili uagize tena",
       "create": "Unda picha ya sanaa",
       "save_order": "Hifadhi amri ya picha ya sanaa",
       "show_image_upload": "Onyesha Upakiaji wa Image.",
-      "title": "Setup ya Nyumba ya sanaa"
+      "title": "Matunzio makuu"
+    },
+    "hint": "Zima au mbali vifaa vya ukurasa wa nyumbani kama maelezo, takwimu za yaliyomo, nk.",
+    "mini_gallery_setup": {
+      "active_label": "Kuwezeshwa",
+      "create": "Unda Matunzio ya Mini",
+      "create_error": "Haiwezi kuunda Matunzio ya Mini",
+      "create_success": "Matunzio ya Mini yameundwa kwa mafanikio",
+      "delete_error": "Haiwezi kufuta",
+      "delete_success": "Matunzio ya Mini yalifutwa kwa mafanikio",
+      "edit_error": "Haiwezi kusasisha nyumba ya sanaa ya mini",
+      "edit_success": "Matunzio ya Mini yalisasishwa kwa mafanikio",
+      "horizontal_slider_label": "Slaidi ya usawa (slaidi kusonga kushoto na kulia)",
+      "slides_per_view": "Slaidi kwa mtazamo",
+      "title": "Matunzio ya Mini",
+      "vertical_label": "Aina ya slider",
+      "vertical_slider_label": "Slaidi ya wima (slaidi kusonga juu na chini)"
     },
     "module_stats": "Takwimu za moduli.",
     "observation_map": "Ramani ya usambazaji wa uchunguzi",
@@ -99,17 +122,28 @@
       "success": "Orodha ya Nyumba ya sanaa ilirekebishwa kwa mafanikio."
     },
     "resources": {
+      "background_color": "Rangi ya asili",
       "error": "Ingiza ID ya uchunguzi wa halali.",
+      "gallery_sidebar": "Matunzio ya sanaa ya pembeni",
       "imageurl": "Chagua picha ya sanaa",
       "link": "Onyesha kiungo cha ukurasa.",
       "new_image": "Upakiaji wa picha.",
       "obs_id": "Kitambulisho cha uchunguzi",
       "observation_image": "Picha ya uchunguzi",
       "observation_image_not_editable": "Picha ya Uchunguzi Haibadiliki",
+      "read_more": "Soma maandishi zaidi ya kitufe",
+      "read_more_button": "Kitufe",
+      "read_more_link": "kiungo",
+      "read_more_ui": "Soma aina zaidi ya UI",
+      "sidebar_opaque": "opaque",
+      "sidebar_translucent": "Translucent",
+      "text_color": "Rangi ya maandishi",
       "title": "Kichwa"
     },
     "save": "Hifadhi maelezo ya ukurasa wa nyumbani.",
     "show_desc": "Onyesha maelezo",
+    "show_donors": "Onyesha wafadhili",
+    "show_sponsors": "Onyesha wadhamini",
     "success": "Mabadiliko yaliyopangwa kwa mafanikio.",
     "table": {
       "actions": "Vitendo",
@@ -123,19 +157,24 @@
     "update": {
       "failure": "Haiwezi kurekebisha maelezo ya ukurasa wa nyumbani.",
       "success": "Maelezo ya Homepage Updated kwa mafanikio."
-    }
+    },
+    "update_for_all": "Sasisha kwa lugha zote"
   },
   "icon": "Icon.",
   "invalid_wkt": "Ingiza Kamba Halali ya WKT",
   "invite": "Andika jina la mtumiaji",
   "invite_founders": "Waalike waanzilishi",
+  "invite_founders_hint": "Waanzilishi wataweza kuhariri kikundi na kubadilisha mipangilio yote ya kikundi.",
   "invite_moderators": "Paribisha wasimamizi",
+  "invite_moderators_hint": "Wasimamizi hawawezi kuhariri mipangilio ya kikundi lakini watakuwa na marupurupu ya ziada kama vile kuchapisha yaliyomo kwa wingi na vitu vyenye vitu.",
   "join": "Jiunge na Group.",
   "join_without_invitation": "Ruhusu mtumiaji kujiunga na kikundi bila mwaliko.",
+  "join_without_invitation_hint": "Ruhusu watumiaji kujiunga na kikundi kama washiriki bila mwaliko? \nVikundi vilivyofungwa vitahitaji wasimamizi kupitisha maombi kabla ya kujiunga.",
   "leave": "Acha Group.",
   "list": {
     "title": "Vikundi."
   },
+  "logo_hint": "Pakia nembo kwa kikundi. \nInapaswa kupigwa kwa mraba.",
   "map": {
     "title": "Unda ramani"
   },
@@ -147,6 +186,7 @@
     "requested": "Kikundi cha Kujiunga na Kikundi kilichotumwa"
   },
   "name": "Jina la kikundi",
+  "name_hint": "Kwaheri kutoa jina la kikundi chako. \nWeka jina mafupi, kwa kuwa majina marefu hayawezi kutengenezwa vizuri katika maeneo yote, na URL ya kikundi itatolewa kulingana na hii.",
   "observation_customisation": "Ubinafsishaji wa Uchunguzi",
   "observation_display": "Onyesho la Uangalizi",
   "observations_having_media": "Kwa Chaguomsingi, Onyesha Uchunguzi Ulio na Midia Pekee",
@@ -156,16 +196,22 @@
       "success": "Imeundwa kwa mafanikio.",
       "title": "Unda utawala wa kikundi"
     },
+    "created_on_rule_title": "Iliyoundwa kwa sheria ya tarehe",
+    "has_user_rule": "Yaliyomo tu kutoka kwa washiriki wa kikundi yanaruhusiwa",
+    "hint": "Sheria za kiotomatiki ambazo zitaruhusu kutuma uchunguzi wa kufuzu kwa kikundi.",
     "input_types": {
       "spatial": "Ongeza utawala wa anga.",
       "taxonomy": "Ongeza utawala wa taxonomic",
       "title": "Chagua aina ya kuingiza.",
       "user": "Uchunguzi wa jumla wa wanachama wote wa kikundi"
     },
+    "no_user_rule": "Yaliyomo yoyote ya mtumiaji yatatumwa",
+    "observed_on_rule_title": "Inazingatiwa juu ya sheria ya tarehe",
     "remove": {
       "failure": "Haiwezi kufuta utawala wa kikundi cha mtumiaji",
       "success": "Utawala wa kikundi cha mtumiaji umefutwa."
     },
+    "spatial_rule_title": "Utawala wa anga",
     "table": {
       "actions": "Vitendo",
       "read_less": "Soma chini.",
@@ -173,16 +219,21 @@
       "rule_type": "Kanuni ya aina.",
       "value": "Thamani"
     },
-    "title": "Kanuni za Kikundi"
+    "taxon_rule_title": "Utawala wa taxonomic",
+    "title": "Kanuni za Kikundi",
+    "trait_rule_title": "Sheria ya tabia",
+    "user_title": "Sheria ya Mtumiaji"
   },
   "save": "Unda kikundi",
   "spatial_coverge": "Chanjo ya nafasi.",
+  "spatial_coverge_hint": "Kutumia zana kwenye ramani, chora polygon mbaya karibu na maeneo ambayo kikundi hiki kinashughulikia.",
   "species_fields": {
     "clear_all": "Futa zote",
     "filter_by_contributors": "Kichujio na wachangiaji",
     "filter_species_fields": "Kichujio na shamba za spishi",
     "select_all": "Chagua Zote",
-    "submit_selections": "Wasilisha chaguzi"
+    "submit_selections": "Wasilisha chaguzi",
+    "title": "Sehemu za spishi"
   },
   "tags": "Tags.",
   "trait": {
@@ -192,5 +243,6 @@
     "title": "Unda sifa"
   },
   "update": "Sasisha Group.",
-  "update_admin": "Sasisha watendaji"
+  "update_admin": "Sasisha watendaji",
+  "webAddress": "WebAddress"
 }

@@ -1,13 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
-import bbox from "@turf/bbox";
-import { getMapCenter, stringToFeature } from "@utils/location";
+import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useState } from "react";
 import { useController } from "react-hook-form";
+import { parse, stringify } from "wkt";
 
 import { Field } from "@/components/ui/field";
-
 const NakshaMapboxDraw: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
   {
@@ -36,30 +35,39 @@ export default function AreaDrawField({
   ...props
 }: AreaDrawFieldProps) {
   const { field, fieldState } = useController({ name });
-  const [coordinates, setCoordinates] = useState({});
+  const [, setCurrentFeatures] = useState([]);
   const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
 
-  const defaultFeatures = useMemo(() => stringToFeature(field.value), []);
+  const defaultFeatures = useMemo(() => {
+    if (!field.value || typeof field.value !== "string" || field.value.trim() === "") {
+      return [];
+    }
+    const geometry = parse(field.value); // Convert WKT to GeoJSON geometry
+    return [
+      {
+        type: "Feature",
+        properties: {},
+        geometry
+      }
+    ];
+  }, []);
 
   const handleOnFeatureChange = (features) => {
+    setCurrentFeatures(features);
     if (!features.length) {
-      setCoordinates({});
+      field.onChange("");
       return;
     }
 
-    const [minlng, minlat, maxlng, maxlat] = bbox({ type: "FeatureCollection", features });
-    setCoordinates({
-      ne: [maxlat, minlng],
-      se: [minlat, maxlng]
-    });
+    const wktString = stringify(features[0].geometry); // Convert to WKT
+    field.onChange(wktString);
   };
 
   useEffect(() => {
-    field.onChange(coordinates);
-  }, [coordinates]);
-
-  useEffect(() => {
-    handleOnFeatureChange(defaultFeatures);
+    // Trigger initial onChange in case there's a default value (WKT)
+    if (defaultFeatures.length) {
+      handleOnFeatureChange(defaultFeatures);
+    }
   }, []);
 
   return (

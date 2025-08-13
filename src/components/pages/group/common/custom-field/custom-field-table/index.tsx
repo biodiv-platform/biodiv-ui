@@ -30,27 +30,33 @@ const CustomFieldTable = ({
   };
 
   const handleReorderCustomField = async () => {
-    const payload = customFields.map((field, displayOrder) => ({
-      cfId: field.customFields.id,
-      displayOrder
-    }));
+    if (userGroupId != null) {
+      const payload = customFields.map((field, displayOrder) => ({
+        cfId: field.customFields.id,
+        displayOrder
+      }));
 
-    const { success } = await axReorderCustomField(userGroupId, payload);
-    if (success) {
-      notification(t("group:custom_field.reorder.success"), NotificationType.Success);
-    } else {
-      notification(t("group:custom_field.reorder.failure"));
+      const { success } = await axReorderCustomField(userGroupId, payload);
+      if (success) {
+        notification(t("group:custom_field.reorder.success"), NotificationType.Success);
+      } else {
+        notification(t("group:custom_field.reorder.failure"));
+      }
     }
     setCanReorder(false);
   };
 
   const removeCustomField = async (index) => {
-    const { success } = await axRemoveCustomField(userGroupId, index);
-    if (success) {
-      setCustomFields(customFields.filter(({ customFields: { id } }) => id !== index));
-      notification(t("group:custom_field.remove.success"), NotificationType.Success);
+    if (userGroupId != null) {
+      const { success } = await axRemoveCustomField(userGroupId, index);
+      if (success) {
+        setCustomFields(customFields.filter(({ customFields: { id } }) => id !== index));
+        notification(t("group:custom_field.remove.success"), NotificationType.Success);
+      } else {
+        notification(t("group:custom_field.remove.failure"), NotificationType.Error);
+      }
     } else {
-      notification(t("group:custom_field.remove.failure"), NotificationType.Error);
+      setCustomFields(customFields.filter((_, i) => i !== index));
     }
   };
 

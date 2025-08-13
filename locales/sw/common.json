@@ -21,6 +21,13 @@
   "clear": "Futa",
   "close": "Karibu",
   "copy": "Nakili kwenye clipboard.",
+  "create_form": {
+    "add_translation_button": "Ongeza tafsiri",
+    "cancel": "Ghairi",
+    "create": "Unda",
+    "language": "Lugha",
+    "language_placeholder": "Chagua lugha"
+  },
   "datatable": "DataTable",
   "delete": "Futa",
   "edit": "Hariri",
@@ -37,6 +44,7 @@
     "twitter": "Twitter"
   },
   "habitats_covered": "Mazingira yalifunikwa",
+  "habitats_covered_hint": "Chagua ni makazi gani ambayo yatajumuishwa katika kikundi hiki. \nIkiwa hakuna makazi yoyote yaliyotolewa yanapatikana, chagua Nyingine.",
   "import": "Ingiza",
   "information": "Taarifa",
   "invalid_request": "Ombi batili",
@@ -88,6 +96,7 @@
   "slider_left": "Kushoto.",
   "slider_right": "Haki",
   "species_coverage": "Aina ya chanjo ya kikundi.",
+  "species_coverage_hint": "Chagua vikundi vya spishi ambavyo kikundi hiki kitafunika. \nIkiwa hakuna hata moja ya vikundi vingine vinapatikana, chagua Nyingine.",
   "success": "Mafanikio",
   "temporal": {
     "observations": "Uchunguzi",
