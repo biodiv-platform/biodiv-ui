@@ -93,6 +93,9 @@ export default function WKTDrawViewer({
   const onWKTInputChange = () => {
     try {
       setGeojson(wkt.parse(WKTInputRef.current.value));
+      if(group){
+        onSave(WKTInputRef.current.value)
+      }
     } catch (e) {
       setGeojson(undefined);
       WKTInputRef.current.value = "";
@@ -158,7 +161,7 @@ export default function WKTDrawViewer({
     <div>
       <SimpleGrid columns={[1, 1, 5, 5]} alignItems="flex-end" gap={3} mb={mb}>
         {group ? (
-          <Field gridColumn="1/5">
+          <Field gridColumn="1/6">
             <Field htmlFor={nameTopology} label={labelTopology} />
             <HStack gap="10" width="full">
               <Input
@@ -225,7 +228,7 @@ export default function WKTDrawViewer({
             </Field>
           </>
         )}
-        <SaveButton disabled={disabled} onClick={handleOnSave} />
+        {!group && <SaveButton disabled={disabled} onClick={handleOnSave} />}
       </SimpleGrid>
       {geojson ? (
         <GeoJSONPreview data={geojson} />
