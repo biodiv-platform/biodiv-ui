@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  ColorPicker,
-  Flex,
-  HStack,
-  parseColor,
-  Portal,
-  Text
-} from "@chakra-ui/react";
+import { Box, Button, ColorPicker, Flex, HStack, parseColor, Portal, Text } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
 import { SubmitButton } from "@components/form/submit-button";
@@ -66,10 +57,13 @@ export default function GallerySetupFrom({
   const { languageId } = useGlobalState();
   const [defaultValues, setDefaultValues] = useState<IGallerySetupForm | any>(undefined);
   const validationSchema = Yup.lazy((value) => {
-    const languageMapShape: Record<string, Yup.ArraySchema<any>> = {};
+    const languageMapShape: Record<string, any> = {};
 
     for (const langId in value || {}) {
-      languageMapShape[langId] = Yup.array().of(galleryFieldValidationSchema);
+      languageMapShape[langId] = Yup.object().shape({
+        title: Yup.string().required("Title is required"),
+        languageId: Yup.number()
+      });
     }
 
     return Yup.object().shape(languageMapShape);
@@ -77,29 +71,26 @@ export default function GallerySetupFrom({
 
   const hForm = useForm<any>({
     mode: "onChange",
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(
+      Yup.object().shape({
+        translations: validationSchema,
+        ...galleryFieldValidationSchema.fields
+      })
+    ),
     context: { isVertical: vertical },
     defaultValues: {
-      [SITE_CONFIG.LANG.DEFAULT_ID]: group
-        ? [
-            {
-              customDescripition: "",
-              fileName: undefined,
-              moreLinks: "",
-              title: "",
-              galleryId: galleryId
-            }
-          ]
-        : [
-            {
-              customDescripition: "",
-              fileName: undefined,
-              moreLinks: "",
-              title: "",
-              truncated: true,
-              galleryId: galleryId
-            }
-          ]
+      translations: { [SITE_CONFIG.LANG.DEFAULT_ID]: {
+        title: "",
+        languageId: SITE_CONFIG.LANG.DEFAULT_ID,
+        description: "",
+        readMoreText: ""
+      } },
+      customDescripition: "",
+      fileName: undefined,
+      moreLinks: "",
+      title: "h",
+      truncated: true,
+      galleryId: galleryId
     }
   });
 
@@ -107,22 +98,20 @@ export default function GallerySetupFrom({
   const [color, setColor] = useState("rgba(255,255,255,1)");
   const [bgColor, setBgColor] = useState("rgba(26, 32, 44, 1)");
 
-  const handleFormSubmit = (value) => {
-    const payload = Object.fromEntries(
-      Object.entries(value as Record<number, any[]>).map(([langId, entries]) => [
-        langId,
-        entries.map((entry) => ({
-          ...entry,
-          authorId: entry?.authorInfo?.id,
-          authorName: entry?.authorInfo?.name,
-          authorImage: entry?.authorInfo?.profilePic,
-          galleryId: galleryId,
-          color: color,
-          bgColor: bgColor
-        }))
-      ])
-    );
-    setGalleryList([...galleryList, [`null|${galleryList.length}`, payload]]);
+  const handleFormSubmit = ({translations,title,customDescripition,...value}) => {
+    const payload = {
+      translations: Object.values(translations),
+      authorId: value?.authorInfo?.id,
+      authorName: value?.authorInfo?.name,
+      authorImage: value?.authorInfo?.profilePic,
+      galleryId: galleryId,
+      color: color,
+      bgColor: bgColor,
+      title: translations[SITE_CONFIG.LANG.DEFAULT_ID].title,
+      customDescripition: translations[SITE_CONFIG.LANG.DEFAULT_ID].description,
+      ...value
+    };
+    setGalleryList([...galleryList, payload]);
     setIsCreate(false);
   };
 
@@ -137,21 +126,13 @@ export default function GallerySetupFrom({
   const [translationSelected, setTranslationSelected] = useState<number>(languageId);
 
   const handleAddTranslation = () => {
-    hForm.setValue(`${langId}`, [
-      {
-        customDescripition: "",
-        fileName: hForm.getValues()[translationSelected][0].fileName,
-        moreLinks: hForm.getValues()[translationSelected][0].moreLinks,
-        title: "",
-        observationId: hForm.getValues()[translationSelected][0].observationId,
-        readMoreText: null,
-        readMoreUIType: hForm.getValues()[translationSelected][0].readMoreUIType,
-        gallerySidebar: hForm.getValues()[translationSelected][0].gallerySidebar,
-        authorInfo: hForm.getValues()[translationSelected][0].authorInfo,
-        truncated: hForm.getValues()[translationSelected][0].truncated,
-        options: hForm.getValues()[translationSelected][0].options
-      }
-    ]);
+    hForm.setValue(`translations.${langId}`, {
+      id: null,
+      title: "",
+      languageId: langId,
+      description: "",
+      readMoreText: ""
+    });
     setTranslationSelected(langId);
   };
 
@@ -170,7 +151,7 @@ export default function GallerySetupFrom({
           </Flex>
         </Box>
         <TranslationTab
-          values={Object.keys(hForm.getValues())}
+          values={Object.keys(hForm.getValues().translations)}
           setLangId={setLangId}
           languages={languages}
           handleAddTranslation={handleAddTranslation}
@@ -189,51 +170,31 @@ export default function GallerySetupFrom({
           )}
           <TextAreaField
             key={`decription-${translationSelected}`}
-            name={`${translationSelected}.0.customDescripition`}
+            name={`translations.${translationSelected}.description`}
             label={t("group:homepage_customization.table.description")}
           />
           <TextBoxField
             key={`readmore-${translationSelected}`}
-            name={`${translationSelected}.0.readMoreText`}
+            name={`translations.${translationSelected}.readMoreText`}
             label={t("group:homepage_customization.resources.read_more")}
             maxLength={30}
           />
           <SelectInputField
-            key={`readmoreui-${translationSelected}`}
-            name={`${translationSelected}.0.readMoreUIType`}
+            key={`readmoreui`}
+            name={`readMoreUIType`}
             label={t("group:homepage_customization.resources.read_more_ui")}
             options={readMoreUIOptions}
             disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             shouldPortal={true}
-            onChangeCallback={(value) => {
-              const values = hForm.getValues();
-
-              for (const langId in values) {
-                const entry = values[langId]?.[0];
-                if (entry) {
-                  hForm.setValue(`${langId}.0.readMoreUIType`, value);
-                }
-              }
-            }}
           />
           {galleryId == -1 && (
             <SelectInputField
-              key={`sidebar-${translationSelected}`}
-              name={`${translationSelected}.0.gallerySidebar`}
+              key={`sidebar`}
+              name={`gallerySidebar`}
               label={t("group:homepage_customization.resources.gallery_sidebar")}
               options={gallerySidebarBackgroundOptions}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               shouldPortal={true}
-              onChangeCallback={(value) => {
-                const values = hForm.getValues();
-
-                for (const langId in values) {
-                  const entry = values[langId]?.[0];
-                  if (entry) {
-                    hForm.setValue(`${langId}.0.gallerySidebar`, value);
-                  }
-                }
-              }}
             />
           )}
 
@@ -247,7 +208,9 @@ export default function GallerySetupFrom({
                 disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               >
                 <ColorPicker.HiddenInput />
-                <ColorPicker.Label>{t("group:homepage_customization.resources.text_color")}</ColorPicker.Label>
+                <ColorPicker.Label>
+                  {t("group:homepage_customization.resources.text_color")}
+                </ColorPicker.Label>
                 <ColorPicker.Control>
                   <ColorPicker.Trigger p="2">
                     <ColorPicker.ValueSwatch boxSize="8" />
@@ -275,7 +238,9 @@ export default function GallerySetupFrom({
                 disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               >
                 <ColorPicker.HiddenInput />
-                <ColorPicker.Label>{t("group:homepage_customization.resources.background_color")}</ColorPicker.Label>
+                <ColorPicker.Label>
+                  {t("group:homepage_customization.resources.background_color")}
+                </ColorPicker.Label>
                 <ColorPicker.Control>
                   <ColorPicker.Trigger p="2">
                     <ColorPicker.ValueSwatch boxSize="8" />
@@ -299,9 +264,9 @@ export default function GallerySetupFrom({
 
           {!group && (
             <CheckboxField
-              key={`truncated-${translationSelected}`}
+              key={`truncated`}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-              name={`${translationSelected}.0.truncated`}
+              name={`truncated`}
               label={t("group:homepage_customization.table.enabled")}
             />
           )}

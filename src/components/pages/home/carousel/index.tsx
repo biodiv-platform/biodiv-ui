@@ -6,8 +6,6 @@ import {
   SimpleGrid,
   useMediaQuery
 } from "@chakra-ui/react";
-import { LANG } from "@configs/site-config";
-import useGlobalState from "@hooks/use-global-state";
 import { useKeenSlider } from "keen-slider/react";
 import React, { useState } from "react";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
@@ -18,7 +16,6 @@ import SlideInfo from "./slide-info";
 
 export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { languageId } = useGlobalState();
   const [sliderLoaded, setSliderLoaded] = useState(false);
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
@@ -99,7 +96,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
           {featured.map((o) => (
             <>
               <Slide
-                resource={o[1]?.[languageId]?.[0] || o[1]?.[LANG.DEFAULT_ID]?.[0]}
+                resource={o}
                 key={o.id}
                 mini={mini}
               />
@@ -124,8 +121,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
           <SlideInfo
             size={featured.length}
             resource={
-              featured[currentSlide][1]?.[languageId]?.[0] ||
-              featured[currentSlide][1]?.[LANG.DEFAULT_ID]?.[0]
+              featured[currentSlide]
             }
             currentSlide={currentSlide}
             scrollTo={iSlider?.current?.moveToIdx}
@@ -136,8 +132,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
       {!mini && (
         <Sidebar
           resource={
-            featured[currentSlide][1]?.[languageId]?.[0] ||
-            featured[currentSlide][1]?.[LANG.DEFAULT_ID]?.[0]
+            featured[currentSlide]
           }
         />
       )}

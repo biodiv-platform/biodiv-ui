@@ -13,8 +13,6 @@ export default function MiniGallery({
   miniGallery,
   setMiniGallery,
   languages,
-  sliderList,
-  setSliderList,
   handleFormSubmit,
   groupId = -1,
   mode = "edit"
@@ -46,8 +44,6 @@ export default function MiniGallery({
             miniGalleryList={miniGallery}
             setMiniGalleryList={setMiniGallery}
             languages={languages}
-            sliderList={sliderList}
-            setSliderList={setSliderList}
             setOpenIndex={setOpenIndex}
             groupId = {groupId}
             mode= {mode}
@@ -68,10 +64,9 @@ export default function MiniGallery({
               }}
               onDelete={(i) => {
                 setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
-                setSliderList(sliderList.filter((_, idx) => idx !== i));
               }}
-              sliderList={sliderList}
-              setSliderList={setSliderList}
+              setMiniGallery={setMiniGallery}
+              miniGallery={miniGallery}
               handleFormSubmit={handleFormSubmit}
               shouldOpen={index==openIndex}
             />
@@ -88,10 +83,9 @@ export default function MiniGallery({
               }}
               onDelete={(i) => {
                 setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
-                setSliderList(sliderList.filter((_, idx) => idx !== i));
               }}
-              sliderList={sliderList}
-              setSliderList={setSliderList}
+              setMiniGallery={setMiniGallery}
+              miniGallery={miniGallery}
               handleFormSubmit={handleFormSubmit}
               shouldOpen={index==openIndex}
               groupId={groupId}

@@ -19,10 +19,10 @@ export const axGetLangList = async (document = false) => {
   }
 };
 
-export const axGetHomeInfo = async (userGroupId?) => {
+export const axGetHomeInfo = async (languageId) => {
   try {
     const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
-      params: { userGroupId }
+      params: { languageId: languageId }
     });
     return { success: true, data };
   } catch (e) {
@@ -31,10 +31,10 @@ export const axGetHomeInfo = async (userGroupId?) => {
   }
 };
 
-export const axGetAdminHomeInfo = async (ctx) => {
+export const axGetAdminHomeInfo = async (ctx, languageId) => {
   try {
     const { data } = await http.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
-      params: { ctx, adminList: true }
+      params: { ctx, adminList: true, languageId: languageId }
     });
     return { success: true, data };
   } catch (e) {

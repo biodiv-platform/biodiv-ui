@@ -10,12 +10,10 @@ import {
   Heading,
   IconButton
 } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import GallerySetupFrom from "@/components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form";
-import useGlobalState from "@/hooks/use-global-state";
 import DeleteIcon from "@/icons/delete";
 import EditIcon from "@/icons/edit";
 import { axRemoveMiniGroupGallery } from "@/services/usergroup.service";
@@ -30,30 +28,28 @@ export default function MiniGroupGalleryItem({
   languages,
   onEdit,
   onDelete,
-  sliderList,
-  setSliderList,
+  setMiniGallery,
+  miniGallery,
   handleFormSubmit,
   shouldOpen,
   groupId
 }) {
   const { t } = useTranslation();
-  const { languageId } = useGlobalState();
+
 
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [editData, setEditData] = useState(sliderList[index]);
-  const [galleryList, setGalleryList] = useState(sliderList[index]);
-  const miniGalleryDetails =
-    item[1]?.[languageId]?.[0] || item[1]?.[SITE_CONFIG.LANG.DEFAULT_ID]?.[0];
+  const [editData, setEditData] = useState(item.gallerySlider);
+  const [galleryList, setGalleryList] = useState(item.gallerySlider);
 
   useEffect(() => {
-    setGalleryList(sliderList[index]);
-    setEditData(sliderList[index]);
-  }, [sliderList]);
+    setGalleryList(item.gallerySlider);
+    setEditData(item.gallerySlider);
+  }, [item.gallerySlider]);
 
   const handleDelete = async () => {
-    if (item[0]) {
-      const { success } = await axRemoveMiniGroupGallery(groupId, item[0]);
+    if (item.galleryId) {
+      const { success } = await axRemoveMiniGroupGallery(groupId, item.galleryId);
       if (success) {
         notification(
           t("group:homepage_customization.mini_gallery_setup.delete_success"),
@@ -88,13 +84,13 @@ export default function MiniGroupGalleryItem({
           <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pl={4} pr={4}>
             <Flex flex={1} align="center" justify="space-between">
               <Heading as="h2" fontSize="1.2rem">
-                {`${miniGalleryDetails.title} Setup`}
-                <Badge colorPalette={miniGalleryDetails.isActive ? "blue" : "red"} ml={2}>
-                  {miniGalleryDetails.isActive ? "ACTIVE" : "INACTIVE"}
+                {`${item.title} Setup`}
+                <Badge colorPalette={item.isActive ? "blue" : "red"} ml={2}>
+                  {item.isActive ? "ACTIVE" : "INACTIVE"}
                 </Badge>
               </Heading>
               <Box>
-                {item[0] && (
+                {item.galleryId && (
                   <IconButton
                     colorPalette="blue"
                     className="action"
@@ -128,14 +124,14 @@ export default function MiniGroupGalleryItem({
                   setIsEdit={setIsEdit}
                   setGalleryList={(v) => {
                     setGalleryList(v);
-                    sliderList[index] = v;
-                    setSliderList(sliderList);
+                    miniGallery[index].gallerySlider = v;
+                    setMiniGallery(miniGallery);
                   }}
                   editGalleryData={editData}
                   languages={languages}
-                  galleryId={Number(item[0])}
+                  galleryId={Number(item.galleryId)}
                   index={index}
-                  vertical={miniGalleryDetails.isVertical}
+                  vertical={item.isVertical}
                 />
               ) : isCreate ? (
                 <GallerySetupFrom
@@ -143,34 +139,36 @@ export default function MiniGroupGalleryItem({
                   galleryList={galleryList}
                   setGalleryList={(v) => {
                     setGalleryList(v);
-                    sliderList[index] = v;
-                    setSliderList(sliderList);
+                    miniGallery[index].gallerySlider = v;
+                    setMiniGallery(miniGallery);
                   }}
                   languages={languages}
-                  galleryId={Number(item[0])}
-                  vertical={miniGalleryDetails.isVertical}
+                  galleryId={Number(item.galleryId)}
+                  vertical={item.isVertical}
                 />
               ) : (
                 <GallerySetupTable
                   setIsCreate={setIsCreate}
                   setGalleryList={(v) => {
                     setGalleryList(v);
-                    sliderList[index] = v;
-                    setSliderList(sliderList);
+                    miniGallery[index].gallerySlider = v;
+                    setMiniGallery(miniGallery);
                   }}
                   galleryList={galleryList}
                   setIsEdit={setIsEdit}
                   setEditGalleryData={setEditData}
-                  galleryId={item[0]}
-                  userGroupId={item[0]? groupId: null}
+                  galleryId={item.galleryId}
+                  userGroupId={item.galleryId ? groupId : null}
                 />
               )}
             </Box>
-            {item[0] && <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
-              <Button colorPalette="blue" onClick={handleFormSubmit}>
-                {t("common:save")}
-              </Button>
-            </Box>}
+            {item.galleryId && (
+              <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
+                <Button colorPalette="blue" onClick={handleFormSubmit}>
+                  {t("common:save")}
+                </Button>
+              </Box>
+            )}
           </AccordionItemContent>
         </AccordionItem>
       </AccordionRoot>

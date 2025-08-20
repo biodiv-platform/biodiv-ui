@@ -6,7 +6,6 @@ import { TextAreaField } from "@components/form/textarea";
 import ImageUploaderField from "@components/pages/group/common/image-uploader-field";
 import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useGlobalState from "@hooks/use-global-state";
 import {
   axEditGroupHomePageGallery,
   axEditMiniGroupHomePageGallery
@@ -34,6 +33,21 @@ export default function GalleryEditForm({
   index = 0,
   vertical = false
 }) {
+
+  const {
+    id,
+    title,
+    fileName,
+    customDescripition,
+    moreLinks,
+    displayOrder,
+    observationId,
+    truncated,
+    readMoreUIType,
+    readMoreText,
+    gallerySidebar,
+    translations
+  } = editGalleryData;
   const { t } = useTranslation();
   const readMoreUIOptions = [
     { label: t("group:homepage_customization.resources.read_more_link"), value: "link" },
@@ -43,17 +57,19 @@ export default function GalleryEditForm({
     { label: t("group:homepage_customization.resources.sidebar_opaque"), value: "opaque" },
     { label: t("group:homepage_customization.resources.sidebar_translucent"), value: "translucent" }
   ];
-  const { languageId } = useGlobalState();
   const [translationSelected, setTranslationSelected] = useState<number>(
-    Number(Object.keys(editGalleryData[1])[0])
+    SITE_CONFIG.LANG.DEFAULT_ID
   );
   const [langId, setLangId] = useState(0);
 
   const validationSchema = Yup.lazy((value) => {
-    const languageMapShape: Record<string, Yup.ArraySchema<any>> = {};
+    const languageMapShape: Record<string, any> = {};
 
     for (const langId in value || {}) {
-      languageMapShape[langId] = Yup.array().of(galleryFieldValidationSchema);
+      languageMapShape[langId] = Yup.object().shape({
+        title: Yup.string().required("Title is required"),
+        languageId: Yup.number()
+      });
     }
 
     return Yup.object().shape(languageMapShape);
@@ -61,78 +77,78 @@ export default function GalleryEditForm({
 
   const hForm = useForm<any>({
     mode: "onChange",
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(Yup.object().shape({
+      translations: validationSchema,
+      ...galleryFieldValidationSchema.fields
+    })),
     context: { isVertical: vertical },
-    defaultValues: editGalleryData[1]
+    defaultValues: {
+      id,
+      title,
+      fileName,
+      customDescripition,
+      moreLinks,
+      displayOrder,
+      observationId,
+      truncated,
+      readMoreUIType,
+      readMoreText,
+      gallerySidebar,
+      galleryId,
+      translations: Object.fromEntries(translations.map((item) => [Number(item.languageId), item]))
+    }
   });
 
   const [color, setColor] = useState(
-    editGalleryData[1][205][0].color
-      ? editGalleryData[1][SITE_CONFIG.LANG.DEFAULT_ID][0].color
+    editGalleryData.color
+      ? editGalleryData.color
       : "rgba(255,255,255,1)"
   );
   const [bgColor, setBgColor] = useState(
-    editGalleryData[1][205][0].bgColor
-      ? editGalleryData[1][SITE_CONFIG.LANG.DEFAULT_ID][0].bgColor
+    editGalleryData.bgColor
+      ? editGalleryData.bgColor
       : "rgba(26, 32, 44, 1)"
   );
 
   const imgUrl = getResourceThumbnail(
     RESOURCE_CTX.OBSERVATION,
-    editGalleryData[1][Object.keys(editGalleryData[1])[0]][0].fileName,
+    editGalleryData.fileName,
     RESOURCE_SIZE.LIST_THUMBNAIL
   );
 
-  if (Object.keys(hForm.getValues()).includes(languageId)) {
+  /*if (Object.keys(hForm.getValues()).includes(languageId)) {
     setTranslationSelected(languageId);
-  }
+  }*/
 
   const handleAddTranslation = () => {
     setTranslationSelected(langId);
-    hForm.setValue(`${langId}`, [
-      {
-        authorId: hForm.getValues()[translationSelected][0].authorId,
-        authorImage: hForm.getValues()[translationSelected][0].authorImage,
-        authorName: hForm.getValues()[translationSelected][0].authorName,
-        customDescripition: "",
-        displayOrder: hForm.getValues()[translationSelected][0].displayOrder,
-        fileName: hForm.getValues()[translationSelected][0].fileName,
-        gallerySidebar: hForm.getValues()[translationSelected][0].gallerySidebar,
-        id: null,
-        languageId: langId,
-        moreLinks: hForm.getValues()[translationSelected][0].moreLinks,
-        observationId: hForm.getValues()[translationSelected][0].observationId,
-        readMoreText: null,
-        readMoreUIType: hForm.getValues()[translationSelected][0].readMoreUIType,
-        sliderId: Number(editGalleryData[0].split("|")[0]),
-        title: "",
-        ugId: hForm.getValues()[translationSelected][0].ugId,
-        galleryId: galleryId
-      }
-    ]);
+    hForm.setValue(`translations.${langId}`, {
+      id: null,
+      title: "",
+      languageId: langId,
+      description: "",
+      readMoreText: ""
+    });
   };
 
-  const handleFormSubmit = async (value) => {
-    const payload = Object.fromEntries(
-      Object.entries(value as Record<number, any[]>).map(([langId, entries]) => [
-        langId,
-        entries.map((entry) => ({
-          ...entry,
-          color: color,
-          bgColor: bgColor
-        }))
-      ])
-    );
+  const handleFormSubmit = async ({translations, ...value}) => {
+    const payload = {
+      translations: Object.values(translations),
+      color: color,
+      bgColor: bgColor,
+      ugId: editGalleryData.ugId,
+      ...value
+    };
     const { success, data } =
       galleryId == -1
         ? await axEditGroupHomePageGallery(
-            editGalleryData[1][Object.keys(editGalleryData[1])[0]][0].ugId,
-            Number(editGalleryData[0].split("|")[0]),
+            editGalleryData.ugId,
+            Number(editGalleryData.sliderId),
             payload
           )
         : await axEditMiniGroupHomePageGallery(
-            editGalleryData[1][Object.keys(editGalleryData[1])[0]][0].ugId,
-            Number(editGalleryData[0].split("|")[0]),
+            editGalleryData.ugId,
+            Number(editGalleryData.sliderId),
             payload
           );
 
@@ -140,16 +156,8 @@ export default function GalleryEditForm({
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
       setGalleryList(
         galleryId == -1
-          ? Object.entries(data?.gallerySlider || {}).sort((a, b) => {
-              const aOrder = parseInt(a[0].split("|")[1], 10);
-              const bOrder = parseInt(b[0].split("|")[1], 10);
-              return aOrder - bOrder;
-            })
-          : Object.entries(data?.miniGallerySlider[index] || {}).sort((a, b) => {
-              const aOrder = parseInt(a[0].split("|")[1], 10);
-              const bOrder = parseInt(b[0].split("|")[1], 10);
-              return aOrder - bOrder;
-            })
+          ? data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+          : data?.miniGallery[index].gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
       );
       setIsEdit(false);
     } else {
@@ -165,7 +173,7 @@ export default function GalleryEditForm({
         </Button>
       </Box>
       <TranslationTab
-        values={Object.keys(hForm.getValues())}
+        values={Object.keys(hForm.getValues().translations)}
         setLangId={setLangId}
         languages={languages}
         handleAddTranslation={handleAddTranslation}
@@ -175,31 +183,21 @@ export default function GalleryEditForm({
       <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
         <TextBoxField
           key={`title-${translationSelected}`}
-          name={`${translationSelected}.0.title`}
+          name={`translations.${translationSelected}.title`}
           isRequired={true}
           label={
             translationSelected != SITE_CONFIG.LANG.DEFAULT_ID
-              ? hForm.getValues()[languageId][0].title
+              ? hForm.getValues().translation[SITE_CONFIG.LANG.DEFAULT_ID].title
               : t("group:homepage_customization.resources.title")
           }
         />
         <TextBoxField
-          key={`links-${translationSelected}`}
-          name={`${translationSelected}.0.moreLinks`}
+          key={`links`}
+          name={`moreLinks`}
           label={t("group:homepage_customization.resources.link")}
           disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-          onChangeCallback={(e) => {
-            const values = hForm.getValues();
-
-            for (const langId in values) {
-              const entry = values[langId]?.[0];
-              if (entry) {
-                hForm.setValue(`${langId}.0.moreLinks`, e.target.value);
-              }
-            }
-          }}
         />
-        {hForm.getValues()[translationSelected][0].observationId ? (
+        {hForm.getValues().observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>
             <Image src={imgUrl} />
@@ -207,70 +205,40 @@ export default function GalleryEditForm({
         ) : (
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
-            name={`${translationSelected}.0.fileName`}
+            name={`fileName`}
             disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-            onChangeCallback={(value) => {
-              const values = hForm.getValues();
-
-              for (const langId in values) {
-                const entry = values[langId]?.[0];
-                if (entry) {
-                  hForm.setValue(`${langId}.0.fileName`, value);
-                }
-              }
-            }}
           />
         )}
         <TextAreaField
           key={`description-${translationSelected}`}
-          name={`${translationSelected}.0.customDescripition`}
+          name={`translations.${translationSelected}.description`}
           label={t("group:homepage_customization.table.description")}
         />
 
         <TextBoxField
           key={`readmore-${translationSelected}`}
-          name={`${translationSelected}.0.readMoreText`}
+          name={`translations.${translationSelected}.readMoreText`}
           label={t("group:homepage_customization.resources.read_more")}
           maxLength={30}
         />
 
         <SelectInputField
-          key={`readmoreui-${translationSelected}`}
-          name={`${translationSelected}.0.readMoreUIType`}
+          key={`readmoreui`}
+          name={`readMoreUIType`}
           label={t("group:homepage_customization.resources.read_more_ui")}
           options={readMoreUIOptions}
           shouldPortal={true}
           disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-          onChangeCallback={(value) => {
-            const values = hForm.getValues();
-
-            for (const langId in values) {
-              const entry = values[langId]?.[0];
-              if (entry) {
-                hForm.setValue(`${langId}.0.readMoreUIType`, value);
-              }
-            }
-          }}
         />
 
         {galleryId == -1 && (
           <SelectInputField
-            key={`sidebar-${translationSelected}`}
-            name={`${translationSelected}.0.gallerySidebar`}
+            key={`sidebar`}
+            name={`gallerySidebar`}
             label={t("group:homepage_customization.resources.gallery_sidebar")}
             options={gallerySidebarBackgroundOptions}
             shouldPortal={true}
             disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-            onChangeCallback={(value) => {
-              const values = hForm.getValues();
-
-              for (const langId in values) {
-                const entry = values[langId]?.[0];
-                if (entry) {
-                  hForm.setValue(`${langId}.0.gallerySidebar`, value);
-                }
-              }
-            }}
           />
         )}
 

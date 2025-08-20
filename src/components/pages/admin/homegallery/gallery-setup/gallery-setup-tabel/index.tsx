@@ -38,7 +38,7 @@ const GallerySetupTable = ({
 
   const handleReorderCustomField = async () => {
     const payload = galleryList.map((id, index) => ({
-      galleryId: Number(id[0].split("|")[0]),
+      galleryId: Number(id.sliderId),
       displayOrder: index
     }));
 
@@ -52,11 +52,11 @@ const GallerySetupTable = ({
   };
 
   const removeGalleryItem = async (index) => {
-    if (galleryList[index][0].split("|")[0] != "null") {
+    if (galleryList[index].sliderId != null) {
       const { success } =
         galleryId == -1
-          ? await axRemoveHomePageGallery(Number(galleryList[index][0].split("|")[0]))
-          : await axRemoveMiniHomePageGallery(Number(galleryList[index][0].split("|")[0]));
+          ? await axRemoveHomePageGallery(Number(galleryList[index].sliderId))
+          : await axRemoveMiniHomePageGallery(Number(galleryList[index].sliderId));
       if (!success) {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
@@ -101,7 +101,7 @@ const GallerySetupTable = ({
           float="right"
           hidden={!showReorder}
           onClick={
-            galleryList.some((e) => e[0].split("|")[0] == "null")
+            galleryList.some((e) => e.id == null)
               ? handleReorderAlter
               : handleReorderCustomField
           }

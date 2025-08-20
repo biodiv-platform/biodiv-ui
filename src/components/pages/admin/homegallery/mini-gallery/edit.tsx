@@ -13,7 +13,6 @@ import { RadioInputField } from "@/components/form/radio";
 import { SwitchField } from "@/components/form/switch";
 import { TextBoxField } from "@/components/form/text";
 import TranslationTab from "@/components/pages/common/translation-tab";
-import useGlobalState from "@/hooks/use-global-state";
 import { axEditMiniGroupGallery } from "@/services/usergroup.service";
 import { axEditMiniGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
@@ -28,6 +27,8 @@ export default function EditMiniGalleryForm({
   groupId
 }) {
   const { t } = useTranslation();
+  const { isActive, isVertical, slidesPerView, translations, id, title, languageId, galleryId, ugId } =
+    editGalleryData;
 
   const SLIDER_TYPE = [
     {
@@ -40,82 +41,77 @@ export default function EditMiniGalleryForm({
     }
   ];
 
-  const { languageId } = useGlobalState();
   const [translationSelected, setTranslationSelected] = useState<number>(
-    Number(Object.keys(editGalleryData[1])[0])
+    SITE_CONFIG.LANG.DEFAULT_ID
   );
   const [langId, setLangId] = useState(0);
 
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
-      Yup.lazy((value) => {
-        const languageMapShape: Record<string, Yup.ArraySchema<any>> = {};
+      Yup.object().shape({
+        translations: Yup.lazy((value) => {
+          const shape: Record<string, any> = {};
 
-        for (const langId in value || {}) {
-          languageMapShape[langId] = Yup.array().of(
-            Yup.object().shape({
+          for (const langId in value || {}) {
+            shape[langId] = Yup.object().shape({
               title: Yup.string().required("Title is required"),
-              isVertical: Yup.boolean(),
-              slidesPerView: Yup.string(),
-              isActive: Yup.boolean()
-            })
-          );
-        }
+              languageId: Yup.number()
+            });
+          }
 
-        return Yup.object().shape(languageMapShape);
+          return Yup.object().shape(shape);
+        }),
+        isActive: Yup.boolean(),
+        isVertical: Yup.boolean(),
+        slidesPerView: Yup.string()
       })
     ),
-    defaultValues: Object.entries(editGalleryData[1]).reduce((acc, [langId, configs]) => {
-      acc[langId] = (configs as any[]).map((config) => ({
-        ...config,
-        isVertical: config.isVertical.toString()
-      }));
-      return acc;
-    }, {})
+    defaultValues: {
+      isActive,
+      isVertical: isVertical.toString(),
+      slidesPerView,
+      translations: Object.fromEntries(translations.map((item) => [Number(item.languageId), item])),
+      id,
+      title,
+      languageId,
+      galleryId,
+      ugId
+    }
   });
 
-  if (Object.keys(hForm.getValues()).includes(languageId)) {
+  /*if (hForm.getValues().translations?.[languageId]) {
     setTranslationSelected(languageId);
-  }
+  }*/
 
   const handleAddTranslation = () => {
-    hForm.setValue(`${langId}`, [
-      {
-        galleryId: hForm.getValues()[translationSelected][0].galleryId,
-        id: null,
-        isActive: hForm.getValues()[translationSelected][0].isActive,
-        isVertical: hForm.getValues()[translationSelected][0].isVertical,
-        languageId: langId,
-        slidesPerView: hForm.getValues()[translationSelected][0].slidesPerView,
-        title: "",
-        ugId: hForm.getValues()[translationSelected][0].ugId
-      }
-    ]);
+    hForm.setValue(`translations.${langId}`, {
+      id: null,
+      title: "",
+      languageId: langId
+    });
     setTranslationSelected(langId);
   };
 
   const handleFormSubmit = async (value) => {
-    const payload = Object.fromEntries(
-      Object.entries(value).map(([langId, items]) => [
-        langId,
-        (items as any[]).map((item) => ({
-          ...item,
-          slidesPerView: Number(item.slidesPerView),
-          isVertical: Boolean(item.isVertical)
-        }))
-      ])
-    );
+    const payload = {
+      ...value,
+      slidesPerView: Number(value.slidesPerView),
+      isVertical: Boolean(value.isVertical),
+      translations: Object.values(value.translations),
+    };
     const { success, data } =
       groupId == -1
-        ? await axEditMiniGallery(editGalleryData[0], payload)
-        : await axEditMiniGroupGallery(groupId, editGalleryData[0], payload);
+        ? await axEditMiniGallery(editGalleryData.galleryId, payload)
+        : await axEditMiniGroupGallery(groupId, editGalleryData.galleryId, payload);
     if (success) {
       notification(
         t("group:homepage_customization.mini_gallery_setup.edit_success"),
         NotificationType.Success
       );
-      miniGalleryList[index] = Object.entries(data)[0];
+      const gallerySlider = miniGalleryList[index].gallerySlider
+      miniGalleryList[index] = data;
+      miniGalleryList[index].gallerySlider = gallerySlider
       setMiniGalleryList(miniGalleryList);
       setIsEdit(false);
     } else {
@@ -136,7 +132,7 @@ export default function EditMiniGalleryForm({
           </Button>
         </Box>
         <TranslationTab
-          values={Object.keys(hForm.getValues())}
+          values={Object.keys(hForm.getValues().translations)}
           setLangId={setLangId}
           languages={languages}
           handleAddTranslation={handleAddTranslation}
@@ -147,62 +143,32 @@ export default function EditMiniGalleryForm({
           <Box m={3}>
             <TextBoxField
               key={`title-${translationSelected}`}
-              name={`${translationSelected}.0.title`}
+              name={`translations.${translationSelected}.title`}
               isRequired={true}
               label={
                 translationSelected != SITE_CONFIG.LANG.DEFAULT_ID
-                  ? hForm.getValues()[SITE_CONFIG.LANG.DEFAULT_ID][0].title
+                  ? hForm.getValues().translations[SITE_CONFIG.LANG.DEFAULT_ID].title
                   : t("group:homepage_customization.resources.title")
               }
             />
             <RadioInputField
-              key={`isVertical-${translationSelected}`}
-              name={`${translationSelected}.0.isVertical`}
+              key={`isVertical`}
+              name={`isVertical`}
               label={t("group:homepage_customization.mini_gallery_setup.vertical_label")}
               options={SLIDER_TYPE}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-              onChangeCallback={(e) => {
-                const values = hForm.getValues();
-
-                for (const langId in values) {
-                  const entry = values[langId]?.[0];
-                  if (entry) {
-                    hForm.setValue(`${langId}.0.isVertical`, e);
-                  }
-                }
-              }}
             />
             <SwitchField
-              key={`isActive-${translationSelected}`}
-              name={`${translationSelected}.0.isActive`}
+              key={`isActive`}
+              name={`isActive`}
               label={t("group:homepage_customization.mini_gallery_setup.active_label")}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-              onChangeCallback={(e) => {
-                const values = hForm.getValues();
-
-                for (const langId in values) {
-                  const entry = values[langId]?.[0];
-                  if (entry) {
-                    hForm.setValue(`${langId}.0.isActive`, e);
-                  }
-                }
-              }}
             />
             <NumberInputField
-              key={`slidesPerView-${translationSelected}`}
-              name={`${translationSelected}.0.slidesPerView`}
+              key={`slidesPerView`}
+              name={`slidesPerView`}
               label={t("group:homepage_customization.mini_gallery_setup.slides_per_view")}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-              onChangeCallback={(e) => {
-                const values = hForm.getValues();
-
-                for (const langId in values) {
-                  const entry = values[langId]?.[0];
-                  if (entry) {
-                    hForm.setValue(`${langId}.0.slidesPerView`, e);
-                  }
-                }
-              }}
             />
             <SubmitButton>{t("common:update")}</SubmitButton>
           </Box>

@@ -20,28 +20,13 @@ export default function HomePageGalleryCustomizationForm({
 }) {
   const { t } = useTranslation();
   const [galleryList, setGalleryList] = useState(
-    Object.entries(homePageDetails?.gallerySlider || {}).sort((a, b) => {
-      const aOrder = parseInt(a[0].split("|")[1], 10);
-      const bOrder = parseInt(b[0].split("|")[1], 10);
-      return aOrder - bOrder;
-    })
+    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
   );
-
-  const updatedMiniGallery = homePageDetails?.miniGallerySlider.map((item) => {
-    const sortedGallerySlider = Object.entries(item || {}).sort((a, b) => {
-      const aOrder = parseInt(a[0].split("|")[1], 10);
-      const bOrder = parseInt(b[0].split("|")[1], 10);
-      return aOrder - bOrder;
-    });
-
-    return sortedGallerySlider;
-  });
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [miniGalleryList, setMiniGalleryList] = useState(
-    Object.entries(homePageDetails?.miniGallery)
+    homePageDetails?.miniGallery
   );
-  const [miniGallerySliderList, setMiniGallerySliderList] = useState(updatedMiniGallery);
 
   const {
     gallerySlider,
@@ -75,43 +60,23 @@ export default function HomePageGalleryCustomizationForm({
   const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
       gallerySlider: galleryList.reduce((acc, item, index) => {
-        const sliderId = item[0].split("|")[0];
-        const languageMap = item[1] as Record<number, any[]>;
-
-        if (sliderId === "null") {
-          for (const langId in languageMap) {
-            languageMap[langId] = languageMap[langId].map((entry) => ({
-              ...entry,
-              displayOrder: index
-            }));
-          }
-          acc[`null|${index}`] = languageMap;
+        if (!item.id) {
+          acc.push({ displayOrder: index, ...item, translations:Object.values(item.translations) });
         }
-
         return acc;
-      }, {}),
-
-      miniGallerySlider: miniGallerySliderList.map((item) => {
-        const updatedGallerySlider = item.reduce((acc: any, item: any, index: number) => {
-          const sliderId = item[0].split("|")[0];
-          const languageMap = item[1] as Record<number, any[]>;
-
-          if (sliderId === "null") {
-            for (const langId in languageMap) {
-              languageMap[langId] = languageMap[langId].map((entry) => ({
-                ...entry,
-                displayOrder: index
-              }));
+      }, []),
+      miniGallery: miniGalleryList.map((item) => {
+        const updatedGallerySlider = item.gallerySlider.reduce(
+          (acc: any[], galleryItem: any, index: number) => {
+            if (!galleryItem.id) {
+              acc.push({ displayOrder: index, ...galleryItem, translations:Object.values(galleryItem.translations) });
             }
-            acc[`null|${index}`] = languageMap;
-          }
-
-          return acc;
-        }, {});
-
-        return updatedGallerySlider;
+            return acc;
+          },
+          []
+        );
+        return {gallerySlider: updatedGallerySlider};
       }),
-
       ...value
     };
     const { success, data } = await axInsertHomePageGallery(payload);
@@ -123,16 +88,7 @@ export default function HomePageGalleryCustomizationForm({
           return aOrder - bOrder;
         })
       );
-      const updatedMiniGallery = data?.miniGallerySlider.map((item) => {
-        const sortedGallerySlider = Object.entries(item || {}).sort((a, b) => {
-          const aOrder = parseInt(a[0].split("|")[1], 10);
-          const bOrder = parseInt(b[0].split("|")[1], 10);
-          return aOrder - bOrder;
-        });
-
-        return sortedGallerySlider;
-      });
-      setMiniGallerySliderList(updatedMiniGallery);
+      setMiniGalleryList(data?.miniGallery)
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
@@ -193,8 +149,6 @@ export default function HomePageGalleryCustomizationForm({
           miniGallery={miniGalleryList}
           setMiniGallery={setMiniGalleryList}
           languages={languages}
-          sliderList={miniGallerySliderList}
-          setSliderList={setMiniGallerySliderList}
           handleFormSubmit = {hForm.handleSubmit(handleFormSubmit)}
         />
       )}

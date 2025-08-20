@@ -22,29 +22,14 @@ export async function getServerSideProps(ctx) {
         currentGroup?.groupId,
         getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
       )
-    : await axGetHomeInfo();
-
-  const updatedMiniGallery = homeInfo?.miniGallerySlider?.map((item) => {
-    const sortedGallerySlider = Object.entries(item).sort((a, b) => {
-      const aOrder = parseInt(a[0].split("|")[1], 10);
-      const bOrder = parseInt(b[0].split("|")[1], 10);
-      return aOrder - bOrder;
-    });
-
-    return sortedGallerySlider;
-  });
+    : await axGetHomeInfo(getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
 
   return {
     props: {
       homeInfo: {
         ...homeInfo,
-        gallerySlider: Object.entries(homeInfo.gallerySlider || {}).sort((a, b) => {
-          const aOrder = parseInt(a[0].split("|")[1], 10);
-          const bOrder = parseInt(b[0].split("|")[1], 10);
-          return aOrder - bOrder;
-        }),
-        miniGallerySlider: updatedMiniGallery,
-        miniGallery: Object.entries(homeInfo?.miniGallery)
+        gallerySlider: homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder),
+        miniGallery: homeInfo?.miniGallery
       }
     }
   };

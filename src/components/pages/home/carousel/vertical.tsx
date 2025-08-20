@@ -11,8 +11,6 @@ import {
   Image,
   Text
 } from "@chakra-ui/react";
-import { LANG } from "@configs/site-config";
-import useGlobalState from "@hooks/use-global-state";
 import { useKeenSlider } from "keen-slider/react";
 import React, { useState } from "react";
 import { LuArrowDown, LuArrowRight, LuArrowUp } from "react-icons/lu";
@@ -22,7 +20,6 @@ import { getResourceThumbnail, RESOURCE_CTX } from "@/utils/media";
 
 export default function VerticalCarousel({ featured, slidesPerView }) {
   const [, setCurrentSlide] = useState(0);
-  const { languageId } = useGlobalState();
   const [sliderLoaded, setSliderLoaded] = useState(false);
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
@@ -91,7 +88,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
         h={featured.length > slidesPerView ? 100 * slidesPerView : 100 * featured.length}
       >
         {featured.map((o, index) => {
-          const resource = o[1]?.[languageId]?.[0] || o[1]?.[LANG.DEFAULT_ID]?.[0];
+          const resource = o;
           const resourceType = resource.authorId
             ? RESOURCE_CTX.OBSERVATION
             : RESOURCE_CTX.USERGROUPS;

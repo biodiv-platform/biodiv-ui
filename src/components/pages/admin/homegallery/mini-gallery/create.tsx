@@ -22,8 +22,6 @@ export default function CreateMiniGalleryForm({
   miniGalleryList,
   setMiniGalleryList,
   languages,
-  sliderList,
-  setSliderList,
   setOpenIndex,
   groupId,
   mode
@@ -48,45 +46,45 @@ export default function CreateMiniGalleryForm({
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
-      Yup.lazy((value) => {
-        const languageMapShape: Record<string, Yup.ArraySchema<any>> = {};
+      Yup.object().shape({
+        translations: Yup.lazy((value) => {
+          const languageMapShape: Record<string, any> = {};
 
-        for (const langId in value || {}) {
-          languageMapShape[langId] = Yup.array().of(
-            Yup.object().shape({
+          for (const langId in value || {}) {
+            languageMapShape[langId] = Yup.object().shape({
               title: Yup.string().required("Title is required"),
-              isVertical: Yup.boolean(),
-              slidesPerView: Yup.string()
-            })
-          );
-        }
+              languageId: Yup.number()
+            });
+          }
 
-        return Yup.object().shape(languageMapShape);
+          return Yup.object().shape(languageMapShape);
+        }),
+        isVertical: Yup.boolean(),
+        slidesPerView: Yup.string()
       })
     ),
     defaultValues: {
-      [SITE_CONFIG.LANG.DEFAULT_ID]: [
-        {
-          isVertical: "false",
-          slidesPerView: 3,
-          languageId: languageId
-        }
-      ]
+      translations: {
+        [SITE_CONFIG.LANG.DEFAULT_ID]:
+          {
+            languageId: SITE_CONFIG.LANG.DEFAULT_ID,
+            title: "",
+            id: null
+          }
+      },
+      isVertical: "false",
+      slidesPerView: 3,
+      languageId: languageId
     }
   });
 
   const handleFormSubmit = async (value) => {
-    const payload = Object.fromEntries(
-      Object.entries(value).map(([langId, items]) => [
-        langId,
-        (items as any[]).map((item) => ({
-          ...item,
-          slidesPerView: Number(item.slidesPerView),
-          isVertical: Boolean(item.isVertical),
-          isActive: true
-        }))
-      ])
-    );
+    const payload = {
+      ...value,
+      slidesPerView: Number(value.slidesPerView),
+      isVertical: Boolean(value.isVertical),
+      translations: Object.values(value.translations)
+    };;
     if (mode == "edit") {
       const { success, data } =
         groupId == -1
@@ -98,8 +96,8 @@ export default function CreateMiniGalleryForm({
           NotificationType.Success
         );
         setOpenIndex(miniGalleryList.length);
-        setMiniGalleryList([...miniGalleryList, ...Object.entries(data)]);
-        setSliderList([...sliderList, []]);
+        data.gallerySlider=[];
+        setMiniGalleryList([...miniGalleryList, data]);
         setIsCreate(false);
       } else {
         notification(
@@ -113,21 +111,17 @@ export default function CreateMiniGalleryForm({
         NotificationType.Success
       );
       setOpenIndex(miniGalleryList.length);
-      setMiniGalleryList([...miniGalleryList, [null,payload]]);
-      setSliderList([...sliderList, []]);
+      setMiniGalleryList([...miniGalleryList, [null, payload]]);
       setIsCreate(false);
     }
   };
 
   const handleAddTranslation = () => {
-    hForm.setValue(`${langId}`, [
-      {
-        isVertical: hForm.getValues()[translationSelected][0].isVertical,
-        languageId: langId,
-        slidesPerView: hForm.getValues()[translationSelected][0].slidesPerView,
-        title: ""
-      }
-    ]);
+    hForm.setValue(`translations.${langId}`, {
+      id: null,
+      title: "",
+      languageId: langId
+    });
     setTranslationSelected(langId);
   };
 
@@ -141,7 +135,7 @@ export default function CreateMiniGalleryForm({
           </Button>
         </Box>
         <TranslationTab
-          values={Object.keys(hForm.getValues())}
+          values={Object.keys(hForm.getValues().translations)}
           setLangId={setLangId}
           languages={languages}
           handleAddTranslation={handleAddTranslation}
@@ -152,46 +146,26 @@ export default function CreateMiniGalleryForm({
           <Box m={3}>
             <TextBoxField
               key={`title-${translationSelected}`}
-              name={`${translationSelected}.0.title`}
+              name={`translations.${translationSelected}.title`}
               isRequired={true}
               label={
                 translationSelected != SITE_CONFIG.LANG.DEFAULT_ID
-                  ? hForm.getValues()[SITE_CONFIG.LANG.DEFAULT_ID][0].title
+                  ? hForm.getValues().translations[SITE_CONFIG.LANG.DEFAULT_ID].title
                   : t("group:homepage_customization.resources.title")
               }
             />
             <RadioInputField
-              key={`isVertical-${translationSelected}`}
-              name={`${translationSelected}.0.isVertical`}
+              key={`isVertical`}
+              name={`isVertical`}
               label={t("group:homepage_customization.mini_gallery_setup.vertical_label")}
               options={SLIDER_TYPE}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-              onChangeCallback={(e) => {
-                const values = hForm.getValues();
-
-                for (const langId in values) {
-                  const entry = values[langId]?.[0];
-                  if (entry) {
-                    hForm.setValue(`${langId}.0.isVertical`, e);
-                  }
-                }
-              }}
             />
             <NumberInputField
-              key={`slidesPerView-${translationSelected}`}
-              name={`${translationSelected}.0.slidesPerView`}
+              key={`slidesPerView`}
+              name={`slidesPerView`}
               label={t("group:homepage_customization.mini_gallery_setup.slides_per_view")}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-              onChangeCallback={(e) => {
-                const values = hForm.getValues();
-
-                for (const langId in values) {
-                  const entry = values[langId]?.[0];
-                  if (entry) {
-                    hForm.setValue(`${langId}.0.slidesPerView`, e);
-                  }
-                }
-              }}
             />
             <SubmitButton>
               {t("group:homepage_customization.mini_gallery_setup.create")}
