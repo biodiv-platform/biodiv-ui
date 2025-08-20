@@ -145,7 +145,7 @@ export default function CreateGroupPageComponent({
   const [, setIsEdit] = useState(false);
   const [galleryList, setGalleryList] = useState<GallerySlider[]>([]);
   const [miniGalleryList, setMiniGalleryList] = useState([]);
-  const [miniGallerySliderList, setMiniGallerySliderList] = useState<any[]>([]);
+  const [miniGallerySliderList] = useState<any[]>([]);
   const [, setEditGalleryData] = useState([]);
   const [customFields, setCustomFields] = useState<
     {
@@ -690,8 +690,6 @@ export default function CreateGroupPageComponent({
             miniGallery={miniGalleryList}
             setMiniGallery={setMiniGalleryList}
             languages={languages}
-            sliderList={miniGallerySliderList}
-            setSliderList={setMiniGallerySliderList}
             handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
             mode={"create"}
           />
