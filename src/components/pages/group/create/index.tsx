@@ -146,7 +146,7 @@ export default function CreateGroupPageComponent({
   const [galleryList, setGalleryList] = useState<GallerySlider[]>(
     []
   );
-  const [miniGalleryList, setMiniGalleryList] = useState(
+  const [miniGalleryList, setMiniGalleryList] = useState<any []>(
     []
   );
   const [, setEditGalleryData] = useState([]);
@@ -257,7 +257,12 @@ export default function CreateGroupPageComponent({
       const miniGalleryIds: string[] = [];
       for (const miniGallery of miniGalleryList) {
         const { success: miniGallery_success, data: mini } = await axCreateMiniGroupGallery(
-          miniGallery[1],
+          {
+            ...miniGallery,
+            slidesPerView: Number(miniGallery.slidesPerView),
+            isVertical: Boolean(miniGallery.isVertical),
+            translations: Object.values(miniGallery.translations)
+          },
           data.id
         );
         miniGallery_overall_success = miniGallery_success;

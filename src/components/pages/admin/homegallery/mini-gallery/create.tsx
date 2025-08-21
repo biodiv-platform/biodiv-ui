@@ -84,7 +84,7 @@ export default function CreateMiniGalleryForm({
       slidesPerView: Number(value.slidesPerView),
       isVertical: Boolean(value.isVertical),
       translations: Object.values(value.translations)
-    };;
+    };
     if (mode == "edit") {
       const { success, data } =
         groupId == -1
