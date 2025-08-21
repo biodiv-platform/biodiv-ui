@@ -14,7 +14,6 @@ interface ITextBoxProps {
   disabled?: boolean;
   color?: string;
   hint?: string;
-  onChangeCallback?;
 }
 
 export const SwitchField = ({
@@ -25,7 +24,6 @@ export const SwitchField = ({
   color = "blue",
   hint,
   disabled,
-  onChangeCallback,
   ...props
 }: ITextBoxProps) => {
   const { field, fieldState } = useController({ name });
@@ -36,10 +34,7 @@ export const SwitchField = ({
         <Field htmlFor={name} label={label} />
         <Switch
           onBlur={field.onBlur}
-          onChange={(e) => {
-            field.onChange(e.target["checked"]);
-            onChangeCallback && onChangeCallback(e.target["checked"]);
-          }}
+          onChange={(e) => field.onChange(e.target["checked"])}
           defaultChecked={field.value}
           disabled={disabled}
           colorPalette={color}

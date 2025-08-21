@@ -80,10 +80,6 @@ export default function EditMiniGalleryForm({
     }
   });
 
-  /*if (hForm.getValues().translations?.[languageId]) {
-    setTranslationSelected(languageId);
-  }*/
-
   const handleAddTranslation = () => {
     hForm.setValue(`translations.${langId}`, {
       id: null,

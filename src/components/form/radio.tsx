@@ -13,7 +13,6 @@ interface IRadioProps {
   options?: any[];
   isInline?: boolean;
   colorPalette?: string;
-  onChangeCallback?;
   disabled?: boolean;
 }
 
@@ -26,7 +25,6 @@ export const RadioInputField = ({
   isInline = true,
   colorPalette = "blue",
   options = [],
-  onChangeCallback,
   ...props
 }: IRadioProps) => {
   const { field, fieldState } = useController({ name });
@@ -42,12 +40,6 @@ export const RadioInputField = ({
       <RadioGroup
         key={name}
         {...field}
-        onChange={(e) => {
-          const target = e.target as HTMLInputElement;
-          const value = target.value;
-          field.onChange(value);
-          onChangeCallback && onChangeCallback(value);
-        }}
         disabled = {disabled}
       >
         <Stack direction={isInline ? "row" : "column"} py={2}>

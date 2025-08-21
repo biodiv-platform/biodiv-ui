@@ -111,7 +111,8 @@ export default function CreateMiniGalleryForm({
         NotificationType.Success
       );
       setOpenIndex(miniGalleryList.length);
-      setMiniGalleryList([...miniGalleryList, [null, payload]]);
+      payload.gallerySlider=[];
+      setMiniGalleryList([...miniGalleryList, payload]);
       setIsCreate(false);
     }
   };

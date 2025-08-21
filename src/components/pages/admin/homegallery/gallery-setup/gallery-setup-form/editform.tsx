@@ -111,10 +111,6 @@ export default function GalleryEditForm({
     }
   });
 
-  /*if (Object.keys(hForm.getValues()).includes(languageId)) {
-    setTranslationSelected(languageId);
-  }*/
-
   const handleAddTranslation = () => {
     hForm.setValue(`translations.${langId}`, {
       id: null,
@@ -142,8 +138,8 @@ export default function GalleryEditForm({
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
       setGalleryList(
         galleryId == -1
-          ? data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
-          : data?.miniGallery[index].gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+          ? data.gallerySlider
+          : data.miniGallery[index].gallerySlider
       );
       setIsEdit(false);
     } else {
@@ -178,19 +174,14 @@ export default function GalleryEditForm({
               : t("group:homepage_customization.resources.title")
           }
         />
-        <TextBoxField
-          key={`moreLinks`}
-          name={`moreLinks`}
-          label={t("group:homepage_customization.resources.link")}
-          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-        />
-        {hForm.getValues().observationId ? (
+        <TextBoxField name="moreLinks" label={t("group:homepage_customization.resources.link")} disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}/>
+        {observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>
             <Image
               src={getResourceThumbnail(
                 RESOURCE_CTX.OBSERVATION,
-                hForm.getValues().fileName,
+                fileName,
                 RESOURCE_SIZE.LIST_THUMBNAIL
               )}
             />
@@ -198,7 +189,7 @@ export default function GalleryEditForm({
         ) : (
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
-            name={`fileName`}
+            name="fileName"
             disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
           />
         )}
@@ -216,8 +207,7 @@ export default function GalleryEditForm({
         />
 
         <SelectInputField
-          key={`readMoreUIType`}
-          name={`readMoreUIType`}
+          name="readMoreUIType"
           label={t("group:homepage_customization.resources.read_more_ui")}
           options={readMoreUIOptions}
           shouldPortal={true}
@@ -226,8 +216,7 @@ export default function GalleryEditForm({
 
         {galleryId == -1 && (
           <SelectInputField
-            key={`gallerySidebar`}
-            name={`gallerySidebar`}
+            name="gallerySidebar"
             label={t("group:homepage_customization.resources.gallery_sidebar")}
             options={gallerySidebarBackgroundOptions}
             shouldPortal={true}
@@ -300,8 +289,7 @@ export default function GalleryEditForm({
         )}
 
         <CheckboxField
-          key={`truncated`}
-          name={`truncated`}
+          name="truncated"
           label={t("group:homepage_customization.table.enabled")}
           disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
         />

@@ -10,10 +10,12 @@ import {
   Heading,
   IconButton
 } from "@chakra-ui/react";
+import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 
 import GallerySetupFrom from "@/components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form";
+import useGlobalState from "@/hooks/use-global-state";
 import DeleteIcon from "@/icons/delete";
 import EditIcon from "@/icons/edit";
 import { axRemoveMiniGroupGallery } from "@/services/usergroup.service";
@@ -35,8 +37,7 @@ export default function MiniGroupGalleryItem({
   groupId
 }) {
   const { t } = useTranslation();
-
-
+  const { languageId } = useGlobalState();
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editData, setEditData] = useState(item.gallerySlider);
@@ -84,7 +85,16 @@ export default function MiniGroupGalleryItem({
           <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pl={4} pr={4}>
             <Flex flex={1} align="center" justify="space-between">
               <Heading as="h2" fontSize="1.2rem">
-                {`${item.title} Setup`}
+                {(() => {
+                  const translationsMap = Object.fromEntries(
+                    item.translations.map((t) => [Number(t.languageId), t])
+                  );
+
+                  return `${
+                    translationsMap?.[languageId]?.title ||
+                    translationsMap?.[SITE_CONFIG.LANG.DEFAULT_ID]?.title
+                  } Setup`;
+                })()}
                 <Badge colorPalette={item.isActive ? "blue" : "red"} ml={2}>
                   {item.isActive ? "ACTIVE" : "INACTIVE"}
                 </Badge>

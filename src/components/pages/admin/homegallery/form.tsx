@@ -20,13 +20,11 @@ export default function HomePageGalleryCustomizationForm({
 }) {
   const { t } = useTranslation();
   const [galleryList, setGalleryList] = useState(
-    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
   );
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [miniGalleryList, setMiniGalleryList] = useState(
-    homePageDetails?.miniGallery
-  );
+  const [miniGalleryList, setMiniGalleryList] = useState(homePageDetails?.miniGallery);
 
   const {
     gallerySlider,
@@ -59,36 +57,38 @@ export default function HomePageGalleryCustomizationForm({
 
   const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
-      gallerySlider: galleryList.reduce((acc, item, index) => {
-        if (!item.id) {
-          acc.push({ displayOrder: index, ...item, translations:Object.values(item.translations) });
-        }
-        return acc;
-      }, []),
+      gallerySlider: galleryList.reduce(
+        (acc, item, index) =>
+          item.id
+            ? acc
+            : [
+                ...acc,
+                { ...item, displayOrder: index, translations: Object.values(item.translations) }
+              ],
+        []
+      ),
       miniGallery: miniGalleryList.map((item) => {
         const updatedGallerySlider = item.gallerySlider.reduce(
           (acc: any[], galleryItem: any, index: number) => {
             if (!galleryItem.id) {
-              acc.push({ displayOrder: index, ...galleryItem, translations:Object.values(galleryItem.translations) });
+              acc.push({
+                displayOrder: index,
+                ...galleryItem,
+                translations: Object.values(galleryItem.translations)
+              });
             }
             return acc;
           },
           []
         );
-        return {gallerySlider: updatedGallerySlider};
+        return { gallerySlider: updatedGallerySlider };
       }),
       ...value
     };
     const { success, data } = await axInsertHomePageGallery(payload);
     if (success) {
-      setGalleryList(
-        Object.entries(data.gallerySlider || {}).sort((a, b) => {
-          const aOrder = parseInt(a[0].split("|")[1], 10);
-          const bOrder = parseInt(b[0].split("|")[1], 10);
-          return aOrder - bOrder;
-        })
-      );
-      setMiniGalleryList(data?.miniGallery)
+      setGalleryList(data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder));
+      setMiniGalleryList(data?.miniGallery);
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);
@@ -149,7 +149,7 @@ export default function HomePageGalleryCustomizationForm({
           miniGallery={miniGalleryList}
           setMiniGallery={setMiniGalleryList}
           languages={languages}
-          handleFormSubmit = {hForm.handleSubmit(handleFormSubmit)}
+          handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
         />
       )}
       {currentStep != "group:homepage_customization.mini_gallery_setup.title" && (

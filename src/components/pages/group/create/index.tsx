@@ -143,9 +143,12 @@ export default function CreateGroupPageComponent({
   const [currentStep, setCurrentStep] = useState(0);
   const [isCreate, setIsCreate] = useState(false);
   const [, setIsEdit] = useState(false);
-  const [galleryList, setGalleryList] = useState<GallerySlider[]>([]);
-  const [miniGalleryList, setMiniGalleryList] = useState([]);
-  const [miniGallerySliderList] = useState<any[]>([]);
+  const [galleryList, setGalleryList] = useState<GallerySlider[]>(
+    []
+  );
+  const [miniGalleryList, setMiniGalleryList] = useState(
+    []
+  );
   const [, setEditGalleryData] = useState([]);
   const [customFields, setCustomFields] = useState<
     {
@@ -268,44 +271,23 @@ export default function CreateGroupPageComponent({
         notification("Successfully created miniGalleries", NotificationType.Success);
       }
       const gallerypaylpad = {
-        gallerySlider: galleryList.reduce<Record<number, any[]>[]>((acc, item, index) => {
-          const sliderId = item[0].split("|")[0];
-          const languageMap = item[1] as Record<number, any[]>;
-
-          if (sliderId === "null") {
-            for (const langId in languageMap) {
-              languageMap[langId] = languageMap[langId].map((entry) => ({
-                ...entry,
-                ugId: data.id,
-                displayOrder: index
-              }));
-            }
-            acc.push(languageMap);
+        gallerySlider: galleryList.reduce<any[]>((acc, item, index) => {
+          if (!item.id) {
+            acc.push({ displayOrder: index, ...item, translations:Object.values(item.translations) });
           }
-
           return acc;
         }, []),
-        miniGallerySlider: miniGallerySliderList.map((item, i) => {
-          const updatedGallerySlider = item.reduce((acc: any, item: any, index: number) => {
-            const sliderId = item[0].split("|")[0];
-            const languageMap = item[1] as Record<number, any[]>;
-
-            if (sliderId === "null") {
-              for (const langId in languageMap) {
-                languageMap[langId] = languageMap[langId].map((entry) => ({
-                  ...entry,
-                  ugId: data.id,
-                  displayOrder: index,
-                  galleryId: miniGalleryIds[i]
-                }));
+        miniGallery: (miniGalleryList as any[]).map((item, i) => {
+          const updatedGallerySlider = item.gallerySlider.reduce(
+            (acc: any[], galleryItem: any, index: number) => {
+              if (!galleryItem.id) {
+                acc.push({ displayOrder: index, ...galleryItem, translations:Object.values(galleryItem.translations), galleryId:miniGalleryIds[i] });
               }
-              acc[`null|${index}`] = languageMap;
-            }
-
-            return acc;
-          }, {});
-
-          return updatedGallerySlider;
+              return acc;
+            },
+            []
+          );
+          return {gallerySlider: updatedGallerySlider};
         }),
         showDesc,
         showGallery,

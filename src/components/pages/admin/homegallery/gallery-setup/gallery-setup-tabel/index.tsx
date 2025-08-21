@@ -37,8 +37,8 @@ const GallerySetupTable = ({
   };
 
   const handleReorderCustomField = async () => {
-    const payload = galleryList.map((id, index) => ({
-      galleryId: Number(id.sliderId),
+    const payload = galleryList.map((galleryItem, index) => ({
+      galleryId: Number(galleryItem.sliderId),
       displayOrder: index
     }));
 

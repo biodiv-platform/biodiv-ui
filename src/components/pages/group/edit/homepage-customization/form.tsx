@@ -20,10 +20,10 @@ export default function HomePageCustomizationForm({
 }) {
   const { t } = useTranslation();
   const [galleryList, setGalleryList] = useState(
-    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+    homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
   );
   const [miniGalleryList, setMiniGalleryList] = useState(
-    homePageDetails?.miniGallery
+    homePageDetails?.miniGallery || []
   );
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -68,7 +68,7 @@ export default function HomePageCustomizationForm({
     const payload = {
       gallerySlider: galleryList.reduce((acc, item, index) => {
         if (!item.id) {
-          acc.push({ displayOrder: index, ...item, translations:Object.values(item.translations) });
+          acc.push({ugId: userGroupId, displayOrder: index, ...item, translations:Object.values(item.translations) });
         }
         return acc;
       }, []),
@@ -76,7 +76,7 @@ export default function HomePageCustomizationForm({
         const updatedGallerySlider = item.gallerySlider.reduce(
           (acc: any[], galleryItem: any, index: number) => {
             if (!galleryItem.id) {
-              acc.push({ displayOrder: index, ...galleryItem, translations:Object.values(galleryItem.translations) });
+              acc.push({ugId: userGroupId, displayOrder: index, ...galleryItem, translations:Object.values(galleryItem.translations) });
             }
             return acc;
           },
@@ -90,11 +90,7 @@ export default function HomePageCustomizationForm({
     const { success, data } = await axUpdateGroupHomePageDetails(userGroupId, payload);
     if (success) {
       setGalleryList(
-        Object.entries(data.gallerySlider || {}).sort((a, b) => {
-          const aOrder = parseInt(a[0].split("|")[1], 10);
-          const bOrder = parseInt(b[0].split("|")[1], 10);
-          return aOrder - bOrder;
-        })
+        data?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
       );
       setMiniGalleryList(data?.miniGallery)
       notification(t("group:homepage_customization.success"), NotificationType.Success);

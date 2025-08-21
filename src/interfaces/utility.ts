@@ -41,6 +41,7 @@ export interface GallerySlider {
   title?: string;
   customDescripition?: string;
   moreLinks?: string;
+  translations?
 }
 export interface Habitat {
   id?: number; // int64

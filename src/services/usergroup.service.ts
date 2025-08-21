@@ -435,7 +435,7 @@ export const axUpdateGroupHomePageDetails = async (userGroupId, payload) => {
 export const axRemoveGroupHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
     await http.put(
-      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${Number(galleryList[index][0].split("|")[0])}`
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${Number(galleryList[index].sliderId)}`
     );
     const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
     if (payload.length > 1) {
@@ -452,7 +452,7 @@ export const axRemoveGroupHomePageGalleryImage = async (userGroupId, galleryList
 export const axRemoveMiniGroupHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
     await http.put(
-      `${ENDPOINT.USERGROUP}/v1/group/homePage/miniSlider/remove/${userGroupId}/${Number(galleryList[index][0].split("|")[0])}`
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/miniSlider/remove/${userGroupId}/${Number(galleryList[index].sliderId)}`
     );
     const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
     if (payload.length > 1) {

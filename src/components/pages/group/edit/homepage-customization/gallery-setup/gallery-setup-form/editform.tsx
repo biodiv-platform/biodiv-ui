@@ -112,13 +112,9 @@ export default function GalleryEditForm({
 
   const imgUrl = getResourceThumbnail(
     RESOURCE_CTX.OBSERVATION,
-    editGalleryData.fileName,
+    fileName,
     RESOURCE_SIZE.LIST_THUMBNAIL
   );
-
-  /*if (Object.keys(hForm.getValues()).includes(languageId)) {
-    setTranslationSelected(languageId);
-  }*/
 
   const handleAddTranslation = () => {
     setTranslationSelected(langId);
@@ -156,8 +152,8 @@ export default function GalleryEditForm({
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
       setGalleryList(
         galleryId == -1
-          ? data.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
-          : data?.miniGallery[index].gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+          ? data.gallerySlider
+          : data.miniGallery[index].gallerySlider
       );
       setIsEdit(false);
     } else {
@@ -192,12 +188,11 @@ export default function GalleryEditForm({
           }
         />
         <TextBoxField
-          key={`links`}
-          name={`moreLinks`}
+          name="moreLinks"
           label={t("group:homepage_customization.resources.link")}
           disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
         />
-        {hForm.getValues().observationId ? (
+        {observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>
             <Image src={imgUrl} />
@@ -205,7 +200,7 @@ export default function GalleryEditForm({
         ) : (
           <ImageUploaderField
             label={t("group:homepage_customization.resources.imageurl")}
-            name={`fileName`}
+            name="fileName"
             disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
           />
         )}
@@ -223,8 +218,7 @@ export default function GalleryEditForm({
         />
 
         <SelectInputField
-          key={`readmoreui`}
-          name={`readMoreUIType`}
+          name={"readMoreUIType"}
           label={t("group:homepage_customization.resources.read_more_ui")}
           options={readMoreUIOptions}
           shouldPortal={true}
@@ -233,8 +227,7 @@ export default function GalleryEditForm({
 
         {galleryId == -1 && (
           <SelectInputField
-            key={`sidebar`}
-            name={`gallerySidebar`}
+            name="gallerySidebar"
             label={t("group:homepage_customization.resources.gallery_sidebar")}
             options={gallerySidebarBackgroundOptions}
             shouldPortal={true}

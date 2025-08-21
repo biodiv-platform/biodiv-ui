@@ -1,5 +1,6 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
+import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationById } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -13,7 +14,7 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
   const { t } = useTranslation();
 
   const handleObservationLink = async () => {
-    const observationId = form.getValues(`${translation}.0.observationId`);
+    const observationId = form.getValues("observationId");
     const {
       success,
       data: { recoIbp, authorInfo, observationResource }
@@ -37,8 +38,7 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
     <>
       <Flex mb={4} alignItems="flex-end">
         <TextBoxField
-          key={`observationId`}
-          name={`observationId`}
+          name="observationId"
           isRequired={true}
           mb={0}
           label={t("group:homepage_customization.resources.obs_id")}
@@ -56,15 +56,15 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
             label={t("group:homepage_customization.resources.title")}
           />
           <TextBoxField
-            key={`moreLinks`}
-            name={`moreLinks`}
+            name="moreLinks"
             isRequired={true}
             label={t("group:homepage_customization.resources.link")}
+            disabled={translation != SITE_CONFIG.LANG.DEFAULT_ID}
           />
           <IconRadioField
-            name={`fileName`}
+            name="fileName"
             label={t("group:homepage_customization.resources.imageurl")}
-            options={form.getValues()?.options}
+            options={defaultValues?.options}
           />
         </>
       )}
