@@ -71,15 +71,12 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
     <DialogContent>
       <FormProvider {...hForm}>
         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-          <DialogHeader>{isAdmin ? t("taxon:grant.title") : t("taxon:request.title")}</DialogHeader>
+          <DialogHeader fontSize={"2xl"} fontWeight={"bold"}>
+            {isAdmin ? t("taxon:grant.title") : t("taxon:request.title")}
+          </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody>
-            <SelectInputField
-              name="role"
-              label={t("taxon:role")}
-              options={TAXON_ROLES}
-              shouldPortal={true}
-            />
+            <SelectInputField name="role" label={t("taxon:role")} options={TAXON_ROLES} />
             <TextAreaField
               name={"requestorMessage"}
               label={t("taxon:request.message")}
@@ -101,7 +98,7 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
             <SubmitButton leftIcon={<CheckIcon />}>
               {isAdmin ? t("taxon:grant.button") : t("taxon:request.button")}
             </SubmitButton>
-            <Button ml={4} onClick={onClose}>
+            <Button ml={4} onClick={onClose} variant={"subtle"}>
               <CrossIcon />
               {t("common:cancel")}
             </Button>
