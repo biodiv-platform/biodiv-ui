@@ -45,11 +45,11 @@ export const getServerSideProps = async (ctx) => {
   const langId = SITE_CONFIG.SPECIES.MULTILINGUAL_FIELDS
     ? getLanguageId(ctx.locale)?.ID
     : SITE_CONFIG.LANG.DEFAULT_ID;
-  const { currentGroup } = await axGroupList(aURL);
+  const { currentGroup } = await axGroupList(aURL, langId);
   const initialFilterParams = {
     ...ctx.query,
     ...DEFAULT_SPECIES_FILTER,
-    userGroupList: currentGroup?.id
+    userGroupList: currentGroup?.groupId
   };
   const { data } = await axGetSpeciesList(initialFilterParams);
 
@@ -57,7 +57,7 @@ export const getServerSideProps = async (ctx) => {
 
   const { data: traits } = await axGetAllTraitsMeta(getLanguageId(ctx.locale)?.ID);
 
-  const { data: fieldsMeta } = await axGetAllFieldsMeta({ langId, userGroupId: currentGroup.id });
+  const { data: fieldsMeta } = await axGetAllFieldsMeta({ langId, userGroupId: currentGroup.groupId });
 
   const { data: listConfig } = await axGetObservationListConfig();
 

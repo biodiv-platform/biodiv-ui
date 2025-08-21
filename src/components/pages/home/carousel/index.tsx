@@ -1,20 +1,39 @@
 import "keen-slider/keen-slider.min.css";
 
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  IconButton,
+  SimpleGrid,
+  useMediaQuery
+} from "@chakra-ui/react";
 import { useKeenSlider } from "keen-slider/react";
 import React, { useState } from "react";
+import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import Sidebar from "./sidebar";
 import Slide from "./slide";
 import SlideInfo from "./slide-info";
 
-export default function CarouselNew({ featured }) {
+export default function CarouselNew({ featured, mini, slidesPerView = 1}) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [sliderLoaded, setSliderLoaded] = useState(false);
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
-      loop: featured.length > 1,
-      slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel)
+      loop: featured.length > slidesPerView,
+      slides: {
+        perView:1
+      },
+      breakpoints: {
+        "(min-width: 700px)": {
+          slides: {
+            perView: slidesPerView,
+            spacing: 16
+          }
+        }
+      },
+      slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel),
+      created: () => setSliderLoaded(true)
     },
     [
       (slider) => {
@@ -48,29 +67,75 @@ export default function CarouselNew({ featured }) {
     ]
   );
 
+  const [isBig] = useMediaQuery(["(min-width: 700px)"]);
+
   return (
     <SimpleGrid
       columns={{ base: 1, md: 3 }}
       borderRadius="md"
       overflow="hidden"
       mb={10}
-      bg="gray.300"
-      color="white"
+      bg={mini?"white":"gray.300"}
+      {...(mini && { mt: 8, mb: 8 })}
     >
-      <Box gridColumn={{ md: "1/3" }} position="relative">
-        <Box ref={sliderRef} className="keen-slider fade">
+      <Box gridColumn={{ md: mini ? "1/4" : "1/3" }} position="relative">
+        {mini && (!isBig || featured.length > slidesPerView) && (
+          <IconButton
+            aria-label="Next Slide"
+            onClick={() => iSlider.current?.prev()}
+            position="absolute"
+            top={"40%"}
+            zIndex={1}
+            colorPalette="gray"
+            size="lg"
+          >
+            <LuArrowLeft size={12} color={"white"} />
+          </IconButton>
+        )}
+        <Box ref={sliderRef} className="keen-slider fade" style={{ visibility: sliderLoaded ? "visible" : "hidden" }}>
           {featured.map((o) => (
-            <Slide resource={o} key={o.id} />
+            <>
+              <Slide
+                resource={o}
+                key={o.id}
+                mini={mini}
+              />
+            </>
           ))}
         </Box>
-        <SlideInfo
-          size={featured.length}
-          resource={featured[currentSlide]}
-          currentSlide={currentSlide}
-          scrollTo={iSlider?.current?.moveToIdx}
-        />
+        {mini && (!isBig || featured.length > slidesPerView) && (
+          <IconButton
+            aria-label="Next Slide"
+            onClick={() => iSlider.current?.next()}
+            position="absolute"
+            top={"40%"}
+            zIndex={1}
+            colorPalette="gray"
+            right={0}
+            size="lg"
+          >
+            <LuArrowRight size={12} color={"white"} />
+          </IconButton>
+        )}
+        {!mini && (
+          <SlideInfo
+            size={featured.length}
+            resource={
+              featured[currentSlide]
+            }
+            currentSlide={currentSlide}
+            scrollTo={iSlider?.current?.moveToIdx}
+            mini={mini}
+          />
+        )}
       </Box>
-      <Sidebar resource={featured[currentSlide]} />
+      {!mini && (
+        <Sidebar
+          resource={
+            featured[currentSlide]
+          }
+        />
+      )}
     </SimpleGrid>
-  );
+  )
 }

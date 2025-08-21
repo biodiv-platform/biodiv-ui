@@ -10,6 +10,7 @@ interface ManageGroupAdministratorsFieldProps {
   onRemove?;
   mb?;
   resetOnSubmit?;
+  hint?;
 }
 
 export default function ManageGroupAdministratorsField({
@@ -17,7 +18,8 @@ export default function ManageGroupAdministratorsField({
   label,
   onRemove,
   mb,
-  resetOnSubmit
+  resetOnSubmit,
+  hint
 }: ManageGroupAdministratorsFieldProps) {
   const { t } = useTranslation();
   const { currentGroup } = useGlobalState();
@@ -61,6 +63,7 @@ export default function ManageGroupAdministratorsField({
       label={label}
       resetOnSubmit={resetOnSubmit}
       mb={mb}
+      hint={hint}
     />
   );
 }

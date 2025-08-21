@@ -1,8 +1,10 @@
 import HomePageComponent from "@components/pages/home";
+import SITE_CONFIG from "@configs/site-config";
 import { axGroupList } from "@services/app.service";
 import { axGetGroupHompageDetails } from "@services/usergroup.service";
 import { axGetHomeInfo } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
 function index({ homeInfo }) {
@@ -11,16 +13,23 @@ function index({ homeInfo }) {
 
 export async function getServerSideProps(ctx) {
   const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL);
-  const { data: homeInfo } = currentGroup?.id
-    ? await axGetGroupHompageDetails(currentGroup?.id)
-    : await axGetHomeInfo();
+  const { currentGroup } = await axGroupList(
+    aURL,
+    getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+  );
+  const { data: homeInfo } = currentGroup?.groupId
+    ? await axGetGroupHompageDetails(
+        currentGroup?.groupId,
+        getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+      )
+    : await axGetHomeInfo(getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
 
   return {
     props: {
       homeInfo: {
         ...homeInfo,
-        gallerySlider: homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
+        gallerySlider: homeInfo.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder),
+        miniGallery: homeInfo?.miniGallery
       }
     }
   };

@@ -13,10 +13,14 @@
     "updated": "Group Users Updated Successfully",
     "view_members": "View All Members"
   },
+  "basic_details": "Basic Details",
   "confirm_closed_group": "This is a closed group, Membership request has to be approved by a moderator. Press OK to send join request",
   "confirm_leave": "Leave Group?",
   "create": {
     "error": "There was some error while creating Group",
+    "next": "Next",
+    "previous": "Previous",
+    "step": "Step",
     "success": "Group Created Successfully",
     "title": "Create a Group"
   },
@@ -68,25 +72,44 @@
     },
     "value": "Value"
   },
+  "custom_field_hint": "Additional queries/fields within the observation upload form for your group.",
   "delete_member": "Are you sure you want to delete?",
   "edit": {
     "error": "There was some error while updating Group",
     "success": "Group Updated Successfully",
     "title": "Edit Group"
   },
+  "group_coverage": "Group Coverage",
   "homepage_customization": {
     "about_us": "About Us",
     "add_options": "Add Options",
     "back": "Back to List",
     "default": "Default",
     "failure": "Unable to Save changes",
-    "gallery": "Gallery",
+    "gallery": "Main Gallery",
+    "gallery_hint": "Upload images to the homepage gallery or use observations as gallery images.",
     "gallery_setup": {
       "alert": "Please save changes to re-order",
       "create": "Create Gallery Image",
       "save_order": "Save Gallery Image(s) Order",
       "show_image_upload": "Show Image Uploader",
-      "title": "Gallery Setup"
+      "title": "Main Gallery"
+    },
+    "hint": "Switch on or off homepage components such as descriptions, content stats, etc.",
+    "mini_gallery_setup": {
+      "active_label": "Enabled",
+      "create": "Create Mini Gallery",
+      "create_error": "Unable to create mini gallery",
+      "create_success": "Mini Gallery Created Successfully",
+      "delete_error": "Unable to delete",
+      "delete_success": "Mini Gallery Deleted Successfully",
+      "edit_error": "Unable to update mini gallery",
+      "edit_success": "Mini Gallery Updated Successfully",
+      "horizontal_slider_label": "Horizontal Slide (Slides move left and right)",
+      "slides_per_view": "Slides In View",
+      "title": "Mini Gallery",
+      "vertical_label": "Slider Type",
+      "vertical_slider_label": "Vertical Slide (Slides move up and down)"
     },
     "module_stats": "Module Stats",
     "observation_map": "Observation Distribution Map",
@@ -100,17 +123,28 @@
       "success": "Gallery List reordered successfully"
     },
     "resources": {
+      "background_color": "Background Color",
       "error": "Enter valid observation id",
+      "gallery_sidebar": "Gallery sidebar background",
       "imageurl": "Choose Gallery Image",
       "link": "Show Page Link",
       "new_image": "Image Upload",
       "obs_id": "Observation Id",
       "observation_image": "Observation Image",
       "observation_image_not_editable": "Observation Image Not Editable",
+      "read_more": "Read more button text",
+      "read_more_button": "button",
+      "read_more_link": "link",
+      "read_more_ui": "Read more UI type",
+      "sidebar_opaque": "opaque",
+      "sidebar_translucent": "translucent",
+      "text_color": "Text Color",
       "title": "Title"
     },
     "save": "Save Homepage Details",
     "show_desc": "Show Description",
+    "show_donors": "Show Donors",
+    "show_sponsors": "Show Sponsors",
     "success": "Updated changes successfully",
     "table": {
       "actions": "Actions",
@@ -124,19 +158,24 @@
     "update": {
       "failure": "Unable to Update Homepage Details",
       "success": "Homepage Details Updated successfully"
-    }
+    },
+    "update_for_all": "Update For All Languages"
   },
   "icon": "Icon",
   "invalid_wkt": "Enter Valid WKT String",
   "invite": "Type user name",
   "invite_founders": "Invite Founders",
+  "invite_founders_hint": "Founders will be able to edit the group and change all group settings.",
   "invite_moderators": "Invite Moderators",
+  "invite_moderators_hint": "Moderators cannot edit the group settings but will have additional privileges such as posting content in bulk and featuring objects.",
   "join": "Join Group",
   "join_without_invitation": "Allow user to join the group without invitation",
+  "join_without_invitation_hint": "Allow users to join the group as members without invitation? Closed groups will need moderators to approve requests before joining.",
   "leave": "Leave Group",
   "list": {
     "title": "Groups"
   },
+  "logo_hint": "Upload a logo for the group. It should preferably be cropped to a square.",
   "map": {
     "title": "Create a map"
   },
@@ -148,6 +187,7 @@
     "requested": "Group join request sent"
   },
   "name": "Group Name",
+  "name_hint": "Kindly provide the name of your group. Keep the name concise, as longer names may not be properly formatted in all locations, and the group URL will be generated based on this.",
   "observation_customisation": "Observation Customisation",
   "observation_display": "Observation Display",
   "observations_having_media": "By Default, Only Display Observations Having Media",
@@ -157,16 +197,22 @@
       "success": "Created successfully",
       "title": "Create Group Rule"
     },
+    "created_on_rule_title": "Created On Date Rule",
+    "has_user_rule": " Only content from the group members is permitted",
+    "hint": "Automated rules that will allow posting of qualifying observations to the group.",
     "input_types": {
       "spatial": "Add Spatial Rule",
       "taxonomy": "Add taxonomic Rule",
       "title": "Select Input Type",
       "user": "Aggregate observation of all group members"
     },
+    "no_user_rule": "Any user’s content will be posted",
+    "observed_on_rule_title": "Observed On Date Rule",
     "remove": {
       "failure": "unable to delete user group rule",
       "success": "user group rule deleted"
     },
+    "spatial_rule_title": "Spatial Rule",
     "table": {
       "actions": "Actions",
       "read_less": "Read Less",
@@ -174,17 +220,22 @@
       "rule_type": "Rule Type",
       "value": "Value"
     },
-    "title": "Group Rules"
+    "taxon_rule_title": "Taxonomic Rule",
+    "title": "Group Rules",
+    "trait_rule_title": "Trait Rule",
+    "user_title": "User Rule"
   },
   "save": "Create Group",
   "spatial_coverge": "Spatial Coverage",
+  "spatial_coverge_hint": "Using the tools on the map, draw a rough polygon around the areas this group covers.",
   "species_fields": {
     "clear_all": "Clear All",
     "filter_by_contributors": "Filter By Contributors",
     "filter_species_fields": "Filter By Species Fields",
     "select_all": "Select All",
     "species_fields": "Select species fields to display",
-    "submit_selections": "Submit Selections"
+    "submit_selections": "Submit Selections",
+    "title": "Species Fields"
   },
   "tags": "Tags",
   "trait": {
@@ -194,5 +245,6 @@
     "title": "Create a trait"
   },
   "update": "Update Group",
-  "update_admin": "Update Administrators"
+  "update_admin": "Update Administrators",
+  "webAddress": "WebAddress"
 }

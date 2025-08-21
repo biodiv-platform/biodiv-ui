@@ -21,6 +21,13 @@
   "clear": "స్పష్టమైన",
   "close": "దగ్గరగా",
   "copy": "క్లిప్బోర్డ్కు కాపీ చేయండి",
+  "create_form": {
+    "add_translation_button": "అనువాదాన్ని జోడించండి",
+    "cancel": "రద్దు చేయండి",
+    "create": "సృష్టించండి",
+    "language": "భాష",
+    "language_placeholder": "భాషను ఎంచుకోండి"
+  },
   "datatable": "Datatable.",
   "delete": "తొలగింపు",
   "edit": "మార్చు",
@@ -37,6 +44,7 @@
     "twitter": "ట్విట్టర్"
   },
   "habitats_covered": "ఆవాసాలు కప్పబడి ఉంటాయి",
+  "habitats_covered_hint": "ఈ గుంపులో ఏ ఆవాసాలు చేర్చబడతాయో ఎంచుకోండి. \nఅందించిన ఆవాసాలు ఏవీ అందుబాటులో లేకపోతే, ఇతర ఎంచుకోండి.",
   "import": "దిగుమతి",
   "information": "సమాచారం",
   "invalid_request": "చెల్లని అభ్యర్థన",
@@ -88,6 +96,7 @@
   "slider_left": "ఎడమవైపున",
   "slider_right": "సరియైనది",
   "species_coverage": "జాతుల సమూహం కవరేజ్",
+  "species_coverage_hint": "ఈ సమూహం కవర్ చేసే జాతుల సమూహాలను ఎంచుకోండి. \nఇతర సమూహాలు ఏవీ అందుబాటులో లేకపోతే, ఇతర ఎంచుకోండి.",
   "success": "సక్సెస్",
   "temporal": {
     "observations": "పరిశీలనలు",

@@ -8,7 +8,7 @@ const GalleryListItems: any = SortableContainer(
     <tbody>
       {galleryList.map((item, index) => (
         <GalleryItemRow
-          key={item.id}
+          key={item.sliderId}
           index={index}
           onDelete={() => removeGalleryItem(index)}
           onEdit={() => editGalleryItem(index)}

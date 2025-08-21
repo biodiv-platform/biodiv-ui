@@ -1,11 +1,13 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import ObservationCreateSinglePageComponent from "@components/pages/observation/create";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import { axGetCreateObservationPageData, axGetspeciesGroups } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
 import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
 const ObservationCreateSinglePage = (props) => <ObservationCreateSinglePageComponent {...props} />;
@@ -18,8 +20,8 @@ export async function getServerSideProps(ctx) {
   const aReq = absoluteUrl(ctx);
   const { data } = await axGetLangList();
   const {
-    currentGroup: { id: userGroupId }
-  } = await axGroupList(aReq.href);
+    currentGroup: { groupId: userGroupId }
+  } = await axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
   const { data: ObservationCreateFormData } = await axGetCreateObservationPageData(
     userGroupId,
     ctx

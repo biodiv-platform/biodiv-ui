@@ -1,8 +1,14 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import GalleryListItems from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-tabel/gallery-list";
+import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
-import { axRemoveHomePageGallery, axReorderHomePageGallery } from "@services/utility.service";
+import {
+  axRemoveHomePageGallery,
+  axRemoveMiniHomePageGallery,
+  axReorderHomePageGallery,
+  axReorderMiniHomePageGallery
+} from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
@@ -13,10 +19,12 @@ const GallerySetupTable = ({
   setGalleryList,
   setIsCreate,
   setIsEdit,
-  setEditGalleryData
+  setEditGalleryData,
+  galleryId = -1
 }) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setGalleryList(arrayMoveImmutable(galleryList, oldIndex, newIndex));
@@ -30,11 +38,11 @@ const GallerySetupTable = ({
 
   const handleReorderCustomField = async () => {
     const payload = galleryList.map((galleryItem, index) => ({
-      galleryId: galleryItem.id,
+      galleryId: Number(galleryItem.sliderId),
       displayOrder: index
     }));
 
-    const { success } = await axReorderHomePageGallery(payload);
+    const { success } = galleryId==-1 ?await axReorderHomePageGallery(payload):await axReorderMiniHomePageGallery(payload);
     if (success) {
       notification(t("group:homepage_customization.reorder.success"), NotificationType.Success);
     } else {
@@ -44,15 +52,17 @@ const GallerySetupTable = ({
   };
 
   const removeGalleryItem = async (index) => {
-    if (galleryList[index]?.id) {
-      const { success } = await axRemoveHomePageGallery(galleryList[index].id);
-      if (success) {
-        notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
-        setGalleryList(galleryList.filter((item, idx) => idx !== index));
-      } else {
+    if (galleryList[index].sliderId != null) {
+      const { success } =
+        galleryId == -1
+          ? await axRemoveHomePageGallery(Number(galleryList[index].sliderId))
+          : await axRemoveMiniHomePageGallery(Number(galleryList[index].sliderId));
+      if (!success) {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
     }
+    setGalleryList(galleryList.filter((_, idx) => idx !== index));
+    notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
   };
 
   const editGalleryItem = async (index) => {
@@ -78,6 +88,7 @@ const GallerySetupTable = ({
           helperClass="sorting-row"
           galleryList={galleryList}
           onSortEnd={onSortEnd}
+          languageId={languageId}
         />
       </table>
       <ButtonGroup gap={4} mt={4}>
@@ -90,7 +101,7 @@ const GallerySetupTable = ({
           float="right"
           hidden={!showReorder}
           onClick={
-            galleryList.some((e) => e.id === undefined)
+            galleryList.some((e) => e.id == null)
               ? handleReorderAlter
               : handleReorderCustomField
           }

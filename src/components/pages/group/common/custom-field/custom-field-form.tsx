@@ -67,16 +67,40 @@ export default function AddCustomField({
       displayOrder: customFields.length + 1
     };
 
-    const { success, data } = customFieldExist
-      ? await axAddExsistingCustomField(userGroupId, addExistPayload)
-      : await axAddCustomField(createPayload);
-
-    if (success) {
-      notification(t("group:custom_field.add.success"), NotificationType.Success);
-      setCustomFields(data);
+    if (!userGroupId) {
+      setCustomFields([
+        ...customFields,
+        {
+          customFields: {
+            id: customFieldExist ? value.id : null,
+            authorId: null,
+            name: value.name,
+            dataType: value.dataType,
+            fieldType: value.fieldType,
+            units: customFieldExist ? null : value.units,
+            iconURL: null,
+            notes: customFieldExist ? null : value.notes
+          },
+          cfValues: customFieldExist ? [] : value.values,
+          defaultValue: null,
+          displayOrder: customFields.length + 1,
+          isMandatory: isMandatory,
+          allowedParticipation: allowedParticipation
+        }
+      ]);
       setIsCreate(false);
     } else {
-      notification(t("group:custom_field.add.failure"));
+      const { success, data } = customFieldExist
+        ? await axAddExsistingCustomField(userGroupId, addExistPayload)
+        : await axAddCustomField(createPayload);
+
+      if (success) {
+        notification(t("group:custom_field.add.success"), NotificationType.Success);
+        setCustomFields(data);
+        setIsCreate(false);
+      } else {
+        notification(t("group:custom_field.add.failure"));
+      }
     }
   };
 

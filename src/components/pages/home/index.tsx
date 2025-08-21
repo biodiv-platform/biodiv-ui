@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import donorsList from "@static/donors";
@@ -8,6 +8,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import Carousel from "./carousel";
+import VerticalCarousel from "./carousel/vertical";
 import HomeDescription from "./description";
 import Features from "./features";
 import Map from "./map";
@@ -24,9 +25,32 @@ export default function HomePageComponent({ homeInfo }) {
   const { t } = useTranslation();
   return (
     <Box className="container" mt={[6, 6, 6, 10]}>
-      {homeInfo.showGallery && HOME.GALLERY && homeInfo.gallerySlider.length > 0 && (
-        <Carousel featured={homeInfo.gallerySlider} />
-      )}
+      {homeInfo?.showGallery &&
+        Array.isArray(homeInfo.gallerySlider) &&
+        homeInfo.gallerySlider.length > 0 && (
+          <Carousel featured={homeInfo.gallerySlider} mini={false} />
+        )}
+      {homeInfo.miniGallery &&
+        homeInfo.miniGallery.map((item) => (
+          <>
+            <Heading as="h2" fontSize="2rem">
+              {item.title ||
+                item.title}
+            </Heading>
+            {item.isVertical ? (
+              <VerticalCarousel
+                featured={item.gallerySlider}
+                slidesPerView={item.slidesPerView}
+              />
+            ) : (
+              <Carousel
+                featured={item.gallerySlider}
+                mini={true}
+                slidesPerView={item.slidesPerView}
+              />
+            )}
+          </>
+        ))}
       {homeInfo.showStats && HOME.STATS && <Stats portalStats={homeInfo.stats} />}
       {homeInfo.showDesc && <HomeDescription description={homeInfo.description} />}
       {homeInfo.showRecentObservation && SITE_CONFIG.OBSERVATION.ACTIVE && <RecentObservations />}

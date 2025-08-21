@@ -1,9 +1,12 @@
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup } from "@chakra-ui/react";
+import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import {
   axRemoveGroupHomePageGalleryImage,
-  axReorderGroupHomePageGallery
+  axRemoveMiniGroupHomePageGalleryImage,
+  axReorderGroupHomePageGallery,
+  axReorderMiniGroupHomePageGallery
 } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
@@ -18,10 +21,12 @@ const GallerySetupTable = ({
   setGalleryList,
   setIsCreate,
   setIsEdit,
-  setEditGalleryData
+  setEditGalleryData,
+  galleryId = -1
 }) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
+  const { languageId } = useGlobalState();
 
   useEffect(() => {
     setGalleryList(galleryList.sort((a, b) => a.displayOrder - b.displayOrder));
@@ -34,16 +39,21 @@ const GallerySetupTable = ({
 
   const handleReorderAlter = () => {
     setCanReorder(false);
-    notification(t("group:homepage_customization.gallery_setup.alert"));
+    if (userGroupId != null) {
+      notification(t("group:homepage_customization.gallery_setup.alert"));
+    }
   };
 
   const handleReorderCustomField = async () => {
-    const payload = galleryList.map(({ id }, index) => ({
-      galleryId: id,
+    const payload = galleryList.map((id, index) => ({
+      galleryId: Number(id.sliderId),
       displayOrder: index
     }));
 
-    const { success } = await axReorderGroupHomePageGallery(userGroupId, payload);
+    const { success } =
+      galleryId == -1
+        ? await axReorderGroupHomePageGallery(userGroupId, payload)
+        : await axReorderMiniGroupHomePageGallery(userGroupId, payload);
     if (success) {
       notification(t("group:homepage_customization.reorder.success"), NotificationType.Success);
     } else {
@@ -53,13 +63,15 @@ const GallerySetupTable = ({
   };
 
   const removeGalleryItem = async (index) => {
-    if (galleryList[index]?.id) {
-      const { success } = await axRemoveGroupHomePageGalleryImage(userGroupId, galleryList, index);
+    if (galleryList[index].sliderId != null) {
+      const { success } = galleryId==-1
+        ? await axRemoveGroupHomePageGalleryImage(userGroupId, galleryList, index)
+        : await axRemoveMiniGroupHomePageGalleryImage(userGroupId, galleryList, index);
       if (!success) {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
     }
-    setGalleryList(galleryList.filter((item, idx) => idx !== index));
+    setGalleryList(galleryList.filter((_, idx) => idx !== index));
     notification(t("group:homepage_customization.remove.success"), NotificationType.Success);
   };
 
@@ -70,43 +82,46 @@ const GallerySetupTable = ({
 
   return (
     <>
-      <table style={{ minWidth: "750px" }} className="table table-bordered">
-        <thead>
-          <tr>
-            <th>{t("group:homepage_customization.table.title")}</th>
-            <th>{t("group:homepage_customization.table.image")}</th>
-            <th>{t("group:homepage_customization.table.description")}</th>
-            <th>{t("group:homepage_customization.table.more_link")}</th>
-            <th>{t("group:homepage_customization.table.actions")}</th>
-          </tr>
-        </thead>
-        <GalleryListItems
-          editGalleryItem={editGalleryItem}
-          removeGalleryItem={removeGalleryItem}
-          helperClass="sorting-row"
-          galleryList={galleryList}
-          onSortEnd={onSortEnd}
-        />
-      </table>
-      <ButtonGroup gap={4} mt={4}>
-        <Button colorPalette="blue" onClick={() => setIsCreate(true)}>
-          {t("group:homepage_customization.gallery_setup.create")}
-          <AddIcon />
-        </Button>
-        <Button
-          colorPalette="blue"
-          float="right"
-          hidden={!showReorder}
-          onClick={
-            galleryList.some((e) => e.id === undefined)
-              ? handleReorderAlter
-              : handleReorderCustomField
-          }
-        >
-          {t("group:homepage_customization.gallery_setup.save_order")}
-          <CheckIcon />
-        </Button>
-      </ButtonGroup>
+      <Box w="full" overflowX="auto" className="fade">
+        <table style={{ minWidth: "750px" }} className="table table-bordered">
+          <thead>
+            <tr>
+              <th>{t("group:homepage_customization.table.title")}</th>
+              <th>{t("group:homepage_customization.table.image")}</th>
+              <th>{t("group:homepage_customization.table.description")}</th>
+              <th>{t("group:homepage_customization.table.more_link")}</th>
+              <th>{t("group:homepage_customization.table.actions")}</th>
+            </tr>
+          </thead>
+          <GalleryListItems
+            editGalleryItem={editGalleryItem}
+            removeGalleryItem={removeGalleryItem}
+            helperClass="sorting-row"
+            galleryList={galleryList}
+            onSortEnd={onSortEnd}
+            languageId={languageId}
+          />
+        </table>
+        <ButtonGroup gap={4} mt={4}>
+          <Button colorPalette="blue" onClick={() => setIsCreate(true)}>
+            {t("group:homepage_customization.gallery_setup.create")}
+            <AddIcon />
+          </Button>
+          <Button
+            colorPalette="blue"
+            float="right"
+            hidden={!showReorder}
+            onClick={
+              galleryList.some((e) => e.id == null)
+                ? handleReorderAlter
+                : handleReorderCustomField
+            }
+          >
+            {t("group:homepage_customization.gallery_setup.save_order")}
+            <CheckIcon />
+          </Button>
+        </ButtonGroup>
+      </Box>
     </>
   );
 };

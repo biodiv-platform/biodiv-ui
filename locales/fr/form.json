@@ -30,6 +30,7 @@
   "date_range": "Ajouter une plage de date",
   "description": {
     "audio": "L'enregistrement s'arrête automatiquement après deux minutes",
+    "hint": "Veuillez fournir un aperçu concis des objectifs et des objectifs du groupe.",
     "my_uploads": "Téléchargez et stockez des médias ici pendant une période de 20 jours.Sélectionnez des images à utiliser dans l'observation",
     "resources": "Téléchargez des fichiers image, audio ou vidéo d'une seule observation de votre appareil.(Utilisez des évaluations pour commander des images)",
     "title": "Description"

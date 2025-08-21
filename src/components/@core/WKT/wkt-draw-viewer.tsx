@@ -1,5 +1,4 @@
-import { Box, HStack, Input, SimpleGrid } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Input, SimpleGrid } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import SITE_CONFIG from "@configs/site-config";
 import DeleteIcon from "@icons/delete";
@@ -14,7 +13,6 @@ import React, { useEffect, useRef, useState } from "react";
 import wkt from "wkt";
 
 import { Field } from "@/components/ui/field";
-import { InputGroup } from "@/components/ui/input-group";
 
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
@@ -48,6 +46,8 @@ export interface WKTProps {
   disabled?: boolean;
   isMultiple?: boolean;
   onSave;
+  group: boolean;
+  value;
 }
 
 export default function WKTDrawViewer({
@@ -58,7 +58,9 @@ export default function WKTDrawViewer({
   centroid,
   mb = 4,
   disabled,
-  onSave
+  group,
+  onSave,
+  value
 }: WKTProps) {
   const WKTInputRef: any = useRef(null);
   const TitleInputRef: any = useRef(null);
@@ -67,18 +69,24 @@ export default function WKTDrawViewer({
   const [geojson, setGeojson] = useState<any>();
 
   const handleOnSave = () => {
-    if (TitleInputRef.current.value && geojson) {
-      onSave({
-        [nameTitle]: TitleInputRef.current.value,
-        [nameTopology]: wkt.stringify(geojson),
-        [centroid]: center(feature(geojson))
-      });
+    if ((!group && TitleInputRef.current.value && geojson) || (group && geojson)) {
+      if (!group) {
+        onSave({
+          [nameTitle]: TitleInputRef.current.value,
+          [nameTopology]: wkt.stringify(geojson),
+          [centroid]: center(feature(geojson))
+        });
+      } else {
+        onSave(wkt.stringify(geojson));
+      }
 
       // Reset Fields
-      TitleInputRef.current.clearValue();
+      if (!group) {
+        TitleInputRef.current.clearValue();
+      }
       WKTInputRef.current.value = "";
     } else {
-      notification("Valid PlaceName and WKT both are required");
+      notification(group ? "Valid WKT is required" : "Valid PlaceName and WKT both are required");
     }
   };
 
@@ -93,8 +101,11 @@ export default function WKTDrawViewer({
   };
 
   const clearWktForm = () => {
-    TitleInputRef.current.clearValue();
+    if (!group) {
+      TitleInputRef.current.clearValue();
+    }
     WKTInputRef.current.value = "";
+    setGeojson(undefined);
   };
 
   const handleMapDraw = (geoJson) => {
@@ -126,32 +137,30 @@ export default function WKTDrawViewer({
 
   useEffect(() => {
     if (!disabled) {
-      WKTInputRef.current.value = "";
-      TitleInputRef.current.clearValue();
-      setGeojson(undefined);
+      if (!group) {
+        WKTInputRef.current.value = "";
+        if (!group) {
+          TitleInputRef.current.clearValue();
+        }
+        setGeojson(undefined);
+      } else {
+        WKTInputRef.current.value = value;
+        if (value != "") {
+          setGeojson(wkt.parse(value));
+        } else {
+          setGeojson(undefined)
+        }
+      }
     }
   }, [disabled]);
 
   return (
     <div>
       <SimpleGrid columns={[1, 1, 5, 5]} alignItems="flex-end" gap={3} mb={mb}>
-        <Field gridColumn="1/3">
-          <SelectAsyncInputField
-            name="geoentities-search"
-            placeholder={t("form:geoentities")}
-            onQuery={onQuery}
-            eventCallback={handleEventCallback}
-            isClearable={true}
-            disabled={disabled}
-            mb={0}
-            label={labelTitle}
-            selectRef={TitleInputRef}
-          />
-        </Field>
-        <Field gridColumn="3/5">
-          <Field htmlFor={nameTopology} label={labelTopology} />
-          <HStack gap="10" width="full">
-            <InputGroup width={"full"}>
+        {group ? (
+          <Field gridColumn="1/5">
+            <Field htmlFor={nameTopology} label={labelTopology} />
+            <HStack gap="10" width="full">
               <Input
                 name={nameTopology}
                 id={nameTopology}
@@ -160,26 +169,63 @@ export default function WKTDrawViewer({
                 onChange={onWKTInputChange}
                 disabled={disabled}
               />
-            </InputGroup>
 
-            {geojson && (
-              <InputGroup flex="1">
-                <Input ps="4.75em">
+              {geojson && (
+                <IconButton
+                  className="left"
+                  aria-label={t("common:clear")}
+                  colorPalette="red"
+                  onClick={clearWktForm}
+                  disabled={disabled}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              )}
+            </HStack>
+          </Field>
+        ) : (
+          <>
+            <Field gridColumn="1/3">
+              <SelectAsyncInputField
+                name="geoentities-search"
+                placeholder={t("form:geoentities")}
+                onQuery={onQuery}
+                eventCallback={handleEventCallback}
+                isClearable={true}
+                disabled={disabled}
+                mb={0}
+                label={labelTitle}
+                selectRef={TitleInputRef}
+              />
+            </Field>
+            <Field gridColumn="3/5">
+              <Field htmlFor={nameTopology} label={labelTopology} />
+              <HStack gap="10" width="full">
+                <Input
+                  name={nameTopology}
+                  id={nameTopology}
+                  ref={WKTInputRef}
+                  placeholder={labelTopology}
+                  onChange={onWKTInputChange}
+                  disabled={disabled}
+                />
+
+                {geojson && (
                   <IconButton
                     className="left"
                     aria-label={t("common:clear")}
-                    color="red.300"
-                    colorPalette="red.300"
+                    colorPalette="red"
                     onClick={clearWktForm}
                     disabled={disabled}
-                  />
-                  <DeleteIcon />
-                </Input>
-              </InputGroup>
-            )}
-          </HStack>
-        </Field>
-        <SaveButton disabled={disabled} onClick={handleOnSave} />
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                )}
+              </HStack>
+            </Field>
+          </>
+        )}
+        {<SaveButton disabled={disabled} onClick={handleOnSave} />}
       </SimpleGrid>
       {geojson ? (
         <GeoJSONPreview data={geojson} />

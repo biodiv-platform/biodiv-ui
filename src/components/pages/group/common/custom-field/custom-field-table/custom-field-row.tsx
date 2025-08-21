@@ -10,7 +10,7 @@ import { SortableElement } from "react-sortable-hoc";
 
 const BooleanIcon = ({ isChecked }) => (
   <Box as="td" w="8rem">
-    {isChecked ? <CheckIcon color="green.500" /> : <CrossIcon color="red.500" />}
+    {isChecked ? <CheckIcon color="green.500" boxSize={8}/> : <CrossIcon color="red.500" boxSize={8}/>}
   </Box>
 );
 
@@ -37,12 +37,14 @@ const CustomFieldRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) 
           {t("common:delete")}
         </Button>
       </td>
-      <td>
-        <Button onClick={onEdit} variant="plain" colorPalette="blue" ml={2}>
+      {itemDetails.customFields.authorId && (
+        <td>
+          <Button onClick={onEdit} variant="plain" colorPalette="blue" ml={2}>
           <EditIcon />
-          {t("common:edit")}
-        </Button>
-      </td>
+            {t("common:edit")}
+          </Button>
+        </td>
+      )}
     </tr>
   );
 });

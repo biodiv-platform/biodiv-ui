@@ -41,7 +41,7 @@ export const getManifestURL = (group: UserGroupIbp) => {
 
 export const reorderRemovedGallerySetup = (data, index) => {
   const list = data.sort((a, b) => a.displayOrder - b.displayOrder);
-  const removedDisplayOrder = data[index].displayOrder;
+  const removedDisplayOrder = data[index].displayOrder;;
 
   const serializeDisplayOrder = () => {
     return list.reduce((acc, item) => {
@@ -58,6 +58,6 @@ export const reorderRemovedGallerySetup = (data, index) => {
 
   return {
     response,
-    payload: response.map(({ id, displayOrder }) => ({ galleryId: id, displayOrder }))
+    payload: response.map(({ sliderId, displayOrder }) => ({ galleryId: sliderId, displayOrder }))
   };
 };

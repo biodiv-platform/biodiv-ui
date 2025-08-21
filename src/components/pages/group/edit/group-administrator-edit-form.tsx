@@ -1,21 +1,19 @@
 import { Box } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import LocalLink from "@components/@core/local-link";
+import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axAddGroupAdminMembers, axUserGroupRemoveAdminMembers } from "@services/usergroup.service";
+import {
+  axAddGroupAdminMembers,
+  axUserGroupRemoveAdminMembers,
+  axUserGroupUpdate
+} from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
-
-import {
-  AccordionItem,
-  AccordionItemContent,
-  AccordionItemTrigger,
-  AccordionRoot
-} from "@/components/ui/accordion";
 
 import AdminInviteField from "../common/admin-invite-field";
 import { transformMemberPayload } from "../create";
@@ -27,11 +25,17 @@ const discardExistingAdministrators = (updatedMembers, currentAdministrators) =>
   return transformMemberPayload(newAdministrators);
 };
 
-export default function GroupAdministratorsEditForm({ founders, moderators, userGroupId }) {
+export default function GroupAdministratorsEditForm({
+  founders,
+  moderators,
+  userGroupId,
+  allowUsersToJoin
+}) {
   const { t } = useTranslation();
 
   const founderIds = founders.map(({ value }) => value);
   const moderatorIds = moderators.map(({ value }) => value);
+  const allowUsers = allowUsersToJoin.allowUserToJoin;
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -43,7 +47,8 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
     ),
     defaultValues: {
       founders,
-      moderators
+      moderators,
+      allowUsers
     }
   });
 
@@ -63,6 +68,13 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   const handleFormSubmit = async (values) => {
+    const { success: s1 } = await axUserGroupUpdate(
+      {
+        ...allowUsersToJoin,
+        allowUserToJoin: values.allowUsers
+      },
+      userGroupId
+    );
     const founderData = discardExistingAdministrators(values.founders, founderIds);
     const moderatorData = discardExistingAdministrators(values.moderators, moderatorIds);
     const membersData = transformMemberPayload(values.members);
@@ -75,7 +87,7 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
       moderatorsEmail: moderatorData.emailList
     };
     const { success } = await axAddGroupAdminMembers(payload);
-    if (success) {
+    if (success && s1) {
       notification(t("group:admin.updated"), NotificationType.Success);
     } else {
       notification(t("group:admin.error"), NotificationType.Error);
@@ -83,52 +95,35 @@ export default function GroupAdministratorsEditForm({ founders, moderators, user
   };
 
   return (
-    <AccordionRoot multiple>
-      <AccordionItem
-        mb={8}
-        bg="white"
-        border="1px solid var(--chakra-colors-gray-300)"
-        borderRadius="md"
-        value="roles"
-      >
-        <AccordionItemTrigger _expanded={{ bg: "gray.100" }} pr={4}>
-          <Box flex={1} textAlign="left" fontSize="lg" pl={4}>
-            🛡️ {t("group:admin.title")}
-          </Box>
-        </AccordionItemTrigger>
-
-        <AccordionItemContent p={4}>
-          <FormProvider {...hForm}>
-            <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-              <AdminInviteField
-                name="founders"
-                label="Edit Founders"
-                onRemove={(o) => onMemberRemoved(o, founderIds)}
-                resetOnSubmit={false}
-              />
-              <AdminInviteField
-                name="moderators"
-                label="Edit Moderators"
-                onRemove={(o) => onMemberRemoved(o, moderatorIds)}
-                resetOnSubmit={false}
-              />
-              <AdminInviteField
-                name="members"
-                label="Add Members"
-                onRemove={(o) => onMemberRemoved(o, [])}
-              />
-              <Box mb={4}>
-                <BlueLink display="block" asChild>
-                  <LocalLink href={"/user/list"} prefixGroup={true}>
-                    {t("group:admin.view_members")}
-                  </LocalLink>
-                </BlueLink>
-              </Box>
-              <SubmitButton>{t("common:update")}</SubmitButton>
-            </form>
-          </FormProvider>
-        </AccordionItemContent>
-      </AccordionItem>
-    </AccordionRoot>
+    <FormProvider {...hForm}>
+      <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
+        <CheckboxField name="allowUsers" label={t("group:join_without_invitation")} mt={2} />
+        <AdminInviteField
+          name="founders"
+          label="Edit Founders"
+          onRemove={(o) => onMemberRemoved(o, founderIds)}
+          resetOnSubmit={false}
+        />
+        <AdminInviteField
+          name="moderators"
+          label="Edit Moderators"
+          onRemove={(o) => onMemberRemoved(o, moderatorIds)}
+          resetOnSubmit={false}
+        />
+        <AdminInviteField
+          name="members"
+          label="Add Members"
+          onRemove={(o) => onMemberRemoved(o, [])}
+        />
+        <Box mb={4}>
+          <BlueLink display="block" asChild>
+            <LocalLink href={"/user/list"} prefixGroup={true}>
+              <BlueLink display="block">{t("group:admin.view_members")}</BlueLink>
+            </LocalLink>
+          </BlueLink>
+        </Box>
+        <SubmitButton>{t("common:update")}</SubmitButton>
+      </form>
+    </FormProvider>
   );
 }

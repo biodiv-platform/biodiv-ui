@@ -1,5 +1,6 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import DataTableCreatePageComponent from "@components/pages/datatable/create";
+import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGroupList } from "@services/app.service";
 import {
@@ -9,6 +10,7 @@ import {
 } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
+import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
 const DataTableCreatePage = (props) => <DataTableCreatePageComponent {...props} />;
@@ -27,8 +29,8 @@ export async function getServerSideProps(ctx) {
   const aReq = absoluteUrl(ctx);
 
   const {
-    currentGroup: { id: userGroupId }
-  } = await axGroupList(aReq.href);
+    currentGroup: { groupId: userGroupId }
+  } = await axGroupList(aReq.href, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
   const {
     data: { customField }
   } = await axGetCreateObservationPageData(userGroupId, ctx);

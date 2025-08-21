@@ -21,6 +21,13 @@
   "clear": "स्पष्ट",
   "close": "बंद करे",
   "copy": "क्लिपबोर्ड पर कॉपी करें",
+  "create_form": {
+    "add_translation_button": "अनुवाद जोड़ें",
+    "cancel": "रद्द करना",
+    "create": "बनाएं",
+    "language": "भाषा",
+    "language_placeholder": "भाषा चुने"
+  },
   "datatable": "विवरण सारणी",
   "delete": "हटाएं",
   "edit": "संपादित करें",
@@ -37,6 +44,7 @@
     "twitter": "ट्विटर"
   },
   "habitats_covered": "निवास स्थान",
+  "habitats_covered_hint": "इस समूह में कौन से आवासों को शामिल किया जाएगा, इसका चयन करें। \nयदि प्रदान किए गए आवासों में से कोई भी उपलब्ध नहीं है, तो अन्य का चयन करें।",
   "import": "आयात",
   "information": "जानकारी",
   "invalid_request": "अमान्य अनुरोध",
@@ -88,6 +96,7 @@
   "slider_left": "बाएं",
   "slider_right": "सही",
   "species_coverage": "प्रजाति समूह कवरेज",
+  "species_coverage_hint": "उन प्रजातियों के समूहों का चयन करें जिन्हें यह समूह कवर करेगा। \nयदि अन्य समूहों में से कोई भी उपलब्ध नहीं है, तो अन्य का चयन करें।",
   "success": "सफलता",
   "temporal": {
     "observations": "अवलोकन",

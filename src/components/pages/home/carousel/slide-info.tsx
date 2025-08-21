@@ -8,9 +8,9 @@ import { Avatar } from "@/components/ui/avatar";
 
 import Indicators from "./indicators";
 
-export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
+export default function SlideInfo({ resource, size, currentSlide, scrollTo, /*indicators*/ mini}) {
   const { t } = useTranslation();
-  const showIndicators = useBreakpointValue({ base: false, md: true });
+  const showIndicators = useBreakpointValue({ base: false, md: true/*indicators*/ });
 
   return (
     <Box
@@ -20,6 +20,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
       left={0}
       right={0}
       p={6}
+      color= {resource.color?resource.color:"white"}
     >
       <Flex justifyContent="space-between" alignItems="flex-end">
         {resource?.authorId > 1 ? (
@@ -47,7 +48,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo }) {
         ) : (
           <div />
         )}
-        {showIndicators && size > 1 && (
+        {!mini && showIndicators && size > 1 && (
           <div>
             <Indicators size={size} currentSlide={currentSlide} scrollTo={scrollTo} />
           </div>

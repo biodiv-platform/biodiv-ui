@@ -13,6 +13,7 @@ interface IRadioProps {
   options?: any[];
   isInline?: boolean;
   colorPalette?: string;
+  disabled?: boolean;
 }
 
 export const RadioInputField = ({
@@ -20,6 +21,7 @@ export const RadioInputField = ({
   label,
   hint,
   mb = 4,
+  disabled,
   isInline = true,
   colorPalette = "blue",
   options = [],
@@ -35,10 +37,14 @@ export const RadioInputField = ({
       label={label}
       {...props}
     >
-      <RadioGroup key={name} {...field}>
+      <RadioGroup
+        key={name}
+        {...field}
+        disabled = {disabled}
+      >
         <Stack direction={isInline ? "row" : "column"} py={2}>
           {options.map((o) => (
-            <Radio key={o.value} id={o.value} value={o.value} colorPalette={colorPalette}>
+            <Radio key={o.value} id={o.value} value={o.value} colorPalette={colorPalette} disabled={disabled}>
               {o.label}
             </Radio>
           ))}

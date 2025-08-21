@@ -11,12 +11,17 @@ const GroupRulesTable = ({ userGroupId, groupRules, setGroupRules, setIsCreate }
   const { t } = useTranslation();
 
   const removeGroupRules = async ({ filterName, filterId }) => {
-    const { success } = await axRemoveUserGroupRule(userGroupId, { filterName, filterId });
-    if (success) {
-      setGroupRules(groupRules.filter((item) => item.id !== filterId));
-      notification(t("group:rules.remove.success"), NotificationType.Success);
+    if (userGroupId != null) {
+      const { success } = await axRemoveUserGroupRule(userGroupId, { filterName, filterId });
+      if (success) {
+        setGroupRules(groupRules.filter((item) => item.id !== filterId));
+        notification(t("group:rules.remove.success"), NotificationType.Success);
+      } else {
+        notification(t("group:rules.remove.failure"), NotificationType.Error);
+      }
     } else {
-      notification(t("group:rules.remove.failure"), NotificationType.Error);
+      setGroupRules(groupRules.filter((_, idx) => idx != filterId));
+      notification(t("group:rules.remove.success"), NotificationType.Success);
     }
   };
 

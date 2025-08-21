@@ -844,6 +844,7 @@ export interface UserGroup {
   webAddress?: string;
 }
 export interface UserGroupIbp {
+  groupId?: number;
   id?: number; // int64
   name?: string;
   icon?: string;

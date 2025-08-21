@@ -1,14 +1,15 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
+import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationById } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-// import IconRadioField from "./icon-radio-field";
+import IconRadioField from "./icon-radio-field";
 
-export default function ExsistingResourceForm({ defaultValues, setDefaultValues }) {
+export default function ExsistingResourceForm({ defaultValues, setDefaultValues, translation }) {
   const form = useFormContext();
   const { t } = useTranslation();
 
@@ -49,7 +50,8 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
       {defaultValues && (
         <>
           <TextBoxField
-            name="title"
+            key={`title-${translation}`}
+            name={`translations.${translation}.title`}
             isRequired={true}
             label={t("group:homepage_customization.resources.title")}
           />
@@ -57,12 +59,13 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues 
             name="moreLinks"
             isRequired={true}
             label={t("group:homepage_customization.resources.link")}
+            disabled={translation != SITE_CONFIG.LANG.DEFAULT_ID}
           />
-          {/* <IconRadioField
+          <IconRadioField
             name="fileName"
             label={t("group:homepage_customization.resources.imageurl")}
             options={defaultValues?.options}
-          /> */}
+          />
         </>
       )}
     </>
