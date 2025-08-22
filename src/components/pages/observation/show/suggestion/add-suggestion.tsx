@@ -124,7 +124,7 @@ export default function AddSuggestion({
 
     axGetObservationById(observationId).then(({ data }) => {
       setImages(
-        data.observationResource.filter((o) => {
+        data?.observationResource?.filter((o) => {
           return o.resource.type === "IMAGE";
         })
       );
