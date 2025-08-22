@@ -35,7 +35,11 @@ export function FilterCheckboxes({
 
   return (
     <>
-      <CheckboxGroup defaultValue={defaultValue} onChange={handleOnChange}>
+      <CheckboxGroup
+        defaultValue={defaultValue}
+        onValueChange={handleOnChange}
+        colorPalette={"blue"}
+      >
         <Stack>
           {options.map(({ label, value, valueIcon, color }) => (
             <Checkbox key={label} value={value} alignItems="baseline">
