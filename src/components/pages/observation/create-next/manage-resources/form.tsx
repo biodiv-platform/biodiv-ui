@@ -52,6 +52,13 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
                       label={t("observation:contributor")}
                       showLabel={false}
                       name={`o.${index}.resources.${idx}.contributor`}
+                      placeholder={t("observation:contributor")}
+                    />
+                    <TextBoxField
+                      label={t("form:caption")}
+                      showLabel={false}
+                      name={`o.${index}.resources.${idx}.caption`}
+                      placeholder={t("form:caption")}
                     />
                     <ButtonGroup gap={4}>
                       <Button
@@ -82,7 +89,9 @@ export default function ManageResourcesForm({ index, resources, onClose }) {
       </DialogBody>
 
       <DialogFooter>
-        <Button onClick={onClose}>{t("common:close")}</Button>
+        <Button onClick={onClose} variant={"subtle"}>
+          {t("common:close")}
+        </Button>
       </DialogFooter>
     </>
   );
