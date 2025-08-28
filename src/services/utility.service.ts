@@ -10,7 +10,7 @@ export const axGetLangList = async (document = false) => {
       : `${ENDPOINT.OBSERVATION}/v1/observation/language`;
 
     const { data } = await plainHttp.get(endpoint, {
-      params: { isDirty: false }
+      params: { isDirty: null }
     });
     return { success: true, data };
   } catch (e) {
@@ -105,8 +105,7 @@ export const axCreateMiniGallery = async (payload) => {
   }
 };
 
-
-export const axEditMiniGallery = async (galleryId,payload) => {
+export const axEditMiniGallery = async (galleryId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.UTILITY}/v1/services/homePage/miniGallery/edit/${galleryId}`,
@@ -119,17 +118,15 @@ export const axEditMiniGallery = async (galleryId,payload) => {
   }
 };
 
-export const axRemoveMiniGallery = async(galleryId) => {
+export const axRemoveMiniGallery = async (galleryId) => {
   try {
-    await http.delete(
-      `${ENDPOINT.UTILITY}/v1/services/homePage/miniGallery/remove/${galleryId}`
-    );
-    return {success: true, data: null}
+    await http.delete(`${ENDPOINT.UTILITY}/v1/services/homePage/miniGallery/remove/${galleryId}`);
+    return { success: true, data: null };
   } catch (e) {
-    console.error(e)
-    return {success: false, data: null}
+    console.error(e);
+    return { success: false, data: null };
   }
-}
+};
 
 export const axRemoveHomePageGallery = async (galleryId) => {
   try {
@@ -177,7 +174,10 @@ export const axReorderHomePageGallery = async (payload) => {
 
 export const axReorderMiniHomePageGallery = async (payload) => {
   try {
-    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/miniSlider/reorder`, payload);
+    const { data } = await http.put(
+      `${ENDPOINT.UTILITY}/v1/services/homePage/miniSlider/reorder`,
+      payload
+    );
     return { success: true, data };
   } catch (e) {
     console.error(e);
