@@ -91,6 +91,7 @@ export function TaxonPermissionRequestForm({ taxon, onClose, isAdmin }) {
                 isClearable={false}
                 label={t("taxon:request.user")}
                 mb={0}
+                portalled={false}
               />
             )}
           </DialogBody>

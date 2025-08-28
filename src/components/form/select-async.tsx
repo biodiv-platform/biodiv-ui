@@ -33,6 +33,7 @@ interface ISelectProps {
   resetOnSubmit?;
   isRaw?;
   openMenuOnFocus?: boolean;
+  portalled?: boolean;
 }
 
 const dummyOnQuery = (q) =>
@@ -73,6 +74,7 @@ export const SelectAsyncInputField = ({
   isClearable = true,
   isRaw,
   openMenuOnFocus = false,
+  portalled = true,
   ...props
 }: ISelectProps) => {
   const form = useFormContext();
@@ -119,7 +121,7 @@ export const SelectAsyncInputField = ({
         <Select
           name={name}
           inputId={name}
-          menuPortalTarget={MENU_PORTAL_TARGET}
+          menuPortalTarget={portalled && MENU_PORTAL_TARGET}
           formatCreateLabel={(v) => `Add "${v}"`}
           isMulti={multiple}
           defaultOptions={options}
