@@ -112,6 +112,7 @@ export default function CreateMiniGalleryForm({
       );
       setOpenIndex(miniGalleryList.length);
       payload.gallerySlider=[];
+      payload.isActive = true
       setMiniGalleryList([...miniGalleryList, payload]);
       setIsCreate(false);
     }

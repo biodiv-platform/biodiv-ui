@@ -273,11 +273,9 @@ export const axGetAllCustomFieldOptionsById = async (observationId, userGroupId,
   }
 };
 
-export const axGetUserGroupCustomField = async (userGroupId, ctx) => {
+export const axGetUserGroupCustomField = async (userGroupId) => {
   try {
-    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/customfield/group/${userGroupId}`, {
-      params: { ctx }
-    });
+    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/customfield/group/${userGroupId}`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -370,11 +368,10 @@ export const axReorderCustomField = async (userGroupId, payload) => {
   }
 };
 
-export const axGetUserGroupRules = async (userGroupId, ctx) => {
+export const axGetUserGroupRules = async (userGroupId) => {
   try {
-    const { data } = await http.get(
-      `${ENDPOINT.INTEGRATOR}/v1/services/filterRule/show/${userGroupId}`,
-      { params: { ctx } }
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.INTEGRATOR}/v1/services/filterRule/show/${userGroupId}`
     );
     return { success: true, data };
   } catch (e) {

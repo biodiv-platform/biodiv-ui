@@ -266,7 +266,7 @@ export default function CreateGroupPageComponent({
           data.id
         );
         miniGallery_overall_success = miniGallery_success;
-        miniGalleryIds.push(Object.keys(mini)[0]);
+        miniGalleryIds.push(mini.galleryId);
 
         if (!miniGallery_success) {
           break;
