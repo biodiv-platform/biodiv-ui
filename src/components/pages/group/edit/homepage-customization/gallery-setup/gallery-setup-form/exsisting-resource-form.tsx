@@ -26,7 +26,16 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
         moreLinks: `observation/show/${observationId}`,
         title: recoIbp?.scientificName || t("common:unknown"),
         fileName: observationResource[0]?.resource?.fileName,
-        options: observationResource.map((item) => ({ value: item?.resource?.fileName }))
+        options: observationResource.map((item) => ({ value: item?.resource?.fileName })),
+        translations:Object.fromEntries(
+          Object.entries(form.getValues().translations).map(([languageId, languageData]) => [
+            languageId,
+            {
+              ...(languageData || {}),
+              title: recoIbp?.scientificName || t("common:unknown"),
+            }
+          ])
+        )
       });
     } else {
       setDefaultValues({});
