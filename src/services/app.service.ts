@@ -3,9 +3,10 @@ import { fetchWithCache } from "@utils/cached-fetch";
 import http, { plainHttp } from "@utils/http";
 import { findCurrentUserGroup, transformUserGroupList } from "@utils/userGroup";
 
-export const axGroupList = async (url?: string, langId?: string,lang?: string) => {
+export const axGroupList = async (url?: string, langId?: string, lang?: string) => {
   try {
-    const data = await fetchWithCache(`${ENDPOINT.USERGROUP}/v1/group/all/${langId}`);
+    const qs = langId ? `?languageId=${langId}` : "";
+    const data = await fetchWithCache(`${ENDPOINT.USERGROUP}/v1/group/all${qs}`);
     const groups = transformUserGroupList(data);
     const currentGroup = url ? findCurrentUserGroup(groups, url, lang) : {};
     return { success: true, groups, currentGroup };
