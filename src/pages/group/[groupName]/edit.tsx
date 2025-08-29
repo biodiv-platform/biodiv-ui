@@ -47,10 +47,9 @@ export const getServerSideProps = async (ctx) => {
     ctx
   );
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.groupId);
-  const { success: s4, data: groupRules } = await axGetUserGroupRules(currentGroup.groupId, ctx);
+  const { success: s4, data: groupRules } = await axGetUserGroupRules(currentGroup.groupId);
   const { success: s3, data: customFieldList } = await axGetUserGroupCustomField(
-    currentGroup.groupId,
-    ctx
+    currentGroup.groupId
   );
   const { data: homePageDetails } = await axGetGroupHompageDetails(currentGroup.groupId, langId);
   const { success: s5, customisations } = await axGetUserGroupMediaToggle(currentGroup.groupId);

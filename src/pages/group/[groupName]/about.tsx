@@ -33,10 +33,9 @@ export const getServerSideProps = async (ctx) => {
   // This can throw error if user is not authorized
   const { success: s1, data: groupInfo } = await axGetUserGroupById(currentGroup.groupId, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
   const { success: s2, data } = await axGetGroupAdministratorsByGroupId(currentGroup.groupId);
-  const { success: s4, data: groupRules } = await axGetUserGroupRules(currentGroup.groupId, ctx);
+  const { success: s4, data: groupRules } = await axGetUserGroupRules(currentGroup.groupId);
   const { success: s3, data: customFieldList } = await axGetUserGroupCustomField(
-    currentGroup.groupId,
-    ctx
+    currentGroup.groupId
   );
   if (groupRules.taxonomicRuleList?.length) {
     const taxonPromises = groupRules.taxonomicRuleList.map(async (item) => {

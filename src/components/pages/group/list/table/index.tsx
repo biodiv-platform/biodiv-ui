@@ -2,7 +2,7 @@ import { Input } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import useGroupListFilter from "../use-group-list";
 import { UserGroupListTableRows } from "./group-list-rows";
@@ -17,6 +17,10 @@ export default function UserGroupListTable() {
       groupListData?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
     );
   }, 200);
+
+  useEffect(() =>{
+    setFilterGroups(groupListData)
+  }, [groupListData])
 
   return (
     <>

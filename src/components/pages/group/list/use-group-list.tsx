@@ -51,6 +51,10 @@ export const GroupListFilterProvider = (props) => {
     }
   }, [filter]);
 
+  useEffect(() =>{
+    setGroupListData(props.userGroupList)
+  }, [props.userGroupList])
+
   const filterData = async () => {
     try {
       NProgress.start();

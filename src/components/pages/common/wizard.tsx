@@ -8,8 +8,9 @@ export default function Wizard({steps, currentStep, setCurrentStep}) {
     <Box mb={8}>
         <Grid
           templateColumns={`repeat(${steps.length}, 1fr)`} // icon, arrow, icon, arrow...
-          gap={0}
+          gap={2}
           alignItems="center"
+          overflow={"auto"}
         >
           {/* === ICONS AND ARROWS === */}
           {steps.map((step, index) => {

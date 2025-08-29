@@ -37,7 +37,8 @@ export const DEFAULT_GROUP: UserGroupIbpExtended = {
   icon: `${ENDPOINT.FILES}${SITE_CONFIG.SITE.ICON}`,
   name: SITE_CONFIG.SITE.TITLE[SITE_CONFIG.LANG.DEFAULT],
   nameLocal: SITE_CONFIG.SITE?.TITLE_LOCAL,
-  webAddress: SITE_CONFIG.SITE.URL
+  webAddress: SITE_CONFIG.SITE.URL,
+  groupId: null as any
 };
 
 export const DATE_ACCURACY = {

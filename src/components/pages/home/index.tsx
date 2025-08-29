@@ -19,7 +19,7 @@ import Supporters from "./supporters";
 const { HOME } = SITE_CONFIG;
 
 export default function HomePageComponent({ homeInfo }) {
-  const { currentGroup } = useGlobalState();
+  const { currentGroup, languageId } = useGlobalState();
   const showFeatures = !currentGroup?.id;
 
   const { t } = useTranslation();
@@ -28,22 +28,23 @@ export default function HomePageComponent({ homeInfo }) {
       {homeInfo?.showGallery &&
         Array.isArray(homeInfo.gallerySlider) &&
         homeInfo.gallerySlider.length > 0 && (
-          <Carousel featured={homeInfo.gallerySlider} mini={false} />
+          <Carousel key={`gallery-${languageId}`} featured={homeInfo.gallerySlider} mini={false} />
         )}
       {homeInfo.miniGallery &&
         homeInfo.miniGallery.map((item) => (
           <>
             <Heading as="h2" fontSize="2rem">
-              {item.title ||
-                item.title}
+              {item.title || item.title}
             </Heading>
             {item.isVertical ? (
               <VerticalCarousel
+                key={`gallery-${item.galleryId}-${languageId}`}
                 featured={item.gallerySlider}
                 slidesPerView={item.slidesPerView}
               />
             ) : (
               <Carousel
+                key={`gallery-${item.galleryId}-${languageId}`}
                 featured={item.gallerySlider}
                 mini={true}
                 slidesPerView={item.slidesPerView}
