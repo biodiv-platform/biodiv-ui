@@ -1,8 +1,6 @@
-import { AspectRatio, Box, Button, Image, SimpleGrid } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Image, Link, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
-import ScientificName from "@components/@core/scientific-name";
-import Tooltip from "@components/@core/tooltip";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -44,7 +42,7 @@ export default function Suggestions({
             href={`/observation/show/${o.observationId}`}
             prefixGroup={true}
           >
-            <Tooltip showArrow={true} title={<ScientificName value={o.name} />}>
+            <Link unstyled>
               <AspectRatio ratio={1}>
                 <Image
                   overflow="hidden"
@@ -64,7 +62,7 @@ export default function Suggestions({
                   borderRadius="md"
                 />
               </AspectRatio>
-            </Tooltip>
+            </Link>
           </LocalLink>
         ))}
       </SimpleGrid>

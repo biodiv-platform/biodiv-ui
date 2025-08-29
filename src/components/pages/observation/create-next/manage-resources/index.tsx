@@ -18,7 +18,9 @@ export default function ManageResourcesModal(props) {
     <DialogRoot open={props.isOpen} onOpenChange={props.onClose}>
       <DialogBackdrop />
       <DialogContent>
-        <DialogHeader>{t("observation:manage_resources")}</DialogHeader>
+        <DialogHeader fontSize={"xl"} fontWeight={"bold"}>
+          {t("observation:manage_resources")}
+        </DialogHeader>
         <DialogCloseTrigger />
         <ManageResourcesForm {...props} />
       </DialogContent>
