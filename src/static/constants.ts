@@ -19,7 +19,7 @@ export const ENDPOINT = {
   GEOSERVER: `${SITE_CONFIG.GEOSERVER_BASE_PATH}/geoserver`,
   INTEGRATOR: `${API_ENDPOINT}integrator-api/api`,
   LANDSCAPE: `${API_ENDPOINT}landscape-api/api`,
-  NAKSHA: `${API_ENDPOINT}naksha-integrator-api/api`,
+  NAKSHA: `${API_ENDPOINT}naksha-api/api`,
   OBSERVATION: `${API_ENDPOINT}observation-api/api`,
   PAGES: `${API_ENDPOINT}pages-api/api`,
   RAW: `${API_ENDPOINT}biodiv`,
