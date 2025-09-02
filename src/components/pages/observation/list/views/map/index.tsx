@@ -6,7 +6,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
-import { NakshaMapboxList } from "naksha-components-react";
+import { NakshaMaplibreLayers } from "naksha-components-react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
@@ -39,12 +39,12 @@ export default function ObservationsMap() {
     <Box className="white-box" mb={4}>
       <BoxHeading>🗺️ {t("observation:list.spatial_distribution")}</BoxHeading>
       <Box h="30rem">
-        <NakshaMapboxList
+        <NakshaMaplibreLayers
           defaultViewState={mapCenter}
           loadToC={false}
           lang={lang}
           key={JSON.stringify(filter)}
-          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
             endpoint: ENDPOINT.GEOSERVER,

@@ -23,13 +23,13 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
   const { field, fieldState } = useController({ name: props.name });
   const [value, setValue] = useState(field.value || []);
   const [isDisabled, setIsdisabled] = useState<boolean>(false);
-  const Viewer = props.canDraw || group? WKTDrawViewer : WKT;
+  const Viewer = props.canDraw || group ? WKTDrawViewer : WKT;
 
   const handleOnSave = (o) => {
-    if (!group){
-    setValue([...value, o]);
-    } else{
-      setValue(o)
+    if (!group) {
+      setValue([...value, o]);
+    } else {
+      setValue(o);
     }
   };
 
@@ -38,7 +38,7 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
   };
 
   useEffect(() => {
-    setIsdisabled(!props.isMultiple && (value.length >= 1 && !group));
+    setIsdisabled(!props.isMultiple && value.length >= 1 && !group);
     field.onChange(value);
   }, [value]);
 
@@ -52,7 +52,13 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
         <Box border="1px" borderColor="gray.300" bg="white" borderRadius="md">
           {group ? (
             <Box mt={4}>
-              <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group} value={value}/>
+              <Viewer
+                {...props}
+                disabled={isDisabled}
+                onSave={handleOnSave}
+                group={group}
+                value={value}
+              />
             </Box>
           ) : (
             <Tabs.Root
@@ -75,7 +81,13 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
                 )}
               </Box>
               <Tabs.Content value="draw">
-                <Viewer {...props} disabled={isDisabled} onSave={handleOnSave} group={group} value={value}/>
+                <Viewer
+                  {...props}
+                  disabled={isDisabled}
+                  onSave={handleOnSave}
+                  group={group}
+                  value={value}
+                />
               </Tabs.Content>
               <Tabs.Content value="search">
                 <GmapsWktLocationPicker

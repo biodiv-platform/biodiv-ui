@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
@@ -7,8 +6,8 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import LazyLoad from "react-lazyload";
 
-const NakshaMapboxList: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
+const NakshaMaplibreLayers: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -66,8 +65,8 @@ export default function ClusterMap({
       display="block"
     >
       <LazyLoad height={422} once={true}>
-        <NakshaMapboxList
-          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        <NakshaMaplibreLayers
+          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           defaultViewState={defaultViewState}
           key={k}
           lang={lang}

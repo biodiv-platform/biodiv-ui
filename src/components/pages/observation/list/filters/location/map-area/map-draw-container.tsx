@@ -1,14 +1,13 @@
 import { Box } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 
 const FILTER_NAME = "location";
 
-const NakshaMapboxDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
+const NakshaMaplibreDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -32,11 +31,15 @@ export default function MapDrawContainer() {
 
   return (
     <Box position="relative" h="22rem">
-      <NakshaMapboxDraw
+      <NakshaMaplibreDraw
         defaultViewState={defaultViewState}
         features={defaultFeatures}
-        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         onFeaturesChange={handleOnFeatureChange}
+        onReady={(ctrl) => {
+          const td = ctrl.getTerraDrawInstance?.();
+          td?.on("change", (features) => handleOnFeatureChange(features));
+        }}
       />
     </Box>
   );

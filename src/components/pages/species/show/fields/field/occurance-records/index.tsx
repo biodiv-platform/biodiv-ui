@@ -11,8 +11,8 @@ import LazyLoad from "react-lazyload";
 
 import useSpecies from "../../../use-species";
 
-const NakshaMapboxList: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
+const NakshaMaplibreLayers: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -46,13 +46,13 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
   return (
     <LazyLoad once={true}>
       <Box h="500px" overflow="hidden" position="relative" borderRadius="md" bg="gray.300" mb={4}>
-        <NakshaMapboxList
+        <NakshaMaplibreLayers
           defaultViewState={defaultViewState}
           loadToC={false}
           showToC={false}
           lang={lang}
           mapStyle={MapStyles.MAP_SATELLITE}
-          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
             endpoint: ENDPOINT.GEOSERVER,

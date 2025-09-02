@@ -1,6 +1,5 @@
 import { Box, Flex, IconButton, Input } from "@chakra-ui/react";
 import GeoJSONPreview from "@components/@core/map-preview/geojson";
-import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
@@ -14,8 +13,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
 
-const NakshaMapboxDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
+const NakshaMaplibreDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -92,9 +91,9 @@ export default function GeoJsonWktParserInput({
         {canShow ? (
           <GeoJSONPreview data={featureData} />
         ) : (
-          <NakshaMapboxDraw
+          <NakshaMaplibreDraw
             defaultViewState={defaultViewState}
-            mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
             onFeaturesChange={handleMapDraw}
           />
         )}

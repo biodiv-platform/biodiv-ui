@@ -1,5 +1,4 @@
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config";
 import { Landscape } from "@interfaces/landscape";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
@@ -12,8 +11,8 @@ import InfoTab from "./document-box";
 import DownloadLandscape from "./download";
 import LandscapeFields from "./fields";
 
-const NakshaMapboxView: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
+const NakshaMaplibreView: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreView),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -46,10 +45,10 @@ export default function LandscapeShowComponent({
         </Heading>
       </Flex>
       <Box position="relative" h="22rem" bg="gray.200" borderRadius="md" overflow="hidden" mb={4}>
-        <NakshaMapboxView
+        <NakshaMaplibreView
           defaultViewState={defaultViewState}
           data={wkt.parse(landscapeShow.wktData)}
-          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         />
         <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Box>

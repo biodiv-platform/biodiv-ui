@@ -1,6 +1,5 @@
 import { Box, HStack, IconButton, Input, SimpleGrid } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
-import SITE_CONFIG from "@configs/site-config";
 import DeleteIcon from "@icons/delete";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import center from "@turf/center";
@@ -17,8 +16,8 @@ import { Field } from "@/components/ui/field";
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
 
-const NakshaMapboxDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
+const NakshaMaplibreDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -67,6 +66,7 @@ export default function WKTDrawViewer({
   const defaultViewState = React.useMemo(() => getMapCenter(2), []);
   const { t } = useTranslation();
   const [geojson, setGeojson] = useState<any>();
+  const mapContainerRef = useRef<HTMLDivElement>(null);
 
   const handleOnSave = () => {
     if ((!group && TitleInputRef.current.value && geojson) || (group && geojson)) {
@@ -135,6 +135,26 @@ export default function WKTDrawViewer({
     }
   };
 
+  // Fix for NakshaMaplibreDraw buttons acting as submit buttons
+  useEffect(() => {
+    const fixMapButtons = () => {
+      if (mapContainerRef.current) {
+        const buttons = mapContainerRef.current.querySelectorAll("button");
+        buttons.forEach((button) => {
+          if (!button.getAttribute("type")) {
+            button.setAttribute("type", "button");
+          }
+        });
+      }
+    };
+
+    // Run initially and then periodically to catch dynamically added buttons
+    fixMapButtons();
+    const interval = setInterval(fixMapButtons, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     if (!disabled) {
       if (!group) {
@@ -148,7 +168,7 @@ export default function WKTDrawViewer({
         if (value != "") {
           setGeojson(wkt.parse(value));
         } else {
-          setGeojson(undefined)
+          setGeojson(undefined);
         }
       }
     }
@@ -177,6 +197,7 @@ export default function WKTDrawViewer({
                   colorPalette="red"
                   onClick={clearWktForm}
                   disabled={disabled}
+                  type="button" // Explicitly set type
                 >
                   <DeleteIcon />
                 </IconButton>
@@ -217,6 +238,7 @@ export default function WKTDrawViewer({
                     colorPalette="red"
                     onClick={clearWktForm}
                     disabled={disabled}
+                    type="button" // Explicitly set type
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -230,10 +252,10 @@ export default function WKTDrawViewer({
       {geojson ? (
         <GeoJSONPreview data={geojson} />
       ) : (
-        <Box position="relative" h="22rem">
-          <NakshaMapboxDraw
+        <Box position="relative" h="22rem" ref={mapContainerRef}>
+          <NakshaMaplibreDraw
             defaultViewState={defaultViewState}
-            mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
             onFeaturesChange={handleMapDraw}
             isReadOnly={disabled}
           />

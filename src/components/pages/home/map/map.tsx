@@ -9,8 +9,8 @@ import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-const NakshaMapboxList: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
+const NakshaMaplibreLayers: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -46,12 +46,12 @@ export default function Map() {
   };
 
   return (
-    <NakshaMapboxList
+    <NakshaMaplibreLayers
       defaultViewState={mapCenter}
       loadToC={true}
       lang={lang}
       managePublishing={canManagePublishing}
-      mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+      // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
       geoserver={{
         endpoint: ENDPOINT.GEOSERVER,
