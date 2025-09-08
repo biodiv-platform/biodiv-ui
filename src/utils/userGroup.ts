@@ -24,11 +24,17 @@ export const findCurrentUserGroup = (
     ...DEFAULT_GROUP,
     name: SITE_CONFIG.SITE.TITLE?.[lang || SITE_CONFIG.LANG.DEFAULT] || DEFAULT_GROUP.name
   };
+  const groupPattern = /\/group\/([^/]+)/;
+  const urlMatch = currentURL.match(groupPattern);
+  const groupNameFromUrl = urlMatch ? urlMatch[1] : null;
 
   return (
     (currentURL &&
       groups.find(
-        (group: UserGroupIbp) => group.webAddress && currentURL == group.webAddress
+        (group: UserGroupIbp) =>
+          group.webAddress &&
+          (group.webAddress.endsWith(`/group/${groupNameFromUrl}`) ||
+            group.webAddress.endsWith(`/group/${groupNameFromUrl}/`))
       )) ||
     defaultGroup
   );
