@@ -40,16 +40,22 @@ export function SpeciesValidateForm({ name }) {
   });
 
   const handleOnValidate = async (values) => {
-    setIsLoading(true);
-    const { success, data } = await axCheckTaxonomy(values);
-    if (success) {
-      setValidateResponse(data);
-      setSelectedTaxon(undefined);
-      setValidationParams(values);
-    } else {
+    try {
+      setIsLoading(true);
+      const { success, data } = await axCheckTaxonomy(values);
+      if (success) {
+        setValidateResponse(data);
+        setSelectedTaxon(undefined);
+        setValidationParams(values);
+      } else {
+        notification(t("species:create.validate_error"));
+      }
+    } catch (error) {
+      console.error("Validation error:", error);
       notification(t("species:create.validate_error"));
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
