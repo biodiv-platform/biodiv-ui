@@ -28,7 +28,7 @@ export const findCurrentUserGroup = (
   return (
     (currentURL &&
       groups.find(
-        (group: UserGroupIbp) => group.webAddress && currentURL == group.webAddress
+        (group: UserGroupIbp) => group.webAddress && currentURL.startsWith(group.webAddress)
       )) ||
     defaultGroup
   );
