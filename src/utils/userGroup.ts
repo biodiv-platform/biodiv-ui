@@ -24,11 +24,16 @@ export const findCurrentUserGroup = (
     ...DEFAULT_GROUP,
     name: SITE_CONFIG.SITE.TITLE?.[lang || SITE_CONFIG.LANG.DEFAULT] || DEFAULT_GROUP.name
   };
+  const match = currentURL.match(/\/group\/([^/]+)/);
+  const groupNameFromUrl = match ? match[1] : null;
 
   return (
     (currentURL &&
       groups.find(
-        (group: UserGroupIbp) => group.webAddress && currentURL.startsWith(group.webAddress)
+        (group: UserGroupIbp) =>
+          group.webAddress &&
+          (group.webAddress.endsWith(`/group/${groupNameFromUrl}`) ||
+            group.webAddress.endsWith(`/group/${groupNameFromUrl}/`))
       )) ||
     defaultGroup
   );
@@ -41,7 +46,7 @@ export const getManifestURL = (group: UserGroupIbp) => {
 
 export const reorderRemovedGallerySetup = (data, index) => {
   const list = data.sort((a, b) => a.displayOrder - b.displayOrder);
-  const removedDisplayOrder = data[index].displayOrder;;
+  const removedDisplayOrder = data[index].displayOrder;
 
   const serializeDisplayOrder = () => {
     return list.reduce((acc, item) => {
