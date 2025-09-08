@@ -12,6 +12,7 @@ import { parse, stringify } from "wkt";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
+import { mapStyles } from "@/static/constants";
 
 const NakshaMaplibreDraw: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
@@ -93,8 +94,8 @@ export default function GeoJsonWktParserInput({
         ) : (
           <NakshaMaplibreDraw
             defaultViewState={defaultViewState}
-            // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
             onFeaturesChange={handleMapDraw}
+            mapStyles={mapStyles}
           />
         )}
       </Box>

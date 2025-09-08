@@ -177,3 +177,18 @@ export const STATS_FILTER = {
   TRAITS: "traits",
   LIFELIST: "lifelist"
 };
+
+export const mapStyles = [
+  {
+    text: "OSM",
+    key: "0",
+    style: "https://unpkg.com/maplibre-gl-styles@0.0.1/styles/osm-mapnik/v8/india.json"
+  },
+  {
+    text: "Satellite",
+    key: "1",
+    style:
+      "https://raw.githubusercontent.com/go2garret/maps/main/src/assets/json/arcgis_hybrid.json",
+    maxZoom: 15.9
+  }
+];

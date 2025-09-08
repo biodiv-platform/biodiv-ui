@@ -1,4 +1,4 @@
-import { MapStyles } from "@biodiv-platform/naksha-commons";
+// import { MapStyles } from "@biodiv-platform/naksha-commons";
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
@@ -51,7 +51,7 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
           loadToC={false}
           showToC={false}
           lang={lang}
-          mapStyle={MapStyles.MAP_SATELLITE}
+          mapStyle={"0"}
           // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{

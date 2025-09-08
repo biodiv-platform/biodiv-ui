@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { mapStyles } from "@/static/constants";
+
 const NakshaMaplibreView: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreView),
   {
@@ -41,7 +43,7 @@ export default function DocumentSidebarMap({ documentCoverages }) {
         <NakshaMaplibreView
           data={geojson}
           defaultViewState={defaultViewState}
-          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          mapStyles={mapStyles}
         />
       ) : (
         t("document:no_geodata")

@@ -6,6 +6,7 @@ import { useController } from "react-hook-form";
 import { parse, stringify } from "wkt";
 
 import { Field } from "@/components/ui/field";
+import { mapStyles } from "@/static/constants";
 const NakshaMaplibreDraw: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
   {
@@ -85,7 +86,7 @@ export default function AreaDrawField({
         defaultViewState={defaultViewState}
         features={defaultFeatures}
         onFeaturesChange={handleOnFeatureChange}
-        // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        mapStyles={mapStyles}
       />
     </Box>
   );

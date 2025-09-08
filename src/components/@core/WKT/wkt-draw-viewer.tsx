@@ -24,6 +24,21 @@ const NakshaMaplibreDraw: any = dynamic(
   }
 );
 
+const mapStyles = [
+  {
+    text: "OSM_custom",
+    key: "0",
+    style: "https://unpkg.com/maplibre-gl-styles@0.0.1/styles/osm-mapnik/v8/india.json"
+  },
+  {
+    text: "Satellite",
+    key: "1",
+    style:
+      "https://raw.githubusercontent.com/go2garret/maps/main/src/assets/json/arcgis_hybrid.json",
+    maxZoom: 15.9
+  }
+];
+
 const onQuery = async (q) => {
   const { data } = await axQueryGeoEntitiesByPlaceName(q);
   return data.map(({ placeName, wktData, id }) => ({
@@ -135,26 +150,6 @@ export default function WKTDrawViewer({
     }
   };
 
-  // Fix for NakshaMaplibreDraw buttons acting as submit buttons
-  useEffect(() => {
-    const fixMapButtons = () => {
-      if (mapContainerRef.current) {
-        const buttons = mapContainerRef.current.querySelectorAll("button");
-        buttons.forEach((button) => {
-          if (!button.getAttribute("type")) {
-            button.setAttribute("type", "button");
-          }
-        });
-      }
-    };
-
-    // Run initially and then periodically to catch dynamically added buttons
-    fixMapButtons();
-    const interval = setInterval(fixMapButtons, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   useEffect(() => {
     if (!disabled) {
       if (!group) {
@@ -255,7 +250,7 @@ export default function WKTDrawViewer({
         <Box position="relative" h="22rem" ref={mapContainerRef}>
           <NakshaMaplibreDraw
             defaultViewState={defaultViewState}
-            // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            mapStyles={mapStyles}
             onFeaturesChange={handleMapDraw}
             isReadOnly={disabled}
           />

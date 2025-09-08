@@ -3,6 +3,8 @@ import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React from "react";
 
+import { mapStyles } from "@/static/constants";
+
 const NakshaMaplibreView: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreView),
   {
@@ -31,11 +33,7 @@ export default function GeoJSONPreview({
 
   return (
     <Box position="relative" h={h} overflow="hidden" mb={mb} borderRadius="md">
-      <NakshaMaplibreView
-        defaultViewState={defaultViewState}
-        data={data}
-        // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
-      />
+      <NakshaMaplibreView defaultViewState={defaultViewState} data={data} mapStyles={mapStyles} />
     </Box>
   );
 }

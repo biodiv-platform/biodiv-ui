@@ -6,6 +6,8 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import wkt from "wkt";
 
+import { mapStyles } from "@/static/constants";
+
 import ReadMore from "./common/read-more";
 import InfoTab from "./document-box";
 import DownloadLandscape from "./download";
@@ -48,7 +50,7 @@ export default function LandscapeShowComponent({
         <NakshaMaplibreView
           defaultViewState={defaultViewState}
           data={wkt.parse(landscapeShow.wktData)}
-          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          mapStyles={mapStyles}
         />
         <DownloadLandscape id={landscape.id} title={landscape.shortName} />
       </Box>

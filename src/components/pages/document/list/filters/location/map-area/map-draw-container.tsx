@@ -4,6 +4,8 @@ import { getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 
+import { mapStyles } from "@/static/constants";
+
 const FILTER_NAME = "location";
 
 const NakshaMaplibreDraw: any = dynamic(
@@ -35,8 +37,8 @@ export default function MapDrawContainer() {
       <NakshaMaplibreDraw
         defaultViewState={defaultViewState}
         features={defaultFeatures}
-        // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         onFeaturesChange={handleOnFeatureChange}
+        mapStyles={mapStyles}
         isPolygon={true}
       />
     </Box>

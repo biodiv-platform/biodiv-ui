@@ -6,6 +6,8 @@ import { defaultViewState, NakshaMaplibreView } from "naksha-components-react";
 import React from "react";
 import wkt from "wkt";
 
+import { mapStyles } from "@/static/constants";
+
 interface ISidebarProps {
   datatable;
   authorInfo?: UserIbp;
@@ -21,6 +23,7 @@ export default function Sidebar({ datatable, authorInfo, taxon }: ISidebarProps)
           <NakshaMaplibreView
             defaultViewState={defaultViewState}
             data={wkt.parse(datatable.geographicalCoverageTopology)}
+            mapStyles={mapStyles}
           />
         </Box>
       ) : (

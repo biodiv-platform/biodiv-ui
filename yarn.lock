@@ -294,11 +294,6 @@
   resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-commons/-/naksha-commons-5.0.0-beta.1.tgz#e5cda0e7b3c0f44c142aa32264031a9b2217caa9"
   integrity sha512-Z/2EFREhXNqkCep7AedKAMMps0rVyzOsKE5ucf7rOxNz7/3arQlVqQUiPIlsZuB1Zz/UbGBvR8js1ETCT44Kkg==
 
-"@biodiv-platform/naksha-commons@5.0.0-beta.2":
-  version "5.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-commons/-/naksha-commons-5.0.0-beta.2.tgz#a423e95a47567da8ff1d10d5605c3ed20fb2c7dd"
-  integrity sha512-8oHTVy/0fJyFvFAumepWjdGXx6wttkQUMP/+XEDkE4kW9rnmkgj1HQI2cxEb/d+IDcRSpzGVLd1y35K1E8DF5g==
-
 "@biodiv-platform/naksha-gmaps-draw@4.5.3":
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-gmaps-draw/-/naksha-gmaps-draw-4.5.3.tgz#ed73782fefe877b1d2a878d4a0d7984ead37f073"
@@ -315,17 +310,18 @@
     "@biodiv-platform/naksha-commons" "*"
     "@turf/bbox" "^6.5.0"
 
-"@biodiv-platform/naksha-maplibre-draw@5.0.7":
-  version "5.0.7"
-  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-draw/-/naksha-maplibre-draw-5.0.7.tgz#0c07505e23fb3dda8e8733b602ffab72bb8d8f67"
-  integrity sha512-THI3XmcXQReye0kj002bin2rJKQDGR3vrybTUnkDPXdmHLC0B8L7MO1BzuIh5AA1coPtK087Sj6glKhI9VJDOw==
+"@biodiv-platform/naksha-maplibre-draw@5.0.10":
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-draw/-/naksha-maplibre-draw-5.0.10.tgz#98587bced845a196c349d11b494488b2b032a729"
+  integrity sha512-uarOTGFKo2Ncvr919lm0QyGMS0h/b9pA9RSWpW1LN7rRnj1vGd3/nA46Pplg3PBupzr7xdY94OcMMS3VbXCBFQ==
   dependencies:
-    "@biodiv-platform/naksha-commons" "5.0.0-beta.2"
+    "@biodiv-platform/naksha-commons" "*"
     "@turf/bbox" "^6.5.0"
     boundingbox "^1.4.0"
     react-gbus "^1.1.2"
     terra-draw "^1.13.0"
     terra-draw-maplibre-gl-adapter "^1.1.2"
+    twind "^0.16.17"
 
 "@biodiv-platform/naksha-maplibre-layers@5.0.1":
   version "5.0.1"
@@ -348,10 +344,10 @@
     redaxios "^0.5.0"
     twind "^0.16.17"
 
-"@biodiv-platform/naksha-maplibre-view@5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-view/-/naksha-maplibre-view-5.0.1.tgz#c2bd40090ff2aae80bb1672bc193b50d66205740"
-  integrity sha512-6oPATbijDnk5C2DRfi7T/TbZSJ14tagqJDwFO1Y/FftkqOHd8XLrmR077S6Lepa1G9ilYdLUzlaLs96mlu46pQ==
+"@biodiv-platform/naksha-maplibre-view@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-view/-/naksha-maplibre-view-5.0.2.tgz#e166e73d2ccbcd31fb513e6dbb815a8cff008abe"
+  integrity sha512-THh2D+W/tQuDwCgNZWe70oMBpn54K9zSp5DS17Cj8kTIwNCBoxqH5K5oFu7to9Z65/5dbtiXd0MDT2E2G+qRkQ==
   dependencies:
     "@biodiv-platform/naksha-commons" "5.0.0-beta.1"
     "@turf/bbox" "^6.5.0"
@@ -7529,17 +7525,17 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@4.6.1-beta.18:
-  version "4.6.1-beta.18"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.6.1-beta.18.tgz#9831046f89cc88038003f835b403afde316ed631"
-  integrity sha512-Af0rZx4IoQWDDAPdCXm21AB6vKJ44ld9lagE3jVPH/cWXeEKIPYFMvTcYKXSNeyRsoMiGyWxDheveIwqAGGvFQ==
+naksha-components-react@4.6.1-beta.21:
+  version "4.6.1-beta.21"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.6.1-beta.21.tgz#c4be645dfed494d646168d903c95250b9177202d"
+  integrity sha512-x52RTHdLL3fNhKEAI/IkkdjDg4niOotV/yQhUEej1n50mPIGHFVfB2iGf+sTTBzP7f0/OrLlKAg7ZzJHzDEdVQ==
   dependencies:
     "@biodiv-platform/eslint-preset" "4.4.9"
     "@biodiv-platform/naksha-gmaps-draw" "4.5.3"
     "@biodiv-platform/naksha-gmaps-view" "4.4.9"
-    "@biodiv-platform/naksha-maplibre-draw" "5.0.7"
+    "@biodiv-platform/naksha-maplibre-draw" "5.0.10"
     "@biodiv-platform/naksha-maplibre-layers" "5.0.1"
-    "@biodiv-platform/naksha-maplibre-view" "5.0.1"
+    "@biodiv-platform/naksha-maplibre-view" "5.0.2"
     "@biodiv-platform/tsconfig" "4.4.9"
 
 nanoclone@^0.2.1:
