@@ -33,7 +33,9 @@ export const findCurrentUserGroup = (
       groups.find(
         (group: UserGroupIbp) =>
           group.webAddress &&
-          (group.webAddress.endsWith(`/group/${groupNameFromUrl}`) ||
+          ((!group.webAddress.startsWith(SITE_CONFIG.SITE.URL) &&
+            currentURL.startsWith(group.webAddress)) ||
+            group.webAddress.endsWith(`/group/${groupNameFromUrl}`) ||
             group.webAddress.endsWith(`/group/${groupNameFromUrl}/`))
       )) ||
     defaultGroup
