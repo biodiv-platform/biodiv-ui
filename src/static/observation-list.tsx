@@ -65,6 +65,18 @@ export const bulkActionTabs = [
     name: "common:usergroups",
     icon: "👥",
     active: SITE_CONFIG.USERGROUP.ACTIVE
+  },
+  {
+    name: "form:species_groups",
+    icon:"👥"
+  },
+  {
+    name: "observation:id.title",
+    icon: "🆔"
+  },
+  {
+    name: "observation:traits",
+    icon: "💎"
   }
 ];
 

@@ -83,7 +83,14 @@ export interface ObservationImageCard {
 }
 export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationImageCard) {
   const [canEdit, setCanEdit] = useState(false);
-  const { hasUgAccess, setCropObservationId } = useObservationFilter();
+  const {
+    hasUgAccess,
+    setCropObservationId,
+    selectAll,
+    setExcludedBulkIds,
+    bulkSpeciesIds,
+    setBulkSpeciesIds
+  } = useObservationFilter();
 
   useEffect(() => {
     setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
@@ -120,6 +127,37 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
             {...getCheckboxProps({ value: String(o.observationId) })}
             className="topCheckbox"
             colorPalette={"blue"}
+            onChange={(e) => {
+              if (selectAll) {
+                if (!e.target["checked"]) {
+                  // Add to excludedIDs if unchecked
+                  if (o.speciesGroupId !== undefined) {
+                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]-1
+                  setBulkSpeciesIds(bulkSpeciesIds)
+                  }
+                  setExcludedBulkIds((prev) => [...prev, String(o.observationId)]);
+                } else {
+                  // Remove from excludedIDs if checked
+                  if (o.speciesGroupId !== undefined) {
+                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]+1
+                  setBulkSpeciesIds(bulkSpeciesIds)
+                  }
+                  setExcludedBulkIds((prev) => prev.filter((id) => id !== String(o.observationId)));
+                }
+              } else {
+                if (e.target["checked"]) {
+                  if (o.speciesGroupId !== undefined) {
+                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]+1
+                  setBulkSpeciesIds(bulkSpeciesIds)
+                  }
+                } else {
+                  if (o.speciesGroupId !== undefined) {
+                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]-1
+                  setBulkSpeciesIds(bulkSpeciesIds)
+                  }
+                }
+              }
+            }}
           ></Checkbox>
         )}
       </HStack>
