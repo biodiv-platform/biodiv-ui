@@ -16,6 +16,7 @@ import {
   TabsContent,
   Text
 } from "@chakra-ui/react";
+import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { bulkActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
@@ -34,6 +35,7 @@ import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
 import { Tooltip } from "@/components/ui/tooltip";
 import useGlobalState from "@/hooks/use-global-state";
+import CheckIcon from "@/icons/check";
 import { TraitsValuePair } from "@/interfaces/traits";
 import { axGetObservationMapData, axGetTraitsByGroupId } from "@/services/observation.service";
 import { axGetLangList } from "@/services/utility.service";
@@ -57,7 +59,8 @@ import GroupPost from "./actions/groupTab";
 export enum bulkActions {
   unPost = "ugBulkUnPosting",
   post = "ugBulkPosting",
-  species = "speciesBulkPosting"
+  species = "speciesBulkPosting",
+  reco = "recoBulkPosting"
 }
 
 export default function BulkMapperModal() {
@@ -171,6 +174,39 @@ export default function BulkMapperModal() {
     onClose();
   };
 
+  const handleOnSubmit = async (values) => {
+    if (values.taxonCommonName || values.taxonScientificName) {
+      const reco ={
+        ...values,
+        confidence: "CERTAIN",
+        recoComment: ""
+      }
+      const params = {
+        ...filter,
+        selectAll,
+        view: "bulkMapping",
+        bulkRecoSuggestion: JSON.stringify(reco),
+        bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
+        bulkAction: bulkActions.reco
+      };
+      const { success } = await axGetObservationMapData(
+        params,
+        filter?.location ? { location: filter.location } : {},
+        true
+      );
+      if (success) {
+        notification(t("observation:bulk_action.success"), NotificationType.Success);
+      } else {
+        notification(t("observation:bulk_action.failure"), NotificationType.Error);
+      }
+      router.push("/observation/list", true, { ...filter }, true);
+  
+      onClose();
+    } else {
+      notification(t("observation:no_empty_suggestion"));
+    }
+  };
+
   const onScientificNameChange = ({ label, value, groupId, raw, source }) => {
     if (value === label) {
       hForm.setValue("scientificNameTaxonId", null);
@@ -245,7 +281,6 @@ export default function BulkMapperModal() {
               <Tabs.Root
                 lazyMount={true}
                 h={{ md: "100%" }}
-                // variant="unstyled"
                 className="tabs"
                 defaultValue={tabIndex}
                 onValueChange={(e) => setTabIndex(e.value)}
@@ -335,7 +370,7 @@ export default function BulkMapperModal() {
                   <TabsContent value="observation:id.title">
                     <Box p={4}>
                       <FormProvider {...hForm}>
-                        <form>
+                        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
                           <SimpleGrid columns={[1, 1, 3, 3]} gap={4}>
                             <SelectAsyncInputField
                               name="taxonCommonName"
@@ -368,6 +403,11 @@ export default function BulkMapperModal() {
                               openMenuOnFocus={true}
                             />
                           </Box>
+                          <HStack m={2} justifyContent="flex-end">
+                            <SubmitButton leftIcon={<CheckIcon />}>
+                              {t("observation:suggest")}
+                            </SubmitButton>
+                          </HStack>
                         </form>
                       </FormProvider>
                     </Box>
