@@ -7,7 +7,6 @@ import {
   Flex,
   HStack,
   Image,
-  Input,
   Portal,
   RadioCard,
   SimpleGrid,
@@ -21,29 +20,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { bulkActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import DatePicker from "react-datepicker";
 import { FormProvider, useForm } from "react-hook-form";
-import { LuCalendar, LuCircleCheck, LuRepeat } from "react-icons/lu";
+import { LuCircleCheck, LuRepeat } from "react-icons/lu";
 import * as Yup from "yup";
 
-import BlueLink from "@/components/@core/blue-link";
-import LocalLink, { useLocalRouter } from "@/components/@core/local-link";
+import { useLocalRouter } from "@/components/@core/local-link";
 import { SelectInputField } from "@/components/form/select";
 import { SelectAsyncInputField } from "@/components/form/select-async";
-import { ColorEditSwatch } from "@/components/pages/species/show/fields/traits/color/color-edit-swatch";
-import { Field } from "@/components/ui/field";
-import { InputGroup } from "@/components/ui/input-group";
 import { Tooltip } from "@/components/ui/tooltip";
 import useGlobalState from "@/hooks/use-global-state";
 import CheckIcon from "@/icons/check";
-import { TraitsValuePair } from "@/interfaces/traits";
-import { axGetObservationMapData, axGetTraitsByGroupId } from "@/services/observation.service";
+import { axGetObservationMapData } from "@/services/observation.service";
 import { axGetLangList } from "@/services/utility.service";
 import { getLocalIcon } from "@/utils/media";
 import notification, { NotificationType } from "@/utils/notification";
 
-import TraitInput from "../../common/trait-input";
-import MultipleCategorialTrait from "../../common/trait-input/multiple-categorical";
 import useObservationFilter from "../../common/use-observation-filter";
 import {
   CommonNameOption,
@@ -55,6 +46,7 @@ import {
   ScientificNameOption
 } from "../../create/form/recodata/scientific-name";
 import GroupPost from "./actions/groupTab";
+import TraitsPost from "./actions/traitsTab";
 
 export enum bulkActions {
   unPost = "ugBulkUnPosting",
@@ -74,7 +66,8 @@ export default function BulkMapperModal() {
     bulkObservationIds,
     observationData,
     bulkSpeciesIds,
-    filter
+    filter,
+    excludedBulkIds
   } = useObservationFilter();
   const [tabIndex, setTabIndex] = useState<string | null>("common:usergroups");
   const handleSelectAll = () => {
@@ -94,22 +87,12 @@ export default function BulkMapperModal() {
       setLanguages(data.map((l) => ({ label: l.name, value: l.id })))
     );
   }, []);
-  const inputRef = useRef<any>();
-
-  const [traitPairs, setTraits] = useState<Required<TraitsValuePair>[]>();
   const { languageId } = useGlobalState();
 
   const idsWithValueGreaterThanZero = Object.entries(bulkSpeciesIds as Record<number, number>)
     .filter(([, value]) => value > 0)
     .map(([id]) => id);
 
-  useEffect(() => {
-    if (idsWithValueGreaterThanZero.length == 1) {
-      axGetTraitsByGroupId(idsWithValueGreaterThanZero[0], languageId).then(({ data }) =>
-        setTraits(data)
-      );
-    }
-  }, [idsWithValueGreaterThanZero, languageId]);
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
@@ -129,10 +112,6 @@ export default function BulkMapperModal() {
   });
   const langRef: any = useRef(null);
   const scientificRef: any = useRef(null);
-  const [facts, setFacts] = useState<any>({});
-  const handleOnChange = (traitId, value) => {
-    setFacts({ ...facts, [traitId]: Array.isArray(value) ? value : value ? [value] : [] });
-  };
 
   const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
     if (langId) {
@@ -176,11 +155,11 @@ export default function BulkMapperModal() {
 
   const handleOnSubmit = async (values) => {
     if (values.taxonCommonName || values.taxonScientificName) {
-      const reco ={
+      const reco = {
         ...values,
         confidence: "CERTAIN",
         recoComment: ""
-      }
+      };
       const params = {
         ...filter,
         selectAll,
@@ -200,7 +179,7 @@ export default function BulkMapperModal() {
         notification(t("observation:bulk_action.failure"), NotificationType.Error);
       }
       router.push("/observation/list", true, { ...filter }, true);
-  
+
       onClose();
     } else {
       notification(t("observation:no_empty_suggestion"));
@@ -239,7 +218,7 @@ export default function BulkMapperModal() {
             background={"linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%)"}
             borderTop={"3px solid #e9ecef"}
             boxShadow={
-              "0 -8px 32px rgba(0, 0, 0, 0.12), 0 -2px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5)"
+              "0 -20px 60px rgba(0, 0, 0, 0.25), 0 -8px 20px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.8)"
             }
           >
             <Box
@@ -254,7 +233,10 @@ export default function BulkMapperModal() {
               </Text>
               <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
                 <ActionBar.SelectionTrigger m={2}>
-                  {selectAll ? observationData.n : bulkObservationIds?.length} selected
+                  {selectAll
+                    ? observationData.n - (excludedBulkIds||[]).length
+                    : bulkObservationIds?.length}{" "}
+                  selected
                 </ActionBar.SelectionTrigger>
                 <ButtonGroup size="sm" variant="outline">
                   {!selectAll && (
@@ -271,10 +253,10 @@ export default function BulkMapperModal() {
                     <LuRepeat />
                     {t("observation:unselect")}
                   </Button>
+                  <ActionBar.CloseTrigger asChild mr={4}>
+                    <CloseButton size="sm" />
+                  </ActionBar.CloseTrigger>
                 </ButtonGroup>
-                <ActionBar.CloseTrigger asChild mr={6}>
-                  <CloseButton size="sm" />
-                </ActionBar.CloseTrigger>
               </Box>
             </Box>
             <Box justifyContent="flex-start" width={"full"}>
@@ -413,179 +395,16 @@ export default function BulkMapperModal() {
                     </Box>
                   </TabsContent>
                   <TabsContent value="observation:traits" height={"18rem"} overflowY={"auto"} p={4}>
-                    {traitPairs?.map(({ traits, values }) => (
-                      <Field mb={4} key={traits.id}>
-                        <Field mb={1}>
-                          <BlueLink mr={2} asChild>
-                            <LocalLink href={`/traits/show/${traits?.traitId}`} prefixGroup={true}>
-                              {traits?.name} {traits?.units && `(${traits.units})`}
-                            </LocalLink>
-                          </BlueLink>
-                        </Field>
-                        {traits.dataType == "STRING" && traits.traitTypes == "RANGE" && (
-                          <MultipleCategorialTrait
-                            name={traits.name}
-                            type={traits.traitTypes}
-                            values={values}
-                            defaultValue={
-                              traits.traitId
-                                ? facts[traits.traitId + "|" + traits.dataType]
-                                : undefined
-                            }
-                            onUpdate={(v) =>
-                              handleOnChange(traits.traitId + "|" + traits.dataType, v)
-                            }
-                            gridColumns={3}
-                          />
-                        )}
-                        {traits.dataType == "STRING" && traits.traitTypes != "RANGE" && (
-                          <TraitInput
-                            type={traits.traitTypes}
-                            values={values}
-                            defaultValue={
-                              traits.traitId
-                                ? facts[traits.traitId + "|" + traits.dataType]
-                                : undefined
-                            }
-                            onUpdate={(v) =>
-                              handleOnChange(traits.traitId + "|" + traits.dataType, v)
-                            }
-                          />
-                        )}
-                        {traits.dataType == "NUMERIC" && (
-                          <TraitInput
-                            type={traits.traitTypes}
-                            values={values}
-                            defaultValue={
-                              traits.traitId
-                                ? facts[traits.traitId + "|" + traits.dataType]
-                                : undefined
-                            }
-                            onUpdate={(v) =>
-                              handleOnChange(traits.traitId + "|" + traits.dataType, v)
-                            }
-                          />
-                        )}
-                        {traits.dataType == "DATE" && (
-                          <Box mb={3} maxW="md">
-                            <InputGroup
-                              endElement={
-                                <label htmlFor={""} style={{ cursor: "pointer" }}>
-                                  <LuCalendar color="gray.300" />
-                                </label>
-                              }
-                            >
-                              <DatePicker
-                                ref={inputRef}
-                                customInput={<Input />}
-                                selected={
-                                  traits.traitId && facts[traits.traitId + "|" + traits.dataType]
-                                    ? new Date(
-                                        facts[traits.traitId + "|" + traits.dataType][0].split(
-                                          ":"
-                                        )[0]
-                                      )
-                                    : null
-                                }
-                                startDate={
-                                  traits.traitId && facts[traits.traitId + "|" + traits.dataType]
-                                    ? new Date(
-                                        facts[traits.traitId + "|" + traits.dataType][0].split(
-                                          ":"
-                                        )[0]
-                                      )
-                                    : null
-                                }
-                                endDate={
-                                  traits.traitId &&
-                                  facts[traits.traitId + "|" + traits.dataType] &&
-                                  facts[traits.traitId + "|" + traits.dataType][0].split(":")
-                                    .length > 1
-                                    ? new Date(
-                                        facts[traits.traitId + "|" + traits.dataType][0].split(
-                                          ":"
-                                        )[1]
-                                      )
-                                    : null
-                                }
-                                dateFormat={"dd-MM-yyyy"}
-                                onChange={(v) => {
-                                  handleOnChange(traits.traitId + "|" + traits.dataType, [
-                                    v
-                                      .filter((d) => d) // Filter out null or undefined values
-                                      .map((d) => d.toISOString().split("T")[0]) // Process remaining values
-                                      .join(":")
-                                  ]);
-                                }}
-                                selectsRange
-                              />
-                            </InputGroup>
-                          </Box>
-                        )}
-                        {traits.dataType == "COLOR" && (
-                          <SimpleGrid columns={{ md: 3 }} gap={4} mb={3}>
-                            {traits.traitId &&
-                              facts[traits.traitId + "|" + traits.dataType] &&
-                              facts[traits.traitId + "|" + traits.dataType].map((value, index) => (
-                                <ColorEditSwatch
-                                  key={index}
-                                  index={index}
-                                  color={value}
-                                  onDelete={(index) =>
-                                    setFacts((prevFacts) => {
-                                      if (traits.traitId) {
-                                        const newValues = prevFacts[
-                                          traits.traitId + "|" + traits.dataType
-                                        ].filter((_, i) => i !== index);
-
-                                        return {
-                                          ...prevFacts,
-                                          [traits.traitId + "|" + traits.dataType]: newValues
-                                        };
-                                      }
-                                    })
-                                  }
-                                  onChange={(i, v) =>
-                                    setFacts((prevFacts) => {
-                                      if (traits.traitId) {
-                                        const existingFacts =
-                                          prevFacts[traits.traitId + "|" + traits.dataType];
-                                        existingFacts[i] = v;
-                                        return {
-                                          ...prevFacts,
-                                          [traits.traitId + "|" + traits.dataType]: existingFacts
-                                        };
-                                      }
-                                    })
-                                  }
-                                />
-                              ))}
-                            <Button
-                              h="3.25rem"
-                              alignItems="center"
-                              justifyContent="center"
-                              onClick={() =>
-                                setFacts((prevFacts) => {
-                                  if (traits.traitId) {
-                                    const existingFacts =
-                                      prevFacts[traits.traitId + "|" + traits.dataType] || [];
-                                    return {
-                                      ...prevFacts,
-                                      [traits.traitId + "|" + traits.dataType]: [
-                                        ...existingFacts,
-                                        "rgb(255,255,255"
-                                      ]
-                                    };
-                                  }
-                                })
-                              }
-                            >
-                              {"Add"}
-                            </Button>
-                          </SimpleGrid>
-                        )}
-                      </Field>
-                    ))}
+                    {idsWithValueGreaterThanZero.length == 1 ? (
+                      <TraitsPost
+                        speciesId={idsWithValueGreaterThanZero[0]}
+                        languageId={languageId}
+                      />
+                    ) : (
+                      <Box>
+                        Please select only observations of one species
+                      </Box>
+                    )}
                   </TabsContent>
                 </Box>
               </Tabs.Root>

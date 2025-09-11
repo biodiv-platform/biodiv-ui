@@ -132,28 +132,28 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
                 if (!e.target["checked"]) {
                   // Add to excludedIDs if unchecked
                   if (o.speciesGroupId !== undefined) {
-                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]-1
-                  setBulkSpeciesIds(bulkSpeciesIds)
+                    bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId] - 1;
+                    setBulkSpeciesIds(bulkSpeciesIds);
                   }
                   setExcludedBulkIds((prev) => [...prev, String(o.observationId)]);
                 } else {
                   // Remove from excludedIDs if checked
                   if (o.speciesGroupId !== undefined) {
-                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]+1
-                  setBulkSpeciesIds(bulkSpeciesIds)
+                    bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId] + 1;
+                    setBulkSpeciesIds(bulkSpeciesIds);
                   }
                   setExcludedBulkIds((prev) => prev.filter((id) => id !== String(o.observationId)));
                 }
               } else {
                 if (e.target["checked"]) {
                   if (o.speciesGroupId !== undefined) {
-                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]+1
-                  setBulkSpeciesIds(bulkSpeciesIds)
+                    bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId] + 1;
+                    setBulkSpeciesIds(bulkSpeciesIds);
                   }
                 } else {
                   if (o.speciesGroupId !== undefined) {
-                  bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId]-1
-                  setBulkSpeciesIds(bulkSpeciesIds)
+                    bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId] - 1;
+                    setBulkSpeciesIds(bulkSpeciesIds);
                   }
                 }
               }
