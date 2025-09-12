@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import { axJoinUserGroup, axLeaveUserGroup } from "@services/usergroup.service";
@@ -72,8 +72,8 @@ export default function JoinUserGroup({
         colorPalette="green"
         onClick={addUserGroupMember}
       >
-        <AddIcon />
-        {t("group:join")}
+        <AddIcon size={"sm"} color={"white"}/>
+        <Text fontSize={"sm"} color={"white"}>{t("group:join")}</Text>
       </Button>
     ) : (
       <Button
@@ -83,13 +83,13 @@ export default function JoinUserGroup({
         colorPalette="red"
         onClick={removeUserGroupMember}
       >
-        <LuMinus />
-        {t("group:leave")}
+        <LuMinus size={"sm"} color={"white"}/>
+        <Text fontSize={"sm"} color={"white"}>{t("group:leave")}</Text>
       </Button>
     )
   ) : (
     <Button size="sm" colorPalette="blue" onClick={waitForAuth} hidden={!showSignInRequired}>
-      {t("common:session_required")}
+      <Text fontSize={"sm"} color={"white"}>{t("common:session_required")}</Text>
     </Button>
   );
 }
