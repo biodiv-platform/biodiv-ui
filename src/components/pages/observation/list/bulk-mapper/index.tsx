@@ -61,6 +61,7 @@ export default function BulkMapperModal() {
   const {
     onClose,
     isOpen,
+    onOpen,
     selectAll,
     handleBulkCheckbox,
     bulkObservationIds,
@@ -70,6 +71,14 @@ export default function BulkMapperModal() {
     excludedBulkIds
   } = useObservationFilter();
   const [tabIndex, setTabIndex] = useState<string | null>("common:usergroups");
+  useEffect(() => {
+    if (bulkObservationIds && bulkObservationIds?.length > 0 && !isOpen) {
+      onOpen();
+    }
+    if (bulkObservationIds && bulkObservationIds?.length == 0 && isOpen) {
+      onClose();
+    }
+  }, [bulkObservationIds]);
   const handleSelectAll = () => {
     alert(`${observationData.n} ${t("observation:select_all_message")}`);
     handleBulkCheckbox("selectAll");
@@ -152,6 +161,51 @@ export default function BulkMapperModal() {
 
     onClose();
   };
+  const handleOnValidate = async () => {
+    const params = {
+      ...filter,
+      selectAll,
+      view: "bulkMapping",
+      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
+      bulkAction: "validateBulkObservations"
+    };
+
+    const { success } = await axGetObservationMapData(
+      params,
+      filter?.location ? { location: filter.location } : {},
+      true
+    );
+    if (success) {
+      notification(t("observation:bulk_action.success"), NotificationType.Success);
+    } else {
+      notification(t("observation:bulk_action.failure"), NotificationType.Error);
+    }
+    router.push("/observation/list", true, { ...filter }, true);
+
+    onClose();
+  };
+  /*const params = {
+      ...filter,
+      selectAll,
+      view: "bulkMapping",
+      bulkSpeciesGroupId: speciesGroupId,
+      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
+      bulkAction
+    };
+
+    const { success } = await axGetObservationMapData(
+      params,
+      filter?.location ? { location: filter.location } : {},
+      true
+    );
+    if (success) {
+      notification(t("observation:bulk_action.success"), NotificationType.Success);
+    } else {
+      notification(t("observation:bulk_action.failure"), NotificationType.Error);
+    }
+    router.push("/observation/list", true, { ...filter }, true);
+
+    onClose();*/
 
   const handleOnSubmit = async (values) => {
     if (values.taxonCommonName || values.taxonScientificName) {
@@ -234,7 +288,7 @@ export default function BulkMapperModal() {
               <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
                 <ActionBar.SelectionTrigger m={2}>
                   {selectAll
-                    ? observationData.n - (excludedBulkIds||[]).length
+                    ? observationData.n - (excludedBulkIds || []).length
                     : bulkObservationIds?.length}{" "}
                   selected
                 </ActionBar.SelectionTrigger>
@@ -292,15 +346,11 @@ export default function BulkMapperModal() {
                           {speciesGroupList?.map((o) => (
                             <RadioCard.Root
                               cursor="pointer"
+                              colorPalette={"blue"}
                               bg="white"
-                              _checked={{
-                                borderColor: "blue.500",
-                                bg: "blue.50"
-                              }}
                               _focus={{
                                 boxShadow: "outline"
                               }}
-                              style={undefined}
                               onValueChange={({ value }) => {
                                 setSpeciesGroupId(value);
                               }}
@@ -399,12 +449,33 @@ export default function BulkMapperModal() {
                       <TraitsPost
                         speciesId={idsWithValueGreaterThanZero[0]}
                         languageId={languageId}
+                        filter={filter}
+                        selectAll={selectAll}
+                        bulkObservationIds={bulkObservationIds}
                       />
                     ) : (
-                      <Box>
-                        Please select only observations of one species
-                      </Box>
+                      <Box>Please select only observations of one species</Box>
                     )}
+                  </TabsContent>
+                  <TabsContent
+                    value="filters:data_quality.validation.title"
+                    height={"18rem"}
+                    overflowY={"auto"}
+                    p={4}
+                  >
+                    <Box bg={"yellow.100"} p={2}>This action will validate the selected observation IDs</Box>
+                    <HStack m={2} justifyContent="flex-end">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          colorPalette="blue"
+                          aria-label="Save"
+                          type="submit"
+                          onClick={() => handleOnValidate()}
+                        >
+                          {"Save"}
+                        </Button>
+                      </HStack>
                   </TabsContent>
                 </Box>
               </Tabs.Root>

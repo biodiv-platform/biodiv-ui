@@ -77,6 +77,10 @@ export const bulkActionTabs = [
   {
     name: "observation:traits",
     icon: "💎"
+  },
+  {
+    name: "filters:data_quality.validation.title",
+    icon: "🆔"
   }
 ];
 

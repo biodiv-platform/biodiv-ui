@@ -1,4 +1,4 @@
-import { Box, Button, Input, SimpleGrid } from "@chakra-ui/react";
+import { Box, Button, HStack, Input, SimpleGrid } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -9,22 +9,47 @@ import { ColorEditSwatch } from "@/components/pages/species/show/fields/traits/c
 import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
 import { TraitsValuePair } from "@/interfaces/traits";
-import { axGetTraitsByGroupId } from "@/services/observation.service";
+import { axGetObservationMapData, axGetTraitsByGroupId } from "@/services/observation.service";
+import { cleanFacts } from "@/utils/tags";
 
 import TraitInput from "../../../common/trait-input";
 import MultipleCategorialTrait from "../../../common/trait-input/multiple-categorical";
 
-export default function TraitsPost({speciesId, languageId}) {
+export default function TraitsPost({ speciesId, languageId, filter, selectAll, bulkObservationIds }) {
   const [traitPairs, setTraits] = useState<Required<TraitsValuePair>[]>();
   const inputRef = useRef<any>();
   useEffect(() => {
-      axGetTraitsByGroupId(speciesId, languageId).then(({ data }) =>
-        setTraits(data)
-      );
-  }, [speciesId , languageId]);
+    axGetTraitsByGroupId(speciesId, languageId).then(({ data }) => setTraits(data));
+  }, [speciesId, languageId]);
   const [facts, setFacts] = useState<any>({});
   const handleOnChange = (traitId, value) => {
     setFacts({ ...facts, [traitId]: Array.isArray(value) ? value : value ? [value] : [] });
+  };
+  const handleOnTraitSave = async () => {
+    const cleFacts = cleanFacts(facts);
+    const result = Object.entries(cleFacts.factValuePairs)
+  .map(([key, values]) => {
+    // Join array values with commas
+    const valueString = values.join(',');
+    return `${key}:${valueString}`;
+  })
+  .filter(part => part.includes(':')) // Remove empty entries
+  .join('|');
+
+    const params = {
+      ...filter,
+      selectAll,
+      view: "bulkMapping",
+      bulkTraits: result,
+      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
+      bulkAction: "traitsBulkPosting"
+    };
+
+    const { success } = await axGetObservationMapData(
+      params,
+      filter?.location ? { location: filter.location } : {},
+      true
+    );
   };
   return (
     <Box>
@@ -174,6 +199,18 @@ export default function TraitsPost({speciesId, languageId}) {
           )}
         </Field>
       ))}
+      <HStack m={2} justifyContent="flex-end">
+        <Button
+          size="sm"
+          variant="outline"
+          colorPalette="blue"
+          aria-label="Save"
+          type="submit"
+          onClick={() => handleOnTraitSave()}
+        >
+          {"Save"}
+        </Button>
+      </HStack>
     </Box>
   );
 }
