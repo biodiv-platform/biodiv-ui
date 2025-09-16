@@ -1,5 +1,6 @@
 import { Box, Button, HStack, Input, SimpleGrid } from "@chakra-ui/react";
-import LocalLink from "@components/@core/local-link";
+import LocalLink, { useLocalRouter } from "@components/@core/local-link";
+import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { LuCalendar } from "react-icons/lu";
@@ -10,12 +11,15 @@ import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
 import { TraitsValuePair } from "@/interfaces/traits";
 import { axGetObservationMapData, axGetTraitsByGroupId } from "@/services/observation.service";
+import notification, { NotificationType } from "@/utils/notification";
 import { cleanFacts } from "@/utils/tags";
 
 import TraitInput from "../../../common/trait-input";
 import MultipleCategorialTrait from "../../../common/trait-input/multiple-categorical";
 
 export default function TraitsPost({ speciesId, languageId, filter, selectAll, bulkObservationIds }) {
+  const { t } = useTranslation();
+  const router = useLocalRouter();
   const [traitPairs, setTraits] = useState<Required<TraitsValuePair>[]>();
   const inputRef = useRef<any>();
   useEffect(() => {
@@ -50,6 +54,13 @@ export default function TraitsPost({ speciesId, languageId, filter, selectAll, b
       filter?.location ? { location: filter.location } : {},
       true
     );
+
+    if (success) {
+      notification(t("observation:bulk_action.success"), NotificationType.Success);
+    } else {
+      notification(t("observation:bulk_action.failure"), NotificationType.Error);
+    }
+    router.push("/observation/list", true, { ...filter }, true);
   };
   return (
     <Box>
