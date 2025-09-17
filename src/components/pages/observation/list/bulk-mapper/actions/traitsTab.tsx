@@ -11,6 +11,7 @@ import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
 import { TraitsValuePair } from "@/interfaces/traits";
 import { axGetObservationMapData, axGetTraitsByGroupId } from "@/services/observation.service";
+import { axGetRootTraits } from "@/services/traits.service";
 import notification, { NotificationType } from "@/utils/notification";
 import { cleanFacts } from "@/utils/tags";
 
@@ -23,7 +24,12 @@ export default function TraitsPost({ speciesId, languageId, filter, selectAll, b
   const [traitPairs, setTraits] = useState<Required<TraitsValuePair>[]>();
   const inputRef = useRef<any>();
   useEffect(() => {
-    axGetTraitsByGroupId(speciesId, languageId).then(({ data }) => setTraits(data));
+    if (speciesId.length==1){
+    axGetTraitsByGroupId(speciesId[0], languageId).then(({ data }) => setTraits(data));
+    }
+    else {
+      axGetRootTraits(languageId).then(({data})=>setTraits(data));
+    }
   }, [speciesId, languageId]);
   const [facts, setFacts] = useState<any>({});
   const handleOnChange = (traitId, value) => {

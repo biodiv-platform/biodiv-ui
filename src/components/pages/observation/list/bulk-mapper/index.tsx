@@ -445,17 +445,15 @@ export default function BulkMapperModal() {
                     </Box>
                   </TabsContent>
                   <TabsContent value="observation:traits" height={"18rem"} overflowY={"auto"} p={4}>
-                    {idsWithValueGreaterThanZero.length == 1 ? (
+                    {
                       <TraitsPost
-                        speciesId={idsWithValueGreaterThanZero[0]}
+                        speciesId={idsWithValueGreaterThanZero}
                         languageId={languageId}
                         filter={filter}
                         selectAll={selectAll}
                         bulkObservationIds={bulkObservationIds}
                       />
-                    ) : (
-                      <Box>Please select only observations of one species</Box>
-                    )}
+                    }
                   </TabsContent>
                   <TabsContent
                     value="filters:data_quality.validation.title"
