@@ -12,8 +12,8 @@ export default function Info({ icon, title, link }) {
   return (
     <Flex align="flex-start" direction={["column", "row"]}>
       <Box w={90} mr={5} mb={8}>
-        <Link aria-label={title} display="inline-block" asChild>
-          <LocalLink href={link} prefixGroup={true}>
+        {link?.startsWith("http") ? (
+          <Link aria-label={title} display="inline-block" href={link} target="_blank" rel="noopener noreferrer">
             <Image
               src={iconPath}
               alt={icon}
@@ -22,8 +22,21 @@ export default function Info({ icon, title, link }) {
               minW={90}
               display="inline-block"
             />
-          </LocalLink>
-        </Link>
+          </Link>
+        ) : (
+          <Link aria-label={title} display="inline-block" asChild>
+            <LocalLink href={link} prefixGroup={true}>
+              <Image
+                src={iconPath}
+                alt={icon}
+                htmlWidth={90}
+                htmlHeight={90}
+                minW={90}
+                display="inline-block"
+              />
+            </LocalLink>
+          </Link>
+        )}
       </Box>
       <Box flexGrow={1}>
         <Text as="h2" lineHeight={1} mb={3} fontSize="2xl">
