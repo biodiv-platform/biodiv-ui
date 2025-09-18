@@ -13,7 +13,7 @@ export default function Info({ icon, title, link }) {
     <Flex align="flex-start" direction={["column", "row"]}>
       <Box w={90} mr={5} mb={8}>
         {link?.startsWith("http") ? (
-          <Link aria-label={title} display="inline-block" href={link} isExternal>
+          <Link aria-label={title} display="inline-block" href={link} target="_blank" rel="noopener noreferrer">
             <Image
               src={iconPath}
               alt={icon}
