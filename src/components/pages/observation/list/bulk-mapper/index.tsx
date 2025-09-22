@@ -30,6 +30,8 @@ import { SelectAsyncInputField } from "@/components/form/select-async";
 import { Tooltip } from "@/components/ui/tooltip";
 import useGlobalState from "@/hooks/use-global-state";
 import CheckIcon from "@/icons/check";
+import LockIcon from "@/icons/lock";
+import UnlockIcon from "@/icons/unlock";
 import { axGetObservationMapData } from "@/services/observation.service";
 import { axGetLangList } from "@/services/utility.service";
 import { getLocalIcon } from "@/utils/media";
@@ -168,6 +170,30 @@ export default function BulkMapperModal() {
       view: "bulkMapping",
       bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
       bulkAction: "validateBulkObservations"
+    };
+
+    const { success } = await axGetObservationMapData(
+      params,
+      filter?.location ? { location: filter.location } : {},
+      true
+    );
+    if (success) {
+      notification(t("observation:bulk_action.success"), NotificationType.Success);
+    } else {
+      notification(t("observation:bulk_action.failure"), NotificationType.Error);
+    }
+    router.push("/observation/list", true, { ...filter }, true);
+
+    onClose();
+  };
+
+  const handleOnUnlock = async () => {
+    const params = {
+      ...filter,
+      selectAll,
+      view: "bulkMapping",
+      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
+      bulkAction: "unlockBulkObservations"
     };
 
     const { success } = await axGetObservationMapData(
@@ -466,12 +492,24 @@ export default function BulkMapperModal() {
                         <Button
                           size="sm"
                           variant="outline"
-                          colorPalette="blue"
+                          colorPalette="red"
                           aria-label="Save"
                           type="submit"
                           onClick={() => handleOnValidate()}
                         >
-                          {"Save"}
+                          <LockIcon/>
+                          {t("observation:id.validate")}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          colorPalette="blue"
+                          aria-label="Save"
+                          type="submit"
+                          onClick={() => handleOnUnlock()}
+                        >
+                          <UnlockIcon/>
+                          {t("observation:id.unlock")}
                         </Button>
                       </HStack>
                   </TabsContent>
