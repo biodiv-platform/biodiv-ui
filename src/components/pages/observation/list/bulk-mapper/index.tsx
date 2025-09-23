@@ -4,6 +4,7 @@ import {
   Button,
   ButtonGroup,
   CloseButton,
+  Collapsible,
   Flex,
   HStack,
   Image,
@@ -13,7 +14,8 @@ import {
   Spinner,
   Tabs,
   TabsContent,
-  Text
+  Text,
+  useDisclosure
 } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -73,6 +75,9 @@ export default function BulkMapperModal() {
     excludedBulkIds
   } = useObservationFilter();
   const [tabIndex, setTabIndex] = useState<string | null>("common:usergroups");
+  const { open: isContentVisible, onToggle: toggleContentVisibility } = useDisclosure({
+    defaultOpen: false
+  });
   useEffect(() => {
     if (bulkObservationIds && bulkObservationIds?.length > 0 && !isOpen) {
       onOpen();
@@ -218,7 +223,8 @@ export default function BulkMapperModal() {
       bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
       bulkAction
     };
-
+ 
+ 
     const { success } = await axGetObservationMapData(
       params,
       filter?.location ? { location: filter.location } : {},
@@ -230,7 +236,8 @@ export default function BulkMapperModal() {
       notification(t("observation:bulk_action.failure"), NotificationType.Error);
     }
     router.push("/observation/list", true, { ...filter }, true);
-
+ 
+ 
     onClose();*/
 
   const handleOnSubmit = async (values) => {
@@ -295,227 +302,246 @@ export default function BulkMapperModal() {
           <ActionBar.Content
             css={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}
             width="full"
-            background={"linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%)"}
-            borderTop={"3px solid #e9ecef"}
+            background={"#F0FDFA"}
             boxShadow={
-              "0 -20px 60px rgba(0, 0, 0, 0.25), 0 -8px 20px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.8)"
+              "0 -20px 60px rgba(0, 0, 0, 0.25), 0 -8px 20px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(0, 0, 0, 0.2)"
             }
           >
-            <Box
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              justifyContent="flex-start"
-              width={"full"}
-            >
-              <Text fontWeight={"bold"} fontSize={"2xl"}>
-                Bulk Actions
-              </Text>
-              <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
-                <ActionBar.SelectionTrigger m={2}>
-                  {selectAll
-                    ? observationData.n - (excludedBulkIds || []).length
-                    : bulkObservationIds?.length}{" "}
-                  selected
-                </ActionBar.SelectionTrigger>
-                <ButtonGroup size="sm" variant="outline">
-                  {!selectAll && (
-                    <Button variant="solid" colorPalette="blue" onClick={handleSelectAll}>
-                      <LuCircleCheck />
-                      {t("observation:select_all")}
-                    </Button>
-                  )}
-                  <Button
-                    variant="solid"
-                    colorPalette="red"
-                    onClick={() => handleBulkCheckbox("UnsSelectAll")}
-                  >
-                    <LuRepeat />
-                    {t("observation:unselect")}
-                  </Button>
-                  <ActionBar.CloseTrigger asChild mr={4}>
-                    <CloseButton size="sm" />
-                  </ActionBar.CloseTrigger>
-                </ButtonGroup>
-              </Box>
-            </Box>
-            <Box justifyContent="flex-start" width={"full"}>
-              <Tabs.Root
-                lazyMount={true}
-                h={{ md: "100%" }}
-                className="tabs"
-                defaultValue={tabIndex}
-                onValueChange={(e) => setTabIndex(e.value)}
+            <Collapsible.Root width={"full"}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="flex-start"
+                width={"full"}
               >
-                <Tabs.List>
-                  {bulkActionTabs.map(({ name, icon, active = true }) => (
-                    <Tabs.Trigger key={name} data-hidden={!active} value={name}>
-                      <Tooltip content={t(name)}>
-                        <div>
-                          {icon} <span>{t(name)}</span>
-                        </div>
-                      </Tooltip>
-                    </Tabs.Trigger>
-                  ))}
-                  <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-                </Tabs.List>
-                <Box position="relative">
-                  <Tabs.Content value="common:usergroups">
-                    <Suspense fallback={<Spinner />}>
-                      <GroupPost />
-                    </Suspense>
-                  </Tabs.Content>
-                  <TabsContent value="form:species_groups" width="100%">
-                    <Suspense fallback={<Spinner />}>
-                      <Box height="10rem" overflowX="clip" overflowY={"scroll"}>
-                        <SimpleGrid columns={[1, 1, 2, 3]} gridGap={4}>
-                          {speciesGroupList?.map((o) => (
-                            <RadioCard.Root
-                              cursor="pointer"
-                              colorPalette={"blue"}
-                              bg="white"
-                              _focus={{
-                                boxShadow: "outline"
-                              }}
-                              onValueChange={({ value }) => {
-                                setSpeciesGroupId(value);
-                              }}
-                              size={"sm"}
-                              value={speciesGroupId}
-                            >
-                              <RadioCard.Item value={o.split("|")[0]} key={o.split("|")[0]}>
-                                <RadioCard.ItemHiddenInput />
-                                <RadioCard.ItemControl>
-                                  <RadioCard.ItemText>
-                                    <Flex
-                                      alignItems="center"
-                                      h="2rem"
-                                      overflow="hidden"
-                                      title={o.split("|")[1]}
-                                    >
-                                      <Image
-                                        loading="lazy"
-                                        boxSize="2rem"
-                                        mr={2}
-                                        objectFit="contain"
-                                        src={getLocalIcon(o.split("|")[1])}
-                                        alt={o.split("|")[1]}
-                                      />
-                                      <Box className="elipsis-2">{o.split("|")[1]}</Box>
-                                    </Flex>
-                                  </RadioCard.ItemText>
-                                </RadioCard.ItemControl>
-                              </RadioCard.Item>
-                            </RadioCard.Root>
-                          ))}
-                        </SimpleGrid>
-                      </Box>
-                      <HStack m={2} justifyContent="flex-end">
-                        <Button
-                          disabled={speciesGroupId == null}
-                          size="sm"
-                          variant="outline"
-                          colorPalette="blue"
-                          aria-label="Save"
-                          type="submit"
-                          onClick={() => handleOnSave(bulkActions.species)}
-                        >
-                          {"Save"}
-                        </Button>
-                      </HStack>
-                    </Suspense>
-                  </TabsContent>
-                  <TabsContent value="observation:id.title">
-                    <Box p={4}>
-                      <FormProvider {...hForm}>
-                        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-                          <SimpleGrid columns={[1, 1, 3, 3]} gap={4}>
-                            <SelectAsyncInputField
-                              name="taxonCommonName"
-                              label={t("observation:common_name")}
-                              style={{ gridColumn: "1/3" }}
-                              onQuery={onCommonNameQuery}
-                              options={commonNameOptions}
-                              optionComponent={CommonNameOption}
-                              placeholder={t("form:min_three_chars")}
-                              onChange={onCommonNameChange}
-                            />
-                            <SelectInputField
-                              name="languageId"
-                              label={t("form:language")}
-                              options={languages}
-                              selectRef={langRef}
-                              shouldPortal={true}
-                            />
-                          </SimpleGrid>
-                          <Box onMouseEnter={() => scientificRef.current.focus()}>
-                            <SelectAsyncInputField
-                              name="scientificNameTaxonId"
-                              label={t("observation:scientific_name")}
-                              onQuery={onScientificNameQuery}
-                              optionComponent={ScientificNameOption}
-                              placeholder={t("form:min_three_chars")}
-                              onChange={onScientificNameChange}
-                              options={[]}
-                              selectRef={scientificRef}
-                              openMenuOnFocus={true}
-                            />
+                <Text fontWeight={"bold"} fontSize={"2xl"}>
+                  Bulk Actions
+                </Text>
+                <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
+                  <ActionBar.SelectionTrigger m={2}>
+                    {selectAll
+                      ? observationData.n - (excludedBulkIds || []).length
+                      : bulkObservationIds?.length}{" "}
+                    selected
+                  </ActionBar.SelectionTrigger>
+                  <ButtonGroup size="sm" variant="outline">
+                    {!selectAll && (
+                      <Button variant="solid" colorPalette="blue" onClick={handleSelectAll}>
+                        <LuCircleCheck />
+                        {t("observation:select_all")}
+                      </Button>
+                    )}
+                    <Button
+                      variant="solid"
+                      colorPalette="red"
+                      onClick={() => handleBulkCheckbox("UnsSelectAll")}
+                    >
+                      <LuRepeat />
+                      {t("observation:unselect")}
+                    </Button>
+                    <Collapsible.Trigger>
+                      <Button
+                        onClick={toggleContentVisibility}
+                        variant={"solid"}
+                        colorPalette={"green"}
+                      >
+                        {isContentVisible ? "Hide actions" : "Show actions"}
+                      </Button>
+                    </Collapsible.Trigger>
+                    <ActionBar.CloseTrigger asChild mr={4}>
+                      <CloseButton size="sm" />
+                    </ActionBar.CloseTrigger>
+                  </ButtonGroup>
+                </Box>
+              </Box>
+              <Box justifyContent="flex-start" width={"full"}>
+                <Tabs.Root
+                  lazyMount={true}
+                  h={{ md: "100%" }}
+                  className="tabs"
+                  defaultValue={tabIndex}
+                  onValueChange={(e) => setTabIndex(e.value)}
+                >
+                  <Tabs.List>
+                    {bulkActionTabs.map(({ name, icon, active = true }) => (
+                      <Tabs.Trigger key={name} data-hidden={!active} value={name}>
+                        <Tooltip content={t(name)}>
+                          <div>
+                            {icon} <span>{t(name)}</span>
+                          </div>
+                        </Tooltip>
+                      </Tabs.Trigger>
+                    ))}
+                    <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
+                  </Tabs.List>
+                  <Box position="relative">
+                    <Collapsible.Content>
+                      <Tabs.Content value="common:usergroups">
+                        <Suspense fallback={<Spinner />}>
+                          <GroupPost />
+                        </Suspense>
+                      </Tabs.Content>
+                      <TabsContent value="form:species_groups" width="100%">
+                        <Suspense fallback={<Spinner />}>
+                          <Box height="10rem" overflowX="clip" overflowY={"scroll"}>
+                            <SimpleGrid columns={[1, 1, 2, 3]} gridGap={4}>
+                              {speciesGroupList?.map((o) => (
+                                <RadioCard.Root
+                                  cursor="pointer"
+                                  colorPalette={"blue"}
+                                  bg="white"
+                                  _focus={{
+                                    boxShadow: "outline"
+                                  }}
+                                  onValueChange={({ value }) => {
+                                    setSpeciesGroupId(value);
+                                  }}
+                                  size={"sm"}
+                                  value={speciesGroupId}
+                                >
+                                  <RadioCard.Item value={o.split("|")[0]} key={o.split("|")[0]}>
+                                    <RadioCard.ItemHiddenInput />
+                                    <RadioCard.ItemControl>
+                                      <RadioCard.ItemText>
+                                        <Flex
+                                          alignItems="center"
+                                          h="2rem"
+                                          overflow="hidden"
+                                          title={o.split("|")[1]}
+                                        >
+                                          <Image
+                                            loading="lazy"
+                                            boxSize="2rem"
+                                            mr={2}
+                                            objectFit="contain"
+                                            src={getLocalIcon(o.split("|")[1])}
+                                            alt={o.split("|")[1]}
+                                          />
+                                          <Box className="elipsis-2">{o.split("|")[1]}</Box>
+                                        </Flex>
+                                      </RadioCard.ItemText>
+                                    </RadioCard.ItemControl>
+                                  </RadioCard.Item>
+                                </RadioCard.Root>
+                              ))}
+                            </SimpleGrid>
                           </Box>
                           <HStack m={2} justifyContent="flex-end">
-                            <SubmitButton leftIcon={<CheckIcon />}>
-                              {t("observation:suggest")}
-                            </SubmitButton>
+                            <Button
+                              disabled={speciesGroupId == null}
+                              size="sm"
+                              variant="outline"
+                              colorPalette="blue"
+                              aria-label="Save"
+                              type="submit"
+                              onClick={() => handleOnSave(bulkActions.species)}
+                            >
+                              {"Save"}
+                            </Button>
                           </HStack>
-                        </form>
-                      </FormProvider>
-                    </Box>
-                  </TabsContent>
-                  <TabsContent value="observation:traits" height={"18rem"} overflowY={"auto"} p={4}>
-                    {
-                      <TraitsPost
-                        speciesId={idsWithValueGreaterThanZero}
-                        languageId={languageId}
-                        filter={filter}
-                        selectAll={selectAll}
-                        bulkObservationIds={bulkObservationIds}
-                      />
-                    }
-                  </TabsContent>
-                  <TabsContent
-                    value="filters:data_quality.validation.title"
-                    height={"18rem"}
-                    overflowY={"auto"}
-                    p={4}
-                  >
-                    <Box bg={"yellow.100"} p={2}>This action will validate the selected observation IDs</Box>
-                    <HStack m={2} justifyContent="flex-end">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          colorPalette="red"
-                          aria-label="Save"
-                          type="submit"
-                          onClick={() => handleOnValidate()}
-                        >
-                          <LockIcon/>
-                          {t("observation:id.validate")}
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          colorPalette="blue"
-                          aria-label="Save"
-                          type="submit"
-                          onClick={() => handleOnUnlock()}
-                        >
-                          <UnlockIcon/>
-                          {t("observation:id.unlock")}
-                        </Button>
-                      </HStack>
-                  </TabsContent>
-                </Box>
-              </Tabs.Root>
-            </Box>
+                        </Suspense>
+                      </TabsContent>
+                      <TabsContent value="observation:id.title">
+                        <Box p={4}>
+                          <FormProvider {...hForm}>
+                            <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+                              <SimpleGrid columns={[1, 1, 3, 3]} gap={4}>
+                                <SelectAsyncInputField
+                                  name="taxonCommonName"
+                                  label={t("observation:common_name")}
+                                  style={{ gridColumn: "1/3" }}
+                                  onQuery={onCommonNameQuery}
+                                  options={commonNameOptions}
+                                  optionComponent={CommonNameOption}
+                                  placeholder={t("form:min_three_chars")}
+                                  onChange={onCommonNameChange}
+                                />
+                                <SelectInputField
+                                  name="languageId"
+                                  label={t("form:language")}
+                                  options={languages}
+                                  selectRef={langRef}
+                                  shouldPortal={true}
+                                />
+                              </SimpleGrid>
+                              <Box onMouseEnter={() => scientificRef.current.focus()}>
+                                <SelectAsyncInputField
+                                  name="scientificNameTaxonId"
+                                  label={t("observation:scientific_name")}
+                                  onQuery={onScientificNameQuery}
+                                  optionComponent={ScientificNameOption}
+                                  placeholder={t("form:min_three_chars")}
+                                  onChange={onScientificNameChange}
+                                  options={[]}
+                                  selectRef={scientificRef}
+                                  openMenuOnFocus={true}
+                                />
+                              </Box>
+                              <HStack m={2} justifyContent="flex-end">
+                                <SubmitButton leftIcon={<CheckIcon />}>
+                                  {t("observation:suggest")}
+                                </SubmitButton>
+                              </HStack>
+                            </form>
+                          </FormProvider>
+                        </Box>
+                      </TabsContent>
+                      <TabsContent
+                        value="observation:traits"
+                        height={"18rem"}
+                        overflowY={"auto"}
+                        p={4}
+                      >
+                        {
+                          <TraitsPost
+                            speciesId={idsWithValueGreaterThanZero}
+                            languageId={languageId}
+                            filter={filter}
+                            selectAll={selectAll}
+                            bulkObservationIds={bulkObservationIds}
+                          />
+                        }
+                      </TabsContent>
+                      <TabsContent
+                        value="filters:data_quality.validation.title"
+                        height={"18rem"}
+                        overflowY={"auto"}
+                        p={4}
+                      >
+                        <Box bg={"yellow.100"} p={2}>
+                          This action will validate the selected observation IDs
+                        </Box>
+                        <HStack m={2} justifyContent="flex-end">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            colorPalette="red"
+                            aria-label="Save"
+                            type="submit"
+                            onClick={() => handleOnValidate()}
+                          >
+                            <LockIcon />
+                            {t("observation:id.validate")}
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            colorPalette="blue"
+                            aria-label="Save"
+                            type="submit"
+                            onClick={() => handleOnUnlock()}
+                          >
+                            <UnlockIcon />
+                            {t("observation:id.unlock")}
+                          </Button>
+                        </HStack>
+                      </TabsContent>
+                    </Collapsible.Content>
+                  </Box>
+                </Tabs.Root>
+              </Box>
+            </Collapsible.Root>
           </ActionBar.Content>
         </ActionBar.Positioner>
       </Portal>
