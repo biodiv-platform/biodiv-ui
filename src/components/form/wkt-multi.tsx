@@ -56,7 +56,7 @@ export default function WKTFieldMulti({ group = false, ...props }: WKTInputProps
             </Box>
           ) : (
             <Tabs.Root
-              defaultValue={SITE_CONFIG?.WKT?.DEFAULT_TAB}
+              defaultValue={String(SITE_CONFIG?.WKT?.DEFAULT_TAB)}
               lazyMount={true}
               variant={"line"}
             >
