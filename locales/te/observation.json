@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "పేరు",
       "count_header": "గణనలు",
-      "heading": "టాప్ అప్లోడర్లు"
+      "heading": "టాప్ అప్లోడర్లు",
+      "observations": "పరిశీలనలు",
+      "species": "జాతులు"
     }
   },
   "location_information": {

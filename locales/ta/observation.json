@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "பெயர்",
       "count_header": "எண்ணிக்கைகள்",
-      "heading": "அதிக பதிவேற்றியவர்கள்"
+      "heading": "அதிக பதிவேற்றியவர்கள்",
+      "observations": "அவதானிப்புகள்",
+      "species": "இனங்கள்"
     }
   },
   "location_information": {

@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "Nom",
       "count_header": "Comptes",
-      "heading": "Top téléchargeurs"
+      "heading": "Top téléchargeurs",
+      "observations": "Observations",
+      "species": "Espèces"
     }
   },
   "location_information": {

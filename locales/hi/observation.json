@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "नाम",
       "count_header": "गिनता",
-      "heading": "शीर्ष अपलोडर"
+      "heading": "शीर्ष अपलोडर",
+      "observations": "टिप्पणियों",
+      "species": "प्रजातियाँ"
     }
   },
   "location_information": {

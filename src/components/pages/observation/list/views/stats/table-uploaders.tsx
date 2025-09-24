@@ -24,16 +24,27 @@ export default function UploadersTable({ data, title, loadMoreUploaders, filter,
               <Table.ColumnHeader {...stickyTh}>
                 {t("observation:list.top_uploaders_list.author_header")}
               </Table.ColumnHeader>
-              <Table.ColumnHeader {...stickyTh} onClick={()=> changeSort("observations")} cursor={"pointer"}>
+              <Table.ColumnHeader
+                {...stickyTh}
+                onClick={() => changeSort("observations")}
+                cursor={"pointer"}
+              >
                 <Flex align="center" gap={1}>
-                  {"Observations"} {data.sort=="observations" && <LuChevronDown />}
+                  {t("observation:list.top_uploaders_list.observations")}{" "}
+                  {data.sort == "observations" && <LuChevronDown />}
                 </Flex>
               </Table.ColumnHeader>
               <Table.ColumnHeader {...stickyTh}>
-              <Flex align="center" gap={1} onClick={()=> changeSort("species")} cursor={"pointer"}>
-                {"Species"} {data.sort=="species" && <LuChevronDown />}
+                <Flex
+                  align="center"
+                  gap={1}
+                  onClick={() => changeSort("species")}
+                  cursor={"pointer"}
+                >
+                  {t("observation:list.top_uploaders_list.species")}{" "}
+                  {data.sort == "species" && <LuChevronDown />}
                 </Flex>
-                </Table.ColumnHeader>
+              </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>
 

@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "പേര്",
       "count_header": "എണ്ണങ്ങൾ",
-      "heading": "മികച്ച അപ്ലോഡറുകൾ"
+      "heading": "മികച്ച അപ്ലോഡറുകൾ",
+      "observations": "നിരീക്ഷണങ്ങൾ",
+      "species": "ഇനം"
     }
   },
   "location_information": {

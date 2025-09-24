@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "Name",
       "count_header": "Counts",
-      "heading": "Top uploaders"
+      "heading": "Top uploaders",
+      "observations": "Observations",
+      "species": "Species"
     }
   },
   "location_information": {
