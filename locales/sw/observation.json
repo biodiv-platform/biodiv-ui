@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "Jina.",
       "count_header": "Hesabu",
-      "heading": "Wapakiaji wa juu"
+      "heading": "Wapakiaji wa juu",
+      "observations": "Uchunguzi",
+      "species": "Taxa"
     }
   },
   "location_information": {

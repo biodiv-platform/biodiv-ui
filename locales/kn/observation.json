@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "ಹೆಸರು",
       "count_header": "ಎಣಿಕೆಗಳು",
-      "heading": "ಅಗ್ರ ಅಪ್ಲೋಡರ್ ಗಳು"
+      "heading": "ಅಗ್ರ ಅಪ್ಲೋಡರ್ ಗಳು",
+      "observations": "ಅವಲೋಕನಗಳು",
+      "species": "ತಳ್ಳಿ"
     }
   },
   "location_information": {

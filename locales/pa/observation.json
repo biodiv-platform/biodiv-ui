@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "ਨਾਮ",
       "count_header": "ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ",
-      "heading": "ਚੋਟੀ ਦੇ ਅਪਲੋਡ ਕਰਨ ਵਾਲੇ"
+      "heading": "ਚੋਟੀ ਦੇ ਅਪਲੋਡ ਕਰਨ ਵਾਲੇ",
+      "observations": "ਨਿਰੀਖਣ",
+      "species": "ਟੈਕਸ"
     }
   },
   "location_information": {

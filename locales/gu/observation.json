@@ -109,7 +109,9 @@
     "top_uploaders_list": {
       "author_header": "નામ",
       "count_header": "ગણતરી",
-      "heading": "ટોચના અપલોડર્સ"
+      "heading": "ટોચના અપલોડર્સ",
+      "observations": "નિરીક્ષણ",
+      "species": "ટેકરા"
     }
   },
   "location_information": {

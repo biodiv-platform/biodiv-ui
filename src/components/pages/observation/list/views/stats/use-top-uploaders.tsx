@@ -9,10 +9,11 @@ export default function useTopUploaders({ filter }) {
   const [topUploaders, setTopUploaders] = useImmer({
     list: [],
     uploadersoffset: 0,
-    isLoading: true
+    isLoading: true,
+    sort: "observations"
   });
 
-  const loadMore = async (getter, setter, reset) => {
+  const loadMore = async (getter, setter, reset, sort) => {
     setter((_draft) => {
       _draft.isLoading = true;
     });
@@ -20,7 +21,7 @@ export default function useTopUploaders({ filter }) {
     const { success, data } = await axGetListData({
       ...filter,
       uploadersoffset: reset ? 0 : getter.uploadersoffset,
-      statsFilter: STATS_FILTER.UPLOADERS
+      statsFilter: `${STATS_FILTER.UPLOADERS}|${sort}`
     });
 
     setter((_draft) => {
@@ -28,6 +29,7 @@ export default function useTopUploaders({ filter }) {
         if (reset) {
           _draft.list = data.aggregateStatsData.groupTopUploaders;
           _draft.uploadersoffset = UPLOADERS_LIMIT;
+          _draft.sort = sort
         } else {
           if (data.aggregateStatsData.groupTopUploaders) {
             _draft.list.push(...data.aggregateStatsData.groupTopUploaders);
@@ -39,13 +41,15 @@ export default function useTopUploaders({ filter }) {
     });
   };
 
-  const loadMoreUploaders = () => loadMore(topUploaders, setTopUploaders, false);
+  const loadMoreUploaders = () => loadMore(topUploaders, setTopUploaders, false, topUploaders.sort);
+
+  const changeSortUploaders = (sort) => loadMore(topUploaders, setTopUploaders, true, sort);
 
   useEffect(() => {
-    loadMore(topUploaders, setTopUploaders, true);
+    loadMore(topUploaders, setTopUploaders, true, "observations");
   }, [filter]);
 
   return {
-    uploadersData: { data: topUploaders, loadMore: loadMoreUploaders }
+    uploadersData: { data: topUploaders, loadMore: loadMoreUploaders, changeSort: changeSortUploaders }
   };
 }
