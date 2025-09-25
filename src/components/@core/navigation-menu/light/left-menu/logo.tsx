@@ -57,7 +57,6 @@ const Logo = styled.div`
   button,
   .button {
     flex-shrink: 0;
-    display: none;
     color: inherit;
     font-size: 1.5rem;
   }
