@@ -110,7 +110,9 @@
     "top_uploaders_list": {
       "author_header": "नाव",
       "count_header": "गणित",
-      "heading": "शीर्ष अपलोडर्स"
+      "heading": "शीर्ष अपलोडर्स",
+      "observations": "निरीक्षणे",
+      "species": "टॅक्स"
     }
   },
   "location_information": {

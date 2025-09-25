@@ -9,10 +9,11 @@ export default function useTopIdentifiers({ filter }) {
   const [topIdentifiers, setTopIdentifiers] = useImmer({
     list: [],
     identifiersoffset: 0,
-    isLoading: true
+    isLoading: true,
+    sort: "observations"
   });
 
-  const loadMore = async (getter, setter, reset) => {
+  const loadMore = async (getter, setter, reset, sort) => {
     setter((_draft) => {
       _draft.isLoading = true;
     });
@@ -20,7 +21,7 @@ export default function useTopIdentifiers({ filter }) {
     const { success, data } = await axGetListData({
       ...filter,
       identifiersoffset: reset ? 0 : getter.identifiersoffset,
-      statsFilter: STATS_FILTER.IDENTIFIERS
+      statsFilter: `${STATS_FILTER.IDENTIFIERS}|${sort}`
     });
 
     setter((_draft) => {
@@ -28,6 +29,7 @@ export default function useTopIdentifiers({ filter }) {
         if (reset) {
           _draft.list = data.aggregateStatsData.groupTopIdentifiers;
           _draft.identifiersoffset = IDENTIFIERS_LIMIT;
+          _draft.sort = sort
         } else {
           if (data.aggregateStatsData.groupTopIdentifiers) {
             _draft.list.push(...data.aggregateStatsData.groupTopIdentifiers);
@@ -39,13 +41,15 @@ export default function useTopIdentifiers({ filter }) {
     });
   };
 
-  const loadMoreIdentifiers = () => loadMore(topIdentifiers, setTopIdentifiers, false);
+  const loadMoreIdentifiers = () => loadMore(topIdentifiers, setTopIdentifiers, false, topIdentifiers.sort);
+
+  const changeSortIdentifiers = (sort) => loadMore(topIdentifiers, setTopIdentifiers, true, sort);
 
   useEffect(() => {
-    loadMore(topIdentifiers, setTopIdentifiers, true);
+    loadMore(topIdentifiers, setTopIdentifiers, true, "observations");
   }, [filter]);
 
   return {
-    identifiersData: { data: topIdentifiers, loadMore: loadMoreIdentifiers }
+    identifiersData: { data: topIdentifiers, loadMore: loadMoreIdentifiers , changeSort: changeSortIdentifiers}
   };
 }

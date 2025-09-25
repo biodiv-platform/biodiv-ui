@@ -110,7 +110,9 @@
     "top_uploaders_list": {
       "author_header": "নাম",
       "count_header": "গণনা করা হয়",
-      "heading": "শীর্ষ আপলোডকারীদের"
+      "heading": "শীর্ষ আপলোডকারীদের",
+      "observations": "পর্যবেক্ষণ",
+      "species": "ট্যাক্সা"
     }
   },
   "location_information": {

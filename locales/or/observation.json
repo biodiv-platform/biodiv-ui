@@ -110,7 +110,9 @@
     "top_uploaders_list": {
       "author_header": "ନାମ",
       "count_header": "ଗଣନା",
-      "heading": "ଶୀର୍ଷ ଅପଲୋଡ୍"
+      "heading": "ଶୀର୍ଷ ଅପଲୋଡ୍",
+      "observations": "ପର୍ଯ୍ୟବେକ୍ଷଣ",
+      "species": "ଟ୍ୟାକ୍ସା"
     }
   },
   "location_information": {
