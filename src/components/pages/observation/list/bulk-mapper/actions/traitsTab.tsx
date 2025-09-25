@@ -219,7 +219,7 @@ export default function TraitsPost({
                   })
                 }
               >
-                {"Add"}
+                {t("traits:add")}
               </Button>
             </SimpleGrid>
           )}
@@ -234,7 +234,7 @@ export default function TraitsPost({
           type="submit"
           onClick={() => handleOnTraitSave()}
         >
-          {"Save"}
+          {t("traits:save")}
         </Button>
       </HStack>
     </Box>

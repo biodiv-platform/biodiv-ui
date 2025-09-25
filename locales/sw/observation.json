@@ -4,7 +4,8 @@
   "add_observation": "Ongeza uchunguzi.",
   "bulk_action": {
     "failure": "Imeshindwa kuanzisha kitendo kikubwa",
-    "success": "Imefaulu kuanzisha hatua nyingi, Mabadiliko yataonekana baada ya muda mfupi"
+    "success": "Imefaulu kuanzisha hatua nyingi, Mabadiliko yataonekana baada ya muda mfupi",
+    "validation_text": "Kitendo hiki kitathibitisha/kufungua vitambulisho vya uchunguzi vilivyochaguliwa"
   },
   "bulk_actions": "Vitendo Vingi",
   "bulk_actions_selected": "kuchaguliwa",

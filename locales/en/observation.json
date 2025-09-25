@@ -4,7 +4,8 @@
   "add_observation": "Add Observation",
   "bulk_action": {
     "failure": "Unable to trigger bulk action",
-    "success": "Successfully triggered  bulk action, Changes will be reflected  shortly"
+    "success": "Successfully triggered  bulk action, Changes will be reflected  shortly",
+    "validation_text": "This action will validate/unlock the selected observation IDs"
   },
   "bulk_actions": "Bulk Actions",
   "bulk_actions_selected": "selected",

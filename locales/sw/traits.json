@@ -1,4 +1,5 @@
 {
+  "add": "ADD",
   "create_form": {
     "add_trait_button": "Hifadhi",
     "add_trait_values_button": "Ongeza thamani ya tabia",
@@ -46,6 +47,7 @@
     "units_year": "Mwaka",
     "value": "Thamani"
   },
+  "save": "Kuokoa",
   "terms": {
     "description": "Kwa kuwasilisha fomu hii, unathibitisha kuwa data unayopakia ni kazi yako mwenyewe, au unayo ruhusa kutoka kwa mmiliki wa hakimiliki ili kuishiriki chini ya leseni ya Creative Commons Attribution (CC-BY)."
   },

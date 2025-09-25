@@ -4,7 +4,8 @@
   "add_observation": "Ajouter une observation",
   "bulk_action": {
     "failure": "Impossible de déclencher une action groupée",
-    "success": "L'action groupée a été déclenchée avec succès, les modifications seront reflétées sous peu"
+    "success": "L'action groupée a été déclenchée avec succès, les modifications seront reflétées sous peu",
+    "validation_text": "Cette action valide / déverrouillera les ID d'observation sélectionnés"
   },
   "bulk_actions": "Actions en vrac",
   "bulk_actions_selected": "choisi",

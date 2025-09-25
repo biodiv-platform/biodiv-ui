@@ -278,7 +278,9 @@ export default function BulkMapperModal() {
           }}
         >
           <ActionBar.Content
-            css={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"flex-start"}
             width="full"
             background={"#F0FDFA"}
             boxShadow={
@@ -520,7 +522,7 @@ export default function BulkMapperModal() {
                         p={4}
                       >
                         <Box bg={"yellow.100"} p={2}>
-                          This action will validate the selected observation IDs
+                          {t("observation:bulk_action.validation_text")}
                         </Box>
                         <HStack m={2} justifyContent="flex-end">
                           <Button

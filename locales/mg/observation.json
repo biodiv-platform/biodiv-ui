@@ -4,7 +4,8 @@
   "add_observation": "Manampy fandinihana",
   "bulk_action": {
     "failure": "Tsy afaka nanetsika hetsika marobe",
-    "success": "Vita soa aman-tsara ny hetsika marobe, ho hita tsy ho ela ny fanovana"
+    "success": "Vita soa aman-tsara ny hetsika marobe, ho hita tsy ho ela ny fanovana",
+    "validation_text": "Ity hetsika ity dia hanamarina / hanokatra ny ID ID fandinihana voafantina"
   },
   "bulk_actions": "Hetsika marobe",
   "bulk_actions_selected": "voafantina",
