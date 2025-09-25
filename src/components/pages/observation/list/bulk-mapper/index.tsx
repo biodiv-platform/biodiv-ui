@@ -15,11 +15,12 @@ import {
   Tabs,
   TabsContent,
   Text,
+  useBreakpointValue,
   useDisclosure
 } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { bulkActionTabs } from "@static/observation-list";
+import { bulkObservationActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -60,6 +61,7 @@ export enum bulkActions {
 }
 
 export default function BulkMapperModal() {
+  const isSmall = useBreakpointValue({ base: true, md: false });
   const { t } = useTranslation();
   const router = useLocalRouter();
   const {
@@ -215,30 +217,6 @@ export default function BulkMapperModal() {
 
     onClose();
   };
-  /*const params = {
-      ...filter,
-      selectAll,
-      view: "bulkMapping",
-      bulkSpeciesGroupId: speciesGroupId,
-      bulkObservationIds: selectAll ? "" : bulkObservationIds?.toString(),
-      bulkAction
-    };
- 
- 
-    const { success } = await axGetObservationMapData(
-      params,
-      filter?.location ? { location: filter.location } : {},
-      true
-    );
-    if (success) {
-      notification(t("observation:bulk_action.success"), NotificationType.Success);
-    } else {
-      notification(t("observation:bulk_action.failure"), NotificationType.Error);
-    }
-    router.push("/observation/list", true, { ...filter }, true);
- 
- 
-    onClose();*/
 
   const handleOnSubmit = async (values) => {
     if (values.taxonCommonName || values.taxonScientificName) {
@@ -316,16 +294,52 @@ export default function BulkMapperModal() {
                 width={"full"}
               >
                 <Text fontWeight={"bold"} fontSize={"2xl"}>
-                  Bulk Actions
+                  {t("observation:bulk_actions")}
                 </Text>
                 <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
                   <ActionBar.SelectionTrigger m={2}>
                     {selectAll
                       ? observationData.n - (excludedBulkIds || []).length
                       : bulkObservationIds?.length}{" "}
-                    selected
+                    {t("observation:bulk_actions_selected")}
                   </ActionBar.SelectionTrigger>
                   <ButtonGroup size="sm" variant="outline">
+                    {!isSmall && (
+                      <>
+                        {!selectAll && (
+                          <Button variant="solid" colorPalette="blue" onClick={handleSelectAll}>
+                            <LuCircleCheck />
+                            {t("observation:select_all")}
+                          </Button>
+                        )}
+                        <Button
+                          variant="solid"
+                          colorPalette="red"
+                          onClick={() => handleBulkCheckbox("UnsSelectAll")}
+                        >
+                          <LuRepeat />
+                          {t("observation:unselect")}
+                        </Button>
+                        <Collapsible.Trigger>
+                          <Button
+                            onClick={toggleContentVisibility}
+                            variant={"solid"}
+                            colorPalette={"green"}
+                          >
+                            {isContentVisible ? "Hide actions" : "Show actions"}
+                          </Button>
+                        </Collapsible.Trigger>
+                      </>
+                    )}
+                    <ActionBar.CloseTrigger asChild mr={4}>
+                        <CloseButton size="sm" onClick={toggleContentVisibility}/>
+                    </ActionBar.CloseTrigger>
+                  </ButtonGroup>
+                </Box>
+              </Box>
+              <Box justifyContent="flex-start" width={"full"}>
+                {isSmall && (
+                  <ButtonGroup size="sm" variant="outline" mb={4}>
                     {!selectAll && (
                       <Button variant="solid" colorPalette="blue" onClick={handleSelectAll}>
                         <LuCircleCheck />
@@ -349,22 +363,18 @@ export default function BulkMapperModal() {
                         {isContentVisible ? "Hide actions" : "Show actions"}
                       </Button>
                     </Collapsible.Trigger>
-                    <ActionBar.CloseTrigger asChild mr={4}>
-                      <CloseButton size="sm" />
-                    </ActionBar.CloseTrigger>
                   </ButtonGroup>
-                </Box>
-              </Box>
-              <Box justifyContent="flex-start" width={"full"}>
+                )}
                 <Tabs.Root
                   lazyMount={true}
                   h={{ md: "100%" }}
                   className="tabs"
                   defaultValue={tabIndex}
                   onValueChange={(e) => setTabIndex(e.value)}
+                  overflowY={"auto"}
                 >
-                  <Tabs.List>
-                    {bulkActionTabs.map(({ name, icon, active = true }) => (
+                  <Tabs.List minWidth={"600px"}>
+                    {bulkObservationActionTabs.map(({ name, icon, active = true }) => (
                       <Tabs.Trigger key={name} data-hidden={!active} value={name}>
                         <Tooltip content={t(name)}>
                           <div>

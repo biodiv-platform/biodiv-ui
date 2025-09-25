@@ -147,7 +147,7 @@ export default function ImageBoxComponent({ o, getCheckboxProps }: ObservationIm
               } else {
                 if (e.target["checked"]) {
                   if (o.speciesGroupId !== undefined) {
-                    bulkSpeciesIds[o.speciesGroupId] = bulkSpeciesIds[o.speciesGroupId] + 1;
+                    bulkSpeciesIds[o.speciesGroupId] = (bulkSpeciesIds[o.speciesGroupId] || 0) + 1;
                     setBulkSpeciesIds(bulkSpeciesIds);
                   }
                 } else {

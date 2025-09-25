@@ -18,17 +18,26 @@ import { cleanFacts } from "@/utils/tags";
 import TraitInput from "../../../common/trait-input";
 import MultipleCategorialTrait from "../../../common/trait-input/multiple-categorical";
 
-export default function TraitsPost({ speciesId, languageId, filter, selectAll, bulkObservationIds }) {
+export default function TraitsPost({
+  speciesId,
+  languageId,
+  filter,
+  selectAll,
+  bulkObservationIds
+}) {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const [traitPairs, setTraits] = useState<Required<TraitsValuePair>[]>();
+  const [speciesIds, setSpeciesIds] = useState([]);
   const inputRef = useRef<any>();
   useEffect(() => {
-    if (speciesId.length==1){
-    axGetTraitsByGroupId(speciesId[0], languageId).then(({ data }) => setTraits(data));
-    }
-    else {
-      axGetRootTraits(languageId).then(({data})=>setTraits(data));
+    if (JSON.stringify(speciesId) !== JSON.stringify(speciesIds)) {
+      if (speciesId.length == 1) {
+        axGetTraitsByGroupId(speciesId[0], languageId).then(({ data }) => setTraits(data));
+      } else {
+        axGetRootTraits(languageId).then(({ data }) => setTraits(data));
+      }
+      setSpeciesIds(speciesId);
     }
   }, [speciesId, languageId]);
   const [facts, setFacts] = useState<any>({});
@@ -38,13 +47,13 @@ export default function TraitsPost({ speciesId, languageId, filter, selectAll, b
   const handleOnTraitSave = async () => {
     const cleFacts = cleanFacts(facts);
     const result = Object.entries(cleFacts.factValuePairs)
-  .map(([key, values]) => {
-    // Join array values with commas
-    const valueString = values.join(',');
-    return `${key}:${valueString}`;
-  })
-  .filter(part => part.includes(':')) // Remove empty entries
-  .join('|');
+      .map(([key, values]) => {
+        // Join array values with commas
+        const valueString = values.join(",");
+        return `${key}:${valueString}`;
+      })
+      .filter((part) => part.includes(":")) // Remove empty entries
+      .join("|");
 
     const params = {
       ...filter,

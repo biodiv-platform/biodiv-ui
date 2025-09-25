@@ -7,6 +7,7 @@
     "success": "L'action groupée a été déclenchée avec succès, les modifications seront reflétées sous peu"
   },
   "bulk_actions": "Actions en vrac",
+  "bulk_actions_selected": "choisi",
   "cf_update_success": "Observation mise à jour avec succès",
   "checklist_annotation": "Champs de données",
   "common_name": "Nom commun",

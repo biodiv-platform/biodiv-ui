@@ -60,7 +60,7 @@ export const sortByOptions = [
   }
 ];
 
-export const bulkActionTabs = [
+export const bulkObservationActionTabs = [
   {
     name: "common:usergroups",
     icon: "👥",
@@ -81,6 +81,14 @@ export const bulkActionTabs = [
   {
     name: "filters:data_quality.validation.title",
     icon: "🆔"
+  }
+];
+
+export const bulkActionTabs = [
+  {
+    name: "common:usergroups",
+    icon: "👥",
+    active: SITE_CONFIG.USERGROUP.ACTIVE
   }
 ];
 

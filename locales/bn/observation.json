@@ -7,6 +7,7 @@
     "success": "বাল্ক অ্যাকশন সফলভাবে ট্রিগার করা হয়েছে, পরিবর্তনগুলি শীঘ্রই প্রতিফলিত হবে৷"
   },
   "bulk_actions": "বিপুল কর্ম",
+  "bulk_actions_selected": "নির্বাচিত",
   "cf_update_success": "সফলভাবে আপডেট পর্যবেক্ষণ কাস্টম ক্ষেত্র",
   "checklist_annotation": "Datatable ক্ষেত্র",
   "common_name": "সাধারণ নাম",

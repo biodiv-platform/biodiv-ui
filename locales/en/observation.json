@@ -7,6 +7,7 @@
     "success": "Successfully triggered  bulk action, Changes will be reflected  shortly"
   },
   "bulk_actions": "Bulk Actions",
+  "bulk_actions_selected": "selected",
   "cf_update_success": "Successfully Updated Observation Custom Field",
   "checklist_annotation": "DataTable Fields",
   "common_name": "Common Name",
