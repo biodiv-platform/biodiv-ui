@@ -45,7 +45,7 @@ const AnnouncementSetupTable = ({
             <th>{"Actions"}</th>
           </tr>
         </thead>
-        {announcementList.map((item, index) => (
+        {announcementList?.map((item, index) => (
           <tr>
             <td width={"450px"}>
               <Box

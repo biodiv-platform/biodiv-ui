@@ -22,7 +22,7 @@ export default function Announcement() {
 
   return (
     <>
-      {open && announcement != null ? (
+      {open && announcement != null && announcement.length>0 ? (
         <Box borderLeft="4px solid" bg={currentAnnouncement.bgColor} p={3}>
           <Flex justify="space-between" align="center" gap={2}>
             <Box width={"40px"}>

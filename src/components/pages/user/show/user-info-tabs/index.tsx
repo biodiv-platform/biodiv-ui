@@ -42,7 +42,7 @@ export default function UserInfoTabs({ user, tab }) {
           <Box mb={4} className="white-box">
             {announcement != null ? (
               <Box p={4}>
-                {announcement.map((item) => (
+                {announcement?.map((item) => (
                   <Box p={2}>
                     <Box bg={item.bgColor} p={3} borderRadius={"sm"}>
                       <Flex justify="space-between" align="center" gap={2}>
