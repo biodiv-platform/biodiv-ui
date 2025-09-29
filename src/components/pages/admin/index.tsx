@@ -122,6 +122,22 @@ function AdminComponent() {
             </List.Item>
           </List.Root>
         </Box>
+        <Box borderWidth="1px" borderRadius="md" boxShadow="sm" p="4" bg="white">
+          <Heading size="md" mb="4" color="teal" borderBottom="1px solid" borderColor="gray.200">
+            Announcements
+          </Heading>
+          <List.Root>
+            <List.Item
+              display="flex"
+              alignItems="center"
+              p="2"
+              borderRadius="md"
+              _hover={{ bg: "teal", color: "white" }}
+            >
+              <Link href="/admin/announcements">{t("admin:links.announcements_configure")}</Link>
+            </List.Item>
+          </List.Root>
+        </Box>
       </SimpleGrid>
     </Box>
   );

@@ -1,4 +1,4 @@
-import { Button, Flex, Menu, Portal } from "@chakra-ui/react";
+import { Box, Button, Flex, Menu, Portal } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
@@ -12,7 +12,7 @@ import SubMenu from "../../common/sub-menu";
 import LoginButton from "./login";
 
 export default function UserMenu() {
-  const { isLoggedIn, user } = useGlobalState();
+  const { isLoggedIn, user, open } = useGlobalState();
   const { t } = useTranslation();
 
   const userMenuRows = [
@@ -30,6 +30,11 @@ export default function UserMenu() {
       name: "my_observations",
       to: `/observation/list`,
       params: { user: user?.id }
+    },
+    {
+      name: "my_notifications",
+      to: `/user/show/${user?.id}`,
+      params: {tab:"notifications"}
     },
     {
       name: "logout",
@@ -58,6 +63,13 @@ export default function UserMenu() {
               src={getUserImage(user?.profile_pic, user.name)}
             />
             {user?.name}
+            {!open && <Box
+              w="8px"
+              h="8px"
+              bg="red.500"
+              borderRadius="full"
+              ml={2}
+            />}
           </Flex>
           <LuChevronDown />
         </Button>

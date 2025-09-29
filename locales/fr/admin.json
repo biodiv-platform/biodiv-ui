@@ -1,5 +1,6 @@
 {
   "links": {
+    "announcements_configure": "Configuration des annonces",
     "name-macthing": "Nom correspondant",
     "notification": "Envoyer une notification push"
   },

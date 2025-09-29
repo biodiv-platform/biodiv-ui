@@ -1,5 +1,6 @@
 {
   "links": {
+    "announcements_configure": "Announcements Setup",
     "name-macthing": "Name Matching",
     "notification": "Send Push-Notification",
     "species_fields": "Species Fields"

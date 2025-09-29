@@ -31,6 +31,7 @@
     "settings": {
       "leaderboard": "My Leaderboard Rank",
       "logout": "Logout",
+      "my_notifications": "My Notifications",
       "my_observations": "My Observations",
       "my_profile": "My Profile",
       "title": "Settings"
