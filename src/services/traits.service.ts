@@ -17,6 +17,17 @@ export const axCreateTrait = async (params) => {
   }
 };
 
+export const axGetRootTraits = async (languageId) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.TRAITS}/v1/factservice/root-traits/${languageId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
 export const axUpdateTrait = async (id, translations) => {
   try {
     const { data } = await plainHttp.put(

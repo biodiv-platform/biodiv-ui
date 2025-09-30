@@ -60,6 +60,30 @@ export const sortByOptions = [
   }
 ];
 
+export const bulkObservationActionTabs = [
+  {
+    name: "common:usergroups",
+    icon: "👥",
+    active: SITE_CONFIG.USERGROUP.ACTIVE
+  },
+  {
+    name: "form:species_groups",
+    icon:"👥"
+  },
+  {
+    name: "observation:id.title",
+    icon: "🆔"
+  },
+  {
+    name: "observation:traits",
+    icon: "💎"
+  },
+  {
+    name: "filters:data_quality.validation.title",
+    icon: "🆔"
+  }
+];
+
 export const bulkActionTabs = [
   {
     name: "common:usergroups",

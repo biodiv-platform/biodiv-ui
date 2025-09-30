@@ -1,4 +1,5 @@
 {
+  "add": "Ajouter",
   "create_form": {
     "add_trait_button": "Sauvegarder",
     "add_trait_values_button": "Ajouter la valeur des traits",
@@ -46,6 +47,7 @@
     "units_year": "Année",
     "value": "Valeur"
   },
+  "save": "Sauvegarder",
   "terms": {
     "description": "En soumettant ce formulaire, vous confirmez que les données que vous téléchargez sont votre propre travail, ou que vous avez la permission du titulaire du droit d'auteur pour les partager sous la licence Creative Commons Attribution (CC-BY)."
   },

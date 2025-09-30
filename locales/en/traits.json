@@ -1,4 +1,5 @@
 {
+  "add": "Add",
   "create_form": {
     "add_trait_button": "Save",
     "add_trait_values_button": "Add Trait Value",
@@ -46,6 +47,7 @@
     "units_year": "Year",
     "value": "Value"
   },
+  "save": "Save",
   "terms": {
     "description": "By submitting this form, you confirm that the data you are uploading is your own work, or you have permission from the copyright holder to share it under the Creative Commons Attribution (CC-BY) license."
   },

@@ -1,4 +1,5 @@
 {
+  "add": "hametraka",
   "create_form": {
     "add_trait_button": "afa-tsy",
     "add_trait_values_button": "Ampio ny sandan'ny toetra",
@@ -46,6 +47,7 @@
     "units_year": "TAOM-",
     "value": "sarobidy"
   },
+  "save": "afa-tsy",
   "terms": {
     "description": "Amin'ny fandefasana ity taratasy ity dia manamafy ianao fa ny angon-drakitra ampidirinao dia ny asanao manokana, na manana alalana avy amin'ny tompon'andraikitry ny zon'ny mpamorona ianao mba hizara azy io eo ambany lisansa Creative Commons Attribution (CC-BY)."
   },
