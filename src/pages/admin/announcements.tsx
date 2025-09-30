@@ -5,7 +5,7 @@ import React from "react";
 import AnnouncementAdmin from "@/components/pages/admin/announcements";
 import { axGetAnnouncementList, axGetLangList } from "@/services/utility.service";
 
-export default function SpeciesFieldsAdminPage({languagesList, announcementList}) {
+export default function AnnouncementsAdminPage({languagesList, announcementList}) {
   return <AnnouncementAdmin languages={languagesList} announcements={announcementList}/>;
 }
 

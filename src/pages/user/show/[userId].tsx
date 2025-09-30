@@ -8,9 +8,9 @@ import { axGetAllHabitat } from "@services/utility.service";
 import { getLanguageId } from "@utils/i18n";
 import React from "react";
 
-const UserShowPage = ({ user, groupFilter, tab }) => (
+const UserShowPage = ({ user, groupFilter }) => (
   <GroupListFilterProvider {...groupFilter}>
-    <UserShowPageComponent user={user} tab={tab}/>
+    <UserShowPageComponent user={user}/>
   </GroupListFilterProvider>
 );
 
@@ -33,7 +33,6 @@ export const getServerSideProps = async (ctx) => {
         habitat: habitat.data,
         userId: user.id
       },
-      tab: ctx.query.tab ?? "about",
       success
     }
   };
