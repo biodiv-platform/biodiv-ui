@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "അറിയിപ്പ് സൃഷ്ടിക്കുക"
+  },
   "links": {
     "announcements_configure": "പ്രഖ്യാപനങ്ങൾ സജ്ജീകരണം",
     "name-macthing": "പേര് പൊരുത്തപ്പെടുന്നു",

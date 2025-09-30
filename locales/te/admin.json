@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "ప్రకటనను సృష్టించండి"
+  },
   "links": {
     "announcements_configure": "ప్రకటనల సెటప్",
     "name-macthing": "పేరు సరిపోలిక",

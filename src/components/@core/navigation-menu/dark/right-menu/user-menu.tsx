@@ -17,6 +17,9 @@ export default function UserMenu() {
 
   const userMenuRows = [
     {
+      name: "my_notifications"
+    },
+    {
       name: "my_profile",
       to: `/user/show/${user?.id}`
     },
@@ -30,11 +33,6 @@ export default function UserMenu() {
       name: "my_observations",
       to: `/observation/list`,
       params: { user: user?.id }
-    },
-    {
-      name: "my_notifications",
-      to: `/user/show/${user?.id}`,
-      params: {tab:"notifications"}
     },
     {
       name: "logout",

@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "ঘোষণা তৈরি করুন"
+  },
   "links": {
     "announcements_configure": "ঘোষণা সেটআপ",
     "name-macthing": "নাম ম্যাচিং",

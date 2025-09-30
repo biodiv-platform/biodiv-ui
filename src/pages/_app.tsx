@@ -93,7 +93,7 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
 
   const { currentGroup, groups } = await axGroupList(aReq.href, languageId?languageId: SITE_CONFIG.LANG.DEFAULT_ID,appContext.ctx.locale);
 
-  const { data: announcement } = await axGetActiveAnnouncement(appContext.ctx);
+  const { data: announcement } = await axGetActiveAnnouncement();
 
   return {
     pageProps,

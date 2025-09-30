@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "Créer une annonce"
+  },
   "links": {
     "announcements_configure": "Configuration des annonces",
     "name-macthing": "Nom correspondant",

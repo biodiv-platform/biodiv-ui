@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "ਘੋਸ਼ਣਾਵਾਂ ਬਣਾਓ"
+  },
   "links": {
     "announcements_configure": "ਘੋਸ਼ਣਾਵਾਂ ਸੈਟਅਪ",
     "name-macthing": "ਨਾਮ ਮੇਲ",

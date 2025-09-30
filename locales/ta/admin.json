@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "அறிவிப்பை உருவாக்குங்கள்"
+  },
   "links": {
     "announcements_configure": "அறிவிப்புகள் அமைப்பு",
     "name-macthing": "பெயர் பொருத்தம்",

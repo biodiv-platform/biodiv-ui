@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "જાહેરાત બનાવો"
+  },
   "links": {
     "announcements_configure": "જાહેરાત",
     "name-macthing": "નામ મેચિંગ",

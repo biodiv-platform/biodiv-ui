@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "घोषणा तयार करा"
+  },
   "links": {
     "announcements_configure": "घोषणा सेटअप",
     "name-macthing": "नाव जुळणी",

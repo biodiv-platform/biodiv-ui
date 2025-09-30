@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "Unda tangazo"
+  },
   "links": {
     "announcements_configure": "Matangazo ya Usanidi",
     "name-macthing": "Jina linalofanana",

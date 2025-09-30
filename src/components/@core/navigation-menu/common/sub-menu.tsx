@@ -12,7 +12,7 @@ const getPageLink = (lang, to) => {
 
 export default function SubMenu({ rows, prefix = "", isPage = false }) {
   const { t, lang } = useTranslation();
-  const { isCurrentGroupMember, isLoggedIn, currentGroup, open } = useGlobalState();
+  const { isCurrentGroupMember, isLoggedIn, currentGroup, open, setOpen } = useGlobalState();
 
   return (
     <Menu.Content>
@@ -26,12 +26,16 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
             <Menu.Item key={item.name} value={item.name} asChild>
               {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
                 <a onClick={() => notification(t("header:member_only"))}>{label}</a>
+              ): item.name == "my_notifications"? (
+                <Box onClick={()=> setOpen(true)}>
+                  {label}
+                  {!open && (
+                    <Box w="8px" h="8px" bg="red.500" borderRadius="full" ml={2} />
+                  )}
+                </Box>
               ) : (
                 <LocalLink href={toLink} params={item.params} prefixGroup={true}>
                   {label}
-                  {!open && item.name == "my_notifications" && (
-                    <Box w="8px" h="8px" bg="red.500" borderRadius="full" ml={2} />
-                  )}
                 </LocalLink>
               )}
             </Menu.Item>

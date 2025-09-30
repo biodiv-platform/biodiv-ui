@@ -158,7 +158,7 @@ export default function AnnouncemntSetupFrom({
               </ColorPicker.Root>
             </SimpleGrid>
           }
-          <SubmitButton>{t("group:homepage_customization.gallery_setup.create")}</SubmitButton>
+          <SubmitButton>{t("admin:announcement.create")}</SubmitButton>
         </form>
       </FormProvider>
     </>

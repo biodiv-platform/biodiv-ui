@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "ಪ್ರಕಟಣೆಯನ್ನು ರಚಿಸಿ"
+  },
   "links": {
     "announcements_configure": "ಪ್ರಕಟಣೆಗಳ ಸೆಟಪ್",
     "name-macthing": "ಹೆಸರು ಹೊಂದಾಣಿಕೆ",

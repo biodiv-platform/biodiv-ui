@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "ଘୋଷଣା ସୃଷ୍ଟି କରନ୍ତୁ |"
+  },
   "links": {
     "announcements_configure": "ଘୋଷଣା ସେଟଅପ୍ |",
     "name-macthing": "ନାମ ମେଳଣ",

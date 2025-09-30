@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "create": "Create Announcement"
+  },
   "links": {
     "announcements_configure": "Announcements Setup",
     "name-macthing": "Name Matching",

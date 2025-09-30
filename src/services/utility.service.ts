@@ -248,12 +248,10 @@ export const axEditAnnouncement = async (announcementId,payload) => {
   }
 };
 
-export const axGetActiveAnnouncement = async(ctx) => {
+export const axGetActiveAnnouncement = async() => {
   try{
-    const { data } = await http.get(
-      `${ENDPOINT.UTILITY}/v1/services/announcement/active`,{
-        params: {ctx}
-      }
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.UTILITY}/v1/services/announcement/active`
     );
     return { success: true, data };
   }
