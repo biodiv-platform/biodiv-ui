@@ -42,6 +42,10 @@ interface ObservationFilterContextProps {
   selectAll?: boolean;
   setSelectAll?;
   bulkObservationIds?: any[];
+  excludedBulkIds?: any[];
+  setExcludedBulkIds;
+  bulkSpeciesIds?;
+  setBulkSpeciesIds;
   handleBulkCheckbox: (arg: string) => void;
   isOpen?;
   onOpen?;
@@ -77,6 +81,8 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
   const [allMedia, setAllMedia] = useState(
     props.observationData.mediaToggle === MEDIA_TOGGLE.WITH_MEDIA ? false : true
   );
+  const [excludedBulkIds, setExcludedBulkIds] = useState<any[]>([]);
+  const [bulkSpeciesIds, setBulkSpeciesIds] = useState({});
 
   const setCropObservationId = async (id, canCrop) => {
     setCanCropObservation(canCrop);
@@ -92,10 +98,18 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
       case "selectAll":
         setSelectAll(true);
         setValue(observationData?.l?.map((i) => String(i.observationId)));
+        setExcludedBulkIds([]);
+        const zeroObject = Object.fromEntries(
+          Object.entries(props.observationData?.ag?.groupSpeciesName || {})
+              .map(([key, value]) => [key.split("|")[0], value]) // Keep original value
+      );
+        setBulkSpeciesIds(zeroObject)
         break;
       case "UnsSelectAll":
         setValue([]);
         setSelectAll(false);
+        setExcludedBulkIds([]);
+        setBulkSpeciesIds({});
         break;
     }
   };
@@ -244,6 +258,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         selectAll,
         setSelectAll,
         bulkObservationIds,
+        excludedBulkIds,
+        setExcludedBulkIds,
+        bulkSpeciesIds,
+        setBulkSpeciesIds,
         handleBulkCheckbox,
         authorizedUserGroupList,
         hasUgAccess,
