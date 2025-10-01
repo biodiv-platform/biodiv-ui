@@ -75,7 +75,7 @@ export default function TraitsPost({
     } else {
       notification(t("observation:bulk_action.failure"), NotificationType.Error);
     }
-    router.push("/observation/list", true, { ...filter }, true);
+    router.push("/observation/list", true, { ...filter, offset: 0 }, true);
   };
   return (
     <Box>
@@ -234,7 +234,7 @@ export default function TraitsPost({
           type="submit"
           onClick={() => handleOnTraitSave()}
         >
-          {t("traits:save")}
+          {t("common:save")}
         </Button>
       </HStack>
     </Box>

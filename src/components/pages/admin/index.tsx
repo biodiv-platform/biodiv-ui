@@ -20,15 +20,6 @@ function AdminComponent() {
               borderRadius="md"
               _hover={{ bg: "teal", color: "white" }}
             >
-              <Link href="/admin/notifications">{t("admin:links.notification")}</Link>
-            </List.Item>
-            <List.Item
-              display="flex"
-              alignItems="center"
-              p="2"
-              borderRadius="md"
-              _hover={{ bg: "teal", color: "white" }}
-            >
               <Link href="/admin/homegallery">{t("group:homepage_customization.title")}</Link>
             </List.Item>
             <List.Item

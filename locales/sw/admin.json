@@ -1,9 +1,15 @@
 {
   "announcement": {
-    "create": "Unda tangazo"
+    "create": "Unda tangazo",
+    "create_failure": "Haiwezi kuunda tangazo",
+    "create_success": "Tangazo liliundwa kwa mafanikio",
+    "delete_failure": "Haiwezi kufuta tangazo",
+    "delete_success": "Tangazo lilifutwa kwa mafanikio",
+    "edit_failure": "Wezesha kuhariri tangazo",
+    "edit_success": "Tangazo lilihaririwa kwa mafanikio"
   },
   "links": {
-    "announcements_configure": "Matangazo ya Usanidi",
+    "announcements_configure": "Dhibiti arifa",
     "name-macthing": "Jina linalofanana",
     "notification": "Tuma Arifa ya Push"
   },

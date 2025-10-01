@@ -1,9 +1,15 @@
 {
   "announcement": {
-    "create": "घोषणा तयार करा"
+    "create": "घोषणा तयार करा",
+    "create_failure": "घोषणा तयार करण्यात अक्षम",
+    "create_success": "घोषणा यशस्वीरित्या तयार केली",
+    "delete_failure": "घोषणा हटविण्यात अक्षम",
+    "delete_success": "घोषणा यशस्वीरित्या हटविली",
+    "edit_failure": "घोषणा संपादित करण्यास सक्षम करा",
+    "edit_success": "घोषणा यशस्वीरित्या संपादित केली"
   },
   "links": {
-    "announcements_configure": "घोषणा सेटअप",
+    "announcements_configure": "सूचना व्यवस्थापित करा",
     "name-macthing": "नाव जुळणी",
     "notification": "पुश-सूचना पाठवा"
   },

@@ -23,6 +23,7 @@ interface GlobalStateContextProps {
   setOpen?;
 
   announcement?;
+  setAnnouncement?;
 
   pages?;
   setPages?;

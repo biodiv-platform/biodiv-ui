@@ -1,9 +1,15 @@
 {
   "announcement": {
-    "create": "ଘୋଷଣା ସୃଷ୍ଟି କରନ୍ତୁ |"
+    "create": "ଘୋଷଣା ସୃଷ୍ଟି କରନ୍ତୁ |",
+    "create_failure": "ଘୋଷଣା ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ |",
+    "create_success": "ଘୋଷଣା ସଫଳତାର ସହିତ ସୃଷ୍ଟି ହୋଇଛି |",
+    "delete_failure": "ଘୋଷଣା ବିଲୋପ କରିବାରେ ଅସମର୍ଥ |",
+    "delete_success": "ଘୋଷଣା ସଫଳତାର ସହିତ ବିଲୋପ ହେଲା |",
+    "edit_failure": "ଘୋଷଣାକୁ ସଂପାଦନ କରିବାକୁ ସକ୍ଷମ କରନ୍ତୁ |",
+    "edit_success": "ଘୋଷଣା ସଫଳତାର ସହିତ ସମ୍ପାଦିତ |"
   },
   "links": {
-    "announcements_configure": "ଘୋଷଣା ସେଟଅପ୍ |",
+    "announcements_configure": "ବିଜ୍ଞପ୍ତିଗୁଡିକ ପରିଚାଳନା କରନ୍ତୁ |",
     "name-macthing": "ନାମ ମେଳଣ",
     "notification": "ପୁସ୍-ବିଜ୍ଞପ୍ତି ପଠାନ୍ତୁ |"
   },

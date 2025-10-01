@@ -16,6 +16,11 @@
   "activity": "Activity",
   "add": "Add",
   "add_trait": "Add Trait",
+  "admin": {
+    "announcement": {
+      "delete_failure": "Unable to delete announcement"
+    }
+  },
   "and": "And",
   "cancel": "Cancel",
   "clear": "Clear",

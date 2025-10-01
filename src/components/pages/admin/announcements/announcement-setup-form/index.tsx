@@ -21,7 +21,7 @@ export default function AnnouncemntSetupFrom({
   languages
 }) {
   const { t } = useTranslation();
-  const { languageId } = useGlobalState();
+  const { languageId, announcement, setAnnouncement } = useGlobalState();
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -32,10 +32,10 @@ export default function AnnouncemntSetupFrom({
       })
     ),
     defaultValues: {
-      languageId: 205,
-      enabled: true, // or false, depending on your needs
+      languageId: SITE_CONFIG.LANG.DEFAULT_ID,
+      enabled: true,
       translations: {
-        205: ""
+        [SITE_CONFIG.LANG.DEFAULT_ID]: "" // Use variable as key
       }
     }
   });
@@ -44,26 +44,21 @@ export default function AnnouncemntSetupFrom({
   const [color, setColor] = useState("rgba(255,255,255,1)");
   const [bgColor, setBgColor] = useState("rgba(26, 32, 44, 1)");
 
-  const handleFormSubmit = async ( value ) => {
+  const handleFormSubmit = async (value) => {
     const payload = {
-        color: color,
-        bgColor: bgColor,
-        ...value
+      color: color,
+      bgColor: bgColor,
+      ...value
     };
-    const { success, data } = await axCreateAnnouncement(payload)
-      if (success) {
-        notification(
-          "Announcement Created",
-          NotificationType.Success
-        );
-        setAnnouncementList([...announcementList, data]);
-        setIsCreate(false);
-      } else {
-        notification(
-          "Unable to create announcement",
-          NotificationType.Error
-        );
-      }
+    const { success, data } = await axCreateAnnouncement(payload);
+    if (success) {
+      notification(t("admin:announcement.create_success"), NotificationType.Success);
+      setAnnouncementList([...announcementList, data]);
+      setAnnouncement([...announcement, data])
+      setIsCreate(false);
+    } else {
+      notification(t("admin.announcement.create_failure"), NotificationType.Error);
+    }
   };
 
   const [translationSelected, setTranslationSelected] = useState<number>(languageId);
@@ -111,7 +106,7 @@ export default function AnnouncemntSetupFrom({
                 </ColorPicker.Label>
                 <ColorPicker.Control>
                   <ColorPicker.Trigger p="2" width={"full"}>
-                    <ColorPicker.ValueSwatch boxSize="10" width={"full"}/>
+                    <ColorPicker.ValueSwatch boxSize="10" width={"full"} />
                   </ColorPicker.Trigger>
                 </ColorPicker.Control>
                 <Portal>
@@ -121,7 +116,7 @@ export default function AnnouncemntSetupFrom({
                       <HStack>
                         <ColorPicker.EyeDropper size="sm" variant="outline" />
                         <ColorPicker.Sliders />
-                        <ColorPicker.ValueSwatch/>
+                        <ColorPicker.ValueSwatch />
                       </HStack>
                     </ColorPicker.Content>
                   </ColorPicker.Positioner>
@@ -140,7 +135,7 @@ export default function AnnouncemntSetupFrom({
                 </ColorPicker.Label>
                 <ColorPicker.Control>
                   <ColorPicker.Trigger p="2" width={"full"}>
-                    <ColorPicker.ValueSwatch boxSize="10" width={"full"}/>
+                    <ColorPicker.ValueSwatch boxSize="10" width={"full"} />
                   </ColorPicker.Trigger>
                 </ColorPicker.Control>
                 <Portal>

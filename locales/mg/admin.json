@@ -1,9 +1,15 @@
 {
   "announcement": {
-    "create": "Mamorona fanambarana"
+    "create": "Mamorona fanambarana",
+    "create_failure": "Tsy afaka namorona fanambarana",
+    "create_success": "Filazana noforonina nahomby",
+    "delete_failure": "Tsy afaka namafa ny fanambarana",
+    "delete_success": "Nesorina tamim-pahombiazana ny fanambarana",
+    "edit_failure": "Mamela ny fanovana",
+    "edit_success": "Namboarina tamim-pahombiazana ny fanambarana"
   },
   "links": {
-    "announcements_configure": "Fampandrenesana fananganana",
+    "announcements_configure": "Mitantana fampandrenesana",
     "name-macthing": "Anarana mifanandrify",
     "notification": "Alefaso ny fanosehana"
   },

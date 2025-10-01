@@ -1,9 +1,15 @@
 {
   "announcement": {
-    "create": "Create Announcement"
+    "create": "Create Announcement",
+    "create_failure": "Unable to create announcement",
+    "create_success": "Announcement Created Successfully",
+    "delete_failure": "Unable to delete announcement",
+    "delete_success": "Announcement deleted successfully",
+    "edit_failure": "Enable to edit announcement",
+    "edit_success": "Announcement edited successfully"
   },
   "links": {
-    "announcements_configure": "Announcements Setup",
+    "announcements_configure": "Manage Notifications",
     "name-macthing": "Name Matching",
     "notification": "Send Push-Notification",
     "species_fields": "Species Fields"

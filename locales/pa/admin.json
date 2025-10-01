@@ -1,9 +1,15 @@
 {
   "announcement": {
-    "create": "ਘੋਸ਼ਣਾਵਾਂ ਬਣਾਓ"
+    "create": "ਘੋਸ਼ਣਾਵਾਂ ਬਣਾਓ",
+    "create_failure": "ਘੋਸ਼ਣਾ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
+    "create_success": "ਐਲਾਨ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ",
+    "delete_failure": "ਦੀ ਘੋਸ਼ਣਾ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
+    "delete_success": "ਐਲਾਨ ਸਫਲਤਾਪੂਰਵਕ ਮਿਟਾ ਦਿੱਤਾ ਗਿਆ",
+    "edit_failure": "ਸੋਧ ਨੂੰ ਸੋਧਣ ਦੇ ਯੋਗ ਬਣਾਓ",
+    "edit_success": "ਐਲਾਨ ਸਫਲਤਾਪੂਰਵਕ ਸੰਪਾਦਿਤ ਕੀਤਾ ਗਿਆ"
   },
   "links": {
-    "announcements_configure": "ਘੋਸ਼ਣਾਵਾਂ ਸੈਟਅਪ",
+    "announcements_configure": "ਨੋਟੀਫਿਕੇਸ਼ਨ ਪ੍ਰਬੰਧਿਤ ਕਰੋ",
     "name-macthing": "ਨਾਮ ਮੇਲ",
     "notification": "ਪੁਸ਼-ਨੋਟੀਫਿਕੇਸ਼ਨ ਭੇਜੋ"
   },

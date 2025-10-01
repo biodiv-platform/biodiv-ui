@@ -20,6 +20,7 @@ import * as Yup from "yup";
 import { RichTextareaField } from "@/components/form/rich-textarea";
 import TranslationTab from "@/components/pages/common/translation-tab";
 import { axEditAnnouncement } from "@/services/utility.service";
+import notification, { NotificationType } from "@/utils/notification";
 
 export default function AnnouncementEditForm({
   setIsEdit,
@@ -71,9 +72,12 @@ export default function AnnouncementEditForm({
     };
    const {success, data} = await axEditAnnouncement(announcementId, payload);
    if (success){
+    notification(t("admin:announcement.edit_success"), NotificationType.Success);
     setIsEdit(false)
     announcementList[index] = data;
     setAnnouncementList(announcementList)
+   } else {
+    notification(t("admin.announcement.edit_failure"), NotificationType.Error);
    }
   };
 
