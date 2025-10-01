@@ -10,7 +10,7 @@ import React from "react";
 
 const UserShowPage = ({ user, groupFilter }) => (
   <GroupListFilterProvider {...groupFilter}>
-    <UserShowPageComponent user={user}/>
+    <UserShowPageComponent user={user} />
   </GroupListFilterProvider>
 );
 

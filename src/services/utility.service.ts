@@ -208,11 +208,11 @@ export const axCreateAnnouncement = async (payload) => {
   }
 };
 
-export const axGetAnnouncementList = async(ctx) => {
+export const axGetAnnouncementList = async(requestData) => {
   try{
     const { data } = await http.get(
       `${ENDPOINT.UTILITY}/v1/services/announcement/all`,{
-        params: {ctx}
+        params: requestData
       }
     );
     return { success: true, data };
