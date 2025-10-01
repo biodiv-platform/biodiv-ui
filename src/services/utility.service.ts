@@ -194,3 +194,69 @@ export const axGetLanguagesWithSpeciesFields = async () => {
     return { success: false, data: [] };
   }
 };
+
+export const axCreateAnnouncement = async (payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.UTILITY}/v1/services/homePage/announcement/create`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+export const axGetAnnouncementList = async(requestData) => {
+  try{
+    const { data } = await http.get(
+      `${ENDPOINT.UTILITY}/v1/services/announcement/all`,{
+        params: requestData
+      }
+    );
+    return { success: true, data };
+  }
+  catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+}
+
+export const axRemoveAnnouncement = async(announcementId) => {
+  try {
+    await http.delete(
+      `${ENDPOINT.UTILITY}/v1/services/announcement/remove/${announcementId}`
+    );
+    return {success: true, data: null}
+  } catch (e) {
+    console.error(e)
+    return {success: false, data: null}
+  }
+}
+
+export const axEditAnnouncement = async (announcementId,payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.UTILITY}/v1/services/announcement/edit/${announcementId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+export const axGetActiveAnnouncement = async() => {
+  try{
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.UTILITY}/v1/services/announcement/active`
+    );
+    return { success: true, data };
+  }
+  catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+}

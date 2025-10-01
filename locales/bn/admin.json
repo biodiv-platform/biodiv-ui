@@ -1,5 +1,15 @@
 {
+  "announcement": {
+    "create": "ঘোষণা তৈরি করুন",
+    "create_failure": "ঘোষণা তৈরি করতে অক্ষম",
+    "create_success": "ঘোষণা সফলভাবে তৈরি",
+    "delete_failure": "ঘোষণা মুছতে অক্ষম",
+    "delete_success": "ঘোষণা সফলভাবে মুছে ফেলা হয়েছে",
+    "edit_failure": "ঘোষণা সম্পাদনা করতে সক্ষম",
+    "edit_success": "ঘোষণা সফলভাবে সম্পাদিত"
+  },
   "links": {
+    "announcements_configure": "বিজ্ঞপ্তি পরিচালনা করুন",
     "name-macthing": "নাম ম্যাচিং",
     "notification": "ধাক্কা-বিজ্ঞপ্তি পাঠান"
   },

@@ -31,6 +31,7 @@
     "settings": {
       "leaderboard": "Mon rang de classement",
       "logout": "Se déconnecter",
+      "my_notifications": "Notifications",
       "my_observations": "Mes observations",
       "my_profile": "Mon profil",
       "title": "Paramètres"

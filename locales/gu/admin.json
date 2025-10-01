@@ -1,5 +1,15 @@
 {
+  "announcement": {
+    "create": "જાહેરાત બનાવો",
+    "create_failure": "જાહેરાત કરવામાં અસમર્થ",
+    "create_success": "ઘોષણા સફળતાપૂર્વક બનાવેલ છે",
+    "delete_failure": "જાહેરાત કા delete ી નાખવામાં અસમર્થ",
+    "delete_success": "ઘોષણા સફળતાપૂર્વક કા deleted ી",
+    "edit_failure": "જાહેરાત સંપાદિત કરવા માટે સક્ષમ",
+    "edit_success": "જાહેરાત સફળતાપૂર્વક સંપાદિત"
+  },
   "links": {
+    "announcements_configure": "સૂચનાઓ મેનેજ કરો",
     "name-macthing": "નામ મેચિંગ",
     "notification": "પુશ-સૂચના મોકલો"
   },

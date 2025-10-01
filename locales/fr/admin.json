@@ -1,5 +1,15 @@
 {
+  "announcement": {
+    "create": "Créer une annonce",
+    "create_failure": "Impossible de créer une annonce",
+    "create_success": "Annonce créée avec succès",
+    "delete_failure": "Impossible de supprimer l'annonce",
+    "delete_success": "Annonce supprimée avec succès",
+    "edit_failure": "Permettre de modifier l'annonce",
+    "edit_success": "Annonce édité avec succès"
+  },
   "links": {
+    "announcements_configure": "Gérer les notifications",
     "name-macthing": "Nom correspondant",
     "notification": "Envoyer une notification push"
   },

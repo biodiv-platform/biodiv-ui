@@ -138,3 +138,12 @@ export interface UserIbp {
   profilePic?: string;
   isAdmin?: boolean;
 }
+
+export interface AnnouncementType {
+  id: number;
+  bgColor: string;
+  color: string;
+  translations: {
+    [key: number]: string;
+  };
+}
