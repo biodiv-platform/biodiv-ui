@@ -75,14 +75,10 @@ export default function GalleryEditForm({
     return Yup.object().shape(languageMapShape);
   });
   const [color, setColor] = useState(
-    editGalleryData.color
-      ? editGalleryData.color
-      : "rgba(255,255,255,1)"
+    editGalleryData.color ? editGalleryData.color : "rgba(255,255,255,1)"
   );
   const [bgColor, setBgColor] = useState(
-    editGalleryData.bgColor
-      ? editGalleryData.bgColor
-      : "rgba(26, 32, 44, 1)"
+    editGalleryData.bgColor ? editGalleryData.bgColor : "rgba(26, 32, 44, 1)"
   );
 
   const hForm = useForm<any>({
@@ -122,7 +118,7 @@ export default function GalleryEditForm({
     setTranslationSelected(langId);
   };
 
-  const handleFormSubmit = async ({translations,...value}) => {
+  const handleFormSubmit = async ({ translations, ...value }) => {
     const payload = {
       translations: Object.values(translations),
       color: color,
@@ -136,11 +132,7 @@ export default function GalleryEditForm({
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-      setGalleryList(
-        galleryId == -1
-          ? data.gallerySlider
-          : data.miniGallery[index].gallerySlider
-      );
+      setGalleryList(galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider);
       setIsEdit(false);
     } else {
       notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
@@ -173,8 +165,13 @@ export default function GalleryEditForm({
               ? hForm.getValues().translations[SITE_CONFIG.LANG.DEFAULT_ID].title
               : t("group:homepage_customization.resources.title")
           }
+          {...(galleryId && { maxLength: 2 })}
         />
-        <TextBoxField name="moreLinks" label={t("group:homepage_customization.resources.link")} disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}/>
+        <TextBoxField
+          name="moreLinks"
+          label={t("group:homepage_customization.resources.link")}
+          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+        />
         {observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>

@@ -8,8 +8,8 @@ import React, { useState } from "react";
 import { LuArrowRight } from "react-icons/lu";
 
 const GroupListItem = () => {
-  const { groups, currentGroup } = useGlobalState();
-  const { t } = useTranslation();
+  const { groups, currentGroup, languageId } = useGlobalState();
+  const { t, lang } = useTranslation();
   const removePrefix = currentGroup.webAddress?.startsWith(SITE_CONFIG.SITE.URL);
   const [filterGroups, setFilterGroups] = useState<any>(groups);
 
@@ -29,13 +29,21 @@ const GroupListItem = () => {
       </Menu.Item>
 
       {filterGroups?.map((g) => {
-        const groupURL: any = removePrefix
+        let groupURL: any = removePrefix
           ? g?.webAddress?.replace(SITE_CONFIG.SITE.URL, "")
           : g?.webAddress;
 
+        if (languageId!=SITE_CONFIG.LANG.DEFAULT_ID){
+          if (g?.webAddress?.startsWith(SITE_CONFIG.SITE.URL)){
+            groupURL = `/${lang}/`+ groupURL
+          } else {
+            groupURL = groupURL+`/${lang}/`
+          }
+        }
+
         return (
           <Menu.Item key={g.id} minH="3rem" value={g.id} asChild>
-            <Link w="full" href={groupURL}>
+            <Link href={groupURL}>
               <Flex alignItems="center">
                 <Image
                   boxSize="2rem"
