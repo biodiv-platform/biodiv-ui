@@ -4,7 +4,7 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT } from "@static/constants";
+import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import { NakshaMaplibreLayers } from "naksha-components-react";
 import useTranslation from "next-translate/useTranslation";
@@ -44,7 +44,11 @@ export default function ObservationsMap() {
           loadToC={false}
           lang={lang}
           key={JSON.stringify(filter)}
-          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          mapStyles={mapStyles.map((s) =>
+            typeof s.style === "string"
+              ? s
+              : { ...s, style: JSON.stringify(s.style) }
+          ) as { text: string; key: string; style: string; maxZoom?: number }[]}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
             endpoint: ENDPOINT.GEOSERVER,

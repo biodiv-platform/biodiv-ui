@@ -1,8 +1,7 @@
-// import { MapStyles } from "@biodiv-platform/naksha-commons";
 import { Box } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT } from "@static/constants";
+import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
@@ -51,8 +50,8 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
           loadToC={false}
           showToC={false}
           lang={lang}
-          mapStyle={"0"}
-          // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          // mapStyle={"0"}
+          mapstyles={mapStyles}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
             endpoint: ENDPOINT.GEOSERVER,

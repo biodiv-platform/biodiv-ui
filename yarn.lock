@@ -323,10 +323,10 @@
     terra-draw-maplibre-gl-adapter "^1.1.2"
     twind "^0.16.17"
 
-"@biodiv-platform/naksha-maplibre-layers@5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-layers/-/naksha-maplibre-layers-5.0.1.tgz#d557f8ffe098993c9e88e7e7b7a3963dc626ea09"
-  integrity sha512-Ps5Sbb07tHYKuyui/hl2hWub1YSQzxtV9Pz7Ihf3l+gWnZEiUgXAIowNXBbAhFG3WNZB1HZZUlbfrQCm9tvWBQ==
+"@biodiv-platform/naksha-maplibre-layers@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-layers/-/naksha-maplibre-layers-5.0.2.tgz#dfaa130e9b04277773aabf447e5cfcb5454e8a8a"
+  integrity sha512-ptrtlyoNmAwy2oY91YPUwPA41x4pL+qGkQNrdnksUfh8S89OIqA8ivRYuMqA5uRYiX3PDOxkFp4oRhZ2PBOe0A==
   dependencies:
     "@biodiv-platform/naksha-commons" "5.0.0-beta.1"
     "@bumaga/tabs" "^0.2.0"
@@ -7525,16 +7525,16 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@4.6.1-beta.21:
-  version "4.6.1-beta.21"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.6.1-beta.21.tgz#c4be645dfed494d646168d903c95250b9177202d"
-  integrity sha512-x52RTHdLL3fNhKEAI/IkkdjDg4niOotV/yQhUEej1n50mPIGHFVfB2iGf+sTTBzP7f0/OrLlKAg7ZzJHzDEdVQ==
+naksha-components-react@4.6.1-beta.22:
+  version "4.6.1-beta.22"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-4.6.1-beta.22.tgz#a3e7173ee8830c6a7d70c1c477638b6e3e6be6a1"
+  integrity sha512-js2xgkASA/4GY0G7de736qKDTC6RjYlcNil+In8eQufUBacpK+JSwRKG52H49GU4zES7Qlz7M7GFYxVHzYRNQA==
   dependencies:
     "@biodiv-platform/eslint-preset" "4.4.9"
     "@biodiv-platform/naksha-gmaps-draw" "4.5.3"
     "@biodiv-platform/naksha-gmaps-view" "4.4.9"
     "@biodiv-platform/naksha-maplibre-draw" "5.0.10"
-    "@biodiv-platform/naksha-maplibre-layers" "5.0.1"
+    "@biodiv-platform/naksha-maplibre-layers" "5.0.2"
     "@biodiv-platform/naksha-maplibre-view" "5.0.2"
     "@biodiv-platform/tsconfig" "4.4.9"
 

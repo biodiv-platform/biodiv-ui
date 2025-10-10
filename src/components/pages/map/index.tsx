@@ -4,7 +4,7 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT, isBrowser } from "@static/constants";
+import { ENDPOINT, isBrowser, mapStyles } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
@@ -79,7 +79,7 @@ export default function MapPageComponent({ defaultLayers }) {
         selectedLayers={defaultLayers}
         onSelectedLayersChange={setSelectedLayers}
         nakshaEndpointToken={`Bearer ${user.accessToken}`}
-        // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        mapStyles={mapStyles}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
         onLayerDownload={handleOnDownload}
         canLayerShare={true}

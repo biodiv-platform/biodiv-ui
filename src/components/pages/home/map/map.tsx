@@ -2,7 +2,7 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT } from "@static/constants";
+import { ENDPOINT, mapStyles } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
@@ -51,7 +51,6 @@ export default function Map() {
       loadToC={true}
       lang={lang}
       managePublishing={canManagePublishing}
-      // mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
       geoserver={{
         endpoint: ENDPOINT.GEOSERVER,
@@ -59,6 +58,7 @@ export default function Map() {
         workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
       }}
       selectedLayers={geoserverLayers}
+      mapStyles={mapStyles}
       layers={[
         {
           id: "global-observations",

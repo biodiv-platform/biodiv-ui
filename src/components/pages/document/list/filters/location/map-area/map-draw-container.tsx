@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
-import { getMapCenter, stringToFeature } from "@utils/location";
+import { convertFeatureToPolygonString, getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 
@@ -22,14 +22,21 @@ export default function MapDrawContainer() {
   const defaultViewState = useMemo(() => getMapCenter(2.8), []);
 
   const handleOnFeatureChange = (features) => {
-    // console.info("features ui", features);
-    if (features.length > 0) {
-      addFilter(FILTER_NAME, features[0]?.geometry?.coordinates.toString());
-      addFilter("geoShapeFilterField", "documentCoverages.topology");
+    if (!features.length) {
+      removeFilter(FILTER_NAME);
+      removeFilter("geoShapeFilterField");
       return;
     }
-    removeFilter(FILTER_NAME);
-    removeFilter("geoShapeFilterField");
+
+    const polygonString = convertFeatureToPolygonString(features[0]);
+
+    if (polygonString) {
+      addFilter(FILTER_NAME, polygonString);
+      addFilter("geoShapeFilterField", "documentCoverages.topology");
+    } else {
+      removeFilter(FILTER_NAME);
+      removeFilter("geoShapeFilterField");
+    }
   };
 
   return (
