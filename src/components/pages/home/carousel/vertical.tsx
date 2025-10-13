@@ -9,7 +9,8 @@ import {
   HStack,
   IconButton,
   Image,
-  Text
+  Text,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { useKeenSlider } from "keen-slider/react";
 import React, { useState } from "react";
@@ -21,13 +22,15 @@ import { getResourceThumbnail, RESOURCE_CTX } from "@/utils/media";
 export default function VerticalCarousel({ featured, slidesPerView }) {
   const [, setCurrentSlide] = useState(0);
   const [sliderLoaded, setSliderLoaded] = useState(false);
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
       vertical: true,
-      loop: featured.length > slidesPerView,
+      loop: featured.length > slidesPerView || isMobile,
       slides: {
-        perView: featured.length > slidesPerView ? slidesPerView : featured.length,
+        perView: isMobile ? 1 : featured.length > slidesPerView ? slidesPerView : featured.length,
         spacing: 4
       },
       slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel),
@@ -67,7 +70,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
 
   return (
     <Box position={"relative"} mt={8} mb={8}>
-      {featured.length > slidesPerView && (
+      {(featured.length > slidesPerView  || isMobile)&& (
         <IconButton
           aria-label="Prev Slide"
           onClick={() => iSlider.current?.prev()}
@@ -85,7 +88,13 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
         ref={sliderRef}
         className="keen-slider"
         style={{ visibility: sliderLoaded ? "visible" : "hidden" }}
-        h={featured.length > slidesPerView ? 100 * slidesPerView : 100 * featured.length}
+        h={
+          isMobile
+            ? 400
+            : featured.length > slidesPerView
+            ? (isTablet?150:100) * slidesPerView
+            : (isTablet?150:100) * featured.length
+        }
       >
         {featured.map((o, index) => {
           const resource = o;
@@ -99,64 +108,129 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
               bg={resource.bgColor ? resource.bgColor : "var(--chakra-colors-gray-800)"}
               color={resource.color ? resource.color : "white"}
             >
-              <HStack h="full" gap={6}>
-                <Box w={100}>
-                {resource.fileName && (
-                  <Image
-                    src={getResourceThumbnail(
-                      resourceType,
-                      resource?.fileName,
-                      RESOURCE_SIZE.PREVIEW
+              {!isMobile && (
+                <HStack h="full" gap={6}>
+                  <Box w={100}>
+                    {resource.fileName && (
+                      <Image
+                        src={getResourceThumbnail(
+                          resourceType,
+                          resource?.fileName,
+                          RESOURCE_SIZE.PREVIEW
+                        )}
+                        h={(isTablet?150:100)}
+                        w={100}
+                        objectFit="cover"
+                        loading="lazy"
+                        alt={resource.id}
+                        bg="gray.300"
+                      />
                     )}
-                    h={100}
-                    w={100}
-                    objectFit="cover"
-                    loading="lazy"
-                    alt={resource.id}
-                    bg="gray.300"
-                  />
-                )}
-                </Box>
-                <Center flex="1" h="full" p={{ base: 5 }}>
-                  <Box>
-                    <Heading as="h1" fontWeight={500} mb={2} fontSize="1.5rem">
-                      {resource?.title}
-                    </Heading>
-                    <Text fontSize={"sm"} mb={4} maxH="6rem" overflow="auto">
-                      {resource?.customDescripition}
-                    </Text>
                   </Box>
-                </Center>
-                <Box
-                  width={150}
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="flex-end"
-                  alignItems="flex-end"
-                  mr={6}
-                >
-                  {resource.moreLinks && resource.readMoreUIType == "button" ? (
-                    <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+                  <Box flex="1" h="full" p={{ base: 5 }}>
+                    <>
+                      <Center>
+                        <Heading as="h1" fontWeight={500} mb={2} fontSize="1.5rem">
+                          {resource?.title}
+                        </Heading>
+                      </Center>
+                      <Center>
+                        <Text fontSize={"sm"} maxH={isTablet?"4rem":"2rem"} overflow={"auto"}>
+                          {resource?.customDescripition}
+                        </Text>
+                      </Center>
+                    </>
+                  </Box>
+                  <Box
+                    width={150}
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-end"
+                    alignItems="flex-end"
+                    mr={6}
+                  >
+                    {resource.moreLinks && resource.readMoreUIType == "button" ? (
+                      <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+                        <a href={resource.moreLinks}>
+                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                          <LuArrowRight />
+                        </a>
+                      </Button>
+                    ) : (
                       <a href={resource.moreLinks}>
-                        {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
-                        <LuArrowRight />
+                        <Flex alignItems="center">
+                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                          <LuArrowRight />
+                        </Flex>
                       </a>
-                    </Button>
-                  ) : (
-                    <a href={resource.moreLinks}>
-                      <Flex alignItems="center">
-                        {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
-                        <LuArrowRight />
-                      </Flex>
-                    </a>
+                    )}
+                  </Box>
+                </HStack>
+              )}
+              {isMobile && (
+                <Box>
+                  {resource.fileName && (
+                    <Image
+                      src={getResourceThumbnail(
+                        resourceType,
+                        resource?.fileName,
+                        RESOURCE_SIZE.PREVIEW
+                      )}
+                      h={"192px"}
+                      w={"full"}
+                      objectFit="cover"
+                      loading="lazy"
+                      alt={resource.id}
+                      bg="gray.300"
+                    />
                   )}
+                  <Box flex="1" h={"9.5rem"} p={{ base: 5 }}>
+                    <>
+                      <Center>
+                        <Heading as="h1" fontWeight={500} mb={2} fontSize="1.5rem">
+                          {resource?.title}
+                        </Heading>
+                      </Center>
+                      <Center>
+                        <Text fontSize={"sm"} mb={4} maxH="5rem" overflow="auto">
+                          {resource?.customDescripition}
+                        </Text>
+                      </Center>
+                    </>
+                  </Box>
+                  <Box
+                    width={"full"}
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-end"
+                    alignItems="flex-end"
+                    mb={2}
+                  >
+                    <Box mr={6}>
+                    {resource.moreLinks && resource.readMoreUIType == "button" ? (
+                      <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+                        <a href={resource.moreLinks}>
+                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                          <LuArrowRight />
+                        </a>
+                      </Button>
+                    ) : (
+                      <a href={resource.moreLinks}>
+                        <Flex alignItems="center">
+                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                          <LuArrowRight />
+                        </Flex>
+                      </a>
+                    )}
+                    </Box>
+                  </Box>
                 </Box>
-              </HStack>
+              )}
             </Box>
           );
         })}
       </Box>
-      {featured.length > slidesPerView && (
+      {(featured.length > slidesPerView || isMobile) && (
         <IconButton
           aria-label="Next Slide"
           onClick={() => iSlider.current?.next()}

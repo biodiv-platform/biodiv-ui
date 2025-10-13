@@ -165,7 +165,7 @@ export default function GalleryEditForm({
               ? hForm.getValues().translations[SITE_CONFIG.LANG.DEFAULT_ID].title
               : t("group:homepage_customization.resources.title")
           }
-          {...(galleryId && { maxLength: 2 })}
+          {...(galleryId != -1 && { maxLength: 20 })}
         />
         <TextBoxField
           name="moreLinks"
@@ -194,13 +194,14 @@ export default function GalleryEditForm({
           key={`description-${translationSelected}`}
           name={`translations.${translationSelected}.description`}
           label={t("group:homepage_customization.table.description")}
+          {...(galleryId != -1 && { maxLength: 292 })}
         />
 
         <TextBoxField
           key={`readMoreText-${translationSelected}`}
           name={`translations.${translationSelected}.readMoreText`}
           label={t("group:homepage_customization.resources.read_more")}
-          maxLength={30}
+          maxLength={galleryId != -1 ? 20 : 30}
         />
 
         <SelectInputField
