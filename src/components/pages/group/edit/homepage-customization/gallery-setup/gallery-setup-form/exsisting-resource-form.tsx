@@ -9,7 +9,12 @@ import { useFormContext } from "react-hook-form";
 
 import IconRadioField from "./icon-radio-field";
 
-export default function ExsistingResourceForm({ defaultValues, setDefaultValues, translation, galleryId }) {
+export default function ExsistingResourceForm({
+  defaultValues,
+  setDefaultValues,
+  translation,
+  galleryId
+}) {
   const form = useFormContext();
   const { t } = useTranslation();
 
@@ -27,12 +32,12 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
         title: recoIbp?.scientificName || t("common:unknown"),
         fileName: observationResource[0]?.resource?.fileName,
         options: observationResource.map((item) => ({ value: item?.resource?.fileName })),
-        translations:Object.fromEntries(
+        translations: Object.fromEntries(
           Object.entries(form.getValues().translations).map(([languageId, languageData]) => [
             languageId,
             {
               ...(languageData || {}),
-              title: recoIbp?.scientificName || t("common:unknown"),
+              title: recoIbp?.scientificName || t("common:unknown")
             }
           ])
         )

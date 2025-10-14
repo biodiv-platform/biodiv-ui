@@ -162,13 +162,13 @@ export default function GallerySetupFrom({
         />
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
           {imagePicker ? (
-            <NewResourceForm translation={translationSelected} galleryId={galleryId}/>
+            <NewResourceForm translation={translationSelected} galleryId={galleryId} />
           ) : (
             <ExsistingResourceForm
               defaultValues={defaultValues}
               setDefaultValues={setDefaultValues}
               translation={translationSelected}
-              galleryId ={galleryId}
+              galleryId={galleryId}
             />
           )}
           <TextAreaField

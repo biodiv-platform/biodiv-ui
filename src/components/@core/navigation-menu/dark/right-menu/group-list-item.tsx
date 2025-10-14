@@ -29,17 +29,21 @@ const GroupListItem = () => {
       </Menu.Item>
 
       {filterGroups?.map((g) => {
-        let groupURL: any = removePrefix
-          ? g?.webAddress?.replace(SITE_CONFIG.SITE.URL, "")
-          : g?.webAddress;
+        const getGroupURL = () => {
+          const baseURL = removePrefix
+            ? g?.webAddress?.replace(SITE_CONFIG.SITE.URL, "")
+            : g?.webAddress;
 
-        if (languageId!=SITE_CONFIG.LANG.DEFAULT_ID){
-          if (g?.webAddress?.startsWith(SITE_CONFIG.SITE.URL)){
-            groupURL = `/${lang}/`+ groupURL
-          } else {
-            groupURL = groupURL+`/${lang}/`
+          if (languageId === SITE_CONFIG.LANG.DEFAULT_ID) {
+            return baseURL;
           }
-        }
+
+          return g?.webAddress?.startsWith(SITE_CONFIG.SITE.URL)
+            ? `/${lang}/${baseURL}`
+            : `${baseURL}/${lang}/`;
+        };
+
+        const groupURL = getGroupURL();
 
         return (
           <Menu.Item key={g.id} minH="3rem" value={g.id} asChild>

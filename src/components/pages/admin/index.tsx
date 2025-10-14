@@ -65,15 +65,7 @@ function AdminComponent() {
               transform: "translateY(-2px)"
             }}
           >
-            <Heading
-              size="md"
-              py={4}
-              px={5}
-              color="white"
-              bg="teal"
-              fontWeight="600"
-              m={0}
-            >
+            <Heading size="md" py={4} px={5} color="white" bg="teal" fontWeight="600" m={0}>
               {section.title}
             </Heading>
             <Box p={5}>
@@ -98,15 +90,10 @@ function AdminComponent() {
                     }}
                     _hover={{
                       bg: "gray.300",
-                      pl: 4,
+                      pl: 4
                     }}
                   >
-                    <Link
-                      href={item.href}
-                      ml={3}
-                      _hover={{ textDecoration: "none" }}
-                      width="100%"
-                    >
+                    <Link href={item.href} ml={3} _hover={{ textDecoration: "none" }} width="100%">
                       {item.label}
                     </Link>
                   </List.Item>

@@ -17,7 +17,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
 
   const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
     {
-      loop: !isBig || featured.length > slidesPerView || isMedium && featured.length > 2,
+      loop: !isBig || featured.length > slidesPerView || (isMedium && featured.length > 2),
       slides: {
         perView: 1
       },
@@ -28,14 +28,15 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
             spacing: 16
           }
         },
-        ...(featured.length>2 && slidesPerView>1 && {
-          "(min-width: 768px) and (max-width: 1099px)": {
-            slides: {
-              perView: 2,
-              spacing: 10
+        ...(featured.length > 2 &&
+          slidesPerView > 1 && {
+            "(min-width: 768px) and (max-width: 1099px)": {
+              slides: {
+                perView: 2,
+                spacing: 10
+              }
             }
-          }
-        })
+          })
       },
       slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel),
       created: () => setSliderLoaded(true)
