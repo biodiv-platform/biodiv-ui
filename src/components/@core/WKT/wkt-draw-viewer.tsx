@@ -148,7 +148,7 @@ export default function WKTDrawViewer({
         if (value != "") {
           setGeojson(wkt.parse(value));
         } else {
-          setGeojson(undefined)
+          setGeojson(undefined);
         }
       }
     }

@@ -42,7 +42,7 @@ function AnnouncementAdmin({ languages, announcements }) {
             setEditAnnouncementData={setEditAnnouncementData}
             setIsCreate={setIsCreate}
             setIsEdit={setIsEdit}
-            setEditIndex = {setEditIndex}
+            setEditIndex={setEditIndex}
           />
         )}
       </Box>

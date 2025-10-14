@@ -22,9 +22,7 @@ export default function HomePageCustomizationForm({
   const [galleryList, setGalleryList] = useState(
     homePageDetails?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder) || []
   );
-  const [miniGalleryList, setMiniGalleryList] = useState(
-    homePageDetails?.miniGallery || []
-  );
+  const [miniGalleryList, setMiniGalleryList] = useState(homePageDetails?.miniGallery || []);
   const [isCreate, setIsCreate] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -68,7 +66,12 @@ export default function HomePageCustomizationForm({
     const payload = {
       gallerySlider: galleryList.reduce((acc, item, index) => {
         if (!item.id) {
-          acc.push({ugId: userGroupId, displayOrder: index, ...item, translations:Object.values(item.translations) });
+          acc.push({
+            ugId: userGroupId,
+            displayOrder: index,
+            ...item,
+            translations: Object.values(item.translations)
+          });
         }
         return acc;
       }, []),
@@ -76,23 +79,26 @@ export default function HomePageCustomizationForm({
         const updatedGallerySlider = item.gallerySlider.reduce(
           (acc: any[], galleryItem: any, index: number) => {
             if (!galleryItem.id) {
-              acc.push({ugId: userGroupId, displayOrder: index, ...galleryItem, translations:Object.values(galleryItem.translations) });
+              acc.push({
+                ugId: userGroupId,
+                displayOrder: index,
+                ...galleryItem,
+                translations: Object.values(galleryItem.translations)
+              });
             }
             return acc;
           },
           []
         );
-        return {gallerySlider: updatedGallerySlider};
+        return { gallerySlider: updatedGallerySlider };
       }),
       ...value
     };
 
     const { success, data } = await axUpdateGroupHomePageDetails(userGroupId, payload);
     if (success) {
-      setGalleryList(
-        data?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder)
-      );
-      setMiniGalleryList(data?.miniGallery)
+      setGalleryList(data?.gallerySlider?.sort((a, b) => a.displayOrder - b.displayOrder));
+      setMiniGalleryList(data?.miniGallery);
       notification(t("group:homepage_customization.success"), NotificationType.Success);
     } else {
       notification(t("group:homepage_customization.failure"), NotificationType.Error);

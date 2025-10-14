@@ -24,9 +24,16 @@ export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
 
   const aURL = absoluteUrl(ctx).href;
-  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
+  const { currentGroup } = await axGroupList(
+    aURL,
+    getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+  );
 
-  const initialFilterParams = { ...DEFAULT_FILTER, ...ctx.query, userGroupList: currentGroup?.groupId };
+  const initialFilterParams = {
+    ...DEFAULT_FILTER,
+    ...ctx.query,
+    userGroupList: currentGroup?.groupId
+  };
   const { data } = await axGetListData(initialFilterParams);
 
   return {

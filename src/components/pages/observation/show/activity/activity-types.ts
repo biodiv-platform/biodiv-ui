@@ -34,5 +34,5 @@ export default {
   UPDATED_FACT: "Updated fact",
   UPDATED_SYNONYM: "Updated synonym",
   PAGE_UPDATED: "Page updated",
-  UPDATE_TAXON_ID:"Updated taxon id"
+  UPDATE_TAXON_ID: "Updated taxon id"
 };

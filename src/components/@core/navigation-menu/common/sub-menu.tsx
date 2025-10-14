@@ -26,12 +26,10 @@ export default function SubMenu({ rows, prefix = "", isPage = false }) {
             <Menu.Item key={item.name} value={item.name} asChild>
               {isLoggedIn && item.memberOnly && isCurrentGroupMember === false ? (
                 <a onClick={() => notification(t("header:member_only"))}>{label}</a>
-              ): item.name == "my_notifications"? (
-                <Box onClick={()=> setOpen(true)}>
+              ) : item.name == "my_notifications" ? (
+                <Box onClick={() => setOpen(true)}>
                   {label}
-                  {!open && (
-                    <Box w="8px" h="8px" bg="red.500" borderRadius="full" ml={2} />
-                  )}
+                  {!open && <Box w="8px" h="8px" bg="red.500" borderRadius="full" ml={2} />}
                 </Box>
               ) : (
                 <LocalLink href={toLink} params={item.params} prefixGroup={true}>

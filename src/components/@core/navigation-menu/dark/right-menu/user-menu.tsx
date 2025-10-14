@@ -61,13 +61,7 @@ export default function UserMenu() {
               src={getUserImage(user?.profile_pic, user.name)}
             />
             {user?.name}
-            {!open && <Box
-              w="8px"
-              h="8px"
-              bg="red.500"
-              borderRadius="full"
-              ml={2}
-            />}
+            {!open && <Box w="8px" h="8px" bg="red.500" borderRadius="full" ml={2} />}
           </Flex>
           <LuChevronDown />
         </Button>

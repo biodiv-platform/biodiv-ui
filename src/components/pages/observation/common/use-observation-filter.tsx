@@ -100,10 +100,12 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
         setValue(observationData?.l?.map((i) => String(i.observationId)));
         setExcludedBulkIds([]);
         const zeroObject = Object.fromEntries(
-          Object.entries(props.observationData?.ag?.groupSpeciesName || {})
-              .map(([key, value]) => [key.split("|")[0], value]) // Keep original value
-      );
-        setBulkSpeciesIds(zeroObject)
+          Object.entries(props.observationData?.ag?.groupSpeciesName || {}).map(([key, value]) => [
+            key.split("|")[0],
+            value
+          ]) // Keep original value
+        );
+        setBulkSpeciesIds(zeroObject);
         break;
       case "UnsSelectAll":
         setValue([]);

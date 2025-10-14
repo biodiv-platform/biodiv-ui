@@ -334,7 +334,7 @@ export default function BulkMapperModal() {
                       </>
                     )}
                     <ActionBar.CloseTrigger asChild mr={4}>
-                        <CloseButton size="sm" onClick={toggleContentVisibility}/>
+                      <CloseButton size="sm" onClick={toggleContentVisibility} />
                     </ActionBar.CloseTrigger>
                   </ButtonGroup>
                 </Box>

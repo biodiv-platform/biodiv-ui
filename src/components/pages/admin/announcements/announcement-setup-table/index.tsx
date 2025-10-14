@@ -32,7 +32,7 @@ const AnnouncementSetupTable = ({
       );
       setAnnouncementList(announcementList.filter((_, idx) => idx !== index));
     } else {
-        notification(t("admin.announcement.delete_failure"), NotificationType.Error);
+      notification(t("admin.announcement.delete_failure"), NotificationType.Error);
     }
   };
 

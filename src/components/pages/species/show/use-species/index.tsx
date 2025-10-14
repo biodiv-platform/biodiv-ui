@@ -23,7 +23,7 @@ interface CounterProviderProps {
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
-    onTaxonUpdated: (newTaxonId: number) => void
+    onTaxonUpdated: (newTaxonId: number) => void;
   };
 }
 

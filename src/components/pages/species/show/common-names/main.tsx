@@ -1,6 +1,6 @@
 import { List, Table } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect,useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { CommonNameAdd, CommonNameEditButtons } from "./actions";
 import { CommonNameEditModal } from "./edit-modal";
