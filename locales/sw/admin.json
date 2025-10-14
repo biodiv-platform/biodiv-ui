@@ -9,7 +9,10 @@
     "edit_success": "Tangazo lilihaririwa kwa mafanikio"
   },
   "links": {
+    "add_species_page": "Ongeza ukurasa wa spishi",
+    "add_taxon": "Ongeza taxon",
     "announcements_configure": "Dhibiti arifa",
+    "clear_cache": "Wazi kache",
     "name-macthing": "Jina linalofanana",
     "notification": "Tuma Arifa ya Push"
   },
@@ -43,5 +46,7 @@
     "translation_save_error": "Kuokoa Tafsiri",
     "translation_success": "Tafsiri zimesasishwa kwa mafanikio",
     "translations": "Tafsiri za shamba za spishi"
-  }
+  },
+  "title": "Dashibodi ya admin",
+  "utils": "Matumizi"
 }

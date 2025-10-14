@@ -41,6 +41,7 @@ export const NumberInputField = ({
           onChangeCallback && onChangeCallback(e.value);
         }}
         disabled={disabled}
+        max={3}
       >
         <HStack gap="2">
           <NumberInput.DecrementTrigger asChild>

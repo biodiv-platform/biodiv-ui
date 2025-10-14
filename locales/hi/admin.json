@@ -9,7 +9,10 @@
     "edit_success": "घोषणा सफलतापूर्वक संपादित की गई"
   },
   "links": {
+    "add_species_page": "एक प्रजाति पृष्ठ जोड़ें",
+    "add_taxon": "एक टैक्सन जोड़ें",
     "announcements_configure": "सूचनाओं का प्रबंधन करें",
+    "clear_cache": "कैश को साफ़ करें",
     "name-macthing": "नाम मिलान",
     "notification": "पुश-अधिसूचना भेजें"
   },
@@ -43,5 +46,7 @@
     "translation_save_error": "अनुवाद सहेजने में त्रुटि",
     "translation_success": "अनुवाद सफलतापूर्वक अपडेट किए गए",
     "translations": "प्रजाति क्षेत्र अनुवाद"
-  }
+  },
+  "title": "व्यवस्थापक डैशबोर्ड",
+  "utils": "उपयोगिताएँ"
 }
