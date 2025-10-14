@@ -70,13 +70,14 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
 
   return (
     <Box position={"relative"} mt={8} mb={8}>
-      {(featured.length > slidesPerView  || isMobile)&& (
+      {(featured.length > slidesPerView || isMobile) && (
         <IconButton
           aria-label="Prev Slide"
           onClick={() => iSlider.current?.prev()}
           position="absolute"
           top={-7}
           left={"50%"}
+          transform="translateX(-50%)"
           zIndex={1}
           colorPalette="gray"
           size="lg"
@@ -92,8 +93,8 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
           isMobile
             ? 400
             : featured.length > slidesPerView
-            ? (isTablet?150:100) * slidesPerView
-            : (isTablet?150:100) * featured.length
+            ? (isTablet ? 150 : 100) * slidesPerView
+            : (isTablet ? 150 : 100) * featured.length
         }
       >
         {featured.map((o, index) => {
@@ -118,7 +119,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
                           resource?.fileName,
                           RESOURCE_SIZE.PREVIEW
                         )}
-                        h={(isTablet?150:100)}
+                        h={isTablet ? 150 : 100}
                         w={100}
                         objectFit="cover"
                         loading="lazy"
@@ -135,7 +136,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
                         </Heading>
                       </Center>
                       <Center>
-                        <Text fontSize={"sm"} maxH={isTablet?"4rem":"2rem"} overflow={"auto"}>
+                        <Text fontSize={"sm"} maxH={isTablet ? "4rem" : "2rem"} overflow={"auto"}>
                           {resource?.customDescripition}
                         </Text>
                       </Center>
@@ -207,21 +208,21 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
                     mb={2}
                   >
                     <Box mr={6}>
-                    {resource.moreLinks && resource.readMoreUIType == "button" ? (
-                      <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+                      {resource.moreLinks && resource.readMoreUIType == "button" ? (
+                        <Button colorPalette="teal" variant="solid" size="lg" fontSize="xl" asChild>
+                          <a href={resource.moreLinks}>
+                            {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                            <LuArrowRight />
+                          </a>
+                        </Button>
+                      ) : (
                         <a href={resource.moreLinks}>
-                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
-                          <LuArrowRight />
+                          <Flex alignItems="center">
+                            {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
+                            <LuArrowRight />
+                          </Flex>
                         </a>
-                      </Button>
-                    ) : (
-                      <a href={resource.moreLinks}>
-                        <Flex alignItems="center">
-                          {resource.readMoreText == null ? "Read More" : resource.readMoreText}{" "}
-                          <LuArrowRight />
-                        </Flex>
-                      </a>
-                    )}
+                      )}
                     </Box>
                   </Box>
                 </Box>
@@ -237,6 +238,7 @@ export default function VerticalCarousel({ featured, slidesPerView }) {
           position="absolute"
           bottom={-5}
           left={"50%"}
+          transform="translateX(-50%)"
           zIndex={1}
           colorPalette="gray"
           size="lg"

@@ -9,7 +9,7 @@ import { useFormContext } from "react-hook-form";
 
 import IconRadioField from "./icon-radio-field";
 
-export default function ExsistingResourceForm({ defaultValues, setDefaultValues, translation }) {
+export default function ExsistingResourceForm({ defaultValues, setDefaultValues, translation, galleryId }) {
   const form = useFormContext();
   const { t } = useTranslation();
 
@@ -63,6 +63,7 @@ export default function ExsistingResourceForm({ defaultValues, setDefaultValues,
             name={`translations.${translation}.title`}
             isRequired={true}
             label={t("group:homepage_customization.resources.title")}
+            {...(galleryId != -1 && { maxLength: 20 })}
           />
           <TextBoxField
             name="moreLinks"

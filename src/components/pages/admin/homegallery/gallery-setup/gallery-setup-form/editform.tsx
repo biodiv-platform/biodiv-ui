@@ -194,14 +194,14 @@ export default function GalleryEditForm({
           key={`description-${translationSelected}`}
           name={`translations.${translationSelected}.description`}
           label={t("group:homepage_customization.table.description")}
-          {...(galleryId != -1 && { maxLength: 292 })}
+          {...(galleryId != -1 && { maxLength: vertical ? 85 : 275 })}
         />
 
         <TextBoxField
           key={`readMoreText-${translationSelected}`}
           name={`translations.${translationSelected}.readMoreText`}
           label={t("group:homepage_customization.resources.read_more")}
-          maxLength={galleryId != -1 ? 20 : 30}
+          maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
         />
 
         <SelectInputField

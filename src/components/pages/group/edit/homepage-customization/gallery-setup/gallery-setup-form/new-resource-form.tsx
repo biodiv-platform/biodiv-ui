@@ -4,7 +4,7 @@ import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-export default function NewResourceForm({ translation }) {
+export default function NewResourceForm({ translation, galleryId }) {
   const { t } = useTranslation();
 
   return (
@@ -14,6 +14,7 @@ export default function NewResourceForm({ translation }) {
         name={`translations.${translation}.title`}
         isRequired={true}
         label={t("group:homepage_customization.resources.title")}
+        {...(galleryId != -1 && { maxLength: 20 })}
       />
       <TextBoxField
         key={`link`}
