@@ -68,7 +68,7 @@ export const bulkObservationActionTabs = [
   },
   {
     name: "form:species_groups",
-    icon:"👥"
+    icon: "👥"
   },
   {
     name: "observation:id.title",

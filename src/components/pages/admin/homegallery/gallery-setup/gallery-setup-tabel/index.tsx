@@ -42,7 +42,10 @@ const GallerySetupTable = ({
       displayOrder: index
     }));
 
-    const { success } = galleryId==-1 ?await axReorderHomePageGallery(payload):await axReorderMiniHomePageGallery(payload);
+    const { success } =
+      galleryId == -1
+        ? await axReorderHomePageGallery(payload)
+        : await axReorderMiniHomePageGallery(payload);
     if (success) {
       notification(t("group:homepage_customization.reorder.success"), NotificationType.Success);
     } else {
@@ -101,9 +104,7 @@ const GallerySetupTable = ({
           float="right"
           hidden={!showReorder}
           onClick={
-            galleryList.some((e) => e.id == null)
-              ? handleReorderAlter
-              : handleReorderCustomField
+            galleryList.some((e) => e.id == null) ? handleReorderAlter : handleReorderCustomField
           }
         >
           <CheckIcon />

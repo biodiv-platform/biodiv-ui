@@ -14,7 +14,7 @@ const TopUploaders = ({ filter }) => {
       data={uploader.uploadersData.data}
       title={t("observation:list.top_uploaders_list.heading")}
       loadMoreUploaders={uploader.uploadersData.loadMore}
-      changeSort = {uploader.uploadersData.changeSort}
+      changeSort={uploader.uploadersData.changeSort}
       filter={filter}
     />
   );

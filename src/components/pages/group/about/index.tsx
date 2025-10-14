@@ -43,14 +43,8 @@ export default function AboutGroupComponent({
   traits
 }: GroupEditPageProps) {
   const { t } = useTranslation();
-  const {
-    description,
-    name,
-    allowUserToJoin,
-    speciesGroupIds,
-    habitatIds,
-    spatialCoverage
-  } = groupInfo;
+  const { description, name, allowUserToJoin, speciesGroupIds, habitatIds, spatialCoverage } =
+    groupInfo;
 
   return (
     <div className="container mt">
@@ -75,10 +69,7 @@ export default function AboutGroupComponent({
         filterIds={habitatIds}
         filterList={habitats}
       />
-      <MapDrawView
-        title={t("group:spatial_coverge")}
-        geometry={spatialCoverage}
-      />
+      <MapDrawView title={t("group:spatial_coverge")} geometry={spatialCoverage} />
       <UserAvatarList title={t("group:admin.founder")} userList={founders} />
       <UserAvatarList title={t("group:admin.moderator")} userList={moderators} />
       {customFieldList.length > 0 && (
@@ -180,7 +171,7 @@ export default function AboutGroupComponent({
               data={{
                 type: "Feature",
                 properties: {},
-                geometry:parse(groupRules.spartialRuleList[0].spatialData)
+                geometry: parse(groupRules.spartialRuleList[0].spatialData)
               }}
             />
           </Box>
@@ -188,7 +179,7 @@ export default function AboutGroupComponent({
         {groupRules.hasTraitRule && (
           <Box>
             <Heading size="md" as="h2" mb={2}>
-            {t("group:rules.trait_rule_title")}
+              {t("group:rules.trait_rule_title")}
             </Heading>
             {groupRules.traitRuleList.map((item) => {
               const trait = traits.filter((trait) => trait.traits.traitId === item.traitId)[0];

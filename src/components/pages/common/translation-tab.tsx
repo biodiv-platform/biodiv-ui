@@ -13,7 +13,14 @@ import {
 } from "@/components/ui/dialog";
 import { Field } from "@/components/ui/field";
 
-export default function TranslationTab({ values, setLangId, languages, handleAddTranslation, translationSelected, setTranslationSelected }) {
+export default function TranslationTab({
+  values,
+  setLangId,
+  languages,
+  handleAddTranslation,
+  translationSelected,
+  setTranslationSelected
+}) {
   const { t } = useTranslation();
   const { open, onClose, onOpen } = useDisclosure();
   return (

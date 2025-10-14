@@ -61,14 +61,16 @@ function MainApp({
     <BusProvider>
       <ChakraProvider value={customTheme}>
         <Toaster />
-        <GlobalStateProvider initialState={{ user, domain, groups, currentGroup, languageId, announcement }}>
+        <GlobalStateProvider
+          initialState={{ user, domain, groups, currentGroup, languageId, announcement }}
+        >
           <Metadata />
           <div className="content">
             {config.header && (
               <>
                 <NavigationMenuDark />
                 <NavigationMenuLight />
-                <Announcement/>
+                <Announcement />
               </>
             )}
             <div id="main">
@@ -91,7 +93,11 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
   const user = getParsedUser(appContext.ctx);
   const languageId = SITE_CONFIG.LANG.LIST[appContext.ctx.locale]?.ID;
 
-  const { currentGroup, groups } = await axGroupList(aReq.href, languageId?languageId: SITE_CONFIG.LANG.DEFAULT_ID,appContext.ctx.locale);
+  const { currentGroup, groups } = await axGroupList(
+    aReq.href,
+    languageId ? languageId : SITE_CONFIG.LANG.DEFAULT_ID,
+    appContext.ctx.locale
+  );
 
   const { data: announcement } = await axGetActiveAnnouncement();
 

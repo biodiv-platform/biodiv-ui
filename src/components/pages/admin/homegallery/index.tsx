@@ -1,7 +1,4 @@
-import {
-  Box,
-  Heading
-} from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import HomeIcon from "@icons/home";
 import ImageIcon from "@icons/image";
@@ -36,12 +33,16 @@ function HomeComponent({ homeInfo, languages }) {
   return (
     <div className="container mt">
       <PageHeading> 🧰 {t("group:homepage_customization.title")}</PageHeading>
-      <Wizard steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep}/>
+      <Wizard steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} />
       <Box p={6} rounded="lg" border="1px solid" borderColor="gray.200" boxShadow="sm" mb={4}>
         <Heading as="h2" fontSize={22} fontWeight="bold" color="gray.900" mb={2}>
           {t(steps[currentStep].translation)}
         </Heading>
-        <HomePageGalleryCustomizationForm homePageDetails={homeInfo} languages={languages} currentStep={steps[currentStep].translation}/>
+        <HomePageGalleryCustomizationForm
+          homePageDetails={homeInfo}
+          languages={languages}
+          currentStep={steps[currentStep].translation}
+        />
       </Box>
     </div>
   );

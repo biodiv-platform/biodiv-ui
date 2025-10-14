@@ -93,7 +93,7 @@ export const axCreateMiniGroupGallery = async (payload, groupId) => {
   }
 };
 
-export const axEditMiniGroupGallery = async (groupId,galleryId,payload) => {
+export const axEditMiniGroupGallery = async (groupId, galleryId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.USERGROUP}/v1/group/homePage/miniGallery/edit/${groupId}/${galleryId}`,
@@ -106,17 +106,17 @@ export const axEditMiniGroupGallery = async (groupId,galleryId,payload) => {
   }
 };
 
-export const axRemoveMiniGroupGallery = async(groupId,galleryId) => {
+export const axRemoveMiniGroupGallery = async (groupId, galleryId) => {
   try {
     await http.delete(
       `${ENDPOINT.USERGROUP}/v1/group/homePage/miniGallery/remove/${groupId}/${galleryId}`
     );
-    return {success: true, data: null}
+    return { success: true, data: null };
   } catch (e) {
-    console.error(e)
-    return {success: false, data: null}
+    console.error(e);
+    return { success: false, data: null };
   }
-}
+};
 
 export const axUserGroupDatatableUpdate = async (userGroupId, groupList) => {
   try {
@@ -275,7 +275,9 @@ export const axGetAllCustomFieldOptionsById = async (observationId, userGroupId,
 
 export const axGetUserGroupCustomField = async (userGroupId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/customfield/group/${userGroupId}`);
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.USERGROUP}/v1/customfield/group/${userGroupId}`
+    );
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -408,7 +410,9 @@ export const axRemoveUserGroupRule = async (userGroupId, payload) => {
 
 export const axGetGroupHompageDetails = async (userGroupId, langId) => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.USERGROUP}/v1/group/homePage/${userGroupId}/${langId}`);
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/${userGroupId}/${langId}`
+    );
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -432,7 +436,9 @@ export const axUpdateGroupHomePageDetails = async (userGroupId, payload) => {
 export const axRemoveGroupHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
     await http.put(
-      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${Number(galleryList[index].sliderId)}`
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/remove/${userGroupId}/${Number(
+        galleryList[index].sliderId
+      )}`
     );
     const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
     if (payload.length > 1) {
@@ -449,11 +455,16 @@ export const axRemoveGroupHomePageGalleryImage = async (userGroupId, galleryList
 export const axRemoveMiniGroupHomePageGalleryImage = async (userGroupId, galleryList, index) => {
   try {
     await http.put(
-      `${ENDPOINT.USERGROUP}/v1/group/homePage/miniSlider/remove/${userGroupId}/${Number(galleryList[index].sliderId)}`
+      `${ENDPOINT.USERGROUP}/v1/group/homePage/miniSlider/remove/${userGroupId}/${Number(
+        galleryList[index].sliderId
+      )}`
     );
     const { response, payload } = reorderRemovedGallerySetup(galleryList, index);
     if (payload.length > 1) {
-      await http.put(`${ENDPOINT.USERGROUP}/v1/group/homePage/miniSlider/reordering/${userGroupId}`, payload);
+      await http.put(
+        `${ENDPOINT.USERGROUP}/v1/group/homePage/miniSlider/reordering/${userGroupId}`,
+        payload
+      );
     }
 
     return { success: true, data: response };
