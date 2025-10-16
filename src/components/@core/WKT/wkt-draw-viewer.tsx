@@ -1,6 +1,5 @@
 import { Box, HStack, IconButton, Input, SimpleGrid } from "@chakra-ui/react";
 import { SelectAsyncInputField } from "@components/form/select-async";
-import SITE_CONFIG from "@configs/site-config";
 import DeleteIcon from "@icons/delete";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import center from "@turf/center";
@@ -13,12 +12,13 @@ import React, { useEffect, useRef, useState } from "react";
 import wkt from "wkt";
 
 import { Field } from "@/components/ui/field";
+import { mapStyles } from "@/static/constants";
 
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
 
-const NakshaMapboxDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
+const NakshaMaplibreDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -67,6 +67,7 @@ export default function WKTDrawViewer({
   const defaultViewState = React.useMemo(() => getMapCenter(2), []);
   const { t } = useTranslation();
   const [geojson, setGeojson] = useState<any>();
+  const mapContainerRef = useRef<HTMLDivElement>(null);
 
   const handleOnSave = () => {
     if ((!group && TitleInputRef.current.value && geojson) || (group && geojson)) {
@@ -177,6 +178,7 @@ export default function WKTDrawViewer({
                   colorPalette="red"
                   onClick={clearWktForm}
                   disabled={disabled}
+                  type="button" // Explicitly set type
                 >
                   <DeleteIcon />
                 </IconButton>
@@ -217,6 +219,7 @@ export default function WKTDrawViewer({
                     colorPalette="red"
                     onClick={clearWktForm}
                     disabled={disabled}
+                    type="button" // Explicitly set type
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -230,10 +233,10 @@ export default function WKTDrawViewer({
       {geojson ? (
         <GeoJSONPreview data={geojson} />
       ) : (
-        <Box position="relative" h="22rem">
-          <NakshaMapboxDraw
+        <Box position="relative" h="22rem" ref={mapContainerRef}>
+          <NakshaMaplibreDraw
             defaultViewState={defaultViewState}
-            mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+            mapStyles={mapStyles}
             onFeaturesChange={handleMapDraw}
             isReadOnly={disabled}
           />

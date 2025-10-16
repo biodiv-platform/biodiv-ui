@@ -1,5 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import { isBrowser } from "@static/constants";
+import { bbox, bboxPolygon, buffer } from "@turf/turf";
 
 import { parseEXIF } from "./date";
 
@@ -94,3 +95,43 @@ export const CleanExif = (data, blockHash) => {
     blockHash
   };
 };
+
+/**
+ * Convert Point or LineString into a polygon string format
+ * expected by the observation filters:
+ * - Point → 5 km buffer (circle polygon)
+ * - LineString → bounding box → 5 km buffer
+ *
+ * @param feature GeoJSON feature
+ * @returns Comma-separated coordinate string OR null
+ */
+export function convertFeatureToPolygonString(feature: any): string | null {
+  if (!feature?.geometry) return null;
+
+  let processed = feature;
+
+  if (feature.geometry.type === "Point") {
+    // Point → 5 km circle buffer
+    processed = buffer(feature, 5, { units: "kilometers" });
+  }
+
+  if (feature.geometry.type === "LineString") {
+    // LineString → bounding box → 5 km buffer
+    const box = bbox(feature);
+    const rectangle = bboxPolygon(box);
+    processed = buffer(rectangle, 5, { units: "kilometers" });
+  }
+
+  if (processed.geometry.type === "Polygon") {
+    const coords = processed.geometry.coordinates[0]; // outer ring
+    // ensure polygon is closed
+    const closedCoords =
+      coords[0][0] !== coords[coords.length - 1][0] || coords[0][1] !== coords[coords.length - 1][1]
+        ? [...coords, coords[0]]
+        : coords;
+
+    return closedCoords.map((c) => c.join(",")).join(",");
+  }
+
+  return null;
+}

@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useEffect, useMemo, useState } from "react";
@@ -7,8 +6,9 @@ import { useController } from "react-hook-form";
 import { parse, stringify } from "wkt";
 
 import { Field } from "@/components/ui/field";
-const NakshaMapboxDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
+import { mapStyles } from "@/static/constants";
+const NakshaMaplibreDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -82,11 +82,11 @@ export default function AreaDrawField({
         errorText={JSON.stringify(fieldState?.error?.message)}
       />
       {hint && <Field color="gray.600" helperText={hint} />}
-      <NakshaMapboxDraw
+      <NakshaMaplibreDraw
         defaultViewState={defaultViewState}
         features={defaultFeatures}
         onFeaturesChange={handleOnFeatureChange}
-        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        mapStyles={mapStyles}
       />
     </Box>
   );

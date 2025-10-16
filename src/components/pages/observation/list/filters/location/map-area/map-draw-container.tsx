@@ -1,14 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import SITE_CONFIG from "@configs/site-config";
-import { getMapCenter, stringToFeature } from "@utils/location";
+import { convertFeatureToPolygonString, getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 
+import { mapStyles } from "@/static/constants";
 const FILTER_NAME = "location";
 
-const NakshaMapboxDraw: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxDraw),
+const NakshaMaplibreDraw: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreDraw),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -21,22 +21,29 @@ export default function MapDrawContainer() {
   const defaultViewState = useMemo(() => getMapCenter(2.8), []);
 
   const handleOnFeatureChange = (features) => {
-    if (features.length > 0) {
-      addFilter(FILTER_NAME, features[0]?.geometry?.coordinates.toString());
-      addFilter("geoShapeFilterField", "location");
+    if (!features.length) {
+      removeFilter(FILTER_NAME);
+      removeFilter("geoShapeFilterField");
       return;
     }
-    removeFilter(FILTER_NAME);
-    removeFilter("geoShapeFilterField");
-  };
 
+    const polygonString = convertFeatureToPolygonString(features[0]);
+
+    if (polygonString) {
+      addFilter(FILTER_NAME, polygonString);
+      addFilter("geoShapeFilterField", "location");
+    } else {
+      removeFilter(FILTER_NAME);
+      removeFilter("geoShapeFilterField");
+    }
+  };
   return (
     <Box position="relative" h="22rem">
-      <NakshaMapboxDraw
+      <NakshaMaplibreDraw
         defaultViewState={defaultViewState}
         features={defaultFeatures}
-        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
         onFeaturesChange={handleOnFeatureChange}
+        mapStyles={mapStyles}
       />
     </Box>
   );

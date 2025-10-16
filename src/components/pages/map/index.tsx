@@ -4,7 +4,7 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT, isBrowser } from "@static/constants";
+import { ENDPOINT, isBrowser, mapStyles } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
@@ -14,8 +14,8 @@ import React, { useEffect, useState } from "react";
 
 import { toaster } from "@/components/ui/toaster";
 
-const NakshaMapboxList: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
+const NakshaMaplibreLayers: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -71,7 +71,7 @@ export default function MapPageComponent({ defaultLayers }) {
 
   return (
     <Box height="calc(100vh - var(--heading-height))" overflow="hidden" position="relative">
-      <NakshaMapboxList
+      <NakshaMaplibreLayers
         lang={lang}
         defaultViewState={defaultViewState}
         loadToC={true}
@@ -79,7 +79,7 @@ export default function MapPageComponent({ defaultLayers }) {
         selectedLayers={defaultLayers}
         onSelectedLayersChange={setSelectedLayers}
         nakshaEndpointToken={`Bearer ${user.accessToken}`}
-        mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+        mapStyles={mapStyles}
         nakshaApiEndpoint={ENDPOINT.NAKSHA}
         onLayerDownload={handleOnDownload}
         canLayerShare={true}
