@@ -29,7 +29,7 @@ export default function Map() {
   const { currentGroup, isLoggedIn } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
   const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
-  const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
+  const mapCenter = React.useMemo(() => getMapCenter(3.5), []);
   const canManagePublishing = isLoggedIn && hasAccess([Role.Admin]);
   const { lang } = useTranslation();
 
