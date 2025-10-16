@@ -2,15 +2,15 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { Role } from "@interfaces/custom";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT } from "@static/constants";
+import { ENDPOINT, mapStyles } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-const NakshaMapboxList: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxList),
+const NakshaMaplibreLayers: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -29,7 +29,7 @@ export default function Map() {
   const { currentGroup, isLoggedIn } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
   const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
-  const mapCenter = React.useMemo(() => getMapCenter(3.4), []);
+  const mapCenter = React.useMemo(() => getMapCenter(3.5), []);
   const canManagePublishing = isLoggedIn && hasAccess([Role.Admin]);
   const { lang } = useTranslation();
 
@@ -46,12 +46,11 @@ export default function Map() {
   };
 
   return (
-    <NakshaMapboxList
+    <NakshaMaplibreLayers
       defaultViewState={mapCenter}
       loadToC={true}
       lang={lang}
       managePublishing={canManagePublishing}
-      mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
       nakshaApiEndpoint={ENDPOINT.NAKSHA}
       geoserver={{
         endpoint: ENDPOINT.GEOSERVER,
@@ -59,6 +58,7 @@ export default function Map() {
         workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
       }}
       selectedLayers={geoserverLayers}
+      mapStyles={mapStyles}
       layers={[
         {
           id: "global-observations",
