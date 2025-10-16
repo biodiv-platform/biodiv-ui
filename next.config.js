@@ -8,7 +8,6 @@ const mainDomain = siteUrl.hostname;
 module.exports = nextTranslate({
   experimental: {
     optimizePackageImports: ["@chakra-ui/react"],
-    esmExternals: 'loose', // or true
     legacyBrowsers: false,
     browsersListForSwc: true,
     nextScriptWorkers: false

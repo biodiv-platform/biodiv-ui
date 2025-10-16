@@ -6,12 +6,20 @@ import useGlobalState from "@hooks/use-global-state";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
-import { NakshaMaplibreLayers } from "naksha-components-react";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>
+);
+
+const NakshaMaplibreLayers: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
 );
 
 export default function ObservationsMap() {
@@ -44,11 +52,7 @@ export default function ObservationsMap() {
           loadToC={false}
           lang={lang}
           key={JSON.stringify(filter)}
-          mapStyles={mapStyles.map((s) =>
-            typeof s.style === "string"
-              ? s
-              : { ...s, style: JSON.stringify(s.style) }
-          ) as { text: string; key: string; style: string; maxZoom?: number }[]}
+          mapStyles={mapStyles}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
             endpoint: ENDPOINT.GEOSERVER,

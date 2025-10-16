@@ -12,6 +12,7 @@ import React, { useEffect, useRef, useState } from "react";
 import wkt from "wkt";
 
 import { Field } from "@/components/ui/field";
+import { mapStyles } from "@/static/constants";
 
 import GeoJSONPreview from "../map-preview/geojson";
 import SaveButton from "./save-button";
@@ -23,21 +24,6 @@ const NakshaMaplibreDraw: any = dynamic(
     loading: () => <p>Loading...</p>
   }
 );
-
-const mapStyles = [
-  {
-    text: "OSM_custom",
-    key: "0",
-    style: "https://unpkg.com/maplibre-gl-styles@0.0.1/styles/osm-mapnik/v8/india.json"
-  },
-  {
-    text: "Satellite",
-    key: "1",
-    style:
-      "https://raw.githubusercontent.com/go2garret/maps/main/src/assets/json/arcgis_hybrid.json",
-    maxZoom: 15.9
-  }
-];
 
 const onQuery = async (q) => {
   const { data } = await axQueryGeoEntitiesByPlaceName(q);

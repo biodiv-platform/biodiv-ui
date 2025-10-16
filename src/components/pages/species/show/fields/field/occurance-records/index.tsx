@@ -50,7 +50,6 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
           loadToC={false}
           showToC={false}
           lang={lang}
-          // mapStyle={"0"}
           mapstyles={mapStyles}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
