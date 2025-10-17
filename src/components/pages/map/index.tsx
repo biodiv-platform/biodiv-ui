@@ -22,7 +22,7 @@ const NakshaMaplibreLayers: any = dynamic(
   }
 );
 
-const defaultViewState = getMapCenter(3.1);
+const defaultViewState = getMapCenter(3.5);
 
 export default function MapPageComponent({ defaultLayers }) {
   const { t, lang } = useTranslation();
