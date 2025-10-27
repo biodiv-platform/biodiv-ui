@@ -118,24 +118,27 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                   )}
 
                   {/* Add Translation Button */}
-                  <Flex justify="flex-end" mb={4}>
-                    <Button
-                      size="sm"
-                      onClick={() => {
-                        append({
-                          languageId: SITE_CONFIG.LANG.DEFAULT_ID,
-                          header: "",
-                          description: "",
-                          urlIdentifier: ""
-                        });
-                        setActiveTab(fields.length);
-                      }}
-                      variant={"subtle"}
-                    >
-                      <LuPlus />
-                      {t("admin:species_fields.add_translation")}
-                    </Button>
-                  </Flex>
+
+                  {parentType != "root" && (
+                    <Flex justify="flex-end" mb={4}>
+                      <Button
+                        size="sm"
+                        onClick={() => {
+                          append({
+                            languageId: SITE_CONFIG.LANG.DEFAULT_ID,
+                            header: "",
+                            description: "",
+                            urlIdentifier: ""
+                          });
+                          setActiveTab(fields.length);
+                        }}
+                        variant={"subtle"}
+                      >
+                        <LuPlus />
+                        {t("admin:species_fields.add_translation")}
+                      </Button>
+                    </Flex>
+                  )}
 
                   {/* Language Tabs */}
                   <Flex mb={4} flexWrap="wrap" gap={2}>
@@ -191,6 +194,7 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
                               hForm.setValue(`translations.${index}.languageId`, option.value);
                             }
                           }}
+                          isDisabled={parentType == "root"}
                         />
                       </Box>
 
