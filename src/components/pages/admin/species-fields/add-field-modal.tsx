@@ -1,4 +1,4 @@
-import { Box, Button, CloseButton, Dialog, Flex, IconButton, Portal, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Text } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import SITE_CONFIG from "@configs/site-config";
@@ -8,9 +8,19 @@ import { axGetLangList } from "@services/utility.service";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { LuPlus, LuTrash2 } from "react-icons/lu";
+import { LuDelete, LuPlus } from "react-icons/lu";
 import ReactSelect from "react-select";
 import * as Yup from "yup";
+
+import {
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot
+} from "@/components/ui/dialog";
 
 interface AddFieldModalProps {
   isOpen: boolean;
@@ -99,139 +109,128 @@ const AddFieldModal: React.FC<AddFieldModalProps> = ({
   };
 
   return (
-    <Dialog.Root open={isOpen} size="xl" onOpenChange={onClose}>
-      <Portal>
-        <Dialog.Backdrop />
-        <Dialog.Positioner>
-          <Dialog.Content>
-            <FormProvider {...hForm}>
-              <form onSubmit={hForm.handleSubmit(handleSubmit)}>
-                <Dialog.Header fontSize={"xl"} fontWeight={"bold"}>
-                  {t(`admin:species_fields.add_${fieldType}`)}
-                </Dialog.Header>
-                <Dialog.CloseTrigger />
-                <Dialog.Body>
-                  {parentName && (
-                    <Text mb={4}>
-                      {t(`admin:species_fields.adding_to_${parentType}`, { name: parentName })}
-                    </Text>
-                  )}
+    <DialogRoot open={isOpen} onOpenChange={onClose} size="xl">
+      <DialogBackdrop />
+      <DialogContent>
+        <FormProvider {...hForm}>
+          <form onSubmit={hForm.handleSubmit(handleSubmit)}>
+            <DialogHeader>{t(`admin:species_fields.add_${fieldType}`)}</DialogHeader>
+            <DialogCloseTrigger />
+            <DialogBody>
+              {parentName && (
+                <Text mb={4}>
+                  {t(`admin:species_fields.adding_to_${parentType}`, { name: parentName })}
+                </Text>
+              )}
 
-                  {/* Add Translation Button */}
-                  <Flex justify="flex-end" mb={4}>
-                    <Button
-                      size="sm"
-                      onClick={() => {
-                        append({
-                          languageId: SITE_CONFIG.LANG.DEFAULT_ID,
-                          header: "",
-                          description: "",
-                          urlIdentifier: ""
-                        });
-                        setActiveTab(fields.length);
-                      }}
-                      variant={"subtle"}
-                    >
-                      <LuPlus />
-                      {t("admin:species_fields.add_translation")}
-                    </Button>
-                  </Flex>
+              {/* Add Translation Button */}
+              <Flex justify="flex-end" mb={4}>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    append({
+                      languageId: SITE_CONFIG.LANG.DEFAULT_ID,
+                      header: "",
+                      description: "",
+                      urlIdentifier: ""
+                    });
+                    setActiveTab(fields.length);
+                  }}
+                >
+                  <LuPlus />
+                  {t("admin:species_fields.add_translation")}
+                </Button>
+              </Flex>
 
-                  {/* Language Tabs */}
-                  <Flex mb={4} flexWrap="wrap" gap={2}>
-                    {fields.map((field, index) => (
-                      <Button
-                        key={field.id}
-                        size="sm"
-                        variant={activeTab === index ? "subtle" : "outline"}
-                        onClick={() => setActiveTab(index)}
+              {/* Language Tabs */}
+              <Flex mb={4} flexWrap="wrap" gap={2}>
+                {fields.map((field, index) => (
+                  <Button
+                    key={field.id}
+                    size="sm"
+                    variant={activeTab === index ? "solid" : "outline"}
+                    onClick={() => setActiveTab(index)}
+                  >
+                    {languages.find(
+                      (lang) => lang.value === hForm.watch(`translations.${index}.languageId`)
+                    )?.label || "Unknown"}
+                    {index > 0 && (
+                      <IconButton
+                        size="xs"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          remove(index);
+                          setActiveTab(0);
+                        }}
+                        ml={2}
+                        aria-label="Remove translation"
                       >
-                        {languages.find(
-                          (lang) => lang.value === hForm.watch(`translations.${index}.languageId`)
-                        )?.label || "Unknown"}
-                        {index > 0 && (
-                          <IconButton
-                            size="xs"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              remove(index);
-                              setActiveTab(0);
-                            }}
-                            ml={2}
-                            aria-label="Remove translation"
-                            variant={"subtle"}
-                          >
-                            <LuTrash2 />
-                          </IconButton>
-                        )}
-                      </Button>
-                    ))}
-                  </Flex>
+                        <LuDelete />
+                      </IconButton>
+                    )}
+                  </Button>
+                ))}
+              </Flex>
 
-                  {/* Active Translation Form */}
-                  {fields.map((field, index) => (
-                    <Box
-                      key={field.id}
-                      display={activeTab === index ? "block" : "none"}
-                      p={4}
-                      bg="gray.50"
-                      borderRadius="md"
-                    >
-                      <Box mb={4}>
-                        <Text mb={2}>Select Language</Text>
-                        <ReactSelect
-                          name={`translations.${index}.languageId`}
-                          placeholder={t("admin:species_fields.language")}
-                          options={languages}
-                          value={languages.find(
-                            (lang) => lang.value === hForm.watch(`translations.${index}.languageId`)
-                          )}
-                          onChange={(option) => {
-                            if (option) {
-                              hForm.setValue(`translations.${index}.languageId`, option.value);
-                            }
-                          }}
-                        />
-                      </Box>
+              {/* Active Translation Form */}
+              {fields.map((field, index) => (
+                <Box
+                  key={field.id}
+                  display={activeTab === index ? "block" : "none"}
+                  p={4}
+                  bg="gray.50"
+                  borderRadius="md"
+                >
+                  <Box mb={4}>
+                    <Text mb={2}>Select Language</Text>
+                    <ReactSelect
+                      name={`translations.${index}.languageId`}
+                      placeholder={t("admin:species_fields.language")}
+                      options={languages}
+                      value={languages.find(
+                        (lang) => lang.value === hForm.watch(`translations.${index}.languageId`)
+                      )}
+                      onChange={(option) => {
+                        if (option) {
+                          hForm.setValue(`translations.${index}.languageId`, option.value);
+                        }
+                      }}
+                    />
+                  </Box>
 
-                      <TextBoxField
-                        name={`translations.${index}.header`}
-                        label={t(`admin:species_fields.${fieldType}_name`)}
-                        isRequired={true}
-                      />
+                  <TextBoxField
+                    name={`translations.${index}.header`}
+                    label={t(`admin:species_fields.${fieldType}_name`)}
+                    isRequired={true}
+                  />
 
-                      <TextBoxField
-                        name={`translations.${index}.description`}
-                        label={t("admin:species_fields.description")}
-                        isRequired={false}
-                      />
+                  <TextBoxField
+                    name={`translations.${index}.description`}
+                    label={t("admin:species_fields.description")}
+                    isRequired={false}
+                  />
 
-                      <TextBoxField
-                        name={`translations.${index}.urlIdentifier`}
-                        label={t("admin:species_fields.url_identifier")}
-                        isRequired={false}
-                      />
-                    </Box>
-                  ))}
-                </Dialog.Body>
+                  <TextBoxField
+                    name={`translations.${index}.urlIdentifier`}
+                    label={t("admin:species_fields.url_identifier")}
+                    isRequired={false}
+                  />
+                </Box>
+              ))}
+            </DialogBody>
 
-                <Dialog.Footer>
-                  <SubmitButton leftIcon={<CheckIcon />} mr={3}>
-                    {t("common:save")}
-                  </SubmitButton>
-                  <Dialog.ActionTrigger asChild>
-                    <Button variant="subtle"> {t("common:cancel")}</Button>
-                  </Dialog.ActionTrigger>
-                </Dialog.Footer>
-              </form>
-            </FormProvider>
-            <Dialog.CloseTrigger asChild>
-              <CloseButton size="sm" />
-            </Dialog.CloseTrigger>
-          </Dialog.Content>
-        </Dialog.Positioner>
-      </Portal>
-    </Dialog.Root>
+            <DialogFooter>
+              <SubmitButton leftIcon={<CheckIcon />} mr={3}>
+                {t("common:save")}
+              </SubmitButton>
+              <Button variant="ghost" onClick={onClose}>
+                {t("common:cancel")}
+              </Button>
+            </DialogFooter>
+          </form>
+        </FormProvider>
+      </DialogContent>
+    </DialogRoot>
   );
 };
 
