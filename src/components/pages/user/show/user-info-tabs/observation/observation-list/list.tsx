@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Button, Flex, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Flex, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import ScientificName from "@components/@core/scientific-name";
@@ -29,7 +29,7 @@ export default function ObservationList({ title, data, loadMore }) {
         {data.list.map((observation) => {
           const title = observation?.recoIbp?.scientificName || t("common:unknown");
           return (
-            <Link target="_blank" className="fade" asChild>
+            <>
               <LocalLink
                 href={`/observation/show/${observation.observationId}`}
                 key={observation.observationId}
@@ -50,7 +50,7 @@ export default function ObservationList({ title, data, loadMore }) {
                   </AspectRatio>
                 </Tooltip>
               </LocalLink>
-            </Link>
+            </>
           );
         })}
         {data.isLoading &&
@@ -67,6 +67,7 @@ export default function ObservationList({ title, data, loadMore }) {
         loading={data.isLoading}
         onClick={() => loadMore()}
         mt={4}
+        variant={"subtle"}
       >
         {t("common:load_more")}
       </Button>
