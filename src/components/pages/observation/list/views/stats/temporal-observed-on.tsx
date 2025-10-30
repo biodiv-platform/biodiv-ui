@@ -4,7 +4,7 @@ import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 import { toaster } from "@/components/ui/toaster";
@@ -12,13 +12,30 @@ import { toaster } from "@/components/ui/toaster";
 import StackedHorizontalChart from "./stacked-horizontal-chart";
 import useTemporalDistributionMonthObserved from "./use-temporal-distribution-month-observed";
 
-const TemporalObservedOn = ({ filter }) => {
+interface TemporalObservedOnProps {
+  filter: any;
+}
+
+const TemporalObservedOn = forwardRef(({ filter }: TemporalObservedOnProps, ref) => {
   const observedOn = useTemporalDistributionMonthObserved({ filter });
   const { t } = useTranslation();
-
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const chartRef = useRef<any>(null);
+  const chartContainerRef = useRef<HTMLDivElement>(null); // Ref for the chart container
+
+  // Expose methods to parent
+  useImperativeHandle(ref, () => ({
+    downloadChart: () => {
+      if (chartRef.current) {
+        chartRef.current.downloadChart();
+      }
+    },
+    base64: () => {
+      if (chartRef.current) {
+        return chartRef.current.getBase64();
+      }
+    }
+  }));
 
   function get50YearIntervalKeys(maxYear, minYear) {
     const intervals: string[] = [];
@@ -104,14 +121,19 @@ const TemporalObservedOn = ({ filter }) => {
             </NativeSelectField>
           </NativeSelectRoot>
         </Box>
-        <StackedHorizontalChart
-          data={observedOn.data.list[years[currentIndex]] || []}
-          ref={chartRef}
-          isStacked={true}
-        />
+        {/* Wrap the chart in a container with ref */}
+        <div ref={chartContainerRef}>
+          <StackedHorizontalChart
+            data={observedOn.data.list[years[currentIndex]] || []}
+            ref={chartRef}
+            isStacked={true}
+          />
+        </div>
       </Box>
     </Box>
   );
-};
+});
+
+TemporalObservedOn.displayName = "TemporalObservedOn";
 
 export default TemporalObservedOn;

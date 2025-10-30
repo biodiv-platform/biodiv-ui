@@ -45,6 +45,9 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
   useImperativeHandle(ref, () => ({
     downloadChart() {
       handleDownloadPng();
+    },
+    getBase64() {
+      return getBase64PNG(); // Just return the promise
     }
   }));
 
@@ -279,6 +282,24 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
     }
   };
 
+  const getBase64PNG = async () => {
+    if (!containerRef.current || !ro) {
+      return null;
+    }
+
+    try {
+      const dataUrl = await toPng(containerRef.current, {
+        backgroundColor: "#FFFFFF"
+      });
+      const parts = dataUrl.split(",");
+      const pureBase64 = parts[1];
+      const result = pureBase64;
+      return result;
+    } catch (error) {
+      console.error("❌ Error in getBase64PNG:", error);
+      return null;
+    }
+  };
   return (
     <div ref={containerRef} style={{ position: "relative" }}>
       <svg width={ro?.width} height={h} ref={svgRef}>

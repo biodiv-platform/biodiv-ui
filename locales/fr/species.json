@@ -64,6 +64,7 @@
     "title": "Ajouter une espèce",
     "validate_error": "Impossible de valider"
   },
+  "download": "Télécharger des espèces",
   "edit_name": "Gérer le nom commun",
   "edit_synonym": "Gérer les synonymes",
   "failed_to_update_taxon": "Échec de la mise à jour du taxon",

@@ -31,7 +31,7 @@ import {
 import notification, { NotificationType } from "@utils/notification";
 import { normalizeSpeciesPayload } from "@utils/species";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuPencil } from "react-icons/lu";
 import * as Yup from "yup";
@@ -45,6 +45,7 @@ import {
   DialogHeader,
   DialogRoot
 } from "@/components/ui/dialog";
+import { axDownloadSpecies } from "@/services/utility.service";
 
 import { SpeciesActivity } from "./activity";
 import SpeciesCommonNamesContainer from "./common-names";
@@ -84,6 +85,10 @@ export default function SpeciesShowPageComponent({
     () => generateReferencesList(species.fieldData),
     [species.fieldData]
   );
+
+  const temporalObservedRef = useRef<{ base64: () => Promise<string> } | null>(null);
+  const traitsPerMonthRef = useRef<{ base64: () => Promise<string> } | null>(null);
+  const observationsMap = useRef<{ captureMapAsBase64: () => Promise<string> } | null>(null);
 
   useEffect(() => {
     setSpecies(initialSpecies);
@@ -217,6 +222,173 @@ export default function SpeciesShowPageComponent({
     }
   };
 
+  const [, languagesData] = useMemo(() => {
+    const newList = species.taxonomicNames.commonNames.reduce((acc, curr) => {
+      const currentLanguage = curr?.language?.name || "Other";
+      if (!acc[currentLanguage]) acc[currentLanguage] = []; //If this type wasn't previously stored
+      acc[currentLanguage].push(curr.name);
+      return acc;
+    }, {});
+    return [Object.keys(newList).sort(), newList];
+  }, [species.taxonomicNames.commonNames]);
+
+  function convertToSimpleStructure(originalData) {
+    const getTraitsWithValues = (traits) => {
+      return (
+        traits
+          ?.map((trait) =>
+            trait?.values?.length > 0
+              ? {
+                  name: trait.name,
+                  options:
+                    trait.options?.reduce((acc, obj) => {
+                      acc[obj.traitValueId] = obj.value;
+                      return acc;
+                    }, {}) || {},
+                  values: trait.values.map((obj) => ({
+                    valueId: obj.valueId,
+                    value: obj.value,
+                    fromDate: obj.fromDate,
+                    toDate: obj.toDate
+                  })),
+                  dataType: trait.dataType,
+                  units: trait.units
+                }
+              : null
+          )
+          .filter(Boolean) || []
+      );
+    };
+
+    const hasData = (fieldObj) => {
+      return (
+        fieldObj.values?.length > 0 ||
+        getTraitsWithValues(fieldObj.traits).length > 0 ||
+        fieldObj.id == 65 ||
+        fieldObj.id == 82
+      );
+    };
+
+    const hasDataInBranch = (field) => {
+      const fieldObj = field.parentField || field;
+      return hasData(fieldObj) || field.childField?.some((child) => hasDataInBranch(child));
+    };
+
+    const buildChildField = (child) => {
+      if (!hasDataInBranch(child)) return null;
+
+      const childObj = child.parentField || child;
+
+      return {
+        id: childObj.id,
+        name: childObj.header || "",
+        values:
+          childObj.values?.map((obj) => ({
+            description: obj.fieldData?.description,
+            attributions: obj.attributions,
+            license: obj.license.name,
+            contributor: obj.contributor?.map((obj) => obj.name)
+          })) || [],
+        traits: getTraitsWithValues(childObj.traits),
+        childField:
+          child.childField
+            ?.map((grandChild) => {
+              const grandChildObj = grandChild.parentField || grandChild;
+              if (!hasData(grandChildObj)) return null;
+
+              return {
+                id: grandChildObj.id,
+                name: grandChildObj.header || "",
+                values:
+                  grandChildObj.values?.map((obj) => ({
+                    description: obj.fieldData?.description,
+                    attributions: obj.attributions,
+                    license: obj.license.name,
+                    contributor: obj.contributor?.map((obj) => obj.name)
+                  })) || [],
+                traits: getTraitsWithValues(grandChildObj.traits),
+                childField: []
+              };
+            })
+            .filter(Boolean) || []
+      };
+    };
+
+    return originalData
+      .map((field) => {
+        if (!hasDataInBranch(field)) return null;
+
+        const fieldObj = field.parentField || field;
+
+        return {
+          id: fieldObj.id,
+          name: fieldObj.header || "",
+          values:
+            fieldObj.values?.map((obj) => ({
+              description: obj.fieldData?.description,
+              attributions: obj.attributions,
+              license: obj.license.name,
+              contributor: obj.contributor?.map((obj) => obj.name)
+            })) || [],
+          traits: getTraitsWithValues(fieldObj.traits),
+          childField: field.childField?.map(buildChildField).filter(Boolean) || []
+        };
+      })
+      .filter(Boolean);
+  }
+
+  const simplifiedData = convertToSimpleStructure(species.fieldData);
+
+  const downloadSpecies = async () => {
+    if (temporalObservedRef.current && traitsPerMonthRef.current && observationsMap.current) {
+      const chartBase64 = await temporalObservedRef.current.base64();
+      const traitsBase64 = await traitsPerMonthRef.current.base64();
+      const mapBase64 = await observationsMap.current.captureMapAsBase64();
+
+      const { success, data } = await axDownloadSpecies({
+        title: species?.taxonomyDefinition?.italicisedForm,
+        speciesGroup: species.speciesGroup?.name,
+        badge: species.taxonomyDefinition.status,
+        synonyms: species.taxonomicNames.synonyms.map((obj) => obj.italicisedForm),
+        taxonomy: species.breadCrumbs,
+        commonNames: languagesData,
+        conceptNames: species.fieldData.map((obj) => obj.parentField.header),
+        fieldData: simplifiedData,
+        references:
+          fieldsRender?.reduce((acc, [key, values]) => {
+            acc[key] = values?.map((obj) => obj[0]);
+            return acc;
+          }, {}) || {},
+        chartImage: chartBase64,
+        traitsChart: traitsBase64,
+        observationMap: mapBase64,
+        resourceData: species.resourceData?.map((obj) => obj.resource.fileName) || null,
+        documentMetaList: species.documentMetaList.map((obj) => ({
+          title: obj.title,
+          user: obj.author.name,
+          pic: obj.author.profilePic
+        }))
+      });
+
+      if (success) {
+        notification("PDF Generated Successfully", NotificationType.Success);
+        // Download the file
+        if (data instanceof Blob) {
+          const url = window.URL.createObjectURL(data);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${species?.taxonomyDefinition?.name}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }
+      } else {
+        notification("Error while generating PDF", NotificationType.Error);
+      }
+    }
+  };
+
   return (
     <SpeciesProvider
       species={species}
@@ -231,7 +403,7 @@ export default function SpeciesShowPageComponent({
     >
       <div className="container mt">
         <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }} maxW="100%" w="full">
-          <SpeciesHeader />
+          <SpeciesHeader downloadSpecies={downloadSpecies} />
           <SpeciesGallery />
         </SimpleGrid>
 
@@ -245,7 +417,7 @@ export default function SpeciesShowPageComponent({
             <SpeciesNavigation />
             <SpeciesSynonymsContainer />
             <SpeciesCommonNamesContainer />
-            <SpeciesFields />
+            <SpeciesFields observationsMap={observationsMap} />
 
             <ToggleablePanel id="123" icon="📚" title="References">
               <Box margin={3}>
@@ -382,7 +554,10 @@ export default function SpeciesShowPageComponent({
             </ToggleablePanel>
           </GridItem>
           <GridItem colSpan={2}>
-            <SpeciesSidebar />
+            <SpeciesSidebar
+              temporalObservedRef={temporalObservedRef}
+              traitsPerMonthRef={traitsPerMonthRef}
+            />
           </GridItem>
         </Grid>
 
