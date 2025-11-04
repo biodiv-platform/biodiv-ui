@@ -51,6 +51,10 @@ export default function Recodata({ index }) {
   };
 
   const onScientificNameChange = ({ label, value, groupId, raw }) => {
+    const acceptedNameId =
+      Array.isArray(raw?.accepted_ids) && raw.accepted_ids.length > 0
+        ? raw.accepted_ids[0]
+        : raw?.id;
     if (value === label) {
       form.setValue(`o.${index}.scientificNameTaxonId`, null);
     }
@@ -62,6 +66,7 @@ export default function Recodata({ index }) {
 
       form.setValue(`o.${index}.sGroup`, groupId);
     }
+    form.setValue(`o.${index}.acceptedId`, acceptedNameId);
   };
 
   const v = form.watch(`o.${index}.tmp`);

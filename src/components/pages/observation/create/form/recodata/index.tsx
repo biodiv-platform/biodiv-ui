@@ -39,6 +39,10 @@ export default function Recodata({ languages }: IRecodataProps) {
   };
 
   const onScientificNameChange = ({ label, value, groupId, raw }) => {
+    const acceptedNameId =
+      Array.isArray(raw?.accepted_ids) && raw.accepted_ids.length > 0
+        ? raw.accepted_ids[0]
+        : raw?.id;
     if (value === label) {
       form.setValue("scientificNameTaxonId", null);
     }
@@ -49,6 +53,8 @@ export default function Recodata({ languages }: IRecodataProps) {
       }
       form.setValue("sGroup", groupId);
     }
+
+    form.setValue("acceptedId", acceptedNameId);
   };
 
   useEffect(() => {
