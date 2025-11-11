@@ -20,7 +20,10 @@ const CheckboxGroupField = ({
   colorPalette = "blue",
   ...props
 }: ITextBoxProps) => {
-  const { field, fieldState } = useController<any>({ name: name as any, defaultValue: [] as string[] });
+  const { field, fieldState } = useController<any>({
+    name: name as any,
+    defaultValue: [] as string[]
+  });
 
   return (
     <Fieldset.Root invalid={!!fieldState.error} mb={mb} {...props}>
