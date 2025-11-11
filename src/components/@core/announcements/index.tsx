@@ -116,18 +116,19 @@ export default function Announcement() {
         </Flex>
 
         <Box width="40px">
-          {filteredAnnouncements.length > 1 && currentIndex !== filteredAnnouncements.length - 1 && (
-            <Button
-              aria-label="Next announcement"
-              size="sm"
-              color={currentAnnouncement.color}
-              onClick={nextAnnouncement}
-              bgColor={currentAnnouncement.bgColor}
-              _hover={{ bg: "rgba(255,255,255,0.2)" }}
-            >
-              <LuChevronRight />
-            </Button>
-          )}
+          {filteredAnnouncements.length > 1 &&
+            currentIndex !== filteredAnnouncements.length - 1 && (
+              <Button
+                aria-label="Next announcement"
+                size="sm"
+                color={currentAnnouncement.color}
+                onClick={nextAnnouncement}
+                bgColor={currentAnnouncement.bgColor}
+                _hover={{ bg: "rgba(255,255,255,0.2)" }}
+              >
+                <LuChevronRight />
+              </Button>
+            )}
         </Box>
 
         <CloseButton
