@@ -64,7 +64,7 @@
     "title": "Add Species",
     "validate_error": "Unable to validate"
   },
-  "download": "Download Species",
+  "download": "Download PDF",
   "edit_name": "Manage Common Name",
   "edit_synonym": "Manange Synonym",
   "failed_to_update_taxon": "Failed to update taxon",

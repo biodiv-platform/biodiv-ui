@@ -45,6 +45,7 @@ import {
   DialogHeader,
   DialogRoot
 } from "@/components/ui/dialog";
+import { ResourceType } from "@/interfaces/custom";
 import { axDownloadSpecies } from "@/services/utility.service";
 
 import { SpeciesActivity } from "./activity";
@@ -242,7 +243,7 @@ export default function SpeciesShowPageComponent({
                   name: trait.name,
                   options:
                     trait.options?.reduce((acc, obj) => {
-                      acc[obj.traitValueId] = obj.value;
+                      acc[obj.traitValueId] = obj.value+"|"+obj.icon;
                       return acc;
                     }, {}) || {},
                   values: trait.values.map((obj) => ({
@@ -252,7 +253,8 @@ export default function SpeciesShowPageComponent({
                     toDate: obj.toDate
                   })),
                   dataType: trait.dataType,
-                  units: trait.units
+                  units: trait.units,
+                  icon: trait.icon
                 }
               : null
           )
@@ -340,6 +342,7 @@ export default function SpeciesShowPageComponent({
   const simplifiedData = convertToSimpleStructure(species.fieldData);
 
   const downloadSpecies = async () => {
+    notification("Generating PDF...", NotificationType.Info);
     if (temporalObservedRef.current && traitsPerMonthRef.current && observationsMap.current) {
       const chartBase64 = await temporalObservedRef.current.base64();
       const traitsBase64 = await traitsPerMonthRef.current.base64();
@@ -362,7 +365,7 @@ export default function SpeciesShowPageComponent({
         chartImage: chartBase64,
         traitsChart: traitsBase64,
         observationMap: mapBase64,
-        resourceData: species.resourceData?.map((obj) => obj.resource.fileName) || null,
+        resourceData: species?.resourceData?.filter((r) => r.resource.type !== ResourceType.Icon).map((obj) => obj.resource.fileName)  || [],
         documentMetaList: species.documentMetaList.map((obj) => ({
           title: obj.title,
           user: obj.author.name,
