@@ -11,7 +11,9 @@ import { SortableElement } from "react-sortable-hoc";
 const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) => {
   const { t } = useTranslation();
   const { moreLinks, fileName, observationId, truncated } = itemDetails;
-  const translations = Object.fromEntries(itemDetails.translations.map((item) => [Number(item.languageId), item]))
+  const translations = Object.fromEntries(
+    itemDetails.translations.map((item) => [Number(item.languageId), item])
+  );
   const { currentGroup, languageId } = useGlobalState();
   const imgUrl = observationId
     ? getResourceThumbnail(RESOURCE_CTX.OBSERVATION, fileName, RESOURCE_SIZE.LIST_THUMBNAIL)
@@ -28,7 +30,10 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
       <td>
         <Image src={imgUrl} />
       </td>
-      <td>{translations?.[languageId]?.description || translations?.[SITE_CONFIG.LANG.DEFAULT_ID]?.description}</td>
+      <td>
+        {translations?.[languageId]?.description ||
+          translations?.[SITE_CONFIG.LANG.DEFAULT_ID]?.description}
+      </td>
 
       {currentGroup.id ? (
         <td>
@@ -57,7 +62,7 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
         <td>
           <Button onClick={onEdit} colorPalette="blue" ml={2}>
             <LuPencil />
-          {t("common:edit")}
+            {t("common:edit")}
           </Button>
         </td>
       )}

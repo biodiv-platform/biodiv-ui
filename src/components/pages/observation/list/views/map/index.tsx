@@ -4,14 +4,22 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT } from "@static/constants";
+import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
-import { NakshaMapboxList } from "naksha-components-react";
+import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>
+);
+
+const NakshaMaplibreLayers: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+  }
 );
 
 export default function ObservationsMap() {
@@ -39,12 +47,12 @@ export default function ObservationsMap() {
     <Box className="white-box" mb={4}>
       <BoxHeading>🗺️ {t("observation:list.spatial_distribution")}</BoxHeading>
       <Box h="30rem">
-        <NakshaMapboxList
+        <NakshaMaplibreLayers
           defaultViewState={mapCenter}
           loadToC={false}
           lang={lang}
           key={JSON.stringify(filter)}
-          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          mapStyles={mapStyles}
           nakshaApiEndpoint={ENDPOINT.NAKSHA}
           geoserver={{
             endpoint: ENDPOINT.GEOSERVER,

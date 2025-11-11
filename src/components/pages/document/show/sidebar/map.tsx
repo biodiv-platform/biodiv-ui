@@ -1,12 +1,13 @@
 import { Box } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-const NakshaMapboxView: any = dynamic(
-  () => import("naksha-components-react").then((mod: any) => mod.NakshaMapboxView),
+import { mapStyles } from "@/static/constants";
+
+const NakshaMaplibreView: any = dynamic(
+  () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreView),
   {
     ssr: false,
     loading: () => <p>Loading...</p>
@@ -39,10 +40,10 @@ export default function DocumentSidebarMap({ documentCoverages }) {
       mb={4}
     >
       {documentCoverages?.length ? (
-        <NakshaMapboxView
+        <NakshaMaplibreView
           data={geojson}
           defaultViewState={defaultViewState}
-          mapboxAccessToken={SITE_CONFIG.TOKENS.MAPBOX}
+          mapStyles={mapStyles}
         />
       ) : (
         t("document:no_geodata")

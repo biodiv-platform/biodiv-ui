@@ -42,7 +42,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [pages, setPages] = useState<any[]>([]);
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
   const [open, setOpen] = useState(true);
-  const [announcement, setAnnouncement] = useState(initialState.announcement || {})
+  const [announcement, setAnnouncement] = useState(initialState.announcement || {});
 
   const isLoggedIn = useMemo(() => !!user.id, [user]);
 
@@ -103,7 +103,19 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
       announcement,
       setAnnouncement
     }),
-    [value, initialState, pages, user, isLoggedIn, isCurrentGroupMember, initialState.languageId, open, setOpen, announcement, setAnnouncement]
+    [
+      value,
+      initialState,
+      pages,
+      user,
+      isLoggedIn,
+      isCurrentGroupMember,
+      initialState.languageId,
+      open,
+      setOpen,
+      announcement,
+      setAnnouncement
+    ]
   );
 
   return <GlobalStateContext.Provider value={valueMemo}>{children}</GlobalStateContext.Provider>;

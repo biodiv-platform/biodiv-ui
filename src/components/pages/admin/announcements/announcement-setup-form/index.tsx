@@ -54,7 +54,7 @@ export default function AnnouncemntSetupFrom({
     if (success) {
       notification(t("admin:announcement.create_success"), NotificationType.Success);
       setAnnouncementList([...announcementList, data]);
-      setAnnouncement([...announcement, data])
+      setAnnouncement([...announcement, data]);
       setIsCreate(false);
     } else {
       notification(t("admin.announcement.create_failure"), NotificationType.Error);

@@ -64,9 +64,10 @@ const GallerySetupTable = ({
 
   const removeGalleryItem = async (index) => {
     if (galleryList[index].sliderId != null) {
-      const { success } = galleryId==-1
-        ? await axRemoveGroupHomePageGalleryImage(userGroupId, galleryList, index)
-        : await axRemoveMiniGroupHomePageGalleryImage(userGroupId, galleryList, index);
+      const { success } =
+        galleryId == -1
+          ? await axRemoveGroupHomePageGalleryImage(userGroupId, galleryList, index)
+          : await axRemoveMiniGroupHomePageGalleryImage(userGroupId, galleryList, index);
       if (!success) {
         notification(t("group:homepage_customization.remove.failure"), NotificationType.Error);
       }
@@ -112,9 +113,7 @@ const GallerySetupTable = ({
             float="right"
             hidden={!showReorder}
             onClick={
-              galleryList.some((e) => e.id == null)
-                ? handleReorderAlter
-                : handleReorderCustomField
+              galleryList.some((e) => e.id == null) ? handleReorderAlter : handleReorderCustomField
             }
           >
             {t("group:homepage_customization.gallery_setup.save_order")}

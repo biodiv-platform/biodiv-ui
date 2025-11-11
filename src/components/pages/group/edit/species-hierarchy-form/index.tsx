@@ -120,7 +120,7 @@ const TreeItem = React.memo(
 
             {isLeaf && (
               <Checkbox
-                checked = {isSelected}
+                checked={isSelected}
                 onChange={handleSelect}
                 colorPalette="blue"
                 size="md"

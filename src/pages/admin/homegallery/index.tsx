@@ -7,13 +7,18 @@ import React from "react";
 
 import { getLanguageId } from "@/utils/i18n";
 
-const HomePage = ({ homeInfo, languagesList }) => <HomeComponent homeInfo={homeInfo} languages={languagesList}/>;
+const HomePage = ({ homeInfo, languagesList }) => (
+  <HomeComponent homeInfo={homeInfo} languages={languagesList} />
+);
 
 export const getServerSideProps = async (ctx) => {
   const redirect = authorizedPageSSP([Role.Admin], ctx);
   if (redirect) return redirect;
 
-  const { data: homeInfo } = await axGetAdminHomeInfo(ctx, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
+  const { data: homeInfo } = await axGetAdminHomeInfo(
+    ctx,
+    getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+  );
   const { data: languagesList } = await axGetLangList();
 
   return {

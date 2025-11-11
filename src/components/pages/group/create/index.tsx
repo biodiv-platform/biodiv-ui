@@ -143,12 +143,8 @@ export default function CreateGroupPageComponent({
   const [currentStep, setCurrentStep] = useState(0);
   const [isCreate, setIsCreate] = useState(false);
   const [, setIsEdit] = useState(false);
-  const [galleryList, setGalleryList] = useState<GallerySlider[]>(
-    []
-  );
-  const [miniGalleryList, setMiniGalleryList] = useState<any []>(
-    []
-  );
+  const [galleryList, setGalleryList] = useState<GallerySlider[]>([]);
+  const [miniGalleryList, setMiniGalleryList] = useState<any[]>([]);
   const [, setEditGalleryData] = useState([]);
   const [customFields, setCustomFields] = useState<
     {
@@ -278,7 +274,11 @@ export default function CreateGroupPageComponent({
       const gallerypaylpad = {
         gallerySlider: galleryList.reduce<any[]>((acc, item, index) => {
           if (!item.id) {
-            acc.push({ displayOrder: index, ...item, translations:Object.values(item.translations) });
+            acc.push({
+              displayOrder: index,
+              ...item,
+              translations: Object.values(item.translations)
+            });
           }
           return acc;
         }, []),
@@ -286,13 +286,18 @@ export default function CreateGroupPageComponent({
           const updatedGallerySlider = item.gallerySlider.reduce(
             (acc: any[], galleryItem: any, index: number) => {
               if (!galleryItem.id) {
-                acc.push({ displayOrder: index, ...galleryItem, translations:Object.values(galleryItem.translations), galleryId:miniGalleryIds[i] });
+                acc.push({
+                  displayOrder: index,
+                  ...galleryItem,
+                  translations: Object.values(galleryItem.translations),
+                  galleryId: miniGalleryIds[i]
+                });
               }
               return acc;
             },
             []
           );
-          return {gallerySlider: updatedGallerySlider};
+          return { gallerySlider: updatedGallerySlider };
         }),
         showDesc,
         showGallery,

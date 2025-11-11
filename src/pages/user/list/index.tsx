@@ -31,8 +31,15 @@ export const getServerSideProps = async (ctx) => {
   const nextOffset = (Number(ctx.query.offset) || LIST_PAGINATION_LIMIT) + LIST_PAGINATION_LIMIT;
   const aURL = absoluteUrl(ctx).href;
   const isAdmin = hasAccess([Role.Admin], ctx);
-  const { currentGroup } = await axGroupList(aURL, getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID);
-  const initialFilterParams = { ...ctx.query, ...DEFAULT_FILTER, userGroupList: currentGroup?.groupId };
+  const { currentGroup } = await axGroupList(
+    aURL,
+    getLanguageId(ctx.locale)?.ID ?? SITE_CONFIG.LANG.DEFAULT_ID
+  );
+  const initialFilterParams = {
+    ...ctx.query,
+    ...DEFAULT_FILTER,
+    userGroupList: currentGroup?.groupId
+  };
   const { data } = await axGetUserList(initialFilterParams);
 
   return {

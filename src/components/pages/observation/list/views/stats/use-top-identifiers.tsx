@@ -29,7 +29,7 @@ export default function useTopIdentifiers({ filter }) {
         if (reset) {
           _draft.list = data.aggregateStatsData.groupTopIdentifiers;
           _draft.identifiersoffset = IDENTIFIERS_LIMIT;
-          _draft.sort = sort
+          _draft.sort = sort;
         } else {
           if (data.aggregateStatsData.groupTopIdentifiers) {
             _draft.list.push(...data.aggregateStatsData.groupTopIdentifiers);
@@ -41,7 +41,8 @@ export default function useTopIdentifiers({ filter }) {
     });
   };
 
-  const loadMoreIdentifiers = () => loadMore(topIdentifiers, setTopIdentifiers, false, topIdentifiers.sort);
+  const loadMoreIdentifiers = () =>
+    loadMore(topIdentifiers, setTopIdentifiers, false, topIdentifiers.sort);
 
   const changeSortIdentifiers = (sort) => loadMore(topIdentifiers, setTopIdentifiers, true, sort);
 
@@ -50,6 +51,10 @@ export default function useTopIdentifiers({ filter }) {
   }, [filter]);
 
   return {
-    identifiersData: { data: topIdentifiers, loadMore: loadMoreIdentifiers , changeSort: changeSortIdentifiers}
+    identifiersData: {
+      data: topIdentifiers,
+      loadMore: loadMoreIdentifiers,
+      changeSort: changeSortIdentifiers
+    }
   };
 }

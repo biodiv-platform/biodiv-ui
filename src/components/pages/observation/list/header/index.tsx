@@ -13,13 +13,7 @@ import { Switch } from "@/components/ui/switch";
 const DownloadObservationDataModal = React.lazy(() => import("../download-observation-modal"));
 
 export default function ListHeader() {
-  const {
-    filter,
-    setFilter,
-    observationData,
-    allMedia,
-    addMediaToggle
-  } = useObservationFilter();
+  const { filter, setFilter, observationData, allMedia, addMediaToggle } = useObservationFilter();
   const { t } = useTranslation();
   const { open, onOpen, onClose } = useDisclosure();
 

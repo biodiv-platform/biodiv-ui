@@ -65,12 +65,11 @@ export default function CreateMiniGalleryForm({
     ),
     defaultValues: {
       translations: {
-        [SITE_CONFIG.LANG.DEFAULT_ID]:
-          {
-            languageId: SITE_CONFIG.LANG.DEFAULT_ID,
-            title: "",
-            id: null
-          }
+        [SITE_CONFIG.LANG.DEFAULT_ID]: {
+          languageId: SITE_CONFIG.LANG.DEFAULT_ID,
+          title: "",
+          id: null
+        }
       },
       isVertical: "false",
       slidesPerView: 3,
@@ -96,7 +95,7 @@ export default function CreateMiniGalleryForm({
           NotificationType.Success
         );
         setOpenIndex(miniGalleryList.length);
-        data.gallerySlider=[];
+        data.gallerySlider = [];
         setMiniGalleryList([...miniGalleryList, data]);
         setIsCreate(false);
       } else {
@@ -111,8 +110,8 @@ export default function CreateMiniGalleryForm({
         NotificationType.Success
       );
       setOpenIndex(miniGalleryList.length);
-      payload.gallerySlider=[];
-      payload.isActive = true
+      payload.gallerySlider = [];
+      payload.isActive = true;
       setMiniGalleryList([...miniGalleryList, payload]);
       setIsCreate(false);
     }

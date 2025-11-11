@@ -1,7 +1,7 @@
 import { Table } from "@chakra-ui/react";
 import ScientificName from "@components/@core/scientific-name";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect,useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { SynonymAdd, SynonymEditButtons } from "./actions";
 import SynonymEditModal from "./edit-modal";

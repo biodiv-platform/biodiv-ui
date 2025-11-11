@@ -29,7 +29,7 @@ export default function useTopUploaders({ filter }) {
         if (reset) {
           _draft.list = data.aggregateStatsData.groupTopUploaders;
           _draft.uploadersoffset = UPLOADERS_LIMIT;
-          _draft.sort = sort
+          _draft.sort = sort;
         } else {
           if (data.aggregateStatsData.groupTopUploaders) {
             _draft.list.push(...data.aggregateStatsData.groupTopUploaders);
@@ -50,6 +50,10 @@ export default function useTopUploaders({ filter }) {
   }, [filter]);
 
   return {
-    uploadersData: { data: topUploaders, loadMore: loadMoreUploaders, changeSort: changeSortUploaders }
+    uploadersData: {
+      data: topUploaders,
+      loadMore: loadMoreUploaders,
+      changeSort: changeSortUploaders
+    }
   };
 }

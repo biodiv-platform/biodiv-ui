@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  ColorPicker,
-  HStack,
-  parseColor,
-  Portal,
-  SimpleGrid
-} from "@chakra-ui/react";
+import { Box, Button, ColorPicker, HStack, parseColor, Portal, SimpleGrid } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config";
@@ -70,15 +62,15 @@ export default function AnnouncementEditForm({
       bgColor: bgColor,
       ...value
     };
-   const {success, data} = await axEditAnnouncement(announcementId, payload);
-   if (success){
-    notification(t("admin:announcement.edit_success"), NotificationType.Success);
-    setIsEdit(false)
-    announcementList[index] = data;
-    setAnnouncementList(announcementList)
-   } else {
-    notification(t("admin.announcement.edit_failure"), NotificationType.Error);
-   }
+    const { success, data } = await axEditAnnouncement(announcementId, payload);
+    if (success) {
+      notification(t("admin:announcement.edit_success"), NotificationType.Success);
+      setIsEdit(false);
+      announcementList[index] = data;
+      setAnnouncementList(announcementList);
+    } else {
+      notification(t("admin.announcement.edit_failure"), NotificationType.Error);
+    }
   };
 
   return (

@@ -18,7 +18,7 @@ export default function Announcement() {
 
   // Initialize filtered announcements when announcement prop changes
   useEffect(() => {
-    if (announcement && open==true) {
+    if (announcement && open == true) {
       setFilteredAnnouncements(announcement);
       setCurrentIndex(0);
     }
