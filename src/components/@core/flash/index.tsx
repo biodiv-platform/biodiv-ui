@@ -1,14 +1,38 @@
-import FlashChange from "@avinlab/react-flash-change";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const Flash = ({ value, children }) => (
-  <FlashChange
-    value={value}
-    flashStyle={{ background: "var(--chakra-colors-yellow-100)" }}
-    style={{ transition: "background 500ms ease" }}
-  >
-    {children}
-  </FlashChange>
-);
+interface FlashProps {
+  value: any;
+  duration?: number;
+  flashStyle?: React.CSSProperties;
+  children: React.ReactNode;
+}
 
-export default Flash;
+export default function Flash({
+  value,
+  duration = 500,
+  flashStyle = { background: "var(--chakra-colors-yellow-100)" },
+  children
+}: FlashProps) {
+  const [isFlashing, setIsFlashing] = useState(false);
+  const prevValue = useRef(value);
+
+  useEffect(() => {
+    if (prevValue.current !== value) {
+      setIsFlashing(true);
+      const timeout = setTimeout(() => setIsFlashing(false), duration);
+      prevValue.current = value;
+      return () => clearTimeout(timeout);
+    }
+  }, [value, duration]);
+
+  return (
+    <span
+      style={{
+        transition: "background 500ms ease",
+        ...(isFlashing ? flashStyle : {})
+      }}
+    >
+      {children}
+    </span>
+  );
+}
