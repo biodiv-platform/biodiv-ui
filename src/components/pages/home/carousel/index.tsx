@@ -83,19 +83,20 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
       {...(mini && { mt: 8, mb: 8 })}
     >
       <Box gridColumn={{ md: mini ? "1/4" : "1/3" }} position="relative">
-        {mini && (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
-          <IconButton
-            aria-label="Next Slide"
-            onClick={() => iSlider.current?.prev()}
-            position="absolute"
-            top={"40%"}
-            zIndex={1}
-            colorPalette="gray"
-            size="lg"
-          >
-            <LuArrowLeft size={12} color={"white"} />
-          </IconButton>
-        )}
+        {mini &&
+          (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
+            <IconButton
+              aria-label="Next Slide"
+              onClick={() => iSlider.current?.prev()}
+              position="absolute"
+              top={"40%"}
+              zIndex={1}
+              colorPalette="gray"
+              size="lg"
+            >
+              <LuArrowLeft size={12} color={"white"} />
+            </IconButton>
+          )}
         <Box
           ref={sliderRef}
           className="keen-slider fade"
@@ -107,20 +108,21 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
             </>
           ))}
         </Box>
-        {mini && (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
-          <IconButton
-            aria-label="Next Slide"
-            onClick={() => iSlider.current?.next()}
-            position="absolute"
-            top={"40%"}
-            zIndex={1}
-            colorPalette="gray"
-            right={0}
-            size="lg"
-          >
-            <LuArrowRight size={12} color={"white"} />
-          </IconButton>
-        )}
+        {mini &&
+          (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
+            <IconButton
+              aria-label="Next Slide"
+              onClick={() => iSlider.current?.next()}
+              position="absolute"
+              top={"40%"}
+              zIndex={1}
+              colorPalette="gray"
+              right={0}
+              size="lg"
+            >
+              <LuArrowRight size={12} color={"white"} />
+            </IconButton>
+          )}
         {!mini && (
           <SlideInfo
             size={featured.length}
