@@ -37,6 +37,7 @@
     "blockhash-core": "^0.1.0",
     "blueimp-load-image": "^5.16.0",
     "boring-avatars": "^1.7.0",
+    "cookies-next": "4.3.0",
     "d3-axis": "^3.0.0",
     "d3-hierarchy": "^3.1.2",
     "d3-scale": "^4.0.2",

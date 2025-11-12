@@ -4,7 +4,7 @@ import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";
 import B64URL from "base64-url";
 import JWTDecode from "jwt-decode";
-import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { emit } from "react-gbus";
 
 /**
@@ -28,40 +28,40 @@ const getDomain = () => {
 // sets/re-sets cookies on development mode
 export const setCookies = (tokens, ctx?) => {
   const cookieOpts = {
-    maxAge: 60 * 60 * 24 * 7, // 1 Week
+    maxAge: 60 * 60 * 24 * 7, // 1 week
     path: "/",
-    domain: getDomain()
+    domain: getDomain(),
+    req: ctx?.req,
+    res: ctx?.res
   };
 
-  setCookie(ctx, TOKEN.BATOKEN, tokens.access_token, cookieOpts);
-  setCookie(ctx, TOKEN.BRTOKEN, tokens.refresh_token, cookieOpts);
+  setCookie(TOKEN.BATOKEN, tokens.access_token, cookieOpts);
+  setCookie(TOKEN.BRTOKEN, tokens.refresh_token, cookieOpts);
 };
 
-export const removeCookies = () => {
+export const removeCookies = (ctx?) => {
   const cookieOpts = {
     path: "/",
-    domain: getDomain()
+    domain: getDomain(),
+    req: ctx?.req,
+    res: ctx?.res
   };
 
-  destroyCookie(null, TOKEN.BATOKEN, cookieOpts);
-  destroyCookie(null, TOKEN.BRTOKEN, cookieOpts);
+  deleteCookie(TOKEN.BATOKEN, cookieOpts);
+  deleteCookie(TOKEN.BRTOKEN, cookieOpts);
 };
 
 export const forwardRedirect = async (forward?) => {
-  // remove cache
   await removeCache();
-
-  // redirect
   window.location.assign(B64URL.decode(forward || "Lw"));
 };
 
 export const getParsedUser = (ctx?) => {
-  const cookies = parseCookies(ctx);
-  const accessToken = cookies?.[TOKEN.BATOKEN];
-  const refreshToken = cookies?.[TOKEN.BRTOKEN];
+  const accessToken = getCookie(TOKEN.BATOKEN, { req: ctx?.req, res: ctx?.res });
+  const refreshToken = getCookie(TOKEN.BRTOKEN, { req: ctx?.req, res: ctx?.res });
 
   if (accessToken) {
-    const decoded: any = JWTDecode(accessToken);
+    const decoded: any = JWTDecode(accessToken as string);
     return {
       ...decoded,
       id: parseInt(decoded.id),

@@ -2,7 +2,7 @@ import { Button, Flex } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { parseCookies, setCookie } from "nookies";
+import { getCookie, setCookie } from "cookies-next";
 import React, { useEffect } from "react";
 import { LuChevronDown } from "react-icons/lu";
 
@@ -12,9 +12,9 @@ const LOCALE_COOKIE = "NEXT_LOCALE";
 export default function LanguageSwitcher() {
   const { lang } = useTranslation();
 
-  const changeLanguage = (language, force?) => {
-    setCookie(null, LOCALE_COOKIE, language, {
-      maxAge: 100 * 24 * 60 * 60,
+  const changeLanguage = (language: string, force?: boolean) => {
+    setCookie(LOCALE_COOKIE, language, {
+      maxAge: 100 * 24 * 60 * 60, // 100 days
       path: "/"
     });
 
@@ -24,8 +24,8 @@ export default function LanguageSwitcher() {
   };
 
   useEffect(() => {
-    const cookies = parseCookies();
-    if (!cookies[LOCALE_COOKIE]) {
+    const existing = getCookie(LOCALE_COOKIE);
+    if (!existing) {
       changeLanguage(lang);
     }
   }, []);
