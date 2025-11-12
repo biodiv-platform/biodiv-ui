@@ -3,8 +3,8 @@ import { Role } from "@interfaces/custom";
 import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";
 import B64URL from "base64-url";
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import JWTDecode from "jwt-decode";
-import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { emit } from "react-gbus";
 
 /**

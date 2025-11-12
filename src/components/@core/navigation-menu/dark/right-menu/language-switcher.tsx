@@ -1,8 +1,8 @@
 import { Button, Flex } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
+import { getCookie, setCookie } from "cookies-next";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { getCookie, setCookie } from "cookies-next";
 import React, { useEffect } from "react";
 import { LuChevronDown } from "react-icons/lu";
 
