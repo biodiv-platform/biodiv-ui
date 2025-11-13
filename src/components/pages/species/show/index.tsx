@@ -46,7 +46,9 @@ import {
   DialogRoot
 } from "@/components/ui/dialog";
 import { ResourceType } from "@/interfaces/custom";
+import { axAddDownloadLog } from "@/services/user.service";
 import { axDownloadSpecies } from "@/services/utility.service";
+import { waitForAuth } from "@/utils/auth";
 
 import { SpeciesActivity } from "./activity";
 import SpeciesCommonNamesContainer from "./common-names";
@@ -243,7 +245,7 @@ export default function SpeciesShowPageComponent({
                   name: trait.name,
                   options:
                     trait.options?.reduce((acc, obj) => {
-                      acc[obj.traitValueId] = obj.value+"|"+obj.icon;
+                      acc[obj.traitValueId] = obj.icon ? obj.value + "|" + obj.icon : obj.value;
                       return acc;
                     }, {}) || {},
                   values: trait.values.map((obj) => ({
@@ -342,6 +344,7 @@ export default function SpeciesShowPageComponent({
   const simplifiedData = convertToSimpleStructure(species.fieldData);
 
   const downloadSpecies = async () => {
+    await waitForAuth();
     notification("Generating PDF...", NotificationType.Info);
     if (temporalObservedRef.current && traitsPerMonthRef.current && observationsMap.current) {
       const chartBase64 = await temporalObservedRef.current.base64();
@@ -365,7 +368,10 @@ export default function SpeciesShowPageComponent({
         chartImage: chartBase64,
         traitsChart: traitsBase64,
         observationMap: mapBase64,
-        resourceData: species?.resourceData?.filter((r) => r.resource.type !== ResourceType.Icon).map((obj) => obj.resource.fileName)  || [],
+        resourceData:
+          species?.resourceData
+            ?.filter((r) => r.resource.type !== ResourceType.Icon)
+            .map((obj) => obj.resource.fileName) || [],
         documentMetaList: species.documentMetaList.map((obj) => ({
           title: obj.title,
           user: obj.author.name,
@@ -386,6 +392,16 @@ export default function SpeciesShowPageComponent({
           a.click();
           document.body.removeChild(a);
           window.URL.revokeObjectURL(url);
+
+          const payload = {
+            filePath: "",
+            filterUrl: window.location.href,
+            status: "success",
+            fileType: "pdf",
+            sourcetype: "Species",
+            notes: "Species Show"
+          };
+          axAddDownloadLog(payload);
         }
       } else {
         notification("Error while generating PDF", NotificationType.Error);
