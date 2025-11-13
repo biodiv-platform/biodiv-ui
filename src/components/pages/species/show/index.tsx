@@ -370,7 +370,8 @@ export default function SpeciesShowPageComponent({
           title: obj.title,
           user: obj.author.name,
           pic: obj.author.profilePic
-        }))
+        })),
+        commonReferences: commonReferences.map((obj) => obj.title)
       });
 
       if (success) {
