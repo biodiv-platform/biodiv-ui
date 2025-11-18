@@ -402,7 +402,7 @@ export default function SpeciesShowPageComponent({
             status: "success",
             fileType: "pdf",
             sourcetype: "Species",
-            notes: species?.taxonomyDefinition?.name||"Species Show"
+            notes: species?.taxonomyDefinition?.name
           };
           axAddDownloadLog(payload);
         }
