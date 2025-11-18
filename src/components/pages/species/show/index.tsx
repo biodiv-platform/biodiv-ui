@@ -293,7 +293,8 @@ export default function SpeciesShowPageComponent({
             description: obj.fieldData?.description,
             attributions: obj.attributions,
             license: obj.license.name,
-            contributor: obj.contributor?.map((obj) => obj.name)
+            contributor: obj.contributor?.map((obj) => obj.name),
+            languageId: obj.fieldData?.languageId
           })) || [],
         traits: getTraitsWithValues(childObj.traits),
         childField:
@@ -310,7 +311,8 @@ export default function SpeciesShowPageComponent({
                     description: obj.fieldData?.description,
                     attributions: obj.attributions,
                     license: obj.license.name,
-                    contributor: obj.contributor?.map((obj) => obj.name)
+                    contributor: obj.contributor?.map((obj) => obj.name),
+                    languageId: obj.fieldData?.languageId
                   })) || [],
                 traits: getTraitsWithValues(grandChildObj.traits),
                 childField: []
@@ -334,7 +336,8 @@ export default function SpeciesShowPageComponent({
               description: obj.fieldData?.description,
               attributions: obj.attributions,
               license: obj.license.name,
-              contributor: obj.contributor?.map((obj) => obj.name)
+              contributor: obj.contributor?.map((obj) => obj.name),
+              languageId: obj.fieldData?.languageId
             })) || [],
           traits: getTraitsWithValues(fieldObj.traits),
           childField: field.childField?.map(buildChildField).filter(Boolean) || []
@@ -361,6 +364,7 @@ export default function SpeciesShowPageComponent({
 
       const { success, data } = await axDownloadSpecies({
         url :SITE_CONFIG.SITE.URL,
+        languageId: languageId,
         title: species?.taxonomyDefinition?.italicisedForm,
         speciesGroup: species.speciesGroup?.name,
         badge: species.taxonomyDefinition.status,
