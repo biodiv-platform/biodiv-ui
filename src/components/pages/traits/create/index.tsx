@@ -350,7 +350,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
               >
                 {t("traits:create_form.cancel")}
               </Button>
-              <Button colorScheme="blue" type="submit">
+              <Button colorPalette="blue" type="submit">
                 {t("traits:create_form.continue")}
               </Button>
             </DialogFooter>
@@ -358,21 +358,22 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
         </DialogContent>
       </DialogRoot>
       <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
-        <Button colorScheme="green">{t("traits:create_form.add_translation_button")}</Button>
+        <Button colorPalette="green">{t("traits:create_form.add_translation_button")}</Button>
       </Flex>
       <Tabs.Root
         overflowX="auto"
         mb={4}
         bg="gray.100"
         rounded="md"
-        // index={translationSelected}
-        // onChange={(index) => setTranslationSelected(index)}
+        variant = "plain"
+        value = {translationSelected.toString()}
+        onValueChange={({ value }) => setTranslationSelected(Number(value))}
       >
         <Tabs.List>
-          {hForm.watch(`translations`).map((translation) => (
+          {hForm.watch(`translations`).map((translation, index) => (
             <Tabs.Trigger
               key={translation.traits.languageId}
-              value={translation.traits.languageId}
+              value={index.toString()}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >
@@ -608,7 +609,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
                 <Box mb={4}>
                   {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
                     languageId && (
-                    <Button onClick={handleAddValue} colorScheme="green" mb={4}>
+                    <Button onClick={handleAddValue} colorPalette="green" mb={4}>
                       {t("traits:create_form.add_trait_values_button")}
                     </Button>
                   )}
