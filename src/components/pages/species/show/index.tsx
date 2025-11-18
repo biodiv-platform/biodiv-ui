@@ -12,6 +12,7 @@ import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { SubmitButton } from "@components/form/submit-button";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
@@ -352,6 +353,7 @@ export default function SpeciesShowPageComponent({
       const mapBase64 = await observationsMap.current.captureMapAsBase64();
 
       const { success, data } = await axDownloadSpecies({
+        url :SITE_CONFIG.SITE.URL,
         title: species?.taxonomyDefinition?.italicisedForm,
         speciesGroup: species.speciesGroup?.name,
         badge: species.taxonomyDefinition.status,
@@ -373,6 +375,7 @@ export default function SpeciesShowPageComponent({
             ?.filter((r) => r.resource.type !== ResourceType.Icon)
             .map((obj) => obj.resource.fileName) || [],
         documentMetaList: species.documentMetaList.map((obj) => ({
+          id: obj.id,
           title: obj.title,
           user: obj.author.name,
           pic: obj.author.profilePic
@@ -399,7 +402,7 @@ export default function SpeciesShowPageComponent({
             status: "success",
             fileType: "pdf",
             sourcetype: "Species",
-            notes: "Species Show"
+            notes: species?.taxonomyDefinition?.name||"Species Show"
           };
           axAddDownloadLog(payload);
         }
