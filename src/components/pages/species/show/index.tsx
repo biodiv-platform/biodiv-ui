@@ -46,6 +46,7 @@ import {
   DialogHeader,
   DialogRoot
 } from "@/components/ui/dialog";
+import { toaster } from "@/components/ui/toaster";
 import { ResourceType } from "@/interfaces/custom";
 import { axAddDownloadLog } from "@/services/user.service";
 import { axDownloadSpecies } from "@/services/utility.service";
@@ -346,7 +347,13 @@ export default function SpeciesShowPageComponent({
 
   const downloadSpecies = async () => {
     await waitForAuth();
-    notification("Generating PDF...", NotificationType.Info);
+    const toastId = toaster.create({
+      type: "loading",
+      title: "Generating PDF...",
+      duration: Infinity, // Never auto-dismiss
+      closable: false // Prevent manual closing
+    });
+    //notification("Generating PDF...", NotificationType.Info);
     if (temporalObservedRef.current && traitsPerMonthRef.current && observationsMap.current) {
       const chartBase64 = await temporalObservedRef.current.base64();
       const traitsBase64 = await traitsPerMonthRef.current.base64();
@@ -384,7 +391,13 @@ export default function SpeciesShowPageComponent({
       });
 
       if (success) {
-        notification("PDF Generated Successfully", NotificationType.Success);
+        toaster.update(toastId, {
+          type: "success",
+          title: "PDF Generated!",
+          duration: 5000, // Auto-dismiss after 5 seconds
+          closable: true
+        });
+        //notification("PDF Generated Successfully", NotificationType.Success);
         // Download the file
         if (data instanceof Blob) {
           const url = window.URL.createObjectURL(data);
@@ -407,7 +420,13 @@ export default function SpeciesShowPageComponent({
           axAddDownloadLog(payload);
         }
       } else {
-        notification("Error while generating PDF", NotificationType.Error);
+        toaster.update(toastId, {
+          type: "error", 
+          title: "PDF Generation Failed",
+          duration: 5000,
+          closable: true
+        });
+        //notification("Error while generating PDF", NotificationType.Error);
       }
     }
   };
