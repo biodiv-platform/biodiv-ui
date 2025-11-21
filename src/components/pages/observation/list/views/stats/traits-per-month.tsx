@@ -4,33 +4,25 @@ import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { forwardRef, useImperativeHandle, useRef } from "react"; // ADD imports
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
 import LineGraph from "./line-graph";
 import useTraitsDistributionData from "./use-traits-distribution-data";
 
-// ADD interface for props
 interface TraitsPerMonthProps {
   filter: any;
 }
 
-// WRAP with forwardRef
 const TraitsPerMonth = forwardRef(({ filter }: TraitsPerMonthProps, ref) => {
   const traits = useTraitsDistributionData({ filter });
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null); // ADD container ref
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // ADD this - expose methods to parent
   useImperativeHandle(ref, () => ({
     base64: () => {
       if (chartRef.current) {
         return chartRef.current.getBase64();
-      }
-    },
-    downloadChart: () => {
-      if (chartRef.current) {
-        chartRef.current.downloadChart();
       }
     }
   }));
@@ -66,7 +58,6 @@ const TraitsPerMonth = forwardRef(({ filter }: TraitsPerMonthProps, ref) => {
   const reversedList = traits.data.list.slice().reverse();
 
   return (
-    // ADD ref to container
     <Box ref={containerRef} className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.traitsDistribution")}{" "}
@@ -80,8 +71,5 @@ const TraitsPerMonth = forwardRef(({ filter }: TraitsPerMonthProps, ref) => {
     </Box>
   );
 });
-
-// ADD display name
-TraitsPerMonth.displayName = "TraitsPerMonth";
 
 export default TraitsPerMonth;

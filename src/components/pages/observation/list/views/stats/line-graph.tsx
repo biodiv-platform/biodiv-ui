@@ -54,7 +54,7 @@ const LineGraph = forwardRef(function LineGraph(
       handleDownloadPng();
     },
     getBase64() {
-      return getBase64PNG(); // Just return the promise
+      return getBase64PNG();
     }
   }));
 
@@ -581,9 +581,7 @@ const LineGraph = forwardRef(function LineGraph(
       const dataUrl = await toPng(containerRef.current, {
         backgroundColor: "#FFFFFF"
       });
-      const parts = dataUrl.split(",");
-      const pureBase64 = parts[1];
-      const result = pureBase64;
+      const result = dataUrl.split(",")[1];
       return result;
     } catch (error) {
       console.error("❌ Error in getBase64PNG:", error);

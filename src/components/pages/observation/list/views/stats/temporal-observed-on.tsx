@@ -21,15 +21,9 @@ const TemporalObservedOn = forwardRef(({ filter }: TemporalObservedOnProps, ref)
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const chartRef = useRef<any>(null);
-  const chartContainerRef = useRef<HTMLDivElement>(null); // Ref for the chart container
+  const chartContainerRef = useRef<HTMLDivElement>(null);
 
-  // Expose methods to parent
   useImperativeHandle(ref, () => ({
-    downloadChart: () => {
-      if (chartRef.current) {
-        chartRef.current.downloadChart();
-      }
-    },
     base64: () => {
       if (chartRef.current) {
         return chartRef.current.getBase64();
@@ -121,7 +115,6 @@ const TemporalObservedOn = forwardRef(({ filter }: TemporalObservedOnProps, ref)
             </NativeSelectField>
           </NativeSelectRoot>
         </Box>
-        {/* Wrap the chart in a container with ref */}
         <div ref={chartContainerRef}>
           <StackedHorizontalChart
             data={observedOn.data.list[years[currentIndex]] || []}
@@ -133,7 +126,5 @@ const TemporalObservedOn = forwardRef(({ filter }: TemporalObservedOnProps, ref)
     </Box>
   );
 });
-
-TemporalObservedOn.displayName = "TemporalObservedOn";
 
 export default TemporalObservedOn;

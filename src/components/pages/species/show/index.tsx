@@ -227,123 +227,85 @@ export default function SpeciesShowPageComponent({
     }
   };
 
-  const [, languagesData] = useMemo(() => {
-    const newList = species.taxonomicNames.commonNames.reduce((acc, curr) => {
-      const currentLanguage = curr?.language?.name || "Other";
-      if (!acc[currentLanguage]) acc[currentLanguage] = []; //If this type wasn't previously stored
-      acc[currentLanguage].push(curr.name);
+  const languagesData = useMemo(() => {
+    const commonNames = species.taxonomicNames?.commonNames || [];
+
+    return commonNames.reduce((acc, curr) => {
+      if (!curr?.name) return acc;
+
+      const languageName = curr?.language?.name || "Other";
+
+      if (!acc[languageName]) {
+        acc[languageName] = [];
+      }
+
+      acc[languageName].push(curr.name);
       return acc;
     }, {});
-    return [Object.keys(newList).sort(), newList];
-  }, [species.taxonomicNames.commonNames]);
+  }, [species.taxonomicNames?.commonNames]);
 
   function convertToSimpleStructure(originalData) {
-    const getTraitsWithValues = (traits) => {
-      return (
-        traits
-          ?.map((trait) =>
-            trait?.values?.length > 0
-              ? {
-                  name: trait.name,
-                  options:
-                    trait.options?.reduce((acc, obj) => {
-                      acc[obj.traitValueId] = obj.icon ? obj.value + "|" + obj.icon : obj.value;
-                      return acc;
-                    }, {}) || {},
-                  values: trait.values.map((obj) => ({
-                    valueId: obj.valueId,
-                    value: obj.value,
-                    fromDate: obj.fromDate,
-                    toDate: obj.toDate
-                  })),
-                  dataType: trait.dataType,
-                  units: trait.units,
-                  icon: trait.icon
-                }
-              : null
-          )
-          .filter(Boolean) || []
-      );
+    const SPECIAL_FIELD_IDS = {
+      DESCRIPTION: 65,
+      HABITAT: 82
     };
 
-    const hasData = (fieldObj) => {
-      return (
-        fieldObj.values?.length > 0 ||
-        getTraitsWithValues(fieldObj.traits).length > 0 ||
-        fieldObj.id == 65 ||
-        fieldObj.id == 82
-      );
-    };
+    const extractValues = (fieldObj) =>
+      fieldObj.values?.map((obj) => ({
+        description: obj.fieldData?.description,
+        attributions: obj.attributions,
+        license: obj.license?.name,
+        contributor: obj.contributor?.map((contrib) => contrib.name),
+        languageId: obj.fieldData?.languageId
+      })) || [];
+
+    const transformTraits = (traits) =>
+      traits
+        ?.filter((trait) => trait?.values?.length > 0)
+        .map((trait) => ({
+          name: trait.name,
+          options:
+            trait.options?.reduce((acc, obj) => {
+              acc[obj.traitValueId] = obj.icon ? `${obj.value}|${obj.icon}` : obj.value;
+              return acc;
+            }, {}) || {},
+          values: trait.values.map((obj) => ({
+            valueId: obj.valueId,
+            value: obj.value,
+            fromDate: obj.fromDate,
+            toDate: obj.toDate
+          })),
+          dataType: trait.dataType,
+          units: trait.units,
+          icon: trait.icon
+        })) || [];
+
+    const hasData = (fieldObj) =>
+      fieldObj.values?.length > 0 ||
+      transformTraits(fieldObj.traits).length > 0 ||
+      fieldObj.id === SPECIAL_FIELD_IDS.DESCRIPTION ||
+      fieldObj.id === SPECIAL_FIELD_IDS.HABITAT;
 
     const hasDataInBranch = (field) => {
       const fieldObj = field.parentField || field;
       return hasData(fieldObj) || field.childField?.some((child) => hasDataInBranch(child));
     };
 
-    const buildChildField = (child) => {
-      if (!hasDataInBranch(child)) return null;
+    const transformField = (field) => {
+      if (!hasDataInBranch(field)) return null;
 
-      const childObj = child.parentField || child;
+      const fieldObj = field.parentField || field;
 
       return {
-        id: childObj.id,
-        name: childObj.header || "",
-        values:
-          childObj.values?.map((obj) => ({
-            description: obj.fieldData?.description,
-            attributions: obj.attributions,
-            license: obj.license.name,
-            contributor: obj.contributor?.map((obj) => obj.name),
-            languageId: obj.fieldData?.languageId
-          })) || [],
-        traits: getTraitsWithValues(childObj.traits),
-        childField:
-          child.childField
-            ?.map((grandChild) => {
-              const grandChildObj = grandChild.parentField || grandChild;
-              if (!hasData(grandChildObj)) return null;
-
-              return {
-                id: grandChildObj.id,
-                name: grandChildObj.header || "",
-                values:
-                  grandChildObj.values?.map((obj) => ({
-                    description: obj.fieldData?.description,
-                    attributions: obj.attributions,
-                    license: obj.license.name,
-                    contributor: obj.contributor?.map((obj) => obj.name),
-                    languageId: obj.fieldData?.languageId
-                  })) || [],
-                traits: getTraitsWithValues(grandChildObj.traits),
-                childField: []
-              };
-            })
-            .filter(Boolean) || []
+        id: fieldObj.id,
+        name: fieldObj.header || "",
+        values: extractValues(fieldObj),
+        traits: transformTraits(fieldObj.traits),
+        childField: field.childField?.map(transformField).filter(Boolean) || []
       };
     };
 
-    return originalData
-      .map((field) => {
-        if (!hasDataInBranch(field)) return null;
-
-        const fieldObj = field.parentField || field;
-
-        return {
-          id: fieldObj.id,
-          name: fieldObj.header || "",
-          values:
-            fieldObj.values?.map((obj) => ({
-              description: obj.fieldData?.description,
-              attributions: obj.attributions,
-              license: obj.license.name,
-              contributor: obj.contributor?.map((obj) => obj.name),
-              languageId: obj.fieldData?.languageId
-            })) || [],
-          traits: getTraitsWithValues(fieldObj.traits),
-          childField: field.childField?.map(buildChildField).filter(Boolean) || []
-        };
-      })
-      .filter(Boolean);
+    return originalData.map(transformField).filter(Boolean);
   }
 
   const simplifiedData = convertToSimpleStructure(species.fieldData);
@@ -353,17 +315,16 @@ export default function SpeciesShowPageComponent({
     const toastId = toaster.create({
       type: "loading",
       title: "Generating PDF...",
-      duration: Infinity, // Never auto-dismiss
-      closable: false // Prevent manual closing
+      duration: Infinity,
+      closable: false
     });
-    //notification("Generating PDF...", NotificationType.Info);
     if (temporalObservedRef.current && traitsPerMonthRef.current && observationsMap.current) {
       const chartBase64 = await temporalObservedRef.current.base64();
       const traitsBase64 = await traitsPerMonthRef.current.base64();
       const mapBase64 = await observationsMap.current.captureMapAsBase64();
 
       const { success, data } = await axDownloadSpecies({
-        url :SITE_CONFIG.SITE.URL,
+        url: SITE_CONFIG.SITE.URL,
         languageId: languageId,
         title: species?.taxonomyDefinition?.italicisedForm,
         speciesGroup: species.speciesGroup?.name,
@@ -398,11 +359,9 @@ export default function SpeciesShowPageComponent({
         toaster.update(toastId, {
           type: "success",
           title: "PDF Generated!",
-          duration: 5000, // Auto-dismiss after 5 seconds
+          duration: 5000,
           closable: true
         });
-        //notification("PDF Generated Successfully", NotificationType.Success);
-        // Download the file
         if (data instanceof Blob) {
           const url = window.URL.createObjectURL(data);
           const a = document.createElement("a");
@@ -425,12 +384,11 @@ export default function SpeciesShowPageComponent({
         }
       } else {
         toaster.update(toastId, {
-          type: "error", 
+          type: "error",
           title: "PDF Generation Failed",
           duration: 5000,
           closable: true
         });
-        //notification("Error while generating PDF", NotificationType.Error);
       }
     }
   };
