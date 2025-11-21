@@ -60,7 +60,7 @@ const NameTable = ({
                       <DialogFooter>
                         <Button onClick={onClose}>{t("taxon:name_matching.cancel")}</Button>
                         <Button
-                          colorScheme="red"
+                          colorPalette="red"
                           onClick={() => {
                             if (currentIndex != undefined) {
                               setUploadResult(
@@ -93,10 +93,10 @@ const NameTable = ({
                       />
                       {item[1]?.name}
                       <Badge ml={2}>{item[1]?.rank}</Badge>
-                      <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.status]}>
+                      <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[item[1]?.status]}>
                         {item[1]?.status}
                       </Badge>
-                      <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[item[1]?.position]}>
+                      <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[item[1]?.position]}>
                         {item[1]?.position}
                       </Badge>
                       {uploadResult[item[4]][1].length > 1 && (
@@ -173,14 +173,14 @@ const NameTable = ({
                         >
                           {option["name"]}
                           <Badge ml={2}>{option["rank"]}</Badge>
-                          <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[option["status"]]}>
+                          <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[option["status"]]}>
                             {option["status"]}
                           </Badge>
-                          <Badge ml={2} colorScheme={TAXON_BADGE_COLORS[option["position"]]}>
+                          <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[option["position"]]}>
                             {option["position"]}
                           </Badge>
                           {option["id"] == item[1]?.id && (
-                            <Badge ml={2} colorScheme="blue">
+                            <Badge ml={2} colorPalette="blue">
                               {"Selected"}
                             </Badge>
                           )}

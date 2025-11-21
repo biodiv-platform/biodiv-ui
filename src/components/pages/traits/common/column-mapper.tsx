@@ -44,10 +44,11 @@ const ColumnMapper = ({
                     <NativeSelectRoot
                       id="dataType"
                       // name="dataType"
-                      defaultValue={selectedValue}
+                      //defaultValue={selectedValue}
                       // placeholder=" "
                     >
                       <NativeSelectField
+                        value={selectedValue}
                         onChange={(e) => {
                           const { value } = e.target;
                           setColumnMapping((prev) => {
@@ -73,6 +74,9 @@ const ColumnMapper = ({
                           });
                         }}
                       >
+                        <option value={""} style={{ cursor: "pointer" }}>
+                          {"Select option"}
+                        </option>
                         {options.map((field) => (
                           <option
                             value={field.toString()}
@@ -113,7 +117,7 @@ const ColumnMapper = ({
           >
             {t("traits:trait_matching.cancel")}
           </Button>
-          <Button colorScheme="blue" disabled={optionDisabled} onClick={onSubmit}>
+          <Button colorPalette="blue" disabled={optionDisabled} onClick={onSubmit}>
             {t("traits:trait_matching.continue")}
           </Button>
         </DialogFooter>

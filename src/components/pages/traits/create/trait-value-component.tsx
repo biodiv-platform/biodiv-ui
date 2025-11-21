@@ -79,7 +79,7 @@ export default function TraitsValueComponent({
             aria-label="Remove value"
             onClick={() => onRemove(index)}
             size="sm"
-            colorScheme="red"
+            colorPalette="red"
           >
             <LuX />
           </IconButton>

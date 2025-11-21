@@ -216,6 +216,7 @@ export default function TraitsEditComponent({ data, languages }) {
           height={70}
           width={70}
           border={"2px dashed #aaa"}
+          backgroundColor="transparent"
         >
           {hForm.watch(`translations[${translationSelected}].values`)[value].icon && (
             <Image
@@ -244,7 +245,7 @@ export default function TraitsEditComponent({ data, languages }) {
                 removeValue(value); // Call delete function
               }}
               size="sm"
-              colorScheme="red"
+              colorPalette="red"
             >
               <LuX />
             </Button>
@@ -456,7 +457,7 @@ export default function TraitsEditComponent({ data, languages }) {
               >
                 {t("traits:create_form.cancel")}
               </Button>
-              <Button colorScheme="blue" type="submit">
+              <Button colorPalette="blue" type="submit">
                 {t("traits:create_form.continue")}
               </Button>
             </DialogFooter>
@@ -464,21 +465,22 @@ export default function TraitsEditComponent({ data, languages }) {
         </DialogContent>
       </DialogRoot>
       <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
-        <Button colorScheme="green">{t("traits:create_form.add_translation_button")}</Button>
+        <Button colorPalette="green">{t("traits:create_form.add_translation_button")}</Button>
       </Flex>
       <Tabs.Root
         overflowX="auto"
         mb={4}
         bg="gray.100"
         rounded="md"
-        // value={translationSelected}
-        // onValueChange={(e) => setTranslationSelected(e.value)}
+        variant = "plain"
+        value = {translationSelected.toString()}
+        onValueChange={({ value }) => setTranslationSelected(Number(value))}
       >
         <Tabs.List>
-          {hForm.watch(`translations`).map((translation) => (
+          {hForm.watch(`translations`).map((translation, index) => (
             <Tabs.Trigger
               key={translation.language}
-              value={translation.language}
+              value={index.toString()}
               _selected={{ bg: "white", borderRadius: "4", boxShadow: "lg" }}
               m={1}
             >
@@ -596,7 +598,7 @@ export default function TraitsEditComponent({ data, languages }) {
                 <Box mb={4}>
                   {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
                     languageId && (
-                    <Button onClick={handleAddValue} colorScheme="green" mb={4}>
+                    <Button onClick={handleAddValue} colorPalette="green" mb={4}>
                       {t("traits:create_form.add_trait_values_button")}
                     </Button>
                   )}

@@ -315,7 +315,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
               <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
                 {t("traits:trait_matching.browse_description")}
               </Heading>
-              <Button colorScheme="blue" onClick={open} mb={8}>
+              <Button colorPalette="blue" onClick={open} mb={8}>
                 {t("traits:trait_matching.browse_button")}
               </Button>
             </Flex>
@@ -416,7 +416,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                           mr={4}
                           borderRadius="50%"
                           variant="outline"
-                          colorScheme="teal"
+                          colorPalette="teal"
                           size="xs"
                         >
                           {expandedRows.includes(index) ? "-" : "+"}
@@ -594,7 +594,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
             {!showstats && (
               <Flex justifyContent="flex-end" mt={4}>
                 <Button
-                  colorScheme="blue"
+                  colorPalette="blue"
                   onClick={handleSubmit}
                   disabled={
                     Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length !=
