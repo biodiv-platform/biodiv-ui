@@ -64,6 +64,7 @@
     "title": "প্রজাতি যোগ করুন",
     "validate_error": "যাচাই করতে অক্ষম"
   },
+  "download": "PDF ডাউনলোড করুন",
   "edit_name": "সাধারণ নাম পরিচালনা করুন",
   "edit_synonym": "Manange Synonym.",
   "failed_to_update_taxon": "ট্যাক্সন আপডেট করতে ব্যর্থ",

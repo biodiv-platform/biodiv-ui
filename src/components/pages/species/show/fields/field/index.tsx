@@ -17,13 +17,15 @@ import SpeciesFieldSimpleCreate from "./simple/create";
 interface SpeciesFieldGroupProps extends SpeciesField {
   valueCallback;
   level: number;
+  observationsMap;
 }
 
 export default function SpeciesFieldGroup({
   parentField,
   childField,
   valueCallback,
-  level
+  level,
+  observationsMap
 }: SpeciesFieldGroupProps) {
   const { showHiddenFields } = useSpeciesFields();
   const [childFieldsHasValue, setChildFieldsHasValue] = useState<boolean>();
@@ -79,7 +81,12 @@ export default function SpeciesFieldGroup({
   switch (parentField.id) {
     // ParentField
     case 65: {
-      return <OccuranceRecoardSpeciesField valueCallback={setChildFieldsHasValue} />;
+      return (
+        <OccuranceRecoardSpeciesField
+          valueCallback={setChildFieldsHasValue}
+          ref={observationsMap}
+        />
+      );
     }
 
     // Documents
@@ -129,6 +136,7 @@ export default function SpeciesFieldGroup({
               valueCallback={setChildFieldsHasValue}
               {...field}
               level={level + 1}
+              observationsMap={observationsMap}
             />
           ))}
         </div>

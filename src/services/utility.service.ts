@@ -252,3 +252,16 @@ export const axGetActiveAnnouncement = async () => {
     return { success: false, data: null };
   }
 };
+
+export const axDownloadSpecies = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.UTILITY}/v1/services/download`, payload, {
+      responseType: "blob"
+    });
+    const blob = new Blob([data], { type: "application/pdf" });
+    return { success: true, data: blob };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
