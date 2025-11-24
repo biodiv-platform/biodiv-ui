@@ -18,9 +18,11 @@ import React, { useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { LuPencil } from "react-icons/lu";
 
+import DownloadIcon from "@/icons/download";
+
 import useSpecies from "../use-species";
 
-function SpeciesHeader() {
+function SpeciesHeader({ downloadSpecies }) {
   const { t } = useTranslation();
   const { species, permissions, taxonEditActions } = useSpecies();
   const speciesTitle = [
@@ -69,6 +71,12 @@ function SpeciesHeader() {
         />
       )}
       <ShareActionButton text={openGraph.title} title={t("species:share")} />
+      <SimpleActionButton
+        icon={<DownloadIcon />}
+        title={t("species:download")}
+        colorPalette="blue"
+        onClick={downloadSpecies}
+      />
     </div>
   );
 
