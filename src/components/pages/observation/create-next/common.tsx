@@ -148,6 +148,7 @@ export const handleOnSingleObservationSubmit = (
     recoComment,
     confidence,
     languageId: lId,
+    acceptedNameId,
     tags,
     customFields,
     facts,
@@ -177,7 +178,8 @@ export const handleOnSingleObservationSubmit = (
       taxonScientificName,
       recoComment,
       confidence,
-      languageId: lId
+      languageId: lId,
+      acceptedNameId
     },
     tags: cleanTags(tags),
     protocol: isSingle ? "SINGLE_OBSERVATION" : "MULTI_OBSERVATION",
