@@ -165,7 +165,6 @@ export default function BulkMapperModal() {
                   className="tabs"
                   defaultValue={tabIndex}
                   onValueChange={(e) => setTabIndex(e.value)}
-                  overflowY={"auto"}
                 >
                   <Tabs.List>
                     {bulkActionTabs.map(({ name, icon, active = true }) => (
@@ -183,16 +182,10 @@ export default function BulkMapperModal() {
                     <Collapsible.Content>
                       <Tabs.Content
                         value="common:usergroups"
-                        height="100%"
-                        className="tab-content"
-                        position="relative"
-                        style={{ overflow: "hidden" }}
                       >
-                        <Box height="100%" overflowY="auto">
                           <Suspense fallback={<Spinner />}>
                             <GroupPost />
                           </Suspense>
-                        </Box>
                       </Tabs.Content>
                     </Collapsible.Content>
                   </Box>
