@@ -66,7 +66,7 @@ export const DocumentFilterProvider = (props) => {
     switch (actionType) {
       case "selectAll":
         setSelectAll(true);
-        //setValue(speciesData?.l?.map((i) => String(i.id)));
+        setValue(documentData?.l?.map((i) => String(i.document.id)));
         break;
       case "UnsSelectAll":
         setValue([]);
