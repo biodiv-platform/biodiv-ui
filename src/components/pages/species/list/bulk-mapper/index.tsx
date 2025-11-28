@@ -1,16 +1,22 @@
-import { Box, Spinner, Tabs } from "@chakra-ui/react";
-import { VerticalTabs } from "@components/pages/observation/list/views/list/container";
+import {
+  ActionBar,
+  Box,
+  Button,
+  ButtonGroup,
+  CloseButton,
+  Collapsible,
+  Portal,
+  Spinner,
+  Tabs,
+  Text,
+  useBreakpointValue,
+  useDisclosure
+} from "@chakra-ui/react";
 import { bulkActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
+import { LuCircleCheck, LuRepeat } from "react-icons/lu";
 
-import {
-  DrawerBackdrop,
-  DrawerCloseTrigger,
-  DrawerContent,
-  DrawerHeader,
-  DrawerRoot
-} from "@/components/ui/drawer";
 import { Tooltip } from "@/components/ui/tooltip";
 
 import useSpeciesList from "../use-species-list";
@@ -22,52 +28,181 @@ export enum bulkActions {
 }
 
 export default function BulkMapperModal() {
+  const isSmall = useBreakpointValue({ base: true, md: false });
   const { t } = useTranslation();
-  const { onClose, isOpen } = useSpeciesList();
+  const [tabIndex, setTabIndex] = useState<string | null>("common:usergroups");
+  const {
+    onClose,
+    isOpen,
+    bulkSpeciesIds,
+    onOpen,
+    selectAll,
+    speciesData,
+    handleBulkCheckbox,
+    excludedBulkIds
+  } = useSpeciesList();
+  const { open: isContentVisible, onToggle: toggleContentVisibility } = useDisclosure({
+    defaultOpen: false
+  });
+  useEffect(() => {
+    if (bulkSpeciesIds && bulkSpeciesIds?.length > 0 && !isOpen) {
+      onOpen();
+    }
+    if (bulkSpeciesIds && bulkSpeciesIds?.length == 0 && isOpen) {
+      onClose();
+    }
+  }, [bulkSpeciesIds]);
+
+  const handleSelectAll = () => {
+    alert(`${speciesData.n} ${t("species:select_all")}`);
+    handleBulkCheckbox("selectAll");
+  };
 
   return (
-    <DrawerRoot placement="bottom" onOpenChange={onClose} open={isOpen}>
-      <DrawerBackdrop />
-      <DrawerContent>
-        <DrawerCloseTrigger />
-        <DrawerHeader fontSize={"2xl"} fontWeight={"bold"}>
-          {t("observation:bulk_actions")}
-        </DrawerHeader>
-        <VerticalTabs>
-          <Tabs.Root
-            lazyMount={true}
-            h={{ md: "100%" }}
-            className="tabs"
-            defaultValue={"common:usergroups"}
+    <ActionBar.Root open={isOpen} closeOnInteractOutside={false} onOpenChange={onClose}>
+      <Portal>
+        <ActionBar.Positioner
+          css={{
+            position: "fixed",
+            bottom: "0",
+            left: "0",
+            right: "0",
+            zIndex: 1000
+          }}
+        >
+          <ActionBar.Content
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"flex-start"}
+            width="full"
+            background={"#F0FDFA"}
+            boxShadow={
+              "0 -20px 60px rgba(0, 0, 0, 0.25), 0 -8px 20px rgba(0, 0, 0, 0.2), inset 0 3px 0 rgba(0, 0, 0, 0.2)"
+            }
           >
-            <Tabs.List>
-              {bulkActionTabs.map(({ name, icon, active = true }) => (
-                <Tabs.Trigger value={name} key={name} data-hidden={!active}>
-                  <Tooltip content={t(name)}>
-                    <div>
-                      {icon} <span>{t(name)}</span>
-                    </div>
-                  </Tooltip>
-                </Tabs.Trigger>
-              ))}
-              <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
-            </Tabs.List>
-            <Tabs.Content
-              value="common:usergroups"
-              height="100%"
-              className="tab-content"
-              position="relative"
-              style={{ overflow: "hidden" }}
-            >
-              <Box height="100%" overflowY="auto">
-                <Suspense fallback={<Spinner />}>
-                  <GroupPost />
-                </Suspense>
+            <Collapsible.Root width={"full"}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="flex-start"
+                width={"full"}
+              >
+                <Text fontWeight={"bold"} fontSize={"2xl"}>
+                  Bulk Actions
+                </Text>
+                <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
+                  <ActionBar.SelectionTrigger m={2}>
+                    {selectAll
+                      ? speciesData.n - (excludedBulkIds || []).length
+                      : bulkSpeciesIds?.length}{" "}
+                    {t("observation:bulk_actions_selected")}
+                  </ActionBar.SelectionTrigger>
+                  <ButtonGroup size="sm" variant="outline">
+                    {!isSmall && (
+                      <>
+                        {!selectAll && (
+                          <Button variant="solid" colorPalette="blue" onClick={handleSelectAll}>
+                            <LuCircleCheck />
+                            {t("observation:select_all")}
+                          </Button>
+                        )}
+                        <Button
+                          variant="solid"
+                          colorPalette="red"
+                          onClick={() => handleBulkCheckbox("UnsSelectAll")}
+                        >
+                          <LuRepeat />
+                          {t("observation:unselect")}
+                        </Button>
+                        <Collapsible.Trigger>
+                          <Button
+                            onClick={toggleContentVisibility}
+                            variant={"solid"}
+                            colorPalette={"green"}
+                          >
+                            {isContentVisible ? "Hide actions" : "Show actions"}
+                          </Button>
+                        </Collapsible.Trigger>
+                      </>
+                    )}
+                    <ActionBar.CloseTrigger asChild mr={4}>
+                      <CloseButton size="sm" onClick={toggleContentVisibility} />
+                    </ActionBar.CloseTrigger>
+                  </ButtonGroup>
+                </Box>
               </Box>
-            </Tabs.Content>
-          </Tabs.Root>
-        </VerticalTabs>
-      </DrawerContent>
-    </DrawerRoot>
+              <Box justifyContent="flex-start" width={"full"}>
+                {isSmall && (
+                  <ButtonGroup size="sm" variant="outline" mb={4}>
+                    {!selectAll && (
+                      <Button variant="solid" colorPalette="blue" onClick={handleSelectAll}>
+                        <LuCircleCheck />
+                        {t("observation:select_all")}
+                      </Button>
+                    )}
+                    <Button
+                      variant="solid"
+                      colorPalette="red"
+                      onClick={() => handleBulkCheckbox("UnsSelectAll")}
+                    >
+                      <LuRepeat />
+                      {t("observation:unselect")}
+                    </Button>
+                    <Collapsible.Trigger>
+                      <Button
+                        onClick={toggleContentVisibility}
+                        variant={"solid"}
+                        colorPalette={"green"}
+                      >
+                        {isContentVisible ? "Hide actions" : "Show actions"}
+                      </Button>
+                    </Collapsible.Trigger>
+                  </ButtonGroup>
+                )}
+                <Tabs.Root
+                  lazyMount={true}
+                  h={{ md: "100%" }}
+                  className="tabs"
+                  defaultValue={tabIndex}
+                  onValueChange={(e) => setTabIndex(e.value)}
+                  overflowY={"auto"}
+                >
+                  <Tabs.List>
+                    {bulkActionTabs.map(({ name, icon, active = true }) => (
+                      <Tabs.Trigger value={name} key={name} data-hidden={!active}>
+                        <Tooltip content={t(name)}>
+                          <div>
+                            {icon} <span>{t(name)}</span>
+                          </div>
+                        </Tooltip>
+                      </Tabs.Trigger>
+                    ))}
+                    <Box borderLeft="1px" borderColor="gray.300" flexGrow={1} />
+                  </Tabs.List>
+                  <Box position="relative">
+                    <Collapsible.Content>
+                      <Tabs.Content
+                        value="common:usergroups"
+                        height="100%"
+                        className="tab-content"
+                        position="relative"
+                        style={{ overflow: "hidden" }}
+                      >
+                        <Box height="100%" overflowY="auto">
+                          <Suspense fallback={<Spinner />}>
+                            <GroupPost />
+                          </Suspense>
+                        </Box>
+                      </Tabs.Content>
+                    </Collapsible.Content>
+                  </Box>
+                </Tabs.Root>
+              </Box>
+            </Collapsible.Root>
+          </ActionBar.Content>
+        </ActionBar.Positioner>
+      </Portal>
+    </ActionBar.Root>
   );
 }
