@@ -19,7 +19,7 @@ import { LuCircleCheck, LuRepeat } from "react-icons/lu";
 
 import { Tooltip } from "@/components/ui/tooltip";
 
-import useSpeciesList from "../use-species-list";
+import useDocumentFilter from "../../common/use-document-filter";
 import GroupPost from "./actions/groupTab";
 
 export enum bulkActions {
@@ -31,30 +31,22 @@ export default function BulkMapperModal() {
   const isSmall = useBreakpointValue({ base: true, md: false });
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState<string | null>("common:usergroups");
-  const {
-    onClose,
-    isOpen,
-    bulkSpeciesIds,
-    onOpen,
-    selectAll,
-    speciesData,
-    handleBulkCheckbox,
-    excludedBulkIds
-  } = useSpeciesList();
+  const { onClose, isOpen, bulkDocumentsIds, onOpen, selectAll, documentData, handleBulkCheckbox } =
+    useDocumentFilter();
   const { open: isContentVisible, onToggle: toggleContentVisibility } = useDisclosure({
     defaultOpen: false
   });
   useEffect(() => {
-    if (bulkSpeciesIds && bulkSpeciesIds?.length > 0 && !isOpen) {
+    if (bulkDocumentsIds && bulkDocumentsIds?.length > 0 && !isOpen) {
       onOpen();
     }
-    if (bulkSpeciesIds && bulkSpeciesIds?.length == 0 && isOpen) {
+    if (bulkDocumentsIds && bulkDocumentsIds?.length == 0 && isOpen) {
       onClose();
     }
-  }, [bulkSpeciesIds]);
+  }, [bulkDocumentsIds]);
 
   const handleSelectAll = () => {
-    alert(`${speciesData.n} ${t("species:select_all")}`);
+    alert(`${documentData.n} ${t("document:select_all")}`);
     handleBulkCheckbox("selectAll");
   };
 
@@ -93,9 +85,7 @@ export default function BulkMapperModal() {
                 </Text>
                 <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
                   <ActionBar.SelectionTrigger m={2}>
-                    {selectAll
-                      ? speciesData.n - (excludedBulkIds || []).length
-                      : bulkSpeciesIds?.length}{" "}
+                    {selectAll ? documentData.n : bulkDocumentsIds?.length}{" "}
                     {t("observation:bulk_actions_selected")}
                   </ActionBar.SelectionTrigger>
                   <ButtonGroup size="sm" variant="outline">
@@ -166,7 +156,6 @@ export default function BulkMapperModal() {
                   className="tabs"
                   defaultValue={tabIndex}
                   onValueChange={(e) => setTabIndex(e.value)}
-                  overflowY={"auto"}
                 >
                   <Tabs.List>
                     {bulkActionTabs.map(({ name, icon, active = true }) => (
@@ -182,18 +171,10 @@ export default function BulkMapperModal() {
                   </Tabs.List>
                   <Box position="relative">
                     <Collapsible.Content>
-                      <Tabs.Content
-                        value="common:usergroups"
-                        height="100%"
-                        className="tab-content"
-                        position="relative"
-                        style={{ overflow: "hidden" }}
-                      >
-                        <Box height="100%" overflowY="auto">
-                          <Suspense fallback={<Spinner />}>
-                            <GroupPost />
-                          </Suspense>
-                        </Box>
+                      <Tabs.Content value="common:usergroups">
+                        <Suspense fallback={<Spinner />}>
+                          <GroupPost />
+                        </Suspense>
                       </Tabs.Content>
                     </Collapsible.Content>
                   </Box>

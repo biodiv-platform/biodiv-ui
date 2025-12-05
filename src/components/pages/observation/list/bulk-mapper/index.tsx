@@ -373,7 +373,6 @@ export default function BulkMapperModal() {
                   className="tabs"
                   defaultValue={tabIndex}
                   onValueChange={(e) => setTabIndex(e.value)}
-                  overflowY={"auto"}
                 >
                   <Tabs.List minWidth={"600px"}>
                     {bulkObservationActionTabs.map(({ name, icon, active = true }) => (
