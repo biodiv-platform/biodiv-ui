@@ -8,13 +8,14 @@ import useSpecies from "../use-species";
 import SpeciesRelatedObservations from "./related-observations";
 import TaxonTable from "./taxon-table";
 
-export default function SpeciesSidebar() {
+export default function SpeciesSidebar({ temporalObservedRef, traitsPerMonthRef }) {
   const { currentGroup } = useGlobalState();
   const { species } = useSpecies();
   return (
     <GridItem colSpan={2}>
       <TaxonTable />
       <TemporalObservedOn
+        ref={temporalObservedRef}
         filter={{
           view: "stats",
           max: 8,
@@ -25,6 +26,7 @@ export default function SpeciesSidebar() {
         }}
       />
       <TraitsPerMonth
+        ref={traitsPerMonthRef}
         filter={{
           view: "stats",
           max: 8,

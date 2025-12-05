@@ -4,31 +4,49 @@ import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
 import LineGraph from "./line-graph";
 import useTraitsDistributionData from "./use-traits-distribution-data";
 
-const TraitsPerMonth = ({ filter }) => {
+interface TraitsPerMonthProps {
+  filter: any;
+}
+
+const TraitsPerMonth = forwardRef(({ filter }: TraitsPerMonthProps, ref) => {
   const traits = useTraitsDistributionData({ filter });
   const { t } = useTranslation();
   const chartRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    base64: () => {
+      if (chartRef.current) {
+        return chartRef.current.getBase64();
+      }
+    }
+  }));
 
   const handleDownload = async () => {
-    await waitForAuth();
-    if (chartRef.current) {
-      chartRef.current.downloadChart();
+    try {
+      await waitForAuth();
+      if (chartRef.current) {
+        chartRef.current.downloadChart();
+      }
+      const payload = {
+        filePath: "",
+        filterUrl: window.location.href,
+        status: "success",
+        fileType: "png",
+        sourcetype: "Observations",
+        notes: "Traits Distribution"
+      };
+      axAddDownloadLog(payload);
+    } catch (error) {
+      console.error("Download error:", error);
     }
-    const payload = {
-      filePath: "",
-      filterUrl: window.location.href,
-      status: "success",
-      fileType: "png",
-      sourcetype: "Observations",
-      notes: "Traits Distribution"
-    };
-    axAddDownloadLog(payload);
   };
+
   if (traits.data.isLoading) {
     return <Skeleton h={450} borderRadius="md" />;
   }
@@ -40,7 +58,7 @@ const TraitsPerMonth = ({ filter }) => {
   const reversedList = traits.data.list.slice().reverse();
 
   return (
-    <Box className="white-box" mb={4}>
+    <Box ref={containerRef} className="white-box" mb={4}>
       <BoxHeading styles={{ display: "flex", justifyContent: "space-between" }}>
         📊 {t("observation:list.chart.traitsDistribution")}{" "}
         <Button onClick={handleDownload} variant="ghost" colorPalette="blue">
@@ -52,6 +70,6 @@ const TraitsPerMonth = ({ filter }) => {
       </Box>
     </Box>
   );
-};
+});
 
 export default TraitsPerMonth;

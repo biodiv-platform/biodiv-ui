@@ -3,9 +3,10 @@ import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
+import { toPng } from "html-to-image";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import LazyLoad from "react-lazyload";
 
 import useSpecies from "../../../use-species";
@@ -22,29 +23,88 @@ const onObservationGridHover = ({ feature }: any) => (
   <div>{feature?.properties?.count} Observations</div>
 );
 
-export default function OccuranceRecoardSpeciesField({ valueCallback }) {
-  const { species } = useSpecies();
-  const defaultViewState = React.useMemo(() => getMapCenter(3.1), []);
-  const { lang } = useTranslation();
+interface OccuranceRecoardSpeciesFieldProps {
+  valueCallback: (loaded: boolean) => void;
+}
 
-  useEffect(() => {
-    valueCallback(true);
-  }, []);
+const OccuranceRecoardSpeciesField = forwardRef(
+  ({ valueCallback }: OccuranceRecoardSpeciesFieldProps, ref) => {
+    const { species } = useSpecies();
+    const defaultViewState = React.useMemo(() => getMapCenter(3.1), []);
+    const { lang } = useTranslation();
+    const mapContainerRef = useRef<HTMLDivElement>(null);
+    const [forceLoad, setForceLoad] = useState(false);
 
-  const fetchGridData = async (geoProps) => {
-    const params = {
-      ...geoProps,
-      taxon: species.taxonomyDefinition.id,
-      view: "map"
+    const handleLoadMap = () => {
+      setForceLoad(true);
     };
 
-    const { data } = await axGetObservationMapData(params);
-    return data;
-  };
+    useImperativeHandle(ref, () => ({
+      captureMapAsBase64: async (): Promise<string | null> => {
+        try {
+          // Force load the map first
+          if (!forceLoad) {
+            handleLoadMap();
+            await new Promise((resolve) => setTimeout(resolve, 4000));
+          } else {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+          }
 
-  return (
-    <LazyLoad once={true}>
-      <Box h="500px" overflow="hidden" position="relative" borderRadius="md" bg="gray.300" mb={4}>
+          if (!mapContainerRef.current) {
+            console.error("Map container not found");
+            return null;
+          }
+
+          try {
+            const dataUrl = await toPng(mapContainerRef.current, {
+              backgroundColor: "#FFFFFF"
+            });
+            const parts = dataUrl.split(",");
+            const pureBase64 = parts[1];
+            const result = pureBase64;
+            return result;
+          } catch (error) {
+            console.error("❌ Error in getBase64PNG:", error);
+            return null;
+          }
+        } catch (error) {
+          console.error("Error capturing map:", error);
+          return null;
+        }
+      },
+      getContainer: () => mapContainerRef.current,
+      getMapData: () => ({
+        speciesId: species.taxonomyDefinition.id,
+        title: "Species Occurrence Map",
+        type: "occurrence_map"
+      })
+    }));
+
+    useEffect(() => {
+      valueCallback(true);
+    }, []);
+
+    const fetchGridData = async (geoProps) => {
+      const params = {
+        ...geoProps,
+        taxon: species.taxonomyDefinition.id,
+        view: "map"
+      };
+
+      const { data } = await axGetObservationMapData(params);
+      return data;
+    };
+
+    const MapContent = (
+      <Box
+        ref={mapContainerRef}
+        h="500px"
+        overflow="hidden"
+        position="relative"
+        borderRadius="md"
+        bg="gray.300"
+        mb={4}
+      >
         <NakshaMaplibreLayers
           defaultViewState={defaultViewState}
           loadToC={false}
@@ -75,6 +135,18 @@ export default function OccuranceRecoardSpeciesField({ valueCallback }) {
           ]}
         />
       </Box>
-    </LazyLoad>
-  );
-}
+    );
+
+    return forceLoad ? (
+      MapContent
+    ) : (
+      <LazyLoad once={true} height={500}>
+        {MapContent}
+      </LazyLoad>
+    );
+  }
+);
+
+OccuranceRecoardSpeciesField.displayName = "OccuranceRecoardSpeciesField";
+
+export default OccuranceRecoardSpeciesField;

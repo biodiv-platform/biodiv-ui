@@ -12,6 +12,7 @@ import DeleteActionButton from "@components/@core/action-buttons/delete";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { SubmitButton } from "@components/form/submit-button";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
+import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
@@ -31,7 +32,7 @@ import {
 import notification, { NotificationType } from "@utils/notification";
 import { normalizeSpeciesPayload } from "@utils/species";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuPencil } from "react-icons/lu";
 import * as Yup from "yup";
@@ -45,6 +46,11 @@ import {
   DialogHeader,
   DialogRoot
 } from "@/components/ui/dialog";
+import { toaster } from "@/components/ui/toaster";
+import { ResourceType } from "@/interfaces/custom";
+import { axAddDownloadLog } from "@/services/user.service";
+import { axDownloadSpecies } from "@/services/utility.service";
+import { waitForAuth } from "@/utils/auth";
 
 import { SpeciesActivity } from "./activity";
 import SpeciesCommonNamesContainer from "./common-names";
@@ -84,6 +90,10 @@ export default function SpeciesShowPageComponent({
     () => generateReferencesList(species.fieldData),
     [species.fieldData]
   );
+
+  const temporalObservedRef = useRef<{ base64: () => Promise<string> } | null>(null);
+  const traitsPerMonthRef = useRef<{ base64: () => Promise<string> } | null>(null);
+  const observationsMap = useRef<{ captureMapAsBase64: () => Promise<string> } | null>(null);
 
   useEffect(() => {
     setSpecies(initialSpecies);
@@ -217,6 +227,172 @@ export default function SpeciesShowPageComponent({
     }
   };
 
+  const languagesData = useMemo(() => {
+    const commonNames = species.taxonomicNames?.commonNames || [];
+
+    return commonNames.reduce((acc, curr) => {
+      if (!curr?.name) return acc;
+
+      const languageName = curr?.language?.name || "Other";
+
+      if (!acc[languageName]) {
+        acc[languageName] = [];
+      }
+
+      acc[languageName].push(curr.name);
+      return acc;
+    }, {});
+  }, [species.taxonomicNames?.commonNames]);
+
+  function convertToSimpleStructure(originalData) {
+    const SPECIAL_FIELD_IDS = {
+      DESCRIPTION: 65,
+      HABITAT: 82
+    };
+
+    const extractValues = (fieldObj) =>
+      fieldObj.values?.map((obj) => ({
+        description: obj.fieldData?.description,
+        attributions: obj.attributions,
+        license: obj.license?.name,
+        contributor: obj.contributor?.map((contrib) => contrib.name),
+        languageId: obj.fieldData?.languageId
+      })) || [];
+
+    const transformTraits = (traits) =>
+      traits
+        ?.filter((trait) => trait?.values?.length > 0)
+        .map((trait) => ({
+          name: trait.name,
+          options:
+            trait.options?.reduce((acc, obj) => {
+              acc[obj.traitValueId] = obj.icon ? `${obj.value}|${obj.icon}` : obj.value;
+              return acc;
+            }, {}) || {},
+          values: trait.values.map((obj) => ({
+            valueId: obj.valueId,
+            value: obj.value,
+            fromDate: obj.fromDate,
+            toDate: obj.toDate
+          })),
+          dataType: trait.dataType,
+          units: trait.units,
+          icon: trait.icon
+        })) || [];
+
+    const hasData = (fieldObj) =>
+      fieldObj.values?.length > 0 ||
+      transformTraits(fieldObj.traits).length > 0 ||
+      fieldObj.id === SPECIAL_FIELD_IDS.DESCRIPTION ||
+      fieldObj.id === SPECIAL_FIELD_IDS.HABITAT;
+
+    const hasDataInBranch = (field) => {
+      const fieldObj = field.parentField || field;
+      return hasData(fieldObj) || field.childField?.some((child) => hasDataInBranch(child));
+    };
+
+    const transformField = (field) => {
+      if (!hasDataInBranch(field)) return null;
+
+      const fieldObj = field.parentField || field;
+
+      return {
+        id: fieldObj.id,
+        name: fieldObj.header || "",
+        values: extractValues(fieldObj),
+        traits: transformTraits(fieldObj.traits),
+        childField: field.childField?.map(transformField).filter(Boolean) || []
+      };
+    };
+
+    return originalData.map(transformField).filter(Boolean);
+  }
+
+  const simplifiedData = convertToSimpleStructure(species.fieldData);
+
+  const downloadSpecies = async () => {
+    await waitForAuth();
+    const toastId = toaster.create({
+      type: "loading",
+      title: "Generating PDF...",
+      duration: Infinity,
+      closable: false
+    });
+    if (temporalObservedRef.current && traitsPerMonthRef.current && observationsMap.current) {
+      const chartBase64 = await temporalObservedRef.current.base64();
+      const traitsBase64 = await traitsPerMonthRef.current.base64();
+      const mapBase64 = await observationsMap.current.captureMapAsBase64();
+
+      const { success, data } = await axDownloadSpecies({
+        url: SITE_CONFIG.SITE.URL,
+        languageId: languageId,
+        title: species?.taxonomyDefinition?.italicisedForm,
+        speciesGroup: species.speciesGroup?.name,
+        badge: species.taxonomyDefinition.status,
+        synonyms: species.taxonomicNames.synonyms.map((obj) => obj.italicisedForm),
+        taxonomy: species.breadCrumbs,
+        commonNames: languagesData,
+        conceptNames: species.fieldData.map((obj) => obj.parentField.header),
+        fieldData: simplifiedData,
+        references:
+          fieldsRender?.reduce((acc, [key, values]) => {
+            acc[key] = values?.map((obj) => obj[0]);
+            return acc;
+          }, {}) || {},
+        chartImage: chartBase64,
+        traitsChart: traitsBase64,
+        observationMap: mapBase64,
+        resourceData:
+          species?.resourceData
+            ?.filter((r) => r.resource.type !== ResourceType.Icon)
+            .map((obj) => obj.resource.fileName) || [],
+        documentMetaList: species.documentMetaList.map((obj) => ({
+          id: obj.id,
+          title: obj.title,
+          user: obj.author.name,
+          pic: obj.author.profilePic
+        })),
+        commonReferences: commonReferences.map((obj) => obj.title)
+      });
+
+      if (success) {
+        toaster.update(toastId, {
+          type: "success",
+          title: "PDF Generated!",
+          duration: 5000,
+          closable: true
+        });
+        if (data instanceof Blob) {
+          const url = window.URL.createObjectURL(data);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${species?.taxonomyDefinition?.name}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+
+          const payload = {
+            filePath: "",
+            filterUrl: window.location.href,
+            status: "success",
+            fileType: "pdf",
+            sourcetype: "Species",
+            notes: species?.taxonomyDefinition?.name
+          };
+          axAddDownloadLog(payload);
+        }
+      } else {
+        toaster.update(toastId, {
+          type: "error",
+          title: "PDF Generation Failed",
+          duration: 5000,
+          closable: true
+        });
+      }
+    }
+  };
+
   return (
     <SpeciesProvider
       species={species}
@@ -231,7 +407,7 @@ export default function SpeciesShowPageComponent({
     >
       <div className="container mt">
         <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }} maxW="100%" w="full">
-          <SpeciesHeader />
+          <SpeciesHeader downloadSpecies={downloadSpecies} />
           <SpeciesGallery />
         </SimpleGrid>
 
@@ -245,7 +421,7 @@ export default function SpeciesShowPageComponent({
             <SpeciesNavigation />
             <SpeciesSynonymsContainer />
             <SpeciesCommonNamesContainer />
-            <SpeciesFields />
+            <SpeciesFields observationsMap={observationsMap} />
 
             <ToggleablePanel id="123" icon="📚" title="References">
               <Box margin={3}>
@@ -382,7 +558,10 @@ export default function SpeciesShowPageComponent({
             </ToggleablePanel>
           </GridItem>
           <GridItem colSpan={2}>
-            <SpeciesSidebar />
+            <SpeciesSidebar
+              temporalObservedRef={temporalObservedRef}
+              traitsPerMonthRef={traitsPerMonthRef}
+            />
           </GridItem>
         </Grid>
 
