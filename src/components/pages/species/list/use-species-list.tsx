@@ -39,6 +39,8 @@ interface SpeciesContextProps {
   selectAll?: boolean;
   setSelectAll?;
   bulkSpeciesIds?: any[];
+  excludedBulkIds?: any[];
+  setExcludedBulkIds;
   handleBulkCheckbox: (arg: string) => void;
   isOpen?;
   onOpen?;
@@ -80,16 +82,19 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
   const { open, onOpen, onClose } = useDisclosure();
   const { getItemProps, value: bulkSpeciesIds, setValue } = useCheckboxGroup();
   const { isLoggedIn } = useGlobalState();
+  const [excludedBulkIds, setExcludedBulkIds] = useState<any[]>([]);
 
   const handleBulkCheckbox = (actionType: string) => {
     switch (actionType) {
       case "selectAll":
         setSelectAll(true);
         setValue(speciesData?.l?.map((i) => String(i.id)));
+        setExcludedBulkIds([]);
         break;
       case "UnsSelectAll":
         setValue([]);
         setSelectAll(false);
+        setExcludedBulkIds([]);
         break;
     }
   };
@@ -219,6 +224,8 @@ export const SpeciesListProvider = (props: SpeciesContextProps) => {
         selectAll,
         setSelectAll,
         bulkSpeciesIds,
+        excludedBulkIds,
+        setExcludedBulkIds,
         handleBulkCheckbox,
         authorizedUserGroupList,
         getCheckboxProps: getItemProps,

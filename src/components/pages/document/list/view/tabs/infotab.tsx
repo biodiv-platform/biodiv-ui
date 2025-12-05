@@ -18,6 +18,7 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { Avatar } from "@/components/ui/avatar";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface InfoTabInterface {
   document;
@@ -57,11 +58,20 @@ export default function InfoTab({
   user
 }: InfoTabInterface) {
   const { t } = useTranslation();
-  const { habitats, species } = useDocumentFilter();
+  const { habitats, species, getCheckboxProps } = useDocumentFilter();
   const { currentGroup } = useGlobalState();
 
   return (
     <Flex direction="column" minH="18rem" justifyContent="space-between" p={4}>
+      <Checkbox
+        position="absolute"
+        bg="white"
+        m={2}
+        zIndex={1}
+        borderRadius={2}
+        colorPalette={"blue"}
+        {...getCheckboxProps({ value: document.id })}
+      ></Checkbox>
       <Stack color="gray.600">
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={3}>

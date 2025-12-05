@@ -1,6 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
+import BulkMapperModal from "./bulk-mapper";
 import Filters from "./filters";
 import Headers from "./headers";
 import ListView from "./view/list-view";
@@ -26,6 +27,7 @@ export default function DocumentListPageComponent({ nextOffset }: DocumentListPa
           <ListView no={nextOffset} />
         </Box>
       </SimpleGrid>
+      <BulkMapperModal />
     </Box>
   );
 }

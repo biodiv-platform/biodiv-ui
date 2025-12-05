@@ -1,3 +1,4 @@
+import { useCheckboxGroup, useDisclosure } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useGlobalState from "@hooks/use-global-state";
 import { DocumentData } from "@interfaces/custom";
@@ -5,7 +6,7 @@ import { UserGroupIbp } from "@interfaces/document";
 import { axGetListData } from "@services/document.service";
 import { axGetLandscapeList } from "@services/landscape.service";
 import { axGetSpeciesGroupList } from "@services/taxonomy.service";
-import { axGetUserGroupList } from "@services/usergroup.service";
+import { axGetUserGroupList, getAuthorizedUserGroupById } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
@@ -13,6 +14,8 @@ import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
+
+import { UserGroup } from "@/interfaces/observation";
 
 interface DocumentFilterContextProps {
   filter?;
@@ -30,6 +33,15 @@ interface DocumentFilterContextProps {
   species;
   habitats;
   protectedAreas?: any[];
+  authorizedUserGroupList?: UserGroup[];
+  getCheckboxProps?;
+  bulkDocumentsIds?: any[];
+  selectAll?: boolean;
+  setSelectAll?;
+  handleBulkCheckbox: (arg: string) => void;
+  isOpen?;
+  onOpen?;
+  onClose?;
 }
 
 const DocumentFilterContext = createContext<DocumentFilterContextProps>(
@@ -45,12 +57,38 @@ export const DocumentFilterProvider = (props) => {
   const [habitats, setHabitats] = useState();
   const [species, setSpecies] = useState();
   const [protectedAreas, setProtectedAreas] = useState([]);
+  const { getItemProps, value: bulkDocumentsIds, setValue } = useCheckboxGroup();
+  const [selectAll, setSelectAll] = useState(false);
+  const { open, onOpen, onClose } = useDisclosure();
+  const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
+
+  const handleBulkCheckbox = (actionType: string) => {
+    switch (actionType) {
+      case "selectAll":
+        setSelectAll(true);
+        setValue(documentData?.l?.map((i) => String(i.document.id)));
+        break;
+      case "UnsSelectAll":
+        setValue([]);
+        setSelectAll(false);
+        break;
+    }
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
       axGetUserGroupList().then(({ data }) => setLoggedInUserGroups(data));
+      getAuthorizedUserGroupById().then(({ data }) => {
+        setAuthorizedUserGroupList(data?.ugList || []);
+      });
     }
   }, [isLoggedIn]);
+
+  useDidUpdateEffect(() => {
+    if (selectAll) {
+      handleBulkCheckbox("selectAll");
+    }
+  }, [documentData.l]);
 
   useEffect(() => {
     if (isBrowser) {
@@ -141,7 +179,16 @@ export const DocumentFilterProvider = (props) => {
         loggedInUserGroups,
         habitats,
         species,
-        protectedAreas
+        protectedAreas,
+        authorizedUserGroupList,
+        getCheckboxProps: getItemProps,
+        bulkDocumentsIds,
+        selectAll,
+        setSelectAll,
+        handleBulkCheckbox,
+        isOpen: open,
+        onOpen,
+        onClose
       }}
     >
       {props.children}

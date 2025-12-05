@@ -228,7 +228,7 @@ export default function NameMatchingComponent() {
                 <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
                   {t("taxon:name_matching.upload_description")}
                 </Heading>
-                <Button colorScheme="blue" onClick={open} mb={8}>
+                <Button colorPalette="blue" onClick={open} mb={8}>
                   {t("taxon:name_matching.upload_button")}
                 </Button>
               </Flex>
@@ -306,8 +306,11 @@ export default function NameMatchingComponent() {
                 </Box>
               )}
               <Box mb={4} width="100%">
-                <NativeSelectRoot maxW="10rem" ml="auto" defaultValue={filter}>
-                  <NativeSelectField onChange={(e) => setFilter(e?.currentTarget?.value)}>
+                <NativeSelectRoot maxW="10rem" ml="auto">
+                  <NativeSelectField
+                    value={filter}
+                    onChange={(e) => setFilter(e?.currentTarget?.value)}
+                  >
                     <option value="All">{t("taxon:name_matching.all_filter")}</option>
                     <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
                     <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>
