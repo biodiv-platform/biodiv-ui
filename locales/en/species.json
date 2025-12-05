@@ -67,7 +67,6 @@
   "download": "Download PDF",
   "edit_name": "Manage Common Name",
   "edit_synonym": "Manange Synonym",
-  "failed_to_update_taxon": "Failed to update taxon",
   "field": {
     "delete": {
       "failure": "Unable to delete field",
@@ -95,7 +94,6 @@
   },
   "manage_media": "Manage Media",
   "observation_media": "Observation Media",
-  "please_select_a_taxon": "Please select a taxon",
   "pull_media": "Pull Media",
   "references": "References",
   "related": {
@@ -108,10 +106,8 @@
   },
   "resource": "Resource",
   "scientific_name": "Scientific Name",
-  "search_for_a_new_taxon_name": "Search for a new taxon name",
   "select_all_message": "Species will be selected",
   "share": "Share this species",
-  "species_already_exists": "species with this taxon already exists",
   "species_group": "Species Group",
   "status": "Status",
   "synonym": {
@@ -138,7 +134,6 @@
   },
   "synonyms": "Synonyms",
   "taxon": "Taxonomy",
-  "taxon_updated_successfully": "Taxon updated successfully",
   "toggle_empty": "Toggle Empty",
   "traits": {
     "range_hint": "use : to septate range values",
@@ -149,6 +144,11 @@
     }
   },
   "unfollow_species": "Follow Species",
-  "update_taxon": "Update Taxon",
-  "view_original": "view original"
+  "view_original": "view original",
+  "please_select_a_taxon": "Please select a taxon",
+  "species_already_exists": "species with this taxon already exists",
+  "taxon_updated_successfully": "Taxon updated successfully",
+  "failed_to_update_taxon": "Failed to update taxon",
+  "search_for_a_new_taxon_name": "Search for a new taxon name",
+  "update_taxon": "Update Taxon"
 }
