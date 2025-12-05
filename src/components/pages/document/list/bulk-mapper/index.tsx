@@ -31,15 +31,8 @@ export default function BulkMapperModal() {
   const isSmall = useBreakpointValue({ base: true, md: false });
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState<string | null>("common:usergroups");
-  const {
-    onClose,
-    isOpen,
-    bulkDocumentsIds,
-    onOpen,
-    selectAll,
-    documentData,
-    handleBulkCheckbox
-  } = useDocumentFilter();
+  const { onClose, isOpen, bulkDocumentsIds, onOpen, selectAll, documentData, handleBulkCheckbox } =
+    useDocumentFilter();
   const { open: isContentVisible, onToggle: toggleContentVisibility } = useDisclosure({
     defaultOpen: false
   });
@@ -92,9 +85,7 @@ export default function BulkMapperModal() {
                 </Text>
                 <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
                   <ActionBar.SelectionTrigger m={2}>
-                    {selectAll
-                      ? documentData.n
-                      : bulkDocumentsIds?.length}{" "}
+                    {selectAll ? documentData.n : bulkDocumentsIds?.length}{" "}
                     {t("observation:bulk_actions_selected")}
                   </ActionBar.SelectionTrigger>
                   <ButtonGroup size="sm" variant="outline">
@@ -180,12 +171,10 @@ export default function BulkMapperModal() {
                   </Tabs.List>
                   <Box position="relative">
                     <Collapsible.Content>
-                      <Tabs.Content
-                        value="common:usergroups"
-                      >
-                          <Suspense fallback={<Spinner />}>
-                            <GroupPost />
-                          </Suspense>
+                      <Tabs.Content value="common:usergroups">
+                        <Suspense fallback={<Spinner />}>
+                          <GroupPost />
+                        </Suspense>
                       </Tabs.Content>
                     </Collapsible.Content>
                   </Box>

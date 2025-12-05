@@ -64,14 +64,14 @@ export default function InfoTab({
   return (
     <Flex direction="column" minH="18rem" justifyContent="space-between" p={4}>
       <Checkbox
-          position="absolute"
-          bg="white"
-          m={2}
-          zIndex={1}
-          borderRadius={2}
-          colorPalette={"blue"}
-          {...getCheckboxProps({ value: document.id })}
-        ></Checkbox>
+        position="absolute"
+        bg="white"
+        m={2}
+        zIndex={1}
+        borderRadius={2}
+        colorPalette={"blue"}
+        {...getCheckboxProps({ value: document.id })}
+      ></Checkbox>
       <Stack color="gray.600">
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={3}>

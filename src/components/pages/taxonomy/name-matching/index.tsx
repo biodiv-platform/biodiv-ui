@@ -307,7 +307,10 @@ export default function NameMatchingComponent() {
               )}
               <Box mb={4} width="100%">
                 <NativeSelectRoot maxW="10rem" ml="auto">
-                  <NativeSelectField value={filter} onChange={(e) => setFilter(e?.currentTarget?.value)}>
+                  <NativeSelectField
+                    value={filter}
+                    onChange={(e) => setFilter(e?.currentTarget?.value)}
+                  >
                     <option value="All">{t("taxon:name_matching.all_filter")}</option>
                     <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
                     <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>

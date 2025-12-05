@@ -129,10 +129,12 @@ export default function ListHeader() {
               </NativeSelectField>
             </NativeSelectRoot>
           </Box>
-          {isAdmin && <Button variant="outline" colorPalette="blue" onClick={onListDownload}>
-            <DownloadIcon />
-            {t("observation:download.title")}
-          </Button>}
+          {isAdmin && (
+            <Button variant="outline" colorPalette="blue" onClick={onListDownload}>
+              <DownloadIcon />
+              {t("observation:download.title")}
+            </Button>
+          )}
         </Stack>
       </Flex>
     </>
