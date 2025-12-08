@@ -42,6 +42,7 @@ interface DocumentFilterContextProps {
   isOpen?;
   onOpen?;
   onClose?;
+  hasUgAccess?: boolean;
 }
 
 const DocumentFilterContext = createContext<DocumentFilterContextProps>(
@@ -61,6 +62,7 @@ export const DocumentFilterProvider = (props) => {
   const [selectAll, setSelectAll] = useState(false);
   const { open, onOpen, onClose } = useDisclosure();
   const [authorizedUserGroupList, setAuthorizedUserGroupList] = useState<any[]>([]);
+  const [hasUgAccess, setHasUgAdminAccess] = useState<boolean>(false);
 
   const handleBulkCheckbox = (actionType: string) => {
     switch (actionType) {
@@ -79,6 +81,7 @@ export const DocumentFilterProvider = (props) => {
     if (isLoggedIn) {
       axGetUserGroupList().then(({ data }) => setLoggedInUserGroups(data));
       getAuthorizedUserGroupById().then(({ data }) => {
+        setHasUgAdminAccess(data?.isAdmin || false);
         setAuthorizedUserGroupList(data?.ugList || []);
       });
     }
@@ -188,7 +191,8 @@ export const DocumentFilterProvider = (props) => {
         handleBulkCheckbox,
         isOpen: open,
         onOpen,
-        onClose
+        onClose,
+        hasUgAccess
       }}
     >
       {props.children}
