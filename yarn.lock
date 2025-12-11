@@ -323,10 +323,10 @@
     terra-draw-maplibre-gl-adapter "^1.1.2"
     twind "^0.16.17"
 
-"@biodiv-platform/naksha-maplibre-layers@5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-layers/-/naksha-maplibre-layers-5.0.3.tgz#d2d1a0587cd71746aef7064780948e85645c6506"
-  integrity sha512-/h6UYnzZUDUnXJ3FtP6uBR4yqCPFRd6g5le4DQfKvplUaVkqgLAm2GRlHQRBAMVlDpGZLIwxxNS9z5HsgKoDtw==
+"@biodiv-platform/naksha-maplibre-layers@5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@biodiv-platform/naksha-maplibre-layers/-/naksha-maplibre-layers-5.0.4.tgz#a037750c7aafa3cd71025d1277843c498c37aead"
+  integrity sha512-VTQWNL1DvHFCct1bxrmnswoVL46wALI0j5bA9Bx7qIqppWr4yYIlNwQqP3V93J/z9ajk5tqjGS1ppCU0qln2Ow==
   dependencies:
     "@biodiv-platform/naksha-commons" "5.0.0-beta.1"
     "@bumaga/tabs" "^0.2.0"
@@ -7342,16 +7342,16 @@ murmurhash-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
   integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
 
-naksha-components-react@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-5.0.1.tgz#71babcae75838aadf89b7e1bd80a5996197505e4"
-  integrity sha512-qexQH/ddaIdGdZrW9XyosVwwZr5fA3dDE5P+LUbzt95jJdwc43M/BAKJmWSAFoa2YdCg03CMJjMQ95Y52SVPNw==
+naksha-components-react@5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/naksha-components-react/-/naksha-components-react-5.0.2.tgz#29fee573933ebb2d4b0307414511b1ab2cf7354b"
+  integrity sha512-W1Z1jkhxRgWkheSa2CInf7e5CBJLE7fXJp7RG7bQ95vCs3h6a2932aZb9n4h1Gq+dv+Kv6gwsQARkslDUgIEHA==
   dependencies:
     "@biodiv-platform/eslint-preset" "4.4.9"
     "@biodiv-platform/naksha-gmaps-draw" "4.5.3"
     "@biodiv-platform/naksha-gmaps-view" "4.4.9"
     "@biodiv-platform/naksha-maplibre-draw" "5.0.10"
-    "@biodiv-platform/naksha-maplibre-layers" "5.0.3"
+    "@biodiv-platform/naksha-maplibre-layers" "5.0.4"
     "@biodiv-platform/naksha-maplibre-view" "5.0.3"
     "@biodiv-platform/tsconfig" "4.4.9"
 
