@@ -74,7 +74,8 @@ export default function Map() {
             geoField: "location",
             summaryColumn: ["count"],
             propertyMap: { count: "Count" }
-          }
+          },
+          zoomToFit: userGroupId ? true : false
         }
       ]}
     />
