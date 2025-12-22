@@ -238,7 +238,7 @@ export const axDeleteSpecies = async (speciesId) => {
 export const axGetSpeciesList = async (params, actions = false) => {
   const fetchHttp = actions ? http : plainHttp;
   try {
-    const { data } = await fetchHttp.post(
+    const { data } = await fetchHttp.get(
       `${ENDPOINT.SPECIES}/v1/species/list/extended_species/_doc`,
       { params }
     );
