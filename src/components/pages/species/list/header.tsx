@@ -51,7 +51,7 @@ export default function ListHeader() {
       authorId: user?.id,
       ...rest,
       ...deconstructSpeciesFieldFilter(description),
-      view: "species_list"
+      view: "csv_download"
     };
 
     const { success } = await axGetSpeciesList(params, true);
