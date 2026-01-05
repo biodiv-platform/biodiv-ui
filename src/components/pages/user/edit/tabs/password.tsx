@@ -48,15 +48,15 @@ export default function ChangePasswordTab({ userId }) {
             <TextBoxField
               name="oldPassword"
               type="password"
-              autoComplete="current-password"
+              autoComplete="off"
               hidden={hideOldPassword}
               label={t("user:current_password")}
             />
-            <TextBoxField name="newPassword" type="password" autoComplete="new-password" label={t("user:new_password")} />
+            <TextBoxField name="newPassword" type="password" autoComplete="off" label={t("user:new_password")} />
             <TextBoxField
               name="confirmNewPassword"
               type="password"
-              autoComplete="new-password"
+              autoComplete="off"
               label={t("user:confirm_new_password")}
             />
           </div>

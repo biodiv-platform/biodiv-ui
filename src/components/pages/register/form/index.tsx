@@ -193,14 +193,14 @@ function SignUpForm() {
               name="password"
               type="password"
               label={t("user:password")}
-              autoComplete="new-password"
+              autoComplete="off"
               hidden={isOAuth}
             />
             <TextBoxField
               name="confirmPassword"
               type="password"
               label={t("user:confirm_password")}
-              autoComplete="new-password"
+              autoComplete="off"
               hidden={isOAuth}
             />
 

@@ -144,13 +144,13 @@ export default function ForgotPasswordComponent() {
                   name="password"
                   label={t("user:password")}
                   type="password"
-                  autoComplete="new-password"
+                  autoComplete="off"
                 />
                 <TextBoxField
                   name="confirmPassword"
                   label={t("user:confirm_password")}
                   type="password"
-                  autoComplete="new-password"
+                  autoComplete="off"
                 />
                 <Flex justifyContent="space-between" alignItems="center">
                   <SubmitButton rightIcon={<LuMoveRight />}>

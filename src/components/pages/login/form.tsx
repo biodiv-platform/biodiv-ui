@@ -121,7 +121,7 @@ function SignInForm({ onSuccess, redirect = true, forward }: ISignInFormProps) {
           <TextBoxField
             name="password"
             type="password"
-            autoComplete="current-password"
+            autoComplete="off"
             label={t("auth:form.password")}
           />
           <Flex justifyContent="space-between" alignItems="center">
