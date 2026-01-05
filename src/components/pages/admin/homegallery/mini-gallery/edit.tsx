@@ -13,9 +13,15 @@ import { RadioInputField } from "@/components/form/radio";
 import { SwitchField } from "@/components/form/switch";
 import { TextBoxField } from "@/components/form/text";
 import TranslationTab from "@/components/pages/common/translation-tab";
+import GallerySetupFrom from "@/components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form";
+import GroupGalleryEditForm from "@/components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form/editform";
+import GroupGallerySetupTable from "@/components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-tabel";
 import { axEditMiniGroupGallery } from "@/services/usergroup.service";
 import { axEditMiniGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
+
+import GalleryEditForm from "../gallery-setup/gallery-setup-form/editform";
+import GallerySetupTable from "../gallery-setup/gallery-setup-tabel";
 
 export default function EditMiniGalleryForm({
   setIsEdit,
@@ -24,7 +30,11 @@ export default function EditMiniGalleryForm({
   setMiniGalleryList,
   index,
   languages,
-  groupId
+  groupId,
+  item,
+  miniGallery,
+  setMiniGallery,
+  handleItemFormSubmit
 }) {
   const { t } = useTranslation();
   const {
@@ -117,6 +127,7 @@ export default function EditMiniGalleryForm({
       const gallerySlider = miniGalleryList[index].gallerySlider;
       miniGalleryList[index] = data;
       miniGalleryList[index].gallerySlider = gallerySlider;
+      handleItemFormSubmit();
       setMiniGalleryList(miniGalleryList);
       setIsEdit(false);
     } else {
@@ -126,6 +137,11 @@ export default function EditMiniGalleryForm({
       );
     }
   };
+
+  const [isCreate, setIsCreate] = useState(false);
+  const [isEdit, setItemsEdit] = useState(false);
+  const [editData, setEditData] = useState(item.gallerySlider);
+  const [galleryList, setGalleryList] = useState(item.gallerySlider);
 
   return (
     <>
@@ -175,8 +191,87 @@ export default function EditMiniGalleryForm({
               label={t("group:homepage_customization.mini_gallery_setup.slides_per_view")}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             />
-            <SubmitButton>{t("common:update")}</SubmitButton>
           </Box>
+        </form>
+      </FormProvider>
+      <Box w="full" p={4} className="fadeInUp white-box" overflowX="auto">
+        {isEdit ? (
+          groupId == -1 ? (
+            <GalleryEditForm
+              setIsEdit={setItemsEdit}
+              setGalleryList={(v) => {
+                setGalleryList(v);
+                miniGallery[index].gallerySlider = v;
+                setMiniGallery(miniGallery);
+              }}
+              editGalleryData={editData}
+              languages={languages}
+              galleryId={Number(item.galleryId)}
+              index={index}
+              vertical={item.isVertical}
+            />
+          ) : (
+            <GroupGalleryEditForm
+              setIsEdit={setItemsEdit}
+              setGalleryList={(v) => {
+                setGalleryList(v);
+                miniGallery[index].gallerySlider = v;
+                setMiniGallery(miniGallery);
+              }}
+              editGalleryData={editData}
+              languages={languages}
+              galleryId={Number(item.galleryId)}
+              index={index}
+              vertical={item.isVertical}
+            />
+          )
+        ) : isCreate ? (
+          <GallerySetupFrom
+            setIsCreate={setIsCreate}
+            galleryList={galleryList}
+            setGalleryList={(v) => {
+              setGalleryList(v);
+              miniGallery[index].gallerySlider = v;
+              setMiniGallery(miniGallery);
+            }}
+            languages={languages}
+            group={false}
+            galleryId={Number(item.galleryId)}
+            vertical={item.isVertical}
+          />
+        ) : groupId == -1 ? (
+          <GallerySetupTable
+            setIsCreate={setIsCreate}
+            setGalleryList={(v) => {
+              setGalleryList(v);
+              miniGallery[index].gallerySlider = v;
+              setMiniGallery(miniGallery);
+            }}
+            galleryList={galleryList}
+            setIsEdit={setItemsEdit}
+            setEditGalleryData={setEditData}
+            galleryId={item.galleryId}
+          />
+        ) : (
+          <GroupGallerySetupTable
+            setIsCreate={setIsCreate}
+            setGalleryList={(v) => {
+              setGalleryList(v);
+              miniGallery[index].gallerySlider = v;
+              setMiniGallery(miniGallery);
+            }}
+            galleryList={galleryList}
+            setIsEdit={setItemsEdit}
+            setEditGalleryData={setEditData}
+            galleryId={item.galleryId}
+            userGroupId={item.galleryId ? groupId : null}
+          />
+        )}
+      </Box>
+
+      <FormProvider {...hForm}>
+        <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
+          <SubmitButton>{t("common:update")}</SubmitButton>
         </form>
       </FormProvider>
     </>
