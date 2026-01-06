@@ -13,7 +13,6 @@ export default function MiniGallery({
   miniGallery,
   setMiniGallery,
   languages,
-  handleFormSubmit,
   groupId = -1,
   mode = "edit"
 }) {
@@ -22,7 +21,6 @@ export default function MiniGallery({
   const [isGalleryEdit, setIsGalleryEdit] = useState(false);
   const [editGalleryData, setEditGalleryData] = useState(miniGallery);
   const [editIndex, setEditIndex] = useState(0);
-  const [, setOpenIndex] = useState(null);
   return (
     <Box>
       {mode == "edit" && isGalleryEdit ? (
@@ -38,7 +36,6 @@ export default function MiniGallery({
             item={miniGallery[editIndex]}
             setMiniGallery={setMiniGallery}
             miniGallery={miniGallery}
-            handleItemFormSubmit={handleFormSubmit}
           />
         </Box>
       ) : isGalleryCreate ? (
@@ -48,7 +45,6 @@ export default function MiniGallery({
             miniGalleryList={miniGallery}
             setMiniGalleryList={setMiniGallery}
             languages={languages}
-            setOpenIndex={setOpenIndex}
             groupId={groupId}
             mode={mode}
           />

@@ -22,7 +22,6 @@ export default function CreateMiniGalleryForm({
   miniGalleryList,
   setMiniGalleryList,
   languages,
-  setOpenIndex,
   groupId,
   mode
 }) {
@@ -94,7 +93,6 @@ export default function CreateMiniGalleryForm({
           t("group:homepage_customization.mini_gallery_setup.create_success"),
           NotificationType.Success
         );
-        setOpenIndex(miniGalleryList.length);
         data.gallerySlider = [];
         setMiniGalleryList([...miniGalleryList, data]);
         setIsCreate(false);
@@ -109,7 +107,6 @@ export default function CreateMiniGalleryForm({
         t("group:homepage_customization.mini_gallery_setup.create_success"),
         NotificationType.Success
       );
-      setOpenIndex(miniGalleryList.length);
       payload.gallerySlider = [];
       payload.isActive = true;
       setMiniGalleryList([...miniGalleryList, payload]);

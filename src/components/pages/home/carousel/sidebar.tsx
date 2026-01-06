@@ -67,12 +67,14 @@ export default function Sidebar({ resource, mini = false }) {
           >
             {resource.customDescripition}
           </Text>
-          <ReadMore
-            resource={resource}
-            readMoreButtonText={readMoreButtonText}
-            readMoreUIType={readMoreUIType}
-            //mini={mini}
-          />
+          {readMoreUIType != "none" && (
+            <ReadMore
+              resource={resource}
+              readMoreButtonText={readMoreButtonText}
+              readMoreUIType={readMoreUIType}
+              //mini={mini}
+            />
+          )}
         </Box>
       </Center>
     </BlurBox>

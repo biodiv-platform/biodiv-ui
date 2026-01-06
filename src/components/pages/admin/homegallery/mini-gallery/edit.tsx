@@ -33,8 +33,7 @@ export default function EditMiniGalleryForm({
   groupId,
   item,
   miniGallery,
-  setMiniGallery,
-  handleItemFormSubmit
+  setMiniGallery
 }) {
   const { t } = useTranslation();
   const {
@@ -127,7 +126,6 @@ export default function EditMiniGalleryForm({
       const gallerySlider = miniGalleryList[index].gallerySlider;
       miniGalleryList[index] = data;
       miniGalleryList[index].gallerySlider = gallerySlider;
-      handleItemFormSubmit();
       setMiniGalleryList(miniGalleryList);
       setIsEdit(false);
     } else {
@@ -192,8 +190,10 @@ export default function EditMiniGalleryForm({
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             />
           </Box>
+          <SubmitButton>{t("common:update")}</SubmitButton>
         </form>
       </FormProvider>
+      <Box h="1px" w="100%" bg="gray.300" my={4} />
       <Box w="full" p={4} className="fadeInUp white-box" overflowX="auto">
         {isEdit ? (
           groupId == -1 ? (
@@ -238,6 +238,7 @@ export default function EditMiniGalleryForm({
             group={false}
             galleryId={Number(item.galleryId)}
             vertical={item.isVertical}
+            index={index}
           />
         ) : groupId == -1 ? (
           <GallerySetupTable
@@ -268,12 +269,6 @@ export default function EditMiniGalleryForm({
           />
         )}
       </Box>
-
-      <FormProvider {...hForm}>
-        <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
-          <SubmitButton>{t("common:update")}</SubmitButton>
-        </form>
-      </FormProvider>
     </>
   );
 }

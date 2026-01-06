@@ -1,7 +1,7 @@
 import { Badge, Box, Flex, Heading, IconButton } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import useGlobalState from "@/hooks/use-global-state";
 import DeleteIcon from "@/icons/delete";
@@ -12,13 +12,6 @@ import notification, { NotificationType } from "@/utils/notification";
 export default function MiniGalleryItem({ item, index, onEdit, onDelete }) {
   const { t } = useTranslation();
   const { languageId } = useGlobalState();
-  const [, setEditData] = useState(item.gallerySlider);
-  const [, setGalleryList] = useState(item.gallerySlider);
-
-  useEffect(() => {
-    setGalleryList(item.gallerySlider);
-    setEditData(item.gallerySlider);
-  }, [item.gallerySlider]);
 
   const handleDelete = async () => {
     const { success } = await axRemoveMiniGallery(item.galleryId);
