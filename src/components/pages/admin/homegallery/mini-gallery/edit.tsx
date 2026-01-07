@@ -235,7 +235,7 @@ export default function EditMiniGalleryForm({
               setMiniGallery(miniGallery);
             }}
             languages={languages}
-            group={false}
+            groupId={groupId}
             galleryId={Number(item.galleryId)}
             vertical={item.isVertical}
             index={index}

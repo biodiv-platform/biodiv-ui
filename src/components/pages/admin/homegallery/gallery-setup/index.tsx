@@ -36,7 +36,7 @@ export default function GallerySetup({
           galleryList={galleryList}
           setGalleryList={setGalleryList}
           languages={languages}
-          group={false}
+          groupId={-1}
         />
       ) : (
         <GallerySetupTable

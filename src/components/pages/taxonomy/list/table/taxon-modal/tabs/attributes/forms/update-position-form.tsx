@@ -45,7 +45,7 @@ export default function UpdatePositionForm({ onDone }) {
           name="position"
           label={t("taxon:modal.attributes.position.title")}
           options={TAXON_POSITION}
-          shouldPortal={true}
+          //shouldPortal={true}
           isRequired={true}
         />
         <SubmitButton leftIcon={<CheckIcon />}>{t("common:save")}</SubmitButton>

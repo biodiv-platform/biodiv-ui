@@ -15,6 +15,10 @@ import * as Yup from "yup";
 
 import TranslationTab from "@/components/pages/common/translation-tab";
 import { Switch } from "@/components/ui/switch";
+import {
+  axCreateGroupHomePageGallery,
+  axInsertMiniGroupHomePageGallery
+} from "@/services/usergroup.service";
 import { axCreateHomePageGallery, axMiniInsertHomePageGallery } from "@/services/utility.service";
 import notification, { NotificationType } from "@/utils/notification";
 
@@ -43,7 +47,7 @@ export default function GallerySetupFrom({
   setGalleryList,
   languages,
   galleryId = -1,
-  group = true,
+  groupId = -1,
   vertical = false,
   index = 0
 }) {
@@ -118,7 +122,7 @@ export default function GallerySetupFrom({
       displayOrder: galleryList.length,
       ...value
     };
-    if (!group) {
+    if (groupId == -1) {
       const { success, data } =
         galleryId == -1
           ? await axCreateHomePageGallery(payload)
@@ -134,8 +138,19 @@ export default function GallerySetupFrom({
         notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
       }
     } else {
-      setGalleryList([...galleryList, payload]);
-      setIsCreate(false);
+      const { success, data } =
+        galleryId == -1
+          ?await axCreateGroupHomePageGallery(groupId, payload)
+          : await axInsertMiniGroupHomePageGallery(groupId, payload);
+      if (success) {
+        notification(t("group:homepage_customization.update.success"), NotificationType.Success);
+        setGalleryList(
+          galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider
+        );
+        setIsCreate(false);
+      } else {
+        notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
+      }
     }
   };
 
@@ -288,7 +303,7 @@ export default function GallerySetupFrom({
             </>
           )}
 
-          {!group && (
+          {groupId == -1 && (
             <CheckboxField
               key={`truncated`}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
