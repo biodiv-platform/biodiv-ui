@@ -66,7 +66,8 @@ export const downloadLogsRow = (data, downloadLabel, unknown) => {
           Header: "File",
           accessor: item,
           Cell: ({ row: { values } }) => {
-            const isDisabled = !adminOrAuthor(values.user.id) || values.type == "PNG";
+            const isDisabled =
+              !adminOrAuthor(values.user.id) || values.type == "PNG" || values.filePath == "";
             return (
               <Button
                 variant="outline"

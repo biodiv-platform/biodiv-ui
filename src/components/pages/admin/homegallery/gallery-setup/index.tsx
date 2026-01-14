@@ -28,7 +28,7 @@ export default function GallerySetup({
           setIsEdit={setIsEdit}
           setGalleryList={setGalleryList}
           editGalleryData={editGalleryData}
-          languages = {languages}
+          languages={languages}
         />
       ) : isCreate ? (
         <GallerySetupFrom

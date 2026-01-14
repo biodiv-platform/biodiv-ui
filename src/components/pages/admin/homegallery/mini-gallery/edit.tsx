@@ -27,8 +27,17 @@ export default function EditMiniGalleryForm({
   groupId
 }) {
   const { t } = useTranslation();
-  const { isActive, isVertical, slidesPerView, translations, id, title, languageId, galleryId, ugId } =
-    editGalleryData;
+  const {
+    isActive,
+    isVertical,
+    slidesPerView,
+    translations,
+    id,
+    title,
+    languageId,
+    galleryId,
+    ugId
+  } = editGalleryData;
 
   const SLIDER_TYPE = [
     {
@@ -94,7 +103,7 @@ export default function EditMiniGalleryForm({
       ...value,
       slidesPerView: Number(value.slidesPerView),
       isVertical: Boolean(value.isVertical),
-      translations: Object.values(value.translations),
+      translations: Object.values(value.translations)
     };
     const { success, data } =
       groupId == -1
@@ -105,9 +114,9 @@ export default function EditMiniGalleryForm({
         t("group:homepage_customization.mini_gallery_setup.edit_success"),
         NotificationType.Success
       );
-      const gallerySlider = miniGalleryList[index].gallerySlider
+      const gallerySlider = miniGalleryList[index].gallerySlider;
       miniGalleryList[index] = data;
-      miniGalleryList[index].gallerySlider = gallerySlider
+      miniGalleryList[index].gallerySlider = gallerySlider;
       setMiniGalleryList(miniGalleryList);
       setIsEdit(false);
     } else {

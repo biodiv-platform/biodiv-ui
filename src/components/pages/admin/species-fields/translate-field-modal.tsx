@@ -1,4 +1,14 @@
-import { Box, Button, Flex, IconButton, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  CloseButton,
+  Dialog,
+  Flex,
+  IconButton,
+  Portal,
+  Text,
+  VStack
+} from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { TextBoxField } from "@components/form/text";
 import SITE_CONFIG from "@configs/site-config";
@@ -10,19 +20,9 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { LuDelete, LuPlus } from "react-icons/lu";
+import { LuPlus, LuTrash2 } from "react-icons/lu";
 import ReactSelect from "react-select";
 import * as Yup from "yup";
-
-import {
-  DialogBackdrop,
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogRoot
-} from "@/components/ui/dialog";
 
 interface FieldTranslation {
   languageId: string;
@@ -184,185 +184,198 @@ const TranslateFieldModal: React.FC<TranslateFieldModalProps> = ({
   if (!field) return null;
 
   return (
-    <DialogRoot open={isOpen} onOpenChange={onClose} size="xl">
-      <DialogBackdrop />
-      <DialogContent>
-        <FormProvider {...hForm}>
-          <form onSubmit={hForm.handleSubmit(handleSubmit)}>
-            <DialogHeader>
-              {t("admin:species_fields.translate")} {fieldType}
-            </DialogHeader>
-            <DialogCloseTrigger />
-            <DialogBody>
-              {/* Original Field Information (Read-only) */}
-              <Box p={4} mb={4} bg="blue.50" borderRadius="md">
-                <VStack align="stretch" gap={3}>
-                  <Box>
-                    <Text fontWeight="medium">{t(`admin:species_fields.${fieldType}_name`)}</Text>
-                    <Text>{field.name}</Text>
+    <Dialog.Root open={isOpen} onOpenChange={onClose} size="xl">
+      <Portal>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <FormProvider {...hForm}>
+              <form onSubmit={hForm.handleSubmit(handleSubmit)}>
+                <Dialog.Header fontSize={"xl"} fontWeight={"bold"}>
+                  {t("admin:species_fields.translate")} {fieldType}
+                </Dialog.Header>
+                <Dialog.CloseTrigger />
+                <Dialog.Body>
+                  {/* Original Field Information (Read-only) */}
+                  <Box p={4} mb={4} bg="blue.50" borderRadius="md">
+                    <VStack align="stretch" gap={3}>
+                      <Box>
+                        <Text fontWeight="medium">
+                          {t(`admin:species_fields.${fieldType}_name`)}
+                        </Text>
+                        <Text>{field.name}</Text>
+                      </Box>
+                      {field.description && (
+                        <Box>
+                          <Text fontWeight="medium">{t("admin:species_fields.description")}</Text>
+                          <Text>{field.description}</Text>
+                        </Box>
+                      )}
+                      {field.urlIdentifier && (
+                        <Box>
+                          <Text fontWeight="medium">
+                            {t("admin:species_fields.url_identifier")}
+                          </Text>
+                          <Text>{field.urlIdentifier}</Text>
+                        </Box>
+                      )}
+                    </VStack>
                   </Box>
-                  {field.description && (
-                    <Box>
-                      <Text fontWeight="medium">{t("admin:species_fields.description")}</Text>
-                      <Text>{field.description}</Text>
-                    </Box>
-                  )}
-                  {field.urlIdentifier && (
-                    <Box>
-                      <Text fontWeight="medium">{t("admin:species_fields.url_identifier")}</Text>
-                      <Text>{field.urlIdentifier}</Text>
-                    </Box>
-                  )}
-                </VStack>
-              </Box>
 
-              {/* Add Translation Button */}
-              <Flex justify="flex-end" mb={4}>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    // Find the English translation data (assuming English languageId is 38)
-                    const englishTranslation = hForm
-                      .getValues("translations")
-                      .find((t) => t.languageId === SITE_CONFIG.LANG.DEFAULT_ID);
+                  {/* Add Translation Button */}
+                  <Flex justify="flex-end" mb={4}>
+                    <Button
+                      size="sm"
+                      variant={"subtle"}
+                      onClick={() => {
+                        // Find the English translation data (assuming English languageId is 38)
+                        const englishTranslation = hForm
+                          .getValues("translations")
+                          .find((t) => t.languageId === SITE_CONFIG.LANG.DEFAULT_ID);
 
-                    // Set empty values but store English values to use as placeholders later
-                    append({
-                      languageId: SITE_CONFIG.LANG.DEFAULT_ID, // Default to French for new translations
-                      header: "",
-                      description: "",
-                      urlIdentifier: ""
-                    });
+                        // Set empty values but store English values to use as placeholders later
+                        append({
+                          languageId: SITE_CONFIG.LANG.DEFAULT_ID, // Default to French for new translations
+                          header: "",
+                          description: "",
+                          urlIdentifier: ""
+                        });
 
-                    // Store English values in React state instead of form
-                    if (englishTranslation) {
-                      setEnglishPlaceholders({
-                        header: englishTranslation.header || "",
-                        description: englishTranslation.description || "",
-                        urlIdentifier: englishTranslation.urlIdentifier || ""
-                      });
-                    }
-
-                    setActiveTab(formFields.length);
-                  }}
-                >
-                  <LuPlus />
-                  {t("admin:species_fields.add_translation")}
-                </Button>
-              </Flex>
-
-              {/* Language Tabs */}
-              <Flex mb={4} flexWrap="wrap" gap={2}>
-                {formFields.map((field, index) => (
-                  <Button
-                    key={field.id}
-                    size="sm"
-                    variant={activeTab === index ? "solid" : "outline"}
-                    onClick={() => setActiveTab(index)}
-                  >
-                    {languages.find(
-                      (lang) => lang.id === hForm.watch(`translations.${index}.languageId`)
-                    )?.name || t("admin:species_fields.language")}
-                    {index > 0 && (
-                      <IconButton
-                        size="xs"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          remove(index);
-                          if (activeTab >= index) {
-                            setActiveTab(Math.max(0, activeTab - 1));
-                          }
-                        }}
-                        ml={2}
-                        aria-label="Remove translation"
-                      >
-                        <LuDelete />
-                      </IconButton>
-                    )}
-                  </Button>
-                ))}
-              </Flex>
-
-              {/* Active Translation Form */}
-              {formFields.map((formField, index) => (
-                <Box
-                  key={formField.id}
-                  display={activeTab === index ? "block" : "none"}
-                  p={4}
-                  bg="gray.50"
-                  borderRadius="md"
-                >
-                  <Text mb={1} fontWeight="medium">
-                    {t("admin:species_fields.language")}{" "}
-                    <Box as="span" color="red.500">
-                      *
-                    </Box>
-                  </Text>
-                  <Box mb={6}>
-                    <ReactSelect
-                      name={`translations.${index}.languageId`}
-                      placeholder={t("admin:species_fields.language")}
-                      options={languages.map((lang) => ({ value: lang.id, label: lang.name }))}
-                      isLoading={isLoadingLanguages}
-                      value={
-                        languages.find(
-                          (lang) => lang.id === hForm.watch(`translations.${index}.languageId`)
-                        )
-                          ? {
-                              value: hForm.watch(`translations.${index}.languageId`),
-                              label: languages.find(
-                                (lang) =>
-                                  lang.id === hForm.watch(`translations.${index}.languageId`)
-                              )?.name
-                            }
-                          : null
-                      }
-                      onChange={(option) => {
-                        if (option) {
-                          hForm.setValue(`translations.${index}.languageId`, option.value);
+                        // Store English values in React state instead of form
+                        if (englishTranslation) {
+                          setEnglishPlaceholders({
+                            header: englishTranslation.header || "",
+                            description: englishTranslation.description || "",
+                            urlIdentifier: englishTranslation.urlIdentifier || ""
+                          });
                         }
+
+                        setActiveTab(formFields.length);
                       }}
-                      className="react-select-container"
-                      classNamePrefix="react-select"
-                    />
-                  </Box>
+                    >
+                      <LuPlus />
+                      {t("admin:species_fields.add_translation")}
+                    </Button>
+                  </Flex>
 
-                  <TextBoxField
-                    name={`translations.${index}.header`}
-                    label={t(`admin:species_fields.${fieldType}_name`)}
-                    isRequired={true}
-                    placeholder={index > 0 ? englishPlaceholders.header : ""}
-                  />
+                  {/* Language Tabs */}
+                  <Flex mb={4} flexWrap="wrap" gap={2}>
+                    {formFields.map((field, index) => (
+                      <Button
+                        key={field.id}
+                        size="sm"
+                        variant={activeTab === index ? "subtle" : "outline"}
+                        onClick={() => setActiveTab(index)}
+                      >
+                        {languages.find(
+                          (lang) => lang.id === hForm.watch(`translations.${index}.languageId`)
+                        )?.name || t("admin:species_fields.language")}
+                        {index > 0 && (
+                          <IconButton
+                            size="xs"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              remove(index);
+                              if (activeTab >= index) {
+                                setActiveTab(Math.max(0, activeTab - 1));
+                              }
+                            }}
+                            ml={2}
+                            aria-label="Remove translation"
+                            variant={"subtle"}
+                          >
+                            <LuTrash2 />
+                          </IconButton>
+                        )}
+                      </Button>
+                    ))}
+                  </Flex>
 
-                  <TextBoxField
-                    name={`translations.${index}.description`}
-                    label={t("admin:species_fields.description")}
-                    isRequired={false}
-                    placeholder={index > 0 ? englishPlaceholders.description : ""}
-                  />
+                  {/* Active Translation Form */}
+                  {formFields.map((formField, index) => (
+                    <Box
+                      key={formField.id}
+                      display={activeTab === index ? "block" : "none"}
+                      p={4}
+                      bg="gray.50"
+                      borderRadius="md"
+                    >
+                      <Text mb={1} fontWeight="medium">
+                        {t("admin:species_fields.language")}{" "}
+                        <Box as="span" color="red.500">
+                          *
+                        </Box>
+                      </Text>
+                      <Box mb={6}>
+                        <ReactSelect
+                          name={`translations.${index}.languageId`}
+                          placeholder={t("admin:species_fields.language")}
+                          options={languages.map((lang) => ({ value: lang.id, label: lang.name }))}
+                          isLoading={isLoadingLanguages}
+                          value={
+                            languages.find(
+                              (lang) => lang.id === hForm.watch(`translations.${index}.languageId`)
+                            )
+                              ? {
+                                  value: hForm.watch(`translations.${index}.languageId`),
+                                  label: languages.find(
+                                    (lang) =>
+                                      lang.id === hForm.watch(`translations.${index}.languageId`)
+                                  )?.name
+                                }
+                              : null
+                          }
+                          onChange={(option) => {
+                            if (option) {
+                              hForm.setValue(`translations.${index}.languageId`, option.value);
+                            }
+                          }}
+                          className="react-select-container"
+                          classNamePrefix="react-select"
+                        />
+                      </Box>
 
-                  <TextBoxField
-                    name={`translations.${index}.urlIdentifier`}
-                    label={t("admin:species_fields.url_identifier")}
-                    isRequired={false}
-                    placeholder={index > 0 ? englishPlaceholders.urlIdentifier : ""}
-                  />
-                </Box>
-              ))}
-            </DialogBody>
+                      <TextBoxField
+                        name={`translations.${index}.header`}
+                        label={t(`admin:species_fields.${fieldType}_name`)}
+                        isRequired={true}
+                        placeholder={index > 0 ? englishPlaceholders.header : ""}
+                      />
 
-            <DialogFooter>
-              <SubmitButton leftIcon={<CheckIcon />} mr={3}>
-                {t("common:save")}
-              </SubmitButton>
-              <Button variant="ghost" onClick={onClose}>
-                {t("common:cancel")}
-              </Button>
-            </DialogFooter>
-          </form>
-        </FormProvider>
-      </DialogContent>
-    </DialogRoot>
+                      <TextBoxField
+                        name={`translations.${index}.description`}
+                        label={t("admin:species_fields.description")}
+                        isRequired={false}
+                        placeholder={index > 0 ? englishPlaceholders.description : ""}
+                      />
+
+                      <TextBoxField
+                        name={`translations.${index}.urlIdentifier`}
+                        label={t("admin:species_fields.url_identifier")}
+                        isRequired={false}
+                        placeholder={index > 0 ? englishPlaceholders.urlIdentifier : ""}
+                      />
+                    </Box>
+                  ))}
+                </Dialog.Body>
+
+                <Dialog.Footer>
+                  <SubmitButton leftIcon={<CheckIcon />} mr={3}>
+                    {t("common:save")}
+                  </SubmitButton>
+                  <Dialog.ActionTrigger asChild>
+                    <Button variant="subtle"> {t("common:cancel")}</Button>
+                  </Dialog.ActionTrigger>
+                </Dialog.Footer>
+              </form>
+            </FormProvider>
+            <Dialog.CloseTrigger asChild>
+              <CloseButton size="sm" />
+            </Dialog.CloseTrigger>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
   );
 };
 

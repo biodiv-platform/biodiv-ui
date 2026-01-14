@@ -15,9 +15,12 @@ import { axFlagDocument, axUnFlagDocument } from "@services/document.service";
 import { getUserImage } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Avatar } from "@/components/ui/avatar";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Role } from "@/interfaces/custom";
+import { hasAccess } from "@/utils/auth";
 
 interface InfoTabInterface {
   document;
@@ -57,11 +60,27 @@ export default function InfoTab({
   user
 }: InfoTabInterface) {
   const { t } = useTranslation();
-  const { habitats, species } = useDocumentFilter();
+  const { habitats, species, getCheckboxProps, hasUgAccess } = useDocumentFilter();
   const { currentGroup } = useGlobalState();
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    setCanEdit(hasAccess([Role.Admin]) || hasUgAccess || false);
+  }, [hasUgAccess]);
 
   return (
     <Flex direction="column" minH="18rem" justifyContent="space-between" p={4}>
+      {canEdit && getCheckboxProps && (
+        <Checkbox
+          position="absolute"
+          bg="white"
+          m={2}
+          zIndex={1}
+          borderRadius={2}
+          colorPalette={"blue"}
+          {...getCheckboxProps({ value: document.id })}
+        ></Checkbox>
+      )}
       <Stack color="gray.600">
         {/* Title + Flag */}
         <Flex justifyContent="space-between" mb={3}>

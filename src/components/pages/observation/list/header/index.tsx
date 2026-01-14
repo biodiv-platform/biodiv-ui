@@ -1,5 +1,4 @@
 import { Box, Button, Flex, HStack, Stack, Tabs, Text, useDisclosure } from "@chakra-ui/react";
-import BulkMapperHeader from "@components/pages/common/bulk-mapper";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import DownloadIcon from "@icons/download";
 import { sortByOptions, viewTabs } from "@static/observation-list";
@@ -14,17 +13,7 @@ import { Switch } from "@/components/ui/switch";
 const DownloadObservationDataModal = React.lazy(() => import("../download-observation-modal"));
 
 export default function ListHeader() {
-  const {
-    filter,
-    setFilter,
-    onOpen: openBulkMappingModal,
-    observationData,
-    handleBulkCheckbox,
-    bulkObservationIds,
-    selectAll,
-    allMedia,
-    addMediaToggle
-  } = useObservationFilter();
+  const { filter, setFilter, observationData, allMedia, addMediaToggle } = useObservationFilter();
   const { t } = useTranslation();
   const { open, onOpen, onClose } = useDisclosure();
 
@@ -47,11 +36,6 @@ export default function ListHeader() {
   const onListDownload = async () => {
     await waitForAuth();
     onOpen();
-  };
-
-  const handleSelectAll = () => {
-    alert(`${observationData.n} ${t("observation:select_all_message")}`);
-    handleBulkCheckbox("selectAll");
   };
 
   const handleMediaToggle = (e) => {
@@ -133,13 +117,6 @@ export default function ListHeader() {
               {t("observation:media_toggle.all")}
             </Text>
           </HStack>
-          <BulkMapperHeader
-            selectAll={selectAll}
-            bulkIds={bulkObservationIds}
-            handleSelectAll={handleSelectAll}
-            handleBulkCheckbox={handleBulkCheckbox}
-            openBulkMappingModal={openBulkMappingModal}
-          />
         </Flex>
       )}
 

@@ -4,9 +4,11 @@
   "add_observation": "ପର୍ଯ୍ୟବେକ୍ଷଣ ଯୋଗ କରନ୍ତୁ |",
   "bulk_action": {
     "failure": "ବଲ୍କ ଆକ୍ସନ୍ ଟ୍ରିଗର କରିବାକୁ ଅସମର୍ଥ |",
-    "success": "ସଫଳତାର ସହିତ ବଲ୍କ ଆକ୍ସନ୍, ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ଶୀଘ୍ର ପ୍ରତିଫଳିତ ହେବ |"
+    "success": "ସଫଳତାର ସହିତ ବଲ୍କ ଆକ୍ସନ୍, ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ଶୀଘ୍ର ପ୍ରତିଫଳିତ ହେବ |",
+    "validation_text": "ଏହି କାର୍ଯ୍ୟଟି ମନୋନୀତ ପର୍ଯ୍ୟବେକ୍ଷଣ ID କୁ ବ valid ଧ / ଅନଲକ୍ କରିବ |"
   },
   "bulk_actions": "ବଲ୍କ କ୍ରିୟା",
+  "bulk_actions_selected": "ମନୋନୀତ |",
   "cf_update_success": "ସଫଳତାର ସହିତ ପର୍ଯ୍ୟବେକ୍ଷଣ କଷ୍ଟମ୍ ଫିଲ୍ଡ |",
   "checklist_annotation": "ଡାଟାବାଟ ଯୋଗ୍ୟ କ୍ଷେତ୍ରଗୁଡିକ |",
   "common_name": "ସାଧାରଣ ନାମ",
@@ -109,7 +111,9 @@
     "top_uploaders_list": {
       "author_header": "ନାମ",
       "count_header": "ଗଣନା",
-      "heading": "ଶୀର୍ଷ ଅପଲୋଡ୍"
+      "heading": "ଶୀର୍ଷ ଅପଲୋଡ୍",
+      "observations": "ପର୍ଯ୍ୟବେକ୍ଷଣ",
+      "species": "ଟ୍ୟାକ୍ସା"
     }
   },
   "location_information": {

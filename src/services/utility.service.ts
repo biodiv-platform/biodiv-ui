@@ -105,8 +105,7 @@ export const axCreateMiniGallery = async (payload) => {
   }
 };
 
-
-export const axEditMiniGallery = async (galleryId,payload) => {
+export const axEditMiniGallery = async (galleryId, payload) => {
   try {
     const { data } = await http.put(
       `${ENDPOINT.UTILITY}/v1/services/homePage/miniGallery/edit/${galleryId}`,
@@ -119,17 +118,15 @@ export const axEditMiniGallery = async (galleryId,payload) => {
   }
 };
 
-export const axRemoveMiniGallery = async(galleryId) => {
+export const axRemoveMiniGallery = async (galleryId) => {
   try {
-    await http.delete(
-      `${ENDPOINT.UTILITY}/v1/services/homePage/miniGallery/remove/${galleryId}`
-    );
-    return {success: true, data: null}
+    await http.delete(`${ENDPOINT.UTILITY}/v1/services/homePage/miniGallery/remove/${galleryId}`);
+    return { success: true, data: null };
   } catch (e) {
-    console.error(e)
-    return {success: false, data: null}
+    console.error(e);
+    return { success: false, data: null };
   }
-}
+};
 
 export const axRemoveHomePageGallery = async (galleryId) => {
   try {
@@ -177,7 +174,10 @@ export const axReorderHomePageGallery = async (payload) => {
 
 export const axReorderMiniHomePageGallery = async (payload) => {
   try {
-    const { data } = await http.put(`${ENDPOINT.UTILITY}/v1/services/homePage/miniSlider/reorder`, payload);
+    const { data } = await http.put(
+      `${ENDPOINT.UTILITY}/v1/services/homePage/miniSlider/reorder`,
+      payload
+    );
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -192,5 +192,76 @@ export const axGetLanguagesWithSpeciesFields = async () => {
   } catch (error) {
     console.error(error);
     return { success: false, data: [] };
+  }
+};
+
+export const axCreateAnnouncement = async (payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.UTILITY}/v1/services/homePage/announcement/create`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+export const axGetAnnouncementList = async (ctx) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.UTILITY}/v1/services/announcement/all`, {
+      params: { ctx }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+export const axRemoveAnnouncement = async (announcementId) => {
+  try {
+    await http.delete(`${ENDPOINT.UTILITY}/v1/services/announcement/remove/${announcementId}`);
+    return { success: true, data: null };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+export const axEditAnnouncement = async (announcementId, payload) => {
+  try {
+    const { data } = await http.put(
+      `${ENDPOINT.UTILITY}/v1/services/announcement/edit/${announcementId}`,
+      payload
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+export const axGetActiveAnnouncement = async () => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/services/announcement/active`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
+export const axDownloadSpecies = async (payload) => {
+  try {
+    const { data } = await http.post(`${ENDPOINT.UTILITY}/v1/services/download`, payload, {
+      responseType: "blob"
+    });
+    const blob = new Blob([data], { type: "application/pdf" });
+    return { success: true, data: blob };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
   }
 };

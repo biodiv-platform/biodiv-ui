@@ -1,5 +1,18 @@
 {
+  "announcement": {
+    "create": "Créer une annonce",
+    "create_failure": "Impossible de créer une annonce",
+    "create_success": "Annonce créée avec succès",
+    "delete_failure": "Impossible de supprimer l'annonce",
+    "delete_success": "Annonce supprimée avec succès",
+    "edit_failure": "Permettre de modifier l'annonce",
+    "edit_success": "Annonce édité avec succès"
+  },
   "links": {
+    "add_species_page": "Ajouter une page d'espèce",
+    "add_taxon": "Ajouter un taxon",
+    "announcements_configure": "Gérer les notifications",
+    "clear_cache": "Vider le cache",
     "name-macthing": "Nom correspondant",
     "notification": "Envoyer une notification push"
   },
@@ -33,5 +46,7 @@
     "translation_save_error": "Traductions de sauvegarde d'erreur",
     "translation_success": "Traductions mises à jour avec succès",
     "translations": "Traductions de champs d'espèces"
-  }
+  },
+  "title": "Tableau de bord d'administration",
+  "utils": "Utilitaires"
 }

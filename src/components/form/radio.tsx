@@ -37,14 +37,16 @@ export const RadioInputField = ({
       label={label}
       {...props}
     >
-      <RadioGroup
-        key={name}
-        {...field}
-        disabled = {disabled}
-      >
+      <RadioGroup key={name} {...field} disabled={disabled}>
         <Stack direction={isInline ? "row" : "column"} py={2}>
           {options.map((o) => (
-            <Radio key={o.value} id={o.value} value={o.value} colorPalette={colorPalette} disabled={disabled}>
+            <Radio
+              key={o.value}
+              id={o.value}
+              value={o.value}
+              colorPalette={colorPalette}
+              disabled={disabled}
+            >
               {o.label}
             </Radio>
           ))}

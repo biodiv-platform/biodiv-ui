@@ -1,5 +1,18 @@
 {
+  "announcement": {
+    "create": "Mamorona fanambarana",
+    "create_failure": "Tsy afaka namorona fanambarana",
+    "create_success": "Filazana noforonina nahomby",
+    "delete_failure": "Tsy afaka namafa ny fanambarana",
+    "delete_success": "Nesorina tamim-pahombiazana ny fanambarana",
+    "edit_failure": "Mamela ny fanovana",
+    "edit_success": "Namboarina tamim-pahombiazana ny fanambarana"
+  },
   "links": {
+    "add_species_page": "Manampia pejy karazana",
+    "add_taxon": "Ampio taxon iray",
+    "announcements_configure": "Mitantana fampandrenesana",
+    "clear_cache": "Cache mazava",
     "name-macthing": "Anarana mifanandrify",
     "notification": "Alefaso ny fanosehana"
   },
@@ -33,5 +46,7 @@
     "translation_save_error": "Hadisoana ny manavotra fandikana",
     "translation_success": "Fandikana nohavaozina soa aman-tsara",
     "translations": "Karazana karazana fandikan-teny"
-  }
+  },
+  "title": "Admin dashboard",
+  "utils": "Uts"
 }

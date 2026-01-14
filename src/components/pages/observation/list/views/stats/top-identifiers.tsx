@@ -14,6 +14,7 @@ const TopIdentifiers = ({ filter }) => {
       data={identifier.identifiersData.data}
       title={t("observation:list.top_identifiers_list.heading")}
       loadMoreIdentifiers={identifier.identifiersData.loadMore}
+      changeSort={identifier.identifiersData.changeSort}
       filter={filter}
     />
   );

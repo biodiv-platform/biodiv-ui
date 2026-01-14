@@ -25,7 +25,7 @@ export default function MiniGallery({
   const [openIndex, setOpenIndex] = useState(null);
   return (
     <Box>
-      {mode=="edit" && isGalleryEdit ? (
+      {mode == "edit" && isGalleryEdit ? (
         <Box w="full" p={4} className="fadeInUp white-box" overflowX="auto">
           <EditMiniGalleryForm
             setIsEdit={setIsGalleryEdit}
@@ -34,7 +34,7 @@ export default function MiniGallery({
             setMiniGalleryList={setMiniGallery}
             index={editIndex}
             languages={languages}
-            groupId = {groupId}
+            groupId={groupId}
           />
         </Box>
       ) : isGalleryCreate ? (
@@ -45,52 +45,54 @@ export default function MiniGallery({
             setMiniGalleryList={setMiniGallery}
             languages={languages}
             setOpenIndex={setOpenIndex}
-            groupId = {groupId}
-            mode= {mode}
+            groupId={groupId}
+            mode={mode}
           />
         </Box>
       ) : (
         <>
-          {mode=="edit" && groupId==-1 ? miniGallery?.map((item, index) => (
-            <MiniGalleryItem
-              key={index}
-              item={item}
-              index={index}
-              languages={languages}
-              onEdit={(i, data) => {
-                setIsGalleryEdit(true);
-                setEditGalleryData(data);
-                setEditIndex(i);
-              }}
-              onDelete={(i) => {
-                setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
-              }}
-              setMiniGallery={setMiniGallery}
-              miniGallery={miniGallery}
-              handleFormSubmit={handleFormSubmit}
-              shouldOpen={index==openIndex}
-            />
-          )):miniGallery?.map((item, index) => (
-            <MiniGroupGalleryItem
-              key={index}
-              item={item}
-              index={index}
-              languages={languages}
-              onEdit={(i, data) => {
-                setIsGalleryEdit(true);
-                setEditGalleryData(data);
-                setEditIndex(i);
-              }}
-              onDelete={(i) => {
-                setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
-              }}
-              setMiniGallery={setMiniGallery}
-              miniGallery={miniGallery}
-              handleFormSubmit={handleFormSubmit}
-              shouldOpen={index==openIndex}
-              groupId={groupId}
-            />
-          ))}
+          {mode == "edit" && groupId == -1
+            ? miniGallery?.map((item, index) => (
+                <MiniGalleryItem
+                  key={index}
+                  item={item}
+                  index={index}
+                  languages={languages}
+                  onEdit={(i, data) => {
+                    setIsGalleryEdit(true);
+                    setEditGalleryData(data);
+                    setEditIndex(i);
+                  }}
+                  onDelete={(i) => {
+                    setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
+                  }}
+                  setMiniGallery={setMiniGallery}
+                  miniGallery={miniGallery}
+                  handleFormSubmit={handleFormSubmit}
+                  shouldOpen={index == openIndex}
+                />
+              ))
+            : miniGallery?.map((item, index) => (
+                <MiniGroupGalleryItem
+                  key={index}
+                  item={item}
+                  index={index}
+                  languages={languages}
+                  onEdit={(i, data) => {
+                    setIsGalleryEdit(true);
+                    setEditGalleryData(data);
+                    setEditIndex(i);
+                  }}
+                  onDelete={(i) => {
+                    setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
+                  }}
+                  setMiniGallery={setMiniGallery}
+                  miniGallery={miniGallery}
+                  handleFormSubmit={handleFormSubmit}
+                  shouldOpen={index == openIndex}
+                  groupId={groupId}
+                />
+              ))}
           <ButtonGroup gap={4} mt={4}>
             <Button colorPalette="blue" onClick={() => setIsGalleryCreate(true)}>
               <AddIcon />

@@ -41,7 +41,7 @@ export interface GallerySlider {
   title?: string;
   customDescripition?: string;
   moreLinks?: string;
-  translations?
+  translations?;
 }
 export interface Habitat {
   id?: number; // int64
@@ -137,4 +137,13 @@ export interface UserIbp {
   name?: string;
   profilePic?: string;
   isAdmin?: boolean;
+}
+
+export interface AnnouncementType {
+  id: number;
+  bgColor: string;
+  color: string;
+  translations: {
+    [key: number]: string;
+  };
 }

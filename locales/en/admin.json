@@ -1,5 +1,18 @@
 {
+  "announcement": {
+    "create": "Create Announcement",
+    "create_failure": "Unable to create announcement",
+    "create_success": "Announcement Created Successfully",
+    "delete_failure": "Unable to delete announcement",
+    "delete_success": "Announcement deleted successfully",
+    "edit_failure": "Enable to edit announcement",
+    "edit_success": "Announcement edited successfully"
+  },
   "links": {
+    "add_species_page": "Add a species page",
+    "add_taxon": "Add a taxon",
+    "announcements_configure": "Manage Notifications",
+    "clear_cache": "Clear cache",
     "name-macthing": "Name Matching",
     "notification": "Send Push-Notification",
     "species_fields": "Species Fields"
@@ -51,5 +64,7 @@
     "translations_management": "Species Fields Translations Management",
     "translations_title": "Manage Field Translations",
     "url_identifier": "URL Identifier"
-  }
+  },
+  "title": "Admin Dashboard",
+  "utils": "Utils"
 }

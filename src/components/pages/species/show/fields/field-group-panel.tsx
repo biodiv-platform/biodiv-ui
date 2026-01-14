@@ -10,7 +10,11 @@ import urlSlug from "url-slug";
 import SpeciesFieldGroup from "./field";
 import useSpeciesFields from "./use-species-field";
 
-export default function FieldGroupPanel({ parentField, childField }: SpeciesField) {
+export default function FieldGroupPanel({
+  parentField,
+  childField,
+  observationsMap
+}: SpeciesField) {
   const { showHiddenFields, toggleHiddenFields } = useSpeciesFields();
   const { t } = useTranslation();
   const [childFieldsHasValue, setChildFieldsHasValue] = useState<boolean>();
@@ -42,6 +46,7 @@ export default function FieldGroupPanel({ parentField, childField }: SpeciesFiel
           childField={childField}
           level={0}
           valueCallback={setChildFieldsHasValue}
+          observationsMap={observationsMap}
         />
 
         {!childFieldsHasValue && !showHiddenFields && <Box mb={4}>{t("common:no_data")}</Box>}

@@ -4,9 +4,11 @@
   "add_observation": "निरीक्षण जोडा",
   "bulk_action": {
     "failure": "मोठ्या प्रमाणात क्रिया ट्रिगर करण्यात अक्षम",
-    "success": "मोठ्या प्रमाणात क्रिया यशस्वीरित्या ट्रिगर केली, बदल लवकरच दिसून येतील"
+    "success": "मोठ्या प्रमाणात क्रिया यशस्वीरित्या ट्रिगर केली, बदल लवकरच दिसून येतील",
+    "validation_text": "ही क्रिया निवडलेल्या निरीक्षण आयडी सत्यापित/अनलॉक करेल"
   },
   "bulk_actions": "मोठ्या प्रमाणात क्रिया",
+  "bulk_actions_selected": "निवडलेले",
   "cf_update_success": "यशस्वीरित्या निरीक्षण सानुकूल फील्ड",
   "checklist_annotation": "डेटाटेबल फील्ड",
   "common_name": "सामान्य नाव",
@@ -109,7 +111,9 @@
     "top_uploaders_list": {
       "author_header": "नाव",
       "count_header": "गणित",
-      "heading": "शीर्ष अपलोडर्स"
+      "heading": "शीर्ष अपलोडर्स",
+      "observations": "निरीक्षणे",
+      "species": "टॅक्स"
     }
   },
   "location_information": {

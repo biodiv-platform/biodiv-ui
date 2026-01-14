@@ -18,9 +18,9 @@ export default function UserGroupListTable() {
     );
   }, 200);
 
-  useEffect(() =>{
-    setFilterGroups(groupListData)
-  }, [groupListData])
+  useEffect(() => {
+    setFilterGroups(groupListData);
+  }, [groupListData]);
 
   return (
     <>

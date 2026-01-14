@@ -1,15 +1,21 @@
-import { Box, Flex, Stack, Tabs, Text } from "@chakra-ui/react";
-import BulkMapperHeader from "@components/pages/common/bulk-mapper";
+import { Box, Button, Flex, Link, Stack, Tabs, Text } from "@chakra-ui/react";
 import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
 import { sortByOptions } from "@static/species";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
+import { LuExternalLink } from "react-icons/lu";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import useGlobalState from "@/hooks/use-global-state";
+import DownloadIcon from "@/icons/download";
+import { Role } from "@/interfaces/custom";
+import { axGetSpeciesList } from "@/services/species.service";
+import { hasAccess } from "@/utils/auth";
+import notification, { NotificationType } from "@/utils/notification";
 
-import useSpeciesList from "./use-species-list";
+import useSpeciesList, { deconstructSpeciesFieldFilter } from "./use-species-list";
 
 export const viewTabs = [
   {
@@ -25,8 +31,10 @@ export const viewTabs = [
 ];
 
 export default function ListHeader() {
-  const { bulkSpeciesIds, speciesData, filter, setFilter, onOpen, selectAll, handleBulkCheckbox } =
-    useSpeciesList();
+  const { user } = useGlobalState();
+  const isAdmin = hasAccess([Role.Admin]);
+
+  const { speciesData, filter, setFilter } = useSpeciesList();
   const { t } = useTranslation();
 
   const handleOnSort = (e) => {
@@ -37,16 +45,37 @@ export default function ListHeader() {
     });
   };
 
+  const onListDownload = async () => {
+    const { view, description, ...rest } = filter.f;
+    const params = {
+      authorId: user?.id,
+      ...rest,
+      ...deconstructSpeciesFieldFilter(description),
+      view: "csv_download"
+    };
+
+    const { success } = await axGetSpeciesList(params, true);
+
+    if (success) {
+      notification(
+        <>
+          {t("observation:download.success")}{" "}
+          <Link href="/user/download-logs">
+            {t("header:menu_secondary.more.download_logs")} <LuExternalLink />
+          </Link>
+        </>,
+        NotificationType.Success
+      );
+    } else {
+      notification(t("observation:download.error"));
+    }
+  };
+
   const handleOnViewChange = (value) => {
     setFilter((_draft) => {
       _draft.f.offset = 0;
       _draft.f.view = value;
     });
-  };
-
-  const handleSelectAll = () => {
-    alert(`${speciesData.n} ${t("species:select_all")}`);
-    handleBulkCheckbox("selectAll");
   };
 
   return (
@@ -100,17 +129,14 @@ export default function ListHeader() {
               </NativeSelectField>
             </NativeSelectRoot>
           </Box>
+          {isAdmin && (
+            <Button variant="outline" colorPalette="blue" onClick={onListDownload}>
+              <DownloadIcon />
+              {t("observation:download.title")}
+            </Button>
+          )}
         </Stack>
       </Flex>
-      <Stack mb={4} direction={"row"} justifyContent="flex-end">
-        <BulkMapperHeader
-          selectAll={selectAll}
-          bulkIds={bulkSpeciesIds}
-          handleSelectAll={handleSelectAll}
-          handleBulkCheckbox={handleBulkCheckbox}
-          openBulkMappingModal={onOpen}
-        />
-      </Stack>
     </>
   );
 }

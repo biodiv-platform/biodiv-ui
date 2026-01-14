@@ -4,9 +4,11 @@
   "add_observation": "Add Observation",
   "bulk_action": {
     "failure": "Unable to trigger bulk action",
-    "success": "Successfully triggered  bulk action, Changes will be reflected  shortly"
+    "success": "Successfully triggered  bulk action, Changes will be reflected  shortly",
+    "validation_text": "This action will validate/unlock the selected observation IDs"
   },
   "bulk_actions": "Bulk Actions",
+  "bulk_actions_selected": "selected",
   "cf_update_success": "Successfully Updated Observation Custom Field",
   "checklist_annotation": "DataTable Fields",
   "common_name": "Common Name",
@@ -109,7 +111,9 @@
     "top_uploaders_list": {
       "author_header": "Name",
       "count_header": "Counts",
-      "heading": "Top uploaders"
+      "heading": "Top uploaders",
+      "observations": "Observations",
+      "species": "Taxa"
     }
   },
   "location_information": {

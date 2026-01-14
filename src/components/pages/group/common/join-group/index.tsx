@@ -72,8 +72,10 @@ export default function JoinUserGroup({
         colorPalette="green"
         onClick={addUserGroupMember}
       >
-        <AddIcon size={"sm"} color={"white"}/>
-        <Text fontSize={"sm"} color={"white"}>{t("group:join")}</Text>
+        <AddIcon size={"sm"} color={"white"} />
+        <Text fontSize={"sm"} color={"white"}>
+          {t("group:join")}
+        </Text>
       </Button>
     ) : (
       <Button
@@ -83,13 +85,17 @@ export default function JoinUserGroup({
         colorPalette="red"
         onClick={removeUserGroupMember}
       >
-        <LuMinus size={"sm"} color={"white"}/>
-        <Text fontSize={"sm"} color={"white"}>{t("group:leave")}</Text>
+        <LuMinus size={"sm"} color={"white"} />
+        <Text fontSize={"sm"} color={"white"}>
+          {t("group:leave")}
+        </Text>
       </Button>
     )
   ) : (
     <Button size="sm" colorPalette="blue" onClick={waitForAuth} hidden={!showSignInRequired}>
-      <Text fontSize={"sm"} color={"white"}>{t("common:session_required")}</Text>
+      <Text fontSize={"sm"} color={"white"}>
+        {t("common:session_required")}
+      </Text>
     </Button>
   );
 }

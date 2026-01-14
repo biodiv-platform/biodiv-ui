@@ -33,7 +33,6 @@ export default function GalleryEditForm({
   index = 0,
   vertical = false
 }) {
-
   const {
     id,
     title,
@@ -77,10 +76,12 @@ export default function GalleryEditForm({
 
   const hForm = useForm<any>({
     mode: "onChange",
-    resolver: yupResolver(Yup.object().shape({
-      translations: validationSchema,
-      ...galleryFieldValidationSchema.fields
-    })),
+    resolver: yupResolver(
+      Yup.object().shape({
+        translations: validationSchema,
+        ...galleryFieldValidationSchema.fields
+      })
+    ),
     context: { isVertical: vertical },
     defaultValues: {
       id,
@@ -100,14 +101,10 @@ export default function GalleryEditForm({
   });
 
   const [color, setColor] = useState(
-    editGalleryData.color
-      ? editGalleryData.color
-      : "rgba(255,255,255,1)"
+    editGalleryData.color ? editGalleryData.color : "rgba(255,255,255,1)"
   );
   const [bgColor, setBgColor] = useState(
-    editGalleryData.bgColor
-      ? editGalleryData.bgColor
-      : "rgba(26, 32, 44, 1)"
+    editGalleryData.bgColor ? editGalleryData.bgColor : "rgba(26, 32, 44, 1)"
   );
 
   const imgUrl = getResourceThumbnail(
@@ -127,7 +124,7 @@ export default function GalleryEditForm({
     });
   };
 
-  const handleFormSubmit = async ({translations, ...value}) => {
+  const handleFormSubmit = async ({ translations, ...value }) => {
     const payload = {
       translations: Object.values(translations),
       color: color,
@@ -150,11 +147,7 @@ export default function GalleryEditForm({
 
     if (success) {
       notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-      setGalleryList(
-        galleryId == -1
-          ? data.gallerySlider
-          : data.miniGallery[index].gallerySlider
-      );
+      setGalleryList(galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider);
       setIsEdit(false);
     } else {
       notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
@@ -186,6 +179,7 @@ export default function GalleryEditForm({
               ? hForm.getValues().translation[SITE_CONFIG.LANG.DEFAULT_ID].title
               : t("group:homepage_customization.resources.title")
           }
+          {...(galleryId != -1 && { maxLength: 20 })}
         />
         <TextBoxField
           name="moreLinks"
@@ -208,13 +202,14 @@ export default function GalleryEditForm({
           key={`description-${translationSelected}`}
           name={`translations.${translationSelected}.description`}
           label={t("group:homepage_customization.table.description")}
+          {...(galleryId != -1 && { maxLength: vertical ? 85 : 275 })}
         />
 
         <TextBoxField
           key={`readmore-${translationSelected}`}
           name={`translations.${translationSelected}.readMoreText`}
           label={t("group:homepage_customization.resources.read_more")}
-          maxLength={30}
+          maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
         />
 
         <SelectInputField

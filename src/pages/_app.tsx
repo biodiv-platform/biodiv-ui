@@ -18,8 +18,10 @@ import NProgress from "nprogress";
 import React, { useEffect } from "react";
 import BusProvider from "react-gbus";
 
+import Announcement from "@/components/@core/announcements";
 import { Toaster } from "@/components/ui/toaster";
 import { customTheme } from "@/configs/theme";
+import { axGetActiveAnnouncement } from "@/services/utility.service";
 
 const AuthWall = dynamic(() => import("@components/@core/container/authwall"), {
   ssr: false
@@ -34,6 +36,7 @@ interface AppProps {
   pageProps;
   pages;
   languageId;
+  announcement;
 }
 
 function MainApp({
@@ -43,6 +46,7 @@ function MainApp({
   groups,
   user,
   languageId,
+  announcement,
   pageProps
 }: AppProps) {
   const config = { header: true, footer: true, ...Component?.config };
@@ -57,13 +61,16 @@ function MainApp({
     <BusProvider>
       <ChakraProvider value={customTheme}>
         <Toaster />
-        <GlobalStateProvider initialState={{ user, domain, groups, currentGroup, languageId }}>
+        <GlobalStateProvider
+          initialState={{ user, domain, groups, currentGroup, languageId, announcement }}
+        >
           <Metadata />
           <div className="content">
             {config.header && (
               <>
                 <NavigationMenuDark />
                 <NavigationMenuLight />
+                <Announcement />
               </>
             )}
             <div id="main">
@@ -86,7 +93,13 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
   const user = getParsedUser(appContext.ctx);
   const languageId = SITE_CONFIG.LANG.LIST[appContext.ctx.locale]?.ID;
 
-  const { currentGroup, groups } = await axGroupList(aReq.href, languageId?languageId: SITE_CONFIG.LANG.DEFAULT_ID,appContext.ctx.locale);
+  const { currentGroup, groups } = await axGroupList(
+    aReq.href,
+    languageId ? languageId : SITE_CONFIG.LANG.DEFAULT_ID,
+    appContext.ctx.locale
+  );
+
+  const { data: announcement } = await axGetActiveAnnouncement();
 
   return {
     pageProps,
@@ -94,7 +107,8 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
     currentGroup,
     domain,
     user,
-    languageId
+    languageId,
+    announcement
   };
 };
 

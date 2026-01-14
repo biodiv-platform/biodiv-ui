@@ -4,9 +4,11 @@
   "add_observation": "Ongeza uchunguzi.",
   "bulk_action": {
     "failure": "Imeshindwa kuanzisha kitendo kikubwa",
-    "success": "Imefaulu kuanzisha hatua nyingi, Mabadiliko yataonekana baada ya muda mfupi"
+    "success": "Imefaulu kuanzisha hatua nyingi, Mabadiliko yataonekana baada ya muda mfupi",
+    "validation_text": "Kitendo hiki kitathibitisha/kufungua vitambulisho vya uchunguzi vilivyochaguliwa"
   },
   "bulk_actions": "Vitendo Vingi",
+  "bulk_actions_selected": "kuchaguliwa",
   "cf_update_success": "Fungua kwa ufanisi uwanja wa desturi",
   "checklist_annotation": "Mashamba ya data",
   "common_name": "Jina la kawaida",
@@ -109,7 +111,9 @@
     "top_uploaders_list": {
       "author_header": "Jina.",
       "count_header": "Hesabu",
-      "heading": "Wapakiaji wa juu"
+      "heading": "Wapakiaji wa juu",
+      "observations": "Uchunguzi",
+      "species": "Taxa"
     }
   },
   "location_information": {

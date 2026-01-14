@@ -1,5 +1,18 @@
 {
+  "announcement": {
+    "create": "ঘোষণা তৈরি করুন",
+    "create_failure": "ঘোষণা তৈরি করতে অক্ষম",
+    "create_success": "ঘোষণা সফলভাবে তৈরি",
+    "delete_failure": "ঘোষণা মুছতে অক্ষম",
+    "delete_success": "ঘোষণা সফলভাবে মুছে ফেলা হয়েছে",
+    "edit_failure": "ঘোষণা সম্পাদনা করতে সক্ষম",
+    "edit_success": "ঘোষণা সফলভাবে সম্পাদিত"
+  },
   "links": {
+    "add_species_page": "একটি প্রজাতির পৃষ্ঠা যুক্ত করুন",
+    "add_taxon": "একটি ট্যাক্সন যুক্ত করুন",
+    "announcements_configure": "বিজ্ঞপ্তি পরিচালনা করুন",
+    "clear_cache": "ক্লিয়ার ক্যাশে",
     "name-macthing": "নাম ম্যাচিং",
     "notification": "ধাক্কা-বিজ্ঞপ্তি পাঠান"
   },
@@ -33,5 +46,7 @@
     "translation_save_error": "অনুবাদ সংরক্ষণ করতে ত্রুটি",
     "translation_success": "অনুবাদগুলি সফলভাবে আপডেট হয়েছে",
     "translations": "প্রজাতির ক্ষেত্র অনুবাদ"
-  }
+  },
+  "title": "অ্যাডমিন ড্যাশবোর্ড",
+  "utils": "ব্যবহার"
 }

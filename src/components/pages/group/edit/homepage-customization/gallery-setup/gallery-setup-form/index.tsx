@@ -79,12 +79,14 @@ export default function GallerySetupFrom({
     ),
     context: { isVertical: vertical },
     defaultValues: {
-      translations: { [SITE_CONFIG.LANG.DEFAULT_ID]: {
-        title: "",
-        languageId: SITE_CONFIG.LANG.DEFAULT_ID,
-        description: "",
-        readMoreText: ""
-      } },
+      translations: {
+        [SITE_CONFIG.LANG.DEFAULT_ID]: {
+          title: "",
+          languageId: SITE_CONFIG.LANG.DEFAULT_ID,
+          description: "",
+          readMoreText: ""
+        }
+      },
       customDescripition: "",
       fileName: undefined,
       moreLinks: "",
@@ -98,7 +100,7 @@ export default function GallerySetupFrom({
   const [color, setColor] = useState("rgba(255,255,255,1)");
   const [bgColor, setBgColor] = useState("rgba(26, 32, 44, 1)");
 
-  const handleFormSubmit = ({translations,title,customDescripition,...value}) => {
+  const handleFormSubmit = ({ translations, title, customDescripition, ...value }) => {
     const payload = {
       translations: Object.values(translations),
       authorId: value?.authorInfo?.id,
@@ -160,24 +162,26 @@ export default function GallerySetupFrom({
         />
         <form onSubmit={hForm.handleSubmit(handleFormSubmit)}>
           {imagePicker ? (
-            <NewResourceForm translation={translationSelected} />
+            <NewResourceForm translation={translationSelected} galleryId={galleryId} />
           ) : (
             <ExsistingResourceForm
               defaultValues={defaultValues}
               setDefaultValues={setDefaultValues}
               translation={translationSelected}
+              galleryId={galleryId}
             />
           )}
           <TextAreaField
             key={`decription-${translationSelected}`}
             name={`translations.${translationSelected}.description`}
             label={t("group:homepage_customization.table.description")}
+            {...(galleryId != -1 && { maxLength: vertical ? 85 : 275 })}
           />
           <TextBoxField
             key={`readmore-${translationSelected}`}
             name={`translations.${translationSelected}.readMoreText`}
             label={t("group:homepage_customization.resources.read_more")}
-            maxLength={30}
+            maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
           />
           <SelectInputField
             key={`readmoreui`}

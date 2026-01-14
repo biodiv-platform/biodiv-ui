@@ -62,7 +62,12 @@ export default function Slide({ resource, mini }) {
   );
 
   return (
-    <Box className="keen-slider__slide" style={{ minWidth: "100%" }} color={resource.color?resource.color:"white"} {...(mini && {bg:"gray.300"})}>
+    <Box
+      className="keen-slider__slide"
+      style={{ minWidth: "100%" }}
+      color={resource.color ? resource.color : "white"}
+      {...(mini && { bg: "gray.300" })}
+    >
       {resource.observationId ? (
         <>
           <LocalLink href={`/observation/show/${resource.observationId}`} prefixGroup={true}>
