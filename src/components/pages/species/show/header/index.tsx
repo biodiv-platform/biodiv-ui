@@ -18,6 +18,7 @@ import React, { useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { LuPencil } from "react-icons/lu";
 
+import NoSSR from "@/components/@core/no-ssr";
 import DownloadIcon from "@/icons/download";
 
 import useSpecies from "../use-species";
@@ -89,12 +90,14 @@ function SpeciesHeader({ downloadSpecies }) {
           <HStack>
             <ScientificName value={species?.taxonomyDefinition?.italicisedForm} />
             {canEditTaxon && currentTaxonId && (
-              <SimpleActionButton
-                icon={<LuPencil />}
-                title="Edit Taxon"
-                onClick={taxonEditActions?.onOpen}
-                colorPalette="green"
-              />
+              <NoSSR>
+                <SimpleActionButton
+                  icon={<LuPencil />}
+                  title="Edit Taxon"
+                  onClick={taxonEditActions?.onOpen}
+                  colorPalette="green"
+                />
+              </NoSSR>
             )}
           </HStack>
         </PageHeading>

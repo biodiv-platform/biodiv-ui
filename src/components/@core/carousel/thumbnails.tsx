@@ -1,4 +1,4 @@
-import { Flex, HStack, Image } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import AudioIcon from "@icons/audio";
 import VideoIcon from "@icons/video";
 import { ResourceType } from "@interfaces/custom";
@@ -6,7 +6,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, getYoutubeImage } from "@utils/media";
 import React from "react";
 
-const Thumbnail = ({ resource }) => {
+export const Thumbnail = ({ resource }) => {
   switch (resource.type) {
     case ResourceType.Icon:
     case ResourceType.Image:
@@ -30,43 +30,19 @@ const Thumbnail = ({ resource }) => {
           src={getYoutubeImage(resource.url, "default")}
         />
       ) : (
-        <VideoIcon />
+        <Box boxSize="100%" display="flex" alignItems="center" justifyContent="center">
+          <VideoIcon />
+        </Box>
       );
 
     case ResourceType.Audio:
-      return <AudioIcon />;
+      return (
+        <Box boxSize="100%" display="flex" alignItems="center" justifyContent="center">
+          <AudioIcon />;
+        </Box>
+      );
 
     default:
       return <>_</>;
   }
 };
-
-function Thumbnails({ resources, moveTo, current }) {
-  return (
-    <HStack justifyContent="center" gap={2} mt={2} maxW="full" overflowY="auto">
-      {resources.map(({ resource }, index) => (
-        <Flex
-          cursor="pointer"
-          transition="all 250ms"
-          boxSize="2.5rem"
-          minW="2.5rem"
-          border="2px"
-          borderRadius="md"
-          borderColor="transparent"
-          bg="gray.300"
-          key={resource.id}
-          onClick={() => moveTo(index)}
-          alignItems="center"
-          justifyContent="center"
-          overflow="hidden"
-          opacity={index === current ? 1 : 0.7}
-          _hover={{ opacity: 1 }}
-        >
-          <Thumbnail resource={resource} />
-        </Flex>
-      ))}
-    </HStack>
-  );
-}
-
-export default Thumbnails;
