@@ -38,12 +38,13 @@ export default function CarouselObservation({
       <IconButton
         {...props}
         ref={ref}
-        size="xs"
-        variant="outline"
+        variant="subtle"
         rounded="full"
         position="absolute"
         zIndex="1"
         bg="bg"
+        opacity={0.4}
+        _hover={{ opacity: 1 }}
       />
     );
   });
