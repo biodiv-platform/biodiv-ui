@@ -2,7 +2,7 @@ import { CheckboxGroup, Image, Input, Stack } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { LuSearch } from "react-icons/lu";
 
 import { Checkbox } from "@/components/ui/checkbox";
@@ -11,11 +11,11 @@ import { InputGroup } from "@/components/ui/input-group";
 import FilterStat from "../stat";
 
 export interface FilterCheckboxesProps {
-  filterKey;
-  label?;
-  translateKey?;
-  statKey?;
-  options;
+  filterKey: string;
+  label?: string;
+  translateKey?: string;
+  statKey?: string;
+  options: any[];
   skipTitleTranslation?: boolean;
   skipOptionsTranslation?: boolean;
   showSearch?: boolean;
@@ -23,90 +23,56 @@ export interface FilterCheckboxesProps {
 
 export default function FilterCheckboxes({
   filterKey,
-  translateKey,
+  translateKey = "",
   statKey,
   options,
   skipOptionsTranslation,
   showSearch
 }: FilterCheckboxesProps) {
   const { filter, addFilter, removeFilter, setAllMedia } = useObservationFilter();
-  const defaultValue = filter?.[filterKey] ? filter?.[filterKey]?.split(",") : [];
   const { t } = useTranslation();
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  const allObservations = ["no_of_images", "no_of_videos", "no_of_audio", "no_media"];
-  const observationsWithMedia = ["no_of_images", "no_of_videos", "no_of_audio"];
 
-  const handleOnChange = (v) => {
-    if (v.length > 0) {
-      addFilter(
-        filterKey,
-        v.toString().split("_").length > 1
-          ? v.toString().split("_")[0] + "|" + v.toString().split("_")[1]
-          : v.toString().split("_")[0]
-      );
+  const [search, setSearch] = useState("");
+
+  const defaultValue = useMemo(
+    () => (filter?.[filterKey] ? filter[filterKey].split(",") : []),
+    [filter, filterKey]
+  );
+
+  const filteredOptions = useMemo(() => {
+    if (!search) return options;
+    return options.filter(({ label }) => label?.toLowerCase().includes(search.toLowerCase()));
+  }, [options, search]);
+
+  const handleOnChange = (values: string[]) => {
+    if (values.length > 0) {
+      addFilter(filterKey, values.join(","));
     } else {
       removeFilter(filterKey);
     }
 
-    if (filterKey == "mediaFilter") {
-      if (v.includes("no_media") || v.length == 0) {
-        setAllMedia(true);
-      } else {
-        setAllMedia(false);
-      }
+    if (filterKey === "mediaFilter") {
+      setAllMedia(values.length === 0 || values.includes("no_media"));
     }
-  };
-
-  const handleOnSearch = (e) => {
-    const searchQuery = e?.target?.value.toLowerCase();
-    setFilteredOptions(options.filter(({ label }) => label.toLowerCase().includes(searchQuery)));
-  };
-
-  const toTitleCase = (input) => {
-    if (typeof input !== "string" || input.length === 0) {
-      return "";
-    }
-    let titleCase = "";
-    let nextTitleCase = true;
-
-    for (let i = 0; i < input.length; i++) {
-      let c = input[i];
-
-      if (c === " ") {
-        nextTitleCase = true;
-      } else if (nextTitleCase) {
-        c = c.toUpperCase();
-        nextTitleCase = false;
-      }
-
-      titleCase += c;
-    }
-
-    return titleCase;
   };
 
   return (
     <>
       {showSearch && (
-        <InputGroup mb={2} pr={4} width={"full"} startElement={<LuSearch color="gray.300" />}>
-          <Input type="text" placeholder={t("common:search")} onChange={handleOnSearch} />
+        <InputGroup mb={2} pr={4} width="full" startElement={<LuSearch color="gray.300" />}>
+          <Input
+            type="text"
+            placeholder={t("common:search")}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </InputGroup>
       )}
-      <CheckboxGroup
-        defaultValue={
-          filterKey != "mediafilter"
-            ? defaultValue
-            : filter?.mediaFilter?.includes("no_media")
-            ? allObservations
-            : observationsWithMedia
-        }
-        onValueChange={handleOnChange}
-        key={filterKey == "mediaFilter" ? filter?.mediaFilter?.toString() : "checkbox-filter-key"}
-        colorPalette={"blue"}
-      >
+
+      <CheckboxGroup value={defaultValue} onValueChange={handleOnChange} colorPalette="blue">
         <Stack>
           {filteredOptions.map(({ label, value, stat, valueIcon }) => (
-            <Checkbox key={label} value={value} alignItems="baseline">
+            <Checkbox key={value} value={value} alignItems="baseline">
               {valueIcon && (
                 <Image
                   src={getTraitIcon(valueIcon, 20)}
@@ -115,12 +81,11 @@ export default function FilterCheckboxes({
                   display="inline"
                   verticalAlign="center"
                   mr={1}
-                  // ignoreFallback={true}
                 />
               )}
-              {skipOptionsTranslation
-                ? label || toTitleCase(value.split("_")[0])
-                : t(translateKey + label)}
+
+              {skipOptionsTranslation ? label : t(`${translateKey}${label}`)}
+
               <FilterStat statKey={statKey} subStatKey={stat || value} />
             </Checkbox>
           ))}
