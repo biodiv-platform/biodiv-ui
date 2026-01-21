@@ -11,11 +11,11 @@ import { InputGroup } from "@/components/ui/input-group";
 import FilterStat from "../stat";
 
 export interface FilterCheckboxesProps {
-  filterKey: string;
-  label?: string;
-  translateKey?: string;
-  statKey?: string;
-  options: any[];
+  filterKey;
+  label?;
+  translateKey?;
+  statKey?;
+  options;
   skipTitleTranslation?: boolean;
   skipOptionsTranslation?: boolean;
   showSearch?: boolean;
