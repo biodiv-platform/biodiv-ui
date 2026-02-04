@@ -8,6 +8,37 @@
     "edit_failure": "Permettre de modifier l'annonce",
     "edit_success": "Annonce édité avec succès"
   },
+  "gbif": {
+    "api": {
+      "create": {
+        "error": "Erreur lors de la création du fichier DWC",
+        "success": "Le fichier DWC a été créé avec succès. Veuillez actualiser pour voir le nouveau fichier."
+      },
+      "delete": {
+        "confirm": "Êtes-vous sûr de vouloir supprimer ce fichier DWC",
+        "error": "Erreur lors de la suppression du fichier DWC",
+        "success": "Fichier DWC supprimé avec succès"
+      }
+    },
+    "generate_new_export": "Générer une nouvelle exportation",
+    "heading": "Exportations de base du GBIF Darwin",
+    "last_generated": "Dernière génération :",
+    "sort": {
+      "Active": "Actif",
+      "All": "Tous",
+      "Deleted": "Supprimé"
+    },
+    "table": {
+      "columns": {
+        "accessed_on": "Consulté le",
+        "actions": "Actes",
+        "created_on": "Créé le",
+        "file_name": "Nom de fichier",
+        "status": "Statut"
+      }
+    },
+    "title": "Éditions GBIF"
+  },
   "links": {
     "add_species_page": "Ajouter une page d'espèce",
     "add_taxon": "Ajouter un taxon",

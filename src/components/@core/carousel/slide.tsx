@@ -6,7 +6,7 @@ import { getInjectableHTML } from "@utils/text";
 import React from "react";
 
 export const NoSlide = ({ speciesGroup }) => (
-  <Flex color="gray.500" w="full" justifyContent="center">
+  <Flex color="gray.500" w="full" justifyContent="center" pt={10}>
     <Image maxW="20rem" src={getLocalIcon(speciesGroup)} />
   </Flex>
 );
@@ -33,7 +33,6 @@ const Slide = ({ resource, alt }) => {
       return (
         <Link target="_blank" href={getResourceRAW(resource.context, resource.fileName)}>
           <Image
-            className="carousel--image"
             loading="lazy"
             src={getResourceThumbnail(resource.context, resource.fileName, RESOURCE_SIZE.PREVIEW)}
             alt={resource.description || alt || resource.fileName}

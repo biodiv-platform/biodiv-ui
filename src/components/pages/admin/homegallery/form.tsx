@@ -57,32 +57,6 @@ export default function HomePageGalleryCustomizationForm({
 
   const handleFormSubmit = async ({ gallerySlider, ...value }) => {
     const payload = {
-      gallerySlider: galleryList.reduce(
-        (acc, item, index) =>
-          item.id
-            ? acc
-            : [
-                ...acc,
-                { ...item, displayOrder: index, translations: Object.values(item.translations) }
-              ],
-        []
-      ),
-      miniGallery: miniGalleryList.map((item) => {
-        const updatedGallerySlider = item.gallerySlider.reduce(
-          (acc: any[], galleryItem: any, index: number) => {
-            if (!galleryItem.id) {
-              acc.push({
-                displayOrder: index,
-                ...galleryItem,
-                translations: Object.values(galleryItem.translations)
-              });
-            }
-            return acc;
-          },
-          []
-        );
-        return { gallerySlider: updatedGallerySlider };
-      }),
       ...value
     };
     const { success, data } = await axInsertHomePageGallery(payload);
@@ -149,10 +123,9 @@ export default function HomePageGalleryCustomizationForm({
           miniGallery={miniGalleryList}
           setMiniGallery={setMiniGalleryList}
           languages={languages}
-          handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
         />
       )}
-      {currentStep != "group:homepage_customization.mini_gallery_setup.title" && (
+      {currentStep == "group:homepage_customization.title" && (
         <Box hidden={isCreate || isEdit} display="flex" m={4} justifyContent="flex-end">
           <Button colorPalette="blue" onClick={hForm.handleSubmit(handleFormSubmit)}>
             {t("common:save")}

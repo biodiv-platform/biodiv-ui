@@ -33,6 +33,7 @@ export default function GallerySetup({
         galleryList={galleryList}
         setGalleryList={setGalleryList}
         languages={languages}
+        groupId={userGroupId}
       />
     </Box>
   ) : (

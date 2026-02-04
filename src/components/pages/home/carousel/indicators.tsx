@@ -21,10 +21,10 @@ const List = styled.ol`
 interface IIndicatorsProps {
   size: number;
   currentSlide: number;
-  scrollTo;
+  setPage;
 }
 
-export default function Indicators({ size, currentSlide, scrollTo }: IIndicatorsProps) {
+export default function Indicators({ size, currentSlide, setPage }: IIndicatorsProps) {
   return (
     <List>
       {Array(size)
@@ -32,7 +32,7 @@ export default function Indicators({ size, currentSlide, scrollTo }: IIndicators
         .map((_, index) => (
           <li
             key={index}
-            onClick={() => scrollTo(index)}
+            onClick={() => setPage(index)}
             className={index === currentSlide ? "active" : ""}
           />
         ))}

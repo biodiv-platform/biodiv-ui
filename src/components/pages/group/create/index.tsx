@@ -682,7 +682,6 @@ export default function CreateGroupPageComponent({
             miniGallery={miniGalleryList}
             setMiniGallery={setMiniGalleryList}
             languages={languages}
-            handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
             mode={"create"}
           />
         )}

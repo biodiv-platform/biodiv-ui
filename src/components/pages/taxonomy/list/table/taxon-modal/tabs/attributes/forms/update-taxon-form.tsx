@@ -133,7 +133,7 @@ export default function UpdateTaxonForm({ onDone }) {
           name="status"
           label={t("taxon:modal.attributes.status.title")}
           options={TAXON_STATUS}
-          shouldPortal={true}
+          //shouldPortal={true}
           isRequired={true}
         />
 

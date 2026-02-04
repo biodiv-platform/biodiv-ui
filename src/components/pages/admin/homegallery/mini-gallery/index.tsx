@@ -13,7 +13,6 @@ export default function MiniGallery({
   miniGallery,
   setMiniGallery,
   languages,
-  handleFormSubmit,
   groupId = -1,
   mode = "edit"
 }) {
@@ -22,7 +21,6 @@ export default function MiniGallery({
   const [isGalleryEdit, setIsGalleryEdit] = useState(false);
   const [editGalleryData, setEditGalleryData] = useState(miniGallery);
   const [editIndex, setEditIndex] = useState(0);
-  const [openIndex, setOpenIndex] = useState(null);
   return (
     <Box>
       {mode == "edit" && isGalleryEdit ? (
@@ -35,6 +33,9 @@ export default function MiniGallery({
             index={editIndex}
             languages={languages}
             groupId={groupId}
+            item={miniGallery[editIndex]}
+            setMiniGallery={setMiniGallery}
+            miniGallery={miniGallery}
           />
         </Box>
       ) : isGalleryCreate ? (
@@ -44,7 +45,6 @@ export default function MiniGallery({
             miniGalleryList={miniGallery}
             setMiniGalleryList={setMiniGallery}
             languages={languages}
-            setOpenIndex={setOpenIndex}
             groupId={groupId}
             mode={mode}
           />
@@ -57,7 +57,6 @@ export default function MiniGallery({
                   key={index}
                   item={item}
                   index={index}
-                  languages={languages}
                   onEdit={(i, data) => {
                     setIsGalleryEdit(true);
                     setEditGalleryData(data);
@@ -66,10 +65,6 @@ export default function MiniGallery({
                   onDelete={(i) => {
                     setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
                   }}
-                  setMiniGallery={setMiniGallery}
-                  miniGallery={miniGallery}
-                  handleFormSubmit={handleFormSubmit}
-                  shouldOpen={index == openIndex}
                 />
               ))
             : miniGallery?.map((item, index) => (
@@ -77,7 +72,6 @@ export default function MiniGallery({
                   key={index}
                   item={item}
                   index={index}
-                  languages={languages}
                   onEdit={(i, data) => {
                     setIsGalleryEdit(true);
                     setEditGalleryData(data);
@@ -86,10 +80,6 @@ export default function MiniGallery({
                   onDelete={(i) => {
                     setMiniGallery(miniGallery.filter((_, idx) => idx !== i));
                   }}
-                  setMiniGallery={setMiniGallery}
-                  miniGallery={miniGallery}
-                  handleFormSubmit={handleFormSubmit}
-                  shouldOpen={index == openIndex}
                   groupId={groupId}
                 />
               ))}

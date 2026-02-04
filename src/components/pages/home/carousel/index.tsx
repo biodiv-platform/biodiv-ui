@@ -1,8 +1,5 @@
-import "keen-slider/keen-slider.min.css";
-
-import { Box, IconButton, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
-import { useKeenSlider } from "keen-slider/react";
-import React, { useState } from "react";
+import { Box, Carousel, IconButton, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
+import React, { useMemo, useState } from "react";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import Sidebar from "./sidebar";
@@ -10,68 +7,26 @@ import Slide from "./slide";
 import SlideInfo from "./slide-info";
 
 export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [sliderLoaded, setSliderLoaded] = useState(false);
+  const [page, setPage] = useState(0);
+
   const [isBig] = useMediaQuery(["(min-width: 1100px)"]);
   const [isMedium] = useMediaQuery(["(min-width: 768px) and (max-width: 1099px)"]);
 
-  const [sliderRef, iSlider] = useKeenSlider<HTMLDivElement>(
-    {
-      loop: !isBig || featured.length > slidesPerView || (isMedium && featured.length > 2),
-      slides: {
-        perView: 1
-      },
-      breakpoints: {
-        "(min-width: 1100px)": {
-          slides: {
-            perView: slidesPerView,
-            spacing: 16
-          }
-        },
-        ...(featured.length > 2 &&
-          slidesPerView > 1 && {
-            "(min-width: 768px) and (max-width: 1099px)": {
-              slides: {
-                perView: 2,
-                spacing: 10
-              }
-            }
-          })
-      },
-      slideChanged: (s) => setCurrentSlide(s?.track?.details?.rel),
-      created: () => setSliderLoaded(true)
-    },
-    [
-      (slider) => {
-        let timeout: ReturnType<typeof setTimeout>;
-        let mouseOver = false;
-        function clearNextTimeout() {
-          clearTimeout(timeout);
-        }
-        function nextTimeout() {
-          clearTimeout(timeout);
-          if (mouseOver) return;
-          timeout = setTimeout(() => {
-            slider.next();
-          }, 7000);
-        }
-        slider.on("created", () => {
-          slider.container.addEventListener("mouseover", () => {
-            mouseOver = true;
-            clearNextTimeout();
-          });
-          slider.container.addEventListener("mouseout", () => {
-            mouseOver = false;
-            nextTimeout();
-          });
-          nextTimeout();
-        });
-        slider.on("dragStarted", clearNextTimeout);
-        slider.on("animationEnded", nextTimeout);
-        slider.on("updated", nextTimeout);
-      }
-    ]
-  );
+  const slidesPerPage = useMemo(() => {
+    if (isBig) return slidesPerView;
+
+    if (isMedium && featured.length > 2 && slidesPerView > 1) {
+      return 2;
+    }
+
+    return 1;
+  }, [isBig, isMedium, slidesPerView, featured.length]);
+
+  const gapResponsive = {
+    base: 4,
+    md: featured.length > 2 && slidesPerView > 1 ? 2.5 : 4,
+    lg: 4
+  };
 
   return (
     <SimpleGrid
@@ -86,7 +41,7 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
         {mini && (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
           <IconButton
             aria-label="Next Slide"
-            onClick={() => iSlider.current?.prev()}
+            onClick={() => setPage(page > 0 ? page - 1 : featured.length - 1)}
             position="absolute"
             top={"40%"}
             zIndex={1}
@@ -96,21 +51,39 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
             <LuArrowLeft size={12} color={"white"} />
           </IconButton>
         )}
-        <Box
-          ref={sliderRef}
-          className="keen-slider fade"
-          style={{ visibility: sliderLoaded ? "visible" : "hidden" }}
+        <Carousel.Root
+          slideCount={featured.length}
+          mx="auto"
+          gap={gapResponsive}
+          position="relative"
+          colorPalette="white"
+          autoplay={{ delay: 5000 }}
+          page={page}
+          onPageChange={(e) => setPage(e.page)}
+          slidesPerPage={slidesPerPage}
         >
-          {featured.map((o) => (
-            <>
-              <Slide resource={o} key={o.id} mini={mini} />
-            </>
-          ))}
-        </Box>
+          <Carousel.Control gap="4" width="full" position="relative">
+            <Carousel.ItemGroup width="full">
+              {featured.map((item, index) => (
+                <Carousel.Item key={index} index={index}>
+                  <Slide resource={item} key={index} mini={mini} />
+                </Carousel.Item>
+              ))}
+            </Carousel.ItemGroup>
+
+            <SlideInfo
+              size={featured.length}
+              resource={featured[page]}
+              currentSlide={page}
+              setPage={setPage}
+              mini={mini}
+            />
+          </Carousel.Control>
+        </Carousel.Root>
         {mini && (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
           <IconButton
             aria-label="Next Slide"
-            onClick={() => iSlider.current?.next()}
+            onClick={() => setPage((page + 1) % featured.length)}
             position="absolute"
             top={"40%"}
             zIndex={1}
@@ -124,14 +97,14 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
         {!mini && (
           <SlideInfo
             size={featured.length}
-            resource={featured[currentSlide]}
-            currentSlide={currentSlide}
-            scrollTo={iSlider?.current?.moveToIdx}
+            resource={featured[page]}
+            currentSlide={page}
+            setPage={setPage}
             mini={mini}
           />
         )}
       </Box>
-      {!mini && <Sidebar resource={featured[currentSlide]} />}
+      {!mini && <Sidebar resource={featured[page]} />}
     </SimpleGrid>
   );
 }
