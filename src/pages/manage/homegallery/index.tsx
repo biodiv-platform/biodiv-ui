@@ -1,10 +1,10 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
-import HomeComponent from "@components/pages/admin/homegallery";
 import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGetAdminHomeInfo, axGetLangList } from "@services/utility.service";
 import React from "react";
 
+import HomeComponent from "@/components/pages/manage/homegallery";
 import { getLanguageId } from "@/utils/i18n";
 
 const HomePage = ({ homeInfo, languagesList }) => (

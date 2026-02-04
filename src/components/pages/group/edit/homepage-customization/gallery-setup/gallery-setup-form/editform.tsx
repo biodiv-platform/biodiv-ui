@@ -212,7 +212,10 @@ export default function GalleryEditForm({
         <TextBoxField
           name="moreLinks"
           label={t("group:homepage_customization.resources.link")}
-          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+          disabled={
+            translationSelected != SITE_CONFIG.LANG.DEFAULT_ID ||
+            hForm.watch().readMoreUIType == "none"
+          }
         />
 
         <TextBoxField
@@ -220,6 +223,7 @@ export default function GalleryEditForm({
           name={`translations.${translationSelected}.readMoreText`}
           label={t("group:homepage_customization.resources.read_more")}
           maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
+          disabled={hForm.watch().readMoreUIType == "none"}
         />
 
         {galleryId == -1 && (

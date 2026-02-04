@@ -22,7 +22,6 @@ const NavigationBox = styled.div`
 `;
 
 function CarouselNavigation() {
-
   return (
     <NavigationBox>
       <Carousel.PrevTrigger asChild>

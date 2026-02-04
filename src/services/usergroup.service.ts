@@ -502,7 +502,7 @@ export const axReorderMiniGroupHomePageGallery = async (userGroupId, payload) =>
 
 export const getAuthorizedUserGroupById = async () => {
   try {
-    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/grouplist/admin`);
+    const { data } = await http.get(`${ENDPOINT.USERGROUP}/v1/group/grouplist/manage`);
     return { success: true, data };
   } catch (e) {
     console.error(e);

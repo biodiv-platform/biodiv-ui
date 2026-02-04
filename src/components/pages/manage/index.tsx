@@ -11,10 +11,10 @@ function AdminComponent() {
     {
       title: t("admin:utils"),
       items: [
-        { href: "/admin/homegallery", label: t("group:homepage_customization.title") },
-        { href: "/admin/announcements", label: t("admin:links.announcements_configure") },
+        { href: "/manage/homegallery", label: t("group:homepage_customization.title") },
+        { href: "/manage/announcements", label: t("admin:links.announcements_configure") },
         { href: "/api/memory-cache/clear", label: t("admin:links.clear_cache") },
-        { href: "/admin/dwc", label: t("admin:gbif.title") }
+        { href: "/manage/dwc", label: t("admin:gbif.title") }
       ]
     },
     {
@@ -42,7 +42,7 @@ function AdminComponent() {
     {
       title: t("header:menu_secondary.species.title"),
       items: [
-        { href: "/admin/species-fields", label: t("admin:links.species_fields") },
+        { href: "/manage/species-fields", label: t("admin:links.species_fields") },
         { href: "/species/create", label: t("admin:links.add_species_page") }
       ]
     }

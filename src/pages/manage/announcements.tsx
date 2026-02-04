@@ -2,7 +2,7 @@ import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import { Role } from "@interfaces/custom";
 import React from "react";
 
-import AnnouncementAdmin from "@/components/pages/admin/announcements";
+import AnnouncementAdmin from "@/components/pages/manage/announcements";
 import { axGetAnnouncementList, axGetLangList } from "@/services/utility.service";
 
 export default function AnnouncementsAdminPage({ languagesList, announcementList }) {
