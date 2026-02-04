@@ -16,16 +16,19 @@ import {
   Text
 } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
+import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { LuChevronLeft, LuChevronRight, LuDownload, LuTrash2 } from "react-icons/lu";
 
 import { axCreateDwc, axDeleteDwcFile } from "@/services/files.service";
-import { formatDate, formatTimeStampFromUTC } from "@/utils/date";
+import { formatTimeStampFromUTC } from "@/utils/date";
 import notification, { NotificationType } from "@/utils/notification";
 
 import useDwcLogsList from "./use-dwc-filter-log";
 
 export default function GbifExportTable() {
+  const { t } = useTranslation();
+
   const { DwcLogData, filter, setFilter, addFilter, resetFilter } = useDwcLogsList();
   const files = DwcLogData?.l || [];
   const filePath = DwcLogData?.filePath;
@@ -87,15 +90,15 @@ export default function GbifExportTable() {
   return (
     <Box mb={4} className="container fadeInUp" pt={6}>
       <HStack mb={3}>
-        <BoxHeading fontSize="2xl">📦 GBIF Darwin Core Exports</BoxHeading>
+        <BoxHeading fontSize="2xl">📦 {t("admin:gbif.heading")}</BoxHeading>
 
         <Spacer />
 
         <NativeSelect.Root width="200px">
           <NativeSelect.Field onChange={handleOnSort}>
-            <option value="">All</option>
-            <option value="false">Active</option>
-            <option value="true">Deleted</option>
+            <option value="">{t("admin:gbif.sort.All")}</option>
+            <option value="false">{t("admin:gbif.sort.Active")}</option>
+            <option value="true">{t("admin:gbif.sort.Deleted")}</option>
           </NativeSelect.Field>
           <NativeSelect.Indicator />
         </NativeSelect.Root>
@@ -106,7 +109,7 @@ export default function GbifExportTable() {
         {/* Header */}
         <HStack justify="space-between" mb={3}>
           <Text fontSize="sm" color="gray.600">
-            Last generated: <strong>{lastGeneratedOn}</strong>
+            {t("admin:gbif.last_generated")} <strong>{lastGeneratedOn}</strong>
           </Text>
 
           <Button
@@ -116,7 +119,7 @@ export default function GbifExportTable() {
             loading={isCreating}
             onClick={handleCreate}
           >
-            Generate New Export
+            {t("admin:gbif.generate_new_export")}
           </Button>
         </HStack>
 
@@ -124,10 +127,13 @@ export default function GbifExportTable() {
         <Table.Root size="sm" variant="outline" striped>
           <Table.Header>
             <Table.Row>
-              <Table.ColumnHeader>File Name</Table.ColumnHeader>
-              <Table.ColumnHeader>Status</Table.ColumnHeader>
-              <Table.ColumnHeader>Created On</Table.ColumnHeader>
-              <Table.ColumnHeader textAlign="center">Actions</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:gbif.table.columns.file_name")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:gbif.table.columns.status")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:gbif.table.columns.accessed_on")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:gbif.table.columns.created_on")}</Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="center">
+                {t("admin:gbif.table.columns.actions")}
+              </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>
 
@@ -148,7 +154,11 @@ export default function GbifExportTable() {
                     {file.status}
                   </Badge>
                 </Table.Cell>
-                <Table.Cell>{file.date ? formatDate(file.date) : "--"}</Table.Cell>
+                <Table.Cell>{file.date ? formatTimeStampFromUTC(file.date) : "--"}</Table.Cell>
+
+                <Table.Cell>
+                  {file.createdDate ? formatTimeStampFromUTC(file.createdDate) : "--"}
+                </Table.Cell>
 
                 <Table.Cell>
                   <HStack justify="center" gap={2}>

@@ -14,7 +14,7 @@ function AdminComponent() {
         { href: "/admin/homegallery", label: t("group:homepage_customization.title") },
         { href: "/admin/announcements", label: t("admin:links.announcements_configure") },
         { href: "/api/memory-cache/clear", label: t("admin:links.clear_cache") },
-        { href: "/dwc", label: t("Dwc") }
+        { href: "/admin/dwc", label: t("admin:gbif.title") }
       ]
     },
     {

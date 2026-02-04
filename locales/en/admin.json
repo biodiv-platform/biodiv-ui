@@ -8,6 +8,31 @@
     "edit_failure": "Enable to edit announcement",
     "edit_success": "Announcement edited successfully"
   },
+  "gbif": {
+    "heading": "GBIF Darwin Core Exports",
+    "generate_new_export": "Generate New Export",
+    "last_generated": "Last Generated:",
+    "sort": {
+      "Active": "Active",
+      "All": "All",
+      "Deleted": "Deleted"
+    },
+    "title": "GBIF Publishing",
+    "table": {
+      "columns": {
+        "accessed_on": "Accessed On",
+        "actions": "Actions",
+        "created_on": "Created On",
+        "deleted": "Deleted",
+        "file_name": "File Name",
+        "id": "ID",
+        "modified_at": "Modified At",
+        "reason_for_deletion": "Reason For Deletion",
+        "status": "Status",
+        "title": "Title"
+      }
+    }
+  },
   "links": {
     "add_species_page": "Add a species page",
     "add_taxon": "Add a taxon",
