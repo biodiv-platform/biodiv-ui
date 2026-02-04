@@ -169,7 +169,7 @@ export default function GbifExportTable() {
                       size="xs"
                       colorScheme="blue"
                       aria-label="Download file"
-                      disabled={file.isDeleted === true}
+                      disabled={file.isDeleted === true || hasInProgress}
                       onClick={() => window.open(`${filePath}${file.fileName}`, "_blank")}
                       colorPalette="blue"
                     >
@@ -180,7 +180,7 @@ export default function GbifExportTable() {
                       size="xs"
                       colorScheme="red"
                       aria-label="Delete file"
-                      disabled={file.isDeleted === true}
+                      disabled={file.isDeleted === true || hasInProgress}
                       onClick={() => handleDelete(file)}
                       colorPalette="red"
                     >
