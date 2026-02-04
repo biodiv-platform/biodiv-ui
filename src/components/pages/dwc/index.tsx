@@ -51,12 +51,15 @@ export default function GbifExportTable() {
   };
 
   const handleDelete = async (file) => {
-    const confirmDelete = window.confirm(`Are you sure you want to delete ${file.fileName}?`);
+    const confirmDelete = window.confirm(`${t("admin:gbif.api.delete.confirm")} ${file.fileName}?`);
+
     if (!confirmDelete) return;
 
     const { success } = await axDeleteDwcFile(file.fileName);
     if (success) {
-      notification("Deleted DWC file", NotificationType.Success);
+      notification(t("admin:gbif.api.delete.success"), NotificationType.Success);
+    } else {
+      notification(t("admin:gbif.api.delete.error"), NotificationType.Error);
     }
   };
 
@@ -67,11 +70,11 @@ export default function GbifExportTable() {
       const { success } = await axCreateDwc();
 
       if (success) {
-        notification("Created DWC file", NotificationType.Success);
+        notification(t("admin:gbif.api.create.success"), NotificationType.Success);
       }
     } catch (e) {
       console.error(e);
-      notification("Failed to create DWC file", NotificationType.Error);
+      notification(t("admin:gbif.api.create.error"), NotificationType.Error);
     } finally {
       setIsCreating(false);
     }
