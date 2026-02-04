@@ -111,3 +111,35 @@ export const axUploadResource = async (resource: File, directory, nestedPath?: s
     return { success: false };
   }
 };
+
+export const axListDwc = async (filter, ctx?) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.FILES}/download/file/list`, {
+      params: { ctx, ...filter }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axDeleteDwcFile = async (fileName) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.FILES}/download/file/delete/${fileName}`);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
+export const axCreateDwc = async () => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.FILES}/upload/dwcfile  `);
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
