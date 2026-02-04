@@ -22,7 +22,6 @@
     },
     "generate_new_export": "नवीन निर्यात व्युत्पन्न करा",
     "heading": "GBIF डार्विन कोर निर्यात",
-    "last_generated": "शेवटचे व्युत्पन्न:",
     "sort": {
       "Active": "सक्रिय",
       "All": "सर्व",
@@ -37,7 +36,8 @@
         "status": "स्थिती"
       }
     },
-    "title": "GBIF प्रकाशन"
+    "title": "GBIF प्रकाशन",
+    "total": "एकूण नोंदी:"
   },
   "links": {
     "add_species_page": "एक प्रजाती पृष्ठ जोडा",

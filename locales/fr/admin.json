@@ -22,7 +22,6 @@
     },
     "generate_new_export": "Générer une nouvelle exportation",
     "heading": "Exportations de base du GBIF Darwin",
-    "last_generated": "Dernière génération :",
     "sort": {
       "Active": "Actif",
       "All": "Tous",
@@ -37,7 +36,8 @@
         "status": "Statut"
       }
     },
-    "title": "Éditions GBIF"
+    "title": "Éditions GBIF",
+    "total": "Journaux totaux :"
   },
   "links": {
     "add_species_page": "Ajouter une page d'espèce",

@@ -22,7 +22,6 @@
     },
     "generate_new_export": "ਨਵਾਂ ਨਿਰਯਾਤ ਤਿਆਰ ਕਰੋ",
     "heading": "GBIF ਡਾਰਵਿਨ ਕੋਰ ਨਿਰਯਾਤ",
-    "last_generated": "ਆਖਰੀ ਵਾਰ ਤਿਆਰ ਕੀਤਾ ਗਿਆ:",
     "sort": {
       "Active": "ਕਿਰਿਆਸ਼ੀਲ",
       "All": "ਸਾਰੇ",
@@ -37,7 +36,8 @@
         "status": "ਸਥਿਤੀ"
       }
     },
-    "title": "GBIF ਪਬਲਿਸ਼ਿੰਗ"
+    "title": "GBIF ਪਬਲਿਸ਼ਿੰਗ",
+    "total": "ਕੁੱਲ ਲਾਗ:"
   },
   "links": {
     "add_species_page": "ਇੱਕ ਸਪੀਸੀਜ਼ ਪੇਜ ਸ਼ਾਮਲ ਕਰੋ",

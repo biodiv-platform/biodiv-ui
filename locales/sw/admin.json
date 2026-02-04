@@ -22,7 +22,6 @@
     },
     "generate_new_export": "Tengeneza Usafirishaji Mpya",
     "heading": "GBIF Darwin Core Mauzo",
-    "last_generated": "Iliyotolewa Mwisho:",
     "sort": {
       "Active": "Inayotumika",
       "All": "Wote",
@@ -37,7 +36,8 @@
         "status": "Hali"
       }
     },
-    "title": "Uchapishaji wa GBIF"
+    "title": "Uchapishaji wa GBIF",
+    "total": "Jumla ya Kumbukumbu:"
   },
   "links": {
     "add_species_page": "Ongeza ukurasa wa spishi",

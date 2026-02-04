@@ -22,7 +22,6 @@
     },
     "generate_new_export": "Mamorona Export Vaovao",
     "heading": "GBIF Darwin Core Exports",
-    "last_generated": "Noforonina farany:",
     "sort": {
       "Active": "Active",
       "All": "rehetra",
@@ -37,7 +36,8 @@
         "status": "sata"
       }
     },
-    "title": "GBIF Publishing"
+    "title": "GBIF Publishing",
+    "total": "Total Logs:"
   },
   "links": {
     "add_species_page": "Manampia pejy karazana",
