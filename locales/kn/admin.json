@@ -22,7 +22,6 @@
     },
     "generate_new_export": "ಹೊಸ ರಫ್ತು ರಚಿಸಿ",
     "heading": "GBIF ಡಾರ್ವಿನ್ ಕೋರ್ ರಫ್ತು",
-    "last_generated": "ಕೊನೆಯದಾಗಿ ರಚಿಸಲಾಗಿದೆ:",
     "sort": {
       "Active": "ಸಕ್ರಿಯ",
       "All": "ಎಲ್ಲಾ",
@@ -37,7 +36,8 @@
         "status": "ಸ್ಥಿತಿ"
       }
     },
-    "title": "GBIF ಪಬ್ಲಿಷಿಂಗ್"
+    "title": "GBIF ಪಬ್ಲಿಷಿಂಗ್",
+    "total": "ಒಟ್ಟು ದಾಖಲೆಗಳು:"
   },
   "links": {
     "add_species_page": "ಜಾತಿಗಳ ಪುಟವನ್ನು ಸೇರಿಸಿ",

@@ -22,7 +22,6 @@
     },
     "generate_new_export": "નવી નિકાસ બનાવો",
     "heading": "GBIF ડાર્વિન કોર નિકાસ",
-    "last_generated": "છેલ્લે જનરેટ કરેલ:",
     "sort": {
       "Active": "સક્રિય",
       "All": "બધા",
@@ -37,7 +36,8 @@
         "status": "સ્થિતિ"
       }
     },
-    "title": "GBIF પબ્લિશિંગ"
+    "title": "GBIF પબ્લિશિંગ",
+    "total": "કુલ લૉગ્સ:"
   },
   "links": {
     "add_species_page": "એક પ્રજાતિ પૃષ્ઠ ઉમેરો",

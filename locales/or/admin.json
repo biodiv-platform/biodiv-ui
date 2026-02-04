@@ -22,7 +22,6 @@
     },
     "generate_new_export": "ନୂତନ ରପ୍ତାନି ସୃଷ୍ଟି କରନ୍ତୁ |",
     "heading": "GBIF ଡାରୱିନ୍ କୋର ରପ୍ତାନି |",
-    "last_generated": "ଶେଷ ଜେନେରେଟେଡ୍:",
     "sort": {
       "Active": "ସକ୍ରିୟ |",
       "All": "ସମସ୍ତ",
@@ -37,7 +36,8 @@
         "status": "ସ୍ଥିତି"
       }
     },
-    "title": "GBIF ପ୍ରକାଶନ |"
+    "title": "GBIF ପ୍ରକାଶନ |",
+    "total": "ସମୁଦାୟ ଲଗ୍:"
   },
   "links": {
     "add_species_page": "ଏକ ପ୍ରଜାତି ପୃଷ୍ଠା ଯୋଡନ୍ତୁ |",

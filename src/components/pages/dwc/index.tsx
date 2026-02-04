@@ -20,6 +20,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { LuChevronLeft, LuChevronRight, LuDownload, LuTrash2 } from "react-icons/lu";
 
+import SITE_CONFIG from "@/configs/site-config";
 import { axCreateDwc, axDeleteDwcFile } from "@/services/files.service";
 import { formatTimeStampFromUTC } from "@/utils/date";
 import notification, { NotificationType } from "@/utils/notification";
@@ -38,10 +39,6 @@ export default function GbifExportTable() {
   const [isCreating, setIsCreating] = useState(false);
 
   const hasInProgress = files.some((f) => f.status === "IN_PROGRESS");
-
-  const lastGeneratedOn = files.length
-    ? formatTimeStampFromUTC(Math.max(...files.map((f) => f.date || 0)))
-    : "--";
 
   const handlePageChange = (page: number) => {
     setFilter((draft) => {
@@ -112,7 +109,7 @@ export default function GbifExportTable() {
         {/* Header */}
         <HStack justify="space-between" mb={3}>
           <Text fontSize="sm" color="gray.600">
-            {t("admin:gbif.last_generated")} <strong>{lastGeneratedOn}</strong>
+            {t("admin:gbif.total")} <strong>{DwcLogData?.n}</strong>
           </Text>
 
           <Button
@@ -170,7 +167,9 @@ export default function GbifExportTable() {
                       colorScheme="blue"
                       aria-label="Download file"
                       disabled={file.isDeleted === true || hasInProgress}
-                      onClick={() => window.open(`${filePath}${file.fileName}`, "_blank")}
+                      onClick={() =>
+                        window.open(`${SITE_CONFIG.SITE.URL}/${filePath}${file.fileName}`, "_blank")
+                      }
                       colorPalette="blue"
                     >
                       <LuDownload />
