@@ -1,7 +1,8 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
-import AdminComponent from "@components/pages/admin";
 import { Role } from "@interfaces/custom";
 import React from "react";
+
+import AdminComponent from "@/components/pages/manage";
 
 const AdminPage = () => <AdminComponent />;
 

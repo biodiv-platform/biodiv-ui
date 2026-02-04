@@ -1,7 +1,8 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
-import NotificationsComponent from "@components/pages/admin/notifications";
 import { Role } from "@interfaces/custom";
 import React from "react";
+
+import NotificationsComponent from "@/components/pages/manage/notifications";
 
 const NotificationsPage = () => <NotificationsComponent />;
 

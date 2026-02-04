@@ -93,7 +93,7 @@ export default function VerticalCarousel({ featured, slidesPerView }: VerticalCa
                         </Center>
                       </Box>
 
-                      <Box
+                      {resource.readMoreUIType != "none" && <Box
                         w={150}
                         display="flex"
                         flexDirection="column"
@@ -114,7 +114,7 @@ export default function VerticalCarousel({ featured, slidesPerView }: VerticalCa
                             </Flex>
                           </a>
                         )}
-                      </Box>
+                      </Box>}
                     </HStack>
                   ) : (
                     <>

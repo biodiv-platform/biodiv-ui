@@ -227,6 +227,7 @@ export default function GallerySetupFrom({
             name={`translations.${translationSelected}.readMoreText`}
             label={t("group:homepage_customization.resources.read_more")}
             maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
+            disabled = {hForm.watch().readMoreUIType=="none"}
           />
           {galleryId == -1 && (
             <SelectInputField
@@ -234,7 +235,7 @@ export default function GallerySetupFrom({
               name={`gallerySidebar`}
               label={t("group:homepage_customization.resources.gallery_sidebar")}
               options={gallerySidebarBackgroundOptions}
-              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID ||  hForm.watch().readMoreUIType=="none"}
               shouldPortal={true}
             />
           )}

@@ -54,7 +54,7 @@ import * as Yup from "yup";
 import WKTFieldMulti from "@/components/form/wkt-multi";
 import EditIcon from "@/icons/edit";
 
-import MiniGallery from "../../admin/homegallery/mini-gallery";
+import MiniGallery from "../../manage/homegallery/mini-gallery";
 import AdminInviteField from "../common/admin-invite-field";
 import AddCustomFieldForm from "../common/custom-field/custom-field-form";
 import CustomFieldTable from "../common/custom-field/custom-field-table";

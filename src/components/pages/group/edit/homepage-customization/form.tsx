@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import MiniGallery from "@/components/pages/admin/homegallery/mini-gallery";
+import MiniGallery from "@/components/pages/manage/homegallery/mini-gallery";
 
 import GallerySetup from "./gallery-setup";
 

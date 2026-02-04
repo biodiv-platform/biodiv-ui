@@ -3,6 +3,8 @@ import http, { plainHttp } from "@utils/http";
 import { getYouTubeId } from "@utils/media";
 import axios from "axios";
 
+import { fetchWithCache } from "@/utils/cached-fetch";
+
 export const axGetLangList = async (document = false) => {
   try {
     const endpoint = document
@@ -268,7 +270,7 @@ export const axEditAnnouncement = async (announcementId, payload) => {
 
 export const axGetActiveAnnouncement = async () => {
   try {
-    const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/services/announcement/active`);
+    const data = await fetchWithCache(`${ENDPOINT.UTILITY}/v1/services/announcement/active`);
     return { success: true, data };
   } catch (e) {
     console.error(e);
