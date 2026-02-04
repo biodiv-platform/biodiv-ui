@@ -355,7 +355,8 @@ export default function SpeciesShowPageComponent({
         resourceData:
           species?.resourceData
             ?.filter((r) => r.resource.type !== ResourceType.Icon)
-            .map((obj) => "/" + RESOURCE_CTX_MAP[obj.resource.context] + obj.resource.fileName) || [],
+            .map((obj) => "/" + RESOURCE_CTX_MAP[obj.resource.context] + obj.resource.fileName) ||
+          [],
         documentMetaList: species.documentMetaList.map((obj) => ({
           id: obj.id,
           title: obj.title,

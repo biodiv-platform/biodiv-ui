@@ -1,8 +1,9 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
-import SpeciesFieldsAdmin from "@/components/pages/manage/species-fields";
 import { Role } from "@interfaces/custom";
 import { axGetLanguagesWithSpeciesFields } from "@services/utility.service";
 import React from "react";
+
+import SpeciesFieldsAdmin from "@/components/pages/manage/species-fields";
 
 export default function SpeciesFieldsAdminPage({ fieldLanguages }) {
   return <SpeciesFieldsAdmin fieldLanguages={fieldLanguages} />;

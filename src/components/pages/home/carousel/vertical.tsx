@@ -93,28 +93,30 @@ export default function VerticalCarousel({ featured, slidesPerView }: VerticalCa
                         </Center>
                       </Box>
 
-                      {resource.readMoreUIType != "none" && <Box
-                        w={150}
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-end"
-                        alignItems="flex-end"
-                        mr={6}
-                      >
-                        {resource.moreLinks && resource.readMoreUIType === "button" ? (
-                          <Button colorPalette="teal" size="lg" fontSize="xl" asChild>
+                      {resource.readMoreUIType != "none" && (
+                        <Box
+                          w={150}
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="flex-end"
+                          alignItems="flex-end"
+                          mr={6}
+                        >
+                          {resource.moreLinks && resource.readMoreUIType === "button" ? (
+                            <Button colorPalette="teal" size="lg" fontSize="xl" asChild>
+                              <a href={resource.moreLinks}>
+                                {resource.readMoreText ?? "Read More"} <LuArrowRight />
+                              </a>
+                            </Button>
+                          ) : (
                             <a href={resource.moreLinks}>
-                              {resource.readMoreText ?? "Read More"} <LuArrowRight />
+                              <Flex alignItems="center">
+                                {resource.readMoreText ?? "Read More"} <LuArrowRight />
+                              </Flex>
                             </a>
-                          </Button>
-                        ) : (
-                          <a href={resource.moreLinks}>
-                            <Flex alignItems="center">
-                              {resource.readMoreText ?? "Read More"} <LuArrowRight />
-                            </Flex>
-                          </a>
-                        )}
-                      </Box>}
+                          )}
+                        </Box>
+                      )}
                     </HStack>
                   ) : (
                     <>
