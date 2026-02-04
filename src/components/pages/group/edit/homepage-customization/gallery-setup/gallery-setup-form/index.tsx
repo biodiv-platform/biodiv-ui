@@ -15,6 +15,12 @@ import * as Yup from "yup";
 
 import TranslationTab from "@/components/pages/common/translation-tab";
 import { Switch } from "@/components/ui/switch";
+import {
+  axCreateGroupHomePageGallery,
+  axInsertMiniGroupHomePageGallery
+} from "@/services/usergroup.service";
+import { axCreateHomePageGallery, axMiniInsertHomePageGallery } from "@/services/utility.service";
+import notification, { NotificationType } from "@/utils/notification";
 
 import { galleryFieldValidationSchema } from "./common";
 import ExsistingResourceForm from "./exsisting-resource-form";
@@ -41,11 +47,13 @@ export default function GallerySetupFrom({
   setGalleryList,
   languages,
   galleryId = -1,
-  group = true,
-  vertical = false
+  groupId = -1,
+  vertical = false,
+  index = 0
 }) {
   const { t } = useTranslation();
   const readMoreUIOptions = [
+    { label: t("group:homepage_customization.resources.read_more_none"), value: "none" },
     { label: t("group:homepage_customization.resources.read_more_link"), value: "link" },
     { label: t("group:homepage_customization.resources.read_more_button"), value: "button" }
   ];
@@ -100,7 +108,7 @@ export default function GallerySetupFrom({
   const [color, setColor] = useState("rgba(255,255,255,1)");
   const [bgColor, setBgColor] = useState("rgba(26, 32, 44, 1)");
 
-  const handleFormSubmit = ({ translations, title, customDescripition, ...value }) => {
+  const handleFormSubmit = async ({ translations, title, customDescripition, ...value }) => {
     const payload = {
       translations: Object.values(translations),
       authorId: value?.authorInfo?.id,
@@ -111,10 +119,39 @@ export default function GallerySetupFrom({
       bgColor: bgColor,
       title: translations[SITE_CONFIG.LANG.DEFAULT_ID].title,
       customDescripition: translations[SITE_CONFIG.LANG.DEFAULT_ID].description,
+      displayOrder: galleryList.length,
       ...value
     };
-    setGalleryList([...galleryList, payload]);
-    setIsCreate(false);
+    if (groupId == -1) {
+      const { success, data } =
+        galleryId == -1
+          ? await axCreateHomePageGallery(payload)
+          : await axMiniInsertHomePageGallery(payload);
+
+      if (success) {
+        notification(t("group:homepage_customization.update.success"), NotificationType.Success);
+        setGalleryList(
+          galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider
+        );
+        setIsCreate(false);
+      } else {
+        notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
+      }
+    } else {
+      const { success, data } =
+        galleryId == -1
+          ?await axCreateGroupHomePageGallery(groupId, payload)
+          : await axInsertMiniGroupHomePageGallery(groupId, payload);
+      if (success) {
+        notification(t("group:homepage_customization.update.success"), NotificationType.Success);
+        setGalleryList(
+          galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider
+        );
+        setIsCreate(false);
+      } else {
+        notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
+      }
+    }
   };
 
   const handleChange = () => {
@@ -177,12 +214,6 @@ export default function GallerySetupFrom({
             label={t("group:homepage_customization.table.description")}
             {...(galleryId != -1 && { maxLength: vertical ? 85 : 275 })}
           />
-          <TextBoxField
-            key={`readmore-${translationSelected}`}
-            name={`translations.${translationSelected}.readMoreText`}
-            label={t("group:homepage_customization.resources.read_more")}
-            maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
-          />
           <SelectInputField
             key={`readmoreui`}
             name={`readMoreUIType`}
@@ -190,6 +221,12 @@ export default function GallerySetupFrom({
             options={readMoreUIOptions}
             disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
             shouldPortal={true}
+          />
+          <TextBoxField
+            key={`readmore-${translationSelected}`}
+            name={`translations.${translationSelected}.readMoreText`}
+            label={t("group:homepage_customization.resources.read_more")}
+            maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
           />
           {galleryId == -1 && (
             <SelectInputField
@@ -266,7 +303,7 @@ export default function GallerySetupFrom({
             </>
           )}
 
-          {!group && (
+          {groupId == -1 && (
             <CheckboxField
               key={`truncated`}
               disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}

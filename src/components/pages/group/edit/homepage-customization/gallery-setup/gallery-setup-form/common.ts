@@ -10,7 +10,12 @@ export const galleryFieldValidationSchema = Yup.object().shape({
     otherwise: (schema) => schema.notRequired().nullable()
   }),
   observationId: Yup.number().nullable(),
-  moreLinks: Yup.string().required(),
+  moreLinks: Yup.string().when("readMoreUIType", {
+    is: (value) => value && value !== "none",
+    then: (schema) =>
+      schema.required("Show page link is required when readMore UI type is not none"),
+    otherwise: (schema) => schema.notRequired().nullable()
+  }),
   options: Yup.array().nullable(),
   truncated: Yup.boolean()
 });

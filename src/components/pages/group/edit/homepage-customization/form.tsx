@@ -146,7 +146,6 @@ export default function HomePageCustomizationForm({
           miniGallery={miniGalleryList}
           setMiniGallery={setMiniGalleryList}
           languages={languages}
-          handleFormSubmit={hForm.handleSubmit(handleFormSubmit)}
           groupId={userGroupId}
         />
       )}

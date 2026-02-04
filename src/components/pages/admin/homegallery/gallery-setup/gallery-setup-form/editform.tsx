@@ -33,6 +33,7 @@ export default function GalleryEditForm({
   const { t } = useTranslation();
 
   const readMoreUIOptions = [
+    { label: t("group:homepage_customization.resources.read_more_none"), value: "none" },
     { label: t("group:homepage_customization.resources.read_more_link"), value: "link" },
     { label: t("group:homepage_customization.resources.read_more_button"), value: "button" }
   ];
@@ -167,11 +168,6 @@ export default function GalleryEditForm({
           }
           {...(galleryId != -1 && { maxLength: 20 })}
         />
-        <TextBoxField
-          name="moreLinks"
-          label={t("group:homepage_customization.resources.link")}
-          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
-        />
         {observationId ? (
           <>
             <p> {t("group:homepage_customization.resources.observation_image_not_editable")} </p>
@@ -197,6 +193,14 @@ export default function GalleryEditForm({
           {...(galleryId != -1 && { maxLength: vertical ? 85 : 275 })}
         />
 
+        <SelectInputField
+          name="readMoreUIType"
+          label={t("group:homepage_customization.resources.read_more_ui")}
+          options={readMoreUIOptions}
+          shouldPortal={true}
+          disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+        />
+
         <TextBoxField
           key={`readMoreText-${translationSelected}`}
           name={`translations.${translationSelected}.readMoreText`}
@@ -204,11 +208,9 @@ export default function GalleryEditForm({
           maxLength={galleryId != -1 ? (vertical ? 10 : 20) : 30}
         />
 
-        <SelectInputField
-          name="readMoreUIType"
-          label={t("group:homepage_customization.resources.read_more_ui")}
-          options={readMoreUIOptions}
-          shouldPortal={true}
+        <TextBoxField
+          name="moreLinks"
+          label={t("group:homepage_customization.resources.link")}
           disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
         />
 
