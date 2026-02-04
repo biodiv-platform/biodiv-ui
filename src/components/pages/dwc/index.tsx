@@ -129,8 +129,8 @@ export default function GbifExportTable() {
             <Table.Row>
               <Table.ColumnHeader>{t("admin:gbif.table.columns.file_name")}</Table.ColumnHeader>
               <Table.ColumnHeader>{t("admin:gbif.table.columns.status")}</Table.ColumnHeader>
-              <Table.ColumnHeader>{t("admin:gbif.table.columns.accessed_on")}</Table.ColumnHeader>
               <Table.ColumnHeader>{t("admin:gbif.table.columns.created_on")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:gbif.table.columns.accessed_on")}</Table.ColumnHeader>
               <Table.ColumnHeader textAlign="center">
                 {t("admin:gbif.table.columns.actions")}
               </Table.ColumnHeader>
@@ -154,11 +154,11 @@ export default function GbifExportTable() {
                     {file.status}
                   </Badge>
                 </Table.Cell>
-                <Table.Cell>{file.date ? formatTimeStampFromUTC(file.date) : "--"}</Table.Cell>
 
                 <Table.Cell>
                   {file.createdDate ? formatTimeStampFromUTC(file.createdDate) : "--"}
                 </Table.Cell>
+                <Table.Cell>{file.date ? formatTimeStampFromUTC(file.date) : "--"}</Table.Cell>
 
                 <Table.Cell>
                   <HStack justify="center" gap={2}>
