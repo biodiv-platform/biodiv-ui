@@ -1,8 +1,7 @@
-import { IconButton } from "@chakra-ui/react";
+import { Carousel, IconButton } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import useTranslation from "next-translate/useTranslation";
 import React from "react";
-import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 const NavigationBox = styled.div`
   .right,
@@ -22,33 +21,20 @@ const NavigationBox = styled.div`
   }
 `;
 
-function CarouselNavigation({ prev, next, current, total }) {
-  const { t } = useTranslation();
+function CarouselNavigation() {
 
   return (
     <NavigationBox>
-      <IconButton
-        className="left"
-        aria-label={t("common:slider_left")}
-        onClick={prev}
-        opacity={0.2}
-        _hover={{ opacity: 1 }}
-        disabled={current === 0}
-        variant={"subtle"}
-      >
-        <LuArrowLeft />
-      </IconButton>
-      <IconButton
-        className="right"
-        aria-label={t("common:slider_right")}
-        onClick={next}
-        opacity={0.2}
-        _hover={{ opacity: 1 }}
-        disabled={current === total - 1}
-        variant={"subtle"}
-      >
-        <LuArrowRight />
-      </IconButton>
+      <Carousel.PrevTrigger asChild>
+        <IconButton size="md" variant="subtle" rounded={"full"}>
+          <LuChevronLeft />
+        </IconButton>
+      </Carousel.PrevTrigger>
+      <Carousel.NextTrigger asChild>
+        <IconButton size="md" variant="subtle" rounded={"full"}>
+          <LuChevronRight />
+        </IconButton>
+      </Carousel.NextTrigger>
     </NavigationBox>
   );
 }

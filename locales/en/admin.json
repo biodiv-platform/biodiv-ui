@@ -8,6 +8,37 @@
     "edit_failure": "Enable to edit announcement",
     "edit_success": "Announcement edited successfully"
   },
+  "gbif": {
+    "api": {
+      "create": {
+        "success": "Created DWC file successfully, Please refresh to see the new file",
+        "error": "Error Creating DWC file"
+      },
+      "delete": {
+        "success": "Deleted DWC file successfully",
+        "error": "Error Deleting DWC file",
+        "confirm": "Are you sure you want to delete this DWC file "
+      }
+    },
+    "generate_new_export": "Generate New Export",
+    "heading": "GBIF Darwin Core Exports",
+    "last_generated": "Last Generated:",
+    "sort": {
+      "Active": "Active",
+      "All": "All",
+      "Deleted": "Deleted"
+    },
+    "title": "GBIF Publishing",
+    "table": {
+      "columns": {
+        "accessed_on": "Accessed On",
+        "actions": "Actions",
+        "created_on": "Created On",
+        "file_name": "File Name",
+        "status": "Status"
+      }
+    }
+  },
   "links": {
     "add_species_page": "Add a species page",
     "add_taxon": "Add a taxon",
