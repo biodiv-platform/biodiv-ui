@@ -8,6 +8,37 @@
     "edit_failure": "Wezesha kuhariri tangazo",
     "edit_success": "Tangazo lilihaririwa kwa mafanikio"
   },
+  "gbif": {
+    "api": {
+      "create": {
+        "error": "Hitilafu katika kuunda faili ya DWC",
+        "success": "Imefaulu kuunda faili ya DWC, Tafadhali onyesha upya ili kuona faili mpya"
+      },
+      "delete": {
+        "confirm": "Je, una uhakika unataka kufuta faili hii ya DWC",
+        "error": "Hitilafu katika Kufuta faili ya DWC",
+        "success": "Imefuta faili ya DWC"
+      }
+    },
+    "generate_new_export": "Tengeneza Usafirishaji Mpya",
+    "heading": "GBIF Darwin Core Mauzo",
+    "last_generated": "Iliyotolewa Mwisho:",
+    "sort": {
+      "Active": "Inayotumika",
+      "All": "Wote",
+      "Deleted": "Imefutwa"
+    },
+    "table": {
+      "columns": {
+        "accessed_on": "Imefikiwa kwenye",
+        "actions": "Vitendo",
+        "created_on": "Imeundwa Juu",
+        "file_name": "Jina la Faili",
+        "status": "Hali"
+      }
+    },
+    "title": "Uchapishaji wa GBIF"
+  },
   "links": {
     "add_species_page": "Ongeza ukurasa wa spishi",
     "add_taxon": "Ongeza taxon",

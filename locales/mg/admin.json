@@ -8,6 +8,37 @@
     "edit_failure": "Mamela ny fanovana",
     "edit_success": "Namboarina tamim-pahombiazana ny fanambarana"
   },
+  "gbif": {
+    "api": {
+      "create": {
+        "error": "Error amin'ny famoronana rakitra DWC",
+        "success": "Nahomby ny famoronana rakitra DWC, havaozy azafady ny rakitra vaovao"
+      },
+      "delete": {
+        "confirm": "Tena te-hamafa ity rakitra DWC ity ve ianao",
+        "error": "Error famafana ny rakitra DWC",
+        "success": "Voafafa soa aman-tsara ny rakitra DWC"
+      }
+    },
+    "generate_new_export": "Mamorona Export Vaovao",
+    "heading": "GBIF Darwin Core Exports",
+    "last_generated": "Noforonina farany:",
+    "sort": {
+      "Active": "Active",
+      "All": "rehetra",
+      "Deleted": "nofafana"
+    },
+    "table": {
+      "columns": {
+        "accessed_on": "Nidirana tamin'ny",
+        "actions": "asa",
+        "created_on": "Noforonina tamin'ny",
+        "file_name": "Anaran'ny fisie",
+        "status": "sata"
+      }
+    },
+    "title": "GBIF Publishing"
+  },
   "links": {
     "add_species_page": "Manampia pejy karazana",
     "add_taxon": "Ampio taxon iray",
