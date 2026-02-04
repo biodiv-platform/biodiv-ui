@@ -8,7 +8,7 @@ import { Avatar } from "@/components/ui/avatar";
 
 import Indicators from "./indicators";
 
-export default function SlideInfo({ resource, size, currentSlide, scrollTo, /*indicators*/ mini }) {
+export default function SlideInfo({ resource, size, currentSlide, setPage, /*indicators*/ mini }) {
   const { t } = useTranslation();
   const showIndicators = useBreakpointValue({ base: false, md: true /*indicators*/ });
 
@@ -50,7 +50,7 @@ export default function SlideInfo({ resource, size, currentSlide, scrollTo, /*in
         )}
         {!mini && showIndicators && size > 1 && (
           <div>
-            <Indicators size={size} currentSlide={currentSlide} scrollTo={scrollTo} />
+            <Indicators size={size} currentSlide={currentSlide} setPage={setPage} />
           </div>
         )}
       </Flex>
