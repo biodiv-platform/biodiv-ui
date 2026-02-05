@@ -5,6 +5,8 @@ import { LOCAL_ASSET_PREFIX } from "@static/observation-create";
 import http, { formDataHeaders } from "@utils/http";
 import { nanoid } from "nanoid";
 
+import { waitForAuth } from "@/utils/auth";
+
 export const axListMyUploads = async (module = RESOURCE_TYPE.OBSERVATION) => {
   try {
     const { data } = await http.get(`${ENDPOINT.FILES}/upload/my-uploads`, { params: { module } });
@@ -114,6 +116,8 @@ export const axUploadResource = async (resource: File, directory, nestedPath?: s
 
 export const axListDwc = async (filter, ctx?) => {
   try {
+    await waitForAuth();
+
     const { data } = await http.get(`${ENDPOINT.FILES}/download/file/list`, {
       params: { ctx, ...filter }
     });
