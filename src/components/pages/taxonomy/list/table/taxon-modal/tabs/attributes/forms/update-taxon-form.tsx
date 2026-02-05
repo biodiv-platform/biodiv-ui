@@ -19,13 +19,32 @@ import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import ExternalBlueLink from "@/components/@core/blue-link/external";
 import { Field } from "@/components/ui/field";
+import { toaster } from "@/components/ui/toaster";
+import useGlobalState from "@/hooks/use-global-state";
+import { axGetTaxonList } from "@/services/api.service";
+import { parseUrl, stringify } from "@/utils/query-string";
 
 export default function UpdateTaxonForm({ onDone }) {
   const { modalTaxon, taxonRanks, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
   const [validateResults, setValidateResults] = useState([]);
   const { open, onClose, onOpen } = useDisclosure();
+  const { currentGroup } = useGlobalState();
+
+  const getLocalPath = (href, params = {}, prefixGroup?, currentGroup?) => {
+    const groupPrefixPath =
+      currentGroup && prefixGroup && !href.startsWith("http") ? currentGroup + href : href;
+
+    const cleanPath = groupPrefixPath.startsWith(currentGroup)
+      ? groupPrefixPath.replace(/^.*\/\/[^\/]+/, "")
+      : groupPrefixPath;
+
+    const newParams = stringify({ ...parseUrl(href).query, ...params });
+
+    return cleanPath + (newParams ? `?${newParams}` : "");
+  };
 
   const [formValidationSchema, formDisabled] = useMemo(() => {
     const validation: [string, any][] = [];
@@ -81,7 +100,12 @@ export default function UpdateTaxonForm({ onDone }) {
     defaultValues: {
       status: modalTaxon?.status,
       newTaxonId: modalTaxon?.acceptedNames?.map((o) => ({ value: o.id, label: o.name })) || [],
-      ...Object.fromEntries(modalTaxon?.hierarchy?.map((o) => [o.rankName, o.name]) || [])
+      ...Object.fromEntries(
+        modalTaxon?.hierarchy?.map((o) => [
+          o.rankName,
+          modalTaxon?.rank === o.rankName ? modalTaxon?.name : o.name
+        ]) || []
+      )
     }
   });
 
@@ -108,6 +132,51 @@ export default function UpdateTaxonForm({ onDone }) {
   };
 
   const handleOnStatusFormSubmit = async ({ newTaxonId, status, ...hierarchy }) => {
+    if (status === TAXON_STATUS_VALUES.SYNONYM) {
+      const treeData = await axGetTaxonList({
+        expand_taxon: true,
+        key: modalTaxon.id
+      });
+      if (treeData.length > 0) {
+        toaster.create({
+          title: "Warning",
+          description: (
+            <div>
+              {"This name cannot be converted to a synonym because it has child taxa:"}
+              {treeData.map((child) => (
+                <div>
+                  <ExternalBlueLink
+                    key={child.id}
+                    href={getLocalPath(
+                      "/taxonomy/list",
+                      { taxonId: child.id, showTaxon: child.id },
+                      true,
+                      currentGroup?.webAddress
+                    )}
+                    target="_blank"
+                  >
+                    {child.text}
+                  </ExternalBlueLink>
+                </div>
+              ))}
+              <br />
+              <div>
+                {"You must first resolve these child taxa by either:"}
+                <ol>
+                  <li>1. Moving them to another accepted name</li>
+                  <li>2. Making them synonyms</li>
+                  <li>3. Deleting them (if appropriate)</li>
+                </ol>
+              </div>
+            </div>
+          ),
+          type: "warning",
+          duration: 9000,
+          closable: true
+        });
+        return;
+      }
+    }
     const { success, data } = await axUpdateTaxonStatus({
       taxonId: modalTaxon.id,
       status,
@@ -159,6 +228,7 @@ export default function UpdateTaxonForm({ onDone }) {
             optionComponent={ScientificNameOption}
             placeholder={t("form:min_three_chars")}
             isRaw={true}
+            portalled={false}
           />
         </Box>
 
