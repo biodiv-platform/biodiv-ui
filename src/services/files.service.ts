@@ -112,7 +112,7 @@ export const axUploadResource = async (resource: File, directory, nestedPath?: s
   }
 };
 
-export const axListDwc = async (filter, ctx?) => {
+export const axListDwc = async (ctx, filter) => {
   try {
     const { data } = await http.get(`${ENDPOINT.FILES}/download/file/list`, {
       params: { ctx, ...filter }

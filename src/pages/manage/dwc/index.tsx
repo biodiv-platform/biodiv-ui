@@ -18,7 +18,10 @@ export const getServerSideProps = async (ctx) => {
 
   const offset = Number(ctx.query.offset ?? 0);
 
-  const { success, data } = await axListDwc({ offset, limit: 15 }, ctx);
+  const { success, data } = await axListDwc(ctx, {
+    offset,
+    limit: 15
+  });
 
   if (!success) {
     return throwUnauthorized(ctx);
