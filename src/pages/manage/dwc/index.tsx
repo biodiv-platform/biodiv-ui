@@ -13,7 +13,7 @@ const Dwc = ({ DwcLogData, initialFilterParams }) => (
 );
 
 export const getServerSideProps = async (ctx) => {
-  const authResult = authorizedPageSSP([Role.Admin], ctx);
+  const authResult = authorizedPageSSP([Role.Any], ctx);
   if (authResult) return authResult;
 
   const offset = Number(ctx.query.offset ?? 0);
