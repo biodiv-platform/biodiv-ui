@@ -177,6 +177,7 @@ export default function UpdateTaxonForm({ onDone }) {
         return;
       }
     }
+    hierarchy[modalTaxon.rank] = ""
     const { success, data } = await axUpdateTaxonStatus({
       taxonId: modalTaxon.id,
       status,
