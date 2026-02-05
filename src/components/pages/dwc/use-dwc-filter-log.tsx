@@ -2,13 +2,21 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { isBrowser } from "@static/constants";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import { axListDwc } from "@/services/files.service";
 
 export const DEFAULT_PARAMS = {
-  offset: 0
+  offset: 0,
+  limit: 15
+};
+
+const DEFAULT_DATA = {
+  filePath: "",
+  l: [],
+  n: 0,
+  hasMore: false
 };
 
 export interface DwcLogsData {
@@ -18,76 +26,114 @@ export interface DwcLogsData {
   hasMore: boolean;
 }
 
-export interface showPageFilters {
-  offset?: any;
-  limit?: any;
+export interface ShowPageFilters {
+  offset?: number;
+  limit?: number;
+  deleted?: string;
 }
 
 interface DwcLogsDataContextProps {
-  filter?: showPageFilters;
+  filter: ShowPageFilters;
   DwcLogData: DwcLogsData;
-  addFilter?;
-  removeFilter?;
-  children?;
-  nextPage?;
-  setFilter?;
-  resetFilter?;
+  loading: boolean;
+  addFilter: (key: string, value: any) => void;
+  removeFilter: (key: string) => void;
+  nextPage: (limit?: number) => void;
+  setFilter: any;
+  resetFilter: () => void;
 }
 
 const DwcLogsContext = createContext<DwcLogsDataContextProps>({} as DwcLogsDataContextProps);
 
-export const DwcLogsDataProvider = (props: DwcLogsDataContextProps) => {
-  const [filter, setFilter] = useImmer<showPageFilters>(props.filter || DEFAULT_PARAMS);
+export const DwcLogsDataProvider = ({
+  children,
+  filter: initialFilter
+}: {
+  children: React.ReactNode;
+  filter?: ShowPageFilters;
+}) => {
+  const [filter, setFilter] = useImmer<ShowPageFilters>(initialFilter || DEFAULT_PARAMS);
 
-  const [DwcLogData, setDwcLogData] = useImmer<DwcLogsData>(props.DwcLogData);
+  const [DwcLogData, setDwcLogData] = useImmer<DwcLogsData>(DEFAULT_DATA);
 
-  useEffect(() => {
-    if (isBrowser) {
-      window.history.pushState("", "", `?${stringify({ ...filter })}`);
-    }
-  }, [filter]);
+  const [loading, setLoading] = useState(false);
+
+  /* ------------------------------------------------
+ FETCH FUNCTION
+------------------------------------------------ */
 
   const fetchListData = async () => {
     try {
+      setLoading(true);
       NProgress.start();
 
-      const { data } = await axListDwc(filter);
+      const { success, data } = await axListDwc(filter);
 
-      setDwcLogData((draft) => {
-        draft.l = data.files || [];
-        draft.n = data.total;
-        draft.filePath = data.filePath;
-        draft.hasMore = data.total > (Number(filter.offset) || 0) + (Number(filter.limit) || 15);
-      });
-
-      NProgress.done();
+      if (success) {
+        setDwcLogData((draft) => {
+          draft.l = data?.files || [];
+          draft.n = data?.total || 0;
+          draft.filePath = data?.filePath || "";
+          draft.hasMore =
+            (data?.total || 0) > (Number(filter.offset) || 0) + (Number(filter.limit) || 15);
+        });
+      }
     } catch (e) {
       console.error(e);
+    } finally {
+      setLoading(false);
       NProgress.done();
     }
   };
+
+  /* ------------------------------------------------
+ INITIAL LOAD
+------------------------------------------------ */
+
+  useEffect(() => {
+    fetchListData();
+  }, []);
+
+  /* ------------------------------------------------
+ URL SYNC
+------------------------------------------------ */
+
+  useEffect(() => {
+    if (isBrowser) {
+      window.history.replaceState("", "", `?${stringify({ ...filter })}`);
+    }
+  }, [filter]);
+
+  /* ------------------------------------------------
+ FILTER CHANGE FETCH
+------------------------------------------------ */
 
   useDidUpdateEffect(() => {
     fetchListData();
   }, [filter]);
 
-  const nextPage = (max = 15) => {
+  /* ------------------------------------------------
+ ACTIONS
+------------------------------------------------ */
+
+  const nextPage = (limit = 15) => {
     setFilter((draft) => {
-      draft.offset = (Number(draft.offset) || 0) + max;
-      draft.limit = max;
+      draft.offset = (Number(draft.offset) || 0) + limit;
+      draft.limit = limit;
     });
   };
 
-  const addFilter = (key, value) => {
+  const addFilter = (key: string, value: any) => {
     setFilter((draft) => {
       draft.offset = 0;
       draft[key] = value;
     });
   };
 
-  const removeFilter = (key) => {
+  const removeFilter = (key: string) => {
     setFilter((draft) => {
       delete draft[key];
+      draft.offset = 0;
     });
   };
 
@@ -97,12 +143,12 @@ export const DwcLogsDataProvider = (props: DwcLogsDataContextProps) => {
       limit: 15
     }));
   };
-
   return (
     <DwcLogsContext.Provider
       value={{
         filter,
         DwcLogData,
+        loading,
         addFilter,
         setFilter,
         removeFilter,
@@ -110,7 +156,7 @@ export const DwcLogsDataProvider = (props: DwcLogsDataContextProps) => {
         resetFilter
       }}
     >
-      {props.children}
+      {children}
     </DwcLogsContext.Provider>
   );
 };
