@@ -178,6 +178,15 @@ export default function UpdateTaxonForm({ onDone }) {
       }
     }
     delete hierarchy[modalTaxon.rank];
+    if (modalTaxon.rank == "species" && !hierarchy["subgenus"]) {
+      delete hierarchy["subgenus"];
+    }
+    if (modalTaxon.rank == "genus" && !hierarchy["subfamily"]) {
+      delete hierarchy["subfamily"];
+    }
+    if (modalTaxon.rank == "family" && !hierarchy["superfamily"]) {
+      delete hierarchy["superfamily"];
+    }
     const { success, data } = await axUpdateTaxonStatus({
       taxonId: modalTaxon.id,
       status,
