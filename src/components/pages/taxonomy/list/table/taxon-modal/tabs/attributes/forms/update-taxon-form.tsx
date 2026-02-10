@@ -32,6 +32,7 @@ export default function UpdateTaxonForm({ onDone }) {
   const [validateResults, setValidateResults] = useState([]);
   const { open, onClose, onOpen } = useDisclosure();
   const { currentGroup } = useGlobalState();
+  const [fieldHints, setFieldHints] = useState<Record<string, string>>({});
 
   const getLocalPath = (href, params = {}, prefixGroup?, currentGroup?) => {
     const groupPrefixPath =
@@ -125,6 +126,16 @@ export default function UpdateTaxonForm({ onDone }) {
       if (data.matched) {
         setValidateResults(data.matched);
         onOpen();
+      } else {
+        // Set a warning (not an error) - won't block form submission
+        /*hForm.setError(rankName, {
+          type: "hint",
+          message: "No match found"
+        });*/
+        setFieldHints(prev => ({
+          ...prev,
+          [rankName]: "No match found. Name will be added while updating"
+        }));
       }
     } else {
       notification(t("species:create.validate_error"));
@@ -178,14 +189,11 @@ export default function UpdateTaxonForm({ onDone }) {
       }
     }
     delete hierarchy[modalTaxon.rank];
-    if (modalTaxon.rank == "species" && !hierarchy["subgenus"]) {
-      delete hierarchy["subgenus"];
-    }
-    if (modalTaxon.rank == "genus" && !hierarchy["subfamily"]) {
-      delete hierarchy["subfamily"];
-    }
-    if (modalTaxon.rank == "family" && !hierarchy["superfamily"]) {
-      delete hierarchy["superfamily"];
+    for (const rank in hierarchy) {
+      const value = hierarchy[rank];
+      if (!value || value.trim() === "") {
+        delete hierarchy[rank];
+      }
     }
     const { success, data } = await axUpdateTaxonStatus({
       taxonId: modalTaxon.id,
@@ -226,6 +234,7 @@ export default function UpdateTaxonForm({ onDone }) {
               isDisabled={isDisabled}
               onValidate={handleOnRankValidate}
               isRequired={isRequired}
+              hint={fieldHints[name]}
             />
           ))}
         </Box>

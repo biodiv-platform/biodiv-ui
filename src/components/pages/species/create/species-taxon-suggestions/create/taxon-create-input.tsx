@@ -15,6 +15,7 @@ interface TaxonCreateInputFieldProps {
   mb?: number;
   onValidate?;
   hidden?;
+  hint?;
 }
 
 export const TaxonCreateInputField = ({
@@ -24,7 +25,8 @@ export const TaxonCreateInputField = ({
   isDisabled,
   hidden,
   onValidate,
-  mb = 4
+  mb = 4,
+  hint = ""
 }: TaxonCreateInputFieldProps) => {
   const {
     register,
@@ -86,6 +88,7 @@ export const TaxonCreateInputField = ({
           {...register(name)}
         />
       </InputGroup>
+      {hint && <Field color="red.600" helperText={hint} />}
     </Field>
   );
 };

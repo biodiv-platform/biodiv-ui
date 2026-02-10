@@ -187,3 +187,23 @@ export const axAddTaxonomyComment = async (payload) => {
     return { success: false, data: [] };
   }
 };
+
+export const axBulkTransferSynonyms = async (
+  params,
+  payload = {},
+  taxonId
+) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/transfer/synonym/${taxonId}`,
+      payload,
+      {
+        params
+      }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
