@@ -72,7 +72,7 @@ export default function SynonymList({
 
       if (success) {
         notification("Synonyms transfered successfully", NotificationType.Success);
-        router.push(`/taxonomy/list`, true, { taxonId: data.id });
+        router.push(`/taxonomy/list`, true, { taxonId: data.id }, true);
       } else {
         notification("Error transfering synonyms");
       }
