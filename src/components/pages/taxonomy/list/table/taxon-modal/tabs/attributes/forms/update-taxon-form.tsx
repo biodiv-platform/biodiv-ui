@@ -20,7 +20,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import ExternalBlueLink from "@/components/@core/blue-link/external";
-import { Field } from "@/components/ui/field";
 import { toaster } from "@/components/ui/toaster";
 import useGlobalState from "@/hooks/use-global-state";
 import { axGetTaxonList } from "@/services/api.service";
@@ -132,9 +131,9 @@ export default function UpdateTaxonForm({ onDone }) {
           type: "hint",
           message: "No match found"
         });*/
-        setFieldHints(prev => ({
+        setFieldHints((prev) => ({
           ...prev,
-          [rankName]: "No match found. Name will be added while updating"
+          [rankName]: "No match found. Name will be created while updating"
         }));
       }
     } else {
@@ -224,8 +223,12 @@ export default function UpdateTaxonForm({ onDone }) {
           isRequired={true}
         />
 
-        <Field label={t("taxon:modal.attributes.rank.title")} />
+        {/*<Field label={t("taxon:modal.attributes.rank.title")} />*/}
         <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.ACCEPTED}>
+          {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
+            modalTaxon.name.split(" ")[0] != hForm.watch().genus && (
+              <Box color={"red.600"}>{"* Genus doesn't match the first part of the name"}</Box>
+            )}
           {formDisabled.map(([name, isRequired, isDisabled]) => (
             <TaxonCreateInputField
               key={name}

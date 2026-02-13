@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, IconButton } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Checkbox, Flex, IconButton } from "@chakra-ui/react";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
@@ -27,7 +27,13 @@ export function CommonNameAdd() {
   );
 }
 
-export function CommonNameEditButtons({ commonName, showPreferred }) {
+export function CommonNameEditButtons({
+  commonName,
+  showPreferred,
+  selectecCommonNames,
+  setSelectedCommonNames,
+  transfer
+}) {
   const { t } = useTranslation();
 
   const handleOnEdit = () => emit(SPECIES_NAME_EDIT, commonName);
@@ -36,7 +42,26 @@ export function CommonNameEditButtons({ commonName, showPreferred }) {
 
   return (
     <Flex alignItems="center" justifyContent="space-between">
-      <Box>{commonName.name}</Box>
+      <Box>
+        {transfer == true && (
+          <Checkbox.Root
+            checked={selectecCommonNames.includes(commonName.id)}
+            onCheckedChange={(details) => {
+              setSelectedCommonNames((prev) =>
+                details.checked
+                  ? [...prev, commonName.id]
+                  : prev.filter((id) => id !== commonName.id)
+              );
+            }}
+            colorPalette={"blue"}
+            mr={2}
+          >
+            <Checkbox.HiddenInput />
+            <Checkbox.Control />
+          </Checkbox.Root>
+        )}
+        {commonName.name}
+      </Box>
       <ButtonGroup gap={0} variant="plain">
         <IconButton
           colorPalette="blue"

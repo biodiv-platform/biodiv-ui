@@ -88,7 +88,7 @@ export const TaxonCreateInputField = ({
           {...register(name)}
         />
       </InputGroup>
-      {hint && <Field color="red.600" helperText={hint} />}
+      {hint && <Field helperTextColor="red.600" helperText={hint} />}
     </Field>
   );
 };

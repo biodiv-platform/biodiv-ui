@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuMoveHorizontal } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { useLocalRouter } from "@/components/@core/local-link";
@@ -40,6 +41,7 @@ export default function SynonymList({
 
   const [synonymsList, setSynonymsList] = useState(synonyms || []);
   const [selectedSynonyms, setSelectedSynonyms] = useState<number[]>([]);
+  const [transfer, setTransfer] = useState<boolean>(false);
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
@@ -93,6 +95,17 @@ export default function SynonymList({
       {isContributor && (
         <Flex align="center" gap={2} mb={4}>
           <SynonymAdd />
+          {transfer == false && (
+            <Button
+              variant={"outline"}
+              size="xs"
+              colorPalette="blue"
+              onClick={() => setTransfer(true)}
+            >
+              <LuMoveHorizontal />
+              Transfer
+            </Button>
+          )}
           {selectedSynonyms.length > 0 && (
             <>
               <Box w="1px" h="20px" bg="gray.300" />
@@ -105,13 +118,15 @@ export default function SynonymList({
                   onSubmit={hForm.handleSubmit(onTransferSubmit)}
                 >
                   <Flex align="center" gap={2}>
+                    <Box w="1px" h="20px" bg="gray.300" />
+                    Transfer to
                     <Box>
                       <SelectAsyncInputField
                         name="newTaxonId"
                         multiple={false}
                         onQuery={(q) => onScientificNameQuery(q)}
                         optionComponent={ScientificNameOption}
-                        placeholder={t("form:min_three_chars")}
+                        placeholder={"Search accepted name"}
                         isRaw={true}
                         portalled={false}
                         mb={0}
@@ -129,6 +144,7 @@ export default function SynonymList({
                       size="sm"
                       onClick={() => {
                         setSelectedSynonyms([]);
+                        setTransfer(false);
                       }}
                       type="button"
                     >
@@ -148,7 +164,7 @@ export default function SynonymList({
             synonymsListSorted.map((synonym) => (
               <Table.Row key={synonym.id}>
                 <Table.Cell>
-                  {isContributor && (
+                  {isContributor && transfer == true && (
                     <Checkbox.Root
                       checked={selectedSynonyms.includes(synonym.id)}
                       onCheckedChange={(details) => {
