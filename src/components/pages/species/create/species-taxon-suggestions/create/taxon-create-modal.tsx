@@ -26,9 +26,10 @@ export default function TaxonCreateModal({ isOpen, onClose, validateResults }) {
 
     // This will clearErrors after values are applied
     // This has to be executed 3rd after `react-hook-form` validation and `onChange` setError Validator
-    setTimeout(clearErrors, 10);
-
-    onClose();
+    setTimeout(() => {
+      clearErrors();
+      onClose();
+    }, 10);
   };
 
   const TaxonValidateTable = [
