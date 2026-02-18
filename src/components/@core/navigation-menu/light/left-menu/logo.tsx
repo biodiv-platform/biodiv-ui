@@ -7,10 +7,10 @@ import { Mq } from "mq-styled-components";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import React, { useMemo } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
-import { getLogo } from "@/utils/media";
+import { getLogo, getResourceRAW, RESOURCE_CTX } from "@/utils/media";
 
 const EditLinkButton = dynamic(() => import("./edit-link-button"), { ssr: false });
 const JoinUserGroup = dynamic(() => import("@components/pages/group/common/join-group"), {
@@ -81,29 +81,63 @@ const Logo = styled.div`
 `;
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
-  const { currentGroup, isCurrentGroupMember, setIsCurrentGroupMember } = useGlobalState();
+  const { currentGroup, isCurrentGroupMember, setIsCurrentGroupMember, siteInfo } =
+    useGlobalState();
   const { t } = useTranslation();
 
-  const { name, nameLocal, icon } = currentGroup;
+  const { id: groupId, name, nameLocal, icon } = currentGroup;
+
+  // Memoize derived values to prevent recalculations on every render
+  const logoSrc = useMemo(
+    () => (groupId ? getLogo(icon) : getResourceRAW(RESOURCE_CTX.SITE, siteInfo.siteLogo) ?? ""),
+    [groupId, icon, siteInfo.siteLogo]
+  );
+
+  const logoAlt = useMemo(
+    () => (groupId ? name : siteInfo.title ?? ""),
+    [groupId, name, siteInfo.title]
+  );
+
+  const logoTooltip = useMemo(
+    () => (groupId ? name : siteInfo.title),
+    [groupId, name, siteInfo.title]
+  );
+
+  const displayTitle = useMemo(
+    () => (groupId ? name : siteInfo.title),
+    [groupId, name, siteInfo.title]
+  );
+
+  const govConfig = SITE_CONFIG.SITE?.GOV;
+  const showGovIcon = govConfig?.ACTIVE;
 
   return (
     <Logo>
       <LocalLink href="/" prefixGroup={true}>
         <>
-          <Image src={getLogo(icon)} alt={name ?? ""} title={name} width={128} height={60} />
+          <Image
+            src={logoSrc}
+            alt={logoAlt}
+            title={logoTooltip}
+            width={128}
+            height={60}
+            loading="eager"
+            style={{ objectFit: "contain" }}
+          />
           <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
             {nameLocal && <Box mb={1}>{nameLocal}</Box>}
-            {name}
+            {displayTitle}
           </Box>
         </>
       </LocalLink>
 
-      {SITE_CONFIG.SITE?.GOV?.ACTIVE && (
+      {showGovIcon && (
         <img
           className="icon-gov"
-          src={SITE_CONFIG.SITE?.GOV?.ICON}
-          alt={SITE_CONFIG.SITE?.GOV?.NAME}
-          title={SITE_CONFIG.SITE?.GOV?.NAME}
+          src={govConfig.ICON}
+          alt={govConfig.NAME}
+          title={govConfig.NAME}
+          loading="lazy"
         />
       )}
 
@@ -115,7 +149,8 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
       >
         {isOpen ? <LuX /> : <LuMenu />}
       </IconButton>
-      {currentGroup.id && (
+
+      {groupId && (
         <>
           <JoinUserGroup
             currentGroup={currentGroup}

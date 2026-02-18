@@ -9,7 +9,8 @@ export const RESOURCE_CTX = {
   PAGES: "PAGES",
   SPECIES: "SPECIES",
   USERGROUPS: "USERGROUPS",
-  DOCUMENT_SOCIAL_PREVIEW: "DOCUMENT_SOCIAL_PREVIEW"
+  DOCUMENT_SOCIAL_PREVIEW: "DOCUMENT_SOCIAL_PREVIEW",
+  SITE: "SITE"
 };
 
 const RESOURCE_CTX_MAP = {
@@ -19,7 +20,8 @@ const RESOURCE_CTX_MAP = {
   SPECIES_FIELD: "img",
   SPECIES: "img",
   USERGROUPS: "userGroups",
-  DOCUMENT_SOCIAL_PREVIEW: "documentSocialPreview"
+  DOCUMENT_SOCIAL_PREVIEW: "documentSocialPreview",
+  SITE: "site"
 };
 
 const cleanSlashes = (path) => path.split("//").join("/");
