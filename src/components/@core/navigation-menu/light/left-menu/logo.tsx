@@ -1,11 +1,10 @@
-import { Box, IconButton } from "@chakra-ui/react";
+import { Box, IconButton, Image } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import { Mq } from "mq-styled-components";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
