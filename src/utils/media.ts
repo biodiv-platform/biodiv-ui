@@ -76,6 +76,12 @@ export const getResourceRAW = (resourceType, resourceUrl) => {
     : undefined;
 };
 
+export const getSiteResourceRAW = (resourceType, resourceUrl) => {
+  return resourceUrl
+    ? `${ENDPOINT.FILES}/get/raw/${RESOURCE_CTX_MAP[resourceType]}${resourceUrl}`
+    : undefined;
+};
+
 export const getTraitIcon = (resourceUrl, w = 40) => {
   return resourceUrl.startsWith("/next-assets/")
     ? resourceUrl

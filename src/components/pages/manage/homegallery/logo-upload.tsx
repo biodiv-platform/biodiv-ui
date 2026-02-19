@@ -1,7 +1,7 @@
 import { Box, CloseButton, Image } from "@chakra-ui/react";
 import { axUploadResource } from "@services/files.service";
-import { resizeImage } from "@utils/image";
-import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
+import { resizeForFavicon, resizeImage } from "@utils/image";
+import { getSiteResourceRAW, RESOURCE_CTX } from "@utils/media";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
@@ -26,13 +26,16 @@ export const LogoField = ({
   const { field } = useController({ name });
 
   const [isProcessing, setIsProcessing] = useState(false);
+  // Add state for image version/timestamp to force refresh
+  const [imageVersion, setImageVersion] = useState(Date.now());
   const { formState } = useFormContext();
 
   const onDrop = async ([file]) => {
     if (!file) return;
 
     setIsProcessing(true);
-    const [fileSm] = await resizeImage(file);
+    const [fileSm] = name === "favIcon" ? await resizeForFavicon(file) : await resizeImage(file);
+
     const { success, data } = await axUploadResource(
       new File([fileSm], name + ".png"),
       "site",
@@ -40,6 +43,8 @@ export const LogoField = ({
     );
     if (success) {
       field.onChange(data);
+      // Update the image version to force reload with new timestamp
+      setImageVersion(Date.now());
     } else {
       notification(t("user:update_error"));
     }
@@ -48,7 +53,7 @@ export const LogoField = ({
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     accept: {
-      "image/*": [".png"]
+      "image/png": [".png"]
     },
     multiple: false,
     onDrop
@@ -57,6 +62,13 @@ export const LogoField = ({
   const handleOnRemove = (e) => {
     e.stopPropagation();
     field.onChange("");
+    setImageVersion(Date.now());
+  };
+
+  const getImageUrl = () => {
+    if (!field.value) return "";
+    const baseUrl = getSiteResourceRAW(RESOURCE_CTX.SITE, field.value);
+    return `${baseUrl}?v=${imageVersion}`;
   };
 
   return (
@@ -80,11 +92,12 @@ export const LogoField = ({
           {field.value ? (
             <div>
               <Image
-                src={getResourceRAW(RESOURCE_CTX.SITE, field.value)}
+                src={getImageUrl()}
                 alt={field.value}
                 maxH="120px"
                 objectFit="cover"
                 borderRadius="md"
+                key={imageVersion}
               />
               <CloseButton top={0} right={0} position="absolute" onClick={handleOnRemove} />
             </div>

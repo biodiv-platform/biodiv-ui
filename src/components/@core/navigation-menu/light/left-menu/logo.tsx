@@ -9,7 +9,7 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useMemo } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
-import { getLogo, getResourceRAW, RESOURCE_CTX } from "@/utils/media";
+import { getLogo, getSiteResourceRAW, RESOURCE_CTX } from "@/utils/media";
 
 const EditLinkButton = dynamic(() => import("./edit-link-button"), { ssr: false });
 const JoinUserGroup = dynamic(() => import("@components/pages/group/common/join-group"), {
@@ -88,7 +88,8 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
 
   // Memoize derived values to prevent recalculations on every render
   const logoSrc = useMemo(
-    () => (groupId ? getLogo(icon) : getResourceRAW(RESOURCE_CTX.SITE, siteInfo.siteLogo) ?? ""),
+    () =>
+      groupId ? getLogo(icon) : getSiteResourceRAW(RESOURCE_CTX.SITE, siteInfo.siteLogo) ?? "",
     [groupId, icon, siteInfo.siteLogo]
   );
 
