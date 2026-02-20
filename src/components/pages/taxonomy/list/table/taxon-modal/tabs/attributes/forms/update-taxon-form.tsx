@@ -227,7 +227,9 @@ export default function UpdateTaxonForm({ onDone }) {
         <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.ACCEPTED}>
           {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
             modalTaxon.name.split(" ")[0] != hForm.watch().genus && (
-              <Box color={"red.600"}>{"* Genus doesn't match the first part of the name"}</Box>
+              <Box color={"red.600"}>
+                {"* The generic name does not correspond to the genus assigned to this taxon."}
+              </Box>
             )}
           {formDisabled.map(([name, isRequired, isDisabled]) => (
             <TaxonCreateInputField
