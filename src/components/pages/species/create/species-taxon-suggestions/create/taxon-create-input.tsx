@@ -1,8 +1,9 @@
-import { Box, Button, Flex, Input, InputGroup } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Input, InputGroup } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { getByPath } from "@utils/basic";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { LuCheck } from "react-icons/lu";
 
 import { Field } from "@/components/ui/field";
 
@@ -14,6 +15,7 @@ interface TaxonCreateInputFieldProps {
   mb?: number;
   onValidate?;
   hidden?;
+  hint?;
 }
 
 export const TaxonCreateInputField = ({
@@ -23,7 +25,8 @@ export const TaxonCreateInputField = ({
   isDisabled,
   hidden,
   onValidate,
-  mb = 4
+  mb = 4,
+  hint = ""
 }: TaxonCreateInputFieldProps) => {
   const {
     register,
@@ -36,7 +39,7 @@ export const TaxonCreateInputField = ({
   const fieldWatch = watch(name);
 
   useDidUpdateEffect(() => {
-    if (isRequired && fieldWatch) {
+    if (fieldWatch) {
       // scheduling validation so this will trigger always after executing form's validator
       setTimeout(() => {
         setError(name, { type: "manual", message: "err" });
@@ -62,12 +65,19 @@ export const TaxonCreateInputField = ({
           </Flex>
         }
         endElement={
-          errors[name] && (
+          errors[name] ? (
             <Box width="5.4rem">
               <Button onClick={onValidateClick} h="1.75rem" size="sm" colorPalette="red">
                 validate
               </Button>
             </Box>
+          ) : (
+            !isDisabled &&
+            fieldWatch && (
+              <Box>
+                <Icon as={LuCheck} color="green.500" />
+              </Box>
+            )
           )
         }
       >
@@ -78,6 +88,7 @@ export const TaxonCreateInputField = ({
           {...register(name)}
         />
       </InputGroup>
+      {hint && <Field helperTextColor="red.600" helperText={hint} />}
     </Field>
   );
 };
