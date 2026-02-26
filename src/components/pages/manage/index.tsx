@@ -45,6 +45,10 @@ function AdminComponent() {
         { href: "/manage/species-fields", label: t("admin:links.species_fields") },
         { href: "/species/create", label: t("admin:links.add_species_page") }
       ]
+    },
+    {
+      title: t("Elastic"),
+      items: [{ href: "/manage/elastic", label: t("Update Elastic Index") }]
     }
   ];
 
