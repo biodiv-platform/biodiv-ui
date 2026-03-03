@@ -16,7 +16,14 @@ interface TaxonCreateInputFieldProps {
   onValidate?;
   hidden?;
   hint?;
+  color?;
 }
+
+const POSITION_COLOR = {
+  WORKING: "yellow.300!",
+  CLEAN: "green.300!",
+  RAW: "gray.300!"
+};
 
 export const TaxonCreateInputField = ({
   name,
@@ -37,6 +44,7 @@ export const TaxonCreateInputField = ({
   } = useFormContext();
 
   const fieldWatch = watch(name);
+  const position = watch("metadata."+name)
 
   useDidUpdateEffect(() => {
     if (fieldWatch) {
@@ -86,6 +94,7 @@ export const TaxonCreateInputField = ({
           placeholder={label}
           defaultValue={getByPath(control._defaultValues, name)}
           {...register(name)}
+          bg={POSITION_COLOR[position] || "white!"}
         />
       </InputGroup>
       {hint && <Field helperTextColor="red.600" helperText={hint} />}

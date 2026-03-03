@@ -10,9 +10,9 @@ export function TaxonAttributesForm({ onClose }) {
     <div>
       <UpdateNameForm onDone={onClose} />
       <Separator my={4} />
-      <UpdateTaxonForm onDone={onClose} />
-      <Separator my={4} />
       <UpdatePositionForm onDone={onClose} />
+      <Separator my={4} />
+      <UpdateTaxonForm onDone={onClose} />
     </div>
   );
 }

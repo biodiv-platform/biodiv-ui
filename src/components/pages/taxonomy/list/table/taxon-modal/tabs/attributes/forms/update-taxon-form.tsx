@@ -1,4 +1,4 @@
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
@@ -32,6 +32,7 @@ export default function UpdateTaxonForm({ onDone }) {
   const { open, onClose, onOpen } = useDisclosure();
   const { currentGroup } = useGlobalState();
   const [fieldHints, setFieldHints] = useState<Record<string, string>>({});
+  const [editHierarchy, setEditHierarchy] = useState<boolean>(false);
 
   const getLocalPath = (href, params = {}, prefixGroup?, currentGroup?) => {
     const groupPrefixPath =
@@ -94,12 +95,21 @@ export default function UpdateTaxonForm({ onDone }) {
             .min(1)
             .required()
         }),
+        metadata: Yup.object().shape(
+          Object.fromEntries(taxonRanks.map(({ name }) => [name, Yup.string().notRequired()]))
+        ),
         ...formValidationSchema
       })
     ),
     defaultValues: {
       status: modalTaxon?.status,
       newTaxonId: modalTaxon?.acceptedNames?.map((o) => ({ value: o.id, label: o.name })) || [],
+      metadata: Object.fromEntries(
+        modalTaxon?.hierarchy?.map((o) => [
+          o.rankName,
+          modalTaxon?.rank === o.rankName ? modalTaxon?.position : o.position
+        ]) || []
+      ),
       ...Object.fromEntries(
         modalTaxon?.hierarchy?.map((o) => [
           o.rankName,
@@ -141,7 +151,7 @@ export default function UpdateTaxonForm({ onDone }) {
     }
   };
 
-  const handleOnStatusFormSubmit = async ({ newTaxonId, status, ...hierarchy }) => {
+  const handleOnStatusFormSubmit = async ({ newTaxonId, status, metadata, ...hierarchy }) => {
     if (status === TAXON_STATUS_VALUES.SYNONYM) {
       const treeData = await axGetTaxonList({
         expand_taxon: true,
@@ -224,25 +234,38 @@ export default function UpdateTaxonForm({ onDone }) {
         />
 
         {/*<Field label={t("taxon:modal.attributes.rank.title")} />*/}
-        <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.ACCEPTED}>
-          {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
-            modalTaxon.name.split(" ")[0] != hForm.watch().genus && (
-              <Box color={"red.600"}>
-                {"* The generic name does not correspond to the genus assigned to this taxon."}
-              </Box>
-            )}
-          {formDisabled.map(([name, isRequired, isDisabled]) => (
-            <TaxonCreateInputField
-              key={name}
-              name={name}
-              label={name}
-              isDisabled={isDisabled}
-              onValidate={handleOnRankValidate}
-              isRequired={isRequired}
-              hint={fieldHints[name]}
-            />
-          ))}
-        </Box>
+        {(modalTaxon?.status != TAXON_STATUS_VALUES.ACCEPTED || editHierarchy != false) && (
+          <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.ACCEPTED}>
+            {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
+              modalTaxon.name.split(" ")[0] != hForm.watch().genus && (
+                <Box color={"red.600"}>
+                  {"* The generic name does not correspond to the genus assigned to this taxon."}
+                </Box>
+              )}
+            {formDisabled.map(([name, isRequired, isDisabled]) => (
+              <TaxonCreateInputField
+                key={name}
+                name={name}
+                label={name}
+                isDisabled={isDisabled}
+                onValidate={handleOnRankValidate}
+                isRequired={isRequired}
+                hint={fieldHints[name]}
+              />
+            ))}
+          </Box>
+        )}
+        {editHierarchy != true && modalTaxon?.status == TAXON_STATUS_VALUES.ACCEPTED && (
+          <Box mb={4}>
+            <Button colorPalette={"green"} onClick={() => {
+              if (confirm("Hierarchy change might be only reflected if the position is clean")) {
+                setEditHierarchy(true)
+              }
+            }}>
+              Edit Hierarchy
+            </Button>
+          </Box>
+        )}
         <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.SYNONYM}>
           <SelectAsyncInputField
             name="newTaxonId"

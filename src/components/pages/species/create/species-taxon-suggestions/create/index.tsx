@@ -50,10 +50,11 @@ export function SpeciesTaxonCreateForm() {
   });
 
   const handleOnTaxonCreate = async (values) => {
+    const {metadata, ...valuesWithMetdata} = values;
     const { success, data } = await axSaveTaxonomy({
       scientificName: validationParams.scientificName,
       rank: validationParams.rankName,
-      rankToName: Object.fromEntries(Object.entries(values).filter((o) => o[1])),
+      rankToName: Object.fromEntries(Object.entries(valuesWithMetdata).filter((o) => o[1])),
       status: "ACCEPTED",
       position: "RAW"
     });
