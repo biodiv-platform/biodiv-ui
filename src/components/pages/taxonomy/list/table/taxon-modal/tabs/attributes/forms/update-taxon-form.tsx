@@ -1,4 +1,4 @@
-import { Box, Button, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Circle, HStack, Icon, useDisclosure } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { SubmitButton } from "@components/form/submit-button";
@@ -17,6 +17,7 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 import * as Yup from "yup";
 
 import ExternalBlueLink from "@/components/@core/blue-link/external";
@@ -134,6 +135,13 @@ export default function UpdateTaxonForm({ onDone }) {
       // if results are available show select dialouge
       if (data.matched) {
         setValidateResults(data.matched);
+        if (fieldHints[rankName]) {
+          setFieldHints((prev) => {
+            const newHints = { ...prev };
+            delete newHints[rankName];
+            return newHints;
+          });
+        }
         onOpen();
       } else {
         // Set a warning (not an error) - won't block form submission
@@ -196,6 +204,17 @@ export default function UpdateTaxonForm({ onDone }) {
         });
         return;
       }
+    } else {
+      if (
+        (modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
+        modalTaxon.name.split(" ")[0] != hForm.watch().genus
+      ) {
+        notification(
+          "Couldn't submit as the generic name does not correspond to the genus assigned to this taxon.",
+          NotificationType.Error
+        );
+        return;
+      }
     }
     delete hierarchy[modalTaxon.rank];
     for (const rank in hierarchy) {
@@ -253,15 +272,42 @@ export default function UpdateTaxonForm({ onDone }) {
                 hint={fieldHints[name]}
               />
             ))}
+            <Box p={2} lineHeight={1} mb={4}>
+              <HStack gap={7} mb={4}>
+                <Box display="flex" alignItems="center" gap={2} justifyContent={"center"}>
+                  <Circle size="15px" bg="var(--chakra-colors-gray-300)" />
+                  Raw
+                </Box>
+                <Box display="flex" alignItems="center" gap={2} justifyContent={"center"}>
+                  <Circle size="15px" bg="var(--chakra-colors-yellow-300)" />
+                  Working
+                </Box>
+                <Box display="flex" alignItems="center" gap={2} justifyContent={"center"}>
+                  <Circle size="15px" bg="var(--chakra-colors-green-300)" />
+                  Clean
+                </Box>
+              </HStack>
+              <Box display="flex" alignItems="center" gap={2} mb={2}>
+                <Icon as={LuCheck} color="green.500" />
+                Name match found and validated
+              </Box>
+              <Box display="flex" alignItems="center" gap={2}>
+                <Icon as={LuTriangleAlert} color="red.500" />
+                No match found, name will be created
+              </Box>
+            </Box>
           </Box>
         )}
         {editHierarchy != true && modalTaxon?.status == TAXON_STATUS_VALUES.ACCEPTED && (
           <Box mb={4}>
-            <Button colorPalette={"green"} onClick={() => {
-              if (confirm("Hierarchy change might be only reflected if the position is clean")) {
-                setEditHierarchy(true)
-              }
-            }}>
+            <Button
+              colorPalette={"green"}
+              onClick={() => {
+                if (confirm("Hierarchy change might be only reflected if the position is clean")) {
+                  setEditHierarchy(true);
+                }
+              }}
+            >
               Edit Hierarchy
             </Button>
           </Box>

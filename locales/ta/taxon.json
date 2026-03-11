@@ -17,7 +17,8 @@
     "root": "வேர்",
     "species": "இனம்",
     "subfamily": "துணைக் குடும்பம்",
-    "subgenus": "துணை இனம்"
+    "subgenus": "துணை இனம்",
+    "superfamily": "சூப்பர் குடும்பம்"
   },
   "modal": {
     "activity": "செயல்பாடு",

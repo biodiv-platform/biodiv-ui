@@ -17,7 +17,8 @@
     "root": "শিকড়",
     "species": "প্রজাতি",
     "subfamily": "উপপরিবার",
-    "subgenus": "সাবজেনাস"
+    "subgenus": "সাবজেনাস",
+    "superfamily": "সুপার ফ্যামিলি"
   },
   "modal": {
     "activity": "কার্যকলাপ",

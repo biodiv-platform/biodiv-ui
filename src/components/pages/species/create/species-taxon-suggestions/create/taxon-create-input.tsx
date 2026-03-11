@@ -1,9 +1,9 @@
-import { Box, Button, Flex, Icon, Input, InputGroup } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Input, InputGroup, useBreakpointValue } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { getByPath } from "@utils/basic";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { LuCheck } from "react-icons/lu";
+import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 
 import { Field } from "@/components/ui/field";
 
@@ -44,7 +44,8 @@ export const TaxonCreateInputField = ({
   } = useFormContext();
 
   const fieldWatch = watch(name);
-  const position = watch("metadata."+name)
+  const position = watch("metadata." + name);
+  const isSmall = useBreakpointValue({ base: true, md: false });
 
   useDidUpdateEffect(() => {
     if (fieldWatch) {
@@ -67,7 +68,7 @@ export const TaxonCreateInputField = ({
     >
       <InputGroup
         startAddon={
-          <Flex minW="8rem" align="center" gap={1}>
+          !isSmall && <Flex minW="8rem" align="center" gap={1}>
             <Box>{label}</Box>
             {isRequired && <Box color="red.500">*</Box>}
           </Flex>
@@ -83,7 +84,7 @@ export const TaxonCreateInputField = ({
             !isDisabled &&
             fieldWatch && (
               <Box>
-                <Icon as={LuCheck} color="green.500" />
+                {!hint ? <Icon as={LuCheck} color="green.500" /> : <Icon as={LuTriangleAlert} color="red.500" />}
               </Box>
             )
           )
@@ -97,7 +98,7 @@ export const TaxonCreateInputField = ({
           bg={POSITION_COLOR[position] || "white!"}
         />
       </InputGroup>
-      {hint && <Field helperTextColor="red.600" helperText={hint} />}
+      {/*hint && <Field helperTextColor="red.600" helperText={hint} />*/}
     </Field>
   );
 };

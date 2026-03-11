@@ -99,7 +99,15 @@ export function TaxonAttributesTable() {
             {modalTaxon?.hierarchy?.map((rank) => (
               <Table.Row key={rank.rankName}>
                 <Table.Cell>{t(`taxon:hierarchy.${rank.rankName}`)}</Table.Cell>
-                <Table.Cell>{rank.name}</Table.Cell>
+                <Table.Cell
+                  style={{
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                    hyphens: "auto"
+                  }}
+                >
+                  {rank.name}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
