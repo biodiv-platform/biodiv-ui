@@ -76,7 +76,7 @@ export default function MapPageComponent({ defaultLayers }) {
         defaultViewState={defaultViewState}
         loadToC={true}
         showToC={true}
-        selectedLayers={selectedLayers}
+        selectedLayers={defaultLayers}
         onSelectedLayersChange={setSelectedLayers}
         nakshaEndpointToken={`Bearer ${user.accessToken}`}
         mapStyles={mapStyles}
