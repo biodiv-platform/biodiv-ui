@@ -12,7 +12,7 @@
     "api": {
       "update_index": {
         "error": "Erreur lors de la mise à jour de l'index Elastic",
-        "success": "Index élastique mis à jour avec succès"
+        "success": "La mise à jour de l'index Elastic s'est déclenchée avec succès"
       }
     },
     "columns": {

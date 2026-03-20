@@ -12,7 +12,7 @@
     "api": {
       "update_index": {
         "error": "Hadisoana amin'ny fanavaozana ny tondro elastika",
-        "success": "Nohavaozina soa aman-tsara ny fanondroana elastika"
+        "success": "Nipoitra soa aman-tsara ny fanavaozana ny tondro elastika"
       }
     },
     "columns": {

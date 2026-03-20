@@ -11,7 +11,7 @@
   "elastic": {
     "api": {
       "update_index": {
-        "success": "Elastic index updated successfully",
+        "success": "Elastic index update triggered successfully",
         "error": "Error updating Elastic index"
       }
     },

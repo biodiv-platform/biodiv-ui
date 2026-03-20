@@ -12,7 +12,7 @@
     "api": {
       "update_index": {
         "error": "Hitilafu ya kusasisha faharasa ya Elastic",
-        "success": "Faharasa ya elastic imesasishwa"
+        "success": "Usasishaji wa faharasa wa elastic umeanzishwa"
       }
     },
     "columns": {
