@@ -26,29 +26,49 @@ export const LogoField = ({
   const { field } = useController({ name });
 
   const [isProcessing, setIsProcessing] = useState(false);
-  // Add state for image version/timestamp to force refresh
   const [imageVersion, setImageVersion] = useState(Date.now());
   const { formState } = useFormContext();
+
+  const clearImageCache = async () => {
+    try {
+      const response = await fetch("/api/image-cache/clear");
+      if (!response.ok) {
+        console.error("Failed to clear image cache");
+      }
+    } catch (error) {
+      console.error("Image cache clear request failed:", error);
+    }
+  };
 
   const onDrop = async ([file]) => {
     if (!file) return;
 
     setIsProcessing(true);
-    const [fileSm] = name === "favIcon" ? await resizeForFavicon(file) : await resizeImage(file);
 
-    const { success, data } = await axUploadResource(
-      new File([fileSm], name + ".png"),
-      "site",
-      name
-    );
-    if (success) {
-      field.onChange(data);
-      // Update the image version to force reload with new timestamp
-      setImageVersion(Date.now());
-    } else {
+    try {
+      const [fileSm] = name === "favIcon" ? await resizeForFavicon(file) : await resizeImage(file);
+
+      const { success, data } = await axUploadResource(
+        new File([fileSm], name + ".png"),
+        "site",
+        name
+      );
+
+      if (success) {
+        field.onChange(data);
+
+        await clearImageCache();
+
+        setImageVersion(Date.now());
+      } else {
+        notification(t("user:update_error"));
+      }
+    } catch (error) {
+      console.error(error);
       notification(t("user:update_error"));
+    } finally {
+      setIsProcessing(false);
     }
-    setIsProcessing(false);
   };
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
@@ -59,9 +79,10 @@ export const LogoField = ({
     onDrop
   });
 
-  const handleOnRemove = (e) => {
+  const handleOnRemove = async (e) => {
     e.stopPropagation();
     field.onChange("");
+    await clearImageCache();
     setImageVersion(Date.now());
   };
 
@@ -82,7 +103,6 @@ export const LogoField = ({
     >
       {label && <Field htmlFor={name} label={label} />}
 
-      {/* Dropzone */}
       <Box id={name} width={"full"}>
         <Container
           style={{ height: "200px", padding: "1rem", position: "relative" }}
