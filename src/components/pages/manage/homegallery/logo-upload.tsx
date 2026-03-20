@@ -26,7 +26,6 @@ export const LogoField = ({
   const { field } = useController({ name });
 
   const [isProcessing, setIsProcessing] = useState(false);
-  const [imageVersion, setImageVersion] = useState(Date.now());
   const { formState } = useFormContext();
 
   const clearImageCache = async () => {
@@ -56,10 +55,7 @@ export const LogoField = ({
 
       if (success) {
         field.onChange(data);
-
         await clearImageCache();
-
-        setImageVersion(Date.now());
       } else {
         notification(t("user:update_error"));
       }
@@ -83,13 +79,6 @@ export const LogoField = ({
     e.stopPropagation();
     field.onChange("");
     await clearImageCache();
-    setImageVersion(Date.now());
-  };
-
-  const getImageUrl = () => {
-    if (!field.value) return "";
-    const baseUrl = getSiteResourceRAW(RESOURCE_CTX.SITE, field.value);
-    return `${baseUrl}?v=${imageVersion}`;
   };
 
   return (
@@ -112,12 +101,11 @@ export const LogoField = ({
           {field.value ? (
             <div>
               <Image
-                src={getImageUrl()}
+                src={getSiteResourceRAW(RESOURCE_CTX.SITE, field.value)}
                 alt={field.value}
                 maxH="120px"
                 objectFit="cover"
                 borderRadius="md"
-                key={imageVersion}
               />
               <CloseButton top={0} right={0} position="absolute" onClick={handleOnRemove} />
             </div>
