@@ -31,7 +31,7 @@ export const LogoField = ({
 
   const clearImageCache = async () => {
     try {
-      const response = await fetch("/api/image-cache/clear");
+      const response = await fetch("/api/memory-cache/clear");
       if (!response.ok) {
         console.error("Failed to clear image cache");
       }
