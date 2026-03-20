@@ -24,7 +24,6 @@ import { axUpdateObservationElastic } from "@/services/observation.service";
 import { formatTimeStampFromUTC } from "@/utils/date";
 import notification, { NotificationType } from "@/utils/notification";
 
-import UserFilterInput from "./filters/name-of-user";
 import useObservationList from "./use-observation-filter";
 
 type FormValues = {
@@ -99,14 +98,14 @@ export default function ElasticComponent() {
       const response = await axUpdateObservationElastic("UPDATE", ids);
 
       if (response.success) {
-        notification("Elastic update triggered successfully", NotificationType.Success);
+        notification(t("admin:elastic.api.update_index.success"), NotificationType.Success);
         hForm.reset({ observationIds: [] });
       } else {
-        notification("Failed to trigger Elastic update", NotificationType.Error);
+        notification(t("admin:elastic.api.update_index.error"), NotificationType.Error);
       }
     } catch (error) {
       console.error(error);
-      notification("Something went wrong", NotificationType.Error);
+      notification(t("admin:elastic.api.update_index.error"), NotificationType.Error);
     } finally {
       setLoading(false);
     }
@@ -115,8 +114,7 @@ export default function ElasticComponent() {
   return (
     <Box mb={4} className="container fadeInUp" pt={6}>
       <HStack mb={3}>
-        <BoxHeading fontSize="3xl"> {t("Observation list")}</BoxHeading>
-        <UserFilterInput filterKey="authorId" />
+        <BoxHeading fontSize="3xl"> {t("admin:elastic.list.title")}</BoxHeading>
       </HStack>
 
       <Separator />
@@ -126,7 +124,7 @@ export default function ElasticComponent() {
           <HStack align="flex-end" gap={4} mb={4}>
             <Box flex="1">
               <Text fontSize="sm" color="gray.600" mb={1}>
-                {t("Total observations")} <strong>{total}</strong>
+                {t("admin:elastic.list.total")} <strong>{total}</strong>
               </Text>
 
               <TagsNextField name="observationIds" placeholder="Add observation ids" numericOnly />
@@ -139,7 +137,7 @@ export default function ElasticComponent() {
               disabled={!selectedIds.length}
               loading={loading}
             >
-              {t("Update Elastic index")}
+              {t("admin:elastic.list.update_index")}
             </Button>
           </HStack>
         </FormProvider>
@@ -159,12 +157,11 @@ export default function ElasticComponent() {
                   <Checkbox.Control />
                 </Checkbox.Root>
               </Table.ColumnHeader>
-
-              <Table.ColumnHeader>{t("ObservationId")}</Table.ColumnHeader>
-              <Table.ColumnHeader>{t("AuthorId")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:elastic.columns.observation_id")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:elastic.columns.author_id")}</Table.ColumnHeader>
               <Table.ColumnHeader>{t("admin:gbif.table.columns.created_on")}</Table.ColumnHeader>
-              <Table.ColumnHeader>{t("GroupId")}</Table.ColumnHeader>
-              <Table.ColumnHeader>{t("Deleted")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:elastic.columns.group_id")}</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("admin:elastic.columns.deleted")}</Table.ColumnHeader>
             </Table.Row>
           </Table.Header>
 

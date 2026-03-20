@@ -8,6 +8,25 @@
     "edit_failure": "Enable to edit announcement",
     "edit_success": "Announcement edited successfully"
   },
+  "elastic": {
+    "api": {
+      "update_index": {
+        "success": "Elastic index updated successfully",
+        "error": "Error updating Elastic index"
+      }
+    },
+    "columns": {
+      "author_id": "AuthorID",
+      "deleted": "Deleted",
+      "group_id": "GroupID",
+      "observation_id": "ObservationID"
+    },
+    "list": {
+      "title": "Observation list",
+      "total": "Total Observations: ",
+      "update_index": "Update Elastic index"
+    }
+  },
   "gbif": {
     "api": {
       "create": {

@@ -8,6 +8,25 @@
     "edit_failure": "ଘୋଷଣାକୁ ସଂପାଦନ କରିବାକୁ ସକ୍ଷମ କରନ୍ତୁ |",
     "edit_success": "ଘୋଷଣା ସଫଳତାର ସହିତ ସମ୍ପାଦିତ |"
   },
+  "elastic": {
+    "api": {
+      "update_index": {
+        "error": "ଇଲେଷ୍ଟିକ୍ ଇଣ୍ଡେକ୍ସ ଅପଡେଟ୍ କରିବାରେ ତ୍ରୁଟି |",
+        "success": "ଇଲେଷ୍ଟିକ୍ ଇଣ୍ଡେକ୍ସ ସଫଳତାର ସହିତ ଅଦ୍ୟତନ ହେଲା |"
+      }
+    },
+    "columns": {
+      "author_id": "AuthorID",
+      "deleted": "ବିଲୋପ",
+      "group_id": "GroupID",
+      "observation_id": "ObservationID"
+    },
+    "list": {
+      "title": "ପର୍ଯ୍ୟବେକ୍ଷଣ ତାଲିକା |",
+      "total": "ସମୁଦାୟ ପର୍ଯ୍ୟବେକ୍ଷଣ:",
+      "update_index": "ଇଲେଷ୍ଟିକ୍ ଇଣ୍ଡେକ୍ସ ଅପଡେଟ୍ କରନ୍ତୁ |"
+    }
+  },
   "gbif": {
     "api": {
       "create": {

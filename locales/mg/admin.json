@@ -8,6 +8,25 @@
     "edit_failure": "Mamela ny fanovana",
     "edit_success": "Namboarina tamim-pahombiazana ny fanambarana"
   },
+  "elastic": {
+    "api": {
+      "update_index": {
+        "error": "Hadisoana amin'ny fanavaozana ny tondro elastika",
+        "success": "Nohavaozina soa aman-tsara ny fanondroana elastika"
+      }
+    },
+    "columns": {
+      "author_id": "AuthorID",
+      "deleted": "nofafana",
+      "group_id": "GroupID",
+      "observation_id": "ObservationID"
+    },
+    "list": {
+      "title": "Lisitry ny fandinihana",
+      "total": "Total Observations:",
+      "update_index": "Fanavaozana ny Index Elastic"
+    }
+  },
   "gbif": {
     "api": {
       "create": {

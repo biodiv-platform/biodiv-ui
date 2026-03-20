@@ -8,6 +8,25 @@
     "edit_failure": "Wezesha kuhariri tangazo",
     "edit_success": "Tangazo lilihaririwa kwa mafanikio"
   },
+  "elastic": {
+    "api": {
+      "update_index": {
+        "error": "Hitilafu ya kusasisha faharasa ya Elastic",
+        "success": "Faharasa ya elastic imesasishwa"
+      }
+    },
+    "columns": {
+      "author_id": "MwandishiID",
+      "deleted": "Imefutwa",
+      "group_id": "Kitambulisho cha Kikundi",
+      "observation_id": "Kitambulisho cha uchunguzi"
+    },
+    "list": {
+      "title": "Orodha ya uchunguzi",
+      "total": "Jumla ya Maoni:",
+      "update_index": "Sasisha faharasa ya Elastic"
+    }
+  },
   "gbif": {
     "api": {
       "create": {

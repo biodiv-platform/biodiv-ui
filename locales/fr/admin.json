@@ -8,6 +8,25 @@
     "edit_failure": "Permettre de modifier l'annonce",
     "edit_success": "Annonce édité avec succès"
   },
+  "elastic": {
+    "api": {
+      "update_index": {
+        "error": "Erreur lors de la mise à jour de l'index Elastic",
+        "success": "Index élastique mis à jour avec succès"
+      }
+    },
+    "columns": {
+      "author_id": "ID d'auteur",
+      "deleted": "Supprimé",
+      "group_id": "ID de groupe",
+      "observation_id": "ID d'observation"
+    },
+    "list": {
+      "title": "Liste d'observations",
+      "total": "Observations totales :",
+      "update_index": "Mettre à jour l'index élastique"
+    }
+  },
   "gbif": {
     "api": {
       "create": {
