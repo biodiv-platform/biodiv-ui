@@ -225,6 +225,7 @@ export default function UpdateTaxonForm({ onDone }) {
     }
     const { success, data } = await axUpdateTaxonStatus({
       taxonId: modalTaxon.id,
+      position: modalTaxon?.position,
       status,
       ...(status === TAXON_STATUS_VALUES.SYNONYM
         ? { newTaxonId: newTaxonId.map((t) => t.value) }

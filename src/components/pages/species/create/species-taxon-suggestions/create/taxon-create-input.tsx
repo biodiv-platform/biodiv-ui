@@ -66,12 +66,20 @@ export const TaxonCreateInputField = ({
       required={isRequired}
       disabled={isDisabled}
     >
+      {isSmall && (
+        <Flex minW="8rem" align="center" gap={1}>
+          <Box>{label}</Box>
+          {isRequired && <Box color="red.500">*</Box>}
+        </Flex>
+      )}
       <InputGroup
         startAddon={
-          !isSmall && <Flex minW="8rem" align="center" gap={1}>
-            <Box>{label}</Box>
-            {isRequired && <Box color="red.500">*</Box>}
-          </Flex>
+          !isSmall && (
+            <Flex minW="8rem" align="center" gap={1}>
+              <Box>{label}</Box>
+              {isRequired && <Box color="red.500">*</Box>}
+            </Flex>
+          )
         }
         endElement={
           errors[name] ? (
@@ -84,7 +92,11 @@ export const TaxonCreateInputField = ({
             !isDisabled &&
             fieldWatch && (
               <Box>
-                {!hint ? <Icon as={LuCheck} color="green.500" /> : <Icon as={LuTriangleAlert} color="red.500" />}
+                {!hint ? (
+                  <Icon as={LuCheck} color="green.500" />
+                ) : (
+                  <Icon as={LuTriangleAlert} color="red.500" />
+                )}
               </Box>
             )
           )
