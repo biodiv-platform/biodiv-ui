@@ -33,7 +33,8 @@ export default function EditMiniGalleryForm({
   groupId,
   item,
   miniGallery,
-  setMiniGallery
+  setMiniGallery,
+  create = false
 }) {
   const { t } = useTranslation();
   const {
@@ -169,28 +170,29 @@ export default function EditMiniGalleryForm({
                   ? hForm.getValues().translations[SITE_CONFIG.LANG.DEFAULT_ID].title
                   : t("group:homepage_customization.resources.title")
               }
+              disabled={!galleryId}
             />
             <RadioInputField
               key={`isVertical`}
               name={`isVertical`}
               label={t("group:homepage_customization.mini_gallery_setup.vertical_label")}
               options={SLIDER_TYPE}
-              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID || !galleryId}
             />
             <SwitchField
               key={`isActive`}
               name={`isActive`}
               label={t("group:homepage_customization.mini_gallery_setup.active_label")}
-              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID || !galleryId}
             />
             <NumberInputField
               key={`slidesPerView`}
               name={`slidesPerView`}
               label={t("group:homepage_customization.mini_gallery_setup.slides_per_view")}
-              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID || !galleryId}
             />
           </Box>
-          <SubmitButton>{t("common:update")}</SubmitButton>
+          {galleryId && <SubmitButton>{t("common:update")}</SubmitButton>}
         </form>
       </FormProvider>
       <Box h="1px" w="100%" bg="gray.300" my={4} />
@@ -239,6 +241,7 @@ export default function EditMiniGalleryForm({
             galleryId={Number(item.galleryId)}
             vertical={item.isVertical}
             index={index}
+            create={create}
           />
         ) : groupId == -1 ? (
           <GallerySetupTable

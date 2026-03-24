@@ -63,19 +63,17 @@ export default function MiniGroupGalleryItem({ item, index, onEdit, onDelete, gr
             </Badge>
           </Heading>
           <Box>
-            {item.galleryId && (
-              <IconButton
-                colorPalette="blue"
-                className="action"
-                aria-label={t("common:edit")}
-                title={t("common:edit")}
-                variant="plain"
-                size="xl"
-                onClick={() => onEdit(index, item)}
-              >
-                <EditIcon />
-              </IconButton>
-            )}
+            <IconButton
+              colorPalette="blue"
+              className="action"
+              aria-label={t("common:edit")}
+              title={t("common:edit")}
+              variant="plain"
+              size="xl"
+              onClick={() => onEdit(index, item)}
+            >
+              <EditIcon />
+            </IconButton>
             <IconButton
               colorPalette="red"
               className="action"
