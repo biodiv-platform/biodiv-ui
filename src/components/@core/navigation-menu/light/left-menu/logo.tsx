@@ -7,10 +7,10 @@ import { Mq } from "mq-styled-components";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import React from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
-import { getLogo, getSiteResourceRAW, RESOURCE_CTX } from "@/utils/media";
+import { getLogo } from "@/utils/media";
 
 const EditLinkButton = dynamic(() => import("./edit-link-button"), { ssr: false });
 const JoinUserGroup = dynamic(() => import("@components/pages/group/common/join-group"), {
@@ -87,27 +87,8 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
 
   const { id: groupId, name, nameLocal, icon } = currentGroup;
 
-  // Memoize derived values to prevent recalculations on every render
-  const logoSrc = useMemo(
-    () =>
-      groupId ? getLogo(icon) : getSiteResourceRAW(RESOURCE_CTX.SITE, siteInfo.siteLogo) ?? "",
-    [groupId, icon, siteInfo.siteLogo]
-  );
-
-  const logoAlt = useMemo(
-    () => (groupId ? name : siteInfo.title ?? ""),
-    [groupId, name, siteInfo.title]
-  );
-
-  const logoTooltip = useMemo(
-    () => (groupId ? name : siteInfo.title),
-    [groupId, name, siteInfo.title]
-  );
-
-  const displayTitle = useMemo(
-    () => (groupId ? name : siteInfo.title),
-    [groupId, name, siteInfo.title]
-  );
+  const logoAlt = groupId ? name : siteInfo.title ?? "";
+  const displayTitle = groupId ? name : siteInfo.title;
 
   const govConfig = SITE_CONFIG.SITE?.GOV;
   const showGovIcon = govConfig?.ACTIVE;
@@ -115,20 +96,18 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
   return (
     <Logo>
       <LocalLink href="/" prefixGroup={true}>
-        <>
-          <Image
-            src={logoSrc}
-            alt={logoAlt}
-            title={logoTooltip}
-            width={128}
-            height={60}
-            style={{ objectFit: "contain" }}
-          />
-          <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
-            {nameLocal && <Box mb={1}>{nameLocal}</Box>}
-            {displayTitle}
-          </Box>
-        </>
+        <Image
+          src={getLogo(icon)}
+          alt={logoAlt}
+          title={displayTitle}
+          width={128}
+          height={60}
+          style={{ objectFit: "contain" }}
+        />
+        <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
+          {nameLocal && <Box mb={1}>{nameLocal}</Box>}
+          {displayTitle}
+        </Box>
       </LocalLink>
 
       {showGovIcon && (
