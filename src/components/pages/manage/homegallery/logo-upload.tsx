@@ -26,18 +26,8 @@ export const LogoField = ({
   const { field } = useController({ name });
 
   const [isProcessing, setIsProcessing] = useState(false);
+  const [cacheKey, setCacheKey] = useState(Date.now()); // 🔥 cache buster
   const { formState } = useFormContext();
-
-  const clearImageCache = async () => {
-    try {
-      const response = await fetch("/api/memory-cache/clear");
-      if (!response.ok) {
-        console.error("Failed to clear image cache");
-      }
-    } catch (error) {
-      console.error("Image cache clear request failed:", error);
-    }
-  };
 
   const onDrop = async ([file]) => {
     if (!file) return;
@@ -55,7 +45,7 @@ export const LogoField = ({
 
       if (success) {
         field.onChange(data);
-        await clearImageCache();
+        setCacheKey(Date.now()); // 🔥 force image refresh
       } else {
         notification(t("user:update_error"));
       }
@@ -75,10 +65,10 @@ export const LogoField = ({
     onDrop
   });
 
-  const handleOnRemove = async (e) => {
+  const handleOnRemove = (e) => {
     e.stopPropagation();
     field.onChange("");
-    await clearImageCache();
+    setCacheKey(Date.now());
   };
 
   return (
@@ -101,7 +91,7 @@ export const LogoField = ({
           {field.value ? (
             <div>
               <Image
-                src={getSiteResourceRAW(RESOURCE_CTX.SITE, field.value)}
+                src={`${getSiteResourceRAW(RESOURCE_CTX.SITE, field.value)}?t=${cacheKey}`} // 🔥 key fix
                 alt={field.value}
                 maxH="120px"
                 objectFit="cover"
