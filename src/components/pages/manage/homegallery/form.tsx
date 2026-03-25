@@ -1,5 +1,6 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Grid } from "@chakra-ui/react";
 import { SwitchField } from "@components/form/switch";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { axUploadHomePageEditorResource } from "@services/pages.service";
 import { axInsertHomePageGallery } from "@services/utility.service";
 import notification, { NotificationType } from "@utils/notification";
@@ -7,8 +8,14 @@ import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import * as Yup from "yup";
 
+import { TextBoxField } from "@/components/form/text";
+import SITE_CONFIG from "@/configs/site-config";
+
+import TranslationTab from "../../common/translation-tab";
 import GallerySetup from "./gallery-setup";
+import { LogoField } from "./logo-upload";
 import MiniGallery from "./mini-gallery";
 
 const WYSIWYGField = dynamic(() => import("@components/form/wysiwyg"), { ssr: false });
@@ -26,6 +33,24 @@ export default function HomePageGalleryCustomizationForm({
   const [isEdit, setIsEdit] = useState(false);
   const [miniGalleryList, setMiniGalleryList] = useState(homePageDetails?.miniGallery);
 
+  const [translationSelected, setTranslationSelected] = useState<number>(
+    SITE_CONFIG.LANG.DEFAULT_ID
+  );
+  const [langId, setLangId] = useState(0);
+
+  const validationSchema = Yup.lazy((value) => {
+    const languageMapShape: Record<string, any> = {};
+
+    for (const langId in value || {}) {
+      languageMapShape[langId] = Yup.object().shape({
+        title: Yup.string().required("Title is required"),
+        languageId: Yup.number()
+      });
+    }
+
+    return Yup.object().shape(languageMapShape);
+  });
+
   const {
     gallerySlider,
     showGallery,
@@ -36,11 +61,20 @@ export default function HomePageGalleryCustomizationForm({
     showSponsors,
     showDonors,
     showDesc,
-    description
+    description,
+    title,
+    translations,
+    siteLogo,
+    favIcon
   } = homePageDetails;
 
   const hForm = useForm<any>({
     mode: "onChange",
+    resolver: yupResolver(
+      Yup.object().shape({
+        translations: validationSchema
+      })
+    ),
     defaultValues: {
       gallerySlider,
       showGallery,
@@ -51,12 +85,17 @@ export default function HomePageGalleryCustomizationForm({
       showSponsors,
       showDonors,
       showDesc,
-      description
+      description,
+      title,
+      siteLogo,
+      favIcon,
+      translations: Object.fromEntries(translations.map((item) => [Number(item.languageId), item]))
     }
   });
 
-  const handleFormSubmit = async ({ gallerySlider, ...value }) => {
+  const handleFormSubmit = async ({ translations, gallerySlider, ...value }) => {
     const payload = {
+      translations: Object.values(translations),
       ...value
     };
     const { success, data } = await axInsertHomePageGallery(payload);
@@ -69,12 +108,58 @@ export default function HomePageGalleryCustomizationForm({
     }
   };
 
+  const handleAddTranslation = () => {
+    setTranslationSelected(langId);
+    hForm.setValue(`translations.${langId}`, {
+      id: null,
+      title: "",
+      languageId: langId,
+      description: "",
+      readMoreText: ""
+    });
+  };
+
   return (
     <>
       {currentStep == "group:homepage_customization.title" && (
         <FormProvider {...hForm}>
+          <TranslationTab
+            values={Object.keys(hForm.getValues().translations)}
+            setLangId={setLangId}
+            languages={languages}
+            handleAddTranslation={handleAddTranslation}
+            translationSelected={translationSelected}
+            setTranslationSelected={setTranslationSelected}
+          />
           <form onSubmit={hForm.handleSubmit(handleFormSubmit)} className="fade">
-            <Box width={["100%", 350]} justifyContent="space-between">
+            <TextBoxField
+              key={`title-${translationSelected}`}
+              name={`translations.${translationSelected}.title`}
+              label={t("Site name")}
+              maxLength={"100"}
+            />
+
+            <WYSIWYGField
+              key={`description-${translationSelected}`}
+              name={`translations.${translationSelected}.description`}
+              label={t("form:description.title")}
+              uploadHandler={axUploadHomePageEditorResource}
+            />
+
+            <Grid
+              templateColumns="repeat(2, 1fr)"
+              gap="6"
+              hidden={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+            >
+              <LogoField name="siteLogo" label={t("Site logo")} />
+              <LogoField name="favIcon" label={t("Fav icon")} />
+            </Grid>
+
+            <Box
+              width={["100%", 350]}
+              justifyContent="space-between"
+              hidden={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
+            >
               <SwitchField name="showGallery" label={t("group:homepage_customization.gallery")} />
               <SwitchField
                 name="showStats"
@@ -99,11 +184,6 @@ export default function HomePageGalleryCustomizationForm({
               />
               <SwitchField name="showDesc" label={t("group:homepage_customization.show_desc")} />
             </Box>
-            <WYSIWYGField
-              name="description"
-              label={t("form:description.title")}
-              uploadHandler={axUploadHomePageEditorResource}
-            />
           </form>
         </FormProvider>
       )}

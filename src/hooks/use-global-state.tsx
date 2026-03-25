@@ -7,6 +7,8 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import { useListener } from "react-gbus";
 import { useDeepCompareMemo } from "use-deep-compare";
 
+import { axGetSiteInfo } from "@/services/utility.service";
+
 interface GlobalStateContextProps {
   user?;
   setUser;
@@ -28,6 +30,9 @@ interface GlobalStateContextProps {
   pages?;
   setPages?;
   getPageTree?;
+
+  siteInfo?;
+  setSiteInfo?;
 }
 
 interface GlobalStateProviderProps {
@@ -43,6 +48,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
   const [open, setOpen] = useState(true);
   const [announcement, setAnnouncement] = useState(initialState.announcement || {});
+  const [siteInfo, setSiteInfo] = useState(initialState.siteInfo || {});
 
   const isLoggedIn = useMemo(() => !!user.id, [user]);
 
@@ -73,11 +79,27 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
     getPageTree();
   }, [initialState.currentGroup?.id, initialState.languageId]);
 
+  // Fetch homeInfo when languageId or currentGroup changes
+  const fetchSiteInfo = async () => {
+    try {
+      const languageId = initialState.languageId;
+
+      // Fetch global home info
+      const response = await axGetSiteInfo(languageId);
+
+      setSiteInfo(response.data);
+    } catch (e) {
+      console.error("Error fetching home info:", e);
+    }
+  };
+
+  useEffect(() => {
+    fetchSiteInfo();
+  }, [initialState.languageId]);
+
   useListener(() => {
     setUser(getParsedUser());
   }, [AUTHWALL.SUCCESS]);
-
-  const value = {};
 
   // to avoid unnecessary re-renders
   const valueMemo = useDeepCompareMemo(
@@ -101,20 +123,22 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
       setOpen,
 
       announcement,
-      setAnnouncement
+      setAnnouncement,
+
+      siteInfo,
+      setSiteInfo
     }),
     [
-      value,
-      initialState,
+      initialState.groups,
+      initialState.currentGroup,
+      initialState.languageId,
       pages,
       user,
       isLoggedIn,
       isCurrentGroupMember,
-      initialState.languageId,
       open,
-      setOpen,
       announcement,
-      setAnnouncement
+      siteInfo
     ]
   );
 

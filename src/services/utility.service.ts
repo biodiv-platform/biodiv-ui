@@ -33,6 +33,18 @@ export const axGetHomeInfo = async (languageId) => {
   }
 };
 
+export const axGetSiteInfo = async (languageId) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.UTILITY}/v1/services/homePage/site`, {
+      params: { languageId: languageId }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
+  }
+};
+
 export const axGetAdminHomeInfo = async (ctx, languageId) => {
   try {
     const { data } = await http.get(`${ENDPOINT.UTILITY}/v1/services/homePage`, {
