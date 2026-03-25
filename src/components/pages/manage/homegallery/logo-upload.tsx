@@ -26,13 +26,12 @@ export const LogoField = ({
   const { field } = useController({ name });
 
   const [isProcessing, setIsProcessing] = useState(false);
-  const [imageVersion, setImageVersion] = useState(Date.now()); // 🔥 cache buster
+  const [imageVersion, setImageVersion] = useState(Date.now());
   const { formState } = useFormContext();
 
-  // 🔥 cache clear API (server/CDN)
   const clearImageCache = async () => {
     try {
-      const response = await fetch("/api/image-cache/clear");
+      const response = await fetch("/api/memory-cache/clear");
       if (!response.ok) {
         console.error("Failed to clear image cache");
       }
@@ -41,11 +40,11 @@ export const LogoField = ({
     }
   };
 
-const safeClearCache = () => {
-  clearImageCache().catch((err) => {
-    console.error("Cache clear failed:", err);
-  });
-};
+  const safeClearCache = () => {
+    clearImageCache().catch((err) => {
+      console.error("Cache clear failed:", err);
+    });
+  };
 
   const onDrop = async ([file]) => {
     if (!file) return;
@@ -63,8 +62,8 @@ const safeClearCache = () => {
 
       if (success) {
         field.onChange(data);
-        setImageVersion(Date.now()); // 🔥 force refresh
-        safeClearCache(); // 🔥 clear CDN/server cache
+        setImageVersion(Date.now());
+        safeClearCache();
       } else {
         notification(t("user:update_error"));
       }
@@ -87,14 +86,14 @@ const safeClearCache = () => {
   const handleOnRemove = (e) => {
     e.stopPropagation();
     field.onChange("");
-    setImageVersion(Date.now()); // 🔥 force refresh
-    safeClearCache(); // 🔥 clear CDN/server cache
+    setImageVersion(Date.now());
+    safeClearCache();
   };
 
   const getImageUrl = () => {
     if (!field.value) return "";
     const baseUrl = getSiteResourceRAW(RESOURCE_CTX.SITE, field.value);
-    return `${baseUrl}?v=${imageVersion}`; // 🔥 cache bust
+    return `${baseUrl}?v=${imageVersion}`;
   };
 
   return (
@@ -122,7 +121,7 @@ const safeClearCache = () => {
                 maxH="120px"
                 objectFit="cover"
                 borderRadius="md"
-                key={imageVersion} 
+                key={imageVersion}
               />
               <CloseButton top={0} right={0} position="absolute" onClick={handleOnRemove} />
             </div>
