@@ -1,8 +1,9 @@
-import { Box, Button, Flex, Input, InputGroup } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Input, InputGroup, useBreakpointValue } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { getByPath } from "@utils/basic";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 
 import { Field } from "@/components/ui/field";
 
@@ -14,7 +15,15 @@ interface TaxonCreateInputFieldProps {
   mb?: number;
   onValidate?;
   hidden?;
+  hint?;
+  color?;
 }
+
+const POSITION_COLOR = {
+  WORKING: "yellow.300!",
+  CLEAN: "green.300!",
+  RAW: "gray.300!"
+};
 
 export const TaxonCreateInputField = ({
   name,
@@ -23,7 +32,8 @@ export const TaxonCreateInputField = ({
   isDisabled,
   hidden,
   onValidate,
-  mb = 4
+  mb = 4,
+  hint = ""
 }: TaxonCreateInputFieldProps) => {
   const {
     register,
@@ -34,9 +44,11 @@ export const TaxonCreateInputField = ({
   } = useFormContext();
 
   const fieldWatch = watch(name);
+  const position = watch("metadata." + name);
+  const isSmall = useBreakpointValue({ base: true, md: false });
 
   useDidUpdateEffect(() => {
-    if (isRequired && fieldWatch) {
+    if (fieldWatch) {
       // scheduling validation so this will trigger always after executing form's validator
       setTimeout(() => {
         setError(name, { type: "manual", message: "err" });
@@ -54,20 +66,39 @@ export const TaxonCreateInputField = ({
       required={isRequired}
       disabled={isDisabled}
     >
+      {isSmall && (
+        <Flex minW="8rem" align="center" gap={1}>
+          <Box>{label}</Box>
+          {isRequired && <Box color="red.500">*</Box>}
+        </Flex>
+      )}
       <InputGroup
         startAddon={
-          <Flex minW="8rem" align="center" gap={1}>
-            <Box>{label}</Box>
-            {isRequired && <Box color="red.500">*</Box>}
-          </Flex>
+          !isSmall && (
+            <Flex minW="8rem" align="center" gap={1}>
+              <Box>{label}</Box>
+              {isRequired && <Box color="red.500">*</Box>}
+            </Flex>
+          )
         }
         endElement={
-          errors[name] && (
+          errors[name] ? (
             <Box width="5.4rem">
               <Button onClick={onValidateClick} h="1.75rem" size="sm" colorPalette="red">
                 validate
               </Button>
             </Box>
+          ) : (
+            !isDisabled &&
+            fieldWatch && (
+              <Box>
+                {!hint ? (
+                  <Icon as={LuCheck} color="green.500" />
+                ) : (
+                  <Icon as={LuTriangleAlert} color="red.500" />
+                )}
+              </Box>
+            )
           )
         }
       >
@@ -76,8 +107,10 @@ export const TaxonCreateInputField = ({
           placeholder={label}
           defaultValue={getByPath(control._defaultValues, name)}
           {...register(name)}
+          bg={POSITION_COLOR[position] || "white!"}
         />
       </InputGroup>
+      {/*hint && <Field helperTextColor="red.600" helperText={hint} />*/}
     </Field>
   );
 };
