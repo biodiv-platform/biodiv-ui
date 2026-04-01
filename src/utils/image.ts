@@ -149,3 +149,39 @@ export const resizeMultiple = async (files: File[]) => {
 
   return assets;
 };
+
+export async function resizeForFavicon(file: File): Promise<any> {
+  const blockHash = await getBlockHash(file);
+
+  const response = await new Promise((resolve) => {
+    loadImage(
+      file,
+      (img, data) => {
+        const done = (blob: Blob, meta: any) => resolve([blob, meta]);
+
+        if (data?.exif) {
+          if (data.exif[274]) {
+            loadImage.writeExifData(data.imageHead, data, "Orientation", 1);
+          }
+
+          img.toBlob((blob) => {
+            loadImage.replaceHead(blob, data.imageHead, (d) =>
+              done(d, CleanExif(data.exif, blockHash))
+            );
+          }, "image/png"); // favicon PNG
+        } else {
+          img.toBlob((d) => done(d, { blockHash }), "image/png");
+        }
+      },
+      {
+        meta: true,
+        canvas: true,
+        orientation: true,
+        maxWidth: 48,
+        maxHeight: 48
+      }
+    );
+  });
+
+  return response;
+}

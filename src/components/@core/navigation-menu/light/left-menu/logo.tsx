@@ -81,29 +81,42 @@ const Logo = styled.div`
 `;
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
-  const { currentGroup, isCurrentGroupMember, setIsCurrentGroupMember } = useGlobalState();
+  const { currentGroup, isCurrentGroupMember, setIsCurrentGroupMember, siteInfo } =
+    useGlobalState();
   const { t } = useTranslation();
 
-  const { name, nameLocal, icon } = currentGroup;
+  const { id: groupId, name, nameLocal, icon } = currentGroup;
+
+  const logoAlt = groupId ? name : siteInfo.title ?? "";
+  const displayTitle = groupId ? name : siteInfo.title;
+
+  const govConfig = SITE_CONFIG.SITE?.GOV;
+  const showGovIcon = govConfig?.ACTIVE;
 
   return (
     <Logo>
       <LocalLink href="/" prefixGroup={true}>
-        <>
-          <Image src={getLogo(icon)} alt={name ?? ""} title={name} width={128} height={60} />
-          <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
-            {nameLocal && <Box mb={1}>{nameLocal}</Box>}
-            {name}
-          </Box>
-        </>
+        <Image
+          src={getLogo(icon)}
+          alt={logoAlt}
+          title={displayTitle}
+          width={128}
+          height={60}
+          style={{ objectFit: "contain" }}
+        />
+        <Box ml={2} textAlign="center" maxW={{ base: "8rem", sm: "unset" }}>
+          {nameLocal && <Box mb={1}>{nameLocal}</Box>}
+          {displayTitle}
+        </Box>
       </LocalLink>
 
-      {SITE_CONFIG.SITE?.GOV?.ACTIVE && (
+      {showGovIcon && (
         <img
           className="icon-gov"
-          src={SITE_CONFIG.SITE?.GOV?.ICON}
-          alt={SITE_CONFIG.SITE?.GOV?.NAME}
-          title={SITE_CONFIG.SITE?.GOV?.NAME}
+          src={govConfig.ICON}
+          alt={govConfig.NAME}
+          title={govConfig.NAME}
+          loading="lazy"
         />
       )}
 
@@ -115,7 +128,8 @@ export default function PrimaryLogo({ isOpen, onToggle }) {
       >
         {isOpen ? <LuX /> : <LuMenu />}
       </IconButton>
-      {currentGroup.id && (
+
+      {groupId && (
         <>
           <JoinUserGroup
             currentGroup={currentGroup}

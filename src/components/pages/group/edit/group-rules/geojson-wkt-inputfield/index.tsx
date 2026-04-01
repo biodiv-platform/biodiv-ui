@@ -102,13 +102,20 @@ export default function GeoJsonWktParserInput({
       {canShow && (
         <InputGroup
           // size="md"
-          startElement={
+          width={"full"}
+          endElement={
             <IconButton aria-label="verify-wkt" colorPalette="blue" onClick={handleWktInput}>
               <LuView />
             </IconButton>
           }
         >
-          <Input type="text" ref={wktInputRef} name="wktInput" placeholder="Enter Valid WKT" />
+          <Input
+            type="text"
+            width={"full"}
+            ref={wktInputRef}
+            name="wktInput"
+            placeholder="Enter Valid WKT"
+          />
         </InputGroup>
       )}
       <Field errorText={fieldState?.error?.message} />

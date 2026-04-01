@@ -39,6 +39,7 @@ interface IGallerySetupForm {
   truncated?: boolean;
   galleryId?: number;
   index?: number;
+  create?: boolean;
 }
 
 export default function GallerySetupFrom({
@@ -49,7 +50,8 @@ export default function GallerySetupFrom({
   galleryId = -1,
   groupId = -1,
   vertical = false,
-  index = 0
+  index = 0,
+  create = false
 }) {
   const { t } = useTranslation();
   const readMoreUIOptions = [
@@ -122,34 +124,39 @@ export default function GallerySetupFrom({
       displayOrder: galleryList.length,
       ...value
     };
-    if (groupId == -1) {
-      const { success, data } =
-        galleryId == -1
-          ? await axCreateHomePageGallery(payload)
-          : await axMiniInsertHomePageGallery(payload);
-
-      if (success) {
-        notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-        setGalleryList(
-          galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider
-        );
-        setIsCreate(false);
-      } else {
-        notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
-      }
+    if (create == true) {
+      setGalleryList([...galleryList, payload]);
+      setIsCreate(false);
     } else {
-      const { success, data } =
-        galleryId == -1
-          ? await axCreateGroupHomePageGallery(groupId, payload)
-          : await axInsertMiniGroupHomePageGallery(groupId, payload);
-      if (success) {
-        notification(t("group:homepage_customization.update.success"), NotificationType.Success);
-        setGalleryList(
-          galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider
-        );
-        setIsCreate(false);
+      if (groupId == -1) {
+        const { success, data } =
+          galleryId == -1
+            ? await axCreateHomePageGallery(payload)
+            : await axMiniInsertHomePageGallery(payload);
+
+        if (success) {
+          notification(t("group:homepage_customization.update.success"), NotificationType.Success);
+          setGalleryList(
+            galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider
+          );
+          setIsCreate(false);
+        } else {
+          notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
+        }
       } else {
-        notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
+        const { success, data } =
+          galleryId == -1
+            ? await axCreateGroupHomePageGallery(groupId, payload)
+            : await axInsertMiniGroupHomePageGallery(groupId, payload);
+        if (success) {
+          notification(t("group:homepage_customization.update.success"), NotificationType.Success);
+          setGalleryList(
+            galleryId == -1 ? data.gallerySlider : data.miniGallery[index].gallerySlider
+          );
+          setIsCreate(false);
+        } else {
+          notification(t("group:homepage_customization.update.failure"), NotificationType.Success);
+        }
       }
     }
   };
@@ -235,10 +242,7 @@ export default function GallerySetupFrom({
               name={`gallerySidebar`}
               label={t("group:homepage_customization.resources.gallery_sidebar")}
               options={gallerySidebarBackgroundOptions}
-              disabled={
-                translationSelected != SITE_CONFIG.LANG.DEFAULT_ID ||
-                hForm.watch().readMoreUIType == "none"
-              }
+              disabled={translationSelected != SITE_CONFIG.LANG.DEFAULT_ID}
               shouldPortal={true}
             />
           )}

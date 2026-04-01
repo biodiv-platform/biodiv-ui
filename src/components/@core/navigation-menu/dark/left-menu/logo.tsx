@@ -7,6 +7,8 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { LuCirclePlus, LuMenu, LuX } from "react-icons/lu";
 
+import useGlobalState from "@/hooks/use-global-state";
+
 const Logo = styled.div`
   display: flex;
   align-items: center;
@@ -36,12 +38,13 @@ const Logo = styled.div`
 `;
 
 export default function PrimaryLogo({ isOpen, onToggle }) {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { siteInfo } = useGlobalState();
 
   return (
     <Logo>
       <Link href={SITE_CONFIG.SITE.URL} className="logo" unstyled>
-        {SITE_CONFIG.SITE.TITLE?.[lang]}
+        {siteInfo.title}
       </Link>
       <IconButton
         className="button"

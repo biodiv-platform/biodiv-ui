@@ -23,7 +23,7 @@ export default function MiniGallery({
   const [editIndex, setEditIndex] = useState(0);
   return (
     <Box>
-      {mode == "edit" && isGalleryEdit ? (
+      {isGalleryEdit ? (
         <Box w="full" p={4} className="fadeInUp white-box" overflowX="auto">
           <EditMiniGalleryForm
             setIsEdit={setIsGalleryEdit}
@@ -36,6 +36,7 @@ export default function MiniGallery({
             item={miniGallery[editIndex]}
             setMiniGallery={setMiniGallery}
             miniGallery={miniGallery}
+            create={mode != "edit"}
           />
         </Box>
       ) : isGalleryCreate ? (

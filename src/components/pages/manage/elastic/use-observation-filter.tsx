@@ -5,7 +5,7 @@ import { stringify } from "querystring";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
-import { axListDwc } from "@/services/files.service";
+import { axListObservation } from "@/services/observation.service";
 
 export const DEFAULT_PARAMS = {
   offset: 0,
@@ -13,28 +13,26 @@ export const DEFAULT_PARAMS = {
 };
 
 const DEFAULT_DATA = {
-  filePath: "",
   l: [],
   n: 0,
   hasMore: false
 };
 
-export interface DwcLogsData {
-  filePath: string;
+export interface ObservationListData {
   l: any[];
   n: number;
   hasMore: boolean;
 }
 
-export interface ShowPageFilters {
+export interface ObservationFilters {
   offset?: number;
   limit?: number;
-  deleted?: string;
+  authorId?: string;
 }
 
-interface DwcLogsDataContextProps {
-  filter: ShowPageFilters;
-  DwcLogData: DwcLogsData;
+interface ObservationContextProps {
+  filter: ObservationFilters;
+  observationData: ObservationListData;
   loading: boolean;
   addFilter: (key: string, value: any) => void;
   removeFilter: (key: string) => void;
@@ -43,37 +41,32 @@ interface DwcLogsDataContextProps {
   resetFilter: () => void;
 }
 
-const DwcLogsContext = createContext<DwcLogsDataContextProps>({} as DwcLogsDataContextProps);
+const ObservationContext = createContext<ObservationContextProps>({} as ObservationContextProps);
 
-export const DwcLogsDataProvider = ({
+export const ObservationListProvider = ({
   children,
   filter: initialFilter
 }: {
   children: React.ReactNode;
-  filter?: ShowPageFilters;
+  filter?: ObservationFilters;
 }) => {
-  const [filter, setFilter] = useImmer<ShowPageFilters>(initialFilter || DEFAULT_PARAMS);
+  const [filter, setFilter] = useImmer<ObservationFilters>(initialFilter || DEFAULT_PARAMS);
 
-  const [DwcLogData, setDwcLogData] = useImmer<DwcLogsData>(DEFAULT_DATA);
+  const [observationData, setObservationData] = useImmer<ObservationListData>(DEFAULT_DATA);
 
   const [loading, setLoading] = useState(false);
-
-  /* ------------------------------------------------
- FETCH FUNCTION
------------------------------------------------- */
 
   const fetchListData = async () => {
     try {
       setLoading(true);
       NProgress.start();
 
-      const { success, data } = await axListDwc(filter);
+      const { success, data } = await axListObservation(filter);
 
       if (success) {
-        setDwcLogData((draft) => {
-          draft.l = data?.files || [];
+        setObservationData((draft) => {
+          draft.l = data?.data || [];
           draft.n = data?.total || 0;
-          draft.filePath = data?.filePath || "";
           draft.hasMore =
             (data?.total || 0) > (Number(filter.offset) || 0) + (Number(filter.limit) || 15);
         });
@@ -86,17 +79,9 @@ export const DwcLogsDataProvider = ({
     }
   };
 
-  /* ------------------------------------------------
- INITIAL LOAD
------------------------------------------------- */
-
   useEffect(() => {
     fetchListData();
   }, []);
-
-  /* ------------------------------------------------
- URL SYNC
------------------------------------------------- */
 
   useEffect(() => {
     if (isBrowser) {
@@ -104,17 +89,9 @@ export const DwcLogsDataProvider = ({
     }
   }, [filter]);
 
-  /* ------------------------------------------------
- FILTER CHANGE FETCH
------------------------------------------------- */
-
   useDidUpdateEffect(() => {
     fetchListData();
   }, [filter]);
-
-  /* ------------------------------------------------
- ACTIONS
------------------------------------------------- */
 
   const nextPage = (limit = 15) => {
     setFilter((draft) => {
@@ -143,11 +120,12 @@ export const DwcLogsDataProvider = ({
       limit: 15
     }));
   };
+
   return (
-    <DwcLogsContext.Provider
+    <ObservationContext.Provider
       value={{
         filter,
-        DwcLogData,
+        observationData,
         loading,
         addFilter,
         setFilter,
@@ -157,10 +135,10 @@ export const DwcLogsDataProvider = ({
       }}
     >
       {children}
-    </DwcLogsContext.Provider>
+    </ObservationContext.Provider>
   );
 };
 
-export default function useDwcLogsList() {
-  return useContext(DwcLogsContext);
+export default function useObservationList() {
+  return useContext(ObservationContext);
 }

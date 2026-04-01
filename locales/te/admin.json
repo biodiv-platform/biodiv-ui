@@ -8,6 +8,25 @@
     "edit_failure": "ప్రకటనను సవరించడానికి ప్రారంభించండి",
     "edit_success": "ప్రకటన విజయవంతంగా సవరించబడింది"
   },
+  "elastic": {
+    "api": {
+      "update_index": {
+        "error": "సాగే సూచికను నవీకరించడంలో లోపం",
+        "success": "సాగే సూచిక నవీకరణ విజయవంతంగా ప్రారంభించబడింది"
+      }
+    },
+    "columns": {
+      "author_id": "AuthorID",
+      "deleted": "తొలగించబడింది",
+      "group_id": "GroupID",
+      "observation_id": "పరిశీలన ID"
+    },
+    "list": {
+      "title": "పరిశీలన జాబితా",
+      "total": "మొత్తం పరిశీలనలు:",
+      "update_index": "సాగే సూచికను నవీకరించండి"
+    }
+  },
   "gbif": {
     "api": {
       "create": {

@@ -29,7 +29,9 @@ import {
   axAddCustomField,
   axAddExsistingCustomField,
   axAddUserGroupRule,
+  axCreateGroupHomePageGallery,
   axCreateMiniGroupGallery,
+  axInsertMiniGroupHomePageGallery,
   axUpdateGroupHomePageDetails,
   axUpdateSpeciesFieldsMapping,
   axUserGroupCreate
@@ -236,7 +238,6 @@ export default function CreateGroupPageComponent({
       spatialData: spacialCoverage,
       invitationData
     };
-
     const { success, data } = await axUserGroupCreate(payload);
     if (success) {
       notification(t("group:create.success"), NotificationType.Success);
@@ -263,6 +264,13 @@ export default function CreateGroupPageComponent({
         );
         miniGallery_overall_success = miniGallery_success;
         miniGalleryIds.push(mini.galleryId);
+        for (const miniSlider of miniGallery.gallerySlider) {
+          const sliderLoad = {
+            ...miniSlider,
+            galleryId: mini.galleryId
+          };
+          await axInsertMiniGroupHomePageGallery(data.id, sliderLoad);
+        }
 
         if (!miniGallery_success) {
           break;
@@ -271,34 +279,10 @@ export default function CreateGroupPageComponent({
       if (miniGallery_overall_success) {
         notification("Successfully created miniGalleries", NotificationType.Success);
       }
+      for (const gallery of galleryList) {
+        await axCreateGroupHomePageGallery(data.id, gallery);
+      }
       const gallerypaylpad = {
-        gallerySlider: galleryList.reduce<any[]>((acc, item, index) => {
-          if (!item.id) {
-            acc.push({
-              displayOrder: index,
-              ...item,
-              translations: Object.values(item.translations)
-            });
-          }
-          return acc;
-        }, []),
-        miniGallery: (miniGalleryList as any[]).map((item, i) => {
-          const updatedGallerySlider = item.gallerySlider.reduce(
-            (acc: any[], galleryItem: any, index: number) => {
-              if (!galleryItem.id) {
-                acc.push({
-                  displayOrder: index,
-                  ...galleryItem,
-                  translations: Object.values(galleryItem.translations),
-                  galleryId: miniGalleryIds[i]
-                });
-              }
-              return acc;
-            },
-            []
-          );
-          return { gallerySlider: updatedGallerySlider };
-        }),
         showDesc,
         showGallery,
         showGridMap,
@@ -663,6 +647,7 @@ export default function CreateGroupPageComponent({
                 galleryList={galleryList}
                 setGalleryList={setGalleryList}
                 languages={languages}
+                create={true}
               />
             ) : (
               <GallerySetupTable

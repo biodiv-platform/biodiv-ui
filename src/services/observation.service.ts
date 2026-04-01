@@ -576,3 +576,26 @@ export const axGetGroupByDayCreatedOn = async (userId) => {
     return { success: false, data: [] };
   }
 };
+
+export const axUpdateObservationElastic = async (updateType, observationId) => {
+  try {
+    const { data } = await http.post(
+      `${
+        ENDPOINT.OBSERVATION
+      }/v1/observation/produce/${updateType}?observationId=${observationId.toString()}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: {} };
+  }
+};
+
+export const axListObservation = async (params) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.OBSERVATION}/v1/observation/list`, { params });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
