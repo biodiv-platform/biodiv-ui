@@ -5,6 +5,8 @@ import axios from "axios";
 
 import { fetchWithCache } from "@/utils/cached-fetch";
 
+import { axClearMemoryCache } from "./api.service";
+
 export const axGetLangList = async (document = false) => {
   try {
     const endpoint = document
@@ -238,6 +240,7 @@ export const axCreateAnnouncement = async (payload) => {
       `${ENDPOINT.UTILITY}/v1/services/homePage/announcement/create`,
       payload
     );
+    await axClearMemoryCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);
@@ -260,6 +263,7 @@ export const axGetAnnouncementList = async (ctx) => {
 export const axRemoveAnnouncement = async (announcementId) => {
   try {
     await http.delete(`${ENDPOINT.UTILITY}/v1/services/announcement/remove/${announcementId}`);
+    await axClearMemoryCache();
     return { success: true, data: null };
   } catch (e) {
     console.error(e);
@@ -273,6 +277,7 @@ export const axEditAnnouncement = async (announcementId, payload) => {
       `${ENDPOINT.UTILITY}/v1/services/announcement/edit/${announcementId}`,
       payload
     );
+    await axClearMemoryCache();
     return { success: true, data };
   } catch (e) {
     console.error(e);
