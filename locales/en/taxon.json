@@ -17,7 +17,8 @@
     "root": "Root",
     "species": "Species",
     "subfamily": "Subfamily",
-    "subgenus": "Subgenus"
+    "subgenus": "Subgenus",
+    "superfamily": "Superfamily"
   },
   "modal": {
     "activity": "Activity",

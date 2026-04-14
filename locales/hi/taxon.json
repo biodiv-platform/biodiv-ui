@@ -17,7 +17,8 @@
     "root": "जड़",
     "species": "प्रजातियां",
     "subfamily": "उपपरिवार",
-    "subgenus": "उपजाति"
+    "subgenus": "उपजाति",
+    "superfamily": "सुपरफ़ैमिली"
   },
   "modal": {
     "activity": "गतिविधि",

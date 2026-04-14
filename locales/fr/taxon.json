@@ -17,7 +17,8 @@
     "root": "Racine",
     "species": "Espèce",
     "subfamily": "Sous-famille",
-    "subgenus": "Sous-genre"
+    "subgenus": "Sous-genre",
+    "superfamily": "Superfamille"
   },
   "modal": {
     "activity": "Activité",

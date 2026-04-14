@@ -17,7 +17,8 @@
     "root": "വേര്",
     "species": "സ്പീഷീസ്",
     "subfamily": "ഉപകുടുംബം",
-    "subgenus": "ഉപജാതി"
+    "subgenus": "ഉപജാതി",
+    "superfamily": "സൂപ്പർഫാമിലി"
   },
   "modal": {
     "activity": "പ്രവർത്തനം",
