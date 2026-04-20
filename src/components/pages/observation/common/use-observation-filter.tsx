@@ -60,6 +60,7 @@ interface ObservationFilterContextProps {
   allMedia;
   setAllMedia;
   addMediaToggle;
+  signingSecret?: string;
 }
 
 const ObservationFilterContext = createContext<ObservationFilterContextProps>(
@@ -164,7 +165,10 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
       const { location, ...otherValues } = filter.f;
       const { data } = await axGetListData(
         { ...otherValues },
-        props.location ? { location: props.location } : location ? { location } : {}
+        props.location ? { location: props.location } : location ? { location } : {},
+        "extended_observation",
+        "_doc",
+        props.signingSecret
       );
       updateMaxVotedRecoPermissions(data?.observationList);
       setObservationData((_draft) => {

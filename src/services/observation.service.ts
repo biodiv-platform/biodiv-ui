@@ -386,16 +386,56 @@ export const axGetListData = async (
   params,
   payload = {},
   index = "extended_observation",
-  type = "_doc"
+  type = "_doc",
+  signingSecret?: string
 ) => {
   try {
+    const isServer = typeof window === "undefined";
+
+    // Prepare query parameters for signing
+    const queryParams = { ...params, index, type };
+
+    // Server-side (SSR): Sign request and call backend directly
+    if (isServer) {
+      const { signRequest } = await import("@utils/request-signing");
+
+      // Generate secret and sign request server-side
+      const secret = signingSecret || (await import("@utils/request-signing")).generateSigningSecret();
+      const { timestamp, signature } = signRequest(queryParams, secret);
+
+      const { data } = await plainHttp.post(
+        `${ENDPOINT.OBSERVATION}/v1/observation/list/${index}/${type}`,
+        payload,
+        {
+          params,
+          headers: {
+            "X-Request-Timestamp": timestamp.toString(),
+            "X-Request-Signature": signature
+          }
+        }
+      );
+      return { success: true, data };
+    }
+
+    // Client-side: Sign request with browser crypto and call backend directly
+    const { signRequestBrowser } = await import("@utils/request-signing");
+
+    // Sign the request with secret passed from SSR
+    const { timestamp, signature } = await signRequestBrowser(queryParams, signingSecret || "");
+
+    // Call backend API directly (not through Next.js API route)
     const { data } = await plainHttp.post(
       `${ENDPOINT.OBSERVATION}/v1/observation/list/${index}/${type}`,
       payload,
       {
-        params
+        params,
+        headers: {
+          "X-Request-Timestamp": timestamp.toString(),
+          "X-Request-Signature": signature
+        }
       }
     );
+
     return { success: true, data };
   } catch (e) {
     console.error(e);

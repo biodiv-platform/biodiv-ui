@@ -7,14 +7,16 @@ import { axGetUserGroupMediaToggle } from "@services/usergroup.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
+import { generateSigningSecret } from "@utils/request-signing";
 import React from "react";
 
-function ObservationListPage({ observationData, listConfig, initialFilterParams, nextOffset }) {
+function ObservationListPage({ observationData, listConfig, initialFilterParams, nextOffset, signingSecret }) {
   return (
     <ObservationFilterProvider
       {...listConfig}
       filter={initialFilterParams}
       observationData={observationData}
+      signingSecret={signingSecret}
     >
       <ObservationListPageComponent nextOffset={nextOffset} />
     </ObservationFilterProvider>
@@ -53,6 +55,9 @@ export const getServerSideProps = async (ctx) => {
 
   const { data } = await axGetListData(initialFilterParams, location ? { location } : {});
 
+  // Generate HMAC signing secret for securing API requests
+  const signingSecret = generateSigningSecret();
+
   return {
     props: {
       observationData: {
@@ -67,7 +72,8 @@ export const getServerSideProps = async (ctx) => {
           : SITE_CONFIG.OBSERVATION.MEDIA_TOGGLE
       },
       nextOffset,
-      initialFilterParams
+      initialFilterParams,
+      signingSecret
     }
   };
 };
