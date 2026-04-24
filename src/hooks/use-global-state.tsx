@@ -66,7 +66,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const getPageTree = async () => {
     try {
       const { data } = await axGetTree({
-        userGroupId: initialState.currentGroup?.id,
+        userGroupId: initialState.currentGroup?.groupId,
         languageId: initialState.languageId
       });
       setPages(data);

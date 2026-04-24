@@ -28,7 +28,7 @@ export default function PagesMenuItem({ onClose }) {
   const { t } = useTranslation();
   const pagesMenu = useMemo(() => {
     const menu = getPagesMenu(pages);
-    return currentGroup?.id
+    return currentGroup?.groupId
       ? [...menu, { name: t("header:menu_secondary.more.about_us"), to: "/about" }]
       : menu;
   }, [pages]);
