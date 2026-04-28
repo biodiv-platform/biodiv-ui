@@ -72,6 +72,7 @@ export default function TextCurationHeader() {
   const [validators, setValidators] = useState<any[]>();
 
   const fetchIbpUsers = async (userIds, setter) => {
+    if (!userIds?.length) return;
     const users = await axGetUsersByID(userIds);
     if (users.length > 0) {
       setter(users);

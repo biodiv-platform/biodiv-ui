@@ -281,7 +281,9 @@ export default function SpeciesHierarchyForm({
           .filter((v) => v.valueType == "contributor")
           .map((m) => m.valueId);
 
-        const contributors = await axGetUsersByID(contributorIds.join(","));
+        const contributors = contributorIds.length
+          ? await axGetUsersByID(contributorIds.join(","))
+          : [];
 
         setValue("members", contributors);
       } catch (err) {
