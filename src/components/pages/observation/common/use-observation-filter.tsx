@@ -161,10 +161,11 @@ export const ObservationFilterProvider = (props: ObservationFilterContextProps) 
           _draft.ml = [];
         });
       }
-      const params = props.location
-        ? { ...filter.f, location: props.location }
-        : filter.f;
-      const { data } = await axGetListData(params, {});
+      const { location, ...otherValues } = filter.f;
+      const { data } = await axGetListData(
+        { ...otherValues },
+        props.location ? { location: props.location } : location ? { location } : {}
+      );
       updateMaxVotedRecoPermissions(data?.observationList);
       setObservationData((_draft) => {
         if (data?.geohashAggregation) {
