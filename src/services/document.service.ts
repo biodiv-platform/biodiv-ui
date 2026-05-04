@@ -218,10 +218,9 @@ export const axDownloadDocument = async (documentPath, documentId, notes) => {
 
 export const axGetListData = async (params, payload = {}, index = "document", type = "_doc") => {
   try {
-    const { data } = await plainHttp.post(
+    const { data } = await plainHttp.get(
       `${ENDPOINT.DOCUMENT}/v1/services/list/${index}/${type}`,
-      payload,
-      { params }
+      { params: { ...params, ...payload } }
     );
 
     return { success: true, data };
@@ -233,10 +232,9 @@ export const axGetListData = async (params, payload = {}, index = "document", ty
 
 export const axGetDocumentListData = async (params, payload = {}) => {
   try {
-    const { data } = await http.post(
+    const { data } = await http.get(
       `${ENDPOINT.DOCUMENT}/v1/services/list/document/_doc`,
-      payload,
-      { params }
+      { params: { ...params, ...payload } }
     );
 
     return { success: true, data };
