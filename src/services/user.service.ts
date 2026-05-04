@@ -163,8 +163,8 @@ export const axGetUserList = async (
 ) => {
   const httpReq = isAdmin ? http : plainHttp;
   try {
-    const { data } = await httpReq.post(`${ENDPOINT.USER}/v1/user/list/${index}/${type}`, payload, {
-      params
+    const { data } = await httpReq.get(`${ENDPOINT.USER}/v1/user/list/${index}/${type}`, {
+      params: { ...params, ...payload }
     });
 
     return { success: true, data };
