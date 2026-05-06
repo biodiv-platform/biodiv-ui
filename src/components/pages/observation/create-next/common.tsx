@@ -1,17 +1,11 @@
-import SITE_CONFIG from "@configs/site-config";
-import { axPredictObservation } from "@services/api.service";
-import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { dateToUTC, formatDate } from "@utils/date";
-import { resizePredictImage } from "@utils/image";
 import { reverseGeocode } from "@utils/location";
-import { getLocalIcon } from "@utils/media";
 import { cleanFacts, cleanTags } from "@utils/tags";
 
 import { parseDefaultCustomField } from "../create/form";
 import { setLastData } from "../create/form/location/use-last-location";
-import { getImageThumb } from "../create/form/uploader/observation-resources/resource-card";
 
-const predictResource = async ({ resource, userId, speciesGroups }) => {
+/*const predictResource = async ({ resource, userId, speciesGroups }) => {
   try {
     let _thumbURL = getImageThumb(resource, userId);
 
@@ -37,15 +31,15 @@ const predictResource = async ({ resource, userId, speciesGroups }) => {
   }
 
   return {};
-};
+};*/
 
 export const preProcessObservations = async (
   resourceGroups,
   currentGroup,
   customFieldList,
-  speciesGroups,
-  userId,
-  canPredict
+  //speciesGroups,
+  //userId,
+  //canPredict
 ) => {
   const finalResources: any[] = [];
 
@@ -70,18 +64,18 @@ export const preProcessObservations = async (
       }
     }
 
-    let predictionResponse = {};
+    const predictionResponse = {};
 
-    const resourceTypeFileFormat = "." + r.type.substring(r.type.indexOf("/") + 1);
+    //const resourceTypeFileFormat = "." + r.type.substring(r.type.indexOf("/") + 1);
 
-    if (
+    /*if (
       canPredict &&
       SITE_CONFIG.OBSERVATION.PREDICT.ACTIVE &&
       r.blob &&
       ACCEPTED_FILE_TYPES["image/*"].includes(resourceTypeFileFormat)
     ) {
       predictionResponse = await predictResource({ resource: r, userId, speciesGroups });
-    }
+    }*/
 
     finalResources.push({
       ...DEFAULT_OBSERVATION_PAYLOAD,
