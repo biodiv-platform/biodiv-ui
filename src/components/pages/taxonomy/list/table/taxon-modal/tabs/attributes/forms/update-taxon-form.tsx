@@ -259,9 +259,9 @@ export default function UpdateTaxonForm({ onDone }) {
     if (success) {
       setModalTaxon(data);
       onDone();
-      notification(t("taxon:modal.attributes.position.success"), NotificationType.Success);
+      notification(t("taxon:modal.attributes.status.success"), NotificationType.Success);
     } else {
-      notification(t("taxon:modal.attributes.position.error"));
+      notification(t("taxon:modal.attributes.status.error"));
     }
   };
 
@@ -279,7 +279,7 @@ export default function UpdateTaxonForm({ onDone }) {
         />
 
         {/*<Field label={t("taxon:modal.attributes.rank.title")} />*/}
-        {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") && (
+        {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") && (modalTaxon?.status == hFormWatch)&& (
           <SelectInputField
             name="rank"
             label={t("taxon:modal.attributes.rank.title")}
@@ -293,6 +293,7 @@ export default function UpdateTaxonForm({ onDone }) {
                 return
               } else {
                 formDisabled[1][2] = hForm.watch().rank == "species" ? true : false;
+                formDisabled[1][1] = hForm.watch().rank == "species" ? false : true;
                 hForm.setValue(
                   "infraspecies",
                   hForm.watch().rank == "infraspecies" ? modalTaxon?.name : "",
