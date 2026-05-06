@@ -36,7 +36,7 @@ import { setLastData } from "../create/form/location/use-last-location";
 export const preProcessObservations = async (
   resourceGroups,
   currentGroup,
-  customFieldList,
+  customFieldList
   //speciesGroups,
   //userId,
   //canPredict

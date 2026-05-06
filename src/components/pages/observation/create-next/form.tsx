@@ -189,7 +189,7 @@ export default function ObservationCreateNextForm({ onBrowse }) {
       const finalResources = await preProcessObservations(
         props.resources,
         currentGroup,
-        sortedCFList,
+        sortedCFList
         //speciesGroups,
         //user.id,
         //props.canPredict
