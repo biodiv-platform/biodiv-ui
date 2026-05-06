@@ -52,7 +52,7 @@ const StackedHorizontalChart = forwardRef(function StackedHorizontalChart(
   }));
 
   useEffect(() => {
-    if (!ro?.width || !data.length) return;
+    if (!ro?.width || !data?.length) return;
 
     const svg = select(svgRef.current).attr("width", ro.width).attr("height", h);
 
