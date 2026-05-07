@@ -42,9 +42,9 @@ const deepMergeObservations = (prev, current) => {
 export default function ObservationCreateNextForm({ onBrowse }) {
   const toastIdRef = React.useRef<any>();
   const { t } = useTranslation();
-  const { currentGroup, languageId } = useGlobalState();
+  const { currentGroup, languageId, user } = useGlobalState();
 
-  const { sortedCFList } = useObservationCreateNext();
+  const { sortedCFList, speciesGroups } = useObservationCreateNext();
 
   const [uploadSummery, setUploadSummery] = useImmer({
     isSubmittd: false,
@@ -189,10 +189,10 @@ export default function ObservationCreateNextForm({ onBrowse }) {
       const finalResources = await preProcessObservations(
         props.resources,
         currentGroup,
-        sortedCFList
-        //speciesGroups,
-        //user.id,
-        //props.canPredict
+        sortedCFList,
+        speciesGroups,
+        user.id,
+        props.canPredict
       );
       o.append(finalResources);
 
