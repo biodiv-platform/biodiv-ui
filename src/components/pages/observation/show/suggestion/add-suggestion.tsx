@@ -20,7 +20,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
 import { axGetLangList } from "@services/utility.service";
-import { plantnetText } from "@static/constants";
+import { DEFAULT_GROUP, plantnetText, specRecText } from "@static/constants";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
@@ -41,6 +41,7 @@ import {
   ScientificNameOption
 } from "../../create/form/recodata/scientific-name";
 import PlantnetPrediction from "./plantnet-prediction";
+import SpecRecPrediction from "./spec-rec-prediction";
 
 interface IAddSuggestionProps {
   isLocked;
@@ -72,12 +73,19 @@ export default function AddSuggestion({
     onClose: onCloseImageModal
   } = useDisclosure();
 
+  const {
+    open: isOpenSpecRecImageModal,
+    onOpen: onOpenSpecRecImageModal,
+    onClose: onCloseSpecRecImageModal
+  } = useDisclosure();
+
   const [predictions, setPredictions] = useState<any[]>([]);
   const [images, setImages] = useState<any[]>([]);
   let defaultButtonValue;
 
   type PredictionEngine = "plantnet" | "spec-rec";
 
+  const isSpecRecActive = SITE_CONFIG?.OBSERVATION?.PREDICT?.ACTIVE && noOfImages >= 1;
   const isPlantnetActive = SITE_CONFIG?.PLANTNET?.ACTIVE && noOfImages >= 1;
   const isSgroupPlant = sgroupId == SITE_CONFIG?.PLANTNET?.PLANT_SGROUP_ID;
 
@@ -85,6 +93,10 @@ export default function AddSuggestion({
     {
       model: "plantnet",
       isActive: isPlantnetActive && isSgroupPlant
+    },
+    {
+      model: "spec-rec",
+      isActive: isSpecRecActive
     }
   ];
 
@@ -197,6 +209,10 @@ export default function AddSuggestion({
     if (e.target.innerText == plantnetText || e.target.id == plantnetText) {
       onOpenimageModal();
     }
+
+    if (e.target.innerText == specRecText || e.target.id == specRecText) {
+      onOpenSpecRecImageModal();
+    }
   };
 
   const isOnlyPlantnetActive = () => {
@@ -271,7 +287,7 @@ export default function AddSuggestion({
                       />
                     )}
 
-                    {/*isSpecRecActive && (
+                    {isSpecRecActive && (
                       <SpecRecPrediction
                         images={images}
                         setPredictions={setPredictions}
@@ -279,7 +295,7 @@ export default function AddSuggestion({
                         onCloseImageModal={onCloseSpecRecImageModal}
                         selectRef={scientificRef}
                       />
-                    )*/}
+                    )}
 
                     {availablePredictionModels.filter((o) => o.isActive == true).length > 0 ? (
                       <Box>
@@ -303,7 +319,7 @@ export default function AddSuggestion({
                               </Stack>
                             )}
 
-                            {/*buttonValue == "spec-rec" && (
+                            {buttonValue == "spec-rec" && (
                               <Stack direction={"row"} align="center">
                                 <Image
                                   id="SpecRec"
@@ -315,7 +331,7 @@ export default function AddSuggestion({
                                   {specRecText}
                                 </Text>
                               </Stack>
-                            )*/}
+                            )}
                           </Button>
 
                           <MenuRoot onSelect={(e) => handleMenuSelect(e)}>
@@ -335,7 +351,7 @@ export default function AddSuggestion({
                                 </MenuItem>
                               )}
 
-                              {/*isSpecRecActive && (
+                              {isSpecRecActive && (
                                 <MenuItem value="spec-rec">
                                   <Image
                                     id="SpecRec"
@@ -343,7 +359,7 @@ export default function AddSuggestion({
                                   />
                                   <Text>{specRecText}</Text>
                                 </MenuItem>
-                              )*/}
+                              )}
                             </MenuContent>
                           </MenuRoot>
 
