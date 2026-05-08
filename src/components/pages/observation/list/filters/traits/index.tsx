@@ -17,7 +17,7 @@ export default function TraitsFilter() {
         const [traitName, traitId] = traitKey.split("|");
         const optionsMap = groupTraits[traitKey] || {};
         const options = Object.keys(optionsMap).map((value) => ({
-          value,
+          value: value.replace("_", "|"),
           stat: `${value}.count`,
           valueIcon: optionsMap[value].valueIcon
         }));
