@@ -143,4 +143,4 @@ export const getDocumentFilePath = (resourceUrl): string => {
 export const getLogo = (resourceUrl) =>
   resourceUrl.startsWith("http")
     ? `${resourceUrl}?w=128&preserve=true`
-    : `${SITE_CONFIG.SITE.URL}${resourceUrl}?w=128&preserve=true`;
+    : `${SITE_CONFIG.SITE.SSR_URL}${resourceUrl}?w=128&preserve=true`;
