@@ -22,13 +22,17 @@ export default function TaxonCreateModal({ isOpen, onClose, validateResults }) {
   const { setValue, clearErrors } = useFormContext();
 
   const applySuggestion = (result) => {
-    result.registry.map((r) => setValue(r.rank, r.name, { shouldValidate: false }));
+    result.registry.map((r) => {
+      setValue(r.rank, r.name, { shouldValidate: false });
+      setValue("metadata." + r.rank, r.position, { shouldValidate: false });
+    });
 
     // This will clearErrors after values are applied
     // This has to be executed 3rd after `react-hook-form` validation and `onChange` setError Validator
-    setTimeout(clearErrors, 10);
-
-    onClose();
+    setTimeout(() => {
+      clearErrors();
+      onClose();
+    }, 10);
   };
 
   const TaxonValidateTable = [

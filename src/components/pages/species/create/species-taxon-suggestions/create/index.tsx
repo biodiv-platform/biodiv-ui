@@ -1,11 +1,12 @@
-import { useDisclosure } from "@chakra-ui/react";
+import { Box, Circle, HStack, Icon, useDisclosure } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axCheckTaxonomy, axSaveTaxonomy } from "@services/taxonomy.service";
-import notification from "@utils/notification";
+import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { Alert } from "@/components/ui/alert";
@@ -20,6 +21,7 @@ export function SpeciesTaxonCreateForm() {
   const [validateResults, setValidateResults] = useState([]);
   const { open, onClose, onOpen } = useDisclosure();
   const [disableForm, setDisableForm] = useState<boolean>();
+  const [fieldHints, setFieldHints] = useState<Record<string, string>>({});
 
   const [formValidationSchema, formDisabled] = useMemo(() => {
     const validation: [string, any][] = [];
@@ -50,10 +52,21 @@ export function SpeciesTaxonCreateForm() {
   });
 
   const handleOnTaxonCreate = async (values) => {
+    if (
+      (validationParams.rankName == "species" || validationParams.rankName == "infraspecies") &&
+      validationParams.scientificName.split(" ")[0] != values.genus
+    ) {
+      notification(
+        "Couldn't submit as the generic name does not correspond to the genus assigned to this taxon.",
+        NotificationType.Error
+      );
+      return;
+    }
+    const { metadata, ...valuesWithMetdata } = values;
     const { success, data } = await axSaveTaxonomy({
       scientificName: validationParams.scientificName,
       rank: validationParams.rankName,
-      rankToName: Object.fromEntries(Object.entries(values).filter((o) => o[1])),
+      rankToName: Object.fromEntries(Object.entries(valuesWithMetdata).filter((o) => o[1])),
       status: "ACCEPTED",
       position: "RAW"
     });
@@ -78,7 +91,24 @@ export function SpeciesTaxonCreateForm() {
       // if results are available show select dialouge
       if (data.matched) {
         setValidateResults(data.matched);
+        if (fieldHints[rankName]) {
+          setFieldHints((prev) => {
+            const newHints = { ...prev };
+            delete newHints[rankName];
+            return newHints;
+          });
+        }
         onOpen();
+      } else {
+        // Set a warning (not an error) - won't block form submission
+        /*hForm.setError(rankName, {
+          type: "hint",
+          message: "No match found"
+        });*/
+        setFieldHints((prev) => ({
+          ...prev,
+          [rankName]: "No match found. Name will be created while updating"
+        }));
       }
     } else {
       notification(t("species:create.validate_error"));
@@ -99,8 +129,33 @@ export function SpeciesTaxonCreateForm() {
             isDisabled={isDisabled}
             onValidate={handleOnRankValidate}
             isRequired={isRequired}
+            hint={fieldHints[name]}
           />
         ))}
+        <Box p={2} lineHeight={1} mb={4}>
+          <HStack gap={7} mb={4}>
+            <Box display="flex" alignItems="center" gap={2} justifyContent={"center"}>
+              <Circle size="15px" bg="var(--chakra-colors-gray-300)" />
+              Raw
+            </Box>
+            <Box display="flex" alignItems="center" gap={2} justifyContent={"center"}>
+              <Circle size="15px" bg="var(--chakra-colors-yellow-300)" />
+              Working
+            </Box>
+            <Box display="flex" alignItems="center" gap={2} justifyContent={"center"}>
+              <Circle size="15px" bg="var(--chakra-colors-green-300)" />
+              Clean
+            </Box>
+          </HStack>
+          <Box display="flex" alignItems="center" gap={2} mb={2}>
+            <Icon as={LuCheck} color="green.500" />
+            Name match found and validated
+          </Box>
+          <Box display="flex" alignItems="center" gap={2}>
+            <Icon as={LuTriangleAlert} color="red.500" />
+            No match found. Name will be created
+          </Box>
+        </Box>
         <SubmitButton isDisabled={Object.keys(hForm.formState.errors).length}>
           {t("species:create.form.taxon.create")}
         </SubmitButton>
