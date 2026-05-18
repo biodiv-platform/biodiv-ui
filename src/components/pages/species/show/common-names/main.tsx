@@ -1,9 +1,9 @@
-import { Box, Button, Flex, List, Table, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, List, Table, Text, useCheckboxGroup } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { LuMoveHorizontal } from "react-icons/lu";
+import { LuCopyCheck, LuMoveHorizontal } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { useLocalRouter } from "@/components/@core/local-link";
@@ -25,6 +25,7 @@ interface CommonNamesListProps {
   taxonId?;
   updateFunc;
   deleteFunc;
+  setLoading?
 }
 
 export default function CommonNamesList({
@@ -33,12 +34,14 @@ export default function CommonNamesList({
   speciesId,
   taxonId,
   updateFunc,
-  deleteFunc
+  deleteFunc,
+  setLoading
 }: CommonNamesListProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
   const [commonNamesList, setCommonNamesList] = useState(commonNames || []);
-  const [selectedCommonNames, setSelectedCommonNames] = useState<number[]>([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const { getItemProps, value: bulkCommonNameIds, setValue } = useCheckboxGroup();
   const [transfer, setTransfer] = useState<boolean>(false);
   const hForm = useForm<any>({
     mode: "onChange",
@@ -50,12 +53,14 @@ export default function CommonNamesList({
   });
 
   const onTransferSubmit = async (details) => {
+    setLoading(true);
     try {
       // Add your transfer logic here
       const { success, data } = await axBulkTransferCommonNames(
         {
-          commonNameIds: selectedCommonNames.join(","),
-          prevTaxonId: taxonId
+          commonNameIds: bulkCommonNameIds.join(","),
+          prevTaxonId: taxonId,
+          selectAll: selectAll
         },
         {},
         details.newTaxonId
@@ -70,6 +75,7 @@ export default function CommonNamesList({
     } catch (error) {
       console.error("Transfer failed:", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -110,11 +116,24 @@ export default function CommonNamesList({
               Transfer
             </Button>
           )}
-          {selectedCommonNames.length > 0 && (
+          {transfer == true && (
+            <Button
+              variant={"outline"}
+              size="xs"
+              colorPalette="blue"
+              onClick={() => {setSelectAll(true)
+                setValue(commonNamesList?.map((i) => String(i.id)));
+              }}
+            >
+              <LuCopyCheck />
+              Select All
+            </Button>
+          )}
+          {(bulkCommonNameIds.length > 0) && (
             <>
               <Box w="1px" h="20px" bg="gray.300" />
               <Text fontSize="sm" fontWeight="medium" color="gray.600">
-                {selectedCommonNames.length} selected
+                {bulkCommonNameIds.length} selected
               </Text>
               <FormProvider {...hForm}>
                 <form
@@ -147,7 +166,7 @@ export default function CommonNamesList({
                     <Button
                       size="sm"
                       onClick={() => {
-                        setSelectedCommonNames([]);
+                        setValue([]);
                         setTransfer(false);
                       }}
                       type="button"
@@ -176,8 +195,7 @@ export default function CommonNamesList({
                           <CommonNameEditButtons
                             commonName={commonName}
                             showPreferred={speciesId}
-                            selectecCommonNames={selectedCommonNames}
-                            setSelectedCommonNames={setSelectedCommonNames}
+                            getItemProps={getItemProps}
                             transfer={transfer}
                           />
                         ) : (

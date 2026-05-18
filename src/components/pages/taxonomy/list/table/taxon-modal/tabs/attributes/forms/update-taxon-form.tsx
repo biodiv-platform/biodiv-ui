@@ -37,7 +37,7 @@ export const TAXON_RANK = [
   }
 ];
 
-export default function UpdateTaxonForm({ onDone }) {
+export default function UpdateTaxonForm({ onDone, setLoading }) {
   const { modalTaxon, taxonRanks, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
   const [validateResults, setValidateResults] = useState([]);
@@ -97,7 +97,7 @@ export default function UpdateTaxonForm({ onDone }) {
         status: Yup.string().required(),
         rank: Yup.string()
           .required()
-          .test("rank-condition", "Can't change binomial name to species", function (value) {
+          .test("rank-condition", "Cannot assign species rank to a trinomial taxon. Please edit the name to a binomial first.", function (value) {
             if (
               modalTaxon?.rank == "infraspecies" &&
               modalTaxon?.canonicalForm.split(" ").length > 2 &&
@@ -184,6 +184,7 @@ export default function UpdateTaxonForm({ onDone }) {
   };
 
   const handleOnStatusFormSubmit = async ({ newTaxonId, rank, status, metadata, ...hierarchy }) => {
+    setLoading(true);
     if (status === TAXON_STATUS_VALUES.SYNONYM) {
       const treeData = await axGetTaxonList({
         expand_taxon: true,
@@ -226,6 +227,7 @@ export default function UpdateTaxonForm({ onDone }) {
           duration: 9000,
           closable: true
         });
+        setLoading(false)
         return;
       }
     } else {
@@ -237,6 +239,7 @@ export default function UpdateTaxonForm({ onDone }) {
           "Couldn't submit as the generic name does not correspond to the genus assigned to this taxon.",
           NotificationType.Error
         );
+        setLoading(false)
         return;
       }
     }
@@ -263,6 +266,7 @@ export default function UpdateTaxonForm({ onDone }) {
     } else {
       notification(t("taxon:modal.attributes.status.error"));
     }
+    setLoading(false)
   };
 
   return (

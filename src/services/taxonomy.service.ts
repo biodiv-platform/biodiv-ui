@@ -219,3 +219,23 @@ export const axBulkTransferCommonNames = async (params, payload = {}, taxonId) =
     return { success: false, data: {} };
   }
 };
+
+export const axTaxonomyBulkAction = async (params) => {
+  try {
+    const { data } = await http.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/bulk`, { params });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+export const axTaxonomyList = async (params) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.TAXONOMY}/v1/taxonomy/esList`, { params });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

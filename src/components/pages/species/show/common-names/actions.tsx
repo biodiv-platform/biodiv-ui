@@ -30,9 +30,8 @@ export function CommonNameAdd() {
 export function CommonNameEditButtons({
   commonName,
   showPreferred,
-  selectecCommonNames,
-  setSelectedCommonNames,
-  transfer
+  transfer,
+  getItemProps
 }) {
   const { t } = useTranslation();
 
@@ -45,14 +44,8 @@ export function CommonNameEditButtons({
       <Box>
         {transfer == true && (
           <Checkbox.Root
-            checked={selectecCommonNames.includes(commonName.id)}
-            onCheckedChange={(details) => {
-              setSelectedCommonNames((prev) =>
-                details.checked
-                  ? [...prev, commonName.id]
-                  : prev.filter((id) => id !== commonName.id)
-              );
-            }}
+            //checked={selectAll ? true : selectecCommonNames.includes(commonName.id)}
+            {...getItemProps({ value: commonName.id })}
             colorPalette={"blue"}
             mr={2}
           >

@@ -1,10 +1,10 @@
-import { Box, Button, Checkbox, Flex, Table, Text } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Table, Text, useCheckboxGroup } from "@chakra-ui/react";
 import ScientificName from "@components/@core/scientific-name";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { LuMoveHorizontal } from "react-icons/lu";
+import { LuCopyCheck, LuMoveHorizontal } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { useLocalRouter } from "@/components/@core/local-link";
@@ -26,6 +26,7 @@ interface SynonymListProps {
   taxonId?;
   updateFunc;
   deleteFunc;
+  setLoading?
 }
 
 export default function SynonymList({
@@ -34,13 +35,15 @@ export default function SynonymList({
   speciesId,
   taxonId,
   updateFunc,
-  deleteFunc
+  deleteFunc,
+  setLoading
 }: SynonymListProps) {
   const { t } = useTranslation();
   const router = useLocalRouter();
 
   const [synonymsList, setSynonymsList] = useState(synonyms || []);
-  const [selectedSynonyms, setSelectedSynonyms] = useState<number[]>([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const { getItemProps, value: bulkSynonymIds, setValue } = useCheckboxGroup();
   const [transfer, setTransfer] = useState<boolean>(false);
   const hForm = useForm<any>({
     mode: "onChange",
@@ -63,10 +66,12 @@ export default function SynonymList({
   const onTransferSubmit = async (details) => {
     try {
       // Add your transfer logic here
+      setLoading(true)
       const { success, data } = await axBulkTransferSynonyms(
         {
-          synonymIds: selectedSynonyms.join(","),
-          prevTaxonId: taxonId
+          synonymIds: bulkSynonymIds.join(","),
+          prevTaxonId: taxonId,
+          selectAll: selectAll
         },
         {},
         details.newTaxonId
@@ -81,6 +86,7 @@ export default function SynonymList({
     } catch (error) {
       console.error("Transfer failed:", error);
     }
+    setLoading(false)
   };
 
   return (
@@ -106,11 +112,25 @@ export default function SynonymList({
               Transfer
             </Button>
           )}
-          {selectedSynonyms.length > 0 && (
+          {transfer == true && (
+            <Button
+              variant={"outline"}
+              size="xs"
+              colorPalette="blue"
+              onClick={() => {
+                setSelectAll(true)
+                setValue(synonymsList?.map((i) => String(i.id)));
+              }}
+            >
+              <LuCopyCheck />
+              Select All
+            </Button>
+          )}
+          {(bulkSynonymIds.length > 0) && (
             <>
               <Box w="1px" h="20px" bg="gray.300" />
               <Text fontSize="sm" fontWeight="medium" color="gray.600">
-                {selectedSynonyms.length} selected
+                {bulkSynonymIds.length} selected
               </Text>
               <FormProvider {...hForm}>
                 <form
@@ -143,7 +163,7 @@ export default function SynonymList({
                     <Button
                       size="sm"
                       onClick={() => {
-                        setSelectedSynonyms([]);
+                        setValue([]);
                         setTransfer(false);
                       }}
                       type="button"
@@ -166,14 +186,8 @@ export default function SynonymList({
                 <Table.Cell>
                   {isContributor && transfer == true && (
                     <Checkbox.Root
-                      checked={selectedSynonyms.includes(synonym.id)}
-                      onCheckedChange={(details) => {
-                        setSelectedSynonyms((prev) =>
-                          details.checked
-                            ? [...prev, synonym.id]
-                            : prev.filter((id) => id !== synonym.id)
-                        );
-                      }}
+                      //checked={selectAll ? true : selectedSynonyms.includes(synonym.id)}
+                      {...getItemProps({ value: synonym.id })}
                       colorPalette={"blue"}
                     >
                       <Checkbox.HiddenInput />
