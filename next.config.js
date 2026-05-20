@@ -2,7 +2,7 @@
 const nextTranslate = require("next-translate");
 const { SITE } = require("./src/configs/site-config");
 
-const siteUrl = new URL(SITE.URL);
+const siteUrl = new URL(SITE.SSR_URL);
 const mainDomain = siteUrl.hostname;
 
 module.exports = nextTranslate({
