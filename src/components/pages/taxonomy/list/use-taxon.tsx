@@ -91,7 +91,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
         }
       });
       offsetPath.current = data?.acceptedPath;
-      offsetId.current = data?.synonymId;
+      offsetId.current = data?.taxonomyNameListItems[data?.taxonomyNameListItems.length-1].id;
     } catch (e) {
       console.error(e);
     }
