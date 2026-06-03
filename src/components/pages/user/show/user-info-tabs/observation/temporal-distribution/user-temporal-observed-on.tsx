@@ -49,7 +49,7 @@ export default function UserTemporalObservedOn(userId) {
     return <Skeleton h={450} borderRadius="md" />;
   }
 
-  if (!data) {
+  if (!data || Object.keys(data).length === 0) {
     return <div></div>;
   }
 

@@ -157,6 +157,7 @@ const SITE_CONFIG_EXAMPLE = {
   SITE: {
     API_ENDPOINT: "http://localhost:8010/proxy/",
     API_ENDPOINT_SSR: "http://localhost:8010/proxy/",
+    SSR_URL: "http://localhost:8010/proxy",
     DESCRIPTION: "A unique repository of information on India's biodiversity",
     GOV: {
       ACTIVE: false,
