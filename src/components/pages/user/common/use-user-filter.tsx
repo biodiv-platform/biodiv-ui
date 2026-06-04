@@ -88,9 +88,10 @@ export function UserListContextProvider(props) {
         });
       }
 
+      const { location, ...otherValues } = filter.f;
       const { data } = await axGetUserList(
-        filter.f,
-        {},
+        { ...otherValues },
+        location ? { location } : {},
         isAdmin
       );
       setuserListData((_draft) => {
