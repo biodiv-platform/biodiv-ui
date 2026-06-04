@@ -1,6 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 
+import BulkMapperModal from "./bulk-mapper";
 import { Filters } from "./filters";
 import TaxonListTable from "./table";
 import TaxonShowModal from "./table/taxon-modal";
@@ -13,6 +14,7 @@ export default function TaxonListComponent() {
         <Filters />
         <TaxonListTable />
       </SimpleGrid>
+      <BulkMapperModal/>
     </Box>
   );
 }

@@ -1,4 +1,10 @@
 {
+  "bulk_action": {
+    "failure": "Imeshindwa kuanzisha kitendo kikubwa",
+    "success": "Imefaulu kuanzisha hatua nyingi, Mabadiliko yataonekana baada ya muda mfupi"
+  },
+  "bulk_actions": "Vitendo Vingi",
+  "bulk_actions_selected": "iliyochaguliwa",
   "create": {
     "title": "Ongeza taxon."
   },
