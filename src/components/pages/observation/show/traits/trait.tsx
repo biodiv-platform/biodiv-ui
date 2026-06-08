@@ -74,7 +74,7 @@ export default function Trait({
       case TRAIT_TYPES.MULTIPLE_CATEGORICAL:
         if (speciesTrait.traits.dataType != "COLOR") {
           setSelectedTraits(
-            speciesTrait.values.filter((tr) => finalTraitValue.includes(tr.traitValueId))
+            speciesTrait.values.filter((tr) => finalTraitValue?.includes(tr.traitValueId))
           );
         } else {
           setSelectedTraits(finalTraitValue.map((v) => ({ value: v })));
