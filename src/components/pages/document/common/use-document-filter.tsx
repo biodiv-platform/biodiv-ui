@@ -112,8 +112,7 @@ export const DocumentFilterProvider = (props) => {
   const fetchListData = async () => {
     try {
       NProgress.start();
-      const { location, ...otherValues } = filter.f;
-      const { data } = await axGetListData({ ...otherValues }, location ? { location } : {});
+      const { data } = await axGetListData(filter.f, {});
       setDocumentData((_draft) => {
         if (filter.f.offset === 0) {
           _draft.l = [];

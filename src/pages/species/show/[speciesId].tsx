@@ -36,7 +36,7 @@ export const getServerSideProps = async (ctx) => {
   const [fieldsMeta, speciesData, speciesGroupsData, speciesPermission, licensesList] =
     await Promise.all([
       axGetAllFieldsMeta({ langId: currentLocaleId, userGroupId: currentGroup.groupId }),
-      axGetSpeciesById(ctx.query.speciesId, currentGroup.groupId != null ? currentGroup : null),
+      axGetSpeciesById(ctx.query.speciesId, currentGroup.groupId),
       axGetspeciesGroups(),
       axCheckSpeciesPermission(ctx, ctx.query.speciesId),
       axGetLicenseList()
