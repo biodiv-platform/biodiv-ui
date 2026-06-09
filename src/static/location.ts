@@ -6,4 +6,4 @@ export const GEOCODE_OPTIONS: any = {
 
 export const AUTOCOMPLETE_FIELDS = ["formatted_address", "geometry", "name"];
 
-export const GMAP_LIBRARIES: any = ["drawing", "places"];
+export const GMAP_LIBRARIES: any = ["places"];
