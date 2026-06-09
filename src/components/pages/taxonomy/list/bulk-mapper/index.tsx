@@ -1,21 +1,21 @@
 import {
   ActionBar,
+  Badge,
   Box,
   Button,
   ButtonGroup,
   CloseButton,
   Collapsible,
+  Flex,
   Heading,
   HStack,
   Portal,
-  SimpleGrid,
-  Table,
   Tabs,
   TabsContent,
   Text,
   useBreakpointValue,
-  useDisclosure
-} from "@chakra-ui/react";
+  useDisclosure,
+  VStack} from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
@@ -24,14 +24,17 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
 import { SelectInputField } from "@/components/form/select";
-import TaxonBreadcrumbs from "@/components/pages/common/breadcrumbs";
-import Loading from "@/components/pages/common/loading";
+import { SelectAsyncInputField } from "@/components/form/select-async";
+import {
+  onScientificNameQuery,
+  ScientificNameOption
+} from "@/components/pages/observation/create/form/recodata/scientific-name";
 import { Tooltip } from "@/components/ui/tooltip";
 import CheckIcon from "@/icons/check";
-import { axGetTaxonDetails, axTaxonomyBulkAction } from "@/services/taxonomy.service";
+import { axTaxonomyBulkAction } from "@/services/taxonomy.service";
+import { TAXON_BADGE_COLORS } from "@/static/constants";
 import { bulkActionTabs, TAXON_POSITION } from "@/static/taxon";
 import notification, { NotificationType } from "@/utils/notification";
-import { getInjectableHTML } from "@/utils/text";
 
 import useTaxonFilter from "../use-taxon";
 
@@ -40,9 +43,7 @@ export default function BulkMapperModal() {
   const { t } = useTranslation();
   const { onClose, isOpen, onOpen, selectedTaxons } = useTaxonFilter();
   const [tabIndex, setTabIndex] = useState<string | null>("taxon:position.title");
-  const [taxon, setTaxon] = useState<any>({});
-  const [selectedRanks, setSelectedRanks] = useState<any []>([]);
-  const [loading, setLoading] = useState(false);
+  const [selectedRanks, setSelectedRanks] = useState<any[]>([]);
   const { open: isContentVisible, onToggle: toggleContentVisibility } = useDisclosure({
     defaultOpen: false
   });
@@ -57,23 +58,19 @@ export default function BulkMapperModal() {
     setSelectedRanks(distinctRanks);
   }, [selectedTaxons]);
 
-  useEffect(() => {
-    setLoading(true);
-    axGetTaxonDetails(selectedTaxons[selectedTaxons.length-1]?.id)
-      .then(({ data }) => {
-        setTaxon(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching taxon:", error);
-      });
-  }, [selectedTaxons[0]]);
-
   const hForm = useForm<any>({
     mode: "onChange",
     resolver: yupResolver(
       Yup.object().shape({
-        position: Yup.string().required()
+        position: Yup.string(),
+        newTaxonId: Yup.number()
+          .transform((_, val) => {
+            // val comes in as an array of option objects from SelectAsync
+            if (Array.isArray(val)) return Number(val[0]?.value);
+            if (typeof val === "object") return Number(val?.value);
+            return Number(val);
+          })
+          .typeError("Please select a taxon")
       })
     ),
     defaultValues: {
@@ -86,7 +83,7 @@ export default function BulkMapperModal() {
     const params = {
       bulkPosition: values.position,
       bulkAction: "position",
-      bulkTaxonIds: selectedTaxons.map(item => item.id).join(','),
+      bulkTaxonIds: selectedTaxons.map((item) => item.id).join(","),
       selectAll: false
     };
 
@@ -97,23 +94,35 @@ export default function BulkMapperModal() {
     } else {
       notification(t("taxon:bulk_action.failure"), NotificationType.Error);
     }
+    onClose();
   };
 
-  const mergeSubmit = async () => {
+  const mergeSubmit = hForm.handleSubmit(async (values) => {
+    const newTaxonId = values.newTaxonId; // Yup transform runs here, gives you a number
+  
+    if (!newTaxonId) {
+      notification(t("taxon:bulk_action.select_taxon"), NotificationType.Error);
+      return;
+    }
+  
+    const selectedIds = selectedTaxons.map((item) => item.id);
+    const mergedIds = [newTaxonId, ...selectedIds].join(",");
+  
     const params = {
       bulkAction: "merge",
-      bulkTaxonIds: selectedTaxons.map(item => item.id).join(','),
+      bulkTaxonIds: mergedIds,
       selectAll: false
     };
-
+  
     const { success } = await axTaxonomyBulkAction(params);
-
+  
     if (success) {
       notification(t("taxon:bulk_action.success"), NotificationType.Success);
     } else {
       notification(t("taxon:bulk_action.failure"), NotificationType.Error);
     }
-  };
+    onClose();
+  });
 
   return (
     <ActionBar.Root open={isOpen} closeOnInteractOutside={false} onOpenChange={onClose}>
@@ -229,89 +238,103 @@ export default function BulkMapperModal() {
                           </FormProvider>
                         </Box>
                       </TabsContent>
-                      <TabsContent value="Merge" height={"14.5rem"}>
-                        {!loading && (
-                          <Box p={4} height={"10rem"} overflowY={"auto"}>
-                            {selectedRanks && selectedRanks.length < 2
-                              ? "This action will merge the selected taxon into the below taxon:"
-                              : "Cannot merge the selected taxon as it contains taxon of different ranks."}
+                      <TabsContent value="Merge" height={"19.5rem"}>
+                        {(
+                          <Box p={4} height={"15rem"} overflowY={"auto"}>
                             {selectedRanks && selectedRanks.length < 2 && (
-                              <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} mt={4}>
-                                <Box gridColumn="1/3">
+                              <Box display="grid" gridTemplateColumns="1fr auto 1fr" gap={0}>
+                                <Box>
                                   <Heading as="h3" size="md" mb={4}>
-                                    {t("common:information")}
+                                    Selected Taxa
                                   </Heading>
-                                  <TaxonBreadcrumbs crumbs={taxon?.hierarchy} type="taxonomy" />
-                                  <Table.Root borderRadius="lg" striped overflow="hidden">
-                                    <Table.Body>
-                                      <Table.Row>
-                                        <Table.Cell
-                                          title={t("taxon:modal.attributes.name.desc")}
-                                          w="12rem"
-                                        >
-                                          {t("taxon:modal.attributes.name.title")}
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                          <span
-                                            dangerouslySetInnerHTML={{
-                                              __html: getInjectableHTML(
-                                                taxon?.taxonomyDefinition?.italicisedForm
-                                              )
-                                            }}
-                                          />
-                                        </Table.Cell>
-                                      </Table.Row>
-                                      <Table.Row>
-                                        <Table.Cell
-                                          title={t("taxon:modal.attributes.canonical.desc")}
-                                        >
-                                          {t("taxon:modal.attributes.canonical.title")}
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                          {taxon?.taxonomyDefinition?.canonicalForm}
-                                        </Table.Cell>
-                                      </Table.Row>
-                                      <Table.Row>
-                                        <Table.Cell title={t("taxon:modal.attributes.author.desc")}>
-                                          {t("taxon:modal.attributes.author.title")}
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                          {taxon?.taxonomyDefinition?.authorYear}
-                                        </Table.Cell>
-                                      </Table.Row>
-                                      <Table.Row>
-                                        <Table.Cell title={t("taxon:modal.attributes.status.desc")}>
-                                          {t("taxon:modal.attributes.status.title")}
-                                        </Table.Cell>
-                                        <Table.Cell>{taxon?.taxonomyDefinition?.status}</Table.Cell>
-                                      </Table.Row>
-                                      <Table.Row>
-                                        <Table.Cell title={t("taxon:modal.attributes.rank.desc")}>
-                                          {t("taxon:modal.attributes.rank.title")}
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                          {t(`taxon:hierarchy.${taxon?.taxonomyDefinition?.rank}`)}
-                                        </Table.Cell>
-                                      </Table.Row>
-                                      <Table.Row>
-                                        <Table.Cell
-                                          title={t("taxon:modal.attributes.position.desc")}
-                                        >
-                                          {t("taxon:modal.attributes.position.title")}
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                          {taxon?.taxonomyDefinition?.position}
-                                        </Table.Cell>
-                                      </Table.Row>
-                                    </Table.Body>
-                                  </Table.Root>
+                                  <VStack gap={1.5} align="stretch">
+                                    {selectedTaxons.map((t) => (
+                                      <Box
+                                        key={t.id}
+                                        //align="center"
+                                        gap={2}
+                                        px={3}
+                                        py={1.5}
+                                        bg="gray.50"
+                                        borderWidth="0.5px"
+                                        borderColor="gray.200"
+                                        borderRadius="md"
+                                      >
+                                        {t.name}
+                                        {t.rank && <Badge>{t.rank}</Badge>}
+                                        {t.status && (
+                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.status]}>
+                                            {t.status}
+                                          </Badge>
+                                        )}
+                                        {t.position && (
+                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.position]}>
+                                            {t.position}
+                                          </Badge>
+                                        )}
+                                      </Box>
+                                    ))}
+                                  </VStack>
                                 </Box>
-                              </SimpleGrid>
+                                <Flex direction="column" align="center" justify="center" px={3}>
+                                  <Box
+                                    w="1px"
+                                    flex={1}
+                                    bgGradient="to-b"
+                                    gradientFrom="transparent"
+                                    gradientTo="teal.400"
+                                  />
+                                  <Box
+                                    w={7}
+                                    h={7}
+                                    borderRadius="full"
+                                    bg="teal.50"
+                                    border="1.5px solid"
+                                    borderColor="teal.400"
+                                    display="flex"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                    flexShrink={0}
+                                    my={1}
+                                  >
+                                    <Text fontSize="14px" color="teal.600">
+                                      →
+                                    </Text>
+                                  </Box>
+                                  <Box
+                                    w="1px"
+                                    flex={1}
+                                    bgGradient="to-b"
+                                    gradientFrom="teal.400"
+                                    gradientTo="transparent"
+                                  />
+                                </Flex>
+                                <Box>
+                                  <Heading as="h3" size="md" mb={4}>
+                                    Merge To
+                                  </Heading>
+                                  <FormProvider {...hForm}>
+                                    <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+                                      <Box>
+                                        <SelectAsyncInputField
+                                          name="newTaxonId"
+                                          label={t("form:accepted_name")}
+                                          multiple={true}
+                                          onQuery={(q) => onScientificNameQuery(q)}
+                                          optionComponent={ScientificNameOption}
+                                          placeholder={t("form:min_three_chars")}
+                                          isRaw={true}
+                                          portalled={false}
+                                        />
+                                      </Box>
+                                    </form>
+                                  </FormProvider>
+                                </Box>
+                              </Box>
                             )}
                           </Box>
                         )}
-                        {loading && <Loading />}
-                        {!loading && selectedRanks && selectedRanks.length < 2 && (
+                        {selectedRanks && selectedRanks.length < 2 && (
                           <HStack m={2} justifyContent="flex-end">
                             <Button onClick={mergeSubmit}>{t("common:save")}</Button>
                           </HStack>
