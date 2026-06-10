@@ -146,6 +146,12 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
 
   const hFormWatch = hForm.watch("status");
 
+  const onRankChange = React.useCallback((hierarchy) => {
+    hierarchy?.forEach((h) => {
+      hForm.setValue(h.taxon_rank, h.taxon_name, { shouldDirty: true });
+    });
+  }, []);
+
   const handleOnRankValidate = async (rankName, scientificName) => {
     // clear results
     setValidateResults([]);
@@ -340,6 +346,7 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
                 onValidate={handleOnRankValidate}
                 isRequired={isRequired}
                 hint={fieldHints[name]}
+                onRankChange={onRankChange}
               />
             ))}
             <Box p={2} lineHeight={1} mb={4}>

@@ -15,7 +15,8 @@ import {
   Text,
   useBreakpointValue,
   useDisclosure,
-  VStack} from "@chakra-ui/react";
+  VStack
+} from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
@@ -99,23 +100,23 @@ export default function BulkMapperModal() {
 
   const mergeSubmit = hForm.handleSubmit(async (values) => {
     const newTaxonId = values.newTaxonId; // Yup transform runs here, gives you a number
-  
+
     if (!newTaxonId) {
       notification(t("taxon:bulk_action.select_taxon"), NotificationType.Error);
       return;
     }
-  
+
     const selectedIds = selectedTaxons.map((item) => item.id);
     const mergedIds = [newTaxonId, ...selectedIds].join(",");
-  
+
     const params = {
       bulkAction: "merge",
       bulkTaxonIds: mergedIds,
       selectAll: false
     };
-  
+
     const { success } = await axTaxonomyBulkAction(params);
-  
+
     if (success) {
       notification(t("taxon:bulk_action.success"), NotificationType.Success);
     } else {
@@ -239,7 +240,7 @@ export default function BulkMapperModal() {
                         </Box>
                       </TabsContent>
                       <TabsContent value="Merge" height={"19.5rem"}>
-                        {(
+                        {
                           <Box p={4} height={"15rem"} overflowY={"auto"}>
                             {selectedRanks && selectedRanks.length < 2 && (
                               <Box display="grid" gridTemplateColumns="1fr auto 1fr" gap={0}>
@@ -260,7 +261,7 @@ export default function BulkMapperModal() {
                                         borderColor="gray.200"
                                         borderRadius="md"
                                       >
-                                        {t.name}
+                                        {t.name + " (" + t.id + ")"}
                                         {t.rank && <Badge>{t.rank}</Badge>}
                                         {t.status && (
                                           <Badge colorPalette={TAXON_BADGE_COLORS[t.status]}>
@@ -333,7 +334,7 @@ export default function BulkMapperModal() {
                               </Box>
                             )}
                           </Box>
-                        )}
+                        }
                         {selectedRanks && selectedRanks.length < 2 && (
                           <HStack m={2} justifyContent="flex-end">
                             <Button onClick={mergeSubmit}>{t("common:save")}</Button>

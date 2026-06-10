@@ -20,7 +20,12 @@ const taxonListRows = [
   {
     Header: "Name",
     accessor: "name",
-    Cell: TaxonNameCell,
+    Cell: ({ cell }: { cell: any }) => (
+      <TaxonNameCell
+        cell={cell}
+        value={`${cell.row.original.name} (${cell.row.original.id})`}  // replace otherField
+      />
+    ),
     style: { paddingTop: 0, paddingBottom: 0 }
   },
   {

@@ -1,10 +1,12 @@
-import { Box, Button, Flex, Icon, Input, InputGroup, useBreakpointValue } from "@chakra-ui/react";
-import useDidUpdateEffect from "@hooks/use-did-update-effect";
-import { getByPath } from "@utils/basic";
+import { Box, Flex } from "@chakra-ui/react";
+import {
+  onScientificNameQuery,
+  ScientificNameOption
+} from "@components/pages/observation/create/form/recodata/scientific-name";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 
+import { SelectAsyncInputField } from "@/components/form/select-async";
 import { Field } from "@/components/ui/field";
 
 interface TaxonCreateInputFieldProps {
@@ -15,14 +17,15 @@ interface TaxonCreateInputFieldProps {
   mb?: number;
   onValidate?;
   hidden?;
+  onRankChange?;
   hint?;
   color?;
 }
 
 const POSITION_COLOR = {
-  WORKING: "yellow.300!",
-  CLEAN: "green.300!",
-  RAW: "gray.300!"
+  WORKING: "yellow.300",
+  CLEAN: "green.300",
+  RAW: "gray.300"
 };
 
 export const TaxonCreateInputField = ({
@@ -31,32 +34,15 @@ export const TaxonCreateInputField = ({
   isRequired,
   isDisabled,
   hidden,
-  onValidate,
-  mb = 4,
-  hint = ""
+  onRankChange,
+  mb = 4
 }: TaxonCreateInputFieldProps) => {
   const {
-    register,
-    control,
     formState: { errors },
     watch,
-    setError
   } = useFormContext();
 
-  const fieldWatch = watch(name);
   const position = watch("metadata." + name);
-  const isSmall = useBreakpointValue({ base: true, md: false });
-
-  useDidUpdateEffect(() => {
-    if (fieldWatch) {
-      // scheduling validation so this will trigger always after executing form's validator
-      setTimeout(() => {
-        setError(name, { type: "manual", message: "err" });
-      }, 0);
-    }
-  }, [fieldWatch]);
-
-  const onValidateClick = () => onValidate(name, fieldWatch);
 
   return (
     <Field
@@ -66,51 +52,30 @@ export const TaxonCreateInputField = ({
       required={isRequired}
       disabled={isDisabled}
     >
-      {isSmall && (
-        <Flex minW="8rem" align="center" gap={1}>
-          <Box>{label}</Box>
+      <Flex width="full" align="center">
+        <Flex minW="8rem" align="center" gap={1} flexShrink={0} bgColor={"lightgray"}>
+          <Box m={4}>{label}</Box>
           {isRequired && <Box color="red.500">*</Box>}
         </Flex>
-      )}
-      <InputGroup
-        startAddon={
-          !isSmall && (
-            <Flex minW="8rem" align="center" gap={1}>
-              <Box>{label}</Box>
-              {isRequired && <Box color="red.500">*</Box>}
-            </Flex>
-          )
-        }
-        endElement={
-          errors[name] ? (
-            <Box width="5.4rem">
-              <Button onClick={onValidateClick} h="1.75rem" size="sm" colorPalette="red">
-                validate
-              </Button>
-            </Box>
-          ) : (
-            !isDisabled &&
-            fieldWatch && (
-              <Box>
-                {!hint ? (
-                  <Icon as={LuCheck} color="green.500" />
-                ) : (
-                  <Icon as={LuTriangleAlert} color="red.500" />
-                )}
-              </Box>
-            )
-          )
-        }
-      >
-        <Input
-          id={name}
-          placeholder={label}
-          defaultValue={getByPath(control._defaultValues, name)}
-          {...register(name)}
-          bg={POSITION_COLOR[position] || "white!"}
-        />
-      </InputGroup>
-      {/*hint && <Field helperTextColor="red.600" helperText={hint} />*/}
+        <Box flex={1}>
+          <SelectAsyncInputField
+            name={name}
+            onQuery={(q) => onScientificNameQuery(q, "name")}
+            optionComponent={ScientificNameOption}
+            placeholder={label}
+            resetOnSubmit={false}
+            isRaw={true}
+            mb={0}
+            onChange={(selected) => {
+              if (selected) onRankChange?.(selected?.hierarchy);
+            }}
+            rawKey="label"
+            portalled={false}
+            bg={POSITION_COLOR[position] || "white!"}
+            disabled={isDisabled}
+          />
+        </Box>
+      </Flex>
     </Field>
   );
 };
