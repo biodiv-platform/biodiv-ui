@@ -7,8 +7,6 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useCallback, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 
-import useIsMobileDevice from "@/hooks/use-is-mobile-device";
-
 import useObservationCreate from "../use-observation-resources";
 
 const DropTargetBox = styled.div`
@@ -48,7 +46,6 @@ export default function DropTarget({ assetsSize }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
   const { addAssets } = useObservationCreate();
-  const isMobileDevice = useIsMobileDevice();
 
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
@@ -114,32 +111,6 @@ export default function DropTarget({ assetsSize }) {
               </Button>
             </FileUpload.Trigger>
           </FileUpload.Root>
-
-          {isMobileDevice && (
-            <>
-              <Text color="gray.500">{t("common:or")}</Text>
-              <FileUpload.Root
-                accept="image/*,video/*"
-                capture="environment"
-                onFileChange={handleFileChange}
-                width={{ base: "full", sm: "auto" }}
-                maxFiles={10}
-              >
-                <FileUpload.HiddenInput />
-                <FileUpload.Trigger asChild>
-                  <Button
-                    colorPalette="blue"
-                    variant="outline"
-                    width="full"
-                    justifyContent="center"
-                    gap={2}
-                  >
-                    {t("form:uploader.use_camera")}
-                  </Button>
-                </FileUpload.Trigger>
-              </FileUpload.Root>
-            </>
-          )}
         </VStack>
       )}
     </DropTargetBox>

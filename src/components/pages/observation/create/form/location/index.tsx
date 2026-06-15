@@ -1,4 +1,4 @@
-import { Box, Button, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import { SelectInputField } from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config";
@@ -182,46 +182,81 @@ const LocationPicker = ({ isRequired = true }) => {
           <Box style={{ gridColumn: "1/4" }}>
             <Field
               invalid={
-                (form.formState.errors[FK.observedAt.name] ||
+                !!(
+                  form.formState.errors[FK.observedAt.name] ||
                   form.formState.errors[FK.latitude.name] ||
-                  form.formState.errors[FK.longitude.name]) &&
-                true
+                  form.formState.errors[FK.longitude.name]
+                )
               }
               required={isRequired}
               htmlFor="places-search"
-            >
-              <Field
-                htmlFor="places-search"
-                required={isRequired}
-                label={
-                  <div
-                    style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}
+              label={
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}
+                >
+                  {FK.observedAt.label}
+                  {/* Desktop Only Buttons */}
+                  <Button
+                    display={["none", "none", "inline-flex", "inline-flex"]}
+                    variant="plain"
+                    size="xs"
+                    colorPalette="blue"
+                    onClick={getCurrentLocation}
                   >
-                    {FK.observedAt.label}
+                    {t("observation:current_location", {
+                      defaultValue: "Use Current Location"
+                    })}
+                  </Button>
+                  {ll.has && (
                     <Button
+                      display={["none", "none", "inline-flex", "inline-flex"]}
+                      title={ll.value?.address}
                       variant="plain"
                       size="xs"
                       colorPalette="blue"
-                      onClick={getCurrentLocation}
+                      onClick={ll.use}
                     >
-                      {t("observation:current_location", {
-                        defaultValue: "Use Current Location"
-                      })}
+                      {t("observation:last_location")}
                     </Button>
-                    {ll.has && (
-                      <Button
-                        title={ll.value?.address}
-                        variant="plain"
-                        size="xs"
-                        colorPalette="blue"
-                        onClick={ll.use}
-                      >
-                        {t("observation:last_location")}
-                      </Button>
-                    )}
-                  </div>
-                }
-              ></Field>
+                  )}
+                </div>
+              }
+            >
+              <Flex
+                display={["flex", "flex", "none", "none"]}
+                flexDirection="row"
+                flexWrap="nowrap"
+                gap="12px"
+                mb={2}
+                width="full"
+                overflowX="auto"
+              >
+                <Button
+                  variant="plain"
+                  size="xs"
+                  colorPalette="blue"
+                  onClick={getCurrentLocation}
+                  whiteSpace="nowrap"
+                  paddingX={0}
+                >
+                  {t("observation:current_location", {
+                    defaultValue: "Use Current Location"
+                  })}
+                </Button>
+                {ll.has && (
+                  <Button
+                    title={ll.value?.address}
+                    variant="plain"
+                    size="xs"
+                    colorPalette="blue"
+                    onClick={ll.use}
+                    whiteSpace="nowrap"
+                  >
+                    {t("observation:last_location")}
+                  </Button>
+                )}
+              </Flex>
+
               <InputGroup
                 width={"full"}
                 className="places-search"
@@ -249,6 +284,7 @@ const LocationPicker = ({ isRequired = true }) => {
                   />
                 </Autocomplete>
               </InputGroup>
+
               <ErrorMessage name={FK.observedAt.name} errors={form.formState.errors} />
               {!open && (
                 <>
