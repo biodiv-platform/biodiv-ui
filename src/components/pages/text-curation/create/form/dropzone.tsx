@@ -1,67 +1,85 @@
-import { Box } from "@chakra-ui/react";
+import { Box, FileUpload } from "@chakra-ui/react";
 import UploadDragging from "@components/pages/document/create/uploader/dropzone/upload-dragging";
 import UploadInfo from "@components/pages/document/create/uploader/dropzone/upload-info";
 import UploadProcessing from "@components/pages/document/create/uploader/dropzone/upload-processing";
-import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import { axUploadCSVCurationResource } from "@services/files.service";
-import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-const DropTargetBox = styled.div`
-  border: 2px dashed var(--chakra-colors-gray-300);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  height: 14.4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  > div {
-    text-align: center;
-  }
-  &[data-dropping="true"] {
-    border-color: var(--chakra-colors-blue-500);
-  }
-  &[data-has-resources="true"] {
-    height: 10rem;
-    margin-top: 1rem;
-  }
-`;
+const ACCEPT_STRING = "text/csv";
 
 export default function CSVDropzoneComponent({ name, setHeaders }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { user } = useGlobalState();
-
   const form = useFormContext();
 
-  const handleOnDrop = async ([file]) => {
-    if (!file) return;
+  const hasResources = !!form.watch(name);
 
-    setIsProcessing(true);
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const file = details.acceptedFiles[0];
 
-    const resource = await axUploadCSVCurationResource(file);
+      if (!file) return;
 
-    form.setValue(name, `/app/data/biodiv/myUploads/${user.id}${resource.path}`);
-    setHeaders(resource.excelJson?.csvHeaders.map((title) => ({ label: title, value: title })));
+      setIsProcessing(true);
+      try {
+        const resource = await axUploadCSVCurationResource(file);
 
-    setIsProcessing(false);
-  };
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: handleOnDrop,
-    accept: { "text/csv": [".csv"] },
-    multiple: false
-  });
+        form.setValue(name, `/app/data/biodiv/myUploads/${user.id}${resource.path}`);
+        setHeaders(resource.excelJson?.csvHeaders.map((title) => ({ label: title, value: title })));
+      } catch (error) {
+        console.error("CSV upload failed:", error);
+      } finally {
+        setIsProcessing(false);
+      }
+    },
+    [form, name, setHeaders, user.id]
+  );
 
   return (
     <Box mb={4}>
-      <DropTargetBox {...getRootProps()} data-dropping={isDragActive}>
-        <input {...getInputProps()} />
-        {isProcessing ? <UploadProcessing /> : isDragActive ? <UploadDragging /> : <UploadInfo />}
-        <div></div>
-      </DropTargetBox>
+      <FileUpload.Root
+        accept={ACCEPT_STRING}
+        onFileChange={handleFileChange}
+        maxFiles={1}
+        width="full"
+      >
+        <FileUpload.HiddenInput />
+
+        <FileUpload.Context>
+          {(fileUpload) => (
+            <FileUpload.Dropzone
+              border="2px dashed"
+              borderColor={fileUpload.dragging ? "blue.500" : "gray.300"}
+              borderRadius="0.5rem"
+              p={4}
+              height={hasResources ? "10rem" : "14.4rem"}
+              mt={hasResources ? 4 : 0}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              width="full"
+              bg={fileUpload.dragging ? "blue.50" : "transparent"}
+              css={{
+                "& > div": {
+                  textAlign: "center"
+                }
+              }}
+            >
+              {isProcessing ? (
+                <UploadProcessing />
+              ) : fileUpload.dragging ? (
+                <UploadDragging />
+              ) : (
+                <UploadInfo />
+              )}
+            </FileUpload.Dropzone>
+          )}
+        </FileUpload.Context>
+      </FileUpload.Root>
     </Box>
   );
 }

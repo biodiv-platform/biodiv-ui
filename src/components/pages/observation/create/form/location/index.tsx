@@ -131,10 +131,38 @@ const LocationPicker = ({ isRequired = true }) => {
   };
 
   const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      form.setValue(FK.latitude.name, latitude);
-      form.setValue(FK.longitude.name, longitude);
-    });
+    if (!navigator.geolocation) {
+      console.warn("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async ({ coords: { latitude, longitude } }) => {
+        const point = { lat: latitude, lng: longitude };
+
+        form.setValue(FK.latitude.name, latitude, { shouldDirty: true });
+        form.setValue(FK.longitude.name, longitude, { shouldDirty: true });
+
+        setCoordinates(point);
+        setCenter(point);
+        setZoom(18);
+
+        try {
+          const results = await reverseGeocode(point);
+          if (results && results.length > 0) {
+            setObservedAtText(results[0].formatted_address);
+          } else {
+            setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+          }
+        } catch (error) {
+          setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+        }
+      },
+      (error) => {
+        console.error("Error retrieving geolocation position:", error);
+      },
+      { enableHighAccuracy: true, timeout: 5000 }
+    );
   };
 
   return (
@@ -166,8 +194,20 @@ const LocationPicker = ({ isRequired = true }) => {
                 htmlFor="places-search"
                 required={isRequired}
                 label={
-                  <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}
+                  >
                     {FK.observedAt.label}
+                    <Button
+                      variant="plain"
+                      size="xs"
+                      colorPalette="blue"
+                      onClick={getCurrentLocation}
+                    >
+                      {t("observation:current_location", {
+                        defaultValue: "Use Current Location"
+                      })}
+                    </Button>
                     {ll.has && (
                       <Button
                         title={ll.value?.address}

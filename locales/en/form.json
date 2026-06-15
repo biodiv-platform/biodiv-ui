@@ -91,7 +91,8 @@
     "predicting": "Generating Predictions...",
     "processing": "Processing",
     "upload": "Upload",
-    "uploading": "Uploading..."
+    "uploading": "Uploading...",
+    "use_camera": "Use Camera"
   },
   "use_in_observation": "Use Selected",
   "wkt": "WKT",

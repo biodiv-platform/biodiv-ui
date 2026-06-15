@@ -1,11 +1,13 @@
 import {
   Box,
   Button,
+  FileUpload,
   Flex,
   GridItem,
   Heading,
   SimpleGrid,
   Tabs,
+  Text,
   useDisclosure
 } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
@@ -27,8 +29,7 @@ import { axCreateTrait } from "@services/traits.service";
 import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Select from "react-select";
 import * as Yup from "yup";
@@ -46,6 +47,8 @@ import { Field } from "@/components/ui/field";
 import TraitsValueComponent from "./trait-value-component";
 
 const onQuery = (q) => onScientificNameQuery(q, "name");
+
+const ACCEPT_STRING = "image/jpeg, image/png, image/jpg";
 
 export default function TraitsCreateComponent({ speciesField, languages }) {
   const { t } = useTranslation();
@@ -70,6 +73,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
     .flat();
   const router = useLocalRouter();
   const [translationSelected, setTranslationSelected] = useState<number>(0);
+
   const formSchema = Yup.object().shape({
     translations: Yup.array().of(
       Yup.object().shape({
@@ -163,25 +167,33 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
   const { open, onClose, onOpen } = useDisclosure();
   const [langId, setLangId] = useState(0);
 
-  // Dropzone setup, with a single file restriction
-  const handleGeneralDrop = useDropzone({
-    accept: { "image/*": [".jpg", ".jpeg", ".png"] },
-    maxFiles: 1,
-    onDrop: async (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        const file = acceptedFiles[0];
-        const { success, data } = await axUploadResource(file, "traits", undefined);
-        if (success) {
-          hForm.watch("translations").forEach((_, index) => {
-            hForm.setValue(`translations[${index}].traits.icon`, data);
-          });
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const file = details.acceptedFiles[0];
+
+      if (details.rejectedFiles && details.rejectedFiles.length > 0) {
+        notification("Unsupported file format. Please upload an image (.jpg, .png)");
+        return;
+      }
+
+      if (file) {
+        try {
+          const { success, data } = await axUploadResource(file, "traits", undefined);
+          if (success) {
+            hForm.watch("translations").forEach((_, index) => {
+              hForm.setValue(`translations[${index}].traits.icon`, data);
+            });
+          }
+        } catch (error) {
+          console.error("Trait graphic upload failure:", error);
         }
       }
-    }
-  });
+    },
+    [hForm]
+  );
 
   const handleOnSubmit = async (payload) => {
-    const seenLangIds: Set<number> = new Set(); // or Set<string> if IDs are strings
+    const seenLangIds: Set<number> = new Set();
     const duplicates: number[] = [];
 
     for (const translation of payload.translations) {
@@ -195,7 +207,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
 
     if (duplicates.length > 0) {
       notification("Please remove duplicate language translations");
-      return; // stop update if duplicate found
+      return;
     }
     const query = payload.translations[0].query.map((taxan) => ({
       taxonomyDefifintionId: taxan.taxonId,
@@ -335,7 +347,7 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
                         value: lang.id,
                         label: lang.name
                       }))}
-                    isSearchable={true} // Enables search
+                    isSearchable={true}
                   />
                 </Field>
               </Box>
@@ -441,31 +453,46 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
                 isRequired={true}
               />
             </Box>
-            <div
-              {...handleGeneralDrop.getRootProps()}
-              style={{
-                border: "2px dashed #aaa",
-                padding: "5px",
-                textAlign: "center",
-                width: "80px",
-                height: "80px"
-              }}
-            >
-              <input {...handleGeneralDrop.getInputProps()} />
-              {hForm.watch(`translations[${translationSelected}].traits.icon`) ? (
-                <div>
-                  <img
-                    src={getTraitIcon(
-                      hForm.watch(`translations[${translationSelected}].traits.icon`)
+
+            <FileUpload.Root accept={ACCEPT_STRING} onFileChange={handleFileChange} maxFiles={1}>
+              <FileUpload.HiddenInput />
+              <FileUpload.Dropzone
+                asChild
+                border="2px dashed var(--chakra-colors-gray-300)"
+                p={1}
+                width="80px"
+                height="80px"
+                minH="auto"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                cursor="pointer"
+                bg="white"
+              >
+                <FileUpload.Trigger asChild>
+                  <Box width="full" height="full">
+                    {hForm.watch(`translations[${translationSelected}].traits.icon`) ? (
+                      <Flex width="full" height="full" align="center" justify="center">
+                        <img
+                          src={getTraitIcon(
+                            hForm.watch(`translations[${translationSelected}].traits.icon`)
+                          )}
+                          alt="Icon Preview"
+                          style={{ height: "70px", width: "70px", objectFit: "cover" }}
+                        />
+                      </Flex>
+                    ) : (
+                      <Flex width="full" height="full" align="center" justify="center">
+                        <Text fontSize="2xl" color="gray.400">
+                          +
+                        </Text>
+                      </Flex>
                     )}
-                    alt="Icon Preview"
-                    style={{ height: "70px", objectFit: "cover" }}
-                  />
-                </div>
-              ) : (
-                <p style={{ padding: "20px" }}>+</p>
-              )}
-            </div>
+                  </Box>
+                </FileUpload.Trigger>
+              </FileUpload.Dropzone>
+            </FileUpload.Root>
+
             <Box>
               <SelectInputField
                 key={`field-${translationSelected}`}
