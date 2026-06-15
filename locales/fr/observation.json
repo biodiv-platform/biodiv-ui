@@ -30,6 +30,7 @@
     },
     "title": "Médias d'observation"
   },
+  "current_location": "Utiliser l'emplacement actuel",
   "custom_fields": "Champs personnalisés",
   "delete_file": {
     "error": "Impossible de traiter le fichier, veuillez réessayer ultérieurement",

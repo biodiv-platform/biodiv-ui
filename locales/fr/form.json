@@ -90,7 +90,8 @@
     "predicting": "Génération de prédictions...",
     "processing": "Traitement en cours",
     "upload": "Télécharger",
-    "uploading": "Téléchargement..."
+    "uploading": "Téléchargement...",
+    "use_camera": "Utiliser l'appareil photo"
   },
   "use_in_observation": "Utiliser sélectionné",
   "wkt": "WKT",
