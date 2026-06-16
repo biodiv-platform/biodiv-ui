@@ -164,16 +164,16 @@ const LocationPicker = ({ isRequired = true }) => {
         let errorMessage = "An unknown error occurred while fetching location.";
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            errorMessage = "Location permission was denied. Please check your browser settings.";
+            errorMessage = "Location permission was denied by the system.";
             break;
           case error.POSITION_UNAVAILABLE:
             errorMessage = "Location information is unavailable.";
             break;
           case error.TIMEOUT:
-            errorMessage = "The location request timed out. Try stepping outside or trying again.";
+            errorMessage = "The location request timed out. Try stepping outside.";
             break;
         }
-        alert(errorMessage);
+        alert(`Geolocation Error: ${errorMessage}`);
       },
       {
         enableHighAccuracy: true,
@@ -181,6 +181,45 @@ const LocationPicker = ({ isRequired = true }) => {
         maximumAge: 10000
       }
     );
+  };
+
+  // --- NEW DIAGNOSTIC CLICK HANDLER ---
+  const handleLocationClick = (e) => {
+    e.preventDefault();
+
+    // 1. Check for Nginx blocking headers (using 'as any' to fix TypeScript error)
+    try {
+      const doc = document as any;
+      if (doc.permissionsPolicy && !doc.permissionsPolicy.allowsFeature("geolocation")) {
+        alert(
+          "BANNED BY NGINX: The server's HTTP 'Permissions-Policy' header is blocking geolocation."
+        );
+        return;
+      }
+    } catch (err) {
+      // Ignored if browser doesn't support document.permissionsPolicy
+    }
+
+    // 2. Check for Insecure Context (Invalid SSL)
+    if (!window.isSecureContext) {
+      alert("FAILED: Chrome thinks this is an insecure context, even with HTTPS.");
+      return;
+    }
+
+    // 3. Query the browser's hardcoded permission state
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: "geolocation" }).then((result) => {
+        if (result.state === "denied") {
+          alert(
+            "DENIED: The browser has hard-blocked this site. If it's not in your site settings, you might be in an Incognito Tab, or Brave Shields are up."
+          );
+        } else {
+          getCurrentLocation();
+        }
+      });
+    } else {
+      getCurrentLocation();
+    }
   };
 
   return (
@@ -192,15 +231,7 @@ const LocationPicker = ({ isRequired = true }) => {
     >
       <>
         {!isOnline && !hideLocationPicker && (
-          <Button
-            mb={4}
-            colorPalette="red"
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              getCurrentLocation();
-            }}
-          >
+          <Button mb={4} colorPalette="red" type="button" onClick={handleLocationClick}>
             Click Here for Manual Coordinates
           </Button>
         )}
@@ -228,29 +259,7 @@ const LocationPicker = ({ isRequired = true }) => {
                     variant="plain"
                     size="xs"
                     colorPalette="blue"
-                    onClick={(e) => {
-                      e.preventDefault();
-
-                      // 1. Check if Chrome Mobile considers the environment secure
-                      if (!window.isSecureContext) {
-                        alert(
-                          "FAILED: Chrome thinks this is an insecure context, even with HTTPS."
-                        );
-                        return;
-                      }
-
-                      // 2. Query Chrome's internal permission state
-                      navigator.permissions.query({ name: "geolocation" }).then((result) => {
-                        alert(`Current Permission State: ${result.state}`);
-
-                        if (result.state === "denied") {
-                          alert("Chrome has this URL explicitly blocked in settings.");
-                        } else {
-                          // If it says 'prompt' but still fails, it's a user gesture / iframe issue
-                          getCurrentLocation();
-                        }
-                      });
-                    }}
+                    onClick={handleLocationClick}
                   >
                     {t("observation:current_location", {
                       defaultValue: "Use Current Location"
@@ -291,27 +300,7 @@ const LocationPicker = ({ isRequired = true }) => {
                   variant="subtle"
                   size="sm"
                   colorPalette="blue"
-                  onClick={(e) => {
-                    e.preventDefault();
-
-                    // 1. Check if Chrome Mobile considers the environment secure
-                    if (!window.isSecureContext) {
-                      alert("FAILED: Chrome thinks this is an insecure context, even with HTTPS.");
-                      return;
-                    }
-
-                    // 2. Query Chrome's internal permission state
-                    navigator.permissions.query({ name: "geolocation" }).then((result) => {
-                      alert(`Current Permission State: ${result.state}`);
-
-                      if (result.state === "denied") {
-                        alert("Chrome has this URL explicitly blocked in settings.");
-                      } else {
-                        // If it says 'prompt' but still fails, it's a user gesture / iframe issue
-                        getCurrentLocation();
-                      }
-                    });
-                  }}
+                  onClick={handleLocationClick}
                   whiteSpace="nowrap"
                 >
                   {t("observation:current_location", {
@@ -327,7 +316,7 @@ const LocationPicker = ({ isRequired = true }) => {
                     colorPalette="blue"
                     onClick={(e) => {
                       e.preventDefault();
-                      ll.use(e); // <--- Add 'e' here
+                      ll.use(e);
                     }}
                     whiteSpace="nowrap"
                   >
