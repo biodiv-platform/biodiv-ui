@@ -130,6 +130,28 @@ const LocationPicker = ({ isRequired = true }) => {
     setSuggestion(searchBoxRef.getPlace());
   };
 
+  const processCoordinates = async (latitude: number, longitude: number) => {
+    const point = { lat: latitude, lng: longitude };
+
+    form.setValue(FK.latitude.name, latitude, { shouldDirty: true });
+    form.setValue(FK.longitude.name, longitude, { shouldDirty: true });
+
+    setCoordinates(point);
+    setCenter(point);
+    setZoom(18);
+
+    try {
+      const results = await reverseGeocode(point);
+      if (results && results.length > 0) {
+        setObservedAtText(results[0].formatted_address);
+      } else {
+        setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+      }
+    } catch (error) {
+      setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+    }
+  };
+
   const getCurrentLocation = () => {
     if (!navigator.geolocation) {
       console.warn("Geolocation is not supported by this browser.");
@@ -137,31 +159,27 @@ const LocationPicker = ({ isRequired = true }) => {
     }
 
     navigator.geolocation.getCurrentPosition(
-      async ({ coords: { latitude, longitude } }) => {
-        const point = { lat: latitude, lng: longitude };
-
-        form.setValue(FK.latitude.name, latitude, { shouldDirty: true });
-        form.setValue(FK.longitude.name, longitude, { shouldDirty: true });
-
-        setCoordinates(point);
-        setCenter(point);
-        setZoom(18);
-
-        try {
-          const results = await reverseGeocode(point);
-          if (results && results.length > 0) {
-            setObservedAtText(results[0].formatted_address);
-          } else {
-            setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
-          }
-        } catch (error) {
-          setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
-        }
+      ({ coords: { latitude, longitude } }) => {
+        processCoordinates(latitude, longitude);
       },
       (error) => {
-        console.error("Error retrieving geolocation position:", error);
+        console.warn("High accuracy geolocation failed, trying fallback...", error);
+
+        navigator.geolocation.getCurrentPosition(
+          ({ coords: { latitude, longitude } }) => {
+            processCoordinates(latitude, longitude);
+          },
+          (fallbackError) => {
+            console.error("Fallback geolocation failed entirely:", fallbackError);
+          },
+          { enableHighAccuracy: false, timeout: 10000 }
+        );
       },
-      { enableHighAccuracy: true, timeout: 5000 }
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000
+      }
     );
   };
 
@@ -222,22 +240,25 @@ const LocationPicker = ({ isRequired = true }) => {
                 </div>
               }
             >
+              {/* Mobile Only Horizon Scrolling Context Container */}
               <Flex
                 display={["flex", "flex", "none", "none"]}
                 flexDirection="row"
                 flexWrap="nowrap"
-                gap="12px"
+                gap="16px"
                 mb={2}
                 width="full"
                 overflowX="auto"
+                paddingY={1}
               >
                 <Button
                   variant="plain"
-                  size="xs"
+                  size="sm"
                   colorPalette="blue"
                   onClick={getCurrentLocation}
                   whiteSpace="nowrap"
-                  paddingX={0}
+                  px={3}
+                  style={{ touchAction: "manipulation" }}
                 >
                   {t("observation:current_location", {
                     defaultValue: "Use Current Location"
@@ -247,10 +268,12 @@ const LocationPicker = ({ isRequired = true }) => {
                   <Button
                     title={ll.value?.address}
                     variant="plain"
-                    size="xs"
+                    size="sm"
                     colorPalette="blue"
                     onClick={ll.use}
                     whiteSpace="nowrap"
+                    px={3}
+                    style={{ touchAction: "manipulation" }}
                   >
                     {t("observation:last_location")}
                   </Button>
