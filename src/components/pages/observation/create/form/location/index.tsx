@@ -230,7 +230,26 @@ const LocationPicker = ({ isRequired = true }) => {
                     colorPalette="blue"
                     onClick={(e) => {
                       e.preventDefault();
-                      getCurrentLocation();
+
+                      // 1. Check if Chrome Mobile considers the environment secure
+                      if (!window.isSecureContext) {
+                        alert(
+                          "FAILED: Chrome thinks this is an insecure context, even with HTTPS."
+                        );
+                        return;
+                      }
+
+                      // 2. Query Chrome's internal permission state
+                      navigator.permissions.query({ name: "geolocation" }).then((result) => {
+                        alert(`Current Permission State: ${result.state}`);
+
+                        if (result.state === "denied") {
+                          alert("Chrome has this URL explicitly blocked in settings.");
+                        } else {
+                          // If it says 'prompt' but still fails, it's a user gesture / iframe issue
+                          getCurrentLocation();
+                        }
+                      });
                     }}
                   >
                     {t("observation:current_location", {
@@ -274,7 +293,24 @@ const LocationPicker = ({ isRequired = true }) => {
                   colorPalette="blue"
                   onClick={(e) => {
                     e.preventDefault();
-                    getCurrentLocation();
+
+                    // 1. Check if Chrome Mobile considers the environment secure
+                    if (!window.isSecureContext) {
+                      alert("FAILED: Chrome thinks this is an insecure context, even with HTTPS.");
+                      return;
+                    }
+
+                    // 2. Query Chrome's internal permission state
+                    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+                      alert(`Current Permission State: ${result.state}`);
+
+                      if (result.state === "denied") {
+                        alert("Chrome has this URL explicitly blocked in settings.");
+                      } else {
+                        // If it says 'prompt' but still fails, it's a user gesture / iframe issue
+                        getCurrentLocation();
+                      }
+                    });
                   }}
                   whiteSpace="nowrap"
                 >
