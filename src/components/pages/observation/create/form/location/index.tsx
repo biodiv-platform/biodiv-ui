@@ -34,29 +34,14 @@ const LocationPicker = ({ isRequired = true }) => {
   );
 
   const FK = {
-    observedAt: {
-      name: "observedAt",
-      label: t("observation:observed_at")
-    },
-    reverseGeocoded: {
-      name: "reverseGeocoded"
-    },
-    locationScale: {
-      name: "locationScale",
-      label: t("observation:location_scale")
-    },
-    latitude: {
-      name: "latitude",
-      label: t("observation:latitude")
-    },
-    longitude: {
-      name: "longitude",
-      label: t("observation:longitude")
-    }
+    observedAt: { name: "observedAt", label: t("observation:observed_at") },
+    reverseGeocoded: { name: "reverseGeocoded" },
+    locationScale: { name: "locationScale", label: t("observation:location_scale") },
+    latitude: { name: "latitude", label: t("observation:latitude") },
+    longitude: { name: "longitude", label: t("observation:longitude") }
   };
 
   const watchLatLng = form.watch([FK.latitude.name, FK.longitude.name, "resources"]);
-
   const defaultValues = form.control._defaultValues;
 
   const { open, onToggle } = useDisclosure();
@@ -122,27 +107,22 @@ const LocationPicker = ({ isRequired = true }) => {
     }
   }, [watchLatLng]);
 
-  const handleOnSearchChange = (e) => {
-    setObservedAtText(e.target.value);
-  };
+  const handleOnSearchChange = (e) => setObservedAtText(e.target.value);
+  const handleOnSearchSelected = async () => setSuggestion(searchBoxRef.getPlace());
 
-  const handleOnSearchSelected = async () => {
-    setSuggestion(searchBoxRef.getPlace());
-  };
+  const getCurrentLocation = (e) => {
+    if (e) e.preventDefault();
 
-  const getCurrentLocation = () => {
     if (!navigator.geolocation) {
-      console.warn("Geolocation is not supported by this browser.");
+      alert("Geolocation is not supported by this browser.");
       return;
     }
 
     navigator.geolocation.getCurrentPosition(
       async ({ coords: { latitude, longitude } }) => {
         const point = { lat: latitude, lng: longitude };
-
         form.setValue(FK.latitude.name, latitude, { shouldDirty: true });
         form.setValue(FK.longitude.name, longitude, { shouldDirty: true });
-
         setCoordinates(point);
         setCenter(point);
         setZoom(18);
@@ -159,9 +139,27 @@ const LocationPicker = ({ isRequired = true }) => {
         }
       },
       (error) => {
-        console.error("Error retrieving geolocation position:", error);
+        console.error("GPS Error:", error);
+        let errorMessage = "An unknown error occurred while fetching location.";
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = "Location permission was denied. Please check your browser settings.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = "Location information is unavailable from the device.";
+            break;
+          case error.TIMEOUT:
+            errorMessage =
+              "The location request timed out. Please step outside for a better GPS signal.";
+            break;
+        }
+        alert(`GPS Failed: ${errorMessage}`);
       },
-      { enableHighAccuracy: true, timeout: 5000 }
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000
+      }
     );
   };
 
@@ -174,7 +172,7 @@ const LocationPicker = ({ isRequired = true }) => {
     >
       <>
         {!isOnline && !hideLocationPicker && (
-          <Button mb={4} colorPalette="red" onClick={getCurrentLocation}>
+          <Button mb={4} colorPalette="red" type="button" onClick={getCurrentLocation}>
             Click Here for Manual Coordinates
           </Button>
         )}
@@ -198,23 +196,26 @@ const LocationPicker = ({ isRequired = true }) => {
                   {/* Desktop Only Buttons */}
                   <Button
                     display={["none", "none", "inline-flex", "inline-flex"]}
+                    type="button"
                     variant="plain"
                     size="xs"
                     colorPalette="blue"
                     onClick={getCurrentLocation}
                   >
-                    {t("observation:current_location", {
-                      defaultValue: "Use Current Location"
-                    })}
+                    {t("observation:current_location", { defaultValue: "Use Current Location" })}
                   </Button>
                   {ll.has && (
                     <Button
                       display={["none", "none", "inline-flex", "inline-flex"]}
+                      type="button"
                       title={ll.value?.address}
                       variant="plain"
                       size="xs"
                       colorPalette="blue"
-                      onClick={ll.use}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        ll.use(e);
+                      }}
                     >
                       {t("observation:last_location")}
                     </Button>
@@ -222,34 +223,38 @@ const LocationPicker = ({ isRequired = true }) => {
                 </div>
               }
             >
+              {/* Mobile Only Buttons */}
               <Flex
                 display={["flex", "flex", "none", "none"]}
                 flexDirection="row"
                 flexWrap="nowrap"
                 gap="12px"
-                mb={2}
+                mb={3}
                 width="full"
                 overflowX="auto"
+                py={1}
               >
                 <Button
-                  variant="plain"
-                  size="xs"
+                  type="button"
+                  variant="subtle"
+                  size="sm"
                   colorPalette="blue"
                   onClick={getCurrentLocation}
                   whiteSpace="nowrap"
-                  paddingX={0}
                 >
-                  {t("observation:current_location", {
-                    defaultValue: "Use Current Location"
-                  })}
+                  {t("observation:current_location", { defaultValue: "Use Current Location" })}
                 </Button>
                 {ll.has && (
                   <Button
+                    type="button"
                     title={ll.value?.address}
-                    variant="plain"
-                    size="xs"
+                    variant="subtle"
+                    size="sm"
                     colorPalette="blue"
-                    onClick={ll.use}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      ll.use(e);
+                    }}
                     whiteSpace="nowrap"
                   >
                     {t("observation:last_location")}
@@ -262,7 +267,15 @@ const LocationPicker = ({ isRequired = true }) => {
                 className="places-search"
                 endElement={
                   <Box>
-                    <Button variant="plain" size="sm" onClick={onToggle}>
+                    <Button
+                      variant="plain"
+                      size="sm"
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onToggle();
+                      }}
+                    >
                       {t(open ? "form:map.hide" : "form:map.show")}
                     </Button>
                   </Box>
