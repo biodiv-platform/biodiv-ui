@@ -1,4 +1,4 @@
-import { Box, CloseButton, Image } from "@chakra-ui/react";
+import { Box, CloseButton, FileUpload, Image } from "@chakra-ui/react";
 import {
   Container,
   ITPageGalleryFieldProps
@@ -8,11 +8,12 @@ import { resizeImage } from "@utils/image";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";
+
+const ACCEPT_STRING = "image/jpeg, image/png, image/jpg";
 
 export const DocumentSocialPreviewField = ({
   helpText,
@@ -30,32 +31,42 @@ export const DocumentSocialPreviewField = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const { formState } = useFormContext();
 
-  const onDrop = async ([file]) => {
-    if (!file) return;
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const file = details.acceptedFiles[0];
 
-    setIsProcessing(true);
-    const [fileSm] = await resizeImage(file);
-    const { success, data } = await axUploadResource(
-      new File([fileSm], file.name),
-      "documentSocialPreview"
-    );
-    if (success) {
-      field.onChange(data);
-    } else {
-      notification(t("user:update_error"));
-    }
-    setIsProcessing(false);
-  };
+      if (details.rejectedFiles && details.rejectedFiles.length > 0) {
+        notification("Format not supported. Please upload a valid image.");
+        return;
+      }
 
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
-    accept: {
-      "image/*": [".jpg", ".jpeg", ".png"]
+      if (!file) return;
+
+      setIsProcessing(true);
+      try {
+        const [fileSm] = await resizeImage(file);
+        const { success, data } = await axUploadResource(
+          new File([fileSm], file.name),
+          "documentSocialPreview"
+        );
+
+        if (success) {
+          field.onChange(data);
+        } else {
+          notification(t("user:update_error"));
+        }
+      } catch (error) {
+        console.error("Upload failed", error);
+        notification(t("user:update_error"));
+      } finally {
+        setIsProcessing(false);
+      }
     },
-    multiple: false,
-    onDrop
-  });
+    [field, t]
+  );
 
   const handleOnRemove = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     field.onChange("");
   };
@@ -78,15 +89,19 @@ export const DocumentSocialPreviewField = ({
     >
       {label && <Field htmlFor={name} label={label} />}
 
-      {/* Dropzone */}
       <Box id={name} width={"full"}>
         <Container
-          style={{ height: "124px", padding: "1rem", position: "relative" }}
-          {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
+          style={{
+            height: "124px",
+            padding: "1rem",
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
         >
-          <input {...getInputProps()} />
           {field.value ? (
-            <div>
+            <Box position="relative">
               <Image
                 src={getResourceThumbnail(
                   RESOURCE_CTX.DOCUMENT_SOCIAL_PREVIEW,
@@ -98,17 +113,55 @@ export const DocumentSocialPreviewField = ({
                 objectFit="cover"
                 borderRadius="md"
               />
-              <CloseButton top={0} right={0} position="absolute" onClick={handleOnRemove} />
-            </div>
+              <CloseButton
+                top={-2}
+                right={-2}
+                position="absolute"
+                onClick={handleOnRemove}
+                bg="white"
+                size="sm"
+                shadow="sm"
+              />
+            </Box>
           ) : isProcessing ? (
             <p>{t("common:loading")}</p>
           ) : (
-            <p>
-              <span style={{ display: "block" }}>{t("form:uploader.label")}</span>
-              <span style={{ display: "block", fontSize: "0.8em" }}>
-                {t("form:recommended_social_preview")}
-              </span>
-            </p>
+            <FileUpload.Root
+              accept={ACCEPT_STRING}
+              onFileChange={handleFileChange}
+              maxFiles={1}
+              width="full"
+              height="full"
+            >
+              <FileUpload.HiddenInput />
+              <FileUpload.Dropzone
+                border="none"
+                bg="transparent"
+                p={0}
+                width="full"
+                height="full"
+                minH="auto"
+              >
+                <FileUpload.DropzoneContent
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                >
+                  <p style={{ textAlign: "center", margin: 0 }}>
+                    <span style={{ display: "block" }}>{t("form:uploader.label")}</span>
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "0.8em",
+                        color: "var(--chakra-colors-gray-500)"
+                      }}
+                    >
+                      {t("form:recommended_social_preview")}
+                    </span>
+                  </p>
+                </FileUpload.DropzoneContent>
+              </FileUpload.Dropzone>
+            </FileUpload.Root>
           )}
         </Container>
       </Box>

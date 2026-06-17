@@ -30,6 +30,7 @@
     },
     "title": "Observation Media"
   },
+  "current_location": "Use current location",
   "custom_fields": "Custom Fields",
   "delete_file": {
     "error": "Unable to process file,Please try again later",
