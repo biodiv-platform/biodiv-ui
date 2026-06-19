@@ -197,7 +197,7 @@ export default function SpeciesShowPageComponent({
       const [fieldsMetaResponse, speciesDataResponse, speciesGroupsResponse, traitsMetaResponse] =
         await Promise.all([
           axGetAllFieldsMeta({ langId: languageId, userGroupId: currentGroup?.id }),
-          axGetSpeciesById(species.species.id, currentGroup?.id != null ? currentGroup : null),
+          axGetSpeciesById(species.species.id, currentGroup?.id),
           axGetspeciesGroups(),
           axGetAllTraitsMetaByTaxonId(newTaxonId, languageId)
         ]);

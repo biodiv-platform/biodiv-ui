@@ -4,12 +4,11 @@ import http, { plainHttp } from "@utils/http";
 import notification from "@utils/notification";
 import { createSpeciesFieldPayload } from "@utils/species";
 
-export const axGetSpeciesById = async (speciesId, payload) => {
+export const axGetSpeciesById = async (speciesId, userGroupId?: number | null) => {
   try {
-    const { data } = await plainHttp.post(
-      `${ENDPOINT.SPECIES}/v1/species/show/${speciesId}`,
-      payload
-    );
+    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/show/${speciesId}`, {
+      params: userGroupId ? { userGroupId } : {}
+    });
 
     return { success: true, data };
   } catch (e) {

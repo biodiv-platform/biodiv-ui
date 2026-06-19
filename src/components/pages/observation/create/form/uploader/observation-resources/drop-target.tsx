@@ -1,94 +1,129 @@
-import { Button, Heading, Text } from "@chakra-ui/react";
-import styled from "@emotion/styled";
+import { Box, Button, FileUpload, Heading, Text, VStack } from "@chakra-ui/react";
 import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { LuMoveUp, LuTimer } from "react-icons/lu";
+import React, { useCallback, useState } from "react";
+import { LuTimer } from "react-icons/lu";
 
 import useObservationCreate from "../use-observation-resources";
 
-const DropTargetBox = styled.div`
-  border: 2px dashed var(--chakra-colors-gray-300);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  min-height: 22rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  > div {
-    text-align: center;
-  }
-  &[data-dropping="true"] {
-    border-color: var(--chakra-colors-blue-500);
-  }
-  &[data-has-resources="false"] {
-    grid-column: 1/6;
-  }
-  svg {
-    display: block;
-    font-size: 2.5rem;
-    margin: 0 auto;
-    margin-bottom: 0.5rem;
-  }
-`;
+const ACCEPT_STRING =
+  typeof ACCEPTED_FILE_TYPES === "object" && !Array.isArray(ACCEPTED_FILE_TYPES)
+    ? Object.keys(ACCEPTED_FILE_TYPES).join(",")
+    : Array.isArray(ACCEPTED_FILE_TYPES)
+    ? ACCEPTED_FILE_TYPES.join(",")
+    : ACCEPTED_FILE_TYPES || "image/*,video/*";
 
 export default function DropTarget({ assetsSize }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
   const { addAssets } = useObservationCreate();
 
-  const handleOnDrop = async (files) => {
-    setIsProcessing(true);
-    const resizedAssets = await resizeMultiple(files);
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const { acceptedFiles, rejectedFiles } = details;
 
-    addAssets(resizedAssets, true);
-    setIsProcessing(false);
+      if (rejectedFiles && rejectedFiles.length > 0) {
+        rejectedFiles.forEach((file) => {
+          const ext = "." + file.name.substring(file.name.lastIndexOf(".") + 1);
+          notification(`${ext} format not supported`);
+        });
+        return;
+      }
+
+      if (acceptedFiles.length > 0) {
+        setIsProcessing(true);
+        try {
+          const resizedAssets = await resizeMultiple(acceptedFiles);
+          addAssets(resizedAssets, true);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsProcessing(false);
+        }
+      }
+    },
+    [addAssets]
+  );
+
+  const hasAssets = !!assetsSize;
+
+  const baseContainerStyles = {
+    border: "2px dashed",
+    borderColor: "gray.300",
+    borderRadius: "md",
+    p: 4,
+    minH: hasAssets ? "14rem" : "22rem",
+    height: hasAssets ? "100%" : "auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    gridColumn: !hasAssets ? "1/6" : "auto"
   };
 
-  const handleOnRejected = (files) => {
-    files.map((file) => {
-      const resourceTypeFileFormat =
-        "." + file.file.name.substring(file.file.name.lastIndexOf(".") + 1);
-      notification(resourceTypeFileFormat + " format not supported");
-    });
-  };
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: handleOnDrop,
-    accept: ACCEPTED_FILE_TYPES,
-    onDropRejected: handleOnRejected
-  });
+  if (isProcessing) {
+    return (
+      <Box {...baseContainerStyles}>
+        <VStack className="fade" gap={2}>
+          <Box as={LuTimer} fontSize="2.5rem" mb={2} />
+          <Text>{t("form:uploader.processing")}</Text>
+        </VStack>
+      </Box>
+    );
+  }
 
   return (
-    <DropTargetBox
-      {...getRootProps()}
-      data-has-resources={!!assetsSize}
-      data-dropping={isDragActive}
+    <FileUpload.Root
+      accept={ACCEPT_STRING}
+      onFileChange={handleFileChange}
+      width="full"
+      maxFiles={10}
+      style={{ gridColumn: !hasAssets ? "1/6" : "auto" }}
     >
-      <input {...getInputProps()} />
-      {isProcessing ? (
-        <div className="fade">
-          <LuTimer />
-          <span>{t("form:uploader.processing")}</span>
-        </div>
-      ) : isDragActive ? (
-        <div className="fade">
-          <LuMoveUp />
-          <span>{t("form:uploader.label_release")}</span>
-        </div>
-      ) : (
-        <div className="fade">
-          <Heading size="md">{t("form:uploader.label")}</Heading>
-          <Text my={2} color="gray.500">
-            {t("common:or")}
-          </Text>
-          <Button colorPalette="blue" variant="outline" children={t("form:uploader.browse")} />
-        </div>
-      )}
-    </DropTargetBox>
+      <FileUpload.HiddenInput />
+
+      <FileUpload.Dropzone
+        {...baseContainerStyles}
+        width="full"
+        cursor="pointer"
+        _hover={{ borderColor: "gray.400" }}
+        _dragging={{
+          borderColor: "blue.500",
+          bg: "blue.50",
+          _dark: { bg: "blue.950" }
+        }}
+        css={{
+          "& svg": {
+            display: "block",
+            fontSize: "2.5rem",
+            margin: "0 auto 0.5rem auto"
+          }
+        }}
+      >
+        <FileUpload.DropzoneContent width="full">
+          <VStack className="fade" width="full" gap={hasAssets ? 1 : 3}>
+            <Heading size={hasAssets ? "sm" : "md"}>{t("form:uploader.label")}</Heading>
+            <Text color="gray.500" fontSize="sm">
+              {t("common:or")}
+            </Text>
+
+            <FileUpload.Trigger asChild>
+              <Button
+                size={hasAssets ? "sm" : "md"}
+                colorPalette="blue"
+                variant="outline"
+                justifyContent="center"
+              >
+                {t("form:uploader.browse")}
+              </Button>
+            </FileUpload.Trigger>
+          </VStack>
+        </FileUpload.DropzoneContent>
+      </FileUpload.Dropzone>
+      <FileUpload.List />
+    </FileUpload.Root>
   );
 }

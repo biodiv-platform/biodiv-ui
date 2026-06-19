@@ -16,8 +16,11 @@ export default function UserFilterInput({ filterKey }) {
   const onQuery = debounce(axUserFilterSearch, 200);
 
   useEffect(() => {
-    if (!filter?.[filterKey]) return;
-    axGetUsersByID(filter[filterKey]).then(setDefaultValue);
+    if (!filter?.[filterKey]) {
+      axGetUsersByID(filter?.[filterKey]).then(setDefaultValue);
+    } else {
+      setDefaultValue([]);
+    }
   }, []);
 
   const handleOnChange = (values) => {

@@ -1,8 +1,8 @@
 import { removeCardWrapperParagraphs } from "@utils/pages";
 
 export const PAGE_TYPES = {
-  CONTENT: "Content",
-  REDIRECT: "Redirect"
+  CONTENT: "CONTENT",
+  REDIRECT: "REDIRECT"
 };
 
 export const PAGE_TYPE_OPTIONS = [

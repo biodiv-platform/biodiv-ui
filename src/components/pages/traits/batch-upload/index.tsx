@@ -1,9 +1,9 @@
 import {
   Box,
   Button,
+  FileUpload,
   Flex,
   Heading,
-  IconButton,
   Image,
   Link,
   Progress,
@@ -22,8 +22,7 @@ import notification from "@utils/notification";
 import dayjs from "dayjs";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useState } from "react";
 import { LuCircleAlert } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";
@@ -31,24 +30,27 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import ColumnMapper from "../common/column-mapper";
 
+const ACCEPT_STRING =
+  "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
 export default function TraitsBatchUpload({ traits, languages }) {
   function groupByLanguageId(list) {
-    const grouped = {}; // Initialize an empty object
+    const grouped = {};
 
     for (let i = 0; i < list.length; i++) {
-      // Loop through the list manually
-      const obj = list[i]; // Get the current object
-      const key = languages.filter((lang) => lang.id === obj.languageId)[0].name; // Get the languageId
+      const obj = list[i];
+      const key = languages.filter((lang) => lang.id === obj.languageId)[0].name;
 
       if (!grouped[key]) {
-        grouped[key] = []; // Initialize array if key doesn't exist
+        grouped[key] = [];
       }
 
-      grouped[key].push("Traits|" + obj.name + "|" + obj.id); // Add object to the respective array
+      grouped[key].push("Traits|" + obj.name + "|" + obj.id);
     }
 
     return grouped;
   }
+
   const [uploadResult, setUploadResult] = useState<Map<string, string>[]>([]);
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
   const [termsAccepted, setTermsAccepted] = useState<boolean>(true);
@@ -60,6 +62,8 @@ export default function TraitsBatchUpload({ traits, languages }) {
   const [successfulUpload, setSuccessfulUpload] = useState(0);
   const [failedUpload, setFailedUpload] = useState(0);
   const [showstats, setshowstats] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+
   const options = [
     "ScientificName",
     "TaxonConceptId",
@@ -69,19 +73,25 @@ export default function TraitsBatchUpload({ traits, languages }) {
     "License"
   ];
   const { t } = useTranslation();
-  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
-    noClick: true,
-    onDrop: async (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        setFile(acceptedFiles[0]);
+
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const targetFile = details.acceptedFiles[0];
+
+      if (details.rejectedFiles && details.rejectedFiles.length > 0) {
+        notification(t("traits:trait_matching.excel_file_error"));
+        return;
+      }
+
+      if (targetFile) {
+        setFile(targetFile);
         try {
           const workbook = new ExcelJS.Workbook();
-          const arrayBuffer = await acceptedFiles[0].arrayBuffer();
+          const arrayBuffer = await targetFile.arrayBuffer();
           await workbook.xlsx.load(arrayBuffer);
 
-          // Assuming the headers are in the first sheet and the first row
-          const worksheet = workbook.worksheets[0]; // Get the first worksheet
-          const firstRow = worksheet.getRow(1); // Get the first row
+          const worksheet = workbook.worksheets[0];
+          const firstRow = worksheet.getRow(1);
           const extractedHeaders: string[] = [];
 
           firstRow.eachCell((cell, colNumber) => {
@@ -91,17 +101,13 @@ export default function TraitsBatchUpload({ traits, languages }) {
               if (options.some((option) => option.toLowerCase() === cellValue.toLowerCase())) {
                 setColumnMapping((prev) => {
                   const updatedOptions = [...prev];
-
                   const existingIndex = updatedOptions.findIndex(([i]) => i === colNumber - 1);
 
                   if (existingIndex !== -1) {
-                    // Update existing entry
                     updatedOptions[existingIndex] = [colNumber - 1, cellValue];
                   } else {
-                    // Add new entry
                     updatedOptions.push([colNumber - 1, cellValue]);
                   }
-
                   return updatedOptions;
                 });
               }
@@ -116,12 +122,8 @@ export default function TraitsBatchUpload({ traits, languages }) {
         alert(t("traits:trait_matching.no_file_error"));
       }
     },
-    accept: {
-      "application/vnd.ms-excel": [".xls"],
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"]
-    },
-    maxFiles: 1
-  });
+    [onOpen1, t]
+  );
 
   const handleSubmit = async () => {
     setshowstats(true);
@@ -290,38 +292,58 @@ export default function TraitsBatchUpload({ traits, languages }) {
     }
   };
 
-  const [currentStep, setCurrentStep] = useState(1);
   return (
     <Box p={4}>
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
         {t("traits:trait_matching.description")}
       </Alert>
       {currentStep == 1 && (
-        <Box
-          {...getRootProps()}
-          minH="calc(100vh - var(--heading-height))"
-          bg={isDragActive ? "blue.100" : undefined}
-          id="dropzone"
-          cursor="inherit"
+        <FileUpload.Root
+          accept={ACCEPT_STRING}
+          onFileChange={handleFileChange}
+          maxFiles={1}
+          width="full"
         >
-          <input {...getInputProps()} />
-          <Flex
-            minH="calc(100vh - var(--heading-height))"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Flex flexDir="column" alignItems="center" p={4}>
-              <UploadIcon size={100} />
-              <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
-                {t("traits:trait_matching.browse_description")}
-              </Heading>
-              <Button colorPalette="blue" onClick={open} mb={8}>
-                {t("traits:trait_matching.browse_button")}
-              </Button>
-            </Flex>
-          </Flex>
-        </Box>
+          <FileUpload.HiddenInput />
+
+          <FileUpload.Context>
+            {(fileUpload) => (
+              <FileUpload.Dropzone
+                asChild
+                border="none"
+                p={0}
+                minH="calc(100vh - var(--heading-height))"
+                id="dropzone"
+                cursor="inherit"
+                width="full"
+              >
+                <Box bg={fileUpload.dragging ? "blue.100" : undefined} width="full" height="full">
+                  <Flex
+                    minH="calc(100vh - var(--heading-height))"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Flex flexDir="column" alignItems="center" p={4}>
+                      <UploadIcon size={100} />
+                      <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
+                        {t("traits:trait_matching.browse_description")}
+                      </Heading>
+                      <Button
+                        colorPalette="blue"
+                        onClick={() => fileUpload.openFilePicker()}
+                        mb={8}
+                      >
+                        {t("traits:trait_matching.browse_button")}
+                      </Button>
+                    </Flex>
+                  </Flex>
+                </Box>
+              </FileUpload.Dropzone>
+            )}
+          </FileUpload.Context>
+        </FileUpload.Root>
       )}
+
       <ColumnMapper
         options={options}
         manyOptions={Object.entries(groupByLanguageId(traits))}
@@ -383,19 +405,26 @@ export default function TraitsBatchUpload({ traits, languages }) {
             </Box>
           )}
           <Box>
-            {Object.entries(uploadResult[0]).filter(
-              ([key, value]) => key.includes("|DATE") && value.split("|").length != 2
+            {Object.entries(uploadResult[0] || {}).filter(
+              ([key, value]) =>
+                key.includes("|DATE") && typeof value === "string" && value.split("|").length != 2
             ).length != 0 && (
               <Box bg="red.500" color="white" p={4} borderRadius="md" boxShadow="md" mb={4}>
-                <Text fontSize="md" fontWeight="bold">
-                  <IconButton w={5} h={5} mr={4} />
+                <Flex align="center" gap={2} fontSize="md" fontWeight="bold">
                   <LuCircleAlert />
-                  Warning: {"Please add a units column for the following date traits"}!
-                </Text>
-                {Object.entries(uploadResult[0])
-                  .filter(([key, value]) => key.includes("|DATE") && value.split("|").length != 2)
+                  <Text>Warning: Please add a units column for the following date traits!</Text>
+                </Flex>
+                {Object.entries(uploadResult[0] || {})
+                  .filter(
+                    ([key, value]) =>
+                      key.includes("|DATE") &&
+                      typeof value === "string" &&
+                      value.split("|").length != 2
+                  )
                   .map(([key]) => (
-                    <Box ml={9}>{key.split("|")[0]}</Box>
+                    <Box ml={9} key={key}>
+                      {key.split("|")[0]}
+                    </Box>
                   ))}
               </Box>
             )}
@@ -403,136 +432,125 @@ export default function TraitsBatchUpload({ traits, languages }) {
               <tbody>
                 {uploadResult &&
                   uploadResult.map((item, index) => (
-                    <tr style={{ borderWidth: "2px" }}>
-                      <Box m={4}>
-                        <Button
-                          onClick={() =>
-                            setExpandedRows((prev) =>
-                              prev.includes(index)
-                                ? prev.filter((rowId) => rowId !== index)
-                                : [...prev, index]
-                            )
-                          }
-                          mr={4}
-                          borderRadius="50%"
-                          variant="outline"
-                          colorPalette="teal"
-                          size="xs"
-                        >
-                          {expandedRows.includes(index) ? "-" : "+"}
-                        </Button>
-                        <span style={{ fontWeight: "bold" }}>
-                          <Link
-                            href={`/species/show/${parseInt(item["Species Id"], 10)}`}
-                            target="_blank"
+                    <tr style={{ borderWidth: "2px" }} key={index}>
+                      <td>
+                        <Box m={4}>
+                          <Button
+                            onClick={() =>
+                              setExpandedRows((prev) =>
+                                prev.includes(index)
+                                  ? prev.filter((rowId) => rowId !== index)
+                                  : [...prev, index]
+                              )
+                            }
+                            mr={4}
+                            borderRadius="50%"
+                            variant="outline"
+                            colorPalette="teal"
+                            size="xs"
                           >
-                            {item["Scientific Name"]}
-                          </Link>
-                        </span>
-                        {expandedRows.includes(index) && (
-                          <Box ml={8}>
-                            <Heading fontSize="medium" m={2}>
-                              💎 {t("traits:trait_matching.traits")}
-                            </Heading>
+                            {expandedRows.includes(index) ? "-" : "+"}
+                          </Button>
+                          <span style={{ fontWeight: "bold" }}>
+                            <Link
+                              href={`/species/show/${parseInt(item["Species Id"], 10)}`}
+                              target="_blank"
+                            >
+                              {item["Scientific Name"]}
+                            </Link>
+                          </span>
+                          {expandedRows.includes(index) && (
                             <Box ml={8}>
-                              <table className="table table-bordered">
-                                <tbody>
-                                  {Object.entries(item).map(([key, values]) => (
-                                    <>
-                                      {key.split("|")[1] == "true" &&
-                                        values != null &&
-                                        (key.split("|")[2] !== "DATE" ||
-                                          values.split("|").length === 2) && (
-                                          <tr>
-                                            <td>
-                                              <BlueLink asChild>
-                                                <LocalLink
-                                                  href={`/traits/show/${key.split("|")[3]}`}
-                                                  prefixGroup={true}
-                                                >
-                                                  {key.split("|")[0]}
-                                                </LocalLink>
-                                              </BlueLink>
-                                            </td>
-                                            <td>
-                                              {key.split("|")[2] == "STRING" && (
-                                                <>
-                                                  <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                              <Heading fontSize="medium" m={2}>
+                                💎 {t("traits:trait_matching.traits")}
+                              </Heading>
+                              <Box ml={8}>
+                                <table className="table table-bordered">
+                                  <tbody>
+                                    {Object.entries(item).map(([key, values]) => (
+                                      <React.Fragment key={key}>
+                                        {key.split("|")[1] == "true" &&
+                                          values != null &&
+                                          typeof values === "string" &&
+                                          (key.split("|")[2] !== "DATE" ||
+                                            values.split("|").length === 2) && (
+                                            <tr>
+                                              <td>
+                                                <BlueLink asChild>
+                                                  <LocalLink
+                                                    href={`/traits/show/${key.split("|")[3]}`}
+                                                    prefixGroup={true}
+                                                  >
+                                                    {key.split("|")[0]}
+                                                  </LocalLink>
+                                                </BlueLink>
+                                              </td>
+                                              <td>
+                                                {key.split("|")[2] == "STRING" && (
+                                                  <>
+                                                    <SimpleGrid
+                                                      columns={{ base: 1, md: 3 }}
+                                                      gap={4}
+                                                    >
+                                                      {values
+                                                        .slice(0, -1)
+                                                        .split(",")
+                                                        .filter(
+                                                          (value) =>
+                                                            value.split("|")[0] !== "NoMatch"
+                                                        )
+                                                        .map((value, vIdx) => (
+                                                          <Flex
+                                                            key={vIdx}
+                                                            alignItems="center"
+                                                            border="2px"
+                                                            borderColor="gray.200"
+                                                            borderRadius="md"
+                                                            lineHeight={1}
+                                                            p={2}
+                                                            h="3.25rem"
+                                                          >
+                                                            {value.split("|")[2] && (
+                                                              <Image
+                                                                objectFit="contain"
+                                                                boxSize="32px"
+                                                                mr={2}
+                                                                src={getTraitIcon(
+                                                                  value.split("|")[2],
+                                                                  20
+                                                                )}
+                                                                alt={value.split("|")[1]}
+                                                              />
+                                                            )}
+                                                            <div>{value.split("|")[1]}</div>
+                                                          </Flex>
+                                                        ))}
+                                                    </SimpleGrid>
                                                     {values
                                                       .slice(0, -1)
                                                       .split(",")
                                                       .filter(
-                                                        (value) => value.split("|")[0] !== "NoMatch"
-                                                      )
-                                                      .map((value) => (
-                                                        <Flex
-                                                          key={value.id}
-                                                          alignItems="center"
-                                                          border="2px"
-                                                          borderColor="gray.200"
-                                                          borderRadius="md"
-                                                          lineHeight={1}
-                                                          p={2}
-                                                          h="3.25rem"
-                                                        >
-                                                          {value.split("|")[2] && (
-                                                            <Image
-                                                              objectFit="contain"
-                                                              boxSize="32px"
-                                                              mr={2}
-                                                              src={getTraitIcon(
-                                                                value.split("|")[2],
-                                                                20
-                                                              )}
-                                                              alt={value.split("|")[1]}
-                                                              // ignoreFallback={true}
-                                                            />
-                                                          )}
-                                                          <div>{value.split("|")[1]}</div>
-                                                        </Flex>
-                                                      ))}
-                                                  </SimpleGrid>
-                                                  {values
-                                                    .slice(0, -1)
-                                                    .split(",")
-                                                    .filter(
-                                                      (value) => value.split("|")[0] === "NoMatch"
-                                                    ).length != 0 && (
-                                                    <Alert bg="red.500" color="white" mt={2}>
-                                                      <Text>
-                                                        {"Couldn't find values: " +
-                                                          values
-                                                            .slice(0, -1) // Slice the array as before
-                                                            .split(",") // Split each value by comma
-                                                            .flat() // Flatten the resulting array of arrays into a single array
-                                                            .filter(
-                                                              (value) =>
-                                                                value.split("|")[0] === "NoMatch"
-                                                            ) // Filter for NoMatch
-                                                            .map((value) => value.split("|")[1]) // Extract the value part after "NoMatch"
-                                                            .join(", ")}
-                                                      </Text>
-                                                    </Alert>
-                                                  )}
-                                                </>
-                                              )}
-                                              {key.split("|")[2] == "NUMERIC" && (
-                                                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-                                                  <Flex
-                                                    border="2px"
-                                                    borderColor="gray.300"
-                                                    alignItems="center"
-                                                    justifyContent="center"
-                                                    borderRadius="md"
-                                                    lineHeight={1}
-                                                    h="3.25rem"
-                                                  >
-                                                    <div>{values}</div>
-                                                  </Flex>
-                                                </SimpleGrid>
-                                              )}
-                                              {key.split("|")[2] == "DATE" &&
-                                                values.split("|").length == 2 && (
+                                                        (value) => value.split("|")[0] === "NoMatch"
+                                                      ).length != 0 && (
+                                                      <Alert bg="red.500" color="white" mt={2}>
+                                                        <Text>
+                                                          {"Couldn't find values: " +
+                                                            values
+                                                              .slice(0, -1)
+                                                              .split(",")
+                                                              .flat()
+                                                              .filter(
+                                                                (value) =>
+                                                                  value.split("|")[0] === "NoMatch"
+                                                              )
+                                                              .map((value) => value.split("|")[1])
+                                                              .join(", ")}
+                                                        </Text>
+                                                      </Alert>
+                                                    )}
+                                                  </>
+                                                )}
+                                                {key.split("|")[2] == "NUMERIC" && (
                                                   <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                                                     <Flex
                                                       border="2px"
@@ -543,38 +561,59 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                                       lineHeight={1}
                                                       h="3.25rem"
                                                     >
-                                                      <div>{values.split("|")[0]}</div>
+                                                      <div>{values}</div>
                                                     </Flex>
                                                   </SimpleGrid>
                                                 )}
-                                              {key.split("|")[2] == "COLOR" && (
-                                                <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-                                                  {values
-                                                    .slice(0, -1)
-                                                    .split("|")
-                                                    .map((value) => (
-                                                      <Box
+                                                {key.split("|")[2] == "DATE" &&
+                                                  values.split("|").length == 2 && (
+                                                    <SimpleGrid
+                                                      columns={{ base: 1, md: 3 }}
+                                                      gap={4}
+                                                    >
+                                                      <Flex
                                                         border="2px"
-                                                        borderColor="rgba(0,0,0,0.1)"
+                                                        borderColor="gray.300"
+                                                        alignItems="center"
+                                                        justifyContent="center"
                                                         borderRadius="md"
                                                         lineHeight={1}
                                                         h="3.25rem"
-                                                        bg={value}
-                                                      />
-                                                    ))}
-                                                </SimpleGrid>
-                                              )}
-                                            </td>
-                                          </tr>
-                                        )}
-                                    </>
-                                  ))}
-                                </tbody>
-                              </table>
+                                                      >
+                                                        <div>{values.split("|")[0]}</div>
+                                                      </Flex>
+                                                    </SimpleGrid>
+                                                  )}
+                                                {key.split("|")[2] == "COLOR" && (
+                                                  <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
+                                                    {values
+                                                      .slice(0, -1)
+                                                      .split("|")
+                                                      .map((value, cIdx) => (
+                                                        <Box
+                                                          key={cIdx}
+                                                          border="2px"
+                                                          borderColor="rgba(0,0,0,0.1)"
+                                                          borderRadius="md"
+                                                          lineHeight={1}
+                                                          h="3.25rem"
+                                                          bg={value}
+                                                        />
+                                                      ))}
+                                                  </SimpleGrid>
+                                                )}
+                                              </td>
+                                            </tr>
+                                          )}
+                                      </React.Fragment>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </Box>
                             </Box>
-                          </Box>
-                        )}
-                      </Box>
+                          )}
+                        </Box>
+                      </td>
                     </tr>
                   ))}
               </tbody>
@@ -582,7 +621,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
             <Box mt={4}>
               <Checkbox
                 checked={termsAccepted}
-                onChange={() => setTermsAccepted(!termsAccepted)}
+                onCheckedChange={(e) => setTermsAccepted(!!e.checked)}
                 colorPalette={"blue"}
               >
                 {t("traits:terms.description")}
@@ -597,11 +636,16 @@ export default function TraitsBatchUpload({ traits, languages }) {
                   colorPalette="blue"
                   onClick={handleSubmit}
                   disabled={
-                    Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length !=
-                      0 ||
-                    Object.entries(uploadResult[0]).filter(
-                      ([key, value]) => key.includes("|DATE") && value.split("|").length != 2
-                    ).length != 0 ||
+                    (uploadResult[0] &&
+                      Object.keys(uploadResult[0]).filter((key) => key.includes("|false")).length !=
+                        0) ||
+                    (uploadResult[0] &&
+                      Object.entries(uploadResult[0]).filter(
+                        ([key, value]) =>
+                          key.includes("|DATE") &&
+                          typeof value === "string" &&
+                          value.split("|").length != 2
+                      ).length != 0) ||
                     !termsAccepted
                   }
                 >

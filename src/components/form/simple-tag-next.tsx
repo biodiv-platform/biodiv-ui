@@ -57,7 +57,7 @@ export default function TagsNextField({
       >
         <TagsInput.Label>{label}</TagsInput.Label>
 
-        <TagsInput.Control >
+        <TagsInput.Control>
           <TagsInput.Items />
           <TagsInput.Input placeholder={placeholder} onBlur={field.onBlur} />
         </TagsInput.Control>

@@ -2,6 +2,7 @@ import {
   AspectRatio,
   Box,
   CloseButton,
+  FileUpload,
   IconButton,
   Image,
   Input,
@@ -15,15 +16,20 @@ import { resizeImage } from "@utils/image";
 import { getResourceRAW, RESOURCE_CTX } from "@utils/media";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import { Field } from "@/components/ui/field";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 
-export const getColor = (props) => {
+type DragProps = {
+  isDragActive?: boolean;
+  isDragAccept?: boolean;
+  isDragReject?: boolean;
+};
+
+export const getColor = (props: DragProps) => {
   if (props.isDragAccept) {
     return "#00e676";
   }
@@ -36,7 +42,7 @@ export const getColor = (props) => {
   return "#eeeeee";
 };
 
-export const Container = styled.div`
+export const Container = styled.div<DragProps>`
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -44,6 +50,7 @@ export const Container = styled.div`
   border-width: 1px;
   border-radius: 0.25rem;
   height: 200px;
+  width: 100%; /* FIX: Force the container to take up the full width */
   border-color: ${(props) => getColor(props)};
   border-style: dashed;
   background: #fff;
@@ -67,6 +74,8 @@ export interface ITPageGalleryFieldProps {
   onRemoveCallback?;
 }
 
+const ACCEPT_STRING = "image/jpeg, image/png, image/jpg";
+
 export const PageGalleryField = ({
   helpText,
   label,
@@ -87,27 +96,36 @@ export const PageGalleryField = ({
   const { fields, append, remove, move } = useFieldArray({ name, keyName: "hId" });
   const [licenses, setLicenses] = useState<any[]>();
 
-  const onDrop = async (files) => {
-    if (!files?.length) return;
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const { acceptedFiles, rejectedFiles } = details;
 
-    setIsProcessing(true);
-    for (const file of files) {
-      const [fileSm] = await resizeImage(file);
-      const { success, data } = await axUploadResource(new File([fileSm], file.name), "pages");
-      if (success) {
-        append({ id: null, fileName: data });
-      } else {
-        notification(t("user:update_error"));
+      if (rejectedFiles && rejectedFiles.length > 0) {
+        notification("Format not supported. Please upload valid images.");
       }
-    }
-    setIsProcessing(false);
-  };
 
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
-    accept: { "image/*": [".jpg", ".jpeg", ".png"] },
-    multiple: true,
-    onDrop
-  });
+      if (!acceptedFiles?.length) return;
+
+      setIsProcessing(true);
+      try {
+        for (const file of acceptedFiles) {
+          const [fileSm] = await resizeImage(file);
+          const { success, data } = await axUploadResource(new File([fileSm], file.name), "pages");
+          if (success) {
+            append({ id: null, fileName: data });
+          } else {
+            notification(t("user:update_error"));
+          }
+        }
+      } catch (error) {
+        console.error("Upload error:", error);
+        notification(t("user:update_error"));
+      } finally {
+        setIsProcessing(false);
+      }
+    },
+    [append, t]
+  );
 
   const handleOnRemove = (item, index) => {
     remove(index);
@@ -136,14 +154,33 @@ export const PageGalleryField = ({
 
       {/* Dropzone */}
       <Box id={name} width={"full"} p={2}>
-        <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
-          <input {...getInputProps()} />
-          {isProcessing ? (
-            <p>{t("common:loading")}</p>
-          ) : (
-            <p>Drag n drop some images here, or click to select files</p>
-          )}
-        </Container>
+        <FileUpload.Root
+          accept={ACCEPT_STRING}
+          onFileChange={handleFileChange}
+          maxFiles={10}
+          disabled={disabled || isProcessing}
+          width="full"
+        >
+          <FileUpload.HiddenInput />
+
+          <FileUpload.Context>
+            {(fileUpload) => (
+              <FileUpload.Dropzone asChild>
+                <Container
+                  isDragActive={fileUpload.dragging}
+                  isDragAccept={false}
+                  isDragReject={false}
+                >
+                  {isProcessing ? (
+                    <p>{t("common:loading")}</p>
+                  ) : (
+                    <p>Drag n drop some images here, or click to select files</p>
+                  )}
+                </Container>
+              </FileUpload.Dropzone>
+            )}
+          </FileUpload.Context>
+        </FileUpload.Root>
       </Box>
 
       {/* Preview */}
@@ -170,7 +207,10 @@ export const PageGalleryField = ({
                 top={0}
                 right={0}
                 m={4}
-                onClick={() => handleOnRemove(item, index)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleOnRemove(item, index);
+                }}
               />
               <Stack>
                 <AspectRatio ratio={1440 / 300}>
@@ -190,7 +230,7 @@ export const PageGalleryField = ({
                   <NativeSelectRoot>
                     <NativeSelectField
                       {...register(`${name}.${index}.licenseId`)}
-                      defaultValue={licenses[0].value}
+                      defaultValue={item.licenseId || licenses[0].value}
                     >
                       {licenses.map((l) => (
                         <option value={l.value} key={l.value}>
@@ -202,7 +242,10 @@ export const PageGalleryField = ({
                 )}
                 <SimpleGrid columns={2} gap={2}>
                   <IconButton
-                    onClick={() => move(index, index - 1)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      move(index, index - 1);
+                    }}
                     disabled={index === 0}
                     aria-label={t("common:prev")}
                     variant={"subtle"}
@@ -210,7 +253,10 @@ export const PageGalleryField = ({
                     <LuArrowLeft />
                   </IconButton>
                   <IconButton
-                    onClick={() => move(index, index + 1)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      move(index, index + 1);
+                    }}
                     disabled={index === fields.length - 1}
                     aria-label={t("common:next")}
                     variant={"subtle"}

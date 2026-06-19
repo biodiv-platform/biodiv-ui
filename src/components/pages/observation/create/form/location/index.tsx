@@ -1,4 +1,4 @@
-import { Box, Button, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import ErrorMessage from "@components/form/common/error-message";
 import { SelectInputField } from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config";
@@ -34,29 +34,14 @@ const LocationPicker = ({ isRequired = true }) => {
   );
 
   const FK = {
-    observedAt: {
-      name: "observedAt",
-      label: t("observation:observed_at")
-    },
-    reverseGeocoded: {
-      name: "reverseGeocoded"
-    },
-    locationScale: {
-      name: "locationScale",
-      label: t("observation:location_scale")
-    },
-    latitude: {
-      name: "latitude",
-      label: t("observation:latitude")
-    },
-    longitude: {
-      name: "longitude",
-      label: t("observation:longitude")
-    }
+    observedAt: { name: "observedAt", label: t("observation:observed_at") },
+    reverseGeocoded: { name: "reverseGeocoded" },
+    locationScale: { name: "locationScale", label: t("observation:location_scale") },
+    latitude: { name: "latitude", label: t("observation:latitude") },
+    longitude: { name: "longitude", label: t("observation:longitude") }
   };
 
   const watchLatLng = form.watch([FK.latitude.name, FK.longitude.name, "resources"]);
-
   const defaultValues = form.control._defaultValues;
 
   const { open, onToggle } = useDisclosure();
@@ -122,19 +107,60 @@ const LocationPicker = ({ isRequired = true }) => {
     }
   }, [watchLatLng]);
 
-  const handleOnSearchChange = (e) => {
-    setObservedAtText(e.target.value);
-  };
+  const handleOnSearchChange = (e) => setObservedAtText(e.target.value);
+  const handleOnSearchSelected = async () => setSuggestion(searchBoxRef.getPlace());
 
-  const handleOnSearchSelected = async () => {
-    setSuggestion(searchBoxRef.getPlace());
-  };
+  const getCurrentLocation = (e) => {
+    if (e) e.preventDefault();
 
-  const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      form.setValue(FK.latitude.name, latitude);
-      form.setValue(FK.longitude.name, longitude);
-    });
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async ({ coords: { latitude, longitude } }) => {
+        const point = { lat: latitude, lng: longitude };
+        form.setValue(FK.latitude.name, latitude, { shouldDirty: true });
+        form.setValue(FK.longitude.name, longitude, { shouldDirty: true });
+        setCoordinates(point);
+        setCenter(point);
+        setZoom(18);
+
+        try {
+          const results = await reverseGeocode(point);
+          if (results && results.length > 0) {
+            setObservedAtText(results[0].formatted_address);
+          } else {
+            setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+          }
+        } catch (error) {
+          setObservedAtText(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+        }
+      },
+      (error) => {
+        console.error("GPS Error:", error);
+        let errorMessage = "An unknown error occurred while fetching location.";
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = "Location permission was denied. Please check your browser settings.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = "Location information is unavailable from the device.";
+            break;
+          case error.TIMEOUT:
+            errorMessage =
+              "The location request timed out. Please step outside for a better GPS signal.";
+            break;
+        }
+        alert(`GPS Failed: ${errorMessage}`);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000
+      }
+    );
   };
 
   return (
@@ -146,7 +172,7 @@ const LocationPicker = ({ isRequired = true }) => {
     >
       <>
         {!isOnline && !hideLocationPicker && (
-          <Button mb={4} colorPalette="red" onClick={getCurrentLocation}>
+          <Button mb={4} colorPalette="red" type="button" onClick={getCurrentLocation}>
             Click Here for Manual Coordinates
           </Button>
         )}
@@ -154,40 +180,102 @@ const LocationPicker = ({ isRequired = true }) => {
           <Box style={{ gridColumn: "1/4" }}>
             <Field
               invalid={
-                (form.formState.errors[FK.observedAt.name] ||
+                !!(
+                  form.formState.errors[FK.observedAt.name] ||
                   form.formState.errors[FK.latitude.name] ||
-                  form.formState.errors[FK.longitude.name]) &&
-                true
+                  form.formState.errors[FK.longitude.name]
+                )
               }
               required={isRequired}
               htmlFor="places-search"
+              label={
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}
+                >
+                  {FK.observedAt.label}
+                  {/* Desktop Only Buttons */}
+                  <Button
+                    display={["none", "none", "inline-flex", "inline-flex"]}
+                    type="button"
+                    variant="plain"
+                    size="xs"
+                    colorPalette="blue"
+                    onClick={getCurrentLocation}
+                  >
+                    {t("observation:current_location", { defaultValue: "Use Current Location" })}
+                  </Button>
+                  {ll.has && (
+                    <Button
+                      display={["none", "none", "inline-flex", "inline-flex"]}
+                      type="button"
+                      title={ll.value?.address}
+                      variant="plain"
+                      size="xs"
+                      colorPalette="blue"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        ll.use(e);
+                      }}
+                    >
+                      {t("observation:last_location")}
+                    </Button>
+                  )}
+                </div>
+              }
             >
-              <Field
-                htmlFor="places-search"
-                required={isRequired}
-                label={
-                  <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                    {FK.observedAt.label}
-                    {ll.has && (
-                      <Button
-                        title={ll.value?.address}
-                        variant="plain"
-                        size="xs"
-                        colorPalette="blue"
-                        onClick={ll.use}
-                      >
-                        {t("observation:last_location")}
-                      </Button>
-                    )}
-                  </div>
-                }
-              ></Field>
+              {/* Mobile Only Buttons */}
+              <Flex
+                display={["flex", "flex", "none", "none"]}
+                flexDirection="row"
+                flexWrap="nowrap"
+                gap="12px"
+                mb={3}
+                width="full"
+                overflowX="auto"
+                py={1}
+              >
+                <Button
+                  type="button"
+                  variant="subtle"
+                  size="sm"
+                  colorPalette="blue"
+                  onClick={getCurrentLocation}
+                  whiteSpace="nowrap"
+                >
+                  {t("observation:current_location", { defaultValue: "Use Current Location" })}
+                </Button>
+                {ll.has && (
+                  <Button
+                    type="button"
+                    title={ll.value?.address}
+                    variant="subtle"
+                    size="sm"
+                    colorPalette="blue"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      ll.use(e);
+                    }}
+                    whiteSpace="nowrap"
+                  >
+                    {t("observation:last_location")}
+                  </Button>
+                )}
+              </Flex>
+
               <InputGroup
                 width={"full"}
                 className="places-search"
                 endElement={
                   <Box>
-                    <Button variant="plain" size="sm" onClick={onToggle}>
+                    <Button
+                      variant="plain"
+                      size="sm"
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onToggle();
+                      }}
+                    >
                       {t(open ? "form:map.hide" : "form:map.show")}
                     </Button>
                   </Box>
@@ -209,6 +297,7 @@ const LocationPicker = ({ isRequired = true }) => {
                   />
                 </Autocomplete>
               </InputGroup>
+
               <ErrorMessage name={FK.observedAt.name} errors={form.formState.errors} />
               {!open && (
                 <>

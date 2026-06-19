@@ -18,7 +18,8 @@ import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
-import { axGetObservationById, axRecoSuggest } from "@services/observation.service";
+import { axRecoSuggest } from "@services/observation.service";
+import { axGetResourcesByObjectId } from "@services/resources.service";
 import { axGetLangList } from "@services/utility.service";
 import { DEFAULT_GROUP, plantnetText, specRecText } from "@static/constants";
 import notification from "@utils/notification";
@@ -122,9 +123,9 @@ export default function AddSuggestion({
       setLanguages(data.map((l) => ({ label: l.name, value: l.id })))
     );
 
-    axGetObservationById(observationId).then(({ data }) => {
+    axGetResourcesByObjectId("observation", observationId).then(({ data }) => {
       setImages(
-        data?.observationResource?.filter((o) => {
+        data?.filter((o) => {
           return o.resource.type === "IMAGE";
         })
       );

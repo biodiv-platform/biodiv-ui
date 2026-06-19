@@ -1,11 +1,12 @@
-import { Box, GridItem, IconButton, SimpleGrid } from "@chakra-ui/react";
+import { Box, FileUpload, Flex, GridItem, IconButton, SimpleGrid, Text } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import { axUploadResource } from "@services/files.service";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback } from "react";
 import { LuX } from "react-icons/lu";
+
+const ACCEPT_STRING = "image/jpeg, image/png, image/jpg";
 
 export default function TraitsValueComponent({
   valueObj,
@@ -15,19 +16,25 @@ export default function TraitsValueComponent({
   langId,
   onValueImageChange
 }) {
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: { "image/*": [".jpg", ".jpeg", ".png"] },
-    maxFiles: 1,
-    onDrop: async (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        const { success, data } = await axUploadResource(acceptedFiles[0], "traits", undefined);
-        if (success) {
-          onValueImageChange(index, data);
+  const { t } = useTranslation();
+
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const targetFile = details.acceptedFiles[0];
+      if (targetFile) {
+        try {
+          const { success, data } = await axUploadResource(targetFile, "traits", undefined);
+          if (success) {
+            onValueImageChange(index, data);
+          }
+        } catch (error) {
+          console.error("Trait row graphic upload failure:", error);
         }
       }
-    }
-  });
-  const { t } = useTranslation();
+    },
+    [index, onValueImageChange]
+  );
+
   return (
     <SimpleGrid columns={{ base: 1, md: 5 }} gap={{ md: 4 }} mb={4}>
       <Box>
@@ -50,34 +57,54 @@ export default function TraitsValueComponent({
           label={`${t("traits:create_form.description")} ${index + 1}`}
         />
       </GridItem>
-      <Box>
-        <div
-          {...getRootProps()}
-          style={{
-            border: "2px dashed #aaa",
-            padding: "5px",
-            textAlign: "center",
-            width: "50px",
-            height: "50px"
-          }}
-        >
-          <input {...getInputProps()} />
-          {valueObj[translationSelected].values[index].icon ? (
-            <img
-              src={getTraitIcon(valueObj[translationSelected].values[index].icon)}
-              alt="Trait Value Icon Preview"
-              style={{ width: "40px", height: "40px" }}
-            />
-          ) : (
-            <p style={{ padding: "5px" }}>+</p>
-          )}
-        </div>
+
+      <Box display="flex" alignItems="flex-end" pb={1}>
+        <FileUpload.Root accept={ACCEPT_STRING} onFileChange={handleFileChange} maxFiles={1}>
+          <FileUpload.HiddenInput />
+          <FileUpload.Dropzone
+            asChild
+            border="2px dashed var(--chakra-colors-gray-300)"
+            p={1}
+            width="50px"
+            height="50px"
+            minH="auto"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            cursor="pointer"
+            bg="white"
+          >
+            <FileUpload.Trigger asChild>
+              <Box width="full" height="full">
+                {valueObj[translationSelected].values[index].icon ? (
+                  <Flex width="full" height="full" align="center" justify="center">
+                    <img
+                      src={getTraitIcon(valueObj[translationSelected].values[index].icon)}
+                      alt="Trait Value Icon Preview"
+                      style={{ width: "40px", height: "40px", objectFit: "cover" }}
+                    />
+                  </Flex>
+                ) : (
+                  <Flex width="full" height="full" align="center" justify="center">
+                    <Text fontSize="lg" color="gray.400">
+                      +
+                    </Text>
+                  </Flex>
+                )}
+              </Box>
+            </FileUpload.Trigger>
+          </FileUpload.Dropzone>
+        </FileUpload.Root>
       </Box>
+
       {valueObj[translationSelected].traits.languageId == langId && (
         <Box display="flex" justifyContent="center" alignItems="center">
           <IconButton
             aria-label="Remove value"
-            onClick={() => onRemove(index)}
+            onClick={(e) => {
+              e.preventDefault();
+              onRemove(index);
+            }}
             size="sm"
             colorPalette="red"
           >

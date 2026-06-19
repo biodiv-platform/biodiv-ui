@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  FileUpload,
   Flex,
   Heading,
   Icon,
@@ -16,8 +17,7 @@ import { axUploadTaxonFile } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useCallback, useState } from "react";
 import { LuChevronDown, LuCircleAlert } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";
@@ -27,12 +27,15 @@ import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-sele
 import NameTable from "./name-table";
 
 type TaxonData = {
-  id: string; // or whatever the correct type is for 'id'
+  id: string;
   name: string;
   rank: string;
   status: string;
   position: string;
 };
+
+const ACCEPT_STRING =
+  "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
 export default function NameMatchingComponent() {
   const [uploadResult, setUploadResult] = useState<[string, TaxonData[]][]>([]);
@@ -48,6 +51,8 @@ export default function NameMatchingComponent() {
   const [filter, setFilter] = useState<string>("Matched");
   const { t } = useTranslation();
   const options = ["Scientific name"];
+  const [currentStep, setCurrentStep] = useState(1);
+
   const importAsExcel = async () => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Sheet1");
@@ -58,7 +63,6 @@ export default function NameMatchingComponent() {
       { header: "SpeciesId", key: "SpeciesId" }
     ];
 
-    // Add new columns dynamically
     const newColumns = headers
       .filter((_, index) => index !== selectedColumn)
       .map((header) => ({
@@ -97,13 +101,13 @@ export default function NameMatchingComponent() {
     const blob = new Blob([buffer], { type: "application/octet-stream" });
     const url = window.URL.createObjectURL(blob);
 
-    // Create a link to trigger download
     const a = document.createElement("a");
     a.href = url;
     a.download = "names.xlsx";
     a.click();
     window.URL.revokeObjectURL(url);
   };
+
   const columnMappingSubmit = async () => {
     onClose1();
     const formData = new FormData();
@@ -115,7 +119,7 @@ export default function NameMatchingComponent() {
       setSelectedColumn(foundItem[0]);
       formData.append("column", foundItem[0].toString());
     }
-    setLoading(true); // Add file to formData
+    setLoading(true);
 
     const { success, data, error } = await axUploadTaxonFile(formData);
     if (success) {
@@ -127,9 +131,9 @@ export default function NameMatchingComponent() {
             Object.entries(obj).map(async ([key, value]: [string, TaxonData[]]) => {
               const { success, data } = await axCheckSpecies(value[0]?.id);
               if (success) {
-                return [key, value[0], data, false, objindex]; // Ensure index is correctly mapped
+                return [key, value[0], data, false, objindex];
               }
-              return [key, value[0], null, false, objindex]; // Keep index consistent even on failure
+              return [key, value[0], null, false, objindex];
             })
           )
         );
@@ -137,48 +141,49 @@ export default function NameMatchingComponent() {
         setLoading(false);
         setCurrentStep(2);
       })();
-    } // Proceed to the next step
-    else {
+    } else {
       setLoading(false);
       notification(error?.message || "Something went wrong!");
     }
   };
-  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
-    noClick: true,
-    onDrop: async (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        setFile(acceptedFiles[0]);
+
+  const handleFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      const targetFile = details.acceptedFiles[0];
+
+      if (details.rejectedFiles && details.rejectedFiles.length > 0) {
+        notification("Format not supported. Please drop an Excel file (.xls, .xlsx)");
+        return;
+      }
+
+      if (targetFile) {
+        setFile(targetFile);
         try {
           const workbook = new ExcelJS.Workbook();
-          const arrayBuffer = await acceptedFiles[0].arrayBuffer();
+          const arrayBuffer = await targetFile.arrayBuffer();
           await workbook.xlsx.load(arrayBuffer);
 
-          // Assuming the headers are in the first sheet and the first row
-          const worksheet = workbook.worksheets[0]; // Get the first worksheet
-          const firstRow = worksheet.getRow(1); // Get the first row
+          const worksheet = workbook.worksheets[0];
+          const firstRow = worksheet.getRow(1);
           const extractedHeaders: string[] = [];
 
           firstRow.eachCell((cell, colNumber) => {
             if (cell.value) {
               const cellValue = cell.value.toString();
-              extractedHeaders.push(`${cellValue}|${colNumber - 1}`); // Extract the value of each cell
+              extractedHeaders.push(`${cellValue}|${colNumber - 1}`);
               if (
                 cell.value.toString().toLowerCase() == "Sci Name".toLowerCase() ||
                 cell.value.toString().toLowerCase() == "Scientific name".toLowerCase()
               ) {
                 setColumnMapping((prev) => {
                   const updatedOptions = [...prev];
-
                   const existingIndex = updatedOptions.findIndex(([i]) => i === colNumber - 1);
 
                   if (existingIndex !== -1) {
-                    // Update existing entry
                     updatedOptions[existingIndex] = [colNumber - 1, "Scientific name"];
                   } else {
-                    // Add new entry
                     updatedOptions.push([colNumber - 1, "Scientific name"]);
                   }
-
                   return updatedOptions;
                 });
               }
@@ -193,14 +198,9 @@ export default function NameMatchingComponent() {
         notification("No file selected!");
       }
     },
-    accept: {
-      "application/vnd.ms-excel": [".xls"],
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"]
-    },
-    maxFiles: 1
-  });
+    [onOpen1]
+  );
 
-  const [currentStep, setCurrentStep] = useState(1);
   return (
     <Box p={4}>
       {/* Progress Bar */}
@@ -210,31 +210,52 @@ export default function NameMatchingComponent() {
       <Box mt={6} p={4} borderWidth={1} borderRadius="md" bg="gray.50">
         {isLoading && <Spinner></Spinner>}
         {currentStep == 1 && !isLoading && (
-          <Box
-            {...getRootProps()}
-            minH="calc(100vh - var(--heading-height))"
-            bg={isDragActive ? "blue.100" : undefined}
-            id="dropzone"
-            cursor="inherit"
+          <FileUpload.Root
+            accept={ACCEPT_STRING}
+            onFileChange={handleFileChange}
+            maxFiles={1}
+            width="full"
           >
-            <input {...getInputProps()} />
-            <Flex
-              minH="calc(100vh - var(--heading-height))"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Flex flexDir="column" alignItems="center" p={4}>
-                <UploadIcon size={100} />
-                <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
-                  {t("taxon:name_matching.upload_description")}
-                </Heading>
-                <Button colorPalette="blue" onClick={open} mb={8}>
-                  {t("taxon:name_matching.upload_button")}
-                </Button>
-              </Flex>
-            </Flex>
-          </Box>
+            <FileUpload.HiddenInput />
+
+            <FileUpload.Context>
+              {(fileUpload) => (
+                <FileUpload.Dropzone
+                  bg={fileUpload.dragging ? "blue.100" : "transparent"}
+                  border="none"
+                  p={0}
+                  minH="calc(100vh - var(--heading-height))"
+                  id="dropzone"
+                  cursor="inherit"
+                  width="full"
+                >
+                  <Box width="full" height="full" onClick={(e) => e.stopPropagation()}>
+                    <Flex
+                      minH="calc(100vh - var(--heading-height))"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Flex flexDir="column" alignItems="center" p={4}>
+                        <UploadIcon size={100} />
+                        <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
+                          {t("taxon:name_matching.upload_description")}
+                        </Heading>
+                        <Button
+                          colorPalette="blue"
+                          onClick={() => fileUpload.openFilePicker()}
+                          mb={8}
+                        >
+                          {t("taxon:name_matching.upload_button")}
+                        </Button>
+                      </Flex>
+                    </Flex>
+                  </Box>
+                </FileUpload.Dropzone>
+              )}
+            </FileUpload.Context>
+          </FileUpload.Root>
         )}
+
         <ColumnMapper
           options={options}
           manyOptions={[]}
@@ -247,10 +268,10 @@ export default function NameMatchingComponent() {
           onSubmit={columnMappingSubmit}
           optionDisabled={columnMapping.filter(([, i]) => i === "Scientific name").length == 0}
         />
+
         {currentStep == 2 && (
           <>
             <Flex justifyContent="space-between" alignItems="center" bg="white" p={4}>
-              {/* Left-aligned content */}
               <Text fontSize="lg">
                 <Text as="span" color="blue.500" fontWeight="bold">
                   {uploadResult.filter(([, value]) => value.length != 0).length}
@@ -262,12 +283,13 @@ export default function NameMatchingComponent() {
                 names matched successfully.
               </Text>
 
-              {/* Right-aligned content */}
               <Flex justifyContent="flex-end">
                 <MenuRoot>
-                  <MenuTrigger as={Button}>
-                    {t("taxon:name_matching.download_button")}
-                    <LuChevronDown />
+                  <MenuTrigger asChild>
+                    <Button>
+                      {t("taxon:name_matching.download_button")}
+                      <LuChevronDown />
+                    </Button>
                   </MenuTrigger>
                   <MenuContent>
                     <MenuItem value="importAsExcel" onClick={importAsExcel}>
@@ -289,7 +311,7 @@ export default function NameMatchingComponent() {
                   {uploadResult
                     .filter(([, value]) => value.length == 0)
                     .map(([key]) => (
-                      <Box ml={9}>
+                      <Box ml={9} key={key}>
                         {selectedColumn != null && (
                           <Link
                             href={`/species/create?name=${
