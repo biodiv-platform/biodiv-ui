@@ -1,10 +1,8 @@
-import { Tabs } from "@chakra-ui/react";
+import { Box, Tabs } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
-
-import { Field } from "@/components/ui/field";
 
 import AudioInput from "./audio-input";
 import FromURL from "./from-url";
@@ -24,10 +22,8 @@ export interface IDropzoneProps {
 const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzoneProps) => {
   const { observationAssets, addAssets } = useObservationCreate();
   const [tab, setTab] = useState("selectedMedia");
-
   const { t } = useTranslation();
-
-  const { field, fieldState } = useController({ name });
+  const { field } = useController({ name });
 
   useEffect(() => {
     observationAssets?.length && field.onChange(observationAssets);
@@ -44,12 +40,7 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
   const onSelectionDone = () => setTab("selectedMedia");
 
   return (
-    <Field
-      hidden={hidden}
-      invalid={!!fieldState.error}
-      mb={mb}
-      errorText={JSON.stringify(fieldState?.error?.message)}
-    >
+    <Box hidden={hidden} mb={mb}>
       <Tabs.Root
         className="nospace"
         onValueChange={(e) => setTab(e.value)}
@@ -90,7 +81,7 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
           <FromURL onDone={onSelectionDone} onSave={addAssets} />
         </Tabs.Content>
       </Tabs.Root>
-    </Field>
+    </Box>
   );
 };
 
