@@ -6,10 +6,9 @@ import { createSpeciesFieldPayload } from "@utils/species";
 
 export const axGetSpeciesById = async (speciesId, userGroupId?: number | null) => {
   try {
-    const { data } = await plainHttp.get(
-      `${ENDPOINT.SPECIES}/v1/species/show/${speciesId}`,
-      { params: userGroupId ? { userGroupId } : {} }
-    );
+    const { data } = await plainHttp.get(`${ENDPOINT.SPECIES}/v1/species/show/${speciesId}`, {
+      params: userGroupId ? { userGroupId } : {}
+    });
 
     return { success: true, data };
   } catch (e) {
