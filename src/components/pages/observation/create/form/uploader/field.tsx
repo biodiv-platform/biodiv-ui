@@ -1,4 +1,4 @@
-import { Box, Tabs } from "@chakra-ui/react";
+import { Box, Tabs, Text } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
   const { observationAssets, addAssets } = useObservationCreate();
   const [tab, setTab] = useState("selectedMedia");
   const { t } = useTranslation();
-  const { field } = useController({ name });
+  const { field, fieldState } = useController({ name });
 
   useEffect(() => {
     observationAssets?.length && field.onChange(observationAssets);
@@ -81,6 +81,12 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
           <FromURL onDone={onSelectionDone} onSave={addAssets} />
         </Tabs.Content>
       </Tabs.Root>
+
+      {fieldState.error && (
+        <Text color="red.500" fontSize="sm" mt={2}>
+          {JSON.stringify(fieldState?.error?.message)}
+        </Text>
+      )}
     </Box>
   );
 };
