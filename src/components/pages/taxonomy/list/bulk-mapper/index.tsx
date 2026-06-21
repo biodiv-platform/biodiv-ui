@@ -22,6 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { LuExternalLink } from "react-icons/lu";
 import * as Yup from "yup";
 
 import { SelectInputField } from "@/components/form/select";
@@ -32,6 +33,7 @@ import {
 } from "@/components/pages/observation/create/form/recodata/scientific-name";
 import { Tooltip } from "@/components/ui/tooltip";
 import CheckIcon from "@/icons/check";
+import { axCheckSpecies } from "@/services/species.service";
 import { axTaxonomyBulkAction } from "@/services/taxonomy.service";
 import { TAXON_BADGE_COLORS } from "@/static/constants";
 import { bulkActionTabs, TAXON_POSITION } from "@/static/taxon";
@@ -42,9 +44,16 @@ import useTaxonFilter from "../use-taxon";
 export default function BulkMapperModal() {
   const isSmall = useBreakpointValue({ base: true, md: false });
   const { t } = useTranslation();
-  const { onClose, isOpen, onOpen, selectedTaxons } = useTaxonFilter();
+  const { onClose, isOpen, onOpen, selectedTaxons, setSelectedTaxons } = useTaxonFilter();
   const [tabIndex, setTabIndex] = useState<string | null>("taxon:position.title");
   const [selectedRanks, setSelectedRanks] = useState<any[]>([]);
+  const [accepted, setAccepted] = useState(true);
+  const [speciesMap, setSpeciesMap] = useState<Map<number, number | null>>(new Map());
+  const ensureSpeciesId = async (taxonId: number) => {
+    if (speciesMap.has(taxonId)) return;
+    const { success, data } = await axCheckSpecies(taxonId);
+    setSpeciesMap((prev) => new Map(prev).set(taxonId, success ? data : null));
+  };
   const { open: isContentVisible, onToggle: toggleContentVisibility } = useDisclosure({
     defaultOpen: false
   });
@@ -57,6 +66,17 @@ export default function BulkMapperModal() {
     }
     const distinctRanks = [...new Set(selectedTaxons.map((item) => item.rank))];
     setSelectedRanks(distinctRanks);
+
+    const distinctStatus = [...new Set(selectedTaxons.map((item) => item.status))];
+    if (distinctStatus.length > 1 || distinctStatus[0] == "SYNONYM") {
+      setAccepted(false);
+    }
+
+    selectedTaxons.forEach((t) => {
+      if (!speciesMap.has(t.id)) {
+        ensureSpeciesId(t.id);
+      }
+    });
   }, [selectedTaxons]);
 
   const hForm = useForm<any>({
@@ -79,6 +99,8 @@ export default function BulkMapperModal() {
     }
   });
   const langRef: any = useRef(null);
+
+  const draggedTaxon = useRef<string | null>(null);
 
   const handleOnSubmit = async (values) => {
     const params = {
@@ -124,6 +146,26 @@ export default function BulkMapperModal() {
     }
     onClose();
   });
+
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    if (!draggedTaxon.current) return;
+    const [name, id] = draggedTaxon.current.split("|");
+    const results = await onScientificNameQuery(name, "id", true);
+    if (!results || results.length === 0) return;
+
+    const match = results.find((r) => r.taxonId === Number(id)) || results[0];
+    const current = hForm.getValues("newTaxonId") || [];
+    hForm.setValue("newTaxonId", Array.isArray(current) ? [...current, match] : [match], {
+      shouldValidate: true,
+      shouldDirty: true
+    });
+    setSelectedTaxons(selectedTaxons.filter((t) => t.id !== Number(id)));
+    draggedTaxon.current = null;
+  };
 
   return (
     <ActionBar.Root open={isOpen} closeOnInteractOutside={false} onOpenChange={onClose}>
@@ -242,7 +284,7 @@ export default function BulkMapperModal() {
                       <TabsContent value="Merge" height={"19.5rem"}>
                         {
                           <Box p={4} height={"15rem"} overflowY={"auto"}>
-                            {selectedRanks && selectedRanks.length < 2 && (
+                            {selectedRanks && selectedRanks.length < 2 && accepted && (
                               <Box display="grid" gridTemplateColumns="1fr auto 1fr" gap={0}>
                                 <Box>
                                   <Heading as="h3" size="md" mb={4}>
@@ -251,32 +293,52 @@ export default function BulkMapperModal() {
                                   <VStack gap={1.5} align="stretch">
                                     {selectedTaxons.map((t) => (
                                       <Box
-                                        key={t.id}
-                                        //align="center"
-                                        gap={2}
-                                        px={3}
-                                        py={1.5}
-                                        bg="gray.50"
-                                        borderWidth="0.5px"
-                                        borderColor="gray.200"
-                                        borderRadius="md"
-                                      >
+                                      key={t.id}
+                                      display="flex"
+                                      alignItems="center"
+                                      px={3}
+                                      py={1.5}
+                                      bg="gray.50"
+                                      borderWidth="0.5px"
+                                      borderColor="gray.200"
+                                      borderRadius="md"
+                                      draggable
+                                      cursor="grab"
+                                      _active={{ cursor: "grabbing" }}
+                                      onDragStart={() => {
+                                        draggedTaxon.current = t.name + "|" + t.id;
+                                      }}
+                                    >
+                                      <Box flex={1} display="flex" alignItems="center" gap={2} flexWrap="wrap">
                                         {t.name + " (" + t.id + ")"}
                                         {t.rank && <Badge>{t.rank}</Badge>}
                                         {t.status && (
-                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.status]}>
-                                            {t.status}
-                                          </Badge>
+                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.status]}>{t.status}</Badge>
                                         )}
                                         {t.position && (
-                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.position]}>
-                                            {t.position}
-                                          </Badge>
+                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.position]}>{t.position}</Badge>
                                         )}
                                       </Box>
+                                      <Box ml="auto" flexShrink={0}>
+                                        {speciesMap.has(t.id) ? (
+                                          speciesMap.get(t.id) ? (
+                                            <Badge
+                                              colorPalette="green"
+                                              cursor="pointer"
+                                              onClick={() => window.open(`/species/${speciesMap.get(t.id)}`, "_blank")}
+                                            >
+                                              <LuExternalLink />
+                                            </Badge>
+                                          ) : null
+                                        ) : (
+                                          <Badge colorPalette="gray">...</Badge>
+                                        )}
+                                      </Box>
+                                    </Box>
                                     ))}
                                   </VStack>
                                 </Box>
+
                                 <Flex direction="column" align="center" justify="center" px={3}>
                                   <Box
                                     w="1px"
@@ -310,26 +372,48 @@ export default function BulkMapperModal() {
                                     gradientTo="transparent"
                                   />
                                 </Flex>
+
                                 <Box>
                                   <Heading as="h3" size="md" mb={4}>
                                     Merge To
                                   </Heading>
-                                  <FormProvider {...hForm}>
-                                    <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
-                                      <Box>
-                                        <SelectAsyncInputField
-                                          name="newTaxonId"
-                                          label={t("form:accepted_name")}
-                                          multiple={true}
-                                          onQuery={(q) => onScientificNameQuery(q)}
-                                          optionComponent={ScientificNameOption}
-                                          placeholder={t("form:min_three_chars")}
-                                          isRaw={true}
-                                          portalled={false}
-                                        />
-                                      </Box>
-                                    </form>
-                                  </FormProvider>
+                                  <Box position="relative">
+                                    <Box
+                                      borderRadius="md"
+                                      borderWidth="2px"
+                                      borderStyle="dashed"
+                                      borderColor={isDragOver ? "teal.400" : "transparent"}
+                                      bg={isDragOver ? "teal.50" : "transparent"}
+                                      transition="all 0.15s"
+                                      onDragOver={(e) => {
+                                        e.preventDefault();
+                                        setIsDragOver(true);
+                                      }}
+                                      onDragEnter={() => setIsDragOver(true)}
+                                      onDragLeave={(e) => {
+                                        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                                          setIsDragOver(false);
+                                        }
+                                      }}
+                                      onDrop={handleDrop}
+                                    >
+                                      <FormProvider {...hForm}>
+                                        <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
+                                          <SelectAsyncInputField
+                                            key={JSON.stringify(hForm.watch("newTaxonId"))}
+                                            name="newTaxonId"
+                                            label={t("form:accepted_name")}
+                                            multiple={false}
+                                            onQuery={(q) => onScientificNameQuery(q, "id", true)}
+                                            optionComponent={ScientificNameOption}
+                                            placeholder={t("form:min_three_chars")}
+                                            isRaw={true}
+                                            portalled={false}
+                                          />
+                                        </form>
+                                      </FormProvider>
+                                    </Box>
+                                  </Box>
                                 </Box>
                               </Box>
                             )}

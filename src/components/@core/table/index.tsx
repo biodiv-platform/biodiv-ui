@@ -57,7 +57,7 @@ export function BasicTable({
                 {
                   id: "selection",
                   Header: (props) => (
-                    <IndeterminateCheckbox {...props.getToggleAllRowsSelectedProps()} />
+                    <IndeterminateCheckbox {...props.getToggleAllRowsSelectedProps()} {...getCheckboxProps?.("header")} />
                   ),
                   Cell: ({ row }) => <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />,
                   style: { width: "16px" }

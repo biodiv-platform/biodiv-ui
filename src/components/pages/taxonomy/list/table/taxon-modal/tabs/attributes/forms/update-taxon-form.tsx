@@ -375,14 +375,14 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
             </Box>
           </Box>
         )}
-        {editHierarchy != true && modalTaxon?.status == TAXON_STATUS_VALUES.ACCEPTED && (
+        {editHierarchy != true && hFormWatch == TAXON_STATUS_VALUES.ACCEPTED && modalTaxon?.position =="CLEAN"&& (
           <Box mb={4}>
             <Button
               colorPalette={"green"}
               onClick={() => {
-                if (confirm("Hierarchy change might be only reflected if the position is clean")) {
+                //if (confirm("Hierarchy change might be only reflected if the position is clean")) {
                   setEditHierarchy(true);
-                }
+                //}
               }}
             >
               Edit Hierarchy

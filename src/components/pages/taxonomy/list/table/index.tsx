@@ -23,7 +23,7 @@ const taxonListRows = [
     Cell: ({ cell }: { cell: any }) => (
       <TaxonNameCell
         cell={cell}
-        value={`${cell.row.original.name} (${cell.row.original.id})`}  // replace otherField
+        value={`${cell.row.original.name} (${cell.row.original.id})`} // replace otherField
       />
     ),
     style: { paddingTop: 0, paddingBottom: 0 }
@@ -63,6 +63,7 @@ export default function TaxonListTable() {
           isSelectable={true}
           size="sm"
           onSelectionChange={setSelectedTaxons}
+          getCheckboxProps={(row) => (row === "header" ? { disabled: true } : {})}
         />
       )}
       <Flex alignItems="center" justifyContent="center" p={4}>

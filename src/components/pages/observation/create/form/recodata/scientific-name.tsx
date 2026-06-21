@@ -67,14 +67,14 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
   );
 };
 
-export const onScientificNameQuery = async (q, valueKey = "id") => {
+export const onScientificNameQuery = async (q, valueKey = "id", id=false) => {
   if (q.length < 3) {
     return;
   }
   const { data }: { data: ExtendedTaxonDefinition[] } = await axSearchSpeciesByText(q, "name");
   return data.map((o) => ({
     value: o[valueKey],
-    label: o.name,
+    label: o.name + (id ? "(" + o[valueKey] + ")" : ""),
     position: o.position,
     status: o.status,
     groupId: o.group_id,
