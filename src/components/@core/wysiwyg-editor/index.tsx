@@ -1,5 +1,7 @@
 /* eslint-disable simple-import-sort/imports */
+// @ts-ignore
 import "tinymce/skins/ui/oxide/content.min.css";
+// @ts-ignore
 import "tinymce/skins/ui/oxide/skin.min.css";
 
 import "tinymce/tinymce";
@@ -32,6 +34,7 @@ export default function WYSIWYGEditor({
       {...props}
       init={{
         skin: false,
+        license_key: "gpl",
         width: "100%",
         height: "600px",
         relative_urls: false,
