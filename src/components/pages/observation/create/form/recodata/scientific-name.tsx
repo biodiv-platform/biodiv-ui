@@ -1,6 +1,6 @@
 import { Badge, Box, Image, Link, Spacer, Stack, Text } from "@chakra-ui/react";
 import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
-import { axSearchSpeciesByText } from "@services/esmodule.service";
+import { axSearchSpeciesByText, axSearchSpeciesByTextByRank } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon, getSuggestionIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
@@ -75,6 +75,28 @@ export const onScientificNameQuery = async (q, valueKey = "id", id=false) => {
   return data.map((o) => ({
     value: o[valueKey],
     label: o.name + (id ? "(" + o[valueKey] + ")" : ""),
+    position: o.position,
+    status: o.status,
+    groupId: o.group_id,
+    acceptedNames:
+      Array.isArray(o.accepted_names) && o.accepted_names.length ? o.accepted_names[0] : "",
+    rank: o.rank,
+    group: getLocalIcon(o.group_name),
+    raw: o,
+    taxonId: o.id,
+    hierarchy: o.hierarchy
+  }));
+};
+
+
+export const onScientificNameAndRankQuery = async (q, valueKey = "id", rank) => {
+  if (q.length < 3) {
+    return;
+  }
+  const { data }: { data: ExtendedTaxonDefinition[] } = await axSearchSpeciesByTextByRank(q, "name", rank);
+  return data.map((o) => ({
+    value: o[valueKey],
+    label: o.name,
     position: o.position,
     status: o.status,
     groupId: o.group_id,

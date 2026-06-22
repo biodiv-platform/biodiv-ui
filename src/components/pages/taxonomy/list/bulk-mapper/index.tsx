@@ -27,6 +27,7 @@ import * as Yup from "yup";
 
 import { SelectInputField } from "@/components/form/select";
 import { SelectAsyncInputField } from "@/components/form/select-async";
+import Loading from "@/components/pages/common/loading";
 import {
   onScientificNameQuery,
   ScientificNameOption
@@ -49,6 +50,7 @@ export default function BulkMapperModal() {
   const [selectedRanks, setSelectedRanks] = useState<any[]>([]);
   const [accepted, setAccepted] = useState(true);
   const [speciesMap, setSpeciesMap] = useState<Map<number, number | null>>(new Map());
+  const [selectedTaxon, setSelectedTaxon] = useState<any>(null);
   const ensureSpeciesId = async (taxonId: number) => {
     if (speciesMap.has(taxonId)) return;
     const { success, data } = await axCheckSpecies(taxonId);
@@ -284,6 +286,10 @@ export default function BulkMapperModal() {
                       <TabsContent value="Merge" height={"19.5rem"}>
                         {
                           <Box p={4} height={"15rem"} overflowY={"auto"}>
+                            {selectedRanks && selectedRanks.length >= 2 && (
+                              <Box>{"Cannot merge taxa of different ranks"}</Box>
+                            )}
+                            {!accepted && <Box>{"Cannot merge synonyms"}</Box>}
                             {selectedRanks && selectedRanks.length < 2 && accepted && (
                               <Box display="grid" gridTemplateColumns="1fr auto 1fr" gap={0}>
                                 <Box>
@@ -293,48 +299,63 @@ export default function BulkMapperModal() {
                                   <VStack gap={1.5} align="stretch">
                                     {selectedTaxons.map((t) => (
                                       <Box
-                                      key={t.id}
-                                      display="flex"
-                                      alignItems="center"
-                                      px={3}
-                                      py={1.5}
-                                      bg="gray.50"
-                                      borderWidth="0.5px"
-                                      borderColor="gray.200"
-                                      borderRadius="md"
-                                      draggable
-                                      cursor="grab"
-                                      _active={{ cursor: "grabbing" }}
-                                      onDragStart={() => {
-                                        draggedTaxon.current = t.name + "|" + t.id;
-                                      }}
-                                    >
-                                      <Box flex={1} display="flex" alignItems="center" gap={2} flexWrap="wrap">
-                                        {t.name + " (" + t.id + ")"}
-                                        {t.rank && <Badge>{t.rank}</Badge>}
-                                        {t.status && (
-                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.status]}>{t.status}</Badge>
-                                        )}
-                                        {t.position && (
-                                          <Badge colorPalette={TAXON_BADGE_COLORS[t.position]}>{t.position}</Badge>
-                                        )}
-                                      </Box>
-                                      <Box ml="auto" flexShrink={0}>
-                                        {speciesMap.has(t.id) ? (
-                                          speciesMap.get(t.id) ? (
-                                            <Badge
-                                              colorPalette="green"
-                                              cursor="pointer"
-                                              onClick={() => window.open(`/species/${speciesMap.get(t.id)}`, "_blank")}
-                                            >
-                                              <LuExternalLink />
+                                        key={t.id}
+                                        display="flex"
+                                        alignItems="center"
+                                        px={3}
+                                        py={1.5}
+                                        bg="gray.50"
+                                        borderWidth="0.5px"
+                                        borderColor="gray.200"
+                                        borderRadius="md"
+                                        draggable
+                                        cursor="grab"
+                                        _active={{ cursor: "grabbing" }}
+                                        onDragStart={() => {
+                                          draggedTaxon.current = t.name + "|" + t.id;
+                                        }}
+                                      >
+                                        <Box
+                                          flex={1}
+                                          display="flex"
+                                          alignItems="center"
+                                          gap={2}
+                                          flexWrap="wrap"
+                                        >
+                                          {t.name + " (" + t.id + ")"}
+                                          {t.rank && <Badge>{t.rank}</Badge>}
+                                          {t.status && (
+                                            <Badge colorPalette={TAXON_BADGE_COLORS[t.status]}>
+                                              {t.status}
                                             </Badge>
-                                          ) : null
-                                        ) : (
-                                          <Badge colorPalette="gray">...</Badge>
-                                        )}
+                                          )}
+                                          {t.position && (
+                                            <Badge colorPalette={TAXON_BADGE_COLORS[t.position]}>
+                                              {t.position}
+                                            </Badge>
+                                          )}
+                                        </Box>
+                                        <Box ml="auto" flexShrink={0}>
+                                          {speciesMap.has(t.id) ? (
+                                            speciesMap.get(t.id) ? (
+                                              <Badge
+                                                colorPalette="green"
+                                                cursor="pointer"
+                                                onClick={() =>
+                                                  window.open(
+                                                    `/species/${speciesMap.get(t.id)}`,
+                                                    "_blank"
+                                                  )
+                                                }
+                                              >
+                                                <LuExternalLink />
+                                              </Badge>
+                                            ) : null
+                                          ) : (
+                                            <Loading />
+                                          )}
+                                        </Box>
                                       </Box>
-                                    </Box>
                                     ))}
                                   </VStack>
                                 </Box>
@@ -409,6 +430,7 @@ export default function BulkMapperModal() {
                                             placeholder={t("form:min_three_chars")}
                                             isRaw={true}
                                             portalled={false}
+                                            onChange={(option) => setSelectedTaxon(option)}
                                           />
                                         </form>
                                       </FormProvider>
@@ -419,9 +441,53 @@ export default function BulkMapperModal() {
                             )}
                           </Box>
                         }
-                        {selectedRanks && selectedRanks.length < 2 && (
+                        {selectedRanks && selectedRanks.length < 2 && accepted && (
                           <HStack m={2} justifyContent="flex-end">
-                            <Button onClick={mergeSubmit}>{t("common:save")}</Button>
+                            <Button
+                              onClick={async () => {
+                                // Get the taxonId from form or selectedTaxon
+                                const taxonId =
+                                  hForm.watch().newTaxonId[0]?.value || selectedTaxon?.value;
+
+                                if (!speciesMap.has(taxonId)) {
+                                  const { success, data } = await axCheckSpecies(taxonId);
+                                  setSpeciesMap((prev) =>
+                                    new Map(prev).set(taxonId, success ? data : null)
+                                  );
+                                }
+
+                                // Find the first selectedTaxon that exists in speciesMap
+                                let existingTaxon:any = null;
+                                if (selectedTaxons && selectedTaxons.length > 0) {
+                                  // If selectedTaxon is an array, find the first one in speciesMap
+                                  if (Array.isArray(selectedTaxons)) {
+                                    existingTaxon = selectedTaxons.find((taxon) =>
+                                      speciesMap.has(taxon.id || taxon.value)
+                                    );
+                                  } else {
+                                    // If selectedTaxon is a single object
+                                    existingTaxon = speciesMap.has(
+                                      selectedTaxon.id || selectedTaxon.value
+                                    )
+                                      ? selectedTaxon
+                                      : null;
+                                  }
+                                }
+
+                                // Get the label for the confirmation message
+                                const targetLabel = existingTaxon
+                                  ? existingTaxon.label || existingTaxon.name
+                                  : hForm.watch().newTaxonId[0]?.label ||
+                                    selectedTaxon?.label ||
+                                    `${selectedTaxons[0]?.name}(${selectedTaxons[0]?.id})`;
+
+                                confirm(
+                                  `This action will merge species page data into ${targetLabel}. Are you sure you want to proceed?`
+                                ) && mergeSubmit();
+                              }}
+                            >
+                              {t("common:save")}
+                            </Button>
                           </HStack>
                         )}
                       </TabsContent>

@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import {
-  onScientificNameQuery,
+  onScientificNameAndRankQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import React from "react";
@@ -60,14 +60,16 @@ export const TaxonCreateInputField = ({
         <Box flex={1}>
           <SelectAsyncInputField
             name={name}
-            onQuery={(q) => onScientificNameQuery(q, "name")}
+            onQuery={(q) => onScientificNameAndRankQuery(q, "name", label)}
             optionComponent={ScientificNameOption}
             placeholder={label}
             resetOnSubmit={false}
             isRaw={true}
             mb={0}
             onChange={(selected) => {
-              if (selected) onRankChange?.(selected?.hierarchy);
+              if (selected){
+                 onRankChange?.(selected?.taxonId);
+              }
             }}
             rawKey="label"
             portalled={false}

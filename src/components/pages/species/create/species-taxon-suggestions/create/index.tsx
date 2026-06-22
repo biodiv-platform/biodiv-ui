@@ -1,7 +1,7 @@
 import { Box, Circle, HStack, Icon, useDisclosure } from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { axCheckTaxonomy, axSaveTaxonomy } from "@services/taxonomy.service";
+import { axCheckTaxonomy, axGetTaxonTree, axSaveTaxonomy } from "@services/taxonomy.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
@@ -78,6 +78,18 @@ export function SpeciesTaxonCreateForm() {
     }
   };
 
+  const onRankChange = React.useCallback(async (taxonId) => {
+    if (taxonId) {
+      const { success, data } = await axGetTaxonTree(taxonId);
+      if (success) {
+        data?.forEach((h) => {
+        hForm.setValue(h.rankName, h.name, { shouldDirty: true });
+        hForm.setValue("metadata."+h.rankName, h.position, { shouldDirty: true });
+        });
+      }
+    }
+  }, []);
+
   const handleOnRankValidate = async (rankName, scientificName) => {
     // clear results
     setValidateResults([]);
@@ -130,6 +142,7 @@ export function SpeciesTaxonCreateForm() {
             onValidate={handleOnRankValidate}
             isRequired={isRequired}
             hint={fieldHints[name]}
+            onRankChange={onRankChange}
           />
         ))}
         <Box p={2} lineHeight={1} mb={4}>

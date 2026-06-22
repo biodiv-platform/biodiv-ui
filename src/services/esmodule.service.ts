@@ -16,6 +16,18 @@ export const axSearchSpeciesByText = async (text, field) => {
   }
 };
 
+export const axSearchSpeciesByTextByRank = async (text, field, rank) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.ESMODULE}/v1/services/auto-complete/etd/er`, {
+      params: { text, field, rank }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axGetUserLeaderboard = async (payload, user) => {
   const authorId = user?.id || -1;
   const { time } = payload;

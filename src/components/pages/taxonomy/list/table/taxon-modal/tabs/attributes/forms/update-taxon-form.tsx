@@ -11,7 +11,7 @@ import TaxonCreateModal from "@components/pages/species/create/species-taxon-sug
 import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
-import { axCheckTaxonomy, axUpdateTaxonStatus } from "@services/taxonomy.service";
+import { axCheckTaxonomy, axGetTaxonTree, axUpdateTaxonStatus } from "@services/taxonomy.service";
 import { TAXON_STATUS, TAXON_STATUS_VALUES } from "@static/taxon";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -97,16 +97,20 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
         status: Yup.string().required(),
         rank: Yup.string()
           .required()
-          .test("rank-condition", "Cannot assign species rank to a trinomial taxon. Please edit the name to a binomial first.", function (value) {
-            if (
-              modalTaxon?.rank == "infraspecies" &&
-              modalTaxon?.canonicalForm.split(" ").length > 2 &&
-              value === "species"
-            ) {
-              return false; // validation fails
+          .test(
+            "rank-condition",
+            "Cannot assign species rank to a trinomial taxon. Please edit the name to a binomial first.",
+            function (value) {
+              if (
+                modalTaxon?.rank == "infraspecies" &&
+                modalTaxon?.canonicalForm.split(" ").length > 2 &&
+                value === "species"
+              ) {
+                return false; // validation fails
+              }
+              return true; // validation passes
             }
-            return true; // validation passes
-          }),
+          ),
         newTaxonId: Yup.mixed().when("status", {
           is: (m) => m === TAXON_STATUS_VALUES.SYNONYM,
           then: Yup.array()
@@ -146,10 +150,16 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
 
   const hFormWatch = hForm.watch("status");
 
-  const onRankChange = React.useCallback((hierarchy) => {
-    hierarchy?.forEach((h) => {
-      hForm.setValue(h.taxon_rank, h.taxon_name, { shouldDirty: true });
-    });
+  const onRankChange = React.useCallback(async (taxonId) => {
+    if (taxonId) {
+      const { success, data } = await axGetTaxonTree(taxonId);
+      if (success) {
+        data?.forEach((h) => {
+        hForm.setValue(h.rankName, h.name, { shouldDirty: true });
+        hForm.setValue("metadata."+h.rankName, h.position, { shouldDirty: true });
+        });
+      }
+    }
   }, []);
 
   const handleOnRankValidate = async (rankName, scientificName) => {
@@ -233,7 +243,7 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
           duration: 9000,
           closable: true
         });
-        setLoading(false)
+        setLoading(false);
         return;
       }
     } else {
@@ -245,7 +255,7 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
           "Couldn't submit as the generic name does not correspond to the genus assigned to this taxon.",
           NotificationType.Error
         );
-        setLoading(false)
+        setLoading(false);
         return;
       }
     }
@@ -272,7 +282,7 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
     } else {
       notification(t("taxon:modal.attributes.status.error"));
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
@@ -289,46 +299,48 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
         />
 
         {/*<Field label={t("taxon:modal.attributes.rank.title")} />*/}
-        {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") && (modalTaxon?.status == hFormWatch)&& (
-          <SelectInputField
-            name="rank"
-            label={t("taxon:modal.attributes.rank.title")}
-            options={TAXON_RANK}
-            isRequired={true}
-            onChangeCallback={() => {
-              if (
-                modalTaxon?.rank == "infraspecies" &&
-                modalTaxon?.canonicalForm.split(" ").length > 2 && hForm.watch().rank == "species"
-              ) {
-                return
-              } else {
-                formDisabled[1][2] = hForm.watch().rank == "species" ? true : false;
-                formDisabled[1][1] = hForm.watch().rank == "species" ? false : true;
-                hForm.setValue(
-                  "infraspecies",
-                  hForm.watch().rank == "infraspecies" ? modalTaxon?.name : "",
-                  { shouldValidate: false }
-                );
-                hForm.setValue(
-                  "metadata." + "infraspecies",
-                  hForm.watch().rank == "infraspecies" ? modalTaxon?.position : undefined,
-                  { shouldValidate: false }
-                );
-                hForm.setValue(
-                  "species",
-                  hForm.watch().rank == "species" ? modalTaxon?.name : null,
-                  { shouldValidate: false }
-                );
-                hForm.setValue(
-                  "metadata." + "species",
-                  hForm.watch().rank == "species" ? modalTaxon?.position : undefined,
-                  { shouldValidate: false }
-                );
-                setEditHierarchy(true);
-              }
-            }}
-          />
-        )}
+        {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
+          modalTaxon?.status == hFormWatch && (
+            <SelectInputField
+              name="rank"
+              label={t("taxon:modal.attributes.rank.title")}
+              options={TAXON_RANK}
+              isRequired={true}
+              onChangeCallback={() => {
+                if (
+                  modalTaxon?.rank == "infraspecies" &&
+                  modalTaxon?.canonicalForm.split(" ").length > 2 &&
+                  hForm.watch().rank == "species"
+                ) {
+                  return;
+                } else {
+                  formDisabled[1][2] = hForm.watch().rank == "species" ? true : false;
+                  formDisabled[1][1] = hForm.watch().rank == "species" ? false : true;
+                  hForm.setValue(
+                    "infraspecies",
+                    hForm.watch().rank == "infraspecies" ? modalTaxon?.name : "",
+                    { shouldValidate: false }
+                  );
+                  hForm.setValue(
+                    "metadata." + "infraspecies",
+                    hForm.watch().rank == "infraspecies" ? modalTaxon?.position : undefined,
+                    { shouldValidate: false }
+                  );
+                  hForm.setValue(
+                    "species",
+                    hForm.watch().rank == "species" ? modalTaxon?.name : null,
+                    { shouldValidate: false }
+                  );
+                  hForm.setValue(
+                    "metadata." + "species",
+                    hForm.watch().rank == "species" ? modalTaxon?.position : undefined,
+                    { shouldValidate: false }
+                  );
+                  setEditHierarchy(true);
+                }
+              }}
+            />
+          )}
         {(modalTaxon?.status != TAXON_STATUS_VALUES.ACCEPTED || editHierarchy != false) && (
           <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.ACCEPTED}>
             {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
@@ -375,20 +387,22 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
             </Box>
           </Box>
         )}
-        {editHierarchy != true && hFormWatch == TAXON_STATUS_VALUES.ACCEPTED && modalTaxon?.position =="CLEAN"&& (
-          <Box mb={4}>
-            <Button
-              colorPalette={"green"}
-              onClick={() => {
-                //if (confirm("Hierarchy change might be only reflected if the position is clean")) {
+        {editHierarchy != true &&
+          hFormWatch == TAXON_STATUS_VALUES.ACCEPTED &&
+          modalTaxon?.position == "CLEAN" && (
+            <Box mb={4}>
+              <Button
+                colorPalette={"green"}
+                onClick={() => {
+                  //if (confirm("Hierarchy change might be only reflected if the position is clean")) {
                   setEditHierarchy(true);
-                //}
-              }}
-            >
-              Edit Hierarchy
-            </Button>
-          </Box>
-        )}
+                  //}
+                }}
+              >
+                Edit Hierarchy
+              </Button>
+            </Box>
+          )}
         <Box hidden={hFormWatch !== TAXON_STATUS_VALUES.SYNONYM}>
           <SelectAsyncInputField
             name="newTaxonId"
