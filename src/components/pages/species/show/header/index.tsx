@@ -18,11 +18,11 @@ import React, { useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { LuPencil, LuRefreshCw } from "react-icons/lu";
 
+import { useLocalRouter } from "@/components/@core/local-link";
 import NoSSR from "@/components/@core/no-ssr";
 import DownloadIcon from "@/icons/download";
 
 import useSpecies from "../use-species";
-import { useLocalRouter } from "@/components/@core/local-link";
 
 function SpeciesHeader({ downloadSpecies }) {
   const router = useLocalRouter();
