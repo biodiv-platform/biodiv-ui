@@ -16,7 +16,7 @@ import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useMemo, useState } from "react";
 import { useListener } from "react-gbus";
-import {LuPencil, LuRefreshCw, LuTrash } from "react-icons/lu";
+import { LuPencil, LuRefreshCw } from "react-icons/lu";
 
 import NoSSR from "@/components/@core/no-ssr";
 import DownloadIcon from "@/icons/download";
