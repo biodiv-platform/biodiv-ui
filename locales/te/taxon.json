@@ -5,6 +5,9 @@
   },
   "bulk_actions": "బల్క్ చర్యలు",
   "bulk_actions_selected": "ఎంపిక చేయబడింది",
+  "common_name": {
+    "success": "సాధారణ పేర్లు విజయవంతంగా బదిలీ చేయబడ్డాయి"
+  },
   "create": {
     "title": "టాక్సోన్ను జోడించు"
   },

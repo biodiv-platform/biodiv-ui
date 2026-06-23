@@ -5,6 +5,9 @@
   },
   "bulk_actions": "ബൾക്ക് പ്രവർത്തനങ്ങൾ",
   "bulk_actions_selected": "തിരഞ്ഞെടുത്തു",
+  "common_name": {
+    "success": "പൊതുവായ പേരുകൾ വിജയകരമായി കൈമാറി"
+  },
   "create": {
     "title": "ടാക്സൺ ചേർക്കുക"
   },

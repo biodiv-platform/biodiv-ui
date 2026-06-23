@@ -20,10 +20,12 @@ const taxonListRows = [
   {
     Header: "Name",
     accessor: "name",
-    Cell: ({ cell }: { cell: any }) => (
-      <TaxonNameCell cell={cell} value={`${cell.row.original.name} (${cell.row.original.id})`} />
-    ),
+    Cell: TaxonNameCell,
     style: { paddingTop: 0, paddingBottom: 0 }
+  },
+  {
+    Header: "Id",
+    accessor: "id"
   },
   {
     Header: "Rank",

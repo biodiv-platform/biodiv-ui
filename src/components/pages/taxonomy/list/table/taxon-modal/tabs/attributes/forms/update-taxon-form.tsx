@@ -24,6 +24,7 @@ import ExternalBlueLink from "@/components/@core/blue-link/external";
 import { toaster } from "@/components/ui/toaster";
 import useGlobalState from "@/hooks/use-global-state";
 import { axGetTaxonList } from "@/services/api.service";
+import { axDeleteSpeciesCache, axGetSpeciesIdFromTaxonId } from "@/services/species.service";
 import { parseUrl, stringify } from "@/utils/query-string";
 
 export const TAXON_RANK = [
@@ -198,11 +199,6 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
         }
         onOpen();
       } else {
-        // Set a warning (not an error) - won't block form submission
-        /*hForm.setError(rankName, {
-          type: "hint",
-          message: "No match found"
-        });*/
         setFieldHints((prev) => ({
           ...prev,
           [rankName]: "No match found. Name will be created while updating"
@@ -290,6 +286,14 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
         : { hierarchy })
     });
     if (success) {
+      if (status == modalTaxon?.status) {
+        const { success, data: speciesId } = await axGetSpeciesIdFromTaxonId(modalTaxon.id);
+        if (success) {
+          if (speciesId) {
+            await axDeleteSpeciesCache(speciesId);
+          }
+        }
+      }
       setModalTaxon(data);
       onDone();
       notification(t("taxon:modal.attributes.status.success"), NotificationType.Success);
@@ -308,11 +312,9 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
           name="status"
           label={t("taxon:modal.attributes.status.title")}
           options={TAXON_STATUS}
-          //shouldPortal={true}
           isRequired={true}
         />
 
-        {/*<Field label={t("taxon:modal.attributes.rank.title")} />*/}
         {(modalTaxon?.rank == "species" || modalTaxon?.rank == "infraspecies") &&
           modalTaxon?.status == hFormWatch && (
             <SelectInputField
@@ -408,9 +410,7 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
               <Button
                 colorPalette={"green"}
                 onClick={() => {
-                  //if (confirm("Hierarchy change might be only reflected if the position is clean")) {
                   setEditHierarchy(true);
-                  //}
                 }}
               >
                 Edit Hierarchy

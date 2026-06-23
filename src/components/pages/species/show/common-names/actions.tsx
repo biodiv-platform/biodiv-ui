@@ -38,11 +38,7 @@ export function CommonNameEditButtons({ commonName, showPreferred, transfer, get
     <Flex alignItems="center" justifyContent="space-between">
       <Box>
         {transfer == true && (
-          <Checkbox.Root
-            {...getItemProps({ value: commonName.id })}
-            colorPalette={"blue"}
-            mr={2}
-          >
+          <Checkbox.Root {...getItemProps({ value: commonName.id })} colorPalette={"blue"} mr={2}>
             <Checkbox.HiddenInput />
             <Checkbox.Control />
           </Checkbox.Root>

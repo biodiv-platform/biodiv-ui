@@ -5,6 +5,9 @@
   },
   "bulk_actions": "Vitendo Vingi",
   "bulk_actions_selected": "iliyochaguliwa",
+  "common_name": {
+    "success": "Majina ya Kawaida yamehamishwa"
+  },
   "create": {
     "title": "Ongeza taxon."
   },

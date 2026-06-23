@@ -12,6 +12,7 @@ import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@/components/pages/observation/create/form/recodata/scientific-name";
+import { axGetSpeciesIdFromTaxonId, axReindexSpecies } from "@/services/species.service";
 import { axBulkTransferCommonNames } from "@/services/taxonomy.service";
 import notification, { NotificationType } from "@/utils/notification";
 
@@ -66,7 +67,21 @@ export default function CommonNamesList({
       );
 
       if (success) {
-        notification("Common Names transfered successfully", NotificationType.Success);
+        const { success: prevTaxon, data: prevSpeciesId } = await axGetSpeciesIdFromTaxonId(
+          taxonId
+        );
+        if (prevTaxon) {
+          if (prevSpeciesId) {
+            await axReindexSpecies(prevSpeciesId);
+          }
+        }
+        const { success, data: speciesId } = await axGetSpeciesIdFromTaxonId(taxonId);
+        if (success) {
+          if (speciesId) {
+            await axReindexSpecies(speciesId);
+          }
+        }
+        notification(t("taxon:common_name.success"), NotificationType.Success);
         router.push(`/taxonomy/list`, true, { taxonId: data.id }, true);
       } else {
         notification("Error transfering common names");

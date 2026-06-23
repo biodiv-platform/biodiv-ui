@@ -65,7 +65,6 @@ export default function SynonymList({
 
   const onTransferSubmit = async (details) => {
     try {
-      // Add your transfer logic here
       setLoading(true);
       const { success, data } = await axBulkTransferSynonyms(
         {
@@ -140,7 +139,7 @@ export default function SynonymList({
                   <Flex align="center" gap={2}>
                     <Box w="1px" h="20px" bg="gray.300" />
                     Transfer to
-                    <Box>
+                    <Box minW={310}>
                       <SelectAsyncInputField
                         name="newTaxonId"
                         multiple={false}

@@ -56,10 +56,7 @@ export function SpeciesTaxonCreateForm() {
       (validationParams.rankName == "species" || validationParams.rankName == "infraspecies") &&
       validationParams.scientificName.split(" ")[0] != values.genus
     ) {
-      notification(
-        "Couldn't submit as the generic name does not correspond to the genus assigned to this taxon.",
-        NotificationType.Error
-      );
+      notification(t("species:create.form.taxon.genus_error"), NotificationType.Error);
       return;
     }
     const { metadata, ...valuesWithMetdata } = values;

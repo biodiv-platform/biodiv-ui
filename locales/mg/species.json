@@ -2,6 +2,7 @@
   "add_reference": "Manampia fanondroana",
   "all_media": "Ny haino aman-jery rehetra",
   "attributions": "andraikitra",
+  "cache": "Esory ny cache pejy aseho",
   "common_name": {
     "delete": {
       "dialouge": "Azonao antoka ve izany?",
@@ -54,6 +55,7 @@
       "select": "Safidio",
       "taxon": {
         "create": "Mamorona taxon",
+        "genus_error": "Tsy afaka natolotra satria tsy mifanaraka amin'ny karazana nomena an'io hetra io ny anarana generika.",
         "parent": "Lalao ray aman-dreny",
         "select": "mifanentana"
       },

@@ -2,6 +2,7 @@
   "add_reference": "Ajouter une référence",
   "all_media": "Tous les médias",
   "attributions": "Attributions",
+  "cache": "Supprimer le cache de la page d'affichage",
   "common_name": {
     "delete": {
       "dialouge": "Êtes-vous certain?",
@@ -54,6 +55,7 @@
       "select": "Sélectionner",
       "taxon": {
         "create": "Créer un taxon",
+        "genus_error": "Impossible de soumettre car le nom générique ne correspond pas au genre attribué à ce taxon.",
         "parent": "Match parent",
         "select": "Apparié"
       },

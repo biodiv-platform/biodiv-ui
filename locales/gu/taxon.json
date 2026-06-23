@@ -5,6 +5,9 @@
   },
   "bulk_actions": "બલ્ક ક્રિયાઓ",
   "bulk_actions_selected": "પસંદ કરેલ",
+  "common_name": {
+    "success": "સામાન્ય નામો સફળતાપૂર્વક સ્થાનાંતરિત થયા"
+  },
   "create": {
     "title": "ટેક્સન ઉમેરો"
   },

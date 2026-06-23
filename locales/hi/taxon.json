@@ -5,6 +5,9 @@
   },
   "bulk_actions": "थोक क्रियाएँ",
   "bulk_actions_selected": "चयनित",
+  "common_name": {
+    "success": "सामान्य नाम सफलतापूर्वक स्थानांतरित कर दिए गए"
+  },
   "create": {
     "title": "टैक्सोन जोड़ें"
   },

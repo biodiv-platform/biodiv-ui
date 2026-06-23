@@ -5,6 +5,9 @@
   },
   "bulk_actions": "বাল্ক অ্যাকশন",
   "bulk_actions_selected": "নির্বাচিত",
+  "common_name": {
+    "success": "সাধারণ নামগুলি সফলভাবে স্থানান্তরিত হয়েছে৷"
+  },
   "create": {
     "title": "ট্যাক্সন যোগ করুন"
   },

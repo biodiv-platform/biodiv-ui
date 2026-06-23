@@ -5,6 +5,9 @@
   },
   "bulk_actions": "Actions groupées",
   "bulk_actions_selected": "choisi",
+  "common_name": {
+    "success": "Noms communs transférés avec succès"
+  },
   "create": {
     "title": "Ajouter un taxon"
   },

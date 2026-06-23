@@ -5,6 +5,9 @@
   },
   "bulk_actions": "ବଲ୍କ କ୍ରିୟା",
   "bulk_actions_selected": "ମନୋନୀତ |",
+  "common_name": {
+    "success": "ସାଧାରଣ ନାମଗୁଡିକ ସଫଳତାର ସହିତ ସ୍ଥାନାନ୍ତରିତ ହେଲା |"
+  },
   "create": {
     "title": "ଟ୍ୟାକ୍ସନ୍ ଯୋଡନ୍ତୁ |"
   },
