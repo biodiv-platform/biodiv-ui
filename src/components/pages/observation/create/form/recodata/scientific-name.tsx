@@ -67,7 +67,7 @@ export const ScientificNameOption = ({ children, ...props }: any) => {
   );
 };
 
-export const onScientificNameQuery = async (q, valueKey = "id", id=false) => {
+export const onScientificNameQuery = async (q, valueKey = "id", id = false) => {
   if (q.length < 3) {
     return;
   }
@@ -88,12 +88,15 @@ export const onScientificNameQuery = async (q, valueKey = "id", id=false) => {
   }));
 };
 
-
 export const onScientificNameAndRankQuery = async (q, valueKey = "id", rank) => {
   if (q.length < 3) {
     return;
   }
-  const { data }: { data: ExtendedTaxonDefinition[] } = await axSearchSpeciesByTextByRank(q, "name", rank);
+  const { data }: { data: ExtendedTaxonDefinition[] } = await axSearchSpeciesByTextByRank(
+    q,
+    "name",
+    rank
+  );
   return data.map((o) => ({
     value: o[valueKey],
     label: o.name,

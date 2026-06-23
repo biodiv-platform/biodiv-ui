@@ -9,16 +9,15 @@ import UpdateTaxonForm from "./forms/update-taxon-form";
 
 export function TaxonAttributesForm({ onClose }) {
   const [loading, setLoading] = useState(false);
-  return (
-    loading?
-    <Loading/>
-    :
+  return loading ? (
+    <Loading />
+  ) : (
     <div>
-      <UpdateNameForm onDone={onClose} setLoading={setLoading}/>
+      <UpdateNameForm onDone={onClose} setLoading={setLoading} />
       <Separator my={4} />
-      <UpdatePositionForm onDone={onClose} setLoading={setLoading}/>
+      <UpdatePositionForm onDone={onClose} setLoading={setLoading} />
       <Separator my={4} />
-      <UpdateTaxonForm onDone={onClose} setLoading={setLoading}/>
+      <UpdateTaxonForm onDone={onClose} setLoading={setLoading} />
     </div>
   );
 }

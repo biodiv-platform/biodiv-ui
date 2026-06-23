@@ -25,7 +25,7 @@ interface CommonNamesListProps {
   taxonId?;
   updateFunc;
   deleteFunc;
-  setLoading?
+  setLoading?;
 }
 
 export default function CommonNamesList({
@@ -55,7 +55,6 @@ export default function CommonNamesList({
   const onTransferSubmit = async (details) => {
     setLoading(true);
     try {
-      // Add your transfer logic here
       const { success, data } = await axBulkTransferCommonNames(
         {
           commonNameIds: bulkCommonNameIds.join(","),
@@ -121,7 +120,8 @@ export default function CommonNamesList({
               variant={"outline"}
               size="xs"
               colorPalette="blue"
-              onClick={() => {setSelectAll(true)
+              onClick={() => {
+                setSelectAll(true);
                 setValue(commonNamesList?.map((i) => String(i.id)));
               }}
             >
@@ -129,7 +129,7 @@ export default function CommonNamesList({
               Select All
             </Button>
           )}
-          {(bulkCommonNameIds.length > 0) && (
+          {bulkCommonNameIds.length > 0 && (
             <>
               <Box w="1px" h="20px" bg="gray.300" />
               <Text fontSize="sm" fontWeight="medium" color="gray.600">

@@ -150,15 +150,29 @@ export default function UpdateTaxonForm({ onDone, setLoading }) {
 
   const hFormWatch = hForm.watch("status");
 
-  const onRankChange = React.useCallback(async (taxonId) => {
+  const onRankChange = React.useCallback(async (taxonId, isNew, rankName) => {
     if (taxonId) {
       const { success, data } = await axGetTaxonTree(taxonId);
       if (success) {
         data?.forEach((h) => {
-        hForm.setValue(h.rankName, h.name, { shouldDirty: true });
-        hForm.setValue("metadata."+h.rankName, h.position, { shouldDirty: true });
+          hForm.setValue(h.rankName, h.name, { shouldDirty: true });
+          hForm.setValue("metadata." + h.rankName, h.position, { shouldDirty: true });
+          if (fieldHints[h.rankName]) {
+            setFieldHints((prev) => {
+              const newHints = { ...prev };
+              delete newHints[h.rankName];
+              return newHints;
+            });
+          }
         });
       }
+    }
+    if (isNew) {
+      hForm.setValue("metadata." + rankName, undefined, { shouldDirty: true });
+      setFieldHints((prev) => ({
+        ...prev,
+        [rankName]: "No match found. Name will be created while updating"
+      }));
     }
   }, []);
 

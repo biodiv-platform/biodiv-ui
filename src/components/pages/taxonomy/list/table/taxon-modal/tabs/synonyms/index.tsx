@@ -12,10 +12,9 @@ export function TaxonSynonymsTab() {
   const { modalTaxon } = useTaxonFilter();
   const [loading, setLoading] = useState(false);
 
-  return (
-    loading?
-    <Loading/>
-    :
+  return loading ? (
+    <Loading />
+  ) : (
     <Box pt={4}>
       {modalTaxon?.id && (
         <SynonymList

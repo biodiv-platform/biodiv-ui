@@ -91,7 +91,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
         }
       });
       offsetPath.current = data?.acceptedPath;
-      offsetId.current = data?.taxonomyNameListItems[data?.taxonomyNameListItems.length-1].id;
+      offsetId.current = data?.taxonomyNameListItems[data?.taxonomyNameListItems.length - 1].id;
     } catch (e) {
       console.error(e);
     }
@@ -121,7 +121,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
     setFilter((_draft) => {
       _draft.f.offsetPath = offsetPath.current;
       _draft.f.offsetId = offsetId.current;
-  });
+    });
   };
 
   const resetFilter = () => {

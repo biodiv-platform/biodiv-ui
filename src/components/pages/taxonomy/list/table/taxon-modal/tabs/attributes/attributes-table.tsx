@@ -65,10 +65,10 @@ export function TaxonAttributesTable() {
             </Table.Row>
             {modalTaxon?.status == "SYNONYM" && (
               <Table.Row>
+                <Table.Cell>{"Accepted Name"}</Table.Cell>
                 <Table.Cell>
-                  {"Accepted Name"}
+                  {modalTaxon?.hierarchy[modalTaxon?.hierarchy?.length - 1]?.name}
                 </Table.Cell>
-                <Table.Cell>{modalTaxon?.hierarchy[modalTaxon?.hierarchy?.length - 1]?.name}</Table.Cell>
               </Table.Row>
             )}
             <Table.Row>

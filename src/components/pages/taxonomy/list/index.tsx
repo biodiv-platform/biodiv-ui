@@ -14,7 +14,7 @@ export default function TaxonListComponent() {
         <Filters />
         <TaxonListTable />
       </SimpleGrid>
-      <BulkMapperModal/>
+      <BulkMapperModal />
     </Box>
   );
 }

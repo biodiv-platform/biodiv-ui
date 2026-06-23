@@ -5,6 +5,7 @@ import {
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 
 import { SelectAsyncInputField } from "@/components/form/select-async";
 import { Field } from "@/components/ui/field";
@@ -35,11 +36,12 @@ export const TaxonCreateInputField = ({
   isDisabled,
   hidden,
   onRankChange,
+  hint,
   mb = 4
 }: TaxonCreateInputFieldProps) => {
   const {
     formState: { errors },
-    watch,
+    watch
   } = useFormContext();
 
   const position = watch("metadata." + name);
@@ -67,13 +69,14 @@ export const TaxonCreateInputField = ({
             isRaw={true}
             mb={0}
             onChange={(selected) => {
-              if (selected){
-                 onRankChange?.(selected?.taxonId);
+              if (selected) {
+                onRankChange?.(selected?.taxonId, selected?.__isNew__, label);
               }
             }}
             rawKey="label"
             portalled={false}
             bg={POSITION_COLOR[position] || "white!"}
+            icon={hint ? <LuTriangleAlert color="red" /> : <LuCheck color="green" />}
             disabled={isDisabled}
           />
         </Box>

@@ -10,12 +10,11 @@ import Loading from "@/components/pages/common/loading";
 
 export function TaxonCommonNamesTab() {
   const { modalTaxon } = useTaxonFilter();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  return (
-    loading?
-    <Loading/>
-    :
+  return loading ? (
+    <Loading />
+  ) : (
     <Box pt={4}>
       {modalTaxon?.id && (
         <CommonNamesList

@@ -27,12 +27,7 @@ export function CommonNameAdd() {
   );
 }
 
-export function CommonNameEditButtons({
-  commonName,
-  showPreferred,
-  transfer,
-  getItemProps
-}) {
+export function CommonNameEditButtons({ commonName, showPreferred, transfer, getItemProps }) {
   const { t } = useTranslation();
 
   const handleOnEdit = () => emit(SPECIES_NAME_EDIT, commonName);
@@ -44,7 +39,6 @@ export function CommonNameEditButtons({
       <Box>
         {transfer == true && (
           <Checkbox.Root
-            //checked={selectAll ? true : selectecCommonNames.includes(commonName.id)}
             {...getItemProps({ value: commonName.id })}
             colorPalette={"blue"}
             mr={2}

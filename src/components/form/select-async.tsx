@@ -35,7 +35,8 @@ interface ISelectProps {
   openMenuOnFocus?: boolean;
   portalled?: boolean;
   rawKey?: string;
-  bg?
+  bg?;
+  icon?: React.ReactNode;
 }
 const dummyOnQuery = (q) =>
   new Promise((resolve) => {
@@ -51,6 +52,28 @@ const DropdownIndicator = (props: DropdownIndicatorProps) => {
     <components.DropdownIndicator {...props}>
       <LuChevronDown />
     </components.DropdownIndicator>
+  );
+};
+
+const SingleValue = ({ children, ...props }: any) => {
+  return <components.SingleValue {...props}>{children}</components.SingleValue>;
+};
+
+const ValueContainer = ({ children, ...props }: any) => {
+  const { icon, isDisabled } = props.selectProps;
+  const hasValue = props.hasValue;
+
+  return (
+    <components.ValueContainer {...props}>
+      <Box display="flex" alignItems="center" width="100%">
+        {children}
+        {icon && hasValue && !isDisabled && (
+          <Box as="span" ml={1} display="inline-flex" alignItems="center" flexShrink={0}>
+            {icon}
+          </Box>
+        )}
+      </Box>
+    </components.ValueContainer>
   );
 };
 
@@ -77,7 +100,8 @@ export const SelectAsyncInputField = ({
   openMenuOnFocus = false,
   portalled = true,
   rawKey,
-  bg="white!",
+  bg = "white!",
+  icon,
   ...props
 }: ISelectProps) => {
   const form = useFormContext();
@@ -132,9 +156,15 @@ export const SelectAsyncInputField = ({
 
   const handleOnChange = (value, event) => {
     if (onChange) onChange(value); // full option with hierarchy
-    eventCallback ? eventCallback(value, event, setSelected) : setSelected(
-      value === null ? null : rawKey ? { value: value?.[rawKey], label: value?.[rawKey] } : value
-    );
+    eventCallback
+      ? eventCallback(value, event, setSelected)
+      : setSelected(
+          value === null
+            ? null
+            : rawKey
+            ? { value: value?.[rawKey], label: value?.[rawKey] }
+            : value
+        );
   };
 
   useEffect(() => {
@@ -167,7 +197,9 @@ export const SelectAsyncInputField = ({
             Option: optionComponent,
             ClearIndicator,
             DropdownIndicator,
-            IndicatorSeparator: () => null
+            IndicatorSeparator: () => null,
+            SingleValue,
+            ValueContainer
           }}
           value={selected}
           isSearchable={true}
@@ -178,12 +210,13 @@ export const SelectAsyncInputField = ({
           noOptionsMessage={() => null}
           ref={selectRef}
           openMenuOnFocus={openMenuOnFocus}
+          icon={icon}
           {...reactSelectProps}
           styles={{
             control: (base) => ({
               ...base,
-              background: bg ? `var(--chakra-colors-${bg.replace(".", "-")})` : base.background,
-            }),
+              background: bg ? `var(--chakra-colors-${bg.replace(".", "-")})` : base.background
+            })
           }}
         />
       </Box>

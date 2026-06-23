@@ -43,14 +43,19 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
   // new method
   onNavigate = async (taxonId) => {
     const treeData = await axGetTaxonList({ expand_taxon: true, taxonIds: taxonId });
-    const expandedKeys = Array.from(new Set([...this.state.expandedKeys, ...(treeData?.[0]?.ids || [])]));
-    this.setState({ selectedKeys: [taxonId], treeData: mergeDeep(this.state.treeData, treeData), expandedKeys }, () => {
-      this.props.onTaxonChange("taxonId", taxonId.toString());
-      setTimeout(() => {
-        const node = document.querySelectorAll(".rc-tree-node-selected")?.[0];
-        node?.scrollIntoView({ block: "center" });
-      }, 100);
-    });
+    const expandedKeys = Array.from(
+      new Set([...this.state.expandedKeys, ...(treeData?.[0]?.ids || [])])
+    );
+    this.setState(
+      { selectedKeys: [taxonId], treeData: mergeDeep(this.state.treeData, treeData), expandedKeys },
+      () => {
+        this.props.onTaxonChange("taxonId", taxonId.toString());
+        setTimeout(() => {
+          const node = document.querySelectorAll(".rc-tree-node-selected")?.[0];
+          node?.scrollIntoView({ block: "center" });
+        }, 100);
+      }
+    );
   };
 
   // in setParentState
@@ -128,7 +133,11 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
           )}
         </div>
 
-        <TaxonResultArrows resultsCount={this.state.resultsCount} allResultKeys={this.state.allResultKeys} onNavigate={this.onNavigate}/>
+        <TaxonResultArrows
+          resultsCount={this.state.resultsCount}
+          allResultKeys={this.state.allResultKeys}
+          onNavigate={this.onNavigate}
+        />
       </TaxonBrowserContainer>
     );
   }

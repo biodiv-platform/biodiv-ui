@@ -123,7 +123,7 @@ export default function BulkMapperModal() {
   };
 
   const mergeSubmit = hForm.handleSubmit(async (values) => {
-    const newTaxonId = values.newTaxonId; // Yup transform runs here, gives you a number
+    const newTaxonId = values.newTaxonId;
 
     if (!newTaxonId) {
       notification(t("taxon:bulk_action.select_taxon"), NotificationType.Error);
@@ -457,7 +457,7 @@ export default function BulkMapperModal() {
                                 }
 
                                 // Find the first selectedTaxon that exists in speciesMap
-                                let existingTaxon:any = null;
+                                let existingTaxon: any = null;
                                 if (selectedTaxons && selectedTaxons.length > 0) {
                                   // If selectedTaxon is an array, find the first one in speciesMap
                                   if (Array.isArray(selectedTaxons)) {

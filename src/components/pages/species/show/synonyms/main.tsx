@@ -26,7 +26,7 @@ interface SynonymListProps {
   taxonId?;
   updateFunc;
   deleteFunc;
-  setLoading?
+  setLoading?;
 }
 
 export default function SynonymList({
@@ -66,7 +66,7 @@ export default function SynonymList({
   const onTransferSubmit = async (details) => {
     try {
       // Add your transfer logic here
-      setLoading(true)
+      setLoading(true);
       const { success, data } = await axBulkTransferSynonyms(
         {
           synonymIds: bulkSynonymIds.join(","),
@@ -86,7 +86,7 @@ export default function SynonymList({
     } catch (error) {
       console.error("Transfer failed:", error);
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
@@ -118,7 +118,7 @@ export default function SynonymList({
               size="xs"
               colorPalette="blue"
               onClick={() => {
-                setSelectAll(true)
+                setSelectAll(true);
                 setValue(synonymsList?.map((i) => String(i.id)));
               }}
             >
@@ -126,7 +126,7 @@ export default function SynonymList({
               Select All
             </Button>
           )}
-          {(bulkSynonymIds.length > 0) && (
+          {bulkSynonymIds.length > 0 && (
             <>
               <Box w="1px" h="20px" bg="gray.300" />
               <Text fontSize="sm" fontWeight="medium" color="gray.600">
@@ -185,11 +185,7 @@ export default function SynonymList({
               <Table.Row key={synonym.id}>
                 <Table.Cell>
                   {isContributor && transfer == true && (
-                    <Checkbox.Root
-                      //checked={selectAll ? true : selectedSynonyms.includes(synonym.id)}
-                      {...getItemProps({ value: synonym.id })}
-                      colorPalette={"blue"}
-                    >
+                    <Checkbox.Root {...getItemProps({ value: synonym.id })} colorPalette={"blue"}>
                       <Checkbox.HiddenInput />
                       <Checkbox.Control />
                     </Checkbox.Root>
