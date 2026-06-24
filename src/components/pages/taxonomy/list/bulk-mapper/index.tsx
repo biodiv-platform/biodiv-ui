@@ -445,7 +445,8 @@ export default function BulkMapperModal() {
                           <HStack m={2} justifyContent="flex-end">
                             <Button
                               onClick={async () => {
-                                // Get the taxonId from form or selectedTaxon
+                                let mergeLabel: string | null = null;
+                                let mergeId = null;
                                 const taxonId =
                                   hForm.watch().newTaxonId[0]?.value || selectedTaxon?.value;
 
@@ -454,35 +455,35 @@ export default function BulkMapperModal() {
                                   setSpeciesMap((prev) =>
                                     new Map(prev).set(taxonId, success ? data : null)
                                   );
-                                }
-
-                                // Find the first selectedTaxon that exists in speciesMap
-                                let existingTaxon: any = null;
-                                if (selectedTaxons && selectedTaxons.length > 0) {
-                                  // If selectedTaxon is an array, find the first one in speciesMap
-                                  if (Array.isArray(selectedTaxons)) {
-                                    existingTaxon = selectedTaxons.find((taxon) =>
-                                      speciesMap.has(taxon.id || taxon.value)
-                                    );
-                                  } else {
-                                    // If selectedTaxon is a single object
-                                    existingTaxon = speciesMap.has(
-                                      selectedTaxon.id || selectedTaxon.value
-                                    )
-                                      ? selectedTaxon
-                                      : null;
+                                  if (data) {
+                                    mergeLabel =
+                                      "hForm.watch().newTaxonId[0]?.label || selectedTaxon?.label";
+                                    mergeId = taxonId;
+                                  }
+                                } else {
+                                  if (speciesMap.get(taxonId)) {
+                                    mergeLabel =
+                                      hForm.watch().newTaxonId[0]?.label || selectedTaxon?.label;
+                                    mergeId = taxonId;
                                   }
                                 }
 
-                                // Get the label for the confirmation message
-                                const targetLabel = existingTaxon
-                                  ? existingTaxon.label || existingTaxon.name
-                                  : hForm.watch().newTaxonId[0]?.label ||
-                                    selectedTaxon?.label ||
-                                    `${selectedTaxons[0]?.name}(${selectedTaxons[0]?.id})`;
+                                if (mergeId == null) {
+                                  for (const taxon of selectedTaxons) {
+                                    if (speciesMap.get(taxon.id)) {
+                                      mergeLabel = taxon.name + "(" + taxon.id + ")";
+                                      mergeId = taxon.id;
+                                      break;
+                                    }
+                                  }
+                                }
 
                                 confirm(
-                                  `This action will merge species page data into ${targetLabel}. Are you sure you want to proceed?`
+                                  mergeLabel
+                                    ? `This action will merge all selected taxa species page data, synonyms, common name and children into ${mergeLabel}. Are you sure you want to proceed?`
+                                    : `This action will merge all selected taxa synonyms, common names and children into ${
+                                        hForm.watch().newTaxonId[0]?.label || selectedTaxon?.label
+                                      }. Are you sure you want to proceed?`
                                 ) && mergeSubmit();
                               }}
                             >
