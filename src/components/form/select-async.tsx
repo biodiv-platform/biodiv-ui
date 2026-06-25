@@ -216,7 +216,8 @@ export const SelectAsyncInputField = ({
             control: (base) => ({
               ...base,
               background: bg ? `var(--chakra-colors-${bg.replace(".", "-")})` : base.background
-            })
+            }),
+            ...(props.style || {})
           }}
         />
       </Box>
