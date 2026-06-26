@@ -18,7 +18,7 @@ export function TaxonSynonymsTab() {
     <Box pt={4}>
       {modalTaxon?.id && (
         <SynonymList
-          isContributor={hasAccess([Role.Admin])}
+          isContributor={hasAccess([Role.Admin]) && modalTaxon?.status == "ACCEPTED"}
           synonyms={modalTaxon?.synonymNames}
           taxonId={modalTaxon.id}
           updateFunc={axUpdateTaxonSynonym}

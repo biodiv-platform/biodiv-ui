@@ -112,59 +112,47 @@ export const SelectAsyncInputField = ({
   );
 
   const onQueryDebounce = debounce(onQuery, debounceTime);
-  const getInitialSelected = (value) => {
-    if (!value) return null;
-    if (multiple) return value;
-    if (isRaw) return typeof value === "string" ? { value, label: value } : value;
-    return typeof value === "string" ? { value, label: value } : { value }; // add label here
-  };
-
-  const [selected, setSelected] = useState(getInitialSelected(field.value));
-
-  const isMounted = React.useRef(false);
-
-  const isExternalUpdate = React.useRef(false);
-
-  const isFirstSync = React.useRef(true);
+  const [selected, setSelected] = useState(
+    field.value
+      ? multiple
+        ? field.value
+        : isRaw
+        ? rawKey
+          ? { value: field.value, label: field.value }
+          : field.value
+        : { value: field.value }
+      : null
+  );
 
   useEffect(() => {
-    if (isFirstSync.current) {
-      isFirstSync.current = false;
-      return;
-    }
-    if (field.value !== undefined && field.value?.value !== selected?.value) {
-      isExternalUpdate.current = true;
-      setSelected(getInitialSelected(field.value));
-    }
-  }, [field.value]);
-
-  useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-      return;
-    }
-    if (isExternalUpdate.current) {
-      isExternalUpdate.current = false;
-      return;
-    }
-
-    field.onChange(multiple ? selected : isRaw ? selected?.value : selected?.value);
-    if (onChange && selected) {
-      onChange(selected);
+    const currentValue = multiple ? selected : selected?.value;
+    if (currentValue !== field.value) {
+      field.onChange(currentValue);
     }
   }, [selected]);
 
+  {
+    rawKey &&
+      useEffect(() => {
+        if (field.value) {
+          setSelected(
+            multiple
+              ? field.value
+              : isRaw
+              ? rawKey
+                ? { value: field.value, label: field.value }
+                : field.value
+              : { value: field.value }
+          );
+        } else {
+          setSelected(multiple ? [] : null);
+        }
+      }, [field.value]);
+  }
+
   const handleOnChange = (value, event) => {
-    if (onChange) onChange(value); // full option with hierarchy
-    eventCallback
-      ? eventCallback(value, event, setSelected)
-      : setSelected(
-          value === null
-            ? null
-            : rawKey
-            ? { value: value?.[rawKey], label: value?.[rawKey] }
-            : value
-        );
+    if (onChange) onChange(value);
+    eventCallback ? eventCallback(value, event, setSelected) : setSelected(value);
   };
 
   useEffect(() => {
