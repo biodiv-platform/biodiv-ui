@@ -1,4 +1,13 @@
 {
+  "bulk_action": {
+    "failure": "Tsy afaka nanetsika hetsika marobe",
+    "success": "Vita soa aman-tsara ny hetsika marobe, ho hita tsy ho ela ny fanovana"
+  },
+  "bulk_actions": "Hetsika marobe",
+  "bulk_actions_selected": "voafantina",
+  "common_name": {
+    "success": "Nafindra soa aman-tsara ny Anarana iombonana"
+  },
   "create": {
     "title": "Manampy taxon"
   },

@@ -33,6 +33,7 @@
   "suggested_species_name": "suggested species name",
   "suggestion_removed": "removed suggestion",
   "taxon_name_updated": "updated taxon name",
+  "transferred_synonynm": "transferred synonym",
   "unfeatured": "unfeatured from group",
   "unflagged": "flagged",
   "updated_common_name": "updated common name",
@@ -40,5 +41,5 @@
   "updated_species_field": "updated species field",
   "updated_species_gallery": "updated species gallery",
   "updated_synonym": "updated synonym",
-  "updated_taxon_id":"Updated taxon id"
+  "updated_taxon_id": "Updated taxon id"
 }

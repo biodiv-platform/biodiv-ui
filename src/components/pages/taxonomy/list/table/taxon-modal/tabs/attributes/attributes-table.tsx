@@ -63,6 +63,14 @@ export function TaxonAttributesTable() {
               </Table.Cell>
               <Table.Cell>{t(`taxon:hierarchy.${modalTaxon?.rank}`)}</Table.Cell>
             </Table.Row>
+            {modalTaxon?.status == "SYNONYM" && (
+              <Table.Row>
+                <Table.Cell>{"Accepted Name"}</Table.Cell>
+                <Table.Cell>
+                  {modalTaxon?.hierarchy[modalTaxon?.hierarchy?.length - 1]?.name}
+                </Table.Cell>
+              </Table.Row>
+            )}
             <Table.Row>
               <Table.Cell title={t("taxon:modal.attributes.source.desc")}>
                 {t("taxon:modal.attributes.source.title")}
@@ -99,7 +107,15 @@ export function TaxonAttributesTable() {
             {modalTaxon?.hierarchy?.map((rank) => (
               <Table.Row key={rank.rankName}>
                 <Table.Cell>{t(`taxon:hierarchy.${rank.rankName}`)}</Table.Cell>
-                <Table.Cell>{rank.name}</Table.Cell>
+                <Table.Cell
+                  style={{
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                    hyphens: "auto"
+                  }}
+                >
+                  {rank.name}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>

@@ -4,12 +4,17 @@ import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { Role } from "@interfaces/custom";
 import { axDeleteTaxonCommonName, axUpdateTaxonCommonName } from "@services/taxonomy.service";
 import { hasAccess } from "@utils/auth";
-import React from "react";
+import React, { useState } from "react";
+
+import Loading from "@/components/pages/common/loading";
 
 export function TaxonCommonNamesTab() {
   const { modalTaxon } = useTaxonFilter();
+  const [loading, setLoading] = useState(false);
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <Box pt={4}>
       {modalTaxon?.id && (
         <CommonNamesList
@@ -18,6 +23,7 @@ export function TaxonCommonNamesTab() {
           isContributor={hasAccess([Role.Admin])}
           updateFunc={axUpdateTaxonCommonName}
           deleteFunc={axDeleteTaxonCommonName}
+          setLoading={setLoading}
         />
       )}
     </Box>

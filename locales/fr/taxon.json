@@ -1,4 +1,13 @@
 {
+  "bulk_action": {
+    "failure": "Impossible de déclencher une action groupée",
+    "success": "Action groupée déclenchée avec succès. Les modifications seront reflétées sous peu."
+  },
+  "bulk_actions": "Actions groupées",
+  "bulk_actions_selected": "choisi",
+  "common_name": {
+    "success": "Noms communs transférés avec succès"
+  },
   "create": {
     "title": "Ajouter un taxon"
   },

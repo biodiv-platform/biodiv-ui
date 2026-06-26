@@ -1,10 +1,11 @@
-import { axGetTaxonDetails, axGetTaxonListData } from "@services/taxonomy.service";
+import { useDisclosure } from "@chakra-ui/react";
+import { axGetTaxonDetails, axTaxonomyList } from "@services/taxonomy.service";
 import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/taxon";
 import { removeEmptyKeys } from "@utils/basic";
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useImmer } from "use-immer";
 
 interface TaxonFilterContextProps {
@@ -26,17 +27,26 @@ interface TaxonFilterContextProps {
 
   showTaxon?;
   setShowTaxon?;
+
+  isOpen?;
+  onOpen?;
+  onClose?;
 }
 
 const TaxonFilterContext = createContext<TaxonFilterContextProps>({} as TaxonFilterContextProps);
 
 export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
-  const initialOffset = props?.filter?.offset || 0;
+  const initialOffsetPath = props?.filter?.offsetPath || "";
+  const initialOffsetId = props?.filter?.offsetId || -1;
+  const offsetPath = useRef(initialOffsetPath);
+  const offsetId = useRef(initialOffsetId);
+
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
   const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: 0, hasMore: true });
   const [isLoading, setIsLoading] = useState<boolean>();
 
   const [selectedTaxons, setSelectedTaxons] = useState([]);
+  const { open, onOpen, onClose } = useDisclosure();
 
   const [modalTaxon, setModalTaxonI] = useState<any>();
   const [showTaxon, setShowTaxon] = useState<any>(filter.f.showTaxon);
@@ -50,7 +60,8 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
           removeEmptyKeys({
             ...filter.f,
             showTaxon,
-            offset: initialOffset
+            offsetPath: initialOffsetPath,
+            offsetId: initialOffsetId
           })
         )}`
       );
@@ -63,14 +74,15 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
       setIsLoading(true);
 
       // Reset list data if params are changed
-      if (filter.f?.offset === 0) {
+      if (filter.f?.offsetPath === "" && filter.f?.offsetId === -1) {
         setTaxonListData((_draft) => {
           _draft.l = [];
           _draft.count = 0;
         });
       }
 
-      const { data } = await axGetTaxonListData(filter.f);
+      //const { data } = await axGetTaxonListData(filter.f);
+      const { data } = await axTaxonomyList(filter.f);
       setTaxonListData((_draft) => {
         if (data?.taxonomyNameListItems) {
           _draft.l.push(...(data?.taxonomyNameListItems || []));
@@ -78,6 +90,8 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
           _draft.hasMore = data?.taxonomyNameListItems.length < LIST_PAGINATION_LIMIT;
         }
       });
+      offsetPath.current = data?.acceptedPath;
+      offsetId.current = data?.taxonomyNameListItems[data?.taxonomyNameListItems.length - 1].id;
     } catch (e) {
       console.error(e);
     }
@@ -91,7 +105,8 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
 
   const addFilter = (key, value) => {
     setFilter((_draft) => {
-      _draft.f.offset = 0;
+      _draft.f.offsetPath = "";
+      _draft.f.offsetId = -1;
       _draft.f[key] = value;
     });
   };
@@ -104,7 +119,8 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
 
   const nextPage = () => {
     setFilter((_draft) => {
-      _draft.f.offset = Number(_draft.f.offset) + LIST_PAGINATION_LIMIT;
+      _draft.f.offsetPath = offsetPath.current;
+      _draft.f.offsetId = offsetId.current;
     });
   };
 
@@ -169,7 +185,11 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
 
         // fetches full taxon information once assigned to `showTaxon` for modal
         modalTaxon,
-        setModalTaxon
+        setModalTaxon,
+
+        isOpen: open,
+        onOpen,
+        onClose
       }}
     >
       {props.children}

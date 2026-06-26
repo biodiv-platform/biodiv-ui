@@ -2,6 +2,7 @@
   "add_reference": "Ongeza kumbukumbu.",
   "all_media": "Wote Vyombo vya habari.",
   "attributions": "Tabia",
+  "cache": "Ondoa akiba ya ukurasa wa onyesho",
   "common_name": {
     "delete": {
       "dialouge": "Una uhakika?",
@@ -54,6 +55,7 @@
       "select": "Chagua",
       "taxon": {
         "create": "Unda Taxon.",
+        "genus_error": "Haikuweza kuwasilisha kwa kuwa jina la jumla haliambatani na jenasi iliyopewa ushuru huu.",
         "parent": "Mechi ya Mzazi",
         "select": "Inafanana"
       },

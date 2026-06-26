@@ -1,9 +1,13 @@
-import { Box, Button, Flex, Input, InputGroup } from "@chakra-ui/react";
-import useDidUpdateEffect from "@hooks/use-did-update-effect";
-import { getByPath } from "@utils/basic";
+import { Box, Flex } from "@chakra-ui/react";
+import {
+  onScientificNameAndRankQuery,
+  ScientificNameOption
+} from "@components/pages/observation/create/form/recodata/scientific-name";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 
+import { SelectAsyncInputField } from "@/components/form/select-async";
 import { Field } from "@/components/ui/field";
 
 interface TaxonCreateInputFieldProps {
@@ -14,7 +18,16 @@ interface TaxonCreateInputFieldProps {
   mb?: number;
   onValidate?;
   hidden?;
+  onRankChange?;
+  hint?;
+  color?;
 }
+
+const POSITION_COLOR = {
+  WORKING: "yellow.300",
+  CLEAN: "green.300",
+  RAW: "gray.300"
+};
 
 export const TaxonCreateInputField = ({
   name,
@@ -22,29 +35,16 @@ export const TaxonCreateInputField = ({
   isRequired,
   isDisabled,
   hidden,
-  onValidate,
+  onRankChange,
+  hint,
   mb = 4
 }: TaxonCreateInputFieldProps) => {
   const {
-    register,
-    control,
     formState: { errors },
-    watch,
-    setError
+    watch
   } = useFormContext();
 
-  const fieldWatch = watch(name);
-
-  useDidUpdateEffect(() => {
-    if (isRequired && fieldWatch) {
-      // scheduling validation so this will trigger always after executing form's validator
-      setTimeout(() => {
-        setError(name, { type: "manual", message: "err" });
-      }, 0);
-    }
-  }, [fieldWatch]);
-
-  const onValidateClick = () => onValidate(name, fieldWatch);
+  const position = watch("metadata." + name);
 
   return (
     <Field
@@ -54,30 +54,33 @@ export const TaxonCreateInputField = ({
       required={isRequired}
       disabled={isDisabled}
     >
-      <InputGroup
-        startAddon={
-          <Flex minW="8rem" align="center" gap={1}>
-            <Box>{label}</Box>
-            {isRequired && <Box color="red.500">*</Box>}
-          </Flex>
-        }
-        endElement={
-          errors[name] && (
-            <Box width="5.4rem">
-              <Button onClick={onValidateClick} h="1.75rem" size="sm" colorPalette="red">
-                validate
-              </Button>
-            </Box>
-          )
-        }
-      >
-        <Input
-          id={name}
-          placeholder={label}
-          defaultValue={getByPath(control._defaultValues, name)}
-          {...register(name)}
-        />
-      </InputGroup>
+      <Flex width="full" align="center">
+        <Flex minW="8rem" align="center" gap={1} flexShrink={0} bgColor={"lightgray"}>
+          <Box m={4}>{label}</Box>
+          {isRequired && <Box color="red.500">*</Box>}
+        </Flex>
+        <Box flex={1}>
+          <SelectAsyncInputField
+            name={name}
+            onQuery={(q) => onScientificNameAndRankQuery(q, "name", label)}
+            optionComponent={ScientificNameOption}
+            placeholder={label}
+            resetOnSubmit={false}
+            isRaw={true}
+            mb={0}
+            onChange={(selected) => {
+              if (selected) {
+                onRankChange?.(selected?.taxonId, selected?.__isNew__, label);
+              }
+            }}
+            rawKey="label"
+            portalled={false}
+            bg={POSITION_COLOR[position] || "white!"}
+            icon={hint ? <LuTriangleAlert color="red" /> : <LuCheck color="green" />}
+            disabled={isDisabled}
+          />
+        </Box>
+      </Flex>
     </Field>
   );
 };

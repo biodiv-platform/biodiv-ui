@@ -26,7 +26,8 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
       treeData: [],
       selectedKeys: this.props.initialTaxon ? this.props.initialTaxon.toString()?.split(",") : [],
       expandedKeys: [],
-      resultsCount: -1
+      resultsCount: -1,
+      allResultKeys: []
     };
   }
 
@@ -35,13 +36,32 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
   onSelect = (selectedKeys) => {
     if (selectedKeys.length) {
       this.setState({ selectedKeys });
-      this.props.onTaxonChange("taxonId", selectedKeys?.toString());
+      this.props.onTaxonChange("taxonId", selectedKeys[0]?.toString());
     }
   };
 
+  // new method
+  onNavigate = async (taxonId) => {
+    const treeData = await axGetTaxonList({ expand_taxon: true, taxonIds: taxonId });
+    const expandedKeys = Array.from(
+      new Set([...this.state.expandedKeys, ...(treeData?.[0]?.ids || [])])
+    );
+    this.setState(
+      { selectedKeys: [taxonId], treeData: mergeDeep(this.state.treeData, treeData), expandedKeys },
+      () => {
+        this.props.onTaxonChange("taxonId", taxonId.toString());
+        setTimeout(() => {
+          const node = document.querySelectorAll(".rc-tree-node-selected")?.[0];
+          node?.scrollIntoView({ block: "center" });
+        }, 100);
+      }
+    );
+  };
+
+  // in setParentState
   setParentState = (d) => {
-    this.props.onTaxonChange("taxonId", d.selectedKeys?.toString());
-    this.setState(d);
+    this.setState({ ...d, allResultKeys: d.selectedKeys, selectedKeys: [d.selectedKeys[0]] });
+    this.props.onTaxonChange("taxonId", d.selectedKeys[0]?.toString());
   };
 
   expandInitialTaxon = async () => {
@@ -113,7 +133,11 @@ class TaxonBrowserComponent extends Component<TaxonBrowserProps, TaxonBrowserSta
           )}
         </div>
 
-        <TaxonResultArrows resultsCount={this.state.resultsCount} />
+        <TaxonResultArrows
+          resultsCount={this.state.resultsCount}
+          allResultKeys={this.state.allResultKeys}
+          onNavigate={this.onNavigate}
+        />
       </TaxonBrowserContainer>
     );
   }

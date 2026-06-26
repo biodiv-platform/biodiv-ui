@@ -24,6 +24,10 @@ const taxonListRows = [
     style: { paddingTop: 0, paddingBottom: 0 }
   },
   {
+    Header: "Id",
+    accessor: "id"
+  },
+  {
     Header: "Rank",
     accessor: "rank",
     Cell: TaxonRankCell
@@ -58,6 +62,7 @@ export default function TaxonListTable() {
           isSelectable={true}
           size="sm"
           onSelectionChange={setSelectedTaxons}
+          getCheckboxProps={(row) => (row === "header" ? { disabled: true } : {})}
         />
       )}
       <Flex alignItems="center" justifyContent="center" p={4}>

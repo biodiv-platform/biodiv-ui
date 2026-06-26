@@ -3,14 +3,30 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
 import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
 
-export default function TaxonResultArrows({ resultsCount }) {
+export default function TaxonResultArrows({
+  resultsCount,
+  allResultKeys = [],
+  onNavigate
+}: {
+  resultsCount: number;
+  allResultKeys?: string[];
+  onNavigate?: (taxonId: string) => void;
+}) {
   const [currentIndex, setCurrentIndex] = useState(resultsCount);
   const [disabled, setDisabled] = useState({ prev: true, next: true });
   const { t } = useTranslation();
 
-  const onPrevious = () => setCurrentIndex(currentIndex - 1);
+  const onPrevious = () => {
+    const newIndex = currentIndex - 1;
+    setCurrentIndex(newIndex);
+    onNavigate?.(allResultKeys?.[newIndex]);
+  };
 
-  const onNext = () => setCurrentIndex(currentIndex + 1);
+  const onNext = () => {
+    const newIndex = currentIndex + 1;
+    setCurrentIndex(newIndex);
+    onNavigate?.(allResultKeys?.[newIndex]);
+  };
 
   useEffect(() => {
     if (currentIndex > -1) {
