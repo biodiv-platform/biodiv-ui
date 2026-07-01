@@ -4,10 +4,10 @@ import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
-import useObsCount from "./use-observation-count";
+import useDocsCount from "./use-document-count";
 
-export function ObservationsLink({ showTaxon }) {
-  const { countsData } = useObsCount(showTaxon);
+export function DocumentsLink({ showTaxon }) {
+  const { countsData } = useDocsCount(showTaxon);
   const { t } = useTranslation();
 
   return (
@@ -18,8 +18,8 @@ export function ObservationsLink({ showTaxon }) {
             {countsData.value || 0}
           </Text>
           <ExternalBlueLink asChild>
-            <LocalLink href={`/observation/list`} params={{ taxon: showTaxon }}>
-              {t("taxon:modal.data_links.observations")}
+            <LocalLink href={`/document/list`} params={{ taxon: showTaxon }}>
+              {t("taxon:modal.data_links.documents")}
             </LocalLink>
           </ExternalBlueLink>
         </Box>

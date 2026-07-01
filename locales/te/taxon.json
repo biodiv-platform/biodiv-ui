@@ -78,6 +78,7 @@
     },
     "common_names": "సాధారణ పేర్లు",
     "data_links": {
+      "documents": "పత్రాలు",
       "observations": "పరిశీలనలు",
       "species": "జాతులు",
       "title": "డేటా లింకులు"

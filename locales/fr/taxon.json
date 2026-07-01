@@ -78,6 +78,7 @@
     },
     "common_names": "Noms communs",
     "data_links": {
+      "documents": "Documents",
       "observations": "Observations",
       "species": "Espèce",
       "title": "Liens de données"

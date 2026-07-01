@@ -78,6 +78,7 @@
     },
     "common_names": "સામાન્ય નામો",
     "data_links": {
+      "documents": "દસ્તાવેજો",
       "observations": "અવલોકન",
       "species": "પ્રજાતિઓ",
       "title": "ડેટા લિંક્સ"

@@ -71,6 +71,7 @@
     "success": "Document supprimé avec succès",
     "title": "Supprimer le document"
   },
+  "rerun": "Réexécutez gnfinder",
   "share": "Partager ce document",
   "show": {
     "scientific_names_table": {

@@ -20,7 +20,7 @@ export function SpeciesPageLink({ showTaxon }) {
 
   return (
     <div>
-      <Box p={2} className="white-box" lineHeight={1} minWidth={200}>
+      <Box p={2} className="white-box" lineHeight={1} minWidth={180}>
         <Text fontSize="3xl" mb={2}>
           {speciesId ? 1 : 0}
         </Text>

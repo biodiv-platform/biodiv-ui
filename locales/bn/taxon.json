@@ -78,6 +78,7 @@
     },
     "common_names": "সাধারণ নাম",
     "data_links": {
+      "documents": "নথিপত্র",
       "observations": "পর্যবেক্ষণ",
       "species": "প্রজাতি",
       "title": "ডেটা লিংক"

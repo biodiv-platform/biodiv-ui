@@ -18,6 +18,7 @@ import UserFilter from "./name-of-user";
 import PublisherFilter from "./publisher";
 import SpeciesGroupsFilter from "./species-groups";
 import TagsFilter from "./tags";
+import TaxonBrowser from "./taxon-browser";
 import TimeFilter from "./time";
 import TitleFilter from "./title";
 import UserGroupFilter from "./user-group";
@@ -35,6 +36,17 @@ export default function FiltersList() {
         </AccordionItemTrigger>
         <AccordionItemContent>
           <SpeciesGroupsFilter />
+        </AccordionItemContent>
+      </AccordionItem>
+
+      <AccordionItem value="taxon_browser">
+        <AccordionItemTrigger pr={4}>
+          <Box flex={1} textAlign="left" pl={4}>
+            {t("filters:taxon_browser.title")}
+          </Box>
+        </AccordionItemTrigger>
+        <AccordionItemContent>
+          <TaxonBrowser />
         </AccordionItemContent>
       </AccordionItem>
 

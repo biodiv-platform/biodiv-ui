@@ -4,6 +4,7 @@ import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
+import { DocumentsLink } from "../../document";
 import { ObservationsLink } from "../../observation";
 import { SpeciesPageLink } from "../../species";
 
@@ -17,9 +18,10 @@ export function TaxonAttributesTable() {
         <Heading as="h3" size="md" mb={4}>
           {t("taxon:modal.data_links.title")}
         </Heading>
-        <HStack mb={4} gap={4}>
+        <HStack mb={4} gap={2}>
           <SpeciesPageLink showTaxon={showTaxon} />
           <ObservationsLink showTaxon={showTaxon} />
+          <DocumentsLink showTaxon={showTaxon} />
         </HStack>
         <Heading as="h3" size="md" mb={4}>
           {t("common:information")}

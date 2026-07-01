@@ -78,6 +78,7 @@
     },
     "common_names": "ਆਮ ਨਾਮ",
     "data_links": {
+      "documents": "ਦਸਤਾਵੇਜ਼",
       "observations": "ਨਿਰੀਖਣ",
       "species": "ਸਪੀਸੀਜ਼",
       "title": "ਡਾਟਾ ਲਿੰਕ"

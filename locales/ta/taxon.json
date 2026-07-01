@@ -78,6 +78,7 @@
     },
     "common_names": "பொதுபெயர்கள்",
     "data_links": {
+      "documents": "ஆவணங்கள்",
       "observations": "கண்காணிப்பு",
       "species": "இனங்கள்",
       "title": "தரவு இணைப்புகள்"

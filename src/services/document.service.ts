@@ -280,3 +280,16 @@ export const axUpdateScientifcNameToIsDeleted = async (nameId) => {
     return { succes: false, data: {} };
   }
 };
+
+export const axRerunGnfinder = async (documentId) => {
+  try {
+    await waitForAuth();
+    const { data } = await http.post(
+      `${ENDPOINT.DOCUMENT}/v1/services/update/gnfinder/${documentId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

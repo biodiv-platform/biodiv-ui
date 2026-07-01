@@ -78,6 +78,7 @@
     },
     "common_names": "സാധാരണ പേരുകൾ",
     "data_links": {
+      "documents": "പ്രമാണങ്ങൾ",
       "observations": "നിരീക്ഷണങ്ങൾ",
       "species": "സ്പീഷീസ്",
       "title": "ഡാറ്റ ലിങ്കുകൾ"

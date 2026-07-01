@@ -78,6 +78,7 @@
     },
     "common_names": "सामान्य नाम",
     "data_links": {
+      "documents": "दस्तावेज़",
       "observations": "टिप्पणियों",
       "species": "प्रजातियां",
       "title": "डेटा लिंक"

@@ -78,6 +78,7 @@
     },
     "common_names": "सामान्य नावे",
     "data_links": {
+      "documents": "कागदपत्रे",
       "observations": "निरीक्षणे",
       "species": "प्रजाती",
       "title": "डेटा लिंक्स"
