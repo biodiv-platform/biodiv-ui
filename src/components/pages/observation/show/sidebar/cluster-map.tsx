@@ -72,6 +72,7 @@ export default function ClusterMap({
           key={k}
           lang={lang}
           selectedLayers={filter ? ["species-observations"] : []}
+          showFullscreenControl={true}
           mapStyles={mapStyles}
           layers={[
             {

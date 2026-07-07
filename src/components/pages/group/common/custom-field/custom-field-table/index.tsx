@@ -81,7 +81,6 @@ const CustomFieldTable = ({
         <CustomFieldListItems
           removeCustomField={removeCustomField}
           customFieldDetails={customFieldDetails}
-          helperClass="sorting-row"
           customFieldList={customFields}
           onSortEnd={onSortEnd}
         />

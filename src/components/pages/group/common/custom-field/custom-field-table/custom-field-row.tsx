@@ -4,9 +4,7 @@ import CrossIcon from "@icons/cross";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuGripVertical } from "react-icons/lu";
-import { SortableElement } from "react-sortable-hoc";
 
 const BooleanIcon = ({ isChecked }) => (
   <Box as="td" w="8rem">
@@ -18,7 +16,14 @@ const BooleanIcon = ({ isChecked }) => (
   </Box>
 );
 
-const CustomFieldRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) => {
+export function CustomFieldRow({
+  itemDetails,
+  onDelete,
+  onEdit,
+  dragHandleProps,
+  innerRef,
+  style
+}) {
   const { t } = useTranslation();
   const {
     customFields: { dataType, fieldType, name },
@@ -27,9 +32,14 @@ const CustomFieldRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) 
   } = itemDetails;
 
   return (
-    <tr>
+    <tr ref={innerRef} style={style}>
       <Box as="td" w="16rem">
-        <LuGripVertical cursor="move" /> {name}
+        <Box as="span" display="inline-flex" alignItems="center">
+          <Box as="span" cursor="grab" mr={2} {...dragHandleProps}>
+            <LuGripVertical />
+          </Box>
+          {name}
+        </Box>
       </Box>
       <td>{dataType}</td>
       <td>{fieldType}</td>
@@ -51,6 +61,4 @@ const CustomFieldRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) 
       )}
     </tr>
   );
-});
-
-export default CustomFieldRow;
+}

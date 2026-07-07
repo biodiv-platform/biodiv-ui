@@ -1,14 +1,38 @@
-import FlashChange from "@avinlab/react-flash-change";
-import React from "react";
+import { Box } from "@chakra-ui/react";
+import React, { useEffect, useRef, useState } from "react";
 
-const Flash = ({ value, children }) => (
-  <FlashChange
-    value={value}
-    flashStyle={{ background: "var(--chakra-colors-yellow-100)" }}
-    style={{ transition: "background 500ms ease" }}
-  >
-    {children}
-  </FlashChange>
-);
+interface FlashProps {
+  value: unknown;
+  children: React.ReactNode;
+}
 
-export default Flash;
+export default function Flash({ value, children }: FlashProps) {
+  const [flash, setFlash] = useState(false);
+  const previousValue = useRef(value);
+
+  useEffect(() => {
+    if (previousValue.current !== value) {
+      setFlash(true);
+
+      const timer = setTimeout(() => {
+        setFlash(false);
+      }, 500);
+
+      previousValue.current = value;
+
+      return () => clearTimeout(timer);
+    }
+  }, [value]);
+
+  return (
+    <Box
+      as="span"
+      bg={flash ? "yellow.100" : "transparent"}
+      transition="background-color 0.5s ease"
+      borderRadius="sm"
+      px={1}
+    >
+      {children}
+    </Box>
+  );
+}

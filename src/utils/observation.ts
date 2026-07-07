@@ -1,5 +1,4 @@
-import distance from "@turf/distance";
-import { point } from "@turf/helpers";
+import { distance, point } from "@turf/turf";
 import setClustering from "set-clustering";
 
 import dayjs from "./date";

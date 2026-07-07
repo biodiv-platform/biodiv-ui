@@ -12,8 +12,8 @@ import {
 } from "@services/usergroup.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
-import { NotificationType } from "@utils/notification";
 import notification from "@utils/notification";
+import { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";

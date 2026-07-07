@@ -1,4 +1,4 @@
-import { type BadgeProps, Badge, FormatNumber, Stat as ChakraStat } from "@chakra-ui/react";
+import { Badge, type BadgeProps, FormatNumber, Stat as ChakraStat } from "@chakra-ui/react";
 import * as React from "react";
 
 import { InfoTip } from "./toggle-tip";

@@ -31,10 +31,10 @@ export default function WYSIWYGEditor({
 }: WYSIWYGEditorProps) {
   return (
     <Editor
+      licenseKey="gpl"
       {...props}
       init={{
         skin: false,
-        license_key: "gpl",
         width: "100%",
         height: "600px",
         relative_urls: false,

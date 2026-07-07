@@ -5,7 +5,7 @@ import React from "react";
 
 import { customTheme } from "@/configs/theme";
 
-import { type ColorModeProviderProps, ColorModeProvider } from "./color-mode";
+import { ColorModeProvider, type ColorModeProviderProps } from "./color-mode";
 
 export function Provider(props: ColorModeProviderProps) {
   return (
