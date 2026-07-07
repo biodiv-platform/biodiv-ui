@@ -1,8 +1,8 @@
 /* eslint-disable simple-import-sort/imports */
 // @ts-ignore
-import "tinymce/skins/ui/oxide/content.min.css";
+import "tinymce/skins/ui/oxide/content.css";
 // @ts-ignore
-import "tinymce/skins/ui/oxide/skin.min.css";
+import "tinymce/skins/ui/oxide/skin.css";
 
 import "tinymce/tinymce";
 import "tinymce/models/dom/model";

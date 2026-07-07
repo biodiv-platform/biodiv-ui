@@ -9,16 +9,16 @@ Next Generation UI for Biodiversity Informatics Platform
 ### 📦 Getting Started
 
 ```sh
-yarn install
+pnpm install
 cp src/configs/site-config.example.js src/configs/site-config.js  # setup with appropriate properties
-yarn dev # will start development server on port 3000
+pnpm dev # will start development server on port 3000
 ```
 
 ### 👷 Production Build
 
 ```sh
-yarn build
-yarn serve           # will start production server
+pnpm build
+pnpm serve           # will start production server
 ```
 
 ### 📝 Generate TS Interfaces from Swagger UI

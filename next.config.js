@@ -1,4 +1,4 @@
-const nextTranslate = require("next-translate");
+const nextTranslate = require("next-translate-plugin");
 const { SITE } = require("./src/configs/site-config");
 
 const siteUrl = new URL(SITE.SSR_URL);
@@ -25,4 +25,4 @@ module.exports = nextTranslate({
       }
     ]
   }
-});
+}, { turbopack: true });
