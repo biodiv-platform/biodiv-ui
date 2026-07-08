@@ -3,9 +3,20 @@ import useTranslation from "next-translate/useTranslation";
 import React from "react";
 
 import { PageHeading } from "@/components/@core/layout";
+import { axUpdateScientificNames } from "@/services/document.service";
+import notification, { NotificationType } from "@/utils/notification";
 
 function AdminComponent() {
   const { t } = useTranslation();
+
+  const handleUpdateScientificNames = async () => {
+    const { success } = await axUpdateScientificNames();
+    if (success) {
+      notification(t("observation:bulk_action.success"), NotificationType.Success);
+    } else {
+      notification(t("observation:bulk_action.failure"), NotificationType.Error);
+    }
+  };
 
   const sections = [
     {
@@ -49,6 +60,10 @@ function AdminComponent() {
     {
       title: t("Elastic"),
       items: [{ href: "/manage/elastic", label: t("Update Elastic Index") }]
+    },
+    {
+      title: t("header:menu_secondary.documents.title"),
+      items: [{ onClick: handleUpdateScientificNames, label: t("admin:links.udate_scientific_names") }]
     }
   ];
 
@@ -98,9 +113,26 @@ function AdminComponent() {
                       pl: 4
                     }}
                   >
-                    <Link href={item.href} ml={3} _hover={{ textDecoration: "none" }} width="100%">
-                      {item.label}
-                    </Link>
+                    {item.href ? (
+                      <Link
+                        href={item.href}
+                        ml={3}
+                        _hover={{ textDecoration: "none" }}
+                        width="100%"
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <Link
+                        as="button"
+                        onClick={item.onClick}
+                        ml={3}
+                        _hover={{ textDecoration: "none" }}
+                        width = "100%"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </List.Item>
                 ))}
               </List.Root>

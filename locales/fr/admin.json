@@ -64,7 +64,8 @@
     "announcements_configure": "Gérer les notifications",
     "clear_cache": "Vider le cache",
     "name-macthing": "Nom correspondant",
-    "notification": "Envoyer une notification push"
+    "notification": "Envoyer une notification push",
+    "udate_scientific_names": "Mettre à jour les noms scientifiques des documents"
   },
   "pages": {
     "notification": {

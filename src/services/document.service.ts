@@ -293,3 +293,16 @@ export const axRerunGnfinder = async (documentId) => {
     return { success: false, data: {} };
   }
 };
+
+export const axUpdateScientificNames = async () => {
+  try {
+    await waitForAuth();
+    const { data } = await http.post(
+      `${ENDPOINT.DOCUMENT}/v1/services/update/names`
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};

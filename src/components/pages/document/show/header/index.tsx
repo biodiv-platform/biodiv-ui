@@ -13,7 +13,6 @@ import {
   axDeleteDocument,
   axFlagDocument,
   axFollowDocument,
-  axRerunGnfinder,
   axUnFlagDocument
 } from "@services/document.service";
 import { RESOURCE_SIZE } from "@static/constants";
@@ -23,7 +22,6 @@ import { getInjectableHTML } from "@utils/text";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
-import { LuRefreshCw } from "react-icons/lu";
 
 interface DocumentHeaderProps {
   document: ShowDocument;
@@ -110,14 +108,6 @@ export default function DocumentHeader({ document }: DocumentHeaderProps) {
             />
           )}
           <ShareActionButton text={pageDescription} title={t("document:share")} />
-          {showActions && (
-            <SimpleActionButton
-              icon={<LuRefreshCw />}
-              title={t("document:rerun")}
-              onClick={() => axRerunGnfinder(documentId)}
-              colorPalette="blue"
-            />
-          )}
         </Flex>
       </SimpleGrid>
     </>

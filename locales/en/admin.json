@@ -11,8 +11,8 @@
   "elastic": {
     "api": {
       "update_index": {
-        "success": "Elastic index update triggered successfully",
-        "error": "Error updating Elastic index"
+        "error": "Error updating Elastic index",
+        "success": "Elastic index update triggered successfully"
       }
     },
     "columns": {
@@ -30,13 +30,13 @@
   "gbif": {
     "api": {
       "create": {
-        "success": "Created DWC file successfully, Please refresh to see the new file",
-        "error": "Error Creating DWC file"
+        "error": "Error Creating DWC file",
+        "success": "Created DWC file successfully, Please refresh to see the new file"
       },
       "delete": {
-        "success": "Deleted DWC file successfully",
+        "confirm": "Are you sure you want to delete this DWC file ",
         "error": "Error Deleting DWC file",
-        "confirm": "Are you sure you want to delete this DWC file "
+        "success": "Deleted DWC file successfully"
       }
     },
     "generate_new_export": "Generate New Export",
@@ -65,7 +65,8 @@
     "clear_cache": "Clear cache",
     "name-macthing": "Name Matching",
     "notification": "Send Push-Notification",
-    "species_fields": "Species Fields"
+    "species_fields": "Species Fields",
+    "udate_scientific_names": "Update Document Scientific Names"
   },
   "pages": {
     "notification": {

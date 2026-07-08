@@ -5,17 +5,21 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import { stickyTh } from "@components/pages/observation/list/views/stats/common";
 import useGlobalState from "@hooks/use-global-state";
-import { axUpdateScientifcNameToIsDeleted } from "@services/document.service";
+import { axRerunGnfinder, axUpdateScientifcNameToIsDeleted } from "@services/document.service";
 import { adminOrAuthor } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
 import React, { useEffect, useState } from "react";
+import { LuRefreshCw } from "react-icons/lu";
+
+import SimpleActionButton from "@/components/@core/action-buttons/simple";
 
 export default function ScientificNamesTable({
   data,
   title,
   loadMoreNames,
   authorId,
-  refreshFunc
+  refreshFunc,
+  documentId
 }) {
   const { t } = useTranslation();
 
@@ -28,7 +32,17 @@ export default function ScientificNamesTable({
 
   return data?.list?.length > 0 ? (
     <Box className="white-box">
-      <BoxHeading>⭐ {title}</BoxHeading>
+      <BoxHeading>
+        ⭐ {title}{" "}
+        {showActions && (
+          <SimpleActionButton
+            icon={<LuRefreshCw />}
+            title={t("document:rerun")}
+            onClick={() => axRerunGnfinder(documentId)}
+            colorPalette="blue"
+          />
+        )}
+      </BoxHeading>
       <Box w="full" overflowY="auto" h={360}>
         <Table.Root striped colorPalette="gray" size="sm">
           <Table.Header>

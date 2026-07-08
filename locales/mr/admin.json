@@ -64,7 +64,8 @@
     "announcements_configure": "सूचना व्यवस्थापित करा",
     "clear_cache": "कॅशे साफ करा",
     "name-macthing": "नाव जुळणी",
-    "notification": "पुश-सूचना पाठवा"
+    "notification": "पुश-सूचना पाठवा",
+    "udate_scientific_names": "दस्तऐवज वैज्ञानिक नावे अद्यतनित करा"
   },
   "pages": {
     "notification": {

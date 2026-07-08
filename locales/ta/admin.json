@@ -64,7 +64,8 @@
     "announcements_configure": "அறிவிப்புகளை நிர்வகிக்கவும்",
     "clear_cache": "தெளிவான தற்காலிக சேமிப்பு",
     "name-macthing": "பெயர் பொருத்தம்",
-    "notification": "தள்ளறிவிப்புகளை அனுப்பவும்"
+    "notification": "தள்ளறிவிப்புகளை அனுப்பவும்",
+    "udate_scientific_names": "ஆவணத்தின் அறிவியல் பெயர்களைப் புதுப்பிக்கவும்"
   },
   "pages": {
     "notification": {

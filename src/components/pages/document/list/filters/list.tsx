@@ -16,6 +16,7 @@ import ItemTypeFilter from "./itemType";
 import Location from "./location";
 import UserFilter from "./name-of-user";
 import PublisherFilter from "./publisher";
+import ScientificNameFilter from "./scientificName";
 import SpeciesGroupsFilter from "./species-groups";
 import TagsFilter from "./tags";
 import TaxonBrowser from "./taxon-browser";
@@ -49,6 +50,8 @@ export default function FiltersList() {
           <TaxonBrowser />
         </AccordionItemContent>
       </AccordionItem>
+
+      <ScientificNameFilter/>
 
       <AccordionItem value="location">
         <AccordionItemTrigger pr={4}>
